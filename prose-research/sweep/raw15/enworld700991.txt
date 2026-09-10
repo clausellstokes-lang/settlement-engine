@@ -1,0 +1,535 @@
+ 
+ D&D Adventurers League Unveils New DungeonCraft Document with Planescape In Focus | EN World D&D & Tabletop RPG News & Reviews 
+ Menu 
+ News/Columns 
+ All News 
+ Dungeons & Dragons 
+ Level Up: Advanced 5th Edition 
+ Pathfinder 
+ Starfinder 
+ Warhammer 
+ 2d20 System 
+ Year Zero Engine 
+ Industry News 
+ Reviews 
+ Dragon Reflections 
+ White Dwarf Reflections 
+ Columns 
+ Weekly Digests 
+ Weekly News Digest 
+ Freebies, Sales & Bundles 
+ RPG Print News 
+ RPG Crowdfunding News 
+ Game Content 
+ ENterplanetary DimENsions 
+ Mythological Figures 
+ Opinion 
+ Worlds of Design 
+ Peregrine's Nest 
+ RPG Evolution 
+ Other Columns 
+ From the Freelancing Frontline 
+ Monster ENcyclopedia 
+ WotC/TSR Alumni Look Back 
+ 4 Hours w/RSD (Ryan Dancey) 
+ The Road to 3E (Jonathan Tweet) 
+ Greenwood's Realms (Ed Greenwood) 
+ Drawmij's TSR (Jim Ward) 
+ Features 
+ Million Dollar TTRPG Crowdfunders 
+ Most Anticipated Tabletop RPGs Of The Year 
+ Eric Noah's Unofficial D&D 3rd Edition News 
+ Top 5 RPGs Compiled Charts 2004-Present 
+ Adventure Game Industry Market Research Summary (RPGs) V1.0 
+ Ryan Dancey: Acquiring TSR 
+ Q&A With Gary Gygax 
+ TSR, WotC, & Paizo: A Comparative History 
+ D&D Pronunciation Guide 
+ D&D in the Mainstream 
+ About Morrus 
+ Podcast 
+ Community 
+ Forums & Topics 
+ Forum List 
+ Latest Posts 
+ Forum list 
+ *Dungeons & Dragons 
+ Level Up: Advanced 5th Edition 
+ D&D Older Editions, OSR, & D&D Variants 
+ *Tabletop General 
+ *Pathfinder & Starfinder 
+ EN Publishing 
+ *Geek Talk & Media 
+ Chat/Discord 
+ Resources 
+ Wiki 
+ Pages 
+ Latest activity 
+ Media 
+ New media 
+ New comments 
+ Downloads 
+ Latest reviews 
+ EN Publishing 
+ Store 
+ EN5ider 
+ Adventures in ZEITGEIST 
+ Awfully Cheerful Engine 
+ What's OLD is NEW 
+ Judge Dredd & The Worlds Of 2000AD 
+ War of the Burning Sky 
+ Level Up: Advanced 5E 
+ EN WORLD+ 
+ Log in 
+ Register 
+ What's new 
+ Forums & Topics 
+ Forum List 
+ Latest Posts 
+ Forum list 
+ *Dungeons & Dragons 
+ Level Up: Advanced 5th Edition 
+ D&D Older Editions, OSR, & D&D Variants 
+ *Tabletop General 
+ *Pathfinder & Starfinder 
+ EN Publishing 
+ *Geek Talk & Media 
+ Chat/Discord 
+ Menu
+ Log in
+ Register
+ Install the app 
+ Install 
+ Upgrade your account to EN WORLD+ and remove most of the site ads. 
+ log in or register to remove this ad 
+-->
+ Community 
+ General Tabletop Discussion 
+ *Dungeons & Dragons 
+ JavaScript is disabled. For a better experience, please enable JavaScript in your browser before proceeding. 
+ You are using an out of date browser. It may not display this or other websites correctly. You should upgrade or use an alternative browser . 
+ D&D Adventurers League Unveils New DungeonCraft Document with Planescape In Focus 
+ Category 
+ Dungeons & Dragons 
+ Thread starter 
+ Thread starter 
+ Raddu 
+ Start date 
+ Start date 
+ Nov 13, 2023 
+ The Planescape setting, effective from November 4th, 2023, offers unique opportunities for Dungeoncraft creators. 
+ Nov 13, 2023 
+ Replies: 8
+ ---->
+ Dungeons & Dragons Adventurers League (DnDAL) has been embracing the creativity of its community with the Dungeoncraft program since November of 2020. This initiative empowers Dungeon Masters to design their own adventures for D&D Adventurers League campaigns. The newly released Dungeoncraft Design Guide, effective from November 9th, 2023, provides comprehensive instructions and standards for crafting these adventures. 
+ Exploring Planescape Options in Dungeoncraft​ The Planescape setting, effective from November 4th, 2023, offers unique opportunities for Dungeoncraft creators: 
+ Planescape as a Setting: While being a part of the Forgotten Realms campaign, Dungeoncraft adventures in Planescape must focus primarily on the Planescape setting. Adventures must start with the code PS-DC. 
+ Allowed Resources: Several resources, including "Morte’s Planar Parade" and "Bigby Presents: Glory of the Giants," are approved for crafting adventures in Planescape. 
+ Adventure Setting Resources: The main source is "Planescape: Adventures in the Multiverse." Creators are advised not to contradict current information or destroy a plane, and to consider the themes and philosophies of each plane. 
+ Tiers and Rewards: Creators can design adventures for any tier and select consumables from approved resources. Rewards have specific limitations to maintain balance. 
+ Publishing Deadlines: Adventures supporting this season must be published on the Dungeon Masters Guild by December 31, 2024, and can be played through March 31, 2025. 
+ You can find the latest DungeonCraft document in the D&D Discord, in the #al-updates channel (you must be a D&D discord member to follow the link). 
+ Creating Your Own Adventures with DungeonCraft​ The Dungeoncraft program allows creators to design their own D&D Adventurers League adventures. These can be tailored for various D&D campaigns, each with specific resource books, useable monsters, and magic item rewards. All Dungeoncraft adventures must align with the world of the featured campaign setting, without crossing into other settings or worlds unless explicitly allowed by that campaign's rules. 
+ Technical Requirements​ Creators must use a specific template provided for Dungeoncraft adventures, including the Community Created D&D Adventurers League logo. Familiarity with the D&D Style Guide and adherence to the DMsGuild Content Guidelines are also required. 
+ Adventure Crafting​ Adventures should be designed for either a two-hour or four-hour play time. The guide specifies how to handle monsters, including annotations for racial abilities and magic items, and prohibits changing the challenge rating of monsters/NPCs or creating new creatures. The adventure must occur within the designated setting and should not result in the destruction of major locations or NPCs. 
+ Treasure​ The program outlines specific rules for selecting magic item rewards and other consumables based on the adventure's tier and duration. These include limits on the types and numbers of items that can be chosen from designated tables. There are clear guidelines for group monetary rewards based on the tier and duration of the adventure. 
+ Story Awards​ Not everything is worth gold; a story award is a persistent award given to characters that meet the requirement in the adventure. Unlike tangible rewards like gold, items, or experience points, a Story Award typically represents a narrative achievement or a change in the character's status within the game world. It can include recognition of alliances formed, enemies made, secrets uncovered, or special knowledge gained. These awards do not provide mechanical benefits but rather enrich the character's personal story and can influence their interactions and experiences in future adventures within the AL framework. Story awards in Dungeoncraft Adventures are not allowed to provide mechanical benefits or circumvent the limits of other listed rewards. 
+ Publication and Compliance​ Creators have the option to publish their adventures on the Dungeon Masters Guild. The adventures must adhere to specific coding and design standards, and only the designers are allowed to run the adventure until it is published. There are strict compliance rules, and adventures can be removed from the DMsGuild if they fail to meet these standards. Non-compliance can also lead to suspension or revocation of the creator's ability to continue creating and publishing sanctioned content under these rules. 
+ DungeoncCraft Adventures​ The best way to learn how to write DungeonCraft adventures is to see how others have written them. Here are five adventures from the DMsGuild: 
+ Dohwar Heist (SJ-DC-DWR-01)​ In the " Dohwar Heist " adventure, the Silver Beak merchant cartel's dohwar on the Rock of Bral face threats from mercane and a raid by vampirates, which results in the loss of their production facilities for sweet honeyfish mooncakes. Adventurers must infiltrate the vampirate stronghold, retrieve the cargo, and escape unnoticed. This four-hour Spelljammer Dungeoncraft Adventure for Tier 2 characters, optimized for APL 8, includes a PDF adventure guide, NPC and creature stat blocks, high-resolution maps, player handouts, and author notes. It's inspired by heist movies and offers various play styles but focuses primarily on action. Content warnings include alcohol, drowning, fantasy violence, and kidnapping. 
+ The Solitude of Solace (WBW-DC-DMMC-01)​ This Silver Best Seller , and 5 stars from 8 ratings is a 4-hour psychological horror adventure for Tier 2 characters, optimized for an average party level (APL) of 8. The storyline involves searching for a lost girl who seeks a cure for her dying mother, leading players into a realm filled with horror. The adventure, designed for virtual tabletop (VTT) play, includes maps and an adventure PDF. It's important to note that this adventure contains mature themes such as body horror, child endangerment, gore, and mental health issues (including abuse, depression, grief, and trauma), and is not recommended for young children or those sensitive to such content. 
+ Forlorn but not Forgotten (SJ-DC-PHP-FLN01-01)​ Forlorn but not Forgotten is an 5 start reviewed (by 8 ratings), Silver Best Seller. This 2-hour Spelljammer adventure for levels 1-4. Set in the Wildspace system of Forlorn, players are tasked with aiding an astral elf in finding his lost lover, marking the first part of the Crystalstar Trilogy. This adventure, ideal for newcomers, offers a mix of role-play, combat, and exploration. Content warnings include possible abduction, loss and mourning, and strangulation. 
+ Starfall (SJ-DC-ECHO-01)​ In Starfall, the Silver Best Seller and 5 star (from 7 ratings) adventure, Githyanki pirates have stolen a sacred relic from the Hesperides Temple. In this two-hour adventure for Tier 3 characters, optimized for an average party level (APL) of 13, players must retrieve the relic before time runs out. Set in the Wildspace system of Echo, the adventure comes with a content warning for death by fire and a potential phobia trigger involving spiders. The product includes an adventure PDF and a map pack, with both standard and printer-friendly versions of the maps. 
+DungeonCraft highlights the D&D AL admins desires to innovate in organized play storytelling. By directly involving the community of Dungeon Masters, the program democratizes the adventure creation process. It allows Dungeon Masters to not only run pre-designed adventures but also to craft and share their own stories within the established D&D universes. This approach empowers the Dungeon Masters, giving them a platform to showcase their creativity and contribute to the expanding lore of D&D. 
+ Last edited by a moderator: Nov 13, 2023 
+ -->
+ Reply 
+ Reactions: 
+ briggart , Eyes of Nine , EthanSental and 5 others 
+ Click to expand... 
+ Written by 
+ Raddu 
+ Explorer · 49 · From Phoenix, AZ 
+ Robert is a freelance RPG designer and marketing professional. He has design credits under Wizards of the Coast, Paizo, Ulisses North America, Schwalb Entertainment, Kobold Press, Alligator Alley Entertainment and more. He was a community manager for the D&D Adventurers League from 2014-2018. Robert is a die-hard Dark Sun fan and the founder of the Burnt World of Athas website ( Athas.org ) and co-host of the Bone, Stone, & Obsidian Dark Sun podcast. He was born and lives in the deserts of Athas, aka Phoenix, AZ. 
+Mastadon: @Raddu@Tabletop.Social 
+Twitter: @Raddu76 
+Discord: Raddu#6891 
+ Messages 
+ 199 
+ Reaction score 
+ 90 
+ Points 
+ 39 
+ log in or register to remove this ad 
+ Vincent55 
+ Adventurer 
+ Nov 13, 2023 
+ #2
+ Yes well, just more controlling from the way it sounds to me, and they wonder why many have left D&D for a more open an free system. 
+ Reply 
+ Reactions: 
+ ColdSpire , Giantrollorc , Erdric Dragin and 1 other person 
+ V 
+ Von Ether 
+ Legend 
+ Nov 13, 2023 
+ #3
+ Vincent55 said: 
+ Yes well, just more controlling from the way it sounds to me, and they wonder why many have left D&D for a more open an free system.
+ Click to expand... 
+Nothing is stopping people from writing their own Planescape adventures whichever fashion they prefer for the DMs Guild. 
+These guidelines only apply if the writer wants their adventures considered for Planescape Adventurers League adventures, which is a more codified way to play the game as it allows the same PC to advance over time at different tables filled with complete strangers. If that level of codification bothers you, I suggest you avoiding Living campaigns and Adventurers League. 
+To sum up, your statement is not wrong. D&D 5e in general does have stricter writer's guidelines and procedures that make it more tempting to write for another game system with less editorial requirements. These guidelines above, however, are part of style of play that needs more guiderails than your usual table does. 
+And to also be honest, more companies with SRDs should put out style guides to ensure their 3 PP maintain consistency. 
+OTH, I don't blame you. The RPGA is why we went from 3.0 to 3.5 so quickly and why 3.5 had more rules. 
+ Last edited: Dec 15, 2023 
+ Reply 
+ Reactions: 
+ briggart , Xohar17 , Eyes of Nine and 6 others 
+ N 
+ Nightfly 
+ Hero 
+ Nov 13, 2023 
+ #4
+ "Not everything is worth gold, a story award is a persistent award given to characters that meet the requirement in the adventure." 
+Avoidance of sentence splices is worth its weight in gold. 
+ Reply 
+ Reactions: 
+ FitzTheRuke , doctorhook and Eyes of Nine 
+ V 
+ Von Ether 
+ Legend 
+ Nov 13, 2023 
+ #5
+ Nightfly said: 
+ "Not everything is worth gold, a story award is a persistent award given to characters that meet the requirement in the adventure." 
+Avoidance of sentence splices is worth its weight in gold.
+ Click to expand... 
+If we are getting technical, do you not mean a comma splice? On that note, where does the second comma in that sentence go? 
+ Reply 
+ talien 
+ Community Supporter 
+ Nov 13, 2023 
+ #6
+ Nightfly said: 
+ "Not everything is worth gold, a story award is a persistent award given to characters that meet the requirement in the adventure." 
+Avoidance of sentence splices is worth its weight in gold.
+ Click to expand... 
+I replaced that comma after "gold" with a semicolon. Thanks for letting us know! 
+ Reply 
+ Reactions: 
+ FitzTheRuke , doctorhook and Marandahir 
+ N 
+ Nightfly 
+ Hero 
+ Nov 13, 2023 
+ #7
+ talien said: 
+ I replaced that comma after "gold" with a semicolon. Thanks for letting us know!
+ Click to expand... 
+I'm an English teacher. You just made my day! 
+ Reply 
+ Reactions: 
+ FitzTheRuke , talien and doctorhook 
+ H 
+ Henadic Theologian 
+ Legend 
+ Nov 14, 2023 
+ #8
+ I love how they felt the need to point out you can't blow up Planes in your adventure, so no nuking Hell. 
+ Reply 
+ Reactions: 
+ darjr , MNblockhead and Distracted DM 
+ C 
+ ColdSpire 
+ Villager 
+ Dec 15, 2023 
+ #9
+ Henadic Theologian said: 
+ I love how they felt the need to point out you can't blow up Planes in your adventure, so no nuking Hell.
+ Click to expand... 
+But it's the only way to be sure! 
+ Reply 
+ Post reply
+ Insert quotes…
+ Similar Threads 
+ D&D 5E (2024) 
+ Future of D&D Encounters Program with Chris Tulach!
+ darjr 
+ Mar 18, 2026 
+ *Dungeons & Dragons
+ 2 
+ 3 
+ Replies 
+ 25 
+ Views 
+ 7K 
+ Jun 1, 2026 
+ Nobleshield 
+ D&D General 
+ Original Dark Sun creators update their Dragon Kings world to 5E
+ Morrus 
+ Aug 27, 2026 
+ *Dungeons & Dragons
+ 6 
+ 7 
+ 8 
+ 9 
+ 10 
+ Replies 
+ 96 
+ Views 
+ 14K 
+ Yesterday at 1:02 PM 
+ Henadic Theologian 
+ H 
+ B 
+ D&D’s Gen Con Vision Keynote 2027—all of the announcements
+ brimmels 
+ Jul 31, 2026 
+ *Dungeons & Dragons
+ 19 
+ 20 
+ 21 
+ 22 
+ 23 
+ Replies 
+ 225 
+ Views 
+ 29K 
+ Aug 12, 2026 
+ Zaukrie 
+ Z 
+ B 
+ D&D Player's Workbook of Epic Adventure and the Dungeon Master's Workbook of Worldbuilding reviews
+ brimmels 
+ May 25, 2026 
+ *Dungeons & Dragons
+ 2 
+ 3 
+ 4 
+ Replies 
+ 34 
+ Views 
+ 15K 
+ May 30, 2026 
+ SothFan 
+ S 
+ D&D Workbooks Announced by Penguin Random House
+ Christian Hoffer 
+ Dec 26, 2025 
+ *Dungeons & Dragons
+ 2 
+ Replies 
+ 19 
+ Views 
+ 16K 
+ May 13, 2026 
+ Silam 
+ Share: 
+ Facebook 
+ X 
+ Bluesky 
+ LinkedIn 
+ Reddit 
+ Pinterest 
+ Tumblr 
+ WhatsApp 
+ Email 
+ Share 
+ Link 
+ Recent & Upcoming Releases 
+ -->
+ -->
+ September 16
+ 2026
+ Arcana Unleashed 
+ (Dungeons & Dragons) 
+ Rulebook featuring "high magic" options, including a host of new spells.
+ Replies (307) 
+ -->
+ -->
+ September 16
+ 2026
+ Arcana Unleashed: Deadfall 
+ (Dungeons & Dragons) 
+ Adventure book featuring Red Wizards of Thay.
+ Replies (187) 
+ -->
+ -->
+ October 1
+ 2026
+ Secrets of the Tome (A5E) 
+ (Level Up: Advanced 5th Edition) 
+ Magical options for spellcasters.
+ Replies (23) 
+ -->
+ -->
+ November 3
+ 2026
+ Dungeons & Dragons: World of Warcraft 
+ (Dungeons & Dragons) 
+ World book for Azeroth
+ Replies (271) 
+ -->
+ -->
+ January 30
+ 2027
+ Dark Sun 
+ (Dungeons & Dragons) 
+ Dark Sun returns in 2027
+ Replies (1967) 
+ -->
+ -->
+ March 6
+ 2027
+ Steel & Skill: The Complete Fighter's Field Guide 
+ (Dungeons & Dragons) 
+ Handbook for D&D fighters.
+ Replies (70) 
+ -->
+ -->
+ June 15
+ 2027
+ Star Wars: Season of Rebellion 
+ (Dungeons & Dragons) 
+ Official D&D Star Wars book
+ Replies (278) 
+ -->
+ -->
+ July 31
+ 2027
+ Greyhawk: Crown of the Witch Queen 
+ (Dungeons & Dragons) 
+ 160-page adventure
+ Replies (269) 
+ -->
+ -->
+ December 31
+ 2027
+ Melf's Guide to Greyhawk: The Shield Lands 
+ (Dungeons & Dragons) 
+ Greyhawk book written by Luke Gygax.
+ Replies (380) 
+ Forum list
+ Post thread…
+ Related Articles 
+ D&D 5E (2024)   Future of D&D Encounters Program with Chris Tulach! 
+ Started by darjr 
+ Mar 18, 2026 
+ Replies: 25 
+ *Dungeons & Dragons
+ D&D General   Original Dark Sun creators update their Dragon Kings world to 5E 
+ Started by Morrus 
+ Aug 27, 2026 
+ Replies: 96 
+ *Dungeons & Dragons
+ B 
+ D&D’s Gen Con Vision Keynote 2027—all of the announcements 
+ Started by brimmels 
+ Jul 31, 2026 
+ Replies: 225 
+ *Dungeons & Dragons
+ B 
+ D&D Player's Workbook of Epic Adventure and the Dungeon Master's Workbook of Worldbuilding reviews 
+ Started by brimmels 
+ May 25, 2026 
+ Replies: 34 
+ *Dungeons & Dragons
+ D&D Workbooks Announced by Penguin Random House 
+ Started by Christian Hoffer 
+ Dec 26, 2025 
+ Replies: 19 
+ *Dungeons & Dragons
+ Remove ads 
+ Recent & Upcoming Releases 
+ -->
+ -->
+ September 16
+ 2026
+ Arcana Unleashed 
+ (Dungeons & Dragons) 
+ Rulebook featuring "high magic" options, including a host of new spells.
+ Replies (307) 
+ -->
+ -->
+ September 16
+ 2026
+ Arcana Unleashed: Deadfall 
+ (Dungeons & Dragons) 
+ Adventure book featuring Red Wizards of Thay.
+ Replies (187) 
+ -->
+ -->
+ October 1
+ 2026
+ Secrets of the Tome (A5E) 
+ (Level Up: Advanced 5th Edition) 
+ Magical options for spellcasters.
+ Replies (23) 
+ -->
+ -->
+ November 3
+ 2026
+ Dungeons & Dragons: World of Warcraft 
+ (Dungeons & Dragons) 
+ World book for Azeroth
+ Replies (271) 
+ -->
+ -->
+ January 30
+ 2027
+ Dark Sun 
+ (Dungeons & Dragons) 
+ Dark Sun returns in 2027
+ Replies (1967) 
+ -->
+ -->
+ March 6
+ 2027
+ Steel & Skill: The Complete Fighter's Field Guide 
+ (Dungeons & Dragons) 
+ Handbook for D&D fighters.
+ Replies (70) 
+ -->
+ -->
+ June 15
+ 2027
+ Star Wars: Season of Rebellion 
+ (Dungeons & Dragons) 
+ Official D&D Star Wars book
+ Replies (278) 
+ -->
+ -->
+ July 31
+ 2027
+ Greyhawk: Crown of the Witch Queen 
+ (Dungeons & Dragons) 
+ 160-page adventure
+ Replies (269) 
+ -->
+ -->
+ December 31
+ 2027
+ Melf's Guide to Greyhawk: The Shield Lands 
+ (Dungeons & Dragons) 
+ Greyhawk book written by Luke Gygax.
+ Replies (380) 
+ Remove ads 
+ Community 
+ General Tabletop Discussion 
+ *Dungeons & Dragons 
+ Light Mode
+ Contact us 
+ Terms and rules 
+ Privacy policy 
+ Help 
+ Home 
+ RSS 
+ Community platform by XenForo ® © 2010-2026 XenForo Ltd. Ignore/Block Essentials by AddonFlare - Premium XF2 Addons 
+ | [XTR] Modal Popups © 2019 XENTR Development | Events Manager by XenCustomize 
+ Discord Integration © Jason Axelrod of
+ 8WAYRUN 
+ XenCarta 2 PRO © Jason Axelrod of
+ 8WAYRUN 
+ Top 

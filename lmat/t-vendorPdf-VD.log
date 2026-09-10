@@ -1,0 +1,52 @@
+gate-mutex: entered SHARED tier at /tmp/settlementforge-vitest-gate.502.lock.shared as PID 82910 after 0 poll(s); 1 shared holder(s) live, worker cap <= 2.
+
+ RUN  v4.1.11 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/laneLMAT
+
+ ✓ tests/build/vendorPdfLazy.test.js > Tier 9.7 — VERIFY_DIST post-build anti-vacuity > when VERIFY_DIST=1, dist/ + dist/assets exist (post-build must verify, not skip) 1ms
+ ✓ tests/build/vendorPdfLazy.test.js > Tier 9.7 — vendor-pdf lazy load contract > vendor-pdf is its own chunk in dist/assets/ 1ms
+ ✓ tests/build/vendorPdfLazy.test.js > Tier 9.7 — vendor-pdf lazy load contract > vendor-pdf chunk is large (would dominate initial bundle if eagerly loaded) 1ms
+ ✓ tests/build/vendorPdfLazy.test.js > Tier 9.7 — vendor-pdf lazy load contract > entry does NOT statically import vendor-pdf (directly) 2ms
+ ✓ tests/build/vendorPdfLazy.test.js > Tier 9.7 — vendor-pdf lazy load contract > vendor-pdf is absent from the entry transitive static closure 3ms
+ ✓ tests/build/vendorPdfLazy.test.js > Tier 9.7 — vendor-pdf lazy load contract > the engine chunk is ABSENT from the entry transitive static closure 3ms
+ ✓ tests/build/vendorPdfLazy.test.js > Tier 9.7 — vendor-pdf lazy load contract > the engine chunk still exists (lazy) and remains large 1ms
+ ✓ tests/build/vendorPdfLazy.test.js > Tier 9.7 — vendor-pdf lazy load contract > the det-math manualChunks rule is present in vite.config.js 0ms
+ ✓ tests/build/vendorPdfLazy.test.js > Tier 9.7 — vendor-pdf lazy load contract > detMath rides its own lazy chunk, never the eager kernel chunk 1ms
+ ✓ tests/build/vendorPdfLazy.test.js > Tier 9.7 — vendor-pdf lazy load contract > the affordance manifest is ABSENT from the entry transitive static closure 5ms
+ ✓ tests/build/vendorPdfLazy.test.js > Tier 9.7 — vendor-pdf lazy load contract > the guidance registry is ABSENT from the entry transitive static closure 5ms
+ ✓ tests/build/vendorPdfLazy.test.js > Tier 9.7 — vendor-pdf lazy load contract > the guidance registry sentinel is PRESENT in some lazy chunk (non-vacuity) 72ms
+ ✓ tests/build/vendorPdfLazy.test.js > Tier 9.7 — vendor-pdf lazy load contract > the guidance notes sidecar is ABSENT from the entry transitive static closure 5ms
+ ✓ tests/build/vendorPdfLazy.test.js > Tier 9.7 — vendor-pdf lazy load contract > the guidance notes sentinel is PRESENT in some lazy chunk (non-vacuity) 68ms
+ ✓ tests/build/vendorPdfLazy.test.js > Tier 9.7 — vendor-pdf lazy load contract > the glossary is ABSENT from the entry transitive static closure 6ms
+ ✓ tests/build/vendorPdfLazy.test.js > Tier 9.7 — vendor-pdf lazy load contract > the glossary sentinel is PRESENT in some lazy chunk (non-vacuity) 96ms
+ ✓ tests/build/vendorPdfLazy.test.js > Tier 9.7 — vendor-pdf lazy load contract > entry static closure raw bytes stay under the first-paint budget (1048000) 3ms
+ ✓ tests/build/vendorPdfLazy.test.js > Tier 9.7 — vendor-pdf lazy load contract > entry static closure gzip bytes stay under 337000 1310ms
+ ✓ tests/build/vendorPdfLazy.test.js > Tier 9.7 — vendor-pdf lazy load contract > entry static closure Brotli bytes stay under 283000 0ms
+ ✓ tests/build/vendorPdfLazy.test.js > Tier 9.7 — vendor-pdf lazy load contract > index.html does NOT preload vendor-pdf 0ms
+ ✓ tests/build/vendorPdfLazy.test.js > Tier 9.7 — source uses dynamic import for PDF generation > src/components/SettlementDetail.jsx uses dynamic import('.../generateSettlementPDF.js') 0ms
+ ✓ tests/build/vendorPdfLazy.test.js > Tier 9.7 — source uses dynamic import for PDF generation > src/components/SingleDossierSuccessPage.jsx uses dynamic import('.../generateSettlementPDF.js') 0ms
+ ✓ tests/build/vendorPdfLazy.test.js > F41 — PDF worker source contracts > generateSettlementPDF.js has NO static @react-pdf/renderer import (worker owns the render) 0ms
+ ✓ tests/build/vendorPdfLazy.test.js > F41 — PDF worker source contracts > generateSettlementPDF.js constructs the render worker via the Vite worker syntax 0ms
+ ✓ tests/build/vendorPdfLazy.test.js > F41 — PDF worker source contracts > generateSettlementPDF.js feature-detects Worker (no user-agent sniffing) 0ms
+ ✓ tests/build/vendorPdfLazy.test.js > F41 — PDF worker source contracts > pdfRender.worker.js imports the window shim BEFORE @react-pdf/renderer 0ms
+ ✓ tests/build/vendorPdfLazy.test.js > F41 — PDF worker source contracts > pdfRender.worker.js contains no dynamic import() 0ms
+ ✓ tests/build/vendorPdfLazy.test.js > F41 — PDF worker chunk contract > the worker is emitted as its own asset and carries the PDF stack 1ms
+ ✓ tests/build/vendorPdfLazy.test.js > F41 — PDF worker chunk contract > the worker asset is ABSENT from the entry transitive static closure 4ms
+ ✓ tests/build/vendorPdfLazy.test.js > F41 — PDF worker chunk contract > index.html does NOT preload the PDF worker 0ms
+ ✓ tests/build/vendorPdfLazy.test.js > WEAVE ST-2 — the goods namespace surface law > the eager graph this arm reads is non-empty and contains the entry (anti-vacuity) 0ms
+ ✓ tests/build/vendorPdfLazy.test.js > WEAVE ST-2 — the goods namespace surface law > both goods index surfaces exist where the vocabulary says they do 0ms
+ ✓ tests/build/vendorPdfLazy.test.js > WEAVE ST-2 — the goods namespace surface law > the EAGER identity surface re-exports only tables already in the first-paint graph 0ms
+ ✓ tests/build/vendorPdfLazy.test.js > WEAVE ST-2 — the goods namespace surface law > NO module in the first-paint graph imports the LAZY chains surface 14ms
+ ✓ tests/build/vendorPdfLazy.test.js > WEAVE ST-2 — the goods namespace surface law > the LAZY chains surface is itself absent from the first-paint module graph 0ms
+ ✓ tests/build/vendorPdfLazy.test.js > WEAVE ST-2 — the goods namespace surface law > MUTANT: a fabricated eager importer of the chains surface is caught 0ms
+ ✓ tests/build/vendorPdfLazy.test.js > WEAVE ST-2 — the goods namespace surface law > MUTANT: a DYNAMIC import of the chains surface is not counted (lazy boundary) 0ms
+ ✓ tests/build/vendorPdfLazy.test.js > WEAVE ST-2 — the goods namespace surface law > tradeLinks.js — the one eager chains-half consumer — keeps its DIRECT import (FP-G4) 0ms
+ ✓ tests/build/vendorPdfLazy.test.js > WEAVE ST-2 — the goods namespace surface law > every chains-half table stays out of the first-paint graph except the FP-G4 leaf 0ms
+ ✓ tests/build/vendorPdfLazy.test.js > WEAVE ST-2 — the goods migration roster matches the tree > the roster reader finds rows at all (anti-vacuity) 190ms
+ ✓ tests/build/vendorPdfLazy.test.js > WEAVE ST-2 — the goods migration roster matches the tree > MUTANT: a row whose door column is wrong is caught 0ms
+ ✓ tests/build/vendorPdfLazy.test.js > WEAVE ST-2 — the goods migration roster matches the tree > every consumer in the tree is declared, with the right eager flag, halves and door 174ms
+
+ Test Files  1 passed (1)
+      Tests  42 passed (42)
+   Start at  11:08:03
+   Duration  3.29s (transform 39ms, setup 22ms, import 1.21s, tests 1.97s, environment 0ms)
+

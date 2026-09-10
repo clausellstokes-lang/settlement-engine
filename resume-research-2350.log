@@ -1,0 +1,23 @@
+inflight scanner restarted (pid 54294)
+== in-flight progress (sweep/inflight/SUMMARY.md) ==
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 23:50:20 (inflight-scan.py; every 120 s; the autosave seals this dir)
+
+| sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
+|---|---|---|---|---:|---|---|---|
+| ai | critic |  | failed | 0 | — | — | 03:45:47 |
+== sweep state before ==
+{"tolkien":{"claims":874,"verdicts":874,"kept":641,"partial":214},"martin":{"claims":990,"verdicts":990,"kept":763,"partial":107},"dnd":{"claims":1052,"verdicts":1052,"kept":762,"partial":182},"ai":{"claims":940,"verdicts":940,"kept":769,"partial":144},"kay":{"claims":1103,"verdicts":1103,"kept":631,"partial":100},"leguin":{"claims":924,"verdicts":924,"kept":454,"partial":87},"wolfe":{"claims":1255,"verdicts":1255,"kept":766,"partial":217},"hobb":{"claims":696,"verdicts":696,"kept":363,"partial":174}}
+== dnd: last run wf_37af3c74-8c8, prev args args-dnd-r9.json -> next tag r10 ==
+{"name": "dnd", "tag": "r10", "out": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/args-dnd-r10.json", "bytes": 4569, "chunks": 1, "toVerify": 11, "findAngles": [], "extraAngles": [], "droppedComplete": ["place-5e-gazetteers", "place-dmg-settlements", "place-srd-measure", "place-editorial-staff"], "baseIndex": null, "verifiedCount": 1142, "cap": 4}
+  flags: {'regrade': True, 'skipSynth': None, 'nothingToRun': None, 'cap': 4} chunks 1 angles [] []
+== ai: last run wf_00551368-b67, prev args args-ai-r9.json -> next tag r10 ==
+{"name": "ai", "tag": "r10", "out": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/args-ai-r10.json", "bytes": 28518, "chunks": 14, "toVerify": 201, "findAngles": [], "extraAngles": ["arch-decoding-literature"], "droppedComplete": ["arch-worldbuilding-communities", "arch-gazetteer-travel-history", "arch-biographical-record", "arch-historical-fact-measured", "arch-second-tell-catalogue"], "baseIndex": 1426, "verifiedCount": 1225, "cap": 4}
+  flags: {'regrade': True, 'skipSynth': None, 'nothingToRun': None, 'cap': 4} chunks 14 angles [] ['arch-decoding-literature']
+
+== PASTE, one Workflow call per sweep (scriptPath = /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/research-workflow-v3.js; args = the JSON of the file named) ==
+  dnd -> /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/args-dnd-r10.json (    4569 bytes)
+  ai -> /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/args-ai-r10.json (   28518 bytes)
+Then: update /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/LAST-RUNS.json with the new runIds/argsFiles/tags; the autosave seals the kit every 5 min.
+⚠ TAG LAW: the tag (r6, r7…) is a LAUNCH COUNTER, not the owner's round. A launch with no findAngles/extraAngles COMPLETES the previous round.
+   The owner's S-BOUND rounds count FIND rounds only: tolkien/martin have none left; dnd/ai one targeted round (the PLACE register / the ARCHIVAL register);
+   kay/leguin/wolfe/hobb one critic-driven top-up; NO further round after those. A file with nothingToRun=true is NOT launched.

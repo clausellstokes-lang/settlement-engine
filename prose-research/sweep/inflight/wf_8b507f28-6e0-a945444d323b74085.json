@@ -1,0 +1,25 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 172,
+ "firstTs": "2026-09-07T16:05:21.827Z",
+ "lastTs": "2026-09-07T16:35:48.414Z",
+ "tools": {
+  "Bash": 32,
+  "Read": 21,
+  "Write": 1,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [],
+ "filesWritten": [
+  "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/reconcile-chronicle-line.md"
+ ],
+ "lastAssistantText": "Guard passes. Now reading the fold, the laws, and the refutation in parallel, plus a sibling reconcile file for the established format.",
+ "run": "wf_8b507f28-6e0",
+ "agent": "a945444d323b74085",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/8de5f153-f375-48fb-803c-ec578a273a4a/subagents/workflows/wf_8b507f28-6e0/agent-a945444d323b74085.jsonl",
+ "journal": "result",
+ "checkpointFile": null
+}

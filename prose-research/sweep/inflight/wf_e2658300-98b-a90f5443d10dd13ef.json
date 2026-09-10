@@ -1,0 +1,23 @@
+{
+ "role": "finder",
+ "name": "martin",
+ "angle": "editorial-ownwords",
+ "tag": null,
+ "lines": 5,
+ "firstTs": "2026-09-06T09:50:26.248Z",
+ "lastTs": "2026-09-06T09:50:26.680Z",
+ "tools": {},
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "You've reached your Fable limit. Switch to another model, or manage usage credits at claude.ai/settings/usage?from=cc_cli_limit_message, to continue.",
+ "run": "wf_e2658300-98b",
+ "agent": "a90f5443d10dd13ef",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/subagents/workflows/wf_e2658300-98b/agent-a90f5443d10dd13ef.jsonl",
+ "journal": "failed",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-martin-editorial-ownwords.json",
+  "claims": 78,
+  "complete": true,
+  "mtime": "08:24:31"
+ }
+}

@@ -1,0 +1,263 @@
+ 
+
+ In Defence of the em dash: What the AI writing debate gets wrong - SALT.agency® 
+
+ Skip to content 
+ Skip to navigation 
+
+ +1 (781) 205-1150 
+
+ 00:00 (GMT) 
+
+ Expertise 
+
+ Technical SEO Services 
+
+ AI Search 
+
+ SEO Strategy 
+
+ SEO Content Services 
+
+ International SEO 
+
+ SEO Migration Services 
+
+ Enterprise Local SEO 
+
+ Travel Sector SEO & AI 
+
+ Our work 
+
+ Case studies 
+
+ Reviews 
+
+ Blog 
+
+ Tools 
+
+ Mirador Local – GBP Manager 
+
+ GSC BigQuery SQL Hero 
+
+ Hreflang Checker 
+
+ Server Log File Googlebot Filter 
+
+ Bulk Redirect Generator 
+
+ Social Profile Checker 
+
+ Careers 
+
+ Contact us 
+
+ Home > Blog > In Defence of the em dash: What the AI writing debate gets wrong 
+
+ Content 
+
+ In Defence of the em dash: What the AI writing debate gets wrong 
+
+ By Sarah Mitchell 
+
+ January 29, 2026 
+
+ The em dash has emerged as an unlikely villain in marketing circles. According to a growing chorus of voices on Reddit and LinkedIn, this humble punctuation mark is a telltale sign of AI-generated content, prompting writers to debate whether to use the em dash at all. 
+
+ But is it though? 
+
+ Here at SALT, we’ve had internal discussions around whether we should abandon the em dash, lest our carefully crafted prose be mistaken for AI-generated slop. 
+
+ For us, the debate isn’t about whether the em dash really is a signifier of AI-generated content. That’s kind of moot, as you’ll see. Instead, the issue for SALT is more about how our audience perceives our content. 
+
+ On the one hand, do we want to risk people mistakenly thinking our content is AI-generated even though it isn’t? And if they do, how might that impact their impressions of our brand, our practices, and our expertise? 
+
+ On the other hand, is this all just a storm in a teacup? Should we really change how we write because of a rapidly spreading internet rumour that will probably burn out just as rapidly when people realise it’s not really a thing? 
+
+ I can’t help thinking that, deep down, all this em dash angst is really about something else. 
+
+ A punctuation reality check 
+
+ I’ve been a professional content and copywriter for decades, and I regularly use the em dash. Always have. 
+
+ To be more accurate, I’m more likely to use the shorter en dash ( – ) with spaces. Even though I’m American, and the longer em dash (—) without spaces is far more common in U.S. English, I usually write content for UK and Australian audiences. 
+
+ You can see how easy it is for writers and editors to tie themselves in knots over stuff like this.If you’re not entirely sure on the difference between a hyphen, en dash and em dash, don’t panic. Many people don’t, even though just about everyone these days spends at least part of every day typing emails or messages on a keyboard. Fewer still would know the shortcuts to enter them into text when typing. 
+
+ And while a hyphen has a handy key on the typical keyboard, no shortcuts required, it’s not interchangeable with the em dash. Use a hyphen instead of an en or em dash and somewhere in the world a puppy dies. Or a copy editor gets an ulcer; I forget which. 
+
+ This confusion may well be what led to the internet rumour that ChatGPT tends to overuse the em dash. According to Know Your Meme , the claim seems to have first appeared in a post on Reddit (since deleted) around October 2024. 
+
+ “Has anyone noticed how ChatGPT tends to use em dashes frequently? They’re not on a keyboard, so it’s usually a dead giveaway that something’s written by AI.” 
+
+ Yet, despite replies to the post pointing out that they do, in fact, use the em dash all the time, the rumour spread. More Reddit threads continued the debate, until the idea broke containment and began spreading on LinkedIn and elsewhere. 
+
+ Thing is, there’s precious little evidence that ChatGPT does use the em dash too frequently; or at least more frequently than the average professional writer. 
+
+ And that’s the point. Prior to the internet, publishing was almost exclusively the domain of professional writers, editors and proofreaders. Every sentence in every book or magazine went through a strict editorial process. A lot of this pre-internet content has since been digitised and absorbed into AI training data – including the frequency and correct usage of the em dash. 
+
+ But the arrival of the internet gave anyone the power to write and publish their own content online: blogs, fan sites, message boards, and more. While there is a lot of professional editorial content online, it no longer dominates people’s reading habits. A whole generation has grown up reading just as much, if not more, amateur-written online content than they have professionally published books and magazines. Meanwhile, the average person posting to social media or writing an email isn’t worried about correct usage of the em dash. 
+
+ But ChatGPT (and other AI platforms) do. AI aims for an approximation of professional, not amateur, writing. 
+
+ Have a look at this Google Books Ngram graph comparing the frequencies of the em dash (in blue), semi-colon (red) and exclamation point (green) in books published between 1500 and 2022. 
+
+ Yes, the frequency in usage of the em dash does drop away after the mid-’90s, possibly as online writing starts to impact published style. But even with that drop, the em dash still far outstrips the semi-colon and the exclamation mark in published books. 
+
+ In other words, ChatGPT uses the em dash precisely because professional writers use the em dash. 
+
+ Or rather, it did. Just recently , OpenAI introduced an update so that ChatGPT would correctly avoid em dashes if a user explicitly tells it to. Even if there was any truth to the em dash rumour, it’s redundant now. 
+
+ But that doesn’t mean you can make your AI-generated content appear more human by removing the em dashes. 
+
+ The real tell is quality, not punctuation 
+
+ The poor em dash isn’t really the issue here. 
+
+ Instead of debating whether we should change our punctuation preferences, perhaps we should be talking about why people want an easy way to distinguish AI writing from human writing in the first place. 
+
+ It’s not the em dash that has a stigma attached to it. AI writing has a stigma attached to it. The em dash is just a convenient scapegoat. 
+
+ This anxiety about AI content – this need to identify it – mirrors past controversies about authenticity online. Think social media influencers not disclosing they were paid to endorse a product; or bots spreading disinformation by simulating human accounts. There are plenty of reasons why people might be nervous about content that isn’t quite what it pretends to be. 
+
+ Even so, there is no simple formula for detecting AI writing. Period. 
+
+ While online tools like GPTZero , Copyleaks , and Turnitin claim to be able to identify AI content, they’re far from perfect. One method they use is to look for linguistic patterns that are statistically more or less likely to appear in AI-generated text than in human writing. 
+
+ There are many flaws with this approach, including that linguistic patterns will differ wildly around the world. A Stanford study found that so-called GPT detectors unanimously misidentified 19.8% of essays written by non-English speakers as AI-generated. One such detector flagged a staggering 97.8% incorrectly. 
+
+ Spotting AI content is far more art than science. Ever read something you suspected was written by AI, even if you couldn’t put your finger on why? I’m betting we all have at some point. 
+
+ School teachers and university lecturers deal with this conundrum every day and have developed a sixth sense for detecting AI-generated assignments. It’s the flat quality of the writing and the formulaic sentences. It’s the inexplicable level of attention given to frivolous or tangential details while key points barely get a mention. It’s the absence of any original ideas or personal observations that would demonstrate the student’s deep understanding and engagement with the topic. 
+
+ Again, this teacher’s AI sense won’t be perfect. But it perfectly illustrates why the distinction between AI and human content matters. At best, AI writing can only ever be mediocre. 
+
+ Of course, there are plenty of mediocre human writers out there (and downright bad ones too). AI doesn’t have the monopoly on bad or mediocre writing. But when literally anyone can use AI to generate mediocre content at scale, the only competitive advantage left is human. 
+
+ Ironically, in an AI-saturated landscape, skilled writers are likely to become more valuable, not less. 
+
+ Why you shouldn’t hate the em dash 
+
+ The em dash was never the villain. It’s a useful tool doing exactly what it’s designed to do: helping writers create rhythm, flow, and a conversational tone in their writing. Don’t abandon good writing practices because of what someone once posted on Reddit. 
+
+ You want your audience to believe and trust your content was written by humans – not because someone edited out the em dashes but because it offers the kind of perspective, depth, and colour AI simply can’t replicate. 
+
+ Create content that provides genuine value to your readers, backed by human judgment, editorial oversight and rigorous proofreading. Double down on those hallmarks of highly effective content that AI can’t easily replicate; deep thinking, personal anecdotes, fresh perspectives, and original research. 
+
+ What matters isn’t whether your content contains em dashes. It’s whether your content is so obviously written by a human that concerns about whether it was written by AI just don’t come up. 
+
+ Need help developing and executing an effective content marketing strategy? Get in touch 
+
+ Share 
+
+ Share on: Facebook 
+
+ Share on: Linkedin 
+
+ « 2026 Hugo SEO benchmark data: What high performance sites get right Your SEO backlog is costing you revenue. Here’s why marketing needs to own it. » 
+
+ Related Posts 
+
+ Reza Moaiandin 
+
+ August 29, 2025 
+
+ See Exactly When ChatGPT Uses Your Content With Our Cloudflare Methodology 
+
+ The biggest referrer to your content might never show up in your Analytics platform. Let that sink in for a minute. It’s a problem for businesses who need visibility in AI search, and let’s face it, that’s everybody. Right now, if ChatGPT, Claude or other AI assistants quotes your blog post in a live answer, […]
+
+ Read more 
+
+ AI 
+
+ Dan Taylor 
+
+ May 9, 2024 
+
+ Does generative AI deliver value to travel itinerary searches? 
+
+ A year ago, ChatGPT disrupted our lives and processes. With it, countless AI tools quickly followed suit and became more accessible to the general public. Search engines are now beginning to introduce a plethora of AI-powered search tools. As businesses, we need to be prepared for how users will adopt these new technologies and how […]
+
+ Read more 
+
+ SEO 
+
+ Holly Mosley 
+
+ April 4, 2023 
+
+ What makes a good 404 error page? 
+
+ The 404 page is a fairly common sight for most internet users. At some point, we’ve all clicked a link or visited a web page, only to be presented with a message that what we were looking for is unavailable. However a user ends up at a 404 error page, the important thing is how […]
+
+ Read more 
+
+ Technical SEO 
+
+ Boston 
+
+ London 
+
+ Leeds 
+
+ London 
+
+ 5 St John's Lane 
+
+ London 
+
+ EC1M 6BH 
+
+ +44 (0) 20 8050 7258 
+
+ Leeds 
+
+ Springwood House 
+
+ Low Lane, Horsforth ,
+
+ Leeds 
+
+ Yorkshire ,
+
+ LS18 5NU 
+
+ +44 (0) 113 460 5671 
+
+ Boston 
+
+ 18 Shipyard Drive 
+
+ Suite 3A ,
+
+ Hingham 
+
+ MA ,
+
+ USA 02043 
+
+ +1 (781) 205-1150 
+
+ Testimonials 
+
+ Travel Directions 
+
+ Careers 
+
+ Privacy Policy 
+
+ Research 
+
+ Core Values 
+
+ Meet The Team 
+
+ Facebook 
+
+ LinkedIn 
+
+ Instagram 
+
+ Copyright 2026 - SALT.agency® is a trading name of Subpixel LTD a UK registered company 09144862 / VAT GB192579073.
+

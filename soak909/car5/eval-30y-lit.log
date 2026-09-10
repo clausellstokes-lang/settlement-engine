@@ -1,0 +1,7 @@
+# tripwire evaluation — w0-soak (30y × 4s, schema 5)
+  FINDING  w0-soak · capacity_realm_load — realm load 0.5449 outside the plateau window [0.6, 1.05]
+  horizon  w0-soak · capacity_plateau — horizon: 30 years observed, 150 required (the row RAN; the run was too short to conclude)
+  horizon  w0-soak · capacity_floor_thaw — horizon: 30 years observed, 100 required (the row RAN; the run was too short to conclude)
+  annotation: deterministicFirings 1 · fullInstrument true · provisional false · rolling false · restored false · behavioralPropertiesPassing UNSTATED
+
+FIRED: 1 deterministic finding(s) over 1 cell(s); 0 host-observability note(s); 2 row(s) COMPLETE BUT INCONCLUSIVE (the run was shorter than the horizon they grade)

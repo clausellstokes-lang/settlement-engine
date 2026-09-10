@@ -1,0 +1,22 @@
+# files parsed: 1661  parse failures: 0  in-function literals >=12ch: 19342
+   292 src/domain/region/propagation.js
+   283 src/generators/safetyProfile.js
+   275 src/generators/power/rulingStructure.js
+   236 src/domain/townScene/manifestRecordValidation.js
+   208 src/generators/npcGenerator.js
+   200 src/generators/narrativeText.js
+   181 src/generators/services/serviceClassifier.js
+   170 src/domain/causalState.js
+   165 src/domain/worldPulse/realmVerbExecution.js
+   161 src/generators/narrativeGenerator.js
+   158 src/domain/worldPulse/relationshipRulesCore.js
+   152 src/generators/generationReceiptJudgments.js
+   152 src/generators/structuralValidator.js
+   151 src/domain/worldPulse/eventProse.js
+   151 src/domain/worldPulse/warReceiptPools.js
+   150 src/generators/economy/economicState.js
+   148 src/generators/power/governanceNarrative.js
+   139 src/domain/capacityModel.js
+   139 src/generators/historyGenerator.js
+   138 src/data/narrativeData.js
+X3 done 0

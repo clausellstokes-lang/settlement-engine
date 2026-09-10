@@ -1,0 +1,49 @@
+# W-C3 INSTITUTIONAL-ECOLOGY SOAK — founding gradient, tolerance drift, faith reach, conscience embargo
+# tick = 1 week; 52 weeks/year. Deterministic; measures landed dynamics, tunes nothing.
+
+== A. FOUNDING-RATE ENVELOPE by plane (devout bleed 0.6) ==
+plane  | Almshouse (benevolent)  fit  yrs | Fighting pit (exploit)  fit  yrs
+LG     | fit 0.52  1.48   yr         | fit 0.00    —    yr (never)
+NG     | fit 0.42  1.85   yr         | fit 0.00    —    yr (never)
+CG     | fit 0.32  2.42   yr         | fit 0.10  7.44   yr
+LN     | fit 0.10  7.56   yr         | fit 0.00    —    yr (never)
+TN     | fit 0.00    —    yr (never) | fit 0.00    —    yr (never)
+CN     | fit 0.00    —    yr (never) | fit 0.43  1.79   yr
+LE     | fit 0.00    —    yr (never) | fit 0.00    —    yr (never)
+NE     | fit 0.00    —    yr (never) | fit 0.33  2.35   yr
+CE     | fit 0.00    —    yr (never) | fit 0.76  1.02   yr
+  golden-window guard: max founding fit 1.00 ⇒ 0.120 accrued in 8 ticks (floor 0.6) ⇒ NO fire
+
+== B. TOLERANCE NORMALIZATION under sustained trade (RATE 0.002, CAP 0.5) ==
+  equal-mass town↔town — good town cruelty tolerance (baseline -1):
+    year 1 : offset 0.188 ⇒ effective cruelty tolerance -0.812
+    year 2 : offset 0.341 ⇒ effective cruelty tolerance -0.659
+    year 5 : offset 0.500 ⇒ effective cruelty tolerance -0.500
+    year 10: offset 0.500 ⇒ effective cruelty tolerance -0.500
+    half-life to 10-yr level: ~1.38 years
+  mass asymmetry — metropolis↔hamlet cruelty tolerance offset at 5 yr:
+    hamlet (mass 2): offset 0.500   |   metropolis (mass 32): offset -0.093   ⇒ 5.39x asymmetry
+
+== C. FAITH PRESCRIBES over carrier hops (weight 0.6) ==
+  a good faith abolishing a convert's slave market, by patron/convert MASS ratio:
+  patron→convert       | mass wt  | reach σ  | abolition (years)
+  metropolis→hamlet    | 4.00     | 1.000    | 0.29 yr
+  city→town            | 2.00     | 0.900    | 0.33 yr
+  town→town            | 1.00     | 0.450    | 0.65 yr
+  hamlet→city          | 0.13     | 0.056    | 5.10 yr
+  thorp→metropolis     | 0.12     | 0.054    | 5.31 yr
+  (σ 0 — no carrier — ⇒ pressure 0 ⇒ the local-only lane, byte-identical.)
+
+== D. EMBARGO AS CONSCIENCE — trade-score multiplier (EMBARGO_W 0.4, FLOOR 0.15) ==
+  buyer | Slave market      | Fighting pit      | Gambling hall     | Almshouse (clean) | Bakers (none)     
+  LG    | ×0.24 (abhor 1.90)| ×0.37 (abhor 1.57)| ×0.42 (abhor 1.44)| ×0.73 (abhor 0.68)| ×1.00             
+  NG    | ×0.24 (abhor 1.90)| ×0.38 (abhor 1.55)| ×0.56 (abhor 1.10)| ×0.88 (abhor 0.30)| ×1.00             
+  CG    | ×0.24 (abhor 1.90)| ×0.38 (abhor 1.55)| ×0.56 (abhor 1.10)| ×0.88 (abhor 0.30)| ×1.00             
+  LN    | ×0.64 (abhor 0.90)| ×0.37 (abhor 1.57)| ×0.42 (abhor 1.44)| ×0.73 (abhor 0.68)| ×1.00             
+  TN    | ×0.64 (abhor 0.90)| ×0.71 (abhor 0.72)| ×0.76 (abhor 0.59)| ×1.00             | ×1.00             
+  CN    | ×0.64 (abhor 0.90)| ×0.78 (abhor 0.55)| ×1.00             | ×1.00             | ×1.00             
+  LE    | ×0.80 (abhor 0.51)| ×0.37 (abhor 1.57)| ×0.42 (abhor 1.44)| ×0.73 (abhor 0.68)| ×1.00             
+  NE    | ×1.00             | ×0.71 (abhor 0.72)| ×0.76 (abhor 0.59)| ×1.00             | ×1.00             
+  CE    | ×1.00             | ×1.00             | ×1.00             | ×1.00             | ×1.00             
+  (×1.00 everywhere = the neutrality interlock: no objection ⇒ tradeWar byte-identical.)
+

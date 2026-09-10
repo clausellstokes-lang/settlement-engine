@@ -1,0 +1,233 @@
+{
+ "name": "ai",
+ "chunk": 2,
+ "claims": [
+  {
+   "index": 524,
+   "feature": "hegemonic voices over-represented",
+   "claim": "Web crawling, participation and filtering all favour those who hew to the hegemonic viewpoint.",
+   "source": "Bender, Gebru, McMillan-Major, Shmitchell — 'On the Dangers of Stochastic Parrots: Can Language Models Be Too Big?' (FAccT 2021)",
+   "url": "https://doi.org/10.1145/3442188.3445922",
+   "quote": "most likely to hew to a hegemonic viewpoint",
+   "page": ""
+  },
+  {
+   "index": 525,
+   "feature": "value-lock on static data",
+   "claim": "Static training data reifies older, less-inclusive framings as language moves on.",
+   "source": "Bender, Gebru, McMillan-Major, Shmitchell — 'On the Dangers of Stochastic Parrots: Can Language Models Be Too Big?' (FAccT 2021)",
+   "url": "https://doi.org/10.1145/3442188.3445922",
+   "quote": "reifies older, less-inclusive understandings",
+   "page": ""
+  },
+  {
+   "index": 526,
+   "feature": "filtering strips marginalised voices",
+   "claim": "Bad-word filtering attenuates the online spaces built by and for LGBTQ people.",
+   "source": "Bender, Gebru, McMillan-Major, Shmitchell — 'On the Dangers of Stochastic Parrots: Can Language Models Be Too Big?' (FAccT 2021)",
+   "url": "https://doi.org/10.1145/3442188.3445922",
+   "quote": "online spaces built by and for LGBTQ people",
+   "page": ""
+  },
+  {
+   "index": 527,
+   "feature": "bias amplification",
+   "claim": "LMs producing text reproduce and even amplify the biases in their input.",
+   "source": "Bender, Gebru, McMillan-Major, Shmitchell — 'On the Dangers of Stochastic Parrots: Can Language Models Be Too Big?' (FAccT 2021)",
+   "url": "https://doi.org/10.1145/3442188.3445922",
+   "quote": "reproduce and even amplify the biases in their input",
+   "page": ""
+  },
+  {
+   "index": 528,
+   "feature": "cherry-picked output passes; random output fails",
+   "claim": "Judges could not detect human-selected GPT-2 poems but did detect randomly sampled ones.",
+   "source": "Köbis, Mossink — 'Artificial intelligence versus Maya Angelou: Experimental evidence that people cannot differentiate AI-generated from human-written poetry' (Computers in Human Behavior 114:106553, 2021)",
+   "url": "https://doi.org/10.1016/j.chb.2020.106553",
+   "quote": "failed to reliably detect the algorithmically-generated poems",
+   "page": ""
+  },
+  {
+   "index": 529,
+   "feature": "human poems still preferred",
+   "claim": "Against professional poets, human poems won 64.90% of pairwise preferences; against novices 56.97%.",
+   "source": "Köbis, Mossink — 'Artificial intelligence versus Maya Angelou: Experimental evidence that people cannot differentiate AI-generated from human-written poetry' (Computers in Human Behavior 114:106553, 2021)",
+   "url": "https://doi.org/10.1016/j.chb.2020.106553",
+   "quote": "Human writers overall won 64.90% of the comparisons",
+   "page": ""
+  },
+  {
+   "index": 530,
+   "feature": "failure to detect is ability, not effort",
+   "claim": "Incentivised judges still scored 50.21% in Study 1, so detection is a matter of ability not motivation.",
+   "source": "Köbis, Mossink — 'Artificial intelligence versus Maya Angelou: Experimental evidence that people cannot differentiate AI-generated from human-written poetry' (Computers in Human Behavior 114:106553, 2021)",
+   "url": "https://doi.org/10.1016/j.chb.2020.106553",
+   "quote": "not a matter of incentives but ability",
+   "page": ""
+  },
+  {
+   "index": 531,
+   "feature": "no deep emotion",
+   "claim": "The authors state the results do not show machine creativity, which requires expression of deep emotion.",
+   "source": "Köbis, Mossink — 'Artificial intelligence versus Maya Angelou: Experimental evidence that people cannot differentiate AI-generated from human-written poetry' (Computers in Human Behavior 114:106553, 2021)",
+   "url": "https://doi.org/10.1016/j.chb.2020.106553",
+   "quote": "a feat that machines lack",
+   "page": ""
+  },
+  {
+   "index": 532,
+   "feature": "selection is the capability",
+   "claim": "Only experimenter-selected poems passed as human, so human curation is doing the passing.",
+   "source": "Köbis, Mossink — 'Artificial intelligence versus Maya Angelou: Experimental evidence that people cannot differentiate AI-generated from human-written poetry' (Computers in Human Behavior 114:106553, 2021)",
+   "url": "https://doi.org/10.1016/j.chb.2020.106553",
+   "quote": "only poems selected by the experimenters successfully passed as human",
+   "page": ""
+  },
+  {
+   "index": 533,
+   "feature": "collective homogenisation",
+   "claim": "Each additional human essay adds more new ideas than each additional GPT-4 essay, and the gap widens with volume.",
+   "source": "Moon, Green, Kushlev — 'Homogenizing Effect of Large Language Models (LLMs) on Creative Diversity: An Empirical Comparison of Human and ChatGPT Writing' (Computers in Human Behavior: Artificial Humans, 2025; preprint 2024)",
+   "url": "https://doi.org/10.1016/j.chbah.2025.100207",
+   "quote": "contributed more new ideas than did each additional GPT-4 essay",
+   "page": ""
+  },
+  {
+   "index": 534,
+   "feature": "diversity growth rate 31% then 11% of human",
+   "claim": "Base GPT-4's diversity growth rate was about 31% of human in Studies 1–2 and about 11% in Study 3.",
+   "source": "Moon, Green, Kushlev — 'Homogenizing Effect of Large Language Models (LLMs) on Creative Diversity: An Empirical Comparison of Human and ChatGPT Writing' (Computers in Human Behavior: Artificial Humans, 2025; preprint 2024)",
+   "url": "https://doi.org/10.1016/j.chbah.2025.100207",
+   "quote": "only about 11% of the rate for the human-written essays",
+   "page": ""
+  },
+  {
+   "index": 535,
+   "feature": "newer model more homogenised",
+   "claim": "gpt-4-0125-preview homogenised more than gpt-4-0613, so the drift is not curing with versions.",
+   "source": "Moon, Green, Kushlev — 'Homogenizing Effect of Large Language Models (LLMs) on Creative Diversity: An Empirical Comparison of Human and ChatGPT Writing' (Computers in Human Behavior: Artificial Humans, 2025; preprint 2024)",
+   "url": "https://doi.org/10.1016/j.chbah.2025.100207",
+   "quote": "actually yielded higher homogenization than the previous model",
+   "page": ""
+  },
+  {
+   "index": 536,
+   "feature": "diversity knobs cost coherence",
+   "claim": "Presence/frequency penalties raised individual diversity above human but at the expense of coherence and readability.",
+   "source": "Moon, Green, Kushlev — 'Homogenizing Effect of Large Language Models (LLMs) on Creative Diversity: An Empirical Comparison of Human and ChatGPT Writing' (Computers in Human Behavior: Artificial Humans, 2025; preprint 2024)",
+   "url": "https://doi.org/10.1016/j.chbah.2025.100207",
+   "quote": "at the expense of coherence and readability",
+   "page": ""
+  },
+  {
+   "index": 537,
+   "feature": "homogenisation inherent to next-token plus RLHF",
+   "claim": "The authors attribute persistent homogenisation to most-probable-token selection and RLHF safety tuning.",
+   "source": "Moon, Green, Kushlev — 'Homogenizing Effect of Large Language Models (LLMs) on Creative Diversity: An Empirical Comparison of Human and ChatGPT Writing' (Computers in Human Behavior: Artificial Humans, 2025; preprint 2024)",
+   "url": "https://doi.org/10.1016/j.chbah.2025.100207",
+   "quote": "homogenization may be an inherent feature of current LLMs",
+   "page": ""
+  },
+  {
+   "index": 538,
+   "feature": "detectors neither accurate nor reliable",
+   "claim": "Fourteen detectors all scored below 80% accuracy, biased toward calling text human.",
+   "source": "Weber-Wulff, Anohina-Naumeca, Bjelobaba, Foltýnek, Guerrero-Dib, Popoola, Šigut, Waddington — 'Testing of detection tools for AI-generated text' (International Journal for Educational Integrity 19:26, 2023)",
+   "url": "https://doi.org/10.1007/s40979-023-00146-z",
+   "quote": "neither accurate nor reliable",
+   "page": ""
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 524,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the voices of people most likely to hew to a hegemonic viewpoint are also more likely to be retained",
+   "note": "ACM publisher PDF of the FAccT'21 paper (dl.acm.org 403; identical publisher typesetting fetched from the s10251.pcdn.co mirror, running heads 'FAccT '21, March 3-10, 2021' and p.613 confirm the version of record). Quote verbatim in Sec. 4.1. All three limbs supported: the same passage covers 'discussions which will be included via the crawling methodology, and finally the texts likely to be contained after the crawled data are filtered', and the section closes 'Thus at each step, from initial participation in Internet fora, to continued presence there, to the collection and finally the filtering of training data, current practice privileges the hegemonic viewpoint.'"
+  },
+  {
+   "index": 525,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the LM-reliant technology reifies older, less-inclusive understandings",
+   "note": "ACM publisher PDF of the FAccT'21 paper (dl.acm.org 403; identical publisher typesetting fetched from the s10251.pcdn.co mirror, running heads 'FAccT '21, March 3-10, 2021' and p.613 confirm the version of record). Quote verbatim in Sec. 4.2 'Static Data/Changing Social Views', in the sentence about the risk of 'value-lock'; the static-data and language-change limbs are the section's own framing ('Social movements produce new norms, language, and ways of communicating')."
+  },
+  {
+   "index": 526,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "attenuate, by suppressing such words as twink, the influence of online spaces built by and for LGBTQ people",
+   "note": "ACM publisher PDF of the FAccT'21 paper (dl.acm.org 403; identical publisher typesetting fetched from the s10251.pcdn.co mirror, running heads 'FAccT '21, March 3-10, 2021' and p.613 confirm the version of record). Quote verbatim in Sec. 4.1. The bad-word limb is explicit: the Colossal Clean Crawled Corpus is 'cleaned, inter alia, by discarding any page containing one of a list of about 400 “Dirty, Naughty, Obscene or Otherwise Bad Words”'."
+  },
+  {
+   "index": 527,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "we foresee that LMs producing text will reproduce and even amplify the biases in their input",
+   "note": "ACM publisher PDF of the FAccT'21 paper (dl.acm.org 403; identical publisher typesetting fetched from the s10251.pcdn.co mirror, running heads 'FAccT '21, March 3-10, 2021' and p.613 confirm the version of record). Quote verbatim in Sec. 6 (Stochastic Parrots), with the same 'LMs producing text' subject the claim uses."
+  },
+  {
+   "index": 528,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "failed to reliably detect the algorithmically-generated poems in the Human-in-the-loop treatment, yet succeeded in the Human-out-of-the-loop treatment",
+   "note": "ScienceDirect 403 by every route and no Wayback 200; verified against the raw author manuscript PDF (arXiv:2005.09980), the same paper. Quote verbatim in the abstract. The two limbs map to the stated treatments: Human-in-the-loop = 'the best one was selected', Human-out-of-the-loop = 'a random poem was chosen'."
+  },
+  {
+   "index": 529,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Human writers overall won 64.90% of the comparisons",
+   "note": "ScienceDirect 403 by every route and no Wayback 200; verified against the raw author manuscript PDF (arXiv:2005.09980), the same paper. Quote verbatim in Study 2 results (Sec. 4.2.1, the professional-poet study, run because 'poems created by novices competed with the output of a state-of-the-art algorithm'); the novice figure is Study 1's 'a win share of 56.97%' (Sec. 3.2.2)."
+  },
+  {
+   "index": 530,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "detecting artificial text is not a matter of incentives but ability",
+   "note": "ScienceDirect 403 by every route and no Wayback 200; verified against the raw author manuscript PDF (arXiv:2005.09980), the same paper. Quote verbatim in the Study 1 discussion; the 50.21% is Study 1's Sec. 3.2.3 ('judges identified the correct origin with an average accuracy of 50.21%'), and the incentive limb is the paper's own ('In light of the financial rewards for accuracy in our version of the Turing Test')."
+  },
+  {
+   "index": 531,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "one of the main functions of creativity ... is the expression of (deep) emotions, a feat that machines lack (so far)",
+   "note": "ScienceDirect 403 by every route and no Wayback 200; verified against the raw author manuscript PDF (arXiv:2005.09980), the same paper. The quoted fragment 'a feat that machines lack' is verbatim and the no-machine-creativity limb is explicit ('the results do not indicate machines are “creative.”'). Graded SUBSTANCE rather than VERBATIM because the paper calls deep emotion one of the main FUNCTIONS of creativity, not a requirement of it, and hedges the machine limb with '(so far)'."
+  },
+  {
+   "index": 532,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "only poems selected by the experimenters successfully passed as human and lowered algorithm aversion",
+   "note": "ScienceDirect 403 by every route and no Wayback 200; verified against the raw author manuscript PDF (arXiv:2005.09980), the same paper. Quote verbatim in Sec. 5.4 'Human Selection in and out of the Loop'; the curation limb is the same paragraph's 'humans play an integral role in the process' and 'whether humans are in or out of the selection loop shaped participants’ reactions'."
+  },
+  {
+   "index": 533,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "each additional human-written essay contributed more new ideas than did each additional GPT-4 essay",
+   "note": "ScienceDirect 403 by every route and Wayback holds only 403 captures; verified against the raw accepted-manuscript PDF at osf.io/download/8p9wu_v4/, headed 'Accepted in Computers in Human Behavior: Artificial Humans'. Quote verbatim in the abstract; the widening limb is the next sentence, 'this difference became more pronounced as more essays were included in the analysis'."
+  },
+  {
+   "index": 534,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "only about 11% of the rate for the human-written essays",
+   "note": "ScienceDirect 403 by every route and Wayback holds only 403 captures; verified against the raw accepted-manuscript PDF at osf.io/download/8p9wu_v4/, headed 'Accepted in Computers in Human Behavior: Artificial Humans'. Quote verbatim in Study 3. The 31% figure appears twice as claimed: Study 1 'only about 31% of the diversity growth rate observed for human-written essays' and Study 2 'only about 31% of the rate for the human-written essays', both for base GPT-4."
+  },
+  {
+   "index": 535,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a newer version of GPT-4 (gpt-4-0125-preview) actually yielded higher homogenization than the previous model (gpt-4-0613)",
+   "note": "ScienceDirect 403 by every route and Wayback holds only 403 captures; verified against the raw accepted-manuscript PDF at osf.io/download/8p9wu_v4/, headed 'Accepted in Computers in Human Behavior: Artificial Humans'. Quote verbatim in the discussion, and the two model ids are named in that same sentence; the 'not curing with versions' limb is the paper's own inferential use of the finding."
+  },
+  {
+   "index": 536,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "increased semantic diversity and decreased homogenization but at the expense of coherence and readability",
+   "note": "ScienceDirect 403 by every route and Wayback holds only 403 captures; verified against the raw accepted-manuscript PDF at osf.io/download/8p9wu_v4/, headed 'Accepted in Computers in Human Behavior: Artificial Humans'. Quote verbatim in the discussion, naming 'presence_penalty' and 'frequency_penalty'. The above-human limb is Study 2's result: 'the parameter-modified model exceeded the individual diversity of the human-written essays, Mean Difference = 16.62'."
+  },
+  {
+   "index": 537,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "suggesting that homogenization may be an inherent feature of current LLMs",
+   "note": "ScienceDirect 403 by every route and Wayback holds only 403 captures; verified against the raw accepted-manuscript PDF at osf.io/download/8p9wu_v4/, headed 'Accepted in Computers in Human Behavior: Artificial Humans'. Quote verbatim in the discussion, immediately after the two attributed causes: 'autoregressive systems optimized to select the most probable next token' and 'instruction tuning with Reinforcement Learning from Human Feedback (RLHF) to produce “safe” or aligned responses'."
+  },
+  {
+   "index": 538,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "they are neither accurate nor reliable (all scored below 80% of accuracy and only 5 over 70%)",
+   "note": "link.springer.com redirects to an IdP and edintegrity.biomedcentral.com serves a JS challenge; verified on the Wayback raw capture 20251124123802id_ of the BMC full text. Quote verbatim in the Discussion. Fourteen is the tested count ('12 publicly available tools and two commercial systems', and later 'Six of the fourteen tools tested'), and the human-bias limb is stated as 'a main bias towards classifying the output as human-written rather than detecting AI-generated text'."
+  }
+ ]
+}

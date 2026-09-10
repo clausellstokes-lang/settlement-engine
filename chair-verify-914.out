@@ -1,0 +1,16 @@
+PASS gate TRUE_EXIT is 0 (read from the LOG, never a notification) — TRUE_EXIT=0
+PASS no scope sentinel — clean
+PASS no ratchet refusal — clean
+PASS dock porcelain 0 — ''
+PASS base is an ancestor of the tip — ('f3ab08f5194201d19f99f8905068783b62fbfaf8', '8522a17b2')
+PASS car count — 18
+PASS every car single-parent — [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+PASS exactly one strict Seat trailer per car (Opus-unvalidated or Fable-validated) — [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+PASS a Fable-validated car is a CHAIR act — carries no Lane: trailer — []
+PASS tests/lint/.lighting-census-baseline.json measuredAtSha measured INSIDE this consist — b2d617611
+PASS scripts/.test-ratchet-baseline.json measuredAtSha measured INSIDE this consist — 3c640f58f
+PASS scripts/.writer-reach-baseline.json frozenAtSha measured INSIDE this consist — 2865da54f
+SKIP tests/lint/.tuning-inventory.json measuredAtSha — untouched by this consist; cites 21fe864fa
+INFO ratchet register totalTests=32173 totalFiles=2497 entries=3
+PASS ratchet register totalTests == the gate line — (32173, '32173')
+CHAIR-VERIFY GREEN

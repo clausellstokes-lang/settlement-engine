@@ -1,0 +1,31 @@
+{
+ "role": "verifier",
+ "name": "leguin",
+ "angle": null,
+ "tag": "i345-359",
+ "lines": 64,
+ "firstTs": "2026-09-06T17:18:46.737Z",
+ "lastTs": "2026-09-06T17:21:32.323Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 12,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [
+  "https://www.rob-tomlinson.com/a-good-read/dispossessed",
+  "https://theodoragoss.com/2015/02/28/stonecoast-wizard-of-earthsea/",
+  "https://www.thefrumiousconsortium.net/2018/03/19/the-dispossessed-by-ursula-k-le-guin/",
+  "https://cannonballread.com/2014/02/bright-the-hawks-flight-on-the-empty-sky/"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "Checkpoint written and validated (15 claims, 15 verdicts, indices match). All four source pages were reached live over raw HTML at HTTP 200 — no summarizer, no fallback route needed.",
+ "run": "wf_5e5c7e72-458",
+ "agent": "acdb99962fe9f47e6",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_5e5c7e72-458/agent-acdb99962fe9f47e6.jsonl",
+ "journal": "result",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-leguin-i345-359.json",
+  "exists": true
+ }
+}

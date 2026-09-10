@@ -1,0 +1,222 @@
+{
+ "src/domain/aiGrounding.js": {
+  "em": 2,
+  "bang": 0
+ },
+ "src/domain/aiOverlayVerifier.js": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/domain/autonomy/signalRegistry.js": {
+  "em": 5,
+  "bang": 0
+ },
+ "src/domain/autonomy/stopConditions.js": {
+  "em": 5,
+  "bang": 0
+ },
+ "src/domain/causalViews.js": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/domain/certification/subsystemRowsBelief.js": {
+  "em": 27,
+  "bang": 1
+ },
+ "src/domain/certification/subsystemRowsCoin.js": {
+  "em": 7,
+  "bang": 0
+ },
+ "src/domain/certification/subsystemRowsCompact.js": {
+  "em": 30,
+  "bang": 0
+ },
+ "src/domain/certification/subsystemRowsGrowth.js": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/domain/certification/subsystemRowsMemory.js": {
+  "em": 10,
+  "bang": 0
+ },
+ "src/domain/certification/subsystemRowsSeat.js": {
+  "em": 9,
+  "bang": 0
+ },
+ "src/domain/certification/subsystemRowsVirtual.js": {
+  "em": 25,
+  "bang": 0
+ },
+ "src/domain/certification/tradeConvergenceContract.js": {
+  "em": 4,
+  "bang": 0
+ },
+ "src/domain/certification/warConvergenceContract.js": {
+  "em": 4,
+  "bang": 0
+ },
+ "src/domain/certification/warConvergenceForces.js": {
+  "em": 6,
+  "bang": 0
+ },
+ "src/domain/clock.js": {
+  "em": 2,
+  "bang": 0
+ },
+ "src/domain/compendium/generated/compendiumData.generated.js": {
+  "em": 2,
+  "bang": 0
+ },
+ "src/domain/content/customContentManifest.generated.js": {
+  "em": 22,
+  "bang": 0
+ },
+ "src/domain/customContentSchema.js": {
+  "em": 15,
+  "bang": 0
+ },
+ "src/domain/dailyLife.js": {
+  "em": 2,
+  "bang": 0
+ },
+ "src/domain/display/dossierViewModel.js": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/domain/display/engagementNarrative.js": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/domain/display/heraldCausalVoice.js": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/domain/display/heraldJoinMolds.js": {
+  "em": 2,
+  "bang": 0
+ },
+ "src/domain/display/parityContract.js": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/domain/districtProfile.js": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/domain/fieldManifest.js": {
+  "em": 12,
+  "bang": 4
+ },
+ "src/domain/highWater.js": {
+  "em": 2,
+  "bang": 0
+ },
+ "src/domain/historyBeats.js": {
+  "em": 2,
+  "bang": 0
+ },
+ "src/domain/npc/acceptanceCharacterReads.js": {
+  "em": 5,
+  "bang": 0
+ },
+ "src/domain/npc/characterConsumers.js": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/domain/npc/knownCharacter.js": {
+  "em": 4,
+  "bang": 0
+ },
+ "src/domain/npc/livedExperienceCatalog.js": {
+  "em": 6,
+  "bang": 0
+ },
+ "src/domain/npc/livedExperienceSources.js": {
+  "em": 10,
+  "bang": 0
+ },
+ "src/domain/npc/npcFacets.js": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/domain/settlementMigrations.js": {
+  "em": 2,
+  "bang": 0
+ },
+ "src/domain/spatial/generosityEV.js": {
+  "em": 7,
+  "bang": 0
+ },
+ "src/domain/undercity/monotoneComponents.js": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/domain/worldPulse/bandFamilies.js": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/domain/worldPulse/bandedStock.js": {
+  "em": 2,
+  "bang": 0
+ },
+ "src/domain/worldPulse/changeAuthorityPolicy.js": {
+  "em": 7,
+  "bang": 0
+ },
+ "src/domain/worldPulse/contributionLedger.js": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/domain/worldPulse/decisionTier.js": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/domain/worldPulse/faithField.js": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/domain/worldPulse/habit/habitCurve.js": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/domain/worldPulse/habit/habitVocabulary.js": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/domain/worldPulse/habitForkRegistry.js": {
+  "em": 34,
+  "bang": 0
+ },
+ "src/domain/worldPulse/lawBandModulation.js": {
+  "em": 2,
+  "bang": 0
+ },
+ "src/domain/worldPulse/momentum.js": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/domain/worldPulse/operations/operationGrammar.js": {
+  "em": 13,
+  "bang": 0
+ },
+ "src/domain/worldPulse/peopleLedger.js": {
+  "em": 2,
+  "bang": 0
+ },
+ "src/domain/worldPulse/pulseStageManifest.js": {
+  "em": 0,
+  "bang": 3
+ },
+ "src/domain/worldPulse/residueStripGuard.js": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/domain/worldPulse/settlementLifecycleFirstClass.js": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/domain/worldPulse/warStance.js": {
+  "em": 2,
+  "bang": 0
+ }
+}

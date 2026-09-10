@@ -1,0 +1,115 @@
+{
+  "id" : null,
+  "scope" : null,
+  "query" : "Hobb Assassin's Apprentice",
+  "appliedFilters" : null,
+  "sort" : null,
+  "configuration" : null,
+  "type" : "discover",
+  "_links" : {
+    "self" : {
+      "href" : "https://dspace.library.uu.nl/server/api/discover/search/objects?query=Hobb%2520Assassin%2527s%2520Apprentice"
+    }
+  },
+  "_embedded" : {
+    "searchResult" : {
+      "_embedded" : {
+        "objects" : [ ]
+      },
+      "_links" : {
+        "self" : {
+          "href" : "https://dspace.library.uu.nl/server/api/discover/search/objects?query=Hobb%20Assassin%27s%20Apprentice&size=10"
+        }
+      },
+      "page" : {
+        "number" : 0,
+        "size" : 10,
+        "totalPages" : 0,
+        "totalElements" : 0
+      }
+    },
+    "facets" : [ {
+      "name" : "author",
+      "facetType" : "text",
+      "facetLimit" : 5,
+      "minValue" : "\"Dark Energy and CMB\" working group",
+      "maxValue" : "Ӧzdemir, Denise M D",
+      "openByDefault" : true,
+      "_links" : {
+        "self" : {
+          "href" : "https://dspace.library.uu.nl/server/api/discover/facets/author?query=Hobb%20Assassin%27s%20Apprentice"
+        }
+      },
+      "_embedded" : {
+        "values" : [ ]
+      }
+    }, {
+      "name" : "subject",
+      "facetType" : "hierarchical",
+      "facetLimit" : 5,
+      "openByDefault" : false,
+      "_links" : {
+        "self" : {
+          "href" : "https://dspace.library.uu.nl/server/api/discover/facets/subject?query=Hobb%20Assassin%27s%20Apprentice"
+        }
+      },
+      "_embedded" : {
+        "values" : [ ]
+      }
+    }, {
+      "name" : "dateIssued",
+      "facetType" : "date",
+      "facetLimit" : 5,
+      "minValue" : "1077",
+      "maxValue" : "Dl. 1 (2000) - ...",
+      "openByDefault" : false,
+      "_links" : {
+        "self" : {
+          "href" : "https://dspace.library.uu.nl/server/api/discover/facets/dateIssued?query=Hobb%20Assassin%27s%20Apprentice"
+        }
+      },
+      "_embedded" : {
+        "values" : [ ]
+      }
+    }, {
+      "name" : "has_content_in_original_bundle",
+      "facetType" : "standard",
+      "facetLimit" : 2,
+      "openByDefault" : false,
+      "_links" : {
+        "self" : {
+          "href" : "https://dspace.library.uu.nl/server/api/discover/facets/has_content_in_original_bundle?query=Hobb%20Assassin%27s%20Apprentice"
+        }
+      },
+      "_embedded" : {
+        "values" : [ ]
+      }
+    }, {
+      "name" : "entityType",
+      "facetType" : "text",
+      "facetLimit" : 5,
+      "openByDefault" : false,
+      "_links" : {
+        "self" : {
+          "href" : "https://dspace.library.uu.nl/server/api/discover/facets/entityType?query=Hobb%20Assassin%27s%20Apprentice"
+        }
+      },
+      "_embedded" : {
+        "values" : [ ]
+      }
+    }, {
+      "name" : "access_status",
+      "facetType" : "text",
+      "facetLimit" : 10,
+      "openByDefault" : false,
+      "_links" : {
+        "self" : {
+          "href" : "https://dspace.library.uu.nl/server/api/discover/facets/access_status?query=Hobb%20Assassin%27s%20Apprentice"
+        }
+      },
+      "_embedded" : {
+        "values" : [ ]
+      }
+    } ]
+  }
+}

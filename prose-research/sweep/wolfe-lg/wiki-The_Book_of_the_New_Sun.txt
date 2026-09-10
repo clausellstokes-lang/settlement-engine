@@ -1,0 +1,186 @@
+{{short description|Novel series by Gene Wolfe}}
+{{Use mdy dates|date=January 2022}}
+{{infobox book | <!-- See Wikipedia:WikiProject_Novels or Wikipedia:WikiProject_Books -->
+| name          = The Book of the New Sun
+| image         = booknewsun.jpg
+| caption       = Front cover of the first one-volume edition (1998)
+| author        = [[Gene Wolfe]]
+| cover_artist  = [[Don Maitz]]
+| country       = United Kingdom
+| language      = English
+| series        = Solar Cycle<ref name="isfdbcycle">{{isfdb series |11836 |Solar Cycle}} (ISFDB). Retrieved April 23, 2012.</ref> <br />''Book of the New Sun'' sub-series<ref name="subseries" group="lower-alpha">ISFDB includes the non-fiction collection ''[[The Castle of the Otter]]'' (1983) and the "coda" novel ''[[The Urth of the New Sun]]'' (1987) in the ''Book of the New Sun'' sub-series (along with some separately published excerpts).</ref>
+| genre         = Science fiction
+| publisher     = [[Simon & Schuster]];<br /> Orb / [[Tor Books]] (first two-volume)
+| pub_date      = 1980–1983 (four vols.); 1987 (coda); 1994 (two volume ed.)
+| media_type    = Print (hardcover first; [[paperback|trade paperback]] first two-volume ed.)
+| pages         = 1225 (1597 including coda)
+| isbn          = 1568658079
+| dewey         = 813/.54 20
+| congress      = PS3573.O52 S53 1994
+| oclc          = 30700568
+| preceded_by   =
+| followed_by   = [[The Urth of the New Sun]]
+}}
+[[File:Commonwealth map from Book of the New Sun.jpg|thumb|The Commonwealth]]
+'''''The Book of the New Sun''''' (1980–1983, 1987) is a four-volume [[science fantasy]] novel<ref>{{Cite web |last=Keeley |first=Matthew |date=December 4, 2017 |title=The Best Way to Approach The Book of the New Sun |url=https://www.tor.com/2017/12/04/the-best-way-to-approach-the-book-of-the-new-sun/ |access-date=November 10, 2019 |publisher=tor.com}}</ref> written by the American author [[Gene Wolfe]]. The work is in four parts with a fifth novel acting as a [[wikt:coda|coda]] to the main story. It inaugurated the "Solar Cycle" that Wolfe continued by setting other works in the same universe (''[[The Book of the Long Sun]]'' series, and ''[[The Book of the Short Sun]]'' series).<ref name=isfdbcycle/>
+
+It chronicles the journey of [[Severian (character)|Severian]], a [[journeyman]] torturer from the Order of the Seekers for Truth and Penitence. After helping a client kill herself, he is exiled in disgrace to journey to the distant city of Thrax where he is to live out his days as their executioner. Severian lives in the ancient city of Nessus in a nation called the Commonwealth, ruled by the Autarch, in the Southern Hemisphere. It is at war with Ascia, its totalitarian northern neighbor. It is a [[first-person narrative]], purportedly translated by Wolfe into contemporary English, set in a distant future when the Sun has dimmed and Earth is cooler (a "[[Dying Earth (subgenre)|Dying Earth]]" story).
+
+The four volumes and additional fifth coda are:
+{{div col|colwidth=30em}}
+* 1980 ''[[The Shadow of the Torturer]]''
+* 1981 ''[[The Claw of the Conciliator]]''
+* 1982 ''[[The Sword of the Lictor]]''
+* 1983 ''[[The Citadel of the Autarch]]''
+* 1987 ''[[The Urth of the New Sun]]''
+{{div col end}}
+
+In a 1998 poll of its subscribers, ''[[Locus (magazine)|Locus]]'' magazine ranked the tetralogy number three among 36 all-time best fantasy novels before 1990, behind only ''[[The Hobbit]]'' and ''[[The Lord of the Rings]]'' by [[J.R.R. Tolkien]].<ref name="locus1998">The Locus Online website links multiple pages providing the results of several polls and a little other information.
+• {{Cite web |title=The Locus Index to SF Awards: 1998 Locus All-Time Poll |url=http://www.locusmag.com/SFAwards/Db/LocusAT1998.html |publisher=Locus Publications |archive-url=https://web.archive.org/web/20040113221814/http://www.locusmag.com/SFAwards/Db/LocusAT1998.html |archive-date=January 13, 2004 |access-date=April 24, 2012}}
+• See also [http://www.isfdb.org/cgi-bin/ay.cgi?Lc1998 "1998 Locus Poll Award"]. ISFDB. Retrieved April 24, 2012.</ref><ref group="lower-alpha">''Locus'' subscribers voted only two [[Middle-earth]] novels by [[J. R. R. Tolkien]] ahead of Wolfe's ''New Sun'', followed by [[Ursula K. Le Guin]]'s ''[[Earthsea]]'' series. Third and fourth ranks were exchanged in the 1987 rendition of the poll, "All-Time Best Fantasy Novels", which considered as single entries Wolfe's ''The Shadow of the Torturer'' and Le Guin's ''A Wizard of Earthsea'', the first volumes of ''New Sun'' and ''Earthsea''.</ref>
+
+==Major themes==
+===Severian as a Christ figure===
+Severian, the main character and narrator of the series, can be interpreted as a [[Christ figure]]. His life has many parallels to the [[Life of Jesus in the New Testament|life of Jesus]], and Gene Wolfe, a [[Catholic]], has explained that he deliberately mirrored Jesus in Severian. He compares Severian's profession as a torturer to Jesus's profession as a carpenter in ''[[The Castle of the Otter]]'':<ref name="Wolfe96">{{Cite book |last=Gordon |first=Joan |title=Gene Wolfe |publisher=Wildside Press LLC |year=1986 |isbn=978-0-89370-956-3 |edition=reprint, annotated |series=Starmont reader's guide |page=96 |issue=29}}</ref>{{blockquote|It has been remarked thousands of times that Christ died under torture. Many of us have read so often that he was a "humble carpenter" that we feel a little surge of nausea on seeing the words yet again. But no one ever seems to notice that the instruments of torture were wood, nails, and a hammer; that the man who built the cross was undoubtedly a carpenter too; that the man who hammered in the nails was as much a carpenter as a soldier, as much a carpenter as a torturer. Very few even have seemed to have noticed that although Christ was a "humble carpenter," the only object we are specifically told he made was not a table or a chair, but a whip.}}
+Severian's life parallels Jesus' occasionally, with his descent into the cave of the man-apes being a [[Harrowing of Hell]] scene, his resurrection of Dorcas being a [[Lazarus of Bethany]] scene, and his friendship with Jonas reflecting [[Wandering Jew|Ahasuerus]].<ref name="Peter Wright 2003 91">{{Cite book |last=Wright |first=Peter |url=https://archive.org/details/attendingdaedalu0000wrig |title=Attending Daedalus: Gene Wolfe, Artifice and the Reader |publisher=Liverpool University Press |year=2003 |isbn=978-0-85323-828-7 |edition=illustrated |page=[https://archive.org/details/attendingdaedalu0000wrig/page/91 91] |url-access=registration}}</ref> Jonas has traveled the world looking to reconnect with the Hierodules, "tinkers with clumsy mechanisms", and is redeemed from wandering exile after befriending Severian. In this respect, he represents the wandering Jew.<ref>{{Cite book |last=Borski |first=Robert |title=Solar Labyrinth: Exploring Gene Wolfe's Book of the New Sun |publisher=iUniverse |year=2004 |isbn=978-0-595-31729-5 |page=85}}</ref> Severian also suffers from occasional seemingly random bleeding from his forehead, as if from a [[crown of thorns]]. Also mirroring the crown of thorns, the Claw of the Conciliator, a thorn that causes Severian to shed blood, becomes a [[True Cross|religious relic]] due to its relation to Severian. Terminus Est represents his [[crucifix]], with Severian describing his sword in ''Urth of the New Sun'' as a "dark cross upon my shoulder." In the following volume, ''[[The Urth of the New Sun]]'', Severian is resurrected as well, escaping to a [[Heaven]]-like plane of existence where an [[Tzadkiel|angel]] resides and then emerging from a stone tomb, as Jesus [[Resurrection of Jesus|rose]] from his stone [[Tomb of Jesus|tomb]].<ref>{{Cite book |last=Wright |first=Peter |url=https://archive.org/details/attendingdaedalu0000wrig |title=Attending Daedalus: Gene Wolfe, Artifice and the Reader |publisher=Liverpool University Press |year=2003 |isbn=978-0-85323-828-7 |edition=illustrated |url-access=registration}}</ref>
+
+However, Wolfe said in an interview, "I don't think of Severian as being a Christ figure; I think of Severian as being a Christian figure. He is a man who has been born into a very perverse background, who is gradually trying to become better."<ref>{{Cite book |last=Jordan |first=James B. |chapter-url=https://books.google.com/books?id=MkPfjCVo3g4C&pg=PA109 |title=Shadows of the New Sun |publisher=Liverpool University Press |year=2009 |isbn=978-1-84631-057-7 |editor-last=Wright |editor-first=Peter |page=109 |chapter=Gene Wolfe Interview |author-link=James B. Jordan |access-date=November 9, 2019}}  The interview was conducted in 1992. It is available in full at https://www.gwern.net/docs/fiction/1992-jordan.pdf.</ref>
+
+==Related works==
+During the years when ''The Book of the New Sun'' was published, Wolfe published two stories from it separately: "Foila's Story: The Armiger's Daughter" (one of the entries in the story-telling contest in the Pelerines' hospital) and "The Tale of the Student and his Son" (one of the two stories that Severian reproduces from a book he obtained for Thecla when she was imprisoned).
+
+Shortly after ''The Citadel of the Autarch'', Wolfe published ''[[The Castle of the Otter]]'', a book of essays about ''The Book of the New Sun'' containing a few fictional elements, such as jokes told by some of the characters.
+
+After the original four-volume novel, Wolfe wrote a novel often called a coda, ''[[The Urth of the New Sun]]'' (1987). He also wrote three short stories, "The Map", "The Cat", and "Empires of Foliage and Flower", that are closely related to ''The Book of the New Sun''.
+
+Later he wrote two book series that are set in Severian's universe. The Internet Speculative Fiction Database catalogs it all as the "Solar Cycle", comprising the short works and three sub-series.<ref name=isfdbcycle /> The two later subseries are ''[[The Book of the Long Sun]]'' (1993–1996, four volumes) and ''[[The Book of the Short Sun]]'' (1999–2001, three volumes). Two of the ''Long Sun'' books were nominated for [[Nebula Award]]s.<ref name=SFawards-wolfe/>
+
+==Place within the genre==
+''The Book of the New Sun'' belongs to the [[Dying Earth (subgenre)|Dying Earth subgenre]] of speculative fiction. Peter Wright calls the series an "[[apotheosis]]" of traditional Dying Earth elements and themes, and Douglas Barbour suggests that the book is a foundational mosaic of that literary heritage: {{blockquote|Wolfe has not only written a truly marvellous science-fantasy set millions of years in our future on a dying 'Urth', but he has also written the book on such works ... where every formal development in this sub-genre is laid out for our interpretation and then done right.}} Traces of this literary tradition can be found throughout the book. In ''The Sword of the Lictor'', Cyriaca (the woman whom Severian spares in Thrax) tells Severian a legend about an automated city, with rebirth as a central theme. This mirrors [[John W. Campbell]]'s ''[[Twilight (Campbell short story)|Twilight]]'', where sentient machines remove the need for human labor. Wolfe himself said that when he was a teenager ''Twilight'' had a great effect on his writing, and this homage to that story is not just a passing reference, but an allusion to a literary predecessor. Earlier in the story, Wolfe alludes to ''[[The Time Machine]]'', with the scene where Severian meets the glowing man-apes mirroring the Time Traveler's confrontation with the Morlocks. In both stories, the protagonist holds up a light to awe the cave peoples, but in the ''Book of the New Sun'' Severian relates to the humanity of the man-apes with the glowing Claw of the Conciliator, while in ''The Time Machine'' the Time Traveler intimidates the Morlocks with his fire.<ref name="Peter Wright 2003 91" />
+
+==Publication history==
+{{Infobox book| <!-- See Wikipedia:WikiProject_Novels or Wikipedia:WikiProject_Books -->
+| name         = Shadow and Claw
+| title_orig   = The Book of the New Sun, Vols. I & II
+| translator   =
+| image        = Wolfe shadow & claw.jpg <!--using US reprint here, prefer first edition-->
+| caption = Cover, by [[Don Maitz]], of the US reprint
+| author       = [[Gene Wolfe]]
+| cover_artist =
+| country      = United Kingdom
+| language     = English
+| series       = The Book of the New Sun
+| genre        = Science fiction
+| publisher    = [[Sidgwick & Jackson]]
+| release_date = 1983
+| media_type   = Print (hardback)
+| pages        = 604
+| isbn         = 978-0-283-99029-8
+| oclc= 21019355
+| preceded_by  =
+| followed_by  = Sword and Citadel
+}}
+
+Gene Wolfe had originally intended the story to be a 40,000-word novella called "The Feast of Saint Catherine", meant to be published in one of the ''[[Orbit (anthology series)|Orbit]]'' anthologies, but during the writing, it continued to grow.<ref>{{cite web |title=Larry McCaffery –- On Encompassing the Entire Universe: An Interview with Gene Wolfe |url=https://www.depauw.edu/sfs/interviews/wolfe46interview.htm |archive-url=https://web.archive.org/web/20260130185147/https://www.depauw.edu/sfs/interviews/wolfe46interview.htm |archive-date=2026-01-30 |date=November 1988 |access-date=24 May 2026}}</ref><ref>{{Cite web |title=George R.R. Martin on Magic Vs. Science - Weird Tales |url=http://weirdtalesmagazine.com/2007/05/24/george-rr-martin-on-magic-vs-science/ |archiveurl=https://web.archive.org/web/20120604063157/http://weirdtalesmagazine.com/2007/05/24/george-rr-martin-on-magic-vs-science/ |url-status=dead |archive-date=June 4, 2012}}</ref> Despite being published with a year between each book, all four books were written and completed during his free time without anyone's knowledge when he was still an editor of ''[[Plant Engineering]]'', allowing him to write at his own pace and take his time.<ref>{{Cite web |title=Nerdist Podcast: George R.R. Martin « Nerdist (1:01:05) |url=http://www.nerdist.com/2013/07/nerdist-podcast-george-r-r-martin/|archive-url=https://web.archive.org/web/20130801044112/http://www.nerdist.com/2013/07/nerdist-podcast-george-r-r-martin|url-status=dead|archive-date=August 1, 2013}}</ref>
+
+The tetralogy was first published in English in the United Kingdom by [[Sidgwick & Jackson]] from 1980 to 1983, and the coda published in 1987, with second publications for each book occurring approximately a year after the first. [[Don Maitz]] illustrated the covers of the US publication, and [[Bruce Pennington]] illustrated the covers of the UK publication. The series was also published in two volumes, named ''Shadow and Claw'' and ''Sword and Citadel'', both published in 1994 by [[Orb Publications]].<ref>{{Cite web |last1=Brown |first1=Charles N. |author-link=Charles N. Brown |last2=William G. Contento |title=The Locus Index to Science Fiction (1984-1998) |url=http://www.locusmag.com/index/b516.htm#A7566 |access-date=February 11, 2008}}</ref><ref>{{Cite web |last1=Brown |first1=Charles N. |author-link=Charles N. Brown |last2=William G. Contento |title=The Locus Index to Science Fiction (2000) |url=http://www.locusmag.com/index/yr2000/b48.htm#A1629 |access-date=February 11, 2008}}</ref>
+
+It was published as a single volume titled ''The Book of the New Sun'' in 1998 by [[Science Fiction Book Club]] and again in 2007 under the title ''Severian of the Guild'', published by [[Orion Publishing Group]].<ref name=isfdbcycle/>
+
+Each book has been separately translated into Spanish, French, German, [[Dutch language|Dutch]], and Japanese.<ref name=isfdbcycle/>
+
+The Japanese printings of the tetralogy and coda were illustrated by [[Yoshitaka Amano]].
+
+==Awards and nominations==
+Each of the four original volumes won at least one major fantasy or science fiction award as the year's "Best Novel" as shown by the table below. The tetralogy was not considered as a whole for any of the annual literary awards compiled by the [[Internet Speculative Fiction Database]] (ISFDB).<ref name="SFawards-wolfe">{{Cite web |title=Gene Wolfe |url=http://www.locusmag.com/SFAwards/Db/NomLit153.html#5709 |archive-url=https://web.archive.org/web/20080314072831/http://www.locusmag.com/SFAwards/Db/NomLit153.html |archive-date=March 14, 2008 |access-date=April 23, 2012}}</ref>
+
+{| class= wikitable
+|+ Best Novel of the year? – annual awards<ref name=SFawards-wolfe/><ref name="WWE-1980">{{Cite web |title=1980 Award Winners & Nominees |url=http://www.worldswithoutend.com/books_year_index.asp?year=1980 |access-date=July 5, 2009 |website=Worlds Without End}}</ref><ref name="WWE-1981">{{Cite web |title=1981 Award Winners & Nominees |url=http://www.worldswithoutend.com/books_year_index.asp?year=1981 |access-date=July 5, 2009 |website=Worlds Without End}}</ref><ref name="WWE-1982">{{Cite web |title=1982 Award Winners & Nominees |url=http://www.worldswithoutend.com/books_year_index.asp?year=1982 |access-date=July 5, 2009 |website=Worlds Without End}}</ref><ref name="WWE-1983">{{Cite web |title=1983 Award Winners & Nominees |url=http://www.worldswithoutend.com/books_year_index.asp?year=1983 |access-date=July 5, 2009 |website=Worlds Without End}}</ref><ref name="WWE-1984">{{Cite web |title=1984 Award Winners & Nominees |url=http://www.worldswithoutend.com/books_year_index.asp?year=1984 |access-date=July 5, 2009 |website=Worlds Without End}}</ref><ref name="WWE-1988">{{Cite web |title=1988 Award Winners & Nominees |url=http://www.worldswithoutend.com/books_year_index.asp?year=1988 |access-date=July 5, 2009 |website=Worlds Without End}}</ref>
+
+! Title (volume or novel) ||Award wins ||Nominations
+|-
+ | ''[[The Shadow of the Torturer]]''<br /> (Simon & Schuster, 1980)
+ || [[BSFA Award for Best Novel|British Science Fiction]] <br> [[World Fantasy Award for Best Novel|World Fantasy]]
+ || Balrog (fantasy), Campbell Memorial (3rd place), Locus Fantasy (2nd place), Nebula
+|-
+ | ''[[The Claw of the Conciliator]]''<br /> ([[Timescape Books]], 1981)
+ || [[Locus Award for Best Fantasy Novel|Locus Fantasy]] <br> [[Nebula Award for Best Novel|Nebula (Science Fiction)]]
+ || [[Hugo Award for Best Novel|Hugo (Science Fiction)]] (2nd place), [[Mythopoeic Awards|Mythopoeic Fantasy]], World Fantasy
+|-
+ | ''[[The Sword of the Lictor]]''<br /> (Timescape Books, 1982)
+ || [[British Fantasy Award for Best Novel]] <br> Locus Fantasy
+ || Balrog, British Science Fiction, Hugo (6th place), Nebula, World Fantasy
+|-
+ | ''[[The Citadel of the Autarch]]''<br /> (Timescape Books, 1983)
+|| [[John W. Campbell Memorial Award|Campbell Memorial (Science Fiction)]]
+|| Balrog, British Science Fiction, Locus Fantasy (2nd place), Nebula
+|-
+ | ''[[The Urth of the New Sun]]''<br /> ([[Tor Books]], 1987)
+ || [[Science Fiction Chronicle]]
+ || Hugo, Locus Science Fiction (3rd place), Nebula
+|-
+|}
+
+==Language==
+===Vocabulary===
+Gene Wolfe uses a variety of archaic and obscure terms throughout the series and in the appendix of ''The Shadow of the Torturer'' he explains his fictitious method:
+
+{{blockquote|In rendering this book—originally composed in a tongue that has not yet achieved existence—into English, I might easily have saved myself a great deal of labor by having recourse to invented terms; in no case have I done so. Thus in many instances, I have been forced to replace yet undiscovered concepts by their closest twentieth-century equivalents.
+}}
+
+Wolfe admitted, however, that some mistakes may have been made in spelling or exact meaning. His unusual words often come from an English–Latin dictionary or an English–Greek dictionary, where he finds roots of words to use.<ref>{{Cite book |title=Shadows of the New Sun: Wolfe on Writing/Writers on Wolfe |publisher=Oxford University Press |year=2007 |isbn=978-1-78138-839-6 |editor-last=Wright |editor-first=Peter}}</ref>
+
+Wolfe stated that he uses strange and arcane words because he "thought they were the best for the story [he] was trying to tell." Language is Wolfe's medium as a writer, and he wishes to "press against the limits of prose." Wolfe's deliberate use of exotic words is meant to manipulate the reader and force upon them a certain visualization of the story, but he does not mean to confuse the reader. He compares the narrator, Severian, and the reader to an English-speaking person and a German-speaking person building a boat:<ref>{{Cite book |last=Andre-Driussi |first=Michael |title=Lexicon Urthus |publisher=Sirius Fiction |year=2008 |isbn=978-0-9642795-1-3 |edition=2nd |page=XV |chapter=interview}}</ref>
+{{blockquote|
+[The English-speaker] would say, "Bring me a flat board," and [the German-speaker] would bring him a board of proper size. They were actually doing something, you see, and the German understood what it was they were doing. Because they were working together (exactly as a writer and reader must) the unintelligible request was heard as "I need something," and the German had little difficulty guessing what was needed.
+
+Why bother, in that case, to learn English? Or learn German? In the narrowest sense, you don't ... But knowing is better and broader and deeper than even the best guessing, and knowing is more fun.}}
+
+Two examples of the arcane words Wolfe uses are "[[wikt:ascian|Ascian]]" and "[[wikt:hydrargyrum|Hydrargyrum]]". Ascian, despite its similarity to "Asian", is derived from a Latin word meaning "without shadow", as the Ascians are tropic dwellers who have no shadow at noon. Hydrargyrum, the fluid contained in Severian's sword Terminus Est, is derived from the Ancient Greek "ὕδωρ", meaning water, and "ἄργυρος", meaning silver, as hydrargyrum is liquid [[Mercury (element)|mercury]].<ref>{{Cite book |last=Andre-Driussi |first=Michael |title=Lexicon Urthus: A Dictionary for the Urth Cycle |publisher=Sirius Fiction |year=2008 |isbn=978-0-9642795-0-6 |edition=2}}</ref>
+
+===Ascian language===
+{{main|Ascian language}}
+The Ascian language further expounds on [[Sapir-Whorf Hypothesis|the idea that word choice alters the thinking of people]], as the Ascian language is simply a set of quotations from government propaganda called "Correct Thought". In order to communicate, Ascians must memorize many quotations and learn to interpret others' use of them. This government regulation of language is intended to directly regulate the thought of Ascians.<ref>{{Cite book |title=The Greenwood Encyclopedia of Science Fiction and Fantasy: Themes, Works, and Wonders |publisher=Greenwood Publishing Group |year=2005 |isbn=978-0-313-32952-4 |editor-last=Westfahl |editor-first=Gary |page=462}}</ref> However, it is illustrated in the novels that the human capacity to adapt language to its own immediate needs and deploy it in unintended or unforeseen ways allows the Ascians to convey meanings outside of or even contradictory to those intended by the creators of "Correct Thought."
+
+==See also==
+{{portal|Novels}}
+* [[Bildungsroman]]
+
+==Notes==
+{{reflist|group=lower-alpha}}
+{{reflist|group=lower-alpha name=subseries}}
+
+==References==
+{{reflist|30em}}
+
+==External links==
+{{wikiquote}}
+* [http://www.ultan.org.uk/review-botns/ "Mapping a Masterwork: A Critical Review of Gene Wolfe's ''The Book of the New Sun''"] -(Peter Wright)
+* [https://web.archive.org/web/20090406143511/http://www.irosf.com/q/zine/article/10536 "What Gene Wolfe Expects of His Readers: The Urth of the New Sun as an Answer to Mysteries in The Book of the New Sun"], by Michael Andre-Driussi
+* {{ISFDB name |171 |Gene Wolfe}}
+* [https://www.theguardian.com/books/booksblog/2009/nov/23/the-book-of-the-new-sun-science-fiction-ulysses guardian.co.uk]
+
+{{Gene Wolfe}}
+{{Locus Award Best Fantasy Novel}}
+{{Nebula Award Best Novel}}
+{{Fantasy fiction}}
+
+{{Authority control}}
+
+{{DEFAULTSORT:Book of the New Sun, The}}
+[[Category:Book series introduced in 1980]]
+[[Category:1980s fantasy novels]]
+[[Category:1980s science fiction novels]]
+[[Category:Dying Earth (genre)]]
+[[Category:High fantasy novels]]
+[[Category:Literary tetralogies]]
+[[Category:Novels about religion]]
+[[Category:Novels by Gene Wolfe]]
+[[Category:American picaresque novels]]
+[[Category:Science fantasy novels]]
+[[Category:Simon & Schuster books]]
+[[Category:Fiction about the Sun]]
+[[Category:The Book of The New Sun]]
+[[Category:Novels first published in serial form]]
+[[Category:Planetary romances]]
+[[Category:Novels with unreliable narrators]]

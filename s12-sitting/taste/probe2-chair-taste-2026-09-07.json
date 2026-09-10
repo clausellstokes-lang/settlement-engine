@@ -1,0 +1,61 @@
+{
+ "seed": "chair-taste-2026-09-07",
+ "name": "Breitturm",
+ "foundedPoolKey": "FOUNDED-OLD",
+ "lines": [
+  {
+   "blockId": "DS-POW-1",
+   "poolKey": "Tolerated",
+   "angle": "street",
+   "text": "Breitturm accepts the Guild Council without approving of it. The town's obedience is a habit rather than a verdict, and both sides understand the difference perfectly."
+  },
+  {
+   "blockId": "DS-POW-1",
+   "poolKey": "breakdown dominated by SAFETY, adverse",
+   "angle": "ledger",
+   "text": "What the Guild Council has lost at Breitturm it has lost to the crime returns. A town that does not feel safe stops crediting whoever is meant to keep it so."
+  },
+  {
+   "blockId": "DS-POW-2",
+   "poolKey": "no token matched: unclassified (the plain-description floor)",
+   "angle": "visitor",
+   "text": "A stranger at Breitturm is directed to Guild Council for anything official, and that is all a stranger is told."
+  },
+  {
+   "blockId": "DS-POW-2",
+   "poolKey": "recentConflict present",
+   "angle": "street",
+   "text": "Nobody at Breitturm needs the trouble explained to them; it is recent enough that the town simply refers to it and moves on."
+  },
+  {
+   "blockId": "DS-POW-6",
+   "poolKey": "operation role criminal revenue stream (unclassified)",
+   "angle": "ledger",
+   "text": "There is criminal infrastructure at Breitturm with local weight, territorial or economic, and no clearer description of it than that."
+  },
+  {
+   "blockId": "DS-POW-4",
+   "poolKey": "legitimacyHold: public opinion neither helps nor hurts",
+   "angle": "threshold",
+   "text": "The Guild Council at Breitturm is carrying its own weight and no more; a shift in the town's regard in either direction would be felt immediately, because there is nothing else cushioning the grip."
+  },
+  {
+   "blockId": "DS-POW-5",
+   "poolKey": "autocrat",
+   "angle": "visitor",
+   "text": "A stranger at Breitturm needs one audience and gets a decision in it, which is either the best or the worst arrangement he will encounter, depending on the decision."
+  },
+  {
+   "blockId": "DS-POW-5",
+   "poolKey": "governing body name: a SLOT, never a baked noun",
+   "angle": "ledger",
+   "text": "What governs Breitturm calls itself the Guild Council, and the name is precise about the town's size and pretensions in a way outsiders routinely mistake."
+  },
+  {
+   "blockId": "DS-POW-7",
+   "poolKey": "layer DORMANT (no ledger materialized)",
+   "angle": "street",
+   "text": "There are interests at Breitturm and there are no camps; a question is answered by whoever cares about that question."
+  }
+ ]
+}

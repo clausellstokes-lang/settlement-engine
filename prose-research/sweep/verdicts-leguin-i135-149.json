@@ -1,0 +1,233 @@
+{
+ "name": "leguin",
+ "chunk": 6,
+ "claims": [
+  {
+   "index": 135,
+   "feature": "register modulation",
+   "claim": "Michael Dirda judges The Left Hand of Darkness to be written in a tone even more gravely austere than A Wizard of Earthsea.",
+   "source": "Michael Dirda, NEA Big Read Reader's Guide to A Wizard of Earthsea (NEA / Arts Midwest)",
+   "url": "https://www.arts.gov/sites/default/files/Readers-Guide-WizardofEarthsea.pdf",
+   "quote": "a tone even more gravely austere than A Wizard",
+   "page": "section on Le Guin's other works"
+  },
+  {
+   "index": 136,
+   "feature": "place and institution description",
+   "claim": "Michael Dirda likens the fantasy or science fiction author's world-building to an anthropologist reporting on a people in as much detail as possible.",
+   "source": "Michael Dirda, NEA Big Read Reader's Guide to A Wizard of Earthsea (NEA / Arts Midwest)",
+   "url": "https://www.arts.gov/sites/default/files/Readers-Guide-WizardofEarthsea.pdf",
+   "quote": "just as an anthropologist reports on an indigenous people",
+   "page": "'About the Author' section"
+  },
+  {
+   "index": 137,
+   "feature": "cadence and rhythm",
+   "claim": "The NEA Teacher's Guide describes the sentences of A Wizard of Earthsea as formal, clear and exact with the musical cadence of an oral storyteller.",
+   "source": "NEA Big Read Teacher's Guide to A Wizard of Earthsea (NEA / Arts Midwest)",
+   "url": "https://www.arts.gov/sites/default/files/Teachers-Guide-LeGuin.pdf",
+   "quote": "formal, clear, and exact, with the musical cadence",
+   "page": "lesson on point of view and the narrator"
+  },
+  {
+   "index": 138,
+   "feature": "register modulation",
+   "claim": "The NEA Teacher's Guide paraphrases Le Guin as holding that heroic or high fantasy demands a slightly formal, elevated style.",
+   "source": "NEA Big Read Teacher's Guide to A Wizard of Earthsea (NEA / Arts Midwest)",
+   "url": "https://www.arts.gov/sites/default/files/Teachers-Guide-LeGuin.pdf",
+   "quote": "a slightly formal, elevated style, commensurate with the genre's focus",
+   "page": "lesson on point of view and the narrator"
+  },
+  {
+   "index": 139,
+   "feature": "adjective and adverb discipline",
+   "claim": "The NEA Teacher's Guide says Le Guin's writing tends to be plain, strong and direct, without obvious flourish, despite occasional figurative language.",
+   "source": "NEA Big Read Teacher's Guide to A Wizard of Earthsea (NEA / Arts Midwest)",
+   "url": "https://www.arts.gov/sites/default/files/Teachers-Guide-LeGuin.pdf",
+   "quote": "plain, strong, and direct, without obvious flourish",
+   "page": "Lesson Five, Figurative Language"
+  },
+  {
+   "index": 140,
+   "feature": "opening sentence",
+   "claim": "The NEA Teacher's Guide offers the novel's first sentence as the demonstration of Le Guin's plain, direct writing.",
+   "source": "NEA Big Read Teacher's Guide to A Wizard of Earthsea (NEA / Arts Midwest)",
+   "url": "https://www.arts.gov/sites/default/files/Teachers-Guide-LeGuin.pdf",
+   "quote": "Consider the very first sentence of the novel",
+   "page": "Lesson Five, Figurative Language"
+  },
+  {
+   "index": 141,
+   "feature": "place and institution description",
+   "claim": "Le Guin, quoted in the NEA Teacher's Guide, says great novels offer a place, a landscape of the imagination the reader can inhabit and return to.",
+   "source": "NEA Big Read Teacher's Guide to A Wizard of Earthsea (NEA / Arts Midwest)",
+   "url": "https://www.arts.gov/sites/default/files/Teachers-Guide-LeGuin.pdf",
+   "quote": "a landscape of the imagination which we can inhabit",
+   "page": "lesson on plot structure and pacing"
+  },
+  {
+   "index": 142,
+   "feature": "diction (native vs latinate)",
+   "claim": "Jacob Brogan asserts that in A Wizard of Earthsea Le Guin relies heavily on words with Germanic roots.",
+   "source": "Jacob Brogan, 'Unlearning to Write', Slate Book Review",
+   "url": "https://slate.com/culture/2015/09/ursula-le-guins-writing-guide-steering-the-craft-reviewed.html",
+   "quote": "relies heavily on words with Germanic roots",
+   "page": "third paragraph"
+  },
+  {
+   "index": 143,
+   "feature": "sentence length variation",
+   "claim": "One of Le Guin's Steering the Craft exercises, quoted by Brogan, asks for a paragraph of narrative in sentences of seven or fewer words.",
+   "source": "Ursula K. Le Guin, Steering the Craft, quoted by Jacob Brogan in Slate",
+   "url": "https://slate.com/culture/2015/09/ursula-le-guins-writing-guide-steering-the-craft-reviewed.html",
+   "quote": "in sentences of seven or fewer words",
+   "page": "paragraph on the book's exercises"
+  },
+  {
+   "index": 144,
+   "feature": "plainness and economy",
+   "claim": "Le Guin, quoted by Brogan, says she finds ornate prose such as Nabokov's difficult because it is always stopping to be admired.",
+   "source": "Ursula K. Le Guin, Steering the Craft, quoted by Jacob Brogan in Slate",
+   "url": "https://slate.com/culture/2015/09/ursula-le-guins-writing-guide-steering-the-craft-reviewed.html",
+   "quote": "difficult to get through because it's always stopping to be admired",
+   "page": "paragraph on prose versus poetry"
+  },
+  {
+   "index": 145,
+   "feature": "plainness and economy",
+   "claim": "Chris Mahon attributes Earthsea's succinctness to every word being carefully weighed before it goes on the page.",
+   "source": "Chris Mahon, '5 Things Every Fantasy Writer Can Learn from Earthsea', The Portalist",
+   "url": "https://theportalist.com/earthsea-ursula-le-guin",
+   "quote": "every word of Le Guin's is carefully weighed",
+   "page": "section 4, 'Economic prose'"
+  },
+  {
+   "index": 146,
+   "feature": "omission as information",
+   "claim": "Chris Mahon argues that Earthsea leaves a lot up to the imagination in a genre that indulges in minutiae.",
+   "source": "Chris Mahon, '5 Things Every Fantasy Writer Can Learn from Earthsea', The Portalist",
+   "url": "https://theportalist.com/earthsea-ursula-le-guin",
+   "quote": "Earthsea leaves a lot up to the imagination",
+   "page": "section 2, 'Geography That Encourages Imagination'"
+  },
+  {
+   "index": 147,
+   "feature": "place and institution description",
+   "claim": "Oren Ashkenazi observes that each Earthsea island the characters visit gets a few defining details, usually in terms of the local economy.",
+   "source": "Oren Ashkenazi, 'Building Earthsea: How Le Guin Laid a Shaky Foundation for Her World', Mythcreants",
+   "url": "https://mythcreants.com/blog/building-earthsea-how-le-guin-laid-a-shaky-foundation-for-her-world/",
+   "quote": "a few defining details, usually in terms of the local economy",
+   "page": "section on the islands"
+  },
+  {
+   "index": 148,
+   "feature": "other: prose doing the worldbuilding's work",
+   "claim": "Oren Ashkenazi reports that on rereading, much of what he remembered as Earthsea's worldbuilding turned out to be Le Guin's wordcraft.",
+   "source": "Oren Ashkenazi, 'Building Earthsea', Mythcreants",
+   "url": "https://mythcreants.com/blog/building-earthsea-how-le-guin-laid-a-shaky-foundation-for-her-world/",
+   "quote": "Earthsea's worldbuilding is actually due to Le Guin's wordcraft",
+   "page": "closing section of the article"
+  },
+  {
+   "index": 149,
+   "feature": "concrete sensory noun",
+   "claim": "Oren Ashkenazi credits Le Guin's evocative description of a goat-charming spell with creating an impression of rarity the world's rules do not support.",
+   "source": "Oren Ashkenazi, 'Building Earthsea', Mythcreants",
+   "url": "https://mythcreants.com/blog/building-earthsea-how-le-guin-laid-a-shaky-foundation-for-her-world/",
+   "quote": "she describes a goat-charming spell with such evocative detail",
+   "page": "closing section of the article"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 135,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The Left Hand of Darkness is written in a tone even more gravely austere than A Wizard of Earthsea.",
+   "note": "Raw PDF (arts.gov, HTTP 200, pypdf text). Sentence appears verbatim in the 'other works' passage of the Reader's Guide; Acknowledgments credits 'Writer: Michael Dirda'."
+  },
+  {
+   "index": 136,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "just as an anthropologist reports on an indigenous people in as much detail as possible",
+   "note": "Raw PDF. Full sentence: '...so a science fiction or fantasy author will build up an elaborate picture of an alien culture and its inhabitants.' In the 'About the Author' page (p.5); Dirda is the credited writer."
+  },
+  {
+   "index": 137,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The sentences are formal, clear, and exact, with the musical cadence of an oral storyteller or medieval bard.",
+   "note": "Raw PDF (Teachers-Guide-LeGuin.pdf, HTTP 200). In the narrator / point-of-view lesson (Lesson Three, FOCUS: narrator and point of view)."
+  },
+  {
+   "index": 138,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Le Guin has stressed that heroic or high fantasy demands a slightly formal, elevated style",
+   "note": "Raw PDF. Continues '...commensurate with the genre's focus on nobility of soul, heroism, and self-sacrifice.' Same point-of-view lesson; only difference is a curly vs straight apostrophe in genre's."
+  },
+  {
+   "index": 139,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Though Le Guin occasionally uses figurative language, her writing tends to be plain, strong, and direct, without obvious flourish.",
+   "note": "Raw PDF. Lesson Five, FOCUS: Figurative Language, exactly as the claim's page field states."
+  },
+  {
+   "index": 140,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Consider the very first sentence of the novel: 'The island of Gont...'",
+   "note": "Raw PDF. The sentence immediately follows 'plain, strong, and direct, without obvious flourish', so it is offered as the illustration of that plainness. Lesson Five."
+  },
+  {
+   "index": 141,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Great novels offer us not only a series of events, but a place, a landscape of the imagination which we can inhabit and return to.",
+   "note": "Raw PDF. Introduced by 'Ursula K. Le Guin has written:', in Lesson Eight (FOCUS: The Plot Unfolds — plot structure and pacing)."
+  },
+  {
+   "index": 142,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "she relies heavily on words with Germanic roots to convey the rawness of her windswept world",
+   "note": "Raw HTML (slate.com, HTTP 200, tags stripped locally). Third body paragraph, naming 'her fantasy novel A Wizard of Earthsea'; byline Jacob Brogan, Sept 11 2015."
+  },
+  {
+   "index": 143,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Write a paragraph of narrative ... in sentences of seven or fewer words",
+   "note": "Raw HTML. Brogan quotes it as one of the exercises: 'goes one', in the paragraph on the book's plainspoken, practical exercises."
+  },
+  {
+   "index": 144,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "she finds such language difficult to get through because it's always stopping to be admired",
+   "note": "Raw HTML. Preceded by 'many people admire the elaborate, ornate prose of writers such as Nabokov'; in the poetry-versus-prose paragraph."
+  },
+  {
+   "index": 145,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "every word of Le Guin's is carefully weighed before being put on the page",
+   "note": "Raw HTML (theportalist.com, HTTP 200). Section 4, 'Economic prose', opening with 'Earthsea is refreshingly succinct and straightforward'; byline Chris Mahon."
+  },
+  {
+   "index": 146,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "In a genre where authors are given free rein to indulge in minutiae, Earthsea leaves a lot up to the imagination.",
+   "note": "Raw HTML. Closing sentence of section 2, 'Geography That Encourages Imagination', exactly as the page field states."
+  },
+  {
+   "index": 147,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "each island the characters visit gets at least a few defining details, usually in terms of the local economy",
+   "note": "Raw HTML (mythcreants.com, HTTP 200). Quoted string is verbatim; the claim elides the page's 'at least' before 'a few', which only weakens what the page asserts. In the 'Cool Islands' section under 'The Good'; byline Oren Ashkenazi."
+  },
+  {
+   "index": 148,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "how much of what I remembered as Earthsea's worldbuilding is actually due to Le Guin's wordcraft",
+   "note": "Raw HTML. Opens with 'When I started my reread for this article, something that constantly surprised me is...'. Placement note: this is the first paragraph of 'The Bad', mid-article, not the closing section as the page field says; that field is metadata, not a claim limb."
+  },
+  {
+   "index": 149,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "she describes a goat-charming spell with such evocative detail that it lets the reader imagine a world where even these tiny acts of sorcery are stupendous",
+   "note": "Raw HTML. The impression is of rare, treasured low-level magic, which the page rejects ('that's not the case at all') and refutes in the following 'Vague and Overpowered Magic' section. Same placement caveat as 148: it sits at the head of 'The Bad'."
+  }
+ ]
+}

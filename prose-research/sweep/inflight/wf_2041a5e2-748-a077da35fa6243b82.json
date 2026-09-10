@@ -1,0 +1,21 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 67,
+ "firstTs": "2026-09-09T19:00:35.184Z",
+ "lastTs": "2026-09-09T19:07:57.467Z",
+ "tools": {
+  "Bash": 14,
+  "Read": 3
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "You've hit your session limit · resets 6:20pm (America/New_York)",
+ "run": "wf_2041a5e2-748",
+ "agent": "a077da35fa6243b82",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/67af10e4-7386-48d4-8cd3-b2985d4885c2/subagents/workflows/wf_2041a5e2-748/agent-a077da35fa6243b82.jsonl",
+ "journal": "failed",
+ "checkpointFile": null
+}

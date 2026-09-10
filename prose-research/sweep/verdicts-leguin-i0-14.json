@@ -1,0 +1,234 @@
+{
+ "name": "leguin",
+ "chunk": 0,
+ "claims": [
+  {
+   "index": 0,
+   "feature": "style is the book",
+   "claim": "Le Guin holds that style is not an ingredient added to a fantasy but the book itself; strip it and only a plot synopsis remains, a claim she calls 'absolutely true of fantasy'.",
+   "source": "Le Guin, 'From Elfland to Poughkeepsie' (1973), full essay text (PDF)",
+   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+   "quote": "The style, of course, is the book.",
+   "page": "p. 9"
+  },
+  {
+   "index": 1,
+   "feature": "plain noble style",
+   "claim": "She argues most epics, the Mabinogion and the sagas use straightforward language that keeps oral directness, and that plainness is the noblest and hardest register for heroic fantasy.",
+   "source": "Le Guin, 'From Elfland to Poughkeepsie' (1973), full essay text (PDF)",
+   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+   "quote": "A plain language is the noblest of all.",
+   "page": "p. 8"
+  },
+  {
+   "index": 2,
+   "feature": "fake plainness (journalistic prose)",
+   "claim": "She separates true plainness from the flat, inexact 'Poughkeepsie' prose of commercial fantasy, which is journalism's deliberate suppression of sensibility applied to the remote and elemental.",
+   "source": "Le Guin, 'From Elfland to Poughkeepsie' (1973), full essay text (PDF)",
+   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+   "quote": "It is not really simple, but flat.",
+   "page": "p. 8"
+  },
+  {
+   "index": 3,
+   "feature": "sensory specificity",
+   "claim": "Sensory cues are 'extremely important in imaginative writing'; when rocks, wind and trees are vague and generalized the scene is not felt.",
+   "source": "Le Guin, 'From Elfland to Poughkeepsie' (1973), full essay text (PDF)",
+   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+   "quote": "the scenery is cardboard, or plastic",
+   "page": "p. 8"
+  },
+  {
+   "index": 4,
+   "feature": "archaism as high wire",
+   "claim": "The archaic manner is a perfect distancer only when done perfectly; botched thee/thou verbs, subjunctives, 'mayhap' and 'ichor' are the touchstones of failure.",
+   "source": "Le Guin, 'From Elfland to Poughkeepsie' (1973), full essay text (PDF)",
+   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+   "quote": "It's a high wire: one slip spoils all.",
+   "page": "p. 6"
+  },
+  {
+   "index": 5,
+   "feature": "distance without archaism",
+   "claim": "Archaisms are inessential to distancing from the ordinary: Jack Vance's aloof, restrained, consistent narrative and dialogue prose is an achieved style with none.",
+   "source": "Le Guin, 'From Elfland to Poughkeepsie' (1973), full essay text (PDF)",
+   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+   "quote": "And it contains no archaisms at all.",
+   "page": "p. 7"
+  },
+  {
+   "index": 6,
+   "feature": "register consistency",
+   "claim": "Alternating colloquial American for humour with formal usage for earnest moments (Leiber, Zelazny) jerks the reader between Elfland and Poughkeepsie and dissolves the characters' coherence.",
+   "source": "Le Guin, 'From Elfland to Poughkeepsie' (1973), full essay text (PDF)",
+   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+   "quote": "the characters lose coherence in my mind",
+   "page": "p. 7"
+  },
+  {
+   "index": 7,
+   "feature": "dialogue diction as the test",
+   "claim": "Speech reveals character whether the author knows it or not; a lord who says 'I could have told you that' can never be a hero, and genuine Elfland dialogue cannot be relocated to Capitol Hill by changing four words.",
+   "source": "Le Guin, 'From Elfland to Poughkeepsie' (1973), full essay text (PDF)",
+   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+   "quote": "Speech expresses character.",
+   "page": "p. 4"
+  },
+  {
+   "index": 8,
+   "feature": "flexible plain range (Tolkien model)",
+   "claim": "Tolkien's plain clear English is praised for flexibility and variety, moving from commonplace to stately and sliding into metre unnoticed, with an unremarkable vocabulary and everything direct, concrete and simple.",
+   "source": "Le Guin, 'From Elfland to Poughkeepsie' (1973), full essay text (PDF)",
+   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+   "quote": "Its outstanding virtue is its flexibility, its variety.",
+   "page": "p. 8"
+  },
+  {
+   "index": 9,
+   "feature": "musical test: sound, syntax, rhythm",
+   "claim": "Good prose, even archaic (Eddison), is judged visually for precision and musically for the sound of words, the movement of syntax and the rhythm of sentences, with nothing faked or blurred.",
+   "source": "Le Guin, 'From Elfland to Poughkeepsie' (1973), full essay text (PDF)",
+   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+   "quote": "the movement of the syntax, and the rhythm of the sentences",
+   "page": "p. 6"
+  },
+  {
+   "index": 10,
+   "feature": "every word counts (exposed construct)",
+   "claim": "In fantasy there is no borrowed reality to hide flaws, only a construct built in a void with every seam exposed, so every word counts and the only voice is the creator's.",
+   "source": "Le Guin, 'From Elfland to Poughkeepsie' (1973), full essay text (PDF)",
+   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+   "quote": "And every word counts.",
+   "page": "p. 10"
+  },
+  {
+   "index": 11,
+   "feature": "polysyndeton as costume",
+   "claim": "Imitation Dunsany is diagnosed as elaborate made-up names, vague gorgeous cities and many sentences beginning with 'And' — biblical cadence worn as costume.",
+   "source": "Le Guin, 'From Elfland to Poughkeepsie' (1973), full essay text (PDF)",
+   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+   "quote": "a great many sentences beginning with \"And.\"",
+   "page": "p. 5"
+  },
+  {
+   "index": 12,
+   "feature": "passion invests trivial acts",
+   "claim": "The Eddison and Morris dialogue passages show nothing happening (reading a book, dividing a rabbit) yet invest trivial acts with importance, emotion and vitality — the elevation lies in the speech, not the event.",
+   "source": "Le Guin, 'From Elfland to Poughkeepsie' (1973), full essay text (PDF)",
+   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+   "quote": "with what importance they invest these trivial acts",
+   "page": "p. 4"
+  },
+  {
+   "index": 13,
+   "feature": "simple timelessness (Tolkien dialogue)",
+   "claim": "Tolkien's speakers use 'an English extraordinary for its simple timelessness' with sobriety, wit and force — the language of men of character rather than mannered archaism.",
+   "source": "Le Guin, 'From Elfland to Poughkeepsie' (1973), full essay text (PDF)",
+   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+   "quote": "an English extraordinary for its simple timelessness",
+   "page": "p. 4"
+  },
+  {
+   "index": 14,
+   "feature": "style as fantasy's authenticity test",
+   "claim": "The Wikipedia synthesis reads the essay as claiming fantastic creation must reach into words and grammar, and cites Peter S. Beagle calling it the definitive piece on why sprinkling thees and thous fails.",
+   "source": "Wikipedia: From Elfland to Poughkeepsie",
+   "url": "https://en.wikipedia.org/wiki/From_Elfland_to_Poughkeepsie",
+   "quote": "reach to the very words and grammar",
+   "page": ""
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 0,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The style, of course, is the book.",
+   "note": "p.9 verbatim; all limbs on page: 'as if it were an ingredient of a book... something added onto the book'; 'If you remove the style, all you have left is a synopsis of the plot'; 'partly true of history; largely true of fiction; and absolutely true of fantasy.'"
+  },
+  {
+   "index": 1,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "A plain language is the noblest of all.",
+   "note": "p.8 verbatim, followed by 'It is also the most difficult.' Limbs on page: 'Most epics are in straightforward language... They retain the directness of their oral forebears'; 'The Mabinogian and the Norse sagas are as plainspoken as they could well be.' Context is explicitly heroic fantasy: 'We are discussing a modern descendant of the epic.' (Essay spells it 'Mabinogian'.)"
+  },
+  {
+   "index": 2,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It is a fake plainness. It is not really simple, but flat.",
+   "note": "p.8 verbatim. Limbs on page: 'It is not really clear, but inexact. Its directness is specious'; 'It is journalistic prose. In journalism, the suppression of the author's personality and sensibility is deliberate'; 'A language intended to express the immediate and the trivial is applied to the remote and the elemental.' Commercial framing on same page: 'Fantasy is selling well, so let's all grind out a fantasy. The Old Baloney Factory.'"
+  },
+  {
+   "index": 3,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the scenery is cardboard, or plastic",
+   "note": "p.8 verbatim, inside 'Its sensory cues--extremely important in imaginative writing--are vague and generalized; the rocks, the wind, the trees are not there, are not felt; the scenery is cardboard, or plastic.' Every limb, including the parenthetical quotation, is on the page."
+  },
+  {
+   "index": 4,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It's a high wire: one slip spoils all.",
+   "note": "p.6 verbatim, preceded by 'The archaic manner is indeed a perfect distancer, but you have to do it perfectly.' The four failure markers are all on pp.5-6: botched thee/thou verbs ('Whithersoever thou goest there also I goest'), the subjunctive ('All the was's turn into were's'), 'Mayhap', and 'the final test, the infallible touchstone of the seventh-rate: Ichor.' Minor: the word 'touchstone' is applied literally only to ichor; the other three are catalogued as novice traps, not called touchstones."
+  },
+  {
+   "index": 5,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "And it contains no archaisms at all.",
+   "note": "p.7 verbatim, closing the Vance paragraph after 'It is an achieved style.' Limbs on page: 'The conversation of his characters is aloof and restrained, very like his own narrative prose'; p.8 opens 'After all, archaisms are not essential'; the distancing purpose is stated on p.5 ('what is wanted in fantasy is a distancing from the ordinary'). 'Consistent' is carried by 'very like his own narrative prose' and 'he never shows a tin ear for tone' -- the phrase 'His tone is perfectly consistent' belongs to Cabell, not Vance."
+  },
+  {
+   "index": 6,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the characters lose coherence in my mind",
+   "note": "p.7 verbatim, inside 'I am jerked back and forth between Elland [sic: Elfland] and Poughkeepsie; the characters lose coherence in my mind, and I lose confidence in them.' Limbs on page: 'Fritz Leiber and Roger Zelazny... they alternate the two styles. When humor is intended the characters talk colloquial American English, or even slang, and at earnest moments they revert to old formal usages.'"
+  },
+  {
+   "index": 7,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Speech expresses character.",
+   "note": "p.4 verbatim, followed by 'It does so whether the speaker or the author knows it or not.' Limbs on page: 'When I hear a man say, \"I could have told you that at Cardosa\"... He is the kind who says, \"I told you so.\" Nobody who says, \"I told you so\" has ever been, or will ever be, a hero'; and 'You could not pull the trick on them that I pulled on Morgan and Nigel--not unless you changed half the words in every sentence. You could not possibly mistake them for anyone on Capitol Hill' (the trick being the four-word change of p.2)."
+  },
+  {
+   "index": 8,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Its outstanding virtue is its flexibility, its variety.",
+   "note": "p.8 verbatim. Limbs on page: 'Tolkien writes a plain, clear English'; 'It ranges easily from the commonplace to the stately, and can slide into metrical poetry, as in the Tom Bombadil episode, without the careless readers even noticing'; 'Tolkien's vocabulary is not striking; he has no ichor; everything is direct, concrete, and simple.'"
+  },
+  {
+   "index": 9,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the movement of the syntax, and the rhythm of the sentences",
+   "note": "p.6 verbatim. Limbs on page: 'That prose, in spite of or because of its archaisms, is good prose: exact, clear, powerful. Visually it is precise and vivid; musically--that is, in the sound of the words, the movement of the syntax, and the rhythm of the sentences--it is subtle and very strong. Nothing in it is faked or blurred.' The subject is Eddison's Worm Ouroboros passage."
+  },
+  {
+   "index": 10,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "And every word counts.",
+   "note": "p.10 verbatim. Limbs on page: 'There is no borrowed reality of history, or current events... to disguise flaws and failures of creation'; 'There is only a construct built in a void, with every joint and seam and nail exposed'; 'The only voice that speaks there is the creator's voice.'"
+  },
+  {
+   "index": 11,
+   "verdict": "PARTIAL",
+   "trueWording": "a lot of elaborate made-up names, some vague descriptions of gorgeous cities and unmentionable dooms, and a great many sentences beginning with \"And.\"",
+   "note": "p.5 quotation is verbatim and the three diagnostic items are exactly on the page. The essay names the King James Bible only as a formative influence on Dunsany's OWN prose ('one of the profoundest formative influences on Dunsany's prose'; imitators are out of reach unless 'brought up from the cradle on the grand sonorities of Genesis and Ecclesiastes'); it never attributes the imitators' 'And' sentences to biblical cadence, and never frames them as costume. That reading is a defensible inference, not the page's statement.",
+   "unsupportedLimb": "biblical cadence worn as costume -- the essay ties the KJV to Dunsany himself, never says imitators wear biblical cadence as costume"
+  },
+  {
+   "index": 12,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "with what importance they invest these trivial acts",
+   "note": "p.4 verbatim, inside 'But with what importance they invest these trivial acts, what emotion, what vitality!' Limbs on page: 'Nothing is really going on, in those first two passages: in one case they're reading a book, in the other they're dividing a cold leg of rabbit' -- and the first two passages are footnoted to Eddison (Worm Ouroboros) and Kenneth Morris (Book of the Three Dragons). 'Elevation lies in the speech, not the event' is the paragraph's own argument ('All of them are heroic, eloquent, passionate... greatness of soul shows when a man speaks')."
+  },
+  {
+   "index": 13,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "an English extraordinary for its simple timelessness",
+   "note": "p.4 verbatim. Limbs on page: 'It has sobriety, wit, and force. It is the language of men of character.' The third passage is footnoted to Tolkien, Fellowship of the Ring (Aragorn, Boromir, Elrond). 'Rather than mannered archaism' is carried by the contrast drawn in the same sentence: 'the speakers are quieter, and use a less extraordinary English' than the Eddison and Morris passages."
+  },
+  {
+   "index": 14,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "fantastic creation should reach to the very words and grammar",
+   "note": "Wikipedia article fetched raw (wikitext via ?action=raw and rendered HTML, oldid 1352490882, last edited 4 May 2026). Verbatim: 'In her argument that fantastic creation should reach to the very words and grammar in fantasy writers, she holds up Lord Dunsany, E. R. Eddison...' Beagle limb verbatim: 'The novelist Peter S. Beagle called it \"the definitive piece on fantasy, and on why simply sprinkling goblins, magic swords, and assorted thees and thous through your story will not get you a step closer to that vast and beautiful realm.\"' Note the page frames the work as a 1972 speech published 1973."
+  }
+ ]
+}

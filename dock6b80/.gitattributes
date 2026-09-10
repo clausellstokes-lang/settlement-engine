@@ -1,0 +1,25 @@
+# Normalize all text files to LF in the repository (checked out as-is). This
+# settles the "LF will be replaced by CRLF" churn on Windows working trees and
+# keeps diffs + generated-bundle hashes stable across platforms.
+#
+# To apply repo-wide to already-tracked files (one-time): `git add --renormalize .`
+* text=auto eol=lf
+
+# Binary assets — never normalize line endings.
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.webp  binary
+*.ico   binary
+*.svg   text eol=lf
+*.pdf   binary
+*.zip   binary
+*.woff  binary
+*.woff2 binary
+*.ttf   binary
+*.otf   binary
+*.eot   binary
+*.mp3   binary
+*.mp4   binary
+*.webm  binary

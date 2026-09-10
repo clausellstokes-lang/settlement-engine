@@ -1,0 +1,28 @@
+{
+ "role": "verifier",
+ "name": "ai",
+ "angle": null,
+ "tag": "i1214-1239",
+ "lines": 28,
+ "firstTs": "2026-09-07T11:53:38.354Z",
+ "lastTs": "2026-09-07T11:54:36.135Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 3
+ },
+ "urlsFetched": [
+  "https://proceedings.neurips.cc/paper_files/paper/2024/file/38cc5cba8e513547b96bc326e25610dc-Paper-Datasets_and_Benchmarks_Track.pdf",
+  "https://www.aph.gov.au/DocumentStore.ashx?id=b4fd6043-6626-4cbe-b8ee-a5c7319e94a0"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "Both PDFs downloaded. Extracting raw text.",
+ "run": "wf_e90e8bd1-c18",
+ "agent": "addf1853690797f27",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/b43943b4-3b40-4fd9-bc63-9b9c9afb55b4/subagents/workflows/wf_e90e8bd1-c18/agent-addf1853690797f27.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-ai-i1214-1239.json",
+  "exists": false
+ }
+}

@@ -1,0 +1,7 @@
+§913 L-MAT landing (register car 2): writer-reach re-takes its provenance at the tip; no other register moved
+
+The register series at the ten-car tip (registers-913.log, 20:34–20:38): the lighting census refrozen by register car 1 (62f201796, titles 23665 -> 23707, files 2543 -> 2545, credited 2170 -> 2172, suiteTitles 6335 -> 6342 — all five figures exactly as the farmed probe predicted); the OSR plain read 1972 exact with 0 drift lines and NO write; the mounts door unchanged (changed: []); prose-numerics 225 exact, nothing re-keyed; the tuning walker plain green (75); writer-reach's dry run HOLD with no refusal and its --write moved frozenAtSha (6906e1935 -> 62f201796) and the tree-scan statistics only — closureSizes.web-transitive 897 -> 898 and scanStats files 1594 -> 1595, sites 38614 -> 38619, propRead 36563 -> 36568, rGrades 5912 -> 5913, nGrades 881663 -> 881794, resolvedReceivers 6680 -> 6681 — because the consist added src modules to the web-transitive closure (). Cohort 1322 -> 1322, 0 stale folded out, 0 registered rows lit; population, registerDigest, surfaceReach and darkUnregistered byte-identical. The §910 prediction 'provenance only' is met in substance and stated here more exactly: the scan statistics are part of the provenance block and they moved with the tree.
+
+Seat: Fable 5.1 — validated
+
+Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>

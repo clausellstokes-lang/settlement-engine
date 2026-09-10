@@ -1,0 +1,7 @@
+     × EVERY CELL RESOLVES TO A VARIANT, and the resolution is not a guess 5ms
+     × ⭐ THE DRIFT ARM: no row added, no row removed, no row moved 5ms
+     × ⭐ THE PROVENANCE REFUSES A FIXTURE ITS RECORDER DID NOT WRITE 2ms
+     × the template reader matches a rendered sentence and refuses a neighbour 1ms
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+ Test Files  1 failed (1)
+      Tests  4 failed | 10 passed (14)

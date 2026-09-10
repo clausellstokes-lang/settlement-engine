@@ -1,0 +1,37 @@
+{
+ "role": "verifier",
+ "name": "hobb",
+ "angle": null,
+ "tag": "i330-344",
+ "lines": 76,
+ "firstTs": "2026-09-06T17:20:45.103Z",
+ "lastTs": "2026-09-06T17:25:17.479Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 14,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [
+  "https://hearwritenow.com/reviews/fantasy/liveship/",
+  "https://www.dragonsteelbooks.com/blogs/the-cognitive-realm/robin-hobb-writing-villians",
+  "https://lexlingua.livejournal.com/33522.html",
+  "https://elliottrwi.com/2019/05/24/a-robin-hobb-rereading-series-entry-1-assassins-apprentice-chapter-1/",
+  "https://elliottrwi.com/2021/09/10/a-robin-hobb-rereading-series-entry-226-fools-errand-chapter-6/",
+  "https://elliottrwi.com/2022/07/15/a-robin-hobb-rereading-series-entry-315-dragon-keeper-front-matter/",
+  "https://elliottrwi.com/2021/12/01/a-robin-hobb-rereading-series-entry-254-golden-fool-chapter-4/",
+  "http://web.archive.org/cdx/search/cdx?url=dragonsteelbooks.com/blogs/the-cognitive-realm/robin-hobb-writing-villians&output=text&limit=20&fl=timestamp,original,statuscode",
+  "https://web.archive.org/web/20250808211906id_/https://www.dragonsteelbooks.com/blogs/the-cognitive-realm/robin-hobb-writing-villians",
+  "https://web.archive.org/web/20250808211906id_/..."
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "k raw capture `20250808211906id_`. Checkpoint written to `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-hobb-i330-344.json` (15624 bytes, 15 claims / 15 verdicts, index order asserted against the chunk).",
+ "run": "wf_22752bb0-128",
+ "agent": "a8a7fa8b5d5967bd5",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_22752bb0-128/agent-a8a7fa8b5d5967bd5.jsonl",
+ "journal": "result",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-hobb-i330-344.json",
+  "exists": true
+ }
+}

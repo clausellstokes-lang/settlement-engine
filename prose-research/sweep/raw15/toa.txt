@@ -1,0 +1,855 @@
+ 
+ Tomb of Annihilation - Wikipedia 
+ Jump to content 
+ Main menu 
+ Main menu 
+ move to sidebar 
+ hide 
+ Navigation
+ Main page Contents Current events Random article About Wikipedia Contact us 
+ Contribute
+ Help Learn to edit Community portal Recent changes Upload file Special pages 
+ Search 
+ Search 
+ Appearance 
+ Donate 
+ Create account 
+ Log in 
+ Personal tools 
+ Donate 
+ Create account 
+ Log in 
+ Contents 
+ move to sidebar 
+ hide 
+ (Top) 
+ 1 
+ Summary 
+ 2 
+ Publication history 
+ 3 
+ Related products 
+ 4 
+ Reception 
+ 5 
+ References 
+ 6 
+ External links 
+ Toggle the table of contents 
+ Tomb of Annihilation 
+ Add languages 
+ Add links 
+ Article 
+ Talk 
+ English 
+ Read 
+ Edit 
+ View history 
+ Tools 
+ Tools 
+ move to sidebar 
+ hide 
+ Actions
+ Read 
+ Edit 
+ View history 
+ General
+ What links here Related changes Upload file Permanent link Page information Cite this page Get shortened URL Switch to legacy parser 
+ Print/export
+ Download as PDF Printable version 
+ In other projects
+ Wikidata item 
+ Appearance 
+ move to sidebar 
+ hide 
+ From Wikipedia, the free encyclopedia 
+ Module for Dungeons and Dragons game 
+ Tomb of Annihilation Cover art by Ben Oliver, 2017 Rules required Dungeons & Dragons , 5th edition Character levels 1-11 Campaign setting Forgotten Realms Authors Chris Perkins , Will Doyle, Steve Winter , with additional design by Adam Lee and story consulting by Pendleton Ward First published September 8, 2017 Pages 256 ISBN 978-0-7869-6610-3 
+ Tomb of Annihilation is an adventure module for the 5th edition of the Dungeons & Dragons fantasy role-playing game . The adventure was inspired by Tomb of Horrors . 
+ Summary [ edit ] 
+ Tomb of Annihilation centers around the Deathcurse, a wasting disease that slowly kills anyone who has ever been raised from the dead and prevents anyone who has died from being raised, and the Soulmonger artifact that caused the disease. [ 1 ] [ 2 ] "The narrative of the campaign begins with the group being hired by Syndra Silvane, a wealthy former adventurer who is afflicted with the Deathcurse. Her sources have tracked the Soulmonger to the ancient jungles of Chult. [...] At its core, Tomb of Annihilation follows a classic quest structure. The party has an objective, a deadline—Silvane is slowly dying, so each day the party spends exploring brings her closer to permanent death—and a sprawling expanse of dangerous wilderness stands in their way". [ 3 ] This adventure module is designed to take player characters from 1st level to 11th level. [ 4 ] 
+ The table of contents lists the follow sections: [ 5 ] 
+ Dramatis Personae 
+ Introduction 
+ Chapter 1: Port Nyanzaru 
+ Chapter 2: The Land of Chult 
+ Chapter 3: Dwellers of the Forbidden City 
+ Chapter 4: Fane of the Night Serpent 
+ Chapter 5: Tomb of the Nine Gods 
+ Appendix A: Character Backgrounds 
+ Appendix B: Random Encounters 
+ Appendix C: Discoveries 
+ Appendix D: Monsters and NPCs 
+ Appendix E: Player Handouts 
+ Appendix F: Trickster Gods of Omu 
+ Stat Blocks 
+ Publication history [ edit ] 
+ The new module was announced in June 2017 during the Stream of Annihilation livestreamed event on the Wizards of the Coast 's Twitch site. [ 6 ] Tomb of Annihilation was released on September 8, 2017 as a 256-page hardcover book. It was also released as a digital product through the following Wizards of the Coast licensees: D&D Beyond , Fantasy Grounds , and Roll20 . [ 1 ] 
+ Tomb of Annihilation was inspired by the classic adventure module Tomb of Horrors , "a lethal dungeon made by D&D co-creator Gary Gygax himself". [ 7 ] Polygon reported that "Wizards of the Coast enlisted more playtesters to try the Dungeons & Dragons Tomb of Annihilation module than any adventure it has released before. Why? Because they were afraid no one would survive it". [ 7 ] The module's setting of Chult in the Forgotten Realms was last explored in the 2nd edition of Dungeons & Dragons . [ 7 ] 
+ This paragraph provides insufficient context for those unfamiliar with the subject . Please help improve the article by providing more context for the reader , especially: Clarify relevance why Perkins said no black writers worked on ToA . It is only in the next paragraph we get a clue that there may have been some insensitivities in the book. This and the next paragraph should be restructured. ( October 2021 ) ( Learn how and when to remove this message ) 
+ In October 2017, Kotaku reported that Chris Perkins "said that no black writers or consultants worked on Tomb of Annihilation ". On the book's design, Perkins said "We didn't want to create a city that felt backward...It's a tale of Chultans reclaiming their own city and land and redefining who they are and moving way from the idea of warring tribes to a more business-minded culture. [...] The land that they live in is a savage land. That's just part of what Chult is. It's a place of monsters. It was our intention to show the Chultans have not only survived it, but have risen above it—that they have dispelled the warring tribal nature that previously defined them and are now actually thriving". [ 8 ] 
+ On June 17, 2020, in the wake of the George Floyd protests , Wizards of the Coast announced: "When every D&D book is reprinted, we have an opportunity to correct errors that we or the broader D&D community discovered in that book. Each year, we use those opportunities to fix a variety of things, including errors in judgment. In recent reprintings of Tomb of Annihilation and Curse of Strahd , for example, we changed text that was racially insensitive. Those reprints have already been printed and will be available in the months ahead. We will continue this process, reviewing each book as it comes up for a reprint and fixing such errors where they are present". [ 9 ] [ 10 ] 
+ Related products [ edit ] 
+ The 7th season of D&D Adventurers League was themed around the Tomb of Annihilation storyline. It includes an adventure module that acts as a hook to lead into the book, "Tier 1 and 2 adventures [that] expand on Tomb of Annihilation ' s story and set the stage for Tier 3 and 4 play, which pick up right after the characters complete the hardcover adventure". [ 11 ] 
+ The 14th expansion of the Neverwinter video game aligned the free-to-play massively multiplayer online role-playing game with the Tomb of Annihilation storyline including a new campaign, a new dungeon and two new zones. [ 12 ] 
+ WizKids , a Wizards of the Coast licensee, released 44 pre-painted miniatures that correspond with the adventure including the lich Acererak. [ 13 ] In October 2017, WizKids released a Tomb of Annihilation themed board game which can be played as a standalone game or can be combined "with the other D&D Adventure System Cooperative Play Board Games". [ 14 ] 
+ Reception [ edit ] 
+ In Publishers Weekly 's "Best-selling Books Week Ending October 2, 2017", Tomb of Annihilation was #14 in "Hardcover Nonfiction" and sold 7,152 units. [ 15 ] [ 16 ] 
+ Alex Springer, for SLUG Magazine , reported that the " Tomb of Annihilation is the type of campaign that can bring out the best—or worst—in a dungeon master" and highlighted mechanics such as new character backgrounds, exploration checks, the jungle themed creature appendix, and the lingering threat of permadeath due to the Soulmonger artifact. Springer wrote "When stacked up against Storm King's Thunder , Tomb of Annihilation feels blessedly streamlined and adventure-focused. There are no politics to navigate, no sieges to weather—it's just a deep dive into an unforgiving wilderness to destroy an artifact that can't be destroyed". [ 3 ] 
+ Cameron Kunzelman, for Paste , highlighted that the adventure is unique compared to previous modules and that the jungles of Chult are designed to try and kill you. Kunzelman wrote that "the jungles and dangers also have a slight feel of 'darkest Africa' to them, and the Chultan people are dark-skinned. The narrative beats in Tomb pull heavily from familiar sources like Edgar Rice Burroughs or Jules Verne , and those works have a long racialized history that is not often grappled with. [...] While the literary and visual content Tomb borrows from makes for interesting design and visuals, I think Wizards could have done more to interrogate those texts that they borrowed from and how they have a complicated past with general representations of 'Africa' writ large". [ 17 ] 
+ Cecilia D'Anastasio, for Kotaku , highlighted that the adventure uses "dated stereotypes of African cultures" and themes of colonialism which date back to the creation of the Chult setting. D'Anastasio wrote "Here's the rub: While many players I talked to enjoyed how the history and political structures of Chult were expanded in Tomb of Annihilation (and enjoyed the adventure's plot generally), they were still unimpressed by its execution. Its setting is an amalgamation of African cultures, a trope frequent in 20th century media that flattens the dimensionality of human experiences on the continent, which contains hundreds of ethnic groups". [ 8 ] 
+ In a review of Tomb of Annihilation in Black Gate , Andrew Zimmerman Jones said "The most recent Dungeons & Dragons 5th edition adventure book, Tomb of Annihilation [...] provides a good framework for a unleashing undead horrors upon a group of innocent fantasy adventurers." [ 18 ] 
+ References [ edit ] 
+ 1 2 "Tomb of Annihilation" . Dungeons & Dragons . Archived from the original on June 7, 2017 . Retrieved 2020-06-18 . 
+ ↑ David, Ari (2020-03-20). "Dungeons & Dragons: Acererak, the Menacing Zombie Wizard, Explained" . CBR . Retrieved 2020-06-20 . 
+ 1 2 Springer, Alex (2018-02-12). "Review: Dungeons and Dragons - Tomb of Annihilation" . SLUG Magazine . Retrieved 2020-06-18 . 
+ ↑ "Tomb of Annihilation | Product Page" . Roll20 . Retrieved 2020-06-18 . 
+ ↑ Perkins, Chris; Doyle, Will; Winter, Steve (2017). Tomb of Annihilation . Adam Lee, Pendleton Ward. Renton, Washington: Wizards of the Coast. ISBN   978-0-7869-6610-3 . OCLC   990286529 . 
+ ↑ "Watch D&D unveil new storyline with Stream of Annihilation livestream" . VentureBeat . 2017-06-02 . Retrieved 2020-06-18 . 
+ 1 2 3 Nelson, Samantha (2017-06-20). "D&D's next module is an entire adventure based on the classic Tomb of Horrors" . Polygon . Retrieved 2020-06-18 . 
+ 1 2 D'Anastasio, Cecilia (2017-10-18). "Dungeons & Dragons Stumbles With Its Revision Of The Game's Major Black Culture" . Kotaku . Retrieved 2020-06-18 . 
+ ↑ Thomas, Jeremy (2020-06-17). "Dungeons & Dragons Taking Steps to Resolve Racial & Ethnic Issues With 5th Edition" . 411MANIA . Retrieved 2020-06-18 . 
+ ↑ Whitbrook, James (2020-06-18). "Dungeons & Dragons Team Announces New Plans to Address Race and Inclusivity in the Game" . io9 . Retrieved 2020-06-18 . 
+ ↑ Lindsay, Chris (2017-09-01). "Tomb of Annihilation" . Dungeons & Dragons . Archived from the original on September 2, 2017 . Retrieved 2020-06-18 . 
+ ↑ "Neverwinter's Tomb of Annihilation brings D&D's latest storyline to PS4 and Xbox One" . VentureBeat . 2017-09-12 . Retrieved 2020-06-18 . 
+ ↑ Perkins, Chris; Lee, Adam (June 28, 2017). "Issue 14: Tomb of Annihilation" . Dragon+ . Retrieved 2020-06-18 . 
+ ↑ "Tomb of Annihilation Adventure System Board Game" . Dungeons & Dragons . Archived from the original on June 23, 2017 . Retrieved 2020-06-18 . 
+ ↑ "Publishers Weekly Bestseller Lists | Back Issue 10/02/2017" . PublishersWeekly.com . Retrieved 2020-06-18 . 
+ ↑ "Publishers Weekly best-selling books" . Williamsport Sun-Gazette . October 8, 2017. Archived from the original on 2020-06-18 . Retrieved 2020-06-18 . 
+ ↑ Kunzelman, Cameron (2017-11-17). "Expand Your Dungeons & Dragons Campaign With These Two New Books" . Paste Magazine . Retrieved 2020-06-18 . 
+ ↑ "Modular: Tabletop Terror in the Tomb of Annihilation – Black Gate" . 26 October 2017. 
+ External links [ edit ] 
+ Wizards of the Coast product page 
+ Player Handouts 
+ Adventurers League Tomb of Annihilation Primer 
+ Dragon+ issue 14 (June 28, 2017): Tomb of Annihilation 
+ v t e Dungeons & Dragons rulebooks and accessories TSR modules · Wizards of the Coast adventures Original Dungeons & Dragons Core 
+ Dungeons & Dragons 
+ Chainmail 
+ Supplements 
+ Supplement I: Greyhawk 
+ Supplement II: Blackmoor 
+ Supplement III: Eldritch Wizardry 
+ Supplement IV: Gods, Demi-Gods, and Heroes 
+ Swords & Spells 
+ Basic Dungeons & Dragons Core 
+ Basic Set 
+ Expert Set 
+ Companion Set 
+ Master Rules 
+ Immortals Rules 
+ Rules Cyclopedia 
+ Supplements 
+ Battlesystem 
+ Creature Catalogue 
+ The Shady Dragon Inn 
+ Wrath of the Immortals 
+ Modules 
+ Adventures in Blackmoor 
+ Castle Amber 
+ Castle Caldwell and Beyond 
+ City of the Gods 
+ Combat Shield and Mini-adventure 
+ Curse of Xanathon 
+ Death's Ride 
+ The Duchy of Ten 
+ Earthshaker! 
+ The Endless Stair 
+ The Gem and the Staff 
+ Ghost of Lion Castle 
+ Horror on the Hill 
+ In Search of Adventure 
+ In Search of the Unknown 
+ The Isle of Dread 
+ The Jade Hare 
+ The Keep on the Borderlands 
+ The Kidnapping of Princess Arelina 
+ Legacy of Blood 
+ The Lost City 
+ Master Player Screen 
+ Mystery of the Snow Pearls 
+ Night's Dark Terror 
+ Palace of the Silver Princess 
+ Queen's Harvest 
+ Rahasia 
+ The Revenge of Rusak 
+ Sabre River 
+ Temple of the Frog 
+ Test of the Warlords 
+ The Tree of Life 
+ The Veiled Society 
+ War Rafts of Kron 
+ Where Chaos Reigns 
+ Advanced Dungeons & Dragons Core 
+ Players Handbook (1978) 
+ Dungeon Masters Guide (1979) 
+ Monster Manual (1977) 
+ Supplements 
+ Battlesystem 
+ Deities & Demigods 
+ Dragonlance Adventures 
+ Dungeoneer's Survival Guide 
+ Empires of the Sands 
+ Fiend Folio 
+ Forgotten Realms Campaign Set 
+ Greyhawk Adventures 
+ Lords of Darkness 
+ The Magister 
+ Manual of the Planes 
+ Monster Manual II 
+ Moonshae 
+ Oriental Adventures 
+ The Savage Frontier 
+ Unearthed Arcana 
+ Waterdeep and the North 
+ Wilderness Survival Guide 
+ World of Greyhawk Fantasy Game Setting 
+ Modules 
+ Against the Cult of the Reptile God 
+ Against the Giants 
+ The Assassin's Knot 
+ Assault on the Aerie of the Slave Lords 
+ The Bane of Llywelyn 
+ Beyond the Crystal Cave 
+ Blood of the Yakuza 
+ Bloodstone Pass 
+ The Bloodstone Wars 
+ Castle Greyhawk 
+ Conan Against Darkness! 
+ Conan Unchained! 
+ Danger at Dunwater 
+ Day of Al'Akbar 
+ Deep Dwarven Delve 
+ Descent into the Depths of the Earth 
+ Dragonlance modules 
+ Dragons of Despair 
+ Dungeonland 
+ Dwellers of the Forbidden City 
+ The Final Enemy 
+ The Forest Oracle 
+ Forgotten Temple of Tharizdun 
+ The Gauntlet 
+ The Ghost Tower of Inverness 
+ Glacial Rift of the Frost Giant Jarl 
+ Hall of the Fire Giant King 
+ The Hidden Shrine of Tamoachan 
+ Isle of the Ape 
+ The Land Beyond the Magic Mirror 
+ Lost Caverns of Tsojcanth 
+ The Lost Island of Castanamir 
+ Lost Tomb of Martek 
+ The Mines of Bloodstone 
+ Oasis of the White Palm 
+ Pharaoh 
+ Queen of the Demonweb Pits 
+ Queen of the Spiders 
+ Ravager of Time 
+ Ravenloft 
+ Ravenloft II: The House on Gryphon Hill 
+ Red Sonja Unconquered 
+ Ruins of Adventure 
+ Scourge of the Slave Lords 
+ The Secret of Bone Hill 
+ The Sentinel 
+ Shrine of the Kuo-Toa 
+ Sinister Secret of Saltmarsh 
+ Swords of Deceit 
+ Swords of the Undercity 
+ The Temple of Elemental Evil 
+ The Throne of Bloodstone 
+ To Find a King 
+ Tomb of Horrors 
+ Tomb of the Lizard King 
+ Treasure Hunt 
+ Under Illefarn 
+ Vault of the Drow 
+ The Village of Hommlet 
+ White Plume Mountain 
+ Advanced Dungeons & Dragons 2nd edition Core 
+ Player's Handbook (1989) 
+ Dungeon Master's Guide (1989) 
+ Monstrous Manual 
+ Monstrous Compendium (1989) 
+ Supplements 
+ Anauroch 
+ Arms and Equipment Guide 
+ Battlesystem 
+ Book of Artifacts 
+ The Code of the Harpers 
+ The Complete Book of Dwarves 
+ The Complete Book of Humanoids 
+ The Complete Fighter's Handbook 
+ The Complete Psionics Handbook 
+ The Dalelands 
+ Demihuman Deities 
+ Draconomicon 
+ Drow of the Underdark 
+ Dwarves Deep 
+ Earth, Air, Fire, and Water 
+ Faiths & Avatars 
+ Forgotten Realms Adventures 
+ The Forgotten Realms Atlas 
+ Forgotten Realms Campaign Setting 
+ From the Ashes 
+ Greyhawk: The Adventure Begins 
+ A Guide to the Astral Plane 
+ Hall of Heroes 
+ Heroes' Lorebook 
+ Iuz the Evil 
+ Jungles of Chult 
+ Legends & Lore 
+ The Marklands 
+ Monster Mythology 
+ Old Empires 
+ The Ruins of Undermountain 
+ The Shining South 
+ Tome of Magic 
+ Villains' Lorebook 
+ Adventures 
+ Against the Giants: The Liberation of Geoff 
+ The Bloodstone Lands 
+ Border Watch 
+ The City of Skulls 
+ Crypt of Lyzandred the Mad 
+ Die Vecna Die! 
+ The Doomgrinder 
+ Doom of Daggerdale 
+ Fate of Istus 
+ Five Shall Be One 
+ Gargoyle 
+ Greyhawk Ruins 
+ Halls of the High King 
+ House of Strahd 
+ Howl from the North 
+ Mordenkainen's Fantastic Adventure 
+ Night Below 
+ Patriots of Ulek 
+ Rary the Traitor 
+ Return of the Eight 
+ Return to the Keep on the Borderlands 
+ Return to the Tomb of Horrors 
+ Return to White Plume Mountain 
+ Slavers 
+ The Star Cairns 
+ Treasures of Greyhawk 
+ Vecna Lives! 
+ Dungeons & Dragons 3rd edition Core 
+ Player's Handbook (2000) 
+ Dungeon Master's Guide (2000) 
+ Monster Manual (2000) 
+ Supplements 
+ Arms and Equipment Guide 
+ Book of Challenges 
+ Book of Vile Darkness 
+ Defenders of the Faith 
+ Deities and Demigods 
+ Enemies and Allies 
+ Epic Level Handbook 
+ Faiths and Pantheons 
+ Fiend Folio 
+ Forgotten Realms Campaign Setting 
+ Ghostwalk 
+ Hero Builder's Guidebook 
+ Living Greyhawk Gazetteer 
+ Lords of Darkness 
+ Magic of Faerûn 
+ Monsters of Faerûn 
+ Manual of the Planes 
+ Masters of the Wild 
+ Monster Manual II 
+ Oriental Adventures 
+ Psionics Handbook 
+ Races of Faerûn 
+ Savage Species 
+ Song and Silence 
+ Stronghold Builder's Guidebook 
+ Sword and Fist 
+ Tome and Blood 
+ Adventures 
+ Bastion of Broken Souls 
+ City of the Spider Queen 
+ Deep Horizon 
+ The Forge of Fury 
+ The Fright at Tristor 
+ Heart of Nightfang Spire 
+ Lord of the Iron Fortress 
+ Return to the Temple of Elemental Evil 
+ The Speaker in Dreams 
+ The Standing Stone 
+ The Sunless Citadel 
+ Dungeons & Dragons v3.5 Core 
+ Player's Handbook (2003) 
+ Dungeon Master's Guide (2003) 
+ Monster Manual (2003) 
+ Dungeons & Dragons Basic Game (2004) 
+ Supplements Eberron 
+ An Adventurer's Guide to Eberron 
+ City of Stormreach 
+ Dragonmarked 
+ Dragons of Eberron 
+ Eberron Campaign Setting 
+ Faiths of Eberron 
+ Five Nations 
+ The Forge of War 
+ Sharn: City of Towers 
+ Forgotten Realms 
+ City of Splendors: Waterdeep 
+ Dragons of Faerûn 
+ Drow of the Underdark 
+ The Grand History of the Realms 
+ Lost Empires of Faerûn 
+ Shining South 
+ Underdark 
+ Other 
+ Book of Exalted Deeds 
+ Cityscape 
+ Complete Adventurer 
+ Complete Arcane 
+ Complete Champion 
+ Complete Divine 
+ Complete Mage 
+ Complete Psionic 
+ Complete Scoundrel 
+ Complete Warrior 
+ Draconomicon 
+ Dragon Magic 
+ Dungeon Master's Guide II 
+ Dungeonscape 
+ Elder Evils 
+ Exemplars of Evil 
+ Expanded Psionics Handbook 
+ Fiendish Codex I: Hordes of the Abyss 
+ Fiendish Codex II: Tyrants of the Nine Hells 
+ Frostburn 
+ Heroes of Battle 
+ Heroes of Horror 
+ Libris Mortis 
+ Lords of Madness 
+ Magic Item Compendium 
+ Magic of Incarnum 
+ Miniatures Handbook 
+ Monster Manual III 
+ Monster Manual IV 
+ Monster Manual V 
+ Planar Handbook 
+ Player's Handbook II 
+ Races of Destiny 
+ Races of the Dragon 
+ Races of Stone 
+ Races of the Wild 
+ Rules Compendium 
+ Sandstorm 
+ Spell Compendium 
+ Stormwrack 
+ Tome of Battle: The Book of Nine Swords 
+ Tome of Magic 
+ Unearthed Arcana 
+ Weapons of Legacy 
+ Adventures Eberron 
+ Eyes of the Lich Queen 
+ Grasp of the Emerald Claw 
+ Shadows of the Last War 
+ Voyage of the Golden Dragon 
+ Whispers of the Vampire's Blade 
+ Expedition series 
+ Expedition to Castle Ravenloft 
+ Expedition to the Demonweb Pits 
+ Expedition to the Ruins of Greyhawk 
+ Expedition to Undermountain 
+ Fantastic Locations 
+ City of Peril 
+ Dragondown Grotto 
+ Fane of the Drow 
+ Fields of Ruin 
+ The Frostfell Rift 
+ Hellspike Prison 
+ Other adventures 
+ Barrow of the Forgotten King 
+ Fortress of the Yuan-Ti 
+ Red Hand of Doom 
+ Scourge of the Howling Horde 
+ The Shattered Gates of Slaughtergarde 
+ The Sinister Spire 
+ Dungeons & Dragons 4th edition Core 
+ Player's Handbook (2008) 
+ Dungeon Master's Guide (2008) 
+ Monster Manual (2008) 
+ Sourcebooks Supplements 
+ Arcane Power 
+ Divine Power 
+ Dungeon Master's Guide 2 
+ Draconomicon (Chromatic Dragons & Metallic Dragons) 
+ Martial Power 
+ Martial Power 2 
+ Monster Manual 2 
+ Monster Vault 
+ Player's Handbook 2 
+ Player's Handbook 3 
+ Primal Power 
+ Psionic Power 
+ Essentials 
+ Dungeon Master's Kit 
+ Heroes of the Fallen Lands 
+ Heroes of the Forgotten Kingdoms 
+ Monster Vault 
+ Rules Compendium 
+ Settings 
+ Dark Sun Campaign Setting 
+ Eberron Campaign Guide 
+ Eberron Player's Guide 
+ Forgotten Realms Campaign Guide 
+ Forgotten Realms Player's Guide 
+ Manual of the Planes 
+ Adventures 
+ Assault on Nightwyrm Fortress 
+ Demon Queen's Enclave 
+ Keep on the Shadowfell 
+ King of the Trollhaunt Warrens 
+ Madness at Gardmore Abbey 
+ Marauders of the Dune Sea 
+ Orcs of Stonefang Pass 
+ Prince of Undeath 
+ Pyramid of Shadows 
+ Thunderspire Labyrinth 
+ Tomb of Horrors 
+ Dungeons & Dragons 5th edition Core 
+ Player's Handbook (2014) 
+ Dungeon Master's Guide (2014) 
+ Monster Manual (2014) 
+ Sourcebooks Supplements 
+ Volo's Guide to Monsters 
+ Xanathar's Guide to Everything 
+ Mordenkainen's Tome of Foes 
+ Tasha's Cauldron of Everything 
+ Fizban's Treasury of Dragons 
+ Mordenkainen Presents: Monsters of the Multiverse 
+ Minsc and Boo's Journal of Villainy 
+ Bigby Presents: Glory of the Giants 
+ The Deck of Many Things 
+ Settings 
+ Sword Coast Adventurer's Guide 
+ Guildmasters' Guide to Ravnica 
+ Acquisitions Incorporated 
+ Eberron: Rising from the Last War 
+ Explorer's Guide to Wildemount 
+ Mythic Odysseys of Theros 
+ Van Richten's Guide to Ravenloft 
+ Strixhaven: A Curriculum of Chaos 
+ Spelljammer: Adventures in Space 
+ Planescape: Adventures in the Multiverse 
+ Adventures 
+ Tyranny of Dragons 
+ Hoard of the Dragon Queen 
+ The Rise of Tiamat 
+ Princes of the Apocalypse 
+ Out of the Abyss 
+ Curse of Strahd 
+ Storm King's Thunder 
+ Tomb of Annihilation 
+ Waterdeep
+ Dragon Heist 
+ Dungeon of the Mad Mage 
+ Baldur's Gate: Descent into Avernus 
+ Icewind Dale: Rime of the Frostmaiden 
+ The Wild Beyond the Witchlight 
+ Critical Role: Call of the Netherdeep 
+ Dragonlance: Shadow of the Dragon Queen 
+ Phandelver and Below: The Shattered Obelisk 
+ Vecna: Eve of Ruin 
+ Anthologies 
+ Tales from the Yawning Portal 
+ Ghosts of Saltmarsh 
+ Candlekeep Mysteries 
+ Journeys through the Radiant Citadel 
+ Keys from the Golden Vault 
+ Quests from the Infinite Staircase 
+ Starter sets 
+ Lost Mine of Phandelver 
+ Dragon of Icespire Peak 
+ Dragons of Stormwreck Isle 
+ Dungeons & Dragons 5.5 edition Core 
+ Player's Handbook (2024) 
+ Dungeon Master's Guide (2024) 
+ Monster Manual (2025) 
+ Sourcebooks Supplements 
+ Arcana Unleashed 
+ Settings 
+ Forgotten Realms: Heroes of Faerûn 
+ Eberron: Forge of the Artificer 
+ Ravenloft: The Horrors Within 
+ D&D: World of Warcraft 
+ Adventures 
+ Arcana Unleashed: Deadfall 
+ Anthologies 
+ Dragon Delves 
+ Forgotten Realms: Adventures in Faerûn 
+ Starter & boxed sets 
+ Heroes of the Borderlands 
+ Stranger Things: Welcome to the Hellfire Club 
+ Magazines 
+ Dragon 
+ Dungeon 
+ v t e Dungeons & Dragons Basics General 
+ Adventurers League 
+ Controversies 
+ Editions 
+ Gen Con 
+ Popular culture 
+ Film series 
+ Related products 
+ Retro-clones 
+ Sources and influences 
+ Gameplay 
+ Adventures 
+ Alignment 
+ Attribute 
+ Dungeon Master 
+ Game mechanics 
+ Magic 
+ Magic item 
+ Miniatures 
+ Psionics 
+ Creators 
+ Gary Gygax 
+ Dave Arneson 
+ Keith Baker 
+ Richard Baker 
+ David Cook 
+ Monte Cook 
+ Ed Greenwood 
+ Jeff Grubb 
+ Rob Heinsoo 
+ Tracy Hickman 
+ Harold Johnson 
+ Robert J. Kuntz 
+ Mike Mearls 
+ Frank Mentzer 
+ Tom Moldvay 
+ Chris Perkins 
+ Jon Pickens 
+ Jonathan Tweet 
+ Jim Ward 
+ Margaret Weis 
+ Skip Williams 
+ Steve Winter 
+ Companies 
+ TSR 
+ Wizards of the Coast 
+ Grenadier Models 
+ Judges Guild 
+ Paizo 
+ Ral Partha 
+ Strategic Simulations 
+ WizKids 
+ Licenses 
+ Open Game License 
+ Game System License 
+ System Reference Document 
+ Geography and cosmology Campaign settings 
+ Birthright 
+ Council of Wyrms 
+ Dark Sun 
+ Dragonlance 
+ Dragon Fist 
+ Eberron 
+ Exandria 
+ Forgotten Realms 
+ Faerûn 
+ Al-Qadim 
+ Kara-Tur 
+ Ghostwalk 
+ Greyhawk 
+ Jakandor 
+ Kingdoms of Kalamar 
+ Magic: The Gathering planes 
+ Ravnica 
+ Strixhaven 
+ Theros 
+ Mahasarpa 
+ Mystara 
+ Blackmoor 
+ Savage Coast 
+ Hollow World 
+ Nentir Vale 
+ Pelinore 
+ Planescape 
+ Ravenloft 
+ Masque of the Red Death 
+ Rokugan 
+ Spelljammer 
+ Planes of existence 
+ Material Plane
+ Aebrynis 
+ Abeir-Toril 
+ Athas 
+ Krynn 
+ Eberron 
+ Mystara 
+ Oerth 
+ Underdark 
+ Inner Planes 
+ Outer Planes 
+ Sigil 
+ Characters and beings Races and lineages 
+ Dragonborn 
+ Dwarf 
+ Elf 
+ Drow 
+ Gnome 
+ Half-elf 
+ Half-orc 
+ Halfling 
+ Human 
+ Kender 
+ Tiefling 
+ Warforged 
+ Classes 
+ Artificer 
+ Barbarian 
+ Bard 
+ Cleric 
+ Druid 
+ Fighter 
+ Monk 
+ Paladin 
+ Ranger 
+ Rogue 
+ Sorcerer 
+ Warlock 
+ Wizard 
+ List of alternative classes 
+ Character lists 
+ Dragonlance 
+ Greyhawk 
+ Ravenloft 
+ Notable characters 
+ Alias 
+ Aribeth 
+ Companions of the Hall 
+ Drizzt Do'Urden 
+ Wulfgar 
+ Elminster 
+ Volothamp Geddarm 
+ Gord the Rogue 
+ Iggwilv 
+ Jaheira 
+ Lord Soth 
+ Raistlin Majere 
+ Minsc 
+ Mordenkainen 
+ Sarevok 
+ Tenser 
+ Strahd von Zarovich 
+ Creatures and monsters 
+ Beholders 
+ Centaur 
+ Devils 
+ Dragons 
+ Gelatinous cube 
+ Giants 
+ Goblins 
+ Illithid (mind flayer) 
+ Lich 
+ Mimic 
+ Owlbear 
+ Orcs 
+ Reptilian humanoids 
+ Kobolds 
+ Slaadi 
+ Trolls 
+ Vampires 
+ List of Dungeons & Dragons monsters (1974–76) 
+ List of Dungeons & Dragons monsters (1977–94) 
+ List of 2nd edition monsters 
+ List of 3rd edition monsters 
+ List of 4th edition monsters 
+ Deities and powers 
+ Bahamut 
+ Corellon Larethian 
+ Greyhawk deities 
+ Tharizdun 
+ Vecna 
+ Moradin 
+ Mystra 
+ Tiamat 
+ Publications Core rulebooks 
+ Player's Handbook 
+ Dungeon Master's Guide 
+ Monster Manual 
+ Classic boxed sets 
+ Dungeons & Dragons (original) 
+ Basic 
+ Expert 
+ Companion 
+ Master 
+ Immortals 
+ Rules Cyclopedia 
+ Supplements 
+ Arms and Equipment Guide 
+ Battlesystem 
+ Book of Exalted Deeds 
+ Book of Vile Darkness 
+ Deities & Demigods 
+ Draconomicon 
+ Fiend Folio 
+ Forgotten Realms Campaign Setting 
+ Libris Mortis 
+ Manual of the Planes 
+ Minsc and Boo's Journal of Villainy 
+ Player's Option: Combat & Tactics 
+ Player's Option: Skills & Powers 
+ Player's Option: Spells & Magic 
+ Unearthed Arcana 
+ High-level rules 
+ Wrath of the Immortals 
+ Dungeon Master Option: High-Level Campaigns 
+ Epic Level Handbook 
+ Psionics Handbook 
+ AD&D 2nd edition 
+ D&D 3rd edition 
+ D&D v3.5 Expanded and Complete 
+ Notable modules 
+ List of Eberron modules and sourcebooks 
+ Against the Giants 
+ Dead Gods 
+ Desert of Desolation 
+ Dragonlance 
+ Expedition to the Barrier Peaks 
+ Expedition to the Demonweb Pits 
+ The Gates of Firestorm Peak 
+ The Isle of Dread 
+ The Keep on the Borderlands 
+ The Lost Caverns of Tsojcanth 
+ Queen of the Spiders 
+ Ravenloft 
+ Red Hand of Doom 
+ The Ruins of Undermountain 
+ The Temple of Elemental Evil 
+ Tomb of Horrors 
+ White Plume Mountain 
+ Online tools 
+ D&D Insider 
+ D&D Beyond 
+ Retrieved from " https://en.wikipedia.org/w/index.php?title=Tomb_of_Annihilation&oldid=1353548993 " 
+ Categories : Dungeons & Dragons modules Forgotten Realms adventures Role-playing game supplements introduced in 2017 Hidden categories: Articles with short description Short description is different from Wikidata Wikipedia articles needing context from October 2021 All Wikipedia articles needing context All pages needing cleanup 
+ This page was last edited on 10 May 2026, at 22:40  (UTC) . 
+ Page was rendered with Parsoid . 
+ Text is available under the Creative Commons Attribution-ShareAlike 4.0 License ;
+additional terms may apply. By using this site, you agree to the Terms of Use and Privacy Policy . Wikipedia® is a registered trademark of the Wikimedia Foundation, Inc. , a non-profit organization. 
+ Privacy policy 
+ About Wikipedia 
+ Disclaimers 
+ Contact Wikipedia 
+ Legal & safety contacts 
+ Code of Conduct 
+ Developers 
+ Statistics 
+ Cookie statement 
+ Mobile view 
+ Search 
+ Search 
+ Toggle the table of contents 
+ Tomb of Annihilation 
+ Add languages 
+ Add topic 
+ 

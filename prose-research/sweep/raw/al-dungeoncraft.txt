@@ -1,0 +1,836 @@
+   
+ 
+Not for resale. Permission granted to print or photocopy this document for personal use only.      Dungeoncraft Adventures Guide 1 
+ 
+   
+D&D® ADVENTURERS LEAGUE 
+DUNGEONCRAFT DESIGN GUIDE 
+ 
+Effective Date: May 2025. Version 1.9c (updated June 23, 2025)   
+You can create your own Dungeons & Dragons® adventures for many of the D&D Adventurers League 
+Campaigns. Each campaign has slightly different selections of Resource books, useable monsters, and magic 
+items rewards. However, there are some aspects that are the same for all Dungeoncraft adventures. The first 
+section of this document addresses those issues, followed by sections unique to each campaign. To create your 
+adventure, you also need the adventure template and style guides used for the Dungeoncraft program. 
+Familiarize yourself with the D&D Adventurers League Player's Guide and D&D Adventurers League DM's 
+Guide.* D&D Adventurers League Resources & Links can be found in the D&D Beyond forum. Community 
+members on the official D&D Discord server have early access to guidance updates and an opportunity to review 
+documents before their release on D&D Beyond. 
+CREATING A DUNGEONCRAFT ADVENTURE  
+GENERAL GUIDELINES 
+Dungeoncraft adventures must take place in the 
+world of the featured campaign setting. They may 
+not cross over into other settings or worlds unless 
+specifically included in that campaign’s rules, as 
+listed below. Using a dreamscape or mindscape is 
+not allowed unless the option is included in the 
+specific campaign setting description. While 
+characters suffering from poor choices is certainly 
+reasonable, adventures should not foster an 
+atmosphere of competition between the DM and 
+the players.* 
+TECHNICAL INFORMATION 
+A template is provided for use, including the 
+Community Created D&D Adventurers League 
+logo. You must use this template and follow the 
+formatting standards as presented in the 
+template. This logo must appear on your 
+adventure (see “Additional Guidelines” below). 
+You should be familiar with the D&D Style Guide 
+(also provided) as well. Please review the Wizards 
+and the DMsGuild Content Guidelines. Only you 
+(or a co-designer) can Dungeon Master your 
+adventure until it is published in the Dungeon 
+Master's Guild.  
+ Definitions.  In Dungeoncraft, a designer is the 
+creative decision-maker who authors the story 
+and game design. There are other roles that polish 
+the designers’ words though layout, art, 
+translating, editing, playtest suggestions, et cetera, 
+but designers decide how or if they'll make those 
+changes. Designers have creative control and the 
+final say in their adventure. 
+ Playtesting by Others. You can have one DM at 
+a time run a playtest of your adventure at the 
+same location (including online). They cannot 
+playtest as part of a special event (convention, 
+charity event, etc.).* 
+ Publishing. You have the option to publish your 
+adventure on the Dungeon Masters Guild. If you 
+choose to do so, some Dungeoncraft campaigns 
+have specific end dates; those without an end date 
+must appear for sale within six months of when 
+you first run it for players (not play-testers). 
+There are no exceptions to this rule. When there is 
+a deadline, the time/date given is for the Eastern 
+US time zone. If you do not publish your 
+adventure, you can continue to Dungeon Master it 
+for one year from the first time you run it. After 
+that time, unpublished adventures are no longer 
+available in the D&D Adventurers League. All 
+versions must be sold together, such as 
+translations, accessible, and VTT. If there is an 
+issue with a specific VTT version including a pdf 
+then you need to add a link to your DMsGuild pdf 
+version. 
+ Accessibility. You may create accessible 
+versions in your upload. The template must be 
+one of your downloads, adjusted to use tags, 
+bookmarks, alt text, and accessibility 
+improvements that don't change anything about 
+the appearance. Additionally, you may create a 
+version that does not use the template, using 
+fonts, sizing, formatting, and layout as advised by 
+accessibility experts.   
+    Art and Graphic Design. Your adventure must 
+follow the template provided for layout but may 
+include art and other graphic design elements 
+subject to the terms and conditions of the 
+DMsGuild support site, which has information on 
+ 
+Not for resale. Permission granted to print or photocopy this document for personal use only.      Dungeoncraft Adventures Guide 2 
+ 
+content, format, art,* and various other common 
+creator questions.  
+CRAFTING YOUR ADVENTURE 
+ Adventure Duration.  Your adventure should 
+ideally be written for a two-hour or four-hour 
+play time, not both. Longer adventures are 
+allowed, but they are treated as four-hour 
+adventures for purposes of rewards. You must 
+note your adventure play time in the description 
+of the adventure. One-hour long adventures are 
+limited to Tier 1 (levels 1-2). They may be 
+bundled together when published but should also 
+have separate DC codes.* 
+ Using Monsters. Each campaign has a list of 
+allowed resources for monsters. However, if a 
+monster is included in the Monster Manual 2024 
+that version must be used, this includes using the 
+Monster Conversion list. Those monsters/NPCs 
+that appear in an allowed resource (for a 
+campaign) and have not been included can be 
+used, however if a Campaign Setting is updated 
+and includes monsters those versions are to be 
+used.* Note that if you are using an NPC stat block 
+and need to add racial abilities and /or access to 
+your adventure's magic item, you can annotate it 
+in the body text similarly to as follows: "Hurgett is 
+a gnome cult fanatic with the following 
+characteristics: size Small, speed 25 feet, 
+darkvision 60 feet, and knows the languages 
+Gnomish and Common. A rope of climbing is 
+within her reach." If a monster possesses spells 
+and you want to swap one or more spells of 
+equivalent level, the new spells must come from 
+the Player’s Handbook 2024* as well as being of 
+the same level. Innate spellcasting features cannot 
+have their spells swapped.  
+ Include the spell changes in your annotated 
+summary of changes –
+ do not change the stat 
+block. This information may also be presented as 
+a sidebar below the stat block. Changes that 
+impact the challenge rating of the monster/NPC 
+are not allowed, nor are new creatures. You must 
+use the most recent version or any errata of a 
+product. If you are including Sidekicks in your 
+adventure, they must be from that DC campaign's 
+available resources and appear as published.  
+ Adventure Setting.  Your adventure must take 
+place in the setting designated and cannot destroy 
+major locations or NPCs. Most campaign worlds 
+can have villages/small towns added. If Wizards 
+of the Coast publishes a new version of the 
+campaign setting you are writing in, then that 
+version becomes useable on the day it is available 
+globally.* 
+ Adventure APL . Adventures are created for a 
+specific tier and APL. The APL for Tier 1 
+adventures (levels 1-4) is APL 3, for Tier 2 (levels 
+5-10) it is APL 8, Tier 3 (levels 11-16) it is APL 13, 
+and for Tier 4 (levels 17-20) it is APL 18. 
+ The Book of Many Things . The traps, riddles 
+and puzzles can be used in any Dungeoncraft. The 
+Deck can be used as inspiration for any adventure. 
+Rules with game effects, like Inspiration Hand, 
+cannot be used. The adventure locations cannot 
+be DC settings. 
+ Ghosts of Saltmarsh. The equipment, ships and 
+monsters described in this book can be used in 
+any DC setting. 
+ Vecna Eye of Ruin.  This adventure takes place 
+across several campaign worlds. The Monster 
+descriptions in Appendix A: Bestiary include lore 
+that indicates which world (and thus which 
+campaign) they belong to. For example, while 
+both the warforged warrior and whirling 
+chandler are constructs the former creature is 
+described as being created originally in Eberron, 
+while the latter is not described as such. The stat 
+block for the warfordge warrior can only be used 
+in the Eberron campaign while the whirling 
+chandler can be used in any DC campaign. 
+Creatures not described as being from a specific 
+campaign world/location can be used in any DC. 
+ Quests from the Infinite Staircase . All 
+constructs and those creatures whose lore 
+connects them to the Cynidicean civilization 
+specifically are not allowed in any DC. All others 
+are available for any DC except Zargon the 
+Returner which is limited to FR DC.* 
+REWARDS 
+All campaigns use one of the reward options 
+below for rarity of item awarded (no firearm 
+magic items). In addition, all adventures may 
+reward a Common magic item. Tier limits for each 
+campaign are listed in that campaign appendix.* 
+Consumables can be from any allowed resource 
+for that campaign. The lists below dictate the 
+number and rarity of the magic rewards for the 
+adventure. You may choose a lower rarity item 
+but keep players’ enjoyment in mind.* 
+ 
+Reward Option. 
+• 1-hour tier 1 Intro (levels 1-2): choose 1 
+Common permanent magic item or 1 healing 
+potion and gold is limited to 25 gp.* 
+• 2-hour tier 1 (levels 1-4): choose 1 Uncommon 
+permanent magic* item and up to 3 common 
+consumables or 1 uncommon consumable 
+ 
+Not for resale. Permission granted to print or photocopy this document for personal use only.      Dungeoncraft Adventures Guide 3 
+ 
+• 4-hour tier 1 (levels 1-4): choose 1 Uncommon 
+permanent magic * item and up to 3 common 
+consumables or 1 uncommon consumable. 
+• 2-hour tier 2 (levels 5-10): choose 1 Rare 
+permanent magic * item and up to 3 common 
+consumables or 1 uncommon consumable. 
+• 4-hour tier 2 (levels 5-10): choose 1 Rare 
+permanent magic* item, and up to 3 common or 
+uncommon consumables. 
+• 2-hour tier 3 (levels 11-16): choose 1 Rare 
+permanent magic* item and up to 3 common or 
+uncommon consumables. 
+• 4-hour tier 3 (levels 11-16): choose 1 Very Rare 
+permanent magic* item, and up to 3 uncommon 
+or rare consumables. 
+• 2-hour tier 4 (levels 17-20): choose 1 Very Rare 
+permanent magic* item and up to 4 rare (or 
+lower) consumables. 
+• 4-hour tier 4 (levels 17-20): choose 1 
+Legendary or Very Rare permanent magic* 
+item, and up to 4 rare (or lower) consumables. 
+• Blessings/Charms. You may replace 2 rare 
+consumables with a blessing or charm. Only 1 
+blessing or charm may be awarded in the 
+adventure. The blessing/charm cannot 
+permanently increase an ability or grant access 
+to wish or a similar spell. These 
+blessing/charms* are restricted to those in the 
+Dungeon Master’s Guide 2024* or The Book of 
+Many Things. However, the Charm of Many 
+Things and Blessing of Unearned Riches are not 
+allowed. 
+• Rewarding items of lower rarity: If for some 
+reason you feel it is necessary for plot/logical 
+reasons to reward an item of lower rarity than 
+allowed you may do so on a 1 for 1 basis. This is 
+not recommended. 
+You may add 1 minor property or quirk to each 
+non-consumable magic item (see the Dungeon 
+Master’s Guide 2024, page 223
+*). Properties must 
+come from the tables in the Dungeon Master’s 
+Guide 2024.* Rewards cannot include wish or 
+similar spells, nor can they permanently increase 
+an ability score. If a designer adds a minor 
+property to an item, you must include all 
+necessary information (for example, if using the 
+“key” minor property you must specify which 
+container, chamber, vault, or door it unlocks).* 
+ Determining which Magic Item to choose . 
+All Dungeoncraft campaigns now use the Random 
+Magic Items tables in the DMG 2024 that start on 
+page 326 when choosing which item to include. 
+ Consider your adventure plot when 
+determining the item. Is the item something that 
+is found in the lair of the villain or is it part of the 
+reward from the NPC that hired the party to solve 
+a problem/perform a task? The Monster Manual 
+2024 includes a Treasure Theme listing for each 
+monster/NPC and can be used as a guide for what 
+would be appropriate for similar creatures/NPCs 
+that are not included. The item chosen cannot 
+include wish or similar spells, nor can they 
+permanently increase an ability score. 
+• If a Treasure Theme is listed, then you choose 
+an item from the appropriate theme and rarity. 
+• If it lists “Any” then you can use any of the 
+tables of the appropriate rarity in that section. 
+• If it lists Individual the coins/gems found are 
+part of the Gold Reward (see section below) 
+Hoard/Lair Reward Option (4-hour adventures 
+only). If the villain is fought in its lair and the 
+creature used has a Treasure listed (some 
+creatures don’t) then you can offer more than one 
+item. These items must come from the creature’s 
+treasure list. The item cannot permanently 
+increase an ability or grant access to wish or a 
+similar spell. Note these do not automatically 
+duplicate. For example, if you have a T2 adventure 
+you can offer up to 3 items (items A, B and C) if 
+there are 5 players 2 of them might choose A, 1 
+chooses B and the other two choose C. This 
+information and explanation MUST be included in 
+the adventure. 
+• Tier 1: 2 Uncommon permanent magic items 
+• Tier 2: 3 Rare permanent magic items 
+• Tier 3: 4 Very Rare permanent magic items 
+• Tier 4: 3 Very Rare items and 2 Legendary 
+permanent magic items* 
+Reward consumables in the same amount and 
+rarity as those listed by hours and tier in 
+“Rewards Option.” * 
+ Treasure . Treasure such as coins, gems, art 
+objects, and any other portable mundane 
+valuables with no other practical use than as 
+currency count toward the gold rewards listed. 
+Other portable items listed in the Equipment 
+section of the Player’s Handbook 2024* may also 
+be obtained during the adventure (weapons, 
+armor, and tools). The portable budget for these 
+items is 1,000 gp per tier of play for a four-hour 
+adventure and 500 gp per tier of play for a two-
+hour adventure. Adventuring Gear from the PH 
+2024 valued at less than 50 gp may be awarded. 
+Mounts listed in the PH 2024 valued at less than 
+ 
+Not for resale. Permission granted to print or photocopy this document for personal use only.      Dungeoncraft Adventures Guide 4 
+ 
+100 gp may be awarded. The value of these items 
+in total cannot exceed the budget for that tier. 
+Mundane equipment listed in your adventure’s 
+stat blocks should also not exceed the budget or 
+be noted in the adventure as not rewardable.* 
+Trade goods and vehicles are story items when 
+placed in adventures.   
+ Gold Rewards.  These are based on tier and 
+time. This is total gold for the group, not 
+individual rewards. Treasure such as gems, coins, 
+art objects, and anything else portable that isn’t 
+adventuring gear counts towards the gold 
+rewards listed. Note that the max gold for a 1-
+hour adventure is 25gp.* 
+ 
+GROUP MONETARY REWARDS BY ADVENTURE TIER  
+(2-HOUR PLAY) 
+Tier Min.    Max. 
+1    50 gp   250 gp    
+2 500 gp   2500 gp 
+3 5000 gp  25,000 gp 
+4 25,000 gp 50,000 gp 
+GROUP MONETARY REWARDS BY ADVENTURE TIER  
+(4-HOUR PLAY) 
+Tier Min.    Max. 
+1    100 gp   500 gp    
+2 1000 gp  5000 gp 
+3 10,000 gp 50,000 gp 
+4 50,000 gp 100,000gp 
+ 
+ Story Awards.  These can never provide a 
+mechanical benefit or be used to get around limits 
+to rewards listed above. Frequently it is better to 
+have a note in a sequel adventure for the DM (if 
+the character has played X then they know Y) than 
+to give the player a story award.  
+ Spellbooks. If a creature is an arcane caster, the 
+spells in their book must reflect those in the stat 
+block. If the creature used is from the Monster 
+Manual 2024 and the creature is CR6 or above you 
+can add 2 spells to their book that is not listed 
+(max spell level of 5) in the stat block.* 
+ADDITIONAL GUIDELINES:  
+THE FINE PRINT 
+• At your option, you can publish your adventure 
+on the Dungeon Masters Guild. Until published, 
+only the designers (maximum two individuals) 
+can run the adventure.  
+• The D&D Adventurers League Content 
+Managers do not need to review your adventure 
+for you to run or publish it. 
+• Please include stat blocks for any monster you 
+use in your adventure that does not appear in 
+the Monster Manual. 
+• Adventures must use the template provided.  
+• When published on the Dungeon Masters Guild 
+(or listed in an event program), your adventure 
+must use an adventure code that reflects the 
+setting; for example, an adventure code that 
+starts with EB-DC code identifies it as a 
+Dungeoncraft Adventure intended for use as 
+part of the Eberron campaign. This code should 
+appear in the upper left corner of your cover (If 
+you intend to write multiple adventures, then 
+we suggest that you consider using a three-
+letter identifier in your code, such as the 
+domain name, so people can quickly find them. 
+For example, EB-DC-WAR-01 for the first 
+adventure in a series set during a minor border 
+war between Breland and Thrane.) 
+• The DDAL Community Created logo and the 
+DMsGuild logo must appear on the cover. No 
+other logos should appear on the cover. 
+• All Dungeoncraft Adventures published on the 
+DM’s Guild must abide by the rules provided by 
+the DM’s Guild in terms of content that can be 
+published in that marketplace. 
+• Adventures must be written for a single table of 
+players. These cannot be epics/multi-table 
+events. 
+IMPORTANT: Dungeoncraft Adventures can be 
+removed from the DMsGuild at any time for failing 
+to meet these standards, those prescribed by the 
+DMsGuild, or for any other reason deemed 
+necessary by Wizards of the Coast. Additionally, 
+any designer(s) publishing a Dungeoncraft 
+Adventure on the Dungeon Masters Guild or 
+running one that does not follow these rules can 
+have their ability to continue to create and publish 
+sanctioned content under these rules suspended 
+or revoked. 
+  
+ 
+Not for resale. Permission granted to print or photocopy this document for personal use only.      Dungeoncraft Adventures Guide 5 
+ 
+DRAGONLANCE 
+You can create your own Dungeons & Dragons® 
+adventures for the D&D Adventurers League 
+Dragonlance Campaign. To create your own 
+adventures, you’ll need Dragonlance Shadow of the 
+Dragon Queen in addition to the Dungeon Master’s 
+Guide. The plot of your adventure must include 
+some aspect of the current situation in Krynn as an 
+integral part. Using monsters from Dragonlance 
+Shadow of the Dragon Queen does not fulfill that 
+requirement by itself.  
+ The Adventure code Dragonlance Dungeoncraft 
+must start with DL-DC.  
+ALLOWED RESOURCES 
+ Monsters  Dragonlance Shadow of the Dragon 
+Queen, Monstrous Compendium Vol 1 and Vol 2 (D&D 
+Beyond exclusive), Fizban’s Treasury of Dragons, the 
+Monster Manual 2024,* and Mordenkainen Presents: 
+Monsters of the Multiverse can be sources for 
+creatures and NPCs. 
+ Adventure Setting.  Your adventure must take 
+place in the world of Krynn, whether that is on the 
+continent of Ansalon or any of the distant lands in 
+that world. These stories must all occur in the 
+current timeline of that world as presented in 
+Dragonlance Shadow of the Dragon Queen. Your 
+adventure is not required to have specific 
+connections to previously published novels or 
+campaign adventures. However, your adventure 
+also cannot kill major NPCs presented in the 
+hardcover adventure or other published adventures.  
+ Tiers.  Adventures can be created for either Tier 1, 
+2, or 3 in this campaign. 
+ Rewards.  Consumables can be from Dragonlance 
+Shadow of the Dragon Queen, Fizban’s Treasury of 
+Dragons, the Dungeon Master’s Guide 2024,* Tasha’s 
+Caldron of Everything and Xanathar’s Guide to 
+Everything. Rare and lower rarity permanent magic 
+items from Fizban’s Treasury of Dragons may be 
+used instead of an item from the tables in the 
+DMG2024.* 
+ Gear from page 188 of Dragonlance Shadow of the 
+Dragon Queen can be included in the mundane item 
+budget.* 
+ The Kagonesti Forest Shroud can be used instead 
+of picking an item from the Implements-Rare table.* 
+Rewards of any type* cannot include wish or similar 
+spells, nor can they permanently increase an ability 
+score. 
+EBERRON 
+ 
+To create your own adventures for the D&D 
+Adventurers League Eberron Campaign, you’ll need 
+Eberron: Rising from the Last War. Adventures in the 
+Eberron campaign must take place in the world of 
+Eberron. They may not cross over into other settings. 
+The plot of your adventure must include some aspect 
+of Eberron as an integral part. Using monsters from 
+Eberron: Rising from the Last War does not fulfill that 
+requirement by itself.  
+ The Adventure code for Eberron must start with 
+EB-DC.  
+ALLOWED RESOURCES 
+ Monsters.  Monsters from Monstrous Compendium 
+Vol 1 (D&D Beyond exclusive), Eberron: Rising from 
+the Last War, Fizban’s Treasury of Dragons, the  
+Monster Manual 2024, * Mordenkainen Presents: 
+Monsters of the Multiverse, The Book of Many Things 
+and Bigby Presents: Glory of the Giants can be sources 
+for creatures and NPCs.  
+ Adventure Setting.  Your adventure must take 
+place in the world of Eberron, whether that is on the 
+continent of Khorvaire or any of the distant lands on 
+that world. These stories must all occur in the current 
+timeline of that world, post-Last War. Eberron 
+stories typically include pulp adventure, noir intrigue, 
+or occasionally war stories focused on the aftermath 
+of the Last War on lands and people. Your adventure 
+is not required to have specific connections to 
+previously published Eberron: Oracle of War  
+campaign adventures. 
+ Tiers.  Adventures can be created for either Tier 1, 
+2 ,3 or 4 in this campaign. 
+ Rewards.  Consumables can be from Eberron: 
+Rising from the Last War , Fizban’s Treasury of 
+Dragons, the Dungeon Master’s Guide  2024,* Tasha’s 
+Caldron of Everything, Xanathar’s Guide to Everything.  
+Permanent Uncommon, Rare and Very Rare magic 
+items from Eberron: Rising from the Last War can be 
+be used instead of the lists in the DMG2024.* Rewards 
+of any type* cannot include wish or similar spells, nor 
+can they permanently increase an ability score. 
+  
+ 
+Not for resale. Permission granted to print or photocopy this document for personal use only.      Dungeoncraft Adventures Guide 6 
+ 
+FORGOTTEN REALMS  
+To create your own adventures for the D&D 
+Adventurers League Forgotten Realms Campaign 
+you may need a number of books, including the 
+Sword Coasts Adventurer’s Guide. Not all of those 
+listed in the Allowed Resource section are necessary 
+for any individual adventure. Adventures set in the 
+Forgotten Realms campaign must take place in the 
+world of Toril. The plot of your adventure must 
+include some aspects of Forgotten Realms as an 
+integral part. The purpose of this part of the 
+Dungeoncraft program is to explore the world of the 
+Forgotten Realms.  
+ The Adventure code for Forgotten Realms 
+Dungeoncraft must start with FR-DC.  
+ While Spelljammer and Planescape campaigns 
+may cross over into Toril these adventures may not 
+cross into those or any other settings. All 
+Adventures must be set after 1489. 
+ALLOWED RESOURCES.  
+ Monsters . Fizban’s Treasury of Dragons, the 
+Monster Manual 2024,* The Book of Many Things, 
+Bigby Presents: The Glory of Giants, and 
+Mordenkainen Presents: Monsters of the Multiverse 
+can be sources for creatures and NPCs. Creatures 
+that appear in a Forgotten Realms hardcover 
+adventure may also be used.  
+ Adventure Setting. The Sword Coast Adventurer’s 
+Guide, and any Wizards of the Coast 5e adventure or 
+Starter Set that occurs in a location within the 
+Forgotten Realms can be used. The criteria for 
+determining if the book is included for setting 
+purposes is: does it describe a location that is 
+exclusive to the Forgotten Realms setting? If that 
+book also includes locations that did not originate in 
+the Forgotten Realms, then those locations, while 
+available for campaign play, are not available 
+locations for FR-DC. Other Forgotten Realms 
+Campaign setting sources published on the 
+DMsGuild may also be used as long as they do not 
+contradict official products. Your adventure is not 
+required to have specific connections to previously 
+published Forgotten Realms campaign adventures. 
+There are a few regions in the Forgotten Realms 
+where you may not place your adventure, the 
+Moonshae Isles, the Border Kingdoms, Evereska, 
+Najara and Murghôm. Additional areas may be 
+added to this list, but adventures already published 
+will be grandfathered in that instance. Hardcover 
+adventures that may be included in the DDAL 
+Forgotten Realms campaign but as such are not 
+included. Also note that the Acquisitions 
+Incorporated book is not included (for legal 
+reasons). 
+ Tiers.  Adventures can be created for either Tier 1, 
+2, 3, or 4* in this campaign. 
+ Rewards.  Consumables can be from Phandelver 
+and Below: The Shattered Obelisk, The Book of Many 
+Things, Sword Coasts Adventurer’s Guide, Fizban’s 
+Treasury of Dragons, the Dungeon Master’s Guide 
+2024,* Tasha’s Caldron of Everything, and Xanathar’s 
+Guide to Everything. Permanent magic items that are 
+Very Rare and below from Tasha’s Cauldron of 
+Everything or items that are Rare and below from 
+Phandelver and Below: The Shattered Obelisk may be 
+substituted for an item from the Random Magic Item 
+tables.* Rewards of any type* cannot include wish or 
+similar spells, nor can they permanently increase an 
+ability score.  
+ 
+Not for resale. Permission granted to print or photocopy this document for personal use only.      Dungeoncraft Adventures Guide 7 
+ 
+PLANESCAPE  
+To create your own adventures for the D&D 
+Adventurers League Forgotten Realms Campaign 
+you need Planescape: Adventures in the Multiverse. 
+The Adventure code for Planescape Dungeoncraft 
+must start with PS-DC.  
+ Planescape is considered to be part of the larger 
+Forgotten Realms campaign for Player Characters. 
+Dungeoncraft adventures must focus on the 
+Planescape setting. Encounters on Toril are limited 
+to Adventure Hooks, Call to Action, and Conclusions. 
+The focus should be on Sigil and the Outlands, 
+though travel to other planes can be included. 
+Remember, IP that belongs to other companies, such 
+as Blizzard Entertainment’s Azeroth, or author's IP, 
+such as Terry Pratchett’s Ankh-Morpork, can’t be 
+used. 
+ The Adventure code for Planescape Dungeoncraft 
+must start with PS-DC. 
+ALLOWED RESOURCES 
+ Monsters.  Morte’s Planar Parade, Fizban’s 
+Treasury of Dragons, and the Monster Manual 2024.* 
+The Book of Many Things, Bigby Presents: Glory of the 
+Giants, and Mordenkainen Presents: Monsters of the 
+Multiverse can be sources for creatures and NPCs. 
+ Adventure Setting Resources.  Planescape: 
+Adventures in the Multiverse is your source for this 
+campaign setting; however, you should not be 
+writing adventures that intersect with the adventure 
+in the set. While earlier Planescape books can be 
+used for flavor or inspiration, do not contradict the 
+information presented in the current version. Also, 
+do not destroy a plane. Consider the themes 
+presented and the philosophies of each plane when 
+creating your adventure. 
+ Tiers.  Adventures can be created for either Tier 1, 
+2 ,3, or 4 in this campaign. 
+ Rewards.  Consumables can be from Planescape: 
+Adventures in the Multiverse, the Dungeon Master’s 
+Guide 2024, The Book of Many Things, Tasha’s 
+Caldron of Everything, and Xanathar’s Guide to 
+Everything. Uncommon or Rare permanent items 
+from Planescape: Adventures in the Multiverse, may 
+be used instead of an item from the tables in the 
+DMG2024.* Rewards of any kind* cannot include 
+wish or similar spells, nor can they permanently 
+increase an ability score. 
+RAVENLOFT  
+Adventures in the Ravenloft campaign must take 
+place in the Domains of Dread and may not cross 
+over into other settings. The plot of your adventure 
+must include some aspect of Ravenloft as an integral 
+part. Using monsters from Van Richten’s Guide to 
+Ravenloft does not fulfill that requirement by itself. 
+ The Adventure code for Ravenloft Dungeoncraft 
+must start with RV-DC.  
+ALLOWED RESOURCES 
+ Monsters.  Monsters from Monstrous Compendium 
+Vol 1 (D&D Beyond exclusive), Van Richten’s Guide to 
+Ravenloft, Curse of Strahd, Fizban’s Treasury of 
+Dragons, the Monster Manual 2024, The Book of 
+Many Things (Undead Only, no Grim Champions),* 
+Mordenkainen Presents: Monsters of the Multiverse, 
+Bigby Presents: Glory of the Giants and Tomb of 
+Annihilation can be sources for creatures and NPCs. 
+If a monster/NPC has been updated the most recent 
+version must be used. 
+ Ravenloft Lineages as NPCs. For this series of 
+adventures, NPC stat blocks that have the 
+requirement that the creature is humanoid may also 
+swap to hexblood in addition to any humanoid races. 
+ Adventure Setting Resources.  Your adventure 
+must take place in the domains of Ravenloft, as 
+described in Van Richten’s Guide to Ravenloft, or a 
+Domain of Dread of your own creation using the 
+rules provided in Chapter Two of that book. Your 
+adventure is not required to have specific 
+connections to the previously published DDAL 
+Ravenloft: Mist Hunters campaign adventures. 
+ Additional Concerns.  
+Ravenloft stories frequently 
+deal with mature themes. As such, you are 
+encouraged to use safety tools and discuss with your 
+players ways to minimize the chances of negative 
+experiences for you and your players. 
+ Tiers.  Adventures can be created for either Tier 1, 
+2, or 3 in this campaign.  
+ Rewards.  Consumables can be from any allowed 
+Ravenloft Campaign source. Only two consumables 
+per adventure can be smokepowder (Which is 
+awarded in a packet of five shots and includes 
+bullets. While the bullets are not magical, in this 
+instance, they are included with the smokepowder. 
+To simplify accounting, deduct 6 gp (the cost of 20 
+bullets) from the portable item budget explained in 
+the Creating a Dungeoncraft Adventure, Rewards 
+section above when awarding this consumable. 
+Uncommon permanent items from Van Richten’s 
+Guide to Ravenloft may be used instead of an item 
+from the tables in the DMG2024.* 
+ Firearms. See PH2024 for mundane firearms that 
+may be included. The value of the firearm is included 
+in the adventuring gear budget discussed above.*
+ 
+Not for resale. Permission granted to print or photocopy this document for personal use only.      Dungeoncraft Adventures Guide 8 
+ 
+SPELLJAMMER  
+You can create your own Dungeons & Dragons® 
+adventures for the D&D Adventurers League 
+Forgotten Realms Campaign using Spelljammer: 
+Adventures in Space. To create your own 
+adventures, you’ll need the Astral Adventurer’s 
+Guide and Boo’s Astral Menagerie from that 
+product. The Adventure code for Spelljammer 
+Dungeoncraft must start with SJ-DC.* 
+ALLOWED RESOURCES 
+ Monsters.  Monsters from Monstrous 
+Compendium Vol 1 (D&D Beyond exclusive), Boo’s 
+Astral Menagerie (part of the Spelljammer: 
+Adventures in Space product), Fizban’s Treasury of 
+Dragons, The Book of Many Things, Bigby Presents: 
+Glory of the Giants, the Monster Manual 2024,* and 
+Mordenkainen Presents: Monsters of the 
+Multiverse can be sources for creatures and NPCs. 
+You are allowed to add “Unusual Nature: Creature 
+does not need air” to a creature (as stated in Boo’s 
+Astral Menagerie) without changing CR. This 
+change should not be made in the stat block as per 
+normal. 
+ Spelljammer Races as NPCs. For this series of 
+adventures, NPC stat blocks that have the 
+requirement that the creature is humanoid may 
+also swap to any of the following races in addition 
+to any humanoid races: autognome, plasmoid, and 
+thri-keen.  
+ Adventure Setting.  While your adventure might 
+start or end in the Forgotten Realms, traveling to 
+places outside of Toril via Wildspace and/or the 
+Astral Sea must be a primary aspect of the 
+adventure. You may use Realmspace. a Wildspace 
+system(s) you create, or the ones presented in the 
+Spelljammer adventure. The adventure could take 
+place entirely in Wildspace or the Astral Sea.  
+ Tiers.  Adventures can be created for either Tier 
+1, 2, or 3 in this campaign.  
+ Rewards.  Consumables can be from 
+Spelljammer: Adventures in Space, the Dungeon 
+Master’s Guide 2024,* The Book of Many Things, 
+Tasha’s Cauldron of Everything, and Xanathar’s 
+Guide to Everything. Only two* consumables per 
+adventure can be smokepowder (Which is 
+awarded in a packet of five shots and includes 
+bullets). While the bullets are not magical, in this 
+instance they are included with the smokepowder. 
+To simplify accounting deduct 6 gp (the cost of 20 
+bullets) from the portable item budget explained 
+in the Creating a Dungeoncraft Adventures, 
+Rewards section above when awarding this 
+consumable. The following items from 
+Spelljammer: Adventures in Space may be 
+substituted for an item of that rarity from the 
+Random Magic Item tables: Wildspace Orrery 
+(Uncommon) or Fish Suit (Very Rare).* Rewards 
+of any type* cannot include wish or similar spells, 
+nor can they permanently increase an ability 
+score. 
+ Firearms. See PH2024 for mundane firearms 
+that may be included. The value of the firearm is 
+included in the adventuring gear budget discussed 
+above.* 
+THE WILD BEYOND THE 
+WITCHLIGHT 
+The original Dungeoncraft season for this 
+adventure included an experiment for some 
+design elements which had some uneven results 
+for everyone involved. New adventures in the 
+Feywild can be set in the areas described in The 
+Wild Beyond the Witchlight adventure, a domain 
+you previously published or a more generic 
+Feywild location. However, new WBW adventures 
+have restrictions: 
+• No Fey Pacts 
+• No new Domains. If you created a Domain and 
+published the adventure, you can continue 
+using it 
+• No new archfey 
+When published on the Dungeon Masters Guild 
+(or listed in an event program), your adventure 
+must use the WBW-DC code to identify it as a 
+Dungeoncraft Adventure. 
+ Monsters.  You can use monsters suggested in 
+the Domain Denizens table that are in the Monster 
+Manual 2024, The Book of Many Things (Fey only), 
+Mordenkainen Presents: Monsters of the 
+Multiverse,*  and The Wild Beyond the Witchlight. 
+You cannot use the archfey presented in Domains 
+of Delight. 
+ Canonical Elements.  It is important to note that 
+while your adventure can use locations presented 
+in the TWBTW adventure, you cannot significantly 
+change locations or major NPCs.  
+ Tiers.  Adventures can be created for either Tier 
+1, 2, or 3 in this campaign.*   
+ 
+Not for resale. Permission granted to print or photocopy this document for personal use only.      Dungeoncraft Adventures Guide 9 
+ 
+ Rewards.  Consumables can be from The Wild 
+Beyond the Witchlight, The Book of Many Things,  
+Fizban’s Treasury of Dragons, the Dungeon 
+Master’s Guide 2024,* Tasha’s Caldron of 
+Everything, and Xanathar’s Guide to Everything. 
+Permanent magic items that are Rare and below 
+from The Wild Beyond the Witchlight may be 
+substituted for an item from the Random Magic 
+Item tables.* Rewards of any type* cannot include 
+wish or similar spells, nor can they permanently 
+increase an ability score 
+*CHANGE LOG 
+April 2025 
+• Replace all references of DMG to DMG2024 
+• Replaced all references of PH to PH2024 
+• Replaced all references of MM to MM2024 
+• In General section: updated effective date,  
+• Added option for 1-hour adventures with 
+guidance for bundling when published. 
+• Updating guidance on magic items for tier & 
+length of adventure using DMG2024 
+• Guidance for magic item selection based on 
+MM2024 and DMG2024 
+• Added option for I hour tier 1 adventures. 
+• Added option for hoard treasure items 
+• Removed tables from each section 
+• Add campaign specific options for permeant 
+magic items 
+• Those campaigns that include smokepowder as 
+an option for consumable reward can now 
+reward 2 sets. 
+• Revised verbiage in Ravenloft appendix (yes 
+you can still use the Tarroka Deck, it is part of 
+Ravenloft and doesn’t really require a specific 
+call out IMO). 
+• Removed Planescape publishing dates 
+• Returned Spelljamming and The Wild Beyond 
+the Witchlight with some adjustments 
+ 
+May 2025 
+• Added missing information (SJ-DC, WBW-DC's 
+tiers, no firearm magic items, DMG2024 minor 
+property example)  
+• Corrected spelling errors and Moonshae Isles as 
+an unavailable setting 
+• Added the BMT and MPMM as monster 
+resources. 
+• Added SJ firearm guidance 
+ 
+June 2025 
+• Rewards: Added al-rules-compendium guidance 
+on rewarding lower rarity items. 
+• Hoard/Lair Reward Option: Corrected treasure 
+list number of items 
+• Clarified permanent item rewards 
+ 

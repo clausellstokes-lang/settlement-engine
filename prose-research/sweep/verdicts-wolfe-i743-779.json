@@ -1,0 +1,241 @@
+{
+ "name": "wolfe",
+ "chunk": 10,
+ "claims": [
+  {
+   "index": 743,
+   "feature": "sentence length variation",
+   "claim": "Across the four samples the angle named, narration-only mean sentence length falls from 32.98 words in 1972 to 17.28 in 1980, 14.61 in 2013 and 10.99 in 2015.",
+   "source": "Opus finder measurement over the four hosted excerpts, narration-only pass (every sentence containing a quotation mark dropped, first ~2,000 remaining words)",
+   "url": "https://www.torforgeblog.com/2022/09/07/excerpt-reveal-the-fifth-head-of-cerberus-by-gene-wolfe/",
+   "quote": "",
+   "page": "derived across four excerpt pages"
+  },
+  {
+   "index": 744,
+   "feature": "sentence length variation",
+   "claim": "A fifth sample breaks the monotone reading: the same narrator, E. A. Smithe, averages 10.99 words per narration sentence in the 2015 A Borrowed Man excerpt and 15.96 in the 2020 Interlibrary Loan excerpt, a difference of 4.97 words at a Welch t of minus 3.52.",
+   "source": "Opus finder measurement over the Reactor A Borrowed Man excerpt and the Tor/Forge Interlibrary Loan excerpt, narration-only pass",
+   "url": "https://www.torforgeblog.com/2020/05/08/excerpt-interlibrary-loan-by-gene-wolfe/",
+   "quote": "",
+   "page": "derived across two excerpt pages"
+  },
+  {
+   "index": 745,
+   "feature": "sentence length variation",
+   "claim": "The one decisive shift in the sampled career is 1972 to 1980: narration mean sentence length falls 15.70 words at a Welch t of 5.68, while the 1980 to 2013 step is 2.67 words at a Welch t of 1.89.",
+   "source": "Opus finder measurement over the four hosted excerpts, narration-only pass",
+   "url": "https://www.torforgeblog.com/2021/06/07/excerpt-shadow-claw/",
+   "quote": "",
+   "page": "derived"
+  },
+  {
+   "index": 746,
+   "feature": "sentence length variation",
+   "claim": "Twenty-nine per cent of the sentences in the 1972 sample run over forty words, against 2.7 per cent in the 1980 sample, 1.4 per cent in 2013 and none in 2015.",
+   "source": "Opus finder measurement over the four hosted excerpts, all-sentence pass",
+   "url": "https://www.torforgeblog.com/2022/09/07/excerpt-reveal-the-fifth-head-of-cerberus-by-gene-wolfe/",
+   "quote": "",
+   "page": "derived across four excerpt pages"
+  },
+  {
+   "index": 747,
+   "feature": "cadence and rhythm",
+   "claim": "The Shadow of the Torturer narration is the most variable of the four samples in sentence length, with a coefficient of variation of 0.769 against 0.586 for the 1972 novella, 0.558 for The Land Across and 0.656 for A Borrowed Man.",
+   "source": "Opus finder measurement over the four hosted excerpts, narration-only pass",
+   "url": "https://www.torforgeblog.com/2021/06/07/excerpt-shadow-claw/",
+   "quote": "",
+   "page": "derived across four excerpt pages"
+  },
+  {
+   "index": 748,
+   "feature": "other: parenthetical density",
+   "claim": "The share of narration sentences carrying a parenthesis or a dash falls from 22.6 per cent in the 1972 sample to 7.6 per cent in 1980, 3.6 per cent in 2013 and 2.2 per cent in 2015.",
+   "source": "Opus finder measurement over the four hosted excerpts, narration-only pass",
+   "url": "https://www.torforgeblog.com/2022/09/07/excerpt-reveal-the-fifth-head-of-cerberus-by-gene-wolfe/",
+   "quote": "",
+   "page": "derived across four excerpt pages"
+  },
+  {
+   "index": 749,
+   "feature": "parataxis vs hypotaxis",
+   "claim": "Finite subordinate-clause markers fall from 1.61 per narration sentence in the 1972 sample to 0.57 in 1980, 0.59 in 2013 and 0.46 in 2015, while per hundred words the same count is roughly flat at 4.79, 2.94, 4.00 and 4.57.",
+   "source": "Opus finder measurement over the four hosted excerpts",
+   "url": "https://www.torforgeblog.com/2022/09/07/excerpt-reveal-the-fifth-head-of-cerberus-by-gene-wolfe/",
+   "quote": "",
+   "page": "derived across four excerpt pages"
+  },
+  {
+   "index": 752,
+   "feature": "dialogue register",
+   "claim": "Sentences carrying quoted speech are 34.2 per cent of the Shadow of the Torturer chapter-one sample and 1.6 per cent of the 1972 Fifth Head of Cerberus sample.",
+   "source": "Opus finder measurement over the two hosted excerpts",
+   "url": "https://www.torforgeblog.com/2021/06/07/excerpt-shadow-claw/",
+   "quote": "",
+   "page": "derived"
+  },
+  {
+   "index": 753,
+   "feature": "dialogue register",
+   "claim": "Only 34.0 per cent of the quoted-speech sentences in the Shadow of the Torturer sample also carry a speech verb, giving 8.47 tagged-speech sentences per thousand words.",
+   "source": "Opus finder measurement over the Tor/Forge 'Shadow & Claw' excerpt",
+   "url": "https://www.torforgeblog.com/2021/06/07/excerpt-shadow-claw/",
+   "quote": "“The guard has gone.” Thus my friend Roche spoke to Drotte",
+   "page": "excerpt body, second paragraph"
+  },
+  {
+   "index": 754,
+   "feature": "other: long-sentence extremes",
+   "claim": "The two sentences a reader picked from page fifteen of Peace to demonstrate Wolfe's difficulty run to 56 and 181 words as quoted on her page.",
+   "source": "Opus finder count over the two passages quoted in the Tree Slices review of Peace",
+   "url": "https://treeslices.wordpress.com/2016/08/20/peace-by-gene-wolfe/",
+   "quote": "Peace starts out with some wonderful, long, complex sentences.",
+   "page": "review body, before the block quotations"
+  },
+  {
+   "index": 755,
+   "feature": "other: reader difficulty",
+   "claim": "A reader reviewing Peace says she had to read the page-fifteen sentence nearly ten times before she could grasp what it was saying.",
+   "source": "Tree Slices, reader review of Peace",
+   "url": "https://treeslices.wordpress.com/2016/08/20/peace-by-gene-wolfe/",
+   "quote": "read over nearly ten times before I could actually grasp",
+   "page": "review body"
+  },
+  {
+   "index": 768,
+   "feature": "cadence and rhythm",
+   "claim": "Garvey says the transitions in The Shadow of the Torturer are so understated that a climax peaks and falls seemingly without incident.",
+   "source": "Tyler Garvey, BSU Honors Thesis 162",
+   "url": "https://vc.bridgew.edu/honors_proj/162/",
+   "quote": "transitions so understated that when a climax comes it peaks and falls",
+   "page": "p. 12"
+  },
+  {
+   "index": 777,
+   "feature": "parataxis vs hypotaxis",
+   "claim": "Gordon says the sentence structure of The Book of the New Sun works not to obfuscate but to illustrate.",
+   "source": "Joan Gordon, Gene Wolfe (Starmont Reader's Guide 29, Starmont House, 1986)",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/1986-gordon-genewolfe.pdf",
+   "quote": "its language does, not to obfuscate but to",
+   "page": "ch. VIII, p. 76"
+  },
+  {
+   "index": 778,
+   "feature": "sentence length variation",
+   "claim": "Gordon measures the opening paragraph of The Shadow of the Torturer and reports that its first sentence is eleven words long.",
+   "source": "Joan Gordon, Gene Wolfe (Starmont Reader's Guide 29, Starmont House, 1986)",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/1986-gordon-genewolfe.pdf",
+   "quote": "the first sentence is fairly short (eleven words)",
+   "page": "ch. VIII, p. 76"
+  },
+  {
+   "index": 779,
+   "feature": "sentence length variation",
+   "claim": "Gordon reports the two remaining sentences of that opening paragraph as thirty-two words and twenty-seven words.",
+   "source": "Joan Gordon, Gene Wolfe (Starmont Reader's Guide 29, Starmont House, 1986)",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/1986-gordon-genewolfe.pdf",
+   "quote": "(thirty—two words and twenty—seven words)",
+   "page": "ch. VIII, p. 76"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 743,
+   "verdict": "PARTIAL",
+   "trueWording": "Replication: 31.50, 18.50, 14.82, 11.66 narration words per sentence.",
+   "unsupportedLimb": "the exact decimals 32.98 (1972) and 17.28 (1980)",
+   "note": "All four excerpt pages reached raw (Tor/Forge blocked live with 403; Fifth Head and Shadow & Claw via Wayback id_ captures 20260315150230 and 20240715194845; The Land Across and A Borrowed Man from reactormag.com). Independent narration-only pass over the same raw excerpt bodies (sentences containing a quotation mark dropped, first ~2,000 remaining words) gives means 31.50 / 18.50 / 14.82 / 11.66. The monotone fall from about 33 to about 11 words is confirmed; the 1972 and 1980 decimals miss by 1.48 and 1.22 words, so the figures are splitter-dependent and should not be quoted to two decimals. Only the Fifth Head URL was cited for a claim derived across four pages."
+  },
+  {
+   "index": 744,
+   "verdict": "PARTIAL",
+   "trueWording": "Replication: 11.66 versus 17.57; gap 5.91 words, Welch t minus 3.89.",
+   "unsupportedLimb": "the figures 10.99, 15.96, 4.97 and t minus 3.52",
+   "note": "Both pages reached raw (Interlibrary Loan via Wayback id_ 20260114144551; A Borrowed Man from reactormag.com). Both pages do name E. A. Smithe as the borrowed-person narrator, so the same-narrator limb holds, and the direction is confirmed: narration sentences are longer in the 2020 excerpt than the 2015 one, difference significant. My pass gives 11.66 vs 17.57, a gap of 5.91 at Welch t minus 3.89, against the claimed 10.99 / 15.96 / 4.97 / minus 3.52. Note the Interlibrary Loan excerpt yields only about 1,423 narration words, so the ~2,000-word cap never binds on that sample and the figure rests on a smaller base than the others."
+  },
+  {
+   "index": 745,
+   "verdict": "PARTIAL",
+   "trueWording": "Replication: 1972-1980 gap 13.00 words, t 4.96; 1980-2013 t 2.54.",
+   "unsupportedLimb": "that 1972-to-1980 is the ONE decisive shift (1980-2013 replicates at t 2.54, not 1.89)",
+   "note": "Four excerpt pages reached raw. The larger limb holds: the 1972-to-1980 step is much the biggest single fall. But the contrast the claim rests on does not survive an independent pass — my 1980-to-2013 step is 3.67 words at Welch t 2.54, nominally significant, and the 2013-to-2015 step is 3.16 words at t 3.55. So 'the one decisive shift in the sampled career' overstates what the raw text supports; at least three of the four steps clear conventional significance in replication. Claimed figures 15.70/t 5.68 and 2.67/t 1.89 also do not reproduce (13.00/t 4.96 and 3.67/t 2.54)."
+  },
+  {
+   "index": 746,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Replication: 28.1, 2.8, 1.4 and 0.0 per cent over forty.",
+   "note": "Four excerpt pages reached raw. An all-sentence pass over the first ~2,000 words of each excerpt body gives long-sentence (over forty words) shares of 28.1 per cent (1972), 2.8 (1980), 1.4 (2013) and 0.0 (2015) — matching the claimed 29 / 2.7 / 1.4 / none within rounding on every sample, and matching the 'none in 2015' limb exactly. Caveat for reuse: the figures hold only for the first ~2,000 words. Over the whole hosted excerpts the 1972 share is 16.5 per cent and the 1980 share 7.2 per cent, because both excerpts turn dialogue-heavy later."
+  },
+  {
+   "index": 747,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Replication CVs 0.582, 0.718, 0.546, 0.626; Shadow the most variable.",
+   "note": "Four excerpt pages reached raw. The rank claim — Shadow of the Torturer narration the most variable of the four in sentence length — is confirmed by an independent narration-only pass. My coefficients of variation are 0.582 (1972), 0.718 (1980), 0.546 (Land Across) and 0.626 (A Borrowed Man), against the claimed 0.586 / 0.769 / 0.558 / 0.656. Three of the four land within 0.03; the 1980 value is 0.05 low in replication but still the highest of the four, so the ordering and the point stand."
+  },
+  {
+   "index": 748,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Replication: 21.9, 9.2, 3.7 and 2.9 per cent.",
+   "note": "Four excerpt pages reached raw. An independent narration-only pass counting sentences that carry a parenthesis or a dash gives 21.9 per cent (1972), 9.2 (1980), 3.7 (2013) and 2.9 (2015), against the claimed 22.6 / 7.6 / 3.6 / 2.2. The monotone tenfold fall is reproduced and three of four figures land within 1.6 points, so the claim is sound as substance; treat the decimals as approximate."
+  },
+  {
+   "index": 749,
+   "verdict": "PARTIAL",
+   "trueWording": "Replication: 1.66, 0.84, 0.66, 0.58 per sentence; per-100-words 5.26, 4.56, 4.46, 4.99.",
+   "unsupportedLimb": "the 1980 figures — 0.57 per sentence and especially 2.94 per hundred words",
+   "note": "Four excerpt pages reached raw. The two-part shape of the claim is confirmed: finite subordinate-clause markers per narration sentence collapse after 1972 (mine 1.66 to 0.84 / 0.66 / 0.58) while the per-hundred-word rate stays roughly flat (mine 5.26 / 4.56 / 4.46 / 4.99). But the claimed 1980 pair does not reproduce — 2.94 per hundred words would be a real dip and my pass gives 4.56, which is what makes the 'roughly flat' reading true rather than an exception. Marker-list choice drives the absolute level, so the per-sentence/per-100-words contrast is reusable and the individual decimals are not."
+  },
+  {
+   "index": 752,
+   "verdict": "PARTIAL",
+   "trueWording": "Replication: 44.4 and 3.1 per cent in first-2,000-word windows.",
+   "unsupportedLimb": "the figures 34.2 and 1.6 per cent, and the unstated window they depend on",
+   "note": "Both pages reached raw. The contrast is confirmed — the Shadow of the Torturer chapter-one sample is dialogue-dense and the 1972 Fifth Head opening almost dialogue-free. The figures are window-dependent and do not reproduce: over the first ~2,000 words I get 44.4 per cent (Shadow) and 3.1 per cent (Fifth Head); over the whole hosted excerpts the shares are 23.7 and 25.9 per cent. The 1.6 per cent figure is only near-true inside an unstated 2,000-word window; anyone applying it to the Fifth Head excerpt as a whole would be off by a factor of sixteen. The claimed pair is internally consistent with claim 753 (about 50 quoted of about 146 sentences), so the finder's splitter counted fewer quoted sentences than mine."
+  },
+  {
+   "index": 753,
+   "verdict": "PARTIAL",
+   "trueWording": "Replication: 34.4 per cent tagged; 11.0 per thousand words.",
+   "unsupportedLimb": "the rate of 8.47 tagged-speech sentences per thousand words",
+   "note": "Page reached raw via Wayback id_ capture 20240715194845. The supplied quotation is verbatim on the page — the excerpt's second paragraph reads exactly 'The guard has gone.' Thus my friend Roche spoke to Drotte, before continuing 'who had already seen it for himself.' The headline share replicates well: in the first ~2,000 words I find 34.4 per cent of quoted-speech sentences also carry a speech verb, against the claimed 34.0. The density limb does not: I count 11.0 tagged-speech sentences per thousand words in that same window, and 4.31 per thousand across the whole excerpt — 8.47 falls between the two and matches neither."
+  },
+  {
+   "index": 754,
+   "verdict": "PARTIAL",
+   "trueWording": "\"Peace starts out with some wonderful, long, complex sentences.\"",
+   "unsupportedLimb": "the 56-word count (the passage is 55 whitespace tokens) and the reviewer's gender",
+   "note": "Page fetched live, HTTP 200. The supplied quotation is verbatim, and the surrounding sentence supports the rest: the reviewer introduces 'the one from page 15' and then 'Or this sentence, further down the same page', so both passages are page-fifteen sentences offered as evidence of difficulty. The second block quotation counts 181 words exactly. The first counts 55 whitespace tokens, reaching 56 only if the en-dash-joined pair near the close is split into two; it also opens with the reviewer's own bracketed substitution for the novel's pronoun. Separately, the post is unsigned except for the handle cernstlomond and uses only 'I'; neither the post nor the site's About page supports 'her'."
+  },
+  {
+   "index": 755,
+   "verdict": "PARTIAL",
+   "trueWording": "\"read over nearly ten times before I could actually grasp\"",
+   "unsupportedLimb": "the reviewer's gender ('she') — the unsigned post says only 'I'",
+   "note": "Page fetched live, HTTP 200. The quotation is verbatim and in context: the reviewer offers to drag up the sentence from page 15 that she had to read over nearly ten times before actually grasping what it was saying. Every substantive limb — the page-fifteen sentence, nearly ten readings, failure to grasp it — is on the page. The only unsupported limb is the pronoun: the post is signed with the handle cernstlomond, uses first person throughout, and neither it nor the site's About page states the author's gender. Safe to reuse if recast as 'a reader' or 'the reviewer'."
+  },
+  {
+   "index": 768,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"transitions so understated that when a climax comes it peaks and falls\"",
+   "note": "The Bridgewater landing page was fetched live but the bepress viewcontent PDF returns 403; recovered as a raw PDF via the Wayback id_ capture 20240724062531 and text-extracted. The thesis is confirmed as Garvey's Item 162. The sentence appears in the discussion of the botanical-gardens episode and names the book explicitly: it says The Shadow of the Torturer moves like a somnambulist through its opening episodes, with archaic vocabulary, frequent pauses and obscure reflections, and transitions so understated that a climax peaks and falls seemingly without incident. Both the wording and every limb of the claim are supported. Page number not independently confirmed — the extracted layout carries no printed folio — so 'p. 12' is unverified metadata, not a claim limb."
+  },
+  {
+   "index": 777,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"much as its language does, not to obfuscate but to illustrate\"",
+   "note": "PDF fetched live from gwern.net (41 MB) and text-extracted. The sentence opens Gordon's discussion of style: sentence structure functions in The Book of the New Sun much as its language does, not to obfuscate but to illustrate, and she then invites the tetralogy's first chapter to exemplify it. The supplied fragment appears word for word, with 'illustrate' hyphenated across the line break in the scan. Located on the page carrying the folio 76, matching the cited page. The OCR is a double-column interleave and garbles neighbouring words, but this sentence is legible in both scan passes present in the file."
+  },
+  {
+   "index": 778,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"the first sentence is fairly short (eleven words)\"",
+   "note": "Same gwern.net PDF, page 76. Gordon block-quotes the opening paragraph of The Shadow of the Torturer, citing it as Ch. 1, p. 9, ST, and then writes that though the first sentence is fairly short (eleven words), it nevertheless moves from present tense to past and ends on the word future. Both limbs hold: she is measuring that opening paragraph, and she reports eleven words. Independent count of the quoted first sentence agrees at eleven words."
+  },
+  {
+   "index": 779,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"are much longer (thirty-two words and twenty-seven words)\"",
+   "note": "Same gwern.net PDF, page 76, the sentence immediately following the eleven-word observation: the two remaining sentences are much longer (thirty-two words and twenty-seven words). The supplied parenthetical appears word for word; the scan's OCR renders 'much' as 'xmch' and the compound hyphens as em-dashes, which is an artifact of the scan and not a difference in wording. Gordon then goes on to discuss the subject of the first of these two longer sentences, confirming she is still on the same opening paragraph."
+  }
+ ]
+}

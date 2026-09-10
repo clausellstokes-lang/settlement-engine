@@ -1,0 +1,243 @@
+{{Book
+| name         = A Game of Thrones
+| title_orig   = 
+| translator   = 
+| image        = [[File:Game_of_thrones.jpeg|250px]]
+| image_caption  = Current US paperback edition
+| author       = 
+| cover_artist = 
+| country      = 
+| language     = 
+| series       =
+| genre        = 
+| publisher    = 
+| release_date = 
+| media_type   = 
+| pages        = 
+| isbn         = 
+| preceded_by  = 
+| followed_by  = [[A Clash of Kings]] ([[A Clash of Kings/Statistical Analysis|Stats]])
+}}
+This page contains some statistical analysis of '''''[[A Game of Thrones]]''''', the first book in [[A Song of Ice and Fire]].
+
+For a full series overview see [[A Song of Ice and Fire/Statistical analysis]], and for other books in the series see:
+*[[A Clash of Kings/Statistical Analysis]]
+*[[A Storm of Swords/Statistical Analysis]] 
+*[[A Feast for Crows/Statistical Analysis]]
+*[[A Dance With Dragons/Statistical Analysis]]
+*[[The Winds of Winter/Statistical Analysis]]
+
+===Chapter by Chapter Breakdown===
+{| class="wikitable sortable"
+!Chapter!!Character!!Word Count!!Percentage
+|-
+|[[Prologue - A Game of Thrones|''Prologue'']]||[[Will]]||3,801||1.30%
+|-
+|[[Bran I - A Game of Thrones|''Chapter 1'']]||[[Bran Stark|Bran]]||3,016||1.03%
+|-
+|[[Catelyn I - A Game of Thrones|''Chapter 2'']]||[[Catelyn Stark|Catelyn]]||2,056||0.70%
+|-
+|[[Daenerys I - A Game of Thrones|''Chapter 3'']]||[[Daenerys Targaryen|Daenerys]]||4,139||1.42%
+|-
+|[[Eddard I - A Game of Thrones|''Chapter 4'']]||[[Eddard Stark|Eddard]]||3,762||1.29%
+|-
+|[[Jon I - A Game of Thrones|''Chapter 5'']]||[[Jon Snow|Jon]]||3,232||1.11%
+|-
+|[[Catelyn II - A Game of Thrones|''Chapter 6'']]||[[Catelyn Stark|Catelyn]]||3,471||1.19%
+|-
+|[[Arya I - A Game of Thrones|''Chapter 7'']]|| [[Arya Stark|Arya]]||2,699||0.92%
+|-
+|[[Bran II - A Game of Thrones|''Chapter 8'']]||[[Bran Stark|Bran]]||3,772|| 1.29%
+|-
+|[[Tyrion I - A Game of Thrones|''Chapter 9'']]||[[Tyrion Lannister|Tyrion]]||2,136||0.73%
+|-
+|[[Jon II - A Game of Thrones|''Chapter 10'']]||[[Jon Snow|Jon]]||2,020||0.69%
+|-
+|[[Daenerys II - A Game of Thrones|''Chapter 11'']] ||[[Daenerys Targaryen|Daenerys]] ||3,851||1.32%
+|-
+|[[Eddard II - A Game of Thrones|''Chapter 12'']]||[[Eddard Stark|Eddard]] ||3,213||1.10%
+|-
+|[[Tyrion II - A Game of Thrones|''Chapter 13'']]||[[Tyrion Lannister|Tyrion]]||3,526||1.21%
+|-
+|[[Catelyn III - A Game of Thrones|''Chapter 14'']]||[[Catelyn Stark|Catelyn]]||3,834||1.31%
+|-
+|[[Sansa I - A Game of Thrones|''Chapter 15'']]||[[Sansa Stark|Sansa]]||5,073||1.74%
+|-
+|[[Eddard III - A Game of Thrones|''Chapter 16'']]||[[Eddard Stark|Eddard]]||2,305||0.79%
+|-
+|[[Bran III - A Game of Thrones|''Chapter 17'']]||[[Bran Stark|Bran]]||1,696||0.58%
+|-
+|[[Catelyn IV - A Game of Thrones|''Chapter 18'']]||[[Catelyn Stark|Catelyn]]||3,993||1.37%
+|-
+|[[Jon III - A Game of Thrones|''Chapter 19'']]||[[Jon Snow|Jon]]||5,159||1.76%
+|-
+|[[Eddard IV - A Game of Thrones|''Chapter 20'']] ||[[Eddard Stark|Eddard]]||4,251||1.45%
+|-
+|[[Tyrion III - A Game of Thrones|''Chapter 21'']]||[[Tyrion Lannister|Tyrion]]||4,367||1.49%
+|-
+|[[Arya II - A Game of Thrones|''Chapter 22'']]||[[Arya Stark|Arya]]||3,885||1.33%
+|-
+|[[Daenerys III - A Game of Thrones|''Chapter 23'']]||[[Daenerys Targaryen|Daenerys]]||4,214||1.44%
+|-
+| [[Bran IV - A Game of Thrones|''Chapter 24'']]||[[Bran Stark|Bran]]||4,654||1.59%
+|-
+|[[Eddard V - A Game of Thrones|''Chapter 25'']]||[[Eddard Stark|Eddard]]||3,226||1.10%
+|-
+| [[Jon IV - A Game of Thrones|''Chapter 26'']]||[[Jon Snow|Jon]]||4,863||1.66%
+|-
+|[[Eddard VI - A Game of Thrones|''Chapter 27'']]|| [[Eddard Stark|Eddard]]||4,094||1.40%
+|-
+|[[Catelyn V - A Game of Thrones|''Chapter 28'']]||[[Catelyn Stark|Catelyn]]||3,543||1.21%
+|-
+|[[Sansa II - A Game of Thrones|''Chapter 29'']]||[[Sansa Stark|Sansa]]||4,513||1.54%
+|-
+|[[Eddard VII - A Game of Thrones|''Chapter 30'']]||[[Eddard Stark|Eddard]]||7,214||2.47%
+|-
+|[[Tyrion IV - A Game of Thrones|''Chapter 31'']]||[[Tyrion Lannister|Tyrion]]||5,392||1.84%
+|-
+|[[Arya III - A Game of Thrones|''Chapter 32'']]||[[Arya Stark|Arya]]||4,769||1.63%
+|-
+|[[Eddard VIII - A Game of Thrones|''Chapter 33'']]||[[Eddard Stark|Eddard]]||3,001||1.03%
+|-
+|[[Catelyn VI - A Game of Thrones|''Chapter 34'']]||[[Catelyn Stark|Catelyn]]||7,334||2.51%
+|-
+|[[Eddard IX - A Game of Thrones|''Chapter 35'']]||[[Eddard Stark|Eddard]]||2,469||0.84%
+|-
+|[[Daenerys IV - A Game of Thrones|''Chapter 36'']]||[[Daenerys Targaryen|Daenerys]]||3,784||1.29%
+|-
+|[[Bran V - A Game of Thrones|''Chapter 37'']] ||[[Bran Stark|Bran]]||5,035||1.72%
+|-
+|[[Tyrion V - A Game of Thrones|''Chapter 38'']]|| [[Tyrion Lannister|Tyrion]]||5,126||1.75%
+|-
+|[[Eddard X - A Game of Thrones|''Chapter 39'']]||[[Eddard Stark|Eddard]]||2,466||0.84%
+|-
+| [[Catelyn VII - A Game of Thrones|''Chapter 40'']] ||[[Catelyn Stark|Catelyn]]||4,832||1.65%
+|-
+| [[Jon V - A Game of Thrones|''Chapter 41'']]||[[Jon Snow|Jon]]||2,929||1.00%
+|-
+|[[Tyrion VI - A Game of Thrones|''Chapter 42'']]||[[Tyrion Lannister|Tyrion]]||3,531||1.20%
+|-
+|[[Eddard XI - A Game of Thrones|''Chapter 43'']]|| [[Eddard Stark|Eddard]]||3,519||1.20%
+|-
+|[[Sansa III - A Game of Thrones|''Chapter 44'']]||[[Sansa Stark|Sansa]]||2,948||1.01%
+|-
+| [[Eddard XII - A Game of Thrones|''Chapter 45'']]||[[Eddard Stark|Eddard]]||3,241||1.11%
+|-
+|[[Daenerys V - A Game of Thrones|''Chapter 46'']]||[[Daenerys Targaryen|Daenerys]]||4,428||1.51%
+|-
+|[[Eddard XIII - A Game of Thrones|''Chapter 47'']]||[[Eddard Stark|Eddard]]||4,955||1.69%
+|-
+| [[Jon VI - A Game of Thrones|''Chapter 48'']]||[[Jon Snow|Jon]]||2,926 ||1.00% 
+|-
+|[[Eddard XIV - A Game of Thrones|''Chapter 49'']]||[[Eddard Stark|Eddard]]||2,225||0.76%
+|-
+|[[Arya IV - A Game of Thrones|''Chapter 50'']]||[[Arya Stark|Arya]]||4,639||1.59%
+|-
+| [[Sansa IV - A Game of Thrones|''Chapter 51'']] ||[[Sansa Stark|Sansa]]||3,748||1.28%
+|-
+| [[Jon VII - A Game of Thrones|''Chapter 52'']]|| [[Jon Snow|Jon]]||5,984||2.04%
+|-
+|[[Bran VI - A Game of Thrones|''Chapter 53'']]||[[Bran Stark|Bran]]||5,564||1.90%
+|-
+|[[Daenerys VI - A Game of Thrones|''Chapter 54'']]||[[Daenerys Targaryen|Daenerys]]||4,359||1.49%
+|-
+|[[Catelyn VIII - A Game of Thrones|''Chapter 55'']]||[[Catelyn Stark|Catelyn]]||4,347||1.49%
+|-
+|[[Tyrion VII - A Game of Thrones|''Chapter 56'']]||[[Tyrion Lannister|Tyrion]]||3,674||1.26%
+|-
+|[[Sansa V - A Game of Thrones|''Chapter 57'']]||[[Sansa Stark|Sansa]]||3,365||1.15%
+|-
+|[[Eddard XV - A Game of Thrones|''Chapter 58'']]||[[Eddard Stark|Eddard]]||3,526||1.21%
+|-
+|[[Catelyn IX - A Game of Thrones|''Chapter 59'']] ||[[Catelyn Stark|Catelyn]]||5,161||1.77%
+
+|-
+|[[Jon VIII - A Game of Thrones|''Chapter 60'']]||[[Jon Snow|Jon]]||4,910||1.68%
+|-
+|[[Daenerys VII - A Game of Thrones|''Chapter 61'']]||[[Daenerys Targaryen|Daenerys]]||3,725||1.27%
+|-
+| [[Tyrion VIII - A Game of Thrones|''Chapter 62'']]||[[Tyrion Lannister|Tyrion]]||7,100||2.43%
+|-
+|[[Catelyn X - A Game of Thrones|''Chapter 63'']]||[[Catelyn Stark|Catelyn]]||3,034||1.04%
+|-
+| [[Daenerys VII - A Game of Thrones|''Chapter 64'']]||[[Daenerys Targaryen|Daenerys]]|| 5,203|| 1.78%
+|-
+|[[Arya V - A Game of Thrones|''Chapter 65'']]||[[Arya Stark|Arya]]||4,943 ||1.69%
+|-
+|[[Bran VII - A Game of Thrones|''Chapter 66'']]||[[Bran Stark|Bran]]||4,231||1.45%
+|-
+|[[Sansa VI - A Game of Thrones|''Chapter 67'']]||[[Sansa Stark|Sansa]] || 3,692||1.26%
+|-
+|[[Daenerys IX - A Game of Thrones|''Chapter 68'']]||[[Daenerys Targaryen|Daenerys]]||4,159
+|1.42%
+|-
+|[[Tyrion IX - A Game of Thrones|''Chapter 69'']]||[[Tyrion Lannister|Tyrion]]||3,477||1.19%
+|-
+|[[Jon IX - A Game of Thrones|''Chapter 70'']]||[[Jon Snow|Jon]]||4,912||1.68%
+|-
+|[[Catelyn XI - A Game of Thrones|''Chapter 71'']]||[[Catelyn Stark|Catelyn]]||4,531||1.55%
+|-
+|[[Daenerys X - A Game of Thrones|''Chapter 72'']]||[[Daenerys Targaryen|Daenerys]]||3,560||1.22%
+|-
+|}
+
+===Unique POV Breakdown===
+{| class="wikitable sortable"
+!Character (9)!!# of POVs (73)!! % of Total POVs!! Word Count (292,332)!!% of Word Count
+|-
+|[[Eddard Stark]]
+| align="right" |15
+| align="right" |20.55%
+| align="right" |53,467
+| align="right" |18.29%
+|-
+|[[Catelyn Stark]]
+| align="right" |11
+| align="right" |15.07%
+| align="right" |46,136
+| align="right" |15.78%
+|-
+| [[Daenerys Targaryen]]
+| align="right" |10
+| align="right" |13.70%
+| align="right" |41,422
+| align="right" |14.17%
+|-
+|[[Tyrion Lannister]]
+| align="right" | 9
+| align="right" |12.33%
+| align="right" |38,329
+| align="right" |13.11%
+|-
+|[[Jon Snow]]
+| align="right" |9
+| align="right" |12.33%
+| align="right" |36,935
+| align="right" |12.63%
+|-
+|[[Bran Stark]]
+| align="right" |7
+| align="right" |9.59%
+| align="right" |27,968
+| align="right" |9.57%
+|-
+|[[Sansa Stark]]
+| align="right" |6
+| align="right" |8.22%
+| align="right" |23,339
+| align="right" |7.98%
+|-
+|[[Arya Stark]]
+| align="right" |5
+| align="right" |6.85%
+| align="right" |20,935
+| align="right" |7.16%
+|-
+|[[Will]]
+| align="right" |1
+| align="right" |1.37%
+| align="right" |3,801
+| align="right" |1.30%
+|}
+[[Category:Statistical Analysis]]
+[[Category:A Game of Thrones]]

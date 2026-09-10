@@ -1,0 +1,234 @@
+{
+ "name": "ai",
+ "chunk": 12,
+ "claims": [
+  {
+   "index": 1383,
+   "feature": "other: marketplace policy",
+   "claim": "DriveThruRPG's July 2023 policy bans commercial content primarily written by AI language generators while permitting partly AI-written titles, and the platform conceded enforcement difficulty.",
+   "source": "Timothy Linward, Wargamer, quoting the OneBookShelf policy",
+   "url": "https://www.wargamer.com/dnd/marketplace-dungeon-masters-guild-ai-ban",
+   "quote": "commercial content primarily written by AI language generators",
+   "page": "paragraph 3"
+  },
+  {
+   "index": 1384,
+   "feature": "other: publisher pledge",
+   "claim": "Kobold Press's No-AI Pledge, quoted by Mike Shea, states that the publisher does not use AI to generate text for its game design.",
+   "source": "Wolfgang Baur / Kobold Press No-AI Pledge, quoted by Mike Shea, Sly Flourish",
+   "url": "https://slyflourish.com/best_llm.html",
+   "quote": "we don’t use AI to generate text for our game design",
+   "page": "section 'The Current State of Generative AI in TTRPGs'"
+  },
+  {
+   "index": 1386,
+   "feature": "measurement",
+   "claim": "Shea reports that among 3,700 players and GMs he surveyed, about 3 in 10 use generative AI when preparing for or playing RPGs.",
+   "source": "Mike Shea, Sly Flourish",
+   "url": "https://slyflourish.com/best_llm.html",
+   "quote": "about 3 in 10 use generative AI when preparing for or playing RPGs",
+   "page": "section 'The Current State of Generative AI in TTRPGs'"
+  },
+  {
+   "index": 1388,
+   "feature": "naming and forms of address",
+   "claim": "Board-game designer Elizabeth Hargrave says the AI-generated placeholder names she sees designers use are often clunky but adequate for a prototype.",
+   "source": "Elizabeth Hargrave to BoardGameWire, quoted by Mike Didymus-True, Rascal News",
+   "url": "https://www.rascal.news/tabletop-industry-veteran-ryan-dancey-loses-alderac-coo-job-after-saying-ai-can-generate-game-ideas-as-good-as-some-of-his-companys-designs/",
+   "quote": "often clunky options but they do the job",
+   "page": "section 'Wider Issue'"
+  },
+  {
+   "index": 1394,
+   "feature": "other: community rule rationale",
+   "claim": "A study of Reddit community AI rules finds quality and authenticity to be the concerns most frequently given as justification.",
+   "source": "'AI Rules? Characterizing Reddit Community Policies Towards AI-Generated Content', arXiv",
+   "url": "https://arxiv.org/html/2410.11698v3",
+   "quote": "quality and authenticity as the most frequently mentioned concerns",
+   "page": "results summary"
+  },
+  {
+   "index": 1397,
+   "feature": "boxed text form",
+   "claim": "He characterises that product's read-aloud text as second person and purple.",
+   "source": "Bryce Lynch, tenfootpole.org review of 'Three Witches'",
+   "url": "https://tenfootpole.org/ironspike/?p=9842",
+   "quote": "Second person read-aloud and purple.",
+   "page": "review body, on the dungeon rooms"
+  },
+  {
+   "index": 1399,
+   "feature": "other: the store label",
+   "claim": "A commenter points out that the product's own DriveThruRPG description carries the marketplace's 'Contains AI-Generated Content' label.",
+   "source": "commenter 'Beoric', tenfootpole.org comment thread",
+   "url": "https://tenfootpole.org/ironspike/?p=9842",
+   "quote": "Contains AI-Generated Content",
+   "page": "comment of June 30, 2025 at 9:10 am"
+  },
+  {
+   "index": 1403,
+   "feature": "other: label without content",
+   "claim": "A commenter says the previewed product's 'Adventure Summary' is not a summary of the adventure and its 'Players Background' provides no background.",
+   "source": "commenter 'Beoric', tenfootpole.org comment thread on 'Bryce rebuts – Greg Gawron'",
+   "url": "https://tenfootpole.org/ironspike/?p=10508",
+   "quote": "which is not, in fact, a summary of the adventure",
+   "page": "comment of June 17, 2026 at 10:56 pm"
+  },
+  {
+   "index": 1404,
+   "feature": "other: voice recognition",
+   "claim": "The same commenter says those two sections are reminiscent of ChatGPT's voice, allowing either that a model wrote them or that a human steeped in LLM writing mimicked its style.",
+   "source": "commenter 'Beoric', tenfootpole.org comment thread on 'Bryce rebuts – Greg Gawron'",
+   "url": "https://tenfootpole.org/ironspike/?p=10508",
+   "quote": "reminiscent of ChatGPT’s voice",
+   "page": "comment of June 17, 2026 at 10:56 pm"
+  },
+  {
+   "index": 1406,
+   "feature": "other: mechanism — long-range dependency",
+   "claim": "That commenter's stated reason is that a model struggles to hold enough separate things in mind at once to have written a chain of clues linking a broken sword in one room to a jammed secret door in another.",
+   "source": "commenter 'Quentin', tenfootpole.org comment thread on 'The Snake Temple Ruins'",
+   "url": "https://tenfootpole.org/ironspike/?p=9829",
+   "quote": "an LLM struggles to remember enough different things at once",
+   "page": "comment of June 21, 2025 at 8:45 am"
+  },
+  {
+   "index": 1407,
+   "feature": "other: mechanism — relations between facts",
+   "claim": "He adds that such a chain involves relationships a machine cannot understand or extrapolate from.",
+   "source": "commenter 'Quentin', tenfootpole.org comment thread on 'The Snake Temple Ruins'",
+   "url": "https://tenfootpole.org/ironspike/?p=9829",
+   "quote": "involving relationships it can’t understand or extrapolate from",
+   "page": "comment of June 21, 2025 at 8:45 am"
+  },
+  {
+   "index": 1409,
+   "feature": "other: awards policy",
+   "claim": "The ENNIE Awards' revised policy, quoted by Rascal News, states that from the 2025-2026 submission cycle it will no longer accept any products containing generative AI or created with the assistance of large language models.",
+   "source": "ENNIE Awards, 'Revised Policy on Generative AI Usage', quoted by Chase Carter, Rascal News",
+   "url": "https://www.rascal.news/ennie-awards-updated-submission-policy-wont-accept-ai-projects-next-year/",
+   "quote": "no longer accept any products containing generative AI",
+   "page": "quoted policy, paragraph 3"
+  },
+  {
+   "index": 1410,
+   "feature": "other: puffed significance",
+   "claim": "The WikiProject AI Cleanup field guide states that LLM writing inflates the importance of a subject by adding statements about how arbitrary aspects of it contribute to a broader topic.",
+   "source": "WikiProject AI Cleanup, 'Wikipedia:Signs of AI writing'",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "the importance of the subject matter by adding statements about how",
+   "page": "section 'Undue emphasis on significance, legacy, and broader trends'"
+  },
+  {
+   "index": 1413,
+   "feature": "other: participial evaluative tail",
+   "claim": "It cites a June 2023 revision of the article on Douéra in which a census population figure is followed by the clause that it creates a lively community within its borders.",
+   "source": "WikiProject AI Cleanup, 'Wikipedia:Signs of AI writing', quoting the Douéra article",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "creating a lively community within its borders.",
+   "page": "section 'Superficial analyses', examples"
+  },
+  {
+   "index": 1414,
+   "feature": "other: weasel attribution",
+   "claim": "The guide states that AI chatbots attribute opinions or claims to a vague authority and exaggerate how many sources hold them.",
+   "source": "WikiProject AI Cleanup, 'Wikipedia:Signs of AI writing'",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "AI chatbots tend to attribute opinions or claims to some vague authority",
+   "page": "section 'Vague attributions and overgeneralization of opinions'"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 1383,
+   "verdict": "PARTIAL",
+   "trueWording": "commercial content primarily written by AI language generators",
+   "unsupportedLimb": "that partly AI-written titles are permitted — page states only the ban and its 'primarily' scope, never an affirmative permission",
+   "note": "Raw fetch, HTTP 200. Quote verbatim in body para on the additional ban effective July 31; 'acknowledge[s] enforcement challenges' also verbatim, attributed to the firm (OneBookShelf), so the enforcement-difficulty limb holds. DriveThruRPG limb holds: article says OneBookshelf marketplaces such as DriveThruRPG will also implement this policy; dateline updated Jul 26, 2023. The permitting limb is an inference from 'primarily', not on the page — only the AI-ART rule has an explicit partial-use allowance (tagging)."
+  },
+  {
+   "index": 1384,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "we don't use AI to generate text for our game design",
+   "note": "Raw fetch, HTTP 200. Section 'The Current State of Generative AI in TTRPGs': Wolfgang Baur of Kobold Press issued the No-AI Pledge, quoted by Mike (Michael E. Shea) on SlyFlourish.com, 30 September 2024. Quote appears word for word inside the pledge's three-clause sentence; publisher and text-generation limbs both hold."
+  },
+  {
+   "index": 1386,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "about 3 in 10 use generative AI",
+   "note": "Raw fetch, HTTP 200. Same section; sentence opens 'Among 3,700 players and GMs I surveyed' and continues with the quoted clause ('...when preparing for or playing RPGs'), so the 3,700 sample, the first-person survey and the 3-in-10 share all hold. trueWording trimmed to 7 words for the cap; the full quoted clause on the page runs 13."
+  },
+  {
+   "index": 1388,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "often clunky options but they do the job",
+   "note": "Raw fetch, HTTP 200. Section 'Wider Issue'. Hargrave (Wingspan designer, TTGDA co-founder) told BoardGameWire she sees people using AI to generate placeholder names in a prototype and that they are 'often clunky options but they do the job' when everything will change many times over. Article first appeared on BoardGameWire 19 Feb 2026, republished by Rascal News (Mike Didymus-True) with permission — the attribution chain in the claim is stated on the page."
+  },
+  {
+   "index": 1394,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "quality and authenticity as the most frequently mentioned concerns",
+   "note": "Raw fetch of arXiv HTML v3, HTTP 200 (Lloyd, Gosciak, Nguyen, Naaman; CHI '25). Quote verbatim in the Discussion/Conclusion findings summary. The 'as justification' limb is separately carried by the Abstract, which says the rules evoke, as justification, concerns about quality and authenticity. Study scope (300,000+ public subreddits, AI rules) supports the 'study of Reddit community AI rules' limb."
+  },
+  {
+   "index": 1397,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Second person read-aloud and purple.",
+   "note": "Raw fetch, HTTP 200. Bryce Lynch's review of 'Three Witches'. Sentence sits in the review body immediately after he moves on to the dungeon rooms and quotes a sample read-aloud line; both limbs (second person, purple) are in the five-word sentence. He repeats the charge later ('Overwrought read-aloud in the second person')."
+  },
+  {
+   "index": 1399,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the product description says it \"Contains AI-Generated Content\"",
+   "note": "Raw fetch, HTTP 200. Comment by Beoric, June 30, 2025 at 9:10 am, exactly as cited: the product description says it 'Contains AI-Generated Content' and that might have been a clue. DriveThruRPG limb holds from the review body above the thread, which prices the product at DriveThru and links the drivethrurpg.com product page. Page never separately calls the phrase a marketplace-applied label, but it does place it in that store's product description."
+  },
+  {
+   "index": 1403,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "which is not, in fact, a summary of the adventure",
+   "note": "Raw fetch, HTTP 200. Comment by Beoric, June 17, 2026 at 10:56 pm, on 'Bryce rebuts - Greg Gawron, Founder, Advanced Fantasy Games'. Same sentence carries both limbs: an 'Adventure Summary' that is not a summary of the adventure and a 'Players Background' which does not, in fact, provide any background. 'Previewed' limb holds — he is describing what the preview shows."
+  },
+  {
+   "index": 1404,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "reminiscent of ChatGPT's voice, so either it was generated",
+   "note": "Raw fetch, HTTP 200. Same Beoric comment, next sentence: the summary and background are both reminiscent of ChatGPT's voice, so either an LLM generated it or someone so steeped in LLM writing wrote it, intentionally or not mimicking its style. Both disjuncts of the claim's 'allowing either' limb are on the page."
+  },
+  {
+   "index": 1406,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "an LLM struggles to remember enough different things at once",
+   "note": "Raw fetch, HTTP 200. Comment by Quentin, June 21, 2025 at 8:45 am, on 'The Snake Temple Ruins'. He quotes room L1-21 and argues the LLM could not credibly have written a sword point in one room from a dead adventurer in another (present in L1-22 with his broken sword) jamming a secret door between the two and acting as a clue to both door and trap — the broken-sword-to-jammed-door chain in the claim. Stated as his reason for concluding it does NOT read like an LLM."
+  },
+  {
+   "index": 1407,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "involving relationships it can't understand or extrapolate from",
+   "note": "Raw fetch, HTTP 200. Same Quentin comment, closing clause of the sentence calling the construction too much sauce on one ingredient 'for a machine' — so the machine-cannot-understand-or-extrapolate limb is on the page as written."
+  },
+  {
+   "index": 1409,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "no longer accept any products containing generative AI",
+   "note": "Raw fetch, HTTP 200; the block-quoted policy sits above Rascal's subscriber wall, so no paywall route was needed. Chase Carter, Jan 27, 2025, quoting the ENNIE Awards post 'Revised Policy on Generative AI Usage': beginning with the 2025-2026 submission cycle the ENNIEs will no longer accept any products containing generative AI or created with the assistance of Large Language Models or similar technologies. Cycle, revised-policy and LLM-assistance limbs all hold."
+  },
+  {
+   "index": 1410,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "puffs up the importance of the subject matter by adding statements",
+   "note": "Raw fetch, HTTP 200. Section 'Undue emphasis on significance, legacy, and broader trends'. Page reads that LLM writing often puffs up the importance of the subject matter by adding statements about how arbitrary aspects of the topic represent or contribute to a broader topic — every limb, including 'arbitrary aspects' and 'broader topic'. Page self-identifies as an advice page from WikiProject AI Cleanup, supporting the attribution."
+  },
+  {
+   "index": 1413,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "creating a lively community within its borders.",
+   "note": "Raw fetch, HTTP 200. Section 'Superficial analyses', Examples 2023-2025 (confirmed by walking back to the nearest preceding heading). The example gives the April 2008 census population of Douera followed by the participial clause quoted, and is credited '- From this June 2023 revision to Douéra'. Census-figure, June-2023 and Douéra limbs all hold; the guide's point there is the trailing '-ing' phrase."
+  },
+  {
+   "index": 1414,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "attribute opinions or claims to some vague authority",
+   "note": "Raw fetch, HTTP 200. Section 'Vague attributions and overgeneralization of opinions' (WP:AIWEASEL). Page: AI chatbots tend to attribute opinions or claims to some vague authority - a practice called weasel wording - and also commonly exaggerate the quantity of sources those opinions are attributed to, which carries the claim's second limb. trueWording trimmed below the full 12-word quoted opening."
+  }
+ ]
+}

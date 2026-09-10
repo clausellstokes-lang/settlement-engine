@@ -1,0 +1,325 @@
+{
+ "name": "wolfe",
+ "chunk": 21,
+ "claims": [
+  {
+   "index": 1053,
+   "feature": "naming and forms of address",
+   "claim": "Wowra finds folk etymology the predominant category of Latro's place names.",
+   "source": "Scott Wowra, 'Place Names in Gene Wolfe's Soldier of the Mist', Ultan's Library, 7 September 2016",
+   "url": "https://ultan.org.uk/place-names-in-gene-wolfes-soldier-of-the-mist/",
+   "quote": "The predominant category is folk etymology",
+   "page": "Toponymy section",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2016",
+   "routeHint": "live page fetched with a browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1054,
+   "feature": "place and institution description",
+   "claim": "Wowra applies George Stewart's taxonomy of 10 categories of place names to Wolfe's toponyms.",
+   "source": "Scott Wowra, 'Place Names in Gene Wolfe's Soldier of the Mist', Ultan's Library, 7 September 2016",
+   "url": "https://ultan.org.uk/place-names-in-gene-wolfes-soldier-of-the-mist/",
+   "quote": "there are 10 categories of place names",
+   "page": "Toponymy section",
+   "kind": "analysis",
+   "polarity": "applies",
+   "date": "2016",
+   "routeHint": "live page fetched with a browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1055,
+   "feature": "annalist voice and deep time",
+   "claim": "George Stewart observed that place names outlive the displacement of one language by another.",
+   "source": "George Stewart (1975), quoted in Scott Wowra, 'Place Names in Gene Wolfe's Soldier of the Mist', Ultan's Library, 2016",
+   "url": "https://ultan.org.uk/place-names-in-gene-wolfes-soldier-of-the-mist/",
+   "quote": "Place-names possess a marked capacity to outlive the displacement of",
+   "page": "Introduction",
+   "kind": "relay",
+   "polarity": "asserts",
+   "date": "1975",
+   "routeHint": "live page fetched with a browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "medium"
+  },
+  {
+   "index": 1056,
+   "feature": "withheld information and inference",
+   "claim": "Wolfe told Darrell Schweitzer that Latro's derivation of Athens as Thought is incorrect though the meaning is right.",
+   "source": "Gene Wolfe, interview with Darrell Schweitzer, Weird Tales (Spring 1988), quoted in Scott Wowra, Ultan's Library, 2016",
+   "url": "https://ultan.org.uk/place-names-in-gene-wolfes-soldier-of-the-mist/",
+   "quote": "although his derivation of it is incorrect",
+   "page": "quoted mid-essay",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "1988",
+   "routeHint": "live page fetched with a browser user agent",
+   "registerHint": "chronicle-line",
+   "confidence": "high"
+  },
+  {
+   "index": 1057,
+   "feature": "naming and forms of address",
+   "claim": "Wolfe's own introduction explains Latro took Laconia to mean Silent Country from hearing of Laconic manners.",
+   "source": "Gene Wolfe, Soldier of the Mist (1986), p. xii, quoted in Scott Wowra, Ultan's Library, 2016",
+   "url": "https://ultan.org.uk/place-names-in-gene-wolfes-soldier-of-the-mist/",
+   "quote": "some taciturn person referred to as having Laconic manners",
+   "page": "quoted mid-essay",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "1986",
+   "routeHint": "live page fetched with a browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1058,
+   "feature": "annalist voice and deep time",
+   "claim": "Wolfe's Severian likens the alzabo's absorption to a material world carrying forward human works.",
+   "source": "Gene Wolfe, Sword and Citadel (1994), p. 147, quoted in Scott Wowra, Ultan's Library, 2016",
+   "url": "https://ultan.org.uk/place-names-in-gene-wolfes-soldier-of-the-mist/",
+   "quote": "whether buildings, songs, battles, or explorations",
+   "page": "quoted mid-essay",
+   "kind": "own-words",
+   "polarity": "applies",
+   "date": "1994",
+   "routeHint": "live page fetched with a browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1059,
+   "feature": "point of view and distance",
+   "claim": "Wowra says Latro depends on his scroll to maintain a sense of personal continuity and identity.",
+   "source": "Scott Wowra, 'Place Names in Gene Wolfe's Soldier of the Mist', Ultan's Library, 2016",
+   "url": "https://ultan.org.uk/place-names-in-gene-wolfes-soldier-of-the-mist/",
+   "quote": "dependent on the scroll to maintain a sense of personal continuity",
+   "page": "mid-essay",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2016",
+   "routeHint": "live page fetched with a browser user agent",
+   "registerHint": "chronicle-line",
+   "confidence": "high"
+  },
+  {
+   "index": 1060,
+   "feature": "withheld information and inference",
+   "claim": "Wolfe said he tried to keep the sinister element of 'A Solar Labyrinth' well in the background.",
+   "source": "Gene Wolfe, introduction to Storeys from the Old Hotel, quoted in Marc Aramini, 'A Solar Labyrinth' entry from Between Light and Shadow (2015), republished on Ultan's Library, 3 February 2016",
+   "url": "https://ultan.org.uk/aramini-on-a-solar-labyrinth/",
+   "quote": "I tried to keep the sinister element well in the background",
+   "page": "Commentary section",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "1988",
+   "routeHint": "live page fetched with a browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1061,
+   "feature": "omission as information",
+   "claim": "Wolfe said he kept the sinister element so far back that few readers notice it at all.",
+   "source": "Gene Wolfe, introduction to Storeys from the Old Hotel, quoted in Marc Aramini's Between Light and Shadow entry, Ultan's Library, 2016",
+   "url": "https://ultan.org.uk/aramini-on-a-solar-labyrinth/",
+   "quote": "it seems I kept it so far back that few readers notice",
+   "page": "Commentary section",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "1988",
+   "routeHint": "live page fetched with a browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1062,
+   "feature": "withheld information and inference",
+   "claim": "Aramini observes that the maze's barriers are illusory but cast by real objects.",
+   "source": "Marc Aramini, 'A Solar Labyrinth' entry from Between Light and Shadow (Castalia House, 2015), republished on Ultan's Library, 3 February 2016",
+   "url": "https://ultan.org.uk/aramini-on-a-solar-labyrinth/",
+   "quote": "Its barriers are illusory, but they are cast by real objects",
+   "page": "Commentary section",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2016",
+   "routeHint": "live page fetched with a browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1063,
+   "feature": "metaphor discipline",
+   "claim": "Aramini notes Wolfe's story names the shadows the faded black ink of God.",
+   "source": "Marc Aramini, 'A Solar Labyrinth' entry from Between Light and Shadow (2015), on Ultan's Library",
+   "url": "https://ultan.org.uk/aramini-on-a-solar-labyrinth/",
+   "quote": "the shadows are called “the faded black ink of God",
+   "page": "Representation section",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2016",
+   "routeHint": "live page fetched with a browser user agent",
+   "registerHint": "none",
+   "confidence": "medium"
+  },
+  {
+   "index": 1064,
+   "feature": "withheld information and inference",
+   "claim": "Aramini argues that when the shadows go at noon only the objects themselves remain.",
+   "source": "Marc Aramini, 'A Solar Labyrinth' entry from Between Light and Shadow (2015), on Ultan's Library",
+   "url": "https://ultan.org.uk/aramini-on-a-solar-labyrinth/",
+   "quote": "We are left with the things themselves",
+   "page": "Representation section",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2016",
+   "routeHint": "live page fetched with a browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1065,
+   "feature": "other: reference-guide register",
+   "claim": "Aramini praises Andre-Driussi's guide for simple declarative statements and brief objective summaries.",
+   "source": "Marc Aramini, 'Standing on the Shoulders of Giants: a review of Michael Andre-Driussi's The Book of the New Sun: A Chapter Guide', Ultan's Library, 20 July 2020",
+   "url": "https://ultan.org.uk/standing-on-the-shoulders-of-giants-a-review-of-michael-andre-driussis-the-book-of-the-new-sun-a-chapter-guide/",
+   "quote": "simple declarative statements and brief, objective summaries clearly delineated",
+   "page": "body of review",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2020",
+   "routeHint": "live page fetched with a browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1066,
+   "feature": "sentence length variation",
+   "claim": "Aramini faults his own Between Light and Shadow for twisty sentences that lose the reader.",
+   "source": "Marc Aramini, 'Standing on the Shoulders of Giants', Ultan's Library, 20 July 2020",
+   "url": "https://ultan.org.uk/standing-on-the-shoulders-of-giants-a-review-of-michael-andre-driussis-the-book-of-the-new-sun-a-chapter-guide/",
+   "quote": "twisty and confounding sentences that sometimes lose themselves",
+   "page": "body of review",
+   "kind": "analysis",
+   "polarity": "disputes",
+   "date": "2020",
+   "routeHint": "live page fetched with a browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1067,
+   "feature": "other: chapter-guide summary register",
+   "claim": "Andre-Driussi's whole entry for one chapter is a single present-tense sentence of plot.",
+   "source": "Michael Andre-Driussi, The Book of the New Sun: A Chapter Guide, quoted in Marc Aramini, 'Standing on the Shoulders of Giants', Ultan's Library, 2020",
+   "url": "https://ultan.org.uk/standing-on-the-shoulders-of-giants-a-review-of-michael-andre-driussis-the-book-of-the-new-sun-a-chapter-guide/",
+   "quote": "At the duel Severian is treacherously struck dead, but he rises",
+   "page": "quoted in review",
+   "kind": "relay",
+   "polarity": "applies",
+   "date": "2020",
+   "routeHint": "live page fetched with a browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "medium"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 1053,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"The predominant category is folk etymology\" (Toponymy section)",
+   "note": "Live page, browser UA. Quote appears word for word closing the Toponymy section, continuing that descriptive, associative and commemorative categories are less frequent. Both limbs (Wowra as author; folk etymology as predominant) hold; the Conclusion repeats that Latro relies predominantly on folk etymology."
+  },
+  {
+   "index": 1054,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"there are 10 categories of place names\" — Stewart's system",
+   "note": "Live page, browser UA. Quote verbatim in the Toponymy section, introduced as Stewart's 1958 taxonomy. Every limb holds: Stewart named, ten categories enumerated (descriptive through shift), and the essay says the following sections classify Latro's place names according to Stewart's taxonomy."
+  },
+  {
+   "index": 1055,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Place-names possess a marked capacity to outlive the displacement\" — Introduction",
+   "note": "Live page, browser UA. Quote verbatim as the essay's opening block quotation, attributed to \"Noted toponymist George Stewart (1975)\"; the sentence continues about passing to speakers of the succeeding language. Reference list gives Names on the Globe, 1975, so the relay date checks out."
+  },
+  {
+   "index": 1056,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"although his derivation of it is incorrect\" — Schweitzer interview quoted",
+   "note": "Live page, browser UA. Quote verbatim inside the block quotation the essay draws from Schweitzer's Spring 1988 Weird Tales interview. Both limbs hold: the passage says Latro is right about what Athens means while his derivation of it is wrong."
+  },
+  {
+   "index": 1057,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"some taciturn person referred to as having Laconic manners\" — Wolfe's introduction",
+   "note": "Live page, browser UA. Quote verbatim in the Folk Etymology section, introduced as Wolfe (1986, xii) explaining in his introduction that Latro concluded Laconia meant Silent Country. Attribution to Wolfe's own introduction and the page reference both check out."
+  },
+  {
+   "index": 1058,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"whether buildings, songs, battles, or explorations\" — Sword and Citadel quote",
+   "note": "Live page, browser UA. Quote verbatim inside the Sword and Citadel (1994, p. 147) block quotation, introduced as Severian's analysis of the alzabo's ability to absorb its victims' thoughts; the passage likens it to the material world absorbing human thoughts and acts and carrying their lives forward. Cite and page number match."
+  },
+  {
+   "index": 1059,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"dependent on the scroll to maintain a sense of personal continuity\"",
+   "note": "Live page, browser UA. Quote verbatim mid-essay, and the sentence ends \"and identity\", so the claim's second noun is supported too. It is Wowra's own analytic sentence about Latro rereading his scroll, matching the attribution."
+  },
+  {
+   "index": 1060,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"I tried to keep the sinister element well in the background\"",
+   "note": "Live page, browser UA. Quote verbatim in the Commentary section, in a block quotation Aramini introduces as Wolfe's statement in the introduction to Storeys from the Old Hotel; the surrounding sentences are about labyrinths and dialing, the subject of this story, so the attachment to 'A Solar Labyrinth' is the page's own framing."
+  },
+  {
+   "index": 1061,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"kept it so far back that few readers notice\" — Commentary",
+   "note": "Live page, browser UA. Quote verbatim in the same Commentary block quotation, immediately following the previous claim's clause; the page's wording ends \"notice it at all; but I like it that way\", so the claim's \"at all\" is supported."
+  },
+  {
+   "index": 1062,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Its barriers are illusory, but they are cast by real objects\"",
+   "note": "Live page, browser UA. Quote verbatim closing the Commentary paragraph about Mr Smith's shadow maze having no walls. Aramini is the bylined author, so the attribution limb holds."
+  },
+  {
+   "index": 1063,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "shadows called \"the faded black ink of God\" — Representation section",
+   "note": "Live page, browser UA. Quote verbatim (curly quotation mark included) opening the Representation section, where Aramini says the whole story works as a metaphor for representation. He presents the phrase as the story's own wording, matching the claim's \"Wolfe's story names\"; the Connection With Other Works section repeats it."
+  },
+  {
+   "index": 1064,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"We are left with the things themselves\" — Representation section",
+   "note": "Live page, browser UA. Quote verbatim in the Representation section, preceded by the sun reaching its zenith and the objects the shadows represent being all that is left. The noon limb is supported both there and under Unanswered Questions, where at noon only the objects as they really are exist."
+  },
+  {
+   "index": 1065,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"simple declarative statements and brief, objective summaries clearly delineated\"",
+   "note": "Live page, browser UA. Quote verbatim in the body of the review. The praise limb holds: the same sentence calls the book a pleasure to read and easy to digest, and two sentences later Aramini calls this clarity and concision one of the book's greatest strengths."
+  },
+  {
+   "index": 1066,
+   "verdict": "PARTIAL",
+   "trueWording": "\"twisty and confounding sentences that sometimes lose themselves\" plus the reader",
+   "unsupportedLimb": "\"his own\" — this page never states that Aramini wrote Between Light and Shadow; the aside names the book without claiming authorship",
+   "note": "Live page, browser UA. Quote verbatim, and the fault limb holds: the sentence continues \"as well as the reader\", contrasted against Andre-Driussi's clarity, with Between Light and Shadow named parenthetically as the interminable work. But the self-attribution is inference from the byline and from a different Ultan's Library page (the 'A Solar Labyrinth' post, which does identify Aramini as its author); on this page the ownership is implied by tone only, never stated."
+  },
+  {
+   "index": 1067,
+   "verdict": "PARTIAL",
+   "trueWording": "\"At the duel Severian is treacherously struck dead, but he rises\"",
+   "unsupportedLimb": "\"whole entry ... is a single present-tense sentence of plot\" — the quoted entire entry also carries a Commentary line quoting page 239 and glossing the paschal egg as Easter resurrection",
+   "note": "Live page, browser UA. Quote verbatim, introduced as Andre-Driussi's entire entry on chapter 27 of The Shadow of the Torturer, \"Is He Dead?\", and the sentence is present tense and plot-only (it continues about the opponent panicking and killing spectators). But the reproduced entry has two parts, the summary sentence and a Commentary paragraph, so the entry is not a single sentence; Aramini's complaint is brevity (\"Michael, give us more, please!\"), not that nothing but plot appears."
+  }
+ ]
+}

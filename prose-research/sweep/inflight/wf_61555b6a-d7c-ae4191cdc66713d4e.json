@@ -1,0 +1,34 @@
+{
+ "role": "verifier",
+ "name": "tolkien",
+ "angle": null,
+ "tag": "i838-852",
+ "lines": 80,
+ "firstTs": "2026-09-06T17:26:20.841Z",
+ "lastTs": "2026-09-06T17:30:22.719Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 16,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [
+  "https://tolkienlibrary.com/press/850-lord-of-the-rings-bbc-dramatization.php",
+  "https://conradbrunstrom.wordpress.com/2020/12/05/the-1981-bbc-lord-of-the-rings-radio-adaptation-reviewed/",
+  "http://www.istad.org/tolkien/sibley.html",
+  "https://www.containsmoderateperil.com/blog/2015/11/24/the-lord-of-the-rings-bbc-radio-adaptation-1981",
+  "http://briansibleytheworks.blogspot.com/2008/01/this-page-is-still-under-construction_23.html",
+  "https://en.wikipedia.org/wiki/The_Lord_of_the_Rings_(1955_radio_series",
+  "https://ora.ox.ac.uk/objects/uuid:fd07c3e1-c729-47f3-ba24-f568968eedce/files/rbv73c0908"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "All fifteen verified against raw pages. Writing the checkpoint file.",
+ "run": "wf_61555b6a-d7c",
+ "agent": "ae4191cdc66713d4e",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_61555b6a-d7c/agent-ae4191cdc66713d4e.jsonl",
+ "journal": "result",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-tolkien-i838-852.json",
+  "exists": true
+ }
+}

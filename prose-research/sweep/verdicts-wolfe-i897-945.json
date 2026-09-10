@@ -1,0 +1,234 @@
+{
+ "name": "wolfe",
+ "chunk": 14,
+ "claims": [
+  {
+   "index": 897,
+   "feature": "metaphor discipline",
+   "claim": "Robinson says most Wolfe stories mean whatever the text of the story is, word for word.",
+   "source": "Kim Stanley Robinson, 'A Story', NYRSF, 6 September 2013",
+   "url": "https://web.archive.org/web/20201116152809/https://www.nyrsf.com/2013/09/a-story-kim-stanley-robinson.html",
+   "quote": "mean whatever the text of the story is, word for word",
+   "page": "para. on allegory"
+  },
+  {
+   "index": 898,
+   "feature": "dialogue register",
+   "claim": "Robinson catalogues Wolfe's set-piece dialogues as catechisms, interrogations, examinations, Socratic dialogues and classroom lessons.",
+   "source": "Kim Stanley Robinson, 'A Story', NYRSF, 6 September 2013",
+   "url": "https://web.archive.org/web/20201116152809/https://www.nyrsf.com/2013/09/a-story-kim-stanley-robinson.html",
+   "quote": "catechisms, interrogations, examinations, Socratic dialogues, classroom lessons",
+   "page": "para. on question and answer"
+  },
+  {
+   "index": 900,
+   "feature": "register modulation",
+   "claim": "Robinson lists anthropological reports among the non-fiction forms Wolfe wrote pastiches of.",
+   "source": "Kim Stanley Robinson, 'A Story', NYRSF, 6 September 2013",
+   "url": "https://web.archive.org/web/20201116152809/https://www.nyrsf.com/2013/09/a-story-kim-stanley-robinson.html",
+   "quote": "pastiches of anthropological reports, fairy tales, aboriginal tales",
+   "page": "para. on pastiche"
+  },
+  {
+   "index": 901,
+   "feature": "register modulation",
+   "claim": "Robinson reports Wolfe telling him he chose a sentimental style because the story's idea was sentimental.",
+   "source": "Kim Stanley Robinson paraphrasing Gene Wolfe, in 'A Story', NYRSF, 6 September 2013",
+   "url": "https://web.archive.org/web/20201116152809/https://www.nyrsf.com/2013/09/a-story-kim-stanley-robinson.html",
+   "quote": "had a sentimental idea, he chose a sentimental style",
+   "page": "para. on pastiche"
+  },
+  {
+   "index": 902,
+   "feature": "other: embedded document",
+   "claim": "Robinson notes the middle novella of The Fifth Head of Cerberus is identified as a fiction written by a minor character in the first story.",
+   "source": "Kim Stanley Robinson, 'A Story', NYRSF, 6 September 2013",
+   "url": "https://web.archive.org/web/20201116152809/https://www.nyrsf.com/2013/09/a-story-kim-stanley-robinson.html",
+   "quote": "identified as a fiction written by a minor character",
+   "page": "para. on the story suites"
+  },
+  {
+   "index": 906,
+   "feature": "compounds and coinages",
+   "claim": "Mikalatos argues Wolfe's obscure vocabulary gives the reader more clues to the surrounding world than most fantasies do.",
+   "source": "Matt Mikalatos, Speculative Faith / Lorehaven, comment 16 March 2013",
+   "url": "https://lorehaven.com/speculativefaith/a-brief-introduction-to-gene-wolfe-my-favorite-contemporary-author/",
+   "quote": "they give more clues to the world around the reader",
+   "page": "comment reply to Becky"
+  },
+  {
+   "index": 922,
+   "feature": "translation and register",
+   "claim": "Crampton identifies the Latro novels' frame as a manuscript Wolfe merely translates, pointing to the reliability of language.",
+   "source": "Jeremy Crampton, 'Some Greek Themes in Gene Wolfe's Latro novels', Ultan's Library, 10 August 2000 (written c.1988)",
+   "url": "https://ultan.org.uk/some-greek-themes-in-latro/",
+   "quote": "framing the text as translation",
+   "page": "section 'Who Writes?'"
+  },
+  {
+   "index": 923,
+   "feature": "translation and register",
+   "claim": "Crampton notes the preface to Soldier of the Mist warns the reader of possible errors of translation.",
+   "source": "Jeremy Crampton, Ultan's Library, 10 August 2000",
+   "url": "https://ultan.org.uk/some-greek-themes-in-latro/",
+   "quote": "we are warned against possible errors of translation in the preface",
+   "page": "section 'Who Writes?'"
+  },
+  {
+   "index": 929,
+   "feature": "terminology consistency",
+   "claim": "Wolfe's own glossary entry for arete, quoted by Crampton, defines the term by a range running from cleanliness and love of order to courage before death.",
+   "source": "Gene Wolfe, glossary to Soldier of Arete, quoted by Jeremy Crampton, Ultan's Library",
+   "url": "https://ultan.org.uk/some-greek-themes-in-latro/",
+   "quote": "ranging from cleanliness and love of order to courage",
+   "page": "section 'Loyalty and Arete'"
+  },
+  {
+   "index": 930,
+   "feature": "terminology consistency",
+   "claim": "Wolfe, quoted by Crampton, describes as an error the assumption that one knows what words mean and that they cannot mean anything else.",
+   "source": "Gene Wolfe in Frontier Crossings (1987) p.119, quoted by Jeremy Crampton, Ultan's Library",
+   "url": "https://ultan.org.uk/some-greek-themes-in-latro/",
+   "quote": "one knows what the words mean, that they actually mean",
+   "page": "section 'Who Writes?'"
+  },
+  {
+   "index": 936,
+   "feature": "other: rereading standard",
+   "claim": "Wolfe's own definition of good literature, quoted back to him by Gaiman from a letter, is writing an educated reader can reread with increased pleasure.",
+   "source": "Gene Wolfe, quoted from a letter by Neil Gaiman in Locus 500, September 2002",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2002-wolfe-locusinterview.pdf",
+   "quote": "can be read by an educated reader, and reread with",
+   "page": "p.82"
+  },
+  {
+   "index": 940,
+   "feature": "other: embedded document",
+   "claim": "Wolfe describes The Fifth Head of Cerberus as built so that the second novella is a story told by a character in the third.",
+   "source": "Gene Wolfe interviewed by Neil Gaiman, Locus 500, September 2002",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2002-wolfe-locusinterview.pdf",
+   "quote": "The second novella is a story told by one",
+   "page": "p.81"
+  },
+  {
+   "index": 941,
+   "feature": "other: purpose of fiction",
+   "claim": "Wolfe says the most important thing fiction does is assure the reader that things need not stay as they are.",
+   "source": "Gene Wolfe interviewed by Neil Gaiman, Locus 500, September 2002",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2002-wolfe-locusinterview.pdf",
+   "quote": "it assures the reader that things need not be as",
+   "page": "p.82"
+  },
+  {
+   "index": 942,
+   "feature": "other: register source",
+   "claim": "Wolfe grounds his industrial settings in his years as a journalist on a trade magazine.",
+   "source": "Gene Wolfe interviewed by Neil Gaiman, Locus 500, September 2002",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2002-wolfe-locusinterview.pdf",
+   "quote": "Remember, I was a journalist on an",
+   "page": "p.82"
+  },
+  {
+   "index": 945,
+   "feature": "terminology consistency",
+   "claim": "Wolfe says the temptation of the defined-terms form is to put one's own prejudices in, as Samuel Johnson did.",
+   "source": "Gene Wolfe interviewed by Neil Gaiman, Locus 500, September 2002",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2002-wolfe-locusinterview.pdf",
+   "quote": "put your own prejudices in as Samuel Johnson",
+   "page": "p.7"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 897,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "most of these stories mean whatever the text of the story is",
+   "note": "Raw Wayback capture of NYRSF fetched and read. Sentence appears verbatim in the allegory paragraph, opening 'So most of these stories...'. Byline 'A Story' / Kim Stanley Robinson, dated 09/06/2013, NYRSF issue 301 (Sept 2013) - all attribution limbs confirmed on the page."
+  },
+  {
+   "index": 898,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "catechisms, interrogations, examinations, Socratic dialogues, classroom lessons",
+   "note": "Verbatim in the question-and-answer paragraph; the list continues 'badgering sessions, and many other forms'. The 'set-piece dialogue' limb is supported by the very next sentence, which names 'this tendency for set piece dialogue'."
+  },
+  {
+   "index": 900,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "pastiches of anthropological reports, fairy tales, aboriginal tales",
+   "note": "Verbatim in the pastiche paragraph. Robinson does not himself sort the list into fiction/non-fiction, but anthropological reports are listed and the same list carries other non-fiction forms (movie reviews, hunting articles), so the claim's 'non-fiction forms' reading holds on the page."
+  },
+  {
+   "index": 901,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "had a sentimental idea, he chose a sentimental style",
+   "note": "Verbatim, same pastiche paragraph: Robinson reports 'He once told me that since \"Our Neighbor, by David Copperfield\"' had a sentimental idea, he chose a sentimental style. Reported-speech limb ('Wolfe telling him') confirmed."
+  },
+  {
+   "index": 902,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "identified as a fiction written by a minor character",
+   "note": "Verbatim in the story-suite paragraph, which opens 'Another suite is made by the three novellas in The Fifth Head of Cerberus'; the clause ends 'in the first story'. Every limb on the page."
+  },
+  {
+   "index": 906,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'than most fantasies do' - the comment reads 'than a lot of fantasies', a weaker comparison class",
+   "trueWording": "they give more clues to the world around the reader",
+   "note": "Live Lorehaven page fetched with a browser UA; comment thread present in the raw HTML. Matt Mikalatos, reply opening 'Hey Becky', timestamped March 15, 2013 at 11:24 pm (the claim's source line says 16 March - one day off, probably timezone). He writes of 'the obscure language and things'; the quotation is verbatim except that the page's comparison is 'a lot of fantasies', not 'most'."
+  },
+  {
+   "index": 922,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "By framing the text as translation... language and its reliability",
+   "note": "ultan.org.uk fetched live. Section 'Who Writes?' In the same section Crampton writes of manuscripts Wolfe 'merely \"edits\" or \"translates\"' and of two writings 'supposedly translated by Wolfe'. The page's exact formulation is 'pointing to the question of language and its reliability'; the claim compresses this to 'the reliability of language', which is the same move."
+  },
+  {
+   "index": 923,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "we are warned against possible errors of translation in the preface",
+   "note": "Verbatim in section 'Who Writes?', the clause closing 'to Soldier of the Mist'. Article bylined Jeremy Crampton, dated 10 August 2000, with an afterword saying it was written in the late 1980s (c.1988) - both source limbs confirmed."
+  },
+  {
+   "index": 929,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "ranging from cleanliness and love of order to courage",
+   "note": "Verbatim under the heading 'Loyalty and \"Arete\"'. Crampton introduces it as Wolfe's own definition and cites it to (Arete, Glossary); the entry opens 'the virtues of a soldier' and closes on courage in the face of death, so the claimed range is exact."
+  },
+  {
+   "index": 930,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "one knows what the words mean, that they actually mean it",
+   "note": "Verbatim in section 'Who Writes?'; Crampton's quotation runs on '...and that they cannot ever mean anything else. All of which is seldom true'. Its footnote 9 is Gene Wolfe [untitled] in R. Jackson (ed.), Frontier Crossings, Conspiracy '87, 1987, p.119 - the claim's citation limb confirmed on the page."
+  },
+  {
+   "index": 936,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "can be read by an educated reader, and reread with increased pleasure",
+   "note": "gwern PDF fetched and text-extracted (6 pages). On printed p.82 (PDF p.4) Gaiman says he has used the line 'ever since I read it in a letter where you defined good literature', then quotes Wolfe's definition verbatim. Letter, quoted-back-by-Gaiman and definition limbs all on the page. Issue confirmed as Locus 500, September 2002 ('This is Issue 500')."
+  },
+  {
+   "index": 940,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The second novella is a story told by one of the characters",
+   "note": "Printed p.81 (PDF p.3), GW speaking of The Fifth Head of Cerberus after Gaiman's 'Those three stories interweave': 'A lot of readers consider it a sort of three-part novel', then the quoted sentence, ending 'in the third novella, and so on'. Every limb supported."
+  },
+  {
+   "index": 941,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "it assures the reader that things need not be as they are",
+   "note": "Printed p.82, both in the body and as the page's pull-quote. Gaiman asks 'What's the most important thing about fiction?'; Wolfe answers with the quoted sentence, ending 'as they are now. In other words, the most important thing is hope.'"
+  },
+  {
+   "index": 942,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Remember, I was a journalist on an industrial magazine, Plant Engineering",
+   "note": "Printed p.82, GW, continuing 'I've been in a ton of industrial plants' and describing plants 'right out of Dante' and a rubber tire plant. Gaiman's next question, 'To what extent does that stuff wind up in the fiction?', draws 'You can't help drawing upon yourself... transmute them into a coherent story', supporting the grounding limb; the issue's own bio gives the span (Plant Engineering, 1972-84), supporting 'years'."
+  },
+  {
+   "index": 945,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It's very tempting to define terms, put your own prejudices in",
+   "note": "Printed p.7 (PDF p.2), GW, in the exchange about dictionaries and guidebooks; the sentence ends 'as Samuel Johnson did' and is preceded by 'Ambrose Bierce was the original guy in that area'. Quotation and both limbs verbatim on the page."
+  }
+ ]
+}

@@ -1,0 +1,62 @@
+
+ RUN  v4.1.11 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/laneB6
+
+ ❯ tests/soak-harness/tripwireRegistry.test.js (9 tests | 2 failed) 17ms
+     × the registry is closed, typed, and every threshold carries a derivation home 7ms
+     × NO ROW MAY KEY ON A FIELD THE RECEIPT WRITER DOES NOT WRITE — the class, banked and shrink-only 2ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/soak-harness/tripwireRegistry.test.js > the tripwire registry > the registry is closed, typed, and every threshold carries a derivation home
+AssertionError: expected [ 'throw_or_assert', …(11) ] to deeply equal [ 'throw_or_assert', …(10) ]
+
+- Expected
++ Received
+
+@@ -8,6 +8,7 @@
+    "capacity_plateau",
+    "capacity_floor_thaw",
+    "capacity_realm_load",
+    "tick_duration_blowout",
+    "memory_watermark",
++   "planted_control",
+  ]
+
+ ❯ tests/soak-harness/tripwireRegistry.test.js:59:31
+     57|     expect(tripwireRegistryDefects()).toEqual([]);
+     58|     expect([...TRIPWIRE_CLASSES]).toEqual(['deterministic', 'host-obse…
+     59|     expect([...TRIPWIRE_IDS]).toEqual([
+       |                               ^
+     60|       'throw_or_assert', 'non_finite_ledger_figure', 'population_colla…
+     61|       'negative_stock', 'unbounded_growth', 'liveness_floor',
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/soak-harness/tripwireRegistry.test.js > the tripwire registry > NO ROW MAY KEY ON A FIELD THE RECEIPT WRITER DOES NOT WRITE — the class, banked and shrink-only
+AssertionError: expected [ 'capacity_plateau', …(2) ] to deeply equal [ 'capacity_plateau', …(1) ]
+
+- Expected
++ Received
+
+  [
+    "capacity_plateau",
+    "capacity_floor_thaw",
++   "planted_control",
+  ]
+
+ ❯ tests/soak-harness/tripwireRegistry.test.js:388:29
+    386|
+    387|     const unreachableRows = [...new Set(reach.unreachable.map((row) =>…
+    388|     expect(unreachableRows).toEqual(['capacity_plateau', 'capacity_flo…
+       |                             ^
+    389|     expect(unreachableRows.length).toBeLessThanOrEqual(UNREACHABLE_ROW…
+    390|     expect(reach.unreachable.length).toBeLessThanOrEqual(UNREACHABLE_P…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 7 passed (9)
+   Start at  01:09:50
+   Duration  171ms (transform 34ms, setup 24ms, import 33ms, tests 17ms, environment 0ms)
+

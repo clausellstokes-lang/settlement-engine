@@ -1,0 +1,21 @@
+{
+ "role": "synth",
+ "name": "wolfe",
+ "angle": null,
+ "tag": null,
+ "lines": 200,
+ "firstTs": "2026-09-07T01:10:25.919Z",
+ "lastTs": "2026-09-07T01:52:32.821Z",
+ "tools": {
+  "Bash": 25,
+  "Read": 26
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": " angles were never verified because the triage keyed on finder labels rather than section features, and they are absent from every feature above; a verify-only completion over a re-keyed triage is owner-gated on cost. The counter angle lost 71 of 114 that way and the primary-on-disk angle 93 of 152.",
+ "run": "wf_8cd21474-a7b",
+ "agent": "ae0dc38d5bd57787c",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/df942c1b-a1a2-4594-ba90-9241ff864ccd/subagents/workflows/wf_8cd21474-a7b/agent-ae0dc38d5bd57787c.jsonl",
+ "journal": "result",
+ "checkpointFile": null
+}

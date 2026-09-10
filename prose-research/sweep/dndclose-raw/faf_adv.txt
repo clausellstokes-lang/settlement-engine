@@ -1,0 +1,387 @@
+RPG Writeups — Dungeons & Dragons Adventures
+
+ Dungeons & Dragons Adventures by al-azad
+
+ 1
+ B1- In Search of the Unknown
+
+ 2
+ B1- In Search of the Unknown (cont.)
+
+ B1- In Search of the Unknown
+
+ posted by al-azad Original SA post
+
+ When in doubt, poke it with your sword.
+
+ Hopefully this is kosher with the thread, but I'd like to make a critical breakdown of Dungeons & Dragons adventures. This is a special subject because the "module" is an iconic part of the game. Even people who have never played D&D or weren't born during the height of these modules know names like "Tomb of Horrors" and "Keep on the Borderlands." Published adventures are not just an integral part of the game's identity, they helped shape the very idea of the classic dungeon crawl.
+
+ First up is
+
+ B1- In Search of the Unknown
+
+ . Written by Mike Carr in 1978, this is one of the earliest stand alone published adventures and came with every copy of Basic D&D. It's an introductory module that extends Basic by teaching DMs how to properly run an adventure. Basically it's a tutorial as much as it is a detailed dungeon crawl.
+
+ Introduction
+
+ The first seven pages are supplementary material for the beginning DM. Quasqeuton, as the dungeon is called, is designed for 3-6 players (or 3-8 in a later paragraph, the editing is really poor in some places). Small parties can be supplemented with paid hirelings or loyal henchman and several paragraphs detail how DMs should handle DMPC loyalty.
+
+ Mapping is the heart of old school D&D and Basic recommends two party roles. One PC is the "caller" who dictates the party's movement while another player is the mapper. Time in Basic revolves around turns (10 minutes) and rounds (10 seconds). Time taken after an encounter always rounds up to the next turn no matter how short they are (simply put, all battles take at least 10 minutes). Consider this gap in time a moment where parties catch their breath, sheath their weapons, and check their armor -- the pre-4E five minute rest if you will. Time is important in Basic because every 3 turns you check for wandering monsters on a 1-in-6. When players are sleeping, you make 3 checks in an 8 hour period because there's less noise to attract creatures.
+
+ And perhaps the most important section is how to be a good DM. "Above all, the DM must be fair, reasonable, and worthy of the respect of all participants." The DM is "above the battle" in that they assist players without giving them the answers. The DM is not an adversary or out to "defeat" the players. The DM is the final arbiter: hear out your players but you have the final word. The image of the classic DM is the domineering asshole leering over his wicked screen but every edition has stressed that the DM is a referee and nothing more. Funny how stereotypes are formed, huh?
+
+ Background
+
+ For some reason almost an entire page is devoted to a background that can be summarized in a few sentences. Rogahn the fighter and Zelligar the wizard, famous adventurers, built a dungeon called Quasqueton where they could party in seclusion with their bros. Several decades ago the two left to fight barbarians in the frozen north (you never hear about barbarians from the tropical south) and never returned so now the dungeon is free game for thieves and vandals AKA adventurers.
+
+ Like all good adventures, there are rumors that characters may know. Some are false but most are true in some manner. Each character may know 0-3 rumors and there are 20 in total. Some of the highlights are
+
+ 3. (False) Rogahn owned a fantastic gem as big as a man's fist that was worth over 100,000 gold pieces; he kept it hidden in his personal quarters.
+
+ 7. The complex has a rear exit which is secret and well hidden.
+
+ 16. (False) An enchanted stone within the stronghold will grant a wish to anyone who chips off a piece of it and places it within their mouth.
+
+ I like 3 and 16 in particular. Number 3 is completely false but greedy players may insist on spending a long ass time overturning Rogahn's room for a treasure that doesn't exist. Hell, I would put a regular gem in the room just to watch player reaction when someone tries to pocket it or argue with a pawn broker over its value. Number 16 is a favorite of mine because there actually is an enchanted stone you have to put in your mouth but it doesn't grant wishes and it isn't 100% beneficial.
+
+ Tips for Players
+
+ Tucked in the back of the module is a background section containing a truncated story and list of pre-generated characters for use either by the players or the DM as hirelings. Interestingly the hirelings have a pretty decent chance of owning magical equipment and being higher level. Also of interest is an NPC personality chart for randomly generating a hireling's attitude, courage, disposition, and loyalty. I just threw some dice and rolled up Drebb the Apprentice, a helpful and reckless thief with a fickle relationship -- if he finds that "100,000gp gem" he's taking off the first chance he gets.
+
+ The final section are tips for players that I call the 10 Commandments To Not Being An Asshole.
+
+ 1. Be an organized player.
+
+ 2. Respect the Dungeon Master.
+
+ 3. Cooperate with fellow players.
+
+ 4. Be neither too slow nor too fast.
+
+ 5. Avoid arguing.
+
+ 6. Always be on your guard.
+
+ 7. Treat NPC hirelings fairly and they'll treat you fairly (usually).
+
+ 8. Know your limits IE not all battles are meant to be won.
+
+ 9. Use your head.
+
+ 10. Good roleplaying is half the fun.
+
+ Classic adventuring party. At least half these jokers will die horribly.
+
+ Preparation
+
+ Quasqueton is hewed from a great rock outcropping at the crest of a large wooded hill. The air within the caverns is heavy, wet, and musty. The atmosphere resists combustion and fire burns smokily. Corridors are generally 10' in width and ceilings are 8-10 feet high. There's a 1-in-3 chance any particular door is locked or stuck. There are no (working) keys in this dungeon, you have to pick the lock with a thief or bash it down which immediately checks for a wandering monster. Speaking of wandering monsters, our choices are
+
+ Floor 1
+
+ 1d6
+
+ 1. 1d4 orcs
+
+ 2. 1d2 giant centipedes
+
+ 3. 1d6 kobolds
+
+ 4. 1d2 troglodytes
+
+ 5. 1d4+1 giant rats
+
+ 6. 1d2 beserkers
+
+ Floor 2
+
+ 1. 1d4 troglodytes
+
+ 2. 1 crab spider
+
+ 3. 1d6+1 kobolds
+
+ 4. 1d8 orcs
+
+ 5. 1d2 zombies
+
+ 6. 1d6+1 goblins
+
+ Out of all the random monsters, the giant centipedes are probably the most dangerous. They deal no actual damage but anyone bitten must save vs. poison or become violently ill (1/2 speed, incapable of actions) for
+
+ 10 days
+
+ ! Giant rats are also rather nasty. They have a 1-in-20 chance of inflicting disease on a bite (save vs. poison to avoid). Once you contract a disease you're bed ridden for a
+
+ month
+
+ but there's a 1-in-4 chance you die outright in 1d6 days. On floor 2, the crab spider is particularly dangerous (save or die, literally) but there's only a chance of one and it's a pretty weak monster with poor AC.
+
+ For those unused to the way things worked, wandering monsters are intentionally designed to be the biggest threat to an adventuring party. Monsters by themselves are worth shit experience; the bulk of experience comes from treasure but very few monsters actually carry personal treasure. Avoiding pointless fights is the first thing a party needs to learn to be successful because random monsters are infinite and it's a waste of resources trying to fight everything.
+
+ However, it's important to understand that random encounter does not mean a random
+
+ battle
+
+ . Basic gives you a chart for reactions if the DM wants some variety and DMs are encouraged to roleplay monsters naturally. As a DM, I've always ruled that animal-like creatures won't attack an armed party unless they outnumber them or take them by surprise. Seriously, why would a bunch of weak ass goblins charge headlong into a group of angry men with swords and boards? They would totally run away, hide in ambush, or find reinforcements in another room to bolster their numbers. Or if they're surprised they may throw themselves at the party's feet begging for mercy. Or maybe they're actually friendly and offer a trade, who knows the DM has so many options available other than "YOU HAVE BEEN WAYLAID BY ENEMIES AND MUST DEFEND YOURSELF!"
+
+ Mummies fighting level 1 characters wouldn't be the dick-est move I've seen. This is an ironic picture because thieves don't have a backstab in Basic and they're a largely useless class with awful skills. See that guy climbing the wall? That's the only thing thieves can do well. In 30 years nothing has changed
+
+ Before I get on with the description of the dungeon proper, the dungeon must be keyed. There are 25 monsters and 34 treasures but it's recommended you choose only 16-20 monsters and 15-25 treasures. Our monster choices are:
+
+ 1d4 orcs
+
+ 1d2 troglodytes (2 sets)
+
+ 1d8+1 kobolds
+
+ 1d2 ghouls
+
+ 1d4 giant centipedes
+
+ 1 carrion crawler
+
+ 1d6+1 orcs
+
+ 1d2 crab spiders
+
+ 1 black widow spider
+
+ 1d4+1 stirges
+
+ 1d4 gnolls
+
+ 1d4 shriekers
+
+ 1d6 skeletons
+
+ 1d4+1 hobgoblins
+
+ 1d6+1 giant rats
+
+ 1d2 zombies
+
+ 1d4+1 kobolds
+
+ 1d4 bandits
+
+ 1 ochre jelly
+
+ 1d4+1 gnomes
+
+ 1d6+1 orcs
+
+ 1 crab spider
+
+ 1d6 goblins
+
+ Ochre jellies are among the nastiest Basic creatures. They have 5 hit dice and inflict 2d6 damage and are immune to damage except fire and cold. Hitting them with weapons or electricity causes them to split into 1d4+1 2hd jellies that do 1d6 damage. Monsters like this are why the wizard should carry oil pots as a backup.
+
+ The monstrous humanoids (orcs, goblins, gnolls, kobolds) were former slaves that built the dungeon so it's implied they call this place home. All other creatures are likely squatters or scavengers with the bandits in particular standing out like a sore thumb.
+
+ The treasure choices are:
+
+ 10ep in leather pouch
+
+ 15gp
+
+ 28gp
+
+ 35gp in small box
+
+ Dagger with jeweled handle (onyx gems)
+
+ 20sp
+
+ agate gems
+
+ mace +1
+
+ false map (shows room and corridor in corridor but inaccurate everything else)
+
+ spear +2
+
+ 120gp
+
+ 500sp silver medallion
+
+ 100gp pearl
+
+ 2450cp
+
+ 200gp onyx statue
+
+ 820sp
+
+ garnate
+
+ 620gp in locked chest
+
+ 2 cure light wounds scrolls
+
+ fake magic wand (radiates magic but doesn't actually do anything)
+
+ bag of devouring ("bag of holding" that eats items)
+
+ 500gp peridot
+
+ shield +1
+
+ 115gp bronze statuette
+
+ 90gp silver mirror
+
+ chainmail +1
+
+ 10gp gold ring
+
+ sleep scroll
+
+ 80sp silver bracelet
+
+ locked chest with 840cp, 290sp, 120ep, 25gp
+
+ ring of protection +1
+
+ 4 small gold rods, 30gp each
+
+ 15gp crystal goblet with "Quasqueton" engrabed on it
+
+ potion of invisibility, 2 doses, 2 hours each
+
+ There are several items in the dungeon that are labeled in some way. It's explicitly mentioned that selling these items will attract attention to the players. I mean, you can't move hundreds of dollars worth of goods without alerting
+
+ someone
+
+ .
+
+ I'm a fan of cursed items. Not so much malicious stuff that kills you outright (fuck whoever designed that strangling necklace), but something like the false wand that looks like magic but doesn't actually do shit. The bag of devouring is one of my favorite items overall. It sucks when it eats important items but enterprising players can come up with alternative uses for one. I've had PCs who use the bag to dispose of bodies to keep scavengers away.
+
+ Dungeon Map
+
+ The first thing you'll probably notice here is the non-linear layout and large number of secret doors. Indeed, a good dungeon crawl should be labyrinthine in design. It's particularly sad that modern day "dungeon crawls" are completely linear by comparison, almost straight lines with few side paths or dead ends. Players really aren't meant to explore the whole thing and mapping it in its entirety is a daunting task.
+
+ Floor 1: Entrance and Beyond
+
+ The entrance is hidden behind underbrush but is relatively easy to find. There's a cumulative 10% chance per adventurer that they automatically notice the doors were previously forced open.
+
+ 1. Aloves. Three sets of alcoves serve as defensive points in case of attack. The second set of alcoves have one-way secret doors that lead in allowing defenders to flank intruders. The third set of alcoves have a permanent effect that triggers two
+
+ magic mouths
+
+ . The mouths shout at anyone with the typical "INTRUDERS WELCOME TO DIE HAHAHAHA" and it's a good excuse to check for a random encounter. At the top of the stairs are decaying bodies: a human fighter, a human magic-user, a dwarf fighter, and two beserkers... adventurers that probably bit it in a random encounter!
+
+ This is a good room to fight some kind of scavenger like giant rats. There isn't much of worth here and the bodies have been half looted so any hidden treasure should be coins tucked in a boot or something.
+
+ 2. Kitchen. A room with two cooking pits, some tables, spilled containers, moldy pieces of food, and hanging utensils.
+
+ 3. Dining Room. A moderately decorated hall with cheap chairs and tables. Zelligar and Rogahn have two walnut thrones, expertly carved, but they're permanently fixed into the walls.
+
+ 4. Lounge. This is where everyone kicked back and pounded brews. There's an empty keg, some benches, and scattered mugs. There's a life-sized white marble statue of a nude woman in the center of the room valued at 5,000gp. Getting it out of the area would require a "major engineering effort" IE a couple of hired peasants with pick axes.
+
+ 5. Wizard's Chamber. Zelligar's room. There's a stone carving that runs most of the wall depicting how badass he is. Zelligar's rosewood bed can be dismantled: the baseboard and two sides are worth 100gp each and the headboard is 500gp. The headboard has Zelligar's name on it and anyone buying it has an 80% chance of recognizing it. There are several recognizable items in the dungeon and the writers stress that hawking them will draw attention.
+
+ There's a nightstand with a trap, a pin that inflicts 1 damage and delivers an oil that makes the grasping hand unusable for 1d4+1 turns (no save). There's a keyhole that disables the trap but no key actually exists in the dungeon. The drawer is empty unless you put treasure in it. Other treasures include a pewter pitcher and three mugs worth 15gp and 5gp each respectively.
+
+ 6. Closet. Zelligar's closet. There's some dusty, worthless cloth in a corner and moth-ridden garments. One garment isn't completely garbage and is valued at 15gp if the players take the time to search for it. There's a bookstand with several pointless books.
+
+ 1. A book of local history.
+
+ 2. An encyclopedia of plants written in elf for some reason.
+
+ 3. Zelligar's personal notebook that's completely unreadable without
+
+ read language
+
+ because it's written in his personal chicken scratch. A dealer/scribe/librarian would pay 50gp for it but there's a 40% chance they tell someone about it and the PCs draw attention.
+
+ 4. A book about weather patterns. Zelligar has his student notes written here in his same unreadable shorthand.
+
+ On a table is a stack of papers held down with a paperweight monogrammed with a letter "Z." Yeah, Zelligar is a total narcissist. The papers are ledgers, inventories, fanancial reports, and messages postmarked 30 years ago. A smart DM would use these as foreshadowing to the treasure they could (possibly) find.
+
+ 7. Wizard's Annex. Zelligar's study. The first thing noticeable is a huge pile of treasure in one corner. The treasure is actually a permanent illusion that's temporarily dispelled for 24 hours when touched. There's actually nothing here and it's recommended no treasure is left here.
+
+ Cash rules everything around me, CREAM get da money, dolla dol-- oh, it's an illusion.
+
+ 8. Wizard's Workroom. This room is pretty cool as it's an interesting location that can possibly be a huge timesink. There's a cabinet with 40 unlabeled jars. There's a chart of random substances that range from blood to spices and even hardened feces. If a substance isn't immediately recognizable, there's a percentage chance to know equal to the character's wisdom times five.
+
+ Good. Good. Keep checking each jar in your paranoia to find everything of value. An army of kobolds will greet you shortly.
+
+ There's a glass jar containing a black cat's body floating in it. If the jar is open, the cat comes to life and runs out of the room. If the door is closed, the cat
+
+ phases through
+
+ the door. This is actually a red herring: the cat will never be seen again but it can potentially turn into a huge distraction that wastes a ton of time as the players hunt it down or discuss its significance. IMO I love manipulation more than monsters and it's moments like these that I live for.
+
+ 9. Wizard's Laboratory. Classic mad scientist's lab with hanging skeletons, torture devices, and weird jars. There's a glass bottle that if uncorked, it fills the room with laughing gas: save vs. poison or laugh uncontrollably for 1d6 rounds, 50% chance to drop held items, and an immediate random monster check.
+
+ Dispel magic
+
+ removes the effect but seriously, who has that spell by now?
+
+ Underneath a bunch of piled logs is a "gold" ring that players will assess at 100gp. An actual jeweler will realize that it's worthless and has no magic properties. There are a bunch of other unnecessary time wasting elements including jars with random substances from room 8, a leather skin with magical writing, fire pits, vats, a wooden coffin, and several kegs.
+
+ B1- In Search of the Unknown (cont.)
+
+ posted by al-azad Original SA post
+
+ In Search of the Unknown cont.
+
+ 10. Storeroom. This is another time wasting room. There are 60 casks containing random common goods from barley to dried mushrooms. Adventurers might be able to enjoy a meal that isn't trail rations but while the food is edible it's certainly not fresh.
+
+ Importantly, this room is completely hidden. The only way inside is through the secret door and that's
+
+ if
+
+ you manage to find it. Again, this illustrates the point that not every area is meant to be found. Perceptive players will
+
+ know
+
+ something is here because there'll be a huge gap in their map. But searching for secret doors is a very long process. It takes a turn to fully search a 10'x10' area so with a party of 3-8 people it can take 20 to 60 minutes to find it.
+
+ Players should be rewarded for going out of ther way so I would personally put a valuable treasure in this area.
+
+ 11. Supply Room. Construction supplies are left here including some useful items like 200' of rope, iron spikes, wooden beams, doors and locks. Creative players can use these tools. The most obvious application would be sealing off a room to rest.
+
+ 12. Library. A modestly furnished library with ornate floors and plus divans to recline on. On the north wall are cages containing small fire beetles that light the room with an eerie, flickering glow. It's not actually explained how these beetles survive and their presence is designed to alert players to a false danger. There are a bunch of books and scrolls here of no immediate value but this isn't an era of printing presses so a room full of books has got to be worth a pretty penny to someone.
+
+ 13. Implement Room. This is another tool room and contains useful items like rope, picks, and saws. Most importantly, this area contains an early example of an annoying ass trap. The corridor extends to a dead end to the east which triggers a portcullis when the characters reach the space directly before the wall. Thieves can discover the trap passively with a remove trap check but at level 1 we're talking about a stupidly low roll.
+
+ Strong people can attempt to break the bars with a 5% chance (str 13-15), 10% (str 16), or 15% (str 17-18). Players can use the hacksaws in the implement room to cut the bars. It takes 24 hours with one saw, 18 with two, 12 with three, and 6 hours with four. Each saw has a 20% chance to break in any 6 hour period so you really want to use all four saws. Doing this makes a lot of noise so wandering monster checks may be made more frequently.
+
+ Finally, the lever and counterweight to raise the portcullis is in the implement room and hidden in a corner so you have to find it first. But it's not that easy, of course not. Only two creatures at a time can attempt to pull the lever and only if their strength is a combined 30. Base chance is 20% at 30 and +5% each point beyond 30.
+
+ This trap might seem like bullshit because of all the factors but honestly it's not that bad. There are multiple ways to escape and you're not likely to inspect this dead-end in the first place.
+
+ 14. Auxiliary Storeroom. Nothing here except a pile of rocks. By the rules of Old School Gaming, treasure is supposed to be placed under a pile of rocks. Or not, keep the players on their toes!
+
+ 15 and 16. Teleportation Rooms. Alright, this one is a classic and B1 can probably be credited for coming up with this classic trap. If you've played a lot of old school RPGs like Wizardry or Ultima you'll probably recognize the infamous teleport trap designed solely to confuse players and fuck up their maps.
+
+ Both rooms are identical. There's a crystalline object that reflects light in a tantalizing pattern that attracts the attention of amoral looters (AKA adventurers). Once approached, everyone in the room and immediate corridor (so if there are bodies or dropped objects, they'll be affected to) is teleported to the exact spot in the other room. The doors open in sync so everything appears exactly the same. The trap doesn't operate again until both doors are closed. The doors automatically close when the party moves 120' away from either door.
+
+ This trap can easily fool unwary players. Smart players leave a trail of "breadcrumbs" but anything in the halls is teleported as well. Even smarter players mark the walls as they walk and this is the true way to fool this trap.
+
+ 17. Char Storage Cellar. A storage room for the smithy. There's nothing here but a bunch of soot and dust. There's a false door set into the wall for some reason. It can be bashed "open" but just falls off the frame.
+
+ 18. Smithy. You've got all the things of a good smithy: giant anvil, bellows, fire pits, and assorted blacksmith tools. This place doesn't smell like ass because vents in the ceiling keep fresh air circulating through the area.
+
+ 19. Access Room. This room served as an alternative storage for the smithy and has a 3' diameter hole leading to the second floor. The hole is 40' deep and the bottom can't be seen unless a light source is tossed down it. There's an iron ring on the wall that can support a creature but each person has a 1-in-6 chance of pulling it out per use or 2-in-6 for anyone who is more than lightly encumbered at 500+ coins (Basic measures weight in coins, 10gp = 1 pound). Generously, the ring doesn't come off until the climber is near the bottom so they only take 1d4 damage as a result. Smart characters will use one of the logs in this room or a support beam elsewhere to act as a makeshift grapple for the hole.
+
+ 20. Dead End Room. An empty, featureless room at the end of a pointlessly long, winding corridor. Why is it here? To waste your time, that's why. An unencumbered party moves at 120' per turn so mapping this entire area takes about 40 minutes. You can get out faster than you came in but you'll probably run into a monster trying to corner you. Yeah, this is definitely a great place to put one of those crab spiders. You might even get a scenario where the players run into the spider's lair just as a party of wandering orcs comes up to their flank. I love encounters where different creatures are attacking each other and the players have to prioritize their targets (or get the fuck out of there!).
+
+ 21. Meeting Room. A simple auditorium with wooden benches and a raised platform. There are decorative banners here that are rotten beyond recognition.
+
+ 22. Garden Room. Once a well kept recreational area, this place is now overgrown completely with mold, moss, and giant mushrooms. The description of this place is very detailed and explains that the multi-colored plants and fungus swirl together in rainbow patterns to create a disturbing "fairyland." A descriptive DM can have a lot of fun here. Any combat taking place here kicks up clouds of spores that obscure vision. Any particular type of fungus has a 30% chance of being poison if ingested (save vs. poison or die).
+
+ 23. Storage Room. Furniture is stored here. There's some carpenters tools and not much else.
+
+ 24. Mistress' Chamber. Alright, jumping to the complete opposite side of the dungeon we have Melissa's chamber. Melissa was Rogahn's mistress. She has a bed like Zelligar but it doesn't have any markings so it's safe to sell. She has a chest with a bunch of worthless clothing and a silver-plated comb worth 5gp. On top of the chest is perfume and a tortoiseshell dish with a single gold piece in it.
+
+ This room is full of a bunch of personal effects that reek of a hopeless romantic. A beautiful mirror has "To the fairest of all in my eyes" hewn into the wood frame. An attractive water basin in one corner has working plumbing (if the water was running). A tapestry shows a warrior carrying off a maiden from a burning village besieged by warriors with the words "Melissa, the most dearly won and greatest of all my treasures." The tapestry is worth 40gp if removed but surely someone will recognize the thing.
+
+ 25. Rogahn's Chamber. Our fighter's room is also a total secret and can only be found from one of the three entrances (one of them, humorously enough, is
+
+ through
+
+ his mistress' chamber). Rogahn is a utilitarian man and his stuff is very simple. He has a bed similar to the others with a simple "R" on the headboard. He has some simple furniture and worthless clothing scattered about.
+
+ Of particular note are four large wall hangings depicting different subjects: a dragon being slain by warriors with one standing at the forefront (I WONDER WHO THIS MAN IS?); a large battle lead by a fighter and wizard; a warrior and maiden on horseback; and a wizard and fighter shaking hands in the sunset. Each tapestry weighs 60lbs and is worth 100gp each although people will definitely know where you got these.

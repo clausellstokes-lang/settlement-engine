@@ -1,0 +1,24 @@
+{
+ "role": "critic",
+ "name": "hobb",
+ "angle": null,
+ "tag": null,
+ "lines": 113,
+ "firstTs": "2026-09-06T18:17:47.911Z",
+ "lastTs": "2026-09-06T18:29:49.348Z",
+ "tools": {
+  "Bash": 25,
+  "Read": 8,
+  "Write": 1
+ },
+ "urlsFetched": [],
+ "filesWritten": [
+  "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/critic-hobb.md"
+ ],
+ "lastAssistantText": "MAs via Wayback `id_`; two or three video-essay transcripts; Shropshire via the OSU catalogue.\n6. New angle: translators.\n7. The epigraph census, and the negation/adverb measurement if a text is licensed.\n8. Before any export, truncate `trueWording` in kept and partial files to a twelve-word window.",
+ "run": "wf_06d7ffd7-48b",
+ "agent": "ab28df93611bbfd1a",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/19ace14d-e63e-4584-ad77-d83bd8e2cd0f/subagents/workflows/wf_06d7ffd7-48b/agent-ab28df93611bbfd1a.jsonl",
+ "journal": "result",
+ "checkpointFile": null
+}

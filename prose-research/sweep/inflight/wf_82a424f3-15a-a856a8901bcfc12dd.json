@@ -1,0 +1,34 @@
+{
+ "role": "verifier",
+ "name": "leguin",
+ "angle": null,
+ "tag": "i90-99",
+ "lines": 33,
+ "firstTs": "2026-09-06T12:25:57.541Z",
+ "lastTs": "2026-09-06T12:27:05.297Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 6
+ },
+ "urlsFetched": [
+  "https://serendipstudio.org/sci_cult/leguin/",
+  "https://digitalcommons.liberty.edu/masters/133/",
+  "https://curtisweyant.com/scholarship/le-guin/secondary-bibliography-the-left-hand-of-darkness/",
+  "https://www.ursulakleguin.com/the-books-of-earthsea",
+  "https://www.ursulakleguin.com/steering-the-craft",
+  "https://www.ursulakleguin.com/return-to-source",
+  "https://api.crossref.org/works?query.bibliographic=How+They+Do+Things+with+Words+Language+Power+Gender+Priestly+Wizards+Le+Guin+Earthsea&rows=3",
+  "https://api.crossref.org/works?query.bibliographic=Beyond+Words+Impact+of+Rhythm+as+Narrative+Technique+Left+Hand+of+Darkness+Extrapolation+1992&rows=3"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "You've hit your session limit · resets 12:20pm (America/New_York)",
+ "run": "wf_82a424f3-15a",
+ "agent": "a856a8901bcfc12dd",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_82a424f3-15a/agent-a856a8901bcfc12dd.jsonl",
+ "journal": "failed",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-leguin-i90-99.json",
+  "exists": false
+ }
+}

@@ -1,0 +1,51 @@
+[
+ {
+  "id": "v2-1",
+  "block": "DS-POW-5",
+  "pool": "governing body name: a SLOT, never a baked noun",
+  "angle": "ledger",
+  "index": 0,
+  "grammar": "V5 INSTITUTION → PRESENT (tense: present throughout)",
+  "before": "What governs {settlement} calls itself the {seat}, and the name is precise about the town's size and pretensions in a way outsiders routinely mistake.",
+  "after": "The {seat} is the name what governs {settlement} gives itself, precise about the town's size and pretensions in a way outsiders routinely mistake.",
+  "claims": [
+   "the governing body gives ITSELF the name {seat} (the reflexive self-designation kept: 'calls itself' → 'gives itself'; the agent is still the body)",
+   "the name is precise about the town's size",
+   "the name is precise about the town's pretensions",
+   "outsiders routinely mistake the MANNER of that precision ('in a way … mistake' kept verbatim)"
+  ],
+  "rule": "V5 INSTITUTION → PRESENT: the sentence opens on the institution ({seat}) and ends on the present state; the chair's own cut, informed by the refuter's cure 1b but NOT adopting it (1b moved the naming agent from the body to the town — 'what {settlement} calls' — a different claim); here the body still names itself ('gives itself'), 'the name … precise' keeps body and name apart, the manner clause is verbatim; 24 → 23 words; A3 note: the proper fill {seat} now follows the article at the opening — a relocated, not created, breach, declared"
+ },
+ {
+  "id": "v2-2",
+  "block": "DS-POW-5",
+  "pool": "governing body name: a SLOT, never a baked noun",
+  "angle": "visitor",
+  "index": 1,
+  "grammar": "V1 PRESENT (tense: present) — KEPT AS WRITTEN",
+  "before": "A stranger who addresses the {seat} at {settlement} by any other title is corrected, politely and immediately.",
+  "after": "A stranger who addresses the {seat} at {settlement} by any other title is corrected, politely and immediately.",
+  "claims": [
+   "a stranger who addresses the {seat} by another title is corrected",
+   "the correction is polite",
+   "the correction is immediate"
+  ],
+  "rule": "KEEP: the variant is already in the plain-fact grammar; the first cut ('gives … any other title') widened the act from address to conferral (the refuter's PARTLY) and bought nothing measurable — no cut earns its risk here; a KEEP is a lawful member of the sample (the 09-05 sample's own convention)"
+ },
+ {
+  "id": "v2-3",
+  "block": "DS-POW-5",
+  "pool": "governing body name: a SLOT, never a baked noun",
+  "angle": "street",
+  "index": 2,
+  "grammar": "V1 PRESENT (tense: present) — the V4 tag WITHDRAWN: no object slot is composed on this block",
+  "before": "The town at {settlement} calls the hall by its proper title in public and something shorter everywhere else, and both usages are precise.",
+  "after": "The town at {settlement} uses the hall's proper title in public and something shorter everywhere else. Both usages are precise.",
+  "claims": [
+   "the town uses the hall's proper title in public (the agent — the town — kept)",
+   "the town uses a shorter form everywhere else",
+   "both usages are precise (a second fact, its own sentence — a QUALIFY move under R-DA-03)"
+  ],
+  "rule": "the refuter's cure 3, adopted: the town stays the user (so the sibling [visitor] variant is not contradicted — a stranger's other title draws a correction; the town's own shorter form is the town's), the ', and both usages' tail becomes its own sentence, 23 → 20 words; the object-first label is withdrawn because the composer fills only {settlement, seat} for DS-POW-5 (powerStateProse.js:895 and the comment beside it) — V4 has no licence here"
+ }
+]

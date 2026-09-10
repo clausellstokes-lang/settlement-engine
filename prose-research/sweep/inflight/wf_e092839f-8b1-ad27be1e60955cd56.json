@@ -1,0 +1,21 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 196,
+ "firstTs": "2026-09-07T08:05:04.508Z",
+ "lastTs": "2026-09-07T08:16:05.138Z",
+ "tools": {
+  "Bash": 51,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "I have executed all the evidence. Writing up.",
+ "run": "wf_e092839f-8b1",
+ "agent": "ad27be1e60955cd56",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/b43943b4-3b40-4fd9-bc63-9b9c9afb55b4/subagents/workflows/wf_e092839f-8b1/agent-ad27be1e60955cd56.jsonl",
+ "journal": "result",
+ "checkpointFile": null
+}

@@ -1,0 +1,343 @@
+
+        
+                
+        
+        
+            
+            
+            
+            
+Let’s Design an Adventure: Boxed Text
+            
+            
+                
+                
+                    
+                        
+                        
+                            by 
+Shawn Merwin
+                        
+                        
+                        
+                            
+                                
+Nov 6, 2019
+                            
+                        
+                    
+                       
+                    
+Category Icon
+                        
+Posts
+                        
+                    
+                    
+                    	                 
+                    
+                    
+                        
+73
+                        
+                    
+                    
+                
+       
+            
+        
+        
+        
+         
+            
+                 
+                
+                    
+    
+        
+        
+Tags
+         
+            
+Let's Design an Adventure!
+        
+            
+Adventure Design
+       
+    
+                
+            
+        
+        
+        
+            
+                
+If you’ve DMed, read, written, or even played D&D adventures at any point in the game’s existence, you are familiar with boxed text, which is also sometimes referred to as read-aloud text. It got its name from the thin boxed-line that sometimes surrounds the text in an adventure, denoting that it should be read aloud to the players. It’s as much a part of D&D’s history and brand as saving throws, hit points, and armor class.
+People who know me understand that when it comes to game design, I don’t care much about tradition or nostalgia. Just because something’s been around forever doesn’t mean it’s good or necessary, it just means it’s been around forever. And nostalgia may sell, but that doesn’t mean it is necessary good or functional. With that sort of mindset, I want to take an honest look at boxed text as an adventure designer.
+Every couple of years, the topic of boxed text sweeps through the game-design community, opinions are thrown about, battle lines and drawn, and then we all go back to writing our own adventures, usually including boxed text. I wrote about the topic 20 years ago on forums, and 10 years ago in blogs, and now I’ll write about it again. Not much has changed in the conversation, but it’s still one we need to have.
+Confession time: I have a love/hate relationship with boxed text. When it’s good, it’s a great tool not just for DMs, but for adventure writers as well. By quickly setting a scene and tone, and orienting the players, it can save a game for less-experienced or underprepared DMs. (I’ve been both, I assure you.) It can also force adventure designers, by the very act of having to write it, to think harder about their encounters. When boxed text is bad, though, it’s really bad. And far too often, it is bad. It can be a drain on players’ attention, and it can make the DMs job harder by being obtuse, uninteresting, misleading, or distracting. Editing bad boxed text is more painful than editing stat blocks, and that’s saying something.
+Writing good boxed text is difficult. It requires the same precision that one might use for fiction or poetry, while also trying to perform the mechanical task of dealing with game elements, much like technical writing. And like battle plans, boxed text rarely survives engagement with the enemy (i.e. the players).
+I Offer Exhibit A
+Consider the following boxed text:
+Your trip through the Forest of Demise was uneventful. The chittering of forest animals and chirping of birds that serenaded you through the forest suddenly ends, as if the creatures of the natural world shun and fear this place. In the distance, you see a tower sticking out of the ground like an evil, twisted tree reaching up to the sky. As you approach the tower, the crunching of the dead leaves under your feet seems almost deafening in the otherwise silent clearing. When you get within 20 feet of the tower, you realize the place is surrounded by a nearly invisible noxious vapor. As you breathe it in, its stench burns your lungs and makes your eyes water. The hairs on your arms bristle with terror and your heart pounds as an anguished shriek cuts through the silence from within the tower. The palpable presence of evil is stunning. On the door of the tower you see four glowing runes.
+Now picture, if you will, a D&D party. We have Pedritar the dragonborn paladin, Brark the grimlock barbarian, Clang the warforged cleric, Drizzelda the wood elf druid, and Rhuul the revenant rogue. The party is approaching the tower-lair of Lystrango the evil lich of doom. If I was running this adventure, this is how I see the adventure starting:
+Me
+: Everyone ready? I have your marching order? Great, let’s start with the opening boxed text!  “
+Your trip through the Forest of Demise was uneventful. The chittering of forest animals and chirping of birds that serenaded you through the forest suddenly ends, as if the creatures of the natural world shun and fears this place. In the—“
+ 
+Drizzelda the Druid
+: Why?
+ 
+Me
+: Why what?
+ 
+Drizzelda the Druid
+: Why do they shun this place?
+ 
+Me
+: [confused stare]
+ 
+Drizzelda the Druid
+: I’m a druid. I ask that squirrel over there why he stopped chittering.
+ 
+Me
+: Um. Right. Ok. He tells you that he and all the forest animals are afraid of the tower in the clearing ahead. Let me jumped ahead to that. “
+In the distance, you see a tower sticking out of—”
+ 
+Brark the Barbarian
+: Nope.
+ 
+Me
+: Nope what?
+ 
+Brark the Barbarian
+: Nope, I don’t see it. I’m a grimlock. Got no eyes.
+ 
+Me
+: Right, ok. 
+“Everyone but Brark sees a tower sticking out the ground like an evil, twisted tree reaching up to the sky.”
+ 
+Drizzelda the Druid
+: I talk to it. I can talk to plants too.
+ 
+Me
+: Huh?
+ 
+Drizzelda the Druid
+: You said there was a tree sticking out of the ground.
+ 
+Me
+: It’s not really a tree. It’s like a tree. It’s a metaphor.
+ 
+Clang the Cleric
+: That’s a simile.
+ Me: Right, a simile. Anyway, continuing: 
+“As you approach the tower, the crunching of the dead leaves under your feet seems almost deafening in the silence.”
+ 
+Rhuul the Rogue
+: I don’t walk on the dead leaves. I try to be silent.
+ 
+Me
+: OK, I guess you can avoid the leaves. But it’s not really that imp—
+ 
+Pedritar the Paladin
+: I’m not walking. I’m flying. Remember I took that feat that gives me wings and a fly speed.
+ 
+Me
+: Got it. Pedritar is flying and Rhuul is tiptoeing around the leaves. Anyway, let’s continue. 
+“When you get within 20 feet of the tower, you realize the place is surrounded by a nearly invisible noxious vapor. As you breathe it in, its stench burns your lungs and makes your eyes water.”
+ 
+Clang the Cleric
+: Technically, I don’t have lungs. I’m made of wood and stone.
+ 
+Me
+: Yeah, I guess. The point is—
+ 
+Brark the Barbarian
+: I still don’t have eyes. They can’t be watering.
+ 
+Me
+: Right. I just mean—
+ 
+Rhuul the Rogue
+: As a revenant, I am undead. Technically, I don’t think I need to breathe.
+ 
+Me
+: Ok, Ok, I get it. There’s a mist that’s burning the lungs of those of you with lungs and/or that breathe, irritating your eyes if you have eyes, and is generally unpleasant and mildly irritating to the rest of you. Let’s continue: 
+“The hairs on your arms bristle with terror and your heart pounds as an anguished shriek cuts through the silence from within the tower. The palpable presence of evil is stunning.”
+ 
+Pedritar the Paladin
+: I can. They can’t.
+ 
+Me
+: Who can’t what?
+ 
+Pedritar the Paladin
+: The rest of the party can’t detect evil without a spell. Only I can.
+ 
+Me
+: It’s just a general presence of evil, not an actual specific evil like undead or fiends.
+ 
+Pedritar the Paladin
+: Seems like only I would be able to feel it. It’s a class ability after all.
+ 
+Me
+: Sure, but—.
+ 
+Drizzelda the Druid:
+ So we can’t take actions?
+ 
+Me
+: Sorry, you lost me.
+ 
+Drizzelda the Druid:
+ You said we were stunned?
+ 
+Me
+: [Rereads boxed text to self] Oh, no. It’s just affecting you noticeably. You aren’t actually 
+stunned
+ stunned. It was just a simile.
+ 
+Clang the Cleric
+: Metaphor. And I have no hair.
+ 
+Me
+: Excuse me?
+ 
+Clang the Cleric
+: You said that the hairs on my arm stand up in terror. I’m hairless. Maybe I have some moss or something that stands up instead?
+ 
+Me
+: Sounds good to me.
+ 
+Rhuul the Rogue
+: I’m not scared.
+ 
+Me
+: What?!
+ 
+Rhuul the Rogue
+: Dude, I was once locked in a coffin with a vampire for a week. A little shrieking from some lich’s tower isn’t going to phase me. And also, I don’t think my heart actually beats, so it couldn’t pound.
+ 
+Clang the Cleric
+: Yeah, I don’t have a—
+ 
+Me
+: Yes, I get it. Moving on. 
+“On the door you see—”
+ 
+Brark the Barbarian
+: I don’t—
+ 
+Me
+: Yes, yes, yes! You have no eyes and can’t see. Let’s sum this up. 
+“There’s a tower in front of you.”
+ What do you do?
+As is evidenced above, boxed text can be rife with pitfalls when it assumes a character’s feelings, movements, actions, or reactions. What sounded like fairly typical boxed text is really a Samuel Beckett play waiting to happen. Boxed text needs to be carefully crafted or it becomes not only unhelpful, but an actual distraction from the game on many levels. I humbly suggest the following tips for creating boxed text:
+Tip 1. Move from the second-person point of view to the third person
+To experienced adventure designers this might sound radical, but it really is a great way to avoid many of the pitfalls illustrated above. If we do not use the word “you” as the subject of the sentences in boxed text, it’s difficult to inadvertently include character actions, motivations, feelings, or movements. By avoiding the second-person (“As you enter the clearing, you notice the bloated corpse of a headless dragon”) and using the third-person (“The bloated corpse of a headless dragon dominates the center of a clearing”), you avoid moving the PCs when they might not want to move, and you’ve given them the chance to enter the clearing from any direction and in any manner they choose. This also makes it very difficult to add bits like “you believe” or “you think,” which steals player agency.
+Tip 2. Avoid the novelist/dramatist urge
+DMs and adventure designers often have stories to tell. However, boxed text is not the place to unleash that inner novelist. Nothing slows a game more than paragraph after paragraph of boxed text, especially when the DM has to stumble through prose so purple that not even a rainbow wants to admit association with the color. There are three main kinds of problem with this novelist’s urge:
+2a. “It was a dark and stormy night.” 
+Relevant details are fine for boxed text, and maybe one or two tiny poetic flourishes can add to the tone. But piling on obvious, irrelevant, or overwrought details make the players lose focus. My rule of thumb when writing or editing is to leave in only the details about the environment when the PCs must interact with them on some level. The stench of a bog or a monster is important only if those things matter for the encounter, especially as a terrain feature or monster ability: the bog weakens a creature entering it, or the monster’s stench is a weakening aura. The smell of flowers in the sunny glade can probably be left out, unless you happen to be DMing for a party comprised solely of elves or florists.
+2b. The villain’s soliloquy
+This trope dominates not just fantasy, but much storytelling in our popular culture. The characters fight their way through the evil mastermind’s fortress, encountering her as she completes her evil plan. Then she breaks into four paragraphs of boxed-text monologue: first cursing the PCs for being a nuisance, then explaining what her evil plan is, then describing to the PCs what will happen to them after she rips off their heads, spits down their necks, and finishes by talking about her plans to take over the world. (Maniacal laugh optional.) It has taken the evil genius one minute, 45 seconds to ramble on, and the subsequent battle where the characters stomp on the faces of her and her guards takes 18 seconds of in-game time.
+Solution: The PCs are always a nuisance; that’s a given. The PCs should learn the evil plan throughout the adventure and know it by the time they arrive. The trash talking can take place during combat, rather than before. Two minutes and tons of player attention saved!
+2c. The action in progress.
+This is similar to the evil soliloquy problem, only it involves action instead of talking. Sometimes PCs are forced to watch while some plot point happens, either leading up to combat, or after combat ends, or just a scene in the flow of your game’s narrative. The characters just saved the prince, and now they get to watch his coronation. If your players are into it, great. Let ‘er rip! However, chances are, even the most invested player nods off after the 8th paragraph of text describing the festivities.
+Solution: Give PCs the chance to interact with the scene, even if it’s just standing in the crowd and trading quips. Better yet, put them up on the royal stage, trying to hold still during the ceremony while a pesky mosquito bites them. (Constitution saving throws for everyone!) Let the characters be the focus. Save the “you watch while” moments for times when you really need them!
+ 
+Tip 3. Describe everything the characters can sense, but not what they can’t
+While this might seem obvious, it happens surprisingly often. The boxed text fails to mention something obvious but important, like the 50-foot-wide chasm between the doorway and the altar. Less troublesome but equally odd is when the boxed text details things the characters couldn’t know. They enter a room full of locked crates, and the boxed text describes the room, detailing the “large crates full of mining equipment.” The characters couldn’t know that without opening them, so let the mystery linger for a bit. Or if it doesn’t matter, only mention the objects that do.
+Tip 3a. Let maps and art do their jobs
+If your adventure includes maps and art for an area, don’t include text that can be easily discerned from them. Room size is detailed by the map, and the picture of the alabaster statue is worth 1,000 words of boxed text. The large chasm in the room? Go ahead and mention that even if it’s shown on the map. This’ll help both visual and auditory processors understand the situation.
+Tip 4. Avoid “seems to be” or “appears to be.”
+For the characters, perception is reality. Everything they sense “appears to be” what it is. And nothing triggers meta-gaming like the words “seems” or “appears” in boxed text. Those words generally mean that some trick or diversion is in the offing. If something “appears to be” to the characters, it “is” to the characters. Wherever you stand philosophically in real life, perception has to equal reality for the characters or you lose too much in the game. Let those Wisdom (Perception) or Intelligence (Investigation) checks separate the “seems” from the “is” after concluding the boxed text.
+Tip 5. Read your boxed text aloud to check readability
+This advice is equally valid for any type of writing you do, but it is required for boxed text. Trouble areas like tongue-twisters, funny-sounding phrases, unintended alliteration, and other pitfalls are hard to spot on the page but easy to hear when spoken. NPCs named “Eileen Dover” just don’t belong in an adventure, whether accidentally or purposefully place.
+Tip 6. Avoid game mechanical terms used in a non-mechanical way
+Terms like 
+reaction
+, 
+action
+, 
+incapacitated
+, 
+stunned
+, 
+frightened
+, 
+magical
+, and many others have specific meanings in the game. Using their normal connotations in proximity to mechanical bits can lead to confusion. Avoid them whenever possible.
+If you keep some of these tips in mind while writing boxed text or planning what you will reveal to your players about an encounter area, I think you will see an improvement not just in how you present it to your players, but in how you design it is as well. Unless you're a 
+grimlock
+, of course.
+A Boxed-Text Opening
+The previous article in this series talked about adventure openings, so let’s kill two birds with one sling stone. I present to you an 
+in media res
+ opening scene boxed text for the unnamed adventure we are creating:
+The carrion crows in the field shriek and take flight, blood decorating their beaks. Their feast is gruesome: at least 30 human bodies are strewn across the hillside, muddy from the downpour earlier in the day. Cresting the top of the hill, near the entrance to the secret base, spiders as big as horses scuttle toward you. They move like others of their kind, but at the end of each leg is a hand, all clenching and opening reflexively as the spiders approach.
+Four sentences, and less than 100 words. The first sentence sets the tone and introduces the scene, using words like “carrion” and “bloody.” The second describes what is obvious on the battlefield: dead bodies and mud—the latter indicating difficult or dangerous terrain. The third introduces the monsters in the fight, as well as gives a clue why the characters are there: a secret base. The fourth shows something odd about the monsters, giving both a point of knowing (spiders) and a horrible unknown (hands at the end of each leg), even as it gives a warning to the players that combat is about to start.
+Next time we’ll continue with this encounter as we talk about creating encounters, with an emphasis on the three pillars of D&D.
+What do you think of boxed text? Do you write read-aloud text for your home adventures? Let us know in the comments.
+Shawn Merwin's professional design, development, and editing work in D&D has spanned 20 years and over 4 million words of content, ranging from third to fifth edition. His most recent credits include the 
+Acquisitions Incorporated
+ book, 
+Baldur’s Gate: Descent into Avernus
+, and 
+Storm Lord’s Wrath
+. He is also the Resource Manager for the D&D Adventurers League’s Eberron: Oracle of War campaign. Shawn hosts a weekly D&D podcast called Down with D&D, and he holds an MFA in Creative Writing from Vermont College of Fine Arts. You can follow his ramblings and musing on Twitter at @shawnmerwin.
+Want to read more of this series? Click on the "Let's Design an Adventure!" tag to see the full series.
+            
+                            
+        
+ 
+        
+        
+       
+            
+            
+            
+                
+                
+                    
+                
+                
+                
+                    
+    
+        
+        
+Tags
+         
+            
+Let's Design an Adventure!
+        
+            
+Adventure Design
+       
+    
+                
+            
+            
+            
+            
+                
+                                        
+                
+                    
+                    
+73
+                
+                
+                
+                
+                    
+                        
+                    
+                
+            
+            
+        
+   
+    

@@ -1,0 +1,234 @@
+{
+ "name": "dnd",
+ "chunk": 8,
+ "claims": [
+  {
+   "index": 1115,
+   "feature": "concrete sensory noun",
+   "claim": "Sims holds that more examples are better than hedged generalizations when writing a species or culture for a game.",
+   "source": "Chris S. Sims, Writing: Generalizations and Absolutes, 2020",
+   "url": "https://chrisssims.wordpress.com/2020/07/14/writing-generalizations-and-absolutes/",
+   "quote": "more examples are better than hedged generalizations",
+   "page": "Generalizations"
+  },
+  {
+   "index": 1116,
+   "feature": "edition and house style",
+   "claim": "Sims cites the 5e Player's Handbook half-orc passage as superlatives hedged into words doing little work.",
+   "source": "Chris S. Sims, Writing: Generalizations and Absolutes, 2020",
+   "url": "https://chrisssims.wordpress.com/2020/07/14/writing-generalizations-and-absolutes/",
+   "quote": "leaving a lot of words doing little work",
+   "page": "Superlatives or Absolutisms"
+  },
+  {
+   "index": 1117,
+   "feature": "edition and house style",
+   "claim": "Sims names Kim Mohan among the mentors who taught him about generalizations, hedging and superlatives.",
+   "source": "Chris S. Sims, Writing: Generalizations and Absolutes, 2020",
+   "url": "https://chrisssims.wordpress.com/2020/07/14/writing-generalizations-and-absolutes/",
+   "quote": "Among them is the great Kim Mohan",
+   "page": "opening paragraph"
+  },
+  {
+   "index": 1118,
+   "feature": "boxed text form",
+   "claim": "Teos Abadia records that Season 8 of the D&D Adventurers League moved away from boxed text and separated the information into specific headings.",
+   "source": "Teos Abadia (Alphastream), The Best and Worst of Adventure Formats at Winter Fantasy 2020",
+   "url": "https://alphastream.org/index.php/2020/02/20/the-best-and-worst-of-adventure-formats-at-winter-fantasy-2020/",
+   "quote": "moving away from boxed text and separating information into specific",
+   "page": "Season 8 Changes"
+  },
+  {
+   "index": 1119,
+   "feature": "dm-facing sentence",
+   "claim": "Abadia records that Season 8 required its authors to use the heading-based format.",
+   "source": "Teos Abadia (Alphastream), The Best and Worst of Adventure Formats at Winter Fantasy 2020",
+   "url": "https://alphastream.org/index.php/2020/02/20/the-best-and-worst-of-adventure-formats-at-winter-fantasy-2020/",
+   "quote": "Season 8 required that authors use the format.",
+   "page": "Season 8 Changes"
+  },
+  {
+   "index": 1120,
+   "feature": "place and institution description",
+   "claim": "Abadia argues the Season 8 format broke a single place description across several headings so that the door's appearance had to be assembled from two sections.",
+   "source": "Teos Abadia (Alphastream), The Best and Worst of Adventure Formats at Winter Fantasy 2020",
+   "url": "https://alphastream.org/index.php/2020/02/20/the-best-and-worst-of-adventure-formats-at-winter-fantasy-2020/",
+   "quote": "The information is spread out.",
+   "page": "Season 8 Changes, Moonshae example"
+  },
+  {
+   "index": 1121,
+   "feature": "dm-facing sentence",
+   "claim": "Abadia's verdict is that the Season 8 format actively obfuscates the content and makes the adventure harder to run at the table.",
+   "source": "Teos Abadia (Alphastream), The Best and Worst of Adventure Formats at Winter Fantasy 2020",
+   "url": "https://alphastream.org/index.php/2020/02/20/the-best-and-worst-of-adventure-formats-at-winter-fantasy-2020/",
+   "quote": "actively obfuscates the content and makes the adventure harder to",
+   "page": "Season 8 Changes, closing"
+  },
+  {
+   "index": 1122,
+   "feature": "boxed text form",
+   "claim": "Abadia praises a rival format's equivalent of boxed text not for being boxed but because it gathers all of the information in one place.",
+   "source": "Teos Abadia (Alphastream), The Best and Worst of Adventure Formats at Winter Fantasy 2020",
+   "url": "https://alphastream.org/index.php/2020/02/20/the-best-and-worst-of-adventure-formats-at-winter-fantasy-2020/",
+   "quote": "eschews the format and actually gathers all of the information",
+   "page": "Season 8 Changes"
+  },
+  {
+   "index": 1123,
+   "feature": "register modulation",
+   "claim": "Christopher Perkins, then editor of DUNGEON Adventures, says Warriors of Heaven does not embrace the narrative style of most Planescape products because it is a core AD&D product.",
+   "source": "Christopher Perkins, interviewed at Planescape: I am the Mimir, 1999",
+   "url": "https://mimir.net/chant/an-interview-with-chris-perkins-designer-of-warriors-of-heaven/",
+   "quote": "does not embrace the narrative style of most PLANESCAPE",
+   "page": "answer on narrative style"
+  },
+  {
+   "index": 1125,
+   "feature": "plainness and economy",
+   "claim": "Perkins says that anyone who has edited his work knows he almost always overwrites.",
+   "source": "Christopher Perkins, interviewed at Planescape: I am the Mimir, 1999",
+   "url": "https://mimir.net/chant/an-interview-with-chris-perkins-designer-of-warriors-of-heaven/",
+   "quote": "I almost always overwrite",
+   "page": "answer on word count"
+  },
+  {
+   "index": 1126,
+   "feature": "place and institution description",
+   "claim": "Perkins says an adventure set in Sigil has an entirely different feel from one set in the Abyss, and that he values describing places that could exist nowhere else.",
+   "source": "Christopher Perkins, interviewed at Planescape: I am the Mimir, 1999",
+   "url": "https://mimir.net/chant/an-interview-with-chris-perkins-designer-of-warriors-of-heaven/",
+   "quote": "an adventure set in Sigil has an entirely different",
+   "page": "answer on what he enjoys as a designer"
+  },
+  {
+   "index": 1127,
+   "feature": "register modulation",
+   "claim": "Perkins says the voice and design of the Planescape campaign setting were daring and striking in their originality.",
+   "source": "Christopher Perkins, interviewed at Planescape: I am the Mimir, 1999",
+   "url": "https://mimir.net/chant/an-interview-with-chris-perkins-designer-of-warriors-of-heaven/",
+   "quote": "The voice and design of the campaign setting was daring",
+   "page": "answer on discovering Planescape"
+  },
+  {
+   "index": 1128,
+   "feature": "plainness and economy",
+   "claim": "Steve Winter, TSR's first hire with professional editing experience, says that in games as in journalism the language needs to be direct and clear.",
+   "source": "Steve Winter, TSR editor, interviewed at Grognardia, 2009",
+   "url": "http://grognardia.blogspot.com/2009/08/interview-steve-winter.html",
+   "quote": "the language needs to be direct and clear",
+   "page": "answer 3"
+  },
+  {
+   "index": 1129,
+   "feature": "adjective and adverb discipline",
+   "claim": "Winter says flowery phrases and clever wordplay are things journalists avoid, and that the same holds in games.",
+   "source": "Steve Winter, TSR editor, interviewed at Grognardia, 2009",
+   "url": "http://grognardia.blogspot.com/2009/08/interview-steve-winter.html",
+   "quote": "Flowery phrases and clever wordplay are things to avoid",
+   "page": "answer 3"
+  },
+  {
+   "index": 1131,
+   "feature": "edition and house style",
+   "claim": "Waterdeep: Dragon Heist, the 2018 city adventure, credits Michele Carter, Scott Fitzgerald Gray and Kim Mohan as its editors.",
+   "source": "Waterdeep: Dragon Heist (Wizards of the Coast, 2018), credits page, read through the Internet Archive's OCR text",
+   "url": "https://archive.org/stream/wheaton_Wdh/Waterdeep%20-%20%20Dragon%20Heist_djvu.txt",
+   "quote": "Editors: Michele Carter Scott Fitzgerald Cray, Kim Mohan",
+   "page": "credits page"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 1115,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "more examples are better than hedged generalizations",
+   "note": "Raw page fetched (chrisssims.wordpress.com, HTTP 200). Quote appears word for word in the 'Generalizations' section, in the paragraph explicitly about writing a description of a species for a game; the surrounding text contrasts game species descriptions with other narratives, so every limb holds."
+  },
+  {
+   "index": 1116,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "leaving a lot of words doing little work",
+   "note": "Raw page. In 'Superlatives or Absolutisms': the sentence about hedged superlatives leads directly into the block-quoted 5e Player's Handbook half-orc passage, which the raw text carries in full. All limbs supported."
+  },
+  {
+   "index": 1117,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Among them is the great Kim Mohan",
+   "note": "Raw page, opening paragraph. Sims's topic sentence names generalizations, hedging and superlatives, then thanks mentors and colleagues who freed him from those habits, Mohan named among them as having tried to teach him more than he could absorb."
+  },
+  {
+   "index": 1118,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "moving away from boxed text and separating information into specific headings",
+   "note": "Raw page fetched (alphastream.org, HTTP 200). 'Season 8 Changes' section; the page frames it as Season 8 AL leaning heavily into that idea, the reason given being that DMs could find and use information as needed. Program named on the page as the D&D Adventurer's League."
+  },
+  {
+   "index": 1119,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Season 8 required that authors use the format.",
+   "note": "Raw page, 'Season 8 Changes', immediately after the description of the heading-driven format (Call to Action, Playing the Pillars, flowchart), so 'the format' is the heading-based one. The page adds that Season 9 keeps the requirement in altered form."
+  },
+  {
+   "index": 1120,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The information is spread out; You must read both places",
+   "note": "Raw page, the MOON12-02 talking-door example. The page states that multiple required headings force the author to break up information that belongs in one place, that the door description sits under 'Dimensions & Terrain' while a clarification sits under 'Door', and that both must be read; a third section (Creatures/NPCs) carries yet more door detail."
+  },
+  {
+   "index": 1121,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "actively obfuscates the content and makes the adventure harder to run",
+   "note": "Raw page, closing sentence of the Season 8 discussion. The page's wording is 'harder to run well at the table'; the claim's 'harder to run at the table' is the same verdict."
+  },
+  {
+   "index": 1122,
+   "verdict": "PARTIAL",
+   "trueWording": "novel excerpt in MOON12-02 eschews the format and actually gathers",
+   "note": "Raw page. The quotation is present and the praise-not-for-being-boxed limb is exact, but the praised passage is not a rival format's: it is an excerpt from a novel printed inside the same Season 8 Moonshae adventure (MOON12-02, A Gift From the Queen) that the post is criticising, and the page's point is that it departs from that Season 8 format. Abadia's rival-format praise elsewhere in the post attaches to the Oracle of War Eberron adventures (EB-07) and to Pelgrane's Night's Black Agents, not to this excerpt.",
+   "unsupportedLimb": "that it is a rival format's equivalent of boxed text - the passage praised sits inside the same Season 8 Moonshae adventure and eschews that format"
+  },
+  {
+   "index": 1123,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "does not embrace the narrative style of most PLANESCAPE products",
+   "note": "Raw page fetched (mimir.net, HTTP 200). Answer to 'From what perspective is the product written?'. The page joins the two limbs with 'and' rather than 'because', but the causal reading is the page's own: the next answer notes A Guide to Hell uses a similar narrative style and 'It, too, is designed as a core AD&D product'. The editor's note at the head of the interview identifies Perkins as editor of TSR's DUNGEON Adventures."
+  },
+  {
+   "index": 1125,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I almost always overwrite",
+   "note": "Raw page, answer to how the supplement grew from 64 to 96 pages. Perkins prefaces it by saying anyone who has edited his work knows this, then explains he had all but exhausted his word count."
+  },
+  {
+   "index": 1126,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "an adventure set in Sigil has an entirely different feel",
+   "note": "Raw page, answer on what attracts him to PLANESCAPE. The same answer carries the second limb: as a designer he enjoys the chance to describe places that could exist nowhere else. Page prints 'feel' in quotation marks and contrasts Sigil with an adventure in the Abyss."
+  },
+  {
+   "index": 1127,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The voice and design of the campaign setting was daring",
+   "note": "Raw page, answer on how he got involved with the PLANESCAPE line. Preceded by his being blown away by the PLANESCAPE Campaign Setting boxed set, so 'the campaign setting' is Planescape; page continues 'and striking in its originality'."
+  },
+  {
+   "index": 1128,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the language needs to be direct and clear",
+   "note": "Raw page fetched (grognardia.blogspot.com, HTTP 200, dated 8 August 2009). The quote closes the answer that begins with journalists being trained for clarity and directness, applying the same to games. The first-hire limb is Winter's own hedged self-report ('I think that I was the first person hired at TSR who had actual job experience in writing and editing'). Locator note: on the page this is answer 2, not answer 3."
+  },
+  {
+   "index": 1129,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Flowery phrases and clever wordplay are things to avoid",
+   "note": "Raw page, same answer as 1128: the sentence follows the statement that journalists are trained to write for clarity and directness, and is followed by 'The same is true in games'. Locator is answer 2, not answer 3."
+  },
+  {
+   "index": 1131,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Editors: Michele Carter Scott Fitzgerald Cray, Kim Mohan",
+   "note": "Raw archive.org full-text page fetched (HTTP 200, 1.19MB) and the OCR credits block read directly. Match is exact once the OCR's doubled spaces are collapsed; the OCR renders Gray as 'Cray'. Same page gives 'First Printing: September 201S' (2018) and the 2018 copyright line, and the foreword frames it as a Waterdeep / City of Splendors adventure, so the date and city-adventure limbs hold."
+  }
+ ]
+}

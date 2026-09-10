@@ -1,0 +1,1725 @@
+{
+  "schemaVersion": 5,
+  "kind": "whole_world_soak",
+  "presetId": "static_campaign",
+  "seed": "lprobe-static_campaign",
+  "years": 5,
+  "settlements": 4,
+  "now": "2026-07-12T00:00:00.000Z",
+  "passed": true,
+  "properties": [
+    "no_crash",
+    "rerun_identical",
+    "population_bounded",
+    "isolated_worker_executed",
+    "isolated_worker_output_identical"
+  ],
+  "seedDivergence": {
+    "executed": true,
+    "instrument": "event_type_total_variation_v1",
+    "verdict": "NOT-EXECUTABLE",
+    "passed": false,
+    "instrumentExecutable": false,
+    "smallestSample": 0,
+    "minSampleEvents": 2,
+    "notExecutableReason": "smallest sample 0 event(s) < the floor of 2 (baseline 0, comparison 0); below it shiftedEventEquivalents cannot reach 2 for ANY pair of worlds, so a FAIL here would be arithmetic rather than evidence",
+    "windowYears": 5,
+    "seeds": {
+      "baseline": "lprobe-static_campaign",
+      "divergent": "lprobe-static_campaign-divergent"
+    },
+    "thresholds": {
+      "minTotalVariationDistance": 0.1,
+      "minShiftedEventEquivalents": 2
+    },
+    "totalVariationDistance": 0,
+    "shiftedEventEquivalents": 0,
+    "sampleTotals": {
+      "baseline": 0,
+      "divergent": 0
+    },
+    "distinctTypeTotals": {
+      "baseline": 0,
+      "divergent": 0
+    },
+    "topTypeShifts": [],
+    "equalWindows": true,
+    "nonEmpty": false,
+    "invalidEntries": [],
+    "hashDiverged": true
+  },
+  "warConvergence": {
+    "schemaVersion": 5,
+    "kind": "war_convergence_observation",
+    "endingsMix": {
+      "terms": 0,
+      "exhaustion": 0,
+      "ruler_change": 0,
+      "fragmentation": 0,
+      "annihilation": 0,
+      "conquest": 0,
+      "punitive_sack_initiation": 0,
+      "punitive_sack_vengeance": 0
+    },
+    "endingsUnclassified": {
+      "not_a_closed_war": 0,
+      "no_terminal_evidence": 0,
+      "razing_road_unreconstructable": 0
+    },
+    "warDurationHistogram": {
+      "short": 0,
+      "long": 0,
+      "generational": 0,
+      "unresolved": 0,
+      "unmeasured": 0
+    },
+    "terminationDecidingTermHistogram": {
+      "cause": 0,
+      "cost_to_continue": 0,
+      "cost_to_stop": 0,
+      "momentum": 0
+    },
+    "decidingTermSampling": {
+      "censusSource": "outcome stream (every interior tick), not the year-boundary deployment ledger",
+      "closeTickResolution": "tick",
+      "observedOpenRoads": [
+        "war_layer_strategy_deploy"
+      ],
+      "observedCloseRoads": [
+        "war_layer_war_exhaustion/siege_abandoned"
+      ],
+      "unobservedRoadDurationsAre": "unmeasured",
+      "decidingTermSample": "1-in-52",
+      "decidingTermSampleReason": "warTerminationReads ride the pulse record and collapseIntervalHistory keeps only the year-final tick",
+      "samples": 0,
+      "horizonTick": 260
+    },
+    "flagCertificationRows": [
+      {
+        "rule": "warTerminationEnabled",
+        "ruleState": "unknown",
+        "verdict": "UNOBSERVED"
+      },
+      {
+        "rule": "dispositionChannelsEnabled",
+        "ruleState": "unknown",
+        "verdict": "UNOBSERVED"
+      },
+      {
+        "rule": "lineageClaimEnabled",
+        "ruleState": "unknown",
+        "verdict": "UNOBSERVED"
+      },
+      {
+        "rule": "coalitionLedgerEnabled",
+        "ruleState": "unknown",
+        "verdict": "UNOBSERVED"
+      },
+      {
+        "rule": "envoyDiplomacyEnabled",
+        "ruleState": "unknown",
+        "verdict": "UNOBSERVED"
+      },
+      {
+        "rule": "conquestDoctrineEnabled",
+        "ruleState": "unknown",
+        "verdict": "UNOBSERVED"
+      },
+      {
+        "rule": "sovereigntyTradeEnabled",
+        "ruleState": "unknown",
+        "verdict": "UNOBSERVED"
+      }
+    ],
+    "forceEvidence": {
+      "homeFrontByDurationBand": {
+        "opening": {
+          "samples": 0,
+          "scoreTotal": 0
+        },
+        "sustained": {
+          "samples": 0,
+          "scoreTotal": 0
+        },
+        "protracted": {
+          "samples": 0,
+          "scoreTotal": 0
+        }
+      },
+      "capabilityReadings": {
+        "readings": 0,
+        "atCollapse": 0
+      },
+      "compromiseWideningSequences": [],
+      "coalitionFragmentation": {
+        "fragmentations": 0,
+        "pairwisePeaces": 0
+      }
+    }
+  },
+  "warConvergenceCensus": {
+    "countedWars": 0,
+    "closedWars": 0,
+    "aliveAtHorizonWars": 0,
+    "histogramSum": 0,
+    "endingsSum": 0,
+    "durationTotalityHolds": true,
+    "endingsTotalityHolds": true,
+    "classifiedEndings": 0,
+    "unclassifiedEndings": 0,
+    "unclassifiedReasons": {
+      "not_a_closed_war": 0,
+      "no_terminal_evidence": 0,
+      "razing_road_unreconstructable": 0
+    },
+    "unmeasuredFromUnobservedRoad": 0,
+    "unmeasuredFromAmbiguousPair": 0,
+    "decidingTermSamples": 0,
+    "horizonTick": 260,
+    "channelCoverage": {
+      "closed": "filled — a reconstructed siege-abandoned outcome, or an open whose army is gone",
+      "attackerId": "filled — reconstructed from the outcome id prefix",
+      "defenderId": "filled — reconstructed from the outcome id prefix",
+      "terminalOutcomes": "filled — conquest and razing outcomes accumulated across every interior tick",
+      "loserDied": "filled — the engine settlement death stamp, config.lifecycleDiedAtTick",
+      "treatyWritten": "filled — the treaty ledger, keyed by the real treatyPairKey minter",
+      "peaceReason": "unfilled — no peace reason reaches the composed year result; warTermination publishes bands and a deciding term, not the reason token classifyWarEnding reads",
+      "coalitionFragmented": "unfilled — coalition fracture facts need coalitionLedgerEnabled, which no shipped preset lights",
+      "seatTransitionFamily": "unfilled — the WR-5 governed families need lineageClaimEnabled, which no shipped preset lights"
+    },
+    "sampling": {
+      "censusSource": "outcome stream (every interior tick), not the year-boundary deployment ledger",
+      "closeTickResolution": "tick",
+      "observedOpenRoads": [
+        "war_layer_strategy_deploy"
+      ],
+      "observedCloseRoads": [
+        "war_layer_war_exhaustion/siege_abandoned"
+      ],
+      "unobservedRoadDurationsAre": "unmeasured",
+      "decidingTermSample": "1-in-52",
+      "decidingTermSampleReason": "warTerminationReads ride the pulse record and collapseIntervalHistory keeps only the year-final tick"
+    }
+  },
+  "finalHash": "45eeaf548170944f77d45c465df0b517dbbd94c5b98e2ec43b7bdb4138387d19",
+  "yearlyHashes": [
+    "74968a135cf21ab964e56043f6dedd38c4523d26cf29d226b5ff62425359b25d",
+    "76adc389d2b4e731b397319bcacb2a7d5244add23520edc45a98e3c1d8c1292f",
+    "a7c863f29aa753753f46447f5a5701f4482ad384fc99b8a488e1f086ab3350c6",
+    "be1c1bab1dcb0e71fd7e4b2d7d7c7300c0833a48a89e237c3ae401f96556500d",
+    "45eeaf548170944f77d45c465df0b517dbbd94c5b98e2ec43b7bdb4138387d19"
+  ],
+  "directFirstResultSha256": "f6eb68a2edc7c63f89116af839c7028ffbc3063a5b4fbd0c9a2743305e7a6c20",
+  "advanceEpochs": [
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "stressorCounts": [
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "startPopulations": [
+    23730,
+    2523,
+    2591,
+    705
+  ],
+  "finalPopulations": [
+    23730,
+    2523,
+    2591,
+    705
+  ],
+  "finalDiedFlags": [
+    false,
+    false,
+    false,
+    false
+  ],
+  "yearlyBytes": [
+    75066,
+    77738,
+    79246,
+    81027,
+    82930
+  ],
+  "yearlyRealmBytes": [
+    751137,
+    765472,
+    767460,
+    769388,
+    772069
+  ],
+  "yearlyMs": [
+    471,
+    398,
+    376,
+    362,
+    397
+  ],
+  "finalRealmBytes": 786172,
+  "structuredCloneMs": 3.878957999999784,
+  "isolatedWorker": {
+    "schemaVersion": 1,
+    "kind": "isolated_advance_worker_measurement",
+    "actualExecution": true,
+    "runtime": {
+      "transport": "node:worker_threads",
+      "isolation": "separate-thread-v8-isolate",
+      "nodeVersion": "v24.12.0",
+      "platform": "darwin",
+      "architecture": "arm64",
+      "parentThreadId": 0,
+      "parentIsMainThread": true,
+      "workerThreadId": 1,
+      "workerIsMainThread": false,
+      "browserWebWorker": false,
+      "productionBrowserTransportMeasured": false,
+      "productWorkerModule": "src/workers/advanceInterval.worker.js",
+      "domainEntry": "src/domain/worldPulse/advanceInterval.js#simulateCampaignWorldInterval"
+    },
+    "request": {
+      "interval": "one_year",
+      "jsonBytes": 654159,
+      "jsonSha256": "e0d5b76ee88ac81f46296bdf971e2d15adba148a12cb94ec85165b73d51fd62b"
+    },
+    "response": {
+      "status": "complete",
+      "jsonBytes": 1435498,
+      "jsonSha256": "f6eb68a2edc7c63f89116af839c7028ffbc3063a5b4fbd0c9a2743305e7a6c20",
+      "progressMessages": 52,
+      "firstProgress": {
+        "ticksDone": 1,
+        "ticksTotal": 52,
+        "interval": "one_year"
+      },
+      "lastProgress": {
+        "ticksDone": 52,
+        "ticksTotal": 52,
+        "interval": "one_year"
+      }
+    },
+    "timingsMs": {
+      "workerConstructor": 0.758,
+      "workerOnlineAfterConstructionStart": 15.793,
+      "productAdapterReadyAfterConstructionStart": 293.954,
+      "coldStartToTerminal": 858.529,
+      "requestToTerminal": 857.77,
+      "workerHandlerToTerminalPost": 556.221,
+      "boundaryAndBootstrapResidual": 301.549
+    },
+    "nonVacuous": true,
+    "claimBoundary": {
+      "measured": "An actual cold Node worker_threads round trip through the product advance worker module and domain entry.",
+      "notMeasured": "Browser Web Worker startup, scheduling, structured-clone implementation, or device-specific duration.",
+      "residual": "boundaryAndBootstrapResidual is an arithmetic remainder containing bootstrap, scheduling, clone, and delivery work; it is not exact transport time.",
+      "timingClass": "Host-sensitive release evidence and regression telemetry, not a cross-device performance guarantee."
+    }
+  },
+  "isolatedWorkerError": null,
+  "heapUsedBytes": 179562608,
+  "peakHeapUsedBytes": 176169336,
+  "realmScalingExercised": false,
+  "subsystems": {
+    "schemaVersion": 5,
+    "kind": "soak_subsystem_configuration",
+    "presetId": "static_campaign",
+    "observedYears": 5,
+    "ruleKeysRecorded": 25,
+    "rules": {
+      "allyDefenseEnabled": false,
+      "defenderAttritionEnabled": false,
+      "defenderResolveEnabled": false,
+      "emergentEventsEnabled": false,
+      "factionCompetitionEnabled": false,
+      "faithSpreadEnabled": false,
+      "institutionLifecycleEnabled": false,
+      "majorChangesRequireProposal": true,
+      "migrationFlowsEnabled": false,
+      "npcAgencyEnabled": false,
+      "populationDynamicsEnabled": false,
+      "relationshipDynamicsEnabled": false,
+      "religionDynamicsEnabled": false,
+      "resourceDriftEnabled": false,
+      "seasonsEnabled": false,
+      "settlementStrategyEnabled": false,
+      "stressorsEnabled": false,
+      "tierDriftEnabled": false,
+      "tradeFlowsEnabled": false,
+      "warDispositionEnabled": false,
+      "warEconomyDrainEnabled": false,
+      "warForageEnabled": false,
+      "warLayerEnabled": false,
+      "warLevyEnabled": false,
+      "warSupplyQualityEnabled": false
+    },
+    "stateKeysComplete": true,
+    "stateKeys": {
+      "calendar": {
+        "years": 5,
+        "maxEntries": 5,
+        "finalEntries": 5
+      },
+      "canonizedAt": {
+        "years": 5,
+        "maxEntries": 1,
+        "finalEntries": 1
+      },
+      "causeLifecycle": {
+        "years": 4,
+        "maxEntries": 2,
+        "finalEntries": 1
+      },
+      "deployments": {
+        "years": 5,
+        "maxEntries": 0,
+        "finalEntries": 0
+      },
+      "dispositionStats": {
+        "years": 5,
+        "maxEntries": 0,
+        "finalEntries": 0
+      },
+      "factionStates": {
+        "years": 5,
+        "maxEntries": 29,
+        "finalEntries": 29
+      },
+      "npcStates": {
+        "years": 5,
+        "maxEntries": 40,
+        "finalEntries": 40
+      },
+      "pendingEvents": {
+        "years": 5,
+        "maxEntries": 0,
+        "finalEntries": 0
+      },
+      "proposals": {
+        "years": 5,
+        "maxEntries": 0,
+        "finalEntries": 0
+      },
+      "pulseHistory": {
+        "years": 5,
+        "maxEntries": 5,
+        "finalEntries": 5
+      },
+      "relationshipStates": {
+        "years": 5,
+        "maxEntries": 6,
+        "finalEntries": 6
+      },
+      "rngSeed": {
+        "years": 5,
+        "maxEntries": 1,
+        "finalEntries": 1
+      },
+      "schemaVersion": {
+        "years": 5,
+        "maxEntries": 1,
+        "finalEntries": 1
+      },
+      "settlementTickStates": {
+        "years": 5,
+        "maxEntries": 4,
+        "finalEntries": 4
+      },
+      "simulationRules": {
+        "years": 5,
+        "maxEntries": 36,
+        "finalEntries": 36
+      },
+      "spatialCanonVersion": {
+        "years": 5,
+        "maxEntries": 1,
+        "finalEntries": 1
+      },
+      "spatialDigest": {
+        "years": 5,
+        "maxEntries": 14,
+        "finalEntries": 14
+      },
+      "spatialLedgers": {
+        "years": 5,
+        "maxEntries": 1,
+        "finalEntries": 1
+      },
+      "spatialLedgers.supplyShipments": {
+        "years": 5,
+        "maxEntries": 6,
+        "finalEntries": 6
+      },
+      "stressors": {
+        "years": 5,
+        "maxEntries": 0,
+        "finalEntries": 0
+      },
+      "tick": {
+        "years": 5,
+        "maxEntries": 1,
+        "finalEntries": 1
+      },
+      "tradeWarState": {
+        "years": 5,
+        "maxEntries": 0,
+        "finalEntries": 0
+      },
+      "volatility": {
+        "years": 5,
+        "maxEntries": 1,
+        "finalEntries": 1
+      },
+      "warExhaustion": {
+        "years": 5,
+        "maxEntries": 0,
+        "finalEntries": 0
+      }
+    }
+  },
+  "behavioral": {
+    "schemaVersion": 4,
+    "kind": "whole_world_behavioral_observation",
+    "settlementIds": [
+      "soak-a",
+      "soak-b",
+      "soak-c",
+      "soak-d"
+    ],
+    "yearly": [
+      {
+        "year": 1,
+        "eventCount": 0,
+        "majorEventCount": 0,
+        "mechanicalOutcomeCount": 0,
+        "unclassifiedEventCount": 0,
+        "eventTypeCounts": {},
+        "moverCounts": {
+          "pressure": 0,
+          "place": 1,
+          "population": 0,
+          "economy": 0,
+          "politics": 0,
+          "war": 0,
+          "faith": 0,
+          "people": 5,
+          "constructive": 0,
+          "knowledge": 0
+        },
+        "selectedMoverCounts": {
+          "pressure": 0,
+          "place": 0,
+          "population": 0,
+          "economy": 0,
+          "politics": 0,
+          "war": 0,
+          "faith": 0,
+          "people": 0,
+          "constructive": 0,
+          "knowledge": 0
+        },
+        "postApplyMoverCounts": {
+          "pressure": 0,
+          "place": 1,
+          "population": 0,
+          "economy": 0,
+          "politics": 0,
+          "war": 0,
+          "faith": 0,
+          "people": 5,
+          "constructive": 0,
+          "knowledge": 0
+        },
+        "postApplyReceiptCount": 6,
+        "arcCounts": {
+          "constructive": 0,
+          "destructive": 0
+        },
+        "postApplyArcCounts": {
+          "constructive": 0,
+          "destructive": 0
+        },
+        "motion": {
+          "populationTransitions": 4,
+          "populationMoved": 0,
+          "prosperityTransitions": 4,
+          "prosperityMoved": 0,
+          "powerTransitions": 4,
+          "powerMoved": 1
+        },
+        "attentionCounts": {},
+        "succession": {
+          "pendingProposals": 0,
+          "attempts": 0,
+          "completions": 0,
+          "integrityFailures": 0,
+          "integrityFailureKinds": {}
+        },
+        "causal": {
+          "crossFamilyEdges": 0,
+          "multiParentEvents": 0,
+          "familyPairs": []
+        },
+        "chronicleSample": [],
+        "stateVectors": {
+          "soak-a": {
+            "population": 23730,
+            "prosperity": 5,
+            "topFaction": "City Council",
+            "powerEntropy": 0.9596672885626075
+          },
+          "soak-b": {
+            "population": 2523,
+            "prosperity": 5,
+            "topFaction": "Guild Council",
+            "powerEntropy": 0.9715006996793791
+          },
+          "soak-c": {
+            "population": 2591,
+            "prosperity": 4,
+            "topFaction": "Military/Guard",
+            "powerEntropy": 0.6933189897375832
+          },
+          "soak-d": {
+            "population": 705,
+            "prosperity": 4,
+            "topFaction": "Elected Reeve",
+            "powerEntropy": 0.9783243733988494
+          }
+        },
+        "phraseRepetition": {
+          "schemaVersion": 1,
+          "kind": "phrase_repetition",
+          "windowTicks": 13,
+          "observations": 9,
+          "windows": 9,
+          "exactRepeats": 0,
+          "familyRepeats": 0,
+          "exactRepeatRate": 0,
+          "familyRepeatRate": 0,
+          "untrackedFamilies": 9,
+          "worstWindow": {
+            "settlementId": "soak-a",
+            "window": 4,
+            "startTick": 52,
+            "endTick": 64,
+            "observations": 1,
+            "exactRepeats": 0,
+            "familyRepeats": 0,
+            "exactRepeatRate": 0,
+            "familyRepeatRate": 0,
+            "untrackedFamilies": 1
+          },
+          "byWindow": [
+            {
+              "settlementId": "soak-a",
+              "window": 4,
+              "startTick": 52,
+              "endTick": 64,
+              "observations": 1,
+              "exactRepeats": 0,
+              "familyRepeats": 0,
+              "exactRepeatRate": 0,
+              "familyRepeatRate": 0,
+              "untrackedFamilies": 1
+            },
+            {
+              "settlementId": "soak-b",
+              "window": 0,
+              "startTick": 0,
+              "endTick": 12,
+              "observations": 1,
+              "exactRepeats": 0,
+              "familyRepeats": 0,
+              "exactRepeatRate": 0,
+              "familyRepeatRate": 0,
+              "untrackedFamilies": 1
+            },
+            {
+              "settlementId": "soak-b",
+              "window": 3,
+              "startTick": 39,
+              "endTick": 51,
+              "observations": 1,
+              "exactRepeats": 0,
+              "familyRepeats": 0,
+              "exactRepeatRate": 0,
+              "familyRepeatRate": 0,
+              "untrackedFamilies": 1
+            },
+            {
+              "settlementId": "soak-b",
+              "window": 4,
+              "startTick": 52,
+              "endTick": 64,
+              "observations": 1,
+              "exactRepeats": 0,
+              "familyRepeats": 0,
+              "exactRepeatRate": 0,
+              "familyRepeatRate": 0,
+              "untrackedFamilies": 1
+            },
+            {
+              "settlementId": "soak-c",
+              "window": 0,
+              "startTick": 0,
+              "endTick": 12,
+              "observations": 1,
+              "exactRepeats": 0,
+              "familyRepeats": 0,
+              "exactRepeatRate": 0,
+              "familyRepeatRate": 0,
+              "untrackedFamilies": 1
+            },
+            {
+              "settlementId": "soak-c",
+              "window": 1,
+              "startTick": 13,
+              "endTick": 25,
+              "observations": 1,
+              "exactRepeats": 0,
+              "familyRepeats": 0,
+              "exactRepeatRate": 0,
+              "familyRepeatRate": 0,
+              "untrackedFamilies": 1
+            },
+            {
+              "settlementId": "soak-c",
+              "window": 2,
+              "startTick": 26,
+              "endTick": 38,
+              "observations": 1,
+              "exactRepeats": 0,
+              "familyRepeats": 0,
+              "exactRepeatRate": 0,
+              "familyRepeatRate": 0,
+              "untrackedFamilies": 1
+            },
+            {
+              "settlementId": "soak-c",
+              "window": 4,
+              "startTick": 52,
+              "endTick": 64,
+              "observations": 1,
+              "exactRepeats": 0,
+              "familyRepeats": 0,
+              "exactRepeatRate": 0,
+              "familyRepeatRate": 0,
+              "untrackedFamilies": 1
+            },
+            {
+              "settlementId": "soak-d",
+              "window": 4,
+              "startTick": 52,
+              "endTick": 64,
+              "observations": 1,
+              "exactRepeats": 0,
+              "familyRepeats": 0,
+              "exactRepeatRate": 0,
+              "familyRepeatRate": 0,
+              "untrackedFamilies": 1
+            }
+          ]
+        },
+        "addressChain": {
+          "schemaVersion": 1,
+          "rows": 6,
+          "subjectAddressed": 6,
+          "typedAction": 6,
+          "affectedSettlements": 6,
+          "reason": 5,
+          "fullyAddressed": 5,
+          "depthHistogram": {
+            "0": 0,
+            "1": 6,
+            "2": 0,
+            "3": 0,
+            "4": 0
+          },
+          "subjectAddressedRateMilli": 1000,
+          "typedActionRateMilli": 1000,
+          "affectedSettlementsRateMilli": 1000,
+          "reasonRateMilli": 833,
+          "fullyAddressedRateMilli": 833
+        },
+        "beliefDivergence": {
+          "infoMode": "omniscient",
+          "spatialCanonized": true,
+          "observers": 0,
+          "slots": 0,
+          "records": 0,
+          "meanConfidence01": null,
+          "meanStalenessTicks": null,
+          "maxStalenessTicks": null,
+          "relationshipComparable": 0,
+          "relationshipMismatched": 0,
+          "faithComparable": 0,
+          "faithMismatched": 0,
+          "axes": [],
+          "divergence01": null
+        }
+      },
+      {
+        "year": 2,
+        "eventCount": 0,
+        "majorEventCount": 0,
+        "mechanicalOutcomeCount": 0,
+        "unclassifiedEventCount": 0,
+        "eventTypeCounts": {},
+        "moverCounts": {
+          "pressure": 0,
+          "place": 1,
+          "population": 0,
+          "economy": 0,
+          "politics": 0,
+          "war": 0,
+          "faith": 0,
+          "people": 4,
+          "constructive": 0,
+          "knowledge": 0
+        },
+        "selectedMoverCounts": {
+          "pressure": 0,
+          "place": 0,
+          "population": 0,
+          "economy": 0,
+          "politics": 0,
+          "war": 0,
+          "faith": 0,
+          "people": 0,
+          "constructive": 0,
+          "knowledge": 0
+        },
+        "postApplyMoverCounts": {
+          "pressure": 0,
+          "place": 1,
+          "population": 0,
+          "economy": 0,
+          "politics": 0,
+          "war": 0,
+          "faith": 0,
+          "people": 4,
+          "constructive": 0,
+          "knowledge": 0
+        },
+        "postApplyReceiptCount": 5,
+        "arcCounts": {
+          "constructive": 0,
+          "destructive": 0
+        },
+        "postApplyArcCounts": {
+          "constructive": 0,
+          "destructive": 0
+        },
+        "motion": {
+          "populationTransitions": 4,
+          "populationMoved": 0,
+          "prosperityTransitions": 4,
+          "prosperityMoved": 0,
+          "powerTransitions": 4,
+          "powerMoved": 2
+        },
+        "attentionCounts": {},
+        "succession": {
+          "pendingProposals": 0,
+          "attempts": 0,
+          "completions": 0,
+          "integrityFailures": 0,
+          "integrityFailureKinds": {}
+        },
+        "causal": {
+          "crossFamilyEdges": 0,
+          "multiParentEvents": 0,
+          "familyPairs": []
+        },
+        "chronicleSample": [],
+        "stateVectors": {
+          "soak-a": {
+            "population": 23730,
+            "prosperity": 5,
+            "topFaction": "City Council",
+            "powerEntropy": 0.9625553998623017
+          },
+          "soak-b": {
+            "population": 2523,
+            "prosperity": 5,
+            "topFaction": "Guild Council",
+            "powerEntropy": 0.9715006996793791
+          },
+          "soak-c": {
+            "population": 2591,
+            "prosperity": 4,
+            "topFaction": "Military/Guard",
+            "powerEntropy": 0.7060934061561138
+          },
+          "soak-d": {
+            "population": 705,
+            "prosperity": 4,
+            "topFaction": "Elected Reeve",
+            "powerEntropy": 0.9783243733988494
+          }
+        },
+        "phraseRepetition": {
+          "schemaVersion": 1,
+          "kind": "phrase_repetition",
+          "windowTicks": 13,
+          "observations": 8,
+          "windows": 6,
+          "exactRepeats": 2,
+          "familyRepeats": 2,
+          "exactRepeatRate": 0.25,
+          "familyRepeatRate": 0.25,
+          "untrackedFamilies": 8,
+          "worstWindow": {
+            "settlementId": "soak-a",
+            "window": 7,
+            "startTick": 91,
+            "endTick": 103,
+            "observations": 3,
+            "exactRepeats": 2,
+            "familyRepeats": 2,
+            "exactRepeatRate": 0.6667,
+            "familyRepeatRate": 0.6667,
+            "untrackedFamilies": 3
+          },
+          "byWindow": [
+            {
+              "settlementId": "soak-a",
+              "window": 7,
+              "startTick": 91,
+              "endTick": 103,
+              "observations": 3,
+              "exactRepeats": 2,
+              "familyRepeats": 2,
+              "exactRepeatRate": 0.6667,
+              "familyRepeatRate": 0.6667,
+              "untrackedFamilies": 3
+            },
+            {
+              "settlementId": "soak-a",
+              "window": 8,
+              "startTick": 104,
+              "endTick": 116,
+              "observations": 1,
+              "exactRepeats": 0,
+              "familyRepeats": 0,
+              "exactRepeatRate": 0,
+              "familyRepeatRate": 0,
+              "untrackedFamilies": 1
+            },
+            {
+              "settlementId": "soak-b",
+              "window": 5,
+              "startTick": 65,
+              "endTick": 77,
+              "observations": 1,
+              "exactRepeats": 0,
+              "familyRepeats": 0,
+              "exactRepeatRate": 0,
+              "familyRepeatRate": 0,
+              "untrackedFamilies": 1
+            },
+            {
+              "settlementId": "soak-b",
+              "window": 8,
+              "startTick": 104,
+              "endTick": 116,
+              "observations": 1,
+              "exactRepeats": 0,
+              "familyRepeats": 0,
+              "exactRepeatRate": 0,
+              "familyRepeatRate": 0,
+              "untrackedFamilies": 1
+            },
+            {
+              "settlementId": "soak-c",
+              "window": 8,
+              "startTick": 104,
+              "endTick": 116,
+              "observations": 1,
+              "exactRepeats": 0,
+              "familyRepeats": 0,
+              "exactRepeatRate": 0,
+              "familyRepeatRate": 0,
+              "untrackedFamilies": 1
+            },
+            {
+              "settlementId": "soak-d",
+              "window": 8,
+              "startTick": 104,
+              "endTick": 116,
+              "observations": 1,
+              "exactRepeats": 0,
+              "familyRepeats": 0,
+              "exactRepeatRate": 0,
+              "familyRepeatRate": 0,
+              "untrackedFamilies": 1
+            }
+          ]
+        },
+        "addressChain": {
+          "schemaVersion": 1,
+          "rows": 5,
+          "subjectAddressed": 5,
+          "typedAction": 5,
+          "affectedSettlements": 5,
+          "reason": 4,
+          "fullyAddressed": 4,
+          "depthHistogram": {
+            "0": 0,
+            "1": 5,
+            "2": 0,
+            "3": 0,
+            "4": 0
+          },
+          "subjectAddressedRateMilli": 1000,
+          "typedActionRateMilli": 1000,
+          "affectedSettlementsRateMilli": 1000,
+          "reasonRateMilli": 800,
+          "fullyAddressedRateMilli": 800
+        },
+        "beliefDivergence": {
+          "infoMode": "omniscient",
+          "spatialCanonized": true,
+          "observers": 0,
+          "slots": 0,
+          "records": 0,
+          "meanConfidence01": null,
+          "meanStalenessTicks": null,
+          "maxStalenessTicks": null,
+          "relationshipComparable": 0,
+          "relationshipMismatched": 0,
+          "faithComparable": 0,
+          "faithMismatched": 0,
+          "axes": [],
+          "divergence01": null
+        }
+      },
+      {
+        "year": 3,
+        "eventCount": 0,
+        "majorEventCount": 0,
+        "mechanicalOutcomeCount": 0,
+        "unclassifiedEventCount": 0,
+        "eventTypeCounts": {},
+        "moverCounts": {
+          "pressure": 0,
+          "place": 1,
+          "population": 0,
+          "economy": 0,
+          "politics": 0,
+          "war": 0,
+          "faith": 0,
+          "people": 5,
+          "constructive": 0,
+          "knowledge": 0
+        },
+        "selectedMoverCounts": {
+          "pressure": 0,
+          "place": 0,
+          "population": 0,
+          "economy": 0,
+          "politics": 0,
+          "war": 0,
+          "faith": 0,
+          "people": 0,
+          "constructive": 0,
+          "knowledge": 0
+        },
+        "postApplyMoverCounts": {
+          "pressure": 0,
+          "place": 1,
+          "population": 0,
+          "economy": 0,
+          "politics": 0,
+          "war": 0,
+          "faith": 0,
+          "people": 5,
+          "constructive": 0,
+          "knowledge": 0
+        },
+        "postApplyReceiptCount": 6,
+        "arcCounts": {
+          "constructive": 0,
+          "destructive": 0
+        },
+        "postApplyArcCounts": {
+          "constructive": 0,
+          "destructive": 0
+        },
+        "motion": {
+          "populationTransitions": 4,
+          "populationMoved": 0,
+          "prosperityTransitions": 4,
+          "prosperityMoved": 0,
+          "powerTransitions": 4,
+          "powerMoved": 0
+        },
+        "attentionCounts": {},
+        "succession": {
+          "pendingProposals": 0,
+          "attempts": 0,
+          "completions": 0,
+          "integrityFailures": 0,
+          "integrityFailureKinds": {}
+        },
+        "causal": {
+          "crossFamilyEdges": 0,
+          "multiParentEvents": 0,
+          "familyPairs": []
+        },
+        "chronicleSample": [],
+        "stateVectors": {
+          "soak-a": {
+            "population": 23730,
+            "prosperity": 5,
+            "topFaction": "City Council",
+            "powerEntropy": 0.9625553998623017
+          },
+          "soak-b": {
+            "population": 2523,
+            "prosperity": 5,
+            "topFaction": "Guild Council",
+            "powerEntropy": 0.9715006996793791
+          },
+          "soak-c": {
+            "population": 2591,
+            "prosperity": 4,
+            "topFaction": "Military/Guard",
+            "powerEntropy": 0.7060934061561138
+          },
+          "soak-d": {
+            "population": 705,
+            "prosperity": 4,
+            "topFaction": "Elected Reeve",
+            "powerEntropy": 0.9783243733988494
+          }
+        },
+        "phraseRepetition": {
+          "schemaVersion": 1,
+          "kind": "phrase_repetition",
+          "windowTicks": 13,
+          "observations": 9,
+          "windows": 7,
+          "exactRepeats": 1,
+          "familyRepeats": 1,
+          "exactRepeatRate": 0.1111,
+          "familyRepeatRate": 0.1111,
+          "untrackedFamilies": 9,
+          "worstWindow": {
+            "settlementId": "soak-a",
+            "window": 8,
+            "startTick": 104,
+            "endTick": 116,
+            "observations": 3,
+            "exactRepeats": 1,
+            "familyRepeats": 1,
+            "exactRepeatRate": 0.3333,
+            "familyRepeatRate": 0.3333,
+            "untrackedFamilies": 3
+          },
+          "byWindow": [
+            {
+              "settlementId": "soak-a",
+              "window": 8,
+              "startTick": 104,
+              "endTick": 116,
+              "observations": 3,
+              "exactRepeats": 1,
+              "familyRepeats": 1,
+              "exactRepeatRate": 0.3333,
+              "familyRepeatRate": 0.3333,
+              "untrackedFamilies": 3
+            },
+            {
+              "settlementId": "soak-a",
+              "window": 9,
+              "startTick": 117,
+              "endTick": 129,
+              "observations": 1,
+              "exactRepeats": 0,
+              "familyRepeats": 0,
+              "exactRepeatRate": 0,
+              "familyRepeatRate": 0,
+              "untrackedFamilies": 1
+            },
+            {
+              "settlementId": "soak-a",
+              "window": 12,
+              "startTick": 156,
+              "endTick": 168,
+              "observations": 1,
+              "exactRepeats": 0,
+              "familyRepeats": 0,
+              "exactRepeatRate": 0,
+              "familyRepeatRate": 0,
+              "untrackedFamilies": 1
+            },
+            {
+              "settlementId": "soak-b",
+              "window": 8,
+              "startTick": 104,
+              "endTick": 116,
+              "observations": 1,
+              "exactRepeats": 0,
+              "familyRepeats": 0,
+              "exactRepeatRate": 0,
+              "familyRepeatRate": 0,
+              "untrackedFamilies": 1
+            },
+            {
+              "settlementId": "soak-b",
+              "window": 12,
+              "startTick": 156,
+              "endTick": 168,
+              "observations": 1,
+              "exactRepeats": 0,
+              "familyRepeats": 0,
+              "exactRepeatRate": 0,
+              "familyRepeatRate": 0,
+              "untrackedFamilies": 1
+            },
+            {
+              "settlementId": "soak-c",
+              "window": 12,
+              "startTick": 156,
+              "endTick": 168,
+              "observations": 1,
+              "exactRepeats": 0,
+              "familyRepeats": 0,
+              "exactRepeatRate": 0,
+              "familyRepeatRate": 0,
+              "untrackedFamilies": 1
+            },
+            {
+              "settlementId": "soak-d",
+              "window": 12,
+              "startTick": 156,
+              "endTick": 168,
+              "observations": 1,
+              "exactRepeats": 0,
+              "familyRepeats": 0,
+              "exactRepeatRate": 0,
+              "familyRepeatRate": 0,
+              "untrackedFamilies": 1
+            }
+          ]
+        },
+        "addressChain": {
+          "schemaVersion": 1,
+          "rows": 6,
+          "subjectAddressed": 6,
+          "typedAction": 6,
+          "affectedSettlements": 6,
+          "reason": 5,
+          "fullyAddressed": 5,
+          "depthHistogram": {
+            "0": 0,
+            "1": 6,
+            "2": 0,
+            "3": 0,
+            "4": 0
+          },
+          "subjectAddressedRateMilli": 1000,
+          "typedActionRateMilli": 1000,
+          "affectedSettlementsRateMilli": 1000,
+          "reasonRateMilli": 833,
+          "fullyAddressedRateMilli": 833
+        },
+        "beliefDivergence": {
+          "infoMode": "omniscient",
+          "spatialCanonized": true,
+          "observers": 0,
+          "slots": 0,
+          "records": 0,
+          "meanConfidence01": null,
+          "meanStalenessTicks": null,
+          "maxStalenessTicks": null,
+          "relationshipComparable": 0,
+          "relationshipMismatched": 0,
+          "faithComparable": 0,
+          "faithMismatched": 0,
+          "axes": [],
+          "divergence01": null
+        }
+      },
+      {
+        "year": 4,
+        "eventCount": 0,
+        "majorEventCount": 0,
+        "mechanicalOutcomeCount": 0,
+        "unclassifiedEventCount": 0,
+        "eventTypeCounts": {},
+        "moverCounts": {
+          "pressure": 0,
+          "place": 1,
+          "population": 0,
+          "economy": 0,
+          "politics": 0,
+          "war": 0,
+          "faith": 0,
+          "people": 0,
+          "constructive": 0,
+          "knowledge": 0
+        },
+        "selectedMoverCounts": {
+          "pressure": 0,
+          "place": 0,
+          "population": 0,
+          "economy": 0,
+          "politics": 0,
+          "war": 0,
+          "faith": 0,
+          "people": 0,
+          "constructive": 0,
+          "knowledge": 0
+        },
+        "postApplyMoverCounts": {
+          "pressure": 0,
+          "place": 1,
+          "population": 0,
+          "economy": 0,
+          "politics": 0,
+          "war": 0,
+          "faith": 0,
+          "people": 0,
+          "constructive": 0,
+          "knowledge": 0
+        },
+        "postApplyReceiptCount": 1,
+        "arcCounts": {
+          "constructive": 0,
+          "destructive": 0
+        },
+        "postApplyArcCounts": {
+          "constructive": 0,
+          "destructive": 0
+        },
+        "motion": {
+          "populationTransitions": 4,
+          "populationMoved": 0,
+          "prosperityTransitions": 4,
+          "prosperityMoved": 0,
+          "powerTransitions": 4,
+          "powerMoved": 0
+        },
+        "attentionCounts": {},
+        "succession": {
+          "pendingProposals": 0,
+          "attempts": 0,
+          "completions": 0,
+          "integrityFailures": 0,
+          "integrityFailureKinds": {}
+        },
+        "causal": {
+          "crossFamilyEdges": 0,
+          "multiParentEvents": 0,
+          "familyPairs": []
+        },
+        "chronicleSample": [],
+        "stateVectors": {
+          "soak-a": {
+            "population": 23730,
+            "prosperity": 5,
+            "topFaction": "City Council",
+            "powerEntropy": 0.9625553998623017
+          },
+          "soak-b": {
+            "population": 2523,
+            "prosperity": 5,
+            "topFaction": "Guild Council",
+            "powerEntropy": 0.9715006996793791
+          },
+          "soak-c": {
+            "population": 2591,
+            "prosperity": 4,
+            "topFaction": "Military/Guard",
+            "powerEntropy": 0.7060934061561138
+          },
+          "soak-d": {
+            "population": 705,
+            "prosperity": 4,
+            "topFaction": "Elected Reeve",
+            "powerEntropy": 0.9783243733988494
+          }
+        },
+        "phraseRepetition": {
+          "schemaVersion": 1,
+          "kind": "phrase_repetition",
+          "windowTicks": 13,
+          "observations": 4,
+          "windows": 4,
+          "exactRepeats": 0,
+          "familyRepeats": 0,
+          "exactRepeatRate": 0,
+          "familyRepeatRate": 0,
+          "untrackedFamilies": 4,
+          "worstWindow": {
+            "settlementId": "soak-a",
+            "window": 16,
+            "startTick": 208,
+            "endTick": 220,
+            "observations": 1,
+            "exactRepeats": 0,
+            "familyRepeats": 0,
+            "exactRepeatRate": 0,
+            "familyRepeatRate": 0,
+            "untrackedFamilies": 1
+          },
+          "byWindow": [
+            {
+              "settlementId": "soak-a",
+              "window": 16,
+              "startTick": 208,
+              "endTick": 220,
+              "observations": 1,
+              "exactRepeats": 0,
+              "familyRepeats": 0,
+              "exactRepeatRate": 0,
+              "familyRepeatRate": 0,
+              "untrackedFamilies": 1
+            },
+            {
+              "settlementId": "soak-b",
+              "window": 16,
+              "startTick": 208,
+              "endTick": 220,
+              "observations": 1,
+              "exactRepeats": 0,
+              "familyRepeats": 0,
+              "exactRepeatRate": 0,
+              "familyRepeatRate": 0,
+              "untrackedFamilies": 1
+            },
+            {
+              "settlementId": "soak-c",
+              "window": 16,
+              "startTick": 208,
+              "endTick": 220,
+              "observations": 1,
+              "exactRepeats": 0,
+              "familyRepeats": 0,
+              "exactRepeatRate": 0,
+              "familyRepeatRate": 0,
+              "untrackedFamilies": 1
+            },
+            {
+              "settlementId": "soak-d",
+              "window": 16,
+              "startTick": 208,
+              "endTick": 220,
+              "observations": 1,
+              "exactRepeats": 0,
+              "familyRepeats": 0,
+              "exactRepeatRate": 0,
+              "familyRepeatRate": 0,
+              "untrackedFamilies": 1
+            }
+          ]
+        },
+        "addressChain": {
+          "schemaVersion": 1,
+          "rows": 1,
+          "subjectAddressed": 1,
+          "typedAction": 1,
+          "affectedSettlements": 1,
+          "reason": 0,
+          "fullyAddressed": 0,
+          "depthHistogram": {
+            "0": 0,
+            "1": 1,
+            "2": 0,
+            "3": 0,
+            "4": 0
+          },
+          "subjectAddressedRateMilli": 1000,
+          "typedActionRateMilli": 1000,
+          "affectedSettlementsRateMilli": 1000,
+          "reasonRateMilli": 0,
+          "fullyAddressedRateMilli": 0
+        },
+        "beliefDivergence": {
+          "infoMode": "omniscient",
+          "spatialCanonized": true,
+          "observers": 0,
+          "slots": 0,
+          "records": 0,
+          "meanConfidence01": null,
+          "meanStalenessTicks": null,
+          "maxStalenessTicks": null,
+          "relationshipComparable": 0,
+          "relationshipMismatched": 0,
+          "faithComparable": 0,
+          "faithMismatched": 0,
+          "axes": [],
+          "divergence01": null
+        }
+      },
+      {
+        "year": 5,
+        "eventCount": 0,
+        "majorEventCount": 0,
+        "mechanicalOutcomeCount": 0,
+        "unclassifiedEventCount": 0,
+        "eventTypeCounts": {},
+        "moverCounts": {
+          "pressure": 0,
+          "place": 1,
+          "population": 0,
+          "economy": 0,
+          "politics": 0,
+          "war": 0,
+          "faith": 0,
+          "people": 1,
+          "constructive": 0,
+          "knowledge": 0
+        },
+        "selectedMoverCounts": {
+          "pressure": 0,
+          "place": 0,
+          "population": 0,
+          "economy": 0,
+          "politics": 0,
+          "war": 0,
+          "faith": 0,
+          "people": 0,
+          "constructive": 0,
+          "knowledge": 0
+        },
+        "postApplyMoverCounts": {
+          "pressure": 0,
+          "place": 1,
+          "population": 0,
+          "economy": 0,
+          "politics": 0,
+          "war": 0,
+          "faith": 0,
+          "people": 1,
+          "constructive": 0,
+          "knowledge": 0
+        },
+        "postApplyReceiptCount": 2,
+        "arcCounts": {
+          "constructive": 0,
+          "destructive": 0
+        },
+        "postApplyArcCounts": {
+          "constructive": 0,
+          "destructive": 0
+        },
+        "motion": {
+          "populationTransitions": 4,
+          "populationMoved": 0,
+          "prosperityTransitions": 4,
+          "prosperityMoved": 0,
+          "powerTransitions": 4,
+          "powerMoved": 0
+        },
+        "attentionCounts": {},
+        "succession": {
+          "pendingProposals": 0,
+          "attempts": 0,
+          "completions": 0,
+          "integrityFailures": 0,
+          "integrityFailureKinds": {}
+        },
+        "causal": {
+          "crossFamilyEdges": 0,
+          "multiParentEvents": 0,
+          "familyPairs": []
+        },
+        "chronicleSample": [],
+        "stateVectors": {
+          "soak-a": {
+            "population": 23730,
+            "prosperity": 5,
+            "topFaction": "City Council",
+            "powerEntropy": 0.9625553998623017
+          },
+          "soak-b": {
+            "population": 2523,
+            "prosperity": 5,
+            "topFaction": "Guild Council",
+            "powerEntropy": 0.9715006996793791
+          },
+          "soak-c": {
+            "population": 2591,
+            "prosperity": 4,
+            "topFaction": "Military/Guard",
+            "powerEntropy": 0.7060934061561138
+          },
+          "soak-d": {
+            "population": 705,
+            "prosperity": 4,
+            "topFaction": "Elected Reeve",
+            "powerEntropy": 0.9783243733988494
+          }
+        },
+        "phraseRepetition": {
+          "schemaVersion": 1,
+          "kind": "phrase_repetition",
+          "windowTicks": 13,
+          "observations": 5,
+          "windows": 5,
+          "exactRepeats": 0,
+          "familyRepeats": 0,
+          "exactRepeatRate": 0,
+          "familyRepeatRate": 0,
+          "untrackedFamilies": 5,
+          "worstWindow": {
+            "settlementId": "soak-a",
+            "window": 20,
+            "startTick": 260,
+            "endTick": 272,
+            "observations": 1,
+            "exactRepeats": 0,
+            "familyRepeats": 0,
+            "exactRepeatRate": 0,
+            "familyRepeatRate": 0,
+            "untrackedFamilies": 1
+          },
+          "byWindow": [
+            {
+              "settlementId": "soak-a",
+              "window": 20,
+              "startTick": 260,
+              "endTick": 272,
+              "observations": 1,
+              "exactRepeats": 0,
+              "familyRepeats": 0,
+              "exactRepeatRate": 0,
+              "familyRepeatRate": 0,
+              "untrackedFamilies": 1
+            },
+            {
+              "settlementId": "soak-b",
+              "window": 18,
+              "startTick": 234,
+              "endTick": 246,
+              "observations": 1,
+              "exactRepeats": 0,
+              "familyRepeats": 0,
+              "exactRepeatRate": 0,
+              "familyRepeatRate": 0,
+              "untrackedFamilies": 1
+            },
+            {
+              "settlementId": "soak-b",
+              "window": 20,
+              "startTick": 260,
+              "endTick": 272,
+              "observations": 1,
+              "exactRepeats": 0,
+              "familyRepeats": 0,
+              "exactRepeatRate": 0,
+              "familyRepeatRate": 0,
+              "untrackedFamilies": 1
+            },
+            {
+              "settlementId": "soak-c",
+              "window": 20,
+              "startTick": 260,
+              "endTick": 272,
+              "observations": 1,
+              "exactRepeats": 0,
+              "familyRepeats": 0,
+              "exactRepeatRate": 0,
+              "familyRepeatRate": 0,
+              "untrackedFamilies": 1
+            },
+            {
+              "settlementId": "soak-d",
+              "window": 20,
+              "startTick": 260,
+              "endTick": 272,
+              "observations": 1,
+              "exactRepeats": 0,
+              "familyRepeats": 0,
+              "exactRepeatRate": 0,
+              "familyRepeatRate": 0,
+              "untrackedFamilies": 1
+            }
+          ]
+        },
+        "addressChain": {
+          "schemaVersion": 1,
+          "rows": 2,
+          "subjectAddressed": 2,
+          "typedAction": 2,
+          "affectedSettlements": 2,
+          "reason": 1,
+          "fullyAddressed": 1,
+          "depthHistogram": {
+            "0": 0,
+            "1": 2,
+            "2": 0,
+            "3": 0,
+            "4": 0
+          },
+          "subjectAddressedRateMilli": 1000,
+          "typedActionRateMilli": 1000,
+          "affectedSettlementsRateMilli": 1000,
+          "reasonRateMilli": 500,
+          "fullyAddressedRateMilli": 500
+        },
+        "beliefDivergence": {
+          "infoMode": "omniscient",
+          "spatialCanonized": true,
+          "observers": 0,
+          "slots": 0,
+          "records": 0,
+          "meanConfidence01": null,
+          "meanStalenessTicks": null,
+          "maxStalenessTicks": null,
+          "relationshipComparable": 0,
+          "relationshipMismatched": 0,
+          "faithComparable": 0,
+          "faithMismatched": 0,
+          "axes": [],
+          "divergence01": null
+        }
+      }
+    ],
+    "controls": {}
+  },
+  "runDurationsMs": {
+    "primary": 2048,
+    "replay": 1949,
+    "divergent": 1685
+  },
+  "ticksAdvanced": 780,
+  "frozenTail": false,
+  "liveness": {
+    "executable": false,
+    "reason": "a liveness floor needs one FULL decade: 5 year(s) against a sample floor of 10, 0 full decade(s) folded",
+    "rows": [],
+    "failures": [],
+    "reported": {
+      "minDistinctTypesPerDecade": null,
+      "minEventsPerSettlementDecade": null,
+      "minHashMovesPerDecade": null,
+      "minMajorsPerDecade": null,
+      "majorSilentDecades": 0,
+      "majorSilentDecadeNumbers": []
+    }
+  },
+  "failures": [],
+  "notExecutable": [
+    {
+      "name": "different seeds produce a divergent event-type mix",
+      "reason": "smallest sample 0 event(s) < the floor of 2 (baseline 0, comparison 0); below it shiftedEventEquivalents cannot reach 2 for ANY pair of worlds, so a FAIL here would be arithmetic rather than evidence; TV 0.000 (min 0.10); 0.00 shifted event-equivalents (min 2); largest shift none (0.000); composite hash also differed"
+    },
+    {
+      "name": "the world keeps moving: every decade carries distinct typed events and the composite state changes every year",
+      "reason": "a liveness floor needs one FULL decade: 5 year(s) against a sample floor of 10, 0 full decade(s) folded"
+    }
+  ],
+  "completedAt": "2026-09-07T01:41:24.140Z",
+  "nonFiniteFigures": []
+}

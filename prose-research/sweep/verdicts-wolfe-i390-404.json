@@ -1,0 +1,233 @@
+{
+ "name": "wolfe",
+ "chunk": 26,
+ "claims": [
+  {
+   "index": 390,
+   "feature": "other: incidental detail as evidence",
+   "claim": "The reader who proposed the Urth list's chapter-by-chapter close reading says he does not believe in trivial trivia in Wolfe.",
+   "source": "JWillard, Urth mailing list, 4 September 2006",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-September/058531.html",
+   "quote": "I don't believe in trivial trivia, provided one can ask",
+   "page": "message body, paragraph 3"
+  },
+  {
+   "index": 391,
+   "feature": "withheld information and inference",
+   "claim": "The same reader describes his reading posture as walking through Wolfe like a minefield.",
+   "source": "JWillard, Urth mailing list, 4 September 2006",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-September/058531.html",
+   "quote": "why I walk through Wolfe like a minefield",
+   "page": "message body, chapter-1 observations"
+  },
+  {
+   "index": 392,
+   "feature": "withheld information and inference",
+   "claim": "The same reader treats the hedge word “perhaps” in Severian's narration as a signal that something is being covered.",
+   "source": "JWillard, Urth mailing list, 4 September 2006",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-September/058531.html",
+   "quote": "uses a perhaps, or one of its relatives, I get nervous",
+   "page": "message body, “Suspicious sentence” item"
+  },
+  {
+   "index": 393,
+   "feature": "opening sentence",
+   "claim": "Dan'l Danehy-Oakes calls the first line of Shadow of the Torturer a haunting first line.",
+   "source": "Dan'l Danehy-Oakes, Urth mailing list, 5 September 2006",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-September/002922.html",
+   "quote": "A rather haunting first line, for me.",
+   "page": "message body, note on p9"
+  },
+  {
+   "index": 394,
+   "feature": "withheld information and inference",
+   "claim": "Dan'l Danehy-Oakes says the first page of Shadow of the Torturer is full of forward references.",
+   "source": "Dan'l Danehy-Oakes, Urth mailing list, 5 September 2006",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-September/002922.html",
+   "quote": "This first page is full of forward",
+   "page": "message body, note on p9"
+  },
+  {
+   "index": 395,
+   "feature": "other: action rendered as confusion",
+   "claim": "Dan'l Danehy-Oakes says the fight in chapter I is more like a real fight than most in fiction.",
+   "source": "Dan'l Danehy-Oakes, Urth mailing list, 5 September 2006",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-September/002922.html",
+   "quote": "more like a real fight than most in fiction.",
+   "page": "message body, note on the fight"
+  },
+  {
+   "index": 396,
+   "feature": "withheld information and inference",
+   "claim": "Dan'l Danehy-Oakes argues the explanation Severian himself offers for the coin's binding power does not hold up against a detail the narration supplies.",
+   "source": "Dan'l Danehy-Oakes, Urth mailing list, 5 September 2006",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-September/002922.html",
+   "quote": "Not Vodalus', to be sure; so the magickal explanation he",
+   "page": "message body, note on pp16-17"
+  },
+  {
+   "index": 397,
+   "feature": "other: counter-evidence, anomaly as authorial error",
+   "claim": "Roy C. Lackey argues that a contradiction about who was handed the pistol, repeated in the appendix to Citadel of the Autarch, is probably Wolfe's own mistake rather than the narrator's.",
+   "source": "Roy C. Lackey, Urth mailing list, 5 September 2006",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-September/002935.html",
+   "quote": "so the mistake is probably Wolfe's.",
+   "page": "message body, first paragraph"
+  },
+  {
+   "index": 398,
+   "feature": "opening sentence",
+   "claim": "Gevers says each volume of The Book of the Long Sun opens with a dialogue in which the informed figure yields his information only in oracular or otherwise obscure form.",
+   "source": "Nick Gevers, “The Reader as Augur”, Ultan's Library, 5 September 2000",
+   "url": "https://ultan.org.uk/the-reader-as-augur/",
+   "quote": "which he will only yield up in oracular or otherwise obscure form",
+   "page": "section 'Beginnings and endings', paragraph 3"
+  },
+  {
+   "index": 399,
+   "feature": "opening sentence",
+   "claim": "Gevers says the information in each opening passage, and the precise character of its obscurity, amount to terms of reading for the rest of the volume.",
+   "source": "Nick Gevers, “The Reader as Augur”, Ultan's Library, 5 September 2000",
+   "url": "https://ultan.org.uk/the-reader-as-augur/",
+   "quote": "amount to guidance, to terms of reading, for the remainder",
+   "page": "section 'Beginnings and endings', paragraph 3"
+  },
+  {
+   "index": 400,
+   "feature": "closing sentence",
+   "claim": "Gevers, using Kim Stanley Robinson's and John Clute's term 'slingshot ending', describes an ending whose momentum of implication carries beyond the text it terminates.",
+   "source": "Nick Gevers, “The Reader as Augur”, Ultan's Library, 5 September 2000, citing Kim Stanley Robinson and John Clute",
+   "url": "https://ultan.org.uk/the-reader-as-augur/",
+   "quote": "an ending whose momentum of implication carries well beyond the confines",
+   "page": "section 'Beginnings and endings', paragraph 3"
+  },
+  {
+   "index": 401,
+   "feature": "opening sentence",
+   "claim": "Gevers reads the first words of Lake of the Long Sun as establishing that silent implication can convey as much as any violent confrontation.",
+   "source": "Nick Gevers, “The Reader as Augur”, Ultan's Library, 5 September 2000",
+   "url": "https://ultan.org.uk/the-reader-as-augur/",
+   "quote": "silent implication can convey as much as any violent confrontation",
+   "page": "section on Lake of the Long Sun's opening"
+  },
+  {
+   "index": 402,
+   "feature": "withheld information and inference",
+   "claim": "Gevers says the opening of Nightside the Long Sun presents signs to two augurs at once, Silk and the reader.",
+   "source": "Nick Gevers, “The Reader as Augur”, Ultan's Library, 5 September 2000",
+   "url": "https://ultan.org.uk/the-reader-as-augur/",
+   "quote": "signs are presented to those augurs, Silk and the reader",
+   "page": "section on Nightside the Long Sun's opening"
+  },
+  {
+   "index": 403,
+   "feature": "withheld information and inference",
+   "claim": "Gevers reads a passing description of a boy's frozen grin as an ironic tribute to that character's concealed function as the tetralogy's narrator.",
+   "source": "Nick Gevers, “The Reader as Augur”, Ultan's Library, 5 September 2000",
+   "url": "https://ultan.org.uk/the-reader-as-augur/",
+   "quote": "his craftily concealed and long-term function as Long Sun",
+   "page": "section on Nightside the Long Sun's opening"
+  },
+  {
+   "index": 404,
+   "feature": "plainness and economy",
+   "claim": "Gevers says that in Exodus From the Long Sun Wolfe's narration becomes spare and unexplanatory, a minefield of hints and implications.",
+   "source": "Nick Gevers, “The Reader as Augur”, Ultan's Library, 5 September 2000",
+   "url": "https://ultan.org.uk/the-reader-as-augur/",
+   "quote": "narration becomes spare, unexplanatory, a minefield of hints and implications",
+   "page": "section on Exodus From the Long Sun"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 390,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I don't believe in trivial trivia, provided one can ask",
+   "note": "Wayback raw capture 20210416053640id_ of the pipermail page (live lists.urth.net refused connection on port 80 after 75s). JWillard, Mon Sep 4 04:28:31 PDT 2006, subject '(urth) Close Reading: Torturer Chapter I'. Page: 'As no one has delivered a comprehensive key to the Wolfe opus, I don't believe in trivial trivia, provided one can ask an interesting question or defend an interesting observation about it.' Proposer limb confirmed by the opening paragraph ('it might be interesting to start a close-reading project, beginning at the beginning with Shadow of the Torturer... A chapter every few days or every week'). Locator quibble only: the sentence sits in paragraph 2 of the message body, not paragraph 3; the claim itself does not assert a paragraph."
+  },
+  {
+   "index": 391,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "A reminder of why I walk through Wolfe like a minefield",
+   "note": "Same Wayback raw capture. Verbatim: 'A reminder of why I walk through Wolfe like a minefield: description of Vodalus, \"I could see him through the fog, very tall, slender...\"' Same author, same message as 390."
+  },
+  {
+   "index": 392,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Whenever Severian uses a perhaps... I get nervous",
+   "note": "Same Wayback raw capture. The item is headed 'Suspicious sentence:' and quotes 'The knife had somehow fallen from the dead man's neck. Perhaps he had pulled it out in his agony.', then: 'Whenever Severian uses a perhaps, or one of its relatives, I get nervous. What other purpose would the line have? Is this someone half-healed by Severian's presence? Something entirely different?' The 'something is being covered' limb rests on the 'Suspicious sentence' heading plus those follow-up questions, which is the passage's plain sense."
+  },
+  {
+   "index": 393,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "A rather haunting first line, for me.",
+   "note": "Wayback raw capture 20210416053708id_ of the 002922 pipermail page (live host unreachable). Dan'l Danehy-Oakes, Tue Sep 5 11:45:40 PDT 2006. Follows his quotation of 'p9. IT IS POSSIBLE I already had some presentiment of my future.', i.e. the first line of Shadow of the Torturer, so both limbs hold."
+  },
+  {
+   "index": 394,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "This first page is full of forward references:",
+   "note": "Same Wayback raw capture. Sentence introduces three bulleted forward references (the locked and rusted gate, 'the symbol of my exile', 'a walk I would take, much later'). The clipped quote 'This first page is full of forward' is a verbatim prefix."
+  },
+  {
+   "index": 395,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "delightfully confused, more like a real fight than most in fiction",
+   "note": "Same Wayback raw capture. Full sentence: 'The fight between Vodalus and the volunteers is delightfully confused, more like a real fight than most in fiction.' The 'chapter I' limb holds: the whole message is his chapter-I close reading (subject line and 'Chapter title: \"Resurrection and Death\"')."
+  },
+  {
+   "index": 396,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Not Vodalus', to be sure; so the magickal explanation he offers simply doesn't wash.",
+   "note": "Same Wayback raw capture. Preceding sentences carry the other limbs: 'Nor, I think, does his explanation of the efficacy of the coin in cementing his service ring true. He goes out of his way to point out that soldiers take their oath to the Autarch and are given a coin with the Autarch's picture. Whose picture is on the coin Vodalus gives Severian?' The supplied detail is the narration's Autarch-coin comparison; 'Not Vodalus'' is Danehy-Oakes's own step, which the claim does not misattribute."
+  },
+  {
+   "index": 397,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The mistake is repeated in the appendix to CITADEL, so the mistake is probably Wolfe's.",
+   "note": "Wayback raw capture 20210416053642id_ of the 002935 pipermail page (live host unreachable). Roy C. Lackey, Tue Sep 5 23:34:45 PDT 2006. Contradiction limb: 'Vodalus definitely gave the pistol to Hildegrin. But later, Sev recalls the scene and has Vodalus giving it to Thea.' The 'rather than the narrator's' limb is carried by the contrast with the very next mistake, of which he writes 'That mistake may or may not be Sev's.'"
+  },
+  {
+   "index": 398,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a figure possessing privileged information, which he will only yield up in oracular or otherwise obscure form",
+   "note": "Live fetch of https://ultan.org.uk/the-reader-as-augur/ (HTTP 200, 110KB), article by Nick Gevers dated 5 September 2000. Full sentence: 'To this end, each opening passage features a dialogue between a more-or-less naive individual and a figure possessing privileged information, which he will only yield up in oracular or otherwise obscure form.' 'Each volume' limb carried by the surrounding paragraph on 'the beginnings and endings of the four volumes'."
+  },
+  {
+   "index": 399,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The information and the precise character of its obscurity amount to guidance, to terms of reading, for the remainder of the volume.",
+   "note": "Same live Ultan's Library page, the sentence immediately following the one behind claim 398. Verbatim."
+  },
+  {
+   "index": 400,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "in what Kim Stanley Robinson and John Clute term a “slingshot ending”, an ending whose momentum of implication carries well beyond the confines of the text it terminates",
+   "note": "Same live Ultan's Library page, same paragraph. All limbs verbatim, including the attribution of the term to Robinson and Clute."
+  },
+  {
+   "index": 401,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Lake's first words... silent implication can convey as much as any violent confrontation",
+   "note": "Same live Ultan's Library page, section on Lake of the Long Sun: 'The tone for this is set by Lake's first words: “Silence fell, abrupt as a shouted command” (p. 13); silent implication can convey as much as any violent confrontation.' The 'first words' limb is explicit."
+  },
+  {
+   "index": 402,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Within that scope, signs are presented to those augurs, Silk and the reader.",
+   "note": "Same live Ultan's Library page, in the discussion of Nightside the Long Sun's opening enlightenment (pp. 9-10, paragraphs one and two). Both the two-augurs limb and the Nightside-opening limb hold."
+  },
+  {
+   "index": 403,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Horn's grin is “frozen in forever”, an ironic tribute to his craftily concealed and long-term function as Long Sun's narrator.",
+   "note": "Same live Ultan's Library page, same paragraph as 402. 'Boy' limb holds: Horn is one of the boy pupils in the basketball game described a paragraph earlier."
+  },
+  {
+   "index": 404,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Wolfe's narration becomes spare, unexplanatory, a minefield of hints and implications",
+   "note": "Same live Ultan's Library page, in the volume-four discussion: 'Subplots and intrigues multiply; beliefs and loyalties shift wildly; Wolfe's narration becomes spare, unexplanatory, a minefield of hints and implications, both practical and symbolic.' Volume four is Exodus From the Long Sun, named as Exodus throughout that section ('Exodus concludes with the customary schism and slingshot')."
+  }
+ ]
+}

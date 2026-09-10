@@ -1,0 +1,33 @@
+#1 WITHHELD(R4-BAND) DS-POP-1 :: QUANTITY: nobody [ledger]
+    ! R4-BAND: a contrast was cut in a pool with sibling bands "QUANTITY: a few souls" | "QUANTITY: a dozen or so" | "QUANTITY: dozens" | "QUANTITY: a hundred or so" | "QUANTITY: several hundred" | "QUANTITY: many hundreds" | "QUANTITY: thousands"; the band half is the refuter's — mechanical PASS withheld
+    · A11 SPREAD (sentences, pool "QUANTITY: nobody" DS-POP-1, angles ledger/street/visitor): 2/2/2 → 2/2/2
+#4 FAIL DS-POP-1 :: QUANTITY: a dozen or so [visitor]
+    - COUNT words LOST (band noun moved?): people
+    · A11 SPREAD (sentences, pool "QUANTITY: a dozen or so" DS-POP-1, angles street/ledger/visitor): 2/1/1 → 2/1/2
+#11 FAIL DS-WAR-2 :: sovereignty · strained [ledger]
+    - MARKS ["dm-only"] — dm-only: the AFTER inherits the mark and the audience law
+    · A11 SPREAD (sentences, pool "sovereignty · strained" DS-WAR-2, angles ledger/unfolding/street): 1/1/1 → 2/1/1
+#14 FAIL DS-FTH-4 :: ROOTED [street]
+    - LONGER: 21 → 22 words
+    - PRONOUN CLOSER ADDED (land on the civic noun)
+    · A11 SPREAD (sentences, pool "ROOTED" DS-FTH-4, angles elder/street/ledger): 1/1/1 → 1/2/1
+#17 FAIL DS-SUP-2 :: CAPTURED [ledger]
+    - MARKS ["dm-only"] — dm-only: the AFTER inherits the mark and the audience law
+    - THREE+ SENTENCES (3) — the register is one flowing sentence or two short ones
+    - NOTE: "rather than" removed but the antithesis SHAPE survives (a column moved, not the failure mode)
+    - EXISTENTIAL OPENER ADDED ("There is / It is")
+    ! R4-BAND: a contrast was cut in a pool with sibling bands "STABLE" | "STRAINED" | "SCARCE" | "BLOCKED" | "SUBSTITUTED" | "COLLAPSING"; the band half is the refuter's — mechanical PASS withheld
+    · A11 SPREAD (sentences, pool "CAPTURED" DS-SUP-2, angles ledger/street/visitor): 2/1/2 → 3/1/2
+    · A11 PRE-EXISTING shared opener in this pool (a debt this pair neither causes nor cures): "the {}" (ledger + visitor)
+#23 FAIL DS-GEN-5 :: smoke (route isolated / mountain_pass) [counterforce]
+    - DURATION/TIME words ADDED: every, year
+    - ANTITHESIS SHAPE ADDED: 0 → 1
+    · A11 SPREAD (sentences, pool "smoke (route isolated / mountain_pass)" DS-GEN-5, angles visitor/street/ledger/counterforce): 1/1/1/1 → 1/1/1/2
+    · A11 PRE-EXISTING shared opener in this pool (a debt this pair neither causes nor cures): "{} is" (street + counterforce)
+#30 FAIL DS-POP-1 :: CANDIDATE KIND: emigration [unfolding]
+    - R4: CUT a word that names a SIBLING pool key: decline  (siblings: QUANTITY: nobody | QUANTITY: a few souls | QUANTITY: a dozen or so | QUANTITY: dozens | QUANTITY: a hundred or so | QUANTITY: several hundred)
+    ! R4-BAND: a contrast was cut in a pool with sibling bands "CANDIDATE KIND: growth" | "CANDIDATE KIND: decline"; the band half is the refuter's — mechanical PASS withheld
+    !   R4-BAND-TEXT: the cut alternative names a word of a sibling band's own TEXT — "QUANTITY: thousands" [visitor] shares decline
+    · A11 SPREAD (sentences, pool "CANDIDATE KIND: emigration" DS-POP-1, angles unfolding/street/ledger): 2/2/1 → 2/2/1
+
+corpus loaded: 2734 variants in 1020 pools; 0 pass mechanically, 1 WITHHELD (R4-BAND — the band half is the refuter's, not a FAIL), 6 fail (a mechanical pass is NOT a claim-preservation verdict — that is the refuter's job)

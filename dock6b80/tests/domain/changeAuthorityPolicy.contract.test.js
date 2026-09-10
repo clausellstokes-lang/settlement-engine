@@ -1,0 +1,379 @@
+/**
+ * changeAuthorityPolicy.contract.test.js — guards the canonical DM change-authority
+ * contract (src/domain/worldPulse/changeAuthorityPolicy.js) against silent drift.
+ *
+ * Two layers:
+ *  1. BEHAVIORAL — runs the proposal-gated flow generators with the proposal flag
+ *     ON vs OFF and asserts the gate actually flips applyMode. This is the live,
+ *     executable half of the contract.
+ *  2. SOURCE-ANCHORED — for every documented change-type, asserts the live
+ *     generator source still carries the applyMode expression the policy claims.
+ *     A future edit that flips an authority (e.g. makes conquest proposal-gated,
+ *     or migrates a severity-gated family onto the flag) fails here.
+ *
+ * The policy reflects REAL current behavior, so this suite passes against today's
+ * code. The two FLAGGED tensions are recorded in the policy, not "fixed."
+ */
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { dirname, resolve } from 'node:path';
+
+import { describe, expect, test } from 'vitest';
+
+import {
+  CHANGE_AUTHORITY_POLICY,
+  CHANGE_AUTHORITY_FLAGGED,
+} from '../../src/domain/worldPulse/changeAuthorityPolicy.js';
+import { deriveDecisionTier } from '../../src/domain/worldPulse/decisionTier.js';
+import { deriveFlowCandidates } from '../../src/domain/worldPulse/index.js';
+import { ensureRegionalGraph } from '../../src/domain/region/index.js';
+
+const here = dirname(fileURLToPath(import.meta.url));
+const wpDir = resolve(here, '../../src/domain/worldPulse');
+const sourceFor = (mod) => readFileSync(resolve(wpDir, mod), 'utf8');
+
+// A severe famine that displaces >=8% of the source population: above the
+// MIGRATION_PROPOSAL_FRACTION gate, so it escalates to proposal IFF the flag is on.
+const migrationSnapshot = (rules) => ({
+  worldState: {
+    tick: 5,
+    simulationRules: rules,
+    stressors: [{ id: 'world_stressor.famine.a', type: 'famine', severity: 1, affectedSettlementIds: ['a'] }],
+  },
+  regionalGraph: ensureRegionalGraph({ channels: [{ type: 'migration_pressure', from: 'a', to: 'b', status: 'confirmed' }] }),
+  byId: new Map([
+    ['a', { id: 'a', name: 'Ashford', settlement: { population: 2000 }, activeConditions: [] }],
+    ['b', { id: 'b', name: 'Briar', settlement: { population: 1500 }, activeConditions: [] }],
+  ]),
+  settlements: [
+    { id: 'a', name: 'Ashford', activeConditions: [], causal: { scores: {} } },
+    { id: 'b', name: 'Briar', activeConditions: [], causal: { scores: {} } },
+  ],
+});
+
+describe('change-authority contract — behavioral (proposal-gated families consult the flag)', () => {
+  test('a major migration flow is PROPOSAL when majorChangesRequireProposal is on', () => {
+    const flows = deriveFlowCandidates(migrationSnapshot({ majorChangesRequireProposal: true }), { tick: 5 });
+    const mig = flows.find(f => f.candidateType === 'flow_migration');
+    expect(mig).toBeTruthy();
+    expect(mig.applyMode).toBe('proposal');
+  });
+
+  test('the SAME migration flow downgrades to AUTO when the flag is off', () => {
+    const flows = deriveFlowCandidates(migrationSnapshot({ majorChangesRequireProposal: false }), { tick: 5 });
+    const mig = flows.find(f => f.candidateType === 'flow_migration');
+    expect(mig).toBeTruthy();
+    expect(mig.applyMode).toBe('auto');
+  });
+});
+
+// For each documented change-type, the exact applyMode expression the live
+// generator must still carry. If a generator's gate is rewritten, update BOTH the
+// policy and this anchor deliberately — that is the point of the guard.
+//
+// AN ANCHOR IS EITHER:
+//   • a STRING — the gate expression itself, when that expression is already
+//     unique inside its module; or
+//   • `{ site, gate }` — DERIVE, DON'T RESTATE. When a bare gate string would
+//     match several mints in one module, the entry NAMES THE SITE and lets the
+//     gate be found inside the site's own object literal, instead of padding the
+//     anchor with whatever source lines happen to sit next to it.
+//
+// The padding is what rots, and it rotted here. `faction_government_challenge`'s
+// anchor used to carry a hand-copied `probability:` formula purely as filler to
+// make the surrounding block unique. WR-5 (e1654184) added a third term to that
+// formula (`+ warPressure * 0.08`) and re-wrapped it across three lines — a change
+// that touched no authority at all — and `src.includes(ANCHOR)` went false. The
+// pin failed for a reason the pin does not care about, which is the hand-keyed
+// address-rot class. The `{ site, gate }` form has nothing to rot: the site token
+// is the candidateType literal (load-bearing — renaming it IS an authority-visible
+// change), and the block boundary is DERIVED by brace balance (the object literal
+// the site is a key of), never transcribed.
+const SOURCE_ANCHORS = Object.freeze({
+  // proposal-gated: gate reads majorChangesRequireProposal.
+  flow_migration: "applyMode: requireProposal && fraction >= MIGRATION_PROPOSAL_FRACTION ? 'proposal' : 'auto'",
+  flow_trade_scarcity: "applyMode: requireProposal && severity >= TRADE_PROPOSAL_SEVERITY ? 'proposal' : 'auto'",
+  population_dynamics: "applyMode: major && rules.majorChangesRequireProposal ? 'proposal' : 'auto'",
+  tier_drift_collapse: "applyMode: authorityFor(rules, 'resource_depletion', rules.majorChangesRequireProposal && severity >= 0.78 ? 'proposal' : 'auto')",
+  institution_lifecycle: "applyMode: rules.majorChangesRequireProposal && severity >= 0.78 ? 'proposal' : 'auto'",
+  // W-LIFECYCLE (proposal-gated, the tier_change precedent): the flag gate is the
+  // LEGACY mode fed through authorityFor (verbatim under routine/full; forced to
+  // proposal under dm_only/recommendations).
+  settlement_terminal_death: "applyMode: authorityFor(rules, 'settlement_terminal_death', /** @type {{ majorChangesRequireProposal?: boolean }} */ (rules).majorChangesRequireProposal ? 'proposal' : 'auto')",
+  settlement_resettled: "applyMode: authorityFor(rules, 'settlement_resettled', /** @type {{ majorChangesRequireProposal?: boolean }} */ (rules).majorChangesRequireProposal ? 'proposal' : 'auto')",
+  // severity-gated: proposal on severity alone, no flag. Since CL-0 the legacy
+  // severity gate is the legacyMode argument fed through authorityFor, which
+  // passes it through VERBATIM under routine/full autonomy (byte-identical) and
+  // forces 'proposal' only under the new dm_only/recommendations modes.
+  pressure_event: "applyMode: authorityFor(rules, 'pressure_event', pressure.score >= 0.72 ? 'proposal' : 'auto')",
+  faction_competition: "applyMode: severity >= 0.74 ? 'proposal' : 'auto'",
+  stressor_escalation: "applyMode: severity >= 0.78 ? 'proposal' : 'auto'",
+  relationship_evolution: 'applyMode: severity >= 0.72 ? "proposal" : "auto"',
+  // severity-gated, newly-mapped sites (each distinct from the families above).
+  faction_institution_capture: "applyMode: asksForApproval ? 'proposal' : 'auto'",
+  faction_rival_power_contest: "applyMode: severity >= 0.7 ? 'proposal' : 'auto'",
+  // A SECOND stressor gate (pressure-born birth), distinct from stressor_escalation.
+  stressor_birth: "const major = pressure.score >= 0.78 || ['occupation', 'magic_deadzone', 'siege', 'coup_detat'].includes(type);",
+  // always-proposal: unconditional 'proposal', no flag / severity / lock.
+  npc_adversarial_action: "const proposal = severity >= action.proposalAt || ['defect', 'sabotage', 'seek_promotion', 'undermine_rival'].includes(actionFamily);",
+  // POINTED, not transcribed (see the note above the table): the mint is named by
+  // its candidateType literal and the gate is asserted inside that mint's own
+  // object literal, so an edit to the neighbouring probability/severity/reasons
+  // lines cannot falsify it and a flip of THIS applyMode cannot hide behind
+  // another mint in the same module.
+  faction_government_challenge: Object.freeze({
+    site: "candidateType: 'faction_government_challenge',",
+    gate: "applyMode: 'proposal',",
+  }),
+  relationship_label_change: 'candidateType,\n    applyMode: "proposal",',
+  treaty_breached: "applyMode: 'proposal',\n      forced: true",
+  // WR-10's conveyance shares that anchor DELIBERATELY, and the sharing is the honest
+  // statement rather than a shortcut. The realm-verb lane has exactly ONE mint
+  // (buildRealmVerbOutcome), and its applyMode is an unconditional literal — so every
+  // realm verb's always-proposal authority IS this line, and a flip here would flip
+  // both entries at once, which is precisely what this contract exists to catch.
+  sovereignty_conveyed: "applyMode: 'proposal',\n      forced: true",
+  tier_change: "ruleFamily: 'tier',\n    targetSaveId: item.id,\n    severity: drift.severity,\n    probability: chance,\n    // Honor majorChangesRequireProposal, consistent with resource_depletion in\n    // this module: a tier change stays a DM proposal under the conservative\n    // default (flag on), and auto-applies only when a campaign opts out of\n    // proposal gating (flag off, e.g. dramatic_campaign). CL-0: the flag gate\n    // is the LEGACY mode fed through authorityFor (verbatim under routine/full;\n    // forced to proposal under dm_only/recommendations).\n    applyMode: authorityFor(rules, 'tier_change', rules.majorChangesRequireProposal ? 'proposal' : 'auto'),",
+  // structural-proposal: auto by default; one branch routes via a proposal-only lever.
+  strategy_move: "applyMode: proposal ? 'proposal' : 'auto'",
+  // auto: bounded logical consequences. Anchored on the ruleId + applyMode block
+  // so a flip AT THE SITE is caught (a bare "applyMode: 'auto'" would match any of
+  // the module's other auto outcomes and miss site-local drift).
+  conquest: "ruleId: 'war_layer_conquest',\n      ruleFamily: 'stressor',\n      applyMode: 'auto'",
+  occupation_transition: "ruleId: `occupation_${archetype}`,\n    ruleFamily: 'stressor',\n    applyMode: 'auto'",
+  occupation_vassalized: "ruleId: 'occupation_vassalized',\n      ruleFamily: 'relationship',\n      applyMode: 'auto'",
+  // W-SEAT D3 (SEAT-3). Ten-space indentation, not six: this mint sits one block deeper
+  // than the vassalization one (inside the per-record step-3 loop, inside the arrival
+  // guard), and the anchor is a LITERAL source substring — an indentation that does not
+  // match the file is a pin that silently guards nothing.
+  occupation_posture: "ruleId: 'occupation_posture',\n          ruleFamily: 'occupation',\n          applyMode: 'auto'",
+  npc_goal_culmination: "probability: 0.9,\n    applyMode: 'auto'",
+  trade_war: "ruleId: `trade_war_${archetype}`,\n    ruleFamily: 'stressor',\n    applyMode: 'auto'",
+  // auto with a separate lock axis (NOT the proposal flag). M10a routes the coup
+  // through authorityFor: the lock-escalation gate (locked ? 'proposal' : 'auto')
+  // is the LEGACY mode fed through — verbatim under routine/full, forced to
+  // proposal under dm_only/recommendations and routine-with-major-approval.
+  coup_succeeded: "applyMode: authorityFor(rules, 'coup_succeeded', locked ? 'proposal' : 'auto')",
+  // auto with approval routing (W-CONVERGENCE): the autonomous mover routes its legacy
+  // 'auto' through authorityFor, forcing proposal under dm_only/recommendations and
+  // routine-with-major-approval (byte-identical under legacy routine/full — dark by default).
+  intervention_ordered: "authorityFor(rules, 'intervention_ordered', 'auto')",
+  blockade_declared: "authorityFor(rules, 'blockade_declared', 'auto')",
+});
+
+/** The gate expression an anchor asserts, in either anchor form. */
+const gateTextOf = (anchor) => (typeof anchor === 'string' ? anchor : anchor.gate);
+
+/**
+ * The slice of `src` that is the object literal `site` is a key of: everything
+ * from the end of the site token to the `}`/`]` that closes the enclosing
+ * literal, tracking nested brackets. The boundary is COMPUTED from the source's
+ * own structure — nothing about it is copied into this file, so it cannot go
+ * stale when the mint's other keys are edited.
+ */
+function mintLiteralAfter(src, site) {
+  const at = src.indexOf(site);
+  if (at < 0) return null;
+  let depth = 0;
+  for (let i = at + site.length; i < src.length; i++) {
+    const ch = src[i];
+    if (ch === '{' || ch === '[') depth++;
+    else if (ch === '}' || ch === ']') {
+      if (depth === 0) return src.slice(at + site.length, i);
+      depth--;
+    }
+  }
+  return src.slice(at + site.length);
+}
+
+describe('change-authority contract — source anchors match the policy', () => {
+  test('every policy change-type has a source anchor and vice versa', () => {
+    expect(Object.keys(SOURCE_ANCHORS).sort()).toEqual(Object.keys(CHANGE_AUTHORITY_POLICY).sort());
+  });
+
+  for (const [changeType, entry] of Object.entries(CHANGE_AUTHORITY_POLICY)) {
+    test(`${changeType} (${entry.authority}) still carries its live applyMode gate in ${entry.module}`, () => {
+      const src = sourceFor(entry.module);
+      const anchor = SOURCE_ANCHORS[changeType];
+      if (typeof anchor === 'string') {
+        expect(src.includes(anchor)).toBe(true);
+      } else {
+        // EXACTLY-ONCE, or the first-match retarget class applies: indexOf takes
+        // the first hit, and a second copy of the site token would let the pin
+        // silently start guarding a different mint.
+        expect(src.split(anchor.site).length - 1, `site token is not unique in ${entry.module}`).toBe(1);
+        const mint = mintLiteralAfter(src, anchor.site);
+        expect(mint, `site token missing from ${entry.module}`).not.toBe(null);
+        expect(mint.includes(anchor.gate)).toBe(true);
+      }
+
+      // The flag-consulting claim must match the anchor's gate text.
+      const anchorReadsFlag = gateTextOf(anchor).includes('RequireProposal')
+        || gateTextOf(anchor).includes('requireProposal');
+      expect(anchorReadsFlag).toBe(entry.consultsProposalFlag);
+
+      // Authority-class invariants on the gate's shape.
+      if (entry.authority === 'auto') {
+        expect(gateTextOf(anchor)).toContain("applyMode: 'auto'");
+        expect(gateTextOf(anchor)).not.toContain('proposal');
+      }
+      if (entry.authority === 'proposal-gated') {
+        expect(anchorReadsFlag).toBe(true);
+      }
+      if (entry.authority === 'severity-gated') {
+        expect(anchorReadsFlag).toBe(false);
+        expect(gateTextOf(anchor)).toMatch(/'proposal'|"proposal"|major/);
+      }
+      if (entry.authority === 'always-proposal') {
+        // No flag, no severity-driven downgrade path in the gate text.
+        expect(anchorReadsFlag).toBe(false);
+        expect(gateTextOf(anchor)).toMatch(/'proposal'|"proposal"|\.includes\(actionFamily\)/);
+        // An always-proposal anchor must NOT be a bare auto outcome.
+        expect(gateTextOf(anchor)).not.toContain("applyMode: 'auto'");
+      }
+      if (entry.authority === 'structural-proposal') {
+        // Auto by default with a single branch routing to proposal.
+        expect(anchorReadsFlag).toBe(false);
+        expect(gateTextOf(anchor)).toContain("'proposal' : 'auto'");
+      }
+    });
+  }
+});
+
+describe('change-authority contract — newly-mapped sites carry their live authority', () => {
+  // The npc adversarial families are forced to proposal REGARDLESS of severity.
+  // Assert the forcing list is exactly {defect, sabotage, seek_promotion,
+  // undermine_rival} so adding/removing a family (which would flip its authority)
+  // fails here.
+  test('npc adversarial families are forced to proposal independent of severity', () => {
+    const src = sourceFor('npcAgency.js');
+    expect(src).toContain(
+      "severity >= action.proposalAt || ['defect', 'sabotage', 'seek_promotion', 'undermine_rival'].includes(actionFamily)",
+    );
+  });
+
+  // tierResourceDynamics has THREE distinct applyMode gates, all routed
+  // through authorityFor since CL-0 (tier/resource candidates never pass the
+  // evaluateWorldPulseRules choke point, so they consult the policy at-site):
+  // the tier change (flag alone), resource_depletion (flag + severity), and
+  // resource_recovery (auto). The LEGACY gate rides as the legacyMode argument,
+  // verbatim, so routine/full behavior is byte-identical to pre-CL0.
+  // Assert all three live so a flip at any site is caught despite sharing a module.
+  test('tierResourceDynamics keeps its three authority-routed gates', () => {
+    const src = sourceFor('tierResourceDynamics.js');
+    expect(src).toContain("ruleFamily: 'tier',");
+    expect(src).toContain(
+      "applyMode: authorityFor(rules, 'tier_change', rules.majorChangesRequireProposal ? 'proposal' : 'auto')",
+    ); // tierCandidate (flag-gated legacy mode)
+    expect(src).toContain(
+      "applyMode: authorityFor(rules, 'resource_depletion', rules.majorChangesRequireProposal && severity >= 0.78 ? 'proposal' : 'auto')",
+    ); // resource_depletion (flag+severity legacy mode)
+    expect(src).toContain(
+      "applyMode: authorityFor(rules, 'resource_recovery', 'auto')",
+    ); // resource_recovery (auto legacy mode)
+  });
+
+  // CL-0: the evaluateWorldPulseRules choke point routes EVERY stochastic
+  // candidate family through authorityFor — the seam that makes the four
+  // severity-gated rogue families (pressure_event, faction_competition,
+  // stressor_escalation, relationship_evolution) consult the per-domain
+  // authority policy without rewriting their modules. Under routine/full it
+  // returns each candidate's own applyMode verbatim (byte-identical, pinned by
+  // authorityLegacyPin.test.js); under dm_only/recommendations it forces
+  // proposal.
+  test('evaluateWorldPulseRules routes all candidates through authorityFor', () => {
+    const src = sourceFor('candidateEvents.js');
+    expect(src).toContain("authorityFor(rules, candidate.ruleFamily || candidate.candidateType, candidate.applyMode)");
+    expect(src).toContain("resolveCandidateConflicts(suppressEquivalentPendingProposalCandidates(routed, snapshot?.worldState), context.budgets || {})");
+  });
+
+  // The relationship rules have TWO distinct gates too: labelProposal (always
+  // proposal) and the severity-gated internal-drift path. Both were extracted out
+  // of relationshipEvolution.js in the god-module split — labelProposal into the
+  // helper leaf, the drift gate into the cooperative rules module. Assert both live.
+  test('the relationship rules keep both the always-proposal label gate and the severity-gated drift gate', () => {
+    expect(sourceFor('relationshipRuleHelpers.js')).toContain('applyMode: "proposal",'); // labelProposal (always-proposal)
+    expect(sourceFor('relationshipRulesCore.js')).toContain('applyMode: severity >= 0.72 ? "proposal" : "auto"'); // internal drift (severity-gated)
+  });
+
+  // The strategy split must stay structural: only sue_for_peace passes a proposal.
+  test('strategyCandidate routes to proposal only when a proposal lever is passed', () => {
+    const src = sourceFor('settlementStrategy.js');
+    expect(src).toContain("applyMode: proposal ? 'proposal' : 'auto'");
+  });
+});
+
+describe('change-authority contract — campaignAltering markers (Advance-scaling Stage 2)', () => {
+  // The EXACT set of policy change-types whose outcomes are STRUCTURAL majors.
+  // Adding/removing a campaign-altering change-type must update BOTH this set and
+  // deriveDecisionTier deliberately — that is the point of the guard.
+  const CAMPAIGN_ALTERING = Object.freeze([
+    'conquest',
+    'occupation_vassalized',
+    'coup_succeeded',
+    'faction_government_challenge',
+    'intervention_ordered',
+    'blockade_declared',
+    'treaty_breached',
+    // WR-10: a conveyance moves sovereignty over a real settlement by deed.
+    'sovereignty_conveyed',
+    // W-LIFECYCLE: a settlement's terminal death removes a living roster member
+    // (the digest cell stays, as a remnant).
+    'settlement_terminal_death',
+  ]);
+
+  test('exactly the structural-major change-types carry campaignAltering: true', () => {
+    const marked = Object.entries(CHANGE_AUTHORITY_POLICY)
+      .filter(([, entry]) => entry.campaignAltering === true)
+      .map(([changeType]) => changeType)
+      .sort();
+    expect(marked).toEqual([...CAMPAIGN_ALTERING].sort());
+  });
+
+  test('no campaignAltering marker is keyed off severity or applyMode', () => {
+    // Authority class is NOT the signal: campaign-altering entries span auto,
+    // auto-with-lock-escalation, and always-proposal. The flag is structural.
+    const authorities = new Set(
+      CAMPAIGN_ALTERING.map(t => CHANGE_AUTHORITY_POLICY[t].authority),
+    );
+    expect(authorities.size).toBeGreaterThan(1);
+  });
+
+  // deriveDecisionTier is the runtime classifier; the policy flag is its written
+  // contract. A representative outcome for each campaign-altering change-type must
+  // classify 'major', and a high-severity famine must classify 'minor'.
+  const REPRESENTATIVE_MAJOR_OUTCOME = Object.freeze({
+    conquest: { candidateType: 'conquest', type: 'power_transfer', powerTransfer: { cause: 'conquest' }, severity: 0.62 },
+    occupation_vassalized: { candidateType: 'occupation_vassalized', type: 'relationship', severity: 0.5 },
+    coup_succeeded: { candidateType: 'coup_succeeded', type: 'power_transfer', powerTransfer: { cause: 'coup' }, severity: 0.7 },
+    faction_government_challenge: { candidateType: 'faction_government_challenge', proposalPayload: { kind: 'government_change' }, severity: 0.55 },
+    intervention_ordered: { candidateType: 'intervention_ordered', type: 'condition', severity: 0.6 },
+    blockade_declared: { candidateType: 'blockade_declared', type: 'condition', severity: 0.6 },
+    treaty_breached: { candidateType: 'treaty_breached', type: 'realm_verb', severity: 1 },
+    sovereignty_conveyed: { candidateType: 'sovereignty_conveyed', type: 'realm_verb', severity: 0.7 },
+    settlement_terminal_death: { candidateType: 'settlement_terminal_death', type: 'lifecycle', lifecyclePatch: { kind: 'terminal_death', saveId: 'a' }, severity: 0.8 },
+  });
+
+  for (const changeType of CAMPAIGN_ALTERING) {
+    test(`deriveDecisionTier classifies a ${changeType} outcome as 'major'`, () => {
+      expect(deriveDecisionTier(REPRESENTATIVE_MAJOR_OUTCOME[changeType])).toBe('major');
+    });
+  }
+
+  test("a high-severity famine outcome classifies 'minor' (severity is NOT the signal)", () => {
+    const famine = { candidateType: 'flow_migration', type: 'stressor', severity: 0.95 };
+    expect(deriveDecisionTier(famine)).toBe('minor');
+  });
+});
+
+describe('change-authority contract — flagged tensions are recorded, not fixed', () => {
+  test('the severity-gated-bypass tension stays on the books for a product decision', () => {
+    const ids = CHANGE_AUTHORITY_FLAGGED.map(f => f.id);
+    expect(ids).toContain('severity-gated-families-bypass-flag');
+  });
+
+  test('the resolved tier-authority-split tension is no longer on the books', () => {
+    const ids = CHANGE_AUTHORITY_FLAGGED.map(f => f.id);
+    expect(ids).not.toContain('tier-authority-split-in-one-module');
+  });
+});

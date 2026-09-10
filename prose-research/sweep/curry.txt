@@ -1,0 +1,895 @@
+Part V
+Critical Approaches
+25
+The Critical Response to Tolkien’s Fiction
+Patrick Curry
+For the purposes of this essay, “Tolkien scholarship” is used as a generic term for all
+critical studies whose subject is Tolkien’s work. That scholarship comprises two parts.
+One, the main subject of this essay, is “Tolkien criticism,” in which the overwhelming
+majority of professional literary and cultural critics commenting on Tolkien’s work have
+made no specialized study of it. The other is “Tolkien studies,” undertaken by relative
+experts on his work, who themselves divide into professional critics on the one hand and
+informed “fans” on the other, with some qualifying as both. Drout (2005) describes work
+by the latter group as “Middle-earth studies.”
+The distinction between Tolkien criticism and Tolkien studies is not clear-cut,
+however, insofar as a few critical experts on Tolkien have had sufficient impact, both
+scholarly and popular, to affect mainstream critical opinion. The leading instance is Tom
+Shippey; others include Verlyn Flieger, Brian Rosebury, Michael Drout, and John Garth.
+In discussing Tolkien criticism, their work will be included, along with that of a few
+critics who, conversely, are not primarily Tolkien scholars but have nonetheless made a
+significant contribution to the field. Also, we are only concerned with the response to
+Tolkien’s fiction.
+It is not enough simply to describe the critical reaction to Tolkien. It is our intellectual
+responsibility to reflect on and try to understand that reaction and the reasons for it, so
+space must also be made for that. Furthermore, one of the factors that makes the critical
+reaction to Tolkien worth considering is his immense popular appeal. It is the
+combination of that and elite critical rejection that gives this subject much of its abiding
+interest. Tolkien’s popular reception therefore cannot be ignored when considering his
+critics.
+Any attempt to survey Tolkien criticism in a disinterested manner must conclude that
+the weight of critical opinion has been, and largely remains, negative. Indeed, the greater
+part seems not an attempt to understand Tolkien and his readers but rather to disqualify
+and humiliate them. In this context, Daniel Timmons’s assessment (2000, 1–10) is
+admirably irenic but misleading. True, for every critical attack on Tolkien one can find a
+positive opinion; but that means little without taking into account the relative status,
+perceived authority, and scholarly as well as public impact of the critics concerned. I
+therefore make no apology for concentrating overall on the critical hostility to Tolkien’s
+fiction.1
+Finally, before we embark, it is vital to realize that we are all, public and professional
+critics alike, engaged in a common task, namely engaging with the meaning(s) of
+Tolkien’s fiction. That is to say: the meanings resulting from how his books, as they are
+written, are taken up by readers. So there are two elements to any such process,
+analytically distinguishable but seamless in practice: production, or what went into his
+fiction, both the materials and his creative uses of them; and reception: what the results
+signify to its readers. There is no escaping what Drout and Wynne (2000, 107) call “the
+vital epistemological fact that all texts must be interpreted”2 and questions of reception –
+what Tolkien (OFS, 48) called “the effect produced now by these old things in the stories
+as they are” – are arguably still the more challenging and therefore neglected of the two.
+Shippey (2000a) is a model in taking an integrated approach.
+The principal phases of critical response are these. The Hobbit was published in 1937
+to some acclaim (see ch. 8), but Tolkien criticism started in earnest with publication of
+The Lord of the Rings, as a book for adults, in 1954–1955. It stepped up with the book’s
+spectacular success beginning in 1965, was given renewed impetus by the results of
+readers’ polls in 1996–1998, and again by Peter Jackson’s films in 2001–2003, and
+2012–2013. Tolkien also received some critical notice with publication of The
+Silmarillion in 1977.
+First Wave: The 1950s and 1960s
+In several ways, the initial critical response to The Lord of the Rings set precedents which
+have continued, with remarkable continuity, into the present. One was the observation by
+W. H. Auden, one of Tolkien’s staunchest defenders, that:
+I rarely remember a book about which I have had such violent arguments. Nobody seems
+to have a moderate opinion; either, like myself, people find it a masterpiece of its genre
+or they cannot abide it, and among the hostile there are some, I must confess, for whose
+judgement I have great respect. (Auden 1956)
+Auden added, shrewdly, “I can only suppose that some people object to Heroic Quests
+and Imaginary Worlds on principle.” Praise was also forthcoming from Richard Hughes,
+Naomi Mitchison, and, effusively but perhaps predictably, C. S. Lewis (1954, 1955), but
+others were less enthusiastic. Alfred Duggan (1954, 541), reviewing The Lord of the
+Rings anonymously in The Times Literary Supplement, opined that “This is not a work
+which many adults will read through more than once,” thus marking the start of a long
+series of patrician critical judgments on Tolkien subsequently perceptible as clearly wide
+of the mark. Similarly, Philip Toynbee, writing in The Observer on August 6, 1961
+recorded his spectacularly premature relief that “today these books have passed into a
+merciful oblivion.”
+In the second of three reviews in 1954–1955, Edwin Muir, just appointed Norton
+Professor of English at Harvard University, declared that The Lord of the Rings
+disappointed because “all the characters are boys masquerading as adult heroes” (1955).
+In other words, they are (1) immature, as signaled by what Muir curiously described as an
+uncomplicatedly happy ending; (2) one-dimensional, the good ones being thoroughly
+good and the bad utterly bad; and (3) problematically masculine and/or sexually
+immature. To anyone who knows the books, it is obvious that the first two points are
+wrong, and they have been refuted more than once (e.g., Le Guin 1989, 57–58; Shippey
+2000b); the third is more complex (see Clark 1997; Green 1998; Curry 2005, 85–87; and
+see ch. 32). What is more significant, however, is the durability of the charges.
+Probably the most influential single review from this period was by one of the leading
+American literary critics of his day, a Marxist modernist, Edmund Wilson (1956). Its
+significance is not so much its questionable judgments (the books show “poverty of
+invention” and their hero “has no serious temptations”) as its contemptuous mockery,
+extending from the title, “Oo, Those Awful Orcs!”, to the dismissal of The Lord of the
+Rings as “juvenile trash.” That tone remained a constant throughout the next half-century.
+In a little-known rejoinder a few years later though, Donald Davie argued that Wilson’s
+attack “quite fails to account for the seriousness of the undertaking, for the pressure that
+drove the author through these thousand or more pages, as it has driven many readers
+(this reader among them) to follow through the same pages eagerly” (1969, 90).
+Also in 1969, amid The Lord of the Rings’ popular success, Columbia University
+Press published a full-length academic critique by Catherine Stimpson. She excoriated
+Tolkien as “an incorrigible nationalist” (1969, 8, 13), celebrating a “bourgeois pastoral
+idyll” with one-dimensional characters who are “irritatingly, blandly, traditionally
+masculine.” The (in)justice of these specific charges has been discussed in detail by
+Colebatch (2003, Chapter 6) as well as Curry (2005, 83–85), so they need not detain us.
+They will serve here to underline the predominantly Marxist, feminist, and literary-
+modernist provenance of these attacks.
+The Silmarillion: The 1970s
+Christopher Tolkien’s edited version of The Silmarillion was published in 1977. It was
+the first of Tolkien’s works of fiction to meet with public bafflement and disappointment
+(in which connection it may be relevant that it was published posthumously, i.e., without
+his approval). It was a response which largely coincided, for once, with the critical
+reception. John Gardner reviewed it sympathetically and insightfully, however, in The
+New York Times Book Review (October 12, 1977).
+It is true, and by now almost a truism, that Tolkien studies must now include Tolkien’s
+legendarium in understanding his work as a whole (see Flieger and Hofstetter 2000;
+Hammond and Anderson 1993, 229–230). In terms of Tolkien criticism, however, that
+importance does not turn The Silmarillion into an accessible or even particularly readable
+text. It isn’t, which has naturally served to sharply limit its impact on common
+apprehensions of Tolkien’s fiction, and critics are under no obligation to pretend
+otherwise. Tolkien himself (Letters 333) noted one insuperable problem that The Lord of
+the Rings and The Hobbit depended for their sense of depth and antiquity on “glimpses of
+a large history in the background,” which was not possible when presenting that
+background itself.
+Tolkien’s Fiction in the 1980s
+This decade began with two critiques of Tolkien in the mold of Stimpson but issuing
+from the new critical industries, recently ascendant within the academy, of structuralism
+and psychoanalysis respectively: Christine Brooke-Rose, A Rhetoric of the Unreal
+(1981), and Rosemary Jackson, Fantasy: The Literature of Subversion (1981). Brooke-
+Rose, an eminent academic structuralist as well as author of “experimental” novels,
+turned the big guns of Theory on The Lord of the Rings, appropriating it as little more
+than grist to its preset mill (see Attebery 1992, 23–27; Curry 2005, 110–111). As with
+those of Wilson and Stimpson but even more so, Brooke-Rose’s account of Tolkien was
+littered with both spelling and factual mistakes, suggesting that the diffi culty for these
+critics lay in reading Tolkien at all, let alone closely, and undermining confidence in her
+wider conclusions.
+Jackson, a Marxist and psychoanalytic critic, argued that Tolkien’s “sentimental” and
+“nostalgic” work functions as a conservative vehicle for repression supporting a ruling
+ideology. The remedy, in standard modernist (and crypto-Protestant) style, is
+demystification. Once again, as Attebery shows (1992, 20–23, 27, 31; see also Curry
+2005, 106–108), Jackson was more concerned to dispose of Tolkien’s work than to
+comprehend it.
+Also in 1981, and again in 1983, Fred Inglis, a former student of F. R. Leavis, took
+Tolkien criticism to a new nadir, calling Tolkien a “fascist” (Inglis 1981, 197). I have
+discussed his critique elsewhere (Curry 2005, 104–106); here it is only needful to point
+out the same phenomenon that Shippey (2000a, 306–308) has noted of Toynbee and
+Edmund Wilson, namely gross inconsistency between their self-professed critical ideals
+and their practice when they encounter Tolkien. In Inglis’s case (1983, 3, 31–32), this
+takes the form of criticizing the metropolitan “irony-stereotypewriter” while shamelessly
+patronizing a “typical” Tolkien reader as the retired head of art in a market-town
+grammar school, reading The Lord of the Rings to his young sons in a pine-paneled flat,
+and so on.
+Inglis was the respectful biographer of Raymond Williams, the leading Marxist
+literary critic of his time and a major influence on the new academic discipline of cultural
+studies. In the course of a critique of pastoralism, Williams (1985, 258) casually counted
+Tolkien as a practitioner of “country-based fantasy” that is “suburban” and “half-
+educated.” Again, the most significant point is not that these criticisms, left unqualified,
+are mistaken, which can easily be shown; Tolkien was no more halfeducated than he was
+a fascist. It is rather how very mistaken they are, and how consistently. That suggests that
+there is (as Marxists like to say) a structural or systematic bias at work.
+Fortunately for Tolkien criticism, the early 1980s also saw publication of what is
+probably its most important single work, both in quality and (eventually) influence: Tom
+Shippey’s The Road to Middle-earth (1982, with revised and expanded editions in 1993
+and 2005). A year later, Verlyn Flieger’s pioneering and insightful Splintered Light:
+Logos and Language in Tolkien’s World (revised edition, 2002) appeared. Together,
+these books revealed the profound linguistic, cultural, and metaphysical dimensions of
+Tolkien’s work. It is doubtful that they significantly altered mainstream critical opinion
+upon publication, but less so that they have done so over time. Since space is severely
+limited, however, and both these books are still widely available as well as unmissable in
+both Tolkien studies and (it is to be hoped) criticism, I won’t discuss them directly here.3
+The Polls: 1996–1998
+In 1996, The Lord of the Rings topped the UK poll by Waterstone’s and Channel 4
+(26,000 readers) of the greatest books of the century. Also that year, the Folio Society
+asked its members to decide upon their favorite books; in first place, with 10,000 votes,
+was The Lord of the Rings. The same finding emerged from follow-up polls in 1997 by
+the television program Bookworm (around 50,000 readers) and readers of the Daily
+Telegraph, and in 1999 by MORI, although in the last The Lord of the Rings was
+formally pushed into second place – by the Bible. That same year, The Lord of the Rings
+topped a poll conducted by Amazon.com as the book of the millennium. In several of
+these polls, Orwell was placed second, either directly or as the author of Nineteen Eighty-
+Four: an interesting fact to which we shall return.
+The critical response was explosively hostile. Auberon Waugh (editor of the Literary
+Review), Professor John Carey, and Mark Lawson (on the BBC Today program) all
+concurred that Tolkien fans had orchestrated the outcome. Tolkien, it seems, has “fans”
+rather than “readers.” This conspiracy theory was quietly dropped after the Folio Society
+poll. Susan Jeffreys, for The Sunday Times (January 26, 1997), recorded the dismay at the
+Waterstone’s/Channel 4 result “up and down the country wherever one or two literati
+gathered together.”4 The Times Literary Supplement (January 24, 1997) found it
+“horrifying” and Howard Jacobson opined that “It’s another black day for British culture”
+(see Pearce 1998, 2–3). Not to be outdone, Germaine Greer (1997, 4) described the result
+as a “nightmare,” adding that the books subsequently inspired by Tolkien “are more or
+less what you would expect; flight from reality is their dominating characteristic.” The
+charge of escapism, reiterating those of immaturity, nostalgia, and conservatism, is
+another hardy perennial to which we shall return.
+The same pattern persisted into the next decade. In 2003, The Lord of the Rings won
+the BBC’s The Big Read poll of readers’ favorite book, with 174,000 votes (23% of the
+total of nearly 750,000 readers): by now, surely an unsurprising result except, it seems, to
+the three critics live on TV on the night, two of whom had apparently been unable to read
+it beforehand. All in all, such instances, together with Tolkien’s critics’ repeated inability
+to get the details or narrative meaning of what they are attacking right, point to an
+irrational revulsion. This is not irrelevant; it throws a very interesting light on the
+dominant literary mindset and, as such, it should form part of any truly critical
+consideration thereof.
+Meanwhile, in contrast to the public critics, an authoritative work edited by John Clute
+and John Grant, The Encyclopedia of Fantasy (1997) offered a measured and reasoned
+assessment of Tolkien’s work, especially concerning both his literary influences and his
+own influence.
+The Good, the Bad, and the Ugly: The 2000s
+In Tolkien criticism, the new century and millennium opened with publication of
+Shippey’s J. R. R. Tolkien: Author of the Century (2000a). Its quality combined with the
+backing of a major trade publisher, and Shippey’s eminence in both Tolkien studies and
+criticism, makes it central in both, and only points made therein which directly concern
+the remit of this essay will be mentioned.
+Shippey defends the bold claim of his title on three grounds: democratic, generic, and
+qualitative (xvii–xx). These could be summarized by saying that for the last 50 years,
+Tolkien has found unignorable numbers of readers, many of whom have not only gone on
+to seek out similar works in the fantasy genre he unintentionally founded but “have been
+deeply and lastingly moved by Tolkien’s works, and even if one doesn’t share the feeling,
+one should be able to understand why.”
+Shippey also makes a convincing case that Tolkien should be considered a modern
+writer, in the company of Orwell, Golding, Vonnegut and others, with a thoroughly
+twentieth-century concern for and treatment of power and evil (see ch. 28). There are two
+qualifications: Tolkien’s understanding of them was often at variance with his
+contemporaries’, and his work being modern in some respects does not preclude it from
+being nonmodern in others.
+Finally, Shippey suggests (xxxiv) that “Very probably the reason for the dislike has a
+good deal to do with the reasons for the success. Tolkien has challenged the very
+authority of the literati, and this will never be forgiven.” In his “Afterword: The
+Followers and the Critics” (305–328), Shippey usefully considers the phenomenon of
+“intense critical hostility to Tolkien, the refusal to allow him to be even a part of ‘English
+literature’ ” (305).
+Despite the insights offered by Shippey, Flieger, and others working in Tolkien
+studies, the various charges laid against The Lord of the Rings over several decades by his
+detractors in Tolkien criticism were prominently revived in 2001 in perhaps the leading
+organ of the British literary establishment, the London Review of Books (LRB), in an
+article by one of its editors, Jenny Turner (for one of the few responses to Turner, see
+Galwey 2004). Entitled, with heavy irony, “Reasons for liking Tolkien,” Turner’s essay
+seeks not so much to understand Tolkien or his readers as to place them beyond serious
+consideration. Nonetheless, it is illuminating because of what it reveals about the gut
+reactions and critical mindset of Wilson, Muir, Stimpson, Jackson, and more recently
+Greer. It is thus invaluable as data.
+Turner repeats some of her predecessors’ elementary mistakes, describing the Hobbits
+of the story as subordinate and powerless, and portraying the message of the book as one
+of reassuring safety resulting from a “cosy little universe.” There is also the familiar
+snobbery according to which The Lord of the Rings isn’t literature but “junk fiction,” in
+the same relation to “literature and learning” as “astrology is to physics,” written by
+someone who, if he hadn’t been an Oxford scholar, might have been obsessed with “a
+model railway, or a record collection, or military history, or maps.”
+Turner’s principal subject, however, is her own reaction to the book. She writes as an
+apostate who once read it with “an intensity I now find scary.” She now finds it “silly and
+boring,” yet “it still locks with my psyche in a most alarming way. . . . It’s an infantile
+comfort that is also a black pit.”5 It seems The Lord of the Rings “has cubby-holes for all
+sorts of urges to hide in,” and “[a]ll sorts of visceral needs and desires are involved”
+which make it “not just anti-intellectual but a sort of anti-book” and even “a little
+sinister.” All Tolkien’s fans are “vulnerable people” smitten by “soggy, yearny
+nostalgia,” but “the swotty teenager” is particularly at risk.
+Turner mentions Tolkien’s “dreadful prose style” in passing (cf. Drout 2004), and
+takes it as read that “[o]bviously there are problems to do with women, and race and
+racism,” not to mention “with the elves and so on” (recall in this connection Auden’s
+point from 1956). But what she helpfully identifies as “the central problem” is that:
+It’s a whole world . . . You would expect elves to figure in Tolkien’s story – if they had
+to figure at all – as creatures within a sub-creation, characters in a story, fictions inside a
+frame. But actually, they are given much more credence, more constitutive importance,
+more ontological weight.
+In consequence, “[y]ou find yourself thirsting for some nice sensible wipe-down
+concepts like ‘metaphor’ or ‘fiction.’ ”
+Why is this a serious problem for Turner and like-minded critics? Certainly the
+metaphysical realism and rationalism that dominates so much of mainstream Western
+culture are obvious in her response; although to apply a little of her hero Freud, why do
+we need constant reminders that Elves, say, are not real? In any case, there is clearly a
+program involved – in this case, rationalist, naturalist, and secularist – along the lines of
+what Barbara Herrnstein Smith (1988, 179) has anatomized as the enduring effort “to
+identify the presumptively universally compelling Truth and Way and to compel it
+universally.” When the Truth is at stake in this way, living and letting live is not a critical
+option, and anyone claiming to sincerely love, say, the work of Tolkien, Proust, and
+George Eliot, must be either deluded or dissembling.
+In more strictly literary terms, it seems that Turner – and given that she is on its
+editorial board, one wonders about the LRB too – fails to understand two of the most
+important things about art, literary or otherwise: that reality is (also) ineluctably fictional,
+and that fiction and its referents are (also) unavoidably real. Turner and her allies
+evidently want to keep reality and fiction on hermetically separate levels except for what
+they, the gatekeepers, will allow through.6 As for metaphor, Paul Ricoeur showed more
+than three decades ago that “There is no non-metaphorical standpoint. . . . metaphoricity
+is absolutely uncontrollable” (2003, 339). In other words, any critique of fiction has
+fiction at its heart, and any critique of metaphoricity can only draw upon metaphor. So
+much for a “sensible wipe-down.”
+Modernism
+This review of the dominant critical reception of Tolkien’s fiction consistently shows two
+characteristics which seem especially significant: a visceral hostility and emotional
+animus, and a plethora of mistakes showing that the books had not been read closely (or
+in a few cases, at all). Taking these together suggests that the inability to really engage
+resulted from the loathing, although without inhibiting the same critics from pronouncing
+anathema. As the critic J. P. Stern once observed, contempt is a poor guide. We must go
+beyond that conclusion, however, in search of an explanation. Why such contempt for
+these particular books?
+Shippey (2000a, 316) argues that “at the heart of the critical rage, and fear, which
+Tolkien immediately and ever after provoked” is the fact that he “threatened the authority
+of the arbiters of taste, the critics, the educationalists, the literati. He was as educated as
+they were but in a different school.” Furthermore, The Lord of the Rings “showed an
+improper ambition, as if it had ideas above the proper station of popular trash.” The
+critics’ assumption is often actually that simple: it’s popular, so it must be trash. Shippey
+adds, “It was the combination that could not be forgiven”.
+This explanation undoubtedly goes far towards explaining the unusual critical
+response, but as it stands, it is an excellent summary that awaits more elaboration. This
+essay will attempt just that under the umbrella term (to be explained) of “modernism.”
+First, however, we need briefly to review other relevant factors which are not captured by
+even a broad definition of modernism, although they may well overlap with it.
+One is that The Lord of the Rings will never have universal appeal (properly so-
+called). That hardly marks it out from any other book, but in terms of content, you
+wouldn’t go to it, for example, for subtle insights into relationships between the sexes.
+Furthermore, there remain stubborn issues, potentially problematic, with the way it treats
+race and politics as well as sex-gender.7 Regarding style, Tolkien’s tone (not unlike that
+of Dickens) is sometimes sentimental, and its occasional archaic and “high” style will
+never be to some readers’ tastes. It is perfectly understandable that some would prefer
+other work (which differs from deploring anyone at all reading it).8
+To some extent, a negative response to Tolkien’s fiction may be simply a function of
+personal disaffinity. Temperaments, even to the extent they are a matter of nurture as well
+as nature, vary widely, and with them, tastes: de gustibus non est disputandum. But taste
+alone won’t carry all the weight of the emotive reactions; alternatively, there must be
+more to “mere taste” than meets the eye.
+In this connection, another potential stumbling-block has been thoroughly explored by
+Shippey (2000a, 2005; see also Honegger 2005): the problems posed, perhaps
+particularly for intellectuals, by a literary artefact suffused with a philological concern for
+words and a particular understanding of language (strongly influenced by Owen Barfield:
+see Flieger 2002) as rooted in and indicative of corresponding worlds/mentalities, past
+and present. That understanding has almost vanished from the contemporary intellectual
+world. As a result, as Shippey (2005, 332) says, “there is an enormous ‘culture-gap’
+between him and his critics” – admirers, often, as much as detractors. Among critics,
+Harold Bloom (2000) falls in this category; he evinces more bafflement than hatred.9 As
+a sign of this problem for literary critics, see the ongoing struggle to place The Lord of
+the Rings in a category: it is clearly not a novel, so is it a romance, an epic, mythopoeic
+fiction, or simply junk fiction? It has often proved easier to simply opine that whatever it
+is, to quote Humphrey Carpenter, it “doesn’t really belong to literature” (BBC Bookshelf,
+November 22, 1991; see Simonson 2008).
+Another consideration is simple snobbery, itself fed by fear (see Carey 1992). The
+power of this attitude, contributing to and fed by membership in a critical elite,
+particularly when institutionalized in an academic or media forum, should not be
+underestimated – particularly where popular success is also part of the mix. Auberon
+Waugh’s contempt for Tolkien was primarily a function of snobbery, and no doubt it also
+figured strongly in that of Wilson, Greer, Turner, and others.
+Nonetheless, more still seems needed to account for the sheer animus. For that, we
+need to invoke something like a worldview, ideology or set of values, relatively coherent
+and strongly held (if not necessarily consciously so). Such values are ultimate in two
+senses: they cannot be further grounded or justified, yet they are also what their bearer
+feels (more than thinks) is fundamental. They are therefore often defended with quasi-
+religious or, in the case of values which entail denying religion, crypto-religious fervor.
+They can change, of course, but any major shift amounts to a conversion experience. It is
+at this level, respecting the critical response to Tolkien’s fiction, that modernism enters
+the picture.
+What do we mean by “modernism”? In answering that question, we first need a
+working definition of “modernity” and “modern” (see also ch. 24). These embrace a
+sensibility and set of values which include, prominently:
+• A belief in the “right” and ability, in principle, of humanity to determine its own
+fate (rather than, say, God or nature), usually through science and technology.
+• Secularism and materialism.
+• Considerable confidence, if not indeed faith, in reason, and relatedly in modern
+science, conceived as the “highest” version of reason, along with efficient
+administration as its practical expression.
+• All of which coalesces into a narrative ideology of Progress and its enemies (chief
+among them, “superstition”, a.k.a. “tradition”) that bears a significant but
+unacknowledged debt to Christian eschatology.
+Modernity is also an historical period, albeit necessarily broadly construed, in which
+that sensibility and set of values finds dominant or preeminent expression and influence
+(the best single guide here is Toulmin 1990, but see also Latour 1993). “Modernism” and
+“modernist” refer to the valorization and advocacy of modern values – that is, the chief
+values of modernity – whether in politics, culture, literature, architecture, music, etc.
+They do not necessarily describe a particular school or movement within art, architecture,
+literature, etc. Thus, literary modernists need no longer hold up Joyce, Eliot, and Woolf
+as exemplars, although they may do so.
+As Veldman perceptively notes: “Not all the reviewers who stood outside Narnia and
+Middle-earth did so because they misunderstood what Lewis and Tolkien were about.
+Many did so precisely because they perceived the protest at the heart of these works”
+(1994, 107).10 It is my contention that the dominant ideology of the literati, as self-
+appointed guardians of literature, is modernism and that those most aggrieved by Tolkien
+are or were, personally as well as professionally, modernists. Given Tolkien’s
+uncompromising, erudite, and popularly received rejection of modernism, this makes
+sense not only of the most consistent charges – infantilism, nostalgia, escapism – but also
+of the casual vehemence with which they have been made.11 As Tolkien himself realized,
+his chief crime was not even “the Escape of the Prisoner”; it was encouraging “the Flight
+of the Deserter” (MC 148). In this connection, it makes perfect sense that the most
+frequent runners-up in the polls of readers were Orwell and Nineteen Eighty-Four: an
+author and a book equally agonized over pathological modernity, although from a
+socialist rather than conservative perspective.
+As evidence and elucidation of this contention, let us examine the issues, as they
+appear in the critical texts, of modernism itself and of irony. Starting with modernism,
+one can second Shippey’s firm placing of The Lord of the Rings as a work with
+characteristically modern concerns, particularly respecting power (see Shippey 2000a,
+312– 318, for an analysis of “Tolkien and modernity”; Weinreich and Honegger 2006;
+and ch. 24). At the same time, one can also agree with Turner (2001) that “In form, in
+content, in everything about it, The Lord of the Rings is the most anti-Modernist of
+novels.” Andrew O’Hehir makes the same point: “the crux of the matter . . . lies in
+Tolkien’s wholehearted rejection of modernity and modernism. This is what so
+powerfully attracts some readers, and just as powerfully repels others” (2001).
+Anthony Lane (2001) sees the same dynamic in Tolkien’s “high” style: “Hardly
+anyone had used it unironically since Tennyson’s ‘Idylls of the King,’ and to revert to it
+with a straight face in the nineteen-fifties was to mount a head-on challenge to
+modernity.” Finally, as argued elsewhere (Curry 2004), it is The Lord of the Rings’
+nonmodernism, presenting “a Europe that has not been ‘Europeanized’” (Luling 1995,
+53), that has powerfully attracted many readers.
+There are no contradictions here if we recall the distinction between modernism and
+modernity. First, Tolkien himself was definitely anti-modernist; his deep reservations
+about advanced technology and industrialism, representative democracy and bureaucracy
+are well documented. It would be simple-minded, however, to assume that his books are
+therefore straightforwardly anti-modernist. Second, Tolkien’s fiction is certainly modern,
+but it is far from purely so. Both Shippey (2000) and Flieger (especially 1997) have
+enabled us to analytically disentangle the modern and nonmodern ingredients in the
+cauldron of Tolkien’s story. Third, that story is not modernist; no advocacy of modernity
+is present. In short, The Lord of the Rings is a modern book, much of the import of which
+is also nonmodern, written by an anti-modernist.
+Rosebury (2003, 149–154) also concludes that it “could not plausibly be called a
+modernist work, because it lacks a crucial quality universal within modernism: irony”
+(154). That brings us to our second key consideration. Preeminently, modernist irony
+functions as a signal that the writer subscribes to what Latour calls the Modern
+Constitution:
+1st: . . . even though we construct Nature, Nature is as if we did not construct it. 2nd:
+even though we do not construct Society, Society is as if we did construct it. 3rd: Nature
+and Society must remain absolutely distinct. (1993, 22)
+“Being ironic, especially about what one is writing oneself, says: being intelligent and
+highly educated, I know that what I am doing (cultural construction) isn’t real (natural) –
+even, indeed especially, if I am writing about nature – and that the two are completely
+different.” And anyone whose art is unselfconscious, thus ignoring (or disrespecting?)
+this convention, becomes fair game for mockery and contempt.
+Like Rosebury, Drout too (2007, 653) notes Tolkien’s failure, or refusal, to meet “the
+modernist expectation of pervasive irony.” Attebery (1992, 39) concurs that “The course
+of twentieth-century literature can be viewed as the gradual spread of irony into every
+phase of storytelling.” Moorcock, one of Tolkien’s bitterest critics (1987, Chapter 5,
+“Epic Pooh”), inadvertently confirms the point: “I think my own dislike of J. R. R.
+Tolkien lies primarily in the fact that in all those hundreds of pages, full of high ideals,
+sinister evil and noble deeds, there is scarcely a hint of irony anywhere” (1987, 107). (For
+a recent unconvincing attempt to enlist Tolkien as a “theorist of the ironic imagination”
+see Saler 2012.)
+Ironies abound within The Lord of the Rings, of course, not least that it turns out to be
+not Frodo or Sam who finally destroy the Ring, nor any of the great and good, but
+Gollum. But Tolkien is not ironic about The Lord of the Rings; nor does he offer the
+slightest opening or invitation to readers to be so. He and his readers are, so to say, post-
+ironic. That is not something that will endear them to critics who pride themselves on
+being the critical avant-garde and can’t stop using irony to signal it, or checking what
+they are reading for such signals. Infuriatingly for some, post-ironists – which, in
+Tolkien’s case, evidently comprise the majority of readers – simply don’t care.
+Taking Turner (2001) again as an unusually articulate but otherwise representative
+critic of Tolkien, recall, in this connection, what she identifies as “the central problem”:
+the “ontological weight” given by Tolkien to fictional creatures like Elves (as Shippey
+2005, 286 points out, “Most novels are about ‘people who never existed,’ ” but let that
+pass). Turner’s cosmopolitan sophistication vanishes when realism, rationalism, and
+secularism are at stake. The only alternative, it seems, is “the vague warm surges of
+feeling associated with religion and religion substitutes.” Indeed, in a kind of modernist
+evocation of cold showers and mittens at night, she warns that “[t]hese responses can be
+touched off with a dangerous ease – every self-aware person finds that he has to train
+himself from adolescence in withstanding them.” As Galwey (2004, 10) comments,
+“Perhaps if one had staked one’s all on modernity, one would feel like that.”
+Turner writes, “When I was young . . . I really did believe that the world inside the
+book had taken over the world outside,” and such literature “plays on the reader’s desire
+to believe that the world Tolkien is writing about is in some way real.” When you grow
+up, however, “You know too much about how the world works to be so easily taken in.”
+Notice how she resorts to classical epistemology in order to disqualify and domesticate
+others’ as well as her own ontological experience of, and as, reality: they (“fans”; it used
+to be “natives”) believe, but we literati know. From there it is a short step to associate
+such “realism” with maturity, growing up, and Muir’s and Wilson’s anxious concern to
+be the Adult in the room. But that is pure rhetoric, not logic or universal experience; and
+swollen into an ideology of Progress, on both an individual and collective level, it
+encourages an all too familiar obligation to chastise heretics, apostates, backsliders, and
+“escapists.”
+It is hardly surprising, then, that “Tolkien’s perfectly sincere, perfectly impossible
+narrative” (Attebery 1992, 46) so provokes. As the Irish writer Nuala O’Faolain once
+remarked:
+The language of highbrow criticism can only cope with a certain kind of fiction. It has no
+vocabulary with which to discuss a world where neither the individual nor the society is
+self-conscious, and the author pretends not to be either. . . . The ordinary reader is far
+ahead of the critics in ease with such a world. (The Irish Times, November 7, 1992)
+In another genuine irony, it was one of the heroes of modernism, Walter Benjamin (1969,
+83, 102), who remarked on modern “embarrassment all around when the wish to hear a
+story is expressed” and added approvingly that “[t]he first true storyteller is, and will
+continue to be, the teller of fairy tales.” As Tolkien wrote in 1955, “the ‘fairy-story’ is
+really an adult genre” – that is, a genre for the ordinary reader – “and one for which a
+starving audience exists” (Letters 209).
+The Lord of the Rings is thus fundamentally not one but several things: a story told by
+a master storyteller; a story inspired by philology; a story suffused with Catholic values;
+and a mythic (or mythopoeic) story with a North European pagan inflection. It is also a
+story that enables the contemporary reader to imaginatively inhabit a nonmodern world,
+one that throws into question some central modern values and assumptions.
+There remains one important point to discuss in this connection. Le Guin has pointed
+to “a deep puritanical distrust of fantasy.” To such critics, fantasy “is escapism. . . . They
+confuse fantasy, which in the psychological sense is a universal and essential faculty of
+the human mind, with infantilism and pathological regression” (and not always by sincere
+error, one would add) “as if evil were a problem, something that can be solved, that has
+an answer.” “That”t she adds, “is escapism” (Le Guin 1989, 58–59; emphasis in original).
+Laura Miller (2008, 101) recounts a conversation in which Tolkien asked Lewis
+rhetorically, “What class of men would you expect to be most preoccupied with, and
+most hostile to, the idea of escape?” The answer, of course, is jailers (OFS 69). Miéville
+(2002) has cited Moorcock to the effect that “this is precisely untrue. Jailers love
+escapism. What they hate is escape.” But that rejoinder turns on whether you think
+imaginatively inhabiting an essentially nonmodern world is already a form of escape,
+rather than mere escapism. Of course, any literature, or indeed art, could constitute
+escapism. Given the phenomenon of radical nostalgia, however (Curry 2004, 15–16) –
+which I take to be empirically confirmed in Tolkien’s case by The Lord of the Rings’
+influence in various movements of political and environmental resistance – his fiction is
+certainly not necessarily escapist or even quietist, sometimes proving rather to be activist.
+From Tolkien Studies
+This section is intended to bring attention to contributions to Tolkien scholarship from
+Tolkien studies, in addition to those already mentioned by Shippey, which have also
+figured in, and affected, Tolkien criticism. One can assume without discussion the
+importance of Douglas A. Anderson’s annotated edition of The Hobbit (Tolkien 2002a),
+the biography by Humphrey Carpenter (1977), Tolkien’s Letters and essays (MC), the
+posthumous Unfinished Tales of Númenor and Middle-earth (UT), and the 12 volumes of
+the History of Middle-earth series (1983–1996). To these should be added two collections
+from major conferences, edited by Reynolds and GoodKnight (1995) and Wells (2008),
+and at least two edited collections: Salu and Farrell (1979) and Clark and Timmons
+(2000).
+First mention must be of the work of Verlyn Flieger (1997, 2002, 2005), and its
+sensitive analysis of the metaphysical and theological dimensions (which are vast and
+intricate) of Tolkien’s work, both fiction and nonfiction. In addition, Flieger has provided
+definitive editions of Smith of Wootton Major (Tolkien 2005), the landmark essay On
+Fairy-stories (Tolkien 2008b, with Douglas A. Anderson), and a collection of essays on
+The Silmarillion (2000, with Carl F. Hostetter). She is also the best guide to the vital
+place of Faërie or enchantment in Tolkien’s work.
+Brian Rosebury (1992) pioneered the first good study of Tolkien’s work as a cultural
+phenomenon, and the later edition (2003) is still more useful and insightful. For other
+recent work of good quality on Tolkien’s fiction in the light of contemporary literature
+and especially cultural studies, see Hughes (2004), Eaglestone (2005), and Fimi (2009).12
+Also in 1992, Brian Attebery’s Strategies of Fantasy set the bar high for such studies.
+Starting from the premiss that “the task of literary theory is to provide a framework
+capable of accounting for the story’s success on its own terms, rather than denying that its
+aims are achievable or worth the attempt” (17), his discussion of Tolkien draws upon the
+unjustly neglected approach of Meeker (1974) and subsequently Elgin (1985) to show
+convincingly that Tolkien’s epic is life affirmingly “comic” and ecological, as opposed to
+despairingly “tragic” and Promethean. As such, it is:
+neither nostalgic nor transcendental. Tolkien draws on the ancient magical worldview and
+the comic narrative structure because they offer something to the present. . . . an
+affirmative, integrative worldview, which is not necessarily naïve, escapist, or
+reactionary. (1992, 34)
+The failure to follow through this insight is the biggest single lapse to date in Tolkien
+studies and criticism alike.
+Michael Drout is a critic and scholar in Tolkien studies whose comprehensive and
+acute metacritical essays (2005 and, with Wynne, 2000) should also be read by anyone
+engaged in Tolkien criticism. He has also edited a Tolkien encyclopedia (2007). His
+bibliography with Wynne and Higgins (2000) is another major resource, along with those
+of Johnson (1986), Hammond (1993, with Douglas A. Anderson), and West (1981, 2004;
+see also Wynne 2007, and Lobdell 2007).
+John Garth’s exemplary biography of the first part of Tolkien’s life (2003) overlaps
+both Tolkien studies and criticism, and it has been deservedly praised. One can only hope
+Garth will one day be able to give similar treatment to Tolkien’s entire life, superseding
+Humphrey Carpenter’s earlier and useful but flawed biography of 1977.13 Finally,
+mention must be made of the excellent series of books produced by Walking Tree
+Publishers, founded in 1997, under the direction of Thomas Honegger, and of the annual
+refereed journal Tolkien Studies, established in 2004.
+Others
+This concluding section will mention contributions by writers not Tolkien scholars as
+such, nor all literary critics, which have nonetheless enriched Tolkien criticism. Pride of
+place here, on account of her unimpeachable status as both writer and critic and her close
+relationship, equally personal and professional, with Tolkien’s fiction, goes to Ursula Le
+Guin. Her reflections in the collection of her essays from 1989 on the vexed questions of
+fantasy and escapism, the complexity of the characters in The Lord of the Rings, and its
+treatment of the nature of evil, remain evergreen.
+The historian Ronald Hutton (2003, 2011) treats the pagan dimension of Tolkien’s
+work, an important but neglected topic, with originality and insight. The result throws an
+interesting light in turn on its Christian dimension, which has received considerably more
+(and sometimes uncritical) attention.
+Another social and cultural historian, Meredith Veldman, wrote an early consideration
+of Tolkien’s social and environmental commitments and influence that stands up very
+well and should be better known. She was the first to note that:
+Decades before the Greens, he denounced the exaltation of mechanization and the narrow definition
+of economic progress that resulted in the degradation of the natural environment, and he did so in
+romantic terms: in Tolkien’s Middle-earth, nature expressed a reality beyond human comprehension
+and worthy of human respect. (1994, 90)
+In this context, The Lord of the Rings “could serve as a text of not only withdrawal but
+also engagement” (108), and the elective affinity between it and the countercultural
+movements of the 1960s, 1970s, and 1990s was far from an anomaly.
+Turning to other literature and literary criticism, we should be grateful to a critic for
+The Guardian (April 3, 2010), Nicholas Lezard, for finally admitting in print that “of all
+the means for professional suicide that are available to the writer, expressing affection for
+Tolkien is one of the most effective.” It is depressing (if you think Tolkien deserves
+better) that this should still be the case in 2010. On the other hand, there are signs that the
+wind is changing. Among the newer generations of contemporary writers, a few are
+evidently unafraid to include casual and favorable references to Tolkien in their own
+work. These include Junot Díaz, Michael Chabon, and, among literary critics, Anthony
+Lane (2001) in The New Yorkerr, Andrew O’Hehir (2001) in the online Salon, and
+another writer for Salon, Laura Miller (2008).
+China Miéville is an accomplished fantasy/science fiction writer himself. In 2002 he
+published a sharp critique of Tolkien in the Socialist Review, an internet journal, but
+followed this up with a lighter and more tolerant treatment in 2009, giving “Five Reasons
+Tolkien Rocks,” which is recommended. Among the acute and amusing points he makes
+is one that breaks through just the modernist barrier erected by Turner and others, which
+they see as Tolkien’s “central problem”:
+Tolkien refused the notion that a work of fiction is, in some reductive way, primarily,
+solely, or really “about” something else, narrowly and precisely. . . . his “cordial dislike”
+[of allegory] is utterly key for the project of creating a fantastic fiction that both means
+and is vividly and irreducibly itself, and is thereby fiction worthy of the name. (2009)
+Miéville, Lane, O’Hehir, and Miller show that it is perfectly possible to subject Tolkien’s
+work to serious criticism and even poke fun at it while still recognizing its virtues,
+respecting its strengths and retaining affection for the old monster, as it were. In support
+of the best of the Tolkien criticism and studies discussed above, they offer hope for
+Tolkien scholarship continuing to put flesh on the bones of perhaps the most pithy and
+accurate critical judgment ever delivered on The Lord of the Rings, by its first publisher
+Rayner Unwin (quoted in Carpenter 1977, 210): “a very great book in its own curious
+way.”
+Postscript
+In the six years which have elapsed since writing this essay, a couple of new points merit
+a mention. One concerns the exhibition of ‘Tolkien: Maker of Middle-earth’ at the
+Bodleian Library in Oxford (2018) and The Morgan Library and Museum in New York
+(2019), and ‘Tolkien, Journey to Middle-earth’ at the Bibliothèque Nationale de France in
+Paris (2019-20). All were extremely well-attended, which underlines the perennial
+popular appeal of Tolkien’s work, regardless of its critical status. The exhibition in
+Oxford was the Bodleian's highest attended exhibition ever, despite the restriction of
+timed, pre-booked tickets; visitors averaged 926 a day. Those taking place in New York
+and Paris were equally successful (Catherine McIllwaine, pers. comm.).
+The second matter, more weighty, is a renewed focus on both Tolkien and his work in
+relation to issues of ‘difference’, especially race and racism. There is a welcome new
+chapter in this edition on that topic, but insofar as it bears on the ongoing critical
+response to Tolkien’s work perhaps I could add a few remarks. They are not intended to
+be a full review of the literature.
+The first thing to say is that hastiness is unhelpful, especially in an intellectual,
+cultural and (not least) technological atmosphere which promotes it. Real social evils,
+both past and present, need to be weighed against the temptation of a simplistic rush to
+rectitude. An attempt to give the former their full stretch without succumbing to the latter
+is therefore a prerequisite for any critical judgment which deserves to be taken seriously.
+Second, close attention needs to be given to disentangling questions of Tolkien’s own
+beliefs – chiefly of interest to biographers and their readers – from those concerning the
+nature of his writings, which surely should be the principal focus of literary critics and
+their readers. Of course, one may fall into both camps, but that does not make them
+identical. (See Fini, 2008, 2012.)
+Tolkien’s own hostility to Nazism, to anti-Semitism, to ‘Nordic’ as a racially-tainted
+term, to the idea that the North is a ‘sacred direction’, to apartheid and to imperialism,
+especially British, are a matter of record. But as he himself writes (2012a, xxii), ‘An
+author cannot of course remain wholly unaffected by his experience, but the ways in
+which a story-germ uses the soil of experience are extremely complex, and attempts to
+define the process are at best guesses from evidence that is inadequate and ambiguous.’
+And that truth cuts both ways, so it still leaves the question: to what extent can Tolkien’s
+work be rightly described as condoning or encouraging racial prejudice?
+One starting-point is to remind ourselves that his stories are just that – fiction – and
+fiction should not be treated as if it were a tract, argument, or direct assertion. It is
+unimaginable, for example, without characters who believe, assert and do things with
+which neither the author nor perhaps any of their readers agree or support. Furthermore,
+storytellers must be free to imagine what and who they like. (Thankfully, there is little
+chance of Tolkien being accused of ‘appropriating’ Elvish culture.)
+By the same token, subjects in stories should, in the absence of strong evidence to the
+contrary, be assumed to be there primarily because the story being told demands it. And
+Tolkien in particular wrote in the first and most basic instance not as a religionist, nor a
+linguist, nor a patriot and so on, but as an artist – a storyteller – and he specifically denies
+and disparages allegorical interpretations whereby the Ring ‘is’ the Bomb, etc.
+(2012a,xxi)
+The alternative would be to attack Conrad’s Heart of Darkness, say, as imperialist and
+racist because it is populated with imperialists and racists, or because it presents
+imperialism and racism in action. What could be more absurd, and all the more so since
+what it shows is just the horrors thereof? (But that did not prevent Chinua Achebe from
+denouncing it as such, and influentially so.)
+Granted all this, it might become possible to tease out any respects in which Tolkien’s
+work could justifiably be said to be racist. But let me add a few more cautionary notes.
+(1) Hobbits were not necessarily white-skinned. Indeed, Sam – ‘the chief hero’ of The
+Lord of the Rings (2006, 161) – is twice described as having brown hands (Tolkien
+2012b, 714 and 2012c, 915), and the Harfoots, probably Sam’s ancestors, are described
+as ‘browner of skin’ than the other two kinds (2012a, 3). (2) Although the Haradrim are
+certainly dark-skinned, we don’t know whether the Easterlings were or not. (3) Inter-
+racial marriages and friendships play a strong role in The Lord of the Rings: between
+Aragorn and Arwen, Gimli and Legolas, and even (given the history of strife between the
+Dwarves and the Rohirrim) Gimli and Eomer. (4) White is not always positive, viz.
+Saruman the White, of the White Hand. And (5) the various heroes are far from
+uniformly white or even human, being strikingly multiracial and indeed multicultural.
+Finally, Tolkien’s famous tale is set in North-West Europe (2006, 239), in an ancient
+time. As such, the story naturally draws upon centuries of its historical experience in
+which, for most by far of its inhabitants, lands to the South were a rumour of heat and
+deserts and from the East came fearsome militant invaders (the Huns, then Mongols, then
+Turks), while the West was a direction of spiritual mystery, including whatever lay over
+the Sea.
+The best candidate for an intractable problem regarding racism remains the Orcs. With
+all the other races in Middle-earth, individual difference finally trumps group
+characteristics. Even when the latter are in play, how they are manifested varies widely
+between individuals (see Chism 2007). But Orcs are apparently irredeemable as a whole,
+simply as such.
+Are they, though? It might have been possible to sustain their generic evil as a
+metaphysical or theological abstraction, but in The Lord of the Rings they unavoidably
+become more individual, arguing with each other, expressing fear and revulsion of the
+Nazgûl, and engaging in blokey camaraderie (‘the lads’). And that individuality surely
+makes Orcs more like the other races. Nor are they even uniformly black. Some were –
+the Uruks of Mordor – but Tolkien describes Orcs generally as ‘sallow-skinned’, which
+Chambers Dictionary defines as ‘of a pale-yellowish colour’. Add Tolkien’s deliberate
+and principled rejection of simple-minded allegory, whereby the Orcs ‘are’ or are ‘like’
+blacks, and we might wonder what the problem really is.
+Yet it is impossible not be struck by Gandalf the (truly) White, the dazzling white light
+of the Galadriel’s phial, the White Lady of Rohan and so on, as against the Black Land,
+the Black Speech, the Black Riders and so on. There is certainly a pattern at work, and
+maybe a problem, which includes colour although not necessarily race.
+Rather, it is part of a deeply problematic overarching moral valuation, deeply rooted in
+‘Western’ culture, which comprises intensely value-laden hierarchical polarities, notably
+light vs dark, high vs low, inner vs outer, culture vs nature, and male vs female (see
+Plumwood 1993). The toxic effect of these valuations on race, gender, class and beyond
+have been, and remain, considerable. Given their ubiquity and antiquity, however – at
+least since Plato, and amplified a thousand-fold by Christian theology – it would have
+been very difficult, if not impossible, for Tolkien not to use them. And if readers accept
+them uncritically, then there could indeed be a problem with Tolkien’s moral cosmology.
+But that is a risk, not an ineluctable result, and I personally feel that in this case, the risk
+is a price worth paying. For otherwise, there would have been no story.
+NOTES
+1 Many of the critical attacks on The Lord of the Rings, up to 2000, are discussed in
+Shippey (2005, Chapter 1), and in Shippey (2000a, especially the “Afterword”);
+these should definitely be consulted. See also Hammond and Anderson (1993);
+Pearce (1998, 1–10); Curry (2004, Chapter 2, and 2005); and Lobdell (2007).
+2 It is therefore odd that later in the same paper, they refer to the “intrinsic quality”
+of Tolkien’s fiction. “Intrinsic” here is an empty signifier which, to use William
+James’s blunt metaphor, can never be cashed in as such. There are only ever
+interpretations, better and worse, and any qualities are a function of the work plus
+its readers, including critics, which interface is therefore where the real work of
+criticism must take place. It follows that any good critical practice must include
+reflexive awareness (which is why ex cathedra denunciations are always a bad
+sign).
+3 Also in 1981, Isaacs and Zimbardo published another collection of critical essays,
+Tolkien: New Critical Perspectives, which failed to add very much to their earlier
+and innovative one of 1968, Tolkien and the Critics: Essays on J. R. R. Tolkien’s
+The Lord of the Rings.
+4 Leading unavoidably to the thought, as Shippey (2000a, xxi) observes, that the
+literati sometimes talk to themselves.
+5 I am vividly reminded of an incident in Vienna in 1910 when Sigmund Freud
+asked Carl Jung to promise that he would “never abandon the sexual theory.”
+When Jung asked why, Freud hesitated before replying that they had to make it a
+“dogma,” an “unshakeable bulwark” against the “black tide of mud, of occultism.”
+Interestingly, Turner makes it clear that Freud is exemplary for her, and she too
+finds in his particular theory of sexual maturity a bulwark, one against the “black
+pit” of Tolkien’s fiction.
+6 Behind nearly all such efforts stands the ghost of Plato, that great advocate of a
+single and universal truth, and enemy of popular unlicensed fictions; and, at no
+great distance, Saint Paul. In terms of their mode, this applies to most modern
+Western secularists as much as to theists.
+7 On the last, see the references already supplied when discussing Muir’s charges.
+On race and racism, see Luling (1995); Fimi (2009); and in general, Eaglestone
+(2005).
+8 Respecting any defense of Tolkien here, however, Drout and Wynne (2000, 123)
+identify as “[t]he biggest failing in Tolkien criticism . . . its lack of discussion of
+Tolkien’s style, his sentence-level writing, his word choice and syntax.”
+9 It is amusing to imagine Bloom trying to find any “anxiety of influence” in
+Tolkien. But did it never occur to him that Joyce’s Ulysses is a much better
+candidate than The Lord of the Rings for a work “fated to become only an intricate
+Period Piece” (Bloom 2000, 2)?
+10 Lumping Tolkien and Lewis together should be done with care, as it can be quite
+misleading.
+11 Although he doesn’t discuss Tolkien specifically, Fredric Jameson, who dismisses
+all contemporary “magical narratives” as “archaic nostalgia” (1975, 61), will serve
+as a paradigmatic example of a dogmatic modernist literary and cultural critic.
+12 For an interesting collection on The Lord of the Rings by philosophers, see
+Bassham and Bronson (2003). It is marred, however, by an annoyingly arch tone
+which seems to indicate a need to show that they are not taking Tolkien too
+seriously.
+13 For interesting reflections on the relatively neglected topic of Tolkien and World
+War II, see also Manni and Bonechi (2008) and ch. 31.
+REFERENCES
+Attebery, Brian. 1992. Strategies of Fantasy. Bloomington : Indiana University Press.
+Auden, W. H. 1956. “At the End of the Quest, Victory.” New York Times Book Review, January 22: 5.
+Bassham, Gregory and Eric Bronson, eds. 2003. The Lord of the Rings and Philosophy: One Book to Rule
+Them All.l La Salle, IL: Open Court.
+Benjamin, Walter. 1969. “The Storyteller.” In Illuminations, edited by Hannah Arendt, 83–109. New York:
+Schocken Books.
+Bloom, Harold, ed. 2000. J. R. R. Tolkien: Modern Critical Views. Philadelphia: Chelsea House.
+Brooke-Rose, Christine. 1981. A Rhetoric of the Unreal. Cambridge: Cambridge University Press.
+Carey, John. 1992. The Intellectuals and the Masses. London: Faber & Faber.
+Carpenter, Humphrey. 1977. J. R. R. Tolkien – A Biography. London: Allen & Unwin.
+Christine Chism, ‘Race and Ethnicity in Tolkien’s Works’, pp. 555-556 in Drout, 2007.
+Clark, Craig. 1997. “Problems of Good and Evil in Tolkien’s The Lord of the Rings.” Mallorn, 35: 15–19.
+Clark, George and Daniel Timmons, eds. 2000. J. R. R. Tolkien and His Literary Resonances. Westport,
+CT: Greenwood.
+Clute, John and John Grant. 1997. The Encyclopedia of Fantasy. London: Orbis.
+Colebatch, Hal G. P. 2003. Return of the Heroes: The Lord of the Rings, Star Wars, Harry Potter, and
+Social Conflict. 2nd edn. Christchurch: Cybereditions.
+Curry, Patrick. 2004. Defending Middle-earth: Tolkien, Myth and Modernity. 2nd edn. Boston: Houghton
+Mifflin.
+Curry, Patrick. 2005. “Tolkien and the Critics: A Critique.” In Root and Branch: Approaches Towards
+Understanding Tolkien, edited by Thomas Honegger, 75–146. 2nd edn. Zurich and Bern: Walking
+Tree Publishers.
+Davie, Donald. 1969. “On Hobbits and Intellectuals .” Encounter (October): 87–92.
+Drout, Michael D. C. 2004. “Tolkien’s Prose Style and its Literary and Rhetorical Effects.” Tolkien Studies,
+1.1: 137–163.
+Drout, Michael D. C. 2005. “Towards a Better Tolkien Criticism.” In Eaglestone (2005), 15–28.
+Drout, Michael D. C., ed. 2007. J. R. R. Tolkien Encyclopaedia. London: Routledge.
+Drout, Michael D. C. and Hilary Wynne. 2000. “Tom Shippey’s J. R. R. Tolkien: Author of the Century and
+a Look Back at Tolkien Criticism since 1982.” Envoi, 9.2: 101–134.
+Drout, Michael, Hilary Wynne, and Melissa Higgins. 2000. “Scholarly Studies of J. R. R. Tolkien and His
+Works (in English): 1984– 2000.” Envoi, 9.2: 135–167.
+Duggan, Alfred. 1954. “Heroic Endeavour.” Times Literary Supplement, August 27: 541.
+Eaglestone, Robert, ed. 2005. Reading The Lord of the Rings: New Writings on Tolkien’s Classic. London:
+Continuum.
+Elgin, Don D. 1985. The Comedy of the Fantastic: Ecological Perspectives on the Fantasy Novel.
+Westport, CT: Greenwood Press.
+Fini, Dimitra. 2008. Tolkien, Race and Cultural History: From Fairies to Hobbits. New York and London:
+Palgrave Macmillan.
+Fini, Dimitra, ‘Revisiting Race in Tolkien’s Legendarium: Constructing Cultures and Ideologies in an
+Imaginary World’ (2012): http://dimitrafimi.com/2018/12/02/revisiting-race-in-tolkiens-legendarium-
+constructing-cultures-and-ideologies-in-an-imaginary-world/ (accessed 12.07.20)
+Flieger, Verlyn. 1997. A Question of Time: J. R. R. Tolkien’s Road to Faërie. Kent, OH: Kent State
+University Press.
+Flieger, Verlyn. 2002. Splintered Light: Logos and Language in Tolkien’s World. Revised edn. Kent, OH:
+Kent State University Press.
+Flieger, Verlyn. 2005. Interrupted Music: The Making of Tolkien’s Mythology. Kent, OH: Kent State
+University Press.
+Flieger, Verlyn and Carl F. Hostetter, eds. 2000. Tolkien’s Legendarium: Essays on The History of Middle-
+earth. Westport, CT: Greenwood Press.
+Galwey, Caroline. 2004. “Reasons for not Liking Tolkien.” Mallorn, 42: 5–10.
+Garth, John. 2003. Tolkien and the Great War: The Threshold of Middle-earth. London: HarperCollins.
+Green, William. 1998. “‘Where’s Mama?’ The Construction of the Feminine in The Hobbit.” The Lion and
+the Unicorn, 22: 188–195.
+Greer, Germaine. 1997. “The Book of the Century?” W: The Waterstone’s Magazine, 8: 2–9.
+Hammond, Wayne G. and Douglas A. Anderson. 1993. J. R. R. Tolkien: A Descriptive Bibliography. New
+Castle, DE: Oak Knoll Press.
+Honegger, Thomas. 2005. “Tolkien Through the Eyes of a Mediaevalist.” In Reconsidering Tolkien, edited
+by Thomas Honegger, 45–66. Zurich and Bern: Walking Tree Publishers.
+Hughes, Shaun F. D. 2004. “Introduction: Postmodern Tolkien.” Modern Fiction Studies, 50.4: 807–813.
+Hutton, Ronald. 2003. Witches, Druids and King Arthurr. London: Hambledon & London.
+Hutton, Ronald. 2011. “The Pagan Tolkien” and “Can We Still Have a Pagan Tolkien?” In The Ring and
+the Cross: Christianity and The Lord of the Rings, edited by Paul Kerry, 57–70 and 90–105. Madison,
+NJ: Fairleigh Dickinson University Press.
+Inglis, Fred. 1981. The Promise of Happiness: Value and Meaning in Children’s Fiction. Cambridge:
+Cambridge University Press.
+Inglis, Fred. 1983. “Gentility and Powerlessness: Tolkien and the New Class.” In J. R. R. Tolkien: This Far
+Land, edited by Robert Giddings, 25–41. London: Vision Press.
+Jackson, Rosemary. 1981. Fantasy: The Literature of Subversion. London: Methuen.
+Jameson, Fredric. 1975. “Magical Narratives: Romance as Genre.” New Literary History, 7.1: 135–163.
+Johnson, Judith A. 1986. J. R. R. Tolkien: Six Decades of Criticism. Westport, CT: Greenwood Press.
+Lane, Anthony. 2001. “The Hobbit Habit: Reading The Lord of the Rings.” The New Yorker,r December
+10. Available at http://www.newyorker.com/ archive/2001/12/10/011210crat_atlarge, accessed
+December 13, 2013.
+Latour, Bruno. 1993. We Have Never Been Modern. Translated by Catherine Porter. Hemel Hempstead :
+Harvester Wheatsheaf.
+Le Guin, Ursula K. 1989. The Language of the Night: Essays on Fantasy and Science Fiction. Rev. edn.
+London: The Women’s Press.
+Lewis, C. S. 1954. “The Gods Return to Earth.” Time and Tide, August 14: 1082.
+Lewis, C. S. 1955. “The Dethronement of Power.” Time and Tide, October 22: 1373.
+Lobdell, Jared. 2007. “Criticism of Tolkien, Twentieth Century.” In J. R. R. Tolkien Encyclopaedia, edited
+by Michael Drout, 109–110. London: Routledge.
+Luling, Virginia. 1995. “An Anthropologist in Middle-earth.” In Reynolds and GoodKnight (1995), 53–57.
+Manni, Franco and Simone Bonechi. 2008. “The Complexity of Tolkien’s Attitude Towards the Second
+World War.” In The Ring Goes Ever On: Proceedings of the Tolkien 2005 Conference: 50 Years of
+The Lord of the Rings, edited by Sarah Wells, 33–51. The Tolkien Society.
+Meeker, Joseph. 1974. The Comedy of Survival: Studies in Literary Ecology. New York: Scribner’s.
+Miéville, China. 2002. “Tolkien – Middle Earth Meets Middle England.” Socialist Review (January).
+Available at http://www.socialist review.org.uk/article.php?articlenumber=7813, accessed December
+13, 2013.
+Miéville, China. 2009. “There and Back Again: Five Reasons Tolkien Rocks.” Omnivoracious. Available
+at http://www.omnivoracious.com/ 2009/06/there-and-back-again-five-reasons -tolkien-rocks.html,
+accessed December 13, 2013.
+Miller, Laura. 2008. The Magician’s Book: A Skeptic’s Adventures in Narnia. New York: Little, Brown.
+Moorcock, Michael. 1987. Wizardry and Wild Romance: A Study of Epic Fantasy. London: Gollancz.
+Mortimer, Patchen. 2005. “Tolkien and Modernism .” Tolkien Studies, 2: 113–129.
+Muir, Edwin. 1955. “A Boy’s World.” The Observerr, November 27: 11.
+O’Hehir, Andrew. 2001. “The Book of the Century.” Salon. Part 1 available at http://www
+.salon.com/books/feature/2001/06/04/tolkien and Part 2 at http://www.salon.com/books/fea
+ture/2001/06/05/tolkien2, both accessed December 13, 2013.
+Pearce, Joseph. 1998. Tolkien: Man and Myth. London: HarperCollins and San Francisco: Ignatius Press.
+Plumwood, Val. Feminism and the Mastery of Nature. London: Routledge, 1993.
+Reynolds, Patricia and Glen H. GoodKnight, eds. 1995. Proceedings of the J. R. R. Tolkien Centenary
+Conference. Milton Keynes: The Tolkien Society and Altadena, CA: Mythopoeic Press.
+Ricoeur, Paul. 2003. The Rule of Metaphor. Translated by Robert Czerny. 2nd edn. London: Routledge.
+Rosebury, Brian. 2003. Tolkien: A Cultural Phenomenon. Basingstoke: Palgrave Macmillan. Originally
+published in 1992 as Tolkien: A Critical Assessment. Basingstoke: Macmillan.
+Saler, Michael. 2012. As If: Modern Enchantment and the Literary Prehistory of Virtual Reality. Oxford:
+Oxford University Press.
+Salu, Mary and Robert T. Farrell, eds. 1979. J. R. R. Tolkien: Scholar and Story-teller.r Ithaca, NY: Cornell
+University Press.
+Shippey, Tom. 2000a. J. R. R. Tolkien: Author of the Century. London: HarperCollins.
+Shippey, Tom. 2000b. “Orcs, Wraiths, Wights: Tolkien’s Images of Evil.” In J. R. R. Tolkien and His
+Literary Resonances, edited by George Clark and Daniel Timmons, 183–198. Westport, CT:
+Greenwood Press.
+Shippey, Tom. 2005. The Road to Middle-earth. Rev. and expanded edn. London: HarperCollins.
+Simonson, Martin. 2008. The Lord of the Rings and the Western Narrative Tradition. Zurich and Jena:
+Walking Tree Publishers.
+Smith, Barbara Herrnstein. 1988. Contingencies of Value: Alternative Perspectives for Critical Theory.
+Cambridge, MA: Harvard University Press.
+Stimpson, Catherine R. 1969. J. R. R. Tolkien. New York: Columbia University Press.
+Timmons, Daniel. 2000. “Introduction.” In J. R. R. Tolkien and His Literary Resonances, edited by George
+Clark and Daniel Timmons, 1–10. Westport, CT: Greenwood Press.
+Tolkien, J.R.R., The Letters of J.R.R. Tolkien, ed. Humphrey Carpenter and Christopher Tolkien. London:
+HarperCollins, 2006.
+Tolkien, J.R.R. The Lord of the Rings, vol. 1: The Fellowship of the Ring. London: HarperCollins, 2012a.
+Tolkien, J.R.R. The Lord of the Rings, vol. 2: The Two Towers. London: HarperCollins, 2012b.
+Tolkien, J.R.R. The Lord of the Rings, vol. 1: The Return of the King. London: HarperCollins, 2012c.
+Toulmin, Stephen. 1990. Cosmopolis: The Hidden Agenda of Modernity. Chicago: University of Chicago
+Press.
+Toynbee, Philip. 1961. Review of The Lord of the Rings. The Observer,r August 6.
+Turner, Jenny. 2001. “Reasons for Liking Tolkien.” London Review of Books, 23.22, November 15.
+Available at http://www.lrb.co.uk/v23/n22/ jenny-turner/reasons-for-liking-tolkien, accessed
+December 13, 2013.
+Veldman, Meredith. 1994. Fantasy, the Bomb, and the Greening of Britain: Romantic Protest, 1945– 1980.
+Cambridge: Cambridge University Press.
+Weinreich, Frank and Thomas Honegger, eds. 2006. Tolkien and Modernity. 2 vols. Zurich and Bern:
+Walking Tree Publishers.
+Wells, Sarah, ed. 2008. The Ring Goes Ever On: Proceedings of the Tolkien 2005 Conference: 50 Years of
+The Lord of the Rings. 2 vols. Coventry: The Tolkien Society.
+West, Richard C. 1981. Tolkien: An Annotated Checklist. 2nd edn. Kent, OH: Kent State University Press.
+West, Richard C. 2004. “A Tolkien Checklist: Selected Criticism 1981–2004.” Modern Fiction Studies,
+50.4: 1015–1028.
+Williams, Raymond. 1985. The Country and the City. London: Hogarth Press.
+Wilson, Edmund. 1956. “Oo, Those Awful Orcs!” The Nation, 182, April 14: 312–313. Reprint in The Bit
+Between My Teeth: A Literary Chronicle of 1950–1965, edited by Edmund Wilson, 326–332. New
+York: Farrar, Straus & Giroux, 1965.
+Wynne, Hilary. 2007. “Tolkien Scholarship: Since 1980.” In J. R. R. Tolkien Encyclopaedia, edited by
+Michael Drout, 659–662. London: Routledge.
+FURTHER READING
+Honegger, Thomas, ed. 2008. Tolkien’s The Lord of the Rings: Sources of Inspiration. Zurich and Bern:
+Walking Tree Publishers.
+Horkheimer, Max and Theodor Adorno. 2002. Dialectic of Enlightenment.t Translated by Edmund
+Jephcott. Stanford: Stanford University Press.
+Lewis, C. S., ed. 2003. A Tolkien Compass. Rev. edn. Chicago and La Salle: Open Court.
+Shippey, Tom. 2003. “Foreword.” In A Tolkien Compass, edited by Jared Lobdell, vii–xi. Chicago and La
+Salle. Open Court.
+Shippey, Tom. 2007. “Literature, Twentieth Century: Influence of Tolkien.” In Drout (2007), 378–382.
+

@@ -1,0 +1,111 @@
+ 
+ Settlements: critique of the DMG guidelines – Oak of Honor Games 
+ Skip to content 
+ Oak of Honor Games 
+ tabletop roleplaying products and services 
+ Menu 
+ Close 
+ Home 
+ About 
+ Blog 
+ Contact 
+ Settlements: critique of the DMG guidelines 
+ I’m spurred to write this post by the settlement generation section of the D&D 5e Dungeon Master’s Guide (DMG). It looks like it is giving a nice little primer on world building settlements for a medieval fantasy setting. But I think there are a few points where it departs from my own understanding of medieval life, so I’m going to make some notes about that here. All very provisional though; I’ve revised this already as I research and may do so again. 
+ (Back in the day, I also had some similar thoughts about the equivalent section in the 3e and 3.5e DMGs, so I will make a few references to the 3.5 version too. I know some of us old-timers still play or have that edition.) 
+ The Purpose section, beginning on page 15 of the DMG, is less about what settlements are like in the world than about how much the GM should invent and record about them. I think it makes good points. 
+ I will deal with the Size section under its sub-headings of Village, Town and City. 
+ Village 
+ The 5e DMG has (from a medieval history point of view) somewhat confused villages and small towns. 
+ The DMG divides settlements just by population, and lumps together everything under 1,000 inhabitants as a village. Historians, in contrast, draw a distinction in nature between villages and towns, whose population ranges overlap. Villages were agricultural units, where peasants lived and worked; they might house up to 500 or so people, most likely 2-400. I don’t think many villages reached 1,000 population. Towns were commercial units, where craftspeople and traders lived and worked; they could be large in population, but might be as small as 300 people or conceivably less. As well as merchants and artisans, most towns would have some food growers working at least local gardens and orchards; some would include a village’s worth of agricultural workers busy on all the nearby land. You could put your cut-offs between different sizes of town where you like, so I can accept 1,000 as an upper threshold for a small town for now. 
+ (The 3.5e DMG has Thorp population 20-80, Hamlet 80-400, Village 400-900 and Small Town 900-2,000. You could for starters move all these labels to the next lower population range, creating a 5-20 category for Thorp, and labelling the 900-2,000 range Medium Town. But still population ranges for different settlement types should overlap.) 
+ As discussed more below, villages were governed (more or less) by a lord of the manor, quite often resident at least part of the time. Such a lord might be a knight or esquire (who probably would be resident), or a greater lord or an institution like a religious house or college (more likely to be non-resident). The lord would probably appoint someone to look after their business—this steward would cover a number of manors if the lord held them. The reeve, in contrast, was one of the villagers, and I believe was most often selected by them, rather than appointed by the lord. The reeve co-ordinated the villagers’ side of the manorial obligations, such as payments and labours. 
+ A village would be unlikely to have soldiers except perhaps the local knight or esquire and maybe his grown sons or a brother or so. In time of emergency the men of the village would do what they could; in England in the later middle ages they were required to own weapons and perhaps armour, according to their wealth and status. 
+ Even small towns might have a charter from the lord, giving rights of self-government to the merchants and craftspeople of the town. Other places would be under manorial government but would have a commercial population. Either way I do not think there would likely be a local force of soldiers, unless the place was also the site of a castle with a lord’s garrison (which would still be small unless a larger force was brought there for a specific and temporary military purpose). 
+ Many, I think most, villages lacked shops, inns or more than a few full-time craftspeople. Some places had a few shops and blurred the line between village and town. But if you make most villages as described in the Commerce section (p19) I think it is more about making adventures easy than period flavour. 
+ Being food-producing centres, villages could supply food out of goodwill or at the right price. Some had resident retailers of common foods like bread, meat, fish, cheese and ale (especially ale; see my earlier post on this subject ). But I am not sure whether they would be likely to have operated a shop full-time. Perhaps more likely they were food growers with a sideline in butchery, baking or whatever, and the locals would know how or when to go to them to buy their produce. Local craftspeople might have everyday items like candles, clothes, tools or pots in stock in their home/workshop. Anything else would likely need to be something the residents were willing to sell from their own household or farmyard goods; peasants would have only peasant goods; luxuries might be found at the shrine or manor house. Small traveling merchants did pass through upon occasion, but perhaps carrying only goods they could expect to sell to villagers, like clothes and wearable accessories, maybe kitchenware and tools. (Villages on a highway between towns or cities would see more and better-stocked merchants.) 
+ A village on a well-travelled road might have an inn, but otherwise, accommodation for travelers would have to be in a local house if any were willing. Ale-brewing was a domestic affair and visitors might be invited to drink at the manor or a peasant house party, but would be unlikely to find a pub as such. (Again, please refer to my other post on pubs and suchlike.) 
+ In a highly religious society similar to medieval Europe, a parish church or other local religious unit/s would be likely in each village. Settings with different religions might differ. A large or prosperous village might support a local organization like a guild which could collect and distribute money for the needy, put on festivals and so on. 
+ Small towns might have more organizations—most likely multiple churches, shrines or temples, and one or more guilds, perhaps divided by trade. And of course, as the DMG says, towns did have shops and full-time craftspeople. Small towns like this would mainly provide goods that served the regular needs of folk in surrounding villages within about half a day’s walk (up to about ten miles). 
+ Dispersed villages as described in the DMG did exist in certain regions, but villages in many regions, especially those with denser populations, typically had the houses clustered at the centre or along a street and surrounded by the village’s fields (which would usually be large open areas in which different peasants cultivated scattered plots) and meadows (which would also often be shared). Villages would not usually have had a marketplace, but might have a central green which could graze livestock when not in use for village events. Villages would also probably have at least one well, one or more mills, any places of worship as noted above, and most likely a manor house. Many manors and churches had a large barn for collecting grain and other things due to them from the villagers. 
+ Towns would usually arrange their main houses along one or more planned streets (shop on the ground floor, living quarters above), with perhaps poor houses tucked away on back lanes. They would be likely to have a marketplace or a wide market street, which would be a prime site for inns or other businesses catering to visitors. As well as the obvious wells, churches, mills etc. even small towns might feature a guildhall. 
+ Town 
+ The 5e DMG is not too far off in its description of a typical more substantial town, from about 1,000 to 6,000 in population. (The 3.5e DMG gives Small Town 900-2,000 and Large Town 2,000-5,000.) 
+ As noted below under government, the townsfolk in a place this size would almost certainly have a large measurement of self-government under a charter. The larger and older the town, the less likely it is that a single noble (other than the king or other overall ruler) would be the underlying lord, landowner and collector of taxes. A few places might have non-standard local rulers like a bishop (or in a fantasy world a college of wizards or whatever). 
+ An army of professional soldiers based in one ordinary town sounds to me unlikely, though in a strife-prone land the town militia might be practiced and effective, and/or there might be a small standing guard. If the town is a centre of royal government for the area, like an English county town, then there might be a sheriff with his own force, or if the town were the site of a lordly castle, that would have some garrison (perhaps very small if the lord were away and the area at peace). The DMG town section does not mention walls, but walled towns were not uncommon, and would be fairly standard in times of serious danger or in towns that had existed through such times. Towns founded in an era of peace that is still going on would probably not have gone to the effort to fortify, though they might still erect a boundary fence or put gates on the roads into town, to control trade and other matters of town regulation. 
+ City 
+ The distinction between a town and a city is a matter for another post, but I will for this discussion take ‘city’ to include large towns and move on. The notes about self-government on towns also apply to cities. Capitals and suchlike prestigious cities would likely feature houses belonging to many nobles from other parts of the country. The nobles would probably only spend a minority of their time there, such as when dealing with the kingdom’s government or buying luxuries. 
+ The larger the town the more I think there would have been professional soldiers there, though visiting knights and warriors in noble retinues might outnumber forces under command of the city council or sheriff. 
+ Cities of over 25,000 were by no means as unique as the 5e DMG suggests, and for towns and cities of only 10,000 or 20,000 or so I would caution against taking to extremes the note about any goods and services being available. Around the mid-14 th century western Europe had half a dozen cities over 50,000, and more between that and 25,000. Byzantium, the Islamic world and China had cities considerably larger again. Super-cities would be the places to go for really rare and high-end goods. 
+ To be fair, if you’re playing a Dark Ages or ‘Points of Light’ setting (which the 5e DMG hints at under Core Assumptions on p9 and with the ‘beacons of civilisation’ description in the City entry; the 4e DMG presented this idea much more clearly), then major urban centres might be absent. Western Christian Europe may have had no cities as big as 15,000 people in 1000 CE (though other parts of the world certainly did). But also at this date it had an underdeveloped cash economy, little literacy outside the church, and lacked many of the technologies in the equipment lists. I think a world with an advanced economy strongly suggests urbanization. 
+ Government 
+ The 5e DMG says that the governing nobility is based in towns. The lord of a village is usually absent; a town or city has a resident noble who rules the surrounding area and appoints one or more nobles, including a lord mayor, to take care of town business. Town and city middle classes elect councils to represent their interests to the ruling nobles. Occasionally, a local lord or lady lives in a keep or fortress with no nearby town or city. The mention of overarching political units such as kingdoms is rather late and short. 
+ (The 3.5e DMG leaves DMs to do their own research into political systems, but has some interesting notes on monsters, magic-users and other nonstandard power centres, as well as some starters for the flavour differences between power centres of the nine D&D alignments.) 
+ I may do a more detailed post on this but, in brief, I think the 5e DMG takes some weird departures from how medieval government actually worked. 
+ Firstly, medieval government was structured in layers much more than the DMG acknowledges. Many villages (manors, actually, which often corresponded to villages) had their own local lord such as a knight or esquire, or shared such a lord with a few other manors. Others did have an absentee lord as suggested in the DMG. Small lords generally owed obedience to a higher lord, with a noble title such as baron or earl. In some countries (though not England) middle-ranking lords like barons might owe allegiance to greater lords like counts or dukes. And in many areas there was a still-higher ruler such as a king, prince, archduke or emperor. 
+ (The royal government historically tended to create its own structure of royal officials such as sheriffs, justices and coroners, often with geographical jurisdictions forming a parallel structure to the aristocratic lordships. But you might find this too complicated for a game setting and prefer to stick with the aristocratic hierarchy.) 
+ Second, medieval lordship was often not based in towns. Many manorial lords were resident in their one manor, or rotated between their few manors. The aristocracy lived at a grander scale, but similarly might live in one main seat, probably a castle in the country (or dominating a village or small town), and/or rotate between their other properties such as manor houses, castles, hunting lodges and town houses. (Continental European aristocracy may have more often had seats in the towns; I am less familiar with this.) 
+ It was from the royal administration that I think English urban-based government developed. The king would travel between residences like any noble and spend time in country pursuits like hunting. But the administrative apparatus of the state, as it grew to handle a greater volume of business, settled increasingly in the capital. And as local royal officials like sheriffs increased in power, their bases in county towns became more significant. 
+ Military force was often temporary, and when gathered together it was often based in or around a castle, rather than necessarily a town. The troops were composed in large part of feudal knights and their retinues and so when not gathered for war they dispersed to their various manors, mainly in the countryside. Later in the middle ages more and more soldiers were hired professionals, but their contracts were not permanent either, and they would move away in peacetime to find a profitable conflict (hopefully: out-of-work mercenaries could cause their own problems, as mentioned in my post on organized crime ). 
+ Third, town government was much more independent of aristocratic lords. Often a lord would own a town (especially if it was fairly small or new), but would allow the wealthier townsfolk to govern their own business affairs and civic administration as long as they paid agreed taxes. Other towns might have a royal charter and the townsfolk hold their land from the king. Town mayors were generally elected from among the townsfolk, rather than being appointed nobles. ‘Lord Mayor’ was a respectful title for the mayors of some of the greatest and most independent towns such as London; it did not denote that the mayor was of noble birth. 
+ Further reading 
+ If you’re interested in learning about medieval English or European settlements, I can recommend: 
+ Everyday Life in Medieval England and Making a Living in the Middle Ages , both by Christopher Dyer. 
+ Life in a Medieval Village , Life in a Medieval City and Life in a Medieval Castle , all by Frances and Joseph Gies. 
+ The Time Traveller’s Guide to Medieval England , by Ian Mortimer 
+ Life in the Middle Ages , by Martyn Whittock 
+ Did you find this useful? Can you contribute your own points on medieval or fantasy settlements? Let us know in the comments below. 
+ Published 14 October, 2020 By Ian Categorized as History , Informative Tagged Settlements 
+ Leave a comment Cancel reply Your email address will not be published. Required fields are marked * Comment * Name * 
+ Email * 
+ Website 
+ Save my name, email, and website in this browser for the next time I comment. 
+ Post navigation 
+ Previous post Thieves’ Guilds Next post Coins and currency 
+ Recent Posts 
+ Improving the D&D 5e weapons list 
+ Content assessment: the Belgariad 
+ David Eddings: age suitability 
+ Hiding and awareness in D&D 5e 
+ Upgrading a monster in DnD 5e 
+ Categories 
+ Galthamar 
+ History 
+ Informative 
+ Journal 
+ Products 
+ Rules 
+ Running the game 
+ Uncategorized 
+ Worldbuilding 
+ Archives 
+ April 2023 
+ August 2022 
+ August 2021 
+ July 2021 
+ June 2021 
+ May 2021 
+ April 2021 
+ March 2021 
+ February 2021 
+ January 2021 
+ December 2020 
+ November 2020 
+ October 2020 
+ July 2020 
+ June 2020 
+ May 2020 
+ April 2020 
+ March 2020 
+ Recent Comments Ian on Portcullises Alias on Portcullises Ian on Drinks in medieval England Peter Scheffer on Drinks in medieval England Ian on Portcullises 
+ Search… 
+ Meta 
+ Log in 
+ Entries feed 
+ Comments feed 
+ WordPress.org 
+ Home 
+ About 
+ Blog 
+ Contact 
+ Proudly powered by WordPress . 
+ Dark Mode: 

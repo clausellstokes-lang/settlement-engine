@@ -1,0 +1,35 @@
+{
+ "role": "verifier",
+ "name": "hobb",
+ "angle": null,
+ "tag": "i45-59",
+ "lines": 94,
+ "firstTs": "2026-09-06T16:52:50.043Z",
+ "lastTs": "2026-09-06T16:57:42.806Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 23,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [
+  "https://cscsnews.com/744/literary-arts/an-interview-with-robin-hobb-character-writing/",
+  "https://fantasy-faction.com/2013/robin-hobb-interview",
+  "https://www.huffpost.com/entry/a-fantasy-world-to-get-lost-in-an-interview-with-robin_b_598101d5e4b0b35d274c5e7c",
+  "https://www.scifinow.co.uk/interviews/interview-author-robin-hobb-a-k-a-megan-lindholm/",
+  "https://www.locusmag.com/2005/Issues/12Hobb.html",
+  "https://www.robinhobb.com/blog/posts/41755",
+  "https://reactormag.com/how-robin-hobbs-assassins-apprentice-pulls-the-rug-out-from-under-you/",
+  "https://lareviewofbooks.org/article/bright-home-dark-heart/"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "All eight source pages fetched live at HTTP 200 with a browser user agent and verified against the stripped raw text — no summarizer, no Wayback fallback needed, so no BLOCKED verdicts.",
+ "run": "wf_22752bb0-128",
+ "agent": "ad73c3c63345ec1ac",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_22752bb0-128/agent-ad73c3c63345ec1ac.jsonl",
+ "journal": "result",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-hobb-i45-59.json",
+  "exists": true
+ }
+}

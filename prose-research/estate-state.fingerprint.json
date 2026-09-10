@@ -1,0 +1,145 @@
+{
+  "label": "estate-state",
+  "files": [
+    "estate-state.txt"
+  ],
+  "paragraphs": 2264,
+  "sentences": 2914,
+  "wordsPerSentence": {
+    "mean": 16.7,
+    "sd": 7.2,
+    "p10": 7,
+    "p50": 17,
+    "p90": 26,
+    "shareUnder8": 0.1301,
+    "shareOver30": 0.0206,
+    "neighbourVariation": 0.399
+  },
+  "sentencesPerParagraph": 1.29,
+  "punctuation": {
+    "semicolonRate": 0.1325,
+    "colonRate": 0.0559,
+    "emDashRate": 0,
+    "questionRate": 0,
+    "exclamationRate": 0,
+    "parenthesisRate": 0.0048
+  },
+  "shapes": {
+    "antithesisRate": 0.1088,
+    "triadRate": 0.0089,
+    "participialOpenerRate": 0.0117,
+    "whichTailRate": 0.0511,
+    "doubledAdjectiveRate": 0.0144,
+    "adverbsPerSentence": 0.162,
+    "thereIsOpenerRate": 0.0515,
+    "dialogueShare": 0.0003
+  },
+  "closers": {
+    "abstractNounRate": 0.0439,
+    "pronounRate": 0.1335,
+    "topClosers": [
+      [
+        "it",
+        253
+      ],
+      [
+        "ashford",
+        63
+      ],
+      [
+        "them",
+        53
+      ],
+      [
+        "here",
+        51
+      ],
+      [
+        "not",
+        33
+      ],
+      [
+        "one",
+        33
+      ],
+      [
+        "town",
+        30
+      ],
+      [
+        "season",
+        25
+      ],
+      [
+        "for",
+        21
+      ],
+      [
+        "on",
+        21
+      ],
+      [
+        "does",
+        18
+      ],
+      [
+        "in",
+        17
+      ]
+    ]
+  },
+  "openers": {
+    "topOpeners": [
+      [
+        "the",
+        928
+      ],
+      [
+        "ashford",
+        610
+      ],
+      [
+        "what",
+        232
+      ],
+      [
+        "a",
+        188
+      ],
+      [
+        "there",
+        110
+      ],
+      [
+        "ashford's",
+        90
+      ],
+      [
+        "nothing",
+        86
+      ],
+      [
+        "it",
+        74
+      ],
+      [
+        "this",
+        37
+      ],
+      [
+        "nobody",
+        37
+      ],
+      [
+        "whatever",
+        35
+      ],
+      [
+        "no",
+        24
+      ]
+    ],
+    "sameOpenerAsPreviousRate": 0.1321
+  },
+  "runsOfThreeSameLengthBand": 0.3202
+}

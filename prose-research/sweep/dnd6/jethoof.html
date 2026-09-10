@@ -1,0 +1,674 @@
+<!doctype html><html lang=en>
+<head>
+<meta charset=utf-8>
+<meta name=description content="Settlements 1 A village, town, or city makes an excellent backdrop for an adventure. The adventurers might be called on to track down a criminal who&rsquo;s gone into hiding, solve a murder, take out a gang of wererats or doppelgangers, or protect a settlement under siege.">
+<title>Settlement Generator</title>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<link rel="shortcut icon" type=image/png href=/icon.png>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Sans+Pro:wght@400;600;700&family=Fira+Code:wght@400;700&display=swap" rel=stylesheet>
+<link href=https://jethoof.github.io/home/styles.e21faa776ad276d7473d18c73cb2fffb.min.css rel=stylesheet>
+<script src=https://jethoof.github.io/home/js/darkmode.46b07878b7f5d9e26ad7a3c40f8a0605.min.js></script>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css integrity=sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs crossorigin=anonymous>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js integrity=sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx crossorigin=anonymous></script>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js integrity=sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR crossorigin=anonymous></script>
+<script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:!0},{left:'$',right:'$',display:!1}],throwOnError:!1})})</script>
+<script>const BASE_URL="https://jethoof.github.io/home",fetchData=Promise.all([fetch("https://jethoof.github.io/home/indices/linkIndex.2f8f940e0a237877c6170419675f2d64.min.json").then(a=>a.json()).then(a=>({index:a.index,links:a.links})),fetch("https://jethoof.github.io/home/indices/contentIndex.c3ffe244b55c4e2cbe961b2b0e16d249.min.json").then(a=>a.json())]).then(([{index:a,links:b},c])=>({index:a,links:b,content:c}))</script>
+</head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GV694HFF39"></script>
+<script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-GV694HFF39',{anonymize_ip:!1})}</script>
+<body>
+<div id=search-container>
+<div id=search-space>
+<input autocomplete=off id=search-bar name=search type=text aria-label=Search placeholder="Search for something...">
+<div id=results-container>
+</div>
+</div>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/flexsearch@0.7.21/dist/flexsearch.bundle.js integrity="sha256-i3A0NZGkhsKjVMzFxv3ksk0DZh3aXqu0l49Bbh0MdjE=" crossorigin=anonymous defer></script>
+<script defer src=https://jethoof.github.io/home/js/search.bc849b857f2c1b822264d40635bb67b6.min.js></script>
+<div class=singlePage>
+<header>
+<h1 id=page-title><a href=https://jethoof.github.io/home>Jethoof's Digital Garden</a></h1><svg tabindex="0" id="search-icon" aria-labelledby="title desc" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title id="title">Search Icon</title><desc id="desc">Icon to open search</desc><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"/><circle cx="8" cy="8" r="7"/></g></svg>
+<div class=spacer></div>
+<div class=darkmode>
+<input class=toggle id=darkmode-toggle type=checkbox tabindex=-1>
+<label id=toggle-label-light for=darkmode-toggle tabindex=-1><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="dayIcon" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35"><title>Light Mode</title><path d="M6 17.5C6 16.672 5.328 16 4.5 16h-3C.672 16 0 16.672.0 17.5S.672 19 1.5 19h3C5.328 19 6 18.328 6 17.5zM7.5 26c-.414.0-.789.168-1.061.439l-2 2C4.168 28.711 4 29.086 4 29.5 4 30.328 4.671 31 5.5 31c.414.0.789-.168 1.06-.44l2-2C8.832 28.289 9 27.914 9 27.5 9 26.672 8.329 26 7.5 26zm10-20C18.329 6 19 5.328 19 4.5v-3C19 .672 18.329.0 17.5.0S16 .672 16 1.5v3C16 5.328 16.671 6 17.5 6zm10 3c.414.0.789-.168 1.06-.439l2-2C30.832 6.289 31 5.914 31 5.5 31 4.672 30.329 4 29.5 4c-.414.0-.789.168-1.061.44l-2 2C26.168 6.711 26 7.086 26 7.5 26 8.328 26.671 9 27.5 9zM6.439 8.561C6.711 8.832 7.086 9 7.5 9 8.328 9 9 8.328 9 7.5c0-.414-.168-.789-.439-1.061l-2-2C6.289 4.168 5.914 4 5.5 4 4.672 4 4 4.672 4 5.5c0 .414.168.789.439 1.06l2 2.001zM33.5 16h-3c-.828.0-1.5.672-1.5 1.5s.672 1.5 1.5 1.5h3c.828.0 1.5-.672 1.5-1.5S34.328 16 33.5 16zM28.561 26.439C28.289 26.168 27.914 26 27.5 26c-.828.0-1.5.672-1.5 1.5.0.414.168.789.439 1.06l2 2C28.711 30.832 29.086 31 29.5 31c.828.0 1.5-.672 1.5-1.5.0-.414-.168-.789-.439-1.061l-2-2zM17.5 29c-.829.0-1.5.672-1.5 1.5v3c0 .828.671 1.5 1.5 1.5s1.5-.672 1.5-1.5v-3C19 29.672 18.329 29 17.5 29zm0-22C11.71 7 7 11.71 7 17.5S11.71 28 17.5 28 28 23.29 28 17.5 23.29 7 17.5 7zm0 18c-4.136.0-7.5-3.364-7.5-7.5s3.364-7.5 7.5-7.5 7.5 3.364 7.5 7.5S21.636 25 17.5 25z"/></svg>
+</label>
+<label id=toggle-label-dark for=darkmode-toggle tabindex=-1><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="nightIcon" viewBox="0 0 100 100" style="enable-background='new 0 0 100 100'"><title>Dark Mode</title><path d="M96.76 66.458c-.853-.852-2.15-1.064-3.23-.534-6.063 2.991-12.858 4.571-19.655 4.571C62.022 70.495 50.88 65.88 42.5 57.5 29.043 44.043 25.658 23.536 34.076 6.47c.532-1.08.318-2.379-.534-3.23-.851-.852-2.15-1.064-3.23-.534-4.918 2.427-9.375 5.619-13.246 9.491-9.447 9.447-14.65 22.008-14.65 35.369.0 13.36 5.203 25.921 14.65 35.368s22.008 14.65 35.368 14.65c13.361.0 25.921-5.203 35.369-14.65 3.872-3.871 7.064-8.328 9.491-13.246C97.826 68.608 97.611 67.309 96.76 66.458z"/></svg>
+</label>
+</div>
+</header>
+<article>
+<h1>Settlement Generator</h1>
+<p class=meta>
+Last updated February 11, 2023
+</p>
+<ul class=tags>
+<li><a href=https://jethoof.github.io/home/tags/worldbuilding/>Worldbuilding</a></li>
+</ul>
+<aside class=mainTOC>
+<details>
+<summary>Table of Contents</summary>
+<nav id=TableOfContents></nav>
+</details>
+</aside>
+<h1 id=settlements-1>Settlements <sup id=fnref:1><a href=#fn:1 class=footnote-ref role=doc-noteref>1</a></sup></h1>
+<p>A village, town, or city makes an excellent backdrop for an adventure. The adventurers might be called on to track down a criminal who&rsquo;s gone into hiding, solve a murder, take out a gang of wererats or doppelgangers, or protect a settlement under siege.
+When creating a settlement for your campaign, focus on the locations that are most relevant to the adventure. Don&rsquo;t worry about naming every street and identifying the inhabitants of every building; that way lies madness.</p>
+<blockquote>
+<p>[!info] Settlement</p>
+<p>Community Size: <code>dice:<a href=/home/worldbuilding/Tables/Settlements#^size rel=noopener class=internal-link data-src=/home/worldbuilding/Tables/Settlements>Settlements</a></code>
+Race Relations: <code>dice: <a href=/home/worldbuilding/Tables/Settlements#^race rel=noopener class=internal-link data-src=/home/worldbuilding/Tables/Settlements>Settlements</a></code>
+Ruler&rsquo;s Status: <code>dice: <a href=/home/worldbuilding/Tables/Settlements#^ruler rel=noopener class=internal-link data-src=/home/worldbuilding/Tables/Settlements>Settlements</a></code>
+Notable Traits: <code>dice: <a href=/home/worldbuilding/Tables/Settlements#^notable rel=noopener class=internal-link data-src=/home/worldbuilding/Tables/Settlements>Settlements</a></code>
+Known for its <code>dice: <a href=/home/worldbuilding/Tables/Settlements#^known rel=noopener class=internal-link data-src=/home/worldbuilding/Tables/Settlements>Settlements</a></code>
+Current Calamity: <code>dice: <a href=/home/worldbuilding/Tables/Settlements#^calamity rel=noopener class=internal-link data-src=/home/worldbuilding/Tables/Settlements>Settlements</a></code>
+Overall Alignment: <code>dice:<a href=/home/worldbuilding/Tables/Settlements#^alignment rel=noopener class=internal-link data-src=/home/worldbuilding/Tables/Settlements>Settlements</a></code>
+Government: <code>dice: <a href=/home/worldbuilding/Tables/Settlements#^Government rel=noopener class=internal-link data-src=/home/worldbuilding/Tables/Settlements>Settlements</a></code>
+^generator</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Community Sizes</th>
+<th>Population</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Thorp</td>
+<td>20-80</td>
+</tr>
+<tr>
+<td>Hamlet</td>
+<td>81-400</td>
+</tr>
+<tr>
+<td>Village</td>
+<td>401-900</td>
+</tr>
+<tr>
+<td>Small Town</td>
+<td>901-2,000</td>
+</tr>
+<tr>
+<td>Large Town</td>
+<td>2,001-5,000</td>
+</tr>
+<tr>
+<td>Small City</td>
+<td>5,001-12,000</td>
+</tr>
+<tr>
+<td>Large City</td>
+<td>12,001 - 25,000</td>
+</tr>
+<tr>
+<td>Metropolis</td>
+<td>25,001 -</td>
+</tr>
+<tr>
+<td>^size</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>dice:1d20</th>
+<th>Race Relations</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1-10</td>
+<td>Harmony</td>
+</tr>
+<tr>
+<td>11-14</td>
+<td>Tension or rivalry</td>
+</tr>
+<tr>
+<td>15-16</td>
+<td>Racial Majority are conquerors</td>
+</tr>
+<tr>
+<td>17</td>
+<td>Racial minority are rulers</td>
+</tr>
+<tr>
+<td>18</td>
+<td>Racial minority are refugees</td>
+</tr>
+<tr>
+<td>19</td>
+<td>Racial majority oppresses minority</td>
+</tr>
+<tr>
+<td>20</td>
+<td>Racial minority oppresses majority</td>
+</tr>
+<tr>
+<td>^race</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>dice:1d20</th>
+<th>Ruler&rsquo;s Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1-5</td>
+<td>Respected, fair, and just</td>
+</tr>
+<tr>
+<td>6-8</td>
+<td>Feared tyrant</td>
+</tr>
+<tr>
+<td>9</td>
+<td>weakling manipulated by others</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Illegitimate ruler, simmering civil war</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Ruled or controlled by a powerful monster</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Mysterious, anonymous cabal</td>
+</tr>
+<tr>
+<td>13</td>
+<td>Contested leadership, open fighting</td>
+</tr>
+<tr>
+<td>14</td>
+<td>Cabal seized power openly</td>
+</tr>
+<tr>
+<td>15</td>
+<td>Doltish lout</td>
+</tr>
+<tr>
+<td>16</td>
+<td>On deathbed, claimants compete for power</td>
+</tr>
+<tr>
+<td>17-18</td>
+<td>Ion-willed but respected</td>
+</tr>
+<tr>
+<td>18-20</td>
+<td>Religious leader</td>
+</tr>
+<tr>
+<td>^ruler</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>dice:1d20</th>
+<th>Notable Traits</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Canals in place of streets</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Massive statue or monument</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Grand temple</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Large Fortress</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Verdant parks and orchards</td>
+</tr>
+<tr>
+<td>6</td>
+<td>River divides town</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Major trade center</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Headquarters of a powerful family or guild</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Population mostly wealthy</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Destitute, rundown</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Awful smell (tanneries, open sewers)</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Center of trade for one specific good</td>
+</tr>
+<tr>
+<td>13</td>
+<td>Site of many battles</td>
+</tr>
+<tr>
+<td>14</td>
+<td>Site of mythic of magical event</td>
+</tr>
+<tr>
+<td>15</td>
+<td>Important library or archive</td>
+</tr>
+<tr>
+<td>16</td>
+<td>Worship of all gods banned</td>
+</tr>
+<tr>
+<td>17</td>
+<td>Sinister reputation</td>
+</tr>
+<tr>
+<td>18</td>
+<td>Notable library or academy</td>
+</tr>
+<tr>
+<td>19</td>
+<td>Site of important tomb or graveyard</td>
+</tr>
+<tr>
+<td>^notable</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>dice:1d20</th>
+<th>Known for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Delicious cuisine</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Rude people</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Greedy merchants</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Artists and writers</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Great hero/savior</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Hordes of beggars</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Flowers</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Tough warriors</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Dark magic</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Decadence</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Piety</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Gambling</td>
+</tr>
+<tr>
+<td>13</td>
+<td>Godlessness</td>
+</tr>
+<tr>
+<td>14</td>
+<td>Education</td>
+</tr>
+<tr>
+<td>15</td>
+<td>Wines</td>
+</tr>
+<tr>
+<td>16</td>
+<td>High Fashion</td>
+</tr>
+<tr>
+<td>17</td>
+<td>Political intrigue</td>
+</tr>
+<tr>
+<td>18</td>
+<td>Powerful guilds</td>
+</tr>
+<tr>
+<td>19</td>
+<td>Strong drink</td>
+</tr>
+<tr>
+<td>20</td>
+<td>Patriotism</td>
+</tr>
+<tr>
+<td>^known</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>dice:1d20</th>
+<th>Calamity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Suspected vampire infestation</td>
+</tr>
+<tr>
+<td>2</td>
+<td>New cult seeks converts</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Important figure died (murder suspected)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>War between rival thieves' guilds</td>
+</tr>
+<tr>
+<td>5-6</td>
+<td>Plague or famine (sparks riots)</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Corrupt officials</td>
+</tr>
+<tr>
+<td>8-9</td>
+<td>Marauding monsters</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Powerful wizard has moved into town</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Economic depression (trade disrupted)</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Flooding</td>
+</tr>
+<tr>
+<td>13</td>
+<td>Undead stirring in cemeteries</td>
+</tr>
+<tr>
+<td>14</td>
+<td>Prophecy of doom</td>
+</tr>
+<tr>
+<td>15</td>
+<td>Brink of war</td>
+</tr>
+<tr>
+<td>16</td>
+<td>Internal strife (leads to anarchy)</td>
+</tr>
+<tr>
+<td>17</td>
+<td>Besieged by enemies</td>
+</tr>
+<tr>
+<td>18</td>
+<td>Scandal threatens powerful families</td>
+</tr>
+<tr>
+<td>19</td>
+<td>Dungeon discovered (adventurers flock to town)</td>
+</tr>
+<tr>
+<td>20</td>
+<td>Religious sects struggle for power</td>
+</tr>
+<tr>
+<td>^calamity</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>dice:1d100</th>
+<th>Overall Alignment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>01-20</td>
+<td>Lawful Good</td>
+</tr>
+<tr>
+<td>21-28</td>
+<td>Neutral Good</td>
+</tr>
+<tr>
+<td>29-36</td>
+<td>Chaotic Good</td>
+</tr>
+<tr>
+<td>37-61</td>
+<td>Lawful Neutral</td>
+</tr>
+<tr>
+<td>62-67</td>
+<td>Neutral</td>
+</tr>
+<tr>
+<td>68-69</td>
+<td>Chaotic Neutral</td>
+</tr>
+<tr>
+<td>70-89</td>
+<td>Lawful Evil</td>
+</tr>
+<tr>
+<td>90-95</td>
+<td>Neutral Evil</td>
+</tr>
+<tr>
+<td>96-100</td>
+<td>Chaotic Evil</td>
+</tr>
+<tr>
+<td>^alignment</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>dice:1d100</th>
+<th>Government</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>01-08</td>
+<td>Autocracy</td>
+</tr>
+<tr>
+<td>09-13</td>
+<td>Bureaucracy</td>
+</tr>
+<tr>
+<td>14-19</td>
+<td>Confederacy</td>
+</tr>
+<tr>
+<td>20-22</td>
+<td>Democracy</td>
+</tr>
+<tr>
+<td>23-27</td>
+<td>Dictatorship</td>
+</tr>
+<tr>
+<td>28-42</td>
+<td>Feudalism</td>
+</tr>
+<tr>
+<td>43-44</td>
+<td>Gerontocracy</td>
+</tr>
+<tr>
+<td>45-53</td>
+<td>Hierarchy</td>
+</tr>
+<tr>
+<td>54-56</td>
+<td>Magocracy</td>
+</tr>
+<tr>
+<td>57-58</td>
+<td>Matriarchy</td>
+</tr>
+<tr>
+<td>59-64</td>
+<td>Militocracy</td>
+</tr>
+<tr>
+<td>65-74</td>
+<td>Monarchy</td>
+</tr>
+<tr>
+<td>75-78</td>
+<td>Oligarchy</td>
+</tr>
+<tr>
+<td>79-80</td>
+<td>Patriarchy</td>
+</tr>
+<tr>
+<td>81-83</td>
+<td>Meritocracy</td>
+</tr>
+<tr>
+<td>84-85</td>
+<td>Plutocracy</td>
+</tr>
+<tr>
+<td>86-92</td>
+<td>Republic</td>
+</tr>
+<tr>
+<td>93-94</td>
+<td>Satrapy</td>
+</tr>
+<tr>
+<td>95</td>
+<td>Kleptocracy</td>
+</tr>
+<tr>
+<td>95-100</td>
+<td>Theocracy</td>
+</tr>
+<tr>
+<td>^Government</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<section class=footnotes role=doc-endnotes>
+<hr>
+<ol>
+<li id=fn:1 role=doc-endnote>
+<p>Dungeon Master&rsquo;s Guide 5e, p.112&#160;<a href=#fnref:1 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+</article>
+<hr>
+<div class=page-end>
+<div class=backlinks-container>
+<h3>Backlinks</h3>
+<ul class=backlinks>
+<li>
+No backlinks found
+</li>
+</ul>
+</div>
+<div>
+<script src=https://cdn.jsdelivr.net/npm/d3@6.7.0/dist/d3.min.js integrity="sha256-+7jaYCp29O1JusNWHaYtgUn6EhuP0VaFuswhNV06MyI=" crossorigin=anonymous></script>
+<h3>Interactive Graph</h3>
+<div id=graph-container></div>
+<style>:root{--g-node:var(--secondary);--g-node-active:var(--primary);--g-node-inactive:var(--visited);--g-link:var(--outlinegray);--g-link-active:#5a7282}</style>
+<script src=https://jethoof.github.io/home/js/graph.27e8521c25c27c79dea35f434c486167.js></script>
+<script>drawGraph("https://jethoof.github.io/home/worldbuilding/Tables/Settlements","https://jethoof.github.io/home",[{"/moc":"#4388cc"},{"/stories":"#4ccc43"},{"/nanowrimo":"#9a43cc"},{"/journal":"#f2ea05"},{"/worldbuilding":"#f28305"}],-1,!0,!1,!0)</script>
+</div>
+</div>
+<div id=contact_buttons>
+<footer>
+<p>Made by Jethoof using <a href=https://github.com/jackyzha0/quartz>Quartz</a>, © 2023</p>
+<ul>
+<li><a href=/home>Home</a></li>
+<li><a href=https://github.com/jethoof>Github</a></li></ul>
+</footer>
+</div>
+<script src=https://jethoof.github.io/home/js/popover.9d69dffc0f2d029ef30cf63230ccce4c.min.js></script>
+<script>initPopover("https://jethoof.github.io/home")</script>
+</div>
+</body>
+</html>

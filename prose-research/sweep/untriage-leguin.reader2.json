@@ -1,0 +1,339 @@
+{
+ "name": "leguin",
+ "writtenAt": "Mon Sep  7 04:42:45 EDT 2026",
+ "critic": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/critic-leguin.md (r10, mtime 2026-09-07T04:36:27-0400)",
+ "rows": [
+  {
+   "index": 384,
+   "feature": "13/14",
+   "why": "critic r10 §8 F13/F14 (sound): Slusser, \"Le Guin gives us precise prose rhythms.\" (verify-only)"
+  },
+  {
+   "index": 389,
+   "feature": "9/10",
+   "why": "critic r10 §8 F9/F10: Jameson's world-reduction thesis, \"the most-cited academic account of her method\", absent from the section (verify-only)"
+  },
+  {
+   "index": 390,
+   "feature": "9/10",
+   "why": "critic r10 §8/§4 F9/F10: Jameson, second source for the leaving-out; \"omission functions as utopian exclusion\" (verify-only)"
+  },
+  {
+   "index": 392,
+   "feature": "9/10",
+   "why": "critic r10 §8/§4 F9/F10: Jameson, the third world-reduction row; §4 gives the limb \"no academic account of it\" (verify-only)"
+  },
+  {
+   "index": 453,
+   "feature": "9/10",
+   "why": "critic r10 §8/§4 F9/F10: Erlich, \"a significant gap to be left or filled in by readers\" (verify-only)"
+  },
+  {
+   "index": 468,
+   "feature": "6/16",
+   "why": "critic r10 §8 F6/F16 (plainness, diction): one of the ten rows the section needs (verify-only)"
+  },
+  {
+   "index": 469,
+   "feature": "13/14",
+   "why": "critic r10 §8 F13/F14 (sound): Kelso, one of the three Kelso rows the section needs (verify-only)"
+  },
+  {
+   "index": 470,
+   "feature": "13/14",
+   "why": "critic r10 §8 F13/F14 (sound): Kelso, one of the three Kelso rows the section needs (verify-only)"
+  },
+  {
+   "index": 472,
+   "feature": "13/14",
+   "why": "critic r10 §8 F13/F14 (sound): Kelso, one of the three Kelso rows the section needs (verify-only)"
+  },
+  {
+   "index": 478,
+   "feature": "13/14",
+   "why": "critic r10 §8/§4 F13: the same Kelso relay as [55], whose \"primary was never claimed\" (verify-only)"
+  },
+  {
+   "index": 522,
+   "feature": "15",
+   "why": "critic r10 §8 F15 (length): one of the three length rows the section needs (verify-only)"
+  },
+  {
+   "index": 526,
+   "feature": "25",
+   "why": "critic r10 §8 F25 (telling): \"Giving information indirectly, by hint and suggestion\" (verify-only)"
+  },
+  {
+   "index": 533,
+   "feature": "15",
+   "why": "critic r10 §8 F15 (length): \"There are no rules concerning sentence length.\" (verify-only)"
+  },
+  {
+   "index": 534,
+   "feature": "15",
+   "why": "critic r10 §8 F15 (length): one of the three length rows the section needs (verify-only)"
+  },
+  {
+   "index": 536,
+   "feature": "13/14",
+   "why": "critic r10 §8 F13/F14 (sound): a sound row the section needs (verify-only)"
+  },
+  {
+   "index": 542,
+   "feature": "19",
+   "why": "critic r10 §8 F19 (point of view): Roberts, counter-evidence beside Cummins, Cadden and Walton (verify-only)"
+  },
+  {
+   "index": 548,
+   "feature": "22",
+   "why": "critic r10 §8/§4 F22: Roberts, \"three names covering three of the four elements\" (verify-only)"
+  },
+  {
+   "index": 551,
+   "feature": "6/16",
+   "why": "critic r10 §8/§4 F6/F16: Guynes, second source for plainness as her own late practice (verify-only)"
+  },
+  {
+   "index": 552,
+   "feature": "8",
+   "why": "critic r10 §8/§4 F8: Guynes, \"luxuriate in the plainclothes description of thistle and juniper\" (the close-2 finder's own top find) (verify-only)"
+  },
+  {
+   "index": 566,
+   "feature": "22",
+   "why": "critic r10 §8/§4 F22: Steering ch. 1, \"the echo-allusions hidden in them, can be intensely expressive\" (verify-only)"
+  },
+  {
+   "index": 577,
+   "feature": "9/10",
+   "why": "critic r10 §8/§4 F9/F10: Burt, second source where the section has \"no academic account of it\" (verify-only)"
+  },
+  {
+   "index": 579,
+   "feature": "9/10",
+   "why": "critic r10 §8/§4 F9/F10: Burt, second source where the section has \"no academic account of it\" (verify-only)"
+  },
+  {
+   "index": 580,
+   "feature": "9/10",
+   "why": "critic r10 §8 F9/F10: Burt, the third of the three Burt rows the section needs (verify-only)"
+  },
+  {
+   "index": 584,
+   "feature": "11/23",
+   "why": "critic r10 §8/§4 F11/F23: Ramsay, \"the reassuring sense of fable which pervades\" — \"adjacent, not a cure\" (verify-only)"
+  },
+  {
+   "index": 587,
+   "feature": "18",
+   "why": "critic r10 §8 F18 (repetition): Amenta (verify-only)"
+  },
+  {
+   "index": 605,
+   "feature": "8",
+   "why": "critic r10 §8 F8 (detail): one of the five detail rows the section needs (verify-only)"
+  },
+  {
+   "index": 613,
+   "feature": "17",
+   "why": "critic r10 §8/§4 F17: Mohanraj quoting Redux, \"Strike the word 'probably'\" — her own recorded self-revision of a hedging adverb (verify-only)"
+  },
+  {
+   "index": 614,
+   "feature": "20",
+   "why": "critic r10 §8 F20 (place): one of the two place rows the section needs (verify-only)"
+  },
+  {
+   "index": 615,
+   "feature": "6/16",
+   "why": "critic r10 §8 F6/F16 (plainness, diction): one of the ten rows the section needs (verify-only)"
+  },
+  {
+   "index": 616,
+   "feature": "6/16",
+   "why": "critic r10 §8 F6/F16 (plainness, diction): one of the ten rows the section needs (verify-only)"
+  },
+  {
+   "index": 618,
+   "feature": "9/10",
+   "why": "critic r10 §8 F9/F10: Le Guin to Morton, \"just the art of suggestion\" (verify-only)"
+  },
+  {
+   "index": 619,
+   "feature": "9/10",
+   "why": "critic r10 §8 F9/F10: Le Guin to Morton, \"You don't really tell people that much\" (verify-only)"
+  },
+  {
+   "index": 621,
+   "feature": "9/10",
+   "why": "critic r10 §8 F9/F10: Le Guin to Morton, one of the leaving-out rows the section needs (verify-only)"
+  },
+  {
+   "index": 622,
+   "feature": "9/10",
+   "why": "critic r10 §8 F9/F10: Le Guin to Morton, \"shorter and more allusive\" (verify-only)"
+  },
+  {
+   "index": 624,
+   "feature": "13/14",
+   "why": "critic r10 §8 F13/F14 (sound): the [624]/[894] pair the section needs (verify-only)"
+  },
+  {
+   "index": 626,
+   "feature": "6/16",
+   "why": "critic r10 §8/§4 F6/F16: a plainness-as-her-own-late-practice row, \"all SKIPPED\" (verify-only)"
+  },
+  {
+   "index": 641,
+   "feature": "12",
+   "why": "critic r10 §8 F12: Bittner, \"The very word tale has an archaic, distant tone\" (verify-only)"
+  },
+  {
+   "index": 646,
+   "feature": "17",
+   "why": "critic r10 §8/§4 F17: Bittner, second source where modifiers rationed rests on \"one book at two relays plus the OCR\" (verify-only)"
+  },
+  {
+   "index": 650,
+   "feature": "13/14",
+   "why": "critic r10 §8 F13/F14; §4 F26 second source, the Bloom-volume essay, \"a skillful use of cadence and sound patterns\" (verify-only)"
+  },
+  {
+   "index": 663,
+   "feature": "6/16",
+   "why": "critic r10 §8/§4 F6/F16: Cadden, \"Leese Webster is very spare\" (verify-only)"
+  },
+  {
+   "index": 664,
+   "feature": "6/16",
+   "why": "critic r10 §8/§4 F6/F16: her own answer to Cadden, \"It's austere\" (verify-only)"
+  },
+  {
+   "index": 667,
+   "feature": "6/16",
+   "why": "critic r10 §8/§4 F6/F16: Olander, \"strong colors and plain fabrics\" (verify-only)"
+  },
+  {
+   "index": 669,
+   "feature": "6/16",
+   "why": "critic r10 §8 F6/F16 (plainness, diction): one of the ten rows the section needs (verify-only)"
+  },
+  {
+   "index": 675,
+   "feature": "9/10",
+   "why": "critic r10 §8/§4 F9/F10: Spivack, \"richly suggestive, leaving much unsaid\" (verify-only)"
+  },
+  {
+   "index": 693,
+   "feature": "19",
+   "why": "critic r10 §8/§4 F19: Dirda, \"confides in the reader like a friend\" — §3's \"strongest counter-witness the section already trusts\" (verify-only)"
+  },
+  {
+   "index": 694,
+   "feature": "11/23",
+   "why": "critic r10 §8 F11/F23 (register, scale): the second register row the section needs (verify-only)"
+  },
+  {
+   "index": 702,
+   "feature": "19",
+   "why": "critic r10 §8 F19: Burt/Plotz, point-of-view counter-evidence the section needs (verify-only)"
+  },
+  {
+   "index": 703,
+   "feature": "19",
+   "why": "critic r10 §8/§4 F19: Burt/Plotz, \"invites us in and holds us back\" (verify-only)"
+  },
+  {
+   "index": 705,
+   "feature": "22",
+   "why": "critic r10 §8 F22 (names): the third names row the section needs (verify-only)"
+  },
+  {
+   "index": 803,
+   "feature": "12",
+   "why": "critic r10 §8 F12: §3 — \"The archaic manner is indeed a perfect distancer\", against feature 12's absolute rule (verify-only)"
+  },
+  {
+   "index": 804,
+   "feature": "12",
+   "why": "critic r10 §8 F12 (archaism): an Elfland page row feature 12's rule \"cannot cite\" (verify-only)"
+  },
+  {
+   "index": 805,
+   "feature": "12",
+   "why": "critic r10 §8 F12: §3 — \"After all, archaisms are not essential.\", against feature 12's absolute rule (verify-only)"
+  },
+  {
+   "index": 816,
+   "feature": "12",
+   "why": "critic r10 §8 F12: Eddison's archaic prose judged \"exact, clear, powerful\" (§3) (verify-only)"
+  },
+  {
+   "index": 817,
+   "feature": "12",
+   "why": "critic r10 §8 F12 (archaism): an Elfland page row feature 12's rule \"cannot cite\" (verify-only)"
+  },
+  {
+   "index": 827,
+   "feature": "8",
+   "why": "critic r10 §8 F8: the \"lesser matters\" qualification — §3: \"Only in lesser matters is realistic detail used to ground the story\" (verify-only)"
+  },
+  {
+   "index": 832,
+   "feature": "6/16",
+   "why": "critic r10 §8/§4 F6/F16: \"potatoes, everyday language, commonplace characters\" (verify-only)"
+  },
+  {
+   "index": 839,
+   "feature": "9/10",
+   "why": "critic r10 §8 F9/F10: BVC, \"brevity, a few telling details, a great left unsaid\" (verify-only)"
+  },
+  {
+   "index": 840,
+   "feature": "9/10",
+   "why": "critic r10 §8 F9/F10: BVC, one of the three leaving-out rows the section needs (verify-only)"
+  },
+  {
+   "index": 844,
+   "feature": "9/10",
+   "why": "critic r10 §8 F9/F10 (BVC); §4 F8 second source, \"Often one physical detail will do it\" (verify-only)"
+  },
+  {
+   "index": 849,
+   "feature": "8",
+   "why": "critic r10 §8 F8 (detail): one of the five detail rows the section needs (verify-only)"
+  },
+  {
+   "index": 853,
+   "feature": "8",
+   "why": "critic r10 §8/§4 F8: her measured practice, \"I'm very strong on accuracy and exactitude\" (verify-only)"
+  },
+  {
+   "index": 856,
+   "feature": "9/10",
+   "why": "critic r10 §8 F9/F10: her own words, \"You can't describe everything\" (verify-only)"
+  },
+  {
+   "index": 863,
+   "feature": "19",
+   "why": "critic r10 §8 F19: \"describe it from the point of view of the powerless\" (verify-only)"
+  },
+  {
+   "index": 890,
+   "feature": "9/10",
+   "why": "critic r10 §8 F9/F10: her own words, \"you do as little as possible\" (verify-only)"
+  },
+  {
+   "index": 894,
+   "feature": "13/14",
+   "why": "critic r10 §8 F13/F14 (sound): the [624]/[894] pair the section needs (verify-only)"
+  },
+  {
+   "index": 920,
+   "feature": "20",
+   "why": "critic r10 §8 F20 (place): one of the two place rows the section needs (verify-only)"
+  }
+ ],
+ "count": 66,
+ "notes": "Reader 2 of two: python3 expanded every bracketed index in the critic's §8 feature bullets (ranges inclusive, comma lists individually) and every index §4's second-source column calls SKIPPED, then kept only those whose state-leguin.json verdict is SKIPPED_TRIAGE. §4 contributed 25 indices and all 25 were already in §8, so the two sections agree; the §8 duplicates bullet (53 indices, to be marked \"duplicate quotation of #N\" without a fetch) is excluded under rule 2 as already kept, and §9's [601]/[602] are excluded as not §8. Raw candidate count 66, all 66 confirmed SKIPPED_TRIAGE, so notSkipped holds only [462] (PARTIAL), the one §4 second-source-column index named as a verifier note rather than a SKIPPED row; the critic heads §8 \"the 82 new SKIPPED rows\" but enumerates 66, leaving 16 of the 135 SKIPPED_TRIAGE rows (519, 565, 598, 599, 600, 604, 606, 610, 611, 701, 706, 813, 867, 868, 891, 892) named nowhere in §8."
+}

@@ -1,0 +1,363 @@
+ 
+
+ Being An Asshole To A Goblin (BAATAG): Elements of a Key 4: Rules for Key-Writing 
+
+Being An Asshole To A Goblin (BAATAG)
+
+ Going Into A Dungeon And Making That Goblin Cry 
+
+ Tuesday, April 28, 2026 
+
+Elements of a Key 4: Rules for Key-Writing
+
+ Alright, last time I read a bunch of keys from various modules and looked at what types of info they included and how they presented it. It's time to try to put all of this to practical use. I'm going to make myself a style guide for my solo-author releases.
+
+I've seen a fair number of arguments over whether good writing is necessary for a RPG product. I'm a firm believer in "rpg books are tools, the play at the table is the art", but even within that context it seems obvious to me that good writing is preferable to thoughtless writing. The more interesting question is "how is good writing for a RPG book different than good writing for a novel/poem/essay?"
+
+I'm going to start by listing my rules for myself, then put them to practical use; I rewrote a one(ish) page dungeon I made last year using these rules--I'll post both copies so we can compare the two and see how well this all works in reality.
+
+ Rule 1: Break these rules if you have a reason to, otherwise don't.
+
+I believe that every mechanistic ruleset is more fun if it contains the seeds of its own destruction; a totalizing ruleset that gives you no exit ramp is irresponsible to create. Skills and taste are far more important to good RPG writing than any list of rules could ever be, so if your taste tells you that you're making your writing worse by following a rule, or if following a rule feels more like busywork than design, you should break it.
+
+If skills are better than rules, why write rules? Skills can't serialize onto a blog post, for one thing, but even more importantly a set of hard rules is a useful lens for looking at your own writing more thoughtfully; you learn more by choosing to break a rule than by ignoring one.
+
+ Rule 2: Everything defaults to unformatted paragraphs.
+
+No bullet points, no bolding. I have in the past been a big fan of bullet points, and am not categorically against bolding, but Part 3 of this series made me realize that they do both come at a cost of legibility. I'm no longer sure what bullet points do that paragraphs do not (other than indent, potentially), and bolding only works when used extremely sparingly--bolding more than one phrase per paragraph loses all of the benefits of drawing the eye to key phrases and instead creates a visual cacophony.
+
+That said, all the various formatting tricks people use serve a purpose. Rather than neglecting to use formatting, my goal is to study the formatting styles others have used and try to replicate their effects in the structure of my text. Plain text paragraphs still need to serve as reference documents, and still need to follow patterns that the reader can use to find information during play with minimal friction.
+
+ Rule 3: Initial paragraphs are for information immediately apparent upon entering a key.
+
+I talk a lot about Immediate Sensory Impressions in previous posts . The first paragraph of a key should generally contain a summary of those impressions. To use the framework of Landmark, Hidden, Secret , it should contain the key's Landmarks.
+
+A goal of this ruleset is to write content that makes the GM's life easier. The initial paragraph should be something that the GM can use as the foundation of their initial description of a key as the players enter it; ideally it should be something that they can read almost verbatim under normal circumstances. Of course, non-normal circumstances are commonplace in RPGs, so the descriptions should not be full scripted box-text.
+
+ Rule 4: Later paragraphs describe one topic each, and that topic should be recognizable from the paragraph's first few words.
+
+I really liked Lair of the Lamb's approach in our last post , where each paragraph bolded its subject matter--this makes it extremely easy to skim between keys for specific information. This follows the same philosophy, but forgoes the need for bolding in favor of predictable sentence structuring. I may fully embrace the Lair of the Lamb approach in the future, allowing myself one bolded phrase per paragraph, but for now I'm sticking to Rule 2.
+
+For reasons that not even I understand, I've been using inverted indentation for a while now--the first line of a paragraph sticks out fully to the left while all other lines are indented. This actually works really well with this rule--the first few words of each paragraph stick out, making them easier to scan. The goal is to make the contents of each paragraph apparent from that bit sticking out.
+
+ Rule 5: The more secret information is, the deeper it goes into the key/paragraph.
+
+To again use the framework of Landmark, Hidden, Secret , you start by revealing all the landmarks in the first paragraph, then move to the hidden elements that can be straightforwardly discovered through the players asking questions, then go to elements that require player fiddling to discover. It is likely that hidden elements will be described in play before secret ones, and the key should be laid out in loose order of expected use.
+
+This can be fairly flexible in practice. To use the LHS example of a rotating bookcase--the bookcase is landmark, the fact that it is a secret door is hidden, the mechanism of triggering it is secret--the bookcase should definitely be mentioned in the first paragraph, but after that things open up quite a bit. You could add a paragraph detailing the scuff marks on the floor by the bookcase, then a second paragraph describing how to operate it, but you could also just make those sentences one and two of a single paragraph. You could even completely omit the scuff marks--they're already implied by the fact that the door rotates in the first place. These rules are not an excuse for writing to become rote, the needs of the specific elements being described still come first.
+
+If a key contains little enough information that it makes the most sense to write it as a single paragraph, that's fine--just follow this same basic flow.
+
+ Rule 6: Keys contain information that can be revealed in the key itself.
+
+A key exists to assist in the act of a GM describing the events that occur within a space in play; it should focus on providing information that can come out while the players are inhabiting that space. If there is a secret about a location that can not be discovered or interacted with at that location itself, it should be described in the key for the location where it can be discovered. If there is no way for the players to learn the information, it should not be included in the module.
+
+One exception to this is information that is discoverable, but not at any keyed location; if you find a treasure in a dungeon that any priest of a certain sect will recognize as a long lost non-magical relic, you can describe the priest's reaction even though they aren't in the dungeon key itself. However, if a church of that sect is a keyed location in the module, you should put the information there.
+
+ Rule 7: Information should be presented in the manner in which the players can discover it.
+
+Related to Rule 6, it is better to describe the way in which players can access information than it is to simply state the information. Instead of "this is the workshop where the artist created the cursed painting" describe the mess of art supplies, the stacks of progressively darker and stranger failed early drafts, the strange reagents ground into pigments strewn across the room. This is "show, don't tell", but even more so--if you don't come up with the concrete details that do the showing the GM will need to improvise them; make their life easier. Of course, the key should be described clearly enough that the GM can grasp the information in case the players investigate the key in an unexpected manner.
+
+A rote way to help with this is to check for usage of "to be" verbs and replace them with something more active. This can be as simple as replacing "there is a painting of the king" with "the painting reveals the form of the king", but it's a good check to make sure that you're describing information that can actually be revealed in play. It's also just more engaging from a writing perspective.
+
+ Rule 8: Write without assumption of perspective.
+
+In slight contrast to the previous rule, information should be presented without assumptions made to specific player positioning or action. You never know if the players will encounter a goblin guard by accident, via sneak attack, while invisible, escorted by an ally of the goblin, disguised, etc. Instead of "they attack the players" write "they attack intruders". Avoid the second person; initial paragraphs should never say "You see a painting at the edge of your light as you open the door"--maybe you arrived in this room from an unexpected direction via passwall or teleportation accident.
+
+Doors in general are tough due to this--they're the one element I often omit in my initial paragraph, just because I have no way of knowing which door the players are entering a room from. When I do describe a door, I describe it as being on the east or north wall, not the far or right one. Even this is unsatisfying, because the GM will probably need to strip out all of that directional information and replace it with ahead/left/right descriptions to maintain the mazelike nature of a location.
+
+ Rule 9: If information about or from another key is available within this key, provide a parenthetical key and page link for easy reference.
+
+If you refer to another location in a key, and some element of this key either can tell you or take you to that key, provide a link to the other key in the format of (X.XX, pg. XX). Page flipping is always a pain, so anything you can do to reduce the need for it is good. The most common form of elements that can tell you about other elements are characters--if a character is likely to mention another key, and is able to answer questions about it, you should provide a link for convenience.
+
+That said, if a key mentions another key but is unable to give details about it, no link is usually needed. A lost traveler trying to return to their home should have a link to their hometown, but an explorer looking for a lost city is fine by itself; the explorer can not give directions to the other key, and does not know the details of what it contains, so there is no need for the GM to refer to it. Many exceptions obviously apply--if the explorer has a map of the city, a link becomes needed.
+
+Reminder links can be added as needed as well--in the relic example from Rule 6 I might link to the church as a reminder just because it's reasonable that a player might be playing a priest of that religion or be able to learn of it through some other unanticipated method. This is on a case by case basis.
+
+ Rule 10: Singular mechanical stats may be put in a parenthetical, but anything longer than a phrase should be described in natural language.
+
+Parentheticals interfere with reading if used unsparingly, but some concepts are genuinely short and mechanical enough that it makes sense to step outside of natural language for them. The most common reason I've found is weapon stats--it's less clunky to say "a longsword (1d8)" than to spend a sentence describing that longswords do 1d8 damage. Also reasonable is "a flamethrower (15' cone, 3d6)". Anything more complex than that, though, should simply be described as a sentence.
+
+Skill checks/saves are one of my greater sources of uncertainty with this ruleset. I plan on generally writing for a specific ruleset (usually Odd Goblin ), but supporting easy conversion to other systems. Weapons and health and spells are often cross-compatible enough as-is, but systems range dramatically in how they handle skills and saves, and describing things like DCs and specific skill names are simultaneously wordy and specific. I also generally believe that difficulty ratings should come as much from situation as subject: a fence might be easy to climb without pressure, moderately difficult to climb stealthily, and hard to climb in the seconds before the guard dogs reach you. My solution is to simply say "Those within 15' save or die." and let the GM choose the DC and relevant stat in cases where the difficulty is moderate. I may say "save with disadvantage/advantage" if I feel that a description needs a difficulty modifier, and let the GM decide if that means a DC number adjustment or an adjustment to the dice rolled based on their system.
+
+ Rule 11: Statblocks go under the key in italics.
+
+Monster statblocks are inherently a mess of symbols that do not flow with the rest of a paragraph. They're also very useful to have on-hand, and are important enough that they're useful to put in a way that's easy to skim for. For each monster in a key, put its statblock immediately after the paragraphs end. Include even non-combatant NPCs and monsters with statblocks described elsewhere in the book.
+
+I also have started including three verbs or adjectives at the end of my statblocks, riffing off of Torchbearer instincts. These are intentionally flexible, meant to give the GM inspirational fallbacks for how the NPC responds to player actions. I find that my NPCs can easily start to act similar to each other if I don't give myself nudges like this, and I find that three words hits a good balance of giving the GM a mental image of who a NPC is without micromanaging the way a scene plays out or writing a bunch of guidance for social edge case scenarios. I generally try to make these different for each key, even for the same monster type, out of a mix of trying to give the NPCs some hint of inner life/personhood and to try to keep repeated encounters distinct from each other.
+
+ Rule 12: Number keys in order of escalating revelation, with questions before answers.
+
+I believe in the primacy of a module as a play aide over a book for reading, but a GM's initial reading of a book has direct relevance to the quality with which they run it--that read-through should mirror the process of play, where the most easily reached part of the location raise questions that the reader/explorer must delve deeper to answer. A GM who is engaged by the early part of the module, kept in suspense, and who must read on in order to discover the truth is more likely to retain what they read for use at the table--and more likely to be motivated to bring it to the table in the first place.
+
+When keying a dungeon, it's obviously best practice to have adjacent rooms have adjacent numbers whenever possible. In practice, this rule mostly just means that when you have to choose which branch of the dungeon to describe first, try to get to your most interesting and consequential keys last, and try to finish your levels/etc with foreshadowing of later elements of the book. Don't twist your dungeon map into a mess trying to do this, though--the space itself still takes precedence over the methods used to describe it.
+
+An implicit part of this rule is that modules should contain questions that are revealed over the course of play. This might be full blown mysteries, but it can also be as simple as "what's the deal with all these goblins who moved into this cave?"--whenever possible place the keys full of goblin graffiti before the goblin camp itself.
+
+ Rule 13: Books start with common knowledge/rumors/hooks, quickly progress to keys, and save advice/summaries/references/etc for the appendixes.
+
+As an extension of Rule 12, you should not explain all the mysteries of your module in the introduction. A GM reading the book from cover to cover should learn about the setting in loosely the same order that the players will, meaning that pre-key writing should be kept brief.
+
+There are some types of information that are needed before keys, though--the types of information that draw the players to the location in the first place, or information they can gather before arriving. A good introduction serves as a hook, providing a reason for players to send their PCs to the location and GMs a reason to keep reading.
+
+I plan on accomplishing this by framing introductions as common knowledge about the module's subject--less of a god's eye view of the situation and more a set of rumors that the players might be exposed to before they set out. This still follows a Landmark, Hidden, Secret format--the introduction starts with a hook usable by the GM to solicit the PCs into investigating, followed by information they can attain via trivial research, followed by information that may conditionally be gained only by getting the right people to talk, if any.
+
+Anything goes for the appendix. At that point a cover-to-cover GM has read everything in the keys, so spoiler-heavy monster descriptions, faction summaries, and so on become permissible. This should all still be kept to a minimum, but certain sizes and formats of adventures necessitate certain types of GM assistances.
+
+ Rule 14: Expect the GM to have the active key in front of them, 20 or so keys fresh in their mind, and up to 80 or so keys already read.
+
+This rule is somewhat intangible, but when deciding what information is worth including or omitting you should assume that the GM has read and reread/prepped the current key and anything else in its section of the book and has probably skimmed nearby sections.
+
+If your book is 20 or less keys, you can assume they have full access to the contents of the keys in their mind; any questions raised and answered in that segment can be seamlessly adjudicated without being a drag on the game. You can drop hints in early keys that are recontextualized by later keys and assume the GM has re-read those early keys with their full context in mind. A Perfect Wife is a great example of a module that works this way.
+
+If the book is 80 or less keys, you can assume the GM read all of it but may not have thought too deeply or prepped for elements in other segments of the module. They show up to session one with full command of level 1 in their mind, but the odds of them not picking up on the implications of setting details that are only fully unpacked on level 3 are relatively high.
+
+If your book is over 100 keys, you can't really assume the player has read (or meaningfully retained) the entire book when they first sit down to play. Some fundamental changes may need to be made regarding book layout to allow the GM to reference commonly known information from parts of the dungeon they haven't read yet. Arden Vul's faction write-ups are an example of what this might look like.
+
+ Now that we've listed the rules, let's see how they work in practice! I have here screenshots from a dungeon I wrote for a (possibly?) defunct APA. Click on the sample image for the full PDF.
+
+ It's 3 levels, 46 keys, and 15 statblocks in a two-page spread. I've run it a few times to good results, so it seems like a perfect candidate for unpacking into fully written keys. Click the image below for a link to the module rewrite on itch.io .
+
+ I've made an effectively unlimited number of community copies available; I hope to use it as a free sample to a larger set of adventures I plan on putting out as part of a project I hope to announce soon.
+
+ Okay, so, how did writing under these rules teach work out in practice? I suggest reading the module before continuing, to preserve the effects of Rule 12.
+
+ I was extremely happy with the results. Initially I was worried about justifying the extra page count; writing the module as a two page spread forced me to be extremely economical with my word choice in a way that I thought worked well, so if I was going to be unpacking this from two to fifteen pages I needed to make sure that the extra words actually added something; I needed to make sure I wasn't losing my Conceptual Density .
+
+ Upon actually writing it, though, I found that the rules I was setting for myself did a great job of avoiding cruft. Grounding everything in an initial paragraph of sensory impressions forced me to think about the spaces I was describing as more than just a set of bullet-point-esque outline entries, and putting extra details in their own paragraphs was good for making me ask myself "does this deserve its own paragraph or can I just leave it unsaid?"
+
+ The most fruitful thing I did, though, was completely avoid statements of being in favor of statements of action (Rule 7). As the dungeon's designer it's very tempting to just say 'there is a hidden door in the room' or 'john is a potion merchant', because that's how I think of them when thinking them up, but forcing myself to always describe them as doing something really made sure I had to think about how the players would be interacting with them, not thinking of them as some sort of abstract platonic object--'Pushing on the west wall reveals a rotating panel offering access to a staircase' is much stronger than 'there is a hidden door' in both function and form.
+
+ Writing things out in full sentences in this was also gave me a lot of 'hooks' to hang further writing on. Giving every object a verb and framing every personality trait as an action taken forced me to think up a lot of additional imagery and detail. I could see that actually being a net negative if it was done carelessly--if you just fill in the most cliche and expected answer in each of these slots you aren't really adding any new info--but by treating it as a chance to think more deeply about the dungeon as a whole and evoke the dungeon's deeper themes it really helped me think deeply about the dungeon's design; if I'm going to have something worth hanging on those hooks, I need to have a coherent vision for the dungeon's vibes and themes that I can point towards with any evocative language I add.
+
+ Those themes don't even really need to be too profound--for this I just wanted to make sure that the bandits felt like they were intruders (lots of damaged high quality furniture), the slimes were out of control and having a great time, the constructs were put-upon and slightly delusional, the villagers were actively absent, and the wizard was mostly concerned with giving inanimate objects life. Whenever I had a place I needed to add a new detail to ground a space's physical description or a verb to illustrate what a NPC is up to, I tried to lean into one of those or to foreshadow some further danger or opportunity deeper in the dungeon. I'm not even sure the slime party fully comes through in the writing, but it was still helpful for me in orienting myself while writing.
+
+ I hadn't read Writing Rooms in Pairs when I first wrote this dungeon, but it's something I was loosely trying to do already that I really doubled down on with this rewrite. You should be able to look at any room in the dungeon and see at least one reference to it elsewhere, even if oblique.
+
+ The two parts of writing this I most struggled with were perspective (Rule 8) and mechanics (Rule 10). Describing a sensory impression of a room without any assumptions as to the entry point of the players is inherently self-contradictory, and trying to do so without assuming the players know which way is north makes it even tougher. In practice, I mostly either omitted door descriptions (anything I could have written would need to be remixed based on the entry door anyway) or used compass directions (even though those will need to be stripped out by the GM). I gave up on avoiding perspective in a few places--there's a room with one door and a throne at the other side, so I just described the throne as being on the 'far end' because it's hard to imagine a situation where the players enter from behind the throne. It still feels like there must be a better way, though.
+
+ The rules for slime infection were a struggle to integrate. I don't want to put them in the intro, because they give away too much about what's going on, but they're a semi-complex set of mechanics that repeat themselves across a half dozen keys. I ended up just putting them on the first page of the dungeon level where they become common, then making sure that the first few keys describing the monsters that use the mechanic make reference to the fact that they attempt to body-snatch humans they overpower. It feels a little inelegant, but it balances spoilers and accessibility so I'm keeping it.
+
+ Spells are tricky. They require a ton of words to describe mechanically, change how they work depending on the system, and it's not unusual for a character to know multiple of them. I used common spell names and trusted the GM to be able to connect those names to spells in their own system, with minor name tweaks existing to modify them slightly--Slime Web describes a spell that acts like Web but that's made of slime instead of spiderwebs. I have some misgivings about this approach but don't see a better option yet.
+
+ One thing I definitely noticed, though, is that keeping all of these rules in mind as I wrote was very hard. This set of guidelines works better as an editing tool than a writing one--I had to go back and do a few edit passes with a few rules in mind each time to fully apply them all. The longer I write this way the more my first drafts will probably hold to these patterns, I hope.
+
+ Finally, deciding what information to include and what simply to imply is always a fun challenge. This module packs a whole bunch of mysteries into a pretty tight space, and I think I did a good job of making all of those solvable without being explicit about them; the three-pack of Elixers of Youth with only two vials left explain why Garl is 15 without me ever saying so explicitly. There are some mysteries that aren't fully answered--why the wizard left--but given that there's no good way of discovering that within the module I think that's okay. A GM could always have the fecal sage give an answer, if they really want, but the important part is just that he's not there any more. I think I would enjoy this level of mystery in a module I read, but I am curious to hear if other feel the same.
+
+ Overall, I'm very happy with these rules so far, am going to keep using them on future projects, and encourage other people to think about which of these rules could strengthen your own personal style guides if you started following them. Of course, it's always impossible for the writer to know how their work will look to fresh eyes, so I'd love to hear people's thoughts on the rules in general and the module's style in particular--and if you run the module I'd especially love to hear how it went and if you found the layout easy to reference during play.
+ This (presumably) concludes my deep-dive into keys and key-writing. You can find the previous posts here:
+ Part 1: Key Contents 
+ Part 2: Writing vs Prep vs Improv 
+ Part 3: Actual Keys 
+
+Posted by
+
+ Misha F 
+
+at
+
+ 12:33 PM 
+
+ Email This BlogThis! Share to X Share to Facebook Share to Pinterest 
+
+Labels:
+ module design ,
+ theory ,
+ writing 
+
+ 1 comment:
+
+ temerity June 8, 2026 at 7:25 PM 
+ Loved this series, helped me nail down my own preferences when formatting keys
+ Reply Delete 
+ Replies 
+ Reply 
+
+ Add comment 
+
+ Load more... 
+
+ Newer Post 
+
+ Older Post 
+
+ Home 
+
+Subscribe to:
+ Post Comments (Atom) 
+
+ About Me
+
+Misha F
+
+ View my complete profile 
+
+ Blog Archive
+
+ ▼ 
+
+2026
+
+ (7) 
+
+ ► 
+
+July
+
+ (2) 
+
+ ▼ 
+
+April
+
+ (1) 
+
+ Elements of a Key 4: Rules for Key-Writing 
+
+ ► 
+
+March
+
+ (1) 
+
+ ► 
+
+February
+
+ (1) 
+
+ ► 
+
+January
+
+ (2) 
+
+ ► 
+
+2025
+
+ (3) 
+
+ ► 
+
+December
+
+ (1) 
+
+ ► 
+
+June
+
+ (1) 
+
+ ► 
+
+May
+
+ (1) 
+
+ ► 
+
+2024
+
+ (1) 
+
+ ► 
+
+May
+
+ (1) 
+
+ ► 
+
+2023
+
+ (5) 
+
+ ► 
+
+May
+
+ (1) 
+
+ ► 
+
+April
+
+ (1) 
+
+ ► 
+
+March
+
+ (1) 
+
+ ► 
+
+January
+
+ (2) 
+
+ ► 
+
+2022
+
+ (3) 
+
+ ► 
+
+December
+
+ (3) 
+
+ ► 
+
+2021
+
+ (2) 
+
+ ► 
+
+October
+
+ (1) 
+
+ ► 
+
+April
+
+ (1) 
+
+ ► 
+
+2020
+
+ (6) 
+
+ ► 
+
+November
+
+ (1) 
+
+ ► 
+
+October
+
+ (2) 
+
+ ► 
+
+September
+
+ (1) 
+
+ ► 
+
+August
+
+ (2) 
+
+Simple theme. Powered by Blogger .
+
+ 

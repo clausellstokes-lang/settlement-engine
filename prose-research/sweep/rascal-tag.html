@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <title>AI - Rascal News</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="preload" as="style" href="https://www.rascal.news/assets/built/screen.css?v=3EUR1Koa7luDwaRK">
+    <link rel="preload" as="script" href="https://www.rascal.news/assets/built/source.js?v=fO0FIOFT6UAWW5WA">
+
+    <link rel="stylesheet" type="text/css" href="https://www.rascal.news/assets/built/screen.css?v=3EUR1Koa7luDwaRK">
+
+    <style>
+        :root {
+            --background-color: #ffffff
+        }
+    </style>
+
+    <script>
+        /* The script for calculating the color contrast has been taken from
+        https://gomakethings.com/dynamically-changing-the-text-color-based-on-background-color-contrast-with-vanilla-js/ */
+        var accentColor = getComputedStyle(document.documentElement).getPropertyValue('--background-color');
+        accentColor = accentColor.trim().slice(1);
+        var r = parseInt(accentColor.substr(0, 2), 16);
+        var g = parseInt(accentColor.substr(2, 2), 16);
+        var b = parseInt(accentColor.substr(4, 2), 16);
+        var yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
+        var textColor = (yiq >= 128) ? 'dark' : 'light';
+
+        document.documentElement.className = `has-${textColor}-text`;
+    </script>
+
+    <link rel="icon" href="https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w256h256/2024/02/Untitled-design--1-.png" type="image/png">
+    <link rel="canonical" href="https://www.rascal.news/tag/ai/">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+    <meta property="og:site_name" content="Rascal News">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="AI - Rascal News">
+    <meta property="og:description" content="Rascal is a tabletop roleplaying game and culture outlet striving to sustainably publish voicey journalism that is compelling, deeply-reported, and fearlessly honest. We’re also a little cheeky">
+    <meta property="og:url" content="https://www.rascal.news/tag/ai/">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="AI - Rascal News">
+    <meta name="twitter:description" content="Rascal is a tabletop roleplaying game and culture outlet striving to sustainably publish voicey journalism that is compelling, deeply-reported, and fearlessly honest. We’re also a little cheeky">
+    <meta name="twitter:url" content="https://www.rascal.news/tag/ai/">
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Series",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Rascal News",
+        "url": "https://www.rascal.news/",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/2024/02/logo-1.webp"
+        }
+    },
+    "url": "https://www.rascal.news/tag/ai/",
+    "name": "AI",
+    "mainEntityOfPage": "https://www.rascal.news/tag/ai/"
+}
+    </script>
+
+    <meta name="generator" content="Ghost 6.62">
+    <link rel="alternate" type="application/rss+xml" title="Rascal News" href="https://www.rascal.news/rss/">
+    <script defer src="https://cdn.jsdelivr.net/ghost/portal@~2.71/umd/portal.min.js" data-i18n="true" data-ghost="https://www.rascal.news/" data-key="38578e780692074ae54774ae11" data-api="https://rascal-news.ghost.io/ghost/api/content/" data-locale="en" crossorigin="anonymous"></script><style id="gh-members-styles">.gh-post-upgrade-cta-content,
+.gh-post-upgrade-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    text-align: center;
+    width: 100%;
+    color: #ffffff;
+    font-size: 16px;
+}
+
+.gh-post-upgrade-cta-content {
+    border-radius: 8px;
+    padding: 40px 4vw;
+}
+
+.gh-post-upgrade-cta h2 {
+    color: #ffffff;
+    font-size: 28px;
+    letter-spacing: -0.2px;
+    margin: 0;
+    padding: 0;
+}
+
+.gh-post-upgrade-cta p {
+    margin: 20px 0 0;
+    padding: 0;
+}
+
+.gh-post-upgrade-cta small {
+    font-size: 16px;
+    letter-spacing: -0.2px;
+}
+
+.gh-post-upgrade-cta a {
+    color: #ffffff;
+    cursor: pointer;
+    font-weight: 500;
+    box-shadow: none;
+    text-decoration: underline;
+}
+
+.gh-post-upgrade-cta a:hover {
+    color: #ffffff;
+    opacity: 0.8;
+    box-shadow: none;
+    text-decoration: underline;
+}
+
+.gh-post-upgrade-cta a.gh-btn {
+    display: block;
+    background: #ffffff;
+    text-decoration: none;
+    margin: 28px 0 0;
+    padding: 8px 18px;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.gh-post-upgrade-cta a.gh-btn:hover {
+    opacity: 0.92;
+}</style><script async src="https://js.stripe.com/v3/"></script>
+    <script defer src="https://cdn.jsdelivr.net/ghost/sodo-search@~1.8/umd/sodo-search.min.js" data-key="38578e780692074ae54774ae11" data-styles="https://cdn.jsdelivr.net/ghost/sodo-search@~1.8/umd/main.css" data-sodo-search="https://rascal-news.ghost.io/" data-locale="en" crossorigin="anonymous"></script>
+    
+    <link href="https://www.rascal.news/webmentions/receive/" rel="webmention">
+    <script defer src="/public/cards.min.js?v=ShRHxgy4po8zN-Wf"></script>
+    <link rel="stylesheet" type="text/css" href="/public/cards.min.css?v=WwnU9jw5ancNC8Gc">
+    <script defer src="/public/comment-counts.min.js?v=oFYkaGLdiMqB8VN9" data-ghost-comments-counts-api="https://www.rascal.news/members/api/comments/counts/"></script>
+    <script defer src="/public/member-attribution.min.js?v=AKG4hWena9j3yX3I"></script><style>:root {--ghost-accent-color: #FF0071;}</style>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-K9E054HM7F"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-K9E054HM7F');
+</script>
+
+</head>
+<body class="tag-template tag-ai has-serif-title has-serif-body">
+
+<div class="gh-inner">
+
+    <header id="gh-navigation" class="gh-navigation is-stacked gh-outer">
+    <div class="gh-navigation-inner gh-inner">
+
+        <div class="gh-navigation-brand">
+            <a class="gh-navigation-logo is-title" href="https://www.rascal.news">
+                    <img src="https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/2024/02/logo-1.webp" alt="Rascal News">
+            </a>
+            <button class="gh-search gh-icon-button" aria-label="Search this site" data-ghost-search>
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></button>            <button class="gh-burger gh-icon-button" aria-label="Menu">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 256 256"><path d="M224,128a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H216A8,8,0,0,1,224,128ZM40,72H216a8,8,0,0,0,0-16H40a8,8,0,0,0,0,16ZM216,184H40a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Z"></path></svg>                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 256 256"><path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"></path></svg>            </button>
+        </div>
+
+        <nav class="gh-navigation-menu">
+            <ul class="nav">
+    <li class="nav-new-games"><a href="https://www.rascal.news/tag/new-games/">New Games</a></li>
+    <li class="nav-features"><a href="https://www.rascal.news/tag/features/">Features</a></li>
+    <li class="nav-investigations"><a href="https://www.rascal.news/tag/investigations/">Investigations</a></li>
+    <li class="nav-crossword"><a href="https://www.rascal.news/tag/crossword/">Crossword</a></li>
+    <li class="nav-podcasts"><a href="https://www.rascal.news/tag/rascal-radio/">Podcasts</a></li>
+    <li class="nav-announcements"><a href="https://www.rascal.news/tag/announcements/">Announcements</a></li>
+    <li class="nav-about"><a href="https://www.rascal.news/about/">About</a></li>
+    <li class="nav-get-in-touch"><a href="https://www.rascal.news/contact/">Get in Touch</a></li>
+</ul>
+
+        </nav>
+
+        <div class="gh-navigation-actions">
+                <button class="gh-search gh-icon-button" aria-label="Search this site" data-ghost-search>
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></button>                <div class="gh-navigation-members">
+                            <a href="#/portal/signin" data-portal="signin">Sign in</a>
+                                <a class="gh-button" href="#/portal/signup" data-portal="signup">Subscribe</a>
+                </div>
+        </div>
+
+    </div>
+</header>
+
+</div>
+
+<div class="gh-viewport">
+
+    
+<main class="gh-main gh-outer">
+
+        <section class="gh-archive has-sidebar gh-inner">
+            <div class="gh-archive-inner">
+                <header class="gh-archive-wrapper">
+                    <h1 class="gh-article-title is-title">AI</h1>
+                </header>
+                            </div>
+        </section>
+
+    
+<section class="gh-container is-list has-sidebar gh-outer">
+    <div class="gh-container-inner gh-inner">
+
+
+        <main class="gh-main">
+            <div class="gh-feed">
+
+                
+
+
+                        <article class="gh-card post tag-investigations tag-ai tag-shannon-appelcline tag-ttrpg-history tag-4-pillar-games">
+    <a class="gh-card-link" href="/ai-generated-profiles-of-ttrpg-designers-ignite-fury-across-social-media/">
+            <figure class="gh-card-image">
+                <img
+                    srcset="https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w160/format/webp/2026/05/Untitled-design--4-.jpg 160w,
+                            https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w320/format/webp/2026/05/Untitled-design--4-.jpg 320w,
+                            https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w600/format/webp/2026/05/Untitled-design--4-.jpg 600w,
+                            https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w960/format/webp/2026/05/Untitled-design--4-.jpg 960w,
+                            https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w1200/format/webp/2026/05/Untitled-design--4-.jpg 1200w,
+                            https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w2000/format/webp/2026/05/Untitled-design--4-.jpg 2000w"
+                    sizes="320px"
+                    src="https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w600/2026/05/Untitled-design--4-.jpg"
+                    alt="AI-generated profiles of TTRPG designers ignite fury across social media"
+                    loading="lazy"
+                >
+            </figure>
+        <div class="gh-card-wrapper">
+            <p class="gh-card-tag">investigations</p>
+            <h3 class="gh-card-title is-title">AI-generated profiles of TTRPG designers ignite fury across social media</h3>
+            <p class="gh-card-excerpt is-body">4 Pillar Games’ new website adds AI-generated slop to an already ephemeral online historical record.</p>
+            <footer class="gh-card-meta">
+                    <span class="gh-card-author">Lin Codega</span>
+                    <time class="gh-card-date" datetime="2026-05-12">May 12, 2026</time>
+            </footer>
+        </div>
+    </a>
+</article>                        <article class="gh-card post tag-culture tag-crosspost tag-ryan-dancey tag-alderac-entertainment-group tag-ai">
+    <a class="gh-card-link" href="/tabletop-industry-veteran-ryan-dancey-loses-alderac-coo-job-after-saying-ai-can-generate-game-ideas-as-good-as-some-of-his-companys-designs/">
+            <figure class="gh-card-image">
+                <img
+                    srcset="https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w160/format/webp/2026/02/Untitled-design.png 160w,
+                            https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w320/format/webp/2026/02/Untitled-design.png 320w,
+                            https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w600/format/webp/2026/02/Untitled-design.png 600w,
+                            https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w960/format/webp/2026/02/Untitled-design.png 960w,
+                            https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w1200/format/webp/2026/02/Untitled-design.png 1200w,
+                            https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w2000/format/webp/2026/02/Untitled-design.png 2000w"
+                    sizes="320px"
+                    src="https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w600/2026/02/Untitled-design.png"
+                    alt="Tabletop industry veteran Ryan Dancey loses Alderac COO job after saying AI can generate game ideas as good as some of his company’s designs"
+                    loading="lazy"
+                >
+            </figure>
+        <div class="gh-card-wrapper">
+            <p class="gh-card-tag">culture</p>
+            <h3 class="gh-card-title is-title">Tabletop industry veteran Ryan Dancey loses Alderac COO job after saying AI can generate game ideas as good as some of his company’s designs</h3>
+            <p class="gh-card-excerpt is-body">&quot;The idea that [AI] could not be used to generate ideas on the level as those embodied by those three games is already demonstrably false (in my opinion).&quot;</p>
+            <footer class="gh-card-meta">
+                    <span class="gh-card-author">Mike Didymus-True</span>
+                    <time class="gh-card-date" datetime="2026-02-27">Feb 27, 2026</time>
+            </footer>
+        </div>
+    </a>
+</article>                        <article class="gh-card post tag-culture tag-hasbro tag-ai tag-business tag-wizards-of-the-coast">
+    <a class="gh-card-link" href="/hasbros-ceos-optional-ai-guidance-is-undercut-by-hasbro-ceos-love-of-ai/">
+            <figure class="gh-card-image">
+                <img
+                    srcset="https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w160/format/webp/2026/02/MTG-the-brothers-war-story-arcs-assembler-1.png 160w,
+                            https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w320/format/webp/2026/02/MTG-the-brothers-war-story-arcs-assembler-1.png 320w,
+                            https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w600/format/webp/2026/02/MTG-the-brothers-war-story-arcs-assembler-1.png 600w,
+                            https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w960/format/webp/2026/02/MTG-the-brothers-war-story-arcs-assembler-1.png 960w,
+                            https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w1200/format/webp/2026/02/MTG-the-brothers-war-story-arcs-assembler-1.png 1200w,
+                            https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w2000/format/webp/2026/02/MTG-the-brothers-war-story-arcs-assembler-1.png 2000w"
+                    sizes="320px"
+                    src="https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w600/2026/02/MTG-the-brothers-war-story-arcs-assembler-1.png"
+                    alt="Hasbro CEO’s optional AI guidance is undercut by Hasbro CEO’s love of AI"
+                    loading="lazy"
+                >
+            </figure>
+        <div class="gh-card-wrapper">
+            <p class="gh-card-tag">culture</p>
+            <h3 class="gh-card-title is-title">Hasbro CEO’s optional AI guidance is undercut by Hasbro CEO’s love of AI</h3>
+            <p class="gh-card-excerpt is-body">Like unlimited time off, it’s a mandate disguised as a choice.</p>
+            <footer class="gh-card-meta">
+                    <span class="gh-card-author">Chase Carter</span>
+                    <time class="gh-card-date" datetime="2026-02-11">Feb 11, 2026</time>
+            </footer>
+        </div>
+    </a>
+</article>                        <article class="gh-card post tag-culture tag-public-article tag-ukge tag-ai tag-gates-of-krystalia tag-instagram">
+    <a class="gh-card-link" href="/uk-games-expo-criticized-for-promoting-rpg-with-generative-ai-imagery/">
+            <figure class="gh-card-image">
+                <img
+                    srcset="https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w160/format/webp/2025/11/Screenshot-2025-11-03-163559-1.png 160w,
+                            https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w320/format/webp/2025/11/Screenshot-2025-11-03-163559-1.png 320w,
+                            https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w600/format/webp/2025/11/Screenshot-2025-11-03-163559-1.png 600w,
+                            https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w960/format/webp/2025/11/Screenshot-2025-11-03-163559-1.png 960w,
+                            https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w1200/format/webp/2025/11/Screenshot-2025-11-03-163559-1.png 1200w,
+                            https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w2000/format/webp/2025/11/Screenshot-2025-11-03-163559-1.png 2000w"
+                    sizes="320px"
+                    src="https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w600/2025/11/Screenshot-2025-11-03-163559-1.png"
+                    alt="UK Games Expo criticized for promoting RPG with generative AI imagery"
+                    loading="lazy"
+                >
+            </figure>
+        <div class="gh-card-wrapper">
+            <p class="gh-card-tag">culture</p>
+            <h3 class="gh-card-title is-title">UK Games Expo criticized for promoting RPG with generative AI imagery</h3>
+            <p class="gh-card-excerpt is-body">Gates of Krystalia’s creators insult commenters, struggle to explain provenance of LLM training material.</p>
+            <footer class="gh-card-meta">
+                    <span class="gh-card-author">Chase Carter</span>
+                    <time class="gh-card-date" datetime="2025-11-03">Nov 3, 2025</time>
+            </footer>
+        </div>
+    </a>
+</article>                        <article class="gh-card post tag-miniatures tag-public-article tag-vallejo tag-ai tag-mini-painting tag-hobby">
+    <a class="gh-card-link" href="/vallejo-uses-allegedly-ai-generated-image-in-advertising/">
+            <figure class="gh-card-image">
+                <img
+                    srcset="https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w160/format/webp/2025/08/Screenshot-2025-08-11-at-12-11-29-Instagram-1.png 160w,
+                            https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w320/format/webp/2025/08/Screenshot-2025-08-11-at-12-11-29-Instagram-1.png 320w,
+                            https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w600/format/webp/2025/08/Screenshot-2025-08-11-at-12-11-29-Instagram-1.png 600w,
+                            https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w960/format/webp/2025/08/Screenshot-2025-08-11-at-12-11-29-Instagram-1.png 960w,
+                            https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w1200/format/webp/2025/08/Screenshot-2025-08-11-at-12-11-29-Instagram-1.png 1200w,
+                            https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w2000/format/webp/2025/08/Screenshot-2025-08-11-at-12-11-29-Instagram-1.png 2000w"
+                    sizes="320px"
+                    src="https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w600/2025/08/Screenshot-2025-08-11-at-12-11-29-Instagram-1.png"
+                    alt="An image of two figures shaking hands, one in sci-fi armour, the other in furs, leathers and chain. They both have two right hands."
+                    loading="lazy"
+                >
+            </figure>
+        <div class="gh-card-wrapper">
+            <p class="gh-card-tag">miniatures</p>
+            <h3 class="gh-card-title is-title">Vallejo uses allegedly AI-generated image in advertising</h3>
+            <p class="gh-card-excerpt is-body">Not so friendly after all.</p>
+            <footer class="gh-card-meta">
+                    <span class="gh-card-author">Caelyn Ellis</span>
+                    <time class="gh-card-date" datetime="2025-08-12">Aug 12, 2025</time>
+            </footer>
+        </div>
+    </a>
+</article>                        <article class="gh-card post tag-miniatures tag-victrix tag-pillage tag-ai tag-guillaume-rousselot tag-public-article">
+    <a class="gh-card-link" href="/wargame-pillage-allegedly-features-undisclosed-ai-generated-images/">
+            <figure class="gh-card-image">
+                <img
+                    srcset="https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w160/format/webp/2025/07/treehouse-1.png 160w,
+                            https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w320/format/webp/2025/07/treehouse-1.png 320w,
+                            https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w600/format/webp/2025/07/treehouse-1.png 600w,
+                            https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w960/format/webp/2025/07/treehouse-1.png 960w,
+                            https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w1200/format/webp/2025/07/treehouse-1.png 1200w,
+                            https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w2000/format/webp/2025/07/treehouse-1.png 2000w"
+                    sizes="320px"
+                    src="https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w600/2025/07/treehouse-1.png"
+                    alt="A monochrome image of a medieval village. The central house appears to have a tree growing out of it."
+                    loading="lazy"
+                >
+            </figure>
+        <div class="gh-card-wrapper">
+            <p class="gh-card-tag">miniatures</p>
+            <h3 class="gh-card-title is-title">UPDATED: Wargame Pillage allegedly features undisclosed AI-generated images</h3>
+            <p class="gh-card-excerpt is-body">Making a game about Viking raids doesn’t mean you have to steal art.</p>
+            <footer class="gh-card-meta">
+                    <span class="gh-card-author">Caelyn Ellis</span>
+                    <time class="gh-card-date" datetime="2025-07-04">Jul 4, 2025</time>
+            </footer>
+        </div>
+    </a>
+</article>                        <article class="gh-card post tag-culture tag-public-article tag-ennies tag-awards tag-ai">
+    <a class="gh-card-link" href="/ennie-awards-updated-submission-policy-wont-accept-ai-projects-next-year/">
+            <figure class="gh-card-image">
+                <img
+                    srcset="https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w160/format/webp/2025/01/GTRWFShXEAAvbUg-1.jpeg 160w,
+                            https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w320/format/webp/2025/01/GTRWFShXEAAvbUg-1.jpeg 320w,
+                            https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w600/format/webp/2025/01/GTRWFShXEAAvbUg-1.jpeg 600w,
+                            https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w960/format/webp/2025/01/GTRWFShXEAAvbUg-1.jpeg 960w,
+                            https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w1200/format/webp/2025/01/GTRWFShXEAAvbUg-1.jpeg 1200w,
+                            https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w2000/format/webp/2025/01/GTRWFShXEAAvbUg-1.jpeg 2000w"
+                    sizes="320px"
+                    src="https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w600/2025/01/GTRWFShXEAAvbUg-1.jpeg"
+                    alt="Three ENNIE awards medals (left to right: silver, gold, bronze) sit on a table amidst a motley collection of dice."
+                    loading="lazy"
+                >
+            </figure>
+        <div class="gh-card-wrapper">
+            <p class="gh-card-tag">culture</p>
+            <h3 class="gh-card-title is-title">ENNIE Awards’ updated submission policy won’t accept AI projects… next year</h3>
+            <p class="gh-card-excerpt is-body">The organization “will no longer accept any products containing generative AI or created with the assistance of Large Language Models or similar technologies.”</p>
+            <footer class="gh-card-meta">
+                    <span class="gh-card-author">Chase Carter</span>
+                    <time class="gh-card-date" datetime="2025-01-27">Jan 27, 2025</time>
+            </footer>
+        </div>
+    </a>
+</article>                        <article class="gh-card post tag-community tag-public-article tag-itch-io tag-funko tag-business-shenanigans tag-ai">
+    <a class="gh-card-link" href="/funko-inadvertently-disables-itch-ios-whole-website-blames-third-party-brand-protection/">
+            <figure class="gh-card-image">
+                <img
+                    srcset="https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w160/format/webp/2024/12/Untitled-design-2.png 160w,
+                            https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w320/format/webp/2024/12/Untitled-design-2.png 320w,
+                            https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w600/format/webp/2024/12/Untitled-design-2.png 600w,
+                            https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w960/format/webp/2024/12/Untitled-design-2.png 960w,
+                            https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w1200/format/webp/2024/12/Untitled-design-2.png 1200w,
+                            https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w2000/format/webp/2024/12/Untitled-design-2.png 2000w"
+                    sizes="320px"
+                    src="https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w600/2024/12/Untitled-design-2.png"
+                    alt="Funko&#x27;s logo, a boy in a crown and blue &quot;f&quot; shirt, beside itch.io&#x27;s storefront and controller logo."
+                    loading="lazy"
+                >
+            </figure>
+        <div class="gh-card-wrapper">
+            <p class="gh-card-tag">community</p>
+            <h3 class="gh-card-title is-title">Funko inadvertently disables itch.io’s whole website, blames third-party brand protection</h3>
+            <p class="gh-card-excerpt is-body">Founder calls foul on “trash ‘AI Powered’ Brand Protection Software”</p>
+            <footer class="gh-card-meta">
+                    <span class="gh-card-author">Chase Carter</span>
+                    <time class="gh-card-date" datetime="2024-12-10">Dec 10, 2024</time>
+            </footer>
+        </div>
+    </a>
+</article>                        <article class="gh-card post tag-culture tag-kobold-press tag-hasbro tag-tales-of-the-valiant tag-ai">
+    <a class="gh-card-link" href="/corporate-ai-will-save-creatives-for-last/">
+            <figure class="gh-card-image">
+                <img
+                    srcset="https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w160/format/webp/2024/09/1920-x-1080-ToV-1536x864-1.webp 160w,
+                            https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w320/format/webp/2024/09/1920-x-1080-ToV-1536x864-1.webp 320w,
+                            https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w600/format/webp/2024/09/1920-x-1080-ToV-1536x864-1.webp 600w,
+                            https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w960/format/webp/2024/09/1920-x-1080-ToV-1536x864-1.webp 960w,
+                            https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w1200/format/webp/2024/09/1920-x-1080-ToV-1536x864-1.webp 1200w,
+                            https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w2000/format/webp/2024/09/1920-x-1080-ToV-1536x864-1.webp 2000w"
+                    sizes="320px"
+                    src="https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w600/2024/09/1920-x-1080-ToV-1536x864-1.webp"
+                    alt="A lich riding a dragon burns a wizard on top of a snow mountain."
+                    loading="lazy"
+                >
+            </figure>
+        <div class="gh-card-wrapper">
+            <p class="gh-card-tag">culture</p>
+            <h3 class="gh-card-title is-title">Corporate AI will save creatives for last</h3>
+            <p class="gh-card-excerpt is-body">The LLM-powered call is coming from inside the house.</p>
+            <footer class="gh-card-meta">
+                    <span class="gh-card-author">Chase Carter</span>
+                    <time class="gh-card-date" datetime="2024-09-20">Sep 20, 2024</time>
+            </footer>
+        </div>
+    </a>
+</article>                        <article class="gh-card post tag-tabletop tag-business tag-hasbro tag-chris-cocks tag-ai tag-dnd tag-magic-the-gathering">
+    <a class="gh-card-link" href="/manufacturing-consent-in-hasbros-toy-factory/">
+            <figure class="gh-card-image">
+                <img
+                    srcset="https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w160/format/webp/2024/09/photo-1503694978374-8a2fa686963a.jpeg 160w,
+                            https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w320/format/webp/2024/09/photo-1503694978374-8a2fa686963a.jpeg 320w,
+                            https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w600/format/webp/2024/09/photo-1503694978374-8a2fa686963a.jpeg 600w,
+                            https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w960/format/webp/2024/09/photo-1503694978374-8a2fa686963a.jpeg 960w,
+                            https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w1200/format/webp/2024/09/photo-1503694978374-8a2fa686963a.jpeg 1200w,
+                            https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w2000/format/webp/2024/09/photo-1503694978374-8a2fa686963a.jpeg 2000w"
+                    sizes="320px"
+                    src="https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w600/2024/09/photo-1503694978374-8a2fa686963a.jpeg"
+                    alt="Manufacturing consent in Hasbro’s toy factory"
+                    loading="lazy"
+                >
+            </figure>
+        <div class="gh-card-wrapper">
+            <p class="gh-card-tag">tabletop</p>
+            <h3 class="gh-card-title is-title">Manufacturing consent in Hasbro’s toy factory</h3>
+            <p class="gh-card-excerpt is-body">You are not immune to propaganda, but you can watch it happen in real time.</p>
+            <footer class="gh-card-meta">
+                    <span class="gh-card-author">Chase Carter</span>
+                    <time class="gh-card-date" datetime="2024-09-12">Sep 12, 2024</time>
+            </footer>
+        </div>
+    </a>
+</article>                        <article class="gh-card post tag-community tag-wizards-of-the-coast tag-hasbro tag-ai tag-business tag-venturebeat">
+    <a class="gh-card-link" href="/wizards-of-the-coasts-latest-ai-experiment-isnt-sexy-but-we-should-still-pay-attention/">
+            <figure class="gh-card-image">
+                <img
+                    srcset="https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w160/format/webp/2024/08/andrea-piparo-scary-modron-march-x-1.jpg 160w,
+                            https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w320/format/webp/2024/08/andrea-piparo-scary-modron-march-x-1.jpg 320w,
+                            https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w600/format/webp/2024/08/andrea-piparo-scary-modron-march-x-1.jpg 600w,
+                            https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w960/format/webp/2024/08/andrea-piparo-scary-modron-march-x-1.jpg 960w,
+                            https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w1200/format/webp/2024/08/andrea-piparo-scary-modron-march-x-1.jpg 1200w,
+                            https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w2000/format/webp/2024/08/andrea-piparo-scary-modron-march-x-1.jpg 2000w"
+                    sizes="320px"
+                    src="https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w600/2024/08/andrea-piparo-scary-modron-march-x-1.jpg"
+                    alt="A line of mechanical creatures, Modrons, march through a fungus-lined cave."
+                    loading="lazy"
+                >
+            </figure>
+        <div class="gh-card-wrapper">
+            <p class="gh-card-tag">community</p>
+            <h3 class="gh-card-title is-title">Wizards of the Coast&#x27;s latest AI experiment isn’t sexy, but we should still pay attention</h3>
+            <p class="gh-card-excerpt is-body">When you say AI shouldn’t replace workers, that includes engineers.</p>
+            <footer class="gh-card-meta">
+                    <span class="gh-card-author">Chase Carter</span>
+                    <time class="gh-card-date" datetime="2024-08-12">Aug 12, 2024</time>
+            </footer>
+        </div>
+    </a>
+</article>                        <article class="gh-card post tag-tabletop tag-dnd tag-ai tag-d-d-2024 tag-internet-detectives">
+    <a class="gh-card-link" href="/dungeons-dragons-new-art-direction-isnt-ai-generated-but-almost-worse-boring/">
+            <figure class="gh-card-image">
+                <img
+                    srcset="https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w160/format/webp/2024/06/GQefouDXIAADXNu-1.jpeg 160w,
+                            https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w320/format/webp/2024/06/GQefouDXIAADXNu-1.jpeg 320w,
+                            https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w600/format/webp/2024/06/GQefouDXIAADXNu-1.jpeg 600w,
+                            https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w960/format/webp/2024/06/GQefouDXIAADXNu-1.jpeg 960w,
+                            https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w1200/format/webp/2024/06/GQefouDXIAADXNu-1.jpeg 1200w,
+                            https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w2000/format/webp/2024/06/GQefouDXIAADXNu-1.jpeg 2000w"
+                    sizes="320px"
+                    src="https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w600/2024/06/GQefouDXIAADXNu-1.jpeg"
+                    alt="Three generic heroic fantasy figures: a rogue, warrior and mage of some kind."
+                    loading="lazy"
+                >
+            </figure>
+        <div class="gh-card-wrapper">
+            <p class="gh-card-tag">tabletop</p>
+            <h3 class="gh-card-title is-title">Dungeons &amp; Dragons’ new art direction isn’t AI generated but almost worse—boring</h3>
+            <p class="gh-card-excerpt is-body">Characters, without character.</p>
+            <footer class="gh-card-meta">
+                    <span class="gh-card-author">Chase Carter</span>
+                    <time class="gh-card-date" datetime="2024-06-25">Jun 25, 2024</time>
+            </footer>
+        </div>
+    </a>
+</article>                        <article class="gh-card post tag-tabletop tag-public-article tag-news tag-evil-genius-games tag-dave-scott tag-ai tag-nfts tag-everyday-heroes">
+    <a class="gh-card-link" href="/rpg-publisher-that-promised-not-to-use-web3-technology-in-their-business-does-it-anyway/">
+            <figure class="gh-card-image">
+                <img
+                    srcset="https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w160/format/webp/2024/06/Screenshot-2024-06-18-at-6.20.39-PM-1-1.png 160w,
+                            https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w320/format/webp/2024/06/Screenshot-2024-06-18-at-6.20.39-PM-1-1.png 320w,
+                            https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w600/format/webp/2024/06/Screenshot-2024-06-18-at-6.20.39-PM-1-1.png 600w,
+                            https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w960/format/webp/2024/06/Screenshot-2024-06-18-at-6.20.39-PM-1-1.png 960w,
+                            https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w1200/format/webp/2024/06/Screenshot-2024-06-18-at-6.20.39-PM-1-1.png 1200w,
+                            https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w2000/format/webp/2024/06/Screenshot-2024-06-18-at-6.20.39-PM-1-1.png 2000w"
+                    sizes="320px"
+                    src="https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/size/w600/2024/06/Screenshot-2024-06-18-at-6.20.39-PM-1-1.png"
+                    alt="Key art for Everyday Heroes RPG. Three people posed in front of a fiery explosion in an urban city."
+                    loading="lazy"
+                >
+            </figure>
+        <div class="gh-card-wrapper">
+            <p class="gh-card-tag">tabletop</p>
+            <h3 class="gh-card-title is-title">RPG publisher that promised not to use Web3 technology in their business does it anyway</h3>
+            <p class="gh-card-excerpt is-body">Evil Genius Games wants to sell you a digital version of Rambo’s M60 for roleplay purposes.</p>
+            <footer class="gh-card-meta">
+                    <span class="gh-card-author">Chase Carter</span>
+                    <time class="gh-card-date" datetime="2024-06-18">Jun 18, 2024</time>
+            </footer>
+        </div>
+    </a>
+</article>
+            </div>
+        </main>
+
+
+
+    </div>
+</section>
+</main>
+    
+    <footer class="gh-footer gh-outer">
+    <div class="gh-footer-inner gh-inner">
+
+        <div class="gh-footer-bar">
+
+            
+
+            <nav class="gh-footer-menu">
+                <ul class="nav">
+    <li class="nav-subscribe"><a href="#/portal/">Subscribe</a></li>
+    <li class="nav-staff"><a href="https://www.rascal.news/staff/">Staff</a></li>
+    <li class="nav-send-a-tip-narrative"><a href="https://www.rascal.news/contact/">Send a Tip (narrative)</a></li>
+    <li class="nav-faq"><a href="https://www.rascal.news/faq/">FAQ</a></li>
+    <li class="nav-send-a-tip-money"><a href="https://www.rascal.news/tip-jar/">Send a Tip (money)</a></li>
+    <li class="nav-write-for-rascal"><a href="https://www.rascal.news/write-for-rascal/">Write for Rascal</a></li>
+    <li class="nav-ethics-standards-and-disclosures"><a href="https://www.rascal.news/ethics/">Ethics, Standards, and Disclosures</a></li>
+    <li class="nav-bluesky"><a href="https://bsky.app/profile/rascal.news">Bluesky</a></li>
+    <li class="nav-public-rss"><a href="https://www.rascal.news/rss/">Public RSS</a></li>
+    <li class="nav-rascal-gift-subscriptions"><a href="https://www.rascal.news/#/portal/gift">Rascal Gift Subscriptions</a></li>
+    <li class="nav-full-text-rss"><a href="https://www.rascal.news/advanced-settings/">Full-text RSS</a></li>
+    <li class="nav-the-back-of-the-book"><a href="https://www.rascal.news/thanks/">The Back of the Book</a></li>
+</ul>
+
+            </nav>
+            
+            <div class="gh-footer-signup">
+                <p><img src="https://storage.ghost.io/c/ef/f6/eff60224-32f0-4628-a535-9939a71e5a38/content/images/2024/02/logo-1.webp" alt="Rascal News"></p>
+                <p class="gh-footer-signup-subhead is-body">Rascal is a tabletop roleplaying game and culture outlet striving to sustainably publish voicey journalism that is compelling, deeply-reported, and fearlessly honest. We’re also a little cheeky.</p>
+            </div>
+            
+ 
+            
+
+
+
+        </div>
+        <div class="gh-footer-copyright">
+                
+            <p>© 2026 Rascal News</p>
+
+        </div>
+
+    </div>
+</footer>    
+</div>
+
+
+<script src="https://www.rascal.news/assets/built/source.js?v=fO0FIOFT6UAWW5WA"></script>
+
+<script src="https://api.readwithacta.com/api/v1/public/static/ESIv10aqqj.js" crossorigin="anonymous"></script>
+<script>
+!function(w,d,id,ns,s){var c=w[ns]=w[ns]||{};if(c.ready||(c.q=[],c.ready=function(){c.q.push(arguments)}),!d.getElementById(id)){var e=d.createElement(s);e.id=id,e.defer=true,e.src="https://assets.context.ly/kit/6.latest/loader.js";var h=d.getElementsByTagName(s)[0];h.parentNode.insertBefore(e,h)}}(window,document,"ctx-loader","Contextly","script");
+</script>
+<script>
+Contextly.ready('widgets');
+</script>
+<script>
+  const OutpostPub = {
+    apiDomain: "https://rascalnews.outpost.pub",
+    apiKey: "dc2f5799-3bbb-4d8f-985a-881becfec4e9",
+    siteName: "Rascal News",
+    memberId: "",
+    memberEmail: "",
+  }
+</script>
+<script defer src="https://assets.outpostpublishingcoop.com/assets/v2/js/outpost-pub.js"></script>
+
+</body>
+</html>

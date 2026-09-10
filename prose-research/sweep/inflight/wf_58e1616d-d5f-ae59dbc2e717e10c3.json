@@ -1,0 +1,33 @@
+{
+ "role": "verifier",
+ "name": "wolfe",
+ "angle": null,
+ "tag": "i75-89",
+ "lines": 64,
+ "firstTs": "2026-09-06T16:57:12.135Z",
+ "lastTs": "2026-09-06T17:02:31.188Z",
+ "tools": {
+  "Read": 5,
+  "ToolSearch": 1,
+  "Bash": 10,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [
+  "https://ansible.uk/cc/cc77.html",
+  "https://web.archive.org/web/2004/http://home.clara.net/andywrobertson/wolfemountains.html",
+  "https://web.archive.org/web/2008/http://www.sfsite.com/fsf/2007/gwng0704.htm",
+  "https://journal.neilgaiman.com/2007/03/gene-wolves.html",
+  "https://sf-encyclopedia.com/entry/wolfe_gene",
+  "https://ansible.uk/cc/"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "st route with a browser user agent (ansible.uk live; the two Wayback URLs resolved to captures 20041204121515 and 20090206225429; journal.neilgaiman.com and sf-encyclopedia.com live) — no BLOCKED, no summarizer in the path: every quote was checked by exact string match against the stripped raw HTML.",
+ "run": "wf_58e1616d-d5f",
+ "agent": "ae59dbc2e717e10c3",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_58e1616d-d5f/agent-ae59dbc2e717e10c3.jsonl",
+ "journal": "result",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-wolfe-i75-89.json",
+  "exists": true
+ }
+}

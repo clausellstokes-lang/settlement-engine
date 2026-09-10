@@ -1,0 +1,48 @@
+{
+ "role": "finder",
+ "name": "wolfe",
+ "angle": "craft",
+ "tag": null,
+ "lines": 90,
+ "firstTs": "2026-09-06T11:45:18.610Z",
+ "lastTs": "2026-09-06T11:47:08.146Z",
+ "tools": {
+  "ToolSearch": 1,
+  "WebSearch": 13,
+  "Bash": 2,
+  "WebFetch": 19
+ },
+ "urlsFetched": [
+  "https://countercraft.substack.com/p/why-you-should-read-gene-wolfe-and",
+  "https://maxgladstone.substack.com/p/the-wolfeman",
+  "https://aidanmoher.com/blog/featured-article/2014/07/gene-wolfe-reliably-unreliable-author-chris-gerwel/",
+  "https://litreactor.com/columns/primer-gene-wolfe-the-subtle-master/",
+  "https://www.murrayewing.co.uk/mewsings/2010/09/11/the-secret-to-reading-gene-wolfe/",
+  "https://www.wolfewiki.com/pmwiki/pmwiki.php?n=OnlineArticles.HowToReadGeneWolfe",
+  "https://substack.com/home/post/p-153880039",
+  "https://www.waggish.org/2007/gene-wolfe-the-book-of-the-new-sun/",
+  "https://floydholland.substack.com/p/the-enchanting-prose-of-gene-wolfe",
+  "https://barach.us/2007/03/03/how-to-read-gene-wolfe/",
+  "https://dmrbooks.com/test-blog/2019/5/10/books-of-gold-reading-gene-wolfe",
+  "https://clarkesworldmagazine.com/wolfe_interview/",
+  "https://clarkesworldmagazine.com/wolfe_interview_2015/",
+  "https://writersofthefuture.com/forum/interviews-entrants-judges-past-winners/writing-advice-from-gene-wolfe/",
+  "https://www.blackgate.com/2010/11/23/and-it-goes-on-from-there-an-interview-with-gene-wolfe/",
+  "https://gwern.net/doc/fiction/gene-wolfe/2007-hall.pdf",
+  "https://tachy.org/posts/botns/",
+  "https://opus.ing/posts/gene-wolfe-fantastical-language",
+  "https://steemit.com/science/@ccscott/gene-wolfe-and-great-prose"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "I'll load the web tools and begin the sweep.",
+ "run": "wf_fd075948-57b",
+ "agent": "a8b75be74f68dd4bc",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_fd075948-57b/agent-a8b75be74f68dd4bc.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-wolfe-craft.json",
+  "claims": 89,
+  "complete": true,
+  "mtime": "12:23:26"
+ }
+}

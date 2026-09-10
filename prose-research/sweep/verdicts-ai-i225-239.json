@@ -1,0 +1,235 @@
+{
+ "name": "ai",
+ "chunk": 8,
+ "sourceChunkFile": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/ai-02.json",
+ "sourceChunkNote": "Task named chunks/ai-08.json, which does not exist; the manifest places indices 225-239 in ai-02.json (chunk 2), matching this checkpoint's i225-239 filename. Claims below are copied verbatim from that file.",
+ "claims": [
+  {
+   "index": 225,
+   "feature": "em dash",
+   "claim": "Measured human em dash density (mean 3.23, range 0.33–17.12 per 1,000 words) envelops the LLM range (0.0–10.62 across twelve models), and the rate is a provider-specific fine-tuning artifact, with Llama's RLHF suppressing it to zero.",
+   "source": "arXiv 2603.27006 — E. M. Freeburg, The Last Fingerprint",
+   "url": "https://arxiv.org/html/2603.27006v1",
+   "quote": "a diagnostic signature of how a model was fine-tuned",
+   "page": "How Markdown Training Shapes LLM Prose"
+  },
+  {
+   "index": 226,
+   "feature": "em dash",
+   "claim": "Readers who relied on em dashes to spot ChatGPT text performed only marginally better than chance, and no single lexical or punctuation feature is definitive.",
+   "source": "The Conversation — Roger J. Kreuz, 2025-07-30",
+   "url": "https://theconversation.com/too-many-em-dashes-weird-words-like-delves-spotting-text-written-by-chatgpt-is-still-more-art-than-science-259629",
+   "quote": "only marginally better than chance",
+   "page": "Spotting text written by ChatGPT is still more art than science"
+  },
+  {
+   "index": 227,
+   "feature": "em dash",
+   "claim": "Heavy em dash use in contemporary fiction has been taught by New York editors since the 1990s, and the tells cited against Shy Girl (flat voice, improbable similes, em dashes) equally fit unedited, neurodivergent or ESL human writing.",
+   "source": "Anne R. Allen, 2026-03-28",
+   "url": "https://annerallen.com/2026/03/does-the-shy-girl-ai-accusation-mean-writers-should-stop-using-the-em-dash/",
+   "quote": "also be attributed to amateurish or unedited writing",
+   "page": "Does the Shy Girl Mess Mean We Give Up the Em Dash?"
+  },
+  {
+   "index": 228,
+   "feature": "em dash; triads; Oxford comma",
+   "claim": "Em dashes, serial commas and the rule of three are basic tenets of fiction that a human author can deploy in a single self-written sentence, so their presence is not evidence of generation.",
+   "source": "Sarah Goehrke (Substack), 2026-08-21",
+   "url": "https://sarahgoehrke.substack.com/p/ai-em-dashes-and-witch-hunts",
+   "quote": "touted as being 'clear indicators of AI usage'",
+   "page": "AI, Em-Dashes, and Witch Hunts"
+  },
+  {
+   "index": 229,
+   "feature": "triads / rule of three",
+   "claim": "The tricolon is a canonical human device — Caesar, Lincoln, Churchill, King, fairy tales, Aristotle's beginning-middle-end — because three is the smallest count that makes a pattern.",
+   "source": "Wikipedia — Rule of three (writing)",
+   "url": "https://en.wikipedia.org/wiki/Rule_of_three_(writing)",
+   "quote": "combines both brevity and rhythm",
+   "page": "Rule of three (writing)"
+  },
+  {
+   "index": 230,
+   "feature": "triads / rule of three",
+   "claim": "Craft guidance for novelists teaches deliberate use of triads (omne trium perfectum, Dickens' three spirits, three-act structure), with the only caution being restraint.",
+   "source": "Jericho Writers — Amy de la Force, 2022",
+   "url": "https://jerichowriters.com/the-rule-of-three-in-writing/",
+   "quote": "Don't overdo it.",
+   "page": "The Rule Of Three In Writing: Our Guide"
+  },
+  {
+   "index": 231,
+   "feature": "triads / rule of three",
+   "claim": "A detector vendor concedes that LLM triads are a reflection of effective communication strategies in human training data and that professional writing employs the rule of three for clarity.",
+   "source": "GPTZero blog — Faizan Mehdi, 2024-03-04",
+   "url": "https://gptzero.me/news/the-rule-of-three/",
+   "quote": "a reflection of effective communication strategies embedded within their training data",
+   "page": "How to Break Free from GPT's Rule of Three in Writing"
+  },
+  {
+   "index": 232,
+   "feature": "antithesis / not X but Y",
+   "claim": "Even a writer who calls 'It's not X; it's Y' the biggest ChatGPT tell concedes contrastive antithesis is concise, was stylish before saturation, and is failing as a fashion cycle rather than as a device.",
+   "source": "Hardly Working (Substack) — Harjas Sandhu, 2026-01-11",
+   "url": "https://hardlyworking1.substack.com/p/how-to-avoid-sounding-like-a-stupid",
+   "quote": "contrastive antithesis is part of ChatGPT's lexicon for a reason.",
+   "page": "Some alternatives to \"It's not X; it's Y\""
+  },
+  {
+   "index": 233,
+   "feature": "parallel constructions / antithesis",
+   "claim": "Wikipedia's own AI-cleanup guide states parallel constructions are common among human writers (myth-busting listicles), that none of its signs prove AI authorship, and that human writing is converging on LLM style.",
+   "source": "Wikipedia:Signs of AI writing",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "Not all text featuring these indicators is AI-generated",
+   "page": "Signs of AI writing"
+  },
+  {
+   "index": 234,
+   "feature": "detection heuristics",
+   "claim": "Wikipedia's guide warns that automated detectors have non-trivial error rates and cites a 2025 study finding human discrimination of LLM text no better than chance.",
+   "source": "Wikipedia:Signs of AI writing",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "Human speech and writing is being influenced by LLMs",
+   "page": "Signs of AI writing"
+  },
+  {
+   "index": 235,
+   "feature": "vocabulary (delve)",
+   "claim": "Nigerian and other British-colonial-educated English speakers use 'delve' as an ordinary word from school onward, so a single-word tell convicts entire human dialects.",
+   "source": "Vanguard (Nigeria), 2024-04",
+   "url": "https://www.vanguardngr.com/2024/04/nigerians-tackle-american-author-for-claiming-delve-is-only-used-by-chatgpt/",
+   "quote": "no one used basic words like 'delve'",
+   "page": "Nigerians tackle American author for claiming 'delve' is only used by ChatGPT"
+  },
+  {
+   "index": 236,
+   "feature": "vocabulary (delve) — counter-counter",
+   "claim": "Corpus analysis finds the 21 LLM focal words (delve, intricate, underscore, realm...) are probably not overrepresented in training data and not especially prevalent in any human English variety, undercutting the 'it's Nigerian English' defence while confirming the base-rate shift in LLM output is real and likely post-training.",
+   "source": "arXiv 2412.11385 — Juzek & Ward, Why Does ChatGPT 'Delve' So Much? (COLING 2025)",
+   "url": "https://arxiv.org/html/2412.11385v1",
+   "quote": "probably not overrepresented in the training data",
+   "page": "Sources of Lexical Overrepresentation in LLMs"
+  },
+  {
+   "index": 237,
+   "feature": "machine detectors (perplexity)",
+   "claim": "Seven commercial detectors flagged 61.22% of 91 human-written TOEFL essays as AI (19.78% unanimously, 97.80% by at least one) while scoring near-perfectly on US 8th-grade essays, because they punish low-perplexity plain prose.",
+   "source": "arXiv 2304.02819 — Liang, Yuksekgonul, Mao, Wu, Zou, 2023",
+   "url": "https://arxiv.org/abs/2304.02819",
+   "quote": "average false positive rate: 61.22%",
+   "page": "GPT detectors are biased against non-native English writers"
+  },
+  {
+   "index": 238,
+   "feature": "machine detectors (evasion)",
+   "claim": "A single 'employ literary language' self-edit prompt dropped detection of ChatGPT essays from up to 100% to up to 13% and of abstracts from 68% to 28%, so ornate prose evades detectors — the inverse of the folk tells.",
+   "source": "arXiv 2304.02819 — Liang et al., 2023",
+   "url": "https://arxiv.org/abs/2304.02819",
+   "quote": "detection rates dropping from up to 100% to up to 13%",
+   "page": "GPT detectors are biased against non-native English writers"
+  },
+  {
+   "index": 239,
+   "feature": "machine detectors (bias)",
+   "claim": "Detectors learn that predictable word choice and simple sentences mean AI, so non-native writers' restricted vocabulary is misread as machine output.",
+   "source": "The Markup — Tara García Mathewson, 2023-08-14",
+   "url": "https://themarkup.org/machine-learning/2023/08/14/ai-detection-tools-falsely-accuse-international-students-of-cheating",
+   "quote": "inherently discriminates against non-native authors",
+   "page": "AI Detection Tools Falsely Accuse International Students of Cheating"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 225,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a diagnostic signature of how a model was fine-tuned",
+   "note": "Quote exact. Every figure confirmed: 'weighted mean across our sample was 3.23 per 1,000 words (median 3.83; range 0.33-17.12)'; GPT-4.1 unconstrained 10.62; 'twelve models from five providers'; 'Meta's Llama models produce zero'; base-vs-instruct Llama 3.1 8B shows 'a latent tendency exists pre-RLHF, with the direction and magnitude of amplification determined by the fine-tuning procedure'. One loose word: 'envelops' overstates - the human range 0.33-17.12 does not reach the LLM floor of 0.0."
+  },
+  {
+   "index": 226,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "only marginally better than chance",
+   "note": "Quote exact: 'the participants' rate of AI detection was only marginally better than chance', in the passage about a study citing 'excessive use of em dashes ... as one marker of computer-generated output'. Second half also supported: the article reports of the feature list that 'none are definitive on their own'."
+  },
+  {
+   "index": 227,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "also be attributed to amateurish or unedited writing",
+   "note": "Quote exact (Anne R. Allen quoting Mark Williams at TNPS). New York/1990s supported: 'Because New York publishing taught us to. I first heard the term \"em dash\" ... in the mid-1990s. I'd scored an in-person critique ... by a real New York editor.' Neurodivergent/ESL supported: 'these are also the \"tells\" of an autistic or ESL writer.' One gloss: the reported tells are 'the narrative voice was all over the place', 'no emotional engagement', 'improbable similes and superfluous verbiage' - 'flat voice' is the claim's paraphrase, not the article's word."
+  },
+  {
+   "index": 228,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "touted as being “clear indicators of AI usage”",
+   "note": "Words verbatim; only the nested quotation marks differ (page uses curly doubles, the claim renders them as singles). Full sentence: 'So many basic tenets of fiction have been touted as being \"clear indicators of AI usage\" including-but by no means limited to-em-dashes, oxford/serial commas, and the rule of three.' The single-sentence demonstration is on the page too: 'I seem to have used all three of those in the preceding sentence. And yet ... I wrote it completely by myself.'"
+  },
+  {
+   "index": 229,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "combines both brevity and rhythm",
+   "note": "Quote exact, and the reason clause the claim leans on is the same sentence: 'with the smallest amount of information needed to create a pattern'. Every exemplar present: 'Veni, vidi, vici ... attributed to Julius Caesar'; 'Government of the people, by the people, for the people - from Lincoln's Gettysburg Address'; Churchill's 'blood, toil, tears and sweat'; 'Martin Luther King Jr. ... was known for his uses of tripling'; folk and fairy tales; 'beginning, middle, and end, as expressed in Aristotle's Poetics'."
+  },
+  {
+   "index": 230,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Tip: Don't overdo it.",
+   "note": "Quote exact (page reads 'Tip: Don't overdo it.'). Triad exemplars confirmed: \"'Omne trium perfectum' 'Everything that comes in threes is perfect'\"; 'Dickens' novella A Christmas Carol ... visited by three spirits'; 'using a three-act plot structure'. The caution is indeed restraint - 'can easily err into the dreaded flowery or purple prose'."
+  },
+  {
+   "index": 231,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a reflection of effective communication strategies embedded within their training data",
+   "note": "Quote exact, on the GPTZero blog (the detector vendor's own site). The second half is the next sentence: 'Professional writing probably employs this \"rule of three\" for clarity'. Framing check: the page attributes the quoted phrase to 'AI writing tools', so the concession is reported by the vendor rather than authored as its own analysis."
+  },
+  {
+   "index": 232,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "contrastive antithesis is part of ChatGPT's lexicon for a reason.",
+   "note": "Quote exact. All four sub-claims land: '\"It's not X; it's Y\" is the single biggest tell that a piece of writing was written by ChatGPT'; 'It's not stupid; it's concise'; 'it was probably pretty stylish before it got overused'; and the fashion-cycle framing, 'niche things gain prominence, become overused, and then fall out of fashion all the time.'"
+  },
+  {
+   "index": 233,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Not all text featuring these indicators is AI-generated",
+   "note": "Quote exact. Parallel constructions: 'It is common for LLMs to use parallel constructions involving \"not\", \"but\", or \"however\"', and of that pattern, 'While it is common among human writers (especially in \"common misconceptions\" or \"myths busted\" listicles), it is stereotypically an \"AI sign.\"' Convergence: 'human speech and writing is being influenced by LLMs, and thus they are becoming more similar.'"
+  },
+  {
+   "index": 234,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Human speech and writing is being influenced by LLMs",
+   "note": "Quote exact. Both halves of the claim are on the page in near-identical wording: 'While they perform better than random chance, these tools have non-trivial error rates'; and 'a 2025 study has shown that human ability to distinguish LLM text from human is no better than random chance.' Note the quote chosen sits on the convergence point rather than on either half of the claim it is attached to."
+  },
+  {
+   "index": 235,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "no one used basic words like 'delve'",
+   "note": "Quote exact, inside a quoted tweet: 'Imagine after being force-fed colonial languages, being forced to speak it better than its owners then being told that no one used basic words like \\'delve\\' in real life. Habibi, come to Nigeria.' Ordinary-word usage is evidenced by a second tweet: 'As an ardent reader, I've been using \\'delve\\' since I was a teenager mostly in writing. Today as a teacher I use it a lot more in speaking.' 'From school onward' is the claim's gloss on that; the article never says 'school'."
+  },
+  {
+   "index": 236,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "probably not overrepresented in the training data",
+   "note": "Quote exact. '21 focal words' exact, and delve/intricate/underscore/realm are all in the Table 2 list. Variety claim exact in substance: 'we do not find evidence that the focal words are especially prevalent in any particular variety of English'; the Nigerian-English hypothesis is named and rejected - 'Our initial analysis of ICE does not support this hypothesis.' One hedge lost in the claim: the paper says only that 'the model testing is consistent with RLHF playing a role', weaker than 'likely post-training'."
+  },
+  {
+   "index": 237,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "average false positive rate: 61.22%",
+   "note": "Quote exact, and every figure checks: 'a corpus of 91 human-authored TOEFL essays ... and 88 US 8-th grade essays'; 'near-perfect accuracy for US 8-th grade essays'; '(average false positive rate: 61.22%)'; 'All seven detectors unanimously identified 18 of the 91 TOEFL essays (19.78%)'; '89 of the 91 TOEFL essays (97.80%) are flagged ... by at least one detector'; and the perplexity mechanism, 'significantly lower perplexity'. URL precision: the cited /abs/2304.02819 page carries only the abstract - the quote lives in the full text at arxiv.org/html/2304.02819v3, reached from that page's HTML link."
+  },
+  {
+   "index": 238,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "reduced detection rates from 100% to 13%",
+   "note": "Quote is a paraphrase, not on the page in any form; the paper reads 'a second-round self-edit prompt (\"Elevate the provided text by employing literary language\") applied to ChatGPT-3.5 significantly reduced detection rates from 100% to 13%' - no 'up to' on either figure. The abstract figures are right (68% -> 28%: 'still identified up to 68% of fake abstracts ... lowered detection rates to up to 28%') but come from a DIFFERENT prompt, 'employing advanced technical language', so the claim's 'a single \\'employ literary language\\' self-edit prompt' covering both results is wrong. Same URL caveat as 237: figures are in the full text, not the /abs/ page."
+  },
+  {
+   "index": 239,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "inherently discriminates against non-native authors",
+   "note": "Quote exact, from a Weixin Liang pull-quote: 'The design of many GPT detectors inherently discriminates against non-native authors, particularly those exhibiting restricted linguistic diversity and word choice.' The mechanism claim is the article's own sentence: 'AI detectors tend to be programmed to flag writing as AI-generated when the word choice is predictable and the sentences are more simple.'"
+  }
+ ]
+}

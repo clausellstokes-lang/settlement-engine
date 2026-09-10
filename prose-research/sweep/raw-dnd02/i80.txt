@@ -1,0 +1,80 @@
+ 
+ Unofficial D&D 2024 Style Guide (Your Capitalization Questions Answered!) « Blog of Holding 
+ « a quick peek at 2024 Monster Manual math 
+ 2024 Monster Manual on a Business Card » 
+ Unofficial D&D 2024 Style Guide (Your Capitalization Questions Answered!)
+ When I’m writing rules for D&D 2024, it annoys me not to have an official style guide. In its absence, I made my own style guide so I can quickly answer my own questions:
+ Is it “action” and “bonus action,” or “Action” and “Bonus Action?” (neither, it’s “action” and “Bonus Action”)
+ Am I “knocked Prone”, or do I “gain the Prone condition” or “have the Prone condition”? (All three)
+ “d20 test”, “d20 Test”, or “D20 Test”? (The latter)
+ (There are undoubtedly really good fan-made style guides out there, better than this! But this is what I have for now.)
+ Here is a google doc of v1 of my current unofficial D&D 2024 style guide . It’s set so you can make suggestions! Feel free to add corrections so we can keep this correct.
+ In case you don’t like clicking links, here’s my first draft of the style guide. (In the future I will probably keep the doc up to date but maybe not this blog post!)
+ Capitalization 
+ Capitalized: abilities (“Strength”), action type (“Attack action”), “Advantage/Disadvantage”, alignment (“Lawful Good”), area (“Emanation”), armor (“Scale Mail”), armor type (“Heavy armor”), “Armor Class”, attack (“Rend attack”), attitude (“Friendly”), “Attunement”, “Bloodied”, “Bonus Action”, “Challenge Rating”, class (“Barbarian”), class feature (“Cunning Action”), coins (“Gold Piece”), components (“Material”), condition (“Grappled”), cover (“Half Cover”), “Concentration”, creature type (“Beast”), “Critical Hit”, “D20 Test”, damage type (“Piercing”), “Death Saving Throw”, “Difficult Terrain”, “Difficulty Class”, “Dungeon Master”, equipment (“Ladder”), “Exhaustion”, “Experience Points”, “Expertise”, “Heroic Inspiration”, “High Jump”, “Hit Points”, “Hit Point Dice/Hit Dice”, “Immunity”, “Initiative”, lifestyle (“Wretched”), light (“Darkness”, “Dim Light”), “Long Jump”, magic item (“ Spell Scroll ”), obscured (“Lightly Obscured”), “Opportunity Attack”, “Origin feat”, “Passive Perception”, “Proficiency Bonus”, “Reaction”, “Resistance”, rest (“Short Rest”), “Ritual”, senses (“Tremorsense”) size (“Tiny”), skill (“Investigation”), species (“Human”), “Speed” (“Swim Speed”), spell (“ Fireball ”), “Spellcasting Focus”, “Stable”, subclass (“Path of the Berserker”), “Unarmed Strike”, “Temporary Hit Points”, “Vulnerability”, weapon (“Dagger”), weapon property or type (“Finesse”, “Melee”)
+ Not Capitalized: ”ability”, “ability modifier”, “action”, “alignment”, “ally”, “armor training”, “attack roll”, “attack bonus”, attack type (“melee attack”), “attuned”, “aura”, “background”, “burning”, “cantrip”, “character”, “class”, “damage”, “damage roll”, “feat”, “hazard”, “hide”, “hit”, “improvised weapon”, “level”, monster name (“skeleton”) (or perhaps its “ Skeleton ”, it’s inconsistent), “object”, “player”, “proficiency”, “round”, “save”, “saving throw”, “size”, “skill”, “species”, “spell”, “spell slot”, “stabilize”, “surprise”, “teleport” as a verb, “turn”
+ Usage Examples 
+ Abilities: “Dexterity modifier”
+ Ability checks and skills: “Whenever you make an ability check using one of the following skills, you can make it as a Strength check even if it normally uses a different ability” “make a Strength (Athletics) check” “you gain proficiency with three skills”
+ Actions: “take an action to” “take a Bonus Action” “As a Bonus Action, you can” “you can Influence a creature” “take the Search action” “after you x, you can y as a bonus action” “As a Magic action, you” Actions: Attack, Dash, Disengage, Dodge, Help, Hide, Influence, Magic, Ready, Search, Study, Utilize
+ Advantage/Disadvantage: “You have Advantage on Strength checks” “doing so gives you Advantage” “attack rolls against you have Advantage” “You have Advantage on any saving throw you make to end the Grappled condition” “being within 5 feet of an enemy doesn’t impose Disadvantage on your attack rolls”
+ Areas: “energy in a 30-foot Line that is 5 feet wide” “radiates from you in a 30-foot Emanation” “Each creature in a 15-foot Cone makes a Dexterity saving throw, taking 3d6 Fire damage on a failed save or half as much damage on a successful one.”
+ Armor Class/Armor: “Your base Armor Class is 10 plus your Dexterity modifier” “You gain training with Heavy armor”
+ Attacks: “make a melee spell attack” “make a melee attack with a Melee weapon”, “make an attack roll (I think the “attack roll bonus” on PHB 41 is incorrect)” “when a creature is hit by an attack roll” “when you hit a target with a weapon” “if you make an attack roll and the roll misses” “the lion makes two Rend attacks”
+ Bonus: “(minimum bonus of +1)”
+ Conditions: “gain the Grappled condition” “gain the Prone condition” “you’re knocked Prone” “causes them to have the Blinded condition” “fall unconscious” “have the Unconscious condition” “on a failed save, a creature has the Frightened condition for 1 minute. At the end of each of the Frightened creature’s turns, the creature repeats the save, ending the condition on itself on a success.” “You can cause a Large or smaller creature to have the prone condition when you hit it with a melee attack” “you can’t use this feature if you have the Incapacitated condition” “until you have the Incapacitated condition” “doesn’t give you levels of Exhaustion”
+ Concentration: When you damage a creature that is concentrating, it has Disadvantage on the saving throw it makes to maintain Concentration”
+ Creatures: “creature who can see or hear you” “Your enemies in the area have Disadvantage”
+ Critical Hit: “When you score a Critical Hit”
+ Equipment: “When you aren’t wearing armor or wielding a Shield”
+ Hit Points: “Hit Point maximum” “if you have 0 Hit Points” “you gain a number of Temporary Hit points equal to your barbarian level” “you can regain a number of hit points equal to” “you restore x Hit Points to the creature”
+ Initiative: “when you roll Initiative”
+ Levels: “When you gain a Bard level” “when you reach level 3”
+ Mastery: “You can activate the Topple mastery property”
+ Movement: “You can transport the creature up to 10 feet horizontally” “you can move a creature to an unoccupied space within 5 feet” “you push the target 5 feet from you”
+Opportunity Attacks: “without provoking opportunity attacks”
+ Proficiency/Expertise: “You gain proficiency in Wisdom saving throws” “you gain Expertise in two of your skill proficiencies of your choice” “you have proficiency in improvised weapons”
+ Rests: “After you xx in this way, you can’t do so again until you finish a Short or Long Rest unless you expend a xx (no action required) to restore your use of it” “you regain all expended uses when you finish a Short or Long Rest”
+ Resistance/Immunity/Vulnerability: You are immune to the Poisoned condition” “you have Resistance to Poison damage”
+ Saving Throws: “saving throw” but “Death Saving Throw” “The target must succeed on a Strength saving throw (DC 8 plus your Strength modifier and Proficiency Bonus or be teleported” “if you fail a saving throw” “fails a saving throw against an effect that applies the Charmed condition”
+ Senses: “You have Darkvision with a range of 60 feet.” “You gain Tremorsense with a range of 60 feet”
+ Speed: “your size and Speed” “You can move up to half your Speed” “the target’s Speed is reduced by 15 feet” “the target’s Speed is halved” “you have a Fly Speed equal to your Speed and can hover” “your Speed increases by 10 feet” “your Speed is 0”
+ Spells: “how many spell slots you have available, how many cantrips you know, and how many spells you can prepare” “Choose your cantrips and prepared spells” “Charisma is your spellcasting ability for your Bard spells” “you can expend a spell slot to” “you learn two spells of your choice” “cast the spell without Material components” “You always have the Telekinesis spell prepared. With this feature, you can cast it without a spell slot or components, and your spellcasting ability for it is Intelligence. Once you cast the spell with this feature, you can’t do so in this way again until you finish a Long Rest.” “You always have that spell prepared. You can cast it once without a spell slot, and you regain the ability to cast it in that way when you finish a Long Rest. You can also cast the spell using any spell slots you have.”
+ view as google doc 
+ Share:
+ Click to share on Facebook (Opens in new window) 
+ Click to share on Reddit (Opens in new window) 
+ Click to share on Twitter (Opens in new window) 
+ Click to share on Google+ (Opens in new window) 
+ This entry was posted on Tuesday, January 7th, 2025 at 3:26 pm and is filed under RPG Hub . You can follow any responses to this entry through the RSS 2.0 feed. 
+ You can leave a response , or trackback from your own site.
+ Leave a Reply
+ Click here to cancel reply. 
+ Name (required) 
+ Mail (will not be published) (required) 
+ Website 
+ Notify me of follow-up comments by email. 
+ Notify me of new posts by email. 
+ Monstrous Menagerie II 
+Kickstart my new book! 300 monsters for 5e and A5E!
+ Dungeon Delver's Guide 
+Get 100+ traps, 50+ monsters, and a definitive guide on how to dungeon!
+ Level Up: Advanced 5e Monstrous Menagerie 
+If you like my ideas on monster design, I wrote the Monstrous Menagerie, a 500+ page bestiary!
+ Battlezoo Bestiary 
+I wrote the 5e monster versions for this bestiary!
+ Buy D&D Posters and Books! 
+If you missed the kickstarter , you can still get the D&D posters containing new art and old rules for dungeon generation. You can also get Paul's DM Notebook.
+ Buy Stuff! 
+ Recent Posts
+ Draw Steel Monsters on a Credit Card 
+ I’m working at MCDM! 
+ where are psionics from? 
+ Distances in the 2024 Monster Manual 
+ 5e monsters: vulnerability is bad 
+ All Archives... 
+ Search
+ Search for: 
+ Follow @blogofholding 
+ Blog of Holding is proudly powered by WordPress 
+ Entries (RSS) and Comments (RSS) . 

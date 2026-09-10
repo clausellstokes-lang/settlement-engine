@@ -1,0 +1,21 @@
+{
+ "role": "verifier",
+ "name": "martin",
+ "angle": null,
+ "tag": "i375-389",
+ "lines": 5,
+ "firstTs": "2026-09-06T12:28:05.382Z",
+ "lastTs": "2026-09-06T12:28:05.722Z",
+ "tools": {},
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "You've hit your session limit · resets 12:20pm (America/New_York)",
+ "run": "wf_faf66625-17e",
+ "agent": "a01c28ba6153b58b1",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_faf66625-17e/agent-a01c28ba6153b58b1.jsonl",
+ "journal": "failed",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-martin-i375-389.json",
+  "exists": true
+ }
+}

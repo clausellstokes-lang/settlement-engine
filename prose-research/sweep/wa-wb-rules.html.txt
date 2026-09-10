@@ -1,0 +1,725 @@
+
+rules - worldbuilding
+/* Custom css: use this block to insert special translation-dependent css in the page header */
+jump to content
+my subreddits
+edit subscriptions
+popular
+-
+all
+-
+users
+ | 
+AskReddit
+-
+pics
+-
+funny
+-
+movies
+-
+gaming
+-
+worldnews
+-
+news
+-
+todayilearned
+-
+nottheonion
+-
+explainlikeimfive
+-
+mildlyinteresting
+-
+DIY
+-
+videos
+-
+OldSchoolCool
+-
+TwoXChromosomes
+-
+tifu
+-
+Music
+-
+books
+-
+LifeProTips
+-
+dataisbeautiful
+-
+aww
+-
+science
+-
+space
+-
+Showerthoughts
+-
+askscience
+-
+Jokes
+-
+Art
+-
+IAmA
+-
+Futurology
+-
+sports
+-
+UpliftingNews
+-
+food
+-
+nosleep
+-
+creepy
+-
+history
+-
+gifs
+-
+InternetIsBeautiful
+-
+GetMotivated
+-
+gadgets
+-
+announcements
+-
+WritingPrompts
+-
+philosophy
+-
+Documentaries
+-
+EarthPorn
+-
+photoshopbattles
+-
+listentothis
+-
+blog
+more »
+reddit.com
+ 
+worldbuilding
+hot
+new
+rising
+controversial
+top
+wiki
+Want to join? 
+Log in
+ or 
+sign up
+ in seconds.
+limit my search to r/worldbuilding
+use the following search parameters to narrow your results:
+subreddit:
+subreddit
+find submissions in "subreddit"
+author:
+username
+find submissions by "username"
+site:
+example.com
+find submissions from "example.com"
+url:
+text
+search for "text" in url
+selftext:
+text
+search for "text" in self post contents
+self:yes (or self:no)
+include (or exclude) self posts
+nsfw:yes (or nsfw:no)
+include (or exclude) results marked as NSFW
+e.g. 
+subreddit:aww site:imgur.com dog
+see the search faq for details.
+advanced search: by author, subreddit...
+Submit a new link
+Submit a new text post
+worldbuilding
+join
+leave
+Info
+For artists, writers, gamemasters, musicians, programmers, philosophers and scientists alike! The creation of new worlds and new universes has long been a key element of speculative fiction, from the fantasy works of Tolkien, Le Guin and Howard, to the science-fiction universes of Burroughs, Delany and Asimov, and to the tabletop realm of Gygax, Barker and Greenwood, and beyond.
+This subreddit is about sharing your worlds, discovering the creations of others, and discussing the many aspects of creating new universes.
+Rules
+Please read our full rules. We have high standards for on-topicness, respect of other people and respect for creative effort.
+Full Subreddit Rules
+Modmail
+Resources
+Every post needs 
+context
+!
+ Consider using our 
+context template
+ to get started. Unsure why context is important? Consider reading our 
+Why Context?
+ essay.
+Remember to 
+flair your posts
+.
+Remember to 
+check out the wiki
+ for lots of resources and tips on starting out!
+There is also a 
+curated list of resources
+ compiled via Discord.
+Chat
+Looking for more active discussion? We have live chat communities that are active just about 24/7! 
+Make sure to 
+read the chat rules 
+ first
+Discord Server
+Snoonet IRC Channel
+(#worldbuilding on irc.snoonet.org:6667, or 6697 for SSL)
+We also encourage users to 
+register an account
+.
+Related Subreddits
+General
+/r/worldjerking
+/r/conlangs
+ 
+/r/NSFWworldbuilding
+/r/WorldPrompts
+Characters
+/r/characterdevelopment
+/r/characterforge
+ 
+Tabletop
+/r/dnd
+/r/dungeonsanddragons
+/r/loremasters
+/r/rpg
+Visual
+/r/imaginarymaps
+ 
+/r/mapmaking
+/r/MapPorn
+ 
+/r/OldMaps
+/r/papertowns
+Genre Discussions
+/r/TheArtifice
+/r/fantasywriters
+ 
+/r/magicbuilding
+/r/scifi
+/r/scifiwriting
+External Resources
+The Cartographer's Guild
+TerraChronica
+The Worldbuilding School
+Worldbuilding Magazine
+Filters
+Maps Only
+No Maps!
+Guides & Tutorials
+Lore
+Art
+Discussions
+Prompts
+a community for 
+16 years
+WIKI TOOLS
+-
+recent wiki revisions
+wiki page list
+MODERATORS
+message the mods
+rules
+view
+history
+talk
+Preface
+Mission Statement
+The Rules
+0. No set of rules is exhaustive.
+1. Be kind to others and respect the community's purpose.
+2. All posts should include original, worldbuilding-related context.
+3. Put in some effort.
+4. This is a DIY community.
+5. NSFW content requires special care.
+6. We allow advertising, but it shouldn't disrupt the community.
+Major Policies
+Personally identifying information and doxxing
+Mental Health Issues
+Examples
+Citations (rule 4)
+Scenario 1
+Scenario 2
+Scenario 3
+Scenario 4
+Scenario 5
+Scenario 6
+Scenario 7
+Focus on original work (rule 4)
+Example 1
+Example 2
+Example 3
+Example 4
+Preface
+The current revision of this page will always reflect the latest rules in effect.
+History of the rules can be found in this page's history and at 
+the rules archive
+.
+Mission Statement
+For geeks and nerds, artists, writers, philosophers, politicians and scientists alike, the creation of new worlds and new universes has been a key element of science fiction and fantasy. It can also exist outside the realm of scifi-literature and RPG-gaming as a means of exploring possibilities.
+This subreddit is about sharing your worlds and discussing the many aspects of creating new universes.
+The Rules
+0. No set of rules is exhaustive.
+We moderate by the spirit of our rules, not the letter. These rules are guidelines, to be applied and interpreted with the goal of making 
+/r/worldbuilding
+ a pleasant and productive space for the worldbuilding community and creators of original worldbuilding content.
+From time to time, unforeseen or exceptional situations may arise. In these cases, the moderators of 
+/r/worldbuilding
+ reserve the right to take any action in the interests of the community.
+Moderator discretion may include, but is not limited to, removing posts or comments, banning users, or changing policy.
+We take pains to minimize the use of moderator discretion and subject discretionary calls to internal review.
+While there are no loopholes, we are willing to make exceptions to the rules where doing so is beneficial for the community or prevents an unjust or absurd outcome.
+/r/Worldbuilding
+ respects the law, Reddit's site-wide policies, and the policies of all other platforms we operate on.
+1. Be kind to others and respect the community's purpose.
+Follow the 
+reddiquette
+! It's all about respect, supporting original creators, and common sense.
+Be polite and courteous towards others, and do what you can to contribute to a pleasant, productive atmosphere for worldbuilders.
+Stay on-topic and try to avoid derailing conversations.
+You can be funny without being a jerk. Being ironic or sarcastic doesn't excuse bad behaviour.
+Don't hijack this subreddit to push a point of view or argue about real-world controversies.
+Be calm, avoid drama, and focus on solving problems maturely. It's not OK to participate in inter-community drama, ever.
+This community values honesty and critical integrity, but it also values inclusion and respect.
+We won't tolerate extreme toxicity, hate speech, political extremism, dog-whistles, or any other abuse of our users or community at large.
+2. All posts should include original, worldbuilding-related context.
+Context is how we decide whether or not a post is on-topic. Unless it's obvious, posts should include context relating to an original world or the hobby of worldbuilding.
+If your post is about your world, it has enough context when a person unfamiliar with your world could understand what you're talking about and ask informed questions about it. ("What's a [proper noun]?" usually doesn't qualify.)
+If your post is about something you think is useful to worldbuilders (inspiration, articles, and so on), it has enough context when a person unfamiliar with the subject could understand what you're talking about and why the item is relevant to worldbuilding. ("I found this inspirational" doesn't qualify. Put in some effort and talk about possibilities, or how it was useful to you, or what you think about it.)
+Context should focus on worldbuilding-related subjects like lore, themes, or the creative process, but may touch on other topics (like mapmaking or characterization) if worldbuilding details are included. (If your post isn't about worldbuilding, but rather about mapmaking or characterization or writing, consider one of the related communities listed in our sidebar.)
+Images (including maps) require added context, unless they are infographics that contextualize themselves. The text is the important part.
+All of the above goes for any kind of post, including resources, characters, articles, maps, lore posts, AMAs, or advertising.
+Always post your context on your 
+/r/worldbuilding
+ post for ease of access. Context can be in the body of a text post or in a top-level comment. Context in post titles is unlikely to be detailed enough, but can be OK.
+We give people 15 minutes to post context, so consider writing it up beforehand.
+3. Put in some effort.
+Every post should contribute to discussion about your work, someone else's work, or worldbuilding as a hobby.
+Always remember that you're presenting your work and thoughts to an audience, so communicate clearly.
+We moderate based on apparent effort, not quality. We also don't consider upvotes or downvotes when moderating.
+Don't take pictures with a potato, throw dozens of undefined proper nouns around, or totally ignore the rules of English.
+Avoid posting memes, contextless "inspiration", or pizza grease that looks like a map.
+Humour is fine, but don't shitpost excessively. The guideline is that a good shitpost requires as much effort as a non-shitpost.
+Don't make reposts or jump onto a bandwagon that's dominating the front page.
+4. This is a DIY community.
+/r/Worldbuilding
+ is made by and for original content creators and prioritises their interests.
+DIY
+: You're encouraged to ask for feedback, resources, or advice. However, do not ask this community to make things for you or do basic research or Googling on your behalf.
+Show of prior effort
+: If you ask for advice or ideas on something you are worldbuilding, you must show the effort you've already put in yourself. For example, you could mention ideas you've already had and why they're unsatisfactory to you, or what sources you've found and why they aren't meeting your needs.
+Respect and integrity
+: We respect creators' rights to their work, legal and moral, and do not tolerate plagiarism. We also expect you, as a creator, to be honest about what you're posting.
+Citations
+: If you present something that is not completely your original work, you must tell us who made it and where you got it from (called a "citation"), even if the work was commissioned, is public domain, or is of unknown origin (e.g. historical).
+Citations should be complete, close to the content, and make it clear that the content isn't yours. It's not OK to hide citations at the end. Visible endnote numbers like 
+[1]
+ (or similar) close to the content are OK and don't count as "hiding".
+Examples of citations
+Focus on original work
+: Posts about your world should focus on your original work, work you've substantially transformed, or work commissioned or produced specifically for your world.
+Unmodified non-original work should be included only as support material, not the focus of your post (
+examples of how to present non-original work
+).
+Resource posts and discussion posts are exempt, but citations are still required.
+Fanfiction
+: Our focus is on original worldbuilding projects. We don't consider this the right community for fanfiction worlds, even if we recognise that they can be substantially transformative. However, we do allow projects that make use of "open" 
+systems
+ such as Dungeons & Dragons.
+AI Content
+: AI art and writing generators tend to provide incomplete or even no proper citation for the material used to train the AI. Content created through such generators are considered incompatible with our policies on citation and are thus not appropriate for our community. An acceptable AI content generator would fully cite the original owners of all media used to train it. The media merely being 'public' does not qualify. Using AI to organize, edit, present, or rewrite material is also incompatible with our policies, regardless of its original origin.
+5. NSFW content requires special care.
+This community doesn't allow content intended only to shock, offend, disgust, or arouse.
+Pornographic worlds and content are not appropriate for this subreddit and should instead be posted to 
+r/NSFWworldbuilding
+.
+We support content that engages with mature or disturbing themes in a sensitive, intelligent way, even if some people find it disagreeable.
+Out of respect for others, all NSFW content should be marked. (Note that for posts, you can do this automatically by including "NSFW" in the title.)
+More specific content warnings are encouraged, but not required.
+When in doubt, err on the side of caution and mark your content as NSFW.
+The moderators reserve the right to apply common sense when deciding what is or isn't NSFW.
+6. We allow advertising, but it shouldn't disrupt the community.
+In general, we're tolerant of ads that respect our community and meet our worldbuilding context requirements.
+Having a previous relationship to 
+/r/worldbuilding
+ is not necessary to advertise here, but ads should be able to demonstrate some relevance and usefulness to the community.
+It's always okay to monetize your own worldbuilding using a Patreon link or something similar. Even selling merchandise is OK.
+Crowdfunding projects (e.g. Kickstarter) and surveys always require pre-approval by the moderation team.
+Advertisements for Non-Fungible Tokens (NFTs) or any similar items are strictly forbidden.
+Collaborative worldbuilding projects can recruit on 
+/r/worldbuilding
+, as long as they organize themselves elsewhere.
+Don't post any kind of ad more than once a month without a mod's approval.
+Ads that don't meet these requirements, are posted too frequently, or which are otherwise malicious will be considered spam.
+Major Policies
+Personally identifying information and doxxing
+We take doxxing very seriously on 
+/r/worldbuilding
+. Doxxing is 
+defined by Wikipedia
+ as "researching and broadcasting private or identifiable information (especially personally identifiable information) about an individual or organization. […] [Doxxing] may be carried out for various reasons, including to aid law enforcement, business analysis, risk analytics, extortion, coercion, harassment, online shaming, and vigilante justice."
+Doxxing already falls under the spirit of 
+Rule 1
+ and is enforced similarly to harassment of or threats against another person. Due to the particular nature of personally identifying information (PII), however, we have a specific policy about how we treat PII posted to the sub:
+Divulging any PII on any person, with the explicit or apparent intent to harass or cause any harm and/or where such action may reasonably be expected to lead to harm regardless of intent, is grounds for an immediate and permanent ban, as well as any escalation deemed necessary, including escalations to reddit administration or law enforcement. This is in accordance with the spirit of 
+Rule 1
+.
+Divulging any PII on any person, 
+without
+ apparent intent to harass or cause harm, is grounds for immediate removal of the PII, 
+unless
+ this PII is made publicly available by the identified party via verifiable means outside reddit (for example, a business website or public portfolio). This includes 
+your own
+ PII: it is not normally reasonable or possible for us to validate the owner of a reddit account as the owner of the PII, so we must treat all PII as a third party's. These situations will be enforced normally (and clearly unintentional first offences should generally only be met with a removal and explanatory message).
+We may make exceptions in some cases if we validate account ownership off-reddit in advance, e.g., if we officially host AMAs, panels or other guest events.
+Mental Health Issues
+Our hearts go out to those suffering from mental illness, and we recognize that a significant portion of our community deal with psychological or emotional problems in their everyday lives. People who suffer from mental illness are as welcome in this community as any other user.
+However, 
+/r/worldbuilding
+ is not a support community for depression or other mental health issues. While there is no shame in seeking professional help, 
+/r/worldbuilding
+ does not have the training, resources, or expertise needed to handle these situations. Using the community in this manner could be dangerous, and could create bad outcomes for everyone involved. As such, we ask you not to reference issues related to depression, suicide, or mental health on 
+/r/worldbuilding
+ in a way that can be construed as directly or indirectly asking for help or seeking attention.
+The moderators reserve the right to handle mental health issues on a discretionary basis. When handling these issues, we will attempt to weigh the interests of the community, moderation team, and persons in crisis. We respect the privacy rights and human dignity of users with mental health problems and will not tolerate attempts to out, shame, or harass them.
+If you are in crisis, or feeling depressed or suicidal, please seek the help of a professional or take advantage of the resources that are available for you online:
+/r/SuicideWatch
+ maintains a 
+list of resources
+ as well as a 
+FAQ for helplines
+.
+/r/Depression
+, 
+/r/Anxiety
+, 
+/r/MentalHealth
+, and many others; consider looking at these communities' sidebars for more resources and other, more specific subreddits.
+Befrienders Worldwide
+National Suicide Prevention Lifeline
+In addition, the users of TVTropes have compiled 
+an extensive listing of international resources
+.
+Examples
+This section is not normative (these are not rules), but they are here to help you understand common situations on 
+/r/worldbuilding
+ and how to make sure your post meets your rules.
+Citations (rule 4)
+The following examples show how you can cite non-original work per our rules. This is not an exhaustive list; if your exact case isn't here, please use your best judgement based on the examples listed, or modmail us to be sure. (If you make a best effort to cite properly, don't worry if you get it a little wrong—we'll just let you know and ask you to fix it in the future.)
+Scenario 1
+Image post that includes non-original images, figures, sprites, etc. in it.
+ This includes images that you created, but that contain copied non-original elements in it in whole or in part. At the 
+start
+ of the context comment, you write:
+This image uses:  
+* [This character](https://link.to/the/artwork) by [Lucy Artist](https://link.to/the/artist), and  
+* [This painting](https://link.to/the/painting) by [Bob Painter](https://link.to/the/artist) for the view outside the window.
+Scenario 2
+Link post to a commissioned image.
+ The image is commissioned 
+by you
+. At the 
+start
+ of the context comment, you write:
+This work was commissioned from the great [Lucy Artist](https://link.to/the/artist). The original can be found [on deviantart](https://deviantart.com/the/original/artwork/page).
+If the artist has asked not to be credited,
+ you could do the following at the 
+start
+ of the context comment. (You might be contacted by the mods to verify this.)
+This work was commissioned. The artist has asked not to be credited.
+Scenario 3
+Text post or comment containing lore.
+ You want to link to a non-original image to illustrate something you're talking about. You decide link to a 
+web page
+ that includes information on the original creator (not link the image directly) or you name/link the creator, or both.
+The [Valley of the Dead](http://flickr.com/page/for/the/photograph) (photo by Phil Photographer) was the site of 
+many battles between the Empire and its enemies to the south-west.
+Text post or comment containing lore.
+ You want to link to a non-original image that you 
+uploaded yourself on an image host
+—e.g. it's not posted online or it's from a book you scanned. Alternatively, you are 
+linking an image directly
+ instead of a web page. You decide to use a footnote (the citation doesn't have to be 100% academic, but it should be enough for someone to easily track down the source, if it's public).
+The [Valley of the Dead](https://imgur.com/valley-photo-link) [1] was the site of many battles between the Empire 
+and its enemies to the south-west. It is the site of [thousands of graves](https://imgur.com/artwork-that-isn't-online-anymore) [2] 
+dug by Keiluo, who made it his mission to put the unburied souls here to rest, between 1231 and 1247.
+(at the end of the post/comment)
+[1] JONES, Edward (ed.). *The Beauty of the Himalayas: A Journey in Photographs*. Publisher: City, 2013. p. 95.
+[2] Artwork by [Lucy Artist](https://link.to/the/artist-if-possible). Not available online, used with permission.
+Scenario 4
+Any kind of post involving a public domain work.
+ You can either cite it normally, or decide not to cite it for whatever reason.
+For a normal citation, follow 
+Scenario 1
+ or 
+Scenario 3
+.
+If you do not cite it, 
+you should still mention which parts of your post are made from a public domain work.
+ For example,
+The aeroplane in this painting is modified from a public-domain photograph.
+Scenario 5
+Any kind of post involving a work whose authorship is unknown.
+ You can mention where the work can be found, e.g., a museum, or a place where it was posted online anonymously, etc.
+[1] Unknown artist, [Title of the Work](https://museum-of-pretty-art.com/link/to/the/work), Museum of Pretty Art Permanent Collection.
+[2] Anonymous artist, [Title of the Work](https://link.to/where-it-was-posted), or a link where you found the work that clearly shows that it was intentionally anonymous.
+This scenario is mostly for 
+historical
+ works or works 
+intentionally
+ released anonymously. It's not good enough for you to say that 
+you
+ personally don't know who made it: you must either track down citation information, or else demonstrate that the creator isn't known 
+at all
+.
+Scenario 6
+Non-original text.
+ If you're posting text that isn't original—for example, a poem or flavour text, then follow 
+Scenario 3
+ to cite the text: a footnote or a link right after the text are both fine.
+Scenario 7
+Links to an external website (e.g. WorldAnvil).
+ The page you link must still meet our rules' citation requirements (whichever scenarios above fit the situation).
+Focus on original work (rule 4)
+The "focus on original work" point under rule 4 means that whatever a reader sees first or most prominently should be original material. Anything non-original should be de-emphasised or placed in a clear support role. Some examples below should hopefully clarify common scenarios. These examples first show something not allowed, followed by an example that shows how to fix it.
+In all cases, citations are also required for non-original work posted.
+Example 1
+Not allowed:
+ You make a link post to an unmodified, non-original image. You post a context comment with original lore.
+Allowed:
+ You make a text post with original lore. In that post, you link the non-original image to support your text.
+Example 2
+Not allowed:
+ You make a link post to an album of several images (e.g. an imgur album), with original text descriptions included alongside the images. In this case, the reader sees an image album as the focus of your post.
+Allowed:
+ You make a text post with your original lore, and link each image alongside the relevant paragraph. 
+OR
+ You make a text post with an introduction/context to your album, specifically direct readers to read your descriptions, and then link the album after that. 
+OR
+ You make a page on your own website, wiki, WorldAnvil, etc., that focuses on the original lore and puts each image to support it.
+Example 3
+Not allowed:
+ You link to your own website, and it looks like a portfolio page that is showcasing an image first, with the text supporting it. The image is non-original.
+Allowed:
+ You link to your own website, and it looks like an original text article that has supporting non-original images, e.g. off to the side with a caption. The non-original images could also be large, as long as they don't look like the page's centrepiece (e.g. if it's partway down the article, this puts focus on the text/article and would be OK).
+Example 4
+(This example doesn't start with a "not allowed" example.)
+Allowed:
+ You post an imgur link of an original piece of art. In the description, you include a non-original poem or piece of text.
+    
+## Preface
+* The current revision of this page will always reflect the latest rules in effect.
+* History of the rules can be found in this page's history and at [the rules archive](/r/worldbuilding/wiki/rules/archive).
+## Mission Statement
+ 
+For geeks and nerds, artists, writers, philosophers, politicians and scientists alike, the creation of new worlds and new universes has been a key element of science fiction and fantasy. It can also exist outside the realm of scifi-literature and RPG-gaming as a means of exploring possibilities.
+ 
+This subreddit is about sharing your worlds and discussing the many aspects of creating new universes.
+ 
+## The Rules
+ 
+### 0. No set of rules is exhaustive.
+ 
+- We moderate by the spirit of our rules, not the letter. These rules are guidelines, to be applied and interpreted with the goal of making /r/worldbuilding a pleasant and productive space for the worldbuilding community and creators of original worldbuilding content.
+- From time to time, unforeseen or exceptional situations may arise. In these cases, the moderators of /r/worldbuilding reserve the right to take any action in the interests of the community.
+- Moderator discretion may include, but is not limited to, removing posts or comments, banning users, or changing policy.
+- We take pains to minimize the use of moderator discretion and subject discretionary calls to internal review.
+- While there are no loopholes, we are willing to make exceptions to the rules where doing so is beneficial for the community or prevents an unjust or absurd outcome.
+- /r/Worldbuilding respects the law, Reddit's site-wide policies, and the policies of all other platforms we operate on.
+ 
+### 1. Be kind to others and respect the community's purpose.
+ 
+- Follow the [reddiquette](https://www.reddithelp.com/hc/en-us/articles/205926439)! It's all about respect, supporting original creators, and common sense.
+- Be polite and courteous towards others, and do what you can to contribute to a pleasant, productive atmosphere for worldbuilders.
+- Stay on-topic and try to avoid derailing conversations.
+- You can be funny without being a jerk. Being ironic or sarcastic doesn't excuse bad behaviour.
+- Don't hijack this subreddit to push a point of view or argue about real-world controversies.
+- Be calm, avoid drama, and focus on solving problems maturely. It's not OK to participate in inter-community drama, ever.
+- This community values honesty and critical integrity, but it also values inclusion and respect.
+- We won't tolerate extreme toxicity, hate speech, political extremism, dog-whistles, or any other abuse of our users or community at large.
+ 
+### 2. All posts should include original, worldbuilding-related context.
+ 
+- Context is how we decide whether or not a post is on-topic. Unless it's obvious, posts should include context relating to an original world or the hobby of worldbuilding.
+- If your post is about your world, it has enough context when a person unfamiliar with your world could understand what you're talking about and ask informed questions about it. ("What's a [proper noun]?" usually doesn't qualify.)
+- If your post is about something you think is useful to worldbuilders (inspiration, articles, and so on), it has enough context when a person unfamiliar with the subject could understand what you're talking about and why the item is relevant to worldbuilding. ("I found this inspirational" doesn't qualify. Put in some effort and talk about possibilities, or how it was useful to you, or what you think about it.)
+- Context should focus on worldbuilding-related subjects like lore, themes, or the creative process, but may touch on other topics (like mapmaking or characterization) if worldbuilding details are included. (If your post isn't about worldbuilding, but rather about mapmaking or characterization or writing, consider one of the related communities listed in our sidebar.)
+- Images (including maps) require added context, unless they are infographics that contextualize themselves. The text is the important part.
+- All of the above goes for any kind of post, including resources, characters, articles, maps, lore posts, AMAs, or advertising.
+- Always post your context on your /r/worldbuilding post for ease of access. Context can be in the body of a text post or in a top-level comment. Context in post titles is unlikely to be detailed enough, but can be OK.
+- We give people 15 minutes to post context, so consider writing it up beforehand.
+ 
+### 3. Put in some effort.
+ 
+- Every post should contribute to discussion about your work, someone else's work, or worldbuilding as a hobby.
+- Always remember that you're presenting your work and thoughts to an audience, so communicate clearly.
+- We moderate based on apparent effort, not quality. We also don't consider upvotes or downvotes when moderating.
+- Don't take pictures with a potato, throw dozens of undefined proper nouns around, or totally ignore the rules of English.
+- Avoid posting memes, contextless "inspiration", or pizza grease that looks like a map.
+- Humour is fine, but don't shitpost excessively. The guideline is that a good shitpost requires as much effort as a non-shitpost.
+- Don't make reposts or jump onto a bandwagon that's dominating the front page.
+ 
+### 4. This is a DIY community.
+ 
+- /r/Worldbuilding is made by and for original content creators and prioritises their interests.
+- **DIY**: You're encouraged to ask for feedback, resources, or advice. However, do not ask this community to make things for you or do basic research or Googling on your behalf.
+  - **Show of prior effort**: If you ask for advice or ideas on something you are worldbuilding, you must show the effort you've already put in yourself. For example, you could mention ideas you've already had and why they're unsatisfactory to you, or what sources you've found and why they aren't meeting your needs.
+- **Respect and integrity**: We respect creators' rights to their work, legal and moral, and do not tolerate plagiarism. We also expect you, as a creator, to be honest about what you're posting.
+  - **Citations**: If you present something that is not completely your original work, you must tell us who made it and where you got it from (called a "citation"), even if the work was commissioned, is public domain, or is of unknown origin (e.g. historical).
+  - Citations should be complete, close to the content, and make it clear that the content isn't yours. It's not OK to hide citations at the end. Visible endnote numbers like `[1]` (or similar) close to the content are OK and don't count as "hiding".
+  - [Examples of citations](#wiki_citations_.28rule_4.29)
+- **Focus on original work**: Posts about your world should focus on your original work, work you've substantially transformed, or work commissioned or produced specifically for your world.
+  - Unmodified non-original work should be included only as support material, not the focus of your post ([examples of how to present non-original work](#wiki_focus_on_original_work_.28rule_4.29)).
+  - Resource posts and discussion posts are exempt, but citations are still required.
+- **Fanfiction**: Our focus is on original worldbuilding projects. We don't consider this the right community for fanfiction worlds, even if we recognise that they can be substantially transformative. However, we do allow projects that make use of "open" *systems* such as Dungeons & Dragons.
+- **AI Content**: AI art and writing generators tend to provide incomplete or even no proper citation for the material used to train the AI. Content created through such generators are considered incompatible with our policies on citation and are thus not appropriate for our community. An acceptable AI content generator would fully cite the original owners of all media used to train it. The media merely being 'public' does not qualify. Using AI to organize, edit, present, or rewrite material is also incompatible with our policies, regardless of its original origin.
+ 
+### 5. NSFW content requires special care.
+ 
+- This community doesn't allow content intended only to shock, offend, disgust, or arouse.
+- Pornographic worlds and content are not appropriate for this subreddit and should instead be posted to r/NSFWworldbuilding.
+- We support content that engages with mature or disturbing themes in a sensitive, intelligent way, even if some people find it disagreeable.
+- Out of respect for others, all NSFW content should be marked. (Note that for posts, you can do this automatically by including "NSFW" in the title.)
+- More specific content warnings are encouraged, but not required.
+- When in doubt, err on the side of caution and mark your content as NSFW.
+- The moderators reserve the right to apply common sense when deciding what is or isn't NSFW.
+ 
+### 6. We allow advertising, but it shouldn't disrupt the community.
+ 
+- In general, we're tolerant of ads that respect our community and meet our worldbuilding context requirements.
+- Having a previous relationship to /r/worldbuilding is not necessary to advertise here, but ads should be able to demonstrate some relevance and usefulness to the community.
+- It's always okay to monetize your own worldbuilding using a Patreon link or something similar. Even selling merchandise is OK.
+- Crowdfunding projects (e.g. Kickstarter) and surveys always require pre-approval by the moderation team.
+- Advertisements for Non-Fungible Tokens (NFTs) or any similar items are strictly forbidden.
+- Collaborative worldbuilding projects can recruit on /r/worldbuilding, as long as they organize themselves elsewhere.
+- Don't post any kind of ad more than once a month without a mod's approval.
+- Ads that don't meet these requirements, are posted too frequently, or which are otherwise malicious will be considered spam.
+## Major Policies
+### Personally identifying information and doxxing
+We take doxxing very seriously on /r/worldbuilding. Doxxing is [defined by Wikipedia](https://en.wikipedia.org/w/index.php?title=Doxing&oldid=837466513) as "researching and broadcasting private or identifiable information (especially personally identifiable information) about an individual or organization. […] [Doxxing] may be carried out for various reasons, including to aid law enforcement, business analysis, risk analytics, extortion, coercion, harassment, online shaming, and vigilante justice."
+Doxxing already falls under the spirit of [Rule 1](https://www.reddit.com/r/worldbuilding/wiki/rules#wiki_1._be_kind_to_others_and_respect_the_community.27s_purpose.) and is enforced similarly to harassment of or threats against another person. Due to the particular nature of personally identifying information (PII), however, we have a specific policy about how we treat PII posted to the sub:
+1. Divulging any PII on any person, with the explicit or apparent intent to harass or cause any harm and/or where such action may reasonably be expected to lead to harm regardless of intent, is grounds for an immediate and permanent ban, as well as any escalation deemed necessary, including escalations to reddit administration or law enforcement. This is in accordance with the spirit of [Rule 1](https://www.reddit.com/r/worldbuilding/wiki/rules#wiki_1._be_kind_to_others_and_respect_the_community.27s_purpose.).
+2. Divulging any PII on any person, *without* apparent intent to harass or cause harm, is grounds for immediate removal of the PII, *unless* this PII is made publicly available by the identified party via verifiable means outside reddit (for example, a business website or public portfolio). This includes *your own* PII: it is not normally reasonable or possible for us to validate the owner of a reddit account as the owner of the PII, so we must treat all PII as a third party's. These situations will be enforced normally (and clearly unintentional first offences should generally only be met with a removal and explanatory message).
+We may make exceptions in some cases if we validate account ownership off-reddit in advance, e.g., if we officially host AMAs, panels or other guest events.
+ 
+### Mental Health Issues
+ 
+Our hearts go out to those suffering from mental illness, and we recognize that a significant portion of our community deal with psychological or emotional problems in their everyday lives. People who suffer from mental illness are as welcome in this community as any other user.
+ 
+However, /r/worldbuilding is not a support community for depression or other mental health issues. While there is no shame in seeking professional help, /r/worldbuilding does not have the training, resources, or expertise needed to handle these situations. Using the community in this manner could be dangerous, and could create bad outcomes for everyone involved. As such, we ask you not to reference issues related to depression, suicide, or mental health on /r/worldbuilding in a way that can be construed as directly or indirectly asking for help or seeking attention.
+ 
+The moderators reserve the right to handle mental health issues on a discretionary basis. When handling these issues, we will attempt to weigh the interests of the community, moderation team, and persons in crisis. We respect the privacy rights and human dignity of users with mental health problems and will not tolerate attempts to out, shame, or harass them.
+ 
+If you are in crisis, or feeling depressed or suicidal, please seek the help of a professional or take advantage of the resources that are available for you online:
+ 
+- /r/SuicideWatch maintains a [list of resources](https://www.reddit.com/r/SuicideWatch/wiki/hotlines) as well as a [FAQ for helplines](https://www.reddit.com/r/SWResources/comments/1c7ntr/suicide_hotline_faqs/).
+- /r/Depression, /r/Anxiety, /r/MentalHealth, and many others; consider looking at these communities' sidebars for more resources and other, more specific subreddits.
+- [Befrienders Worldwide](http://www.befrienders.org/)
+- [National Suicide Prevention Lifeline](https://suicidepreventionlifeline.org/)
+- In addition, the users of TVTropes have compiled [an extensive listing of international resources](https://web.archive.org/web/20200119174242/https://tvtropes.org/pmwiki/pmwiki.php/UsefulNotes/SuicidePrevention).
+## Examples
+This section is not normative (these are not rules), but they are here to help you understand common situations on /r/worldbuilding and how to make sure your post meets your rules.
+### Citations (rule 4)
+The following examples show how you can cite non-original work per our rules. This is not an exhaustive list; if your exact case isn't here, please use your best judgement based on the examples listed, or modmail us to be sure. (If you make a best effort to cite properly, don't worry if you get it a little wrong—we'll just let you know and ask you to fix it in the future.)
+#### Scenario 1
+**Image post that includes non-original images, figures, sprites, etc. in it.** This includes images that you created, but that contain copied non-original elements in it in whole or in part. At the **start** of the context comment, you write:
+    This image uses:  
+    * [This character](https://link.to/the/artwork) by [Lucy Artist](https://link.to/the/artist), and  
+    * [This painting](https://link.to/the/painting) by [Bob Painter](https://link.to/the/artist) for the view outside the window.
+#### Scenario 2
+**Link post to a commissioned image.** The image is commissioned **by you**. At the **start** of the context comment, you write:
+    This work was commissioned from the great [Lucy Artist](https://link.to/the/artist). The original can be found [on deviantart](https://deviantart.com/the/original/artwork/page).
+**If the artist has asked not to be credited,** you could do the following at the **start** of the context comment. (You might be contacted by the mods to verify this.)
+    This work was commissioned. The artist has asked not to be credited.
+#### Scenario 3
+**Text post or comment containing lore.** You want to link to a non-original image to illustrate something you're talking about. You decide link to a **web page** that includes information on the original creator (not link the image directly) or you name/link the creator, or both.
+    The [Valley of the Dead](http://flickr.com/page/for/the/photograph) (photo by Phil Photographer) was the site of 
+    many battles between the Empire and its enemies to the south-west.
+**Text post or comment containing lore.** You want to link to a non-original image that you **uploaded yourself on an image host**—e.g. it's not posted online or it's from a book you scanned. Alternatively, you are **linking an image directly** instead of a web page. You decide to use a footnote (the citation doesn't have to be 100% academic, but it should be enough for someone to easily track down the source, if it's public).
+    The [Valley of the Dead](https://imgur.com/valley-photo-link) [1] was the site of many battles between the Empire 
+    and its enemies to the south-west. It is the site of [thousands of graves](https://imgur.com/artwork-that-isn't-online-anymore) [2] 
+    dug by Keiluo, who made it his mission to put the unburied souls here to rest, between 1231 and 1247.
+    (at the end of the post/comment)
+    [1] JONES, Edward (ed.). *The Beauty of the Himalayas: A Journey in Photographs*. Publisher: City, 2013. p. 95.
+    [2] Artwork by [Lucy Artist](https://link.to/the/artist-if-possible). Not available online, used with permission.
+#### Scenario 4
+**Any kind of post involving a public domain work.** You can either cite it normally, or decide not to cite it for whatever reason.
+For a normal citation, follow [Scenario 1](#wiki_scenario_1) or [Scenario 3](#wiki_scenario_3).
+If you do not cite it, **you should still mention which parts of your post are made from a public domain work.** For example,
+    The aeroplane in this painting is modified from a public-domain photograph.
+#### Scenario 5
+**Any kind of post involving a work whose authorship is unknown.** You can mention where the work can be found, e.g., a museum, or a place where it was posted online anonymously, etc.
+    [1] Unknown artist, [Title of the Work](https://museum-of-pretty-art.com/link/to/the/work), Museum of Pretty Art Permanent Collection.
+    [2] Anonymous artist, [Title of the Work](https://link.to/where-it-was-posted), or a link where you found the work that clearly shows that it was intentionally anonymous.
+This scenario is mostly for *historical* works or works *intentionally* released anonymously. It's not good enough for you to say that *you* personally don't know who made it: you must either track down citation information, or else demonstrate that the creator isn't known *at all*.
+#### Scenario 6
+**Non-original text.** If you're posting text that isn't original—for example, a poem or flavour text, then follow [Scenario 3](#wiki_scenario_3) to cite the text: a footnote or a link right after the text are both fine.
+#### Scenario 7
+**Links to an external website (e.g. WorldAnvil).** The page you link must still meet our rules' citation requirements (whichever scenarios above fit the situation).
+### Focus on original work (rule 4)
+The "focus on original work" point under rule 4 means that whatever a reader sees first or most prominently should be original material. Anything non-original should be de-emphasised or placed in a clear support role. Some examples below should hopefully clarify common scenarios. These examples first show something not allowed, followed by an example that shows how to fix it.
+**In all cases, citations are also required for non-original work posted.**
+#### Example 1
+> **Not allowed:** You make a link post to an unmodified, non-original image. You post a context comment with original lore.
+> 
+> **Allowed:** You make a text post with original lore. In that post, you link the non-original image to support your text.
+#### Example 2
+> **Not allowed:** You make a link post to an album of several images (e.g. an imgur album), with original text descriptions included alongside the images. In this case, the reader sees an image album as the focus of your post.
+> 
+> **Allowed:** You make a text post with your original lore, and link each image alongside the relevant paragraph. **OR** You make a text post with an introduction/context to your album, specifically direct readers to read your descriptions, and then link the album after that. **OR** You make a page on your own website, wiki, WorldAnvil, etc., that focuses on the original lore and puts each image to support it.
+#### Example 3
+> **Not allowed:** You link to your own website, and it looks like a portfolio page that is showcasing an image first, with the text supporting it. The image is non-original.
+> 
+> **Allowed:** You link to your own website, and it looks like an original text article that has supporting non-original images, e.g. off to the side with a caption. The non-original images could also be large, as long as they don't look like the page's centrepiece (e.g. if it's partway down the article, this puts focus on the text/article and would be OK).
+#### Example 4
+(This example doesn't start with a "not allowed" example.)
+> **Allowed:** You post an imgur link of an original piece of art. In the description, you include a non-original poem or piece of text.
+    
+revision by 
+Paracelsus-Place
+— 
+7 months ago
+view source
+about
+blog
+about
+advertising
+careers
+help
+site rules
+Reddit help center
+reddiquette
+mod guidelines
+contact us
+apps & tools
+Reddit for iPhone
+Reddit for Android
+mobile website
+<3
+reddit premium
+Use of this site constitutes acceptance of our 
+User Agreement
+ and 
+Privacy Policy
+. © 2026 reddit inc. All rights reserved.
+REDDIT and the ALIEN Logo are registered trademarks of reddit inc.
+π
+ 
+Rendered by PID 329132 on reddit-service-r2-loggedout-77d97f884b-d6brg at 2026-08-19 23:24:18.542188+00:00 running a017ce1 country code: US.

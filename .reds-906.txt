@@ -1,0 +1,8 @@
+tests/copy/voiceMechanics.test.js
+tests/copy/voiceMechanics.test.js:308:46
+tests/docs/enforcement-claims.test.js
+tests/docs/enforcement-claims.test.js:483:91
+tests/lint/sovereigntyLightingContract.walker.test.js
+tests/lint/sovereigntyLightingContract.walker.test.js:7455:8
+tests/property/generatorGoldenMaster.test.js
+tests/property/generatorGoldenMaster.test.js:897:19

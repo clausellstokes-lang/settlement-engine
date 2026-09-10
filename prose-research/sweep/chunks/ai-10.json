@@ -1,0 +1,158 @@
+{
+ "name": "ai",
+ "chunk": 10,
+ "indices": [
+  1557,
+  1558,
+  1559,
+  1560,
+  1561,
+  1562,
+  1563,
+  1564,
+  1565,
+  1566,
+  1567,
+  1568,
+  1569,
+  1570,
+  1571
+ ],
+ "claims": [
+  {
+   "index": 1557,
+   "feature": "withheld information and inference",
+   "claim": "Grinblat and Bucklew say they deliberately let players employ apophenia, the human tendency to perceive patterns, rather than prescribing a narrative morphology.",
+   "source": "Jason Grinblat and C. Brian Bucklew, 'Subverting Historical Cause & Effect: Generation of Mythic Biographies in Caves of Qud', FDG'17, Aug 2017",
+   "url": "https://pcgworkshop.com/archive/grinblat2017subverting.pdf",
+   "quote": "apophenia, the human tendency to perceive patterns",
+   "page": "section 3, Motivation and Design Goals"
+  },
+  {
+   "index": 1558,
+   "feature": "plainness and economy",
+   "claim": "Grinblat and Bucklew say they aimed for evocative biographical narratives rather than meticulously detailed ones.",
+   "source": "Jason Grinblat and C. Brian Bucklew, 'Subverting Historical Cause & Effect: Generation of Mythic Biographies in Caves of Qud', FDG'17, Aug 2017",
+   "url": "https://pcgworkshop.com/archive/grinblat2017subverting.pdf",
+   "quote": "evocative biographical narratives",
+   "page": "section 3, Motivation and Design Goals"
+  },
+  {
+   "index": 1559,
+   "feature": "other: account rather than simulation",
+   "claim": "Grinblat and Bucklew say they did not aim to explicitly simulate historical logic, and instead generated history in order to simulate historical accounts.",
+   "source": "Jason Grinblat and C. Brian Bucklew, 'Subverting Historical Cause & Effect: Generation of Mythic Biographies in Caves of Qud', FDG'17, Aug 2017",
+   "url": "https://pcgworkshop.com/archive/grinblat2017subverting.pdf",
+   "quote": "we didn't aim to explicitly simulate historical logic",
+   "page": "section 3, Motivation and Design Goals"
+  },
+  {
+   "index": 1560,
+   "feature": "place and institution description",
+   "claim": "Grinblat and Bucklew say places named in a sultan's generated life are instantiated as historic sites during world generation.",
+   "source": "Jason Grinblat and C. Brian Bucklew, 'Subverting Historical Cause & Effect: Generation of Mythic Biographies in Caves of Qud', FDG'17, Aug 2017",
+   "url": "https://pcgworkshop.com/archive/grinblat2017subverting.pdf",
+   "quote": "instantiated as historic sites during world generation",
+   "page": "section 4.6, Impact on the Generated World"
+  },
+  {
+   "index": 1561,
+   "feature": "reception",
+   "claim": "Grinblat and Bucklew report that gospels appear in 14 of the 150 most popular screenshots uploaded to the Caves of Qud Steam community page over six months.",
+   "source": "Jason Grinblat and C. Brian Bucklew, 'Subverting Historical Cause & Effect: Generation of Mythic Biographies in Caves of Qud', FDG'17, Aug 2017",
+   "url": "https://pcgworkshop.com/archive/grinblat2017subverting.pdf",
+   "quote": "gospels are featured in 14 of the 150 most popular screenshots",
+   "page": "section 5, Evaluation"
+  },
+  {
+   "index": 1562,
+   "feature": "other: pool size as a variety input",
+   "claim": "Grinblat and Bucklew say output variety would be improved by expanding the set of domains, then numbering ten, and the suite of historical events, then numbering nineteen.",
+   "source": "Jason Grinblat and C. Brian Bucklew, 'Subverting Historical Cause & Effect: Generation of Mythic Biographies in Caves of Qud', FDG'17, Aug 2017",
+   "url": "https://pcgworkshop.com/archive/grinblat2017subverting.pdf",
+   "quote": "the set of domains (currently numbering ten)",
+   "page": "section 6, Future Work"
+  },
+  {
+   "index": 1563,
+   "feature": "point of view and distance",
+   "claim": "Grinblat and Bucklew propose as future work that one event generate multiple, conflicting gospels from different perspectives.",
+   "source": "Jason Grinblat and C. Brian Bucklew, 'Subverting Historical Cause & Effect: Generation of Mythic Biographies in Caves of Qud', FDG'17, Aug 2017",
+   "url": "https://pcgworkshop.com/archive/grinblat2017subverting.pdf",
+   "quote": "conflicting gospels from different perspectives",
+   "page": "section 6, Future Work"
+  },
+  {
+   "index": 1564,
+   "feature": "register modulation",
+   "claim": "Grinblat and Bucklew say Caves of Qud relies on a corpus of over 40,000 words to establish its voice, and that the replacement grammar let them codify that diction and repackage it procedurally.",
+   "source": "Jason Grinblat and C. Brian Bucklew, 'Subverting Historical Cause & Effect: Generation of Mythic Biographies in Caves of Qud', FDG'17, Aug 2017",
+   "url": "https://pcgworkshop.com/archive/grinblat2017subverting.pdf",
+   "quote": "over 40,000 words",
+   "page": "section 5, Evaluation"
+  },
+  {
+   "index": 1565,
+   "feature": "other: templates become visible with repetition",
+   "claim": "Jonathan Lessard, quoted in Ryan's dissertation, argues that readers will soon see through authored story patterns used to retrieve stories from a simulation.",
+   "source": "James Ryan, 'Curating Simulated Storyworlds', PhD dissertation, UC Santa Cruz, Dec 2018",
+   "url": "https://escholarship.org/content/qt1340j5h2/qt1340j5h2_noSplash_7b2b04b56dfeee9e4558c9f47e6cb25b.pdf",
+   "quote": "readers will soon see through them",
+   "page": "Chapter 13, closing discussion"
+  },
+  {
+   "index": 1566,
+   "feature": "homogenisation",
+   "claim": "Lessard, quoted in Ryan, characterises the repeated template as the same story with a different name substituted.",
+   "source": "James Ryan, 'Curating Simulated Storyworlds', PhD dissertation, UC Santa Cruz, Dec 2018",
+   "url": "https://escholarship.org/content/qt1340j5h2/qt1340j5h2_noSplash_7b2b04b56dfeee9e4558c9f47e6cb25b.pdf",
+   "quote": "except with Bob instead of John",
+   "page": "Chapter 13, closing discussion"
+  },
+  {
+   "index": 1567,
+   "feature": "other: sifting only finds what it was told to find",
+   "claim": "Ryan concedes that a system sifting a simulated history can only excavate material that matches the patterns it was given.",
+   "source": "James Ryan, 'Curating Simulated Storyworlds', PhD dissertation, UC Santa Cruz, Dec 2018",
+   "url": "https://escholarship.org/content/qt1340j5h2/qt1340j5h2_noSplash_7b2b04b56dfeee9e4558c9f47e6cb25b.pdf",
+   "quote": "the computer can only excavate material that matches those particular patterns",
+   "page": "Chapter 13, closing discussion"
+  },
+  {
+   "index": 1568,
+   "feature": "other: boring substrate",
+   "claim": "Ryan names boringness as a fundamental pitfall of emergent narrative, saying some simulations are too boring to yield stories.",
+   "source": "James Ryan, 'Curating Simulated Storyworlds', PhD dissertation, UC Santa Cruz, Dec 2018",
+   "url": "https://escholarship.org/content/qt1340j5h2/qt1340j5h2_noSplash_7b2b04b56dfeee9e4558c9f47e6cb25b.pdf",
+   "quote": "some simulations are too boring",
+   "page": "section 4.1.1, Boringness"
+  },
+  {
+   "index": 1569,
+   "feature": "homogenisation",
+   "claim": "Ryan quotes Mike Cook's pronouncement that the aesthetics of big numbers is dead, made in the context of boredom with No Man's Sky.",
+   "source": "James Ryan, 'Curating Simulated Storyworlds', PhD dissertation, UC Santa Cruz, Dec 2018",
+   "url": "https://escholarship.org/content/qt1340j5h2/qt1340j5h2_noSplash_7b2b04b56dfeee9e4558c9f47e6cb25b.pdf",
+   "quote": "the aesthetics of big numbers is dead",
+   "page": "Chapter 13, closing discussion"
+  },
+  {
+   "index": 1570,
+   "feature": "homogenisation",
+   "claim": "Gillian Smith, quoted by Douglas Heaven in New Scientist and relayed by Ryan, says size alone is not enough to sustain interest in a generated world.",
+   "source": "James Ryan, 'Curating Simulated Storyworlds', PhD dissertation, UC Santa Cruz, Dec 2018",
+   "url": "https://escholarship.org/content/qt1340j5h2/qt1340j5h2_noSplash_7b2b04b56dfeee9e4558c9f47e6cb25b.pdf",
+   "quote": "size alone is not enough to sustain interest",
+   "page": "Chapter 13, closing discussion"
+  },
+  {
+   "index": 1571,
+   "feature": "other: monotony as backdrop",
+   "claim": "Ryan says each Talk of the Town emergent scenario stands against the monotony of everyday existence that constitutes the far majority of a town's history.",
+   "source": "James Ryan, 'Curating Simulated Storyworlds', PhD dissertation, UC Santa Cruz, Dec 2018",
+   "url": "https://escholarship.org/content/qt1340j5h2/qt1340j5h2_noSplash_7b2b04b56dfeee9e4558c9f47e6cb25b.pdf",
+   "quote": "the monotony of everyday existence that constitutes the far majority",
+   "page": "Chapter 10, on aesthetics of a larger context"
+  }
+ ]
+}

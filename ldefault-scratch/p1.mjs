@@ -1,0 +1,35 @@
+import { SIMULATION_RULE_PRESETS, DEFAULT_SIMULATION_RULES, DEFAULT_SIMULATION_PRESET_ID, normalizeSimulationRules, newCampaignSimulationRules, NEW_CAMPAIGN_SIMULATION_PRESET_ID } from '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/laneLDEFAULT/src/domain/worldPulse/simulationRules.js';
+const rr = SIMULATION_RULE_PRESETS[DEFAULT_SIMULATION_PRESET_ID].rules;
+const full = SIMULATION_RULE_PRESETS.full_simulation.rules;
+const defKeys = new Set(Object.keys(DEFAULT_SIMULATION_RULES));
+// RULE_COMPARISON_KEYS is module-private; it is DERIVED, reconstructed exactly (src:1162)
+const BOOLEAN_KEYS = Object.keys(DEFAULT_SIMULATION_RULES).filter(k => typeof DEFAULT_SIMULATION_RULES[k] === 'boolean');
+const cmp = new Set(['propagationMode','intensity','migrationMode',...BOOLEAN_KEYS]);
+const virt = Object.keys(rr).filter(k => k !== 'presetId' && !defKeys.has(k));
+console.log('--- PREMISE 1: the twenty-one keys, all VIRTUAL ---');
+console.log('DEFAULT_SIMULATION_PRESET_ID =', DEFAULT_SIMULATION_PRESET_ID, '| NEW_CAMPAIGN_SIMULATION_PRESET_ID =', JSON.stringify(NEW_CAMPAIGN_SIMULATION_PRESET_ID));
+console.log('realistic_regional total keys =', Object.keys(rr).length, '| VIRTUAL (non-DEFAULT) keys =', virt.length);
+console.log(virt.join(', '));
+console.log('in DEFAULT_SIMULATION_RULES ->', JSON.stringify(virt.filter(k=>defKeys.has(k))), '(must be [])');
+console.log('in RULE_COMPARISON_KEYS  ->', JSON.stringify(virt.filter(k=>cmp.has(k))), '(must be [])');
+console.log('RULE_COMPARISON_KEYS size =', cmp.size);
+console.log('all 21 valued true?', virt.every(k=>rr[k]===true));
+console.log('any NOT already lit in full_simulation ->', JSON.stringify(virt.filter(k=>full[k]!==true)), '(must be [])');
+console.log('--- PREMISE 2: identity survives ---');
+const keyless = { ...rr }; delete keyless.presetId;
+console.log('keyless rr re-infers          =', normalizeSimulationRules(keyless).presetId);
+const legacy = { ...DEFAULT_SIMULATION_RULES, narrativeTempo: 'realistic_regional' };
+console.log('legacy RR save (NO virt keys) =', normalizeSimulationRules(legacy).presetId);
+console.log('normalize({})                 =', normalizeSimulationRules({}).presetId);
+console.log('--- PREMISE 3: the birth price ---');
+const born = newCampaignSimulationRules();
+const lit  = newCampaignSimulationRules(DEFAULT_SIMULATION_PRESET_ID);
+const added = Object.keys(lit).filter(k=>!(k in born));
+console.log('born keys =', Object.keys(born).length, '| lit keys =', Object.keys(lit).length, '| added =', added.length);
+console.log('added *Enabled =', added.filter(k=>k.endsWith('Enabled')).length, '| added profile axes =', added.filter(k=>!k.endsWith('Enabled')).length);
+console.log('--- PREMISE 4: leak under overlay ---');
+const fullKeys = Object.keys(full);
+console.log(JSON.stringify(Object.fromEntries(Object.keys(SIMULATION_RULE_PRESETS).map(id => {
+  const own = new Set(Object.keys(SIMULATION_RULE_PRESETS[id].rules));
+  return [id, fullKeys.filter(k=>!own.has(k)).length];
+})), null, 1));

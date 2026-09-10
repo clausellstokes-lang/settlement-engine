@@ -1,0 +1,234 @@
+{
+ "name": "dnd",
+ "chunk": 6,
+ "claims": [
+  {
+   "index": 244,
+   "feature": "source discipline for setting facts",
+   "claim": "Writers are told not to rely on internet searches, wikis, or prior-edition products for setting facts.",
+   "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "quote": "Don’t rely on Internet searches",
+   "page": "p.1"
+  },
+  {
+   "index": 245,
+   "feature": "register: high-fantasy tone gate",
+   "claim": "Tone is gated by a Lord of the Rings / Game of Thrones plausibility test; humor and tragedy are allowed only if they do not overtake the general tone.",
+   "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "quote": "ring wraiths aren’t used for gags",
+   "page": "p.2"
+  },
+  {
+   "index": 246,
+   "feature": "register: party over lone hero",
+   "claim": "D&D's brand voice frames adventure as a team's story rather than a lone knight's.",
+   "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "quote": "Teamwork and friendship are a huge part",
+   "page": "p.2"
+  },
+  {
+   "index": 247,
+   "feature": "gender neutrality (2019 rule)",
+   "claim": "Gender-neutral wording is expected whenever a person's gender is unknown or irrelevant, and the reader's gender is not assumed.",
+   "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "quote": "gender neutrality whenever the gender of a person is unknown",
+   "page": "p.2"
+  },
+  {
+   "index": 248,
+   "feature": "second person in rules text",
+   "claim": "Rules text achieves gender neutrality chiefly by being written in the second person.",
+   "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "quote": "writing in the second person whenever possible",
+   "page": "p.2"
+  },
+  {
+   "index": 249,
+   "feature": "singular they (2019: allowed but rationed)",
+   "claim": "v1.08a newly permits singular 'they/their' but tells writers to reach for it only when no other pleasing alternative exists.",
+   "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "quote": "but don’t abuse this liberty",
+   "page": "p.2"
+  },
+  {
+   "index": 250,
+   "feature": "pronoun devices to avoid",
+   "claim": "'He or she' is to be used sparingly; 'he/she' and 's/he' are banned; alternating he and she for inclusivity is banned.",
+   "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "quote": "avoid “he/she” and “s/he” altogether",
+   "page": "p.2"
+  },
+  {
+   "index": 251,
+   "feature": "gender and fantasy races (2019 rule)",
+   "claim": "In 2019 'man' and 'woman' were reserved for humans only, so a dwarf is a 'male dwarf', never a 'dwarf man'.",
+   "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "quote": "we write “male dwarf,” not “dwarf man”",
+   "page": "p.2"
+  },
+  {
+   "index": 252,
+   "feature": "dialogue exemption from editorial style",
+   "claim": "Editorial rules such as the man/woman restriction may be broken in dialogue and first-person narrative, because a character need not follow house style.",
+   "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "quote": "This rule can be broken in dialogue and first-person narrative",
+   "page": "p.3"
+  },
+  {
+   "index": 253,
+   "feature": "gender-specific suffixes",
+   "claim": "Gendered suffixes are avoided ('priest', 'actor'); 'priestess'/'actress' survive only inside an in-world title or organization name.",
+   "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "quote": "Avoid gender-specific suffixes whenever possible",
+   "page": "p.3"
+  },
+  {
+   "index": 254,
+   "feature": "'god' as ungendered noun",
+   "claim": "Deities are called 'god' regardless of gender in editorial voice; 'goddess' is reserved for in-world usage.",
+   "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "quote": "use “god” whether the deity is male or female",
+   "page": "p.3"
+  },
+  {
+   "index": 255,
+   "feature": "heading hierarchy",
+   "claim": "Headings descend Chapter Title > Heading 1 > 2 > 3 > Inline Subhead without skipping, and exist for structure, never aesthetics.",
+   "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "quote": "Use a heading for a structural reason, not an aesthetic one",
+   "page": "p.3"
+  },
+  {
+   "index": 256,
+   "feature": "inline subhead punctuation",
+   "claim": "The inline subhead (heading 4) is set in bold italics and ends with a period, exclamation point, or question mark, not a colon.",
+   "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "quote": "should be followed by terminal punctuation, not a colon",
+   "page": "p.3"
+  },
+  {
+   "index": 257,
+   "feature": "emphasis discipline",
+   "claim": "Bold is the only emphasis device, and a term already in the section heading gets no emphasis in running text.",
+   "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "quote": "Use bold for such emphasis",
+   "page": "p.3"
+  },
+  {
+   "index": 258,
+   "feature": "sidebars",
+   "claim": "Sidebars are rationed; any sidebar that must follow a specific passage to make sense should be folded into body text instead.",
+   "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "quote": "The best sidebars can appear anywhere on a page",
+   "page": "p.3"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 244,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Don't rely on Internet searches; beware prior-edition products",
+   "note": "p.1 sidebar 'Texts about D&D Settings': quote verbatim. Wikis limb explicit ('Both Wikipedia and the Forgotten Realms Wiki ... contain some unreliable information'); prior-edition limb worded 'beware of relying solely on D&D products from previous editions'; positive rule is that main references are WotC guides or official fifth edition products."
+  },
+  {
+   "index": 245,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Think Lord of the Rings or Game of Thrones",
+   "note": "p.2 'High Fantasy' sidebar: 'Elements of humor or tragedy are fine, so long as they are true to the facts of the brand and don't overtake the general tone. When in doubt, think about properties like the Lord of the Rings or Game of Thrones. If a situation would seem out of place there, it probably doesn't belong in D&D. For instance, there are moments of humor with the hobbits, but ring wraiths aren't used for gags.' Guide adds a second condition ('true to the facts of the brand') the claim omits, which does not weaken it."
+  },
+  {
+   "index": 246,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Lone knight less characteristic than an adventuring team",
+   "note": "p.2 'High Fantasy': 'D&D is about small bands of characters embarking on adventures together. Teamwork and friendship are a huge part of what makes D&D distinct as a brand. The lone knight fighting a dragon is less characteristic of D&D than an adventuring team fighting a dragon.' Both limbs verbatim."
+  },
+  {
+   "index": 247,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Expect gender neutrality; readers' gender identity not assumed",
+   "note": "p.2 'Gender': 'We expect gender neutrality whenever the gender of a person is unknown or irrelevant. We don't assume that our readers are of a particular gender identity.' Quote verbatim; both limbs on the page."
+  },
+  {
+   "index": 248,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "In rules text, prefer second person for neutrality",
+   "note": "p.2 'Achieving Gender Neutrality': 'In rules text, we prefer to achieve gender neutrality by writing in the second person whenever possible.' Quote verbatim; 'chiefly' matches the guide's 'we prefer ... whenever possible'."
+  },
+  {
+   "index": 249,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Rely on it only lacking a reasonable or pleasing alternative",
+   "note": "p.2: 'In a departure from our past usage, we allow the use of \"they\" and \"their\" as singular pronouns, but don't abuse this liberty. Rely on this device only when you have no other reasonable or pleasing alternative.' Quote verbatim. The 'newly' limb rests on the page's own 'In a departure from our past usage' in a document stamped 'Version 1.08a'; the page never says the change was introduced at 1.08a specifically."
+  },
+  {
+   "index": 250,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Use 'he or she' sparingly; don't alternate he and she",
+   "note": "p.2: 'Use \"he or she\" sparingly, and avoid \"he/she\" and \"s/he\" altogether. Also, don't alternate between \"he\" and \"she\" in an attempt to be inclusive.' All three limbs verbatim on the page."
+  },
+  {
+   "index": 251,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Man and woman reserved for describing humans only",
+   "note": "p.2 'Gender and Fantasy Races': '\"Man,\" \"woman,\" and their plurals are reserved for describing humans only. For example, we write \"male dwarf,\" not \"dwarf man\" or \"man dwarf.\"' Rule and quote verbatim. The '2019' dating is not on the page — every footer reads 'Version 1.08a (c)2018 Wizards of the Coast'; the January 2019 update date comes from the hosting file name, as the claim's own source field records."
+  },
+  {
+   "index": 252,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "A character doesn't necessarily follow our editorial style",
+   "note": "p.3 opening line, continuing the p.2 'Gender and Fantasy Races' section: 'This rule can be broken in dialogue and first-person narrative, since a character doesn't necessarily follow our editorial style!' 'This rule' is the man/woman restriction, so the antecedent limb holds."
+  },
+  {
+   "index": 253,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Priestess only if part of a person's or in-world title",
+   "note": "p.3 'Gender-Specific Suffixes': 'Avoid gender-specific suffixes whenever possible. For example, we write \"priest\" or \"actor\" whether the person is male or female. Use a word like \"priestess\" or \"actress\" only if it's part of a person's title or an in-world organizations' titles.' Quote verbatim; the claim's 'in-world title or organization name' compresses 'a person's title or an in-world organizations' titles'."
+  },
+  {
+   "index": 254,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "In-world uses of 'goddess' are fine",
+   "note": "p.3: 'Another example: use \"god\" whether the deity is male or female. Again, in-world uses of \"goddess\" are fine.' Quote verbatim; both limbs supported."
+  },
+  {
+   "index": 255,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Work down the hierarchy without skipping steps",
+   "note": "p.3 'Headings': hierarchy printed as Chapter Title / Heading 1 / Heading 2 / Heading 3 / Inline Subhead [aka Heading 4], introduced by 'Work your way down the heading hierarchy without skipping steps'; then 'Use a heading for a structural reason, not an aesthetic one.' Quote verbatim; both limbs on the page."
+  },
+  {
+   "index": 256,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Use a period, an exclamation point, or a question mark",
+   "note": "p.3 'Inline Subheads': 'The lowest level of our heading hierarchy is the inline subhead. It functions as our heading 4. Contrary to past D&D usage, this subhead should be followed by terminal punctuation, not a colon. Use a period, an exclamation point, or a question mark.' Bold-italics limb: 'If you don't have access to the style, set the subhead in bold italics to distinguish it from text that is simply bold' (p.3), confirmed on p.4 ('the entire inline subhead is bold italics')."
+  },
+  {
+   "index": 257,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "that bold is the ONLY emphasis device - the page prescribes bold for emphasis in place of an inline subhead, and nowhere states or implies that it is the sole permitted emphasis device",
+   "trueWording": "Use bold for such emphasis, unless it's in the heading",
+   "note": "p.3: 'Finally, don't use an inline subhead when you simply want to emphasize a word or phrase. Use bold for such emphasis, unless the emphasized term or phrase appears in the section's heading. Then, no emphasis is required. For example, if a Heading 3 says \"Ki Points,\" don't bold \"ki points\" in the associated running text.' Quote verbatim and the heading-term limb fully supported; the exclusivity quantifier 'only' is the claim's, not the guide's - the guide's italics rules elsewhere (pp.4, 6-7) govern titles, spells, words-as-words and unspoken discourse, and it never rules italics out for emphasis in so many words."
+  },
+  {
+   "index": 258,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "If it must follow a section to be intelligible, probably not a sidebar",
+   "note": "p.3 'Sidebars': 'Avoid overusing sidebars. If a sidebar must follow a particular section of text to be intelligible, it probably shouldn't be a sidebar. The best sidebars can appear anywhere on a page and still make sense.' Quote verbatim; both limbs supported, with the guide hedging 'probably shouldn't be a sidebar' and leaving the remedy (body text) implicit rather than naming it."
+  }
+ ]
+}

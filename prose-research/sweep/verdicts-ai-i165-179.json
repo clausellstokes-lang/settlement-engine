@@ -1,0 +1,233 @@
+{
+ "name": "ai",
+ "chunk": 4,
+ "claims": [
+  {
+   "index": 165,
+   "feature": "detectable in the opening sentences",
+   "claim": "Asimov's managing editor says AI submissions are bland, obvious and identifiable within the first couple of sentences.",
+   "source": "Emily Hockaday interview (Oct 2023; pub. 2025)",
+   "url": "https://nanocrit.com/index.php/issues/issue17/An-Interview-with-Emily-Hockaday-Senior-Managing-Editor-of-Asimov-s-Science-Fiction-Magazine-by-Jason-Ellis",
+   "quote": "usually you can tell the first couple of sentences",
+   "page": ""
+  },
+  {
+   "index": 166,
+   "feature": "AI poetry over-narrates",
+   "claim": "AI poetry submissions don't make much sense and are overly narrative.",
+   "source": "Emily Hockaday interview",
+   "url": "https://nanocrit.com/index.php/issues/issue17/An-Interview-with-Emily-Hockaday-Senior-Managing-Editor-of-Asimov-s-Science-Fiction-Magazine-by-Jason-Ellis",
+   "quote": "overly narrative in places",
+   "page": ""
+  },
+  {
+   "index": 167,
+   "feature": "bad in new ways",
+   "claim": "Clarkesworld found generated submissions were the worst ever received and failed in ways human writing does not.",
+   "source": "Neil Clarke, Clarkesworld Editor's Desk, April 2023",
+   "url": "https://clarkesworldmagazine.com/clarke_04_23/",
+   "quote": "sometimes bad in entirely new ways",
+   "page": ""
+  },
+  {
+   "index": 168,
+   "feature": "leftover prompt in text",
+   "claim": "Hybrid or polished AI submissions still carry recognizable characteristics, and sometimes the prompt or chatbot reply is left in the story.",
+   "source": "Neil Clarke, Clarkesworld Editor's Desk, August 2025",
+   "url": "https://clarkesworldmagazine.com/clarke_08_25/",
+   "quote": "leave a prompt or ChatGPT response in the text",
+   "page": ""
+  },
+  {
+   "index": 169,
+   "feature": "tells scale with length",
+   "claim": "AI hallmarks are more obvious in longer works than in flash fiction or poetry.",
+   "source": "Neil Clarke, Clarkesworld Editor's Desk, August 2025",
+   "url": "https://clarkesworldmagazine.com/clarke_08_25/",
+   "quote": "",
+   "page": ""
+  },
+  {
+   "index": 170,
+   "feature": "rhythm and duplicate titles",
+   "claim": "Editors detect AI slush by a difference in prose rhythm and by batches of submissions sharing the same generated title.",
+   "source": "Neil Clarke quoted in Salon, 2023-02-25",
+   "url": "https://www.salon.com/2023/02/25/ai-writing-clarkesworld-science-fiction/",
+   "quote": "There's a difference in rhythm",
+   "page": ""
+  },
+  {
+   "index": 171,
+   "feature": "below editorial standard; tells withheld",
+   "claim": "Clarkesworld says output is nowhere near its standards and deliberately keeps its detection patterns private; generated-sub statistics are 'noise'.",
+   "source": "Neil Clarke blog",
+   "url": "https://neil-clarke.com/how-ai-submissions-have-changed-our-submissions-process/",
+   "quote": "nowhere near the standards we expect",
+   "page": ""
+  },
+  {
+   "index": 172,
+   "feature": "soulless product",
+   "claim": "Uncanny's editor says AI stories are obvious without detectors and produce a soulless product; they drove submissions to 2,800 in two weeks.",
+   "source": "Michael Damian Thomas, The Uncanny Valley 62, Uncanny Magazine issue 67",
+   "url": "https://www.uncannymagazine.com/article/the-uncanny-valley-62/",
+   "quote": "it creates a terrible, soulless product",
+   "page": ""
+  },
+  {
+   "index": 173,
+   "feature": "regression to the mean",
+   "claim": "LLMs sand down specific, unusual, nuanced facts into generic positive descriptions, drifting toward the most statistically likely text.",
+   "source": "Wikipedia:Signs of AI writing",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "sand down specific, unusual, nuanced facts",
+   "page": ""
+  },
+  {
+   "index": 174,
+   "feature": "undue significance",
+   "claim": "AI text inflates importance with 'stands as', 'is a testament', 'pivotal moment', 'broader trends'.",
+   "source": "Wikipedia:Signs of AI writing",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "is a testament",
+   "page": ""
+  },
+  {
+   "index": 175,
+   "feature": "promotional tone",
+   "claim": "LLMs struggle to hold a neutral register and drift into advert-like language ('vibrant', 'nestled', 'rich heritage').",
+   "source": "Wikipedia:Signs of AI writing",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "tend toward advertisement-like writing",
+   "page": ""
+  },
+  {
+   "index": 176,
+   "feature": "vague attribution",
+   "claim": "AI text attributes opinions to unnamed authorities ('Experts argue', 'Some critics argue').",
+   "source": "Wikipedia:Signs of AI writing",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "attribute opinions to some vague authority",
+   "page": ""
+  },
+  {
+   "index": 177,
+   "feature": "AI vocabulary and copula avoidance",
+   "claim": "High density of 'delve', 'tapestry', 'testament', 'pivotal', 'intricate', and replacement of is/are with 'serves as', 'stands as', 'boasts'.",
+   "source": "Wikipedia:Signs of AI writing",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "LLMs overuse specific words",
+   "page": ""
+  },
+  {
+   "index": 178,
+   "feature": "negative parallelism and rule of three",
+   "claim": "'Not only X but Y' / 'It is not just X, it's Y' constructions and lists of three recur; the guide stresses these are signs, not a word ban.",
+   "source": "Wikipedia:Signs of AI writing",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "This list is not a ban on certain words",
+   "page": ""
+  },
+  {
+   "index": 179,
+   "feature": "word repetition without relief",
+   "claim": "Human writers, even bad ones, rest an overused word; LLMs lock into a local minimum of the same clichés.",
+   "source": "Makin, 'How to Identify AI-Written Web Fiction', Record Crash, 2025-11-27",
+   "url": "https://recordcrash.substack.com/p/how-to-identify-ai-written-web-fiction",
+   "quote": "it won't stop going to the same well",
+   "page": ""
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 165,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "usually you can tell the first couple of sentences that it's AI",
+   "note": "Exact string present in Hockaday's answer. 'Bland' and 'obvious' also hers: 'what we're seeing from these algorithms is really bland' and 'very easy to weed them out right now, because they're so obvious and so bad'."
+  },
+  {
+   "index": 166,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It was didn't make much sense. And then it was overly narrative in places.",
+   "note": "Quote exact. CAVEAT ON SCOPE: the example is a poem an AI generator wrote in a friend's style, posted for a laugh - NOT a slush submission. Hockaday says separately 'the poems are still bad' and that poetry submissions exist but 'there is nothing good'. Do not cite this as being about submissions."
+  },
+  {
+   "index": 167,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "among the worst submissions we've ever received and sometimes bad in entirely new ways",
+   "note": "Quote exact. Precision note: Clarke wrote 'among the worst submissions we've ever received', not 'the worst ever received' - the claim slightly overstates."
+  },
+  {
+   "index": 168,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "they even leave a prompt or ChatGPT response in the text",
+   "note": "Exact. Full sentence: works 'co-written' with AI or given a polishing edit 'still display the hallmarks I've come to expect, and occasionally, they even leave a prompt or ChatGPT response in the text.' Both halves of the claim supported."
+  },
+  {
+   "index": 169,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "the tells are more obvious on longer works",
+   "note": "Claim carried no quote. Page has it parenthetically, in the context of flash and poetry examples finding publication elsewhere - so the flash/poetry contrast is the author's own framing, supported."
+  },
+  {
+   "index": 170,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "There's a difference in rhythm, and there are some serious tells, like a bunch of submissions with the same title generated by an AI program",
+   "note": "Exact (source uses a curly apostrophe). Both limbs - rhythm and duplicate generated titles - are in the one Clarke sentence Salon quotes."
+  },
+  {
+   "index": 171,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the output of these tools is nowhere near the standards we expect",
+   "note": "Quote exact in the post body. The other two limbs verify from Clarke's own comment replies on the same page, not the body: 'The stats (genre, length, etc.) for generated submissions are basically noise' and 'There are some patterns there that I use as warning signs, but I don't make those public.' Body also: 'I haven't spoken much about what we're checking for there because I don't want to make it easier for the spammers/sloppers'."
+  },
+  {
+   "index": 172,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I can't stress enough that it creates a terrible, soulless product",
+   "note": "Quote exact. 'We don't use AI detectors... AI garbage is fairly obvious' supports the no-detectors limb. Precision note: 2,800 submissions came from the open period August 25 to September 8 (15 days) and AI is called 'a big reason' for the volume, not the sole cause; page is issue Sixty-Seven as cited."
+  },
+  {
+   "index": 173,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "tends to omit specific, unusual, nuanced facts",
+   "note": "'sand down' does not appear anywhere in the page (0 hits). True sentence: 'the LLM tends to omit specific, unusual, nuanced facts (which are statistically rare) and replace them with more generic, positive descriptions'. Drift-toward-likely-text limb verbatim elsewhere: 'the result tends toward the most statistically likely result'. Substance right, quote wrong."
+  },
+  {
+   "index": 174,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "is a testament/reminder",
+   "note": "'is a testament' appears contiguously inside the Words-to-watch list of the section 'Undue emphasis on significance, legacy, and broader trends'. 'stands as' appears verbatim in the copulatives list; 'stands/serves as' and 'a crucial/pivotal/vital/significant/key role/moment' are slash-variants, so 'pivotal moment' is not contiguous on the page."
+  },
+  {
+   "index": 175,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "their output will often tend toward advertisement-like writing",
+   "note": "Exact. Preceded by 'LLMs have serious problems keeping a neutral tone.' 'vibrant', 'nestled' and 'rich' are all in that section's Words-to-watch box."
+  },
+  {
+   "index": 176,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "attribute opinions or claims to some vague authority",
+   "note": "Quote as given omits 'or claims', so not word for word. Section 'Vague attributions and overgeneralization of opinions'; 'Experts argue' and 'Some critics argue' both appear in its Words-to-watch box."
+  },
+  {
+   "index": 177,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Many studies have demonstrated that LLMs overuse specific words",
+   "note": "Quote exact. delve, tapestry, testament, pivotal and intricate/intricacies all appear in the words-to-watch box. Copula limb also verbatim: section 'Avoidance of basic copulatives' lists 'serves as/stands as/marks/functions as/operates as/represents [a]', 'boasts/features/maintains/offers [a]'."
+  },
+  {
+   "index": 178,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "this list is descriptive, not prescriptive; observations, not rules",
+   "note": "The quoted sentence is absent - 'ban', 'banned', 'prohibit', 'forbid' get 0 hits on the page. Nearest true wording is the lead's 'Moreover, this list is descriptive, not prescriptive; it consists of observations, not rules', plus 'The patterns listed here are also only potential signs of a problem, not the problem itself.' The construction limbs are exact: 'Not only ... but ...' and 'It is not just ..., it's ...' under 'Not just X, but also Y', and a 'Rule of three' section reading 'LLMs overuse the rule of three'."
+  },
+  {
+   "index": 179,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Once your story has reached a local minimum of samey cliches, it won't stop going to the same well",
+   "note": "Exact (curly apostrophe). Human-writer limb also on the page: 'A human writer might reuse words, but even bad ones will \"give it a rest\" when they notice.'"
+  }
+ ]
+}

@@ -1,0 +1,1050 @@
+RaY
+Research at the University of York St John
+For more information please contact RaY at
+ray@yorksj.ac.uk
+Garlick, Ben and King, Liesl (2022) A geography beyond the 
+Anthropocene: Ursula Le Guin’s Always Coming Home as topophilia
+for survival. Cultural geographies.  
+Downloaded from: https://ray.yorksj.ac.uk/id/eprint/6566/
+The version presented here may differ from the published version or version of record. If 
+you intend to cite from the work you are advised to consult the publisher's version:
+https://journals.sagepub.com/doi/10.1177/14744740221126984
+Research at York St John (RaY) is an institutional repository. It supports the principles of 
+open access by making the research outputs of the University available in digital form. 
+Copyright of the items stored in RaY reside with the authors and/or other copyright 
+owners. Users may access full text items free of charge, and may download a copy for 
+private study or non-commercial research. For further reuse terms, see licence terms 
+governing individual outputs.  Institutional Repositories Policy Statement
+
+https://doi.org/10.1177/14744740221126984
+cultural geographies 
+ 1 –20
+© The Author(s) 2022
+Article reuse guidelines:  
+sagepub.com/journals-permissions
+DOI: 10.1177/14744740221126984
+journals.sagepub.com/home/cgj
+A geography beyond the 
+Anthropocene: Ursula Le Guin’s 
+Always Coming Home as topophilia 
+for survival
+Ben Garlick  and Liesl King
+York St John University, UK
+Abstract
+The science fiction of Ursula Le Guin deftly uses prose to conjure alternative worlds, societies 
+and cultures of nature amidst times of profound upheaval. Equally, her writing is suffused with 
+quiet hope: the sense that we already possess the tools required to craft better futures, if only 
+we paid better attention to the here and now. Across her work, Le Guin poses political and 
+ethical questions about the value of, and our relationship to, the wider environment; and the 
+consequences that (may) lie in wait along our contemporary lines of flight. In Always Coming 
+Home (1985), she excavates a possible future: a speculative cultural geography of life on earth 
+that is both careful in its placing and caring of place. In this paper, we consider the space-times 
+of this experimental ‘archaeology of the future’ and its imagined post-Anthropocene landscape. 
+We explore how Le Guin’s non-linear, digressive, fragmentary writing mobilises the love of place 
+(topophilia) to manifest an awareness of there being multiple, potential, situated articulations of 
+life after the Anthropocene in tension with profound uncertainty over the earthly legacies of our 
+current modes of existence.
+Keywords
+Anthropocene, landscape, love, science fiction, topophilia, Ursula Le Guin
+Introduction: narrating Anthropocene geographies
+Discussions of the ‘Anthropocene’ inevitably imagine future geographies. Often, apocalyptic, bar-
+ren or ‘blasted’ landscapes materialise socio-cultural anxiety in the face of crisis. 1 However, cau-
+tious hope is also manifest in stories of conservation and care that might ‘provision’ future 
+ecological abundance.
+2 In each case, such narratives tend to figure our present as a vital moment of 
+transition, rather than terminus, though to what remains uncertain.3
+Corresponding author:
+Ben Garlick, School of Humanities, York St John University, Lord Mayor’s Walk, York YO31 7EX, UK. 
+Email: b.garlick@yorksj.ac.uk
+1126984CGJ0010.1177/14744740221126984cultural geographiesGarlick and King
+research-article2022
+Article
+
+2 cultural geographies 00(0)
+A challenge when speculating on liveable futures is figuring ways of living that might take us 
+there. Both comprehending and responding to the distributed causality of planetary change has 
+prompted the environmental crisis of the Anthropocene to be seen as a crisis of representation. For 
+Bill McKibben, Western paralysis, or apathy, in the face of climate catastrophe reflects our fatal 
+‘confusion’ with regards the unfolding geographies of ecological crisis.
+4 Timothy Morton argues 
+the Anthropocene is characterised by the proliferation of ‘hyperobjects’ – such as ‘climate change’, 
+‘nuclear waste’ or ‘microplastics’ – each exerting a force in shaping the world, yet resistant to 
+human sense-making because of their complex, distributed, inhuman spatio-temporality. A world 
+of hyperobjects poses issues for tracing more-than-human geographies, potentially signalling the 
+ends of ‘landscape’ as viable spatial imaginary amidst a world of scattered causality and pan-scalar 
+entanglement.
+5
+Nevertheless, the nebulous, distributed geographies of the Anthropocene do not negate the value 
+of situated perspectives. Much writing in geography (and beyond) examines the Anthropocene 
+through the lens of place and landscape. More popularly oriented nature writing similarly offers 
+encounters with place to grasp the Anthropocene’s affects.
+6 Work on extinction, for example, traces 
+specific, spatial stories of species decline to illuminate losses unfolding in multiple registers, and 
+propose means to articulate or resist them.
+7 David Matless conceptualises UK coastal erosion land-
+scapes as ‘Anthropo-scenes’, making fathomable deep time environmental transformations. 
+Crucially, engaging with Anthropo-scenes as the ‘stepping point for [. . .] stories’ of ecological 
+transformation requires acts of representation and looking, as well as phenomenological encounter.
+8 
+Aurora Fredriksen’s theorisation of ‘ordinary Anthropocenes’, emergent from particular human-
+nonhuman assemblages haunted by longer histories of habitat degradation, helps attune to more 
+mundane experiences of anthropogenic ecological change.
+9 Anna Tsing’s influential work on the 
+landscapes of forestry and mushroom picking in the Pacific Northwest and Japan considers the pos-
+sibilities and excesses of life amidst the ruins of capitalism.
+10 Clearly, then, ‘the geographies being 
+engaged for the development of Anthropocene thinking matter’.11
+Consequently, this paper critically examines the work of Ursula Le Guin, whose writing inspires 
+many via its hopeful worlding. Our engagement with Le Guin reflects an appreciation of the power 
+of stories to articulate environmental crisis. Her brand of feminist science fiction (sf) addresses 
+many issues that concern contemporary cultural geographies of the Anthropocene, asking how 
+particular realities emerge, exist and endure amidst shared conditions of entanglement, violence 
+and co-becoming.
+12 Offering geographers ‘an informed view of possible futures [. . .] imagina-
+tively constructed’, her sf texts provide vital ‘cognitive spaces’ for extrapolating potential trajecto-
+ries out of present restrictions and crises.
+13 As an ‘inherently geographical’ genre, sf worlds reflect 
+and refract ‘real physical, social, and cultural landscapes’ via experimental acts of world building 
+that connect the futuristic, or fantastic, with the spaces of a differently perceived, lived present and 
+their potential to be otherwise.
+14
+Rather than re-assert heroic narratives of progress, Le Guin’s sf conjures alternative worlds, 
+societies and cultures of nature that materialise, and make ‘thinkable’, more abstract questions of 
+ethics, violence and interrelating in times of upheaval. Equally, her stories exude modest optimism: 
+the sense that we already possess the tools required to craft alternative futures. We examine her 
+novel, Always Coming Home (hereafter ACH), published 1985. An ‘archaeology of the future’, 
+ACH constructs the fictional lifeworld of the Kesh: a human society that ‘might be going to have 
+lived a long, long time from now’ amidst the ruins of a California ravaged by global catastrophe.
+15 
+As argued, ACH demonstrates the potential of sf writing to articulate potential geographies beyond 
+the Anthropocene via projects of ‘place love’ attuned to future survival.
+Additionally, ACH is a particularly intriguing text because of its presentation, stylised as 
+anthropological ethnography. Thus, the text articulates a place-love informed by Le Guin’s 
+Garlick and King 3
+childhood explorations of landscape, and the academic influence of her father, anthropologist 
+Alfred Kroeber. Kroeber spent much of his life championing the importance of studying and 
+understanding indigenous societies in California, articulating an approach to studying culture that 
+eschewed environmental determinism and evolutionary conceptualisations of ‘civilisation’ 
+(alongside propositions of inherent, hierarchical racial difference). Instead, he advocated a con-
+textual, situated examination of societies in the vein of his mentor Franz Boas.
+16 His work is 
+significant for geographers, given its influence upon the Berkley School approach to studying 
+culture and landscape.
+17 Moreover, his practicing anthropology as a gathering of fragments that 
+pieced together located ways of living haunts ACH and it’s densely descriptive, at times encyclo-
+paedic, treatment of a possible future geography. Equally, in the context of current critical reflec-
+tions on Kroeber’s practices, the text entrains questions about the more troubling legacies of 
+anthropologists’ efforts to represent non-Western peoples (often conceived as non- or pre-mod-
+ern) and their environments. Consequently, whilst foregrounding the progressive potential within 
+Le Guin’s treatment of place, we remain cognisant of the awkwardness of ACH’s political project, 
+seeking as it does to draw inspiration from indigenous cosmologies, and its risk of appearing to 
+promote both appropriation and romanticisation.
+18 As discussed below, such concerns are present 
+in Le Guin’s own thinking and throughout the text’s account of a possible future geography.
+The following section introduces Le Guin’s novel and its critique of rationalist utopia. We then 
+proceed to conceptualise the relationship between the novel and California’s Napa Valley. In turn, 
+we present our alternative reading of the novel as a practical project of place-love oriented towards 
+future survival, informed by work on place and landscape characteristic of cultural geographies’ 
+recent ‘telling turn’.
+19 Doing so, we argue, reinforces the importance of places and landscapes as 
+containers of stories, possibilities and futures in the Anthropocene.
+Roaming the Valley
+Unfolding amidst a future version/vision of California, ACH invites the reader into the world of the 
+‘Kesh’: a human society inhabiting the ‘Valley of Na’ (Napa Valley). Billed as a novel,
+20 yet more 
+a collection of fragments that cross-cut, interweave, complement, even contradict, reading ACH 
+recalls Deleuze and Guattari’s notion of book-as-rhizome. An open-ended tangle of lines of affect 
+and flight, the Valley coalesces and pulls apart in the process of writing and interpretation.
+21 An 
+experimental imagining of a liveable society and landscape following planet-wide destruction 
+packaged akin to an anthropological monograph, ACH hosts multiple readings. Le Guin defers 
+agency to the reader, letting them to explore the Valley in a non-linear, open-ended manner.
+22 
+Evoking the Deleuzian ‘plateau’, her text is ‘all middle’.23
+In terms of content, the life-story of Stone Telling, a Kesh woman, informs the most consistent 
+narrative. Told in three parts, Stone Telling relays her childhood and journey to distant lands with 
+her birth father; a warrior from the patriarchal, militarist Dayao, or Condor – a society sharply 
+contrasting the Kesh, whilst mirroring our own. Stone Telling’s tale introduces and elaborates ele-
+ments of Kesh society examined elsewhere, and her experiences and ultimate return reflect the 
+novel’s titular refrain. The remainder of ACH comprises short(er) pieces, illustrations and, origi-
+nally, musical recordings that divulge, or collage, Valley life. Presented as a gathering together of 
+the collected knowledge of the Kesh, the text has been ostensibly compiled by anthropologist-
+ethnographer ‘Pandora’, its content relayed via parable, proverb, poetry, drama, song and the ‘fac-
+tual’ documentation of practical information (much housed in additional, encyclopaedia-like 
+appendices referred to as ‘The Back of the Book’).
+24 A consistent voice and participating character, 
+narrator or else implicit translator/reporter, Pandora seemingly hails from our time, operating as 
+cipher for both the reader and Le Guin. She dramatises the challenge of representing and 
+4 cultural geographies 00(0)
+comprehending this future and her often frustrated efforts to communicate with various Kesh 
+informants, and document the minutiae of their world, underscores the ontological gap between 
+our society and theirs, as well as the awkward relationship between anthropological ethnographer 
+and their subject, questioning the limits of imagining and materialising this future.
+25
+We elaborate aspects of Valley living below, but in brief the Kesh practice a hunter-gatherer 
+existence organised around relations of kinship with a variety of human and non-human ‘people’. 
+Each ‘person’ in the valley is affiliated to a particular ‘house’, defining their (cross-species) famil-
+ial connections and obligations, delimiting sexual practices and diagramming the relational ecol-
+ogy of place. Each ‘House’ has an associated ‘heyima’ or lodge, serving as ‘material manifestation’ 
+of Kesh cosmology and practical all-purpose community buildings for worship, political debate, 
+workshops, discussion, accommodation, knowledge accumulation, education, resource manage-
+ment and economic activities (within and beyond the valley). Humans and ‘domesticated’ nonhu-
+mans (e.g. cohabiting animals, hunted fauna, gathered flora, building materials) belong to five 
+‘Earth’ houses. Other nonhumans (truly ‘wild’ animals, birds), inhuman agencies (the wind, the 
+rain) and past/potential human others (the dead, the unborn) belong to four ‘Sky’ houses.
+26 This 
+cosmology is encapsulated by the ‘heyiya-if’ or ‘hinge’ (Figure 1). An ‘inexhaustible metaphor’,27 
+the hinge informs philosophy, architecture, town planning, ceremonial activities and spiritual life. 
+Its spiral arms evoke the Taoist taijitu (the yin/yang symbol) as well as the spirals featured through-
+out indigenous American iconography. At its centre resides a point of disconnection, signifying the 
+unknowable possibility of change and difference, and the un-representable, yet vital, relationship 
+between earth (actual, material existence) and sky (excessive, virtual existence). As Pandora com-
+ments: ‘A hinge connects and it holds apart’.
+28
+When exactly the novel occurs, beyond several thousand years hence, remains ambiguous. The 
+Kesh are doubly ‘puzzled’ by questions of origin.29 Neither do they possess answers to such ques-
+tions; nor do they comprehend time in terms of a periodised, teleological ‘history’. Thus, there is a 
+profound discontinuity (captured by the hinge) between our time and geography, and that of the 
+Kesh, undermining any clear sense of historical progression from one to the other. As conveyed via 
+several awkward exchanges between Pandora and Kesh individuals, they seem to favour thinking 
+in terms of geography and journeys through lived landscapes, over progression through linear time. 
+One man, Gather, who enjoys studying the historical records of past architectural styles, leaves 
+Figure 1. The ‘heyiya-if’/hinge depicted in Always Coming Home (1985). Illustration by Margaret Chodos-
+Irvine.
+Source: Wikimedia Commons.
+Garlick and King 5
+Pandora frustrated when he cannot answer questions as to when in history the Kesh are to be 
+located. As she describes:
+He doesn’t perceive time as a direction, let alone a progress, but as a landscape in which one may go any 
+number of directions, or nowhere. He spatialises time; it is not an arrow, nor a river, but a house, the 
+house he lives in. One may go from room to room, and come back; to go outside, all you have to do is 
+open the door.
+30
+That is not to say the Kesh they have no concept of temporality: they track the seasons and count 
+yearly cycles relative to lived events in the valley (e.g. rituals, harvests). The origin myths of Kesh 
+culture suggest that Valley society emerges after several world-ending events (seemingly climate 
+crisis and nuclear conflict).
+31 Consistently, however, the gyre of circling buzzards and condors 
+recurs across the text, conceptualising circularity and return without ‘closing the circle’.32 ‘Coming 
+home’ maintains community in harmony with place, rejecting repetition, closure or stasis in favour 
+of change and uncertainty.
+Linear accounts of civilisation are associated with the ‘sickness’ of past societies, and the cause 
+of the world’s ruination. The Kesh inhabit a version of Earth degraded by multiple cycles of anthro-
+pogenic destruction. Much of California as we know it lies underwater, its urban centres drowned. 
+Large areas have been rendered toxic and uninhabitable; and the coasts and oceans are strewn with 
+industrial waste. The Kesh are ‘surrounded with evidence of our values’,
+33 manifesting at multiple 
+scales. Human and nonhuman bodies in the Valley bear the ‘biocidal legacy’ 34 of stillbirth, con-
+genital conditions and restricted life expectancy. Living in ruins prompts the Kesh to reject world-
+views manifesting such destruction as the doing of ‘backward-headed’ people who failed to think 
+on the consequences of their avaricious quest for progress.
+35
+The Kesh are, however, hardly technophobic. They generate hydroelectricity, maintain a train 
+on wooden rails and construct buildings, wineries and mills. Additionally, communities over 50 
+persons host ‘exchanges’: computer terminals enabling inter-settlement communication and access 
+to the accumulated information archives of a networked artificial intelligence, the ‘City of Mind’. 
+In this future, the City of Mind has long since advanced beyond its human creators, becoming self-
+aware and extending its project of information accumulation into the stars. Instead of rejecting 
+technology, then, the Kesh choose not to pursue the construction of technoscientific shibboleths, 
+favouring the practical, tacit skills and knowledge required to live well in the Valley over those 
+complex techno-industrial assemblages (and associated systems of inequality and degradation) 
+needed to build tanks, bombs and planes. Valley technology is ‘completely adequate to the needs 
+of the people’.
+36
+Finally, the Kesh are not the only humans living in this world. Other societies – nomadic pig 
+herders, coastal merchants, distant cotton growers – exist in (and beyond) California and exhibit 
+their own ways of living. These other human societies appear analogous to the Kesh in many ways, 
+with whom they trade and communicates from time to time. Some, however, are strikingly differ-
+ent in outlook and activity, such as the antagonistic Condor or Dayao. Therefore, whilst Le Guin 
+focuses on the Valley, her world is populated with other ‘introverted but cooperative peoples’, 
+engaged in distinct projects of survival.
+37
+A feminist utopia
+Le Guin’s writing consciously shirks mainstream sf conventions. Less concerned with idealising 
+the ‘high-tech’, her worlds manifest slower, anarchic, anti-authoritarian societies.
+38 Le Guin disre-
+gards obvious heroes or epic battles, viewing fiction as ‘a bag [. . .] holding things in a particular, 
+6 cultural geographies 00(0)
+powerful relation to one another’. Thus, her novels are ‘full of beginnings without ends, of initia-
+tions, of losses, of transformations and translations’. 39 These are worlds to wander in rather than 
+race across.
+Consequently, ACH, like The Dispossessed (1974) and The Left Hand of Darkness (1969), 
+expresses an alternative feminist, process-oriented utopianism.40 The question of utopia is central 
+to sf world-building. For Darko Suvin, utopianism requires grounding in scientific reality via the 
+‘novum’: the ‘specific object or change introduced by the author [that] leads to the fictional world’s 
+estrangement’.
+41 In this sense, utopian sf aims to model how current circumstances could lead to 
+‘progressive alternatives’ and futures, extrapolating trajectories of (possible) innovation. Often 
+critical of present issues, the novum should ideally open onto better, more equal futures.
+42 
+Suggesting tangible, material continuities between our ‘now’ and the text’s ‘then’, sf utopias are 
+tethered in provocative ways to contemporary modes of living and emphasise the challenges of the 
+present as much as the future.
+43
+For Le Guin, figuring utopia ‘a novum away’ prevents appreciating the ‘possibilities inherent in 
+the world we have’.44 She rejects the idea of modernist ‘progress’ as implicated in the ills of con-
+temporary planetary degradation, accusing rationalist or ‘Euclidean’ utopians of reproducing such 
+discourses. By imagining societies where, conversely, progress is subordinate to process, ACH 
+renders in fiction Le Guin’s critique of utopia as a masculine, ‘yang’ enterprise; ‘aggressive, lineal, 
+progressive, creative, expanding, advancing, and hot’.
+45 An obsession with progress in the present, 
+at the expense of environment and people, reproduces a colonising will to master, measure and 
+control. In ACH, the City of Mind satirises these ideals via its objective of ‘a total mental model or 
+replica of the Universe’.
+46 In contrast to ‘yang’ utopia, its ‘[m]odels, plans, blueprints, wiring dia-
+grams’, Le Guin’s ‘yin’ utopia is ‘dark, wet, obscure, weak, yielding, passive, participatory, circu-
+lar, cyclical, peaceful, nurturant, retreating, contracting, and cold’.
+47 Such ways of living are 
+un-mapped and involves inhabiting the ‘edges’ of progress, avoiding ‘a one-way future consisting 
+only of growth’.
+48 Turning (y)inwards, slowing down and learning to know and value the specific 
+ecologies of place locates Le Guin’s ‘habitable present’ in acts of processual dwelling, denied 
+within reified, abstract progress narratives.
+49
+The world of the Kesh has been characterised as such a utopia.50 A people ‘predominantly con-
+cerned with preserving its existence’, they practice ‘a modest standard of living, conservative of 
+natural resources, with a low constant fertility rate and a political life based upon consent’, adapted 
+to their environment and living in general harmony with others.
+51 The Kesh celebrate ‘process for 
+its own sake rather than to facilitate progress [. . .] ontology rather than teleology’. 52 Life in the 
+Valley rejects technoscientific innovation’s emancipatory promise. Crucially, such a society could 
+‘exist already’. Indeed, it may have once existed in the California landscapes that inspired Le Guin 
+(see below).
+53 This yin utopia is therefore as much about returning to workable acts of place lov-
+ing/living, as imagining the future. Consequently, ACH has been interpreted as a feminist act of 
+‘staying with the trouble’, making habitable worlds with what we have.
+54
+Yet whilst the Valley conjures ‘utopian hope’, 55 Le Guin strives not for a general account of 
+utopian geographies. She favours ‘a partial vision’ avoiding both ‘the Scylla of bulldozing univer-
+salism and the Charybdis of disempowering relativism’ via a focussed particularity.56 The situation 
+of the novel is fundamental: this future takes place somewhere. Reading ACH via the notion of 
+‘utopia’ proves awkward for its association with the idealised ‘no-place’, given that Le Guin’s 
+project (and its writing, see below) explicitly labours some-place. Furthermore, the text itself 
+denies any utopian claims. Kesh society, marked by death, violence, conflict, struggle and toxic 
+after effects, is arrestingly un-utopian. ACH’ s account of survival in this ‘messy wilderness’
+57 
+emphasises the ongoing effort required to resist lapsing into the mental ‘sickness’ that leads humans 
+to dominate and control.
+58 As one character, a Kesh archivist, remarks to Pandora and the reader:
+Garlick and King 7
+This is a mere dream dreamed in a bad time, an Up Yours to the people who ride snowmobiles, make 
+nuclear weapons, and run prison camps by a middle-aged housewife, a critique or civilisation possible 
+only to the civilised, an affirmation pretending to be a rejection, a glass of milk for the soul ulcered by acid 
+rain, a piece of pacifist jeanjacquerie, and a cannibal dance among the savages in the ungodly garden of 
+the farthest West.’
+59
+The Valley ‘isn’t a perfect world’. A partial, situated project, it might be ‘close to the best of all 
+possible worlds’.60 The text conveys the troubling thought that the world of Kesh might require 
+apocalypse and genetic ruination to occur. Therefore, we turn to what ACH does offer: namely, a 
+specific account of a specific place and its inhabitation in spite of future catastrophe. In doing so, 
+we contend that Le Guin manifests topophilia – the love of place – as a survival strategy in/beyond 
+the Anthropocene.
+Topophilia for survival
+In the remainder of this paper, we present Le Guin’s text as an act of Anthropocene topophilia, 
+performing the love of place as a survival strategy. Specifically, ACH mobilises Le Guin’s praxis 
+of love of/for/with landscape in three registers, articulating a potential post-Anthropocene geogra-
+phy. First, it mobilises love for place accrued through inhabitation, investment, attachment and 
+knowledge. Secondly, Kesh society diagrams a model of slow living as part of a more-than-human 
+ecology, which is a subject of care. Finally, ACH responds to the absences, silences and disconti-
+nuities that percolate through landscape as invitational into acts of loving place by figuring alterna-
+tive futures, and recovering lost pasts. In these ways, ACH practices topophilia for survival, traces 
+a ‘geography of love’
+61 amidst its fictionalised future for northern California. It showcases the kind 
+of literary innovation called upon to meet the onto-epistemological challenge of the Anthropocene.62 
+Given the difficult task of representing the scope of planetary ecological crisis and our means of 
+response, ACH draws on encounters with place to muse on its future potential, and potential future.
+Topophilia is a concept with ambivalent politics. We articulate, via Le Guin, a progressive 
+place-love as a means to cultivate the necessary ecological attention that living well in/after the 
+Anthropocene might demand. Yet one can reasonably frame ACH’ s geographical focusing as of a 
+piece with the kind of ‘world reduction’ that her sf has been accused of elsewhere. That is, by virtue 
+of a contracted spatial reality, ACH presents an idealistic situation whereby its speculative world-
+ing need not wrangle with the questions of how to navigate or respond to the unequal power rela-
+tions, competing agencies and distributed processes that characterise the complex geographies of 
+the Anthropocene.
+63 Equally, one must also acknowledge the troubling tendencies of place-love to 
+be mobilised as the basis for exclusionary, parochial and nostalgia-oriented politics. Such concerns 
+are elaborated in response to the unequal effects of time-space compression, as well as in more 
+discussions of the problematic conflating of ‘landscape’, ‘dwelling’ and notions of ‘homeland’.
+64 
+To manifest place (and landscape) in more progressive political terms requires, as Doreen Massey 
+famously argues, appreciating its open-ended, fluid and always contested qualities as the ‘meeting 
+place’ of multiple spatio-temporal relations.
+65 This is the treatment of place that we see given form 
+in ‘The Valley’, and it is on this basis that we turn to examine her project of topophilia oriented to 
+survival in/after the Anthropocene.
+Place-love as personal attachment
+Yi-Fu Tuan conceptualises environments as ‘objects of profound attachment and love’.66 He argues 
+that grasping, and responding to, environmental crises requires reckoning with the affective bonds 
+8 cultural geographies 00(0)
+between people and environment. Thus, Tuan offers ‘topophilia’ as a term capturing such attach-
+ment as the outcome of phenomenal and cultural experience. Through knowing and investing in 
+places, affection and commitment grows. Crucially, topophilia demands situatedness; it ‘cannot be 
+stretched over an empire’.
+67 Place love involves intimately exploring environmental characteristics 
+and edges. Thus, Tuan’s contemporary, Edward Relph, frames an authentic place sense in terms of 
+home, ‘balancing a need to stay with a desire to escape’. Homes offer ‘the point of departure’ for 
+worldly living.
+68 Thus, loved places, as home, are more than emotional repositories. They figure an 
+ontological orientation onto the world implicated in how we affect and are affected.69
+Le Guin’s account of ‘the Valley’ in ACH expresses topophilia by articulating a life-long asso-
+ciation with, and affection for, the Napa area of California. She frames her life-long efforts at writ-
+ing as, variously, efforts to articulate this place. Specifically, the homestead purchased by her 
+father, anthropologist Alfred Kroeber, where she spent summers as a child. Kroeber’s career 
+researching the cultures of indigenous communities in California and elsewhere, and his interest in 
+the valley as a landscape inhabited by a little-recorded indigenous society, fed her place-love. His 
+approach to documenting these cultures – espousing, after his mentor Boas, the importance of 
+fieldwork, first-hand ethnographical encounters beyond the museum, and the significance of lin-
+guistic processes in cultural development – is evident in her construction of the Valley. His exten-
+sive writings on the cosmology and social structures of such communities – much of which he 
+documented through first-hand conversations with informants – would inform the ‘anarcho-prim-
+itivist’ politics characteristic of societies in her writing.
+70
+Works of literature engage in acts of ‘spatial dreaming’, giving form to ‘cultural and political 
+hopes and anxieties’.71 In elaborating the intention of ACH, Le Guin makes explicit her desire to 
+find language capable of expressing the storied landscapes of the Napa Valley. As she describes:
+I want to talk about looking at the world, about geography, particularly about geography of the human 
+people to whom this isn’t a New Land, not the New World, but just the world, their world. This is going to 
+lead me for a little while into rather strange places, but place is what it’s all about, and there’s no use 
+talking in abstractions if what you’re trying to get at is exactly the opposite.
+72
+The subfield of literary geographies, long housing myriad inventive and critical approaches for 
+examining texts, proposes multiple ways of examining the geographical ‘event’ of written work as 
+involving a variety of activities and sites in their creation, reception and (re-)presentation.
+73 
+Importantly, this work acknowledges literature as more than ideological, reflecting cultural con-
+text; or empirical ‘data’, for its evocative place description. Literature ‘disrupt[s] or challenge[s] 
+conventional meaning not simply through its coverage of “geographical” topics but also through 
+the particular conventions of literary writing’. Cultural geographies have witnessed a (re)turn to 
+story-telling and narrative over the past two decades.
+74 This ‘literary’ or ‘telling’ turn views crea-
+tive use of narrative as the means of constructing careful and intimate portraits of places and land-
+scapes, their mutability and dwelling.
+75 A key aim is to nurture ways of writing that ‘realise fidelity 
+to place’.76 Read in this context, ACH appears a dedicated, geographical project of love for the 
+place Le Guin spent childhood summers exploring from a young age, and later returned to regu-
+larly, including when she wrote the novel.
+To achieve her goal, Le Guin required a new way to write place. The character of this place is 
+central to the poetry, stories, rituals and existence of her imagined Kesh, living inside this land, 
+and ‘opening one’s senses to all that [it] has to offer’.
+77 Le Guin recalls childhood efforts at writ-
+ing the Valley. Her stories, shared with her father, featured angelic messengers, impressing the 
+land’s meaning upon visiting explorers. Perhaps reflecting his own rejection of the tendency of 
+anthropology to view culture and landscape as explainable in terms of overarching theories (like 
+Garlick and King 9
+evolution) rather than as objects to be examined and studied in context, Kroeber queried why the 
+landscape required mediation. He encouraged her to write place as excessively, materially pre-
+sent, free of such elevated interpretation, and rich in its substantive detail. From then, Le Guin 
+sought increasingly to eschew those (Western) literary tropes and tendencies that ‘lead me away 
+from my own land’.
+ACH would feature dense, empirical accounts of the character of the ground, plants, animals, 
+trees, rocks and hills, each described and mapped in almost overwhelming detail. She sought to 
+render a geography of California concerned less with ‘abstractions’ than the ‘utterly concrete, 
+local, fixed in place’.
+78 Furthermore, Le Guin encountered and read indigenous literatures, cos-
+mologies and oral traditions, finding they contained ‘the right words for my country, my world, 
+here’.
+79 For many of these communities, landscapes appeared as processual, more-than-human 
+ecologies. When writing ACH, she Le Guin sought to connect with the practices, stories and cos-
+mologies of those people for whom Napa had once been a home akin to the yin utopia mapped in 
+her writing, now long gone and beyond conventional means of excavation (see below). Thus, the 
+mythologies and traditions of those indigenous societies that did endure – the Yurok, Swampy Cree 
+and Navaho – provided her with ‘unfailing inspiration for an ethic and aesthetic native to the west-
+ern American earth’, though she was careful not to exploit their stories.
+80
+Learning to listen to ‘the people who lived there’ was challenging and time-consuming. 
+Indigenous mappings, contrary to Orientalist tropes, are hardly ‘simple’ ways of envisioning land-
+scape. As complex, multi-layered ways of thinking about place, they required a reorientation for 
+the outsider Le Guin.
+81 In this she was aided by the ‘intellectual milieu’ of her childhood, with its 
+many fleshy and textual ‘refugees’. Alternative scholars, non-Western texts (notably, the Tao-te-
+ching), and representatives from the indigenous communities working with her father circulated 
+through her family home. She turned their ideas over in the earth, playing amidst the madrone and 
+adobe whilst her brothers fought overseas.
+82 Her long exposure to alternative ontologies and texts 
+informed her efforts ‘to think like a person of the Valley’ and her text’s attempts to enact a similar 
+experience for its readers.
+83 Nevertheless, it remains possible to read aspects of the text as roman-
+ticising of indigenous ontologies. Despite her efforts at articulating a complex, non-utopic, living 
+society, ACH remains embroiled with the legacy of colonial anthropology and unresolved ques-
+tions around the extent to which such albeit speculative and creative reimagining of indigenous 
+cosmologies might be subject to the charge of appropriation.
+Drawing on emplaced ways of writing and thinking, Le Guin’s crafted account of California 
+articulated the landscape’s lived multiplicity and distinctive ‘accent’ through fiction. Thus, Le 
+Guin’s love of place provided a means to reimagine it as the vessel for a possible future. Mobilising 
+a lived geography to communicate a love of place, ACH combines rich description, the rhythms of 
+oral tradition and Le Guin’s speculative anthropological eye. Equally, the definitively local and 
+bounded feel of the world-in-a-text enables the reader to roam the Valley and mingle with its peo-
+ple. In the manner of a rich regional geography, the confinement of place becomes an opening onto 
+broader processes, transformations and questions.
+84 The world of the Kesh might be a mere 30 miles 
+around, but such distance ‘can be a short or a long way’ depending how it is traversed.85
+Place-love, care and kin
+ACH’s project of topophilia exceeds the expression of personal attachment, performing a place 
+love that is ‘spatial, relational and political’.
+86 ACH diagrams a model for a slow, emplaced way of 
+living amidst a more-than-human landscape, peopled with kin and addressed as a subject of care. 
+This is place-love as praxis: a performative commitment to care, respect and response. For Le 
+Guin, ‘[w]hen you build a world, you are responsible for it’.
+87 Her love for the Valley saw her build 
+10 cultural geographies 00(0)
+a world in which it was cared for. Building a world responsibly means paying sufficient attention 
+to the details. Thus, ACH devotes space to intimately describing the form and character of the land, 
+and the practices by which the Kesh engage it. For Relph, places to which we have a genuine 
+attachment constitute ‘fields of care’ involving ‘real responsibility and respect for that place both 
+for itself and for what it is to yourself and to others’ alongside ‘a complete commitment to that 
+place’
+88 Although Relph (and Tuan) has been subject to significant criticism for accounts of place 
+tending towards solipsism and the erasure of lived difference, 89 such remarks do resonate with 
+contemporary writing on love and care in feminist theory addressing such limitations. To elaborate 
+the Valley as ‘a field of care’ we read ACH through Donna Haraway’s theorising of non-innocent 
+multispecies love.
+Haraway draws much inspiration from Le Guin’s work, championing sf as a vital space for 
+exploring the implications and obligations of entangled becoming with ‘chthonic’ others in our 
+current epoch. Her own sf experimentation, ‘The Camille Stories’, constructs a pan-generational 
+tale of transition – via cross-species experimentation and communal, collaborative living – from 
+today’s Anthropocene into a flourishing ‘Chthulucene’ of multispecies becoming.
+90 Not the only 
+theorist to conceptualise love as practical, relational work necessitating definition and direction,91 
+for Haraway, kinship, companionship and love between ‘significant others’ – persons (in the Kesh 
+sense) who recognise and become-with each another, if asymmetrically – necessitates labour to 
+register and respond to the other. Tracing histories of human-canine cohabitation, collaboration 
+and co-evolution via reflections on her dog, Cayenne, and the contact zones of their meeting, 
+Haraway characterises human-nonhuman ‘response-ability’ – the ability to recognise and respond 
+to an-other – as both ‘historical aberration and a natural cultural legacy’.
+92
+Such theorising helps to articulate relations of love as developing, contingently, over time, 
+being reworked and reproduced via the acts of inheritance by which they are (re)made.93 Crucially, 
+for geographers, it matters where such relations play out: the geographical character of the contact 
+zone mediating encounters with and recognition of the other.
+94 In modelling the world of the Kesh, 
+ACH presents a far-future is one of a contemporary society that has moved in reverse. The novel 
+constructs a slow way of living amidst this ecology as constituent rather than master. This society 
+is localised but not closed. They welcome travellers to their lands and are ‘content’ to know of, but 
+not visit, places beyond the Valley.
+95 Contrasting the (ultimately self-defeating) aggressive expan-
+sionism of the exceptionalist, anthropocentric Condor, the Kesh trade and interact with others 
+societies as needed, managing these relations across inter-generational via agreed partnerships. 
+However, they also direct the majority of their energy and concern inwards, towards the practical-
+ity of daily living in the people of the Valley. Indeed, the closing lines of the initiation song for 
+members of the Finders Lodge (a guild in charge of trade and excursions beyond the Valley) bids 
+the listener ‘walk carefully [. . .] walk mindfully [. . .] walk fearlessly [. . .] return with us, return 
+to us, be always coming home’.
+96
+Haraway’s thinking (and that of other posthumanist-feminists) figures love as active, knotty, inter-
+generational, ongoing and necessarily incorporating acts of exclusion as the loving of some occurs at 
+the expense of others.
+97 Le Guin’s work offers a site for speculating on how such a love might mani-
+fest in and through place. Important, too, is Haraway’s rejection of a rational biopolitics for governing 
+exclusions, preferring a ‘love that escapes calculation’
+98 and which stays with the trouble of relating. 
+ACH offers a creative, literary example that is good to think with. It helps us conceive of what such 
+love might practically involve when seeking to negotiate place as a more-than-human achievement in 
+the wake of ecological catastrophe. The slow, introverted existence in place that characterises Valley 
+life is based upon desire to ‘persevere’, rather than expand or dominate. Such an existence is ‘an 
+interactive, rhythmic, and unstable process, which constitutes an end in itself’.
+99 Thus ACH diagrams 
+a caring, responsible form of place loving/living outside of modernist progress. The Valley serves as 
+what Haraway terms a ‘quiet place’ for ‘modest possibilities of partial recuperation and getting on 
+Garlick and King 11
+together’.100 The Kesh defer to landscape, its form and character, with regards practical living. Stone 
+Telling recalls the disagreement between the Kesh and visiting Condor soldiers, seeking to bridge a 
+nearby creek to transport supplies. For the villagers, such efforts at landscape engineering are ill-
+thought: ‘If a bridge at this place were appropriate, there would be one’. As one elder explains to the 
+Condor general:
+One doesn’t need roads and bridges to go from room to room of one’s house. This Valley is our house, 
+where we live.101
+As the narrator, Pandora, notes, ‘It is hard for us to conceive, harder to approve, of a serious adult 
+person not in a hurry [. . .] Hurry is the essence of the city’ and of civilisation.102 The city, a materialisa-
+tion of the anthropological machine via purified spaces and quotidian acts of human exceptionalism,103 
+is anathema to the valley. Whilst the Condor ‘keep without giving’, dwelling amidst ‘walls of black 
+basalt’ and ‘wide streets at right angles’,
+104 the Kesh endure as a ‘loose, light, soft network’, of ‘small 
+scale’ settlements, trading, crafting and gathering resources as needed. They ‘were not engaged in 
+enterprises requiring heroic sacrifice’.
+105 Upon the Valley, Stone Telling’s handmaid, who escapes the 
+Condor lands with the protagonist, remarks ‘it’s easy being here’. In the Valley, ‘everybody belongs to 
+everybody’ rather than all things belonging to ‘man’, as under the Dayao.
+106 Indeed, Pandora observes 
+that ‘Kesh grammar makes no provision for a relation of ownership between living beings’.107 An 
+external visitor to the Valley, she captures the essence of Kesh existence woven into a more-than-
+human, non-hierarchical ecological network of care.
+108
+Importantly, Pandora suggests, this low-impact way of living reflects a society in which ‘large 
+families, a large private food-supply, and a competitive attitude were all socially disapproved’. 109 
+However, it is also the deathly consequence of past catastrophes resulting in low birth rates and 
+short life expectancies (30–40 years). Such slow living appears predicated on a legacy of slow 
+violence. Indeed, there is little desire to live long in this world and the role of doctors incorpo-
+rates euthanasia, as the Kesh prioritise ‘the alleviation of misery [. . .] ahead of the prolongation 
+of life’ or maintaining ‘an ideal of perfect health’, ensuring ‘that living wasn’t any harder than it 
+had to be’.
+110 Therefore, such care for place in the eco-corporeal ruins of California is possible 
+only after the Anthropocene epoch has occurred. Amidst this blasted earth, efforts unfold to 
+replenish refuge. 111
+The primary source of food is gained through gathering, though hunting does occur as a pastime 
+and for religious purposes. Thus, living requires practical knowledge of regional ecology, exempli-
+fied by the Kesh capacity to live well on a diverse range of local edible flora. Indeed, ‘[t]here is no 
+word in Kesh for famine’.
+112 Domestic animals, being members of ‘earth’ houses, ‘consented to 
+live and to die with human beings’ 113 as ‘people living together’. 114 Wild animals, as members of 
+the unearthly ‘Sky’ houses, possess their own ways of living. To attempt to ‘coax’ or control these 
+lifeforms is viewed as ‘perverse’.
+115 Hunted animals consent to die when called upon by the hunter 
+to meet their weapon. Reminiscent of certain indigenous American traditions, specific invocations 
+mark the killing of hunted animals and the hunter’s gratitude.
+116 Stories of spectral beasts leading 
+hunters to their death reflect Kesh anxieties around failing to show sufficient ‘respect’. Thus, the 
+dealing of death does not negate a recognition of nonhuman personhood.
+As a result of their society’s modest size, and proliferating toxic markers of past ‘backward-
+headed’ civilisation, the Kesh engage the environment and its inhabitants and active beings, with 
+whom they converse and engage in acts of care and attention. All ‘people’ were held to have their 
+own ‘dances’, whether perceptible by humans or not. The dances of the Kesh, such as the ‘world 
+dance’, acted as seasonal celebrations of humanity’s ‘participation in the making and unmaking, 
+the renewal and continuity, of the world’.
+117 They greeted its inhabitants, other animals, even 
+stones, with a call of ‘heya’: an ‘untranslatable statement of praise/greeting/holiness/being 
+12 cultural geographies 00(0)
+sacred’118 acknowledging nonhuman personhood. The organising familial ‘houses’ evoke the 
+materiality of landscape, named for the madrone tree, red adobe and blue clay. The houses likewise 
+materialise Le Guin’s imagined multispecies society, connecting humans, animals, plants together 
+in familial networks that can be usefully likened to Harawayan ‘oddkin’, figuring a more-than-
+human family network defined by more than genetic relation or straight filiation.
+119 As Pandora 
+notes, it was normal ‘[to] call an olive tree grandmother or a sheep sister, to address a half-acre 
+field of dirt ploughed for corn as “my brother”’. This was neither a ‘primitive’ nor ‘symbolic’ act 
+for the Kesh, but the culmination of a love for place that involved understanding one’s existence 
+within a larger relational ecology.
+120
+Place-love and absence
+Sf writing creates vital space to respond to the transformations, estrangements, monstrous entities 
+and effects of the Anthropocene. As Jonathon Turnbull demonstrates by way of examining Jeff van 
+der Meer’s Southern Reach trilogy, such texts render those hauntings, discontinuities, feedback 
+loops and forms of ‘weirding’ that trouble linear accounts of modernist progress.
+121 Indeed, in the 
+context of conceptual turns towards emotion, affect, embodiment and practice, the means by which 
+sf texts, authors and readers navigate and manifest the un-/non-representable are significant for 
+how they explore and reckon with the limits of perception.
+122 Literature inevitably works on the 
+reader ‘to affect and inspire [. . .] rather than merely represent’,123 providing a key site for making 
+sense of, and evaluating, the representation, experience and relationality of place and landscape.124 
+Before concluding, we briefly reflect on ACH as an act of place-love that marshals absences, 
+silences and discontinuities as invitations to imagine potential futures.
+Whilst Le Guin rejects ‘overt moralizing’,
+125 a clear ethical thread runs through ACH. As much 
+recent work in geography and elsewhere argues, the Anthropocene, as an epoch of extensive 
+human-inflicted environmental degradation, cannot be detached from histories of colonisation and 
+colonial violence.
+126 Furthermore, as ‘Western’ ontologies of nature and culture as essentialised 
+and distinct are seen to legitimate capitalist ecocide, the value of alternative stories and indigenous 
+ontologies as a means to reframe human-nonhuman relations and reject dualistic Enlightenment 
+thinking is championed. Indeed, Haraway’s recent work engages indigenous American activism 
+and knowledges to account for creative ways of resisting extractive industry. She emphasises the 
+importance of foregrounding different ways of talking about the environment, singling out Le 
+Guin’s fiction to impress that ‘[it] matters what stories use to tell other stories with’.
+127
+Yet, in the case of the landscape that hosts Le Guin’s speculative future, no stories survive. The 
+knowledges, practices and beliefs of those living in Napa Valley prior to the arrival of European 
+colonisers were never recorded. As low-impact societies with cultures of oral transmission, their 
+genocide and displacement resulted in their ways of living being erased with few traces. As Le 
+Guin notes, even their names are unknown; only those afforded to them by the Spanish remain.
+128 
+This vast absence resides at the heart of ACH, echoing across the text, as it permeated the anthro-
+pological survey work of her father, whose initial fieldwork involving indigenous societies and 
+cultures in California were driven by a feverish, colonial archival impulse to salvage soon to be lost 
+ways of living.
+129 For Le Guin, the vanished past inspires as much speculation as the distant future, 
+offering fertile ground to cultivate ways to lovingly exist in place:
+Which is farther from us, father out of reach, more silent – the dead, or the unborn? Those whose bones lie 
+under the thistles and the dirt and the tombstones of the Past, or those who slip weightless among molecules, 
+dwelling where a century passes in a day, among the fair folk, under the great, bell-curved Hill of 
+Possibility? [. . .] There’s no way to reach that lot by digging.
+130
+Garlick and King 13
+Absence is inherent to the experience of landscape; its capacity to unsettle and disperse our percep-
+tion outwards, elsewhere, on affective lines of flight.131 In tension, absence also pulls us in, inviting 
+us to it with stories, relations, dreams.132 As a result, ‘the absencing fracture of landscape is simul-
+taneously a sort of openness’133 as moments of ‘distance and non-coincidence’ texture our encoun-
+ters and perceptions within place in ways that ensure they are never settled. For John Wylie, the 
+‘geographies of love’ thus concern less geographies of ‘fusion’ or attachment (after Tuan ), or 
+relating and response (after Haraway), than moments of rupture and dispersal, originating out of 
+the silence and absence that marks encounters with the other’s unknowable excess.
+134 In short, 
+experiences of landscape are haunted by that which is not present, or unactualised.135 The inarticu-
+lable gap at the centre of landscape invites the labour of love as an ongoing working through of the 
+tensions between presence and absence.
+Thus, the irresolvable absences at the heart of the Valley – a past unrecorded,; a future yet to 
+come – beckon Le Guin into acts of topophilia, and ACH’s twin aims of mourning and worlding.
+136 
+Itself an expression of love, this sf project attempts to fill this void with new, hopeful stories of 
+living in place. As discussed, when constructing ‘her Valley’, Le Guin sought indigenous commu-
+nities in California and beyond that remained for inspiration and guidance in writing landscape as 
+something lived in across generations, as part of wider ecology of beings – human and not. Yet, the 
+absence of the indigenous communities who did once live in Napa Valley remains at the book’s 
+heart: ‘One may listen, but all the words of their language are gone, gone utterly’.
+137
+Moreover, this absence is integral to the central organising metaphor of Kesh culture: the hinge. 
+Depicted as two interlocking spirals, it reflects the twin domains characterising Kesh ontology: the 
+earth, or actuality, of living; and the sky, or domain of virtual possibility. At the centre of the hinge 
+sits a gap, a space, between these sides of existence. That gap, ‘that leap, break, flip, that reversal 
+from in to out, from out to in’,
+138 is central to A culture that abides in fluidity and uncertainty as 
+engines for difference and change. The Kesh practise a deep respect for the transitory, fleeting and 
+impermanent. They regularly empty their libraries of books that have long gone unread and burn 
+them, creating space for new knowledge whilst expressing faith in the idea that all that is useful is 
+either already known or will be rediscovered when needed.
+Le Guin’s imaginary future is an intricately woven account of what might yet come to pass in 
+the wake of the Anthropocene marked by a further absence, that of conventional narrative. Her 
+refusal to indulge what Roland Barthes terms the ‘pleasure’ of the text enables ACH to manifest in 
+writing the Kesh’s preference for the gyring returns over and above of the pursuance of linear pro-
+gress. To build this world is a conjurer’s attempt to shift the reader’s perception of our own reality 
+‘sideways’. And yet, dissonance at the heart of the hinge suggests uncertainty about whether we 
+can perceive differently. The Valley remains aporetic, like the fantasy of fulsome dwelling itself.
+139 
+As Pandora writes:
+When I take you to the Valley, you’ll see the blue hills on the left and the blue hills on the right, the rainbow 
+and the vineyards under the rainbow late in the rainy season, and maybe you’ll say, “There it is, that’s it!” 
+But I’ll say, “A little farther.”
+140
+In turn, the Kesh’s world proliferates with the absence of our current ways of living. When such 
+ways (re)appear – as in the Condor cities and tanks – they do not last long. ACH is bound up with 
+our absence, as much as that of those preceding us. As well as working, via love, to recover a way 
+of living in place, ACH reminds us that our world is, today, already ghosted by alternative forms of 
+worlding. Such sentiment is evoked in one of the many poems, ostensibly shared with Pandora by 
+her Valley informants, ‘From the People of the Houses of Earth in the Valley to the Other People 
+Who Were on Earth Before Them’. Here the Kesh appear to directly address our time from theirs, 
+reminding us that the Valley exists here, now, as yet without expression:
+14 cultural geographies 00(0)
+In your time when all the words were written,
+in your time when everything was fuel,
+in your time when houses hid the ground,
+we were among you.
+[. . .]
+You did not know us. We were the words you had no language for.141
+Arising out of absences – that of a past where people lived well, and a future where they do again 
+– comes Le Guin’s act of place-love in the Anthropocene. The text ‘encourages a conceptual reor-
+dering of the world’, and offers ‘an entry into the reciprocal set of relations that characterise 
+[Valley] life’.
+142 For the Kesh, storytelling is an act of intervention in the world.143 ACH mobilises 
+absence to manifest of a geography of love, and its invitation to consider how we might make a life 
+amidst the ruins, returning to place and the demands of living well within it.
+Conclusion
+To conclude, we have drawn from literary geographies and contemporary work on narrating the 
+Anthropocene to consider Ursula Le Guin’s Always Coming Home, as a practical act of topophilia 
+oriented towards future survival. As Haraway argues, ‘SF is storytelling and fact telling’: as ‘the-
+ory in the mud’ it proffers ‘the patterning of possible worlds and possible times, material-semiotic 
+worlds, gone, here and yet to come’.
+144 Through speculatively offering a future society that lives in 
+and through the specifics of place after the planet (and human bodies) have been ravaged and trans-
+formed by war, toxins and climate collapse, Le Guin crafts a hopeful vision of future geography. 
+She imagines one possible version of life beyond the Anthropocene, found in a specific place and 
+way of living each carefully rendered in intricate, excessive detail. Informed by her engagements 
+with indigenous knowledge, Le Guin seeks a means of articulating her deep love for a place 
+haunted by absence. Her act of ‘storiation’ works to ‘lead us away from hyperobjects, abstraction, 
+and indifference’.
+145
+The Kesh represent one future amongst many, offering hope and a sense of the work required to 
+think and make alternative modes of existence. Always Coming Home does not offer a future for 
+all humanity. Neither does it suggest that the Anthropocene is a time to abandon the specificity of 
+place and landscape – the animating particularities of encounters between people and geography. 
+It is also a future packaged and stylised in accordance with conventions reminiscent of the salvage 
+anthropology that motivated her father and others’ engagements with California’s indigenous soci-
+eties during the early-twentieth century. Yet, what her work does offer is an attempt to craft the 
+means for living inside these specificities. Le Guin explicitly tethers the future of humanity to the 
+love of (a) landscape. For her, California’s Napa Valley affords the possibility of a life beyond the 
+Anthropocene. Thus, her brand of sf showcases the ethical, imaginative and political work that 
+returning to ‘place portraiture’ within cultural geographies might undertake.
+146
+Crucially, such a project for Le Guin requires finding a language both appropriate to articulat-
+ing the crises of our time, as well as manifesting ways of living that break free from the toxic 
+narrative arc of ‘progress’ and move ‘sideways’ or ‘yinwards’. Of course, her means of doing so 
+evoke further questions of how to reckon with anthropology’s colonial history, as well as the 
+Garlick and King 15
+challenge of engaging (and mobilising) indigenous ecological knowledge alongside the issues of 
+romanticisation and appropriation. 147 Clearly, though, an overheating world is ill-served by ‘hot 
+utopias’ that position salvation a mere technological ‘novum’ away. ACH rejects what we might 
+call ‘eco-modernism’ in favour of evoking (and prefiguring) current enthusiasms for ‘degrowth’, 
+local consumption and slow living leading into more processual engagements with the environ-
+ment that decentre the human. Le Guin’s work is utopian in its hope for a better future, yet also 
+disavows this impulse in both revelling in the gap between our present and that future, and choos-
+ing to locate it beyond the violent ruination of our current world. Le Guin presents attentive, 
+empirical, lyrical place-writing as a possible strategy for manifesting practical ways of living that 
+can open onto better relationships with our surroundings before such ruination – of the planet and 
+the body – comes to pass.
+Acknowledgements
+The authors wish to thank the editors of the special issue for inviting this submission and for their support 
+throughout the publication process. We also want to extend thanks to the editors at cultural geographies – 
+specifically Harriet Hawkins and Anna Secor – for their assistance during the review process. Finally, our 
+gratitude goes to the participants in 2020’s the Earth and its Others online conference event, for engaging 
+with our initial ideas; and to those who provided anonymous review feedback on the manuscript, which 
+greatly assisted in bringing it up to standard.
+Ethics Statement
+The authors confirm the work is their own and has not previously been published elsewhere. Every effort has 
+been made to ensure all spurces are appropriately cited and acknowledged. There exist no conflicts of interest 
+concerning the content of the paper or its publication. All research ethics guidelines have been adhered to in 
+the conduct of the research upon which it is based. Any errors appearing in the paper are the responsibility of 
+the authors alone.
+Funding
+The author(s) received no financial support for the research, authorship, and/or publication of this article.
+ORCID iD
+Ben Garlick  https://orcid.org/0000-0001-7257-0430
+Notes
+  1. A.Tsing, ‘Blasted Landscapes (and the Gentle Arts of Mushroom Picking)’, in E.Kirksey (ed.), The 
+Multispecies Salon (Durham: Duke University Press, 2014), pp. 87–109; F.Ginn, ‘When Horses Won’t 
+Eat: Apocalypse and the Anthropocene’, Annals of the Association of American Geographers, 105, 
+2015, pp. 351–9; K.Strauss, ‘These Overheating Worlds’, Annals of the Association of American 
+Geographers, 105, 2015, pp. 342–50; T.Walton and W.Shaw, ‘Living With the Anthropocene Blues’, 
+Geoforum, 60, 2015, pp. 1–3.
+  2. T.van Dooren, The Wake of Crows: Living and Dying in Shared Worlds (New York: Columbia University 
+Press, 2019).
+  3. D.Haraway, ‘Anthropocene, Capitalocene, Plantationocene, Chthulucene: Making Kin’, Environmental 
+Humanities, 6, 2015, pp. 159–65.
+  4. B.McKibben, ‘Worried? Us?’, Granta, 80, 2003, pp. 8–12.
+  5. T.Morton, Hyperobjects: Philosophy and Ecology After the End of the World (London: University of 
+Minnesota Press, 2013); regarding the implications for ‘landscape’ see: T.Morton, ‘Zero Landscapes in 
+the Time of Hyperobjects’, Graz Architectural Magazine, 7, 2011, pp. 78–87.
+16 cultural geographies 00(0)
+  6. Recent examples include: D.Farrier, Footprints: In Search of Future Fossils (London: 4th Estate, 2020); 
+K.Jamie, Surfacing (London: Sort of Books, 2019); R.Macfarlane, Underland: A Deep Time Journey 
+(London: Penguin, 2019).
+  7. K.Symons and B.Garlick, ‘Introduction: Tracing Geographies of Extinction’, Environmental 
+Humanities, 12, 2020, pp. 288–95.
+  8. D.Matless, ‘The Anthroposcenic’, Transactions of the Institute of British Geographers, 42, 2017,  
+p. 364.
+  9. A.Fredriksen, ‘Haunting, Ruination and Encounter in the Ordinary Anthropocene: Storying the Return 
+of Florida’s Wild Flamingos’, cultural geographies, 27, 2021, p. 532.
+ 10. A.Tsing, The Mushroom at the End of the World: On the Possibility of Life in Capitalist Ruins (Princeton 
+& Oxford: Princeton University Press, 2015); A.Tsing, ‘Blasted Landscapes’.
+ 11. D.Chandler and J.Pugh, ‘The Anthropocene Islands Agenda’, Dialogues in Human Geography, 11, 
+2021, p. 448.
+ 12. C.Åsberg and R.Braidotti, ‘Feminist Posthumanities: An Introduction’, in C.Åsberg and R.Braidotti 
+(eds), A Feminist Companion to the Post Humanities (London: Springer, 2018), p. 12.
+ 13. R.Kitchin and J.Kneale, ‘Science Fiction or Future Fact? Exploring Imaginative Geographies of the 
+New Millennium’, Progress in Human Geography, 25, 2001, p. 20, p. 32.
+ 14. See H.Gunderman, ‘Geographies of Science Fiction, Peace, and Cosmopolitanism: Conceptualising 
+Critical Worldbuilding Through a Lens of Doctor Who’, Literary Geographies, 6, 2020, p. 42; also 
+J.Kneale, ‘Plots: Space, Conspiracy and Contingency in William Gibson’s Pattern Recognition and 
+Spook Country’, Environment and Planning D: Society and Space, 29, 2011, pp. 169–86; L.Harris, 
+‘Towards Narrative Political Ecologies’, Environment and Planning E: Nature and Space, 5, 2022,  
+pp. 835–60.
+ 15. U.Le Guin, Always Coming Home (London: Grafton, 1988), p. xi.
+ 16. On the early work of Kroeber see I.Jackins, ‘The First Boasian: Alfred Kroeber and Franz Boas, 1896-
+1905’, American Anthropologist, 104, 2002, pp. 520–32. Kroeber sets out an approach to studying cul-
+ture as a ‘superorganic’ domain of existence to be known in terms of its material objects, practices, oral 
+traditions and linguistic forms, and their geographical distribution via works including: A.Kroeber, ‘The 
+Superorganic’, American Anthropologist, 19, 1917, pp. 163–213; and The Nature of Culture (Chicago: 
+University of Chicago Press, 1952). For a discussion of Kroeber’s ‘salvage’ anthropology that sought to 
+document pre-colonial indigenous societies in California, see: K.Lightfoot, Indians, Missionaries and 
+Merchants: The Legacy of Colonial Encounters on the California Frontiers (Berkley: University of 
+California Press, 2005).
+ 17. See discussion of M.Rose, ‘The Question of Culture in Cultural Geography: Latent Legacies and 
+Potential Futures’, Progress in Human Geography, 45, 2021, pp. 958–60.
+ 18. Recent consideration of these issues features in the self-reflective discussions of Bawaka Country; 
+W.Sarah, S.Suchet-Pearson, K.Lloyd, L.Burarrwanga, R.Ganambarr, M.Ganambarr-Stubbs, et al., 
+‘Everything is Love: Mobilising Knowledges, Identities and Places as Bawaka’, in M.Palomino-
+Schalscha and N.Gombay (eds), Indigenous Places and Colonial Spaces: The Politics of Intertwined 
+Relations (Abingdon: Routledge, 2018), pp. 53–5.
+ 19. See H.Lorimer, ‘Telling Small Stories: Spaces of Knowledge and the Practice of Geography’, 
+Transactions of the Institute of British Geographers, 28, 2003, pp. 197–217; H.Lorimer and H.Parr, 
+‘Excursions – Telling Stories and Journeys’, 21, 2014, pp. 543–7; E.Cameron, ‘New Geographies of 
+Story and Story Telling’, Progress in Human Geography, 36, 2012, pp. 573–92; M.Rose, D.Cooper and 
+H.Griffiths, ‘Acknowledging the Work of Poetry: A Collaborative Commentary on Tim Cresswell’s 
+Fence’, cultural geographies, 25, 2018, pp. 257–62.
+ 20. Le Guin has described the decision to subtitle the original published text with the words ‘a novel’ as “a 
+commercial thing”, reflecting her publisher’s fears that the book text would be mistaken for anthropo-
+logical account. Indeed, Le Guin revealed she encountered some initial difficulty with copyrighting the 
+recordings of Kesh music as the material was assumed to have been recordings of traditional indigenous 
+musicians, rather than an sf creation. See: U.Le Guin, T.Barton, M.Chodos-Irvine and G.Hersh, ‘The 
+Making of Always Coming Home: A Panel at Mythopoeic Conference XIX Berkeley, California, July 
+31 1988’, Mythlore, 17, 1991, pp. 56–63.
+Garlick and King 17
+ 21. G.Deleuze and F.Guattari, A Thousand Plateaus: Capitalism and Schizophrenia, V ol. 2 (London: 
+Bloomsbury, 2013), p. 2.
+ 22. C.Franko, ‘Self-Conscious Narration as the Complex Representation of Hope in Le Guin’s Always 
+Coming Home’, Mythlore, 15, 1989, p. 57.
+ 23. Le Guin, ACH, p. 163.
+ 24. Le Guin, ACH, p. xi.
+ 25. Franko, ‘Self-Conscious Narration’.
+ 26. A full account of this cosmology is provided within ‘The Serpentine Codex’, in U.Le Guin, ACH,  
+pp. 43–9.
+ 27. Le Guin, ACH, p. 45.
+ 28. Le Guin, ACH, p. 242.
+ 29. Franko, ‘Self-Conscious Narration’, p. 59.
+ 30. Le Guin, ACH, pp. 171–2.
+ 31. For discussions on the temporality of the Kesh, and some of these origin myths, see Le Guin, ACH,  
+pp. 160–9.
+ 32. Le Guin, ACH, p. 29.
+ 33. Franko, ‘Self-Conscious Narration’, p. 59.
+ 34. J.Moore, ‘An Archaeology of the Future: Ursula Le Guin and Anarcho-Primitivism’ (Reading: 
+Foundation, 1995), p. 39.
+ 35. Le Guin, ACH, p. 159.
+ 36. Le Guin, ACH, p. 380.
+ 37. Le Guin, ACH, p. 379.
+ 38. See Moore, ‘An Archaeology of the Future’, pp. 32–9.
+ 39. U.Le Guin, ‘The Carrier Bag Theory of Fiction’, in U.Le Guin, Dancing at the Edge of the World 
+(London: Paladin, 1989 [1986]), p. 169.
+ 40. A.Chan Kit-Sze, ‘Re-Reading Ursula K. Le Guin’s SF: The Daoist Yin Principle in Ecofeminist 
+Novels’, in D.Vakoch (ed.), Dystopias and Utopias on Earth and Beyond: Feminist Ecocriticism of 
+Science Fiction (Abingdon: Routledge, 2021), pp. 126–37.
+ 41. K.Buse, ‘Genre, Utopia, and Ecological Crisis: World-Multiplication in Le Guin’s Fantasy’, Green 
+Letters, 17, 2013, p. 267.
+ 42. I.Csicsery-Ronay Jr, ‘Marxist Theory and Science Fiction’, in E.James and F.Mendlesohn, The 
+Cambridge Companion to Science Fiction (Cambirdge: Cambridge University Press, 2003), pp. 113–24.
+ 43. Strauss, ‘These Overheating Worlds’; M.Woods, ‘Imagining the Anthropocenic City: The New Face 
+of Urban Renewal in New Orleans and Josh Neufeld’s A.D.: New Orleans After the Deluge’, Literary 
+Geographies, 4, 2015, pp. 84–102.
+ 44. Buse, ‘Genre, Utopia’, p. 276.
+ 45. U.Le Guin, ‘A Non-Euclidean View of California as a Cold Place to be’, in U.Le Guin, Dancing at the 
+Edge of the World (London: Paladin, 1989 [1982]), p. 90.
+ 46. Le Guin, ACH, p. 151; Le Guin et al., ‘The Making of’, p. 61.
+ 47. Le Guin, ‘A Non-Euclidean View’, p. 90.
+ 48. Le Guin, ‘A Non-Euclidean View’, p. 85.
+ 49. Le Guin, ‘A Non-Euclidean View’, p. 87; Buse, ‘Genre, Utopia’, p. 270.
+ 50. See S.Medlicott, ‘Conceiving an Ecofeminist Utopia: Genre, Gender, and Ecology in Ursula K Le 
+Guin’s Always Coming Home’, ISLE: Interdisciplinary Studies in Literature and Environment, isaa177, 
+2020, pp. 1–14; Buse, ‘Genre, Utopia’; Chan Kit-Sze, ‘Re-Reading Ursula’; Franko, ‘Self-Conscious 
+Narration’.
+ 51. Le Guin, ‘A Non-Euclidean View’, p. 96.
+ 52. Medlicott, ‘Conceiving an Ecofeminist Utopia’, p. 10.
+ 53. Le Guin, ‘A Non-Euclidean View’, pp. 81–2, p. 93.
+ 54. Medlicott, ‘Conceiving an Ecofeminist Utopia’, p. 7; D.Haraway, Staying With the Trouble: Making 
+Kin in the Chthulucene (Durham: Duke, 2016).
+ 55. Franko, ‘Self-Conscious Narration’, p. 57.
+18 cultural geographies 00(0)
+ 56. Åsberg and Braidotti, ‘Feminist Posthumanities’, p. 13.
+ 57. Le Guin, ACH, p. 239.
+ 58. As well as featuring in several Kesh parables and myths, and manifesting in the figure of the “back-
+ward-headed person”, the nature of this “sickness” is the subject of a lengthy debate in a dialogue 
+between various Kesh individuals and the representatives of the ‘Warrior Lodge’ that forms in response 
+to the potential threat of the Condor people in the course of the ‘Stone Telling’ narrative: Le Guin, ACH, 
+pp. 381–6.
+ 59. Le Guin, ACH, p. 316.
+ 60. Moore, ‘An Archaeology’, p. 37.
+ 61. As elaborated by C.-A.Morrison, L.Johnston and R.Longhurst, ‘Critical Geographies of Love as Spatial, 
+Relational and Political’, Progress in Human Geography, 37, 2012, pp. 505–21.
+ 62. McKibben, ‘Worried? Us?’.
+ 63. Here we are applying to the geographical scope of ACH the critique of Le Guin articulated by F.Jameson, 
+‘World Reduction in Le Guin: The Emergence of Utopian Narrative’, Science Fiction Studies, 2, 1975, 
+pp. 221–30.
+ 64. D.Harvey, The Condition of Postmodernity (New York: Wiley-Blackwell, 1990), p. 351; J.Wylie, ‘A 
+Landscape Cannot be a Homeland’, Landscape Research, 41, 2016, pp. 408–16.
+ 65. D.Massey, ‘Landscape as a Provocation’, Journal of Material Culture, 11, 2006, pp. 33–48.
+ 66. Y .-F.Tuan, Topophilia: A Study of Environmental Perception, Attitudes, and Values (New York: 
+Colombia University Press, 1974), p. xii.
+ 67. Tuan, Topophilia, p. 101.
+ 68. E.Relph, Place and Placelessness (London: SAGE, 2008 [1976]), pp. 40–1.
+ 69. S.Ahmed, The Cultural Politics of Emotion (Edinburgh: Edinburgh University Press, 2013).
+ 70. Moore, ‘An Archaeology’.
+ 71. Strauss, ‘These Overheating Worlds’, p. 348.
+ 72. U.Le Guin, ‘Legends for a New Land: Guest of Honor Speech at the 19th Annual Mythopoeic 
+Conference’, Mythlore, 15, 1988, p. 6.
+ 73. See A.Saunders, ‘The Spatial Event of Writing: John Galsworthy and the Creation of Fraternity’, cul-
+tural geographies, 20, 2013, pp. 285–98; J.Riding, ‘A Geographical Biography of a Nature Writer’, 
+cultural geographies, 23, 2015, pp. 387–99.
+ 74. See Lorimer, ‘Telling small’; Cameron, ‘New Geographies’.
+ 75. H.Lorimer, ‘Dear Departed: Writing the Lifeworlds of Place’, Transactions of the Institute of British 
+Geographers, 44, 2019, p. 332; see also S.Daniels and H.Lorimer, ‘Until the End of Days: Narrating 
+Landscape and Environment’, cultural geographies, 19, 2012, pp. 3–9; C.DeSilvey, ‘Making Sense 
+of Transience: An Anticipatory History’, cultural geographies, 19, 2012, pp. 31–54; O.Jones, ‘“Not 
+Promising a Landfall. . .”: An Autotopographical Account of Loss of Place, Memory and Landscape’, 
+Environmental Humanities, 6, 2015, pp. 1–27; F.MacDonald, ‘The Ruins of Erskine Beveridge’, 
+Transactions of the Institute of British Geographers, 39, 2014, pp. 477–89.
+ 76. Lorimer, ‘Dear Departed’, p. 341.
+ 77. Relph, Place and Placelessness, p. 54.
+ 78. Le Guin, ‘Legends. . .’, p. 6.
+ 79. Le Guin, ‘Legends. . .’, p. 4.
+ 80. L.McCaffrey, Across the Wounded Galaxies: Interviews With Contemporary American Science Fiction 
+Writers (Chicago: University of Illinois Press, 1990), p. 172.
+ 81. Le Guin, ‘Legends. . .’, p. 10.
+ 82. McCaffrey, Across the Wounded Galaxies, p. 154.
+ 83. McCaffrey, Across the Wounded Galaxies, p. 172.
+ 84. D.Matless, ‘Writing Regional Cultural Landscape: Cultural Geography on the Norfolk Broads’, in 
+J.Riding and M.Jones (eds), Reanimating Regions: Culture, Politics and Performance (Abingdon: 
+Routeledge, 2017), p. 18.
+ 85. Le Guin, ACH, p. 54.
+ 86. Morrison et al., ‘Geographies of Love’, p. 506.
+Garlick and King 19
+ 87. McCaffrey, Across the Wounded Galaxies, p. 161.
+ 88. Relph, Place and Placelessness, pp. 37–8.
+ 89. See G.Rose, Feminism and Geography: The Limits of Geographical Knowledge (Cambridge: Polity 
+Press), pp.76–83.
+ 90. Haraway, Staying With the Trouble, pp. 134–68.
+ 91. In particular, such an understanding love is informed here by: b.hooks, All About Love: New Visions 
+(New York: Harper Perennial, 2000); and Ahmed, Cultural Politics.
+ 92. D.Haraway, When Species Meet (Durham: Duke, 2008), p. 16.
+ 93. See T.van Dooren, Flight Ways: Life and Loss at the Edge of Extinction (New York: Colombia University 
+Press, 2014).
+ 94. S.Hinchliffe, ‘Where Species Meet’, Environment and Planning D: Society & Space, 28, 2010, 
+pp. 34–5.
+ 95. Le Guin, ACH, p. 453.
+ 96. Le Guin, ACH, p. 404.
+ 97. E.Giraud, What Comes After Entanglement? (Durham: Duke University Press, 2019).
+ 98. Haraway, When Species Meet, p. 85.
+ 99. Le Guin, ‘A Non-Euclidean View’, p. 91.
+100. Haraway, Staying With the Trouble, p. 10.
+101. Le Guin, ACH, pp. 34–5.
+102. Le Guin, ACH, p. 410.
+103. S.Ruddick, ‘Situating the Anthropocene: Planetary Urbanization and the Anthropological Machine’, 
+Urban Geography, 36, 2013, pp. 1113–30.
+104. Le Guin, ACH, p. 340, p. 185.
+105. Le Guin, ACH, p. 380.
+106. Le Guin, ACH, pp. 366–7.
+107. Le Guin, ACH, p. 42.
+108. We take the notion of a ‘care network’ manifest as distributed attentiveness from: A.Krywoszynska, 
+‘Caring for Soil Life in the Anthropocene: The Role of Attentiveness in More-Than-Human Ethics’, 
+Transactions of the Institute of British Geographers, 44, 2019, pp. 661–75.
+109. Le Guin, ACH, p. 437.
+110. Le Guin, ACH, p. 473, p. 475.
+111. Haraway, Staying With the Trouble, p. 100.
+112. Le Guin, ACH, p. 437.
+113. Le Guin, ACH, p. 420.
+114. Le Guin, ACH, pp. 418–9.
+115. Le Guin, ACH, p. 420.
+116. Le Guin, ACH, p. 94.
+117. Le Guin, ACH, p. 454.
+118. Le Guin, ACH, p. 515.
+119. Haraway, Staying With the Trouble, pp. 102–3.
+120. Le Guin, ACH, p. 424.
+121. J.Turnbull, ‘Weird’, Environmental Humanities, 13, 2021, pp. 277–8.
+122. J.Kneale, ‘From Beyond: H.P. Lovecraft and the Place of Horror’, cultural geographies, 13, 2006,  
+pp. 106–26.
+123. Harris, ‘Towards Narrative’.
+124. N.Alexander, ‘On Literary Geography’, Literary Geographies, 1, 2015, pp. 3–6.
+125. McCaffrey, Across the Wounded Galaxies, p. 170.
+126. H.Davis and Z.Todd, ‘On the Importance of a Date, or, Decolonizing the Anthropocene’, ACME: An 
+International Journal for Critical Geographies, 16, 2017, pp. 761–80.
+127. Haraway, Staying With the Trouble, p. 118.
+128. Le Guin, ‘A Non-Euclidean View’.
+20 cultural geographies 00(0)
+129. Lightfoot, Indians.
+130. Le Guin, ACH, p. 4.
+131. J.Wylie, ‘Landscape, Absence and the Geographies of Love’, Transactions of the Institute of British 
+Geographers, 34, 2009, pp. 275–89.
+132. M.Rose, ‘Back to Back: A Response to “Landscape, Absence and the Geographies of Love”’, 
+Transactions of the Institute of British Geographers, 35, 2010, pp. 141–4.
+133. Wylie, ‘Landscape, Absence’, p. 280.
+134. H.Reinert, ‘The Landscape Concept as Rupture: Extinction and Perspective in a Norwegian Fjord’, in 
+H.Soovali-Sepping, H.Reinert and J.Miles-Watson (eds), Ruptured Landscapes: Landscape, Identity 
+and Social Change (Dordrecht: Springer, 2015), pp. 41–54.
+135. Wylie, ‘Landscape, Absence’, p. 284.
+136. H.Reinert, ‘The Haunting Cliffs: Some Notes on Silence’, Parallax, 24, 2018, pp. 501–12.
+137. Le Guin, ACH, p. 4.
+138. Le Guin, ACH, p. 153.
+139. Franko, ‘Self-Conscious Narration’, p. 59; J.Wylie, ‘Dwelling and Displacement: Tim Robinson and 
+the Questions of Landscape’, cultural geographies, 19, 2012, p. 375.
+140. Le Guin, ACH, p. 339.
+141. Le Guin, ACH, p. 405.
+142. K.Zuelke, ‘Keeping Grows; Giving Flows: Reciprocal Relations and the Gift of Always Coming Home’, 
+in D.Vakoch (ed.), Dystopias and Utopias on Earth and Beyond: Feminist Ecocriticism of Science 
+Fiction (Abingdon: Routledge, 2021), p. 148.
+143. Le Guin, ACH, p. 315.
+144. Haraway, Staying With the Trouble, p. 31.
+145. E.B.Martinez, ‘On Storiation and What is Washed Ashore: The Anthropocene as Big Kahuna’, 
+Dialogues in Human Geography, 11(3), 2021, pp. 439–42. 
+146. Lorimer, ‘Dear Departed’.
+147. Bawaka Country; Sarah et al., ‘Everything’.
+Author biographies
+Ben Garlick is a cultural geographer at York St John University. His work focuses on the more-than-human 
+and literary geographies of landscape, particularly in the context of conservation and environmental change.
+Liesl King is an Associate Head of the School of Humanities (Creative Writing, Media & Film Studies), York 
+St John University. Her research examines representations of gender and progressive spirituality in twentieth-
+century women’s sf and fantasy. In 2017, she launched the online sf magazine Terra Two: An Ark for Off-
+World Survival.

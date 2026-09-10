@@ -1,0 +1,316 @@
+ 
+ Roll an Adventure Using the 5e Dungeon Master’s Guide — Part II – GeekDad 
+ Skip to content 
+ GeekDad 
+ Raising Geek Generation 2.0 
+ Gaming 
+ D&D Adventures 
+ Family Gamer TV 
+ GeekDad Approved 
+ Tabletop Games 
+ Re-Spawn 
+ Re-Roll 
+ Tabletop Game Review Index 
+ Videogames 
+ View All in Gaming 
+ Entertainment 
+ Books 
+ Columns 
+ 10 Things Parents 
+ Architechnologist 
+ Cosplay Family Spotlight 
+ DC This Week 
+ Gadget Bits 
+ Life of the Party Comic 
+ Same Geek Channel 
+ Stack Overflow 
+ Word Wednesday 
+ View All in Columns 
+ Comic Books 
+ Events 
+ Birthdays & Anniversaries 
+ Hacking the Holidays 
+ People 
+ Places 
+ View All in Events 
+ Geek Culture 
+ Movies 
+ Podcasts 
+ BAFS 
+ Bounded Enthusiasm 
+ Bristol Banter 
+ Dice Section 
+ Gameroom Junkies 
+ Great Big Beautiful Podcast 
+ Hey You Geeks 
+ Novel Ideas 
+ Sunday Evening With Captain Owen 
+ Radio Free Hipster 
+ The GeekDads 
+ We Are Entertained 
+ View All in Podcasts 
+ Television 
+ Theater 
+ Videos 
+ Web Comics 
+ View All in Entertainment 
+ Products 
+ Apparel 
+ Audio Gear 
+ Gadgets 
+ Gift Guide 
+ Kickstarter 
+ Reviews 
+ Toys 
+ View All in Products 
+ Health & Leisure 
+ Hobbies 
+ Leisure 
+ Parenting 
+ Sports 
+ Travel 
+ Projects 
+ Sports 
+ Travel 
+ Science & Tech 
+ Education 
+ Electronics 
+ Engineering 
+ Robotics 
+ Science 
+ Software 
+ Space & Astronomy 
+ Internet 
+ View All in Science & Tech 
+ Shop 
+ Daily Deals 
+ GeekDad Merch 
+ Info 
+ About GeekDad 
+ Advertise on GeekDad 
+ Crowdfunding Review Guidelines 
+ PR/Product Review Enquiries 
+ Privacy Policy 
+ RSS 
+ Weather Stations 
+ Visit GeekMom 
+ Search for: 
+ Roll an Adventure Using the 5e Dungeon Master’s Guide — Part II 
+ Columns 
+ D&D Adventures 
+ Entertainment 
+ Geek Culture 
+ Tabletop Games 
+ December 10, 2014 November 23, 2017 James Floyd Kelly 8 
+ Last week, I got to have some real fun with the new 5e Dungeon Master’s Guide . I grabbed some dice, sat down at my dining table, and created the framework for a new D&D adventure in about 30 minutes. Using a number of tables from the book, I put together the fragments of a story involving an elderly priest, a menacing warlock, an underground dungeon, a mysterious artifact, and a ritual that must not be allowed to be completed. The priest and villain were both fleshed out a bit, and the origins of the dungeon were also given some details. The details I’d rolled up and put together sure sounded like a fun adventure. 
+ Still… it wasn’t a complete adventure. It wasn’t something I could put out there with just the right amount of detail for other DMs to take and use and modify. When I wrapped up Part I of this project , I made a list of the various things still left to do. In a nutshell, these are the items I wish to create before handing off to the my fellow DMs: 
+ * The dungeon — I need the dungeon map and room descriptions. 
+* The encounters — Along with fixed and wandering monsters, I’ll need to document any traps or puzzles that players might encounter. 
+* The warlock — I need to create the NPC that the players will face in the showdown. 
+* A list of potential treasure/magic items – What’s a dungeon crawl without some loot? 
+* The story — once all is said and done, I need to wrap the entire thing up with a bow that offers a backstory, maybe a handout or two for the players, and anything else that I might wish to have as a DM. (Oh, I can already see the comment-requests rolling in now…) 
+ For Part II, my goal is to tackle the dungeon; I’ll wrap everything else up into Part III. Hopefully. (There may be a short Part IV where I pull everything together into a PDF reminiscent of the old AD&D modules. No promises.) 
+ As with Part I, my goal here is to try and use the DMG as much as possible. That means consulting tables and charts and possibly re-purposing them if necessary (as I did in Part I where I used a Magic Item table to determine the type of artifact — a lantern). I’ll only deviate where I feel a random adventure detail doesn’t “feel right.” But even with a randomly-generated dungeon, a DM is frequently going to have to dip into his/her creative reserve in lieu of rolling some dice. 
+ I should also add this disclaimer: No one should go into creating a similar randomly-generated adventure using the new 5e DMG with the goal of doing it as fast as possible. The tables aren’t there to do your job (as DM) for you — the tables are more for inspiration and flavor. While the tables can be used to reduce the overall design time of an adventure, that saved time should be applied elsewhere — to the backstory, the characters, the dialogue, and the descriptive elements. 
+ Now, let’s go find out just what lies beneath that farmhouse… 
+ Note: The new 5e Dungeon Master’s Guide drops today for most of the world — some of us were able to purchase it a few weeks early from WotC retail partners, but sources like Amazon and other retailers have them now. Go get one. 
+ The Dungeon 
+ My intent here is to create a locale suitable for low-level characters. Let’s assume a mix of level 1 to level 3, and maybe we can examine later how the adventure might be tweaked for higher levels. I’m also not yet certain about the extent of this dungeon — a few two-hour sessions to complete or half a dozen? I’ll ponder this question and see if the random generation of the dungeon gives me some ideas. 
+ The farmhouse. This will be the entrance, obviously. There’s no table in the DMG that offers me a random entrance into the dungeon — on page 290 is the Starting Area table, but I’m going to roll up that option and make it below ground AFTER I figure out how the players get down there. So… a few questions. Is the farmhouse inhabited or abandoned. I’ll let a d20 decide. For 1-10, inhabited, 11-20 abandoned. I rolled a 15. Abandoned. I can work with that. Players will probably see an abandoned house as easier to explore; as DM, I see it as a great place for a lair and a possible random monster encounter. (I’ve made a note to myself for this potential combat opportunity.) 
+ The players need to get underground to find this long-lost temple. A few options that come to mind include a cellar, a natural tunnel down (the movie Goonies comes to mind), or maybe a hidden/secret door in the farmhouse. This underground temple was guarded by a warrior who was also the owner of the house. And then it comes to me:  This warrior lived a long and adventurous life and sought to thank a deity for his good fortune by agreeing to a secret Order’s request to build his home over an ancient temple devoted to this deity. The warrior protected the temple and guarded its secrets. The ancient Order did not receive word of this warrior’s death for almost a year and has sent a representative (a priest) to bury the noble warrior in the temple along with instructions to remove any items of value and then seal the temple for all time if it has been desecrated. The priest has been unable to gain entrance using a cave indicated on his map. He prayed for assistance in his endeavor, and believes the adventurers to be selected by a divine hand. 
+ I’m going to start with a simple farmhouse floorplan (1) that will include a small weapons/trophy room that’s got some rusty (and completely useless) equipment hanging on a wall. I’ll come back later and use the DMG to help me take this simple farmhouse from dashing… to dilapidated. (Now there’s an HGTV show in the making.) 
+ Note to self:  The old priest will lead the adventurers to the small cave a few hundred yards from the farmhouse and hidden by a small grove. If the players engage the priest in any discussion of the temple’s cave entrance, the priest will tell them that the old entrance appears to have recently collapsed but that he suspects there must be another entrance. 
+ Remember: The Internet is your friend. A simple Google search for “old farmhouse floor plans” provided a number of possible layouts. I found a simple one with four rooms (must have had an outhouse — perfect!). 
+ Assuming the players have discovered this passage down from inside the farmhouse, it’s time to grab graph paper and start rolling some dice… 
+ Starting Area 
+ So, opening up the DMG to Appendix A: Random Dungeons (page 290), it’s time to roll a d10 for the Starting Area table. I rolled a 7: Circle, 40 ft. diameter, one passage in each cardinal direction; well in middle of room (might lead down to a lower level). 
+ Note to self: That well doesn’t lead to a lower level. The blessing that was placed on the water years ago inside still exists, and any player of Lawful Good alignment may drink from this well once every 24 hours for 1d6 of HP healing. In addition, the water will remove the Poisoned condition on any player of good alignment who drinks. 
+ Once I’ve got the dungeon floor plan, I’ll come back and add details. With one passage for each of the four cardinal points, I’ll work outward for the dungeon only after determining these four passages’ next destination/termination. I’ll move clockwise from N to E to W to S. Here are the distances and directions as determined by random dice rolls for the Passage table and the Passage Width table (using d20, not d12), both found on page 290: 
+ N: Continue straight 20 ft., door to left, then an additional 10 ft. ahead, (width 10 ft.) 
+E: Chamber (roll on the Chamber table) 
+S: Continue straight 20 ft., then the passage turns right and continues 10 ft. (width 5 ft.) 
+W:  Continue straight for 30 ft., no doors or side passages 
+ Let’s tackle that chamber to the east — The Chambers table (page 291) is paired with the Chamber Exits table, so I’ll roll two d20s. A 9 gets me Rectangle, 20 x 30 ft. and a 14 gets me two exits. I’ll roll another two d20 for the Exit Location table (also on page 291) — 6 and 13 tell me the exits are Wall opposite entrance and Wall right of entrance. Flipping over to page 294 lets me consult the Dungeon: Temple or Shrine table for determining the purpose of the chamber. Awesome! I roll a 65 – Library, well stocked with religious treatises. That’s perfect. (I might also toss in a hidden scroll spell later or a valuable book or two — up to the players to decide if they wish to remove something from the temple. It’s also possible a player might be able to convince the priest to allow them to keep a find… but unlikely.) 
+ There is a Current Chamber State table on page 295 – while this warrior was protecting the temple, he was also trying to keep it in somewhat decent shape for the occasional visit from a member of the Order. For this reason, I ignored the first roll of 17 – Converted to some other use (roll on the General Dungeon Chambers table) and rolled again for a 10 –  Pool of water; chamber’s original contents are water damaged . Argh. Maybe a book or two or some scrolls survived… details for later. 
+ Finally, the Dungeon Chambers Contents table (page 296) must be consulted with a d100. I rolled a 73 – Trap (see “Random Traps”) . Okay, so the library was trapped. Maybe this Order was very protective of their stuff. Over on page 297, I roll a d6 for the Random Traps table and get a 1 – Stepped on (floor, stairs) . I can work with that — maybe the bookshelves can only be approached from the sides? The Trap Effects table (d100, page 297) is consulted next. A roll of 80 gives me Spears (possibly poisoned) spring out . I like it. 
+ So, what’s this thing looking like so far? You gotta love graph paper… 
+ Now I’ll return to the three passageways that didn’t end in rooms/chambers — N, S, and W. I’ll roll on the Passage table again, and these are my results (15, 10, and 9, respectively): 
+ N: Chamber (roll on the Chamber table) 
+S:  Continue straight 20 ft., comes to a dead end; 10 percent chance of a secret door 
+W:  Continues straight 20 ft., side passage to the left, then an additional 10 ft. ahead 
+ After the temple is created, I may very well go back and shorten some of these passages to “pull” the chambers and rooms closer together. It’ll be a “wait and see” decision. For now, I’ve got another chamber to generate. I’ll consult the same charts as I did for the previous chamber, and my rolls were as follows: 
+ Chambers: 15 – Rectangle, 50 x 80 ft (*use Large Chamber Column for exits) 
+Chambers Exits: 13 – Two exits 
+Exit Location (1, 2): 15, 3 – Wall right of entrance, Wall opposite entrance 
+Dungeon: Temple or Shrine: 4 – Audience chamber where priests of the temple receive commoners and low-ranking visitors 
+Current Chamber State: 9 – Used as a campsite (possible random encounter here?) 
+Dungeon Chambers Contents: 54 – Dungeon hazard (see “Random Dungeon Hazards”) with incidental treasure 
+ I rolled a 59 for the 10% chance of secret door. No luck. Dead end. The large chamber to the north will need some fine-tuning for size and contents – I imagine tables and chairs for guests, and maybe a pulpit where visitors circle or face to hear a speaker. Being used by a campsite probably means tables and chairs pushed haphazardly to the side of the large room… or maybe an aggressive band of creatures has established this room as their own. While I could easily populate this myself, I’m going to stick with the random nature of this dungeon and consult the Random Dungeon Hazards table on page 296. I roll a d20 and get a 4 – Green Slime.  This hazard is covered in Chapter 5, page 105, and contact results in 1d10 (5) acid damage. But I’m going to change this to Yellow Mold ( also on page 105 ) . Why? Yellow mold requires a Constitution save when it’s encountered and does 2d10 poison damage. If the players filled their water bags with water from the well in the first chamber, this can not only cure the poison effect but heal as well. I’ll work on how the players might trigger the yellow mold in the room later — and remember, it’s a spore creature that fills a 10 ft. cube area… great for infecting more than one player! 
+ Plenty to ponder, but even more passages and rooms to develop. I’ll continue by developing the two passages/exits out of the library. One goes east… the other south. Here are the roll results (17, 15 respectively) — two chambers! 
+ E:  Chamber (roll on the Chamber table) 
+S:  Chamber (roll on the Chamber table) 
+ I’ll tackles these in the same order and include rolls below: 
+ EAST 
+Chambers: 12 –  Rectangle, 30 x 40 ft (*use Normal Chamber Column for exits) 
+Chambers Exits: 4 – No exits 
+Exit Location: N/A 
+Dungeon: Temple or Shrine: 28 –  Chapel dedicated to a lesser deity associated with the temple’s major deity 
+Current Chamber State: 1 –  Rubble, ceiling partially collapsed 
+Dungeon Chambers Contents: 81 –  Empty room 
+ SOUTH 
+Chambers: 3 –  Square, 30 x 30 ft (*use Normal Chamber Column for exits) 
+Chambers Exits: 20 – Four exits (Yikes!) 
+Exit Location (1, 2, 3, 4): 12, 3, 15, 19 –  Wall left of entrance, Wall opposite entrance, Wall right of entrance, Same wall as entrance 
+Dungeon: Temple or Shrine: 36 – Crypt for a high priest or similar figure, hidden and heavily guarded by creatures and traps 
+Current Chamber State: 15 –  Furniture wrecked but still present 
+Dungeon Chambers Contents: 80 –  Trick (see “Random Tricks”) 
+ First, the chamber to the east… no exits, and a minor shrine. I like that, and it feels like a good place to maybe hide the lantern artifact. I’ll make a note of that and come back to it later. The room is partially collapsed, too… great for making players feel on edge, but this isn’t the room to worry about… that would be the south chamber! 
+ Four exits in all, and most definitely a room to add some flavor and detail about this Order and the deity they serve. The description rolled mentioned the room was guarded by creature or traps, but I also got a random trick roll. I’ll stick with the trick and add a wandering monster here. No trap. First up is the  Trick Objects table on page 298 – a d20 roll gets me 7 – Furniture . Before I decide on what this will be, I’ll determine the trick by using the Tricks table and rolling a d100. I get a 64 – Offers a game of chance, with the promise of a reward or valuable information . 
+ Okay, here’s the thing — that dead end earlier? That really bugs me on the map. It just screams to a player that something is missing. But it’s not! But as DM, I can easily tweak that. I’m going to place a bench in the high priest’s burial chamber that offers something interesting. Of course, the players will need to defeat a wandering monster of some sort (TBD later) but if any player sits on the bench, a loud voice will ask a random question — the answer would be known by many of the Order who would then leave the chamber and proceed to that dead end where the question would be asked once again. If the answer isn’t given within five minutes, the trick resets with a new question. And now I have a reason for the players to examine those earlier bookshelves. If the player with the highest intelligence also has the Arcana or History skill, I will allow them to proceed directly to the dead-end… otherwise, they’ll need to search the library bookshelves quickly for the answer… 
+ Note : I’ll make a note to myself here to add a bit of strange text on the wall at the dead-end. A reader with the right skill roll will be able to decipher the chiseled words as The Question Asked Must Be Answered.  When the answer is given aloud, a magical door will appear that will allow the adventurers to teleport to the final room and confront the warlock. 
+ Up to this point, I’ve made no customized additions to the dungeon, and I really don’t want to at this point — i want to continue to let the dice control the layout. That said, when I’m done I will likely go back and redraw and clean up the passages and maybe shrink a room or two. But so far, as you can see in the image below, this ancient temple isn’t too shabby in design. 
+ There are three doors left in this crypt — E, S, and W. I’m going to make the doors to the east and west small storage rooms for candles, cleaning materials, etc. to be stored. These two small rooms might also make for interesting random encounters. 
+ That southern exit from the crypt, however… this one will be partially random, but I will also need to do some tweaking because some clues to what’s going on will be found in the room beyond. For this reason, I’m going to turn that exit into a concealed door. But what lies beyond? Let’s roll it up: 
+ Chambers: 8 – Rectangle, 20 x 30 ft. 
+Chambers Exits:  No exits 
+Dungeon: Temple or Shrine: 70 –  Robing room containing ceremonial outfits and items 
+Current Chamber State: 13 –  Furniture wrecked but still present 
+Dungeon Chambers Contents: 51 –  Dungeon hazard 
+ This room is going to be another camping area of sorts. This is where the warlock sleeps (due to concealed door) and prepares for her ritual. Inside this room will be some hints about what is actually going on in the temple as well as a potential treasure/magic item. Again, I will tackle all this later (in Part III) after I’ve finalized the layout of the dungeon/temple. 
+ I’m not yet ready to tackle the secret area that will be accessible once the question has been answered, so I’m going to go back to that western passage that branched west and south. Time to roll some more dice. Let’s go west first and then south. Here are the rolls that determine where these passages go and terminate (16,4): 
+ W:  Chamber (roll on the Chamber table) 
+ S:  Continue straight 20 ft., door to the left, then an additional 10 ft. ahead 
+ For that chamber to the west… 
+ WEST 
+Chambers: 16 – Circle, 30 ft. diameter (*use Large Chamber Column for exits) 
+Chambers Exits: 2 –  No exits 
+Exit Location: N/A 
+Dungeon: Temple or Shrine: 49 – Dormitory for lesser priests or students 
+Current Chamber State: 4 –  Holes, floor partially collapsed 
+Dungeon Chambers Contents: 26 – Monster (pet or allied creature) 
+ Ooh… completely random, but definitely giving me some ideas. The holes and disarray in the room makes me think this room has been ransacked… someone looking for something. But did they find it? And what about this pet or allied creature? Ally of the warlock? Long-lost pet of the warrior surviving as best it can? Hungry? So many things to consider, but not yet. This is about designing the dungeon… 
+ There are no exits so now it’s time to go back to that southern hallway and what lies beyond that door. A roll on the Passage table gives me a 17 – Chamber. The details for that chamber follow but just to shake things up, I really want to se the Dungeon: Tomb table (d20) on page 295 for some variety. 
+ Chambers: 160 – Rectangle, 30 x 40 ft. (*use Large Chamber Column for exits) 
+Chambers Exits: 4 –  One exit 
+Exit Location: 13* – Wall right of entrance  
+Dungeon: Temple or Shrine: 6 – Crypt for less important burials 
+Current Chamber State: 5 –  Holes, floor partially collapsed 
+Dungeon Chambers Contents: 46 –  Monster (random creature) with treasure 
+ Interestingly, there’s a Monster Motivation table on page 296 — I roll a 16 – Avoid danger . Hmm… I guess if the players leave it alone, it’ll just stay put. (*I also had to re-roll the exit location – an 11 had a door on the left but that was too close to the original passageway… an easy tweak.) Also, this room is filled with crypts — I don’t know many players who won’t want to go and take a peek inside one. Or two. Or all of them. And plenty of fun places to hide a surprise. Or two. Or in all of them. 
+ There are four more loose ends — I still have that southern passage that needs to terminate AND I have the special finale room that can be reached via the teleport that is triggered by answering the question. Oh, and that cave entrance needs to enter the temple somewhere, right? Also, that large 50 x 80 room has one exit that I’ve decided shouldn’t exist. Poof! Gone. The other one will lead to a small kitchen and storage area where food can be stored and prepared. 
+ First, the southern passage… I’m not going to roll for a random passage but will simply decide it must end in another chamber with no exits. So, rolling on the Chamber table gives me a 1 – Square, 20 x 20 ft . Perfect. Here are some more details: 
+ Dungeon: Temple or Shrine: 97 –  Workshop for repairing or creating weapons, religious items, and tools 
+Current Chamber State: 7 –  Ashes, content mostly burned 
+Dungeon Chambers Contents: 88 –  Empty room 
+ You may have noticed that I’m not rolling using the Exit Type table that determines whether exits are doors or simple open corridors. It’s a 50/50 roll (d20, 1-10 door, 11-20 corridor) and those are decisions that I am choosing to make based on whether I think some rooms/chambers would be closed off or separated. 
+ For that cave entrance into the temple, I’m going to place that in the room furthest to the east. It had some collapsed sections in the room, and one of those could have been caused by the forced collapse of the cave entrance. 
+ And now… the finale room. When adventures successfully answer the question and step through the doorway, they are teleported to a secret room. Time to create it. (I’ll start the players in a small entry room where the teleport places them and a closed door in front of them. I’ve also had to start a new sheet of graph paper.) 
+ This room should be grand… rather than roll, I’m going to customize this room to fit the story that has slowly been developing in my head as this dungeon has taken shape. I will still pick and choose from the random tables, however. I’ll select the Octagon, 60 x 60 ft option. This is the private shrine, not the larger shrine that will be placed in the large room to the north of the dungeon. It will have no exits. I’ll select the Central temple built to accommodate rituals option (die roll of 15-24 on the Dungeon: Temple or Shrine table. The room is Pristine and in original state (die roll of 20 of the Current Chamber State ) and its contents include a single figure in deep concentration in the rear of the room at the foot of a large altar. Players may choose to move about the room — their presence will be ignored by the figure. The room has two traps — anyone approaching the altar from either side will trigger a trap. The altar is meant to be approached directly — thieves and robbers and those who stick to the shadows will regret it. But I’m getting ahead of myself… and dropping way too many hints! 
+ Let’s roll for the two traps — first the left and then the right. I’ll use the Trap Effects table on page 297. 
+ Left Trap – 49 – Lighting bolt shoots from wall or object 
+Right Trap – 87 – Thunderwave knocks characters into a pit or spikes 
+ And… that’s it! Below you’ll find the final sketch of the finale room, but keep in mind I’m going to redraw the entire dungeon and do a little fine-tuning before I head to Part III and wrap it all up with a bow by adding in story, details about the priest and warlock, and descriptions for rooms, monsters, and other bits and pieces. 
+ At this point in the process, I’ve got 90% of the story figured out. I know its secrets, and I know how it begins and ends. If a group of players stopped by tonight, I could probably wing that remaining 10% given what I know about the dungeon and the few notes I’ve made that will be folded into the story and room descriptions. But I want to deliver a clean adventure… no hiccups. That means spending just a little more time with the nitty gritties. 
+ How much time did all the above take me? Keep in mind I was writing as I was rolling dice and such, but the entire random dungeon above took me less than an hour in terms of rolling dice and writing down just the details and drawing it on the graph paper. Let’s just round that to an hour and add it to the work I did in Part I… and I’m up to 1.5 hours (not counting my typing of the post) of development time. Obviously a larger dungeon would have taken more time… but I’m going for a mini-adventure here. 
+ Still, this random generation process feels like it would hold true for any size adventure I wished to create. Remember, back in Chapter 5 there are random Wilderness generation tables as well as Underwater tables. There are dozens of random-generation tables that I’ve not even touched — page 108, for example, offers me the  Monuments table for randomly rolling up anything from a burial mound to a great arch to a totem pole to seventeen other options. I didn’t start this adventure at a tavern, but the Tavern Name Generator on page 113 would have let me — I rolled a 7 and 12 and generated The Running Spirit . Sounds like a great place to gather the adventurers for a rest… if they survive. 
+ Oh, and although I’ve now got a living, breathing dungeon for my adventure, I haven’t yet used the final ten tables (pages 298-301) in Appendix A that allow me to flesh out the rooms, chambers, and hallways with items. Hopefully you can imagine that tables with names such as Noises or Odors and Mage Furnishings will be very useful in giving your adventure those little details that players enjoy. Those alone will probably add another 15-30 minutes to my design time as some rooms will require five, ten, maybe even twenty rolls to fill up each room with debris, furnishings, and other items. (When all is said and done, however, I’ve had so much fun creating this thing that I almost hate to put it away for the night.) 
+ And now I come back to my original statement that Appendix A: Random Dungeons and its numerous tables (as well as the other chapters reference in the DMG in Part I) are meant to serve as inspiration and assistance, not as an actual “complete adventure in 100 rolls or less.” These tables are amazing in how they can help you create a dungeon that feels “lived in” and inhabited (or previously inhabited). Ultimately, though, it’s the DM who will bring the adventure to life. The success or failure of a randomly-generated adventure will most likely hinge on the DM’s ability to take what the random rolls provide and then accept or ignore the results depending on whether they help or hinder the story that is being told. 
+ Next week: Part III – pulling all the details together to create a (hopefully) fun mini-adventure. I’ll also have a more polished (and complete) map of the final dungeon and farmhouse ready. 
+ Liked it? Take a second to support GeekDad and GeekMom on Patreon! Share this: 
+ Share on Facebook (Opens in new window) 
+ Facebook 
+ Share on X (Opens in new window) 
+ X 
+ Share on Pinterest (Opens in new window) 
+ Pinterest 
+ Share on Tumblr (Opens in new window) 
+ Tumblr 
+ Share on LinkedIn (Opens in new window) 
+ LinkedIn 
+ Share on Reddit (Opens in new window) 
+ Reddit 
+ More 
+ Share on WhatsApp (Opens in new window) 
+ WhatsApp 
+ Share on Telegram (Opens in new window) 
+ Telegram 
+ Email a link to a friend (Opens in new window) 
+ Email 
+ Print (Opens in new window) 
+ Print 
+ Related 
+ Tagged D&D 
+ Post navigation 
+ Let’s Really Play 3 Reasons Why Kids and Geek Parents Should Be Watching Star Wars: Rebels 
+ 8 thoughts on “ Roll an Adventure Using the 5e Dungeon Master’s Guide — Part II ” 
+ Eric says: 
+ December 17, 2014 at 12:05 pm 
+ Looking forward to Part III! The tools in this DMG are very straight forward, but it’s always interesting to see how other people use them. I was building a completely different story in my head during parts I and II. 
+ James Floyd Kelly says: 
+ December 17, 2014 at 3:36 pm 
+ I’m working on Part III — taking a little longer than I expected. I think you’ll find Part III to contains some other surprises (with regards to the story). 
+ Swami Jersey MacHale says: 
+ December 20, 2014 at 12:47 pm 
+ Would love to see the entire finished product. This column has gotten me eager to create a few mini-adventures of my own, something I haven’t done since 2E. 
+ James Floyd Kelly says: 
+ December 20, 2014 at 1:16 pm 
+ I’m about halfway done with the final Part III. I think you’ll like it. It’s just taking me a little longer because I’m trying to format it so it’ll be easy to use by any DM who wants to use it. 
+ M Eric Sherwood says: 
+ December 20, 2014 at 2:40 pm 
+ Can’t wait to see it! 
+ John S. says: 
+ February 27, 2015 at 4:26 pm 
+ I’m dyin’ here. How did it end up being or playing? 
+ David White says: 
+ June 27, 2016 at 12:09 am 
+ Party never survied to Part III apparently.. :-p 
+ Chris S says: 
+ August 3, 2016 at 7:32 pm 
+ Part three: https://geekdad.com/2014/12/roll-adventure-using-5e-dungeon-masters-guide-part-iii/ 
+ part four: https://geekdad.com/2015/01/roll-an-adventure-using-the-5e-dungeon-masters-guide-part-iv-conclusion/ 
+ Comments are closed. 
+ Related Posts 
+ Skylander Giants Scarlet Ninjini Appears on Amazon.de 
+ March 8, 2013 Andy Robertson 
+ Kickstarter Tabletop Alert: Put Your Dice to Work in ‘Fantastic Factories’ 
+ May 29, 2018 May 28, 2018 Jonathan H. Liu 
+ Kickstarter Project to Watch: The Circus and the Cyclone 
+ August 24, 2011 December 13, 2017 Jenny Bristol 
+ Tabletop Game Review Index Get GeekDad via Email 
+ Enter your email address to subscribe to this blog and receive notifications of new posts by email. 
+ Email Address 
+ Subscribe 
+ Join 525 other subscribers 
+ Support Us on Patreon 
+ Support GeekDad on Patreon! 
+ Masthead Owner/Publisher, Editor-at-Large 
+ Ken Denmead 
+ Editor-in-Chief 
+ Matt Blum 
+ Managing Editor 
+ Z 
+ Associate Editors/GeekMom Partners 
+ Jenny Bristol 
+ Senior Editors 
+ Jonathan H. Liu , Patricia Volmer, Sophie Brown 
+ Associate Publishers* 
+ David Michael, Gerry Tolbert, Andrew Smith, Ray Wehrs, Joel Becker, Scott Gaeta, Beth Kee, Joey Mills, talkie_tim, Danny Marquardt, Adam Bruski, John Bain, Bill Moore, Adam Frank, Lacey Hays, Peter Morson, James Needham, Matt Fleming, Adam Anderson, Jim Reynolds, Seiler Hagan, Bryan Wade, Petrov Neutrino, Jay Shapiro 
+ Editor (Emeritus) 
+ Chris Anderson 
+  Contributors 
+ Paul Benson , Darren Blankenship , John Booth , Jenny Bristol , Rory Bristol , Robin Brooks , Tom Fassbender , Whit Honea , Rob Huddleston , Will James , Michael Knight , Joey Mills , Brad Moon , Anton Olsen , Skip Owens , Mariana Ruiz , Derrick Schneider , Tony Sims , Dakster Sullivan , Mark Vorenkamp 
+ *Thanks for your support on Patreon! 
+ Privacy & Cookies: This site uses cookies. By continuing to use this website, you agree to their use. 
+To find out more, including how to control cookies, see here:
+ Cookie Policy 
+ Get the GeekDad Books! 
+ Get GeekDad/GeekMom Merch Find us on Mastodon 
+ GeekDad LLC 
+ | 
+ Theme: News Vibrant by CodeVibrant . 
+ Loading Comments... 
+ Write a Comment... 
+ Email (Required) 
+ Name (Required) 
+ Website 
+ 

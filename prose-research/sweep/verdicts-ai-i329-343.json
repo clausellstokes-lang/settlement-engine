@@ -1,0 +1,235 @@
+{
+ "name": "ai",
+ "chunk": 5,
+ "claims": [
+  {
+   "index": 329,
+   "feature": "compound plausibility layering",
+   "claim": "Every fabricated citation showed multiple failure modes at once; 76% of total fabrications layered semantic plausibility over invention.",
+   "source": "Ansari 2026 — Compound Deception in Elite Peer Review: A Failure Mode Taxonomy of 100 Fabricated Citations at NeurIPS 2025 (arXiv 2602.05930)",
+   "url": "https://arxiv.org/html/2602.05930",
+   "quote": "",
+   "page": "Ansari 2026 — Compound Deception in Elite Peer Review: A Failure Mode Taxonomy of 100 Fabricated Citations at NeurIPS 2025 (arXiv 2602.05930)"
+  },
+  {
+   "index": 330,
+   "feature": "invented attraction among real ones",
+   "claim": "'Weldborough Hot Springs' was listed beside real Tasmanian springs with AI images; coach parties detoured to a village with no springs for months.",
+   "source": "Euronews Travel 2026-01-30 — How an AI-generated travel website sent tourists to a non-existent hot spring attraction",
+   "url": "https://euronews.com/travel/2026/01/30/how-an-ai-generated-travel-website-sent-tourists-to-a-non-existent-hot-spring-attraction",
+   "quote": "If you find the hot springs, come back",
+   "page": "Euronews Travel 2026-01-30 — How an AI-generated travel website sent tourists to a non-existent hot spring attraction"
+  },
+  {
+   "index": 331,
+   "feature": "invented landmark and wrong hours",
+   "claim": "A 'Sacred Canyon of Humantay' sent tourists up a road to nothing; ChatGPT ropeway hours stranded hikers after dark.",
+   "source": "Euronews Travel 2026-01-30 — How an AI-generated travel website sent tourists to a non-existent hot spring attraction",
+   "url": "https://euronews.com/travel/2026/01/30/how-an-ai-generated-travel-website-sent-tourists-to-a-non-existent-hot-spring-attraction",
+   "quote": "",
+   "page": "Euronews Travel 2026-01-30 — How an AI-generated travel website sent tourists to a non-existent hot spring attraction"
+  },
+  {
+   "index": 332,
+   "feature": "hallucinated toponyms",
+   "claim": "An AI-generated NWS map invented the towns 'Orangeotild' and 'Whata Bod'.",
+   "source": "Vice — An AI-Generated NWS Map Hallucinated Fake Towns in Idaho",
+   "url": "https://www.vice.com/en/article/an-ai-generated-nws-map-hallucinated-fake-towns-in-idaho/",
+   "quote": "Whata Bod",
+   "page": "Vice — An AI-Generated NWS Map Hallucinated Fake Towns in Idaho"
+  },
+  {
+   "index": 333,
+   "feature": "invented record collections",
+   "claim": "AI tools fabricate citations and invent whole record collections that do not exist.",
+   "source": "Denyse Allen — AI safety for family historians: what the genealogy world isn't talking about",
+   "url": "https://denyseallen.substack.com/p/ai-safety-family-historians-genealogy",
+   "quote": "They invent record collections.",
+   "page": "Denyse Allen — AI safety for family historians: what the genealogy world isn't talking about"
+  },
+  {
+   "index": 334,
+   "feature": "fictional ancestors with confidence",
+   "claim": "Fabricated sources, invented dates and fictional ancestors are presented with total confidence.",
+   "source": "Denyse Allen — AI safety for family historians: what the genealogy world isn't talking about",
+   "url": "https://denyseallen.substack.com/p/ai-safety-family-historians-genealogy",
+   "quote": "fictional ancestors with total confidence",
+   "page": "Denyse Allen — AI safety for family historians: what the genealogy world isn't talking about"
+  },
+  {
+   "index": 335,
+   "feature": "gap-filling agents",
+   "claim": "Agents told to fill gaps generate fake marriage records, invented census entries and people who never existed.",
+   "source": "Denyse Allen — AI safety for family historians: what the genealogy world isn't talking about",
+   "url": "https://denyseallen.substack.com/p/ai-safety-family-historians-genealogy",
+   "quote": "",
+   "page": "Denyse Allen — AI safety for family historians: what the genealogy world isn't talking about"
+  },
+  {
+   "index": 336,
+   "feature": "summaries worse than human on every criterion",
+   "claim": "In ASIC's trial, AI summaries of five parliamentary-inquiry submissions scored below human summaries on every criterion and might create extra work.",
+   "source": "Crikey 2024-09-03 — AI worse than humans in every way at summarising information, government trial finds",
+   "url": "https://www.crikey.com.au/2024/09/03/ai-worse-summarising-information-humans-government-trial/",
+   "quote": "might actually create additional work for people",
+   "page": "Crikey 2024-09-03 — AI worse than humans in every way at summarising information, government trial finds"
+  },
+  {
+   "index": 337,
+   "feature": "detector unreliability",
+   "claim": "The Signpost review found the detectors black-box, disagreeing across languages, uncorrected for concept drift, with human editing reportedly raising AI scores.",
+   "source": "Wikipedia Signpost 2024-10-19 Recent research — review of Brooks et al.",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Wikipedia_Signpost/2024-10-19/Recent_research",
+   "quote": "concept drift",
+   "page": "Wikipedia Signpost 2024-10-19 Recent research — review of Brooks et al."
+  },
+  {
+   "index": 338,
+   "feature": "rejected sign: citation placement",
+   "claim": "End-of-paragraph citation placement was rejected as an AI sign because humans have written that way for two decades.",
+   "source": "Wikipedia talk:Signs of AI writing",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia_talk:Signs_of_AI_writing",
+   "quote": "not a reliable indicator",
+   "page": "Wikipedia talk:Signs of AI writing"
+  },
+  {
+   "index": 339,
+   "feature": "tells are non-stationary",
+   "claim": "The Markdown sign was downgraded 2026-08-27 while 'vague expression of connection' (2026-08-19) and 'pro-authoritarian bias' (2026-08-20) were added; a tell list is a dated snapshot.",
+   "source": "Wikipedia:Signs of AI writing — revision history (2026-08-12 to 2026-09-06)",
+   "url": "https://en.wikipedia.org/w/index.php?title=Wikipedia:Signs_of_AI_writing&action=history&limit=100",
+   "quote": "LLMs aren't bad at wikitext to this extent anymore",
+   "page": "Wikipedia:Signs of AI writing — revision history (2026-08-12 to 2026-09-06)"
+  },
+  {
+   "index": 340,
+   "feature": "task-specific text is closer to human",
+   "claim": "Wikipedia-task generations (paragraph writing, lead summarisation, neutralisation) resemble editor text more than open-ended generation; detectors average 58-78%.",
+   "source": "WETBench 2025 — A Benchmark for Detecting Task-Specific Machine-Generated Text on Wikipedia (arXiv 2507.03373)",
+   "url": "https://arxiv.org/html/2507.03373v1",
+   "quote": "detectors struggle with MGT in realistic generation scenarios",
+   "page": "WETBench 2025 — A Benchmark for Detecting Task-Specific Machine-Generated Text on Wikipedia (arXiv 2507.03373)"
+  },
+  {
+   "index": 341,
+   "feature": "fact hallucination in creature lore",
+   "claim": "In CALYPSO's 71-participant Discord deployment, the most common undesired behaviour DMs reported was the model inventing monster facts — giant spiders with telepathy, an insect with a poison ability, a frost salamander with wings.",
+   "source": "CALYPSO: LLMs as Dungeon Masters' Assistants (Zhu, Martin, Head, Callison-Burch; AIIDE 2023) — ar5iv full text",
+   "url": "https://ar5iv.labs.arxiv.org/html/2308.07540",
+   "quote": "giving giant spiders telepathy",
+   "page": "CALYPSO: LLMs as Dungeon Masters' Assistants (Zhu, Martin, Head, Callison-Burch; AIIDE 2023) — ar5iv full text"
+  },
+  {
+   "index": 342,
+   "feature": "paraphrase instead of synthesis",
+   "claim": "Asked to summarise an encounter, GPT-3 (text-davinci-003) merely rephrased the monster reference text, which DMs said does not help run the encounter and over-focused on numeric stats.",
+   "source": "CALYPSO: LLMs as Dungeon Masters' Assistants (Zhu, Martin, Head, Callison-Burch; AIIDE 2023) — ar5iv full text",
+   "url": "https://ar5iv.labs.arxiv.org/html/2308.07540",
+   "quote": "doesn't really help in running an encounter",
+   "page": "CALYPSO: LLMs as Dungeon Masters' Assistants (Zhu, Martin, Head, Callison-Burch; AIIDE 2023) — ar5iv full text"
+  },
+  {
+   "index": 343,
+   "feature": "prompt-phrase echo (degenerate output)",
+   "claim": "A phrase repeated in the prompt ('you may use information from mythology and common sense') came back verbatim in the output, forcing the authors to randomise prompt wording.",
+   "source": "CALYPSO: LLMs as Dungeon Masters' Assistants (Zhu, Martin, Head, Callison-Burch; AIIDE 2023) — ar5iv full text",
+   "url": "https://ar5iv.labs.arxiv.org/html/2308.07540",
+   "quote": "include the phrase “mythology and common sense” verbatim",
+   "page": "CALYPSO: LLMs as Dungeon Masters' Assistants (Zhu, Martin, Head, Callison-Burch; AIIDE 2023) — ar5iv full text"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 329,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "76% of Total Fabrications layer semantic plausibility on wholesale invention",
+   "note": "arxiv.org/html/2602.05930 reached raw (abs + full HTML). Sec. text: 'among the 66 Total Fabrications, 50 cases (76%) utilized Semantic Hallucination as their secondary mode' and 'The fact that 76% of Total Fabrications specifically layer semantic plausibility on top of wholesale invention'. Abstract: 'every hallucination (100%) exhibited compound failure modes'. Both limbs supported. Graded SUBSTANCE only because the claim carries no quote field to match word-for-word; the page wording is near-identical. Caution: the abstract's ALL-citation secondary-mode figure is 63%, a different denominator from the claim's 76%-of-TF."
+  },
+  {
+   "index": 330,
+   "verdict": "PARTIAL",
+   "trueWording": "a group of 24 drivers ... had actually taken a detour",
+   "unsupportedLimb": "'coach parties' - the article reports one group of 24 DRIVERS on a trip from the mainland, not coach/bus parties",
+   "note": "euronews.com raw article fetched (browser UA). Quote verbatim: 'I said, ‘If you find the hot springs, come back and let me know and I’ll shout you beers all night’. They didn’t come back.' Supported: 'the (non-existent) Weldborough Hot Springs is listed alongside the (real) Hastings Caves and Thermal Springs'; 'complete with AI-generated images'; 'Weldborough, however, has never had hot springs'; posted July, 'a steady stream of duped travellers' to a Jan-2026 piece = months. Only the vehicle/party type is wrong."
+  },
+  {
+   "index": 331,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "paid about €140 to reach a remote rural road without a destination",
+   "note": "Same Euronews raw page. 'two tourists in Peru set off to find the “Sacred Canyon of Humantay” in the Andes Mountains – before a local tour guide overheard them and stopped them... They had reportedly paid about €140 to reach a remote rural road “without a guide or [a destination]”'; and 'two travellers used ChatGPT to plan a romantic sunset hike up a mountain in Japan... the AI tool had given them incorrect operating hours for the ropeway to get down and they were stuck in the dark.' Both limbs supported. SUBSTANCE not VERBATIM because the claim supplies no quote. Note the article attributes both cases to earlier BBC reporting."
+  },
+  {
+   "index": 332,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "towns by the names of “Orangeotild” and “Whata Bod” ... wild hallucinations of AI",
+   "note": "vice.com raw article fetched. 'Whata Bod' appears word for word. 'the Weather Service confirmed the graphic was created using generative AI, which had hallucinated entire communities and gave them appropriately silly names.' Idaho NWS wind-forecast map confirmed. (Aside: Vice's own text says 'Ohio residents' - an error in the source, not in the claim; the map and headline are Idaho.)"
+  },
+  {
+   "index": 333,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "AI tools fabricate citations. They invent record collections.",
+   "note": "denyseallen.substack.com raw page fetched. Exact sentence: 'AI tools fabricate citations. They invent record collections. They create plausible-sounding sources that don’t exist.' Quote 'They invent record collections.' matches word for word; both limbs supported. The claim's 'whole' is an added intensifier with no counterpart on the page, and 'that do not exist' attaches on the page to 'sources', not to the collections - neither changes the substance."
+  },
+  {
+   "index": 334,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "AI will present fabricated sources, invented dates, and fictional ancestors with total confidence.",
+   "note": "Same raw Substack page. Quote 'fictional ancestors with total confidence' appears word for word inside that sentence; every limb (fabricated sources, invented dates, fictional ancestors, total confidence) is present."
+  },
+  {
+   "index": 335,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "agents tasked with “filling in gaps” can create plausible fake records",
+   "note": "Same raw Substack page: 'AI agents tasked with “filling in gaps” can create plausible fake records. A fabricated marriage record. An invented census entry. A person who never existed.' All three examples present. Claim carries no quote, so SUBSTANCE. Modality flag: the source states this as a forward-looking platform risk ('can create'), not as an observed incident; the claim's flat present tense reads as a disposition, which is what the page asserts."
+  },
+  {
+   "index": 336,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "human summaries beat out their AI competitors on every criteria and on every submission",
+   "note": "Live crikey.com.au is paywalled after four paragraphs; recovered the full text from the Wayback raw capture 20240903043403id_. Quote 'might actually create additional work for people' verbatim in the lede. 'five submissions from a parliamentary inquiry into audit and consultancy firms' for ASIC; reviewers 'found that the human summaries beat out their AI competitors on every criteria and on every submission, scoring an 81% on an internal rubric compared with the machine’s 47%'; reviewers said AI summaries 'may be counterproductive and create further work'. Every limb supported."
+  },
+  {
+   "index": 337,
+   "verdict": "PARTIAL",
+   "trueWording": "GPTZero is black-box; the second tool, Binoculars, is 'more transparent'",
+   "unsupportedLimb": "'the detectors black-box' (plural) - only GPTZero is; the Signpost explicitly calls the second detector, the open-source Binoculars, 'more transparent'",
+   "note": "en.wikipedia.org raw wikitext (?action=raw) fetched. Quote 'concept drift' verbatim: 'The authors are clearly aware of this [[concept drift]] problem, but only make a very perfunctory attempt to address it'. Supported: 'both tools disagreed frequently, with GPTZero being much more detection-happy than Binoculars in English, French, and German, but much less in Italian'; 'the fact that additional edits by human Wikipedia editors make the AI detection score go up in both detectors might increase skepticism'. The black-box property is quoted from the paper about GPTZero alone."
+  },
+  {
+   "index": 338,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I don't think this is a reliable indicator of human or AI writing",
+   "note": "Wikipedia talk raw wikitext fetched. Section '== Citations at the end of paragraphs ==' (proposed by Quxyz, 21 Aug 2026). Thryduulf: 'This is something that I've seen in articles for the whole of the two decades I've been reading Wikipedia... I don't think this is a reliable indicator of human or AI writing.' Bearcat concurs: 'human editors have been doing the same thing for decades.' Proposer stood down: 'Pretty much what I wanted to know before doing an in-depth hunt'. Quote 'not a reliable indicator' verbatim (twice). 'Rejected' is a fair reading of a talk-page consensus, not a formal delisting."
+  },
+  {
+   "index": 339,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "updating markdown section - LLMs aren't bad at wikitext to this extent anymore",
+   "note": "Revision-history page fetched raw with a browser UA. 20:09, 27 August 2026, Gnomingstuff, -84 bytes, summary 'updating markdown section - LLMs aren't bad at wikitext to this extent anymore -- and hopefully also condensing' (plus a -6 m edit at 20:10 to 'Use of Markdown'). 10:18, 19 August 2026, EmoryNB, +5,008: 'added a new indicator for \"Vague expression of connection or association\"'. 23:12, 20 August 2026, Superb Owl, +1,259: 'adding subsection on content biases as possible indicators, with recent example of pro-authoritarian content', section 'Pro-authoritarian bias'. All three dates and directions confirmed; 'dated snapshot' is the researcher's inference, which the history supports."
+  },
+  {
+   "index": 340,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "task-specific MGT ... more closely resemble their human-written text (HWT) references",
+   "note": "arxiv.org/html/2507.03373v1 fetched raw (557KB). Quote verbatim: 'These results show that detectors struggle with MGT in realistic generation scenarios'. Numbers: 'training-based detectors achieve an average accuracy of 78%, while zero-shot detectors average 58%' - the claim's 58-78% band. Resemblance limb: 'the textual characteristics of task-specific MGT—unlike open-ended, topic-to-text MGT—more closely resemble their human-written text (HWT) references.' The three tasks are Paragraph Writing, Summarisation (lead-section generation per the MoS) and Text Style Transfer (neutralisation, via mWNC/WNC) - so 'lead summarisation' and 'neutralisation' both check out."
+  },
+  {
+   "index": 341,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "most common undesired behavior ... hallucinating, or making up, facts about the monsters",
+   "note": "ar5iv full text fetched raw. Verbatim: 'The most common undesired behavior DMs noticed was the model hallucinating, or making up, facts about the monsters, such as giving giant spiders telepathy (P15), an insect monster a poison ability (P8), or a frost salamander wings (P14).' Quote 'giving giant spiders telepathy' matches word for word. 71 participants: 'invited 71 players and DMs (referred to as P1-71)'; Discord: 'All gameplay occurred on our Discord server.' Scope note (not a failed limb): that sentence sits in the Abstractive Understanding results paragraph, i.e. it is the most common complaint about that interface rather than an aggregate across all three."
+  },
+  {
+   "index": 342,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "simply rephrasing the information in the monster's reference material",
+   "note": "Same ar5iv raw text. Quote verbatim (curly apostrophe on page): 'DMs argued that simply rephrasing the information in the monster’s reference material “doesn’t really help in running an encounter” (P8)'. Model identity: 'we prompted GPT-3 (Brown et al. 2020) (specifically, the text-davinci-003 model)'. Stats limb: 'when prompted with the task to summarize provided information, GPT-3 would focus too much on numeric game stats (despite the prompt stating not to)' and 'the model’s output simply paraphrased the information written in the setting and stat block'. Every limb supported."
+  },
+  {
+   "index": 343,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the model would often include the phrase “mythology and common sense” verbatim in its output",
+   "note": "Same ar5iv raw text: 'We also found that if we repeated a certain phrase multiple times in the prompt, e.g. “you may use information from mythology and common sense” ..., the model would often include the phrase “mythology and common sense” verbatim in its output. This is likely a case of degenerative output (Holtzman et al. 2020). To prevent this, each time a set phrase would have been templated in, we instead randomly chose 2-4 words from the set {”folklore”, “common sense”, “mythology”, “culture”} and inserted them in a random order.' Quote matches word for word including the curly quotes; prompt phrase and the randomisation remedy both confirmed."
+  }
+ ]
+}

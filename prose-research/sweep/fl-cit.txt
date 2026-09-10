@@ -1,0 +1,695 @@
+
+
+ Can ChatGPT Help with Genealogy Citations? – Family Locket 
+
+ The Research Like a Pro Genealogy Podcast 
+
+ Home 
+
+ About 
+
+ Podcast 
+
+ Books 
+
+ Research Like a Pro 
+
+ Research Like a Pro with DNA 
+
+ RLP Challenge Workbook 
+
+ RLP with AI Workbook 
+
+ Services 
+
+ RLP eCourse 
+
+ RLP Study Group 
+
+ RLP with DNA eCourse 
+
+ RLP with DNA Study Group 
+
+ Coaching and Consulting 
+
+ Professional Genealogy Research 
+
+ Blog 
+
+ Categories 
+
+ Research Tips 
+
+ LDS 
+
+ TFH Consultants 
+
+ Children 
+
+ #FHforChildren 
+
+ #FHforChildren Blog Link Up 
+
+ List of FH ideas for Children and Teens 
+
+ Our Posts about Children and FH 
+
+ Creating and Sharing 
+
+ Accreditation 
+
+ DNA 
+
+ Organizing 
+
+ Research Like a Pro 
+
+ Technology 
+
+ Shop 
+
+ Books 
+
+ Coaching 
+
+ DNA 
+
+ eCourses 
+
+ Felt Family Trees 
+
+ Institute Courses 
+
+ Quick Reference 
+
+ Research 
+
+ Study Group 
+
+ Webinars 
+
+ Workshop 
+
+ Speaking 
+
+ Diana’s Lecture Topics 
+
+ Nicole’s Lecture Topics 
+
+ DNA 
+
+ Newsletter 
+
+ My Courses 
+
+ RLP e-Course 
+
+ RLP Study Group 
+
+ RLP with DNA eCourse 
+
+ RLP with DNA Study Group 
+
+ RLP with AI Workshop 
+
+ Merging and Separating Identities 
+
+ Webinars 
+
+ RLP Webinar Series 2026 
+
+ RLP Webinar Series 2025 
+
+ RLP Webinar Series 2024 
+
+ RLP Webinar Series 2023 
+
+ Log In 
+
+ Finding ancestors and keeping them close to the heart
+
+ Contact Us 
+ $ 0.00 No products in the cart
+ Go to shop 
+
+ Login 
+
+ Remember me? 
+
+ Login 
+
+ Home 
+
+ About 
+
+ Podcast 
+
+ Books 
+
+ Research Like a Pro 
+
+ Research Like a Pro with DNA 
+
+ RLP Challenge Workbook 
+
+ RLP with AI Workbook 
+
+ Services 
+
+ RLP eCourse 
+
+ RLP Study Group 
+
+ RLP with DNA eCourse 
+
+ RLP with DNA Study Group 
+
+ Coaching and Consulting 
+
+ Professional Genealogy Research 
+
+ Blog 
+
+ Categories 
+
+ Research Tips 
+
+ LDS 
+
+ TFH Consultants 
+
+ Children 
+
+ #FHforChildren 
+
+ #FHforChildren Blog Link Up 
+
+ List of FH ideas for Children and Teens 
+
+ Our Posts about Children and FH 
+
+ Creating and Sharing 
+
+ Accreditation 
+
+ DNA 
+
+ Organizing 
+
+ Research Like a Pro 
+
+ Technology 
+
+ Shop 
+
+ Books 
+
+ Coaching 
+
+ DNA 
+
+ eCourses 
+
+ Felt Family Trees 
+
+ Institute Courses 
+
+ Quick Reference 
+
+ Research 
+
+ Study Group 
+
+ Webinars 
+
+ Workshop 
+
+ Speaking 
+
+ Diana’s Lecture Topics 
+
+ Nicole’s Lecture Topics 
+
+ DNA 
+
+ Newsletter 
+
+ My Courses 
+
+ RLP e-Course 
+
+ RLP Study Group 
+
+ RLP with DNA eCourse 
+
+ RLP with DNA Study Group 
+
+ RLP with AI Workshop 
+
+ Merging and Separating Identities 
+
+ Webinars 
+
+ RLP Webinar Series 2026 
+
+ RLP Webinar Series 2025 
+
+ RLP Webinar Series 2024 
+
+ RLP Webinar Series 2023 
+
+ Log In 
+
+ Can ChatGPT Help with Genealogy Citations?
+
+ November 17, 2023 
+
+ Posted by 
+
+ Nicole Elder Dyer 
+
+ Research Tips 
+
+ If you’re curious about how artificial intelligence (AI) might help you become more efficient, consider experimenting with citations. The large language models (LLMs) that have become popular in the last year might prove useful in this area. I’ve been using ChatGPT to experiment with AI in the last month as a student in the National Genealogical Society (NGS) course, Empowering Genealogists with Artificial Intelligence taught by Steve Little. Steve has a great blog here: https://aigenealogyinsights.com/ . In the NGS course, we had four sessions about the four main LLM transformations: summarize, extract, generate, and translate. Today I experimented with having ChatGPT help me generate citations.
+
+ Book Citation
+
+ When learning how to create citations, it’s a good idea to start with a basic book citation. The principles for citing books are carried over to citing other publications in genealogy research, like websites. For genealogy citations, we use the Evidence Explained (EE) style. This style is based on the Chicago Manual’s Humanities Style (as opposed to its author-date style). The format for a book citation is the same in both EE and Chicago.
+
+ I asked ChatGPT 4 to help me cite a book in Chicago format. It then provided me both the format for a bibliographic entry and the footnote/endnote. Here’s the full response:
+
+ To cite the book “Research Like a Pro: A Genealogist’s Guide” by Diana Elder and Nicole Dyer in Chicago format, you would generally use the following structure:
+
+ Bibliography Entry: Elder, Diana, and Nicole Dyer. Research Like a Pro: A Genealogist’s Guide . [Place of Publication]: [Publisher], [Year of Publication].
+
+ Footnote/Endnote: 
+
+ Diana Elder and Nicole Dyer, Research Like a Pro: A Genealogist’s Guide ([Place of Publication]: [Publisher], [Year of Publication]), [Page number].
+
+ In these citations, replace [Place of Publication], [Publisher], [Year of Publication], and [Page number] with the appropriate information from the book. The page number is only necessary in the footnote or endnote and should correspond to the specific part of the book you are referencing.
+
+ It’s important to note that the title of the book is italicized in both the bibliography and the notes. Additionally, in the notes, only the first author’s last name is listed first, followed by the first name, while the second author’s name is in the standard format.
+
+ Next I asked it how to create a shortened version of the reference note for use as a subsequent note. Here’s the response:
+
+ For a shortened version of the reference note for “Research Like a Pro: A Genealogist’s Guide” by Diana Elder and Nicole Dyer, used in subsequent notes in Chicago format, you would generally include just the primary author’s last name, a shortened version of the title, and the page number being referenced. It would look like this:
+
+ Elder and Dyer, Research Like a Pro , [Page number].
+
+ For instance, if you are referencing page 45 in a subsequent note, it would be:
+
+ Elder and Dyer, Research Like a Pro , 45.
+
+ This shortened format is used after the first full citation of the work in your footnotes or endnotes to make subsequent references more concise.
+
+ Read the full conversation here: https://chat.openai.com/share/b9d6ddfe-96f3-4881-a75b-2e523a32aa50 
+
+ ChatGPT did a great job with providing the accurate format for a Chicago book citation. The Chicago Manual of Style, 17th ed., gives the same format on p. 799, section 14.101.
+
+ Census Citation
+
+ I asked ChatGPT to create a census citation. I started with a citation that I had already made for myself for my ancestor, Eliza Ann Isenhour. I separated the citation I had previously made into multiple lines, removed the punctuation, added an extra word (webpage near accessed) and put the civil division into the same line as the county and state – just to see if it knew where to put that. Here’s my prompt:
+
+ You are an expert genealogist. Make a citation for Eliza Isenhour on the 1850 census following the Evidence Explained style manual used by genealogists. Here is the information about Eliza’s enumeration:
+
+ 1850 U.S. census
+
+Polk, Montgomery County, Arkansas
+
+population schedule
+
+p. 405a
+
+dwelling 6
+
+family 6
+
+Eliza Ann Isenhour in Barnet Isenhour household
+
+database with images
+
+Ancestry
+
+https://www.ancestry.com/discoveryui-content/view/9812411:8054
+
+webpage accessed 17 November 2023
+
+citing NARA microfilm publication M432, roll 28
+
+ The response:
+
+ To create a citation for Eliza Isenhour in the 1850 U.S. Census following the Evidence Explained style, you would structure it like this:
+
+ “1850 U.S. census, Montgomery County, Arkansas, Polk, population schedule, p. 405a, dwelling 6, family 6, Eliza Ann Isenhour in Barnet Isenhour household; database with images, Ancestry ( https://www.ancestry.com/discoveryui-content/view/9812411:8054 : accessed 17 November 2023); citing NARA microfilm publication M432, roll 28.”
+
+ This citation follows the general format recommended by the Evidence Explained style guide, which includes the year and type of record, geographic location, specific details of where the record is found (page, dwelling, family), the individual’s name and household context, the database and its URL, the date of access, and the specific archival reference (NARA microfilm publication and roll number).
+
+ I was pretty impressed! It got almost everything right. This citation is usable. It did not place Polk, the civil division, in the correct position according to Evidence Explained , 3rd ed., p. 237. The civil division should follow the words “population schedule.” I prompted ChatGPT to put Polk where it belongs, and it did. I then asked it to make a few other tweaks, like removing the a after 405a, which is the page number given in the source information from Ancestry, and asked it to add the word (stamped) after 405. Then I asked it to italicize the publication website, Ancestry.
+
+ Read the full conversation here: https://chat.openai.com/share/9fa169e8-648a-40e7-bea6-5ff6361411e2 
+
+ Checking Suggested Citations
+
+ It’s important to check for accuracy while ChatGPT is still evolving. Because LLMs aren’t search engines, they sometimes produce incorrect information, according to what it thinks you want to hear. When I asked ChatGPT to make a citation for Eliza Ann Isenhour on the 1850 census, without providing the details from her actual household, it suggested that I follow this format:
+
+ “1850 United States Federal Census, [State], [County], [Township or City], enumeration district [ED], page [Page Number], dwelling [Dwelling Number], family [Family Number], Eliza Isenhour; digital image, [Name of Database or Collection] ([URL of the database] : accessed [Date of Access]); citing National Archives and Records Administration microfilm [Microfilm Number].”
+
+ This is an okay suggestion, and I love that it created a template that you can fill in. However, it incorrectly tells you to include the enumeration district (ED). EDs were not used until the 1880 census. Read the full conversation here: https://chat.openai.com/share/b7638e29-d6f9-431f-85a9-d2a008ebeb7d 
+
+ Why do LLMs produce incorrect suggestions? The GPT in ChatGPT stands for Generative Pre-trained Transformer. The AI has been trained by reading a lot of content and is best suited for helping you with creative tasks or helping you summarize a block of text that you provide. The way it works is by predicting what usually comes next when talking about specific topics. So, if you provide ChatGPT with the way you like your citations to look, then give it some information to use, it can probably help with that. While we’re still learning the capabilities of ChatGPT and other LLMs, it’s important to check their work. This will help you know if you can use it for the tasks that will help make your work more efficient.
+
+ Shortening Citations
+
+ Another usage you might try for ChatGPT and citations is asking it to shorten a citation you’ve already made, when you want to use it for a subsequent note. I returned to my first conversation with ChatGPT about creating a citation for Eliza Isenhour where I provided the details. After the full reference note citation was tweaked the way I like it, I asked it to shorten the citation for a subsequent note. Here’s the response:
+
+ For a subsequent note, a short form citation for Eliza Isenhour in the 1850 census can be created as follows: 
+
+ “1850 U.S. census, Montgomery Co., Ark., Polk, p. 405 (stamped), Eliza Ann Isenhour.” 
+
+ In this short form citation, the details are condensed, providing just enough information to identify the specific record without repeating all the information from the full citation. It includes the year, the abbreviated state and county, the civil division, page number, and the name of the individual. 
+
+ My response: 
+
+ Please include population schedule, abbreviated, and the dwelling and family numbers, which can also be abbreviated. 
+
+ ChatGPT’s response: 
+
+ Certainly! Here’s the revised short form citation including the requested elements: 
+
+ “1850 U.S. census, Montgomery Co., Ark., pop. sch., Polk, p. 405 (stamped), dwl. 6, fam. 6, Eliza Ann Isenhour.” 
+
+ In this version, “population schedule” is abbreviated as “pop. sch.,” and “dwelling” and “family” are abbreviated as “dwl.” and “fam.,” respectively. This format maintains the necessary details while being concise for a subsequent note. 
+
+ This can be a starting point for helping you figure out how you want to shorten citations for subsequent notes in a particular piece of genealogical writing that you’re creating.
+
+ Conclusion
+
+ It seems possible that LLMs could help us start drafting our citations. However, without me providing the details for the 1850 census that I already knew would be helpful, it had a much harder time. Maybe we can train our chatbots to give us citations in the format we prefer after providing them with additional examples and training.
+
+ The book citation was great, so using ChatGPT for help citing common source types, like books and articles online, is a great usage right now.
+
+ Your Turn
+
+ If you experiment with asking ChatGPT to create a citation for you, share below in the comments how it turned out. Was the citation formatted the way you’d expect according to the style manual?
+
+ Note: If you are sharing any private information as you practice making citations, turn off your chat history so it’s not seen by the engineers training the chatbot. See https://help.openai.com/en/articles/7730893-data-controls-faq for more info.
+
+ More AI and Genealogy Resources
+
+ Bettinger, Blaine.”Unlocking Family Secrets with AI | Findmypast,” 22 March 2023. YouTube. https://www.youtube.com/watch?v=exepLKC72Ts . This webinar is a great introduction to LLMs and Artificial Intelligence for genealogy and covers the purpose of LLMs, what they can do, and what they can’t do.
+
+ ——. “10 ChatGPT Prompts Every Genealogist Needs to Know | Findmypast,” 10 May 2023. YouTube . https://www.youtube.com/watch?v=EbRXzd2SmNM .This gives some great ideas for how to use ChatGPT in genealogy.
+
+ Little, Steve. “Empowering Genealogists with Artificial Intelligence 6 September 2023.” YouTube. https://www.youtube.com/watch?v=npQaRJbzE1s . This is an overview of AI for genealogy and some of the capabilities of ChatGPT.
+
+ ——. “Artificial Intelligence and Genealogy: Using ChatGPT to Write Stories from Family Trees, Create Trees from Stories.” 17 March 2023. AI Genealogy Insights. https://aigenealogyinsights.com/2023/03/17/artificial-intelligence-and-genealogy-using-chatgpt-to-write-stories-from-family-trees-create-trees-from-stories/ . This blog post discusses using ChatGPT to help create reports with citations and mentions the style guides used by genealogists.
+
+ Tags: 1850 census artificial intelligence Automatic Citations book ChatGPT Citations 
+
+ Share 
+
+ 0 
+
+ About Nicole Elder Dyer 
+
+ Nicole Dyer is a professional genealogist specializing in Southern United States research and genetic genealogy. She is the creator of FamilyLocket.com and the Research Like a Pro Genealogy Podcast. She co-authored Research Like a Pro: A Genealogist's Guide and Research Like a Pro with DNA and is an instructor for the study groups of the same name. She lectures at conferences and institutes and previously served as the secretary and publicity chair of the Pima County Genealogy Society. Nicole holds a bachelor's degree from Brigham Young University in History Teaching. At Family Locket Genealogists, Nicole is a project manager, editor, and researcher. 
+
+ You also might be interested in
+
+ Disclosing Use of AI for Writing Assistance in Genealogy 
+
+ Apr 12, 2024 
+
+ Exploring the use of artificial intelligence chatbots for creating written[...] 
+
+ Automated Source Citation Builders 
+
+ Oct 17, 2023 
+
+ Does the thought of making a source citation make you[...] 
+
+ RLP 100: Top Ten Tips to Research Like a Pro 
+
+ Jun 8, 2020 
+
+ Today’s episode of Research Like a Pro is a celebration[...] 
+
+ 10 Comments
+
+ Leave your reply.
+
+ Teresa 
+
+ · Reply 
+
+ November 18, 2023 at 10:36 AM 
+
+ I will have nothing to do with ChatGPT…nothing, nada, zip… I see how it can be useful, but I don’t want to give its creators any more support by actually using it and encouraging them to extend its influence and capabilities. I shudder to think what might happen if Elon Musk gets his mitts on the underlying technology…
+
+ Helen 
+
+ · Reply 
+
+ November 18, 2023 at 2:26 PM 
+
+ Be careful with AI, here’s a story of a lawyer who used AI to help with citations and discovered (too late) that AI cited non-existent court cases. The formats were excellent, though.
+
+ https://www.cnbc.com/2023/06/22/judge-sanctions-lawyers-whose-ai-written-filing-contained-fake-citations.html 
+
+ Nicole Elder Dyer 
+
+ · Reply 
+
+ Author 
+
+ November 20, 2023 at 1:44 PM 
+
+ Agreed. As I said in the post, we must fact check the responses. LLMs aren’t search engines, and they sometimes produce incorrect information, according to what it thinks you want to hear. The lawyer in that case asked for references, and the AI gave him some that were in a nice format, but not real. If we provide information to the chatbot then ask it to create something with it, using only what we provide, we can reduce the chance for hallucinations and fictional references.
+
+ Sam 
+
+ · Reply 
+
+ November 19, 2023 at 6:13 AM 
+
+ I know many of us are curious if ChatGPT can do things for us. But if we are to learn for ourselves the importance of proper citations why bother with this exercise? 
+
+ I dread this next chapter of my education… citations… bleh! But even in my childish stubborn dislike of some foods I have acquired a taste for sushi and my wife’s obsession with spinach / artichoke dip!
+
+ Nicole Elder Dyer 
+
+ · Reply 
+
+ Author 
+
+ November 20, 2023 at 1:39 PM 
+
+ Costco has delicious artichoke dip (but no spinach in that one).
+
+That’s a good question. Why should we use ChatGPT for citations if learning how to cite requires that we do spend time practicing it ourselves? I have two thoughts on that. 1 – Once you’ve learned how to make citations, the task becomes tedious and rote. At that point, perhaps AI can speed up tedious processes that we know how to do. We would simply review the citation and make sure it accurately reflects what we are citing. 2 – Large language models can be a tool for helping you understand what you’re learning. Asking, “why do we need to italicize titles of websites and books” could generate a response that helps you understand it better. Asking “what is the purpose of punctuation in a citation” can also give you valuable insights. The process of asking ChatGPT to generate a citation for you, then comparing it to the models in Evidence Explained can also be a way to more fully understand the citation model. There are many reasons to use a LLM, and many reasons people may not want to try! As a professional genealogist, there’s never enough time to accomplish all I want to when researching and writing, so I’m hoping the AI developments will speed up many of my repetitive tasks, like citations. I also want to be careful that using it doesn’t introduce mistakes into my citations. We’ll see where it goes!
+
+ Lori Samuelson 
+
+ · Reply 
+
+ November 20, 2023 at 2:24 PM 
+
+ I’m impressed with your results. I entered a RootsMagic Individual Summary on an ancestor with a prompt for a narrative summary. I then asked for sources for each fact as I was confused where ChatGPT hallucinated. (First hallucination was a misread of the text; ancestor had arrived as a 12 year old and it claimed 52 year old. Second was a residence location; assumed that he lived in the county he enlisted in but he lived in the neighboring county). The sources I received looked like this:
+
+Ancestry.com, Sweden, Church Records, 1451-1943 ↩
+
+Ancestry.com, Counties of Porter and Lake, Indiana: Historical and Biographical: Illustrated ↩
+
+Ancestry.com, Sweden, Emigrants Registered in Church Books, 1783-1991 ↩
+
+Ancestry.com, U.S., Naturalization Record Indexes, 1791-1992 ↩
+
+Ancestry.com, Sweden, Emigrants Registered in Church Books, 1783-1991 ↩
+
+Ancestry.com, U.S. Naturalization Record Indexes, 1791-1992 ↩
+
+Ancestry.com, 1860 United States Federal Census ↩
+
+ Not sure why Ancestry.com was always selected as the source as the book and church records were from different sources (Hathi Trust and Arkivdigital). Only think I can think of is I synched my Ancestry.com tree with RootsMagic so it must have not take the source I entered on Ancestry. Ancestry as the source for the RootsMagic file which is kind of correct.
+
+ Nicole Elder Dyer 
+
+ · Reply 
+
+ Author 
+
+ November 20, 2023 at 2:39 PM 
+
+ Thanks for sharing! I’d love to see your conversation if you don’t mind sharing. You can generate a link at the top right of the conversation.
+
+ Lori Samuelsong 
+
+ · Reply 
+
+ November 21, 2023 at 7:57 AM 
+
+ I blogged about it at genealogyatheart.com – Using AI to Write a Genealogical Narrative. Scroll down to see a comment – I directed the person to your blog.
+
+ Alexis Bagale 
+
+ · Reply 
+
+ December 18, 2023 at 10:51 AM 
+
+ This is genius! I often use ChatGPT to help me streamline things (such as writing complex Excel formulas) but somehow never thought of asking it to help with citations!
+
+ Sharon Collins 
+
+ · Reply 
+
+ July 20, 2024 at 2:33 AM 
+
+ I know this is an old post BUT, I have been experimenting with ChatGPT this week. Mostly to help re-write what I have already written in a research report. I found it helpful as it put the punctuation in the right places etc. My grammer well not the greatest. 
+
+ I have also used it to summarise my already transcribed wills and deeds and this to me is really helpful. Today I thought if I am going to add the summaries that ChatGPT creates I want to cite the summary as being created by ChatGPT. So I asked it to create a citation on the summary and it gave me this: 
+
+ Probate Court, Georgetown, Brown County, Ohio. “Will of Nancy Gray.” August 26, 1878. In Records of Wills, Bourbon County, Kentucky. Certified by Jas. M. Hughes, Clerk, and Judge Malt Turney.
+
+ Not quite what I was after so I turned that into this:
+
+ Summary created by AI using ChatGPT (chatgpt.com: accessed 20 July 2024); “Will of Nancy Gray” dated 12 December 1877, Proved 1 July 1878 in Bourbon County Kentucky, Recorded 26 August 1878 in Brown County Ohio. Certified by Jas. M. Hughes, Clerk, and Judge Malt Turney. 
+
+ Of course my reports are not being submitted to any journals or anything this is just for me and my family.
+
+ Leave a Reply Thanks for the note! 
+ Cancel Reply 
+
+ Δ 
+
+ This site uses Akismet to reduce spam. Learn how your comment data is processed. 
+
+ Diana Elder, AG®, and Nicole Dyer 
+
+We are mother & daughter professional genealogists sharing ideas for finding ancestors and keeping them close to the heart. Read more about us and our research team here. Thanks for visiting! Follow us on Facebook and X .
+
+ Search
+
+ Blog Post Categories
+ Blog Post Categories 
+ Select Category 
+ Artificial Intelligence (32) 
+ Creating and Sharing Family History (325) 
+ Book Club (47) 
+ Crafts and Projects (23) 
+ Families and Children (93) 
+ Kids Book Club (14) 
+ Family History is for Everyone Spotlights (21) 
+ Family Reunions (8) 
+ FamilySearch Apps (6) 
+ FamilySearch Memories (16) 
+ Sharing Stories (53) 
+ DNA Tools (22) 
+ Education (3) 
+ Favorite Reads of the Month (48) 
+ LDS Family History (95) 
+ Activities (11) 
+ General Conference (8) 
+ Youth and Primary (27) 
+ Research Like a Pro with DNA (16) 
+ Research Tips (991) 
+ Accreditation (20) 
+ Certification (6) 
+ DNA (156) 
+ FamilySearch FamilyTree (15) 
+ Organizing (37) 
+ Podcast (422) 
+ Records (63) 
+ Research Like a Pro (54) 
+ timeline (1) 
+
+ Airtable Links
+ Nicole’s Templates 
+
+ Diana’s Templates 
+
+ Latest Research Log Templates: 
+
+ RLP with DNA 4.2 (2026) Log 
+
+ RLP with DNA 4.2 (2026) Blank 
+
+ Articles about Airtable 
+
+ Video: Tracking DNA Matches with Airtable (YouTube)
+
+ Free Downloads
+ U.S. Census Records PDF Guide 
+
+ Probate Records PDF Guide 
+
+ U.S. Federal Census Tables 1790-1950 Template – docx file download
+
+ Sample DNA Citations PDF Guide 
+
+ Institute Courses
+ Coming in 2027:
+
+ Merging and Separating Course
+
+ New Course – to be announced soon
+
+ Featured Products
+
+ Research Like a Pro Webinar Series 2025 
+
+ $ 65.00 Original price was: $65.00. $ 55.00 Current price is: $55.00. 
+
+ Research Like a Pro® with DNA eCourse 
+
+ $ 275.00 
+
+ Research Like a Pro e-Course 
+
+ Rated 5.00 out of 5 
+
+ $ 175.00 
+
+ Sale
+
+ Research Like a Pro with AI Workbook - Second Edition (eBook) 
+
+ $ 40.99 Original price was: $40.99. $ 39.99 Current price is: $39.99. 
+
+ Research Like a Pro Webinar Series - 2023 
+
+ $ 60.00 Original price was: $60.00. $ 45.00 Current price is: $45.00. 
+
+ Research Like a Pro Webinar Series - 2024 
+
+ $ 60.00 Original price was: $60.00. $ 45.00 Current price is: $45.00. 
+
+ Research Like a Pro Webinar Series 2025 
+
+ $ 65.00 Original price was: $65.00. $ 55.00 Current price is: $55.00. 
+
+ Newsletter Sign Up – Receive Excel Research Log
+
+ About 
+
+ Privacy 
+
+ FAQ 
+
+ Sign Up 
+
+ Register 
+
+ Contact Us 
+
+ Log In 
+
+ Log Out 
+
+ © 2026 · FamilyLocket
+
+ Prev 
+
+ Next 
+
+ Type and press Enter to search
+

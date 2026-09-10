@@ -1,0 +1,32 @@
+{
+ "role": "verifier",
+ "name": "ai",
+ "angle": null,
+ "tag": "i1456-1470",
+ "lines": 98,
+ "firstTs": "2026-09-07T04:45:37.560Z",
+ "lastTs": "2026-09-07T04:51:38.304Z",
+ "tools": {
+  "ToolSearch": 1,
+  "Bash": 21,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [
+  "https://arxiv.org/pdf/$id",
+  "https://arxiv.org/abs/2009.07243",
+  "https://arxiv.org/abs/1911.00650",
+  "https://arxiv.org/abs/2405.00492",
+  "https://arxiv.org/abs/2106.00085",
+  "https://arxiv.org/abs/2411.07641"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "All five papers were fetched live as raw PDFs from arxiv.org (browser UA, `pdftotext -layout`); no summarizer or search snippet was used, and no fallback route was needed. Checkpoint written.",
+ "run": "wf_0eb229cc-f75",
+ "agent": "af29d2a2952ee4548",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/405b5e7e-8c4d-4fa3-8d98-bc46b7fbf074/subagents/workflows/wf_0eb229cc-f75/agent-af29d2a2952ee4548.jsonl",
+ "journal": "result",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-ai-i1456-1470.json",
+  "exists": true
+ }
+}

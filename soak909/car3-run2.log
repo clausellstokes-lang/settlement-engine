@@ -1,0 +1,118 @@
+
+ RUN  v4.1.11 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/laneB6
+
+ ❯ tests/soak-harness/tripwireRegistry.test.js (11 tests | 4 failed) 29ms
+     × each DETERMINISTIC row fires on its own defect, and only on its own 10ms
+     × a row keyed on an ABSENT field is NOT-EXECUTABLE and names the field — it never answers [] 1ms
+     × NO ROW MAY KEY ON A FIELD THE RECEIPT WRITER DOES NOT WRITE — the class, banked and shrink-only 6ms
+     × a NESTED requirement is grounded in its own writer, and an ungrounded one is refused rather than passed 4ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/soak-harness/tripwireRegistry.test.js > the tripwire registry > each DETERMINISTIC row fires on its own defect, and only on its own
+AssertionError: expected [ 'capacity_plateau', …(2) ] to deeply equal [ 'capacity_plateau', …(1) ]
+
+- Expected
++ Received
+
+  [
+    "capacity_plateau",
+    "capacity_floor_thaw",
++   "capacity_envelope_30y",
+  ]
+
+ ❯ tests/soak-harness/tripwireRegistry.test.js:241:8
+    239|     expect(firedRows(underloaded)).toEqual(['capacity_realm_load']);
+    240|     expect(evaluateTripwires(underloaded).notExecutable.map((row) => r…
+    241|       .toEqual(['capacity_plateau', 'capacity_floor_thaw']);
+       |        ^
+    242|     expect(fired(clean({ behavioral: underloaded.behavioral }))).toEqu…
+    243|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+ FAIL  tests/soak-harness/tripwireRegistry.test.js > the tripwire registry > a row keyed on an ABSENT field is NOT-EXECUTABLE and names the field — it never answers []
+AssertionError: expected [ …(4) ] to deeply equal [ …(3) ]
+
+- Expected
++ Received
+
+@@ -12,6 +12,11 @@
+    {
+      "class": "deterministic",
+      "id": "capacity_realm_load",
+      "reason": "requires receipt.behavioral.yearly[last].realmDemography — absent from this receipt",
+    },
++   {
++     "class": "deterministic",
++     "id": "capacity_envelope_30y",
++     "reason": "requires receipt.behavioral.yearly[last].motion — absent from this receipt",
++   },
+  ]
+
+ ❯ tests/soak-harness/tripwireRegistry.test.js:280:33
+    278|     const blind = evaluateTripwires(asTheWriterShipsIt);
+    279|     expect(blind.findings).toEqual([]);
+    280|     expect(blind.notExecutable).toEqual([
+       |                                 ^
+    281|       { id: 'capacity_plateau', class: 'deterministic', reason: REASON…
+    282|       { id: 'capacity_floor_thaw', class: 'deterministic', reason: REA…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  tests/soak-harness/tripwireRegistry.test.js > the tripwire registry > NO ROW MAY KEY ON A FIELD THE RECEIPT WRITER DOES NOT WRITE — the class, banked and shrink-only
+AssertionError: expected [ 'capacity_plateau', …(2) ] to deeply equal [ 'capacity_plateau', …(3) ]
+
+- Expected
++ Received
+
+  [
+    "capacity_plateau",
+    "capacity_floor_thaw",
+    "capacity_realm_load",
+-   "capacity_envelope_30y",
+  ]
+
+ ❯ tests/soak-harness/tripwireRegistry.test.js:499:8
+    497|     expect(legacyObserver.length).toBeLessThan(OBSERVER_SOURCE.length);
+    498|     expect(convictedBy(tripwireFieldReach(TRIPWIRES, legacyWriter, leg…
+    499|       .toEqual(declaresRequires);
+       |        ^
+    500|
+    501|     // ⛔ THE THIRD ROW, REFUSED WITH A MEASUREMENT. A walker that read…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+ FAIL  tests/soak-harness/tripwireRegistry.test.js > the tripwire registry > a NESTED requirement is grounded in its own writer, and an ungrounded one is refused rather than passed
+AssertionError: expected [ { …(2) }, { …(2) } ] to deeply equal [ { id: 'capacity_realm_load', …(1) } ]
+
+- Expected
++ Received
+
+  [
+    {
+      "id": "capacity_realm_load",
+      "reason": "a nested `requires` path (behavioral.yearly[last].realmDemography) and no nested-writer source to ground it in",
+    },
++   {
++     "id": "capacity_envelope_30y",
++     "reason": "a nested `requires` path (behavioral.yearly[last].motion) and no nested-writer source to ground it in",
++   },
+  ]
+
+ ❯ tests/soak-harness/tripwireRegistry.test.js:580:69
+    578|     // shrugged at the rest would report a clean sheet about the exact…
+    579|     // zero lived. This is the arm that keeps the two-argument call fr…
+    580|     expect(tripwireFieldReach(TRIPWIRES, WRITER_SOURCE).unreadable).to…
+       |                                                                     ^
+    581|       id: 'capacity_realm_load',
+    582|       reason: 'a nested `requires` path (behavioral.yearly[last].realm…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  4 failed | 7 passed (11)
+   Start at  03:34:22
+   Duration  221ms (transform 44ms, setup 28ms, import 46ms, tests 29ms, environment 0ms)
+

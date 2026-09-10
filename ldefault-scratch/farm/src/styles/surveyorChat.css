@@ -1,0 +1,76 @@
+/* src/styles/surveyorChat.css — SC-1A: the Surveyor door's text-intent shell.
+   STRUCTURE ONLY. Colour, type and spacing tokens stay in theme.js and reach the
+   elements as inline style from the component; this sheet holds the things an
+   inline style cannot say — the responsive frame, the flex column that pins the
+   composer to the bottom edge, and the mobile bottom sheet.
+   Selectors are doubled (.sf-door-panel.sf-door-panel--chat) so they outrank the
+   base .sf-door-panel rule in index.css regardless of sheet insertion order: this
+   file rides the lazy door chunk, index.css is eager. */
+
+.sf-door-panel.sf-door-panel--chat {
+  left: 50%;
+  right: auto;
+  top: 50%;
+  bottom: auto;
+  transform: translate(-50%, -50%);
+  width: min(760px, calc(100vw - 32px));
+  max-width: min(760px, calc(100vw - 32px));
+  max-height: min(72vh, 720px);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+}
+
+.sf-door-chat-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+/* The log takes the slack, so the composer stays put while the register scrolls. */
+.sf-door-chat-log {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sf-door-chat-turn { display: flex; flex-direction: column; gap: 2px; }
+.sf-door-chat-register { display: flex; flex-wrap: wrap; gap: 8px; }
+.sf-door-chat-composer { display: flex; flex-direction: column; gap: 6px; }
+
+.sf-door-chat-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+/* One row minimum; the component measures and writes height/overflow-y as you type. */
+.sf-door-chat-area {
+  width: 100%;
+  box-sizing: border-box;
+  resize: none;
+  overflow-y: hidden;
+  max-height: 144px;
+  padding: 8px;
+  line-height: 1.5;
+}
+
+/* MOBILE: a bottom sheet, lifted clear of the software keyboard. Declared after the
+   desktop rule at equal specificity, so it wins when the component adds the class. */
+.sf-door-panel.sf-door-panel--sheet {
+  left: 0;
+  right: 0;
+  top: auto;
+  bottom: 0;
+  transform: none;
+  width: 100%;
+  max-width: 100%;
+  max-height: 82vh;
+  padding-bottom: calc(16px + var(--sf-door-kbd-inset, 0px));
+}

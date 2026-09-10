@@ -1,0 +1,24 @@
+{
+  "instrument": "lprobe/census-probe.mjs",
+  "output": "(d) the lighting-census tuple",
+  "tree": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/laneDESKTIP",
+  "takenAt": "2026-09-07T01:20:06.861Z",
+  "live": {
+    "files": 2537,
+    "parked": 373,
+    "credited": 2164,
+    "titles": 23555,
+    "suiteTitles": 6302
+  },
+  "frozen": {
+    "files": 2537,
+    "parked": 373,
+    "credited": 2164,
+    "titles": 23555,
+    "suiteTitles": 6302
+  },
+  "drift": [],
+  "verdict": "LIVE == FROZEN (no refreeze owed at this tree)",
+  "registerAct": "NOT TAKEN. LIGHTING_CENSUS_REFREEZE is a chair act at the landing; it exits non-zero BY DESIGN, and the proof is a PLAIN re-run of the walker afterwards.",
+  "digest": "fe4dc3c6e34dbbf282d44a1977ad35b41a6039238742385ac783b9bdfe5328b6"
+}

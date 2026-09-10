@@ -1,0 +1,16 @@
+import re,sys,html
+p=sys.argv[1]
+s=open(p,encoding='utf-8',errors='replace').read()
+s=re.sub(r'(?is)<script.*?</script>',' ',s)
+s=re.sub(r'(?is)<style.*?</style>',' ',s)
+s=re.sub(r'(?is)<noscript.*?</noscript>',' ',s)
+s=re.sub(r'(?is)<!--.*?-->',' ',s)
+s=re.sub(r'(?i)</(p|div|br|li|h[1-6]|blockquote|tr)>','\n',s)
+s=re.sub(r'(?i)<br\s*/?>','\n',s)
+s=re.sub(r'(?s)<[^>]+>',' ',s)
+s=html.unescape(s)
+s=s.replace('’',"'").replace('‘',"'").replace('“','"').replace('”','"').replace('—',' -- ').replace('–','-').replace('\xa0',' ')
+s=re.sub(r'[ \t]+',' ',s)
+s=re.sub(r'\n\s*\n+','\n\n',s)
+open(p.replace('.html','.txt'),'w',encoding='utf-8').write(s)
+print(p, len(s))

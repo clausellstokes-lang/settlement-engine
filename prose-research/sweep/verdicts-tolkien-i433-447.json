@@ -1,0 +1,233 @@
+{
+ "name": "tolkien",
+ "chunk": 4,
+ "claims": [
+  {
+   "index": 433,
+   "feature": "heraldry in plain English",
+   "claim": "Tolkien describes heraldic devices for characters and nations in simple English rather than technical blazon, keeping the record's technical matter in ordinary diction.",
+   "source": "Wikipedia, 'Tolkien and antiquarianism'",
+   "url": "https://en.wikipedia.org/wiki/Tolkien_and_antiquarianism",
+   "quote": "",
+   "page": "§ Heraldry"
+  },
+  {
+   "index": 434,
+   "feature": "Appendix F rationale for register layering",
+   "claim": "In Appendix F the translator explains that Westron is rendered as English to preserve the contrast between a widespread language and the living remains of far older and more reverend tongues, with the analogy that calling Rivendell Imladris would be like speaking of Winchester as Camelot.",
+   "source": "Wikipedia, 'Pseudotranslation in The Lord of the Rings'",
+   "url": "https://en.wikipedia.org/wiki/Pseudotranslation_in_The_Lord_of_the_Rings",
+   "quote": "far older and more reverend tongues",
+   "page": "§ Implementation"
+  },
+  {
+   "index": 435,
+   "feature": "fiction/reality blur",
+   "claim": "Turner observes that Tolkien's Winchester/Camelot analogy further blurs the already confused distinction between fiction and reality that the pseudotranslation sets up.",
+   "source": "Wikipedia, 'Pseudotranslation in The Lord of the Rings' (citing Turner)",
+   "url": "https://en.wikipedia.org/wiki/Pseudotranslation_in_The_Lord_of_the_Rings",
+   "quote": "further blurs the already confused distinction",
+   "page": "§ Complex implications"
+  },
+  {
+   "index": 436,
+   "feature": "typographic key to provenance",
+   "claim": "Appendix A opens with a key to its own apparatus: actual extracts from longer annals and tales are placed within quotation marks, later insertions in brackets, notes within quotation marks come from the sources and others are editorial.",
+   "source": "Giuseppe Pezzini, 'The authors of Middle Earth' (J. Inklings Studies 2018), n. 35 quoting Appendix A",
+   "url": "https://research-repository.st-andrews.ac.uk/bitstream/handle/10023/13159/Pezzini_2018_JIS_AuthorsofMiddleEarth_AAM.pdf?sequence=1&isAllowed=y",
+   "quote": "Insertions of later date are enclosed in brackets",
+   "page": "n. 35, p. 12"
+  },
+  {
+   "index": 437,
+   "feature": "narrative formulas imply hobbit or Gondorian authorship",
+   "claim": "Formulas such as 'before we came to the Shire' imply parts of the Appendices are written by hobbits, while 'as we have learned from the King' points to Gondor and the scribe Findegil, so the annal's first person shifts with its source.",
+   "source": "Giuseppe Pezzini, 'The authors of Middle Earth' (J. Inklings Studies 2018)",
+   "url": "https://research-repository.st-andrews.ac.uk/bitstream/handle/10023/13159/Pezzini_2018_JIS_AuthorsofMiddleEarth_AAM.pdf?sequence=1&isAllowed=y",
+   "quote": "as we have learned from the King",
+   "page": "n. 35, p. 12"
+  },
+  {
+   "index": 438,
+   "feature": "record announces its own abridgement",
+   "claim": "Appendix A declares that only selections from its sources, in most places much abridged, are presented, so the annal frames itself as an epitome of fuller documents.",
+   "source": "Giuseppe Pezzini, 'The authors of Middle Earth' (J. Inklings Studies 2018), n. 34 quoting Appendix A",
+   "url": "https://research-repository.st-andrews.ac.uk/bitstream/handle/10023/13159/Pezzini_2018_JIS_AuthorsofMiddleEarth_AAM.pdf?sequence=1&isAllowed=y",
+   "quote": "in most places much abridged",
+   "page": "n. 34, p. 12"
+  },
+  {
+   "index": 439,
+   "feature": "scribal glosses harmonise the frame",
+   "claim": "The appendices are full of scribal glosses, later notes and editorial references deliberately matched to the textual history in the Note on the Shire Records, so the frame is realised by formal features rather than asserted.",
+   "source": "Giuseppe Pezzini, 'The authors of Middle Earth' (J. Inklings Studies 2018)",
+   "url": "https://research-repository.st-andrews.ac.uk/bitstream/handle/10023/13159/Pezzini_2018_JIS_AuthorsofMiddleEarth_AAM.pdf?sequence=1&isAllowed=y",
+   "quote": "full of scribal glosses, later notes, and editorial references",
+   "page": "§1.7, p. 11"
+  },
+  {
+   "index": 440,
+   "feature": "ancient annals with scribal footnotes",
+   "claim": "Turner describes the prologue and appendices as an elaborate apparatus containing genealogies and ancient annals complete with scribal footnotes and editorial comments, even a discussion 'On Translation'.",
+   "source": "Wikipedia, 'Literary devices in The Lord of the Rings' (citing Turner 2011)",
+   "url": "https://en.wikipedia.org/wiki/Literary_devices_in_The_Lord_of_the_Rings",
+   "quote": "",
+   "page": "§ Pseudotranslation and editorial framing"
+  },
+  {
+   "index": 441,
+   "feature": "quotation marks as sole source-marker",
+   "claim": "Passages of Appendix A translated from Fourth-Age hobbit or Gondorian writers are marked only by surrounding quotation marks, expecting the reader to recall the Prologue's discussion of sources.",
+   "source": "Kate Nepveu, 'LotR re-read: Appendices' (Reactor)",
+   "url": "https://reactormag.com/lotr-reread-appendices/",
+   "quote": "only marked by surrounding quotation marks",
+   "page": "main text"
+  },
+  {
+   "index": 442,
+   "feature": "hedged suggestion idiom",
+   "claim": "Some quoted passages in Appendix A let Tolkien suggest things without committing to them, in the chronicle idiom 'some say he dwells there still'.",
+   "source": "Kate Nepveu, 'LotR re-read: Appendices' (Reactor)",
+   "url": "https://reactormag.com/lotr-reread-appendices/",
+   "quote": "some say he dwells there still",
+   "page": "main text"
+  },
+  {
+   "index": 443,
+   "feature": "annals versus year-list split",
+   "claim": "Appendix A's narrative annals and Appendix B's year-list divide one history so that a reader loses orientation in A and finds B redundant, wanting something more like A and B combined.",
+   "source": "Kate Nepveu, 'LotR re-read: Appendices' (Reactor)",
+   "url": "https://reactormag.com/lotr-reread-appendices/",
+   "quote": "something more like A & B combined",
+   "page": "main text"
+  },
+  {
+   "index": 444,
+   "feature": "year-lists with brief narrative islands",
+   "claim": "Appendix B primarily contains timelines (lists of years) for the Second, Third and Fourth Ages with only a few brief narrative sections, such as the account of the Wizards.",
+   "source": "Tolkien Gateway, 'Appendix B'",
+   "url": "https://tolkiengateway.net/wiki/Appendix_B",
+   "quote": "a few brief narrative sections",
+   "page": "main text"
+  },
+  {
+   "index": 445,
+   "feature": "compiler's calendar",
+   "claim": "The Fourth-Age section of the Tale of Years gives its dates in Shire-reckoning and follows primarily what happened to the hobbits, so the calendar and focus track the compiler's own community.",
+   "source": "Tolkien Gateway, 'Appendix B'",
+   "url": "https://tolkiengateway.net/wiki/Appendix_B",
+   "quote": "dates are given in the Shire-reckoning",
+   "page": "§ Synopsis"
+  },
+  {
+   "index": 446,
+   "feature": "annal definition and gaps",
+   "claim": "Annals are lists of years or spans with brief summaries, and Tolkien's Second Age annals have significant gaps, a single entry covering the years 2000 to 3000.",
+   "source": "Norbert Schürer, 'Second Age, Middle Age', JTR 15.2 (2022)",
+   "url": "https://scholar.valpo.edu/journaloftolkienresearch/vol15/iss2/6",
+   "quote": "lists of years or spans with brief summaries",
+   "page": "p. 8"
+  },
+  {
+   "index": 447,
+   "feature": "record declares its own scarcity",
+   "claim": "Appendix B's Second Age opens by declaring that of events in Middle-earth the records are few and brief and their dates often uncertain, so the annalist states the limits of his sources before listing them.",
+   "source": "Norbert Schürer, 'Second Age, Middle Age', JTR 15.2 (2022), quoting Appendix B",
+   "url": "https://scholar.valpo.edu/journaloftolkienresearch/vol15/iss2/6",
+   "quote": "the records are few and brief",
+   "page": "p. 7"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 433,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "descriptions were in simple English rather than in specific blazon",
+   "note": "Raw wikitext of en.wikipedia 'Tolkien and antiquarianism' (Special:Export), section 'Heraldry': 'Tolkien described heraldic devices for many of the characters and nations of Middle-earth. His descriptions were in simple English rather than in specific blazon.' (cited to Purdy 1982 and Hriban 2011). Claim carries no quote field, and its trailing gloss 'keeping the record's technical matter in ordinary diction' is a restatement of the same fact, so graded on substance rather than verbatim."
+  },
+  {
+   "index": 434,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Raw wikitext of 'Pseudotranslation in The Lord of the Rings', section Implementation / 'Deciding on pseudotranslation'. Quote verbatim inside the Appendix F blockquote: '[I wished to preserve] the contrast between a wide-spread language... and the living remains of far older and more reverend tongues.' Winchester/Camelot limb also verbatim: 'But to refer to Rivendell as Imladris was as if one now was to speak of Winchester as Camelot...'. Westron-as-English limb supported on the same page ('He pretended to have translated the original language Westron into English'; Tolkien's Letter 144: 'equate the Westron ... with English')."
+  },
+  {
+   "index": 435,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Same page, end of 'Deciding on pseudotranslation' running into 'Complex implications': 'Allan Turner remarks that this further blurs the already confused distinction between fiction and reality' (sfn Turner 2011a p.18), where 'this' is the immediately preceding Winchester/Camelot blockquote. Quote verbatim; attribution to Turner explicit."
+  },
+  {
+   "index": 436,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Pezzini AAM PDF (fetched direct, 200, 26pp, text extracted with pypdf), footnote 35: 'a complex system of diacritics, explained by Tolkien in the opening section... Cf. LotR Appendix A [Tolkien 2004: 1033] Actual extracts from longer annals and tales are placed within quotation marks. Insertions of later date are enclosed in brackets. Notes within quotation marks are found in the sources. Others are editorial.' All four conventions verbatim; 'opens with a key' matches 'explained by Tolkien in the opening section' at LotR p.1033. Pagination note: in this accepted-manuscript PDF nn.34-35 sit at the foot of p.11, not p.12 as the claim's page field says."
+  },
+  {
+   "index": 437,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Pezzini n.35 verbatim: 'Narrative formulas, for instance, imply that parts of the Appendices are authored by Hobbits... Cf. e.g. LotR Appendix A [Tolkien 2004: 1039] \"as they had done for long years before we came to the Shire\". Other references instead point to Gondor and to Findegil, the scribe of the king (cf. e.g. ibidem 1050 n. 1 as we have learned from the King).' Quote verbatim. The closing clause 'the annal's first person shifts with its source' is the claimer's gloss, but is directly entailed by the two first-person formulas the footnote contrasts."
+  },
+  {
+   "index": 438,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Pezzini n.34 verbatim: 'LotR Appendix A [Tolkien 2004: 1033] \"only selections from them [the sources], in most places much abridged, are here presented\".' Quote verbatim; 'epitome of fuller documents' is an entailed gloss on that sentence. Same pagination note as 436 (footnote sits on p.11 of this AAM)."
+  },
+  {
+   "index": 439,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Pezzini section 1.7, p.11: 'also this latter part is duly harmonised in the text through the use of formal features; the appendixes are indeed full of scribal glosses, later notes, and editorial references that are meant to match the elaborate textual history detailed in the Note on the Shire Records'. Quote verbatim; 'deliberately matched' = 'meant to match'; 'realised by formal features rather than asserted' = 'harmonised in the text through the use of formal features'. Page cite p.11 confirmed against the PDF's own page 11."
+  },
+  {
+   "index": 440,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "elaborate editorial framing with genealogies, annals, scribal footnotes",
+   "note": "Raw wikitext of 'Literary devices in The Lord of the Rings', section 'Pseudotranslation and editorial framing': 'Tolkien then goes much further, constructing an elaborate editorial framing of the entire book, constructing a prologue and multiple appendices... These include genealogies, ancient annals complete with scribal footnotes and editorial comments, even a discussion \"On Translation\"...' (sfn Turner 2011a pp.15-17, plus Brooke-Rose 1981 and Carpenter). Claim supplies no quote; the page says 'elaborate editorial framing', not 'elaborate apparatus', and the sentence carries three citations with Turner first, so the Turner attribution is by citation rather than by named attribution in the text."
+  },
+  {
+   "index": 441,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "reactormag.com/lotr-reread-appendices/ fetched live (200) and read as raw HTML-stripped text: 'some of Appendix A appears to be directly \"translated\" from the writings of a Fourth-Age person or persons... (in several places it's obviously a hobbit... other sections could be by Gondorians). At least in my copy, they're only marked by surrounding quotation marks, which seems to be expecting a good deal of the reader's memory to recall the discussion about sources all the way back in the Prologue'. Quote verbatim; every limb present. Nepveu hedges with 'At least in my copy', which the claim states flatly."
+  },
+  {
+   "index": 442,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Same Reactor page, same paragraph: 'some look like Tolkien's way of suggesting things without committing to them (\"At the Grey Havens dwelt Cirdan the Shipwright, and some say he dwells there still, until the Last Ship sets sail into the West.\")'. Quote verbatim. Source hedges with 'look like'; 'chronicle idiom' is the claimer's label for the cited example."
+  },
+  {
+   "index": 443,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Same Reactor page, 'The Appendices Generally': 'partly because of the way Appendices A and B are split. For some reason, I had a very hard time getting oriented in overall history as to much of the stuff described in Appendix A, \"Annals of the Kings and Rulers,\" and kept wanting something more like A & B combined... when I got to Appendix B, it turned out that I'd managed to puzzle and place everything on my own and now it felt redundant'. Quote verbatim; loss of orientation, redundancy of B and the wish for A & B combined all present. It is one reader's reported experience, not a general finding."
+  },
+  {
+   "index": 444,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "tolkiengateway.net is behind a Cloudflare interstitial: plain curl 403, browser-UA curl with Accept/Accept-Language headers 403, and the MediaWiki action=raw route 403. Recovered via the Wayback raw capture https://web.archive.org/web/20260820110221id_/https://tolkiengateway.net/wiki/Appendix_B (200, full article text, page last edited 11 April 2026): 'It primarily contains timelines (lists of years) from the Second, Third, and Fourth Ages and the events of those years. There are also a few brief narrative sections, including a short discussion of the Wizards and how Gandalf received the Ring of Fire from Cirdan.' Quote verbatim; every limb present. Raw archived page, not a summarizer."
+  },
+  {
+   "index": 445,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Same Wayback raw capture, Synopsis sub-section 'Later Events Concerning the Members of the Fellowship of the Ring': 'Chronology of the early Fourth Age (although dates are given in the Shire-reckoning, and primarily follow what happened with the hobbits).' Quote verbatim. The closing gloss about the compiler's community is supported earlier on the same page: 'It was probably at Great Smials that The Tale of Years was put together... with the assistance of material collected by Meriadoc Brandybuck.'"
+  },
+  {
+   "index": 446,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "scholar.valpo.edu landing page fetched live (200) but holds only the abstract; the article PDF at cgi/viewcontent.cgi?article=1295 returns 403 to direct fetch (bot block). Recovered via Wayback raw capture https://web.archive.org/web/20241117105434id_/...article=1295&context=journaloftolkienresearch (200, application/pdf, 18pp), text extracted with pypdf; confirmed as Schurer, 'Second Age, Middle Age', JTR 15.2 art. 6. Article p.8: 'These annals - meaning lists of years or spans with brief summaries of what happened during that time - also have significant gaps: For instance, both T1 and T4 simply list the years 2000-3000 as one entry'. Quote verbatim, page cite p.8 confirmed. The 2000-3000 single entry is specifically in drafts T1 and T4 in The Peoples of Middle-earth, not in the published Appendix B."
+  },
+  {
+   "index": 447,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Same Wayback-recovered Schurer PDF, article p.7: 'Tolkien's first paragraph about the Second Age reads: \"These were the dark years for Men of Middle-earth, but the years of the glory of Numenor. Of events in Middle-earth the records are few and brief, and their dates are often uncertain\" (Lord of the Rings 1082)', in a passage explicitly about Appendix B, 'The Tale of Years'. Quote verbatim, page cite p.7 confirmed. Schurer reads the paragraph as evidence of a bleak view of the world; the claim's closing gloss that 'the annalist states the limits of his sources before listing them' is the claimer's in-world framing, entailed by the quoted primary text but not Schurer's own point."
+  }
+ ]
+}

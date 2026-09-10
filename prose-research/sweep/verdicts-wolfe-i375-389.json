@@ -1,0 +1,233 @@
+{
+ "name": "wolfe",
+ "chunk": 25,
+ "claims": [
+  {
+   "index": 375,
+   "feature": "withheld information and inference",
+   "claim": "A MetaFilter reader disputes the ambiguity reading, arguing Wolfe's unreliability is a puzzle readers assemble from careful cluing rather than genuine epistemic uncertainty.",
+   "source": "MetaFilter user “RogerB”, thread 149475, 8 May 2015, 8:50 AM",
+   "url": "https://www.metafilter.com/149475/Gene-Wolfe-The-Reliably-Unreliable-Author",
+   "quote": "assemble based on careful cluing the truth that the narrator doesn't know",
+   "page": "comment by RogerB, 8:50 AM"
+  },
+  {
+   "index": 376,
+   "feature": "withheld information and inference",
+   "claim": "A MetaFilter reader says the text reveals how horrible Severian is through what still manages to slip through his own narration.",
+   "source": "MetaFilter user “Pseudoephedrine”, thread 149475, 8 May 2015, 12:29 PM",
+   "url": "https://www.metafilter.com/149475/Gene-Wolfe-The-Reliably-Unreliable-Author",
+   "quote": "revealing how horrible he is through what still manages to slip",
+   "page": "comment by Pseudoephedrine, 12:29 PM"
+  },
+  {
+   "index": 377,
+   "feature": "point of view and distance",
+   "claim": "A MetaFilter reader says some Wolfe narrators are sincere recorders of what they experienced who have fundamentally misunderstood the events they record.",
+   "source": "MetaFilter user “byanyothername”, thread 149475, 8 May 2015, 9:00 AM",
+   "url": "https://www.metafilter.com/149475/Gene-Wolfe-The-Reliably-Unreliable-Author",
+   "quote": "sincere recorders of the truth they've experienced, but they've fundamentally misunderstood",
+   "page": "comment by byanyothername, 9:00 AM"
+  },
+  {
+   "index": 378,
+   "feature": "withheld information and inference",
+   "claim": "A MetaFilter reader names deliberate frustration of expectations as the Wolfe device more central than unreliable narration.",
+   "source": "MetaFilter user “straight”, thread 149475, 8 May 2015, 9:11 AM",
+   "url": "https://www.metafilter.com/149475/Gene-Wolfe-The-Reliably-Unreliable-Author",
+   "quote": "the deliberate frustration of expectations",
+   "page": "comment by straight, 9:11 AM"
+  },
+  {
+   "index": 379,
+   "feature": "diction (native vs latinate)",
+   "claim": "A MetaFilter reader states that in The Book of the New Sun everything archaic to Severian is rendered as Latin.",
+   "source": "MetaFilter user “Ipsifendus”, thread 149475, 8 May 2015, 8:57 AM",
+   "url": "https://www.metafilter.com/149475/Gene-Wolfe-The-Reliably-Unreliable-Author",
+   "quote": "Everything archaic to Severian is rendered as Latin.",
+   "page": "comment by Ipsifendus, 8:57 AM"
+  },
+  {
+   "index": 380,
+   "feature": "withheld information and inference",
+   "claim": "A MetaFilter reader attributes to Wolfe the remark that everything means something but not everything means very much.",
+   "source": "MetaFilter user “straight” relaying Gene Wolfe, thread 149475, 8 May 2015",
+   "url": "https://www.metafilter.com/149475/Gene-Wolfe-The-Reliably-Unreliable-Author",
+   "quote": "Everything means something, but not everything means very much.",
+   "page": "comment by straight, 9:00 AM"
+  },
+  {
+   "index": 381,
+   "feature": "other: counter-evidence, anomaly as authorial error",
+   "claim": "A MetaFilter reader reports that Wolfe, asked by letter about a contradiction in the first pages of Shadow of the Torturer, answered that it was a typo.",
+   "source": "MetaFilter user “Ipsifendus” reporting a letter from Gene Wolfe, thread 149475, 8 May 2015, 9:25 AM",
+   "url": "https://www.metafilter.com/149475/Gene-Wolfe-The-Reliably-Unreliable-Author",
+   "quote": "Typo.",
+   "page": "comment by Ipsifendus, 9:25 AM"
+  },
+  {
+   "index": 382,
+   "feature": "opening sentence",
+   "claim": "Ian Sales says the title novella of The Fifth Head of Cerberus opens traditionally, as a childhood memory.",
+   "source": "Ian Sales (“iansales”), SFF Chronicles thread 11050, 13 June 2006",
+   "url": "https://www.sffchronicles.com/threads/11050/",
+   "quote": "The novella opens traditionally enough—a childhood memory",
+   "page": "post #1, essay body"
+  },
+  {
+   "index": 383,
+   "feature": "withheld information and inference",
+   "claim": "Ian Sales says that three paragraphs after that conventional opening the reader learns the narrator's father traded in children.",
+   "source": "Ian Sales (“iansales”), SFF Chronicles thread 11050, 13 June 2006",
+   "url": "https://www.sffchronicles.com/threads/11050/",
+   "quote": "three paragraphs later we learn that the narrator’s father traded in children",
+   "page": "post #1, essay body"
+  },
+  {
+   "index": 384,
+   "feature": "civic record register",
+   "claim": "Ian Sales says the novella 'V.R.T.' consists of excerpts from taped interviews and a field journal, framed by a military officer reading those documents to decide on an incarceration.",
+   "source": "Ian Sales (“iansales”), SFF Chronicles thread 11050, 13 June 2006",
+   "url": "https://www.sffchronicles.com/threads/11050/",
+   "quote": "It consists of excerpts from taped interviews, the field journal",
+   "page": "post #1, essay body"
+  },
+  {
+   "index": 385,
+   "feature": "withheld information and inference",
+   "claim": "Ian Sales says the authorities read a table of bullet-drop figures found in a field guide as meaning Marsch is an assassin.",
+   "source": "Ian Sales (“iansales”), SFF Chronicles thread 11050, 13 June 2006",
+   "url": "https://www.sffchronicles.com/threads/11050/",
+   "quote": "the authorities take this to mean Marsch is an assassin",
+   "page": "post #1, essay body"
+  },
+  {
+   "index": 386,
+   "feature": "withheld information and inference",
+   "claim": "Ian Sales says clues in the text, including a library shelf description, suggest the unnamed narrator's surname is Wolfe.",
+   "source": "Ian Sales (“iansales”), SFF Chronicles thread 11050, 13 June 2006",
+   "url": "https://www.sffchronicles.com/threads/11050/",
+   "quote": "Clues in the text suggest his surname is Wolfe",
+   "page": "post #1, essay body"
+  },
+  {
+   "index": 387,
+   "feature": "other: incidental detail as evidence",
+   "claim": "A forum analyst says objective outside detail is, in his opinion, at the heart of getting to the bottom of things in Wolfe.",
+   "source": "SFF Chronicles user “felicibusbrevis”, thread 11050, 24 March 2013 (an analysis written for the Urth mailing list)",
+   "url": "https://www.sffchronicles.com/threads/11050/",
+   "quote": "at the heart of getting to the bottom of things in Wolfe",
+   "page": "post #16, opening statement of method"
+  },
+  {
+   "index": 388,
+   "feature": "register modulation",
+   "claim": "The same forum analyst says the embedded aboriginal myth “A Story” is written in a mythic dream prose very different from the first part of the novel.",
+   "source": "SFF Chronicles user “felicibusbrevis”, thread 11050, 24 March 2013",
+   "url": "https://www.sffchronicles.com/threads/11050/",
+   "quote": "mythic but confusing dream prose that channels the savage mind",
+   "page": "post #16, section on “A Story”"
+  },
+  {
+   "index": 389,
+   "feature": "withheld information and inference",
+   "claim": "A reader of Peace reports taking things in at face value and failing to catch the significance of what Wolfe was alluding to.",
+   "source": "SFF Chronicles user “Fried Egg”, thread 528814, 14 September 2010",
+   "url": "https://www.sffchronicles.com/threads/528814/",
+   "quote": "taking things in at face value and failed to catch the significance",
+   "page": "post #1"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 375,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"unreliability\" as an intricate, hyperrational puzzle, not epistemic uncertainty",
+   "note": "RogerB, 8:50 AM May 8 2015, confirmed on raw page: \"it has basically nothing to do with unresolvable ambiguity or genuine epistemic uncertainty... it's 'unreliability' as a kind of intricate, hyperrational trick or puzzle for readers, who assemble based on careful cluing the truth that the narrator doesn't know.\" Quote exact; both limbs (disputes ambiguity reading; puzzle assembled from cluing) supported."
+  },
+  {
+   "index": 376,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "revealing how horrible he is through what slips through his narration",
+   "note": "Pseudoephedrine, 12:29 PM May 8 2015: \"Severian is a bad guy... revealing how horrible he is through what still manages to slip through his narration.\" Quote exact. Page says \"his narration\"; the claim's \"his own narration\" is a paraphrase outside the quoted span, not a distinct limb."
+  },
+  {
+   "index": 377,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "sincere recorders who fundamentally misunderstood the events of the story",
+   "note": "byanyothername, 9:00 AM May 8 2015: \"Some are sincere recorders of the truth they've experienced, but they've fundamentally misunderstood the events of the story.\" Quote exact (straight apostrophes on page, matching). Claim's \"the events they record\" tracks \"the events of the story\"."
+  },
+  {
+   "index": 378,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "even more central than unreliable narration is deliberate frustration of expectations",
+   "note": "straight, 9:11 AM May 8 2015: \"The thing Wolfe does that I think is even more central than unreliable narration is the deliberate frustration of expectations.\" Quote exact; the comparative limb (\"more central than unreliable narration\") is on the page verbatim."
+  },
+  {
+   "index": 379,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Everything archaic to Severian is rendered as Latin.",
+   "note": "Ipsifendus, 8:57 AM May 8 2015. Quote exact, closing the paragraph \"About that language...\" whose surrounding comment is explicitly about BotNS/Urth, supporting the claim's \"in The Book of the New Sun\" limb."
+  },
+  {
+   "index": 380,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "As he has said, \"Everything means something, but not everything means very much.\"",
+   "note": "straight, 9:00 AM May 8 2015 (attribution line \"posted by straight at 9:00 AM on May 8, 2015\"). Quote exact; \"he\" is Wolfe in context (\"the solution to his puzzles\"), supporting the attribution-to-Wolfe limb."
+  },
+  {
+   "index": 381,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Wolfe's explanation for the contradiction: \"Typo.\"",
+   "note": "Ipsifendus, 9:25 AM May 8 2015: \"Within the first 2 pages of 'Shadow of the Torturer', there's a contradiction... my wife wrote Wolfe a letter... asking about the contradiction. Wolfe replied by writing me directly... and an explanation for the contradiction: Typo.\" All limbs (letter, first pages of Shadow of the Torturer, typo answer) supported; the letter was sent by his wife, which the claim does not contradict."
+  },
+  {
+   "index": 382,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The novella opens traditionally enough—a childhood memory",
+   "note": "iansales post #1, Jun 13 2006. Quote exact (em dash matches). Context paragraph opens \"Something is not quite right about the world of 'The Fifth Head Of Cerberus'\", so \"the novella\" is the title novella, supporting that limb."
+  },
+  {
+   "index": 383,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "three paragraphs later we learn that the narrator's father traded in children",
+   "note": "iansales post #1, same sentence as index 382: \"The novella opens traditionally enough—a childhood memory—but three paragraphs later we learn that the narrator's father traded in children.\" Quote exact including the curly apostrophe."
+  },
+  {
+   "index": 384,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "excerpts from taped interviews, field journal, transcripts and prison diary, framed by the officer's reading",
+   "note": "iansales post #1: \"It consists of excerpts from taped interviews, the field journal, interrogation transcripts and prison diary of Marsch, framed by a narrative describing the military officer reading those documents in order to make a decision on Marsch's incarceration.\" Quote exact; military officer and incarceration-decision limbs both verbatim."
+  },
+  {
+   "index": 385,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "figures describe bullet drop; the authorities take this to mean Marsch is an assassin",
+   "note": "iansales post #1: the evidence is \"a table of figures in the back of a copy of A Field Guide to the Animals of St Anne... The figures apparently describe the amount of drop in trajectory of a bullet for given ranges, and the authorities take this to mean Marsch is an assassin.\" Quote exact; field-guide and bullet-drop limbs supported."
+  },
+  {
+   "index": 386,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Clues in the text suggest his surname is Wolfe—the book under 'W' in the library",
+   "note": "iansales post #1: \"'The Fifth Head Of Cerberus' is the remembrances of an unnamed narrator. Clues in the text suggest his surname is Wolfe—the description of a book by his father appearing under 'W' in the library:\" followed by the block-quoted shelf passage. Quote exact; unnamed-narrator and library-shelf limbs both supported."
+  },
+  {
+   "index": 387,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "objective outside detail is usually, in my opinion, at the heart of getting to the bottom of things in Wolfe",
+   "note": "felicibusbrevis post #16, Mar 24 2013, written for the Urth list (\"I just wrote this little write up for the urth list\"); the sentence sits in the \"First, my philosophy on Wolfe's stories\" paragraph. Quote exact. Only slippage: the page hedges with \"usually\", which the claim drops; the claim keeps \"in his opinion\", so no limb is left unsupported."
+  },
+  {
+   "index": 388,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "that mythic but confusing dream prose... very different than the first part of the novel",
+   "note": "felicibusbrevis post #16: \"The style of A Story is something Wolfe is very good at – that mythic but confusing dream prose that channels the savage mind without losing sophistication. It is very different than the first part of the novel\". Quote exact. \"Embedded aboriginal myth\" is supported on the same page by post #1 ('\"A Story,\" by John V. Marsch' is a Sainte Anne aboriginal myth, as transcribed by Marsch)."
+  },
+  {
+   "index": 389,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "just taking things in at face value and failed to catch the significance of what he was alluding to",
+   "note": "Fried Egg, thread \"Peace (*SPOILERS*)\", post #1, Sep 14 2010. Quote exact; \"he\" is Wolfe in context (\"Wolfe's eloquant prose\"), supporting the \"what Wolfe was alluding to\" limb."
+  }
+ ]
+}

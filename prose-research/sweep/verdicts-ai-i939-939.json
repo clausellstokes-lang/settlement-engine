@@ -1,0 +1,23 @@
+{
+  "name": "ai",
+  "chunk": 29,
+  "claims": [
+    {
+      "index": 939,
+      "feature": "detection and its failures",
+      "claim": "Williams states that detection tools are not reading and not evaluating authorial intent but measuring two mathematical properties of text, perplexity and burstiness.",
+      "source": "Mark Williams, editor of The New Publishing Standard, 2026",
+      "url": "https://thenewpublishingstandard.com/2026/06/09/david-shelley-ai-detection-publishing/",
+      "quote": "They are not reading.",
+      "page": "section 'How The Tools Actually Work'"
+    }
+  ],
+  "verdicts": [
+    {
+      "index": 939,
+      "verdict": "VERIFIED_VERBATIM",
+      "trueWording": "They are not reading. They are not evaluating authorial intent, creative decision-making, or the presence of a human mind in the work. They are measuring two mathematical properties of text.",
+      "note": "Raw HTML fetched with a browser UA (HTTP 200, 26451 bytes) and stripped to text; the live page was reached directly, no summarizer or archive needed. Quote 'They are not reading.' appears word for word under the heading 'How The Tools Actually Work - And Why They Fail'. Every limb holds: not reading; not evaluating authorial intent; 'measuring two mathematical properties of text'; 'The first is perplexity - how statistically surprising each word choice is'; 'The second is burstiness ... it measures variation in sentence length and complexity'. Byline is Mark Williams, dated Jun 9, 2026. The source-field descriptor 'editor of The New Publishing Standard' is not asserted on the page itself (the word 'editor' there refers to David Shelley), but that descriptor is not a limb of the claim sentence."
+    }
+  ]
+}

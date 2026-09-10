@@ -1,0 +1,28 @@
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.502.lock as PID 26317 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+
+ RUN  v4.1.11 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/laneANCHOR905
+
+ ❯ tests/components/warFaithSurfacing.test.jsx (16 tests | 1 failed) 770ms
+     × the fold half: no statically-shut host stands between the surface and the door root 4ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/components/warFaithSurfacing.test.jsx > §906 — War & Resolve is READ inside the real War door, not merely mounted > the fold half: no statically-shut host stands between the surface and the door root
+Error: ENOENT: no such file or directory, open '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/laneANCHOR905/tests/components/undefined'
+ ❯ readSrc tests/components/warFaithSurfacing.test.jsx:477:28
+    475|   }
+    476|
+    477|   const readSrc = (rel) => readFileSync(fileURLToPath(new URL(`../../s…
+       |                            ^
+    478|
+    479|   test('the lit prose reaches the accessible DOM on first paint, with …
+ ❯ tests/components/warFaithSurfacing.test.jsx:507:24
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 15 passed (16)
+   Start at  22:11:31
+   Duration  4.39s (transform 2.15s, setup 30ms, import 2.87s, tests 770ms, environment 624ms)
+

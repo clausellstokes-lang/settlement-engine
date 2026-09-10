@@ -1,0 +1,282 @@
+ 
+ Baker's Field: Twenty-Eight Adventures (Part 1) 
+Baker's Field
+ Richard Baker's News and Ponderings 
+ Monday, March 9, 2015 
+Twenty-Eight Adventures (Part 1)
+As you may have noticed, I have been delinquent in keeping my blog fresh over the last couple of months. For most of the summer and fall, I was insanely busy with work on Princes of the Apocalypse , the upcoming Dungeons & Dragons adventure designed by Sasquatch Game Studio. Then I spent much of the last couple of months catching up on my writing and working on our Primeval Thule PDF adventures.
+(By the way . . . the Primeval Thule Campaign Setting should be available in better retail stores in early April. If you missed the Kickstarter, ask your FLGS about ordering it for you!)
+Looking ahead to the next few months, I’d like to make sure I provide a regular and interesting discussion of gamer-friendly topics, and give folks a reason to keep up with what I’m doing. So, I’ve decided to use a bit of nostalgia to lure people in for a bit. The nostalgia in question is simple: During my career as a professional game designer, I’ve written 28 published adventures. For the next six months, I’m going to look at one adventure a week in chronological order, telling you a little bit about each one and what I was trying to do. These 28 adventures span twenty-three years of work in the RPG biz, and hopefully they’ll give me opportunities to share some interesting stories and insights about what it’s been like to work as a game designer over the years.
+I’ve been told a number of times that I’m a good adventure designer, which strikes me as a little ironic. You see, I generally don’t like writing adventures all that much. Every time I’ve taken on an adventure project, I’ve spent weeks or months feeling like I was behind schedule and overmatched. I do my best, and I generally end up feeling reasonably proud of how it turns out, but it’s never easy .
+ What Qualifies 
+To make it onto my list, I decided that I would only include complete adventures. So, while I’ve written dozens of adventure locales—for example, some of the keyed sites in the 3rd Edition Lords of Madness book, or the 4th Edition Draconomicon II —they don’t count because they weren’t separately published. I did include complete adventures that appeared as samples or introductions in other books, so my “Exit 23” adventure from the Dark Matter Campaign Setting makes the list. Also, I didn’t include anything that I worked on as a developer or editor, even though sometimes my contributions were pretty substantial. So, with those conditions, my list begins with the Dungeons & Dragons 2nd Edition Dark Sun super-adventure Dragon’s Crown. It wasn’t the first thing I wrote at TSR, but it’s the first adventure of mine that saw publication.
+ 1. Dragon’s Crown 
+Nothing like jumping in at the deep end! I was hired by TSR, Inc. in October of 1991. When I joined the R&D department in Lake Geneva, it was organized into four product teams: Core D&D, Basic D&D, Old Worlds, and New Worlds. Everybody in the creative department belonged to two different product teams—your assignments weren’t necessarily exclusive to those lines, but you would attend a product team meeting every week and contribute to discussions and tasks such as line planning, coming up with product names, writing marketing copy, and so on. Jim Ward asked me which groups I was most interested in, and to my surprise, I was assigned accordingly to the Core D&D group (led by Steve Winter) and the New Worlds group (under Tim Brown).
+The New Worlds group was a pretty awesome place to be in 1991 and 1992. It focused on the Spelljammer, Ravenloft, and Dark Sun product lines. My first project was the Spelljammer sourcebook Rock of Bral, but then I got a string of Dark Sun assignments: Valley of Dust and Fire, Dragon’s Crown, Merchant House of Amketch, The Will and the Way. So, I stepped into the “second-year” Dark Sun planning and work, following up on the plans Tim Brown and Troy Denning put in motion for the original boxed set and adventures.
+ Dragon’s Crown was my fourth assignment at TSR. I worked on it from August through November of 1992. The basic idea was pretty epic: A 288-page high-level super-adventure by multiple authors, back in a time when the vast majority of TSR’s adventures were 32- or 64-page efforts by single authors. My direct responsibility was 2 MU of design, plus overall outlining and freelancer coordination. (A “MU” was the scheduling unit used at TSR for RPG work. It stood for “module unit” and represented 32 pages of writing/design, or 20,000 to 22,000 words. When I first started at TSR, the standard was that a designer like me would be scheduled for 1 month per MU. If it seems generous, remember, we also handled a lot of outlining, planning, and freelancer oversight while plugging away on our design assignments.)
+After a concept meeting to brainstorm up ideas for this gigantic adventure, I sat down and tried to hammer it all together. Naturally, the focus of the adventure needed to involve the Dragon’s Crown Mountains (the title was already approved), so I took a look at what was said about this mysterious place in the Dark Sun boxed set. For a plot, I figured that something threatening “psionics as we know it” would work well by giving every Dark Sun hero a direct slap in the face. That led me to come up with the Order, a neutral group of powerful psionicists whose stronghold was located in the lush valley at the center of the mountains. The Order was after nothing less than establishing a monopoly on psionic power by covering Athas in a field of psionic suppression, and it would be the PCs’ job to stop them.
+I was very paranoid about carving up one continuous story arc between six different authors, so I decided to assign myself the beginning and the end of the story, and establish clear “stop” and “start” points for the other designers. In other words, I made sure that Geoff Pass and Alex Bund knew that the PCs were supposed to be ready to go to Urik at the beginning of Part II, and needed to be ready to leave Lake Island at the end of Part III. So, I personally wrote Part I (Out of the Valley), and Part VII (Dragon’s Crown Mountains). The other contributors were Kirk Botula and Lisa Smedman.
+One major problem cropped up with Dragon’s Crown: Most of the work by Geoff Pass and Alex Bund was lost due to some mysterious incompatibility between our word processor programs. When I first started at TSR, we worked in WordPerfect. I have no idea what the other guys used, but the fact that they were in England and we were exchanging files by physically mailing each other 3.5” disks might have had something to do it. (Looking back now, it seems only slightly more advanced that chiseling cuneiform on clay tablets.) Bill Slavicsek, the editor for that section, received almost nothing for a turnover. He “edited” huge stretches of Part II and III of the adventure by writing it himself.
+So, how do I think I did with 23 years of hindsight? As I write this, I have the old module spread out on my desk, and I’m looking through the various components. (Annoyingly enough, I don’t have the darned poster map, so I can’t admire my awesome psionic fortress. Wonder where that went?) In retrospect, there are definitely parts that are pretty railroad-ish or heavy-handed, although part of that was my excessive paranoia in making sure all the contributing authors knew where to start and stop their sections. I also seem to have been VERY fond of boxed text back in the day, although that was kind of a 2e style thing.
+Finally, I wonder how many people really played through Dragon’s Crown —it was a high-level adventure in a world where adventures are not very portable to home settings. I mean, I’ve never played it or run it since working on it, and I wrote the darned thing. But there are parts I like a great deal, such as the fortress of Dasaraches, the Order and its factions, and the Road of Fire. I look back at the adventure as “fair to middlin’” by my own standards, but I did come up with lots of interesting pieces to play with.
+ Next week: My only Ravenloft adventure, Dark of the Moon !
+Posted by
+ Richard Baker 
+at
+ 9:38 PM 
+ Email This BlogThis! Share to X Share to Facebook Share to Pinterest 
+ 11 comments:
+ Raddu76 March 10, 2015 at 3:30 PM 
+ Great blog post Richard! I think we started it back in the nineties, but never finished it. I remember the players of psionic characters were particularly upset that they were nerfed in the adventure. I've used bits and pieces of it in many later adventures.
+ Reply Delete 
+ Replies 
+ Reply 
+ Richard Baker March 15, 2015 at 11:04 AM 
+ Thanks, Raddu! I seem to recall that psionicists could un-nerf by getting their hands on some of the "immunity tokens" the agents of the Order carried, but that might have come along pretty late in the adventure.
+ Reply Delete 
+ Replies 
+ Reply 
+ cdiak March 16, 2015 at 12:08 PM 
+ I really enjoyed this adventure, but especially part 3. 
+ Reply Delete 
+ Replies 
+ Reply 
+ Unknown March 24, 2015 at 3:37 PM 
+ i must ahve ran it 3-4 times it was great i am still running a dark sun campaign and at times i still use parts of dragon crown mountain. 
+ Reply Delete 
+ Replies 
+ Reply 
+ JasonKeaya July 6, 2015 at 11:56 PM 
+ I played Dragon Crown as a Dm in the spring of 2008 with a group of people I played Dark Sun since 2004 every month, so their character tree where in the 13-14 lvl range. 
+I kept the part in Urik but added a giant flying carpet to travel to the Road of Fire. So the player had to share the magical carpet with Hamanu retainers and they were interesting conflict and roleplaying while the players and the retaineers tried to double-cross each other. 
+Really interesting adventure I liked it.
+ Reply Delete 
+ Replies 
+ Reply 
+ Richard Baker July 7, 2015 at 8:33 AM 
+ That sounds pretty awesome, Jason! The idea of some "help" from Hamanu is pretty clever.
+ Reply Delete 
+ Replies 
+ Reply 
+ Mestre Peroxido July 4, 2016 at 6:33 AM 
+ I played as DM in Dragon's Crown back in 1998. It was the first High-Level adventure for me. At that time I was very focused in run the adventure as it was written, so I had notes, graphs, fluxograms to help me at this. One curious thing I remember was that in the final module, the group found some not usual passage through the kitchen or service work and jumped straight to the final rooms. The previous encounters were all made when they were already getting out, and not paying much attention. Five of the eight players died after the mission was accomplished (a mage with invisibility and prismatic spray was responsible for three). 
+This adventure was a tremendous fun through hours of play. 
+ Reply Delete 
+ Replies 
+ Reply 
+ JasonKeaya August 5, 2016 at 6:00 AM 
+ This comment has been removed by the author.
+ Reply Delete 
+ Replies 
+ Reply 
+ JasonKeaya August 5, 2016 at 6:16 AM 
+ This comment has been removed by the author.
+ Reply Delete 
+ Replies 
+ Reply 
+ JasonKeaya August 5, 2016 at 6:22 AM 
+ The best part of the adventure is the Road of Fire. We had 6 sessions of gaming (5 hours each) just on those three islands. Once, they lost the siltskimmer Belamarash under the silt and the player surprised me by spending all his pfp on megakinesis to pull it out of the silt like Luke Skywalker with his X-wing. 
+We had great time with the war between the giants clans. The players and Hamanu retaineers were switching side and baiting the clans against one another. They were a lot of politics involved and since they were high level, they had a lot of ways to understand and talk the language of the giants. I added some backstory on the culture of each clans and players had to discover these backstory in order to manipulate the clans. Once, but the party and the Hamanu retaineers ended up prisoners to the goat head giant (who wanted to sacrifice them to their magma god, I don't remember if it was in the scenario or an idea I came up with). The players where able to escape and trap the Urikites behind (I made them escape later to make sure we have the final fight in Aarackle fortress). 
+The second island with all the volcanoes was epic, they were some close call there, with fight on ridge overlooking magma pit, almost killing the whole party. I had a big fight with an agent of the Order who tried to stop the party there. 
+The part travelling the mud flat on foot was also fun. I added more critters. A gaj made a big mess with the Mule gladiator brain. 
+The third island was like something straight out of Ravenloft.
+ Reply Delete 
+ Replies 
+ Reply 
+ Matthew December 29, 2020 at 4:45 AM 
+ Richard - did it ever occur to you that most players would want to keep the Psionatrix for themselves rather than destroying it? 
+ Reply Delete 
+ Replies 
+ Reply 
+ Add comment 
+ Load more... 
+ Newer Post 
+ Older Post 
+ Home 
+Subscribe to:
+ Post Comments (Atom) 
+ SF and Fantasy Writer, Gamer, Fan
+ About Me
+Richard Baker
+ Welcome! I'm Richard Baker, author and game designer. You may know me from my Forgotten Realms novels or my work on the Dungeons & Dragons game. These days I'm working on my own projects. My next big one is Valiant Dust , the start of a brand-new military science fiction series from Tor Books.
+In 2013 I founded Sasquatch Game Studio to keep a hand in publishing great games. We're working on a new version of the Alternity Science Fiction Game. We hope to Kickstart Alternity early in 2017, so keep your eyes open! 
+ View my complete profile 
+ Followers
+ Blog Archive
+ ► 
+2017
+ (9) 
+ ► 
+October
+ (1) 
+ ► 
+August
+ (1) 
+ ► 
+May
+ (1) 
+ ► 
+March
+ (1) 
+ ► 
+February
+ (2) 
+ ► 
+January
+ (3) 
+ ► 
+2016
+ (5) 
+ ► 
+June
+ (1) 
+ ► 
+April
+ (1) 
+ ► 
+February
+ (2) 
+ ► 
+January
+ (1) 
+ ▼ 
+2015
+ (26) 
+ ► 
+December
+ (1) 
+ ► 
+November
+ (2) 
+ ► 
+October
+ (1) 
+ ► 
+September
+ (2) 
+ ► 
+August
+ (1) 
+ ► 
+July
+ (2) 
+ ► 
+June
+ (5) 
+ ► 
+May
+ (4) 
+ ► 
+April
+ (4) 
+ ▼ 
+March
+ (4) 
+ Twenty-Eight Adventures, Part 4 
+ Twenty-Eight Adventures, Part 3 
+ Twenty-Eight Adventures, Part 2 
+ Twenty-Eight Adventures (Part 1) 
+ ► 
+2014
+ (8) 
+ ► 
+November
+ (1) 
+ ► 
+October
+ (1) 
+ ► 
+September
+ (1) 
+ ► 
+August
+ (1) 
+ ► 
+March
+ (1) 
+ ► 
+February
+ (1) 
+ ► 
+January
+ (2) 
+ ► 
+2013
+ (15) 
+ ► 
+October
+ (1) 
+ ► 
+September
+ (1) 
+ ► 
+August
+ (2) 
+ ► 
+July
+ (2) 
+ ► 
+June
+ (1) 
+ ► 
+May
+ (2) 
+ ► 
+April
+ (2) 
+ ► 
+March
+ (1) 
+ ► 
+February
+ (2) 
+ ► 
+January
+ (1) 
+ ► 
+2012
+ (32) 
+ ► 
+December
+ (3) 
+ ► 
+November
+ (2) 
+ ► 
+October
+ (4) 
+ ► 
+September
+ (2) 
+ ► 
+August
+ (3) 
+ ► 
+July
+ (1) 
+ ► 
+June
+ (3) 
+ ► 
+May
+ (3) 
+ ► 
+April
+ (2) 
+ ► 
+March
+ (4) 
+ ► 
+February
+ (2) 
+ ► 
+January
+ (3) 
+ ► 
+2011
+ (2) 
+ ► 
+December
+ (2) 
+Travel theme. Theme images by enot-poloskun . Powered by Blogger .
+ 

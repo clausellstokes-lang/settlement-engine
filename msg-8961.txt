@@ -1,0 +1,23 @@
+§896.1: the Fable seat rules twenty-eight rows of the §892 retrovalidation walk from the sealed evidence
+
+Every slice of the §892 walk is COMPLETE on disk — twenty of twenty, 575 calls,
+423 RATIFY, 123 AMEND, 13 REVERSE, 8 EVIDENCE-THIN, 8 OUT-OF-SCOPE — restored
+from the sealed sitting kit after the scratchpad cull. Thirteen rows already
+carried a Fable ruling from the §892 sitting; twenty-eight walked rows did not,
+because the Fable seat ran out before it could write them and an Opus seat may
+not. This act writes them.
+
+Each ruling re-derives its VERDICTS from the slice evidence and names every
+AMEND, REVERSE and EVIDENCE-THIN call by claim and receipt. It does NOT
+re-execute the probes: every EVIDENCE-THIN call stays PLAUSIBLE, not CONFIRMED,
+until re-run against the current tree, and the ruling says so on the row. The
+fourteen lane-local ids (S05-n, the P0 sweep's A1..F4, S20's five lanes) roll up
+under their parent rows §882.13, §882.15b, §892.1 and §892.2 rather than
+minting rows of their own. Every anchor was dry-run against the HEAD queue blob
+and resolved exactly once before this act; the writer asserts the same.
+
+Enrols: none — this act RULES enrolled rows; it enrols no new lane
+
+Seat: Fable 5.1 — validated
+
+Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>
