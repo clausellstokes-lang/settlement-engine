@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-10 00:24:51 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-10 00:30:53 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -37,7 +37,7 @@
 | ? | other |  | result | 0 | draft-round-1.md | — | 22:39:34 |
 | ? | other |  | result | 0 | cure-round-1.md | — | 04:10:20 |
 | ? | other |  | result | 0 | — | — | 04:22:47 |
-| ? | other |  | in-flight | 0 | — | — | 04:24:50 |
+| ? | other |  | in-flight | 0 | — | — | 04:29:57 |
 | ? | other |  | result | 0 | cure-round-1.md | — | 04:10:56 |
 | ? | other |  | result | 0 | — | — | 04:24:45 |
 | ? | other |  | result | 0 | cure-round-1.md | — | 04:09:28 |
@@ -134,7 +134,8 @@
 | ? | other |  | result | 0 | general.refute.md | — | 04:22:05 |
 | ? | other |  | result | 0 | defense.survey.md | — | 04:06:47 |
 | ? | other |  | result | 0 | power.refute.md | — | 04:18:28 |
-| ? | other |  | in-flight | 0 | stressors.refute.md | — | 04:24:48 |
+| ? | other |  | in-flight | 0 | — | — | 04:29:57 |
+| ? | other |  | result | 0 | stressors.refute.md | — | 04:27:35 |
 | ? | other |  | result | 0 | defense.refute.md | — | 04:24:28 |
 | ? | other |  | result | 0 | — | — | 04:19:05 |
 | ? | other |  | result | 0 | warFaith.survey.md | — | 04:00:59 |
