@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-09 23:56:42 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-10 00:04:45 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -35,6 +35,11 @@
 | ? | other |  | in-flight | 0 | — | — | 23:30:21 |
 | ? | other |  | result | 0 | draft-round-3.md | — | 23:14:35 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 22:39:34 |
+| ? | other |  | in-flight | 0 | — | — | 04:00:08 |
+| ? | other |  | in-flight | 0 | — | — | 03:59:56 |
+| ? | other |  | in-flight | 0 | — | — | 04:00:32 |
+| ? | other |  | in-flight | 0 | — | — | 04:00:10 |
+| ? | other |  | in-flight | 0 | — | — | 04:00:14 |
 | ? | other |  | result | 0 | refute-fable.md | — | 19:04:52 |
 | ? | other |  | result | 0 | — | — | 19:04:34 |
 | ? | other |  | result | 0 | — | — | 17:57:47 |
@@ -123,12 +128,15 @@
 | ? | other |  | result | 0 | draft-round-1.md | — | 23:12:02 |
 | ? | other |  | failed | 0 | — | — | 19:08:35 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 22:44:38 |
-| ? | other |  | in-flight | 0 | — | — | 03:54:14 |
-| ? | other |  | in-flight | 0 | — | — | 03:54:50 |
-| ? | other |  | in-flight | 0 | — | — | 03:52:33 |
-| ? | other |  | in-flight | 0 | warFaith.survey.md | — | 03:56:21 |
-| ? | other |  | in-flight | 0 | — | — | 03:52:55 |
-| ? | other |  | in-flight | 0 | — | — | 03:54:31 |
+| ? | other |  | in-flight | 0 | general.survey.md | — | 04:01:47 |
+| ? | other |  | in-flight | 0 | stressors.survey.md | — | 04:03:17 |
+| ? | other |  | in-flight | 0 | defense.survey.md | — | 04:03:24 |
+| ? | other |  | in-flight | 0 | — | — | 04:04:35 |
+| ? | other |  | in-flight | 0 | — | — | 04:04:17 |
+| ? | other |  | result | 0 | warFaith.survey.md | — | 04:00:59 |
+| ? | other |  | in-flight | 0 | — | — | 04:04:38 |
+| ? | other |  | result | 0 | economy.survey.md | — | 04:03:31 |
+| ? | other |  | result | 0 | power.survey.md | — | 04:03:54 |
 | ? | other |  | result | 0 | refine.md | — | 00:24:50 |
 | ? | other |  | result | 0 | refine.md | — | 00:22:46 |
 | ? | other |  | result | 0 | — | — | 00:13:53 |

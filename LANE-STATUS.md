@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-09 23:57:00 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-10 00:03:38 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = d7f4c6b0e §919: the REWRITE train's first car lands — the index-stable draw signed (59.61 % of ce
 
@@ -127,10 +127,10 @@ product claude/composite-r4 = f73bdbf16 · ledger = d7f4c6b0e §919: the REWRITE
       | 
 - **L-PROBE-2 (chair)**: cheap 6/6 tips · full: FULL_DONE · bracket: BRACKET_DONE
 ## RESEARCH SWEEPS (state = claims/verdicts/kept; verdict files; section/critic mtimes) — round tags in sweep/LAST-RUNS.json
-- **tolkien**: claims 874 · verdicts 874 (todo 0) · kept 641 · partial 214 · verdict files 43 (triage 0, regrade r4) · section 09-06 14:20 · critic 09-06 14:42
-- **martin**: claims 990 · verdicts 990 (todo 0) · kept 763 · partial 107 · verdict files 43 (triage 1, regrade r5) · section 09-06 15:41 · critic 09-06 22:31
-- **dnd**: claims 1212 · verdicts 1212 (todo 0) · kept 906 · partial 265 · verdict files 89 (triage 2, regrade r6) · section 09-07 03:58 · critic 09-07 04:33
-- **ai**: claims 1586 · verdicts 1407 (todo 179) · kept 1129 · partial 197 · verdict files 92 (triage 2, regrade r5) · section 09-07 01:37 · critic 09-07 02:10
+- **tolkien**: claims 874 · verdicts 874 (todo 0) · kept 641 · partial 214 · verdict files 35 (triage 0, regrade r4) · section 09-06 14:20 · critic 09-06 14:42
+- **martin**: claims 990 · verdicts 990 (todo 0) · kept 763 · partial 107 · verdict files 39 (triage 1, regrade r5) · section 09-06 15:41 · critic 09-06 22:31
+- **dnd**: claims 1212 · verdicts 1212 (todo 0) · kept 906 · partial 265 · verdict files 85 (triage 2, regrade r6) · section 09-07 03:58 · critic 09-07 04:33
+- **ai**: claims 1586 · verdicts 1407 (todo 179) · kept 1129 · partial 197 · verdict files 80 (triage 2, regrade r5) · section 09-07 01:37 · critic 09-07 02:10
 - **kay**: claims 1103 · verdicts 1103 (todo 0) · kept 631 · partial 100 · verdict files 55 (triage 2, regrade r8) · section 09-06 20:21 · critic 09-06 20:50
 - **leguin**: claims 924 · verdicts 858 (todo 66) · kept 666 · partial 117 · verdict files 59 (triage 2, regrade r8) · section 09-07 04:03 · critic 09-07 04:36
 - **wolfe**: claims 1255 · verdicts 1255 (todo 0) · kept 766 · partial 217 · verdict files 71 (triage 1, regrade r7) · section 09-06 21:48 · critic 09-06 22:09
@@ -141,11 +141,12 @@ product claude/composite-r4 = f73bdbf16 · ledger = d7f4c6b0e §919: the REWRITE
 - wf_183dda09-702: 202 journal lines, 104 agents
 - wf_2041a5e2-748: 60 journal lines, 33 agents
 - wf_3b79f7ff-928: 8 journal lines, 4 agents
+- wf_49878604-b9f: 5 journal lines, 5 agents
 - wf_525170fc-546: 48 journal lines, 24 agents
 - wf_68d644ef-3dd: 124 journal lines, 64 agents
 - wf_73595d81-51d: 18 journal lines, 9 agents
 - wf_7e1abdf4-c9a: 48 journal lines, 24 agents
-- wf_8ca05b10-e44: 6 journal lines, 6 agents
+- wf_8ca05b10-e44: 10 journal lines, 8 agents
 - wf_b6204819-335: 72 journal lines, 36 agents
 - wf_dc0e55ca-00d: 60 journal lines, 30 agents
 - wf_e49b0611-dbb: 13 journal lines, 7 agents
@@ -155,4 +156,4 @@ product claude/composite-r4 = f73bdbf16 · ledger = d7f4c6b0e §919: the REWRITE
 - wf_f9cf9a1d-188: 49 journal lines, 26 agents
 
 ## PROCESSES: 57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 2.66 2.85 2.95
+load: 3.91 3.28 3.09
