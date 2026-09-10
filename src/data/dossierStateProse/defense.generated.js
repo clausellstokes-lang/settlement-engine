@@ -5254,9 +5254,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           ],
           "vid": 1,
           "wordings": [
-            "Wages and keeping are answered in full on {settlement}'s {defwork}, and dangerous is the country.",
-            "The threat is live. At {settlement} a {defwork} stands, and its upkeep wants nothing.",
-            "The cost of the {defwork} standing at {settlement} is met to the last, and the country is not quiet."
+            "The threat is live. {settlement} holds a {defwork}, and its upkeep is met to the last.",
+            "The keeping of the {defwork} at {settlement} wants nothing, and the country is dangerous.",
+            "What {settlement}'s {defwork} costs is answered in full, and the country is not quiet."
           ]
         },
         {
@@ -5268,9 +5268,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           ],
           "vid": 2,
           "wordings": [
-            "The country is dangerous, and nothing is owing on {settlement}'s {defwork}.",
-            "In dangerous country {settlement} has a {defwork} standing, and the money for it is found.",
-            "Danger the country carries, and at {settlement} the money holds and the {defwork} holds."
+            "Nothing is owing on {settlement}'s {defwork}, and the country carries danger.",
+            "In dangerous country {settlement} has a {defwork}, and the money for it is found.",
+            "At {settlement} the money holds and the {defwork} holds, and danger is in the country."
           ]
         },
         {
@@ -5282,25 +5282,25 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           ],
           "vid": 3,
           "wordings": [
-            "Set in dangerous country, {settlement} is enclosed, and the {defwork} stands with its keeping paid.",
-            "Dangerous country lies at {settlement}, and the town stands enclosed by a {defwork} kept at full cost.",
-            "The keeping of the {defwork} standing at {settlement} is met entire, and the country the town sits in is dangerous."
+            "The country is dangerous. {settlement} is enclosed, and its {defwork} is kept at full cost.",
+            "The cost of the {defwork} at {settlement} is met entire, and danger holds in the country.",
+            "Danger is live in the country, and {settlement} pays the whole cost of its {defwork}."
           ]
         }
       ],
       "WALLED-QUIET": [
         {
           "angle": "visitor",
-          "text": "{settlement} keeps a {defwork} and keeps it up; no live threat stands in the country.",
+          "text": "{settlement} keeps a {defwork} and lets nothing of its keeping go; the country carries no live threat.",
           "slots": [
             "settlement",
             "defwork"
           ],
           "vid": 1,
           "wordings": [
-            "Nothing live threatens {settlement}, and the {defwork} the town keeps up is standing.",
-            "In a country that carries no live threat, {settlement} has a {defwork} standing, and nothing of its keeping is let go.",
-            "A {defwork} stands at {settlement} and is kept up. The country round the town shows no live threat."
+            "The country about {settlement} is quiet. The town's {defwork} stands, and its keeping is not let fall.",
+            "Nothing live threatens {settlement}, and the {defwork} the town keeps up stands.",
+            "A {defwork} has standing at {settlement}, kept up by the town, and nothing live is abroad in the country."
           ]
         },
         {
@@ -5312,52 +5312,52 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           ],
           "vid": 2,
           "wordings": [
-            "Nothing in the country is live against {settlement}, and nothing is short in the upkeep of the {defwork} it keeps standing.",
-            "With no live threat in the country, the {defwork} at {settlement} has standing, and no part of its keeping goes unpaid.",
-            "No threat in the country is live, and the {defwork} of {settlement} is standing. The keeping of it is met."
+            "The upkeep of the {defwork} at {settlement} is met, and it stands. The country is settled.",
+            "Nothing in the country is live against {settlement}, and the {defwork} stands with no part of its keeping unpaid.",
+            "No live threat presses {settlement}. The {defwork} it keeps stands, and nothing of the keeping is left aside."
           ]
         },
         {
           "angle": "ledger",
-          "text": "The town asks little of its {defwork} and keeps its upkeep whole; the work stands entered on the roll.",
+          "text": "The town asks little of its {defwork}, and its upkeep is paid whole; the work stands entered on the roll.",
           "slots": [
             "defwork"
           ],
           "vid": 3,
           "wordings": [
-            "On the roll the {defwork} is entered standing, with its upkeep met in full, and the country carries nothing live against the town.",
-            "Little is asked of the {defwork}. Nothing of its keeping goes unmet, and the roll shows the work standing.",
-            "The roll holds the {defwork} standing and its upkeep met at full rate, and the country is settled."
+            "On the roll the {defwork} is carried standing, its upkeep met in full, and nothing live lies against the town.",
+            "Little is asked of the {defwork}. The roll shows the work standing, and its keeping met.",
+            "The roll sets down the {defwork} standing and its upkeep paid, and the country is quiet."
           ]
         }
       ],
       "WALLED-STRAINED": [
         {
           "angle": "ledger",
-          "text": "The town of {settlement} holds a {defwork}, and its muster's wage is not made up to the roll.",
+          "text": "The town of {settlement} holds a {defwork}; its muster's wage is not made up to the roll.",
           "slots": [
             "settlement",
             "defwork"
           ],
           "vid": 1,
           "wordings": [
-            "A {defwork} stands at {settlement}; the pay of its muster is short.",
+            "A {defwork} stands at {settlement}. Its muster's pay is short.",
             "In place at {settlement} is a {defwork}, and the upkeep of its muster is unmet.",
-            "A {defwork} is entered standing at {settlement}, and its muster's funding is entered short of the roll."
+            "A {defwork} is entered standing at {settlement}, and the funding of its muster is short of the wage."
           ]
         },
         {
           "angle": "unfolding",
-          "text": "The {defwork} at {settlement} stands, and the wage of its muster is short of the roll.",
+          "text": "The {defwork} at {settlement} stands, and the muster's pay is short of the roll.",
           "slots": [
             "defwork",
             "settlement"
           ],
           "vid": 2,
           "wordings": [
-            "A {defwork} is in place at {settlement}, and the pay of the town's muster is short.",
-            "At {settlement} a {defwork} is up. Its muster's upkeep stands unmet.",
-            "The {defwork} of {settlement} is up, and its muster's funding is under the roll's wage."
+            "A {defwork} is in place at {settlement}, and the town's muster is paid under its wage.",
+            "At {settlement} a {defwork} is up. Its muster's upkeep stands open.",
+            "A {defwork} at {settlement} is the town's, and its muster's funding is under the roll."
           ]
         }
       ],
@@ -5370,37 +5370,37 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           ],
           "vid": 1,
           "wordings": [
-            "The measure of {settlement} stops at a village, and the place carries no wall.",
-            "At {settlement} the size keeps to a village. The place stands unwalled.",
-            "Village size holds at {settlement}, and no wall stands."
+            "The measure of {settlement} stops at a village, and it carries no wall.",
+            "At {settlement} the size keeps to a village and no higher. The place stands unwalled.",
+            "Village size holds at {settlement} and no wall stands."
           ]
         },
         {
           "angle": "visitor",
-          "text": "The whole of {settlement} stands no larger than a village and shows no wall.",
+          "text": "What stands at {settlement} is no larger than a village, and no wall shows.",
           "slots": [
             "settlement"
           ],
           "vid": 2,
           "wordings": [
-            "In {settlement} the place is of village size and stands without a wall.",
-            "The size at {settlement} does not pass a village, and the place is unwalled.",
-            "The place called {settlement} is a village at most and goes unwalled."
+            "A village is the most {settlement} comes to. The place holds no wall.",
+            "The size at {settlement} does not pass a village, nor is a wall up.",
+            "In size {settlement} is a village at the most and goes unwalled."
           ]
         }
       ],
       "UNWALLED-LARGE": [
         {
           "angle": "counterforce",
-          "text": "Above the village rank, {settlement} carries no wall.",
+          "text": "Above the village rank, {settlement} keeps no wall.",
           "slots": [
             "settlement"
           ],
           "vid": 1,
           "wordings": [
-            "The size of {settlement} is past any village, and no wall closes the town.",
-            "No enclosure runs round {settlement}, and the rank is a town's or greater.",
-            "Town rank belongs to {settlement}, and a wall does not."
+            "The rank at {settlement} runs above the villages. No wall runs round the town.",
+            "No wall encloses {settlement}, and its rank begins where the villages end.",
+            "Town rank or above is {settlement}'s, and a wall is not."
           ]
         },
         {
@@ -5411,9 +5411,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           ],
           "vid": 2,
           "wordings": [
-            "The standing at {settlement} is above the villages, and no circuit rings the town.",
-            "By rank {settlement} is a town or larger, and no circuit stands.",
-            "Of a town's rank or larger, {settlement} holds no circuit."
+            "A town's rank and better is entered at {settlement}, and no circuit stands.",
+            "Ranked a town or larger, {settlement} holds no circuit.",
+            "The weight of {settlement} runs to a town's and beyond, and the ground carries no circuit."
           ]
         }
       ]

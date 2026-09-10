@@ -5970,61 +5970,61 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
 
 **`WALLED-THREATENED`**
 1. `[ledger]` Danger stands in the country, and {settlement} keeps its {defwork} at full charge.
-   - `[face]` Wages and keeping are answered in full on {settlement}'s {defwork}, and dangerous is the country.
-   - `[face]` The threat is live. At {settlement} a {defwork} stands, and its upkeep wants nothing.
-   - `[face]` The cost of the {defwork} standing at {settlement} is met to the last, and the country is not quiet.
+   - `[face]` The threat is live. {settlement} holds a {defwork}, and its upkeep is met to the last.
+   - `[face]` The keeping of the {defwork} at {settlement} wants nothing, and the country is dangerous.
+   - `[face]` What {settlement}'s {defwork} costs is answered in full, and the country is not quiet.
 2. `[street]` A {defwork} stands at {settlement} in dangerous country. The keeping is paid.
-   - `[face]` The country is dangerous, and nothing is owing on {settlement}'s {defwork}.
-   - `[face]` In dangerous country {settlement} has a {defwork} standing, and the money for it is found.
-   - `[face]` Danger the country carries, and at {settlement} the money holds and the {defwork} holds.
+   - `[face]` Nothing is owing on {settlement}'s {defwork}, and the country carries danger.
+   - `[face]` In dangerous country {settlement} has a {defwork}, and the money for it is found.
+   - `[face]` At {settlement} the money holds and the {defwork} holds, and danger is in the country.
 3. `[visitor]` The {defwork} at {settlement} stands whole in its keeping, and the country around is dangerous.
-   - `[face]` Set in dangerous country, {settlement} is enclosed, and the {defwork} stands with its keeping paid.
-   - `[face]` Dangerous country lies at {settlement}, and the town stands enclosed by a {defwork} kept at full cost.
-   - `[face]` The keeping of the {defwork} standing at {settlement} is met entire, and the country the town sits in is dangerous.
+   - `[face]` The country is dangerous. {settlement} is enclosed, and its {defwork} is kept at full cost.
+   - `[face]` The cost of the {defwork} at {settlement} is met entire, and danger holds in the country.
+   - `[face]` Danger is live in the country, and {settlement} pays the whole cost of its {defwork}.
 
 **`WALLED-QUIET`**
-1. `[visitor]` {settlement} keeps a {defwork} and keeps it up; no live threat stands in the country.
-   - `[face]` Nothing live threatens {settlement}, and the {defwork} the town keeps up is standing.
-   - `[face]` In a country that carries no live threat, {settlement} has a {defwork} standing, and nothing of its keeping is let go.
-   - `[face]` A {defwork} stands at {settlement} and is kept up. The country round the town shows no live threat.
+1. `[visitor]` {settlement} keeps a {defwork} and lets nothing of its keeping go; the country carries no live threat.
+   - `[face]` The country about {settlement} is quiet. The town's {defwork} stands, and its keeping is not let fall.
+   - `[face]` Nothing live threatens {settlement}, and the {defwork} the town keeps up stands.
+   - `[face]` A {defwork} has standing at {settlement}, kept up by the town, and nothing live is abroad in the country.
 2. `[elder]` The {defwork} stands, its keeping paid in full, and the country holds nothing live against {settlement}.
-   - `[face]` Nothing in the country is live against {settlement}, and nothing is short in the upkeep of the {defwork} it keeps standing.
-   - `[face]` With no live threat in the country, the {defwork} at {settlement} has standing, and no part of its keeping goes unpaid.
-   - `[face]` No threat in the country is live, and the {defwork} of {settlement} is standing. The keeping of it is met.
-3. `[ledger]` The town asks little of its {defwork} and keeps its upkeep whole; the work stands entered on the roll.
-   - `[face]` On the roll the {defwork} is entered standing, with its upkeep met in full, and the country carries nothing live against the town.
-   - `[face]` Little is asked of the {defwork}. Nothing of its keeping goes unmet, and the roll shows the work standing.
-   - `[face]` The roll holds the {defwork} standing and its upkeep met at full rate, and the country is settled.
+   - `[face]` The upkeep of the {defwork} at {settlement} is met, and it stands. The country is settled.
+   - `[face]` Nothing in the country is live against {settlement}, and the {defwork} stands with no part of its keeping unpaid.
+   - `[face]` No live threat presses {settlement}. The {defwork} it keeps stands, and nothing of the keeping is left aside.
+3. `[ledger]` The town asks little of its {defwork}, and its upkeep is paid whole; the work stands entered on the roll.
+   - `[face]` On the roll the {defwork} is carried standing, its upkeep met in full, and nothing live lies against the town.
+   - `[face]` Little is asked of the {defwork}. The roll shows the work standing, and its keeping met.
+   - `[face]` The roll sets down the {defwork} standing and its upkeep paid, and the country is quiet.
 
 **`WALLED-STRAINED`**
-1. `[ledger]` The town of {settlement} holds a {defwork}, and its muster's wage is not made up to the roll.
-   - `[face]` A {defwork} stands at {settlement}; the pay of its muster is short.
+1. `[ledger]` The town of {settlement} holds a {defwork}; its muster's wage is not made up to the roll.
+   - `[face]` A {defwork} stands at {settlement}. Its muster's pay is short.
    - `[face]` In place at {settlement} is a {defwork}, and the upkeep of its muster is unmet.
-   - `[face]` A {defwork} is entered standing at {settlement}, and its muster's funding is entered short of the roll.
-2. `[unfolding]` The {defwork} at {settlement} stands, and the wage of its muster is short of the roll.
-   - `[face]` A {defwork} is in place at {settlement}, and the pay of the town's muster is short.
-   - `[face]` At {settlement} a {defwork} is up. Its muster's upkeep stands unmet.
-   - `[face]` The {defwork} of {settlement} is up, and its muster's funding is under the roll's wage.
+   - `[face]` A {defwork} is entered standing at {settlement}, and the funding of its muster is short of the wage.
+2. `[unfolding]` The {defwork} at {settlement} stands, and the muster's pay is short of the roll.
+   - `[face]` A {defwork} is in place at {settlement}, and the town's muster is paid under its wage.
+   - `[face]` At {settlement} a {defwork} is up. Its muster's upkeep stands open.
+   - `[face]` A {defwork} at {settlement} is the town's, and its muster's funding is under the roll.
 
 **`UNWALLED-SMALL`**
 1. `[street]` {settlement} is village size or under, and no wall closes the place.
-   - `[face]` The measure of {settlement} stops at a village, and the place carries no wall.
-   - `[face]` At {settlement} the size keeps to a village. The place stands unwalled.
-   - `[face]` Village size holds at {settlement}, and no wall stands.
-2. `[visitor]` The whole of {settlement} stands no larger than a village and shows no wall.
-   - `[face]` In {settlement} the place is of village size and stands without a wall.
-   - `[face]` The size at {settlement} does not pass a village, and the place is unwalled.
-   - `[face]` The place called {settlement} is a village at most and goes unwalled.
+   - `[face]` The measure of {settlement} stops at a village, and it carries no wall.
+   - `[face]` At {settlement} the size keeps to a village and no higher. The place stands unwalled.
+   - `[face]` Village size holds at {settlement} and no wall stands.
+2. `[visitor]` What stands at {settlement} is no larger than a village, and no wall shows.
+   - `[face]` A village is the most {settlement} comes to. The place holds no wall.
+   - `[face]` The size at {settlement} does not pass a village, nor is a wall up.
+   - `[face]` In size {settlement} is a village at the most and goes unwalled.
 
 **`UNWALLED-LARGE`**
-1. `[counterforce]` Above the village rank, {settlement} carries no wall.
-   - `[face]` The size of {settlement} is past any village, and no wall closes the town.
-   - `[face]` No enclosure runs round {settlement}, and the rank is a town's or greater.
-   - `[face]` Town rank belongs to {settlement}, and a wall does not.
+1. `[counterforce]` Above the village rank, {settlement} keeps no wall.
+   - `[face]` The rank at {settlement} runs above the villages. No wall runs round the town.
+   - `[face]` No wall encloses {settlement}, and its rank begins where the villages end.
+   - `[face]` Town rank or above is {settlement}'s, and a wall is not.
 2. `[ledger]` The town of {settlement}'s weight stands without a circuit.
-   - `[face]` The standing at {settlement} is above the villages, and no circuit rings the town.
-   - `[face]` By rank {settlement} is a town or larger, and no circuit stands.
-   - `[face]` Of a town's rank or larger, {settlement} holds no circuit.
+   - `[face]` A town's rank and better is entered at {settlement}, and no circuit stands.
+   - `[face]` Ranked a town or larger, {settlement} holds no circuit.
+   - `[face]` The weight of {settlement} runs to a town's and beyond, and the ground carries no circuit.
 
 ---
 
