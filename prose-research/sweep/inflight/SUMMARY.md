@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-09 23:50:40 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-09 23:56:42 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -123,12 +123,12 @@
 | ? | other |  | result | 0 | draft-round-1.md | — | 23:12:02 |
 | ? | other |  | failed | 0 | — | — | 19:08:35 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 22:44:38 |
-| ? | other |  | in-flight | 0 | — | — | 03:50:34 |
-| ? | other |  | in-flight | 0 | — | — | 03:50:34 |
-| ? | other |  | in-flight | 0 | — | — | 03:50:23 |
-| ? | other |  | in-flight | 0 | — | — | 03:48:46 |
-| ? | other |  | in-flight | 0 | — | — | 03:50:40 |
-| ? | other |  | in-flight | 0 | — | — | 03:50:27 |
+| ? | other |  | in-flight | 0 | — | — | 03:54:14 |
+| ? | other |  | in-flight | 0 | — | — | 03:54:50 |
+| ? | other |  | in-flight | 0 | — | — | 03:52:33 |
+| ? | other |  | in-flight | 0 | warFaith.survey.md | — | 03:56:21 |
+| ? | other |  | in-flight | 0 | — | — | 03:52:55 |
+| ? | other |  | in-flight | 0 | — | — | 03:54:31 |
 | ? | other |  | result | 0 | refine.md | — | 00:24:50 |
 | ? | other |  | result | 0 | refine.md | — | 00:22:46 |
 | ? | other |  | result | 0 | — | — | 00:13:53 |
