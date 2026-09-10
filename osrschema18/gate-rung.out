@@ -1,1 +1,0 @@
-observed-shape baseline: schema 17 — expected 18. Build and review the governed migration bundle, then explicitly re-freeze with --write --migrate-schema=18 --migration-review=<bundle.json>.

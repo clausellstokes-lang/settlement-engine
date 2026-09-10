@@ -1,4 +1,0 @@
-  probe: load=2.34 workers=0 streak=1 waited=0s
-  probe: load=1.94 workers=0 streak=2 waited=60s
-  probe: load=2.74 workers=0 streak=3 waited=120s
-QUIET CONFIRMED after 120s

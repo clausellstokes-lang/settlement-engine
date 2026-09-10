@@ -1,9 +1,0 @@
-file:///private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/laneSEAM/scripts/wiring-census.mjs:1240
-    if (!verdict.ok) throw new Error(verdict.detail);
-                           ^
-
-Error: docs/content/wiring-census.json is stale; run `node scripts/wiring-census.mjs`.
-    at main (file:///private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/laneSEAM/scripts/wiring-census.mjs:1240:28)
-    at async file:///private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/laneSEAM/scripts/wiring-census.mjs:1250:71
-
-Node.js v24.12.0
