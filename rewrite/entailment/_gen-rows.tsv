@@ -1,0 +1,193 @@
+DS-POP-1	QUANTITY: nobody	WIRING-UNRESOLVED		season,settlement			SOURCE-UNRESOLVED
+DS-POP-1	QUANTITY: a few souls	WIRING-UNRESOLVED		season,settlement			SOURCE-UNRESOLVED
+DS-POP-1	QUANTITY: a dozen or so	WIRING-UNRESOLVED					SOURCE-UNRESOLVED
+DS-POP-1	QUANTITY: dozens	WIRING-UNRESOLVED		settlement			SOURCE-UNRESOLVED
+DS-POP-1	QUANTITY: a hundred or so	WIRING-UNRESOLVED		settlement			SOURCE-UNRESOLVED
+DS-POP-1	QUANTITY: several hundred	WIRING-UNRESOLVED		settlement			SOURCE-UNRESOLVED
+DS-POP-1	QUANTITY: many hundreds	WIRING-UNRESOLVED		settlement			SOURCE-UNRESOLVED
+DS-POP-1	QUANTITY: thousands	WIRING-UNRESOLVED		settlement			SOURCE-UNRESOLVED
+DS-POP-1	HERALD KIND: hungry_gap	WIRING-UNRESOLVED		season,settlement			SOURCE-UNRESOLVED
+DS-POP-1	HERALD KIND: migration_flight	WIRING-UNRESOLVED		settlement			SOURCE-UNRESOLVED
+DS-POP-1	RECEIPT: births exceed deaths	WIRING-UNRESOLVED		settlement			SOURCE-UNRESOLVED
+DS-POP-1	RECEIPT: births and deaths in balance	WIRING-UNRESOLVED		settlement			SOURCE-UNRESOLVED
+DS-POP-1	RECEIPT: deficit01 positive	WIRING-UNRESOLVED		settlement			SOURCE-UNRESOLVED
+DS-POP-1	CANDIDATE KIND: growth	WIRING-UNRESOLVED		settlement			SOURCE-UNRESOLVED
+DS-POP-1	CANDIDATE KIND: emigration	WIRING-UNRESOLVED		settlement			SOURCE-UNRESOLVED
+DS-POP-1	CANDIDATE KIND: decline	WIRING-UNRESOLVED		settlement			SOURCE-UNRESOLVED
+DS-POP-1	BELIEVED TREND diverges from the ring	WIRING-UNRESOLVED		counterpart,settlement			SOURCE-UNRESOLVED
+DS-POP-2	BAND −2: has been emptying	WIRING-UNRESOLVED		settlement			SOURCE-UNRESOLVED
+DS-POP-2	BAND −1: has been thinning	WIRING-UNRESOLVED		settlement			SOURCE-UNRESOLVED
+DS-POP-2	BAND 0: has held level	WIRING-UNRESOLVED		settlement			SOURCE-UNRESOLVED
+DS-POP-2	BAND +1: has been growing	WIRING-UNRESOLVED		settlement			SOURCE-UNRESOLVED
+DS-POP-2	BAND +2: has been swelling	WIRING-UNRESOLVED		settlement			SOURCE-UNRESOLVED
+DS-POP-2	WINDOW under two readings	WIRING-UNRESOLVED		settlement			SOURCE-UNRESOLVED
+DS-POP-2	NET MAGNITUDE, banded	WIRING-UNRESOLVED					SOURCE-UNRESOLVED
+DS-GEN-1	crime_wave	WIRING-UNRESOLVED		settlement			SOURCE-UNRESOLVED
+DS-GEN-1	economic_disparity	WIRING-UNRESOLVED		faction,settlement			SOURCE-UNRESOLVED
+DS-GEN-1	guild_conflict	WIRING-UNRESOLVED		faction,faction2,settlement	craft		SOURCE-UNRESOLVED
+DS-GEN-1	infiltration_fear	WIRING-UNRESOLVED		faction,settlement			SOURCE-UNRESOLVED
+DS-GEN-1	leadership_vacuum	WIRING-UNRESOLVED		faction,settlement			SOURCE-UNRESOLVED
+DS-GEN-1	magical_controversy	WIRING-UNRESOLVED		faction,settlement			SOURCE-UNRESOLVED
+DS-GEN-1	occupation_legacy	WIRING-UNRESOLVED		settlement			SOURCE-UNRESOLVED
+DS-GEN-1	outside_debt	WIRING-UNRESOLVED		settlement			SOURCE-UNRESOLVED
+DS-GEN-1	resource_scarcity	WIRING-UNRESOLVED		settlement			SOURCE-UNRESOLVED
+DS-GEN-1	succession_crisis	WIRING-UNRESOLVED		faction,faction2,settlement			SOURCE-UNRESOLVED
+DS-GEN-2	intensity: low	RESOLVED	conflict.intensity	faction,faction2,issue,settlement,stakes			SOURCE-UNRESOLVED
+DS-GEN-2	intensity: moderate	RESOLVED	conflict.intensity	faction,faction2,issue,settlement,stakes			SOURCE-UNRESOLVED
+DS-GEN-2	intensity: high	RESOLVED	conflict.intensity	faction,faction2,issue,settlement,stakes			SOURCE-UNRESOLVED
+DS-GEN-3	scores.military: STRONG	RESOLVED	axis | score	settlement			SOURCE-UNRESOLVED
+DS-GEN-3	scores.military: ADEQUATE	RESOLVED	axis | score	settlement			SOURCE-UNRESOLVED
+DS-GEN-3	scores.military: WEAK	RESOLVED	axis | score	settlement			SOURCE-UNRESOLVED
+DS-GEN-3	scores.military: CRITICAL	RESOLVED	axis | score	settlement			SOURCE-UNRESOLVED
+DS-GEN-3	scores.monster: STRONG	RESOLVED	axis | score	settlement			SOURCE-UNRESOLVED
+DS-GEN-3	scores.monster: ADEQUATE	RESOLVED	axis | score	settlement			SOURCE-UNRESOLVED
+DS-GEN-3	scores.monster: WEAK	RESOLVED	axis | score	settlement			SOURCE-UNRESOLVED
+DS-GEN-3	scores.monster: CRITICAL	RESOLVED	axis | score	settlement			SOURCE-UNRESOLVED
+DS-GEN-3	scores.internal: STRONG	RESOLVED	axis | score	settlement			SOURCE-UNRESOLVED
+DS-GEN-3	scores.internal: ADEQUATE	RESOLVED	axis | score	settlement			SOURCE-UNRESOLVED
+DS-GEN-3	scores.internal: WEAK	RESOLVED	axis | score	settlement			SOURCE-UNRESOLVED
+DS-GEN-3	scores.internal: CRITICAL	RESOLVED	axis | score	settlement			SOURCE-UNRESOLVED
+DS-GEN-3	scores.economic: STRONG	RESOLVED	axis | score	settlement			SOURCE-UNRESOLVED
+DS-GEN-3	scores.economic: ADEQUATE	RESOLVED	axis | score	settlement			SOURCE-UNRESOLVED
+DS-GEN-3	scores.economic: WEAK	RESOLVED	axis | score	settlement			SOURCE-UNRESOLVED
+DS-GEN-3	scores.economic: CRITICAL	RESOLVED	axis | score	settlement			SOURCE-UNRESOLVED
+DS-GEN-3	scores.magical: STRONG	RESOLVED	axis | score	settlement			SOURCE-UNRESOLVED
+DS-GEN-3	scores.magical: ADEQUATE	RESOLVED	axis | score	settlement			SOURCE-UNRESOLVED
+DS-GEN-3	scores.magical: WEAK	RESOLVED	axis | score	settlement			SOURCE-UNRESOLVED
+DS-GEN-3	scores.magical: CRITICAL	RESOLVED	axis | score	settlement			SOURCE-UNRESOLVED
+DS-GEN-3	prosperity: Poverty / Impoverished	RESOLVED	text(label) (via PROSPERITY_POOL_OF in generalStateProse.js)	settlement			SOURCE-UNRESOLVED
+DS-GEN-3	prosperity: Struggling / Poor	RESOLVED	text(label) (via PROSPERITY_POOL_OF in generalStateProse.js)	settlement			SOURCE-UNRESOLVED
+DS-GEN-3	prosperity: Moderate / Modest	RESOLVED	text(label) (via PROSPERITY_POOL_OF in generalStateProse.js)	settlement			SOURCE-UNRESOLVED
+DS-GEN-3	prosperity: Comfortable / Prosperous	RESOLVED	text(label) (via PROSPERITY_POOL_OF in generalStateProse.js)	settlement			SOURCE-UNRESOLVED
+DS-GEN-3	prosperity: Wealthy / Thriving	RESOLVED	text(label) (via PROSPERITY_POOL_OF in generalStateProse.js)	settlement			SOURCE-UNRESOLVED
+DS-GEN-3	safetyProfile.safetyLabel: head word in {Secure, Controlled, Quarantined}	RESOLVED	head (via SAFETY_POOL_OF in generalStateProse.js)	settlement			SOURCE-UNRESOLVED
+DS-GEN-3	safetyProfile.safetyLabel: head word in {Tense, Strained, Restricted, Unsafe}	RESOLVED	head (via SAFETY_POOL_OF in generalStateProse.js)	settlement			SOURCE-UNRESOLVED
+DS-GEN-3	safetyProfile.safetyLabel: head word in {Dangerous, Desperate}	RESOLVED	head (via SAFETY_POOL_OF in generalStateProse.js)	settlement			SOURCE-UNRESOLVED
+DS-GEN-3	economicViability.viable: true	RESOLVED	readings.viable	settlement			LICENSED
+DS-GEN-3	economicViability.viable: false	RESOLVED	readings.viable	settlement			LICENSED
+DS-GEN-3	defenseProfile.readiness.label: Fortress	RESOLVED	text(label) (via READINESS_POOL_OF in generalStateProse.js)	settlement			SOURCE-UNRESOLVED
+DS-GEN-3	defenseProfile.readiness.label: Well-Defended	RESOLVED	text(label) (via READINESS_POOL_OF in generalStateProse.js)	settlement			SOURCE-UNRESOLVED
+DS-GEN-3	defenseProfile.readiness.label: Defensible	RESOLVED	text(label) (via READINESS_POOL_OF in generalStateProse.js)	settlement			SOURCE-UNRESOLVED
+DS-GEN-3	defenseProfile.readiness.label: Lightly Defended	RESOLVED	text(label) (via READINESS_POOL_OF in generalStateProse.js)	settlement			SOURCE-UNRESOLVED
+DS-GEN-3	defenseProfile.readiness.label: Vulnerable	RESOLVED	text(label) (via READINESS_POOL_OF in generalStateProse.js)	settlement			SOURCE-UNRESOLVED
+DS-GEN-3	defenseProfile.readiness.label: Undefended	RESOLVED	text(label) (via READINESS_POOL_OF in generalStateProse.js)	settlement			SOURCE-UNRESOLVED
+DS-GEN-3	foodSecurity.label: Secure	RESOLVED	text(label) (via FOOD_POOL_OF in generalStateProse.js)	settlement			SOURCE-UNRESOLVED
+DS-GEN-3	foodSecurity.label: Surplus	RESOLVED	text(label) (via FOOD_POOL_OF in generalStateProse.js)	settlement			SOURCE-UNRESOLVED
+DS-GEN-3	foodSecurity.label: Pressured	RESOLVED	text(label) (via FOOD_POOL_OF in generalStateProse.js)	settlement			SOURCE-UNRESOLVED
+DS-GEN-3	foodSecurity.label: Import-Dependent	RESOLVED	text(label) (via FOOD_POOL_OF in generalStateProse.js)	settlement	market		SOURCE-UNRESOLVED
+DS-GEN-3	foodSecurity.label: Deficit	RESOLVED	text(label) (via FOOD_POOL_OF in generalStateProse.js)	settlement			SOURCE-UNRESOLVED
+DS-GEN-3	foodSecurity.label: Deficit × Active Famine	RESOLVED	text(label) (via FOOD_POOL_OF in generalStateProse.js)	settlement			SOURCE-UNRESOLVED
+DS-GEN-5	market (route crossroads)	RESOLVED	scene (via SITUATION_POOL_OF_SCENE in generalStateProse.js)	settlement	market,road		SOURCE-UNRESOLVED
+DS-GEN-5	port	RESOLVED	readings | readings.primaryStress	settlement	road		SOURCE-UNRESOLVED
+DS-GEN-5	river	RESOLVED	readings | readings.primaryStress	settlement			SOURCE-UNRESOLVED
+DS-GEN-5	smoke (route isolated / mountain_pass)	RESOLVED	scene (via SITUATION_POOL_OF_SCENE in generalStateProse.js)	settlement	road		SOURCE-UNRESOLVED
+DS-GEN-5	ordinary (route road and the default)	RESOLVED	scene (via SITUATION_POOL_OF_SCENE in generalStateProse.js)	settlement	road		SOURCE-UNRESOLVED
+DS-GEN-6	crossroads	RESOLVED	text(tradeRouteAccess) (via ORIGIN_POOL_OF_ROUTE in generalStateProse.js)	settlement			LICENSED
+DS-GEN-6	port	RESOLVED	readings | readings.primaryStress	settlement	road		SOURCE-UNRESOLVED
+DS-GEN-6	river	RESOLVED	readings | readings.primaryStress	settlement			SOURCE-UNRESOLVED
+DS-GEN-6	isolated	RESOLVED	text(tradeRouteAccess) (via ORIGIN_POOL_OF_ROUTE in generalStateProse.js)	settlement			LICENSED
+DS-GEN-6	road	RESOLVED	readings.tradeRouteAccess	settlement	road		LICENSED
+DS-GEN-6	tier overlay: metropolis	RESOLVED	text(tier) (via TIER_OVERLAY_OF in generalStateProse.js)	settlement			SOURCE-UNRESOLVED
+DS-GEN-6	tier overlay: city	RESOLVED	text(tier) (via TIER_OVERLAY_OF in generalStateProse.js)	settlement			SOURCE-UNRESOLVED
+DS-GEN-6	tier overlay: thorp / hamlet	RESOLVED	text(tier) (via TIER_OVERLAY_OF in generalStateProse.js)	settlement			SOURCE-UNRESOLVED
+DS-GEN-6	tier overlay: other tiers	RESOLVED	readings.tier	settlement			SOURCE-UNRESOLVED
+DS-GEN-7	power_economic: criminal faction in a transit hub	RESOLVED	`${text(note?.type)}|${text(note?.tab)}` (via COHERENCE_POOL_OF in generalStateProse.js)	band,faction,settlement			SOURCE-UNRESOLVED
+DS-GEN-7	power_economic: powerful criminal faction in a prosperous settlement	RESOLVED	`${text(note?.type)}|${text(note?.tab)}` (via COHERENCE_POOL_OF in generalStateProse.js)	band,faction,settlement			SOURCE-UNRESOLVED
+DS-GEN-7	stress_economic: siege against trade income	RESOLVED	`${text(note?.type)}|${text(note?.tab)}` (via COHERENCE_POOL_OF in generalStateProse.js)	settlement	market		SOURCE-UNRESOLVED
+DS-GEN-7	power_stress: occupation against stated stability	RESOLVED	`${text(note?.type)}|${text(note?.tab)}` (via COHERENCE_POOL_OF in generalStateProse.js)	settlement			SOURCE-UNRESOLVED
+DS-GEN-7	power_economic: temple economy under a secular seat	RESOLVED	`${text(note?.type)}|${text(note?.tab)}` (via COHERENCE_POOL_OF in generalStateProse.js)	govFaction,settlement	temple,hall		SOURCE-UNRESOLVED
+DS-GEN-7	historical_economic: the recovery narrative	RESOLVED	`${text(note?.type)}|${text(note?.tab)}` (via COHERENCE_POOL_OF in generalStateProse.js)	settlement			SOURCE-UNRESOLVED
+DS-GEN-7	structuralViolations[]	RESOLVED	readings.structuralViolations | readings.structuralViolations.length	settlement			OFFICE
+DS-GEN-7	structuralSuggestions[]	RESOLVED	readings.structuralSuggestions | readings.structuralSuggestions.length	settlement			OFFICE
+DS-GEN-8	lifecycleStatus: relic_ruin	WIRING-UNRESOLVED		settlement			SOURCE-UNRESOLVED
+DS-GEN-8	lifecycleStatus: abandoned_site	WIRING-UNRESOLVED		settlement			SOURCE-UNRESOLVED
+DS-GEN-8	history.ancientRuin present	RESOLVED	ruin | ruin.name	ruin,settlement,timeband_age,timeband_since			SOURCE-UNRESOLVED
+DS-GEN-8	steading row: organic	RESOLVED	row	band,resource,settlement,steading			SOURCE-UNRESOLVED
+DS-GEN-8	steading row: provenance: 'forced'	RESOLVED	row	band,settlement,steading			SOURCE-UNRESOLVED
+DS-GEN-8	steading row: charterPending	RESOLVED	row	band,settlement,steading			SOURCE-UNRESOLVED
+DS-REL-1	trade_partner	WIRING-UNRESOLVED		counterpart,settlement	market		SOURCE-UNRESOLVED
+DS-REL-1	allied	WIRING-UNRESOLVED		counterpart,settlement			SOURCE-UNRESOLVED
+DS-REL-1	patron	RESOLVED	link	counterpart,settlement	temple		SOURCE-UNRESOLVED
+DS-REL-1	client	RESOLVED	link	counterpart,settlement			SOURCE-UNRESOLVED
+DS-REL-1	rival	WIRING-UNRESOLVED		counterpart,settlement			SOURCE-UNRESOLVED
+DS-REL-1	cold_war	WIRING-UNRESOLVED		counterpart,settlement			SOURCE-UNRESOLVED
+DS-REL-1	hostile	WIRING-UNRESOLVED		counterpart,settlement			SOURCE-UNRESOLVED
+DS-REL-1	neutral	WIRING-UNRESOLVED		counterpart,settlement			SOURCE-UNRESOLVED
+DS-REL-1	cross-settlement NPC contacts	RESOLVED	link.npcConnections	counterpart,npc,settlement			SOURCE-UNRESOLVED
+DS-REL-1	cross-settlement engagements	RESOLVED	row | row.type	counterpart,faction,settlement			SOURCE-UNRESOLVED
+DS-REL-2	prominentRelationship present	RESOLVED	readings.prominentRelationship	settlement			OFFICE
+DS-REL-2	flagDriven count > 0	RESOLVED	readings.relationships | readings.relationships.length	band,settlement			SOURCE-UNRESOLVED
+DS-REL-2	flagDriven count zero	RESOLVED	readings.relationships | readings.relationships.length	settlement			SOURCE-UNRESOLVED
+DS-GEN-9	founding	WIRING-UNRESOLVED		challenge,founder,reason,settlement,timeband_since			SOURCE-UNRESOLVED
+DS-GEN-9	historicalCharacter	WIRING-UNRESOLVED		settlement,timeband_age			SOURCE-UNRESOLVED
+DS-GEN-9	event type: disaster	WIRING-UNRESOLVED		band,event,settlement,timeband_age,timeband_since			SOURCE-UNRESOLVED
+DS-GEN-9	event type: political	WIRING-UNRESOLVED		event,settlement,timeband_since			SOURCE-UNRESOLVED
+DS-GEN-9	event type: economic	WIRING-UNRESOLVED		event,settlement,timeband_since			SOURCE-UNRESOLVED
+DS-GEN-9	event type: religious	WIRING-UNRESOLVED		event,settlement,timeband_since			SOURCE-UNRESOLVED
+DS-GEN-9	event type: magical	WIRING-UNRESOLVED		event,settlement,timeband_since			SOURCE-UNRESOLVED
+DS-GEN-9	event type: demographic	WIRING-UNRESOLVED		band,event,settlement,timeband_since			SOURCE-UNRESOLVED
+DS-GEN-9	event type: exile_return	WIRING-UNRESOLVED		settlement,timeband_age,timeband_since			SOURCE-UNRESOLVED
+DS-GEN-9	event type: occupation_infiltration	WIRING-UNRESOLVED		settlement,timeband_since			SOURCE-UNRESOLVED
+DS-GEN-9	recency framing: Recent	RESOLVED	marker.yearsAgo	settlement			LICENSED
+DS-GEN-9	recency framing: Living memory	RESOLVED	marker.yearsAgo	settlement			LICENSED
+DS-GEN-9	recency framing: Last century	RESOLVED	marker.yearsAgo	settlement			LICENSED
+DS-GEN-9	recency framing: Ancient	RESOLVED	marker.yearsAgo	settlement			LICENSED
+DS-GEN-9	recency framing: Deep history	RESOLVED	marker.yearsAgo	settlement			LICENSED
+DS-GEN-10	PRINT-NATIVE CHAPTER OPENERS: overview	WIRING-UNRESOLVED		settlement			SOURCE-UNRESOLVED
+DS-GEN-10	PRINT-NATIVE CHAPTER OPENERS: economics	WIRING-UNRESOLVED		settlement			SOURCE-UNRESOLVED
+DS-GEN-10	PRINT-NATIVE CHAPTER OPENERS: defense	WIRING-UNRESOLVED		settlement			SOURCE-UNRESOLVED
+DS-GEN-10	PRINT-NATIVE CHAPTER OPENERS: viability	WIRING-UNRESOLVED		settlement			SOURCE-UNRESOLVED
+DS-GEN-10	PRINT-NATIVE CHAPTER OPENERS: power	WIRING-UNRESOLVED		settlement			SOURCE-UNRESOLVED
+DS-HK-1	category npc: the people are the opening	WIRING-UNRESOLVED		settlement			SOURCE-UNRESOLVED
+DS-HK-1	category faction: the blocs are the opening	WIRING-UNRESOLVED		settlement			SOURCE-UNRESOLVED
+DS-HK-1	category tension: the standing quarrels are the opening	WIRING-UNRESOLVED		settlement			SOURCE-UNRESOLVED
+DS-HK-1	category economics: the books are the opening	WIRING-UNRESOLVED		settlement			SOURCE-UNRESOLVED
+DS-HK-1	category safety: the streets are the opening	WIRING-UNRESOLVED		settlement			SOURCE-UNRESOLVED
+DS-HK-1	category history: the past is the opening	WIRING-UNRESOLVED		settlement			SOURCE-UNRESOLVED
+DS-HK-1	category relationship: the ties are the opening	WIRING-UNRESOLVED		settlement			SOURCE-UNRESOLVED
+DS-HK-1	clock bread_riot	WIRING-UNRESOLVED		settlement			SOURCE-UNRESOLVED
+DS-HK-1	clock smuggling_rise	WIRING-UNRESOLVED		settlement			SOURCE-UNRESOLVED
+DS-HK-1	clock legitimacy_crisis	WIRING-UNRESOLVED		governing,settlement			SOURCE-UNRESOLVED
+DS-HK-1	clock faction_split	WIRING-UNRESOLVED		faction,faction2,settlement			SOURCE-UNRESOLVED
+DS-GEN-11	viable: true: the arithmetic closes	RESOLVED	readings.viable	settlement			LICENSED
+DS-GEN-11	the MARGINAL arm: neither verdict returned	RESOLVED	readings.viable	settlement			LICENSED
+DS-GEN-11	viable: false: the arithmetic does not close	RESOLVED	readings.viable	settlement			LICENSED
+DS-GEN-11	criticalIssueCount: critical contradictions on the record	RESOLVED	readings.criticalIssueCount	band,settlement			LICENSED
+DS-GEN-11	criticalIssueCount zero	RESOLVED	readings.criticalIssueCount	settlement			LICENSED
+DS-GEN-11	THE FIRST-SURVEY QUALIFICATION	WIRING-UNRESOLVED		settlement			SOURCE-UNRESOLVED
+DS-GEN-12	WATER-EDGE	RESOLVED	text(terrainType) (via TERRAIN_FAMILY_OF in generalStateProse.js)	settlement			LICENSED
+DS-GEN-12	HIGH-GROUND	RESOLVED	text(terrainType) (via TERRAIN_FAMILY_OF in generalStateProse.js)	settlement			LICENSED
+DS-GEN-12	WOODLAND	RESOLVED	text(terrainType) (via TERRAIN_FAMILY_OF in generalStateProse.js)	settlement			LICENSED
+DS-GEN-12	OPEN-GROUND	RESOLVED	text(terrainType) (via TERRAIN_FAMILY_OF in generalStateProse.js)	settlement			LICENSED
+DS-GEN-12	DRY-GROUND	RESOLVED	text(terrainType) (via TERRAIN_FAMILY_OF in generalStateProse.js)	settlement			LICENSED
+DS-GEN-13	MARKET-OPEN	RESOLVED	readings | readings.isEntrepot | readings.tradeRouteAccess	settlement	market		LICENSED
+DS-GEN-13	MARKET-NARROW	RESOLVED	readings | readings.isEntrepot | readings.tradeRouteAccess	settlement	market		LICENSED
+DS-GEN-13	ENTREPOT	RESOLVED	readings | readings.isEntrepot | readings.tradeRouteAccess	good,settlement			LICENSED
+DS-GEN-13	NO-MARKET	RESOLVED	readings | readings.isEntrepot | readings.tradeRouteAccess	settlement	market		LICENSED
+DS-GEN-14	FOUNDED-YOUNG	RESOLVED	hist	settlement			SOURCE-UNRESOLVED
+DS-GEN-14	FOUNDED-OLD	RESOLVED	hist	settlement,timeband_age			SOURCE-UNRESOLVED
+DS-GEN-14	GROWN-UNRECORDED	RESOLVED	hist	settlement			SOURCE-UNRESOLVED
+DS-POP-3	RISING-OPEN	RESOLVED	readings.populationTrend.band | readings.populationTrend.window	settlement			SOURCE-UNRESOLVED
+DS-POP-3	RISING-NARROW	RESOLVED	readings.populationTrend.band | readings.populationTrend.window	settlement			SOURCE-UNRESOLVED
+DS-POP-3	LEVEL	RESOLVED	readings.populationTrend.band | readings.populationTrend.window	settlement			SOURCE-UNRESOLVED
+DS-POP-3	FALLING-OPEN	RESOLVED	readings.populationTrend.band | readings.populationTrend.window	settlement			SOURCE-UNRESOLVED
+DS-POP-3	FALLING-NARROW	RESOLVED	readings.populationTrend.band | readings.populationTrend.window	settlement			SOURCE-UNRESOLVED
+DS-GEN-15	SCARRED-FRESH	WIRING-UNRESOLVED		calamity,settlement,timeband_since			SOURCE-UNRESOLVED
+DS-GEN-15	SCARRED-FADING	WIRING-UNRESOLVED		calamity,settlement			SOURCE-UNRESOLVED
+DS-GEN-15	REBUILT	WIRING-UNRESOLVED		settlement			SOURCE-UNRESOLVED
+DS-GEN-15	ENCROACHED	WIRING-UNRESOLVED		settlement			SOURCE-UNRESOLVED
+DS-GEN-15	WORN-PLAIN	WIRING-UNRESOLVED		settlement			SOURCE-UNRESOLVED
+DS-GEN-16	ANCHORED-RECENT	RESOLVED	events	calamity,settlement			SOURCE-UNRESOLVED
+DS-GEN-16	ANCHORED-OLD	RESOLVED	events	calamity,settlement,timeband_age			SOURCE-UNRESOLVED
+DS-GEN-16	LAYERED-ANCHORED	RESOLVED	events	settlement			SOURCE-UNRESOLVED
+DS-GEN-16	RECORDED-UNANCHORED	RESOLVED	events	calamity,settlement			SOURCE-UNRESOLVED
+DS-GEN-16	UNMARKED	RESOLVED	events	settlement			SOURCE-UNRESOLVED
+DS-GEN-17	ADMINISTERED	RESOLVED	readings.inst	settlement			SOURCE-UNRESOLVED
+DS-GEN-17	GARRISONED	RESOLVED	readings.inst	settlement			SOURCE-UNRESOLVED
+DS-GEN-17	LETTERED	RESOLVED	readings.inst	settlement			SOURCE-UNRESOLVED
+DS-GEN-17	PROVISIONED	RESOLVED	readings.inst	settlement			SOURCE-UNRESOLVED
+DS-GEN-17	BARE	RESOLVED	readings.inst	settlement			SOURCE-UNRESOLVED
+DS-GEN-18	STALLED	RESOLVED	readings | readings.activeChains | readings.exploitation | readings.isEntrepot | readings.primaryImports	institution,resource,settlement			LICENSED
+DS-GEN-18	HOME-FED	RESOLVED	readings | readings.activeChains | readings.exploitation | readings.isEntrepot | readings.primaryImports	institution,resource,settlement			LICENSED
+DS-GEN-18	BOUGHT-IN	RESOLVED	readings | readings.activeChains | readings.exploitation | readings.isEntrepot | readings.primaryImports	good,institution,settlement			LICENSED
+DS-GEN-18	UNWORKED	RESOLVED	readings | readings.activeChains | readings.exploitation | readings.isEntrepot | readings.primaryImports	resource,settlement			LICENSED
