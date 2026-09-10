@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-10 00:36:55 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-10 00:42:57 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -41,30 +41,6 @@
 | ? | other |  | result | 0 | cure-round-1.md | — | 04:10:56 |
 | ? | other |  | result | 0 | — | — | 04:24:45 |
 | ? | other |  | result | 0 | cure-round-1.md | — | 04:09:28 |
-| ? | other |  | result | 0 | refute-fable.md | — | 19:04:52 |
-| ? | other |  | result | 0 | — | — | 19:04:34 |
-| ? | other |  | result | 0 | — | — | 17:57:47 |
-| ? | other |  | failed | 0 | — | — | 19:09:13 |
-| ? | other |  | result | 0 | draft-round-1.md | — | 17:57:46 |
-| ? | other |  | result | 0 | — | — | 18:01:20 |
-| ? | other |  | result | 0 | — | — | 18:23:47 |
-| ? | other |  | result | 0 | — | — | 22:48:14 |
-| ? | other |  | result | 0 | refine.md | — | 18:42:14 |
-| ? | other |  | result | 0 | refute-fable.md | — | 19:05:07 |
-| ? | other |  | result | 0 | refine.md | — | 18:48:45 |
-| ? | other |  | result | 0 | refine.md | — | 18:52:01 |
-| ? | other |  | result | 0 | — | — | 18:25:58 |
-| ? | other |  | result | 0 | — | — | 18:00:17 |
-| ? | other |  | result | 0 | refine.md | — | 18:43:41 |
-| ? | other |  | result | 0 | — | — | 22:38:32 |
-| ? | other |  | result | 0 | refute-fable.md | — | 22:28:09 |
-| ? | other |  | result | 0 | — | — | 18:31:48 |
-| ? | other |  | result | 0 | refute-armA.md | — | 19:05:40 |
-| ? | other |  | failed | 0 | — | — | 19:09:12 |
-| ? | other |  | result | 0 | — | — | 18:59:12 |
-| ? | other |  | result | 0 | draft-round-1.md | — | 18:05:03 |
-| ? | other |  | result | 0 | refine.md | — | 18:49:41 |
-| ? | other |  | result | 0 | — | — | 18:11:54 |
 | ? | other |  | failed | 0 | — | — | 19:08:19 |
 | ? | other |  | failed | 0 | — | — | 19:08:22 |
 | ? | other |  | in-flight | 0 | — | — | 23:30:21 |
