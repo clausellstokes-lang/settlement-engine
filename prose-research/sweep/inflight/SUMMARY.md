@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-10 00:16:49 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-10 00:24:51 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -36,9 +36,10 @@
 | ? | other |  | result | 0 | draft-round-3.md | — | 23:14:35 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 22:39:34 |
 | ? | other |  | result | 0 | cure-round-1.md | — | 04:10:20 |
-| ? | other |  | in-flight | 0 | — | — | 04:12:58 |
+| ? | other |  | result | 0 | — | — | 04:22:47 |
+| ? | other |  | in-flight | 0 | — | — | 04:24:50 |
 | ? | other |  | result | 0 | cure-round-1.md | — | 04:10:56 |
-| ? | other |  | in-flight | 0 | — | — | 04:14:13 |
+| ? | other |  | result | 0 | — | — | 04:24:45 |
 | ? | other |  | result | 0 | cure-round-1.md | — | 04:09:28 |
 | ? | other |  | result | 0 | refute-fable.md | — | 19:04:52 |
 | ? | other |  | result | 0 | — | — | 19:04:34 |
@@ -130,12 +131,12 @@
 | ? | other |  | result | 0 | draft-round-1.md | — | 22:44:38 |
 | ? | other |  | result | 0 | general.survey.md | — | 04:06:17 |
 | ? | other |  | result | 0 | stressors.survey.md | — | 04:06:44 |
-| ? | other |  | in-flight | 0 | — | — | 04:15:40 |
+| ? | other |  | result | 0 | general.refute.md | — | 04:22:05 |
 | ? | other |  | result | 0 | defense.survey.md | — | 04:06:47 |
-| ? | other |  | in-flight | 0 | power.refute.md | — | 04:16:29 |
-| ? | other |  | in-flight | 0 | — | — | 04:15:33 |
-| ? | other |  | in-flight | 0 | — | — | 04:15:03 |
-| ? | other |  | in-flight | 0 | — | — | 04:12:57 |
+| ? | other |  | result | 0 | power.refute.md | — | 04:18:28 |
+| ? | other |  | in-flight | 0 | stressors.refute.md | — | 04:24:48 |
+| ? | other |  | result | 0 | defense.refute.md | — | 04:24:28 |
+| ? | other |  | result | 0 | — | — | 04:19:05 |
 | ? | other |  | result | 0 | warFaith.survey.md | — | 04:00:59 |
 | ? | other |  | result | 0 | — | — | 04:14:33 |
 | ? | other |  | result | 0 | economy.survey.md | — | 04:03:31 |
