@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-10 00:10:47 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-10 00:16:49 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -36,9 +36,9 @@
 | ? | other |  | result | 0 | draft-round-3.md | — | 23:14:35 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 22:39:34 |
 | ? | other |  | result | 0 | cure-round-1.md | — | 04:10:20 |
-| ? | other |  | in-flight | 0 | — | — | 03:59:56 |
-| ? | other |  | in-flight | 0 | cure-round-1.md | — | 04:10:44 |
-| ? | other |  | in-flight | 0 | — | — | 04:00:10 |
+| ? | other |  | in-flight | 0 | — | — | 04:12:58 |
+| ? | other |  | result | 0 | cure-round-1.md | — | 04:10:56 |
+| ? | other |  | in-flight | 0 | — | — | 04:14:13 |
 | ? | other |  | result | 0 | cure-round-1.md | — | 04:09:28 |
 | ? | other |  | result | 0 | refute-fable.md | — | 19:04:52 |
 | ? | other |  | result | 0 | — | — | 19:04:34 |
@@ -130,14 +130,14 @@
 | ? | other |  | result | 0 | draft-round-1.md | — | 22:44:38 |
 | ? | other |  | result | 0 | general.survey.md | — | 04:06:17 |
 | ? | other |  | result | 0 | stressors.survey.md | — | 04:06:44 |
-| ? | other |  | in-flight | 0 | — | — | 04:10:28 |
+| ? | other |  | in-flight | 0 | — | — | 04:15:40 |
 | ? | other |  | result | 0 | defense.survey.md | — | 04:06:47 |
-| ? | other |  | in-flight | 0 | — | — | 04:10:03 |
-| ? | other |  | in-flight | 0 | — | — | 04:10:40 |
-| ? | other |  | in-flight | 0 | — | — | 04:10:38 |
-| ? | other |  | in-flight | 0 | — | — | 04:09:47 |
+| ? | other |  | in-flight | 0 | power.refute.md | — | 04:16:29 |
+| ? | other |  | in-flight | 0 | — | — | 04:15:33 |
+| ? | other |  | in-flight | 0 | — | — | 04:15:03 |
+| ? | other |  | in-flight | 0 | — | — | 04:12:57 |
 | ? | other |  | result | 0 | warFaith.survey.md | — | 04:00:59 |
-| ? | other |  | in-flight | 0 | — | — | 04:07:50 |
+| ? | other |  | result | 0 | — | — | 04:14:33 |
 | ? | other |  | result | 0 | economy.survey.md | — | 04:03:31 |
 | ? | other |  | result | 0 | power.survey.md | — | 04:03:54 |
 | ? | other |  | result | 0 | refine.md | — | 00:24:50 |
