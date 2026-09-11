@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-11 05:25:22 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-11 05:31:10 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = d7f4c6b0e §919: the REWRITE train's first car lands — the index-stable draw signed (59.61 % of ce
 
@@ -229,7 +229,7 @@ json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
 ## WORKFLOW RUNS of chair session 4ed79a2b-6cd2-45cf-ab97-83cdad49c30b (journal lines; a run dies with the session — the FILES above are the checkpoint)
 - wf_3252b403-4ff: 6 journal lines, 6 agents
 - wf_a8b0a386-355: 1 journal lines, 1 agents
-- wf_abaf2de0-b00: 7 journal lines, 6 agents
+- wf_abaf2de0-b00: 8 journal lines, 6 agents
 
 ## PROCESSES: 57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 2.54 2.92 4.74
+load: 2.32 2.60 3.98

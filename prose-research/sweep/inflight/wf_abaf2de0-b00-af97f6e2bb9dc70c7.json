@@ -1,0 +1,21 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 77,
+ "firstTs": "2026-09-11T09:24:54.694Z",
+ "lastTs": "2026-09-11T09:26:09.010Z",
+ "tools": {
+  "Bash": 12,
+  "Read": 5
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "I'll begin by reading the voice documents and the pool files in parallel.",
+ "run": "wf_abaf2de0-b00",
+ "agent": "af97f6e2bb9dc70c7",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/4ed79a2b-6cd2-45cf-ab97-83cdad49c30b/subagents/workflows/wf_abaf2de0-b00/agent-af97f6e2bb9dc70c7.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}
