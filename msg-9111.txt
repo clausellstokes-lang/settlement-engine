@@ -1,9 +1,0 @@
-§911.1: the owner rules the three §911 rows — the stress test accepted at ≈ 4.0–4.9 h, a re-run after any retune, and two seeds per research cell — all gated on the reconciliation passing
-
-Verbatim (2026-09-07 ~11:45): "then yes, but only after the reconciliation work has passed." The order stands: reconciliation → taste sample → the owner's walk → the stress test → tuning last. Also recorded: the 11:15 seat split (Fable judges, Opus implements and verifies — applied to S12), the 11:35 plain-language directive, and the open watermark question with the chair's advice. Zero product bytes.
-
-Enrols: none — a ledger-only owner-ruling row; no Opus car landed in this act (§911.1).
-
-Seat: Fable 5.1 — validated
-
-Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>
