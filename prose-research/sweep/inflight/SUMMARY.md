@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-11 10:56:04 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-11 11:02:05 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -15,7 +15,7 @@
 | ? | other |  | in-flight | 0 | — | — | 09:36:54 |
 | ? | other |  | in-flight | 0 | — | — | 09:36:54 |
 | ? | other |  | in-flight | 0 | — | — | 09:36:53 |
-| ? | other |  | in-flight | 0 | — | — | 14:54:47 |
+| ? | other |  | result | 0 | — | — | 14:58:10 |
 | ? | other |  | failed | 0 | — | — | 10:25:02 |
 | ? | other |  | result | 0 | stressors.referent.refute.md | — | 14:19:37 |
 | ? | other |  | result | 0 | — | — | 14:19:35 |

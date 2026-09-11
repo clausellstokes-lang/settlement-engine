@@ -1,3 +1,5 @@
+> CHAIR (2026-09-11 11:0x): READ WHOLE and RATIFIED AS CORRECTED at brief ADDENDUM 13 part B (`briefs/brief-REWRITE-car8b-defense.md`): the layer vocabulary widened (A.1), rules 3, 4 and 5 amended, the writer bars W20–W27, X-D1…X-D4 and DG-1…DG-40 ruled, OW-1…OW-23 disposed. This file is the refuters' instrument as written.
+
 # REFERENT-TABLE.draft — THE REFERENT LAW, folded from six desks (twelve packets)
 
 Folder: Fable 5.1 (the fold seat of the referent survey). Dock `laneRW-DEFW` at `f2da5a3ee`, READ-ONLY; every `file:line` below is the surveyor's or refuter's re-derivation in that tree, carried with its verdict. This is a research packet, not prose and not a ruling: the chair ratifies. Sources: `<desk>.referent.survey.md` (Opus surveyor) and `<desk>.referent.refute.md` (Fable refuter) for defense · general · economy · power · stressors · warFaith, all read WHOLE; the law from `briefs/brief-REWRITE-car8b-defense.md` ADDENDUM 11.
@@ -830,14 +832,14 @@ Counted over THIS fold's tables (the fold's own denominators; the packets' figur
 | desk | noun rows (§2) | HOLDS | CONDITIONAL | REFUSED-table rows | of which REFUTED-led | of which CONDITIONAL-led | of which cite/path-only | wrong-layer findings (§5) | the refuter's own roll |
 |---|---|---|---|---|---|---|---|---|---|
 | defense | 47 | 40 | 7 | 14 | 10 | 4 | 0 | 28 (25 survey + 3 refuter) | not printed as a roll |
-| general | 39 | 30 | 9 | 11 | 4 | 6 | 1 | 45 (F-1…F-48 in 44 rows incl. the 5 engine-string row + the 35-row record-word block folded as one row) | not printed as a roll |
+| general | 39 | 30 | 9 | 11 | 4 | 6 | 1 | 45 table rows = F-1…F-43 singly + F-44…F-48 (five engine strings) as one row + F-49…F-83 (the 35 record-word rows) as one row — 83 findings | not printed as a roll |
 | economy | 23 | 19 | 4 | 10 | 4 | 3 | 3 | 21 (20 survey + 1 refuter) | not printed as a roll |
 | power | 23 | 19 | 4 | 9 | 4 | 4 | 1 | 27 (R-1a…R-6 + 2 instrument rows; 55 body-word variants by the refuter's list) | **114 verdicts: HOLDS 93 · CONDITIONAL 12 · REFUTED 9** (4 substantive) |
 | stressors | 36 | 30 | 6 | 19 | 9 | 8 | 2 | 34 (32 survey, of which F23 REFUTED + 2 refuter) | not printed as a roll |
 | warFaith | 40 | 31 | 9 | 19 | 7 | 10 | 2 | 35 (33 survey + 2 refuter) | not printed as a roll (21 cite drifts, no verdict changed) |
 | **total** | **208** | **169** | **39** | **82** | **38** | **35** | **9** | **190** | — |
 
-Cross-desk tables: **OVERLAPS 39** (§3, OV-1 … OV-39, merged and deduplicated across six desks) · **POWER SLOTS 29** (§4.1) · **VISIBILITY 19** (§4.2) · **WRONG-LAYER FINDINGS 190** (§5; 6 desks) · **OWED wiring decisions 23** (§6.1, OW-1 … OW-23) · **surveyor/refuter disagreements 44** (§6.2: 40 per-desk DG rows + 4 cross-desk X-D rows).
+Cross-desk tables: **OVERLAPS 39** (§3, OV-1 … OV-39, merged and deduplicated across six desks) · **POWER SLOTS 29** (§4.1) · **VISIBILITY 19** (§4.2) · **WRONG-LAYER FINDINGS 190 table rows** (§5; 6 desks; 228 findings once the general desk's two folded rows are unfolded) · **OWED wiring decisions 23** (§6.1, OW-1 … OW-23) · **surveyor/refuter disagreements 44** (§6.2: 40 per-desk DG rows + 4 cross-desk X-D rows).
 
 Standing facts the count rests on (all HOLDS at the census grain): no pool of ANY desk reads `institutions[].impairments[]`, a brokerage patron or a per-faction `captureState`; the ORGAN-UNDER-POWER layer is wired on 4 power rows (`watch` / `court + watch`) and 4 warFaith rows (`court`) only; the covert flag is `true` on 4 census rows in the estate (DS-WAR-1, by token) and 0 on every other desk; the person-naming reads are two (DS-REL-1, DS-POW-3); the desks with NO body read of their own are four (economy, power, stressors, warFaith).
 
