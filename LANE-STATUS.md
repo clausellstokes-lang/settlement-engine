@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-11 05:59:57 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-11 06:05:42 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = d7f4c6b0e §919: the REWRITE train's first car lands — the index-stable draw signed (59.61 % of ce
 
@@ -210,8 +210,8 @@ stat: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-
 - **VIS-906** (same dock laneANCHOR905, on top of the anchor car) receipt head:
 - **L-PROBE-2 (chair)**: cheap /6 tips · full:  · bracket: 
 ## REWRITE 8b PACKETS (rewrite/DS-DEF-n/<pool>/: skeleton · draft-round-N · refine · kept · refute* · cure-round-N · cured-round-N; JUDGMENT.md / JUDGMENT-cure.md per block; the entailment + referent tables)
-- DS-DEF-11: pools 5 · skeleton 5 · draft 5 · refine 5 · kept 5 · refute 10 · cure 10 · cured 10 · JUDGMENT yes · JUDGMENT-cure no
-- entailment: surveys 6 · refutes 6 · ENTAILMENT-TABLE.draft.md absent · referent surveys 6 · referent refutes 0 · REFERENT-TABLE.draft.md absent
+- DS-DEF-11: pools 5 · skeleton 5 · draft 5 · refine 5 · kept 5 · refute 13 · cure 10 · cured 10 · JUDGMENT yes · JUDGMENT-cure no
+- entailment: surveys 6 · refutes 6 · ENTAILMENT-TABLE.draft.md 09-11 06:02 346529 B · referent surveys 6 · referent refutes 0 · REFERENT-TABLE.draft.md absent
 - HOLD-VITEST absent · runner count 0
 
 ## RESEARCH SWEEPS (state = claims/verdicts/kept; verdict files; section/critic mtimes) — round tags in sweep/LAST-RUNS.json
@@ -227,21 +227,7 @@ json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
 - LAST-RUNS: tolkien r7-not-launched/(none — nothingToRun 17:26), kay r8/wf_d76e605d-6d1, leguin r11/wf_49ef9b66-2e6, wolfe r8/wf_8cd21474-a7b, martin r8/wf_0cd91522-1ce, hobb r7/wf_255b6391-7fb, dnd r13/wf_2c525e43-1f2, ai r12/wf_6dd3b009-2b0, dnd_r13 r13/wf_2c525e43-1f2, leguin_r11 r11/wf_49ef9b66-2e6, dnd_r14 r14/
 
 ## WORKFLOW RUNS of chair session 4ed79a2b-6cd2-45cf-ab97-83cdad49c30b — PER AGENT, PER LANE (owner 09-11: save progress per agent per lane; a run dies with the session, its journal + the packets + the dock commits are the checkpoint; journals mirrored under $SC/_progress/<wf>/)
-- **wf_3252b403-4ff** (mtime 09-11 05:56): agent calls 13 (7 distinct) · DONE 1 · FAILED 0 · RETRIED (superseded attempts) 6 · IN FLIGHT 6 — mirror `_progress/wf_3252b403-4ff/`
-    - `a92fbb493` SURVEYOR defense · RETRIED (a later attempt on the same key runs) · transcript 09-11 05:36 966 KB · 94 tool calls · files: $SP/annex-def1-6.txt, $SP/annex-def7-10.txt, $SP/annex-def11.txt, $SP/annex-def-all.txt
-    - `a258758c8` SURVEYOR general · RETRIED (a later attempt on the same key runs) · transcript 09-11 05:36 1034 KB · 88 tool calls · files: $D/_gen_annex.txt, general.referent.survey.md
-    - `aedcb6855` SURVEYOR economy · RETRIED (a later attempt on the same key runs) · transcript 09-11 05:36 946 KB · 95 tool calls
-    - `a5b3683d1` SURVEYOR power · RETRIED (a later attempt on the same key runs) · transcript 09-11 05:36 882 KB · 72 tool calls · files: _pow-annex.txt, power.referent.survey.md
-    - `ac09efeba` SURVEYOR stressors · RETRIED (a later attempt on the same key runs) · transcript 09-11 05:36 817 KB · 80 tool calls
-    - `a70dd9439` SURVEYOR warFaith · RETRIED (a later attempt on the same key runs) · transcript 09-11 05:36 928 KB · 83 tool calls · files: warfaith-census.txt, warfaith-variants.txt
-    - `adc8ac978` SURVEYOR power · IN FLIGHT · transcript 09-11 05:57 1189 KB · 106 tool calls · files: pow-census.txt, pow-words.txt, power.referent.survey.md · last: Bash F=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratc
-    - `a3f87f01c` SURVEYOR general · DONE · transcript 09-11 05:56 886 KB · 89 tool calls · files: desk.txt, variants.txt, fix.pl, general.referent.survey.md · result: {"desk": "general (THE OVERVIEW / RELATIONS / POPULATION / HOOKS DESK)", "blocks": ["DS-GEN-1", "DS-GEN-2", "DS-GEN-3", "DS-GEN-5", "DS-GEN-6", "DS-GEN-7", "DS-
-    - `a9e609dca` SURVEYOR warFaith · IN FLIGHT · transcript 09-11 05:57 986 KB · 84 tool calls · files: hdrs.txt, "$OUT/warfaith-annex.txt, warFaith.referent.survey.md · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
-    - `a2c8e4398` SURVEYOR stressors · IN FLIGHT · transcript 09-11 05:57 1014 KB · 92 tool calls · files: words.txt, variants.txt, nounmap.txt, stressors.referent.survey.md · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
-    - `afe5153e4` SURVEYOR defense · IN FLIGHT · transcript 09-11 05:57 916 KB · 83 tool calls · files: defA.txt, defB.txt, defall.txt, defense.referent.survey.md · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
-    - `aacc17cae` SURVEYOR economy · IN FLIGHT · transcript 09-11 05:57 1109 KB · 101 tool calls · files: eco-variants.txt, economy.referent.survey.md · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
-    - `a76810298` REFUTER general · IN FLIGHT · transcript 09-11 05:57 353 KB · 9 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
-- **wf_abaf2de0-b00** (mtime 09-11 05:54): agent calls 20 (17 distinct) · DONE 13 · FAILED 0 · RETRIED (superseded attempts) 3 · IN FLIGHT 4 — mirror `_progress/wf_abaf2de0-b00/`
+- **wf_abaf2de0-b00** (mtime 09-11 06:02): agent calls 21 (18 distinct) · DONE 17 · FAILED 0 · RETRIED (superseded attempts) 3 · IN FLIGHT 1 — mirror `_progress/wf_abaf2de0-b00/`
     - `acb131a55` GATE r1 · DONE · transcript 09-11 05:24 559 KB · 56 tool calls · files: x.txt, msg.txt, (git commit) · result: {"commit": "32634b8004831321c2d0b5985766cb8f0ae78590", "pools": [{"dir": "ds-def-11--walled-threatened", "applied": true, "inBand": true, "failing": [], "refusa
     - `af97f6e2b` REFUTER WALLED-THREATENED r1 · DONE · transcript 09-11 05:32 611 KB · 19 tool calls · files: refute-cure-round-1.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-11/ds-def-11--walled-th
     - `afe4107e1` REFUTER WALLED-QUIET r1 · DONE · transcript 09-11 05:33 591 KB · 24 tool calls · files: refute-cure-round-1.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-11/ds-def-11--walled-qu
@@ -257,14 +243,29 @@ json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
     - `a51a5343d` CURER WALLED-STRAINED r2 · DONE · transcript 09-11 05:45 493 KB · 31 tool calls · files: .rows-out.txt, .hdr.txt, .notes.txt, cure-round-2.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-11/ds-def-11--walled-st
     - `afa1a836e` CURER WALLED-QUIET r2 · DONE · transcript 09-11 05:45 633 KB · 31 tool calls · files: head-rows.txt, $SCR/packet-rows.txt · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-11/ds-def-11--walled-qu
     - `a6c98bba7` GATE r2 · DONE · transcript 09-11 05:54 528 KB · 50 tool calls · files: newtexts.txt, (git commit) · result: {"commit": "5cfc02000f38daa8281908727c99a03d739725e6", "pools": [{"dir": "ds-def-11--walled-threatened", "applied": true, "inBand": true, "failing": [], "refusa
-    - `a5f054ddb` REFUTER WALLED-THREATENED r2 · IN FLIGHT · transcript 09-11 05:56 513 KB · 17 tool calls · last: Bash DOCK=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scr
-    - `aa1c6b3b7` REFUTER WALLED-QUIET r2 · IN FLIGHT · transcript 09-11 05:56 486 KB · 18 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
-    - `a154a2e83` REFUTER WALLED-STRAINED r2 · IN FLIGHT · transcript 09-11 05:59 533 KB · 29 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
-    - `ac1a912ff` REFUTER UNWALLED-SMALL r2 · IN FLIGHT · transcript 09-11 05:59 572 KB · 21 tool calls · files: head-rows.txt · last: Bash rm -f /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4ed79a2b-6cd2-45cf-ab97-83cdad49c30b/sc
+    - `a5f054ddb` REFUTER WALLED-THREATENED r2 · DONE · transcript 09-11 06:02 632 KB · 19 tool calls · files: refute-cure-round-2.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-11/ds-def-11--walled-th
+    - `aa1c6b3b7` REFUTER WALLED-QUIET r2 · DONE · transcript 09-11 06:01 592 KB · 20 tool calls · files: annex-wq.txt · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-11/ds-def-11--walled-qu
+    - `a154a2e83` REFUTER WALLED-STRAINED r2 · DONE · transcript 09-11 06:00 565 KB · 31 tool calls · files: refute-cure-round-2-fable.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-11/ds-def-11--walled-st
+    - `ac1a912ff` REFUTER UNWALLED-SMALL r2 · DONE · transcript 09-11 06:01 614 KB · 23 tool calls · files: head-rows.txt, refute-cure-round-2.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-11/ds-def-11--unwalled-
     - `a571418ef` REFUTER UNWALLED-LARGE r2 · DONE · transcript 09-11 05:59 603 KB · 22 tool calls · files: refute-cure-2-fable.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-11/ds-def-11--unwalled-
-- **wf_a8b0a386-355** (mtime 09-11 05:36): agent calls 2 (1 distinct) · DONE 0 · FAILED 0 · RETRIED (superseded attempts) 1 · IN FLIGHT 1 — mirror `_progress/wf_a8b0a386-355/`
+    - `a3651b6e1` JUDGE · IN FLIGHT · transcript 09-11 06:05 554 KB · 25 tool calls · files: journal-refuters.txt · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
+- **wf_3252b403-4ff** (mtime 09-11 05:56): agent calls 13 (7 distinct) · DONE 1 · FAILED 0 · RETRIED (superseded attempts) 6 · IN FLIGHT 6 — mirror `_progress/wf_3252b403-4ff/`
+    - `a92fbb493` SURVEYOR defense · RETRIED (a later attempt on the same key runs) · transcript 09-11 05:36 966 KB · 94 tool calls · files: $SP/annex-def1-6.txt, $SP/annex-def7-10.txt, $SP/annex-def11.txt, $SP/annex-def-all.txt
+    - `a258758c8` SURVEYOR general · RETRIED (a later attempt on the same key runs) · transcript 09-11 05:36 1034 KB · 88 tool calls · files: $D/_gen_annex.txt, general.referent.survey.md
+    - `aedcb6855` SURVEYOR economy · RETRIED (a later attempt on the same key runs) · transcript 09-11 05:36 946 KB · 95 tool calls
+    - `a5b3683d1` SURVEYOR power · RETRIED (a later attempt on the same key runs) · transcript 09-11 05:36 882 KB · 72 tool calls · files: _pow-annex.txt, power.referent.survey.md
+    - `ac09efeba` SURVEYOR stressors · RETRIED (a later attempt on the same key runs) · transcript 09-11 05:36 817 KB · 80 tool calls
+    - `a70dd9439` SURVEYOR warFaith · RETRIED (a later attempt on the same key runs) · transcript 09-11 05:36 928 KB · 83 tool calls · files: warfaith-census.txt, warfaith-variants.txt
+    - `adc8ac978` SURVEYOR power · IN FLIGHT · transcript 09-11 05:57 1189 KB · 106 tool calls · files: pow-census.txt, pow-words.txt, power.referent.survey.md · last: Bash F=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratc
+    - `a3f87f01c` SURVEYOR general · DONE · transcript 09-11 05:56 886 KB · 89 tool calls · files: desk.txt, variants.txt, fix.pl, general.referent.survey.md · result: {"desk": "general (THE OVERVIEW / RELATIONS / POPULATION / HOOKS DESK)", "blocks": ["DS-GEN-1", "DS-GEN-2", "DS-GEN-3", "DS-GEN-5", "DS-GEN-6", "DS-GEN-7", "DS-
+    - `a9e609dca` SURVEYOR warFaith · IN FLIGHT · transcript 09-11 05:57 986 KB · 84 tool calls · files: hdrs.txt, "$OUT/warfaith-annex.txt, warFaith.referent.survey.md · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
+    - `a2c8e4398` SURVEYOR stressors · IN FLIGHT · transcript 09-11 05:57 1014 KB · 92 tool calls · files: words.txt, variants.txt, nounmap.txt, stressors.referent.survey.md · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
+    - `afe5153e4` SURVEYOR defense · IN FLIGHT · transcript 09-11 05:57 916 KB · 83 tool calls · files: defA.txt, defB.txt, defall.txt, defense.referent.survey.md · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
+    - `aacc17cae` SURVEYOR economy · IN FLIGHT · transcript 09-11 05:57 1109 KB · 101 tool calls · files: eco-variants.txt, economy.referent.survey.md · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
+    - `a76810298` REFUTER general · IN FLIGHT · transcript 09-11 05:57 353 KB · 9 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
+- **wf_a8b0a386-355** (mtime 09-11 05:36): agent calls 2 (1 distinct) · DONE 1 · FAILED 0 · RETRIED (superseded attempts) 1 · IN FLIGHT 0 — mirror `_progress/wf_a8b0a386-355/`
     - `a52bed9cf` FOLDER · RETRIED (a later attempt on the same key runs) · transcript 09-11 05:36 1146 KB · 24 tool calls · files: _addendum10.verbatim.md, _partA.md, _partB.md
-    - `ad30ac0bb` FOLDER · IN FLIGHT · transcript 09-11 05:59 1451 KB · 31 tool calls · files: rewrite/entailment/_addendum10.fromBrief.md, _partC.md, _partD.md, _partE.md · last: Write /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchp
+    - `ad30ac0bb` FOLDER · DONE · transcript 09-11 06:02 1531 KB · 36 tool calls · files: _partD.md, _partE.md, _partF.md, _partG.md · result: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/entailment/ENTAILMENT-TABLE.draft.md
 
 ## PROCESSES: 57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 2.35 2.20 2.55
+load: 2.38 2.23 2.43
