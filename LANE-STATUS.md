@@ -1,13 +1,13 @@
-# LANE-STATUS — written 2026-09-11 05:19:37 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-11 05:25:22 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = d7f4c6b0e §919: the REWRITE train's first car lands — the index-stable draw signed (59.61 % of ce
 
 ## BUILD / KIT LANES (dock · base · cars · porcelain · receipt)
-- **REWRITE 8b DS-DEF-11 (the validation block; cure round)** dock `laneRW-DEF11` HEAD 7acc5ff1c · 12 cars over f73bdbf16 · porcelain 0 · last commits:
+- **REWRITE 8b DS-DEF-11 (the validation block; cure round)** dock `laneRW-DEF11` HEAD 32634b800 · 13 cars over f73bdbf16 · porcelain 0 · last commits:
+    32634b800 REWRITE 8b DS-DEF-11 cure round 1: 5/5 pools
     7acc5ff1c REWRITE 8b DS-DEF-11: 12/12 · 0 faces reverted · 5 refusal(s) — the Fable judge rulings applied
     44b8b7a50 REWRITE 8b DS-DEF-11 refine: 5/5 kept, 0 reverted
     dd53a9564 REWRITE 8b DS-DEF-11 draft round 1: 5/5
-    f2da5a3ee REWRITE car 8b-W-5-lighting: the lighting census re-freezes at the car's tip, by its own ritual
     receipt `receipt-rewrite.md` (mtime 09-09 14:58) head:
       | # RECEIPT — the REWRITE train
       | 
@@ -210,7 +210,7 @@ stat: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-
 - **VIS-906** (same dock laneANCHOR905, on top of the anchor car) receipt head:
 - **L-PROBE-2 (chair)**: cheap /6 tips · full:  · bracket: 
 ## REWRITE 8b PACKETS (rewrite/DS-DEF-n/<pool>/: skeleton · draft-round-N · refine · kept · refute* · cure-round-N · cured-round-N; JUDGMENT.md / JUDGMENT-cure.md per block; the entailment + referent tables)
-- DS-DEF-11: pools 5 · skeleton 5 · draft 5 · refine 5 · kept 5 · refute 6 · cure 5 · cured 0 · JUDGMENT yes · JUDGMENT-cure no
+- DS-DEF-11: pools 5 · skeleton 5 · draft 5 · refine 5 · kept 5 · refute 6 · cure 5 · cured 5 · JUDGMENT yes · JUDGMENT-cure no
 - entailment: surveys 6 · refutes 6 · ENTAILMENT-TABLE.draft.md absent · referent surveys 0 · referent refutes 0 · REFERENT-TABLE.draft.md absent
 - HOLD-VITEST absent · runner count 0
 
@@ -229,7 +229,7 @@ json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
 ## WORKFLOW RUNS of chair session 4ed79a2b-6cd2-45cf-ab97-83cdad49c30b (journal lines; a run dies with the session — the FILES above are the checkpoint)
 - wf_3252b403-4ff: 6 journal lines, 6 agents
 - wf_a8b0a386-355: 1 journal lines, 1 agents
-- wf_abaf2de0-b00: 1 journal lines, 1 agents
+- wf_abaf2de0-b00: 7 journal lines, 6 agents
 
 ## PROCESSES: 57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 2.96 3.57 5.81
+load: 2.54 2.92 4.74
