@@ -1,4 +1,4 @@
-# wf_b9aa5993-4a0 — per-agent progress, 2026-09-11 17:44:10
+# wf_b9aa5993-4a0 — per-agent progress, 2026-09-11 17:49:55
     - `addd4fc66` ? · DONE · transcript 09-11 15:37 609 KB · 39 tool calls · files: skeleton.md, skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--economic-su
     - `a9316f3de` MARKER Economic Survival: WEAK · DONE · transcript 09-11 15:35 540 KB · 30 tool calls · files: "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--economic-survival-weak/skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--economic-su
     - `ad9a7c83a` MARKER Economic Survival: CRITICAL · DONE · transcript 09-11 15:36 658 KB · 42 tool calls · files: def2-block.txt, skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--economic-su
@@ -46,9 +46,29 @@
     - `a27663090` WRITER Disasters & Famine: NO reserves, hospital present r2 · DONE · transcript 09-11 17:22 561 KB · 31 tool calls · files: "$D/draft-round-2.md · result: Packet path: `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--disast
     - `a3ffbe8d2` GATE r2 · DONE · transcript 09-11 17:33 553 KB · 59 tool calls · files: (git commit) · result: {"commit": "fa973a8845128e820af1c5e9310bc61c72c6ff5d", "pools": [{"dir": "ds-def-2--beasts-monsters-plagued-no-perimeter-and-no-forc", "inBand": true, "failing"
     - `a1853ff76` REFINER Beasts & Monsters: plagued, perimeter AND organized force · DONE · transcript 09-11 17:44 715 KB · 33 tool calls · files: "$SC/rewrite/DS-DEF-2/ds-def-2--beasts-monsters-plagued-perimeter-and-organized-/refine.md, refine.md, rows.txt, sents.txt · result: Packet: `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--beasts-mons
-    - `a24c502a4` REFINER Beasts & Monsters: plagued, perimeter but NO force to hold it · IN FLIGHT · transcript 09-11 17:35 364 KB · 18 tool calls · last: Bash SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
-    - `ade7cba0f` REFINER Beasts & Monsters: plagued, NO perimeter and NO force · IN FLIGHT · transcript 09-11 17:44 632 KB · 34 tool calls · files: x.txt, refine.md · last: Bash P=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratc
-    - `a2ef5d0f1` REFINER Beasts & Monsters: frontier, credible deterrence · IN FLIGHT · transcript 09-11 17:44 656 KB · 29 tool calls · files: "$D/refine.md · last: Bash cat /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scra
-    - `a06f60c2a` REFINER Beasts & Monsters: frontier, force without a perimeter · IN FLIGHT · transcript 09-11 17:43 628 KB · 32 tool calls · files: "$D/refine.md · last: Bash SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
-    - `a2a9df843` REFINER Beasts & Monsters: settled, defenses beyond the need · IN FLIGHT · transcript 09-11 17:44 614 KB · 27 tool calls · last: Bash P=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratc
-    - `a497553cc` REFINER Beasts & Monsters: settled, nothing organized · IN FLIGHT · transcript 09-11 17:44 124 KB · 0 tool calls
+    - `a24c502a4` REFINER Beasts & Monsters: plagued, perimeter but NO force to hold it · FAILED · transcript 09-11 17:48 645 KB · 18 tool calls
+    - `ade7cba0f` REFINER Beasts & Monsters: plagued, NO perimeter and NO force · DONE · transcript 09-11 17:44 646 KB · 35 tool calls · files: x.txt, refine.md · result: Packet written and verified mechanically. Here is the result.  **Packet:** `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-
+    - `a2ef5d0f1` REFINER Beasts & Monsters: frontier, credible deterrence · FAILED · transcript 09-11 17:45 698 KB · 34 tool calls · files: "$D/refine.md, refine.md
+    - `a06f60c2a` REFINER Beasts & Monsters: frontier, force without a perimeter · DONE · transcript 09-11 17:45 673 KB · 35 tool calls · files: "$D/refine.md, refine.md · result: **Packet:** `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--beasts-
+    - `a2a9df843` REFINER Beasts & Monsters: settled, defenses beyond the need · DONE · transcript 09-11 17:44 633 KB · 29 tool calls · files: rows.txt · result: PACKET: `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--beasts-mons
+    - `a497553cc` REFINER Beasts & Monsters: settled, nothing organized · FAILED · transcript 09-11 17:45 338 KB · 22 tool calls
+    - `a41d708f9` REFINER Invasion & War: walls AND professional garrison · FAILED · transcript 09-11 17:45 276 KB · 13 tool calls · files: refine.md
+    - `a4789f3fd` REFINER Invasion & War: walls with citizen militia · FAILED · transcript 09-11 17:45 287 KB · 11 tool calls
+    - `ab4318a3b` REFINER Invasion & War: walls with NO force · FAILED · transcript 09-11 17:45 146 KB · 2 tool calls
+    - `a6ec9ff33` REFINER Invasion & War: force with NO walls · FAILED · transcript 09-11 17:45 124 KB · 0 tool calls
+    - `a1114efc0` REFINER Invasion & War: militia only · FAILED · transcript 09-11 17:45 124 KB · 0 tool calls
+    - `af389434c` REFINER Invasion & War: neither walls nor force · FAILED · transcript 09-11 17:45 124 KB · 0 tool calls
+    - `a6474d696` REFINER Internal Security: full legal chain (court AND prison) · FAILED · transcript 09-11 17:45 124 KB · 0 tool calls
+    - `a34e7217c` REFINER Internal Security: court without detention r1 · FAILED · transcript 09-11 17:45 124 KB · 0 tool calls
+    - `a738b7a38` REFINER Internal Security: detention without process · FAILED · transcript 09-11 17:45 124 KB · 0 tool calls
+    - `ad55877b9` REFINER Internal Security: no legal infrastructure · FAILED · transcript 09-11 17:45 124 KB · 0 tool calls
+    - `aacc86078` REFINER Economic Survival: STRONG · FAILED · transcript 09-11 17:45 124 KB · 0 tool calls
+    - `a57cd1f39` REFINER Economic Survival: ADEQUATE · FAILED · transcript 09-11 17:45 124 KB · 0 tool calls
+    - `a288baed5` REFINER Economic Survival: WEAK · FAILED · transcript 09-11 17:45 124 KB · 0 tool calls
+    - `a9366bdac` REFINER Economic Survival: CRITICAL · FAILED · transcript 09-11 17:45 124 KB · 0 tool calls
+    - `a507cc247` REFINER Disasters & Famine: granary AND hospital · FAILED · transcript 09-11 17:45 124 KB · 0 tool calls
+    - `a54bf32b6` REFINER Disasters & Famine: granary AND parish care only · FAILED · transcript 09-11 17:45 124 KB · 0 tool calls
+    - `a4071af08` REFINER Disasters & Famine: granary, NO medical provision · FAILED · transcript 09-11 17:45 124 KB · 0 tool calls
+    - `a4416f3e3` REFINER Disasters & Famine: NO reserves, hospital present · FAILED · transcript 09-11 17:45 124 KB · 0 tool calls
+    - `afa9f06a2` REFINER Disasters & Famine: NO reserves, NO medical provision · FAILED · transcript 09-11 17:45 124 KB · 0 tool calls
+    - `a32dd7c6f` GATE · FAILED · transcript 09-11 17:48 105 KB · 0 tool calls
