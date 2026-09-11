@@ -2,5 +2,11 @@
 
 Fable refuter, seat Fable 5.1, against `defense.referent.survey.md` (Opus surveyor). Dock `laneRW-DEFW` at `f2da5a3ee`, READ-ONLY. Every cite re-derived in the dock. Verdict vocabulary: HOLDS · CONDITIONAL (condition stated exactly) · REFUTED (code quoted). Default under doubt: CONDITIONAL or REFUTED.
 
-STATUS: IN PROGRESS (checkpoint law — this file is rewritten section by section).
+STATUS: IN PROGRESS (checkpoint law — this file is rewritten section by section). Sections planned: §A the engine re-read (what the refuter found that moves rows) · §B verdicts on §1–§2 (the layers) · §C verdicts on §3 (the nouns) · §D verdicts on §4 (the reads) · §E verdicts on §5–§6 (overlaps, slots) · §F verdicts on §7 (visibility) · §G verdicts on §8 (findings) · §H overlaps the surveyor missed · §I missed nouns · §J the law as drafted, tested.
 
+## §A THE ENGINE RE-READ — findings that move rows (written first, checkpoint 1)
+
+A-1. `holderTable.js:317-323`: the WATCH holder KIND's record-keepers in the shipped roster are `Professional city watch, Town watch` (services `Crime reporting · Crime response · Missing persons`). So the ORGAN (holder of `criminalCaptureState`, `safetyProfile`, `blackMarketCapture`) resolves to the SAME institution rows the watch BUCKET holds (`defenseInstitutionBuckets.js:95-97`). "Two things by table" is true of the TABLES; it is ONE row in the town. (Moves: §3.3, O-2, law item 3.)
+A-2. `holderTable.js:279-288`: the MUSTER kind's only record-keeper is the `Citizen militia` (`Muster training`); a garrison town without a militia has "men under arms and no roll of them". So a citation of "the muster" as a HOLDER is CONDITIONAL on a live Citizen militia; as a CLASS WORD for the body it is the chair's ruling, not an engine object. (Moves: §3.2 safe words.)
+A-3. `holderTable.js:141`: `captured = criminal !== 'none' || faction !== null` — INTERESTED-at-birth fires at `adversarial` and `equilibrium` too, not only `corrupted`/`capture`; but `standingOf:661` reads the WORLD `captureState` as captured only at `corrupted`/`capture`. Two thresholds for "captured". (Moves: §7.1's "while the town is not captured".)
+A-4. `holderTable.js:707-708`: `interested` is ALSO true on `corrupt` (the compromised list) and `corruptImpairment` for ANY kind, not only STATE_ORGAN_KINDS. A corruption impairment on a muster holder makes a muster read INTERESTED. (Moves: §4.3 "INTERESTED ... the four organs it reaches".)

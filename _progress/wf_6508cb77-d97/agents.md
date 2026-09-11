@@ -1,4 +1,4 @@
-# wf_6508cb77-d97 — per-agent progress, 2026-09-11 10:00:19
+# wf_6508cb77-d97 — per-agent progress, 2026-09-11 10:06:00
     - `a87757ba9` REFUTER defense · FAILED · transcript 09-11 06:25 526 KB · 21 tool calls
     - `a29122cfc` REFUTER general · FAILED · transcript 09-11 06:25 509 KB · 22 tool calls · files: general.referent.refute.md
     - `ace38485c` REFUTER economy · FAILED · transcript 09-11 06:26 613 KB · 47 tool calls · files: $SC/rewrite/entailment/economy.referent.refute.md
@@ -6,3 +6,9 @@
     - `a807540d9` REFUTER stressors · FAILED · transcript 09-11 06:25 524 KB · 21 tool calls
     - `ac5e0574e` REFUTER warFaith · FAILED · transcript 09-11 06:25 578 KB · 26 tool calls · files: $SC/rewrite/entailment/warFaith.referent.refute.md
     - `a246b85c5` FOLDER · FAILED · transcript 09-11 06:26 101 KB · 0 tool calls
+    - `ad55f1ba2` REFUTER defense · IN FLIGHT · transcript 09-11 10:05 459 KB · 20 tool calls · files: $SC/rewrite/entailment/defense.referent.refute.md · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
+    - `aa904cb80` REFUTER general · IN FLIGHT · transcript 09-11 10:05 450 KB · 16 tool calls · files: $SC/rewrite/entailment/general.referent.refute.md · last: Bash D=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratc
+    - `a1b514bd3` REFUTER economy · IN FLIGHT · transcript 09-11 10:05 442 KB · 30 tool calls · last: Bash D=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratc
+    - `a6f370189` REFUTER power · IN FLIGHT · transcript 09-11 10:05 476 KB · 22 tool calls · files: $SC/rewrite/entailment/power.referent.refute.md · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
+    - `a48868e85` REFUTER stressors · IN FLIGHT · transcript 09-11 10:05 426 KB · 19 tool calls · files: $SC/rewrite/entailment/_stressors_survey_tail.tmp.md, $SC/rewrite/entailment/stressors.referent.refute.md · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
+    - `a89e0af42` REFUTER warFaith · IN FLIGHT · transcript 09-11 10:05 524 KB · 22 tool calls · last: Bash D=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratc
