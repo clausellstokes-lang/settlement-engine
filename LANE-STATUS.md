@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-11 10:34:30 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-11 10:40:13 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = d7f4c6b0e §919: the REWRITE train's first car lands — the index-stable draw signed (59.61 % of ce
 
@@ -211,7 +211,7 @@ stat: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-
 - **L-PROBE-2 (chair)**: cheap /6 tips · full:  · bracket: 
 ## REWRITE 8b PACKETS (rewrite/DS-DEF-n/<pool>/: skeleton · draft-round-N · refine · kept · refute* · cure-round-N · cured-round-N; JUDGMENT.md / JUDGMENT-cure.md per block; the entailment + referent tables)
 - DS-DEF-11: pools 5 · skeleton 5 · draft 5 · refine 5 · kept 5 · refute 13 · cure 10 · cured 10 · JUDGMENT yes · JUDGMENT-cure yes
-- entailment: surveys 6 · refutes 6 · ENTAILMENT-TABLE.draft.md 09-11 06:07 346945 B · referent surveys 6 · referent refutes 6 · REFERENT-TABLE.draft.md 09-11 10:30 92368 B
+- entailment: surveys 6 · refutes 6 · ENTAILMENT-TABLE.draft.md 09-11 06:07 346945 B · referent surveys 6 · referent refutes 6 · REFERENT-TABLE.draft.md 09-11 10:38 143565 B
 - HOLD-VITEST absent · runner count 0
 
 ## RESEARCH SWEEPS (state = claims/verdicts/kept; verdict files; section/critic mtimes) — round tags in sweep/LAST-RUNS.json
@@ -241,7 +241,7 @@ json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
     - `a6f370189` REFUTER power · DONE · transcript 09-11 10:17 783 KB · 40 tool calls · files: $SC/rewrite/entailment/power.referent.refute.md, power.referent.refute.md · result: {"desk": "power", "packet": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/entailment
     - `a48868e85` REFUTER stressors · DONE · transcript 09-11 10:19 886 KB · 38 tool calls · files: $SC/rewrite/entailment/_stressors_survey_tail.tmp.md, $SC/rewrite/entailment/stressors.referent.refute.md, $SC/rewrite/entailment/_stressors_annex.tmp.md, stressors.referent.refute.md · result: {"desk": "stressors (DS-STR-1 \u00b7 DS-STR-2 \u00b7 DS-CND-1)", "packet": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-
     - `a89e0af42` REFUTER warFaith · DONE · transcript 09-11 10:18 975 KB · 40 tool calls · files: warFaith.referent.refute.md · result: {"desk": "warFaith", "packet": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/entailm
-    - `a579b1c41` FOLDER · IN FLIGHT · transcript 09-11 10:34 1183 KB · 26 tool calls · files: $SC/rewrite/entailment/_addendum11.verbatim.md, $SC/rewrite/entailment/_addendum13.verbatim.md, .referent.survey.md, .referent.refute.md · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchp
+    - `a579b1c41` FOLDER · IN FLIGHT · transcript 09-11 10:38 1241 KB · 27 tool calls · files: $SC/rewrite/entailment/_addendum11.verbatim.md, $SC/rewrite/entailment/_addendum13.verbatim.md, .referent.survey.md, .referent.refute.md · last: Bash SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
 - **wf_abaf2de0-b00** (mtime 09-11 06:12): agent calls 22 (19 distinct) · DONE 19 · FAILED 0 · RETRIED (superseded attempts) 3 · IN FLIGHT 0 — mirror `_progress/wf_abaf2de0-b00/`
     - `acb131a55` GATE r1 · DONE · transcript 09-11 05:24 559 KB · 56 tool calls · files: x.txt, msg.txt, (git commit) · result: {"commit": "32634b8004831321c2d0b5985766cb8f0ae78590", "pools": [{"dir": "ds-def-11--walled-threatened", "applied": true, "inBand": true, "failing": [], "refusa
     - `af97f6e2b` REFUTER WALLED-THREATENED r1 · DONE · transcript 09-11 05:32 611 KB · 19 tool calls · files: refute-cure-round-1.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-11/ds-def-11--walled-th
@@ -284,4 +284,4 @@ json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
     - `ad30ac0bb` FOLDER · DONE · transcript 09-11 06:02 1531 KB · 36 tool calls · files: _partD.md, _partE.md, _partF.md, _partG.md · result: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/entailment/ENTAILMENT-TABLE.draft.md
 
 ## PROCESSES: 57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 1.73 1.94 2.05
+load: 2.23 2.01 2.04
