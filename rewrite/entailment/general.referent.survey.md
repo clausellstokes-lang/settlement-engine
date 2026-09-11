@@ -173,7 +173,7 @@ For every institution-class noun a face of this desk can render. **B** = BODY (a
 | `COLUMN_SOURCES.holderRole` | `institutionTable.js:129-138`, hardcoded `null`, `read: false` | no typed NPC→institution edge exists | agreed, and no desk pool asks for one |
 | `{npc}` | declared `proper`, *"a cast person named on a member receipt; never minted, no fate resolved"* `RECEIPT_POOLS_DOSSIER_STATE.md:173`; filled by `localNpcFill` from `npcConnections[].primaryNPCName`, THIS TOWN'S END ONLY — `generalStateProse.js:1534-1541` | "PERSON — NEVER a referent" | **`DS-REL-1 :: cross-settlement NPC contacts` names a person by name, in a sentence whose whole subject is that person** (`RECEIPT_POOLS_DOSSIER_STATE.md:5560`: *"{npc} in {settlement} keeps a standing tie in {counterpart}"*). Its read `link.npcConnections` is **not-produced** per the card |
 
-**Raised, not ruled.** The drafted law's "PERSON — NEVER a referent" and the corpus's `{npc}` slot are in direct tension on exactly one pool of this desk. The engine's own refusal is narrower than the law's: `institutionTable.js:134-136` refuses an NPC→INSTITUTION edge, and the licence card's standing refusal is *"a named character and that character's fate (product scope)"* — a refusal of FATE, not of NAMING. §9 puts the question to the chair.
+**Raised, not ruled.** The drafted law's "PERSON — NEVER a referent" and the corpus's `{npc}` slot are in direct tension on exactly one pool of this desk. The engine's own refusal is narrower than the law's: `institutionTable.js:134-136` refuses an NPC→INSTITUTION edge, and the licence card's standing refusal is *"a named character and that character's fate (product scope)"* — a refusal of FATE, not of NAMING. §7 item 4 puts the question to the chair.
 
 ---
 
@@ -347,7 +347,7 @@ Findings for the chair. Quotes are ≤ 12 words. "Layer asked" = the layer the r
 
 ## 6. SUMMARY — THE DESK'S ANSWER TO THE OWNER'S QUESTION
 
-1. **On this desk the layer is decided by the read almost everywhere, and the read almost everywhere is an AGGREGATE.** 29 of the desk's 119 RESOLVED pools read a SCORE, a BAND or a LABEL computed over bodies. For those, no noun of any layer is licensed: the card's `may claim` names a band and nothing else.
+1. **On this desk the layer is decided by the read almost everywhere, and the read almost everywhere is an AGGREGATE.** 29 of the desk's 119 RESOLVED pools read a SCORE, a BAND or a LABEL computed over bodies (`DS-GEN-3`'s 20 score rows + 6 readiness + 3 safety). ⚠ AMENDED: `DS-GEN-3` carries 42 rows in all, and **40 of them are band/label reads** — the 29 counted here plus 5 `prosperity` and 6 `foodSecurity` rows, which are aggregates over the ECONOMY rather than over bodies and so fall outside this section's frame but under the same "no noun is licensed" consequence. For those, no noun of any layer is licensed: the card's `may claim` names a band and nothing else.
 2. **The BODY layer is reachable on exactly 13 pools** — `DS-GEN-17` (5), `DS-GEN-13` (4), `DS-GEN-18` (4) — and only `DS-GEN-13` applies the ruin filter (`generalStateProse.js:1139`), so "keeps a market" means a STANDING market there and "is GARRISONED" does not mean a standing anything.
 3. **The HOLDER-ORGAN layer is reachable on 31 pools, across 7 of the 12 kinds, and NEVER on the order organs.** No general-desk read resolves the watch, the muster, the court, the parish, the census or the tradition.
 4. **The POWER layer is reachable only through three typed name slots** — `{faction}`/`{faction2}`, `{govFaction}`, `{governing}` — plus `{controller}`, which is mis-typed (it is filled from a body, §2.4). **No general-desk pool reads a capture state, a corruption impairment or a patron.** Ten pools carry the STATE-ORGAN flag, which is a register warning about INTERESTED, not a claim a face may state.
@@ -363,6 +363,120 @@ Findings for the chair. Quotes are ≤ 12 words. "Layer asked" = the layer the r
 3. **The desk's DM face is an angle marker, not an engine flag** (§3.3). Nine variants carry `· dm-only` under an editorial test (`RECEIPT_POOLS_DOSSIER_STATE.md:455-462`), and the desk's census `covert` count is zero. Rule 4 ("visibility follows the power layer") therefore binds nothing on this desk as wired today.
 4. **The `{npc}` tension** (§2.5). The drafted law says PERSON is never a referent; `DS-REL-1 :: cross-settlement NPC contacts` makes a named person the subject of its sentence, from a real record, with the far end deliberately withheld (`generalStateProse.js:1526-1531`). If the law stands as written, that pool's three variants are refused wholesale and a RESOLVED pool goes dark; if the law is narrowed to FATE (which is what the engine and the card actually refuse), the pool stands. This is the one place the referent law changes what ships.
 5. **Two of the desk's own glosses are false about the code they describe, in the same direction** — `DS-GEN-17`'s "a force the town PAYS for" (annex `:6205`, leaf comment `generalStateProse.js:1157`) against `hasMilitaryInst`'s `walls`/`citadel` members (`priorityHelpers.js:45`). A writer told the gloss writes F-39; a writer told the code does not. **A gloss that contradicts its own key function is a licence the writer cannot see is void.**
-6. **The watch is the desk's single largest exposure** (20 occurrences, §0.1), and exactly one of those rows (F-12, the safety-label family) sits on a read whose FIELD TOKEN already maps to the watch kind (`holderTable.js:212`). **A read-grain wiring fix on `SAFETY_POOL_OF` — keying the pool on `safetyProfile.safetyLabel` rather than on the key-function argument `head` — would license three of the twenty and leave seventeen unlicensed.** That is the cheapest single wiring row this survey found.
+6. ⛔ **CORRECTED BY §8 — the watch is NOT the desk's largest exposure.** Re-measured it is 13 occurrences, against 26 for the record words (*the rolls* / *the roll*) and 22 for the baked seat (*hall* + *seat*); §0.1 carries the corrected table and §8 the record-word rows. The watch row below still stands on its own terms, and exactly one of those rows (F-12, the safety-label family) sits on a read whose FIELD TOKEN already maps to the watch kind (`holderTable.js:212`). **A read-grain wiring fix on `SAFETY_POOL_OF` — keying the pool on `safetyProfile.safetyLabel` rather than on the key-function argument `head` — would license three of the twenty and leave seventeen unlicensed.** That is the cheapest single wiring row this survey found.
 7. **The engine's own hook stages bake three layers on the same page the desk frames** (F-44…F-48). `DS-HK-1` is forbidden to paraphrase them; nothing forbids them from contradicting it.
 8. **A third and fourth birth purse exist** (§1.1 row 1). The chair's ADDENDUM 12 amendment reasons over two; `monsterUpkeepMult` (floor 0.7, `defenseGenerator.js:223`) and `econHealthMult` (floor 0.45, `:289`) are the others, and all four are published together on `economicGates` (`:467-471`). The ONE-GATE-MANY-THINGS counterpart for this desk is therefore stated over four gates, not two.
+
+---
+
+## 8. THE RECORD WORDS — THE DESK'S LARGEST REFERENT EXPOSURE, MEASURED (new; supersedes §0.1's earlier claim that the watch was the largest)
+
+A record word (*the rolls*, *the books*, *the roll*, *on the books*, *the returns*, *the complaint book*, *the departure rolls*, *the burial rolls*) is a **HOLDER-ORGAN** noun: it names the RECORD and, through it, the organ that keeps it. Under the drafted law's rule 1 a record word is licensable only on a read whose holder resolves, and under `sourceOfRow` a citation is licensed only at `standing: LICENSED` — an `OFFICE` standing refuses one outright (`src/domain/prose/holderTable.js:563-570`; the card prints *"NO citation is licensed: a face naming a record holder here is refused by arm A13"*, `scripts/lib/prose-licence-card.mjs:333-336`).
+
+### 8.1 THE ENGINE HAS NO HOLDER FOR THE POPULATION AT ALL
+
+| probe | result | file:line |
+|---|---|---|
+| is there a `population`, `populationHistory`, `migration`, `births` or `deaths` token anywhere in `HOLDER_SOURCES`? | **NO — zero matches over the whole table** | `src/domain/prose/holderTable.js:164-270` |
+| the kind whose record IS the roll | `census` — services *Citizen registration · Noble registration*, `rosterBacked: true`, `dutyNamed: 2` | `holderTable.js:290-294` |
+| which institutions back it | **exactly two**: `Democratic assembly` and `Royal seat` | cite at `holderTable.js:294`; rows at `src/data/institutionServices.js:891`, `:1231` |
+| every `DS-POP-1` and `DS-POP-2` row | **WIRING-UNRESOLVED, `reads: []`**, `holderReason: "no mapping row resolves any field this pool reads"` | `docs/content/wiring-census.json` (24 rows) |
+| the five `DS-POP-3` rows | **RESOLVED**, but `source.kind` is the empty string and `fields` maps `readings.populationTrend.band` / `.window` to `""` — the tokens exist and resolve no kind | `docs/content/wiring-census.json` |
+
+⭐ So the population blocks say *the rolls* on reads that resolve **no holder**, while the one kind whose record is the roll is reachable by no pool of this desk and is roster-backed by two institutions a town below city tier does not have.
+
+### 8.2 EVERY RECORD-WORD ROW OF THE DESK (35 rows; quotes ≤ 12 words)
+
+| # | block | quoted | line | the record named | what the read resolves |
+|---|---|---|---|---|---|
+| F-49 | `DS-POP-1` | *"The departure rolls are empty"* | `:4853` | a departure register | no token; pool WIRING-UNRESOLVED, `reads: []` |
+| F-50 | `DS-POP-1` | *"the burial rolls run longer than the harvest explains"* | `:4891` | `parish` — *Register of the dead* `holderTable.js:298` | same |
+| F-51 | `DS-POP-1` | *"the rolls carry it"* | `:4893` | `census` | same |
+| F-52 | `DS-POP-1` | *"The rolls run in the town's favour"* | `:4903` | `census` | same |
+| F-53 | `DS-POP-1` | *"The rolls balance"* | `:4906` | `census` | same |
+| F-54 | `DS-POP-1` | *"The rolls are short"* | `:4913` | `census` | same |
+| F-55 | `DS-POP-1` | *"what the rolls say have come apart"* (`· dm-only`) | `:4931` | `census` | same |
+| F-56 | `DS-POP-2` | *"it is not what the older rolls describe"* | `:4968` | `census`, historical | same |
+| F-57 | `DS-GEN-1` | *"The watch's book at {settlement} is thick"* | `:5190` | `watch` — *Crime reporting* `holderTable.js:319` | `SOURCE-UNRESOLVED` |
+| F-58 | `DS-GEN-1` | *"the rolls show the rest of the town living on the remainder"* | `:5198` | `treasury` | `SOURCE-UNRESOLVED` |
+| F-59 | `DS-GEN-1` | *"{settlement}'s rolls still carry the shape the occupation put on them"* | `:5233` | `treasury` (taxed quarters, exempt trades) | `SOURCE-UNRESOLVED` |
+| F-60 | `DS-GEN-3` | *"The muster roll at {settlement} is long and current"* | `:5303` | `muster` | AGGREGATE (`axis`+`score`) — = F-1 |
+| F-61 | `DS-GEN-3` | *"{settlement}'s complaint book has more entries opened than closed"* | `:5317` | `watch` | AGGREGATE — = F-18 |
+| F-62 | `DS-GEN-3` | *"the rolls are being kept for reasons other than trade"* | `:5362` | `census` / `parish` | `text(label)` via `FOOD_POOL_OF`; `SOURCE-UNRESOLVED` |
+| F-63 | `DS-GEN-7` | *"the rolls are accurate and incomplete"* (`· dm-only`) | `:5457` | `treasury` | `SOURCE-UNRESOLVED` (a `note.type\|note.tab` key) |
+| F-64 | `DS-GEN-7` | *"the trade income on its books"* | `:5460` | `treasury` | same |
+| F-65 | `DS-GEN-7` | *"{settlement}'s books show a hard collapse"* | `:5479` | `treasury` | same |
+| F-66 | `DS-GEN-8` | *"The rolls close on a departure and not on a disaster"* | `:5506` | `census` | `SOURCE-UNRESOLVED` |
+| F-67 | `DS-GEN-8` | *"{settlement} is off the rolls"* | `:5512` | `census` | same |
+| F-68 | `DS-GEN-8` | *"{ruin} … appears on no roll of {settlement}'s"* | `:5520` | `census` / `toll-bar`, negated | same |
+| F-69 | `DS-REL-2` | *"{band} of the ties on {settlement}'s roll"* | `:5588` | a relationship register — **no holder kind maps one** | pool RESOLVED, `source.kind` empty, `SOURCE-UNRESOLVED`; the block's one resolved row is `office` at standing **OFFICE** (no citation licensed at all) |
+| F-70 | `DS-REL-2` | *"Nothing on {settlement}'s relationship roll"* | `:5594` | same, negated | same |
+| F-71 | `DS-GEN-9` | *"still on {settlement}'s books"* | `:5624` | `office` / `treasury` | the EVENTS pools are **WIRING-UNRESOLVED**, not the block's five `elders` recency pools |
+| F-72 | `DS-GEN-9` | *"{settlement}'s rolls changed by {band} at {event}"* | `:5653` | `census` | same |
+| F-73 | `DS-GEN-9` | *"{settlement}'s rolls carry names that were struck and restored"* | `:5660` | `census` — a NAME-level claim | same |
+| F-74 | `DS-GEN-10` | *"{settlement}'s year, as the books have it"* | `:5709` | `treasury` | `SOURCE-UNRESOLVED` (a PDF slice key) |
+| F-75 | `DS-GEN-12` | *"the books are written at the working end"* | `:5883` | `treasury` / `office` | holder **`road`**, standing LICENSED — a licensed holder, and the sentence cites a DIFFERENT one |
+| F-76 | `DS-POP-3` | *"the roll and the approaches agree with one another"* | `:6048` | `census` | `readings.populationTrend.band` → kind `""` |
+| F-77 | `DS-POP-3` | *"more people here than the older rolls describe"* | `:6049` | `census` | same |
+| F-78 | `DS-POP-3` | *"the roll rises"* | `:6055` | `census` | same |
+| F-79 | `DS-POP-3` | *"{settlement}'s roll holds where it is"* | `:6058` | `census` | same |
+| F-80 | `DS-POP-3` | *"the roll falls beside them"* | `:6062` | `census` | same |
+| F-81 | `DS-GEN-16` | *"{settlement}'s books record no disaster worth the word"* | `:6132` | `office` — negated | `SOURCE-UNRESOLVED` |
+| F-82 | `DS-GEN-18` | *"the building stands, the skill remains, and the books wait"* | `:6248` | `treasury` / `office` | holder **`market`**, standing LICENSED — again a licensed holder and a different one cited |
+| F-83 | `DS-GEN-3` | *"The watch's returns at {settlement} are short"* | `:5340` | `watch` | = F-12 |
+
+**Two of the 35 are the interesting ones.** F-75 (`DS-GEN-12`) and F-82 (`DS-GEN-18`) sit on pools whose holder **does** resolve at `standing: LICENSED` — `road` and `market` — and both cite *the books*, which is the `office`/`treasury` record, not theirs. They are not "a record word with no record"; they are **a record word naming the WRONG organ on a read that licensed a different one**. That is rule 2's exact failure mode (noun layer right, noun REFERENT wrong) and the only instance of it this desk carries.
+
+### 8.3 THE QUESTION §8 PUTS TO THE CHAIR (not decided here)
+
+Is *the rolls* on a `populationTrend` read (a) an unlicensed HOLDER-ORGAN citation, refused by rule 1 exactly as *the watch's book* is, or (b) a licensed METONYM for the read itself — the population record as a figure of speech for the population, naming no keeper? The engine gives an argument for each:
+
+- **for (a):** `sourceOfRow` refuses a citation at every standing but LICENSED (`holderTable.js:563-570`), and the card prints the refusal in words. Nothing distinguishes *"the rolls are short"* from *"the watch's book is thick"* at the card's grain — both name a record on a pool the card marks SOURCE-UNRESOLVED.
+- **for (b):** the `census` kind's own `dutyNamed: 2` (`holderTable.js:293`) and two-institution roster mean that on most towns **there is no keeper to mis-attribute to**, so the word may be doing metonymic and not attributive work. Compare the entailment law's rule 1: a watch keeps watch is definitional; *a town has a population count* is arguably the same class of fact.
+
+⚠ Whichever way the chair rules, **the ruling settles 26 of the desk's rows at once** and it is the single largest rewrite lever the referent law has on this desk. It cannot be left to the drafters: ruled (a), most of DS-POP-1/-2/-3 and four DS-GEN-9 rows lose their `[ledger]` sentence's central noun; ruled (b), the desk keeps them and *the watch's book* still falls, because the watch HAS a keeper (`hasWatch`, a bucket, a kind and a `SECURITY_INSTITUTION_RE` member) and the attribution is therefore live.
+
+---
+
+## 9. THE ENGINE'S OWN REFERENT LAW, ALREADY IN CODE — A PRECEDENT FOR ADDENDUM 11
+
+The strongest support for the drafted law is that `holderTable.js` **already refuses an attribution on exactly rule 3's ground**, in a comment written before the law was drafted:
+
+> ⚠ `Record keeping` IS DELIBERATELY IN NO LIST. It is carried by the Church/Temple, by the Lord's steward and by the Parish churches alike, so it names the parish and the office in one breath; a kind claiming it would claim a holder it cannot tell apart. — `src/domain/prose/holderTable.js:257-259`
+
+That is ADDENDUM 11 rule 3 (SAME WORD, SAME REFERENT; a fused agent asserts a relation no field computes) stated by the engine about its own service vocabulary. **The chair may cite it as engine precedent rather than as a new invention** — which is the difference between a mapping and a rule the owner has to be asked for. It also settles the shape of the §8 question: the engine's instinct where one record word reaches two organs is to **refuse the kind, not to pick one**.
+
+### 9.1 `dutyNamed` — WHICH KINDS THIS ENGINE CAN SAY ARE *FOR* SOMETHING
+
+`dutyNamed` counts the duties the kind's own service vocabulary names (`holderTable.js:249`, the `DUTY_SERVICE_KINDS` note). A face saying what an organ IS FOR is making a duty claim, so a kind at `dutyNamed: 0` has no duty on the record to state.
+
+| kind | `dutyNamed` | `rosterBacked` | file:line | consequence for a face |
+|---|---|---|---|---|
+| `treasury` | 4 | true | `holderTable.js:273-276` | may state what it is for |
+| `parish` | 3 | true | `:297-300` | may |
+| `toll-bar` | 3 | true | `:304-307` | may |
+| `office` | 3 | true | `:357-360` | may — but **no citation** (`standing: OFFICE`) |
+| `census` | 2 | true | `:290-293` | may — unreachable on this desk |
+| `road` | 2 | true | `:350-353` | may; LICENSED on `DS-GEN-12` ×5 |
+| `muster` | 1 | true | `:280-283` | one duty only (*Muster training*) |
+| `elders` | 1 | true | `:332-335` | one (*Record of custom*); LICENSED on `DS-GEN-9` ×5 |
+| **`watch`** | **0** | true | `:318-321` | ⭐ **no duty on the record.** A face saying what the watch is FOR states an unrecorded duty even where the body resolves |
+| **`court`** | **0** | true | `:325-328` | ⭐ same |
+| **`market`** | **0** | true | `:311-314` | ⭐ same; LICENSED on `DS-GEN-18` ×5, so this is live on this desk |
+| `tradition` | 0 | **false** | `:339-342` | nothing anywhere |
+
+⭐ **THE WATCH AT `dutyNamed: 0` IS A SECOND, INDEPENDENT REASON THE WATCH IS UNSAFE ON THIS DESK** — separate from the read-layer argument. Even on a town where `hasWatch` is true and the read is a body read, the table records **zero named duties** for the watch kind, so *"the watch answers what is reported to it"* (F-5) and *"the watch troubles itself with"* (F-6) state a duty the engine does not carry. The always-safe move is the BODY fact (presence) and never the purpose.
+
+---
+
+## 10. THE PACKET'S OWN CORRECTIONS, AND ONE LANE HAZARD
+
+### 10.1 THIRTY-FOUR CITES RE-DERIVED AND CORRECTED IN THIS PASS
+
+Every cite in §§0-7 was re-derived by `grep -n` (not by counting `sed` output, which is what produced the drift). Corrected: `prose-wave-gate.mjs:295`→`:294` (+ the `general` row at `:297`); `corruption.js:662`→`:663`; the `court` field tokens `216/220/221/223`→`215/218/219/221`; the `toll-bar` fields `185/186/187`→`183/184/185`; **the `road` fields `265/266`→`233/234`** (the worst of them); `piety`/`unaffiliated` `227/228`→`226/227`; the `{seat}` register row `:196`→`:194`; `rulingStructure.js` `786/791`→`787/792` and `criminalCaptureState` published at `:797` (not `:755`, which is where it is computed); `supplyChainState.js:487`→`:486`; `institutionRoster.js:38`→`:53`; `generalStateProse.js:1155`→`:1157`; `holderTable.js:682`→`:683`, `:705-706`→`:707`, `:695`→`:707`/`:770`, `:564-567`→`:563-570`; `defenseScoreBands.js:37-38`→`:39`; `wiringCensus.js:1314`→`:1311` for the `law` class; the five `hookEscalation.js` stage strings `395/406/417/418/419`→`396/407/419/420/421`; the clock triggers `487-497`→`484-494` and `521-524`→`519-523`; `RECEIPT_POOLS_DOSSIER_STATE.md:236-241`→`:207`+`:229`.
+
+**Everything else verified EXACT**, including every one of the 30 shipped annex quotes of §5, all 21 `priorityHelpers.js` booleans, all 12 `holderTable.js` kind rows, all 17 `institutionServices.js` rows, all 6 `glyphAssign.js` classes, the 9 `defenseGenerator.js` purse and score lines, and every census figure (193 rows · 119 RESOLVED · 74 WIRING-UNRESOLVED · covert 0 · 23 blocks · the holder-kind distribution), re-measured from `docs/content/wiring-census.json` by an independent script.
+
+### 10.2 ⚠ A LANE HAZARD WORTH THE INDEX
+
+**`grep` returns NOTHING on `scripts/prose-wave-gate.mjs` — silently.** BSD `grep` classifies the file as binary (`file` reports *"a /usr/bin/env node script executable (binary data)"*) and, with `-n`, prints no match and no warning rather than the usual *"Binary file … matches"*. A lane that greps that file for `--section`, `SECTION_LEAVES` or a block prefix concludes the handling does not exist. **`grep -a` is required on it.** This packet's earlier draft took the empty result at face value and mis-cited the desk key to a line that does exist but says something else. The same class will bite any lane reading that gate.
