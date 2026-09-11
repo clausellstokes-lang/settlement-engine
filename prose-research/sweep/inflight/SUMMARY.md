@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-11 06:11:35 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-11 06:17:35 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -17,6 +17,7 @@
 | ? | other |  | in-flight | 0 | — | — | 09:36:53 |
 | ? | other |  | in-flight | 0 | _partA.md, _partB.md | — | 09:36:53 |
 | ? | other |  | result | 0 | _partC.md, _partD.md, _partE.md, _partF.md, _partG.md | — | 10:02:59 |
+| ? | other |  | in-flight | 0 | — | — | 10:17:29 |
 | ? | other |  | result | 0 | — | — | 09:30:09 |
 | ? | other |  | result | 0 | refute-cure-round-1.md | — | 09:32:57 |
 | ? | other |  | result | 0 | refute-cure-round-2-fable.md | — | 10:00:45 |
@@ -25,7 +26,7 @@
 | ? | other |  | result | 0 | — | — | 09:47:00 |
 | ? | other |  | result | 0 | — | — | 09:47:35 |
 | ? | other |  | result | 0 | refute-cure-1-fable.md | — | 09:32:14 |
-| ? | other |  | in-flight | 0 | — | — | 10:08:40 |
+| ? | other |  | result | 0 | JUDGMENT-cure.md | — | 10:12:41 |
 | ? | other |  | result | 0 | refute-cure-round-1.md | — | 09:33:00 |
 | ? | other |  | result | 0 | — | — | 10:01:29 |
 | ? | other |  | result | 0 | — | — | 09:45:59 |
