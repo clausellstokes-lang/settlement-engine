@@ -1,6 +1,6 @@
-# LANE-STATUS — written 2026-09-11 15:20:47 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-11 15:26:33 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
-product claude/composite-r4 = f73bdbf16 · ledger = d7f4c6b0e §919: the REWRITE train's first car lands — the index-stable draw signed (59.61 % of ce
+product claude/composite-r4 = f73bdbf16 · ledger = 33db59adb §919.1: THE OPUS CHAIR MANUAL — the procedures, the architecture of a block run, the la
 
 ## BUILD / KIT LANES (dock · base · cars · porcelain · receipt)
 - **REWRITE 8b DS-DEF-11 (the validation block; cure round)** dock `laneRW-DEF11` HEAD 5cfc02000 · 14 cars over f73bdbf16 · porcelain 0 · last commits:
@@ -355,4 +355,4 @@ json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
     - `ad30ac0bb` FOLDER · DONE · transcript 09-11 06:02 1531 KB · 36 tool calls · files: _partD.md, _partE.md, _partF.md, _partG.md · result: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/entailment/ENTAILMENT-TABLE.draft.md
 
 ## PROCESSES: 57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 3.32 2.50 2.36
+load: 2.39 2.27 2.29
