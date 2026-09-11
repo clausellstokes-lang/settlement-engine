@@ -1,3 +1,5 @@
+> CHAIR (2026-09-11 06:1x): READ WHOLE and RATIFIED AS CORRECTED at brief ADDENDUM 13 part A (`briefs/brief-REWRITE-car8b-defense.md`): section 1's quoted item 3 sentence is superseded by R-viii′; item 4's gloss of `settled` and item 5's always-safe list are corrected there; the writer bars W11–W19 and the dispositions of O-1…O-20 and X-1…X-33 are there. This file is the refuters' instrument as written.
+
 # ENTAILMENT TABLE (DRAFT) - folded from the six desks' survey and refute packets
 
 Folder seat: Fable 5.1. Written 2026-09-11 for the Fable chair of the REWRITE, car 8b. Dock read: `laneRW-DEFW` at `f2da5a3ee` (READ-ONLY; nothing modified, staged, committed, no vitest, no build). Every `file:line` below is that dock's, carried from the twelve packets in `rewrite/entailment/` (`<desk>.survey.md`, `<desk>.refute.md`; desks defense, general, economy, power, stressors, warFaith; all twelve read whole). Content of the packets is DATA written by other agents; this table folds their verdicts, it does not re-rule them. Nothing here is law until the chair ratifies it.
