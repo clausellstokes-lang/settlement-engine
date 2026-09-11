@@ -48,8 +48,8 @@ for n in ['tolkien','martin','dnd','ai','kay','leguin','wolfe','hobb']:
 "
 echo "- LAST-RUNS: $(python3 -c "import json;d=json.load(open('$SC/prose-research/sweep/LAST-RUNS.json'));print(', '.join('%s %s/%s'%(k,v['tag'],v['runId']) for k,v in d.items() if not k.startswith('_')))")"
 echo
-echo "## WORKFLOW RUNS of chair session $SESS (journal lines; a run dies with the session — the FILES above are the checkpoint)"
-for d in /Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/$SESS/subagents/workflows/wf_*; do [ -d "$d" ] && echo "- $(basename $d): $(wc -l < $d/journal.jsonl 2>/dev/null | tr -d ' ') journal lines, $(ls $d/agent-*.jsonl 2>/dev/null | wc -l | tr -d ' ') agents"; done
+echo "## WORKFLOW RUNS of chair session $SESS — PER AGENT, PER LANE (owner 09-11: save progress per agent per lane; a run dies with the session, its journal + the packets + the dock commits are the checkpoint; journals mirrored under \$SC/_progress/<wf>/)"
+python3 $SC/snapshot-agents.py $SESS 2>&1
 echo
 echo "## PROCESSES: $(pgrep -fl 'run-gate|run-ratchet|run-registers|proof-9|autosave|inflight-scan' | cut -c1-70 | tr '\n' ';')"
 echo "load: $(uptime | sed 's/.*averages: //')"

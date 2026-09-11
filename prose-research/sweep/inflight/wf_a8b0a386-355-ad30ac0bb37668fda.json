@@ -1,0 +1,21 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 96,
+ "firstTs": "2026-09-11T09:36:53.890Z",
+ "lastTs": "2026-09-11T09:38:47.333Z",
+ "tools": {
+  "Bash": 4,
+  "Read": 23
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "",
+ "run": "wf_a8b0a386-355",
+ "agent": "ad30ac0bb37668fda",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/4ed79a2b-6cd2-45cf-ab97-83cdad49c30b/subagents/workflows/wf_a8b0a386-355/agent-ad30ac0bb37668fda.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}

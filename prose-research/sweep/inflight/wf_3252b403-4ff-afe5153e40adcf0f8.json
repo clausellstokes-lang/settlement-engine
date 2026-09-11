@@ -1,0 +1,20 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 148,
+ "firstTs": "2026-09-11T09:36:54.052Z",
+ "lastTs": "2026-09-11T09:41:30.941Z",
+ "tools": {
+  "Bash": 39
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "Rich findings. Let me check how visibility is actually typed — `isCovertPath` and the `dm-only` mark.",
+ "run": "wf_3252b403-4ff",
+ "agent": "afe5153e40adcf0f8",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/4ed79a2b-6cd2-45cf-ab97-83cdad49c30b/subagents/workflows/wf_3252b403-4ff/agent-afe5153e40adcf0f8.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}
