@@ -1,0 +1,21 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 84,
+ "firstTs": "2026-09-11T20:12:23.136Z",
+ "lastTs": "2026-09-11T20:13:57.011Z",
+ "tools": {
+  "Bash": 9,
+  "Read": 15
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "Packet dir has only `skeleton.md` — no prior draft, so this is a fresh start. Reading the skeleton and the voice documents.",
+ "run": "wf_b9aa5993-4a0",
+ "agent": "a4e5e0276a02893ab",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/4ed79a2b-6cd2-45cf-ab97-83cdad49c30b/subagents/workflows/wf_b9aa5993-4a0/agent-a4e5e0276a02893ab.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}
