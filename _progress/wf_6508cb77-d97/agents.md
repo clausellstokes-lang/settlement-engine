@@ -1,4 +1,4 @@
-# wf_6508cb77-d97 — per-agent progress, 2026-09-11 07:08:53
+# wf_6508cb77-d97 — per-agent progress, 2026-09-11 07:14:37
     - `a87757ba9` REFUTER defense · FAILED · transcript 09-11 06:25 526 KB · 21 tool calls
     - `a29122cfc` REFUTER general · FAILED · transcript 09-11 06:25 509 KB · 22 tool calls · files: general.referent.refute.md
     - `ace38485c` REFUTER economy · FAILED · transcript 09-11 06:26 613 KB · 47 tool calls · files: $SC/rewrite/entailment/economy.referent.refute.md
