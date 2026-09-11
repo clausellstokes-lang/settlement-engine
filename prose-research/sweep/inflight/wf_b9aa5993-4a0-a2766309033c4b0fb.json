@@ -1,0 +1,20 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 95,
+ "firstTs": "2026-09-11T21:12:03.003Z",
+ "lastTs": "2026-09-11T21:14:53.256Z",
+ "tools": {
+  "Bash": 24
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "Let me read the MOVE-GRAMMAR and CLERK-LAWS sections the brief names.",
+ "run": "wf_b9aa5993-4a0",
+ "agent": "a2766309033c4b0fb",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/4ed79a2b-6cd2-45cf-ab97-83cdad49c30b/subagents/workflows/wf_b9aa5993-4a0/agent-a2766309033c4b0fb.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}

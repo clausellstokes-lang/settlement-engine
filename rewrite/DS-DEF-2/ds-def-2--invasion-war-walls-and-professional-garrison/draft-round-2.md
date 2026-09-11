@@ -100,3 +100,27 @@ Every face carries the SAME claim set, so arm A6 reads across the faces and find
 - **The thread (R-i, §1.4.1):** each two-sentence face carries a NOUN forward from its first sentence ("its works … those works"; "the works standing … with the works"); every one-sentence face hands the works or the soldiers forward for the modifiers that may follow, and none closes on an abstraction.
 - **Hard walls, all twelve faces:** no em dash, no exclamation, no digit, no `which`-clause, no question, no first or second person, no figure, no sense verb on an abstraction, no intent for an inanimate or collective thing, no future indicative, no totality over persons, no belief frame, no count of men, no season or duration, no cause, no badge or posture word, no pay, wages, upkeep or keeping word for the military gate (DS-DEF-11's cell), no strength or thinning of the force (DS-DEF-5's cell), no siege, raid, assault, attempt, attacker or stores (W17; the Disasters row's cell), no material or material source (W11).
 - **The same page (C7, A1/A11):** the Beasts rows on this tab name the same two bodies and spell the wall read "the works" ("the works stand at the town", "the works standing"); this pool spells it the same way, as the referent law's rule 3 requires, and contradicts neither. Nothing here touches pay or morale (the Economic Survival row), the stores (the Disasters row), or the court and the gaol (Internal Security). The sibling row `walls with citizen militia` states a part-time force; this pool is silent on the militia and so cannot contradict it.
+
+## 5. Refusals
+
+**None.** All three variants were made lawful under the card, the two ratified tables and the bars W1–W27; no variant is banked as a refusal row, and no face was written that a law refuses. Round 2 adds no refusal and withdraws none: the two cured faces were lawful in claim before the cure and are lawful in claim after it, and the cure was to a soft rule's depth, never to a wall.
+
+Three fences the skeleton left open are recorded here as taken, not decided (carried forward from round 1, unchanged):
+1. **The force's name (skeleton fence 1, open row 1).** `the garrison` is refused in every face because the key also fires on `Barracks` towns where no `Garrison` row resolves (W12). If CAR 8b-W-2 mints a derived force-name fill from the resolved garrison-bucket row, a face may take the specific noun through the fill and nothing else in this pool moves.
+2. **"professional(s)" (skeleton fence 3).** Not used. If the chair rules the label's own adjective lawful at its ENGINE meaning, vid 1's shipped "professionals" returns as a candidate face word and nothing else moves.
+3. **The capability joint (skeleton fence 2).** Refused throughout: no face predicates holding, manning, defending or a cost on either body. Only the key's bare conjunction is stated. If the chair rules the capability clause lawful for this block, these faces stay lawful as they stand and a sharper joint becomes available to a refinement round.
+
+## 6. Round 2's own record (for the gate and the sitting)
+
+| | round 1 | round 2 |
+|---|---|---|
+| variants | 3 | 3 (same vids, same order, same angle tags, none added, none removed, none merged) |
+| faces | 12 | 12 |
+| faces changed | — | 2 (vid 1 face b; vid 2 face c) |
+| faces carried byte for byte | — | 10 |
+| `punctuation.colonRate` faces over band | 1 of 12 (depth 6.987) | 0 of 12 |
+| `shapes.participialOpenerRate` faces over band | 1 of 12 (depth 13.62) | 0 of 12 |
+| claims added or dropped | — | none: the claim set of every face is identical to round 1's, and round 1's to the licensed set of its shipped variant |
+| refusals | 0 | 0 |
+
+Both owned failing measures moved; neither cure touched a claim, a slot set, an angle tag, a declared construction, a sentence count or a force spelling. Status: COMPLETE.
