@@ -5977,24 +5977,24 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
    - `[face]` Nothing is owing on {settlement}'s {defwork}, and the country carries danger.
    - `[face]` In dangerous country {settlement} has a {defwork}, and the money for it is found.
    - `[face]` At {settlement} the money for keeping the {defwork} holds, and danger is in the country.
-3. `[visitor]` The {defwork} at {settlement} stands in full keeping, and the country around is dangerous.
+3. `[visitor]` The {defwork} at {settlement} stands with its keeping paid, and the country around is dangerous.
    - `[face]` The country is dangerous. In that country {settlement} is enclosed, and its {defwork} is kept at full cost.
-   - `[face]` Outside {settlement} the country holds danger, and the {defwork} is kept and paid for.
+   - `[face]` Kept at the whole of its upkeep, the {defwork} at {settlement} stands, and danger holds in the country.
    - `[face]` Danger is live in the country, and the {defwork} at {settlement} is kept up in full.
 
 **`WALLED-QUIET`**
 1. `[visitor]` {settlement} keeps a {defwork} and lets nothing of its keeping go; the country carries no live threat.
    - `[face]` The country about {settlement} is quiet. The town's {defwork} stands, and its keeping is not let fall.
    - `[face]` With no live threat in the country round {settlement}, the {defwork} the town keeps up stands.
-   - `[face]` The town of {settlement} has a {defwork} standing and its keeping met, and the country shows no live threat.
+   - `[face]` A {defwork} kept up at {settlement} stands, and the country shows no live threat.
 2. `[elder]` The {defwork} stands, its keeping paid in full, and the country holds nothing live against {settlement}.
    - `[face]` The upkeep of the {defwork} at {settlement} is met, and the {defwork} stands. Round the town the country is clear of live threat.
    - `[face]` Nothing in the country is live against {settlement}, and the {defwork} stands with no part of its keeping unpaid.
    - `[face]` The country the town sits in is quiet, and the {defwork} of {settlement}, its upkeep met, is standing.
 3. `[ledger]` The town's {defwork} stands entered on the roll, its upkeep paid whole, and the country is without live threat.
-   - `[face]` On the roll the {defwork} is carried standing, and no live threat stands in the country. The {defwork}'s upkeep is met in full.
+   - `[face]` On the roll the {defwork} is entered as standing, and the country is free of live threat. The {defwork}'s upkeep is met in full.
    - `[face]` No live threat is abroad in the country, and the {defwork} is entered on the roll standing, its keeping met.
-   - `[face]` A {defwork} is set down on the roll as standing, its upkeep paid, and the country is quiet.
+   - `[face]` The country is quiet, and the {defwork}'s upkeep is paid. The {defwork} is set down on the roll as standing.
 
 **`WALLED-STRAINED`**
 1. `[ledger]` The town of {settlement} holds a {defwork}; its muster's wage is not made up to the roll.
@@ -6004,7 +6004,7 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
 2. `[unfolding]` The {defwork} at {settlement} stands, and the muster's wage lies open on the roll.
    - `[face]` A {defwork} is in place at {settlement}, and the pay of the town's muster is short.
    - `[face]` At {settlement} a {defwork} is up. The upkeep of the town's muster stands open.
-   - `[face]` No wage keeps the {defwork} at {settlement} standing, and the muster's wages go unmet.
+   - `[face]` A {defwork} at {settlement} is the town's, and the shortfall bears alike on its keeping and on the muster's wages.
 
 **`UNWALLED-SMALL`**
 1. `[street]` {settlement} is village size or under, and no wall closes the place.

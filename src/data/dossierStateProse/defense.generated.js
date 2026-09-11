@@ -5275,7 +5275,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "The {defwork} at {settlement} stands in full keeping, and the country around is dangerous.",
+          "text": "The {defwork} at {settlement} stands with its keeping paid, and the country around is dangerous.",
           "slots": [
             "defwork",
             "settlement"
@@ -5283,7 +5283,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "vid": 3,
           "wordings": [
             "The country is dangerous. In that country {settlement} is enclosed, and its {defwork} is kept at full cost.",
-            "Outside {settlement} the country holds danger, and the {defwork} is kept and paid for.",
+            "Kept at the whole of its upkeep, the {defwork} at {settlement} stands, and danger holds in the country.",
             "Danger is live in the country, and the {defwork} at {settlement} is kept up in full."
           ]
         }
@@ -5300,7 +5300,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "wordings": [
             "The country about {settlement} is quiet. The town's {defwork} stands, and its keeping is not let fall.",
             "With no live threat in the country round {settlement}, the {defwork} the town keeps up stands.",
-            "The town of {settlement} has a {defwork} standing and its keeping met, and the country shows no live threat."
+            "A {defwork} kept up at {settlement} stands, and the country shows no live threat."
           ]
         },
         {
@@ -5325,9 +5325,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           ],
           "vid": 3,
           "wordings": [
-            "On the roll the {defwork} is carried standing, and no live threat stands in the country. The {defwork}'s upkeep is met in full.",
+            "On the roll the {defwork} is entered as standing, and the country is free of live threat. The {defwork}'s upkeep is met in full.",
             "No live threat is abroad in the country, and the {defwork} is entered on the roll standing, its keeping met.",
-            "A {defwork} is set down on the roll as standing, its upkeep paid, and the country is quiet."
+            "The country is quiet, and the {defwork}'s upkeep is paid. The {defwork} is set down on the roll as standing."
           ]
         }
       ],
@@ -5357,7 +5357,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "wordings": [
             "A {defwork} is in place at {settlement}, and the pay of the town's muster is short.",
             "At {settlement} a {defwork} is up. The upkeep of the town's muster stands open.",
-            "No wage keeps the {defwork} at {settlement} standing, and the muster's wages go unmet."
+            "A {defwork} at {settlement} is the town's, and the shortfall bears alike on its keeping and on the muster's wages."
           ]
         }
       ],
