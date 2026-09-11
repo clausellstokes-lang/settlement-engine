@@ -2,7 +2,7 @@
 
 Seat: Opus 5 (Fable-unvalidated), writer for the Fable chair · block DS-DEF-2 · role SPINE · 3 variants in, 3 variants out, 12 faces (4 per variant: the numbered row plus three `[face]` sub-rows).
 Paste the block below under the pool's bold heading, in place of the pool's three existing numbered rows. The typed lines (ROLE / READS / RELATION / ATTACH / FORM / MOVE) are untouched and are not repeated here.
-Status: IN PROGRESS — variants 1 to 3 written; the notes are being written.
+Status: COMPLETE — three variants rewritten in place, twelve faces, zero refusals.
 
 1. `[ledger]` The works at {settlement} are entered as standing, and so are the soldiers.
    - `[face]` Soldiers are carried standing at {settlement}, and with them the works the town has built.
@@ -15,7 +15,7 @@ Status: IN PROGRESS — variants 1 to 3 written; the notes are being written.
 3. `[street]` The town has the works, and with the works it has soldiers.
    - `[face]` Soldiers are in the town, and the works stand with them.
    - `[face]` The town keeps its works. With those works stands the town's force.
-   - `[face]` What the town has standing is the works, and the muster besides.
+   - `[face]` What the town has is the works, and the muster besides.
 
 --- NOTES
 
@@ -45,3 +45,49 @@ All three variants realise **V1 PRESENT** (skeleton §8: the only level-1 member
 - KEPT (licensed): only the frame `The town` as the street's subject (the town is the holder of its own roster, and "the town has / keeps …" states the presence read in the naming form).
 - DROPPED: *believes* — a belief frame and a fused collective agent (R-DA-13's executable floor; W22, W23; D-F16/D-F18 by shape). *could be held* — a manning and a hypothetical outcome (A-24/W17). *founded on something* — a cause, and the hedged non-statement standing in for the two bodies (fault 29; R-DA-13's vague-authority floor). *rather than on hope* — a contrast whose rejected alternative names no sibling key or band, and a feeling (R-DA-02; the FEELING non-move).
 - This variant's floor RISES: the shipped line names NEITHER read, and every face here states both at the street's stance. No face carries `{settlement}` — the parent's slot set is empty (ARCH §2.5).
+
+## 2. Per face: which card clause licenses each claim
+
+Every face carries the SAME claim set, so arm A6 reads across the faces and finds them claim-equal: (i) the works stand — the card's `may claim`, the `walls === true` half of the predicate, layer BODY; (ii) the soldiers stand — the card's `may claim`, the `garrison === true` half, layer BODY; (iii) the two on one row — the key's own conjunction (`invasionRowSituation` returns this row only when both are true), never a relation, a holding or a cause. The table names the words that carry each half and the stance word that carries the angle. `{settlement}` appears exactly once in every face of vids 1 and 2 and in no face of vid 3, matching each parent's slot set (ARCH §2.5).
+
+| vid · face | words | the works half (card `may claim`, `walls`) | the force half (card `may claim`, `garrison`) | the conjunction | the angle's own carrier | slots |
+|---|---|---|---|---|---|---|
+| 1 · row | 13 | "The works at {settlement}" | "the soldiers" | "and so are" (both entered on one row) | "are entered as standing" — the office's formula, R-vi/W7; no record noun, no citation (W24) | `{settlement}` |
+| 1 · a | 15 | "the works the town has built" | "Soldiers" | "with them" (the skeleton's blessed conjunction phrase, order inverted) | "are carried standing" — the office's formula | `{settlement}` |
+| 1 · b | 15 | "the works" | "the town's muster" | "entered together" plus the colon pair | "Two things are entered" — the formula; the count is in WORDS and is a count of the key's own two reads, never over persons (R-DA-16) | `{settlement}` |
+| 1 · c | 15 | "the town's works" | "the town's force" | "Both … and …" | "are set down … as standing" — the formula, third spelling | `{settlement}` |
+| 2 · row | 11 | "the works" | "the soldiers" | "together" — the shipped word, kept verbatim | "A stranger at {settlement} sees" — the eye, which may see and nothing else (W27) | `{settlement}` |
+| 2 · a | 15 | "the works" (echoed for the thread) | "the soldiers" | "with the works" | "What a stranger sees at {settlement} is" — the eye in a cleft | `{settlement}` |
+| 2 · b | 16 | "the works the town has built" | "the town's force" | "both … and …" | "a stranger sees" | `{settlement}` |
+| 2 · c | 16 | "the works standing" | "the town's muster" | "Standing with them" | "A stranger reaches {settlement} and finds" — arrival, the visitor's own frame; two sentences, the second carrying "standing" and "them" forward (R-i, the thread at k = 0) | `{settlement}` |
+| 3 · row | 12 | "the works" | "soldiers" | "with the works" | "The town has …" — the street's subject stating its own standing plainly | none |
+| 3 · a | 11 | "the works" | "Soldiers" | "stand with them" | two short copular clauses, the street's idiom | none |
+| 3 · b | 12 | "its works" / "those works" | "the town's force" | "With those works stands" | "The town keeps its works" — the naming form the taste kept; two sentences, the second carrying "works" forward (R-i) | none |
+| 3 · c | 11 | "the works" | "the muster" | "besides" | "What the town has is" — the street's cleft | none |
+
+**Provenance: ZERO citations in twelve faces.** The card prints `source: muster · standing LICENSED`, but the holder resolves `null` on this row (a garrison town has men under arms and no roll of them, OV-5), none of S3's three reasons is present (no two accounts, no interested count, no keeper who is a power), and the `[ledger]` angle is a STANDPOINT that licenses no record noun (W24). So no face says "the roll", "the books", "the record shows", or "according to" (W7, R-vi; §24's ceiling is a ceiling, and the exemplars with raw text cite at zero per 786 sentences).
+
+## 3. The pool's walls, checked face by face
+
+- **Both reads in every face, with the conjunction** — no face is an inventory line; no face states one body alone (ADDENDUM 7 rule 3, the skeleton's density floor).
+- **One force object per face** (`objectClass force`): `the soldiers` · `Soldiers` · `the town's muster` · `the town's force` · `the muster`, never two spellings in one face.
+- **Silence on a militia** in all twelve faces: neither asserted nor denied (the reader never consults `militia` on this branch).
+- **The four faces of a variant differ in CONSTRUCTION**, not vocabulary alone (W4, ADDENDUM 7 rule 4): vid 1 runs works-first coordinate · soldiers-first with inversion · an enumerated colon pair · a `Both … and …` coordination under one predicate; vid 2 runs the plain seeing sentence · a cleft · a `both … and …` inside the seeing frame · a two-sentence arrival with an inverted second; vid 3 runs the have-frame · two short copular clauses · a two-sentence keep-frame with an inverted second · a cleft.
+- **A11 spread:** the three variants' first two words are "The works" · "A stranger" · "The town" — no two alike, and none is the settlement token.
+- **T-F8:** no face opens on `{settlement}`; the two faces that begin with "At {settlement}" open on the capital "At", not on the slot.
+- **Sentence counts:** vid 1 four one-sentence faces; vid 2 three of one and one of two; vid 3 three of one and one of two.
+- **Closes, varied in kind and never a verdict:** a body ("the soldiers", "the town's muster", "the town's force", "the muster"), an object ("the works", "what the town has built"), a condition ("as standing"). No face closes on a rating, a maxim, a hook or a cause. One face closes on a pronoun ("with them", vid 3 face a) and it is a sub-face, never the spine's own row, since a modifier may follow the row (R-DA-04's pronoun-closer ceiling; k = 2).
+- **The thread (R-i, §1.4.1):** each two-sentence face carries a noun forward from its first sentence ("the works … those works"; "standing … Standing with them"); every one-sentence face hands the works or the soldiers forward for the modifiers that may follow, and none closes on an abstraction.
+- **Hard walls, all twelve faces:** no em dash, no exclamation, no digit, no `which`-clause, no question, no first or second person, no figure, no sense verb on an abstraction, no intent for an inanimate or collective thing, no future indicative, no totality over persons, no belief frame, no count of men, no season or duration, no cause, no badge or posture word, no pay, wages, upkeep or keeping word for the military gate (DS-DEF-11's cell), no strength or thinning of the force (DS-DEF-5's cell), no siege, raid, assault, attempt, attacker or stores (W17; the Disasters row's cell), no material or material source (W11).
+- **The same page (C7, A1/A11):** the Beasts rows on this tab name the same two bodies; this pool spells them "the works" and "the soldiers", which is what those rows can also spell them, and contradicts neither. Nothing here touches pay or morale (the Economic Survival row) or the stores (the Disasters row) or the court and the gaol (Internal Security).
+
+## 4. Refusals
+
+**None.** All three variants were made lawful under the card, the two ratified tables and the bars W1–W27; no variant is banked as a refusal row, and no face was written that a law refuses.
+
+Two fences the skeleton left open are recorded here as taken, not decided:
+1. **The force's name (skeleton fence 1, open row 1).** `the garrison` is refused in every face because the key also fires on `Barracks` towns where no `Garrison` row resolves (W12). If CAR 8b-W-2 mints a derived force-name fill from the resolved garrison-bucket row, a face may take the specific noun through the fill and nothing else in this pool moves.
+2. **"professional(s)" (skeleton fence 3).** Not used. If the chair rules the label's own adjective lawful at its ENGINE meaning, vid 1's shipped "professionals" returns as a candidate face word and nothing else moves.
+3. **The capability joint (skeleton fence 2).** Refused throughout: no face predicates holding, manning, defending or a cost on either body. Only the key's bare conjunction is stated. If the chair rules the capability clause lawful for this block, these faces stay lawful as they stand and a sharper joint becomes available to a refinement round.
+
+Status: COMPLETE — three variants, twelve faces, notes and refusals all written.
