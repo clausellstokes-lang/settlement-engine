@@ -9,6 +9,7 @@ import json, sys, os, re, subprocess
 J, LA, DOCK, OUT = sys.argv[1:5]
 RUNID = sys.argv[5] if len(sys.argv) > 5 else os.path.basename(os.path.dirname(J))
 la = json.load(open(LA)); BLOCK = la['block']; POOLS = la['pools']; DIRS = [p['dir'] for p in POOLS]
+PRIOR = la.get('resume') if isinstance(la.get('resume'), dict) else {}  # a run launched FROM a resume: its supplied phases left no journal results, so seed from them
 SC = os.path.dirname(os.path.dirname(os.path.abspath(LA))) if os.path.basename(os.path.dirname(os.path.abspath(LA))) == 'rewrite' else None
 PK = os.path.join(os.path.dirname(os.path.abspath(LA)), BLOCK)
 warn = []
@@ -68,6 +69,8 @@ for r in res:
 # --- MARK ---
 markedDirs = [m['dir'].rstrip('/').split('/')[-1] for m in marks]
 markedDirs = [d for d in markedDirs if d in DIRS and os.path.exists(os.path.join(PK, d, 'skeleton.md'))]
+for d in (PRIOR.get('markedDirs') or []):
+    if d in DIRS and d not in markedDirs and os.path.exists(os.path.join(PK, d, 'skeleton.md')): markedDirs.append(d)
 # --- DRAFT state replay (the script's own rules) ---
 state = {d: {'inBand': False, 'dry': 0, 'banked': False, 'rounds': 0, 'feedback': ''} for d in DIRS}
 def feedback_of(v):
@@ -126,6 +129,23 @@ if judge and isinstance(judge.get('cureTargets'), list):
                            [dict(variant=v['variant'], face=v['face'], quote=v.get('quote', ''), finding='NEW after the cure: ' + v.get('finding', '') + ' [' + v.get('law', '') + ']', cure=v.get('cure', '')) for v in x['newFindings']]
         cureCommits.append(g['commit']); cureRoundsDone = rnd
     cureOpen = openm
+# seed from the prior resume object where this run's journal shows nothing for a phase
+if PRIOR:
+    if not dgates and PRIOR.get('draftRoundsDone'):
+        draftRoundsDone = max(draftRoundsDone, int(PRIOR['draftRoundsDone'])); draftCommit = draftCommit or PRIOR.get('draftCommit')
+        if PRIOR.get('draftState'):
+            for d, st in PRIOR['draftState'].items():
+                if d in state: state[d].update({k: st.get(k, state[d][k]) for k in ('inBand', 'dry', 'banked', 'rounds', 'feedback')})
+    refineCommit = refineCommit or PRIOR.get('refineCommit')
+    prior_ref = {r['dir']: r for r in (PRIOR.get('refutes') or []) if isinstance(r, dict) and 'dir' in r}
+    have = set(r['dir'].rstrip('/').split('/')[-1] for r in refutes)
+    for d, r in prior_ref.items():
+        if d not in have: refutes.append(r)
+    judge = judge or PRIOR.get('judge'); applied = applied or PRIOR.get('applied')
+    if not cgates and PRIOR.get('cureRoundsDone'):
+        cureRoundsDone = int(PRIOR['cureRoundsDone']); cureCommits = list(PRIOR.get('cureCommits') or []); cureOpen = PRIOR.get('cureOpen')
+    judgeCure = judgeCure or PRIOR.get('judgeCure'); appliedCure = appliedCure or PRIOR.get('appliedCure')
+    warn.append('seeded from the prior resume object in ' + os.path.basename(LA) + ' (markedDirs ' + str(len(PRIOR.get('markedDirs') or [])) + ')')
 out = dict(la)
 out['resume'] = {
     'fromRunId': RUNID,

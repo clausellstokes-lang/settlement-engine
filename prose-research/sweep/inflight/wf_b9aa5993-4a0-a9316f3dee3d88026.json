@@ -1,0 +1,21 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 97,
+ "firstTs": "2026-09-11T19:28:11.123Z",
+ "lastTs": "2026-09-11T19:32:07.539Z",
+ "tools": {
+  "Bash": 14,
+  "Read": 10
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "All voice documents read. Now continuing the packet from where it stopped — variant 1 first, on disk immediately.",
+ "run": "wf_b9aa5993-4a0",
+ "agent": "a9316f3dee3d88026",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/4ed79a2b-6cd2-45cf-ab97-83cdad49c30b/subagents/workflows/wf_b9aa5993-4a0/agent-a9316f3dee3d88026.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}

@@ -2,7 +2,7 @@
 
 Seat: Fable 5.1 — marker for the REWRITE, working for the Fable chair. This file is the only thing this seat wrote. Everything below is judged against the printed licence card, the census row it was printed from, the reader function the card names and the producer behind it, the annex block's header lines, the register card (with S2 and S3), Part B §1 and §16 to §24, MOVE-GRAMMAR §1 to §3, §1.4.1 and §4.4.1 to §4.4.3, CLERK-LAWS §2.4.1 and §2.6.1, ARCH v2 §2.5 and §8.3, brief ADDENDUM 13 parts A and B (the entailment law, the referent law, the writer bars W11 to W27), the two ratified tables' rows that name this pool or its arm, and `rewrite/rulings-DEF2.txt`; where a shipped clause reads well but no field licenses it, it is UNLICENSED here and the law is named.
 
-Status: IN PROGRESS — section 0 written; variants 1 to 3, section 8 and section 9 follow (the checkpoint law: this file is rewritten section by section as the work lands).
+Status: IN PROGRESS — section 0 and VARIANT 1 written; variants 2 and 3, section 8 and section 9 follow (the checkpoint law: this file is rewritten section by section as the work lands).
 
 ## 0. THE CARD, THE KEY, THE ONE READ AND ITS LAYER (what the faces are wired to)
 
