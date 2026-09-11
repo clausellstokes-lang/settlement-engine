@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-11 10:51:39 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-11 10:57:23 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = d7f4c6b0e §919: the REWRITE train's first car lands — the index-stable draw signed (59.61 % of ce
 
@@ -227,7 +227,7 @@ json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
 - LAST-RUNS: tolkien r7-not-launched/(none — nothingToRun 17:26), kay r8/wf_d76e605d-6d1, leguin r11/wf_49ef9b66-2e6, wolfe r8/wf_8cd21474-a7b, martin r8/wf_0cd91522-1ce, hobb r7/wf_255b6391-7fb, dnd r13/wf_2c525e43-1f2, ai r12/wf_6dd3b009-2b0, dnd_r13 r13/wf_2c525e43-1f2, leguin_r11 r11/wf_49ef9b66-2e6, dnd_r14 r14/
 
 ## WORKFLOW RUNS of chair session 4ed79a2b-6cd2-45cf-ab97-83cdad49c30b — PER AGENT, PER LANE (owner 09-11: save progress per agent per lane; a run dies with the session, its journal + the packets + the dock commits are the checkpoint; journals mirrored under $SC/_progress/<wf>/)
-- **wf_6508cb77-d97** (mtime 09-11 10:20): agent calls 14 (7 distinct) · DONE 6 · FAILED 7 · RETRIED (superseded attempts) 7 · IN FLIGHT -6 — mirror `_progress/wf_6508cb77-d97/`
+- **wf_6508cb77-d97** (mtime 09-11 10:52): agent calls 15 (7 distinct) · DONE 6 · FAILED 7 · RETRIED (superseded attempts) 8 · IN FLIGHT -6 — mirror `_progress/wf_6508cb77-d97/`
     - `a87757ba9` REFUTER defense · FAILED · transcript 09-11 06:25 526 KB · 21 tool calls
     - `a29122cfc` REFUTER general · FAILED · transcript 09-11 06:25 509 KB · 22 tool calls · files: general.referent.refute.md
     - `ace38485c` REFUTER economy · FAILED · transcript 09-11 06:26 613 KB · 47 tool calls · files: $SC/rewrite/entailment/economy.referent.refute.md
@@ -241,7 +241,8 @@ json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
     - `a6f370189` REFUTER power · DONE · transcript 09-11 10:17 783 KB · 40 tool calls · files: $SC/rewrite/entailment/power.referent.refute.md, power.referent.refute.md · result: {"desk": "power", "packet": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/entailment
     - `a48868e85` REFUTER stressors · DONE · transcript 09-11 10:19 886 KB · 38 tool calls · files: $SC/rewrite/entailment/_stressors_survey_tail.tmp.md, $SC/rewrite/entailment/stressors.referent.refute.md, $SC/rewrite/entailment/_stressors_annex.tmp.md, stressors.referent.refute.md · result: {"desk": "stressors (DS-STR-1 \u00b7 DS-STR-2 \u00b7 DS-CND-1)", "packet": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-
     - `a89e0af42` REFUTER warFaith · DONE · transcript 09-11 10:18 975 KB · 40 tool calls · files: warFaith.referent.refute.md · result: {"desk": "warFaith", "packet": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/entailm
-    - `a579b1c41` FOLDER · IN FLIGHT · transcript 09-11 10:47 1362 KB · 29 tool calls · files: $SC/rewrite/entailment/_addendum11.verbatim.md, $SC/rewrite/entailment/_addendum13.verbatim.md, .referent.survey.md, .referent.refute.md · last: Bash SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
+    - `a579b1c41` FOLDER · RETRIED (a later attempt on the same key runs) · transcript 09-11 10:52 1362 KB · 29 tool calls · files: $SC/rewrite/entailment/_addendum11.verbatim.md, $SC/rewrite/entailment/_addendum13.verbatim.md, .referent.survey.md, .referent.refute.md
+    - `a69ec97ae` FOLDER · IN FLIGHT · transcript 09-11 10:54 593 KB · 26 tool calls · last: Bash D=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratc
 - **wf_abaf2de0-b00** (mtime 09-11 06:12): agent calls 22 (19 distinct) · DONE 19 · FAILED 0 · RETRIED (superseded attempts) 3 · IN FLIGHT 0 — mirror `_progress/wf_abaf2de0-b00/`
     - `acb131a55` GATE r1 · DONE · transcript 09-11 05:24 559 KB · 56 tool calls · files: x.txt, msg.txt, (git commit) · result: {"commit": "32634b8004831321c2d0b5985766cb8f0ae78590", "pools": [{"dir": "ds-def-11--walled-threatened", "applied": true, "inBand": true, "failing": [], "refusa
     - `af97f6e2b` REFUTER WALLED-THREATENED r1 · DONE · transcript 09-11 05:32 611 KB · 19 tool calls · files: refute-cure-round-1.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-11/ds-def-11--walled-th
@@ -284,4 +285,4 @@ json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
     - `ad30ac0bb` FOLDER · DONE · transcript 09-11 06:02 1531 KB · 36 tool calls · files: _partD.md, _partE.md, _partF.md, _partG.md · result: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/entailment/ENTAILMENT-TABLE.draft.md
 
 ## PROCESSES: 57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 3.27 3.48 2.75
+load: 2.08 2.53 2.55

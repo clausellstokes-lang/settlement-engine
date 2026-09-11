@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-11 10:52:04 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-11 10:56:04 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -15,6 +15,7 @@
 | ? | other |  | in-flight | 0 | — | — | 09:36:54 |
 | ? | other |  | in-flight | 0 | — | — | 09:36:54 |
 | ? | other |  | in-flight | 0 | — | — | 09:36:53 |
+| ? | other |  | in-flight | 0 | — | — | 14:54:47 |
 | ? | other |  | failed | 0 | — | — | 10:25:02 |
 | ? | other |  | result | 0 | stressors.referent.refute.md | — | 14:19:37 |
 | ? | other |  | result | 0 | — | — | 14:19:35 |
@@ -27,7 +28,7 @@
 | ? | other |  | result | 0 | warFaith.referent.refute.md | — | 14:18:26 |
 | ? | other |  | failed | 0 | — | — | 10:25:06 |
 | ? | other |  | result | 0 | — | — | 14:20:27 |
-| ? | other |  | in-flight | 0 | — | — | 14:47:32 |
+| ? | other |  | in-flight | 0 | — | — | 14:52:21 |
 | ? | other |  | failed | 0 | — | — | 10:26:25 |
 | ? | other |  | in-flight | 0 | _partA.md, _partB.md | — | 09:36:53 |
 | ? | other |  | result | 0 | _partC.md, _partD.md, _partE.md, _partF.md, _partG.md | — | 10:02:59 |
