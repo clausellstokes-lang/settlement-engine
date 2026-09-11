@@ -1,4 +1,4 @@
-# wf_6508cb77-d97 — per-agent progress, 2026-09-11 10:40:16
+# wf_6508cb77-d97 — per-agent progress, 2026-09-11 10:45:59
     - `a87757ba9` REFUTER defense · FAILED · transcript 09-11 06:25 526 KB · 21 tool calls
     - `a29122cfc` REFUTER general · FAILED · transcript 09-11 06:25 509 KB · 22 tool calls · files: general.referent.refute.md
     - `ace38485c` REFUTER economy · FAILED · transcript 09-11 06:26 613 KB · 47 tool calls · files: $SC/rewrite/entailment/economy.referent.refute.md
@@ -12,4 +12,4 @@
     - `a6f370189` REFUTER power · DONE · transcript 09-11 10:17 783 KB · 40 tool calls · files: $SC/rewrite/entailment/power.referent.refute.md, power.referent.refute.md · result: {"desk": "power", "packet": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/entailment
     - `a48868e85` REFUTER stressors · DONE · transcript 09-11 10:19 886 KB · 38 tool calls · files: $SC/rewrite/entailment/_stressors_survey_tail.tmp.md, $SC/rewrite/entailment/stressors.referent.refute.md, $SC/rewrite/entailment/_stressors_annex.tmp.md, stressors.referent.refute.md · result: {"desk": "stressors (DS-STR-1 \u00b7 DS-STR-2 \u00b7 DS-CND-1)", "packet": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-
     - `a89e0af42` REFUTER warFaith · DONE · transcript 09-11 10:18 975 KB · 40 tool calls · files: warFaith.referent.refute.md · result: {"desk": "warFaith", "packet": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/entailm
-    - `a579b1c41` FOLDER · IN FLIGHT · transcript 09-11 10:38 1241 KB · 27 tool calls · files: $SC/rewrite/entailment/_addendum11.verbatim.md, $SC/rewrite/entailment/_addendum13.verbatim.md, .referent.survey.md, .referent.refute.md · last: Bash SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
+    - `a579b1c41` FOLDER · IN FLIGHT · transcript 09-11 10:43 1305 KB · 28 tool calls · files: $SC/rewrite/entailment/_addendum11.verbatim.md, $SC/rewrite/entailment/_addendum13.verbatim.md, .referent.survey.md, .referent.refute.md · last: Bash SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
