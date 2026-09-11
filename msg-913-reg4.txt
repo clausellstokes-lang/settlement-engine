@@ -1,0 +1,7 @@
+§913 L-MAT landing (register car 4, second pass): writer-reach re-takes its provenance at the car-12 tip; no other register moved
+
+The second register pass at the seventeen-car tip (registers-913b.log, after car 12 e47974d84 rewrote three why-strings in densityCreateBoundary.js without their em dashes): the lighting census untouched and its plain walker green (no test file moved; titles 23707, files 2545 as frozen at 62f201796); the OSR plain read exact with 0 drift lines and no write; the mounts door unchanged (changed: []); prose-numerics 225 exact, nothing re-keyed and nothing relocated; the tuning walker plain green; writer-reach's dry run HOLD with no refusal and its --write moved frozenAtSha alone (62f201796 -> e47974d84) — a provenance refresh; cohort 1322 -> 1322, 0 stale folded out, 0 registered rows lit; no scan statistic moved (three punctuation marks changed inside strings, no file added).
+
+Seat: Fable 5.1 — validated
+
+Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>

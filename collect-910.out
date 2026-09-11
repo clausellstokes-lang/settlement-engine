@@ -1,0 +1,21 @@
+LEDGER_TIP_BEFORE=921bb9a8f96aeb077921c61ab83981f76cee2fc8
+  seal OK · product OK at 3b1c0eaa5
+EDIT_OK ledger +14021 B, card +3511 B, frq +1031 B
+--- C0 scan ---
+docs/OWNER_DECISION_QUEUE.md:0
+docs/HANDOFF_CURRENT.md:0
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/queue-910.md:0
+  ledger and queue are PURE APPENDS
+LEDGER COMMIT: 29a4ff20decab4d3c2f827ab6b9d3ca036febbbf
+COMMIT_OK
+--- READ-BACK AT 29a4ff20d ---
+29a4ff20d §910: the soak receipt ships its per-year series and the capacity rows become fully executable — SOAK-HONEST-909 lands as nine cars over 6ebe0ef3b: the series additive on v5 (the schema bump withdrawn on measurement), dotted-path requires with the walker reading the observer, capacity_envelope_30y armed (roster 12/10), seven negatives anchored, the weak zero's last two floors closed
+
+ docs/FABLE_RETROVALIDATION_QUEUE.md | 4 ++++
+ docs/HANDOFF_CURRENT.md             | 8 +++++++-
+ docs/OWNER_DECISION_QUEUE.md        | 3 +++
+ 3 files changed, 14 insertions(+), 1 deletion(-)
+  ODQ §910 rows: 1
+  FRQ R-rows: 73  (new R-rows: 73)
+  seat trailer Fable (must be 1): 1
+COLLECT_910_OK tip=29a4ff20d

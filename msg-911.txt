@@ -1,0 +1,11 @@
+§911: the horizon is measured — CAP-HORIZON-909 lands with zero product bytes at 3b1c0eaa5: the 600-year lit run discharges §910's D1 (capacity_plateau executed and fired on a shipped series), the fixture settles into the realm-load window on this seed, §907's 0.4787 is a seed fact (a second seed reads 0.6443 at year 300 under byte-identical src), SOAK-1 is re-priced at ≈ 4.0–4.9 h, and a six-lens skeptic pass corrected the receipt in thirty-two places before the ledger took it
+
+The lane (Opus, laneB6, 08:35 → 10:21) took three detached runs through the exclusive mutex, all TRUE_EXIT=0, and moved no product byte. The skeptic pass wf_7afed34c-ef0 (six Opus lenses + a fold, read-only) is the chair's re-derivation: 33 items, 12 confirmed, 16 partly, 2 refuted, 3 untested. Every figure in the row is the fold's. The corrections that matter: the second seed's 300-year rate double-counted the run's overhead (0.8051 → 0.7818), so the price band is ≈ 4.0–4.9 h; the settlement term rests on two seeds, not one; the design's ≈ 17.6 h was a measurement at b66e9551 (the pre-demographics world) and the new band is the extrapolation, with a 13× per-settlement-year disagreement left UNTESTED; the world is inside the window from year 1 with nine excursions, not three.
+
+Rulings (vetoable): §907 (c) closed — no re-cut, no tuning, a seed-and-trajectory fact; the freeze's evidence should carry more than one seed (NEW owner row CAP-11); the plateau WINDOW is the chair's and capacity_plateau is aligned to the register's definition as a zero-tuning instrument car (CAP-WINDOW-911, after L-MAT), the 0.05 band stays owner-signed; SOAK-1 re-priced, manual, after the walk, CAP-10 reopened; E1 and E2 priced, not chartered. docs/DESIGN_HORIZON.md amended in place on its three price lines (CHAIR-AMENDED §911).
+
+Enrols: R74 — lane CAP-HORIZON-909 (zero cars; receipt receipt-cap-horizon-909; the skeptic pass wf_7afed34c-ef0, skeptic-911/FOLD.md)
+
+Seat: Fable 5.1 — validated
+
+Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>

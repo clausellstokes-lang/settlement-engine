@@ -1,0 +1,147 @@
+{
+  "label": "tolkien-plain",
+  "files": [
+    "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/prose-research/primary/raw/tolkien_plain.txt"
+  ],
+  "paragraphs": 23,
+  "sentences": 200,
+  "wordsPerSentence": {
+    "mean": 22.5,
+    "sd": 15.4,
+    "p10": 6,
+    "p50": 20,
+    "p90": 43,
+    "shareUnder8": 0.145,
+    "shareOver30": 0.27,
+    "neighbourVariation": 0.733
+  },
+  "sentencesPerParagraph": 8.7,
+  "punctuation": {
+    "semicolonRate": 0.06,
+    "colonRate": 0.125,
+    "emDashRate": 0.015,
+    "questionRate": 0.055,
+    "exclamationRate": 0.065,
+    "parenthesisRate": 0.245
+  },
+  "shapes": {
+    "antithesisRate": 0.03,
+    "triadRate": 0.125,
+    "participialOpenerRate": 0.005,
+    "whichTailRate": 0.01,
+    "doubledAdjectiveRate": 0.045,
+    "adverbsPerSentence": 0.325,
+    "thereIsOpenerRate": 0.02,
+    "dialogueShare": 0
+  },
+  "closers": {
+    "abstractNounRate": 0.045,
+    "pronounRate": 0.07,
+    "topClosers": [
+      [
+        "",
+        11
+      ],
+      [
+        "us",
+        4
+      ],
+      [
+        "it",
+        3
+      ],
+      [
+        "guardian",
+        3
+      ],
+      [
+        "me",
+        3
+      ],
+      [
+        "heart",
+        2
+      ],
+      [
+        "do",
+        2
+      ],
+      [
+        "soon",
+        2
+      ],
+      [
+        "not",
+        2
+      ],
+      [
+        "others",
+        2
+      ],
+      [
+        "lover",
+        2
+      ],
+      [
+        "college",
+        2
+      ]
+    ]
+  },
+  "openers": {
+    "topOpeners": [
+      [
+        "i",
+        43
+      ],
+      [
+        "the",
+        12
+      ],
+      [
+        "but",
+        12
+      ],
+      [
+        "we",
+        12
+      ],
+      [
+        "and",
+        7
+      ],
+      [
+        "they",
+        7
+      ],
+      [
+        "it",
+        6
+      ],
+      [
+        "on",
+        4
+      ],
+      [
+        "all",
+        3
+      ],
+      [
+        "so",
+        3
+      ],
+      [
+        "in",
+        3
+      ],
+      [
+        "a",
+        3
+      ]
+    ],
+    "sameOpenerAsPreviousRate": 0.065
+  },
+  "runsOfThreeSameLengthBand": 0.155,
+  "presence": null,
+  "presenceReason": "the raw exemplar text is GONE from this machine — the `files` array points into the dead scratchpad d5b9a39f and 1 of 1 basename(s) do not resolve under primary/raw. Re-obtaining the text is an owner act (cost and IP); the three §13.2 lines are NULL rather than fabricated."
+}

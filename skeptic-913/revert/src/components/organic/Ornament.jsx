@@ -1,0 +1,65 @@
+import { emblem, emblemForKind, cartouche, cartoucheDeviceLayout, compassRose } from '../../design/organic/ornament/compose.js';
+
+/**
+ * components/organic/Ornament — the seeded-ornament React surface (law §5).
+ *
+ * Thin wrappers over the pure SVG builders (design/organic/ornament/compose.js).
+ * The SVG is always decorative (aria-hidden, non-interactive); anything a reader
+ * must perceive — a settlement's NAME inside a cartouche — is real HTML the caller
+ * passes as children (the decorative/functional split), so it stays in the
+ * accessibility tree and the reading order.
+ */
+
+/** A single house emblem. Pass `kind` for the meaning-bearing mark, or `seed`
+ *  for a seeded choice. */
+export function Emblem({ kind, seed, mode = 'light', size = 48 }) {
+  const svg = kind ? emblemForKind(kind, { seed, mode, size }) : emblem(seed ?? 'emblem', { mode, size });
+  return <span className="oc-ornament" aria-hidden="true" dangerouslySetInnerHTML={{ __html: svg }} />;
+}
+
+/** THE house compass rose — the one canonical signature. */
+export function CompassRose({ mode = 'light', size = 64 }) {
+  return <span className="oc-ornament" aria-hidden="true" dangerouslySetInnerHTML={{ __html: compassRose({ mode, size }) }} />;
+}
+
+/**
+ * SeededCartouche — a rare, meaningful nameplate framing its children. The frame
+ * is seeded, decorative SVG behind the content; the children (the NAME) are HTML
+ * on top, centred, and remain the accessible label. Parametric size.
+ */
+export function SeededCartouche({ seed, mode = 'light', width = 320, height = 96, children }) {
+  const svg = cartouche(seed, { mode, width, height });
+  // Responsive: cap at the intrinsic width but shrink to fit a narrow pane, holding
+  // the aspect ratio (so the field-mode dossier survives a 320px reflow). The frame
+  // SVG scales via its viewBox; the label overlays.
+  //
+  // OPTICAL PADDING (review revision): the label's clearances derive from the SAME
+  // cartoucheDeviceLayout the composer draws with — past the medallion's right
+  // edge + gutter on the left, and a mirrored gutter + the frame's inner detail
+  // (~12px) on the right — expressed as PERCENTAGES of the intrinsic size so they
+  // scale with the responsive plate. Title size is container-scaled in organic.css
+  // (.oc-cartouche is an inline-size container), so the name never crowds the
+  // frame at any width.
+  const dev = cartoucheDeviceLayout(height);
+  const padLeftPct = ((dev.endX + dev.gutter) / width) * 100;
+  const padRightPct = ((dev.gutter + 12) / width) * 100;
+  const pad = (n) => `${Math.round(n * 100) / 100}%`;
+  return (
+    <span className="oc-cartouche" style={{ position: 'relative', display: 'block', width: `${width}px`, maxWidth: '100%', aspectRatio: `${width} / ${height}` }}>
+      <span
+        className="oc-cartouche__frame oc-ornament"
+        aria-hidden="true"
+        style={{ position: 'absolute', inset: 0 }}
+        dangerouslySetInnerHTML={{ __html: svg }}
+      />
+      <span
+        className="oc-cartouche__label"
+        style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: `0 ${pad(padRightPct)} 0 ${pad(padLeftPct)}`, boxSizing: 'border-box', overflow: 'hidden' }}
+      >
+        {children}
+      </span>
+    </span>
+  );
+}
+
+export default Emblem;

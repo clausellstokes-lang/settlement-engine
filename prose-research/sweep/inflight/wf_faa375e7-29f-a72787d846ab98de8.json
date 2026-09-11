@@ -1,0 +1,25 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 113,
+ "firstTs": "2026-09-07T11:54:38.918Z",
+ "lastTs": "2026-09-07T12:08:17.479Z",
+ "tools": {
+  "Bash": 13,
+  "Read": 12,
+  "Write": 1,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [],
+ "filesWritten": [
+  "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/best-martin.md"
+ ],
+ "lastAssistantText": "Quotes verified verbatim against their cited rows; zero em dashes; max quote length eleven words.",
+ "run": "wf_faa375e7-29f",
+ "agent": "a72787d846ab98de8",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/b43943b4-3b40-4fd9-bc63-9b9c9afb55b4/subagents/workflows/wf_faa375e7-29f/agent-a72787d846ab98de8.jsonl",
+ "journal": "result",
+ "checkpointFile": null
+}

@@ -1,0 +1,3154 @@
+
+Fourth Edition Improved D&D Design For Good, But One of Its Innovations Still Leads to Bad Adventures | DMDavid
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+	 
+		 	 
+	 
+ 
+ 
+	
+		
+			
+DMDavid
+			
+Dungeons & Dragons design, advice, tools and inspiration
+		
+		
+			
+Menu
+			
+Skip to content
+			
+Home
+Start Here
+Character Builds
+Dungeon Masters Tools
+Dungeon Tiles
+Poster Maps
+About
+		
+				
+			
+	
+	
+		
+			
+				
+	
+				
+			
+						
+Fourth Edition Improved D&D Design For Good, But One of Its Innovations Still Leads to Bad Adventures
+										
+					
+26 Replies
+				
+					
+				
+			
+Some gamers say that ability checks make D&D 
+less
+ fun. These fans of an older style of 
+Dungeons & Dragons
+ prefer a game where instead of rolling perception to spot a trap door, characters tap the floor with their 10-foot pole. I like that style of play just fine, but I like ability checks too. Making a successful check gives me fleeting satisfaction. Checks give a clearer way of deciding success than the method 
+Gary Gygax
+ used in 1974. (He estimated the odds and improvised a roll.) Plus, rolled checks add a random element that can bring surprises, especially to DMs who call for a check despite being unprepared for failure.
+Still, ability checks lack enough entertainment value to carry a D&D game. I know because lately I’ve played too many published and organized play adventures that leaned hard on ability checks for any amusement. I would share examples, but I’ve forgotten them.
+Adventure designers hoping to plan fun D&D sessions sometimes string ability checks together into encounters, 
+travel sequences
+, and even adventures, but those batches of ability checks just turn into forgettable games. I understand the temptation that leads to a reliance on ability checks. Dreaming up obstacles that characters can overcome with checks seems effortless. Traveling through the woods? How about a survival check. Talking to the innkeeper? Give me a diplomacy check. I could do this all day, and my game session only lasts a few hours. Inventing challenges that players need to overcome with their own ingenuity proves much more work. Besides, we DMs would all rather focus on the story behind challenges.
+The fun of D&D comes from immersing in the role of a character, and from making decisions and seeing the results in the game world. But ability checks tend to eliminate the players’ decisions from the game. So one of the dungeon’s diabolical challenges just becomes a Wisdom (Perception) check followed by an Dexterity check. The 
+Dungeon Master’s Guide
+ explains, “Roleplaying can diminish if players feel that their die rolls, rather than their decisions and characterizations, always determine success.” Ability checks challenge characters while leaving players idle. “Today we’re playing 
+White Plume Mountain
+. Everyone roll an ability check and tell me how your success helped the party win one of the three magic weapons.”
+Some roleplaying games feature rules that make checks reveal character. Such mechanics allow talented experts to flaunt their skills, but in D&D, the d20 tends to make skilled, talented characters seem 
+inconsistent or inept
+. A single d20 yields numbers like 1 and 20 as frequently as middle numbers, so D&D tests rolled on a d20 often result in the extreme numbers that cause experts to botch checks and the untrained and untalented to luck into success. In D&D worlds, the mighty barbarian fails to open a pickle jar, and then hands it to the pencil-necked wizard who easily opens the lid. (For help making the most of swingy d20 tests, see
+How to Turn D&D’s Swingy d20 Checks Into a Feature That Can Improve Your Game
+.)
+The joy of the d20 comes from how the die delivers extreme swings that can add surprising twists to a game session. This merit also means that game challenges built around bunches of skill checks play like a series of coin flips.
+The most engaging adventures challenge players to
+interact with non-player characters to find the keys to winning their help
+figure out mysteries, puzzles, and objects with unknown functions
+deduce the best ways to bypass the traps that stand in the way
+choose from options that offer a mix of risks and rewards
+Adventure designers don’t deserve the blame for thinking ability checks can sustain a fun adventure. The fault lies with fourth edition and its skill challenges.
+Ability checks entered 
+Dungeons & Dragons
+ 6 years after the game’s debut, and then checks took twenty more years to become a core mechanic. See (
+Ability Checks—From the Worst Mechanic in Role-Playing Game History to a Foundation Of D&D
+.) Even when third edition settled on a core d20 check mechanic, adventures rarely made batches of checks into a focus until fourth edition and its skill challenges reached gamers.
+Skill challenges satisfied three design goals.
+To give the non-combat parts of the game the same mechanical rigor as the fights. This helped refute the notion that all the rules for combat proved D&D was just a game about fighting. Plus the designers felt that if they “made things as procedural as possible, people would just follow the rules and have fun regardless of who they played with.” (See 
+How Years of Trying to Fix Obnoxious People Shrank D&D’s Appeal
+.)
+To make the DM’s role undemanding. Casual DMs could simply buy an adventure, read the boxed text, and then run a sequence of skill challenges and combat encounters. In a skill challenge, the DM just had to decide if a skill helped the players—but only when the challenge’s description neglected to list a skill in advance.
+To avoid frustrating players who struggled to overcome an obstacle. Without checks, D&D challenges could sometimes lead to players becoming stuck, especially if a DM focused on one “correct” action required to overcome an obstacle. Fourth edition attempted to eliminate such frustrations by emphasizing skill checks and skill challenges over concrete obstacles and over players’ problem solving skills.
+None of these goals aimed to add fun for the players, although players who dislike puzzles may approve of the third benefit. 
+Tip:
+ If players dislike brain teasers, skip those challenges or let stuck players make Intelligence rolls for hints. If everyone rolls, 
+someone virtually always succeeds
+.
+Ability checks aren’t much fun. I enjoyed fourth and as the designers say without fourth there would never be a fifth, but its skill challenges created the myth that a series of ability checks offer enough fun to sustain a game, and that myth has led to some dull games.
+When the game emphasizes character skill, the players never need to make meaningful decisions or engage the game world. They just look at their character sheet for the best applicable skill. I suppose this improves on playing guess-the-solution-I-thought-of with an inflexible DM, but picking a skill and rolling is much less fun than D&D can be.
+Related:
+ My account of the story of fourth edition starts with 
+The Threat that Nearly Killed Dungeons & Dragons—Twice
+.
+D&D and the Role of the Die Roll, a Love Letter
+The skill challenge: good intentions, half baked
+Player skill without player frustration
+Share this:
+Tweet
+				
+Email a link to a friend (Opens in new window)
+				
+Email
+			
+					
+		
+		
+			This entry was posted in 
+Advice
+, 
+Role-playing game design
+ and tagged 
+ability checks
+, 
+d20
+, 
+skill challenges
+ on 
+February 14, 2023
+ by 
+David Hartlage
+.								
+	
+				
+					
+Post navigation
+					
+←
+ Drop Everything and Play in My Winter Fantasy 2023 Game!
+					
+Simple Builds That Make Multi-Level Battles Extraordinary 
+→
+				
+				
+	
+			
+			26 thoughts on “
+Fourth Edition Improved D&D Design For Good, But One of Its Innovations Still Leads to Bad Adventures
+”		
+		
+					
+		
+			
+				
+Adam
+ 
+February 14, 2023 at 8:37 am
+				
+				
+				
+				
+				
+So what do you recommend instead?
+								
+				
+				
+Reply
+ 
+↓
+				
+			
+				
+		
+		
+			
+				
+Anthony
+ 
+February 14, 2023 at 6:41 pm
+				
+				
+				
+				
+				
+I use checks to give players the benefit of time. For instance, a thief that makes a skill check opens a lock fast enough to avoid a wandering monster check. Otherwise, they could open the lock without a roll given enough time, but depending on the complexity of the lock, it might take so much time that there’s one or more wandering monster checks.
+								
+				
+				
+Reply
+ 
+↓
+				
+			
+				
+		
+		
+			
+				
+Glyn Harrison
+ 
+February 14, 2023 at 9:10 am
+				
+				
+				
+				
+				
+I like to use skill checks for 2 reasons:
+1. Call for a roll: To indicate that the players actions have the possibility to change something (if not, there is no roll)
+2. To adjudicate a declared action (only if there is uncertainty of success or failure): to find out if it succeeds.
+Both ways work on a meta level where the DC gives a clue to how close the player is getting to finding a working solution to the ‘problem’ at hand.
+								
+				
+				
+Reply
+ 
+↓
+				
+			
+				
+		
+		
+			
+				
+Creeper Jr.
+ 
+February 14, 2023 at 9:35 am
+				
+				
+				
+				
+				
+I think an iteration of 4th Ed Skill Challenges could be really useful and fun (or, if not fun, reduce frustration to allow for other fun things). I modified them when I ran 4th Ed games (and continued to sue them in 5th) and I find them useful for non-combat “set-piece” situations. I tried to never use the phrase “Skill Challenge” and that helped a lot. 
+The main problem with 4th ed skill challenges IMHO is that there was so much suggested by the rules, that a lot of DMs locked in on only the skills listed instead of the underlying progression described or implied by the challenge text.
+ Additionally, I think they are bad for tables that revert to “I roll a Religion check. What did it do?” instead of “I think back to my time in the temple to recall what I know of this symbol”. A lot of new DMs running published adventures tend to let their tables develop as the first type. (And if everyone is having fun, that’s cool. But Skill Challenges probably aren’t the best for that group). If you are running the second type of table, having some structure can be helpful in juggling a complex situation.
+								
+				
+				
+Reply
+ 
+↓
+				
+			
+				
+		
+		
+			
+				
+Marty
+ 
+February 15, 2023 at 10:55 am
+				
+				
+				
+				
+				
+I agree… and to add to this, I think this was a problem before 4th Editon. 4e just amplified the issue that already existed.
+5th Edition still suffers from the “I roll a check – what happens?” problem.
+The rules don’t do a good job in explaining how a skill check should work in play. 
+Since 3rd Edition player say this in most situations:
+“Can I use ?” instead of “My character looks at  to see if I can…”
+Players are centering the skills on the character sheet, not the action in play. 
+Tell the DM what your character is DOING not what skill check you want to roll.
+								
+				
+				
+Reply
+ 
+↓
+				
+			
+				
+		
+		
+			
+				
+Marty
+ 
+February 15, 2023 at 10:59 am
+				
+				
+				
+				
+				
+Ack — comment broke on my example
+“Can I use [skill name]?” as opposed to “My character does [this action].”
+								
+				
+				
+Reply
+ 
+↓
+				
+			
+				
+		
+		
+			
+				
+Frederick Coen
+ 
+February 15, 2023 at 3:12 pm
+				
+				
+				
+				
+				
+This is *usually* how my game goes.  PC: “Can I climb that cliff and fight at the top?”  DM: “Probably.  Gimme an Athletics check; beat the DC by 5, and you can have one attack at the top.”    Or, PC: “I’m on watch while we travel.  My familiar is out scouting, and I occasionally drop back behind to see if we are followed.”  DM: “Okay, you don’t spot any followers [there’s an ambush ahead, but he specifically said he was *following*], but go ahead and roll a Perception check for the hawk…”
+								
+				
+				
+Reply
+ 
+↓
+				
+			
+				
+		
+		
+			
+				
+Peter Towers
+ 
+February 14, 2023 at 10:18 am
+				
+				
+				
+				
+				
+Ugh people should write their age for these kinda articles. Figuring this guy is around 30 so he would not have been around for Gygaxian style.  RPing the game today is just story time and skill checks.  Back in the day it was imagination. Way better.  Your not immersed if your just reading a character sheet because your not imagining it’s you in that position you know it’s your character. If you don’t get it it cause you never played when DND was good. And I play 5e but just because apparently old DND is too complicated… People need to be told what they can.and cannot do otherwise they do nothing. Ridiculous
+								
+				
+				
+Reply
+ 
+↓
+				
+			
+				
+		
+		
+			
+				
+Creeper Jr.
+ 
+February 14, 2023 at 12:02 pm
+				
+				
+				
+				
+				
+And get off my lawn!!!
+In reality, D&D before 3rd edition and D&D after 3rd edition are completely different games. I agree that the earlier flavors of D&D allow for much more immersion and imagination. That said, it’s WAY more enjoyable to play with a poor/inexperienced DM in the newer editions.
+								
+				
+				
+Reply
+ 
+↓
+				
+			
+				
+		
+		
+			
+				
+alphastream
+ 
+February 14, 2023 at 5:06 pm
+				
+				
+				
+				
+				
+You are very wrong about the author’s age.
+								
+				
+				
+Reply
+ 
+↓
+				
+			
+				
+		
+		
+			
+				
+Joe
+ 
+March 7, 2023 at 3:19 am
+				
+				
+				
+				
+				
+Dude, are you serious? Have you even looked at DM David’s About Me?
+https://dmdavid.com/about/
+								
+				
+				
+Reply
+ 
+↓
+				
+			
+				
+		
+		
+			
+				
+Frederick Coen
+ 
+February 14, 2023 at 10:23 am
+				
+				
+				
+				
+				
+Dang, that was spot-on, David.  I think I have been leaning a little too heavily on the die roll.  I do try – as Creeper Jr. says – to only give rolls when the player frames the reason why they should give a roll.  But a lot of my sessions are perception checks, survival checks while traveling, stealth checks to sneak, athletics checks to climb… dreaded charisma checks to accomplish social things.
+Partly, though, this trend – at least for my table – has been exacerbated by COVID and playing remote.  It’s hard for someone to grab the mike (so to speak) to roleplay that interaction with the guard, or for the group to brainstorm a solution to a puzzle.
+								
+				
+				
+Reply
+ 
+↓
+				
+			
+				
+		
+		
+			
+				
+Creeper Jr.
+ 
+February 14, 2023 at 12:06 pm
+				
+				
+				
+				
+				
+Don’t feel bad if your games go that way – 5E really pushes the game in that direction. Really 3rd and everything since do it.  The character sheet is full of cool things that your character can do – just roll a d20. After a few sessions, it’s easy to forgo the imaginative aspects of the game and shortcut to the mechanics in front of you. I’m guilty of it and have to constantly wrestle the game away from that.
+								
+				
+				
+Reply
+ 
+↓
+				
+			
+				
+		
+		
+			
+				
+Justin Leow
+ 
+February 14, 2023 at 10:52 am
+				
+				
+				
+				
+				
+I’d like to offer a more comprehensive review on what makes ability checks fun, and how skill challenges can be run in a fun way. 
+David is absolutely right in that just the act alone of rolling a d20 isn’t inherently fun. Ergo, stringing along a series of ability checks and calling it a skill challenge isn’t inherently fun either. But that’s needlessly deconstructive and also not an entirely accurate description of what an ability check or skill challenge really is.
+So what actually is an ability check? It involves rolling a d20 yes, but it’s not just about rolling a piece of plastic and telling you whether or not you succeed. Because when you roll a d20, you don’t just see the final result. No, that’s not what makes it fun, and if that’s the end of it, then yeah it wouldn’t be fun. 
+No, when you make an ability check, on top of rolling a d20, you also add a bunch of modifiers on top of it. What’s the purpose of these modifiers? They’re a reflection of all the accomplishments and decisions you’ve made up till this point. You sum up the cultural factors, the ancestral factors, the amount of training you have in that particular activity, any magical bonuses that might aid you, and also any circumstantial benefits that might arise from the specific approach that you’ve taken to fulfill that activity. 
+Summing up all of these factors, seeing the mechanical impact of your past decisions, is *fun*. More often than not, you also have the ability to affect your odds of success by changing your approach, changing your loadout, activating magic items, and so on, and the act of discussing with your group and making choices to increase your odds of success is itself engaging and fun. 
+All of these factors boil to a crescendo when you make the dice roll and resolve the question of whether or not you succeeded, but the fun isn’t found in the dice roll – it’s to be found in everything you’ve done that has led up to it. 
+So yeah. Ability checks are an inherently fun way to resolve uncertainty. If they weren’t, the designers wouldn’t have added it to the game. But care must be taken to prevent unfun situations from unintentionally arising. For example, if you know it would be unfun if players fail to unlock a locked door and get stuck for minutes trying to figure out how to bypass and watching their characters flounder in failure, then skip the check and let them succeed automatically. 
+*If players get bored because of an ability check, the ability check isn’t the problem. The problem is the GM calling for the wrong tool for the job.*
+In the same way, skill challenges are also a tool for the GM. But they’re a scalpel, not a blunt instrument. They need to be used carefully and tuned precisely for the exact narrative scenario they’re meant to portray. 4e did a bad job by trying to cram everything outside of combat into a skill challenge, without teaching GMs how to use the tool properly.
+Here’s how you run a skill challenge properly. First you determine a precise, specific obstacle that the PCs need to resolve. PCs work together to resolve it, just like any other task outside of combat. If they succeed, you move on to the next obstacle, and then the next, until you run out of obstacles and the skill challenge is complete.
+What happens if they fail? Well, that’s up to the specific context of what that obstacle is. It’s possible that you immediately kick them out of the skill challenge and present them with an immediate consequence for failure. It’s also possible that you let them succeed at a cost, moving onto the next obstacle, but keeping track of how many failures they accumulated. It can also just be something as simple as taking some damage and moving on.
+You rinse and repeat until all the obstacles are completed, and then resolve any final consequences that ought to happen. 
+If that sounds like an ordinary session of out-of-combat exploration in D&D, then you’d be correct. Because it should be. 
+All a skill challenge really means, is that while it’s in progress, the players take a backseat to their agency, and are *reactive* to incoming obstacles, rather than their usual *proactive* behavior. Instead of making decisions on what to do next, they’re instead making decisions within the restrictions of a specified larger activity – whether that be a chase sequence, an infiltration, a social conversation, and so on. 
+People get so caught up on skill challenges being a series of dice rolls that they fail to realize that thats literally exactly what all of D&D is. It’s printed on a pretty stat block with suggestions on what obstacles there are and what options players can do to resolve it, and all that does is make it easier on the GM to run. 
+At its core, it’s just a series of ability checks. That’s all D&D ever is. And there’s nothing really wrong with that.
+								
+				
+				
+Reply
+ 
+↓
+				
+			
+				
+		
+		
+			
+				
+Fredrick R
+ 
+February 14, 2023 at 11:28 am
+				
+				
+				
+				
+				
+The 2 hit with a d20 roll was solved in Bard Game’s Arcanum game ages ago.
+								
+				
+				
+Reply
+ 
+↓
+				
+			
+				
+		
+		
+			
+				
+backcountry164
+ 
+February 14, 2023 at 12:27 pm
+				
+				
+				
+				
+				
+The obvious flaw with this theory is the fact that entire games are designed around skill checks. I have quite a bit of fun playing CoC.
+ It’s not skill checks that are the problem, it poor implementation. Both by lazy DM’s using them as a crutch and the d20 mechanic in general.
+								
+				
+				
+Reply
+ 
+↓
+				
+			
+				
+		
+		
+			
+				
+Pablo Rojo
+ 
+February 14, 2023 at 5:54 pm
+				
+				
+				
+				
+				
+I’m with you that simple rolling a dice or make skill check isn’t fun, but in my table make a skill check is a consequence of a previous interaction, you can’t simple rolling Diplomacy to convince a pnj to do something without talk with that pnj. You need an argument to convince the pnj and then you roll the ability check. And even if the argument isn’t good enough there’s no check. The same with a trap or a puzzle or obstacle; you first need to interact with it and then perhaps you may roll the dices. It’s just like the Illusion spells. If you ask for a salvation at seeing any illusion there’s no fun at all, but if you need to interact with her and then you think it may be an illusion and finally you roll, for me is the correct way to manage the illusion.
+Regarding Skill Challenges, what is stated in the first paragraph is perfectly applicable. There is no ability roll without a previous action by the characters. At least I did it that way when I was playing 4th edition. Sometimes I wouldn’t even tell the players that there was a skill challenge. I simply presented the situation and waited for their reactions: “the river has started to get rough and the raft you are traveling on is going too fast, if you continue like this you will surely end up crashing into the rocks and sinking”. If a player wanted to steer the raft, then they could roll (for example athletics to take the helm) or if someone was looking for an easier route than another then a Perception check. And so with whatever ability was useful for the situation. And if nobody came up with anything, then the raft crashed and everyone ended up in the water. And that’s it. But I found it funny to know that they needed 6 successes before having 4 failures to be successful and that this encounter would also be worth a certain amount of pxs, in addition to avoiding that the situation depended on a single skill roll. If you also narrated the failures, the tension increased and I think the fun also increased.
+I don’t think ability rolls or Skill Challenges are bad per se, but I think a DM needs to know how to present and narrate them at his table. Perhaps it is true that for those of us who already played in the last century it is easier for us to do it, just as it is also true that the D&D rules do not explain very well how to do it to a novice DM. But, as said above, if CoC is fun to play I don’t think the problem is in the ability checks.
+								
+				
+				
+Reply
+ 
+↓
+				
+			
+				
+		
+		
+			
+				
+Michael Drejer
+ 
+February 15, 2023 at 4:41 am
+				
+				
+				
+				
+				
+I think 5e is actually better for running skill challenges than 4e, because of how 5e allows for more interpretation of actions and skills.
+I’ve run some skill challenges for my group and all were wildly successful. I focused on letting the players come up with crazy ideas and cinematic descriptions first, then deciding which skills/abilities to roll (remember that Tools count as well… one of my players used Weaver’s tool proficiency to shape a Wall of Thorns into a harmless bumper for their astral skiff to safely bump away Modrons that were in the way).
+By allowing the players to go beyond the Rules as Written and instead focus entirely on the Rule of Cool, skill challenges become extremely enjoyable for all at the table.
+								
+				
+				
+Reply
+ 
+↓
+				
+			
+				
+		
+		
+			
+				
+Ian
+ 
+February 15, 2023 at 9:38 am
+				
+				
+				
+				
+				
+I think you’re ignoring the aspect of skill challenges in that they help balance character ability vs player ability. If I have a character with low intelligence and perception, I can use player skill to use a ten foot pole to find the traps my character is too unskilled to find. But not finding those traps is the balance of investing my character’s talents elsewhere. I shouldn’t be able to use player skill to negate all my character’s weaknesses. Some of the roleplaying fun comes from living with your character’s weaknesses and failures and reacting to those in the world.
+								
+				
+				
+Reply
+ 
+↓
+				
+			
+				
+		
+		
+			
+				
+Frederick Coen
+ 
+February 15, 2023 at 3:09 pm
+				
+				
+				
+				
+				
+Ian, this is a good point.  I have definitely known players over the years that give their characters CHA 5, then act like leaders; or INT 6, but still solve puzzles. In the case of the poor CHA, I might call for the roll, but give good ideas and role-playing a bonus.  In the case of the puzzle, I consider the *player’s* contributions part of the genius wizard *character’s* ability [i.e. group puzzle solving, because players also play characters *more* charismatic or intelligent than themselves!]
+								
+				
+				
+Reply
+ 
+↓
+				
+			
+				
+		
+		
+			
+				
+Justin Whelan
+ 
+February 15, 2023 at 4:27 pm
+				
+				
+				
+				
+				
+Interesting and provocative thoughts David! But I’m lft wondering, exactly how is this different to ‘ability checks’ in combat? Why is rolling a d20, adding modifiers and comparing it to a DC (armour class) “fun” when you are swinging a sword, while the exact same process is “unfun” to you when it is an ability check? 
+Put another way, why can’t players just come up with imaginative solutions to overcoming threatening monsters, without rolling swingy dice?
+								
+				
+				
+Reply
+ 
+↓
+				
+			
+				
+		
+		
+			
+				
+backcountry164
+ 
+March 1, 2023 at 12:52 pm
+				
+				
+				
+				
+				
+They can, coming up with clever was to avoid combat has always been a part of the game.
+If you’re talking about after combat has begun, I think the obvious question is, what are the monsters doing?? Are they allowed imaginative solutions also?? How do you resolve the situation when there are two opposing sides??
+								
+				
+				
+Reply
+ 
+↓
+				
+			
+				
+		
+		
+			
+				
+tynam
+ 
+February 16, 2023 at 4:27 pm
+				
+				
+				
+				
+				
+There is a fundamental of GMing at play here:
+Never call for a die roll that you really don’t want the players to fail.
+The key to exciting skill checks is that success and failure should both advance the story… in different ways.  Success should advance to a new challenge by defeating the previous one.  Failure should advance to a new challenge by complicating or making irrelevant the previous one.
+								
+				
+				
+Reply
+ 
+↓
+				
+			
+				
+		
+		
+			
+				
+backcountry164
+ 
+March 1, 2023 at 12:47 pm
+				
+				
+				
+				
+				
+You shouldn’t be “wanting” your players to do anything. If failure isn’t an option, are you really playing a game? No. You’re just telling a story. Despite current beliefs, D&D is still a game.
+								
+				
+				
+Reply
+ 
+↓
+				
+			
+				
+		
+		
+			
+				
+tynam
+ 
+June 19, 2023 at 9:53 am
+				
+				
+				
+				
+				
+You’ve completely missed the point of what I was saying.  Where the hell did you get “failure isn’t an option” from a paragraph in which I listed two options, one of which was failure, along with exactly what the consequence of failure should be?
+My point was _exactly_ that if your game depends on there being a success at a certain point, you shouldn’t be rolling it.  Because that’s not where the interesting decision is, and a game is a series of interesting decisions.  Move the narrative along until you’re at a place where the decisions are.
+(And if you think telling a story prevents D&D from being a game, you need more practice doing both at once.  It’s a _narrative_ game.  Just because game mechanics are a thing doesn’t mean literally every sentence of the story must be subject to being overridden by a skill check.  That’s ludicrous.  Framing the scene is what the DM is there for in the first place.)
+As for “you shouldn’t want your players to do anything”, that’s also nonsense.  I want my players to engage with each other and the story we’re crafting together.  I want players to do things that build on that narrative.  I want players to remain within the context we’ve agreed for play, because otherwise the lack of same page will collapse the game.  Game mechanics are there to give you options for how you do the thing; they won’t solve the question of what thing to do without some actual storytelling to to set it up.
+								
+				
+				
+Reply
+ 
+↓
+				
+			
+				
+		
+		
+			
+				
+Tyler Hanson
+ 
+February 21, 2023 at 11:53 am
+				
+				
+				
+				
+				
+Blades in the Dark codified skill challenges as the primary gameplay loop. The game is popular enough that it seems like a viable way to run things.
+								
+				
+				
+Reply
+ 
+↓
+				
+			
+				
+		
+		
+		
+	
+	
+		
+			
+Leave a Reply
+Cancel reply
+			
+				
+									
+									
+					 
+					
+							
+		
+		
+		
+		
+			
+		
+	
+			
+			
+My DMs Guild Adventures
+Search
+				
+					
+Search for:
+					
+					
+				
+			
+Recent Comments
+Slinky
+ on 
+Wizards of the Coast Announces More D&D for Everyone, but Not All of It’s for You
+Joseph R.
+ on 
+Wizards of the Coast Announces More D&D for Everyone, but Not All of It’s for You
+Ilias
+ on 
+Wizards of the Coast Announces More D&D for Everyone, but Not All of It’s for You
+Joe
+ on 
+Wizards of the Coast Announces More D&D for Everyone, but Not All of It’s for You
+Heightdiff
+ on 
+The Right Monster for the Job: D&D Monsters Listed by Function
+Archives
+        
+                    
+            
+                
+                    2026                
+            
+            
+                
+                            
+            
+                
+                    
+                        +                    
+                    August                    
+                
+                
+                    (1)
+                
+            
+            
+                            
+        
+                        
+            
+        
+                
+            
+                
+                    2025                
+            
+            
+                
+                            
+            
+                
+                    
+                        +                    
+                    December                    
+                
+                
+                    (4)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    July                    
+                
+                
+                    (1)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    April                    
+                
+                
+                    (1)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    March                    
+                
+                
+                    (1)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    January                    
+                
+                
+                    (2)
+                
+            
+            
+                            
+        
+                        
+            
+        
+                
+            
+                
+                    2024                
+            
+            
+                
+                            
+            
+                
+                    
+                        +                    
+                    December                    
+                
+                
+                    (1)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    November                    
+                
+                
+                    (1)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    May                    
+                
+                
+                    (1)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    April                    
+                
+                
+                    (1)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    January                    
+                
+                
+                    (1)
+                
+            
+            
+                            
+        
+                        
+            
+        
+                
+            
+                
+                    2023                
+            
+            
+                
+                            
+            
+                
+                    
+                        +                    
+                    November                    
+                
+                
+                    (2)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    September                    
+                
+                
+                    (10)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    August                    
+                
+                
+                    (2)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    July                    
+                
+                
+                    (1)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    June                    
+                
+                
+                    (2)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    May                    
+                
+                
+                    (2)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    April                    
+                
+                
+                    (2)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    March                    
+                
+                
+                    (1)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    February                    
+                
+                
+                    (2)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    January                    
+                
+                
+                    (2)
+                
+            
+            
+                            
+        
+                        
+            
+        
+                
+            
+                
+                    2022                
+            
+            
+                
+                            
+            
+                
+                    
+                        +                    
+                    December                    
+                
+                
+                    (2)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    November                    
+                
+                
+                    (2)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    October                    
+                
+                
+                    (1)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    September                    
+                
+                
+                    (2)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    August                    
+                
+                
+                    (2)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    July                    
+                
+                
+                    (2)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    June                    
+                
+                
+                    (2)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    May                    
+                
+                
+                    (3)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    April                    
+                
+                
+                    (3)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    March                    
+                
+                
+                    (3)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    February                    
+                
+                
+                    (2)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    January                    
+                
+                
+                    (4)
+                
+            
+            
+                            
+        
+                        
+            
+        
+                
+            
+                
+                    2021                
+            
+            
+                
+                            
+            
+                
+                    
+                        +                    
+                    December                    
+                
+                
+                    (3)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    November                    
+                
+                
+                    (5)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    October                    
+                
+                
+                    (6)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    September                    
+                
+                
+                    (8)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    August                    
+                
+                
+                    (3)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    July                    
+                
+                
+                    (4)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    June                    
+                
+                
+                    (5)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    May                    
+                
+                
+                    (4)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    April                    
+                
+                
+                    (4)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    March                    
+                
+                
+                    (5)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    February                    
+                
+                
+                    (5)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    January                    
+                
+                
+                    (4)
+                
+            
+            
+                            
+        
+                        
+            
+        
+                
+            
+                
+                    2020                
+            
+            
+                
+                            
+            
+                
+                    
+                        +                    
+                    December                    
+                
+                
+                    (5)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    November                    
+                
+                
+                    (4)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    October                    
+                
+                
+                    (4)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    September                    
+                
+                
+                    (5)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    August                    
+                
+                
+                    (4)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    July                    
+                
+                
+                    (4)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    June                    
+                
+                
+                    (5)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    May                    
+                
+                
+                    (4)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    April                    
+                
+                
+                    (4)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    March                    
+                
+                
+                    (5)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    February                    
+                
+                
+                    (4)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    January                    
+                
+                
+                    (4)
+                
+            
+            
+                            
+        
+                        
+            
+        
+                
+            
+                
+                    2019                
+            
+            
+                
+                            
+            
+                
+                    
+                        +                    
+                    December                    
+                
+                
+                    (5)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    November                    
+                
+                
+                    (4)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    October                    
+                
+                
+                    (5)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    September                    
+                
+                
+                    (4)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    August                    
+                
+                
+                    (4)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    July                    
+                
+                
+                    (5)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    June                    
+                
+                
+                    (10)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    May                    
+                
+                
+                    (6)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    April                    
+                
+                
+                    (6)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    March                    
+                
+                
+                    (4)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    February                    
+                
+                
+                    (4)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    January                    
+                
+                
+                    (5)
+                
+            
+            
+                            
+        
+                        
+            
+        
+                
+            
+                
+                    2018                
+            
+            
+                
+                            
+            
+                
+                    
+                        +                    
+                    December                    
+                
+                
+                    (3)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    November                    
+                
+                
+                    (4)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    October                    
+                
+                
+                    (5)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    September                    
+                
+                
+                    (3)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    August                    
+                
+                
+                    (4)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    July                    
+                
+                
+                    (5)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    June                    
+                
+                
+                    (4)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    May                    
+                
+                
+                    (4)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    April                    
+                
+                
+                    (3)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    March                    
+                
+                
+                    (2)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    February                    
+                
+                
+                    (2)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    January                    
+                
+                
+                    (3)
+                
+            
+            
+                            
+        
+                        
+            
+        
+                
+            
+                
+                    2017                
+            
+            
+                
+                            
+            
+                
+                    
+                        +                    
+                    December                    
+                
+                
+                    (3)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    November                    
+                
+                
+                    (4)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    October                    
+                
+                
+                    (4)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    September                    
+                
+                
+                    (4)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    August                    
+                
+                
+                    (5)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    July                    
+                
+                
+                    (4)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    June                    
+                
+                
+                    (4)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    May                    
+                
+                
+                    (5)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    April                    
+                
+                
+                    (4)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    March                    
+                
+                
+                    (4)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    February                    
+                
+                
+                    (3)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    January                    
+                
+                
+                    (5)
+                
+            
+            
+                            
+        
+                        
+            
+        
+                
+            
+                
+                    2016                
+            
+            
+                
+                            
+            
+                
+                    
+                        +                    
+                    December                    
+                
+                
+                    (4)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    November                    
+                
+                
+                    (4)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    October                    
+                
+                
+                    (3)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    September                    
+                
+                
+                    (3)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    August                    
+                
+                
+                    (2)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    July                    
+                
+                
+                    (2)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    June                    
+                
+                
+                    (4)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    May                    
+                
+                
+                    (3)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    April                    
+                
+                
+                    (2)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    March                    
+                
+                
+                    (2)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    February                    
+                
+                
+                    (3)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    January                    
+                
+                
+                    (4)
+                
+            
+            
+                            
+        
+                        
+            
+        
+                
+            
+                
+                    2015                
+            
+            
+                
+                            
+            
+                
+                    
+                        +                    
+                    December                    
+                
+                
+                    (3)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    November                    
+                
+                
+                    (4)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    October                    
+                
+                
+                    (2)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    September                    
+                
+                
+                    (3)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    August                    
+                
+                
+                    (1)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    July                    
+                
+                
+                    (2)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    June                    
+                
+                
+                    (3)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    May                    
+                
+                
+                    (3)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    April                    
+                
+                
+                    (4)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    March                    
+                
+                
+                    (3)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    February                    
+                
+                
+                    (3)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    January                    
+                
+                
+                    (5)
+                
+            
+            
+                            
+        
+                        
+            
+        
+                
+            
+                
+                    2014                
+            
+            
+                
+                            
+            
+                
+                    
+                        +                    
+                    December                    
+                
+                
+                    (4)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    November                    
+                
+                
+                    (4)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    October                    
+                
+                
+                    (5)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    September                    
+                
+                
+                    (5)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    August                    
+                
+                
+                    (6)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    July                    
+                
+                
+                    (6)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    June                    
+                
+                
+                    (4)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    May                    
+                
+                
+                    (6)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    April                    
+                
+                
+                    (4)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    March                    
+                
+                
+                    (7)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    February                    
+                
+                
+                    (5)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    January                    
+                
+                
+                    (6)
+                
+            
+            
+                            
+        
+                        
+            
+        
+                
+            
+                
+                    2013                
+            
+            
+                
+                            
+            
+                
+                    
+                        +                    
+                    December                    
+                
+                
+                    (5)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    November                    
+                
+                
+                    (5)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    October                    
+                
+                
+                    (5)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    September                    
+                
+                
+                    (3)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    August                    
+                
+                
+                    (4)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    July                    
+                
+                
+                    (4)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    June                    
+                
+                
+                    (3)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    May                    
+                
+                
+                    (3)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    April                    
+                
+                
+                    (3)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    March                    
+                
+                
+                    (3)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    February                    
+                
+                
+                    (4)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    January                    
+                
+                
+                    (7)
+                
+            
+            
+                            
+        
+                        
+            
+        
+                
+            
+                
+                    2012                
+            
+            
+                
+                            
+            
+                
+                    
+                        +                    
+                    December                    
+                
+                
+                    (9)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    November                    
+                
+                
+                    (9)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    October                    
+                
+                
+                    (5)
+                
+            
+            
+                            
+        
+                
+            
+                
+                    
+                        +                    
+                    September                    
+                
+                
+                    (5)
+                
+            
+            
+                            
+        
+                        
+            
+        
+                
+        
+DM David
+		
+		
+		
+DM David
+		
+		
+Categories
+			
+					
+Adventurers League
+	
+Advice
+	
+Character builds
+	
+Conventions
+	
+D&D fifth edition
+	
+D&D fourth edition
+	
+Dungeon master's tools
+	
+Inspiration
+	
+Lair Assault
+	
+Living Forgotten Realms
+	
+Miniatures
+	
+Products
+	
+Reviews
+	
+Role-playing game design
+	
+Role-playing game history
+	
+Rules
+	
+Scenarios
+	
+Uncategorized
+			
+			
+Meta
+		
+						
+Log in
+			
+Entries feed
+			
+Comments feed
+			
+WordPress.org
+		
+		
+Subscribe to Blog via Email
+			
+			
+									
+Enter your email address to subscribe to this blog and receive notifications of new posts by email.
+										
+						
+							Email Address						
+						
+					
+					
+						
+						
+						
+						
+						
+						
+							Subscribe						
+					
+							
+						
+			
+		
+		
+	
+		
+						Copyright © 2026 David Hartlage
+		
+	
+ 
+	
+			
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+					 
+						
+			 
+			 
+			 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+		 
+		

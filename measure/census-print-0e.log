@@ -1,0 +1,51 @@
+WIRING CENSUS · ARCH car 0 · committed at docs/content/wiring-census.json
+  pools 708 · blocks 68 · variants 2266
+  RESOLVED 318 · WIRING-UNRESOLVED 390 · with a predicate 185 · clean 185
+  key functions 118 (consulted 118) · key tables 29
+  TIERS · MISSING 34 · THIN 483 · COVERED 225 · MISSING-AT-TIER 44 (of 347 per-tier silences, 303 LAWFUL)
+  ── the car-0 columns ─────────────────────────────────────────────
+  reads = tests on 708 of 708 rows · narrowed 0 · NARROWS refused 0
+  reads GRAIN (SITTING §O.1) · BRANCH on 287 rows · function-wide, fail-closed, on 421
+  ── the two GRAINS, side by side (branch | function-wide) ─────────
+    read paths over all 708 rows          529    757
+    k = 0 of the RESOLVED rows             49    121
+    blocks that can attach NOTHING         22     26
+    blocks the branch grain FREES: DS-DEF-11 · DS-DEF-9 · DS-ECO-9 · DS-POW-3
+    k histogram, branch:   k=-2 11 · k=-1 12 · k=0 26 · k=1 79 · k=2 190
+    k histogram, function: k=-6 5 · k=-4 7 · k=-2 9 · k=-1 34 · k=0 66 · k=1 87 · k=2 110
+  absent · measured 377 · default 10 · not-produced 64 (over 451 read paths; the table rung's 78 rows carry the instrument's own label and no absence record)
+  covert rows 4 · objectClass named on 99 of 708 · rows with a mount 566
+  fact budget · k = 0 on 49 of 318 RESOLVED rows · 390 NOT-EXECUTABLE (UNRESOLVED)
+  k histogram: k=-2 11 · k=-1 12 · k=0 26 · k=1 79 · k=2 190
+  customReachable rows 21 over 8 kinds
+    services 6 · resources 6 · institutions 5 · tradeGoods 2 · factions 2 · stressors 0 · deities 0 · traditions 0
+  relation rows 165 · by source (a) 131 · (b) 28 · (c) 6
+    by direction a->b 165
+    THE JOIN: rows both of whose endpoints a desk reads — STRICT 0 (either endpoint 0) · by LEAF 0 (either 2) over 85 desk read roots
+  ── attach coverage, the ten blocks with the most spines ──────────
+    DS-GEN-3    spines    42 · facts     7 · spines reached 10000 bp · mean reach  7891 bp
+    DS-STR-2    spines    22 · facts     2 · spines reached 10000 bp · mean reach  5000 bp
+    DS-STR-1    spines    15 · facts     1 · spines reached     0 bp · mean reach     0 bp
+    DS-ECO-11   spines    14 · facts     5 · spines reached 10000 bp · mean reach  7429 bp
+    DS-CND-1    spines    12 · facts     5 · spines reached 10000 bp · mean reach  7500 bp
+    DS-DEF-5    spines    11 · facts     8 · spines reached 10000 bp · mean reach  7386 bp
+    DS-WAR-1    spines    11 · facts    10 · spines reached 10000 bp · mean reach  7273 bp
+    DS-ECO-12   spines    10 · facts     9 · spines reached 10000 bp · mean reach  5778 bp
+    DS-GEN-6    spines     9 · facts     9 · spines reached 10000 bp · mean reach  8395 bp
+    DS-FTH-1    spines     8 · facts     4 · spines reached 10000 bp · mean reach  6875 bp
+  modifier-eligible facts per tab: viability 39 · economics 38 · history 34 · plot_hooks 34 · relationships 34 · overview 27 · resources 12 · daily_life 12 · services 10 · power 7 · war 6 · faith 6 · defense 5
+  ── mounts per fact, the twelve with the most spine mounts ────────
+    readings                                       spine     4 · modifier     0
+    eco                                            spine     3 · modifier     0
+    faith                                          spine     3 · modifier     0
+    granary                                        spine     3 · modifier     0
+    legitimacy                                     spine     3 · modifier     0
+    foodBalance                                    spine     2 · modifier     0
+    forces                                         spine     2 · modifier     0
+    politics                                       spine     2 · modifier     0
+    port                                           spine     2 · modifier     0
+    power                                          spine     2 · modifier     0
+    readings.isEntrepot                            spine     2 · modifier     6
+    readings.primaryStress                         spine     2 · modifier     0
+  ── the RATE corpus ───────────────────────────────────────────────
+    192 cells x 4 seeds = 768 towns · pools that fired 267

@@ -1,0 +1,201 @@
+Modelling Cultural, Religious and Political Affiliation in
+Artificial Intelligence Decision-Making
+Mark R Johnson1
+Abstract. This paper examines cutting-edge work in the
+generation of individual AI actors who behave according to
+procedurally-generated social, cultural, political and religious
+norms. Based on the author’s ongoing development of the game
+Ultima Ratio Regum (URR) – built with a hand-made game
+engine in Python – the paper explores three core aspects of
+URR’s AI actors. Firstly, the generation of a full world
+population of AI actors and ensuring that they are distributed
+appropriately and logically for a culturally-varied world;
+secondly the procedural generation of densely complex religious,
+political, cultural and socially normative values to assign to these
+AI actors, and how their decision-making processes are
+determined by these allegiances; and thirdly and lastly how this
+game, among other objectives, seeks to forward what I term
+“qualitative AI” where culture and society, not pathfinding and
+“optimal” decision-making, are the primary determinants of
+behaviour. The paper concludes with a summary of both these
+three points and the future plans for the game’s AI systems. 1
+
+1 INTRODUCTION
+This exploratory paper is based on the author’s own
+work, having been for the last three years the sole developer of
+the roguelike game “Ultima Ratio Regum” (URR). Set during
+the Scientific Revolution, almost everything within the game is
+procedurally generated – this ranges from the “macro” level of
+2000+ years of detailed history, historical figures, empires and
+nations, religions, wars, dozens of vast cities and a vast world
+population of procedurally-generated non-player characters
+(NPCs) unique to each playthrough, to the “micro” level of
+individual towns and cities, individual NPCs, specific buildings
+and items, and flora and fauna. Inspired by the works of
+Umberto Eco and Jorge Luis Borges, the game is an exploration
+of a number of themes including historiography and the writing
+of the historical record, metanarrative and political ideology, and
+the philosophical idealism of George Berkeley. Most crucially
+the work aims to specifically integrate this “thematic” content
+with the game’s mechanics, rather than leaving such content as
+“background” or “lore” that the player can take or leave. Much
+of this will be achieved through the use of innovative AI actors
+currently being developed at time of writing. Every aspect of the
+behaviour of these actors – their greetings, their insults, their
+dress, their farewells, their behaviour in challenging situations,
+their reaction to those from other nations, and much else – is
+procedurally generated, and fore-grounded in their decisionmaking algorithms. It is these actors and the roles they play
+which this paper focuses upon, and the break they represent from
+1
+
+Science & Technology Studies Unit, Dept. of Sociology, Univ. of
+York, YO10 5DD, UK. Email: mrj503@york.ac.uk.
+
+much traditional AI research into decision-making optimization
+[1] and pathfinding [2].
+
+2 PROCEDURAL GENERATION AND
+ARTIFICIAL INTELLIGENCE
+Firstly, the paper explores the procedural content
+generation of the game, and how this affects the AI actors. An
+“average” generated URR world has a population of
+approximately ten million NPCs. Naturally for such numbers,
+the management of these NPCs takes place at a number of
+different “levels” in the game depending on the player’s
+activities – many of the NPCs are “abstracted out” at any given
+time. The game also contains a system which identifies the most
+“important” NPCs and ensures that their actions and decisions
+are always simulated regardless of the player’s location (roughly
+500-700 NPCs on average are considered “important” by the
+game’s algorithm at any one time, and their actions are carried
+out constantly, unless one falls below the metric for
+“importance”, at which point that actor is then abstracted out
+once more). NPCs within the game vary according to a
+significant range of variables: according to their race, language,
+cultural background and cultural norms, sex and gender, age,
+political alignment, religious beliefs (if any), national
+citizenship, and interests and agendas. A rough calculation
+currently suggests that there are over 1 trillion possible AI actors
+that may be procedurally generated within the game world who
+will, crucially, behave differently according to the social and
+cultural context within which they are generated. The agendas of
+these actors (returned to later in this abstract) are largely
+dependent on their cultural and religious backgrounds, leading to
+a densely complex world within which the player will uncover
+information about religious feuds, cultural differences, longstanding war bitterness, language difficulties, and many similar
+concepts of a sort not normally explored in games. The paper
+will therefore examine the generation of the AI actors from a
+creative standpoint; the management of so many AIs from a
+technical standpoint; and the integration of the two into a
+culturally and socially variegated and dense world.
+
+and therefore strongly differentiate between all the procedurallygenerated AI actors in a given instance of the game. Equally, the
+greater the knowledge the player has attained about the world’s
+culture, the more able the player is to make their wishes felt
+within the game world.
+
+3 TOWARDS QUALITATIVE AI
+
+Figure 1. Example of Generated Political Divisions
+Secondly, the paper explores how this content
+generation creates a deeply complex environmental simulation,
+arguably one of the most detailed and dense generated worlds
+ever created in a game. As above, the agendas of these AIs are
+dependent on the procedural generation of their origins. A
+generated URR world contains approximately forty civilizations
+(Figure 1) designed to emulate the massive variety in real-world
+civilizations from this historical era. Some may be nomadic
+desert peoples who travel in lengthy caravan routes across the
+world, or hunter-gatherer tribes in close to the Arctic Circle who
+construct their buildings from ice and stone and have limited
+trading relations with a nearby civilization, or feudal
+civilizations who range from the imperialist and the expansionist
+to the protectionist or isolationist, and have widely differing
+cultural preferences on issues such as aesthetics, slavery,
+gladiatorial sport, ethics and morality, and so forth. This variety
+extends into other areas, such as religion, where a complex
+algorithm can procedurally create over a million detailed
+religions with information about their beliefs, their god(s), what
+festivals or special events are on their religious calendar, their
+relationships with other religions, their presence in civilizations,
+eschatological and creation beliefs, the appearance of their altars,
+expectations from worshippers, etc. All of these “cultural actors”
+inform the creation of the AI actors who exist within these
+contexts. Crucially, therefore, rather than presenting this
+civilizational/cultural/religious detail as “background” or “lore”
+as many games do, they are foregrounded in the AI actors,
+whose motivations, interests and agendas can only be understood
+via a detailed understanding of the generated cultural
+backgrounds from which they originate. In turn, this affects their
+willingness to interact with the player, to assist or communicate
+with the player, and to potentially oppose the player if the player
+has aligned themselves with religions or cultures inimical to
+those of other NPCs. At the same time, it is a game of
+incomplete information [cf 3] where both the player, and NPCs,
+must make judgements about the opinions of others based on the
+data they possess. The actions of AIs are dependent upon the
+social conditions and expectations into which they are “born”,
+
+Thirdly, the paper brings these together to explore the
+use of this integration of procedural generation and sociological
+concepts as a method for game-based learning in the fields of
+philosophy, sociology, and the humanities more generally. AIs
+respond and behave according to their political, cultural, social
+and religious affiliations, and this transforms these concepts in
+the social sciences into gameplay mechanics that affect the
+behaviour of AI and the world the player explores, rather than
+simply a method for constructing a game world which then has
+no further impact upon the player’s experience. This is in part
+akin to the world by Mateas on “expressive AI” [4] and
+Gruenworldt and Katchabaw’s “Realistic Reaction System” [5]
+but develops it into further qualitative and social science
+domains, and integrates far broader “relationship” structures of
+religions and cultures into the interpersonal dimension previous
+focused upon. The paper therefore explores how the game
+depicts the influence of these many factors on social interaction,
+and how these influences are represented in the actions,
+decisions and interests of the game’s AI. In turn, this leads to
+game-based learning where understanding the cultural, political
+and religious motivations of AI actors is actually essential to
+success or failure within the game world. Lastly, this also serves
+to illustrate the potential for the development of ‘qualitative’
+game mechanics in video games more generally, and highlights
+the potential for the use of complex AI actors in moving away
+from the ubiquitous stat-based gameplay of levels, items,
+rewards, and so forth, and towards developing “AI” that can be
+understood in terms of their as full actors with a range of interest
+and agendas, rather than as only actors in combat or strategy
+situations.
+
+4 CONCLUSIONS
+The paper explores three central components to the
+game’s AI – the emphasis on procedural content generation and
+the integration between that and artificial intelligence; the
+emphasis within this on creating cultures, societies and religions,
+and having these directly influence AI decisions; and thirdly the
+potential for this game to develop “qualitative AI” and to create
+gameplay mechanics based on political, sociological and
+humanist concepts rarely explored in interactive media. It notes
+the potential educational and pedagogic value of these, the
+potential for new forms of gameplay rarely explored in computer
+games, and the paper lastly notes the planned future
+developments of the game’s in-development system.
+
+REFERENCES
+[1] G. Chaslot, S. Bakkes, I. Szita and P. Spronck. Monte-Carlo Tree
+Search: A New Framework for Game AI. In: Proceedings of the
+Fourth Artificial Intelligence and Interactive Digital Entertainment
+Conference. AAAI (2008).
+
+[2] T. Standley. Finding Optimal Solutions to Cooperative Pathfinding
+Problems. In Proceedings of the Twenty-Fourth AAAI Conference on
+Artificial Intelligence (AAAI-10). AAAI (2010).
+[3] D. Billings, A. Davison, J. Schaeffer, D. Szafron. The Challenge of
+Poker. In Artificial Intelligence, 134:1-2:201-240 (2002).
+[4] M. Mateas. Expressive AI: Games and Artificial Intelligence. edings
+of Level Up: Digital Games Research Conference (2003).
+[5] L. Gruenwoldt and M. Katchabaw. Creating Reactive Non Player
+Character Artificial Intelligence in Modern Video Games. In
+Proceedings of the 2005 GameOn North America Conference (2005).
+
+

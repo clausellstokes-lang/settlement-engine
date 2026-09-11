@@ -1,0 +1,264 @@
+=== #0 [VERIFIED_VERBATIM] pos0
+CLAIM: Wolfe plants each clue exactly once and refuses to repeat it, on the principle that a clue told five times is written for someone dumber than the reader.
+TW: 'I try not to leave a clue more than once ... if you tell me five times then I feel that you are writing for somebody that is a lot dumber than I am' (p.121).
+NOTE: Quote verbatim on p.121. Both limbs on the page; he also says 'So I try and leave my clues once.' Only softening: he says 'I try not to', a shade less absolute than the claim's 'refuses'.
+
+=== #1 [VERIFIED_VERBATIM] pos1
+CLAIM: He says he leaves all the clues a reader will need and often more, because in real detection the work is finding more clues, not reasoning harder from a few.
+TW: 'generally try and leave all the clues that I think the reader is going to require, sometimes more than they require' + 'very little of it consists of reasoning from clues and the great majority of it consists of finding more clues' (p.121).
+NOTE: Quote verbatim. Surplus-of-clues limb and the real-detection reason are both explicit, the latter framed as 'actual police work' / 'a real life situation'.
+
+=== #2 [VERIFIED_VERBATIM] pos2
+CLAIM: Wolfe denies writing perspectival novels where confusion is the point: the clues are there, the puzzles are meant to be solved, and superficial confusion is simply how life looks before you think about it.
+TW: 'Everything may be confusing but that is how things are... Life seen superficially has very little pattern to it.' (p.127)
+NOTE: Quote verbatim (page reads '...pattern to it. There is a lot of confusion'). The 'clues are there / puzzles the reader is supposed to figure out / not that type of novel' formulation is Jordan's question, which Wolfe affirms with 'Yes' and then elaborates in his own words: 'It is not true that you can't get through the confusion and figure out certain things.' Attribution by assent, not by his own sentence.
+
+=== #4 [VERIFIED_VERBATIM] pos3
+CLAIM: In Castleview different characters see the same unexplained thing as cowboys, Arthurian knights or a spaceship, modelled on anomaly reports where two witnesses describe a third thing differently.
+TW: 'When you research these anomalous stories and accounts you get this sort of thing. You get two witnesses who have very different stories depending on how they perceived some third thing that we don't know what it was. So I tried to show it like that.' (p.126)
+NOTE: Quote verbatim. The cowboys/knights/spaceship enumeration is Jordan's question ('cowboys and Indians... Arthur and his knights... a spaceship'), which Wolfe adopts with 'So I tried to show it like that', and the Castleview context is explicit on the same page.
+
+=== #5 [VERIFIED_VERBATIM] pos4
+CLAIM: Wolfe made Weer a dead man rather than a reminiscing old man so the remembered rooms could be re-created with a strength ordinary reminiscence could not justify.
+TW: 'Because I wanted to lend to the memories certain supernatural strengths that an old man thinking over his life wouldn't have. I wanted to do the rooms as re-creations of rooms that he had known as a very young man... I could not have gotten with just reminiscence.' (p.115)
+NOTE: Quote verbatim and every limb on the page: dead man rather than reminiscing old man (Jordan's question, answered directly), the re-created rooms, and the strength plain reminiscence could not justify.
+
+=== #6 [VERIFIED_VERBATIM] pos5
+CLAIM: He conceived Peace not as purgatory but as a ghost trying to make sense of his own life, and accepts purgatory as another way of saying the same thing.
+TW: 'That is not the way I conceived it when I wrote it. I conceived it more that he was a ghost trying to make sense of his own life. And I think that is another way of saying that.' (p.116)
+NOTE: Quote verbatim. Both limbs hold, with a nuance the claim keeps: to 'is Weer in Purgatory working toward peace?' he first answers 'Yeah, I think probably he is', then distinguishes conception from purgatory and accepts purgatory as 'another way of saying that'.
+
+=== #7 [VERIFIED_VERBATIM] pos6
+CLAIM: The Soldier books are built to show the problems of a genuinely good man who cannot remember, which Wolfe maps onto a decent society that has no awareness of its history.
+TW: 'The book really is intended to show the problems faced by a genuinely good man who can't remember. Because it seems to me that is the problem of our society... our society has no memory because it has no awareness of history.' (p.118)
+NOTE: Quote verbatim and the society mapping explicit ('We have a genuinely good society... quite decent individuals'; 'this America blundering around on the world stage more or less as Latro does'). Page says singular 'The book' (Soldier of Arete under discussion) where the claim says 'The Soldier books'.
+
+=== #8 [VERIFIED_VERBATIM] pos7
+CLAIM: For the Soldier books he wrote the ancient world as the pagans wrote about it rather than through the rationalist modern historian, so gods appear as the characters expected them to.
+TW: 'what I tried to do was to write about that pagan world as the pagans themselves wrote about it. If we read modern historians we are reading a very rationalistic viewpoint...' (p.117)
+NOTE: Quote verbatim; the rationalist-historian contrast is spelled out at length. The third limb is on the page too, via the Acts example: 'They are mistaken for Zeus and Hermes in human form because people in those days expected that you could see Zeus and Hermes in human form', prefaced by 'I think that the gods of paganism were real.'
+
+=== #9 [VERIFIED_VERBATIM] pos8
+CLAIM: Wolfe says he used the memory-palace system of Simonides in the Soldier books.
+TW: 'I am familiar with the memory palace concept, which originally derives from Simonides, a Greek poet of the fifth century B.C... I have made use of the memory palace system in the Soldier books, of course.' (p.107)
+NOTE: Quote verbatim; Simonides and the Soldier books both named in the same answer. He adds that he has heard of Yates's The Art of Memory but not read it.
+
+=== #10 [VERIFIED_VERBATIM] pos9
+CLAIM: He says symbolic details arrive as local impulses ('that's neat; I'll do that') and denies the books are allegories.
+TW: 'Every once in a while you say, "Gee, that's neat; I'll do that." And you do it. I wasn't writing the whole book that way. The book isn't intended as an allegory.' (p.118)
+NOTE: Quote verbatim including the period. The impulse phrasing on the page is 'Gee, that's neat; I'll do that.' The denial is singular ('The book') where the claim generalises to 'the books'; he separately denies allegory for Free Live Free on p.128 ('I wasn't trying to write allegory').
+
+=== #11 [VERIFIED_VERBATIM] pos10
+CLAIM: Wolfe claims he can identify a writer from a paragraph or two and could write imitation Shakespeare or Lewis that passes, a self-described knack for voice.
+TW: 'I could almost invariably identify the writer from the first paragraph or two... And I am a good imitator. I could write imitation Shakespeare that you would think was probably legitimate Shakespeare... I have sort of a knack for doing that sort of thing.' (p.103)
+NOTE: Quote verbatim and every limb explicit, including the Lewis limb ('I could write much better imitation C. S. Lewis than a lot of this supposedly posthumous stuff') and the self-described knack. The paragraph-or-two identification is set in a writers' chain letter, alongside 'I am pretty good at spotting styles'.
+
+=== #12 [VERIFIED_VERBATIM] pos11
+CLAIM: He describes the Severian books as in part his decision to rewrite The Dying Earth from his own standpoint, openly acknowledging Vance and Clark Ashton Smith.
+TW: 'Was Jack Vance's style an influence on the style of the Severian novels?' - 'Oh, I'm sure... A lot of that was my deciding to rewrite The Dying Earth from my own standpoint' (p.103); 'I have never concealed a debt to Jack Vance and a debt to Clark Ashton Smith' (p.104).
+NOTE: Quote verbatim on p.103. 'In part' matches 'A lot of that'. The Clark Ashton Smith acknowledgment sits just over the page break on p.104, not on p.103 as the page field implies.
+
+=== #14 [VERIFIED_VERBATIM] pos12
+CLAIM: He reads scriptural images (the apple, the sky rolled up) as figurative language giving a general idea to an audience unable to grasp the actuality, a model for conveying meaning in pictures.
+TW: 'We don't know what is really meant by the world coming to an end, and God rolling up the sky like a carpet and all that. It is all picturesque language, figurative language to try to give a general idea to an audience that would not be capable of understanding the actuality.' (p.129)
+NOTE: Quote verbatim. The apple limb follows immediately: 'It is like the Genesis story. I don't believe in a literal "apple"... but if you have to explain to a bunch of primitives how men differ from animals... this is a pretty good way to do it.' 'In pictures' tracks the page's own 'picturesque language'.
+
+=== #15 [VERIFIED_VERBATIM] pos13
+CLAIM: Any narrator who is a person inside the story is going to be unreliable; five or six honest courtroom witnesses to one event all report different things.
+TW: "then the narrator is damn well going to be unreliable"
+NOTE: Raw PDF text extracted with pypdf from gwern.net copy (Shadows of the New Sun ch.12, p.169). Quote appears word for word. Both limbs on page: narration by 'this person in the story' entails unreliability, and 'Ask any courtroom lawyer about examining five or six different witnesses to the same event. The five or six witnesses are all trying to tell the truth, but they have all seen different things.' 'Honest' = 'all trying to tell the truth'.
+
+=== #16 [VERIFIED_VERBATIM] pos14
+CLAIM: Speakers in crowded Long Sun scenes are identified without tags by characteristic phrases or mistakes and by each saying only what that character would say in that circumstance.
+TW: "she is saying something that only Maytera Marble would say"
+NOTE: Raw PDF p.168. Quote verbatim. Interviewer's question supplies the crowded-scene limb ('scenes with a number of characters all speaking in turn without being identified'); Wolfe gives both mechanisms: 'certain characteristic phrases or mistakes, or whatever, that will identify him as the speaker' and the circumstance test ('the speech that... Maytera Marble makes under a certain circumstance, is not the speech that Blood would make').
+
+=== #17 [VERIFIED_VERBATIM] pos15
+CLAIM: The more complex the story, the clearer its narrative structure must be; shaken up, a ten-thousand-part machine is just a box of junk.
+TW: "or it isn't complex, it's simply confused"; 10,000 parts shaken = "a box of junk"
+NOTE: Raw PDF p.169. Quote verbatim. Machine limb verbatim too: 'If you have a machine with 10,000 parts and you shake them up in a box, what you have is a box of junk.' One hedge worth recording: Wolfe answers 'It's almost that it has to be', slightly softer than the claim's flat 'must be', but the proposition is his and affirmed.
+
+=== #19 [VERIFIED_VERBATIM] pos16
+CLAIM: He finds the Latin or Greek word for the thing he needs, then searches unabridged dictionaries on the assumption that someone once anglicised it, often finding an 18th-century citation.
+TW: "on the assumption that someone will have anglicised this term as a new word"
+NOTE: Raw PDF p.173-174. Quote verbatim. Every limb present: 'looking up the Latin or Greek word that corresponds to something you need a word for, and then going back to unabridged dictionaries...' and 'very often you find that somebody did indeed do that, and it crops up in the Oxford dictionary for a citation in the 18th century or whatever.'
+
+=== #20 [VERIFIED_VERBATIM] pos17
+CLAIM: In Fifth Head the story attributed to John V. Marsch is actually written by the shadowchild who replaced him, a trick Wolfe concedes is New Wave.
+TW: "not actually written by John V. Marsch, but by the shadowchild who has replaced" him
+NOTE: Raw PDF p.169. Quote verbatim. New Wave limb doubly supported: Wolfe calls it 'the rather tricky thing, which I suppose is New Wave' and then, after the interviewer supplies the title, 'That's New Wave.' 'Concedes' is fair - he had just minimised his New Wave membership.
+
+=== #21 [VERIFIED_VERBATIM] pos18
+CLAIM: Wolfe rejects monocultured SF worlds as mental sloth, noting that in one big city people at different social levels already speak almost different languages.
+TW: "I think it's mostly laziness. Mental sloth more than anything else."
+NOTE: Raw PDF pp.172-173. Quote verbatim. Big-city limb verbatim: 'If you look at a big city, you discover that, on various levels of society, people are talking in ways that are almost different languages already.' The monoculture-criticism limb is established in the question ('you have in the past criticised sf works that depict monocultured worlds') and affirmed by the answer.
+
+=== #22 [VERIFIED_VERBATIM] pos19
+CLAIM: Wolfe often first writes synopsis and in revision lengthens it, turning generalities into hard facts and making each speaker talk as she talks.
+TW: "I turned generalities into hard facts. I made India talk the way she talks."
+NOTE: Raw HTML fetched from clarkesworldmagazine.com (HTTP 200) and de-tagged locally; no summarizer. Quote verbatim. Synopsis limb: 'Often I tend to write synopsis. When I do, I have to flesh it out in revision.' Lengthening limb: interviewer notes 'you made the second version longer' and Wolfe answers 'It's longer, but it has a lot more meat.'
+
+=== #23 [VERIFIED_VERBATIM] pos20
+CLAIM: He forbids himself sentences like 'Nick was a bad man and a cruel man' and must instead show Nick being bad within the story.
+TW: "'Nick was a bad man and a cruel man.' That's easy. I know I can't say it at all."
+NOTE: Raw Clarkesworld HTML. Quote verbatim, though on the page Wolfe attributes it to another ('Long ago somebody said, "Easy writing makes damned hard reading."') - the claim does not assert authorship, so no limb fails. Show-don't-state limb verbatim: 'I have to show [Nick] being bad and cruel in the context of the story.'
+
+=== #24 [VERIFIED_VERBATIM] pos21
+CLAIM: He stops when he can no longer tell whether changes improve the piece, usually after four drafts; a fifth that reverts to the second is a bad sign.
+TW: "A fifth draft may find me reverting to the second or the third, and that's a bad sign."
+NOTE: Raw Clarkesworld HTML. Quote verbatim. Stopping-rule limb verbatim: 'There comes a point at which I'm no longer sure that what I'm doing is improving the piece. That's when I stop working on it and send it in. Usually - not always, but usually - I get there after four drafts.' Page says reverting to the second OR THIRD; the claim's 'second' is a subset, not a contradiction.
+
+=== #25 [VERIFIED_VERBATIM] pos22
+CLAIM: Dialogue must entertain, forward the plot and characterize the speaker at once, and sound like what that speaker would say to that person then.
+TW: "It must entertain the reader, forward the plot, and characterize the speaker."
+NOTE: Raw Clarkesworld HTML. Quote 'Dialogue is action.' verbatim as its own line. Simultaneity limb: 'All pretty much at the same time.' Naturalness limb verbatim: 'it must sound natural - that is, like something that speaker might say at that time to that person.'
+
+=== #26 [VERIFIED_VERBATIM] pos23
+CLAIM: Even unimportant characters must speak differently from one another; students reject this because everybody sounds alike to them.
+TW: "The butler mustn't sound like the footman, even though neither is an important character."
+NOTE: Raw Clarkesworld HTML. Quote verbatim. Student limb verbatim: 'This is one of those truths that students reject out of hand. They reject it because everybody sounds alike. / To them.' - the page's line break makes 'To them' the sting, which the claim renders correctly.
+
+=== #27 [VERIFIED_VERBATIM] pos24
+CLAIM: Like poetry and song, fiction demands the concrete; he contrasts an abstract shipwreck summary with a ballad naming the ship, the cargo and the shoal.
+TW: "Like poetry and song, fiction demands the concrete."
+NOTE: Raw Clarkesworld HTML. Quote verbatim. The contrast is on the page: abstract version 'The vessel, bearing fuel to the New World, met with misfortune shortly before its arrival'; ballad names ship ('the Nightingale'), cargo ('Twenty-one days from Clyde in coal') and shoal ('he drowned on the hard-rock shoal'). All three nouns of the claim check out.
+
+=== #28 [VERIFIED_VERBATIM] pos25
+CLAIM: A short story works by engendering expectations and satisfying them; he told a student to post a sign reading 'I AM GOING TO TELL YOU SOMETHING COOL'.
+TW: "By engendering expectations and satisfying them."
+NOTE: Raw Clarkesworld HTML, answering 'In general terms, how does a short story work?' Quote verbatim. Sign limb verbatim including capitalisation: 'I told a student once to letter a sign and put it where he'd see it when he wrote: "I AM GOING TO TELL YOU SOMETHING COOL."'
+
+=== #29 [VERIFIED_VERBATIM] pos26
+CLAIM: Realistic fiction leaves out far too much of human experience; fantasy is nearer the truth.
+TW: "Because fantasy is nearer the truth, that's all... Realistic fiction leaves out far, far too much."
+NOTE: Raw Clarkesworld HTML. Quote verbatim. Both limbs in one answer; the human-experience limb is carried by the adjacent 'How true is that story for the bulk of humankind?' Claim's ordering is reversed from the page's, which does not affect support.
+
+=== #30 [VERIFIED_VERBATIM] pos27
+CLAIM: Style should suit the story; a wrong style is comic for ten pages, and the narrator's voice is inseparable from style.
+TW: "Other than that, the style should suit the story."
+NOTE: Clarkesworld 2008 fetched raw (curl, browser UA, HTTP 200). Quote verbatim. All limbs on page: 'Imagine The Wings of the Dove as told by Huck Finn. It would be funny for ten pages, but . . .' and 'the author's voice, or the narrator's, it's so closely linked to style that I see no point in discussing it separately.'
+
+=== #31 [VERIFIED_VERBATIM] pos28
+CLAIM: First person puts the reader inside the story and lets the narrator comment on actions, whereas authorial comment is usually ruinously bad.
+TW: "If the author comments from his viewpoint, it's usually ruinously bad."
+NOTE: Clarkesworld 2015 raw (HTTP 200). Quote verbatim. Page: 'When you have a first person narrator, you are much more into the story. Also, the first person narrator can comment from his viewpoint on actions.' Note the page's 'you are much more into the story' is the writer's vantage as much as the reader's; the claim's 'puts the reader inside the story' is a mild gloss but consistent with the answer's contrast to third person distance.
+
+=== #32 [VERIFIED_VERBATIM] pos29
+CLAIM: Narrators are either openly unreliable or pretend to be totally reliable, but all are unreliable because people write books and people cannot be trusted.
+TW: "they are always unreliable because people are writing books and people can't be trusted"
+NOTE: Clarkesworld 2015 raw. Quote verbatim within: 'There are narrators that are openly unreliable and there are narrators that pretend to be totally reliable. But they are always unreliable because people are writing books and people can't be trusted, you know?' Every limb supported.
+
+=== #35 [VERIFIED_VERBATIM] pos30
+CLAIM: Characterization is done only by showing the character thinking, speaking and acting characteristically, never by telling the reader about him.
+TW: "You do not characterize by telling the reader about the character... You simply show it and shut up."
+NOTE: Black Gate 2010 raw (HTTP 200). Item 4 of Wolfe's numbered advice list: 'You do not characterize by telling the reader about the character. You do it by showing the character thinking, speaking and acting in a characteristic way. You simply show it and shut up.' Every limb verbatim.
+
+=== #36 [VERIFIED_VERBATIM] pos31
+CLAIM: Do not start a story without an ending in mind; the ending may change but there must always be a destination.
+TW: "Do not start a story unless you have an ending in mind."
+NOTE: Black Gate 2010 raw. Item 5: 'Do not start a story unless you have an ending in mind. You can change the story's ending if you wish, but you should always have a destination.' Quote verbatim; both limbs (ending may change; always a destination) on page.
+
+=== #37 [VERIFIED_VERBATIM] pos32
+CLAIM: He does almost no research before writing and fills in world details as he reaches them, researching as he goes (what Greeks ate for breakfast: nothing).
+TW: "how much research I do before I start writing. The answer is, almost none."
+NOTE: Black Gate 2010 raw. Quote verbatim. Page continues: 'If it's a book on Ancient Greece, what is it about Ancient Greece that I need to know? What did Ancient Greeks eat for breakfast?' and, asked, 'They didn't eat breakfast!' — supporting research-as-you-go and the breakfast parenthesis.
+
+=== #38 [VERIFIED_VERBATIM] pos33
+CLAIM: In 'The Tree Is My Hat' the ex-wife's name Mary Christmas is never stated; the reader finds it out by deduction.
+TW: "the ex-wife... is named Mary Christmas. I never say that - you find out by deduction"
+NOTE: Black Gate 2010 raw. Quote verbatim; the page spells the title 'The Tree is My Hat' (lower-case 'is'), a typographic difference only. All limbs supported.
+
+=== #40 [VERIFIED_VERBATIM] pos34
+CLAIM: Wolfe says the storytelling contest in the third New Sun volume is strictly padding added when the publisher split the book.
+TW: "If you look in the third book, you will find a storytelling contest that's strictly padding."
+NOTE: Black Gate 2010 raw. Quote verbatim. The split limb is supported immediately before: 'My publisher thought that I should divide it into two books and build each book up... That's what I did.'
+
+=== #41 [VERIFIED_VERBATIM] pos35
+CLAIM: Wolfe attributes the shorter paragraphs and looser tone of his later books to criticism for being unreadable and overcomplex, after which he decided to loosen up.
+TW: "criticism for being unreadable and overcomplex... 'Well, I'll loosen up.'"
+NOTE: MIT Technology Review 2014 raw (HTTP 200, full article text retrieved, section 'EDITING AND WRITING'). Quote verbatim inside: 'It's that I've gotten so much criticism for being unreadable and overcomplex and hard to get into and all this stuff. And I thought, "Well, I'll loosen up."' The shorter-paragraphs/looser-tone description is the interviewer's, which Wolfe re-explains ('It's not that, really') by the criticism — exactly the attribution the claim makes.
+
+=== #42 [VERIFIED_VERBATIM] pos36
+CLAIM: He sets himself hard technical challenges with narrators because an author who makes everything easy for himself bores the reader.
+TW: "If you make everything easy for yourself as an author, you bore the reader."
+NOTE: MIT Technology Review 2014 raw, section 'UNRELIABLE NARRATORS AND CRAFT'. Interviewer: 'With your narrators, you set yourself difficult technical challenges.' Wolfe's answer is the quoted line. Both limbs supported.
+
+=== #43 [VERIFIED_VERBATIM] pos37
+CLAIM: Weer's unreliability is that he is a ghost, and ghosts often do not realize they are dead.
+TW: "He's a ghost. Ghosts often don't realize they're dead."
+NOTE: MIT Technology Review 2014 raw, same section. Quote verbatim (typographic apostrophes normalized). The interviewer names Weer as 'unreliable in this particular sense: he's dead, and doesn't know it', and Wolfe affirms 'He's a ghost.'
+
+=== #44 [VERIFIED_VERBATIM] pos38
+CLAIM: Marsch in Fifth Head knows he is not a real Earthman but is trying to talk himself into believing he is.
+TW: "He knows he's not a real Earthman, but he's trying to talk himself into believing that he is."
+NOTE: MIT Technology Review 2014 raw, same section, answering whether John Marsch understands he is really V.R.T. Quote verbatim; every limb on the page.
+
+=== #45 [VERIFIED_VERBATIM] pos39
+CLAIM: A naive observer is more interesting because he gives only what he has seen, whereas adult witnesses cannot separate what they saw from what it means.
+TW: "he's just giving you what he has seen"
+NOTE: Raw MIT Tech Review page fetched with a browser UA (200, 468KB). Wolfe: "I think a naive observer is more interesting to read because he's just giving you what he has seen. If you've ever listened to people giving testimony at a trial, they are almost incapable of distinguishing between what they have actually seen or heard and their opinions of what it means." Quote verbatim. Wording note: the page says "people giving testimony at a trial", not literally "adult witnesses" — the child/adult contrast is the question's frame (young narrators, "what Maisie knew"); substance of the limb is fully supported.
+
+=== #46 [VERIFIED_VERBATIM] pos40
+CLAIM: Having built Severian to forget nothing, Wolfe built Latro from a real brain injury to forget everything.
+TW: "In Severian, I had created a character who forgot nothing"
+NOTE: Same page. Wolfe: "I came across an article about a brain injury that is perfectly real [anterograde amnesia]... In Severian, I had created a character who forgot nothing. And I thought: let's do one of these guys who forgets everything." The interviewer frames it as "In the Soldier series you created a narrator who forgets everything at the end of every day"; the same page names Latro as the Soldier series narrator, so the Latro identification is page-supported. Quote verbatim.
+
+=== #47 [VERIFIED_VERBATIM] pos41
+CLAIM: Every narrator is unreliable because each sees from his own standpoint and not another's.
+TW: "You see things from your standpoint and not from... someone else"
+NOTE: Same page. Q: "A persistent theme of your writing is the unreliability of narrators." Wolfe: "They're all unreliable. Well, we all are, aren't we?" Then, to "Everyone's story is necessarily subjective": "You see things from your standpoint and not from the standpoint of someone else." Both limbs verbatim.
+
+=== #48 [VERIFIED_VERBATIM] pos42
+CLAIM: He recommends The Sorcerer's House as an entry point because the epistolary form helps readers, provided they accept the style changing with each letter writer.
+TW: "It's an epistolary novel, and that seems to help people along"
+NOTE: Same page, EDITING AND WRITING section, answering how a Niven/Card/Brin reader should start Wolfe: "I think it's probably The Sorcerer's House. It's an epistolary novel, and that seems to help people along. So long as they don't get bothered by the fact that the style changes from one letter writer to another." Every limb verbatim.
+
+=== #49 [VERIFIED_VERBATIM] pos43
+CLAIM: Military service teaches you to look at scenery as defensive positions, the perception behind Severian's line that war is a new geography.
+TW: "You learn to look at scenery from a standpoint of defensive positions"
+NOTE: Same page, WAR AND RELIGION section. The interviewer quotes Severian's passage ("War is not a new experience; it is a new world ... Even its geography is new, because it is a geography in which insignificant hills and hollows are lifted to the importance of cities") and Wolfe's whole reply is the quoted line. The claim's link between the Severian passage and the perception is by direct adjacency (reply to that quoted passage), not an explicit statement; the military framing is the section's own ("What military service does is rub off a lot of the pretense and self-deception").
+
+=== #50 [VERIFIED_VERBATIM] pos44
+CLAIM: Wolfe learned prose from a college editor who blue-pencilled every word a sentence did not require, and he wrote the next story so it could not be cut.
+TW: "He's taking out every word the sentence doesn't require"
+NOTE: locusmag.com/2002/Issue09/GaimanWolfe.html fetched raw (200, 17KB; page uses a legacy charset so curly apostrophes render as replacement chars — normalized before matching). Wolfe on the student editor of The Commentator at Texas A&M: "he got a blue pencil, and he edited it there in front of me... 'I see what he's doing. He's taking out every word the sentence doesn't require. I'm going to write the next story so he can't do that.'" Also "I learned more from the student editor of The Commentator than I have ever learned from any other editor." All limbs supported.
+
+=== #51 [VERIFIED_VERBATIM] pos45
+CLAIM: His definition of good literature is what an educated reader can read and reread with increased pleasure, and he refuses to write fiction that gives everything up on first reading.
+TW: "read by an educated reader, and reread with increased pleasure"
+NOTE: Same Locus page. Gaiman quotes Wolfe's own letter definition: "My definition of good literature is that which can be read by an educated reader, and reread with increased pleasure." On fiction that gives everything up first time, Wolfe: "Phooey! I don't want to write that kind of thing. Rats! I don't like it and it would bore me to write it and I'm not gonna write it." Both limbs supported; the definition is Wolfe's, quoted back to him by Gaiman.
+
+=== #52 [VERIFIED_VERBATIM] pos46
+CLAIM: He will not adjudicate readers' theories about the text because he argues from presumed expertise on an unlevel field, and there is no sacredness to the text.
+TW: "I am dealing from this position of presumed expertise"
+NOTE: Same Locus page: "too often people want me to go in and settle their argument. That's exactly what I should not do. I am dealing from this position of presumed expertise. We don't have a level playing field... There's no sacredness to the text." Every limb verbatim, including the Baker Street Irregulars analogy that carries it.
+
+=== #53 [VERIFIED_VERBATIM] pos47
+CLAIM: Wolfe says readers will see things in the books he does not see consciously, and that he likes those things.
+TW: "You're going to see things in there that I don't see consciously"
+NOTE: Same Locus page: "And besides, I don't know everything to give it up. You're going to see things in there that I don't see consciously. I like those things." Quote and both limbs verbatim.
+
+=== #54 [VERIFIED_VERBATIM] pos48
+CLAIM: Gaiman calls Wolfe the master of lying in fiction and says Peace is built on lies decipherable after three or four readings; Wolfe replies that he never lies.
+TW: "Peace is built on lies" / "I never lie."
+NOTE: Same Locus page. Gaiman: "I think Gene is the master of lying in fiction, both directly and indirectly. Peace is built on lies... After three or four times through that text, you begin to be able to say, 'I think he's lying about this or that.'" Wolfe's entire reply: "I never lie." All three limbs (master of lying, Peace built on lies, three or four readings, the reply) verbatim.
+
+=== #55 [VERIFIED_VERBATIM] pos49
+CLAIM: The most important thing fiction does is assure the reader that things need not be as they are now, which Wolfe names hope.
+TW: "it assures the reader that things need not be as they are now"
+NOTE: Same Locus page. Q: "What's the most important thing about fiction?" Wolfe: "The most important thing is that it assures the reader that things need not be as they are now. In other words, the most important thing is hope." Every limb verbatim.
+
+=== #56 [VERIFIED_VERBATIM] pos50
+CLAIM: Anything in a book must do several things at once (tone, plot, character); a 'pass the salt' line is waste unless said in a particular way or for a purpose.
+TW: "it's a waste unless it's said in some particular way"
+NOTE: locusmag.com/2011/03/gene-wolfe-engineering-the-future/ fetched raw (200, 163KB); page is the excerpts from the March 2011 Locus interview. Wolfe: "When you do anything in a book, you really have to be doing several things at once. You need to pique the tone of the book; to move the plot forward; to touch on the character of the person. If you've got a dinner scene where somebody says, 'Pass the salt,' it's a waste unless it's said in some particular way, or the character wants the salt for some special purpose." Every limb verbatim, tone/plot/character included.
+
+=== #57 [VERIFIED_VERBATIM] pos51
+CLAIM: Wolfe denies his style has changed at all: he writes in a voice appropriate to the story he has to tell.
+TW: "My style hasn't changed at all"
+NOTE: Wayback capture 20020703232613 of sfsite.com/03b/gw124.htm fetched raw (200, 41KB); header confirms "A Magus Of Many Suns: An Interview With Gene Wolfe / An interview with Nick Gevers / January 2002". Wolfe: "My style hasn't changed at all. I write in a voice appropriate to the story I have to tell, that's all. I may be doing it a bit better now, or a bit worse; but that's always been the idea." Both limbs verbatim.
+
+=== #58 [VERIFIED_VERBATIM] pos52
+CLAIM: A style becomes difficult only when it is not suited to what is being said; if it is the right style he likes it, if not he changes it.
+TW: "I use the style suited to the story... If it isn't, I change it"
+NOTE: Same SF Site capture: "There really aren't any answers. I use the style suited to the story. If it's the right style for the story, I like it. If it isn't, I change it. A style becomes difficult when it is not suited to what is being said." Quote and both limbs verbatim. Wording note: the page says "becomes difficult when it is not suited"; the claim's "only when" is a (fair, context-consistent) tightening, not the page's word.

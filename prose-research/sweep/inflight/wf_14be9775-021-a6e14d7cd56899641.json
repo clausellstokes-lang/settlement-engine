@@ -1,0 +1,31 @@
+{
+ "role": "verifier",
+ "name": "leguin",
+ "angle": null,
+ "tag": "i722-743",
+ "lines": 80,
+ "firstTs": "2026-09-07T06:43:35.747Z",
+ "lastTs": "2026-09-07T06:48:26.289Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 18,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [
+  "https://strangehorizons.com/wordpress/non-fiction/articles/i-never-did-like-smart-ass-utopians-on-always-coming-home-by-ursula-k-le-guin/",
+  "https://ray.yorksj.ac.uk/id/eprint/6566/8/14744740221126984.pdf",
+  "https://dannyreviews.com/h/Always_Coming_Home.html",
+  "https://vector-bsfa.com/2020/12/24/review-the-left-hand-of-darkness-by-ursula-k-le-guin/"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "Checkpoint written and verified. All four sources returned HTTP 200 on the first live fetch with a browser user agent and were read as raw text (the PDF via `pdftotext -layout`), so no Wayback or archive route was needed and nothing is BLOCKED.",
+ "run": "wf_14be9775-021",
+ "agent": "a6e14d7cd56899641",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/405b5e7e-8c4d-4fa3-8d98-bc46b7fbf074/subagents/workflows/wf_14be9775-021/agent-a6e14d7cd56899641.jsonl",
+ "journal": "result",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-leguin-i722-743.json",
+  "exists": true
+ }
+}

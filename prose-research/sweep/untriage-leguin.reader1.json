@@ -1,0 +1,650 @@
+{
+ "name": "leguin",
+ "writtenAt": "Mon Sep  7 04:43:28 EDT 2026",
+ "critic": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/critic-leguin.md (rung-9/third completeness pass, mtime 04:36:27 2026-09-07)",
+ "rows": [
+  {
+   "index": 384,
+   "feature": "13/14",
+   "why": "critic \u00a78 F13/F14 (sound): Slusser, \"Le Guin gives us precise prose rhythms.\" (verify-only)"
+  },
+  {
+   "index": 389,
+   "feature": "9/10",
+   "why": "critic \u00a78 F9/F10 (leaving-out, the glimpse): Jameson, \"the world-reduction thesis, the most-cited academic account of her method\", absent from the section (verify-only)"
+  },
+  {
+   "index": 390,
+   "feature": "9/10",
+   "why": "critic \u00a78 F9/F10 (leaving-out, the glimpse): Jameson, \"the world-reduction thesis, the most-cited academic account of her method\", absent from the section (verify-only)"
+  },
+  {
+   "index": 392,
+   "feature": "9/10",
+   "why": "critic \u00a78 F9/F10 (leaving-out, the glimpse): Jameson, \"the world-reduction thesis, the most-cited academic account of her method\", absent from the section (verify-only)"
+  },
+  {
+   "index": 453,
+   "feature": "9/10",
+   "why": "critic \u00a78 F9/F10: Erlich; \u00a74 offers it as a second source, \"a significant gap to be left or filled in by readers\" (verify-only)"
+  },
+  {
+   "index": 468,
+   "feature": "6/16",
+   "why": "critic \u00a78 F6/F16 (plainness, diction): rows the plainness and diction features need (verify-only)"
+  },
+  {
+   "index": 469,
+   "feature": "13/14",
+   "why": "critic \u00a78 F13/F14 (sound): Kelso rows the sound features need (verify-only)"
+  },
+  {
+   "index": 470,
+   "feature": "13/14",
+   "why": "critic \u00a78 F13/F14 (sound): Kelso rows the sound features need (verify-only)"
+  },
+  {
+   "index": 471,
+   "feature": "duplicates",
+   "why": "critic \u00a78, the 53 duplicates: should be marked \"duplicate quotation of #N\" without a fetch \u2014 un-skipped so the marking can be recorded (no fetch owed)"
+  },
+  {
+   "index": 472,
+   "feature": "13/14",
+   "why": "critic \u00a78 F13/F14 (sound): Kelso rows the sound features need (verify-only)"
+  },
+  {
+   "index": 476,
+   "feature": "duplicates",
+   "why": "critic \u00a78, the 53 duplicates: should be marked \"duplicate quotation of #N\" without a fetch \u2014 un-skipped so the marking can be recorded (no fetch owed)"
+  },
+  {
+   "index": 478,
+   "feature": "13/14",
+   "why": "critic \u00a78 F13/F14 (sound); \u00a74: the same Kelso relay as [55], whose primary was never claimed; the essay sits in the Wave PDF on disk (verify-only)"
+  },
+  {
+   "index": 479,
+   "feature": "duplicates",
+   "why": "critic \u00a78, the 53 duplicates: should be marked \"duplicate quotation of #N\" without a fetch \u2014 un-skipped so the marking can be recorded (no fetch owed)"
+  },
+  {
+   "index": 516,
+   "feature": "duplicates",
+   "why": "critic \u00a78, the 53 duplicates: should be marked \"duplicate quotation of #N\" without a fetch \u2014 un-skipped so the marking can be recorded (no fetch owed)"
+  },
+  {
+   "index": 517,
+   "feature": "duplicates",
+   "why": "critic \u00a78, the 53 duplicates: should be marked \"duplicate quotation of #N\" without a fetch \u2014 un-skipped so the marking can be recorded (no fetch owed)"
+  },
+  {
+   "index": 518,
+   "feature": "duplicates",
+   "why": "critic \u00a78, the 53 duplicates: should be marked \"duplicate quotation of #N\" without a fetch \u2014 un-skipped so the marking can be recorded (no fetch owed)"
+  },
+  {
+   "index": 520,
+   "feature": "duplicates",
+   "why": "critic \u00a78, the 53 duplicates: should be marked \"duplicate quotation of #N\" without a fetch \u2014 un-skipped so the marking can be recorded (no fetch owed)"
+  },
+  {
+   "index": 522,
+   "feature": "15",
+   "why": "critic \u00a78 F15 (length): the two rows listed beside 533 for the sentence-length feature (verify-only)"
+  },
+  {
+   "index": 523,
+   "feature": "duplicates",
+   "why": "critic \u00a78, the 53 duplicates: should be marked \"duplicate quotation of #N\" without a fetch \u2014 un-skipped so the marking can be recorded (no fetch owed)"
+  },
+  {
+   "index": 524,
+   "feature": "duplicates",
+   "why": "critic \u00a78, the 53 duplicates: should be marked \"duplicate quotation of #N\" without a fetch \u2014 un-skipped so the marking can be recorded (no fetch owed)"
+  },
+  {
+   "index": 526,
+   "feature": "25",
+   "why": "critic \u00a78 F25 (telling): \"Giving information indirectly, by hint and suggestion\" (verify-only)"
+  },
+  {
+   "index": 529,
+   "feature": "duplicates",
+   "why": "critic \u00a78, the 53 duplicates: should be marked \"duplicate quotation of #N\" without a fetch \u2014 un-skipped so the marking can be recorded (no fetch owed)"
+  },
+  {
+   "index": 530,
+   "feature": "duplicates",
+   "why": "critic \u00a78, the 53 duplicates: should be marked \"duplicate quotation of #N\" without a fetch \u2014 un-skipped so the marking can be recorded (no fetch owed)"
+  },
+  {
+   "index": 533,
+   "feature": "15",
+   "why": "critic \u00a78 F15 (length): \"There are no rules concerning sentence length.\" (verify-only)"
+  },
+  {
+   "index": 534,
+   "feature": "15",
+   "why": "critic \u00a78 F15 (length): the two rows listed beside 533 for the sentence-length feature (verify-only)"
+  },
+  {
+   "index": 536,
+   "feature": "13/14",
+   "why": "critic \u00a78 F13/F14 (sound): listed among the sound rows the section needs (verify-only)"
+  },
+  {
+   "index": 537,
+   "feature": "duplicates",
+   "why": "critic \u00a78, the 53 duplicates: should be marked \"duplicate quotation of #N\" without a fetch \u2014 un-skipped so the marking can be recorded (no fetch owed)"
+  },
+  {
+   "index": 542,
+   "feature": "19",
+   "why": "critic \u00a78 F19 (point of view): Roberts, listed among the rows the point-of-view feature needs (verify-only)"
+  },
+  {
+   "index": 548,
+   "feature": "22",
+   "why": "critic \u00a78 F22 (names); \u00a74: Roberts, \"three names covering three of the four elements\", a second source beside Shippey (verify-only)"
+  },
+  {
+   "index": 551,
+   "feature": "6/16",
+   "why": "critic \u00a78 F6/F16 (plainness, diction); \u00a74 names Guynes as a second source for plainness as her own late practice (verify-only)"
+  },
+  {
+   "index": 552,
+   "feature": "8",
+   "why": "critic \u00a78 F8 (detail): Guynes, \"her sentences luxuriate in the plainclothes description of thistle and juniper\", the close-2 finder's top find (verify-only)"
+  },
+  {
+   "index": 561,
+   "feature": "duplicates",
+   "why": "critic \u00a78, the 53 duplicates: should be marked \"duplicate quotation of #N\" without a fetch \u2014 un-skipped so the marking can be recorded (no fetch owed)"
+  },
+  {
+   "index": 562,
+   "feature": "duplicates",
+   "why": "critic \u00a78, the 53 duplicates: should be marked \"duplicate quotation of #N\" without a fetch \u2014 un-skipped so the marking can be recorded (no fetch owed)"
+  },
+  {
+   "index": 563,
+   "feature": "duplicates",
+   "why": "critic \u00a78, the 53 duplicates: should be marked \"duplicate quotation of #N\" without a fetch \u2014 un-skipped so the marking can be recorded (no fetch owed)"
+  },
+  {
+   "index": 564,
+   "feature": "duplicates",
+   "why": "critic \u00a78, the 53 duplicates: should be marked \"duplicate quotation of #N\" without a fetch \u2014 un-skipped so the marking can be recorded (no fetch owed)"
+  },
+  {
+   "index": 566,
+   "feature": "22",
+   "why": "critic \u00a78 F22 (names); \u00a74: Steering ch. 1, \"the echo-allusions hidden in them, can be intensely expressive\" (verify-only)"
+  },
+  {
+   "index": 567,
+   "feature": "duplicates",
+   "why": "critic \u00a78, the 53 duplicates: should be marked \"duplicate quotation of #N\" without a fetch \u2014 un-skipped so the marking can be recorded (no fetch owed)"
+  },
+  {
+   "index": 575,
+   "feature": "duplicates",
+   "why": "critic \u00a78, the 53 duplicates: should be marked \"duplicate quotation of #N\" without a fetch \u2014 un-skipped so the marking can be recorded (no fetch owed)"
+  },
+  {
+   "index": 576,
+   "feature": "duplicates",
+   "why": "critic \u00a78, the 53 duplicates: should be marked \"duplicate quotation of #N\" without a fetch \u2014 un-skipped so the marking can be recorded (no fetch owed)"
+  },
+  {
+   "index": 577,
+   "feature": "9/10",
+   "why": "critic \u00a78 F9/F10: Burt; \u00a74 names 577 and 579 as second sources for the no-academic-account limb (verify-only)"
+  },
+  {
+   "index": 578,
+   "feature": "duplicates",
+   "why": "critic \u00a78, the 53 duplicates: should be marked \"duplicate quotation of #N\" without a fetch \u2014 un-skipped so the marking can be recorded (no fetch owed)"
+  },
+  {
+   "index": 579,
+   "feature": "9/10",
+   "why": "critic \u00a78 F9/F10: Burt; \u00a74 names 577 and 579 as second sources for the no-academic-account limb (verify-only)"
+  },
+  {
+   "index": 580,
+   "feature": "9/10",
+   "why": "critic \u00a78 F9/F10: Burt; \u00a74 names 577 and 579 as second sources for the no-academic-account limb (verify-only)"
+  },
+  {
+   "index": 582,
+   "feature": "duplicates",
+   "why": "critic \u00a78, the 53 duplicates: should be marked \"duplicate quotation of #N\" without a fetch \u2014 un-skipped so the marking can be recorded (no fetch owed)"
+  },
+  {
+   "index": 583,
+   "feature": "duplicates",
+   "why": "critic \u00a78, the 53 duplicates: should be marked \"duplicate quotation of #N\" without a fetch \u2014 un-skipped so the marking can be recorded (no fetch owed)"
+  },
+  {
+   "index": 584,
+   "feature": "11/23",
+   "why": "critic \u00a78 F11/F23 (register, scale); \u00a74: Ramsay, \"the reassuring sense of fable which pervades\", adjacent to the domestic-register limb (verify-only)"
+  },
+  {
+   "index": 587,
+   "feature": "18",
+   "why": "critic \u00a78 F18 (repetition): Amenta, the row the repetition feature needs (verify-only)"
+  },
+  {
+   "index": 605,
+   "feature": "8",
+   "why": "critic \u00a78 F8 (detail): rows the detail feature needs, listed beside 827, 552 and 853 (verify-only)"
+  },
+  {
+   "index": 607,
+   "feature": "duplicates",
+   "why": "critic \u00a78, the 53 duplicates: should be marked \"duplicate quotation of #N\" without a fetch \u2014 un-skipped so the marking can be recorded (no fetch owed)"
+  },
+  {
+   "index": 608,
+   "feature": "duplicates",
+   "why": "critic \u00a78, the 53 duplicates: should be marked \"duplicate quotation of #N\" without a fetch \u2014 un-skipped so the marking can be recorded (no fetch owed)"
+  },
+  {
+   "index": 613,
+   "feature": "17",
+   "why": "critic \u00a78 F17 (modifiers); \u00a74: Mohanraj quoting Redux, \"Strike the word 'probably' and replace it with 'certainly.'\", her own recorded self-revision (verify-only)"
+  },
+  {
+   "index": 614,
+   "feature": "20",
+   "why": "critic \u00a78 F20 (place): the two rows the place feature needs (verify-only)"
+  },
+  {
+   "index": 615,
+   "feature": "6/16",
+   "why": "critic \u00a78 F6/F16 (plainness, diction): rows the plainness and diction features need (verify-only)"
+  },
+  {
+   "index": 616,
+   "feature": "6/16",
+   "why": "critic \u00a78 F6/F16 (plainness, diction): rows the plainness and diction features need (verify-only)"
+  },
+  {
+   "index": 618,
+   "feature": "9/10",
+   "why": "critic \u00a78 F9/F10 (leaving-out, the glimpse): Le Guin to Morton, \"fantasy and science fiction is just the art of suggestion\" (verify-only)"
+  },
+  {
+   "index": 619,
+   "feature": "9/10",
+   "why": "critic \u00a78 F9/F10 (leaving-out, the glimpse): Le Guin to Morton, \"You don't really tell people that much\" (verify-only)"
+  },
+  {
+   "index": 621,
+   "feature": "9/10",
+   "why": "critic \u00a78 F9/F10 (leaving-out, the glimpse): Le Guin to Morton, listed beside 618/619/622 as a needed row (verify-only)"
+  },
+  {
+   "index": 622,
+   "feature": "9/10",
+   "why": "critic \u00a78 F9/F10 (leaving-out, the glimpse): Le Guin to Morton, \"shorter and more allusive\" (verify-only)"
+  },
+  {
+   "index": 624,
+   "feature": "13/14",
+   "why": "critic \u00a78 F13/F14 (sound): written \"[624]/[894]\", one pair of sound rows the section needs (verify-only)"
+  },
+  {
+   "index": 626,
+   "feature": "6/16",
+   "why": "critic \u00a78 F6/F16 (plainness, diction); \u00a74 lists it among the second sources for plainness as her own late practice (verify-only)"
+  },
+  {
+   "index": 641,
+   "feature": "12",
+   "why": "critic \u00a78 F12 (archaism): Bittner, \"The very word tale has an archaic, distant tone\" (verify-only)"
+  },
+  {
+   "index": 646,
+   "feature": "17",
+   "why": "critic \u00a78 F17 (modifiers); \u00a74 names Bittner as the second source for the rationed-modifiers limb, now one book at two relays (verify-only)"
+  },
+  {
+   "index": 650,
+   "feature": "13/14",
+   "why": "critic \u00a78 F13/F14 (sound); \u00a74 attributes it to F26: the Bloom-volume essay, \"a skillful use of cadence and sound patterns\" (verify-only)"
+  },
+  {
+   "index": 663,
+   "feature": "6/16",
+   "why": "critic \u00a78 F6/F16 (plainness, diction); \u00a74: Cadden, \"Leese Webster is very spare\" (verify-only)"
+  },
+  {
+   "index": 664,
+   "feature": "6/16",
+   "why": "critic \u00a78 F6/F16 (plainness, diction); \u00a74: her own answer to Cadden, \"It's austere\" (verify-only)"
+  },
+  {
+   "index": 667,
+   "feature": "6/16",
+   "why": "critic \u00a78 F6/F16 (plainness, diction); \u00a74: Olander, \"strong colors and plain fabrics\" (verify-only)"
+  },
+  {
+   "index": 669,
+   "feature": "6/16",
+   "why": "critic \u00a78 F6/F16 (plainness, diction): listed with the Olander and Cadden rows (verify-only)"
+  },
+  {
+   "index": 675,
+   "feature": "9/10",
+   "why": "critic \u00a78 F9/F10: Spivack; \u00a74 offers it as the second source for the leaving-out method, \"richly suggestive, leaving much unsaid\" (verify-only)"
+  },
+  {
+   "index": 680,
+   "feature": "duplicates",
+   "why": "critic \u00a78, the 53 duplicates: should be marked \"duplicate quotation of #N\" without a fetch \u2014 un-skipped so the marking can be recorded (no fetch owed)"
+  },
+  {
+   "index": 681,
+   "feature": "duplicates",
+   "why": "critic \u00a78, the 53 duplicates: should be marked \"duplicate quotation of #N\" without a fetch \u2014 un-skipped so the marking can be recorded (no fetch owed)"
+  },
+  {
+   "index": 682,
+   "feature": "duplicates",
+   "why": "critic \u00a78, the 53 duplicates: should be marked \"duplicate quotation of #N\" without a fetch \u2014 un-skipped so the marking can be recorded (no fetch owed)"
+  },
+  {
+   "index": 688,
+   "feature": "duplicates",
+   "why": "critic \u00a78, the 53 duplicates: should be marked \"duplicate quotation of #N\" without a fetch \u2014 un-skipped so the marking can be recorded (no fetch owed)"
+  },
+  {
+   "index": 689,
+   "feature": "duplicates",
+   "why": "critic \u00a78, the 53 duplicates: should be marked \"duplicate quotation of #N\" without a fetch \u2014 un-skipped so the marking can be recorded (no fetch owed)"
+  },
+  {
+   "index": 690,
+   "feature": "duplicates",
+   "why": "critic \u00a78, the 53 duplicates: should be marked \"duplicate quotation of #N\" without a fetch \u2014 un-skipped so the marking can be recorded (no fetch owed)"
+  },
+  {
+   "index": 692,
+   "feature": "duplicates",
+   "why": "critic \u00a78, the 53 duplicates: should be marked \"duplicate quotation of #N\" without a fetch \u2014 un-skipped so the marking can be recorded (no fetch owed)"
+  },
+  {
+   "index": 693,
+   "feature": "19",
+   "why": "critic \u00a78 F19 (point of view): Dirda, \"confides in the reader like a friend\" \u2014 \u00a73 calls it the strongest counter-witness feature 19 omits (verify-only)"
+  },
+  {
+   "index": 694,
+   "feature": "11/23",
+   "why": "critic \u00a78 F11/F23 (register, scale): the second row listed for register and scale (verify-only)"
+  },
+  {
+   "index": 698,
+   "feature": "duplicates",
+   "why": "critic \u00a78, the 53 duplicates: should be marked \"duplicate quotation of #N\" without a fetch \u2014 un-skipped so the marking can be recorded (no fetch owed)"
+  },
+  {
+   "index": 699,
+   "feature": "duplicates",
+   "why": "critic \u00a78, the 53 duplicates: should be marked \"duplicate quotation of #N\" without a fetch \u2014 un-skipped so the marking can be recorded (no fetch owed)"
+  },
+  {
+   "index": 700,
+   "feature": "duplicates",
+   "why": "critic \u00a78, the 53 duplicates: should be marked \"duplicate quotation of #N\" without a fetch \u2014 un-skipped so the marking can be recorded (no fetch owed)"
+  },
+  {
+   "index": 702,
+   "feature": "19",
+   "why": "critic \u00a78 F19 (point of view): Burt/Plotz; \u00a74 names 703, \"invites us in and holds us back\", as the second counter-source (verify-only)"
+  },
+  {
+   "index": 703,
+   "feature": "19",
+   "why": "critic \u00a78 F19 (point of view): Burt/Plotz; \u00a74 names 703, \"invites us in and holds us back\", as the second counter-source (verify-only)"
+  },
+  {
+   "index": 704,
+   "feature": "duplicates",
+   "why": "critic \u00a78, the 53 duplicates: should be marked \"duplicate quotation of #N\" without a fetch \u2014 un-skipped so the marking can be recorded (no fetch owed)"
+  },
+  {
+   "index": 705,
+   "feature": "22",
+   "why": "critic \u00a78 F22 (names): listed with 566 and 548 among the rows the names feature needs (verify-only)"
+  },
+  {
+   "index": 792,
+   "feature": "duplicates",
+   "why": "critic \u00a78, the 53 duplicates: should be marked \"duplicate quotation of #N\" without a fetch \u2014 un-skipped so the marking can be recorded (no fetch owed)"
+  },
+  {
+   "index": 793,
+   "feature": "duplicates",
+   "why": "critic \u00a78, the 53 duplicates: should be marked \"duplicate quotation of #N\" without a fetch \u2014 un-skipped so the marking can be recorded (no fetch owed)"
+  },
+  {
+   "index": 794,
+   "feature": "duplicates",
+   "why": "critic \u00a78, the 53 duplicates: should be marked \"duplicate quotation of #N\" without a fetch \u2014 un-skipped so the marking can be recorded (no fetch owed)"
+  },
+  {
+   "index": 796,
+   "feature": "duplicates",
+   "why": "critic \u00a78, the 53 duplicates: should be marked \"duplicate quotation of #N\" without a fetch \u2014 un-skipped so the marking can be recorded (no fetch owed)"
+  },
+  {
+   "index": 797,
+   "feature": "duplicates",
+   "why": "critic \u00a78, the 53 duplicates: should be marked \"duplicate quotation of #N\" without a fetch \u2014 un-skipped so the marking can be recorded (no fetch owed)"
+  },
+  {
+   "index": 798,
+   "feature": "duplicates",
+   "why": "critic \u00a78, the 53 duplicates: should be marked \"duplicate quotation of #N\" without a fetch \u2014 un-skipped so the marking can be recorded (no fetch owed)"
+  },
+  {
+   "index": 802,
+   "feature": "duplicates",
+   "why": "critic \u00a78, the 53 duplicates: should be marked \"duplicate quotation of #N\" without a fetch \u2014 un-skipped so the marking can be recorded (no fetch owed)"
+  },
+  {
+   "index": 803,
+   "feature": "12",
+   "why": "critic \u00a78 F12 (archaism); \u00a73: the same Elfland page holds \"The archaic manner is indeed a perfect distancer\", contradicting the absolute rule (verify-only)"
+  },
+  {
+   "index": 804,
+   "feature": "12",
+   "why": "critic \u00a78 F12 (archaism): listed with the Elfland archaism rows 803, 805, 816, 817 (verify-only)"
+  },
+  {
+   "index": 805,
+   "feature": "12",
+   "why": "critic \u00a78 F12 (archaism); \u00a73: \"After all, archaisms are not essential.\" on the page feature 12 rests on (verify-only)"
+  },
+  {
+   "index": 814,
+   "feature": "duplicates",
+   "why": "critic \u00a78, the 53 duplicates: should be marked \"duplicate quotation of #N\" without a fetch \u2014 un-skipped so the marking can be recorded (no fetch owed)"
+  },
+  {
+   "index": 815,
+   "feature": "duplicates",
+   "why": "critic \u00a78, the 53 duplicates: should be marked \"duplicate quotation of #N\" without a fetch \u2014 un-skipped so the marking can be recorded (no fetch owed)"
+  },
+  {
+   "index": 816,
+   "feature": "12",
+   "why": "critic \u00a78 F12 (archaism); \u00a73: Eddison's archaic prose judged \"exact, clear, powerful\" (verify-only)"
+  },
+  {
+   "index": 817,
+   "feature": "12",
+   "why": "critic \u00a78 F12 (archaism): listed with the Elfland archaism rows (verify-only)"
+  },
+  {
+   "index": 819,
+   "feature": "duplicates",
+   "why": "critic \u00a78, the 53 duplicates: should be marked \"duplicate quotation of #N\" without a fetch \u2014 un-skipped so the marking can be recorded (no fetch owed)"
+  },
+  {
+   "index": 820,
+   "feature": "duplicates",
+   "why": "critic \u00a78, the 53 duplicates: should be marked \"duplicate quotation of #N\" without a fetch \u2014 un-skipped so the marking can be recorded (no fetch owed)"
+  },
+  {
+   "index": 821,
+   "feature": "duplicates",
+   "why": "critic \u00a78, the 53 duplicates: should be marked \"duplicate quotation of #N\" without a fetch \u2014 un-skipped so the marking can be recorded (no fetch owed)"
+  },
+  {
+   "index": 824,
+   "feature": "duplicates",
+   "why": "critic \u00a78, the 53 duplicates: should be marked \"duplicate quotation of #N\" without a fetch \u2014 un-skipped so the marking can be recorded (no fetch owed)"
+  },
+  {
+   "index": 827,
+   "feature": "8",
+   "why": "critic \u00a78 F8 (detail): the \"lesser matters\" qualification \u2014 \u00a73 says the great matters are carried by coherence, the small by detail (verify-only)"
+  },
+  {
+   "index": 828,
+   "feature": "duplicates",
+   "why": "critic \u00a78, the 53 duplicates: should be marked \"duplicate quotation of #N\" without a fetch \u2014 un-skipped so the marking can be recorded (no fetch owed)"
+  },
+  {
+   "index": 829,
+   "feature": "duplicates",
+   "why": "critic \u00a78, the 53 duplicates: should be marked \"duplicate quotation of #N\" without a fetch \u2014 un-skipped so the marking can be recorded (no fetch owed)"
+  },
+  {
+   "index": 832,
+   "feature": "6/16",
+   "why": "critic \u00a78 F6/F16 (plainness, diction); \u00a74: \"potatoes, everyday language, commonplace characters\" for her own late practice (verify-only)"
+  },
+  {
+   "index": 839,
+   "feature": "9/10",
+   "why": "critic \u00a78 F9/F10 (leaving-out, the glimpse): BVC, \"brevity, a few telling details, a great left unsaid\" (verify-only)"
+  },
+  {
+   "index": 840,
+   "feature": "9/10",
+   "why": "critic \u00a78 F9/F10 (leaving-out, the glimpse): BVC rows beside 839; \u00a74 also names 844 for the F8 exact-nouns limb (verify-only)"
+  },
+  {
+   "index": 844,
+   "feature": "9/10",
+   "why": "critic \u00a78 F9/F10 (leaving-out, the glimpse): BVC rows beside 839; \u00a74 also names 844 for the F8 exact-nouns limb (verify-only)"
+  },
+  {
+   "index": 849,
+   "feature": "8",
+   "why": "critic \u00a78 F8 (detail): rows the detail feature needs, listed beside 827, 552 and 853 (verify-only)"
+  },
+  {
+   "index": 853,
+   "feature": "8",
+   "why": "critic \u00a78 F8 (detail): \"I'm very strong on accuracy and exactitude\", a second source for her measured practice (verify-only)"
+  },
+  {
+   "index": 855,
+   "feature": "duplicates",
+   "why": "critic \u00a78, the 53 duplicates: should be marked \"duplicate quotation of #N\" without a fetch \u2014 un-skipped so the marking can be recorded (no fetch owed)"
+  },
+  {
+   "index": 856,
+   "feature": "9/10",
+   "why": "critic \u00a78 F9/F10 (leaving-out, the glimpse): \"You can't describe everything\" (verify-only)"
+  },
+  {
+   "index": 863,
+   "feature": "19",
+   "why": "critic \u00a78 F19 (point of view): \"describe it from the point of view of the powerless\" (verify-only)"
+  },
+  {
+   "index": 866,
+   "feature": "duplicates",
+   "why": "critic \u00a78, the 53 duplicates: should be marked \"duplicate quotation of #N\" without a fetch \u2014 un-skipped so the marking can be recorded (no fetch owed)"
+  },
+  {
+   "index": 890,
+   "feature": "9/10",
+   "why": "critic \u00a78 F9/F10 (leaving-out, the glimpse): \"you do as little as possible\" (verify-only)"
+  },
+  {
+   "index": 894,
+   "feature": "13/14",
+   "why": "critic \u00a78 F13/F14 (sound): written \"[624]/[894]\", one pair of sound rows the section needs (verify-only)"
+  },
+  {
+   "index": 895,
+   "feature": "duplicates",
+   "why": "critic \u00a78, the 53 duplicates: should be marked \"duplicate quotation of #N\" without a fetch \u2014 un-skipped so the marking can be recorded (no fetch owed)"
+  },
+  {
+   "index": 920,
+   "feature": "20",
+   "why": "critic \u00a78 F20 (place): the two rows the place feature needs (verify-only)"
+  }
+ ],
+ "count": 119,
+ "notes": "Reader 1 of two (session b43943b4). Method: transcribed section 8 bullet by bullet, expanded its ranges inclusive with python3 (516-518, 561-564, 680-682, 688-690, 698-700, 792-794, 796-798, 819-821 -> 53 duplicate rows; the feature bullets carry comma lists only), then read every index section 4 names and kept only those it calls a SKIPPED second source. All of section 4's SKIPPED second sources were already in section 8, so section 4 added no new index; its other eleven indices ([49, 50, 55, 83, 128, 416, 462, 586, 731, 747, 748] - the one-source limbs it flags, not second sources) are non-SKIPPED and are reported in notSkipped. Every one of the 119 rows was checked against state-leguin.json (1,791,483 bytes, sha256 ce3c4fff20d52177, the identity the critic states) and carries verdict SKIPPED_TRIAGE. Raw candidate count before the rule-3 filter: 130 (119 from section 8, 11 section-4-only). JUDGMENT FOR THE RECONCILER: the 53 duplicates bullet IS included, because it sits inside section 8 (the designated primary list), its rows are all SKIPPED_TRIAGE and stay skipped forever unless un-triaged, and it is the only place in either section with ranges to expand; but the critic's own section 9 item 2 prices the round at '~82 rows' and says to mark those 53 'without fetching', so if the reconciler reads the list as fetch-only, drop the 53 rows whose feature is 'duplicates' and the count becomes 66. Section 8's header says 82 while its feature bullets name 66 distinct indices; the 16 remaining SKIPPED_TRIAGE rows in the state ([519, 565, 598, 599, 600, 604, 606, 610, 611, 701, 706, 813, 867, 868, 891, 892]) are not named in section 8 and were excluded per the 'nothing from other sections' rule, though 66 + 16 = 82 exactly. [601] and [602] are named only in section 9 and are BLOCKED, not SKIPPED_TRIAGE, so they are out on two grounds.",
+ "notSkipped": [
+  {
+   "index": 49,
+   "verdict": "VERIFIED_VERBATIM"
+  },
+  {
+   "index": 50,
+   "verdict": "VERIFIED_VERBATIM"
+  },
+  {
+   "index": 55,
+   "verdict": "VERIFIED_VERBATIM"
+  },
+  {
+   "index": 83,
+   "verdict": "VERIFIED_VERBATIM"
+  },
+  {
+   "index": 128,
+   "verdict": "VERIFIED_VERBATIM"
+  },
+  {
+   "index": 416,
+   "verdict": "VERIFIED_VERBATIM"
+  },
+  {
+   "index": 462,
+   "verdict": "PARTIAL"
+  },
+  {
+   "index": 586,
+   "verdict": "VERIFIED_VERBATIM"
+  },
+  {
+   "index": 731,
+   "verdict": "VERIFIED_VERBATIM"
+  },
+  {
+   "index": 747,
+   "verdict": "PARTIAL"
+  },
+  {
+   "index": 748,
+   "verdict": "VERIFIED_VERBATIM"
+  }
+ ]
+}

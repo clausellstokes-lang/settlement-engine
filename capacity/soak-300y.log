@@ -1,0 +1,62 @@
+SOAK START Mon Sep  7 00:09:37 EDT 2026
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.502.lock as PID 60913 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+
+# realm-scale case research-lit-4s-300y-4s-seed1
+# whole-world soak — 300 years × 4 settlements, seed "realm-scale-research-lit-4s-300y-4s-seed1", full_simulation preset (seasons preset), now pinned 2026-07-12T00:00:00.000Z
+
+## run A (primary)
+  300 years in 762.3s — final tick 15600 (15600 expected)
+
+## isolated worker evidence (actual Node worker_threads; not browser timing)
+  cold 3873.074ms · request 3870.081ms · worker handler 3441.339ms
+  transport node:worker_threads · thread 1 · 52 progress messages
+
+## assertions
+  PASS  tick arithmetic — finalTick 15600 == years×52
+  PASS  actual isolated Node worker execution — worker thread 1 != main thread 0
+  PASS  isolated worker output equals the direct domain path — 32c81cba35df == 32c81cba35df
+  PASS  isolated worker completed a non-vacuous one-year advance — 52 progress messages; final tick 52/52
+  PASS  byte-identical re-run (same seed) — all 300 yearly composite hashes equal
+  PASS  different seeds produce a divergent event-type mix — TV 0.273 (min 0.10); 232.07 shifted event-equivalents (min 2); largest shift strategy_reroute (0.051); composite hash also differed
+  PASS  every settlement population finite and > 0 every year (remnants excepted: a properly-died settlement holds zero by law)
+  PASS  realm population bounded — 21844 → 12289 (×0.56; envelope 0.05–20)
+  PASS  the world keeps moving: every decade carries distinct typed events and the composite state changes every year — 30 decade(s); min distinct types 17 (floor 10), min hash moves 10 (floor 10), min events/settlement 271.5 (floor 1)
+        majors: min 18 per decade; 0 decade(s) with none — REPORTED, and no floor grades it
+  PASS  serialized state under the house envelope — max 2.05MB < 3.60MB (4 settlements)
+  PASS  per-year wall-time trend not age-linear — Q1 2139.2ms → Q4 2890.2ms/year
+
+## cost envelope (serialized worldState+regionalGraph bytes per year)
+  381KB 407KB 480KB 539KB 577KB 645KB 665KB 717KB 772KB 816KB 850KB 923KB 973KB 1026KB 1106KB 1150KB 1199KB 1242KB 1317KB 1359KB 1422KB 1446KB 1516KB 1556KB 1585KB 1653KB 1730KB 1808KB 1868KB 1830KB 1820KB 1794KB 1770KB 1771KB 1744KB 1771KB 1766KB 1738KB 1745KB 1763KB 1739KB 1751KB 1751KB 1711KB 1733KB 1722KB 1722KB 1703KB 1693KB 1684KB 1707KB 1687KB 1676KB 1679KB 1642KB 1620KB 1598KB 1587KB 1608KB 1620KB 1599KB 1604KB 1607KB 1629KB 1628KB 1640KB 1640KB 1647KB 1649KB 1630KB 1617KB 1610KB 1602KB 1570KB 1583KB 1608KB 1605KB 1632KB 1636KB 1644KB 1643KB 1647KB 1677KB 1668KB 1653KB 1639KB 1625KB 1613KB 1617KB 1650KB 1675KB 1684KB 1666KB 1652KB 1649KB 1668KB 1670KB 1650KB 1684KB 1671KB 1680KB 1686KB 1687KB 1707KB 1709KB 1730KB 1713KB 1710KB 1694KB 1687KB 1700KB 1691KB 1717KB 1732KB 1719KB 1725KB 1712KB 1709KB 1707KB 1686KB 1685KB 1684KB 1688KB 1674KB 1678KB 1657KB 1655KB 1623KB 1621KB 1606KB 1596KB 1599KB 1595KB 1584KB 1560KB 1525KB 1528KB 1528KB 1518KB 1507KB 1505KB 1509KB 1498KB 1527KB 1522KB 1537KB 1543KB 1536KB 1548KB 1551KB 1563KB 1595KB 1596KB 1587KB 1593KB 1602KB 1603KB 1610KB 1595KB 1611KB 1612KB 1609KB 1621KB 1687KB 1729KB 1724KB 1745KB 1757KB 1781KB 1810KB 1810KB 1825KB 1861KB 1873KB 1890KB 1921KB 1903KB 1878KB 1874KB 1892KB 1857KB 1871KB 1917KB 1934KB 1927KB 1977KB 2011KB 2038KB 2027KB 2049KB 2038KB 2047KB 1998KB 1964KB 1978KB 1998KB 1993KB 2015KB 1987KB 1983KB 1970KB 1941KB 1925KB 1932KB 1927KB 1956KB 1965KB 1973KB 1986KB 2022KB 2011KB 1973KB 1969KB 1990KB 1949KB 1925KB 1922KB 1941KB 1923KB 1937KB 1935KB 1933KB 1958KB 1951KB 1916KB 1940KB 1918KB 1940KB 1930KB 1927KB 1905KB 1905KB 1894KB 1889KB 1880KB 1874KB 1854KB 1850KB 1846KB 1859KB 1852KB 1844KB 1836KB 1843KB 1843KB 1857KB 1833KB 1882KB 1881KB 1886KB 1889KB 1884KB 1868KB 1869KB 1836KB 1844KB 1836KB 1838KB 1844KB 1865KB 1893KB 1904KB 1902KB 1940KB 1949KB 1960KB 1956KB 1947KB 1930KB 1929KB 1977KB 1973KB 1980KB 1984KB 1963KB 2013KB 1962KB 1960KB 1963KB 1967KB 1979KB 1988KB 1990KB 2011KB 2018KB 2023KB 2041KB 2032KB 2029KB 1997KB 1999KB 1995KB 1967KB 1971KB 1969KB 1951KB 1945KB 1949KB 1937KB 1917KB
+  max 2.05MB · final 1.92MB · 512KB/settlement
+
+## stressor rhythm (active stressors at each year end)
+  2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2 1 2 2 2 2 2 2 2 0 0 0 0 0 0 0 0 0 0 0 0 2 2 2 2 2 2 0 0 1 2 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 1 2 2 2 2 2 2 2 2 1 2 2 2 2 2 2 2 2 2 2 2 2 1 2 2 2 2 2 2 2 1 2 2 2 2 2 2 0 2 2 1 2 2 2 2 2 1 1 2 2 2 2 2 2 2 1 2 2 2 2 2 2 2 1 1 2 2 2 2 0 2 2 1 2 2 1 2 2 2 2 1 2 2 2 2 2 2 2 2 2 2 2 2
+  min 0 · max 2 · final 2
+  stressors oscillated across the run (no permanent freeze at this horizon).
+
+## population trajectory (per settlement, year 1 → 300)
+  soak-a (city): 15548 → 10869 (min 6026, max 15196)
+  soak-b (town): 4213 → 1017 (min 0, max 3457)
+  soak-c (town): 1426 → 244 (min 224, max 1263)
+  soak-d (village): 657 → 159 (min 0, max 585)
+
+## war convergence (WR-9 instrument — envelopes graded by the behavioral oracle, not here)
+  counted wars 2 = closed 2 + alive at horizon 0
+  duration histogram {"short":0,"long":0,"generational":0,"unresolved":0,"unmeasured":2} (sum 2)
+  endings mix {"terms":0,"exhaustion":0,"ruler_change":0,"fragmentation":0,"annihilation":0,"conquest":1,"punitive_sack_initiation":0,"punitive_sack_vengeance":0}
+  endings unclassified {"not_a_closed_war":0,"no_terminal_evidence":1,"razing_road_unreconstructable":0} (1 of 2 closes)
+  deciding terms {"cause":0,"cost_to_continue":0,"cost_to_stop":0,"momentum":0} — 0 samples, 1-in-52
+  declared resolution: close ticks are tick-resolved from the outcome stream (every interior tick), not the year-boundary deployment ledger
+  wars ended by a road this collector does not observe: 2 (counted, duration unmeasured); ambiguous pairings: 0
+  PASS  every counted war lands in exactly one duration band — sum 2 === counted 2
+  PASS  every closed war lands in exactly one ending or one unclassified reason — classified 1 + unclassified 1 === closes 2
+
+receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/capacity/artifacts/research-lit-4s.cases/research-lit-4s-300y-4s-seed1.json
+
+OK — all assertions green (300y × 3 runs)
+
+realm-scale evidence: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/capacity/artifacts/research.json
+source: 4243bdc610fe5b380f1d0029973cf9088bae1631
+digest: c8205d4e1147c2fb28be42e93a4e18a753850cfa050d5a9709204527f1e3ffe0
+TRUE_EXIT=0
+SOAK END Mon Sep  7 00:35:20 EDT 2026

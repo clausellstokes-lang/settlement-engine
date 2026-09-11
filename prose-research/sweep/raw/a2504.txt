@@ -1,0 +1,508 @@
+ 
+ Automated Archival Descriptions with Federated Intelligence of LLMs 
+ Report GitHub Issue 
+ × 
+ Title: 
+ Content selection saved. Describe the issue below: 
+ Description: 
+ Submit without GitHub 
+ Submit in GitHub 
+ arXiv is now an independent nonprofit! 
+ Learn more 
+ × 
+ Back to arXiv 
+ Why HTML? 
+ Report Issue 
+ Back to Abstract 
+ Download PDF 
+ Abstract 
+ 1 Introduction 
+ 2 Related Work 
+ 3 LLM-Agent-Driven Automatic Generation of Archival Metadata 
+ 3.1 System Architecture 
+ 3.2 Determining Candidate LLMs 
+ 3.3 Computing Consistent Metadata Descriptions 
+ 3.4 Creating Optimal Metadata Descriptions 
+ 4 Experimental Evaluation 
+ 4.1 Metrics and approach 
+ 4.2 Data and Ground Truth 
+ 4.3 Analysis and Discussion 
+ 5 Conclusions 
+ References 
+ License: CC BY-NC-ND 4.0
+arXiv:2504.05711v2 [cs.AI] 02 Feb 2026 
+ Automated Archival Descriptions with 
+ Federated Intelligence of LLMs 
+ Jinghua Groppe
+ Affiliation: IFIS, University of Lübeck, Ratzeburger Allee 160, 23562 Lübeck,
+Germany 
+ , 
+ E-mail jinghua.groppe@uni-luebeck.de 
+ Andreas Marquet
+ Affiliation: Friedrich-Ebert-Stiftung e.V., Godesberger Allee 149, 53175 Bonn, Germany
+ , 
+ E-mail Andreas.Marquet@fes.de 
+ Annabel Walz
+ Affiliation: Friedrich-Ebert-Stiftung e.V., Godesberger Allee 149, 53175 Bonn, Germany
+ , 
+ E-mail Andreas.Marquet@fes.de 
+ Sven Groppe
+ E-mail sven.groppe@uni-luebeck.de 
+ E-mail Annabel.Walz@fes.de 
+ Affiliation: IFIS, University of Lübeck, Ratzeburger Allee 160, 23562 Lübeck,
+Germany 
+ , 
+ E-mail jinghua.groppe@uni-luebeck.de 
+ Abstract 
+ Enforcing archival standards demands specialized expertise, and manually creating metadata descriptions for archival materials requires considerable manual effort and is error-prone. This work aims to explore the potential of agentic AI and large language models (LLMs) in addressing the challenges of implementing a standardized archival description process. To this end, we introduce an agentic AI-driven system for the automated generation of high-quality metadata descriptions of archival materials. We develop a federated optimization approach that unites the intelligence of multiple LLMs to construct optimal archival metadata. We also suggest methods to overcome the challenges associated with using LLMs for consistent metadata generation. To evaluate the feasibility and effectiveness of our techniques, we conducted extensive experiments using a real-world dataset of archival materials, which covers a variety of document types and formats. The evaluation results demonstrate the feasibility of our techniques and highlight the superior performance of the federated optimization approach compared to single-model solutions in metadata quality and reliability. 
+ Keywords: information extraction file repositories archive metadata generation federated LLM agentic AI
+ 1 Introduction 
+ Despite the availability of numerous specialized applications and document management systems, file repositories remain widely used technical environments that often merit preservation. From an archival perspective, the main challenge stems from their inherently flexible use by both individuals and organizations. This flexibility frequently leads to unstructured storage practices, inconsistent file naming conventions, redundancies, and incomplete or missing metadata, and these factors complicate efforts to maintain order and accessibility of file repositories. Additionally, the absence of a standardized procedure for file creation often results in the loss of contextual information, making it difficult to determine the origins and significance of stored files [ 30 , 25 , 17 ] . In addition, file repositories generally lack quantitative and qualitative constraints, meaning that relevant information can be stored in unrestricted and highly variable forms [ 5 , 1 ] . 
+ Given the vast and practically unlimited volume of data [ 16 ] , coupled with the fundamentally different nature of digital media, traditional archival methods - such as appraisal, arrangement, and description - are only partially applicable in their current form. As a result, methodological and technical adaptations are necessary to ensure effective archival practices.
+Initial pilot projects relied predominantly on manual and intellectual efforts to process file repositories, further confirming the assumption that the associated workload is overwhelming, given the sheer size of the records.
+Considering these challenges and the immense number of files to be managed, research topics such as the automatic extraction of metadata have become increasingly significant. 
+ For efficient subject-specific processing, (semi-) automatic approaches - computational methods initiated, supervised, and refined by archivists - appear to be the most promising (e.g., [ 24 ] ). These (mostly) automated methods help manage the large-scale processing of files. However, intellectual input remains essential, particularly for contextualizing individual documents, understanding the workflows of the organizations or individuals creating them, and integrating files within existing archival holdings. These challenges are further exacerbated by the prevalence of hybrid record-keeping practices, in which analogue and digital documents coexist and their proportions shift over time. As a result, file systems present multiple complexities, introducing potential ambiguities regarding their origin, acquisition, and subsequent processing. 
+ The use of artificial intelligence (AI) in archival practice has recently been tested for a variety of purposes, demonstrating significant potential - particularly in recognizing objects, people, or buildings in photographs and in content indexing of audiovisual material. Research conducted within the British LUSTRE network highlights both the promising applications of AI and the organizational prerequisites tied to adopting this emerging technology [ 18 ] . In a related initiative, the British National Archives evaluated several AI-based tools
+to support the selection and acquisition of digital records [ 28 ] . Building on these developments, this paper, centered on the file storage scenario, seeks to offer a more flexible and adaptive AI framework that advances the current state of the art. 
+ Large language models (LLMs), owning to their remarkable capacity to produce human-like, context-aware responses across a wide range of tasks such as translation, summarization, question-answering, creative writing, and code generation, are the basis of chatbots (for general purposes like ChatGPT, Grok, DeepSeek and Gemini, and for special purposes like [ 21 ] ) and are becoming an integral part of many aspects of daily life [ 22 ] . Their ability to perform tasks with little to no prior examples - known as zero-shot or few-shot learning [ 2 ] - makes them highly adaptable for use in data pipelines [ 19 , 20 ] . This flexibility coupled with other strengths is particularly valuable in generating archival metadata across heterogeneous documents, where LLMs can automate much of the process while allowing archivists to intervene with minimal effort to refine results and streamline subsequent workflows. 
+ In this work, we investigate the abilities of agentic AI and LLMs in addressing challenges in implementing archival standards and propose a universal LLM-agent-driven framework for automated generation of archival metadata. Our main contributions include: 
+ • 
+ an agentic AI-based metadata generation system, which utilizes the federated intelligence of multiple LLMs to automatically generate high-quality metadata for archival materials, 
+ • 
+ a methodology for determining best LLMs for archival metadata extraction, 
+ • 
+ techniques to address the challenges of using LLMs in generating consistent metadata descriptions, 
+ • 
+ a federated optimization approach, which synthesizes an optimal metadata description from the results of an ensemble of LLMs, and 
+ • 
+ an extensive experimental evaluation on real-world archival materials containing documents of various types and in various formats. The evaluation results confirm the practicality of the LLM-agent-driven framework and demonstrate the superior performance of the federated approach compared to the use of individual LLMs alone. 
+ 2 Related Work 
+ Large language models have already been used very successfully for information extraction tasks in other application areas: For example, Wang et al. [ 29 ] and Parekh et al. [ 26 ] used OpenAI’s large language models to extract structured data about events from unstructured text. Goel et al. [ 6 ] combined large language models with human expertise to annotate patient-related information in medical texts. By using state-of-the-art large language models such as GPT-4, Schimmenti et al. [ 27 ] achieved very high accuracies for extracting metadata from historical texts (title: 98%, type: 94%, date: 89%, location: 95%, author: 79%). Although the results of these studies come from partly different application areas, they indicate that large language models can also be successfully used for information extraction in archives, with their advantages in terms of language understanding and few-shot learning. 
+ The transfer of document content into knowledge graphs can also be largely automated using large language models [ 23 , 4 ] , whereby archivists, for example, gain better control (compared to e.g. retrieval augmented generation) over what is freely accessible to archive users in a subsequent step, or which documents are subject to a protection period, by post-processing the knowledge graph. 
+ The authors in [ 3 ] discuss the related work about LLM ensembles. In this work, we propose a variant of LLM ensembles that uses an ensemble after inference approach to re-generate in case of unsuccessful validation and to generate a synthesized output from all outputs of the LLMs in the ensemble, tailored to the needs of archives by providing specialized contexts and a specialized validator. 
+ None of the existing approaches investigates the use of large language models in the context of supporting archivists for archiving files. 
+ 3 LLM-Agent-Driven Automatic Generation of Archival Metadata 
+ We suggest an agentic AI-based metadata generation system, which employs the federated intelligence of LLMs to automatically create a complete and precise metadata description of archival materials. We first introduce the agentic AI architecture of the LLM-based metadata generation system in Sec. 1 , then present the methodology to determine the best LLMs for the metadata generation task in Sec. 3.2 . Sec. 3.3 describes the techniques to address the challenges of LLMs in constructing consistent metadata descriptions and Sec. 3.4 presents the federated optimization approach, which leverages the intelligence of multiple LLMs to create high-quality archival metadata. 
+ 3.1 System Architecture 
+ Figure 1: Agentic AI-driven system architecture for automated generation of optimal archival metadata 
+ Fig. 1 depicts the architecture of the automatic metadata generation system composed of agents powered by LLMs.
+After getting the user input, the LLM Instructor agent first analyses the input content and retrieves the corresponding context (like metadata specification of ISAD(G), Records in Contexts, and alike) from the Context agent (See Sec. 3.3 for details about contexts). Based on the user input and the context, the LLM Instructor then constructs instructions to generate metadata descriptions. These instructions and the archival material provided by the user are then fed into an ensemble of agents powered by various LLMs, and each LLM will generate a metadata description for the archival material according to the instructions. All the metadata descriptions generated are then checked by a Validator agent in terms of, e.g. the structure, completeness of extraction, and format adherence according to the context information. 
+ If validation fails, the validator agent will notify the LLM instructor agent of which LLMs output incorrect metadata descriptions. The LLM instructor then instructs the LLM agents to re-extract the metadata description. When all metadata descriptions created by the LLM agents in the ensemble are successfully validated, the validator agent sends all data and information to the LLM Federator agent. The Federator agent will construct synthesis instructions based on the requirements given in the context information and then synthesize an optimal metadata description from all individual ones according to the instructions. The new metadata description will be validated according to the context as well by the Validator agent. If validation fails, it will inform the LLM Federator agent to perform the synthesis again until validation is successful. 
+ Finally, the agentic AI system will output a high-quality metadata description for the given archival material in the required format, which maximizes the completeness and accuracy of the content and is optimally aligned with the archiving standard.
+The archival community widely adopts XML for storing metadata descriptions, as XML can present semi-structured data in a human-readable and machine-processable format while various optimization techniques [ 10 , 9 , 7 , 14 , 12 , 11 , 8 , 15 , 13 ] 
+exist to speed up XML querying and transformations between different application-specific XML formats. 
+ 3.2 Determining Candidate LLMs 
+ A large number of LLMs are available for data extraction, and this presents an initial challenge: selecting the most suitable models to generate high-quality, reliable metadata descriptions. This section proposes a systematic methodology to identify the optimal candidate LLMs. 
+ Given a collection of LLMs: 
+ 1. 
+ For each LLM, check whether it knows the standard to be used for the archival description. If this is not the case, it is removed from the collection. 
+ 2. 
+ For each LLM, ask it to create a metadata description according to the archiving standard for some samples of the archival materials. If it is unable to do so or the quality of the extracted metadata description is low, it will be removed. 
+ 3. 
+ Design a prompt that exactly describes the format and structure of the metadata. For each LLM, we test with examples to see if it can extract metadata according to the requirements. If it cannot, it is removed. 
+ 4. 
+ Evaluate the LLMs in the collection with samples of archival materials. If the performance of an LLM is lower than a threshold, it is removed. 
+ 5. 
+ Finally, if there are multiple LLMs from the same series in the collection, we will only keep the latest or more powerful one. 
+ The website https://lmarena.ai/ 1 1 
+ 1 
+ visited on 31.3.2025 collects 94 LLMs for researchers and practitioners to compare and test their performance, and so we use the collection as the initial one. After applying the selection methodology, we determine four LLMs: Grok 3 built by xAI, GPT-4-turbo by OpenAI, DeepSeek-V3 from DeepSeek, and Gemini 2.0 Flash from Google. 
+ 3.3 Computing Consistent Metadata Descriptions 
+ Many archival description standards provide descriptive elements, and most of them are made up of several words. This causes several problems: i) Some data store formats (like XML) require one-word tags. ii) Using long descriptive elements (or their concatenation) as tags is inefficient. For these reasons, simplified one-word tags are applied instead of descriptive names, and LLMs also follow this practice. However, different LLMs could adopt different ways to tag these elements, and even the same LLM might use various tags at different time.
+Furthermore, although we use the LLMs, which are familiar with the archival description standards, they do not always strictly follow them, and the metadata descriptions created by LLMs could have different structures and elements at different times.
+Metadata descriptions with varying structures and different tags are useless and need significantly post-processing. However, an automatic post-processing, which converts them into a consistent format, is almost impossible because the structure and terminology that LLMs use could be unlimited. Therefore, we need a solution to ensure that metadata descriptions generated by any LLMs at any time are strictly consistent in terms of structure and tags. 
+ In this work, we suggest a context-based solution: We use a context that contains the necessary information to create consistent metadata. We provide the context to the LLMs, which use it to create metadata descriptions. We also provide the context to the validator agent, which will validate if the generated metadata descriptions comply with the specification given in the context. If validation fails, we ask the LLMs to re-regenerate the metadata description. This process is repeated until validation succeeds as shown in Fig. 1 . In extreme cases, it could occur that LLMs cannot create a metadata description according to the requirements. But this can be easily handled by setting up a limited number of repetitions. If this number is exceeded, the system notifies the user. 
+ To create a clear reference for LLMs to follow, such a context should include the following pieces of information: 
+ • 
+ the structure of the metadata description, which LLMs should follow. 
+ • 
+ the purpose of each element, which provides LLMs with information on how to extract its value. 
+ • 
+ examples for each element, which illustrate the use of the element. 
+ • 
+ one-word tag for each element, which enables the use of uniform vocabulary. 
+ 3.4 Creating Optimal Metadata Descriptions 
+ According to the methodology suggested in Sec 3.2 , we can determine the best LLMs for automated generation of archival metadata. We want to utilize all of their intelligence to create an optimal archival metadata description. To realize this, we first ask each of the LLMs to analyze the archival material and generate metadata descriptions for it. Next, we aim to integrate the strengths of these metadata descriptions to synthesize a new, optimized version—one that maximizes completeness and precision of content while aligning closely with the metadata standard and the overarching intent of the archive. 
+ To create the optimal metadata set from the source metadata ones, we suggest a systematic optimization strategy as follows: 
+ 1. 
+ Analyze source metadata sets and identify their strengths and weaknesses. 
+ • 
+ assess against the archival description standard: check if the metadata sets reflect the purposes of each element and follow the rules and conventions of the standard. 
+ • 
+ compare against the archival material: cross-reference the metadata sets with the archival material to check if they reflect the archival intent and verify factual details like dates, creators, and content. 
+ • 
+ identify variations, differences, and contradictions across the source metadata sets. 
+ 2. 
+ Element-by-element optimization 
+ For each element: 
+ • 
+ select the best base: Choose the most accurate or detailed entry from the source metadata sets as a starting point. 
+ • 
+ enhance with details: Add specifics from other sets or the archival material. 
+ • 
+ resolve discrepancies: cross-reference the metadata with the archival material and the archival standard. 
+ • 
+ correct errors: Adjust based on evidence (e.g., OCR errors given in notes). 
+ • 
+ standardize format: Ensure compliance with the rules of the archival standard. 
+ 3. 
+ Validation and refinement 
+ • 
+ Cross-check with the archival standard and format requirements: Ensure that all elements follow the hierarchical structure and use the correct tags. 
+ • 
+ Align with archival material: Verify if the metadata reflects the intent and focus of the material. 
+ • 
+ Eliminate redundancy: Streamline overlapping details. 
+ • 
+ Enhance utility: Add details to aid users and systems if necessary. 
+ For automation, we need an agent to carry out these tasks. This agent should have knowledge of the archiving process, be familiar with the archival description standard, and have the ability to analyze and reason. No doubt, LLMs are currently an optimal candidate for such an agent. In order to find an LLM that can best perform the optimization task, we tested and evaluated a number of LLMs, and the results of the evaluation show that Grok3 from xAI is superior to other LLMs. 
+ 4 Experimental Evaluation 
+ 4.1 Metrics and approach 
+ The quality of archival metadata is determined by many aspects: factual accuracy, content completeness, equivalence of intent, avoidance of contradiction, and alignment with the archival description standard. To evaluate these aspects, we need to compare the metadata sets against both the ground truth and the standard. The existing evaluation techniques, from the purely statistical scorers (Blue, ROUGE, Meteor and Levenshtein distance) to embedding models (like BertScore and MoverScore) to Natural Language Inference models (like NLI scorer) and BLEURT (which uses pre-trained models like BERT to score LLM outputs on ground truth), are not able to do this. 
+ Recently, LLM-as-a-Judge is emerging to perform complex evaluation due to their superior reasoning capabilities and knowledge about the world, and so we also use LLMs as evaluators. We instruct LLMs to evaluate the quality of the automatically generated metadata sets based on the ground truth and the standards, and compute a score for each element on a scale from 0 to 1 based on the factual accuracy, content completeness, contextual consistency, equivalence of intent, avoidance of contradiction and alignment with the archival description standard, where 0 indicates no similarity and 1 indicates identical or near-identical meaning, with increments reflecting nuanced differences. More concretely: 
+ • 
+ 1: Exact or near-exact match in meaning and detail. 
+ • 
+ 0.75-0.99: High similarity with minor omissions or slight rephrasing. 
+ • 
+ 0.5-0.74: Moderate similarity with noticeable differences or partial matches. 
+ • 
+ 0.25-0.49: Low similarity with significant deviations or missing key details. 
+ • 
+ 0-0.24: Complete mismatch or entirely missing relevant information. 
+ In order to find the most appropriate LLM as evaluator, we test and evaluate different LLMs, and the test results show that Grok3 is currently the best LLM for this task. 
+ 4.2 Data and Ground Truth 
+ In our evaluation, we use real-world archive materials from Deutscher Gewerkschaftsbund (DGB) 2 2 
+ 2 
+ The DGB is an umbrella organization for eight member unions in Germany. Please see https://en.dgb.de/ (visited on 31.3.2025) for further information. held at the Archive of Social Democracy of the Friedrich-Ebert-Stiftung (AdsD) (https://www.fes.de/archiv-der-sozialen-demokratie/). To reflect the diversity and heterogeneity of archival materials and evaluate the capabilities of LLMs in generating metadata descriptions, we choose 22 representative archival units from the archival corpus as evaluation data, which contain different document types (minutes, speeches, letters, memos, articles, e-mails, newsletters, presentations, notes, calendar, wage and income tax statistics) and cover various topics in different data formats (PDF, MS Word, PowerPoint, Excel).
+Fig 2 presents the word statistics of the documents in the evaluation data set. The number of words is on average 2037.25, the median 1003.5, the minimum 189, and the maximum 18141. Most documents have between 500 and 1500 words. 
+ 0 0 5,000 5{,}000 10,000 10{,}000 15,000 15{,}000 #Words in documents 
+ Figure 2: Box plots of number of words of each document in the evaluation dataset 
+ Table 1: ISAD(G) areas and elements considered in this evaluation with abbreviations used in this paper 
+ Area /Element 
+ Description 
+ Abbreviation 
+ 1. Identity Statement Area 
+ This area provides essential information to identify the archival unit being described. 
+ Id 
+ 1.2 Title 
+ The name given to the archival unit, either a formal title (if one exists) or a descriptive title created by the archivist 
+ Id:Title 
+ 1.3 Date(s) 
+ The date range or specific dates of the archival unit, including creation or accumulation dates. 
+ Id:Date 
+ 1.4 Level of Description 
+ Indicates the hierarchical level of the archival unit (e.g., fonds, sub-fonds, series, file, item). 
+ Id:DescLev 
+ 1.5 Extent and medium of the unit of description (quantity, bulk, or size) 
+ Describes the physical or digital size and format of the unit (e.g., "3 boxes," "0.5 linear meters," "10 digital files (PDF)"). 
+ Id:Extent 
+ 3. Content and Structure Area 
+ This area describes the intellectual content and organization of the archival materials. 
+ Cont 
+ 3.1 Scope and Content 
+ A summary of the subject matter, themes, and types of records included in the unit, helping users assess its relevance. 
+ Cont:Scope 
+ 4. Conditions of Access and Use Area 
+ This area outlines the terms and conditions for accessing and using the materials. 
+ AccessUse 
+ 4.3 Language(s) and Script(s) of Material 
+ Identifies the language(s) and script(s) used in the materials (e.g., "English, with some documents in French; Latin script"). 
+ AccessUse:Lang 
+ 4.4 Physical Characteristics and Technical Requirements 
+ Describes any physical or technical conditions affecting use, such as fragility or digital file formats. 
+ AccessUse:PhysTech 
+ Id:Title Id:Date Id:DescLev Id:Extent Cont:Scope AccessUse:Lang AccessUse:PhysTech Id Cont AccessUse All 0 0 0.2 0.2 0.4 0.4 0.6 0.6 0.8 0.8 1 1 Score LLM 1 LLM 2 LLM 3 LLM 4 Federated 
+ Figure 3: LLM scores for information extraction (average over all scores for all documents) 
+ Table 2: Improvements of the LLM scores of the federated approach in comparison to direct use of LLMs 
+ Element/Area 
+ LLM 1 
+ LLM 2 
+ LLM 3 
+ LLM 4 
+ Id:Title 
+ 0% 
+ 11% 
+ 0% 
+ 9% 
+ Id:Date 
+ 15% 
+ 10% 
+ 6% 
+ 9% 
+ Id:DescLev 
+ 0% 
+ 0% 
+ 12% 
+ 10% 
+ Id:Extent 
+ -2% 
+ 4% 
+ -9% 
+ 5% 
+ Cont:Scope 
+ 1% 
+ 20% 
+ 13% 
+ 16% 
+ AccessUse:Lang 
+ 0% 
+ 0% 
+ -4% 
+ -5% 
+ AccessUse:PhysTech 
+ 3% 
+ 8% 
+ 0% 
+ 42% 
+ Id 
+ 3% 
+ 7% 
+ 1% 
+ 8% 
+ Cont 
+ 1% 
+ 20% 
+ 13% 
+ 16% 
+ AccessUse 
+ 2% 
+ 4% 
+ -2% 
+ 13% 
+ All 
+ 2% 
+ 10% 
+ 4% 
+ 12% 
+ The ground truth was manually created by professional archivists of the AdsD and includes a full set of ISAD(G) metadata for archival materials in the dataset. ISAD(G) stands for General International Standard Archival Description, a framework developed by the International Council on Archives (ICA) to standardize the description of archival materials.
+It is widely used by archivists globally to make archival records more accessible and understandable.
+ISAD(G) organizes metadata elements into several areas, and each element serves a specific purpose in creating a comprehensive and standardized archival description. These elements can be divided into two groups: one group of elements whose values can be determined directly or by inferring from the archive material itself; another group of elements whose values need information from external sources or are assigned by an archivist. As a result, the elements in the second group are not suitable for evaluation. We list the areas and elements of ISAD(G) considered in our evaluation in Table 1 , and also introduce their one-word tags, which we use in the succeeding figures (Fig. 3 and Fig. 4 ) and tables (Table 2 ). 
+ 0 0 0.2 0.2 0.4 0.4 0.6 0.6 0.8 0.8 1 1 All AccessUse Cont Areas:  Id AccessUse:PhysTech AccessUse:Lang Cont:Scope Id:Extent Id:DescLev Id:Date Elements:  Id:Title Legend: LLM 1 LLM 2 LLM 3 LLM 4 Federated 
+ Figure 4: Box plots of LLM scores for information extraction 
+ 10 3 10^{3} 10 4 10^{4} 0.2 0.2 0.4 0.4 0.6 0.6 0.8 0.8 1 1 #words Score Id:Title 10 3 10^{3} 10 4 10^{4} 0.5 0.5 1 1 #words Score Id:Date 10 3 10^{3} 10 4 10^{4} 0.2 0.2 0.4 0.4 0.6 0.6 0.8 0.8 1 1 #words Score Id:DescLev 10 3 10^{3} 10 4 10^{4} 0 0 0.5 0.5 1 1 #words Score Id:Extent 10 3 10^{3} 10 4 10^{4} 0.2 0.2 0.4 0.4 0.6 0.6 0.8 0.8 1 1 #words Score Cont:Scope 10 3 10^{3} 0.9 0.9 0.95 0.95 1 1 #words Score AccessUse:Lang 10 3 10^{3} 0 0 0.5 0.5 1 1 #words Score AccessUse:PhysTech LLM 1 LLM 2 LLM 3 LLM 4 Federated 10 3 10^{3} 10 4 10^{4} 0.6 0.6 0.8 0.8 1 1 #words Score All 
+ Figure 5: Number of words versus scores for single elements of ISAD(G) metadata and overall score 
+ 4.3 Analysis and Discussion 
+ We have determined the best LLMs for metadata extraction in Sec. 3.2 and for metadata optimization in Sec. 3.4 . We will refer to them as LLM 1 (Grok 3 from xAI), LLM 2 (GPT-4-turbo from OpenAI), LLM 3 (DeepSeek-V3 built by DeepSeek), and LLM 4 (Gemini 2.0 Flash from Google) in the analysis. 
+ We present in Figure 3 the average LLM scores over all the documents in the dataset for each element, each area, and the whole metadata according to the ISAD(G) standard. Looking at the performance of the single LLMs, LLM 1 performed the best, followed by LLM 3, LLM 2, and finally LLM 4. It is remarkable that the open source LLM 3 is the second-best LLM in our evaluation of the single LLMs. Even the last LLM (LLM 4) also achieves a score of 0.81 for the whole document. Looking at the averages of scores for each element and area, these average scores are never below 0.61. For the best LLM, these average scores are never below 0.78. Finally, the federated approach beats all single LLMs with an average of 0.90 for the whole metadata description, and its average scores for each element and area are never below 0.83. 
+ Table 2 presents the performance enhancement of our federated approach over directly using single LLMs. For a few elements, such as Id:Extent and AccessUse:Lang, the federated approach does not outperform some individual models. The main reason for this is actually that the federated approach adheres to the archiving standards more strictly and produces more complete content. For example, according to the ISAD(G) specification, the element Id:Extent describes the physical or digital size and format of the unit. For the element, our federated approach creates its content as "3 pages, digital document (PDF)", while the ground truth is only "3 pages". Obviously, the content created by the federated approach is more complete than the ground truth. However, due to the difference between the generated value and the ground truth, the federated approach received a lower score than the LLMs, which extract only "3 pages" for this element, just like the ground truth. Looking at the performance improvements given by the federated approach, coupled with the fact that the federated approach can produce more complete content than the ground truth, we can say that the ability of the federated approach in generation of high-quality metadata is very impressive. 
+ To further analyze the reasons of the superior performance of the federated approach, we also look at the box plots of scores in Figure 4 , which shows the minimum, maximum, median, 25%, and 75% quartiles over all documents. We detect several cases: The federated approach takes over 
+ • 
+ all (or almost all, respectively) the extracted information from the best single LLM (like for the elements Id:Title, Id:DescLev, and AccessUse:Lang (Cont:Scope, respectively)). 
+ • 
+ the best values among the different LLMs (like for the element Id:Date and AccessUse:PhysTech) 
+ • 
+ a mixture of good and bad values (like for the element Id:Extent). In this case the federated approach achieves an average score compared to the scores of the 4 LLMs. 
+ Interestingly, we do not observe a case where the federated approach takes over the bad values in most cases, and the case, where a mixture of good values and bad values are taken over are rare (i.e., we only observed it for the element Id:Extent), and the reason for this, as discussed earlier, is the capabilities of the federated approach: it can adhere more strictly to the archiving standard and create more exact and complete content than human specialists do. 
+ We present in Figure 5 the scores for each element of ISAD(G) metadata versus the number of words of the documents. Interestingly, we see that there are some outliers for documents with around 1,000 words, where the generated metadata descriptions are not similar to the ones of the ground truth. Looking at the overall score for the whole metadata descriptions, we see a tendency for slightly decreasing scores for larger documents (ignoring the outliers with low scores for smaller documents). 
+ 5 Conclusions 
+ Large Language Models (LLMs) are advanced AI systems that are trained on large amounts of text data and thus acquire knowledge about the world and a remarkable ability to understand natural languages. They are being used to automate a variety of natural language processing tasks such as customer support, content creation, and question answering. This work explores their potential for automated archiving and introduces an LLM-agent-driven AI system for automatic generation of archival metadata. This system integrates LLM agents with validators, specialized context handling, and a federated optimization technique that unites the intelligence of individual LLMs to produce high-quality metadata descriptions for archival materials.
+We conducted an extensive experimental evaluation using real-world archival samples covering documents of various types and data formats. The evaluation results demonstrate the capability of the LLM-based approach in automatic archiving and the superior performance of the federated technique in generating high-quality archival metadata descriptions. 
+ Acknowledgments 
+ This work is funded by the German Research Foundation under project number 570892866. 
+ References 
+ [1] 
+ J. M. Barrueco and M. Termens (2022) 
+ Digital preservation in institutional repositories: a systematic literature review .
+ Digital Library Perspectives 38 ( 2 ), pp. 161–174 .
+ Cited by: §1 .
+ [2] 
+ T. Brown et al. (2020) 
+ Language models are few-shot learners .
+ In Advances in Neural Information Processing Systems , H. Larochelle, M. Ranzato, R. Hadsell, M.F. Balcan, and H. Lin (Eds.) ,
+ Vol. 33 , pp. 1877–1901 .
+ Cited by: §1 .
+ [3] 
+ Z. Chen et al. (2025) 
+ Harnessing multiple large language models: a survey on llm ensemble .
+ arXiv ( arXiv:2502.18036 ).
+ External Links: Link 
+ Cited by: §2 .
+ [4] 
+ M. Ezzabady, F. Ieng, H. Khorashadizadeh, F. Benamara, S. Groppe, and S. Sahri (2024) 
+ Towards generating high-quality knowledge graphs by leveraging large language models .
+ In The 29th Annual International Conference on Natural Language & Information Systems (NLDB 2024), Turin, Italy ,
+ Cited by: §2 .
+ [5] 
+ B. Gillner (2023) 
+ Abfragen statt anbieten. eine alternative Praxis im archivischen Umgang mit Dateisystemen. .
+ Archiv. Theorie und Praxis 4 , pp. 317––321 .
+ Cited by: §1 .
+ [6] 
+ A. Goel et al. (2023) 
+ LLMs accelerate annotation for medical information extraction .
+ arXiv .
+ External Links: Document 
+ Cited by: §2 .
+ [7] 
+ J. Groppe and S. Groppe (2006) 
+ A prototype of a schema-based xpath satisfiability tester .
+ In International Conference on Database and Expert Systems Applications ,
+ pp. 93–103 .
+ Cited by: §3.1 .
+ [8] 
+ J. Groppe and S. Groppe (2006) 
+ Satisfiability-test, rewriting and refinement of users’ xpath queries according to xml schema definitions .
+ In East European Conference on Advances in Databases and Information Systems ,
+ pp. 22–38 .
+ Cited by: §3.1 .
+ [9] 
+ J. Groppe and S. Groppe (2008) 
+ Filtering Unsatisfiable XPath Queries .
+ Data and Knowledge Engineering 64 ( 1 ), pp. 134–169 .
+ External Links: ISSN 0169-023X ,
+ Link 
+ Cited by: §3.1 .
+ [10] 
+ J. Groppe (2008) 
+ Speeding up xml querying .
+ Berlin, Germany: Zugl Lübeck University .
+ Cited by: §3.1 .
+ [11] 
+ S. Groppe, S. Böttcher, G. Birkenheuer, and A. Höing (2006) 
+ Reformulating xpath queries and xslt queries on xslt views .
+ Data and Knowledge Engineering 57 ( 1 ), pp. 64–110 .
+ Cited by: §3.1 .
+ [12] 
+ S. Groppe, S. Bottcher, and J. Groppe (2006) 
+ XPath query simplification with regard to the elimination of intersect and except operators .
+ In 22nd International Conference on Data Engineering Workshops (ICDEW’06) ,
+ pp. 86–86 .
+ Cited by: §3.1 .
+ [13] 
+ S. Groppe and S. Böttcher (2003) 
+ XPath query transformation based on xslt stylesheets .
+ In Proceedings of the 5th ACM international workshop on Web information and data management ,
+ pp. 106–110 .
+ Cited by: §3.1 .
+ [14] 
+ S. Groppe and S. Böttcher (2005) 
+ Schema-based query optimization for xquery queries. .
+ In ADBIS Research Communications ,
+ Cited by: §3.1 .
+ [15] 
+ S. Groppe, J. Groppe, N. Klein, R. Bettentrupp, S. Böttcher, and L. Gruenwald (2011) 
+ Transforming xslt stylesheets into xquery expressions and vice versa .
+ Computer Languages, Systems & Structures 37 ( 2 ), pp. 76–111 .
+ Cited by: §3.1 .
+ [16] 
+ S. Groppe (2020) 
+ Emergent models, frameworks, and hardware technologies for big data analytics .
+ The Journal of Supercomputing 76 ( 3 ), pp. 1800–1827 .
+ External Links: Link 
+ Cited by: §1 .
+ [17] 
+ L. Jaillant, K. Aske, E. Goudarouli, and N. Kitcher (2022) 
+ Introduction: challenges and prospects of born-digital and digitized archives in the digital humanities .
+ Archival Science 22 , pp. 285–291 .
+ Cited by: §1 .
+ [18] 
+ L. Jaillant and A. Rees (2022) 
+ Applying ai to digital archives: trust, collaboration and shared professional ethics .
+ Digital Scholarship in the Humanities 38 ( 2 ), pp. 571–585 .
+ External Links: ISSN 2055-768X 
+ Cited by: §1 .
+ [19] 
+ S. B. Junior, P. Ceravolo, S. Groppe, M. Jarrar, S. Maghool, F. Sèdes, S. Sahri, and M. V. Keulen (2024) 
+ Are large language models the new interface for data pipelines? .
+ In Proceedings of the International Workshop on Big Data in Emergent Distributed Environments, Santiago, Chile ,
+ Cited by: §1 .
+ [20] 
+ A. Kessel, S. Groppe, D. Röpert, and J. Groppe (2025) 
+ AI-supported analysis and classification of digitized botanical collections .
+ In The 11th International Conference on machine Learning, Optimization and Data science (LOD), Tuscany, Italy ,
+ Cited by: §1 .
+ [21] 
+ A. Kessel, S. Sahri, S. Groppe, J. Groppe, H. Khorashadizadeh, M. Pignal, E. P. Pimparé, and R. Vignes-Lebbe (2025) 
+ Impact of chatbots on user experience and data quality on citizen science platforms .
+ Computers 14 ( 1 ).
+ External Links: Link 
+ Cited by: §1 .
+ [22] 
+ H. Khorashadizadeh, F. Z. Amara, M. Ezzabady, F. Ieng, S. Tiwari, N. Mihindukulasooriya, J. Groppe, S. Sahri, F. Benamara, and S. Groppe (2024) 
+ Research trends for the interplay between large language models and knowledge graphs .
+ In VLDB 2024 Workshop: The International Workshop on Data Management Opportunities in Unifying Large Language Models + Knowledge Graphs (LLM+KG), Guangzhou, China ,
+ External Links: Link 
+ Cited by: §1 .
+ [23] 
+ H. Khorashadizadeh, N. Mihindukulasooriya, N. Ranji, M. Ezzabady, F. Ieng, J. Groppe, F. Benamara, and S. Groppe (2024) 
+ Construction and canonicalization of economic knowledge graphs with llms .
+ In International Knowledge Graph and Semantic Web Conference (KGSWC) ,
+ Cited by: §2 .
+ [24] 
+ S. Lenartz (2022) 
+ Digital ist besser? möglichkeiten der automatisierten aufbereitung und bewertung von fileablagen mit python am beispiel einer digitalen fotosammlung .
+ Wuerttembergische Landesbibliothek. Stuttgart .
+ Cited by: §1 .
+ [25] 
+ K. Naumann and M. Puchta (2017) 
+ Kreative digitale Ablagen und die Archive .
+ Ergebnisse eines Workshops des KLA-Ausschusses Digitale Archive am 22./23 November 2016 in der Generaldirektion der Staatlichen Archive Bayerns. München .
+ Cited by: §1 .
+ [26] 
+ T. Parekh, I. Hsu, K. Huang, K. Chang, and N. Peng (2023) 
+ GENEVA: benchmarking generalizability for event argument extraction with hundreds of event types and argument roles .
+ In Proceedings of the 61st Annual Meeting of the Association for Computational Linguistics ,
+ Cited by: §2 .
+ [27] 
+ A. Schimmenti, V. Pasqual, F. Tomasi, F. Vitali, and M. van Erp (2024) 
+ Structuring authenticity assessments on historical documents using llms .
+ arXiv .
+ External Links: Document 
+ Cited by: §2 .
+ [28] 
+ The National Archives (2021) 
+ Using AI for digital records selection in government - guidance for records managers based on an evaluation of current marketplace solutions .
+ External Links: Link 
+ Cited by: §1 .
+ [29] 
+ X. Wang, S. Li, and H. Ji (2023) 
+ Code4Struct: code generation for few-shot event structure prediction .
+ In Proceedings of the 61st Annual Meeting of the Association for Computational Linguistics ,
+ Cited by: §2 .
+ [30] 
+ G. Wendt and S. Westphal (2017) 
+ Eine Herausforderung des Übergangs: Fileablagen als Quellen der digitalen Überlieferungsbildung .
+ Transformation ins Digitale. 85. Deutscher Archivtag Karlsruhe , pp. 105–113 .
+ Cited by: §1 .
+ Experimental support, please
+ view the build logs 
+ for errors. Generated by
+ L
+ A 
+ T
+ E 
+ xml 
+ .
+ Instructions for reporting errors 
+ We are continuing to improve HTML versions of papers, and your feedback helps enhance accessibility and mobile
+ support. To report errors in the HTML that will help us improve conversion and rendering, choose any of the
+ methods listed below: 
+ Click the "Report Issue" ( 
+ ) button, located in the page header. 
+ Tip: You can select the relevant text first, to include it in your report. 
+ Our team has already identified the following issues . We appreciate your time reviewing and reporting rendering errors we
+ may not have found yet. Your efforts will help us improve the HTML versions for all readers, because disability
+ should not be a barrier to accessing research. Thank you for your continued support in championing open access for
+ all. 
+ Have a free development cycle? Help support accessibility at arXiv! Our collaborators at LaTeXML maintain a list of packages that need conversion , and welcome developer contributions . 
+ We gratefully acknowledge support from
+ our major funders ,
+ member institutions , ,
+ and all contributors.
+ About 
+ · 
+ Help 
+ · 
+ Contact 
+ · 
+ Subscribe 
+ · 
+ Copyright 
+ · 
+ Privacy 
+ · 
+ Accessibility 
+ · 
+ Operational Status (opens in new tab) 
+ Major funding support from 

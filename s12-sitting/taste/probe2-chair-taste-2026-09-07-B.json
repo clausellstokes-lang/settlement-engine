@@ -1,0 +1,55 @@
+{
+ "seed": "chair-taste-2026-09-07-B",
+ "name": "Langburg",
+ "foundedPoolKey": "FOUNDED-OLD",
+ "lines": [
+  {
+   "blockId": "DS-POW-1",
+   "poolKey": "Contested",
+   "angle": "ledger",
+   "text": "The Guild Council's writ runs shorter at Langburg each season, and what the rolls show is not defiance so much as delay, which comes to the same figure at collection."
+  },
+  {
+   "blockId": "DS-POW-1",
+   "poolKey": "breakdown dominated by SAFETY, adverse",
+   "angle": "ledger",
+   "text": "What the Guild Council has lost at Langburg it has lost to the crime returns. A town that does not feel safe stops crediting whoever is meant to keep it so."
+  },
+  {
+   "blockId": "DS-POW-2",
+   "poolKey": "stable matched",
+   "angle": "threshold",
+   "text": "What is settled at Langburg is the hall and only the hall; the town's steadiness is a statement about who answers, and not about what the answers will be."
+  },
+  {
+   "blockId": "DS-POW-2",
+   "poolKey": "recentConflict present",
+   "angle": "street",
+   "text": "Nobody at Langburg needs the trouble explained to them; it is recent enough that the town simply refers to it and moves on."
+  },
+  {
+   "blockId": "DS-POW-4",
+   "poolKey": "legitimacyHold: public rejection is breaking the hold",
+   "angle": "street",
+   "text": "The town has turned on whoever sits at Langburg, and the turning is doing more damage to the hold than any rival has managed."
+  },
+  {
+   "blockId": "DS-POW-5",
+   "poolKey": "autocrat",
+   "angle": "unfolding",
+   "text": "What the Guild Council at Langburg fears is not the town but the people closest to it; a seat held by one person is lost the way one person can be replaced."
+  },
+  {
+   "blockId": "DS-POW-5",
+   "poolKey": "governing body name: a SLOT, never a baked noun",
+   "angle": "visitor",
+   "text": "A stranger who addresses the Guild Council at Langburg by any other title is corrected, politely and immediately."
+  },
+  {
+   "blockId": "DS-POW-7",
+   "poolKey": "layer DORMANT (no ledger materialized)",
+   "angle": "visitor",
+   "text": "A stranger at Langburg cannot work out who is aligned with whom, and the reason is that nobody is."
+  }
+ ]
+}

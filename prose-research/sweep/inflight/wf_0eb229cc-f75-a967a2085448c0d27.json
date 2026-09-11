@@ -1,0 +1,21 @@
+{
+ "role": "regrade",
+ "name": "ai",
+ "angle": null,
+ "tag": "regrade-r10",
+ "lines": 167,
+ "firstTs": "2026-09-07T04:53:46.938Z",
+ "lastTs": "2026-09-07T05:07:46.321Z",
+ "tools": {
+  "Bash": 20,
+  "Read": 20
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "kes claim records from `state-ai.json` — a regrade file's `claims` array is used only for key matching, so a rewritten URL in it is discarded. Those rows also need an *upgrade*, which this downgrade-only file cannot carry. They need a fetch round plus a claims-level URL rewrite, not a verdicts file.",
+ "run": "wf_0eb229cc-f75",
+ "agent": "a967a2085448c0d27",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/405b5e7e-8c4d-4fa3-8d98-bc46b7fbf074/subagents/workflows/wf_0eb229cc-f75/agent-a967a2085448c0d27.jsonl",
+ "journal": "result",
+ "checkpointFile": null
+}

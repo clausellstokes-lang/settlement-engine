@@ -1,0 +1,25 @@
+{
+ "role": "synth",
+ "name": "leguin",
+ "angle": null,
+ "tag": null,
+ "lines": 202,
+ "firstTs": "2026-09-06T22:16:04.864Z",
+ "lastTs": "2026-09-06T22:44:25.199Z",
+ "tools": {
+  "Bash": 32,
+  "Read": 14,
+  "Write": 1,
+  "Edit": 24
+ },
+ "urlsFetched": [],
+ "filesWritten": [
+  "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/section-leguin.md"
+ ],
+ "lastAssistantText": "er map names them first.\n- The DM-page citation rule (book, chapter, page; never the unofficial PDF hosts; never a true wording over twelve words) is written into feature 29 and the source-concentration paragraph.\n- The coverage table closes the section with sources per angle and the verdict counts.",
+ "run": "wf_e95fca37-bb5",
+ "agent": "a044aa3b6f03c0cb7",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/cc123b6c-1961-44c5-b071-c5e5aee7ee80/subagents/workflows/wf_e95fca37-bb5/agent-a044aa3b6f03c0cb7.jsonl",
+ "journal": "result",
+ "checkpointFile": null
+}

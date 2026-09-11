@@ -1,0 +1,2296 @@
+{
+ "name": "tolkien",
+ "regrade": true,
+ "claims": [
+  {
+   "index": 0,
+   "feature": "register modulation",
+   "claim": "Rosebury holds that Tolkien opens passages in plain modern language and modulates into a higher register only where the narrative touches ancient or magical history.",
+   "source": "Wikipedia, 'Tolkien's prose style' (citing Rosebury 2003)",
+   "url": "https://en.wikipedia.org/wiki/Tolkien%27s_prose_style",
+   "quote": "modulating into a higher register to deal with echoes",
+   "angle": "academic"
+  },
+  {
+   "index": 1,
+   "feature": "per-speaker register",
+   "claim": "Turner argues Tolkien assigns discrete linguistic registers to different peoples: simple and modern for Hobbits, more archaic for Dwarves, Elves and the Rohirrim.",
+   "source": "Wikipedia, 'Tolkien's prose style' (citing Turner 2020/2022)",
+   "url": "https://en.wikipedia.org/wiki/Tolkien%27s_prose_style",
+   "quote": "discrete linguistic registers for different characters, peoples",
+   "angle": "academic"
+  },
+  {
+   "index": 3,
+   "feature": "hobbit mediation",
+   "claim": "Shippey holds that the Hobbits' modern idiom lets them mediate between the modern reader and the heroic, archaic world of the epic.",
+   "source": "Wikipedia, 'Tolkien's prose style' (citing Shippey 2005)",
+   "url": "https://en.wikipedia.org/wiki/Tolkien%27s_prose_style",
+   "quote": "",
+   "angle": "academic"
+  },
+  {
+   "index": 4,
+   "feature": "per-speaker register (Council of Elrond)",
+   "claim": "Shippey reads 'The Council of Elrond', roughly fifteen thousand words consisting entirely of talk, as a tour de force in which each of many speakers is given a distinct idiom.",
+   "source": "'An Analysis of Scholarship on Tolkien: The Council of Elrond' (student synthesis of Shippey)",
+   "url": "https://alaskakenziegirl.wixsite.com/website/post/an-analysis-of-scholarship-on-tolkien-the-council-of-elrond-character-revealed",
+   "quote": "",
+   "angle": "academic"
+  },
+  {
+   "index": 10,
+   "feature": "modern idiom (Saruman)",
+   "claim": "Saruman's duplicity is conveyed through politically minded, abstract modern speech.",
+   "source": "Tolkien: Medieval and Modern blog, 'To Make a Soul'",
+   "url": "http://tolkienmedievalandmodern.blogspot.com/2014/04/to-make-soul-tolkien-and-variations-of.html",
+   "quote": "politically minded, abstract manners of speech",
+   "angle": "academic"
+  },
+  {
+   "index": 11,
+   "feature": "per-speaker register (Rohirrim)",
+   "claim": "Tolkien imagined the Rohirrim speaking the Common Speech more slowly and deliberately because it was their second language.",
+   "source": "Tolkien: Medieval and Modern blog, 'To Make a Soul' (citing Tolkien's letter to Tiller)",
+   "url": "http://tolkienmedievalandmodern.blogspot.com/2014/04/to-make-soul-tolkien-and-variations-of.html",
+   "quote": "much slower and more deliberate",
+   "angle": "academic"
+  },
+  {
+   "index": 12,
+   "feature": "orc registers",
+   "claim": "Rosebury identifies three types of Orc dialogue keyed to rank; Grishnákh speaks like a melodrama villain while Gorbag uses grumbling twentieth-century bureaucratic speech.",
+   "source": "Wikipedia, 'Tolkien's prose style' (citing Rosebury 2003)",
+   "url": "https://en.wikipedia.org/wiki/Tolkien%27s_prose_style",
+   "quote": "three types of Orc-dialogue for different ranks",
+   "angle": "academic"
+  },
+  {
+   "index": 14,
+   "feature": "idiolect (Gollum)",
+   "claim": "Rosebury describes Gollum's extraordinary idiolect of obsessive repetition and infantile whining; the translation literature adds ungrammatical syntax, 'pocketses' plurals and I/we confusion.",
+   "source": "Wikipedia, 'Tolkien's prose style' (citing Rosebury 2003)",
+   "url": "https://en.wikipedia.org/wiki/Tolkien%27s_prose_style",
+   "quote": "obsessive repetition, infantile whining",
+   "angle": "academic"
+  },
+  {
+   "index": 21,
+   "feature": "Old English lexis",
+   "claim": "The Rohirrim's speech carries actual Old English words and phrases such as éored, dwimmerlaik and mearas, and the Dwarves' speech is archaic, blunt and proverbial.",
+   "source": "Wikipedia, 'Tolkien's prose style'",
+   "url": "https://en.wikipedia.org/wiki/Tolkien%27s_prose_style",
+   "quote": "",
+   "angle": "academic"
+  },
+  {
+   "index": 23,
+   "feature": "fronting",
+   "claim": "Turner's example of fronting, placing the object before the verb, is 'Weapons they have laid at your doors', a construction he notes cannot be reproduced in French and is unmarked in German.",
+   "source": "Wikipedia, 'Translating The Lord of the Rings' (citing Turner)",
+   "url": "https://en.wikipedia.org/wiki/Translating_The_Lord_of_the_Rings",
+   "quote": "Weapons they have laid at your doors",
+   "angle": "academic"
+  },
+  {
+   "index": 24,
+   "feature": "Old English to Modern English mapping",
+   "claim": "Shippey explains that Tolkien rendered Rohirric as Old English so that its relation to Westron mirrors Old English's relation to Modern English.",
+   "source": "Wikipedia, 'Translating The Lord of the Rings' (citing Shippey)",
+   "url": "https://en.wikipedia.org/wiki/Translating_The_Lord_of_the_Rings",
+   "quote": "",
+   "angle": "academic"
+  },
+  {
+   "index": 32,
+   "feature": "hyperbole",
+   "claim": "Key semantic domains for entire/maximum, loud, hot, and long/tall/wide support the hypothesis that Tolkien tends toward hyperbole, while dense plant vocabulary (elm-tree, alder, rowan, hemlock) supplies circumstantial realism.",
+   "source": "Siepmann, 'Tolkien as a stylist' (CL2017)",
+   "url": "https://www.birmingham.ac.uk/documents/college-artslaw/corpus/conference-archives/2017/general/paper239.pdf",
+   "quote": "Tolkien tends to resort to hyperbole",
+   "angle": "academic"
+  },
+  {
+   "index": 41,
+   "feature": "short stacked sentences",
+   "claim": "Lee shows from typescripts that Tolkien deliberately condensed the climactic prose into short sentences piled one on another, matching Kullmann and Siepmann's 'short, stark sentences' of the epic mode.",
+   "source": "Lee 2022, close reading (ORA PDF)",
+   "url": "https://ora.ox.ac.uk/objects/uuid:115e70e7-6327-4a43-898c-18091c59e4fb/files/r8910jw66g",
+   "quote": "Tolkien deliberately condensed the prose",
+   "angle": "academic"
+  },
+  {
+   "index": 45,
+   "feature": "omnipresent heterodiegetic narrator",
+   "claim": "Lee, following Kullmann and Siepmann, describes LOTR's narrator as omnipresent and heterodiegetic, less intrusive than The Hobbit's, ranging over the battlefield with the Old English poet's freedom from space and time.",
+   "source": "Lee 2022, close reading (ORA PDF)",
+   "url": "https://ora.ox.ac.uk/objects/uuid:115e70e7-6327-4a43-898c-18091c59e4fb/files/r8910jw66g",
+   "quote": "does not take part in the story",
+   "angle": "academic"
+  },
+  {
+   "index": 52,
+   "feature": "plain phrasal verbs",
+   "claim": "Rosebury shows Tolkien favouring plain descriptive phrasal verbs 'have on' and 'get off' over the more literary 'wear' and 'dismount', and rejects unsupported charges of archaising and wrenched syntax.",
+   "source": "Wikipedia, 'Tolkien: A Cultural Phenomenon'",
+   "url": "https://en.wikipedia.org/wiki/Tolkien:_A_Cultural_Phenomenon",
+   "quote": "a certain sensuous precision, distinctive of Tolkien",
+   "angle": "academic"
+  },
+  {
+   "index": 67,
+   "feature": "verse fitted to speakers",
+   "claim": "Kullmann and Siepmann hold every poem follows a traditional genre and is fitted in style and content to its speaker, and Straubhaar that prose and verse are built to flow as an integrated whole.",
+   "source": "Wikipedia, 'Poetry in The Lord of the Rings'",
+   "url": "https://en.wikipedia.org/wiki/Poetry_in_The_Lord_of_the_Rings",
+   "quote": "fitted in style and contents to the characters",
+   "angle": "academic"
+  },
+  {
+   "index": 68,
+   "feature": "prose-to-verse shift",
+   "claim": "Kullmann argues the shift from prose to poetry directs attention from meaning to sound, with hobbit verse in simple iambic tetrameter, Elvish verse in liquid l-sounds, and Rohan's in Old English alliterative metre.",
+   "source": "Kullmann, 'Poetic Insertions in Tolkien's The Lord of the Rings', Connotations 23.2",
+   "url": "https://www.connotations.de/article/thomas-kullmann-poetic-insertions-in-tolkiens-the-lord-of-the-rings/",
+   "quote": "direct the focus away from meaning to sound",
+   "angle": "academic"
+  },
+  {
+   "index": 72,
+   "feature": "register incompatibility (1960 Hobbit rewrite)",
+   "claim": "Rateliff records that Tolkien's 1960 rewrite tried to bring The Hobbit into harmony with LOTR's mood, language and geography, and was abandoned because it was losing the humour and no longer read as The Hobbit.",
+   "source": "Wikipedia, 'The History of The Hobbit' (citing Rateliff, Fisher)",
+   "url": "https://en.wikipedia.org/wiki/The_History_of_The_Hobbit",
+   "quote": "losing much of the humour",
+   "angle": "academic"
+  },
+  {
+   "index": 74,
+   "feature": "hobbit style and Latinate avoidance",
+   "claim": "Kirk (1971), as summarised, treats LOTR as a philological experiment with a deliberate fairy-tale hobbit style, register graded by social standing (Frodo speaks more nobly), and a resistance to Latin-derived vocabulary.",
+   "source": "rogersdylan blog, 'I Would Rather Have Written in Elvish' (summary of Kirk 1971)",
+   "url": "https://rogersdylan.wordpress.com/2010/03/29/i-would-rather-have-written-in-elvish/",
+   "quote": "a grand philological experiment",
+   "angle": "academic"
+  },
+  {
+   "index": 79,
+   "feature": "found-manuscript / editorial voice",
+   "claim": "The Red Book conceit, the Prologue's 'Note on the Shire Records' and the appendices produce an editorial distance mimicking historical recovery; West says the device appeals to the modern mystique of scholarly research.",
+   "source": "Wikipedia, 'Red Book of Westmarch'",
+   "url": "https://en.wikipedia.org/wiki/Red_Book_of_Westmarch",
+   "quote": "the modern mystique of scholarly research",
+   "angle": "academic"
+  },
+  {
+   "index": 82,
+   "feature": "vague description",
+   "claim": "Agøy's survey of all descriptions in LOTR finds Tolkien's descriptions rarely very detailed, with characters, buildings and scenery described quite vaguely so readers complete the picture.",
+   "source": "Agøy 2013, 'Vague or Vivid? Descriptions in The Lord of the Rings', Tolkien Studies 10 (abstract via OpenAlex)",
+   "url": "https://api.openalex.org/works?search=%22Vague%20or%20Vivid%22%20Descriptions%20Lord%20of%20the%20Rings&per-page=3",
+   "quote": "Tolkien's descriptions are rarely very detailed",
+   "angle": "academic"
+  },
+  {
+   "index": 84,
+   "feature": "invitational style (memory-shaped description)",
+   "claim": "Lee reports Rateliff's observation that Tolkien often describes a scene not as experienced but as remembered afterwards, and that Walker and Rateliff both call this the 'invitational style'.",
+   "source": "Lee 2022, close reading (ORA PDF), citing Rateliff 2009 and Walker 2009",
+   "url": "https://ora.ox.ac.uk/objects/uuid:115e70e7-6327-4a43-898c-18091c59e4fb/files/r8910jw66g",
+   "quote": "as you would remember it afterwards",
+   "angle": "academic"
+  },
+  {
+   "index": 85,
+   "feature": "deep time / ubi sunt",
+   "claim": "Walker credits the prose with a sense of time that brings past and future into the present; Shippey defends the Lament of the Rohirrim as a paraphrase of The Wanderer's ubi sunt against Manlove's charge of overworked cadences.",
+   "source": "Wikipedia, 'Literary reception of The Lord of the Rings' (and 'Tolkien's prose style')",
+   "url": "https://en.wikipedia.org/wiki/Literary_reception_of_The_Lord_of_the_Rings",
+   "quote": "overworked cadences",
+   "angle": "academic"
+  },
+  {
+   "index": 87,
+   "feature": "hypotyposis / metalepsis / harmonism",
+   "claim": "Chen argues Tolkien's Secondary Belief is produced by a style of hypotyposis (vivid evocation), metalepsis and harmonism across LOTR and The Silmarillion.",
+   "source": "Chen 2014, 'Tolkien's Style of Fantasy', Caietele Echinox 26 (CEEOL abstract)",
+   "url": "https://www.ceeol.com/content-files/document-63723.pdf",
+   "quote": "hypotyposis, metalepsis and harmonism",
+   "angle": "academic"
+  },
+  {
+   "index": 92,
+   "feature": "architectural structure (Lewis)",
+   "claim": "Lewis's 1955 review praises the romance's very high architectural quality, its two-pattern six-book design, and the fact that no individual or species exists only for the plot.",
+   "source": "kate_nepveu, 'LotR re-read: Lewis, The Dethronement of Power'",
+   "url": "https://kate-nepveu.livejournal.com/187276.html",
+   "quote": "very high architectural quality",
+   "angle": "academic"
+  },
+  {
+   "index": 94,
+   "feature": "Edwardian adventure-story mode",
+   "claim": "Lobdell argues the architecture and narrative style of the Edwardian adventure story (King Solomon's Mines, The Lost World) underlie The Hobbit and LOTR.",
+   "source": "Lobdell, The World of the Rings (Internet Archive record)",
+   "url": "https://archive.org/details/worldofringslang0000lobd",
+   "quote": "the Edwardian adventure story",
+   "angle": "academic"
+  },
+  {
+   "index": 101,
+   "feature": "register bound to thought",
+   "claim": "Simon argues that putting Théoden's speech about dying honourably into modern idiom would require an insincerity of thought, a disunion of word and meaning.",
+   "source": "Tom Simon, The rhetoric of Middle-earth (Bondwine, 2013-01-11)",
+   "url": "https://bondwine.com/2013/01/11/the-rhetoric-of-middle-earth/",
+   "quote": "a disunion of word and meaning",
+   "angle": "craft"
+  },
+  {
+   "index": 103,
+   "feature": "craft lesson: invisible style",
+   "claim": "Simon's lesson for fantasy writers is that stylistic choices must serve the story and never call attention to themselves, or they bounce the reader out.",
+   "source": "Tom Simon, The rhetoric of Middle-earth (Bondwine, 2013-01-11)",
+   "url": "https://bondwine.com/2013/01/11/the-rhetoric-of-middle-earth/",
+   "quote": "bouncing one out of the story",
+   "angle": "craft"
+  },
+  {
+   "index": 109,
+   "feature": "lexical sources of archaicity",
+   "claim": "Siepmann's corpus study attributes the impression of archaicity to three lexical causes: overuse of nineteenth-century fiction words, avoidance of modern-world words, and dense coinages, unusual grammar and rare words.",
+   "source": "Dirk Siepmann, Tolkien as a stylist: a corpus-based investigation (CL2017, Birmingham)",
+   "url": "https://www.birmingham.ac.uk/documents/college-artslaw/corpus/conference-archives/2017/general/paper239.pdf",
+   "quote": "the avoidance of words associated with the modern world",
+   "angle": "craft"
+  },
+  {
+   "index": 110,
+   "feature": "nineteenth-century landscape and direction vocabulary",
+   "claim": "Siepmann finds the key words shared with nineteenth-century novels cluster in landscape, position/direction (whither, thither, yonder, afar), warfare, and descriptive verbs, and were already obsolescent when Tolkien wrote.",
+   "source": "Dirk Siepmann, Tolkien as a stylist (CL2017)",
+   "url": "https://www.birmingham.ac.uk/documents/college-artslaw/corpus/conference-archives/2017/general/paper239.pdf",
+   "quote": "obsolete or obsolescent at the time of writing",
+   "angle": "craft"
+  },
+  {
+   "index": 114,
+   "feature": "distinctive key words",
+   "claim": "Words key only to The Lord of the Rings fall into warfare, natural features (dike, fen, dingle, starless), artefacts (fastness, sheath), peoples (lore-masters, wolf-riders), time (yesteryear) and prepositions (among, outwards), jointly producing an otherworldly atmosphere.",
+   "source": "Dirk Siepmann, Tolkien as a stylist (CL2017)",
+   "url": "https://www.birmingham.ac.uk/documents/college-artslaw/corpus/conference-archives/2017/general/paper239.pdf",
+   "quote": "an atmosphere of medievalism or otherworldliness",
+   "angle": "craft"
+  },
+  {
+   "index": 115,
+   "feature": "homely collocation and hyperbole",
+   "claim": "Siepmann finds Tolkien prefers the homeliest collocations yet pairs everyday adjectives like 'great' unusually with abstractions, objects and weather, and leans on hyperbole domains (entire/maximum, loud, heavy, tall).",
+   "source": "Dirk Siepmann, Tolkien as a stylist (CL2017)",
+   "url": "https://www.birmingham.ac.uk/documents/college-artslaw/corpus/conference-archives/2017/general/paper239.pdf",
+   "quote": "a marked preference for the most homely collocations available",
+   "angle": "craft"
+  },
+  {
+   "index": 117,
+   "feature": "archaism in sentence structure",
+   "claim": "Oakley Gordon argues the archaic quality of Tolkien's dialogue lies in word order rather than vocabulary, contrasting 'Nay, Gandalf!' with 'Not at all my dear G.' and calling the older orders terser and more vivid.",
+   "source": "Oakley Gordon, Language, Thought, and Worldviews in Tolkien's Writing (Salka Wind, 2021-12-24)",
+   "url": "https://salkawind.com/blog/archives/2184",
+   "quote": "terser, more vivid",
+   "angle": "craft"
+  },
+  {
+   "index": 126,
+   "feature": "per-speaker register (modern villain)",
+   "claim": "Shippey notes Saruman, as quoted by Gandalf, talks like a politician in empty modern words (real, ultimate, deploring), the one modern register in the chapter.",
+   "source": "Wikipedia, The Council of Elrond (citing Shippey 2005)",
+   "url": "https://en.wikipedia.org/wiki/The_Council_of_Elrond",
+   "quote": "talks like a politician",
+   "angle": "craft"
+  },
+  {
+   "index": 131,
+   "feature": "Council register table",
+   "claim": "The course blog tabulates the Council: Glóin in short broken sentences and apposition, hobbits in quick exclamations, Aragorn slipping between Elendil's heir and Strider, Boromir in a relatively Elrondian pattern.",
+   "source": "Tolkien: Medieval and Modern, Tolkien's Use of Poetry and Prose (2014-04-18)",
+   "url": "http://tolkienmedievalandmodern.blogspot.com/2014/04/tolkiens-use-of-poetry-and-prose.html",
+   "quote": "",
+   "angle": "craft"
+  },
+  {
+   "index": 135,
+   "feature": "orc registers",
+   "claim": "Rosebury (per Wikipedia) identifies at least three orc dialects by rank, with Grishnákh talking like a melodrama villain or public-school bully and Gorbag in the idiom of a murderous bureaucracy.",
+   "source": "Wikipedia, Tolkien's prose style (citing Rosebury 2003)",
+   "url": "https://en.wikipedia.org/wiki/Tolkien%27s_prose_style",
+   "quote": "like a melodrama villain, or a public-school bully",
+   "angle": "craft"
+  },
+  {
+   "index": 141,
+   "feature": "failed formal register as comedy",
+   "claim": "Turner (per Wikipedia) cites Pippin's 'O Wise People!' to Gildor as a hobbit attempting the formal register and thereby mediating it for the reader.",
+   "source": "Wikipedia, Tolkien's prose style (citing Turner 2020)",
+   "url": "https://en.wikipedia.org/wiki/Tolkien%27s_prose_style",
+   "quote": "O Wise People!",
+   "angle": "craft"
+  },
+  {
+   "index": 144,
+   "feature": "revived Old English words",
+   "claim": "Wilton lists revived Old English words (mathom, smial, barrow) and says Rohan's language was made to resemble ancient English so that its usages seem vaguely familiar and evoke ages past.",
+   "source": "David Wilton, Old English in LoTR (Wordorigins, 2020-03-07)",
+   "url": "https://www.wordorigins.org/harmless-drudge/old-english-in-lotr",
+   "quote": "seem vaguely familiar and evoke images of ages past",
+   "angle": "craft"
+  },
+  {
+   "index": 145,
+   "feature": "ubi sunt echo of The Wanderer",
+   "claim": "Novelist Patricia Bracewell juxtaposes The Wanderer's ubi sunt formula with the Rohirrim lament to show Tolkien's prose carrying the current of Old English history and language.",
+   "source": "Patricia Bracewell, Tolkien and the Anglo-Saxons (2018-08-17)",
+   "url": "https://www.patriciabracewell.com/2018/08/tolkien-and-the-anglo-saxons/",
+   "quote": "the thrumming current of Old English history and language",
+   "angle": "craft"
+  },
+  {
+   "index": 146,
+   "feature": "anaphora in the lament",
+   "claim": "The Universe in Words post shows the lament built on repeating a single phrase, 'Where is', each repetition conjuring one Rohirric image and conferring nostalgic value through rhetorical question.",
+   "source": "A Universe in Words, Tolkien, 'The Wanderer' and the Ubi Sunt-tradition (2015-11-07)",
+   "url": "http://universeinwords.blogspot.com/2015/11/tolkien-wanderer-and-ubi-sunttradition.html",
+   "quote": "relies on the repetition of a single phrase",
+   "angle": "craft"
+  },
+  {
+   "index": 148,
+   "feature": "stress-and-release macro rhythm",
+   "claim": "Drout (per Wikipedia) holds that the craftsmanship is consistent from the single sentence to the journey's macro-structure, all built on a repeated stress and release pattern.",
+   "source": "Wikipedia, Tolkien's prose style (citing Drout 2004)",
+   "url": "https://en.wikipedia.org/wiki/Tolkien%27s_prose_style",
+   "quote": "a repeated stress and release pattern",
+   "angle": "craft"
+  },
+  {
+   "index": 153,
+   "feature": "prose composed by ear",
+   "claim": "Le Guin infers from the cadences that Tolkien must have heard what he wrote, placing him with Dickens and Woolf as writers whose narrative prose wants the living voice.",
+   "source": "Jason Fisher, Lingwë (2010-09-23)",
+   "url": "http://lingwe.blogspot.com/2010/09/reading-lord-of-rings-aloud.html",
+   "quote": "Tolkien must have heard what he wrote",
+   "angle": "craft"
+  },
+  {
+   "index": 154,
+   "feature": "short rhythms form long rhythms",
+   "claim": "Le Guin, in Conversations on Writing, says short rhythms repeated form long rhythms and this cyclical repetition is why the book enchants.",
+   "source": "Goodreads note, Ursula K. Le Guin: Conversations on Writing",
+   "url": "https://www.goodreads.com/notes/38204934-ursula-k-le-guin/39382716-sean-noah/bc5474a9-afb5-4213-afc7-8994fc6277bc",
+   "quote": "Short rhythms repeated form long rhythms",
+   "angle": "craft"
+  },
+  {
+   "index": 155,
+   "feature": "iambic vs alliterative meter in prose",
+   "claim": "Venkatesh's writing lesson shows iambic pentameter driving plain action prose like a drumbeat, while elevated battle passages switch to four-stress Anglo-Saxon alliterative meter.",
+   "source": "Krishnan Venkatesh, Rhythm: A Writing Lesson from Tolkien (The Old Pearl Bed, 2017-01-13)",
+   "url": "https://kappatsupatchi.wordpress.com/2017/01/13/rhythm-a-writing-lesson-from-tolkien/",
+   "quote": "like a drumbeat, marking the relentless forward drive",
+   "angle": "craft"
+  },
+  {
+   "index": 156,
+   "feature": "incantatory register through meter",
+   "claim": "Venkatesh says the alliterative sections turn incantatory and trance-like, with repetition ('All is lost. All is lost') intensifying emotion, and that double-meter lets Tolkien switch modes effortlessly.",
+   "source": "Krishnan Venkatesh, The Old Pearl Bed (2017-01-13)",
+   "url": "https://kappatsupatchi.wordpress.com/2017/01/13/rhythm-a-writing-lesson-from-tolkien/",
+   "quote": "incantatory, almost trance-like",
+   "angle": "craft"
+  },
+  {
+   "index": 160,
+   "feature": "verse embedded in prose at peaks",
+   "claim": "Shelton (per Wikipedia) notes Éomer declaims alliterative verse mid-battle, midway between lament and battle-cry, and the chapter closes on an elegiac lay imitating Beowulf.",
+   "source": "Wikipedia, Battle of the Pelennor Fields (citing Shelton; Mahon 1978)",
+   "url": "https://en.wikipedia.org/wiki/Battle_of_the_Pelennor_Fields",
+   "quote": "Mourn not overmuch! Mighty was the fallen, meet was his ending",
+   "angle": "craft"
+  },
+  {
+   "index": 166,
+   "feature": "apo koinou syntax",
+   "claim": "Drout praises 'Speeding along with little hope of stopping or turning' as an apo koinou construction that forces tiny re-readings of the sentence's meaning.",
+   "source": "Michael Drout, Wormtalk (2007-04-12)",
+   "url": "http://wormtalk.blogspot.com/2007/04/how-to-critique-tolkiens-prose-style-at.html",
+   "quote": "Speeding along with little hope of stopping or turning",
+   "angle": "craft"
+  },
+  {
+   "index": 173,
+   "feature": "depth via inconsistent documents in varied styles",
+   "claim": "Drout, Hitotsubashi and Scavera (per Wikipedia) trace the impression of depth to casual incomplete allusions and multiple inconsistent accounts written as if by different hands.",
+   "source": "Wikipedia, Impression of depth in The Lord of the Rings (citing Drout et al. 2014)",
+   "url": "https://en.wikipedia.org/wiki/Impression_of_depth_in_The_Lord_of_the_Rings",
+   "quote": "as if by different hands",
+   "angle": "craft"
+  },
+  {
+   "index": 175,
+   "feature": "pseudo-editorial frame",
+   "claim": "Sipahi (per Wikipedia) shows the Prologue frames the text as oral tradition written down, copied and redacted, so the narrator's voice is that of a translator-editor of old documents.",
+   "source": "Wikipedia, Impression of depth in The Lord of the Rings (citing Sipahi 2016)",
+   "url": "https://en.wikipedia.org/wiki/Impression_of_depth_in_The_Lord_of_the_Rings",
+   "quote": "",
+   "angle": "craft"
+  },
+  {
+   "index": 179,
+   "feature": "weakness in light comedy",
+   "claim": "Auden's 1956 review concedes light comedy is not Tolkien's forte and the opening chapters are a little shy-making, while the sense of the credible is never violated.",
+   "source": "W. H. Auden reviews (1954, 1956; Epistle of Dude reprint)",
+   "url": "https://epistleofdude.wordpress.com/2019/05/13/auden-reviews-tolkien/",
+   "quote": "light comedy is not Mr. Tolkien's forte",
+   "angle": "craft"
+  },
+  {
+   "index": 181,
+   "feature": "unashamed heroic register",
+   "claim": "Lewis characterises the book's register as gorgeous, eloquent and unashamed heroic romance, opening lighter in a way that risks losing readers.",
+   "source": "C. S. Lewis reviews (1954, 1955; Epistle of Dude reprint)",
+   "url": "https://epistleofdude.wordpress.com/2018/11/17/c-s-lewis-reviews-the-lord-of-the-rings/",
+   "quote": "gorgeous, eloquent, and unashamed",
+   "angle": "craft"
+  },
+  {
+   "index": 182,
+   "feature": "sound symbolism of invented languages",
+   "claim": "Wikipedia's sound article reports Black Speech built to sound harsh with about 63% consonants and more voiced plosives against 52–55% for Elvish, which was chosen for beauty.",
+   "source": "Wikipedia, Sound and language in Middle-earth",
+   "url": "https://en.wikipedia.org/wiki/Sound_and_language_in_Middle-earth",
+   "quote": "to sound harsh",
+   "angle": "craft"
+  },
+  {
+   "index": 190,
+   "feature": "game design: slowness as Tolkien feel",
+   "claim": "Game designer Sage LaTorra argues The One Ring captures the feel of Tolkien's writing through deliberate length and slowness, its long-winded journeys and discourses, rather than mechanical elegance.",
+   "source": "Sage LaTorra, I Spent The Last Year Being A Hobbit (2021-07-12)",
+   "url": "https://www.latorra.org/2021/07/12/the-one-ring/",
+   "quote": "long-winded journeys",
+   "angle": "craft"
+  },
+  {
+   "index": 191,
+   "feature": "game design: melancholic undertone",
+   "claim": "The Adventures in Middle-earth Loremaster's Guide (per its reviewer) tells game masters to keep the melancholic undertone of the long defeat, treating The Hobbit as a subjective memoir.",
+   "source": "rasmusnord01, Adventures in Middle-earth Loremaster's Guide review (Mindlands, 2017-10-23)",
+   "url": "https://mindlands.blog/2017/10/23/adventures-in-middle-earth-loremasters-guide-review/",
+   "quote": "a melancholic undertone to Tolkien's world",
+   "angle": "craft"
+  },
+  {
+   "index": 195,
+   "feature": "stress-release craftsmanship attribution",
+   "claim": "The Wikipedia article credits Drout (2004), not Le Guin, with the 'stress and release' formulation, while crediting Le Guin (2001) only with a sympathetic account of the style.",
+   "source": "Wikipedia, Tolkien's prose style",
+   "url": "https://en.wikipedia.org/wiki/Tolkien%27s_prose_style",
+   "quote": "",
+   "angle": "craft"
+  },
+  {
+   "index": 196,
+   "feature": "archaism defended (terseness)",
+   "claim": "Tolkien rejects the 'tushery' charge, holding that genuine archaic English is terser than modern English and can say things the modern idiom cannot.",
+   "source": "Tolkien, Letter 171 to Hugh Brogan (1955), quoted in 'Passages I Highlighted in The Letters of J.R.R. Tolkien'",
+   "url": "https://www.lesswrong.com/posts/jJ2p3E2qkXGRBbvnp/passages-i-highlighted-in-the-letters-of-j-r-r-tolkien",
+   "quote": "a real archaic English is far more terse than modern",
+   "angle": "the"
+  },
+  {
+   "index": 197,
+   "feature": "moderated archaism",
+   "claim": "Tolkien describes Théoden's dialogue as 'moderated or watered archaism', deliberately short of authentic Middle English while still non-modern.",
+   "source": "Tolkien, Letter 171, as quoted via Le Guin in TheOneRing.net, 'From The Rings of Power to Poughkeepsie'",
+   "url": "https://www.theonering.net/torwp/2022/09/26/115304-from-the-rings-of-power-to-poughkeepsie/",
+   "quote": "moderated or watered archaism",
+   "angle": "the"
+  },
+  {
+   "index": 203,
+   "feature": "hobbit register = rustic English",
+   "claim": "Tolkien defines hobbits as rustic English people made small, which grounds their plain modern speech register.",
+   "source": "BBC Radio 4 interview with Denys Gueroult, January 1971 broadcast, transcript at uv.es",
+   "url": "https://www.uv.es/~fores/jrtoa2.html",
+   "quote": "Hobbits are just rustic English people",
+   "angle": "the"
+  },
+  {
+   "index": 205,
+   "feature": "phonaesthetic sources of names (Welsh, Finnish)",
+   "claim": "Tolkien names Welsh style-and-sound and Finnish as the potent influences behind his nomenclature, especially mountain names.",
+   "source": "BBC interview with Denys Gueroult, transcript at uv.es",
+   "url": "https://www.uv.es/~fores/jrtoa2.html",
+   "quote": "attracted me by it's style and sound",
+   "angle": "the"
+  },
+  {
+   "index": 206,
+   "feature": "map-driven consistency",
+   "claim": "Tolkien says a complicated story must be worked to a map or it cannot be kept consistent.",
+   "source": "BBC interview with Denys Gueroult, transcript at uv.es",
+   "url": "https://www.uv.es/~fores/jrtoa2.html",
+   "quote": "you must work to a map",
+   "angle": "the"
+  },
+  {
+   "index": 208,
+   "feature": "language as sensory pleasure",
+   "claim": "Tolkien describes encountering a new language as like tasting a new wine, an aesthetic and nourishing pleasure underlying his invented tongues.",
+   "source": "Stuart D. Lee, ''Tolkien in Oxford' (BBC, 1968): A Reconstruction', Tolkien Studies 15 (ORA PDF)",
+   "url": "https://ora.ox.ac.uk/objects/uuid:937e4b3c-ea7a-4da2-ad9d-1d3d3612180d/download_file?file_format=pdf&safe_filename=Tolkien_in_Oxford_SDLee.pdf&type_of_work=Journal+article",
+   "quote": "just like tasting a new wine",
+   "angle": "the"
+  },
+  {
+   "index": 218,
+   "feature": "deliberate enigmas / unexplained detail",
+   "claim": "Tolkien says a good deal must remain unexplained even where explanation exists, because a mythical age needs enigmas.",
+   "source": "Tolkien, Letter 144 to Naomi Mitchison (1954)",
+   "url": "https://apilgriminnarnia.com/2017/03/28/the-tolkien-letter-must-read/",
+   "quote": "even in a mythical Age there must be some enigmas",
+   "angle": "the"
+  },
+  {
+   "index": 230,
+   "feature": "familiar vs deferential pronouns as register marker",
+   "claim": "Appendix F says Shire hobbits lost the familiar/deferential distinction, so Pippin addressed even Denethor familiarly, astonishing Gondor.",
+   "source": "John D. Rateliff, 'Eowyn's Thee and Thou' (Sacnoth's Scriptorium), quoting Appendix F footnote",
+   "url": "http://sacnoths.blogspot.com/2019/04/eowyns-thee-and-thou.html",
+   "quote": "including the Lord Denethor himself",
+   "angle": "the"
+  },
+  {
+   "index": 231,
+   "feature": "degraded orc speech / elvish command of styles",
+   "claim": "Appendix F notes Elves commanded many styles while Orc and Troll speech was actually filthier than shown.",
+   "source": "Tolkien, Appendix F, discussed at TheOneRing.net Reading Room",
+   "url": "http://newboards.theonering.net/forum/gforum/perl/gforum.cgi?post=173512",
+   "quote": "more filthy than I have shown it",
+   "angle": "the"
+  },
+  {
+   "index": 234,
+   "feature": "worn-down obsolete name-stock for the Shire",
+   "claim": "Tolkien explains Shire names carry elements that are obsolete, dialectal or worn-down in current English, giving them antiquarian texture.",
+   "source": "Tolkien, 'Guide to the Names in The Lord of the Rings'",
+   "url": "https://tolkien.ro/text/JRR%20Tolkien%20-%20Guide%20to%20the%20Names%20in%20The%20Lord%20of%20the%20Rings.pdf",
+   "quote": "obsolete or dialectal, or are worn-down and obscured in form",
+   "angle": "the"
+  },
+  {
+   "index": 235,
+   "feature": "archaism as rusticism",
+   "claim": "Tolkien identifies 'Oliphaunt' as an archaic form used as a rusticism, lamenting the loss of archaic colouring in translation.",
+   "source": "Tolkien, 'Guide to the Names in The Lord of the Rings'",
+   "url": "https://tolkien.ro/text/JRR%20Tolkien%20-%20Guide%20to%20the%20Names%20in%20The%20Lord%20of%20the%20Rings.pdf",
+   "quote": "an archaic form of 'elephant' used as a 'rusticism'",
+   "angle": "the"
+  },
+  {
+   "index": 236,
+   "feature": "avoid prettified literary diction",
+   "claim": "Tolkien prefers debased rustic associations of 'elf' over pretty literary fancies, signalling his distaste for ornamental register.",
+   "source": "Tolkien, 'Guide to the Names in The Lord of the Rings'",
+   "url": "https://tolkien.ro/text/JRR%20Tolkien%20-%20Guide%20to%20the%20Names%20in%20The%20Lord%20of%20the%20Rings.pdf",
+   "quote": "less damaging than the 'pretty' literary fancies",
+   "angle": "the"
+  },
+  {
+   "index": 240,
+   "feature": "antiquated but not arcane",
+   "claim": "Tolkien's rule for heroic diction is to avoid both the colloquial and the obscure, being antiquated without being arcane.",
+   "source": "Philip Irving Mitchell, 'Tolkien on Translating Beowulf' (DBU)",
+   "url": "https://www.dbu.edu/mitchell/tolkien-medieval-tradition-resources/beowulf-translate.html",
+   "quote": "intentionally antiquated but not intentionally arcane",
+   "angle": "the"
+  },
+  {
+   "index": 274,
+   "feature": "multivalent texture",
+   "claim": "Flieger describes the work's richness and multivalent texture that lets every reader take what they need.",
+   "source": "Wikipedia, 'Tolkien's prose style' (citing Flieger); Flieger interview at Tolkienista",
+   "url": "https://tolkienista.com/2022/04/22/tolkien-between-the-darkness-and-the-splintered-lights-of-faery-an-interview-with-verlyn-flieger/",
+   "quote": "so rich, so multi-valent",
+   "angle": "the"
+  },
+  {
+   "index": 276,
+   "feature": "names as feast / elvish beauty",
+   "claim": "Lewis praises the names as a feast that at moments embody a piercing, high, elvish beauty unmatched in prose.",
+   "source": "C.S. Lewis, 'The Gods Return to Earth' (Time and Tide, 1954), reproduced at TheOneRing.com",
+   "url": "https://www.theonering.com/the-gods-return-to-earth-c-s-lewis-review-of-the-fellowship-of-the-ring/",
+   "quote": "The names alone are a feast",
+   "angle": "the"
+  },
+  {
+   "index": 278,
+   "feature": "homely fireside beside heroic",
+   "claim": "Lewis notes the book balances snug firesides and good cheer for the hobbit in each reader against great valour and anguish.",
+   "source": "C.S. Lewis, 'The Gods Return to Earth' (1954)",
+   "url": "https://www.theonering.com/the-gods-return-to-earth-c-s-lewis-review-of-the-fellowship-of-the-ring/",
+   "quote": "many a snug fireside and many an hour of good cheer",
+   "angle": "the"
+  },
+  {
+   "index": 282,
+   "feature": "historical and social reality within Quest",
+   "claim": "Auden says Tolkien uses the Quest's traditional properties while satisfying our sense of historical and social reality.",
+   "source": "W.H. Auden, 'At the End of the Quest, Victory' (NYT, 1956), at Anthropology of Accord",
+   "url": "https://doctorpence.blogspot.com/2016/02/friday-bookreview-wh-auden-on-lord-of.html",
+   "quote": "satisfying our sense of historical and social reality",
+   "angle": "the"
+  },
+  {
+   "index": 285,
+   "feature": "hostile: class snobbery in speech; overworked cadences",
+   "claim": "Stimpson reads character language as class snobbery and Manlove hears overworked cadences and monotonous pitch, hostile readings Shippey and Rosebury rebut.",
+   "source": "Wikipedia, 'Literary reception of The Lord of the Rings'",
+   "url": "https://en.wikipedia.org/wiki/Literary_reception_of_The_Lord_of_the_Rings",
+   "quote": "overworked cadences",
+   "angle": "the"
+  },
+  {
+   "index": 286,
+   "feature": "corpus: three lexical causes of archaicity",
+   "claim": "Siepmann's corpus study finds the impression of archaicity comes from overuse of nineteenth-century fiction words, avoidance of modern-world words, and dense rare or obsolescent words.",
+   "source": "Dirk Siepmann, 'Tolkien as a stylist: a corpus-based investigation into The Lord of the Rings' (Corpus Linguistics 2017, Birmingham)",
+   "url": "https://www.birmingham.ac.uk/documents/college-artslaw/corpus/conference-archives/2017/general/paper239.pdf",
+   "quote": "the avoidance of words associated with the modern world",
+   "angle": "the"
+  },
+  {
+   "index": 291,
+   "feature": "non-standard speech marks Sam and Gollum; epic style for heroes",
+   "claim": "Kullmann and Siepmann note Sam and Gollum are marked by non-standard speech while omniscient passages shift to epic style marking Aragorn as an old-style hero.",
+   "source": "Wikipedia, 'Tolkien's prose style' and 'Storytelling in The Lord of the Rings' (citing Kullmann & Siepmann)",
+   "url": "https://en.wikipedia.org/wiki/Tolkien's_prose_style",
+   "quote": "marked out by their non-standard speech",
+   "angle": "the"
+  },
+  {
+   "index": 298,
+   "feature": "found-manuscript frame",
+   "claim": "Bowman notes the Red Book device puts the tale inside quotation marks, casting Tolkien as translator rather than author.",
+   "source": "Wikipedia, 'Storytelling in The Lord of the Rings'",
+   "url": "https://en.wikipedia.org/wiki/Storytelling_in_The_Lord_of_the_Rings",
+   "quote": "inside quotation marks",
+   "angle": "the"
+  },
+  {
+   "index": 300,
+   "feature": "Shippey on delivered archaism and metre",
+   "claim": "Shippey remarks that Tolkien's lines are archaic though persuasive when delivered with conviction, and that Tolkien became very strict about metre.",
+   "source": "Writers Write, 'Talking LOTR With Tolkien Expert Professor Thomas Shippey'; Tolkien Library Shippey chat",
+   "url": "https://www.writerswrite.com/journal/thomas-shippey-3021",
+   "quote": "archaic though they often are",
+   "angle": "the"
+  },
+  {
+   "index": 302,
+   "feature": "paratactic chronicle register",
+   "claim": "Gandalf's telling of Isildur's death uses paratactic clause structure and unfamiliar proper nouns to sound sombre and chronicle-like.",
+   "source": "John Halbrooks, Tolkienian Style",
+   "url": "https://johnhalbrooks.substack.com/p/tolkienian-style",
+   "quote": "He leaped into the waters, but the Ring slipped",
+   "angle": "close"
+  },
+  {
+   "index": 303,
+   "feature": "antiquarian register (Prologue)",
+   "claim": "The Prologue's subtitle 'Concerning Hobbits' adopts a nineteenth-century antiquarian register, and the early chapters carry more place-names than The Hobbit to signal expansion.",
+   "source": "John Halbrooks, Tolkienian Style",
+   "url": "https://johnhalbrooks.substack.com/p/tolkienian-style",
+   "quote": "Concerning Hobbits",
+   "angle": "close"
+  },
+  {
+   "index": 304,
+   "feature": "register shift Book IV to Book V",
+   "claim": "The prose rises from hobbit-colloquial in Book Four to a heroic register in the Pelennor chapters of Book Five.",
+   "source": "John Halbrooks, Heroic Language in The Lord of the Rings (Substack, 2026-08-12)",
+   "url": "https://johnhalbrooks.substack.com/p/heroic-language-in-the-lord-of-the-93f",
+   "quote": "the hosts of Mordor wailed, and terror took them",
+   "angle": "close"
+  },
+  {
+   "index": 312,
+   "feature": "sentence length as movement",
+   "claim": "A long sentence tracks difficult movement and short sentences then supply details; the Barrow-downs and Dead Marshes rely on word-sound, alliteration and understated rhyme.",
+   "source": "Alun Ephraim, cellar door",
+   "url": "https://alunephraim.substack.com/p/cellar-door",
+   "quote": "alliteration, an understated bit of rhyme",
+   "angle": "close"
+  },
+  {
+   "index": 315,
+   "feature": "Elfland dialogue test",
+   "claim": "The Aragorn/Boromir/Elrond exchange is an English extraordinary for its simple timelessness that could not be mistaken for Capitol Hill, and Boromir's slight whine is characterising.",
+   "source": "Ursula K. Le Guin, From Elfland to Poughkeepsie (1973)",
+   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+   "quote": "an English extraordinary for its simple timelessness",
+   "angle": "close"
+  },
+  {
+   "index": 316,
+   "feature": "plain style (Le Guin relayed)",
+   "claim": "Le Guin's judgement that Tolkien's plain English is direct, concrete and simple is quoted and endorsed by a language blogger.",
+   "source": "Stan Carey, Sentence first (2024-10-16)",
+   "url": "https://stancarey.wordpress.com/2024/10/16/how-to-see-ones-own-world-ursula-k-le-guin-on-writing-style/",
+   "quote": "no ichor; everything is direct, concrete and simple",
+   "angle": "close"
+  },
+  {
+   "index": 319,
+   "feature": "register by people",
+   "claim": "Tolkien selects registers to suit peoples: simple and modern for hobbits, more archaic for Dwarves, Elves and Rohirrim, with hobbits mediating for the modern reader (Turner).",
+   "source": "Wikipedia, Tolkien's prose style",
+   "url": "https://en.wikipedia.org/wiki/Tolkien's_prose_style",
+   "quote": "simple and modern for Hobbits",
+   "angle": "close"
+  },
+  {
+   "index": 321,
+   "feature": "Saruman's hollow modern speech",
+   "claim": "Shippey reads Saruman's vocabulary as empty politician-speak built on words like 'real' and 'ultimate'.",
+   "source": "Wikipedia, Tolkien's prose style (Shippey)",
+   "url": "https://en.wikipedia.org/wiki/Tolkien's_prose_style",
+   "quote": "we can bide our time, we can keep",
+   "angle": "close"
+  },
+  {
+   "index": 326,
+   "feature": "invitational ambiguity",
+   "claim": "Walker's book argues the prose is strikingly invitational, taut with semantic ambiguity that widens meaning and draws the reader into sub-creation.",
+   "source": "Wikipedia, Tolkien's prose style (Walker)",
+   "url": "https://en.wikipedia.org/wiki/Tolkien's_prose_style",
+   "quote": "strikingly invitational",
+   "angle": "close"
+  },
+  {
+   "index": 331,
+   "feature": "hobbit focalization",
+   "claim": "Kullmann and Siepmann find about 85% of narrative time focalized through the four hobbits, with character viewpoint conveying state of mind while omniscient narration stays vivid; the epic style is archaic diction plus parataxis linked by 'and'.",
+   "source": "Wikipedia, Storytelling in The Lord of the Rings (Kullmann/Siepmann)",
+   "url": "https://en.wikipedia.org/wiki/Storytelling_in_The_Lord_of_the_Rings",
+   "quote": "parataxis with clauses linked with 'and'",
+   "angle": "close"
+  },
+  {
+   "index": 332,
+   "feature": "three lexical causes of archaicity (corpus)",
+   "claim": "The corpus study finds the impression of archaicity comes from overuse of nineteenth-century-fiction words, avoidance of modern-world words, and dense coinages, unusual grammar and obsolescent words, across four lexical sets (landscape, direction, warfare, descriptive verbs).",
+   "source": "Dirk Siepmann, Tolkien as a stylist: a corpus-based investigation (Birmingham CL2017)",
+   "url": "https://www.birmingham.ac.uk/documents/college-artslaw/corpus/conference-archives/2017/general/paper239.pdf",
+   "quote": "three simple lexical causes",
+   "angle": "close"
+  },
+  {
+   "index": 336,
+   "feature": "Hobbit narrator see-saw",
+   "claim": "Shippey notes The Hobbit's narration see-saws between Bilbo's 'business manner', the narrator's matter-of-fact tone and Thorin's high style, with 'of course' and 'as you probably know' hinting at hidden depths.",
+   "source": "C.S. Lewis and J.R.R. Tolkien blog, review of Author of the Century",
+   "url": "https://lewistolkien.wordpress.com/j-r-r-tolkien/j-r-r-tolkien-author-of-the-century-by-tom-shippey/",
+   "quote": "business manner",
+   "angle": "close"
+  },
+  {
+   "index": 338,
+   "feature": "archaic structure, not vocabulary",
+   "claim": "Théoden's 'Nay, Gandalf!' speech uses only words still current; its archaism is in the sentence arrangement, and the final clause order carries a thought modern idiom cannot (quoting Letter 171).",
+   "source": "Oakley Gordon, Language, Thought, and Worldviews in Tolkien's Writing (Salka Wind, 2021-12-24)",
+   "url": "https://salkawind.com/blog/archives/2184",
+   "quote": "terser, more vivid, and sometimes nobler than modern English",
+   "angle": "close"
+  },
+  {
+   "index": 341,
+   "feature": "thou/you as intimacy dial",
+   "claim": "In the Athrabeth Finrod moves deliberately between formal 'you' and intimate 'thou' to open and close distance with Andreth, encoding relationship in grammar.",
+   "source": "Sparrow F. Alden, Early Modern English Inflectional Morphology (Mythmoot II, 2013)",
+   "url": "https://signumuniversity.org/wp-content/uploads/2016/11/Mythmoot2_Alden-Early-Modern-English.pdf",
+   "quote": "Finrod uses the different inflections to connote",
+   "angle": "close"
+  },
+  {
+   "index": 343,
+   "feature": "thee/thou register (forum)",
+   "claim": "Mythgard forum posters treat thee/thou in the Silmarillion as the familiar form that nonetheless sounds formal today, note Yea/Nay as the cheap archaism, and grade the Valar most archaic with First-Age Elves one step down.",
+   "source": "Mythgard Forums, Modern Turns of Phrase and Archaic Language (2019)",
+   "url": "https://forums.signumuniversity.org/index.php?threads/modern-turns-of-phrase-and-archaic-language.3549/page-2",
+   "quote": "Yea/Nay for Yes/No",
+   "angle": "close"
+  },
+  {
+   "index": 349,
+   "feature": "intrusive omniscient narrator in LotR",
+   "claim": "The omniscient narrator reappears on the Downs to raise and simultaneously discount supernatural possibility, calling the standing stone 'more like a warning'.",
+   "source": "Kate Nepveu, LotR re-read: Fog on the Barrow-downs",
+   "url": "https://reactormag.com/lotr-re-read-fellowship-i8-fog-on-the-barrow-downs/",
+   "quote": "more like a warning",
+   "angle": "close"
+  },
+  {
+   "index": 351,
+   "feature": "polarities that reverse",
+   "claim": "Le Guin's essay, as summarised, reads the narrative as pulsing between polarities (darkness/daylight, confusion/clarity, imprisonment/freedom), each reversal recurring three or four times per chapter, and hears a Beethoven finale when the closing lines are read aloud.",
+   "source": "Kate Nepveu, LotR re-read: Le Guin, Rhythmic Pattern in The Lord of the Rings (LiveJournal)",
+   "url": "https://kate-nepveu.livejournal.com/180011.html",
+   "quote": "Stress, release. Inbreath, outbreath. A heartbeat.",
+   "angle": "close"
+  },
+  {
+   "index": 361,
+   "feature": "inversion and self-naming (Éowyn)",
+   "claim": "'No living man am I' opens with negation then affirmation, 'Éowyn I am, Éomund's daughter' is a pre-duel self-naming challenge, and the closing conditional is parallel and archaic.",
+   "source": "middle-earth-mythopoeia (Tumblr)",
+   "url": "https://www.tumblr.com/middle-earth-mythopoeia/722725648255385600/the-movie-dialogue-cant-surpass-this-but-no",
+   "quote": "Éowyn I am, Éomund's daughter",
+   "angle": "close"
+  },
+  {
+   "index": 362,
+   "feature": "ubi sunt adaptation",
+   "claim": "'Where now the horse and the rider?' adapts the Wanderer's ubi sunt lament, rephrasing its opening question and expanding it item by item.",
+   "source": "M.E. Bond, Tolkien's Influences: The Wanderer (2019-05-27)",
+   "url": "https://www.mebondbooks.com/2019/05/27/tolkiens-influences-the-wanderer/",
+   "quote": "Where now the horse and the rider?",
+   "angle": "close"
+  },
+  {
+   "index": 363,
+   "feature": "ubi sunt as erotema",
+   "claim": "The Rohan lament is a recognisable ubi sunt, a lament for greatness past and irrecoverable built on rhetorical questions.",
+   "source": "Anglophilic Anglican, Ubi sunt? Song of the Rohirrim (2019-07-30)",
+   "url": "https://anglophilicanglican.wordpress.com/2019/07/30/ubi-sunt-song-of-the-rohirrim-a-lament/",
+   "quote": "a well-known poetic form",
+   "angle": "close"
+  },
+  {
+   "index": 364,
+   "feature": "ubi sunt expansion",
+   "claim": "Tolkien turns the Old English 'Hwær cwom mearg?' into an expanded meditation running through rider, horn, helm, hauberk, harp and harvest.",
+   "source": "Lucy Holland, where is the horse and the rider (Silvan Historian, 2025-02-23)",
+   "url": "https://silvanhistorian.substack.com/p/where-is-the-horse-and-the-rider",
+   "quote": "",
+   "angle": "close"
+  },
+  {
+   "index": 366,
+   "feature": "King James diction (Ainulindalë)",
+   "claim": "Usenet readers, citing Petty and Rosebury via Hammond and Scull, describe the Ainulindalë's highly formal King James-style diction with -eth forms as scriptural yet distinctively Tolkien's.",
+   "source": "alt.fan.tolkien, Analysis and Criticism of the Ainulindale (narkive)",
+   "url": "https://alt.fan.tolkien.narkive.com/OT4GD3gR/analysis-and-criticism-of-the-ainulindale",
+   "quote": "the fire that giveth Life and Reality",
+   "angle": "close"
+  },
+  {
+   "index": 372,
+   "feature": "restraint at the ending",
+   "claim": "The Grey Havens closes on emotional restraint, with Sam's 'Well, I'm back' as the hobbit response to epic events.",
+   "source": "Never Felt Better, Chapter by Chapter: The Grey Havens (2012-03-08)",
+   "url": "https://neverfeltbetter.wordpress.com/2012/03/08/the-lords-of-the-rings-chapter-by-chapter-the-grey-havens/",
+   "quote": "Well, I'm back",
+   "angle": "close"
+  },
+  {
+   "index": 388,
+   "feature": "chronicle dating by feast days",
+   "claim": "The Farmer Giles chronicle fixes its events by the church calendar (St Nicholas' Day, Christmas Eve, 14 January) inside a legendary span 'between Brutus and King Arthur'.",
+   "source": "Noah Huisman, 'On Farmer Giles' (The Lumenorean)",
+   "url": "https://noahhuisman.substack.com/p/on-farmer-giles",
+   "quote": "",
+   "angle": "civic-record"
+  },
+  {
+   "index": 393,
+   "feature": "ethnographic pre-text",
+   "claim": "Kullmann finds the Prologue imitates the non-fictional prose of nineteenth- and early-twentieth-century ethnography, while the Note on the Shire Records mimics works of historiography.",
+   "source": "Wikipedia, 'Editorial framing of The Lord of the Rings' (citing Kullmann & Siepmann 2021, pp. 46–47)",
+   "url": "https://en.wikipedia.org/wiki/Editorial_framing_of_The_Lord_of_the_Rings",
+   "quote": "non-fictional prose of nineteenth- and early twentieth-century ethnography",
+   "angle": "civic-record"
+  },
+  {
+   "index": 413,
+   "feature": "transmission chain with dates",
+   "claim": "The Note traces the Red Book through dated copies (the Thain's Book, IV 64; Findegil's exact copy, IV 172) and records the Minas Tirith annotations and corrections 'especially of names, words and quotations', a stemma written as prose.",
+   "source": "Giuseppe Pezzini, 'The authors of Middle Earth' (J. Inklings Studies 2018), quoting the Note",
+   "url": "https://research-repository.st-andrews.ac.uk/bitstream/handle/10023/13159/Pezzini_2018_JIS_AuthorsofMiddleEarth_AAM.pdf?sequence=1&isAllowed=y",
+   "quote": "Findegil, King's Writer, finished this work in IV 172",
+   "angle": "civic-record"
+  },
+  {
+   "index": 432,
+   "feature": "antiquarian aesthetics and improved forgery",
+   "claim": "Groom places Tolkien in the English antiquarian line of Swift, Chatterton and Stukeley as one who enlists the aesthetics of antiquarianism, and Sherwood reads the non-narrative elements as Tolkien improving on antiquarian forgery to create modern fantasy's conventions.",
+   "source": "Wikipedia, 'Tolkien and antiquarianism'",
+   "url": "https://en.wikipedia.org/wiki/Tolkien_and_antiquarianism",
+   "quote": "enlists the aesthetics of antiquarianism",
+   "angle": "civic-record"
+  },
+  {
+   "index": 441,
+   "feature": "quotation marks as sole source-marker",
+   "claim": "Passages of Appendix A translated from Fourth-Age hobbit or Gondorian writers are marked only by surrounding quotation marks, expecting the reader to recall the Prologue's discussion of sources.",
+   "source": "Kate Nepveu, 'LotR re-read: Appendices' (Reactor)",
+   "url": "https://reactormag.com/lotr-reread-appendices/",
+   "quote": "only marked by surrounding quotation marks",
+   "angle": "civic-record"
+  },
+  {
+   "index": 442,
+   "feature": "hedged suggestion idiom",
+   "claim": "Some quoted passages in Appendix A let Tolkien suggest things without committing to them, in the chronicle idiom 'some say he dwells there still'.",
+   "source": "Kate Nepveu, 'LotR re-read: Appendices' (Reactor)",
+   "url": "https://reactormag.com/lotr-reread-appendices/",
+   "quote": "some say he dwells there still",
+   "angle": "civic-record"
+  },
+  {
+   "index": 443,
+   "feature": "annals versus year-list split",
+   "claim": "Appendix A's narrative annals and Appendix B's year-list divide one history so that a reader loses orientation in A and finds B redundant, wanting something more like A and B combined.",
+   "source": "Kate Nepveu, 'LotR re-read: Appendices' (Reactor)",
+   "url": "https://reactormag.com/lotr-reread-appendices/",
+   "quote": "something more like A & B combined",
+   "angle": "civic-record"
+  },
+  {
+   "index": 446,
+   "feature": "annal definition and gaps",
+   "claim": "Annals are lists of years or spans with brief summaries, and Tolkien's Second Age annals have significant gaps, a single entry covering the years 2000 to 3000.",
+   "source": "Norbert Schürer, 'Second Age, Middle Age', JTR 15.2 (2022)",
+   "url": "https://scholar.valpo.edu/journaloftolkienresearch/vol15/iss2/6",
+   "quote": "lists of years or spans with brief summaries",
+   "angle": "civic-record"
+  },
+  {
+   "index": 447,
+   "feature": "record declares its own scarcity",
+   "claim": "Appendix B's Second Age opens by declaring that of events in Middle-earth the records are few and brief and their dates often uncertain, so the annalist states the limits of his sources before listing them.",
+   "source": "Norbert Schürer, 'Second Age, Middle Age', JTR 15.2 (2022), quoting Appendix B",
+   "url": "https://scholar.valpo.edu/journaloftolkienresearch/vol15/iss2/6",
+   "quote": "the records are few and brief",
+   "angle": "civic-record"
+  },
+  {
+   "index": 450,
+   "feature": "annalistic compression",
+   "claim": "The Silmarillion uses a compressed style in which events are briefly documented as if in annals recording history and legend, with minimal dialogue, which makes it feel more distant and difficult.",
+   "source": "Wikipedia, 'Tolkien's prose style'",
+   "url": "https://en.wikipedia.org/wiki/Tolkien%27s_prose_style",
+   "quote": "as if in annals recording history and legend",
+   "angle": "civic-record"
+  },
+  {
+   "index": 451,
+   "feature": "varying styles as a depth factor",
+   "claim": "Drout, Hitotsubashi and Scavera identify four factors behind the impression of depth, the fourth being different texts written in varying styles as if by different hands.",
+   "source": "Wikipedia, 'Literary devices in The Lord of the Rings'",
+   "url": "https://en.wikipedia.org/wiki/Literary_devices_in_The_Lord_of_the_Rings",
+   "quote": "Different texts written in varying styles",
+   "angle": "civic-record"
+  },
+  {
+   "index": 452,
+   "feature": "multiple-manuscripts device",
+   "claim": "Sipahi highlights the Prologue's device of multiple manuscripts, redactions and translations of the Red Book as the framework that establishes authenticity, while Brooke-Rose dismissed the genealogies and histories as unnecessary to the narrative.",
+   "source": "Wikipedia, 'Impression of depth in The Lord of the Rings'",
+   "url": "https://en.wikipedia.org/wiki/Impression_of_depth_in_The_Lord_of_the_Rings",
+   "quote": "",
+   "angle": "civic-record"
+  },
+  {
+   "index": 454,
+   "feature": "record names its own scribes",
+   "claim": "The Tale of Aragorn and Arwen is attributed within the frame to Barahir, grandson of Faramir, writing after Aragorn's death, with an abbreviated version entered in the Thain's Book by Findegil.",
+   "source": "Wikipedia, 'The Tale of Aragorn and Arwen'",
+   "url": "https://en.wikipedia.org/wiki/The_Tale_of_Aragorn_and_Arwen",
+   "quote": "written after Aragorn's death by Barahir",
+   "angle": "civic-record"
+  },
+  {
+   "index": 459,
+   "feature": "per-character registers",
+   "claim": "Kullmann's character-by-character stylistics finds Gandalf and Frodo the most flexible registers, Sam the most evolving, Gimli and Legolas the most traditional, and Merry and Pippin speaking common English as reality-based touchstones.",
+   "source": "Sharon L. Bolding, review of Kullmann & Siepmann, Mythlore 41.1 (2022)",
+   "url": "https://dc.swosu.edu/mythlore/vol41/iss1/23/",
+   "quote": "reality-based touchstones",
+   "angle": "civic-record"
+  },
+  {
+   "index": 466,
+   "feature": "critical method",
+   "claim": "Hand-waving about undefined 'depth' is worthless; a real critique of Tolkien's prose must be specific and detailed at the sentence level.",
+   "source": "Drout, Wormtalk 2007-04-12",
+   "url": "http://wormtalk.blogspot.com/2007/04/how-to-critique-tolkiens-prose-style-at.html",
+   "quote": "useless as criticism",
+   "angle": "primaries"
+  },
+  {
+   "index": 470,
+   "feature": "annalistic vs novelistic voice",
+   "claim": "The Children of Húrin is a hybrid between the historic/annalistic style of The Silmarillion and the novelistic style of The Lord of the Rings.",
+   "source": "Drout, Wormtalk, 'The Children of Húrin Review' (2007-04-17)",
+   "url": "https://wormtalk.blogspot.com/2007/04/children-of-hrin-review-below-contains.html",
+   "quote": "historic/annalistic style of The Silmarillion",
+   "angle": "primaries"
+  },
+  {
+   "index": 483,
+   "feature": "register rise in elvish speech",
+   "claim": "Galadriel's farewell to Treebeard suddenly shifts to less plain language with an elvish place-name, against Treebeard's triple 'feel ... feel ... smell'.",
+   "source": "Shippey, The Road to Middle-earth, p. 161",
+   "url": "https://archive.org/stream/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology/The%20Road%20to%20Middle-Earth%20_%20How%20J.R.R.%20Tolkien%20Created%20a%20New%20Mythology%20(%20PDFDrive%20)_djvu.txt",
+   "quote": "sudden change to less plain language",
+   "angle": "primaries"
+  },
+  {
+   "index": 528,
+   "feature": "opening archness fades",
+   "claim": "The first chapter is a little shy-making, but once the story moves the initial archness disappears.",
+   "source": "W. H. Auden, 'The Hero Is a Hobbit' (NYT, 1954), excerpted at Epistle of Dude",
+   "url": "https://epistleofdude.wordpress.com/2019/05/13/auden-reviews-tolkien/",
+   "quote": "this initial archness disappears",
+   "angle": "primaries"
+  },
+  {
+   "index": 531,
+   "feature": "hobbit rustic register",
+   "claim": "The hobbits closely resemble the arcadian rustics of British detective fiction.",
+   "source": "Auden 1954",
+   "url": "https://epistleofdude.wordpress.com/2019/05/13/auden-reviews-tolkien/",
+   "quote": "those arcadian rustics",
+   "angle": "primaries"
+  },
+  {
+   "index": 532,
+   "feature": "descriptive elaboration of the portal-quest",
+   "claim": "The language of portal-quest fantasy is elaborate in the anthropologist's or pre-Raphaelite painter's way, intensely descriptive and exploratory.",
+   "source": "Farah Mendlesohn, Rhetorics of Fantasy (2008), Introduction",
+   "url": "http://fantasyliterature.pbworks.com/w/file/fetch/86904445/farah%20mendlesohn%20-%20rhetorics%20of%20fantasy%20intro.pdf",
+   "quote": "the elaboration of the anthropologist or the pre-Raphaelite painter",
+   "angle": "primaries"
+  },
+  {
+   "index": 535,
+   "feature": "style off the critical radar",
+   "claim": "Scholars missed Tolkien's style because sentence-level style is not on the sociological critic's radar, though it mattered greatly to Tolkien.",
+   "source": "Walker interview",
+   "url": "https://tolkienlibrary.com/press/905-power-of-tolkien-prose.php",
+   "quote": "isn't on our scholarly radar",
+   "angle": "primaries"
+  },
+  {
+   "index": 548,
+   "feature": "Faërie indescribable (glimpse, not definition)",
+   "claim": "Faërie is indescribable though not imperceptible; the writer gives glimpses rather than definitions, and analysis will not discover the secret of the whole.",
+   "source": "Tolkien, 'On Fairy-stories'",
+   "url": "https://coolcalvary.files.wordpress.com/2018/10/on-fairy-stories1.pdf",
+   "quote": "cannot be caught in a net of words",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "index": 576,
+   "feature": "regret of 'for children' style (Letter 165)",
+   "claim": "In so far as The Hobbit was dressed up as for children in style or manner, Tolkien regrets it, and so, he says, do the children.",
+   "source": "The Letters of J.R.R. Tolkien, no. 165 to Houghton Mifflin (June 1955)",
+   "url": "https://static1.squarespace.com/static/59d68c02c534a5079b390c38/t/5c2d3e3f575d1f37b45d4750/1546468936692/the_letters_of_j.rrtolkien.pdf",
+   "quote": "in style or manner, I regret it",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "index": 630,
+   "feature": "deliberate stylistic variation",
+   "claim": "The Lord of the Rings shows far more deliberate stylistic variation than any other novel, with sixty poems and songs in many styles and several languages.",
+   "source": "Tolkien Estate, Tom Shippey, 'The Lord of the Rings, Book of the Century'",
+   "url": "https://www.tolkienestate.com/writing/tom-shippey-the-lord-of-the-rings-book-of-the-century/",
+   "quote": "far more deliberate stylistic variation",
+   "angle": "tolkien-own-theory"
+  },
+  {
+   "index": 669,
+   "feature": "free indirect speech absent",
+   "claim": "Siepmann finds that the short copular sentences and modal 'would' uses that signal free indirect speech in modern fiction are conspicuous by their absence from The Lord of the Rings (pp. 75-76).",
+   "source": "Kullmann & Siepmann, Tolkien as a Literary Artist (2021), Google Books search-inside",
+   "url": "https://books.google.com/books?id=9uAsEAAAQBAJ",
+   "quote": "conspicuous by their absence from The Lord of the Rings",
+   "angle": "pov-syntax"
+  },
+  {
+   "index": 688,
+   "feature": "archaicity from three lexical causes",
+   "claim": "Siepmann's 2017 corpus study: the impression of archaicity comes from overuse of nineteenth-century fiction words (yonder, journey (v), topmost), avoidance of modern-world words, and dense use of coinages, unusual patterns and obsolescent words; reference corpora were 30m (19th-c fiction), 160m (post-war fiction) and 94m (mixed).",
+   "source": "Dirk Siepmann, 'Tolkien as a stylist: a corpus-based investigation' (Corpus Linguistics 2017, Birmingham)",
+   "url": "https://www.birmingham.ac.uk/documents/college-artslaw/corpus/conference-archives/2017/general/paper239.pdf",
+   "quote": "three simple lexical causes",
+   "angle": "pov-syntax"
+  },
+  {
+   "index": 695,
+   "feature": "LOTR narrator disappears behind characters",
+   "claim": "Poveda: LOTR begins in a conversational tone with Hobbit-style asides and an occasionally unreliable narrator ('probably started by the knowledgeable Sam'), but as the plot progresses the voice becomes neutral and the narrator disappears behind the characters.",
+   "source": "Jaume Albero Poveda, 'Narrative models in Tolkien's stories of Middle-earth', Journal of English Studies 4 (2003-04)",
+   "url": "https://dialnet.unirioja.es/descarga/articulo/1975822.pdf",
+   "quote": "the narrator disappears behind the characters",
+   "angle": "pov-syntax"
+  },
+  {
+   "index": 710,
+   "feature": "average sentence length (Hobbit opening)",
+   "claim": "Shugar's grammatical analysis of The Hobbit's opening finds an average sentence length of 19 words, a longest sentence of 59 words, nested clauses with coordinating conjunctions and em-dash interruptions.",
+   "source": "Amelia Shugar, 'A Grammatical Journey down the Hobbit Hole' (2019)",
+   "url": "https://ameliashugar.com/a-grammatical-journey-down-the-hobbit-hole/",
+   "quote": "an average sentence length of 19 words",
+   "angle": "pov-syntax"
+  },
+  {
+   "index": 717,
+   "feature": "uniform register (Carroux)",
+   "claim": "Carroux treated the source with enormous respect and a unified linguistic style, and Tolkien was delighted with her work apart from the poems.",
+   "source": "Translating The Lord of the Rings (Wikipedia)",
+   "url": "https://en.wikipedia.org/wiki/Translating_The_Lord_of_the_Rings",
+   "quote": "enormous respect",
+   "angle": "register-experiments"
+  },
+  {
+   "index": 718,
+   "feature": "address term as class marker",
+   "claim": "Krege's rendering of Sam's 'Master' as 'Chef' (boss) was criticised as misrepresenting a rural gardener's relation to his employer, and the September 2012 revision removed it.",
+   "source": "Der Herr der Ringe — Übersetzungen (de.wikipedia)",
+   "url": "https://de.wikipedia.org/wiki/Der_Herr_der_Ringe",
+   "quote": "Chef",
+   "angle": "register-experiments"
+  },
+  {
+   "index": 725,
+   "feature": "slang that dates",
+   "claim": "Krege's slang such as 'Penner' (bum) and 'Dalli Dalli' (hurry up) dated quickly and read as anachronistic.",
+   "source": "Wolfgang Krege (Ardapedia)",
+   "url": "https://www.ardapedia.org/wiki/Wolfgang_Krege",
+   "quote": "Dalli Dalli",
+   "angle": "register-experiments"
+  },
+  {
+   "index": 728,
+   "feature": "2012 revision scope",
+   "claim": "Lisa Kuppler's 2012 revision preserved Krege's stylistic approach but corrected orthography and restored the traditional address for Frodo.",
+   "source": "Wolfgang Krege (Ardapedia)",
+   "url": "https://www.ardapedia.org/wiki/Wolfgang_Krege",
+   "quote": "",
+   "angle": "register-experiments"
+  },
+  {
+   "index": 745,
+   "feature": "word connotation in register",
+   "claim": "Stenström notes the Swedish 'älvor' for elves imports unwanted fairy connotations.",
+   "source": "Review: Translating Tolkien: Text and Film (Mythopoeic Society)",
+   "url": "https://mythsoc.org/reviews/translating-tolkien-text-and-film.htm",
+   "quote": "",
+   "angle": "register-experiments"
+  },
+  {
+   "index": 765,
+   "feature": "prestige inversion between retranslations",
+   "claim": "Parcerisas notes the German case is the inverse of the Swedish: the first (Carroux) enjoys more prestige than the 2000 retranslation.",
+   "source": "Francesc Parcerisas, 'Traduir J. R. R. Tolkien' (Traducció literària, URV 2018)",
+   "url": "https://ddd.uab.cat/pub/caplli/2018/237309/tradlit_a2018p21.pdf",
+   "quote": "",
+   "angle": "register-experiments"
+  },
+  {
+   "index": 768,
+   "feature": "laconic tone measured",
+   "claim": "Andersson's prose matched Tolkien's laconic tone, using 24 words where Ohlmarks used 42 in one sampled sentence.",
+   "source": "Translation of The Lord of the Rings into Swedish (Wikipedia)",
+   "url": "https://en.wikipedia.org/wiki/Translation_of_The_Lord_of_the_Rings_into_Swedish",
+   "quote": "",
+   "angle": "register-experiments"
+  },
+  {
+   "index": 789,
+   "feature": "tonal evolution and Aragorn's registers",
+   "claim": "Andersson observed the book starts out as a children's book and moves into a more sinister mode, and that Aragorn's speech varies between ranger and king.",
+   "source": "Translating Tolkien — Erik Andersson interview (TheOneRing.net, 2004)",
+   "url": "https://www.theonering.net/torwp/2004/01/01/24998-translating-tolkien-2/",
+   "quote": "starts out as a children's book",
+   "angle": "register-experiments"
+  },
+  {
+   "index": 800,
+   "feature": "popular rather than academic tone",
+   "claim": "Brooks acknowledged heavy Tolkien influence in his first novel and said he then adopted a popular-fiction approach rather than an academic tone.",
+   "source": "The Sword of Shannara (Wikipedia)",
+   "url": "https://en.wikipedia.org/wiki/The_Sword_of_Shannara",
+   "quote": "",
+   "angle": "register-experiments"
+  },
+  {
+   "index": 802,
+   "feature": "talks instead of sings",
+   "claim": "Vredenburgh judges that Shannara talks when it should at least be trying to sing, is bereft of atmosphere, and follows Tolkien's story architecture rather than his prose.",
+   "source": "Half a Century of Reading Tolkien, Part Seven: The Sword of Shannara (Black Gate)",
+   "url": "https://www.blackgate.com/2025/11/02/half-a-century-of-reading-tolkien-part-seven-the-sword-of-shannara-by-terry-brooks/",
+   "quote": "talks when it should at least be trying to sing",
+   "angle": "register-experiments"
+  },
+  {
+   "index": 852,
+   "feature": "cutting versus compressing",
+   "claim": "Series One, which cut scenes, was welcomed (appreciation 64/100); Series Two, which compressed them, was heard as a footling and ridiculous-sounding adventure story.",
+   "source": "The Lord of the Rings (1955 radio series) (Wikipedia)",
+   "url": "https://en.wikipedia.org/wiki/The_Lord_of_the_Rings_(1955_radio_series)",
+   "quote": "",
+   "angle": "register-experiments"
+  },
+  {
+   "index": 859,
+   "feature": "Bombadil dreadful",
+   "claim": "Tolkien described Norman Shelley's Bombadil as dreadful and the announcer's misdescription of Goldberry and Willowman as worse still (Letters 175, 176, 198).",
+   "source": "Stuart D. Lee, 'A Milestone in BBC History? The 1955-56 Radio Dramatization of The Lord of the Rings' (Oxford ORA)",
+   "url": "https://ora.ox.ac.uk/objects/uuid:fd07c3e1-c729-47f3-ba24-f568968eedce/files/rbv73c0908",
+   "quote": "dreadful",
+   "angle": "register-experiments"
+  },
+  {
+   "index": 867,
+   "feature": "parataxis as exalted register",
+   "claim": "Turner shows Tolkien's paratactic 'and'-linked sentences at key moments create an impression of exalted register through biblical association without archaic vocabulary.",
+   "source": "Tolkien's prose style (Wikipedia)",
+   "url": "https://en.wikipedia.org/wiki/Tolkien%27s_prose_style",
+   "quote": "an impression of exalted register",
+   "angle": "register-experiments"
+  },
+  {
+   "index": 870,
+   "feature": "annalist voice",
+   "claim": "The Silmarillion documents events briefly as if in annals rather than describing persons, giving what Shippey calls more rarefied air.",
+   "source": "Tolkien's prose style (Wikipedia)",
+   "url": "https://en.wikipedia.org/wiki/Tolkien%27s_prose_style",
+   "quote": "more rarefied air",
+   "angle": "register-experiments"
+  },
+  {
+   "index": 873,
+   "feature": "familiar phrasal verbs",
+   "claim": "Rosebury shows Tolkien favours familiar phrasal verbs such as 'have on' and 'get off' over the more literary 'wear' and 'dismount'.",
+   "source": "Tolkien: A Cultural Phenomenon (Wikipedia)",
+   "url": "https://en.wikipedia.org/wiki/Tolkien:_A_Cultural_Phenomenon",
+   "quote": "familiar phrasal verbs",
+   "angle": "register-experiments"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 0,
+   "verdict": "PARTIAL",
+   "trueWording": "Tolkien begins this in plain language, modulating into a higher register",
+   "note": "Quote is not verbatim: page reads 'to deal with the echoes of ancient and magical history' (claim drops 'the'). Page attributes this to Rosebury's analysis of the Merry/Witch-King passage. The claim generalises one analysed passage into a rule ('only where'); the page states it of that passage only.",
+   "unsupportedLimb": "the 'only where' generalisation - the page states the plain-to-higher-register modulation of the one analysed Merry/Witch-King passage, not as a rule"
+  },
+  {
+   "index": 1,
+   "verdict": "PARTIAL",
+   "trueWording": "discrete linguistic registers for different characters, peoples, and cultures",
+   "note": "Quote present word for word. Following sentence: 'Tolkien intentionally creates a contrast between the simple modern style of the Hobbits and more archaizing language for the Dwarves, Elves, and Riders of Rohan.' Caveat on the source line: the wikitext footnote is {{sfn|Turner|2013|pp=545–546}} (Tolkien Encyclopedia, 'Prose Style'), not Turner 2020/2022.",
+   "unsupportedLimb": "the source attribution 'Turner 2020/2022' - the sentence's footnote is Turner 2013 (Tolkien Encyclopedia, 'Prose Style')"
+  },
+  {
+   "index": 3,
+   "verdict": "PARTIAL",
+   "trueWording": "Hobbits serve as mediators between the ordinary modern world and the heroic",
+   "note": "Body sentence: 'Shippey explains that the Hobbits serve as mediators between the ordinary modern world and the heroic and archaic fantasy realm, making The Hobbit and The Lord of the Rings readily accessible' (sfn Shippey 2005 p. 259). The 'modern idiom' mechanism comes from the uncited lead ('simple and modern for Hobbits... This allowed him to use the Hobbits to mediate between the modern reader and the heroic and archaic realm of fantasy'); the page says 'fantasy realm', not 'epic'.",
+   "unsupportedLimb": "the 'modern idiom' mechanism, which comes from the uncited lead, and 'epic' where the page says 'fantasy realm'"
+  },
+  {
+   "index": 4,
+   "verdict": "PARTIAL",
+   "trueWording": "fifteen thousand words of conversing; extraordinary job; each character's distinct language",
+   "note": "'tour de force' and 'idiom' do not appear on the page. Page: 'may dismiss it as a waste of fifteen thousand words because there is little to no action, other than people conversing back and forth... However, Shippey argues that Tolkien does an extraordinary job with the lengthy part of the text' (Shippey 68-69), and 'put a great deal of thought into each character's language, making them more distinct'. Student blog synthesis, not Shippey's own words.",
+   "unsupportedLimb": "'tour de force' and 'idiom', which do not appear on the page; the wording is a student blog's synthesis, not Shippey's"
+  },
+  {
+   "index": 10,
+   "verdict": "PARTIAL",
+   "trueWording": "Saruman's duplicity can be felt through his politically minded, abstract manners of speech",
+   "note": "Quote present word for word. The claim's word 'modern' is an addition: the page never calls Saruman's speech modern (the word occurs only in the blog title and course blurb).",
+   "unsupportedLimb": "'modern' - the page never calls Saruman's speech modern"
+  },
+  {
+   "index": 11,
+   "verdict": "PARTIAL",
+   "trueWording": "it being their second language, he imagined it would be much slower and more deliberate",
+   "note": "COMPLETENESS CRITIC: the page does not link the slower-delivery sentence to the Tiller letter — PARTIAL until Letter 193 is fetched. || [verifier note] Page: 'Tolkien even went to far as to consider the tone and cadence with which the Rohirrim would speak C.S.; it being their second language, he imagined it would be much slower and more deliberate.' A literal newline in the HTML between 'more' and 'deliberate' renders as a space. Caveat: the page does not link this sentence to the Tiller letter; the Tiller letter is quoted in a separate paragraph about 'linguistic differentiation... in diction, idiom'.",
+   "unsupportedLimb": "the Tiller-letter attribution - the page does not link the slower-delivery sentence to that letter (unverified until Letter 193 is fetched)"
+  },
+  {
+   "index": 12,
+   "verdict": "PARTIAL",
+   "trueWording": "at least three types of Orc-dialogue for different ranks and tribes",
+   "note": "Quote present word for word, cited to Rosebury 2003 pp. 81-83, as is Grishnákh 'like a melodrama villain, or a public-school bully'. Caveat: the Gorbag clause is misattributed. The body assigns the twentieth-century soldier/functionary/'minor officials in a murderous bureaucracy' reading to Vaninskaya 2020, not Rosebury; the lead's 'minor functionary Gorbag uses grumbling modern speech' is uncited.",
+   "unsupportedLimb": "the Gorbag / 'minor officials in a murderous bureaucracy' clause, which the page assigns to Vaninskaya 2020, not Rosebury"
+  },
+  {
+   "index": 14,
+   "verdict": "PARTIAL",
+   "trueWording": "extraordinary idiolect, with its obsessive repetition, its infantile whining",
+   "note": "Quote not verbatim: page reads 'its obsessive repetition, its infantile whining' (claim drops the second 'its'). Rosebury's part is supported: Gollum's 'extraordinary idiolect', with 'its minimal syntax and its unstable sense of being one or two people'. The second half is NOT on this page: 'pocketses', 'ungrammatical' and any I/we discussion are absent; the only other Gollum remark is Kullmann and Siepmann's 'non-standard speech'.",
+   "unsupportedLimb": "the second half - 'pocketses', ungrammaticality and the I/we instability are not on this page"
+  },
+  {
+   "index": 21,
+   "verdict": "PARTIAL",
+   "trueWording": "words rescued from total obscurity like éored, dwimmerlaik, and mearas",
+   "note": "Old English lexis half is on the page: 'He gives Rohan speakers words \"rescued from total obscurity\" like \"éored\", Old English for \"a troop of cavalry\", \"dwimmerlaik\", and \"mearas\"' plus 'Westu Théoden hál!'. The Dwarves half is a composite not stated as such: 'archaic, blunt, clearsighted' describes 'the other Council members' generally, not Dwarves; 'proverbial' does not appear, only 'Legolas and Gimli always use a literary style, often with proverbs'; the lead says only 'more archaic for Dwarves, Elves, and the Rohirrim'.",
+   "unsupportedLimb": "the Dwarves half - 'archaic, blunt, clearsighted' describes the Council members generally and 'proverbial' does not appear"
+  },
+  {
+   "index": 23,
+   "verdict": "PARTIAL",
+   "trueWording": "Weapons they have laid at your doors",
+   "note": "Page: 'Allan Turner gives the example of fronting, where Tolkien puts the object at the start of a sentence rather than after the verb: \"Weapons they have laid at your doors\". Turner points out that this cannot be done in French, while in German it remains a common construction and doesn't give an archaic effect.' The word 'unmarked' is the claim's paraphrase, not on the page. Cited via Smith 2006 review citing Turner 2005.",
+   "unsupportedLimb": "'unmarked' - the claim's paraphrase, not on the page"
+  },
+  {
+   "index": 24,
+   "verdict": "PARTIAL",
+   "trueWording": "Old English to Modern English represents ... Rohirric to Westron",
+   "note": "Page: 'Tolkien uses the mapping of Old English to Modern English to represent the mapping of the constructed languages Rohirric to Westron.' The content holds, but the attribution does not: that sentence is unattributed in-text and its citation (ref 6) is Tolkien, 'The Rivers and Beacon-hills of Gondor', Vinyar Tengwar 42, p. 8, not Shippey. Shippey 2005 pp. 131-133 is cited two sentences earlier only for the general point that Tolkien used English/Old Norse/Old English as pseudo-translations and began from the words he wanted.",
+   "unsupportedLimb": "the attribution to Shippey - the mapping sentence is cited to Tolkien's 'The Rivers and Beacon-hills of Gondor', Vinyar Tengwar 42"
+  },
+  {
+   "index": 32,
+   "verdict": "PARTIAL",
+   "trueWording": "Tolkien tends to resort to hyperbole",
+   "note": "Page: \"'entire/maximum', 'sound:loud', 'temperature:hot/on fire', 'long, tall and wide', the last five domains lending additional weight to the hypothesis that Tolkien tends to resort to hyperbole.\" CAUTION on the second half of the claim: the page presents the plants domain (elm-tree, alder-tree, hemlock, rowan) as a 'major source of descriptivity' missed by key-word analysis; 'circumstantial realism' is credited separately to 'general appearance and physical properties', 'geographical terms', 'farming and horticulture' and 'fixing and mending' — NOT to the plant vocabulary. Trim that linkage.",
+   "unsupportedLimb": "the circumstantial-realism linkage - the page credits that to other domains, NOT to the plant vocabulary"
+  },
+  {
+   "index": 41,
+   "verdict": "PARTIAL",
+   "trueWording": "Tolkien deliberately condensed the prose",
+   "note": "Page: 'short sentences come one on top of each other and manuscript evidence shows that Tolkien deliberately condensed the prose'; footnote 28 gives MS Di examples and cites Kullmann and Siepmann's (2021, 115-116) \"short, stark sentences\" conveying a sense of \"epic\". Minor: Lee says 'manuscript evidence' (example is MS Di, a manuscript), not 'typescripts' — say 'manuscript/typescript evidence'.",
+   "unsupportedLimb": "'typescripts' - the source says manuscript evidence, and its footnote cites MS Di"
+  },
+  {
+   "index": 45,
+   "verdict": "PARTIAL",
+   "trueWording": "does not take part in the story",
+   "note": "Verbatim: 'we get a \"heterodiegetic\" narrator who does not take part in the story (Kullmann and Siepmann, 2021, 90)'. Every element checks out: 'Whilst not as intrusive as we find in The Hobbit... the narrator takes on an omnipresent role moving back and forth across Middle-earth'; 'the narrative swoops across the battlefield like a drone'; and footnote 21 supplies the Old English poet element — 'Described famously by Renoir (1962) as the Old English poet's ability to be free of \"space and time\", akin to a film director.' Minor precision point: the space/time idea is Lee citing Renoir 1962, not Kullmann and Siepmann, who are cited only for the heterodiegetic narrator.",
+   "unsupportedLimb": "the Old English poet / space-and-time element, which is Lee citing Renoir 1962, not Kullmann and Siepmann"
+  },
+  {
+   "index": 52,
+   "verdict": "PARTIAL",
+   "trueWording": "familiar phrasal verbs 'have on' and 'get off'",
+   "note": "Substance confirmed, but the supplied quote is a decoy. The supporting passage: 'Allan Turner comments in the same work that Rosebury rejects the unsupported assertions of archaising and \"wrenched syntax\" by critics like Catharine Stimpson, and that Rosebury pointed out that Tolkien used a plain descriptive style, demonstrably favouring the \"familiar phrasal verbs 'have on' and 'get off' .. to the slightly more literary 'wear' and 'dismount'\".' The quoted phrase 'a certain sensuous precision, distinctive of Tolkien' DOES appear verbatim on the page, but in an unrelated passage several paragraphs earlier — Nancy-Lou Patterson in Mythlore liking Rosebury's characterisation of 'Tolkien's descriptive gifts'. It is not evidence for the phrasal-verb claim; the citation should be repointed to the Turner sentence.",
+   "unsupportedLimb": "the supplied quote 'a certain sensuous precision' - it sits in an unrelated Mythlore passage and is not evidence for the phrasal-verb claim"
+  },
+  {
+   "index": 67,
+   "verdict": "PARTIAL",
+   "trueWording": "fitted in style and contents to the characters",
+   "note": "Quote is on the page word for word — BUT it is Tolkien's own wording from a letter (cited [T 3]), not Kullmann and Siepmann's. Their wording is 'all the poems follow in one traditional genre or another'; the page introduces the letter as corroboration ('Tolkien indeed wrote in a letter that...'). Straubhaar half is confirmed: prose and poetry 'intended and constructed to flow complementarily as an integrated whole.'",
+   "unsupportedLimb": "the attribution - 'fitted in style and contents to the characters' is Tolkien's own wording from a letter, not Kullmann and Siepmann's"
+  },
+  {
+   "index": 68,
+   "verdict": "PARTIAL",
+   "trueWording": "away from the meaning to sound and form",
+   "note": "Quote is NOT word for word. Actual: 'The shift from prose to poetry serves to direct the focus of the reader's attention away from the meaning to sound and form, from the signifie to the signifiant.' Other elements supported: iambic tetrameter is 'the most prominent metre found in the novel', used mainly for the walking songs and hymns, and called 'a very simple metre' (though Kullmann does not label it 'hobbit verse'); Elvish l-sounds confirmed ('names that emphasize the letter l ... the elves being -l-ight, -l-iquid, e-l-usive'); Rohan confirmed ('alliterative verse used by the \"Ents\" and the \"Riders of Rohan,\" which obviously follows the rules of Old English alliterative poetry').",
+   "unsupportedLimb": "'hobbit verse' - Kullmann does not label the iambic tetrameter that"
+  },
+  {
+   "index": 72,
+   "verdict": "PARTIAL",
+   "trueWording": "just as well that Tolkien abandoned the attempt",
+   "note": "Quote 'losing much of the humour' is verbatim, and the harmony motive is on the page (Fisher: the rewrite 'would have refashioned the whole book \"to bring it into greater harmony with the mood, language, and geography of The Lord of the Rings\"'; Rateliff's stated goal is the 1960 revision 'abortively seeking to harmonize the novel with The Lord of the Rings'). BUT the page nowhere gives a REASON for the abandonment and contains nothing resembling 'no longer read as The Hobbit' — Fisher merely adds 'In his view, it was just as well that Tolkien abandoned the attempt.' The causal clause of the claim is unsupported here.",
+   "unsupportedLimb": "the causal clause - the page nowhere gives a reason for the abandonment and contains nothing resembling 'no longer read as The Hobbit'"
+  },
+  {
+   "index": 74,
+   "verdict": "PARTIAL",
+   "trueWording": "a grand philological experiment",
+   "note": "Blog: 'The author of \"I Would Rather Have Written in Elvish,\" Elizabeth D. Kirk, shares the view that Lord of the Rings was a grand philological experiment.' Hobbit style confirmed ('this \"Hobbit style\" was deliberate and crucial to Tolkien's world creation'; '\"Hobbit style\" refers to the fairy-tale-esque quality'). TWO CAVEATS: the page gives no date for Kirk (1971 is not stated anywhere on it); and the Frodo register point is the blogger's own view, not Kirk's — prefaced 'It is my opinion that...' ('Frodo's tendency to speak more \"nobly\" than his Hobbit companions'). The Latinate point appears as the critics' complaint that Tolkien's style 'suffers from his hesitance to use latin-based words', which Kirk defends against.",
+   "unsupportedLimb": "the 1971 date for Kirk, which is nowhere on the page, and the Frodo-register point, which is the blogger's own view, not Kirk's"
+  },
+  {
+   "index": 79,
+   "verdict": "PARTIAL",
+   "trueWording": "\"the authority it imparts is by an appeal … to the modern mystique of scholarly research\"",
+   "note": "Verbatim and correctly attributed: \"In the Tolkien scholar Richard C. West's view, Tolkien's Red Book is a pastiche of scholarship. It functions, he writes, as what scholars would call a spurious source, but the authority it imparts is by an appeal not to the old and familiar, but to the modern mystique of scholarly research.\" The found-manuscript conceit and the copies/redactions/translations are on the page. Minor: 'Note on the Shire Records' appears on this page only as a citation locator, not as discussed text (it is discussed substantively on the Impression-of-depth page).",
+   "unsupportedLimb": "the 'Note on the Shire Records' - it appears on this page only as a citation locator, not as discussed text"
+  },
+  {
+   "index": 82,
+   "verdict": "PARTIAL",
+   "trueWording": "\"Tolkien's descriptions are rarely very detailed\"",
+   "note": "OpenAlex returns Agøy 2013, 'Vague or Vivid?: Descriptions in The Lord of the Rings', Tolkien Studies 10, with the phrase verbatim (typographic apostrophe only difference), followed by \"People, buildings and objects are usually described more or less as the scenery or weather is described, quite vaguely, that is; as seen from a distance.\" The whole-text survey is confirmed: \"I have read through the entire main text of The Lord of the Rings slowly and taking detailed notes\", and Reid's review in the same result set calls it \"a detailed close reading of all descriptions in the novel\" whose generality lets \"readers fill in the blanks\". Note the source says 'objects', not the claim's 'scenery', in that triad.",
+   "unsupportedLimb": "'scenery' - the source's triad is 'People, buildings and objects'"
+  },
+  {
+   "index": 84,
+   "verdict": "PARTIAL",
+   "trueWording": "\"as you would remember it afterwards\"",
+   "note": "Verbatim in Lee's PDF: \"Rateliff (2009, 6) suggested that Tolkien 'often describes a scene not as you experience it but as you would remember it afterwards'\". The invitational-style attribution is also verbatim, in Lee's footnote 17: \"what has been called his 'invitational style' (Walker 2009, and Rateliff 2009)\". One nuance the claim flattens: Lee raises the Rateliff observation in order to qualify it for this scene (\"but in this instance no single protagonist could have seen all these things\"), and the footnote attaches 'invitational style' to non-description of a monster, a different passage from the memory point.",
+   "unsupportedLimb": "the fusion of two passages - Lee raises Rateliff's memory point in order to qualify it for this scene, and 'invitational style' is footnoted to a different passage"
+  },
+  {
+   "index": 85,
+   "verdict": "PARTIAL",
+   "trueWording": "Manlove's \"overworked cadences\" and \"monotonous pitch\"",
+   "note": "COMPLETENESS CRITIC: the Walker half is not on the URL — PARTIAL. || [verifier note] The quoted phrase is verbatim on the fetched page: Shippey \"replies to Colin Manlove's attack on Tolkien's 'overworked cadences' and 'monotonous pitch' and the suggestion that the Ubi sunt section of the Old English poem The Wanderer is 'real elegy' unlike anything in Tolkien, with the observation that Tolkien's Lament of the Rohirrim is a paraphrase of just that section\". The Walker half is NOT on this URL; it is on the companion page the claim's source field also names ('Tolkien's prose style'): \"Walker adds that the sense of time which brings the past and the future into the present is created both by Tolkien's ambiguity about the numinous, and by his use of the ubi sunt theme\" (Walker 2009, p. 85). Both halves hold, split across the two cited pages.",
+   "unsupportedLimb": "the Walker half, which is not on the cited URL (it is on the companion 'Tolkien's prose style' page)"
+  },
+  {
+   "index": 87,
+   "verdict": "PARTIAL",
+   "trueWording": "\"resides in the style of hypotyposis, metalepsis and harmonism\"",
+   "note": "The URL serves CEEOL's article-detail HTML rather than a PDF, but it carries the abstract: \"The essay argues that Tolkienian fantasy art that brings forth Secondary Belief resides in the style of hypotyposis, metalepsis and harmonism\", with \"The Lord of the Rings trilogy and The Silmarillion as exemplifying texts\". Bibliographic details confirm the claim: Fanfan Chen, Caietele Echinox, Issue Year 2014, Issue No. 26, pp. 63-82. The gloss 'vivid evocation' for hypotyposis is the claim's own, not the abstract's.",
+   "unsupportedLimb": "the gloss 'vivid evocation' for hypotyposis, which is the claim's own and not the abstract's"
+  },
+  {
+   "index": 92,
+   "verdict": "PARTIAL",
+   "trueWording": "he greatly admires splitting of the Fellowship into parallel books",
+   "note": "The quoted phrase 'very high architectural quality' does NOT appear anywhere on the page (checked against raw HTML, not just extracted text; LiveJournal buries the post body, so I re-extracted it directly). The page does confirm: the essay 'originally appeared in 1955'; Lewis 'talks about the structure of the work' and admires the parallel books of volumes two and three (discussing books 3 & 5 and 4 & 6, i.e. the six-book design); and verbatim, 'no individual, and no species, seems to exist only for the sake of the plot.' Two of three elements hold; the headline quotation is not on the cited page.",
+   "unsupportedLimb": "'very high architectural quality' - the phrase does not appear anywhere on the page"
+  },
+  {
+   "index": 94,
+   "verdict": "PARTIAL",
+   "trueWording": "three important influences: the Edwardian adventure story, comparative languages, Christian theology",
+   "note": "The quoted phrase 'the Edwardian adventure story' is verbatim on the page, but only inside jacket copy and the table of contents ('An adventure story in the Edwardian mode'). The claim's specifics are NOT on this record at all: King Solomon's Mines, The Lost World, and The Hobbit appear nowhere, and the record never says 'architecture and narrative style'. This is an Internet Archive catalog record (blurb + TOC), not the book text, so it can support only the bare Edwardian-influence thesis for LOTR.",
+   "unsupportedLimb": "the specifics - King Solomon's Mines, The Lost World, The Hobbit and 'architecture and narrative style' are not on this catalog record at all"
+  },
+  {
+   "index": 101,
+   "verdict": "PARTIAL",
+   "trueWording": "an insincerity of thought, a disunion of word and meaning",
+   "note": "Verbatim, and correctly situated: the passage concerns Theoden's 'I myself will go to war, to fall in the front of the battle... Thus shall I sleep better', set against a modernised paraphrase. One attribution nuance worth noting: Simon marks the phrase as Tolkien's own ('It would be, as he calls it, ...'), quoting Tolkien's reply to Hugh Brogan; Simon endorses and elaborates the argument rather than coining the phrase.",
+   "unsupportedLimb": "the attribution - Simon marks the phrase as Tolkien's own, quoting his reply to Hugh Brogan, rather than coining it"
+  },
+  {
+   "index": 103,
+   "verdict": "PARTIAL",
+   "trueWording": "This is what is meant by the expression 'bouncing one out of the story'",
+   "note": "Quotation verbatim, and the lesson is on the page: 'Our grave danger as writers, then, is that we will do something to wrench the reader's attention away from the story and back to the text... we need to keep their minds on the story as much as possible, which generally means keeping it off the text.' One nuance: Simon does not counsel plain invisibility - he explicitly rejects flat prose as 'too flat to engage the emotions' and argues for a broad emotional range, so 'never call attention to themselves' should be read as 'never wrench attention from story to text'.",
+   "unsupportedLimb": "'never call attention to themselves' - Simon explicitly rejects flat prose and argues for a broad emotional range"
+  },
+  {
+   "index": 109,
+   "verdict": "PARTIAL",
+   "trueWording": "the avoidance of words associated with the modern world",
+   "note": "Verbatim within: \"the impression of archaicity which any reader will experience on reading Lord of the Rings is partly due to three simple lexical causes: the 'overuse' of words borrowed from nineteenth-century fiction, the avoidance of words associated with the modern world, and the comparatively dense use of new coinages, unusual grammatical patterns, rare or obsolescent words.\" Minor hedge dropped by the claim: the source says \"partly due\", not simply attributes.",
+   "unsupportedLimb": "the dropped hedge - the source says the archaicity is 'partly due' to the three causes"
+  },
+  {
+   "index": 110,
+   "verdict": "PARTIAL",
+   "trueWording": "obsolete or obsolescent at the time of writing",
+   "note": "Verbatim. Source names four lexical sets: landscape description; position or direction; warfare and the struggle between good and evil; other descriptive verbs and adjectives. All four cited direction words appear (whither, thither, yonder, afar). Scope nuance: the obsolescence remark is made specifically of \"the keywords used to describe its settings\", slightly narrower than the claim's blanket application to all four sets.",
+   "unsupportedLimb": "the blanket application to all four lexical sets - the obsolescence remark is made of the setting keywords only"
+  },
+  {
+   "index": 114,
+   "verdict": "PARTIAL",
+   "trueWording": "an atmosphere of medievalism or otherworldliness",
+   "note": "Verbatim, within \"although not archaic, work together to create an atmosphere of medievalism or otherworldliness\". Every category and example in the claim matches the source's list of LotR-exclusive key words. One small slip: the source's final category is \"certain prepositions and adverbs (along, among, outwards)\" — the claim calls it prepositions, though outwards is an adverb.",
+   "unsupportedLimb": "the category label - the source's final category is 'certain prepositions and adverbs', and 'outwards' is an adverb"
+  },
+  {
+   "index": 115,
+   "verdict": "PARTIAL",
+   "trueWording": "a marked preference for the most homely collocations available",
+   "note": "Verbatim. The great pairings match the source's three meaning groups (abstract nouns, concrete objects, natural phenomena including weather), introduced by \"Tolkien also uses everyday adjectives in what would have been considered unusual collocations even in his day\". One inaccuracy: the hyperbole hypothesis rests on \"the last five domains\" — speed, entire/maximum, sound:loud, temperature:hot/on fire, long/tall/wide. 'weight: heavy' is listed as a descriptivity source but falls outside those five, so the claim's inclusion of \"heavy\" among the hyperbole domains is slightly off.",
+   "unsupportedLimb": "'heavy', which falls outside the five domains that carry the hyperbole hypothesis"
+  },
+  {
+   "index": 117,
+   "verdict": "PARTIAL",
+   "trueWording": "word orders that are terser, more vivid",
+   "note": "Verbatim: \"Archaic English provides word orders that are terser, more vivid, and sometimes nobler than modern English.\" The word-order-not-vocabulary framing is explicit: \"The words are all familiar to us... What is archaic about the passage has to do with the structure of the sentences.\" Both contrasted passages appear, the modern one exactly as \"'Not at all my dear G. You don't know your own skill as a doctor...'\". Attribution nuance: this passage is Gordon summarising Tolkien's own letter, not advancing an argument of his own.",
+   "unsupportedLimb": "the attribution - this passage is Gordon summarising Tolkien's own letter, not advancing an argument of his own"
+  },
+  {
+   "index": 126,
+   "verdict": "PARTIAL",
+   "trueWording": "talks like a politician, using empty words like 'real change'",
+   "note": "The quotation is exact. Two embellishments do not survive: the page gives only 'real change' as the empty-word example -- 'ultimate' and 'deploring' appear nowhere on the page (grepped) -- and 'the one modern register in the chapter' is contradicted, since the same page calls Aragorn's language 'deceptively modern, even easy-going on occasion'. Trim the parenthetical and the exclusivity claim.",
+   "unsupportedLimb": "'ultimate' and 'deploring', which appear nowhere on the page, and the exclusivity claim, contradicted by Aragorn's 'deceptively modern' language"
+  },
+  {
+   "index": 131,
+   "verdict": "PARTIAL",
+   "trueWording": "Gloin ... short, broken sentences and apposition; Boromir 'relatively Elrondian'",
+   "note": "No quotation supplied. All four items are on the page: Gloin 'is curt ... short, broken sentences and apposition (Shippey, 71)'; 'Aragorn slips easily between speaking like Elendil's heir and Strider, and Boromir adopts a lofty \"relatively Elrondian\" pattern of speech'. One refinement: the 'quick exclamations' belong specifically to Bilbo and Frodo (alongside simple rhymes), not hobbits generally, and the passage is running prose, not a table.",
+   "unsupportedLimb": "'quick exclamations', which belong to Bilbo and Frodo specifically, not hobbits generally; the passage is running prose, not a table"
+  },
+  {
+   "index": 135,
+   "verdict": "PARTIAL",
+   "trueWording": "like a melodrama villain, or a public-school bully",
+   "note": "Exact on the page. Rosebury 2003 pp.81-83 is correctly cited for \"at least three types of Orc-dialogue for different ranks and tribes\" and for the Grishnakh quote. Caveat: the Gorbag/\"minor officials in a murderous bureaucracy\" element is Vaninskaya 2020 p.363 on the same page, NOT Rosebury; the claim blends two scholars under one name.",
+   "unsupportedLimb": "the Gorbag / 'minor officials' element, which is Vaninskaya 2020 p.363, not Rosebury - the claim blends two scholars under one name"
+  },
+  {
+   "index": 141,
+   "verdict": "PARTIAL",
+   "trueWording": "O Wise People!",
+   "note": "Exact, and the surrounding sentence supports the whole claim: Pippin \"attempts a formal register\" with these words on meeting the High Elf Gildor, cited to Turner 2020 pp.389-403, framed as how \"such mediation is effected early\". Note the claim's own feature label (\"failed formal register as comedy\") goes beyond the page, which says nothing about comedy.",
+   "unsupportedLimb": "the comedy label - the page says nothing about comedy"
+  },
+  {
+   "index": 144,
+   "verdict": "PARTIAL",
+   "trueWording": "They seem vaguely familiar and evoke images of ages past",
+   "note": "Exact. Wilton lists mathom and smial as resurrected Old English words, and quotes Tolkien: \"the language of Rohan I have accordingly made to resemble ancient English\". Two minor slips: barrow is classed not as revived but as a word \"not lost, but perhaps a bit archaic\", and the \"vaguely familiar\" sentence is about Tolkien's Old English usages generally, not Rohan's language specifically.",
+   "unsupportedLimb": "'barrow', classed on the page as archaic-but-not-lost, and the 'vaguely familiar' sentence, which is about Tolkien's Old English usages generally, not Rohan's language"
+  },
+  {
+   "index": 145,
+   "verdict": "PARTIAL",
+   "trueWording": "the thrumming current of Old English history and language",
+   "note": "Exact. The post opens by juxtaposing The Wanderer's ubi sunt lines (Liuzza translation) with \"Where now the horse and the rider?\" from The Two Towers. Nuance: the phrase appears in the negative and autobiographically - she \"did not perceive the thrumming current... that coursed beneath it\" until she studied pre-Conquest England.",
+   "unsupportedLimb": "the quoted phrase's sense - it appears in the negative and autobiographically (she did not perceive the current until she studied pre-Conquest England)"
+  },
+  {
+   "index": 146,
+   "verdict": "PARTIAL",
+   "trueWording": "relies on the repetition of a single phrase: 'Where is'",
+   "note": "Exact (page: \"very strongly relies on the repetition of a single phrase\"), followed by \"With each occurrence of this phrase Tolkien conjures up an image belonging to the Rohirrim\". The nostalgia-through-rhetorical-question point is present but is Rosemary Woolf quoted on The Wanderer - the erotema \"confers a deep nostalgic value upon them\" - not the blogger's own claim about Tolkien's lament.",
+   "unsupportedLimb": "the nostalgia-through-rhetorical-question point, which is Rosemary Woolf quoted on The Wanderer, not the blogger on Tolkien's lament"
+  },
+  {
+   "index": 148,
+   "verdict": "PARTIAL",
+   "trueWording": "a repeated stress and release pattern",
+   "note": "Exact, inside the full quotation attributed to Drout 2004 pp.137-163: \"the craftsmanship of The Lord of the Rings is consistent at all levels of construction, from the individual sentence to the macro structure of the journey, a repeated stress and release pattern\". Framing nuance: the page presents Drout as characterising Le Guin's 2001 argument.",
+   "unsupportedLimb": "'Drout holds' - the page presents Drout as characterising Le Guin's 2001 argument"
+  },
+  {
+   "index": 153,
+   "verdict": "PARTIAL",
+   "trueWording": "Tolkien must have heard what he wrote",
+   "note": "Verbatim: \"Like Charles Dickens and Virginia Woolf, Tolkien must have heard what he wrote. The narrative prose of such novelists is like poetry in that it wants the living voice to speak it...\" Dickens/Woolf pairing and the living-voice point are both on the page; \"infers from the cadences\" is the claim's connective, since Le Guin juxtaposes rather than states the inference.",
+   "unsupportedLimb": "'infers from the cadences' - the claim's connective; Le Guin juxtaposes rather than states the inference"
+  },
+  {
+   "index": 154,
+   "verdict": "PARTIAL",
+   "trueWording": "Short rhythms repeated form long rhythms",
+   "note": "Verbatim in the Goodreads Kindle highlight from Conversations on Writing: \"Short rhythms repeated form long rhythms; there's a cyclical repetition in his work which I think is part of why it totally enchants so many of us.\" One caution: Le Guin says \"part of why it totally enchants so many of us\", so the claim's \"is why the book enchants\" hardens a hedge.",
+   "unsupportedLimb": "the hardened hedge - Le Guin says the cyclical repetition is 'part of why' the work enchants"
+  },
+  {
+   "index": 155,
+   "verdict": "PARTIAL",
+   "trueWording": "like a drumbeat, marking the relentless forward drive",
+   "note": "Verbatim within \"The iambic is sometimes like a drumbeat, marking the relentless forward drive of the action.\" Both halves of the claim hold: iambic pentameter is shown scanned in the Cirith Ungol passage, and the elevated Rohirrim/Pelennor passages are identified as \"the alliterative meter of Anglo-Saxon poetry... four main stressed syllables, of which at least three are alliterated\". Minor: the drumbeat sentence is about the Cirith Ungol passage, not a battle scene.",
+   "unsupportedLimb": "the battle-scene setting - the drumbeat sentence is about the Cirith Ungol passage"
+  },
+  {
+   "index": 156,
+   "verdict": "PARTIAL",
+   "trueWording": "elevated, incantatory, almost trance-like",
+   "note": "Mixed. The quote is verbatim (\"the style then changes into something elevated, incantatory, almost trance-like\"), and the mode-switching half is supported: \"This double-meter is how Tolkien effects an effortless, organic transition from one mode to the other.\" But the repetition clause is NOT on the page: \"repetition\"/\"repeat\" occurs zero times in the article, no comment is made about emotional intensification, and \"All is lost. All is lost\" appears only inside the quoted Tolkien passage in the earlier IAMBIC (Cirith Ungol) section — not in the alliterative sections the claim assigns it to. That clause must be dropped.",
+   "unsupportedLimb": "the repetition clause, which is NOT on the page ('repetition' occurs zero times), and 'All is lost. All is lost', which belongs to the earlier iambic section"
+  },
+  {
+   "index": 160,
+   "verdict": "PARTIAL",
+   "trueWording": "Mourn not overmuch! Mighty was the fallen, meet was his ending",
+   "note": "Verbatim (page continues \"When his mound is raised, women then shall weep. War now calls us!\"). Both halves supported, but the attribution needs care: the \"midway between\" phrase is Shippey's, quoted by Shelton — \"Shelton notes that Shippey rightly called this \"'midway between' a lament and a battle-cry\"\" — and the closing \"elegiac lay\" in which \"Tolkien has a scop of Rohan imitate his beloved Beowulf\" is Mahon's observation, not Shelton's.",
+   "unsupportedLimb": "the attributions - 'midway between' is Shippey's, quoted by Shelton, and the closing 'elegiac lay' is Mahon's observation, not Shelton's"
+  },
+  {
+   "index": 166,
+   "verdict": "PARTIAL",
+   "trueWording": "\"Speeding along with little hope of stopping or turning\" is particularly good",
+   "note": "Quote appears word for word as Drout's own citation of the phrase. Two wording caveats: he spells the device 'apo koinu' (not 'apo koinou'), and the effect he names is 'such tiny re-constructions of sentence meaning', not 're-readings' — and he offers it as something that 'can be read as' the construction, adding 'others disagree'.",
+   "unsupportedLimb": "'re-readings' - the effect Drout names is 'such tiny re-constructions of sentence meaning', offered as something that 'can be read as' the construction, 'others disagree'"
+  },
+  {
+   "index": 173,
+   "verdict": "PARTIAL",
+   "trueWording": "the multiple styles in which the various texts are written, as if by different hands",
+   "note": "Quote verbatim, and the four factors all cite ref [5] = Drout, Hitotsubashi & Scavera 2014, 'Tolkien's Creation of the Impression of Depth', Tolkien Studies 11(1):167-211. Minor conflation in the claim: 'as if by different hands' attaches to the multiple STYLES (factor 4); the inconsistent accounts are factor 3, 'the multiple accounts, containing gaps and inconsistencies, as if it were a real body of historical documents'. Factor 2 is 'the apparently casual and incomplete mentions of this background'.",
+   "unsupportedLimb": "the conflation - 'as if by different hands' attaches to the multiple styles (factor 4); the inconsistent accounts are factor 3"
+  },
+  {
+   "index": 175,
+   "verdict": "PARTIAL",
+   "trueWording": "details the various copies, redactions, and translations",
+   "note": "No quote supplied. The page supports the first two-thirds: 'Scholars such as Peri Sipahi note that the use of multiple accounts is introduced in the Prologue to The Lord of the Rings, where the narrator explains that \"many of their traditions, up to that time still mainly oral, were collected and written down\", and then details the various copies, redactions, and translations that were made of the fictive Red Book of Westmarch.' The concluding inference — that the narrator's voice is therefore 'that of a translator-editor of old documents' — is NOT on the page and is not attributed to Sipahi there; 'translator' appears zero times in the body, and 'Editorial framing'/'Pseudotranslation' occur only as sidebar navigation links.",
+   "unsupportedLimb": "the concluding translator-editor inference, which is NOT on the page and is not attributed to Sipahi there"
+  },
+  {
+   "index": 179,
+   "verdict": "PARTIAL",
+   "trueWording": "this is light comedy and light comedy is not Mr. Tolkien's forte",
+   "note": "Quote verbatim (page uses a curly apostrophe in 'Tolkien's'). The credible clause is verbatim too and sits in the same 1956 review, 'At the End of the Quest, Victory': 'the reader's sense of the credible is never violated.' One misattribution: the 'shy-making' remark is not from the 1956 review but from the 1954 Fellowship review reprinted above it on the same page, and it is singular — 'some readers may find the opening chapter a little shy-making' — not 'the opening chapters'.",
+   "unsupportedLimb": "the 'shy-making' remark, which is from the 1954 Fellowship review, not the 1956 one, and is singular ('the opening chapter')"
+  },
+  {
+   "index": 181,
+   "verdict": "PARTIAL",
+   "trueWording": "\"heroic romance, gorgeous, eloquent, and unashamed, has suddenly returned\"",
+   "note": "Quote appears word for word. Second half also supported: \"the first chapter, in which the author (taking a risk) writes almost in the manner of the earlier and far lighter book. With some who will find the main body of the book deeply moving, this chapter may not be a favourite.\" Minor overstatement: Lewis says the chapter \"may not be a favourite\", not that it risks losing readers. Page carries both the 1954 and 1955 reviews as claimed.",
+   "unsupportedLimb": "the overstatement - Lewis says the chapter 'may not be a favourite', not that it risks losing readers"
+  },
+  {
+   "index": 182,
+   "verdict": "PARTIAL",
+   "trueWording": "\"the Black Speech … to sound harsh\"; 63% consonants vs 52%/55%",
+   "note": "\"to sound harsh\" is verbatim in the lead. Figures match exactly: \"The Black Speech is 63% consonants, compared to the Elvish samples' 52% and 55%\", and \"Black Speech contains far more voiced plosives (/b, d, g/) than Elvish\". Two fair-use caveats: the percentages are Podhorodecka's counts on THREE SAMPLES (one Sindarin, one Quenya, one Black Speech), not whole-corpus properties; and the page's word for the Elvish design goal is \"to sound pleasant\" (the \"beautiful\" wording is Tolkien's theory that certain sounds are \"inherently beautiful\").",
+   "unsupportedLimb": "the corpus scope - the percentages are Podhorodecka's counts on three samples, not whole-corpus properties; the page's word for the Elvish goal is 'to sound pleasant'"
+  },
+  {
+   "index": 190,
+   "verdict": "PARTIAL",
+   "trueWording": "\"Long-winded journeys? Of course\"; \"gives a feel of Tolkien's writing\"",
+   "note": "Quote verbatim (sentence-initial capital in source). Substance holds: \"in doing the same thing but more slowly and with less direction it gives a feel of Tolkien's writing … the length of The One Ring feels like a part of its style\", and the mechanics contrast is explicit (\"Burning Wheel … handle skill advancement … more eloquently\"; \"the mechanics in Burning Wheel and Monsterhearts cover their respective areas better\"). Page identifies him: \"Sage LaTorra is a game designer and engineering manager at Google.\" One nuance: \"long-winded journeys and discourses\" comes from the COMBAT critique, where he lists them as things he associates with Tolkien while arguing long-winded FIGHTS are un-Tolkienish — not as praise of the game's rules.",
+   "unsupportedLimb": "the framing - 'long-winded journeys and discourses' comes from the combat critique, not from praise of the game's rules"
+  },
+  {
+   "index": 191,
+   "verdict": "PARTIAL",
+   "trueWording": "\"There is a melancholic undertone to Tolkien's world\"",
+   "note": "Verbatim, in the reviewer's summary of the guide: \"the theme The Long Defeat in a Fallen World highlights that the players can't defeat the great evil … There is a melancholic undertone to Tolkien's world.\" The memoir element is also on the page: \"the Hobbit is written as a memoir, and thus subjective.\" Byline/date confirmed as \"October 23, 2017 … rasmusnord01\". Mild strengthening: the reviewer says a Loremaster \"can tone it down, but it important for creating the right 'feel'\" — not a flat instruction to keep it.",
+   "unsupportedLimb": "the strengthened instruction - the reviewer says a Loremaster 'can tone it down', not that the melancholy must be kept"
+  },
+  {
+   "index": 195,
+   "verdict": "PARTIAL",
+   "trueWording": "sympathetic account (Le Guin 2001); \"stress and release pattern\" cited Drout 2004",
+   "note": "Raw wikitext: \"In 2001, the fantasy novelist Ursula Le Guin wrote a sympathetic account of Tolkien's prose style,{{sfn|Le Guin|2001}} arguing as Michael Drout writes that 'the craftsmanship ... a repeated stress and release pattern'.{{sfn|Drout|2004|pp=137-163}}\" The attribution split the claim describes is exactly right. Minor caveat on the word 'only': Le Guin 2001 is also cited twice elsewhere in the article (Tom Bombadil's metrical speech; the post-1990s favourable turn), so she is not credited solely with the sympathetic account article-wide — but the stress-and-release formulation is indeed footnoted to Drout, not her. No quote field supplied, hence SUBSTANCE not VERBATIM.",
+   "unsupportedLimb": "'only' - Le Guin 2001 is cited twice elsewhere in the article, so she is not credited solely with the sympathetic account"
+  },
+  {
+   "index": 196,
+   "verdict": "PARTIAL",
+   "trueWording": "\"a real archaic English is far more terse than modern\"",
+   "note": "COMPLETENESS CRITIC: the letter number is not on the page (it is carried by claim #339) — PARTIAL on the attribution limb. || [verifier note] Exact string present (fetched via LessWrong GraphQL API; plain curl returned a 59-byte stub). Full context: \"a real archaic English is far more terse than modern; also many of things said could not be said in our slack and often frivolous idiom\" — so the second half of the claim is verbatim-supported too. FLAG: the word 'tushery' does NOT appear anywhere on this page, nor does 'Brogan' or a letter number; the page introduces it only as \"a letter to a reader critiquing the archaic English spoken by the Riders of Rohan\". The tushery framing is real but belongs to the theonering.net source (claim 197's URL), which has \"Tolkien addressed 'tushery' as the 'bogus medieval stuff with … expletives, such as tush, pish, zounds, marry'\". Quote itself is clean.",
+   "unsupportedLimb": "the attribution limb - 'tushery', 'Brogan' and the letter number do NOT appear anywhere on this page (the letter number is carried by claim #339)"
+  },
+  {
+   "index": 197,
+   "verdict": "PARTIAL",
+   "trueWording": "\"moderated or watered archaism\" vs \"a more authentically antique diction\"",
+   "note": "COMPLETENESS CRITIC: the letter number is not on the page (it is carried by claim #339) — PARTIAL on the attribution limb. || [verifier note] Exact phrase present on the theonering.net page: \"First pointing out that it is actually 'moderated or watered archaism' compared to a more authentically antique diction ('Nay, thou n'wost not thine own skill in healing,')\", in the context of Théoden's exchange with Gandalf. FLAG: 'Middle English' does not appear on the page — the contrast drawn is with 'a more authentically antique diction', not named as Middle English. Second flag: the page is an essay by Ostadan quoting Tolkien's letter directly; the claim's source line ('as quoted via Le Guin') misdescribes the chain, though the URL does carry the quote.",
+   "unsupportedLimb": "the attribution limb - the letter number is not on the page, 'Middle English' does not appear, and the source line's 'as quoted via Le Guin' misdescribes the chain"
+  },
+  {
+   "index": 203,
+   "verdict": "PARTIAL",
+   "trueWording": "\"Hobbits are just rustic English people, made small in size\"",
+   "note": "Exact string present on the uv.es transcript. FLAG on the claim's trailing inference: the source gives the reason for the small size as imagination, not speech — \"made small in size because it reflects (in general) the small reach of their imagination - not the small reach of their courage or latent power.\" Nothing on this page connects rusticity to a plain modern speech register; that clause is the claimant's own gloss, not Tolkien's. The quoted definition itself is exact.",
+   "unsupportedLimb": "the trailing inference - the page gives imagination, not speech, as the reason for the small size; nothing there connects rusticity to a plain modern register"
+  },
+  {
+   "index": 205,
+   "verdict": "PARTIAL",
+   "trueWording": "\"Welsh has always attracted me by it's style and sound\"; Finnish \"very potent influence\"",
+   "note": "Exact string present on uv.es, including the source's own 'it's' misspelling. Finnish is likewise supported: \"But a much rarer, very potent influence on myself has been Finnish.\" One nuance: the mountain-names link is the interviewer's formulation — \"the music of Welsh comes through in the names you've chosen for mountains and for places in general\" — which Tolkien affirms with \"Very much.\" So the mountain-name specificity is endorsed rather than volunteered by Tolkien.",
+   "unsupportedLimb": "the mountain-name specificity, which is the interviewer's formulation, endorsed by Tolkien rather than volunteered"
+  },
+  {
+   "index": 206,
+   "verdict": "PARTIAL",
+   "trueWording": "\"complicated story you must work to a map otherwise you can never make a map afterwards\"",
+   "note": "Exact string present: \"If you're going to have a complicated story you must work to a map otherwise you can never make a map of it afterwards.\" FLAG on the rationale: the claim's 'or it cannot be kept consistent' is a paraphrase; the source's stated reason is that you could never draw the map afterwards. Adjacent context (moons and sunsets worked out to 1942 almanac) supports the consistency reading, so the gloss is defensible, but it is not the source's wording.",
+   "unsupportedLimb": "the rationale 'or it cannot be kept consistent' - the source's stated reason is that the map could never be drawn afterwards"
+  },
+  {
+   "index": 208,
+   "verdict": "PARTIAL",
+   "trueWording": "\"a new language to me is just like tasting a new wine\"",
+   "note": "Exact string present in the ORA PDF (88 pages, extracted with pypdf): \"because a new language to me is just like tasting a new wine or some new sweetmeat or something.\" The aesthetic/nourishing half is the next sentence verbatim: \"I find that intoxicating and aesthetic and nourishing.\" Note Lee's footnote 69 records a ~10-second audio break at this point, so the reconstruction flags the passage as spliced — the wording is Lee's attested text, but the transcript itself is a reconstruction.",
+   "unsupportedLimb": "the quotation's continuity - Lee's footnote 69 records a ~10-second audio break at this point, so the transcript is a spliced reconstruction"
+  },
+  {
+   "index": 218,
+   "verdict": "PARTIAL",
+   "trueWording": "even in a mythical Age there must be some enigmas",
+   "note": "Verbatim, preceded by \"I think it is good that there should be a lot of things unexplained (especially if an explanation actually exists)\" — supporting the first half. The claim's causal 'because' is a mild interpretive link; the page places the two statements adjacently rather than asserting the causation.",
+   "unsupportedLimb": "the causal 'because' - the page places the two statements adjacently rather than asserting the causation"
+  },
+  {
+   "index": 230,
+   "verdict": "PARTIAL",
+   "trueWording": "including the Lord Denethor himself",
+   "note": "Rateliff quotes the Appendix F footnote verbatim: \"Peregrin Took, for instance, in his first few days in Minas Tirith used the familiar for people of all ranks, including the Lord Denethor himself. This may have amused the aged Steward, but it must have astonished his servants.\" One precision point: the page says the deferential forms \"had gone out of colloquial use\" in Shire-usage and \"lingered only among the villagers\" as endearments — not that the distinction was wholly lost — and it is Denethor's servants, not Gondor generally, who are astonished.",
+   "unsupportedLimb": "the wholly-lost distinction (the page says the deferential forms 'had gone out of colloquial use' and 'lingered only among the villagers') and 'Gondor generally', where it is Denethor's servants who are astonished"
+  },
+  {
+   "index": 231,
+   "verdict": "PARTIAL",
+   "trueWording": "more degraded and filthy than I have shown it",
+   "note": "The claimed string \"more filthy than I have shown it\" does NOT appear word for word. Raw page: \"Orcs and Trolls [who] spoke as they would [....]; and their language was actually more degraded and filthy than I have shown it I do not suppose that any will wish for a closer rendering\". The Elves half is verbatim: \"the Eldar, being above all skilled in words, had the command of many styles.\" Substance of the claim holds; the quotation as given is a truncation.",
+   "unsupportedLimb": "the quoted string, which is a truncation - the page reads 'more degraded and filthy than I have shown it'"
+  },
+  {
+   "index": 234,
+   "verdict": "PARTIAL",
+   "trueWording": "obsolete or dialectal, or are worn-down and obscured in form",
+   "note": "PDF text: \"Names (of places and persons) occur, especially in the Shire, which are not 'meaningless', but are English in form... containing elements that are in the current language obsolete or dialectal, or are worn-down and obscured in form. (See Appendix F.)\" The space in \"worn -down\" in my extraction is a pypdf artifact, not the source. \"Antiquarian texture\" is the claimant's gloss, not Tolkien's word.",
+   "unsupportedLimb": "'antiquarian texture', which is the claimant's gloss, not Tolkien's word"
+  },
+  {
+   "index": 235,
+   "verdict": "PARTIAL",
+   "trueWording": "an archaic form of 'elephant' used as a 'rusticism'",
+   "note": "PDF text: \"Oliphaunt. Retain this. It is an archaic form of 'elephant' used as a 'rusticism', on the supposition that rumour of the Southern beast would have reached the Shire long ago in the form of legend.\" Note: the entry does not lament loss of archaic colouring in translation — it offers a workaround (substituting O for initial E) and says the meaning would remain obvious; the 'lamenting' half of the claim is the claimant's overlay.",
+   "unsupportedLimb": "the lamenting half - the entry does not lament loss of archaic colouring but offers a workaround"
+  },
+  {
+   "index": 236,
+   "verdict": "PARTIAL",
+   "trueWording": "less damaging than the 'pretty' literary fancies",
+   "note": "PDF text: \"I find these debased rustic associations less damaging than the 'pretty' literary fancies.\" Context is the German rendering of 'elf' and the Drayton / Midsummer Night's Dream \"pretty, fanciful reduction of 'elf' to a butterfly-like creature\". Claim's substance holds, though the passage is about a name's associations rather than register generally.",
+   "unsupportedLimb": "'distaste for ornamental register' - the passage is about a name's associations rather than register generally"
+  },
+  {
+   "index": 240,
+   "verdict": "PARTIAL",
+   "trueWording": "intentionally antiquated but not intentionally arcane",
+   "note": "DBU page (Mitchell): \"Tolkien argues that the language of Beowulf for its time was intentionally antiquated but not intentionally arcane; therefore, a good modern translation should avoid both the colloquial and the obscure.\" Both halves of the claim are on the page. Minor framing caveat: the page states this as advice for translating Beowulf, not as a general rule for 'heroic diction'; it is Mitchell's summary of Tolkien's essay, not Tolkien's own sentence.",
+   "unsupportedLimb": "the scope and voice - the page states this as advice for translating Beowulf, not as a general rule for heroic diction, and it is Mitchell's summary, not Tolkien's own sentence"
+  },
+  {
+   "index": 274,
+   "verdict": "PARTIAL",
+   "trueWording": "Tolkien's work is so rich, so multi-valent",
+   "note": "Quote verbatim at the given Tolkienista URL, but there it is advice to young researchers ('there's work to be done on every level'), not about readers. The 'every reader takes what they need' half comes from the co-named source: Wikipedia's 'Tolkien's prose style' has Flieger noting the book offers 'richness and multivalent texture', enabling every reader to take what they personally need and want. Verified across the two named sources, not on the URL alone.",
+   "unsupportedLimb": "the every-reader half - on the cited URL the quote is advice to young researchers, not about readers; that half comes from the co-named Wikipedia source"
+  },
+  {
+   "index": 276,
+   "verdict": "PARTIAL",
+   "trueWording": "The names alone are a feast",
+   "note": "Verbatim, and continued on the page as '[and are] best of all ... when they embody that piercing, high, elvish beauty of which no other prose writer has captured so much'. Page confirms the review title and Lewis's authorship; it does not name Time and Tide or the year 1954 (it does carry the page cite 'p. 1083').",
+   "unsupportedLimb": "the citation - the page does not name Time and Tide or the year 1954"
+  },
+  {
+   "index": 278,
+   "verdict": "PARTIAL",
+   "trueWording": "many a snug fireside and many an hour of good cheer",
+   "note": "Verbatim, in 'Despite many a snug fireside and many an hour of good cheer to gratify the Hobbit in each of us, anguish is, for me, almost the prevailing note.' 'Great valour' does appear on the page but in Lewis's closing quotation of Tolkien ('great valour, and great deeds that were not wholly vain'), not in the fireside sentence.",
+   "unsupportedLimb": "'great valour', which is on the page only inside Lewis's closing quotation of Tolkien, not in the fireside sentence"
+  },
+  {
+   "index": 282,
+   "verdict": "PARTIAL",
+   "trueWording": "satisfying our sense of historical and social reality",
+   "note": "Verbatim, in 'using the traditional properties of the Quest, the heroic journey, the Numinous Object, the conflict between Good and Evil while at the same time satisfying our sense of historical and social reality'. Page identifies it as Auden's 1956 NY Times review but does not print the title 'At the End of the Quest, Victory'.",
+   "unsupportedLimb": "the title 'At the End of the Quest, Victory', which the page does not print"
+  },
+  {
+   "index": 285,
+   "verdict": "PARTIAL",
+   "trueWording": "Stimpson's charges, rebutted by Patrick Curry",
+   "note": "Quote verbatim: Shippey \"replies to Colin Manlove's attack on Tolkien's 'overworked cadences' and 'monotonous pitch'\". Stimpson's charge \"Tolkien's language betrays 'class snobbery'\" is also verbatim, in a table captioned \"Criticisms of Tolkien by Catherine R. Stimpson, rebutted by Patrick Curry\". Downgraded because the page names CURRY, not Rosebury, as the rebutter; Rosebury appears only as one who \"began to consider why Tolkien had attracted such hostility\" and re-evaluated the work. Shippey-as-rebutter is correct.",
+   "unsupportedLimb": "the rebutter - the page names Patrick Curry, not Rosebury, as rebutting Stimpson"
+  },
+  {
+   "index": 286,
+   "verdict": "PARTIAL",
+   "trueWording": "the avoidance of words associated with the modern world",
+   "note": "p.2: \"the impression of archaicity ... is partly due to three simple lexical causes: the 'overuse' of words borrowed from nineteenth-century fiction, the avoidance of words associated with the modern world, and the comparatively dense use of new coinages, unusual grammatical patterns, rare or obsolescent words.\" Two minor softenings in the claim: the source says \"partly due\", and the third cause also covers new coinages and unusual grammatical patterns, not just rare/obsolescent words. Page cite p.2 correct.",
+   "unsupportedLimb": "the dropped hedge ('partly due') and the third cause's scope, which also covers new coinages and unusual grammatical patterns"
+  },
+  {
+   "index": 291,
+   "verdict": "PARTIAL",
+   "trueWording": "epic style, marking out characters as old-style heroes",
+   "note": "First half verbatim: \"Kullmann and Siepmann observe that characters such as Sam Gamgee and Gollum are marked out by their non-standard speech.\" Second half downgraded: the page says \"Other omniscient narrator passages are in epic style, marking out characters as old-style heroes\" -- it names NO character there. Aragorn is discussed elsewhere on the page only as having \"Archaic, literary\" speech; tying him to the old-style-hero sentence is the claimant's inference, not the source's wording.",
+   "unsupportedLimb": "the Aragorn tie - the page names NO character in the old-style-heroes sentence; that is the claimant's inference"
+  },
+  {
+   "index": 298,
+   "verdict": "PARTIAL",
+   "trueWording": "inside quotation marks",
+   "note": "Verbatim and correctly attributed: the Red Book frame \"effectively puts the whole of The Hobbit, including the troublesome closure, 'inside quotation marks', as Bowman puts it\". Two scope notes: the page says it encloses The Hobbit specifically, not \"the tale\" at large; and the translator-not-author framing (\"the claim that he had translated it into English from the original Westron rather than written it himself\") sits in the adjoining section cited to Turner, Flieger, Brljak and Kullmann, with Bowman among the cites for the found-manuscript conceit.",
+   "unsupportedLimb": "the scope ('the tale' at large, where the page says The Hobbit specifically) and the translator-not-author framing, cited to Turner, Flieger, Brljak and Kullmann rather than Bowman"
+  },
+  {
+   "index": 300,
+   "verdict": "NOT_FOUND",
+   "trueWording": "His actors put across their lines, archaic though they often are",
+   "note": "COMPLETENESS CRITIC: the quoted sentence is Shippey's Times review of Peter Jackson's FILM (the actors' delivery), not a statement about Tolkien's prose register — NOT_FOUND for the register claim. || [verifier note] Quote exact, but it is Shippey's Times review of Peter Jackson's FILM: 'His actors put across their lines, archaic though they often are, with total and persuasive conviction.' The second half of the claim -- that Tolkien became very strict about metre -- appears nowhere on this page (no occurrence of metre/meter/verse re Tolkien); it must come from the unlinked 'Tolkien Library Shippey chat', which was not fetchable from the single URL given. Do not cite this page for the metre point.",
+   "unsupportedLimb": "the register claim - the quoted sentence is Shippey's Times review of Peter Jackson's FILM (the actors' delivery), not a statement about Tolkien's prose register"
+  },
+  {
+   "index": 302,
+   "verdict": "PARTIAL",
+   "trueWording": "He leaped into the waters, but the Ring slipped from his finger",
+   "note": "Quote word-for-word, and the analysis is explicit: 'Note the paratactic movement from clause to clause and the introduction of unfamiliar proper nouns.' It is Gandalf's telling at Bag End. One nuance: the page's own adjectives are 'somber and sober, not antiquated but dignified' -- 'chronicle-like' is the claim's gloss, not the page's word.",
+   "unsupportedLimb": "'chronicle-like', which is the claim's gloss - the page's own adjectives are 'somber and sober, not antiquated but dignified'"
+  },
+  {
+   "index": 303,
+   "verdict": "PARTIAL",
+   "trueWording": "Concerning Hobbits",
+   "note": "Subtitle quoted verbatim and glossed as 'the stylistic mode of a certain strain of nineteenth-century English antiquarianism'. Second half also supported, via Shippey: 'there are a lot more names -- names of towns, surnames, names of regions, inns, rivers, bridges', whose effect is 'a wider, deeper, more complex world'. Minor drift: the page says names generally, not only place-names.",
+   "unsupportedLimb": "'place-names' - the page says names generally (towns, surnames, regions, inns, rivers, bridges)"
+  },
+  {
+   "index": 304,
+   "verdict": "PARTIAL",
+   "trueWording": "the hosts of Mordor wailed, and terror took them",
+   "note": "Quote word-for-word. Claim supported: 'There is a stylistic shift as we move from Book Four to Book Five'; Book Four's language 'has been mostly hobbit-colloquial'. Small precision: the cited passage (838) is Book Five ch.5 'The Ride of the Rohirrim', which the essay says carries on 'through much of the prose describing the following battle' -- i.e. into, not from, the Pelennor chapter.",
+   "unsupportedLimb": "the chapter placement - the cited passage is Book Five ch.5 'The Ride of the Rohirrim', carrying on INTO the Pelennor chapter, not from it"
+  },
+  {
+   "index": 312,
+   "verdict": "PARTIAL",
+   "trueWording": "alliteration, an understated bit of rhyme",
+   "note": "Quote word-for-word. Both limbs on the page: 'the use of a long sentence to track the movement of characters over difficult terrain... and then a series of short sentences to describe details'. Attribution nuance: the long/short-sentence point and 'the sounds of particular words' belong to the Barrow Downs passage; 'alliteration, an understated bit of rhyme' is said of the Dead Marshes passage. The claim merges the two.",
+   "unsupportedLimb": "the merge - the long/short-sentence point belongs to the Barrow Downs passage and 'alliteration, an understated bit of rhyme' to the Dead Marshes passage"
+  },
+  {
+   "index": 315,
+   "verdict": "PARTIAL",
+   "trueWording": "an English extraordinary for its simple timelessness",
+   "note": "Le Guin PDF p.4-5, exact. Adjacent support: 'You could not possibly mistake them for anyone on Capitol Hill' (of all three passages) and 'the very slight whine in Boromir's tone is significant also... the flaw is envy'. Caveat: she also writes 'Such language is rare on Capitol Hill, but it has occurred there', so the Capitol Hill point is 'not mistakable for', not 'impossible there'.",
+   "unsupportedLimb": "the absolute - Le Guin also writes 'Such language is rare on Capitol Hill, but it has occurred there'"
+  },
+  {
+   "index": 316,
+   "verdict": "PARTIAL",
+   "trueWording": "he has no ichor; everything is direct, concrete and simple",
+   "note": "Exact inside Stan Carey's block quote of Le Guin's 'From Elfland to Poughkeepsie' (post dated 16 Oct 2024). 'Endorsed' is only implicit: Carey quotes approvingly and follows with his own plain-style paragraph, but never explicitly endorses the Tolkien judgement.",
+   "unsupportedLimb": "'endorsed' - Carey quotes approvingly but never explicitly endorses the Tolkien judgement"
+  },
+  {
+   "index": 319,
+   "verdict": "PARTIAL",
+   "trueWording": "simple and modern for Hobbits",
+   "note": "Exact in the lead. Attribution nuance: the lead says 'Commentators have noted'; the body section 'Hobbits as mediators with the heroic' does attribute the register contrast to Turner ('Turner states... Tolkien intentionally creates a contrast between the simple modern style of the Hobbits and more archaizing language for the Dwarves, Elves, and Riders of Rohan'), but the mediation point is footnoted to Shippey 2005 p.259, not Turner.",
+   "unsupportedLimb": "the Turner attribution - the lead says only 'Commentators have noted' and the mediation point is footnoted to Shippey 2005 p.259"
+  },
+  {
+   "index": 321,
+   "verdict": "PARTIAL",
+   "trueWording": "we can bide our time, we can keep",
+   "note": "Quote exact inside the Saruman block quote. Shippey's gloss is verified: 'no other character in the book uses words so empty of meaning as \"real\", \"deploring\", and \"ultimate\"'. But 'politician-speak' is the claim-writer's gloss — the word 'politic-' appears nowhere in the article; it says 'several modern evils'.",
+   "unsupportedLimb": "'politician-speak', which is the claim-writer's gloss - 'politic-' appears nowhere in the article, which says 'several modern evils'"
+  },
+  {
+   "index": 326,
+   "verdict": "PARTIAL",
+   "trueWording": "strikingly invitational",
+   "note": "Exact. Walker's own block quote supports the rest: 'His prose is taut with semantic ambiguities tending to widen potential meaning' and 'an open invitation to subcreation' (unhyphenated). Minor: the 'strikingly invitational' sentence is footnoted to West 2011, a review of Walker's book, not to Walker directly.",
+   "unsupportedLimb": "the attribution - the 'strikingly invitational' sentence is footnoted to West 2011, a review of Walker's book, not to Walker"
+  },
+  {
+   "index": 331,
+   "verdict": "PARTIAL",
+   "trueWording": "\"The epic style is characterised by archaic diction, parataxis with clauses linked with 'and'\"",
+   "note": "Article: POV \"most often - 85% of the time - one of the four Hobbit protagonists\"; \"when Tolkien does use a single character's viewpoint, he does it to show their state of mind\"; omniscient archaic style \"highly vivid\"/\"highly mimetic\". Nuance: the 85% qualifies the character-POV portion of the narrative half, not all narrative time.",
+   "unsupportedLimb": "the scope of 85%, which qualifies the character-POV portion of the narrative half, not all narrative time"
+  },
+  {
+   "index": 332,
+   "verdict": "PARTIAL",
+   "trueWording": "\"partly due to three simple lexical causes: the 'overuse' of words borrowed from nineteenth-century fiction, the avoidance of words associated with the modern world, and the comparatively dense use of new coinages, unusual grammatical patterns, rare or obsolescent words\"",
+   "note": "Four lexical sets named exactly: landscape description; position or direction; warfare and the struggle between good and evil; other descriptive verbs and adjectives. Nuance: paper hedges \"partly due to\"; claim drops the hedge.",
+   "unsupportedLimb": "the dropped hedge - the paper says the archaicity is 'partly due to' the three causes"
+  },
+  {
+   "index": 336,
+   "verdict": "PARTIAL",
+   "trueWording": "\"the style see-saws between Bilbo's “business manner,” the narrator's matter-of-fact tone, and Thorin's style\"",
+   "note": "Divergence: page says \"Thorin's style\", not \"Thorin's high style\" - \"high\" is the summarizer's addition. \"of course\"/\"as you probably know\" appear in the earlier chapter summary, said to imply \"there is more to the story than what he has written\".",
+   "unsupportedLimb": "'high' - the page says 'Thorin's style', not 'Thorin's high style'"
+  },
+  {
+   "index": 338,
+   "verdict": "PARTIAL",
+   "trueWording": "\"has to do with the structure of the sentences\"",
+   "note": "Quote is verbatim, and the page does say the Theoden words \"are all familiar to us, and are still in use today\" (excepting \"Nay\") and that the archaism is structural. NOT supported: the specific proposition that the FINAL CLAUSE ORDER carries a thought modern idiom cannot - the page merely leaves \"thus shall I sleep better\" untranslated inside its modern paraphrase and argues generally that a king speaking modern English \"would not have had those thoughts\". Downgraded for that unstated element.",
+   "unsupportedLimb": "the final-clause-order proposition, which is NOT supported - the page argues generally that a king speaking modern English 'would not have had those thoughts'"
+  },
+  {
+   "index": 341,
+   "verdict": "PARTIAL",
+   "trueWording": "\"Finrod uses the different inflections to connote the ... relationship between Finrod and Andreth\"",
+   "note": "Supported in detail: \"When Finrod says THOU, THEE, he was to lean in and create intimacy / When he said YOU, he was to create distance and respect\"; \"Even here, Finrod's word-choice is absolutely deliberate\". Caveat the claim omits: Alden quotes Christopher Tolkien that \"my father was in two minds as to which forms Finrod should employ\", and counts six uses of \"you\" that \"seem to be in error\".",
+   "unsupportedLimb": "the deliberateness, which the claim omits qualifying - Alden quotes Christopher Tolkien that 'my father was in two minds' and counts six uses of 'you' that 'seem to be in error'"
+  },
+  {
+   "index": 343,
+   "verdict": "CONTRADICTED",
+   "trueWording": "\"the use of Yea/Nay for Yes/No\"; \"it's unfortunate that the 'thee/thou' dialogue will sound more formal\"",
+   "note": "COMPLETENESS CRITIC: the page calls Yea/Nay 'another good archaicism' that 'can appear all the time'; 'cheap marker' was the claim-writer's inversion — CONTRADICTED. || [verifier note] Register grading present: \"allow our First Age elves to be one step down from the Valar in their archaicism, as the text does.\" Two divergences: the page ranks Iluvatar most archaic with \"the close runner-up of the Valar\", not the Valar at the top; and \"cheap archaism\" is the summarizer's word - the page calls Yea/Nay \"another good archaicism\" that \"can appear all the time\".",
+   "unsupportedLimb": "'cheap marker' - the page calls Yea/Nay 'another good archaicism' that 'can appear all the time'; the inversion is the claim-writer's"
+  },
+  {
+   "index": 349,
+   "verdict": "PARTIAL",
+   "trueWording": "The intrusive omniscient narrator makes a reappearance on the Downs",
+   "note": "COMPLETENESS CRITIC: 'more like a warning' is a reader comment, not Nepveu — PARTIAL (the warm-sun quotation is hers; the standing-stone half is not). || [verifier note] First half verbatim in Nepveu's post: 'The intrusive omniscient narrator makes a reappearance on the Downs, first to raise and, simultaneously, discount a possibility of supernatural doings'. CAVEAT: the passage she then quotes is the warm-sun/lying-too-long one, NOT the standing stone. 'more like a warning' appears only in a reader comment: 'I noticed the interjection of the omniscient voice as well with the statement that the standing stone they lunch under was \"more like a warning.\"' The claim's source line credits only Nepveu, not comments, so the standing-stone half is mis-attributed.",
+   "unsupportedLimb": "the standing-stone half - 'more like a warning' is a reader comment, not Nepveu (the warm-sun quotation is hers)"
+  },
+  {
+   "index": 351,
+   "verdict": "PARTIAL",
+   "trueWording": "Stress, release. Inbreath, outbreath. A heartbeat.",
+   "note": "Quote verbatim. Polarities verbatim as \"darkness/daylight,\" \"confusion of thought/clarity,\" and \"imprisonment or a trap/freedom\" within 'a pulsation back and forth between polarities'. Beethoven verbatim: 'Reading the lines aloud I can't help thinking of a Beethoven finale'. UNSUPPORTED SUB-CLAIM: 'each reversal recurring three or four times per chapter' is nowhere on the page - grep for 'three or four' returns zero hits in both this page and the Reactor post that summarises the same essay. Drop or re-source that frequency.",
+   "unsupportedLimb": "'each reversal recurring three or four times per chapter', which is nowhere on the page (zero hits for 'three or four')"
+  },
+  {
+   "index": 361,
+   "verdict": "PARTIAL",
+   "trueWording": "Eowyn I am, Eomund's daughter (page uses a curly apostrophe)",
+   "note": "Quote verbatim (typographic apostrophe only difference). Negation/affirmation confirmed: \"the negative statement of 'No living man am I' is followed by the positive statement of 'You look upon a woman.'\" Pre-duel self-naming confirmed: \"It's like announcing one's identity before a duel-which is in effect what she is doing.\" NOT SUPPORTED: the closing conditional is nowhere called parallel or archaic; the post calls it \"heroic resoluteness\" and \"the courage of mortals\". That third limb is the researcher's own gloss.",
+   "unsupportedLimb": "the closing conditional, which is nowhere called parallel or archaic - the post calls it 'heroic resoluteness'"
+  },
+  {
+   "index": 362,
+   "verdict": "PARTIAL",
+   "trueWording": "Where now the horse and the rider?",
+   "note": "Quote appears verbatim (the page reprints Tolkien's lament in full). Adaptation supported in the page's own words: \"The passage of The Wanderer which is echoed most directly in The Lord of the Rings is the 'ubi sunt' passage\". NOT SUPPORTED: the page never analyses a rephrased opening question or an item-by-item expansion; it juxtaposes the two texts and leaves the comparison to the reader. Note for the sweep: this page, not the index-363 page, is where erotema is defined - quoting Juli Witte, \"This is called an erotema, a rhetorical question\".",
+   "unsupportedLimb": "the rephrased opening question and item-by-item expansion, which the page never analyses - it juxtaposes the two texts"
+  },
+  {
+   "index": 363,
+   "verdict": "PARTIAL",
+   "trueWording": "it is a well-known poetic form: the lament, known by scholars as \"Ubi Sunt?\"",
+   "note": "Quote verbatim. Applied to the Rohirrim song: \"But it is of a mode that would have been easily recognized... for it is a well-known poetic form\". Greatness-past limb verbatim: \"It is a lament for the greatness of things now past, and perhaps, irrecoverable\". NOT SUPPORTED: raw text has zero occurrences of \"erotema\", \"rhetorical\" or even \"question\" - only the incipit gloss \"Where is...?\". The feature label \"ubi sunt as erotema\" is mis-sourced to this page; the erotema wording belongs to index 362's page.",
+   "unsupportedLimb": "the erotema label - 'erotema', 'rhetorical' and 'question' have zero occurrences on this page; the wording belongs to claim #362's page"
+  },
+  {
+   "index": 364,
+   "verdict": "PARTIAL",
+   "trueWording": "Tolkien wrote his own beautiful version of this poem",
+   "note": "Claim carries an empty quote field, so verbatim is not assessable; substance confirmed. Raw text has \"Hwaer cwom mearg? Hwaer cwom mago?\" and then Tolkien's lines with rider, horn, helm, hauberk, harpstring, harvest. Byline and date confirmed: Lucy Holland, Feb 23, 2025. Caveat: \"expanded meditation\" is the researcher's characterisation - the page says only that Tolkien wrote his own version.",
+   "unsupportedLimb": "'expanded meditation', which is the researcher's characterisation - the page says only that Tolkien wrote his own version"
+  },
+  {
+   "index": 366,
+   "verdict": "PARTIAL",
+   "trueWording": "the fire that giveth Life and Reality",
+   "note": "COMPLETENESS CRITIC: the -eth quotation is John Garth quoting The Book of Lost Tales I, not The Silmarillion; -eth forms are never discussed as a feature — PARTIAL (the King James remark is about The Silmarillion; the example is not). || [verifier note] Quote verbatim, but note its provenance: it is John Garth quoting The Book of Lost Tales I p. 53, not Petty or Rosebury. King James limb verbatim and correctly routed: \"Anne C. Petty in /Tolkien in the Land of Heroes/... 'Anyone looking for biblical parallels within /The Silmarillion/ should make note of the highly formal, King James-style diction.' (as quoted in RG p. 32)\" - RG being Hammond and Scull's Reader's Guide; Rosebury likewise cited via Hammond and Scull. NOT SUPPORTED: \"-eth forms\" are never discussed as a feature (the sole -eth token is \"giveth\" inside the quotation), and \"distinctively\" appears zero times - the page's Tolkien-vs-Bible contrast is about the Ainur's participation, not diction.",
+   "unsupportedLimb": "the -eth example - it is John Garth quoting The Book of Lost Tales I, not The Silmarillion, and -eth forms are never discussed as a feature (the King James remark is about The Silmarillion)"
+  },
+  {
+   "index": 372,
+   "verdict": "PARTIAL",
+   "trueWording": "a typical hobbit reaction to the momentous events that have transpired",
+   "note": "Quote verbatim: \"all he has to say is: 'Well, I'm back'\". Hobbit-response limb verbatim as given. NOT SUPPORTED: \"emotional restraint\" is not the page's framing - raw text has zero hits for restrain/understat/muted/quiet/anticlimax, and the page calls the departure \"an emotional scene\" and quotes \"not all tears are an evil\". The restraint reading is the researcher's inference from \"all he has to say is\".",
+   "unsupportedLimb": "'emotional restraint', which is not the page's framing - it calls the departure 'an emotional scene' and quotes 'not all tears are an evil'"
+  },
+  {
+   "index": 388,
+   "verdict": "PARTIAL",
+   "trueWording": "sets it between Brutus settling the lands and King Arthur",
+   "note": "Raw page fetched (200, live). Claim carries no quote field. Page has all three dates in the narrative: 'He was supposed to set out upon St. Nicholas' Day', 'carried this into the hall on Christmas Eve', and the dragon's oath 'to return on January the fourteenth'. The claim's internal quoted span 'between Brutus and King Arthur' is NOT verbatim; footnote 4 reads 'sets it sometime between the time that Brutus settled the lands and King Arthur'. 'Church calendar' is the claimant's gloss (two of the three dates are feast days; 14 January is not).",
+   "unsupportedLimb": "the internal quoted span (footnote 4 reads 'sometime between the time that Brutus settled the lands and King Arthur') and 'church calendar' - 14 January is not a feast day"
+  },
+  {
+   "index": 393,
+   "verdict": "PARTIAL",
+   "trueWording": "prologue obviously imitates the non-fictional prose of ... ethnography; Notes on Shire Records imitate works of historiography",
+   "note": "Raw wikitext fetched via Special:Export (200). Quote verbatim in section 'Multiple elements'; the historiography limb is verbatim too. Citation flag: the article attributes this to Kullmann 2009 (Nordic Journal of English Studies 8.2), pp. 46-47 — 'Siepmann' does not occur anywhere in the article, so the claim's source field 'Kullmann & Siepmann 2021' is wrong even though the page numbers match. Also the article writes 'Notes on Shire Records'; Tolkien's title is 'Note on the Shire Records'.",
+   "unsupportedLimb": "the source field 'Kullmann & Siepmann 2021' - 'Siepmann' does not occur anywhere in the article, which attributes the passage to Kullmann 2009"
+  },
+  {
+   "index": 413,
+   "verdict": "PARTIAL",
+   "trueWording": "Findegil, King's Writer, finished this work in IV 172",
+   "note": "Pezzini PDF, §1.7, pp. 11-12, which block-quotes the Note in full: 'Findegil, King's Writer, finished this work in IV 172. It is an exact copy in all details of the Thain's Book in Minas Tirith. That book, was a copy, made at the request of King Elessar, of the Red Book of the Periannath, and was brought to him by the Thain Peregrin when he retired to Gondor in IV 64. ... In Minas Tirith it received much annotation, and many corrections, especially of names, words and quotations in the Elvish languages'. Quote verbatim, both dates and the annotation clause present. Two small looseness notes: IV 64 is the year Peregrin brought the book to Gondor (the Thain's Book being the copy made at Elessar's request), and 'a stemma written as prose' is the claim's own descriptor - Pezzini never uses the word stemma (0 hits in 26 pp.).",
+   "unsupportedLimb": "'a stemma written as prose', the claim's own descriptor - Pezzini never uses the word stemma (0 hits in 26 pp.)"
+  },
+  {
+   "index": 432,
+   "verdict": "PARTIAL",
+   "trueWording": "enlist[ed] the aesthetics of antiquarianism",
+   "note": "Raw wikitext. The quote is NOT word for word - the page reads Groom notes that Tolkien was not a 'literary forger' like Chatterton, but that his facsimile pages of the Book of Mazarbul 'enlist[ed] the aesthetics of antiquarianism' and that he 'adopts the techniques of literary forgery' - bracketed past tense, and predicated of the Book of Mazarbul facsimile rather than of Tolkien at large, hence SUBSTANCE not VERBATIM. Both other limbs hold: 'Nick Groom, in A Companion to J. R. R. Tolkien, places Tolkien in the tradition of English antiquarianism', with Swift, Stukeley, Chatterton (plus Percy and Blake) as the line, tabulated as 'Nick Groom's analysis of Tolkien's relationship to English antiquarianism'; and 'Sherwood argues that Tolkien intentionally set about improving on antiquarian forgery, eventually creating \\\"the codes and conventions of modern fantasy literature\\\"', with Sherwood quoted on the non-narrative elements that 'will all sound familiar as they are the techniques that [Tolkien] used to immerse readers into Arda'. Metadata nit: the 'enlist[ed]' sentence is in § Antiquarian elements in Tolkien's writings > Artwork, not § Tolkien in the English antiquarian tradition.",
+   "unsupportedLimb": "the scope of 'enlist[ed] the aesthetics of antiquarianism', which is predicated of the Book of Mazarbul facsimile rather than of Tolkien at large"
+  },
+  {
+   "index": 441,
+   "verdict": "PARTIAL",
+   "trueWording": "",
+   "note": "reactormag.com/lotr-reread-appendices/ fetched live (200) and read as raw HTML-stripped text: 'some of Appendix A appears to be directly \"translated\" from the writings of a Fourth-Age person or persons... (in several places it's obviously a hobbit... other sections could be by Gondorians). At least in my copy, they're only marked by surrounding quotation marks, which seems to be expecting a good deal of the reader's memory to recall the discussion about sources all the way back in the Prologue'. Quote verbatim; every limb present. Nepveu hedges with 'At least in my copy', which the claim states flatly.",
+   "unsupportedLimb": "the dropped hedge - Nepveu writes 'At least in my copy', which the claim states flatly"
+  },
+  {
+   "index": 442,
+   "verdict": "PARTIAL",
+   "trueWording": "",
+   "note": "Same Reactor page, same paragraph: 'some look like Tolkien's way of suggesting things without committing to them (\"At the Grey Havens dwelt Cirdan the Shipwright, and some say he dwells there still, until the Last Ship sets sail into the West.\")'. Quote verbatim. Source hedges with 'look like'; 'chronicle idiom' is the claimer's label for the cited example.",
+   "unsupportedLimb": "the dropped hedge ('look like') and 'chronicle idiom', which is the claimer's label for the cited example"
+  },
+  {
+   "index": 443,
+   "verdict": "PARTIAL",
+   "trueWording": "",
+   "note": "Same Reactor page, 'The Appendices Generally': 'partly because of the way Appendices A and B are split. For some reason, I had a very hard time getting oriented in overall history as to much of the stuff described in Appendix A, \"Annals of the Kings and Rulers,\" and kept wanting something more like A & B combined... when I got to Appendix B, it turned out that I'd managed to puzzle and place everything on my own and now it felt redundant'. Quote verbatim; loss of orientation, redundancy of B and the wish for A & B combined all present. It is one reader's reported experience, not a general finding.",
+   "unsupportedLimb": "the generalisation - it is one reader's reported experience, not a general finding"
+  },
+  {
+   "index": 446,
+   "verdict": "PARTIAL",
+   "trueWording": "",
+   "note": "scholar.valpo.edu landing page fetched live (200) but holds only the abstract; the article PDF at cgi/viewcontent.cgi?article=1295 returns 403 to direct fetch (bot block). Recovered via Wayback raw capture https://web.archive.org/web/20241117105434id_/...article=1295&context=journaloftolkienresearch (200, application/pdf, 18pp), text extracted with pypdf; confirmed as Schurer, 'Second Age, Middle Age', JTR 15.2 art. 6. Article p.8: 'These annals - meaning lists of years or spans with brief summaries of what happened during that time - also have significant gaps: For instance, both T1 and T4 simply list the years 2000-3000 as one entry'. Quote verbatim, page cite p.8 confirmed. The 2000-3000 single entry is specifically in drafts T1 and T4 in The Peoples of Middle-earth, not in the published Appendix B.",
+   "unsupportedLimb": "the location - the 2000-3000 single entry is in drafts T1 and T4 in The Peoples of Middle-earth, not in the published Appendix B"
+  },
+  {
+   "index": 447,
+   "verdict": "PARTIAL",
+   "trueWording": "",
+   "note": "Same Wayback-recovered Schurer PDF, article p.7: 'Tolkien's first paragraph about the Second Age reads: \"These were the dark years for Men of Middle-earth, but the years of the glory of Numenor. Of events in Middle-earth the records are few and brief, and their dates are often uncertain\" (Lord of the Rings 1082)', in a passage explicitly about Appendix B, 'The Tale of Years'. Quote verbatim, page cite p.7 confirmed. Schurer reads the paragraph as evidence of a bleak view of the world; the claim's closing gloss that 'the annalist states the limits of his sources before listing them' is the claimer's in-world framing, entailed by the quoted primary text but not Schurer's own point.",
+   "unsupportedLimb": "the closing gloss that 'the annalist states the limits of his sources before listing them', which is the claimer's in-world framing and not Schurer's point"
+  },
+  {
+   "index": 450,
+   "verdict": "PARTIAL",
+   "trueWording": "compressed style; events briefly documented as if in annals",
+   "note": "Wikitext, section 'The Silmarillion': 'written in a compressed style, in which events are briefly documented as if in [[annals]] recording history and legend' (cited to Bratman 2000). Minimal dialogue: 'Many chapters have little in the way of dialogue'. Distant: Shippey, 'a more distant and mythic work'. Difficult: 'making the work feel more difficult' (Turner). Note the page distributes the causation across three sources rather than deriving distance/difficulty from the annalistic mode.",
+   "unsupportedLimb": "the derivation of distance and difficulty from the annalistic mode - the page distributes the causation across three separate sources"
+  },
+  {
+   "index": 451,
+   "verdict": "PARTIAL",
+   "trueWording": "writing different texts in varying styles",
+   "note": "Substance exact: 'The effect was constructed on at least four factors, namely the enormous scale ... the apparently casual and incomplete mentions ... multiple inconsistent accounts, as in real history; and writing different texts in varying styles' (sfn Drout|Hitotsubashi|Scavera|2014, pp. 167-211). Not VERBATIM because the supplied quote 'Different texts written in varying styles' is a reordering; the page says 'writing different texts in varying styles' (that exact phrasing is also on the companion 'Impression of depth' article, which additionally heads a section 'Varying styles'). Page says 'at least four factors', not exactly four.",
+   "unsupportedLimb": "the count - the page says 'at least four factors', not exactly four"
+  },
+  {
+   "index": 452,
+   "verdict": "PARTIAL",
+   "trueWording": "details the various copies, redactions, and translations of the Red Book",
+   "note": "No quote supplied, so verbatim grading not applicable. Sipahi limb supported under Factors > 'Multiple accounts, apparent contradictions': 'Scholars such as Peri Sipahi note that the use of multiple accounts is introduced in the Prologue ... and then details the various copies, redactions, and translations that were made of the fictive Red Book of Westmarch' (page says 'copies', claim says 'manuscripts'). Brooke-Rose limb supported under Reception: she 'attacked \"the histories and genealogies\" as not \"in the least necessary to the narrative\"'. Caveat: 'establishes authenticity' is the article's lead-level framing of the whole depth effect ('attractively authentic'), not something the page attributes to Sipahi.",
+   "unsupportedLimb": "'establishes authenticity', which is the article's lead-level framing of the whole depth effect and is not attributed to Sipahi"
+  },
+  {
+   "index": 454,
+   "verdict": "PARTIAL",
+   "trueWording": "written after Aragorn's death by Barahir, grandson of Faramir and Eowyn",
+   "note": "Frame-story sentence verbatim: 'the frame story is that the tale was written after Aragorn's death by Barahir, grandson of Faramir and Eowyn, and that an abbreviated version of the tale was included in the copy of the Thain's Book made by Findegil.' Page's own Tolkien footnote adds 'The full tale is stated to have been written by Barahir, grandson of the Steward Faramir, some time after the passing of the King.' Only nuance: Findegil made the copy of the Thain's Book into which the abbreviated version was added.",
+   "unsupportedLimb": "the Thain's Book limb - Findegil made the COPY of the Thain's Book into which the abbreviated version was added"
+  },
+  {
+   "index": 459,
+   "verdict": "PARTIAL",
+   "trueWording": "Gandalf and Frodo most flexible; Merry and Pippin reality-based touchstones",
+   "note": "Same PDF, p. 284 (sheet 10), on the penultimate chapter 'Language and Character' and its '\"character by character\" stylistics of direct speech': 'Gandalf and Frodo are found to be the most flexible. Sam undergoes the most evolution. Gimli and Legolas represent the most traditional registers for their typology. Merry and Pippen use common English language as befitting their role of reality-based touchstones.' Quote verbatim. Attribution nuance: this sentence says 'the author', with Kullmann named as the author of the immediately preceding chapters; the review spells it 'Pippen'.",
+   "unsupportedLimb": "the Kullmann attribution - the review's sentence says 'the author', and the chapter is elsewhere pinned as by both authors"
+  },
+  {
+   "index": 466,
+   "verdict": "PARTIAL",
+   "trueWording": "",
+   "note": "'useless as criticism' is verbatim in the post's update: 'hand-waving and invocations of a lack of \"depth\" are useless as criticism'; 'undefined' is the post's own word for that notion of depth ('the undefined notion of \"depth\" that Appleyard uses'). The second limb is carried by 'I assert that specific and detailed discussion makes for better scholarship, criticism and intellectual practice than blanket condemnation' plus the post's demonstrated sentence-level method ('I think the sentence would have given the reader a better image without the \"or\"'). The page's assertion is comparative ('makes for better') where the claim says 'must be'.",
+   "unsupportedLimb": "'must be' - the page's assertion is comparative, 'makes for better scholarship, criticism and intellectual practice'"
+  },
+  {
+   "index": 470,
+   "verdict": "PARTIAL",
+   "trueWording": "",
+   "note": "Verbatim: 'Like the \"Narn,\" the story is quite readable, and like the \"Narn,\" it is somewhat of a hybrid between the historic/annalistic style of The Silmarillion and the novelistic style of The Lord of the Rings.' The claim drops the page's hedge 'somewhat of a hybrid'; otherwise every limb is on the page.",
+   "unsupportedLimb": "the dropped hedge 'somewhat of a hybrid'"
+  },
+  {
+   "index": 483,
+   "verdict": "PARTIAL",
+   "trueWording": "the sudden change to less plain language in Galadriel's speech, with its elvish place-name",
+   "note": "Shippey p.161, verbatim: '...the triple repetition of \"feel ... feel ... smell\", or the sudden change to less plain language in Galadriel's speech, with its elvish place-name'. The triple repetition is Treebeard's ('I feel it in the water, I feel it in the earth, and I smell it in the air'); Galadriel's reply carries the place-name Tasarinan and 'Farewell!'. Shippey lists the two as separate candidate irritants rather than explicitly setting one 'against' the other, but both facts are on the page.",
+   "unsupportedLimb": "the 'against' relation - Shippey lists the two as separate candidate irritants rather than setting one against the other"
+  },
+  {
+   "index": 528,
+   "verdict": "PARTIAL",
+   "trueWording": "\"once the story gets moving, this initial archness disappears\"",
+   "note": "Auden: 'I think some readers may find the opening chapter a little shy-making, [b]ut they must not let themselves be put off, for, once the story gets moving, this initial archness disappears.' Quote exact. Auden hedges the first limb as 'some readers may find'; the claim states it flatly. Page carries 'A. D. 1954', supporting the date.",
+   "unsupportedLimb": "the dropped hedge - Auden writes 'some readers may find', which the claim states flatly"
+  },
+  {
+   "index": 531,
+   "verdict": "PARTIAL",
+   "trueWording": "\"resemble very closely those arcadian rustics... British detective stories\"",
+   "note": "Auden: hobbits 'in their thinking and sensibility resemble very closely those arcadian rustics who inhabit so many British detective stories.' Quote exact. The source restricts the resemblance to thinking and sensibility (explicitly contrasted with their three-foot, hairy-footed physical description); the claim drops that restriction but does not reverse it.",
+   "unsupportedLimb": "the dropped restriction - the source confines the resemblance to the hobbits' thinking and sensibility"
+  },
+  {
+   "index": 532,
+   "verdict": "PARTIAL",
+   "trueWording": "\"the elaboration of the anthropologist or the pre-Raphaelite painter\"",
+   "note": "Mendlesohn: 'The language of the portal fantasy is often elaborate, but it is the elaboration of the anthropologist or the pre-Raphaelite painter, intensely descriptive and exploratory rather than assumptive.' Quote exact, under her heading 'The Portal-Quest Fantasy'. Source hedges with 'often' and adds 'rather than assumptive'.",
+   "unsupportedLimb": "the dropped hedge 'often' and the omitted 'rather than assumptive'"
+  },
+  {
+   "index": 535,
+   "verdict": "PARTIAL",
+   "trueWording": "\"Style isn't on our scholarly radar... though that mattered a lot to Tolkien himself\"",
+   "note": "Walker: 'Style isn't on our scholarly radar. Our best readers these days are mostly sociological critics... we haven't noticed much about his writing style, though that mattered a lot to Tolkien himself.' Quote exact and every limb supported; the page says 'style'/'writing style' generally, so 'sentence-level' is the claim's narrowing, neither stated nor denied there.",
+   "unsupportedLimb": "'sentence-level', the claim's narrowing - the page says 'style' / 'writing style' generally, neither stating nor denying it"
+  },
+  {
+   "index": 548,
+   "verdict": "PARTIAL",
+   "trueWording": "“indescribable, though not imperceptible”; “analysis will not necessarily discover the secret”",
+   "note": "Same PDF. Quote verbatim: 'Faërie cannot be caught in a net of words; for it is one of its qualities to be indescribable, though not imperceptible.' Glimpses-not-definitions limb verbatim: 'I will not attempt to define that, nor to describe it directly. It cannot be done … will give some glimpses of my own imperfect vision of it.' One nuance: the page hedges — 'analysis will not NECESSARILY discover the secret of the whole' — where the claim drops 'necessarily'; the limb is supported but stated more categorically than Tolkien states it.",
+   "unsupportedLimb": "the dropped 'necessarily' - the page reads 'analysis will not necessarily discover the secret of the whole'"
+  },
+  {
+   "index": 576,
+   "verdict": "PARTIAL",
+   "trueWording": "'In so far as it was dressed up as \"for children\" ... I regret it. So do the children.'",
+   "note": "Letters PDF at Letter 165 To the Houghton Mifflin Co. (PDF p.232). Quote 'in style or manner, I regret it' verbatim, and 'So do the children' immediately follows; the editorial bracket '[The Hobbit]' fixes the referent. Location caveat: the sentence sits in Carpenter's headnote to Letter 165, quoting Harvey Breit's 5 June 1955 New York Times column drawn from Tolkien's own answers, not in the body of the 30 June 1955 letter — which opens 'Please do not blame me for what Breit made of my letter!'",
+   "unsupportedLimb": "the location - the sentence sits in Carpenter's headnote quoting Harvey Breit's 5 June 1955 column, not in the body of Letter 165"
+  },
+  {
+   "index": 630,
+   "verdict": "PARTIAL",
+   "trueWording": "far more deliberate stylistic variation than any other novel provides",
+   "note": "Raw HTML fetched. Both limbs on the page: ‘…if with far more deliberate stylistic variation than any other novel provides’ and ‘contains some sixty poems and songs, in many styles and several languages’. Only precision loss: the page hedges ‘some sixty’, the claim states ‘sixty’.",
+   "unsupportedLimb": "the dropped hedge - the page says 'some sixty' poems and songs"
+  },
+  {
+   "index": 669,
+   "verdict": "PARTIAL",
+   "trueWording": "pp.75-76: \"This may be due to the fact that Tolkien does not use free indirect speech, since short sentences like these tend to be direct renditions by an omniscient narrator of characters' inner monologue. By the same token, then, uses of the modal would which indicate free indirect speech are conspicuous by their absence from The Lord of the Rings\"",
+   "note": "Route: Google Books search-inside on the cited volume; the sentence straddles the page break and was reconstructed from overlapping snippets returned for p.75 and p.76, matching the claim's cited span pp.75-76. Quote 'conspicuous by their absence from The Lord of the Rings' is word for word on p.76. Both limbs hold: the short copular sentences are the immediately preceding item ('copular be and a subject complement. Merely a hollow formality. / She was not an optimistic woman. / Not the usual sort. / Hardly a submissive voice!'), presented in section 3.2 - which p.72 identifies as the section that 'deals with dispreferred constructions' - and the 'by the same token' carries the absence over to the modal-would uses. Strictly, the words 'conspicuous by their absence' are attached in the text to the would-uses, and the copular sentences' absence is stated in the surrounding dispreferred-constructions framing.",
+   "unsupportedLimb": "the attachment of 'conspicuous by their absence', which in the text applies to the modal-would uses, not to the short copular sentences"
+  },
+  {
+   "index": 688,
+   "verdict": "PARTIAL",
+   "trueWording": "the impression of archaicity ... is partly due to three simple lexical causes",
+   "note": "Raw PDF fetched live (200, 4pp, pdfminer text). Quote 'three simple lexical causes' verbatim. All three causes verbatim: 'overuse' of words borrowed from nineteenth-century fiction, avoidance of words associated with the modern world, dense use of new coinages, unusual grammatical patterns, rare or obsolescent words. yonder, journey (v) and topmost all appear in the listed 19th-century key words. Corpora verbatim: 19th-century corpus 'about 30 million words', post-war fiction 'around 160 million running words', 'a reference corpus of 94 million words' (heterogeneous/mixed). Only softening: the page says 'partly due to', the claim says 'comes from'.",
+   "unsupportedLimb": "the dropped hedge - the page says 'partly due to' where the claim says 'comes from'"
+  },
+  {
+   "index": 695,
+   "verdict": "PARTIAL",
+   "trueWording": "the narrative voice becomes more neutral and the narrator disappears behind the characters",
+   "note": "Same raw Dialnet PDF. Quote 'the narrator disappears behind the characters' verbatim. Limbs verbatim: 'It begins with a chapter that has a conversational and uninhibited tone'; 'some of the asides that also characterize the narrative voice of The Hobbit'; 'The narrator is sometimes unreliable: \"A day or two later a rumour (probably started by the knowledgeable Sam)\" (I, 47)'. Page reads 'more neutral'; claim says 'neutral'.",
+   "unsupportedLimb": "the dropped comparative - the page reads 'more neutral', the claim 'neutral'"
+  },
+  {
+   "index": 710,
+   "verdict": "PARTIAL",
+   "trueWording": "“In a piece with an average sentence length of 19 words”",
+   "note": "Quote verbatim. Also on the page: 'This 59-word sentence is the longest one within the section I analyzed'; 'propelled by the nested clauses and coordinating conjunctions'; and the em-dash interruption ('All’s right with the world and then… EM DASH… “Gandalf came by”'). Byline on the page reads 'By Amelia Turkette', March 2019, on ameliashugar.com — the attribution name differs from the byline.",
+   "unsupportedLimb": "the attribution name, which differs from the page's byline, 'By Amelia Turkette'"
+  },
+  {
+   "index": 717,
+   "verdict": "PARTIAL",
+   "trueWording": "“treating its source with ‘enormous respect’”; “Tolkien was delighted with Carroux’s work”",
+   "note": "Quote verbatim. Page: 'Tolkien was delighted with Carroux’s work, with the sole exception of the poems and songs.' The unified-style limb is supported by 'Krege thought Carroux’s more unified version was lacking' and by the lead's 'using a similar linguistic style for the speech of both elves and hobbits'. Note 'enormous respect' is the Tolkien scholar Susanne Stopfel's characterisation, which the claim states unattributed.",
+   "unsupportedLimb": "'enormous respect', which is the Tolkien scholar Susanne Stopfel's characterisation and is stated unattributed"
+  },
+  {
+   "index": 718,
+   "verdict": "PARTIAL",
+   "trueWording": "Bei Krege 'Chef'; Anrede im September 2012 eliminiert",
+   "note": "de.wikipedia, section 'Übersetzung von Wolfgang Krege': 'Im Original lautet sie master, bei Carroux Herr, bei Krege Chef. Hierdurch wird nach Ansicht der Kritiker das Verhältnis eines ländlichen Gärtnergesellen zu seinem Herrn unzutreffend wiedergegeben.' and 'Im September 2012 ... wurde Sams ... Anrede Chef eliminiert'. Precision point: the page's word is 'seinem Herrn' (his master), not 'employer'; Weinreich (claim 731) argues explicitly that the relation is class standing rather than employment, so the 'employer' gloss imports the framing the critics reject. The page does not itself gloss 'Chef' as 'boss' (en.wikipedia does).",
+   "unsupportedLimb": "'employer' - the page's word is 'seinem Herrn' (his master), and it does not itself gloss 'Chef' as 'boss'"
+  },
+  {
+   "index": 725,
+   "verdict": "PARTIAL",
+   "trueWording": "Trendausdrücke, die in wenigen Jahren Patina angesetzt haben werden",
+   "note": "Quotes 'Dalli Dalli' and 'Penner' both present verbatim. Ardapedia carries the Rüdiger Sturm passage (Spiegel Online, 3 Nov 2000): 'anstatt manche Dialoge behutsam zu modernisieren, peppt er sie mit Trendausdrücken auf, die in wenigen Jahren Patina angesetzt haben werden, sofern das nicht jetzt schon der Fall ist. Charaktere werden ... als \"Penner\" beschimpft oder mit \"Dalli Dalli\" angefeuert.' Attribution note: the page carries this as a named critic's contention under 'Kritiker der Neuübersetzung geben jedoch folgendes zu bedenken', not in its own voice, and the German is 'Patina angesetzt' (dated) rather than the claim's 'anachronistic'.",
+   "unsupportedLimb": "the voice and wording - the page carries this as a named critic's contention, not in its own voice, and its word is 'Patina angesetzt' (dated), not 'anachronistic'"
+  },
+  {
+   "index": 728,
+   "verdict": "PARTIAL",
+   "trueWording": "Kuppler behielt Kreges Stil bei und korrigierte vornehmlich orthographische Fehler",
+   "note": "No quote supplied, so substance grade. Ardapedia: '2012 erschien eine von Lisa Kuppler überarbeitete Version ... Kuppler behielt dabei Kreges Stil bei der Überarbeitung bei und korrigierte vornehmlich orthographische Fehler.' The address limb rests on the page's Anmerkung 1: 'In der überarbeiteten Übersetzung Wolfgang Kreges behielt Lisa Kuppler die Originalbezeichnung Master bei.' Precision point: the page says she kept Tolkien's ORIGINAL term 'Master', not that she restored Carroux's German 'Herr' — so 'the traditional address' is true only if read as Tolkien's own word. de.wikipedia (claim 718) states the complementary fact, that 'Chef' was eliminated in September 2012.",
+   "unsupportedLimb": "'the traditional address' - the page says Kuppler kept Tolkien's ORIGINAL term 'Master', not that she restored Carroux's German 'Herr'"
+  },
+  {
+   "index": 745,
+   "verdict": "PARTIAL",
+   "trueWording": "'elves' as 'aelvor,' a word which apparently has the connotation of 'fairy'",
+   "note": "No quote supplied. Raw page: 'Stenstrom is critical of many of Zetterholm's choices, including \"elves\" as \"aelvor,\" a word which apparently has the connotation of \"fairy.\"' The criticism carries the 'unwanted' sense. Context limb not in the claim: this is Zetterholm's Swedish Hobbit, not the LotR translation.",
+   "unsupportedLimb": "the work - the criticised translation is Zetterholm's Swedish Hobbit, not the LotR translation"
+  },
+  {
+   "index": 765,
+   "verdict": "PARTIAL",
+   "trueWording": "\"el cas de les dues traduccions alemanyes existents és invers\"",
+   "note": "Same PDF. Page: \"Segons que sembla, el cas de les dues traduccions alemanyes existents és invers: la primera, de Margaret Carroux, publicada entre 1969 i 1970, gaudeix de més «prestigi» que no pas la segona, de l'any 2000...\" The immediately preceding section is the Swedish case (Ohlmarks 1959-61 superseded by the orthodox Andersson/Olsson 2005), so 'invers' does refer to the Swedish. No quote was supplied, hence SUBSTANCE not VERBATIM; the page hedges with 'Segons que sembla' (apparently).",
+   "unsupportedLimb": "the dropped hedge - the page says 'Segons que sembla' (apparently)"
+  },
+  {
+   "index": 768,
+   "verdict": "PARTIAL",
+   "trueWording": "Sample table: Ohlmarks 42 words, Andersson and Olsson 24 words",
+   "note": "Same page, 'Prose' section. Strömbom's comparison table gives Tolkien 20 words, Ohlmarks 1959-1961 42 words, Andersson and Olsson 2005 24 words for 'Indeed, few Hobbits had ever seen or sailed upon the Sea...'. The laconic limb is supported: \"Commentators including Petter Lindgren in Aftonbladet have remarked on Ohlmarks's wordy text compared to Andersson's more laconic version\", and the page calls Tolkien's own language 'simple or even laconic'. No quote supplied, so SUBSTANCE; 'matched Tolkien's laconic tone' is the claim's phrasing, the page says only 'more laconic' than Ohlmarks.",
+   "unsupportedLimb": "'matched Tolkien's laconic tone' - the page says only that Andersson's version is 'more laconic' than Ohlmarks's"
+  },
+  {
+   "index": 789,
+   "verdict": "PARTIAL",
+   "trueWording": "Sometimes the language he uses gives a glimpse of his identity as the great king Aragorn",
+   "note": "theonering.net page fetched raw. Quote verbatim: 'It starts out as a children’s book, as a continuation of “Bilbo”, with a Birthday party. Then the story progresses into a more sinister mode.' Register limb supported: 'Take the Vidstige (Strider/ P.) character, for instance, he changes all the time. Sometimes the language he uses gives a glimpse of his identity as the great king Aragorn.' The page says Strider/Vidstige, never the word 'ranger'; the page is TORn's fan translation of a Svenska Dagbladet article, not a TORn-conducted interview.",
+   "unsupportedLimb": "'ranger', which the page never uses, and the interview framing - the page is TORn's fan translation of a Svenska Dagbladet article, not a TORn-conducted interview"
+  },
+  {
+   "index": 800,
+   "verdict": "PARTIAL",
+   "trueWording": "\"I'm a popular fiction writer, that's the way I approached it\"",
+   "note": "Wikipedia raw wikitext: \"He admits that he was very influenced by The Lord of the Rings when writing it, being his first novel\", plus the 2012 interview blockquote \"Tolkien approached it as an academic ... not as popular fiction. I'm a popular fiction writer, that's the way I approached it. ... I was heavily under the influence of Tolkien when I wrote Sword of Shannara\". Graded SUBSTANCE because the claim carries an empty quote field; note the page frames the popular-fiction approach as how he wrote Sword, not as something adopted afterwards.",
+   "unsupportedLimb": "the 'afterwards' framing - the page frames the popular-fiction approach as how he wrote Sword of Shannara, not as something adopted later"
+  },
+  {
+   "index": 802,
+   "verdict": "PARTIAL",
+   "trueWording": "Sword \"talks when it should at least be trying to sing\" ... \"bereft of atmosphere\"",
+   "note": "Fletcher Vredenburgh, Black Gate, 2 Nov 2025: \"Last time around, I wrote Sword 'talks when it should at least be trying to sing,' and I stand by that\" (verbatim, with \"at least\"), and \"a book that talks when it should be trying to sing, a bereft of atmosphere. I think all those things hold true.\" Third limb is composite rather than a single sentence: his own words give the story side (\"a story that tracks so closely to the LotR in so many places\") and the prose side separately (\"it rarely finds any of the fantastical transcendence of Tolkien\"); the explicit story-not-prose contrast appears on the page verbatim only inside the quoted Lin Carter passage.",
+   "unsupportedLimb": "the story-not-prose contrast, which appears on the page verbatim only inside the quoted Lin Carter passage"
+  },
+  {
+   "index": 852,
+   "verdict": "PARTIAL",
+   "trueWording": "first series welcomed, 64/100 by last episode; second compressed, criticised",
+   "note": "Wikipedia: 'audience appreciation had by the last episode reached 64 out of 100 from an initial score of 56'; listeners 'enjoyed the first series, where Tiller had followed Tolkien's advice to make a selection of scenes and cut the rest. They were far more critical of the second series, where Tiller had compressed many scenes, resulting in what a self-described \"Civil Servant\" called \"a footling and ridiculous sounding adventure story\"'. Two caveats short of VERBATIM: 64 is the last-episode score (initial 56), and the footling phrase is one named listener's, quoted by the page as the result of the compression, not a general verdict.",
+   "unsupportedLimb": "the general verdict - 'a footling and ridiculous sounding adventure story' is one named listener's phrase, quoted as the result of the compression"
+  },
+  {
+   "index": 859,
+   "verdict": "PARTIAL",
+   "trueWording": "Bombadil 'dreadful'; Goldberry/Willowman description 'worse still'",
+   "note": "Raw PDF footnote 2: Letters #175 (Molly Waldron 30/11/55) carries both quotes; the same footnote cites Letters #176 and #198. Note: #176/#198 are cited as further references, not as the source of the two quoted phrases.",
+   "unsupportedLimb": "the citation of Letters #176 and #198, which are cited on the page as further references, not as the source of the two quoted phrases"
+  },
+  {
+   "index": 867,
+   "verdict": "PARTIAL",
+   "trueWording": "readers experience it as 'an impression of exalted register'",
+   "note": "Raw Wikipedia text: Turner on the Pelennor eucatastrophe passage - paratactic style with repeated 'and' 'in the manner of the New Testament', the impression arising 'because of the biblical association'; Turner's 'special stylistic effects at key moments' supports the key-moments limb. The page says Tolkien uses 'few unusual or archaic words' there rather than none.",
+   "unsupportedLimb": "'no archaic words' - the page says Tolkien uses 'few unusual or archaic words' in the passage, not none"
+  },
+  {
+   "index": 870,
+   "verdict": "PARTIAL",
+   "trueWording": "\"more rarefied air\" (Shippey, quoted verbatim on the page)",
+   "note": "Section 'The Silmarillion': 'The Silmarillion, by contrast with The Lord of the Rings, is written in a compressed style, in which events are briefly documented as if in annals recording history and legend, rather than described with much focus on persons or the niceties of conventional storytelling' (attributed to Bratman); the next sentence: 'Shippey states that The Silmarillion comes across to the reader as a more distant and mythic work ... there was in his view no place for humorously earthy Hobbits in the \"more rarefied air\" of that work.' Quote verbatim and both factual limbs present; the claim's connective 'giving' joins two adjacent, same-subject sentences by different scholars (Bratman for the annals limb, Shippey for the phrase) rather than reproducing a stated causal link.",
+   "unsupportedLimb": "the causal connective 'giving' - the page joins two adjacent sentences by different scholars (Bratman for the annals, Shippey for 'more rarefied air') without asserting the link"
+  },
+  {
+   "index": 873,
+   "verdict": "PARTIAL",
+   "trueWording": "\"familiar phrasal verbs 'have on' and 'get off'\" vs \"'wear' and 'dismount'\"",
+   "note": "Raw wikitext of en.wikipedia.org/wiki/Tolkien:_A_Cultural_Phenomenon fetched with a browser UA via ?action=raw. Reception section: 'Allan Turner comments in the same work that Rosebury rejects the unsupported assertions of archaising and \"wrenched syntax\" by critics like Catharine Stimpson, and that Rosebury pointed out that Tolkien used a plain descriptive style, demonstrably favouring the \"familiar phrasal verbs 'have on' and 'get off' .. to the slightly more literary 'wear' and 'dismount'\".' Quote verbatim; every limb supported. Only difference is intensity: the page reads 'slightly more literary', the claim 'the more literary'.",
+   "unsupportedLimb": "the dropped hedge - the page reads 'slightly more literary', not 'the more literary'"
+  }
+ ]
+}

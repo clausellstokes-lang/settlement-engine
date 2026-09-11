@@ -1,0 +1,55 @@
+{{experimental}}
+
+Be very careful if you use '''artificial intelligence''' (AI). The prose is nearly always better written by you, for style and to avoid potential copyright and plagiarism issues.
+
+[[:m:Artificial intelligence/Guidelines|Artificial intelligence/Guidelines]] on Meta-Wiki describes recommended practices for developing and deploying AI-assisted tools, concerning Wikimedia projects in general, including Wikivoyage. These are relevant for any systematic AI-assisted work.
+
+==Hallucinations==
+Generative AI tools invent facts on their own from time to time, such as claiming a particular beach resort has a restaurant because many do. Computer scientists call such inventions "AI hallucinations".
+
+AI help can be useful for gathering and formatting information, but you need to be very specific about what you want the AI to do to avoid hallucinations, and to carefully check the results.
+
+The text or listing created by the AI may sound very convincing – they are programmed to answer as humans would, and has no idea about the concept of uncertainty. You need to check the correctness from actual sources, usually the official site. Any listing added on the advice of an AI tool should include the official website, and information on distances, transport services, etc., must likewise be checked.
+
+==AI-assisted article text==
+AI must not be used to quickly create many articles.
+
+If you want to use AI to generate '''drafts''', create them in a [[Wikivoyage:User page help#Using a personal sandbox|sandbox of yours]], at most a few at a time. Publish each one when you have checked, copyedited and completed it to the point where it is clearly useful, no unchecked facts remain, and the style is satisfactory. If you want to create several such articles, notify the community of your plans in the [[Wikivoyage:Travellers' pub|Travellers' pub]] and wait for the discussion to settle before creating more than a few of them.
+
+Using AI to ''find'' information is OK, but confirm the information yourself. Also check that the AI hasn't ignored essential aspects of the topic and that the focus is reasonably balanced. It is probably true that [[Hillah]] is a city of half a million in a mostly agricultural region, but ignoring that it once was a major centre of Islamic scholarship and that [[Babylon]] is just a few kilometres away would be a faux pas. AIs may get carried away by your having shown interest in something or get too tied to an example.
+
+===Checking===
+If you use AI help in writing an article, '''you must''' at least:
+* check that there are no [[w:Hallucination (artificial intelligence)|hallucinations]] (AI-invented "facts");
+* copy edit any generated text to suit Wikivoyage's style;
+* make sure every listing has a url that confirms the added information, and
+* verify the existence of any transport service you add.
+
+===AI assisted copy editing===
+When creating articles, it is OK to use AI help (such as Grammarly) for spell-checking and light copy editing, etc., with the same caveats as when letting an AI write draft wording by itself: you must check the facts and the style of the result for yourself and fix any problems.
+
+For existing articles, you shouldn't get carried away. There may be subtle preferences in how to write an article, including choice of language variety and style. Bulk "fixing" of wording that the original authors chose consciously is frowned upon and must not be done with AI assistance. Aim to maintain the original tone and style of the article, and avoid converting an article into an obvious AI voice.
+
+Actual errors, or style issues there is consensus on, can be fixed with AI assistance, but unless you are a seasoned Wikivoyager who knows how the community feels about the corrections you are going to make, don't do it. It is also very easy to make a hard-to-fix mess out of it, even if there is consensus on what you intended to do. If cleaning the mess may take days, make sure you are prepared to commit to it. Just reverting everything may not be possible if other editors have edited the affected articles in the meantime.
+
+==Illustrations==
+Computer-generated "photos", "paintings" and "drawings" may not be used on Wikivoyage. For most destinations, there is an abundance of real photos on Wikimedia Commons, and we don't want images that picture what the place ''might'' look like. Also be careful with computer-modified images.
+
+Graphs and similar are rarely used here. If you think one is needed and you create it with AI assistance, you should carefully control the inputs.
+
+If you use AI assistance to create a map, make it simple enough that you can check that there are no hallucinations. Tell the AI what map to use as base.
+
+When using computer-generated illustrations, notify the community through a thread on the article talk page.
+
+:''See also: [[c:Commons:AI-generated media]], for Wikimedia Commons' AI policy.''
+
+==Discussions==
+AI tools may not be used in posts on talk pages other than for spelling correction, finding a word, and similar tasks; the original wording must be yours – do not use the style AI chatbots tend to use. Pace, volume, etc. should be the same as when participating without AI assistance (as a native speaker without special challenges), see [[Wikivoyage:Using talk pages]].
+
+==Copyright issues==
+Many of the current (as of the mid-2020s) AI programs work by applying a large language model to a collection of inputs; they output what would typically be said – and in some cases, they will repeat what has actually been said. This may violate the copyright of the original author; some critics refer to widely-used AI programs as "plagiarism machines". The legal implications are far from clear; as of mid-2026, there are many cases before the courts of several countries.
+
+Even if the program works well and there are no legal problems, what you get is some average or mishmash of the inputs; that is not what Wikivoyage needs.
+
+
+[[Category:Wikivoyage drafts and proposals]]

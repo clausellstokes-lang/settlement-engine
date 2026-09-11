@@ -1,0 +1,361 @@
+Better Narration Through Visualization: A Lifestyle Guide | The Angry GM
+
+ This here’s another lesson in my year-long True Game Mastery series. You don’t have to read these in order, but you probably should. So, if you’re new here, maybe check out the series outline and start at the beginning. 
+
+Click here for the The True Game Mastery Series index.
+
+TTRPGs are games of imagination! Or so every roleplaying game book claims before burying you under a landslide of math, probability, statistics, exacting rules, grids, diagrams, and paperwork. Imagination!
+
+What those books don’t tell you is that your job — as the game’s Master — is to get a bunch of inattentive, hyperactive, selfish sociopaths to imagine the same thing you are. True Game Masters bring all the imaginations at the table in synch. And you’ve only got one imagination synchronization tool up your arsenal. It’s called Narration.
+
+Today, I’m going to help you up your Narration game. And fix your busted-ass imagination. Because, trust me, your imagination is broken.
+
+The Art of Narration
+
+One of your many, many, many thankless jobs at the TTRPG table — assuming you’re the GM, of course — is to act as the players’ eyes, ears, and brains. See, your TTRPG campaign’s world exists only in your head. No one can see it but you. So you’ve got to tell the players everything their characters see, hear, feel, smell, perceive, and know about your game’s world.
+
+And if you want to minimize the chances your players will get their dumb characters killed, consistency and clarity are key. So drop the flowery frigging prose, be clear, and get to the damned point.
+
+Narration is how you impart information about the game’s world. Clearly, comprehensibly, and concisely. And it comes in four flavors.
+
+Scene-Setting Narration is all about describing locations, situations, and events so the players can decide what dumbass actions their idiot avatars take.
+
+Exposition Narration delivers factual information directly to the players so they know what their characters know about the world, even if they refuse to use that knowledge for any good purpose.
+
+Resolution Narration reveals to the players the results of their characters’ stupid actions and shows them exactly how their decisions made everything worse.
+
+Transition Narration moves the action across time and space. It covers minutes or hours passed and yards or miles traveled. Or it covers unimportant activities like cleaning up after a battle, making and breaking camp, or pooping.
+
+That’s all Narration 101. And if you’ve muddled your way through running at least one TTRPG session, you’ve probably figured most of that crap out. But there’s a difference between muddling through a game and actually Mastering one.
+
+The stuff I’m going to teach you today will help you provide better Narration. And while I’m mostly focusing on Scene-Setting Narration, mastering this lesson will improve all of your Narration.
+
+Setting a Scene in Two Easy Steps
+
+When it’s time to Set a Scene, most Game Masters just open their mouths and vomit forth descriptive prose. But there’s more to good Scene-Setting Narration than just Scene Description. In fact, Scene Description is the second part of the two-step, Scene-Setting process. True Game Masters take time to Construct Scenes before they describe them.
+
+Scene Construction means deliberately, purposefully imagining a scene, location, or event before saying a single word about it. And most folks skip Scene Construction and just start blurting out Scene Descriptions. Because most folks are Mere Game Executors.
+
+Why do people skip Scene Construction? Some people just don’t know any better. They have no idea there’s a step they’re skipping. Others do know better, but they’ve gotten sloppy, careless, or impatient. But most folks skip it because it’s hard. And people don’t like to do hard things. And Scene Construction is getting harder every year for every Game Master.
+
+Why Scene Construction Matters
+
+Imagination Isn’t Magic
+
+Whenever I mention imagination — and Visualization, which I’m getting to — people tell me their brains just don’t work that way. They just can’t Visualize. And, though they don’t realize it, that’s partly because their imaginations are shriveled, atrophied, hollowed-out husks because people don’t take good care of their imaginations. I’ll explain that below.
+
+But part of it is that people just expect too much from their imaginations.
+
+Imaginations aren’t holodecks. They aren’t magical doorways to the Land of Make-Believe. They aren’t hallucinations. You can’t just close your eyes and find yourself immersed in a four-dimensional dreamscape. And if that’s what you expect, you’ll think your imagination is broken when it doesn’t happen.
+
+Even after you heal your diseased imagination — it needs healing; trust me — it’ll never work like that. It’ll work better than it does now, but it’ll never be like stepping onto a holodeck. Instead, it’ll be a hodgepodge of sensory impressions and mental associations. Senses of color, pattern, and texture, echoes of remembered sounds, faint whiffs of odors.
+
+Fortunately, that’s all you need. You don’t need a conscious illusion to help you Narrate. You just need an imaginary construct sloshing around in your unconscious nudging the talking parts of your brain.
+
+You and I both know it’s easy to rattle off a Scene Description. Or just read one aloud from a module. No one actually needs to play a hippie-dippie bullshit game of pretend every time the players walk into a new room. So why bother?
+
+Why? Because it makes for a better game! And one that’s easier to run! Why else?!
+
+Once a scene has started — once players start asking questions and characters start doing things — the more quickly and clearly, you can answer those questions and resolve those actions, the better the game flows. And the easier it is to maintain that flow. If you’ve got a really clear image in your head of what’s going on, you can provide clear, concise, consistent answers and more quickly determine how things change in response to whatever the players do.
+
+Moreover, the more clearly and consistently you can describe the world, the better able your players are to predict the likely outcomes of their outcomes. And that’s the key to the players making good, rational decisions about their characters’ actions. If the players can’t guess the likely outcomes of their choices, all they can do is act randomly.
+
+Players don’t need your help acting irrationally.
+
+Taking a couple extra seconds to build an image of the world in your head makes everything easier, clearer, and more immersive. It’s good for you and it’s good for your players.
+
+The Simple Solution to All Most of Your Narration Woes
+
+Text Boxes Kill Brain Cells
+
+Do you want to kill your Narration abilities deader than a 1st-level wizard after the first fight in any OSR game? Just read Boxed Text.
+
+Most published modules have these chunks of boxed text you’re supposed to read to your players to Set the Scene. And Boxed Text might seem like a great way to skip building Narration and Visualization skills. But relying on Boxed Text actually makes it harder to run games.
+
+You don’t internalize ideas when you read text aloud. Most people can’t remember what they read a few seconds after reading it out loud. And no, you’re not the one rare exceptions. Sorry. Your brain just isn’t wired that way.
+
+When you read stuff out loud, the ideas the text conveys aren’t getting passed to most of your brain. When you read aloud, you translate the symbols into sounds and the sounds into audible words. And all that work is done in the same part of the brain. The language part. The other parts of your brain — the turning ideas into associations parts — don’t get involved. And thus you end up with only a vague understanding of what you just read.
+
+If you absolutely must rely on Boxed Text, read the text in its entirety to yourself first, then read it again out loud. Or, better still, read it to yourself and then summarize what you read out loud. From memory. That forces your whole brain to think about what you read.
+
+Do you want a fast-acting, low-effort fix for your Narration suckage? Of course you do. Everyone wants fast-acting, low-effort solutions to their problems. Just try breathing.
+
+Seriously. Practice a habit I call Breathe, Then Speak.
+
+The next time you have to Set a Scene in a TTRPG session, stop. Just stop. Don’t open your mouth. Don’t start spewing language noises. Just hit the brakes.
+
+Then, close your eyes.
+
+Close ‘em.
+
+Now, take one long, deep breath. Inhale through your nose and exhale slowly through your mouth.
+
+Open your eyes.
+
+Now, start talking.
+
+That’s it. Before you Set a Scene, close your eyes and take one deep breath. I know it’ll feel awkward. I know it’ll be weird. Your players will give you funny looks, but you won’t see them because you’ll have your eyes closed. And once your players notice your Narration is improving — and they’ll notice it before you do — they’ll shut up and accept it.
+
+The key is to do it every time. Make it a consistent habit. And that’s really the hardest part. Remembering to do it every time.
+
+The point of this weird ass exercise is just to give your brain — the intuitive, unconscious, creative parts — a little head start. To give your imagination one quiet second to think about the scene you’re about to set. Given even just one short pause in the noise, your creative brain will start working. And it’ll start prompting the talky bits of your brain meat. Feeding it ideas. You won’t even know it’s happening.
+
+The thing is, when you start talking before your imagination wakes up, your creative brain is stuck listening to the words and imagining what you’re describing. And that’s backasswards. You want to describe what you imagine.
+
+To that end, Breathe, Then Speak actually creates a little habitual cue in your brain. Once you make a habit of closing your eyes and breathing deeply immediately before engaging your imagination, your brain will recognize that eye-closing-and-breath-taking as a warning that you need your imagination running. Eventually, the habitual cue will let you kickstart your creativity just by taking one deep breath with your eyes closed.
+
+If you think of your creative brain parts like a cat — and that’s a pretty apt description for reasons — your little eye-closing, breath-breathing ritual is like running a mental can opener.
+
+As a benefit, conscious slow breathing lowers your pulse rate and stress levels. If you’re prone to stage fright — which is at its worst whenever you have to start a new scene — the Breathe, Then Speak technique will help mitigate that.
+
+Now, I ain’t claiming my Breathe, Then Speak trick will make you a Scene-Setting Savant. It won’t turn you into the Ralph Waldo Emmerson of Extemporaneous Fantasy Adventure Prose. It’ll just make everything a little easier. And, in the long run, tiny gains add up.
+
+So trust me and try it.
+
+Better Scene-Setting Through Visualization
+
+After a few weeks of doing the Breathe, Then Speak thing, you might be perfectly happy with your Scene-Setting skills. Good for you. But after you’ve given your imagination some breathing room — pun totally intended — you can up your Narration game more by training your imagination for deliberate Scene Construction.
+
+That is, you can train your imagination to conjure purpose-built scenes in its holodeck.
+
+But Scene Construction isn’t easy. It takes a lot of practice. And it relies on a tricky skill called Visualization.
+
+Visualization: What It Be and How It Do
+
+Visualization is really just a fancy term for imagining really good. It’s like the semi-professional version of bush-league imagination. Really, Visualization is just building an imaginary something in the pretend space in your brain.
+
+Despite the name, though, Visualization isn’t purely visual. Rather, it’s a feast for all the senses. And even the feels.
+
+Well, not a feast. More like a menu with some pictures and the faint aroma of food wafting in from the kitchen. As I mentioned in the sidebar above, imagination isn’t magic. It’s not a full-on internal hallucination. Though it does improve with time.
+
+But even vague, cloudy, half-unconscious Visualizations are useful when paired with verbal Description.
+
+The Visualization/Description Feedback Loop
+
+Repetition Is Good For Everyone
+
+Even though I keep telling Game Masters to make a habit of repeating details, phrases, and descriptive elements over and over and over and over, most of you still don’t do it. When you’re the one doing the repeating, repetition is really noticeable. But audiences — readers and listeners — don’t notice repetition. That’s because people don’t pay as much attention to what they hear and read as they think they do. Repetition is how writers and speakers mitigate that problem.
+
+If you want your players to notice a detail or remember a scene element, you have to repeat it at least three times. But repetition ain’t just good for players. Your imagination is just as flighty and inattentive as any player. It has to be reminded of key details to hold the Visualization together.
+
+If you don’t mention the rain constantly, most players will forget it’s raining from one round to the next. And so will your own imagination.
+
+Remember what I said above about the two-step, Scene-Construction and Scene-Description process? Good. Now forget it. Because Visualization and Description don’t actually come sequentially. Instead, they feed each other. They form a loop.
+
+When you Visualize something, your imagination piles up a bunch of sensory impressions and associations and then stirs them all together hoping they turn into something. Or perhaps it’s better to say your imagination starts massaging the pile of impressions, gradually trying to mold them into whatever.
+
+This is not how anything actually works. But, as I said before, I’m not a neuroscientist and this whole website is just about improving your ability to pretend you’re an elf.
+
+When you describe the thing your imagination is trying to build, you’re helping that stirring, massaging, coalescing process. Your imagination is really good with impressions, but it’s not good with structure. Language is all about structure. The point is, your imagination seizes on the words your brain generates and uses them to clarify its Visualization. Which then makes it easier to Describe. And round and round it goes.
+
+This is why it’s possible to fake this crap by just opening your mouth and blurting out some words. And also why the two skills — Description and Visualization — get stronger together. But the whole process is a lot smoother if you let your imagination make the first move.
+
+The point is, the more you Describe a scene — and refer back to that Description — the clearer the Visualization becomes. So you want to keep describing and redescribing the scene’s elements as it plays out. And keep calling attention to the most important or most forgettable scene elements.
+
+Your Poor, Atrophied Imagination
+
+Visualization’s great, but most people suck at it. Why?
+
+It’s like this: when you stop using a bodily part, it atrophies. Your Pretenderary Lobe — which is the technical name for the part of your brain that Visualizes, except it isn’t because I just made that name up — your Pretenderary Lobe has atrophied. I can almost guarantee it.
+
+Hell, most of you haven’t just let your Pretenderary Lobe atrophy, you’ve poisoned it the way booze poisons livers and binge-watching Amazon original series poisoned storytelling.
+
+You live in a world of constant sensory stimulation. You’re so used to constant stimulation that any lack of stimulation physically hurts you. You can’t tolerate boredom. Not for one single, solitary second.
+
+The problem is that your creative imagination works best when the rest of your brain is quiet. In fact, your imagination spends most of its time filling awkward brain silences. That’s what daydreaming is. So the constant noise in your brain means your creative imagination hasn’t gotten out of bed in years. It’s miserable, it’s depressed, and its legs don’t work.
+
+Moreover, the constant, bright, colorful bombardment of sensory stimulation also leaves you thinking your imagination should be at least as bright and vivid and exciting. When you were a kid, it probably was. But not anymore.
+
+So, your imagination is dead. Well, it’s mostly dead. And mostly dead is slightly alive. So there’s hope.
+
+Resurrecting a Mostly Dead Imagination
+
+But I Have ADHD…
+
+Whenever I give advice — especially advice to do with focus, creativity, or attention — a few folks will mention that my advice is hard to follow for folks with specific, diagnosed neurodevelopmental or other disorders.
+
+I know everyone faces different challenges. But I am not actually a mental health professional. I’m not qualified to help people with diagnosed disorders. And trying to help would be recklessly irresponsible and dangerous. As someone who himself has worked with mental health professionals to overcome various challenges, I would never seek help from some random asshole on the internet and I ain’t gonna offer any either. I’m sorry.
+
+Actually, I do have one piece of advice.
+
+If you want to improve your TTRPG experiences in light of a specific, diagnosed mental health obstacle, tell your mental health professional that that’s what you want. Seriously. Good mental health professionals want you to set specific goals and they want to help you enjoy positive social activities and interactions. So say, “look, I play these role-playing games with my friends; can you give me some tools to improve my experience in light of my specific challenges?” Therapists thrive on that crap.
+
+I know because I’ve said exactly that to my care providers. And they not only helped, but they applauded me for taking proactive steps to set goals and engage in positive social activities.
+
+I’m sorry I can’t help you directly; I know it sucks. All I can do is point you to someone who can help because I ain’t them.
+
+If you’re a modern human gamer living in the Western world, your imagination is mostly dead. That’s the bad news. The good news is you can fix it. But the other bad news is how you can fix it.
+
+You’re really not going to like this.
+
+This is seriously going to piss you off.
+
+You’ve got to make some lifestyle changes. And now I know how my doctor feels every time he tells me that. And why he cowers after he says it. Please don’t punch me. Actually, punch me if you want to. But don’t cancel your support.
+
+First, limit sensory noise. Do you always have a podcast or video going in the background? Stop. Just stop. Practice focusing all your attention on just one thing. Learn to operate in the quiet. And if silence truly kills you — if you just can’t handle it — replace the audiobooks and podcasts with lyric-free music. That’s been proven to increase focus and productivity as well as help your creative imagination.
+
+Second, set aside ten to fifteen minutes every day for boredom. Yes, boredom. And be warned, boredom’s gonna hurt at first. Your brain’s been on a constant diet of bright, vibrant stimulation. It’s an addict now. And detox is never pretty. But power through it. Spend ten minutes every day sitting quietly — or with light, lyric-free music — gazing out the window or across the room. Sit. Don’t lie down. And keep your eyes open. Don’t close ‘em. But don’t stare either. Just let your mind wander.
+
+Third, read. Carve out some time every day exclusively for reading. It’s one of the most creativity-stimulating things you can do. And because it floods your brain with linguistic representations of sensory impressions, it’s like strength training for your imaginovisualatory cortex. Reading text is better than listening to audiobooks, but if audio is the only way you can read, it works too. But make sure that all you’re doing is listening. Having an audiobook in the background while you do something else is not reading. Sorry.
+
+Do that crap every day for two weeks and your sad, sorry little imagination will eventually start getting its ass out of bed and doing something useful for you. And then just make a new lifestyle of it.
+
+Your Imaginary Fitness Program
+
+Those lifestyle changes I suggested are just about undoing the damage. Letting your imagination recover enough to drag its sorry little ass out of bed every day. It’s the bare minimum. If you want to build a strong, healthy imagination and master Visualization, you need an actual imaginary fitness regimen.
+
+I’m going to wrap up this lesson with three specific exercises to try. Pick one to start with and do it every other day for two weeks. Or every day. That’s even better. But keep in mind these exercises won’t do jack squat without a healthy imagination lifestyle.
+
+After two weeks, if your chosen activity remains a painful struggle — or if you just want a change — pick a different activity and try it. Or, if the activity’s working for you, add a second exercise to your program.
+
+Meanwhile, next lesson, I’ll give you some actual advice you can use at the table to get your players taking action.
+
+Exercise 1: Say What You Saw
+
+This exercise is the easiest of the four. You’ll need a good book of fantasy art. Or any kind of art. I’m always going to recommend fantasy stuff because this site’s all about playing pretend elf games. Find a book with lots of fantasy art. Or print out a bunch of pictures you find online. But print them. Get the hell away from the screen.
+
+Fantasy art wall calendars are great for this activity.
+
+When it’s time for your imaginary workout, find a quiet place to sit — with some white noise or quiet, lyric-free music if silence kills you — find a quiet place to sit and flip to a random picture. Study the picture for a while. Drink it in. Explore it with your eyes. Take as long as you want.
+
+Once you feel like you really know the picture, close the book and put it aside. But mark your page.
+
+Now, describe the picture you just looked at. Out loud. Give as much detail as possible and keep talking until you run out of stuff to say. When you do — or if you find yourself forgetting key details — pause your description, return to your picture, and study it again. Then, put it away and describe some more.
+
+Give that ten or fifteen minutes per session every day or every other day. This one won’t just help you with Visualization, it’ll also give you some Description practice.
+
+Exercise 2: Free Description Journaling
+
+This second exercise might seem easy, but it’s deceptively tricky. But it is helpful if you’re a homebrewer. Especially if you like pulling homebrew content from your ass at the game table.
+
+You’ll need a notebook or journal and a bunch of writing prompts. Especially fantastic location prompts. The random location tables in RPG books work great.
+
+You’ll also need a timer.
+
+When it’s time for your imaginary workout, sequester yourself somewhere quiet and put fifteen minutes on the clock. You can increase the time once you get comfortable with the exercise.
+
+Generate a prompt and start the timer. Now, Free Write a description of the prompted location or scene.
+
+Free Writing is all about getting words on paper. So don’t think too hard, don’t make any edits, and don’t stop writing. Just put down every word that drifts through your brain. Try to focus on pure description. If you notice yourself getting away from description, gently nudge your brain on course. Say something like, “just describe.”
+
+At first, you’ll have to chide yourself a lot. Or else you’ll run out of gas before the timer goes off. But eventually, you’ll be able to spin out description from any prompt for a full fifteen minutes or more.
+
+Exercise 3: Build a Sensory Sanctuary and Visit Every Day
+
+This exercise is tricky, but it’ll help you get better at engaging all your senses and holding a construct in your imagination’s holodeck. It’s also a variation of a deep relaxation technique. So if you want to de-stress a bit while you work out your imagination, this is a good one.
+
+What you’re going to do is construct a relaxing scene in your brain and then learn to conjure it at will. You’ll need ten minutes in a quiet place each day. Though the first time you do it, you don’t want to use a timer. Take as long as you need the first time.
+
+To construct your scene, recall a moment in your life when you felt content, relaxed, safe, secure, or otherwise just some flavor of happy. Got it? Now, close your eyes. Anchor yourself in the moment by specifying the time in place and your head. I might say to myself, “vacationing with my family in Busch Gardens, Virginia on a warm summer evening.”
+
+Now, try to recall as many visual details as you can. What was visible in that scene at that moment? Rattle off a list in your head.
+
+Do the same next for auditory detail. Try to recall what you might have heard around you.
+
+Then, do the same for your sense of smell and your sense of touch.
+
+Finally, if you want, you can try to recall what you were feeling at the time. It’s pretty pleasant.
+
+Once you’ve run through your senses and listed as many details in your head as possible, just sit with your eyes closed with the scene. Try to hold it in your head.
+
+Now, open your eyes. Look around and take note of where you are.
+
+Now, close your eyes again and see if the scene is still there. It might not be. That’s okay.
+
+After your first time with this exercise, write down as much as you can about the scene. Start by specifying the time and location, then list the visual details, then the auditory ones, then the olfactory, tactile, and emotional details. Writing them down helps you remember them.
+
+Each time you come back to the exercise, set a timer for ten minutes. Then, close your eyes and construct the scene again. Then, just sit, trying to give it your attention until the timer dings. When your time’s up, open your eyes, glance around, and then close them and see if the scene is still there.
+
+Over time, you’ll find you don’t have to deliberately construct the scene. It’ll just be waiting there for you whenever you want to visit.
+
+And if you ever need to de-stress from the dumbass things your players did during your latest TTRPG session, just close your eyes and go to your happy place. Because every GM needs a happy place.
+
+ [jetpack_subscription_form] 
+
+ 20 thoughts on “Better Narration Through Visualization: A Lifestyle Guide” 
+
+ Here’s another exercise that I find helpful for stocking the imagination with descriptive detail that may help it embellish your visualized scenes. It is also relaxing and good for your eyes (but see warning below). Also, this is not original – someone taught me this.
+
+Pick a time and location out of doors where you’ll be able to see things a good ways off – I find a quarter mile or so to work pretty well. Fair weather is helpful, but not mandatory. Leave behind all the artificial stimuli, including podcasts and lyric-free music. Sorry. I prefer being seated, but if standing works for you that’s fine.
+
+Now, look around and let your gaze come to rest on something distant – farther away than you would normally look – but of which you can still make out at least a little detail. Focus on it until you notice something about it that you did not notice more or less instantly, and describe it briefly to yourself. The articulation I was taught is, “I am aware I see …”. And don’t be picky, and don’t take too long. Just describe the first detail that you notice. It should take at most a couple of seconds to pick up on something.
+
+Then shift your gaze to another object and repeat. Do this for a set number of objects. I find five to be reasonable. Then just rest for maybe 10 seconds or so.
+
+Next, repeat looking at objects OR switch to a different sense. For instance, hearing: close your eyes (since sight tends to dominate our other senses) and listen until you hear a sound that you did not notice at first. Describe (“I am aware I hear …”). Repeat.
+
+Switch to touch – what your feet feel about the ground beneath them or what your hands feel about whatever they are resting on, or what your butt senses about what you are sitting on, or what your face feels about the air around you. “I am aware I feel …” You get the idea.
+
+Smell can be a little iffy – it takes me a while to hone in on a scent. And taste, well, if you want to wander about tasting random objects, be my guest.
+
+Back to sight, though – the distance thing is not particularly necessary – I just find it’s better for relaxation and better eye exercise unless you choose to gaze directly at the sun or a thermonuclear explosion. That would be bad for your eyes. So don’t do that.
+
+ For me, the easiest moment to do nothing and daydream is when I commute by train or bus, or in someone else’s car. There is something about being a passenger in a moving vehicle that makes it okay not to engage in any activity and just let my mind wander. As a child, I loved six-hours car trips to go on holidays for just that reason.
+
+Showers and household chores also work, but not as well for me. I’m very bad at multitasking, so I often end up just thinking about what I’m doing.
+
+I’m relieved to find my lifestyle is already compatible with a healthy imagination, and loves the exercises. They seem like fun, and I think they could do double duty and help with my fiction writing as well as my GMing.
+
+ Before the pandemic, my commute was a nice 20-30 minute block of time away from screens to think about my game, let my mind wander, play out hypothetical PC/NPC interactions in my mind, etc. Since I’ve switched to remote work and lost those opportunities, I’ve really noticed the degradation in my imagination when I’m GMing. I’ll try some of these exercises to build it back up, good article!
+
+ Wow. I’m enjoying every article from the course. I really appreciate the new style, straight to the point but still enough explanation to understand your thought process.
+
+I especially love the exercises part, kind of habit building deal. It makes it easier to focus on one thing at a time to better our games. Building slowly etc. I’ll keep a post-it with “stop. Breathe. Speak” for my future games.
+
+For the reference it’s good you don’t feel the need to justify yourself, however i find it very interesting that you mention books that inspired you. Always happy to dig deeper or just find interesting reeds 🙂
+
+ Aphantasia – the inability to form mental images, or visualize – is a real condition. It does not, however, implies a lack of imagination or creativity. We just have to wire our brains different. I, for instance, like to focus on auditory, olfactory and sensory descriptions. Like: the room is hot and humid, with a faint rotten flesh, like a small animal have died in the room.
+
+Another thing is that I tend to focus on dialogue, emotional responses, mental challenges and moral dilemmas.
+
+To help me set the scene for the players, however, I like to look up pictures of similar locations that I have planned and describe its general features. More often than not, I tend to incorporate details of those illustrations on my encounters, so it’s kind of a feedback loop.
+
+ It is a real condition. But also not one I am qualified to provide advice about. Also, as noted in the article, the term Visualization is neither entirely or exclusively visual. 
+
+Regardless, I advise folks GMing with aphantasia to seek expert advice from a qualified source.
+
+ The greatest stumbling block to a condition like aphantasia is the fact that, because there is a wide neurodiversity of brain wiring for counterfactual thinking, and most people only speak about the working of their own imagination in the most vague and symbolic ways, it’s actually very difficult to know if your imagination is functioning in an average capacity and you are expecting to play in the NBA just because 5’11” is taller than average, or if there’s actually something subpar about your abilities.
+
+ This is why it is important for people to work with professionals not get information from random people on the Internet. Which is why this thread of discussion is closed. Thank you.
+
+ Just a small note; the first sentence of the first imagination exercise says “This exercise is the easiest of the four.” I’m guessing you originally had four exercises, then cut it down to three. I was a bit confused when I read that. 🙂
+
+ Well color my buttery biscuts, using green food coloring. Instead of imagining the fourth exercise that angry might have created you have to merely take out a well worn eraser named self sabotage and use it to erase this opportunity to create your own ideas.
+
+ Great article. I do many of the lifestyle things already, thankfully. Just need to strengthen my visualization muscle!
+
+ It was as I was reading “Practice focusing all your attention on just one thing” that I became aware that I never really do that anymore, as while reading that article I was playing a phone game on one side, alt-tabbing to another game on the other side, and still going on stupid detours here and there like deleting a spammy email when the notification popped up.
+
+The depressing thing is when I was younger I could easily do something for several hours and block everything else out, whereas nowadays it feels like I only play games in 20-minute bursts or only read books in 10-15 page bursts before needing to do [different thing]. Maybe trying these exercises will help….
+
+ Don’t trick yourself into thinking this is a natural consequence of aging. Nor is it “just how you are.” It is a learned habit. And it can be unlearned. It ain’t easy; it’ll take conscious effort. But it can be unlearned. Unlearn it.
+
+ 100% agree here. I found it can be done, having small children played havoc with my ability to focus on anything, add in internet connected phones and I was a mess. I worked at it and have mostly unlearned my distracted habits.
+
+ I forget when exactly it happened but one of your previous articles inspired me to make conscious efforts to improve my visualization and narration. While I have been doing that I have noticed a bit of a problem. Sometimes, my players interrupt me. Not a lot, but often enough that it was on the top of my brain when I started the article. I’m not sure wether the problem is me and my narration (do I ramble, spend to much time narrating, or the narration just isn’t interesting), my players, or the medium we’re playing through (on-line game).
+
+ Angry, would you be willing to share any sources on focus and/or the detrimental effects of extraneous stimuli while working on a task? I routinely have students tell me (I’m a teacher) that they “can’t focus on work unless they have music/a podcast/whatever playing in the background.” That has always felt unhealthy to me, but I couldn’t figure out why. Do you have any recommended reading on that topic?
+
+ As one of the mentioned mental health professionals, I highly appreciate Angrys advices.
+
+Keep up your great work, Sir, and greetings from Germany!
+
+ One thing I remain grateful for is my ability to enjoy silence, and the ability, in today’s over stimulated world, to just sit and be bored once in a while. It’s been a while since I’ve consciously chosen to do it on a day to day basis however, and this article is a great reminder that choosing to do it is a lot different than just letting it happen.
+
+ I have been away from your articles for a while now. Things have changed around here. I’ve always appreciated the way you break things down and that still absolutely shines. I admire the direction you took since I last read an article. There’s enough attitude to remind me you’re Angry. But it also feels good in new ways. I can’t pinpoint it exactly, but you do feel more sincere now. I’m glad you are still around and I have enjoyed binge reading through your new stuff.
+
+ Hey, thanks for that man.
+
+ Comments are closed.
+
+ Search the Site
+
+ Search
+
+Recent Posts in this Series
+Tactical Infiltration Action Posted on: December 18, 2023
+Resolving Social Actions Posted on: October 27, 2023
+Mastering the Thousand Cuts Posted on: September 30, 2023
+Professor Angry's Office Hours: The Art of the Cutaway Posted on: September 29, 2023
+Declaring Your Players' Social Actions Posted on: September 27, 2023
+More posts: True Game Mastery

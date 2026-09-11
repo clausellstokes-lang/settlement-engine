@@ -1,0 +1,33 @@
+findings: 1 capacity_realm_load
+observability: 0
+notExecutable: [
+  {
+    "id": "capacity_plateau",
+    "class": "deterministic",
+    "reason": "requires receipt.yearlyPopulations, receipt.yearlyDiedFlags — absent from this receipt"
+  },
+  {
+    "id": "capacity_floor_thaw",
+    "class": "deterministic",
+    "reason": "requires receipt.yearlyPopulations, receipt.yearlyDiedFlags — absent from this receipt"
+  }
+]
+deterministicFirings: 1
+annotated.fullInstrument: false
+annotated.notExecutable: [
+  {
+    "name": "tripwire capacity_plateau",
+    "reason": "requires receipt.yearlyPopulations, receipt.yearlyDiedFlags — absent from this receipt",
+    "source": "tripwire-registry"
+  },
+  {
+    "name": "tripwire capacity_floor_thaw",
+    "reason": "requires receipt.yearlyPopulations, receipt.yearlyDiedFlags — absent from this receipt",
+    "source": "tripwire-registry"
+  }
+]
+mintRefusals: [
+  "a deterministic-class tripwire fired — the run is not clean",
+  "not the FULL instrument at build-complete-dark",
+  "2 deterministic tripwire row(s) could not run — tripwire capacity_plateau (requires receipt.yearlyPopulations, receipt.yearlyDiedFlags — absent from this receipt); tripwire capacity_floor_thaw (requires receipt.yearlyPopulations, receipt.yearlyDiedFlags — absent from this receipt)"
+]

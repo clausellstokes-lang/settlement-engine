@@ -1,0 +1,7 @@
+§915 MEASURE landing (register car): writer-reach re-takes its provenance at the seventeen-car tip; no other register moved
+
+The register series at 1f89c5d2b (registers-915.log, 10:2x; every door as predicted): the lighting census untouched by the chair — the lane's own 4b refreeze (files 2553, parked 375, credited 2178, titles 23843, suiteTitles 6377) equals the farmed probe at the tip and the plain walker is green (34); the OSR plain read 1972 exact with 0 drift lines and NO write; the mounts door unchanged (changed: []); prose-numerics 225 exact, nothing re-keyed; the tuning walker plain green (75); writer-reach's dry run HOLD with no refusal and its --write moved the provenance alone (frozenAtSha 2865da54f -> 1f89c5d2b): cohort 1322 -> 1322, 0 stale folded out, 0 registered rows lit; no scan statistic moved — the train's src motion is the fenced census island, which has no product importer.
+
+Seat: Fable 5.1 — validated
+
+Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>

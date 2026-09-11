@@ -1,0 +1,438 @@
+
+
+ Torture and confession in Wolfe’s Book of the New Sun – Ultan's Library
+
+ Skip to the content
+
+Home
+
+Articles
+
+Book of the New Sun
+
+Fifth Head of Cerberus
+
+Latro (Soldier) novels
+
+Book Reviews
+
+Interviews
+
+News
+
+About
+
+Contributors
+
+Search
+
+Home
+
+Articles
+
+Book of the New Sun
+
+Fifth Head of Cerberus
+
+Latro (Soldier) novels
+
+Book Reviews
+
+Interviews
+
+News
+
+About
+
+Contributors
+
+Torture and confession in Wolfe’s Book of the New Sun
+
+By Jonathan
+
+On 10 April 2001
+
+In Articles, Book of the New Sun, Gene Wolfe
+
+by Jeremy Crampton
+
+Abstract
+
+This document briefly examines the use of torture and confession in Gene Wolfe’s Book of the New Sun and how it both differs from and reflects actual historical practice (at least in Europe and America). It is not the purpose of these notes to provide a full or sustained argument, merely to outline some possible ways of proceeding.
+
+I am concerned here with “judicial torture” and confession, that is, official torture sanctioned and indeed performed for or by the state. As a summary of what I am going to say these are the areas of overlap and difference between Wolfe and historical practice:
+
+Wolfe includes prisons and places of confinement within his judicial system (the torturer’s Matachin tower, the antechamber at the House Absolute and the drainage channel in Thrax). As was historical practice, these are really jails (ie., places of temporary confinement until trial or punishment) until the development of the prison qua prison in the early modern period (prisons per se were a separate and much later development historically).
+
+Historically torture was used to elicit confessions and has been bound with confession for millennia. Wolfe gives some examples of this (eg., in Dr. Talos’ play).
+
+Torture was inherently a public spectacle historically. Wolfe shows this very well in Morwenna’s torture. However, he also creates both a mythical guild of torturers and a hidden zone of torture within their building. This differs from most historical practice. Why did Wolfe invent the guild of torturers, with a private zone of torture?
+
+Furthermore, most use of torture in Wolfe is for punishment alone. The torture of Thecla is the standout example of this. Wolfe underplays the connection between torture and confession. Why?
+
+5What were subjects of torture called? Wolfe calls them “clients” whereas they were actually called “patients”. Both terms indicate that subjects of torture were to be treated or cared for, but Wolfe’s more metaphorical term lacks the notion that patients were to be corrected or normalized (that is, that a patient can be “ill” and in need of reform). As we shall see, the judicial system in TBotNS is not at all concerned with reform of the prisoner, but with punishment for transgression of the rule of law.
+
+In the first two points therefore Wolfe clearly establishes the judicial system in TBotNS as that of Europe up to say the early modern period, before the prison reforms introduced by thinkers such as Cesare Beccaria (1738-1794) and Jeremy Bentham (1748-1832). Beccaria’s 1764 book marks the intoduction of the idea of reform of the prisoner rather than their punishment or retribution. In the last three points however, Wolfe interestingly diverges from historical practice for reasons of his own. It is not my aim in these notes to speculate why this might be, preferring instead to leave this for others more familiar with Wolfe.
+
+Introduction: Definition of terms and historical practice
+
+How was torture employed as a historical practice? Since the earliest societies torture was used to elicit confessions and the truth.
+
+Definition and history.
+
+Article 1 of the United Nations Declaration against Torture (1975): “Torture means any act by which severe pain or suffering, whether physical or mental, is intentionally inflicted by or at the instigation of a public official on a person for such purposes as obtaining from him or a third person information or confession, punishing him for an act he has committed, or intimidating him or others persons.”
+
+Encyclopaedia Britannica: “Torture was apparently commonly practiced in many ancient civilizations. The ancient Greek practice of torturing slaves to obtain information influenced early Roman laws, in which torture gave the testimonies of slaves and those of low social status more validity.”
+
+OCD: (Oxford Classical Dictionary) entry on torture: “slaves might be tortured in order to extract confessions of their own guilt or evidence against other persons (the unreliability of this second kind seems to have been recognised in practice at Athens). At Rome the investigation by torture was called quaestio; the evidence of the tortured was not testimonium.” (p. 1535). It goes on to point out that during the “Principate” the emperors urged some restraint, only in cases of seriousness should it be used, and its evidence was “fragile”, but that this is no indication of what went on in practice (ie., that torture continued as an actual practice).
+
+Foucault notes in his History of Sexuality Vol I that in 1215 AD codification of the sacrament of penance by the 4th Lateran Council led to the development of confessional techniques and, he argues, the “resulting development” of declining importance of accusatory methods, sworn statements, and the rise of methods of interrogation and inquest (Foucault, 1978, p. 58). Foucault’s point is that ways of finding the truth changed. Previously societies had used accusations which could be defended if enough upstanding people swore you were innocent. Now the emphasis was on tests and inquiries of the evidence. Torture could be an important part of this inquest, and its practice was therefore renewed in medieval times.
+
+ The Catholic Encyclopedia (1913) glosses the 4th Lateran Council adoption of: “Canon 21, the famous “Omnis utriusque sexus”, which commands every Christian who has reached the years of discretion to confess all his, or her, sins at least once a year to his, or her, own (i.e. parish) priest. This canon did no more than confirm earlier legislation and custom, and has been often but wrongly, quoted as commanding for the first time the use of sacramental confession.” http://www.newadvent.org/cathen/09018a.htm).
+
+Enc. Brit: “A renewed interest in Roman law, the dissatisfaction with earlier modes of securing reliable information, and the development of strong political authorities contributed to the increased use of torture in Europe beginning in the 12th century. Prior to this period oaths, ordeals, and combats were common ways to resolve judicial conflicts, but by the 13th century confession became, along with the testimony of eyewitnesses, the means of determining guilt in most of Europe…By 1800 most European countries had legally abolished the use of torture, but in the 20th century it reappeared in unexpectedly high proportions. The political pressures of the modern state were blamed for this increase, particularly its use by armies during wartime and by intelligence agencies. It was in countries that used law as a means of imposing ideology, however, that torture became most widespread, for example, in the fascist countries of Italy and Nazi Germany and the communist government of the U.S.S.R. under Joseph Stalin. In Nazi concentration camps, doctors became involved in creating gruesome tortures and in sustaining individuals so that they could be tortured again…Although torture has been universally condemned, it is still widely practiced in many regions, including Latin America, Africa, and the Middle East.”
+
+Characteristics of Judicial Torture & Confession
+
+Foucault notes three essential features which are required for punishment to be torture:
+
+It must produce a certain degree of pain. This pain should be quantifiable and calculated.
+
+Torture must be regulated and in proportion. It is in proportion to the gravity of the crime, the standing of the criminal, and the rank of the victim.
+
+Torture is part of a ritual, a liturgy. First, it must mark the body of the criminal, or through public humiliation, to brand them with infamy. Second, torture takes place in public as a grand spectacle, almost of excess. “The fact that the guilty man should moan and cry out under the blows is not a shameful side-effect, it is the very ceremonial of justice being expressed in all its force” (Foucault, 1977, p. 34).
+
+This is why torture often continued after the death of the criminal (with drawing and quartering or burning the body to ash, etc.). Therefore no blame or guilt attaches to the executioner (“torturer” in Wolfe’s language). He is merely “revealing” or providing an outlet of the prisoner’s guilt. He is a shepherd, and no more guilty than a priest whose penitent sinner has difficulty or pain in confessing the sin. In fact the more difficult the confession, whether by a priest or torturer, the more valid the truth produced, and the greater the rewards for those who confessed (though not, of course, in this life). Both the priest and the executioner provided an authoritative supervision of the confession. As Catholics know, a confession cannot be made to a layman, but to a priest or bishop only. The confession was not made under a chaos of pain, such as the one Severian teases himself with, where all the arts of the torturer would be applied to him “all together in a revelation of pain” (Volume I, Chapter 13, hereafter I, 13). There were formalities and techniques to be employed, especially the circumstances under which one confessed. “In medieval law” observes Foucault, “the confession was valid only when made by an adult and before an adversary” (Foucault, 1977, p. 310). And because the confession had to be “spontaneous” and given with the participation of the tortured, sometimes you were tortured twice, once before the executioner, and again before the judge. Only the confession produced truth–it was “the Queen of proofs” to the medieval officers who used it (Peters, 1985, p. 41).
+
+The Cath. Enc. makes this connection explicit between the confessor and the doctor with his patient by quoting St. John Chrysostom (d. 347): “Be not ashamed to approach (the priest) because you have sinned, nay rather, for this very reason approach. No one says: Because I have an ulcer, I will not go near a physician or take medicine; on the contrary, it is just this that makes it needful to call in physicians and apply remedies. We (priests) know well how to pardon, because we ourselves are liable to sin. This is why God did not give us angels to be our doctors, nor send down Gabriel to rule the flock, but from the fold itself he chooses the shepherds”. Origen (d. 154) goes further and says that confessing is like vomiting, but you’ll feel better afterwards.
+
+Torture then should produce pain, but the torturer has no guilt. Torture and confession are intimately integrated. But how much torture should be applied? The answer to this depended on the perpetrator, the crime, and the victim. The severity was applied in proportion to a whole knowledge apparatus, a “biography” of criminality. There were degrees of torture (the first degree was simply to show the accused the instruments of torture. Often this was sufficient, especially for children or the elderly. Thecla was subjected to this as the first stage of her torture). This knowledge of the individual’s criminality was derived in various ways, especially from the evidence against you. If this evidence was weak (eg., from rumors or your manner when questioned) you would receive a lighter punishment than if the evidence was strong (you were seen by two independent and reliable witnesses with a bloody sword; Foucault, 1977, p. 36). There was no binary division between “guilty” or “not guilty.” You could be partially guilty. Thus in I, 3, where we first see the influx of new prisoners brought in their coffles (chain-gangs), they are each carrying a “copper cylinder” which contains all their information–their biography of crimes. So important are these papers that the tortures cannot proceed without them, and if they have swapped the cylinders, they will receive that person’s punishments instead. The knowledge they contain trumps any other knowledge (eg., the Guild surely knew that Thecla had committed no crime). Wolfe’s brief description of this scene is completely justified historically.
+
+Of course, the chain-gang itself was part of the punishment. To be publicly paraded as a criminal spectacle was meant to be part of a whole “branding” process that was quite extensive, for apart from the humiliating walk in public to the scaffold or place of detention, there were other rituals involved. These included the fixing on the body of the iron collars and chains. The prisoner’s head would be thrown back on an executioner’s block and the executioner would strike the iron, whilst contriving to miss the prisoner’s head: “it takes three men to rivet an iron-collar” notes one early 19th century observer, “the first holds up the block, the second holds the two branches of the iron collar together and, with his two outstretched arms, secures the patient’s head; the third strikes with repeated blows and flattens the bolt under his huge hammer. Each blow shakes the head and the body” (quoted in Foucault, 1977, p. 258).
+
+During the walk itself, the prisoners would be subject to the ridicule, and sometimes physical attacks of the onlookers. Others came to try and determine the profession of the convict from their facial characteristics or clothing, in a manner closely related to that of phrenology. Sometimes the prisoners played up to this crowd, displaying tatoos of gallows, or re-enacting their crimes. This spectacle of the chain-gang was finally ended in France in 1837 and public execution by guillotine was stopped after that of Weidmann in 1939, but it continued in private, ie., in the prison courtyard, until the very late date of 1977 (Abbott, 1994) before being abolished by President Mitterand in 1981.
+
+The executioner (torturer) himself plays an interesting role. As the representative of the ruler, he was the “king’s sword” in a way, but he did not have the ruler’s power or even respect. He was somewhat infamous himself. His relative lack of power is demonstrated in the fact that the ruler could send a letter of pardon up until the very last minute (as Severian worries, I, 30). If the executioner botches the process, they themselves could be punished or set upon by the angry crowd (Severian feared he “would have been finished for life” if he had made such a mistake with Morwenna, III, 5). When they were given their orders, the letters were not placed on a table, but thrown on the ground in front of them (Foucault, 1977, p. 52, compare I, 31, where Severian has to tell the chiliarch to cast his fee at his feet). On the other hand, as Wolfe shows (I, 30), the executioner could pick up significant tips by allowing the public, especially women, to get blood on their handkerchiefs (Abbott, 1994, p. 202).
+
+In summary, we see historically a constant equation between the use of torture for confession, and for punishment. Torture was a public spectacle, and the nature of the torture or other punishment was often altered to fit the crime. During the late 18th and early 19th centuries reformers proposed a whole series of alternatives, of which imprisonment was only one, and one which had a difficult birth (among other reasons, it was criticised because it provided only a standard punishment despite the variety of crimes committed). Confession was an integral part of torture because it supposedly produced a deep truth which needed to be “freed” (either of your accomplices, or your sins).
+
+Juridicality in Wolfe
+
+We can now examine some juridical examples from Wolfe. The first passage I have selected is the leg-flaying (I, 3) of the maidservant. Here indeed is a deliberate and measured application of torture. It is also one of the few times Wolfe is explicit about torture being used for confession. “The client was put to the question last night” says Master Palaemon (emphasis added). As they are leaving she says “I don’t know. Only, oh, can’t you believe I wouldn’t tell you if I did?” (from information we learn later she seems to have been asked for the location of Thea and Vodalus). But this incident is noted by the Master as an unusual case, perhaps because she seems to have held out against the questioning (“I wouldn’t tell you” etc.)
+
+Wolfe tells us that the torturers are the executors of a sentence decided elsewhere by the judicial process. During Thecla’s torture Master Gurloes observes “We carry out the sentences that are delivered to us, doing no more than we are told, and no less, and making no changes” (I, 12). The “instructions of jurists” are also mentioned in I, 7, implying trials; “sentences” and “an order” for Thecla’s torture are mentioned elsewhere in I, 12. Severian himself states outright that “we obey the judges, who hold their offices because the people consent to it” (III, 2). As we have seen, this corresponds to historical practice, where the ruler abrogated power to themselves or their judges as their representative, and reserved the right to issue pardons if necessary (although in practice such pardons were rare, as it still is today in capital cases in the USA).
+
+The torturers are also trained to blatantly ignore what clients say: “nothing said by a client under questioning is heard by you [Severian]” (I, 3). While one could easily read this as applying not to the torturers as a whole, but to apprentices and journeymen, for Palaemon goes on “once the journeymen of our guild were deafened” (emphasis added), nevertheless, it seems fairly safe to distinguish the torturers from other parts of the legal process (in Dr. Talos’ play we see both an Inquisitor and a torturer, Severian plays the torturer). If Severian’s comment quoted above can be believed there are at least three levels of judicial power: the people, the Autarch-appointed judges, the Guild. In fact, as another passage shows (that of Morwenna discussed below) there is also the religious arm (a “caloyer,” for Morwenna, or a “hieromonach”-attendent monk in III, 1). The silence of the torturer also emphasises that the confession is not there for the benefit of the torturers, but to produce penitence in the accused, or to produce truth for the authorities (be it judge or priest).
+
+A second example is the name of the guild which Wolfe invents, ie., the Guild of Seekers for Truth and Penitence. Under this name they are practically a guild of confessors; admitting truthfully to your transgressions and being truly penitent. They also provide the necessary authority figure (as Catholic doctrine points out, you cannot confess and be absolved by a layman. This placed the church figure in a position of power and reaffirmed his authority-it made them special in the same way a psychiatrist hears a patient and elicits the truth). Their private zone of torture however has no historical counterpart, unless you count contemporary state executions in the USA-but even here these are witnessed, eg., there are seats for five journalists at every execution in Texas, relatives of both the victim and prisoner regularly attend. Wolfe’s “Guild” is therefore a notable departure from historical practice, which Wolfe seems to accept in the parallel case of private execution which is ordered by the archon of Thrax (III, 4). For this Abdiesus suffers notable guilt and embarrassment due to its departure from the norm.
+
+A third example is the detailed scene involving the torture and execution of Morwenna. Morwenna’s husband, Stachys, and her child Chad have both died from some sickness. She is to be tortured and executed in public (in fact during the height of a country fair). It is worth looking at this incident more fully as it is one of the few scenes given of Severian officially performing his duties.
+
+On the same scaffold is a cattle thief, but Wolfe says almost nothing about his torture, or any others, ducking instead behind a concern that the narrative will be overlong (II, 4). Wolfe is historically accurate however in placing a criminal who has committed a property crime on the scaffold. As more and more wealth was tied up in property, transported around through ports and across the country, stored in warehouses and workshops, so more crimes took place against property. According to one contemporary estimate the port of London lost £500,000 per annum to theft in 1797. Many of these thefts were thought to be committed by the workers themselves (even today the retail industry fights assiduously against “shrinkage” which forms a far larger part of theft than by customers). Consequently new legislation was introduced, as well as more checks (observation and surveillance) upon the workers.
+
+Morwenna is confined, not in a jail (which were uncommon), but down by the river. Severian visits her beforehand and observes another woman, Eusebia, insulting her. Eusebia (Gr. “piety” or “reverence to the gods”) was also in love with the husband, perhaps even before Morwenna (she says Morwenna “stole my Stachys”, II, 4). Severian calls Eusebia “Morwenna’s accuser” (II, 1) although it is interesting that she has “been exposed by the authorities” (II, 4) for poisoning her child and husband.
+
+Severian collects his sword and mask from his room at the inn, and proceeds to the scaffold “at the very center of the festivities” (II, 4). Again, this corresponds with pre-reform practice of the “spectacle of the scaffold.” As I have noted, punishment was a highly visible public practice (unlike imprisonment in later historical time periods). Wolfe correctly places two figures of authority next to the scaffold (besides Severian), a caloyer and the alcalde, or head man of the town. Now, a caloyer is an interesting figure. He is actually a monk (specifically of the Greek Orthodox church) whose name comes the Greek “kalos” beautiful and “geras” old age. A caloyer also attends a whipping administered by Palaemon (IV, 12). So the three figures at the torture are a religious authority, a political authority, and a judicial authority. This again was very typical. This is not to omit the crowd themselves, who were in a real sense, another authority at the scene, and they too verified that the punishment had taken place properly.
+
+As the prayers are finished the prisoner is brought up and given a chance to speak. This last-minute confession or “gallows speech” is part of a historical tradition, which may or may not have been based on real speeches (Foucault says that a lot of them seem highly improbable, with highly dramatic and contrite confessions at the last minute, Foucault, 1977, p. 66). It is also significant that Morwenna is encouraged to speak to “the children” ie., to warn them against turning into a bad person like her. Foucault quotes one improbable gallows speech by a woman which was set down in the mid 18th century: “fathers and mothers who hear me now, watch over your children and teach them well; in my childhood I was a liar and good-for-nothing; I began by stealing a small six-liard knife…” Such speeches, if given, were sure crowd pleasers. Again, Wolfe is tapping into a rich historical vein at this point.
+
+Morwenna actually denies her guilt. She says she has been accused of “horrible things” and that she loved her family. This does little for the crowd, which would prefer a contrite and confessional prisoner. The crowd are actually are more disturbed by Eusebia’s curse as she hands Morwenna a bouquet of flowers. Severian begins the torture by seating Morwenna and taking a branding iron to her cheeks. This iron will have some appropriate letter inscribed upon it; perhaps, if Morwenna is guilty of poison, the letter “P” (regicides in France would be branded with an “R”, a thief with “V” [for voleur] and those who were to be put into forced labor a “T” [for travaux forcés], see Morris & Rothman, 1998, p. 48). Severian mentions some other punishments here too, especially blinding. Amputation of the hands, ears, nose or breasts was also inflicted. These were all roughly the same level of punishment (a middle one between whipping, the least severe, and capital punishment, the most).
+
+Morwenna is in fact to receive that last level of punishment. She is to be beheaded. This would be classified as a “merciful” death, especially as it is done with the “noble” sword. According to the Oxford History (pp. 48-51) the rankings in early modern Europe were as follows:
+
+Whipping and flogging with rope or branches. This is the penalty which had long ago been inflicted on Winnoc, the Pelerine slave, by Palaemon (IV, 12) for stealing. The discussion turns on the relative lack of permanent damage this punishment involved (Winnoc claims he could have walked back to his cell afterwards), and how it successfully served as a deterrant (we might take that discussion with a pinch of salt of course).
+
+Branding with irons or sword.
+
+Mutilation, such as amputation, especially of the ear.
+
+Capital punishment. There were two levels, the “merciful” involving beheading, hanging, garroting and burying alive and
+
+“Prolonged” execution, including burning alive, and breaking on the wheel, followed after death by exposure of the body (eg., on a stake). See Abbott (1994) for a wide variety of methods.
+
+Morwenna receives a harsh punishment, but is ultimately given a “merciful” level death. After the branding (intended to humiliate and mark the body of the condemned with the symbol of authority) her legs are broken. As she totters on the execution block Severian strikes off her head with a horizontal blow (see below).
+
+Right: Contemporary (German?) illustration of a woman’s execution by sword while seated
+
+Severian does not describe what happens to Morwenna’s body but he does for Agilus. “The headless body” says Severian, “must be taken away in a manner dignified yet dishonorable” (I, 31). The body must be secured, and in the case of nobles, yielded to his family.
+
+What were the range of practices performed for confining criminals? As already noted, prisons were a later development in the history of punishment (early 19th century). However, there was a longer history of jails as places for temporary confinement while the prisoner awaited punishment. Wolfe gives us the ultimate expression of this in the antechamber of the House Absolute, a place of temporary confinement used in the distant past, but now forgotten and effectively turned into a prison (II, 14). The antechamber is not juridically all that interesting, except for one notable reason. This is the nocturnal visits by the “young exultants” (II, 18) who come to sport with the prisoners. These exultants have a secret doorway into the chamber, through which they can pass unobserved, whilest at the same time they can observe the prisoners. This ability of the authorities to observe and not be observed marks the entry of a new and fascinating subject in judicial systems, that of surveillance.
+
+Surveillance is of course a central component of regulated punishment (Foucault devotes a whole section of his book to it, where he calls it “panopticism” after the work of prison reformer Jeremy Bentham who promoted surveillant prisons. Pentonville in London was partly inspired by his theories). Surveillance was part of a whole regime of “disciplining” of the body, that is, of control and the putting into power relations of people. During the early 19th century reformers in America suggested a new model of punishment based on confinement in prisons. These prisons would allow the prisoners to be extremely regulated and observed. For example, the model prison in Philadelphia was the Eastern State Penitentiary (built 1829) which inspired what is known as the “separate system”. In this implementation prisoners were confined to their cells without interaction with other prisoners. Even the architecture of the prison reflected the ideals of observation: it consisted of a central rotunda and five radial arms of cell blocks. (The prison still stands today, though it was abandoned in 1971. One may tour the site, and as I write this in October the Halloween celebrations have been installed. For further information and pictures see my Website http://monarch.gsu.edu/jcrampton/foucault/, which provides a link to the official Website and discusses the prison in the light of work by Foucault.) Eastern State is said to have inspired the designs of about 300 prisons worldwide (Johnston, 1994).
+
+The name “penitentiary” also indicates that the prisoner will become “penitent” or sorry for his crimes, and repent (penance, penalty, repent, penal etc. are all related words). Indeed, the architectural design and spatial arrangement of the prison was conceived as a way of implementing the Quaker ideals of leading Philadelphians at the time (such as Roberts Vaux and Caleb Lownes). These men prized self-examination, away from the interruptions of the mundane world, as a way to find “that of God in every man” (George Fox, founder of Quakerism). Solitude can therefore get you more in touch with your inner penitent self. Because it is hard to implement, perpetual surveillance was required (even the heating pipes at Eastern state looped out of each prisoner’s cell and into the corridor so that guards would hear any communication if prisoners banged on the pipes. In practice of course this complete separation was not possible to maintain, and the Philadelphian system was eventually a failure.
+
+The prisons we know today, with each prisoner confined to a cell, or sharing one, has only existed in a systematic way for about two hundred years. It did not arise as a “natural” or undisputed solution. The degree of the separation was a matter of intense controversy in the early 19th century, with the Philadelphian model of complete separation for the entire sentence pitted against the “congregate” system associated with Auburn and Ossining. Prior to this, prisoners would be confined (often only temporarily to await trial) in more communal spaces, such as the antechamber in the House Absolute. Before the prison in Europe, castles were often used, as they were no longer needed for security, and had not yet acquired the historical or antiquarian value they have today.
+
+In another instance of confinement, prisoners might be secured in underground chambers. We see this briefly illustrated in Wolfe by the prison of the magicians, where you enter from above (III, 20). Penitent monks were sometimes confined in underground cells like this (penitence was a state rather than an act, you were a penitent).
+
+Severian gives us his commentary on punishments in III, 3. First, he states very clearly that punishment is a necessity to an ordered society: “no one could feel safe and no one could be safe, and in the end the people would rise up-at first against the thieves and the murderers, and then against anyone who offended the popular ideas of proprietry.” This is the idea of punishment as bulwark against chaos. But Severian recognised two problems with this: who is to be punished, and how? To the first, Severian points out the difficulty of deciding guilt unless it is done by officially appointed judges, for if others were to do it, they would be “setting themselves up as judges over the judges appointed by the Autarch, judges with less training in the law and without authority to call witnesses”. Hence the need for a system of authority to be deployed, an authority held in the hands of a small set of experts rather than the people. To answer the second, Severian suggests and rejects four options: forced labour, imprisonment, equal punishment for all, and exile.
+
+The problem with forced labour is the cost of the guards and restraining equipment, which might otherwise go to pay honest workers. Imprisonment is also problematic because when people are confined “in comfort and without pain” it again will be very costly as it is likely that such prisoners would live a long time. This time Severian points out that the money might be better spent on troops in the war. If all were equally punished this would produce gross inequities, and the punishment would not fit the crime-as the early writers on penology recognised. As for banishment, this might be an option during peace but now during war would surely lead to those who were banished to work for the enemy.
+
+Is Severian convincing? The force of his argument lies not so much in logic as in our ability to find examples of just what he describes. For example, during the Peloponnesian War between Sparta and Athens, after the Spartans had beaten Athens and imposed the rule of the Thirty Tyrants (404-3 BC) a reign of terror existed in Athens. At first informers and obvious criminals were arrested, but soon this extended to political opponents who were tried en mass. During this time too Alcibiades was banished from Athens (415 BC) and worked for Sparta.
+
+Severian finds imprisonment actually the most problematic. He characterises prison as comfortable and painless, a view which today we would find very surprising indeed. For Severian it is a “soft option.” He also cites the high cost of prisons, which we would certainly be able to agree with, but without considering the “benefits” of prisons which today we would be quick to cite, such as removal of dangerous persons from society, the political need for deterrence (cited by both this year’s US Presidential candidates as the only possible reason for capital punishment despite the fact that there is little statistical data to support this position), that prisons are more “humane” than torture and so on.
+
+What is noteworthy in this very informative section is that Severian is not at all concerned with punishment to reform the criminal, but with punishment as the legal retribution for transgression of the rule of law. He expresses throughout TBotNS the position that punishment is necessary in order to stave off disorder and chaos in society (see quote above or at I, 14, where he agrees with the lochage that order and peace are required in society).
+
+By contrast, as we have seen, the early prison reformers, such as Beccaria, Vaux, Bentham, etc. were completely concerned with the penitent prisoner, the one who confessed and was repentent about his sins, or rather with constructing spaces which would produce repentence. To them, prisons were a more humane and advanced method of punishment, free of the barbarities associated with arbitrary trials, torture, and the whims of the monarch. Foucault, of course, disagrees, judging that prisons are just another form for regulating behaviour in those targeted as bad and deviant. For example, after considering at length whether prisoners should be put to work in prisons such as Eastern State, the early reformers clearly decided that they should be (and passed an Act so stating), thus taking advantage of inexpensive and highly controllable labour. The “pure” idea of criminal reform was therefore eclipsed right from the beginning by the state’s desire to exploit those in its power. The judicial system in TBotNS can therefore be very safely dated prior to the prison reform of the mid-18th to early 19th centuries, to a time when torture and confession were the primary means of juridicality. Wolfe chooses to halthis model of juridicality before this development.
+
+Wolfe’s failure to link torture and confession
+
+Since Wolfe follows very closely the juridical practices up to the period of early modern Europe it is more than a little surprising that a major component of that juridical apparatus is omitted, namely the use of torture to elicit confession. This is very strange in such a richly imagined book. Talk of punishment and confession is extremely rare in Wolfe. The major occurrence is in Dr. Talos’ play (II, 24):
+
+“Inquisitor: I now most solemnly adjure you to confess this sin, and if you have so sinned, what power aided you to accomplish it, and the names of those who taught you to call upon that power.
+
+Meschiane: The soldiers only saw I meant no harm, and were afraid for me. I-
+
+Familiar: Silence!
+
+Inquisitor: No weight is given to the protestations of the accused unless they are made under duress. My familiar will prepare you.”
+
+This is a clear equivalency between confession to produce information through torture (“confess…the names of those who taught you”) and that truth is produced only through torture (“No weight is given to the protestations of the accused unless they are made under duress,” the subject cannot just give the names of the accomplices, they have to be validated through a properly elicited confession). This is also remarkably like the Catholic “sacrament of penance” which the Catholic Encyclopedia points out “is a judicial process in which the penitent is at once the accuser, the person accused, and the witness, while the priest pronounces judgment and sentence.” As with gallows speeches, the patient, or sinner in this case, should be truly penitent and there is disappointment if not. Whether one is confessing to an executioner (or torturer) or a priest the relationship is the same, the power relations are the same and the desired effect is the same.
+
+In fact, it emerges that Wolfe situates this example within a laughably incompetant process, which includes mistaken identity, torture of the clearly innocent, and defective equipment. The scene is comedic rather than illustrative of punishment techniques. Furthermore the scene takes place within a play, drawn broadly for a variety of audience members, which acts to further decrease the chances of our taking this seriously. We might enquire therefore why the major scene in Wolfe to overtly link torture and confession is subverted through comedy.
+
+There are only a couple of times Wolfe uses torture in this way, the vast preponderance is on torture for punishment and not to elicit confession. The standout example of this is Thecla’s torture, which she clearly undergoes as punishment for her (remote) association with Vodalus. During her torture she is not asked any questions, nor is any confession sought from her. There is also no evidence that she ever stood trial or was found guilty of any crime. Why does Wolfe do this? I would prefer to leave this as an open question, perhaps for others more familiar with Wolfe than me, and merely to conclude by examining one of the ways that confession has been thought of historically as a positive action. That is, that confession frees. I would suggest that Wolfe wishes to keep confession for this special purpose of emancipation.
+
+The Purpose of Confession
+
+Confession is supposed to be a release, a free circulation of true information:
+
+a. in religion, unburdens you, it is a necessary step for a faithful condition, a union with God. Cath. Enc.: “The grace conferred is deliverance from the guilt of sin and, in the case of mortal sin, from its eternal punishment; hence also reconciliation with God, justification.”
+
+b. it produces true knowledge: “the confession became one of the West’s most highly valued techniques for producing truth” (Foucault, 1978, p. 59).
+
+Does confession free?
+
+Foucault’s analysis of sexuality (Foucault, 1978) indicates that we should be careful with associating “freedom” with information which “wants to be free.” In his keynote discussion of the confession, Foucault shows that it is a mistake to think that confession frees the truth against power’s attempts to silence it: on the contrary truth’s “production is thoroughly imbued with relations of power. The confession is an example of this” (p. 60).[see note 1]
+
+Foucault’s brilliant discussion of the confession proceeded as follows. For Foucault, the arresting concern was to show how truth was produced; in this case through a multiplication of discourses on sex rather than a repression. Foucault doubted what he called the “repressive hypothesis”, that is that following a period of relative openness about sex in the 17th century, the 19th century was marked by repression, rarety of talk about sex, and general lack of acknowledgement. Opposing this, he wanted to argue that in fact sex was very widely discussed; there was a multitude of discourse concerning it, and that furthermore this discourse had the effect of producing truths about sex: he wanted to write the history of “discursive production…of the production of power…of the propagation of knowledge” (p. 12).
+
+Foucault was indeed aware that there had been periods of censorship and repression at different times with regard to sex. This was not the point. What he wanted to cast doubt on was the idea of repression as the means and principle through which to understand the history of sexuality. What he kept returning to, as with his examination of the confession, was the production of discourse and the “will to knowledge” (la volonté de savoir, the book’s original French title).
+
+But Foucault was not just concerned with religious confession, although he cites the codification of confession in the Christian pastoral during the Lateran Council of 1215. The practice of confession is much more widespread. As I noted in the Introduction the 4th Lateran Council merely codified existing practice. Confession was used in family relationships, love, justice, medicine and many more (p. 59), and took many forms, including letters, interrogations, narratives and consultations (p. 63). Foucault does not hesitate to speak of a “great archive” being consituted, and although for a long time this archive “dematerialized as it was formed” and disappeared, soon medicine, psychiatry and pedagogy began to record and use it. Foucault’s point is that ways of finding the truth changed. Previously societies had used accusations which could be defended if enough upstanding people swore you were innocent. By contrast society moved to one where there were tests and inquiries of the evidence (a more “scientific” approach versus throwing people into the water to see if you floated [guilty] or drowned [innocent-the water “accepted” you], the idea being that the water was a metaphor for the flood).
+
+This surfeit of confession marks a transition to new literatures and philosophies concerned with extracting the truth from the depths of oneself: “it seems to us that truth, lodged in our most secret nature, ‘demands’ only to surface; that if it fails to do so, this is because a constraint holds it in place, the violence of a power weighs it down, and it can finally be articulated only at the price of a kind of liberation” (p. 60). It seems, so Foucault says, as if confession frees and power silences. But this is a ruse which is taking us in. On the contrary, truth is “not by nature free-nor error servile-but…its production is thoroughly imbued with relations of power” (p. 60).
+
+Foucault then goes on to document in more specific terms how the confessional discourse on sexuality was scientifically approached. For example, the inducement to speak was clinically codified through questionnaires, hypnosis etc. The method of interpretation was also given a justification as follows: the truth was not latent within the subject just waiting to be revealed through the confession; it was first present but incomplete and “blind to itself” (p. 66) and only secondarily could it be completed by the interlocutor’s abilities to verify, decipher, forgive, and to demand the confession in the first place.
+
+Foucault had earlier discussed how confessions were performed under duress, or even torture in Discipline and Punish (Foucault, 1977). Around the time of the 12th and 13th centuries in Europe confession, the queen of proofs, became the dominant mode of finding the truth in judicial cases (not coincidentally at the same time as the 4th Lateran Council).
+
+Why was torture used for so long in the production of truth in criminal cases (say until the criminal reforms of the late 18th century in Europe)? Again, we can look to the circulation of power to explain this. Torture “revealed truth and showed the operation of power. It assured…the procedure of the investigation on the operation of the confession…it also made the body of the condemned man the place where the vengeance of the sovereign was applied, the anchoring point for a manifestation of power” (Foucault, 1977, p. 55).
+
+The effects of the confession were given a scientific rubric; the confession was not just a documentation of sins, but was adjudged as either normal or pathological, and, if the latter, could be used within therapeutic treatments: the truth could heal (Foucault, 1978, p. 67). It can be seen how this would bring into play the expert, who could act as gatekeeper in a process of normalization. In the case of penal torture, this gave rise to the person of the inquisitor, in the case of psychiatric medicine that of the psychiatrist.
+
+Summary.
+
+The juridical system depicted by Wolfe is mostly that of the pre-reform movement from late medieval to early modern Europe but probably best typified by the 17th and 18th centuries. It includes torture, confinement for holding prisoners (ie., jails not prisons), a system of authority that handed down sentences to be carried out by executioners, validation of truth-seeking through confession and so on. Of course Wolfe is free to mix and match juridical systems from any and all time periods. It is all the more interesting therefore that his system should approximate so closely that of Europe up to the early modern period.
+
+Wolfe’s system of juridicality is clearly prior to that of the reforms suggested by Beccaria, who argued that punishment should be focussed on the reform of the criminal rather than for purposes of vengeance. Clearly, reform is not possible if the criminal is executed. If the criminal is not executed it is not in the interests of public safety to allow them their freedom; hence the development of the prison in the late 18th and early 19th centuries. In Wolfe’s system, there is an absence of such reform, so we can safely date his model as prior to say the mid-18th century.
+
+Nevertheless we can identify one significant departure from this historical development, the more remarkable because so much else does conform to historical event. In Wolfe, confession is highly problematic, not to say, silenced. Historically it underwent a transition from penance to the production of truth and the attendant placement of truth within relations of power. In other words, the development of the prison went hand in hand with the production of the penitent prisoner who confessed his sins and worked on them (similarly for religious confession which also falls within this ambit). By stopping his model of juridicality historically prior to the development of prisons and their penitent function Wolfe again erases the link between confession and punishment. Most critically, we can see that historically, confession has been used to validate one’s individuality by producing a set of discourse about oneself (truthful confession)–one became “authenticated” in the face of power. Historically this took place with the idea that prisoners were “patients” who were ill and in need of a penal “cure” ie., solitude in a penitentiary (giving rise to the need for complex and ubiquitous surveillance). Wolfe avoids this historical designation by choosing to call them “clients”, which again separates the use of torture for a (self-)healing confession. As I have done here we can read Wolfe against Foucault to show that Wolfe privileges confession for reasons of his own.
+
+A second departure from historical practice lies in Wolfe’s invention of a guild of executioners, the Guild of the Seekers for Truth and Penitence. Historically torture was carried out in public, not private. The private zone of torture never occurred historically. Again, Wolfe may have reasons of his own for this.
+
+Finally, we can use Wolfe’s book to discuss the nature of confession. Although we are a “confessing society” now more than ever (think of Jerry Springer, Oprah, “real TV” etc.) we can see that the truth produced through confession is one which operates within power relations. It is a mistake therefore to think that such truth is a “free” one, or that confession frees the deep truth from within you.
+
+Jeremy Crampton, October-December 2000.
+
+“Tenir un discours sur la science fiction ne me séduit pas. D’elle je ne connais rien. Absolument rien. Il ne me vient-et ne me viendra jamais, je le pense-aucun discours” Michel Foucault, 3 June 1977.
+
+Sources
+
+Abbott, G. 1994. The Book of Execution, an Encyclopedia of Methods of Judicial Execution. London: Headline Books.
+
+Catholic Encyclopedia. Online edition. Orig. pub. 1913. .
+
+Encyclopedia Britannica. Online edition.
+
+Foucault, M. 1977. Discipline and Punish. Trans. Alan Sheridan. New York: Vintage Books.
+
+Foucault, M. 1978. The History of Sexuality An Introduction. Volume I of The History of Sexuality. Trans. Robert Hurley. New York: Vintage Books.
+
+Foucault, M. 2001. Fearless Speech. Boston: MIT Press.
+
+Johnston, N. 1994. Eastern State Penitentiary, Crucible of Good Intentions. Philadelphia: The University of Pennsylvania Press.
+
+Morris, N. & Rothman, D.J. (Eds.). 1998. The Oxford History of the Prison. New York: Oxford University Press.
+
+Peters, E. 1985. Torture. New York: Blackwell.
+
+Notes
+
+1. Foucault’s discussion of “parrhesia” or truth-telling is another example. In parrhesia, an ancient Greek conception of speaking the truth to authority, we see Foucault’s concern for the discourses within which truth is constructed. See Foucault, 2001.
+
+Share this:
+
+Share
+
+ Email a link to a friend (Opens in new window)
+ Email
+
+ Share on Facebook (Opens in new window)
+ Facebook
+
+ Share on X (Opens in new window)
+ X
+
+ Share on Tumblr (Opens in new window)
+ Tumblr
+
+Previous
+
+The Reader as Augur: Beginnings and Endings in Gene Wolfe’s The Book of the Long Sun
+
+Next
+
+Harmonies and Mysteries: a review of Gene Wolfe’s On Blue’s Waters
+
+Categorically:
+
+A Solar Labyrinth
+
+Articles
+
+Book Reviews
+
+Featured
+
+Gene Wolfe
+
+Book of the Long Sun
+
+Book of the New Sun
+
+Book of the Short Sun
+
+Fifth Head of Cerberus
+
+Latro (Soldier) novels
+
+Interviews
+
+Latest
+
+News
+
+Shadows of the New Sun
+
+site admin
+
+Wolfeana
+
+Cave Canem
+Robert Borski’s site about the mystery that is the Fifth Head of Cerberus
+
+Sirius Fiction
+Home of Lexicon Urthus, Michael Andre-Driussi, and the forthcoming book about Book of the Long Sun
+
+The URTH mailing list
+Ongoing old-fashioned email discussion of Wolfe, and everything else that is important
+
+Wolfewiki
+A wiki about Gene Wolfe
+
+Search Ultan
+
+Search
+
+Categories
+Categories
+ Select Category
+ A Solar Labyrinth
+ Articles
+ Book Reviews
+ Featured
+ Gene Wolfe
+    Book of the Long Sun
+    Book of the New Sun
+    Book of the Short Sun
+    Fifth Head of Cerberus
+    Latro (Soldier) novels
+ Interviews
+ Latest
+ News
+ Shadows of the New Sun
+ site admin
+
+Wolfeana
+
+Cave Canem
+Robert Borski’s site about the mystery that is the Fifth Head of Cerberus
+
+Sirius Fiction
+Home of Lexicon Urthus, Michael Andre-Driussi, and the forthcoming book about Book of the Long Sun
+
+The URTH mailing list
+Ongoing old-fashioned email discussion of Wolfe, and everything else that is important
+
+Wolfewiki
+A wiki about Gene Wolfe
+
+Categories
+
+A Solar Labyrinth
+
+Articles
+
+Book of the Long Sun
+
+Book of the New Sun
+
+Book of the Short Sun
+
+Book Reviews
+
+Featured
+
+Fifth Head of Cerberus
+
+Gene Wolfe
+
+Interviews
+
+Latest
+
+Latro (Soldier) novels
+
+News
+
+Shadows of the New Sun
+
+site admin
+
+Wolfeana
+
+Cave Canem
+
+Sirius Fiction
+
+The URTH mailing list
+
+Wolfewiki
+
+Meta
+
+Log in
+
+Entries feed
+
+Comments feed
+
+WordPress.org
+
+Powered by WordPress & Theme by Anders Norén
+
+ Loading Comments...
+
+ Write a Comment...
+
+ Email (Required)
+
+ Name (Required)
+
+ Website
+
+

@@ -1,0 +1,401 @@
+ 
+
+ Procedural book generation! | Dr Mark R Johnson 
+
+ About 
+
+ Publications 
+
+ Games 
+
+ Blog 
+
+ Press 
+
+ Speaking 
+
+ Contact 
+
+ CV 
+
+ Dr Mark R Johnson 
+
+ About 
+
+ Publications 
+
+ Games 
+
+ Blog 
+
+ Press 
+
+ Speaking 
+
+ Contact 
+
+ CV 
+
+ Procedural book generation!
+
+ July 27, 2021 Game Design , Ultima Ratio Regum , Updates 
+
+ Hello friends! There is  so much work  I’ve done on 0.9 already I cannot wait to share with you all, but I haven’t yet finished the “0.9 Dev Announcement” blog post, so in the meantime, here is procedural book generation. I am…  incredibly happy with this. Books can be religious books, cult books, philosophy books, novels, history books, records of deaths, language books, and in the future we’ll add two more, nature books and fighting technique books. The colours on the side show the flag colours of the nation of origin (if they are compressed it’s a nomadic nation, if they are separate it is a feudal nation), the books also vary in width and depth and page colours, and the colours are generally informed by the nation’s flags but also sometimes other things. Quality is also reflected (low, medium, high) in various ways; a bookmark shows a scholarly nation; and a line on the spine shows an aesthetic nation. There are billions of permutations. They will appear as items in 0.9 (well on-track for a late 2021 release), and will be readable in 0.10 (aiming for late 2022 release). All (well, most, anyway!) will potentially contain some information about the world and / the hidden items you are looking for, whether explicitly, or through metaphor, or in some other way. Enjoy!
+
+ And another sixteen…
+
+ Post navigation
+
+ 0.9 URRpdate #1: The Next Release 
+
+ Procedural throne generation 
+
+ 12 Comments 
+
+ Felix says: 
+
+ July 27, 2021 at 3:19 am 
+
+ Whoaaa… It must be awesome to be a scholar in your game world.
+
+ Reply 
+
+ Mark R Johnson says: 
+
+ July 27, 2021 at 6:25 am 
+
+ All those books to read…! Must be magical. (Universities are actually one of the final buildings / areas I intend to add at some point soon!)
+
+ Reply 
+
+ Denox says: 
+
+ July 27, 2021 at 6:24 pm 
+
+ Wow! Are there plans to make people’s reactions to the player’s books and knowledge in the future? And what about emotions like in Dwarf Fortress?
+
+ Reply 
+
+ Mark R Johnson says: 
+
+ July 28, 2021 at 12:36 am 
+
+ Thanks Denox! Yes, absolutely, 0.10 (2022) will feature a rehaul of the conversation system to allow for this type of stuff :). (Or possibly 0.9 in 2021 but let’s not get too ambitious…!)
+
+ Reply 
+
+ Taylor V says: 
+
+ July 28, 2021 at 10:26 pm 
+
+ I don’t think I’m supposed to judge a book by its cover… but these are awesome!
+
+I really like the little details you added like the bookmarkers and the colors on the bindings too.
+
+ Reply 
+
+ Mark R Johnson says: 
+
+ July 29, 2021 at 12:02 am 
+
+ Haha, thank you! Yes, a line on the binding means the nation has the “aesthetics” cultural choice and a bookmark means they have the “scholarship” one :).
+
+ Reply 
+
+ crowbar says: 
+
+ July 29, 2021 at 7:32 pm 
+
+ As a librarian, this update delights me immensely! The generated codices look like they’re fairly crackling with hidden secrets. I’m also interested in how the books “will potentially contain some information about the world and / the hidden items you are looking for.” Will you tell us more about the planned URR quest(s) in a future dev update? I seem to recall the original idea having the player investigate some sort of conspiracy that had altered knowledge of the world’s history.
+
+ Reply 
+
+ Mark R Johnson says: 
+
+ July 30, 2021 at 12:27 am 
+
+ Yes, definitely! 0.9 is well on track for a 2019 release, then I’m hoping for 0.10 in 2020… and then maybe 1.0 straight after that?! But yes, more on this soon. That’s still basically the plan, you’re searching out items relating to this conspiracy hidden across the world, and books will be a central part of it :).
+
+ Reply 
+
+ Pavel K says: 
+
+ July 30, 2021 at 12:37 pm 
+
+ Hey Mark! Great update, thanks! Very impressive, scrolls and maps next?
+
+I just wanted to make sure – are you still planning to release 0.8.3 or you will work on it and hold the release until 0.9 is done? Last time you mentioned that you were working on 0.8.3 and 0.9 simultaneously.
+
+ Reply 
+
+ Mark R Johnson says: 
+
+ July 31, 2021 at 12:29 am 
+
+ Thanks Pavel! Oh yes, I have some amazing generated treasure maps to show off :). Yeah, I’m just going to hold 0.8.3 now and call it the earliest dev on 0.9. I’ll be doing a proper 0.9 announcement post either this coming week or the week after, hopefully, then updates about progress. Aiming to release last thing this year!
+
+ Reply 
+
+ DL says: 
+
+ August 2, 2021 at 10:16 pm 
+
+ Wow, you’re actually gonna aim for these to be readable? Just having these generate like this is amazing as it is.
+
+ Reply 
+
+ Mark R Johnson says: 
+
+ August 3, 2021 at 3:46 am 
+
+ Oh heck yes! 0.9 is about trade, currencies, and travel, so “for now” they’re just trade goods; next year all texts will be generated!
+
+ Reply 
+
+ Leave a Reply Cancel reply 
+
+ Your email address will not be published. Required fields are marked * 
+
+ Comment * 
+
+ Name * 
+
+ Email * 
+
+ Website 
+
+ Notify me of follow-up comments by email. 
+
+ Notify me of new posts by email. 
+
+ Δ 
+
+ Recent Posts
+
+ Ultima Ratio Regum 0.11 Update #66: Tutorial Quest Refinement 
+
+ Ultima Ratio Regum 0.11 Update #65: Playable Tutorial Quest!! 
+
+ Ultima Ratio Regum 0.11 Update #64: Total Speech and Conversation Rework 1/2 
+
+ Interlude: Thoughts On Some Cryptic Riddle Quests 
+
+ Ultima Ratio Regum 0.11 Update #63: Picture Clues Generation 1 and Soundtrack News 
+
+ Recent Comments
+
+ Mark R Johnson on Ultima Ratio Regum 0.11 Update #66: Tutorial Quest Refinement 
+
+ crowbar on Ultima Ratio Regum 0.11 Update #66: Tutorial Quest Refinement 
+
+ Mark R Johnson on Ultima Ratio Regum 0.11 Update #66: Tutorial Quest Refinement 
+
+ Mark R Johnson on Ultima Ratio Regum 0.11 Update #65: Playable Tutorial Quest!! 
+
+ Mark R Johnson on Ultima Ratio Regum 0.11 Update #65: Playable Tutorial Quest!! 
+
+ Archives
+
+ August 2026 
+
+ July 2026 
+
+ June 2026 
+
+ May 2026 
+
+ April 2026 
+
+ March 2026 
+
+ February 2026 
+
+ January 2026 
+
+ December 2025 
+
+ November 2025 
+
+ October 2025 
+
+ September 2025 
+
+ August 2025 
+
+ July 2025 
+
+ June 2025 
+
+ May 2025 
+
+ April 2025 
+
+ March 2025 
+
+ February 2025 
+
+ January 2025 
+
+ December 2024 
+
+ November 2024 
+
+ October 2024 
+
+ September 2024 
+
+ August 2024 
+
+ July 2024 
+
+ June 2024 
+
+ May 2024 
+
+ April 2024 
+
+ March 2024 
+
+ February 2024 
+
+ January 2024 
+
+ December 2023 
+
+ November 2023 
+
+ October 2023 
+
+ September 2023 
+
+ August 2023 
+
+ July 2023 
+
+ June 2023 
+
+ May 2023 
+
+ April 2023 
+
+ March 2023 
+
+ February 2023 
+
+ January 2023 
+
+ December 2022 
+
+ November 2022 
+
+ October 2022 
+
+ June 2022 
+
+ March 2022 
+
+ December 2021 
+
+ November 2021 
+
+ October 2021 
+
+ September 2021 
+
+ August 2021 
+
+ July 2021 
+
+ June 2021 
+
+ May 2021 
+
+ April 2021 
+
+ March 2021 
+
+ February 2021 
+
+ January 2021 
+
+ December 2020 
+
+ November 2020 
+
+ October 2020 
+
+ September 2020 
+
+ August 2020 
+
+ May 2020 
+
+ April 2020 
+
+ March 2020 
+
+ January 2020 
+
+ December 2019 
+
+ November 2019 
+
+ October 2019 
+
+ September 2019 
+
+ August 2019 
+
+ July 2019 
+
+ June 2019 
+
+ May 2019 
+
+ April 2019 
+
+ March 2019 
+
+ February 2019 
+
+ January 2019 
+
+ August 2018 
+
+ May 2017 
+
+ January 2017 
+
+ November 2016 
+
+ July 2014 
+
+ Categories
+
+ Academic 
+
+ Commentary 
+
+ Game Design 
+
+ Ultima Ratio Regum 
+
+ Uncategorized 
+
+ Updates 
+
+ Meta
+
+ Log in 
+
+ Entries feed 
+
+ Comments feed 
+
+ WordPress.org 
+
+ © 2026 Dr Mark R Johnson All Rights Reserved.
+
+ Designed by NERDcloud 
+
+ 
