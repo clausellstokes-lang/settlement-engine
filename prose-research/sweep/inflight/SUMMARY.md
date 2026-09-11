@@ -1,12 +1,13 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-11 15:14:35 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-11 15:20:36 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
 | ? | other |  | result | 0 | — | — | 15:13:09 |
 | ? | other |  | result | 0 | — | — | 19:13:11 |
 | ? | other |  | failed | 0 | — | — | 15:29:21 |
+| ? | other |  | in-flight | 0 | — | — | 19:20:23 |
 | ? | other |  | failed | 0 | — | — | 15:29:20 |
-| ? | other |  | in-flight | 0 | — | — | 19:14:35 |
+| ? | other |  | in-flight | 0 | — | — | 19:20:23 |
 | ? | other |  | failed | 0 | — | — | 15:29:18 |
 | ? | other |  | failed | 0 | — | — | 15:29:18 |
 | ? | other |  | result | 0 | — | — | 15:22:32 |
@@ -16,7 +17,7 @@
 | ? | other |  | result | 0 | — | — | 15:12:50 |
 | ? | other |  | failed | 0 | — | — | 15:28:10 |
 | ? | other |  | failed | 0 | — | — | 15:28:09 |
-| ? | other |  | in-flight | 0 | — | — | 19:13:42 |
+| ? | other |  | result | 0 | — | — | 19:15:18 |
 | ? | other |  | result | 0 | skeleton.md | — | 15:21:30 |
 | ? | other |  | failed | 0 | — | — | 15:28:07 |
 | ? | other |  | failed | 0 | — | — | 15:29:16 |
@@ -27,7 +28,7 @@
 | ? | other |  | failed | 0 | — | — | 15:28:08 |
 | ? | other |  | failed | 0 | — | — | 15:29:21 |
 | ? | other |  | failed | 0 | — | — | 15:29:18 |
-| ? | other |  | in-flight | 0 | skeleton.md | — | 19:13:59 |
+| ? | other |  | result | 0 | skeleton.md | — | 19:16:25 |
 | ? | other |  | failed | 0 | — | — | 15:29:18 |
 | ? | other |  | failed | 0 | — | — | 15:29:19 |
 | ? | other |  | result | 0 | — | — | 15:24:29 |
@@ -39,14 +40,15 @@
 | ? | other |  | failed | 0 | — | — | 15:29:17 |
 | ? | other |  | failed | 0 | — | — | 15:29:19 |
 | ? | other |  | failed | 0 | — | — | 15:29:18 |
-| ? | other |  | in-flight | 0 | — | — | 19:14:35 |
+| ? | other |  | in-flight | 0 | — | — | 19:20:23 |
 | ? | other |  | failed | 0 | — | — | 15:29:18 |
+| ? | other |  | in-flight | 0 | — | — | 19:20:23 |
 | ? | other |  | result | 0 | — | — | 19:14:35 |
 | ? | other |  | failed | 0 | — | — | 15:29:18 |
 | ? | other |  | failed | 0 | — | — | 15:29:18 |
 | ? | other |  | failed | 0 | — | — | 15:28:16 |
 | ? | other |  | failed | 0 | — | — | 15:29:17 |
-| ? | other |  | in-flight | 0 | — | — | 19:14:32 |
+| ? | other |  | in-flight | 0 | — | — | 19:20:23 |
 | ? | other |  | failed | 0 | — | — | 15:28:07 |
 | ? | other |  | result | 0 | — | — | 15:12:57 |
 | ? | other |  | result | 0 | — | — | 15:20:01 |
@@ -64,7 +66,7 @@
 | ? | other |  | result | 0 | skeleton.md | — | 15:14:28 |
 | ? | other |  | result | 0 | — | — | 19:13:59 |
 | ? | other |  | failed | 0 | — | — | 15:29:18 |
-| ? | other |  | in-flight | 0 | — | — | 19:14:26 |
+| ? | other |  | in-flight | 0 | — | — | 19:20:23 |
 | ? | other |  | failed | 0 | — | — | 15:29:19 |
 | ? | other |  | failed | 0 | — | — | 15:29:19 |
 | ? | other |  | failed | 0 | — | — | 15:29:17 |
