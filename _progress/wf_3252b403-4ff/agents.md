@@ -1,4 +1,4 @@
-# wf_3252b403-4ff — per-agent progress, 2026-09-11 17:21:17
+# wf_3252b403-4ff — per-agent progress, 2026-09-11 17:27:00
     - `a92fbb493` SURVEYOR defense · RETRIED (a later attempt on the same key runs) · transcript 09-11 05:36 966 KB · 94 tool calls · files: $SP/annex-def1-6.txt, $SP/annex-def7-10.txt, $SP/annex-def11.txt, $SP/annex-def-all.txt
     - `a258758c8` SURVEYOR general · RETRIED (a later attempt on the same key runs) · transcript 09-11 05:36 1034 KB · 88 tool calls · files: $D/_gen_annex.txt, general.referent.survey.md
     - `aedcb6855` SURVEYOR economy · RETRIED (a later attempt on the same key runs) · transcript 09-11 05:36 946 KB · 95 tool calls
