@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-11 10:22:00 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-11 10:28:01 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -27,7 +27,7 @@
 | ? | other |  | result | 0 | warFaith.referent.refute.md | — | 14:18:26 |
 | ? | other |  | failed | 0 | — | — | 10:25:06 |
 | ? | other |  | result | 0 | — | — | 14:20:27 |
-| ? | other |  | in-flight | 0 | — | — | 14:21:21 |
+| ? | other |  | in-flight | 0 | — | — | 14:25:58 |
 | ? | other |  | failed | 0 | — | — | 10:26:25 |
 | ? | other |  | in-flight | 0 | _partA.md, _partB.md | — | 09:36:53 |
 | ? | other |  | result | 0 | _partC.md, _partD.md, _partE.md, _partF.md, _partG.md | — | 10:02:59 |
