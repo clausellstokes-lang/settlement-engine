@@ -3,19 +3,19 @@
  "name": null,
  "angle": null,
  "tag": null,
- "lines": 58,
+ "lines": 144,
  "firstTs": "2026-09-11T10:20:32.137Z",
- "lastTs": "2026-09-11T10:21:34.157Z",
+ "lastTs": "2026-09-11T10:25:02.502Z",
  "tools": {
-  "Bash": 8,
+  "Bash": 24,
   "Read": 2
  },
  "urlsFetched": [],
  "filesWritten": [],
- "lastAssistantText": "I have the survey whole. I'll create the packet file now (checkpoint law), then batch the dock verification reads.",
+ "lastAssistantText": "You've hit your session limit · resets 10am (America/New_York)",
  "run": "wf_6508cb77-d97",
  "agent": "ac5e0574e98d361ec",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/4ed79a2b-6cd2-45cf-ab97-83cdad49c30b/subagents/workflows/wf_6508cb77-d97/agent-ac5e0574e98d361ec.jsonl",
- "journal": "in-flight",
+ "journal": "failed",
  "checkpointFile": null
 }
