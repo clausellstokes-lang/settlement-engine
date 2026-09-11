@@ -1,0 +1,76 @@
+§909 CAR 4: the seven negative assertions the whole-suite proof counted are anchored — each absence now stands on a liveness anchor that travels its own code path
+
+The chair's whole-suite proof at d58b489b8 found one unpredicted red:
+tests/lint/negativeAssertionAnchor.walker.test.js, arm "no NEW un-anchored negative
+assertion anywhere in the test corpus", counted seven bare negatives that cars 1–3 of this
+lane introduced into tests/soak-harness/tripwireRegistry.test.js (lines 471, 472, 518, 519,
+590, 723, 724; frozen ceiling 0 — no soak-harness file holds a row in either roster). The
+walker was right in the way that matters here: every one of the seven sits inside a
+RECONSTRUCTION CONTROL, and a control whose negative can go vacuous proves the cure against
+the cure. All seven are anchored through tests/helpers/anchoredNegatives.js; no inline
+`// anchored:` marker was used, because a live sibling exists at every site and the helper
+is the stronger form. This is the same class car 5 of §907 cured in this file, and the
+anchors below are chosen the same way — the sibling that would vanish under the same drift.
+
+  :471, :472 — 'yearlyPopulations' / 'yearlyDiedFlags' absent from
+    receiptWriterFields(legacyWriter), anchored by 'finalPopulations' / 'finalDiedFlags'.
+    Each anchor is the excluded key's own FINAL-state sibling: same object literal in
+    scripts/audit/whole-world-soak.mjs, same read. Measured on the reconstruction: 41 keys,
+    both anchors present, neither series key present. The `legacyWriter.length <
+    WRITER_SOURCE.length` check above catches a replace that matched NOTHING; these catch a
+    READ that returned nothing, which is the other half and was uncovered.
+
+  :518, :519 — 'realmDemography' / 'motion' absent from nestedWriterFields(legacyObserver)
+    on the BOTH-BLINDED control, anchored by 'realmSelfSufficiency' and by
+    'motionRenamedForControl'. The two anchors deliberately catch different vacuities.
+    `realmSelfSufficiency` ships one line ABOVE `realmDemography` in the observer's own
+    literal (behavioral-observation.mjs:1058/:1059) through the same CONDITIONAL SHORTHAND
+    SPREAD branch of literalKeysFrom — the exact branch car 2 measured blind — so a scanner
+    that stopped reading spreads reds here instead of reporting a deletion it never made.
+    `motionRenamedForControl` is the renamed twin itself, and it closes a real hole: the
+    rename LENGTHENS the source, so the length check could not prove it matched, and a dead
+    rename regex would have left 'motion' present and the negative silently false.
+    Measured: 78 keys on the blinded observer, both anchors present, neither member present.
+
+  :590 — 'realmDemography' absent from nestedWriterFields(legacyObserver) on the pre-P4
+    control, anchored by 'realmSelfSufficiency' for the same spread-branch reason.
+    'motion' was the other candidate and was refused: it is a plain `key: {` and would
+    survive the one drift this anchor exists to catch.
+
+  :723, :724 — '0.0025' absent from codeOnly(OBSERVER_SOURCE) and
+    codeOnly(ENVELOPE_SUITE_SOURCE), anchored by 'MOTION_FLOOR_01' — the identifier that
+    REPLACED the literal in car 3's lift. The helper's contract admits a string collection
+    (assertContainable accepts typeof 'string'), so no marker was needed. A bare "no 0.0025
+    here" is equally true of a file that went missing, a path that never resolved, and a
+    comment-stripper that ate the code with the comments; measured, MOTION_FLOOR_01 survives
+    codeOnly in both sources because it is live code, so each absence now stands on a source
+    proved readable.
+
+NEGATIVE CONTROL, because an anchor that cannot fail anchors nothing. Each of the seven
+anchors was broken in turn (the sibling renamed to a non-existent key) and the file re-run:
+all seven red with the helper's LIVENESS ANCHOR message, exit 1, seven for seven. The file
+was then restored from a copy taken before the probe and `diff` is clean; both gates were
+re-run at the committed bytes.
+
+NO TITLE MOVES. it()/test() titles 11 before and 11 after; describe() 1 and 1; the title
+lines are byte-identical under diff. The lighting census stays at its predicted 23664.
+
+Test bytes only: no product file, no fixture, no threshold, no golden, no register cell. No
+same-seed output moves. No assertion was weakened or deleted — the seven negatives all
+survive inside the helper, each now preceded by a positive that must hold first.
+
+Gate: GATE_MUTEX_TIER=shared sh scripts/gate-mutex.sh --run -- npx vitest run
+tests/soak-harness/tripwireRegistry.test.js --maxWorkers=2 -> exit 0, Test Files 1 passed
+(1), Tests 11 passed (11). Same form for
+tests/lint/negativeAssertionAnchor.walker.test.js -> exit 0, Test Files 1 passed (1), Tests
+9 passed (9) — up from 1 failed | 8 passed (9) at the chair's proof. The walker's scan read
+directly: this file 7 -> 0, no tests/soak-harness file offending at all. npx eslint on the
+file -> exit 0, zero bytes of output.
+
+REFUSAL WITH A MEASUREMENT: the dispatched command was refused by the mutex itself —
+"gate-mutex: SHARED tier REFUSED — the command declares no worker cap", exit 2. The shared
+tier admits a run only because it cannot saturate the box (gate-mutex.sh:34-36), so
+--maxWorkers=2 was added and every run above carries it.
+
+Seat: Opus 5 — Fable-unvalidated
+Lane: SOAK-HONEST-909

@@ -1,0 +1,65 @@
+§913 car 12: three em dashes leave three why-strings in densityCreateBoundary.js — the Tier-2 voice ratchet's per-file debt returns to its banked ceiling
+
+THE RED. The composed-tip gate reds at test:ratchet with "BANKED-ROW MAGNITUDE
+REFUSED — a permitted red may not GROW". The banked row is tests/copy/
+voiceMechanics.test.js :: E2 "per-file debt exactly matches the baseline"; its
+measure [files-over-baseline] read 3 against a frozen ceiling of 2. The ceiling
+cannot be raised, so the cure is to cut the population. The third file was this
+consist's own: src/domain/density/densityCreateBoundary.js went baseline em:0
+bang:0 -> current em:3 bang:0. The other two over-baseline files (labelBands.js
++5, generalStateProse.js +3) are pre-existing and banked, and stay.
+
+The E2 walker scans STRING LITERALS in src/data and src/domain (comments are not
+counted). Measured with the test's own stringLiteralContents idiom (espree, same
+Literal/TemplateLiteral visit, same /—/g count): em=3 bang=0 before, em=0 bang=0
+after, with "literals scanned: 70" both times, so no literal was added or
+removed. Comments keep their dashes and were not touched.
+
+WHAT CHANGED. Punctuation only, in three concatenated why-string chunks. No word
+removed, no figure altered, no digit added, no exclamation mark introduced, no
+factual claim shortened.
+
+1. PIPELINE_REACHERS['src/store/settlementGenerateAction.js'].why
+   before: 'state.config — the Library\'s "Apply Saved Configuration & Regenerate" runs '
+   after:  'state.config: the Library\'s "Apply Saved Configuration & Regenerate" runs '
+2. the same why
+   before: 'updateConfig admits the whole underscore family by prefix — so what keeps this '
+   after:  'updateConfig admits the whole underscore family by prefix. So what keeps this '
+3. GENERATION_LAWS.livingContent.why
+   before: 'emitted dist file changing SIZE (658 of 1,377 changed BYTES — the entry chunk\'s hash '
+   after:  'emitted dist file changing SIZE (658 of 1,377 changed BYTES: the entry chunk\'s hash '
+
+MEASUREMENTS.
+
+(a) npx vitest run tests/copy/voiceMechanics.test.js — the E2 per-file arm still
+FAILS, as it must (it is banked and the other two files remain), but it now names
+exactly TWO files and no longer names densityCreateBoundary.js:
+
+    src/domain/display/labelBands.js: baseline em:0 bang:0 → current em:5 bang:0
+    src/domain/display/stateProse/generalStateProse.js: baseline em:0 bang:0 → current em:3 bang:0
+    : expected [ …(2) ] to deeply equal []
+
+     Test Files  1 failed (1)
+          Tests  1 failed | 18 passed (19)
+
+(b) every test that reads or imports the file (grep -rlE densityCreateBoundary
+tests/), run one at a time, both green:
+
+    tests/lint/densityCreateBoundary.walker.test.js   14 passed (14)
+    tests/domain/livingContentLawWiring.test.js       12 passed (12)
+
+No assertion needed updating. The L-MAT consist's recorded claim that the walker
+length-checks why and does not read its content is VERIFIED: its only three why
+assertions are .length floors (line 247 > 40 for PIPELINE_REACHERS rows, lines
+427 and 435 > 60 for GENERATION_LAWS rows), and both changed strings stay many
+hundreds of characters long. livingContentLawWiring.test.js's two hits on this
+wording (lines 203, 418) are inside // comments, not assertions.
+
+check-test-ratchet.mjs was NOT run here (it holds the gate mutex); the chair
+re-runs the ratchet and the gate. The whole suite was not run.
+
+Receipt: $SC/receipt-913-car12.md
+
+Seat: Opus 5 — Fable-unvalidated
+Lane: L-MAT-FIX
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>

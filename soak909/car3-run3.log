@@ -1,0 +1,76 @@
+
+ RUN  v4.1.11 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/laneB6
+
+ ❯ tests/soak-harness/tripwireRegistry.test.js (11 tests | 3 failed) 27ms
+     × each DETERMINISTIC row fires on its own defect, and only on its own 9ms
+     × a row keyed on an ABSENT field is NOT-EXECUTABLE and names the field — it never answers [] 1ms
+     × NO ROW MAY KEY ON A FIELD THE RECEIPT WRITER DOES NOT WRITE — the class, banked and shrink-only 6ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/soak-harness/tripwireRegistry.test.js > the tripwire registry > each DETERMINISTIC row fires on its own defect, and only on its own
+AssertionError: expected [ { …(3) } ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   {
++     "class": "deterministic",
++     "id": "capacity_envelope_30y",
++     "reason": "requires receipt.behavioral.yearly[last].motion — absent from this receipt",
++   },
++ ]
+
+ ❯ tests/soak-harness/tripwireRegistry.test.js:262:54
+    260|     // third channel is empty, so this `[]` is a measurement rather th…
+    261|     // same assertion reported for three weeks.
+    262|     expect(evaluateTripwires(settled).notExecutable).toEqual([]);
+       |                                                      ^
+    263|   });
+    264|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  tests/soak-harness/tripwireRegistry.test.js > the tripwire registry > a row keyed on an ABSENT field is NOT-EXECUTABLE and names the field — it never answers []
+ReferenceError: MOTION_REASON is not defined
+ ❯ tests/soak-harness/tripwireRegistry.test.js:291:70
+    289|       // …and the FOURTH at car 3, on the same reading: a receipt with…
+    290|       // measured nothing about the envelope, and the row now says whi…
+    291|       { id: 'capacity_envelope_30y', class: 'deterministic', reason: M…
+       |                                                                      ^
+    292|     ]);
+    293|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/soak-harness/tripwireRegistry.test.js > the tripwire registry > NO ROW MAY KEY ON A FIELD THE RECEIPT WRITER DOES NOT WRITE — the class, banked and shrink-only
+AssertionError: expected [ 'capacity_plateau', …(2) ] to deeply equal [ 'capacity_plateau', …(3) ]
+
+- Expected
++ Received
+
+  [
+    "capacity_plateau",
+    "capacity_floor_thaw",
+    "capacity_realm_load",
+-   "capacity_envelope_30y",
+  ]
+
+ ❯ tests/soak-harness/tripwireRegistry.test.js:505:8
+    503|     expect(legacyObserver.length).toBeLessThan(OBSERVER_SOURCE.length);
+    504|     expect(convictedBy(tripwireFieldReach(TRIPWIRES, legacyWriter, leg…
+    505|       .toEqual(declaresRequires);
+       |        ^
+    506|
+    507|     // ⛔ THE THIRD ROW, REFUSED WITH A MEASUREMENT. A walker that read…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed | 8 passed (11)
+   Start at  03:35:10
+   Duration  196ms (transform 46ms, setup 28ms, import 45ms, tests 27ms, environment 0ms)
+

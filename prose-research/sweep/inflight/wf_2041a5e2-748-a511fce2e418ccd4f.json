@@ -1,0 +1,20 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 92,
+ "firstTs": "2026-09-09T22:22:27.436Z",
+ "lastTs": "2026-09-09T22:33:58.570Z",
+ "tools": {
+  "Bash": 22
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "the shipped narrowing-margin trajectory being history without an event-provenance field.\n\n**Also flagged:** the packet uses `defense` (annex-measured 125 vs `defence` 6, R-DA-22); the sibling `readiness ADEQUATE` packet writes `defence` throughout, so one of the two must move before the block lands.",
+ "run": "wf_2041a5e2-748",
+ "agent": "a511fce2e418ccd4f",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/67af10e4-7386-48d4-8cd3-b2985d4885c2/subagents/workflows/wf_2041a5e2-748/agent-a511fce2e418ccd4f.jsonl",
+ "journal": "result",
+ "checkpointFile": null
+}

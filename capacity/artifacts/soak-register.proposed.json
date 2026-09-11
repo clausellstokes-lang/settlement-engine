@@ -1,0 +1,138 @@
+{
+  "kind": "soak_register_proposal",
+  "registerVersion": 1,
+  "cellKey": "research-lit-4s/research-lit-4s-300y-4s-seed1",
+  "identity": {
+    "seed": "realm-scale-research-lit-4s-300y-4s-seed1",
+    "years": 300,
+    "settlements": 4,
+    "lighting": {
+      "demographicsEnabled": true
+    },
+    "receiptSchemaVersion": 5,
+    "settlementIds": [
+      "soak-a",
+      "soak-b",
+      "soak-c",
+      "soak-d"
+    ]
+  },
+  "figures": {
+    "realm.runawayCount": {
+      "value": 0,
+      "direction": "shrink"
+    },
+    "realm.flooredCount": {
+      "value": 0,
+      "direction": "shrink"
+    },
+    "realm.unlawfulZeroCount": {
+      "value": 0,
+      "direction": "shrink"
+    },
+    "realm.bifurcated": {
+      "value": 0,
+      "direction": "shrink"
+    },
+    "realm.ratio": {
+      "value": 0.5625801135323201,
+      "direction": "band",
+      "band": 0.25
+    },
+    "liveness.minDistinctTypesPerDecade": {
+      "value": 17,
+      "direction": "floor"
+    },
+    "liveness.minEventsPerSettlementDecade": {
+      "value": 271.5,
+      "direction": "floor"
+    },
+    "liveness.minHashMovesPerDecade": {
+      "value": 10,
+      "direction": "floor"
+    },
+    "liveness.silentDecades": {
+      "value": 0,
+      "direction": "shrink"
+    },
+    "liveness.frozenDecades": {
+      "value": 0,
+      "direction": "shrink"
+    },
+    "bytes.maxRealmBytes": {
+      "value": 2902602,
+      "direction": "band",
+      "band": 0.1
+    },
+    "cost.peakHeapUsedBytes": {
+      "value": 509407024,
+      "direction": "ceiling",
+      "ceiling": 838860800
+    },
+    "cost.primaryMs": {
+      "value": 762290,
+      "direction": "report"
+    },
+    "population.soak-a.shape": {
+      "value": "other",
+      "direction": "exact"
+    },
+    "population.soak-a.final": {
+      "value": 10869,
+      "direction": "band",
+      "band": 0.1
+    },
+    "population.soak-b.shape": {
+      "value": "other",
+      "direction": "exact"
+    },
+    "population.soak-b.final": {
+      "value": 1017,
+      "direction": "band",
+      "band": 0.1
+    },
+    "population.soak-c.shape": {
+      "value": "other",
+      "direction": "exact"
+    },
+    "population.soak-c.final": {
+      "value": 244,
+      "direction": "band",
+      "band": 0.1
+    },
+    "population.soak-d.shape": {
+      "value": "other",
+      "direction": "exact"
+    },
+    "population.soak-d.final": {
+      "value": 159,
+      "direction": "band",
+      "band": 0.1
+    },
+    "bytes.realmBytesAtYear.100": {
+      "value": 2502773,
+      "direction": "band",
+      "band": 0.1
+    },
+    "bytes.realmBytesAtYear.200": {
+      "value": 2836494,
+      "direction": "band",
+      "band": 0.1
+    },
+    "bytes.realmBytesAtYear.300": {
+      "value": 2779110,
+      "direction": "band",
+      "band": 0.1
+    }
+  },
+  "shapes": {
+    "soak-a": "other",
+    "soak-b": "other",
+    "soak-c": "other",
+    "soak-d": "other"
+  },
+  "mintRefusals": [
+    "a deterministic-class tripwire fired — the run is not clean"
+  ],
+  "proposedAt": "2026-09-07T04:35:54.236Z"
+}

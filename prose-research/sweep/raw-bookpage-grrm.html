@@ -1,0 +1,1455 @@
+<!doctype html>
+<html lang="en-US">
+<head><meta charset="UTF-8"><script>if(navigator.userAgent.match(/MSIE|Internet Explorer/i)||navigator.userAgent.match(/Trident\/7\..*?rv:11/i)){var href=document.location.href;if(!href.match(/[?&]nowprocket/)){if(href.indexOf("?")==-1){if(href.indexOf("#")==-1){document.location.href=href+"?nowprocket=1"}else{document.location.href=href.replace("#","?nowprocket=1#")}}else{if(href.indexOf("#")==-1){document.location.href=href+"&nowprocket=1"}else{document.location.href=href.replace("#","&nowprocket=1#")}}}}</script><script>(()=>{class RocketLazyLoadScripts{constructor(){this.v="2.0.5",this.userEvents=["keydown","keyup","mousedown","mouseup","mousemove","mouseover","mouseout","touchmove","touchstart","touchend","touchcancel","wheel","click","dblclick","input"],this.attributeEvents=["onblur","onclick","oncontextmenu","ondblclick","onfocus","onmousedown","onmouseenter","onmouseleave","onmousemove","onmouseout","onmouseover","onmouseup","onmousewheel","onscroll","onsubmit"]}async t(){this.i(),this.o(),/iP(ad|hone)/.test(navigator.userAgent)&&this.h(),this.u(),this.l(this),this.m(),this.k(this),this.p(this),this._(),await Promise.all([this.R(),this.L()]),this.lastBreath=Date.now(),this.S(this),this.P(),this.D(),this.O(),this.M(),await this.C(this.delayedScripts.normal),await this.C(this.delayedScripts.defer),await this.C(this.delayedScripts.async),await this.T(),await this.F(),await this.j(),await this.A(),window.dispatchEvent(new Event("rocket-allScriptsLoaded")),this.everythingLoaded=!0,this.lastTouchEnd&&await new Promise(t=>setTimeout(t,500-Date.now()+this.lastTouchEnd)),this.I(),this.H(),this.U(),this.W()}i(){this.CSPIssue=sessionStorage.getItem("rocketCSPIssue"),document.addEventListener("securitypolicyviolation",t=>{this.CSPIssue||"script-src-elem"!==t.violatedDirective||"data"!==t.blockedURI||(this.CSPIssue=!0,sessionStorage.setItem("rocketCSPIssue",!0))},{isRocket:!0})}o(){window.addEventListener("pageshow",t=>{this.persisted=t.persisted,this.realWindowLoadedFired=!0},{isRocket:!0}),window.addEventListener("pagehide",()=>{this.onFirstUserAction=null},{isRocket:!0})}h(){let t;function e(e){t=e}window.addEventListener("touchstart",e,{isRocket:!0}),window.addEventListener("touchend",function i(o){o.changedTouches[0]&&t.changedTouches[0]&&Math.abs(o.changedTouches[0].pageX-t.changedTouches[0].pageX)<10&&Math.abs(o.changedTouches[0].pageY-t.changedTouches[0].pageY)<10&&o.timeStamp-t.timeStamp<200&&(window.removeEventListener("touchstart",e,{isRocket:!0}),window.removeEventListener("touchend",i,{isRocket:!0}),"INPUT"===o.target.tagName&&"text"===o.target.type||(o.target.dispatchEvent(new TouchEvent("touchend",{target:o.target,bubbles:!0})),o.target.dispatchEvent(new MouseEvent("mouseover",{target:o.target,bubbles:!0})),o.target.dispatchEvent(new PointerEvent("click",{target:o.target,bubbles:!0,cancelable:!0,detail:1,clientX:o.changedTouches[0].clientX,clientY:o.changedTouches[0].clientY})),event.preventDefault()))},{isRocket:!0})}q(t){this.userActionTriggered||("mousemove"!==t.type||this.firstMousemoveIgnored?"keyup"===t.type||"mouseover"===t.type||"mouseout"===t.type||(this.userActionTriggered=!0,this.onFirstUserAction&&this.onFirstUserAction()):this.firstMousemoveIgnored=!0),"click"===t.type&&t.preventDefault(),t.stopPropagation(),t.stopImmediatePropagation(),"touchstart"===this.lastEvent&&"touchend"===t.type&&(this.lastTouchEnd=Date.now()),"click"===t.type&&(this.lastTouchEnd=0),this.lastEvent=t.type,t.composedPath&&t.composedPath()[0].getRootNode()instanceof ShadowRoot&&(t.rocketTarget=t.composedPath()[0]),this.savedUserEvents.push(t)}u(){this.savedUserEvents=[],this.userEventHandler=this.q.bind(this),this.userEvents.forEach(t=>window.addEventListener(t,this.userEventHandler,{passive:!1,isRocket:!0})),document.addEventListener("visibilitychange",this.userEventHandler,{isRocket:!0})}U(){this.userEvents.forEach(t=>window.removeEventListener(t,this.userEventHandler,{passive:!1,isRocket:!0})),document.removeEventListener("visibilitychange",this.userEventHandler,{isRocket:!0}),this.savedUserEvents.forEach(t=>{(t.rocketTarget||t.target).dispatchEvent(new window[t.constructor.name](t.type,t))})}m(){const t="return false",e=Array.from(this.attributeEvents,t=>"data-rocket-"+t),i="["+this.attributeEvents.join("],[")+"]",o="[data-rocket-"+this.attributeEvents.join("],[data-rocket-")+"]",s=(e,i,o)=>{o&&o!==t&&(e.setAttribute("data-rocket-"+i,o),e["rocket"+i]=new Function("event",o),e.setAttribute(i,t))};new MutationObserver(t=>{for(const n of t)"attributes"===n.type&&(n.attributeName.startsWith("data-rocket-")||this.everythingLoaded?n.attributeName.startsWith("data-rocket-")&&this.everythingLoaded&&this.N(n.target,n.attributeName.substring(12)):s(n.target,n.attributeName,n.target.getAttribute(n.attributeName))),"childList"===n.type&&n.addedNodes.forEach(t=>{if(t.nodeType===Node.ELEMENT_NODE)if(this.everythingLoaded)for(const i of[t,...t.querySelectorAll(o)])for(const t of i.getAttributeNames())e.includes(t)&&this.N(i,t.substring(12));else for(const e of[t,...t.querySelectorAll(i)])for(const t of e.getAttributeNames())this.attributeEvents.includes(t)&&s(e,t,e.getAttribute(t))})}).observe(document,{subtree:!0,childList:!0,attributeFilter:[...this.attributeEvents,...e]})}I(){this.attributeEvents.forEach(t=>{document.querySelectorAll("[data-rocket-"+t+"]").forEach(e=>{this.N(e,t)})})}N(t,e){const i=t.getAttribute("data-rocket-"+e);i&&(t.setAttribute(e,i),t.removeAttribute("data-rocket-"+e))}k(t){Object.defineProperty(HTMLElement.prototype,"onclick",{get(){return this.rocketonclick||null},set(e){this.rocketonclick=e,this.setAttribute(t.everythingLoaded?"onclick":"data-rocket-onclick","this.rocketonclick(event)")}})}S(t){function e(e,i){let o=e[i];e[i]=null,Object.defineProperty(e,i,{get:()=>o,set(s){t.everythingLoaded?o=s:e["rocket"+i]=o=s}})}e(document,"onreadystatechange"),e(window,"onload"),e(window,"onpageshow");try{Object.defineProperty(document,"readyState",{get:()=>t.rocketReadyState,set(e){t.rocketReadyState=e},configurable:!0}),document.readyState="loading"}catch(t){console.log("WPRocket DJE readyState conflict, bypassing")}}l(t){this.originalAddEventListener=EventTarget.prototype.addEventListener,this.originalRemoveEventListener=EventTarget.prototype.removeEventListener,this.savedEventListeners=[],EventTarget.prototype.addEventListener=function(e,i,o){o&&o.isRocket||!t.B(e,this)&&!t.userEvents.includes(e)||t.B(e,this)&&!t.userActionTriggered||e.startsWith("rocket-")||t.everythingLoaded?t.originalAddEventListener.call(this,e,i,o):(t.savedEventListeners.push({target:this,remove:!1,type:e,func:i,options:o}),"mouseenter"!==e&&"mouseleave"!==e||t.originalAddEventListener.call(this,e,t.savedUserEvents.push,o))},EventTarget.prototype.removeEventListener=function(e,i,o){o&&o.isRocket||!t.B(e,this)&&!t.userEvents.includes(e)||t.B(e,this)&&!t.userActionTriggered||e.startsWith("rocket-")||t.everythingLoaded?t.originalRemoveEventListener.call(this,e,i,o):t.savedEventListeners.push({target:this,remove:!0,type:e,func:i,options:o})}}J(t,e){this.savedEventListeners=this.savedEventListeners.filter(i=>{let o=i.type,s=i.target||window;return e!==o||t!==s||(this.B(o,s)&&(i.type="rocket-"+o),this.$(i),!1)})}H(){EventTarget.prototype.addEventListener=this.originalAddEventListener,EventTarget.prototype.removeEventListener=this.originalRemoveEventListener,this.savedEventListeners.forEach(t=>this.$(t))}$(t){t.remove?this.originalRemoveEventListener.call(t.target,t.type,t.func,t.options):this.originalAddEventListener.call(t.target,t.type,t.func,t.options)}p(t){let e;function i(e){return t.everythingLoaded?e:e.split(" ").map(t=>"load"===t||t.startsWith("load.")?"rocket-jquery-load":t).join(" ")}function o(o){function s(e){const s=o.fn[e];o.fn[e]=o.fn.init.prototype[e]=function(){return this[0]===window&&t.userActionTriggered&&("string"==typeof arguments[0]||arguments[0]instanceof String?arguments[0]=i(arguments[0]):"object"==typeof arguments[0]&&Object.keys(arguments[0]).forEach(t=>{const e=arguments[0][t];delete arguments[0][t],arguments[0][i(t)]=e})),s.apply(this,arguments),this}}if(o&&o.fn&&!t.allJQueries.includes(o)){const e={DOMContentLoaded:[],"rocket-DOMContentLoaded":[]};for(const t in e)document.addEventListener(t,()=>{e[t].forEach(t=>t())},{isRocket:!0});o.fn.ready=o.fn.init.prototype.ready=function(i){function s(){parseInt(o.fn.jquery)>2?setTimeout(()=>i.bind(document)(o)):i.bind(document)(o)}return"function"==typeof i&&(t.realDomReadyFired?!t.userActionTriggered||t.fauxDomReadyFired?s():e["rocket-DOMContentLoaded"].push(s):e.DOMContentLoaded.push(s)),this},s("on"),s("one"),s("off"),t.allJQueries.push(o)}e=o}t.allJQueries=[],o(window.jQuery),Object.defineProperty(window,"jQuery",{get:()=>e,set(t){o(t)}})}P(){const t=new Map;document.write=document.writeln=function(e){const i=document.currentScript,o=document.createRange(),s=i.parentElement;let n=t.get(i);void 0===n&&(n=i.nextSibling,t.set(i,n));const c=document.createDocumentFragment();o.setStart(c,0),c.appendChild(o.createContextualFragment(e)),s.insertBefore(c,n)}}async R(){return new Promise(t=>{this.userActionTriggered?t():this.onFirstUserAction=t})}async L(){return new Promise(t=>{document.addEventListener("DOMContentLoaded",()=>{this.realDomReadyFired=!0,t()},{isRocket:!0})})}async j(){return this.realWindowLoadedFired?Promise.resolve():new Promise(t=>{window.addEventListener("load",t,{isRocket:!0})})}M(){this.pendingScripts=[];this.scriptsMutationObserver=new MutationObserver(t=>{for(const e of t)e.addedNodes.forEach(t=>{"SCRIPT"!==t.tagName||!t.src||t.noModule||t.isWPRocket||this.pendingScripts.push({script:t,promise:new Promise(e=>{const i=()=>{const i=this.pendingScripts.findIndex(e=>e.script===t);i>=0&&this.pendingScripts.splice(i,1),e()};t.addEventListener("load",i,{isRocket:!0}),t.addEventListener("error",i,{isRocket:!0}),setTimeout(i,1e3)})})})}),this.scriptsMutationObserver.observe(document,{childList:!0,subtree:!0})}async F(){await this.X(),this.pendingScripts.length?(await this.pendingScripts[0].promise,await this.F()):this.scriptsMutationObserver.disconnect()}D(){this.delayedScripts={normal:[],async:[],defer:[]},document.querySelectorAll("script[type$=rocketlazyloadscript]").forEach(t=>{t.hasAttribute("data-rocket-src")?t.hasAttribute("async")&&!1!==t.async?this.delayedScripts.async.push(t):t.hasAttribute("defer")&&!1!==t.defer||"module"===t.getAttribute("data-rocket-type")?this.delayedScripts.defer.push(t):this.delayedScripts.normal.push(t):this.delayedScripts.normal.push(t)})}async _(){await this.L();let t=[];document.querySelectorAll("script[type$=rocketlazyloadscript][data-rocket-src]").forEach(e=>{let i=e.getAttribute("data-rocket-src");if(i&&!i.startsWith("data:")){i.startsWith("//")&&(i=location.protocol+i);try{const o=new URL(i).origin;o!==location.origin&&t.push({src:o,crossOrigin:e.crossOrigin||"module"===e.getAttribute("data-rocket-type")})}catch(t){}}}),t=[...new Map(t.map(t=>[JSON.stringify(t),t])).values()],this.Y(t,"preconnect")}async G(t){if(await this.K(),!0!==t.noModule||!("noModule"in HTMLScriptElement.prototype))return new Promise(e=>{let i;function o(){(i||t).setAttribute("data-rocket-status","executed"),e()}try{if(navigator.userAgent.includes("Firefox/")||""===navigator.vendor||this.CSPIssue)i=document.createElement("script"),[...t.attributes].forEach(t=>{let e=t.nodeName;"type"!==e&&("data-rocket-type"===e&&(e="type"),"data-rocket-src"===e&&(e="src"),i.setAttribute(e,t.nodeValue))}),t.text&&(i.text=t.text),t.nonce&&(i.nonce=t.nonce),i.hasAttribute("src")?(i.addEventListener("load",o,{isRocket:!0}),i.addEventListener("error",()=>{i.setAttribute("data-rocket-status","failed-network"),e()},{isRocket:!0}),setTimeout(()=>{i.isConnected||e()},1)):(i.text=t.text,o()),i.isWPRocket=!0,t.parentNode.replaceChild(i,t);else{const i=t.getAttribute("data-rocket-type"),s=t.getAttribute("data-rocket-src");i?(t.type=i,t.removeAttribute("data-rocket-type")):t.removeAttribute("type"),t.addEventListener("load",o,{isRocket:!0}),t.addEventListener("error",i=>{this.CSPIssue&&i.target.src.startsWith("data:")?(console.log("WPRocket: CSP fallback activated"),t.removeAttribute("src"),this.G(t).then(e)):(t.setAttribute("data-rocket-status","failed-network"),e())},{isRocket:!0}),s?(t.fetchPriority="high",t.removeAttribute("data-rocket-src"),t.src=s):t.src="data:text/javascript;base64,"+window.btoa(unescape(encodeURIComponent(t.text)))}}catch(i){t.setAttribute("data-rocket-status","failed-transform"),e()}});t.setAttribute("data-rocket-status","skipped")}async C(t){const e=t.shift();return e?(e.isConnected&&await this.G(e),this.C(t)):Promise.resolve()}O(){this.Y([...this.delayedScripts.normal,...this.delayedScripts.defer,...this.delayedScripts.async],"preload")}Y(t,e){this.trash=this.trash||[];let i=!0;var o=document.createDocumentFragment();t.forEach(t=>{const s=t.getAttribute&&t.getAttribute("data-rocket-src")||t.src;if(s&&!s.startsWith("data:")){const n=document.createElement("link");n.href=s,n.rel=e,"preconnect"!==e&&(n.as="script",n.fetchPriority=i?"high":"low"),t.getAttribute&&"module"===t.getAttribute("data-rocket-type")&&(n.crossOrigin=!0),t.crossOrigin&&(n.crossOrigin=t.crossOrigin),t.integrity&&(n.integrity=t.integrity),t.nonce&&(n.nonce=t.nonce),o.appendChild(n),this.trash.push(n),i=!1}}),document.head.appendChild(o)}W(){this.trash.forEach(t=>t.remove())}async T(){try{document.readyState="interactive"}catch(t){}this.fauxDomReadyFired=!0;try{await this.K(),this.J(document,"readystatechange"),document.dispatchEvent(new Event("rocket-readystatechange")),await this.K(),document.rocketonreadystatechange&&document.rocketonreadystatechange(),await this.K(),this.J(document,"DOMContentLoaded"),document.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this.K(),this.J(window,"DOMContentLoaded"),window.dispatchEvent(new Event("rocket-DOMContentLoaded"))}catch(t){console.error(t)}}async A(){try{document.readyState="complete"}catch(t){}try{await this.K(),this.J(document,"readystatechange"),document.dispatchEvent(new Event("rocket-readystatechange")),await this.K(),document.rocketonreadystatechange&&document.rocketonreadystatechange(),await this.K(),this.J(window,"load"),window.dispatchEvent(new Event("rocket-load")),await this.K(),window.rocketonload&&window.rocketonload(),await this.K(),this.allJQueries.forEach(t=>t(window).trigger("rocket-jquery-load")),await this.K(),this.J(window,"pageshow");const t=new Event("rocket-pageshow");t.persisted=this.persisted,window.dispatchEvent(t),await this.K(),window.rocketonpageshow&&window.rocketonpageshow({persisted:this.persisted})}catch(t){console.error(t)}}async K(){Date.now()-this.lastBreath>45&&(await this.X(),this.lastBreath=Date.now())}async X(){return document.hidden?new Promise(t=>setTimeout(t)):new Promise(t=>requestAnimationFrame(t))}B(t,e=window){return e===document&&"readystatechange"===t||(e===document&&"DOMContentLoaded"===t||(e===window&&"DOMContentLoaded"===t||(e===window&&"load"===t||e===window&&"pageshow"===t)))}static run(){(new RocketLazyLoadScripts).t()}}RocketLazyLoadScripts.run()})();
+</script>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="profile" href="https://gmpg.org/xfn/11">
+	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+<meta name="robots" content="noai, noimageai" /><script type="text/rocketlazyloadscript" id="cookieyes" data-rocket-type="text/javascript" data-rocket-src="https://cdn-cookieyes.com/client_data/67f23d91df56739df0ba2fe82206b604/script.js" data-rocket-defer defer></script>
+<!-- Google Tag Manager for WordPress by gtm4wp.com -->
+<script data-cfasync="false" data-pagespeed-no-defer>
+	var gtm4wp_datalayer_name = "dataLayer";
+	var dataLayer = dataLayer || [];
+</script>
+<!-- End Google Tag Manager for WordPress by gtm4wp.com -->		<script type="text/rocketlazyloadscript">
+		(function(){
+			window.ecsSchemeConfig={systemAuto:false,darkLogoUrl:""};
+			var m=document.cookie.match(/(?:^|;\s*)ecs_color_scheme=([^;]+)/);
+			if(m&&m[1]==='alt'){
+				document.documentElement.setAttribute('data-ecs-scheme','alt');
+			}else if(!m&&false){
+				if(window.matchMedia&&window.matchMedia('(prefers-color-scheme:dark)').matches){
+					document.documentElement.setAttribute('data-ecs-scheme','alt');
+				}
+			}
+		})();
+		</script>
+		
+	<!-- This site is optimized with the Yoast SEO plugin v28.4 - https://yoast.com/product/yoast-seo-wordpress/ -->
+	<title>George R.R. Martin: History is written in blood</title>
+<link data-rocket-prefetch href="https://connect.facebook.net" rel="dns-prefetch">
+<link data-rocket-prefetch href="https://www.google-analytics.com" rel="dns-prefetch">
+<link data-rocket-prefetch href="https://www.googletagmanager.com" rel="dns-prefetch">
+<link data-rocket-prefetch href="https://use.typekit.net" rel="dns-prefetch">
+<link data-rocket-prefetch href="https://assets.bookpage.com" rel="dns-prefetch">
+<link data-rocket-prefetch href="https://t1.bookpage.com" rel="dns-prefetch">
+<link data-rocket-prefetch href="https://tag.simpli.fi" rel="dns-prefetch">
+<link data-rocket-prefetch href="https://stats.wp.com" rel="dns-prefetch"><link rel="preload" data-rocket-preload as="image" href="https://t1.bookpage.com/wp-content/uploads/2021/08/24174719/large-21221.jpg" imagesrcset="https://t1.bookpage.com/wp-content/uploads/2021/08/24174719/large-21221.jpg 400w, https://t1.bookpage.com/wp-content/uploads/2021/08/24174719/large-21221-201x300.jpg 201w" imagesizes="(max-width: 400px) 100vw, 400px" fetchpriority="high">
+	<link rel="canonical" href="https://www.bookpage.com/interviews/17465-george-r-r-martin-fiction/" />
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="George R.R. Martin: History is written in blood" />
+	<meta property="og:description" content="Without question, Tolkien set the standard for worldbuilding. Readers of epic fantasy aren’t content with a few generations of kings mentioned in some measly footnotes; they want a world so vast and detailed that it could be real. With Tolkien’s template in mind, George R.R. Martin addresses fans’ demands for a truly epic history. While [&hellip;]" />
+	<meta property="og:url" content="https://www.bookpage.com/interviews/17465-george-r-r-martin-fiction/" />
+	<meta property="og:site_name" content="BookPage | Discover your next great book!" />
+	<meta property="article:publisher" content="https://www.facebook.com/readbookpage/" />
+	<meta property="article:published_time" content="2014-11-13T01:40:57+00:00" />
+	<meta property="article:modified_time" content="2022-09-23T13:39:14+00:00" />
+	<meta property="og:image" content="https://bp5-assets-2.s3.us-east-2.amazonaws.com/wp-content/uploads/2021/08/24174719/large-21221.jpg" />
+	<meta property="og:image:width" content="400" />
+	<meta property="og:image:height" content="598" />
+	<meta property="og:image:type" content="image/jpeg" />
+	<meta name="author" content="Cat Acree" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:creator" content="@bookpage" />
+	<meta name="twitter:site" content="@bookpage" />
+	<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https:\/\/schema.org","@graph":[{"@type":"Article","@id":"https:\/\/www.bookpage.com\/interviews\/17465-george-r-r-martin-fiction\/#article","isPartOf":{"@id":"https:\/\/www.bookpage.com\/interviews\/17465-george-r-r-martin-fiction\/"},"author":[{"@id":"https:\/\/www.bookpage.com\/#\/schema\/person\/052871182a2a386350a17efa265ef6c4"}],"headline":"George R.R. Martin: History is written in blood","datePublished":"2014-11-13T01:40:57+00:00","dateModified":"2022-09-23T13:39:14+00:00","mainEntityOfPage":{"@id":"https:\/\/www.bookpage.com\/interviews\/17465-george-r-r-martin-fiction\/"},"wordCount":884,"publisher":{"@id":"https:\/\/www.bookpage.com\/#organization"},"image":{"@id":"https:\/\/www.bookpage.com\/interviews\/17465-george-r-r-martin-fiction\/#primaryimage"},"thumbnailUrl":"https:\/\/t1.bookpage.com\/wp-content\/uploads\/2021\/08\/24174719\/large-21221.jpg","articleSection":["Interview"],"inLanguage":"en-US"},{"@type":"WebPage","@id":"https:\/\/www.bookpage.com\/interviews\/17465-george-r-r-martin-fiction\/","url":"https:\/\/www.bookpage.com\/interviews\/17465-george-r-r-martin-fiction\/","name":"George R.R. Martin: History is written in blood","isPartOf":{"@id":"https:\/\/www.bookpage.com\/#website"},"primaryImageOfPage":{"@id":"https:\/\/www.bookpage.com\/interviews\/17465-george-r-r-martin-fiction\/#primaryimage"},"image":{"@id":"https:\/\/www.bookpage.com\/interviews\/17465-george-r-r-martin-fiction\/#primaryimage"},"thumbnailUrl":"https:\/\/t1.bookpage.com\/wp-content\/uploads\/2021\/08\/24174719\/large-21221.jpg","datePublished":"2014-11-13T01:40:57+00:00","dateModified":"2022-09-23T13:39:14+00:00","breadcrumb":{"@id":"https:\/\/www.bookpage.com\/interviews\/17465-george-r-r-martin-fiction\/#breadcrumb"},"inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https:\/\/www.bookpage.com\/interviews\/17465-george-r-r-martin-fiction\/"]}]},{"@type":"ImageObject","inLanguage":"en-US","@id":"https:\/\/www.bookpage.com\/interviews\/17465-george-r-r-martin-fiction\/#primaryimage","url":"https:\/\/t1.bookpage.com\/wp-content\/uploads\/2021\/08\/24174719\/large-21221.jpg","contentUrl":"https:\/\/t1.bookpage.com\/wp-content\/uploads\/2021\/08\/24174719\/large-21221.jpg","width":400,"height":598},{"@type":"BreadcrumbList","@id":"https:\/\/www.bookpage.com\/interviews\/17465-george-r-r-martin-fiction\/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https:\/\/www.bookpage.com\/"},{"@type":"ListItem","position":2,"name":"George R.R. Martin: History is written in blood"}]},{"@type":"WebSite","@id":"https:\/\/www.bookpage.com\/#website","url":"https:\/\/www.bookpage.com\/","name":"BookPage | Discover your next great book!","description":"Find expert book recommendations for the best books to read in all genres","publisher":{"@id":"https:\/\/www.bookpage.com\/#organization"},"potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https:\/\/www.bookpage.com\/?s={search_term_string}"},"query-input":{"@type":"PropertyValueSpecification","valueRequired":true,"valueName":"search_term_string"}}],"inLanguage":"en-US"},{"@type":"Organization","@id":"https:\/\/www.bookpage.com\/#organization","name":"BookPage","url":"https:\/\/www.bookpage.com\/","logo":{"@type":"ImageObject","inLanguage":"en-US","@id":"https:\/\/www.bookpage.com\/#\/schema\/logo\/image\/","url":"https:\/\/t1.bookpage.com\/wp-content\/uploads\/2021\/07\/10161812\/BP_Logo_Black.png","contentUrl":"https:\/\/t1.bookpage.com\/wp-content\/uploads\/2021\/07\/10161812\/BP_Logo_Black.png","width":1200,"height":322,"caption":"BookPage"},"image":{"@id":"https:\/\/www.bookpage.com\/#\/schema\/logo\/image\/"},"sameAs":["https:\/\/www.facebook.com\/readbookpage\/","https:\/\/x.com\/bookpage","https:\/\/www.instagram.com\/readbookpage\/","https:\/\/www.youtube.com\/channel\/UCMNmFvHwpV0wcQmWqY0gXPw","https:\/\/bsky.app\/profile\/readbookpage.bsky.social"]},{"@type":"Person","@id":"https:\/\/www.bookpage.com\/#\/schema\/person\/052871182a2a386350a17efa265ef6c4","name":"Cat Acree","image":{"@type":"ImageObject","inLanguage":"en-US","@id":"https:\/\/secure.gravatar.com\/avatar\/71811357d1f8009c16c68baecdc05b9ff6f9addd735cb6caeee4533b55355ffd?s=96&d=mm&r=g8445409a91eac73a4ecd24f6fe6f9965","url":"https:\/\/secure.gravatar.com\/avatar\/71811357d1f8009c16c68baecdc05b9ff6f9addd735cb6caeee4533b55355ffd?s=96&d=mm&r=g","contentUrl":"https:\/\/secure.gravatar.com\/avatar\/71811357d1f8009c16c68baecdc05b9ff6f9addd735cb6caeee4533b55355ffd?s=96&d=mm&r=g","caption":"Cat Acree"},"url":"https:\/\/www.bookpage.com\/contributor\/cat-acree\/"}]}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+
+<link rel="alternate" type="application/rss+xml" title="BookPage | Discover your next great book! &raquo; Feed" href="https://www.bookpage.com/feed/" />
+<link rel="alternate" title="oEmbed (JSON)" type="application/json+oembed" href="https://www.bookpage.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.bookpage.com%2Finterviews%2F17465-george-r-r-martin-fiction%2F" />
+<link rel="alternate" title="oEmbed (XML)" type="text/xml+oembed" href="https://www.bookpage.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.bookpage.com%2Finterviews%2F17465-george-r-r-martin-fiction%2F&#038;format=xml" />
+<link rel="stylesheet" type="text/css" href="https://use.typekit.net/wqe2pma.css"><style id="wp-img-auto-sizes-contain-inline-css">
+img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
+/*# sourceURL=wp-img-auto-sizes-contain-inline-css */
+</style>
+<style id="wp-emoji-styles-inline-css">
+
+	img.wp-smiley, img.emoji {
+		display: inline !important;
+		border: none !important;
+		box-shadow: none !important;
+		height: 1em !important;
+		width: 1em !important;
+		margin: 0 0.07em !important;
+		vertical-align: -0.1em !important;
+		background: none !important;
+		padding: 0 !important;
+	}
+/*# sourceURL=wp-emoji-styles-inline-css */
+</style>
+<style id="wp-block-library-inline-css">
+:root{--wp-block-synced-color:#7a00df;--wp-block-synced-color--rgb:122,0,223;--wp-bound-block-color:var(--wp-block-synced-color);--wp-editor-canvas-background:#ddd;--wp-admin-theme-color:#007cba;--wp-admin-theme-color--rgb:0,124,186;--wp-admin-theme-color-darker-10:#006ba1;--wp-admin-theme-color-darker-10--rgb:0,107,160.5;--wp-admin-theme-color-darker-20:#005a87;--wp-admin-theme-color-darker-20--rgb:0,90,135;--wp-admin-border-width-focus:2px}@media (min-resolution:192dpi){:root{--wp-admin-border-width-focus:1.5px}}.wp-element-button{cursor:pointer}:root .has-very-light-gray-background-color{background-color:#eee}:root .has-very-dark-gray-background-color{background-color:#313131}:root .has-very-light-gray-color{color:#eee}:root .has-very-dark-gray-color{color:#313131}:root .has-vivid-green-cyan-to-vivid-cyan-blue-gradient-background{background:linear-gradient(135deg,#00d084,#0693e3)}:root .has-purple-crush-gradient-background{background:linear-gradient(135deg,#34e2e4,#4721fb 50%,#ab1dfe)}:root .has-hazy-dawn-gradient-background{background:linear-gradient(135deg,#faaca8,#dad0ec)}:root .has-subdued-olive-gradient-background{background:linear-gradient(135deg,#fafae1,#67a671)}:root .has-atomic-cream-gradient-background{background:linear-gradient(135deg,#fdd79a,#004a59)}:root .has-nightshade-gradient-background{background:linear-gradient(135deg,#330968,#31cdcf)}:root .has-midnight-gradient-background{background:linear-gradient(135deg,#020381,#2874fc)}:root{--wp--preset--font-size--normal:16px;--wp--preset--font-size--huge:42px}.has-regular-font-size{font-size:1em}.has-larger-font-size{font-size:2.625em}.has-normal-font-size{font-size:var(--wp--preset--font-size--normal)}.has-huge-font-size{font-size:var(--wp--preset--font-size--huge)}:root .has-text-align-center{text-align:center}:root .has-text-align-left{text-align:left}:root .has-text-align-right{text-align:right}.has-fit-text{white-space:nowrap!important}#end-resizable-editor-section{display:none}.aligncenter{clear:both}.items-justified-left{justify-content:flex-start}.items-justified-center{justify-content:center}.items-justified-right{justify-content:flex-end}.items-justified-space-between{justify-content:space-between}.screen-reader-text{word-wrap:normal!important;border:0;clip-path:inset(50%);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;word-break:normal!important}.screen-reader-text:focus{background-color:#ddd;clip-path:none;color:#444;display:block;font-size:1em;height:auto;left:5px;line-height:normal;padding:15px 23px 14px;text-decoration:none;top:5px;width:auto;z-index:100000}html :where(.has-border-color){border-style:solid}html :where([style^=border-color],[style*=";border-color"],[style*="; border-color"]){border-style:solid}html :where([style^=border-top-color],[style*=";border-top-color"],[style*="; border-top-color"]){border-top-style:solid}html :where([style^=border-right-color],[style*=";border-right-color"],[style*="; border-right-color"]){border-right-style:solid}html :where([style^=border-bottom-color],[style*=";border-bottom-color"],[style*="; border-bottom-color"]){border-bottom-style:solid}html :where([style^=border-left-color],[style*=";border-left-color"],[style*="; border-left-color"]){border-left-style:solid}html :where([style^=border-width],[style*=";border-width"],[style*="; border-width"]){border-style:solid}html :where([style^=border-top-width],[style*=";border-top-width"],[style*="; border-top-width"]){border-top-style:solid}html :where([style^=border-right-width],[style*=";border-right-width"],[style*="; border-right-width"]){border-right-style:solid}html :where([style^=border-bottom-width],[style*=";border-bottom-width"],[style*="; border-bottom-width"]){border-bottom-style:solid}html :where([style^=border-left-width],[style*=";border-left-width"],[style*="; border-left-width"]){border-left-style:solid}html :where(img[class*=wp-image-]){height:auto;max-width:100%}:where(figure){margin:0 0 1em}html :where(.is-position-sticky){--wp-admin--admin-bar--position-offset:var(--wp-admin--admin-bar--height,0px)}@media screen and (max-width:600px){html :where(.is-position-sticky){--wp-admin--admin-bar--position-offset:0px}}
+/*# sourceURL=/wp-includes/css/dist/block-library/common.min.css */
+</style>
+<style id="wp-block-styles-placeholder-inline-css">
+:root { --wp-internal-comment: "Placeholder for wp_hoist_late_printed_styles() to replace with the block styles printed at wp_footer." }
+/*# sourceURL=wp-block-styles-placeholder-inline-css */
+</style>
+<link rel='stylesheet' id='jet-engine-frontend-css' href='https://assets.bookpage.com/wp-content/plugins/jet-engine/assets/css/frontend.css?ver=3.8.14.3' media='all' />
+<style id="wp-global-styles-placeholder-inline-css">
+:root { --wp-internal-comment: "Placeholder for wp_hoist_late_printed_styles() to replace with the global-styles printed at wp_footer." }
+/*# sourceURL=wp-global-styles-placeholder-inline-css */
+</style>
+<link rel='stylesheet' id='dce-style-css' href='https://assets.bookpage.com/wp-content/plugins/dynamic-content-for-elementor/assets/css/style.min.css?ver=3.4.13' media='all' />
+<link rel='stylesheet' id='dce-dynamic-visibility-css' href='https://assets.bookpage.com/wp-content/plugins/dynamic-content-for-elementor/assets/css/dynamic-visibility.min.css?ver=3.4.13' media='all' />
+<link rel='stylesheet' id='hello-elementor-css' href='https://assets.bookpage.com/wp-content/themes/hello-elementor/assets/css/reset.css?ver=3.5.1' media='all' />
+<link rel='stylesheet' id='hello-elementor-theme-style-css' href='https://assets.bookpage.com/wp-content/themes/hello-elementor/assets/css/theme.css?ver=3.5.1' media='all' />
+<link rel='stylesheet' id='hello-elementor-header-footer-css' href='https://assets.bookpage.com/wp-content/themes/hello-elementor/assets/css/header-footer.css?ver=3.5.1' media='all' />
+<link rel='stylesheet' id='ecs-color-scheme-css' href='https://assets.bookpage.com/wp-content/plugins/ele-custom-skin/modules/color-scheme/assets/css/ecs-color-scheme.min.css?ver=4.3.11' media='all' />
+<link rel='stylesheet' id='ecs-container-layout-css' href='https://assets.bookpage.com/wp-content/plugins/ele-custom-skin/modules/container-layout/assets/css/ecs-container-layout.min.css?ver=4.3.11' media='all' />
+<link rel='stylesheet' id='swiper-css' href='https://assets.bookpage.com/wp-content/plugins/elementor/assets/lib/swiper/v8/css/swiper.min.css?ver=8.4.5' media='all' />
+<link rel='stylesheet' id='e-swiper-css' href='https://assets.bookpage.com/wp-content/plugins/elementor/assets/css/conditionals/e-swiper.min.css?ver=4.2.4' media='all' />
+<link rel='stylesheet' id='ecs-mobile-menu-css' href='https://assets.bookpage.com/wp-content/plugins/ele-custom-skin/modules/mobile-menu/assets/css/ecs-mobile-menu.min.css?ver=4.3.11' media='all' />
+<link rel='stylesheet' id='ecs-editorial-text-css' href='https://assets.bookpage.com/wp-content/plugins/ele-custom-skin/modules/editorial-text/assets/css/ecs-editorial-text.min.css?ver=4.3.11' media='all' />
+<link rel='stylesheet' id='ecs-scheme-selector-css' href='https://assets.bookpage.com/wp-content/plugins/ele-custom-skin-pro/assets/css/ecs-scheme-selector.css?ver=4.2.2' media='all' />
+<link rel='stylesheet' id='elementor-frontend-css' href='https://assets.bookpage.com/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=4.2.4' media='all' />
+<link rel='stylesheet' id='widget-social-icons-css' href='https://assets.bookpage.com/wp-content/plugins/elementor/assets/css/widget-social-icons.min.css?ver=4.2.4' media='all' />
+<link rel='stylesheet' id='e-apple-webkit-css' href='https://assets.bookpage.com/wp-content/plugins/elementor/assets/css/conditionals/apple-webkit.min.css?ver=4.2.4' media='all' />
+<link rel='stylesheet' id='widget-image-css' href='https://assets.bookpage.com/wp-content/plugins/elementor/assets/css/widget-image.min.css?ver=4.2.4' media='all' />
+<link rel='stylesheet' id='widget-search-css' href='https://assets.bookpage.com/wp-content/plugins/elementor-pro/assets/css/widget-search.min.css?ver=4.2.3' media='all' />
+<link rel='stylesheet' id='widget-nav-menu-css' href='https://assets.bookpage.com/wp-content/plugins/elementor-pro/assets/css/widget-nav-menu.min.css?ver=4.2.3' media='all' />
+<link rel='stylesheet' id='e-animation-pop-css' href='https://assets.bookpage.com/wp-content/plugins/elementor/assets/lib/animations/styles/e-animation-pop.min.css?ver=4.2.4' media='all' />
+<link rel='stylesheet' id='widget-heading-css' href='https://assets.bookpage.com/wp-content/plugins/elementor/assets/css/widget-heading.min.css?ver=4.2.4' media='all' />
+<link rel='stylesheet' id='widget-share-buttons-css' href='https://assets.bookpage.com/wp-content/plugins/elementor-pro/assets/css/widget-share-buttons.min.css?ver=4.2.3' media='all' />
+<link rel='stylesheet' id='elementor-icons-shared-0-css' href='https://assets.bookpage.com/wp-content/plugins/elementor/assets/lib/font-awesome/css/fontawesome.min.css?ver=5.15.3' media='all' />
+<link rel='stylesheet' id='elementor-icons-fa-solid-css' href='https://assets.bookpage.com/wp-content/plugins/elementor/assets/lib/font-awesome/css/solid.min.css?ver=5.15.3' media='all' />
+<link rel='stylesheet' id='elementor-icons-fa-brands-css' href='https://assets.bookpage.com/wp-content/plugins/elementor/assets/lib/font-awesome/css/brands.min.css?ver=5.15.3' media='all' />
+<link rel='stylesheet' id='widget-posts-css' href='https://assets.bookpage.com/wp-content/plugins/elementor-pro/assets/css/widget-posts.min.css?ver=4.2.3' media='all' />
+<link rel='stylesheet' id='elementor-icons-css' href='https://assets.bookpage.com/wp-content/plugins/elementor/assets/lib/eicons/css/elementor-icons.min.css?ver=5.53.0' media='all' />
+<link rel='stylesheet' id='elementor-post-57-css' href='https://assets.bookpage.com/wp-content/uploads/elementor/css/post-57.css?ver=1788498312' media='all' />
+<link rel='stylesheet' id='uael-frontend-css' href='https://assets.bookpage.com/wp-content/plugins/ultimate-elementor/assets/min-css/uael-frontend.min.css?ver=1.45.4' media='all' />
+<link rel='stylesheet' id='uael-teammember-social-icons-css' href='https://assets.bookpage.com/wp-content/plugins/elementor/assets/css/widget-social-icons.min.css?ver=3.24.0' media='all' />
+<link rel='stylesheet' id='uael-social-share-icons-brands-css' href='https://assets.bookpage.com/wp-content/plugins/elementor/assets/lib/font-awesome/css/brands.css?ver=5.15.3' media='all' />
+<link rel='stylesheet' id='uael-social-share-icons-fontawesome-css' href='https://assets.bookpage.com/wp-content/plugins/elementor/assets/lib/font-awesome/css/fontawesome.css?ver=5.15.3' media='all' />
+<link rel='stylesheet' id='uael-nav-menu-icons-css' href='https://assets.bookpage.com/wp-content/plugins/elementor/assets/lib/font-awesome/css/solid.css?ver=5.15.3' media='all' />
+<link rel='stylesheet' id='elementor-post-156381-css' href='https://assets.bookpage.com/wp-content/uploads/elementor/css/post-156381.css?ver=1788498313' media='all' />
+<link rel='stylesheet' id='elementor-post-71-css' href='https://assets.bookpage.com/wp-content/uploads/elementor/css/post-71.css?ver=1788498313' media='all' />
+<link rel='stylesheet' id='elementor-post-140-css' href='https://assets.bookpage.com/wp-content/uploads/elementor/css/post-140.css?ver=1788498322' media='all' />
+<link rel='stylesheet' id='pd-bookpage-style-css-css' href='https://assets.bookpage.com/wp-content/plugins/px_bookpages/style.css?ver=1788696825' media='all' />
+<style id="elementor-pro-custom-fonts-inline-css">
+@font-face {
+	font-family: 'Gelica Regular';
+	font-style: normal;
+	font-weight: normal;
+	font-display: auto;
+	src: url('https://assets.bookpage.com/wp-content/uploads/2026/02/Gelica-Regular.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'Gelica Italic';
+	font-style: normal;
+	font-weight: normal;
+	font-display: auto;
+	src: url('https://assets.bookpage.com/wp-content/uploads/2026/02/Gelica-Italic.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'UtopiaStd Capt';
+	font-style: normal;
+	font-weight: normal;
+	font-display: auto;
+	src: url('https://assets.bookpage.com/wp-content/uploads/2021/07/UtopiaStd-Capt.woff2') format('woff2'),
+		url('https://assets.bookpage.com/wp-content/uploads/2021/07/UtopiaStd-Capt.woff') format('woff'),
+		url('https://assets.bookpage.com/wp-content/uploads/2021/07/UtopiaStd-Capt.ttf') format('truetype'),
+		url('https://bp5-assets-2.s3.us-east-2.amazonaws.com/wp-content/uploads/2021/07/19170145/UtopiaStd-Capt.svg#UtopiaStdCapt') format('svg');
+}
+@font-face {
+	font-family: 'UtopiaStd Capt';
+	font-style: normal;
+	font-weight: bold;
+	font-display: auto;
+	src: url('https://assets.bookpage.com/wp-content/uploads/2021/07/UtopiaStd-BoldCapt.eot');
+	src: url('https://assets.bookpage.com/wp-content/uploads/2021/07/UtopiaStd-BoldCapt.eot?#iefix') format('embedded-opentype'),
+		url('https://assets.bookpage.com/wp-content/uploads/2021/07/UtopiaStd-BoldCapt.woff2') format('woff2'),
+		url('https://assets.bookpage.com/wp-content/uploads/2021/07/UtopiaStd-BoldCapt.woff') format('woff'),
+		url('https://assets.bookpage.com/wp-content/uploads/2021/07/UtopiaStd-BoldCapt.ttf') format('truetype'),
+		url('https://bp5-assets-2.s3.us-east-2.amazonaws.com/wp-content/uploads/2021/07/19170145/UtopiaStd-BoldCapt.svg#UtopiaStdCapt') format('svg');
+}
+
+@font-face {
+	font-family: 'CenturyGothic';
+	font-style: normal;
+	font-weight: normal;
+	font-display: auto;
+	src: url('https://assets.bookpage.com/wp-content/uploads/2021/07/CenturyGothic.eot');
+	src: url('https://assets.bookpage.com/wp-content/uploads/2021/07/CenturyGothic.eot?#iefix') format('embedded-opentype'),
+		url('https://assets.bookpage.com/wp-content/uploads/2021/07/CenturyGothic.woff2') format('woff2'),
+		url('https://assets.bookpage.com/wp-content/uploads/2021/07/CenturyGothic.woff') format('woff'),
+		url('https://assets.bookpage.com/wp-content/uploads/2021/07/CenturyGothic.ttf') format('truetype'),
+		url('https://bp5-assets-2.s3.us-east-2.amazonaws.com/wp-content/uploads/2021/07/19170119/CenturyGothic.svg#CenturyGothic') format('svg');
+}
+@font-face {
+	font-family: 'CenturyGothic';
+	font-style: normal;
+	font-weight: bold;
+	font-display: auto;
+	src: url('https://assets.bookpage.com/wp-content/uploads/2021/07/CenturyGothic-Bold.ttf') format('truetype');
+}
+
+/*# sourceURL=elementor-pro-custom-fonts-inline-css */
+</style>
+<link rel='stylesheet' id='hello-elementor-child-style-css' href='https://assets.bookpage.com/wp-content/themes/hello-theme-child-master/style.css?ver=1.0.0' media='all' />
+<link rel='stylesheet' id='ecs-styles-css' href='https://assets.bookpage.com/wp-content/plugins/ele-custom-skin/assets/css/ecs-style.min.css?ver=4.3.11' media='all' />
+<link rel='stylesheet' id='elementor-post-148-css' href='https://assets.bookpage.com/wp-content/uploads/elementor/css/post-148.css?ver=1787740560' media='all' />
+<link rel='stylesheet' id='elementor-post-165-css' href='https://assets.bookpage.com/wp-content/uploads/elementor/css/post-165.css?ver=1784734370' media='all' />
+<link rel='stylesheet' id='elementor-post-170-css' href='https://assets.bookpage.com/wp-content/uploads/elementor/css/post-170.css?ver=1784733919' media='all' />
+<link rel='stylesheet' id='elementor-post-221-css' href='https://assets.bookpage.com/wp-content/uploads/elementor/css/post-221.css?ver=1784734235' media='all' />
+<link rel='stylesheet' id='elementor-post-312-css' href='https://assets.bookpage.com/wp-content/uploads/elementor/css/post-312.css?ver=1628277802' media='all' />
+<link rel='stylesheet' id='elementor-post-72319-css' href='https://assets.bookpage.com/wp-content/uploads/elementor/css/post-72319.css?ver=1786627760' media='all' />
+<link rel='stylesheet' id='elementor-post-196980-css' href='https://assets.bookpage.com/wp-content/uploads/elementor/css/post-196980.css?ver=1771856612' media='all' />
+<link rel='stylesheet' id='elementor-post-201630-css' href='https://assets.bookpage.com/wp-content/uploads/elementor/css/post-201630.css?ver=1785763067' media='all' />
+<link rel='stylesheet' id='elementor-post-201903-css' href='https://assets.bookpage.com/wp-content/uploads/elementor/css/post-201903.css?ver=1784734132' media='all' />
+<link rel='stylesheet' id='elementor-post-210237-css' href='https://assets.bookpage.com/wp-content/uploads/elementor/css/post-210237.css?ver=1784309336' media='all' />
+<link rel='stylesheet' id='elementor-post-231352-css' href='https://assets.bookpage.com/wp-content/uploads/elementor/css/post-231352.css?ver=1785762922' media='all' />
+<link rel='stylesheet' id='elementor-post-231403-css' href='https://assets.bookpage.com/wp-content/uploads/elementor/css/post-231403.css?ver=1785762783' media='all' />
+<link rel='stylesheet' id='elementor-post-231468-css' href='https://assets.bookpage.com/wp-content/uploads/elementor/css/post-231468.css?ver=1786637242' media='all' />
+<link rel='stylesheet' id='elementor-post-231538-css' href='https://assets.bookpage.com/wp-content/uploads/elementor/css/post-231538.css?ver=1785762647' media='all' />
+<link rel='stylesheet' id='elementor-post-231550-css' href='https://assets.bookpage.com/wp-content/uploads/elementor/css/post-231550.css?ver=1785762733' media='all' />
+<link rel='stylesheet' id='elementor-post-233379-css' href='https://assets.bookpage.com/wp-content/uploads/elementor/css/post-233379.css?ver=1787050726' media='all' />
+<link rel='stylesheet' id='elementor-icons-blue_sky-css' href='https://assets.bookpage.com/wp-content/uploads/elementor/custom-icons/blue_sky/css/blue_sky.css?ver=1.0.0' media='all' />
+<script type="text/rocketlazyloadscript" id="jquery-core-js" data-rocket-src="https://assets.bookpage.com/wp-includes/js/jquery/jquery.min.js?ver=3.7.1" data-rocket-defer defer></script>
+<script type="text/rocketlazyloadscript" id="jquery-migrate-js" data-rocket-src="https://assets.bookpage.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1" data-rocket-defer defer></script>
+<script type="text/rocketlazyloadscript" id="ecs-mobile-menu-js" data-rocket-src="https://assets.bookpage.com/wp-content/plugins/ele-custom-skin/modules/mobile-menu/assets/js/ecs-mobile-menu.min.js?ver=4.3.11" data-rocket-defer defer></script>
+<script id="pd-bookpage-script-js-extra">
+var usdoctor = {"ajax_url":"https://www.bookpage.com/wp-admin/admin-ajax.php"};
+//# sourceURL=pd-bookpage-script-js-extra
+</script>
+<script type="text/rocketlazyloadscript" id="pd-bookpage-script-js" data-rocket-src="https://assets.bookpage.com/wp-content/plugins/px_bookpages/script.js?ver=1788696825" data-rocket-defer defer></script>
+<script id="ecs_ajax_load-js-extra">
+var ecs_ajax_params = {"ajaxurl":"https://www.bookpage.com/wp-admin/admin-ajax.php","posts":"{\"page\":0,\"name\":\"17465-george-r-r-martin-fiction\",\"category_name\":\"interviews\",\"error\":\"\",\"m\":\"\",\"p\":0,\"post_parent\":\"\",\"subpost\":\"\",\"subpost_id\":\"\",\"attachment\":\"\",\"attachment_id\":0,\"pagename\":\"\",\"page_id\":0,\"second\":\"\",\"minute\":\"\",\"hour\":\"\",\"day\":0,\"monthnum\":0,\"year\":0,\"w\":0,\"tag\":\"\",\"cat\":\"\",\"tag_id\":\"\",\"author\":\"\",\"author_name\":\"\",\"feed\":\"\",\"tb\":\"\",\"paged\":0,\"meta_key\":\"\",\"meta_value\":\"\",\"preview\":\"\",\"s\":\"\",\"sentence\":\"\",\"title\":\"\",\"fields\":\"all\",\"menu_order\":\"\",\"embed\":\"\",\"category__in\":[],\"category__not_in\":[],\"category__and\":[],\"post__in\":[],\"post__not_in\":[],\"post_name__in\":[],\"tag__in\":[],\"tag__not_in\":[],\"tag__and\":[],\"tag_slug__in\":[],\"tag_slug__and\":[],\"post_parent__in\":[],\"post_parent__not_in\":[],\"author__in\":[],\"author__not_in\":[],\"search_columns\":[],\"orderby\":\"menu_order\",\"order\":\"ASC\",\"ignore_sticky_posts\":false,\"suppress_filters\":false,\"cache_results\":true,\"update_post_term_cache\":true,\"update_menu_item_cache\":false,\"lazy_load_term_meta\":true,\"update_post_meta_cache\":true,\"post_type\":\"\",\"posts_per_page\":13,\"nopaging\":false,\"comments_per_page\":\"50\",\"no_found_rows\":false}","nonce":"df405325dc"};
+//# sourceURL=ecs_ajax_load-js-extra
+</script>
+<script type="text/rocketlazyloadscript" id="ecs_ajax_load-js" data-rocket-src="https://assets.bookpage.com/wp-content/plugins/ele-custom-skin/assets/js/ecs_ajax_pagination.min.js?ver=4.3.11" data-rocket-defer defer></script>
+<script type="text/rocketlazyloadscript" id="ecs-script-js" data-rocket-src="https://assets.bookpage.com/wp-content/plugins/ele-custom-skin/assets/js/ecs.min.js?ver=4.3.11" data-rocket-defer defer></script>
+<link rel="https://api.w.org/" href="https://www.bookpage.com/wp-json/" /><link rel="alternate" title="JSON" type="application/json" href="https://www.bookpage.com/wp-json/wp/v2/posts/115307" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.bookpage.com/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 7.1" />
+<link rel='shortlink' href='https://www.bookpage.com/?p=115307' />
+<meta name="facebook-domain-verification" content="l9geby2idi0isj340ctrlsfa8djb6d" /><script type="text/rocketlazyloadscript" id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/57b210cc6afa7912ef5d7e386/1f2ccbea4cbc0bdf756af4666.js");</script>	<style>img#wpstats{display:none}</style>
+		
+<!-- Google Tag Manager for WordPress by gtm4wp.com -->
+<!-- GTM Container placement set to automatic -->
+<script data-cfasync="false" data-pagespeed-no-defer>
+	var dataLayer_content = {"pagePostType":"post","pagePostType2":"single-post","pageCategory":["interviews"],"pagePostAuthor":"Cat Acree"};
+	dataLayer.push( dataLayer_content );
+</script>
+<script data-cfasync="false" data-pagespeed-no-defer>
+(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P85NP22');
+</script>
+<!-- End Google Tag Manager for WordPress by gtm4wp.com --><script type="text/rocketlazyloadscript" async data-rocket-src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1933750090033622" crossorigin="anonymous"></script><script type="text/rocketlazyloadscript" data-rocket-type="text/javascript">
+  var _avp = _avp || [];
+  (function() {
+    var s = document.createElement("script");
+    s.type = "text/javascript"; s.async = true; s.src = "https://bookpage.advertserve.com/js/libcode3.js";
+    var x = document.getElementsByTagName("script")[0];
+    x.parentNode.insertBefore(s, x);
+  })();
+  </script><script type="text/rocketlazyloadscript">window.addEventListener('DOMContentLoaded', function() {
+jQuery(document).ready(function(){
+	jQuery('.side-posts').find('article').each(function(){
+		var emp = jQuery(this).find('.more-info-text-field > .elementor-widget-container').text().indexOf('No text') >= 0; 
+		var more_btn = jQuery(this).find('.more-info');
+		var more_info = jQuery(this).find('.more-info-text');
+		var more_info_close = jQuery(this).find('.more-info-close');
+		if(emp){
+			jQuery(more_btn).hide();
+		}
+		else{
+			jQuery(more_btn).show();
+			jQuery(more_btn).find('a').on('click', function(){
+				jQuery(more_info).slideToggle();
+				event.preventDefault();
+			});
+			jQuery(more_info_close).on('click', function(){
+				jQuery(more_info).slideUp();
+			});
+			}
+		
+	});
+});
+});</script>
+<script type="text/rocketlazyloadscript">(function(document, tag) { var script = document.createElement(tag); var element = document.getElementsByTagName('body')[0]; script.src = 'https://acsbap.com/apps/app/assets/js/acsb.js'; script.async = true; script.defer = true; (typeof element === 'undefined' ? document.getElementsByTagName('html')[0] : element).appendChild(script); script.onload = function() { acsbJS.init({ statementLink : '', feedbackLink : '', footerHtml : '', hideMobile : false, hideTrigger : false, language : 'en', position : 'right', leadColor : '#146FF8', triggerColor : '#146FF8', triggerRadius : '50%', triggerPositionX : 'right', triggerPositionY : 'bottom', triggerIcon : 'default', triggerSize : 'medium', triggerOffsetX : 20, triggerOffsetY : 20, mobile : { triggerSize : 'small', triggerPositionX : 'right', triggerPositionY : 'bottom', triggerOffsetX : 0, triggerOffsetY : 0, triggerRadius : '0' } }); };}(document, 'script'));</script>
+			<style>
+				.e-con.e-parent:nth-of-type(n+4):not(.e-lazyloaded):not(.e-no-lazyload),
+				.e-con.e-parent:nth-of-type(n+4):not(.e-lazyloaded):not(.e-no-lazyload) * {
+					background-image: none !important;
+				}
+				@media screen and (max-height: 1024px) {
+					.e-con.e-parent:nth-of-type(n+3):not(.e-lazyloaded):not(.e-no-lazyload),
+					.e-con.e-parent:nth-of-type(n+3):not(.e-lazyloaded):not(.e-no-lazyload) * {
+						background-image: none !important;
+					}
+				}
+				@media screen and (max-height: 640px) {
+					.e-con.e-parent:nth-of-type(n+2):not(.e-lazyloaded):not(.e-no-lazyload),
+					.e-con.e-parent:nth-of-type(n+2):not(.e-lazyloaded):not(.e-no-lazyload) * {
+						background-image: none !important;
+					}
+				}
+			</style>
+			<link rel="icon" href="https://t1.bookpage.com/wp-content/uploads/2021/07/19165527/BP-favicon-3-150x150.png" sizes="32x32" />
+<link rel="icon" href="https://t1.bookpage.com/wp-content/uploads/2021/07/19165527/BP-favicon-3.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="https://t1.bookpage.com/wp-content/uploads/2021/07/19165527/BP-favicon-3.png" />
+<meta name="msapplication-TileImage" content="https://t1.bookpage.com/wp-content/uploads/2021/07/19165527/BP-favicon-3.png" />
+<style id="wp-custom-css">
+.elementor-slideshow__title {
+    display: none !important;
+}
+
+hr.wp-block-separator {
+    margin: 25px !important;
+
+    border-top: 0px solid !important;
+    border-bottom: 1px solid;
+}
+
+.sidebar-category-tax {
+    display: none !important;
+}
+
+.elementor-view-stacked .elementor-icon {
+    padding: .5em;
+    background-color: #2e12ca;
+
+}
+.elementor-icon {
+
+    font-size: 12px;
+
+}
+
+
+element.style {
+}
+figure.wp-block-pullquote blockquote p {
+    font-style: normal !important;
+}
+
+
+
+.book-author-in-post {
+    font-family: 'Gelica Regular', serif;
+    font-size: 24px !important;
+    font-weight: normal !important;
+    line-height: 1.2em !important;
+}
+
+
+.book-byline {
+    font-family: "Gelica Regular", serif
+    font-size: 24px;
+    font-weight: normal;
+    color: #000;
+}
+
+.book-byline a {
+	color:#000;
+}
+
+div#gform_wrapper_13 {
+    display: block!important;
+}
+</style>
+<style id="rocket-lazyrender-inline-css">[data-wpr-lazyrender] {content-visibility: auto;}</style><meta name="generator" content="WP Rocket 3.23.3.3" data-wpr-features="wpr_delay_js wpr_defer_js wpr_preconnect_external_domains wpr_automatic_lazy_rendering wpr_oci wpr_cdn wpr_desktop" /></head>
+<body class="wp-singular post-template-default single single-post postid-115307 single-format-standard wp-custom-logo wp-embed-responsive wp-theme-hello-elementor wp-child-theme-hello-theme-child-master hello-elementor-default elementor-default elementor-kit-57 elementor-page-140">
+
+
+<!-- GTM Container placement set to automatic -->
+<!-- Google Tag Manager (noscript) -->
+				<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P85NP22" height="0" width="0" style="display:none;visibility:hidden" aria-hidden="true"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+
+		<header  data-elementor-type="header" data-elementor-id="156381" class="elementor elementor-156381 elementor-location-header" data-elementor-post-type="elementor_library">
+					<section  class="elementor-section elementor-top-section elementor-element elementor-element-680aeae2 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="680aeae2" data-element_type="section" data-e-type="section">
+						<div  class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-25 elementor-top-column elementor-element elementor-element-40f0523b" data-id="40f0523b" data-element_type="column" data-e-type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-1a5f49da elementor-shape-circle elementor-widget__width-initial elementor-grid-0 e-grid-align-center elementor-widget elementor-widget-social-icons" data-id="1a5f49da" data-element_type="widget" data-e-type="widget" data-widget_type="social-icons.default">
+				<div class="elementor-widget-container">
+							<div class="elementor-social-icons-wrapper elementor-grid" role="list">
+							<span class="elementor-grid-item" role="listitem">
+					<a class="elementor-icon elementor-social-icon elementor-social-icon-instagram elementor-repeater-item-ba0874a" href="https://www.instagram.com/readbookpage/?hl=en" target="_blank">
+						<span class="elementor-screen-only">Instagram</span>
+						<i aria-hidden="true" class="fab fa-instagram"></i>					</a>
+				</span>
+							<span class="elementor-grid-item" role="listitem">
+					<a class="elementor-icon elementor-social-icon elementor-social-icon-facebook elementor-repeater-item-ae37593" href="https://www.facebook.com/readbookpage/" target="_blank">
+						<span class="elementor-screen-only">Facebook</span>
+						<i aria-hidden="true" class="fab fa-facebook"></i>					</a>
+				</span>
+							<span class="elementor-grid-item" role="listitem">
+					<a class="elementor-icon elementor-social-icon elementor-social-icon-x-twitter elementor-repeater-item-4627225" href="https://twitter.com/bookpage" target="_blank">
+						<span class="elementor-screen-only">X-twitter</span>
+						<i aria-hidden="true" class="fab fa-x-twitter"></i>					</a>
+				</span>
+							<span class="elementor-grid-item" role="listitem">
+					<a class="elementor-icon elementor-social-icon elementor-social-icon-icon-bluesky_logo elementor-repeater-item-5576793" href="https://bsky.app/profile/readbookpage.bsky.social" target="_blank">
+						<span class="elementor-screen-only">Icon-bluesky_logo</span>
+						<i aria-hidden="true" class="icon icon-bluesky_logo"></i>					</a>
+				</span>
+							<span class="elementor-grid-item" role="listitem">
+					<a class="elementor-icon elementor-social-icon elementor-social-icon-linkedin elementor-repeater-item-b719cc3" href="https://www.linkedin.com/company/bookpage" target="_blank">
+						<span class="elementor-screen-only">Linkedin</span>
+						<i aria-hidden="true" class="fab fa-linkedin"></i>					</a>
+				</span>
+							<span class="elementor-grid-item" role="listitem">
+					<a class="elementor-icon elementor-social-icon elementor-social-icon-tiktok elementor-repeater-item-cfd5659" href="https://www.tiktok.com/@readbookpage" target="_blank">
+						<span class="elementor-screen-only">Tiktok</span>
+						<i aria-hidden="true" class="fab fa-tiktok"></i>					</a>
+				</span>
+					</div>
+						</div>
+				</div>
+				<section class="elementor-section elementor-inner-section elementor-element elementor-element-37126ca elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="37126ca" data-element_type="section" data-e-type="section">
+						<div  class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-12c5833" data-id="12c5833" data-element_type="column" data-e-type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-49f7d8a elementor-widget__width-initial elementor-view-default elementor-widget elementor-widget-icon" data-id="49f7d8a" data-element_type="widget" data-e-type="widget" data-widget_type="icon.default">
+				<div class="elementor-widget-container">
+							<div class="elementor-icon-wrapper">
+			<div class="elementor-icon">
+			<i aria-hidden="true" class="fab fa-google"></i>			</div>
+		</div>
+						</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-f7755ac" data-id="f7755ac" data-element_type="column" data-e-type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-12f8ae3 elementor-widget elementor-widget-text-editor" data-id="12f8ae3" data-element_type="widget" data-e-type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+									<p style="text-align: left;"><a href="https://google.com/preferences/source?q=bookpage.com" target="_blank" rel="noopener"><em>Add us as a Google Preferred Source</em></a></p>								</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-621f84a6" data-id="621f84a6" data-element_type="column" data-e-type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-11e568f5 elementor-widget elementor-widget-theme-site-logo elementor-widget-image" data-id="11e568f5" data-element_type="widget" data-e-type="widget" data-widget_type="theme-site-logo.default">
+				<div class="elementor-widget-container">
+											<a href="https://www.bookpage.com">
+			<img width="750" height="201" src="https://t1.bookpage.com/wp-content/uploads/2021/07/10161812/BP_Logo_Black-750x201.png" class="attachment-large size-large wp-image-211209" alt="" srcset="https://t1.bookpage.com/wp-content/uploads/2021/07/10161812/BP_Logo_Black-750x201.png 750w, https://t1.bookpage.com/wp-content/uploads/2021/07/10161812/BP_Logo_Black-250x67.png 250w, https://t1.bookpage.com/wp-content/uploads/2021/07/10161812/BP_Logo_Black-125x33.png 125w, https://t1.bookpage.com/wp-content/uploads/2021/07/10161812/BP_Logo_Black-768x206.png 768w, https://t1.bookpage.com/wp-content/uploads/2021/07/10161812/BP_Logo_Black-1536x412.png 1536w, https://t1.bookpage.com/wp-content/uploads/2021/07/10161812/BP_Logo_Black-2048x549.png 2048w, https://t1.bookpage.com/wp-content/uploads/2021/07/10161812/BP_Logo_Black.png 1200w" sizes="(max-width: 750px) 100vw, 750px" />				</a>
+											</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-25 elementor-top-column elementor-element elementor-element-48b7e066" data-id="48b7e066" data-element_type="column" data-e-type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-dcd29ef elementor-widget elementor-widget-search" data-id="dcd29ef" data-element_type="widget" data-e-type="widget" data-settings="{&quot;submit_trigger&quot;:&quot;both&quot;,&quot;pagination_type_options&quot;:&quot;none&quot;}" data-widget_type="search.default">
+				<div class="elementor-widget-container">
+							<search class="e-search hidden" role="search">
+			<form class="e-search-form" action="https://www.bookpage.com" method="get">
+
+				
+				<label class="e-search-label" for="search-dcd29ef">
+					<span class="elementor-screen-only">
+						Search					</span>
+									</label>
+
+				<div class="e-search-input-wrapper">
+					<input id="search-dcd29ef" placeholder="Type here" class="e-search-input" type="search" name="s" value="" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="results-dcd29ef" aria-haspopup="listbox">
+					<i aria-hidden="true" class="fas fa-times"></i>										<output id="results-dcd29ef" class="e-search-results-container hide-loader" aria-live="polite" aria-atomic="true" aria-label="Results for search" tabindex="0">
+						<div class="e-search-results"></div>
+											</output>
+									</div>
+				
+				
+				<button class="e-search-submit  " type="submit">
+					
+										<span class="">
+						Search					</span>
+									</button>
+				<input type="hidden" name="e_search_props" value="dcd29ef-156381">
+			</form>
+		</search>
+						</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+				<section  class="elementor-section elementor-top-section elementor-element elementor-element-148db0e8 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="148db0e8" data-element_type="section" data-e-type="section">
+						<div  class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-1d96194c" data-id="1d96194c" data-element_type="column" data-e-type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-518acdd e--pointer-none ecs-nav-layout-horizontal elementor-nav-menu--dropdown-tablet elementor-nav-menu--toggle elementor-nav-menu--burger elementor-widget elementor-widget-nav-menu" data-id="518acdd" data-element_type="widget" data-e-type="widget" data-settings="{&quot;layout&quot;:&quot;horizontal&quot;,&quot;submenu_icon&quot;:{&quot;value&quot;:&quot;&lt;i class=\&quot;fas fa-caret-down\&quot; aria-hidden=\&quot;true\&quot;&gt;&lt;\/i&gt;&quot;,&quot;library&quot;:&quot;fa-solid&quot;},&quot;toggle&quot;:&quot;burger&quot;}" data-widget_type="nav-menu.default">
+				<div class="elementor-widget-container">
+								<nav aria-label="Menu" class="elementor-nav-menu--main elementor-nav-menu__container elementor-nav-menu--layout-horizontal e--pointer-none">
+				<ul id="menu-1-518acdd" class="elementor-nav-menu"><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-231646"><a href="#" class="elementor-item elementor-item-anchor">Browse by Genre<span class="sub-arrow"><i class="fas fa-caret-down" aria-hidden="true"></i></span></a>
+<ul class="sub-menu elementor-nav-menu--dropdown">
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-231651"><a href="https://www.bookpage.com/genres/audio/" class="elementor-sub-item">Audiobooks</a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-231649"><a href="https://www.bookpage.com/genres/childrens-ya/" class="elementor-sub-item">Children&#8217;s &#038; YA</a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-231643"><a href="https://www.bookpage.com/genres/fiction/" class="elementor-sub-item">Fiction</a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-231650"><a href="https://www.bookpage.com/genres/historical-fiction/" class="elementor-sub-item">Historical Fiction</a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-231645"><a href="https://www.bookpage.com/genres/mystery-suspense/" class="elementor-sub-item">Mystery &#038; Suspense</a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-231644"><a href="https://www.bookpage.com/genres/nonfiction/" class="elementor-sub-item">Nonfiction</a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-231647"><a href="https://www.bookpage.com/genres/romance/" class="elementor-sub-item">Romance</a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-231648"><a href="https://www.bookpage.com/genres/science-fiction-fantasy/" class="elementor-sub-item">SFF &#038; Horror</a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-231657"><a href="https://www.bookpage.com/category/behind-the-book/" class="elementor-item">Author Essays</a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-231656"><a href="https://www.bookpage.com/category/interviews/" class="elementor-item">Author Interviews</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-231987"><a href="https://www.bookpage.com/reviews/" class="elementor-item">Book Reviews</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-232038"><a href="https://bookpage.com/newsletters" class="elementor-item">Newsletters</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-231654"><a href="https://www.bookpage.com/subscriptions/" class="elementor-item">Subscribe</a></li>
+</ul>			</nav>
+					<div class="elementor-menu-toggle" role="button" tabindex="0" aria-label="Menu Toggle" aria-expanded="false">
+			<i aria-hidden="true" role="presentation" class="elementor-menu-toggle__icon--open eicon-menu-bar"></i><i aria-hidden="true" role="presentation" class="elementor-menu-toggle__icon--close eicon-close"></i>		</div>
+					<nav class="elementor-nav-menu--dropdown elementor-nav-menu__container" aria-hidden="true">
+				<ul id="menu-2-518acdd" class="elementor-nav-menu"><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-231646"><a href="#" class="elementor-item elementor-item-anchor" tabindex="-1">Browse by Genre<span class="sub-arrow"><i class="fas fa-caret-down" aria-hidden="true"></i></span></a>
+<ul class="sub-menu elementor-nav-menu--dropdown">
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-231651"><a href="https://www.bookpage.com/genres/audio/" class="elementor-sub-item" tabindex="-1">Audiobooks</a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-231649"><a href="https://www.bookpage.com/genres/childrens-ya/" class="elementor-sub-item" tabindex="-1">Children&#8217;s &#038; YA</a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-231643"><a href="https://www.bookpage.com/genres/fiction/" class="elementor-sub-item" tabindex="-1">Fiction</a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-231650"><a href="https://www.bookpage.com/genres/historical-fiction/" class="elementor-sub-item" tabindex="-1">Historical Fiction</a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-231645"><a href="https://www.bookpage.com/genres/mystery-suspense/" class="elementor-sub-item" tabindex="-1">Mystery &#038; Suspense</a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-231644"><a href="https://www.bookpage.com/genres/nonfiction/" class="elementor-sub-item" tabindex="-1">Nonfiction</a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-231647"><a href="https://www.bookpage.com/genres/romance/" class="elementor-sub-item" tabindex="-1">Romance</a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-231648"><a href="https://www.bookpage.com/genres/science-fiction-fantasy/" class="elementor-sub-item" tabindex="-1">SFF &#038; Horror</a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-231657"><a href="https://www.bookpage.com/category/behind-the-book/" class="elementor-item" tabindex="-1">Author Essays</a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-231656"><a href="https://www.bookpage.com/category/interviews/" class="elementor-item" tabindex="-1">Author Interviews</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-231987"><a href="https://www.bookpage.com/reviews/" class="elementor-item" tabindex="-1">Book Reviews</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-232038"><a href="https://bookpage.com/newsletters" class="elementor-item" tabindex="-1">Newsletters</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-231654"><a href="https://www.bookpage.com/subscriptions/" class="elementor-item" tabindex="-1">Subscribe</a></li>
+</ul>			</nav>
+						</div>
+				</div>
+				<div class="elementor-element elementor-element-2209b69 elementor-widget elementor-widget-html" data-id="2209b69" data-element_type="widget" data-e-type="widget" data-widget_type="html.default">
+				<div class="elementor-widget-container">
+					<div style="text-align:center">
+    <!-- BEGIN ADVERTSERVE CODE -->
+<div data-tagid="fHsEfkK8aHHGW1iNzzBn">
+<script type="text/rocketlazyloadscript" data-rocket-type="text/javascript">
+var _avp = _avp || [];
+_avp.push({ tagid: 'fHsEfkK8aHHGW1iNzzBn', alias: '/', type: 'banner', zid: 1, pid: 0, secure: true });
+</script>
+</div>
+<!-- END ADVERTSERVE CODE -->
+</div>				</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+				</header>
+				<div  data-elementor-type="single-post" data-elementor-id="140" class="elementor elementor-140 elementor-location-single post-115307 post type-post status-publish format-standard has-post-thumbnail hentry category-interviews genres-fantasy genres-fiction genres-science-fiction-fantasy" data-elementor-post-type="elementor_library">
+					<section class="elementor-section elementor-top-section elementor-element elementor-element-eebaf05 elementor-section-content-middle elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="eebaf05" data-element_type="section" data-e-type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+						<div  class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-20aa0c9" data-id="20aa0c9" data-element_type="column" data-e-type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-baa9dea elementor-widget elementor-widget-theme-post-featured-image elementor-widget-image" data-id="baa9dea" data-element_type="widget" data-e-type="widget" data-widget_type="theme-post-featured-image.default">
+				<div class="elementor-widget-container">
+															<img fetchpriority="high" width="400" height="598" src="https://t1.bookpage.com/wp-content/uploads/2021/08/24174719/large-21221.jpg" class="attachment-full size-full wp-image-58590" alt="" srcset="https://t1.bookpage.com/wp-content/uploads/2021/08/24174719/large-21221.jpg 400w, https://t1.bookpage.com/wp-content/uploads/2021/08/24174719/large-21221-201x300.jpg 201w" sizes="(max-width: 400px) 100vw, 400px" />															</div>
+				</div>
+				<div class="elementor-element elementor-element-c66a8b8 elementor-widget__width-initial elementor-widget-mobile__width-initial elementor-absolute elementor-widget elementor-widget-shortcode" data-id="c66a8b8" data-element_type="widget" data-e-type="widget" data-settings="{&quot;_position&quot;:&quot;absolute&quot;}" data-widget_type="shortcode.default">
+				<div class="elementor-widget-container">
+							<div class="elementor-shortcode">
+  <!-- [ books_thumb ] -->
+ <div class="jet-listing-grid jet-listing">
+  <div class="jet-listing-grid__items grid-col-desk-1 grid-col-tablet-1 grid-col-mobile-1 jet-listing-grid--290">
+    <div class="jet-listing-grid__item jet-listing-dynamic-post-289" data-post-id="289">
+      <div data-elementor-type="jet-listing-items" data-elementor-id="290" class="elementor elementor-290" data-elementor-settings="[]">
+        <div class="elementor-section-wrap">
+                    
+          <div class="elementor-section elementor-top-section elementor-element elementor-element-f8ab54b elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="f8ab54b" data-element_type="section">
+            <div  class="elementor-container elementor-column-gap-no">
+              <div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-da2bc05" data-id="da2bc05" data-element_type="column">
+                <div class="elementor-widget-wrap elementor-element-populated">
+                  <div class="elementor-element elementor-element-454f6c5 elementor-widget__width-initial elementor-widget elementor-widget-image" data-id="454f6c5" data-element_type="widget" data-widget_type="image.default">
+                    <div class="elementor-widget-container">
+                      <a href="https://www.bookpage.com/interviews/17465-george-r-r-martin-fiction/ "><img width="303" height="460" src="https://t1.bookpage.com/wp-content/uploads/2021/08/22125243/large-17205.jpg" class="attachment-full size-full book-cover-border" alt="" loading="lazy"></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+                  </div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+</div>
+						</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-66 elementor-top-column elementor-element elementor-element-44aaaaa" data-id="44aaaaa" data-element_type="column" data-e-type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-6153c5b elementor-widget elementor-widget-shortcode" data-id="6153c5b" data-element_type="widget" data-e-type="widget" data-widget_type="shortcode.default">
+				<div class="elementor-widget-container">
+							<div class="elementor-shortcode"><!-- [ bp_publish_date ] -->
+<div class="elementor-element elementor-element-59b72ff elementor-widget elementor-widget-shortcode" data-id="59b72ff" data-element_type="widget" data-widget_type="shortcode.default"><div class="elementor-widget-container"><div class="elementor-shortcode"><span style="font-family: 'CenturyGothic', Sans-serif;font-size: 12px;font-weight: bold;line-height: 1.2em;">
+  December 2014</span></div></div></div>
+
+</div>
+						</div>
+				</div>
+				<div class="elementor-element elementor-element-32a7ddd elementor-widget elementor-widget-theme-post-title elementor-page-title elementor-widget-heading" data-id="32a7ddd" data-element_type="widget" data-e-type="widget" data-widget_type="theme-post-title.default">
+				<div class="elementor-widget-container">
+					<h1 class="elementor-heading-title elementor-size-default">George R.R. Martin: History is written in blood</h1>				</div>
+				</div>
+				<div class="elementor-element elementor-element-1c19878 elementor-widget elementor-widget-shortcode" data-id="1c19878" data-element_type="widget" data-e-type="widget" data-widget_type="shortcode.default">
+				<div class="elementor-widget-container">
+							<div class="elementor-shortcode"><span class="coauthor-descriptor">Interview by</span> <span class="coauthor-byline"><a href="https://www.bookpage.com/contributor/cat-acree/">Cat Acree</a></span></div>
+						</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+				<section  class="elementor-section elementor-top-section elementor-element elementor-element-47bf1e4 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="47bf1e4" data-element_type="section" data-e-type="section">
+						<div class="elementor-container elementor-column-gap-no">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-5413f00" data-id="5413f00" data-element_type="column" data-e-type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-17d1fce elementor-widget__width-auto elementor-widget elementor-widget-heading" data-id="17d1fce" data-element_type="widget" data-e-type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-heading-title elementor-size-default">Share this Article:</div>				</div>
+				</div>
+				<div class="elementor-element elementor-element-8d4726b elementor-share-buttons--view-icon elementor-share-buttons--skin-flat elementor-share-buttons--shape-circle elementor-share-buttons--color-custom elementor-widget__width-auto elementor-grid-0 elementor-widget elementor-widget-share-buttons" data-id="8d4726b" data-element_type="widget" data-e-type="widget" data-widget_type="share-buttons.default">
+				<div class="elementor-widget-container">
+							<div class="elementor-grid" role="list">
+								<div class="elementor-grid-item" role="listitem">
+						<div class="elementor-share-btn elementor-share-btn_facebook" role="button" tabindex="0" aria-label="Share on facebook">
+															<span class="elementor-share-btn__icon">
+								<i class="fab fa-facebook" aria-hidden="true"></i>							</span>
+																				</div>
+					</div>
+									<div class="elementor-grid-item" role="listitem">
+						<div class="elementor-share-btn elementor-share-btn_twitter" role="button" tabindex="0" aria-label="Share on twitter">
+															<span class="elementor-share-btn__icon">
+								<i class="fab fa-twitter" aria-hidden="true"></i>							</span>
+																				</div>
+					</div>
+									<div class="elementor-grid-item" role="listitem">
+						<div class="elementor-share-btn elementor-share-btn_pinterest" role="button" tabindex="0" aria-label="Share on pinterest">
+															<span class="elementor-share-btn__icon">
+								<i class="fab fa-pinterest" aria-hidden="true"></i>							</span>
+																				</div>
+					</div>
+									<div class="elementor-grid-item" role="listitem">
+						<div class="elementor-share-btn elementor-share-btn_email" role="button" tabindex="0" aria-label="Share on email">
+															<span class="elementor-share-btn__icon">
+								<i class="fas fa-envelope" aria-hidden="true"></i>							</span>
+																				</div>
+					</div>
+						</div>
+						</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+				<section  class="elementor-section elementor-top-section elementor-element elementor-element-88f1943 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="88f1943" data-element_type="section" data-e-type="section">
+						<div  class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-66 elementor-top-column elementor-element elementor-element-b2a18dc" data-id="b2a18dc" data-element_type="column" data-e-type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-a71a345 elementor-widget elementor-widget-theme-post-content" data-id="a71a345" data-element_type="widget" data-e-type="widget" data-widget_type="theme-post-content.default">
+				<div class="elementor-widget-container">
+					<p>Without question, Tolkien set the standard for worldbuilding. Readers of epic fantasy aren’t content with a few generations of kings mentioned in some measly footnotes; they want a world so vast and detailed that it could be real. With Tolkien’s template in mind, George R.R. Martin addresses fans’ demands for a truly epic history.</p>
+<p>While fantasy readers have long immersed themselves in Martin’s mega-best-selling A Song of Ice and Fire series, HBO’s “Game of Thrones” introduced thousands more to his world full of dragons, magic and brutal murders of (spoiler alert!) <em>everyone</em>. At the risk of further delaying the author from writing the sixth book in the series, BookPage called Martin to talk about his new encyclopedic history of Westeros and beyond, <strong>The World of Ice and Fire</strong>.</p>
+<p>“The [Song of Ice and Fire] world is full of stories, just as our world is,” Martin says. “Because I’ve been writing about this world for so many years now, the world has become very real to me, and I can see all these other stories, and part of me wants to tell them, too. . . . If I had all the time in the world, I could easily write novels about the reign of Aegon III or Aegon IV, the Dance of the Dragons or the romance between King Aerys I and his queen. There are a lot of stories there to be told.”</p>
+<p>Talk about an understatement. Martin’s novels are brimming with references to untold history and legends, and if he pursued every tangent, we’d never get to the end of the story. Even <strong>The World of Ice and Fire</strong>, which is intended to be the definitive historical volume for the Seven Kingdoms, can only briefly touch on the wealth of tales here. The storytelling possibilities are limitless—which is the reason why Martin is still charmingly enthusiastic about this world, even after inhabiting it for the last 20 years.</p>
+<p style="text-align: center;"><img decoding="async" class="nowrap" style="height: 538px; margin: 10px; width: 400px;" src="http://t1.bookpage.com/images/1085/int-george-rr-martin-interview-the-eyrie.jpg" alt="" /></p>
+<p style="text-align: center;"><span style="font-size: 9px;">The Eyrie, copyright © Ted Nasmith. Reprinted with permission of Random House.</span></p>
+<p>In response to fans’ constant requests for extended genealogies and fleshed-out, panoramic histories, Martin announced in 2006 that he would begin writing this companion book. “There’s a great thirst on the part of some of the fans for more and more details about the world,” Martin says. “But I didn’t want to get too close to the so-called present day of Westeros, because I don’t want to give away any of the developments in the coming novels.”</p>
+<p>The full history of the Seven Kingdoms exists in Martin’s brain—a magic trick if there ever was one—but even the author’s vast imagination needs some help keeping it straight. Elio M. García and Linda Antonsson, founders of the fan site Westeros.‌org, have been studying (and fact-checking) the details of Martin’s world for years. As co-writers, they pored over 10,000 pages of novels, pulling out all references to history, myths and legends. After they organized and formed the book’s structure, Martin stepped in to fill in the blanks.</p>
+<p>This is far from a complete and infallible account, however. Where Tolkien was concerned with myth and languages, Martin is fascinated by history—and the challenges of retelling it.</p>
+<p>The narrator of <strong>The World of Ice and Fire</strong> is Maester Yandel, who acknowledges the difficulties in composing this book, though he insists his multitude of sources has provided a mostly complete narrative: “[E]very building is constructed stone by stone, and the same may be said of knowledge, extracted and compiled by many learned men, each of whom builds upon the works of those who preceded him. What one of them does not know is known to another, and little remains truly unknown if one seeks far enough.”</p>
+<p>As in our own world, history is written by the victors, who often skew truth toward more flattering legend. In an attempt to condense hundreds of years and to represent disparate cultures’ beliefs while coming to some sort of truthful conclusion, Maester Yandel has presented a history that is undeniably distorted. These far-off places and long-dead men refuse to give up all their secrets. For example, Valyrians insist they descended from dragons, and Ironborns believe they come from fish, but these elements of “history” are born out of religion. Where did these people actually come from? Often the answer is only speculation.</p>
+<p>Perhaps the book’s greatest strength—and Martin agrees—is the sumptuous illustrations that bring these stories to life. The author collaborated with Random House on choosing the fantasy artists featured in the book, and the artwork ranges from paintings to digital images, from portraits of kings to gory, blood-soaked battle scenes. Martin especially enjoyed working with Ted Nasmith to create the definitive representations of castles such as Winterfell and Casterly Rock. “We went back and forth to get the look of all those castles exactly as I imagine them,” Martin promises.</p>
+<p>One question remains for fans who might hope to find clues in this ambitious companion book: Does history repeat itself? Martin’s cheeky answer: “A resounding yes and no. A bit of maybe.”</p>
+<p>&nbsp;</p>
+<p><em>This article was originally published in the December 2014 issue of BookPage. Download the entire issue for the <a href="http://www.amazon.com/BookPage/dp/B00ATRKG30">Kindle</a> or <a href="http://www.barnesandnoble.com/w/bookpage-bookpage/1108179846?ean=2940043956934%94">Nook</a>.</em></p>
+				</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-c36e378" data-id="c36e378" data-element_type="column" data-e-type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-99e364f elementor-widget elementor-widget-shortcode" data-id="99e364f" data-element_type="widget" data-e-type="widget" data-widget_type="shortcode.default">
+				<div class="elementor-widget-container">
+							<div class="elementor-shortcode">
+
+			<!-- [ books_sidebar ] -->
+		<div class="get-book">
+			<div class="get-book-head">
+				<h3>Get the Book</h3>
+			</div>
+			<div class="get-book-books">
+
+										<articles class="gbooks">
+							<div class="gbook-inner">
+								<div class="gbook-img">
+									<a href="https://www.bookpage.com/books/the-world-of-ice-and-fire/"><img src="https://t1.bookpage.com/wp-content/uploads/2021/08/22125243/large-17205.jpg" alt="The World of Ice and Fire" class="book-cover-border" title="The World of Ice and Fire"></a>
+								</div>
+								<div class="gbook-det">
+									<!--<div class="gbook-genre">
+									  Fiction
+									</div>-->
+									<a href="https://www.bookpage.com/books/the-world-of-ice-and-fire/"><h4>The World of Ice and Fire</h4></a>
+									<div class="gbook-author">
+										By Elio M. Garcia & George R.R. Martin & Linda Antonsson																													</div>
+
+									<!--<div class="gbook-extras">
+            Price $50.00          </div>-->
+									<div class="gbook-extras">
+										<div>Bantam</div>
+										ISBN 9780553805444									</div>
+								</div>
+							</div>
+
+
+							<div class="dropdown-g"><div class="dropbtn-g">Buy Now</div><div class="dropdown-content-g"><a href="https://www.amazon.com/s?k=9780553805444&tag=bookpage88-20" target="_blank" rel="noopener" title="Buy Now from Amazon">Amazon</a><a href="https://www.booksamillion.com/search?id=129899&query=9780553805444" target="_blank" rel="noopener" title="Buy Now from Books-A-Million">Books-A-Million</a><a href="https://bookshop.org/a/1356/9780553805444" target="_blank" rel="noopener" title="Buy Now from Book Shop">Bookshop.org</a><a href="https://www.worldcat.org/search?qt=worldcat_org_bks&q=9780553805444" target="_blank" rel="noopener" title="Find on WorldCat">Find on WorldCat</a></div></div>
+						</articles>
+					
+			</div>
+		</div>
+	</div>
+						</div>
+				</div>
+				<div class="elementor-section elementor-inner-section elementor-element elementor-element-39da4cff elementor-hidden-phone elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="39da4cff" data-element_type="section" data-e-type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-9e6127b" data-id="9e6127b" data-element_type="column" data-e-type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-396ba46 elementor-widget elementor-widget-heading" data-id="396ba46" data-element_type="widget" data-e-type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h3 class="elementor-heading-title elementor-size-default">Sign Up</h3>				</div>
+				</div>
+				<div class="elementor-element elementor-element-1f4757a elementor-widget elementor-widget-global elementor-global-117040 elementor-widget-text-editor" data-id="1f4757a" data-element_type="widget" data-e-type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+									<p>Stay on top of new releases: Sign up for our newsletter to receive reading recommendations in your favorite genres.</p>
+		<div data-elementor-type="widget" data-elementor-id="185136" class="elementor elementor-185136" data-elementor-post-type="elementor_library">
+						<div class="elementor-element elementor-element-185136 elementor-align-center elementor-widget elementor-widget-button" data-id="185136" data-element_type="widget" data-e-type="widget" data-widget_type="button.default">
+				<div class="elementor-widget-container">
+									<div class="elementor-button-wrapper">
+					<a class="elementor-button elementor-button-link elementor-size-sm" href="https://www.bookpage.com/email/">
+						<span class="elementor-button-content-wrapper">
+									<span class="elementor-button-text">Sign up now</span>
+					</span>
+					</a>
+				</div>
+								</div>
+				</div>
+				</div>
+										</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</div>
+				<div class="elementor-element elementor-element-6bf0c9e uni-ad elementor-widget elementor-widget-global elementor-global-72130 elementor-widget-html" data-id="6bf0c9e" data-element_type="widget" data-e-type="widget" data-widget_type="html.default">
+				<div class="elementor-widget-container">
+					<div data-tagid="B9y1CZXtRZjl4x3R0oDy">
+    <script type="text/rocketlazyloadscript" data-rocket-type="text/javascript">
+        var _avp = _avp || [];
+        _avp.push({ tagid: 'B9y1CZXtRZjl4x3R0oDy', alias: '/', type: 'banner', zid: 4, pid: 0, secure: true });
+    </script>
+</div>				</div>
+				</div>
+				<div class="elementor-element elementor-element-2afdf70 fiction-ad elementor-hidden-desktop elementor-hidden-tablet elementor-hidden-mobile elementor-widget elementor-widget-global elementor-global-332 elementor-widget-html" data-id="2afdf70" data-element_type="widget" data-e-type="widget" data-widget_type="html.default">
+				<div class="elementor-widget-container">
+					<div data-tagid="B9y1CZXtRZjl4x3R0oDy">
+    <script type="text/rocketlazyloadscript" data-rocket-type="text/javascript">
+        var _avp = _avp || [];
+    _avp.push({ tagid: 'B9y1CZXtRZjl4x3R0oDy', alias: '/', type: 'banner', zid: 4, pid: 0, secure: true });
+    </script>
+</div>				</div>
+				</div>
+				<div class="elementor-element elementor-element-800e5b6 nonfiction-ad elementor-hidden-desktop elementor-hidden-tablet elementor-hidden-mobile elementor-widget elementor-widget-global elementor-global-333 elementor-widget-html" data-id="800e5b6" data-element_type="widget" data-e-type="widget" data-widget_type="html.default">
+				<div class="elementor-widget-container">
+					<div data-tagid="B9y1CZXtRZjl4x3R0oDy">
+    <script type="text/rocketlazyloadscript" data-rocket-type="text/javascript">
+        var _avp = _avp || [];
+        _avp.push({ tagid: 'B9y1CZXtRZjl4x3R0oDy', alias: '/', type: 'banner', zid: 4, pid: 0, secure: true });
+    </script>
+</div>				</div>
+				</div>
+				<div class="elementor-element elementor-element-3c61b32 mystery-ad elementor-hidden-desktop elementor-hidden-tablet elementor-hidden-mobile elementor-widget elementor-widget-global elementor-global-335 elementor-widget-html" data-id="3c61b32" data-element_type="widget" data-e-type="widget" data-widget_type="html.default">
+				<div class="elementor-widget-container">
+					<div data-tagid="B9y1CZXtRZjl4x3R0oDy">
+    <script type="text/rocketlazyloadscript" data-rocket-type="text/javascript">
+        var _avp = _avp || [];
+        _avp.push({ tagid: 'B9y1CZXtRZjl4x3R0oDy', alias: '/', type: 'banner', zid: 4, pid: 0, secure: true });
+    </script>
+</div>				</div>
+				</div>
+				<div class="elementor-element elementor-element-b347b01 romance-ad elementor-hidden-desktop elementor-hidden-tablet elementor-hidden-mobile elementor-widget elementor-widget-global elementor-global-336 elementor-widget-html" data-id="b347b01" data-element_type="widget" data-e-type="widget" data-widget_type="html.default">
+				<div class="elementor-widget-container">
+					<div data-tagid="B9y1CZXtRZjl4x3R0oDy">
+    <script type="text/rocketlazyloadscript" data-rocket-type="text/javascript">
+        var _avp = _avp || [];
+        _avp.push({ tagid: 'B9y1CZXtRZjl4x3R0oDy', alias: '/', type: 'banner', zid: 4, pid: 0, secure: true });
+    </script>
+</div>				</div>
+				</div>
+				<div class="elementor-element elementor-element-62881dd sci-fi-fantasy-ad elementor-hidden-desktop elementor-hidden-tablet elementor-hidden-mobile elementor-widget elementor-widget-global elementor-global-337 elementor-widget-html" data-id="62881dd" data-element_type="widget" data-e-type="widget" data-widget_type="html.default">
+				<div class="elementor-widget-container">
+					<div data-tagid="B9y1CZXtRZjl4x3R0oDy">
+    <script type="text/rocketlazyloadscript" data-rocket-type="text/javascript">
+        var _avp = _avp || [];
+        _avp.push({ tagid: 'B9y1CZXtRZjl4x3R0oDy', alias: '/', type: 'banner', zid: 4, pid: 0, secure: true });
+    </script>
+</div>				</div>
+				</div>
+				<div class="elementor-element elementor-element-47a3972 ya-childrens-ad elementor-hidden-desktop elementor-hidden-tablet elementor-hidden-mobile elementor-widget elementor-widget-global elementor-global-338 elementor-widget-html" data-id="47a3972" data-element_type="widget" data-e-type="widget" data-widget_type="html.default">
+				<div class="elementor-widget-container">
+					<div data-tagid="B9y1CZXtRZjl4x3R0oDy">
+    <script type="text/rocketlazyloadscript" data-rocket-type="text/javascript">
+        var _avp = _avp || [];
+        _avp.push({ tagid: 'B9y1CZXtRZjl4x3R0oDy', alias: '/', type: 'banner', zid: 4, pid: 0, secure: true });
+    </script>
+</div>				</div>
+				</div>
+				<div class="elementor-element elementor-element-0643196 elementor-widget elementor-widget-heading" data-id="0643196" data-element_type="widget" data-e-type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h3 class="elementor-heading-title elementor-size-default">Trending Interviews</h3>				</div>
+				</div>
+				<div class="elementor-element elementor-element-f620618 elementor-grid-1 side-posts elementor-grid-tablet-1 elementor-posts--thumbnail-top elementor-grid-mobile-1 elementor-widget elementor-widget-posts" data-id="f620618" data-element_type="widget" data-e-type="widget" data-settings="{&quot;custom_columns&quot;:&quot;1&quot;,&quot;custom_row_gap&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:20,&quot;sizes&quot;:[]},&quot;custom_columns_tablet&quot;:&quot;1&quot;,&quot;custom_columns_mobile&quot;:&quot;1&quot;,&quot;custom_row_gap_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;custom_row_gap_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]}}" data-widget_type="posts.custom">
+				<div class="elementor-widget-container">
+					      <div class="ecs-posts elementor-posts-container elementor-posts   elementor-grid elementor-posts--skin-custom" data-settings="{&quot;current_page&quot;:1,&quot;max_num_pages&quot;:&quot;5&quot;,&quot;load_method&quot;:&quot;&quot;,&quot;widget_id&quot;:&quot;f620618&quot;,&quot;post_id&quot;:115307,&quot;theme_id&quot;:140,&quot;change_url&quot;:false,&quot;reinit_js&quot;:false}">
+      		<article id="post-232796" class="elementor-post elementor-grid-item ecs-post-loop post-232796 post type-post status-publish format-standard has-post-thumbnail hentry category-interviews tag-homeslide genres-chapter-book genres-childrens genres-childrens-ya genres-middle-grade">
+				<div data-elementor-type="loop" data-elementor-id="148" class="elementor elementor-148 elementor-location-single post-232796 post type-post status-publish format-standard has-post-thumbnail hentry category-interviews tag-homeslide genres-chapter-book genres-childrens genres-childrens-ya genres-middle-grade" data-elementor-post-type="elementor_library">
+					<div class="elementor-section elementor-top-section elementor-element elementor-element-4251b408 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="4251b408" data-element_type="section" data-e-type="section">
+						<div class="elementor-container elementor-column-gap-no">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-4b202819" data-id="4b202819" data-element_type="column" data-e-type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-section elementor-inner-section elementor-element elementor-element-77982753 elementor-section-content-middle elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="77982753" data-element_type="section" data-e-type="section">
+						<div class="elementor-container elementor-column-gap-no">
+					<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-a8c559b" data-id="a8c559b" data-element_type="column" data-e-type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-10b528ab elementor-widget elementor-widget-theme-post-featured-image elementor-widget-image" data-id="10b528ab" data-element_type="widget" data-e-type="widget" data-widget_type="theme-post-featured-image.default">
+				<div class="elementor-widget-container">
+																<a href="https://www.bookpage.com/interviews/andrea-l-rogers-interview-death-in-the-tallgrass/">
+							<img width="1000" height="1250" src="https://t1.bookpage.com/wp-content/uploads/2026/07/27114336/MUG_Andrea-L.-Rogers-credit-Erica-Pretty-Eagle-1.jpg" class="attachment-full size-full wp-image-232352" alt="" srcset="https://t1.bookpage.com/wp-content/uploads/2026/07/27114336/MUG_Andrea-L.-Rogers-credit-Erica-Pretty-Eagle-1.jpg 1000w, https://t1.bookpage.com/wp-content/uploads/2026/07/27114336/MUG_Andrea-L.-Rogers-credit-Erica-Pretty-Eagle-1-250x313.jpg 250w, https://t1.bookpage.com/wp-content/uploads/2026/07/27114336/MUG_Andrea-L.-Rogers-credit-Erica-Pretty-Eagle-1-750x938.jpg 750w, https://t1.bookpage.com/wp-content/uploads/2026/07/27114336/MUG_Andrea-L.-Rogers-credit-Erica-Pretty-Eagle-1-125x156.jpg 125w, https://t1.bookpage.com/wp-content/uploads/2026/07/27114336/MUG_Andrea-L.-Rogers-credit-Erica-Pretty-Eagle-1-768x960.jpg 768w" sizes="(max-width: 1000px) 100vw, 1000px" />								</a>
+															</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-2802a92c" data-id="2802a92c" data-element_type="column" data-e-type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-529eaa5 elementor-widget elementor-widget-global elementor-global-231286 elementor-widget-text-editor" data-id="529eaa5" data-element_type="widget" data-e-type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+									<a href="https://www.bookpage.com/genres/childrens-ya/">Children&#039;s &amp; YA</a>								</div>
+				</div>
+				<div data-dce-title-color="#000000" class="elementor-element elementor-element-3d6fd144 elementor-widget elementor-widget-theme-post-title elementor-page-title elementor-widget-heading" data-id="3d6fd144" data-element_type="widget" data-e-type="widget" data-widget_type="theme-post-title.default">
+				<div class="elementor-widget-container">
+					<h5 class="elementor-heading-title elementor-size-default"><a href="https://www.bookpage.com/interviews/andrea-l-rogers-interview-death-in-the-tallgrass/">The echoes of injustice</a></h5>				</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</div>
+				<div data-dce-background-color="#FAFAFA" class="elementor-section elementor-inner-section elementor-element elementor-element-76f90335 more-info-text elementor-hidden-desktop elementor-hidden-tablet elementor-hidden-mobile elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="76f90335" data-element_type="section" data-e-type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-17561f74" data-id="17561f74" data-element_type="column" data-e-type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-684fad33 more-info-close elementor-widget__width-auto elementor-absolute elementor-view-default elementor-widget elementor-widget-icon" data-id="684fad33" data-element_type="widget" data-e-type="widget" data-settings="{&quot;_position&quot;:&quot;absolute&quot;}" data-widget_type="icon.default">
+				<div class="elementor-widget-container">
+							<div class="elementor-icon-wrapper">
+			<div class="elementor-icon">
+			<i aria-hidden="true" class="fas fa-times"></i>			</div>
+		</div>
+						</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</div>
+					</div>
+		</div>
+					</div>
+		</div>
+				</div>
+				</article>
+				<article id="post-232794" class="elementor-post elementor-grid-item ecs-post-loop post-232794 post type-post status-publish format-standard has-post-thumbnail hentry category-interviews tag-homeslide genres-fiction genres-literary-fiction">
+				<div data-elementor-type="loop" data-elementor-id="148" class="elementor elementor-148 elementor-location-single post-232794 post type-post status-publish format-standard has-post-thumbnail hentry category-interviews tag-homeslide genres-fiction genres-literary-fiction" data-elementor-post-type="elementor_library">
+					<div class="elementor-section elementor-top-section elementor-element elementor-element-4251b408 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="4251b408" data-element_type="section" data-e-type="section">
+						<div class="elementor-container elementor-column-gap-no">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-4b202819" data-id="4b202819" data-element_type="column" data-e-type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-section elementor-inner-section elementor-element elementor-element-77982753 elementor-section-content-middle elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="77982753" data-element_type="section" data-e-type="section">
+						<div class="elementor-container elementor-column-gap-no">
+					<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-a8c559b" data-id="a8c559b" data-element_type="column" data-e-type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-10b528ab elementor-widget elementor-widget-theme-post-featured-image elementor-widget-image" data-id="10b528ab" data-element_type="widget" data-e-type="widget" data-widget_type="theme-post-featured-image.default">
+				<div class="elementor-widget-container">
+																<a href="https://www.bookpage.com/interviews/marlon-james-interview-the-disappearers/">
+							<img width="1000" height="1249" src="https://t1.bookpage.com/wp-content/uploads/2026/07/27114426/MUG_Marlon-James-credit-Mark-Seliger-1.jpg" class="attachment-full size-full wp-image-232356" alt="Photo of Marlon James by Mark Seliger." srcset="https://t1.bookpage.com/wp-content/uploads/2026/07/27114426/MUG_Marlon-James-credit-Mark-Seliger-1.jpg 1000w, https://t1.bookpage.com/wp-content/uploads/2026/07/27114426/MUG_Marlon-James-credit-Mark-Seliger-1-250x312.jpg 250w, https://t1.bookpage.com/wp-content/uploads/2026/07/27114426/MUG_Marlon-James-credit-Mark-Seliger-1-750x937.jpg 750w, https://t1.bookpage.com/wp-content/uploads/2026/07/27114426/MUG_Marlon-James-credit-Mark-Seliger-1-125x156.jpg 125w, https://t1.bookpage.com/wp-content/uploads/2026/07/27114426/MUG_Marlon-James-credit-Mark-Seliger-1-768x959.jpg 768w" sizes="(max-width: 1000px) 100vw, 1000px" />								</a>
+															</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-2802a92c" data-id="2802a92c" data-element_type="column" data-e-type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-529eaa5 elementor-widget elementor-widget-global elementor-global-231286 elementor-widget-text-editor" data-id="529eaa5" data-element_type="widget" data-e-type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+									<a href="https://www.bookpage.com/genres/fiction/">Fiction</a>								</div>
+				</div>
+				<div data-dce-title-color="#000000" class="elementor-element elementor-element-3d6fd144 elementor-widget elementor-widget-theme-post-title elementor-page-title elementor-widget-heading" data-id="3d6fd144" data-element_type="widget" data-e-type="widget" data-widget_type="theme-post-title.default">
+				<div class="elementor-widget-container">
+					<h5 class="elementor-heading-title elementor-size-default"><a href="https://www.bookpage.com/interviews/marlon-james-interview-the-disappearers/">Marlon James asks, how does violence change you?</a></h5>				</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</div>
+				<div data-dce-background-color="#FAFAFA" class="elementor-section elementor-inner-section elementor-element elementor-element-76f90335 more-info-text elementor-hidden-desktop elementor-hidden-tablet elementor-hidden-mobile elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="76f90335" data-element_type="section" data-e-type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-17561f74" data-id="17561f74" data-element_type="column" data-e-type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-684fad33 more-info-close elementor-widget__width-auto elementor-absolute elementor-view-default elementor-widget elementor-widget-icon" data-id="684fad33" data-element_type="widget" data-e-type="widget" data-settings="{&quot;_position&quot;:&quot;absolute&quot;}" data-widget_type="icon.default">
+				<div class="elementor-widget-container">
+							<div class="elementor-icon-wrapper">
+			<div class="elementor-icon">
+			<i aria-hidden="true" class="fas fa-times"></i>			</div>
+		</div>
+						</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</div>
+					</div>
+		</div>
+					</div>
+		</div>
+				</div>
+				</article>
+				<article id="post-229430" class="elementor-post elementor-grid-item ecs-post-loop post-229430 post type-post status-publish format-standard has-post-thumbnail hentry category-interviews tag-homeslide genres-memoir genres-nonfiction">
+				<div data-elementor-type="loop" data-elementor-id="148" class="elementor elementor-148 elementor-location-single post-229430 post type-post status-publish format-standard has-post-thumbnail hentry category-interviews tag-homeslide genres-memoir genres-nonfiction" data-elementor-post-type="elementor_library">
+					<div class="elementor-section elementor-top-section elementor-element elementor-element-4251b408 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="4251b408" data-element_type="section" data-e-type="section">
+						<div class="elementor-container elementor-column-gap-no">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-4b202819" data-id="4b202819" data-element_type="column" data-e-type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-section elementor-inner-section elementor-element elementor-element-77982753 elementor-section-content-middle elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="77982753" data-element_type="section" data-e-type="section">
+						<div class="elementor-container elementor-column-gap-no">
+					<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-a8c559b" data-id="a8c559b" data-element_type="column" data-e-type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-10b528ab elementor-widget elementor-widget-theme-post-featured-image elementor-widget-image" data-id="10b528ab" data-element_type="widget" data-e-type="widget" data-widget_type="theme-post-featured-image.default">
+				<div class="elementor-widget-container">
+																<a href="https://www.bookpage.com/interviews/nephi-craig-interview-our-knives-will-save-us/">
+							<img width="1000" height="1183" src="https://t1.bookpage.com/wp-content/uploads/2026/06/29100844/MUG_Nephi-Craig-c-Ari-Carter-Craig-.jpg" class="attachment-full size-full wp-image-228617" alt="Photo of Nephi Craig (c) Ari Carter Craig" srcset="https://t1.bookpage.com/wp-content/uploads/2026/06/29100844/MUG_Nephi-Craig-c-Ari-Carter-Craig-.jpg 1000w, https://t1.bookpage.com/wp-content/uploads/2026/06/29100844/MUG_Nephi-Craig-c-Ari-Carter-Craig--250x296.jpg 250w, https://t1.bookpage.com/wp-content/uploads/2026/06/29100844/MUG_Nephi-Craig-c-Ari-Carter-Craig--750x887.jpg 750w, https://t1.bookpage.com/wp-content/uploads/2026/06/29100844/MUG_Nephi-Craig-c-Ari-Carter-Craig--125x148.jpg 125w, https://t1.bookpage.com/wp-content/uploads/2026/06/29100844/MUG_Nephi-Craig-c-Ari-Carter-Craig--768x909.jpg 768w" sizes="(max-width: 1000px) 100vw, 1000px" />								</a>
+															</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-2802a92c" data-id="2802a92c" data-element_type="column" data-e-type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-529eaa5 elementor-widget elementor-widget-global elementor-global-231286 elementor-widget-text-editor" data-id="529eaa5" data-element_type="widget" data-e-type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+									<a href="https://www.bookpage.com/genres/nonfiction/">Nonfiction</a>								</div>
+				</div>
+				<div data-dce-title-color="#000000" class="elementor-element elementor-element-3d6fd144 elementor-widget elementor-widget-theme-post-title elementor-page-title elementor-widget-heading" data-id="3d6fd144" data-element_type="widget" data-e-type="widget" data-widget_type="theme-post-title.default">
+				<div class="elementor-widget-container">
+					<h5 class="elementor-heading-title elementor-size-default"><a href="https://www.bookpage.com/interviews/nephi-craig-interview-our-knives-will-save-us/">Forces collide in Nephi Craig’s powerful debut memoir</a></h5>				</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</div>
+				<div data-dce-background-color="#FAFAFA" class="elementor-section elementor-inner-section elementor-element elementor-element-76f90335 more-info-text elementor-hidden-desktop elementor-hidden-tablet elementor-hidden-mobile elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="76f90335" data-element_type="section" data-e-type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-17561f74" data-id="17561f74" data-element_type="column" data-e-type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-684fad33 more-info-close elementor-widget__width-auto elementor-absolute elementor-view-default elementor-widget elementor-widget-icon" data-id="684fad33" data-element_type="widget" data-e-type="widget" data-settings="{&quot;_position&quot;:&quot;absolute&quot;}" data-widget_type="icon.default">
+				<div class="elementor-widget-container">
+							<div class="elementor-icon-wrapper">
+			<div class="elementor-icon">
+			<i aria-hidden="true" class="fas fa-times"></i>			</div>
+		</div>
+						</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</div>
+					</div>
+		</div>
+					</div>
+		</div>
+				</div>
+				</article>
+				</div>
+						</div>
+				</div>
+				<div class="elementor-element elementor-element-0ddbbba elementor-align-right elementor-widget elementor-widget-button" data-id="0ddbbba" data-element_type="widget" data-e-type="widget" data-widget_type="button.default">
+				<div class="elementor-widget-container">
+									<div class="elementor-button-wrapper">
+					<a class="elementor-button elementor-button-link elementor-size-sm" href="/category/interviews/">
+						<span class="elementor-button-content-wrapper">
+						<span class="elementor-button-icon">
+				<svg xmlns="http://www.w3.org/2000/svg" id="arrow_long" data-name="arrow long" width="38.92" height="14" viewBox="0 0 38.92 14"><path id="Path" d="M-38.231,6.273H-2.367l-5.1-5.1a.689.689,0,0,1,0-.974A.689.689,0,0,1-6.49.2l6.2,6.2A.687.687,0,0,1,0,6.962s0,.007,0,.01,0,.015,0,.022a.684.684,0,0,1-.037.193.666.666,0,0,1-.05.11.691.691,0,0,1-.058.088.646.646,0,0,1-.053.08L-6.536,13.8a.687.687,0,0,1-.487.2.687.687,0,0,1-.487-.2.689.689,0,0,1,0-.974L-2.336,7.65H-38.231a.689.689,0,0,1-.689-.689A.689.689,0,0,1-38.231,6.273Z" transform="translate(38.92 0)"></path></svg>			</span>
+									<span class="elementor-button-text">All Interviews</span>
+					</span>
+					</a>
+				</div>
+								</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+				<section data-wpr-lazyrender="1" class="elementor-section elementor-top-section elementor-element elementor-element-d2d10d5 elementor-hidden-phone elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="d2d10d5" data-element_type="section" data-e-type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-5391922" data-id="5391922" data-element_type="column" data-e-type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-5f7464d uni-ad elementor-widget elementor-widget-global elementor-global-72131 elementor-widget-html" data-id="5f7464d" data-element_type="widget" data-e-type="widget" data-widget_type="html.default">
+				<div class="elementor-widget-container">
+					<div data-tagid="Um2qfppxNdBN727loyDo">
+    <script type="text/rocketlazyloadscript" data-rocket-type="text/javascript">
+        var _avp = _avp || [];
+        _avp.push({ tagid: 'Um2qfppxNdBN727loyDo', alias: '/', type: 'banner', zid: 1, pid: 0, secure: true });
+    </script>
+</div>				</div>
+				</div>
+				<div class="elementor-element elementor-element-b3c3699 fiction-ad elementor-hidden-desktop elementor-hidden-tablet elementor-hidden-mobile elementor-widget elementor-widget-global elementor-global-339 elementor-widget-html" data-id="b3c3699" data-element_type="widget" data-e-type="widget" data-widget_type="html.default">
+				<div class="elementor-widget-container">
+					<div data-tagid="Um2qfppxNdBN727loyDo">
+    <script type="text/rocketlazyloadscript" data-rocket-type="text/javascript">
+        var _avp = _avp || [];
+        _avp.push({ tagid: 'Um2qfppxNdBN727loyDo', alias: '/', type: 'banner', zid: 1, pid: 0, secure: true });
+    </script>
+</div>				</div>
+				</div>
+				<div class="elementor-element elementor-element-0e5878f nonfiction-ad elementor-hidden-desktop elementor-hidden-tablet elementor-hidden-mobile elementor-widget elementor-widget-global elementor-global-340 elementor-widget-html" data-id="0e5878f" data-element_type="widget" data-e-type="widget" data-widget_type="html.default">
+				<div class="elementor-widget-container">
+					<div data-tagid="Um2qfppxNdBN727loyDo">
+    <script type="text/rocketlazyloadscript" data-rocket-type="text/javascript">
+        var _avp = _avp || [];
+        _avp.push({ tagid: 'Um2qfppxNdBN727loyDo', alias: '/', type: 'banner', zid: 1, pid: 0, secure: true });
+    </script>
+</div>				</div>
+				</div>
+				<div class="elementor-element elementor-element-a822682 mystery-ad elementor-hidden-desktop elementor-hidden-tablet elementor-hidden-mobile elementor-widget elementor-widget-global elementor-global-341 elementor-widget-html" data-id="a822682" data-element_type="widget" data-e-type="widget" data-widget_type="html.default">
+				<div class="elementor-widget-container">
+					<div data-tagid="Um2qfppxNdBN727loyDo">
+    <script type="text/rocketlazyloadscript" data-rocket-type="text/javascript">
+        var _avp = _avp || [];
+        _avp.push({ tagid: 'Um2qfppxNdBN727loyDo', alias: '/', type: 'banner', zid: 1, pid: 0, secure: true });
+    </script>
+</div>				</div>
+				</div>
+				<div class="elementor-element elementor-element-83f16e4 romance-ad elementor-hidden-desktop elementor-hidden-tablet elementor-hidden-mobile elementor-widget elementor-widget-global elementor-global-342 elementor-widget-html" data-id="83f16e4" data-element_type="widget" data-e-type="widget" data-widget_type="html.default">
+				<div class="elementor-widget-container">
+					<div data-tagid="Um2qfppxNdBN727loyDo">
+    <script type="text/rocketlazyloadscript" data-rocket-type="text/javascript">
+        var _avp = _avp || [];
+        _avp.push({ tagid: 'Um2qfppxNdBN727loyDo', alias: '/', type: 'banner', zid: 1, pid: 0, secure: true });
+    </script>
+</div>				</div>
+				</div>
+				<div class="elementor-element elementor-element-3cea9e2 sci-fi-fantasy-ad elementor-hidden-desktop elementor-hidden-tablet elementor-hidden-mobile elementor-widget elementor-widget-global elementor-global-343 elementor-widget-html" data-id="3cea9e2" data-element_type="widget" data-e-type="widget" data-widget_type="html.default">
+				<div class="elementor-widget-container">
+					<div data-tagid="Um2qfppxNdBN727loyDo">
+    <script type="text/rocketlazyloadscript" data-rocket-type="text/javascript">
+        var _avp = _avp || [];
+        _avp.push({ tagid: 'Um2qfppxNdBN727loyDo', alias: '/', type: 'banner', zid: 1, pid: 0, secure: true });
+    </script>
+</div>				</div>
+				</div>
+				<div class="elementor-element elementor-element-5fc925c ya-childrens-ad elementor-hidden-desktop elementor-hidden-tablet elementor-hidden-mobile elementor-widget elementor-widget-global elementor-global-344 elementor-widget-html" data-id="5fc925c" data-element_type="widget" data-e-type="widget" data-widget_type="html.default">
+				<div class="elementor-widget-container">
+					<div data-tagid="Um2qfppxNdBN727loyDo">
+    <script type="text/rocketlazyloadscript" data-rocket-type="text/javascript">
+        var _avp = _avp || [];
+        _avp.push({ tagid: 'Um2qfppxNdBN727loyDo', alias: '/', type: 'banner', zid: 1, pid: 0, secure: true });
+    </script>
+</div>				</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+				</div>
+				<footer data-elementor-type="footer" data-elementor-id="71" class="elementor elementor-71 elementor-location-footer" data-elementor-post-type="elementor_library">
+					<footer class="elementor-section elementor-top-section elementor-element elementor-element-b0cf370 elementor-section-full_width elementor-reverse-mobile elementor-section-height-default elementor-section-height-default" data-id="b0cf370" data-element_type="section" data-e-type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-e2d5282 col-left-lg" data-id="e2d5282" data-element_type="column" data-e-type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-section elementor-inner-section elementor-element elementor-element-c363c89 elementor-section-full_width elementor-section-height-default elementor-section-height-default" data-id="c363c89" data-element_type="section" data-e-type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-25 elementor-inner-column elementor-element elementor-element-8fd1d9d" data-id="8fd1d9d" data-element_type="column" data-e-type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-66daa59 elementor-widget__width-initial elementor-widget elementor-widget-image" data-id="66daa59" data-element_type="widget" data-e-type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+															<img width="250" height="67" src="https://t1.bookpage.com/wp-content/uploads/2021/07/10161812/BP_Logo_Black-250x67.png" class="attachment-medium size-medium wp-image-211209" alt="" srcset="https://t1.bookpage.com/wp-content/uploads/2021/07/10161812/BP_Logo_Black-250x67.png 250w, https://t1.bookpage.com/wp-content/uploads/2021/07/10161812/BP_Logo_Black-750x201.png 750w, https://t1.bookpage.com/wp-content/uploads/2021/07/10161812/BP_Logo_Black-125x33.png 125w, https://t1.bookpage.com/wp-content/uploads/2021/07/10161812/BP_Logo_Black-768x206.png 768w, https://t1.bookpage.com/wp-content/uploads/2021/07/10161812/BP_Logo_Black-1536x412.png 1536w, https://t1.bookpage.com/wp-content/uploads/2021/07/10161812/BP_Logo_Black-2048x549.png 2048w, https://t1.bookpage.com/wp-content/uploads/2021/07/10161812/BP_Logo_Black.png 1200w" sizes="(max-width: 250px) 100vw, 250px" />															</div>
+				</div>
+				<div class="elementor-element elementor-element-1b67a69 elementor-widget__width-initial elementor-widget elementor-widget-text-editor" data-id="1b67a69" data-element_type="widget" data-e-type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+									<p>BookPage is an editorially independent recommendation guide for readers, highlighting the best new books across all genres as chosen by our editors. Starred (<strong>★</strong>) titles indicate a book that is exceptional in its genre or category. Any publisher-sponsored content is clearly labeled as such.</p>								</div>
+				</div>
+				<div class="elementor-element elementor-element-c666cad elementor-shape-circle e-grid-align-left elementor-grid-0 elementor-widget elementor-widget-social-icons" data-id="c666cad" data-element_type="widget" data-e-type="widget" data-widget_type="social-icons.default">
+				<div class="elementor-widget-container">
+							<div class="elementor-social-icons-wrapper elementor-grid" role="list">
+							<span class="elementor-grid-item" role="listitem">
+					<a class="elementor-icon elementor-social-icon elementor-social-icon-instagram elementor-animation-pop elementor-repeater-item-ceeb15b" href="https://www.instagram.com/readbookpage/?hl=en" target="_blank">
+						<span class="elementor-screen-only">Instagram</span>
+						<i aria-hidden="true" class="fab fa-instagram"></i>					</a>
+				</span>
+							<span class="elementor-grid-item" role="listitem">
+					<a class="elementor-icon elementor-social-icon elementor-social-icon-facebook-f elementor-animation-pop elementor-repeater-item-1c03eed" href="https://www.facebook.com/readbookpage/" target="_blank">
+						<span class="elementor-screen-only">Facebook-f</span>
+						<i aria-hidden="true" class="fab fa-facebook-f"></i>					</a>
+				</span>
+							<span class="elementor-grid-item" role="listitem">
+					<a class="elementor-icon elementor-social-icon elementor-social-icon-icon-bluesky_logo elementor-animation-pop elementor-repeater-item-d4abaa4" href="https://bsky.app/profile/readbookpage.bsky.social" target="_blank">
+						<span class="elementor-screen-only">Icon-bluesky_logo</span>
+						<i aria-hidden="true" class="icon icon-bluesky_logo"></i>					</a>
+				</span>
+							<span class="elementor-grid-item" role="listitem">
+					<a class="elementor-icon elementor-social-icon elementor-social-icon-x-twitter elementor-animation-pop elementor-repeater-item-09af4fa" href="https://twitter.com/bookpage" target="_blank">
+						<span class="elementor-screen-only">X-twitter</span>
+						<i aria-hidden="true" class="fab fa-x-twitter"></i>					</a>
+				</span>
+							<span class="elementor-grid-item" role="listitem">
+					<a class="elementor-icon elementor-social-icon elementor-social-icon-linkedin elementor-animation-pop elementor-repeater-item-ddbf61a" href="https://www.linkedin.com/company/bookpage" target="_blank">
+						<span class="elementor-screen-only">Linkedin</span>
+						<i aria-hidden="true" class="fab fa-linkedin"></i>					</a>
+				</span>
+							<span class="elementor-grid-item" role="listitem">
+					<a class="elementor-icon elementor-social-icon elementor-social-icon-tiktok elementor-animation-pop elementor-repeater-item-2ed0ab8" href="https://www.tiktok.com/@readbookpage" target="_blank">
+						<span class="elementor-screen-only">Tiktok</span>
+						<i aria-hidden="true" class="fab fa-tiktok"></i>					</a>
+				</span>
+					</div>
+						</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-25 elementor-inner-column elementor-element elementor-element-1cadb5d elementor-hidden-tablet elementor-hidden-phone" data-id="1cadb5d" data-element_type="column" data-e-type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div data-dce-title-color="#000000" class="elementor-element elementor-element-4299604 elementor-widget elementor-widget-heading" data-id="4299604" data-element_type="widget" data-e-type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h3 class="elementor-heading-title elementor-size-default">Company</h3>				</div>
+				</div>
+				<div class="elementor-element elementor-element-f594fc1 ecs-nav-layout-vertical e--pointer-text e--animation-none elementor-nav-menu--dropdown-none elementor-nav-menu--toggle elementor-nav-menu--burger ecs-toggle-align-center elementor-widget elementor-widget-nav-menu" data-id="f594fc1" data-element_type="widget" data-e-type="widget" data-settings="{&quot;layout&quot;:&quot;vertical&quot;,&quot;submenu_icon&quot;:{&quot;value&quot;:&quot;&lt;i class=\&quot;fas fa-caret-down\&quot; aria-hidden=\&quot;true\&quot;&gt;&lt;\/i&gt;&quot;,&quot;library&quot;:&quot;fa-solid&quot;},&quot;toggle&quot;:&quot;burger&quot;}" data-widget_type="nav-menu.default">
+				<div class="elementor-widget-container">
+								<nav aria-label="Menu" class="elementor-nav-menu--main elementor-nav-menu__container elementor-nav-menu--layout-vertical e--pointer-text e--animation-none">
+				<ul id="menu-1-f594fc1" class="elementor-nav-menu sm-vertical"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-364"><a href="https://www.bookpage.com/about-us/" class="elementor-item">About BookPage</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-365"><a rel="privacy-policy" href="https://www.bookpage.com/privacy/" class="elementor-item">Privacy Policy</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-201583"><a href="https://docs.google.com/document/d/1yMltzw6vYXXhBefLZHViL3fV33_lYrxpxzOvPHhRy3c/edit?usp=sharing" class="elementor-item">BookPage Style Guide</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-206794"><a href="https://www.bonfire.com/store/bookpage/" class="elementor-item">BookPage Merch</a></li>
+</ul>			</nav>
+					<div class="elementor-menu-toggle" role="button" tabindex="0" aria-label="Menu Toggle" aria-expanded="false">
+			<i aria-hidden="true" role="presentation" class="elementor-menu-toggle__icon--open eicon-menu-bar"></i><i aria-hidden="true" role="presentation" class="elementor-menu-toggle__icon--close eicon-close"></i>		</div>
+					<nav class="elementor-nav-menu--dropdown elementor-nav-menu__container" aria-hidden="true">
+				<ul id="menu-2-f594fc1" class="elementor-nav-menu sm-vertical"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-364"><a href="https://www.bookpage.com/about-us/" class="elementor-item" tabindex="-1">About BookPage</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-365"><a rel="privacy-policy" href="https://www.bookpage.com/privacy/" class="elementor-item" tabindex="-1">Privacy Policy</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-201583"><a href="https://docs.google.com/document/d/1yMltzw6vYXXhBefLZHViL3fV33_lYrxpxzOvPHhRy3c/edit?usp=sharing" class="elementor-item" tabindex="-1">BookPage Style Guide</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-206794"><a href="https://www.bonfire.com/store/bookpage/" class="elementor-item" tabindex="-1">BookPage Merch</a></li>
+</ul>			</nav>
+						</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-25 elementor-inner-column elementor-element elementor-element-7a4d046 elementor-hidden-tablet elementor-hidden-phone" data-id="7a4d046" data-element_type="column" data-e-type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div data-dce-title-color="#000000" class="elementor-element elementor-element-1540415 elementor-widget elementor-widget-heading" data-id="1540415" data-element_type="widget" data-e-type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h3 class="elementor-heading-title elementor-size-default">Contact</h3>				</div>
+				</div>
+				<div class="elementor-element elementor-element-4c71aa0 ecs-nav-layout-vertical e--pointer-text e--animation-none elementor-nav-menu--dropdown-none elementor-nav-menu--toggle elementor-nav-menu--burger ecs-toggle-align-center elementor-widget elementor-widget-nav-menu" data-id="4c71aa0" data-element_type="widget" data-e-type="widget" data-settings="{&quot;layout&quot;:&quot;vertical&quot;,&quot;submenu_icon&quot;:{&quot;value&quot;:&quot;&lt;i class=\&quot;fas fa-caret-down\&quot; aria-hidden=\&quot;true\&quot;&gt;&lt;\/i&gt;&quot;,&quot;library&quot;:&quot;fa-solid&quot;},&quot;toggle&quot;:&quot;burger&quot;}" data-widget_type="nav-menu.default">
+				<div class="elementor-widget-container">
+								<nav aria-label="Menu" class="elementor-nav-menu--main elementor-nav-menu__container elementor-nav-menu--layout-vertical e--pointer-text e--animation-none">
+				<ul id="menu-1-4c71aa0" class="elementor-nav-menu sm-vertical"><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-221596"><a href="https://www.bookpage.com/advertise/" class="elementor-item">Advertise in BookPage</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-221595"><a href="https://www.bookpage.com/submission-guidelines/" class="elementor-item">Submit books to BookPage</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-221594"><a href="https://www.bookpage.com/contact-us/" class="elementor-item">Contact us</a></li>
+</ul>			</nav>
+					<div class="elementor-menu-toggle" role="button" tabindex="0" aria-label="Menu Toggle" aria-expanded="false">
+			<i aria-hidden="true" role="presentation" class="elementor-menu-toggle__icon--open eicon-menu-bar"></i><i aria-hidden="true" role="presentation" class="elementor-menu-toggle__icon--close eicon-close"></i>		</div>
+					<nav class="elementor-nav-menu--dropdown elementor-nav-menu__container" aria-hidden="true">
+				<ul id="menu-2-4c71aa0" class="elementor-nav-menu sm-vertical"><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-221596"><a href="https://www.bookpage.com/advertise/" class="elementor-item" tabindex="-1">Advertise in BookPage</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-221595"><a href="https://www.bookpage.com/submission-guidelines/" class="elementor-item" tabindex="-1">Submit books to BookPage</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-221594"><a href="https://www.bookpage.com/contact-us/" class="elementor-item" tabindex="-1">Contact us</a></li>
+</ul>			</nav>
+						</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-25 elementor-inner-column elementor-element elementor-element-d779182" data-id="d779182" data-element_type="column" data-e-type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div data-dce-title-color="#000000" class="elementor-element elementor-element-74adcf9 elementor-widget elementor-widget-heading" data-id="74adcf9" data-element_type="widget" data-e-type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h3 class="elementor-heading-title elementor-size-default">Subscriptions</h3>				</div>
+				</div>
+				<div class="elementor-element elementor-element-187fe0a ecs-nav-layout-vertical e--pointer-text e--animation-none elementor-nav-menu--dropdown-none elementor-nav-menu--toggle elementor-nav-menu--burger ecs-toggle-align-center elementor-widget elementor-widget-nav-menu" data-id="187fe0a" data-element_type="widget" data-e-type="widget" data-settings="{&quot;layout&quot;:&quot;vertical&quot;,&quot;submenu_icon&quot;:{&quot;value&quot;:&quot;&lt;i class=\&quot;fas fa-caret-down\&quot; aria-hidden=\&quot;true\&quot;&gt;&lt;\/i&gt;&quot;,&quot;library&quot;:&quot;fa-solid&quot;},&quot;toggle&quot;:&quot;burger&quot;}" data-widget_type="nav-menu.default">
+				<div class="elementor-widget-container">
+								<nav aria-label="Menu" class="elementor-nav-menu--main elementor-nav-menu__container elementor-nav-menu--layout-vertical e--pointer-text e--animation-none">
+				<ul id="menu-1-187fe0a" class="elementor-nav-menu sm-vertical"><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-206800"><a href="https://www.bookpage.com/library-subscriptions/" class="elementor-item">Libraries</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-221622"><a href="https://www.bookpage.com/bookstore-subscriptions/" class="elementor-item">Bookstores</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-192133"><a href="https://subscribe.bookpage.com" class="elementor-item">Personal</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-221593"><a href="https://subscribe.bookpage.com/gift-subscription/" class="elementor-item">Give a gift</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-366"><a href="https://www.bookpage.com/find/" class="elementor-item">Find BookPage</a></li>
+</ul>			</nav>
+					<div class="elementor-menu-toggle" role="button" tabindex="0" aria-label="Menu Toggle" aria-expanded="false">
+			<i aria-hidden="true" role="presentation" class="elementor-menu-toggle__icon--open eicon-menu-bar"></i><i aria-hidden="true" role="presentation" class="elementor-menu-toggle__icon--close eicon-close"></i>		</div>
+					<nav class="elementor-nav-menu--dropdown elementor-nav-menu__container" aria-hidden="true">
+				<ul id="menu-2-187fe0a" class="elementor-nav-menu sm-vertical"><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-206800"><a href="https://www.bookpage.com/library-subscriptions/" class="elementor-item" tabindex="-1">Libraries</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-221622"><a href="https://www.bookpage.com/bookstore-subscriptions/" class="elementor-item" tabindex="-1">Bookstores</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-192133"><a href="https://subscribe.bookpage.com" class="elementor-item" tabindex="-1">Personal</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-221593"><a href="https://subscribe.bookpage.com/gift-subscription/" class="elementor-item" tabindex="-1">Give a gift</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-366"><a href="https://www.bookpage.com/find/" class="elementor-item" tabindex="-1">Find BookPage</a></li>
+</ul>			</nav>
+						</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</div>
+				<div class="elementor-section elementor-inner-section elementor-element elementor-element-7bcaaf9 elementor-section-full_width elementor-section-height-default elementor-section-height-default" data-id="7bcaaf9" data-element_type="section" data-e-type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-773e1c1" data-id="773e1c1" data-element_type="column" data-e-type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-5b3c362 elementor-widget elementor-widget-heading" data-id="5b3c362" data-element_type="widget" data-e-type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-heading-title elementor-size-default">© 1996–2026 BookPage and ProMotion, inc. | 2143 Belcourt Avenue, Nashville, TN 37212</div>				</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</div>
+					</div>
+		</div>
+					</div>
+		</footer>
+				</footer>
+		
+<script type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":["/wp-*.php","/wp-admin/*","/wp-content/uploads/*","/wp-content/*","/wp-content/plugins/*","/wp-content/themes/hello-theme-child-master/*","/wp-content/themes/hello-elementor/*","/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
+</script>
+<script async src="https://tag.simpli.fi/sifitag/99be14cc-8d03-496c-b03d-130cd5f3b882"></script>				<script type="text/rocketlazyloadscript" data-rocket-type="text/javascript">window.addEventListener('DOMContentLoaded', function() {
+				(function() {
+					// Global page view and session tracking for UAEL Modal Popup feature
+					try {
+						// Session tracking: increment if this is a new session
+						
+						// Check if any popup on this page uses current page tracking
+						var hasCurrentPageTracking = false;
+						var currentPagePopups = [];
+						// Check all modal popups on this page for current page tracking
+						if (typeof jQuery !== 'undefined') {
+							jQuery('.uael-modal-parent-wrapper').each(function() {
+								var scope = jQuery(this).data('page-views-scope');
+								var enabled = jQuery(this).data('page-views-enabled');
+								var popupId = jQuery(this).attr('id').replace('-overlay', '');	
+								if (enabled === 'yes' && scope === 'current') {
+									hasCurrentPageTracking = true;
+									currentPagePopups.push(popupId);
+								}
+							});
+						}
+						// Global tracking: ALWAYS increment if ANY popup on the site uses global tracking
+												// Current page tracking: increment per-page counters
+						if (hasCurrentPageTracking && currentPagePopups.length > 0) {
+							var currentUrl = window.location.href;
+							var urlKey = 'uael_page_views_' + btoa(currentUrl).replace(/[^a-zA-Z0-9]/g, '').substring(0, 50);
+							var currentPageViews = parseInt(localStorage.getItem(urlKey) || '0');
+							currentPageViews++;
+							localStorage.setItem(urlKey, currentPageViews.toString());
+							// Store URL mapping for each popup
+							for (var i = 0; i < currentPagePopups.length; i++) {
+								var popupUrlKey = 'uael_popup_' + currentPagePopups[i] + '_url_key';
+								localStorage.setItem(popupUrlKey, urlKey);
+							}
+						}
+					} catch (e) {
+						// Silently fail if localStorage is not available
+					}
+				})();
+				});</script>
+							<script type="text/rocketlazyloadscript">
+				( () => {
+					const lazyloadRunObserver = () => {
+						const lazyloadBackgrounds = document.querySelectorAll( `.e-con.e-parent:not(.e-lazyloaded)` );
+						const lazyloadBackgroundObserver = new IntersectionObserver( ( entries ) => {
+							entries.forEach( ( entry ) => {
+								if ( entry.isIntersecting ) {
+									let lazyloadBackground = entry.target;
+									if( lazyloadBackground ) {
+										lazyloadBackground.classList.add( 'e-lazyloaded' );
+									}
+									lazyloadBackgroundObserver.unobserve( entry.target );
+								}
+							});
+						}, { rootMargin: '200px 0px 200px 0px' } );
+						lazyloadBackgrounds.forEach( ( lazyloadBackground ) => {
+							lazyloadBackgroundObserver.observe( lazyloadBackground );
+						} );
+					};
+					const events = [
+						'DOMContentLoaded',
+						'elementor/lazyload/observe',
+					];
+					events.forEach( ( event ) => {
+						document.addEventListener( event, lazyloadRunObserver );
+					} );
+				} )();
+			</script>
+			<link rel='stylesheet' id='elementor-post-185136-css' href='https://assets.bookpage.com/wp-content/uploads/elementor/css/post-185136.css?ver=1788498314' media='all' />
+<style id="global-styles-inline-css">
+:root{--wp--preset--aspect-ratio--square: 1;--wp--preset--aspect-ratio--4-3: 4/3;--wp--preset--aspect-ratio--3-4: 3/4;--wp--preset--aspect-ratio--3-2: 3/2;--wp--preset--aspect-ratio--2-3: 2/3;--wp--preset--aspect-ratio--16-9: 16/9;--wp--preset--aspect-ratio--9-16: 9/16;--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgb(6,147,227) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgb(252,185,0) 0%,rgb(255,105,0) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgb(255,105,0) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgb(255, 255, 255), 6px 6px rgb(0, 0, 0);--wp--preset--shadow--crisp: 6px 6px 0px rgb(0, 0, 0);}.wp-block-button{--wp--preset--dimension--25: 25%;--wp--preset--dimension--50: 50%;--wp--preset--dimension--75: 75%;--wp--preset--dimension--100: 100%;}:root { --wp--style--global--content-size: 800px;--wp--style--global--wide-size: 1200px; }:where(body) { margin: 0; }.wp-site-blocks > .alignleft { float: left; margin-right: 2em; }.wp-site-blocks > .alignright { float: right; margin-left: 2em; }.wp-site-blocks > .aligncenter { justify-content: center; margin-left: auto; margin-right: auto; }:where(.wp-site-blocks) > * { margin-block-start: 24px; margin-block-end: 0; }:where(.wp-site-blocks) > :first-child { margin-block-start: 0; }:where(.wp-site-blocks) > :last-child { margin-block-end: 0; }:root { --wp--style--block-gap: 24px; }:root :where(.is-layout-flow) > :first-child{margin-block-start: 0;}:root :where(.is-layout-flow) > :last-child{margin-block-end: 0;}:root :where(.is-layout-flow) > *{margin-block-start: 24px;margin-block-end: 0;}:root :where(.is-layout-constrained) > :first-child{margin-block-start: 0;}:root :where(.is-layout-constrained) > :last-child{margin-block-end: 0;}:root :where(.is-layout-constrained) > *{margin-block-start: 24px;margin-block-end: 0;}:root :where(.is-layout-flex){gap: 24px;}:root :where(.is-layout-grid){gap: 24px;}.is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}.is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}.is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}.is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}.is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}.is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}.is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}.is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}body{padding-top: 0px;padding-right: 0px;padding-bottom: 0px;padding-left: 0px;}:root :where(.wp-element-button, .wp-block-button__link){background-color: #32373c;border-width: 0;color: #fff;font-family: inherit;font-size: inherit;font-style: inherit;font-weight: inherit;letter-spacing: inherit;line-height: inherit;padding-top: calc(0.667em + 2px);padding-right: calc(1.333em + 2px);padding-bottom: calc(0.667em + 2px);padding-left: calc(1.333em + 2px);text-decoration: none;text-transform: inherit;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+/*# sourceURL=global-styles-inline-css */
+</style>
+<script type="text/rocketlazyloadscript" id="emx-views-js-after">
+(function(){
+			var key = "emxv115307", url = "https:\/\/www.bookpage.com\/wp-json\/emx\/v1\/view\/115307";
+			try {
+				if ( sessionStorage.getItem( key ) ) { return; }
+				sessionStorage.setItem( key, "1" );
+			} catch ( e ) {}
+			if ( navigator.sendBeacon ) {
+				navigator.sendBeacon( url );
+			} else {
+				fetch( url, { method: "POST", keepalive: true } );
+			}
+		})();
+//# sourceURL=emx-views-js-after
+</script>
+<script type="text/rocketlazyloadscript" id="bp-reviews-genre-filter-js-after">
+document.addEventListener('change', function (e) {
+            if (e.target.id !== 'bp-reviews-genre-filter') return;
+            var url = new URL(window.location.href);
+            e.target.value ? url.searchParams.set('genre_filter', e.target.value) : url.searchParams.delete('genre_filter');
+            window.location.href = url.toString();
+        });
+    
+//# sourceURL=bp-reviews-genre-filter-js-after
+</script>
+<script type="text/rocketlazyloadscript" id="ecs-color-switcher-js" data-rocket-src="https://assets.bookpage.com/wp-content/plugins/ele-custom-skin/modules/color-scheme/assets/js/ecs-color-switcher.min.js?ver=4.3.11" data-rocket-defer defer></script>
+<script type="text/rocketlazyloadscript" id="swiper-js" data-rocket-src="https://assets.bookpage.com/wp-content/plugins/elementor/assets/lib/swiper/v8/swiper.min.js?ver=8.4.5" data-rocket-defer defer></script>
+<script type="text/rocketlazyloadscript" id="elementor-webpack-runtime-js" data-rocket-src="https://assets.bookpage.com/wp-content/plugins/elementor/assets/js/webpack.runtime.min.js?ver=4.2.4" data-rocket-defer defer></script>
+<script type="text/rocketlazyloadscript" id="elementor-frontend-modules-js" data-rocket-src="https://assets.bookpage.com/wp-content/plugins/elementor/assets/js/frontend-modules.min.js?ver=4.2.4" data-rocket-defer defer></script>
+<script type="text/rocketlazyloadscript" id="jquery-ui-core-js-before">window.addEventListener('DOMContentLoaded', function() {
+jQuery.uiBackCompat = true;
+//# sourceURL=jquery-ui-core-js-before
+});</script>
+<script type="text/rocketlazyloadscript" id="jquery-ui-core-js" data-rocket-src="https://assets.bookpage.com/wp-includes/js/jquery/ui/core.min.js?ver=1.14.2" data-rocket-defer defer></script>
+<script id="elementor-frontend-js-extra">
+var uael_particles_script = {"uael_particles_url":"https://www.bookpage.com/wp-content/plugins/ultimate-elementor/assets/min-js/uael-particles.min.js","particles_url":"https://www.bookpage.com/wp-content/plugins/ultimate-elementor/assets/lib/particles/particles.min.js","snowflakes_image":"https://www.bookpage.com/wp-content/plugins/ultimate-elementor/assets/img/snowflake.svg","gift":"https://www.bookpage.com/wp-content/plugins/ultimate-elementor/assets/img/gift.png","tree":"https://www.bookpage.com/wp-content/plugins/ultimate-elementor/assets/img/tree.png","skull":"https://www.bookpage.com/wp-content/plugins/ultimate-elementor/assets/img/skull.png","ghost":"https://www.bookpage.com/wp-content/plugins/ultimate-elementor/assets/img/ghost.png","moon":"https://www.bookpage.com/wp-content/plugins/ultimate-elementor/assets/img/moon.png","bat":"https://www.bookpage.com/wp-content/plugins/ultimate-elementor/assets/img/bat.png","pumpkin":"https://www.bookpage.com/wp-content/plugins/ultimate-elementor/assets/img/pumpkin.png"};
+//# sourceURL=elementor-frontend-js-extra
+</script>
+<script type="text/rocketlazyloadscript" id="elementor-frontend-js-before">
+var elementorFrontendConfig = {"environmentMode":{"edit":false,"wpPreview":false,"isScriptDebug":false},"i18n":{"shareOnFacebook":"Share on Facebook","shareOnX":"Share on X","pinIt":"Pin it","download":"Download","downloadImage":"Download image","fullscreen":"Fullscreen","zoom":"Zoom","share":"Share","playVideo":"Play Video","previous":"Previous","next":"Next","close":"Close","a11yCarouselPrevSlideMessage":"Previous slide","a11yCarouselNextSlideMessage":"Next slide","a11yCarouselFirstSlideMessage":"This is the first slide","a11yCarouselLastSlideMessage":"This is the last slide","a11yCarouselPaginationBulletMessage":"Go to slide"},"is_rtl":false,"breakpoints":{"xs":0,"sm":480,"md":768,"lg":1025,"xl":1440,"xxl":1600},"responsive":{"breakpoints":{"mobile":{"label":"Mobile Portrait","value":767,"default_value":767,"direction":"max","is_enabled":true},"mobile_extra":{"label":"Mobile Landscape","value":880,"default_value":880,"direction":"max","is_enabled":false},"tablet":{"label":"Tablet Portrait","value":1024,"default_value":1024,"direction":"max","is_enabled":true},"tablet_extra":{"label":"Tablet Landscape","value":1200,"default_value":1200,"direction":"max","is_enabled":false},"laptop":{"label":"Laptop","value":1366,"default_value":1366,"direction":"max","is_enabled":false},"widescreen":{"label":"Widescreen","value":2400,"default_value":2400,"direction":"min","is_enabled":false}},"hasCustomBreakpoints":false},"version":"4.2.4","is_static":false,"experimentalFeatures":{"additional_custom_breakpoints":true,"container":true,"theme_builder_v2":true,"nested-elements":true,"global_classes_should_enforce_capabilities":true,"e_variables":true,"e_opt_in_v4_page":true,"e_components":true,"e_interactions":true,"e_widget_creation":true,"import-export-customization":true,"e_pro_atomic_form":true,"e_pro_collection_loop":true,"e_pro_variables":true,"e_pro_interactions":true},"urls":{"assets":"https:\/\/www.bookpage.com\/wp-content\/plugins\/elementor\/assets\/","ajaxurl":"https:\/\/www.bookpage.com\/wp-admin\/admin-ajax.php","uploadUrl":"https:\/\/www.bookpage.com\/wp-content\/uploads"},"nonces":{"floatingButtonsClickTracking":"32f82f862f","atomicFormsSendForm":"1c87704eea"},"swiperClass":"swiper","settings":{"page":[],"editorPreferences":[],"dynamicooo":[]},"kit":{"active_breakpoints":["viewport_mobile","viewport_tablet"],"global_image_lightbox":"yes","lightbox_enable_counter":"yes","lightbox_enable_fullscreen":"yes","lightbox_enable_zoom":"yes","lightbox_enable_share":"yes","lightbox_title_src":"title","lightbox_description_src":"description"},"post":{"id":115307,"title":"George%20R.R.%20Martin%3A%20History%20is%20written%20in%20blood","excerpt":"","featuredImage":"https:\/\/t1.bookpage.com\/wp-content\/uploads\/2021\/08\/24174719\/large-21221.jpg"}};
+//# sourceURL=elementor-frontend-js-before
+</script>
+<script type="text/rocketlazyloadscript" id="elementor-frontend-js" data-rocket-src="https://assets.bookpage.com/wp-content/plugins/elementor/assets/js/frontend.min.js?ver=4.2.4" data-rocket-defer defer></script>
+<script type="text/rocketlazyloadscript" id="elementor-frontend-js-after">window.addEventListener('DOMContentLoaded', function() {
+window.scope_array = [];
+								window.backend = 0;
+								jQuery.cachedScript = function( url, options ) {
+									// Allow user to set any option except for dataType, cache, and url.
+									options = jQuery.extend( options || {}, {
+										dataType: "script",
+										cache: true,
+										url: url
+									});
+									// Return the jqXHR object so we can chain callbacks.
+									return jQuery.ajax( options );
+								};
+							    jQuery( window ).on( "elementor/frontend/init", function() {
+									elementorFrontend.hooks.addAction( "frontend/element_ready/global", function( $scope, $ ){
+										if ( "undefined" == typeof $scope ) {
+												return;
+										}
+										if ( $scope.hasClass( "uael-particle-yes" ) ) {
+											window.scope_array.push( $scope );
+											$scope.find(".uael-particle-wrapper").addClass("js-is-enabled");
+										}else{
+											return;
+										}
+										if(elementorFrontend.isEditMode() && $scope.find(".uael-particle-wrapper").hasClass("js-is-enabled") && window.backend == 0 ){
+											var uael_url = uael_particles_script.uael_particles_url;
+
+											jQuery.cachedScript( uael_url );
+											window.backend = 1;
+										}else if(elementorFrontend.isEditMode()){
+											var uael_url = uael_particles_script.uael_particles_url;
+											jQuery.cachedScript( uael_url ).done(function(){
+												var flag = true;
+											});
+										}
+									});
+								});
+
+								// Added both `document` and `window` event listeners to address issues where some users faced problems with the `document` event not triggering as expected.
+								// Define cachedScript globally to avoid redefining it.
+
+								jQuery.cachedScript = function(url, options) {
+									options = jQuery.extend(options || {}, {
+										dataType: "script",
+										cache: true,
+										url: url
+									});
+									return jQuery.ajax(options); // Return the jqXHR object so we can chain callbacks
+								};
+
+								let uael_particle_loaded = false; //flag to prevent multiple script loads.
+
+								jQuery( document ).on( "ready elementor/popup/show", () => {
+										loadParticleScript();
+								});
+
+								jQuery( window ).one( "elementor/frontend/init", () => {
+								 	if (!uael_particle_loaded) {
+										loadParticleScript();
+									}
+								});
+								
+								function loadParticleScript(){
+								 	// Use jQuery to check for the presence of the element
+									if (jQuery(".uael-particle-yes").length < 1) {
+										return;
+									}
+									
+									uael_particle_loaded = true;
+									var uael_url = uael_particles_script.uael_particles_url;
+									// Call the cachedScript function
+									jQuery.cachedScript(uael_url);
+								}
+//# sourceURL=elementor-frontend-js-after
+});</script>
+<script type="text/rocketlazyloadscript" id="ecs-slider-js" data-rocket-src="https://assets.bookpage.com/wp-content/plugins/ele-custom-skin/modules/container-layout/assets/js/ecs-slider.min.js?ver=4.3.11" data-rocket-defer defer></script>
+<script type="text/rocketlazyloadscript" id="ecs-scheme-selector-js" data-rocket-src="https://assets.bookpage.com/wp-content/plugins/ele-custom-skin-pro/assets/js/ecs-scheme-selector.js?ver=4.2.2" data-rocket-defer defer></script>
+<script type="text/rocketlazyloadscript" id="smartmenus-js" data-rocket-src="https://assets.bookpage.com/wp-content/plugins/elementor-pro/assets/lib/smartmenus/jquery.smartmenus.min.js?ver=1.2.1" data-rocket-defer defer></script>
+<script type="text/rocketlazyloadscript" id="imagesloaded-js" data-rocket-src="https://assets.bookpage.com/wp-includes/js/imagesloaded.min.js?ver=5.0.0" data-rocket-defer defer></script>
+<script id="jetpack-stats-js-before">
+_stq = window._stq || [];
+_stq.push([ "view", {"v":"ext","blog":"247309828","post":"115307","tz":"-5","srv":"www.bookpage.com","j":"1:16.1.3"} ]);
+_stq.push([ "clickTrackerInit", "247309828", "115307" ]);
+//# sourceURL=jetpack-stats-js-before
+</script>
+<script data-wp-strategy="defer" defer fetchpriority="low" id="jetpack-stats-js" src="https://stats.wp.com/e-202636.js"></script>
+<script type="text/rocketlazyloadscript" id="heartbeat-js" data-rocket-src="https://assets.bookpage.com/wp-content/plugins/wp-rocket/assets/js/heartbeat.js?ver=3.23.3.3" data-rocket-defer defer></script>
+<script type="text/rocketlazyloadscript" id="elementor-pro-webpack-runtime-js" data-rocket-src="https://assets.bookpage.com/wp-content/plugins/elementor-pro/assets/js/webpack-pro.runtime.min.js?ver=4.2.3" data-rocket-defer defer></script>
+<script type="text/rocketlazyloadscript" id="wp-hooks-js" data-rocket-src="https://assets.bookpage.com/wp-includes/js/dist/hooks.min.js?ver=f0f188028580e8dc1255"></script>
+<script type="text/rocketlazyloadscript" id="wp-i18n-js" data-rocket-src="https://assets.bookpage.com/wp-includes/js/dist/i18n.min.js?ver=1dfe7db3940c23ea9216"></script>
+<script type="text/rocketlazyloadscript" id="wp-i18n-js-after">
+wp.i18n.setLocaleData( { 'text direction\u0004ltr': [ 'ltr' ] } );
+//# sourceURL=wp-i18n-js-after
+</script>
+<script type="text/rocketlazyloadscript" id="elementor-pro-frontend-js-before">
+var ElementorProFrontendConfig = {"ajaxurl":"https:\/\/www.bookpage.com\/wp-admin\/admin-ajax.php","nonce":"e1a250e97d","urls":{"assets":"https:\/\/www.bookpage.com\/wp-content\/plugins\/elementor-pro\/assets\/","rest":"https:\/\/www.bookpage.com\/wp-json\/"},"settings":{"lazy_load_background_images":true},"popup":{"hasPopUps":true},"shareButtonsNetworks":{"facebook":{"title":"Facebook","has_counter":true},"twitter":{"title":"Twitter"},"linkedin":{"title":"LinkedIn","has_counter":true},"pinterest":{"title":"Pinterest","has_counter":true},"reddit":{"title":"Reddit","has_counter":true},"vk":{"title":"VK","has_counter":true},"odnoklassniki":{"title":"OK","has_counter":true},"tumblr":{"title":"Tumblr"},"digg":{"title":"Digg"},"skype":{"title":"Skype"},"stumbleupon":{"title":"StumbleUpon","has_counter":true},"mix":{"title":"Mix"},"telegram":{"title":"Telegram"},"pocket":{"title":"Pocket","has_counter":true},"xing":{"title":"XING","has_counter":true},"whatsapp":{"title":"WhatsApp"},"email":{"title":"Email"},"print":{"title":"Print"},"x-twitter":{"title":"X"},"threads":{"title":"Threads"}},"facebook_sdk":{"lang":"en_US","app_id":""},"lottie":{"defaultAnimationUrl":"https:\/\/www.bookpage.com\/wp-content\/plugins\/elementor-pro\/modules\/lottie\/assets\/animations\/default.json"}};
+//# sourceURL=elementor-pro-frontend-js-before
+</script>
+<script type="text/rocketlazyloadscript" id="elementor-pro-frontend-js" data-rocket-src="https://assets.bookpage.com/wp-content/plugins/elementor-pro/assets/js/frontend.min.js?ver=4.2.3" data-rocket-defer defer></script>
+<script type="text/rocketlazyloadscript" id="pro-elements-handlers-js" data-rocket-src="https://assets.bookpage.com/wp-content/plugins/elementor-pro/assets/js/elements-handlers.min.js?ver=4.2.3" data-rocket-defer defer></script>
+
+<script>(()=>{class RocketElementorPreload{constructor(){this.deviceMode=document.createElement("span"),this.deviceMode.id="elementor-device-mode-wpr",this.deviceMode.setAttribute("class","elementor-screen-only"),document.body.appendChild(this.deviceMode)}t(){let t=getComputedStyle(this.deviceMode,":after").content.replace(/"/g,"");this.animationSettingKeys=this.i(t),document.querySelectorAll(".elementor-invisible[data-settings]").forEach(t=>{const e=t.getBoundingClientRect();if(e.bottom>=0&&e.top<=window.innerHeight)try{this.o(t)}catch(t){}})}o(t){const e=JSON.parse(t.dataset.settings),i=e.m||e.animation_delay||0,n=e[this.animationSettingKeys.find(t=>e[t])];if("none"===n)return void t.classList.remove("elementor-invisible");t.classList.remove(n),this.currentAnimation&&t.classList.remove(this.currentAnimation),this.currentAnimation=n;let o=setTimeout(()=>{t.classList.remove("elementor-invisible"),t.classList.add("animated",n),this.l(t,e)},i);window.addEventListener("rocket-startLoading",function(){clearTimeout(o)})}i(t="mobile"){const e=[""];switch(t){case"mobile":e.unshift("_mobile");case"tablet":e.unshift("_tablet");case"desktop":e.unshift("_desktop")}const i=[];return["animation","_animation"].forEach(t=>{e.forEach(e=>{i.push(t+e)})}),i}l(t,e){this.i().forEach(t=>delete e[t]),t.dataset.settings=JSON.stringify(e)}static run(){const t=new RocketElementorPreload;requestAnimationFrame(t.t.bind(t))}}document.addEventListener("DOMContentLoaded",RocketElementorPreload.run)})();</script></body>
+</html>
+
+<!-- This website is like a Rocket, isn't it? Performance optimized by WP Rocket. Learn more: https://wp-rocket.me - Debug: cached@1788696825 -->

@@ -1,0 +1,15 @@
+gate green · tests=31982
+INFO ratchet register totalTests=31982 totalFiles=2489 entries=3
+PASS ratchet register totalTests == the gate line — (31982, '31982')
+CHAIR-VERIFY GREEN
+CAS OK: product=3b1c0eaa5 · sealed landing-soakhonest-2026-09-07 · cars since ca651d54b=331
+ docs/FABLE_RETROVALIDATION_QUEUE.md | 4 ++++
+ docs/HANDOFF_CURRENT.md             | 8 +++++++-
+ docs/OWNER_DECISION_QUEUE.md        | 3 +++
+ 3 files changed, 14 insertions(+), 1 deletion(-)
+  ODQ §910 rows: 1
+  FRQ R-rows: 73  (new R-rows: 73)
+  seat trailer Fable (must be 1): 1
+COLLECT_910_OK tip=29a4ff20d
+DONE:
+  29a4ff20d §910: the soak receipt ships its per-year series and the capacity rows become fully executable �

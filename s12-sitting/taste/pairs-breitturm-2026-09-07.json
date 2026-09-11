@@ -1,0 +1,56 @@
+[
+ {
+  "id": "bt-1",
+  "block": "DS-DEF-11",
+  "pool": "WALLED-STRAINED",
+  "angle": "unfolding",
+  "before": "The {defwork} around {settlement} is sound and the muster behind it is thinning, which is the kind of arithmetic a town notices late.",
+  "after": "The {defwork} around {settlement} is sound and the muster behind it is thinning. A town notices that arithmetic late.",
+  "rule": "A9/B0.2 the ', which is' tail becomes its own sentence; 'the kind of' (rationed) drops; the claim (a town notices late) is kept"
+ },
+ {
+  "id": "bt-2",
+  "block": "DS-DEF-8",
+  "pool": "override active (generic framing)",
+  "angle": "ledger",
+  "before": "What {settlement}'s defenses are ordinarily worth does not describe the town at present; there is a crisis on it, and the arrangements have been rebuilt around the crisis.",
+  "after": "What {settlement}'s defenses are ordinarily worth does not describe the town at present. A crisis sits on it, and the arrangements have been rebuilt around the crisis.",
+  "rule": "A′-R2 the semicolon staple becomes a period; B0.3/B0.7 the existential 'there is' gives way to the civic thing as subject; A1 state first, cause second kept"
+ },
+ {
+  "id": "bt-3",
+  "block": "DS-GEN-11",
+  "pool": "the MARGINAL arm: neither verdict returned",
+  "angle": "ledger",
+  "before": "Whether {settlement} holds together is not a settled question. The pieces mostly fit, and the places where they do not are the places worth reading.",
+  "after": "Whether {settlement} holds together is not a settled question. The pieces mostly fit, and the places where they do not are in the record.",
+  "rule": "the evaluative closer ('worth reading', the significance tell) becomes a fact the Viability surface holds (the misfits are listed); B0.3 lands on the record"
+ },
+ {
+  "id": "bt-4",
+  "block": "DS-POW-1",
+  "pool": "Tolerated",
+  "angle": "street",
+  "before": "{settlement} accepts the {seat} without approving of it. The town's obedience is a habit rather than a verdict, and both sides understand the difference perfectly.",
+  "after": "{settlement} accepts the {seat} without approving of it. The town's obedience is a habit rather than a verdict, and both sides understand the difference.",
+  "rule": "A8 KEEP the contrast (habit/verdict IS the Tolerated band's claim against Approved); cut only 'perfectly' (manufactured emphasis, no claim spent)"
+ },
+ {
+  "id": "bt-5",
+  "block": "DS-ECO-12",
+  "pool": "INCOME MIX: two or three sources between them",
+  "angle": "street",
+  "before": "Ask what this town lives on and you will be given a short list rather than an answer.",
+  "after": "Asked what it lives on, the town offers a short list rather than an answer.",
+  "rule": "A8 KEEP the contrast ('an answer' rejects the sibling band 'one source carries the town'); only the direct address ('Ask… you will be given') and the bare future leave the record register; no count word added"
+ },
+ {
+  "id": "bt-6",
+  "block": "DS-DEF-3",
+  "pool": "First-Survey qualification (the reading is a first look)",
+  "angle": "visitor",
+  "before": "This is what {settlement} looks like on a first pass; a season here would either confirm it or correct it, and nobody has spent the season yet.",
+  "after": "What follows is {settlement} on a first pass. A season here would confirm it or correct it, and nobody has spent the season yet.",
+  "rule": "the semicolon staple becomes a period; the 'This is' frame opener goes; 'either' drops (no claim); the conditional ('would') is kept — a first-survey line states no fate"
+ }
+]

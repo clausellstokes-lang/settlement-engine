@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Dread Trident &#8211; In Conversation with Curtis D. Carbonell | Liverpool University Press Blog</title>
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<link rel="pingback" href="https://liverpooluniversitypress.blog/xmlrpc.php" />
+<script type="text/javascript">
+  WebFontConfig = {"google":{"families":["Lato:b:latin,latin-ext","Lato:r,i,b,bi:latin,latin-ext"]},"api_url":"https:\/\/fonts-api.wp.com\/css"};
+  (function() {
+    var wf = document.createElement('script');
+    wf.src = '/wp-content/plugins/custom-fonts/js/webfont.js';
+    wf.type = 'text/javascript';
+    wf.async = 'true';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(wf, s);
+	})();
+</script><style id="jetpack-custom-fonts-css">.wf-active .site-title{font-family:"Lato",sans-serif;font-size:28.6px;font-weight:700;font-style:normal}.wf-active body{font-family:"Lato",sans-serif}.wf-active body, .wf-active button, .wf-active input, .wf-active select, .wf-active textarea{font-family:"Lato",sans-serif}.wf-active #main div.sharedaddy h3.sd-title{font-family:"Lato",sans-serif}.wf-active h1, .wf-active h2, .wf-active h3, .wf-active h4, .wf-active h5, .wf-active h6{font-family:"Lato",sans-serif;font-weight:700;font-style:normal}.wf-active h1{font-size:37.7px;font-style:normal;font-weight:700}.wf-active h2{font-size:35.1px;font-style:normal;font-weight:700}.wf-active h3{font-size:32.5px;font-style:normal;font-weight:700}.wf-active h4{font-size:28.6px;font-style:normal;font-weight:700}.wf-active h5{font-size:26px;font-style:normal;font-weight:700}.wf-active h6{font-size:23.4px;font-style:normal;font-weight:700}.wf-active .entry-title{font-size:37.7px;font-weight:700;font-style:normal}.wf-active .comments-title{font-size:32.5px;font-style:normal;font-weight:700}.wf-active .comments-area #respond h3{font-family:"Lato",sans-serif;font-size:32.5px;font-style:normal;font-weight:700}.wf-active .widget-title, .wf-active .widget-title a, .wf-active .widgettitle{font-size:20.8px;font-weight:700;font-style:normal}.wf-active .widget-area .widget-grofile h4{font-size:20.8px;font-weight:700;font-style:normal}.wf-active .sidebar-widget-area .widget-title, .wf-active .sidebar-widget-area .widget-title a, .wf-active .sidebar-widget-area .widgettitle{font-size:19.5px;font-style:normal;font-weight:700}.wf-active .sidebar-widget-area .widget-grofile h4{font-size:19.5px;font-style:normal;font-weight:700}.wf-active .footer-widget-area .widget-title, .wf-active .footer-widget-area .widget-title a{font-weight:700;font-style:normal}.wf-active .page-title{font-size:36.4px;font-weight:700;font-style:normal}.wf-active .grid .entry-title{font-size:19.5px;font-style:normal;font-weight:700}.wf-active .testimonials .entry-title{font-size:18.2px;font-weight:700;font-style:normal}</style>
+<meta name='robots' content='max-image-preview:large' />
+
+<!-- Async WordPress.com Remote Login -->
+<script id="wpcom_remote_login_js">
+var wpcom_remote_login_extra_auth = '';
+function wpcom_remote_login_remove_dom_node_id( element_id ) {
+	var dom_node = document.getElementById( element_id );
+	if ( dom_node ) { dom_node.parentNode.removeChild( dom_node ); }
+}
+function wpcom_remote_login_remove_dom_node_classes( class_name ) {
+	var dom_nodes = document.querySelectorAll( '.' + class_name );
+	for ( var i = 0; i < dom_nodes.length; i++ ) {
+		dom_nodes[ i ].parentNode.removeChild( dom_nodes[ i ] );
+	}
+}
+function wpcom_remote_login_final_cleanup() {
+	wpcom_remote_login_remove_dom_node_classes( "wpcom_remote_login_msg" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_key" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_validate" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_js" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_request_access_iframe" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_request_access_styles" );
+}
+
+// Watch for messages back from the remote login
+window.addEventListener( "message", function( e ) {
+	if ( e.origin === "https://r-login.wordpress.com" ) {
+		var data = {};
+		try {
+			data = JSON.parse( e.data );
+		} catch( e ) {
+			wpcom_remote_login_final_cleanup();
+			return;
+		}
+
+		if ( data.msg === 'LOGIN' ) {
+			// Clean up the login check iframe
+			wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_key" );
+
+			var id_regex = new RegExp( /^[0-9]+$/ );
+			var token_regex = new RegExp( /^.*|.*|.*$/ );
+			if (
+				token_regex.test( data.token )
+				&& id_regex.test( data.wpcomid )
+			) {
+				// We have everything we need to ask for a login
+				var script = document.createElement( "script" );
+				script.setAttribute( "id", "wpcom_remote_login_validate" );
+				script.src = '/remote-login.php?wpcom_remote_login=validate'
+					+ '&wpcomid=' + data.wpcomid
+					+ '&token=' + encodeURIComponent( data.token )
+					+ '&host=' + window.location.protocol
+					+ '//' + window.location.hostname
+					+ '&postid=1954'
+					+ '&is_singular=1';
+				document.body.appendChild( script );
+			}
+
+			return;
+		}
+
+		// Safari ITP, not logged in, so redirect
+		if ( data.msg === 'LOGIN-REDIRECT' ) {
+			window.location = 'https://wordpress.com/log-in?redirect_to=' + window.location.href;
+			return;
+		}
+
+		// Safari ITP, storage access failed, remove the request
+		if ( data.msg === 'LOGIN-REMOVE' ) {
+			var css_zap = 'html { -webkit-transition: margin-top 1s; transition: margin-top 1s; } /* 9001 */ html { margin-top: 0 !important; } * html body { margin-top: 0 !important; } @media screen and ( max-width: 782px ) { html { margin-top: 0 !important; } * html body { margin-top: 0 !important; } }';
+			var style_zap = document.createElement( 'style' );
+			style_zap.type = 'text/css';
+			style_zap.appendChild( document.createTextNode( css_zap ) );
+			document.body.appendChild( style_zap );
+
+			var e = document.getElementById( 'wpcom_request_access_iframe' );
+			e.parentNode.removeChild( e );
+
+			document.cookie = 'wordpress_com_login_access=denied; path=/; max-age=31536000';
+
+			return;
+		}
+
+		// Safari ITP
+		if ( data.msg === 'REQUEST_ACCESS' ) {
+			console.log( 'request access: safari' );
+
+			// Check ITP iframe enable/disable knob
+			if ( wpcom_remote_login_extra_auth !== 'safari_itp_iframe' ) {
+				return;
+			}
+
+			// If we are in a "private window" there is no ITP.
+			var private_window = false;
+			try {
+				var opendb = window.openDatabase( null, null, null, null );
+			} catch( e ) {
+				private_window = true;
+			}
+
+			if ( private_window ) {
+				console.log( 'private window' );
+				return;
+			}
+
+			var iframe = document.createElement( 'iframe' );
+			iframe.id = 'wpcom_request_access_iframe';
+			iframe.setAttribute( 'scrolling', 'no' );
+			iframe.setAttribute( 'sandbox', 'allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-top-navigation-by-user-activation' );
+			iframe.src = 'https://r-login.wordpress.com/remote-login.php?wpcom_remote_login=request_access&origin=' + encodeURIComponent( data.origin ) + '&wpcomid=' + encodeURIComponent( data.wpcomid );
+
+			var css = 'html { -webkit-transition: margin-top 1s; transition: margin-top 1s; } /* 9001 */ html { margin-top: 46px !important; } * html body { margin-top: 46px !important; } @media screen and ( max-width: 660px ) { html { margin-top: 71px !important; } * html body { margin-top: 71px !important; } #wpcom_request_access_iframe { display: block; height: 71px !important; } } #wpcom_request_access_iframe { border: 0px; height: 46px; position: fixed; top: 0; left: 0; width: 100%; min-width: 100%; z-index: 99999; background: #23282d; } ';
+
+			var style = document.createElement( 'style' );
+			style.type = 'text/css';
+			style.id = 'wpcom_request_access_styles';
+			style.appendChild( document.createTextNode( css ) );
+			document.body.appendChild( style );
+
+			document.body.appendChild( iframe );
+		}
+
+		if ( data.msg === 'DONE' ) {
+			wpcom_remote_login_final_cleanup();
+		}
+	}
+}, false );
+
+// Inject the remote login iframe after the page has had a chance to load
+// more critical resources
+window.addEventListener( "DOMContentLoaded", function( e ) {
+	var iframe = document.createElement( "iframe" );
+	iframe.style.display = "none";
+	iframe.setAttribute( "scrolling", "no" );
+	iframe.setAttribute( "id", "wpcom_remote_login_key" );
+	iframe.src = "https://r-login.wordpress.com/remote-login.php"
+		+ "?wpcom_remote_login=key"
+		+ "&origin=aHR0cHM6Ly9saXZlcnBvb2x1bml2ZXJzaXR5cHJlc3MuYmxvZw%3D%3D"
+		+ "&wpcomid=149451857"
+		+ "&time=" + Math.floor( Date.now() / 1000 );
+	document.body.appendChild( iframe );
+}, false );
+</script>
+<link rel='dns-prefetch' href='//s2.wp.com' />
+<link rel='dns-prefetch' href='//wordpress.com' />
+<link rel='dns-prefetch' href='//s1.wp.com' />
+<link rel='dns-prefetch' href='//s0.wp.com' />
+<link rel="alternate" type="application/rss+xml" title="Liverpool University Press Blog &raquo; Feed" href="https://liverpooluniversitypress.blog/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Liverpool University Press Blog &raquo; Comments Feed" href="https://liverpooluniversitypress.blog/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Liverpool University Press Blog &raquo; Dread Trident &#8211; In Conversation with Curtis D.&nbsp;Carbonell Comments Feed" href="https://liverpooluniversitypress.blog/2020/01/27/dread-trident-in-conversation-with-curtis-d-carbonell/feed/" />
+	<script type="text/javascript">
+		/* <![CDATA[ */
+		function addLoadEvent(func) {
+			var oldonload = window.onload;
+			if (typeof window.onload != 'function') {
+				window.onload = func;
+			} else {
+				window.onload = function () {
+					oldonload();
+					func();
+				}
+			}
+		}
+		/* ]]> */
+	</script>
+	<style id="wp-img-auto-sizes-contain-inline-css">
+img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
+/*# sourceURL=wp-img-auto-sizes-contain-inline-css */
+</style>
+<link crossorigin='anonymous' rel='stylesheet' id='all-css-2-1' href='/_static/??-eJxtjEsKgDAMBS9kjbqwuBDPUtog9o9J8fpaEQSRBw8GhoEjC50iY2QIRWRf1i0SWOSstHsYQkr1TPFIsKNXjEbkRPyhVhM18J/0m8M3fFPVlzD3UnbTtWG0J2CTNNk=&cssminify=yes' type='text/css' media='all' />
+<style id="wp-emoji-styles-inline-css">
+
+	img.wp-smiley, img.emoji {
+		display: inline !important;
+		border: none !important;
+		box-shadow: none !important;
+		height: 1em !important;
+		width: 1em !important;
+		margin: 0 0.07em !important;
+		vertical-align: -0.1em !important;
+		background: none !important;
+		padding: 0 !important;
+	}
+/*# sourceURL=wp-emoji-styles-inline-css */
+</style>
+<style id="wp-block-library-inline-css">
+:root{--wp-block-synced-color:#7a00df;--wp-block-synced-color--rgb:122,0,223;--wp-bound-block-color:var(--wp-block-synced-color);--wp-editor-canvas-background:#ddd;--wp-admin-theme-color:#007cba;--wp-admin-theme-color--rgb:0,124,186;--wp-admin-theme-color-darker-10:#006ba1;--wp-admin-theme-color-darker-10--rgb:0,107,160.5;--wp-admin-theme-color-darker-20:#005a87;--wp-admin-theme-color-darker-20--rgb:0,90,135;--wp-admin-border-width-focus:2px}@media (min-resolution:192dpi){:root{--wp-admin-border-width-focus:1.5px}}.wp-element-button{cursor:pointer}:root .has-very-light-gray-background-color{background-color:#eee}:root .has-very-dark-gray-background-color{background-color:#313131}:root .has-very-light-gray-color{color:#eee}:root .has-very-dark-gray-color{color:#313131}:root .has-vivid-green-cyan-to-vivid-cyan-blue-gradient-background{background:linear-gradient(135deg,#00d084,#0693e3)}:root .has-purple-crush-gradient-background{background:linear-gradient(135deg,#34e2e4,#4721fb 50%,#ab1dfe)}:root .has-hazy-dawn-gradient-background{background:linear-gradient(135deg,#faaca8,#dad0ec)}:root .has-subdued-olive-gradient-background{background:linear-gradient(135deg,#fafae1,#67a671)}:root .has-atomic-cream-gradient-background{background:linear-gradient(135deg,#fdd79a,#004a59)}:root .has-nightshade-gradient-background{background:linear-gradient(135deg,#330968,#31cdcf)}:root .has-midnight-gradient-background{background:linear-gradient(135deg,#020381,#2874fc)}:root{--wp--preset--font-size--normal:16px;--wp--preset--font-size--huge:42px}.has-regular-font-size{font-size:1em}.has-larger-font-size{font-size:2.625em}.has-normal-font-size{font-size:var(--wp--preset--font-size--normal)}.has-huge-font-size{font-size:var(--wp--preset--font-size--huge)}:root .has-text-align-center{text-align:center}:root .has-text-align-left{text-align:left}:root .has-text-align-right{text-align:right}.has-fit-text{white-space:nowrap!important}#end-resizable-editor-section{display:none}.aligncenter{clear:both}.items-justified-left{justify-content:flex-start}.items-justified-center{justify-content:center}.items-justified-right{justify-content:flex-end}.items-justified-space-between{justify-content:space-between}.screen-reader-text{word-wrap:normal!important;border:0;clip-path:inset(50%);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;word-break:normal!important}.screen-reader-text:focus{background-color:#ddd;clip-path:none;color:#444;display:block;font-size:1em;height:auto;left:5px;line-height:normal;padding:15px 23px 14px;text-decoration:none;top:5px;width:auto;z-index:100000}html :where(.has-border-color){border-style:solid}html :where([style^=border-color],[style*=";border-color"],[style*="; border-color"]){border-style:solid}html :where([style^=border-top-color],[style*=";border-top-color"],[style*="; border-top-color"]){border-top-style:solid}html :where([style^=border-right-color],[style*=";border-right-color"],[style*="; border-right-color"]){border-right-style:solid}html :where([style^=border-bottom-color],[style*=";border-bottom-color"],[style*="; border-bottom-color"]){border-bottom-style:solid}html :where([style^=border-left-color],[style*=";border-left-color"],[style*="; border-left-color"]){border-left-style:solid}html :where([style^=border-width],[style*=";border-width"],[style*="; border-width"]){border-style:solid}html :where([style^=border-top-width],[style*=";border-top-width"],[style*="; border-top-width"]){border-top-style:solid}html :where([style^=border-right-width],[style*=";border-right-width"],[style*="; border-right-width"]){border-right-style:solid}html :where([style^=border-bottom-width],[style*=";border-bottom-width"],[style*="; border-bottom-width"]){border-bottom-style:solid}html :where([style^=border-left-width],[style*=";border-left-width"],[style*="; border-left-width"]){border-left-style:solid}html :where(img[class*=wp-image-]){height:auto;max-width:100%}:where(figure){margin:0 0 1em}html :where(.is-position-sticky){--wp-admin--admin-bar--position-offset:var(--wp-admin--admin-bar--height,0px)}@media screen and (max-width:600px){html :where(.is-position-sticky){--wp-admin--admin-bar--position-offset:0px}}
+
+/*# sourceURL=/wp-content/plugins/gutenberg-core/v23.9.0/build/styles/block-library/common.min.css */
+</style>
+<style id="wp-block-library-inline-css-extra">
+.has-text-align-justify {
+	text-align:justify;
+}
+.has-text-align-justify{text-align:justify;}
+/*# sourceURL=wp-block-library-inline-css */
+</style>
+
+<style id="classic-theme-styles-inline-css">
+.wp-block-button__link{background-color:#32373c;border-radius:9999px;box-shadow:none;color:#fff;font-size:1.125em;padding:calc(.667em + 2px) calc(1.333em + 2px);text-decoration:none}.wp-block-file__button{background:#32373c;color:#fff}.wp-block-accordion-heading{margin:0}.wp-block-accordion-heading__toggle{background-color:inherit!important;color:inherit!important}.wp-block-accordion-heading__toggle:not(:focus-visible){outline:none}.wp-block-accordion-heading__toggle:focus,.wp-block-accordion-heading__toggle:hover{background-color:inherit!important;border:none;box-shadow:none;color:inherit;padding:var(--wp--preset--spacing--20,1em) 0;text-decoration:none}.wp-block-accordion-heading__toggle:focus-visible{outline:auto;outline-offset:0}.wp-block-tab:not(.has-text-color){color:inherit!important}.wp-block-tab:not(.has-background){background-color:inherit!important}.wp-block-tab:focus,.wp-block-tab:hover{text-decoration:none}.wp-block-tab:focus-visible{outline:auto;outline-offset:0}
+/*# sourceURL=/wp-content/plugins/gutenberg-core/v23.9.0/build/styles/block-library/classic.min.css */
+</style>
+
+<style id="coblocks-inline-format-inline-css">
+.uppercase{text-transform:uppercase}
+/*# sourceURL=coblocks-inline-format-inline-css */
+</style>
+<link crossorigin='anonymous' rel='stylesheet' id='all-css-12-1' href='/_static/??-eJx9jcEKg0AMRH+oaVhorR7Eb9E16IpZg8min2889FZ6GYbhPQYPgbhlo2zIBWQtU8qKcdvJd5be0AmmMfW0Ejv2jKoP/K0daZzIXNdvB6PzvyJ+A8MgO6mCJ6fCYLN/6e113IZXU9WfUL/DcgHSTkDo&cssminify=yes' type='text/css' media='all' />
+<style id="global-styles-inline-css">
+:root{--wp--preset--aspect-ratio--square: 1;--wp--preset--aspect-ratio--4-3: 4/3;--wp--preset--aspect-ratio--3-4: 3/4;--wp--preset--aspect-ratio--3-2: 3/2;--wp--preset--aspect-ratio--2-3: 2/3;--wp--preset--aspect-ratio--16-9: 16/9;--wp--preset--aspect-ratio--9-16: 9/16;--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgb(6,147,227) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgb(252,185,0) 0%,rgb(255,105,0) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgb(255,105,0) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--font-family--albert-sans: 'Albert Sans', sans-serif;--wp--preset--font-family--alegreya: Alegreya, serif;--wp--preset--font-family--arvo: Arvo, serif;--wp--preset--font-family--bodoni-moda: 'Bodoni Moda', serif;--wp--preset--font-family--bricolage-grotesque: 'Bricolage Grotesque', sans-serif;--wp--preset--font-family--cabin: Cabin, sans-serif;--wp--preset--font-family--chivo: Chivo, sans-serif;--wp--preset--font-family--commissioner: Commissioner, sans-serif;--wp--preset--font-family--cormorant: Cormorant, serif;--wp--preset--font-family--courier-prime: 'Courier Prime', monospace;--wp--preset--font-family--crimson-pro: 'Crimson Pro', serif;--wp--preset--font-family--dm-mono: 'DM Mono', monospace;--wp--preset--font-family--dm-sans: 'DM Sans', sans-serif;--wp--preset--font-family--dm-serif-display: 'DM Serif Display', serif;--wp--preset--font-family--domine: Domine, serif;--wp--preset--font-family--eb-garamond: 'EB Garamond', serif;--wp--preset--font-family--epilogue: Epilogue, sans-serif;--wp--preset--font-family--fahkwang: Fahkwang, sans-serif;--wp--preset--font-family--figtree: Figtree, sans-serif;--wp--preset--font-family--fira-sans: 'Fira Sans', sans-serif;--wp--preset--font-family--fjalla-one: 'Fjalla One', sans-serif;--wp--preset--font-family--fraunces: Fraunces, serif;--wp--preset--font-family--gabarito: Gabarito, system-ui;--wp--preset--font-family--ibm-plex-mono: 'IBM Plex Mono', monospace;--wp--preset--font-family--ibm-plex-sans: 'IBM Plex Sans', sans-serif;--wp--preset--font-family--ibarra-real-nova: 'Ibarra Real Nova', serif;--wp--preset--font-family--instrument-serif: 'Instrument Serif', serif;--wp--preset--font-family--inter: Inter, sans-serif;--wp--preset--font-family--josefin-sans: 'Josefin Sans', sans-serif;--wp--preset--font-family--jost: Jost, sans-serif;--wp--preset--font-family--libre-baskerville: 'Libre Baskerville', serif;--wp--preset--font-family--libre-franklin: 'Libre Franklin', sans-serif;--wp--preset--font-family--literata: Literata, serif;--wp--preset--font-family--lora: Lora, serif;--wp--preset--font-family--merriweather: Merriweather, serif;--wp--preset--font-family--montserrat: Montserrat, sans-serif;--wp--preset--font-family--newsreader: Newsreader, serif;--wp--preset--font-family--noto-sans-mono: 'Noto Sans Mono', sans-serif;--wp--preset--font-family--nunito: Nunito, sans-serif;--wp--preset--font-family--open-sans: 'Open Sans', sans-serif;--wp--preset--font-family--overpass: Overpass, sans-serif;--wp--preset--font-family--pt-serif: 'PT Serif', serif;--wp--preset--font-family--petrona: Petrona, serif;--wp--preset--font-family--piazzolla: Piazzolla, serif;--wp--preset--font-family--playfair-display: 'Playfair Display', serif;--wp--preset--font-family--plus-jakarta-sans: 'Plus Jakarta Sans', sans-serif;--wp--preset--font-family--poppins: Poppins, sans-serif;--wp--preset--font-family--raleway: Raleway, sans-serif;--wp--preset--font-family--roboto: Roboto, sans-serif;--wp--preset--font-family--roboto-slab: 'Roboto Slab', serif;--wp--preset--font-family--rubik: Rubik, sans-serif;--wp--preset--font-family--rufina: Rufina, serif;--wp--preset--font-family--sora: Sora, sans-serif;--wp--preset--font-family--source-sans-3: 'Source Sans 3', sans-serif;--wp--preset--font-family--source-serif-4: 'Source Serif 4', serif;--wp--preset--font-family--space-mono: 'Space Mono', monospace;--wp--preset--font-family--syne: Syne, sans-serif;--wp--preset--font-family--texturina: Texturina, serif;--wp--preset--font-family--urbanist: Urbanist, sans-serif;--wp--preset--font-family--work-sans: 'Work Sans', sans-serif;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgb(255, 255, 255), 6px 6px rgb(0, 0, 0);--wp--preset--shadow--crisp: 6px 6px 0px rgb(0, 0, 0);}.wp-block-button{--wp--preset--dimension--25: 25%;--wp--preset--dimension--50: 50%;--wp--preset--dimension--75: 75%;--wp--preset--dimension--100: 100%;}:where(body) { margin: 0; }:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}body{padding-top: 0px;padding-right: 0px;padding-bottom: 0px;padding-left: 0px;}:root :where(.wp-element-button, .wp-block-button__link){background-color: #32373c;border-width: 0;color: #fff;font-family: inherit;font-size: inherit;font-style: inherit;font-weight: inherit;letter-spacing: inherit;line-height: inherit;padding-top: calc(0.667em + 2px);padding-right: calc(1.333em + 2px);padding-bottom: calc(0.667em + 2px);padding-left: calc(1.333em + 2px);text-decoration: none;text-transform: inherit;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}.has-albert-sans-font-family{font-family: var(--wp--preset--font-family--albert-sans) !important;}.has-alegreya-font-family{font-family: var(--wp--preset--font-family--alegreya) !important;}.has-arvo-font-family{font-family: var(--wp--preset--font-family--arvo) !important;}.has-bodoni-moda-font-family{font-family: var(--wp--preset--font-family--bodoni-moda) !important;}.has-bricolage-grotesque-font-family{font-family: var(--wp--preset--font-family--bricolage-grotesque) !important;}.has-cabin-font-family{font-family: var(--wp--preset--font-family--cabin) !important;}.has-chivo-font-family{font-family: var(--wp--preset--font-family--chivo) !important;}.has-commissioner-font-family{font-family: var(--wp--preset--font-family--commissioner) !important;}.has-cormorant-font-family{font-family: var(--wp--preset--font-family--cormorant) !important;}.has-courier-prime-font-family{font-family: var(--wp--preset--font-family--courier-prime) !important;}.has-crimson-pro-font-family{font-family: var(--wp--preset--font-family--crimson-pro) !important;}.has-dm-mono-font-family{font-family: var(--wp--preset--font-family--dm-mono) !important;}.has-dm-sans-font-family{font-family: var(--wp--preset--font-family--dm-sans) !important;}.has-dm-serif-display-font-family{font-family: var(--wp--preset--font-family--dm-serif-display) !important;}.has-domine-font-family{font-family: var(--wp--preset--font-family--domine) !important;}.has-eb-garamond-font-family{font-family: var(--wp--preset--font-family--eb-garamond) !important;}.has-epilogue-font-family{font-family: var(--wp--preset--font-family--epilogue) !important;}.has-fahkwang-font-family{font-family: var(--wp--preset--font-family--fahkwang) !important;}.has-figtree-font-family{font-family: var(--wp--preset--font-family--figtree) !important;}.has-fira-sans-font-family{font-family: var(--wp--preset--font-family--fira-sans) !important;}.has-fjalla-one-font-family{font-family: var(--wp--preset--font-family--fjalla-one) !important;}.has-fraunces-font-family{font-family: var(--wp--preset--font-family--fraunces) !important;}.has-gabarito-font-family{font-family: var(--wp--preset--font-family--gabarito) !important;}.has-ibm-plex-mono-font-family{font-family: var(--wp--preset--font-family--ibm-plex-mono) !important;}.has-ibm-plex-sans-font-family{font-family: var(--wp--preset--font-family--ibm-plex-sans) !important;}.has-ibarra-real-nova-font-family{font-family: var(--wp--preset--font-family--ibarra-real-nova) !important;}.has-instrument-serif-font-family{font-family: var(--wp--preset--font-family--instrument-serif) !important;}.has-inter-font-family{font-family: var(--wp--preset--font-family--inter) !important;}.has-josefin-sans-font-family{font-family: var(--wp--preset--font-family--josefin-sans) !important;}.has-jost-font-family{font-family: var(--wp--preset--font-family--jost) !important;}.has-libre-baskerville-font-family{font-family: var(--wp--preset--font-family--libre-baskerville) !important;}.has-libre-franklin-font-family{font-family: var(--wp--preset--font-family--libre-franklin) !important;}.has-literata-font-family{font-family: var(--wp--preset--font-family--literata) !important;}.has-lora-font-family{font-family: var(--wp--preset--font-family--lora) !important;}.has-merriweather-font-family{font-family: var(--wp--preset--font-family--merriweather) !important;}.has-montserrat-font-family{font-family: var(--wp--preset--font-family--montserrat) !important;}.has-newsreader-font-family{font-family: var(--wp--preset--font-family--newsreader) !important;}.has-noto-sans-mono-font-family{font-family: var(--wp--preset--font-family--noto-sans-mono) !important;}.has-nunito-font-family{font-family: var(--wp--preset--font-family--nunito) !important;}.has-open-sans-font-family{font-family: var(--wp--preset--font-family--open-sans) !important;}.has-overpass-font-family{font-family: var(--wp--preset--font-family--overpass) !important;}.has-pt-serif-font-family{font-family: var(--wp--preset--font-family--pt-serif) !important;}.has-petrona-font-family{font-family: var(--wp--preset--font-family--petrona) !important;}.has-piazzolla-font-family{font-family: var(--wp--preset--font-family--piazzolla) !important;}.has-playfair-display-font-family{font-family: var(--wp--preset--font-family--playfair-display) !important;}.has-plus-jakarta-sans-font-family{font-family: var(--wp--preset--font-family--plus-jakarta-sans) !important;}.has-poppins-font-family{font-family: var(--wp--preset--font-family--poppins) !important;}.has-raleway-font-family{font-family: var(--wp--preset--font-family--raleway) !important;}.has-roboto-font-family{font-family: var(--wp--preset--font-family--roboto) !important;}.has-roboto-slab-font-family{font-family: var(--wp--preset--font-family--roboto-slab) !important;}.has-rubik-font-family{font-family: var(--wp--preset--font-family--rubik) !important;}.has-rufina-font-family{font-family: var(--wp--preset--font-family--rufina) !important;}.has-sora-font-family{font-family: var(--wp--preset--font-family--sora) !important;}.has-source-sans-3-font-family{font-family: var(--wp--preset--font-family--source-sans-3) !important;}.has-source-serif-4-font-family{font-family: var(--wp--preset--font-family--source-serif-4) !important;}.has-space-mono-font-family{font-family: var(--wp--preset--font-family--space-mono) !important;}.has-syne-font-family{font-family: var(--wp--preset--font-family--syne) !important;}.has-texturina-font-family{font-family: var(--wp--preset--font-family--texturina) !important;}.has-urbanist-font-family{font-family: var(--wp--preset--font-family--urbanist) !important;}.has-work-sans-font-family{font-family: var(--wp--preset--font-family--work-sans) !important;}
+/*# sourceURL=global-styles-inline-css */
+</style>
+
+<link crossorigin='anonymous' rel='stylesheet' id='all-css-14-1' href='/_static/??-eJyNUO0OgjAMfCFnISbgH+OjGFzKHKzrso0Q394CRo0S4r+7a+/6AWNQmn1Gn4EGFdxgrE+gmUgk5WyPwtKXshdlBxY8Zyvu9AJLYT2zwxwa3T85ELOHi/UaDHqMS84q/AnNNyRZK0QkOxC0HLGNUoOU7w7/b5+GzxY1Brlva/mIV8dGoJm/8aZbJoOsHOsmWzn1k6jWNTZO1jOdyrouq6I6HIvuAY1sljo=&cssminify=yes' type='text/css' media='all' />
+<style id="forefront-style-inline-css">
+.byline { clip: rect(1px, 1px, 1px, 1px); height: 1px; position: absolute; overflow: hidden; width: 1px; }
+/*# sourceURL=forefront-style-inline-css */
+</style>
+<link crossorigin='anonymous' rel='stylesheet' id='print-css-15-1' href='/wp-content/mu-plugins/global-print/global-print.css?m=1465851035i&cssminify=yes' type='text/css' media='print' />
+<style id="jetpack-global-styles-frontend-style-inline-css">
+:root { --font-headings: unset; --font-base: unset; --font-headings-default: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif; --font-base-default: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;}
+/*# sourceURL=jetpack-global-styles-frontend-style-inline-css */
+</style>
+<link crossorigin='anonymous' rel='stylesheet' id='all-css-18-1' href='/_static/??-eJyNjcEKAjEMRH/ImhVlqwfxU6TbhrZrmhTTIv69u+JFvHgZ5sHwBh7VeOGG3KB0U6nHzAoztur87cNQRNYInVBBk7tjcCE83zVz3HrVDfxvumb2MPVMAVR8dmRIougX/DhbwrK8pwNEksnROriU884e9+PJDnaYXxwFS20=&cssminify=yes' type='text/css' media='all' />
+<script id="jetpack_related-posts-js-extra">
+var related_posts_js_options = {"post_heading":"h4"};
+//# sourceURL=jetpack_related-posts-js-extra
+</script>
+<script id="wpcom-actionbar-placeholder-js-extra">
+var actionbardata = {"siteID":"149451857","postID":"1954","siteURL":"https://liverpooluniversitypress.blog","xhrURL":"https://liverpooluniversitypress.blog/wp-admin/admin-ajax.php","nonce":"31dea0f642","isLoggedIn":"","statusMessage":"","subsEmailDefault":"instantly","proxyScriptUrl":"https://s0.wp.com/wp-content/js/wpcom-proxy-request.js?m=1513050504i&amp;ver=20211021","shortlink":"https://wp.me/pa75fP-vw","i18n":{"followedText":"New posts from this site will now appear in your \u003Ca href=\"https://wordpress.com/reader\"\u003EReader\u003C/a\u003E","foldBar":"Collapse this bar","unfoldBar":"Expand this bar","shortLinkCopied":"Shortlink copied to clipboard."}};
+//# sourceURL=wpcom-actionbar-placeholder-js-extra
+</script>
+<script id="jetpack-mu-wpcom-settings-js-before">
+var JETPACK_MU_WPCOM_SETTINGS = {"assetsUrl":"https://s1.wp.com/wp-content/mu-plugins/jetpack-mu-wpcom-plugin/moon/jetpack_vendor/automattic/jetpack-mu-wpcom/src/build/"};
+//# sourceURL=jetpack-mu-wpcom-settings-js-before
+</script>
+<script crossorigin='anonymous' type='text/javascript'  src='/_static/??-eJx1jcEOwiAQRH/I7dYm6Mn4KabCpgFhQVhS+/digkk9eJpM5uUNrgl0ZCEWDBWSr4vlgo4kzfrRO4YYGW+WNd6r9QYz+VnIQIpFym8bguXBlQPuxK4xXiDl+Nq+W5P5aqh8RveslLcee8FfCIJdcjvt8DVcjmelxvE0Tcq9AV2gTlk='></script>
+<script id="rlt-proxy-js-after">
+	rltInitialize( {"token":null,"iframeOrigins":["https:\/\/widgets.wp.com"]} );
+//# sourceURL=rlt-proxy-js-after
+</script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://liverpooluniversitypressblog.wordpress.com/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress.com" />
+<link rel="canonical" href="https://liverpooluniversitypress.blog/2020/01/27/dread-trident-in-conversation-with-curtis-d-carbonell/" />
+<link rel='shortlink' href='https://wp.me/pa75fP-vw' />
+<link rel="alternate" type="application/json+oembed" href="https://public-api.wordpress.com/oembed/?format=json&amp;url=https%3A%2F%2Fliverpooluniversitypress.blog%2F2020%2F01%2F27%2Fdread-trident-in-conversation-with-curtis-d-carbonell%2F&amp;for=wpcom-auto-discovery" /><link rel="alternate" type="application/xml+oembed" href="https://public-api.wordpress.com/oembed/?format=xml&amp;url=https%3A%2F%2Fliverpooluniversitypress.blog%2F2020%2F01%2F27%2Fdread-trident-in-conversation-with-curtis-d-carbonell%2F&amp;for=wpcom-auto-discovery" />
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Dread Trident &#8211; In Conversation with Curtis D. Carbonell" />
+<meta property="og:url" content="https://liverpooluniversitypress.blog/2020/01/27/dread-trident-in-conversation-with-curtis-d-carbonell/" />
+<meta property="og:description" content="Curtis D. Carbonell&#8217;s Dread Trident, the latest addition to the Liverpool Science Fiction Texts and Studies series, focuses on tabletop role-playing games as vital mechanisms in the increasin…" />
+<meta property="article:published_time" content="2020-01-27T10:00:52+00:00" />
+<meta property="article:modified_time" content="2020-01-21T14:35:23+00:00" />
+<meta property="og:site_name" content="Liverpool University Press Blog" />
+<meta property="og:image" content="https://liverpooluniversitypress.blog/wp-content/uploads/2020/01/founded-1899-new-logo.png" />
+<meta property="og:image:width" content="400" />
+<meta property="og:image:height" content="207" />
+<meta property="og:image:alt" content="Founded-1899-new-logo" />
+<meta property="og:locale" content="en_US" />
+<meta property="article:publisher" content="https://www.facebook.com/WordPresscom" />
+<meta name="twitter:creator" content="@livunipress" />
+<meta name="twitter:site" content="@livunipress" />
+<meta name="twitter:text:title" content="Dread Trident &#8211; In Conversation with Curtis D.&nbsp;Carbonell" />
+<meta name="twitter:image" content="https://liverpooluniversitypress.blog/wp-content/uploads/2020/01/founded-1899-new-logo.png?w=640" />
+<meta name="twitter:image:alt" content="Founded-1899-new-logo" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<!-- End Jetpack Open Graph Tags -->
+<link rel="search" type="application/opensearchdescription+xml" href="https://liverpooluniversitypress.blog/osd.xml" title="Liverpool University Press Blog" />
+<link rel="search" type="application/opensearchdescription+xml" href="https://s1.wp.com/opensearch.xml" title="WordPress.com" />
+<meta name="theme-color" content="#f0f2f0" />
+<meta name="description" content="Curtis D. Carbonell&#039;s Dread Trident, the latest addition to the Liverpool Science Fiction Texts and Studies series, focuses on tabletop role-playing games as vital mechanisms in the increasing creation of ‘realized worlds’ in modern culture. We discussed this study of role-playing gametexts with the author. Could you tell us a bit about Dread Trident and&hellip;" />
+	<style type="text/css">
+			.site-title,
+		.site-description {
+			clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+			clip: rect(1px, 1px, 1px, 1px);
+			position: absolute;
+		}
+		</style>
+	<style type="text/css" id="custom-colors-css">.entry-content .page-links a { color: #FFFFFF;}
+body { background-color: #f0f2f0;}
+.site-footer, .footer-widget-area, .footer-widget-area .widget input[type="text"], .footer-widget-area .widget input[type="email"], .footer-widget-area .widget input[type="url"], .footer-widget-area .widget input[type="password"], .footer-widget-area .widget input[type="search"], .footer-widget-area .widget input[type="number"], .footer-widget-area .widget input[type="tel"], .footer-widget-area .widget input[type="range"], .footer-widget-area .widget input[type="date"], .footer-widget-area .widget input[type="month"], .footer-widget-area .widget input[type="week"], .footer-widget-area .widget input[type="time"], .footer-widget-area .widget input[type="datetime"], .footer-widget-area .widget input[type="datetime-local"], .footer-widget-area .widget input[type="color"], .footer-widget-area .widget textarea { background-color: #710a09;}
+.footer-widget-area .widget_calendar #wp-calendar tbody a { background-color: #420605;}
+.footer-widget-area .widget_calendar #wp-calendar tbody a:hover, .footer-widget-area .milestone-header { background-color: #2A0403;}
+.footer-widget-area .milestone-countdown { background-color: #420605;}
+.footer-widget-area .milestone-countdown { border-color: #420605;}
+.footer-widget-area button, html .footer-widget-area input[type="button"], .footer-widget-area input[type="reset"], .footer-widget-area input[type="submit"] { color: #710a09;}
+.footer-widget-area, .footer-widget-area .widget ul > li, .footer-widget-area .widget ol > li, .footer-widget-area .widget input[type="text"], .footer-widget-area .widget input[type="email"], .footer-widget-area .widget input[type="url"], .footer-widget-area .widget input[type="password"], .footer-widget-area .widget input[type="search"], .footer-widget-area .widget input[type="number"], .footer-widget-area .widget input[type="tel"], .footer-widget-area .widget input[type="range"], .footer-widget-area .widget input[type="date"], .footer-widget-area .widget input[type="month"], .footer-widget-area .widget input[type="week"], .footer-widget-area .widget input[type="time"], .footer-widget-area .widget input[type="datetime"], .footer-widget-area .widget input[type="datetime-local"], .footer-widget-area .widget input[type="color"], .footer-widget-area .widget textarea, .footer-widget-area .widget_calendar #wp-calendar, .footer-widget-area .widget_calendar #wp-calendar thead th, .footer-widget-area .widget_calendar #wp-calendar tbody td, .footer-widget-area .widget_calendar #wp-calendar tfoot td#next, .footer-widget-area .widget_rss ul a, .footer-widget-area .widget_text a { border-color: #A40B08;}
+.site-info, .site-info a, .social-links a, .footer-widget-area .widget_recent_entries .post-date, .footer-widget-area .wp-caption-text { color: #FC1511;}
+.footer-widget-area ::-webkit-input-placeholder { color: #FC1511;}
+.footer-widget-area button, html .footer-widget-area input[type="button"], .footer-widget-area input[type="reset"], .footer-widget-area input[type="submit"] { background-color: #FC1511;}
+.footer-widget-area .widget, .footer-widget-area .widget-title, .footer-widget-area .widget a, .footer-widget-area .widget input[type="text"], .footer-widget-area .widget input[type="email"], .footer-widget-area .widget input[type="url"], .footer-widget-area .widget input[type="password"], .footer-widget-area .widget input[type="search"], .footer-widget-area .widget input[type="number"], .footer-widget-area .widget input[type="tel"], .footer-widget-area .widget input[type="range"], .footer-widget-area .widget input[type="date"], .footer-widget-area .widget input[type="month"], .footer-widget-area .widget input[type="week"], .footer-widget-area .widget input[type="time"], .footer-widget-area .widget input[type="datetime"], .footer-widget-area .widget input[type="datetime-local"], .footer-widget-area .widget input[type="color"], .footer-widget-area .widget textarea, .footer-widget-area .widget a, .footer-widget-area .widget_calendar #wp-calendar tbody a, .footer-widget-area .widget_flickr #flickr_badge_uber_wrapper a:link, .footer-widget-area .widget_flickr #flickr_badge_uber_wrapper a:active, .footer-widget-area .widget_flickr #flickr_badge_uber_wrapper a:visited, .footer-widget-area .milestone-header, .footer-widget-area .milestone-countdown, .footer-widget-area .milestone-message { color: #F66764;}
+.footer-widget-area .widget a:hover, .footer-widget-area .widget_rss ul a, .footer-widget-area .widget_text a, .footer-widget-area .widget_rss ul a:hover, .footer-widget-area .widget_text a:hover, .site-info a:hover, .social-links a:hover:before, .footer-widget-area .widget_flickr #flickr_badge_uber_wrapper a:hover { color: #FAEAEA;}
+.entry-content a, .entry-summary a, comment-content a { color: #A60606;}
+.entry-title a:hover,.entry-meta a:hover { color: #A60606;}
+.categories-links a:hover { color: #A60606;}
+.format-aside .entry-content .entry-title a, .format-quote .entry-content .entry-title a { color: #A60606;}
+.site-content .navigation-comment a:hover { color: #A60606;}
+.comment-meta a:hover { color: #A60606;}
+#cancel-comment-reply-link:hover { color: #A60606;}
+.widget a:hover { color: #A60606;}
+.widget_calendar #wp-calendar tbody a:hover { color: #A60606;}
+.widget_flickr #flickr_badge_uber_wrapper a:hover { color: #A60606;}
+.widget_rss ul a { color: #A60606;}
+.widget_text a { color: #A60606;}
+#infinite-footer .blog-info a:hover, #infinite-footer .blog-credits a:hover { color: #A60606;}
+.entry-format a:hover:before, .entry-date a:hover:before, .byline a:hover:before, .edit-link a:hover:before, .comments-link a:hover:before, .full-size-link a:hover:before, .parent-post-link a:hover:before, .comment-reply-link:hover:before, .comment-reply-login:hover:before { color: #A60606;}
+.entry-content a:hover, .entry-summary a:hover, comment-content a:hover { color: #A60606;}
+.format-aside .entry-content .entry-title a:hover, .format-quote .entry-content .entry-title a:hover { color: #A60606;}
+.widget_rss ul a:hover { color: #A60606;}
+.widget_text a:hover { color: #A60606;}
+button, html input[type="button"], input[type="reset"], input[type="submit"] { background-color: #a28f95;}
+.button, .button:visited { background-color: #a28f95;}
+.page-links > span { background-color: #a28f95;}
+.entry-content .page-links a:active { background-color: #a28f95;}
+.site-content [class*="navigation"] a { background-color: #a28f95;}
+#infinite-handle span { background-color: #a28f95;}
+.woocommerce span.onsale, .woocommerce #respond input#submit, .woocommerce #respond input#submit.alt, .woocommerce a.button, .woocommerce a.button.alt, .woocommerce button.button, .woocommerce button.button.alt, .woocommerce input.button, .woocommerce input.button.alt { background-color: #a28f95;}
+.woocommerce .star-rating, .woocommerce .woocommerce-product-rating .star-rating { color: #a28f95;}
+button:hover, html input[type="button"]:hover, input[type="reset"]:hover, input[type="submit"]:hover { background-color: #AD9DA2;}
+.button:hover { background-color: #AD9DA2;}
+.page-links > span:hover { background-color: #AD9DA2;}
+.entry-content .page-links a:hover { background-color: #AD9DA2;}
+.site-content [class*="navigation"] a:hover { background-color: #AD9DA2;}
+#infinite-handle span:hover { background-color: #AD9DA2;}
+.woocommerce #respond input#submit:hover, .woocommerce #respond input#submit.alt:hover, .woocommerce a.button:hover, .woocommerce a.button.alt:hover, .woocommerce button.button:hover, .woocommerce button.button.alt:hover, .woocommerce input.button:hover, .woocommerce input.button.alt:hover { background-color: #AD9DA2;}
+button, html input[type="button"], input[type="reset"], input[type="submit"] { color: #000000;}
+.entry-content a.button, .entry-content a.button:visited, .entry-content a.button:hover, .entry-summary a.button, .entry-summary a.button:visited, .entry-summary a.button:hover, .comment-content a.button, .comment-content a.button:visited, .comment-content a.button:hover { color: #000000;}
+.page-links > span { color: #000000;}
+.entry-content .page-links a:active, .entry-content .page-links a:hover { color: #000000;}
+.site-content [class*="navigation"] a { color: #000000;}
+#infinite-handle span { color: #000000;}
+.woocommerce span.onsale, .woocommerce #respond input#submit, .woocommerce #respond input#submit.alt, .woocommerce a.button, .woocommerce a.button.alt, .woocommerce button.button, .woocommerce button.button.alt, .woocommerce input.button, .woocommerce input.button.alt, .woocommerce #respond input#submit:hover, .woocommerce #respond input#submit.alt:hover, .woocommerce a.button:hover, .woocommerce a.button.alt:hover, .woocommerce button.button:hover, .woocommerce button.button.alt:hover, .woocommerce input.button:hover, .woocommerce input.button.alt:hover { color: #000000;}
+.hero.without-featured-image { background-color: #ffffff;}
+.hero.without-featured-image .page-title { color: #212121;}
+</style>
+<link rel="icon" href="https://liverpooluniversitypress.blog/wp-content/uploads/2018/08/cropped-lupcoloph4_red-converted.png?w=32" sizes="32x32" />
+<link rel="icon" href="https://liverpooluniversitypress.blog/wp-content/uploads/2018/08/cropped-lupcoloph4_red-converted.png?w=192" sizes="192x192" />
+<link rel="apple-touch-icon" href="https://liverpooluniversitypress.blog/wp-content/uploads/2018/08/cropped-lupcoloph4_red-converted.png?w=180" />
+<meta name="msapplication-TileImage" content="https://liverpooluniversitypress.blog/wp-content/uploads/2018/08/cropped-lupcoloph4_red-converted.png?w=270" />
+			<link rel="stylesheet" id="custom-css-css" type="text/css" href="https://s2.wp.com/?custom-css=1&#038;csblog=a75fP&#038;cscache=6&#038;csrev=10" />
+			<link crossorigin='anonymous' rel='stylesheet' id='all-css-0-3' href='/_static/??-eJyNjMEKhDAMBX9IfaiIXsRPWdxskGqbFNPi7y+CevY4wzA4YkkqiSUh5DL6vDgxrJziTNvFCKqCjxPC1yttBjtc5L0iswLvD0F/2bOB5l2zsX+iW5zDKYx1P3RN07b1sP4BKPs7aw==&cssminify=yes' type='text/css' media='all' />
+
+</head>
+
+<body class="wp-singular post-template-default single single-post postid-1954 single-format-standard wp-theme-premiumforefront customizer-styles-applied jetpack-reblog-enabled author-hidden custom-colors">
+<div id="page" class="hfeed site">
+		<header id="masthead" class="site-header" role="banner">
+		<div class="site-branding">
+							<a href="https://liverpooluniversitypress.blog/" title="Liverpool University Press Blog" rel="home" class="header-image-link">
+					<img src="https://liverpooluniversitypress.blog/wp-content/uploads/2018/11/cropped-birdheader3.jpg" width="737" height="142" alt="" />
+				</a>
+						<a href="https://liverpooluniversitypress.blog/" class="site-logo-link" rel="home" itemprop="url"></a>			<h1 class="site-title"><a href="https://liverpooluniversitypress.blog/" title="Liverpool University Press Blog" rel="home">Liverpool University Press Blog</a></h1>
+			<h2 class="site-description">Liverpool University Press is the UK&#039;s 3rd oldest university press and one of its fastest growing publishers. We publish humanities and social sciences.</h2>
+		</div>
+
+		<nav id="site-navigation" class="navigation-main" role="navigation">
+			<h1 class="menu-toggle">Menu</h1>
+
+			<a href="#content" class="screen-reader-text skip-link">Skip to content</a>
+
+			<div class="menu-social-container"><ul id="menu-social" class="menu"><li id="menu-item-65" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-65"><a target="_blank" rel="noopener" href="http://www.liverpooluniversitypress.co.uk">Website</a></li>
+<li id="menu-item-13527" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-13527"><a href="https://bsky.app/profile/livunipress.bsky.social">Bluesky</a></li>
+<li id="menu-item-67" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-67"><a target="_blank" rel="noopener" href="https://www.facebook.com/liverpooluniversitypress/">Facebook</a></li>
+<li id="menu-item-68" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-68"><a target="_blank" rel="noopener" href="https://www.instagram.com/livunipress/">Instagram</a></li>
+<li id="menu-item-11016" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-11016"><a href="https://www.linkedin.com/company/liverpool-university-press">LinkedIn</a></li>
+<li id="menu-item-66" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-66"><a target="_blank" rel="noopener" href="http://twitter.com/livunipress">X</a></li>
+</ul></div>		</nav>
+	</header><!-- #masthead -->
+
+	<div id="main" class="site-main">
+	<div id="primary" class="content-area">
+		<div id="content" class="site-content" role="main">
+
+		
+			
+<article id="post-1954" class="post-1954 post type-post status-publish format-standard hentry category-literature tag-curtis-d-carbonell tag-dread-trident tag-dungeons-and-dragons tag-liverpool-science-fiction-texts-and-studies-series tag-role-playing-games tag-science-fiction">
+	
+	<header class="entry-header">
+		<span class="categories-links"><a href="https://liverpooluniversitypress.blog/category/literature/" rel="category tag">Literature</a></span>
+					<h1 class="entry-title">Dread Trident &#8211; In Conversation with Curtis D.&nbsp;Carbonell</h1>		
+		<div class="entry-meta clear">
+			
+			<span class="entry-date"><a href="https://liverpooluniversitypress.blog/2020/01/27/dread-trident-in-conversation-with-curtis-d-carbonell/" title="10:00 am" rel="bookmark"><time class="entry-date" datetime="2020-01-27T10:00:52+00:00">January 27, 2020</time></a></span> <span class="byline"><span class="author vcard"><a class="url fn n" href="https://liverpooluniversitypress.blog/author/liverpooluniversitypressblog/" title="View all posts by Liverpool University Press" rel="author">Liverpool University Press</a></span></span>
+			
+					</div><!-- .entry-meta -->
+
+	</header><!-- .entry-header -->
+
+
+		<div class="entry-content">
+		<p>Curtis D. Carbonell&#8217;s <a href="https://www.liverpooluniversitypress.co.uk/books/id/51525/" target="_blank" rel="noopener">Dread Trident</a>, the latest addition to the <a href="https://www.liverpooluniversitypress.co.uk/series/series-12324/" target="_blank" rel="noopener">Liverpool Science Fiction Texts and Studies series</a>, focuses on tabletop role-playing games as vital mechanisms in the increasing creation of ‘realized worlds’ in modern culture. We discussed this study of role-playing gametexts with the author.</p>
+<hr />
+<p><strong>Could you tell us a bit about <em>Dread Trident</em> and what drew you to focus your research in this area?</strong></p>
+<p>I was interested in how role-playing gametexts appeared to be an overlooked area of investigation for literary scholars interested in fantasy and science fiction. It was evident to me from conversations I’d had with colleagues over the years that they were conversant in Tolkien, Howard or Lovecraft, but not a single one knew anything about Dungeons and Dragons (other than to categorize it as ‘that nerdy game’).</p>
+<p>I have also been working through posthumanism as a discourse, interested in how technology and the human intersect because we see a form of the posthuman represented in fantasy and science fiction. The threads began to entwine as I saw how embodied roleplaying games provide a touch of the material fantastic in our digitally dominated worlds. I then began my close readings of the archives and saw how the modern fantastic, as a concept, emerged in the play of these gametexts.</p>
+<p><strong>Your study argues for the importance of tabletop role-playing games (TRPGs) and explores their rich fantasy gametexts. Why do you think TRPGs have been somewhat overlooked in literary and cultural studies?</strong></p>
+<p>The primary barrier is that to have any understanding of these, you have to play them. I was first introduced to Dungeons and Dragons in the early 80s. I only returned to it recently as an adult and literary scholar when I realised that forty years of published material was out there, waiting to be mined. It is easy to say that this material has been overlooked because of its simplicity or lack of textual and psychological depth, but that ‘high-brow’ critique holds less weight today when all manner of cultural activity is open to investigation. I think, also, that for most of the time that role-playing games have been popular, they have been relegated to niche activity by a particular demographic associated with juvenile (often male) geek culture. Its resurgence as a ‘cool’ activity is refreshing, as is its turn to an overt inclusivity.</p>
+<p>I think a back door to the investigation of TRPGs may occur as digital game studies continues to break disciplinary ground. As media and game scholars work through the mechanics and meanings of RPG video games, they validate the form. The pen-and-paper, analog forms continue to be created and played as well. These gametexts work within this broader tapestry of fantastic fictive literature that provides agential play for consumers. I think this will continue.</p>
+<p><strong>Your book covers multiple TRPGs. Could you tell us more about one of these which particularly stands out to you as a key example in your work?</strong></p>
+<p>It has to be Dungeons and Dragons. D&amp;D is the seminal high fantasy TRPG that has dominated popular culture and the form since its beginning in the ‘70s. It also works as a fitting example of how shared/imaginary worlds are created, with the very concept of the multiverse an integral part of its construction. It also uses clever mechanisms that help with harmonising the iterations of its differing campaign settings over the decades.</p>
+<p>As a fantasy setting it is superb as an arena of investigation and carries within it enough material for its own monograph. D&amp;D is exemplary for anyone interested in fantasy studies to see how traditional literary studies and analog game studies overlap, in particular, that middle ground where we see literary tropes push up against game mechanics.</p>
+<p><strong>Realized fantasy worlds are becoming ever more popular in modern times &#8211; why do you think this is the case?</strong></p>
+<p>This concept is helpful because it re-orients us away from a naïve realist view of the world (which is still important in many instances, such as the use of engineering to find solutions to practical problems). The ‘realized’, though, refracts our experience of living in a highly technologized (i.e. posthumanized) world inflected with the fantastic. It is this curious flavour that we seeing emerging as a dominant impulse in parts of the world where technology is ascendant. This may be a small portion of the world’s population, but for those of us living it, our lives are often experienced in a liminal place imbued with the modern fantastic. My suspicion is that it is one oblique result of the Modern Crisis and reflects many people’s need for a touch of enchantment in their lives. From reading novels to watching films or playing video games, these overt forms of engaging the fantastic have garnered even greater momentum since the process began in the late 19th century. I am curious about the new forms these fantasy worlds are taking.</p>
+<p>For more information on <em>Dread Trident</em>, visit our <a href="https://www.liverpooluniversitypress.co.uk/books/id/51525/" target="_blank" rel="noopener">website</a>.</p>
+<div><img data-attachment-id="1913" data-permalink="https://liverpooluniversitypress.blog/2020/01/08/an-hss-perspective-on-the-mandatory-criteria-for-transformative-journals/founded-1899-new-logo-2/#main" data-orig-file="https://liverpooluniversitypress.blog/wp-content/uploads/2020/01/founded-1899-new-logo.png" data-orig-size="1200,619" data-comments-opened="0" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="Founded-1899-new-logo" data-image-description="" data-image-caption="" data-large-file="https://liverpooluniversitypress.blog/wp-content/uploads/2020/01/founded-1899-new-logo.png?w=600" class="  wp-image-1913 aligncenter" src="https://liverpooluniversitypress.blog/wp-content/uploads/2020/01/founded-1899-new-logo.png?w=400&#038;h=207" alt="Founded-1899-new-logo" width="400" height="207" srcset="https://liverpooluniversitypress.blog/wp-content/uploads/2020/01/founded-1899-new-logo.png?w=400&amp;h=206 400w, https://liverpooluniversitypress.blog/wp-content/uploads/2020/01/founded-1899-new-logo.png?w=800&amp;h=413 800w, https://liverpooluniversitypress.blog/wp-content/uploads/2020/01/founded-1899-new-logo.png?w=150&amp;h=77 150w, https://liverpooluniversitypress.blog/wp-content/uploads/2020/01/founded-1899-new-logo.png?w=300&amp;h=155 300w, https://liverpooluniversitypress.blog/wp-content/uploads/2020/01/founded-1899-new-logo.png?w=768&amp;h=396 768w" sizes="(max-width: 400px) 100vw, 400px" /></div>
+<div></div>
+<div style="text-align:center;"><strong>Follow us for more updates</strong></div>
+<div style="text-align:center;"><span style="color:#9e032a;"><strong><a style="color:#9e032a;" href="http://bit.ly/LUPonemail" target="_blank" rel="noopener noreferrer">Sign up to our mailing list</a></strong></span></div>
+<div style="text-align:center;"><span style="color:#9e032a;"><strong><a style="color:#9e032a;" href="http://bit.ly/lupontwitter" target="_blank" rel="noopener noreferrer">Twitter</a> <span style="color:#808080;"> |</span> <a style="color:#9e032a;" href="http://bit.ly/luponinsta" target="_blank" rel="noopener noreferrer">Instagram</a></strong></span></div>
+<div style="text-align:center;"><span style="color:#9e032a;"><strong><a style="color:#9e032a;" href="http://bit.ly/LUPwebsite" target="_blank" rel="noopener">www.liverpooluniversitypress.co.uk</a></strong></span></div>
+<p>&nbsp;</p>
+<div id="jp-post-flair" class="sharedaddy sd-like-enabled sd-sharing-enabled"><div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-icon-text sd-sharing"><h3 class="sd-title">Share this:</h3><div class="sd-content"><ul><li class="share-bluesky"><a rel="nofollow noopener noreferrer"
+				data-shared="sharing-bluesky-1954"
+				class="share-bluesky sd-button share-icon"
+				href="https://liverpooluniversitypress.blog/2020/01/27/dread-trident-in-conversation-with-curtis-d-carbonell/?share=bluesky"
+				target="_blank"
+				aria-labelledby="sharing-bluesky-1954"
+				>
+				<span id="sharing-bluesky-1954" hidden>Share on Bluesky (Opens in new window)</span>
+				<span>Bluesky</span>
+			</a></li><li class="share-email"><a rel="nofollow noopener noreferrer"
+				data-shared="sharing-email-1954"
+				class="share-email sd-button share-icon"
+				href="mailto:?subject=%5BShared%20Post%5D%20Dread%20Trident%20-%20In%20Conversation%20with%20Curtis%20D.%20Carbonell&#038;body=https%3A%2F%2Fliverpooluniversitypress.blog%2F2020%2F01%2F27%2Fdread-trident-in-conversation-with-curtis-d-carbonell%2F&#038;share=email"
+				target="_blank"
+				aria-labelledby="sharing-email-1954"
+				data-email-share-error-title="Do you have email set up?" data-email-share-error-text="If you&#039;re having problems sharing via email, you might not have email set up for your browser. You may need to create a new email yourself." data-email-share-nonce="5e39ea94eb" data-email-share-track-url="https://liverpooluniversitypress.blog/2020/01/27/dread-trident-in-conversation-with-curtis-d-carbonell/?share=email">
+				<span id="sharing-email-1954" hidden>Email a link to a friend (Opens in new window)</span>
+				<span>Email</span>
+			</a></li><li class="share-facebook"><a rel="nofollow noopener noreferrer"
+				data-shared="sharing-facebook-1954"
+				class="share-facebook sd-button share-icon"
+				href="https://liverpooluniversitypress.blog/2020/01/27/dread-trident-in-conversation-with-curtis-d-carbonell/?share=facebook"
+				target="_blank"
+				aria-labelledby="sharing-facebook-1954"
+				>
+				<span id="sharing-facebook-1954" hidden>Share on Facebook (Opens in new window)</span>
+				<span>Facebook</span>
+			</a></li><li class="share-end"></li></ul></div></div></div><div class='sharedaddy sd-block sd-like jetpack-likes-widget-wrapper jetpack-likes-widget-unloaded' id='like-post-wrapper-149451857-1954-6a9da1695007b' data-src='//widgets.wp.com/likes/index.html?ver=20260906#blog_id=149451857&amp;post_id=1954&amp;origin=liverpooluniversitypressblog.wordpress.com&amp;obj_id=149451857-1954-6a9da1695007b&amp;domain=liverpooluniversitypress.blog' data-name='like-post-frame-149451857-1954-6a9da1695007b' data-title='Like or Reblog'><div class='likes-widget-placeholder post-likes-widget-placeholder' style='height: 55px;'><span class='button'><span>Like</span></span> <span class='loading'>Loading...</span></div><span class='sd-text-color'></span><a class='sd-link-color'></a></div>
+<div id='jp-relatedposts' class='jp-relatedposts' >
+	<h3 class="jp-relatedposts-headline"><em>Related</em></h3>
+</div></div>
+			</div>
+	
+		<footer class="entry-meta">
+		<span class="tags-links"><a href="https://liverpooluniversitypress.blog/tag/curtis-d-carbonell/" rel="tag">Curtis D Carbonell</a>, <a href="https://liverpooluniversitypress.blog/tag/dread-trident/" rel="tag">Dread Trident</a>, <a href="https://liverpooluniversitypress.blog/tag/dungeons-and-dragons/" rel="tag">Dungeons and Dragons</a>, <a href="https://liverpooluniversitypress.blog/tag/liverpool-science-fiction-texts-and-studies-series/" rel="tag">Liverpool Science Fiction Texts and Studies series</a>, <a href="https://liverpooluniversitypress.blog/tag/role-playing-games/" rel="tag">Role-playing games</a>, <a href="https://liverpooluniversitypress.blog/tag/science-fiction/" rel="tag">science fiction</a></span>
+	</footer>
+	</article><!-- #post-## -->
+
+				<nav role="navigation" id="nav-below" class="navigation-post">
+		<h1 class="screen-reader-text">Post navigation</h1>
+
+	<div class="nav-previous"><a href="https://liverpooluniversitypress.blog/2020/01/24/lup-awards-for-outstanding-journal-reviewers/" rel="prev"><span class="meta-nav">Previous post</span></a></div><div class="nav-next"><a href="https://liverpooluniversitypress.blog/2020/01/31/testimonies-from-the-front-line-of-nineteenth-century-british-abolitionism/" rel="next">Next post</a></div>
+	</nav><!-- #nav-below -->
+	
+			
+		
+		</div><!-- #content -->
+	</div><!-- #primary -->
+
+	<div id="secondary" class="widget-area sidebar-widget-area" role="complementary">
+				<aside id="text-4" class="widget widget_text"><h1 class="widget-title">Sign up to our mailing list</h1>			<div class="textwidget"><p><a href="https://bit.ly/SignUpLUP"><img loading="lazy" class="aligncenter wp-image-111 size-thumbnail" src="https://liverpooluniversitypressblog.files.wordpress.com/2018/08/lupcoloph4_red-converted-e1533825477472.png?w=150" alt="Sign up to our mailing list" width="150" height="150" srcset="https://liverpooluniversitypressblog.files.wordpress.com/2018/08/lupcoloph4_red-converted-e1533825477472.png?w=150 150w, https://liverpooluniversitypressblog.files.wordpress.com/2018/08/lupcoloph4_red-converted-e1533825477472.png 300w" sizes="auto, (max-width: 150px) 100vw, 150px" /></a></p>
+</div>
+		</aside><aside id="search-2" class="widget widget_search"><form role="search" method="get" class="search-form" action="https://liverpooluniversitypress.blog/">
+				<label>
+					<span class="screen-reader-text">Search for:</span>
+					<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" />
+				</label>
+				<input type="submit" class="search-submit" value="Search" />
+			</form></aside>
+		<aside id="recent-posts-3" class="widget widget_recent_entries">
+		<h1 class="widget-title">Recent Posts</h1>
+		<ul>
+											<li>
+					<a href="https://liverpooluniversitypress.blog/2026/09/02/liverpool-university-press-to-publish-art-libraries-journal-from-2027/">Liverpool University Press to publish Art Libraries Journal from&nbsp;2027</a>
+									</li>
+											<li>
+					<a href="https://liverpooluniversitypress.blog/2026/09/01/50-years-of-canadian-studies-and-the-british-journal-of-canadian-studies-bjcs/">50 years of Canadian Studies and the British Journal of Canadian Studies&nbsp;(BJCS)</a>
+									</li>
+											<li>
+					<a href="https://liverpooluniversitypress.blog/2026/08/27/journal-of-romance-studies-welcomes-new-editors-and-invites-submissions/">Journal of Romance Studies welcomes new editors and invites&nbsp;submissions</a>
+									</li>
+											<li>
+					<a href="https://liverpooluniversitypress.blog/2026/08/25/call-for-a-co-editor-international-development-planning-review/">Call for a Co-Editor | International Development Planning&nbsp;Review</a>
+									</li>
+											<li>
+					<a href="https://liverpooluniversitypress.blog/2026/08/19/t-s-eliot-studies-annual-barbarous-cuisine-t-s-eliot-in-ireland-1936-and-1940-46th-annual-t-s-eliot-memorial-lecture/">T.S. Eliot Studies Annual | ‘Barbarous Cuisine: T. S. Eliot in Ireland, 1936 and 1940: 46th Annual T. S. Eliot Memorial&nbsp;Lecture’</a>
+									</li>
+					</ul>
+
+		</aside><aside id="block-2" class="widget widget_block"></aside><aside id="wp_tag_cloud-4" class="widget wp_widget_tag_cloud"><h1 class="widget-title">Tags</h1><a href="https://liverpooluniversitypress.blog/tag/books/" class="tag-cloud-link tag-link-178 tag-link-position-1" style="font-size: 10.867469879518pt;" aria-label="books (60 items)">books</a>
+<a href="https://liverpooluniversitypress.blog/tag/eighteenth-century/" class="tag-cloud-link tag-link-475574 tag-link-position-2" style="font-size: 9.0120481927711pt;" aria-label="Eighteenth Century (47 items)">Eighteenth Century</a>
+<a href="https://liverpooluniversitypress.blog/tag/enlightenment/" class="tag-cloud-link tag-link-43835 tag-link-position-3" style="font-size: 8.6746987951807pt;" aria-label="Enlightenment (45 items)">Enlightenment</a>
+<a href="https://liverpooluniversitypress.blog/tag/featured-article/" class="tag-cloud-link tag-link-202473 tag-link-position-4" style="font-size: 11.204819277108pt;" aria-label="featured article (63 items)">featured article</a>
+<a href="https://liverpooluniversitypress.blog/tag/free-to-read/" class="tag-cloud-link tag-link-561837 tag-link-position-5" style="font-size: 14.578313253012pt;" aria-label="free to read (101 items)">free to read</a>
+<a href="https://liverpooluniversitypress.blog/tag/french-studies/" class="tag-cloud-link tag-link-3126940 tag-link-position-6" style="font-size: 8.1686746987952pt;" aria-label="french studies (42 items)">french studies</a>
+<a href="https://liverpooluniversitypress.blog/tag/history/" class="tag-cloud-link tag-link-678 tag-link-position-7" style="font-size: 15.253012048193pt;" aria-label="History (112 items)">History</a>
+<a href="https://liverpooluniversitypress.blog/tag/international-development-planning-review/" class="tag-cloud-link tag-link-646328063 tag-link-position-8" style="font-size: 8.1686746987952pt;" aria-label="international development planning review (42 items)">international development planning review</a>
+<a href="https://liverpooluniversitypress.blog/tag/journals/" class="tag-cloud-link tag-link-5465 tag-link-position-9" style="font-size: 22pt;" aria-label="Journals (283 items)">Journals</a>
+<a href="https://liverpooluniversitypress.blog/tag/literature/" class="tag-cloud-link tag-link-557 tag-link-position-10" style="font-size: 14.409638554217pt;" aria-label="Literature (99 items)">Literature</a>
+<a href="https://liverpooluniversitypress.blog/tag/modern-languages/" class="tag-cloud-link tag-link-755590 tag-link-position-11" style="font-size: 14.915662650602pt;" aria-label="Modern Languages (105 items)">Modern Languages</a>
+<a href="https://liverpooluniversitypress.blog/tag/news/" class="tag-cloud-link tag-link-103 tag-link-position-12" style="font-size: 13.734939759036pt;" aria-label="News (91 items)">News</a>
+<a href="https://liverpooluniversitypress.blog/tag/open-access/" class="tag-cloud-link tag-link-24853 tag-link-position-13" style="font-size: 16.096385542169pt;" aria-label="open access (125 items)">open access</a>
+<a href="https://liverpooluniversitypress.blog/tag/oxford-university-studies-in-the-enlightenment/" class="tag-cloud-link tag-link-205062432 tag-link-position-14" style="font-size: 10.867469879518pt;" aria-label="Oxford University Studies in the Enlightenment (60 items)">Oxford University Studies in the Enlightenment</a>
+<a href="https://liverpooluniversitypress.blog/tag/pavilion-poetry/" class="tag-cloud-link tag-link-368533368 tag-link-position-15" style="font-size: 8pt;" aria-label="Pavilion Poetry (41 items)">Pavilion Poetry</a>
+<a href="https://liverpooluniversitypress.blog/tag/planning/" class="tag-cloud-link tag-link-4599 tag-link-position-16" style="font-size: 13.734939759036pt;" aria-label="planning (91 items)">planning</a>
+<a href="https://liverpooluniversitypress.blog/tag/poetry/" class="tag-cloud-link tag-link-422 tag-link-position-17" style="font-size: 10.698795180723pt;" aria-label="Poetry (59 items)">Poetry</a>
+<a href="https://liverpooluniversitypress.blog/tag/qa/" class="tag-cloud-link tag-link-8841 tag-link-position-18" style="font-size: 15.084337349398pt;" aria-label="Q&amp;A (108 items)">Q&amp;A</a>
+<a href="https://liverpooluniversitypress.blog/tag/town-planning-review/" class="tag-cloud-link tag-link-108855495 tag-link-position-19" style="font-size: 11.879518072289pt;" aria-label="town planning review (70 items)">town planning review</a>
+<a href="https://liverpooluniversitypress.blog/tag/tpr/" class="tag-cloud-link tag-link-1530246 tag-link-position-20" style="font-size: 8.1686746987952pt;" aria-label="TPR (42 items)">TPR</a></aside>	</div><!-- #secondary -->
+	</div><!-- #main -->
+
+	
+	<footer id="colophon" class="site-footer clear" role="contentinfo">
+		<div class="site-info">
+						<a href="https://wordpress.com/?ref=footer_custom_powered" rel="nofollow">Website Powered by WordPress.com</a>.
+			
+					</div><!-- .site-info -->
+
+		
+			</footer><!-- #colophon -->
+</div><!-- #page -->
+
+<!--  -->
+<script type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":["/wp-*.php","/wp-admin/*","/files/*","/wp-content/*","/wp-content/plugins/*","/wp-content/themes/premium/forefront/*","/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
+</script>
+<script id="grofiles-cards-js" src="//0.gravatar.com/js/hovercards/hovercards.min.js?ver=202636d1133547e8a1f2801609f51cef12522abe7f6647d869e9fbc974fe356a37e613"></script>
+<script id="wpgroho-js-extra">
+var WPGroHo = {"my_hash":""};
+//# sourceURL=wpgroho-js-extra
+</script>
+<script crossorigin='anonymous' type='text/javascript'  src='/wp-content/mu-plugins/gravatar-hovercards/wpgroho.js?m=1610363240i'></script>
+
+	<script>
+		// Initialize and attach hovercards to all gravatars
+		( function() {
+			function init() {
+				if ( typeof Gravatar === 'undefined' ) {
+					return;
+				}
+
+				if ( typeof Gravatar.init !== 'function' ) {
+					return;
+				}
+
+				Gravatar.profile_cb = function ( hash, id ) {
+					WPGroHo.syncProfileData( hash, id );
+				};
+
+				Gravatar.my_hash = WPGroHo.my_hash;
+				Gravatar.init(
+					'body',
+					'#wp-admin-bar-my-account',
+					{
+						i18n: {
+							'Edit your profile →': 'Edit your profile →',
+							'View profile →': 'View profile →',
+							'Contact': 'Contact',
+							'Send money': 'Send money',
+							'Sorry, we are unable to load this Gravatar profile.': 'Sorry, we are unable to load this Gravatar profile.',
+							'Gravatar not found.': 'Gravatar not found.',
+							'Too Many Requests.': 'Too Many Requests.',
+							'Internal Server Error.': 'Internal Server Error.',
+							'Is this you?': 'Is this you?',
+							'Claim your free profile.': 'Claim your free profile.',
+							'Email': 'Email',
+							'Home Phone': 'Home Phone',
+							'Work Phone': 'Work Phone',
+							'Cell Phone': 'Cell Phone',
+							'Contact Form': 'Contact Form',
+							'Calendar': 'Calendar',
+						},
+					}
+				);
+			}
+
+			if ( document.readyState !== 'loading' ) {
+				init();
+			} else {
+				document.addEventListener( 'DOMContentLoaded', init );
+			}
+		} )();
+	</script>
+
+		<div style="display:none">
+	</div>
+		<div id="actionbar" dir="ltr" style="display: none;"
+			class="actnbr-premium-forefront actnbr-has-follow actnbr-has-actions">
+		<ul>
+								<li class="actnbr-btn actnbr-hidden">
+						<a class="actnbr-action actnbr-actn-reblog" href="">
+							<svg class="gridicon gridicons-reblog" height="20" width="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path d="M22.086 9.914L20 7.828V18c0 1.105-.895 2-2 2h-7v-2h7V7.828l-2.086 2.086L14.5 8.5 19 4l4.5 4.5-1.414 1.414zM6 16.172V6h7V4H6c-1.105 0-2 .895-2 2v10.172l-2.086-2.086L.5 15.5 5 20l4.5-4.5-1.414-1.414L6 16.172z"/></g></svg><span>Reblog</span>
+						</a>
+					</li>
+									<li class="actnbr-btn actnbr-hidden">
+								<a class="actnbr-action actnbr-actn-follow " href="">
+			<svg class="gridicon" height="20" width="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path clip-rule="evenodd" d="m4 4.5h12v6.5h1.5v-6.5-1.5h-1.5-12-1.5v1.5 10.5c0 1.1046.89543 2 2 2h7v-1.5h-7c-.27614 0-.5-.2239-.5-.5zm10.5 2h-9v1.5h9zm-5 3h-4v1.5h4zm3.5 1.5h-1v1h1zm-1-1.5h-1.5v1.5 1 1.5h1.5 1 1.5v-1.5-1-1.5h-1.5zm-2.5 2.5h-4v1.5h4zm6.5 1.25h1.5v2.25h2.25v1.5h-2.25v2.25h-1.5v-2.25h-2.25v-1.5h2.25z"  fill-rule="evenodd"></path></svg>
+			<span>Subscribe</span>
+		</a>
+		<a class="actnbr-action actnbr-actn-following  no-display" href="">
+			<svg class="gridicon" height="20" width="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M16 4.5H4V15C4 15.2761 4.22386 15.5 4.5 15.5H11.5V17H4.5C3.39543 17 2.5 16.1046 2.5 15V3H17.5V12.5H16V4.5ZM5.5 6.5H14.5V8H5.5V6.5ZM5.5 9.5H9.5V11H5.5V9.5ZM12 11H13V12H12V11ZM10.5 9.5H14.5V13.5H10.5V9.5ZM5.5 12H9.5V13.5H5.5V12Z" fill="#008A20"></path><path d="M19.5303 15.0303L15.5 19.0605L12.9697 16.5303L14.0303 15.4697L15.5 16.9395L18.4697 13.9697L19.5303 15.0303Z" fill="#008A20"></path></svg>
+			<span>Subscribed</span>
+		</a>
+							<div class="actnbr-popover tip tip-top-left actnbr-notice" id="follow-bubble">
+							<div class="tip-arrow"></div>
+							<div class="tip-inner actnbr-follow-bubble">
+															<ul>
+											<li class="actnbr-sitename">
+			<a href="http://liverpooluniversitypress.blog">
+				<img loading='lazy' alt='' src='https://liverpooluniversitypress.blog/wp-content/uploads/2018/08/cropped-lupcoloph4_red-converted.png?w=50' srcset='https://liverpooluniversitypress.blog/wp-content/uploads/2018/08/cropped-lupcoloph4_red-converted.png?w=50 1x, https://liverpooluniversitypress.blog/wp-content/uploads/2018/08/cropped-lupcoloph4_red-converted.png?w=75 1.5x, https://liverpooluniversitypress.blog/wp-content/uploads/2018/08/cropped-lupcoloph4_red-converted.png?w=100 2x, https://liverpooluniversitypress.blog/wp-content/uploads/2018/08/cropped-lupcoloph4_red-converted.png?w=150 3x, https://liverpooluniversitypress.blog/wp-content/uploads/2018/08/cropped-lupcoloph4_red-converted.png?w=200 4x' class='avatar avatar-50' height='50' width='50' />				Liverpool University Press Blog			</a>
+		</li>
+										<div class="actnbr-message no-display"></div>
+									<form method="post" action="https://subscribe.wordpress.com" accept-charset="utf-8" style="display: none;">
+																						<div class="actnbr-follow-count">Join 239 other subscribers</div>
+																					<div>
+										<input type="email" name="email" placeholder="Enter your email address" class="actnbr-email-field" aria-label="Enter your email address" />
+										</div>
+										<input type="hidden" name="action" value="subscribe" />
+										<input type="hidden" name="blog_id" value="149451857" />
+										<input type="hidden" name="source" value="https://liverpooluniversitypress.blog/2020/01/27/dread-trident-in-conversation-with-curtis-d-carbonell/" />
+										<input type="hidden" name="sub-type" value="actionbar-follow" />
+										<input type="hidden" id="_wpnonce" name="_wpnonce" value="8242f234aa" />										<div class="actnbr-button-wrap">
+											<button type="submit" value="Sign me up">
+												Sign me up											</button>
+										</div>
+									</form>
+									<li class="actnbr-login-nudge">
+										<div>
+											Already have a WordPress.com account? <a href="https://wordpress.com/log-in?redirect_to=https%3A%2F%2Fr-login.wordpress.com%2Fremote-login.php%3Faction%3Dlink%26back%3Dhttps%253A%252F%252Fliverpooluniversitypress.blog%252F2020%252F01%252F27%252Fdread-trident-in-conversation-with-curtis-d-carbonell%252F">Log in now.</a>										</div>
+									</li>
+								</ul>
+															</div>
+						</div>
+					</li>
+							<li class="actnbr-ellipsis actnbr-hidden">
+				<svg class="gridicon gridicons-ellipsis" height="24" width="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path d="M7 12c0 1.104-.896 2-2 2s-2-.896-2-2 .896-2 2-2 2 .896 2 2zm12-2c-1.104 0-2 .896-2 2s.896 2 2 2 2-.896 2-2-.896-2-2-2zm-7 0c-1.104 0-2 .896-2 2s.896 2 2 2 2-.896 2-2-.896-2-2-2z"/></g></svg>				<div class="actnbr-popover tip tip-top-left actnbr-more">
+					<div class="tip-arrow"></div>
+					<div class="tip-inner">
+						<ul>
+								<li class="actnbr-sitename">
+			<a href="http://liverpooluniversitypress.blog">
+				<img loading='lazy' alt='' src='https://liverpooluniversitypress.blog/wp-content/uploads/2018/08/cropped-lupcoloph4_red-converted.png?w=50' srcset='https://liverpooluniversitypress.blog/wp-content/uploads/2018/08/cropped-lupcoloph4_red-converted.png?w=50 1x, https://liverpooluniversitypress.blog/wp-content/uploads/2018/08/cropped-lupcoloph4_red-converted.png?w=75 1.5x, https://liverpooluniversitypress.blog/wp-content/uploads/2018/08/cropped-lupcoloph4_red-converted.png?w=100 2x, https://liverpooluniversitypress.blog/wp-content/uploads/2018/08/cropped-lupcoloph4_red-converted.png?w=150 3x, https://liverpooluniversitypress.blog/wp-content/uploads/2018/08/cropped-lupcoloph4_red-converted.png?w=200 4x' class='avatar avatar-50' height='50' width='50' />				Liverpool University Press Blog			</a>
+		</li>
+								<li class="actnbr-folded-follow">
+										<a class="actnbr-action actnbr-actn-follow " href="">
+			<svg class="gridicon" height="20" width="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path clip-rule="evenodd" d="m4 4.5h12v6.5h1.5v-6.5-1.5h-1.5-12-1.5v1.5 10.5c0 1.1046.89543 2 2 2h7v-1.5h-7c-.27614 0-.5-.2239-.5-.5zm10.5 2h-9v1.5h9zm-5 3h-4v1.5h4zm3.5 1.5h-1v1h1zm-1-1.5h-1.5v1.5 1 1.5h1.5 1 1.5v-1.5-1-1.5h-1.5zm-2.5 2.5h-4v1.5h4zm6.5 1.25h1.5v2.25h2.25v1.5h-2.25v2.25h-1.5v-2.25h-2.25v-1.5h2.25z"  fill-rule="evenodd"></path></svg>
+			<span>Subscribe</span>
+		</a>
+		<a class="actnbr-action actnbr-actn-following  no-display" href="">
+			<svg class="gridicon" height="20" width="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M16 4.5H4V15C4 15.2761 4.22386 15.5 4.5 15.5H11.5V17H4.5C3.39543 17 2.5 16.1046 2.5 15V3H17.5V12.5H16V4.5ZM5.5 6.5H14.5V8H5.5V6.5ZM5.5 9.5H9.5V11H5.5V9.5ZM12 11H13V12H12V11ZM10.5 9.5H14.5V13.5H10.5V9.5ZM5.5 12H9.5V13.5H5.5V12Z" fill="#008A20"></path><path d="M19.5303 15.0303L15.5 19.0605L12.9697 16.5303L14.0303 15.4697L15.5 16.9395L18.4697 13.9697L19.5303 15.0303Z" fill="#008A20"></path></svg>
+			<span>Subscribed</span>
+		</a>
+								</li>
+														<li class="actnbr-signup"><a href="https://wordpress.com/start/">Sign up</a></li>
+							<li class="actnbr-login"><a href="https://wordpress.com/log-in?redirect_to=https%3A%2F%2Fr-login.wordpress.com%2Fremote-login.php%3Faction%3Dlink%26back%3Dhttps%253A%252F%252Fliverpooluniversitypress.blog%252F2020%252F01%252F27%252Fdread-trident-in-conversation-with-curtis-d-carbonell%252F">Log in</a></li>
+																<li class="actnbr-shortlink">
+										<a href="https://wp.me/pa75fP-vw">
+											<span class="actnbr-shortlink__text">Copy shortlink</span>
+											<span class="actnbr-shortlink__icon"><svg class="gridicon gridicons-checkmark" height="16" width="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path d="M9 19.414l-6.707-6.707 1.414-1.414L9 16.586 20.293 5.293l1.414 1.414"/></g></svg></span>
+										</a>
+									</li>
+																<li class="flb-report">
+									<a href="https://wordpress.com/abuse/?report_url=https://liverpooluniversitypress.blog/2020/01/27/dread-trident-in-conversation-with-curtis-d-carbonell/" target="_blank" rel="noopener noreferrer">
+										Report this content									</a>
+								</li>
+															<li class="actnbr-reader">
+									<a href="https://wordpress.com/reader/blogs/149451857/posts/1954">
+										View post in Reader									</a>
+								</li>
+															<li class="actnbr-subs">
+									<a href="https://subscribe.wordpress.com/">Manage subscriptions</a>
+								</li>
+																<li class="actnbr-fold"><a href="">Collapse this bar</a></li>
+														</ul>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+	
+<script>
+window.addEventListener( "DOMContentLoaded", function( event ) {
+	var link = document.createElement( "link" );
+	link.href = "/wp-content/mu-plugins/actionbar/actionbar.css?v=20250116";
+	link.type = "text/css";
+	link.rel = "stylesheet";
+	document.head.appendChild( link );
+
+	var script = document.createElement( "script" );
+	script.src = "/wp-content/mu-plugins/actionbar/actionbar.js?v=20250204";
+	document.body.appendChild( script );
+} );
+</script>
+
+			<div id="jp-carousel-loading-overlay" style="display: none;">
+			<div id="jp-carousel-loading-wrapper">
+				<span id="jp-carousel-library-loading"><svg class="jetpack-spinner" width="40" height="40" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><circle cx="50" cy="50" r="46" fill="none" stroke="#ddd" stroke-width="8"/><path d="M 50 4 A 46 46 0 0 1 96 50" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round"><animateTransform attributeName="transform" type="rotate" dur="1.4s" from="0 50 50" to="360 50 50" repeatCount="indefinite"/></path></svg></span>
+			</div>
+		</div>
+		<div class="jp-carousel-overlay" style="display: none;">
+
+		<div class="jp-carousel-container">
+			<!-- The Carousel Swiper -->
+			<div
+				class="jp-carousel-wrap swiper jp-carousel-swiper-container jp-carousel-transitions"
+				itemscope
+				itemtype="https://schema.org/ImageGallery">
+				<div class="jp-carousel swiper-wrapper"></div>
+				<div class="jp-swiper-button-prev swiper-button-prev">
+					<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<mask id="maskPrev" mask-type="alpha" maskUnits="userSpaceOnUse" x="8" y="6" width="9" height="12">
+							<path d="M16.2072 16.59L11.6496 12L16.2072 7.41L14.8041 6L8.8335 12L14.8041 18L16.2072 16.59Z" fill="white"/>
+						</mask>
+						<g mask="url(#maskPrev)">
+							<rect x="0.579102" width="23.8823" height="24" fill="#FFFFFF"/>
+						</g>
+					</svg>
+				</div>
+				<div class="jp-swiper-button-next swiper-button-next">
+					<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<mask id="maskNext" mask-type="alpha" maskUnits="userSpaceOnUse" x="8" y="6" width="8" height="12">
+							<path d="M8.59814 16.59L13.1557 12L8.59814 7.41L10.0012 6L15.9718 12L10.0012 18L8.59814 16.59Z" fill="white"/>
+						</mask>
+						<g mask="url(#maskNext)">
+							<rect x="0.34375" width="23.8822" height="24" fill="#FFFFFF"/>
+						</g>
+					</svg>
+				</div>
+			</div>
+			<!-- The main close buton -->
+			<div class="jp-carousel-close-hint">
+				<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<mask id="maskClose" mask-type="alpha" maskUnits="userSpaceOnUse" x="5" y="5" width="15" height="14">
+						<path d="M19.3166 6.41L17.9135 5L12.3509 10.59L6.78834 5L5.38525 6.41L10.9478 12L5.38525 17.59L6.78834 19L12.3509 13.41L17.9135 19L19.3166 17.59L13.754 12L19.3166 6.41Z" fill="white"/>
+					</mask>
+					<g mask="url(#maskClose)">
+						<rect x="0.409668" width="23.8823" height="24" fill="#FFFFFF"/>
+					</g>
+				</svg>
+			</div>
+			<!-- Image info, comments and meta -->
+			<div class="jp-carousel-info">
+				<div class="jp-carousel-info-footer">
+					<div class="jp-carousel-pagination-container">
+						<div class="jp-swiper-pagination swiper-pagination"></div>
+						<div class="jp-carousel-pagination"></div>
+					</div>
+					<div class="jp-carousel-photo-title-container">
+						<div class="jp-carousel-photo-caption"></div>
+					</div>
+					<div class="jp-carousel-photo-icons-container">
+						<a href="#" class="jp-carousel-icon-btn jp-carousel-icon-info" aria-label="Toggle photo metadata visibility">
+							<span class="jp-carousel-icon">
+								<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<mask id="maskInfo" mask-type="alpha" maskUnits="userSpaceOnUse" x="2" y="2" width="21" height="20">
+										<path fill-rule="evenodd" clip-rule="evenodd" d="M12.7537 2C7.26076 2 2.80273 6.48 2.80273 12C2.80273 17.52 7.26076 22 12.7537 22C18.2466 22 22.7046 17.52 22.7046 12C22.7046 6.48 18.2466 2 12.7537 2ZM11.7586 7V9H13.7488V7H11.7586ZM11.7586 11V17H13.7488V11H11.7586ZM4.79292 12C4.79292 16.41 8.36531 20 12.7537 20C17.142 20 20.7144 16.41 20.7144 12C20.7144 7.59 17.142 4 12.7537 4C8.36531 4 4.79292 7.59 4.79292 12Z" fill="white"/>
+									</mask>
+									<g mask="url(#maskInfo)">
+										<rect x="0.8125" width="23.8823" height="24" fill="#FFFFFF"/>
+									</g>
+								</svg>
+							</span>
+						</a>
+												<a href="#" class="jp-carousel-icon-btn jp-carousel-icon-comments" aria-label="Toggle photo comments visibility">
+							<span class="jp-carousel-icon">
+								<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<mask id="maskComments" mask-type="alpha" maskUnits="userSpaceOnUse" x="2" y="2" width="21" height="20">
+										<path fill-rule="evenodd" clip-rule="evenodd" d="M4.3271 2H20.2486C21.3432 2 22.2388 2.9 22.2388 4V16C22.2388 17.1 21.3432 18 20.2486 18H6.31729L2.33691 22V4C2.33691 2.9 3.2325 2 4.3271 2ZM6.31729 16H20.2486V4H4.3271V18L6.31729 16Z" fill="white"/>
+									</mask>
+									<g mask="url(#maskComments)">
+										<rect x="0.34668" width="23.8823" height="24" fill="#FFFFFF"/>
+									</g>
+								</svg>
+
+								<span class="jp-carousel-has-comments-indicator" aria-label="This image has comments."></span>
+							</span>
+						</a>
+											</div>
+				</div>
+				<div class="jp-carousel-info-extra">
+					<div class="jp-carousel-info-content-wrapper">
+						<div class="jp-carousel-photo-title-container">
+							<div class="jp-carousel-photo-title"></div>
+						</div>
+						<div class="jp-carousel-comments-wrapper">
+															<div id="jp-carousel-comments-loading">
+									<span>Loading Comments...</span>
+								</div>
+								<div class="jp-carousel-comments"></div>
+								<div id="jp-carousel-comment-form-container">
+									<span id="jp-carousel-comment-form-spinner"><svg class="jetpack-spinner" width="20" height="20" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><circle cx="50" cy="50" r="46" fill="none" stroke="#ddd" stroke-width="8"/><path d="M 50 4 A 46 46 0 0 1 96 50" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round"><animateTransform attributeName="transform" type="rotate" dur="1.4s" from="0 50 50" to="360 50 50" repeatCount="indefinite"/></path></svg></span>
+									<div id="jp-carousel-comment-post-results"></div>
+																														<form id="jp-carousel-comment-form">
+												<label for="jp-carousel-comment-form-comment-field" class="screen-reader-text">Write a Comment...</label>
+												<textarea
+													name="comment"
+													class="jp-carousel-comment-form-field jp-carousel-comment-form-textarea"
+													id="jp-carousel-comment-form-comment-field"
+													placeholder="Write a Comment..."
+												></textarea>
+												<div id="jp-carousel-comment-form-submit-and-info-wrapper">
+													<div id="jp-carousel-comment-form-commenting-as">
+																													<fieldset>
+																<label for="jp-carousel-comment-form-email-field">Email (Required)</label>
+																<input type="text" name="email" class="jp-carousel-comment-form-field jp-carousel-comment-form-text-field" id="jp-carousel-comment-form-email-field" />
+															</fieldset>
+															<fieldset>
+																<label for="jp-carousel-comment-form-author-field">Name (Required)</label>
+																<input type="text" name="author" class="jp-carousel-comment-form-field jp-carousel-comment-form-text-field" id="jp-carousel-comment-form-author-field" />
+															</fieldset>
+															<fieldset>
+																<label for="jp-carousel-comment-form-url-field">Website</label>
+																<input type="text" name="url" class="jp-carousel-comment-form-field jp-carousel-comment-form-text-field" id="jp-carousel-comment-form-url-field" />
+															</fieldset>
+																											</div>
+													<input
+														type="submit"
+														name="submit"
+														class="jp-carousel-comment-form-button"
+														id="jp-carousel-comment-form-button-submit"
+														value="Post Comment" />
+												</div>
+											</form>
+																											</div>
+													</div>
+						<div class="jp-carousel-image-meta">
+							<div class="jp-carousel-title-and-caption">
+								<div class="jp-carousel-photo-info">
+									<div class="jp-carousel-caption" itemprop="caption description"></div>
+								</div>
+
+								<div class="jp-carousel-photo-description"></div>
+							</div>
+							<a class="jp-carousel-image-download" href="#" aria-label="Download image" target="_blank" style="display: none;">
+								<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="3" y="3" width="19" height="18">
+										<path fill-rule="evenodd" clip-rule="evenodd" d="M5.84615 5V19H19.7775V12H21.7677V19C21.7677 20.1 20.8721 21 19.7775 21H5.84615C4.74159 21 3.85596 20.1 3.85596 19V5C3.85596 3.9 4.74159 3 5.84615 3H12.8118V5H5.84615ZM14.802 5V3H21.7677V10H19.7775V6.41L9.99569 16.24L8.59261 14.83L18.3744 5H14.802Z" fill="white"/>
+									</mask>
+									<g mask="url(#mask0)">
+										<rect x="0.870605" width="23.8823" height="24" fill="#FFFFFF"/>
+									</g>
+								</svg>
+								<span class="jp-carousel-download-text"></span>
+							</a>
+							<div class="jp-carousel-image-map" style="display: none;"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		</div>
+		
+	<script type="text/javascript">
+		window.WPCOM_sharing_counts = {"https://liverpooluniversitypress.blog/2020/01/27/dread-trident-in-conversation-with-curtis-d-carbonell/":1954};
+	</script>
+				
+	<script type="text/javascript">
+		(function () {
+			var wpcom_reblog = {
+				source: 'toolbar',
+
+				toggle_reblog_box_flair: function (obj_id, post_id) {
+
+					// Go to site selector. This will redirect to their blog if they only have one.
+					const postEndpoint = `https://wordpress.com/post`;
+
+					// Ideally we would use the permalink here, but fortunately this will be replaced with the 
+					// post permalink in the editor.
+					const originalURL = `${ document.location.href }?page_id=${ post_id }`; 
+					
+					const url =
+						postEndpoint +
+						'?url=' +
+						encodeURIComponent( originalURL ) +
+						'&is_post_share=true' +
+						'&v=5';
+
+					const redirect = function () {
+						if (
+							! window.open( url, '_blank' )
+						) {
+							location.href = url;
+						}
+					};
+
+					if ( /Firefox/.test( navigator.userAgent ) ) {
+						setTimeout( redirect, 0 );
+					} else {
+						redirect();
+					}
+				},
+			};
+
+			window.wpcom_reblog = wpcom_reblog;
+		})();
+	</script>
+<script id="comment-like-js-extra">
+var comment_like_text = {"loading":"Loading...","swipeUrl":"https://s2.wp.com/wp-content/mu-plugins/comment-likes/js/lib/swipe.js?m=1382645497i&amp;ver=20131008"};
+//# sourceURL=comment-like-js-extra
+</script>
+<script id="jetpack-carousel-js-extra">
+var jetpackSwiperLibraryPath = {"url":"/wp-content/mu-plugins/jetpack-plugin/moon/_inc/blocks/swiper.js"};
+var jetpackCarouselStrings = {"widths":[370,700,1000,1200,1400,2000],"is_logged_in":"","lang":"en","ajaxurl":"https://liverpooluniversitypress.blog/wp-admin/admin-ajax.php","nonce":"a9f1d0107e","display_exif":"1","display_comments":"1","single_image_gallery":"1","single_image_gallery_media_file":"","background_color":"black","comment":"Comment","post_comment":"Post Comment","write_comment":"Write a Comment...","loading_comments":"Loading Comments...","image_label":"Open image in full-screen.","download_original":"View full size \u003Cspan class=\"photo-size\"\u003E{0}\u003Cspan class=\"photo-size-times\"\u003E\u00d7\u003C/span\u003E{1}\u003C/span\u003E","no_comment_text":"Please be sure to submit some text with your comment.","no_comment_email":"Please provide an email address to comment.","no_comment_author":"Please provide your name to comment.","comment_post_error":"Sorry, but there was an error posting your comment. Please try again later.","comment_approved":"Your comment was approved.","comment_unapproved":"Your comment is in moderation.","camera":"Camera","aperture":"Aperture","shutter_speed":"Shutter Speed","focal_length":"Focal Length","copyright":"Copyright","comment_registration":"0","require_name_email":"1","login_url":"https://liverpooluniversitypressblog.wordpress.com/wp-login.php?redirect_to=https%3A%2F%2Fliverpooluniversitypress.blog%2F2020%2F01%2F27%2Fdread-trident-in-conversation-with-curtis-d-carbonell%2F","blog_id":"149451857","meta_data":["camera","aperture","shutter_speed","focal_length","copyright"],"stats_query_args":"blog=149451857&v=wpcom&tz=1&user_id=0&subd=liverpooluniversitypressblog","is_public":"1"};
+//# sourceURL=jetpack-carousel-js-extra
+</script>
+<script id="sharing-js-js-extra">
+var sharing_js_options = {"lang":"en","counts":"1","is_stats_active":"1"};
+//# sourceURL=sharing-js-js-extra
+</script>
+<script crossorigin='anonymous' type='text/javascript'  src='/_static/??-eJydkEFSwzAMRS+EK1jQlgXDURhjy4kSSza2Rdvb40JgOimbspO+/ht9CQ7ZuCQNpQGryVEHkgqRZqzwrqg4WvERy2aqd/C32SXmLplvaFoJa7CNyN2WCzIpQ0gFQ+mzMyj2gwbbKMktVJ0p910ym5CcVhPoeAseVNx55VXSixMnbNm6eemBUxJ4JXHwphQ9OFuSVoy/vh9hw3R1yuXnFps55P6zVfv/OHW0Bb31/vRVkgxLjhd+ftjtd0+P9/vtdvoEsuW/5g=='></script>
+<script id="jetpack-testimonial-theme-supports-js-after">
+const jetpack_testimonial_theme_supports = false
+//# sourceURL=jetpack-testimonial-theme-supports-js-after
+</script>
+<script id="sharing-js-js-after">
+window.WPCOM_sharing_popups = window.WPCOM_sharing_popups || {};
+window.WPCOM_sharing_popups[ "bluesky" ] = "menubar=1,resizable=1,width=600,height=400";
+window.WPCOM_sharing_popups = window.WPCOM_sharing_popups || {};
+window.WPCOM_sharing_popups[ "facebook" ] = "menubar=1,resizable=1,width=600,height=400";
+//# sourceURL=sharing-js-js-after
+</script>
+<script id="wp-emoji-settings" type="application/json">
+{"baseUrl":"https://s0.wp.com/wp-content/mu-plugins/wpcom-smileys/twemoji/2/72x72/","ext":".png","svgUrl":"https://s0.wp.com/wp-content/mu-plugins/wpcom-smileys/twemoji/2/svg/","svgExt":".svg","source":{"concatemoji":"/wp-includes/js/wp-emoji-release.min.js?m=1783090810i&ver=7.1-RC3-63320"}}
+</script>
+<script type="module">
+/*! This file is auto-generated */
+var e="script#wp-emoji-settings",t=document.querySelector(e);if(!(t instanceof HTMLScriptElement))throw new Error("Element missing: "+e);const r=JSON.parse(t.text),s=(window._wpemojiSettings=r,"wpEmojiSettingsSupports"),o=["flag","emoji"];function i(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(s,JSON.stringify(t))}catch(e){}}function c(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0);const r=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);return t.every((e,t)=>e===r[t])}function p(e,t){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var n=e.getImageData(16,16,1,1);for(let e=0;e<n.data.length;e++)if(0!==n.data[e])return!1;return!0}function u(e,t,n,r){switch(t){case"flag":return n(e,"\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!n(e,"\ud83c\udde8\ud83c\uddf6","\ud83c\udde8\u200b\ud83c\uddf6")&&!n(e,"\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!r(e,"\ud83e\u1fac8")}return!1}function f(e,t,n,r){let a;const s=(a="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):document.createElement("canvas")).getContext("2d",{willReadFrequently:!0}),o=(s.textBaseline="top",s.font="600 32px Arial",{});return e.forEach(e=>{o[e]=t(s,e,n,r)}),o}function a(e){var t=document.createElement("script");t.src=e,t.defer=!0,document.head.appendChild(t)}r.supports={everything:!0,everythingExceptFlag:!0},new Promise(t=>{let n=function(){try{var e=JSON.parse(sessionStorage.getItem(s));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+f.toString()+"("+[JSON.stringify(o),u.toString(),c.toString(),p.toString()].join(",")+"));",r=new Blob([e],{type:"text/javascript"});const a=new Worker(URL.createObjectURL(r),{name:"wpTestEmojiSupports"});return void(a.onmessage=e=>{i(n=e.data),a.terminate(),t(n)})}catch(e){}i(n=f(o,u,c,p))}t(n)}).then(e=>{for(const n in e)r.supports[n]=e[n],r.supports.everything=r.supports.everything&&r.supports[n],"flag"!==n&&(r.supports.everythingExceptFlag=r.supports.everythingExceptFlag&&r.supports[n]);var t;r.supports.everythingExceptFlag=r.supports.everythingExceptFlag&&!r.supports.flag,r.supports.everything||((t=r.source||{}).concatemoji?a(t.concatemoji):t.wpemoji&&t.twemoji&&(a(t.twemoji),a(t.wpemoji)))});
+//# sourceURL=/wp-includes/js/wp-emoji-loader.min.js
+</script>
+	<iframe src='https://widgets.wp.com/likes/master.html?ver=20260906#ver=20260906' scrolling='no' id='likes-master' name='likes-master' style='display:none;'></iframe>
+	<div id='likes-other-gravatars' role="dialog" aria-hidden="true" tabindex="-1"><div class="likes-text"><span>%d</span></div><ul class="wpl-avatars sd-like-gravatars"></ul></div>
+	<script src="//stats.wp.com/w.js?69" defer></script> <script type="text/javascript">
+_tkq = window._tkq || [];
+_stq = window._stq || [];
+_tkq.push(['storeContext', {'blog_id':'149451857','blog_tz':'1','user_lang':'en','blog_lang':'en','user_id':'0'}]);
+		// Prevent sending pageview tracking from WP-Admin pages.
+		_stq.push(['view', {'blog':'149451857','v':'wpcom','tz':'1','user_id':'0','post':'1954','subd':'liverpooluniversitypressblog'}]);
+		_stq.push(['extra', {'crypt':'UE5tW3cvZGRlby1IUTImVm91RzZXcmdOZVVpJVVkJTNPRktUU0lrQW9PVUpPZzRnc2JscmRuQmlTVEwtdEdNXUM1NCZfbHlSP2JdL0tKXVBxZUJFUzI4OFFJaHZvN2owLnhkU1FsTX5+fHctdGxPOCtsdWcxVWU9a3BXM1ZUYltLT1EyOH5SVTZxWzhQVFh3JjFDfi5vb1s9XTRSMDJMLFt3eUU0dXo0bXd8cHU3dy1pbE9oNUo0d2praEtvb1gzcVRbaktMUHFzZHxwdXBGTit3WzZBWVM3ST9HWnhiUms5RXhJXW5FWGtVLENCK190Q1RUKzg='}]);
+_stq.push([ 'clickTrackerInit', '149451857', '1954' ]);
+</script>
+<noscript><img src="https://pixel.wp.com/b.gif?v=noscript" style="height:1px;width:1px;overflow:hidden;position:absolute;bottom:1px;" alt="" /></noscript>
+<meta id="bilmur" property="bilmur:data" content="" data-provider="wordpress.com" data-service="simple" data-site-tz="Europe/London" data-custom-props="{&quot;enq_jquery&quot;:&quot;1&quot;,&quot;logged_in&quot;:&quot;0&quot;,&quot;wptheme&quot;:&quot;premium\/forefront&quot;,&quot;wptheme_is_block&quot;:&quot;0&quot;}"   >
+		<script defer src="/wp-content/js/bilmur.min.js?i=17&amp;m=202636"></script> 	
+</body>
+</html>

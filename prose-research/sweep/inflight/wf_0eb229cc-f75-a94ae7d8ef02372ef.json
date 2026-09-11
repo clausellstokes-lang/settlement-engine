@@ -1,0 +1,21 @@
+{
+ "role": "synth",
+ "name": "ai",
+ "angle": null,
+ "tag": null,
+ "lines": 205,
+ "firstTs": "2026-09-07T05:07:46.364Z",
+ "lastTs": "2026-09-07T05:55:12.945Z",
+ "tools": {
+  "Bash": 30,
+  "Read": 23
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": " the nine NOT_FOUND rows are URL-precision failures rather than false claims. The archival round's verified share is highest in the biographical angle (71 of 104) and lowest in the second-catalogue angle (10 of 80), which is the angle the next round should re-run with the triage keyed on dependence.",
+ "run": "wf_0eb229cc-f75",
+ "agent": "a94ae7d8ef02372ef",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/405b5e7e-8c4d-4fa3-8d98-bc46b7fbf074/subagents/workflows/wf_0eb229cc-f75/agent-a94ae7d8ef02372ef.jsonl",
+ "journal": "result",
+ "checkpointFile": null
+}

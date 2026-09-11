@@ -1,0 +1,338 @@
+{
+ "name": "ai",
+ "chunk": 17,
+ "claims": [
+  {
+   "index": 1471,
+   "feature": "counter-evidence",
+   "claim": "Tang and colleagues measure that at temperature 3.0 plain sampling and top-p score zero exact match on GPQA and GSM8K with LLaMA-3-8B-Instruct, while min-p scores 16.02 and 14.84 and their own method 25.00 and 74.61.",
+   "source": "Tang, Liu, Xu, Huang, arXiv:2411.07641v1 (2024)",
+   "url": "https://arxiv.org/abs/2411.07641",
+   "quote": "while standard sampling and top-p completely fail on GPQA",
+   "page": "Table 2 and the paragraph following it",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2024-11-12",
+   "routeHint": "arxiv PDF -> pdftotext -layout",
+   "registerHint": "none",
+   "confidence": "high",
+   "modelEra": "LLaMA-3-8B-Instruct, November 2024; register measured: reasoning benchmarks GPQA, GSM8K, AQuA, MATH, not fiction or archival prose"
+  },
+  {
+   "index": 1472,
+   "feature": "counter-evidence",
+   "claim": "Tang and colleagues report that a temperature around 1.5 gave the best accuracy under their controlled sampling, against the common guidance that reasoning wants greedy or low-temperature decoding.",
+   "source": "Tang, Liu, Xu, Huang, arXiv:2411.07641v1 (2024)",
+   "url": "https://arxiv.org/abs/2411.07641",
+   "quote": "slightly higher temperatures (typically around 1.5) yield",
+   "page": "Section 5, 'Optimal Temperature and Exploration'",
+   "kind": "measurement",
+   "polarity": "disputes",
+   "date": "2024-11-12",
+   "routeHint": "arxiv PDF -> pdftotext -layout",
+   "registerHint": "none",
+   "confidence": "high",
+   "modelEra": "LLaMA-3-8B-Instruct, November 2024; register measured: reasoning benchmarks, not prose"
+  },
+  {
+   "index": 1473,
+   "feature": "other: repetition loop mechanism",
+   "claim": "Li, Holtzman and colleagues state that maximising probability is a poor decoding objective for open-ended generation because it yields short and repetitive text.",
+   "source": "Li, Holtzman, Fried, Liang, Eisner, Hashimoto, Zettlemoyer, Lewis, 'Contrastive Decoding', arXiv:2210.15097v2 (2023); ACL 2023",
+   "url": "https://arxiv.org/abs/2210.15097",
+   "quote": "probability is a poor decoding objective for",
+   "page": "Abstract",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2023-07-10",
+   "routeHint": "arxiv PDF -> pdftotext -layout",
+   "registerHint": "none",
+   "confidence": "high",
+   "modelEra": "GPT-2 XL and OPT-13B, observation 2022-2023; register measured: Wikipedia, WikiNews and story continuations"
+  },
+  {
+   "index": 1474,
+   "feature": "discourse-level tells",
+   "claim": "Li and colleagues state that sampling often produces incoherent text that drifts away from the topic it started on.",
+   "source": "Li, Holtzman, Fried, Liang, Eisner, Hashimoto, Zettlemoyer, Lewis, arXiv:2210.15097v2 (2023); ACL 2023",
+   "url": "https://arxiv.org/abs/2210.15097",
+   "quote": "sampling can often produce incoherent text",
+   "page": "Abstract",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2023-07-10",
+   "routeHint": "arxiv PDF -> pdftotext -layout",
+   "registerHint": "none",
+   "confidence": "high",
+   "modelEra": "GPT-2 XL and OPT-13B, 2022-2023; register measured: Wikipedia, WikiNews and stories"
+  },
+  {
+   "index": 1475,
+   "feature": "discourse-level tells",
+   "claim": "Li and colleagues describe their qualitative nucleus-sampling example as shifting from a third-person narrative style into a first-person conversational one within a single continuation.",
+   "source": "Li, Holtzman, Fried, Liang, Eisner, Hashimoto, Zettlemoyer, Lewis, arXiv:2210.15097v2 (2023); ACL 2023",
+   "url": "https://arxiv.org/abs/2210.15097",
+   "quote": "a style shift from third person",
+   "page": "Section 6.3 Qualitative Examples; Table 3",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2023-07-10",
+   "routeHint": "arxiv PDF -> pdftotext -layout",
+   "registerHint": "chronicle-line",
+   "confidence": "high",
+   "modelEra": "GPT-2 1.5B with nucleus sampling, 2022-2023; register measured: Wikipedia-prompted continuation"
+  },
+  {
+   "index": 1476,
+   "feature": "reader and expert judgment",
+   "claim": "Li and colleagues report that across three domains and two models their evaluators preferred contrastive decoding 2.6 times more often than nucleus sampling on coherence, and 1.4 times more often on fluency.",
+   "source": "Li, Holtzman, Fried, Liang, Eisner, Hashimoto, Zettlemoyer, Lewis, arXiv:2210.15097v2 (2023); ACL 2023",
+   "url": "https://arxiv.org/abs/2210.15097",
+   "quote": "evaluators preferred CD 2.6x more than nucleus",
+   "page": "Section 6.2 Human Evaluation; Table 2",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2023-07-10",
+   "routeHint": "arxiv PDF -> pdftotext -layout",
+   "registerHint": "dossier-archivist",
+   "confidence": "high",
+   "modelEra": "GPT-2 XL and OPT-13B, roughly 20 qualified Mechanical Turk raters, 2022-2023; register measured: Wikipedia, WikiNews and story continuations"
+  },
+  {
+   "index": 1477,
+   "feature": "steerability",
+   "claim": "Zhou, Keuper and Fritz argue that reported gains for adaptive truncation samplers depend heavily on the parameters their authors curated and on the limited exemplar text used to evaluate them.",
+   "source": "Zhou, Keuper, Fritz, 'Balancing Diversity and Risk in LLM Sampling', arXiv:2408.13586v2 (2025)",
+   "url": "https://arxiv.org/abs/2408.13586",
+   "quote": "are highly dependent on the curated parameters",
+   "page": "Abstract",
+   "kind": "analysis",
+   "polarity": "disputes",
+   "date": "2025-01-08",
+   "routeHint": "arxiv PDF -> pdftotext -layout",
+   "registerHint": "none",
+   "confidence": "high",
+   "modelEra": "Llama family, Mistral family and GPT-2-XL, observation 2024-2025; register measured: Wikipedia-English prefixes"
+  },
+  {
+   "index": 1478,
+   "feature": "steerability",
+   "claim": "Zhou, Keuper and Fritz state that there is no universally optimal sampling parameter across scenarios and that users cannot know the optimal one for their own task.",
+   "source": "Zhou, Keuper, Fritz, arXiv:2408.13586v2 (2025)",
+   "url": "https://arxiv.org/abs/2408.13586",
+   "quote": "There exists no universal optimal paramters",
+   "page": "Section 1 Introduction, second bullet (the source spells 'paramters')",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2025-01-08",
+   "routeHint": "arxiv PDF -> pdftotext -layout",
+   "registerHint": "none",
+   "confidence": "high",
+   "modelEra": "Llama, Mistral and GPT-2-XL, 2024-2025; register: Wikipedia-English"
+  },
+  {
+   "index": 1479,
+   "feature": "other: truncation-sampling mechanism",
+   "claim": "Zhou, Keuper and Fritz measure with a Wikipedia-English prefix tree that the truncation point which exactly covers the real continuations varies drastically from prefix to prefix, so a fixed k has no adaptability.",
+   "source": "Zhou, Keuper, Fritz, arXiv:2408.13586v2 (2025)",
+   "url": "https://arxiv.org/abs/2408.13586",
+   "quote": "which exactly cover the full data supports, vary",
+   "page": "Section 1 Introduction; Figure 2 (gpt2-xl)",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2025-01-08",
+   "routeHint": "arxiv PDF -> pdftotext -layout",
+   "registerHint": "dossier-archivist",
+   "confidence": "high",
+   "modelEra": "GPT-2-XL for the histogram, plus Llama and Mistral families, 2024-2025; register measured: Wikipedia-English sentence-starting prefixes"
+  },
+  {
+   "index": 1480,
+   "feature": "counter-evidence",
+   "claim": "Zhou, Keuper and Fritz report that Mirostat performed poorly across all three of their downstream tasks, which they attribute to its resting on the Zipf law of natural language.",
+   "source": "Zhou, Keuper, Fritz, arXiv:2408.13586v2 (2025)",
+   "url": "https://arxiv.org/abs/2408.13586",
+   "quote": "For all the three tasks, Mirostat does not perform",
+   "page": "Section 6 (results on HumanEval, GSM8K, TruthfulQA)",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2025-01-08",
+   "routeHint": "arxiv PDF -> pdftotext -layout",
+   "registerHint": "none",
+   "confidence": "high",
+   "modelEra": "Llama, Mistral, GPT-2-XL, 2024-2025; register measured: code, maths and question answering, not prose"
+  },
+  {
+   "index": 1481,
+   "feature": "homogenisation",
+   "claim": "Meister, Pimentel, Malagutti, Wilcox and Cotterell frame every truncation sampler as a precision-recall trade in which the model gives up the ability to produce certain strings in exchange for a higher rate of desirable text.",
+   "source": "Meister, Pimentel, Malagutti, Wilcox, Cotterell, 'On the Efficacy of Sampling Adapters', arXiv:2307.03749v2 (2024); ACL 2023",
+   "url": "https://arxiv.org/abs/2307.03749",
+   "quote": "a model loses its ability to produce certain strings,",
+   "page": "Abstract; Section 1 Introduction",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2024-01-05",
+   "routeHint": "arxiv PDF -> pdftotext -layout",
+   "registerHint": "none",
+   "confidence": "high",
+   "modelEra": "GPT-2 small and large, GPT-Neo, with GPT-J as reference, observation 2023; register measured: WebText and WikiText"
+  },
+  {
+   "index": 1482,
+   "feature": "homogenisation",
+   "claim": "Meister and colleagues find empirically that applying a sampling adapter raises the precision of the distribution at the cost of its recall, robustly across their design choices.",
+   "source": "Meister, Pimentel, Malagutti, Wilcox, Cotterell, arXiv:2307.03749v2 (2024); ACL 2023",
+   "url": "https://arxiv.org/abs/2307.03749",
+   "quote": "the precision of a distribution at the expense",
+   "page": "Section 7 Conclusion",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2024-01-05",
+   "routeHint": "arxiv PDF -> pdftotext -layout",
+   "registerHint": "none",
+   "confidence": "high",
+   "modelEra": "GPT-2 small and large, GPT-Neo, GPT-J reference, 2023; register measured: WebText and WikiText"
+  },
+  {
+   "index": 1483,
+   "feature": "counter-evidence",
+   "claim": "Meister and colleagues report that the highest sequence-level quality scores did not come from the adapter settings with the best precision but from an intermediate point on the precision-recall line.",
+   "source": "Meister, Pimentel, Malagutti, Wilcox, Cotterell, arXiv:2307.03749v2 (2024); ACL 2023",
+   "url": "https://arxiv.org/abs/2307.03749",
+   "quote": "sequence-level quality scores do not correspond",
+   "page": "Section 5, 'A Precision-Recall Trade-Off'; Figure 2",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2024-01-05",
+   "routeHint": "arxiv PDF -> pdftotext -layout",
+   "registerHint": "none",
+   "confidence": "high",
+   "modelEra": "GPT-2 small and large, GPT-Neo, 2023; register measured: WebText and WikiText"
+  },
+  {
+   "index": 1484,
+   "feature": "detection and its failures",
+   "claim": "Meister and colleagues state that the precision-recall shift a sampling adapter enforces is not visible in perplexity or the other standard distribution-quality metrics.",
+   "source": "Meister, Pimentel, Malagutti, Wilcox, Cotterell, arXiv:2307.03749v2 (2024); ACL 2023",
+   "url": "https://arxiv.org/abs/2307.03749",
+   "quote": "not reflected in standard metrics of distribution",
+   "page": "Abstract",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2024-01-05",
+   "routeHint": "arxiv PDF -> pdftotext -layout",
+   "registerHint": "none",
+   "confidence": "high",
+   "modelEra": "GPT-2 era models, 2023; register measured: WebText and WikiText"
+  },
+  {
+   "index": 1485,
+   "feature": "discourse-level tells",
+   "claim": "Ji, Ke, Wang and Huang characterise the standing trade-off as sampling producing less repetitive text that is disjunctive in discourse, while search keeps topic coherence at the price of more repetition.",
+   "source": "Ji, Ke, Wang, Huang, 'Language Model Decoding as Direct Metrics Optimization', arXiv:2310.01041v2 (2024); ICLR 2024",
+   "url": "https://arxiv.org/abs/2310.01041",
+   "quote": "texts which are often disjunctive in discourse, while search-based methods",
+   "page": "Abstract",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2024-06-05",
+   "routeHint": "arxiv PDF -> pdftotext -layout",
+   "registerHint": "chronicle-line",
+   "confidence": "high",
+   "modelEra": "GPT-2 XL and OPT-6.7B, observation 2023-2024; register measured: Wikipedia and News domains"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 1471,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "standard sampling and top-p completely fail on GPQA and GSM8K",
+   "note": "Quote is verbatim in the paragraph under Table 2 (Sec. 4.2 Single-Pass Results). Every figure checks against Table 2 at T=3.0: GPQA Sample 0.00, Top-p 0.00, Min-p 16.02, Top-n-sigma 25.00; GSM8K Sample 0.00, Top-p 0.00, Min-p 14.84, Top-n-sigma 74.61. Sec. 4.1 Setup names the model LLaMA-3-8B-Instruct. Paper title: 'Top-n-sigma: Not All Logits Are You Need'."
+  },
+  {
+   "index": 1472,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "slightly higher temperatures (typically around 1.5) yield optimal performance",
+   "note": "Quote verbatim. Full sentence contrasts 'the common guideline that reasoning tasks benefit most from deterministic (greedy) or low-temperature decoding', so the disputes polarity is right. LOCATOR CORRECTION: the paragraph headed 'Optimal Temperature and Exploration' sits in Section 4.2 (Single-Pass Results), not Section 5; the heading name in the page field is right, the section number is not. Metric is Exact Match, consistent with 'best accuracy'."
+  },
+  {
+   "index": 1473,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "maximum probability is a poor decoding objective for open-ended generation",
+   "note": "Quote verbatim in the Abstract, first sentence: '...because it produces short and repetitive text.' Both limbs (poor objective for open-ended generation; because short and repetitive) supported."
+  },
+  {
+   "index": 1474,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "sampling can often produce incoherent text that drifts from the original topics",
+   "note": "Quote verbatim, Abstract second sentence; 'drifts away from the topic it started on' is the paper's 'drifts from the original topics'. Section 1 independently states generated text 'is prone to incoherence and topic drift'."
+  },
+  {
+   "index": 1475,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "there is a style shift from third person narrative style to first",
+   "note": "Quote verbatim in Section 6.3 Qualitative Examples: 'moreover, there is a style shift from third person narrative style to first person conversational style.' Table 3 confirms it is the Nucleus (1.5B) continuation of a single Sonic the Hedgehog prompt, so 'nucleus-sampling example' and 'within a single continuation' both hold; the same passage also reports topic drift from a video game to music and an email format."
+  },
+  {
+   "index": 1476,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "evaluators preferred CD 2.6x more than nucleus sampling",
+   "note": "Quote verbatim in Section 6.2 Human Evaluation. Full passage: CD is significantly more coherent 'across three domains and two models: on average across settings', 2.6x over nucleus on coherence and, 'As for fluency, CD is preferred 1.4x more than nucleus sampling'. Table 2 is indeed the human-evaluation table (wikitext/wikinews/story; GPT-2 XL and OPT-13B), and its caption repeats 'across three domains and two models'. Section 6.1 confirms Amazon Mechanical Turk raters."
+  },
+  {
+   "index": 1477,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "highly dependent on the curated parameters and the limited exemplar text",
+   "note": "Quote verbatim in the Abstract. Full sentence: 'Although improved results have been reported with these methods on open-ended text generation tasks, the results are highly dependent on the curated parameters and the limited exemplar text.' 'these methods' are the adaptive tail-truncation methods, so the adaptive-truncation limb holds."
+  },
+  {
+   "index": 1478,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "There exists no universal optimal paramters in different scenarios and users",
+   "note": "Quote verbatim including the source's misspelling 'paramters', and the page field flags that spelling correctly. Full sentence in the second Introduction bullet ('Users are agnostic to the optimal parameters in real-world applications'): '...in different scenarios and users are agnostic to the optimal parameters for their own tasks.' Both limbs supported."
+  },
+  {
+   "index": 1479,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "truncation positions, which exactly cover the full data supports, vary drastically",
+   "note": "Quote verbatim in Section 1. Full sentence: '...vary drastically given different prefixes and Top-k sampling could be regarded as a baseline method with zero adaptability', which supports the fixed-k limb in the paper's own words. The prefix tree is built by rearranging Wikipedia-English into a word-level Trie (their Context-Preserving Trie); Figure 2's caption confirms the histogram is gpt2-xl truncation values achieving full recall of data support."
+  },
+  {
+   "index": 1480,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "For all the three tasks, Mirostat does not perform well in general",
+   "note": "LOCATOR CORRECTION FIRST: Section 6's three tasks are MBPP, HumanEval and GSM8K (Llama-2-7B, Tables 3-5). The page field's 'HumanEval, GSM8K, TruthfulQA' is wrong - TruthfulQA is the separate Section 5.4 validation, not one of the three. The claim sentence itself says only 'all three of their downstream tasks' and is correct. Quote verbatim; the attribution limb is supported but HEDGED in the source: 'probably because it is based on the Zipf-law of natural language and thus not suitable for code and math tasks.'"
+  },
+  {
+   "index": 1481,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "model loses its ability to produce certain strings, its precision rate",
+   "note": "Quote 'a model loses its ability to produce certain strings,' is verbatim in Section 1; the Abstract carries the near-identical 'the model loses its ability to produce certain strings, its precision rate on desirable text increases', which is the source of the claim's second limb. Note the Section 1 wording differs slightly ('its ability to produce desirable text increases'). Scope check on 'every truncation sampler': the paper's framework 'encompasses most of the transformations performed by previously proposed sampling adapters' and it experiments with top-k, nucleus, typical and eta, so the truncation-sampler class is covered, though the paper's own scope word is 'most', not 'every'."
+  },
+  {
+   "index": 1482,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "increases the precision of a distribution at the expense of its recall",
+   "note": "Quote verbatim in Section 7 Conclusion. Full sentence: 'We find evidence that the application of sampling adapters increases the precision of a distribution at the expense of its recall; this observation is robust across several experimental design choices.' The robustness limb is the paper's own words."
+  },
+  {
+   "index": 1483,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "highest sequence-level quality scores do not correspond with the sampling adapter-hyperparameter settings",
+   "note": "Quote verbatim under the Section 5 paragraph heading 'A Precision-Recall Trade-Off.', which cites Fig. 2 - the page field is accurate. Full passage: the highest scores do not correspond with the settings 'that achieve the best precision (i.e., lowest reverse cross-entropy). Rather, they correspond to an intermediate point along the line', which is exactly the claim's second limb."
+  },
+  {
+   "index": 1484,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "not reflected in standard metrics of distribution quality (such as perplexity)",
+   "note": "Quote verbatim in the Abstract; the parenthetical names perplexity, so both the perplexity limb and the 'other standard distribution-quality metrics' limb hold. Section 6 reinforces it: recall-weighted measures 'such as perplexity, are known not to be good indicators of text quality'."
+  },
+  {
+   "index": 1485,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "texts which are often disjunctive in discourse, while search-based methods maintain",
+   "note": "Quote verbatim in the Abstract. Full sentence: 'sampling-based methods produce less-repetitive texts which are often disjunctive in discourse, while search-based methods maintain topic coherence at the cost of increased repetition' - both halves of the claimed trade-off are the paper's own wording. Header confirms 'Published as a conference paper at ICLR 2024'; Section 5 confirms GPT-2 XL and OPT-6.7B on the Wikipedia (Wikitext-103) and News (Wikinews) domains."
+  }
+ ]
+}

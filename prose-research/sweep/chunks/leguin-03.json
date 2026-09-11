@@ -1,0 +1,158 @@
+{
+ "name": "leguin",
+ "chunk": 3,
+ "indices": [
+  694,
+  702,
+  703,
+  705,
+  803,
+  804,
+  805,
+  816,
+  817,
+  827,
+  832,
+  839,
+  840,
+  844,
+  849
+ ],
+ "claims": [
+  {
+   "index": 694,
+   "feature": "annalist voice and deep time",
+   "claim": "Dirda says the narrator conveys the real story behind the legends of the Archmage Ged.",
+   "source": "Michael Dirda, NEA Big Read teacher's guide to A Wizard of Earthsea (2008)",
+   "url": "https://openlibrary.org/search/inside.json?q=identifier%3Aursulakleguinswi00dird%20AND%20%22the%20real%20story%20behind%20the%20legends%20of%20the%20Archmage%20Ged%22",
+   "quote": "the real story behind the legends of the Archmage Ged",
+   "page": "archive.org search-inside snippet"
+  },
+  {
+   "index": 702,
+   "feature": "place and institution description",
+   "claim": "Plotz says Le Guin trains a spotlight on all the things that we make up and then treat as real.",
+   "source": "John Plotz, Ursula Le Guin's Earthsea (2023), p. 34, quoted in Stephanie Burt, Strange Horizons, 6 November 2023",
+   "url": "https://strangehorizons.com/wordpress/non-fiction/ursula-le-guins-earthsea-by-john-plotz/",
+   "quote": "trains a spotlight on all the things that we make up",
+   "page": "p. 34, as quoted in the review"
+  },
+  {
+   "index": 703,
+   "feature": "point of view and distance",
+   "claim": "Burt says Le Guin invites the reader in and holds the reader back.",
+   "source": "Stephanie Burt, review of Plotz, Strange Horizons, 6 November 2023",
+   "url": "https://strangehorizons.com/wordpress/non-fiction/ursula-le-guins-earthsea-by-john-plotz/",
+   "quote": "invites us in and holds us back",
+   "page": "review body, paragraph on subcreation"
+  },
+  {
+   "index": 705,
+   "feature": "naming and forms of address",
+   "claim": "Le Guin says she drew a map of islands she knew nothing about and named them happily.",
+   "source": "Ursula K. Le Guin, 2015 interview with John Plotz, transcribed in Public Books, 21 February 2024",
+   "url": "https://www.publicbooks.org/john-plotz-on-earthsea-anarchism-and-ursula-k-le-guin/",
+   "quote": "But I named them happily",
+   "page": "interview transcript, on drawing the Earthsea map"
+  },
+  {
+   "index": 803,
+   "feature": "archaism",
+   "claim": "Le Guin grants that the archaic manner is a perfect distancer but says it must be done perfectly.",
+   "source": "Ursula K. Le Guin, \"From Elfland to Poughkeepsie\" (1973)",
+   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+   "quote": "The archaic manner is indeed a perfect distancer",
+   "page": "p.6 of the PDF"
+  },
+  {
+   "index": 804,
+   "feature": "archaism",
+   "claim": "Le Guin names ichor as the infallible touchstone of the seventh-rate among fantasy's fancy words.",
+   "source": "Ursula K. Le Guin, \"From Elfland to Poughkeepsie\" (1973)",
+   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+   "quote": "the infallible touchstone of the seventh-rate: Ichor",
+   "page": "p.6 of the PDF"
+  },
+  {
+   "index": 805,
+   "feature": "archaism",
+   "claim": "Le Guin concludes that archaisms are not essential to fantasy.",
+   "source": "Ursula K. Le Guin, \"From Elfland to Poughkeepsie\" (1973)",
+   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+   "quote": "After all, archaisms are not essential.",
+   "page": "p.8 of the PDF"
+  },
+  {
+   "index": 816,
+   "feature": "archaism",
+   "claim": "Le Guin praises Eddison's archaic prose as exact, clear and powerful despite or because of its archaisms.",
+   "source": "Ursula K. Le Guin, \"From Elfland to Poughkeepsie\" (1973)",
+   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+   "quote": "exact, clear, powerful",
+   "page": "p.6 of the PDF"
+  },
+  {
+   "index": 817,
+   "feature": "register modulation",
+   "claim": "Le Guin criticises Leiber and Zelazny for alternating a colloquial American style with old formal usages within one work.",
+   "source": "Ursula K. Le Guin, \"From Elfland to Poughkeepsie\" (1973)",
+   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+   "quote": "they alternate the two styles",
+   "page": "p.7 of the PDF"
+  },
+  {
+   "index": 827,
+   "feature": "concrete sensory noun",
+   "claim": "Le Guin says realistic detail is used in fantasy only in lesser matters, to ground the story and prevent an overload of the improbable.",
+   "source": "Ursula K. Le Guin, \"Plausibility Revisited\" (2005)",
+   "url": "https://www.ursulakleguin.com/plausibility-revisited",
+   "quote": "Only in lesser matters is realistic detail used to ground the story",
+   "page": "paragraph on fantasy"
+  },
+  {
+   "index": 832,
+   "feature": "plainness and economy",
+   "claim": "Le Guin says that with the most ordinary ingredients, naming everyday language among them, and care and skill in using them, a writer can make something extremely good.",
+   "source": "Ursula K. Le Guin, \"Navigation Q1: How do you make something good?\", Book View Cafe, 27 July 2015 (text at ursulakleguin.com)",
+   "url": "https://www.ursulakleguin.com/bvc-navigation-q1",
+   "quote": "potatoes, everyday language, commonplace characters",
+   "page": "third paragraph"
+  },
+  {
+   "index": 839,
+   "feature": "omission as information",
+   "claim": "Le Guin says pity and terror are achieved more often through brevity, a few telling details and a great deal left unsaid than through wallowing in a bloodbath.",
+   "source": "Ursula K. Le Guin, \"Navigating the Ocean of Story: Session 2, Round 1\", Book View Cafe, 2016",
+   "url": "https://www.ursulakleguin.com/bvc-navigating-the-ocean-of-story-session-2-round-1",
+   "quote": "brevity, a few telling details, a great left unsaid",
+   "page": "answer to Lauren, question 5 (the page as fetched reads \"a great left unsaid\")"
+  },
+  {
+   "index": 840,
+   "feature": "omission as information",
+   "claim": "Le Guin praises a Patrick O'Brian scene of a ship going down with five hundred men aboard as one that could not be shorter, more silent, or more shocking.",
+   "source": "Ursula K. Le Guin, \"Navigating the Ocean of Story: Session 2, Round 1\", Book View Cafe, 2016",
+   "url": "https://www.ursulakleguin.com/bvc-navigating-the-ocean-of-story-session-2-round-1",
+   "quote": "could not be shorter, more silent, or more shocking",
+   "page": "answer to Lauren, question 5"
+  },
+  {
+   "index": 844,
+   "feature": "concrete sensory noun",
+   "claim": "Le Guin advises describing just enough of a character's appearance to give the noticing reader a clear clue, saying one physical detail will often do it.",
+   "source": "Ursula K. Le Guin, \"Navigating the Ocean of Story: Session 2, Round 1\", Book View Cafe, 2016",
+   "url": "https://www.ursulakleguin.com/bvc-navigating-the-ocean-of-story-session-2-round-1",
+   "quote": "Often one physical detail will do it",
+   "page": "answer to Beth, question 4"
+  },
+  {
+   "index": 849,
+   "feature": "withheld information and inference",
+   "claim": "Le Guin says a reader will learn what an unexplained invented term means but may have to wait a while, and that lazy readers find waiting uncomfortable.",
+   "source": "Ursula K. Le Guin, \"Navigating the Ocean of Story: Session 2 — Three New Questions\", Book View Cafe, 21 March 2016",
+   "url": "https://www.ursulakleguin.com/bvc-navigating-the-ocean-of-story-session-2-three-new-questions",
+   "quote": "The reader will learn what it is",
+   "page": "answer to Nicole and Bayla"
+  }
+ ]
+}

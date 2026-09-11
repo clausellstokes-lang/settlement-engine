@@ -1,0 +1,1418 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-102039733-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-102039733-1');
+</script>
+	
+<script>
+/**
+* Function that registers a click on an outbound link in Analytics.
+* This function takes a valid URL string as an argument, and uses that URL string
+* as the event label. Setting the transport method to 'beacon' lets the hit be sent
+* using 'navigator.sendBeacon' in browser that support it.
+*/
+var getOutboundLink = function(url) {
+  gtag('event', 'click', {
+    'event_category': 'outbound',
+    'event_label': url,
+    'transport_type': 'beacon',
+    'event_callback': function(){document.location = url;}
+  });
+}
+</script>
+
+<meta name="google-site-verification" content="4tukU1_ZcV0eV7hWoVWCfrWVq-i1UsSupGnqS10Snl4" />
+<meta name="keywords" content="science fiction, fantasy, magazine, book review, author interview, news" />
+<meta name="description" content="The magazine of the science fiction, fantasy, and horror field with news, reviews, and author interviews" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<link rel="pingback" href="https://locusmag.com/xmlrpc.php" />
+<title>Gary K. Wolfe reviews Guy Gavriel Kay &#8211; Locus Online</title>
+<link rel='dns-prefetch' href='//secure.gravatar.com' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel='dns-prefetch' href='//v0.wordpress.com' />
+<link rel="alternate" type="application/rss+xml" title="Locus Online &raquo; Feed" href="https://locusmag.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Locus Online &raquo; Comments Feed" href="https://locusmag.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Locus Online &raquo; Gary K. Wolfe reviews Guy Gavriel Kay Comments Feed" href="https://locusmag.com/2016/06/gary-k-wolfe-reviews-guy-gavriel-kay/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.0.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.0.1\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/locusmag.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.6.10"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([55357,56424,8205,55356,57212],[55357,56424,8203,55356,57212])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='wp-block-library-css'  href='https://locusmag.com/wp-includes/css/dist/block-library/style.min.css?ver=5.6.10' type='text/css' media='all' />
+<style id='wp-block-library-inline-css' type='text/css'>
+.has-text-align-justify{text-align:justify;}
+</style>
+<link rel='stylesheet' id='colormag_style-css'  href='https://locusmag.com/wp-content/themes/colormag-pro/style.css?ver=5.6.10' type='text/css' media='all' />
+<link rel='stylesheet' id='colormag_child_style-css'  href='https://locusmag.com/wp-content/themes/colormag-pro-child/style.css?ver=1.0' type='text/css' media='all' />
+<link rel='stylesheet' id='colormag_googlefonts-css'  href='//fonts.googleapis.com/css?family=Open+Sans%7CDroid+Sans&#038;ver=5.6.10' type='text/css' media='all' />
+<link rel='stylesheet' id='colormag-fontawesome-css'  href='https://locusmag.com/wp-content/themes/colormag-pro/fontawesome/css/font-awesome.min.css?ver=4.7.0' type='text/css' media='all' />
+<link rel='stylesheet' id='popup-maker-site-css'  href='//locusmag.com/wp-content/uploads/pum/pum-site-styles.css?generated=1674607070&#038;ver=1.16.2' type='text/css' media='all' />
+<link rel='stylesheet' id='social-logos-css'  href='https://locusmag.com/wp-content/plugins/jetpack/_inc/social-logos/social-logos.min.css?ver=9.8.1' type='text/css' media='all' />
+<link rel='stylesheet' id='jetpack_css-css'  href='https://locusmag.com/wp-content/plugins/jetpack/css/jetpack.css?ver=9.8.1' type='text/css' media='all' />
+<script type='text/javascript' src='https://locusmag.com/wp-includes/js/jquery/jquery.min.js?ver=3.5.1' id='jquery-core-js'></script>
+<script type='text/javascript' src='https://locusmag.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<!--[if lte IE 8]>
+<script type='text/javascript' src='https://locusmag.com/wp-content/themes/colormag-pro/js/html5shiv.min.js?ver=5.6.10' id='html5-js'></script>
+<![endif]-->
+<script type='text/javascript' id='colormag-loadmore-js-extra'>
+/* <![CDATA[ */
+var colormag_script_vars = {"no_more_posts":"No more post"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://locusmag.com/wp-content/themes/colormag-pro/js/loadmore.min.js?ver=5.6.10' id='colormag-loadmore-js'></script>
+<link rel="https://api.w.org/" href="https://locusmag.com/wp-json/" /><link rel="alternate" type="application/json" href="https://locusmag.com/wp-json/wp/v2/posts/2698" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://locusmag.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://locusmag.com/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.6.10" />
+<link rel="canonical" href="https://locusmag.com/2016/06/gary-k-wolfe-reviews-guy-gavriel-kay/" />
+<link rel='shortlink' href='https://wp.me/p9B2Rc-Hw' />
+<link rel="alternate" type="application/json+oembed" href="https://locusmag.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Flocusmag.com%2F2016%2F06%2Fgary-k-wolfe-reviews-guy-gavriel-kay%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://locusmag.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Flocusmag.com%2F2016%2F06%2Fgary-k-wolfe-reviews-guy-gavriel-kay%2F&#038;format=xml" />
+<style type='text/css'>img#wpstats{display:none}</style>
+		<style type="text/css" id="custom-background-css">
+body.custom-background { background-color: #ffffff; }
+</style>
+	
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Gary K. Wolfe reviews Guy Gavriel Kay" />
+<meta property="og:url" content="https://locusmag.com/2016/06/gary-k-wolfe-reviews-guy-gavriel-kay/" />
+<meta property="og:description" content="From Locus Magazine&#8217;s May 2016 issue In the brief acknowledgments at the end of his magnificent new novel Children of Earth and Sky, Guy Gavriel Kay mentions that his fictional Renaissance ci…" />
+<meta property="article:published_time" content="2016-06-08T16:30:49+00:00" />
+<meta property="article:modified_time" content="2018-05-07T22:58:47+00:00" />
+<meta property="og:site_name" content="Locus Online" />
+<meta property="og:image" content="https://s0.wp.com/i/blank.jpg" />
+<meta property="og:locale" content="en_US" />
+<meta name="twitter:site" content="@locusmag" />
+<meta name="twitter:text:title" content="Gary K. Wolfe reviews Guy Gavriel Kay" />
+<meta name="twitter:image" content="https://locusmag.com/wp-content/uploads/2017/09/kaycoeas_199x300.jpg?w=144" />
+<meta name="twitter:card" content="summary" />
+
+<!-- End Jetpack Open Graph Tags -->
+<link rel="icon" href="https://locusmag.com/wp-content/uploads/2017/10/LocusRocketLogo.jpg" sizes="32x32" />
+<link rel="icon" href="https://locusmag.com/wp-content/uploads/2017/10/LocusRocketLogo.jpg" sizes="192x192" />
+<link rel="apple-touch-icon" href="https://locusmag.com/wp-content/uploads/2017/10/LocusRocketLogo.jpg" />
+<meta name="msapplication-TileImage" content="https://locusmag.com/wp-content/uploads/2017/10/LocusRocketLogo.jpg" />
+<!-- Locus Online Internal Styles -->		<style type="text/css"> .colormag-button,blockquote,button,input[type=reset],input[type=button],
+		input[type=submit]{background-color:#89111d}
+		a,#masthead .main-small-navigation li:hover > .sub-toggle i,
+		#masthead .main-small-navigation li.current-page-ancestor > .sub-toggle i,
+		#masthead .main-small-navigation li.current-menu-ancestor > .sub-toggle i,
+		#masthead .main-small-navigation li.current-page-item > .sub-toggle i,
+		#masthead .main-small-navigation li.current-menu-item > .sub-toggle i,
+		#masthead.colormag-header-classic #site-navigation .fa.search-top:hover,
+		#masthead.colormag-header-classic #site-navigation.main-small-navigation .random-post a:hover .fa-random,
+		#masthead.colormag-header-classic #site-navigation.main-navigation .random-post a:hover .fa-random,
+		#masthead.colormag-header-classic .breaking-news .newsticker a:hover{color:#89111d}
+		#site-navigation{border-top:4px solid #89111d}
+		.home-icon.front_page_on,.main-navigation a:hover,.main-navigation ul li ul li a:hover,
+		.main-navigation ul li ul li:hover>a,
+		.main-navigation ul li.current-menu-ancestor>a,
+		.main-navigation ul li.current-menu-item ul li a:hover,
+		.main-navigation ul li.current-menu-item>a,
+		.main-navigation ul li.current_page_ancestor>a,.main-navigation ul li.current_page_item>a,
+		.main-navigation ul li:hover>a,.main-small-navigation li a:hover,.site-header .menu-toggle:hover,
+		#masthead.colormag-header-classic .main-navigation ul ul.sub-menu li:hover > a,
+		#masthead.colormag-header-classic .main-navigation ul ul.sub-menu li.current-menu-ancestor > a,
+		#masthead.colormag-header-classic .main-navigation ul ul.sub-menu li.current-menu-item > a,
+		#masthead.colormag-header-clean #site-navigation .menu-toggle:hover,
+		#masthead.colormag-header-clean #site-navigation.main-small-navigation .menu-toggle,
+		#masthead.colormag-header-classic #site-navigation.main-small-navigation .menu-toggle,
+		#masthead .main-small-navigation li:hover > a, #masthead .main-small-navigation li.current-page-ancestor > a,
+		#masthead .main-small-navigation li.current-menu-ancestor > a, #masthead .main-small-navigation li.current-page-item > a,
+		#masthead .main-small-navigation li.current-menu-item > a,
+		#masthead.colormag-header-classic #site-navigation .menu-toggle:hover,
+		.main-navigation ul li.focus > a,
+        #masthead.colormag-header-classic .main-navigation ul ul.sub-menu li.focus > a { background-color:#89111d}
+		#masthead.colormag-header-classic .main-navigation ul ul.sub-menu li:hover,
+		#masthead.colormag-header-classic .main-navigation ul ul.sub-menu li.current-menu-ancestor,
+		#masthead.colormag-header-classic .main-navigation ul ul.sub-menu li.current-menu-item,
+		#masthead.colormag-header-classic #site-navigation .menu-toggle:hover,
+		#masthead.colormag-header-classic #site-navigation.main-small-navigation .menu-toggle,
+
+		#masthead.colormag-header-classic .main-navigation ul > li:hover > a,
+        #masthead.colormag-header-classic .main-navigation ul > li.current-menu-item > a,
+        #masthead.colormag-header-classic .main-navigation ul > li.current-menu-ancestor > a,
+        #masthead.colormag-header-classic .main-navigation ul li.focus > a { border-color:#89111d}
+		.main-small-navigation .current-menu-item>a,.main-small-navigation .current_page_item>a,
+		#masthead.colormag-header-clean .main-small-navigation li:hover > a,
+		#masthead.colormag-header-clean .main-small-navigation li.current-page-ancestor > a,
+		#masthead.colormag-header-clean .main-small-navigation li.current-menu-ancestor > a,
+		#masthead.colormag-header-clean .main-small-navigation li.current-page-item > a,
+		#masthead.colormag-header-clean .main-small-navigation li.current-menu-item > a { background:#89111d}
+		#main .breaking-news-latest,.fa.search-top:hover{background-color:#89111d}
+		.byline a:hover,.comments a:hover,.edit-link a:hover,.posted-on a:hover,
+		.social-links i.fa:hover,.tag-links a:hover,
+		#masthead.colormag-header-clean .social-links li:hover i.fa,
+		#masthead.colormag-header-classic .social-links li:hover i.fa,
+		#masthead.colormag-header-clean .breaking-news .newsticker a:hover{color:#89111d}
+		.widget_featured_posts .article-content .above-entry-meta .cat-links a,
+		.widget_call_to_action .btn--primary,.colormag-footer--classic .footer-widgets-area .widget-title span::before,
+		.colormag-footer--classic-bordered .footer-widgets-area .widget-title span::before{background-color:#89111d}
+		.widget_featured_posts .article-content .entry-title a:hover{color:#89111d}
+		.widget_featured_posts .widget-title{border-bottom:2px solid #89111d}
+		.widget_featured_posts .widget-title span,
+		.widget_featured_slider .slide-content .above-entry-meta .cat-links a{background-color:#89111d}
+		.widget_featured_slider .slide-content .below-entry-meta .byline a:hover,
+		.widget_featured_slider .slide-content .below-entry-meta .comments a:hover,
+		.widget_featured_slider .slide-content .below-entry-meta .posted-on a:hover,
+		.widget_featured_slider .slide-content .entry-title a:hover{color:#89111d}
+		.widget_highlighted_posts .article-content .above-entry-meta .cat-links a{background-color:#89111d}
+		.widget_block_picture_news.widget_featured_posts .article-content .entry-title a:hover,
+		.widget_highlighted_posts .article-content .below-entry-meta .byline a:hover,
+		.widget_highlighted_posts .article-content .below-entry-meta .comments a:hover,
+		.widget_highlighted_posts .article-content .below-entry-meta .posted-on a:hover,
+		.widget_highlighted_posts .article-content .entry-title a:hover{color:#89111d}
+		.category-slide-next,.category-slide-prev,.slide-next,
+		.slide-prev,.tabbed-widget ul li{background-color:#89111d}
+		i.fa-arrow-up, i.fa-arrow-down{color:#89111d}
+		#secondary .widget-title{border-bottom:2px solid #89111d}
+		#content .wp-pagenavi .current,#content .wp-pagenavi a:hover,
+		#secondary .widget-title span{background-color:#89111d}
+		#site-title a{color:#89111d}
+		.page-header .page-title{border-bottom:2px solid #89111d}
+		#content .post .article-content .above-entry-meta .cat-links a,
+		.page-header .page-title span{background-color:#89111d}
+		#content .post .article-content .entry-title a:hover,.entry-meta .byline i,
+		.entry-meta .cat-links i,.entry-meta a,.post .entry-title a:hover,.search .entry-title a:hover{color:#89111d}
+		.entry-meta .post-format i{background-color:#89111d}
+		.entry-meta .comments-link a:hover,.entry-meta .edit-link a:hover,.entry-meta .posted-on a:hover,
+		.entry-meta .tag-links a:hover,.single #content .tags a:hover{color:#89111d}
+		.format-link .entry-content a,.more-link{background-color:#89111d}
+		.count,.next a:hover,.previous a:hover,.related-posts-main-title .fa,
+		.single-related-posts .article-content .entry-title a:hover{color:#89111d}
+		.pagination a span:hover{color:#89111d;border-color:#89111d}
+		.pagination span{background-color:#89111d}
+		#content .comments-area a.comment-edit-link:hover,#content .comments-area a.comment-permalink:hover,
+		#content .comments-area article header cite a:hover,.comments-area .comment-author-link a:hover{color:#89111d}
+		.comments-area .comment-author-link span{background-color:#89111d}
+		.comment .comment-reply-link:hover,.nav-next a,.nav-previous a{color:#89111d}
+		.footer-widgets-area .widget-title{border-bottom:2px solid #89111d}
+		.footer-widgets-area .widget-title span{background-color:#89111d}
+		#colophon .footer-menu ul li a:hover,.footer-widgets-area a:hover,a#scroll-up i{color:#89111d}
+		.advertisement_above_footer .widget-title{border-bottom:2px solid #89111d}
+		.advertisement_above_footer .widget-title span{background-color:#89111d}
+		.sub-toggle{background:#89111d}
+		.main-small-navigation li.current-menu-item > .sub-toggle i {color:#89111d}
+		.error{background:#89111d}
+		.num-404{color:#89111d}
+		#primary .widget-title{border-bottom: 2px solid #89111d}
+		#primary .widget-title span{background-color:#89111d}
+		.related-posts-wrapper-flyout .entry-title a:hover{color:#89111d} .main-navigation li, .site-header .menu-toggle { font-family: Droid Sans; } .main-navigation ul li a { font-size: 15px; } h1 { font-size: 44px; } #site-title a { color: #000000; } .main-navigation a, .main-navigation ul li ul li a, .main-navigation ul li.current-menu-item ul li a, .main-navigation ul li ul li.current-menu-item a, .main-navigation ul li.current_page_ancestor ul li a, .main-navigation ul li.current-menu-ancestor ul li a, .main-navigation ul li.current_page_item ul li a { color: #f9f9f9; } #header-text-nav-container { background-color: #fcfcfc; } h1, h2, h3, h4, h5, h6 { color: #444444; } body, button, input, select, textarea { color: #000000; } .colormag-button, input[type="reset"], input[type="button"], input[type="submit"], button, .more-link span { color: #dbdbdb; } .colormag-button, input[type="reset"], input[type="button"], input[type="submit"], button, .more-link span { background-color: #565656; } .footer-widgets-wrapper { background-color: #2c2e34; } #colophon .tg-upper-footer-widgets .widget { background-color: #2c2e34; } #colophon .footer-menu ul li a { color: #f9f2f2; } .footer-socket-wrapper { background-color: #2c2e34; } .below-entry-meta .byline,.tg-module-meta .tg-post-auther-name{display:none;} .above-entry-meta,.tg-post-categories{display:none;} .below-entry-meta .comments,.tg-module-meta .tg-module-comments{display:none;}#colophon { background-position: center center; }#colophon { background-size: auto; }#colophon { background-attachment: scroll; }#colophon { background-repeat: repeat; }</style>
+					<link rel="stylesheet" type="text/css" id="wp-custom-css" href="https://locusmag.com/?custom-css=f7d01c159b" />
+		</head>
+
+<body class="post-template-default single single-post postid-2698 single-format-standard custom-background  wide">
+<div id="page" class="hfeed site">
+		<header id="masthead" class="site-header clearfix">
+		<div id="header-text-nav-container" class="clearfix">
+			
+			
+			<div class="inner-wrap">
+
+				<div id="header-text-nav-wrap" class="clearfix">
+					<div id="header-left-section">
+						<img id="mapped-image" src="https://locusmag.com/wp-content/uploads/2021/06/locus-header-align-left6rainbow-version4.jpg" usemap="#image-map">
+						<!-- original header image: https://locusmag.com/wp-content/uploads/2017/10/locus-header-align-left6.jpg -->
+
+<map name="image-map">
+    <area target="" alt="Home" title="Home" href="https://locusmag.com" coords="0,0,396,209" shape="rect">
+    <area target="" alt="Subscribe Now" title="Subscribe Now" href="https://locusmag.com/subscribe/" coords="395,1,1199,98" shape="rect">
+    <area target="" alt="Donate Now" title="Donate Now" href="https://locusmag.com/donate/" coords="395,97,1199,206" shape="rect">
+</map>
+													<div id="header-logo-image">
+								
+															</div><!-- #header-logo-image -->
+							<div id="header-logo-image-2">
+                                <a style="padding:0px" href="https://locusmag.com/" title="Locus Online" rel="home"><img src="https://locusmag.com/wp-content/uploads/2021/06/Topper-for-Mobile6rainbow.jpg" alt="Locus Online"></a>
+                            </div><!-- #header-logo-image-2  original mobile header: https://locusmag.com/wp-content/uploads/2017/10/Topper-for-Mobile6.jpg-->
+												<div id="header-text" class="screen-reader-text">
+															<h3 id="site-title">
+									<a href="https://locusmag.com/" title="Locus Online" rel="home">Locus Online</a>
+								</h3>
+																						<p id="site-description">The Magazine of the Science Fiction and Fantasy Field</p>
+							<!-- #site-description -->
+						</div><!-- #header-text -->
+					</div><!-- #header-left-section -->
+					<div id="header-right-section">
+												<div id="header-right-sidebar" class="clearfix">
+						<aside id="custom_html-79" class="widget_text widget widget_custom_html clearfix"><div class="textwidget custom-html-widget"><!--custom_html-79 (top banner ad on reviews categories full screen)-->
+<!--
+<a href=""><img class="banner" src="" alt=""></a>-->
+<!--transparent banner pushes ad down -->
+<a href="http://locusmag.com/subscribe/"><img class="banner" src="http://locusmag.com/wp-content/uploads/2017/11/TransparentBanner.png" alt=""></a> 
+</div></aside><aside id="custom_html-91" class="widget_text widget widget_custom_html clearfix"><div class="textwidget custom-html-widget"><!-- custom_html-91 (top banner ad small screen)
+<a href=""><img class="banner" src="" alt=""></a>-->
+<!--this is the code for the default small banner ad DO NOT DELETE. Copy and paste to above-->
+<a href="http://locusmag.com/subscribe/"><img class="banner" src="http://locusmag.com/wp-content/uploads/2017/10/Topper-Subscribe-Ad-for-Mobile7.jpg" alt="Subscribe!"></a> 
+</div></aside><aside id="custom_html-80" class="widget_text widget widget_custom_html clearfix"><div class="textwidget custom-html-widget"><!--custom_html-80 (bottom banner ad full screen and mobile screen on reviews categories)-->
+<!--HEADER Ad 
+<a href="URL HERE" onclick="getOutboundLink('URL HERE'); return false;"><img class="banner" src="SOURCE FILE HERE" alt="ALT TEXT HERE" style="margin-top:5px"></a>-->
+
+<!--HELLBENT BANNER AD TO 1/30 -->
+
+<a href="https://static.macmillan.com/static/fib/hell-bent/?utm_source=locusspotlight&utm_medium[…]m_content=-other-shopnow-buynow&utm_campaign=9781250313102" onclick="getOutboundLink('https://static.macmillan.com/static/fib/hell-bent/?utm_source=locusspotlight&utm_medium[…]m_content=-other-shopnow-buynow&utm_campaign=9781250313102'); return false;"><img class="banner" src="https://locusmag.com/wp-content/uploads/2023/01/HellBent_Locus_728x90.gif" alt="HELL BENT BANNER AD" style="margin-top:10px; height:90px; width:728px; overflow:hidden"></a> 
+</div></aside>						</div>
+											</div><!-- #header-right-section -->
+
+				</div><!-- #header-text-nav-wrap -->
+
+			</div><!-- .inner-wrap -->
+
+			
+			<nav id="site-navigation" class="main-navigation clearfix" role="navigation">
+				<div class="inner-wrap clearfix">
+											<div class="home-icon">
+							<a href="https://locusmag.com/" title="Locus Online"><i class="fa fa-home"></i></a>
+						</div>
+											<h4 class="menu-toggle"></h4>
+					<div class="menu-primary-container"><ul id="menu-home-page" class="menu"><li id="menu-item-88839" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-88839"><a href="https://locusmag.com/recent-posts/">All Posts</a></li>
+<li id="menu-item-12166" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-12166 menu-item-category-1"><a href="https://locusmag.com/category/news/">News</a>
+<ul class="sub-menu">
+	<li id="menu-item-31321" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-31321 menu-item-category-5"><a href="https://locusmag.com/category/news/awards/">Awards</a></li>
+	<li id="menu-item-31324" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-31324 menu-item-category-3"><a href="https://locusmag.com/category/news/announcements/">Announcements</a></li>
+	<li id="menu-item-31323" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-31323 menu-item-category-12"><a href="https://locusmag.com/category/news/publishing/">Publishing</a></li>
+	<li id="menu-item-88765" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-88765 menu-item-category-140"><a href="https://locusmag.com/category/newtitlesbestsellers/">New Titles &#038; Bestsellers</a></li>
+	<li id="menu-item-31326" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-31326 menu-item-category-8"><a href="https://locusmag.com/category/news/conventions/">Conventions</a></li>
+	<li id="menu-item-31322" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-31322 menu-item-category-11"><a href="https://locusmag.com/category/news/obituaries/">Obituaries</a></li>
+</ul>
+</li>
+<li id="menu-item-66521" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-has-children menu-item-66521 menu-item-category-138"><a href="https://locusmag.com/category/reviews/">Reviews</a>
+<ul class="sub-menu">
+	<li id="menu-item-66311" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-66311 menu-item-category-117"><a href="https://locusmag.com/category/reviews/books/">Books</a></li>
+	<li id="menu-item-66313" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-66313 menu-item-category-115"><a href="https://locusmag.com/category/reviews/short-fiction/">Short Fiction</a></li>
+	<li id="menu-item-66312" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-66312 menu-item-category-116"><a href="https://locusmag.com/category/films/">Films</a></li>
+	<li id="menu-item-87738" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-87738"><a href="https://locusmag.com/reviews/">Index to Reviews</a></li>
+</ul>
+</li>
+<li id="menu-item-12168" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-12168 menu-item-category-122"><a href="https://locusmag.com/category/features/">Features</a>
+<ul class="sub-menu">
+	<li id="menu-item-31332" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-31332 menu-item-category-125"><a href="https://locusmag.com/category/features/interviews/">Interviews</a>
+	<ul class="sub-menu">
+		<li id="menu-item-87740" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-87740"><a href="https://locusmag.com/interviews/">Index to Interviews</a></li>
+	</ul>
+</li>
+	<li id="menu-item-31333" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-31333 menu-item-category-127"><a href="https://locusmag.com/category/features/spotlight/">Spotlights</a></li>
+	<li id="menu-item-67145" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-67145 menu-item-category-186"><a href="https://locusmag.com/category/features/commentary/">Commentary</a>
+	<ul class="sub-menu">
+		<li id="menu-item-66273" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-66273 menu-item-category-124"><a href="https://locusmag.com/category/features/commentary/cory-doctorow/">Cory Doctorow</a></li>
+		<li id="menu-item-66274" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-66274 menu-item-category-126"><a href="https://locusmag.com/category/features/commentary/kameron-hurley/">Kameron Hurley</a></li>
+		<li id="menu-item-66275" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-66275 menu-item-category-135"><a href="https://locusmag.com/category/features/commentary/roundtable/">Roundtable</a></li>
+		<li id="menu-item-88801" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-88801"><a href="https://locusmag.com/sf-crossing-the-gulf/">SF Crossing the Gulf</a></li>
+	</ul>
+</li>
+</ul>
+</li>
+<li id="menu-item-31343" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-31343"><a href="https://locusmag.com/subscribe/">Subscribe</a></li>
+<li id="menu-item-66292" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-66292"><a href="https://locusmag.com/advertise/">Advertise</a></li>
+<li id="menu-item-89858" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-89858"><a href="https://locusmag.com/donate/">Donate</a></li>
+<li id="menu-item-66222" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-66222"><a href="https://locusmag.com/aboutlocusonline/">About</a>
+<ul class="sub-menu">
+	<li id="menu-item-113165" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-113165"><a href="https://locusmag.com/aboutlocusonline/submission-guidelines/">Submission Guidelines</a></li>
+	<li id="menu-item-68978" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-68978"><a href="https://locusmag.com/aboutlocusonline/contact/">Contact Us</a></li>
+	<li id="menu-item-30474" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-30474 menu-item-category-129"><a href="https://locusmag.com/category/staff/">Staff</a></li>
+	<li id="menu-item-66224" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-66224"><a href="https://locusmag.com/our-history/">History of Locus Magazine</a>
+	<ul class="sub-menu">
+		<li id="menu-item-66801" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-66801"><a href="https://locusmag.com/aboutlocusonline/charles-n-brown-1937-2009/">Charles N. Brown (1937-2009)</a></li>
+		<li id="menu-item-67127" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-67127"><a href="https://locusmag.com/aboutlocusonline/locus-online/">Locus Online</a></li>
+	</ul>
+</li>
+	<li id="menu-item-87210" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-87210"><a href="https://locusmag.com/aboutlocusonline/faq/">FAQ</a></li>
+	<li id="menu-item-109463" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-109463"><a href="https://locusmag.com/aboutlocusonline/code-of-conduct/">Code of Conduct</a></li>
+	<li id="menu-item-111115" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-111115"><a href="https://subscribers.locusmag.com/store">Store</a></li>
+</ul>
+</li>
+<li id="menu-item-31344" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31344"><a href="https://locusmag.com/resources/">Resources</a>
+<ul class="sub-menu">
+	<li id="menu-item-66396" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-66396"><a href="https://locusmag.com/forthcomingbooks/">Forthcoming Books</a></li>
+	<li id="menu-item-66369" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-66369"><a href="https://locusmag.com/interviews/">Index to Interviews</a></li>
+	<li id="menu-item-68933" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-68933"><a href="https://locusmag.com/reviews/">Index to Reviews</a></li>
+	<li id="menu-item-132223" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-132223"><a href="https://locusmag.com/#TOCArchive">Archived Posts by Month</a></li>
+	<li id="menu-item-92030" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-92030"><a href="http://locusmag.com/2019-directory/">Directories</a></li>
+	<li id="menu-item-66423" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-66423"><a href="http://www.sfadb.com/">Science Fiction Awards Database</a></li>
+	<li id="menu-item-66388" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-66388"><a href="https://locusmag.com/conventions/">Conventions List</a></li>
+	<li id="menu-item-68934" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-68934"><a href="https://locusmag.com/links/">Links by Category</a></li>
+	<li id="menu-item-111114" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-111114"><a href="https://subscribers.locusmag.com/store">Store</a></li>
+</ul>
+</li>
+<li id="menu-item-87742" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-87742"><a href="https://subscribers.locusmag.com/">My Account</a></li>
+</ul></div>																<i class="fa fa-search search-top"></i>
+						<div class="search-form-top">
+							<form action="https://locusmag.com/" class="search-form searchform clearfix" method="get">
+	<div class="search-wrap">
+		<input type="text" placeholder="Search" class="s field" name="s">
+		<button class="search-icon" type="submit"></button>
+	</div>
+</form><!-- .searchform -->
+						</div>
+									</div>
+			</nav>
+
+		</div><!-- #header-text-nav-container -->
+
+		
+	</header>
+			<div id="main" class="clearfix">
+		
+		
+		<div class="inner-wrap clearfix">
+
+
+<div id="primary">
+	<div id="content" class="clearfix">
+
+		
+			
+<article id="post-2698" class="post-2698 post type-post status-publish format-standard has-post-thumbnail hentry category-books category-reviews tag-gary-k-wolfe">
+	
+	
+	
+	
+					<div class="featured-image">
+									<img width="199" height="300" src="https://locusmag.com/wp-content/uploads/2017/09/kaycoeas_199x300.jpg" class="attachment-colormag-featured-image size-colormag-featured-image wp-post-image" alt="" loading="lazy" srcset="https://locusmag.com/wp-content/uploads/2017/09/kaycoeas_199x300.jpg 199w, https://locusmag.com/wp-content/uploads/2017/09/kaycoeas_199x300-60x90.jpg 60w" sizes="(max-width: 199px) 100vw, 199px" />											</div>
+
+					
+	
+	<div class="article-content clearfix">
+
+		
+		<div class="above-entry-meta"><span class="cat-links"><a href="https://locusmag.com/category/reviews/books/" style="background:#1e92bc" rel="category tag">Books</a>&nbsp;<a href="https://locusmag.com/category/reviews/" style="background:#0c4870" rel="category tag">Reviews</a>&nbsp;</span></div>
+			<header class="entry-header">
+				<h1 class="entry-title">
+					Gary K. Wolfe reviews Guy Gavriel Kay				</h1>
+			</header>
+
+			<div class="below-entry-meta">
+			<span class="posted-on"><a href="https://locusmag.com/2016/06/gary-k-wolfe-reviews-guy-gavriel-kay/" title="9:30 am" rel="bookmark"><i class="fa fa-calendar-o"></i> <time class="entry-date published" datetime="2016-06-08T09:30:49-07:00">June 8, 2016</time><time class="updated" datetime="2018-05-07T15:58:47-07:00">May 7, 2018</time></a></span>
+			<span class="byline"><span class="author vcard" itemprop="name"><i class="fa fa-user"></i><a class="url fn n" href="https://locusmag.com/author/admin/" title="admin">admin</a></span></span>
+
+			
+						<span class="comments"><a href="https://locusmag.com/2016/06/gary-k-wolfe-reviews-guy-gavriel-kay/#respond"><i class="fa fa-comment"></i> 0 Comments</a></span>
+			<span class="tag-links"><i class="fa fa-tags"></i><a href="https://locusmag.com/tag/gary-k-wolfe/" rel="tag">Gary K. Wolfe</a></span></div>
+		<div class="entry-content clearfix">
+			<div class="postcontent">
+<p><b>Children of Earth and Sky</b>, Guy Gavriel Kay (<a href="http://www.amazon.com/gp/search?keywords=9780451472960&amp;index=books&amp;linkCode=qs&amp;tag=locusmag06-20">NAL 978-0-451-47296-0, $27.00, 448pp, hc</a>) May 2016. Cover by Larry Rostant</p>
+<p><a href="http://www.amazon.com/gp/search?keywords=9780451472960&amp;index=books&amp;linkCode=qs&amp;tag=locusmag06-20"><img loading="lazy" class="alignleft size-full wp-image-73345" src="http://locusmag.com/wp-content/uploads/2017/09/kaycoeas_199x300.jpg" alt="" width="199" height="300" srcset="https://locusmag.com/wp-content/uploads/2017/09/kaycoeas_199x300.jpg 199w, https://locusmag.com/wp-content/uploads/2017/09/kaycoeas_199x300-60x90.jpg 60w" sizes="(max-width: 199px) 100vw, 199px" /></a>In the brief acknowledgments at the end of his magnificent new novel <b>Children of Earth and Sky</b>, Guy Gavriel Kay mentions that his fictional Renaissance city of Obravic is an ‘‘amalgam,’’ and it occurs to me that this is as good a word as any for Kay’s much-discussed technique of combining history and fantasy, of renaming and essentially rebranding ac­tual events, places, and characters for his own purposes. I suspect that by now he’s weary of being asked why he undertakes such meticu­lous background research (in this case, largely involving the Ottoman-Habsburg wars and the Siege of Vienna), when he isn’t particularly constrained by that research in the fiction, but in fact he is as constrained as he wants to be – only the constraints are perhaps more harmonic than melodic. He allows himself freedom to improvise up to a point, and that point is what defines his uniquely nuanced approach to his dialogue between fantasy and history. Instead of finding cavities in the historical record in which to insert fantasy spectacles (as Tim Pow­ers did in that earlier entertaining fantasy built around the Siege of Vienna, <b>The Drawing of the Dark</b>), Kay wants to explore and enhance the fantasy-like resonance inherent in much historical fiction, and it’s a fair bet than many, if not most of his readers will have only the vaguest awareness of the historical Suleiman the Magnificent or the layout of Dubrovnik. His use of supernatural elements is deliberately, even tactically, restrained, and while a ghost is involved in one of the key events in <b>Children of Earth and Sky</b>, for the most part his ghosts serve, as they did in Shakespeare, as conduits of otherwise unavailable information (ghosts were essentially the mobile phones of Renais­sance drama).</p>
+<p><b>Children of Earth and Sky </b>returns us to the Europe of Kay’s Sarantine Mosaic, beginning some 25 years after the fall of Sarantium, Kay’s version of Byzantium. As with all of Kay’s best work, however, its power derives less from its tweaking of history than from its complex, nuanced characters whose stories come to intertwine in revealing ways; it’s no accident that Kay chooses metaphors like tapestries and mosaics for his novels and series. Among the most appealing are Danica Gradek, a skilled ar­cher who has been drafted to join the swift-boat pirates of Senjan (a name only slightly altered from the Croatian town of Senj); Pero Villani, a young artist chosen for the risky assignment of painting a western-style portrait of the power­ful khalif Gurçu, the Suleiman-like nemesis of eastern Europe; Leonora Valeri, rescued from her father’s cruelly imposed exile to serve as a spy for Seressa (a version of Venice); and Damaz, a young warrior kidnapped as a child and now rising through the ranks of the khalif’s elite infantry force the djanni (a pretty obvious variation on janissaries). As usual, there is a rich cast of secondary figures, from servants to ship captains, merchants, priestesses, and emperors (including the exiled empress of the fallen Sarantium). Kay has a remarkable gift for lending surprising depth to even walk-on figures, but the young people carry the burden of the narrative, and this lends the tale a par­ticular poignance when the chronology opens up a bit toward the end of the novel.</p>
+<p>In addition to his well-known skill at devis­ing various diplomatic and court intrigues, Kay is hardly averse to kinetic action sequences and detailed battlefield strategies. For me, the novel really develops its momentum during an early pirate raid in which Leonora and Danica first meet and later develop a kind of survival friendship that reflects the problematic options available to women in Renaissance Europe. We first meet Damaz in a kind of set piece in which he challenges and defeats a rival trainee who is planning what amounts to a brutal hate crime, and later follow him as a foot-soldier during the khalif’s ill-fated siege. The artist Pero – who was also aboard that ship that Danica helps raid, and who fell in love at first sight with Leonora – gets his own turn later on when he finds himself in a kind of psychological cat-and-mouse game with the terrifying khalif Gurçu, who could of course have him killed at any moment, and the khalif’s scheming family. As these various threads merge in ingenious ways – always just a bit short of seeming <i>too </i>ingenious – Kay builds a convincingly human answer to the paradox that has long made the Renaissance so hypnotic, so alien, and familiar with its juxtaposition of crude brutality and magnificent beauty, of high manners and low betrayals, of emerging technology and stark primitivism. It’s an amalgam, all right, but it’s also a tapestry of the sort that no one but Kay really seems to know how to do.</p>
+</div>
+<div class="postsidebar"></div>
+<div class="postcontent">
+<div class="footerblog">
+<p>Read more! This is one of many reviews from recent issues of Locus Magazine. To read more, go <a href="https://secure.locusmag.com/Magazine/Subscribe.html">here to subscribe</a>.</p>
+</div>
+</div>
+<div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-icon sd-sharing"><div class="sd-content"><ul><li class="share-facebook"><a rel="nofollow noopener noreferrer" data-shared="sharing-facebook-2698" class="share-facebook sd-button share-icon no-text" href="https://locusmag.com/2016/06/gary-k-wolfe-reviews-guy-gavriel-kay/?share=facebook" target="_blank" title="Click to share on Facebook"><span></span><span class="sharing-screen-reader-text">Click to share on Facebook (Opens in new window)</span></a></li><li class="share-twitter"><a rel="nofollow noopener noreferrer" data-shared="sharing-twitter-2698" class="share-twitter sd-button share-icon no-text" href="https://locusmag.com/2016/06/gary-k-wolfe-reviews-guy-gavriel-kay/?share=twitter" target="_blank" title="Click to share on Twitter"><span></span><span class="sharing-screen-reader-text">Click to share on Twitter (Opens in new window)</span></a></li><li class="share-tumblr"><a rel="nofollow noopener noreferrer" data-shared="" class="share-tumblr sd-button share-icon no-text" href="https://locusmag.com/2016/06/gary-k-wolfe-reviews-guy-gavriel-kay/?share=tumblr" target="_blank" title="Click to share on Tumblr"><span></span><span class="sharing-screen-reader-text">Click to share on Tumblr (Opens in new window)</span></a></li><li class="share-pinterest"><a rel="nofollow noopener noreferrer" data-shared="sharing-pinterest-2698" class="share-pinterest sd-button share-icon no-text" href="https://locusmag.com/2016/06/gary-k-wolfe-reviews-guy-gavriel-kay/?share=pinterest" target="_blank" title="Click to share on Pinterest"><span></span><span class="sharing-screen-reader-text">Click to share on Pinterest (Opens in new window)</span></a></li><li class="share-end"></li></ul></div></div></div>		</div>
+
+			</div>
+
+	</article>
+
+		
+	</div><!-- #content -->
+
+	
+
+			<ul class="default-wp-page clearfix thumbnail-pagination">
+									<li class="previous">
+					<a href="https://locusmag.com/2016/06/2016-chesley-awards-finalists/" rel="prev"><span class="meta-nav">&larr; Previous</span> 2016 Chesley Awards Finalists</a>					</li>
+				
+									<li class="next">
+					<a href="https://locusmag.com/2016/06/rivera-wins-slf-grant/" rel="next">Rivera Wins SLF Grant <span class="meta-nav">Next &rarr;</span></a>					</li>
+							</ul>
+			
+		
+		
+		
+
+	<h4 class="related-posts-main-title">
+		<i class="fa fa-thumbs-up"></i><span>Earlier Posts of Interest...</span>
+	</h4>
+
+	<div class="related-posts clearfix">
+
+					<div class="single-related-posts">
+
+									<div class="related-posts-thumbnail">
+						<a href="https://locusmag.com/2011/07/russell-letson-reviews-james-s-a-corey/" title="Russell Letson reviews James S.A. Corey">
+													</a>
+					</div>
+				
+				<div class="article-content">
+
+					<h3 class="entry-title">
+						<a href="https://locusmag.com/2011/07/russell-letson-reviews-james-s-a-corey/" rel="bookmark" title="Russell Letson reviews James S.A. Corey">Russell Letson reviews James S.A. Corey</a>
+					</h3><!--/.post-title-->
+
+					<div class="below-entry-meta">
+						<span class="posted-on"><a href="https://locusmag.com/2011/07/russell-letson-reviews-james-s-a-corey/" title="10:22 am" rel="bookmark"><i class="fa fa-calendar-o"></i> <time class="entry-date published" datetime="2011-07-20T10:22:33-07:00">July 20, 2011</time></a></span>
+						<span class="byline"><span class="author vcard"><i class="fa fa-user"></i><a class="url fn n" href="https://locusmag.com/author/admin/" title="admin">admin</a></span></span>
+
+						<span class="comments"><i class="fa fa-comment"></i><a href="https://locusmag.com/2011/07/russell-letson-reviews-james-s-a-corey/#respond">0</a></span>
+					</div>
+
+				</div>
+
+			</div><!--/.related-->
+					<div class="single-related-posts">
+
+									<div class="related-posts-thumbnail">
+						<a href="https://locusmag.com/2021/05/maya-c-james-reviews-the-unbroken-by-c-l-clark/" title="Maya C. James Reviews <b>The Unbroken</b> by C.L. Clark">
+							<img width="200" height="300" src="https://locusmag.com/wp-content/uploads/2021/03/clark-unbroken-200x300.jpg" class="attachment-colormag-featured-post-medium size-colormag-featured-post-medium wp-post-image" alt="" loading="lazy" srcset="https://locusmag.com/wp-content/uploads/2021/03/clark-unbroken-200x300.jpg 200w, https://locusmag.com/wp-content/uploads/2021/03/clark-unbroken-60x90.jpg 60w" sizes="(max-width: 200px) 100vw, 200px" />						</a>
+					</div>
+				
+				<div class="article-content">
+
+					<h3 class="entry-title">
+						<a href="https://locusmag.com/2021/05/maya-c-james-reviews-the-unbroken-by-c-l-clark/" rel="bookmark" title="Maya C. James Reviews <b>The Unbroken</b> by C.L. Clark">Maya C. James Reviews <b>The Unbroken</b> by C.L. Clark</a>
+					</h3><!--/.post-title-->
+
+					<div class="below-entry-meta">
+						<span class="posted-on"><a href="https://locusmag.com/2021/05/maya-c-james-reviews-the-unbroken-by-c-l-clark/" title="8:30 am" rel="bookmark"><i class="fa fa-calendar-o"></i> <time class="entry-date published" datetime="2021-05-14T08:30:37-07:00">May 14, 2021</time></a></span>
+						<span class="byline"><span class="author vcard"><i class="fa fa-user"></i><a class="url fn n" href="https://locusmag.com/author/locusmag/" title="locusmag">locusmag</a></span></span>
+
+						<span class="comments"><i class="fa fa-comment"></i><a href="https://locusmag.com/2021/05/maya-c-james-reviews-the-unbroken-by-c-l-clark/#respond">0</a></span>
+					</div>
+
+				</div>
+
+			</div><!--/.related-->
+					<div class="single-related-posts">
+
+									<div class="related-posts-thumbnail">
+						<a href="https://locusmag.com/2013/11/faren-miller-reviews-samantha-shannon/" title="Faren Miller reviews Samantha Shannon">
+													</a>
+					</div>
+				
+				<div class="article-content">
+
+					<h3 class="entry-title">
+						<a href="https://locusmag.com/2013/11/faren-miller-reviews-samantha-shannon/" rel="bookmark" title="Faren Miller reviews Samantha Shannon">Faren Miller reviews Samantha Shannon</a>
+					</h3><!--/.post-title-->
+
+					<div class="below-entry-meta">
+						<span class="posted-on"><a href="https://locusmag.com/2013/11/faren-miller-reviews-samantha-shannon/" title="2:06 pm" rel="bookmark"><i class="fa fa-calendar-o"></i> <time class="entry-date published" datetime="2013-11-21T14:06:27-08:00">November 21, 2013</time></a></span>
+						<span class="byline"><span class="author vcard"><i class="fa fa-user"></i><a class="url fn n" href="https://locusmag.com/author/admin/" title="admin">admin</a></span></span>
+
+						<span class="comments"><i class="fa fa-comment"></i><a href="https://locusmag.com/2013/11/faren-miller-reviews-samantha-shannon/#respond">0</a></span>
+					</div>
+
+				</div>
+
+			</div><!--/.related-->
+		
+	</div><!--/.post-related-->
+
+
+	
+	
+<div id="comments" class="comments-area">
+
+	
+	
+	
+		<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="/2016/06/gary-k-wolfe-reviews-guy-gavriel-kay/#respond" style="display:none;">Cancel reply</a></small></h3><form action="https://locusmag.com/wp-comments-post.php" method="post" id="commentform" class="comment-form" novalidate><p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> Required fields are marked <span class="required">*</span></p><p class="comment-form-comment"><label for="comment">Comment</label> <textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" required="required"></textarea></p><p class="comment-form-author"><label for="author">Name <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="30" maxlength="245" required='required' /></p>
+<p class="comment-form-email"><label for="email">Email <span class="required">*</span></label> <input id="email" name="email" type="email" value="" size="30" maxlength="100" aria-describedby="email-notes" required='required' /></p>
+<p class="comment-form-url"><label for="url">Website</label> <input id="url" name="url" type="url" value="" size="30" maxlength="200" /></p>
+<p class="comment-subscription-form"><input type="checkbox" name="subscribe_comments" id="subscribe_comments" value="subscribe" style="width: auto; -moz-appearance: checkbox; -webkit-appearance: checkbox;" /> <label class="subscribe-label" id="subscribe-label" for="subscribe_comments">Notify me of follow-up comments by email.</label></p><p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Post Comment" /> <input type='hidden' name='comment_post_ID' value='2698' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="b606bd8d88" /></p><p style="display: none !important;"><label>&#916;<textarea name="ak_hp_textarea" cols="45" rows="8" maxlength="100"></textarea></label><input type="hidden" id="ak_js" name="ak_js" value="176"/><script>document.getElementById( "ak_js" ).setAttribute( "value", ( new Date() ).getTime() );</script></p></form>	</div><!-- #respond -->
+	
+</div><!-- #comments -->
+</div><!-- #primary -->
+
+
+<div id="secondary">
+			
+		<aside id="colormag_child_news_in_picture_widget-21" class="widget widget_block_picture_news widget_highlighted_posts widget_featured_meta widget_featured_posts clearfix">						<div class="widget_block_picture_news_inner_wrap">
+			<div id="style5_slider_colormag_child_news_in_picture_widget-21" class="widget_highlighted_post_area_no_slide" >
+									<div class="single-article">
+						<figure><a href="https://locusmag.com/2023/02/issue-745-table-of-contents-february-2023/" title="Issue 745 Table of Contents, February 2023"><img width="499" height="648" src="https://locusmag.com/wp-content/uploads/2023/01/745coverx650-499x648.jpg" class="attachment-colormag-featured-cover size-colormag-featured-cover wp-post-image" alt="Issue 745 Table of Contents, February 2023" loading="lazy" title="Issue 745 Table of Contents, February 2023" /></a></figure>						<div class="article-content">
+							<div class="above-entry-meta"><span class="cat-links"><a href="https://locusmag.com/category/issues/"  rel="category tag">Issues</a>&nbsp;</span></div>							<h3 class="entry-title">
+								<a href="https://locusmag.com/2023/02/issue-745-table-of-contents-february-2023/" title="Issue 745 Table of Contents, February 2023">Issue 745 Table of Contents, February 2023</a>
+							</h3>
+
+							<div class="below-entry-meta">
+								<span class="posted-on"><a href="https://locusmag.com/2023/02/issue-745-table-of-contents-february-2023/" title="12:05 am" rel="bookmark"><i class="fa fa-calendar-o"></i> <time class="entry-date published" datetime="2023-02-01T00:05:17-08:00">February 1, 2023</time></a></span>								<span class="byline"><span class="author vcard"><i class="fa fa-user"></i><a class="url fn n" href="https://locusmag.com/author/locusmag/" title="locusmag">locusmag</a></span></span>
+								<span class="comments"><i class="fa fa-comment"></i><a href="https://locusmag.com/2023/02/issue-745-table-of-contents-february-2023/#respond">0</a></span>
+							</div>
+						</div>
+					</div>
+							</div>
+		</div>
+		</aside><aside id="custom_html-124" class="widget_text widget widget_custom_html clearfix"><div class="textwidget custom-html-widget">
+<a href="https://subscribers.locusmag.com/back-issues"><button type="button" style="background-color:#89111d;color:white;width:100%;margin:0">See All Issues</button></a></div></aside><aside id="ad_html_single-62" class="widget_text widget widget_custom_html clearfix"><div class="textwidget custom-html-widget"><!--Gregory Leuning Run of Site Dec 2022 -->
+<div style="text-align:center">
+<a href="https://www.amazon.com/Colossus-Greg-Leunig-ebook/dp/B0BCH4PVF6/ref=sr_1_1?crid=1KTX5EJ33Y0DE&keywords=colossus+greg+leunig&qid=1668987587&sprefix=colossus+greg+leunig%2Caps%2C83&sr=8-1"><img src="https://locusmag.com/wp-content/uploads/2022/12/Colossus-ad-revised.jpg" alt="Gregory Leuning"></a></div>
+
+<!--End Man Nov 16- Dec 16 2022-->
+<div style="text-align:center">
+<a href="https://www.amazon.com/End-Man-Alex-Austin/dp/1951445341/ref=sr_1_1?crid=5VJJ5TSJFVON&keywords=end+man+alex+austin&qid=1668539096&sprefix=end+man%2Caps%2C459&sr=8-1"><img src="https://locusmag.com/wp-content/uploads/2022/11/300-300-ad-4.jpg" alt="End Man"></a></div>
+</div></aside><aside id="colormag_featured_posts_small_thumbnails-10" class="widget widget_featured_posts widget_featured_posts_small_thumbnails widget_featured_meta clearfix">		<h3 class="widget-title" style="border-bottom-color:#0c4870;"><span style="background-color:#0c4870;">Latest Reviews</span><a href="https://locusmag.com/category/reviews/" class="view-all-link">View All</a></h3>		<div class="following-post">
+							<div class="single-article clearfix " >
+					<figure><a href="https://locusmag.com/2023/02/ian-mond-reviews-concerning-those-who-have-fallen-asleep-ghost-stories-by-adam-soto/" title="Ian Mond Reviews <b>Concerning Those Who Have Fallen Asleep: Ghost Stories</b> by Adam Soto"><img width="60" height="90" src="https://locusmag.com/wp-content/uploads/2023/01/locus-10-60x90.jpg" class="attachment-colormag-featured-post-small size-colormag-featured-post-small wp-post-image" alt="Ian Mond Reviews &lt;b&gt;Concerning Those Who Have Fallen Asleep: Ghost Stories&lt;/b&gt; by Adam Soto" loading="lazy" title="Ian Mond Reviews &lt;b&gt;Concerning Those Who Have Fallen Asleep: Ghost Stories&lt;/b&gt; by Adam Soto" srcset="https://locusmag.com/wp-content/uploads/2023/01/locus-10-60x90.jpg 60w, https://locusmag.com/wp-content/uploads/2023/01/locus-10-200x300.jpg 200w, https://locusmag.com/wp-content/uploads/2023/01/locus-10.jpg 333w" sizes="(max-width: 60px) 100vw, 60px" /></a></figure>					<div class="article-content">
+						<div class="above-entry-meta"><span class="cat-links"><a href="https://locusmag.com/category/reviews/books/" style="background:#1e92bc" rel="category tag">Books</a>&nbsp;<a href="https://locusmag.com/category/reviews/" style="background:#0c4870" rel="category tag">Reviews</a>&nbsp;</span></div>						<h3 class="entry-title">
+							<a href="https://locusmag.com/2023/02/ian-mond-reviews-concerning-those-who-have-fallen-asleep-ghost-stories-by-adam-soto/" title="Ian Mond Reviews Concerning Those Who Have Fallen Asleep: Ghost Stories by Adam Soto">Ian Mond Reviews <b>Concerning Those Who Have Fallen Asleep: Ghost Stories</b> by Adam Soto</a>
+						</h3>
+						<div class="below-entry-meta">
+							<span class="posted-on"><a href="https://locusmag.com/2023/02/ian-mond-reviews-concerning-those-who-have-fallen-asleep-ghost-stories-by-adam-soto/" title="8:30 am" rel="bookmark"><i class="fa fa-calendar-o"></i> <time class="entry-date published" datetime="2023-02-06T08:30:41-08:00">February 6, 2023</time></a></span>							<span class="byline"><span class="author vcard"><i class="fa fa-user"></i><a class="url fn n" href="https://locusmag.com/author/locusmag/" title="locusmag">locusmag</a></span></span>
+							<span class="comments"><i class="fa fa-comment"></i><a href="https://locusmag.com/2023/02/ian-mond-reviews-concerning-those-who-have-fallen-asleep-ghost-stories-by-adam-soto/#respond">0</a></span>
+													</div>
+					</div>
+				</div>
+								<div class="single-article clearfix " >
+					<figure><a href="https://locusmag.com/2023/02/alexandra-pierce-reviews-the-measure-by-nikki-erlick/" title="Alexandra Pierce Reviews <b>The Measure</b> by Nikki Erlick"><img width="60" height="90" src="https://locusmag.com/wp-content/uploads/2022/07/erlick-measure-60x90.jpg" class="attachment-colormag-featured-post-small size-colormag-featured-post-small wp-post-image" alt="Alexandra Pierce Reviews &lt;b&gt;The Measure&lt;/b&gt; by Nikki Erlick" loading="lazy" title="Alexandra Pierce Reviews &lt;b&gt;The Measure&lt;/b&gt; by Nikki Erlick" srcset="https://locusmag.com/wp-content/uploads/2022/07/erlick-measure-60x90.jpg 60w, https://locusmag.com/wp-content/uploads/2022/07/erlick-measure-197x300.jpg 197w, https://locusmag.com/wp-content/uploads/2022/07/erlick-measure-200x300.jpg 200w, https://locusmag.com/wp-content/uploads/2022/07/erlick-measure.jpg 329w" sizes="(max-width: 60px) 100vw, 60px" /></a></figure>					<div class="article-content">
+						<div class="above-entry-meta"><span class="cat-links"><a href="https://locusmag.com/category/reviews/books/" style="background:#1e92bc" rel="category tag">Books</a>&nbsp;<a href="https://locusmag.com/category/reviews/" style="background:#0c4870" rel="category tag">Reviews</a>&nbsp;</span></div>						<h3 class="entry-title">
+							<a href="https://locusmag.com/2023/02/alexandra-pierce-reviews-the-measure-by-nikki-erlick/" title="Alexandra Pierce Reviews The Measure by Nikki Erlick">Alexandra Pierce Reviews <b>The Measure</b> by Nikki Erlick</a>
+						</h3>
+						<div class="below-entry-meta">
+							<span class="posted-on"><a href="https://locusmag.com/2023/02/alexandra-pierce-reviews-the-measure-by-nikki-erlick/" title="8:30 am" rel="bookmark"><i class="fa fa-calendar-o"></i> <time class="entry-date published" datetime="2023-02-05T08:30:34-08:00">February 5, 2023</time></a></span>							<span class="byline"><span class="author vcard"><i class="fa fa-user"></i><a class="url fn n" href="https://locusmag.com/author/locusmag/" title="locusmag">locusmag</a></span></span>
+							<span class="comments"><i class="fa fa-comment"></i><a href="https://locusmag.com/2023/02/alexandra-pierce-reviews-the-measure-by-nikki-erlick/#respond">0</a></span>
+													</div>
+					</div>
+				</div>
+								<div class="single-article clearfix " >
+					<figure><a href="https://locusmag.com/2023/02/paul-di-filippo-reviews-the-thing-in-the-snow-by-sean-adams/" title="Paul Di Filippo Reviews <b>The Thing in the Snow</b> by Sean Adams"><img width="60" height="90" src="https://locusmag.com/wp-content/uploads/2023/01/adamstis_200x300-60x90.jpg" class="attachment-colormag-featured-post-small size-colormag-featured-post-small wp-post-image" alt="Paul Di Filippo Reviews &lt;b&gt;The Thing in the Snow&lt;/b&gt; by Sean Adams" loading="lazy" title="Paul Di Filippo Reviews &lt;b&gt;The Thing in the Snow&lt;/b&gt; by Sean Adams" srcset="https://locusmag.com/wp-content/uploads/2023/01/adamstis_200x300-60x90.jpg 60w, https://locusmag.com/wp-content/uploads/2023/01/adamstis_200x300.jpg 200w" sizes="(max-width: 60px) 100vw, 60px" /></a></figure>					<div class="article-content">
+						<div class="above-entry-meta"><span class="cat-links"><a href="https://locusmag.com/category/reviews/books/" style="background:#1e92bc" rel="category tag">Books</a>&nbsp;<a href="https://locusmag.com/category/reviews/" style="background:#0c4870" rel="category tag">Reviews</a>&nbsp;</span></div>						<h3 class="entry-title">
+							<a href="https://locusmag.com/2023/02/paul-di-filippo-reviews-the-thing-in-the-snow-by-sean-adams/" title="Paul Di Filippo Reviews The Thing in the Snow by Sean Adams">Paul Di Filippo Reviews <b>The Thing in the Snow</b> by Sean Adams</a>
+						</h3>
+						<div class="below-entry-meta">
+							<span class="posted-on"><a href="https://locusmag.com/2023/02/paul-di-filippo-reviews-the-thing-in-the-snow-by-sean-adams/" title="2:00 pm" rel="bookmark"><i class="fa fa-calendar-o"></i> <time class="entry-date published" datetime="2023-02-04T14:00:14-08:00">February 4, 2023</time></a></span>							<span class="byline"><span class="author vcard"><i class="fa fa-user"></i><a class="url fn n" href="https://locusmag.com/author/loceditor/" title="LocEditor">LocEditor</a></span></span>
+							<span class="comments"><i class="fa fa-comment"></i><a href="https://locusmag.com/2023/02/paul-di-filippo-reviews-the-thing-in-the-snow-by-sean-adams/#respond">0</a></span>
+													</div>
+					</div>
+				</div>
+								<div class="single-article clearfix " >
+					<figure><a href="https://locusmag.com/2023/02/karen-burnham-reviews-short-fiction-the-sunday-morning-transport-slate-future-tense-and-new-edge-sword-and-sorcery/" title="Karen Burnham Reviews Short Fiction: <i>The Sunday Morning Transport, Slate Future Tense,</i> and <i>New Edge Sword and Sorcery</i>"><img width="60" height="90" src="https://locusmag.com/wp-content/uploads/2023/01/locus-11-60x90.png" class="attachment-colormag-featured-post-small size-colormag-featured-post-small wp-post-image" alt="Karen Burnham Reviews Short Fiction: &lt;i&gt;The Sunday Morning Transport, Slate Future Tense,&lt;/i&gt; and &lt;i&gt;New Edge Sword and Sorcery&lt;/i&gt;" loading="lazy" title="Karen Burnham Reviews Short Fiction: &lt;i&gt;The Sunday Morning Transport, Slate Future Tense,&lt;/i&gt; and &lt;i&gt;New Edge Sword and Sorcery&lt;/i&gt;" srcset="https://locusmag.com/wp-content/uploads/2023/01/locus-11-60x90.png 60w, https://locusmag.com/wp-content/uploads/2023/01/locus-11-200x300.png 200w" sizes="(max-width: 60px) 100vw, 60px" /></a></figure>					<div class="article-content">
+						<div class="above-entry-meta"><span class="cat-links"><a href="https://locusmag.com/category/reviews/" style="background:#0c4870" rel="category tag">Reviews</a>&nbsp;<a href="https://locusmag.com/category/reviews/short-fiction/" style="background:#629915" rel="category tag">Short Fiction</a>&nbsp;</span></div>						<h3 class="entry-title">
+							<a href="https://locusmag.com/2023/02/karen-burnham-reviews-short-fiction-the-sunday-morning-transport-slate-future-tense-and-new-edge-sword-and-sorcery/" title="Karen Burnham Reviews Short Fiction: The Sunday Morning Transport, Slate Future Tense, and New Edge Sword and Sorcery">Karen Burnham Reviews Short Fiction: <i>The Sunday Morning Transport, Slate Future Tense,</i> and <i>New Edge Sword and Sorcery</i></a>
+						</h3>
+						<div class="below-entry-meta">
+							<span class="posted-on"><a href="https://locusmag.com/2023/02/karen-burnham-reviews-short-fiction-the-sunday-morning-transport-slate-future-tense-and-new-edge-sword-and-sorcery/" title="8:30 am" rel="bookmark"><i class="fa fa-calendar-o"></i> <time class="entry-date published" datetime="2023-02-04T08:30:02-08:00">February 4, 2023</time></a></span>							<span class="byline"><span class="author vcard"><i class="fa fa-user"></i><a class="url fn n" href="https://locusmag.com/author/locusmag/" title="locusmag">locusmag</a></span></span>
+							<span class="comments"><i class="fa fa-comment"></i><a href="https://locusmag.com/2023/02/karen-burnham-reviews-short-fiction-the-sunday-morning-transport-slate-future-tense-and-new-edge-sword-and-sorcery/#respond">0</a></span>
+													</div>
+					</div>
+				</div>
+						</div>
+						</aside><aside id="ad_html_single-45" class="widget_text widget widget_custom_html clearfix"><div class="textwidget custom-html-widget"><!--Merch Ad-->
+<div style="text-align:center">
+<a href="https://subscribers.locusmag.com/store"><img src="https://locusmag.com/wp-content/uploads/2019/09/merch-ad-1.png" alt="Locus Merchandise"></a></div></div></aside><aside id="media_image-18" class="widget widget_media_image clearfix"><a href="https://www.gsblaw.com/"><img class="image " src="http://www.locusmag.com/2014/Ads/legalthanks.jpg" alt="" width="300" height="227" /></a></aside><aside id="tag_cloud-4" class="widget widget_tag_cloud clearfix"><h3 class="widget-title"><span>Tag Cloud</span></h3><div class="tagcloud"><a href="https://locusmag.com/category/news/announcements/" class="tag-cloud-link tag-link-3 tag-link-position-1" style="font-size: 18.432432432432pt;" aria-label="Announcements (761 items)">Announcements</a>
+<a href="https://locusmag.com/category/archives/" class="tag-cloud-link tag-link-254 tag-link-position-2" style="font-size: 9.0810810810811pt;" aria-label="Archives (13 items)">Archives</a>
+<a href="https://locusmag.com/category/news/awards/" class="tag-cloud-link tag-link-5 tag-link-position-3" style="font-size: 21.621621621622pt;" aria-label="Awards (2,919 items)">Awards</a>
+<a href="https://locusmag.com/category/newtitlesbestsellers/bestsellers/" class="tag-cloud-link tag-link-139 tag-link-position-4" style="font-size: 18.324324324324pt;" aria-label="Bestsellers (721 items)">Bestsellers</a>
+<a href="https://locusmag.com/category/blinks/" class="tag-cloud-link tag-link-181 tag-link-position-5" style="font-size: 17.621621621622pt;" aria-label="Blinks (535 items)">Blinks</a>
+<a href="https://locusmag.com/category/blurb/" class="tag-cloud-link tag-link-151 tag-link-position-6" style="font-size: 10.594594594595pt;" aria-label="Blurb (26 items)">Blurb</a>
+<a href="https://locusmag.com/category/reviews/books/" class="tag-cloud-link tag-link-117 tag-link-position-7" style="font-size: 21.081081081081pt;" aria-label="Books (2,331 items)">Books</a>
+<a href="https://locusmag.com/category/news/bookstores/" class="tag-cloud-link tag-link-6 tag-link-position-8" style="font-size: 13.081081081081pt;" aria-label="Bookstores (76 items)">Bookstores</a>
+<a href="https://locusmag.com/category/newtitlesbestsellers/classic-reprints/" class="tag-cloud-link tag-link-144 tag-link-position-9" style="font-size: 12.864864864865pt;" aria-label="Classic Reprints (70 items)">Classic Reprints</a>
+<a href="https://locusmag.com/category/features/commentary/" class="tag-cloud-link tag-link-186 tag-link-position-10" style="font-size: 15.567567567568pt;" aria-label="Commentary (224 items)">Commentary</a>
+<a href="https://locusmag.com/category/news/contests/" class="tag-cloud-link tag-link-7 tag-link-position-11" style="font-size: 13.891891891892pt;" aria-label="Contests (108 items)">Contests</a>
+<a href="https://locusmag.com/category/news/conventions/" class="tag-cloud-link tag-link-8 tag-link-position-12" style="font-size: 16.594594594595pt;" aria-label="Conventions (345 items)">Conventions</a>
+<a href="https://locusmag.com/category/features/commentary/cory-doctorow/" class="tag-cloud-link tag-link-124 tag-link-position-13" style="font-size: 13.135135135135pt;" aria-label="Cory Doctorow (78 items)">Cory Doctorow</a>
+<a href="https://locusmag.com/category/features/" class="tag-cloud-link tag-link-122 tag-link-position-14" style="font-size: 18.648648648649pt;" aria-label="Features (830 items)">Features</a>
+<a href="https://locusmag.com/category/films/" class="tag-cloud-link tag-link-116 tag-link-position-15" style="font-size: 15.081081081081pt;" aria-label="Films (179 items)">Films</a>
+<a href="https://locusmag.com/category/newtitlesbestsellers/forthcoming-books/" class="tag-cloud-link tag-link-294 tag-link-position-16" style="font-size: 9.7837837837838pt;" aria-label="Forthcoming Books (18 items)">Forthcoming Books</a>
+<a href="https://locusmag.com/category/news/international/" class="tag-cloud-link tag-link-342 tag-link-position-17" style="font-size: 8pt;" aria-label="International (8 items)">International</a>
+<a href="https://locusmag.com/category/features/interviews/" class="tag-cloud-link tag-link-125 tag-link-position-18" style="font-size: 16.432432432432pt;" aria-label="Interviews (319 items)">Interviews</a>
+<a href="https://locusmag.com/category/issues/" class="tag-cloud-link tag-link-132 tag-link-position-19" style="font-size: 16.594594594595pt;" aria-label="Issues (342 items)">Issues</a>
+<a href="https://locusmag.com/category/features/commentary/kameron-hurley/" class="tag-cloud-link tag-link-126 tag-link-position-20" style="font-size: 11.891891891892pt;" aria-label="Kameron Hurley (46 items)">Kameron Hurley</a>
+<a href="https://locusmag.com/category/news/legal-2/" class="tag-cloud-link tag-link-9 tag-link-position-21" style="font-size: 13.297297297297pt;" aria-label="Legal (85 items)">Legal</a>
+<a href="https://locusmag.com/category/news/milestones/" class="tag-cloud-link tag-link-10 tag-link-position-22" style="font-size: 15.351351351351pt;" aria-label="Milestones (201 items)">Milestones</a>
+<a href="https://locusmag.com/category/newtitlesbestsellers/new-and-notable/" class="tag-cloud-link tag-link-133 tag-link-position-23" style="font-size: 14.432432432432pt;" aria-label="New &amp; Notable (136 items)">New &amp; Notable</a>
+<a href="https://locusmag.com/category/newtitlesbestsellers/new-books/" class="tag-cloud-link tag-link-141 tag-link-position-24" style="font-size: 18pt;" aria-label="New Books (628 items)">New Books</a>
+<a href="https://locusmag.com/category/newtitlesbestsellers/new-in-paperback/" class="tag-cloud-link tag-link-143 tag-link-position-25" style="font-size: 13.189189189189pt;" aria-label="New in Paperback (80 items)">New in Paperback</a>
+<a href="https://locusmag.com/category/news/" class="tag-cloud-link tag-link-1 tag-link-position-26" style="font-size: 22pt;" aria-label="News (3,434 items)">News</a>
+<a href="https://locusmag.com/category/newtitlesbestsellers/" class="tag-cloud-link tag-link-140 tag-link-position-27" style="font-size: 20.756756756757pt;" aria-label="New Titles &amp; Bestsellers (2,019 items)">New Titles &amp; Bestsellers</a>
+<a href="https://locusmag.com/category/news/obituaries/" class="tag-cloud-link tag-link-11 tag-link-position-28" style="font-size: 17.081081081081pt;" aria-label="Obituaries (427 items)">Obituaries</a>
+<a href="https://locusmag.com/category/newtitlesbestsellers/periodicals/" class="tag-cloud-link tag-link-142 tag-link-position-29" style="font-size: 16.432432432432pt;" aria-label="Periodicals (322 items)">Periodicals</a>
+<a href="https://locusmag.com/category/news/publishing/" class="tag-cloud-link tag-link-12 tag-link-position-30" style="font-size: 17.891891891892pt;" aria-label="Publishing (596 items)">Publishing</a>
+<a href="https://locusmag.com/category/staff/reviewers/" class="tag-cloud-link tag-link-130 tag-link-position-31" style="font-size: 9.0810810810811pt;" aria-label="Reviewers (13 items)">Reviewers</a>
+<a href="https://locusmag.com/category/reviews/" class="tag-cloud-link tag-link-138 tag-link-position-32" style="font-size: 21.513513513514pt;" aria-label="Reviews (2,819 items)">Reviews</a>
+<a href="https://locusmag.com/category/features/commentary/roundtable/" class="tag-cloud-link tag-link-135 tag-link-position-33" style="font-size: 17.135135135135pt;" aria-label="Roundtable (433 items)">Roundtable</a>
+<a href="https://locusmag.com/category/reviews/short-fiction/" class="tag-cloud-link tag-link-115 tag-link-position-34" style="font-size: 18.27027027027pt;" aria-label="Short Fiction (702 items)">Short Fiction</a>
+<a href="https://locusmag.com/category/slider/" class="tag-cloud-link tag-link-183 tag-link-position-35" style="font-size: 12.972972972973pt;" aria-label="Slider (73 items)">Slider</a>
+<a href="https://locusmag.com/category/features/spotlight/" class="tag-cloud-link tag-link-127 tag-link-position-36" style="font-size: 13.621621621622pt;" aria-label="Spotlight (96 items)">Spotlight</a>
+<a href="https://locusmag.com/category/staff/" class="tag-cloud-link tag-link-129 tag-link-position-37" style="font-size: 10.702702702703pt;" aria-label="Staff (27 items)">Staff</a>
+<a href="https://locusmag.com/category/staff-picks/" class="tag-cloud-link tag-link-314 tag-link-position-38" style="font-size: 13.297297297297pt;" aria-label="Staff Picks (84 items)">Staff Picks</a>
+<a href="https://locusmag.com/category/support-what-we-do/" class="tag-cloud-link tag-link-343 tag-link-position-39" style="font-size: 10.756756756757pt;" aria-label="Support What We Do (28 items)">Support What We Do</a>
+<a href="https://locusmag.com/category/uncategorized/" class="tag-cloud-link tag-link-279 tag-link-position-40" style="font-size: 8pt;" aria-label="Uncategorized (8 items)">Uncategorized</a>
+<a href="https://locusmag.com/category/news/workshops/" class="tag-cloud-link tag-link-13 tag-link-position-41" style="font-size: 12.378378378378pt;" aria-label="Workshops (56 items)">Workshops</a></div>
+</aside><aside id="ad_html_site-31" class="widget_text widget widget_custom_html clearfix"><div class="textwidget custom-html-widget"><!--Black Lives Matter-->
+<div style="text-align:center">
+<a href="https://locusmag.com/black-lives-matter/" onclick="getOutboundLink('https://locusmag.com/black-lives-matter/'); return false;"><img src="https://locusmag.com/wp-content/uploads/2020/06/blacklivesmatter1-2.jpg" alt="Black Lives Matter"></a></div>
+
+</div></aside><aside id="colormag_featured_posts_vertical_widget-10" class="widget widget_featured_posts widget_featured_posts_vertical widget_featured_meta clearfix">		<h3 class="widget-title" style="border-bottom-color:;"><span style="background-color:;">What they say</span></h3>						<div class="first-post">			<div class="single-article clearfix " >
+								<div class="article-content">
+					<div class="above-entry-meta"><span class="cat-links"><a href="https://locusmag.com/category/blurb/"  rel="category tag">Blurb</a>&nbsp;</span></div>					<h3 class="entry-title">
+						<a href="https://locusmag.com/2010/10/arthur-c-clarke-on-locus/" title="Arthur C. Clarke on Locus">Arthur C. Clarke on Locus</a>
+					</h3>
+					<div class="below-entry-meta">
+						<span class="posted-on"><a href="https://locusmag.com/2010/10/arthur-c-clarke-on-locus/" title="8:38 pm" rel="bookmark"><i class="fa fa-calendar-o"></i> <time class="entry-date published" datetime="2010-10-02T20:38:58-07:00">October 2, 2010</time></a></span>						<span class="byline"><span class="author vcard"><i class="fa fa-user"></i><a class="url fn n" href="https://locusmag.com/author/locusmag/" title="locusmag">locusmag</a></span></span>
+						<span class="comments"><i class="fa fa-comment"></i><a href="https://locusmag.com/2010/10/arthur-c-clarke-on-locus/#respond">0</a></span>
+											</div>
+											<div class="entry-content">
+							<p>&#8220;LOCUS is the only periodical I read from cover to cover. It is also the only magazine which makes me drop everything when it arrives…&#8221;</p>
+<div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-icon sd-sharing"><div class="sd-content"><ul><li class="share-facebook"><a rel="nofollow noopener noreferrer" data-shared="sharing-facebook-87346" class="share-facebook sd-button share-icon no-text" href="https://locusmag.com/2010/10/arthur-c-clarke-on-locus/?share=facebook" target="_blank" title="Click to share on Facebook"><span></span><span class="sharing-screen-reader-text">Click to share on Facebook (Opens in new window)</span></a></li><li class="share-twitter"><a rel="nofollow noopener noreferrer" data-shared="sharing-twitter-87346" class="share-twitter sd-button share-icon no-text" href="https://locusmag.com/2010/10/arthur-c-clarke-on-locus/?share=twitter" target="_blank" title="Click to share on Twitter"><span></span><span class="sharing-screen-reader-text">Click to share on Twitter (Opens in new window)</span></a></li><li class="share-tumblr"><a rel="nofollow noopener noreferrer" data-shared="" class="share-tumblr sd-button share-icon no-text" href="https://locusmag.com/2010/10/arthur-c-clarke-on-locus/?share=tumblr" target="_blank" title="Click to share on Tumblr"><span></span><span class="sharing-screen-reader-text">Click to share on Tumblr (Opens in new window)</span></a></li><li class="share-pinterest"><a rel="nofollow noopener noreferrer" data-shared="sharing-pinterest-87346" class="share-pinterest sd-button share-icon no-text" href="https://locusmag.com/2010/10/arthur-c-clarke-on-locus/?share=pinterest" target="_blank" title="Click to share on Pinterest"><span></span><span class="sharing-screen-reader-text">Click to share on Pinterest (Opens in new window)</span></a></li><li class="share-end"></li></ul></div></div></div>						</div>
+									</div>
+
+			</div>
+			</div>					</aside>
+	</div>
+
+
+
+</div><!-- .inner-wrap -->
+</div><!-- #main -->
+
+	<div class="advertisement_above_footer">
+		<div class="inner-wrap">
+			<aside id="custom_html-86" class="widget_text widget widget_custom_html clearfix"><div class="textwidget custom-html-widget"><div style="overflow:hidden">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Monitor and Roundtable Footer -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-5592052723055700"
+     data-ad-slot="5524096217"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div></div></aside>		</div>
+	</div>
+
+
+
+<footer id="colophon" class="clearfix ">
+	
+<div class="footer-widgets-wrapper">
+	<div class="inner-wrap">
+		<div class="footer-widgets-area clearfix">
+			<div class="tg-upper-footer-widgets clearfix">
+				<div class="footer_upper_widget_area tg-one-third">
+					<aside id="archives-8" class="widget widget_archive clearfix"><h3 class="widget-title"><span>Archived Posts</span></h3>		<label class="screen-reader-text" for="archives-dropdown-8">Archived Posts</label>
+		<select id="archives-dropdown-8" name="archive-dropdown">
+			
+			<option value="">Select Month</option>
+				<option value='https://locusmag.com/2023/02/'> February 2023 &nbsp;(28)</option>
+	<option value='https://locusmag.com/2023/01/'> January 2023 &nbsp;(107)</option>
+	<option value='https://locusmag.com/2022/12/'> December 2022 &nbsp;(104)</option>
+	<option value='https://locusmag.com/2022/11/'> November 2022 &nbsp;(95)</option>
+	<option value='https://locusmag.com/2022/10/'> October 2022 &nbsp;(113)</option>
+	<option value='https://locusmag.com/2022/09/'> September 2022 &nbsp;(112)</option>
+	<option value='https://locusmag.com/2022/08/'> August 2022 &nbsp;(101)</option>
+	<option value='https://locusmag.com/2022/07/'> July 2022 &nbsp;(108)</option>
+	<option value='https://locusmag.com/2022/06/'> June 2022 &nbsp;(103)</option>
+	<option value='https://locusmag.com/2022/05/'> May 2022 &nbsp;(108)</option>
+	<option value='https://locusmag.com/2022/04/'> April 2022 &nbsp;(126)</option>
+	<option value='https://locusmag.com/2022/03/'> March 2022 &nbsp;(108)</option>
+	<option value='https://locusmag.com/2022/02/'> February 2022 &nbsp;(118)</option>
+	<option value='https://locusmag.com/2022/01/'> January 2022 &nbsp;(99)</option>
+	<option value='https://locusmag.com/2021/12/'> December 2021 &nbsp;(93)</option>
+	<option value='https://locusmag.com/2021/11/'> November 2021 &nbsp;(104)</option>
+	<option value='https://locusmag.com/2021/10/'> October 2021 &nbsp;(92)</option>
+	<option value='https://locusmag.com/2021/09/'> September 2021 &nbsp;(113)</option>
+	<option value='https://locusmag.com/2021/08/'> August 2021 &nbsp;(87)</option>
+	<option value='https://locusmag.com/2021/07/'> July 2021 &nbsp;(94)</option>
+	<option value='https://locusmag.com/2021/06/'> June 2021 &nbsp;(93)</option>
+	<option value='https://locusmag.com/2021/05/'> May 2021 &nbsp;(91)</option>
+	<option value='https://locusmag.com/2021/04/'> April 2021 &nbsp;(92)</option>
+	<option value='https://locusmag.com/2021/03/'> March 2021 &nbsp;(104)</option>
+	<option value='https://locusmag.com/2021/02/'> February 2021 &nbsp;(124)</option>
+	<option value='https://locusmag.com/2021/01/'> January 2021 &nbsp;(97)</option>
+	<option value='https://locusmag.com/2020/12/'> December 2020 &nbsp;(149)</option>
+	<option value='https://locusmag.com/2020/11/'> November 2020 &nbsp;(88)</option>
+	<option value='https://locusmag.com/2020/10/'> October 2020 &nbsp;(106)</option>
+	<option value='https://locusmag.com/2020/09/'> September 2020 &nbsp;(116)</option>
+	<option value='https://locusmag.com/2020/08/'> August 2020 &nbsp;(95)</option>
+	<option value='https://locusmag.com/2020/07/'> July 2020 &nbsp;(119)</option>
+	<option value='https://locusmag.com/2020/06/'> June 2020 &nbsp;(102)</option>
+	<option value='https://locusmag.com/2020/05/'> May 2020 &nbsp;(107)</option>
+	<option value='https://locusmag.com/2020/04/'> April 2020 &nbsp;(100)</option>
+	<option value='https://locusmag.com/2020/03/'> March 2020 &nbsp;(121)</option>
+	<option value='https://locusmag.com/2020/02/'> February 2020 &nbsp;(113)</option>
+	<option value='https://locusmag.com/2020/01/'> January 2020 &nbsp;(93)</option>
+	<option value='https://locusmag.com/2019/12/'> December 2019 &nbsp;(124)</option>
+	<option value='https://locusmag.com/2019/11/'> November 2019 &nbsp;(94)</option>
+	<option value='https://locusmag.com/2019/10/'> October 2019 &nbsp;(113)</option>
+	<option value='https://locusmag.com/2019/09/'> September 2019 &nbsp;(86)</option>
+	<option value='https://locusmag.com/2019/08/'> August 2019 &nbsp;(94)</option>
+	<option value='https://locusmag.com/2019/07/'> July 2019 &nbsp;(93)</option>
+	<option value='https://locusmag.com/2019/06/'> June 2019 &nbsp;(96)</option>
+	<option value='https://locusmag.com/2019/05/'> May 2019 &nbsp;(118)</option>
+	<option value='https://locusmag.com/2019/04/'> April 2019 &nbsp;(107)</option>
+	<option value='https://locusmag.com/2019/03/'> March 2019 &nbsp;(114)</option>
+	<option value='https://locusmag.com/2019/02/'> February 2019 &nbsp;(114)</option>
+	<option value='https://locusmag.com/2019/01/'> January 2019 &nbsp;(96)</option>
+	<option value='https://locusmag.com/2018/12/'> December 2018 &nbsp;(97)</option>
+	<option value='https://locusmag.com/2018/11/'> November 2018 &nbsp;(111)</option>
+	<option value='https://locusmag.com/2018/10/'> October 2018 &nbsp;(107)</option>
+	<option value='https://locusmag.com/2018/09/'> September 2018 &nbsp;(94)</option>
+	<option value='https://locusmag.com/2018/08/'> August 2018 &nbsp;(81)</option>
+	<option value='https://locusmag.com/2018/07/'> July 2018 &nbsp;(85)</option>
+	<option value='https://locusmag.com/2018/06/'> June 2018 &nbsp;(93)</option>
+	<option value='https://locusmag.com/2018/05/'> May 2018 &nbsp;(112)</option>
+	<option value='https://locusmag.com/2018/04/'> April 2018 &nbsp;(115)</option>
+	<option value='https://locusmag.com/2018/03/'> March 2018 &nbsp;(130)</option>
+	<option value='https://locusmag.com/2018/02/'> February 2018 &nbsp;(102)</option>
+	<option value='https://locusmag.com/2018/01/'> January 2018 &nbsp;(96)</option>
+	<option value='https://locusmag.com/2017/12/'> December 2017 &nbsp;(73)</option>
+	<option value='https://locusmag.com/2017/11/'> November 2017 &nbsp;(71)</option>
+	<option value='https://locusmag.com/2017/10/'> October 2017 &nbsp;(77)</option>
+	<option value='https://locusmag.com/2017/09/'> September 2017 &nbsp;(56)</option>
+	<option value='https://locusmag.com/2017/08/'> August 2017 &nbsp;(48)</option>
+	<option value='https://locusmag.com/2017/07/'> July 2017 &nbsp;(69)</option>
+	<option value='https://locusmag.com/2017/06/'> June 2017 &nbsp;(59)</option>
+	<option value='https://locusmag.com/2017/05/'> May 2017 &nbsp;(80)</option>
+	<option value='https://locusmag.com/2017/04/'> April 2017 &nbsp;(78)</option>
+	<option value='https://locusmag.com/2017/03/'> March 2017 &nbsp;(64)</option>
+	<option value='https://locusmag.com/2017/02/'> February 2017 &nbsp;(50)</option>
+	<option value='https://locusmag.com/2017/01/'> January 2017 &nbsp;(72)</option>
+	<option value='https://locusmag.com/2016/12/'> December 2016 &nbsp;(46)</option>
+	<option value='https://locusmag.com/2016/11/'> November 2016 &nbsp;(50)</option>
+	<option value='https://locusmag.com/2016/10/'> October 2016 &nbsp;(54)</option>
+	<option value='https://locusmag.com/2016/09/'> September 2016 &nbsp;(51)</option>
+	<option value='https://locusmag.com/2016/08/'> August 2016 &nbsp;(60)</option>
+	<option value='https://locusmag.com/2016/07/'> July 2016 &nbsp;(63)</option>
+	<option value='https://locusmag.com/2016/06/'> June 2016 &nbsp;(56)</option>
+	<option value='https://locusmag.com/2016/05/'> May 2016 &nbsp;(55)</option>
+	<option value='https://locusmag.com/2016/04/'> April 2016 &nbsp;(52)</option>
+	<option value='https://locusmag.com/2016/03/'> March 2016 &nbsp;(57)</option>
+	<option value='https://locusmag.com/2016/02/'> February 2016 &nbsp;(53)</option>
+	<option value='https://locusmag.com/2016/01/'> January 2016 &nbsp;(53)</option>
+	<option value='https://locusmag.com/2015/12/'> December 2015 &nbsp;(46)</option>
+	<option value='https://locusmag.com/2015/11/'> November 2015 &nbsp;(55)</option>
+	<option value='https://locusmag.com/2015/10/'> October 2015 &nbsp;(49)</option>
+	<option value='https://locusmag.com/2015/09/'> September 2015 &nbsp;(48)</option>
+	<option value='https://locusmag.com/2015/08/'> August 2015 &nbsp;(54)</option>
+	<option value='https://locusmag.com/2015/07/'> July 2015 &nbsp;(53)</option>
+	<option value='https://locusmag.com/2015/06/'> June 2015 &nbsp;(56)</option>
+	<option value='https://locusmag.com/2015/05/'> May 2015 &nbsp;(56)</option>
+	<option value='https://locusmag.com/2015/04/'> April 2015 &nbsp;(61)</option>
+	<option value='https://locusmag.com/2015/03/'> March 2015 &nbsp;(56)</option>
+	<option value='https://locusmag.com/2015/02/'> February 2015 &nbsp;(53)</option>
+	<option value='https://locusmag.com/2015/01/'> January 2015 &nbsp;(58)</option>
+	<option value='https://locusmag.com/2014/12/'> December 2014 &nbsp;(50)</option>
+	<option value='https://locusmag.com/2014/11/'> November 2014 &nbsp;(53)</option>
+	<option value='https://locusmag.com/2014/10/'> October 2014 &nbsp;(59)</option>
+	<option value='https://locusmag.com/2014/09/'> September 2014 &nbsp;(57)</option>
+	<option value='https://locusmag.com/2014/08/'> August 2014 &nbsp;(54)</option>
+	<option value='https://locusmag.com/2014/07/'> July 2014 &nbsp;(64)</option>
+	<option value='https://locusmag.com/2014/06/'> June 2014 &nbsp;(66)</option>
+	<option value='https://locusmag.com/2014/05/'> May 2014 &nbsp;(60)</option>
+	<option value='https://locusmag.com/2014/04/'> April 2014 &nbsp;(60)</option>
+	<option value='https://locusmag.com/2014/03/'> March 2014 &nbsp;(62)</option>
+	<option value='https://locusmag.com/2014/02/'> February 2014 &nbsp;(60)</option>
+	<option value='https://locusmag.com/2014/01/'> January 2014 &nbsp;(54)</option>
+	<option value='https://locusmag.com/2013/12/'> December 2013 &nbsp;(53)</option>
+	<option value='https://locusmag.com/2013/11/'> November 2013 &nbsp;(51)</option>
+	<option value='https://locusmag.com/2013/10/'> October 2013 &nbsp;(52)</option>
+	<option value='https://locusmag.com/2013/09/'> September 2013 &nbsp;(60)</option>
+	<option value='https://locusmag.com/2013/08/'> August 2013 &nbsp;(56)</option>
+	<option value='https://locusmag.com/2013/07/'> July 2013 &nbsp;(59)</option>
+	<option value='https://locusmag.com/2013/06/'> June 2013 &nbsp;(60)</option>
+	<option value='https://locusmag.com/2013/05/'> May 2013 &nbsp;(61)</option>
+	<option value='https://locusmag.com/2013/04/'> April 2013 &nbsp;(73)</option>
+	<option value='https://locusmag.com/2013/03/'> March 2013 &nbsp;(58)</option>
+	<option value='https://locusmag.com/2013/02/'> February 2013 &nbsp;(50)</option>
+	<option value='https://locusmag.com/2013/01/'> January 2013 &nbsp;(58)</option>
+	<option value='https://locusmag.com/2012/12/'> December 2012 &nbsp;(50)</option>
+	<option value='https://locusmag.com/2012/11/'> November 2012 &nbsp;(54)</option>
+	<option value='https://locusmag.com/2012/10/'> October 2012 &nbsp;(59)</option>
+	<option value='https://locusmag.com/2012/09/'> September 2012 &nbsp;(54)</option>
+	<option value='https://locusmag.com/2012/08/'> August 2012 &nbsp;(61)</option>
+	<option value='https://locusmag.com/2012/07/'> July 2012 &nbsp;(74)</option>
+	<option value='https://locusmag.com/2012/06/'> June 2012 &nbsp;(63)</option>
+	<option value='https://locusmag.com/2012/05/'> May 2012 &nbsp;(68)</option>
+	<option value='https://locusmag.com/2012/04/'> April 2012 &nbsp;(64)</option>
+	<option value='https://locusmag.com/2012/03/'> March 2012 &nbsp;(65)</option>
+	<option value='https://locusmag.com/2012/02/'> February 2012 &nbsp;(53)</option>
+	<option value='https://locusmag.com/2012/01/'> January 2012 &nbsp;(61)</option>
+	<option value='https://locusmag.com/2011/12/'> December 2011 &nbsp;(61)</option>
+	<option value='https://locusmag.com/2011/11/'> November 2011 &nbsp;(61)</option>
+	<option value='https://locusmag.com/2011/10/'> October 2011 &nbsp;(58)</option>
+	<option value='https://locusmag.com/2011/09/'> September 2011 &nbsp;(62)</option>
+	<option value='https://locusmag.com/2011/08/'> August 2011 &nbsp;(70)</option>
+	<option value='https://locusmag.com/2011/07/'> July 2011 &nbsp;(40)</option>
+	<option value='https://locusmag.com/2011/06/'> June 2011 &nbsp;(39)</option>
+	<option value='https://locusmag.com/2011/05/'> May 2011 &nbsp;(59)</option>
+	<option value='https://locusmag.com/2011/04/'> April 2011 &nbsp;(36)</option>
+	<option value='https://locusmag.com/2011/03/'> March 2011 &nbsp;(42)</option>
+	<option value='https://locusmag.com/2011/02/'> February 2011 &nbsp;(42)</option>
+	<option value='https://locusmag.com/2011/01/'> January 2011 &nbsp;(45)</option>
+	<option value='https://locusmag.com/2010/12/'> December 2010 &nbsp;(30)</option>
+	<option value='https://locusmag.com/2010/11/'> November 2010 &nbsp;(28)</option>
+	<option value='https://locusmag.com/2010/10/'> October 2010 &nbsp;(36)</option>
+	<option value='https://locusmag.com/2010/09/'> September 2010 &nbsp;(48)</option>
+	<option value='https://locusmag.com/2010/08/'> August 2010 &nbsp;(26)</option>
+	<option value='https://locusmag.com/2010/07/'> July 2010 &nbsp;(32)</option>
+	<option value='https://locusmag.com/2010/06/'> June 2010 &nbsp;(30)</option>
+	<option value='https://locusmag.com/2010/05/'> May 2010 &nbsp;(27)</option>
+	<option value='https://locusmag.com/2010/04/'> April 2010 &nbsp;(22)</option>
+	<option value='https://locusmag.com/2010/03/'> March 2010 &nbsp;(24)</option>
+	<option value='https://locusmag.com/2010/02/'> February 2010 &nbsp;(26)</option>
+	<option value='https://locusmag.com/2010/01/'> January 2010 &nbsp;(23)</option>
+	<option value='https://locusmag.com/2009/12/'> December 2009 &nbsp;(24)</option>
+	<option value='https://locusmag.com/2009/11/'> November 2009 &nbsp;(24)</option>
+	<option value='https://locusmag.com/2009/10/'> October 2009 &nbsp;(20)</option>
+	<option value='https://locusmag.com/2009/09/'> September 2009 &nbsp;(25)</option>
+	<option value='https://locusmag.com/2009/08/'> August 2009 &nbsp;(29)</option>
+	<option value='https://locusmag.com/2009/07/'> July 2009 &nbsp;(15)</option>
+	<option value='https://locusmag.com/2009/06/'> June 2009 &nbsp;(18)</option>
+	<option value='https://locusmag.com/2009/05/'> May 2009 &nbsp;(15)</option>
+	<option value='https://locusmag.com/2009/04/'> April 2009 &nbsp;(30)</option>
+	<option value='https://locusmag.com/2009/03/'> March 2009 &nbsp;(31)</option>
+	<option value='https://locusmag.com/2009/02/'> February 2009 &nbsp;(43)</option>
+	<option value='https://locusmag.com/2009/01/'> January 2009 &nbsp;(27)</option>
+	<option value='https://locusmag.com/2008/12/'> December 2008 &nbsp;(2)</option>
+	<option value='https://locusmag.com/2007/12/'> December 2007 &nbsp;(1)</option>
+	<option value='https://locusmag.com/2006/12/'> December 2006 &nbsp;(1)</option>
+	<option value='https://locusmag.com/2005/12/'> December 2005 &nbsp;(1)</option>
+	<option value='https://locusmag.com/2004/12/'> December 2004 &nbsp;(1)</option>
+	<option value='https://locusmag.com/2003/12/'> December 2003 &nbsp;(1)</option>
+	<option value='https://locusmag.com/2002/12/'> December 2002 &nbsp;(1)</option>
+	<option value='https://locusmag.com/2001/12/'> December 2001 &nbsp;(1)</option>
+	<option value='https://locusmag.com/2000/12/'> December 2000 &nbsp;(2)</option>
+	<option value='https://locusmag.com/2000/11/'> November 2000 &nbsp;(1)</option>
+	<option value='https://locusmag.com/2000/10/'> October 2000 &nbsp;(1)</option>
+	<option value='https://locusmag.com/2000/09/'> September 2000 &nbsp;(1)</option>
+	<option value='https://locusmag.com/2000/08/'> August 2000 &nbsp;(1)</option>
+	<option value='https://locusmag.com/2000/07/'> July 2000 &nbsp;(1)</option>
+	<option value='https://locusmag.com/2000/06/'> June 2000 &nbsp;(1)</option>
+	<option value='https://locusmag.com/2000/05/'> May 2000 &nbsp;(1)</option>
+	<option value='https://locusmag.com/2000/04/'> April 2000 &nbsp;(1)</option>
+	<option value='https://locusmag.com/2000/03/'> March 2000 &nbsp;(1)</option>
+	<option value='https://locusmag.com/2000/02/'> February 2000 &nbsp;(1)</option>
+	<option value='https://locusmag.com/2000/01/'> January 2000 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1999/12/'> December 1999 &nbsp;(2)</option>
+	<option value='https://locusmag.com/1999/11/'> November 1999 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1999/10/'> October 1999 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1999/09/'> September 1999 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1999/08/'> August 1999 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1999/07/'> July 1999 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1999/06/'> June 1999 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1999/05/'> May 1999 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1999/04/'> April 1999 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1999/03/'> March 1999 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1999/02/'> February 1999 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1999/01/'> January 1999 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1998/12/'> December 1998 &nbsp;(2)</option>
+	<option value='https://locusmag.com/1998/11/'> November 1998 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1998/10/'> October 1998 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1998/09/'> September 1998 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1998/08/'> August 1998 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1998/07/'> July 1998 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1998/06/'> June 1998 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1998/05/'> May 1998 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1998/04/'> April 1998 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1998/03/'> March 1998 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1998/02/'> February 1998 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1998/01/'> January 1998 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1997/12/'> December 1997 &nbsp;(2)</option>
+	<option value='https://locusmag.com/1997/11/'> November 1997 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1997/10/'> October 1997 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1997/09/'> September 1997 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1997/08/'> August 1997 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1997/07/'> July 1997 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1997/06/'> June 1997 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1997/05/'> May 1997 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1997/04/'> April 1997 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1997/03/'> March 1997 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1997/02/'> February 1997 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1997/01/'> January 1997 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1996/12/'> December 1996 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1996/11/'> November 1996 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1996/10/'> October 1996 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1996/09/'> September 1996 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1996/08/'> August 1996 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1996/07/'> July 1996 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1996/06/'> June 1996 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1996/05/'> May 1996 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1996/04/'> April 1996 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1996/03/'> March 1996 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1996/02/'> February 1996 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1996/01/'> January 1996 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1995/12/'> December 1995 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1995/11/'> November 1995 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1995/10/'> October 1995 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1995/09/'> September 1995 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1995/08/'> August 1995 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1995/07/'> July 1995 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1995/06/'> June 1995 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1995/05/'> May 1995 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1995/04/'> April 1995 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1995/03/'> March 1995 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1995/02/'> February 1995 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1995/01/'> January 1995 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1994/12/'> December 1994 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1994/11/'> November 1994 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1994/10/'> October 1994 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1994/09/'> September 1994 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1994/08/'> August 1994 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1994/07/'> July 1994 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1994/06/'> June 1994 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1994/05/'> May 1994 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1994/04/'> April 1994 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1994/03/'> March 1994 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1994/02/'> February 1994 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1994/01/'> January 1994 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1993/12/'> December 1993 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1993/11/'> November 1993 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1993/10/'> October 1993 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1993/09/'> September 1993 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1993/08/'> August 1993 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1993/07/'> July 1993 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1993/06/'> June 1993 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1993/05/'> May 1993 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1993/04/'> April 1993 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1993/03/'> March 1993 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1993/02/'> February 1993 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1993/01/'> January 1993 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1992/12/'> December 1992 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1992/11/'> November 1992 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1992/10/'> October 1992 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1992/09/'> September 1992 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1992/08/'> August 1992 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1992/07/'> July 1992 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1992/06/'> June 1992 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1992/05/'> May 1992 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1992/04/'> April 1992 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1992/03/'> March 1992 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1992/02/'> February 1992 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1992/01/'> January 1992 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1991/12/'> December 1991 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1991/11/'> November 1991 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1991/10/'> October 1991 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1991/09/'> September 1991 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1991/08/'> August 1991 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1991/07/'> July 1991 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1991/06/'> June 1991 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1991/05/'> May 1991 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1991/04/'> April 1991 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1991/03/'> March 1991 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1991/02/'> February 1991 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1991/01/'> January 1991 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1990/12/'> December 1990 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1990/11/'> November 1990 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1990/10/'> October 1990 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1990/09/'> September 1990 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1990/08/'> August 1990 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1990/07/'> July 1990 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1990/06/'> June 1990 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1990/05/'> May 1990 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1990/04/'> April 1990 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1990/03/'> March 1990 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1990/02/'> February 1990 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1990/01/'> January 1990 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1989/12/'> December 1989 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1989/11/'> November 1989 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1989/10/'> October 1989 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1989/09/'> September 1989 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1989/08/'> August 1989 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1989/07/'> July 1989 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1989/06/'> June 1989 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1989/05/'> May 1989 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1989/04/'> April 1989 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1989/03/'> March 1989 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1989/02/'> February 1989 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1989/01/'> January 1989 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1988/12/'> December 1988 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1988/11/'> November 1988 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1988/10/'> October 1988 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1988/09/'> September 1988 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1988/08/'> August 1988 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1988/07/'> July 1988 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1988/06/'> June 1988 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1988/05/'> May 1988 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1988/04/'> April 1988 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1988/03/'> March 1988 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1988/02/'> February 1988 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1988/01/'> January 1988 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1987/12/'> December 1987 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1987/11/'> November 1987 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1987/10/'> October 1987 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1987/09/'> September 1987 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1987/08/'> August 1987 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1987/07/'> July 1987 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1987/06/'> June 1987 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1987/05/'> May 1987 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1987/04/'> April 1987 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1987/03/'> March 1987 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1987/02/'> February 1987 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1987/01/'> January 1987 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1986/12/'> December 1986 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1986/11/'> November 1986 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1986/10/'> October 1986 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1986/09/'> September 1986 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1986/08/'> August 1986 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1986/07/'> July 1986 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1986/06/'> June 1986 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1986/05/'> May 1986 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1986/04/'> April 1986 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1986/03/'> March 1986 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1986/02/'> February 1986 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1986/01/'> January 1986 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1985/12/'> December 1985 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1985/11/'> November 1985 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1985/10/'> October 1985 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1985/09/'> September 1985 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1985/08/'> August 1985 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1985/07/'> July 1985 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1985/06/'> June 1985 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1985/05/'> May 1985 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1985/04/'> April 1985 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1985/03/'> March 1985 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1985/02/'> February 1985 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1985/01/'> January 1985 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1984/12/'> December 1984 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1984/11/'> November 1984 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1984/10/'> October 1984 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1984/09/'> September 1984 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1984/08/'> August 1984 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1984/07/'> July 1984 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1984/06/'> June 1984 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1984/05/'> May 1984 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1984/04/'> April 1984 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1984/03/'> March 1984 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1984/02/'> February 1984 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1984/01/'> January 1984 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1982/07/'> July 1982 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1982/04/'> April 1982 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1982/03/'> March 1982 &nbsp;(1)</option>
+	<option value='https://locusmag.com/1982/02/'> February 1982 &nbsp;(1)</option>
+
+		</select>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+(function() {
+	var dropdown = document.getElementById( "archives-dropdown-8" );
+	function onSelectChange() {
+		if ( dropdown.options[ dropdown.selectedIndex ].value !== '' ) {
+			document.location.href = this.options[ this.selectedIndex ].value;
+		}
+	}
+	dropdown.onchange = onSelectChange;
+})();
+/* ]]> */
+</script>
+			</aside><aside id="categories-3" class="widget widget_categories clearfix"><h3 class="widget-title"><span>Categories</span></h3><form action="https://locusmag.com" method="get"><label class="screen-reader-text" for="cat">Categories</label><select  name='cat' id='cat' class='postform' >
+	<option value='-1'>Select Category</option>
+	<option class="level-0" value="3">Announcements&nbsp;&nbsp;(761)</option>
+	<option class="level-0" value="254">Archives&nbsp;&nbsp;(13)</option>
+	<option class="level-0" value="5">Awards&nbsp;&nbsp;(2,919)</option>
+	<option class="level-0" value="139">Bestsellers&nbsp;&nbsp;(721)</option>
+	<option class="level-0" value="181">Blinks&nbsp;&nbsp;(535)</option>
+	<option class="level-0" value="151">Blurb&nbsp;&nbsp;(26)</option>
+	<option class="level-0" value="117">Books&nbsp;&nbsp;(2,331)</option>
+	<option class="level-0" value="6">Bookstores&nbsp;&nbsp;(76)</option>
+	<option class="level-0" value="144">Classic Reprints&nbsp;&nbsp;(70)</option>
+	<option class="level-0" value="186">Commentary&nbsp;&nbsp;(224)</option>
+	<option class="level-0" value="7">Contests&nbsp;&nbsp;(108)</option>
+	<option class="level-0" value="8">Conventions&nbsp;&nbsp;(345)</option>
+	<option class="level-0" value="124">Cory Doctorow&nbsp;&nbsp;(78)</option>
+	<option class="level-0" value="122">Features&nbsp;&nbsp;(830)</option>
+	<option class="level-0" value="116">Films&nbsp;&nbsp;(179)</option>
+	<option class="level-0" value="294">Forthcoming Books&nbsp;&nbsp;(18)</option>
+	<option class="level-0" value="342">International&nbsp;&nbsp;(8)</option>
+	<option class="level-0" value="125">Interviews&nbsp;&nbsp;(319)</option>
+	<option class="level-0" value="132">Issues&nbsp;&nbsp;(342)</option>
+	<option class="level-0" value="126">Kameron Hurley&nbsp;&nbsp;(46)</option>
+	<option class="level-0" value="9">Legal&nbsp;&nbsp;(85)</option>
+	<option class="level-0" value="10">Milestones&nbsp;&nbsp;(201)</option>
+	<option class="level-0" value="133">New &amp; Notable&nbsp;&nbsp;(136)</option>
+	<option class="level-0" value="141">New Books&nbsp;&nbsp;(628)</option>
+	<option class="level-0" value="143">New in Paperback&nbsp;&nbsp;(80)</option>
+	<option class="level-0" value="140">New Titles &amp; Bestsellers&nbsp;&nbsp;(2,019)</option>
+	<option class="level-0" value="1">News&nbsp;&nbsp;(3,434)</option>
+	<option class="level-0" value="11">Obituaries&nbsp;&nbsp;(427)</option>
+	<option class="level-0" value="142">Periodicals&nbsp;&nbsp;(322)</option>
+	<option class="level-0" value="12">Publishing&nbsp;&nbsp;(596)</option>
+	<option class="level-0" value="130">Reviewers&nbsp;&nbsp;(13)</option>
+	<option class="level-0" value="138">Reviews&nbsp;&nbsp;(2,819)</option>
+	<option class="level-0" value="135">Roundtable&nbsp;&nbsp;(433)</option>
+	<option class="level-0" value="115">Short Fiction&nbsp;&nbsp;(702)</option>
+	<option class="level-0" value="183">Slider&nbsp;&nbsp;(73)</option>
+	<option class="level-0" value="127">Spotlight&nbsp;&nbsp;(96)</option>
+	<option class="level-0" value="129">Staff&nbsp;&nbsp;(27)</option>
+	<option class="level-0" value="314">Staff Picks&nbsp;&nbsp;(84)</option>
+	<option class="level-0" value="343">Support What We Do&nbsp;&nbsp;(28)</option>
+	<option class="level-0" value="279">Uncategorized&nbsp;&nbsp;(8)</option>
+	<option class="level-0" value="13">Workshops&nbsp;&nbsp;(56)</option>
+</select>
+</form>
+<script type="text/javascript">
+/* <![CDATA[ */
+(function() {
+	var dropdown = document.getElementById( "cat" );
+	function onCatChange() {
+		if ( dropdown.options[ dropdown.selectedIndex ].value > 0 ) {
+			dropdown.parentNode.submit();
+		}
+	}
+	dropdown.onchange = onCatChange;
+})();
+/* ]]> */
+</script>
+
+			</aside><aside id="custom_html-71" class="widget_text widget widget_custom_html clearfix"><div class="textwidget custom-html-widget"><b>All opinions expressed</b> <br>by commentators, guest bloggers, reviewers, and interviewees are solely their own and do not reflect the opinions of <i>Locus</i> magazine or its staff. 
+
+<a id="TOCArchive"></a></div></aside>				</div>
+				<div class="footer_upper_widget_area tg-one-third">
+					<aside id="custom_html-61" class="widget_text widget widget_custom_html clearfix"><h3 class="widget-title"><span>Contact</span></h3><div class="textwidget custom-html-widget">Locus SF Foundation<br>
+dba Locus Publications<br>
+655 13th St. #100<br>
+Oakland CA 94612<br><br>
+ph. +1-510-339-9196<br>
+<br>
+<a href="mailto:locus@locusmag.com">locus@locusmag.com</a><br><br>
+
+Weekdays: 9-5 Pacific Time</div></aside><aside id="search-3" class="widget widget_search clearfix"><form action="https://locusmag.com/" class="search-form searchform clearfix" method="get">
+	<div class="search-wrap">
+		<input type="text" placeholder="Search" class="s field" name="s">
+		<button class="search-icon" type="submit"></button>
+	</div>
+</form><!-- .searchform -->
+</aside>				</div>
+				<div class="footer_upper_widget_area tg-one-third tg-one-third-last">
+					<aside id="custom_html-92" class="widget_text widget widget_custom_html clearfix"><h3 class="widget-title"><span>Suggestion, tips, typos?</span></h3><div class="textwidget custom-html-widget">You can send news, tips, and suggestions to <a href="mailto:locus@locusmag.com">locus@locusmag.com.</a>
+<br><br>
+If you see problems or bugs on the site, please let us know and include the URL and also which browser you are using.</div></aside><aside id="custom_html-64" class="widget_text widget widget_custom_html clearfix"><h3 class="widget-title"><span>Follow us!</span></h3><div class="textwidget custom-html-widget"><div align="center">
+<a href="http://twitter.com/locusmag"><img height="50" width="50" src="http://locusmag.com/wp-content/uploads/2017/10/birdie.gif"></a>
+<a href="https://www.facebook.com/Locus-Magazine-547211638785273/"><img height="51" width="51" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Facebook_icon.svg/2000px-Facebook_icon.svg.png"></a>
+<a href="http://www.patreon.com/locus"><img height="49" width="49" src="http://locusmag.com/wp-content/uploads/2017/08/Patreon_logo.svg.png"></a>
+<a href="https://www.instagram.com/locusmagazine/"><img height="49" width="49" src="http://locusmag.com/wp-content/uploads/2018/01/instagram.png"></a></div></div></aside>				</div>
+			</div>
+
+			<div class="tg-footer-main-widget">
+				<div class="tg-first-footer-widget">
+									</div>
+			</div>
+
+			<div class="tg-footer-other-widgets">
+				<div class="tg-second-footer-widget">
+									</div>
+				<div class="tg-third-footer-widget">
+									</div>
+				<div class="tg-fourth-footer-widget">
+					<aside id="custom_html-101" class="widget_text widget widget_custom_html clearfix"><div class="textwidget custom-html-widget"><style>
+p.hidden {
+    display: none;
+}
+</style>
+
+<p class="hidden">Locus Magazine and Website cover science fiction, fantasy, young-adult, horror books, short fiction, anthologies, magazines, films, news, conventions, and international. Also interviews with SFF authors, editors, artists, and more.</p></div></aside>				</div>
+			</div>
+
+			<div class="footer-full-width-sidebar inner-wrap clearfix">
+							</div>
+		</div>
+	</div>
+</div>
+	<div class="footer-socket-wrapper clearfix">
+		<div class="inner-wrap">
+			<div class="footer-socket-area">
+				<div class="footer-socket-right-section">
+					
+					<nav class="footer-menu clearfix">
+											</nav>
+				</div>
+
+				<div class="footer-socket-left-section">
+					<div class="copyright">Copyright ©  2023 Locus Publications. All rights reserved.</div>				</div>
+			</div>
+
+		</div>
+	</div>
+</footer>
+
+	<a href="#masthead" id="scroll-up"><i class="fa fa-chevron-up"></i></a>
+
+
+
+</div><!-- #page -->
+<div id="pum-114835" class="pum pum-overlay pum-theme-89562 pum-theme-default-theme popmake-overlay pum-overlay-disabled pum-click-to-close auto_open click_open" data-popmake="{&quot;id&quot;:114835,&quot;slug&quot;:&quot;igg&quot;,&quot;theme_id&quot;:89562,&quot;cookies&quot;:[{&quot;event&quot;:&quot;on_popup_open&quot;,&quot;settings&quot;:{&quot;name&quot;:&quot;pum-114835&quot;,&quot;key&quot;:&quot;&quot;,&quot;session&quot;:true,&quot;path&quot;:true,&quot;time&quot;:&quot;15 minutes&quot;}}],&quot;triggers&quot;:[{&quot;type&quot;:&quot;auto_open&quot;,&quot;settings&quot;:{&quot;cookie_name&quot;:[&quot;pum-114835&quot;],&quot;delay&quot;:1000}},{&quot;type&quot;:&quot;click_open&quot;,&quot;settings&quot;:{&quot;extra_selectors&quot;:&quot;&quot;,&quot;cookie_name&quot;:null}}],&quot;mobile_disabled&quot;:true,&quot;tablet_disabled&quot;:null,&quot;meta&quot;:{&quot;display&quot;:{&quot;stackable&quot;:&quot;1&quot;,&quot;overlay_disabled&quot;:&quot;1&quot;,&quot;scrollable_content&quot;:false,&quot;disable_reposition&quot;:false,&quot;size&quot;:&quot;tiny&quot;,&quot;responsive_min_width&quot;:&quot;0%&quot;,&quot;responsive_min_width_unit&quot;:false,&quot;responsive_max_width&quot;:&quot;100%&quot;,&quot;responsive_max_width_unit&quot;:false,&quot;custom_width&quot;:&quot;640px&quot;,&quot;custom_width_unit&quot;:false,&quot;custom_height&quot;:&quot;380px&quot;,&quot;custom_height_unit&quot;:false,&quot;custom_height_auto&quot;:false,&quot;location&quot;:&quot;left bottom&quot;,&quot;position_from_trigger&quot;:false,&quot;position_top&quot;:&quot;100&quot;,&quot;position_left&quot;:&quot;10&quot;,&quot;position_bottom&quot;:&quot;10&quot;,&quot;position_right&quot;:&quot;0&quot;,&quot;position_fixed&quot;:&quot;1&quot;,&quot;animation_type&quot;:&quot;fade&quot;,&quot;animation_speed&quot;:&quot;350&quot;,&quot;animation_origin&quot;:&quot;left bottom&quot;,&quot;overlay_zindex&quot;:false,&quot;zindex&quot;:&quot;1999999999&quot;},&quot;close&quot;:{&quot;text&quot;:&quot;&quot;,&quot;button_delay&quot;:&quot;100&quot;,&quot;overlay_click&quot;:&quot;1&quot;,&quot;esc_press&quot;:&quot;1&quot;,&quot;f4_press&quot;:&quot;1&quot;},&quot;click_open&quot;:[]}}" role="dialog" aria-hidden="true" >
+
+	<div id="popmake-114835" class="pum-container popmake theme-89562 pum-responsive pum-responsive-tiny responsive size-tiny pum-position-fixed">
+
+				
+
+				
+
+		
+
+				<div class="pum-content popmake-content" tabindex="0">
+			<p><a href="https://igg.me/at/locusmag"><img loading="lazy" class="wp-image-135927 size-medium alignright" src="https://locusmag.com/wp-content/uploads/2022/11/fb-page-indiegogo-2022-flat-300x158.jpg" alt="Locus Indiegogo 2022" width="300" height="158" srcset="https://locusmag.com/wp-content/uploads/2022/11/fb-page-indiegogo-2022-flat-300x158.jpg 300w, https://locusmag.com/wp-content/uploads/2022/11/fb-page-indiegogo-2022-flat-1024x538.jpg 1024w, https://locusmag.com/wp-content/uploads/2022/11/fb-page-indiegogo-2022-flat-768x403.jpg 768w, https://locusmag.com/wp-content/uploads/2022/11/fb-page-indiegogo-2022-flat.jpg 1200w" sizes="(max-width: 300px) 100vw, 300px" /></a>We have some great swag at our fundraiser: signed books, author chats, story crits, Tuckerizations, a <em>Locus</em> coffee mug, t-shirt, and more! Check it out, and help support <em>Locus</em>!</p>
+<p>&nbsp;</p>
+		</div>
+
+
+				
+
+				            <button type="button" class="pum-close popmake-close" aria-label="Close">
+			CLOSE            </button>
+		
+	</div>
+
+</div>
+
+	<script type="text/javascript">
+		window.WPCOM_sharing_counts = {"https:\/\/locusmag.com\/2016\/06\/gary-k-wolfe-reviews-guy-gavriel-kay\/":2698,"https:\/\/locusmag.com\/2010\/10\/arthur-c-clarke-on-locus\/":87346};
+	</script>
+						<script type='text/javascript' src='https://locusmag.com/wp-includes/js/comment-reply.min.js?ver=5.6.10' id='comment-reply-js'></script>
+<script type='text/javascript' src='https://locusmag.com/wp-content/themes/colormag-pro/js/sticky/jquery.sticky.min.js?ver=20150309' id='colormag-sticky-menu-js'></script>
+<script type='text/javascript' src='https://locusmag.com/wp-content/themes/colormag-pro/js/navigation.min.js?ver=5.6.10' id='colormag-navigation-js'></script>
+<script type='text/javascript' src='https://locusmag.com/wp-content/themes/colormag-pro/js/fitvids/jquery.fitvids.min.js?ver=1.2.0' id='colormag-fitvids-js'></script>
+<script type='text/javascript' id='colormag-custom-js-extra'>
+/* <![CDATA[ */
+var colormag_load_more = {"tg_nonce":"afa55801ec","ajax_url":"https:\/\/locusmag.com\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://locusmag.com/wp-content/themes/colormag-pro/js/colormag-custom.min.js?ver=5.6.10' id='colormag-custom-js'></script>
+<script type='text/javascript' src='https://locusmag.com/wp-includes/js/jquery/ui/core.min.js?ver=1.12.1' id='jquery-ui-core-js'></script>
+<script type='text/javascript' id='popup-maker-site-js-extra'>
+/* <![CDATA[ */
+var pum_vars = {"version":"1.16.2","pm_dir_url":"https:\/\/locusmag.com\/wp-content\/plugins\/popup-maker\/","ajaxurl":"https:\/\/locusmag.com\/wp-admin\/admin-ajax.php","restapi":"https:\/\/locusmag.com\/wp-json\/pum\/v1","rest_nonce":null,"default_theme":"89562","debug_mode":"","disable_tracking":"","home_url":"\/","message_position":"top","core_sub_forms_enabled":"1","popups":[],"analytics_route":"analytics","analytics_api":"https:\/\/locusmag.com\/wp-json\/pum\/v1"};
+var pum_sub_vars = {"ajaxurl":"https:\/\/locusmag.com\/wp-admin\/admin-ajax.php","message_position":"top"};
+var pum_popups = {"pum-114835":{"triggers":[{"type":"auto_open","settings":{"cookie_name":["pum-114835"],"delay":1000}}],"cookies":[{"event":"on_popup_open","settings":{"name":"pum-114835","key":"","session":true,"path":true,"time":"15 minutes"}}],"disable_on_mobile":true,"disable_on_tablet":false,"atc_promotion":null,"explain":null,"type_section":null,"theme_id":"89562","size":"tiny","responsive_min_width":"0%","responsive_max_width":"100%","custom_width":"640px","custom_height_auto":false,"custom_height":"380px","scrollable_content":false,"animation_type":"fade","animation_speed":"350","animation_origin":"left bottom","open_sound":"none","custom_sound":"","location":"left bottom","position_top":"100","position_bottom":"10","position_left":"10","position_right":"0","position_from_trigger":false,"position_fixed":true,"overlay_disabled":true,"stackable":true,"disable_reposition":false,"zindex":"1999999999","close_button_delay":"100","fi_promotion":null,"close_on_form_submission":false,"close_on_form_submission_delay":"0","close_on_overlay_click":true,"close_on_esc_press":true,"close_on_f4_press":true,"disable_form_reopen":false,"disable_accessibility":false,"theme_slug":"default-theme","id":114835,"slug":"igg"}};
+/* ]]> */
+</script>
+<script type='text/javascript' src='//locusmag.com/wp-content/uploads/pum/pum-site-scripts.js?defer&#038;generated=1674607070&#038;ver=1.16.2' id='popup-maker-site-js'></script>
+<script type='text/javascript' src='https://locusmag.com/wp-content/plugins/popup-maker/assets/js/vendor/mobile-detect.min.js?ver=1.3.3' id='mobile-detect-js'></script>
+<script type='text/javascript' src='https://locusmag.com/wp-includes/js/wp-embed.min.js?ver=5.6.10' id='wp-embed-js'></script>
+<script type='text/javascript' id='sharing-js-js-extra'>
+/* <![CDATA[ */
+var sharing_js_options = {"lang":"en","counts":"1","is_stats_active":"1"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://locusmag.com/wp-content/plugins/jetpack/_inc/build/sharedaddy/sharing.min.js?ver=9.8.1' id='sharing-js-js'></script>
+<script type='text/javascript' id='sharing-js-js-after'>
+var windowOpen;
+			( function () {
+				function matches( el, sel ) {
+					return !! (
+						el.matches && el.matches( sel ) ||
+						el.msMatchesSelector && el.msMatchesSelector( sel )
+					);
+				}
+
+				document.body.addEventListener( 'click', function ( event ) {
+					if ( ! event.target ) {
+						return;
+					}
+
+					var el;
+					if ( matches( event.target, 'a.share-facebook' ) ) {
+						el = event.target;
+					} else if ( event.target.parentNode && matches( event.target.parentNode, 'a.share-facebook' ) ) {
+						el = event.target.parentNode;
+					}
+
+					if ( el ) {
+						event.preventDefault();
+
+						// If there's another sharing window open, close it.
+						if ( typeof windowOpen !== 'undefined' ) {
+							windowOpen.close();
+						}
+						windowOpen = window.open( el.getAttribute( 'href' ), 'wpcomfacebook', 'menubar=1,resizable=1,width=600,height=400' );
+						return false;
+					}
+				} );
+			} )();
+var windowOpen;
+			( function () {
+				function matches( el, sel ) {
+					return !! (
+						el.matches && el.matches( sel ) ||
+						el.msMatchesSelector && el.msMatchesSelector( sel )
+					);
+				}
+
+				document.body.addEventListener( 'click', function ( event ) {
+					if ( ! event.target ) {
+						return;
+					}
+
+					var el;
+					if ( matches( event.target, 'a.share-twitter' ) ) {
+						el = event.target;
+					} else if ( event.target.parentNode && matches( event.target.parentNode, 'a.share-twitter' ) ) {
+						el = event.target.parentNode;
+					}
+
+					if ( el ) {
+						event.preventDefault();
+
+						// If there's another sharing window open, close it.
+						if ( typeof windowOpen !== 'undefined' ) {
+							windowOpen.close();
+						}
+						windowOpen = window.open( el.getAttribute( 'href' ), 'wpcomtwitter', 'menubar=1,resizable=1,width=600,height=350' );
+						return false;
+					}
+				} );
+			} )();
+var windowOpen;
+			( function () {
+				function matches( el, sel ) {
+					return !! (
+						el.matches && el.matches( sel ) ||
+						el.msMatchesSelector && el.msMatchesSelector( sel )
+					);
+				}
+
+				document.body.addEventListener( 'click', function ( event ) {
+					if ( ! event.target ) {
+						return;
+					}
+
+					var el;
+					if ( matches( event.target, 'a.share-tumblr' ) ) {
+						el = event.target;
+					} else if ( event.target.parentNode && matches( event.target.parentNode, 'a.share-tumblr' ) ) {
+						el = event.target.parentNode;
+					}
+
+					if ( el ) {
+						event.preventDefault();
+
+						// If there's another sharing window open, close it.
+						if ( typeof windowOpen !== 'undefined' ) {
+							windowOpen.close();
+						}
+						windowOpen = window.open( el.getAttribute( 'href' ), 'wpcomtumblr', 'menubar=1,resizable=1,width=450,height=450' );
+						return false;
+					}
+				} );
+			} )();
+</script>
+<script src='https://stats.wp.com/e-202306.js' defer></script>
+<script>
+	_stq = window._stq || [];
+	_stq.push([ 'view', {v:'ext',j:'1:9.8.1',blog:'141816146',post:'2698',tz:'-8',srv:'locusmag.com'} ]);
+	_stq.push([ 'clickTrackerInit', '141816146', '2698' ]);
+</script>
+</body>
+</html>

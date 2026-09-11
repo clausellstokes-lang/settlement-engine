@@ -1,0 +1,2047 @@
+
+ Large language models are homogeneously creative | PNAS Nexus | Oxford Academic 
+ Skip to Main Content 
+ Advertisement
+ Search Menu 
+ AI Discovery Assistant 
+ Menu 
+ Sign in through your institution 
+ Remember my
+institution 
+ Navbar Search Filter
+ PNAS Nexus This issue Computer Sciences Psychological and Cognitive Sciences (Social and Political Sciences) NAS Journals 
+ Medicine and Health Science and Mathematics Social Sciences Books Journals Oxford Academic 
+ Mobile Enter search term
+ Search 
+ Issues
+ Advance Articles
+ More Content
+ Sign up for alerts
+ High-Impact Research
+ Illuminations Collections
+ Engineering Research Collection
+ Medicine Research Collection
+ Physical Sciences Collection
+ Subject 
+ Biological, Health, and Medical Sciences 
+ Browse content in Biological, Health, and Medical Sciences 
+ Administration Of Health Services, Education, and Research 
+ Agricultural Sciences 
+ Allied Health Professions 
+ Anesthesiology 
+ Anthropology 
+ Anthropology (Biological, Health, and Medical Sciences) 
+ Applied Biological Sciences 
+ Biochemistry 
+ Biophysics and Computational Biology (Biological, Health, and Medical Sciences) 
+ Biostatistics 
+ Cell Biology 
+ Dermatology 
+ Developmental Biology 
+ Ecology 
+ Emergency Medicine 
+ Environmental Sciences (Biological, Health, and Medical Sciences) 
+ Evolution 
+ Genetics 
+ Immunology and Inflammation 
+ Internal Medicine 
+ Medical Microbiology 
+ Medical Sciences 
+ Microbiology 
+ Neurology 
+ Neuroscience 
+ Nutrition 
+ Obstetrics and Gynecology 
+ Ophthalmology 
+ Pathology 
+ Pediatrics 
+ Pharmacology 
+ Pharmacy 
+ Physical Medicine 
+ Physiology 
+ Plant Biology 
+ Population Biology 
+ Psychiatry 
+ Psychological and Cognitive Sciences (Biological, Health, and Medical Sciences) 
+ Public Health and Epidemiology 
+ Radiation Oncology 
+ Radiology 
+ Rehabilitation 
+ Surgery 
+ Sustainability Science (Biological, Health, and Medical Sciences) 
+ Systems Biology 
+ Veterinary Medicine 
+ Physical Sciences and Engineering 
+ Browse content in Physical Sciences and Engineering 
+ Aerospace Engineering 
+ Applied Mathematics 
+ Applied Physical Sciences 
+ Astronomy 
+ Bioengineering 
+ Biophysics and Computational Biology (Physical Sciences and Engineering) 
+ Chemical Engineering 
+ Chemistry 
+ Civil and Environmental Engineering 
+ Computer Sciences 
+ Computer Science and Engineering 
+ Earth Resources Engineering 
+ Earth, Atmospheric, and Planetary Sciences 
+ Electric Power and Energy Systems Engineering 
+ Electronics, Communications and Information Systems Engineering 
+ Engineering 
+ Environmental Sciences (Physical Sciences and Engineering) 
+ Industrial, Manufacturing and Operational Systems Engineering 
+ Materials Engineering 
+ Mathematics 
+ Mechanical Engineering 
+ Physics 
+ Statistics 
+ Sustainability Science (Physical Sciences and Engineering) 
+ Social and Political Sciences 
+ Browse content in Social and Political Sciences 
+ Anthropology (Social and Political Sciences) 
+ Demography 
+ Economic Sciences 
+ Environmental Sciences (Social and Political Sciences) 
+ Political Sciences 
+ Psychological and Cognitive Sciences (Social and Political Sciences) 
+ Social Sciences 
+ Sustainability Science (Social and Political Sciences) 
+ Submit
+ Author guidelines
+ Submission site
+ Open access and publication fees
+ Read and publish agreements
+ Self-archiving policy
+ Why submit to PNAS Nexus
+ The PNAS portfolio
+ For reviewers
+ About
+ About PNAS Nexus
+ About National Academy of Sciences
+ Editorial Board
+ NAS Journals 
+ Issues
+ Advance Articles
+ More Content
+ Sign up for alerts
+ High-Impact Research
+ Illuminations Collections
+ Engineering Research Collection
+ Medicine Research Collection
+ Physical Sciences Collection
+ Subject
+ All Subject
+ Expand 
+ Expand 
+ Biological, Health, and Medical
+ Sciences
+ Administration Of Health Services, Education, and Research 
+ Agricultural Sciences 
+ Allied Health Professions 
+ Anesthesiology 
+ Anthropology 
+ Anthropology (Biological, Health, and Medical Sciences) 
+ Applied Biological Sciences 
+ Biochemistry 
+ Biophysics and Computational Biology (Biological, Health, and Medical Sciences) 
+ Biostatistics 
+ Cell Biology 
+ Dermatology 
+ Developmental Biology 
+ Ecology 
+ Emergency Medicine 
+ Environmental Sciences (Biological, Health, and Medical Sciences) 
+ Evolution 
+ Genetics 
+ Immunology and Inflammation 
+ Internal Medicine 
+ Medical Microbiology 
+ Medical Sciences 
+ Microbiology 
+ Neurology 
+ Neuroscience 
+ Nutrition 
+ Obstetrics and Gynecology 
+ Ophthalmology 
+ Pathology 
+ Pediatrics 
+ Pharmacology 
+ Pharmacy 
+ Physical Medicine 
+ Physiology 
+ Plant Biology 
+ Population Biology 
+ Psychiatry 
+ Psychological and Cognitive Sciences (Biological, Health, and Medical Sciences) 
+ Public Health and Epidemiology 
+ Radiation Oncology 
+ Radiology 
+ Rehabilitation 
+ Surgery 
+ Sustainability Science (Biological, Health, and Medical Sciences) 
+ Systems Biology 
+ Veterinary Medicine 
+ Physical Sciences and
+ Engineering
+ Aerospace Engineering 
+ Applied Mathematics 
+ Applied Physical Sciences 
+ Astronomy 
+ Bioengineering 
+ Biophysics and Computational Biology (Physical Sciences and Engineering) 
+ Chemical Engineering 
+ Chemistry 
+ Civil and Environmental Engineering 
+ Computer Sciences 
+ Computer Science and Engineering 
+ Earth Resources Engineering 
+ Earth, Atmospheric, and Planetary Sciences 
+ Electric Power and Energy Systems Engineering 
+ Electronics, Communications and Information Systems Engineering 
+ Engineering 
+ Environmental Sciences (Physical Sciences and Engineering) 
+ Industrial, Manufacturing and Operational Systems Engineering 
+ Materials Engineering 
+ Mathematics 
+ Mechanical Engineering 
+ Physics 
+ Statistics 
+ Sustainability Science (Physical Sciences and Engineering) 
+ Social and Political
+ Sciences
+ Anthropology (Social and Political Sciences) 
+ Demography 
+ Economic Sciences 
+ Environmental Sciences (Social and Political Sciences) 
+ Political Sciences 
+ Psychological and Cognitive Sciences (Social and Political Sciences) 
+ Social Sciences 
+ Sustainability Science (Social and Political Sciences) 
+ Browse all content 
+ Browse content in 
+ Submit
+ Author guidelines
+ Submission site
+ Open access and publication fees
+ Read and publish agreements
+ Self-archiving policy
+ Why submit to PNAS Nexus
+ The PNAS portfolio
+ For reviewers
+ About
+ About PNAS Nexus
+ About National Academy of Sciences
+ Editorial Board
+ Close 
+ Navbar Search Filter
+ PNAS Nexus This issue Computer Sciences Psychological and Cognitive Sciences (Social and Political Sciences) NAS Journals 
+ Medicine and Health Science and Mathematics Social Sciences Books Journals Oxford Academic 
+ Enter search term
+ Search 
+ Advanced Search 
+ Search Menu 
+ AI Discovery Assistant
+ Discover the most relevant content quickly with our AI Discovery Assistant
+ Article Navigation 
+ Close mobile search navigation 
+ Article Navigation
+ Volume 5
+ Issue 3
+March 2026 
+ Article Contents
+ Abstract 
+ Introduction 
+ Results 
+ Discussion 
+ Materials and methods 
+ Notes 
+ Acknowledgments 
+ Supplementary Material 
+ Funding 
+ Author Contributions 
+ Previous Presentation 
+ Preprints 
+ Data Availability 
+ References 
+ < Previous 
+ Next > 
+ Article Navigation
+ Article Navigation
+ Journal Article 
+ Large language models are homogeneously creative
+ Emily Wenger 
+ , 
+ Emily Wenger
+ Conceptualization, Data curation, Formal analysis, Funding acquisition, Investigation, Methodology, Project administration, Resources, Software, Supervision, Validation, Visualization, Writing - original draft, Writing - review & editing
+ Department of Electrical and Computer Engineering, Duke University
+, Durham, NC 27705
+, USA
+ To whom correspondence should be addressed: Email: [email protected] 
+ https://orcid.org/0009-0006-3346-8226
+ Search for other works by this author on:
+ Oxford Academic 
+ Google Scholar 
+ Yoed N Kenett 
+ Yoed N Kenett
+ Funding acquisition, Supervision, Validation, Writing - review & editing
+ Faculty of Data and Decision Sciences, Technion - Israel Institute of Technology
+, Haifa 3200003
+, Israel
+ https://orcid.org/0000-0003-3872-7689
+ Search for other works by this author on:
+ Oxford Academic 
+ Google Scholar 
+ Back to Content 
+ Competing Interest: The authors declare no competing interests.
+ Author Notes 
+ PNAS Nexus , Volume 5, Issue 3, March 2026, pgag042, https://doi.org/10.1093/pnasnexus/pgag042 
+ Published:
+ 24 March 2026
+ Article history 
+ Received:
+ 14 July 2025
+ Accepted:
+ 12 January 2026
+ Corrected and typeset:
+ 24 March 2026
+ Published:
+ 24 March 2026
+ PDF 
+ Split View
+ Views
+ Article contents 
+ Figures & tables 
+ Video 
+ Audio 
+ Supplementary Data 
+ Cite 
+ Cite
+ Emily Wenger, Yoed N Kenett, Large language models are homogeneously creative, PNAS Nexus , Volume 5, Issue 3, March 2026, pgag042, https://doi.org/10.1093/pnasnexus/pgag042 
+ Select Format 
+ Select format 
+ .ris (Mendeley, Papers, Zotero) 
+ .enw (EndNote) 
+ .bibtex (BibTex) 
+ .txt (Medlars, RefWorks) 
+ Download citation 
+ Close 
+ Permissions Icon 
+ Permissions
+ Share Icon 
+ Share 
+ Bluesky 
+ Facebook 
+ X 
+ LinkedIn 
+ Email 
+ Navbar Search Filter
+ PNAS Nexus This issue Computer Sciences Psychological and Cognitive Sciences (Social and Political Sciences) NAS Journals 
+ Medicine and Health Science and Mathematics Social Sciences Books Journals Oxford Academic 
+ Mobile Enter search term
+ Search 
+ Close 
+ Navbar Search Filter
+ PNAS Nexus This issue Computer Sciences Psychological and Cognitive Sciences (Social and Political Sciences) NAS Journals 
+ Medicine and Health Science and Mathematics Social Sciences Books Journals Oxford Academic 
+ Enter search term
+ Search 
+ Advanced Search 
+ Search Menu 
+ AI Discovery Assistant
+ Discover the most relevant content quickly with our AI Discovery Assistant
+ Abstract
+ Numerous large language models (LLMs) are marketed for use as creativity support tools, despite several studies showing that using an LLM as a creative partner narrows creative outputs. However, these studies only consider the effects of interacting with a single LLM on specific creativity tasks, begging the question of whether narrowed creativity stems from using a particular LLM—with an arguably limited range of outputs—or from using LLMs in general . To test this, we elicit creative responses from many humans and LLMs using standardized creativity tasks and compare population-level response diversity. We find that LLM responses mirror other LLM responses far more than humans do other humans, even after controlling for key confounding variables. This finding adds a new dimension to the ongoing discussion about creativity and LLMs. If today’s LLMs behave similarly, using them as creative partners—regardless of the model used—may drive users toward similar “creative” outputs.
+ AI , creativity , homogeneity 
+ Significance Statement 
+ Motivated by prior work showing that particular language models (e.g., ChatGPT) can produce homogeneous creative outputs, we elicit creative responses from humans and a broad set of large language models (LLMs) using multiple standardized creativity tasks and compare the population-level diversity of responses. We find that LLM responses are much more similar to other LLM responses than human responses are to each other, even after experimentally controlling for response structure and other key variables. This finding of significant homogeneity in creative outputs across LLMs enriches the ongoing discussion about creativity and LLMs. Not only do particular LLMs produce homogeneous creative outputs—all LLMs produce similar , homogeneous creative outputs. This study highlights a potential danger of relying on LLMs as creative partners.
+ Introduction
+ Large language models (LLMs) have moved out of research labs and into our everyday lives. Given their advanced abilities to generate text and respond to prompts, LLMs are often marketed as creativity support tools that allow users to write drafts, edit documents, and generate new ideas with ease ( 1–4 ). Consumers have responded eagerly to these suggestions. According to a 2024 survey by Adobe, over half of Americans have used generative AI tools like LLMs as creative partners for brainstorming, drafting written content, creating images, or writing code. An overwhelming majority of LLM users surveyed believe these models will help them be more creative ( 5 ). Already, many studies have shown how AI models, such as ChatGPT, outperform humans in standard lab-based assessments of creativity ( 6–12 ), lending credibility to this view.
+ Creativity is typically defined as the ability to generate ideas that are both novel and useful ( 13 , 14 ). Extensive cognitive research on human creativity over the past few decades has focused on the cognitive capacities that facilitate creativity, such as attention, memory, intelligence, cognitive control, and associative thinking ( 15–20 ). A majority of such cognitive and neuroscientific research focuses on divergent thinking, the ability to generate multiple solutions to a given problem ( 16 , 21 , 22 ). Divergent thinking is commonly measured via verbal creativity tasks such as the alternative uses task (AUT; ( 23 )), where participants are given common objects and asked to list possible alternative uses. Traditionally, performance in such tasks was assessed via subjective ratings of external judges ( 24 ) or self-report questionnaires ( 25 ), but the introduction of computational tools to creativity assessment have significantly advanced creativity assessment in and outside of the lab ( 26–30 ). Parallel research on creativity as a process emphasizes the importance of associative thinking, the ability to search through one’s memory and combine concepts into novel and useful ideas ( 15 , 31–34 ).
+ Regardless of the definition, outsourcing human creativity to LLMs could have unintended consequences and demands further scrutiny ( 35–38 ). One major concern in the study of AI and creativity is whether using AI to aid creative tasks homogenizes creative outputs. Numerous studies have shown evidence of this. For example, Doshi and Hauser ( 39 ) found that writers who used GPT-4 as a creativity support tool produced more creative stories than humans working alone, but that the stories from writers who collaborated with GPT-4 were more similar to each other than were stories from human writers, thus more homogeneous. Similarly, Moon et al. ( 40 ) compared college essays written by humans and GPT models and found that LLM-authored essays contributed fewer new ideas and were more homogeneous than human-authored essays. This phenomenon of LLM-driven content homogenization appears across domains—in research idea generation ( 41 ), essay writing ( 40 ), survey responses ( 42 ), creative ideation ( 43 ), and art ( 44 )—although recent work argues such homogenization may be context-dependent ( 45 ).
+ Recent work also showed that when GPT models are evaluated multiple times in associative thinking tasks, their responses overlap, even if each individual response has a higher quantitative-based originality score ( 46 ). Cropley ( 46 ) examined how different LLMs performed on an associative thinking task, the divergent association task (DAT; ( 47 )), compared to humans. In the DAT, participants are required to generate words that are unrelated to each other, assessing disassociative thinking abilities that facilitate creativity ( 31 ). This study revealed that while the LLMs generate more original output than humans in this task, the variability of their responses was lower. Given the significance of variability in human creativity ( 48 , 49 ), such a less variable, homogenized output by the LLMs raises potential concerns regarding the discussion of LLM creativity.
+ Most current works comparing human–AI creativity examine a single model (usually an LLM like ChatGPT) and its effect on downstream creative content. However, this begs the question: does AI-driven homogeneity observed in prior studies occur because only a single AI model is studied? It could be reasonably argued that a single LLM must have a limited range of outputs, causing the homogeneity. Perhaps, if researchers employed numerous different AI models, the homogenization effects would vanish. Thus, a critical open question is whether it is the use of specific models in these studies—often GPT variants—that causes observed homogeneity, or if such homogeneity would be observed regardless of the model used .
+ Recent work studying feature space alignment in large-scale AI models suggests that using multiple models will not solve the homogenization problem. Numerous studies have proposed ways to measure similarity between AI model feature representations (e.g., their internal way of representing model inputs) ( 50–54 ), since such similarity is believed to indicate overall model similarity. Nascent work has applied similar methods to LLMs and found evidence of “feature universality” across LLMs ( 55 , 56 ). We postulate that such feature space alignment in LLMs may result in homogeneous creative outputs across these models. This would imply that using LLMs as creative partners in general causes output homogeneity, because all LLMs would have limited and similar output ranges.
+ The consequences of cross-LLM creative output homogeneity would be significant in the creative space and beyond. Humans who rely on LLMs as creative partners would find their creative outputs remarkably similar to those of other LLM users regardless of the model used, resulting in a collective narrowing of creativity. This is especially critical given a recent study showing that students over-rely on LLM-generated suggestions when generating creative ideas, rather than engaging in more complex cognitive strategies ( 57 ). More broadly, homogeneity among popular LLMs could lead to bias propagation, widespread security vulnerabilities, or other problems ( 58 , 59 ).
+ In the current study, we build on prior work showing that using specific LLMs as creative partners in creative thinking tasks narrows the range of creative outputs, to study creative output variability across tasks and across LLMs (Fig. 1 ). We evaluate the diversity of responses to creative prompts across many LLMs using standard creativity tasks, such as the AUT, DAT, and forward flow (FF; measuring associative thinking ( 60 )) and compare this to the diversity of human responses. We specifically focus on verbal creativity tasks that are commonly used in empirical and AI creativity research ( 9 , 31 , 46 ), to generalize across these tasks and provide a comprehensive examination of potential LLM creative homogenization. Our key finding is that LLMs responses are much more similar to each other than are human responses, indicating significant homogeneity across the LLMs we evaluate. This study enriches the current debate surrounding LLMs and creativity, clarifying that it is likely the use of LLMs in general, rather than the use of a specific LLM, that homogenizes creative outputs.
+ Fig. 1.
+ Overview of our methodology. First, we evaluate a large set of humans ( ⁠ n = 102 ⁠ ) and LLMs ( ⁠ n = 22 ⁠ ) on three divergent thinking tasks: AUT, DAT, and FF (steps 1 and 2). Then, we measure the originality of individual responses from humans/LLMs (step 3) and the population-level variability across the whole set of humans/LLMs.
+ Open in new tab Download slide 
+ Results
+ Our goal is to measure whether LLMs produce more, less, or equally diverse creative outputs as a group of human participants. We measure this diversity (or variability) in responses by computing the semantic similarity among responses of 102 human participants and 22 LLMs to three standard creativity tasks: the AUT ( 61 ), FF ( 60 ), and DAT ( 47 ).
+ To score responses in these tasks, we leverage recent work enabling quantitative assessment of creativity performance ( 26 , 28 , 62 ). We score two aspects of task responses: individual originality and population-level variability . The originality metric O t ( ⁠ t = AUT, DAT, FF) measures the originality of an individual’s (LLM or human participant) response via its semantic distance from the task prompt. Intuitively, this metric captures the divergence of thought between the prompt and response, a commonly recognized measure of creativity ( 26 , 27 ). The variability metric V t measures the breadth of creative responses from a population (e.g., LLMs or human participants), by computing the semantic distances between embedded representations of population responses. Following prior work and common practice and, in particular, AI creativity research, originality, and variability are computed in aggregate across start words for the AUT and FF tasks ( 47 , 60 , 63 , 64 ). Fig. 1 presents our workflow.
+ Individual originality of human participants vs. LLMs
+ As a baseline, we first compute originality scores across the three tasks for all human participants and LLMs, then compare them. LLMs score were slightly higher than human participants on the AUT and DAT tasks, mirroring prior work ( 9 ) but were worse on FF. Fig. 2 and Table 1 show the distributions of originality scores for human participants and LLMs on these tasks and provides statistics comparing population means for the two groups. LLMs and human participants exhibit roughly equal levels of measured originality on these tests on average, removing this as a possible confounding variable in our study of response variability.
+ Fig. 2.
+ LLMs slightly outperform humans on the AUT and DAT, but humans slightly outperform LLMs on FF. Panel A: AUT individual originality. Panel B: FF individual originality. Panel C: DAT individual originality.
+ Open in new tab Download slide 
+ Table 1. 
+ Open in new tab
+ Statistical analysis of human vs. LLM performance on creativity tasks.
+ Test 
+ . μ ( O t ( LLM ) ) 
+ . μ ( O t ( Human ) ) 
+ . Test statistic 
+ . P -value 
+ . Effect size 
+ . Test power 
+ . 
+ AUT 0.711 0.696 t ( 2094 ) = − 3.4 0.001 0.1 0.84 
+ FF 0.603 0.637 t ( 164 ) = 5.2 2.9 e − 07 0.52 0.99 
+ DAT 0.801 0.753 t ( 159 ) = − 5.12 8.7 e − 07 0.77 0.99 
+ Test μ ( O t ( LLM ) ) μ ( O t ( Human ) ) Test statistic P -value Effect size Test power 
+ AUT 0.711 0.696 t ( 2094 ) = − 3.4 0.001 0.1 0.84 
+ FF 0.603 0.637 t ( 164 ) = 5.2 2.9 e − 07 0.52 0.99 
+ DAT 0.801 0.753 t ( 159 ) = − 5.12 8.7 e − 07 0.77 0.99 
+ LLMs slightly outperform humans on the AUT and DAT, but humans slightly outperform LLMs on FF. However, the effect size for these is relatively small, confirming results from prior work showing relatively similar performance between humans and LLMs on creativity tests. Null hypothesis is μ ( O t ( LLM ) ) = μ ( O t ( Human ) ) ⁠ ; alternative is μ ( O t ( LLM ) ) > μ ( O t ( Human ) ) ⁠ .
+ Population-level response variability in human participants vs. LLMs
+ Next, we explore the main question: whether human participants and LLMs exhibit different population-level variability in creative outputs. Our key finding is that LLM responses exhibit much less variability, as measured by semantic distance between pairs of embedded responses, than do human responses. Fig. 3 and Table 2 show the distributions of V t ( LLM ) and V t ( Human ) ⁠ , e.g., cosine distances between embedded representations of responses from these populations. Both these views of the data confirm that LLM responses are much more similar to each other than are human participant responses. From this, we conclude that a population of LLMs produces more homogeneous outputs in response to creative prompts than a population of human participants.
+ Fig. 3.
+ Across all tests, LLMs have significantly lower mean population-level variability than humans. Panel A: population-level AUT variability. Panel B: population-level FF variability. Panel C: population-level DAT variability.
+ Open in new tab Download slide 
+ Table 2. 
+ Open in new tab
+ Statistical analysis of human vs. LLM response variability on creativity tasks.
+ Test 
+ . μ ( V t ( LLM ) ) 
+ . μ ( V t ( Human ) ) 
+ . Test statistic 
+ . p -value 
+ . Effect size 
+ . Test power 
+ . 
+ AUT 0.459 0.699 t ( 308 ) = 12.6 3.5 e − 30 1.8 1.0 
+ FF 0.518 0.642 t ( 66 ) = 5.6 1.8 e − 07 0.87 1.0 
+ DAT 0.632 0.791 t ( 13 ) = 3.0 0.005 1.1 0.9 
+ Test μ ( V t ( LLM ) ) μ ( V t ( Human ) ) Test statistic p -value Effect size Test power 
+ AUT 0.459 0.699 t ( 308 ) = 12.6 3.5 e − 30 1.8 1.0 
+ FF 0.518 0.642 t ( 66 ) = 5.6 1.8 e − 07 0.87 1.0 
+ DAT 0.632 0.791 t ( 13 ) = 3.0 0.005 1.1 0.9 
+ Null hypothesis is that μ ( V t ( LLM ) ) = μ ( V t ( Human ) ) ⁠ ; alternative is that μ ( V t ( LLM ) ) > μ ( V t ( Human ) ) ⁠ . The difference is statistically significant for all tests.
+ To further understand the overlap in LLM responses as compared to human participants, we visualize the sentence embeddings of AUT in Fig. 4 (DAT and FF are in Fig. S1 ). To do this, we conduct t-distributed stochastic neighbor embedding (TSNE) ( 65 ) analyses of the embeddings, which allows visualization of high-dimensional data (384 in our case) in two dimensions. For AUT and FF, we then color the TSNE results to identify sets of responses corresponding to the same AUT prompt object or FF starting word. For the DAT, where there is only one prompt type, we simply note human vs. LLM responses. This visualization confirms the behavior observed statistically: LLM responses “cluster” in feature space, providing further evidence of low LLM response variability.
+ Fig. 4.
+ LLM responses cluster together in feature space more than do human responses. TSNE of AUT sentence embeddings by response start word. LLM responses are bold dots; human responses are opaque dots.
+ Open in new tab Download slide 
+ Exploring causes and mitigations for LLM output homogeneity
+ Having established that LLMs produce more homogeneous creative outputs than human participants, we next explore several additional dimensions of this key finding. We find that the low response variability of LLMs can be partially explained through analysis of lexical patterns in LLM and human responses. We remove stopwords from responses, then count the number of word overlaps between sets of responses from LLMs and human participants—all AUT uses from a human/LLM, all words in a FF response, etc. As Fig. 5 shows, LLM responses tend to have many more words in common than human responses, across all tasks. This overlap at least partially accounts for the high semantic similarity between LLM responses, as the embedding process maps responses with overlapping words to similar feature vectors. Further exploration of lexical pattern differences between LLMs and humans participants is needed in future work.
+ Fig. 5.
+ LLM responses have far more words in common than do human responses. We look at word overlaps between “full” responses from LLMs and humans—e.g., all uses from the AUT, all words in the FF, etc. This corresponds to the sentence embedding method of population originality measurement and explains why the difference between LLMs and humans is more pronounced in this setting. Panel A: AUT response overlaps; Panel B: FF response overlaps; Panel C: DAT response overlaps.
+ Open in new tab Download slide 
+ Next, we demonstrate that LLM response homogeneity remains even after strictly controlling for structural differences in human and LLM responses. For both the DAT and FF tests, the response structure is fixed, making comparison of population-level variability straightforward. However, the AUT is more open-ended, so confounding variables such as differences in response structure (e.g., number of words, tense, etc.) between LLMs and human participants may impact measurements of response variability. For example, if every LLM AUT response is four words long and uses a gerund (e.g., “making” and “writing”), the measured similarity between LLM responses may be artificially inflated. Since we want to measure variability in the substance rather than the structure of responses, we must ensure that structural similarity does not impact our findings. Through carefully designed experiments, we demonstrate that the observed population-level difference in LLM and human response variability remains even after controlling for AUT response structure. For space reasons, this analysis can be found in the Supplementary material .
+ Next, we inspect whether models in the same “family” produce more homogenous responses than a baseline set of otherwise unrelated models. To do this, we measure the population-level variability of AUT responses from Llama model family: Meta Llama 3 70B Instruct , Meta Llama 3 8B Instruct , Meta Llama 3.1 405B Instruct , Meta Llama 31 70B Instruct , and Meta Llama 3.1 8B Instruct . Given the small number of models we are comparing, we add more AUT startwords to increase dataset size. These start words, modeled on prior AUT studies ( 62 ), are: book, bottle, brick, fork, hammer, pants, shoe, shovel, table, and tire. Fig. 6 shows population-level AUT originality distributions for unrelated LLMs vs. Llama models, and statistics comparing these distributions. This analysis reveals that models in the same “family” exhibit slightly lower response diversity than models from different “families.” Although the differences of means is not statistically significant (see Table 3 ), from visual inspection of histograms in Fig. 6 , we see that the sentence embedding distribution for Llama models is skewed right. The presence of these outliers drives up the overall Llama population mean, making it appear more similar to that of the regular LLMs. Future work is needed to examine other model families and explore other dimensions of family-specific similarity.
+ Fig. 6.
+ Models from the same “family” (Llama) have lower population-level creativity than models from different families. This can be seen in the leftward distribution shift of the Llama population differences compared to the all model population differences. However, because the Llama distribution is right-skewed, the distribution shift is not captured in a t test for differences of means in the sentence embedding case (Table 3 ). Histograms show the full set of response distances for all Llama models vs. models from distinct families.
+ Open in new tab Download slide 
+ Table 3. 
+ Open in new tab
+ t test for differences of means in population-level variability between all LLMs and LLMs from the same family.
+ μ ( V t ( LLM ) ) 
+ . μ ( V t ( Llama ) ) 
+ . Test statistic 
+ . P -value 
+ . Effect size 
+ . Test power 
+ . 
+ 0.491 0.429 t ( 23 ) = 0.85 0.199 0.36 0.04 
+ μ ( V t ( LLM ) ) μ ( V t ( Llama ) ) Test statistic P -value Effect size Test power 
+ 0.491 0.429 t ( 23 ) = 0.85 0.199 0.36 0.04 
+ Null hypothesis is that μ ( V t ( LLM ) ) = μ ( V t ( Llama ) ) ⁠ ; alternative is that μ ( V t ( LLM ) ) > μ ( V t ( Llama ) ) ⁠ .
+ Finally, we consider ways to make LLMs produce more variable creative outputs as a possible mitigation for the creative homogeneity we observe. We experiment with varying the temperature of the LLM response and the system prompt provided to the model. The temperature t is a variable ranging from 0 to 2 that shifts the probability distribution of output tokens that the model uses to form its response. At low t , models are more likely to choose high probability tokens, potentially making responses less creative and random. All prior experiments in the current study were run with T = 1.0 ⁠ , but here, we experiment with T = { 0.5 , 1.0 , 1.5 , 2.0 } ⁠ . As Fig. 7 and Table 4 show, increasing t does improve the population-level variability of LLM responses. However, this statistical result is somewhat misleading. We observed empirically that responses at T = 2.0 were largely gibberish. This is important as a creative idea is one that is both original and appropriate ( 14 ). Models would often start their response with somewhat sensible English responses to the prompt, then quickly devolve into nonsense. To create a set of data usable in our analysis, we culled LLM responses at T = 2.0 via two criteria: (i) removing non-English words and (ii) removing repeated outputs. Examples of nonedited LLM responses at T = 2.0 can be found in the Supplementary material .
+ Fig. 7.
+ Increasing temperature improves LLMs’ population-level variability in responses at the expense of lower response quality. Examples of LLM responses at various temperatures are shown in Supplementary material . Each panel shows population-level AUT variability at different temperatures: 0.5 (Panel A), 1.0 (Panel B), 1.5 (Panel C), and 2.0 (Panel D).
+ Open in new tab Download slide 
+ Table 4. 
+ Open in new tab
+ t test for differences of means in population-level variability as temperature increase.
+ Temperature 
+ . μ ( V t ( LLM ) ) 
+ . μ ( V t ( Human ) ) 
+ . Test statistic 
+ . P -value 
+ . Effect size 
+ . Test power 
+ . 
+ 0.5 0.418 0.699 t ( 287 ) = 11.9 2.3 e − 27 2.2 1.0 
+ 1.0 0.459 0.699 t ( 308 ) = 12.6 3.5 e − 30 1.8 1.0 
+ 1.5 0.544 0.699 t ( 278 ) = 5.6 1.9 e − 8 1.2 1.0 
+ 2.0 0.672 0.699 t ( 273 ) = 0.87 0.19 0.2 0.04 
+ Temperature μ ( V t ( LLM ) ) μ ( V t ( Human ) ) Test statistic P -value Effect size Test power 
+ 0.5 0.418 0.699 t ( 287 ) = 11.9 2.3 e − 27 2.2 1.0 
+ 1.0 0.459 0.699 t ( 308 ) = 12.6 3.5 e − 30 1.8 1.0 
+ 1.5 0.544 0.699 t ( 278 ) = 5.6 1.9 e − 8 1.2 1.0 
+ 2.0 0.672 0.699 t ( 273 ) = 0.87 0.19 0.2 0.04 
+ Null hypothesis is that μ ( V t ( LLM ) ) = μ ( V t ( Human ) ) ⁠ ; alternative is that μ ( V t ( LLM ) ) > μ ( V t ( Human ) ) ⁠ . Note that the majority of LLM responses at temperature 2.0 were unusable (see text for details), resulting in a low test power for this setting.
+ Finally, we consider whether modifying the LLM system prompt to strictly requesting creative outputs will induce higher variability without the gibberish observed at high temperatures. We experiment with prompts designed to elicit different levels of creativity:
+ Baseline : “You are a helpful assistant.”
+ More creative : “You are a creative assistant that always provides answers that demonstrate imaginative, outside-the-box thinking.”
+ Very creative : “You are a creative assistant that always provides answers that demonstrate imaginative, outside-the-box thinking. You are about to take a creativity assessment, and your answers should be as novel, original, and bold as possible. If you receive the highest score on this creativity assessment, you will receive $200.”
+ Not creative : “You are a robot assistant that always provides answers that are unoriginal, bland, and soulless. You are about to take a creativity assessment, and your answers should be as generic and unoriginal as possible.”
+ We evaluate LLMs on the AUT using these system prompts and report summary statistics in Table 5 . As the table shows, using more creative system prompts slightly increases individual creativity for LLMs. However, the system prompts does not substantially improve LLM response variability—across all prompts, LLM variability is much lower than that of humans.
+ Table 5. 
+ Open in new tab
+ Varying the system prompt slightly increases LLM individual creativity and response variability, but variability remains far lower than that of humans.
+ Prompt 
+ . Individual creativity 
+ . Population-level variability 
+ . 
+ μ ( O A U T ( P ) ) 
+ . t ( d f ) = X ⁠ , P (vs. humans) 
+ . μ ( V A U T ( P ) ) 
+ . t ( d f ) = X ⁠ , P (vs. humans) 
+ . 
+ Humans 0.695 – 0.699 – 
+ Baseline 0.711 t ( 2094 ) = − 3.4 ⁠ , 0.001 0.459 t ( 308 ) = 12.6 ⁠ , 3.5 e − 30 
+ More creative 0.733 t ( 5020 ) = − 9.8 ⁠ , 1.0 e − 22 0.503 t ( 308 ) = 10.6 , 7.8 e − 23 
+ Very creative 0.754 t ( 5206 ) = − 15.9 ⁠ , 3.2 e − 56 0.551 t ( 308 ) = 8.2 ⁠ , 4.4 e − 15 
+ Not creative 0.702 t ( 2507 ) = − 1.28 ⁠ , 0.1 0.477 t ( 308 ) = 11.4 ⁠ , 8.6 e − 26 
+ Prompt Individual creativity Population-level variability 
+ μ ( O A U T ( P ) ) t ( d f ) = X , P (vs. humans) μ ( V A U T ( P ) ) t ( d f ) = X , P (vs. humans) 
+ Humans 0.695 – 0.699 – 
+ Baseline 0.711 t ( 2094 ) = − 3.4 , 0.001 0.459 t ( 308 ) = 12.6 , 3.5 e − 30 
+ More creative 0.733 t ( 5020 ) = − 9.8 , 1.0 e − 22 0.503 t ( 308 ) = 10.6 , 7.8 e − 23 
+ Very creative 0.754 t ( 5206 ) = − 15.9 , 3.2 e − 56 0.551 t ( 308 ) = 8.2 , 4.4 e − 15 
+ Not creative 0.702 t ( 2507 ) = − 1.28 , 0.1 0.477 t ( 308 ) = 11.4 , 8.6 e − 26 
+ Discussion
+ Our study explores possible convergence in the creative outputs of large-scale LLMs across multiple creativity tasks. While prior studies have found that using LLMs can facilitate creative tasks ( 66 ), likely by facilitating a cocreative act ( 67 ), other studies have highlighted homogenization effects incurred by LLMs during creativity tasks ( 39 , 46 , 68 , 69 ). We test this by soliciting creative outputs from LLMs and human participants using standardized and commonly used creativity tasks—the AUT ( 61 ), FF ( 60 ), and the DAT ( 47 )—and measuring the population-level variability of responses. While caution should be used in extrapolating human-centric psychological tests to nonhuman entities ( 70 ), these tests are now widely used in assessing LLM creativity ( 71 ).
+ Mirroring prior work ( 9 ), we show that LLMs match or outperform humans on standard tasks of creativity. Yet, this finding of individual creativity is misleading because LLM responses to creative prompts are much more similar to each other than are human responses, even after controlling for LLM “family” overlap and differences in human/LLM response structure. Altering the LLM system prompt to encourage higher creativity slightly increases inter-LLM response variability , but human responses are still more variable. This result replicates, supports, and extends prior observations of LLM-induced homogeneity ( 39 , 40 , 46 , 72 ). Importantly, such prior work only considered the effect of specific LLMs on creative outputs. Thus, our current study strongly suggests that the use of LLMs in general may homogenize creative outputs.
+ Importantly, recent work highlights how individuals vary in their susceptibility to be impacted by potential homogenization effects by LLMs during performance in creative tasks ( 73–75 ). For example, Distefano et al. ( 73 ) demonstrate how individual differences, domain expertise, and creative thinking ability impact the success of human–AI creativity; Urban et al. ( 74 ) find that more creative individuals use more variable and complex prompts then less creative individuals when solving creative problems; and Mermert et al. ( 75 ) show how less creative individuals tend to over-rely on an LLM brainstorming tool compared to more creative individuals, which led to a reduction in ideas contributed by the less creative individuals. Conversely, Orwig et al. ( 76 ) examined how individual variability in creativity impacted prompts used to create AI-generated images, finding that more creative individuals generated richer prompts that led more creative AI-generated images. This further suggests that individual creativity differences influence the creativity of AI outputs in human–AI teaming. As people become more dependent on LLMs, their ideas and products are likely to become increasingly homogenized ( 39 , 43 , 68 , 69 ), regardless of the LLM they use . Such diminished variability of LLMs output could harm future thinking, especially when human creativity, flexibility, and adaptability are needed most.
+ Our results also have interesting implications for those who develop and deploy AI models. Although nascent work has observed similarity in feature representations among today’s large-scale LLMs ( 56 , 77 ), limited work has considered downstream consequences of LLM similarity. One work ( 78 ) examines question-answering bias of 10 LLMs across 4 “families” but finds little evidence of bias similarity among models. Another demonstrates jailbreak attacks that transfer between LLMs ( 79 ) but does not specifically leverage LLM similarity in attack development. Huh et al. ( 77 ) also postulated that large models will become more similar over time due to their design and objectives, suggesting the homogenization we observe may worsen over time. Those developing AI models can hopefully use this work as a springboard to motivate study of other homogeneous properties of AI models and develop appropriate mitigations.
+ Our work has several limitations. First, while we demonstrate LLM homogeneity in response to certain creativity tests, this does not prove that LLMs in general produce homogeneous outputs when asked to behave creatively. It merely indicates that future work should explore this subject. Additionally, we measure a single metric of divergent thinking or creativity—originality, as measured by semantic distance—and find that LLMs are homogeneous along this dimension. However, there are other well-known metrics of divergent thinking, such as flexibility, fluency, and elaboration, and LLMs may demonstrate more or less homogeneity along these dimensions. Future work should consider these alternatives.
+ Another limitation of our study is that we consider only LLMs served behind public APIs, rather than locally hosted models. Publicly hosted models typically undergo extensive alignment training to ensure compliance with company guidelines. Prior work has shown that aligned models perform worse on tests of creativity and randomness than baseline (e.g., unaligned) models ( 80 ). However, given the widespread use of hosted, aligned LLMs, we believe the results of our study remain relevant, though future work is needed to examine response diversity from unaligned LLMs.
+ Another issue is whether we can truly compare human and LLM performance on creativity tasks. Given our aim, it seems reasonable to test humans and LLMs using the AUT, FF, and DAT and then compare the population-level variability of their responses. However, it is an active area of debate as to whether psychological tests—including those of creativity—designed for humans are applicable to LLMs. Some argue that works probing LLM performance on these tasks is misguided due to fundamental differences between LLM and humans ( 46 , 70 , 81 ). Despite this disagreement, we believe creativity tasks administered to LLMs can be useful for our purposes, because we are not trying to measure inherent LLM creativity. Instead, we would like to understand the variability of LLM and human responses to creative prompts, which is an empirical rather than psychological trait. Well-trained LLMs should respond similarly to factual questions but not necessarily to creative prompts, so if there is indeed homogeneity in LLM outputs, creativity is the appropriate lens through which to evaluate this question.
+ Our results highlight a danger of relying on generative AI models as creative partners, particularly if LLMs are widely adopted as creativity support tools for writing, idea generation, or similar tasks ( 39 , 72 ). If all LLMs respond similarly to specific creative requests, then the population of users leveraging to LLMs to aid creativity will converge toward a limited set of creative outputs. In other words, LLM users may be self-limited from being exhibiting the divergent creativity that defined well-recognized artistic geniuses like Tolkein, Mozart, and Picasso because their LLM “creative” partners may collectively drive them toward a mean. Creativity thrives on heterogeneity of ideas, but today’s LLMs seem unable to provide these.
+ Given the rapidly evolving landscape of AI, a critical question based on our findings and past work is whether AI creativity is an engineering challenge that can be solved in the future. As empirical creativity research progresses in elucidating the cognitive building blocks of creativity—i.e., divergent thinking, associative thinking, memory, attention, cognitive control, analogical reasoning, etc.—can these building blocks be implemented in new LLMs to achieve a true creative artificial intelligence? Increasing understanding of the complexity of the creative process at the cognitive and neural levels ( 6 , 82 , 83 ), is advancing a mechanistic understanding of creativity that may one day be successfully implemented in AI ( 84 ). However, similar to the pursuit of artificial general intelligence ( 85 ), many challenges remain in reaching such an engineering implementation. Critically, whether such a goal can be achieved remains in question, given critical dimensions of creativity that center around authenticity, intentionality, context, embodiment, and individuality ( 86–89 ), dimensions that are not currently realistically possible in the current LLM landscape. Overall, while several cognitive mechanisms of creativity can be implemented in future LLMs (i.e., increased response variability), it remains unclear whether creativity in its comprehensive sense can ever be.
+ Materials and methods
+ Participants and procedures
+Human participants
+ We conducted an IRB-approved user study to collect human responses to creativity tests. a Study participants were recruited from the Prolific platform and were asked to complete the DAT, FF, and AUT creativity tasks. Exact wording of test questions can be found in the Supplementary information . It took participants 19 min on average to complete the survey, and they were compensated at a rate of $15/h. Participants completed the three tests in order: DAT, then FF, then AUT. Participant demographics are described in Table S1 . All participants completed a signed consent form before starting the study. We recruited 114 participants from the Prolific platform, screening for English fluency and an approval rating > 95 ⁠ . Of these, 12 were excluded on suspicion of being bots due to unusually short response times ( ⁠ < 5 min) or failed attention checks. Thus, the final dataset contains 102 human participants. Authors manually inspected responses to correct obvious misspellings.
+ The risk in relying on responses from online crowd workers is that they may themselves be bots or may leverage LLMs in crafting their responses, resulting in reduced response diversity ( 42 ). Prolific runs strict tests to ensure human responses, and we also used safeguards to prevent this, including attention tests and post hoc data inspection. However, the risk remains. Therefore, we confirm the validity of our survey responses by comparing them to public datasets of human responses to the AUT b , FF c , and DAT d from prior studies as a secondary validation dataset. These data are from creativity tests run in person before the rise of LLMs (around 2022), so they are unlikely to contain LLM responses.
+ We test both the individual originality and population-level variability of our human respondents versus prior study respondents and find that while respondents in prior studies score better individually on the tasks, respondents to our study exhibit equal or greater population-level variability (the more important metric for our study) on the more-informative AUT and FF tests. Our results roughly mirror those of prior studies, making them a reasonable baseline for our analysis. Details of our analysis are below.
+ Large language models
+ As a baseline, we test 22 LLMs with public APIs: https://docs.github.com/en/github-models/prototyping-with-ai-models and https://ai.google.dev/ : AI21-Jamba-Instruct , Cohere Command R, Cohere Command R Plus , Meta Llama 3 70B Instruct , Meta Llama 3 8B Instruct , Meta Llama 3.1 405B Instruct , Meta Llama 31 70B Instruct , Meta Llama 3.1 8B Instruct , Mistral large , Mistral large 2407 , Mistral Nemo, Mistral small , Google Gemini 1.5 , gpt 4o , gpt 4o mini , Phi 3 medium 128k instruct , Phi 3 medium 4k instruct , Phi 3 mini 128k instruct , Phi 3 mini 4k instruct , Phi 3 small 128k instruct , Phi 3 small 8k instruct, and Phi 3.5 mini instruct . Models in the same “family” (e.g., all Llamas, all GPTs, etc.) may generate unusually similar responses due to similarities in architecture, training data, or optimization techniques. To control for this, we restrict ourselves following subset of models when conducting statistical tests, which contains only one model from each “family”: AI21 Jamba 1.5 Large ( 90 ), Google Gemini 1.5 ( 91 ), Cohere Command R Plus ( 92 ), Meta Llama 3 70B Instruct ( 93 ), Mistral Large ( 94 ), gpt 4o ( 95 ), and Phi 3 medium 128k Instruct ( 96 ). All these models were trained by distinct entities, providing a reasonable independent baseline. When we explore how models within the same “family” behave, we use the Llama model family ( 93 ): Meta Llama 3 70B Instruct , Meta Llama 3 8B Instruct, Meta Llama 3.1 405B Instruct , Meta Llama 31 70B Instruct, Meta Llama 3.1 8B Instruct . We evaluate all models with the default system prompt of “You are a helpful assistant,” a default temperature of 1.0, and a default top-p of 1.0 unless otherwise indicated. Since human test respondents respond to one instance of the task with a particular startword at a given time, we ask LLMs to do the same. For example, we prompt an LLM to respond to the AUT with startword “book,” then we reprompt them to get their AUT response with the next startword “hammer.” We chose to elicit responses from LLMs this way, rather than eliciting multiple responses at once (e.g., prompting for AUT responses with all startwords) to most closely mimic human responses to these tests. Exact LLM prompt wording can be found in the Supplementary material .
+ After obtaining all model responses to all tests with all startwords in this one-by-one manner, we remove unnecessary punctuation and characters (e.g., numbered DAT outputs) by manual inspection to enable standardized, automated processing of the data. Less than 2 % of data were removed from LLM responses in this process.
+ Creativity assessment
+ We assess LLM and human performance on three creativity tasks. These tasks are commonly used in human creativity research and measure main cognitive capacities that realize creativity, namely divergent thinking and associative thinking ( 15 , 18 ).
+ Alternative uses task ( 61 ) is one of the most widely used in-lab creativity assessment tasks. It measures divergent thinking—a critical aspect of creativity ( 13 , 22 )—by presenting participants with an object and asking them to generate creative uses for it. Following established best practices ( 97 , 98 ), we test users with five common objects—book, fork, table, hammer, and pants. Using multiple starting objects reduces the effect of a particular object (e.g., book) on participant responses, ensuring results generalize ( 62 ). It also allows us to collect more data, given the limited number of LLMs we can evaluate relative to the number of possible human subjects.
+ Forward flow ( 60 ) measures the divergence of a user’s chain of thought from a fixed starting point based on their associative abilities ( 99 , 100 ), a general mechanism of creative thinking ( 15 ). It provides a starting prompt word and asks people to write down the next word that follows in their mind from the previous word for up to 20 words. We follow the original FF approach and run our study using five different start prompt words: candle, table, bear, snow, and toaster. As in the AUT, providing multiple creative stimuli ensures results generalize and gives us more data.
+ The divergent association task ( 47 ) asks participants to list 10 words that are as unrelated as possible. Higher semantic variety in this list is positively correlated with traditional metrics for creative thinking ( 31 , 47 ). These are subject to certain constraints: only nouns, no proper nouns, only single words in English, and the task must be completed in <4 min. The DAT provides a limited amount of information compared to the other tests, since the creative stimulus is not varied.
+ Evaluation metrics
+ The primary goal of this study is to evaluate the variability of LLM responses to creative prompts relative to that of humans. To do this, we compute the semantic similarity of responses in different populations (LLMs vs. humans) and compute distributional differences in similarity scores between populations. As a baseline, we also compare the originality of individual LLM responses to the tests relative to that of humans.
+ Traditionally, performance in the verbal creativity tasks we use was assessed via subjective ratings of external judges ( 24 ), or more general creative ability was assessed via self-report questionnaires ( 25 ). However, the introduction of computational tools to creativity assessment have significantly advanced creativity assessment in and outside of the lab ( 26–30 ). Such methods are based on using various computational models to quantify idea originality in open-ended creativity divergent thinking tasks, such as the AUT ( 26 , 28 ), or in associative thinking tasks ( 60 , 100 ). We leverage these computational methods in our work.
+ Scoring individual originality
+ Although divergent thinking tasks can be measured using multiple metrics ( 23 ), it has long been argued the originality of responses is the strongest indicator of creativity ( 34 ). Originality—how novel responses are relative to the given prompt(s)—can also easily be measured in an automated fashion by embedding prompts and responses in a mathematical feature space and measuring the cosine distance between the feature vectors ( 101 ). Prior work confirms that such automated analysis closely matches originality rankings of human scorers ( 62 ).
+ Our metrics for individual originality follow the guidelines of prior studies but use the automated evaluation methods of ( 62 ) and leverage the GloVe 840B model ( 102 ) to compute word embeddings. The format of each test necessitates different originality scoring procedures, described in detail below. Originality scores are denoted as O t ( P ) ⁠ , where t = AUT, FF, or DAT and P is a population, either humans or LLMs.
+ After computing originality scores, we then compare the distributions of O t ( LLM ) and O t ( Humans ) to measure differences in originality between the two groups. We do this by testing for statistically significant differences in μ ( O t ( LLM ) ) and μ ( O t ( Human ) ) using Welch’s t -test to compare differences in means, since the populations typically do not exhibit equal variance. We use a statistical significance threshold of ρ = 0.01 ⁠ . For all tests, the null hypothesis is that μ ( O t ( LLM ) ) = μ ( O t ( Human ) ) ⁠ , and the alternative is that μ ( O t ( LLM ) ) > μ ( O t ( Human ) ) ⁠ .
+ Scoring population-level variability
+ We measure the variability in responses to the creativity tasks from a given population by computing the semantic distances between sets of responses from individuals in the population (e.g., comparing the set of AUT uses produced by an LLM to that of another LLM). If many population members generate semantically similar sets of answers, this indicates that the response variability of the population is low, and vice versa if it is high. We denote the variability of a population P on test t as V t ( P ) ⁠ , the set of all similarity scores between all responses from all population members. As before, P refers to either LLMs or humans.
+ We use a sentence embedding model S to measure semantic similarity between responses. Sentence embedding models map sentences or short paragraphs to feature vectors and, similar to the word embedding model, map similar content to similar feature vectors. We compute elements of V t ( P ) by representing an individual’s responses to a certain test condition (e.g., all their AUT responses to a certain prompt) as a single, space-separated word string R and embedding this into a mathematical space via S ⁠ , producing S ( R ) ⁠ . We then take the cosine similarity between this vector and those of other population members to form V t ( P ) ⁠ :
+ V t ( P ) = { 1 − cos ( S ( R i p ) , S ( R i + 1 p ) ) , ∀ ( R i p , p ) ∈ P } , 
+ (1) 
+ where R i p , R j p denote the responses of two different population members to prompt p . Computing distances only between successive population members ensures the resulting distance dataset is independent and identically distributed (IID), a necessary condition to perform t -tests. In our experiments, we use all-MiniLM-L6-v2 from the sentence_transformers Python library ( 103 ), a high-performing and widely used model, to compute sentence embeddings. We remove punctuation and stopwords before computing embeddings.
+ V t ( P ) is composed of cosine distance scores, so if it skews toward 0, responses in the population are similar to each other. If it skews toward 1, they are more different, and therefore the population exhibits higher variability. Note that V t ( P ) only contains similarity scores of responses from different LLM/human subjects. We can then compare the statistical distributions of V t ( LLM ) and V t ( Humans ) to measure the relative response variability between these groups. We do this using the same statistical tests as before. For all tests, the null hypothesis is that μ ( V t ( LLM ) ) = μ ( V t ( Human ) ) ⁠ , and the alternative is that μ ( V t ( LLM ) ) > μ ( V t ( Human ) ) ⁠ .
+ For our statistical tests, we compare the means of two independent samples without assuming equal variance between the two populations, since computed statistics for the human and LLM response populations showed different variances for the two populations. When running a two-sample t -test of independent samples without the assumption of equal variance, one must use the Satterwaithe approximation to compute the effective degrees of freedom, which is given as:
+ ν = ( s 1 2 n 1 + s 2 2 n 2 ) 2 s 1 4 n 1 2 ( n 1 − 1 ) + s 2 4 n 2 2 ( n 2 − 1 ) , 
+ (2) 
+ where s 1 2 , s 2 2 are the sample variances of each population and n 1 , n 2 are the population sample sizes.
+ When reporting results of statistical t -tests, we use the standard APA format, reporting the degrees of freedom (DOF), test statistic X , and significance level y : t ( DOF ) = X , p = y ⁠ . For context, we also report the effect size, which is the difference between the means of the two populations divided by their pooled standard deviation. Cohen ( 104 ) defines small, medium, and large effect sizes as 0.2, 0.5, and 0.8, respectively. Finally, we report test power, the probability of correctly rejecting the null hypothesis.
+ Notes
+ a Duke University IRB 2025–0154
+ b https://osf.io/u3yv4 
+ c https://osf.io/7p5mt/ 
+ d https://osf.io/kbeq6/ 
+ Acknowledgments
+ The authors thank Austin Liu for helping them design system prompts.
+ Supplementary Material
+ Supplementary material is available at PNAS Nexus online.
+ Funding
+ This work was funded by Duke University.
+ Author Contributions
+ Emily Wenger (Conceptualization, Methodology, Investigation, Visualization, Funding acquisition, Project administration, Writing—original draft, Writing—review & editing) and Yoed N. Kenett (Conceptualization, Theory, Writing—review & editing)
+ Previous Presentation
+ These results have not been previously presented.
+ Preprints
+ A preprint of this article is published at https://arxiv.org/pdf/2501.19361? 
+ Data Availability
+ Data underlying this article and code to reproduce major figures presented in this article can be found at https://github.com/arguslab-duke/llms_are_homogeneous .
+ References
+ 1 Google
+ . 2024
+. Google and team USA - dear Sydney. https://www.youtube.com/watch?v=NgtHJKn0Mck .
+ 2 Apple intelligence — writing tools — iphone 16, 2024. https://www.youtube.com/watch?v=3m0MoYKwVTM .
+ 3 Use notion AI to write better, more efficient notes and docs, 2024. https://www.notion.com/help/guides/notion-ai-for-docs .
+ 4 Ellis
+ M
+ . 2024
+. How to use AI to enhance your storytelling process. https://www.grammarly.com/blog/writing-with-ai/ai-story-writing/ .
+ 5 Pandya
+ V
+ . 2024
+. The age of generative AI: over half of Americans have used generative AI and most believe it will help them be more creative. Adobe 
+.
+ 6 Runco
+ MA
+ , Turkman
+ B
+ , Acar
+ S
+ , Alabbasi
+ AMA
+ . 2025
+. Examining the idea density and semantic distance of responses given by AI to tests of divergent thinking
+. J Creat Behav
+. 59
+( 3
+): e1528
+.
+ Google Scholar 
+ Crossref 
+ Search ADS 
+ WorldCat 
+ 7 Raz
+ T
+ , Reiter-Palmon
+ R
+ , Kenett
+ YN
+ . 2024
+. Open and closed-ended problem solving in humans and AI: the influence of question asking complexity
+. Think Skills Creat
+. 53
+( 3
+): 101598
+.
+ Google Scholar 
+ OpenURL Placeholder Text 
+ WorldCat 
+ 8 Orwig
+ W
+ , Edenbaum
+ ER
+ , Greene
+ JD
+ , Schacter
+ DL
+ . 2024
+. The language of creativity: evidence from humans and large language models
+. J Creat Behav
+. 58
+( 1
+): 128
+– 136
+.
+ Google Scholar 
+ Crossref 
+ Search ADS 
+ PubMed 
+ WorldCat 
+ 9 Hubert
+ KF
+ , Awa
+ KN
+ , Zabelina
+ DL
+ . 2024
+. The current state of artificial intelligence generative language models is more creative than humans on divergent thinking tasks
+. Sci Rep
+. 14
+( 1
+): 3440
+.
+ Google Scholar 
+ Crossref 
+ Search ADS 
+ PubMed 
+ WorldCat 
+ 10 Byrge
+ C
+ , Guzik
+ EE
+ , Gilde
+ C
+ . 2025
+. Artificial intelligence and the creative process: does AI-creativity extend beyond divergent thinking?
+ J Creat
+. 35
+( 2
+): 100105
+.
+ Google Scholar 
+ Crossref 
+ Search ADS 
+ WorldCat 
+ 11 Gilhooly
+ K
+ . 2024
+. AI vs humans in the aut: simulations to LLMs
+. J Creat
+. 34
+( 1
+): 100071
+.
+ Google Scholar 
+ Crossref 
+ Search ADS 
+ WorldCat 
+ 12 Koivisto
+ M
+ , Grassini
+ S
+ . 2023
+. Best humans still outperform artificial intelligence in a creative divergent thinking task
+. Sci Rep
+. 13
+( 1
+): 13601
+.
+ Google Scholar 
+ Crossref 
+ Search ADS 
+ PubMed 
+ WorldCat 
+ 13 Green
+ AE
+ , Beaty
+ RE
+ , Kenett
+ YN
+ , Kaufman
+ JC
+ . 2024
+. The process definition of creativity
+. Creat Res J
+. 36
+( 3
+): 544
+– 572
+.
+ Google Scholar 
+ Crossref 
+ Search ADS 
+ WorldCat 
+ 14 Runco
+ MA
+ , Jaeger
+ GJ
+ . 2012
+. The standard definition of creativity
+. Creat Res J
+. 24
+( 1
+): 92
+– 96
+.
+ Google Scholar 
+ Crossref 
+ Search ADS 
+ WorldCat 
+ 15 Beaty
+ RE
+ , Kenett
+ YN
+ . 2023
+. Associative thinking at the core of creativity
+. Trends Cogn Sci
+. 27
+( 7
+): 671
+– 683
+.
+ Google Scholar 
+ Crossref 
+ Search ADS 
+ PubMed 
+ WorldCat 
+ 16 Benedek
+ M
+ , Christensen
+ AP
+ , Fink
+ A
+ , Beaty
+ RE
+ . 2019
+. Creativity assessment in neuroscience research
+. Psychol Aesthet Creat Arts
+. 13
+( 2
+): 218
+.
+ Google Scholar 
+ Crossref 
+ Search ADS 
+ WorldCat 
+ 17 Benedek
+ M
+ , Jauk
+ E
+ , Sommer
+ M
+ , Arendasy
+ M
+ , Neubauer
+ AC
+ . 2014
+. Intelligence, creativity, and cognitive control: the common and differential involvement of executive functions in intelligence and creativity
+. Intelligence
+. 46
+: 73
+– 83
+.
+ Google Scholar 
+ Crossref 
+ Search ADS 
+ PubMed 
+ WorldCat 
+ 18 Benedek
+ M
+ , Beaty
+ RE
+ , Schacter
+ DL
+ , Kenett
+ YN
+ . 2023
+. The role of memory in creative ideation
+. Nat Rev Psychol
+. 2
+( 4
+): 246
+– 257
+.
+ Google Scholar 
+ Crossref 
+ Search ADS 
+ WorldCat 
+ 19 Chrysikou
+ EG
+ . 2019
+. Creativity in and out of (cognitive) control
+. Curr Opin Behav Sci
+. 27
+: 94
+– 99
+.
+ Google Scholar 
+ Crossref 
+ Search ADS 
+ WorldCat 
+ 20 Kenett
+ YN
+ . 2025
+. The role of knowledge in creative thinking
+. Creat Res J
+. 37
+( 2
+): 242
+– 249
+.
+ Google Scholar 
+ Crossref 
+ Search ADS 
+ WorldCat 
+ 21 Acar
+ S
+ , Runco
+ MA
+ . 2019
+. Divergent thinking: new methods, recent research, and extended theory
+. Psychol Aesthet Creat Arts
+. 13
+( 2
+): 153
+– 158
+.
+ Google Scholar 
+ Crossref 
+ Search ADS 
+ WorldCat 
+ 22 Runco
+ MA
+ , Acar
+ S
+ . 2012
+. Divergent thinking as an indicator of creative potential
+. Creat Res J
+. 24
+( 1
+): 66
+– 75
+.
+ Google Scholar 
+ Crossref 
+ Search ADS 
+ WorldCat 
+ 23 Torrance
+ EP
+ . Torrance test of creative thinking
+. Scholastic Testing Service, Inc.
+, 1966
+.
+ Google Scholar 
+ Google Preview 
+ OpenURL Placeholder Text 
+ WorldCat 
+ COPAC 
+ 24 Silvia
+ PJ
+ , Wigert
+ B
+ , Reiter-Palmon
+ R
+ , Kaufman
+ JC
+ . 2012
+. Assessing creativity with self-report scales: a review and empirical evaluation
+. Psychol Aesthet Creat Arts
+. 6
+( 1
+): 19
+– 34
+.
+ Google Scholar 
+ Crossref 
+ Search ADS 
+ WorldCat 
+ 25 Kaufman
+ JC
+ . 2019
+. Self-assessments of creativity: not ideal, but better than you think
+. Psychol Aesthet Creat Arts
+. 13
+( 2
+): 187
+– 192
+.
+ Google Scholar 
+ Crossref 
+ Search ADS 
+ WorldCat 
+ 26 Beaty
+ RE
+ , Johnson
+ DR
+ . 2021
+. Automating creativity assessment with semdis: an open platform for computing semantic distance
+. Behav Res Methods
+. 53
+( 2
+): 757
+– 780
+.
+ Google Scholar 
+ Crossref 
+ Search ADS 
+ PubMed 
+ WorldCat 
+ 27 Kenett
+ YN
+ . 2019
+. What can quantitative measures of semantic distance tell us about creativity?
+ Curr Opin Behav Sci
+. 27
+: 11
+– 16
+.
+ Google Scholar 
+ Crossref 
+ Search ADS 
+ WorldCat 
+ 28 Organisciak
+ P
+ , Acar
+ S
+ , Dumas
+ D
+ , Berthiaume
+ K
+ . 2023
+. Beyond semantic distance: automated scoring of divergent thinking greatly improves with large language models
+. Think Skills Creat
+. 49
+( 1
+): 101356
+.
+ Google Scholar 
+ OpenURL Placeholder Text 
+ WorldCat 
+ 29 Patterson
+ JD
+ , et al. 2025
+. Cap: the creativity assessment platform for online testing and automated scoring
+. Behav Res Methods
+. 57
+( 9
+): 264
+.
+ Google Scholar 
+ Crossref 
+ Search ADS 
+ PubMed 
+ WorldCat 
+ 30 Rafner
+ J
+ , et al. 2022
+. Digital games for creativity assessment: strengths, weaknesses and opportunities
+. Creat Res J
+. 34
+( 1
+): 28
+– 54
+.
+ Google Scholar 
+ Crossref 
+ Search ADS 
+ WorldCat 
+ 31 Benedek
+ M
+ , Könen
+ T
+ , Neubauer
+ AC
+ . 2012
+. Associative abilities underlying creativity
+. Psychol Aesthet Creat Arts
+. 6
+( 3
+): 273
+– 281
+.
+ Google Scholar 
+ Crossref 
+ Search ADS 
+ WorldCat 
+ 32 Kenett
+ YN
+ . Creatively searching through semantic memory structure: a short integrative review. In: Ball
+ LJ
+ , Vallée-Tourangeau
+ F
+ , editors. The Routledge international handbook of creative cognition
+. Routledge
+; 2023
+. p. 160
+– 179
+.
+ Google Scholar 
+ Crossref 
+ Search ADS 
+ Google Preview 
+ WorldCat 
+ COPAC 
+ 33 Kenett
+ YN
+ . Assessing the role of associative abilities in creative thinking via behavioral, computational, and neuroscientific approaches. In: Acar
+ S
+ , Runco
+ MA
+ , editors. Handbook of creativity assessment
+. Elgar
+; 2024
+. p. 180
+– 196
+.
+ Google Scholar 
+ Google Preview 
+ OpenURL Placeholder Text 
+ WorldCat 
+ COPAC 
+ 34 Mednick
+ S
+ . 1962
+. The associative basis of the creative process
+. Psychol Rev
+. 69
+( 3
+): 220
+– 232
+.
+ Google Scholar 
+ Crossref 
+ Search ADS 
+ PubMed 
+ WorldCat 
+ 35 Faiella
+ A
+ , Zielińska
+ A
+ , Karwowski
+ M
+ , Corazza
+ GE
+ . 2025
+. Am I still creative? The effect of artificial intelligence on creative self-beliefs
+. J Creat Behav
+. 59
+( 2
+): e70011
+.
+ Google Scholar 
+ Crossref 
+ Search ADS 
+ WorldCat 
+ 36 Medeiros
+ K
+ , Cropley
+ DH
+ , Marrone
+ RL
+ , Reiter-Palmon
+ R
+ . 2025
+. Human-AI co-creativity: does ChatGPT make us more creative?
+ J Creat Behav
+. 59
+( 2
+): e70022
+.
+ Google Scholar 
+ Crossref 
+ Search ADS 
+ WorldCat 
+ 37 Runco
+ MA
+ . 2025
+. The misleading definition of creativity suggested by AI must be kept out of the classroom
+. Educ Sci (Basel)
+. 15
+( 9
+): 1141
+.
+ Google Scholar 
+ Crossref 
+ Search ADS 
+ WorldCat 
+ 38 Tang
+ M
+ , Hofreiter
+ S
+ , Werner
+ CH
+ , Zielińska
+ A
+ , Karwowski
+ M
+ . 2025
+. “Who” is the best creative thinking partner? An experimental investigation of human–human, human–internet, and human–AI co-creation
+. J Creat Behav
+. 59
+( 3
+): e1519
+.
+ Google Scholar 
+ Crossref 
+ Search ADS 
+ WorldCat 
+ 39 Doshi
+ AR
+ , Hauser
+ OP
+ . 2024
+. Generative AI enhances individual creativity but reduces the collective diversity of novel content
+. Sci Adv
+. 10
+( 28
+): eadn5290
+.
+ Google Scholar 
+ Crossref 
+ Search ADS 
+ PubMed 
+ WorldCat 
+ 40 Moon
+ K
+ , Green
+ AE
+ , Kushlev
+ K
+ . 2025
+. Homogenizing effect of large language models (LLMs) on creative diversity: an empirical comparison of human and ChatGPT writing
+. Comput Human Behav Artif Humans
+. 6
+: 100207
+.
+ Google Scholar 
+ Crossref 
+ Search ADS 
+ WorldCat 
+ 41 Si
+ C
+ , Yang
+ D
+ , Hashimoto
+ T
+ . 2024
+. Can LLMs generate novel research ideas? A large-scale human study with 100+ NLP researchers [preprint]
+, arXiv 2024, arXiv:2409.04109. 10.48550/arXiv:2409.04109 
+ 42 Zhang
+ S
+ , Xu
+ J
+ , Alvero
+ A
+ . 2024
+. Generative AI meets open-ended survey responses: participant use of AI and homogenization. OSF 
+.
+ 43 Anderson
+ BR
+ , Shah
+ JH
+ , Kreminski
+ M
+ . Homogenization effects of large language models on human creative ideation. In: Proceedings of the 16th Conference on Creativity & Cognition . Association for Computing Machinery; 2024. p. 413–425
+.
+ 44 Zhou
+ E
+ , Lee
+ D
+ . 2024
+. Generative artificial intelligence, human creativity, and art
+. PNAS Nexus
+. 3
+( 3
+): pgae052
+.
+ Google Scholar 
+ Crossref 
+ Search ADS 
+ PubMed 
+ WorldCat 
+ 45 Jain
+ S
+ , et al. 2025
+. Llm output homogenization is task dependent [preprint]
+, arXiv 2025, arXiv:2509.21267. 10.48550/arXiv:2509.21267 
+ 46 Cropley
+ D
+ . 2023
+. Is artificial intelligence more creative than humans? ChatGPT and the divergent association task
+. Learn Lett
+. 2
+: 13
+– 13
+.
+ Google Scholar 
+ Crossref 
+ Search ADS 
+ WorldCat 
+ 47 Olson
+ JA
+ , Nahas
+ J
+ , Chmoulevitch
+ D
+ , Cropper
+ SJ
+ , Webb
+ ME
+ . 2021
+. Naming unrelated words predicts creativity
+. Proc Natl Acad Sci U S A
+. 118
+( 25
+): e2022340118
+.
+ Google Scholar 
+ Crossref 
+ Search ADS 
+ PubMed 
+ WorldCat 
+ 48 Hills
+ TT
+ , Kenett
+ YN
+ . 2025
+. An entropy modulation theory of creative exploration
+. Psychol Rev
+. 132
+( 1
+): 239
+– 251
+.
+ Google Scholar 
+ Crossref 
+ Search ADS 
+ PubMed 
+ WorldCat 
+ 49 Simonton
+ DK
+ . 2023
+. The blind-variation and selective-retention theory of creativity: recent developments and current status of BVSR
+. Creat Res J
+. 35
+( 3
+): 304
+– 323
+.
+ Google Scholar 
+ Crossref 
+ Search ADS 
+ WorldCat 
+ 50 Sucholutsky
+ I
+ , et al. 2023
+. Getting aligned on representational alignment [preprint]
+, arXiv 2023, arXiv:2310.13018. 10.48550/arXiv:2310.13018 
+ 51 Kornblith
+ S
+ , Norouzi
+ M
+ , Lee
+ H
+ , Hinton
+ G
+ . Similarity of neural network representations revisited. In: International Conference on Machine Learning . PMLR; 2019. p. 3519–3529
+.
+ 52 Lenc
+ K
+ , Vedaldi
+ A
+ . Understanding image representations by measuring their equivariance and equivalence. In: Proceedings of CVPR . IEEE Computer Society; 2015
+.
+ 53 Liang R, Li T, Li L, Wang J, Zhang Q. 2019. Knowledge consistency between neural networks and beyond [preprint], arXiv 2019, arXiv:1908.01581.
+ 54 Bansal
+ Y
+ , Nakkiran
+ P
+ , Barak
+ B
+ . Revisiting model stitching to compare neural representations. In: Proceedings of NeurIPS . Curran Associates, Inc.; 2021
+.
+ 55 Lan
+ M
+ , et al. 2024
+. Sparse autoencoders reveal universal feature spaces across large language models [preprint]
+, arXiv 2024, arXiv:2410.06981. 10.48550/arXiv:2410.06981 
+ 56 Klabunde
+ M
+ , Ben Amor
+ M
+ , Granitzer
+ M
+ , Lemmerich
+ F
+ . Towards measuring representational similarity of large language models. In: UniReps: the first workshop on unifying representations in neural models . 2023
+; Proceedings of Machine Learning Research (PMLR).
+ 57 Boers
+ J
+ , Etty
+ T
+ , Baars
+ M
+ , van Boekhoven
+ K
+ . 2025
+. Exploring cognitive strategies in human-AI interaction: ChatGPT’s role in creative tasks
+. J Creat
+. 35
+( 1
+): 100095
+.
+ Google Scholar 
+ Crossref 
+ Search ADS 
+ WorldCat 
+ 58 Kleinberg
+ J
+ , Raghavan
+ M
+ . 2021
+. Algorithmic monoculture and social welfare
+. Proc Natl Acad Sci U S A
+. 118
+( 22
+): e2018340118
+.
+ Google Scholar 
+ Crossref 
+ Search ADS 
+ PubMed 
+ WorldCat 
+ 59 Bommasani
+ R
+ , Creel
+ KA
+ , Kumar
+ A
+ , Jurafsky
+ D
+ , Liang
+ PS
+ . 2022
+. Picking on the same person: does algorithmic monoculture lead to outcome homogenization?
+ Adv Neural Inf Process Syst
+. 35
+: 3663
+– 3678
+.
+ Google Scholar 
+ OpenURL Placeholder Text 
+ WorldCat 
+ 60 Gray
+ K
+ , et al. 2019
+. “Forward flow”: a new measure to quantify free thought and predict creativity
+. Am Psychol
+. 74
+( 5
+): 539
+.
+ Google Scholar 
+ Crossref 
+ Search ADS 
+ PubMed 
+ WorldCat 
+ 61 Guilford
+ JP
+ , Christensen
+ PR
+ , Merrifield
+ PR
+ , Wilson
+ RC
+ . 1978
+. Alternate uses
+.
+ 62 Dumas
+ D
+ , Organisciak
+ P
+ , Doherty
+ M
+ . 2021
+. Measuring divergent thinking originality with human raters and text-mining models: a psychometric comparison of methods
+. Psychol Aesthet Creat Arts
+. 15
+( 4
+): 645
+– 663
+.
+ Google Scholar 
+ Crossref 
+ Search ADS 
+ WorldCat 
+ 63 Runco
+ MA
+ , Turkman
+ B
+ , Acar
+ S
+ , Alabbasi
+ AMA
+ . 2025
+. Examining the idea density and semantic distance of responses given by AI to tests of divergent thinking
+. J Creat Behav
+. 59
+( 3
+): e1528
+.
+ Google Scholar 
+ Crossref 
+ Search ADS 
+ WorldCat 
+ 64 Saretzki
+ J
+ , Andrae
+ R
+ , Forthmann
+ B
+ , Benedek
+ M
+ . 2025
+. Investigation of response aggregation methods in divergent thinking assessments
+. J Creat Behav
+. 59
+( 3
+): e1527
+.
+ Google Scholar 
+ Crossref 
+ Search ADS 
+ WorldCat 
+ 65 Van der Maaten
+ L
+ , Hinton
+ G
+ . 2008
+. Visualizing data using t-SNE
+. J Mach Learn Res
+. 9
+( 11
+): 2579
+– 2605
+.
+ Google Scholar 
+ OpenURL Placeholder Text 
+ WorldCat 
+ 66 Lee
+ BC
+ , Chung
+ J
+ . 2024
+. An empirical investigation of the impact of ChatGPT on creativity
+. Nat Hum Behav
+. 8
+( 10
+): 1906
+– 1914
+.
+ Google Scholar 
+ Crossref 
+ Search ADS 
+ PubMed 
+ WorldCat 
+ 67 Rafner
+ J
+ , Beaty
+ RE
+ , Kaufman
+ JC
+ , Lubart
+ T
+ , Sherson
+ J
+ . 2023
+. Creativity in the age of generative AI
+. Nat Hum Behav
+. 7
+( 11
+): 1836
+– 1838
+.
+ Google Scholar 
+ Crossref 
+ Search ADS 
+ PubMed 
+ WorldCat 
+ 68 Laak
+ K-J
+ , Abdelghani
+ R
+ , Aru
+ J
+ . Personalisation is not guaranteed: the challenges of using generative AI for personalised learning. In: International Conference on Innovative Technologies and Learning . Springer; 2024. p. 40–49
+.
+ 69 Riedl
+ C
+ , Bogert
+ E
+ . 2024
+. Effects of AI feedback on learning, the skill gap, and intellectual diversity [preprint], arXiv 2024, arXiv:2409.18660
+. 10.48550/arXiv:2409.18660 
+ 70 Stella
+ M
+ , Hills
+ TT
+ , Kenett
+ YN
+ . 2023
+. Using cognitive psychology to understand GPT-like models needs to extend beyond human biases
+. Proc Natl Acad Sci U S A
+. 120
+( 43
+): e2312911120
+.
+ Google Scholar 
+ Crossref 
+ Search ADS 
+ PubMed 
+ WorldCat 
+ 71 Ismayilzada
+ M
+ , Paul
+ D
+ , Bosselut
+ A
+ , van der Plas
+ L
+ . 2024
+. Creativity in AI - progresses and challenges [preprint], arXiv 2024, arXiv:2410.17218
+. 10.48550/arXiv:2410.17218 
+ 72 Moon
+ K
+ , Kushlev
+ K
+ , Bank
+ A
+ , Green
+ A
+ . 2025
+. Impersonal statements: LLM-era college admissions essays exhibit deep homogenization despite lexical diversity. OSF 
+.
+ 73 DiStefano
+ PV
+ , et al. 2025
+. Evaluating AI’s ideas: the role of individual creativity and expertise in human-AI co-creativity. OSF 
+.
+ 74 Urban
+ M
+ , et al. 2025
+. How students prompt ChatGPT for creative problem-solving: process mining of hybrid human-AI regulation. OSF 
+.
+ 75 Memmert
+ L
+ , Mies
+ J
+ , Bittner
+ E
+ . Brainstorming with a generative language model - the role of creative ability and tool-support for brainstorming performance. In: Proceedings of 45th International Conference on Information Systems (ICIS) . Association for Information Systems (AIS); 2024
+.
+ 76 Orwig
+ W
+ , et al. 2026
+. Using AI to generate visual art: do individual differences in creativity predict AI-assisted art quality?
+ Creat Res J
+. 38
+: 242
+– 253
+.
+ Google Scholar 
+ Crossref 
+ Search ADS 
+ WorldCat 
+ 77 Huh
+ M
+ , Cheung
+ B
+ , Wang
+ T
+ , Isola
+ P
+ . 2024
+. The platonic representation hypothesis [preprint], arXiv 2024, arXiv:2405.07987
+. 10.48550/arXiv:2405.07987 
+ 78 Jeong
+ H
+ , Ma
+ S
+ , Houmansadr
+ A
+ . 2024
+. Bias similarity across large language models [preprint], arXiv 2024, arXiv:2410.12010
+. 10.48550/arXiv:2410.12010 
+ 79 Zou
+ A
+ , et al. 2023
+. Universal and transferable adversarial attacks on aligned language models [preprint], arXiv 2023, arXiv:2307.15043
+. 10.48550/arXiv:2307.15043 
+ 80 West
+ P
+ , Potts
+ C
+ . Base models beat aligned models at randomness and creativity. In: Second Conference on Language Modeling . The COLM community; 2025
+.
+ 81 Gupta
+ A
+ , Song
+ X
+ , Anumanchipalli
+ G
+ . Self-assessment tests are unreliable measures of LLM personality. In: Proceedings of the 7th BlackboxNLP Workshop: Analyzing and Interpreting Neural Networks for NLP . Association for Computational Linguistics (ACL). p. 301–314
+.
+ 82 Aru
+ J
+ . 2025
+. Artificial intelligence and the internal processes of creativity
+. J Creat Behav
+. 59
+( 2
+): e1530
+.
+ Google Scholar 
+ Crossref 
+ Search ADS 
+ WorldCat 
+ 83 Seiler
+ J-P
+ , et al. 2025
+. Towards circuit mechanisms of the creative process: describing the functions, mechanisms and neural correlates of creativity
+.
+ 84 Ismayilzada
+ M
+ , et al. 2025
+. Creative preference optimization [preprint], arXiv 2025, arXiv:2505.14442
+. 10.48550/arXiv:2505.14442 
+ 85 Mumuni
+ A
+ , Mumuni
+ F
+ . 2025
+. Large language models for artificial general intelligence (AGI): a survey of foundational principles and approaches
+.
+ 86 Abraham
+ A
+ . 2022
+. Creativity or creativities? Why context matters
+. Des Stud
+. 78
+( 1
+): 101060
+.
+ Google Scholar 
+ OpenURL Placeholder Text 
+ WorldCat 
+ 87 Abraham
+ A
+ . 2025
+. Why the standard definition of creativity fails to capture the creative act
+. Theory Psychol
+. 35
+( 1
+): 40
+– 60
+.
+ Google Scholar 
+ Crossref 
+ Search ADS 
+ WorldCat 
+ 88 Runco
+ MA
+ . 2024
+. The discovery and innovation of AI does not qualify as creativity
+. J Cogn Psychol
+. 1
+– 10
+.
+ Google Scholar 
+ OpenURL Placeholder Text 
+ WorldCat 
+ 89 Vallée-Tourangeau
+ F
+ . 2025
+. The One-I model of creativity: a commentary on Green et al. (2024)
+. Creat Res J
+. 1
+– 6
+.
+ Google Scholar 
+ OpenURL Placeholder Text 
+ WorldCat 
+ 90 Team
+ J
+ , et al. 2024
+. Jamba-1.5: hybrid transformer-mamba models at scale [preprint], arXiv 2024, arXiv:2408.12570
+. 10.48550/arXiv:2408.12570 
+ 91 Team
+ G
+ , et al. 2024
+. gemini 1.5: unlocking multimodal understanding across millions of tokens of context [preprint], arXiv 2024, arXiv:2403.05530
+. 10.48550/arXiv:2403.05530 
+ 92 Command r and command r plus model card, 2024. https://docs.cohere.com/docs/responsible-use .
+ 93 Dubey
+ A
+ , et al. 2024
+. The llama 3 herd of models [preprint], arXiv 2024, arXiv:2407.21783
+. 10.48550/arXiv:2407.21783 
+ 94 Jiang
+ AQ
+ , et al. 2023
+. mistral 7b [preprint], arXiv 2023, arXiv:2310.06825
+. 10.48550/arXiv:2310.06825 
+ 95 Achiam
+ J
+ , et al. 2023
+. gpt-4 technical report [preprint], arXiv 2023, arXiv:2303.08774
+. 10.48550/arXiv:2303.08774 
+ 96 Abdin
+ M
+ , et al. 2024
+. phi-3 technical report: a highly capable language model locally on your phone [preprint], arXiv 2024, arXiv:2404.14219
+. 10.48550/arXiv:2404.14219 
+ 97 Dumas
+ D
+ , Dunbar
+ KN
+ . 2014
+. Understanding fluency and originality: a latent variable perspective
+. Think Skills Creat
+. 14
+: 56
+– 67
+.
+ Google Scholar 
+ Crossref 
+ Search ADS 
+ WorldCat 
+ 98 Barbot
+ B
+ . 2018
+. The dynamics of creative ideation: introducing a new assessment paradigm
+. Front Psychol
+. 9
+: 2529
+.
+ Google Scholar 
+ Crossref 
+ Search ADS 
+ PubMed 
+ WorldCat 
+ 99 Merseal
+ HM
+ , et al. 2025
+. Free association ability distinguishes highly creative artists from scientists: findings from the big-c project
+. Psychol Aesthet Creat Arts
+. 18
+( 3
+): 495
+– 504
+.
+ Google Scholar 
+ OpenURL Placeholder Text 
+ WorldCat 
+ 100 Beaty
+ RE
+ , Zeitlen
+ DC
+ , Baker
+ BS
+ , Kenett
+ YN
+ . 2021
+. Forward flow and creative thought: assessing associative cognition and its role in divergent thinking
+. Think Skills Creat
+. 41
+( 1
+): 100859
+.
+ Google Scholar 
+ OpenURL Placeholder Text 
+ WorldCat 
+ 101 Beaty
+ RE
+ , Silvia
+ PJ
+ , Nusbaum
+ EC
+ , Jauk
+ E
+ , Benedek
+ M
+ . 2014
+. The roles of associative and executive processes in creative cognition
+. Mem Cognit
+. 42
+: 1186
+– 1197
+.
+ Google Scholar 
+ Crossref 
+ Search ADS 
+ PubMed 
+ WorldCat 
+ 102 Pennington
+ J
+ , Socher
+ R
+ , Manning
+ CD
+ . Glove: global vectors for word representation. In: Empirical methods in natural language processing (EMNLP) . Association for Computational Linguistics (ACL); 2014. p. 1532–1543
+.
+ 103 Reimers
+ N
+ , Gurevych
+ I
+ . Sentence-BERT: sentence embeddings using Siamese BERT-networks. In: Proc. of EMNLP . Association for Computational Linguistics (ACL); 2019
+.
+ 104 Cohen
+ J.
+ A power primer. In Kazdin AW, editor. Methodological issues and strategies in clinical research. 4th ed. American Psychological Association; 2016. p. 279–284. 10.1037/14805-018 
+ Author notes
+ Competing Interest: The authors declare no competing interests.
+ © The Author(s) 2026. Published by Oxford University Press on behalf of National Academy of Sciences.
+ This is an Open Access article distributed under the terms of the Creative Commons Attribution-NonCommercial License ( https://creativecommons.org/licenses/by-nc/4.0/ ), which permits non-commercial re-use, distribution, and reproduction in any medium, provided the original work is properly cited. For commercial re-use, please contact [email protected] for reprints and translation rights for reprints. All other permissions can be obtained through our RightsLink service via the Permissions link on the article page on our site—for further information please contact [email protected] .
+ Subject
+ Computer Sciences 
+ Psychological and Cognitive Sciences (Social and Political Sciences) 
+ Issue Section:
+ Physical Sciences and Engineering 
+ > 
+ Computer Sciences 
+ Collection: 
+ NAS Journals 
+ Editor: 
+ Frederick Chang 
+ Frederick Chang
+ Editor
+ Search for other works by this author on:
+ Oxford Academic 
+ Google Scholar 
+ Download all slides 
+ Supplementary data 
+ Supplementary data
+ pgag042_Supplementary_Data - pdf file
+ Comments
+ 0 Comments
+ Comments (0) 
+ Add comment 
+ Close comment form modal 
+ I agree to the terms and conditions. 
+ You must accept the terms and conditions.
+ Add comment 
+ Cancel 
+ Submit a comment
+ Name 
+ Affiliations 
+ Comment title 
+ Comment 
+ You have entered an invalid code
+ Submit 
+ Cancel 
+ Thank you for submitting a comment on this article. Your comment will be reviewed and published at the journal's discretion. Please check for further notifications by email.
+ Advertisement
+ Citations
+ Views
+ 8,959
+ Altmetric
+ More metrics information 
+ Metrics
+ Total Views 
+ 8,959 
+ 7,674 
+ Pageviews 
+ 1,285 
+ PDF Downloads 
+ Since 3/1/2026
+ Month: 
+ Total Views: 
+ March 2026 
+ 1,095 
+ April 2026 
+ 2,514 
+ May 2026 
+ 2,499 
+ June 2026 
+ 1,147 
+ July 2026 
+ 1,004 
+ August 2026 
+ 700 
+ Citations
+ Powered by Dimensions 
+ 4 
+ Web of Science 
+ Altmetrics
+ × 
+ Close Modal 
+ Email alerts
+ New journal issues
+ New journal articles
+ Activity related to this article
+ Sign up for marketing 
+ New journal issues alert
+ To set up an email alert, please sign in to your personal account, or register 
+ Sign in
+ Personal account
+ Sign in with email/username & password
+ Get email alerts
+ Save searches
+ Purchase content
+ Activate your purchase/trial code
+ Add your ORCID iD
+ Sign in 
+ Register 
+ Journal article activity alert
+ To set up an email alert, please sign in to your personal account, or register 
+ Sign in
+ Personal account
+ Sign in with email/username & password
+ Get email alerts
+ Save searches
+ Purchase content
+ Activate your purchase/trial code
+ Add your ORCID iD
+ Sign in 
+ Register 
+ Close Modal 
+ Citing articles via
+ Web of Science (4) 
+ Google Scholar 
+ New and popular articles
+ Latest 
+ Most Read 
+ Most Cited 
+Still very much dead and alive: Incoherence in conspiracism as a departure from Bayesian rationality 
+Like humans, language models demonstrate face-to-character biases 
+Modeling infodemics on a global scale: A 30 countries study using epidemiological and social listening data 
+The fallopian tube: Biosensor and dynamic regulator of preimplantation development 
+Diffusive buckling fronts in lattice-based metamaterials 
+ More from Oxford Academic
+ Medicine and Health 
+ Science and Mathematics 
+ Social Sciences 
+ Books 
+ Journals 
+ Advertisement
+ Advertisement
+ close advertisement 
+ Advertisement
+ About PNAS Nexus 
+ Editorial Board 
+ Author guidelines 
+ Bluesky 
+ X (formerly Twitter) 
+ PNAS Nexus Google Search Profile 
+ LinkedIn 
+ ResearchGate 
+ Facebook 
+ Contact PNAS Nexus 
+ Advertising and Corporate Services 
+ Journals Career Network 
+ Online ISSN 2752-6542
+ Copyright © 2026 National Academy of Sciences
+ About Oxford Academic 
+ Publish journals with us 
+ University press partners 
+ What we publish 
+ New features 
+ For authors 
+ Open access 
+ Purchasing 
+ Institutional account management 
+ Rights and permissions 
+ Get help with access 
+ Accessibility 
+ Contact us 
+ Advertising 
+ Media enquiries 
+ Oxford University Press 
+ News 
+ Oxford Languages 
+ University of Oxford 
+ Oxford University Press is a department of the University of Oxford. It furthers the University's objective of excellence in research, scholarship, and education by publishing worldwide
+ Copyright © 2026 Oxford University Press
+ Cookie settings 
+ Cookie policy 
+ Privacy policy 
+ Legal notice 
+ Close 
+ Close 
+ This Feature Is Available To Subscribers Only
+ Sign In or Create an Account 
+ Close 
+ This PDF is available to Subscribers Only
+ View Article Abstract & Purchase Options 
+ For full access to this pdf, sign in to an existing account, or purchase an annual subscription.
+ Close 
+ Gift article access
+ As a benefit of your subscription, you can share temporary access to restricted articles.
+ Each link will stop working after 30 days or 10 uses. You may create up to 10 links in a 30 day period.
+ Please sign in to your personal account to gift article access.
+ Sign in 
+ Register 
+ Gift article access
+ Please create a link below to share with others. This will provide temporary access to this restricted article.
+ The link will stop working after 30 days or 10 uses. You may create up to 10 links in a 30 day period.
+ Gift articles remaining: -- 
+ Create gift link 
+ Gift article access
+ The link will stop working after 30 days or 10 uses. You may create up to 10 links in a 30 day period.
+ Gift articles remaining: -- 
+ Copy link 
+ Copied! 
+ Gift article access
+ As a benefit of your subscription, you can share temporary access to restricted articles.
+ Each link will stop working after 30 days or 10 uses.
+ You have reached the limit of 10 links within a 30 day period
+ Ad
+ × 
+ 

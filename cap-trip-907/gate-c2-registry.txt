@@ -1,0 +1,9 @@
+
+ RUN  v4.1.11 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/laneB6
+
+
+ Test Files  1 passed (1)
+      Tests  9 passed (9)
+   Start at  01:10:05
+   Duration  184ms (transform 40ms, setup 26ms, import 41ms, tests 15ms, environment 0ms)
+

@@ -1,0 +1,15 @@
+gate green · tests=32584
+INFO ratchet register totalTests=32584 totalFiles=2509 entries=3
+PASS ratchet register totalTests == the gate line — (32584, '32584')
+CHAIR-VERIFY GREEN
+CAS OK: product=f73bdbf16 · sealed landing-rewrite-8a-2026-09-09 · cars since ca651d54b=476
+ docs/FABLE_RETROVALIDATION_QUEUE.md | 4 ++++
+ docs/HANDOFF_CURRENT.md             | 6 +++++-
+ docs/OWNER_DECISION_QUEUE.md        | 1 +
+ 3 files changed, 10 insertions(+), 1 deletion(-)
+  ODQ §919 rows: 1
+  FRQ R-rows: 82  (new R-rows: 82)
+  seat trailer Fable (must be 1): 1
+COLLECT_919_OK tip=d7f4c6b0e
+DONE:
+  d7f4c6b0e §919: the REWRITE train's first car lands — the index-stable draw signed (59.61 % of cells re-i

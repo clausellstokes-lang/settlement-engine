@@ -1,0 +1,22 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 181,
+ "firstTs": "2026-09-10T04:03:31.044Z",
+ "lastTs": "2026-09-10T04:19:05.952Z",
+ "tools": {
+  "Bash": 27,
+  "Read": 28,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "The dock is clean at `f2da5a3ee` (zero porcelain lines) and the packet is at the required path. Returning the structured verdicts.",
+ "run": "wf_8ca05b10-e44",
+ "agent": "af8e6e77078190fff",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/67af10e4-7386-48d4-8cd3-b2985d4885c2/subagents/workflows/wf_8ca05b10-e44/agent-af8e6e77078190fff.jsonl",
+ "journal": "result",
+ "checkpointFile": null
+}

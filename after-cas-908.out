@@ -1,0 +1,15 @@
+gate green · tests=31979
+INFO ratchet register totalTests=31979 totalFiles=2489 entries=3
+PASS ratchet register totalTests == the gate line — (31979, '31979')
+CHAIR-VERIFY GREEN
+CAS OK: product=6ebe0ef3b · sealed landing-captrip-2026-09-07 · cars since ca651d54b=322
+ docs/FABLE_RETROVALIDATION_QUEUE.md | 4 ++++
+ docs/HANDOFF_CURRENT.md             | 8 +++++++-
+ docs/OWNER_DECISION_QUEUE.md        | 3 +++
+ 3 files changed, 14 insertions(+), 1 deletion(-)
+  ODQ §908 rows: 1
+  FRQ R-rows: 72  (new R-rows: 72)
+  seat trailer Fable (must be 1): 1
+COLLECT_908_OK tip=64735cb34
+DONE:
+  64735cb34 §908: the capacity tripwires are made honest — CAP-TRIP-907 lands as nine cars over 4243bdc61: 

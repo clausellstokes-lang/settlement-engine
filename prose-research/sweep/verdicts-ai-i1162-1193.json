@@ -1,0 +1,234 @@
+{
+ "name": "ai",
+ "chunk": 7,
+ "claims": [
+  {
+   "index": 1162,
+   "feature": "other: first-hand observation as the boundary",
+   "claim": "Lonely Planet's editorial policy states that AI does not and cannot do the on-the-ground reporting work the brand rests on.",
+   "source": "Lonely Planet, Editorial Policy on AI (vendor page, fetched 6 September 2026)",
+   "url": "https://www.lonelyplanet.com/legal/ai-policy",
+   "quote": "AI does not and cannot do that work",
+   "page": "opening paragraph"
+  },
+  {
+   "index": 1163,
+   "feature": "other: first-hand observation as the boundary",
+   "claim": "The same policy states the publisher does not use AI to create original editorial reporting, recommendations, reviews or destination expertise.",
+   "source": "Lonely Planet, Editorial Policy on AI (vendor page, fetched 6 September 2026)",
+   "url": "https://www.lonelyplanet.com/legal/ai-policy",
+   "quote": "We do not use AI to create original editorial reporting",
+   "page": "section 'What we will not do'"
+  },
+  {
+   "index": 1165,
+   "feature": "other: invented particular",
+   "claim": "A local-history author reports that ChatGPT, asked about Eleanor Roosevelt, called Theodore Roosevelt her husband.",
+   "source": "Michael Burgess quoted by Slate, November 2025",
+   "url": "https://slate.com/technology/2025/11/arcadia-publishing-artificial-intelligence-history-books-authors.html",
+   "quote": "Eleanor and her husband Theodore Roosevelt",
+   "page": "section on the History Press authors"
+  },
+  {
+   "index": 1166,
+   "feature": "other: the missing archival particular",
+   "claim": "The same author argues the research behind his local history is beyond AI because it required microfilm held at the state library.",
+   "source": "Michael Burgess quoted by Slate, November 2025",
+   "url": "https://slate.com/technology/2025/11/arcadia-publishing-artificial-intelligence-history-books-authors.html",
+   "quote": "not going to go and get microfilm",
+   "page": "section on the History Press authors"
+  },
+  {
+   "index": 1168,
+   "feature": "other: generic positive epithet in place description",
+   "claim": "Tripadvisor's AI summary of that hotel summarised its cleanliness as spotless.",
+   "source": "Which?, July 2026",
+   "url": "https://www.which.co.uk/policy-and-insight/article/tripadvisor-ai-tool-gives-glowing-reviews-to-dangerous-hotels-which-finds-adbnO9E3Dr2O",
+   "quote": "cleanliness summarised as 'spotless'",
+   "page": "section on the Riu Palace Santa Maria"
+  },
+  {
+   "index": 1169,
+   "feature": "other: generic positive epithet in place description",
+   "claim": "Tripadvisor's AI summary of the Britannia International hotel described its atmosphere as charming, where Google's overview of the same hotel reported filthy conditions.",
+   "source": "Which?, July 2026",
+   "url": "https://www.which.co.uk/policy-and-insight/article/tripadvisor-ai-tool-gives-glowing-reviews-to-dangerous-hotels-which-finds-adbnO9E3Dr2O",
+   "quote": "described the atmosphere as ‘charming’",
+   "page": "comparison with Google's AI overview"
+  },
+  {
+   "index": 1176,
+   "feature": "other: generic superlative in place description",
+   "claim": "A June 2023 revision to the Wikipedia article on the Ethiopian woreda Alamata opened by saying the town stands as a vibrant town with a rich cultural heritage.",
+   "source": "AI-generated Wikipedia text from a June 2023 revision to Alamata (woreda), quoted as an example in Wikipedia:Signs of AI writing",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "stands as a vibrant town with a rich cultural heritage",
+   "page": "section 'Promotional and advertisement-like language', subtypes"
+  },
+  {
+   "index": 1178,
+   "feature": "other: undue emphasis on significance in a place entry",
+   "claim": "An October 2024 revision to the Wikipedia article on Kumba, Cameroon said road networks helped solidify its role as a regional hub.",
+   "source": "AI-generated Wikipedia text from an October 2024 revision to Kumba, Cameroon, quoted as an example in Wikipedia:Signs of AI writing",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "solidify its role as a regional hub",
+   "page": "section 'Undue emphasis on significance, legacy, and broader trends'"
+  },
+  {
+   "index": 1183,
+   "feature": "other: genre glitch (promotional register intruding into a record)",
+   "claim": "A digital-culture professor defines a genre glitch as text that suddenly switches genre, typically inserting a short promotional phrase into an informational text.",
+   "source": "Jill Walker Rettberg, Professor and Co-Director of the Center for Digital Narrative, University of Bergen, jilltxt.net, 13 May 2026",
+   "url": "https://jilltxt.net/genre-glitches-and-unexpected-promotional-phrases-as-a-sign-of-ai-writing/",
+   "quote": "the text suddenly switches genre, typically inserting a short promotional phrase",
+   "page": "opening definition"
+  },
+  {
+   "index": 1184,
+   "feature": "other: genre glitch (promotional register intruding into a record)",
+   "claim": "Her legal-document example is a United States government detention memorandum that, on mentioning a long-distance train, added that it was a route famous for its scenic views of the mountains and deserts.",
+   "source": "Government's Memorandum in Support of Pretrial Detention, US v. Cole Tomas Allen, 29 April 2026, quoted by Jill Walker Rettberg, 13 May 2026",
+   "url": "https://jilltxt.net/genre-glitches-and-unexpected-promotional-phrases-as-a-sign-of-ai-writing/",
+   "quote": "a route famous for its scenic views of the mountains and deserts",
+   "page": "Example 2"
+  },
+  {
+   "index": 1187,
+   "feature": "other: invented archival particular",
+   "claim": "A historical society reference librarian reports that ChatGPT, asked about the first Hindu wedding in US media, generated an article title in quotation marks from a specific newspaper on a particular date, none of which she could verify.",
+   "source": "Nikki Koehlert, OHS Reference Librarian, Oregon Historical Society blog, 9 January 2024",
+   "url": "https://www.ohs.org/blog/an-artificial-intelligence-research-request.cfm",
+   "quote": "generated an article title in quotations from a specific newspaper on a particular date",
+   "page": "after the quoted ChatGPT response"
+  },
+  {
+   "index": 1188,
+   "feature": "other: invented archival particular",
+   "claim": "The same librarian's proposed mechanism is that the names appeared on the same newspaper pages but unrelated, and the model found a repeated pattern and produced a conclusion not based in fact.",
+   "source": "Nikki Koehlert, Oregon Historical Society blog, 9 January 2024",
+   "url": "https://www.ohs.org/blog/an-artificial-intelligence-research-request.cfm",
+   "quote": "it found a repeated pattern and produced a conclusion, but that conclusion was not based in fact",
+   "page": "paragraph on the newspaper page pattern"
+  },
+  {
+   "index": 1191,
+   "feature": "other: invented particular",
+   "claim": "The reporter states that AI-written nonfiction compiled from information available on the internet still tends to be full of inaccuracies.",
+   "source": "Jule Pattison-Gordon, Governing, 3 October 2025",
+   "url": "https://www.governing.com/artificial-intelligence/how-local-librarians-keep-ai-slop-off-the-shelves",
+   "quote": "such books still tend to be full of inaccuracies",
+   "page": "paragraph on why nonfiction dominates"
+  },
+  {
+   "index": 1192,
+   "feature": "other: invented place described richly",
+   "claim": "A Peruvian trekking guide says the AI itinerary describing a nonexistent Sacred Canyon of Humantay was confidently written and full of vivid adjectives.",
+   "source": "Miguel Angel Gongora Meza, founder of Evolution Treks Peru, quoted by BBC Travel, 26 September 2025",
+   "url": "https://www.bbc.com/travel/article/20250926-the-perils-of-letting-ai-plan-your-next-trip",
+   "quote": "confidently written and full of vivid adjectives",
+   "page": "opening section"
+  },
+  {
+   "index": 1193,
+   "feature": "other: invented place described richly",
+   "claim": "The same guide says the invented place name is a combination of two places that have no relation to the description attached to it.",
+   "source": "Miguel Angel Gongora Meza quoted by BBC Travel, 26 September 2025",
+   "url": "https://www.bbc.com/travel/article/20250926-the-perils-of-letting-ai-plan-your-next-trip",
+   "quote": "The name is a combination of two places that have no relation",
+   "page": "opening section"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 1162,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "AI does not and cannot do that work",
+   "note": "Live fetch, HTTP 200. Opening paragraph. The preceding two sentences carry the other limbs: the reputation is built on 'the people who actually go', who walk, eat and ask before judging a hotel - so 'that work' is on-the-ground reporting, and the brand-rests-on-it limb is the reputation sentence."
+  },
+  {
+   "index": 1163,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "We do not use AI to create original editorial reporting",
+   "note": "Section heading 'What we will not do' is on the page verbatim; the sentence continues with recommendations, reviews and destination expertise, so all four items in the claim are listed."
+  },
+  {
+   "index": 1165,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Eleanor and her husband Theodore Roosevelt",
+   "note": "Live fetch, HTTP 200, no paywall. Slate piece by Nitish Pahwa, November 2025 path. Michael Burgess says he put something about Eleanor Roosevelt into ChatGPT and it returned the phrase; he is a local-history author (self-published local history republished by History Press in 2023). The piece returns to the mix-up in its closing paragraph."
+  },
+  {
+   "index": 1166,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "not going to go and get microfilm",
+   "note": "Same paragraph supplies the remaining limbs: the reporter writes that the book required research Burgess believes AI cannot do, and Burgess names the New York State Library and its microfilm of Franklin Roosevelt's gubernatorial papers. State library limb confirmed."
+  },
+  {
+   "index": 1168,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "cleanliness summarised as 'spotless'",
+   "note": "Live fetch, HTTP 200. Which? press release dated 02 Jul 2026, so 'July 2026' is right. The same sentence names the hotel (Riu Palace Santa Maria, Cape Verde) as the subject of the Tripadvisor AI summary, so the claim's 'that hotel' referent is anchored on the page."
+  },
+  {
+   "index": 1169,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "described the atmosphere as 'charming'",
+   "note": "Both limbs sit in one paragraph comparing the platforms for the Britannia International hotel in London: Google's overview is reported as highlighting guest reviews of 'filthy' conditions, and Tripadvisor's summary of the same hotel as praising clean rooms and calling the atmosphere charming."
+  },
+  {
+   "index": 1176,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'opened by saying' - the page never says the passage was the article's opening, and the cited revision shows it was not",
+   "trueWording": "stands as a vibrant town with a rich cultural heritage",
+   "note": "Quotation is verbatim on the page, in section 'Promotional and advertisement-like language' > 'Subtypes', labelled as from a June 2023 revision to Alamata (woreda). I followed the page's own diff link (oldid 1162718043; API confirms timestamp 2023-06-30 and title 'Alamata (woreda)') and fetched the raw wikitext: the lead is a plain one-sentence definition of Alamata as a woreda in Tigray Region, and the 'Nestled within...' passage is the first line of the '== Overview ==' section, not the opening. Puffery limb, June 2023 limb, Ethiopian-woreda limb and the quotation all hold; only the positional limb fails."
+  },
+  {
+   "index": 1178,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "solidify its role as a regional hub",
+   "note": "Same page, section 'Undue emphasis on significance, legacy, and broader trends' (shortcuts WP:AILEGACY / WP:AITREND), example labelled as from an October 2024 revision to Kumba, Cameroon; the sentence credits road networks connecting Kumba to Mamfe and Buea. Every limb supported."
+  },
+  {
+   "index": 1183,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the text suddenly switches genre, typically inserting a short promotional phrase",
+   "note": "Opening definition sentence; it continues with 'full of sensory details' and 'into an informational text', so the claim's informational-text limb is on the page. Post dated May 13, 2026. Author descriptor on the page is 'Professor and Co-Director of the Center for Digital Narrative at the University of Bergen'; the page never uses the words 'digital culture', so the claim's 'digital-culture professor' is a field paraphrase, not the page's wording."
+  },
+  {
+   "index": 1184,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a route famous for its scenic views of the mountains and deserts",
+   "note": "Example 2. Surrounding text gives the other limbs: the source is cited as the Government's Memorandum in Support of Pretrial Detention in United States v. Cole Tomas Allen, 29 April 2026, page 9, and the glitch fires on a mention of a long-distance Amtrak passenger train to Chicago. The quoted phrase runs on to 'of the American West'."
+  },
+  {
+   "index": 1187,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "generated an article title in quotations from a specific newspaper",
+   "note": "Live fetch, HTTP 200. Page dated January 9, 2024, by Nikki Koehlert, OHS Reference Librarian. The sentence continues 'on a particular date'. The prompt limb is on the page verbatim as the researcher's ChatGPT prompt about the first Hindu wedding in U.S. media, and the could-not-verify limb is her earlier report that she found neither the article title nor any record of the two named people or such a wedding."
+  },
+  {
+   "index": 1188,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "it found a repeated pattern and produced a conclusion",
+   "note": "Same paragraph carries the mechanism limb: the names and the words wedding/Hindoo appeared on the same Daily Astorian pages in the 1910s but were unrelated, and the sentence closes with the conclusion not being based in fact."
+  },
+  {
+   "index": 1191,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "such books still tend to be full of inaccuracies",
+   "note": "Live fetch, HTTP 200. Governing, published October 3, 2025, by Jule Pattison-Gordon. The phrase is the reporter's own parenthetical inside her sentence about AI writing nonfiction by compiling information available on the Internet, so both the compiled-from-the-internet limb and the reporter-states limb hold."
+  },
+  {
+   "index": 1192,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "confidently written and full of vivid adjectives",
+   "note": "Live fetch, HTTP 200. Gongora Meza is described as founder and director of Evolution Treks Peru, overhearing tourists planning a hike to the 'Sacred Canyon of Humantay', and he states there is no such place. The thing he describes is 'the screenshot'; the article's own framing (travellers using AI to create itineraries; a program like ChatGPT) supports calling it an AI itinerary. Metadata caveat: URL slug is 20250926 but the live page displays 29 September 2025; the claim sentence asserts no date, so the grade is unaffected."
+  },
+  {
+   "index": 1193,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The name is a combination of two places that have no relation",
+   "note": "Same quoted paragraph; the sentence ends by saying the two places have no relation to the description, which is the claim's 'attached to it' limb. Same date caveat as 1192 (page displays 29 September 2025)."
+  }
+ ]
+}

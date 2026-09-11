@@ -1,0 +1,1 @@
+perl -0pi -e "s{It is receding\. What remains is the damage rather than the danger\.}{'It is receding. What remains is the damage rather than the danger.' . (' The ledgers still carry the entry and the streets still carry the memory.' x 15)}e" src/data/dossierStateProse/stressors.generated.js
