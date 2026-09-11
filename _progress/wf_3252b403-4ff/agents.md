@@ -1,0 +1,13 @@
+# wf_3252b403-4ff — per-agent progress, 2026-09-11 05:48:33
+    - `a92fbb493` SURVEYOR defense · RETRIED (a later attempt on the same key runs) · transcript 09-11 05:36 966 KB · 94 tool calls · files: $SP/annex-def1-6.txt, $SP/annex-def7-10.txt, $SP/annex-def11.txt, $SP/annex-def-all.txt
+    - `a258758c8` SURVEYOR general · RETRIED (a later attempt on the same key runs) · transcript 09-11 05:36 1034 KB · 88 tool calls · files: $D/_gen_annex.txt, general.referent.survey.md
+    - `aedcb6855` SURVEYOR economy · RETRIED (a later attempt on the same key runs) · transcript 09-11 05:36 946 KB · 95 tool calls
+    - `a5b3683d1` SURVEYOR power · RETRIED (a later attempt on the same key runs) · transcript 09-11 05:36 882 KB · 72 tool calls · files: _pow-annex.txt, power.referent.survey.md
+    - `ac09efeba` SURVEYOR stressors · RETRIED (a later attempt on the same key runs) · transcript 09-11 05:36 817 KB · 80 tool calls
+    - `a70dd9439` SURVEYOR warFaith · RETRIED (a later attempt on the same key runs) · transcript 09-11 05:36 928 KB · 83 tool calls · files: warfaith-census.txt, warfaith-variants.txt
+    - `adc8ac978` SURVEYOR power · IN FLIGHT · transcript 09-11 05:48 976 KB · 90 tool calls · files: pow-census.txt, pow-words.txt · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
+    - `a3f87f01c` SURVEYOR general · IN FLIGHT · transcript 09-11 05:48 685 KB · 77 tool calls · files: desk.txt, variants.txt, fix.pl, general.referent.survey.md · last: Edit /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchp
+    - `a9e609dca` SURVEYOR warFaith · IN FLIGHT · transcript 09-11 05:48 853 KB · 75 tool calls · files: hdrs.txt, "$OUT/warfaith-annex.txt · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
+    - `a2c8e4398` SURVEYOR stressors · IN FLIGHT · transcript 09-11 05:48 842 KB · 80 tool calls · files: census-str.txt, words.txt, variants.txt, nounmap.txt · last: Bash mkdir -p /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db
+    - `afe5153e4` SURVEYOR defense · IN FLIGHT · transcript 09-11 05:46 730 KB · 65 tool calls · files: def-census.txt, defA.txt, defB.txt, defall.txt · last: Bash mkdir -p /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db
+    - `aacc17cae` SURVEYOR economy · IN FLIGHT · transcript 09-11 05:48 927 KB · 87 tool calls · files: eco-variants.txt · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
