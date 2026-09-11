@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-11 15:54:40 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-11 16:00:41 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -85,19 +85,21 @@
 | ? | other |  | result | 0 | — | — | 14:20:27 |
 | ? | other |  | in-flight | 0 | — | — | 14:52:21 |
 | ? | other |  | failed | 0 | — | — | 10:26:25 |
-| ? | other |  | in-flight | 0 | — | — | 19:51:36 |
+| ? | other |  | in-flight | 0 | — | — | 20:00:36 |
 | ? | other |  | result | 0 | — | — | 19:48:22 |
+| ? | other |  | in-flight | 0 | — | — | 19:59:51 |
 | ? | other |  | result | 0 | — | — | 19:36:43 |
 | ? | other |  | result | 0 | skeleton.md | — | 19:37:59 |
-| ? | other |  | in-flight | 0 | — | — | 19:51:50 |
+| ? | other |  | in-flight | 0 | — | — | 20:00:17 |
 | ? | other |  | result | 0 | — | — | 19:35:44 |
-| ? | other |  | in-flight | 0 | — | — | 19:51:29 |
+| ? | other |  | in-flight | 0 | — | — | 19:59:24 |
 | ? | other |  | result | 0 | — | — | 19:49:03 |
-| ? | other |  | in-flight | 0 | — | — | 19:50:30 |
+| ? | other |  | result | 0 | draft-round-1.md | — | 19:56:39 |
 | ? | other |  | result | 0 | — | — | 19:35:00 |
-| ? | other |  | in-flight | 0 | — | — | 19:50:15 |
-| ? | other |  | in-flight | 0 | — | — | 19:51:34 |
+| ? | other |  | result | 0 | — | — | 19:59:19 |
+| ? | other |  | in-flight | 0 | — | — | 20:00:22 |
 | ? | other |  | result | 0 | — | — | 19:38:34 |
 | ? | other |  | result | 0 | — | — | 19:38:07 |
+| ? | other |  | in-flight | 0 | — | — | 20:00:40 |
 
 RECOVERY after a cutoff: for a finder whose journal says in-flight/failed and whose checkpoint is absent or complete=false, its urlsFetched list is the seed for the re-run (`mk-round.py … --inflight` folds it into the angle prompt as PRIOR PROGRESS); a verifier chunk without its verdict file simply re-runs (15 claims).
