@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-11 16:58:19 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-11 17:04:04 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = 33db59adb §919.1: THE OPUS CHAIR MANUAL — the procedures, the architecture of a block run, the la
 
@@ -43,7 +43,8 @@ product claude/composite-r4 = f73bdbf16 · ledger = 33db59adb §919.1: THE OPUS 
       | 
       | Every figure below comes from a command that ran in this dock with its exit code captured. A figure
       | without a command is not in this file. ZERO reader-facing bytes is the car's own fence: the manifest
-- **DS-DEF-2 (waits for the tables)** dock `laneRW-DEF2` HEAD f2da5a3ee · 0 cars over f2da5a3ee · porcelain 0 · last commits:
+- **DS-DEF-2 (waits for the tables)** dock `laneRW-DEF2` HEAD 8540c87eb · 1 cars over f2da5a3ee · porcelain 0 · last commits:
+    8540c87eb REWRITE 8b DS-DEF-2 draft round 1: 17/26
     receipt `receipt-rewrite.md` (mtime 09-09 14:58) head:
       | # RECEIPT — the REWRITE train
       | 
@@ -263,7 +264,7 @@ json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
     - `a7fb664fa` WRITER Disasters & Famine: granary, NO medical provision r1 · DONE · transcript 09-11 16:50 694 KB · 32 tool calls · files: "$D/draft-round-1.md · result: Packet written and mechanically checked.  **Packet:** `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scr
     - `abc5fba69` WRITER Disasters & Famine: NO reserves, hospital present r1 · DONE · transcript 09-11 16:54 787 KB · 34 tool calls · result: Packet complete and verified on disk.  **Packet path:** `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/s
     - `aef677062` WRITER Disasters & Famine: NO reserves, NO medical provision r1 · DONE · transcript 09-11 16:51 757 KB · 45 tool calls · files: $D/draft-round-1.md · result: The packet is written. Reporting what the file holds.  **Packet:** `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0
-    - `a26c816f6` GATE r1 · IN FLIGHT · transcript 09-11 16:58 435 KB · 37 tool calls · last: Bash R=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratc
+    - `a26c816f6` GATE r1 · IN FLIGHT · transcript 09-11 17:04 688 KB · 76 tool calls · files: gate-r1.txt, (git commit) · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
 - **wf_2e33aae5-027** (mtime 09-11 15:16): agent calls 68 (56 distinct) · DONE 18 · FAILED (not retried) 32 · RETRIED (superseded attempts) 12 · IN FLIGHT 6 — mirror `_progress/wf_2e33aae5-027/`
     - `a8df09f92` MARKER Beasts & Monsters: plagued, perimeter AND organized force · DONE · transcript 09-11 11:12 801 KB · 43 tool calls · files: "$D/skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--beasts-mons
     - `a2d2b0711` MARKER Beasts & Monsters: plagued, perimeter but NO force to hold it · DONE · transcript 09-11 11:12 667 KB · 27 tool calls · files: "$SC/rewrite/DS-DEF-2/ds-def-2--beasts-monsters-plagued-perimeter-but-no-force-t/skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--beasts-mons
@@ -391,4 +392,4 @@ json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
     - `ad30ac0bb` FOLDER · DONE · transcript 09-11 06:02 1531 KB · 36 tool calls · files: _partD.md, _partE.md, _partF.md, _partG.md · result: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/entailment/ENTAILMENT-TABLE.draft.md
 
 ## PROCESSES: 57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 2.03 1.98 2.07
+load: 2.38 2.30 2.20
