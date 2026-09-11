@@ -1,37 +1,176 @@
-# LANE-STATUS — written 2026-09-11 05:13:53 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-11 05:19:37 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = d7f4c6b0e §919: the REWRITE train's first car lands — the index-stable draw signed (59.61 % of ce
 
 ## BUILD / KIT LANES (dock · base · cars · porcelain · receipt)
-fatal: not a git repository (or any of the parent directories): .git
-fatal: not a git repository (or any of the parent directories): .git
-- **CAP-TRIP-907(§907 charter; lands on a chair gate → §908)** dock `laneB6` HEAD  ·  cars over 4243bdc61 · porcelain 0 · last commits:
-fatal: not a git repository (or any of the parent directories): .git
-    receipt `receipt-cap-trip-907.md` (mtime 09-07 01:50) head:
-      | # RECEIPT — LANE CAP-TRIP-907
-      | **Seat: Opus 5 — Fable-unvalidated · Chair: Fable 5.1 (session 405b5e7e) · dock `$SC/laneB6` · repair lane, four cars**
+- **REWRITE 8b DS-DEF-11 (the validation block; cure round)** dock `laneRW-DEF11` HEAD 7acc5ff1c · 12 cars over f73bdbf16 · porcelain 0 · last commits:
+    7acc5ff1c REWRITE 8b DS-DEF-11: 12/12 · 0 faces reverted · 5 refusal(s) — the Fable judge rulings applied
+    44b8b7a50 REWRITE 8b DS-DEF-11 refine: 5/5 kept, 0 reverted
+    dd53a9564 REWRITE 8b DS-DEF-11 draft round 1: 5/5
+    f2da5a3ee REWRITE car 8b-W-5-lighting: the lighting census re-freezes at the car's tip, by its own ritual
+    receipt `receipt-rewrite.md` (mtime 09-09 14:58) head:
+      | # RECEIPT — the REWRITE train
       | 
-      | **STATUS: COMPLETE** — **FIVE cars**: four chartered (three landed as built, one landed as a measured REFUSAL — car 3's row is not armed; the corrections it owed did land) and **car 5, the repair the chair's whole-su
+      | Seat: Opus 5 — Fable-unvalidated. Lane: REWRITE. Chair session 67af10e4.
       | 
-      | ## ARRIVAL CHECK — Mon Sep  7 00:52:00 EDT 2026 — **all three lines pass**
-      | - `git rev-parse HEAD` == `4243bdc610fe5b380f1d0029973cf9088bae1631` — **CONFIRMED**
-      | - `git status --porcelain | wc -l` == `0` — **CONFIRMED**
-      | - `ls -A node_modules | wc -l` == `455`. The two over 453 are the Vitest cache dirs; the dot-entries are exactly `.bin`, `.vite`, `.vite-temp`. **ACCEPTABLE per the brief, and stated as the brief requires.**
+      | ---
       | 
-      | ## THE BRIEF'S FIGURES, RE-DERIVED BEFORE ANY EDIT (a brief figure is a hypothesis)
-      | | brief cites | measured at `4243bdc61` | verdict |
-      | |---|---|---|
-      | | `tripwires.mjs:239,:243,:276,:278` key on `yearlyPopulations`/`yearlyDiedFlags` | grep: exactly those four lines | **CONFIRMED** |
-fatal: not a git repository (or any of the parent directories): .git
-fatal: not a git repository (or any of the parent directories): .git
-- **L-UI-MAT(landed §904)** dock `laneLUIMAT` HEAD  ·  cars over dd5f13218 · porcelain 0 · last commits:
-fatal: not a git repository (or any of the parent directories): .git
-    receipt receipt-l-ui-mat.md: NOT WRITTEN YET
-fatal: not a git repository (or any of the parent directories): .git
-fatal: not a git repository (or any of the parent directories): .git
-- **L-DEFAULT(landed §903)** dock `laneLDEFAULT` HEAD  ·  cars over fd36f0298 · porcelain 0 · last commits:
-fatal: not a git repository (or any of the parent directories): .git
-    receipt receipt-l-default.md: NOT WRITTEN YET
+      | ## CAR 8a — THE KERNEL, THE INSTRUMENTS AND THE GATE
+      | 
+      | **STATUS: LANDED WHOLE — twelve commits, `f4005cccd` … `5c7eadb18`.** Chartered at SITTING §T.10 (2026-09-09); ARCH §12 row 8a; §N.2 SIGNED;
+      | Part B §20–§23. Dock `$SC/laneREWRITE`, cut at the §917 product tip `29ec62425` (detached HEAD,
+      | porcelain 0 at open, runners 0 at open — both executed, exit 0).
+      | 
+      | Every figure below comes from a command that ran in this dock with its exit code captured. A figure
+      | without a command is not in this file. ZERO reader-facing bytes is the car's own fence: the manifest
+- **REWRITE 8b-W (the wiring car, landed in its dock = the consist lineage)** dock `laneRW-DEFW` HEAD f2da5a3ee · 9 cars over f73bdbf16 · porcelain 0 · last commits:
+    f2da5a3ee REWRITE car 8b-W-5-lighting: the lighting census re-freezes at the car's tip, by its own ritual
+    62ae09bbf REWRITE car 8b-W-5: the licence card names the table row, not the file — every table-rung pool's claim line cured
+    290f86ee0 Register (REWRITE 8b-W): the prose byte ratchet's declared row for the regenerated leaf
+    c3bd63354 Register (REWRITE 8b-W): the observed-shape inventory re-frozen on its drifted input
+    receipt `receipt-rewrite.md` (mtime 09-09 14:58) head:
+      | # RECEIPT — the REWRITE train
+      | 
+      | Seat: Opus 5 — Fable-unvalidated. Lane: REWRITE. Chair session 67af10e4.
+      | 
+      | ---
+      | 
+      | ## CAR 8a — THE KERNEL, THE INSTRUMENTS AND THE GATE
+      | 
+      | **STATUS: LANDED WHOLE — twelve commits, `f4005cccd` … `5c7eadb18`.** Chartered at SITTING §T.10 (2026-09-09); ARCH §12 row 8a; §N.2 SIGNED;
+      | Part B §20–§23. Dock `$SC/laneREWRITE`, cut at the §917 product tip `29ec62425` (detached HEAD,
+      | porcelain 0 at open, runners 0 at open — both executed, exit 0).
+      | 
+      | Every figure below comes from a command that ran in this dock with its exit code captured. A figure
+      | without a command is not in this file. ZERO reader-facing bytes is the car's own fence: the manifest
+- **DS-DEF-2 (waits for the tables)** dock `laneRW-DEF2` HEAD f2da5a3ee · 0 cars over f2da5a3ee · porcelain 0 · last commits:
+    receipt `receipt-rewrite.md` (mtime 09-09 14:58) head:
+      | # RECEIPT — the REWRITE train
+      | 
+      | Seat: Opus 5 — Fable-unvalidated. Lane: REWRITE. Chair session 67af10e4.
+      | 
+      | ---
+      | 
+      | ## CAR 8a — THE KERNEL, THE INSTRUMENTS AND THE GATE
+      | 
+      | **STATUS: LANDED WHOLE — twelve commits, `f4005cccd` … `5c7eadb18`.** Chartered at SITTING §T.10 (2026-09-09); ARCH §12 row 8a; §N.2 SIGNED;
+      | Part B §20–§23. Dock `$SC/laneREWRITE`, cut at the §917 product tip `29ec62425` (detached HEAD,
+      | porcelain 0 at open, runners 0 at open — both executed, exit 0).
+      | 
+      | Every figure below comes from a command that ran in this dock with its exit code captured. A figure
+      | without a command is not in this file. ZERO reader-facing bytes is the car's own fence: the manifest
+- **DS-DEF-1 (waits)** dock `laneRW-DEF1` HEAD f2da5a3ee · 0 cars over f2da5a3ee · porcelain 0 · last commits:
+    receipt `receipt-rewrite.md` (mtime 09-09 14:58) head:
+      | # RECEIPT — the REWRITE train
+      | 
+      | Seat: Opus 5 — Fable-unvalidated. Lane: REWRITE. Chair session 67af10e4.
+      | 
+      | ---
+      | 
+      | ## CAR 8a — THE KERNEL, THE INSTRUMENTS AND THE GATE
+      | 
+      | **STATUS: LANDED WHOLE — twelve commits, `f4005cccd` … `5c7eadb18`.** Chartered at SITTING §T.10 (2026-09-09); ARCH §12 row 8a; §N.2 SIGNED;
+      | Part B §20–§23. Dock `$SC/laneREWRITE`, cut at the §917 product tip `29ec62425` (detached HEAD,
+      | porcelain 0 at open, runners 0 at open — both executed, exit 0).
+      | 
+      | Every figure below comes from a command that ran in this dock with its exit code captured. A figure
+      | without a command is not in this file. ZERO reader-facing bytes is the car's own fence: the manifest
+- **DS-DEF-5 (waits)** dock `laneRW-DEF5` HEAD f2da5a3ee · 0 cars over f2da5a3ee · porcelain 0 · last commits:
+    receipt `receipt-rewrite.md` (mtime 09-09 14:58) head:
+      | # RECEIPT — the REWRITE train
+      | 
+      | Seat: Opus 5 — Fable-unvalidated. Lane: REWRITE. Chair session 67af10e4.
+      | 
+      | ---
+      | 
+      | ## CAR 8a — THE KERNEL, THE INSTRUMENTS AND THE GATE
+      | 
+      | **STATUS: LANDED WHOLE — twelve commits, `f4005cccd` … `5c7eadb18`.** Chartered at SITTING §T.10 (2026-09-09); ARCH §12 row 8a; §N.2 SIGNED;
+      | Part B §20–§23. Dock `$SC/laneREWRITE`, cut at the §917 product tip `29ec62425` (detached HEAD,
+      | porcelain 0 at open, runners 0 at open — both executed, exit 0).
+      | 
+      | Every figure below comes from a command that ran in this dock with its exit code captured. A figure
+      | without a command is not in this file. ZERO reader-facing bytes is the car's own fence: the manifest
+- **DS-DEF-3 (waits)** dock `laneRW-DEF3` HEAD f2da5a3ee · 0 cars over f2da5a3ee · porcelain 0 · last commits:
+    receipt `receipt-rewrite.md` (mtime 09-09 14:58) head:
+      | # RECEIPT — the REWRITE train
+      | 
+      | Seat: Opus 5 — Fable-unvalidated. Lane: REWRITE. Chair session 67af10e4.
+      | 
+      | ---
+      | 
+      | ## CAR 8a — THE KERNEL, THE INSTRUMENTS AND THE GATE
+      | 
+      | **STATUS: LANDED WHOLE — twelve commits, `f4005cccd` … `5c7eadb18`.** Chartered at SITTING §T.10 (2026-09-09); ARCH §12 row 8a; §N.2 SIGNED;
+      | Part B §20–§23. Dock `$SC/laneREWRITE`, cut at the §917 product tip `29ec62425` (detached HEAD,
+      | porcelain 0 at open, runners 0 at open — both executed, exit 0).
+      | 
+      | Every figure below comes from a command that ran in this dock with its exit code captured. A figure
+      | without a command is not in this file. ZERO reader-facing bytes is the car's own fence: the manifest
+- **DS-DEF-4 (waits)** dock `laneRW-DEF4` HEAD f2da5a3ee · 0 cars over f2da5a3ee · porcelain 0 · last commits:
+    receipt `receipt-rewrite.md` (mtime 09-09 14:58) head:
+      | # RECEIPT — the REWRITE train
+      | 
+      | Seat: Opus 5 — Fable-unvalidated. Lane: REWRITE. Chair session 67af10e4.
+      | 
+      | ---
+      | 
+      | ## CAR 8a — THE KERNEL, THE INSTRUMENTS AND THE GATE
+      | 
+      | **STATUS: LANDED WHOLE — twelve commits, `f4005cccd` … `5c7eadb18`.** Chartered at SITTING §T.10 (2026-09-09); ARCH §12 row 8a; §N.2 SIGNED;
+      | Part B §20–§23. Dock `$SC/laneREWRITE`, cut at the §917 product tip `29ec62425` (detached HEAD,
+      | porcelain 0 at open, runners 0 at open — both executed, exit 0).
+      | 
+      | Every figure below comes from a command that ran in this dock with its exit code captured. A figure
+      | without a command is not in this file. ZERO reader-facing bytes is the car's own fence: the manifest
+- **DS-DEF-6 (waits)** dock `laneRW-DEF6` HEAD f2da5a3ee · 0 cars over f2da5a3ee · porcelain 0 · last commits:
+    receipt `receipt-rewrite.md` (mtime 09-09 14:58) head:
+      | # RECEIPT — the REWRITE train
+      | 
+      | Seat: Opus 5 — Fable-unvalidated. Lane: REWRITE. Chair session 67af10e4.
+      | 
+      | ---
+      | 
+      | ## CAR 8a — THE KERNEL, THE INSTRUMENTS AND THE GATE
+      | 
+      | **STATUS: LANDED WHOLE — twelve commits, `f4005cccd` … `5c7eadb18`.** Chartered at SITTING §T.10 (2026-09-09); ARCH §12 row 8a; §N.2 SIGNED;
+      | Part B §20–§23. Dock `$SC/laneREWRITE`, cut at the §917 product tip `29ec62425` (detached HEAD,
+      | porcelain 0 at open, runners 0 at open — both executed, exit 0).
+      | 
+      | Every figure below comes from a command that ran in this dock with its exit code captured. A figure
+      | without a command is not in this file. ZERO reader-facing bytes is the car's own fence: the manifest
+- **DS-DEF-8 (waits)** dock `laneRW-DEF8` HEAD f2da5a3ee · 0 cars over f2da5a3ee · porcelain 0 · last commits:
+    receipt `receipt-rewrite.md` (mtime 09-09 14:58) head:
+      | # RECEIPT — the REWRITE train
+      | 
+      | Seat: Opus 5 — Fable-unvalidated. Lane: REWRITE. Chair session 67af10e4.
+      | 
+      | ---
+      | 
+      | ## CAR 8a — THE KERNEL, THE INSTRUMENTS AND THE GATE
+      | 
+      | **STATUS: LANDED WHOLE — twelve commits, `f4005cccd` … `5c7eadb18`.** Chartered at SITTING §T.10 (2026-09-09); ARCH §12 row 8a; §N.2 SIGNED;
+      | Part B §20–§23. Dock `$SC/laneREWRITE`, cut at the §917 product tip `29ec62425` (detached HEAD,
+      | porcelain 0 at open, runners 0 at open — both executed, exit 0).
+      | 
+      | Every figure below comes from a command that ran in this dock with its exit code captured. A figure
+      | without a command is not in this file. ZERO reader-facing bytes is the car's own fence: the manifest
+- **DS-DEF-9 (waits)** dock `laneRW-DEF9` HEAD f2da5a3ee · 0 cars over f2da5a3ee · porcelain 0 · last commits:
+    receipt `receipt-rewrite.md` (mtime 09-09 14:58) head:
+      | # RECEIPT — the REWRITE train
+      | 
+      | Seat: Opus 5 — Fable-unvalidated. Lane: REWRITE. Chair session 67af10e4.
+      | 
+      | ---
+      | 
+      | ## CAR 8a — THE KERNEL, THE INSTRUMENTS AND THE GATE
+      | 
+      | **STATUS: LANDED WHOLE — twelve commits, `f4005cccd` … `5c7eadb18`.** Chartered at SITTING §T.10 (2026-09-09); ARCH §12 row 8a; §N.2 SIGNED;
+      | Part B §20–§23. Dock `$SC/laneREWRITE`, cut at the §917 product tip `29ec62425` (detached HEAD,
+      | porcelain 0 at open, runners 0 at open — both executed, exit 0).
+      | 
+      | Every figure below comes from a command that ran in this dock with its exit code captured. A figure
+      | without a command is not in this file. ZERO reader-facing bytes is the car's own fence: the manifest
 - **HORIZON-B6 (COMPLETE, landed §907)** (kit/read-only lane) receipt `receipt-horizon-b6.md` (mtime 09-07 00:42) head:
       | # RECEIPT — LANE HORIZON-B6 (the three CAPACITY evidence measurements)
       | 
@@ -70,6 +209,11 @@ stat: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-
 - **ANCHOR-905** dock `laneANCHOR905` HEAD  ·  cars over 6582958ce · porcelain 0 · HOLD-VITEST absent · receipt head:
 - **VIS-906** (same dock laneANCHOR905, on top of the anchor car) receipt head:
 - **L-PROBE-2 (chair)**: cheap /6 tips · full:  · bracket: 
+## REWRITE 8b PACKETS (rewrite/DS-DEF-n/<pool>/: skeleton · draft-round-N · refine · kept · refute* · cure-round-N · cured-round-N; JUDGMENT.md / JUDGMENT-cure.md per block; the entailment + referent tables)
+- DS-DEF-11: pools 5 · skeleton 5 · draft 5 · refine 5 · kept 5 · refute 6 · cure 5 · cured 0 · JUDGMENT yes · JUDGMENT-cure no
+- entailment: surveys 6 · refutes 6 · ENTAILMENT-TABLE.draft.md absent · referent surveys 0 · referent refutes 0 · REFERENT-TABLE.draft.md absent
+- HOLD-VITEST absent · runner count 0
+
 ## RESEARCH SWEEPS (state = claims/verdicts/kept; verdict files; section/critic mtimes) — round tags in sweep/LAST-RUNS.json
 Traceback (most recent call last):
   File "<string>", line 3, in <module>
@@ -82,23 +226,10 @@ Traceback (most recent call last):
 json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
 - LAST-RUNS: tolkien r7-not-launched/(none — nothingToRun 17:26), kay r8/wf_d76e605d-6d1, leguin r11/wf_49ef9b66-2e6, wolfe r8/wf_8cd21474-a7b, martin r8/wf_0cd91522-1ce, hobb r7/wf_255b6391-7fb, dnd r13/wf_2c525e43-1f2, ai r12/wf_6dd3b009-2b0, dnd_r13 r13/wf_2c525e43-1f2, leguin_r11 r11/wf_49ef9b66-2e6, dnd_r14 r14/
 
-## WORKFLOW RUNS of chair session 67af10e4-7386-48d4-8cd3-b2985d4885c2 (journal lines; a run dies with the session — the FILES above are the checkpoint)
-- wf_183dda09-702: 202 journal lines, 104 agents
-- wf_2041a5e2-748: 60 journal lines, 33 agents
-- wf_3b79f7ff-928: 8 journal lines, 4 agents
-- wf_49878604-b9f: 11 journal lines, 6 agents
-- wf_525170fc-546: 48 journal lines, 24 agents
-- wf_68d644ef-3dd: 124 journal lines, 64 agents
-- wf_73595d81-51d: 18 journal lines, 9 agents
-- wf_7e1abdf4-c9a: 48 journal lines, 24 agents
-- wf_8ca05b10-e44: 25 journal lines, 13 agents
-- wf_b6204819-335: 72 journal lines, 36 agents
-- wf_dc0e55ca-00d: 60 journal lines, 30 agents
-- wf_e49b0611-dbb: 13 journal lines, 7 agents
-- wf_e70e2f5c-7fb: 21 journal lines, 12 agents
-- wf_e7c6cf61-44a: 31 journal lines, 16 agents
-- wf_f100ecea-eec: 1 journal lines, 1 agents
-- wf_f9cf9a1d-188: 49 journal lines, 26 agents
+## WORKFLOW RUNS of chair session 4ed79a2b-6cd2-45cf-ab97-83cdad49c30b (journal lines; a run dies with the session — the FILES above are the checkpoint)
+- wf_3252b403-4ff: 6 journal lines, 6 agents
+- wf_a8b0a386-355: 1 journal lines, 1 agents
+- wf_abaf2de0-b00: 1 journal lines, 1 agents
 
 ## PROCESSES: 57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 2.32 5.92 7.50
+load: 2.96 3.57 5.81
