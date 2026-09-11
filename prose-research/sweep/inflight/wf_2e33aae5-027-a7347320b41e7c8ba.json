@@ -1,0 +1,21 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 131,
+ "firstTs": "2026-09-11T15:22:32.530Z",
+ "lastTs": "2026-09-11T15:26:00.844Z",
+ "tools": {
+  "Bash": 21,
+  "Read": 3
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "Next I need the brief's ADDENDUM 13 whole, the two tables' court rows, and the heading maps of the four voice documents. None depends on another; requesting them together.",
+ "run": "wf_2e33aae5-027",
+ "agent": "a7347320b41e7c8ba",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/4ed79a2b-6cd2-45cf-ab97-83cdad49c30b/subagents/workflows/wf_2e33aae5-027/agent-a7347320b41e7c8ba.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}

@@ -102,3 +102,135 @@ The ledger enters the three legs of the key as standing facts in the office's ow
 - A face that turns the ledger into a maxim ("a wall without men is a wall for the taking") — the generalisation test (R-DA-12).
 
 ---
+
+## 2. VARIANT 2 `[visitor]` (checkpoint 3)
+
+### 2.1 Number and angle
+Variant 2 · `[visitor]` (vid 2; annex `:2642`).
+
+### 2.2 The shipped sentence, verbatim
+> A stranger at {settlement} sees a serious perimeter and a serious absence of anyone standing in it.
+
+### 2.3 Every claim, tagged
+| # | claim | licence | layer of the noun | layer of the read | note |
+|---|---|---|---|---|---|
+| 1 | A stranger at {settlement} [is the eye] | LICENSED as the `[visitor]` angle's standpoint (W27: "a stranger" is the visitor's eye; it may see, never act, decide, be told or be given a name) | NONE (a stance noun; not a person referent) | — | "sees" is perception and lawful; the placement "at {settlement}" is lawful and is not a proper-slot OPENER (the face opens on "A stranger") |
+| 2 | sees a ... perimeter | LICENSED, read (a) `forces.walls.present` | BODY ("perimeter") | BODY (the walls bucket) | CONDITIONAL on the WORD: "perimeter" is FALSE of a `Gates (if walled)`-only town (ENTAILMENT D-6: a gate is a point) and the REFERENT row's HOLDS for "the perimeter" is overruled by W15's alias bar for a face written once for every town of the key; the safe spelling is "the works" |
+| 3 | serious (perimeter) | UNLICENSED: a CONDITION / EXTENT / QUALITY of the works (NOT ENTAILED: condition, height, extent, D-3; a palisade of "sharpened stakes ... minimal protection" sits on this key); an evaluative adjective the record does not rate (R-DA-10: evaluative adjectives → 0; MOVE-GRAMMAR §1.3 VERDICT does not exist) | NONE (a quality) | BODY | |
+| 4 | a serious absence | UNLICENSED: a VERDICT on the absence ("serious" = what the fact means: the MEANING move, §1.3); the anaphora "serious ... serious" is the rhetorical figure bought with the two verdicts, not a claim of its own | NONE | NONE | the absence itself is the licensed kernel (reads b, c); only the adjective goes |
+| 5 | of anyone standing in it | UNLICENSED: a TOTALITY OVER PERSONS (REFUSED COLUMN; W22); manning NOT ENTAILED; CONTRADICTED on every native town of the key (the required `Town watch`, Gate duty) and on a levied thorp (§0.4); "standing in it" makes the works a LINE one stands in (D-6: continuity and a walkway not entailed; the "line" reading is the force word the REFERENT row refuses on a pool that reads a force) | PERSON-plural ("anyone") | NONE (an absence of two bodies) | licensed kernel: no garrison and no militia stands to the works, found by the eye |
+| 6 | (implicit) no garrison stands | NOT STATED as such (folded into "anyone") | — | NONE | must be stated |
+| 7 | (implicit) no militia stands | NOT STATED as such | — | NONE | must be stated |
+
+### 2.4 The reads the rewrite must state
+- (a) the works stand — SEEN by the stranger's eye at {settlement}.
+- (b) no garrison and (c) no militia stands to them — FOUND by the eye, as an absence the eye meets, never "anyone" / "nobody"; the key's own compression "no force at them" / "no force to hold them".
+- Plus the LICENSED claims of the shipped sentence: claim 1 (the stranger as the eye at {settlement}) and claim 2 (the works, seen).
+- No country read, no gate read, no watch, no band: the eye sees only what the key reads.
+
+### 2.5 The angle's stance in one sentence
+The visitor is a stranger's EYE placed at {settlement}: it may see the works standing and find no force at them, in one perception that lands on a civic thing (the works · the force), and it may not walk, act, judge ("serious"), be told, be named, measure the works' size or condition, count anyone, name an attacker, or say what any of it means or would cost (W27 · W8: the visitor carries a read only as a standing state seen, never as the town's act, a verdict or an accounts fact).
+
+### 2.6 The turns worth keeping (lawful verbatim clauses)
+- "A stranger at {settlement} sees" — the opener, lawful (a stance noun opens; `{settlement}` sits inside the phrase, so T-F8 is not engaged); carry it as the opener of at least one face.
+- The CONSTRUCTION "sees X and Y" — one perception holding the thing that stands and the absence beside it — is the visitor's lawful SHAPE for the whole key once the two adjectives and the persons are cured: "sees the works and no force at them" is the licensed form of the shipped compression, at the same weight; "a serious perimeter and a serious absence of anyone standing in it" is the exact unlicensed set (two verdicts and a totality).
+- "at {settlement}" as the placement of the eye — lawful.
+
+### 2.7 What would make the rewrite a regression here
+- Dropping the stranger's eye (a visitor face written as the ledger's flat entry is a dropped angle; W27; R-iv's counterpart for this tag).
+- Keeping "serious" (either), "anyone", "standing in it", or replacing them with a synonym of the same class ("a real wall", "a proper circuit", "no one on it", "not a soul").
+- Marching or acting the stranger ("walks the circuit", "climbs", "asks", "is told") instead of placing the eye.
+- Naming the wall by "the perimeter" or "the line", or naming a gate, a tower or a walkway the read does not reach.
+- Letting the stranger see the country, the road, the watch or the band ("sees a quiet country", "sees the watch at the gate") — fields this pool does not read (A0b over-claim; the Town watch is unread even where it stands).
+- An inventory line with the stance dropped: "A stranger sees the works. No force stands." (two sentences, no thread, no shape).
+- A face plainer than the shipped where the licensed compression exists ("sees the works and no force at them"): the density law (Part B §21.4).
+
+---
+
+## 3. VARIANT 3 `[street]` (checkpoint 3)
+
+### 3.1 Number and angle
+Variant 3 · `[street]` (vid 3; annex `:2643`).
+
+### 3.2 The shipped sentence, verbatim
+> The town has the thing that would save it and not the people who would use it, and says so when pressed.
+
+### 3.3 Every claim, tagged
+| # | claim | licence | layer of the noun | layer of the read | note |
+|---|---|---|---|---|---|
+| 1 | The town has the thing | LICENSED, read (a) `forces.walls.present`, as the FACT (the town holds a wall-class work) | NONE ("the town" as possessor) · BODY ("the thing" = the works, by periphrasis) | BODY | "the thing" is the street's plain word and claims nothing of itself; W15's always-safe spelling "what the town has built" is the same plainness with the class named; either is lawful |
+| 2 | that would save it | UNLICENSED: a CAPABILITY of the works (that they save the town) the presence flag does not hold (D-3 NOT ENTAILED: "whether they have held"); a subjunctive EDGE with no threshold field behind it (R-DA-07 licenses "would" only on a typed edge); an implied attacker (no read); the MAXIM shape "the thing that would save it" (R-DA-12's generalisation test: a life-general claim about walls) | NONE | BODY | the relative clause is the whole unlicensed load; "the works" carries the fact without it |
+| 3 | and not the people who would use it | UNLICENSED: a TOTALITY OVER PERSONS (REFUSED COLUMN; W22 "the people"); manning NOT ENTAILED; CONTRADICTED on every native town of the key (the `Town watch`) and a levied thorp (§0.4); "who would use it" a second capability forecast on persons | PERSON-plural ("the people") | NONE (absence of garrison and militia) | the CONTRAST SHAPE "has X and not Y" is itself LAWFUL here (MOVE-GRAMMAR wall 5 / R-DA-02: the rejected alternative names a sibling key's fact — `walls with citizen militia`, `walls AND professional garrison` — so the contrast is licensed by a sibling key, never fronted, the closing move of at most one variant per pool); only its filling is refused |
+| 4 | and says so when pressed | UNLICENSED: the town as a SPEAKING AGENT with an admission (a collective interior / belief frame: the register card's "no assigned reaction", R-DA-14 seen-not-meant, W23's fused collective agent — the REFERENT findings D-F16/D-F18 fail "the town has decided" and "the town has not yet had to think about"); "when pressed" an EVENT with an implied interlocutor who presses (W22: a person as agent; no event-provenance field on an R1 STATE pool, R-DA-19); a STANDPOINT (the card's bar); a THIRD clause (R-DA-03: never a third) | NONE (the town as agent) · PERSON (the presser, implied) | (none) | |
+| 5 | (implicit) no garrison stands | NOT STATED as such (folded into "the people") | — | NONE | must be stated |
+| 6 | (implicit) no militia stands | NOT STATED as such | — | NONE | must be stated |
+
+### 3.4 The reads the rewrite must state
+- (a) the town has the works (the shipped opener's fact, kept in the street's plain word).
+- (b) no garrison and (c) no militia — the force absent, as the second limb of the street's contrast ("and not the force to hold them" / "and no force of its own to hold them"; the stricter "and neither garrison nor militia").
+- Plus the LICENSED claim of the shipped sentence: claim 1 ("The town has ...").
+- Nothing else: no attacker, no outcome, no speech, no belief, no watch, no country.
+
+### 3.5 The angle's stance in one sentence
+The street is the town's own PLAIN ACCOUNT of its standing condition, in the commonest civic words, stated as a thing the town lives with rather than entered by an office (no formula, no citation, no measure), and it may NOT give the town a voice, a belief, a plan, a decision, a mood or an admission ("says", "knows", "believes", "pretends", "does not pretend", "when pressed"), name a person who asks or answers, or reach for the maxim the plain word invites (W22 · W23 · W27 · R-DA-14 · the register card's "no assigned reaction" and "closes on a moral, an uplift, a maxim").
+
+### 3.6 The turns worth keeping (lawful verbatim clauses)
+- "The town has" — the opener, lawful (not a proper slot; the town as possessor of the works); carry it as the opener of at least one face.
+- The CONTRAST SHAPE "has the thing ... and not the people ..." is the street's lawful construction for this key (a sibling-licensed contrast, wall 5) and its weight must be kept: "The town has the works and not the force to hold them" is the licensed form at the same compression; the two relative clauses ("that would save it", "who would use it") and the tail ("and says so when pressed") are the exact unlicensed set.
+- "the thing" as the street's word for the works — lawful as a plain noun, but only without its relative clause; "what the town has built" is the same register with the class named.
+
+### 3.7 What would make the rewrite a regression here
+- Writing the street as the ledger's entry ("Entered as standing: the works, and no force") or as the visitor's eye — a dropped angle; the three variants must keep three constructions (W4).
+- Keeping any speech, belief or admission frame ("says so", "knows it", "does not pretend", "when asked") or a person who presses.
+- Keeping "would save it" / "would use it" or any capability, outcome or attacker ("the thing that would matter in a siege").
+- Keeping "the people", "nobody", "no one", or naming the watch as the missing people (the town-tier trap: the watch STANDS on every native town of this key and is unread).
+- Losing the contrast shape "has X and not Y" from every face of this variant (the one lawful turn), or fronting the contrast as the subject ("Not the force but the works is what the town has") — wall 5 refuses a fronted contrast.
+- A face plainer than the shipped where the licensed compression exists (Part B §21.4).
+- A face that opens on `{settlement}` (T-F8), or a maxim close ("and a wall without hands is a fence").
+
+---
+
+## 4. POOL-LEVEL: THE READS, THE STANCES, THE COMPOSITION FENCES, THE REGRESSION LINE (checkpoint 4)
+
+### 4.1 The reads the rewrite must state in EVERY face of EVERY variant (the skeleton rule)
+1. THE WORKS: a wall-class member stands at {settlement} (read a). Spelling: "the works", "what the town has built", "the town's works"; the street's plain "the thing" only without a relative clause. Not "the line" (REFERENT row "the line" · W20: a force word on a pool that reads two forces); "walls" / "the perimeter" only at the W15 alias hazard (false on a `Gates (if walled)`-only town; a stretch on a thorp `Palisade`); never a material (W11), never a condition, extent, height, age, walkway or manning (ENTAILMENT law item 1), never a gate, tower or citadel as a second object.
+2. NO GARRISON (read b): no `Garrison`, `Barracks` or `Professional city watch` on the live roster.
+3. NO MILITIA (read c): no `Citizen militia` on the live roster.
+   Together (b) and (c) are the key's own word "no force". Spellings: "no force to hold them" (the key's compression; "to hold" is the force class's definitional purpose, not a manning claim), "no force at them", "no force of its own", "no garrison and no militia", "neither garrison nor militia". Never "nobody", "no one", "anyone", "the people", "unmanned", "no watch" (the watch is unread and REQUIRED on every native town of this key; a `Household levy` may stand on a thorp), never a hired company or charter hall asserted absent, never a headcount, a thinning or a pay word (no gate read on this key; a headcount is DS-DEF-5's cell).
+The three are ONE keyed condition (R-v); stating all three is not "a second fact". There is NO fourth read: this key reads no `monsterThreat`, no `economicGates`, no band, no route. A face that states the country's threat, the town's quiet, the pay of anything, a readiness word or a route over-claims (arm A0b; C7 against the Beasts row and DS-DEF-11 on the same page).
+
+### 4.2 The stances, one line each (from the register card and the block's PROVENANCE line)
+- `[ledger]`: the office enters the three legs as standing facts in its own formula; cites nothing (no muster record resolves; W24); invents no attacker, tactic, outcome, duty, maxim or forecast.
+- `[visitor]`: a stranger's eye at {settlement} sees the works and finds no force at them; it never acts, judges, is told, measures or names.
+- `[street]`: the town's plain account of what it has and has not (the sibling-licensed contrast "has the works and not the force"), with no voice, belief, plan, admission or interlocutor given to the town.
+- What NO stance may invent here (the block's PROVENANCE line read under ADDENDUM 8 ruling 2): a historical clause (walls built after a siege), a capability beyond presence ("cannot be held", "would save it", "takes this town"), a manning fact, an attacker, an outcome. "The causal clauses here are capability clauses (walls without people cannot be held)" describes the SHIPPED text and licenses nothing: the card prints no cause and no capability, and the engine joins no force to the works' holding.
+
+### 4.3 Composition fences the drafter cannot see but must write for (THE THREAD; the seam contract)
+- This is a SPINE (role spine; spine mounts 1 on the defense tab; modifier mounts 0). The composer puts it FIRST; modifiers follow by salience. Every face must therefore END on a noun a modifier can pick up (the works · the force · the town) and must read as the passage's opening, never as a turn outward.
+- A face is one or two sentences (A1). Where two: the second carries a noun forward from the first (R-i: the thread binds at k = 0). The shipped v1's second sentence changes subject to an attacker; the rewrite's second sentence, if any, stays on the works, the force or the town.
+- A sentence face may not open on `{settlement}` (T-F8); the settlement token opens at most one variant of the pool (wall 10); no face opens on a comma or a clause-list word.
+- No em dash, no exclamation, no digit, no percent, no `which`; the copula kept, the expletive struck ("There is no force" is the R-DA-07 expletive: prefer "No force stands").
+- The four faces of a variant are claim-equal to EACH OTHER (A6 across faces) and differ in CONSTRUCTION, not vocabulary alone (ADDENDUM 7 rule 4; W4: the variant's declared grammar is kept across its faces).
+- At most ONE negated-surface opener per variant (W10 / R-ii): "No force stands to the works" is a PRESENT read negated, not an ABSENCE opener, and it is spent once per variant.
+- The CONTRAST "has the works and not the force" is licensed by a sibling key (wall 5) but is never fronted and is the CLOSING move of at most ONE variant of the pool: the street owns it here; the ledger and the visitor close on another kind (a condition of the works; the force as an object; the town).
+- Sibling distance: the three variants keep three constructions (the ledger's entry in the office's formula · the visitor's one-perception "sees X and Y" · the street's plain contrast); no two variants of the pool share their first two words (A11); the census counts `grammars: 2` on the shipped pool and the rewrite may not fall below it.
+- The `[street]` register is neither the ledger nor the visitor: a street face that opens "Entered as standing" or "A stranger" has collapsed onto a sibling (W4).
+
+### 4.4 The provenance ruling for this pool
+The card licenses a citation of the muster holder "where the provenance budget allows"; the referent law (rule 5, OV-5, W24) licenses the muster's RECORD nouns only where a live `Citizen militia` with `Muster training` resolves, and on this key the militia is absent by construction (holder null on the census row); Part B §24 sets the exemplar rate at zero. RULING for the drafter, vetoable by the chair: zero citations on this pool; the ledger's formula ("entered as standing", "carried on the record") is lawful; "the roll shows" and "the books hold" are not; the street and the visitor cite nothing by their stance.
+
+### 4.5 What would make the rewrite of this POOL a regression (the inventory line and its kin)
+- Any face that states fewer than the three legs (the shipped rows each carry read (a) and fold (b) and (c) into a person word; the rewrite must be richer in truth: the works, no garrison, no militia, in every face).
+- Any face that is an inventory line: the key's facts with no angle and no thread ("The works stand. No garrison stands. No militia stands.").
+- A lost lawful turn: "A stranger at {settlement} sees" (v2) absent from the visitor variant; "The town has ... and not ..." (v3) absent from the street variant; the ledger's compression "has the works and no force to hold them" (the licensed form of v1's "has walls and nobody to put on them") absent from the pool.
+- A dropped angle: the visitor written as a ledger entry; the street written with the office's formula or the stranger's eye, or written as a belief/speech frame; the ledger written with a citation.
+- A kept unlicensed clause: "nobody to put on them", "A determined attacker", "takes this town", "with ladders and patience", "requires nothing else" (v1); "serious" ×2, "anyone standing in it" (v2); "that would save it", "the people who would use it", "and says so when pressed" (v3).
+- A face plainer than the shipped where a licensed form of the compression exists (Part B §21.4, ADDENDUM 6): "has walls and nobody to put on them" → "has the works and no force to hold them"; "sees a serious perimeter and a serious absence of anyone standing in it" → "sees the works and no force at them"; "has the thing that would save it and not the people who would use it" → "has the works and not the force to hold them". A rewrite that spends two flat sentences where one licensed compression stood is the regression the density law names.
+- A face that imports a read the key does not carry: the country's threat (the Beasts row's), the pay gate (DS-DEF-11's), the watch (unread; standing on every native town here), the readiness band (`{band}` RESERVED), the route (`{route}` unfilled), an attacker or a war stress (the war desk's).
+- A face that opens on `{settlement}` (T-F8) or names `{band}` / `{route}`.
+- A face at the wrong layer: a body word for the absence ("the muster is short", "the watch is gone"), a person as referent ("whoever would stand there"), an external body ("the enemy", "a raider") on a read that holds none (W20 · W22 · W25).
+
+### 4.6 Count
+Three shipped variants (vid 1 `[ledger]` · vid 2 `[visitor]` · vid 3 `[street]`); three sections above, one per variant; no variant added or removed (never trim).
+
+Seat: Fable 5.1 — marker packet; checkpoint 4 complete; the packet is whole.

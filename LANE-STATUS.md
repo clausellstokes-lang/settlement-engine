@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-11 11:20:18 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-11 11:26:03 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = d7f4c6b0e §919: the REWRITE train's first car lands — the index-stable draw signed (59.61 % of ce
 
@@ -211,7 +211,7 @@ stat: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-
 - **L-PROBE-2 (chair)**: cheap /6 tips · full:  · bracket: 
 ## REWRITE 8b PACKETS (rewrite/DS-DEF-n/<pool>/: skeleton · draft-round-N · refine · kept · refute* · cure-round-N · cured-round-N; JUDGMENT.md / JUDGMENT-cure.md per block; the entailment + referent tables)
 - DS-DEF-11: pools 5 · skeleton 5 · draft 5 · refine 5 · kept 5 · refute 13 · cure 10 · cured 10 · JUDGMENT yes · JUDGMENT-cure yes
-- DS-DEF-2: pools 12 · skeleton 12 · draft 0 · refine 0 · kept 0 · refute 0 · cure 0 · cured 0 · JUDGMENT no · JUDGMENT-cure no
+- DS-DEF-2: pools 15 · skeleton 14 · draft 0 · refine 0 · kept 0 · refute 0 · cure 0 · cured 0 · JUDGMENT no · JUDGMENT-cure no
 - entailment: surveys 6 · refutes 6 · ENTAILMENT-TABLE.draft.md 09-11 06:07 346945 B · referent surveys 6 · referent refutes 6 · REFERENT-TABLE.draft.md 09-11 11:01 285943 B
 - HOLD-VITEST absent · runner count 0
 
@@ -228,7 +228,7 @@ json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
 - LAST-RUNS: tolkien r7-not-launched/(none — nothingToRun 17:26), kay r8/wf_d76e605d-6d1, leguin r11/wf_49ef9b66-2e6, wolfe r8/wf_8cd21474-a7b, martin r8/wf_0cd91522-1ce, hobb r7/wf_255b6391-7fb, dnd r13/wf_2c525e43-1f2, ai r12/wf_6dd3b009-2b0, dnd_r13 r13/wf_2c525e43-1f2, leguin_r11 r11/wf_49ef9b66-2e6, dnd_r14 r14/
 
 ## WORKFLOW RUNS of chair session 4ed79a2b-6cd2-45cf-ab97-83cdad49c30b — PER AGENT, PER LANE (owner 09-11: save progress per agent per lane; a run dies with the session, its journal + the packets + the dock commits are the checkpoint; journals mirrored under $SC/_progress/<wf>/)
-- **wf_2e33aae5-027** (mtime 09-11 11:20): agent calls 13 (13 distinct) · DONE 7 · FAILED 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 6 — mirror `_progress/wf_2e33aae5-027/`
+- **wf_2e33aae5-027** (mtime 09-11 11:24): agent calls 18 (18 distinct) · DONE 12 · FAILED 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 6 — mirror `_progress/wf_2e33aae5-027/`
     - `a8df09f92` MARKER Beasts & Monsters: plagued, perimeter AND organized force · DONE · transcript 09-11 11:12 801 KB · 43 tool calls · files: "$D/skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--beasts-mons
     - `a2d2b0711` MARKER Beasts & Monsters: plagued, perimeter but NO force to hold it · DONE · transcript 09-11 11:12 667 KB · 27 tool calls · files: "$SC/rewrite/DS-DEF-2/ds-def-2--beasts-monsters-plagued-perimeter-but-no-force-t/skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--beasts-mons
     - `abb01c380` MARKER Beasts & Monsters: plagued, NO perimeter and NO force · DONE · transcript 09-11 11:13 692 KB · 37 tool calls · files: skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--beasts-mons
@@ -236,12 +236,17 @@ json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
     - `a6c9feae9` MARKER Beasts & Monsters: frontier, force without a perimeter · DONE · transcript 09-11 11:14 882 KB · 45 tool calls · files: skeleton.md, '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--beasts-monsters-frontier-force-without-a-perimet/skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--beasts-mons
     - `a16251050` MARKER Beasts & Monsters: settled, defenses beyond the need · DONE · transcript 09-11 11:11 750 KB · 38 tool calls · files: skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--beasts-mons
     - `af2097f74` MARKER Beasts & Monsters: settled, nothing organized · DONE · transcript 09-11 11:20 714 KB · 35 tool calls · files: "$P/skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--beasts-mons
-    - `aded159ae` MARKER Invasion & War: walls AND professional garrison · IN FLIGHT · transcript 09-11 11:20 907 KB · 45 tool calls · last: Bash SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
-    - `a731e9410` MARKER Invasion & War: walls with citizen militia · IN FLIGHT · transcript 09-11 11:19 776 KB · 36 tool calls · files: skeleton.md · last: Bash P=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratc
-    - `a86ab8357` MARKER Invasion & War: walls with NO force · IN FLIGHT · transcript 09-11 11:20 761 KB · 41 tool calls · files: "$D/skeleton.md · last: Bash SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
-    - `af3695335` MARKER Invasion & War: force with NO walls · IN FLIGHT · transcript 09-11 11:19 846 KB · 52 tool calls · files: "$D/skeleton.md · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
-    - `adfba1272` MARKER Invasion & War: militia only · IN FLIGHT · transcript 09-11 11:17 674 KB · 31 tool calls · last: Bash SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
-    - `a6d158fc4` MARKER Invasion & War: neither walls nor force · IN FLIGHT · transcript 09-11 11:20 161 KB · 3 tool calls · last: Bash SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
+    - `aded159ae` MARKER Invasion & War: walls AND professional garrison · DONE · transcript 09-11 11:24 1002 KB · 50 tool calls · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--invasion-wa
+    - `a731e9410` MARKER Invasion & War: walls with citizen militia · DONE · transcript 09-11 11:21 810 KB · 38 tool calls · files: skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--invasion-wa
+    - `a86ab8357` MARKER Invasion & War: walls with NO force · DONE · transcript 09-11 11:22 818 KB · 45 tool calls · files: "$D/skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--invasion-wa
+    - `af3695335` MARKER Invasion & War: force with NO walls · DONE · transcript 09-11 11:24 940 KB · 59 tool calls · files: "$D/skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--invasion-wa
+    - `adfba1272` MARKER Invasion & War: militia only · DONE · transcript 09-11 11:24 806 KB · 34 tool calls · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--invasion-wa
+    - `a6d158fc4` MARKER Invasion & War: neither walls nor force · IN FLIGHT · transcript 09-11 11:25 774 KB · 43 tool calls · last: Bash SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
+    - `a346d9d42` MARKER Internal Security: full legal chain (court AND prison) · IN FLIGHT · transcript 09-11 11:25 597 KB · 27 tool calls · files: "$D/skeleton.md · last: Bash SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
+    - `a7347320b` MARKER Internal Security: court without detention · IN FLIGHT · transcript 09-11 11:26 479 KB · 24 tool calls · last: Read /Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/4ed79a2b-6cd2-45cf-ab97-83cdad49c30b/
+    - `a1b1036b8` MARKER Internal Security: detention without process · IN FLIGHT · transcript 09-11 11:26 402 KB · 24 tool calls · last: Bash SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
+    - `a1007aea0` MARKER Internal Security: no legal infrastructure · IN FLIGHT · transcript 09-11 11:26 418 KB · 33 tool calls · last: Bash cat /Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/4ed79a2b-6cd2-45cf-ab97-83cdad49c
+    - `ac3d67fab` MARKER Economic Survival: STRONG · IN FLIGHT · transcript 09-11 11:26 378 KB · 15 tool calls · last: Bash D=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratc
 - **wf_6508cb77-d97** (mtime 09-11 10:52): agent calls 15 (7 distinct) · DONE 7 · FAILED 7 · RETRIED (superseded attempts) 8 · IN FLIGHT -7 — mirror `_progress/wf_6508cb77-d97/`
     - `a87757ba9` REFUTER defense · FAILED · transcript 09-11 06:25 526 KB · 21 tool calls
     - `a29122cfc` REFUTER general · FAILED · transcript 09-11 06:25 509 KB · 22 tool calls · files: general.referent.refute.md
@@ -300,4 +305,4 @@ json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
     - `ad30ac0bb` FOLDER · DONE · transcript 09-11 06:02 1531 KB · 36 tool calls · files: _partD.md, _partE.md, _partF.md, _partG.md · result: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/entailment/ENTAILMENT-TABLE.draft.md
 
 ## PROCESSES: 57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 3.89 3.94 3.55
+load: 2.64 3.26 3.38
