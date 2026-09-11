@@ -1,0 +1,21 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 109,
+ "firstTs": "2026-09-11T15:14:28.855Z",
+ "lastTs": "2026-09-11T15:17:22.190Z",
+ "tools": {
+  "Bash": 18,
+  "Read": 13
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "I'll start by checking whether an earlier attempt left a packet, then read the voice documents and run the licence card.",
+ "run": "wf_2e33aae5-027",
+ "agent": "adfba12728c134bb3",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/4ed79a2b-6cd2-45cf-ab97-83cdad49c30b/subagents/workflows/wf_2e33aae5-027/agent-adfba12728c134bb3.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}
