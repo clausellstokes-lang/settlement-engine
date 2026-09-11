@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-11 16:46:49 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-11 16:52:50 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -70,21 +70,6 @@
 | ? | other |  | failed | 0 | — | — | 15:29:19 |
 | ? | other |  | failed | 0 | — | — | 15:29:19 |
 | ? | other |  | failed | 0 | — | — | 15:29:17 |
-| ? | other |  | result | 0 | — | — | 14:58:10 |
-| ? | other |  | failed | 0 | — | — | 10:25:02 |
-| ? | other |  | result | 0 | stressors.referent.refute.md | — | 14:19:37 |
-| ? | other |  | result | 0 | — | — | 14:19:35 |
-| ? | other |  | failed | 0 | — | — | 10:25:05 |
-| ? | other |  | failed | 0 | — | — | 10:25:06 |
-| ? | other |  | result | 0 | economy.referent.refute.md | — | 14:17:01 |
-| ? | other |  | result | 0 | power.referent.refute.md | — | 14:17:05 |
-| ? | other |  | failed | 0 | — | — | 10:26:24 |
-| ? | other |  | failed | 0 | — | — | 10:25:36 |
-| ? | other |  | result | 0 | warFaith.referent.refute.md | — | 14:18:26 |
-| ? | other |  | failed | 0 | — | — | 10:25:06 |
-| ? | other |  | result | 0 | — | — | 14:20:27 |
-| ? | other |  | in-flight | 0 | — | — | 14:52:21 |
-| ? | other |  | failed | 0 | — | — | 10:26:25 |
 | ? | other |  | result | 0 | — | — | 20:05:25 |
 | ? | other |  | result | 0 | — | — | 20:14:30 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 20:25:54 |
@@ -99,7 +84,7 @@
 | ? | other |  | result | 0 | — | — | 20:30:38 |
 | ? | other |  | result | 0 | — | — | 19:35:44 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 20:34:56 |
-| ? | other |  | in-flight | 0 | — | — | 20:40:12 |
+| ? | other |  | in-flight | 0 | — | — | 20:52:23 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 20:24:44 |
 | ? | other |  | result | 0 | — | — | 20:01:26 |
 | ? | other |  | result | 0 | — | — | 19:49:03 |
@@ -107,11 +92,11 @@
 | ? | other |  | result | 0 | — | — | 20:39:04 |
 | ? | other |  | result | 0 | — | — | 19:35:00 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 20:12:23 |
-| ? | other |  | in-flight | 0 | — | — | 20:36:42 |
+| ? | other |  | result | 0 | — | — | 20:50:10 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 20:39:01 |
 | ? | other |  | result | 0 | — | — | 19:59:19 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 20:42:32 |
-| ? | other |  | in-flight | 0 | — | — | 20:41:55 |
+| ? | other |  | result | 0 | — | — | 20:51:56 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 20:13:24 |
 | ? | other |  | result | 0 | — | — | 20:02:45 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 20:22:52 |
