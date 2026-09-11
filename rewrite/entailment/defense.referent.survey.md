@@ -306,7 +306,7 @@ A band, a score band or a status label is computed FROM bodies and refers to NON
 |---|---|---|---|---|---|---|
 | `{seat}` | proper | DS-DEF-4 (`RECEIPT_POOLS_DOSSIER_STATE.md:2800`) | **5 pools** (capture ×5) | **YES** — `seat: properFill(text(power.government))` at `defenseStateProse.js:962` | `['settlement']` only | **the desk's one working power slot — but the card says it is never filled** (§9 W-2) |
 | `{faction}` | proper | DS-DEF-3 `:2737`, DS-DEF-4 `:2800`, DS-DEF-5 `:2870` | **0** | **NO** — no `faction` fill anywhere on the leaf | — | declared, unused, unwired |
-| `{npc}` | proper | DS-DEF-4 `:2800` | **0** | **NO** | — | declared; the block's own fence forbids it (`:2811`) |
+| `{npc}` | proper | DS-DEF-4 `:2800` | **0** | **NO** | — | declared; the block's own fence forbids it (`:2809-2810`) |
 | `{counterpart}` | proper | DS-DEF-1 `:2508`, 5 `:2870`, 6 `:2950`, 7, 8, 10 | 3 rows name it | **NO** at this tip | — | the besieger/occupier name; lives in `warStatus.js:283-298`, `occupationStatus.js:74-76` |
 | `{institution}` | proper | DS-DEF-6 `:2950`, DS-DEF-9 `:3197` | **1 row** (DS-DEF-6 `Clergy care` v2, `:3018`) | **NO** | — | a body-naming slot with no provider |
 | `{defwork}` | bare-common | DS-DEF-11 `:5967` | 3 pools | **YES** — `defwork: defworkFill(forces)` at `defenseStateProse.js:1084` | `['settlement']` only | the desk's one working BODY slot (§9 W-2) |

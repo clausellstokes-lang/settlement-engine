@@ -1,446 +1,418 @@
 # REFERENT SURVEY — THE POWER DESK (DS-POW-1 … DS-POW-7)
 
-**Question:** ADDENDUM 11, THE REFERENT LAW — for every institution-class noun this desk can
-render, which LAYER the engine gives it (BODY / HOLDER-ORGAN / POWER / ROLE), which reads
-resolve to each layer, the engine's own overlaps, the typed slot that names the power, and the
-always-safe class word. **This is a research packet. It decides nothing; the chair does.**
+**The question (brief ADDENDUM 11, THE REFERENT LAW).** For every institution-class noun and
+every role word this desk can render: which LAYER the engine gives it (BODY / HOLDER-ORGAN /
+POWER / ROLE), which reads resolve to each layer, the engine's own overlaps, the typed slot
+that names the power, and the always-safe class word. **A research packet. It decides nothing;
+the chair does.**
 
-**Dock:** `laneRW-DEFW` at `f2da5a3ee` (read-only; nothing staged, nothing run but the printing
-card script). Every cite below was re-derived in this tree, not copied from the addendum.
+**Dock:** `laneRW-DEFW` at `f2da5a3ee`, read-only. Nothing was modified, staged or committed.
+The only executable runs were `scripts/prose-licence-card.mjs` (15 cards, §3) and three
+`node -e` printing probes over the committed census, the generated leaf and two pure helpers.
+No vitest, no build. **Every file:line below was re-derived in this tree**; where ADDENDUM 11's
+own cite points elsewhere, the correction is stated in §9.
 
 **Sister packet:** `rewrite/entailment/power.survey.md` (the ENTAILMENT question — what a word
-MEANS). Its noun inventory is used here and its entailment rows are **not** repeated.
+MEANS). Its noun inventory is used here; its entailment rows are **not** repeated.
+
+> ⚠ **THIS FILE SUPERSEDES a same-named packet written at 05:33** (preserved as
+> `power.referent.survey.SUPERSEDED-0533.md`). Two of its desk figures are wrong against the
+> leaf (DS-POW-1 has **41** variants, not 43; DS-POW-7 has **60**, not 58 — §1), and its §0
+> block table is otherwise re-derived and agrees. Its findings F-16/F-17/F-18 are re-derived
+> here as R-2, R-9 and R-6 with the cites corrected.
 
 ---
 
-## §0 THE DESK, DERIVED RATHER THAN GUESSED
+## §0 THE DESK, DERIVED AND NOT GUESSED
 
-The brief forbids guessing the block prefix set. `scripts/prose-wave-gate.mjs:294-300`
-(`SECTION_LEAVES`) makes a **leaf IS a section**, and its own header records why: the first cut
-was a hand-written prefix list and it put two prefixes on the wrong desk and left DS-POP on none
-(`prose-wave-gate.mjs:278-292`). So the desk is read off its own leaf.
+The brief forbids guessing the block prefix set. Two independent registers agree:
 
-```
-node -e "import {DOSSIER_STATE_PROSE_POWER} from './src/data/dossierStateProse/power.generated.js'"
-```
+| Register | What it says | file:line |
+|---|---|---|
+| The wave gate's section table | `power: DOSSIER_STATE_PROSE_POWER` — **a leaf IS a section**, so the six leaves partition the corpus by construction | `scripts/prose-wave-gate.mjs:294` (`SECTION_LEAVES`), `:298` (the power row) |
+| Why it is a leaf and not a prefix list | the first cut was hand-written, put two prefixes on the wrong desk and left DS-POP on none — 29 of 708 pools reachable from no section | `prose-wave-gate.mjs:279-290` |
+| The projector's DESKS table | `{ file: 'power', constant: 'DOSSIER_STATE_PROSE_POWER', prefixes: ['DS-POW-'] }` | `scripts/generate-dossier-state-prose.mjs:109` |
+| The partition, asserted rather than trusted | `sectionsCoverEveryPool()` | `prose-wave-gate.mjs:307-331` |
 
-| Block | Title (annex) | Pools | RESOLVED | WIRING-UNRESOLVED | Variants | dm-only | Annex |
+**The power desk is the `DS-POW-` prefix, and exactly that: seven blocks.**
+
+---
+
+## §1 THE DESK, MEASURED (printed from the leaf and the committed census, not transcribed)
+
+| Block | Title (annex) | Pools | Variants | dm-only | RESOLVED | LICENSED | Annex |
 |---|---|---|---|---|---|---|---|
-| DS-POW-1 | Public legitimacy banner | 11 | 1 | 10 | 43 | 1 | `docs/content/RECEIPT_POOLS_DOSSIER_STATE.md:1915` |
-| DS-POW-2 | Stability + governing authority header | 9 | 8 | 1 | 31 | 0 | `:1998` |
-| DS-POW-3 | The Ladder | 5 | 5 | 0 | 16 | 0 | `:2069` |
-| DS-POW-4 | Rule and succession | 9 | 7 | 2 | 29 | 0 | `:2116` |
-| DS-POW-5 | Ruling structure + the ruling-power lens | 12 | 1 | 11 | 40 | 3 | `:2186` |
-| DS-POW-6 | Legitimacy / capture / safety ladder cells | 13 | 7 | 6 | 39 | 12 | `:2276` |
-| DS-POW-7 | Blocs, coalitions, the divided court | 20 | 2 | 18 | 58 | 13 | `:2366` |
-| **desk** | | **79** | **31** | **48** | **256** | **29** | |
+| DS-POW-1 | Public legitimacy banner | 11 | 41 | 1 | 1 | 1 | `docs/content/RECEIPT_POOLS_DOSSIER_STATE.md:1915` |
+| DS-POW-2 | Stability + governing authority header | 9 | 31 | 0 | 8 | 2 | `:1998` |
+| DS-POW-3 | The Ladder | 5 | 16 | 0 | 5 | 0 | `:2069` |
+| DS-POW-4 | Rule and succession | 9 | 29 | 0 | 7 | 3 | `:2116` |
+| DS-POW-5 | Ruling structure + the ruling-power lens | 12 | 40 | 3 | 1 | 1 | `:2186` |
+| DS-POW-6 | Legitimacy / capture / safety ladder cells | 13 | 39 | 12 | 7 | 5 | `:2276` |
+| DS-POW-7 | Blocs, coalitions, the divided court | 20 | 60 | 13 | 2 | 2 | `:2366` |
+| **desk** | | **79** | **256** | **29** | **31** | **14** | |
 
-Source-holder standing over the 79 rows (`docs/content/wiring-census.json`): **LICENSED 14 ·
-SOURCE-UNRESOLVED 65**; every LICENSED row resolves to a **state organ** — `court` 10, `watch` 2,
-`court + watch` 2. **No row on this desk resolves to `muster`, `elders`, `office`, `market`,
-`treasury`, `parish`, `toll-bar`, `census`, `road` or `tradition`.** No row is `INTERESTED`.
+Source-holder standing over the 79 census rows (`docs/content/wiring-census.json`):
+**LICENSED 14 · SOURCE-UNRESOLVED 65 · INTERESTED 0 · `covert` flag true 0.**
+Every LICENSED row resolves to a **state organ**: `court` 10 · `watch` 2 · `court + watch` 2.
+**No row on this desk resolves to `muster`, `elders`, `office`, `market`, `treasury`, `parish`,
+`toll-bar`, `census`, `road` or `tradition`.**
 
-⛔ **THE STRUCTURAL FACT THAT GOVERNS EVERY ROW BELOW.** *No pool of this desk reads
-`settlement.institutions[]`.* The 79 rows' reads are `legitimacy.*`, `power.*`, `factions`,
-`reading.rungs*`, `ledger*`, `breakdown*`, `politics.blocs`, `label`, `first`, `name` — and not
-one institution field. So the desk has **no BODY read of its own at all**: every body word its
-prose uses today (the hall, the watch, the walls, the customs, the granary, the market, the
-clerks) is a **baked noun with no row behind it**. The BODY layer reaches this desk only by
-borrowing another desk's read, which under law 1 is the layer error the law exists to name.
+### ⛔ THE STRUCTURAL FACT THAT GOVERNS EVERY ROW BELOW
+
+**No pool of this desk reads `settlement.institutions[]`, any defense bucket, any impairment,
+any patron or any per-faction `captureState`.** Measured: a regex over the `reads` and
+`fieldsRead` of all 79 rows for `institution|impair|patron|corrupt|forces|walls|garrison|
+militia|watch|muster|charter|mercenary` returns **zero hits**. The desk's whole vocabulary of
+reads is twenty-two expressions:
+
+```
+breakdown · breakdown.prosperity · breakdown.safety · factions · factions.length
+first (via STABILITY_LADDER in powerStateProse.js) · label (via RISK_POOL_OF in powerStateProse.js)
+ledger · ledger.present · legitimacy · legitimacy.breakdown · legitimacy.govMultiplier
+legitimacy.governanceFractured · name · politics.blocs · power.criminalCaptureState
+power.recentConflict · power.stability · reading.instability · reading.rungs
+reading.rungs.length · reading.rungs.map
+```
+
+So **the power desk has no BODY read of its own at all.** Every body word its shipped prose
+uses today — the hall (50 occurrences), the watch (5), the walls (4), the granary, the customs,
+the market, the clearinghouse, the workshops, the council, the court, the gates, the tables — is
+a **baked noun with no row behind it**. The BODY layer reaches this desk only by borrowing
+another desk's read, which under draft law 1 is precisely the layer error the law exists to
+name. **66 of 256 shipped variants carry at least one body word.**
 
 ---
 
-## §1 THE FOUR LAYERS, AS THE ENGINE TYPES THEM (every cite re-derived at `f2da5a3ee`)
+## §2 THE FOUR LAYERS, AS THE ENGINE TYPES THEM (every cite re-derived at `f2da5a3ee`)
 
 | Layer | The engine's typed home | file:line | What the layer answers |
 |---|---|---|---|
-| **BODY** | `settlement.institutions[]` rows by recorded name; defense bucketing by substring | `src/domain/institutions/defenseInstitutionBuckets.js:83-107` (`DEFENSE_BUCKET_KEYWORDS`), keys exported `:116` | does this thing exist here, and what is it |
-| **BODY (roster)** | 238 authored institution rows keyed by name | `src/data/institutionServices.js:8` onward (e.g. `"Town council"` `:32`, `"Courthouse"` `:89`, `"Citizen militia"` `:835`, `"Mayor and council"` `:1069`, `"Professional city watch"` `:1206`, `"Town watch"` `:1322`, `"Village reeve"` `:1346`, `"Town hall"` `:1623`, `"City hall"` `:1629`) | the recorded member |
-| **HOLDER-ORGAN** | `HOLDER_KINDS`, twelve, closed | `src/domain/prose/holderTable.js:78-81` | which record keeps this fact |
-| **HOLDER-ORGAN (state's four)** | `STATE_ORGAN_KINDS = office · court · treasury · watch` | `holderTable.js:115` | which organs a captured ruling structure reaches |
-| **HOLDER-ORGAN (kind→roster)** | `HOLDER_RECORDS`, one row per kind with its services and its citation | `holderTable.js:271-366` — `watch` kind `:318`, services `:319` (Crime reporting · Crime response · Missing persons); `court` kind `:325`, services `:326`; `office` kind `:357`, services `:358`, note `:362-363`; `muster` kind `:280`, note `:285-288`; `elders` kind `:332` | the organ's own books |
-| **POWER (settlement-wide)** | `powerStructure.criminalCaptureState` on the five-rung ladder | ladder `src/domain/corruption.js:474`; produced `src/generators/power/rulingStructure.js:755`, returned `:797`; mapped to the WATCH holder `holderTable.js:211` | who has taken the state |
-| **POWER (per-faction)** | `factions[].captureState`; the world-run stepper and its settlement rollup | `holderTable.js:129-144` (`capturedRulingStructure`); `src/domain/worldPulse/factionCapture.js:136-144` (`settlementCaptureState`); capture-crossing rungs `:157` | which house has been bought |
-| **POWER (per-institution impairment)** | a `corruption`-typed impairment on a SECURITY body, `covert` or revealed | `src/domain/corruption.js:630` (`SECURITY_INSTITUTION_RE = /(watch\|garrison\|constab\|guard\|magistrate\|court\|barracks)/i`), `:662-691` (`compromisedSecurityInstitutions`), the covert/revealed split `:677-680` | which body is bought, and whether the town knows |
-| **POWER (patron)** | a brokerage house's patron, closed vocabulary `genesis · captured` | `src/domain/worldPulse/brokeragePatronage.js:59` (`BROKERAGE_PATRON_SOURCES`), eligibility `:74-88` | who owns this house |
-| **POWER (bloc)** | `blocs[]{members, glue, end, strain, covert}`; a ruling bloc is a consolidation read | typedef `src/domain/worldPulse/settlementPolitics.js:64-67`; `rulingBlocOf` `:549`, floor `:149`; `coalitionConsolidation01` `:604` | who stands with whom |
-| **ROLE (typed, faction-side)** | a member faction's `leaderNpcId` / `leaderName` | `settlementPolitics.js:222`, `:252` | who heads this house |
-| **ROLE (typed, rung-side)** | `rungs[]{npcId, name, standing}`, top rung first | `src/domain/townMap/ladderRead.js:95-107` (`ladderRungsOf`); mirror shape `:22-28` | who is where inside a house |
-| **ROLE (typed, seat rank)** | `roleSeatFor(dotRank)` → `leader_champion · lieutenant_operator · agent_protege` | `src/domain/worldPulse/npcAgency.js:411-415`; demotion twin `corruption.js:462-464` | how high the buying reached |
-| **ROLE (vocabulary)** | `ROLE_CATEGORY_KEYWORDS` (8 categories), `POWER_ROLES_BY_CATEGORY` (143 rows over 8 domains), `FACTION_ROLES` (6 keys) | `src/generators/roleCategory.js:32-68`; `src/data/historyData.js:18-1103`; `src/generators/factionRoles.js:44-61` | the words an office may be called |
-| **PERSON** | **never a referent** — `COLUMN_SOURCES.holderRole` is a hardcoded null on every row | `src/domain/institutions/institutionTable.js:215` (`OPEN_BY_LAW.holderRole = 'no typed NPC→institution edge exists; the value is null on every row'`), `:503-509` (basis `absent:…`, the name-regex at `npcProfile.js:341-353` deliberately not called); the register's own statement `src/domain/prose/holderTable.js:32-36` | — |
-
-⭐ **The move grammar already carries the law's shape.** `MOVES.PERSON` asserts *"an office-holder
-as office, at most one recorded act"* and licenses *"a role: an office roll, `role`,
-`holderRole`"* (`src/domain/prose/moveGrammar.js:41`). The REFERENT LAW's role clause is that
-move, restated; `holderRole` being null everywhere is why the licence is empty on this desk.
+| **BODY** (bucket) | `DEFENSE_BUCKET_KEYWORDS` — substring matches over the institution's native semantic name; six defence buckets plus `magicDef` | `src/domain/institutions/defenseInstitutionBuckets.js:83` (table), `:84` walls · `:88` garrison · `:92` militia · `:95` watch · `:98` mercenary · `:101` charter · `:105` magicDef; keys exported `:116` | does this thing exist here, and what class is it |
+| **BODY** (roster) | 285 authored institution rows keyed by recorded name, each with its service menu | `src/data/institutionServices.js:8` onward | the recorded member |
+| **BODY** (partition) | `partitionDefenseInstitutions` / `standingDefenseForces` — RUIN-BLIND by contract | `defenseInstitutionBuckets.js:134`, `:169` | the roster as built vs. as it stands |
+| **HOLDER-ORGAN** | `HOLDER_KINDS`, twelve, closed: treasury · muster · census · parish · toll-bar · market · watch · court · elders · tradition · road · office | `src/domain/prose/holderTable.js:78` | which record keeps this fact |
+| **HOLDER-ORGAN** (the state's four) | `STATE_ORGAN_KINDS = office · court · treasury · watch` — the only kinds a settlement-wide capture of the ruling structure reaches | `holderTable.js:115`, with its ground `:92-114` | which organs a captured ruling structure reaches |
+| **HOLDER-ORGAN** (resolution) | field → kind (`HOLDER_SOURCES`, `:164`), kind → this town's institution (`holdersOf`, `:599`, through the kind's record-keeping SERVICE names `HOLDER_RECORDS`, `:271`) | | who in THIS town keeps it |
+| **POWER** (settlement-wide) | `powerStructure.criminalCaptureState` on the five-rung `CAPTURE_LADDER` (`none · adversarial · equilibrium · corrupted · capture`) | ladder `src/domain/corruption.js:474`; written `src/generators/power/rulingStructure.js:797`; computed `src/generators/factionDynamics.js:220` | is the state itself bought |
+| **POWER** (per faction) | `factions[].captureState`, seeded at birth onto the GOVERNING entry only when the settlement rung is equilibrium+ | `rulingStructure.js:764-767`; world-run `src/domain/worldPulse/factionCapture.js:106-121`; rollup `:136` | which house is bought |
+| **POWER** (INTERESTED) | `capturedRulingStructure` + `standingOf(..., kind)`: the four state organs become interested parties in their own records | `holderTable.js:129`, `:642`, the organ gate `:678-700`; the standing word `:90` | is the record's keeper a party to it |
+| **POWER** (per institution) | a `corruption`-typed impairment on a SECURITY body; `covert !== true` ⇒ a public scandal, else the hidden channel | `corruption.js:630` (`SECURITY_INSTITUTION_RE`), `:663` (`compromisedSecurityInstitutions`), `:677-680` (the covert/revealed split) | is this one body bought, and does the town know |
+| **POWER** (patron) | a brokerage house's patron, `genesis` or `captured` | `src/domain/worldPulse/brokeragePatronage.js:60`, `:202`, `:228`, `:285-295` | whose interest does this house serve |
+| **POWER** (the name) | the power is a FACTION NAME or the ruling structure; `governingName` is a generated `proper` string, never a baked noun | `rulingStructure.js:787`; the ruling-power classification `src/domain/spatial/cohesionWeave.js:133`, `:171`, `:196` | who the power is |
+| **ROLE** | `officesOf(settlement)` — the NPC roster's `role` and `title` nouns **plus the governing seat's designation**; an OPEN column by law | `src/domain/institutions/institutionTable.js:377-400`, `:396-398` (the seat folded into the office set); openness `:210-216` | what offices exist here |
+| **PERSON** — **never a referent** | `holderRole` is a hardcoded `null` on every row: no typed NPC→institution edge exists anywhere in the estate | `institutionTable.js:457` (the null), `:129-138` (`COLUMN_SOURCES.holderRole`, `read: false`), `:215` (`OPEN_BY_LAW`), restated `holderTable.js:32-36` | — |
 
 ---
 
-## §2 WHAT THIS DESK CAN ACTUALLY PUT ON A PAGE
+## §3 THE LICENCE CARD AS PRINTED — WHAT IT SAYS ABOUT THE LAYER TODAY
 
-Four slots fill; eight do not (`src/domain/display/stateProse/powerStateProse.js:858-876`, `:909`,
-`:994`, `:639`).
+Fifteen cards were run across all seven blocks (`node scripts/prose-licence-card.mjs <block>
+'<pool>'`). Their grammar is uniform and **layer-blind**:
 
-| Slot | Fill | file:line | Layer of the fill |
+| Card line | What it prints | Layer content |
+|---|---|---|
+| `reads:` | the field expressions, each with its absence class | the field, not its layer |
+| `may claim:` | *"that `<field>` holds, as a STANDING fact of the record"* — identically on `governanceFractured`, `stability`, `criminalCaptureState`, `govMultiplier`, `blocs`, `rungs.length` | **no referent layer at all** |
+| `may NOT:` | *a count, a cause, a season, a future, a standpoint, a second fact* (+ `another civic object of the class <X>` where T-F12 bites) | no layer clause |
+| `source:` | e.g. `court · standing LICENSED · a STATE ORGAN (interested where the town is captured)` | **the one layer signal the card already prints** |
+| `audience:` | `player (no mark) · marks in this pool: dm-only` | the visibility signal, from the VARIANT MARKS |
+| `covert:` | `no` on **all 79 rows of this desk** | reads the census flag, which never fires here (§7) |
+
+Cards run (all RESOLVED, spread across every block): DS-POW-1 `governanceFractured true`;
+DS-POW-2 `siege matched`, `recentConflict present`, `governing faction holds a DOMINANT share`;
+DS-POW-3 `clear top rung, low instability`, `shallow ladder (few rungs recorded)`; DS-POW-4
+`legitimacyHold: public backing hardens the hold`, `riskLabel: Critical. The seat could fall`;
+DS-POW-5 `autocrat`; DS-POW-6 `capture reached a LEADER`, `capture pressure ADVANCING`,
+`neutral baseline`, `operation role criminal revenue stream (unclassified)`; DS-POW-7 `an
+opposition bloc forms COVERT under an autarchy`, `layer DORMANT (no ledger materialized)`.
+
+**The card's `source:` line is already an ORGAN-UNDER-POWER marker in everything but name.** On
+this desk it is the only printed thing that distinguishes a record's keeper from the record's
+subject, and ADDENDUM 11 rule 2's `BODY / ORGAN-UNDER-POWER / ROLE` tag has no printed home yet.
+
+---
+
+## §4 THE NOUN INVENTORY — EVERY INSTITUTION-CLASS NOUN A FACE OF THIS DESK CAN RENDER
+
+Reading: **L** = the layers the engine gives the word. **desk reads** = which of THIS desk's
+reads resolve to that layer (the answer is very often *none*, and that is the finding).
+
+### §4.1 The bodies
+
+| Noun | Layers the engine gives it (engine row · file:line) | Desk reads that resolve to each layer | Engine's own overlaps | Typed slot for the power | Always-safe class word |
+|---|---|---|---|---|---|
+| **the watch** | **BODY**: watch bucket `defenseInstitutionBuckets.js:95-97` (`town watch` · `city watch` · `professional city watch`); roster `Professional city watch` `institutionServices.js:1206`, `Town watch` `:1322` · **HOLDER-ORGAN**: `watch` kind `holderTable.js:78`, a STATE ORGAN `:115`, records `Crime reporting / Crime response / Missing persons` `:318-323`, holders measured = *Professional city watch, Town watch* · **POWER**: matched by `SECURITY_INSTITUTION_RE` `corruption.js:630`, so it can carry a `corruption` impairment, covert or revealed `:677-680` | BODY: **none** (`forces.watch.present` is DS-DEF-5's, census row `DS-DEF-5 :: watch PRESENT`) · HOLDER: `power.criminalCaptureState` (DS-POW-6 `capture reached an AGENT…`, `…a LEADER`) and `breakdown*` + `criminalCaptureState` (DS-POW-6 `capture pressure ADVANCING`, `…RECOVERING`) — 4 rows, kind `watch` / `court + watch` · POWER: **none** | `professional city watch` sits in the **garrison** bucket (`:90`) AND the **watch** bucket (`:96`); it is ALSO the watch-kind record holder (`:319` services vs `institutionServices.js:1206`); and it is ALSO a SECURITY institution (`corruption.js:630`). One name, three registers | — (the desk names no power over the watch) | at the BODY layer **the guard** (garrison bucket `:88-90`, `professional guard`); the paid military as a class is **the muster** (`holderTable.js:78`, records `:280-288`) and the watch is **not in it** |
+| **the hall** | **BODY**: `Town hall` `institutionServices.js:1623`, `City hall` `:1629` (both **office**-kind holders, `holderTable.js:357-362`), plus `Guild Hall` `:55`, `Adventurers' Charter Hall` `:320`, `Free company hall` `:930`, `Hireling hall` `:1002`, `Gambling halls` `:941` · **civic class** `hall` `wiringCensus.js:1314` · **ROLE/POWER by proxy**: the desk uses it as a synonym for the `{seat}` fill | **none at any layer.** 50 occurrences across the desk, zero reads | the word is the civic class `hall` (with `council`, `charter`, `seat`, `office`, `chamber`, `moot`) — so a T-F12 attach beside any of those six is refused | `{seat}` (§5) | **the ruling structure** (class word) or the `{seat}` slot; *the hall* is unlicensed as a body on this desk |
+| **the walls** | **BODY**: walls bucket `defenseInstitutionBuckets.js:84-87`; roster *Town walls · City walls and gates · Citadel · Massive walls and fortifications · Palisade or earthworks · Gates (if walled)* · **HOLDER-ORGAN**: the `walls` token maps to the **muster** kind `holderTable.js:188` · **civic class** `wall` `wiringCensus.js:1302` | **none.** 4 occurrences (DS-POW-2 `siege` v1, v4; DS-POW-6 `neutral baseline` v1; DS-POW-7 `glue threat` v1) | the `walls` field is the muster's, not a walls-kind's; `Gates (if walled)` is in the **walls** bucket AND is a **toll-bar** holder (`holderTable.js:304-308` cite) | — | the `{defwork}` slot is the **defense desk's**; this desk has no licensed spelling |
+| **the gates** | **BODY**: `Gates (if walled)` matches the walls bucket (`wall` substring, `:84`); civic class `wall` (`gate`, `wiringCensus.js:1302`) · **HOLDER-ORGAN**: toll-bar (`Toll collection`, `holderTable.js:304-308`) | **none.** DS-POW-2 `siege` v2 ("the gates"), DS-POW-6 `duty evasion` v2 ("the gate") | one row in two registers (defence perimeter + toll bar) | — | none licensed here |
+| **the granary** | **BODY**: `City granaries` `institutionServices.js:838` · **civic class** `storehouse` `wiringCensus.js:1321`, deliberately split from `store` `:1304-1308` · **HOLDER**: withdrawn on its own evidence — *"its only writers are a prose phrase map and a binding counter"* `holderTable.js:157-159` | **none.** DS-POW-1 `breakdown dominated by FOOD, adverse` v1 (twice in one sentence) | the word named two civic objects (the stock and the building) and the class was re-cut at REWRITE 8a-8 | — | none licensed here |
+| **the customs** | **BODY**: `Customs house` `institutionServices.js:530` · **HOLDER-ORGAN**: toll-bar (`Customs brokerage`, `holderTable.js:304-308`) | **none.** DS-POW-6 `duty evasion` v1, v3 — the pool's only read is `name` | — | — | none licensed here |
+| **the market** | **BODY**: `Market` `:48`, `Market square` `:1064`, `Weekly market` `:524`, `Daily markets` `:879`, `Multiple market squares` `:1132`, `Black market` `:759`, `Slave market` `:517`, `Fish market` `:920`, `Whisper market` `:1671` · **HOLDER-ORGAN**: `market` kind `holderTable.js:311-316`, holder measured = *Market square* · **civic class** `market` `wiringCensus.js:1310` | the operation-role pools read `name` (the criminal operation's own name) — DS-POW-6 `parallel marketplace`, `stolen goods market`, `criminal revenue stream` carry `objectClass: market` in the census | the word names a lawful body, an illegal body and a holder kind at once; the desk's "second market" is the operation's own name, not the market kind | — | speak the operation by its role label (`criminalOpRole.js:38-57`), never as *the market* |
+| **the court** | **BODY**: `Courthouse` `institutionServices.js:89`, `Multiple court buildings` `:1117` · **HOLDER-ORGAN**: `court` kind `holderTable.js:78`, a STATE ORGAN `:115`, records `Criminal trials / Civil disputes / Notary services / Criminal proceedings / Civil litigation / Appeals` `:325-330`, holders measured = *Courthouse, Multiple court buildings* · **POWER**: `SECURITY_INSTITUTION_RE` matches `court` `corruption.js:630` · **civic class** `law` `wiringCensus.js:1311` | HOLDER: **12 of the desk's 14 LICENSED rows** resolve to `court` (10) or `court + watch` (2) · BODY: **none** | ⛔ **the word means two different things on this desk**: the *court of law* (the holder) and the *court* as the political assembly (DS-POW-7's pool name `consolidation 0: a fully divided court`, census `objectClass: law`). The engine's only typed `court` is the law court | — | at the assembly sense: **the hall's own combination** / the `{seat}`; at the record sense the court is a CITATION, never a subject |
+| **the council** | **BODY**: `Town council` `:32` (holds **elders** `Record of custom` AND **toll-bar** `Market charter and tolls`), `Mayor and council` `:1069`, `Elder Grove Council` `:497`, `Guild governance` `:985` · **POWER (a value)**: `council` is one of the six `RULING_POWERS` `cohesionWeave.js:133`, mapped from the archetypes `government · civic · labor` `:172` · **a NAME**: fourteen `governingName` values contain "Council" (`rulingStructure.js:161-176`, `:219-250`, `:259-290`) · **civic class** `hall` `wiringCensus.js:1314` | POWER: `readings.structuralLens.rulingPower === 'council'` selects DS-POW-5's `council` pool (`powerStateProse.js:709-713`) — **census-WIRING-UNRESOLVED** · BODY: none | one word = an institution row, a ruling-power value, and part of most `{seat}` fills. The annex's own fence: *"prose that hard-codes the council will be wrong on most settlements"* `RECEIPT_POOLS_DOSSIER_STATE.md:2199-2201` | `{seat}` | **the ruling structure**; the six ruling-power words are lens VALUES and are safe only as the pool they key |
+| **the workshops** | **BODY**: `Craft Guild District` `:134`; civic class `craft` `wiringCensus.js:1316` | **none** — DS-POW-5's five `economicBase:` pools are **dark by declaration** (`powerStateProse.js:665-680`: the three source keys are convicted as keys no writer produces, so the base fails soft to `mixed` and the desk refuses to draw it) | — | — | none licensed here |
+| **the tables** (gambling) | **BODY**: `Gambling halls` `institutionServices.js:941` | DS-POW-6 `unlicensed revenue` v3, on a `name` read | — | — | the role label `unlicensed revenue` |
+| **the clearinghouse** | **no engine row anywhere** — not a roster name, not a bucket, not a civic class | DS-POW-6 `stolen goods market` v1 | — | — | none; the word is an invention |
+| **the temple / `{institution}`** | **BODY**: the §0c institution slot, DS-POW-5's theocracy arm (`RECEIPT_POOLS…:2197`) · civic class `temple` `wiringCensus.js:1312` | **named by one variant of forty and never filled** — census `DS-POW-5 :: theocracy` `slotsWithoutProvider: ["institution"]`; the desk leaves it unfilled by declaration (`powerStateProse.js:696-701`), so anchored liveness drops that variant | the ONE variant of this desk that would name a recorded institution row is the one variant that never renders | — | the parish/faith vocabulary is the **warFaith desk's** |
+| **the prison / the gaol** | **BODY**: `Small prison/stocks` `:1635`, `Large prison` `:1640` · civic class `law` `wiringCensus.js:1311` | **none** — not rendered by any shipped variant of this desk | the `law` class puts prison, gaol and court in one refusal set | — | — |
+| **the guard** | **BODY**: garrison bucket `defenseInstitutionBuckets.js:88-90` (`professional guard`); `SECURITY_INSTITUTION_RE` matches `guard` `corruption.js:630`; civic class `force` `wiringCensus.js:1303` | **none** | the garrison bucket contains the *professional city watch*, so "the guard" and "the watch" overlap in the engine's own table | — | **the guard** is itself the safe BODY word for the garrison bucket — on the defense desk, not here |
+| **the muster** | **HOLDER-ORGAN ONLY**: `muster` kind `holderTable.js:78`; its record is `Muster training` `:281`; **exactly ONE institution in the whole 285-row roster keeps it — the Citizen militia** (`institutionServices.js:835`), which the table itself calls *"the sharpest wiring debt this table found"* `holderTable.js:285-288`. The muster kind's FIELDS are walls · garrison · militia · mercenary · charter · force · economicGates … `:188-199` | **none.** The desk's single occurrence is the **verb** — DS-POW-4 `legitimacyHold: public opinion neither helps nor hurts` v1, *"what {faction} can muster for itself"* | ⚠ **a reverse alias trap**: the class word for the paid military is a common English verb, and this desk already uses the verb on a legitimacy read. A refuter reading for the class word will hit it | — | **the muster** (as a noun, on a muster-kind read — which this desk has none of) |
+| **the rolls · the records · the accounts · the books · the returns · the manifests · the minutes** | **HOLDER-layer SURFACES** — the office's own formula. `HOLDER_RECORDS` names the service rows that make an institution a keeper (`holderTable.js:271-364`); `office` is *"the compiling record itself"* `:74-77`, and a citation on it is a FINDING, not a licence `:361-362` | DS-POW-1 (`rolls` ×3, `records`, `accounts` ×3, `returns`), DS-POW-2 (`rolls`), DS-POW-4 (`rolls` ×3, `records` ×3), DS-POW-5 (`books`), DS-POW-6 (`rolls`, `record`, `returns`, `books`, `manifests`, `minute`) | the shipped `ledger` token was **withdrawn** from the holder table on its own evidence — *"seven writers across the treasury, the peace terms, the pantheon and three lifecycles, so the token names no one holder"* `holderTable.js:159-161` | — | the surface is lawful (ADDENDUM 12 R-vi / W7); **the roll as an AGENT-SOURCE is not** |
+| **the houses** (15) / **a house** (6) | **POWER**: a `faction` is a recorded NAME — `factions[]{faction, power, powerLabel, isGoverning}` (`rulingStructure.js:781`, `:787`), and in the world-run a `factionStates` entry with `archetype`, `captureState`, `leaderNpcId` (`settlementPolitics.js:246-258`) | `factions` / `factions.length` (DS-POW-2 DOMINANT / NARROW); `politics.blocs` (DS-POW-5 `autocrat`, DS-POW-7 presence) | *house* is also a BODY word elsewhere (`Banking House` `:96`, brokerage houses `brokeragePatronage.js:283-286`) | `{faction}` / `{counterpart}` (§5) | **the houses** is safe as the plural of the typed faction slot; it is NOT safe for a brokerage house or a bank |
+| **the combination / the bloc / the majority** | **POWER**: the `Bloc` typedef — `{id, members[], glue{type,detail}, end, strain, sinceTick, covert?}` `settlementPolitics.js:63-67`; glue types `:423-455`; ends `ARCHETYPE_END` `:461`; ruling bloc `:549`; consolidation `:604` | `politics.blocs` — DS-POW-7 `layer DORMANT` and `an opposition bloc forms COVERT…` (the only two RESOLVED of twenty) | the glue `patronage` is **PEOPLE-HELD** and dies at succession (`:451`, `:792`, `:803`) — a ROLE-layer fact inside a POWER-layer row | `{faction}` + `{counterpart}` | **the combination** (the shipped word) is the safest: it names the typed bloc without claiming an institution |
+| **the criminal interest / the operator** | **POWER**: `computeCriminalCaptureState` reads a criminal FACTION's power against the governing faction's and the safety ratio (`factionDynamics.js:220-273`); the operation's own role is a label (`criminalOpRole.js:38-57`) | `power.criminalCaptureState` (4 rows), `name` (7 operation-role rows) | ⚠ the ladder names **no faction and no person**: `capture` = *"a REAL underworld … DOMINATES a still-standing government"* `factionDynamics.js:237-243`; `corrupted` = *"the council is purchased"* `:257-259` | none typed — the criminal party is never named by a slot | **the criminal interest** (the shipped words) is the safest: it is a standing, not a body |
+
+### §4.2 The role words
+
+`officesOf` (`institutionTable.js:377-400`) is the engine's ROLE layer: the NPC roster's `role`
+and `title` nouns, **plus the governing seat's designation** (`:396-398`). The column is OPEN by
+law (`:210-216`). **No typed NPC→institution edge exists** (`:457`, `:129-138`), so a role word
+may state a STANDING CONDITION and may never be given an act, an intention or a fate.
+
+| Role word | Occurrences on the desk | Engine row · file:line | Layer verdict |
 |---|---|---|---|
-| `{settlement}` | `settlement.name` | `powerStateProse.js:858` | the town (not an institution) |
-| `{seat}` | `powerStructure.governingName` | `powerStateProse.js:860`, `:875`; produced `src/generators/power/rulingStructure.js:787` | **POWER** — a governance LABEL, not an institution row |
-| `{faction}` | the **same** `governingName` string | `powerStateProse.js:876`, `:909`, `:953` | **POWER** |
-| `{counterpart}` | `readings.contenders.challengers[0].name` | `powerStateProse.js:994`; produced `src/domain/rulingPowerCoup.js:87-105` | **POWER** (a rival faction's name) |
-| `{npc}` | `reading.rungs[0].name` | `powerStateProse.js:639`; produced `ladderRead.js:95-107` | **ROLE** (the top rung's holder) |
-| `{institution}` | **deliberately unfilled** | `powerStateProse.js:914-916` | would be **BODY** — absent |
-| `{band}` `{reason}` `{good}` `{route}` `{timeband_since}` `{timeband_age}` | unfilled | `powerStateProse.js:914-916`, `:928-940` | — |
-
-⚠ **THE TWO-BAG NOTE IS A REFERENT COLLISION THE ENGINE ALREADY RECORDS.**
-`powerStateProse.js:862-873`, verbatim in part: *"{seat} CARRIES TWO INCOMPATIBLE ROLES ACROSS
-THESE BLOCKS… In DS-POW-1 every {seat} seam is the governing BODY… In DS-POW-2 it is the HALL, a
-PLACE the body occupies… No hall-name producer exists"*, so DS-POW-2 leaves `{seat}` unfilled and
-keeps 21 of 31 variants. This is law 3 (same word, same referent) failing **at the slot**, not at
-the sentence — and the fix the engine took was to drop the variants, not to change the word.
+| **the clerks** | 3 — DS-POW-1 `Endorsed` v2, `Approved` v2, `Legitimacy Crisis` v2 | no typed row: a clerk is neither a roster institution nor a holder kind. `holderRole` is null `institutionTable.js:457` | **PERSON doing an act** (*record*, *name*, *chase*) on a read that is the legitimacy band |
+| **the officials** | 1 — DS-POW-6 `duty evasion` v1, *"enough officials are agreeable"* | as above | **PERSON with a disposition**, on a `name` read |
+| **a ruler / its rulers** | 7 — DS-POW-1 `Endorsed` v4; DS-POW-4 `previousGovernments` v4, `legitimacyHold: backing` v1 and v3; DS-POW-6 `present: false` v1, `neutral baseline` v1 | the generic of the `{seat}` fill; `officesOf` folds `governingName` into the office set `:396-398` | **ROLE**, licensed as a standing condition; *"a ruler … can do things a ruler without it cannot attempt"* is a maxim frame, not a town fact |
+| **an operator** | 1 — DS-POW-1 `Endorsed` v4 | the criminal side has no typed person; the ladder is settlement-wide (`factionDynamics.js:220`) | **PERSON**, on a legitimacy-band read |
+| **a leader** | 2 — DS-POW-7 `glue concession` v3, `receipt fractured` v3 | `leaderNpcId` / `leaderName` ARE typed (`settlementPolitics.js:252-253`) and **the desk reads neither** | ROLE word over an **unread** typed field |
+| **the person who speaks for {faction}** | 1 — DS-POW-6 `capture reached a LEADER` v1 | the rung word comes from `capturePoolKey` (`powerStateProse.js:436-440`), which reads ONLY the settlement-wide ladder | **ROLE asserted from a POWER read that names no person** |
+| **the incumbent / the challenger** | DS-POW-4 `Contested` v3, `Critical` v1 (`{counterpart}`) | `contenders.incumbent{name, gated, govMultiplier}` / `challengers[]{name, archetype, weight}` arrive as a caller READING (`powerStateProse.js:994`) | ROLE, and the slot carries a recorded NAME |
+| **`{npc}`** | DS-POW-3, 6 of 16 variants | `ladderRungsOf` → `{npcId, name, standing}` `src/domain/townMap/ladderRead.js:95-107`; filled `powerStateProse.js:639` | ⚠ **the desk's ONE person-named slot** — a recorded NPC name in subject position (§9 Q-1) |
+| **the reeve · the headman · the mayor · the priest** | inside `{seat}` fills, never as bare nouns | `'village reeve': 'Elected Reeve'` `rulingStructure.js:164`; `"Headman's Authority"` `:259`; `'Priestly Guidance'` `:260`; `'Town Mayor'` `:284` | ⚠ **a role word can arrive INSIDE the body slot.** `{seat}` is not guaranteed to render a body |
+| **elder** | an ANGLE tag, not a text noun — DS-POW-2 `recentConflict` v1, DS-POW-3 `low instability` v2, DS-POW-4 `previousGovernments` v1 | ALSO a holder kind (`elders`, `holderTable.js:332-337`, holders = *Household elder, Village headman, Village elder, Town council*) and three roster rows (`:14`, `:20`, `:26`) | the same string is a stance name, a holder kind and an institution row |
+| **the captain · the factor** | **zero occurrences** on this desk | ADDENDUM 11's specimen role words; `captain` matches no roster row and no holder kind | not part of this desk's vocabulary |
+| **somebody · nobody · anybody · everybody · a stranger · people · a person** | very frequent (the `[visitor]` and `[street]` angles) | no typed row; the licence card's standing refusal is *"a totality over persons"* | layer-free; they become PERSON claims only when given an act |
 
 ---
 
-## §3 THE LICENCE CARDS AS PRINTED (eight RESOLVED pools, one per block plus two)
+## §5 THE TYPED SLOTS THAT NAME THE POWER
 
-`node scripts/prose-licence-card.mjs <block> "<pool>"`, run in the dock.
-
-| Block :: pool | reads | source line the card prints | may claim |
-|---|---|---|---|
-| DS-POW-1 :: `governanceFractured true` | `legitimacy`, `legitimacy.governanceFractured` | `court · standing LICENSED · a STATE ORGAN (interested where the town is captured)` | that `governanceFractured (=== true)` holds, as a STANDING fact of the record |
-| DS-POW-2 :: `recentConflict present` | `power.recentConflict` | `court · standing LICENSED · a STATE ORGAN` | that `recentConflict` holds |
-| DS-POW-3 :: `clear top rung, low instability` | `reading.instability`, `reading.rungs`, `.length`, `.map` | `(none) · standing SOURCE-UNRESOLVED` — *"NO citation is licensed: a face naming a record holder here is refused by arm A13"* | that `instability` holds |
-| DS-POW-4 :: `legitimacyHold: public backing hardens the hold` | `legitimacy.govMultiplier` (predicate `> 1`) | `court · standing LICENSED · a STATE ORGAN` | that `govMultiplier (> 1)` holds |
-| DS-POW-5 :: `autocrat` | **`politics.blocs`** | `court · standing LICENSED · a STATE ORGAN` | **that `blocs` holds** — see §6 F-2 |
-| DS-POW-6 :: `capture pressure ADVANCING` | `breakdown`, `.prosperity`, `.safety`, `power.criminalCaptureState` | `court + watch · standing LICENSED · two-source row · a STATE ORGAN` | that `safety (< 0 AND < 0)` holds |
-| DS-POW-6 :: `capture reached a LEADER` | `power.criminalCaptureState` | `watch · standing LICENSED · a STATE ORGAN` | that `criminalCaptureState` holds |
-| DS-POW-7 :: `an opposition bloc forms COVERT under an autarchy` | `politics.blocs` | `court · standing LICENSED · a STATE ORGAN` | that `blocs` holds |
-
-Every card prints `covert: no` (§8) and the same closing refusals, including *"a named character
-and that character's fate (product scope)"*. **The card already prints the ORGAN half of the
-referent layer** (`a STATE ORGAN`) and prints **nothing** for the BODY or ROLE half — the law's
-item 2 (a layer tag per read) would be a new column, not a new table.
-
----
-
-## §4 EVERY INSTITUTION-CLASS NOUN AND ROLE WORD OF THE DESK
-
-Key: **B** = BODY · **H** = HOLDER-ORGAN · **P** = POWER · **R** = ROLE. "Reads on this desk"
-names the census reads of DS-POW-1…7 that resolve to that layer; **∅** means *this desk holds no
-read at that layer for this noun* — the word is available to the prose and unlicensed by the card.
-
-### 4.1 THE TWELVE HOLDER KINDS (`holderTable.js:78-81`) — the organ words
-
-| Noun | Layers the engine gives it | Engine row (file:line) | Reads on this desk | Safe class word | Overlap |
-|---|---|---|---|---|---|
-| **the treasury** | H | `holderTable.js:79`; record row `:273` | ∅ | the treasury | a state organ (`:115`) |
-| **the muster** | H; B via 5 buckets | `holderTable.js:79`; kind→fields `:188-192` (walls · garrison · militia · mercenary · charter); record row `:280`, note `:285-288` | ∅ — **the desk holds no muster read** | **the muster** (the paid military's class word, ADDENDUM 11) | one institution keeps a muster: the Citizen militia (`:285-288`) |
-| **the census** | H | `:79`; row `:290` | ∅ | the census | — |
-| **the parish** | H | `:79`; row `:297` | ∅ | the parish | — |
-| **the toll-bar** | H | `:79`; row `:304` | ∅ | the toll bar | Town council keeps it (`:311`) |
-| **the market** | H; B (roster row `Market square`) | `:79`; row `:311` | ∅ | the market | civic-object class `market` (`wiringCensus.js:1309`) |
-| **the watch** | **H (state organ)**; **B (defense bucket)**; **B (two roster rows)**; **P-object (security RE)** | H `:80`, state organ `:115`, row `:318`, services `:319`; bucket `defenseInstitutionBuckets.js:95-97`; rows `institutionServices.js:1206`, `:1322`; security RE `corruption.js:630` | **P** only, indirectly: `power.criminalCaptureState` is watch-HELD (`holderTable.js:211`) in DS-POW-6 ×4. **∅ at BODY.** | **the watch** for the order organ or the watch bucket — **never** for the paid military | §6 O-1, O-2 |
-| **the court** | **H (state organ)**; B (`Courthouse`, `Multiple court buildings`); **P-object (security RE)**; and a **fourth, untyped political sense** the desk actually uses | H `:80`, state organ `:115`, row `:325`, services `:326`; rows `institutionServices.js:89`; security RE `corruption.js:630`; the political sense has **no engine row** | **H**: 10 of 14 LICENSED rows resolve `court`. **∅ at BODY.** | the court (the organ); **for the assembly use "the hall"/"the combination"** | §6 O-3 |
-| **the elders** | H; B (`Household elder` `:15`, `Village elder` `:26`); R (`elder` a government role keyword) | H `:80`, row `:332`; roles `roleCategory.js:34`, `historyData.js` other/`Elder` | ∅ | the elders (the record); "an elder" is a ROLE word | §6 O-4 |
-| **the tradition** | H, with **no institution anywhere in the shipped roster** | `:80`; row `:339` and its note `:343-348` | ∅ | — (SOURCE-UNRESOLVED in every generable town) | — |
-| **the road** | H; B | `:80`; row `:350`, services `:351`; field rows `:233-234` (terrainType · monsterThreat) | ∅ | the road register | — |
-| **the office** | H — **the compiling record itself**; B (`Town hall`, `City hall`, `City administration`) | `:80`, `OFFICE_KIND` `:84`, row `:357`, services `:358`, and its note `:362-363` (*"a CITATION on a fact sourced here is a finding"*) | ∅ as a holder; the WORD "the office" is used by DS-POW-4/7 as *the seat's authority* | **the office** | §6 O-5 |
-
-### 4.2 THE SEVEN DEFENSE BUCKETS (`defenseInstitutionBuckets.js:83-107`) — body words this desk borrows
-
-| Noun | Bucket keywords | file:line | Layers | Reads on this desk | Safe class word |
-|---|---|---|---|---|---|
-| **the walls** | wall · citadel · palisade · earthwork · inner citadel · massive walls | `:84-87` | B; muster-held (`holderTable.js:188`) | **∅** — used at `RECEIPT_POOLS…:2305` with no read | the {defwork} (defense desk's) |
-| **the garrison** | garrison · barracks · professional guard · professional city watch · multiple garrison | `:88-91` | B; muster (`:189`); security RE | ∅ | the garrison |
-| **the militia** | citizen militia · militia | `:92-94` | B; muster (`:190`); the only roster row keeping a muster | ∅ | the militia |
-| **the watch (bucket)** | town watch · city watch · professional city watch | `:95-97` | B **and** H — see §6 O-1 | ∅ at BODY | the watch (bucket) |
-| **the mercenary company** | mercenary company · mercenary quarter · hired muscle | `:98-100` | B; muster (`:191`) | ∅ | the mercenary company |
-| **the charter hall** | adventurers' charter hall / guild hall / multiple adventurers' | `:101-104` | B; muster (`:192`) | ∅ | the charter hall |
-| **magic defenses** | wizard · mages' guild · mage · academy of magic · golem workforce · alchemist | `:105-107` | B; **not a muster row** | ∅ | — |
-
-### 4.3 THE SIX DEFENSE GROUP LABELS MINTED **IN THE POWER GENERATOR**
-
-`src/generators/power/governanceNarrative.js:499-506` (`deriveDefenseGroupLabel`), precedence
-order: garrison → militia → watch → mercenary company → (small tier) community → **guard**.
-
-| Label | file:line | Layer | Note for the chair |
-|---|---|---|---|
-| `The garrison` | `:500` | B | the first-match winner |
-| `The militia` | `:501` | B | |
-| `The watch` | `:502` | B | **the power generator itself uses "the watch" as a body label** — the engine's own precedent for the body sense |
-| `The mercenary company` | `:503` | B | |
-| `The community` | `:506` (small tiers) | B | the unpaid baseline |
-| **`The guard`** | `:506` (fallback) | B | ADDENDUM 11's "the guard is a body word (garrison bucket)" is confirmed here as the **residual** label, not the garrison's own |
-
-⚠ This function is in `src/generators/power/` and **is not read by any DS-POW pool** — it feeds
-the governance narrative string, not the prose corpus. A power face using "the guard" is using a
-label the power generator mints and the power desk does not read.
-
-### 4.4 THE RULING STRUCTURE — the POWER layer's own nouns
-
-| Noun | Name class / members | file:line | Layers | Reads on this desk | Safe class word |
-|---|---|---|---|---|---|
-| **`{seat}` (the governing body's name)** | 22 institution-keyed labels + 14 council modifiers + 4 small-tier + 7 town + 11 city/metropolis fallbacks | map `rulingStructure.js:161-175`; modifiers `:196-233`; small `:244-256`; town `:266-287`; city `:288-320`; produced `:787` | **P** (a typed proper slot) — *derived from* a B row name by lowercase substring (`:178-182`) | `factions`, `power.stability`, `label`, `legitimacy.*` | **the ruling structure** / **the seat** | 
-| **the hall** | **no producer at all** | `powerStateProse.js:866-870` (*"No hall-name producer exists"*) | would be B (a place) | **∅** — 50 uses in the shipped desk rows | "the hall" is the safest available **place** word precisely because nothing types it |
-| **the ruling power** | 6 closed: autocrat · council · theocracy · merchant_league · criminal · mixed | `src/domain/spatial/cohesionWeave.js:134`; archetype→power `:180-186` | **P** (a class of power, not a body) | `politics.blocs` on `autocrat` **only**, and by the wrong route (§6 F-2) | the ruling structure |
-| **the government** | `government` = the same string as `governingName` | `rulingStructure.js:792` | P | ∅ (both `previousGovernments` pools are WIRING-UNRESOLVED) | the government |
-| **a previous government** | `previousGovernments[]{government, cause, tick, by}`; transfer causes coup · election · succession · conquest · appointment | annex `:2124-2127`; causes `src/domain/rulingPower.js:356`, lawful passage `:376` | P + HISTORY | **∅** — WIRING-UNRESOLVED, 7 variants | the government before this one |
-| **`{faction}` / `{counterpart}`** | the faction-name class (guilds, noble houses, Military/Guard, Religious Authorities, Thieves' Guild, Arcane Orders, 25 stress-minted rows, neighbour-injected rows) | `rulingStructure.js:497-682`; `src/generators/power/stressFactions.js:21-385`; `src/generators/steps/neighbourFactions.js:77-130` | **P** (a proper-typed slot) | `factions`, `factions.length`, `label` | **the house** / **the faction** |
-| **the archetype** | 13 canonical: government · noble · military · merchant · religious · criminal · arcane · craft · labor · outsider · occupation · civic · other | `src/domain/factionArchetypes.js:34-48` | P (a classification, never a name) | ∅ | — |
-
-### 4.5 THE BLOC LAYER (DS-POW-7)
-
-| Noun | Members / typed shape | file:line | Layers | Reads on this desk | Safe class word |
-|---|---|---|---|---|---|
-| **the combination / a bloc** | `{id, members[], glue[], end, strain, sinceTick, covert?}` | typedef `settlementPolitics.js:64-67` | **P** | `politics.blocs` (2 RESOLVED rows); 18 rows WIRING-UNRESOLVED | **the combination** (the desk's own word, 32 uses) |
-| **a ruling bloc / the majority** | needs ≥ `RULING_CONSOLIDATION_FLOOR` 0.4 **and** the governing faction inside | `rulingBlocOf` `:549`, `:587`; floor `:149` | P | ∅ | the majority |
-| **the court (political)** | `coalitionConsolidation01`, 0 = a fully divided court | `:604`, `:633` | P — **and the engine has no row for "court" in this sense** | ∅ (WIRING-UNRESOLVED) | **the hall** — see §6 O-3 |
-| **the glue** | 5 closed: compromise · threat · doctrine · patronage · concession, each with an authored `detail` | `classifyGlue` `:423-456`; compromise `:429-437`, threat `:440-441`, doctrine `:444-446`, patronage `:450-451`, concession `:454-455` | P; **patronage is `peopleHeld: true`** (`:451`) ⇒ carries an **R** component the engine types | ∅ | the binding |
-| **the end** | 5 closed: seats · doctrine · commerce · survival · patron | `ARCHETYPE_END` `:461-466`; `GOAL_END_HINT` `:469-472` | P | ∅ | what it is for |
-| **the receipt** | 5 kinds: formed · realigned · fractured · exposed · deferred | typedef `:66-67`; emitted `:786-986`; conspiracy discovery `:823-828` | P + HISTORY | ∅ | — |
-| **a leader tie** | warm 6 (`family · mentor_student · ally · respect · lover · patron_client`), hostile 2 (`rival · enemy`), hard-block strengths 4 (`bitter · mortal · personal · serious`) | `:316`, `:318`, `:320`; read `:357-365` | **R** — the one typed person-edge this desk touches | ∅ (WIRING-UNRESOLVED) | the people at the head of the houses |
-| **a member's leader** | `leaderNpcId` / `leaderName` per member faction | `:222`, `:252`; consumed `:427-428`, `:488-489`, `:812-815` | **R**, typed **faction→NPC** (not institution→NPC) | ∅ | the leader |
-
-### 4.6 THE CAPTURE / CRIMINAL LAYER (DS-POW-6)
-
-| Noun | Members | file:line | Layers | Reads on this desk | Safe class word |
-|---|---|---|---|---|---|
-| **the capture ladder** | none · adversarial · equilibrium · corrupted · capture | `corruption.js:474`; stepper `:479-482`; birth producer `rulingStructure.js:755`, `:764-766` | **P** | `power.criminalCaptureState` — DS-POW-6 ×4 (watch-held) | the capture |
-| **an agent / a leader (the rung reached)** | `leader_champion (3) · lieutenant_operator (2) · agent_protege (1)` | `npcAgency.js:411-415`; demotion `corruption.js:462-464` | **R** | **∅ — the pools that split on it read only `criminalCaptureState`** (§6 F-3) | the rung the approach reached |
-| **the criminal interest** | — (the desk's own coinage) | — | P | `power.criminalCaptureState` | **the criminal interest** (the desk's safest word: it names no body) |
-| **an operation's economic role** | 7 closed: parallel marketplace · duty evasion · unlicensed revenue · money laundering · stolen goods market · protection + extraction · criminal revenue stream | `src/domain/criminalOpRole.js:38-46`, roster `:56-64` | B (what the operation IS) | `name` on the unclassified pool only; 6 of 7 WIRING-UNRESOLVED | the operation |
-| **the criminal structure** | organized (Organized Syndicate) · semi-organized · diffuse | `src/domain/display/defenseDisplay.js:160-177` | B | ∅ | — |
-| **a corruption impairment** | `impairments[].type === 'corruption'`, `covert` true/false, on a SECURITY body | `corruption.js:662-691`; split `:677-680`; drag `:702-709` | **P over a B** — the law's ORGAN-UNDER-POWER, exactly | **∅ on this desk** (§8) | "the {body} is bought" |
-| **a brokerage patron** | genesis · captured | `brokeragePatronage.js:59`; eligibility `:74-88` | **P over a B** | ∅ | the house's patron |
-
-### 4.7 THE LEGITIMACY / LADDER READS
-
-| Noun | Shape | file:line | Layers | Reads on this desk | Safe class word |
-|---|---|---|---|---|---|
-| **the legitimacy band** | Endorsed ≥75 · Approved ≥60 · Tolerated ≥45 · Contested ≥30 · Legitimacy Crisis <30 | `src/generators/factionDynamics.js:106-112`; ladder text `src/domain/compendium/bandLadders.js:175-181` | a standing of the **seat** held by the **court** | **∅** — all five band pools WIRING-UNRESOLVED | the town's regard |
-| **the breakdown** | `{prosperity, safety, defense, food}`, signed, off a neutral base | `factionDynamics.js:179`; inputs `:147-164` | court-held **scores**, not bodies | `legitimacy.breakdown` (DS-POW-6 neutral), `breakdown.prosperity/.safety` (DS-POW-6 capture ×2) | **the factors**: prosperity · safety · defense · food |
-| **`governanceFractured`** | boolean; the recorded body is not the deciding one | annex `:1922`; read `powerStateProse.js:250` (`legitimacyLensPoolKey`) | B-configuration whose implied **P is UNNAMED** | `legitimacy.governanceFractured` | "a governing body and a government" (the desk's own, `:1993`) |
-| **`govMultiplier`** | 1.30 · 1.15 · 1.00 · 0.80 · 0.60 | `factionDynamics.js:113-118` | a standing over the seat held by **the town**, not by a faction | `legitimacy.govMultiplier` ×3 | the hold |
-| **the ladder / a rung / standing** | `rungs[]{npcId, name, standing 0..1}` top-first; caps thorp 1 … metropolis 5 | `ladderRead.js:95-107`; caps `src/domain/worldPulse/npcLadderState.js:107-110` | **R** | `reading.rungs`, `.length`, `.map`, `reading.instability` (5 pools) | the rung / the top of the house |
-| **the stability string** | a FREE STRING matched by substring; ~30 generator labels | classifier `powerStateProse.js:305-330`; labels `governanceNarrative.js:249-338`, `src/domain/rulingPower.js:414-420` | B (the body's steadiness) | `first`, `power.stability` | the hall's steadiness |
-| **the coup risk label** | Stable · Holding · Contested · Critical. The seat could fall | `src/domain/rulingPowerCoup.js:255-260` | P (the contest) | `label` ×4 | the seat |
-| **a challenger / a contender** | `challengers[]{name, archetype, power, weight}`; criminal archetypes excluded by rule | `rulingPowerCoup.js:87-105`, exclusion `:104` | **P** (a faction, not a person) | `label` | **the challenger** = `{counterpart}`, a house |
-
-### 4.8 ROLE WORDS THE DESK RENDERS OR COULD RENDER
-
-⛔ Every row in this table sits on `holderRole === null` (`institutionTable.js:215`). A role word
-on this desk names a **vocabulary entry**, never an engine edge to an institution.
-
-| Role word | Typed where | file:line | Layer | Read on this desk | Verdict for the chair |
-|---|---|---|---|---|---|
-| **the clerk / clerks** | `City Clerk`, `Herald/Town Crier`, `Notary/Scrivener`, `Monastery Archivist`, `Arcane Archivist`, `Cartographer` → title `clerk` | `historyData.js` government + religious + magic + other rows | R | **∅** | used 3× in DS-POW-1 rows that read NOTHING (§9 F-6) |
-| **the captain** | `Guard Captain`, `Mercenary Captain`, `Ship Captain`, `Cavalry Commander`, `Naval Commander` → `captain`; `Watch Captain` | `historyData.js` military/economy rows; `factionRoles.js:47-48` (`watch` → Watch Captain, `linkToInst: /watch\|garrison\|barracks\|militia/`) | R | ∅ | the addendum's example role word; typed, unread |
-| **the reeve** | `Reeve` → title `overseer`; `reeve` a government role keyword; **`Village reeve` is also an institution row**; **`Elected Reeve` is also a governance label** | `historyData.js` government; `roleCategory.js:34`; `institutionServices.js:1346`; `rulingStructure.js:164` | R **+ B + P** | ∅ | §6 O-6 — the three-layer word |
-| **the elder** | `Elder` → `elder`; `elder` a government keyword; `Household elder` / `Village elder` rows; **`elders` is a holder kind** | `historyData.js` other; `roleCategory.js:34`; `institutionServices.js:15`, `:26`; `holderTable.js:80` | R **+ B + H** | ∅ | §6 O-4 |
-| **the mayor** | `Mayor`, `Governor`, `Duke/Viceroy` → title `mayor`; `mayor` a government keyword; **`Town Mayor` is a governance label**; **`Mayor and council` is an institution row** | `historyData.js:21-39`; `roleCategory.js:34`; `rulingStructure.js:284`; `institutionServices.js:1069` | R + P + B | ∅ | the same three-layer shape as the reeve |
-| **the magistrate** | `Chief Magistrate` → `magistrate`; `magistrate` a government keyword; **`magistrate` is in `SECURITY_INSTITUTION_RE`** | `historyData.js` government; `roleCategory.js:35`; `corruption.js:630` | R + P-object | ∅ | a role word the corruption path treats as a body |
-| **the priest** | 15 religious rows → `priest`/`inquisitor`/`templar`/`healer`; `priest`/`priestess` keywords; `FACTION_ROLES.temple` → High Priestess | `historyData.js` religious; `roleCategory.js:42-43`; `factionRoles.js:44-46` | R | ∅ (the theocracy pool is WIRING-UNRESOLVED and `{institution}` unfilled) | — |
-| **the factor** | `Trade Factor`, `Grain Factor` → `merchant`; `factor` an economy keyword | `historyData.js` economy; `roleCategory.js:50` | R | ∅ | — |
-| **the constable** | `constable` a military keyword; **`constab` is in `SECURITY_INSTITUTION_RE`** | `roleCategory.js:38`; `corruption.js:630` | R + P-object | ∅ | — |
-| **the guildmaster / guild master** | `Guild Master`, `Thieves' Guild Master`, `Assassin Guildmaster`; `FACTION_ROLES.merchant` → Guildmaster | `historyData.js` economy/criminal; `factionRoles.js:49-52` | R | ∅ | — |
-| **the steward / chancellor / chamberlain / alderman / warden / sheriff / judge / governor / official** | 9 more government keywords | `roleCategory.js:34-36` | R | ∅ | — |
-| **the kingpin / crime lord / fence / smuggler / racketeer / corrupt official** | 16 criminal rows; `kingpin` a criminal keyword; `FACTION_ROLES.thieves` → Kingpin, Lieutenant | `historyData.js` criminal; `roleCategory.js:53-56`; `factionRoles.js:53-56` | R | ∅ | DS-POW-6's "an operator" is unspelt from this set |
-| **the lord / lady / baron / knight / noble heir** | 9 noble keywords + 9 noble rows; `FACTION_ROLES.noble` → Lord Mayor (`linkToInst` narrowed 2026-08-11, `factionRoles.js:63-100`) | `roleCategory.js:57-60`; `historyData.js` government/noble | R | ∅ | the one role whose institution link the estate has already audited |
-| **the archmagister / wizard / magister** | 15 magic rows; `FACTION_ROLES.arcane` → Archmagister | `historyData.js` magic; `factionRoles.js:57-59` | R | ∅ | — |
-| **a ruler / rulers** | **NOWHERE** — not in `ROLE_CATEGORY_KEYWORDS`, not in `POWER_ROLES_BY_CATEGORY`, not a `FACTION_ROLES` role | searched `roleCategory.js:32-68`, `historyData.js:18-1103`, `factionRoles.js:44-61` | **none** | ∅ | **used 4× in the shipped desk rows** (§9 F-3, F-7) |
-| **an operator** | `lieutenant_operator` is a **seat rank**, not a role title | `npcAgency.js:412` | R (a rank word) | ∅ | — |
-| **a creditor / a trader / a partnership** | not a role, not a body, not a holder | — | **none** | ∅ | §9 F-8 |
-| **the head (of a house)** | `leaderNpcId` types the thing; "head" is not a vocabulary word | `settlementPolitics.js:252` | R (typed), word untyped | ∅ | acceptable as a position word, not as a person |
-
----
-
-## §5 THE DESK'S READS, ASSIGNED TO A LAYER
-
-Item 2 of the draft law asks for a layer tag per read. Here is what the tag would say for all
-17 distinct reads of the desk (`docs/content/wiring-census.json`, rows `DS-POW-*`).
-
-| Read | Holder kind (census) | Layer the read carries | Pools | Body words it would license |
+| Slot | What fills it | file:line | Shape | Layer it actually carries |
 |---|---|---|---|---|
-| `legitimacy` | court | ORGAN-UNDER-POWER (the seat's standing with the town) | DS-POW-1 ×1, DS-POW-6 ×2 | none — the seat is the OBJECT |
-| `legitimacy.governanceFractured` | court | BODY-configuration; the implied power is **unnamed** | DS-POW-1 ×1 | the governing body · the government |
-| `legitimacy.breakdown` | court | four **scores**, not bodies | DS-POW-6 ×1 | **none** |
-| `legitimacy.govMultiplier` | court | a standing over the seat held by **the town** | DS-POW-4 ×3 | none |
-| `power.stability` | court | BODY (the hall's steadiness) | DS-POW-2 ×1 | the hall |
-| `power.recentConflict` | court | BODY + recorded cause | DS-POW-2 ×1 | the hall |
-| `power.criminalCaptureState` | **watch** | **POWER** | DS-POW-6 ×4 | none — the organ is the OBJECT |
-| `breakdown` / `.prosperity` / `.safety` | court | scores | DS-POW-6 ×2 | none |
-| `factions` / `factions.length` | (unresolved) | POWER (the roster) | DS-POW-2 ×2 | the houses |
-| `first` (STABILITY_LADDER) | (unresolved) | BODY (a classifier token) | DS-POW-2 ×4 | the hall |
-| `label` (RISK_POOL_OF) | (unresolved) | POWER (the contest) | DS-POW-4 ×4 | the seat · the challenger |
-| `reading.rungs` / `.length` / `.map` | (unresolved) | **ROLE** | DS-POW-3 ×5 | the rung · the top of the house |
-| `reading.instability` | (unresolved) | **ROLE** (churn) | DS-POW-3 ×4 | the head |
-| `ledger` / `ledger.present` | (unresolved) | the record's own presence (OFFICE-shaped) | DS-POW-6 ×2 | none |
-| `politics.blocs` | court | POWER | DS-POW-5 ×1, DS-POW-7 ×2 | the combination |
-| `name` (operationRolePoolKey) | (unresolved) | BODY (what the operation is) | DS-POW-6 ×1 | the operation |
+| `{settlement}` | `settlement.name` through `properFill` | `powerStateProse.js:858`, `:178-186` | `proper` | the town |
+| `{seat}` | **`powerStructure.governingName`** | fill `:860`; produced `rulingStructure.js:787`; the same value is also `government` `:792` | `proper` (`SLOT_FILL_SHAPES` `:149-152`) | **whatever class the generated name happens to be** — a body (*Town Council*), an office (*Royal Authority*, *Feudal Stewardship*), or a role (*Town Mayor*, *Elected Reeve*, *Headman's Authority*, *Priestly Guidance*) |
+| `{faction}` | **the same `governingName`** in DS-POW-2, -4, -6, -7 | `:876`, `:909`, `:953`, `:962` | `proper` | the governing power's name — **not** the captured house, and not a rival (see R-2, R-3) |
+| `{counterpart}` | `readings.contenders.challengers[0].name` | `:994`, used `:909`, `:953` | `proper` | a rival faction's recorded name |
+| `{npc}` | `reading.rungs[0].name` (DS-POW-3 only) | `:639`; produced `ladderRead.js:95-107` | `proper` | **a recorded person's name** |
+| `{institution}` | nothing — no provider | census `DS-POW-5 :: theocracy` `slotsWithoutProvider`; declared `:696-701` | `proper` | would be a recorded institution row |
+| `{route}`, `{good}` | nothing — no provider | census `DS-POW-5 :: economicBase: trade_hub` / `: craft`; declared `:696-701` | `proper` / `bare-common` | — |
+| **the ruling structure, as a CLASS** | `RULING_POWERS` = `autocrat · council · theocracy · merchant_league · criminal · mixed`, mapped from the governing faction's archetype and **total, failing soft to `mixed`** | `cohesionWeave.js:133`, `:171-180` (`ARCHETYPE_TO_RULING`), `:194-197` | a lens value | the POWER's KIND, never its name |
+| **the patron** | `patronId` / `patronName` / `patronArchetype`, `source: 'genesis' | 'captured'` | `brokeragePatronage.js:285-296`; sources `:60` | typed | **read by no pool of this desk** |
 
-**Reads that carry a BODY layer: 7 of 17, and every one of them is about the HALL or an
-OPERATION — never about a defense body, an order body, or any institution row.**
+⛔ The desk owns **no literal fill table** and says so: `SLOT_FILL_TABLES = Object.freeze({})`
+(`powerStateProse.js:162`), *"both its slots take a generated NAME, not a table-mapped enum"*
+`:155-160`. So every referent this desk names arrives as a **generated proper string whose
+class the engine does not tag**.
 
-### 5.1 THE HOLDER TABLE'S OWN MAPPING ROWS FOR THIS DESK'S FIELDS
+---
 
-The census's `source.kind` is derived from these rows, so this is the primary evidence and the
-census the reading of it. Each row is `field → {kind, cite, read}` (`holderTable.js:146-240`).
+## §6 THE ENGINE'S OWN OVERLAPS (wiring facts for the register car, not writer choices)
 
-| Field token | Kind | Row (file:line) | Producer the row cites | Layer |
+| # | Word | Rows it occupies | file:line | Note |
 |---|---|---|---|---|
-| `govMultiplier` | court | `holderTable.js:215` | `src/generators/factionDynamics.js:127` | a standing over the seat |
-| `governanceFractured` | court | `:216` | `factionDynamics.js:133` | BODY-configuration |
-| `breakdown` | court | `:217` | `factionDynamics.js:179` | four scores |
-| `blocs` | court | `:218` | `src/domain/worldPulse/settlementPolitics.js:992` | POWER |
-| `stability` | court | `:219` | `src/generators/power/rulingStructure.js:702` | BODY |
-| `recentConflict` | court | `:220` | `rulingStructure.js:702` | BODY + cause |
-| **`criminalCaptureState`** | **watch** | **`:211`** | **`rulingStructure.js:797`** | **POWER** |
-| `blackMarketCapture` | watch | `:210` | `src/generators/safetyProfile.js:684` | POWER — **unread by this desk** |
-| `safetyProfile` | watch | `:212` | `src/generators/economy/economicState.js:873` | BODY-ish — **unread by this desk** |
-| `yearsAgo` | elders | `:230` | `src/generators/historyGenerator.js:289` | — unread by this desk |
-
-⭐ **The referent law's split is confirmed at the field grain, not argued.** The four organs a
-captured ruling structure reaches are `office · court · treasury · watch` (`holderTable.js:115`);
-this desk's fourteen LICENSED rows resolve to **two of them only** — `court` (the seat's own
-books: legitimacy, stability, conflict, blocs) and `watch` (the order books: the capture state).
-The `muster` kind — the paid military's class word — holds twelve field tokens
-(`holderTable.js:188-199`) and **not one of them is read by any power pool.** ADDENDUM 11's
-correction ("the class word for the paid military is THE MUSTER … the watch names the watch
-bucket or the order organ and never the muster as a whole") is therefore not merely safe on this
-desk: **the muster is unreachable from it**, and a power face using the word would be reaching
-into DS-DEF's cells.
+| O-1 | **professional city watch** | the **garrison** bucket AND the **watch** bucket | `defenseInstitutionBuckets.js:90` and `:96` | the alias overlap ADDENDUM 11 names; measured over the roster, the garrison bucket holds *Garrison · Multiple garrisons · Professional city watch · Barracks* and the watch bucket holds *Professional city watch · Town watch* |
+| O-2 | **watch** | a defence BUCKET (`:95`) **and** a HOLDER KIND (`holderTable.js:78`) that is a STATE ORGAN (`:115`) | | the table records the split in its own words: *"the muster roll counts men under arms, and the watch keeps its own count"* `holderTable.js:206-208` |
+| O-3 | **court** | a HOLDER KIND (law court, `holderTable.js:325-330`) **and** the political assembly (DS-POW-7's pool name) **and** the civic class `law` (`wiringCensus.js:1311`) | | the engine types only the law court; the assembly sense has no row |
+| O-4 | **council** | an institution row (`Town council` `:32`) **and** a `RULING_POWERS` value (`cohesionWeave.js:133`) **and** a component of most `{seat}` fills **and** the civic class `hall` (`wiringCensus.js:1314`) | | four registers, one word |
+| O-5 | **Town council** | holds the **elders** record (`Record of custom`) **and** the **toll-bar** record (`Market charter and tolls`) | `institutionServices.js:32-38`; `holderTable.js:304-308`, `:332-337` | one institution, two holder kinds — `sourceOfForTown` dedupes on the **pair**, not the name `holderTable.js:751-760` |
+| O-6 | **reeve** | an institution row (`Village reeve` `institutionServices.js:1346`) **and** a **treasury** holder (`Tax collection`) **and** a `governingName` value (`'village reeve' → 'Elected Reeve'` `rulingStructure.js:164`) **and** a role word | | ADDENDUM 11 offers "the reeve" as a specimen ROLE word; on this desk it is three other things first (§9 Q-4) |
+| O-7 | **Town hall / City hall** | the **office** kind's holders (`Record filing` / `Public record access`) **and** `Town hall` is also a **treasury** holder (`Tax payment`) | `institutionServices.js:1623`, `:1629`; `holderTable.js:273-278`, `:357-362` | a citation on an office-sourced fact is a **finding**, `:361-362` |
+| O-8 | **the state's four organs vs. the security bodies** | `STATE_ORGAN_KINDS = office · court · treasury · watch` (`holderTable.js:115`) vs. `SECURITY_INSTITUTION_RE = watch|garrison|constab|guard|magistrate|court|barracks` (`corruption.js:630`) | | measured over the 285-row roster, `SECURITY_INSTITUTION_RE` matches **8** rows — *Courthouse · Garrison · Multiple court buildings · Multiple garrisons · Professional city watch · Town watch · Barracks · Watchtower* — **and four of those are this desk's own record holders** |
+| O-9 | **muster (noun) vs. muster (verb)** | the class word for the paid military `holderTable.js:78` vs. ordinary English | | DS-POW-4 already uses the verb on a legitimacy read |
+| O-10 | **the civic-object classifier cuts across the holder table** | `watch` → `force`; `court` → `law`; `patron` → `temple`; `seat`/`office`/`council`/`charter` → `hall`; `market` → `market` | `wiringCensus.js:1302-1322` | measured on this desk: `DS-POW-7 :: end patron` files under **temple**; `DS-POW-7 :: consolidation 0: a fully divided court` files under **law**; `DS-POW-4 :: riskLabel: Critical. The seat could fall` files under **hall**; `DS-POW-5 :: merchant_league` and `: trade_hub` under **market**; `: craft` under **craft** |
+| O-11 | **the muster kind has one holder in the entire roster** | `Citizen militia` | `holderTable.js:280-288`; `institutionServices.js:835` | *"A town with a Garrison and no militia has men under arms and no roll of them"* |
+| O-12 | **`tradition` has no holder anywhere** | zero roster rows | `holderTable.js:338-347` | SOURCE-UNRESOLVED in every town the product can generate |
 
 ---
 
-## §6 THE ENGINE'S OWN OVERLAPS (law item 5: a wiring fact, never a writer's choice)
+## §7 VISIBILITY — WHICH FACE MAY NAME EACH STANDING READ (part d)
 
-### Alias overlaps — one word, two or more engine rows
-
-| # | Word | The rows it sits in | file:line | Wiring note |
+| Standing read | Engine visibility flag | file:line | Licensed face, by the engine | What the desk actually does |
 |---|---|---|---|---|
-| **O-1** | `professional city watch` | the **garrison** bucket AND the **watch** bucket | `defenseInstitutionBuckets.js:90` and `:96` | the record already flagged in ADDENDUM 11; confirmed verbatim. The module's own header says the redundant-looking entries were left rather than minimised because *"a 'tidy' that changed one match is a defence changing hands in silence"* (`:75-80`) |
-| **O-2** | `watch` | (a) HOLDER kind `:80` and STATE ORGAN `:115`; (b) defense BUCKET `:95`; (c) two roster rows `institutionServices.js:1206`, `:1322`; (d) `SECURITY_INSTITUTION_RE` `corruption.js:630`; (e) civic-object class **`force`** `wiringCensus.js:1303`; (f) military role keywords `roleCategory.js:39`; (g) `FACTION_ROLES.watch` `factionRoles.js:47`; (h) the power generator's body label `governanceNarrative.js:502` | — | **EIGHT rows.** The holder kind's own services are *Crime reporting · Crime response · Missing persons* (`holderTable.js:319`) — order records, not defense; but the census's label-half classifier files the word under `force`. The muster kind does **not** contain the watch bucket (`holderTable.js:188-192`), so ADDENDUM 11's rule 5 ("a face never uses 'the watch' for a pay-gate read") is confirmed by construction |
-| **O-3** | `court` | (a) HOLDER kind `:80` + STATE ORGAN `:115` (trials, disputes, notary, appeals `:327`); (b) roster rows `institutionServices.js:89`; (c) `SECURITY_INSTITUTION_RE` `corruption.js:630`; (d) civic-object class **`law`** `wiringCensus.js:1310`; (e) **the political assembly — DS-POW-7's own pool names** (`RECEIPT_POOLS…:2366`, `:2404`) with **no engine row at all** | — | **The desk's most-used sense is the one the engine does not hold.** Measured consequence: the census assigned `objectClass: "law"` to `DS-POW-7 :: consolidation 0: a fully divided court` — a pool about bloc consolidation now classified as a law-court object, so the projector's same-class attach refusal (`wiringCensus.js:1294-1298`) would fire between that pool and a real gaol/assize modifier |
-| **O-4** | `elder` | (a) HOLDER kind `elders` `:80`; (b) roster rows `Household elder` `:15`, `Village elder` `:26`; (c) government role keyword `roleCategory.js:34`; (d) role row `Elder` `historyData.js` other; (e) governance labels `Elder Consensus` / `Free Elder Council` / `Elder Council` `rulingStructure.js:162-163` | — | four layers on one word; the governance label is the only one this desk can render |
-| **O-5** | `office` / `seat` / `council` / `hall` | civic-object class **`hall`** = `['hall','council','charter','seat','office','chamber','moot']` `wiringCensus.js:1312` — while `office` is also a HOLDER kind `:80` / `OFFICE_KIND` `:84`, `council` is a governance label `rulingStructure.js:167` and an institution row `institutionServices.js:32`, and `seat` is the desk's `{seat}` slot | — | the classifier collapses the holder-organ, the power label and the place into one class. `DS-POW-4 :: riskLabel: Critical. The seat could fall` carries `objectClass: "hall"` for this reason |
-| **O-6** | `reeve` | (a) institution row `Village reeve` `institutionServices.js:1346`; (b) governance label `Elected Reeve` `rulingStructure.js:164`; (c) government role keyword `roleCategory.js:34`; (d) role row `Reeve` → title `overseer` `historyData.js` government | — | ADDENDUM 11 offers "the reeve" as a specimen ROLE word; in this engine it is **three** things before it is a role, and the mapping at `rulingStructure.js:178-182` is exactly the B→P bridge (an institution row NAME lowercased becomes the governance LABEL) |
-| **O-7** | `patron` | (a) a bloc **end** `settlementPolitics.js:463`; (b) a brokerage-house **patron source** `brokeragePatronage.js:59`; (c) a warm leader-tie type `patron_client` `:316`; (d) civic-object class **`temple`** `wiringCensus.js:1311` | — | measured consequence: `DS-POW-7 :: end patron` carries `objectClass: "temple"` — a bloc serving an outside interest is classified as a temple object |
-| **O-8** | `guard` | (a) the residual body label `The guard` `governanceNarrative.js:506`; (b) the garrison bucket's `professional guard` `:89`; (c) `SECURITY_INSTITUTION_RE` `corruption.js:630`; (d) civic-object class `force` `wiringCensus.js:1303`; (e) military role keyword `roleCategory.js:39`; (f) the faction name `Military/Guard` `rulingStructure.js:596` | — | "the guard" is safe as a body word and is **also a faction name**, so on a town whose governing faction is `Military/Guard` the same word is the `{faction}` fill |
-| **O-9** | `market` | HOLDER kind `:79`; civic-object class `market` `wiringCensus.js:1309`; `DS-POW-6 :: operation role stolen goods market` carries `objectClass: "market"` | — | a criminal-operation pool classified as the lawful market object |
-| **O-10** | `council` | governance LABEL (`Town Council` etc., `rulingStructure.js:167`, `:219`, `:247`) **and** institution row `"Town council"` `institutionServices.js:32` **and** a ruling-power word `cohesionWeave.js:134` | — | the same string is a P label, a B row and a P class; `{seat}` renders the first only |
+| `power.criminalCaptureState` = `corrupted` / `capture` (DS-POW-6 `capture reached an AGENT…`, `…a LEADER`) | **none.** The field carries no covert flag; it is a plain string on `powerStructure` | written `rulingStructure.js:797`; ladder `corruption.js:474` | the engine does not decide | **the ANNEX decides**: all 6 variants carry `marks: ["dm-only"]`, and the block's fence adds *"The seat rank an operator has reached is the sharpest covert fact in the cluster and never appears outside a `dm-only` tag"* `RECEIPT_POOLS…:2305-2307`; PDF `PRINT-DEFERRED` `:2297` |
+| `power.criminalCaptureState` direction (DS-POW-6 `capture pressure ADVANCING` / `RECOVERING`) | none | as above | — | all 6 variants `dm-only`; the fence says *"Capture DIRECTION is state and is narratable; the damping and amplification coefficients are not"* `:2292-2293` |
+| `factions[].captureState` (the per-faction rung) | none typed; seeded at birth onto the governing entry only at equilibrium+ | `rulingStructure.js:764-767`; `holderTable.js:129-145` | — | **read by no pool of this desk** |
+| a `corruption` impairment on a SECURITY body | ⭐ **a real typed flag**: `covert !== true` ⇒ the institution goes in `revealed` (a public scandal); otherwise `covert` (the hidden channel) | `corruption.js:677-680`, with the reason in the comment `:670-674` | **revealed ⇒ both faces; covert ⇒ the DM line only** | **read by no pool of this desk — and, measured over the committed census, by no shipped pool of ANY desk.** The only prose consumer is the taste's unshipped DS-DEF-11 modifier pools `watch: bought (revealed)` / `(covert)` |
+| a brokerage house's patron | ⭐ **a typed audience projection**: `projectPatronBindings(bindings, {audience})` — a player projection blanks `patronName` on a covert row unless the institution id is in `exposed` | `brokeragePatronage.js:319-329`, doctrine `:303-312` | legal ⇒ both faces; whisper-market ⇒ DM until exposed | **read by no pool of this desk.** DS-POW-7's `end patron` invents the relation from the bloc's `end` value (`ARCHETYPE_END` `settlementPolitics.js:461`), not from a patron binding; all 3 variants are `dm-only` |
+| `blocs[].covert` (a conspiracy under an autarchy; `compromise` glue) | ⭐ **typed**: `classifyGlue` returns `{glue, peopleHeld, covert}` and `compromise` is covert outright `settlementPolitics.js:423-436`; a conspiracy forms covert under an autarchy `:959-962`; the covert→revealed discovery path `:823-830` | | covert ⇒ the DM line; a revealed leash is a public scandal both faces may name (`receipt exposed`) | **the desk reads `politics.blocs` and never `blocs.covert`.** `politicsPresencePoolKey` reads `b?.covert === true` in JS (`powerStateProse.js:809`) but the census's read recovery records only `politics.blocs`, so **`covert` is `false` on all 79 rows** while 13 of DS-POW-7's 60 variants are `dm-only` |
+| `legitimacy.governanceFractured`, `legitimacy.govMultiplier`, `power.stability`, `power.recentConflict`, `politics.blocs`, `ledger.*`, `breakdown.*` | none | | both faces | 1 `dm-only` variant on the desk (DS-POW-1 `governanceFractured true` v3) |
 
-### Key-function overlaps — a pool resolved against another pool's field
-
-| # | Finding | file:line | Consequence |
-|---|---|---|---|
-| **F-1** | `'autocrat'` appears **exactly once** in the whole `src/domain/display/stateProse/` tree | `powerStateProse.js:801`, inside `politicsPresencePoolKey` (DS-POW-**7**'s presence lens) | — |
-| **F-2** | The census bound `DS-POW-5 :: autocrat` to `keyFunction: politicsPresencePoolKey`, `rung: literal`, `reads: ["politics.blocs"]` — so **the one RESOLVED ruling-power pool on the desk reads the bloc layer, not the ruling power.** Its real key is `rulingPowerPoolKey` (`powerStateProse.js:709-712`), which returns the lens word by dynamic lookup and therefore names no literal, which is why its five siblings (council · theocracy · merchant_league · criminal · mixed) stayed WIRING-UNRESOLVED | census row `DS-POW-5 :: autocrat`; `powerStateProse.js:709-712` vs `:797-804` | the printed card licenses *"that `blocs` holds"* on a face about one person deciding. A face written to that card would state the bloc layer under a ruling-structure pool |
-| **F-3** | `DS-POW-6 :: capture reached an AGENT of a faction` and `:: capture reached a LEADER` both read **`power.criminalCaptureState` only** — the settlement-wide ladder, whose rungs are `none · adversarial · equilibrium · corrupted · capture` (`corruption.js:474`). **Neither "agent" nor "leader" is a rung.** The seat rank that would license the split is `roleSeatFor` (`npcAgency.js:411-415`) and no census row reads it | census rows; `corruption.js:474`; `npcAgency.js:411-415` | the ROLE-layer distinction the two pool names carry is unlicensed by both cards, which print the identical `may claim: that criminalCaptureState holds` |
+⛔ **THE MEASURED GAP.** `COVERT_SOURCES` (`wiringCensus.js:1252-1259`) lists
+`compromisedSecurityInstitutions · npc.corrupt · corruptNpc · impairment.covert ·
+mobilization.covert · blocs.covert`, and `isCovertPath` (`:1265-1269`) also catches a bare
+`covert` segment. **Estate-wide only four rows carry `covert: true`, all four on DS-WAR-1
+(`mobilization: …`).** So on the power desk the visibility signal lives **entirely in the
+annex's `dm-only` variant marks** (29 of 256) and not in any instrument the gate reads. Draft
+law 4 ("visibility follows the power layer") currently has **no mechanical carrier on this
+desk**.
 
 ---
 
-## §7 THE TYPED SLOTS THAT NAME THE POWER
+## §8 FINDINGS — SHIPPED ROWS USING A WORD AT THE WRONG LAYER FOR ITS READ (part e)
 
-| Slot / class word | What it names | Typed where | file:line | Rendered on this desk? |
+Quotes are ≤12 words. **These are findings for the chair, not verdicts.**
+
+### §8.1 A BODY WORD ON A DESK WITH NO BODY READ (the largest class: 66 of 256 variants)
+
+| # | Row | Read the pool carries | Quote (≤12 words) | The layer charge |
 |---|---|---|---|---|
-| `{seat}` | the ruling structure by its own generated name | `powerStructure.governingName` | produced `rulingStructure.js:787`; filled `powerStateProse.js:860`, `:875` | **YES** — DS-POW-1/4/5/6/7 |
-| `{faction}` | the acting house — **the same string as `{seat}`** on this desk | `governingName` again | `powerStateProse.js:876`, `:909`, `:953` | **YES**, and it is not a second name |
-| `{counterpart}` | the top challenger | `challengers[0].name` | `rulingPowerCoup.js:87-105`; filled `powerStateProse.js:994` | **YES** — DS-POW-4, DS-POW-7 |
-| `{npc}` | the top rung's holder | `rungs[0].name` | `ladderRead.js:95-107`; filled `powerStateProse.js:639` | **YES** — DS-POW-3 only |
-| `{institution}` | a named building or house on the roster | the roster | declared absent `powerStateProse.js:914-916` | **NO** |
-| **"the ruling structure"** | the class word for the power | `RULING_POWERS` | `cohesionWeave.js:134` | class word — always safe |
-| **"the office"** | the compiling record | `OFFICE_KIND` | `holderTable.js:84` | class word — always safe |
-| **"the muster"** | the paid military | `HOLDER_KINDS` | `holderTable.js:79`, fields `:188-192` | class word — **safe, and this desk has no read that would use it** |
-| **"the guard"** | a body of the garrison class | residual label | `governanceNarrative.js:506` | class word — safe as a **body** word only |
-| a corruption patron | the power over a security body | `impairments[].type === 'corruption'` | `corruption.js:677-680` | **not read by this desk** |
-| a brokerage patron | the power over a house | `BROKERAGE_PATRON_SOURCES` | `brokeragePatronage.js:59` | **not read by this desk** |
+| R-1a | DS-POW-1 `Endorsed` v4 `[counterforce]` | `(none — WIRING-UNRESOLVED)` | *"Crime finds little room … and the watch is not the reason"* | **the watch** on a legitimacy-band pool with **no read at all**. Exactly ADDENDUM 11 rule 5's named case ("a face never uses *the watch* for a pay-gate read") transposed: here it is a legitimacy read, and the watch bucket is the defence desk's (`DS-DEF-5 :: watch PRESENT`) |
+| R-1b | DS-POW-2 `siege matched` v2 `[ledger]` | `power.stability` (court) | *"it governs rationing, the gates and the watch rota"* | three body words (gates, watch, plus *besieged*) on a stability-string read; the annex's own fence says *"A variant asserts ONLY the condition its own token names"* `RECEIPT_POOLS…:2009-2011` |
+| R-1c | DS-POW-6 `neutral baseline` v1 `[ledger]` | `ledger`, `ledger.present`, `legitimacy.breakdown` (court) | *"not the harvest, not the watch, not the walls"* | a three-body negation on a read that is *the four contributions are all zero* |
+| R-1d | DS-POW-6 `capture RECOVERING` v2 `[counterforce · dm-only]` | `breakdown*` + `criminalCaptureState` (court + watch) | *"Prosperity and a working watch did what no investigation did"* | the **watch as a body** on a **standing** read. Under draft law 1 the standing read names the organ under a power with the institution as OBJECT; here the watch is the AGENT of a recovery |
+| R-1e | DS-POW-6 `stolen goods market` v2 `[counterforce]` | `name` | *"the somewhere is the part the watch has never reached"* | the watch as an agent on an operation-NAME read |
+| R-1f | DS-POW-1 `breakdown … FOOD, adverse` v1 `[ledger]` | `(none — WIRING-UNRESOLVED)` | *"is being judged at the granary door, and the granary is not helping"* | the granary is a `storehouse`-class body with no read; the pool's subject is a signed contribution |
+| R-1g | **the hall, 50 occurrences across 6 blocks** | various | *"The hall at {settlement} is settled"* (DS-POW-2 `stable` v1) | the desk's dominant body word. `hall` is a civic class (`wiringCensus.js:1314`) whose roster members (`Town hall`, `City hall`) are **office-kind holders**, not the ruling structure. Draft law 1 would read *the hall* as a BODY word on a POWER/ORGAN read every time |
+| R-1h | DS-POW-6 `duty evasion` v1, v3 `[ledger]`, `[counterforce]` | `name` | *"Goods reach {settlement} around the customs rather than through them"* | the customs is a toll-bar body; the read is the operation's own name |
+| R-1i | DS-POW-6 `stolen goods market` v1 `[ledger]` | `name` | *"moved back into lawful circulation through a clearinghouse"* | **a body word with no engine row of any kind** |
+| R-1j | DS-POW-5 `council` v3 `[unfolding]` | `(none — WIRING-UNRESOLVED)` | *"A council falls to unrest rather than to a rival"* | the annex's own fence forbids hard-coding *the council* (`:2199-2202`); the pool is the ruling-power VALUE `council`, and the sentence spells the value as a body |
 
-⛔ **The desk has exactly one power-naming slot, rendered under two spellings.** `{seat}` and
-`{faction}` are the same string (`powerStateProse.js:860`, `:876`). Law 3's "same word, same
-referent" is therefore **already violated at the fill**, in the opposite direction: two different
-words carry one referent. A unit that says "the {seat}" in one sentence and "{faction}" in the
-next has said the same name twice and reads as two actors.
+### §8.2 A PERSON DOING SOMETHING
 
----
+| # | Row | Read | Quote (≤12 words) | The layer charge |
+|---|---|---|---|---|
+| R-4a | DS-POW-1 `Endorsed` v2 `[ledger]` | `(none)` | *"the clerks record almost nothing they have had to chase"* | a PERSON class acting. `holderRole` is null on every row (`institutionTable.js:457`) |
+| R-4b | DS-POW-1 `Approved` v2 | `(none)` | *"the exceptions are few enough that the clerks can name them"* | as above |
+| R-4c | DS-POW-1 `Legitimacy Crisis` v2 | `(none)` | *"the clerks who keep them have stopped chasing what is missing"* | as above; three clerk sentences in one block |
+| R-4d | DS-POW-6 `duty evasion` v1 | `name` | *"enough officials are agreeable for it to be routine"* | a PERSON class with a disposition, on a label read |
+| R-4e | DS-POW-6 `capture reached a LEADER` v1 `[dm-only]` | `power.criminalCaptureState` | *"The person who speaks for {faction} … is not free to speak"* | a ROLE asserted from a settlement-wide POWER rung that names no person (§8.4) |
+| R-4f | DS-POW-1 `Endorsed` v4 | `(none)` | *"leaves an operator very few doors to lean on"* | a criminal PERSON on a legitimacy pool |
+| R-4g | DS-POW-7 `receipt fractured` v3 `[unfolding]` | `(none)` | *"A leader who bound the combination … left the seat"* | the `leaderNpcId` IS typed (`settlementPolitics.js:252`) and this desk **reads it nowhere**; the sentence narrates an unread field |
+| R-4h | DS-POW-4 `legitimacyHold: backing` v1, v3 `[street]`, `[counterforce]` | `legitimacy.govMultiplier` (court) | *"a ruler with the town behind them can do things"* | a ROLE generic stated as a **maxim** rather than as this town's standing; ADDENDUM 12 W5's maxim-frame class |
 
-## §8 VISIBILITY — WHICH FACE MAY NAME EACH STANDING READ
+### §8.3 A FUSED AGENT (a relation no field computes)
 
-The draft law's item 4 makes visibility follow the power layer. On this desk the engine flag and
-the annex tag **do not meet**.
+| # | Row | Read | Quote (≤12 words) | The layer charge |
+|---|---|---|---|---|
+| R-5a | DS-POW-3 `high instability` v1 `[ledger]` | `reading.instability`, `reading.rungs*` | *"A house that keeps re-learning who it answers to gets less done"* | the churn→weakness link IS licensed by the annex fence (`:2078-2083`), but the sentence fuses the faction (POWER) with an internal ROLE order and speaks as one agent |
+| R-5b | DS-POW-6 `capture reached an AGENT of a faction` v1 `[dm-only]` | `power.criminalCaptureState` | *"Somebody well down inside {faction} … is answering elsewhere"* | fuses a PERSON (*somebody*), a DEPTH (*well down inside*) and a RELATION (*answering elsewhere*) on a rung that carries none of the three |
+| R-5c | DS-POW-7 `consolidation 0` v2 `[unfolding · dm-only]` | `(none — WIRING-UNRESOLVED)` | *"A small interest buys a great deal here"* | a POWER-layer purchase asserted on a consolidation scalar the desk does not read |
+| R-5d | DS-POW-4 `riskLabel: Holding` v1 `[ledger]` | `label (via RISK_POOL_OF)` | *"{faction} outweighs everyone who wants the {seat}"* | **{faction} and {seat} render the SAME STRING** (R-2), so the sentence reads as one actor outweighing itself |
 
-| Standing read | Engine visibility flag | file:line | Census `covert` | Annex tag today | Licensed face, by the engine flag |
-|---|---|---|---|---|---|
-| `power.criminalCaptureState` — ADVANCING / RECOVERING | **none** (the ladder carries no covert field) | `corruption.js:474` | **false** | every variant `dm-only` (3+3) | the flag says nothing; the tag is the only gate |
-| `power.criminalCaptureState` — AGENT / LEADER | **none**; the seat rank that would be covert is unread (§6 F-3) | `npcAgency.js:411-415` | **false** | every variant `dm-only`; annex marks them `PRINT-DEFERRED` (`RECEIPT_POOLS…:2297`) | the flag says nothing |
-| a bloc's `covert` | **`Bloc.covert?: boolean`** — a real typed flag | typedef `settlementPolitics.js:67`; written `:904`; conspiracy discovery `:823-828` | **false** | `an opposition bloc forms COVERT` every variant `dm-only` | **DM pen line** |
-| glue `compromise` | **`covert: true`** returned by the classifier | `settlementPolitics.js:435` | **false** | every variant `dm-only` | **DM pen line** |
-| a corruption impairment | **`covert` true = hidden channel, else a public scandal** | `corruption.js:677-680` | n/a — **not read by this desk** | — | covert ⇒ DM; revealed ⇒ **both faces** |
-| `legitimacy.governanceFractured` | none | — | false | 1 of 4 variants `dm-only` | player face |
-| `legitimacy.govMultiplier` | none | — | false | none | player face |
-| `politics.blocs` (dormant / ruling / glue / end / receipt) | none at the root | — | false | overt except `end patron`, `receipt exposed` | player face |
+### §8.4 THE RANK CLAIM — a ROLE read off a settlement-wide POWER rung
 
-⛔ **THE MEASURED GAP.** `wiringCensus.js` publishes a frozen COVERT-SOURCE list whose three
-entries are `impairment.covert`, `mobilization.covert` and **`blocs.covert`** (`:1256-1258`), and a
-row whose reads name one *"may hold no unmarked variant and can never be a candidate on the
-player face"* (`:1230-1232`). Across the whole 708-row census **exactly four rows read covert=true,
-and all four are DS-WAR-1** (`mobilization.*`). **Zero power rows.** Yet
-`politicsPresencePoolKey` **does** read the flag — `const covert = blocs.some((b) => b?.covert === true)`
-(`powerStateProse.js:800-802`) — and the pool it returns is `an opposition bloc forms COVERT under
-an autarchy`. The census recorded that pool's reads as the root `politics.blocs`, so the
-COVERT-SOURCE gate never fires on the one power pool it was written for, and the desk's whole
-visibility rule rests on the hand-written annex `dm-only` tag (29 of 256 variants). **Wiring row
-for the register car**, not a writer's problem.
+`capturePoolKey` (`powerStateProse.js:436-440`) maps `criminalCaptureState === 'capture'` →
+`capture reached a LEADER` and `'corrupted'` → `capture reached an AGENT of a faction`. But
+`computeCriminalCaptureState` (`factionDynamics.js:220-273`) computes those rungs from a
+**criminal faction's power against the governing faction's power and the safety ratio** — its
+own comments read *"a REAL underworld … DOMINATES a still-standing government"* (`:237-243`) and
+*"the council is purchased"* (`:245-246`). **It names no seat, no rank and no person.** The
+`agent · deputy · leader` vocabulary the annex quotes (`RECEIPT_POOLS…:2293-2295`) is the
+world-run `rank` parameter of `captureAdvanceChance` (`corruption.js:490-497`, *"1=agent..3=leader"*),
+read from an NPC's `dotRank` on an internal seat (`factionCapture.js:93-99`) — a PERSON fact
+this desk never receives. **Six shipped variants (all `dm-only`) rest on it.**
 
----
+### §8.5 THE SAME WORD, TWO REFERENTS — AND ONE REFERENT, TWO SPELLINGS
 
-## §9 FINDINGS — SHIPPED DESK ROWS AT THE WRONG LAYER FOR THEIR READ
-
-Quotes ≤ 12 words. "Read" = the census read the pool actually carries.
-
-| # | Class | Row (file:line) | Quote (≤12 words) | Read | Why it is a layer error |
-|---|---|---|---|---|---|
-| **F-1** | body word on a score read | `RECEIPT_POOLS…:2305` (DS-POW-6 `neutral baseline`) | *"not the harvest, not the watch, not the walls"* | `legitimacy.breakdown` (**court**) | the breakdown's four members are `prosperity · safety · defense · food` (`factionDynamics.js:179`). "the watch" substitutes a **BODY** (and an order **ORGAN**) for the *safety* score, "the walls" a muster-held **BODY** (`holderTable.js:188`) for the *defense* score. Three layers in one clause, on a read that holds none of them |
-| **F-2** | body word on a POWER read | `:2316` (DS-POW-6 `capture RECOVERING`) | *"Prosperity and a working watch did what no investigation did"* | `breakdown.prosperity`, `breakdown.safety` (court), `power.criminalCaptureState` (watch) | the watch appears as a **body that works**; the read whose holder *is* the watch is the capture state, and the read this clause states is a court-held score. Also asserts an absent act ("no investigation") that no field records |
-| **F-3** | a person doing something | `:2159` (DS-POW-4 `backing hardens the hold`) | *"a ruler with the town behind them can do things"* | `legitimacy.govMultiplier` (court) | "a ruler" is in **no** role vocabulary of the estate (`roleCategory.js:32-68`, `historyData.js:18-1103`, `factionRoles.js:44-61`); and the clause is a **maxim about rulers generally**, not this town's standing |
-| **F-4** | a person doing something | `:2161` (same pool) | *"There are people at {settlement} who would move on the {seat}"* | `legitimacy.govMultiplier` | unnamed persons with intentions and a counterfactual; the read is one coefficient's band |
-| **F-5** | a person doing something | `:2169` (DS-POW-4 `rejection is breaking the hold`) | *"The town has turned on whoever sits at {settlement}"* | `legitimacy.govMultiplier` | "whoever sits" is a **person** by circumlocution; the engine's referent is the seat |
-| **F-6** | role word with no read | `:1935`, `:1941`, `:1961` (DS-POW-1 `Endorsed` / `Approved` / `Legitimacy Crisis`) | *"the clerks who keep them have stopped chasing what is missing"* | **`reads: []`** — all three pools WIRING-UNRESOLVED | `clerk` is a typed role **title** (`historyData.js` government) with `holderRole === null` (`institutionTable.js:215`); here it is a group of persons performing an act, on a pool that licenses nothing |
-| **F-7** | body word + person on an unresolved read | `:1937` (DS-POW-1 `Endorsed`) | *"the watch is not the reason … leaves an operator very few doors"* | **`reads: []`** | the watch as a **body** and an **operator** as a person, both on a pool with no read; the sentence also asserts a causal negative |
-| **F-8** | untyped role nouns | `:2230` (DS-POW-5 `merchant_league`) | *"run by people who are also its creditors, and the two roles"* | **`reads: []`** | "creditors" is neither a role vocabulary entry nor a body; "roles" invokes the ROLE layer the desk cannot reach |
-| **F-9** | fused agent | `:2175` (DS-POW-4 `previousGovernments present`) | *"The lineage at {settlement} records what took each prior government"* | **`reads: []`** | the lineage as an **agent-source** — the class ADDENDUM 12 R-vi refused on the defense desk ("The roll shows…"); the same shape on this desk, unruled |
-| **F-10** | organ word at the political layer | `:2405` (DS-POW-7 `consolidation 0`) | *"The court at {settlement} is divided finely enough that it is cheap"* | **`reads: []`** | "the court" is the HOLDER kind and STATE ORGAN (`holderTable.js:80`, `:115`) and a SECURITY body (`corruption.js:630`); here it means the assembly of houses, a sense the engine holds nowhere. The census's own classifier read it as `objectClass: "law"` (§6 O-3) |
-| **F-11** | persons at the head | `:2419` (DS-POW-7 glue `patronage`), `:2489` (`hostile leader tie`) | *"a personal loyalty between the people at the head of it"* | **`reads: []`** | the engine **does** type this (`leaderNpcId` `settlementPolitics.js:252`; `peopleHeld: true` `:451`; tie types `:316-320`) — so the referent is lawful **and the read is absent**. A cure is a WIRING row, not a rewrite |
-| **F-12** | a leader acting | `:2476` (DS-POW-7 receipt `fractured`) | *"A leader who bound the combination at {settlement} left the seat"* | **`reads: []`** | a succession event **is** typed (`leaderNpcId` drift, `settlementPolitics.js:795-801`) and unread; as written it is a person performing a closed act on an unresolved pool |
-| **F-13** | body word on a body read the desk does not hold | `:2038` (DS-POW-2 `siege matched`) | *"it governs rationing, the gates and the watch rota"* | `first` (STABILITY_LADDER) | "the gates" (walls bucket `:84`) and "the watch rota" (watch bucket `:95` / order organ `:115`) are two BODY referents on a read that carries only the stability classifier token |
-| **F-14** | organ verb on a score read | `:1978` (DS-POW-1 `breakdown SAFETY adverse`) | *"Every season {settlement} goes badly policed costs the {seat}"* | **`reads: []`** | "policed" is the order organ as a verb; and "every season … costs" is a rate the read does not carry |
-| **F-15** | body word on an unresolved operation read | `:2351` (DS-POW-6 `stolen goods market`) | *"the somewhere is the part the watch has never reached"* | **`reads: []`** | the watch as a body performing (not performing) an act; the pool reads nothing |
-| **F-16** | two words, one referent | desk-wide | `{seat}` and `{faction}` fill from the same `governingName` | `powerStateProse.js:860`, `:876` | law 3 inverted: one referent under two spellings, so a unit naming both reads as two actors. Measured cost already paid once: DS-POW-2 drops 10 of 31 variants rather than render the collision (`:866-873`) |
-| **F-18** | an UNNAMED power asserted on a band predicate | `:1993` (DS-POW-1 `governanceFractured true`, the `dm-only` variant) | *"{settlement} has a governing body and it has a government"* | `legitimacy.governanceFractured` (court, `holderTable.js:216`) | **the annex's own fence is refuted by the engine.** `RECEIPT_POOLS…:1928-1930` says *"`governanceFractured` is a SEPARATE assertion and is never inferred from a low band — a crisis-band town with an intact hall is a real and common state."* The producer sets `governanceFractured: score < 30` (`factionDynamics.js:133`) on the **identical predicate** as `isLegitimacyCrisis: score < 30` (`:132`), and the display layer records it verbatim: *"the two are COEXTENSIVE at the producer"* (`powerStateProse.js:54-56`, restated `:234-237`). So the four variants assert a **second, unnamed power** ("a government" that is not the governing body) on a read that is the legitimacy score being under 30 — a POWER-layer claim with no typed faction slot behind it, on a BODY-configuration read that is really the crisis band under another name |
-| **F-17** | the desk's only PERSON-NAMED slot | DS-POW-3, all 5 pools | `{npc}` = `rungs[0].name` | `ladderRead.js:95-107`; filled `powerStateProse.js:639` | not a defect — **a question the chair must answer.** The draft law says PERSON is never a referent and an individual appears "only as a ROLE word"; DS-POW-3 puts a **recorded name** in subject position. The engine types the edge (NPC→rung inside a faction) even though it types no NPC→institution edge, and the annex fence already bars a fate (*"a name leaving the top rung is a departure from the rung, never from life"*, `RECEIPT_POOLS…:2083-2085`) |
+- **R-2 — `{seat}` and `{faction}` fill from ONE string.** `const governing =
+  properFill(text(power.governingName))` (`powerStateProse.js:860`) fills `{seat}` at `:875` and
+  `{faction}` at `:876`, and BOTH at `:909` (DS-POW-7), `:953` (DS-POW-4) and `:962` (DS-POW-6).
+  Draft law 3 inverted: one referent under two spellings, so a unit naming both reads as two
+  actors. The desk has already paid this cost once knowingly — DS-POW-2 leaves `{seat}` unfilled
+  and drops 10 of 31 variants rather than render *"The Merchant Council … is Merchant
+  Council's"* (`:862-874`).
+- **R-3 — DS-POW-6's `{faction}` is documented as the CAPTURED HOUSE and filled with the
+  GOVERNING BODY.** The comment at `:957-958` says *"DS-POW-6 uses {seat} as the governing BODY …
+  and {faction} for the captured house, so it takes BOTH fills — the two roles do not collide in
+  this block"*, and the very next line (`:962`) fills both from `governing`. The desk derives no
+  captured-faction name anywhere (`capturePoolKey` reads the settlement-wide rung only), so
+  *"Somebody well down inside {faction}"* renders the **ruling structure's own name** on every
+  town. A POWER-layer misattribution produced by the fill, not by the writer.
+- **R-6 — `governanceFractured` asserts a SECOND, UNNAMED power.** DS-POW-1's `dm-only` variant
+  (`RECEIPT_POOLS…:1990-1993`) says *"{settlement} has a governing body and it has a government"*.
+  The producer sets `governanceFractured: score < 30` (`factionDynamics.js:133`) on the
+  **identical predicate** as `isLegitimacyCrisis: score < 30` (`:132`), and the desk records the
+  collapse verbatim: *"the two are COEXTENSIVE at the producer"* (`powerStateProse.js:53-55`).
+  The annex's PROVENANCE fence asserts the opposite — *"`governanceFractured` is a SEPARATE
+  assertion and is never inferred from a low band"* (`:1928-1930`). So four variants name a power
+  with **no typed slot behind it** on a read that is the crisis band under another name.
 
 ---
 
-## §10 WIRING ROWS AND OPEN QUESTIONS (raised, not decided)
+## §9 INSTRUMENT AND WIRING ROWS, AND THE QUESTIONS THE CHAIR MUST ANSWER
+
+### §9.1 Two instrument defects found and PROVEN by execution
+
+**W-1 — DS-POW-1's licence card reports the WRONG BAG, and it is a layer-grade misdirection.**
+The card for all eleven DS-POW-1 pools prints
+`FILLED at this block's call sites: {faction} {npc} {settlement} · NAMED BUT NEVER FILLED: {seat}`.
+The desk fills `{settlement}` and `{seat}` and neither `{faction}` nor `{npc}`
+(`powerStateProse.js:875`). **Cause, executed:** `resolveBag` resolves a shorthand `slots:` by
+`new RegExp('\\bconst\\s+slots\\s*=').exec(src)` — the **first** match in the file
+(`tests/helpers/dossierComposedFill.js:141`). `powerStateProse.js` declares `const slots =`
+twice, at **line 634** (inside `powerLadderRung`, the DS-POW-3 bag `{settlement, faction, npc}`)
+and at **line 875** (DS-POW-1's own). Run in the dock:
+
+```
+resolveBag(src,"slots")           => ["settlement","faction","npc"]     ← powerLadderRung's, line 634
+every `const slots =` line:       => [634, 875]
+resolveBag(src,"stabilitySlots")  => ["settlement","faction"]           ← correct (unique name)
+```
+
+Under the referent law the card therefore tells a writer that DS-POW-1 may name a **faction**
+(a POWER-layer typed slot) and an **NPC** (a person), and may not name the **`{seat}`** — the one
+referent 38 of its 41 variants actually carry. It also plants a false wiring-debt row: the census
+lists `{seat}` as `slotsWithoutProvider` on eleven pools (`wiringCensus.js:608`, reported
+`:1176-1177`). The cure is a per-declaration resolve (nearest enclosing scope), not a rename.
+**Only DS-POW-1 is affected on this desk**; DS-POW-3 collides on the same first match and is
+correct by luck.
+
+**W-2 — DS-POW-5's only RESOLVED row is resolved against the WRONG key function.** The census
+gives `DS-POW-5 :: autocrat` `keyFunction: politicsPresencePoolKey`, `reads: ["politics.blocs"]`,
+`source: court · LICENSED`. The real selector is `rulingPowerPoolKey`
+(`powerStateProse.js:709-713`), which returns `lens.rulingPower` by CORPUS lookup and contains
+**no literal**; the literal `'autocrat'` the census's rung-3 search found lives inside
+`politicsPresencePoolKey` at `:810` (`text(rulingPower) === 'autocrat'`), which is DS-POW-7's
+function. So the card licenses a face to speak *the court's bloc record* on a pool whose actual
+read is the **ruling-power classification of the governing faction's archetype**
+(`cohesionWeave.js:171-196`). A layer error created by the instrument.
+
+### §9.2 Wiring rows for the register car
 
 | # | Row | Evidence |
 |---|---|---|
-| W-1 | `blocs.covert` is on the frozen COVERT-SOURCE list and **no power row reads it**, although `politicsPresencePoolKey` does | `wiringCensus.js:1256-1258`, `:1230-1232`; `powerStateProse.js:800-802`; census `covert=false` on 79/79 |
-| W-2 | `DS-POW-5 :: autocrat` is RESOLVED against DS-POW-7's key function by a literal match | §6 F-2 |
-| W-3 | The AGENT/LEADER split reads no seat rank | §6 F-3; `npcAgency.js:411-415` |
-| W-4 | The desk reads **no institution row**, so every body word in its prose is unlicensed by construction | §0, §5 |
-| W-5 | `{seat}` and `{faction}` are one string; DS-POW-2 has no hall-name producer | `powerStateProse.js:860-876` |
-| W-6 | The bloc ROLE layer (`leaderNpcId`, tie types, `peopleHeld`, succession drift) is fully typed and **entirely unread** — 18 of DS-POW-7's 20 pools are WIRING-UNRESOLVED | `settlementPolitics.js:222`, `:252`, `:316-320`, `:451`, `:795-801`; census |
-| W-7 | The corruption impairment (the law's cleanest ORGAN-UNDER-POWER fact, with a real covert flag) is read by **no desk at all** on the power side | `corruption.js:662-691`; census |
-| W-9 | `governanceFractured` and the `Legitimacy Crisis` band are coextensive at the producer, and the annex's PROVENANCE fence asserts the opposite. The display layer already orders LENS C ahead of LENS B *because* of the collapse (`powerStateProse.js:44-60`), so the crisis band prints **both** the ladder line and the fracture line on the same town | `factionDynamics.js:132-133`; `powerStateProse.js:54-56`, `:234-237`; annex `RECEIPT_POOLS…:1928-1930` |
-| W-8 | The civic-object classifier files `watch` under `force`, `court` under `law`, `patron` under `temple`, `seat`/`office`/`council` under `hall` — cutting across the holder table's kinds, with three measured mis-classifications on this desk | `wiringCensus.js:1300-1325`; census `objectClass` on DS-POW-4/5/6/7 |
-| Q-1 | Is `{npc}` (a recorded name at the top rung) a ROLE read or a PERSON referent? §9 F-17 |
-| Q-2 | `governanceFractured` asserts a power the engine does not name. Which layer tag does a read with an **unnamed** power carry? | `:1993` vs `holderTable.js:129-144` |
-| Q-3 | `govMultiplier` is a standing over the seat held by **the town**, not by a faction or the ruling structure. Does law 1's "standing read" cover a standing whose holder is the populace? | `factionDynamics.js:113-118` |
-| Q-5 | Where a read's implied power has **no typed slot** (F-18, Q-2), does the law refuse the power clause outright, or admit an unnamed-power form ("the decisions are made elsewhere") as a licensed standing read? The desk's shipped rows take the second option four times over and the engine names nobody | `:1990-1994`; `holderTable.js:129-144` |
-| Q-4 | ADDENDUM 11 offers "the reeve" and "the captain" as specimen ROLE words. On this desk "the reeve" is an institution row, a governance label and a role keyword before it is a role (§6 O-6). Does the law want a **safe role list** per desk, the way it wants safe class words? |
+| W-3 | **The desk reads no institution row**, so every body word in its prose is unlicensed by construction (66 of 256 variants) | §1, §8.1 |
+| W-4 | **The corruption impairment — the law's cleanest ORGAN-UNDER-POWER fact, and the only one with a real covert flag — is read by no shipped pool of any desk** | `corruption.js:663-691`; census probe over all 708 rows |
+| W-5 | **`blocs.covert` is on the frozen COVERT-SOURCE list and no power row reads it**, although `politicsPresencePoolKey` reads `b?.covert` in JS | `wiringCensus.js:1252-1259`, `:1265-1269`; `powerStateProse.js:809`; census `covert=false` on 79/79 |
+| W-6 | **The brokerage patron has a typed audience projection and no prose consumer**; DS-POW-7's `end patron` invents the relation from the bloc's `end` value | `brokeragePatronage.js:319-329`; `settlementPolitics.js:461` |
+| W-7 | **The bloc ROLE layer is fully typed and entirely unread** — `leaderNpcId`, `leaderName`, warm/hostile tie types, `peopleHeld`, succession drift. **18 of DS-POW-7's 20 pools are WIRING-UNRESOLVED** | `settlementPolitics.js:252-253`, `:316-318`, `:423-455`, `:792-803`, `:927-928` |
+| W-8 | **`{seat}` and `{faction}` are one string, and DS-POW-2 has no hall-name producer** | `powerStateProse.js:860`, `:866-876` |
+| W-9 | **`governanceFractured` and the `Legitimacy Crisis` band are coextensive at the producer, and the annex's PROVENANCE fence asserts the opposite** | `factionDynamics.js:132-133`; `powerStateProse.js:51-60`; annex `:1928-1930` |
+| W-10 | **The civic-object classifier cuts across the holder table**, with three measured mis-files on this desk (`end patron` → temple, `a fully divided court` → law, `the seat could fall` → hall) | `wiringCensus.js:1302-1322`; census `objectClass` on DS-POW-4/5/6/7 |
+| W-11 | **DS-POW-5's five `economicBase:` pools are dark by declaration** and its `{institution}`, `{route}`, `{good}` slots have no provider — so the one variant of the desk that would name a recorded institution row never renders | `powerStateProse.js:665-701`; census `slotsWithoutProvider` |
+| W-12 | **The AGENT/LEADER rank split reads no seat rank** | §8.4 |
+| W-13 | **The muster kind has exactly one holder in the 285-row roster**, and `tradition` has none at all | `holderTable.js:280-288`, `:338-347` |
+
+### §9.3 Questions the law must answer (raised, not decided)
+
+| # | Question | Why it is open |
+|---|---|---|
+| Q-1 | **Is `{npc}` a ROLE read or a PERSON referent?** The draft law says PERSON is never a referent and an individual appears "only as a ROLE word"; DS-POW-3 puts a **recorded name** in subject position in 6 of 16 variants | `ladderRead.js:95-107`; filled `powerStateProse.js:639`. The engine types the NPC→rung edge inside a faction even though it types no NPC→institution edge, and the annex fence already bars a fate: *"a name leaving the top rung is a departure from the rung, never from life"* `:2084-2085` |
+| Q-2 | **Which layer tag does a read with an UNNAMED power carry?** `governanceFractured` asserts a second government the engine never names | R-6; `holderTable.js:129-145` |
+| Q-3 | **Does "a standing read" cover a standing whose holder is the POPULACE?** `govMultiplier` is a standing over the seat held by the town, not by a faction or the ruling structure | `factionDynamics.js:113-118`; DS-POW-4's three hold pools |
+| Q-4 | **Does the law want a SAFE ROLE LIST per desk, the way it wants safe class words?** ADDENDUM 11 offers "the reeve" and "the captain" as specimens; on this desk *reeve* is an institution row, a treasury holder and a `governingName` value before it is a role, and *captain* appears nowhere | O-6; `rulingStructure.js:164` |
+| Q-5 | **Where a read's implied power has no typed slot, does the law refuse the power clause, or admit an unnamed-power form?** The shipped rows take the second option (*"the real decisions are made elsewhere"*, *"answering elsewhere"*, *"a particular interest"*) and the engine names nobody | annex `:1990-1994`, `:2319-2328`; `holderTable.js:129-145` |
+| Q-6 | **Is the `{seat}` fill a BODY word, an OFFICE word or a ROLE word?** `officesOf` folds `governingName` into the OFFICE set (`institutionTable.js:396-398`), and the generator can put *Town Mayor*, *Elected Reeve*, *Headman's Authority* or *Priestly Guidance* in it (`rulingStructure.js:164`, `:259-260`, `:284`). A law that fixes the layer by the READ still needs to know what class the SLOT renders |
+| Q-7 | **Does draft law 4 have any mechanical carrier on this desk?** Visibility here is carried entirely by the annex's `dm-only` marks (29 of 256 variants), and the census `covert` flag is false on all 79 rows | §7 |
+
+---
+
+## §10 THE ONE-LINE SUMMARY FOR THE CHAIR
+
+The power desk is the **cleanest test of the referent law and the hardest case for it**: it is
+the only desk whose every read is a POWER-layer or ORGAN-layer standing (a capture rung, a
+legitimacy coefficient, a bloc ledger, a stability string), it has **no body read whatsoever**,
+and 66 of its 256 shipped variants speak in body words anyway — *the hall* fifty times, *the
+watch* five, with no institution row behind either. Its two LICENSED holder kinds (`court`,
+`watch`) are exactly the two institutions the corruption model can buy, which is where the law's
+ORGAN-UNDER-POWER layer would first earn its keep — and neither the desk nor any shipped pool in
+the estate reads that fact today.
 
 ---
 
 *Packet written by the power-desk referent surveyor, seat Opus 5, from `laneRW-DEFW` at
-`f2da5a3ee`. Nothing in the dock was modified, staged or committed; the only executable run was
-`scripts/prose-licence-card.mjs`, which prints.*
+`f2da5a3ee`. Nothing in the dock was modified, staged or committed. The only executable runs
+were `scripts/prose-licence-card.mjs` (15 cards) and three printing `node -e` probes over the
+committed census, the generated leaf, and `tests/helpers/dossierComposedFill.js`'s pure
+`resolveBag` / `fillSites`. No vitest, no build.*

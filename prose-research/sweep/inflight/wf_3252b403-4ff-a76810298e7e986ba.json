@@ -1,0 +1,20 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 57,
+ "firstTs": "2026-09-11T09:56:17.524Z",
+ "lastTs": "2026-09-11T09:57:49.948Z",
+ "tools": {
+  "Bash": 9
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "I'll start by reading the brief's ADDENDUM 11 (and 10) and the surveyor packet.",
+ "run": "wf_3252b403-4ff",
+ "agent": "a76810298e7e986ba",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/4ed79a2b-6cd2-45cf-ab97-83cdad49c30b/subagents/workflows/wf_3252b403-4ff/agent-a76810298e7e986ba.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}
