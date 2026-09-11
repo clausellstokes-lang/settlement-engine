@@ -1,8 +1,0 @@
-#v3-1 PASS(mechanical) DS-POW-5 :: governing body name: a SLOT, never a baked noun [ledger]
-    · A11 SPREAD (sentences, pool "governing body name: a SLOT, never a baked noun" DS-POW-5, angles ledger/visitor/street): 1/1/1 → 1/1/1
-#v3-2 PASS(mechanical) DS-POW-5 :: governing body name: a SLOT, never a baked noun [visitor]
-    · A11 SPREAD (sentences, pool "governing body name: a SLOT, never a baked noun" DS-POW-5, angles ledger/visitor/street): 1/1/1 → 1/1/1
-#v3-3 PASS(mechanical) DS-POW-5 :: governing body name: a SLOT, never a baked noun [street]
-    · A11 SPREAD (sentences, pool "governing body name: a SLOT, never a baked noun" DS-POW-5, angles ledger/visitor/street): 1/1/1 → 1/1/2
-
-corpus loaded: 2734 variants in 1020 pools; 3 pass mechanically, 0 WITHHELD (R4-BAND — the band half is the refuter's, not a FAIL), 0 fail (a mechanical pass is NOT a claim-preservation verdict — that is the refuter's job)

@@ -1,5 +1,0 @@
-
-> settlementforge@1.0.0 typecheck:ratchet
-> node scripts/check-full-typecheck.mjs
-
-[typecheck-ratchet] OK — no type regressions (173 error(s), ceiling 173).
