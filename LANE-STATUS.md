@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-11 10:05:56 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-11 10:11:41 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = d7f4c6b0e §919: the REWRITE train's first car lands — the index-stable draw signed (59.61 % of ce
 
@@ -235,12 +235,12 @@ json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
     - `a807540d9` REFUTER stressors · FAILED · transcript 09-11 06:25 524 KB · 21 tool calls
     - `ac5e0574e` REFUTER warFaith · FAILED · transcript 09-11 06:25 578 KB · 26 tool calls · files: $SC/rewrite/entailment/warFaith.referent.refute.md
     - `a246b85c5` FOLDER · FAILED · transcript 09-11 06:26 101 KB · 0 tool calls
-    - `ad55f1ba2` REFUTER defense · IN FLIGHT · transcript 09-11 10:05 459 KB · 20 tool calls · files: $SC/rewrite/entailment/defense.referent.refute.md · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
-    - `aa904cb80` REFUTER general · IN FLIGHT · transcript 09-11 10:05 450 KB · 16 tool calls · files: $SC/rewrite/entailment/general.referent.refute.md · last: Bash D=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratc
-    - `a1b514bd3` REFUTER economy · IN FLIGHT · transcript 09-11 10:05 442 KB · 30 tool calls · last: Bash D=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratc
-    - `a6f370189` REFUTER power · IN FLIGHT · transcript 09-11 10:05 476 KB · 22 tool calls · files: $SC/rewrite/entailment/power.referent.refute.md · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
-    - `a48868e85` REFUTER stressors · IN FLIGHT · transcript 09-11 10:05 426 KB · 19 tool calls · files: $SC/rewrite/entailment/_stressors_survey_tail.tmp.md, $SC/rewrite/entailment/stressors.referent.refute.md · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
-    - `a89e0af42` REFUTER warFaith · IN FLIGHT · transcript 09-11 10:05 524 KB · 22 tool calls · last: Bash D=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratc
+    - `ad55f1ba2` REFUTER defense · IN FLIGHT · transcript 09-11 10:11 809 KB · 43 tool calls · files: $SC/rewrite/entailment/defense.referent.refute.md, $SC/rewrite/entailment/_defref_annex.txt · last: Bash SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
+    - `aa904cb80` REFUTER general · IN FLIGHT · transcript 09-11 10:10 679 KB · 29 tool calls · files: $SC/rewrite/entailment/general.referent.refute.md · last: Bash D=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratc
+    - `a1b514bd3` REFUTER economy · IN FLIGHT · transcript 09-11 10:11 660 KB · 54 tool calls · last: Bash D=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratc
+    - `a6f370189` REFUTER power · IN FLIGHT · transcript 09-11 10:11 681 KB · 38 tool calls · files: $SC/rewrite/entailment/power.referent.refute.md · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
+    - `a48868e85` REFUTER stressors · IN FLIGHT · transcript 09-11 10:11 693 KB · 31 tool calls · files: $SC/rewrite/entailment/_stressors_survey_tail.tmp.md, $SC/rewrite/entailment/stressors.referent.refute.md, $SC/rewrite/entailment/_stressors_annex.tmp.md · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
+    - `a89e0af42` REFUTER warFaith · IN FLIGHT · transcript 09-11 10:11 844 KB · 38 tool calls · last: Bash D=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratc
 - **wf_abaf2de0-b00** (mtime 09-11 06:12): agent calls 22 (19 distinct) · DONE 19 · FAILED 0 · RETRIED (superseded attempts) 3 · IN FLIGHT 0 — mirror `_progress/wf_abaf2de0-b00/`
     - `acb131a55` GATE r1 · DONE · transcript 09-11 05:24 559 KB · 56 tool calls · files: x.txt, msg.txt, (git commit) · result: {"commit": "32634b8004831321c2d0b5985766cb8f0ae78590", "pools": [{"dir": "ds-def-11--walled-threatened", "applied": true, "inBand": true, "failing": [], "refusa
     - `af97f6e2b` REFUTER WALLED-THREATENED r1 · DONE · transcript 09-11 05:32 611 KB · 19 tool calls · files: refute-cure-round-1.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-11/ds-def-11--walled-th
@@ -283,4 +283,4 @@ json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
     - `ad30ac0bb` FOLDER · DONE · transcript 09-11 06:02 1531 KB · 36 tool calls · files: _partD.md, _partE.md, _partF.md, _partG.md · result: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/entailment/ENTAILMENT-TABLE.draft.md
 
 ## PROCESSES: 57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 2.54 2.45 2.36
+load: 2.07 2.20 2.27

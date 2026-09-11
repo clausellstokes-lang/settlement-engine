@@ -1,0 +1,849 @@
+2500	### DS-DEF-1: `Defense › Defensive posture header` · `defenseProfile.readiness + resourceAnalysis.{terrain,strategicValue} + safetyProfile.guardEffectivenessDesc`
+2501	> *what the town amounts to as a defended place, before any particular threat is named*
+2502	
+2503	**RECEIPT:** `src/components/new/tabs/DefenseTab.jsx:120-136` · bands `src/domain/display/defenseScoreBands.js:30-39`
+2504	**STATE-KEY:** `defenseProfile.readiness.label` (band word) read against
+2505	`scoreBand` (`STRONG` ≥65 · `ADEQUATE` ≥40 · `WEAK` ≥20 · `CRITICAL` <20) ·
+2506	`resourceAnalysis.terrain` · `resourceAnalysis.strategicValue` ·
+2507	`safetyProfile.guardEffectivenessDesc`.
+2508	**SLOTS:** `{settlement}` `{route}` `{counterpart}` `{band}`
+2509	**SECTION-TARGET:** `defense`
+2510	**PROVENANCE + FENCE:** the readiness word is a summary of the five arms and
+2511	asserts nothing about any one of them — a `STRONG` header over a `CRITICAL`
+2512	food arm is a real and common state, and the header variant may not imply
+2513	otherwise. Terrain and strategic value are STANDING facts of the site with no
+2514	recorded history; they never license a causal clause about how the town came
+2515	to be there. `guardEffectivenessDesc` is engine prose about the watch and
+2516	belongs in the public-order shape (`DS-DEF-3`), not here.
+2517	**COMPOSITION FENCE (§0h V1-g):** this block's `ADEQUATE` readiness cell and
+2518	`DS-DEF-10`'s `ADEQUATE` per-arm badge cell read closely alike, because the two
+2519	states genuinely rhyme — a covered-with-no-margin *town* and a covered-with-no-
+2520	margin *arm*. They are different fields on different rows and both are kept;
+2521	**a composed Defense tab draws one of them, never both.**
+2522	**PDF PARITY:** parity.
+2523	
+2524	**readiness `STRONG`**
+2525	1. `[visitor]` {settlement} reads as a defended place from the road in: the approaches are watched, the works are kept up, and none of it looks like it was thrown together.
+2526	2. `[ledger]` What {settlement} can field and what {settlement} has built are both in good order; the town would take real effort to threaten and knows it.
+2527	3. `[street]` The town does not spend much time thinking about being attacked, and the reason is not complacency. The arrangements are in place, and the town is not relying on anything else instead.
+2528	4. `[counterforce]` Nothing presses {settlement} at present, and the absence is not luck: a town this well set is not worth the price of trying.
+2529	
+2530	**readiness `ADEQUATE`**
+2531	1. `[ledger]` {settlement} is covered against what it is likely to face, with little left over. The arrangements work and would not survive being tested twice at once.
+2532	2. `[visitor]` A stranger sees an ordinary defended town at {settlement}: enough on the walls to be serious, not enough to be reassuring.
+2533	3. `[street]` The town believes it could hold against the usual trouble and does not claim more than that, which is a fair reading of what it has.
+2534	4. `[threshold]` {settlement} is at the point where the arrangements are sufficient and nothing is spare. One more demand on them and the town would be choosing which pressure to leave uncovered.
+2535	
+2536	**readiness `WEAK`**
+2537	1. `[ledger]` The defensive arrangements at {settlement} are thin. Something is in place against most pressures and nothing is in place in depth.
+2538	2. `[visitor]` What a stranger notices at {settlement} is how much of the perimeter has nobody on it, and how normal the town seems to find that.
+2539	3. `[unfolding]` {settlement} is getting by on not being tested. The margin has been narrowing rather than widening, and nothing in hand is closing it.
+2540	
+2541	**readiness `CRITICAL`**
+2542	1. `[ledger]` {settlement} is effectively undefended. There is no arrangement here that would slow a serious attempt on the town by more than the time it takes to walk in.
+2543	2. `[street]` The town knows perfectly well what it could not survive, and the knowledge shapes what it will and will not provoke.
+2544	3. `[visitor]` A stranger reaches the centre of {settlement} without being stopped, challenged or counted by anybody at all.
+2545	
+2546	**terrain FAVOURABLE to the defender**
+2547	1. `[visitor]` The ground does more for {settlement} than the town does. The approach is narrow, and anything coming at it has to come the long way and in the open.
+2548	2. `[ledger]` {settlement} is sited where the terrain carries part of the defense; what the town has built is worth more here than the same works would be on flat ground.
+2549	3. `[counterforce]` The ground here does the arguing. Anything weighing an attempt on {settlement} has to weigh the approach first, and the approach is the part that does not improve with numbers.
+2550	
+2551	**terrain EXPOSED**
+2552	1. `[visitor]` {settlement} sits open. There is no ground here that helps it, and everything the town has must be built rather than found.
+2553	2. `[ledger]` The site gives {settlement} nothing defensively. Every advantage the town holds is one it has paid for and must keep paying for.
+2554	3. `[street]` The town has no hill and no narrows and does not pretend otherwise; what {settlement} holds it holds by standing on it.
+2555	
+2556	**strategic value HIGH**
+2557	1. `[ledger]` {settlement} holds something worth taking, and that is the whole of the defensive problem: the town must be worth more to keep than it is to seize.
+2558	2. `[street]` The town is aware of what it sits on and aware that others are aware, and the awareness runs underneath a great deal of what it decides.
+2559	3. `[visitor]` A stranger understands within a day why anybody would want {settlement}, and understands shortly afterwards why the town is so careful about who it offends.
+2560	
+2561	**strategic value LOW**
+2562	1. `[counterforce]` Nothing at {settlement} is worth an army's season, and the town's best defense is that plain fact rather than anything on its walls.
+2563	2. `[ledger]` {settlement} is not a prize. What it can field matters less here than what it does not have that anyone would come for.
+2564	3. `[street]` The town knows it is not worth taking and has made a kind of peace with the knowledge, which is not the same as being comfortable with it.
+2565	
+2566	---
+2567	
+2568	### DS-DEF-2: `Defense › Threat assessment (the five readiness rows)` · `defenseProfile.scores{monster,military,internal,economic,disaster} + institutions{walls,garrison,militia,charter} + config.monsterThreat + compound.inst`
+2569	> *the five pressures, and what the town actually has standing against each*
+2570	
+2571	**RECEIPT:** `src/domain/display/threatAssessment.js:28-195` (`buildThreatAssessment`) · rendered `src/components/new/tabs/DefenseTab.jsx:150-183` · the walls predicate `src/domain/causalState.js:300-315` (`defenseProfileHasWalls`)
+2572	**STATE-KEY:** five fixed rows (`Beasts & Monsters` · `Invasion & War` ·
+2573	`Internal Security` · `Economic Survival` · `Disasters & Famine`), each with a
+2574	`scoreBand` badge (`STRONG` / `ADEQUATE` / `WEAK` / `CRITICAL`), read against
+2575	`config.monsterThreat` (`plagued` / `frontier` / `settled`), the institution
+2576	presence flags, and `compound.inst`.
+2577	**SLOTS:** `{settlement}` `{band}` `{route}`
+2578	**SECTION-TARGET:** `defense`
+2579	**PROVENANCE + FENCE (the biggest in this cluster).** The existing
+2580	`buildThreatAssessment` lattice is genuinely dossier-native and this shape
+2581	EXTENDS it into a pool rather than replacing it — the corpus's job here is that
+2582	each branch currently holds exactly ONE string, so every settlement in a given
+2583	branch says the same words. Two standing defects are corrected in the authoring
+2584	and must not be reintroduced: the `plagued`+nothing branch leaks a lowercase
+2585	sentence lead, and the walls read must ride `defenseProfileHasWalls`, never a
+2586	presence check on `institutions.walls` — an empty `walls: []` array still
+2587	contains the key, and reading presence rather than the predicate once granted
+2588	every settlement in the product the walled bonus. Institution presence is a
+2589	STANDING fact with no recorded history; the causal clauses here are
+2590	*capability* clauses (walls without people cannot be held) and never
+2591	*historical* ones (walls built after a siege) unless the history surface
+2592	supplies the ancestry.
+2593	**PDF PARITY:** parity (`viewModel.js` defense slice).
+2594	
+2595	**`Beasts & Monsters`: `plagued`, perimeter AND organized force**
+2596	1. `[ledger]` The country around {settlement} is thick with creatures and the town has answered it properly: there is a wall to hold and there are people to hold it, and both are in use constantly.
+2597	2. `[street]` Defense at {settlement} is not an emergency arrangement, it is the week's work: the rotations run, the gates close on time, and nobody treats any of it as unusual.
+2598	3. `[unfolding]` What {settlement} has built is holding against the pressure and is being spent doing it; the posture is survivable, and survivable is the most that can be said of it here.
+2599	
+2600	**`Beasts & Monsters`: `plagued`, perimeter but NO force to hold it**
+2601	1. `[ledger]` {settlement} has a wall and nobody to man it. The line is a chokepoint on paper and a chokepoint requires people standing in it, which this town cannot supply for more than a night.
+2602	2. `[visitor]` A stranger walks the perimeter at {settlement} and finds long stretches of good work with nobody on them, in a country where that matters a great deal.
+2603	3. `[unfolding]` The works at {settlement} are doing less each season as the watch thins, and the thinning is not being reversed.
+2604	
+2605	**`Beasts & Monsters`: `plagued`, NO perimeter and NO force**
+2606	1. `[ledger]` An embattled country and nothing organized standing in it: {settlement} has no line, no force and no specialist recourse, and survival here rests on terrain, distance and the ability to leave.
+2607	2. `[street]` The town does not defend itself. What it does is watch, and move, and hope the pressure goes around it, and that is understood by everyone in it.
+2608	3. `[visitor]` A stranger arriving at {settlement} understands the danger before anybody explains it, because nothing about the place is arranged as though danger were expected to be met.
+2609	
+2610	**`Beasts & Monsters`: `frontier`, credible deterrence**
+2611	1. `[ledger]` {settlement} sits on an active frontier with a line and a force behind it. Most of what comes out of the country will not press a defended perimeter, and most of what comes here does not.
+2612	2. `[street]` The town takes the frontier seriously and has taken it seriously long enough that the arrangements are ordinary rather than anxious.
+2613	3. `[counterforce]` Very little reaches {settlement} out of the wild country, and the reason is that the arrangements are visible from a long way off.
+2614	
+2615	**`Beasts & Monsters`: `frontier`, force without a perimeter**
+2616	1. `[ledger]` {settlement} keeps armed people on an open frontier, which means the defense is reactive: whatever comes chooses where the fighting happens, and the town arrives afterwards.
+2617	2. `[visitor]` A stranger finds soldiers at {settlement} and no wall for them to stand on, and can see how that would go against anything that arrived in more than one place.
+2618	3. `[street]` The town can answer trouble and cannot prevent it, and the difference costs it something every season.
+2619	
+2620	**`Beasts & Monsters`: `settled`, defenses beyond the need**
+2621	1. `[counterforce]` There is very little in the country around {settlement} and there are substantial works facing it; whatever the walls here are for, it is not the creatures.
+2622	2. `[ledger]` {settlement} is comfortably over-provided against beasts. The pressures that matter to this town are internal, and its defensive spending does not reflect that.
+2623	3. `[visitor]` A stranger notices the perimeter at {settlement} chiefly for how relaxed the people on it are.
+2624	
+2625	**`Beasts & Monsters`: `settled`, nothing organized**
+2626	1. `[ledger]` {settlement} keeps no organized defense against the country, and in a heartland this quiet the arrangement is a reasonable one rather than a gap.
+2627	2. `[street]` The town has never needed to think about what is outside it, and does not.
+2628	3. `[visitor]` A stranger walks out of {settlement} in any direction at any hour and meets nothing that would justify a watch.
+2629	
+2630	**`Invasion & War`: walls AND professional garrison**
+2631	1. `[ledger]` {settlement} has a line and professionals to hold it, which is real deterrence against raiding and against a conventional assault; it is not a posture rated for a long siege without stores behind it.
+2632	2. `[visitor]` A stranger sizing {settlement} up sees the two things that matter together (the wall and the men who belong to it) and revises what an attempt would cost.
+2633	3. `[street]` The town believes it could be held, and the belief is founded on something rather than on hope.
+2634	
+2635	**`Invasion & War`: walls with citizen militia**
+2636	1. `[ledger]` Walls at {settlement} with townspeople behind them: credible against raiders, and inadequate against anybody who arrives professionally and brought siege gear.
+2637	2. `[street]` The town would turn out and does not pretend that turning out is the same as being defended.
+2638	3. `[unfolding]` What {settlement} has would hold against the first thing and is unlikely to hold against the second, and nothing in hand changes that.
+2639	
+2640	**`Invasion & War`: walls with NO force**
+2641	1. `[ledger]` {settlement} has walls and nobody to put on them. A determined attacker takes this town with ladders and patience, and requires nothing else.
+2642	2. `[visitor]` A stranger at {settlement} sees a serious perimeter and a serious absence of anyone standing in it.
+2643	3. `[street]` The town has the thing that would save it and not the people who would use it, and says so when pressed.
+2644	
+2645	**`Invasion & War`: force with NO walls**
+2646	1. `[ledger]` {settlement} keeps a professional force and no perimeter. It answers raiders well and cannot hold a siege, because there is nothing here to hold.
+2647	2. `[street]` The town's defense is people rather than works, and people can be gone around.
+2648	3. `[visitor]` A stranger sees soldiers at {settlement} and no line for them to stand behind, and can see how that decides where any fight would happen.
+2649	
+2650	**`Invasion & War`: militia only**
+2651	1. `[ledger]` {settlement} can put armed citizens on their own ground, which counts for something against a disorganized raid and for nothing at all against a disciplined force.
+2652	2. `[street]` The town knows its own country and knows that knowing it is not an answer to a professional army.
+2653	3. `[visitor]` A stranger at {settlement} meets armed townspeople who are entirely competent on their own ground and have never stood in a line with anybody.
+2654	
+2655	**`Invasion & War`: neither walls nor force**
+2656	1. `[ledger]` {settlement} has no line and no force. Organized aggression cannot be resisted here; what preserves the town is distance, diplomacy, or being beneath notice.
+2657	2. `[counterforce]` Nothing has come for {settlement} and nothing about the town would stop it. The safety here is entirely a matter of nobody having wanted to.
+2658	3. `[street]` The town's plan for an army is to not be interesting to one, and everybody here can state the plan.
+2659	
+2660	**`Internal Security`: full legal chain (court AND prison)**
+2661	1. `[ledger]` {settlement} can arrest, try and hold, and having all three means the town's law is a process rather than a threat.
+2662	2. `[street]` A thing done wrong at {settlement} goes somewhere and takes time, and the town has come to rely on that rather than on the watch's temper.
+2663	3. `[visitor]` A stranger who brings a complaint at {settlement} is given a procedure rather than a favour, and the procedure runs.
+2664	
+2665	**`Internal Security`: court without detention**
+2666	1. `[ledger]` {settlement} tries offences it cannot hold anyone for; the sentences available here are money and exile, and both of them fall unevenly.
+2667	2. `[street]` The town's law can name a wrong and cannot keep the person who did it, so it reaches for the purse or the road.
+2668	3. `[unfolding]` Each judgment {settlement} cannot enforce costs the next one a little of its weight, and the town's courts are spending down a reputation they cannot replace.
+2669	
+2670	**`Internal Security`: detention without process**
+2671	1. `[ledger]` {settlement} can hold people and has no settled way of deciding whether it should, which makes enforcement here a matter of who is doing it.
+2672	2. `[visitor]` A stranger at {settlement} is careful in a way he would not need to be in a town with courts, and cannot say precisely why.
+2673	3. `[street]` The town can put a person away at {settlement} and cannot say on what grounds, and has learned not to ask on whose.
+2674	
+2675	**`Internal Security`: no legal infrastructure**
+2676	1. `[ledger]` There is no legal machinery at {settlement}; order here rests on force alone, and force alone deters only while it is present.
+2677	2. `[street]` The town settles things itself, quickly, and does not always settle them well.
+2678	3. `[visitor]` A stranger wronged at {settlement} discovers there is nowhere to take it, and that the discovery surprises nobody local.
+2679	
+2680	**`Economic Survival`: `STRONG`**
+2681	1. `[ledger]` {settlement} can absorb a sustained crisis out of its own revenue: emergency measures can be paid for and the garrison can be kept paid while they last.
+2682	2. `[street]` The town could go through a bad season with its arrangements intact, and the people who would have to be paid through one know it.
+2683	3. `[counterforce]` Trouble at {settlement} has not turned into a collapse, and the reason is money. A town that can pay through a crisis mostly does.
+2684	
+2685	**`Economic Survival`: `ADEQUATE`**
+2686	1. `[ledger]` {settlement} can fund a short crisis. A long one begins eating reserves within a few months, and the reserves are not deep enough to hide that from anybody.
+2687	2. `[unfolding]` The town's capacity to pay for its own emergencies is real and finite, and every season of pressure moves the finite part closer.
+2688	3. `[threshold]` {settlement} can pay for a crisis of the ordinary length; the edge of what it can fund lies a few months past the beginning of one, and the town has not been asked to find out where.
+2689	
+2690	**`Economic Survival`: `WEAK`**
+2691	1. `[ledger]` Chronic shortfall at {settlement} limits what the town can do in an emergency before the emergency starts; the pay is irregular, and irregular pay shows up as morale exactly when it matters.
+2692	2. `[street]` The people who would have to hold {settlement} through something are already owed, and they have not forgotten it.
+2693	3. `[unfolding]` The shortfall at {settlement} is chronic rather than sudden, and each season of it removes a little more of what the town could do about a crisis when one comes.
+2694	
+2695	**`Economic Survival`: `CRITICAL`**
+2696	1. `[ledger]` {settlement} cannot fund a response to anything. Any sustained pressure exhausts the town's capacity almost immediately and then continues.
+2697	2. `[unfolding]` The town is not spending its way out of trouble because there is nothing to spend, and each thing that goes wrong makes the next thing cheaper to happen.
+2698	3. `[street]` The town could not pay for a bad month at {settlement}, and the people who would have to be paid know it.
+2699	
+2700	**`Disasters & Famine`: granary AND hospital**
+2701	1. `[ledger]` {settlement} holds food against a bad year and has somewhere to put the sick; between them the town can take a failed harvest or an outbreak without either becoming a catastrophe.
+2702	2. `[street]` The town has a place for grain and a place for the ill, and knows exactly what having both is worth.
+2703	3. `[counterforce]` Neither a failed harvest nor an outbreak turns into a catastrophe at {settlement}, and the reason is in the two buildings rather than in the luck.
+2704	
+2705	**`Disasters & Famine`: granary AND parish care only**
+2706	1. `[ledger]` There is food stored at {settlement} and there are clergy who tend the sick: reserves against hunger, and against disease something better than nothing and well short of a hospital.
+2707	2. `[street]` The town can eat through a bad year. What it does about a plague is pray and nurse, in that order.
+2708	3. `[visitor]` A stranger finds a full store and a modest infirmary at {settlement}, and can see which of the two the town has spent its thinking on.
+2709	
+2710	**`Disasters & Famine`: granary, NO medical provision**
+2711	1. `[ledger]` {settlement} can feed itself through a failed harvest and has nothing at all against disease; a sickness here spreads until it stops of its own accord.
+2712	2. `[unfolding]` The stores will carry the town through hunger. Nothing here will carry it through a plague, and the town has not built anything that would.
+2713	3. `[street]` The town can outlast a hungry year at {settlement} and has no answer at all to a sick one, and knows which of the two it fears.
+2714	
+2715	**`Disasters & Famine`: NO reserves, hospital present**
+2716	1. `[ledger]` {settlement} can treat and contain an outbreak and keeps no food against a bad harvest; a crop failure here becomes hardship the same season it happens.
+2717	2. `[street]` The town is better prepared for the sickness than for the hunger, which is an unusual way round and does not comfort anyone.
+2718	3. `[unfolding]` {settlement} is arranged against the sickness it has seen and not against the hunger it has not, and nothing in hand is correcting the imbalance.
+2719	
+2720	**`Disasters & Famine`: NO reserves, NO medical provision**
+2721	1. `[ledger]` {settlement} holds no food against a bad year and has nobody to treat the sick; a failed harvest is immediate hardship here and a plague runs until it burns out.
+2722	2. `[street]` The town's answer to a bad season is the same as its answer to a sickness, which is to endure it and count afterwards.
+2723	3. `[visitor]` A stranger looking for the granary or the sick-house at {settlement} is directed to neither, because there is neither.
+2724	
+2725	---
+2726	
+2727	### DS-DEF-3: `Defense › Public order banner` · `defenseProfile.scores.internal + safetyProfile.{safetyLabel,safetyDesc}`
+2728	> *how safe the ordinary day is, said once*
+2729	
+2730	**RECEIPT:** `src/components/new/tabs/DefenseTab.jsx:190-215` · classifier `src/domain/display/safetySeverity.js:47-73` · ladder `src/domain/compendium/bandLadders.js:186-195` (`SAFETY_LEVELS`)
+2731	**STATE-KEY:** `orderStatus` from `scores.internal` (`Strong` / `Adequate` /
+2732	`Weak Public Order`, plus `Critical: Order Failing`) · `safetyProfile.safetyLabel`
+2733	(`Very Safe` / `Safe` / `Moderate` / `Unsafe` / `Dangerous`) · `safetySeverityOf`
+2734	tier (`dangerous` / `unsafe` / `controlled` / `stable`, TOTAL over fourteen
+2735	producer tokens with a loud `unknown` fallback) · a crisis stress may OVERRIDE
+2736	the label with a compound form.
+2737	**SLOTS:** `{settlement}` `{band}` `{faction}`
+2738	**SECTION-TARGET:** `defense` · also `power`
+2739	**PROVENANCE + FENCE:** the surface currently says the same fact three times in
+2740	three grammars — a headline, a badge and a raw label — and the in-file comment
+2741	admits it. **The corpus says it once.** The variant IS the banner; the badge
+2742	becomes chrome and the raw label is not printed at all. Where a crisis stress
+2743	has produced a COMPOUND label, the prose must honour the compound and not the
+2744	base — a town reading *tense under an active siege* is not a `Moderate` town
+2745	and may not be described as one. The `unknown` fallback is LOUD by design and
+2746	draws no prose: an unclassifiable safety reading is a defect to surface, not a
+2747	state to narrate. A First-Survey page qualifies every cell here as a first
+2748	reading rather than a settled one.
+2749	**PDF PARITY:** parity.
+2750	
+2751	**`Very Safe`**
+2752	1. `[street]` Nothing much happens to people at {settlement}. The watch is heavier than anything working against it, by a margin the town does not have to think about.
+2753	2. `[visitor]` A stranger walks {settlement} at any hour without being troubled, and notices that the locals do the same without appearing to have decided to.
+2754	3. `[ledger]` Enforcement at {settlement} sits far above whatever criminal presence the town holds; the returns are thin because there is very little to return.
+2755	4. `[counterforce]` There is money at {settlement} and there is opportunity, and neither has produced an organized interest. The watch here is simply too heavy to be worth the arrangement.
+2756	
+2757	**`Safe`**
+2758	1. `[street]` {settlement} is a quiet town. Things are taken occasionally and the taking does not spread, because the people who would spread it are known.
+2759	2. `[ledger]` Enforcement at {settlement} is clearly the stronger side; criminal work here is suppressed rather than absent, and stays suppressed.
+2760	3. `[visitor]` A stranger is comfortable at {settlement} and is also aware that the comfort has somebody maintaining it.
+2761	
+2762	**`Moderate`**
+2763	1. `[street]` {settlement} runs on a working balance: the law is present, crime exists, and neither has the run of the town.
+2764	2. `[ledger]` Enforcement and criminal presence at {settlement} sit close enough that the town's condition is a matter of which way the next few seasons go.
+2765	3. `[visitor]` A stranger at {settlement} is told which streets to avoid and finds the advice specific, short and accurate.
+2766	4. `[threshold]` The balance at {settlement} sits where either side could take it. A thinner watch or a bolder operator would show up in the returns within the season, and nothing else would need to change.
+2767	
+2768	**`Unsafe`**
+2769	1. `[street]` Crime at {settlement} is outrunning the watch. It is not chaos; it is that the people doing it have stopped expecting to be caught.
+2770	2. `[ledger]` What criminal work is being done at {settlement} measurably exceeds what is being answered, and the gap is legible in the returns rather than merely felt.
+2771	3. `[unfolding]` The balance at {settlement} has tipped and is still tipping. Each season the watch answers a smaller share of what happens.
+2772	
+2773	**`Dangerous`**
+2774	1. `[street]` The watch at {settlement} has been overwhelmed. What happens in this town is decided by whoever is present when it happens.
+2775	2. `[ledger]` Organized interests at {settlement} now outweigh enforcement outright; there is no part of the town's order that does not run through somebody's permission.
+2776	3. `[visitor]` A stranger at {settlement} is not warned about particular streets, because the warning would have to cover all of them.
+2777	
+2778	**COMPOUND override (a crisis stress has rewritten the label)**
+2779	1. `[street]` The ordinary safety of {settlement} has stopped applying. Whatever the town was, the crisis on it now is what governs the streets.
+2780	2. `[ledger]` The town's usual reading does not describe {settlement} at present; the standing condition has been overtaken by the crisis and the watch is arranged around that instead.
+2781	3. `[unfolding]` Order at {settlement} is being held under a pressure the town's arrangements were not built for, and how long it holds is a question about the pressure rather than about the watch.
+2782	
+2783	**First-Survey qualification (the reading is a first look)**
+2784	1. `[visitor]` This is what {settlement} looks like on a first pass; a season here would either confirm it or correct it, and nobody has spent the season yet.
+2785	2. `[ledger]` The safety reading for {settlement} is an initial one. It is honest about what has been seen and says nothing about what has not.
+2786	3. `[street]` What the town says about its own safety at {settlement} is what the town says on a first acquaintance, and a longer one would be a different account.
+2787	
+2788	---
+2789	
+2790	### DS-DEF-4: `Defense › Criminal structure + capture consequence` · `deriveCriminalStructure(settlement) + powerStructure.criminalCaptureState + safetyProfile.criminalInstitutions[]`
+2791	> *what shape the crime here has, and how far into the hall it has reached*
+2792	
+2793	**RECEIPT:** `src/domain/display/defenseDisplay.js:97-180` (the three structure notes `:139-150`) · `src/components/new/tabs/DefenseTab.jsx:217-256` (the two capture-consequence paragraphs `:249-255`) · ladder `src/domain/corruption.js:421-441`
+2794	**STATE-KEY:** structure key (`organized` · `semi-organized` · `diffuse` ·
+2795	`null`) classified by institution NAME substring · `criminalCaptureState`
+2796	(`none` · `adversarial` · `equilibrium` · `corrupted` · `capture`, ordered) ·
+2797	`criminalInstitutions[]` with per-operation roles (`parallel marketplace` ·
+2798	`duty evasion` · `unlicensed revenue` · `money laundering` · `stolen goods
+2799	market` · `protection + extraction` · `criminal revenue stream`).
+2800	**SLOTS:** `{settlement}` `{seat}` `{faction}` `{npc}` `{good}` `{band}`
+2801	**SECTION-TARGET:** `defense` · also `power` (the capture arm)
+2802	**PROVENANCE + FENCE (R-W2-A).** The structure key is a substring classification
+2803	over institution names — a variant may assert only what its matched class
+2804	means, and a `null` key means *no organized criminal infrastructure was
+2805	recognized*, which is NOT the same as *no crime*. Capture is a separate ladder
+2806	and never inferred from structure: an `organized` town at `none` capture is
+2807	common and means exactly that the syndicate has not reached the seat. Capture
+2808	at `corrupted` and above is covert content — the town does not know, and the
+2809	page that says so is the DM's. Never name the compromised person as a target;
+2810	the leash is the state, not a fate.
+2811	**PDF PARITY:** parity for structure; `PRINT-DEFERRED` for capture rungs at
+2812	`corrupted` and above (the print chapter carries no audience gate of its own).
+2813	
+2814	**structure `organized`**
+2815	1. `[street]` Crime at {settlement} has an order to it. What is permitted is permitted by somebody, random violence is put down because it draws attention, and the arrangement is stable enough to negotiate with.
+2816	2. `[ledger]` The criminal interest at {settlement} is a hierarchy rather than a nuisance: predictable, rule-bound, and extracting steadily from the same places every season.
+2817	3. `[visitor]` A stranger at {settlement} is not robbed and is quietly told what the arrangement is; the danger here is systematic rather than sudden.
+2818	4. `[counterforce]` There is very little street violence at {settlement} and it is not the watch's doing. A structured interest suppresses what draws enforcement, and does it more thoroughly than the watch could.
+2819	
+2820	**structure `semi-organized`**
+2821	1. `[ledger]` Criminal work at {settlement} is coordinated enough to hold routes and territories and not coordinated enough to have a head; several interests are running, and none of them is the one to talk to.
+2822	2. `[street]` The town knows there are arrangements at {settlement} and cannot say whose, because the answer changes by street and by season.
+2823	3. `[unfolding]` What is being contested at {settlement} is who gets to be the arrangement, and until that settles the town gets the cost of both a syndicate and a scramble.
+2824	
+2825	**structure `diffuse`**
+2826	1. `[ledger]` Crime at {settlement} is opportunistic and unorganized: fences, bandits and small operators working for themselves, with nothing to threaten and nobody to buy.
+2827	2. `[street]` Things go missing at {settlement} and no one profits by it twice; there is no structure here, which makes it less dangerous and much harder to stop.
+2828	3. `[visitor]` A stranger at {settlement} is at risk from individuals rather than from an arrangement, which is worse in the moment and better in every other way.
+2829	
+2830	**structure `null` (nothing organized recognized)**
+2831	1. `[ledger]` No criminal infrastructure has been identified at {settlement}. Whatever wrongdoing the town has does not run through anything that could be called an organization.
+2832	2. `[street]` What goes wrong at {settlement} goes wrong one thing at a time and belongs to whoever did it.
+2833	3. `[visitor]` A stranger asking after the arrangements at {settlement} is met with genuine incomprehension, which is either the truth or an unusually good performance of it.
+2834	
+2835	**capture `none`**
+2836	1. `[ledger]` Nothing criminal has reached the {seat} at {settlement}. Whatever operates in the town operates outside the hall, and the hall's decisions are the hall's.
+2837	2. `[counterforce]` There is a criminal interest at {settlement} with the means to reach into the hall and it has not; the seat's people are watched too closely for the approach to be worth its risk.
+2838	3. `[street]` Whatever is being run at {settlement} is being run outside the hall, and the town's dealings with the hall are the town's dealings with the hall.
+2839	
+2840	**capture `adversarial`**
+2841	1. `[ledger]` The {seat} at {settlement} and the criminal interest here are opposed, actively, and the opposition is the arrangement. Each is spending on the other and neither is winning.
+2842	2. `[street]` The hall at {settlement} moves against the operators and the operators move back, and the town is where the two of them meet.
+2843	3. `[unfolding]` The hall and the operators at {settlement} are each spending on the other and neither is gaining, and the spending is coming out of things the town needed.
+2844	
+2845	**capture `equilibrium`**
+2846	1. `[ledger]` The {seat} at {settlement} and the criminal interest have found a line and both keep to it; nothing is bought here, and nothing is pressed either.
+2847	2. `[street]` There is an understanding at {settlement} that nobody has written down: what is permitted, and where the permitting stops.
+2848	3. `[unfolding]` The balance at {settlement} holds because both sides prefer it, which is a different thing from either side being restrained.
+2849	
+2850	**capture `corrupted`** *(every variant `dm-only`)*
+2851	1. `[ledger · dm-only]` Somebody at the {seat} of {settlement} is carrying a leash, and the decisions that come out of the hall now bend around it in ways the rolls will not show.
+2852	2. `[unfolding · dm-only]` The criminal interest at {settlement} has bought into the hall rather than around it, and each decision it shapes makes the next one cheaper to shape.
+2853	3. `[street · dm-only]` The town at {settlement} does not know, and is beginning to notice that certain matters never quite conclude.
+2854	
+2855	**capture `capture`** *(every variant `dm-only`)*
+2856	1. `[ledger · dm-only]` The {seat} at {settlement} is held. What the hall decides is decided elsewhere and announced here, and the announcing is the only part the town sees.
+2857	2. `[unfolding · dm-only]` There is no longer a distinction at {settlement} between the criminal interest and the governing one; the town is being administered by its syndicate through the forms of its hall.
+2858	3. `[visitor · dm-only]` A stranger at {settlement} conducts perfectly ordinary business with the hall and never learns whose business it actually was.
+2859	
+2860	---
+2861	
+2862	### DS-DEF-5: `Defense › Armed forces & fortifications` · `defenseProfile.institutions{walls,garrison,militia,watch,mercenary,charter,magicDef}`
+2863	> *what is actually standing here, and what is not*
+2864	
+2865	**RECEIPT:** `src/components/new/tabs/DefenseTab.jsx:284-328` (the two authored absence sentences `:305-307`, `:324-326`)
+2866	**STATE-KEY:** presence and content of each institution group —
+2867	`Fortifications` (walls) · `Standing Forces` (garrison, militia, watch) ·
+2868	`Contracted Forces` (mercenary) · `Monster Response` (charter) · `Arcane
+2869	Defense` (magicDef).
+2870	**SLOTS:** `{settlement}` `{faction}` `{band}` `{counterpart}`
+2871	**SECTION-TARGET:** `defense`
+2872	**PROVENANCE + FENCE (R-W2-B).** The surface today narrates only ABSENCE and
+2873	lists presence as name-and-description cards. This shape authors presence at
+2874	the same density. A group's presence asserts capability, never history: a
+2875	garrison exists, it was not necessarily raised for anything. Walls ride
+2876	`defenseProfileHasWalls`, never a presence check. Contracted forces carry one
+2877	entailment the standing forces do not — they are paid, and the state carries
+2878	the payment relationship, so a variant may say the contract is a contract; it
+2879	may not say the contract is failing unless the economic arm supplies that.
+2880	**PDF PARITY:** parity.
+2881	
+2882	**walls PRESENT**
+2883	1. `[visitor]` There is a line around {settlement} and it is kept: the gates shut, the works are repaired, and a stranger enters where the town intends him to.
+2884	2. `[ledger]` {settlement} controls its own entry points. That is what a perimeter buys: not invulnerability, but the choice of where anything happens.
+2885	3. `[street]` The town has a wall and arranges its day around the gates without noticing that it does.
+2886	
+2887	**walls ABSENT**
+2888	1. `[ledger]` {settlement} is unfortified. There is no perimeter, which means the town cannot control entry and cannot make a chokepoint of anything.
+2889	2. `[visitor]` A stranger arrives at {settlement} from whichever direction suits him and is not obliged to pass anybody on the way in.
+2890	3. `[street]` The town has an edge rather than a boundary at {settlement}, and the edge is wherever the last building happens to be.
+2891	
+2892	**garrison PRESENT**
+2893	1. `[ledger]` {settlement} keeps a standing force: people whose work is the defense of this town and who are answerable for it as work.
+2894	2. `[street]` The soldiers at {settlement} belong to the town rather than to a season; they are a fixture, with all the friction and all the reliability of one.
+2895	3. `[visitor]` A stranger at {settlement} is counted at the gate by somebody whose job that is, and is counted again on the way out.
+2896	
+2897	**militia PRESENT (no garrison)**
+2898	1. `[ledger]` {settlement}'s defense is its own people under arms. They know the ground, they can be raised, and raising them stops everything else the town was doing.
+2899	2. `[street]` The town turns out when it must and goes back to work after, and understands that this is a different thing from having soldiers.
+2900	3. `[counterforce]` {settlement} could keep soldiers and does not; the town has decided that arming itself when needed costs less than paying anybody to be armed all year.
+2901	
+2902	**watch PRESENT**
+2903	1. `[ledger]` {settlement} keeps a watch, which is a matter of order rather than of war. It answers what happens inside the walls and is not built for what arrives outside them.
+2904	2. `[street]` There are people walking the town at {settlement} at night, and the town's sense of itself rests more on that than on anything at the gate.
+2905	3. `[visitor]` A stranger walking {settlement} late is looked at rather than stopped, and the looking is systematic enough to notice.
+2906	
+2907	**NO organized force at all**
+2908	1. `[ledger]` {settlement} has no organized force. Defense here is individual armed citizens, with no command, no training and no way to coordinate a response.
+2909	2. `[street]` The town would defend itself as a crowd defends itself, which is to say briefly and in several directions at once.
+2910	3. `[visitor]` A stranger at {settlement} can find nobody whose responsibility the town's defense is, because it is not anybody's.
+2911	
+2912	**mercenary / contracted forces PRESENT**
+2913	1. `[ledger]` Part of what defends {settlement} is contracted rather than owed: competent, available, and loyal for exactly as long as the terms run.
+2914	2. `[street]` The town pays for some of its soldiers and knows which ones, and treats them accordingly.
+2915	3. `[unfolding]` The contracted companies at {settlement} are doing the work they were engaged for, and the engagement has an end written into it that the town has not yet had to think about.
+2916	
+2917	**charter hall PRESENT (specialist monster response)**
+2918	1. `[ledger]` {settlement} keeps a charter for specialist work. The things a garrison is wrong for go to people retained to handle exactly them.
+2919	2. `[street]` There is somewhere at {settlement} to take the problems that are not soldiers' problems, and the town uses it more than it likes to say.
+2920	3. `[visitor]` A stranger at {settlement} finds a hall whose business is the sort of trouble a garrison is the wrong instrument for, and finds it busy.
+2921	
+2922	**charter hall ABSENT where the country warrants one**
+2923	1. `[ledger]` {settlement} retains no specialists. Whatever comes out of the country is the garrison's problem regardless of whether the garrison is the right answer to it.
+2924	2. `[counterforce]` {settlement} keeps no chartered hall and is not unaware of the need; what stands between the town and one is the cost of retaining specialists rather than any doubt about wanting them.
+2925	3. `[street]` The town sends soldiers to things soldiers are wrong for at {settlement}, and pays for the wrongness each time.
+2926	
+2927	**arcane defense PRESENT**
+2928	1. `[ledger]` {settlement} keeps arcane provision in its defenses: detection, wards, and an answer to things that conventional arrangements cannot see coming.
+2929	2. `[visitor]` A stranger at {settlement} is measured at the gate in a way he cannot quite identify, and is not told about it.
+2930	3. `[street]` There are wards at {settlement} the town does not discuss and would notice immediately if they stopped.
+2931	
+2932	**arcane defense ABSENT**
+2933	1. `[ledger]` {settlement}'s defense is conventional throughout. What arrives unseen here goes undetected and therefore unanswered.
+2934	2. `[street]` The town has no answer to anything it cannot see, and is unprepared rather than protected in that respect.
+2935	3. `[counterforce]` Nothing unseen has come at {settlement}, and nothing here would know if it had; the record of safety and the capacity to detect are two different things.
+2936	
+2937	---
+2938	
+2939	### DS-DEF-6: `Defense › Supporting capabilities` · `scores.economic/magical + compound.inst{hasMagicInst,hasCourtSystem,hasPrison,hasHospital,hasChurch,hasGranary,hasPort,hasNavy} + tradeAccess + blockade`
+2940	> *the six things that decide whether the defense can be sustained rather than merely fielded*
+2941	
+2942	**RECEIPT:** `src/domain/display/defenseDisplay.js:183-250` (`deriveSupportingCapabilities`) · rendered `src/components/new/tabs/DefenseTab.jsx:330-357`
+2943	**STATE-KEY:** six rows — `Economic Backing` (`Well-funded` / `Adequate` /
+2944	`Underfunded` / `Critical`) · `Magical Capability` (`Arcane support` / `None`) ·
+2945	`Legal Infrastructure` (`Court + Prison` / `Court only` / `Prison only` /
+2946	`None`) · `Medical Readiness` (`Hospital present` / `Clergy care` / `None`) ·
+2947	`Logistics & Supply` (`Granary present` / `No reserves`, modulated by port and
+2948	isolation) · `Naval Defense` when coastal (`Under blockade` / `Naval force` /
+2949	`Port only`).
+2950	**SLOTS:** `{settlement}` `{route}` `{counterpart}` `{institution}` `{band}`
+2951	**SECTION-TARGET:** `defense` · also `economy` (the backing and logistics arms)
+2952	**PROVENANCE + FENCE:** this is the corpus's closest existing model for state+cause
+2953	weaving and the causal clauses here are all CAPABILITY entailments — a granary
+2954	plus sea access is the hardest siege posture to break because of what those two
+2955	things do together, not because of anything that happened. The one genuinely
+2956	historical cell is the blockade: `stressor-blockade:` is a stamped cause with a
+2957	recorded author, and it is the only row here that may name a counterpart. The
+2958	magical bypass channels (`teleport` / `airship`) are live-world state.
+2959	**PDF PARITY:** parity, EXCEPT the blockade bypass cells — `PRINT-DEFERRED`.
+2960	
+2961	**`Economic Backing: Well-funded`**
+2962	1. `[ledger]` {settlement} pays its defense in full and on time, keeps the equipment maintained and holds something in reserve; every other arrangement in the town's defense is worth more for it.
+2963	2. `[street]` The soldiers at {settlement} are paid, which the town regards as unremarkable and which is the single thing most likely to keep them where they are.
+2964	3. `[counterforce]` A bad year does not empty {settlement}'s walls, and the reason is the pay rather than the loyalty. A town that keeps paying keeps its people standing where it put them.
+2965	
+2966	**`Economic Backing: Adequate`**
+2967	1. `[ledger]` Upkeep at {settlement} is adequate with shortfalls; things are maintained a little later than they should be and nothing has yet failed for it.
+2968	2. `[unfolding]` The defense at {settlement} is being funded to the edge of sufficiency each season, and a single unbudgeted year would show immediately.
+2969	3. `[threshold]` Upkeep at {settlement} covers what is standing and nothing more; the edge is one unbudgeted expense away, and nothing in the arrangement is holding the town back from it.
+2970	
+2971	**`Economic Backing: Underfunded`**
+2972	1. `[ledger]` Pay at {settlement} is irregular and the equipment shows it; the risk here is not capability but morale, and morale fails before equipment does.
+2973	2. `[street]` The people who defend {settlement} are owed and are saying so, and the saying has begun to change how they do the work.
+2974	3. `[unfolding]` The gear at {settlement} is being kept in service past where it should be replaced, and each season of that makes the replacing more expensive rather than less.
+2975	
+2976	**`Economic Backing: Critical`**
+2977	1. `[ledger]` {settlement} cannot sustain armed forces at all. This is not a shortfall, it is a systemic failure. Whatever is still standing is standing for reasons other than payment.
+2978	2. `[unfolding]` The town has stopped being able to pay for its own defense and has not yet stopped having one, and the gap between those two facts is closing.
+2979	3. `[street]` Nobody at {settlement} is being paid to defend it, and the people still doing it are doing it for reasons the town cannot rely on.
+2980	
+2981	**`Magical Capability: Arcane support`**
+2982	1. `[ledger]` {settlement} has arcane provision behind its defenses: detection, warding and the ability to answer a spell with something other than a shield.
+2983	2. `[street]` The town has people it calls on for the things soldiers cannot do, and calls on them rarely enough that it still counts as remarkable.
+2984	3. `[counterforce]` What the walls at {settlement} cannot see is somebody's charge rather than nobody's, and the town would learn of such a thing from an account rendered rather than from an alarm raised.
+2985	
+2986	**`Magical Capability: None`**
+2987	1. `[ledger]` {settlement}'s defense is entirely conventional. Anything that arrives invisible arrives unopposed, because there is nothing here that would know.
+2988	2. `[counterforce]` Nothing has exploited the gap at {settlement}, and the gap is complete. Whatever has spared the town, it was not a ward.
+2989	3. `[street]` The town's answer to anything it cannot see at {settlement} is to find out afterwards, and nothing in its arrangements offers it any other answer.
+2990	
+2991	**`Legal Infrastructure: Court + Prison`**
+2992	1. `[ledger]` {settlement} holds the whole chain: arrest, prosecution and detention. A wrong here has a route through the town's institutions and the route ends somewhere.
+2993	2. `[street]` Justice at {settlement} takes time and produces a result, and the town has arranged its expectations around both halves of that.
+2994	3. `[visitor]` A stranger at {settlement} sees both buildings on the same square and understands what the town has decided about order.
+2995	
+2996	**`Legal Infrastructure: Court only`**
+2997	1. `[ledger]` {settlement} tries and cannot hold. The sentences available are fines and exile, and both of them favour whoever can pay or leave.
+2998	2. `[unfolding]` The gap at {settlement} between what a court can decide and what the town can carry out has widened, and it widens a little more each time somebody walks away from a ruling.
+2999	3. `[street]` The town at {settlement} fines what it cannot hold and exiles what it cannot fine, and both fall hardest on people who have nowhere to go.
+3000	
+3001	**`Legal Infrastructure: Prison only`**
+3002	1. `[ledger]` {settlement} can detain without any settled process for deciding whom; enforcement here is arbitrary in the exact sense, and depends on who is holding the keys.
+3003	2. `[street]` People are taken at {settlement} and the taking is not explained, and the town has learned not to press for the explanation.
+3004	3. `[unfolding]` What {settlement} holds people for drifts with whoever is doing the holding, and the drift is not written anywhere it could be corrected.
+3005	
+3006	**`Legal Infrastructure: None`**
+3007	1. `[ledger]` There is no legal machinery at {settlement}. Deterrence extends exactly as far as force does and stops there.
+3008	2. `[visitor]` A stranger wronged at {settlement} has nowhere to take it, and is told so without embarrassment.
+3009	3. `[street]` Order at {settlement} extends exactly as far as somebody willing to enforce it is standing, and no further.
+3010	
+3011	**`Medical Readiness: Hospital present`**
+3012	1. `[ledger]` {settlement} can treat casualties, contain an outbreak and recover people who would otherwise be lost; in a siege that is the difference between losses and attrition.
+3013	2. `[street]` There is a place at {settlement} for the badly hurt, and the town's willingness to fight is quietly founded on it.
+3014	3. `[visitor]` A stranger taken ill at {settlement} is taken somewhere rather than left somewhere, which is rarer than a town this size suggests.
+3015	
+3016	**`Medical Readiness: Clergy care`**
+3017	1. `[ledger]` Care at {settlement} is the parish's: wounds dressed, sickness nursed, and no capacity at all for containment when something spreads.
+3018	2. `[street]` The town's sick go to the {institution} and are tended there, well and without means.
+3019	3. `[unfolding]` What {settlement} has will hold against the ordinary run of hurt and would be overwhelmed by anything arriving all at once.
+3020	
+3021	**`Medical Readiness: None`**
+3022	1. `[ledger]` {settlement} has no dedicated healers. Wounds take what they take, and a plague here runs until it has finished.
+3023	2. `[unfolding]` The town is one outbreak from a loss it has nothing prepared to slow.
+3024	3. `[street]` The sick at {settlement} are tended by whoever is related to them, and that is the whole of the arrangement.
+3025	
+3026	**`Logistics & Supply: Granary + port`**
+3027	1. `[ledger]` {settlement} holds stored food and keeps the sea; between them that is the hardest posture there is to starve out, and it is the reason a siege here would have to be a fleet.
+3028	2. `[counterforce]` {settlement} does not close easily. Cutting the roads leaves the water, closing the water leaves the stores, and an attempt on either one alone accomplishes nothing.
+3029	3. `[street]` The town has grain in store and water at the door at {settlement}, and is unhurried about threats in a way that irritates its neighbours.
+3030	
+3031	**`Logistics & Supply: Granary in isolation`**
+3032	1. `[ledger]` {settlement} holds reserves and nothing else; endurance here is exactly the size of what is in the granary and not a day longer.
+3033	2. `[unfolding]` The town can sit out a bad season on its stores, and the stores are a quantity that only goes one way once the sitting starts.
+3034	3. `[street]` What is in the store at {settlement} is the whole of the town's future in a bad season, and everybody here can estimate it.
+3035	
+3036	**`Logistics & Supply: Granary with road supply`**
+3037	1. `[ledger]` {settlement} keeps stores and is fed by the roads; the roads are the vulnerability, and the granary is what buys time to do something about them.
+3038	2. `[street]` The town has grain put by and knows it is put by against the {route} closing rather than against the harvest failing.
+3039	3. `[counterforce]` An interruption on the roads to {settlement} does not reach the table, and the granary is the reason rather than the roads.
+3040	
+3041	**`Logistics & Supply: No reserves, port open`**
+3042	1. `[ledger]` {settlement} keeps nothing back and does not need to while the port runs; the supply continues as long as the water does.
+3043	2. `[counterforce]` {settlement} keeps no granary and is not short for want of one. The water answers faster than a store could, and a store is not what this town would spend on.
+3044	3. `[street]` The town eats what the water brings at {settlement}, daily, and has no cause to wonder what it would do otherwise.
+3045	
+3046	**`Logistics & Supply: No reserves, landlocked`**
+3047	1. `[ledger]` {settlement} holds no food buffer at all. Any interruption to supply becomes a survival question within days rather than seasons.
+3048	2. `[street]` The town eats what arrives, and has nothing put by against a season when nothing does.
+3049	3. `[unfolding]` {settlement} is one interrupted week from a genuine crisis and has been for as long as anybody has bothered to check.
+3050	
+3051	**`Naval Defense: Naval force`**
+3052	1. `[ledger]` {settlement} controls its own sea approaches; anything coming by water would need to beat the fleet before it reached the town.
+3053	2. `[visitor]` A stranger arriving by sea at {settlement} is met well before the harbour and understands the arrangement immediately.
+3054	3. `[counterforce]` Nothing hostile stands off {settlement}, and the ships that would have to be beaten first are the reason.
+3055	
+3056	**`Naval Defense: Port only`**
+3057	1. `[ledger]` {settlement} has a harbour and nothing to hold it with; any vessel that wants the sea approaches has them.
+3058	2. `[unfolding]` The port is the town's living and the town's opening, and nothing has yet arrived that made the second half matter.
+3059	3. `[visitor]` A stranger sails into {settlement} unchallenged and is struck, afterwards, by how easy that was.
+3060	
+3061	**`Naval Defense: Under blockade`** *(recorded cause — clause licensed)*
+3062	1. `[ledger]` A hostile fleet sits across {settlement}'s sea approaches. The port is choked, and what the town lives on has stopped arriving by the route it arrives on.
+3063	2. `[street]` The harbour at {settlement} is full of vessels that cannot leave and empty of the ones that should be coming in.
+3064	3. `[unfolding]` The blockade on {settlement} is doing its work quietly. Nothing has been assaulted, and everything the town needs is a little further away each week. *(print-deferred)*
+3065	4. `[counterforce · dm-only]` The fleet across {settlement}'s approaches has closed the water and not the town: a magical channel still runs the line, impaired and expensive and running. *(print-deferred)*
+3066	
+3067	---
+3068	
+3069	### DS-DEF-7: `Defense › Live defense readiness + war front` · `causalState.variables.defense_readiness{band,contributors[]} vs frozen defenseProfile.scores · warStatus.{besiegedBy,besiegingTargets}`
+3070	> *what the town can field TODAY, against what it was built to field*
+3071	
+3072	**RECEIPT:** `src/components/dossier/EngineSections.jsx:143-198` (the two siege sentences `:178-195`) · the verbatim twin `src/components/new/tabs/WarFaithTab.jsx:73-76`
+3073	**STATE-KEY:** `defense_readiness.band` (`surplus` · `adequate` · `strained` ·
+3074	`critical` · `collapsed`) · `contributors[]{delta, reason}` (each carries a
+3075	RECORDED reason) · `warStatus.besiegedBy[]` · `warStatus.besiegingTargets[]`.
+3076	**SLOTS:** `{settlement}` `{counterpart}` `{reason}` `{band}` `{timeband_since}`
+3077	**SECTION-TARGET:** `defense` · also `tensions`
+3078	**PROVENANCE + FENCE:** this is the ONE defense shape whose state carries real
+3079	provenance — every contributor has a `reason`, so causal clauses are fully
+3080	licensed and are the point. The live band must be read AGAINST the frozen
+3081	profile: the interesting sentence is nearly always the divergence (a
+3082	well-built town currently unable to field it). Per **R-W2-C** the siege
+3083	sentence is minted HERE and drawn by `WarFaithTab` rather than authored twice;
+3084	the verbatim duplication between `EngineSections.jsx` and `WarFaithTab.jsx` is
+3085	a live copy-drift hazard and the corpus must not preserve it. `besiegingTargets`
+3086	is the campaigning arm and says nothing about the home town's walls except
+3087	through the thinning it causes, which IS recorded.
+3088	**PDF PARITY:** `PRINT-DEFERRED` for the contributor cells (the print chapter
+3089	self-gates the live world); parity for the band cells.
+3090	
+3091	**band `surplus`**
+3092	1. `[ledger]` {settlement} can field more than it needs. Whatever the town was built for, what it can actually put in the line today exceeds it.
+3093	2. `[street]` There are more people under arms at {settlement} than the season calls for, and the surplus is doing nothing except being available.
+3094	3. `[counterforce]` Nothing threatens {settlement} and the town is at full strength anyway, which is a choice somebody made and is still paying for.
+3095	
+3096	**band `adequate`**
+3097	1. `[ledger]` What {settlement} can field today matches what the town needs today, with the margin that implies and no more.
+3098	2. `[street]` The arrangements are holding at {settlement} and nobody is being asked for anything extraordinary.
+3099	3. `[counterforce]` Nothing has had to be set aside at {settlement} to keep the line manned, which is the only real test of whether a defense is affordable.
+3100	
+3101	**band `strained`**
+3102	1. `[ledger]` {settlement} can still field a defense and it is costing the town elsewhere; what is standing in the line is standing because something else was set down.
+3103	2. `[unfolding]` The strain at {settlement} is being carried rather than relieved, and carrying it is what is producing the next season's shortfall.
+3104	3. `[street]` The town is managing, and everybody involved in the managing knows precisely how thin it is.
+3105	4. `[threshold]` {settlement} is at the point where holding the line and running the town have become the same budget, and each further call on one is taken from the other.
+3106	
+3107	**band `critical`**
+3108	1. `[ledger]` {settlement} is at the edge of being able to field anything. What remains is committed, and there is nothing behind it.
+3109	2. `[unfolding]` One more call on {settlement}'s defense and there will be nothing to answer it with; the town has reached the point of hoping rather than planning.
+3110	3. `[street]` What is left at {settlement} is committed, and the town has stopped discussing what it would do if more were asked.
+3111	
+3112	**band `collapsed`**
+3113	1. `[ledger]` {settlement} can no longer field a defense. The arrangements exist on the rolls and do not exist in the town.
+3114	2. `[street]` There is nobody left at {settlement} to be called out, and the calling has stopped.
+3115	3. `[visitor]` A stranger at {settlement} finds the posts unmanned and the muster books current, and the gap between the two is the whole of the town's condition.
+3116	
+3117	**live band FALLS SHORT of the built profile**
+3118	1. `[ledger]` {settlement} was built to be defended better than it presently can be; the works are what they were and the people to hold them are not.
+3119	2. `[visitor]` A stranger sees serious defenses at {settlement} and very few defenders, and is right to read the gap as recent.
+3120	3. `[unfolding]` The distance between what {settlement} has and what {settlement} can use is widening, and the works do not narrow it by standing there.
+3121	
+3122	**live band EXCEEDS the built profile**
+3123	1. `[ledger]` {settlement} is fielding more than its works would suggest. What is holding this town is people rather than stone, and it is holding.
+3124	2. `[street]` The town has put more into the line than it was ever set up to, and the arrangement is temporary in a way nobody has named yet.
+3125	3. `[counterforce]` {settlement} is holding more than its works should permit, and what is holding it is people under no obligation to be there.
+3126	
+3127	**a contributor with a RECORDED reason, adverse**
+3128	1. `[ledger]` What {settlement} has lost from its readiness it has lost to {reason}, and the loss is entered rather than inferred.
+3129	2. `[unfolding]` {reason} is still taking from what {settlement} can field, season on season, and nothing in hand has been set against it.
+3130	3. `[street]` The town can name what has cost it at {settlement}, exactly, and names it whenever the subject of the walls comes up.
+3131	
+3132	**a contributor with a RECORDED reason, favourable**
+3133	1. `[ledger]` {settlement}'s readiness stands where it does because of {reason}; take that away and the town's line is a different arrangement entirely.
+3134	2. `[street]` The town is better defended than it was, and can name the thing that did it.
+3135	3. `[counterforce]` {settlement} would be thinner on the walls without {reason}, and the difference is entered rather than assumed.
+3136	
+3137	**`besiegedBy` present** *(the shared siege row — minted once, per R-W2-C)*
+3138	1. `[street]` There is an army at {settlement}'s walls. Everything the town does now is done inside them, and the gates have stopped being a matter of routine.
+3139	2. `[ledger]` {counterpart} holds the approaches to {settlement}. Nothing enters and nothing leaves, and the town's condition from here is a question of stores and time.
+3140	3. `[visitor]` Nobody reaches {settlement} at present. What can be seen of the town is seen from outside a line that is not the town's own.
+3141	
+3142	**`besiegingTargets` present (the army is abroad)**
+3143	1. `[ledger]` {settlement}'s force is away besieging {counterpart}, and the home garrison is thinned for exactly as long as the campaign runs.
+3144	2. `[street]` The town has sent its soldiers to sit outside somebody else's walls, and is quieter and emptier and more exposed for it.
+3145	3. `[unfolding]` What {settlement} is spending on {counterpart} it is spending out of its own walls; the campaign is being paid for in the town's own readiness.
+3146	
+3147	---
+3148	
+3149	### DS-DEF-8: `Defense › Active military status` · `settlement.stress[].type → DEFENSE_STRESS_STATUS + stress.{summary,viabilityNote}`
+3150	> *when a crisis overrides the standing posture*
+3151	
+3152	**RECEIPT:** `src/components/new/tabs/DefenseTab.jsx:138-148` · the set `src/domain/display/defenseDisplay.js:29, :61` (`DEFENSE_STRESS_STATUS`, derived over `STRESS_TYPE_MAP`)
+3153	**STATE-KEY:** the matched stress `type` against `DEFENSE_STRESS_STATUS`
+3154	(fifteen postures, total over the registered stress vocabulary) ·
+3155	`stress.summary` · `stress.viabilityNote`.
+3156	**SLOTS:** `{settlement}` `{counterpart}` `{band}` `{reason}`
+3157	**SECTION-TARGET:** `defense`
+3158	**SIBLING:** `DS-STR-1` / `DS-GEN-4` frame what a stressor does to the TOWN; this block and `DS-DEF-10` frame what it does to the town's ability to DEFEND itself. A composed page draws one, not both.
+3159	**PROVENANCE + FENCE:** the posture words are UPPERCASE military-telegram chrome
+3160	and are NOT the prose — the corpus supplies the sentence and the posture word
+3161	remains a badge if the surface wants one. A stress carries a TYPE, which is
+3162	its own cause, so each posture licenses exactly the clause its type names and
+3163	no other. The fifteen per-posture cells live in **`DS-DEF-10`**; this shape authors
+3164	only the OVERRIDE framing — the fact that the town's standing defensive
+3165	description has been superseded — plus the `summary` / `viabilityNote` weave.
+3166	Shared with the PDF `defenseSlice`.
+3167	**PDF PARITY:** parity (pdf-4 shares the set).
+3168	
+3169	**override active (generic framing)**
+3170	1. `[ledger]` What {settlement}'s defenses are ordinarily worth does not describe the town at present; there is a crisis on it, and the arrangements have been rebuilt around the crisis.
+3171	2. `[street]` The town's usual posture has been set aside at {settlement}. Everything is arranged for the one thing now, and the rest is waiting.
+3172	3. `[unfolding]` {settlement} is not being defended according to its plan; it is being defended according to what is happening, and the two have parted company.
+3173	
+3174	**override active, viability threatened**
+3175	1. `[unfolding]` The crisis at {settlement} is not merely a posture. It is a question about whether the town continues, and the defensive arrangements are being spent to answer it.
+3176	2. `[ledger]` What is standing at {settlement} is standing against something the town was not built to survive, and the reckoning says so plainly.
+3177	3. `[street]` The town is not arguing about its defenses at {settlement}; it is arguing about whether there will be a town to defend.
+3178	
+3179	**override active, viability intact**
+3180	1. `[ledger]` {settlement} is under real pressure and is not in danger of ending; the posture has changed and the town has not.
+3181	2. `[street]` The town is dealing with something serious and going on being a town while it does.
+3182	3. `[counterforce]` The crisis at {settlement} has changed the posture and not the prospects, and the town has been careful to keep the two separate.
+3183	
+3184	**multiple stresses, one posture shown**
+3185	1. `[ledger]` More than one thing is pressing {settlement} at once, and the posture named is the heaviest of them rather than the whole account.
+3186	2. `[unfolding]` The town is carrying several pressures together at {settlement}, and it is the combination rather than any single one that is doing the damage.
+3187	3. `[street]` More than one thing is wrong at {settlement} at once, and the town names the loudest of them when asked and means all of them.
+3188	
+3189	---
+3190	
+3191	### DS-DEF-9: `Viability › Magic dependency` · `defenseProfile.magicDependency + economicState.activeChains[].magicNote`
+3192	> *whether the town would still work if the practitioners left*
+3193	
+3194	**RECEIPT:** `src/components/new/tabs/ViabilityTab.jsx:171-191` · twin badge `src/components/new/tabs/OverviewTab.jsx:188-194`
+3195	**STATE-KEY:** `magicDependency` boolean · `activeChains[].magicNote` (which
+3196	chains name a magical input).
+3197	**SLOTS:** `{settlement}` `{good}` `{band}` `{institution}`
+3198	**SECTION-TARGET:** `viability` · also `overview`
+3199	**PROVENANCE + FENCE:** this is currently ONE fixed paragraph shown to every
+3200	settlement in the product that trips the boolean — the corpus's job here is
+3201	variance and the FALSE state, which today has no prose at all. The clause is
+3202	conditional and consequential (*losing them would expose…*), which is lawful:
+3203	the dependency is a standing structural fact and the exposure is entailed by it,
+3204	not by any event. The named causes of a hypothetical loss must stay generic —
+3205	conflict, sickness, political disruption — because the state carries no
+3206	specific threat to the practitioners. Twinned with the OverviewTab badge per
+3207	**R-W2-C**: one pool, two draws.
+3208	**PDF PARITY:** parity (`viewModel.js` viability slice).
+3209	
+3210	**`magicDependency` true**
+3211	1. `[ledger]` {settlement} runs on arcane work. What the town produces, and in some measure what the town eats, depends on practitioners continuing to be here and continuing to be willing.
+3212	2. `[street]` A handful of people at {settlement} do work nobody else can do, and the town's whole arrangement rests on them without ever having decided to.
+3213	3. `[unfolding]` The resilience of {settlement} is only as durable as its practitioners are; a hard season for them (conflict, sickness, a falling-out with the hall) becomes a hard season for everyone at once.
+3214	4. `[visitor]` A stranger at {settlement} sees a town doing better than its ground and its roads would explain, and eventually finds out why.
+3215	
+3216	**`magicDependency` true, with a NAMED dependent chain**
+3217	1. `[ledger]` The {good} that {settlement} lives on cannot be made here without arcane work, which puts the whole line behind a very small number of people.
+3218	2. `[unfolding]` {settlement}'s trade in {good} is being sustained by practitioners rather than by the country, and nothing about that arrangement is being made more robust.
+3219	3. `[street]` The town's living at {settlement} passes through a workshop that could not run without the arcane, and everybody in the trade knows which workshop.
+3220	
+3221	**`magicDependency` false**
+3222	1. `[ledger]` Nothing structural at {settlement} depends on arcane work. What the town makes it makes with hands and ground, and would go on making without a practitioner in it.
+3223	2. `[counterforce]` There is magic at {settlement} and the town does not rest on it. Losing every practitioner here would be a loss and not a collapse.
+3224	3. `[street]` The town would go on if the arcane went away, more slowly and less comfortably and go on.
+3225	
+3226	---
+3227	
+3228	### DS-DEF-10: `DEFENSE: the five arms, readiness badges, and military posture` · `defenseProfile.{scores,economicGates,institutions} + defenseProfileHasWalls + DEFENSE_STRESS_STATUS`
+3229	> *the frozen ladder cells, and the fifteen crises that override them*
+3230	
+3231	**RECEIPT:** `src/domain/display/defenseScoreBands.js:29-40` (`scoreBand`, the one ladder) · `src/domain/compendium/bandLadders.js:197-208, :239-240` (`DEFENSE_READINESS_LEVELS`, the five arms) · `src/domain/display/defenseDisplay.js:26-68` (`MILITARY_POSTURE`, `DEFENSE_STRESS_STATUS`) · `src/domain/causalState.js:300-315`
+3232	**STATE-KEY:** `scoreBand` (four, FROZEN — *never extend*: `STRONG` ≥65 ·
+3233	`ADEQUATE` ≥40 · `WEAK` ≥20 · `CRITICAL` <20) applied per arm · the five arms
+3234	(beasts and monsters · invasion and war · internal security · economic survival
+3235	· disasters and famine) · the settlement's overall defense reading from *well
+3236	defended* down to *undefended* · `DEFENSE_STRESS_STATUS`, fifteen postures, one
+3237	per registered stress type.
+3238	**SLOTS:** `{settlement}` `{counterpart}` `{band}` `{reason}` `{good}` `{timeband_since}`
+3239	**SECTION-TARGET:** `defense`
+3240	**SIBLING:** `DS-GEN-3` reads the five score axes at OVERVIEW grain as timeless first-survey capability prose under WRITER-4's carve-out; the badge cells here are the DEFENSE-tab reading and carry no such carve-out. `DS-STR-1` owns the stressor's effect on the town; the postures here own its effect on the defense.
+3241	**PROVENANCE + FENCE (the walls hazard, restated because it has bitten).** Walls
+3242	ride `defenseProfileHasWalls(def)` — the `hasWalls` flag, or a genuinely
+3243	non-empty `walls` / `institutions.walls`. The read was once a stringify match
+3244	that granted every settlement in the product the walled bonus, because an empty
+3245	`walls: []` array still contains the literal key. **No variant may assert walls
+3246	from a presence check.** The badge ladder is frozen at four rungs and prose that
+3247	implies a fifth gradation is prose that will not survive the next tuning. The
+3248	per-arm row framing lives in **`DS-DEF-2`**; this shape authors the badge cells
+3249	generically (any arm) and the fifteen postures, which no rendered surface
+3250	currently narrates at all beyond an uppercase word.
+3251	**COMPOSITION FENCE (§0h V1-g):** the `ADEQUATE` badge cell here and
+3252	`DS-DEF-1`'s `ADEQUATE` readiness cell read closely alike and describe different
+3253	rows — the arm and the town. Both stand; **one per page, never both.**
+3254	**PDF PARITY:** parity (pdf-4 shares `DEFENSE_STRESS_STATUS`).
+3255	
+3256	**badge `STRONG` (any arm)**
+3257	1. `[ledger]` This pressure is well covered at {settlement}. What the town has against it is more than the pressure is likely to bring.
+3258	2. `[street]` Nobody at {settlement} worries about this one, and the not-worrying is founded on something rather than on habit.
+3259	3. `[counterforce]` Nothing gets far with this at {settlement}. What the town holds against it caps how bad it can become, and the cap sits well above anything this pressure brings.
+3260	
+3261	**badge `ADEQUATE` (any arm)**
+3262	1. `[ledger]` {settlement} is covered against this and has very little margin; the arrangements work and would not survive being tested twice.
+3263	2. `[street]` The town would manage, and knows roughly how narrowly.
+3264	3. `[threshold]` What {settlement} has here answers the pressure at its ordinary size; the edge is an unusual one, and nothing about the arrangement would announce that the edge had been reached.
+3265	
+3266	**badge `WEAK` (any arm)**
+3267	1. `[ledger]` {settlement} is thinly covered here. Something is in place, and a real instance of this would strain it past where it holds.
+3268	2. `[unfolding]` What {settlement} keeps against this arm has been falling behind what the arm is asked to meet, and no decision taken here has changed that direction.
+3269	3. `[threshold]` The arrangement at {settlement} holds against the small instance of this and not the large one, and there is nothing in it that distinguishes the two until the large one arrives.
+3270	
+3271	**badge `CRITICAL` (any arm)**
+3272	1. `[ledger]` {settlement} is effectively uncovered against this. Whatever the town has here would not slow the thing it is meant to slow.
+3273	2. `[street]` The town knows this is where it would break and has not been able to do anything about it.
+3274	3. `[visitor]` A stranger can see the gap at {settlement} without being told what to look for, and can see that the town has stopped looking at it.
+3275	
+3276	**overall reading `well defended`**
+3277	1. `[visitor]` {settlement} is a defended town in every direction a stranger would think to look, and in the two he would not.
+3278	2. `[ledger]` The five pressures on {settlement} are all answered, none of them thinly; there is no obvious way in and no obvious way to starve it out.
+3279	3. `[counterforce]` Nothing presses {settlement}, and the arrangements are the reason for that rather than the beneficiary of it.
+3280	
+3281	**overall reading `undefended`**
+3282	1. `[ledger]` {settlement} has no serious answer to any of the five pressures on it. This is not a weak point, it is the absence of the whole arrangement.
+3283	2. `[street]` The town's continued existence is a matter of nothing having come for it.
+3284	3. `[visitor]` A stranger enters {settlement}, crosses it and leaves without meeting anything that would have stopped him doing worse.
+3285	
+3286	**posture `ACTIVE SIEGE`** *(recorded cause — clause licensed)*
+3287	1. `[ledger]` An army sits outside {settlement} and the town's defensive arrangements have been reorganized around holding rather than deterring.
+3288	2. `[street]` Everything the town does now is measured against the stores and the walls, and nothing else is being measured at all.
+3289	3. `[unfolding]` Every arrangement at {settlement} is now measured against the stores, and the measuring is the town's whole calendar.
+3290	
+3291	**posture `INTERNAL PRESSURE` (famine)**
+3292	1. `[ledger]` {settlement} is defending a hungry town, which changes what can be asked of anyone in it and how long they will keep answering.
+3293	2. `[street]` The watch stands and the watch is not being fed properly, and both of those facts are the same fact.
+3294	3. `[unfolding]` What {settlement} can ask of the people on its walls falls with what it can feed them, and neither is being replenished.
+3295	
+3296	**posture `UNDER OCCUPATION`**
+3297	1. `[ledger]` {settlement}'s defense is not {settlement}'s. What stands on these walls answers to {counterpart}, and what the town could raise for itself is a separate and much smaller question.
+3298	2. `[street]` The soldiers here defend the town from everything except the people who put them here.
+3299	3. `[counterforce]` {settlement} is well garrisoned and cannot use the garrison; what stands here defends the town against everything except the arrangement that put it here.
+3300	
+5963	### DS-DEF-11 · Defense › Why the wall, and why not · `defenseProfileHasWalls` × `config.monsterThreat` × tier × the economic-upkeep gate
+5964	
+5965	**RECEIPT:** `defenseProfileHasWalls(settlement.defenseProfile)` (`src/domain/causalState.js`), the canonical wall reader `DS-DEF-10` already keys on, over `defenseProfile.institutions.walls` — the engine's wall name class is `'wall'`, `'citadel'`, `'palisade'`, `'earthwork'`, `'inner citadel'`, `'massive walls'` (`src/generators/defenseGenerator.js`) · `config.monsterThreat` · `defenseProfile.scores` and the generator's own ECONOMIC-UPKEEP GATE, whose recorded law is that paid defenses degrade when unpaid, that BUILT WALLS KEEP STANDING, and that unpaid soldiers desert slowly (`src/generators/defenseGenerator.js`) · `settlement.tier`
+5966	**STATE-KEY:** `WALLED-THREATENED` (walls, live threat) / `WALLED-QUIET` (walls, no live threat) / `WALLED-STRAINED` (walls, impaired upkeep) / `UNWALLED-SMALL` (no walls, village and below) / `UNWALLED-LARGE` (no walls, town and above)
+5967	**SLOTS:** `{settlement}` `{defwork}` *(minted by this chapter per §0c-2: fills with the settlement's own wall-class institution by its RECORDED name, never a baked or invented noun; a settlement with no wall-class row is not offered a variant that needs one)*
+5968	**SECTION-TARGET:** `defense` · also `overview`
+5969	**PROVENANCE:** The enclosure mechanism is engine-native TWICE OVER, and both halves are structural reads of live fields: the threat side (walls score against the threat axes) and the purse side (the upkeep gate, whose asymmetry between stone and wages is the generator's own recorded rule, not an authored flourish). The one historical clause this block might want — WHEN the wall was raised — has NO backing fact at this tip and is deliberately absent; it arrives with the fabric epochs (CT-1b). R-DST-A: `DS-DEF-5` is the armed-forces SURFACE and `DS-DEF-10` the arms LADDER; this block is the why-frame for the fortification fact alone and composes BESIDE them, never over the same cell twice. `UNWALLED-LARGE` is the mandatory `[counterforce]` arm (§0b): the engine records a gate, so the dossier must be able to say the wall did NOT get built.
+5970	
+5971	**`WALLED-THREATENED`**
+5972	1. `[ledger]` {settlement} keeps its {defwork} because the country requires it; the threat is on the town's books as plainly as the grain.
+5973	2. `[street]` Nobody in {settlement} thinks of the {defwork} as ornament; the town knows what it is for and checks it.
+5974	3. `[visitor]` {settlement} is enclosed the way working things are enclosed: against something, and recently attended to.
+5975	
+5976	**`WALLED-QUIET`**
+5977	1. `[visitor]` {settlement} keeps a {defwork} the present peace does not obviously require, and keeping it is cheaper than ever needing it again.
+5978	2. `[elder]` The {defwork} stands ahead of any present need; walls are easier to keep than to raise, and {settlement} keeps this one.
+5979	3. `[ledger]` The town pays little for its {defwork} now that it asks little of it; built work stands on its own patience.
+5980	
+5981	**`WALLED-STRAINED`**
+5982	1. `[ledger]` {settlement}'s {defwork} stands better than the watch that should man it; stone keeps itself, and wages do not.
+5983	2. `[unfolding]` The {defwork} around {settlement} is sound and the muster behind it is thinning, which is the kind of arithmetic a town notices late.
+5984	
+5985	**`UNWALLED-SMALL`**
+5986	1. `[street]` {settlement} is too small to wall and knows it; the town's safety is its neighbours, its distance, and its unimportance.
+5987	2. `[visitor]` No wall marks where {settlement} ends; at this size the country and the town simply agree to differ.
+5988	
+5989	**`UNWALLED-LARGE`**
+5990	1. `[counterforce]` {settlement} has reached a size that usually buys stone, and has not bought it; whether that is confidence or thrift, the openness is itself a statement.
+5991	2. `[ledger]` A town of {settlement}'s weight without a circuit is spending its defense money on something else, and the books say what.
+5992	
+5993	---
+5994	
+5995	**CT-1a SECTION ENDS.** Four blocks, seventeen pools, forty-eight authored variants:
+5996	`DS-GEN-12` (the ground), `DS-GEN-13` (the market and the roads), `DS-GEN-14` (founded
+5997	once, grown since) and `DS-DEF-11` (why the wall, and why not). No pool falls below the
+5998	two-variant floor the projection contract holds; every slot a variant uses is declared on
+5999	its block's SLOTS line; every angle is drawn from §0b's palette. The chapter adds no
+6000	rendered surface, so §0g's denominator and its 77/77 coverage are unchanged.
+6001	
+6002	---
+6003	
+6004	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+6005	
+6006	## CT-2 — GROWTH AND WHAT THE YEARS DID (why the roll moves, and what the record and the stones still carry)
+6007	
+6008	*Authored 2026-08-22 under the content-train charter (ODQ §360 / §360.1 / §361), compiled at
+6009	CT-0 and ratified at ODQ §378; sequenced at §387. Three blocks, fifteen pools, thirty-seven
+6010	variants. The blocks land DARK: no desk reads them yet, and composer wiring is its own lane
