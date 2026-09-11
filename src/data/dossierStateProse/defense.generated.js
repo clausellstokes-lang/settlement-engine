@@ -483,7 +483,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "wordings": [
             "Out in monster country {settlement} keeps no muster and no wall.",
             "A plagued country of monsters surrounds {settlement}, a place with no wall and no muster.",
-            "At {settlement} the place stands with neither a wall nor a force in a country of monsters."
+            "At {settlement} the country is thick with monsters, and the place itself stands with neither a wall nor a force."
           ]
         },
         {
@@ -495,7 +495,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "vid": 3,
           "wordings": [
             "What a stranger sees at {settlement} is a country of monsters and a place without a wall or a muster.",
-            "Coming to {settlement} out of monster country, a stranger finds a place that keeps no muster and no wall.",
+            "The place a stranger finds at {settlement} stands open and unmustered, and around it lies a country of beasts.",
             "The first thing a stranger meets at {settlement} is monster country, and the next is a place open and unmustered."
           ]
         }
@@ -509,7 +509,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           ],
           "vid": 1,
           "wordings": [
-            "The works at {settlement} stand on an active frontier. Standing with the works is the town's force.",
+            "The works at {settlement} stand on an active frontier. With the works stands the town's force.",
             "At {settlement} the works are carried as standing, and a force with them. The country the works stand in is frontier country.",
             "A force stands at {settlement}, and the country it stands in is frontier country. What the town has built stands with the force."
           ]
@@ -622,25 +622,40 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "Beasts & Monsters: settled, nothing organized": [
         {
           "angle": "ledger",
-          "text": "{settlement} keeps no organized defense against the country, and in a heartland this quiet the arrangement is a reasonable one rather than a gap.",
+          "text": "{settlement} keeps no works and no muster against the country, and the country runs low in beasts.",
           "slots": [
             "settlement"
           ],
-          "vid": 1
+          "vid": 1,
+          "wordings": [
+            "The beasts about {settlement} are few, and the town keeps neither works nor muster.",
+            "The town of {settlement} holds no works and keeps no muster, and the country about it is entered as quiet.",
+            "Little comes out of the country about {settlement}. Against that country the town keeps no muster, and no works stand."
+          ]
         },
         {
           "angle": "street",
-          "text": "The town has never needed to think about what is outside it, and does not.",
+          "text": "The town stands without works or muster, and what is outside it is quiet.",
           "slots": [],
-          "vid": 2
+          "vid": 2,
+          "wordings": [
+            "The country outside is quiet, and the town facing it has neither works nor muster.",
+            "Beasts are few out in the country. The town has no works against that country and keeps no muster.",
+            "What comes out of the country is little. Against that country the town holds no works and no muster."
+          ]
         },
         {
           "angle": "visitor",
-          "text": "A stranger walks out of {settlement} in any direction at any hour and meets nothing that would justify a watch.",
+          "text": "A stranger walks out of {settlement} past no works and no muster, and meets few creatures in the country.",
           "slots": [
             "settlement"
           ],
-          "vid": 3
+          "vid": 3,
+          "wordings": [
+            "Coming on {settlement} out of a quiet country, a stranger passes no works and finds no muster in the town.",
+            "Neither works nor muster meets a stranger at {settlement}, and beyond the town the country carries few beasts.",
+            "Few creatures meet a stranger in the country about {settlement}. The town in that country shows no works, and keeps no muster."
+          ]
         }
       ],
       "Invasion & War: walls AND professional garrison": [
@@ -653,7 +668,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "vid": 1,
           "wordings": [
             "Soldiers are carried standing at {settlement}, and with them the works the town has built.",
-            "Two things are entered at {settlement} and entered together: the works, and the town's muster.",
+            "Two things are entered at {settlement} and entered together, the works and the town's muster.",
             "Both the town's works and the town's force are set down at {settlement} as standing."
           ]
         },
@@ -667,7 +682,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "wordings": [
             "What a stranger sees at {settlement} is the works and, with the works, the soldiers.",
             "At {settlement} a stranger sees both the town's force and the works the town has built.",
-            "A stranger reaches {settlement} and finds the works standing. Standing with them is the town's muster."
+            "A stranger reaches {settlement} and finds the works standing. The town's muster stands with the works."
           ]
         },
         {
@@ -685,7 +700,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "Invasion & War: walls with citizen militia": [
         {
           "angle": "ledger",
-          "text": "Walls at {settlement} with townspeople behind them: a part-time force, raised off its own work.",
+          "text": "Walls at {settlement} with townspeople behind them, a part-time force raised off its own work.",
           "slots": [
             "settlement"
           ],
@@ -731,7 +746,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "vid": 1,
           "wordings": [
             "No force stands at {settlement}, and what stands is the works.",
-            "Set down at {settlement}: the works standing, and no force in the town.",
+            "Set down at {settlement} are the works standing, and no force in the town.",
             "What the town has built at {settlement} stands entered. To hold the works the town has no force."
           ]
         },
@@ -744,21 +759,19 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "vid": 2,
           "wordings": [
             "What a stranger finds at {settlement} is the works, and neither garrison nor militia.",
-            "A stranger finds no force at {settlement}, and finds the works.",
-            "A stranger comes to {settlement} and sees the works. Neither garrison nor militia stands in the town."
+            "A stranger finds no force at {settlement}, and sees the works.",
+            "A stranger comes to {settlement} and sees the works. No garrison and no militia stand at the works."
           ]
         },
         {
           "angle": "street",
-          "text": "The town of {settlement} has the works and not the force to hold them.",
-          "slots": [
-            "settlement"
-          ],
+          "text": "The town has the works and neither a garrison nor a militia to hold them.",
+          "slots": [],
           "vid": 3,
           "wordings": [
-            "What the town has built at {settlement} stands, and no force is kept in the town.",
-            "The town of {settlement} keeps no force and keeps the works.",
-            "The works stand at {settlement}. The town keeps no garrison and no militia."
+            "What the town has built stands, and no force is kept in the town.",
+            "The town is without a garrison and without a militia, and what it has is the works.",
+            "The town has the works. The town keeps no garrison and no militia."
           ]
         }
       ],
@@ -931,7 +944,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           ],
           "vid": 1,
           "wordings": [
-            "Entered at {settlement} is formal law, and no gaol is entered beside that law.",
+            "The town of {settlement} is entered with formal law, and has no gaol under that law.",
             "Law at {settlement} is formal in its standing. Beside that law the town carries nothing to hold under.",
             "What {settlement} keeps is formal law, and it keeps no gaol."
           ]
@@ -1044,7 +1057,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "Economic Survival: STRONG": [
         {
           "angle": "ledger",
-          "text": "Holding through a crisis is entered strong at {settlement}.",
+          "text": "Through a crisis, holding is entered strong at {settlement}.",
           "slots": [
             "settlement"
           ],
@@ -1062,7 +1075,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "vid": 2,
           "wordings": [
             "A crisis is a pressure the town is well covered for.",
-            "Carrying a crisis is the town's strong standing.",
+            "Strong is how the town carries a crisis.",
             "Where a crisis would have to be carried, the town is strong."
           ]
         },
@@ -1210,7 +1223,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "wordings": [
             "Those tending the sick are set down at {settlement} as standing, against sickness. The granary is set down beside them, a place for grain against hunger.",
             "A granary stands at {settlement} and grain is stored in it against hunger. Those tending the sick are entered with the granary, against sickness.",
-            "Entered at {settlement} as standing: those tending the sick, and a granary where grain is stored. They stand against sickness and hunger."
+            "Entered as standing at {settlement} are those tending the sick and a granary where grain is stored. They stand against sickness and hunger."
           ]
         },
         {
@@ -1221,7 +1234,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "wordings": [
             "Grain has its place in the town, and those who tend the sick are there as well, against hunger and against sickness.",
             "What the town has against hunger is a place for grain, and against sickness those tending the sick.",
-            "A place for grain, and those tending the sick: the town has these against hunger and against sickness."
+            "A place for grain and those tending the sick, the town has these against hunger and against sickness."
           ]
         },
         {
@@ -1351,8 +1364,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           ],
           "vid": 3,
           "wordings": [
-            "Standing at {settlement} are those tending the sick. Against hunger the town stands with no granary.",
-            "What stands at {settlement} are those tending the sick: against hunger, no granary stands.",
+            "Here at {settlement} stand those tending the sick. Against hunger the town stands with no granary.",
+            "What stands at {settlement} are those tending the sick, and what does not stand is a granary against hunger.",
             "The town of {settlement} has those tending the sick standing and no granary standing against hunger."
           ]
         }
@@ -1498,9 +1511,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         "role": "spine",
         "variantCount": 3,
         "faceCounts": [
-          1,
-          1,
-          1
+          4,
+          4,
+          4
         ],
         "vids": [
           1,
