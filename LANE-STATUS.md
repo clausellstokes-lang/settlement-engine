@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-11 05:31:10 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-11 05:36:54 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = d7f4c6b0e §919: the REWRITE train's first car lands — the index-stable draw signed (59.61 % of ce
 
@@ -210,8 +210,8 @@ stat: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-
 - **VIS-906** (same dock laneANCHOR905, on top of the anchor car) receipt head:
 - **L-PROBE-2 (chair)**: cheap /6 tips · full:  · bracket: 
 ## REWRITE 8b PACKETS (rewrite/DS-DEF-n/<pool>/: skeleton · draft-round-N · refine · kept · refute* · cure-round-N · cured-round-N; JUDGMENT.md / JUDGMENT-cure.md per block; the entailment + referent tables)
-- DS-DEF-11: pools 5 · skeleton 5 · draft 5 · refine 5 · kept 5 · refute 6 · cure 5 · cured 5 · JUDGMENT yes · JUDGMENT-cure no
-- entailment: surveys 6 · refutes 6 · ENTAILMENT-TABLE.draft.md absent · referent surveys 0 · referent refutes 0 · REFERENT-TABLE.draft.md absent
+- DS-DEF-11: pools 5 · skeleton 5 · draft 5 · refine 5 · kept 5 · refute 9 · cure 5 · cured 5 · JUDGMENT yes · JUDGMENT-cure no
+- entailment: surveys 6 · refutes 6 · ENTAILMENT-TABLE.draft.md absent · referent surveys 2 · referent refutes 0 · REFERENT-TABLE.draft.md absent
 - HOLD-VITEST absent · runner count 0
 
 ## RESEARCH SWEEPS (state = claims/verdicts/kept; verdict files; section/critic mtimes) — round tags in sweep/LAST-RUNS.json
@@ -227,9 +227,9 @@ json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
 - LAST-RUNS: tolkien r7-not-launched/(none — nothingToRun 17:26), kay r8/wf_d76e605d-6d1, leguin r11/wf_49ef9b66-2e6, wolfe r8/wf_8cd21474-a7b, martin r8/wf_0cd91522-1ce, hobb r7/wf_255b6391-7fb, dnd r13/wf_2c525e43-1f2, ai r12/wf_6dd3b009-2b0, dnd_r13 r13/wf_2c525e43-1f2, leguin_r11 r11/wf_49ef9b66-2e6, dnd_r14 r14/
 
 ## WORKFLOW RUNS of chair session 4ed79a2b-6cd2-45cf-ab97-83cdad49c30b (journal lines; a run dies with the session — the FILES above are the checkpoint)
-- wf_3252b403-4ff: 6 journal lines, 6 agents
-- wf_a8b0a386-355: 1 journal lines, 1 agents
-- wf_abaf2de0-b00: 8 journal lines, 6 agents
+- wf_3252b403-4ff: 12 journal lines, 12 agents
+- wf_a8b0a386-355: 2 journal lines, 2 agents
+- wf_abaf2de0-b00: 20 journal lines, 14 agents
 
 ## PROCESSES: 57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 2.32 2.60 3.98
+load: 4.25 2.89 3.60
