@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-11 11:54:13 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-11 12:00:14 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -58,19 +58,6 @@
 | ? | other |  | failed | 0 | — | — | 15:29:19 |
 | ? | other |  | failed | 0 | — | — | 15:29:19 |
 | ? | other |  | failed | 0 | — | — | 15:29:17 |
-| ? | other |  | in-flight | 0 | economy.referent.survey.md | — | 09:57:49 |
-| ? | other |  | in-flight | 0 | power.referent.survey.md | — | 09:57:49 |
-| ? | other |  | in-flight | 0 | defense.referent.survey.md | — | 09:57:49 |
-| ? | other |  | in-flight | 0 | warFaith.referent.survey.md | — | 09:57:49 |
-| ? | other |  | in-flight | 0 | — | — | 09:36:53 |
-| ? | other |  | in-flight | 0 | — | — | 09:57:49 |
-| ? | other |  | in-flight | 0 | general.referent.survey.md | — | 09:36:53 |
-| ? | other |  | result | 0 | general.referent.survey.md, fix.pl | — | 09:56:17 |
-| ? | other |  | in-flight | 0 | — | — | 09:36:53 |
-| ? | other |  | in-flight | 0 | stressors.referent.survey.md | — | 09:57:49 |
-| ? | other |  | in-flight | 0 | — | — | 09:36:54 |
-| ? | other |  | in-flight | 0 | — | — | 09:36:54 |
-| ? | other |  | in-flight | 0 | — | — | 09:36:53 |
 | ? | other |  | result | 0 | — | — | 14:58:10 |
 | ? | other |  | failed | 0 | — | — | 10:25:02 |
 | ? | other |  | result | 0 | stressors.referent.refute.md | — | 14:19:37 |
