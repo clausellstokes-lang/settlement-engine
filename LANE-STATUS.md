@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-11 15:09:15 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-11 15:15:00 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = d7f4c6b0e §919: the REWRITE train's first car lands — the index-stable draw signed (59.61 % of ce
 
@@ -211,7 +211,7 @@ stat: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-
 - **L-PROBE-2 (chair)**: cheap /6 tips · full:  · bracket: 
 ## REWRITE 8b PACKETS (rewrite/DS-DEF-n/<pool>/: skeleton · draft-round-N · refine · kept · refute* · cure-round-N · cured-round-N; JUDGMENT.md / JUDGMENT-cure.md per block; the entailment + referent tables)
 - DS-DEF-11: pools 5 · skeleton 5 · draft 5 · refine 5 · kept 5 · refute 13 · cure 10 · cured 10 · JUDGMENT yes · JUDGMENT-cure yes
-- DS-DEF-2: pools 18 · skeleton 18 · draft 0 · refine 0 · kept 0 · refute 0 · cure 0 · cured 0 · JUDGMENT no · JUDGMENT-cure no
+- DS-DEF-2: pools 19 · skeleton 19 · draft 0 · refine 0 · kept 0 · refute 0 · cure 0 · cured 0 · JUDGMENT no · JUDGMENT-cure no
 - entailment: surveys 6 · refutes 6 · ENTAILMENT-TABLE.draft.md 09-11 06:07 346945 B · referent surveys 6 · referent refutes 6 · REFERENT-TABLE.draft.md 09-11 11:01 285943 B
 - HOLD-VITEST absent · runner count 0
 
@@ -228,7 +228,7 @@ json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
 - LAST-RUNS: tolkien r7-not-launched/(none — nothingToRun 17:26), kay r8/wf_d76e605d-6d1, leguin r11/wf_49ef9b66-2e6, wolfe r8/wf_8cd21474-a7b, martin r8/wf_0cd91522-1ce, hobb r7/wf_255b6391-7fb, dnd r13/wf_2c525e43-1f2, ai r12/wf_6dd3b009-2b0, dnd_r13 r13/wf_2c525e43-1f2, leguin_r11 r11/wf_49ef9b66-2e6, dnd_r14 r14/
 
 ## WORKFLOW RUNS of chair session 4ed79a2b-6cd2-45cf-ab97-83cdad49c30b — PER AGENT, PER LANE (owner 09-11: save progress per agent per lane; a run dies with the session, its journal + the packets + the dock commits are the checkpoint; journals mirrored under $SC/_progress/<wf>/)
-- **wf_2e33aae5-027** (mtime 09-11 15:04): agent calls 62 (56 distinct) · DONE 12 · FAILED (not retried) 38 · RETRIED (superseded attempts) 6 · IN FLIGHT 6 — mirror `_progress/wf_2e33aae5-027/`
+- **wf_2e33aae5-027** (mtime 09-11 15:14): agent calls 66 (56 distinct) · DONE 16 · FAILED (not retried) 34 · RETRIED (superseded attempts) 10 · IN FLIGHT 6 — mirror `_progress/wf_2e33aae5-027/`
     - `a8df09f92` MARKER Beasts & Monsters: plagued, perimeter AND organized force · DONE · transcript 09-11 11:12 801 KB · 43 tool calls · files: "$D/skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--beasts-mons
     - `a2d2b0711` MARKER Beasts & Monsters: plagued, perimeter but NO force to hold it · DONE · transcript 09-11 11:12 667 KB · 27 tool calls · files: "$SC/rewrite/DS-DEF-2/ds-def-2--beasts-monsters-plagued-perimeter-but-no-force-t/skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--beasts-mons
     - `abb01c380` MARKER Beasts & Monsters: plagued, NO perimeter and NO force · DONE · transcript 09-11 11:13 692 KB · 37 tool calls · files: skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--beasts-mons
@@ -247,10 +247,10 @@ json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
     - `a1b1036b8` MARKER Internal Security: detention without process · RETRIED (a later attempt on the same key runs) · transcript 09-11 11:28 632 KB · 53 tool calls
     - `a1007aea0` MARKER Internal Security: no legal infrastructure · RETRIED (a later attempt on the same key runs) · transcript 09-11 11:29 768 KB · 57 tool calls · files: skeleton.md
     - `ac3d67fab` MARKER Economic Survival: STRONG · RETRIED (a later attempt on the same key runs) · transcript 09-11 11:28 655 KB · 29 tool calls
-    - `a033b870a` MARKER Economic Survival: ADEQUATE · FAILED · transcript 09-11 11:28 100 KB · 0 tool calls
-    - `a3e3be896` MARKER Economic Survival: WEAK · FAILED · transcript 09-11 11:28 100 KB · 0 tool calls
-    - `a1529c076` MARKER Economic Survival: CRITICAL · FAILED · transcript 09-11 11:28 100 KB · 0 tool calls
-    - `acad941ed` MARKER Disasters & Famine: granary AND hospital · FAILED · transcript 09-11 11:28 100 KB · 0 tool calls
+    - `a033b870a` MARKER Economic Survival: ADEQUATE · RETRIED (a later attempt on the same key runs) · transcript 09-11 11:28 100 KB · 0 tool calls
+    - `a3e3be896` MARKER Economic Survival: WEAK · RETRIED (a later attempt on the same key runs) · transcript 09-11 11:28 100 KB · 0 tool calls
+    - `a1529c076` MARKER Economic Survival: CRITICAL · RETRIED (a later attempt on the same key runs) · transcript 09-11 11:28 100 KB · 0 tool calls
+    - `acad941ed` MARKER Disasters & Famine: granary AND hospital · RETRIED (a later attempt on the same key runs) · transcript 09-11 11:28 100 KB · 0 tool calls
     - `a4b7ff146` MARKER Disasters & Famine: granary AND parish care only · FAILED · transcript 09-11 11:28 100 KB · 0 tool calls
     - `a87e5f28a` MARKER Disasters & Famine: granary, NO medical provision · FAILED · transcript 09-11 11:28 100 KB · 0 tool calls
     - `a39e8d3cd` MARKER Disasters & Famine: NO reserves, hospital present · FAILED · transcript 09-11 11:28 100 KB · 0 tool calls
@@ -285,12 +285,16 @@ json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
     - `a41ea02e6` GATE · FAILED · transcript 09-11 11:29 98 KB · 0 tool calls
     - `a2e8aedb6` JUDGE r0 · FAILED · transcript 09-11 11:29 100 KB · 0 tool calls
     - `ae38129fa` GATE · FAILED · transcript 09-11 11:29 98 KB · 0 tool calls
-    - `a64335516` MARKER Invasion & War: neither walls nor force · IN FLIGHT · transcript 09-11 15:08 564 KB · 22 tool calls · last: Bash L=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratc
-    - `afa2027ca` MARKER Internal Security: full legal chain (court AND prison) · IN FLIGHT · transcript 09-11 15:08 615 KB · 21 tool calls · last: Bash SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
-    - `ae7156d1c` MARKER Internal Security: court without detention · IN FLIGHT · transcript 09-11 15:07 606 KB · 37 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
-    - `a8e94d9ad` MARKER Internal Security: detention without process · IN FLIGHT · transcript 09-11 15:08 698 KB · 51 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
-    - `ac34bafe6` MARKER Internal Security: no legal infrastructure · IN FLIGHT · transcript 09-11 15:08 760 KB · 48 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
-    - `a6a762fff` MARKER Economic Survival: STRONG · IN FLIGHT · transcript 09-11 15:08 689 KB · 34 tool calls · files: "$SC/../4ed79a2b-6cd2-45cf-ab97-83cdad49c30b/scratchpad/def2-annex.md, def2-annex.md, "$P/skeleton.md · last: Bash SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
+    - `a64335516` MARKER Invasion & War: neither walls nor force · DONE · transcript 09-11 15:13 660 KB · 27 tool calls · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--invasion-wa
+    - `afa2027ca` MARKER Internal Security: full legal chain (court AND prison) · DONE · transcript 09-11 15:12 717 KB · 28 tool calls · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--internal-se
+    - `ae7156d1c` MARKER Internal Security: court without detention · IN FLIGHT · transcript 09-11 15:14 805 KB · 44 tool calls · last: Bash P=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratc
+    - `a8e94d9ad` MARKER Internal Security: detention without process · DONE · transcript 09-11 15:13 819 KB · 56 tool calls · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--internal-se
+    - `ac34bafe6` MARKER Internal Security: no legal infrastructure · IN FLIGHT · transcript 09-11 15:14 859 KB · 52 tool calls · files: skeleton.md · last: Edit /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchp
+    - `a6a762fff` MARKER Economic Survival: STRONG · DONE · transcript 09-11 15:14 803 KB · 41 tool calls · files: "$SC/../4ed79a2b-6cd2-45cf-ab97-83cdad49c30b/scratchpad/def2-annex.md, def2-annex.md, "$P/skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--economic-su
+    - `a969baec2` MARKER Economic Survival: ADEQUATE · IN FLIGHT · transcript 09-11 15:15 640 KB · 32 tool calls · last: Bash SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
+    - `a3a38f373` MARKER Economic Survival: WEAK · IN FLIGHT · transcript 09-11 15:15 485 KB · 24 tool calls · last: Bash SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
+    - `a5dc7aa14` MARKER Economic Survival: CRITICAL · IN FLIGHT · transcript 09-11 15:15 354 KB · 14 tool calls · last: Bash SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
+    - `a8a184c0e` MARKER Disasters & Famine: granary AND hospital · IN FLIGHT · transcript 09-11 15:15 174 KB · 8 tool calls · files: "$SC/rewrite/DS-DEF-2/ds-def-2--disasters-famine-granary-and-hospital/skeleton.md · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
 - **wf_6508cb77-d97** (mtime 09-11 10:52): agent calls 15 (7 distinct) · DONE 7 · FAILED (not retried) 0 · RETRIED (superseded attempts) 8 · IN FLIGHT 0 — mirror `_progress/wf_6508cb77-d97/`
     - `a87757ba9` REFUTER defense · RETRIED (a later attempt on the same key runs) · transcript 09-11 06:25 526 KB · 21 tool calls
     - `a29122cfc` REFUTER general · RETRIED (a later attempt on the same key runs) · transcript 09-11 06:25 509 KB · 22 tool calls · files: general.referent.refute.md
@@ -349,4 +353,4 @@ json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
     - `ad30ac0bb` FOLDER · DONE · transcript 09-11 06:02 1531 KB · 36 tool calls · files: _partD.md, _partE.md, _partF.md, _partG.md · result: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/entailment/ENTAILMENT-TABLE.draft.md
 
 ## PROCESSES: 57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 2.13 2.40 2.38
+load: 2.14 2.10 2.25
