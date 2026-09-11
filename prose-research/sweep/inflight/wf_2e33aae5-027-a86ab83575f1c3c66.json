@@ -1,0 +1,21 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 61,
+ "firstTs": "2026-09-11T15:12:57.835Z",
+ "lastTs": "2026-09-11T15:14:01.099Z",
+ "tools": {
+  "Bash": 12,
+  "Read": 1
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "The packet does not exist yet, so this is a fresh start. I will read the voice documents, the pool rows, and print the licence card in one batch.",
+ "run": "wf_2e33aae5-027",
+ "agent": "a86ab83575f1c3c66",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/4ed79a2b-6cd2-45cf-ab97-83cdad49c30b/subagents/workflows/wf_2e33aae5-027/agent-a86ab83575f1c3c66.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}
