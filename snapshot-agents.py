@@ -32,14 +32,16 @@ for run in runs:
             if not os.path.exists(dst) or open(dst).read() != src: open(dst, 'w').write(src)
         except Exception as e: lines.append('  (journal mirror failed: %s)' % e)
     done = len(results); n = len(started); nsup = len(superseded)
-    lines.append('- **%s** (mtime %s): agent calls %d (%d distinct) · DONE %d · FAILED %d · RETRIED (superseded attempts) %d · IN FLIGHT %d — mirror `_progress/%s/`' % (wf, mt(run), n, len(set(keyof.values())), done, len(failed), nsup, n - done - len(failed) - nsup, wf))
+    nfail = len([a for a in failed if a not in superseded])  # a dead attempt later retried is RETRIED, not FAILED
+    inflight = n - done - nfail - nsup
+    lines.append('- **%s** (mtime %s): agent calls %d (%d distinct) · DONE %d · FAILED (not retried) %d · RETRIED (superseded attempts) %d · IN FLIGHT %d — mirror `_progress/%s/`' % (wf, mt(run), n, len(set(keyof.values())), done, nfail, nsup, inflight, wf))
     agent_lines = []
     for a in started:
         tp = os.path.join(run, 'agent-%s.jsonl' % a); mp = os.path.join(run, 'agent-%s.meta.json' % a)
         label = ''
         try: label = json.load(open(mp)).get('label') or json.load(open(mp)).get('name') or ''
         except Exception: pass
-        status = 'DONE' if a in results else ('FAILED' if a in failed else ('RETRIED (a later attempt on the same key runs)' if a in superseded else 'IN FLIGHT'))
+        status = 'DONE' if a in results else ('RETRIED (a later attempt on the same key runs)' if a in superseded else ('FAILED' if a in failed else 'IN FLIGHT'))
         tools = 0; last = ''; files = []; size = 0; tmt = ''
         if os.path.exists(tp):
             size = os.path.getsize(tp); tmt = mt(tp)

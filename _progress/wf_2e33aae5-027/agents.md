@@ -1,4 +1,4 @@
-# wf_2e33aae5-027 — per-agent progress, 2026-09-11 15:03:35
+# wf_2e33aae5-027 — per-agent progress, 2026-09-11 15:09:19
     - `a8df09f92` MARKER Beasts & Monsters: plagued, perimeter AND organized force · DONE · transcript 09-11 11:12 801 KB · 43 tool calls · files: "$D/skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--beasts-mons
     - `a2d2b0711` MARKER Beasts & Monsters: plagued, perimeter but NO force to hold it · DONE · transcript 09-11 11:12 667 KB · 27 tool calls · files: "$SC/rewrite/DS-DEF-2/ds-def-2--beasts-monsters-plagued-perimeter-but-no-force-t/skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--beasts-mons
     - `abb01c380` MARKER Beasts & Monsters: plagued, NO perimeter and NO force · DONE · transcript 09-11 11:13 692 KB · 37 tool calls · files: skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--beasts-mons
@@ -11,12 +11,12 @@
     - `a86ab8357` MARKER Invasion & War: walls with NO force · DONE · transcript 09-11 11:22 818 KB · 45 tool calls · files: "$D/skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--invasion-wa
     - `af3695335` MARKER Invasion & War: force with NO walls · DONE · transcript 09-11 11:24 940 KB · 59 tool calls · files: "$D/skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--invasion-wa
     - `adfba1272` MARKER Invasion & War: militia only · DONE · transcript 09-11 11:24 806 KB · 34 tool calls · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--invasion-wa
-    - `a6d158fc4` MARKER Invasion & War: neither walls nor force · FAILED · transcript 09-11 11:28 829 KB · 44 tool calls
-    - `a346d9d42` MARKER Internal Security: full legal chain (court AND prison) · FAILED · transcript 09-11 11:28 676 KB · 29 tool calls · files: "$D/skeleton.md
-    - `a7347320b` MARKER Internal Security: court without detention · FAILED · transcript 09-11 11:28 845 KB · 39 tool calls
-    - `a1b1036b8` MARKER Internal Security: detention without process · FAILED · transcript 09-11 11:28 632 KB · 53 tool calls
-    - `a1007aea0` MARKER Internal Security: no legal infrastructure · FAILED · transcript 09-11 11:29 768 KB · 57 tool calls · files: skeleton.md
-    - `ac3d67fab` MARKER Economic Survival: STRONG · FAILED · transcript 09-11 11:28 655 KB · 29 tool calls
+    - `a6d158fc4` MARKER Invasion & War: neither walls nor force · RETRIED (a later attempt on the same key runs) · transcript 09-11 11:28 829 KB · 44 tool calls
+    - `a346d9d42` MARKER Internal Security: full legal chain (court AND prison) · RETRIED (a later attempt on the same key runs) · transcript 09-11 11:28 676 KB · 29 tool calls · files: "$D/skeleton.md
+    - `a7347320b` MARKER Internal Security: court without detention · RETRIED (a later attempt on the same key runs) · transcript 09-11 11:28 845 KB · 39 tool calls
+    - `a1b1036b8` MARKER Internal Security: detention without process · RETRIED (a later attempt on the same key runs) · transcript 09-11 11:28 632 KB · 53 tool calls
+    - `a1007aea0` MARKER Internal Security: no legal infrastructure · RETRIED (a later attempt on the same key runs) · transcript 09-11 11:29 768 KB · 57 tool calls · files: skeleton.md
+    - `ac3d67fab` MARKER Economic Survival: STRONG · RETRIED (a later attempt on the same key runs) · transcript 09-11 11:28 655 KB · 29 tool calls
     - `a033b870a` MARKER Economic Survival: ADEQUATE · FAILED · transcript 09-11 11:28 100 KB · 0 tool calls
     - `a3e3be896` MARKER Economic Survival: WEAK · FAILED · transcript 09-11 11:28 100 KB · 0 tool calls
     - `a1529c076` MARKER Economic Survival: CRITICAL · FAILED · transcript 09-11 11:28 100 KB · 0 tool calls
@@ -55,3 +55,9 @@
     - `a41ea02e6` GATE · FAILED · transcript 09-11 11:29 98 KB · 0 tool calls
     - `a2e8aedb6` JUDGE r0 · FAILED · transcript 09-11 11:29 100 KB · 0 tool calls
     - `ae38129fa` GATE · FAILED · transcript 09-11 11:29 98 KB · 0 tool calls
+    - `a64335516` MARKER Invasion & War: neither walls nor force · IN FLIGHT · transcript 09-11 15:08 564 KB · 22 tool calls · last: Bash L=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratc
+    - `afa2027ca` MARKER Internal Security: full legal chain (court AND prison) · IN FLIGHT · transcript 09-11 15:08 615 KB · 21 tool calls · last: Bash SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
+    - `ae7156d1c` MARKER Internal Security: court without detention · IN FLIGHT · transcript 09-11 15:07 606 KB · 37 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
+    - `a8e94d9ad` MARKER Internal Security: detention without process · IN FLIGHT · transcript 09-11 15:08 698 KB · 51 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
+    - `ac34bafe6` MARKER Internal Security: no legal infrastructure · IN FLIGHT · transcript 09-11 15:08 760 KB · 48 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
+    - `a6a762fff` MARKER Economic Survival: STRONG · IN FLIGHT · transcript 09-11 15:08 689 KB · 34 tool calls · files: "$SC/../4ed79a2b-6cd2-45cf-ab97-83cdad49c30b/scratchpad/def2-annex.md, def2-annex.md, "$P/skeleton.md · last: Bash SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat

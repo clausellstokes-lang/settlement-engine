@@ -1,0 +1,21 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 123,
+ "firstTs": "2026-09-11T19:04:19.585Z",
+ "lastTs": "2026-09-11T19:07:05.526Z",
+ "tools": {
+  "Bash": 27,
+  "Read": 4
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "The register card is read. The zsh `=` expansion tripped the second command, so I will re-run the annex read with quotes, alongside the remaining voice documents and a sibling packet for format.",
+ "run": "wf_2e33aae5-027",
+ "agent": "a6a762fff1f9f2e85",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/4ed79a2b-6cd2-45cf-ab97-83cdad49c30b/subagents/workflows/wf_2e33aae5-027/agent-a6a762fff1f9f2e85.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}

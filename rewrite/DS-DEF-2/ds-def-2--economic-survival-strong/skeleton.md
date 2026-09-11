@@ -1,0 +1,5 @@
+# SKELETON — DS-DEF-2 · `Economic Survival: STRONG` (the marker's packet; Fable, 2026-09-11)
+
+Seat: Fable 5.1 — marker for the REWRITE, working for the Fable chair. This file is the only thing this seat wrote. Everything below is judged against the printed licence card, the census row it was printed from, the reader function the card names and the producer behind it, the annex block's header lines, the register card (with S2 and S3), Part B §1 and §16–§24, MOVE-GRAMMAR §1–§3 and §4.4.1–§4.4.3, CLERK-LAWS §2.4.1 and §2.6.1, ARCH v2 §2.5 and §8.3, brief ADDENDUM 13 parts A and B (the entailment law, the referent law, the writer bars W11–W27), the two ratified tables' rows that name this pool, and `rewrite/rulings-DEF2.txt`; where a shipped clause reads well but no field licenses it, it is UNLICENSED here and the law is named.
+
+Status: IN PROGRESS — section 0 being written (the checkpoint law: this file is rewritten section by section; a successor continues from the last complete section).

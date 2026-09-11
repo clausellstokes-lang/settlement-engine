@@ -1,11 +1,11 @@
-# wf_6508cb77-d97 — per-agent progress, 2026-09-11 15:03:35
-    - `a87757ba9` REFUTER defense · FAILED · transcript 09-11 06:25 526 KB · 21 tool calls
-    - `a29122cfc` REFUTER general · FAILED · transcript 09-11 06:25 509 KB · 22 tool calls · files: general.referent.refute.md
-    - `ace38485c` REFUTER economy · FAILED · transcript 09-11 06:26 613 KB · 47 tool calls · files: $SC/rewrite/entailment/economy.referent.refute.md
-    - `ac714c86b` REFUTER power · FAILED · transcript 09-11 06:25 714 KB · 31 tool calls · files: powerStateProse.numbered.txt, annex-power.numbered.txt
-    - `a807540d9` REFUTER stressors · FAILED · transcript 09-11 06:25 524 KB · 21 tool calls
-    - `ac5e0574e` REFUTER warFaith · FAILED · transcript 09-11 06:25 578 KB · 26 tool calls · files: $SC/rewrite/entailment/warFaith.referent.refute.md
-    - `a246b85c5` FOLDER · FAILED · transcript 09-11 06:26 101 KB · 0 tool calls
+# wf_6508cb77-d97 — per-agent progress, 2026-09-11 15:09:19
+    - `a87757ba9` REFUTER defense · RETRIED (a later attempt on the same key runs) · transcript 09-11 06:25 526 KB · 21 tool calls
+    - `a29122cfc` REFUTER general · RETRIED (a later attempt on the same key runs) · transcript 09-11 06:25 509 KB · 22 tool calls · files: general.referent.refute.md
+    - `ace38485c` REFUTER economy · RETRIED (a later attempt on the same key runs) · transcript 09-11 06:26 613 KB · 47 tool calls · files: $SC/rewrite/entailment/economy.referent.refute.md
+    - `ac714c86b` REFUTER power · RETRIED (a later attempt on the same key runs) · transcript 09-11 06:25 714 KB · 31 tool calls · files: powerStateProse.numbered.txt, annex-power.numbered.txt
+    - `a807540d9` REFUTER stressors · RETRIED (a later attempt on the same key runs) · transcript 09-11 06:25 524 KB · 21 tool calls
+    - `ac5e0574e` REFUTER warFaith · RETRIED (a later attempt on the same key runs) · transcript 09-11 06:25 578 KB · 26 tool calls · files: $SC/rewrite/entailment/warFaith.referent.refute.md
+    - `a246b85c5` FOLDER · RETRIED (a later attempt on the same key runs) · transcript 09-11 06:26 101 KB · 0 tool calls
     - `ad55f1ba2` REFUTER defense · DONE · transcript 09-11 10:20 1032 KB · 58 tool calls · files: $SC/rewrite/entailment/defense.referent.refute.md, $SC/rewrite/entailment/_defref_annex.txt · result: {"desk": "defense (DS-DEF-1 \u2026 DS-DEF-11)", "packet": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db
     - `aa904cb80` REFUTER general · DONE · transcript 09-11 10:19 861 KB · 33 tool calls · files: $SC/rewrite/entailment/general.referent.refute.md, variants.txt · result: {"desk": "general", "packet": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/entailme
     - `a1b514bd3` REFUTER economy · DONE · transcript 09-11 10:17 756 KB · 56 tool calls · files: economy.referent.refute.md · result: {"desk": "economy", "packet": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/entailme
