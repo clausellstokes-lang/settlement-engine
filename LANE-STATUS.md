@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-11 02:53:30 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-11 05:07:56 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = d7f4c6b0e §919: the REWRITE train's first car lands — the index-stable draw signed (59.61 % of ce
 
@@ -101,4 +101,4 @@ json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
 - wf_f9cf9a1d-188: 49 journal lines, 26 agents
 
 ## PROCESSES: 57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 4.55 8.85 8.19
+load: 5.38 8.33 8.28
