@@ -1,0 +1,21 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 116,
+ "firstTs": "2026-09-11T21:33:41.230Z",
+ "lastTs": "2026-09-11T21:36:08.424Z",
+ "tools": {
+  "Bash": 15,
+  "Read": 15
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "Now the skeleton and the shipped rows.",
+ "run": "wf_b9aa5993-4a0",
+ "agent": "a1853ff764ff60c0c",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/4ed79a2b-6cd2-45cf-ab97-83cdad49c30b/subagents/workflows/wf_b9aa5993-4a0/agent-a1853ff764ff60c0c.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}
