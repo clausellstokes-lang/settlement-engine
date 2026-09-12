@@ -21,6 +21,24 @@ Read whole before a word was written: `REGISTER-CARD.md` (with S2 and S3); `RULE
 Dock `laneRW-DEF2` READ ONLY; the only execution was `node scripts/prose-licence-card.mjs DS-DEF-2 'Internal Security: court without detention'`.
 Nothing outside this packet file was written anywhere. Written under the checkpoint law, section by section.
 
+**CONTINUED under the checkpoint law (a later sitting of the same seat; the earlier sitting was cut off after it
+had written every section).** Nothing sound was re-written. What the continuation VERIFIED rather than assumed,
+each by execution and each CONFIRMED: (a) the twelve rows below were diffed line for line against
+`git show 471ce894a83658b0e0fe480819a9f1dcd22605e3:docs/content/RECEIPT_POOLS_DOSSIER_STATE.md | sed -n '2791,2803p'` —
+**exactly three lines differ and they are exactly the three targets**, every other face byte-identical including the
+three-space indent and the backticked tags; (b) `JUDGMENT.md` has been RE-RUN since the earlier sitting
+(mtime 2026-09-12 01:55, the prior run kept beside it as `JUDGMENT.prior-run-2026-09-11T2252.md`) and its
+`--- CURES` section still carries these three rows for this pool with the same findings and the same named cures,
+and its `--- REVERTS` section still carries `variant 2 | face 1` — so no ruling moved under the packet;
+(c) the v2 f1 claim in the line above was checked rather than asserted: the annex at HEAD reads
+*"Here the law is formal, and there is nowhere in the town to hold under that law."*, which is
+`draft-round-2.md`'s own face for that slot, while `kept.md` (the refined set) reads *"…the town is without a place
+of confinement."* — the annex therefore DOES already carry the reverted draft face, and the packet leaves it
+byte-identical as the gate requires; (d) the one noun the judge's cure introduces was checked against the engine:
+`src/domain/display/threatAssessment.js:147` reads `'Courts prosecute but limited detention.'`, so **detention** is
+the engine's own word for this branch (W14, the label at its engine meaning) and `skeleton.md:173` already lists
+*"detention stands unmet at {settlement}"* among the OPEN move's lawful realisations.
+
 **The card, re-run this session (identical to the skeleton's §0.1):**
 ```
   reads:      court (not-produced) · prison (not-produced)
