@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-11 22:59:28 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-11 23:05:12 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = 3706c6df7 §919.2: the OPUS CHAIR MANUAL amended — the refuter and re-refuter seat is OPUS at the 
 
@@ -43,7 +43,8 @@ product claude/composite-r4 = f73bdbf16 · ledger = 3706c6df7 §919.2: the OPUS 
       | 
       | Every figure below comes from a command that ran in this dock with its exit code captured. A figure
       | without a command is not in this file. ZERO reader-facing bytes is the car's own fence: the manifest
-- **DS-DEF-2 (waits for the tables)** dock `laneRW-DEF2` HEAD 402d592df · 3 cars over f2da5a3ee · porcelain 0 · last commits:
+- **DS-DEF-2 (waits for the tables)** dock `laneRW-DEF2` HEAD 471ce894a · 4 cars over f2da5a3ee · porcelain 0 · last commits:
+    471ce894a REWRITE 8b DS-DEF-2: 50/78 variants kept as refined · 31 faces reverted · 99 cure target(s) — the Fable judge rulings applied
     402d592df REWRITE 8b DS-DEF-2 refine: 23/26 kept, 3 reverted
     fa973a884 REWRITE 8b DS-DEF-2 draft round 2: 24/26
     8540c87eb REWRITE 8b DS-DEF-2 draft round 1: 17/26
@@ -364,7 +365,7 @@ json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
     - `ac81c30e5` REFUTER Disasters & Famine: NO reserves, hospital present · DONE · transcript 09-11 22:17 702 KB · 32 tool calls · files: "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--disasters-famine-no-reserves-hospital-present/refute-round-2.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--disasters-f
     - `ac786186d` REFUTER Disasters & Famine: NO reserves, NO medical provision · DONE · transcript 09-11 22:22 777 KB · 43 tool calls · files: refute-round-1.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--disasters-f
     - `ae3c68660` JUDGE r2 · DONE · transcript 09-11 22:56 1476 KB · 45 tool calls · files: rev.txt, HEAD.md, TAIL.md, JUDGMENT.md · result: {"commit": "not-committed", "variants": 78, "facesReverted": 31, "refusals": [], "judgmentPath": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engi
-    - `a76bc16f1` GATE · IN FLIGHT · transcript 09-11 22:59 351 KB · 26 tool calls · last: Bash cd "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4ed79a2b-6cd2-45cf-ab97-83cdad49c30b/scra
+    - `a76bc16f1` GATE · IN FLIGHT · transcript 09-11 23:05 674 KB · 77 tool calls · files: docs/content/RECEIPT_POOLS_DOSSIER_STATE.md, contract-head.txt, (git commit) · last: Bash grep -n "JUDGE_SCHEMA" -A 30 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-40
 - **wf_2e33aae5-027** (mtime 09-11 15:16): agent calls 68 (56 distinct) · DONE 18 · FAILED (not retried) 32 · RETRIED (superseded attempts) 12 · IN FLIGHT 6 — mirror `_progress/wf_2e33aae5-027/`
     - `a8df09f92` MARKER Beasts & Monsters: plagued, perimeter AND organized force · DONE · transcript 09-11 11:12 801 KB · 43 tool calls · files: "$D/skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--beasts-mons
     - `a2d2b0711` MARKER Beasts & Monsters: plagued, perimeter but NO force to hold it · DONE · transcript 09-11 11:12 667 KB · 27 tool calls · files: "$SC/rewrite/DS-DEF-2/ds-def-2--beasts-monsters-plagued-perimeter-but-no-force-t/skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--beasts-mons
@@ -492,4 +493,4 @@ json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
     - `ad30ac0bb` FOLDER · DONE · transcript 09-11 06:02 1531 KB · 36 tool calls · files: _partD.md, _partE.md, _partF.md, _partG.md · result: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/entailment/ENTAILMENT-TABLE.draft.md
 
 ## PROCESSES: 57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 2.67 2.37 2.18
+load: 2.11 2.38 2.25
