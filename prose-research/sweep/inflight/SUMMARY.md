@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-12 04:21:38 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-12 04:27:41 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -15,11 +15,11 @@
 | ? | other |  | result | 0 | — | — | 08:10:22 |
 | ? | other |  | result | 0 | — | — | 08:00:46 |
 | ? | other |  | result | 0 | items-W11-W19.md | — | 08:19:37 |
-| ? | other |  | in-flight | 0 | — | — | 08:21:13 |
-| ? | other |  | in-flight | 0 | — | — | 08:21:28 |
+| ? | other |  | result | 0 | — | — | 08:24:17 |
+| ? | other |  | result | 0 | items-ET-3-4.md | — | 08:25:36 |
 | ? | other |  | result | 0 | items-W1-W10.md, appendix-W1-W10.md | — | 08:20:42 |
 | ? | other |  | result | 0 | items-W20-W27.md | — | 08:20:42 |
-| ? | other |  | in-flight | 0 | — | — | 08:21:37 |
+| ? | other |  | result | 0 | — | — | 08:26:07 |
 | ? | other |  | failed | 0 | — | — | 03:37:01 |
 | ? | other |  | result | 0 | — | — | 20:05:25 |
 | ? | other |  | result | 0 | — | — | 03:19:04 |

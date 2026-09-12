@@ -42,11 +42,36 @@ survivor the ground names the field, file and line that DENIES a breach; for a s
 the bar policed instead of truth. `VALIDATION` is an em dash awaiting a later Fable seat's mark; nothing in
 this archive has been validated by anyone yet.
 
+**[corrected] Whose words the permission column carries, checked and not assumed.** A reviewer is told that
+`what a writer may NOW do` is the column to argue with, so it matters whether he is arguing with the fold or
+with the archivist. In this slice he is arguing with the fold: all **176** of the main table's `the ground`
+and `what a writer may NOW do` cells were compared byte-for-byte against `convert-ET-3-4.md` (splitting on
+unescaped pipes, which a naive split corrupts), and **176 of 176 are identical — zero cells were composed,
+extended or softened by this scribe, in either direction**, verdicts included. Every overstatement a reviewer
+may want to attack (`L-121`'s "use it", `A-6`'s "write men on the wall", `A-27`'s reach, `L-25`, `L-17`) is
+the FOLD's, carried across unedited, and is properly argued with the fold. The ONE column in this file whose
+permissions are the archivist's is column 5 of the APPENDIX at the end, where the packet handed back no
+writer-facing permission at all; every cell there is marked `[archivist's reading]` for that reason.
+
 **A note on the grounds that read `—`.** Where the fold's `what a writer may NOW do` cell is a bare dash with
 a parenthetical ("wiring row", "dark field", "copy unit"), the row was never a bar on a writer at all: it
 recorded a defect in the engine's own wiring. The strike removes it from the writer's law and leaves it where
 the chair keeps it, as a routing or wiring finding. A reviewer who wants to challenge those should challenge
 the claim that the row never reached a face — not the claim that the defect is unreal.
+
+**[corrected] — and the paragraph above is wrong about two of the twenty-five.** Twenty-five rows carry a
+bare-dash permission cell. Twenty-three are STRUCK and the note describes them. **Two are CONTRADICTION —
+KEPT, not struck — and nothing was removed from the writer's law on either.** `L-30`'s dash reads
+"*a wiring contradiction the refuter should still fail; see newFindings*" and `L-120`'s reads
+"*see newFindings: the engine's own string is the contradiction*". `L-120` in particular still bars a writer
+from repeating `originContext.reason`'s walls, granaries and bound labour, which is a live floor-1 bar with
+teeth. The accurate reading of a bare dash is narrower than the note claims: **the FOLD wrote no
+writer-facing permission for this row** — for twenty-three of them because the row was wiring, a dark field or
+a copy unit, and for `L-30` and `L-120` because the row survives as a REFUTER's finding with no writer
+permission attached. Both are rowed again in the appendix at the end of this file (`NF-8` and `NF-5`). Two
+further dashes are not wiring rows either and the note's characterisation does not fit them: `L-67`
+("*floor 1 still catches a face denying the printed severity*", a strike with a surviving floor) and `L-13`
+("*the ground the rows below cite*", the mechanism the roster-flag rows depend on).
 
 ---
 
@@ -395,3 +420,49 @@ cure (the duplicate-unit baseline, §915), and "frame, never restate" was the on
 rather than spending it. The strike may be right on the law and wrong on the arithmetic — and if it is right
 on the law, the correct shape is probably SPLIT, keeping the bar over the free-prose strings (`situationDesc`,
 `entrepotNote`, `magicNote`, `dependency.impact`) until each is audited the way `originContext.reason` was.
+
+---
+
+## APPENDIX — NEW BARS AND FINDINGS ARRIVING WITH THE RE-CUT
+
+**Why this appendix exists.** Alongside its 176 rulings the source packet returned ten `newFindings`:
+contradictions the conversion itself DISCOVERED. Two rows of the main table point at them by name (`L-30` and
+`L-120`, both "see newFindings") and no row reproduces them, so a reviewer following the protocol could neither
+see them nor challenge them. They are rowed here, `NF-1` … `NF-10`, in the packet's own order, in the same six
+columns as the main table.
+
+**What the cross-check found, and it is not what the brief for this repair assumed.** Each finding was checked
+against all 176 rows for a row carrying the same field, file and citation. **Eight of the ten are already rowed**
+— at `L-108`, `A-3`, `L-93`/`L-103`, `L-120`, `L-88`, `L-73`, `L-30`, `A-29`/`L-57` — and on those eight the
+finding adds verification, a re-framing or a third surface, but takes nothing further from a writer; the named
+row's permission cell still governs. **Two narrow a writer beyond anything the table states, and only those two
+carry the leading `⚠ NEW BAR`:**
+
+- `⚠ NEW BAR · NF-1` — the wartime LOSS branch's two shipped counts (a third of the working-age men conscripted;
+  food prices doubled). `L-111` rows the garrison half of that summary and nothing rows the counts, and the bar
+  runs directly against `L-12`'s new permission to restate the engine-authored strings.
+- `⚠ NEW BAR · NF-9` — `'occupation authority'` as a proper NAME. `L-131` carries the fallback in its old-law cell
+  and STRUCK it among "the phrase-reader caveats"; this finding re-imposes it on a different file and line
+  (`warStatus.js:333-335`) that no row in this slice cites.
+
+Those two change what the permission cells earlier in this file mean — specifically `L-12`, `L-111`, `L-131` and
+`A-27` — and a reviewer sampling permissions should read them against these two rows.
+
+**Whose words are whose.** Column 2 is the packet's finding VERBATIM and uncut. Column 4 names the field and the
+finding's own citations. **Column 5 is not the fold's**: the packet stated these as engine defects and handed back
+no writer-facing permission for any of them, so every cell in that column is this scribe's reading and carries the
+`[archivist's reading]` marker — argue with the archivist there, not with the fold. `VALIDATION` is an em dash
+awaiting a later Fable seat's mark, as everywhere else in this file.
+
+| id | the finding, in the packet's own words | verdict | the ground, with the FIELD named | what a writer may NOW do, or MAY NO LONGER do | VALIDATION |
+|---|---|---|---|---|---|
+| ⚠ NEW BAR · NF-1 | VERIFIED ENGINE SELF-CONTRADICTION (no bar stated it): `stressNarrative.js:145-152` — the wartime PROFIT summary asserts "The garrison is reinforced and well-supplied" at EVERY tier, including hamlets whose roster carries no garrison row; the loss branch states "Conscription has taken a third of the working-age men" and "Food prices have doubled", two countable facts in SHIPPED prose (floor 2). The rewrite drops both; the summary itself is a wiring finding for the stressors desk. | CONTRADICTION (VERIFIED) — the garrison half is rowed at `L-111`; **the loss branch's two counts are rowed nowhere in this slice** | **FIELD:** the wartime PROFIT / loss summary strings, `stressNarrative.js:145-152` (verified), read against `compound.inst.hasGarrison` and the roster printed beside them (no garrison row resolves at hamlet), and against floor 2 for the loss branch's conscription fraction and doubled prices. | [archivist's reading] **MAY NO LONGER** carry the loss branch's two shipped counts — "Conscription has taken a third of the working-age men" and "Food prices have doubled" — into prose: they are countable facts under floor 2, and the packet's own disposition is that "the rewrite drops both". No row in this slice states that bar, and it NARROWS `L-12`'s new permission to "restate, extend or answer" the engine-authored strings, which on its face licenses exactly this restatement. The garrison half is already handed to a writer at `L-111` ("write war as good business where the record says so") and is unchanged. | — |
+| NF-2 | VERIFIED: `stressNarrative.js:98-99` vs `activeConditions.js:58-66` — `plague_onset` prints "It is not yet a plague" while the condition promoted from it on the same settlement is labelled 'Plague' with "A virulent illness spreads". Two engine records deny each other; whichever a face follows it contradicts the other surface. Filed only as a label trap before; it is a page-level defect. | CONTRADICTION (VERIFIED) — rowed at `L-108` | **FIELD:** `plague_onset` (the stress record, `stressNarrative.js:98-99`) against the condition promoted from it on the same settlement, labelled `Plague` (`activeConditions.js:58-66`); both verified in the dock. | [archivist's reading] Nothing new at the writer's grain: the bar and the permission are both rowed at `L-108`, whose ground states the rule in terms ("a face must state the record IT reads and may not deny the other printed beside it") and whose permission cell governs. What this finding adds is the verification and the judgment that the defect is page-level rather than a label trap. | — |
+| NF-3 | VERIFIED: `governanceNarrative.js:506` mints the label "The guard" as the NON-small-tier fallback precisely when NO force institution matches, while `safetyProfile.js:300`/`:309` print "There is no meaningful guard presence"/"There is effectively no law enforcement" on that same town. Two panels on one page contradict; A-3 recorded it as a disputed WORD, never as the defect it is. | CONTRADICTION (VERIFIED) — rowed at `A-3` (the KEPT half) | **FIELD:** the power desk's stability-label fallback `The guard` (`governanceNarrative.js:506`, minted for the non-small tiers precisely when NO force institution matches) against the safety panel, `safetyProfile.js:300`, `:309`; both verified. | [archivist's reading] Nothing new at the writer's grain: the KEPT half of `A-3` carries this contradiction on the same two citations, and `A-3`'s permission cell governs ("Use 'the guard' where a force row resolves. Where none does, write the absence"). The finding's remark that "`A-3` recorded it as a disputed WORD" is true of the OLD `A-3` row, not of the re-cut one. | — |
+| NF-4 | `powerStateProse.js:275-330` with `stressFactions.js:109-111` and `PowerTab.jsx:117` — seventeen stability labels (including `Fractured — no stable governing authority`, `Suppressed (under occupation)` and `Volatile` = succession_void) fall to a FLOOR pool whose prose asserts "{faction} holds the hall" while the seat chip beside it prints the seat standing vacant. The old bars policed the word "hall"; the contradiction is the claim of a holder. | CONTRADICTION — rowed at `L-93`, and the holder claim again at `L-103` | **FIELD:** the stability-label FLOOR pool, `powerStateProse.js:275-330` with `stressFactions.js:109-111` — seventeen labels, among them `Fractured — no stable governing authority`, `Suppressed (under occupation)` and `Volatile` (`succession_void`) — against the seat chip printed beside the prose, `PowerTab.jsx:117`. | [archivist's reading] Nothing new at the writer's grain: `L-93` rows the floor pool and hands back the better material ("write the seat's real condition — vacant, suppressed, fractured"), and `L-103` rows the holder claim itself ("a named seat governing contradicts the vacancy printed"). The finding's contribution is the re-framing — the old bars policed the WORD "hall", the bar that survives is on the CLAIM OF A HOLDER. | — |
+| NF-5 | `stressorGates.js:446-467` and `stressorDynamics.js:837` — the engine's own `originContext.reason` strings assert "Strong walls give besiegers pause" off a causal SCORE with no wall row, "The granaries hold a real reserve" off `storageMonths >= 2` (which falls through at 1.5-2.0 months with no granary building), and bound labour for `servile_uprising` on a model that declares it has no slavery substrate. The contradiction is authored by the engine, not by a writer. | CONTRADICTION — rowed at `L-120` (which points here: "see newFindings") | **FIELD:** `originContext.reason` (`stressorGates.js:446-467`; `stressorDynamics.js:837`) — the wall reason off a causal SCORE with no wall row, the granary reason off `storageMonths >= 2`, bound labour on a model that declares no slavery substrate. | [archivist's reading] Nothing is handed back and nothing new is taken away at the writer's grain: the writer-facing bar is rowed at `L-120` (CONTRADICTION, KEPT — a writer may not repeat those reason strings). What this finding adds is that the contradiction is AUTHORED BY THE ENGINE and not by a writer; it is a wiring finding for the stressors desk. | — |
+| NF-6 | `labelBands.js:130-161` — the complexity band prints "surplus farm trade" on a village whose `foodSecurity` label prints `Deficit`, and "subsistence living" on a `Surplus` hamlet. Two lines on one page deny each other before any prose is written. | CONTRADICTION — rowed at `L-88` | **FIELD:** the complexity band, `labelBands.js:130-161`, against the `foodSecurity` label printed on the same page. | [archivist's reading] Nothing new at the writer's grain: `L-88` rows the same defect on the same citation and hands back the permission that governs ("write the trade the band names WITHOUT contradicting the food line beside it"). | — |
+| NF-7 | `generalStateProse.js:820-826` vs `:1139-1147` — DS-GEN-5's arrival scene asserts that all roads "end in the same square" keyed on ROUTE alone, while DS-GEN-13 can resolve NO-MARKET on the same town. | CONTRADICTION — rowed at `L-73` | **FIELD:** DS-GEN-5's arrival scene, `generalStateProse.js:820-826`, keyed on ROUTE alone, against DS-GEN-13's NO-MARKET arm on the same town, `:1139-1147`. | [archivist's reading] Nothing new at the writer's grain: `L-73` rows this exactly, on both citations, and its permission governs ("write arrivals and their destination without minting a market the market read denies"); `A-20`'s KEPT half says the same at the alias grain. | — |
+| NF-8 | `resourceGenerator.js:140`,`:155-181` with `entities.js:228-232` — on the exploitation lens `{institution}` fills `Mill` from the STATIC catalog row, naming a building the town's printed roster does not carry (and the `food` tag fully exploits a grain chain off a Tavern plus an Ale house). | CONTRADICTION — rowed at `L-30` (which points here: "see newFindings") | **FIELD:** `{institution}` on the exploitation lens (`processingInstitutions[0]`; `resourceGenerator.js:140`, `:155-181`) and the `food` tag backfill (`entities.js:228-232`). | [archivist's reading] Nothing is handed back and nothing new is taken away at the writer's grain: the fill is fired by a slot, not by a writer, and the row is already carried at `L-30` (CONTRADICTION, KEPT, with the refuter told to fail it). It is a wiring finding for the resource desk. | — |
+| ⚠ NEW BAR · NF-9 | `warStatus.js:333-335` — `occupiedSettlements(...).occupier` falls back to the literal string `'occupation authority'`, which renders in prose as a proper NAME for a body the world does not carry. | CONTRADICTION — **rowed nowhere**: `L-131` carries the fallback in its old-law cell and STRUCK it as one of "the phrase-reader caveats" | **FIELD:** `occupiedSettlements(...).occupier`, `warStatus.js:333-335`, whose fallback is the literal string `'occupation authority'`. `L-131`'s own citation is a different file (`occupationStatus.js:54-64`), and its KEPT half reaches only the resistance reading. | [archivist's reading] **MAY NO LONGER** treat "occupation authority" as the NAME of an occupying body, or build a named body out of it: it is the engine's fallback string for a body the world does not carry, and it renders in prose as a proper name. This NARROWS `L-131`, whose SPLIT struck "the phrase-reader caveats" — the half that carried this very fallback — and whose surviving permission ("write quiet that is not peace") says nothing about it; and it narrows `A-27`'s large strike, which frees the crown, the realm and the border country but was never asked about an engine-minted occupier's name. | — |
+| NF-10 | `stressFactions.js:211-241` with `defenseDisplay.js:25-42` — a poor town under migration pressure mints a `Departure Committee` (emigration) while the stress summary speaks of arrivals and the Defense tab posture reads `MIGRATION SURGE` over it: three surfaces, two directions, one record. | CONTRADICTION — rowed at `A-29`, and the posture half at `L-57` | **FIELD:** the minted faction `Departure Committee` (`stressFactions.js:211-241`) against the stress summary's arrivals and the Defense tab posture `MIGRATION SURGE` (`defenseDisplay.js:25-42`). | [archivist's reading] Nothing new at the writer's grain: `A-29` rows the direction ("arrivals where the record minted a `Departure Committee` … contradicts the faction row") and hands back "the direction the record carries"; `L-57` rows the posture half (`MIGRATION SURGE` read as inflow). The finding's contribution is that THREE surfaces carry the collision, not two. | — |
