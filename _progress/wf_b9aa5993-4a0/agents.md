@@ -1,4 +1,4 @@
-# wf_b9aa5993-4a0 — per-agent progress, 2026-09-12 01:44:03
+# wf_b9aa5993-4a0 — per-agent progress, 2026-09-12 01:49:41
     - `addd4fc66` ? · DONE · transcript 09-11 15:37 609 KB · 39 tool calls · files: skeleton.md, skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--economic-su
     - `a9316f3de` MARKER Economic Survival: WEAK · DONE · transcript 09-11 15:35 540 KB · 30 tool calls · files: "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--economic-survival-weak/skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--economic-su
     - `ad9a7c83a` MARKER Economic Survival: CRITICAL · DONE · transcript 09-11 15:36 658 KB · 42 tool calls · files: def2-block.txt, skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--economic-su
@@ -158,4 +158,4 @@
     - `aa676056a` CURER Disasters & Famine: granary, NO medical provision r1 · FAILED · transcript 09-11 23:40 592 KB · 27 tool calls
     - `a66d25f94` CURER Disasters & Famine: NO reserves, hospital present r1 · FAILED · transcript 09-11 23:36 546 KB · 32 tool calls · files: annex-HEAD.md, pool-base.txt, "$D/cure-round-1.md
     - `a26db2a81` CURER Disasters & Famine: NO reserves, NO medical provision r1 · FAILED · transcript 09-11 23:37 547 KB · 31 tool calls
-    - `a9deceac3` JUDGE r2 · IN FLIGHT · transcript 09-12 01:43 1002 KB · 25 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
+    - `a9deceac3` JUDGE r2 · IN FLIGHT · transcript 09-12 01:48 1097 KB · 29 tool calls · last: Bash cat > /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4ed79a2b-6cd2-45cf-ab97-83cdad49c30b/sc
