@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-11 23:34:02 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-11 23:39:49 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = 3706c6df7 §919.2: the OPUS CHAIR MANUAL amended — the refuter and re-refuter seat is OPUS at the 
 
@@ -215,7 +215,7 @@ stat: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-
 - **L-PROBE-2 (chair)**: cheap /6 tips · full:  · bracket: 
 ## REWRITE 8b PACKETS (rewrite/DS-DEF-n/<pool>/: skeleton · draft-round-N · refine · kept · refute* · cure-round-N · cured-round-N; JUDGMENT.md / JUDGMENT-cure.md per block; the entailment + referent tables)
 - DS-DEF-11: pools 5 · skeleton 5 · draft 5 · refine 5 · kept 5 · refute 13 · cure 10 · cured 10 · JUDGMENT yes · JUDGMENT-cure yes
-- DS-DEF-2: pools 26 · skeleton 26 · draft 36 · refine 26 · kept 26 · refute 32 · cure 23 · cured 0 · JUDGMENT yes · JUDGMENT-cure no
+- DS-DEF-2: pools 26 · skeleton 26 · draft 36 · refine 26 · kept 26 · refute 32 · cure 24 · cured 0 · JUDGMENT yes · JUDGMENT-cure no
 - entailment: surveys 6 · refutes 6 · ENTAILMENT-TABLE.draft.md 09-11 06:07 346945 B · referent surveys 6 · referent refutes 6 · REFERENT-TABLE.draft.md 09-11 11:01 285943 B
 - HOLD-VITEST absent · runner count 0
 
@@ -232,7 +232,7 @@ json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
 - LAST-RUNS: tolkien r7-not-launched/(none — nothingToRun 17:26), kay r8/wf_d76e605d-6d1, leguin r11/wf_49ef9b66-2e6, wolfe r8/wf_8cd21474-a7b, martin r8/wf_0cd91522-1ce, hobb r7/wf_255b6391-7fb, dnd r13/wf_2c525e43-1f2, ai r12/wf_6dd3b009-2b0, dnd_r13 r13/wf_2c525e43-1f2, leguin_r11 r11/wf_49ef9b66-2e6, dnd_r14 r14/
 
 ## WORKFLOW RUNS of chair session 4ed79a2b-6cd2-45cf-ab97-83cdad49c30b — PER AGENT, PER LANE (owner 09-11: save progress per agent per lane; a run dies with the session, its journal + the packets + the dock commits are the checkpoint; journals mirrored under $SC/_progress/<wf>/)
-- **wf_b9aa5993-4a0** (mtime 09-11 23:31): agent calls 158 (132 distinct) · DONE 123 · FAILED (not retried) 0 · RETRIED (superseded attempts) 23 · IN FLIGHT 12 — mirror `_progress/wf_b9aa5993-4a0/`
+- **wf_b9aa5993-4a0** (mtime 09-11 23:34): agent calls 159 (133 distinct) · DONE 125 · FAILED (not retried) 4 · RETRIED (superseded attempts) 23 · IN FLIGHT 7 — mirror `_progress/wf_b9aa5993-4a0/`
     - `addd4fc66` ? · DONE · transcript 09-11 15:37 609 KB · 39 tool calls · files: skeleton.md, skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--economic-su
     - `a9316f3de` MARKER Economic Survival: WEAK · DONE · transcript 09-11 15:35 540 KB · 30 tool calls · files: "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--economic-survival-weak/skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--economic-su
     - `ad9a7c83a` MARKER Economic Survival: CRITICAL · DONE · transcript 09-11 15:36 658 KB · 42 tool calls · files: def2-block.txt, skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--economic-su
@@ -385,12 +385,13 @@ json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
     - `ad5fe5115` CURER Internal Security: no legal infrastructure r1 · DONE · transcript 09-11 23:30 535 KB · 36 tool calls · files: cure-round-1.md, $S/base13.txt, $S/new13.txt, $S/new13b.txt · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--internal-se
     - `a166dccda` CURER Economic Survival: STRONG r1 · DONE · transcript 09-11 23:28 375 KB · 23 tool calls · files: "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--economic-survival-strong/cure-round-1.md, annex-head.txt, packet-rows.txt · result: {"dir": "ds-def-2--economic-survival-strong", "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scr
     - `af7ffe36b` CURER Economic Survival: ADEQUATE r1 · DONE · transcript 09-11 23:31 611 KB · 35 tool calls · files: cure-round-1.md, annex_rows.txt, cure_rows.txt, cure_text.txt · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--economic-su
-    - `a93a30874` CURER Economic Survival: WEAK r1 · IN FLIGHT · transcript 09-11 23:33 429 KB · 28 tool calls · files: annex-HEAD.md, rows-seed.txt, "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--economic-survival-weak/cure-round-1.md · last: Bash F="/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
-    - `a9abcdcd5` CURER Economic Survival: CRITICAL r1 · IN FLIGHT · transcript 09-11 23:30 334 KB · 20 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchp
-    - `a22ef1775` CURER Disasters & Famine: granary AND hospital r1 · IN FLIGHT · transcript 09-11 23:34 363 KB · 22 tool calls · files: cure-round-1.md, annex_base.txt, cure_rows.txt · last: Bash SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
-    - `a627a83cd` CURER Disasters & Famine: granary AND parish care only r1 · IN FLIGHT · transcript 09-11 23:33 504 KB · 30 tool calls · files: $POOL/cure-round-1.md · last: Bash POOL=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scr
-    - `aa676056a` CURER Disasters & Famine: granary, NO medical provision r1 · IN FLIGHT · transcript 09-11 23:34 446 KB · 25 tool calls · last: Bash SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
-    - `a66d25f94` CURER Disasters & Famine: NO reserves, hospital present r1 · IN FLIGHT · transcript 09-11 23:34 372 KB · 21 tool calls · files: annex-HEAD.md, pool-base.txt, "$D/cure-round-1.md · last: Bash SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
+    - `a93a30874` CURER Economic Survival: WEAK r1 · DONE · transcript 09-11 23:34 436 KB · 29 tool calls · files: annex-HEAD.md, rows-seed.txt, "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--economic-survival-weak/cure-round-1.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--economic-su
+    - `a9abcdcd5` CURER Economic Survival: CRITICAL r1 · FAILED · transcript 09-11 23:39 521 KB · 21 tool calls · files: cure-round-1.md
+    - `a22ef1775` CURER Disasters & Famine: granary AND hospital r1 · DONE · transcript 09-11 23:34 378 KB · 25 tool calls · files: cure-round-1.md, annex_base.txt, cure_rows.txt · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--disasters-f
+    - `a627a83cd` CURER Disasters & Famine: granary AND parish care only r1 · FAILED · transcript 09-11 23:37 593 KB · 31 tool calls · files: $POOL/cure-round-1.md
+    - `aa676056a` CURER Disasters & Famine: granary, NO medical provision r1 · IN FLIGHT · transcript 09-11 23:34 451 KB · 26 tool calls · last: Bash SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
+    - `a66d25f94` CURER Disasters & Famine: NO reserves, hospital present r1 · FAILED · transcript 09-11 23:36 546 KB · 32 tool calls · files: annex-HEAD.md, pool-base.txt, "$D/cure-round-1.md
+    - `a26db2a81` CURER Disasters & Famine: NO reserves, NO medical provision r1 · FAILED · transcript 09-11 23:37 547 KB · 31 tool calls
 - **wf_2e33aae5-027** (mtime 09-11 15:16): agent calls 68 (56 distinct) · DONE 18 · FAILED (not retried) 32 · RETRIED (superseded attempts) 12 · IN FLIGHT 6 — mirror `_progress/wf_2e33aae5-027/`
     - `a8df09f92` MARKER Beasts & Monsters: plagued, perimeter AND organized force · DONE · transcript 09-11 11:12 801 KB · 43 tool calls · files: "$D/skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--beasts-mons
     - `a2d2b0711` MARKER Beasts & Monsters: plagued, perimeter but NO force to hold it · DONE · transcript 09-11 11:12 667 KB · 27 tool calls · files: "$SC/rewrite/DS-DEF-2/ds-def-2--beasts-monsters-plagued-perimeter-but-no-force-t/skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--beasts-mons
@@ -518,4 +519,4 @@ json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
     - `ad30ac0bb` FOLDER · DONE · transcript 09-11 06:02 1531 KB · 36 tool calls · files: _partD.md, _partE.md, _partF.md, _partG.md · result: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/entailment/ENTAILMENT-TABLE.draft.md
 
 ## PROCESSES: 57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 2.31 2.41 2.30
+load: 1.84 2.15 2.23
