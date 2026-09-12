@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-11 22:01:53 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-11 22:07:54 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -14,6 +14,8 @@
 | ? | other |  | result | 0 | — | — | 02:01:01 |
 | ? | other |  | result | 0 | refine.md | — | 21:44:06 |
 | ? | other |  | in-flight | 0 | — | — | 01:23:58 |
+| ? | other |  | in-flight | 0 | — | — | 02:07:51 |
+| ? | other |  | in-flight | 0 | — | — | 02:07:53 |
 | ? | other |  | failed | 0 | — | — | 21:45:40 |
 | ? | other |  | failed | 0 | — | — | 21:48:44 |
 | ? | other |  | result | 0 | refine.md | — | 01:05:36 |
@@ -36,8 +38,8 @@
 | ? | other |  | result | 0 | — | — | 01:51:15 |
 | ? | other |  | result | 0 | — | — | 19:35:44 |
 | ? | other |  | result | 0 | — | — | 01:37:22 |
-| ? | other |  | in-flight | 0 | — | — | 02:01:44 |
-| ? | other |  | in-flight | 0 | — | — | 02:00:58 |
+| ? | other |  | in-flight | 0 | — | — | 02:07:40 |
+| ? | other |  | result | 0 | — | — | 02:07:11 |
 | ? | other |  | result | 0 | refine.md | — | 00:22:48 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 20:34:56 |
 | ? | other |  | result | 0 | — | — | 01:38:01 |
@@ -54,10 +56,10 @@
 | ? | other |  | result | 0 | — | — | 01:35:52 |
 | ? | other |  | result | 0 | refine.md | — | 21:45:34 |
 | ? | other |  | result | 0 | — | — | 01:50:32 |
-| ? | other |  | in-flight | 0 | — | — | 02:01:49 |
+| ? | other |  | in-flight | 0 | — | — | 02:02:16 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 20:24:44 |
 | ? | other |  | result | 0 | — | — | 20:01:26 |
-| ? | other |  | in-flight | 0 | — | — | 02:01:43 |
+| ? | other |  | result | 0 | — | — | 02:02:18 |
 | ? | other |  | result | 0 | — | — | 19:49:03 |
 | ? | other |  | result | 0 | — | — | 01:08:45 |
 | ? | other |  | in-flight | 0 | — | — | 01:23:58 |
@@ -85,7 +87,7 @@
 | ? | other |  | in-flight | 0 | — | — | 01:23:58 |
 | ? | other |  | result | 0 | — | — | 20:50:10 |
 | ? | other |  | result | 0 | refute-round-2.md | — | 01:46:51 |
-| ? | other |  | in-flight | 0 | — | — | 02:00:47 |
+| ? | other |  | result | 0 | — | — | 02:05:58 |
 | ? | other |  | result | 0 | — | — | 01:41:26 |
 | ? | other |  | result | 0 | refine.md | — | 00:32:07 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 20:39:01 |
@@ -105,7 +107,7 @@
 | ? | other |  | result | 0 | — | — | 20:51:56 |
 | ? | other |  | result | 0 | refine.md | — | 00:28:33 |
 | ? | other |  | result | 0 | refine.md | — | 01:01:22 |
-| ? | other |  | in-flight | 0 | — | — | 02:01:51 |
+| ? | other |  | in-flight | 0 | — | — | 02:04:01 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 20:13:24 |
 | ? | other |  | result | 0 | refine.md | — | 00:46:04 |
 | ? | other |  | result | 0 | — | — | 00:37:41 |
@@ -118,6 +120,7 @@
 | ? | other |  | failed | 0 | — | — | 21:45:41 |
 | ? | other |  | result | 0 | — | — | 21:04:52 |
 | ? | other |  | result | 0 | — | — | 21:18:17 |
+| ? | other |  | in-flight | 0 | — | — | 02:07:10 |
 | ? | other |  | result | 0 | — | — | 02:01:49 |
 | ? | other |  | failed | 0 | — | — | 21:45:40 |
 | ? | other |  | result | 0 | — | — | 19:38:07 |
