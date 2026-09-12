@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-11 20:12:51 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-11 20:18:37 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = 33db59adb §919.1: THE OPUS CHAIR MANUAL — the procedures, the architecture of a block run, the la
 
@@ -230,7 +230,7 @@ json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
 - LAST-RUNS: tolkien r7-not-launched/(none — nothingToRun 17:26), kay r8/wf_d76e605d-6d1, leguin r11/wf_49ef9b66-2e6, wolfe r8/wf_8cd21474-a7b, martin r8/wf_0cd91522-1ce, hobb r7/wf_255b6391-7fb, dnd r13/wf_2c525e43-1f2, ai r12/wf_6dd3b009-2b0, dnd_r13 r13/wf_2c525e43-1f2, leguin_r11 r11/wf_49ef9b66-2e6, dnd_r14 r14/
 
 ## WORKFLOW RUNS of chair session 4ed79a2b-6cd2-45cf-ab97-83cdad49c30b — PER AGENT, PER LANE (owner 09-11: save progress per agent per lane; a run dies with the session, its journal + the packets + the dock commits are the checkpoint; journals mirrored under $SC/_progress/<wf>/)
-- **wf_b9aa5993-4a0** (mtime 09-11 20:08): agent calls 79 (73 distinct) · DONE 50 · FAILED (not retried) 20 · RETRIED (superseded attempts) 3 · IN FLIGHT 6 — mirror `_progress/wf_b9aa5993-4a0/`
+- **wf_b9aa5993-4a0** (mtime 09-11 20:18): agent calls 82 (73 distinct) · DONE 53 · FAILED (not retried) 17 · RETRIED (superseded attempts) 6 · IN FLIGHT 6 — mirror `_progress/wf_b9aa5993-4a0/`
     - `addd4fc66` ? · DONE · transcript 09-11 15:37 609 KB · 39 tool calls · files: skeleton.md, skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--economic-su
     - `a9316f3de` MARKER Economic Survival: WEAK · DONE · transcript 09-11 15:35 540 KB · 30 tool calls · files: "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--economic-survival-weak/skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--economic-su
     - `ad9a7c83a` MARKER Economic Survival: CRITICAL · DONE · transcript 09-11 15:36 658 KB · 42 tool calls · files: def2-block.txt, skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--economic-su
@@ -284,9 +284,9 @@ json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
     - `a06f60c2a` REFINER Beasts & Monsters: frontier, force without a perimeter · DONE · transcript 09-11 17:45 673 KB · 35 tool calls · files: "$D/refine.md, refine.md · result: **Packet:** `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--beasts-
     - `a2a9df843` REFINER Beasts & Monsters: settled, defenses beyond the need · DONE · transcript 09-11 17:44 633 KB · 29 tool calls · files: rows.txt · result: PACKET: `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--beasts-mons
     - `a497553cc` REFINER Beasts & Monsters: settled, nothing organized · RETRIED (a later attempt on the same key runs) · transcript 09-11 17:45 338 KB · 22 tool calls
-    - `a41d708f9` REFINER Invasion & War: walls AND professional garrison · FAILED · transcript 09-11 17:45 276 KB · 13 tool calls · files: refine.md
-    - `a4789f3fd` REFINER Invasion & War: walls with citizen militia · FAILED · transcript 09-11 17:45 287 KB · 11 tool calls
-    - `ab4318a3b` REFINER Invasion & War: walls with NO force · FAILED · transcript 09-11 17:45 146 KB · 2 tool calls
+    - `a41d708f9` REFINER Invasion & War: walls AND professional garrison · RETRIED (a later attempt on the same key runs) · transcript 09-11 17:45 276 KB · 13 tool calls · files: refine.md
+    - `a4789f3fd` REFINER Invasion & War: walls with citizen militia · RETRIED (a later attempt on the same key runs) · transcript 09-11 17:45 287 KB · 11 tool calls
+    - `ab4318a3b` REFINER Invasion & War: walls with NO force · RETRIED (a later attempt on the same key runs) · transcript 09-11 17:45 146 KB · 2 tool calls
     - `a6ec9ff33` REFINER Invasion & War: force with NO walls · FAILED · transcript 09-11 17:45 124 KB · 0 tool calls
     - `a1114efc0` REFINER Invasion & War: militia only · FAILED · transcript 09-11 17:45 124 KB · 0 tool calls
     - `af389434c` REFINER Invasion & War: neither walls nor force · FAILED · transcript 09-11 17:45 124 KB · 0 tool calls
@@ -305,11 +305,14 @@ json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
     - `afa9f06a2` REFINER Disasters & Famine: NO reserves, NO medical provision · FAILED · transcript 09-11 17:45 124 KB · 0 tool calls
     - `a32dd7c6f` GATE · FAILED · transcript 09-11 17:48 105 KB · 0 tool calls
     - `afe3b9b95` REFINER Beasts & Monsters: plagued, perimeter but NO force to hold it · IN FLIGHT · transcript 09-11 20:09 388 KB · 21 tool calls · files: "$D/refine.md · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
-    - `ab7eaf0f0` REFINER Beasts & Monsters: plagued, NO perimeter and NO force · IN FLIGHT · transcript 09-11 20:12 335 KB · 21 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
-    - `a3289dd4c` REFINER Beasts & Monsters: frontier, credible deterrence · IN FLIGHT · transcript 09-11 20:11 368 KB · 18 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
-    - `abf8d9703` REFINER Beasts & Monsters: frontier, force without a perimeter · IN FLIGHT · transcript 09-11 20:11 319 KB · 13 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
-    - `a5510d82f` REFINER Beasts & Monsters: settled, defenses beyond the need · IN FLIGHT · transcript 09-11 20:09 307 KB · 16 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchp
+    - `ab7eaf0f0` REFINER Beasts & Monsters: plagued, NO perimeter and NO force · DONE · transcript 09-11 20:18 621 KB · 43 tool calls · files: faces.txt · result: The packet is complete and verified. All twelve wordings re-scanned mechanically after the edits.  **Packet:** `/private/tmp/claude-502/-Users-cstokes-Desktop-s
+    - `a3289dd4c` REFINER Beasts & Monsters: frontier, credible deterrence · DONE · transcript 09-11 20:17 563 KB · 32 tool calls · files: block.txt · result: The packet is complete and independently verified.  **Packet:** `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b
+    - `abf8d9703` REFINER Beasts & Monsters: frontier, force without a perimeter · DONE · transcript 09-11 20:15 450 KB · 23 tool calls · result: PACKET: `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--beasts-mons
+    - `a5510d82f` REFINER Beasts & Monsters: settled, defenses beyond the need · IN FLIGHT · transcript 09-11 20:17 587 KB · 26 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
     - `a2b96dd0a` REFINER Beasts & Monsters: settled, nothing organized · IN FLIGHT · transcript 09-11 20:11 495 KB · 32 tool calls · last: Bash SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
+    - `ae8eaabbf` REFINER Invasion & War: walls AND professional garrison · IN FLIGHT · transcript 09-11 20:17 457 KB · 22 tool calls · last: Bash P=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratc
+    - `ad6cc5eb0` REFINER Invasion & War: walls with citizen militia · IN FLIGHT · transcript 09-11 20:18 240 KB · 10 tool calls · last: Bash sed -n '1,400p' /Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/4ed79a2b-6cd2-45cf-ab
+    - `acedfeac7` REFINER Invasion & War: walls with NO force · IN FLIGHT · transcript 09-11 20:18 240 KB · 10 tool calls · last: Bash SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
 - **wf_2e33aae5-027** (mtime 09-11 15:16): agent calls 68 (56 distinct) · DONE 18 · FAILED (not retried) 32 · RETRIED (superseded attempts) 12 · IN FLIGHT 6 — mirror `_progress/wf_2e33aae5-027/`
     - `a8df09f92` MARKER Beasts & Monsters: plagued, perimeter AND organized force · DONE · transcript 09-11 11:12 801 KB · 43 tool calls · files: "$D/skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--beasts-mons
     - `a2d2b0711` MARKER Beasts & Monsters: plagued, perimeter but NO force to hold it · DONE · transcript 09-11 11:12 667 KB · 27 tool calls · files: "$SC/rewrite/DS-DEF-2/ds-def-2--beasts-monsters-plagued-perimeter-but-no-force-t/skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--beasts-mons
@@ -437,4 +440,4 @@ json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
     - `ad30ac0bb` FOLDER · DONE · transcript 09-11 06:02 1531 KB · 36 tool calls · files: _partD.md, _partE.md, _partF.md, _partG.md · result: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/entailment/ENTAILMENT-TABLE.draft.md
 
 ## PROCESSES: 57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 1.96 2.21 2.16
+load: 2.44 2.36 2.25

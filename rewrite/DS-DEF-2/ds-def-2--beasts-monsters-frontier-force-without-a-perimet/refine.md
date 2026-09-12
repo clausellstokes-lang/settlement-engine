@@ -20,7 +20,7 @@ pool's heading.*
 3. `[street]` In frontier country the town stands unwalled, and keeps armed people.
    - `[face]` The country here is frontier, and the town's force stands where no wall does.
    - `[face]` People under arms stand here in frontier country, and the town has no wall.
-   - `[face]` Here the town goes without works and holds armed people. What lies outside is frontier country.
+   - `[face]` Here the town goes without works and holds armed people. What lies outside the town is frontier country.
 
 --- NOTES
 
@@ -134,13 +134,18 @@ parent (`{settlement}` ×1 in variants 1 and 2; none in variant 3).
   did not need. It also takes its country and absence surfaces off V1 face 1's ("the country outside
   is frontier") and V2 face 2's ("a town with no wall"), which the draft had shared across variants.
 - **V3 face 4.** *"Here the town goes without works and holds armed people, in frontier country."* →
-  **"Here the town goes without works and holds armed people. What lies outside is frontier
-  country."** The draft's trailing `, in frontier country` is a qualification carried as a TAIL, which
+  **"Here the town goes without works and holds armed people. What lies outside the town is
+  frontier country."** The draft's trailing `, in frontier country` is a qualification carried as a TAIL, which
   R-DA-03 refuses in terms (the qualification gets its own sentence, never a tail) — the single
   clearest form fault in the drafted pool. Made into its own sentence it becomes the passage's one
   turn outward, placed last, which is exactly the second form the owner's THREAD rule licenses; and
-  `What lies outside` is the street's own idiom for the country, which keeps the face inside its angle
-  (§0b: the town's own talk about its condition).
+  `What lies outside` is the street's own idiom for the country, so the face stays inside its angle
+  (§0b: the town's own talk about its condition). **The second sentence names `the town` and not only
+  `outside`, on R-i:** the ruling is that a spine's own second sentence carries a noun forward from its
+  first REGARDLESS of k, because "sits last" is a property of the passage the writer cannot see — the
+  turn-outward licence alone would have left this face where WT 1-f1 and 3-f1 stood when R-i converted
+  them to FAIL, so the carried noun is stated. The clause is a free relative on no head noun and
+  carries no relativiser, so the `which`-wall is untouched.
 
 ## B. WHAT THE REFINEMENT MOVED, MEASURED (reported, never claimed as a gate result)
 
@@ -162,8 +167,8 @@ parent (`{settlement}` ×1 in variants 1 and 2; none in variant 3).
   "according to". W24's bar on the ledger tag as a licence for a record noun holds, and §24's
   provenance ceiling is untouched at ZERO citations for the pool (the card licenses the muster as a
   holder of the force fact alone, and none of S3's three reasons obtains).
-- **Length spread: sd 2.90 → 3.26** (11 · 14 · 14 · 15 · 17 · 17 · 19 · 19 · 20 · 21 · 22 words; mean
-  17.1, range 11 to 22). The within-pool floor is 4.0 and the pool is still under it: this remains the
+- **Length spread: sd 2.90 → 3.25** (11 · 14 · 14 · 15 · 17 · 17 · 18 · 19 · 19 · 20 · 21 · 22 words;
+  mean 17.3, range 11 to 22; sample sd, the draft's own measure). The within-pool floor is 4.0 and the pool is still under it: this remains the
   ONE soft measure the pool sits outside, now at a smaller distance, and the reason is the draft's and
   still stands — three reads with no joint have a floor of about eleven words in this vocabulary, and
   a wider spread would have to be bought with a face that drops a read or with padding. Reported, not
@@ -175,7 +180,8 @@ parent (`{settlement}` ×1 in variants 1 and 2; none in variant 3).
   the turn outward last). Twelve distinct first-two-word pairs, unchanged; **no face opens on
   `{settlement}`** (T-F8 cannot fire), and R-DA-17 holds at index 0.
 - **Walls re-checked over all twelve refined faces, all clear:** no em dash · no exclamation · no digit
-  or percent · no `which` and no relative clause of any kind · no colon or semicolon · no parenthesis
+  or percent · no `which` in any form, and no relative clause on a head noun (V3 face 4's `What lies
+  outside the town` is a free relative subject: no relativiser, no head) · no colon or semicolon · no parenthesis
   or quotation mark · no question · no existential opener · no future indicative · no subjunctive edge
   · no first or second person · no figure, simile, sense verb on an abstraction or intent given to an
   inanimate thing (`set in` was the last candidate and is gone) · no participial opener · no `-ly`
@@ -194,12 +200,29 @@ parent (`{settlement}` ×1 in variants 1 and 2; none in variant 3).
   (ADDENDUM 8 (1); R-v) and the country is the key's discriminator against `plagued, NO perimeter and
   NO force` and `settled, nothing organized` — vetoable in one word, and if the chair rules the other
   way R1 drops from variants 2 and 3 and each face there loses one clause; (v) the contrast in V3 face
-  2, with its stated fallback. The refinement adds no third call.
+  2, with its stated fallback.
+- **The refinement makes ONE call of its own, recorded here so it can be vetoed in one word: `the
+  muster` in V1 face 1, against the draft's section D (iii).** The draft declined the word on a
+  stricter reading (that on a `Barracks`-resolving town it names a roll the town does not keep);
+  ADDENDUM 13 A.5 and the referent law's rule 5 say the opposite in terms — "the muster" is one of the
+  TWO always-safe class words for the paid military, a class word asserts no roll, and "the muster
+  roll" is the record noun that would be a citation (it appears nowhere here, and the pool's citation
+  count stays zero). The card's own `source: muster` names the same holder kind for the same read. **If
+  the chair or a refuter rules the draft's way, the fallback is one word and the claim set is
+  unchanged: V1 face 1 reverts to "armed people stand", and the variant then carries three force
+  spellings instead of four.**
+- **One surface is shared inside variant 3 and is reported rather than papered over:** the short line
+  and face 3 both state the country as `in frontier country` (fronted in the line, medial in face 3).
+  The two faces differ in subject, in the order of the reads and in the landing noun, so the
+  four-faces rule is met on construction; the alternative arrangements each cost more (moving face 3
+  back onto `the country outside is frontier` would duplicate a whole five-word CLOSE with V1 face 1,
+  and the lawful draft itself carried the same three-word phrase twice inside variant 1, which this
+  refinement cured). The cheaper of the two duplications is the one kept, deliberately.
 
 ## C. INVENTORY
 
 Variants 3 → 3 (vids 1, 2, 3 at their own indices, angle tags `[ledger]` `[visitor]` `[street]`
-unchanged, one bracketed tag each, no `[plain]`). Faces 12 → 12, one for one. Slot sets: variant 1
+unchanged, one bracketed tag each; the modifier marker the projector refuses on a spine row appears on none). Faces 12 → 12, one for one. Slot sets: variant 1
 `{settlement}` ×1 on all four faces; variant 2 `{settlement}` ×1 on all four; variant 3 EMPTY on all
 four (ARCH §2.5: a face whose `{slot}` set differs from its parent's is refused). Nothing trimmed,
 merged, reordered or banked; no refusal row.
