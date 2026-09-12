@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-11 20:47:37 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-11 20:51:38 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -138,18 +138,18 @@
 | ? | other |  | failed | 0 | — | — | 21:45:41 |
 | ? | other |  | failed | 0 | — | — | 21:45:41 |
 | ? | other |  | failed | 0 | — | — | 21:45:42 |
-| ? | other |  | in-flight | 0 | — | — | 00:39:41 |
+| ? | other |  | in-flight | 0 | refine.md | — | 00:50:29 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 20:42:32 |
 | ? | other |  | result | 0 | — | — | 20:51:56 |
 | ? | other |  | result | 0 | refine.md | — | 00:28:33 |
-| ? | other |  | in-flight | 0 | — | — | 00:47:33 |
+| ? | other |  | in-flight | 0 | — | — | 00:48:17 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 20:13:24 |
 | ? | other |  | result | 0 | refine.md | — | 00:46:04 |
 | ? | other |  | result | 0 | — | — | 00:37:41 |
 | ? | other |  | result | 0 | — | — | 20:02:45 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 20:22:52 |
 | ? | other |  | result | 0 | — | — | 00:23:27 |
-| ? | other |  | in-flight | 0 | — | — | 00:40:34 |
+| ? | other |  | in-flight | 0 | — | — | 00:50:38 |
 | ? | other |  | result | 0 | — | — | 19:38:34 |
 | ? | other |  | result | 0 | — | — | 20:46:10 |
 | ? | other |  | failed | 0 | — | — | 21:45:41 |
@@ -160,7 +160,7 @@
 | ? | other |  | result | 0 | draft-round-2.md | — | 21:11:32 |
 | ? | other |  | result | 0 | refine.md | — | 00:23:11 |
 | ? | other |  | failed | 0 | — | — | 21:45:42 |
-| ? | other |  | in-flight | 0 | — | — | 00:39:54 |
+| ? | other |  | in-flight | 0 | refine.md | — | 00:51:23 |
 | ? | other |  | result | 0 | — | — | 21:11:27 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 20:08:40 |
 | ? | other |  | failed | 0 | — | — | 21:45:42 |
