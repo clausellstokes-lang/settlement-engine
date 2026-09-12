@@ -1,0 +1,20 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 27,
+ "firstTs": "2026-09-12T06:56:47.450Z",
+ "lastTs": "2026-09-12T06:57:08.738Z",
+ "tools": {
+  "Bash": 5
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "I'll start by reading the brief's ADDENDUM 14 and the addenda it names.",
+ "run": "wf_c1990c61-ad7",
+ "agent": "a846ad521eee1f316",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/4ed79a2b-6cd2-45cf-ab97-83cdad49c30b/subagents/workflows/wf_c1990c61-ad7/agent-a846ad521eee1f316.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}

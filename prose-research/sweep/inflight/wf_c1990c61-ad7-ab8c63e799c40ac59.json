@@ -1,0 +1,20 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 30,
+ "firstTs": "2026-09-12T06:56:47.450Z",
+ "lastTs": "2026-09-12T06:57:09.862Z",
+ "tools": {
+  "Bash": 6
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "I'll start by reading the brief's addenda, then the engine in the dock.",
+ "run": "wf_c1990c61-ad7",
+ "agent": "ab8c63e799c40ac59",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/4ed79a2b-6cd2-45cf-ab97-83cdad49c30b/subagents/workflows/wf_c1990c61-ad7/agent-ab8c63e799c40ac59.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}
