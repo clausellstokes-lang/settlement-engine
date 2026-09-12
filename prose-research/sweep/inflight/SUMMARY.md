@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-12 07:16:50 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-12 07:20:52 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -16,7 +16,7 @@
 | ? | other |  | result | 0 | — | — | 08:00:46 |
 | ? | other |  | result | 0 | skeleton.md | — | 09:53:48 |
 | ? | other |  | result | 0 | — | — | 09:50:38 |
-| ? | other |  | in-flight | 0 | — | — | 11:15:23 |
+| ? | other |  | result | 0 | draft-round-2.md | — | 11:20:19 |
 | ? | other |  | result | 0 | — | — | 10:41:03 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 10:51:42 |
 | ? | other |  | result | 0 | skeleton.md | — | 09:32:41 |
@@ -25,7 +25,7 @@
 | ? | other |  | result | 0 | — | — | 10:54:24 |
 | ? | other |  | result | 0 | skeleton.md | — | 09:04:37 |
 | ? | other |  | result | 0 | — | — | 10:55:54 |
-| ? | other |  | in-flight | 0 | — | — | 11:16:03 |
+| ? | other |  | in-flight | 0 | — | — | 11:18:52 |
 | ? | other |  | result | 0 | — | — | 10:24:16 |
 | ? | other |  | result | 0 | skeleton.md | — | 09:08:02 |
 | ? | other |  | result | 0 | — | — | 09:24:17 |
@@ -34,8 +34,9 @@
 | ? | other |  | result | 0 | — | — | 10:15:54 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 10:12:54 |
 | ? | other |  | result | 0 | — | — | 10:14:32 |
-| ? | other |  | in-flight | 0 | — | — | 11:16:31 |
+| ? | other |  | in-flight | 0 | — | — | 11:20:50 |
 | ? | other |  | result | 0 | — | — | 09:28:11 |
+| ? | other |  | in-flight | 0 | — | — | 11:20:01 |
 | ? | other |  | result | 0 | — | — | 10:40:17 |
 | ? | other |  | result | 0 | — | — | 10:30:21 |
 | ? | other |  | result | 0 | — | — | 10:55:10 |
@@ -44,16 +45,17 @@
 | ? | other |  | result | 0 | — | — | 09:36:55 |
 | ? | other |  | result | 0 | skeleton.md | — | 09:48:36 |
 | ? | other |  | result | 0 | — | — | 10:15:54 |
-| ? | other |  | in-flight | 0 | — | — | 11:16:37 |
+| ? | other |  | in-flight | 0 | — | — | 11:17:15 |
 | ? | other |  | result | 0 | — | — | 10:28:25 |
 | ? | other |  | result | 0 | skeleton.md | — | 09:50:52 |
-| ? | other |  | in-flight | 0 | — | — | 11:16:44 |
+| ? | other |  | result | 0 | — | — | 11:18:50 |
 | ? | other |  | result | 0 | — | — | 10:55:53 |
 | ? | other |  | result | 0 | — | — | 10:24:57 |
 | ? | other |  | result | 0 | — | — | 10:13:43 |
 | ? | other |  | result | 0 | — | — | 10:03:12 |
 | ? | other |  | result | 0 | skeleton.md | — | 09:40:57 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 10:17:15 |
+| ? | other |  | in-flight | 0 | — | — | 11:20:51 |
 | ? | other |  | result | 0 | — | — | 09:24:57 |
 | ? | other |  | result | 0 | — | — | 10:31:07 |
 | ? | other |  | result | 0 | skeleton.md | — | 09:37:02 |
@@ -64,7 +66,7 @@
 | ? | other |  | result | 0 | — | — | 09:11:38 |
 | ? | other |  | result | 0 | skeleton.md | — | 09:43:02 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 10:25:48 |
-| ? | other |  | in-flight | 0 | — | — | 11:16:48 |
+| ? | other |  | result | 0 | — | — | 11:17:08 |
 | ? | other |  | result | 0 | — | — | 09:08:38 |
 | ? | other |  | result | 0 | skeleton.md | — | 09:10:45 |
 | ? | other |  | result | 0 | — | — | 10:46:27 |
@@ -73,6 +75,7 @@
 | ? | other |  | result | 0 | — | — | 10:37:02 |
 | ? | other |  | result | 0 | — | — | 09:56:07 |
 | ? | other |  | result | 0 | skeleton.md | — | 09:22:13 |
+| ? | other |  | in-flight | 0 | — | — | 11:19:39 |
 | ? | other |  | result | 0 | items-W11-W19.md | — | 08:19:37 |
 | ? | other |  | result | 0 | — | — | 08:24:17 |
 | ? | other |  | result | 0 | items-ET-3-4.md | — | 08:25:36 |
