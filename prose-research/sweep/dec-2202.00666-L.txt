@@ -1,0 +1,1597 @@
+                                                                             Locally Typical Sampling
+
+                                                     Clara Meister1 Tiago Pimentel2 Gian Wiher1 Ryan Cotterell1,2
+                                                                  1
+                                                                    ETH Zürich 2 University of Cambridge
+                                                             clara.meister@inf.ethz.ch tp472@cam.ac.uk
+                                                         gian.wiher@inf.ethz.ch ryan.cotterell@inf.ethz.ch
+
+
+
+
+                                                             Abstract                        et al., 2022). Yet when used as text generators,
+                                                                                             their performance is far from perfect. One of the
+                                            Today’s probabilistic language generators
+                                                                                             largest determinants of the generated text’s quality
+
+
+
+
+arXiv:2202.00666v6 [cs.CL] 5 Jun 2025
+                                            fall short when it comes to producing
+                                            coherent and fluent text despite the fact        is the choice of decoding strategy—i.e., the
+                                            that the underlying models perform well          decision rule used to extract strings from a model.
+                                            under standard metrics, e.g., perplexity. This   Perhaps surprisingly, for many language generation
+                                            discrepancy has puzzled the language genera-     tasks, decoding strategies which aim to find the
+                                            tion community for the last few years. In this   highest-probability strings produce text that is
+                                            work, we posit that the abstraction of natural   undesirable (Holtzman et al., 2020; See et al.,
+                                            language generation as a discrete stochastic     2019; Eikema and Aziz, 2020; Zhang et al., 2021;
+                                            process—which allows for an information-
+                                                                                             DeLucia et al., 2021). For instance, Stahlberg and
+                                            theoretic analysis—can provide new insights
+                                            into the behavior of probabilistic language      Byrne (2019) report that in their neural machine
+                                            generators, e.g., why high-probability texts     translation experiments, the highest-probability
+                                            can be dull or repetitive. Humans use            string is usually the empty string. On the other
+                                            language as a means of communicating             hand, stochastic strategies, which take random
+                                            information, aiming to do so in a simul-         samples from the model, often lead to text with
+                                            taneously efficient and error-minimizing         better qualitative properties (Fan et al., 2018;
+                                            manner; in fact, psycholinguistics research
+                                                                                             Holtzman et al., 2020; Basu et al., 2021). However,
+                                            suggests humans choose each word in a
+                                            string with this subconscious goal in mind.      stochastic strategies still have a host of other
+                                            We formally define the set of strings that       problems, while not entirely dispensing with those
+                                            meet this criterion: those for which each        seen in maximization-based approaches.1
+                                            word has an information content close to            At first glance, it is unintuitive that high-
+                                            the expected information content, i.e., the      probability strings are often neither desirable nor
+                                            conditional entropy of our model. We then        human-like. Due to this pathology, a number of
+                                            propose a simple and efficient procedure
+                                                                                             works have concluded that there must be faults
+                                            for enforcing this criterion when generating
+                                            from probabilistic models, which we call         in the training objective or architecture of the
+                                            locally typical sampling. Automatic and          probabilistic models behind language generators
+                                            human evaluations show that, in comparison       (Welleck et al., 2020; Guan et al., 2020; Li et al.,
+                                            to nucleus and top-k sampling, locally typi-     2020, inter alia). Yet, this conclusion is at odds
+                                            cal sampling offers competitive performance      with these models’ performance in terms of other
+                                            (in both abstractive summarization and           metrics. The fact that modern models can place
+                                            story generation) in terms of quality while
+                                                                                             high probability on held-out text suggests that they
+                                            consistently reducing degenerate repetitions.
+                                                                                             provide good estimates (in at least some aspects)
+                                                                                             of the probability distribution underlying human
+                                        1   Introduction                                     language. We posit that looking at language
+                                        Modern probabilistic models have repeatedly          generation through an information-theoretic lens
+                                        demonstrated their prowess at modeling natural          1
+                                                                                                  While maximization-based strategies can produce text
+                                        language, placing high probability on held-out       which is generic or degenerate, stochastic strategies occasion-
+                                        corpora from many different domains (Brown           ally produce nonsensical text. Both types of strategies tend
+                                        et al., 2020; Hoffmann et al., 2022; Chowdhery       to eventually fall into repetitive loops.
+may shed light on this paradox.                                   and story generation, we observe that, compared
+   Communication via natural language can intu-                   to nucleus and top-k sampling: (i) locally typical
+itively be cast in information-theoretic terms. In-               sampling reduces the number of degenerate repeti-
+deed, there is a long history of studying language                tions, giving a REP value (Welleck et al., 2020) on
+through the lens of information theory (Shannon,                  par with human text, and (ii) text generated using
+1948, 1951; Hale, 2001; Piantadosi et al., 2011;                  typical sampling is generally closer in quality to
+Pimentel et al., 2020, inter alia). In this paradigm,             that of human text.3
+linguistic strings are messages used to convey in-
+formation, and their information content can be                   2       Two Views of Language Modeling
+quantified as a function of their probability of be-              In this work, we discuss language models4 in
+ing uttered—often driven by context. Assuming                     an information-theoretic light. Our first step
+that humans use language in order to transmit infor-              towards this goal is to re-frame their presentation.
+mation in an efficient yet robust manner (Zaslavsky               Concretely, we put forth that there are actually
+et al., 2018; Gibson et al., 2019), the subset of                 two lenses through which we can view language
+strings typically used by humans should encode                    modeling productively. Under the traditional lens,
+information at some (perhaps near-optimal) rate.2                 we can think of a language model as a distribution
+In fact, prior works studying the uniform informa-                over full strings: a language model constitutes
+tion density hypothesis (Levy and Jaeger, 2007;                   the distribution of a single string-valued random
+Mahowald et al., 2013) empirically observed this                  variable. Under an alternative lens, we can think of
+property in humans’ use of natural language.                      a language model as a discrete stochastic process:
+   These insights lead us to re-think what it means               a collection of indexed random variables. We
+to be a probabilistic language generator. First, we               compare and contrast these views formally, and
+contend that language generators, in some cases,                  then show how to use the language process view
+can be thought of as discrete stochastic processes.               to derive a new sampling algorithm in §5.
+This in turn, allows us to cleanly define typicality
+(and the typical set) for these processes. We ar-                 2.1      A Single String-Valued Random Variable
+gue, however, that due to discrepancies between                   We codify the traditional view of language mod-
+the model behind these generators and the true                    eling in the following definition. Let V be an
+distribution over natural language strings, directly              alphabet—a non-empty, finite set.
+sampling from the typical set is not a good idea.                 Definition 2.1 (Language Model). A language
+Indeed, for language generators that do not use                   model p is a probability distribution over all strings
+an end-of-string (EOS) state, this is exactly what                y ∈ V ∗ .5 Under this view, we can think of a lan-
+is done by ancestral sampling—a decoding strat-                   guage model as describing a single V ∗ -valued ran-
+egy not known for providing high-quality text. In-                dom variable.
+spired by research on human sentence processing,
+                                                                     Under Definition 2.1, it is common to express
+we then define the more restrictive notion of local
+                                                                  a language model in the following factorized form
+typicality, and argue that if we want text generated
+from a model to be “human-like,” we should per-                                                      T
+                                                                                                     Y
+haps enforce this information-theoretic criterion in                        p(y = y1 · · · yT ) =          p(yt | y <t )      (1)
+generations ourselves. To this end, we develop a                                                     t=1
+new algorithm, which we call locally typical sam-                                              def
+                                                                  where we define y <t = ⟨y0 , . . . , yt−1 ⟩ with the
+pling. Concretely, we hypothesize that for text to
+                                                                  padding y0 = BOS as a distinguished beginning-
+be perceived as natural, each word should have an
+                                                                  of-string symbol and YT = EOS as a distinguished
+information content close to its expected informa-
+                                                                  end-of-string symbol. Through the chain rule of
+tion content given prior context. When sampling
+                                                                      3
+from probabilistic language generators, we should                       An implementation of typical sampling can be found in
+limit our options to strings that adhere to this prop-            the Hugging Face’s Transformers library (Wolf et al., 2020).
+                                                                      4
+                                                                        Here we use the term language model to refer to any
+erty. In experiments on abstractive summarization                 (valid) probability distribution over natural language strings.
+                                                                  We subsequently specify the necessary conditions for validity.
+   2
+     Information rate may be defined with respect to time (as     Note that this distribution may also be conditioned on an input.
+                                                                      5
+is the case with spoken language) or with respect to a specific         The Kleene closure of a set V is defined as
+                                                                      def S
+linguistic unit, such as a word (as is the case with text).       V∗ = ∞          n
+                                                                            n=0 V .
+probability, we can always factorize a model as in               and Thompson, 1973) if and only if
+Eq. (1). The process which produces such a factor-
+                                                                                       |y|
+ization is called local normalization.6 However,                          X            Y
+                                                                                             p(Yt = yt | Y <t = y <t ) = 1
+with local normalization, we encounter a subtlety:
+                                                                   y∈(V ∗ ⊗{EOS}) t=1
+one has to define each conditional probability p(yt |
+                                                                                                                                 (2)
+y <t ) not over V, but rather over the augmented set
+   def
+V = V ∪ {EOS}, i.e., where we have added the                                          def
+                                                                 where A ⊗ B = {ab | a ∈ A, b ∈ B}.
+distinguished end-of-string symbol EOS. Why? Be-
+                                                                   In words, tightness says that a language process
+cause without EOS, it would be impossible to nor-
+                                                                 must not leak probability mass to infinite strings.
+malize the language model, i.e., have it sum to 1.7
+                                                                 Because a language model must be a (valid)
+                                                                 probability distribution, it must also be tight.
+2.2   A Discrete Stochastic Process
+                                                                 Proposition 2.4. Let Y = {Yt }∞ t=1 be a language
+Interestingly, the factorization in Eq. (1) suggests             process over alphabet V with distribution p and let
+                                                                                               Q|y|
+that we might view language models, not as a
+                                                                          P
+                                                                    def       y∈(V t−1 ⊗{EOS})   i=1 p(Yi =yi |Y <i =y <i )
+                                                                 pt =                     Q|y|                                . Then
+single string-valued random variable, but rather
+                                                                               P
+                                                                                 y∈V t−1     i=1 p(Y i =yi |Y <i =y <i )
+
+as a collection of random variables {Yt }∞  t=1 , i.e.,            Ptight if and only if pt = 1 for some 0 < t < ∞
+                                                                 Y is
+as a discrete stochastic process.8 Under this view,              or ∞ t=1 pt → ∞.
+we arrive at the following definition of what we
+                                                                 Proof. Note that pt is the probability of sampling
+term a language process, to distinguish it from the
+                                                                 EOS at exactly step t given that the history of the
+definition of a language model given above.
+                                                                 string is of length (t − 1).
+Definition 2.2 (Language Process). A language                    • Case 1: Suppose pt = 1 for some 0 < t < ∞.
+process over V is a discrete stochastic process                    Then, Y is clearly tight as no probability mass is
+Y = {Yt }∞      t=1 where each Yt is V-valued.                     leaked to strings beyond length t, where t < ∞.
+The process is described by a distribution p,
+and we denote its conditional distribution as                    • Case 2: Now suppose pt < 1 for all t. In
+p(Yt = yt | Y <t = y <t ) for t > 0. In slight abuse               this case, we have that the probability       of all
+                                                                   infinite-length strings is given by ∞
+                                                                                                        Q
+of notation but out of convention, we take Yt for                                                         t=1 (1 − pt ).
+t ≤ 0 to be BOS, i.e., conditioning p on just BOS                  However, by a standard result Q   (see e.g., Knopp,
+                                                                                                       ∞
+signifies the initial distribution of the process.                 1954, Ch. P∞12),  we  have   that   t=1 (1 − pt ) =
+                                                                   0 ⇐⇒            p
+                                                                               t=1 t   →  ∞,  provided  pt < 1.
+   Definition 2.2 is very generic. In words, it
+just says that a language process is any discrete                Both cases together complete the proof.                          ■
+process where we sample a new word9 given the
+                                                                    We can now see that language processes are
+previously sampled words. The first question that
+                                                                 strictly more general than language models: Eq. (1)
+naturally comes to mind is when the definitions of
+                                                                 shows us that any language model can be written
+a language model and a language process coincide.
+                                                                 as a language process, but Proposition 2.4 shows
+As it turns out, there is a simple answer.
+                                                                 the converse is not necessarily true. Indeed, Propo-
+Definition 2.3 (Tightness). Let Y = {Yt }∞     t=1
+                                                                 sition 2.4 allows us to easily construct a simple lan-
+be a language process over alphabet V with                       guage process (example given below) that cannot
+distribution p. A language process is tight (Booth               be converted to a language model, which motivates
+                                                                 the formalism.
+    6
+      The ubiquity of Eq. (1) has led some authors to defining   Example 2.5. Let V = {a}. Define a language
+language models in the locally normalized form, even though      process Y = {Yt }∞
+globally normalized language models are also perfectly fine                          t=1 over V such that each Yt
+                                                                                                                  1
+to consider (Goyal et al., 2019).                                is distributed according to p(a | y <t ) = 1 − 2t+1
+                                                                                           1
+    7
+      Some authors erroneously omit EOS from their definition.   and p(EOS | y <t ) = 2t+1 . Note that we keep
+However, we require a distinguished symbol EOS to be able        the convention that Yt P = BOS for t ≤ 0, and
+to locally normalize the language model and make it a valid      thus p0 = 0. We have ∞                  1
+                                                                                             t=1 pt = 2 < ∞, so,
+probability distribution.
+    8
+      This process is discrete both in time and in value.
+                                                                 by Proposition 2.4, Y is not a language
+                                                                                                      Q∞ model.
+                                                                 Computing the infinite product          t=1 (1 − pt )
+    9
+      One could just as easily define a language process over
+subwords, morphemes or characters.                               shows Y leaks ≈ .58 to infinite strings.
+Life after EOS? Proposition 2.4 further hints at                  Definition 2.7 (Stationarity). A k-Markov lan-
+the more intuitive difference between language                    guage process Y = {Yt }∞   t=1 over alphabet V with
+models and language processes—what happens af-                    distribution p is stationary if the following holds
+ter EOS? In the traditional definition of a language
+model (Definition 2.1), life ends at EOS. That is,                          p(Yt+n | Yt−k+n , . . . , Yt−1+n )                  (3)
+any string with symbols after EOS would not be a                                        = p(Yt | Yt−k , . . . , Yt−1 )
+valid sample from a language model because such
+strings are not in the model’s support. On the other              for n ≥ 0. We again take Yt for t ≤ 0 to be BOS,
+hand, a language process offers a more chipper                    indicating our initial distribution.
+view: once we hit EOS, we can just generate an-                      While not theoretically Markovian, human
+other symbol. A language process is better thought                language is generally considered stationary, i.e.,
+of as an infinite babbler than a distribution over                the probability distribution over the next word
+any sort of strings. At some level, this is indeed                should not depend on absolute position, but rather
+the implicit view that is adopted by some when                    the history.
+language modeling, as many language models do                     Definition 2.8 (Ergodicity). A language process
+not have EOS in the traditional sense. For the rest               Y = {Yt }∞  t=1 is ergodic if its statistical properties
+of this paper we will also take this view, and con-               (e.g., ensemble averages) can be deduced from a
+sider language processes for which we can continue                single, sufficiently long, random sample.
+generating after sampling an EOS symbol.
+                                                                     The above definition is intentionally informal
+2.3    Other Useful Properties                                    because ergodicity is a complex topic that would
+                                                                  take time to treat thoroughly, but see McMillan
+Next, we discuss some other properties about
+                                                                  (1953) and Breiman (1957) for a more rigorous
+language processes that are important for under-
+                                                                  discussion. One of the important implications
+standing the theoretical results presented in §3.
+                                                                  of ergodicity for language processes, however, is
+Definition 2.6 (Markov). A language process Y =                   rather straightforward: if our language process
+{Yt }∞
+     t=1 over alphabet V with distribution p is                   is over alphabet V with distribution p and is
+Markov10 if the following equality holds                          ergodic, then for every symbol y ∈ V and for
+                                                                  every history y <t ∈ V ∗ , there must exist an
+       p(Yt | Y <t ) = p(Yt | Yt−k , . . . , Yt−1 )               extension y <t′ = y <t , yt , · · · , yt′−1 such that
+                                                                  p(Yt′ = y | Y <t′ = y <t′ ) > 0. In plain terms,
+where k ≥ 0 is the Markov order. We again take
+                                                                  this just says that we can always reach every word
+Yt for t ≤ 0 to be BOS, indicating our initial
+                                                                  in our alphabet via some path no matter where we
+distribution.
+                                                                  currently are. In our context, ergodicity also relates
+   Many language processes are explicitly defined                 to the problem with EOS. If we convert a language
+to be Markov, e.g., ones based on n-gram language                 model into a language process (as discussed in
+models. However, many language processes based                    §2.1) and make the EOS state absorbing,12 this
+on recurrent neural networks are, in principle,                   language process must be non-ergodic, as once it
+non-Markov. Yet despite being capable of learning                 encounters EOS, no other state is reachable.
+non-Markov distributions, researchers have found
+that recurrent neural language models tend to learn               2.4    Estimating a Language Model from Data
+Markov distributions. For instance, Khandelwal                    Language models are typically estimated from
+et al. (2018) show that a recurrent neural language               language data. The standard method for estimating
+model’s memory is empirically bounded at roughly                  the parameters of p is via maximization of the
+200 words. Thus, we can still generally assume this               log-likelihood of a training corpus S
+property when working with language processes
+                                                                                             |y|
+parameterized by such models.11                                                             XX
+                                                                          L(θ; S) = −                  log p(yt | y <t )        (4)
+  10
+      Also known as a Markov chain.                                                         y∈S t=1
+   11
+      Note that, in principle, human language is not Markov, in
+so far as many linguists believe human language is capable of     do not consider the Markovian property of most models as a
+arbitrarily deep center-embeddings (Chomsky, 1957, 1995).         limitation to their ability to model natural language in practice.
+                                                                     12
+Yet research suggests that humans do not make use of this               This would be done by setting the transition probability
+property in practice (Reich, 1969; Karlsson, 2010), and so we     p(Yt = EOS | Y <t = y <t ) = 1 if yt−1 = EOS.
+where θ are the model p’s parameters. The above               p. To give the reader intuition about typicality, we
+is equivalent to minimizing the cross-entropy loss            now turn to a classical example.13
+between p and the empirical distribution. Note that           Example 3.3. Consider an i.i.d. stochastic process
+we assume all y ∈ S end in the special EOS token.             Y = {Yt }∞  t=1 where Yt is defined as the outcome
+                                                              of flipping a biased coin: we have p(HEADS) = .6
+3     Information-Theoretic Properties of                     and p(TAILS) = .4. If we flip 100 coins, the most
+      Language Processes                                      likely outcome is the sequence of 100 heads. How-
+The view of language modeling as a discrete                   ever, this would be a surprising outcome to most
+stochastic process naturally lends itself to an anal-         people, who would intuitively expect the sequence
+ysis through the lens of information theory. In-              to consist of roughly 60% heads and 40% tails. In-
+deed, much of information theory is concerned                 deed, even for relatively large ε, the sequence of
+                                                                                        (T )
+with the study of discrete stochastic processes (see          100 heads is not in the Tε typical set; its average
+e.g., Cover and Thomas, 2012, Ch. 4). In this                 symbol probability is .6 ≫ 2−H(Yt ) ≈ 0.51.
+section, we review standard information-theoretic                The above example demonstrates that the typical
+definitions in §3.1 and build on these to introduce           set often does not contain the most likely sequence.
+our own notion of local typicality in §3.2.                   Additionally, the typical set is interesting because,
+                                                              as T → ∞, it contains nearly all the probability
+3.1    Typicality                                             mass; we formalize this property in a proposition.
+An important definition in the study of stochastic            Proposition 3.4. Let Y = {Yt }∞  t=1 be a stationary,
+processes is entropy rate, which generalizes the              ergodic discrete stochastic process where each Yt
+notion of entropy from a random variable to a                 follows distribution p and takes on values in a finite
+stochastic process.                                           support Y. For every ε > 0, for sufficiently large
+Definition 3.1 (Entropy Rate). Let Y = {Yt }∞    t=1          T , the following conditions hold:
+be a stationary, ergodic discrete stochastic process                P
+over alphabet V with distribution p. The entropy                 i)        (T ) p(y) > 1 − ε
+                                                                       y∈T  ε
+rate of Y is defined as
+                                                                                                   (T )
+                                                                ii) (1 − ε)2T (H(Y )−ε) ≤ |Tε             | ≤ 2T (H(Y )+ε)
+                    def       1
+           H(Y ) = lim            H(Y1 , . . . , Yt )   (5)
+                          t→∞ t                               In words, as we take T → ∞, the probability mass
+                                                              covered by the typical set is nearly 1 and the num-
+   The entropy rate is useful in that it tells us, in the     ber of elements in it is nearly 2T ·H(Y ) .
+limit, how spread out, i.e., entropic, the distribution
+is. Another interpretation is that it quantifies the          Proof. See Breiman (1957) for proof.                        ■
+complexity of Y . In the case of an i.i.d. process,
+the entropy rate and the entropy coincide, making             What’s wrong with the typical set? Let Y be
+the entropy rate a true generalization of the entropy.        a stationary, ergodic language process. By the con-
+Using entropy rate, we can define the notion of the           ditions of Definition 3.2, we know that Y has a
+typical set.                                                  typical set. We have motivated the typical set, in-
+                                                              tuitively, as the subset of strings that are usual or
+Definition 3.2 (Typical Set). Let Y = {Yt }∞    t=1 be        typical among all strings. Under this intuition, it
+a stationary, ergodic discrete stochastic process             makes sense that—when using Y as a language
+where each Yt follows distribution p and takes on             generator—this is the set from which we would
+values in a finite support Y. For 1 ≤ T < ∞, the              like to select a string. A relatively straightforward
+(T, ε)-typical set of Y is the set of all sequences of        corollary of Proposition 3.4 is that ancestral sam-
+length exactly T with average per-symbol negative             pling should pull from just this set. To see this, we
+log-probability close to H(Y ), i.e.                          can turn to i) in Proposition 3.4: since ancestral
+                                                              sampling provides an i.i.d. sample from Y , the
+              n    log p(y)            o
+                                                                                                              (T )
+      Tε(T ) = y |          + H(Y ) < ε                 (6)   probability of getting an element not in Tε as
+                      T
+                                                              T → ∞ is (1 − ε), i.e., practically never. However,
+  In informal terms, the typical set is the set of all           13
+                                                                    See Dieleman (2020) for further discussion of the concept
+samples that we would expect when sampling from               of typicality in the context of generative modeling.
+                                                                                                      PT
+there is the confound that our models are not per-                                                      t=1 log p(yt )
+                                                            T H(Yt ) < T ε, which implies                   T            +
+fect representations of the true distribution behind                                          (T )
+the “human” natural language process. Perhaps for           H(Yt )   < ε, which implies y ∈ Tε .                         ■
+this reason (and the reasons discussed in §4), ances-
+tral sampling is not known to result in samples that           A natural question to ask at this point is why the
+humans judge to be high quality in the task of lan-         definition of local typicality is useful in the context
+guage generation; rather it often leads to text that        of a language process. Our argument, presented in
+humans perceive as incoherent (Holtzman et al.,             the following section, is cognitive in nature.
+2020). Furthermore, the typical set’s definition re-
+lies on Y being a stationary and ergodic language
+                                                            4     Local Typicality in Natural Language
+process. As we saw in §2.2, however, a language             To motivate our definition of local typicality in
+model that we convert into a language process will          the context of natural language, we must first look
+be non-ergodic by definition (at least if we keep           at language through an information-theoretic lens.
+EOS as an absorbing state). Thus, while the typical         We will consider two distributions in this section:
+set is a natural starting point, it does not actually get   pe, the distribution that a speaker of the language
+us to our end goal of defining a set of strings that hu-    is assumed to generate strings from, and pb our
+mans would find typical. To remedy this problem,            language process that approximates pe—albeit,
+we introduce the new concept of local typicality.           perhaps not perfectly. In this setting, we view a
+                                                            natural language string y as a means of communi-
+3.2   Local Typicality
+                                                            cating some information, where each word yt is a
+A core contribution of this work is to define a more        symbol via which we construct our message. The
+restrictive notion of typicality—termed here local          information content of y is then defined as its neg-
+typicality—which we subsequently motivate as                ative log-probability under a specified distribution:
+useful in the context of describing the set of strings      − log pe(y). Following the chain rule of probability,
+humans typically produce.                                   this quantity can be decomposed over words, i.e.,
+Definition 3.5 (Locally Typical Set). Let Y =               the information content of a word is its negative log-
+{Yt }∞                                                      probability given prior context: − log pe(yt | y <t ).
+     t=1 be a discrete stochastic process over finite
+support Y. The (T, ε)-locally typical set of Y is the
+                                                            4.1    Properties of Human Communication
+set of all sequences of length exactly T such that
+          n                                                 Given the above definitions, we can now ask a
+L(T )
+      =    y = y0 · · · yT | ∀1 ≤ t ≤ T,        (7)         question at the heart of this work: what are the
+ ε
+                                                  o         information-theoretic characteristics of natural lan-
+      log p(yt | y <t ) + H(Yt | Y <t = y <t ) < ε          guage typically produced by humans. In other
+                                                            words, what do strings sampled from pe look like,
+   In comparison to the typical set, the locally typi-      from the perspective of pb, our trained language pro-
+cal set further restricts the set of samples to those       cess? Research in psycholinguistics suggests that a
+for which each individual symbol yt has probability         core component of what makes text human-like is
+near the local conditional entropy, i.e., the entropy       its per-unit information content.
+of the distribution p(· | y <t ). In general, there is no      To motivate this conclusion, we first consider
+strong theoretical relationship between the typical         a language user’s objective. When using natural
+set and the locally typical set. However, in the case       language, humans aim to transmit information effi-
+of an i.i.d. stochastic process we can prove that the       ciently while also minimizing the risk of miscom-
+latter constitutes a subset of the former.                  munication (Zipf, 1949). In order to achieve this
+                                                            goal, speakers avoid producing words with either
+Proposition 3.6. Let Y = {Yt }∞    t=1 be an i.i.d.
+                                   (T )   (T )              very high or very low information content (Fenk
+discrete stochastic process, then Lε ⊆ Tε .                 and Fenk, 1980; Aylett and Turk, 2004; Levy and
+                                                            Jaeger, 2007; Mahowald et al., 2013, inter alia), a
+Proof. Since Y is i.i.d., we have that H(Y ) =
+                                                            behavior inline with theories of efficient and robust
+H(Yt | Y <t ) = H(Yt ). Let y be an element
+    (T )
+                                                            communication.14 Indeed, cross-linguistic research
+of Lε . Then, Tt=1 log p(yt ) + H(Yt ) < T ε.
+                 P
+                                                               14
+                                  PT                              See Gibson et al. (2019) for an in-depth review of how
+Thus, by the triangle inequality,  t=1 log p(yt ) +         efficiency has shaped the evolution of language.
+                                                                 We verify this relationship empirically us-
+                                                              ing data from human language processes. In
+                                                              Fig. 1, we show the distribution of the differ-
+                                                              ence between the information content of yt
+                                                              and the expected information content of Yt ,
+                                                              i.e., − log pb(yt | y <t ) − H(Yt | Y <t = y <t ),
+                                                              according to the model on human-generated text.
+Figure 1: The per-token distribution of the deviation (ε)
+                                                              The peaked nature of the distributions in Fig. 1
+of information content from conditional entropy. Values
+are computed using the reference (human) text for three
+                                                              reveals that human language indeed tends to have
+different language generation tasks, where probabilities      per-word information content quite close a specific
+and entropies are computed using probabilistic models         value; the centering of these distributions around
+trained on the respective task (see §6 for model details).    ≈ 0 suggests that this value is H(Yt | Y <t = y <t ).
+Dotted line and adjacent label indicate median ε              Notably, Meister et al. (2022) shows the same is
+while dashed line and adjacent label indicate mean ε.         not true for text generated by models according to
+Per token distributions of conditional entropies and          a number of different popular decoding schemes,
+information contents are shown in App. B for reference.
+                                                              which instead produce strings with much higher
+                                                              probability, i.e., with lower information content.
+has shown that languages trade-off information con-              In an ideal situation, such a property of natural
+tent and speech rate, perhaps aiming at a specific            language would be reflected in pb, in which case
+(optimal) information rate (Coupé et al., 2019; Pi-           sampling from the typical set should be sufficient to
+mentel et al., 2021). Further, not using words in             ensure human-like language. However, our models
+a context where they have very high or low infor-             are by no means perfect. The failure to capture the
+mation content avoids characteristics that appear to          property of human language expounded in Hyp. 4.1
+negatively impact traditional grammaticality judg-            may come from a number of possible modeling
+ments: an ideal natural language string would not             deficiencies, e.g., poor ability to capture the tails
+compensate for unusually near-zero probability in             of these distributions. We hypothesize that, when
+the first half, e.g., syntactic error, with unusually         using language models to generate text, enforcing
+high probability in the second half, e.g., especially         this local-typicality criterion explicitly may serve
+frequent words (Schütze, 2016; Lau et al., 2017).             as a patch for this shortcoming.
+
+4.2    An Information-Theoretic Formalization                 5        Sampling from a Language Process
+The definition of local typicality presented in §3.2          In this section, we describe how to sample from a
+can be viewed as an embodiment of the charac-                 language process parameterized by the distribution
+teristics of human language just described above.             p,16 or in more commonly-used terminology,
+One logical interpretation of these behaviors is              how to decode from p. There are many different
+that, at every time step, natural-sounding language           algorithms one could employ to sample from p.
+should have per-symbol information content close              The most intuitive strategy is ancestral sampling,17
+to the expected (average) per-symbol information              which works as follows: sample yt ∼ p(· | y <t )
+content.15 We formalize this relationship in the              for each history y <t successively until some
+following hypothesis.                                         chosen criterion, e.g., the EOS symbol is sampled
+Hypothesis 4.1. Samples y = y0 · · · yT from a                or a maximum length is reached. Note that in
+human language process with distribution pe tend              the case of the former criterion, this procedure is
+                                                 (T )         equivalent to sampling entire strings according to
+to belong to the process’s locally typical set Lε
+                                                              the distribution p. Perhaps the most popular set of
+for large enough T and some ε > 0. In words,
+                                                              techniques for sampling fall under a paradigm we
+this means that we should expect every word in
+                                                              call truncated sampling, where the vocabulary
+natural-sounding sentences to be close to the ex-
+                                                              at a time step is truncated to a core subset of words.
+pected information content under pe, i.e., the condi-
+                                                                  16
+tional entropy given prior context.                                Here we only consider locally normalized p, i.e., pro-
+                                                              cesses in which sampling is done on a word-by-word basis.
+  15                                                            17
+    The standard definition of (Shannon) entropy for a ran-        Another natural option would be to choose words which
+dom variable X with support XPis equivalent to the expected   maximize the probability assigned by p to the resulting string,
+information of X: H(X) = − x∈X p(x) log p(x).                 but this work focuses on stochastic strategies.
+For instance, Fan et al. (2018) propose limiting               A number of recent works have tried to offer
+the sampling space to the top-k most likely words              explanations for this phenomenon. Some have
+in each decoding step, and Holtzman et al. (2020)              attributed it to a diversity–quality trade-off (Zhang
+consider the smallest nucleus (i.e., subset) of                et al., 2021; Basu et al., 2021), while others blame
+words whose cumulative probability mass exceeds                shortcomings of model architectures or training
+a chosen threshold η.                                          strategies (Welleck et al., 2020; Li et al., 2020).
+   In this paper, we give a general treatment of                  Our analysis from §4 inspires an alternative ex-
+truncated sampling and then discuss our variant.               planation, motivated by information theory and
+Given a context-dependent constraint subset                    psycholinguistics, for why models that perform so
+C(y <t ) ⊆ V of the vocabulary, we define the                  well (in terms of metrics such as perplexity) can
+truncated distribution as                                      still exhibit such undesirable behavior when used
+                                                               to generate text. First, the connection between
+                  def   p(y | y <t )1{y ∈ C(y <t )}
+      π(y | y <t ) =                                     (8)   probability and information content may explain
+                                  Z(y <t )
+                                                               why high-probability text is often dull or generic
+where the normalizer is defined as                             (Holtzman et al., 2020; Eikema and Aziz, 2020);
+                       X                                       its low information content likely makes for bor-
+                  def
+         Z(y <t ) =           p(y | y <t )               (9)   ing, i.e., uninformative, text. This connection also
+                           y∈C(y <t )                          offers a potential explanation for the rather strange
+                                                               behavior that, when a string has a repetitive loop,
+and we call C(y <t ) the truncation set. Now we                language models often assign increasingly higher
+give two examples of truncated samplers.                       probability to the repeated substring (Holtzman
+Algorithm 5.1 (Top-k Sampling). In top-k sam-                  et al., 2020); the substring conveys less and less
+pling, the truncation set C(y <t ) is defined as the           information after each occurrence.
+top-k highest-probability tokens y according to                   A further implication of this framing is the equiv-
+p(· | y <t ), i.e., the solution to the following subset       alence between decoding strings from a probabilis-
+maximization problem                                           tic language generator and sampling messages from
+                              X                                the natural language communication channel. If we
+           maximize                    p(y | y <t )            wish to solely sample from the subset of messages
+         C(y <t )∈P(V)
+                            y∈C(y <t )              (10)       that a human would typically construct, i.e., that
+            subject to      |C(y <t )| ≤ k                     are human-like, then we should begin by narrow-
+                                                               ing down this subset to those messages that meet at
+where P is the power set operator.                             least some of the same criteria as human-generated
+Algorithm 5.2 (Nucleus Sampling). In nucleus                   messages. In this work, we have identified the cri-
+sampling, we choose a threshold parameter η and                terion that such messages tend to be in the locally
+define the truncation set C(y <t ) as the solution to          typical set. This observation motivates a new de-
+the following subset minimization problem                      coding strategy in which our information-theoretic
+                                                               criterion is explicitly enforced.
+       minimize         |C(y <t )|
+      C(y <t )∈P(V)                                            5.2     Locally Typical Sampling
+                           X                            (11)   We now introduce our novel sampling algorithm,
+        subject to                   p(y | y <t ) ≥ η
+                        y∈C(y <t )                             which we entitle locally typical sampling.
+                                                               Algorithm 5.3. Locally typical sampling is a trun-
+where again P is the power set operator.
+                                                               cated sampling scheme where the truncation set
+5.1     Shortcomings of Existing Algorithms                    C(y <t ) is the solution to the following subset opti-
+                                                               mization problem18
+To motivate sampling based on the locally
+typical set, we must first better understand the                  minimize
+                                                                                  X
+                                                                                       H(Yt | Y <t = y <t )     (12)
+shortcomings of current decoding strategies. While               C(y <t )∈P(V)
+                                                                                  y∈C ′ (y <t )
+strings generated using stochastic strategies may
+have lower probability according to pb, they often                                                      + log p(y | y <t )
+                                                                                    X
+outperform those decoded using maximization-                         subject to                p(y | y <t ) ≥ τ
+based strategies in terms of qualitative metrics.                                 y∈C(y <t )
+   In words, Algorithm 5.3 limits the sampling dis-                 more open-ended tasks, where the entropy of the
+tribution to only those words with negative log-                    language model is higher, beam search can lead to
+probability within a certain absolute range from the                low-quality text (Li et al., 2016; Holtzman et al.,
+conditional entropy (expected information content)                  2020; Welleck et al., 2020; Meister et al., 2022).
+of the model at that time step. In the spirit of nu-                Locally typical sampling is also closely related to
+cleus sampling, this range is determined by a hyper-                nucleus sampling. When the probability distribu-
+parameter τ , the amount of probability mass from                   tion over the vocabulary has low conditional en-
+the original distribution that we wish to consider.                 tropy, i.e., when there are only a few reasonable
+   Interestingly, Algorithm 5.3 does not imply that                 choices for the next word according to our model,
+high-probability words should not be chosen. In-                    nucleus and typical will have the same truncation
+deed, in the situation where conditional entropy is                 set. Locally typical sampling and Mirostat (Basu
+low, i.e., when the model places most of the proba-                 et al., 2021) likewise have similar decision rules for
+bility mass on a small subset of words, it is likely                truncation. Mirostat decodes strings such that they
+the case that only high-probability words fall into                 have a perplexity (or, equivalently, a per-word infor-
+the locally typical set.                                            mation content) close to a target value. In contrast
+                                                                    to Mirostat, however, locally typical sampling does
+Computational Complexity. From a practical                          not require a specific target information content to
+perspective, locally typical sampling can be im-                    be defined. Rather, locally typical sampling defines
+plemented with the same efficiency as nucleus or                    this quantity as the conditional entropy, choosing it
+top-k sampling. First, we compute the conditional                   dynamically (per word) and making it less sensitive
+entropy, which is an O(|V|) operation. Second, we                   to hyperparameter choice. Finally, locally typical
+sort words by their absolute distance from H(b   p(· |              sampling is also related to Braverman et al.’s (2020)
+Y <t = y <t )), which can be done in O(|V| log |V|)                 strategy, which proposes a look-ahead decoding al-
+time with standard sorting algorithms. Finally, we                  gorithm that generates text with a similar entropy
+greedily take words from this list until their cumu-                rate to that of human-generated text. Our strategy’s
+lative probability exceeds the threshold τ , which                  motivation is similar—to match the tendencies in
+again takes O(|V|) time. Thus, creating our altered                 information content exhibited by human-generated
+distribution has time complexity O(|V| log |V|).19                  text—albeit without requiring the computational
+Relationship to Other Decoding Strategies.                          overhead of a look-ahead strategy.
+Notably, we already see motivation for this cri-
+                                                                    6     Experiments
+terion in the performance of several well-known
+decoding strategies. For example, beam search                       In this section, we explore the efficacy of our de-
+is the predominant decoding strategy for machine                    coding strategy on two natural language generation
+translation models (Wu et al., 2016; Edunov et al.,                 tasks: abstractive summarization and story gener-
+2018; Ng et al., 2019; Meister et al., 2020b), a                    ation. We assess performance with respect to sev-
+setting in which beam search (incidentally) often                   eral other stochastic decoding strategies: nucleus
+already enforces this criterion.20 Yet, when used in                sampling, top-k sampling, temperature sampling,21
+  18
+                                                                    beam search and Mirostat. Our evaluation includes
+      Erratum: This definition of the optimization problem be-
+ing solved to produce the locally typical sampling truncation       both automatic metrics and human ratings.
+set allows for solutions in which continuations whose log-
+probabilities lie closest to the conditional entropy are excluded   6.1    Setup
+from the set. The authors are working on a new formulation          Models and Data. We use the Hugging Face
+that leads to solutions that better align with the greedy algo-
+rithm described subsequently in the computational complexity        framework (Wolf et al., 2020) for reproducibility,
+section—and therefore with the specification of the locally         employing their implementations of nucleus, top-
+typical set in Eq. (7). We thank Shay Cohen for pointing out        k, temperature sampling and beam search. We
+the issue in our original formulation.                              rely on the implementation of Mirostat provided
+   19
+      For each of the truncation sampling algorithms, the trun-
+cation set can also be identified using the selection algorithm     Meister et al., 2020a). Therefore, at each decoding step, the
+(no sorting required) in O(|V|) time. We provide the analysis       set of words with negative log-probability near the conditional
+using sorting as that is the standard implementation.               entropy of the model are typically those with high probability—
+   20
+      When trained without label-smoothing, which artificially      the same as those chosen by beam search.
+                                                                       21
+inflates conditional entropies, machine translation models tend           Temperature sampling is defined as ancestral sampling
+to have quite low conditional entropies (see e.g., Fig. 3 in        after local renormalization with an annealing term τ .
+                                                        Story Generation
+                           PPL (g)           PPL (i)          M AUVE (↑)         REP (↓)   Zipf           D (↑)    Human (↑)
+ Reference                 16.33             26.71             −                 0.28      1.09           0.85     4.12 (±0.02)
+ Temperature (τ =0.5)      25.34 (+9.01)     18.78 (−7.93)     0.95              0.25      1.07 (−0.02)   0.87     4.13 (±0.02)
+ Temperature (τ =1)        25.67 (+9.34)     11.77 (−14.94)    0.95              0.26      1.07 (−0.02)   0.87     4.13 (±0.02)
+ Nucleus (η=0.9)           7.75 (−8.58)      10.25 (−16.46)    0.95              0.35      1.29 (+0.20)   0.79     4.09 (±0.02)
+ Nucleus (η=0.95)          11.65 (−4.68)     11.77 (−14.94)    0.95              0.30      1.20 (+0.11)   0.84     4.13 (±0.02)
+ Top-k (k=30)              7.07 (−9.26)      18.78 (−7.93)     0.88              0.35      1.41 (+0.32)   0.80     4.13 (±0.02)
+ Top-k (k=40)              11.83 (−4.5)      13.08 (−13.63)    0.92              0.35      1.33 (+0.24)   0.82     4.09 (±0.02)
+ Mirostat (τ =3)           8.14 (−8.19)      23.53 (−3.18)     0.93              0.34      1.30 (+0.21)   0.83     4.12 (±0.02)
+ Typical (τ =0.2)          14.25 (−2.08)     23.51 (−3.20)     0.78              0.30      1.27 (+0.18)   0.84     4.15 (±0.02)
+ Typical (τ =0.95)         11.59 (−4.74)     11.77 (−14.94)    0.96              0.31      1.21 (+0.12)   0.84     4.13 (±0.02)
+
+Table 1: Automatic quality and diversity metrics, as described in §6.1, along with human ratings on the
+W RITING P ROMPTS dataset. Human ratings are averaged across criteria to form a single metric. Bolded values
+are the best results among decoding strategies, where for perplexity (PPL) and Zipf’s coefficient, we take this to
+be the delta from measurements on human text (numbers in purple). Numbers in blue are standard error estimates.
+Results are from finetuned GPT-2 large.
+
+by its authors. For story generation, we finetune                  in computation of automatic metrics.
+the medium and large versions of GPT-2 (Radford
+                                                                   Automatic Quality Metrics. As automatic qual-
+et al., 2019) from checkpoints made available by
+                                                                   ity metrics, we evaluate the generated text’s
+OpenAI on the W RITING P ROMPTS dataset (Fan
+                                                                   perplexity—under both the model used to generate
+et al., 2018). We use the medium checkpoint fine-
+                                                                   the text (PPL(g)) and an independent, i.e., not fine-
+tuned on W IKI T EXT-103 (Merity et al., 2017) to
+                                                                   tuned, LM (PPL(i)), namely GPT-2 large (Radford
+produce the data used in Fig. 1. For abstractive
+                                                                   et al., 2019). Several prior works have shown that
+summarization, we use BART (Lewis et al., 2020)
+                                                                   neither low nor high perplexity (Zhang et al., 2021;
+finetuned on the CNN/DAILY M AIL dataset (Nalla-
+                                                                   Nadeem et al., 2020; Pillutla et al., 2021) are direct
+pati et al., 2016).22 All reported metrics are com-
+                                                                   indicators of text quality. Rather, human-like text
+puted on the respective test sets.
+                                                                   often has perplexity within a certain range. Con-
+                                                                   sequently, we report the difference in this metric
+Hyperparameters. In a preliminary hyperparam-
+                                                                   from the reference text as well. We additionally
+eter sweep using M AUVE23 (Pillutla et al., 2021),
+                                                                   evaluate using M AUVE24 (Pillutla et al., 2021) with
+we found k = {30, 40}, η = {0.9, 0.95} and
+                                                                   the reference text.
+τ = 3.0 to be the best performing hyperparameters
+for top-k sampling, nucleus sampling and Mirostat,                 Automatic Diversity Metrics. We also evaluate
+respectively. For locally typical sampling, we                     locally typical sampling using automatic diversity
+found τ = 0.2, τ = 0.95 to provide the best results                metrics. We compute REP (Welleck et al., 2020),
+for story generation and abstractive summarization,                Zipf’s coefficient, and n-gram diversity. For
+respectively. Standard values according to the                     REP we use the average of REP /ℓ scores, as
+literature for other hyperparameters (i.e., for beam               defined in Eq. 9 of (Welleck et al., 2020) for
+search and temperature sampling) were employed.                    ℓ ∈ {16, 32, 128}. We define n-gram diversity D
+We use these values in our human evaluations and                   as the average fraction of unique vs. total n-grams
+  22
+                                                                   for n ∈ {1, 2, 3, 4} in a string
+      As we are interested in getting as close an estimate of p
+as possible with our models pb, all fine-tuning is done without                   4
+label-smoothing. Note that label-smoothing may also artifi-
+                                                                                  X #unique n-grams in string
+                                                                            D=                                              (13)
+cially inflate conditional entropy estimates, as it pushes the                             # n-grams in string
+                                                                                  n=1
+learned distribution towards the most entropic distribution: the
+uniform distribution (Pereyra et al., 2017).
+   23
+      We use the default settings given by the authors for all
+M AUVE computations, albeit we employ different LMs in             Human Evaluations. We use the Amazon Me-
+our parameter sweep vs. reported results (standard GPT-2 vs.       chanical Turk framework to obtain human judg-
+GPT-2 large, respectively) to reduce bias in the final results.    ments of text quality from 5 different annotators on
+Notably, M AUVE presents similar performances when used
+                                                                      24
+with these two pretrained LMs (Pimentel et al., 2022).                     We use the implementation provided by the authors.
+                                           Abstractive Summarization
+                        PPL (g)        PPL (i)        M AUVE (↑) REP (↓)           Zipf            D (↑)    Human (↑)
+ Reference              10.29          34.21            −                0.13      0.76            0.97     4.31 (±0.03)
+ Beam (k=5)             1.39 (−8.90)   34.21 (−0.00)    0.90             0.14      0.77 (+0.01)    0.97     4.35 (±0.03)
+ Temperature (τ =0.5)   7.10 (−3.19)   55.31 (+21.1)    0.97             0.15      0.75 (−0.01)    0.97     4.25 (±0.03)
+ Temperature (τ =1)     6.46 (−3.83)   35.96 (+1.75)    0.95             0.14      0.75 (−0.01)    0.97     4.29 (±0.03)
+ Nucleus (η=0.9)        2.97 (−7.32)   33.63 (−0.58)    0.90             0.17      0.93 (+0.17)    0.96     4.26 (±0.03)
+ Nucleus (η=0.95)       3.96 (−6.33)   56.43 (+22.22)   0.99             0.15      0.91 (+0.15)    0.97     4.26 (±0.03)
+ Top-k (k=30)           3.13 (−7.16)   34.79 (+0.58)    0.98             0.16      0.93 (+0.17)    0.97     4.31 (±0.03)
+ Top-k (k=40)           3.26 (−7.03)   28.38 (−5.83)    0.96             0.16      0.93 (+0.17)    0.97     4.29 (±0.03)
+ Typical (τ =0.2)       3.80 (−6.49)   62.33 (+28.12)   0.72             0.14      0.91 (+0.15)    0.97     4.27 (±0.03)
+ Typical (τ =0.95)      3.86 (−6.43)   56.67 (+22.46)   0.96             0.15      0.92 (+0.16)    0.97     4.32 (±0.03)
+
+Table 2: Automatic quality and diversity metrics, as described in §6.1, along with human ratings on the
+CNN/DAILY M AIL dataset. Human ratings are averaged across criteria to form a single metric. Bolded val-
+ues are the best results among decoding strategies, where for perplexity (PPL) and Zipf’s coefficient, we take this to
+be the delta from measurements on human text (numbers in purple). Numbers in blue are standard error estimates.
+
+
+
+
+Figure 2: REP (Welleck et al., 2020) values for different k and τ /η (lower is better). Lines indicate REP measurement
+for reference text and Mirostat (left)/beam search (right).
+
+
+200 examples per decoding strategy, per task. We                  For each story/summarization and each of the cri-
+use solely MTurk Master Workers in order to maxi-              teria, we take the median score across raters as the
+mize the quality of our ratings. We follow DeLucia             final score.25 Workers are paid $1.50 per HIT for
+et al. (2021) in setting up our evaluations. Each              the abstractive summarization task and $2 per HIT
+Human Intelligence Task (HIT) consists of either               for the story generation task, for which entries were
+a single prompt from which a story should be gen-              longer. Note that these rates translate to >$15/hour.
+erated or a single news article to be summarized.
+The raters are first presented with the different rat-         6.2   Results
+ing criteria, along with descriptions of the type of         Quantitative Performance. Tab. 1 and 2 show
+text that meets these criteria at different levels of        the results of our different evaluation metrics. Hu-
+the scale. Raters are additionally provided several          man scores are averaged across the qualitative
+examples of stories/summarizations that both meet            metrics to give an aggregate score; the value in
+and fail to meet the rating criteria. They are then          parentheses is the standard error of the estimate.
+presented with the respective prompt/news article            We show full breakdowns of score distributions
+and the corresponding stories/summaries generated            in Tab. 5. We see that in general, locally typi-
+by different decoders and by the reference in ran-           cal sampling performs on par with or better than
+dom order. For abstractive summarization, we ask             other sampling techniques, producing text with hu-
+annotators to score on fluency and relevance, while          man quality ratings closest to that of the reference
+for story generation, annotators score on fluency,           among the stochastic decoding strategies. Interest-
+coherence, and interestingness, each using a scale           ingly, beam search still outperforms locally typical
+from 1 to 5. We choose these criteria following                   25
+                                                                     We use an attention check in each HIT. Responses where
+recommendations from van der Lee et al. (2019).                the attention check has been failed are thrown out.
+                           Abstractive Summarization (CNN/DailyMail)
+    Prompt        (CNN) The attorney for a suburban New York cardiologist charged in what authorities say
+                  was a failed scheme to have another physician hurt or killed is calling the allegations against
+                  his client “completely unsubstantiated.” Appearing Saturday morning on CNN’s “New Day,”
+                  Randy Zelin defended his client, Dr. Anthony Moschetto, who faces criminal solicitation,
+                  conspiracy, burglary, arson, criminal prescription sale and weapons charges in connection to
+                  what prosecutors called a plot to take out a rival doctor on Long Island. “None of anything in
+                  this case has any evidentiary value,” Zelin told CNN’s Christi Paul...
+    Reference     A lawyer for Dr. Anthony Moschetto says the charges against him are baseless. Moschetto,
+                  54, was arrested for selling drugs and weapons, prosecutors say. Authorities allege Moschetto
+                  hired accomplices to burn down the practice of former associate.
+    Beam          Dr. Anthony Moschetto faces criminal solicitation, conspiracy, burglary, arson and weapons
+    k=5           charges. “None of anything in this case has any evidentiary value,” his attorney says.
+    Nucleus       Dr. Anthony Moschetto, 54, pleaded not guilty to charges Wednesday. Two men – identified
+    η = 0.95      as James Chmela and James Kalamaras – were named as accomplices.
+    Top-k         Dr. Anthony Moschetto is accused of providing police with weapons and prescription drugs.
+    k = 30        Authorities say he was part of a conspiracy to harm or kill a rival doctor. His attorney calls
+                  the allegations against his client “completely unsubstantiated”
+    Typical       Dr. Anthony Moschetto is charged with crimes including arson, conspiracy, burglary, pre-
+    τ = 0.95      scription sale, weapons charges. His attorney says “none of anything in this case has any
+                  evidentiary value”
+
+Table 3: Sample generations for abstractive summarization; examples correspond to ID 1 in the test set. Decoding
+strategy hyperparameters are chosen based off of performance in human evaluations shown in Tab. 2.
+
+
+sampling in abstractive summarization, albeit by           Qualitative Performance. We present some ex-
+a small margin. This could perhaps be attributed           amples of text generated according to each of the
+to the deterministic nature of beam search, which          decoding strategies in Tab. 3 and 4. For both of
+suggests that an interesting direction for future re-      the tasks, we choose the example with ID 1 in the
+search may be a deterministic version of locally typ-      respective test set and provide examples from each
+ical sampling, e.g., where the highest-probability         of the decoding strategies, employing the hyperpa-
+word within the truncated set is always chosen. Im-        rameter values that lead to the best human scores
+portantly, all the strategies we explore are quite         in Tab. 1 and 2. For the summarization task, we
+close to human-level performance—in some cases             see that locally typical sampling provides a com-
+even surpassing human references in terms of rat-          prehensive and coherent summary of the article,
+ings. At this level, it is perhaps only reasonable         quite similar to that of beam search. In comparison,
+to expect that the differentiation between the top         the text produced by temperature sampling is not
+strategies is small. Accordingly, we also consider         necessarily coherent; text from nucleus sampling
+how robust locally typical sampling is to hyperpa-         and top-k sampling misses some of the important
+rameter choice. Fig. 2 shows REP measurements              information in the article, e.g., the charges of bur-
+for different values of the hyperparameters k, η,          glary and arson. While the qualitative performance
+and τ for top-k, nucleus, and locally typical sam-         in story generation is much more subjective, locally
+pling, respectively. Interestingly, REP appears to be      typical sampling arguably provides the most fluent
+far less sensitive to τ than to k and η. While many        story amongst all the decoding strategies. Other
+values of k and η appear to lead to degenerate rep-        stories lack coherence and, even within the first
+etitions in story generation, most values of τ lead        few sentences, we see repeated phrases and words.
+to text with a REP value on par with human text,           Together, these results suggest that locally typical
+demonstrating that an advantage of our technique           sampling may indeed produce more desirable text.
+is its robustness to hyperparameter choice. See
+Fig. 6 in the appendix for a larger exploration of          7   Conclusion
+how other quality metrics vary as a function of τ .
+                                                            In this work, we analyze decoding from probabilis-
+                                                            tic language generators in the information-theoretic
+                                 Story Generation (WritingPrompts)
+    Prompt        A kid doodling in a math class accidentally creates the world’s first functional magic circle
+                  in centuries.
+    Reference    It was dark and Levi was pretty sure he was lying on his back. There was firelight flickering
+                 off of what was left of a ceiling. He could hear something but it was muffled. He was almost
+                 positive it was screaming. When he tried to move he felt an excruciating pain in his left side
+                 that caused him to cry out...
+    Nucleus      “Why do you draw a circle?” He asked as he handed the piece of paper over to her. She
+    η = 0.95     rolled her eyes and looked down at the picture, “Because I like math!” “Then what?” “I like
+                 to draw the circles.” She ran a hand through her curls and looked away. “See, I have three
+                 circles.” “Hmph, I didn’t think I saw that in your class.” A younger student brought up the
+                 ceiling and murmured...
+    Top-k        “Aha. Aah! That makes three.” Professor Gosh sighed. “Oh my God, you had to have been
+    k = 30       there.” “Well, I’m not sure if that’s the right term, but this circle is going to work.” “But I
+                 just told you that it wasn’t working, didn’t you, you little sh**? I’m not kidding! That circle
+                 is gon na work!” “So what now?’...
+    Temp         It was teachers duty to ensure that our kingdom is pure and pure and successful, however it
+    τ = 1.0      does not mean we do not try to be as rebellious as any other kingdom. Most of our teachers
+                 are suitable for rulership, being knowledgeable in sadistic rec thunking of time stopping
+                 magic circle created by several apprentices...
+    Mirostat     ready to go home, when a little kid starts to sketch a circle. “No. Just stop. It’s not working.”
+      τ =3       “But the circle turns to smoke and then to a flame. It’s not working, I know it is!” Another
+                 kid, who was also drawing a circle with his phone, starts to scream. The teacher, looking at
+                 the circle, lost his patience and started to yell...
+    Typical      As soon as he got the clock on his desk he jumped up. The noise it was making had changed
+    τ = 0.2      his day forever. His hair, normally unkempt, now glistened and he had to have more hair
+                 because of it. “Yes!” He had declared triumphantly as he watched his father fumble around
+                 in the backpack in search of a little compass he always kept with him. He took it from the
+                 desk and quickly walked out the door to see what had happened. He wasn’t the first child in
+                 the world to draw something...
+
+Table 4: Sample generations for story generation from GPT-2 large finetuned on the W RITING P ROMPTS dataset;
+examples correspond to ID 1 in the test set. Decoding strategy hyperparameters are chosen based off of best
+performance in human evaluations shown in Tab. 1. Full stories shown in App. B.
+
+
+framework. We equate a language model to a dis-            locally typical sampling—leads to text of compa-
+crete stochastic process, and use the known proper-        rable or better quality than other stochastic decod-
+ties of such processes to quantitatively describe the      ing strategies according to human ratings. Further,
+samples we should expect. Motivated by results in          when compared to these other decoding strategies,
+psycholinguistics, we hypothesize that—with the            several quantitative properties of typically-sampled
+goal of communicating efficiently and robustly—            text more closely align with those of human text.
+humans produce text whose per-word information
+content is within a close range of the expected infor-      Acknowledgments
+mation content of a word given prior context. Cur-         We would like to thank Jason Eisner, Tim Vieira,
+rent language models may fall short in capturing           Jennifer White and Ari Holtzmann for early conver-
+this property, which is a possible explanation for         sations about the relationship between information
+why the corresponding language processes often do          theory and sampling. We would also like to thank
+not lead to human-like text. Yet, this observation         Ehud Reiter, who served as our TACL action editor,
+provides a simple new criterion for decoding more          and the the anonymous reviewers for their insight-
+human-like text from probabilistic language genera-        ful feedback during the review process. Further, we
+tors: constraining the sampling space to words that        are grateful to Eleanor Chodroff, Clément Guerner
+meet this criterion. In experiments on two language        and Lucas Torroba Hennigen for their feedback on
+generation tasks, we find that our strategy—called         the manuscript of this work.
+Ethical Concerns
+In order to complete our human evaluation, we
+used a crowdsourcing platform. For each task, we
+made sure that the crowdworkers would be paid (at
+minimum) a wage of $15 per hour.
+   Another ethical consideration worth discussing
+concerns the use of language models for text gener-
+ation. Text generated by these models may contain
+malicious content, either by design of the user or as
+a byproduct of the training data/algorithm. While
+we hope the results of our work will not be mis-
+used, they may nonetheless provide insights for
+those employing these models with ill-intent as
+to how machine-generated text can be made more
+“human-like,” and thus more convincing.
+References                                            Roberts, Paul Barham, Hyung Won Chung,
+                                                      Charles Sutton, Sebastian Gehrmann, Parker
+Matthew Aylett and Alice Turk. 2004. The smooth
+                                                      Schuh, Kensen Shi, Sasha Tsvyashchenko,
+ signal redundancy hypothesis: A functional ex-
+                                                      Joshua Maynez, Abhishek Rao, Parker Barnes,
+ planation for relationships between redundancy,
+                                                      Yi Tay, Noam Shazeer, Vinodkumar Prab-
+ prosodic prominence, and duration in sponta-
+                                                      hakaran, Emily Reif, Nan Du, Ben Hutchin-
+ neous speech. Language and Speech, 47(1):31–
+                                                      son, Reiner Pope, James Bradbury, Jacob
+ 56.
+                                                      Austin, Michael Isard, Guy Gur-Ari, Pengcheng
+Sourya Basu, Govardana Sachitanandam Ra-              Yin, Toju Duke, Anselm Levskaya, Sanjay
+  machandran, Nitish Shirish Keskar, and Lav R.       Ghemawat, Sunipa Dev, Henryk Michalewski,
+  Varshney. 2021.      Mirostat: A perplexity-        Xavier Garcia, Vedant Misra, Kevin Robin-
+  controlled neural text decoding algorithm. In       son, Liam Fedus, Denny Zhou, Daphne Ip-
+  Proceedings of the 9th International Conference     polito, David Luan, Hyeontaek Lim, Barret
+  on Learning Representations.                        Zoph, Alexander Spiridonov, Ryan Sepassi,
+                                                      David Dohan, Shivani Agrawal, Mark Omer-
+Taylor L. Booth and Richard A. Thompson. 1973.        nick, Andrew M. Dai, Thanumalayan Sankara-
+  Applying probability measures to abstract lan-      narayana Pillai, Marie Pellat, Aitor Lewkowycz,
+  guages. IEEE Transactions on Computers, C-          Erica Moreira, Rewon Child, Oleksandr Polozov,
+  22(5):442–450.                                      Katherine Lee, Zongwei Zhou, Xuezhi Wang,
+                                                      Brennan Saeta, Mark Diaz, Orhan Firat, Michele
+Mark Braverman, Xinyi Chen, Sham Kakade,
+                                                      Catasta, Jason Wei, Kathy Meier-Hellstern, Dou-
+ Karthik Narasimhan, Cyril Zhang, and Yi Zhang.
+                                                      glas Eck, Jeff Dean, Slav Petrov, and Noah
+ 2020. Calibration, entropy rates, and memory
+                                                      Fiedel. 2022. PaLM: Scaling language modeling
+ in language models. In Proceedings of the 37th
+                                                      with pathways. CoRR, abs/2204.02311.
+ International Conference on Machine Learning,
+ volume 119, pages 1089–1099. PMLR.                 Christophe Coupé, Yoon Mi Oh, Dan Dediu, and
+                                                      François Pellegrino. 2019. Different languages,
+Leo Breiman. 1957. The individual ergodic theo-
+                                                      similar encoding efficiency: Comparable infor-
+  rem of information theory. The Annals of Math-
+                                                      mation rates across the human communicative
+  ematical Statistics, 28(3):809–811.
+                                                      niche. Science Advances, 5(9).
+Tom Brown, Benjamin Mann, Nick Ryder, Melanie
+                                                    Thomas M. Cover and Joy A. Thomas. 2012. El-
+  Subbiah, Jared D Kaplan, Prafulla Dhariwal,
+                                                      ements of Information Theory. John Wiley &
+  Arvind Neelakantan, Pranav Shyam, Girish Sas-
+                                                      Sons.
+  try, Amanda Askell, Sandhini Agarwal, Ariel
+  Herbert-Voss, Gretchen Krueger, Tom Henighan,     Alexandra DeLucia, Aaron Mueller, Xiang Lisa
+  Rewon Child, Aditya Ramesh, Daniel Ziegler,         Li, and João Sedoc. 2021. Decoding methods
+  Jeffrey Wu, Clemens Winter, Chris Hesse, Mark       for neural narrative generation. In Proceedings
+  Chen, Eric Sigler, Mateusz Litwin, Scott Gray,      of the 1st Workshop on Natural Language Gen-
+  Benjamin Chess, Jack Clark, Christopher Berner,     eration, Evaluation, and Metrics (GEM 2021),
+  Sam McCandlish, Alec Radford, Ilya Sutskever,       pages 166–185, Online. Association for Compu-
+  and Dario Amodei. 2020. Language models are         tational Linguistics.
+  few-shot learners. In Advances in Neural Infor-
+  mation Processing Systems, volume 33, pages       Sander Dieleman. 2020. Musings on typicality.
+  1877–1901. Curran Associates, Inc.                Sergey Edunov, Myle Ott, Michael Auli, and David
+Noam Chomsky. 1957. Syntactic Structures. Mou-        Grangier. 2018. Understanding back-translation
+  ton and Co., The Hague.                             at scale. In Proceedings of the 2018 Confer-
+                                                      ence on Empirical Methods in Natural Language
+Noam Chomsky. 1995. The Minimalist Program.           Processing, pages 489–500, Brussels, Belgium.
+  MIT Press, Cambridge, MA.                           Association for Computational Linguistics.
+
+Aakanksha Chowdhery, Sharan Narang, Jacob De-       Bryan Eikema and Wilker Aziz. 2020. Is MAP de-
+  vlin, Maarten Bosma, Gaurav Mishra, Adam            coding all you need? The inadequacy of the
+  mode in neural machine translation. In Pro-           van den Driessche, Bogdan Damoc, Aurelia Guy,
+  ceedings of the 28th International Conference         Simon Osindero, Karen Simonyan, Erich Elsen,
+  on Computational Linguistics, COLING, pages           Jack W. Rae, Oriol Vinyals, and Laurent Sifre.
+  4506–4520, Barcelona, Spain (Online). Interna-        2022. Training compute-optimal large language
+  tional Committee on Computational Linguistics.        models. CoRR, abs/2203.15556.
+
+Angela Fan, Mike Lewis, and Yann Dauphin. 2018.       Ari Holtzman, Jan Buys, Li Du, Maxwell Forbes,
+  Hierarchical neural story generation. In Pro-         and Yejin Choi. 2020. The curious case of neu-
+  ceedings of the 56th Annual Meeting of the Asso-      ral text degeneration. In Proceedings of the 8th
+  ciation for Computational Linguistics (Volume         International Conference on Learning Represen-
+ 1: Long Papers), pages 889–898, Melbourne,             tations.
+  Australia. Association for Computational Lin-
+  guistics.                                           Fred Karlsson. 2010. Syntactic recursion and itera-
+                                                        tion. In Harry van der Hulst, editor, Recursion
+August Fenk and Gertraud Fenk. 1980. Konstanz           and Human Language, chapter 3, pages 43–68.
+  im Kurzzeitgedächtnis-Konstanz im sprach-             De Gruyter Mouton, Berlin, New York.
+  lichen Informationsfluß. Zeitschrift für ex-
+  perimentelle und angewandte Psychologie,            Urvashi Khandelwal, He He, Peng Qi, and Dan Ju-
+  27(3):400–414.                                        rafsky. 2018. Sharp nearby, fuzzy far away: How
+                                                        neural language models use context. In Proceed-
+Edward Gibson, Richard Futrell, Steven T. Pianta-       ings of the 56th Annual Meeting of the Asso-
+  dosi, Isabelle Dautriche, Kyle Mahowald, Leon         ciation for Computational Linguistics (Volume
+  Bergen, and Roger Levy. 2019. How efficiency          1: Long Papers), pages 284–294, Melbourne,
+  shapes human language. Trends in Cognitive            Australia. Association for Computational Lin-
+  Sciences, 23(5):389–407.                              guistics.
+Kartik Goyal, Chris Dyer, and Taylor Berg-            Konrad Knopp. 1954. Theory and Application of
+  Kirkpatrick. 2019. An empirical investigation         Infinite Series. Blackie & Son Ltd., London.
+  of global and local normalization for recurrent
+  neural sequence models using a continuous re-       Jey Han Lau, Alexander Clark, and Shalom Lappin.
+  laxation to beam search. In Proceedings of the        2017. Grammaticality, acceptability, and proba-
+  2019 Conference of the North American Chapter         bility: A probabilistic view of linguistic knowl-
+  of the Association for Computational Linguistics:     edge. Cognitive Science, 41(5):1202–1241.
+  Human Language Technologies, Volume 1 (Long
+  and Short Papers), pages 1724–1733, Minneapo-       Chris van der Lee, Albert Gatt, Emiel van Mil-
+  lis, Minnesota. Association for Computational         tenburg, Sander Wubben, and Emiel Krahmer.
+  Linguistics.                                          2019. Best practices for the human evaluation
+                                                        of automatically generated text. In Proceedings
+Jian Guan, Fei Huang, Zhihao Zhao, Xiaoyan              of the 12th International Conference on Natural
+   Zhu, and Minlie Huang. 2020. A knowledge-            Language Generation, pages 355–368, Tokyo,
+   enhanced pretraining model for commonsense           Japan. Association for Computational Linguis-
+   story generation. Transactions of the Associa-       tics.
+   tion for Computational Linguistics, 8:93–108.
+                                                      Roger Levy and T. Florian Jaeger. 2007. Speakers
+John Hale. 2001. A probabilistic Earley parser as       optimize information density through syntactic
+  a psycholinguistic model. In Second Meeting of        reduction. In Advances in Neural Information
+  the North American Chapter of the Association         Processing Systems, volume 19. MIT Press.
+  for Computational Linguistics.
+                                                      Mike Lewis, Yinhan Liu, Naman Goyal, Marjan
+Jordan Hoffmann, Sebastian Borgeaud, Arthur            Ghazvininejad, Abdelrahman Mohamed, Omer
+  Mensch, Elena Buchatskaya, Trevor Cai, Eliza         Levy, Veselin Stoyanov, and Luke Zettlemoyer.
+  Rutherford, Diego de Las Casas, Lisa Anne            2020. BART: Denoising sequence-to-sequence
+  Hendricks, Johannes Welbl, Aidan Clark, Tom          pre-training for natural language generation,
+  Hennigan, Eric Noland, Katie Millican, George        translation, and comprehension. In Proceedings
+  of the 58th Annual Meeting of the Association for     Papers), pages 36–45, Dublin, Ireland. Associa-
+  Computational Linguistics, pages 7871–7880,           tion for Computational Linguistics.
+  Online. Association for Computational Linguis-
+  tics.                                               Stephen Merity, Caiming Xiong, James Bradbury,
+                                                        and Richard Socher. 2017. Pointer sentinel mix-
+Jiwei Li, Michel Galley, Chris Brockett, Jian-          ture models. In Proceedings of the 5th Interna-
+  feng Gao, and Bill Dolan. 2016. A diversity-          tional Conference on Learning Representations.
+  promoting objective function for neural conver-
+  sation models. In Proceedings of the 2016 Con-      Moin Nadeem, Tianxing He, Kyunghyun Cho, and
+  ference of the North American Chapter of the         James Glass. 2020. A systematic characteri-
+  Association for Computational Linguistics: Hu-       zation of sampling algorithms for open-ended
+  man Language Technologies, pages 110–119,            language generation. In Proceedings of the 1st
+  San Diego, California. Association for Compu-        Conference of the Asia-Pacific Chapter of the As-
+  tational Linguistics.                                sociation for Computational Linguistics and the
+                                                       10th International Joint Conference on Natural
+Margaret Li, Stephen Roller, Ilia Kulikov, Sean        Language Processing, pages 334–346, Suzhou,
+ Welleck, Y-Lan Boureau, Kyunghyun Cho, and            China. Association for Computational Linguis-
+ Jason Weston. 2020. Don’t say that! Making            tics.
+ inconsistent dialogue unlikely with unlikelihood
+ training. In Proceedings of the 58th Annual          Ramesh Nallapati, Bowen Zhou, Cicero dos San-
+ Meeting of the Association for Computational           tos, Caglar Gulçehre, and Bing Xiang. 2016. Ab-
+ Linguistics, pages 4715–4728, Online. Associa-         stractive text summarization using sequence-to-
+ tion for Computational Linguistics.                    sequence RNNs and beyond. In Proceedings
+                                                        of The 20th SIGNLL Conference on Computa-
+Kyle Mahowald, Evelina Fedorenko, Steven T.
+                                                        tional Natural Language Learning, pages 280–
+  Piantadosi, and Edward Gibson. 2013.
+                                                        290, Berlin, Germany. Association for Computa-
+  Info/information theory: Speakers choose
+                                                        tional Linguistics.
+  shorter words in predictive contexts. Cognition,
+ 126(2):313–318.                                      Nathan Ng, Kyra Yee, Alexei Baevski, Myle Ott,
+                                                        Michael Auli, and Sergey Edunov. 2019. Face-
+Brockway McMillan. 1953. The basic theorems of
+                                                        book FAIR’s WMT19 news translation task sub-
+  information theory. The Annals of Mathematical
+                                                        mission. In Proceedings of the Fourth Confer-
+  Statistics, 24(2):196–219.
+                                                        ence on Machine Translation (Volume 2: Shared
+Clara Meister, Elizabeth Salesky, and Ryan Cot-        Task Papers, Day 1), pages 314–319, Florence,
+  terell. 2020a. Generalized entropy regularization     Italy. Association for Computational Linguistics.
+  or: There’s nothing special about label smooth-
+  ing. In Proceedings of the 58th Annual Meeting      Gabriel Pereyra, George Tucker, Jan Chorowski,
+  of the Association for Computational Linguis-         Łukasz Kaiser, and Geoffrey E. Hinton. 2017.
+  tics, pages 6870–6886, Online. Association for        Regularizing neural networks by penalizing con-
+  Computational Linguistics.                            fident output distributions. In Proceedings of
+                                                        the 5th International Conference on Learning
+Clara Meister, Tim Vieira, and Ryan Cotterell.          Representations.
+  2020b. If beam search is the answer, what was
+  the question? In Proceedings of the 2020 Con-       Steven T. Piantadosi, Harry Tily, and Edward Gib-
+  ference on Empirical Methods in Natural Lan-          son. 2011. Word lengths are optimized for ef-
+  guage Processing, Online. Association for Com-        ficient communication. Proceedings of the Na-
+  putational Linguistics.                               tional Academy of Sciences, 108(9):3526–3529.
+
+Clara Meister, Gian Wiher, Tiago Pimentel, and        Krishna Pillutla, Swabha Swayamdipta, Rowan
+  Ryan Cotterell. 2022. On the probability–quality      Zellers, John Thickstun, Sean Welleck, Yejin
+  paradox in language generation. In Proceedings        Choi, and Zaid Harchaoui. 2021. MAUVE: Mea-
+  of the 60th Annual Meeting of the Association         suring the gap between neural text and human
+  for Computational Linguistics (Volume 2: Short        text using divergence frontiers. In Advances
+  in Neural Information Processing Systems, vol-       tongue? In Proceedings of the 2019 Conference
+  ume 34, pages 4816–4828. Curran Associates,          on Empirical Methods in Natural Language Pro-
+  Inc.                                                 cessing and the 9th International Joint Confer-
+                                                       ence on Natural Language Processing (EMNLP-
+Tiago Pimentel, Clara Meister, and Ryan Cotterell.     IJCNLP), pages 3356–3362, Hong Kong, China.
+  2022. Cluster-based evaluation of automatically      Association for Computational Linguistics.
+  generated text. CoRR, abs/2205.16001.
+                                                     Sean Welleck, Ilia Kulikov, Stephen Roller, Emily
+Tiago Pimentel, Clara Meister, Elizabeth Salesky,      Dinan, Kyunghyun Cho, and Jason Weston.
+  Simone Teufel, Damián Blasi, and Ryan Cot-           2020. Neural text generation with unlikelihood
+  terell. 2021. A surprisal–duration trade-off         training. In Proceedings of the 8th International
+  across and within the world’s languages. In Pro-     Conference on Learning Representations.
+  ceedings of the 2021 Conference on Empirical
+  Methods in Natural Language Processing, pages      Thomas Wolf, Lysandre Debut, Victor Sanh, Julien
+  949–962, Online and Punta Cana, Dominican            Chaumond, Clement Delangue, Anthony Moi,
+  Republic. Association for Computational Lin-         Pierric Cistac, Tim Rault, Rémi Louf, Morgan
+  guistics.                                            Funtowicz, Joe Davison, Sam Shleifer, Patrick
+                                                       von Platen, Clara Ma, Yacine Jernite, Julien Plu,
+Tiago Pimentel, Brian Roark, and Ryan Cotterell.
+                                                       Canwen Xu, Teven Le Scao, Sylvain Gugger,
+  2020. Phonotactic Complexity and Its Trade-
+                                                       Mariama Drame, Quentin Lhoest, and Alexan-
+  offs. Transactions of the Association for Compu-
+                                                       der M. Rush. 2020. Transformers: State-of-the-
+  tational Linguistics, 8:1–18.
+                                                       art natural language processing. In Proceedings
+Alec Radford, Jeffrey Wu, Rewon Child, David           of the 2020 Conference on Empirical Methods in
+  Luan, Dario Amodei, and Ilya Sutskever. 2019.        Natural Language Processing: System Demon-
+  Language models are unsupervised multitask           strations, pages 38–45, Online. Association for
+  learners.                                            Computational Linguistics.
+
+Peter A. Reich. 1969. The finiteness of natural      Yonghui Wu, Mike Schuster, Zhifeng Chen,
+  language. Language, 45(4):831–843.                   Quoc V. Le, Mohammad Norouzi, Wolfgang
+                                                       Macherey, Maxim Krikun, Yuan Cao, Qin Gao,
+Carson T. Schütze. 2016. The empirical base of         Klaus Macherey, Jeff Klingner, Apurva Shah,
+  linguistics: Grammaticality judgments and lin-       Melvin Johnson, Xiaobing Liu, Lukasz Kaiser,
+  guistic methodology. Classics in Linguistics 2.      Stephan Gouws, Yoshikiyo Kato, Taku Kudo,
+  Language Science Press, Berlin.                      Hideto Kazawa, Keith Stevens, George Kurian,
+                                                       Nishant Patil, Wei Wang, Cliff Young, Ja-
+Abigail See, Aneesh Pappu, Rohun Saxena, Akhila
+                                                       son Smith, Jason Riesa, Alex Rudnick, Oriol
+ Yerukola, and Christopher D. Manning. 2019.
+                                                       Vinyals, Gregory S. Corrado, Macduff Hughes,
+  Do massively pretrained language models make
+                                                       and Jeffrey Dean. 2016. Google’s neural ma-
+  better storytellers? In Proceedings of the 23rd
+                                                       chine translation system: Bridging the gap be-
+  Conference on Computational Natural Language
+                                                       tween human and machine translation. CoRR,
+  Learning (CoNLL), pages 843–861, Hong Kong,
+                                                       abs/1609.08144.
+  China. Association for Computational Linguis-
+  tics.                                              Noga Zaslavsky, Charles Kemp, Terry Regier,
+Claude E. Shannon. 1948. A mathematical the-           and Naftali Tishby. 2018. Efficient compres-
+  ory of communication. Bell System Technical          sion in color naming and its evolution. Pro-
+  Journal, 27:623–656.                                 ceedings of the National Academy of Sciences,
+                                                      115(31):7937–7942.
+Claude E. Shannon. 1951. Prediction and entropy
+  of printed english. Bell System Technical Jour-    Hugh Zhang, Daniel Duckworth, Daphne Ippolito,
+  nal, 30(1):50–64.                                    and Arvind Neelakantan. 2021. Trading off di-
+                                                       versity and quality in natural language genera-
+Felix Stahlberg and Bill Byrne. 2019. On NMT           tion. In Proceedings of the Workshop on Human
+  search errors and model errors: Cat got your         Evaluation of NLP Systems (HumEval), pages
+  25–33, Online. Association for Computational
+  Linguistics.
+
+George Kingsley Zipf. 1949. Human Behavior and
+  the Principle of Least Effort. Addison-Wesley
+  Press, Oxford, UK.
+A    Human Evaluation Setup
+
+
+
+
+We use Amazon Mechanical Turk framework for collecting human ratings of text. We use solely MTurk
+Master Workers in order to maximize the quality of our ratings. For story generation and abstractive
+summarization, each Human Intelligence Task (HIT) consists of either a single prompt from which a story
+should be generated or a single news article to be summarized. The raters are first presented with the
+different rating criteria, along with descriptions of the type of text that meets these criteria at different
+levels of the scale. These definitions can be seen in 3 and 4. Raters are additionally provided several
+examples of stories/summarizations meeting/failing to meet the rating criteria. They are then presented
+with the respective prompt/news article and the corresponding stories/summaries generated by different
+decoders and by the reference in random order. We use an attention check in each HIT. Responses where
+the attention check has been failed are thrown out. For each of the rating criteria, the rater assigns a score
+from 1 to 5. For each story/summarization and each of the criteria, we take the median score across raters
+as the final respective score. Statistics for these scores can be seen in Tab. 5. Workers are awarded $1.50
+per HIT for the abstractive summarization task and $2 per HIT for the story generation task, for which
+entries were longer. These rates translate to >$15/hour.
+
+
+
+              Previewing Answers Submitted by Workers
+              This message is only visible to you and will not be shown to Workers.
+              You can test completing the task below and click "Submit" in order to preview the data and format of the submitted results.
+
+
+
+
+        Detailed Instructions         Examples
+
+
+       We will reject your HIT if you fail attention checks or if you have unusually low agreement with other annotators.
+
+       Definitions
+       Below you will find multiple prompts and stories (narratives) generated from those prompts. Please rate the stories according to their interestingness, fluency and
+       coherence following the given definitions and examples. We will reject your HIT if you input obviously wrong answers.
+       The 5-point scale for each definition should be used as a guideline. The definitions are displayed when hovering over each radio button for convenience. (Note: if the
+       definitions do not appear even after a few seconds, please leave your browser (e.g. Chrome) and OS (e.g. Windows) information in the comment box.)
+
+
+
+             Interesting:The story is fun to read. It feels creative, original, dynamic, and/or vivid. The opposite of this might be something that's obvious, stereotypical/unoriginal,
+             and/or boring.
+                   Very interesting: The story has themes, characters, and dialog that make you want to keep reading it and you might even want to show it to a friend
+                   Somewhat interesting: The story has themes, characters, dialog, and/or a writing style that pique your interest
+                   Mildly interesting: There are moments of interest but the story is not too notable.
+                   Not very interesting: You finish the story but can't remember anything unique about it. Adequate, but not a fun read
+                   Not at all interesting: You do not even want to finish reading the story. It is boring and/or unoriginal.
+
+             Fluent:The story is written in grammatical English. No obvious grammar mistakes that a person wouldn't make. An incomplete final word or incomplete
+             sentence does not count as a mistake and should not affect fluency. The English sounds natural. Note: do not take off points for spaces between punction (e.g.
+             "don 't") and simpler sentences. Simple English is as good as complex English, as long as everything is grammatical.
+                   Very fluent: The sentences read as if they were written by a native English speaker with 1 or no errors.
+                   Somewhat fluent: The sentences read as if they were written by a native English speaker with very few errors. Some minor mistakes that a person could
+                   have reasonably made.
+                   Mildly fluent: The sentences could have been written by a human but it is not entirely obvious.
+                   Not very fluent: Many sentences have frequently repeated words and phrases. Obvious mistakes.
+                   Not at all fluent: The sentences are completely unreadable. If the same sentence is repeated over and over for the entire story, that story is considered not
+                   at all fluent.
+
+             Coherent:The story feels like one consistent story, and not a bunch of jumbled topics. Stays on-topic with a consistent plot, and doesn't feel like a series of
+             disconnected sentences.
+                  Very coherent: The sentences when taken as a whole all have a clearly identifiable plot
+                  Somewhat coherent: Many of the sentences work together for a common plot with common characters. One or two unrelated sentences.
+                  Mildly coherent: Around half of the sentences work together. The plot is not entirely clear though.
+                  Not very coherent: Only a few sentences seem to be from the same story; the others are random.
+                  Not at all coherent: There is absolutely no identifiable plot. Each sentence feels completely disconnected from every other sentence.
+
+
+
+
+     Please confirm the following worker criteria:
+       I have read the instructions
+       I have read the examples
+       I am a native English speaker
+
+
+
+     Narrative 1
+                   [PROMPT] ${prompt_0}
+                                                                             Figure 3: Stories survey.
+                   [RESPONSE] ${response_0}
+
+
+     Evaluation
+     How interesting is the story?
+
+                                  Very interesting          Somewhat interesting          Mildly interesting         Not very interesting        Not at all interesting
+
+
+
+     How fluent is the story?
+                Previewing Answers Submitted by Workers
+                This message is only visible to you and will not be shown to Workers.
+                You can test completing the task below and click "Submit" in order to preview the data and format of the submitted results.
+
+
+
+
+          Detailed Instructions        Examples
+
+
+         We will reject your HIT if you fail attention checks or if you have unusually low agreement with other annotators.
+
+         Definitions
+         Below you will find a news article and multiple summaries of this article. The news article is repeated for each summary for reference. Please rate the summaries
+         according to their fluency and relevance following the given definitions and examples. We will reject your HIT if you input obviously wrong answers.
+         The 4-point scale for each definition should be used as a guideline. The definitions are displayed when hovering over each radio button for convenience. (Note: if the
+         definitions do not appear even after a few seconds, please leave your browser (e.g. Chrome) and OS (e.g. Windows) information in the comment box.)
+
+
+
+               Fluent:The summary is written in grammatical English. No obvious grammar mistakes that a person wouldn't make. An incomplete final word or incomplete
+               sentence does not count as a mistake and should not affect fluency. The English sounds natural. Note: do not take off points for spaces between punction
+               (e.g. "don 't") and simpler sentences. Simple English is as good as complex English, as long as everything is grammatical.
+                      Very fluent: The sentences read as if they were written by a native English speaker with 1 or no errors.
+                      Somewhat fluent: The sentences read as if they were written by a native English speaker with very few errors. Some minor mistakes that a person could
+                      have reasonably made.
+                      Mildly fluent: The sentences could have been written by a human but it is not entirely obvious as there are a number of mistakes.
+                      Not very fluent: Many sentences have frequently repeated words and phrases. Obvious mistakes.
+                      Not at all fluent: The sentences are completely unreadable. If the same sentence is repeated over and over for the entire story, that story is considered not
+                      at all fluent.
+
+               Relevant:The summary captures all the relevenant events, persona and locations from the article.
+                    Very relevant: It is very clear the summary captures the theme, vocabulary, and specific persona and locations from the article.
+                    Somewhat relevant: Most sentences include relevant points from the article.
+                    Mildly relevant: A few sentences include relevant points from the article.
+                    Not very relevant: The summary mentions something from the article but contains mostly unrelated text.
+                    Not at all relevant: It is as if the summary was written without reading the article.
+
+
+
+
+       Please confirm the following worker criteria:
+         I have read the instructions
+         I have read the examples
+         I am a native English speaker
+
+
+
+       Narrative 1                                                    Figure 4: Summarization survey.
+                     [ARTICLE] ${prompt_0}
+
+            [SUMMARY] ${response_0}
+B     Additional    Results
+       Evaluation
+       How fluent is the text?
+
+                                      Very fluent              Somewhat fluent               Mildly fluent             Not very fluent            Not at all fluent
+
+
+
+       How relevant is the summary to the article?
+
+                                     Very relevant           Somewhat relevant              Mildly relevant           Not very relevant          Not at all relevant
+
+
+
+
+       Narrative 2
+                     [ARTICLE] ${prompt_1}
+
+                     [SUMMARY] ${response_1}
+Figure 5: Distributions of conditional entropies and information contents per token for three different language
+     Evaluation
+generation tasks for human text, i.e., the reference text for each of the respective datasets.
+       How fluent is the text?
+
+                                      Very fluent              Somewhat fluent               Mildly fluent             Not very fluent            Not at all fluent
+
+
+                                            Story Generation (l)                                            Story Generation (m)                                         Summarization
+ Decoder
+     How relevant is the summary to the article?
+                             Coherence            Fluency Interestingness                          Coherence       Fluency Interestingness                             Fluency   Relevance
+ Reference                       4.36Very relevant 4.25 (±0.23)
+                                      (±0.31)             Somewhat relevant
+                                                                       4.56 (±0.25)Mildly4.02
+                                                                                          relevant
+                                                                                               (±0.27)                Not
+                                                                                                                       4.2very relevant
+                                                                                                                           (±0.27)              Not at all
+                                                                                                                                               4.15 (±0.2) relevant4.43 (±0.25)       4.18 (±0.27)
+ Beam (k=5)                                −              −                   −                 −                                  −                         − 4.47 (±0.24)           4.23 (±0.28)
+ Temperature (τ =0.9) 4.32 (±0.25) 4.16 (±0.19)                     4.47 (±0.27) 4.02 (±0.22)                         4.26 (±0.29)            4.19 (±0.24) 4.36 (±0.25)               4.13 (±0.26)
+      Narrative
+ Temperature    (τ =1)3        4.36 (±0.28) 4.25 (±0.22)            4.47 (±0.30) 4.02 (±0.32)                          4.2 (±0.29)            4.18 (±0.22) 4.42 (±0.26)               4.15 (±0.28)
+ Nucleus (η=0.9)[ARTICLE]      4.32
+                                 ${prompt_2}
+                                    (±0.25)     4.28 (±0.24)        4.48 (±0.31) 3.99 (±0.27)                         4.16 (±0.32)            4.13 (±0.21) 4.39 (±0.27)                4.13 (±0.3)
+ Nucleus (η=0.95)               4.3 (±0.28) 4.28 (±0.29)            4.49 (±0.26) 4.00 (±0.19)                         4.24 (±0.35)            4.14 (±0.17) 4.44 (±0.26)               4.08 (±0.29)
+                     [SUMMARY] ${response_2}
+ Top-k (k=30)                  4.35 (±0.25) 4.21 (±0.24)            4.53 (±0.27) 4.03 (±0.24)                           4.2 (±0.3)            4.16 (±0.22) 4.44 (±0.24)               4.18 (±0.26)
+ Top-k (k=40)                  4.34 (±0.27) 4.24 (±0.23)            4.53 (±0.25) 4.00 (±0.27)                         4.17 (±0.31)            4.11 (±0.18) 4.41 (±0.25)               4.17 (±0.33)
+      Evaluation
+ Mirostat (τ =3)               4.39 (±0.27) 4.26 (±0.23)            4.55 (±0.27) 4.02 (±0.22)                         4.16 (±0.32)            4.17 (±0.22)                     −                −
+      How(τfluent
+ Typical     =0.2)is the text? 4.36 (±0.29) 4.24 (±0.24)            4.55 (±0.25) 4.07 (±0.26)                         4.23 (±0.32)            4.14 (±0.26) 4.37 (±0.28)               4.16 (±0.29)
+ Typical (τ =0.95)             4.35 (±0.28)
+                                    Very fluent 4.24 (±0.23)        4.53 (±0.26)Mildly
+                                                        Somewhat fluent             4.04   (±0.21)
+                                                                                       fluent                         4.18 (±0.31)
+                                                                                                                       Not very fluent        4.18Not(±0.22)
+                                                                                                                                                       at all fluent 4.42 (±0.28)     4.22 (±0.27)
+
+
+TableHow
+      5: relevant
+          Breakdown           of human ratings on quality metrics per task; results for story generation are from finetuned
+                  is the summary to the article?
+versions of GPT-2 medium                  (m) and Somewhat
+                                Very relevant
+                                                  large (l).    Values in
+                                                           relevant
+                                                                           blue are variances.
+                                                                       Mildly relevant  Not very relevant Not at all relevant
+
+
+
+
+       Narrative 4
+                     [ARTICLE] ${prompt_3}
+
+                     [SUMMARY] ${response_3}
+
+
+       Evaluation
+       How fluent is the text?
+
+                                      Very fluent              Somewhat fluent               Mildly fluent             Not very fluent            Not at all fluent
+Figure 6: M AUVE, Zipf’s coefficient, (average) probability mass of candidate token pool and (average) candidate
+token pool size as a function of decoder hyperparameters for nucleus, top-k and locally typical sampling.
+                    Abstractive Summarization (CNN/DailyMail)
+Prompt      (CNN) The attorney for a suburban New York cardiologist charged in what authori-
+            ties say was a failed scheme to have another physician hurt or killed is calling the
+            allegations against his client “completely unsubstantiated.” Appearing Saturday
+            morning on CNN’s “New Day,” Randy Zelin defended his client, Dr. Anthony
+            Moschetto, who faces criminal solicitation, conspiracy, burglary, arson, criminal
+            prescription sale and weapons charges in connection to what prosecutors called a
+            plot to take out a rival doctor on Long Island. “None of anything in this case has any
+            evidentiary value,” Zelin told CNN’s Christi Paul. "It doesnt́ matter what anyone
+            says, he is presumed to be innocent." Moschetto,54, pleaded not guilty to all charges
+            Wednesday. He was released after posting $2 million bond and surrendering his
+            passport. Zelin said that his next move is to get Dr. Moshetto back to work. “He’s got
+            patients to see. This man, while he was in a detention cell, the only thing that he cared
+            about were his patients. And amazingly, his patients were flooding the office with
+            calls, making sure that he was OK,” Zelin said. Two other men – identified as James
+            Chmela, 43, and James Kalamaras, 41 – were named as accomplices, according to
+            prosecutors. They pleaded not guilty in Nassau County District Court, according to
+            authorities. Both were released on bail. A requests for comment from an attorney
+            representing Chmela was not returned. It’s unclear whether Kalamaras has retained
+            an attorney. Police officers allegedly discovered approximately 100 weapons at
+            Moschetto’s home, including hand grenades, high-capacity magazines and knives.
+            Many of the weapons were found in a hidden room behind a switch-activated book-
+            shelf, according to prosecutors. The investigation began back in December, when
+            undercover officers began buying heroin and oxycodone pills from Moschetto in
+            what was initially a routine investigation into the sale of prescription drugs, officials
+            said. During the course of the undercover operation, however, Moschetto also sold
+            the officers two semiautomatic assault weapons as well as ammunition, prosecutors
+            said. Moschetto allegedly told officers during one buy that he needed dynamite to
+            “blow up a building.” He later said he no longer needed the dynamite because a friend
+            was setting fire to the building instead. Kalamaras and Chmela are believed to have
+            taken part in the arson, according to prosecutors. “The fire damaged but did not
+            destroy the office of another cardiologist whose relationship with Dr. Moschetto had
+            soured due to a professional dispute,” according to the statement from the district
+            attorney’s office. Moschetto allegedly gave an informant and undercover detective
+            blank prescriptions and cash for the assault and killing of the fellow cardiologist,
+            according to prosecutors. He also requested that the rival’s wife be assaulted if she
+            happened to be present, authorities said. “He was willing to pay $5,000 to have him
+            beaten and put in a hospital for a few months, and then he said he would pay $20,000
+            to have him killed,” said Assistant District Attorney Anne Donnelly, according to
+            CNN affiliate WCBS.
+Reference   A lawyer for Dr. Anthony Moschetto says the charges against him are baseless.
+            Moschetto, 54, was arrested for selling drugs and weapons, prosecutors say. Au-
+            thorities allege Moschetto hired accomplices to burn down the practice of former
+            associate.
+Beam        Dr. Anthony Moschetto faces criminal solicitation, conspiracy, burglary, arson and
+            weapons charges. “None of anything in this case has any evidentiary value,” his
+            attorney says.
+Temp        Dr. Anthony Moschetto accused of planning to kill doctor, drug dealer. Scheme
+            imploded when a crisis developed in their relationships. Preliminary bond hearing
+            set for August 5.
+Nucleus   Dr. Anthony Moschetto, 54, pleaded not guilty to charges Wednesday. Two men –
+          identified as James Chmela and James Kalamaras – were named as accomplices.
+Top-k     Dr. Anthony Moschetto is accused of providing police with weapons and prescription
+          drugs. Authorities say he was part of a conspiracy to harm or kill a rival doctor. His
+          attorney calls the allegations against his client “completely unsubstantiated”
+Typical   Dr. Anthony Moschetto is charged with crimes including arson, conspiracy, burglary,
+          prescription sale, weapons charges. His attorney says “none of anything in this case
+          has any evidentiary value”
+                       Story Generation (WritingPrompts)
+Prompt    A kid doodling in a math class accidentally creates the world’s first functional magic
+          circle in centuries.
+Reference   It was dark and Levi was pretty sure he was lying on his back. There was firelight
+            flickering off of what was left of a ceiling. He could hear something but it was
+            muffled. He was almost positive it was screaming. When he tried to move he felt an
+            excruciating pain in his left side that caused him to cry out. His hand moved to it
+            instinctively and found something protruding from the wound. It seemed to be a pipe
+            of some kind. He attempted to pull it out but it was covered in blood making it slick.
+            Levi’s ears began ringing and the sounds began to become clearer, it felt quite a bit
+            like some one was driving needles into his eardrums. The sounds he was hearing
+            were definitely screams and not just one person’s, a lot of people were screaming or
+            yelling. There was some one close to him that was crying. He looked in the direction
+            of the tears and seen his sister kneeling beside him, her hands covering her face.
+            “What happened Laur?” He was shocked at the sound that barely rasped out from
+            between his lips. His sister’s hands jerked down and she stared down at Levi with a
+            shocked look on her face. “bu... I tho... you weren’t breathing!” What started as a
+            whisper ended in yell as she threw her self across her brother and began to sob anew.
+            Levi cried out hoarsely but she didn’t hear. She just continued to cling to him like
+            a little girl that had just found her lost doll. He put one of his arms around her and
+            scanned the room as much as he could. It looked like a warzone, like something out
+            of one of the many shooters in his gaming collection. “What the hell?” There were
+            dead bodies everywhere, he recognized some of them. There were firefighters and
+            EMT’s running around trying to find survivors in the rubble. Most of the screams
+            were coming from survivors. He seemed to be laying on top of the bottom of a desk,
+            and he was pretty sure the pipe sticking out of his side was a actually one of the legs.
+            Then he spotted it lying about two feet from his right leg, a round section of desk
+            about the size of a softball. On it was a round symbol with geometric shapes glowing
+            with dark red embers and a dull tendril of smoke rising up from it. It all came back to
+            him in rush. He drew that in his notebook. It was second period and his trig teacher
+            had this monotonous voice that could put a crack head to sleep. Laurana caught him
+            doodling and had thrown a pencil at him to scold him silently, which made him jerk
+            as he was connecting the last line on his drawing. Then there was the light and the
+            heat and lastly the dark. Did he do this? What the hell was going on here? A voice
+            brought him out of his little flashback. “Sir. Sir? Sir!” it was a firefighter. “I need
+            you to stay still. You’re going to hear a loud noise from behind you. I need you stay
+            calm.” Kay. “He just blew up his classroom with a piece of paper and a pencil and
+            this guy wants him to stay calm.” it’s going to cause this desk to vibrate a lot and
+            your going to feel some pain but there is nothing that we can do about it. We will
+            work as fast as possible.” The sound of the saw kicking on was not near as bad as he
+            had thought, but Levi was no where near ready for when it made contact with the leg
+            of the desk. His cries of agony began to drown out the sound of everything around
+            him until darkness overwhelmed him. Sorry about my grammar it’s been a while
+            since I have written anything also, first time poster so take it easy on me; p
+Nucleus   “Why do you draw a circle?” He asked as he handed the piece of paper over to her.
+          She rolled her eyes and looked down at the picture, “Because I like math!” “Then
+          what?” “I like to draw the circles.” She ran a hand through her curls and looked away.
+          “See, I have three circles.” “Hmph, I didn’t think I saw that in your class.” A younger
+          student brought up the ceiling and murmured. “Yeah, sure. It’s just, why do we draw
+          the circles?” “Because they’re circles.” She looked up. “But they don’t match up!”
+          She pointed at the nearby wall, “They don’t start out like this!” She ran a hand over
+          the map on the wall, “It starts out the same.” She turned and pointed to the map
+          marked with candles. “You have fire here.” “Well that’s nice.” He turned away from
+          her, “I don’t think the artists in class thought about it that way.” She pointed again.
+          “See? Even your circle!” “That’s my circle.” “Look, Mason.” “Hear, daughter.” “I
+          don’t see a man, and so can’t prove it.” The two young adults nodded in agreement.
+          Then she began to speak, “I draw the circles because I like to guess about what will
+          happen when I make circles.” “Yeah, and that’s what we’re going to do when you
+          make a circle and turn the paper to our faces.”
+Top-k     “Aha. Aah! That makes three.” Professor Gosh sighed. “Oh my God, you had to
+          have been there.” “Well, I’m not sure if that’s the right term, but this circle is going
+          to work.” “But I just told you that it wasn’t working, didn’t you, you little sh**?
+          I’m not kidding! That circle is gon na work!” “So what now?” “Well, that’s for you
+          to figure out. First, you’ve got to figure out a way to communicate with the circle.
+          Maybe the spell isn’t right for it, but it’s not going to ruin the circle.” “Okay, okay,
+          you’ve told me to figure it out so I’ll do a whole lot of work. But how exactly do
+          you communicate a spell to a circle of stones in a basement?” “Simple, really. You
+          put it inside the circle, and it magically works its way around the circle to get to
+          the person you wrote’I AM’ on.” “But how? Why am I supposed to be the main
+          caster?” “Because you don’t have magic powers to cast spells.” “What? That’s not
+          even supposed to be possible.” “You are special, you know.” Professor Gosh looked
+          at me with a little bit of sympathy. “I can’t believe you’re a wizard, you can do
+          all this stuff when you’re a kid.” “Well, yeah, that’s what they told me, so I guess
+          you’re right. But no matter how hard you try, you can’t control magic. Don’t worry,
+          we’ll figure out a way to make you a wizard one of your own.” “Okay, I think you
+          understand, I still haven’t figured out how to create a spell, but I am so excited about
+          the possibilities!” “Alright, let’s do this.”
+Temp   It was teachers duty to ensure that our kingdom is pure and pure and successful,
+       however it does not mean we do not try to be as rebellious as any other kingdom.
+       Most of our teachers are suitable for rulership, being knowledgeable in sadistic rec
+       thunking of time stopping magic circle created by several apprentices at the same
+       time. After the first amendment, we decided that whilst having a society that thrives
+       on protecting and serving the majority of people, whilst ensuring that the needs of
+       some are met, the elements of freedom, equality and liberty shall not be infringed
+       upon. Sadly, we ’ ve done little to uphold those values since the day our forefathers
+       signed the ancient Papercut act and limited the extent of human freedoms. It is now
+       a day we lay a steady hand on the pages of history, hoping that the rules shall be
+       rewritten and brought to what they once were. The next barrier to seeing the world
+       anew as a black pantheon was a fallen occult student, Mr Pegarchow in Commerce,
+       brought to history via the magic eye how to make a magic circle in the first place.
+       This student made a hoop in the library that can be opened with a simple spiral. If a
+       magic circle is inside this hoop, the magical illusion created is that a circle is made
+       with the appropriate essence of spirit. An image of Pgyarchow being covered by the
+       hoop, with the colours that inhabit it are verily magical. The magician essentially
+       created. . . magic. To this day, not a single piece of paper hath survived contact with
+       the magic eye. There were so many experiments looking for what function to draw
+       in, or when it starts, 3rd century of my not-so-distant time. Nothing turned out as
+       expected and everyone quickly passed into subculture that embraced the forbidden
+       art of forgetfulness. However, even through the strongest taboo that could cause,
+       symbols of independent spirit were still made and used as religion source material. I
+       am the last wizard right now though not by choice, which was rather problematic
+       after my mentor ’ s death. However, I am different, and a magician, not by birth but
+       via training and knowledge dedcialized from the single book of knowledge stored in
+       my heart, able to share it with everyone, even those who share their mothers blood.
+       To mhm, Lizonun
+Mirostat   ready to go home, when a little kid starts to sketch a circle. “No. Just stop. It’s not
+           working.” “But the circle turns to smoke and then to a flame. It’s not working, I know
+           it is!” Another kid, who was also drawing a circle with his phone, starts to scream.
+           The teacher, looking at the circle, lost his patience and started to yell at the student:
+           “This circle is not working, you need to come up with some more inventive magic
+           demonstration!” “I like it. You can draw it with your phone, it’s not hard.” “No,
+           stop it. Just stop drawing it like that and move on with your day. You look troubled.”
+           “No, I do. I can get some ideas for my magic circle. Also it looks cool and I can
+           tell everyone that it’s working.” “Ok, but you still have to come up with a name for
+           the circle.” “I can come up with kenning, kenning-perforant, kenning-untergrund
+           or kenning-unterhrund depending on the layout. Then my circle is named kenning-
+           unterhrund, and then I post that on reddit, and I sell it on Etsy!” “Uhh... you spelt it
+           wrong again using your phone, kenning-unterhrund for what’s a circle in the middle
+           of a room! You’re not getting any creativity from that!” “Still, I’m not that bad. I
+           could come up with a name too. We could see if our circle works on reddit!” The
+           teacher starts to object, but the kid just brushes him off: “open the door and let me in,
+           I’ll tell everyone my name for my circle.” The door is open and the teacher comes
+           in. “KENNING-UNTER DOES N’T WORK, IT’SBAGS!” The kid answers: “Open
+           the door and let me in. If there’s no door, I’ll come back tomorrow and make a new
+           one.” He sounds confident in his plan. “Ok, kenning-untergrund, kenning-unterhrund
+           or kenning-unteromactually totalitarian need you! Honoring your name will make
+           your circle work better!” The kid is ready to spell it then: “The kenning-untergrund,
+           kenning-unterunterhrund, kenning-unteronAAAKE!” The teacher asks: “What do
+           you mean fails?” “Ok, and I forgot why I just copy all my circles to my phone:)”
+           “You can’t make circles! That would be impossible. And you forgot the reason for
+           your circle to not work:)” “Yes, I did! I forgot the purpose of my circle and this
+           happened to me too:)” “That might happen, but get out of here immediately, the spell
+           is about to hit the ground!” The kid grabs the teacher by the shirt collar: “So what
+           did you get out of it? I thought magic circles are making people happy?” The teacher
+           looks at him with fury in his eyes: “You should go to the yelling and crying section
+           of the school, before the spell hits the ground. You’re going to repeat the’Wizard’
+           spell again.” “Thanks, but no, I’ll leave.” The kid grabs the ground and he leaves the
+           school. Then his circle is gone. The teacher is still trying to figure out what should
+           be done about the circle because he forgot to ask some of his other students. So he
+           goes home to his basement, to his computer and he starts to draw a circle. And then
+           he draws another one. And another one. Soon enough, there are some things that are
+           drawn on his screen: a circle with smoke coming out of it, a circle with fog coming
+           out of it, a circle with fire coming out of it, a circle with flavouring of words coming
+           out of it, a circle with adding words into it and a circle with some mixture of words
+           coming out of it. As the circle is wants to be drawn, he starts to move his finger Mask
+           he was using to draw the circle. When suddenly, his finger don’t move, slowly but
+           steadily, like a hand is starting to move against his will. The students are looking
+           at the screen now. They start to scream and yell: “Why is the hand still moving?!!”
+           “Yes,
+Typical   As soon as he got the clock on his desk he jumped up. The noise it was making had
+          changed his day forever. His hair, normally unkempt, now glistened and he had to
+          have more hair because of it. "Yes!" He had declared triumphantly as he watched his
+          father fumble around in the backpack in search of a little compass he always kept
+          with him. He took it from the desk and quickly walked out the door to see what
+          had happened. He wasn’t the first child in the world to draw something to him and
+          so far, so good. It wasn’t as big as a tree, but it did sparkle a little bit and made a
+          few notes in his calculus textbook. As he left the room, the others around him also
+          drew and explained to him their ability. Most kids who knew their way around magic
+          started to teach their spells in a lesson on learning. His teachers tried to tell him
+          about his parents but he only heard his name as they asked if he knew about them.
+          They explained how he would always go with them when he learned something and
+          then asked how he had found the way. His mother said she always did the work
+          when she taught and then how his father used the ingredients he had brought along to
+          create his circle. It wasn’t anything like what his mother would use to do her magic
+          but he wasn’t interested in her or his magic because it wasn’t his favorite type. As he
+          got older he got to watch as the world moved. His family went out on field trips to
+          look at stars and wonder where the other world is. They asked where his mother and
+          father went, and how long they spent on that. It wasn’t anything like he expected but
+          they never explained what the field trips were about. As he grew older he became
+          a man with more responsibility and began to notice things like this happen to the
+          rest of the world. As a man who didn’t believe in magic he found his circle was
+          missing from the side of the road he always stopped on to check his bearings. His
+          neighbors thought it was weird that his neighbors’ circles would get in the way. One
+          day his friends stopped on the street he was walking down and told him to get to
+          his car and take him to a store so they could find his circle. When they found his
+          circle they gave it back and it had no clue where it came from. After some further
+          digging he discovered the missing part of the circle. A pentagram that appeared out
+          of nothingness on the road and for the longest time, no one had been able to find it. A
+          couple weeks later a truck came out and dumped all of the construction workers that
+          were using the road and blocked it. When his circle had disappeared the news talked
+          about the weird pentagram on the road. This went on for months until his mother
+          noticed he wasn’t coming home. When she came home, she looked in his room and
+          he wasn’t there. When he wasn’t there he never made his presence known to her and
+          never tried to teach his spells to her. They eventually went back to their apartment
+          together. Her father didn’t even acknowledge his daughter at first but his wife didn’t
+          think to call him or get his attention. The father, seeing the pattern and a good time
+          with his daughter decided to stay. She told her parents to check their calendar. It
+          had stopped being so late that her father thought to take his place to try to sleep off
+          his spell exhaustion. The parents realized something was up and the wife suggested
+          she get her boyfriend and see if she could have a quiet time. It wasn’t a normal time
+          to do such things, but when he found her and saw his father had passed he told his
+          girlfriend that they would meet for drinks to get over it. The wife got ready to go,
+          and they drove home. She pulled over in front of their house. A truck pulled up in
+          the driveway, stopped and looked out and began to slowly pull into the driveway.
+          When she was looking in his eyes, she asked if he knew about her mother’s strange
+          powers. When he replied he asked how his father got the circle that they kept around
+          for all of these years.
+                  The man pulled up in his truck and gave his girlfriend the back seat and started the
+                  truck. She took him home, they drank, and watched a movie about dragons and
+                  aliens and made up a bedtime story for the boy and girl. After dinner the boy slept
+                  through the night. He dreamt that the circle had gone missing, that it had disappeared
+                  in his yard, and that the car parked next to him was covered in dust and it smelled
+                  like his room had been raided by monsters. After his sleep, the mother took him to
+                  his room to wake him up. When she entered he didn’t react at all. “Are you alright
+                  honey?” The mother asked him. The boy responded in the most puzzled tone she
+                  had ever heard him.
+
+Table 6: Full sample generations for abstractive summarization and story generation. We use samples from the
+model fine-tuned from GPT-2 large for story generation.
+

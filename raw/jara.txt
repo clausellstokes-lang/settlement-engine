@@ -1,0 +1,1193 @@
+                                                                    International Journal of Role-Playing - Issue 4
+
+
+
+
+      A Closer Look at the (Rule-) Books:
+      Framings and Paratexts in Tabletop
+              Role-playing Games
+Popular Abstract - As texts which are based on collaborative and interactive narration, tabletop – also
+known as “pen and paper” – role-playing games (TRPGs) are distinct in their technological simplicity.
+Indeed, in their traditional form all they require is the physical presence of a group of players – commonly
+around a table, hence “tabletop” – who collaboratively participate in developing a narrative; and a system
+of rules which allow resolving the outcome of situations in which different levels of chance may be
+involved – the need to write down statistic information making them “pen and paper”. Evidently, this
+apparent lack of sophistication makes role-playing games – as a clearly contemporary cultural
+phenomenon (cf. Punday, 2005; Nephew, 2004; Harrigan, 2007; Mackay, 2001) – stand out in the context of
+a world that is becoming ever more dependent on technology. All the more so, considering the persistence
+of TRPGs in the face of its “descendants” in other more technologically advanced media and despite what
+has become the popular notion of “the bigger, the faster, the better.” Nevertheless, that which occurs
+during a role-playing game session – the level of interactivity, player immersion in the narrative, flexibility
+of the rules, etc. - generally surpasses, even today, what many of its “successors” achieve. How does this
+occur? How is it possible; through what mechanisms do TRPGs allow such sophistication when relying
+solely on the “old fashioned” technologies of (hand-) writing and oral narration? Approaching these
+questions from the general perspective of literary studies, the following paper problematizes what can be
+called a “naïve view” of communication technology by addressing the complex relationship between the
+printed texts used for role-playing – such as rule- and sourcebooks – and the narratives created during
+game-play. To do so, it addresses the fundamental influence that framings, such as rules, character sheets
+and setting, as well as paratextual elements contained within or at the borders of these texts, such as cover
+illustrations, prologues and epilogues, just to name a few – have on participants’ interpretation and, most
+importantly, creation of TRPG narratives.
+
+
+
+                                                David Jara
+                                          University of Heidelberg
+                                                 Germany
+                                     david.jara@hggs.uni-heidelberg.de
+
+
+
+ABSTRACT                                                  the reception of the diegesis (once it has come into
+                                                          existence) but, because they temporally precede its
+Approaching the subject from the general
+                                                          actual    creation,   heavily      influence   player
+perspective of literary studies, the following paper
+                                                          expectations and are thus decisive for the
+analyzes the impact that framings (as by Wolf,
+                                                          subsequent production of text. This way of using
+1999) and paratexts (as by Genette, 1987)2
+                                                          fiction to create additional fiction has relevance to
+contained within TRPG rule- and sourcebooks3
+                                                          forms of readership beyond RPG play (Walton,
+have on the construction and negotiation of
+                                                          1990) and may account for the persistence of the
+narratives during game-play. More specifically, the
+                                                          face-to-face game in a technologically mediated
+text argues for an unconventional use of such
+                                                          age.
+elements due to the fact that they not only affect
+
+
+
+                                                                                                              39
+                                                                                 International Journal of Role-Playing - Issue 4
+
+
+
+1. INTRODUCTION                                                        works, Werner Wolf, has called attention to the
+                                                                       “well known fact that literary texts, more than non-
+From the perspective of literary studies, TRPGs
+                                                                       literary ones, are usually accompanied by framings
+present us from the beginning with an intrinsic
+                                                                       referring to the specificity of the text and giving
+theoretical dilemma: the fact that a “proper”, fixed,
+                                                                       hints as to how to read it.” (1999: 102) Implicitly,
+“main text” is unavailable. Indeed, the actual role-
+                                                                       therefore, Wolf proposes a specific use of framing
+playing game narratives only emerge during the
+                                                                       devices (or ‘framings’) in literary texts which is to
+game session itself and exist ephemerally within its
+                                                                       be distinguished from their function in “normal” or
+boundaries. Nevertheless, the session can also be
+                                                                       stereotyped speech situations. In the latter cases,
+seen as being “tertiary”, largely the product of
+                                                                       “frames will be more or less taken for granted, as
+other texts; those that establish the broad fictional
+                                                                       such situations seem to call for certain frames
+premises and the rules by which the fictional space
+                                                                       automatically as default settings.” (Wolf, 2006: 5)
+is to be negotiated (“primary texts”); and those that
+                                                                       With fictional texts however, not only has the frame
+establish the specific fictional premises that allow
+                                                                       of reference first to be established (cf. Hruschovski,
+for a particular game session to develop
+                                                                       1984) but it has to be assigned a meaning as well;
+(“secondary texts”) (Hammer 2007). But how
+                                                                       In such cases, “special (additional) agreements
+exactly does this textual “conversion” take place?
+                                                                       between ‘senders’ and ‘receivers’ have to be made
+While there are several accounts on how rules
+                                                                       and signaled.” (ibid. 6) Because of the fact that the
+enable and shape diegetic play (Punday, 2005), the
+                                                                       most effective framing devices are those that
+function of the rulebooks qua books is still greatly
+                                                                       influence the reading of a text from its beginning,
+under examined. The following paper explores
+                                                                       focusing on those elements which precede the
+their impact by looking at both the framing (Wolf,
+                                                                       main text is recommended. According to this
+1999) as well as the paratextual elements (Genette,
+                                                                       approach, (literary) ‘framings’ are to be understood
+1987) contained in these texts. Furthermore, I will
+                                                                       as,
+argue that TRPGs are a special instance of
+textuality in which the construction of narratives
+relies heavily on an unconventional2 use of such
+                                                                          “[…] easily identifiable markers […] that exist
+elements. Rather than functioning solely as
+                                                                          in the immediate context or within a work of
+mediators between the reader(s) and the framed
+                                                                          fiction previous [emphasis in the original] to the
+text – influencing the perception and interpretation
+                                                                          reader’s framing activity and indeed serve as its
+of the latter3 – these ‘genesic’ framing devices are
+                                                                          most important basis. These framings are or
+created prior to the main text, and serve thus the
+                                                                          seem to be located on another level than the
+function of extending (multi-) authorial control
+                                                                          framed text, they contribute, for the reader, to
+over the game by actively shaping the narrations
+                                                                          the constitution or stabilization of a (real or
+created during play. This is done not only
+                                                                          imaginary) communicative situation in the
+procedurally, but also by shaping the narratives’
+                                                                          literary exchange and also help him or her to
+“story space”, its genre conventions or ‘interaction
+                                                                          select frames of interpretation or reference
+codes’ (Fatland, 2006) that players draw upon to
+                                                                          relevant       for     the      work       under
+create their contributions to play.
+                                                                          consideration.” (1999: 103)
+
+
+2. FRAMINGS AND PARATEXTS
+                                                                       In addition, Wolf also points out that there are four
+Criticizing what he considers to be a general lack of
+                                                                       “potential ‘agencies’” of such framing, adding to
+academic research concerning framing in literary
+                                                                       the authorial instance (‘sender’) that of the reader
+
+1 The references to Genette in the following paper are based on the English translation of Seuils (1987)
+
+2 For the purpose of this paper, I will be using mainly game material published by White Wolf due to their explicit focus
+
+ on ‘storytelling’. (All material used under permission from the publisher: White Wolf © 2012 CCP hf. All rights
+ reserved.)
+3 At least in relation to their use in “traditional” literary forms.
+
+4 Understood in the context of linguistic analysis, the term ‘frame’ (as by Goffman, 1974) may be described as “the sum of
+
+various factors that influence and predetermine discursive exchanges, contribute to their coherence and meaningfulness
+and distinguish specific discursive exchanges from other possible ones.” (Wolf, 1999: 98) As such, frames are generally
+equated with “a ‘speech situation’ in its broadest sense including the rules and contexts stabilizing the meaning of the
+discursive exchange.” (ibid.) Moreover, they are to be understood as cognitive meta-concepts that “generally function as
+preconditions of interpretation.” (Wolf, 2006: 5) Because of
+
+                                                                                                                          40
+                                                                   International Journal of Role-Playing - Issue 4
+
+
+
+(‘recipient’), the text (‘message’) and its context       using a term which could “in principle” apply to
+(2006: 15). Of the four, however, it is primarily the     almost anything. In order to avoid such
+textual and contextual framings that can be directly      recursiveness, Wolf proposes a principle of
+observed and analyzed since ‘sender’ and                  contiguity to the definition of framing while
+‘recipient’-based ones are mainly internal cognitive      redefining the term paratext as a framing sub-
+processes (ibid.).                                        category:
+Generally speaking, Wolf’s idea of a framing
+device appears to correspond with what Gerard
+                                                             “[I]n contrast to Genette, for whom ‘paratexts’
+Genette (1997) has defined as the paratext. The
+                                                             comprise both ‘contextual’ and ‘textual’
+latter encompasses a wide variety of phenomena
+                                                             framings, I would like to restrict ‘paratextual
+such as the name of a book’s author, titles,
+                                                             framings’, whether authorized or not, to a
+subtitles, footnotes, prefaces, commentaries, and
+                                                             variant of ‘textual’ framings, namely to [those]
+illustrations; all of which, as Genette argues,
+                                                             which are parts of individual works and are
+surround and extend the text in order to make it
+                                                             positioned at their borders, but are discernible
+available, allowing its reception or, as he puts it, to
+                                                             not only through their liminal position, but also,
+“ensure the text’s presence in the world” (1).
+                                                             and, above all, through their function as
+Furthermore, because paratexts influence the way
+                                                             introductory, explanatory etc. that forms the
+in which a text is interpreted, Genette considers
+                                                             ‘threshold’ to the main text of the work in
+them to be defined on the most part “by an
+                                                             question” (2006, 20)
+authorial     intention    and     assumption        of
+responsibility” (ibid. 3). Accordingly, such textual
+phenomena may be considered to be an instance of          As Genette, Wolf also indicates that the main
+authorial control; a point from which the author          function of framing in literature – of which the
+can influence the way in which his text is read.          paratext is, indeed, a prominent form - is to guide
+                                                          and control interpretations within the “abstract
+                                                          cognitive frames” presented by fictional texts
+   Indeed, this fringe (the paratext), always the
+                                                          (2006: 6).
+   conveyor of a commentary that is authorial or
+   more or less legitimated by the author,                Not only is Wolf’s re-definition of the term
+   constitutes a zone not only of transition, but of      ‘paratext’ necessary, but it is also an important one
+   transaction [emphasis in original]: a privileged       to notice here, especially considering the fact that
+   place of a pragmatics and a strategy, of an            the latter has been broadly used in game theory
+   influence on the public, an influence that –           since its introduction to the field by Mia Consalvo
+   whether well or poorly understood and                  in her influential book Cheating (2007). In it,
+   achieved –is at the service of a better reception      Consalvo coins the term “paratextual industries”
+   for the text and a more pertinent reading of it        stating that:
+   (more pertinent, of course, in the eyes of the
+   author and his allies) (ibid. 2)
+                                                             “I believe that the peripheral industries
+                                                             surrounding games function as just such a
+Thus, the paratext is to be understood as secondary          paratext. Gaming magazines, strategy guides,
+to the main text and as such, as “fundamentally              mod chip makers [etc.] work to shape the
+heteronomous, auxiliary, and dedicated to the                gameplay experience in particular ways. Those
+service of something other than itself that                  ways have played a significant role in how
+constitutes its raison d'etre.” (ibid. 12)                   gameplay is now understood. […]The central
+                                                             tendency remains though: the creation of a
+While useful, Genette’s notion of the paratext
+                                                             flourishing paratext has significantly shaped
+proves to be a problematic one as well; a fact which
+                                                             games and gamers in the process of creating
+is not difficult to understand when considering
+                                                             new markets.” (9)
+that for him, “‘every context serves [in principle] as
+a paratext’” (9) Thus, the paratext could include
+even background information about the author              While Consalvo’s application of the term has
+concerning such things as, for example, his age,          proved enlightening and useful in a general sense,
+sex, etc. (ibid. 7) Clearly, there is little value in
+
+
+
+                                                                                                            41
+                                                                                    International Journal of Role-Playing - Issue 4
+
+
+
+as it adds an important perspective to the study of                     Additionally, TRPG rulebooks in themselves also
+games and the seemingly endless production of                           seem to comply with several of the criteria
+text that surrounds them, a more detailed approach                      mentioned in Wolf’s definition of framings: they
+must acknowledge that in order to determine                             exist in the immediate context of the diegesis and,
+specific types of paratext and their functions, the                     since they precede the actual game playing, they
+particularities of the medium itself must be first                      also exist prior to any reader/player’s input or
+put under consideration. Additionally, it is                            framing activity. At the same time, they are
+necessary to identify the nature (and location) of                      physically separated – and thus appear to be easily
+the primary/main text. Only then will it be                             identifiable – from the diegesis of the game. Clearly,
+possible to recognize and differentiate relevant                        these texts guide the interpretation of in-game
+paratexts and framings. In the case of TRPGs, such                      events, either by laying out the rules which
+a distinction has special importance due to the                         underlie the outcome of certain actions or by
+complex nature of its text(s) (cf. Padol, 1996;                         providing a (fictional) context within which
+Stenros, 2004). Since my approach to TRPGs is                           character action becomes meaningful.
+mainly from the perspective of literary studies, I
+will consider the diegetic level as the primary text
+of the game session2. In a general sense then, TRPG                       Because TRPG rulebooks exemplify
+framings can be understood as elements that serve                          how “primary authors” extend their
+to ‘trigger’ relevant ‘meta-concepts’ (i.e. frames) for                  influence upon the game, it is through
+the interpretation of discourses within the game’s
+                                                                           them that we can better understand
+diegesis3.
+                                                                          how the different authorial instances
+                                                                             involved in TRPGs negotiate the
+3. FRAMING IN TRPGs                                                       shared fictional environment during
+As mentioned previously, the lack of a fixed, “main                                       play. (3)
+text” or diegesis is a major difficulty for the study
+of the TRPG medium. However, as Hammer (2007)
+has proposed, from the point of view of its                             However, because of the fact that the information
+construction, the diegesis of the RPG session can                       they contain may be directly adopted in the
+actually be seen as being “tertiary”, since it                          interface (Padol, 1996), becoming an integral part of
+emerges greatly as a product of other texts. Where                      the diegesis, the nature of such information
+the “primary” text serves to first establish the                        becomes ambiguous: is it within or without of the
+broad fictional premises (setting) and the rules by                     diegesis? Or is it perhaps both? While rules are
+which the fictional space is to be negotiated, the                      always formally external to the story, their
+“secondary” text provides the specific fictional                        implementation has direct effects on the in-game
+premises on which a particular game-session is                          events; setting and plot material, for their part, are
+based      (plot).    Correspondingly,       Hammer                     always potentially diegetic. Evidently, far from
+distinguishes three types of RPG authorship:                            being a singular text, the rulebook comprises in
+primary, secondary and tertiary. Because TRPG                           itself a great amount of heterogeneous information
+rulebooks exemplify how “primary authors”                               which is relevant for different levels of meaning
+extend their influence upon the game, it is through                     within the complex system of information that is
+them that we can better understand how the                              the TRPG session2. At the same time, not all of its
+different authorial instances involved in TRPGs                         components must necessarily be seen as framing
+negotiate the shared fictional environment during                       devices and, even if they are, do not have the same
+play. Moreover, since both Genette as well as Wolf                      relevance. Thus, it becomes necessary to further
+have stressed the importance of paratexts/                              reduce our focus within the rulebook itself. I
+framings as an instance of authorial control over                       propose therefore a (very) general distinction of the
+the text, the study of these elements is key to                         information contained in these texts which may be
+understanding how this negotiation takes place.                         roughly classified into: rules, setting information
+                                                                        and (meta)framing devices. Because of their
+                                                                        explicit focus on ‘storytelling’, I will be drawing
+
+5 This distinction, however, is done mainly for practical purposes: The fact that the TRPG game session is, in itself, a multi-layered
+
+  text is one that is acknowledged and the necessity of such a reduction will be justified later on.
+6 This notion ties in closely with Ilieva’s (2012) enlightening analysis of the negotiation of cultural codes in LARP discourse. My
+
+ focus in this paper, however, is more directed towards the specific materiality of these triggering elements and their relationship to
+ the negotiated, diegetic text.
+                                                                                                                                    42
+                                                                                   International Journal of Role-Playing - Issue 4
+
+
+
+examples for the most part on games based on                            in terms of ‘virtues’, ‘vices’ and ‘morality’, thus
+White Wolf’s World of Darkness (WoD) TRPG.                              triggering the frame ‘moral conflict’ as a guiding
+                                                                        interpretive meta-concept of the potential stories
+                                                                        created during game-play. By doing this, not only
+ in their specific form - by including (or                              does the game implicitly encourage players to
+    excluding) rules for certain actions                                create characters with psychological depth – thus
+  instead of others – rules affect player                               creating stories which involve the portrayal of
+   (as well as GM) expectations for the                                 inner conflict – but, because of the nature of the
+   game, thus influencing their input in                                attributes it focuses on, it also influences the type of
+             the narrative. (3)                                         inner conflict portrayed.
+                                                                        It is important to point out, however, that
+                                                                        quantification is not necessarily the only (although
+3.1 Rules                                                               it is probably the most common) mode of
+While rules constitute the basis of the textual                         representation within a RPG rules system (cf.
+interface that allows for multiple player interaction                   Hitchens & Drachen, 2008). An example of this is
+during role-playing games (Punday, 2005), we                            the fact that, while the ‘morality’ trait is indeed
+must ask ourselves whether these elements are                           represented numerically, the ‘virtue’ and ‘vice’
+merely constituents of the ‘game frame’ or whether                      attributes are expressed solely in qualitative form.
+they are also a framing (i.e. whether they act as                       As stated in the WoD rulebook, “Virtues are not
+frame ‘triggers’) of the diegesis. Necessarily, they                    extensions of a character’s Morality. Rather, they
+are the first, since the idea of ‘rules’ is an essential                are ideals that inform his actions and provide a
+part of the meta-concept ‘game’2; at the same time,                     framework by which he interacts with society [my
+however, rules also allow player interpretation of                      emphasis].” (92)
+in-game situations, functioning simultaneously as                       Still, the representation (statistic or otherwise) of
+framing devices. In this respect, Will Hindmarch                        inner traits implies an important hermeneutic
+has asserted that “TRPG rules help the players and                      inversion regarding most other types of fiction; that
+the Storyteller understand and explain how their                        is, where in conventional fiction readers may
+characters, as their agents in the game world, affect                   deduce and/or interpret a character’s inner
+and respond to the actions that unfold in the                           feelings and struggles by his actions or - itself a
+story.” (51) Furthermore, in their specific form - by                   classic example of a framing device - internal
+including (or excluding) rules for certain actions                      monologues within the text, in TRPGs, the inner
+instead of others – rules affect player (as well as                     characteristics have been (numerically) fixed to
+GM) expectations for the game, thus influencing                         guide and help participants in understanding and,
+their input in the narrative. Thus, the rules not only                  therefore, playing their characters.
+allow the interpretation of in-game i.e. diegetic                              Fig. 1. Dungeons and Dragons Character Sheet
+situations, but also shape them as they                                                           (1974)
+meaningfully delimit the choices available to
+players from the “outside”. Indeed, as Hayot and
+Wesp (2004) have pointed out, “those elements of
+the game that lay at the heart of the game’s
+strategic considerations are also a form of
+representation.” (410) This becomes especially
+evident when considering the issue of character
+construction (cf. Lankonski, 2004). For example,
+games such as those published by White Wolf not
+only have rules to statistically represent “physical”
+elements and character attributes, but also for
+representing a number of “inner” attributes such as
+personality and, most interestingly, moral values
+(see fig 2.). In the case of the World of Darkness
+games, characters’ personalities are depicted partly
+
+7 For an in depth analysis of   role-playing as a system of information, see Harviainen (2012)
+8 In this respect, Wolf has stated that “a frame is, as a rule, designated by a single term and as such corresponds to one metaconcept
+
+but usually governs a plurality of subconcepts and expectations.” (2006: 4)
+                                                                                                                                   43
+                                                                                International Journal of Role-Playing - Issue 4
+
+
+
+This, as expressed in the Vampire Players’ Guide
+represents a “convenient heuristic if a player isn’t                Thus, a “good” character might reasonably act in a
+entirely certain how his character is likely to                     way that is contrary to his “nature” – the trait only
+respond to a certain situation” (21). Thus, players                 determining the probability of a character acting in a
+are expected to interpret in-game situations                        certain way -, resulting in a change in its statistic
+concerning their characters in terms of a                           representation on the game level. This change, for
+quantified/qualitative representation of inner                      its part, might then influence future actions of the
+traits. To this extent, stat sheets are clearly framing             same character. The following passage of the
+devices, but such that they not only guide                          rulebook makes this clear:
+interpretations but also determine to a certain
+extent that which they frame. It is important to
+note, however, that the translation of a rating into                     “[M]ortals have a much greater penchant for
+the game through character action is in itself also a                   change and growth than vampires. As living
+matter of interpretation since not all characters                       things, they are free to change their courses at
+with the same rating necessarily reveal it the same                     any time. Mortals can “turn over a new leaf,”
+way. Take, for example, the trait of ‘Humanity’ in                      while vampires don’t really have that option. To
+Vampire, a trait that represents “humankind’s                           reflect this, mortal characters regain humanity
+better, more humane and caring aspect.” (ibid. 22)                      at a different rate than Kindred”3 (Requiem 23)
+The players’ guide states that:
+   “[M]oral decay does not affect everyone the                      This understood, one may describe the role-playing
+   same way. Not every mortal with a Humanity                       game session as a constant “interpretive loop”
+   of 2 [a very low rating] or less is going to                     between diegetic and game frame4. This is made
+   become a Charles Manson, Adolf Hitler or                         especially evident in the character creation process;
+   Joseph Stalin. Moral bankruptcy wears many                       more specifically, in the transition from the
+   faces, and not all of them coincide with the                     character as a statistic entity to a narrative one.
+   more simplistic expressions with which we may                    Indeed, after constructing the framework of a
+   be familiar” (ibid.)                                             character, all a player has are “some traits and a
+                                                                    general sense of who [his] character might
+                                                                    be.” (Players’ Guide 23) However, in order to “flesh
+Evidently, the way in which a trait is portrayed
+                                                                    it out”, the player must be able to “make the leap
+depends on how it is to be interpreted within the
+                                                                    from seeing the character as a collection of
+context of a specific game. Nevertheless, in-game
+                                                                    numbers and begin to view him as a full-fledged
+events can also modify the statistics that represent
+                                                                    living, breathing individual.” (ibid.) This transition
+them.
+                                                                    is based on a fundamental need for providing
+                                                                    inner-diegetic plausibility. In other words, it does
+      Fig. 2. World of Darkness Character Sheet (2004)              not suffice that character stats have been
+                                                                    appropriately chosen from a strategic point of view
+                                                                    – which would make sense if a TRPG were truly
+                                                                    only a game – if they cannot be explained in a
+                                                                    logical way from a diegetic one. Therefore, the
+                                                                    Vampire Players’ Guide recommends GMs
+                                                                    (‘storytellers’) to “demand a certain degree of
+                                                                    realism from the game [so] that players can suspend
+                                                                    their disbelief and immerse themselves in their
+                                                                    characters [my emphasis]” (ibid.). Failing to do so,
+                                                                    the text warns, will have repercussions on the
+                                                                    game as it “will never take on a feel of a shared
+                                                                    world and […] always feel like a bunch of people
+                                                                    sitting around a table rolling dice.” (ibid.)
+
+
+
+
+9 Kindred being the self-designating term used by vampires in White Wolf’s Vampire setting (cf. Requiem 14).
+
+
+                                                                                                                       44
+                                                                                    International Journal of Role-Playing - Issue 4
+
+
+
+3.2 SETTING INFORMATION                                                     “While each story has its own central theme, the
+Setting information constitutes what can be seen as                         looming theme behind them all explores the
+the “substance” of the TRPG rulebook; it consists                           dramatic ramifications of a world of
+of information pertaining to the fictional world that                       supernatural secrets. Storytellers and players
+can be selectively used and introduced into the                             alike should be mindful of this theme when
+game interface2. Nevertheless, unless disputed or                           they feel the need to return to the roots of the
+explicitly modified during the game, the setting                            game.” (ibid. 23)
+can be seen as an implicit agreement constituting
+the diegetic level’s frame of reference, i.e. the
+“hypothetical primary framework” on which the                                 if the discursive interface of the
+game is based. Thus, if the discursive interface of                       players is to be seen as the artifact of
+the players is to be seen as the artifact of the role-                      the role-playing game, the setting
+playing game, the setting information can be
+                                                                             information can be considered a
+considered a coding of the frame within which this
+                                                                          coding of the frame within which this
+discourse becomes meaningful. In this respect
+setting information complies with the general
+                                                                           discourse becomes meaningful. (5)
+function     of     “substitut[ing],    simulat[ing],
+modify[ing], add[ing] to, or […] represent[ing],
+those frame constituents and framings which in                          Evidently frames such as genre and theme serve as
+ordinary discursive exchange are implied in the                         guiding meta-concepts within which the TRPG
+communicative       situation    or    are     agreed                   narratives develop. Their central importance is
+upon.” (Wolf, 2006: 103)                                                highlighted by the fact that they are explicitly
+Additionally, genre, theme and mood indications are                     triggered within the main text of the rulebook. In
+among the most important framings for the                               the case of Vampire: The Requiem, the genre –
+collaborative construction of narrations during                         “modern gothic storytelling game” – proves to be
+role-playing game sessions. Clearly, the triggering                     important not only for the main theme of the game
+of specific genre frames does not affect the reading                    (“morality”), but also for the aesthetic associated
+of the rulebook – which, in itself, has no literary                     with it:
+genre; or rather, whose “genre” is precisely that of                        “What you hold in your hands is a Modern
+being a ‘rulebook’ – as much as it produces                                 Gothic Storytelling game, a roleplaying game
+expectations as to the story possibilities of the                           that allows you to build chronicles that explore
+game. As a consequence, players are guided into                             morality through the metaphor of vampirism.
+creating narratives which are conceptually and                              In Vampire, you “play the monster,” and what
+aesthetically more unified as they follow general                           you do as that monster both makes for an
+literary genre conventions. For example, the WoD                            interesting story and might even teach you a
+core-rulebook, which comprises the basic, common                            little about your own values and those of your
+setting and rule information for most of the                                fellows […] The setting of Vampire borrows
+company’s other games, is defined as a “horror                              greatly from gothic literature, not the smallest
+game” (WoD 22, 23). Thus, by invoking the frame                             amount of which comes from the “set dressing”
+of ‘horror fiction’ the rulebook invites players to                         of the movement. Key to the literary gothic
+include motifs, tropes and topoi typical of this genre                      tradition are the ideas of barbarism, corruption
+into their campaigns. The same can be said                                  and medieval imagery.” (14)
+concerning its mood (“dread”) and theme (“dark
+mystery”). As for the latter, the rulebook states:
+
+
+10 Harviainen (2008) has defined this in terms of each player’s “personal hermeneutic circle” (75). Thus, the game can be considered
+
+  a number of texts where “the gaming process itself can be treated as interpretation done by the participants, and analyzed as
+  such.” (ibid.)
+11 Borgstrom (2007) goes even further, arguing that the setting of the actual game is never the same as that contained within the
+
+  published book:
+          [T]he setting that one group plays in is not the setting that another group plays in. In effect, role-playing games in their
+          static, published form do not describe a specific fictional world or story. They describe a large multidimensional space of
+          fictional worlds and stories organized by unifying data (57).
+12 The following examples are indeed only a very tiny fraction of the framings available in these texts. A thorough identification and
+
+analysis of all of such elements would greatly surpass the scope of this article.
+                                                                                                                                   45
+                                                                   International Journal of Role-Playing - Issue 4
+
+
+
+3.3 RULEBOOK (META-)FRAMING                                  “[s]tory structure can also come from the
+DEVICES12                                                    game’s setting and the assumptions that people
+Among the different elements of the rulebook, it is          take from a game’s components and packaging.
+its own framing devices which present the most               If you buy a game called “Kill the Dragon,” you
+interesting features concerning the framing of the           assume that there will be a dragon and to win
+diegesis. Indeed, considered as an artifact in its           you must kill it, and that is the direction your
+own right, the rulebook, as any other printed text,          play will take.” (77)
+features a variety of framing elements such as a
+“front and back cover, which usually displays its
+title and the names of its designer and                     Rulebook covers are generally good
+publisher” (Nephew, 2004: 21). However, as we              examples of how different paratextual
+will see, these texts not only serve to stabilize the      elements may be combined to create
+meaning and guide the interpretation of the                   what can be seen as a unified,
+information contained within the rulebook itself but,         plurimedial framing device. (6)
+in most cases, they are directly related to the
+diegetic level of the game. Thus, they become
+meta-framings of the potential diegesis, creating
+expectations concerning the stories that may be           This can be described in terms of the double function
+told during play. Considering the fact that one of        of the text’s framing devices explained previously,
+the main functions of framings is to “mark an             as they mark both the artifactuality of the rulebook
+artifact as such and distinguish it from its              as well as that of the potential interface/diegesis
+surroundings by indicating the special rules              created by the players.
+(frames) that apply in its reception,” (Wolf, 2006:
+26) these framing devices can be said to have a           3.3.1 The cover
+double function by marking two artifacts: the
+                                                          Rulebook covers are generally good examples of
+rulebook proper and the textual interface produced
+                                                          how different paratextual elements may be
+during play.
+                                                          combined to create what can be seen as a unified,
+The most evident examples of framing in rulebooks         plurimedial framing device. Thus, although we can
+are those denominated paratexts in the narrower           generally deconstruct them into a verbal, a
+sense, such as titles, prologues, epilogues,              typographical and a pictorial component, we must
+illustrations, and so on. More specifically, these        keep in mind that they function as a framing unity.
+elements correspond to what Genette has deemed            Furthermore, by observing the simplicity of the
+‘peritexts’ – texts at the borders of a work – as         original cover of the D&D game from 1974 (See fig.
+opposed to ‘epitexts’ – those texts which are             3), it becomes evident that the aforementioned
+materially removed from the work in question.             “double use” of framing devices was notoriously
+Among these framings, those which exist in initial        less prominent in early TRPGs (compare also figs. 1
+position tend to have greater relevance in their          & 2).
+influence      upon     reader     expectations    and
+interpretation of a text (Wolf, 1999). Evidently,
+because of their practically invariable position at
+the beginning of a text, titles are one of the primary
+mediators between work and reader. As such, they
+are one of the main instances of influence upon a
+text’s reception. Moreover, titles of role-playing
+game rulebooks are interesting cases of initial
+paratexts, because they do more than just referring
+to the content of the book that they frame. Indeed,
+if we consider games such as Dungeons and
+Dragons, Vampire or Paranoia, it becomes evident
+that their titles say less about the books as artifacts
+than about the type of stories than can be told with
+them. As Wallis (2007) has observed,
+
+
+
+
+                                                                                                            46
+                                                                                    International Journal of Role-Playing - Issue 4
+
+
+
+        Fig. 3. Dungeons and Dragons Covers (1974)                      although the cover illustration might appear at first
+                                                                        glance to be a quite “literal” translation, so to
+                                                                        speak, of the title, it is actually an essential
+                                                                        complementary element that expands the initial
+                                                                        premise established in verbal form. Seen from
+                                                                        behind, a solitary human figure is shown walking
+                                                                        down a dim lit street at night.
+                                                                                                     Fig. 4
+                                                                             a) World of Darkness Cover (Left) and b) Inlay Cover
+                                                                             (right)
+
+
+
+
+Apart from the rulebook’s title and illustration, it is
+clear that the subtitle refers primarily to the
+strategic character of the information contained
+within the text itself rather than its possibilities of
+constructing an actual story within the fictional
+                                                                        The picture is altogether full of dark shadows, with
+world. Thus, these elements trigger the frame
+                                                                        the lighter areas being merely a slight hue of blue
+‘game’ rather than ‘narrative’ (i.e. ‘fiction’) as the
+                                                                        or gray. Nevertheless, the image is actually less
+governing frame of the TRPG session. This may be
+                                                                        redundant than it seems. First of all, the “world” of
+contrasted with fig. 4, which shows the cover and
+                                                                        the title is now portrayed as a familiar one, not a
+inlay cover respectively of the World of Darkness
+                                                                        valley full of ‘orcs’ or a spaceship adrift in the vast
+core-rulebook. Although the title in itself is still
+                                                                        darkness of the cosmos, but an alleyway that does
+relatively generic, it already conveys an ominous
+                                                                        not appear to differ greatly from those in the real
+feeling, a certain uneasiness that relies heavily on
+                                                                        world. Additionally, there seems to be a
+the general association that is made between
+                                                                        concretization of the slight uneasiness implicit in
+darkness and the fear of the unknown; of that
+                                                                        the title, now heightened and transformed into
+which may not be seen. Were it on its own,
+                                                                        definite suspense by the almost topical motif of the
+however, the title would still leave enough space
+                                                                        lone figure in the dark alleyway. At the same time,
+open to speculation: What kind of world is meant?
+                                                                        there seems to be the implication that this now
+What kind of darkness? Indeed, the “world of
+                                                                        impending menace is not of a natural kind - not the
+darkness” of the title could still refer to any
+                                                                        “junkies” around the corner - but something more
+number of settings, with “darkness” referring to,
+                                                                        mysterious and unknown. This feeling is conveyed
+for example, evil (i.e. “dark”) forces, the “dark
+                                                                        by the blurred and “shaky” nature of the image
+ages” of a particular fictional world, or a particular
+                                                                        which resembles a badly taken picture. Within it,
+“dark lord.” However, the title could also refer to
+                                                                        the objects appear to lack definite borders, giving
+an outer space setting or to a setting where the
+                                                                        almost the impression of “seeing double”. It is
+characters are all blind. Clearly, taken on its own
+                                                                        precisely this idea that is further reinforced by the
+the title is highly indeterminate. In this respect,
+13 A similar framing strategy has been described by Roy Sommer (2006) in the context of film analysis:
+
+Both the design of, and the information conveyed by, the titles and credits themselves make a significant contribution to the framing
+process. For instance, paratextual devices such as the use of distinctive fonts in the title sequence of Star Wars: Episode III create
+continuity between this episode and the other movies of the saga. (392)
+14 Indeed, later on in the rulebook we find a passage that closely resembles our interpretation of the cover:
+
+       Characters in the World of Darkness can blur the line between reality and the occult. Indeed, that’s what it’s all about.
+       Exploring a world of mystery that tries to keep itself hidden. A world that punishes those who look too deep. But those
+       who refuse to look suffer even worse. They’re rocked on seas of conspiracies of which they go unaware. Damned if you
+       do, damned if you don’t. There are no easy answers, and knowing is not half the battle. It’s only the first shot in a long,
+       grinding war against the shadows. (WoD 23)
+
+                                                                                                                                     47
+                                                                   International Journal of Role-Playing - Issue 4
+
+
+
+typographical form of the title itself (fig 5.), whose
+letters appear to be shifted and slightly displaced.     Contrasting with the rest of the illustration, this
+Indeed, what appears at first almost like a printing     image displays a clearly contoured depiction of a
+mistake is yet another indicator of the “otherness”      person – or rather his shadow – in a solitary
+of the “world” presented by the game, giving the         alleyway. This image necessarily evokes the figure
+idea of an underlying, “hidden” reality.                 on the cover page and by doing so produces
+Considering the above mentioned, the inlay cover         questions, semantic blanks that may be filled
+(fig 4. b) is to be seen as an extension of the front    during the game: “Is he afraid? Is this what is
+cover, answering but also expanding to a great           awaiting him? Will he become - or is he already -
+extent the expectations previously created by it.        one of ‘them’?” In a way then, the image represents
+First of all, by recurring in the same position and      a window between (front and inlay) covers and,
+form, the title reinforces the idea of unity between     therefore, between the “worlds” of the game.
+the previous illustration and this one3.
+                                                         Considering what has been discussed above, these
+                                                         initial framing devices can be said to foreshadow
+                                                         the whole concept of the World of Darkness setting
+                 Fig. 5. WoD Title Graphic               in a nutshell4. This considered, the cover may be
+                                                         described           as     an        “anticipatory
+                                                         illustration” (Wandhoff, 2006: 210) that has the
+                                                         function of “provid[ing] the narrative text with a
+                                                         moralizing maxim or theme that is encapsulated in
+                                                         a picture and put before the reader’s inner eye
+                                                         before the narrative proper starts.” (ibid. 212)
+                                                         Moreover, the cover triggers important frames of
+                                                         reference, creating expectations as to the type of
+In other words, because it has not been altered, the     narrative that can be developed during the game.
+title calls our attention to the changes in the          As a matter of fact, one is under the impression
+picture. As we can observe, the slight bluish hue of     that this framing alone is enough to engender the
+the previous image has been reduced to black and         ideas to construct a story. In fact, as Genette (1997)
+shades of grey. This fact may be correlated with the     has already pointed out, “a title hit upon all of a
+absence of any source of light - in contrast to the      sudden, and sometimes well before the subject of
+cover where, despite the darkness, there were still      the book is […] like an instigator: once the title is
+streetlamps in the background. The solitary human        there, the only thing left to produce is a text that
+figure, for its part, has now been replaced by           justifies it” (67).
+several explicitly or implicitly non-human ones.
+Again, boundaries here are not clearly cut and the       Another element of the cover page(s) which should
+figures, as well as their background, appear only in     not go unattended is the caption “Storytelling
+parts, as if covered by, or emerging from a              System Rulebook” which appears in the lower area
+surrounding fog. It is only upon closer examination      of both illustrations and serves to trigger two major
+that one may spot the “odd man out” in the upper         frames – i.e. meta-concepts – within which both the
+right corner of the picture (see fig. 6).                rulebook as well as the potential diegesis are to be
+                                                         understood: that of ‘game’ and that of ‘fiction.’
+                                                         Paradoxically, by doing so, it simultaneously
+                                                         creates a space for suspension of disbelief by
+               Fig. 6. WoD Inlay Cover Detail            establishing that the diegetic level is based on “a
+           !                                             set of transformation rules that indicates what is to
+                                                         be treated as real and how it is to be treated as real
+                                                         within the make-believe framework.” (Fine, 1983:
+                                                         183) In other words, the denomination of a text as
+                                                         “role-playing game rulebook” implies the
+                                                         agreement “to ‘bracket’ the world outside the
+                                                         game” (ibid.) during play. Indeed, more than
+                                                         signaling its game character, the indication on a
+                                                         printed text as “role-playing game” may be seen as
+                                                         a more complex version of the original framing
+
+
+                                                                                                            48
+                                                                                    International Journal of Role-Playing - Issue 4
+
+
+
+used in child’s play (i.e. “let’s make believe”). In                                   Fig. 7. Werewolf the Forsaken (2)
+this last case, suspension of disbelief is easily
+broken as soon as disagreements between
+participants are encountered. However, by
+including more complex, rule-based framings,
+TRPG rulebooks allow a greater plausibility, a
+reality, to a certain extent, of the diegetic world.
+Moreover, the issue of the size of the font –
+notoriously small in the first cover; slightly larger
+in the inlay – is to be noted as well since it
+represents the conscious decision to foreground, in
+the first place, the atmosphere and tension
+displayed in the cover while de-emphasizing the
+ludic/fictional nature of the text. Obviously, this
+may be seen as a strategy intended to augment the
+suspense created by the cover, but also a framing
+that indicates that, while the World of Darkness is a
+game, it is a game to be taken seriously. In fact, the                       As has been previously mentioned, there is a
+introduction to the players’ guide to Vampire                           notorious prominence of such elements in
+begins with the following quote by MC. Escher in                        storytelling-based role-playing games. Indeed, if
+its heading – indeed, yet another paratext!: “My                        we go back to our analysis of the games and
+work is a game, a very serious game” (qtd. in                           sourcebooks published by White Wolf, we will
+Vampire Players’ Guide 7). At the same time, this                       notice that practically all of them begin with a
+subtitle also underscores the focus of the game in                      prologue consisting of a short narrative text that
+producing interesting stories rather than just fun,                     provides an atmospheric introduction into the
+“escapist” adventures. Again, this is meant to                          fictional setting of the specific game. In most cases,
+influence the way in which the players create their                     such as Werewolf: The Forsaken (WF), Vampire: The
+campaigns and the stories they tell since there is no                   Requiem (VtR) and Mage: The Awakening (MtA), the
+great difference – at least in principle – between                      narrative is continued as an epilogue in the last
+how a “storytelling game” is played and how any                         pages of the book. For example, in WF, the reader
+other TRPG is.                                                          is presented at the beginning with a character’s
+                                                                        (Mark) first transformation into a werewolf and the
+3.3.2 Prologues, Epilogues                  and      Framing/           mysterious circumstances that surround it (fig. 7).
+Embedded Narratives                                                     In the epilogue (fig. 8), after recovering
+                                                                        consciousness in an alleyway, Mark is approached
+Because of the explicit, salient nature that makes                      by a group of strangers – a “pack” of other
+them clearly discernible from the rest of the text5,                    werewolves, in fact - who offer to give him
+prologues,    epilogues     and    “framing”     or                     answers to his new condition:
+“embedded” narratives6 offer us with further
+examples of paratexts within the rulebook.
+
+
+
+
+15 This explicitness is given by typographical, stylistic and spatial differences; as well as by the fact that these texts are generally
+
+  surrounded by, or appear within, accompanying illustrations.
+16 One must distinguish how both “framing” as well as “embedded” are to be understood: Indeed, these texts may be either embedded
+
+  in, or framing, the rulebook as a text, however, this function may shift concerning the diegesis. In the latter case it is probably more
+  accurate to consider these texts in general as framing narratives rather than embedded ones.
+
+                                                                                                                                       49
+                                                                                       International Journal of Role-Playing - Issue 4
+
+
+
+                                                                          prologue proper, the reader is presented with a
+              Fig 8. Werewolf the Forsaken (313)                          number of short, fragmentary narratives
+                                                                          intercalated with considerations on the basics of
+                                                                          storytelling. In general terms, these narratives
+                                                                          serve a similar function to that of frame stories in
+                                                                          literary texts (cf. Wolf, 2006: 179-206). However,
+                                                                          because of the fact that the framed story – the one
+                                                                          produced during play – is clearly the dominant text
+                                                                          during a RPG session, the function of these texts
+                                                                          can be described in terms of what Wolf has called
+                                                                          ‘mise en cadre’:
+
+
+                                                                              “In this case, rather than shed light through
+                                                                              revelatory similarities in a ‘bottom up’ process –
+                                                                              as in mises en abyme – the framing implicitly
+                                                                              sheds light on the framed text in a ‘top down’
+                                                                              process. As narratology has failed to provide a
+    A hard, bitter smile creased Russell’s face, and                          separate term for this reversal of mise en
+    he refused to back off. “First, I thought we’d                            abyme, I have proposed […] to baptize it ‘mise
+    answer some of your questions for you, son. Tell                          en cadre’” (ibid. 198)
+    you a little about what you are and what it
+    means.”
+                                                                              Furthermore, these stories, although mostly
+    “What I’ve become.”
+                                                                          fragmentary and unrelated, not only serve the
+    “No, what you are,” Russell said. “After that,                        general function of establishing the mood and
+    there’s people you have to meet and some hard                         genre of the game – both of which are explicitly
+    tests you’ll have to pass. Then your life can                         stated in White Wolf’s games – but also exemplify
+    finally get started and you can try to put it to                      how these frames can be translated into narratives.
+    some good use.” “Or,” the Hispanic guy put in,
+                                                                          .1(Intra-)textual, implicit framings
+    “you can just get the hell out of our territory
+                                                                          Although they are by far not as salient as the
+    and fend for yourself.” (312, 313)
+                                                                          previous examples, intra-textual7 framings also
+                                                                          play a central role in the interpretation of the
+                                                                          content of the rulebook. Moreover, because they
+Evidently, the use of the framing narrative here
+                                                                          are neither statistic, nor setting information in the
+creates a bridge between levels of meaning since
+                                                                          proper sense, these elements clearly serve a
+the player is naturally led to identify with the
+                                                                          different function than that of structurally (the
+newborn Werewolf character, Mark. Thus, the
+                                                                          rules) or materially (setting information)
+framing allows a trespassing to a certain extent of
+                                                                          grounding the game. Indeed, these framing devices
+the borders between “worlds” and the invitation to
+                                                                          influence how meaning is to be ascribed within the
+Mark to “learn what [he is] and what it [all]
+                                                                          “primary framework” of the fictional world. While
+means”, becomes a beckoning to the players to take
+                                                                          the rulebook provides a system of rules and
+his place and investigate the setting by playing out
+                                                                          information concerning elements, creatures and
+their own adventures.
+                                                                          phenomena of a fictional setting, this data still
+     Apart from such cases of prologues/epilogues,                        portrays a fictional environment which is, to a
+the use of “embedded” narratives in the WoD core-                         great extent, without meaning. As Fine (1983) has
+rulebook is especially notorious. In fact, within the                     observed, since the events of the role-playing game
+first 30 pages of the book, there is little mention of                    take place within a fictional ‘world,’ “[t]he creation
+players, rules or characters. Instead, and after the                      of the broad outlines of a fantastic setting is not
+
+17 Again, intra-textual refers in this case to the fact that these framing devices occur within the rulebook’s main text, as opposed to the
+
+  previous examples such as the cover, prologues and epilogues which are at its borders. As in the previous cases of embedded/
+  framing narratives, however, it remains difficult to determine whether these framings may be considered intra- or extra-textual in
+  relation to the session’s diegesis.
+18 This, of course is not a narrative instance in the proper sense, as there is no actual narration of ‘events’.
+
+
+
+                                                                                                                                        50
+                                                                                  International Journal of Role-Playing - Issue 4
+
+
+
+sufficient to set the stage for a game.” (76) Because                 information concerning the way in which these
+of this, it becomes necessary to also “establish a                    vampires relate to other Kindred. If it were indeed
+world view that directs the game action and                           only setting information (i.e. data) that was being
+represents the implicit philosophy or ideals by                       conveyed, it would suffice to mention the fact that
+which the world operates.” (ibid.) This, precisely, is                other clans generally have little to do with
+the main function of rulebooks’ intra-textual                         Nosferatu vampires. However, this information is
+framings. In the following example, we may                            again intertwined with the portrayal of “intra-
+observe how setting information is intertwined                        diegetic” systems of meaning.
+with intra-textual framing in order to influence the
+interpretation of the diegetic reality from “within”:
+                                                                          “If they had their druthers, most other clans
+                                                                          would prefer never to associate with the
+    The Kindred gain most of their power and                              Nosferatu at all, yet the Haunts’ [i.e. the
+    strength not from their own innate abilities, but                     Nosferatus’] inarguable talents and brute force
+    from the influence they wield in the mortal                           make them too dangerous to ignore. So other
+    world. […] Why risk one’s own potentially eternal                     Kindred offer them a tense hospitality, hide their
+    existence, miserable as it might be at times, when one                unease behind wary diplomacies and pray that the
+    can manipulate pawns into taking those risks                          Nosferatu leave as soon as possible. [my
+    instead? [my emphasis] (Requiem 26)                                   emphasis]” (Players’ Guide 111)
+
+
+Clearly, there are two types of discourse available                   Not only does this passage express the fact that
+in this paragraph. On the one hand, the first half of                 Nosferatu are generally disliked, but expands its
+it consists of the stating of information from an                     significance by portraying the attitude other
+“uninvolved”, third person point of view.                             Vampire’s      have   toward     them   and     the
+However, what immediately follows it is a sentence                    circumstances under which Kindred might seek
+that portrays what can be interpreted as the                          Nosferatu assistance. Thus, this passage reinforces
+thoughts of a vampire within the fictional world                      overarching themes (frames) of the game such as
+itself. In narratological terms we could describe                     ‘deceit’ and ‘conspiracy’.
+this as a transition of the “narrative8” instance from
+an extra-, heterodiegetic perspective to an
+apparently intra-, homodiegetic one. By creating                      4. CONCLUSION
+                                                                      Throughout this paper I have argued that a close
+the illusion of observing the fictional world from
+                                                                      examination of TRPG rulebooks is central to
+within, this transition – a beautiful case of ‘free
+                                                                      understanding the way in which these games allow
+indirect discourse’ in fact – frames the diegetic
+                                                                      for the construction of highly complex,
+world, thus adding new structures of meaning to it.
+                                                                      collaborative and interactive narratives. To
+A similar case of intra-textual framing can be
+                                                                      demonstrate their impact, I have recurred mainly
+observed in the next example where, after
+                                                                      to Genette’s and Wolf’s considerations concerning
+elaborating on the main characteristics concerning
+                                                                      the specific use of paratexts and framings in works
+the vampire clan of the Nosferatu – a central aspect
+                                                                      of fiction. By distinguishing three basic rulebook
+of which is the fact that they are generally
+                                                                      components – namely, rules, setting and
+repulsive, either because of their appearance, their
+                                                                      (meta)framing devices - I have attempted to show
+smell, or both –, the text goes on to add
+                                                                      how these elements, in addition to their main
+
+19 As Nephew (2004) has stated, “[t]he text necessarily presents the world as incomplete and fragmentary, as no sourcebook can
+
+  describe every inch of a fantasy world.” (39)
+20 Indeed, as he concludes in one of his reviews: “I hope I can play this one day, either with my current group or with a group I’ll
+
+  have in the future” (Game Geeks #117 Houses of the Blooded) Doubtlessly, this type of commentary would be inconceivable in any
+  other medium as it would appear nonsensical to seriously comment on a book one has not read, a film one has not seen, or a game
+  one has not played.
+21 In Das Fiktive und das Imaginäre (1991), Wolfgang Iser establishes the necessity of reformulating the traditional notion of reality
+
+ and fiction as a binary system of opposed elements by adding the concept of the imaginary. Thus, he proposes a ternary system,
+ arguing that all fictional texts are based on the triadic relationship between the spheres of the real, the fictive and the imaginary.
+ Because of the fact that signs, which are used to refer to real elements or concepts – understood as those of the empiric, extra-
+ textual world –, lose their original pragmatic determination in the fictional text, while the imaginary – understood by Iser as an
+ experience which is “diffus, formlos, unfixiert und ohne Objektreferenz” (20) – is given substance and form by the text, the
+ relationship between these spheres is one of ‘boundary crossing’. This crossing of boundaries occurs, according to Iser, by a
+ conscious and intentional act he has called fictionalizing act (Akt des Fingierens).
+
+                                                                                                                                    51
+                                                                                    International Journal of Role-Playing - Issue 4
+
+
+
+function, serve as framings to the potential                            the reader’s visualization of stories in potence.
+diegeses created during game-play. In this respect,                     Indeed, Kurt Wiegel’s video reviews of TRPGs on
+I have argued that setting and rules not only                           the internet are a good example of this. Wiegel,
+provide the structural basis to the game but that                       who is an experienced game-master, discusses in
+they also frame it as they invariably imply                             short video clips different role-playing games,
+reductions of the imagined world2. Consequently,                        commenting on their playability and story
+by including or excluding (hypothetical)                                possibilities. However, in many of these cases,
+information, they create expectations concerning                        Wiegel’s commentary is done without any actual
+the playing of the game much in the same way as                         playing experience of the game3. Likewise, it is not
+initial framing devices used in “traditional” written                   uncommon for players to purchase rulebooks for
+fiction. At the same time, rules and setting                            different games, not so much with the objective of
+information affect the interpretation players make                      playing them, but rather as a mode of gathering
+of diegetic events. Rulebook paratexts, for their                       ideas – be it rules, setting or storylines – for
+part, are especially notorious for having a “double”                    campaigns already running in another game
+framing function as they extend their influence                         system. In this respect, it is important to
+from the rulebook towards the diegesis by                               distinguish       rulebooks      from   proto-diegetic
+triggering important frames within which the                            phenomena such as the draft of a novel. In this last
+                                                                        case there will regularly be a single text (i.e. one
+                                                                        story) as an outcome, whereas a RPG sourcebook
+    During the process of gaming the                                    may inform an indefinite number of narrations.
+    players progressively reduce the                                    Thus, one could argue that RPG rulebooks are to be
+   space of possible stories down to a                                  understood        as     an    incomplete    ‘act   of
+     single story – one set of things                                   fictionalizing’ (Akt des Fingierens)4. Here, indeed,
+   “happened,” while all other sets did                                 the imaginary has been fixed by giving it form as
+                   not.”                                                setting information. In fact, it has been given an
+                                                                        additional aspect of “reality” by the introduction of
+                                                                        rules for its transformation into statistically
+diegesis is to be constructed. In addition, the
+                                                                        determined elements. However, the rulebook in
+rulebook’s intra-textual framing devices serve to
+                                                                        itself is still not a single complete story and is, as
+add diegetic meaning to the otherwise purely
+                                                                        yet, not completely ‘realized’ (realisiert). Indeed,
+factual information given by the game setting.
+                                                                        “the creation of world, character, and story become
+                                                                        “real” when experienced during the course of a
+In view of the aforementioned, perhaps the best                         game session, rather than on the reading of the
+way to describe TRPG rulebooks would be as a                            game rulebook itself.” (Nephew, 2004: 39) Thus, the
+system of framings. However, because of the fact that                   role-playing game rulebook is a text still imbued by
+the diegesis only emerges during the actual                             the possibilities of the imaginary. It is only during
+playing of the game, the framings provided in the                       game play that this fictionalizing act is completed.
+rulebook are to be understood as surrounding a                          As Borgstrom (2007) has observed, “[b]efore the
+diegetic void. This void, however, is not a                             game begins there is a large space of possible
+completely abstract nothingness but, because                            stories defined by the initial premise. During the
+framing devices are conveyors of meaning, it                            process of gaming the players progressively reduce
+becomes what in Iserian terms is called a Leerstelle                    the space of possible stories down to a single story
+or semantic blank. (In other words, a semantic                          – one set of things “happened,” while all other sets
+blank can only exist within an established system                       did not.” (58) For this reason, the expectations
+of meaning; only within it may a semantic vacuum                        triggered by a rulebook’s framing devices directly
+be “filled”.) As Henry (2009) has stated, “the                          influence the formation of the story. Indeed, there
+existence of these fictional worlds, written without                    is no actual ‘horror’ within the rulebook of the
+their stories, is an invitation for stories to                          World of Darkness but, because its framings trigger
+happen.” (7) Rulebooks are therefore texts that                         this specific genre frame, the players, as well as the
+enable the visualization of potential diegeses. One                     GM, will be inclined to produce a text that matches
+could say then, that the rulebook is also an artifact                   what is expected from it5.
+that produces an aesthetic object, the object being
+
+22 In this respect, Wallis (2007) has pointed out that “all stories must follow the rules of their genre and of storytelling in general if
+
+  they are to satisfy an audience.” (78) Consequently, a “game’s mechanics must take into consideration the rules of the genre that it
+  is trying to create: not just the relevant icons and tropes, but the nature of a story from that genre” (ibid. 73).
+                                                                                                                                       52
+                                                                                 International Journal of Role-Playing - Issue 4
+
+
+
+The system of framings constituted by the rulebook                   fiction. This is especially important if we consider
+is therefore crucial in order to establish the specific              the notion that all fiction is in fact a form of
+‘interaction codes’ and ‘improvisation patterns’ (as                 pretense play (cf. Walton 1990; Iser 1991; Sutrop,
+by Fatland, 2006) relevant to a given game. Equally                  2000). Indeed, much as the players’ individual
+important, however, is the fact that by doing so                     visualization of the game events, any aesthetic or
+TRPG texts also reveal to their readers, both                        literary work is only truly available as the
+implicitly and explicitly, how this is achieved,                     individual experience of a given recipient. When
+inciting players to further modify or even replace                   communicating about these texts, negotiation
+them with other (framing) texts. This specific mode                  through framings – interpretations, blurbs,
+of self-disclosure, as well as the use of framings in                reviews, opinions, etc. – allows us to bridge the gap
+TRPGs to incite the production (and not only the                     between our own experience of the text and that of
+reception) of text is what I have called genesic                     others6. Thus, not only may role-playing games
+framing. Moreover, it is this feature that is likely to              teach us something about the way in which we
+account for much of the complexity of the TRPG                       negotiate reality (cf. Mackay, 2001) but, foremost,
+medium as well as for its persistence in time.                       about how we negotiate fiction7.
+Indeed, despite the appearance of alternatives in
+more technologically advanced media, TRPGs are
+still unique in that participants are not only playing               5. REFERENCES
+                                                                     [1] Achilli et al. 2004. The World of Darkness: White Wolf
+a (storytelling) game but, by doing so, they are also                    Publishing.
+learning the mechanisms that will allow them to
+                                                                     [2] Achilli et al. 2004. Vampire: The Requiem: White Wolf
+(re-)construct and manipulate it along the way.                          Publishing.
+                                                                     [3] Achilli et al. 2006. Requiem, Chronichler's Guide:
+ This specific mode of self-disclosure,                                  White Wolf Publishing.
+    as well as the use of framings in                                [4] Blackwelder et al. Vampire: Players’ Guide: White
+                                                                         Wolf Publishing.
+  TRPGs to incite the production (and
+ not only the reception) of text is what I                           [5] Borgstrom, R., 2007. Structure and Meaning in Role-
+                                                                         Playing Game Design. In: P. Harrigan and N.
+    have called genesic framing.(11)                                     Wardrip-Fruin, eds. Second Person: role-playing and
+                                                                         story in games and playable media. Cambridge, MA:
+Finally, it is important to note that by focusing on                     MIT Press, 58–66.
+rulebooks as “primary” texts, it is possible to                      [6] Bunia, R., 2006. Framing the End. In: W. Wolf and W.
+elucidate how the different authorial instances                          Bernhardt, eds. Framing Borders in Literature and
+involved in the game – primary, secondary and                            Other Media. Amsterdam: Rodopi, 359–383.
+tertiary – extend their influence over the ‘story                    [7] Consalvo, M., 2007. Cheating: gaining advantage in
+space’ beyond their specified areas of agency. If the                    videogames. Cambridge, MA: MIT Press.
+narratives created during role-playing games may                     [8] Costikyan, G., 2007. Games, Storytelling, and
+be seen as an actualization of player expectations,                      Breaking the String. In: P. Harrigan and N. Wardrip-
+                                                                         Fruin, eds. Second Person: role-playing and story in
+their (potential) fulfillment is to be understood as
+                                                                         games and playable media. Cambridge, MA: MIT
+the result of collective negotiation. While the latter                   Press, 5–13.
+may be done explicitly, as in meta-game dialog in
+                                                                     [9] Dembeck, T., 2006. (Paratextual) Framing and the
+general, from what has been discussed in this                            Work of Art. In: W. Wolf and W. Bernhardt, eds.
+paper it becomes evident that much of it in fact                         Framing Borders in Literature and Other Media.
+results from the manipulation of expectations and                        Amsterdam: Rodopi, 263–295.
+diegesis interpretation by means of genesic                          [10] Fatland, E. (2006). Interaction codes: Understanding
+framing. In this respect, a description and analysis                      and establishing patterns in player improvisation. In
+of how secondary and tertiary authors make use of                         T. Fritzon & T. Wrigstad (Eds.), Role, play, art:
+such framing strategies is still a matter for further                     Collected experiences of role-playing (pp. 17-34).
+                                                                          Stockholm: Foreningen Knutepunkt.
+investigation.
+                                                                     [11] Fine, G.A., 1983. Shared Fantasy: Role-Playing Games
+As for now, it is possible to assert that tabletop                        as Social Worlds. Chicago, London: Univ. of Chicago
+role-playing games demonstrate the true extent to                         Press.
+which framings are relevant in mediating works of
+
+23 As a matter of fact, Stefanescu (2006) has pointed out that “all comprehension of a literary work is ultimately a negotiation
+
+ between the interpretive frames imposed by the reader and those suggested by the text itself.” (330)
+24 A similar point has been made by Loponen and Stenros (2012)
+
+
+                                                                                                                              53
+                                                                         International Journal of Role-Playing - Issue 4
+
+
+
+[12] Gelber, D., Costikyan, G., and Goldberg, E., 1984.       [29] Lankoski, P., 2004. Character Design Fundamentals
+     Paranoia: West End Games.                                     for Role-Playing Games. In: M. Montola and J.
+[13] Genette, G., 1997. Paratexts: Thresholds of                   Stenros, eds. Beyond Role and Play: Tools, Toys and
+     interpretation. Cambridge: Cambridge Univ. Press.             Theory for Harnessing the Imagination. Helsinki:
+                                                                   Ropecon, 139–148.
+[14] Glaser, B.G. and Strauss, A.L., 1974. Awareness of
+     dying. Chicago: Aldine.                                  [30] Loponen, M. and Stenros, J. 2012. Power Relations in
+                                                                   Cultural Semiospheres. Paper presented at Role-
+[15] Goffman, E., 1974. Frame Analysis: An Essay on the            Playing in Games seminar, 10-11 April, 2012,
+     Organization of Experience. Harmondsworth:                    Tampere, Finland.
+     Penguin.
+                                                              [31] Machell, M., 2002. The Problem with Character
+[16] Grünzweig, W. and Solbach, A., eds., 1999.                    Backgrounds [online]. Available from: http://
+     Grenzüberschreitungen: Narratologie im Kontext/               www.realms.org.uk [Accessed 21 Sep 2012].
+     Transcending Boundaries: Narratology in Context.
+     Tübingen: Gunter Narr Verlag.                            [32] Machell, M., 2003. Social Contract Gaming [online].
+                                                                   Available from: www.realms.org.uk [Accessed 21
+[17] Gygax, G. and Arneson, D., 1974. Dungeons and                 Sep 2012].
+     Dragons: Rules for Fantastic Medieval Wargames
+     Campaigns Playable with Paper and Pencil and             [33] Mackay, D., 2001. The Fantasy Role-Playing Game: A
+     Miniature Figures. Lake Geneva: TSR.                          New Performing Art. Jefferson, North Carolina,
+                                                                   London: McFarland & Company.
+[18] Hammer, J. (2007). Agency and authority in role-
+     playing 'texts'. In M. Knobel & C. Lankshear (Eds.),     [34] Miller, J., 2006. Role Playing Games as Interactive
+     A new literacies sampler (pp. 67-93). New York: Peter         Fiction. Reconstruction: Studies in Contemporary
+     Lang.                                                         Culture [online], 6 (1). Available from: http://
+                                                                   reconstruction.eserver.org/122/contents122.shtml
+[19] Harrigan, P. and Wardrip-Fruin, N., eds., 2007.               [Accessed 22 Sep 2012].
+     Second Person: role-playing and story in games and
+     playable media. Cambridge, MA: MIT Press.                [35] Montola, M. and Stenros, J., eds., 2004. Beyond Role
+                                                                   and Play: Tools, Toys and Theory for Harnessing the
+[20] Harviainen, J.T., 2008. A Hermeneutical Approach to           Imagination. Helsinki: Ropecon.
+     Role-Playing Analysis. International Journal of Role-
+     Playing [online] (1), 66–78. Available from: http://     [36] Nephew, M.A.B., 2004. Playing with Power: The
+     journalofroleplaying.org/ [Accessed 21 Sep 2012].             Authorial Consequences of Roleplaying Games.
+                                                                   Dissertation Abstracts International, Section A: The
+[21] Harviainen, J.T., 2012. Systemic Perspectives on              Humanities and Social Sciences, 64 (11).
+     Information on Physically Performed Role-play.
+     Doctoral dissertation. Tampere, Univ of Tampere          [37] Padol, L., 1996. Playing Stories, Telling Games:
+                                                                   Collaborative Storytelling in Role-Playing Games
+[22] Hayot, E. and Wesp, E., 2004. Style, Strategy and             [online]. Available from: http://
+     Mimesis in Ergodic Literature. Comparative Literature         www.recappub.com/games.html [Accessed 24 Aug
+     Studies, 41 (3), 404–423.                                     2009 - document no longer available online].
+[23] Henry, L., 2003. Group Narration: Power, Information,    [38] Punday, D., 2005. Creative Accounting: Role-Playing
+     and Play in Role Playing Games [online].                      Games, Possible-World Theory, and the Agency of
+     www.darkshire.net. Available from: http://                    Imagination. Poetics Today, 26 (1), 113–139.
+     www.darkshire.net/jhkim/rpg/theory/liz-
+     paper-2003/ [Accessed 21 Sep 2012].                      [39] Rein-Hagen, M. et al. 1991. Vampire: The Masquerade:
+                                                                   White Wolf Publishing.
+[24] Hindmarch, W., 2007. Storytelling Games as a
+     Creative Medium. In: P. Harrigan and N. Wardrip-         [40] Schick, L., 1991. Heroic Worlds: A History and Guide to
+     Fruin, eds. Second Person: role-playing and story in          Role-Playing Games. Buffalo: Prometheus Books.
+     games and playable media. Cambridge, MA: MIT             [41] Sommer, R., 2006. Initial Framings in Film. In: W.
+     Press, 47–55.                                                 Wolf and W. Bernhardt, eds. Framing Borders in
+[25] Hitchens, M. and Drachen, A., 2008. The Many Faces            Literature and Other Media. Amsterdam: Rodopi, 383–
+     of Role-Playing Games. International Journal of Role-         407.
+     Playing [online] (1), 3-21. Available from: http://      [42] Stefanescu, M., 2006. The (Dis)Continuity of
+     journalofroleplaying.org/ [Accessed 21 Sep 2012].             Framings. In: W. Wolf and W. Bernhardt, eds.
+[26] Hruschovski, B., 1984. Fictionality and Fields of             Framing Borders in Literature and Other Media.
+     Reference. Poetics Today, 5 (2), 227–251.                     Amsterdam: Rodopi, 329–341.
+
+[27] Ilieva, A. 2012. Cultural Codes, Cultural Memory         [43] Stenros, J., 2004. Notes on Role-Playing Texts. In: M.
+     and Cultural Concepts in Live Role-Playing                    Montola and J. Stenros, eds. Beyond Role and Play:
+     Discourses. Paper presented at Role-Playing in                Tools, Toys and Theory for Harnessing the Imagination.
+     Games seminar, 10-11 April, 2012, Tampere, Finland.           Helsinki: Ropecon, 75–80.
+
+[28] Iser, W., 1991. Das Fiktive und das Imaginäre:           [44] Sutrop, M., 2000. Fiction and Imagination: The
+     Perspektiven literarischer Anthropologie. Frankfurt a.        Anthropological Function of Literature. Paderborn:
+     M.: Suhrkamp.                                                 Mentis
+
+
+
+
+                                                                                                                          54
+                                                                  International Journal of Role-Playing - Issue 4
+
+
+
+[45] Wallis, J., 2007. Making Games That Make Stories.
+     In: P. Harrigan and N. Wardrip-Fruin, eds. Second
+     Person: role-playing and story in games and playable
+     media. Cambridge, MA: MIT Press, 69–80.
+[46] Walton, K. (1990). Mimesis as Make-Believe: On the
+     Foundations of Representational Arts. Cambridge,
+     Mass.: Harvard Univ. Pr.
+[47] Wandhoff, H., 2006. Found(ed) in a Picture:
+     Ekphrastic Framing in Ancient, Medieval, and
+     Contemporary Literature. In: W. Wolf and W.
+     Bernhardt, eds. Framing Borders in Literature and
+     Other Media. Amsterdam: Rodopi, 179–207.
+[48] Waskul, D.D., 2006. The role-playing game and the
+     game of role-playing: the ludic self and everyday
+     life. In: P. Williams, S.Q. Hendricks, and W.K.
+     Winkler, eds. Gaming as Culture: essays on reality,
+     identity and experience in fantasy games. Jefferson,
+     N.C.: McFarland & Co., 19–38.
+[49] Wiegel, K. Game Geeks [online]. http://
+     gamegeeksrpg.com/ [Accessed 22 Sep 2012].
+[50] Williams, P., Hendricks, S.Q., and Winkler, W.K.,
+     eds., 2006. Gaming as Culture: essays on reality, identity
+     and experience in fantasy games. Jefferson, N.C.:
+     McFarland & Co.
+[51] Wolf, M.J.P. and Perron, B., 2003. The video game
+     theory reader. New York, London: Routledge.
+[52] Wolf, W. and Bernhardt, W., eds., 2006. Framing
+     Borders in Literature and Other Media. Amsterdam:
+     Rodopi.
+[53] Wolf, W., 1999. Framing Fiction: Reflections on a
+     Narratological Concept and an Example: Bradbury,
+     Mensonge. In: W. Grünzweig and A. Solbach, eds.
+     Grenzüberschreitungen: Narratologie im Kontext/
+     Transcending Boundaries: Narratology in Context.
+     Tübingen: Gunter Narr Verlag, 97–124.
+
+
+
+ David Jara is a Chilean Ph. D. candidate in literary
+ studies at the University of Heidelberg, Germany.
+ His current research focuses on the negotiation of
+ narratives and fictional spaces in tabletop role-playing
+ games.
+
+
+
+
+                                                                                                      54
+

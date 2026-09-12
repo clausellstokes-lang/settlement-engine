@@ -1,0 +1,20 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 307,
+ "firstTs": "2026-09-11T09:16:07.333Z",
+ "lastTs": "2026-09-11T09:36:53.965Z",
+ "tools": {
+  "Bash": 80
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "Now I have what I need. Writing the packet.",
+ "run": "wf_3252b403-4ff",
+ "agent": "ac09efeba19fc29a9",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/4ed79a2b-6cd2-45cf-ab97-83cdad49c30b/subagents/workflows/wf_3252b403-4ff/agent-ac09efeba19fc29a9.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}

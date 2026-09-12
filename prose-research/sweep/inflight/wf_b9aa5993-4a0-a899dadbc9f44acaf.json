@@ -1,0 +1,22 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 104,
+ "firstTs": "2026-09-12T01:49:18.607Z",
+ "lastTs": "2026-09-12T02:02:18.139Z",
+ "tools": {
+  "Bash": 16,
+  "Read": 10,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "The packet is on disk. Returning the verdicts.",
+ "run": "wf_b9aa5993-4a0",
+ "agent": "a899dadbc9f44acaf",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/4ed79a2b-6cd2-45cf-ab97-83cdad49c30b/subagents/workflows/wf_b9aa5993-4a0/agent-a899dadbc9f44acaf.jsonl",
+ "journal": "result",
+ "checkpointFile": null
+}

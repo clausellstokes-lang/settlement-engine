@@ -1,0 +1,81 @@
+{
+ "commit": "66d5b6e084cab89bb3281fc56846ed940182acdf",
+ "pools": [
+  {
+   "dir": "def11-country-walled",
+   "inBand": true,
+   "failing": [],
+   "refusals": [
+    "failures before 0 after 0 kept"
+   ],
+   "moved": true
+  },
+  {
+   "dir": "def11-country-unwalled",
+   "inBand": true,
+   "failing": [],
+   "refusals": [
+    "failures before 0 after 0 kept"
+   ],
+   "moved": true
+  },
+  {
+   "dir": "def11-watch-revealed",
+   "inBand": true,
+   "failing": [],
+   "refusals": [
+    "failures before 0 after 0 kept"
+   ],
+   "moved": true
+  },
+  {
+   "dir": "def11-watch-covert",
+   "inBand": true,
+   "failing": [],
+   "refusals": [
+    "failures before 1 after 0 kept",
+    "UNLAWFUL at the draft commit and CURED by arm B: the draft's one failing measure 'band depth \u00b7 closers.abstractNounRate (over) = 8.6 band-widths on 1 of 12 face(s)' (band: DEPTH at most 1.75 band-widths on every face) is gone; depth ok reads 12/12 where the draft read 11/12; no new failing measure, so the refinement keeps under the fell-or-held rule"
+   ],
+   "moved": true
+  },
+  {
+   "dir": "def2-stores-short",
+   "inBand": true,
+   "failing": [],
+   "refusals": [
+    "failures before 0 after 0 kept"
+   ],
+   "moved": true
+  },
+  {
+   "dir": "def2-stores-importfed",
+   "inBand": true,
+   "failing": [
+    {
+     "measure": "composed walk \u00b7 C3 \u00b7 is this clause historical? (the refinement, before revert)",
+     "value": "3 owned finding(s), all on the new face 'The victuals at {settlement} are had from other parts.' at the joint with each of the three Disasters & Famine: granary AND hospital spine variants",
+     "band": "every owned arm green: FAIL 0 and WITHHELD 0 over the pool's composed units"
+    },
+    {
+     "measure": "composed walk \u00b7 owned unit verdicts (the refinement, before revert)",
+     "value": "FAIL 0 \u00b7 WITHHELD 3 \u00b7 PASS 33",
+     "band": "FAIL 0 and WITHHELD 0 on the writers' own grain"
+    }
+   ],
+   "refusals": [
+    "failures before 0 after 2 reverted",
+    "REVERTED: lawful at the draft commit (0 failing) and made unlawful by arm B on the writers' own grain \u2014 'are had' reads to C3 as a past-tense construction, and a historical assertion on a PRESENT pool is the refuter's (A6). The twelve draft rows were restored with git show 4935b86c3b:docs/content/RECEIPT_POOLS_DOSSIER_STATE.md (never the checkout family) and verified byte-identical; the projector and the harness were re-run over the reverted state and the pool reads inBand YES with owned FAIL 0 \u00b7 WITHHELD 0 \u00b7 PASS 36 and 0 owned findings in the committed state, which is what inBand true reports here."
+   ],
+   "moved": false
+  },
+  {
+   "dir": "gen3-purse-short",
+   "inBand": true,
+   "failing": [],
+   "refusals": [
+    "failures before 0 after 0 kept"
+   ],
+   "moved": true
+  }
+ ]
+}

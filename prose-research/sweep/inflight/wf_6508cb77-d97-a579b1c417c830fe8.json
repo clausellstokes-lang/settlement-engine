@@ -1,0 +1,21 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 115,
+ "firstTs": "2026-09-11T14:20:27.549Z",
+ "lastTs": "2026-09-11T14:52:21.268Z",
+ "tools": {
+  "Bash": 9,
+  "Read": 20
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "I have everything needed; the remaining work is writing section 6 (OWED) and computing section 7's counts from the packet itself.",
+ "run": "wf_6508cb77-d97",
+ "agent": "a579b1c417c830fe8",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/4ed79a2b-6cd2-45cf-ab97-83cdad49c30b/subagents/workflows/wf_6508cb77-d97/agent-a579b1c417c830fe8.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}

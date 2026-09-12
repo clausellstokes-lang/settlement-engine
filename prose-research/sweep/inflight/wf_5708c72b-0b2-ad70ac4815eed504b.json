@@ -1,0 +1,21 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 131,
+ "firstTs": "2026-09-12T08:56:56.054Z",
+ "lastTs": "2026-09-12T09:01:32.593Z",
+ "tools": {
+  "Bash": 32,
+  "Read": 3
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "All anchors pinned. Writing the packet now, section by section.",
+ "run": "wf_5708c72b-0b2",
+ "agent": "ad70ac4815eed504b",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/4ed79a2b-6cd2-45cf-ab97-83cdad49c30b/subagents/workflows/wf_5708c72b-0b2/agent-ad70ac4815eed504b.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}

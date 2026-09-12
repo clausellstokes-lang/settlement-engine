@@ -1,0 +1,148 @@
+{
+  "label": "dnd-rules",
+  "files": [
+    "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/prose-research/primary/raw/dnd_rules_srd.txt",
+    "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/prose-research/primary/raw/dnd_rules_basic.txt"
+  ],
+  "paragraphs": 416,
+  "sentences": 1141,
+  "wordsPerSentence": {
+    "mean": 18.4,
+    "sd": 8.9,
+    "p10": 9,
+    "p50": 17,
+    "p90": 31,
+    "shareUnder8": 0.0675,
+    "shareOver30": 0.1017,
+    "neighbourVariation": 0.52
+  },
+  "sentencesPerParagraph": 2.74,
+  "punctuation": {
+    "semicolonRate": 0.0114,
+    "colonRate": 0.0272,
+    "emDashRate": 0.0254,
+    "questionRate": 0.0035,
+    "exclamationRate": 0,
+    "parenthesisRate": 0.1025
+  },
+  "shapes": {
+    "antithesisRate": 0.0105,
+    "triadRate": 0.0447,
+    "participialOpenerRate": 0.0342,
+    "whichTailRate": 0.0237,
+    "doubledAdjectiveRate": 0.0131,
+    "adverbsPerSentence": 0.14,
+    "thereIsOpenerRate": 0.0018,
+    "dialogueShare": 0.0438
+  },
+  "closers": {
+    "abstractNounRate": 0.0876,
+    "pronounRate": 0.05,
+    "topClosers": [
+      [
+        "",
+        47
+      ],
+      [
+        "check",
+        34
+      ],
+      [
+        "it",
+        27
+      ],
+      [
+        "action",
+        24
+      ],
+      [
+        "you",
+        17
+      ],
+      [
+        "attack",
+        14
+      ],
+      [
+        "turn",
+        12
+      ],
+      [
+        "damage",
+        12
+      ],
+      [
+        "game",
+        11
+      ],
+      [
+        "roll",
+        11
+      ],
+      [
+        "checks",
+        10
+      ],
+      [
+        "them",
+        8
+      ]
+    ]
+  },
+  "openers": {
+    "topOpeners": [
+      [
+        "the",
+        140
+      ],
+      [
+        "if",
+        97
+      ],
+      [
+        "a",
+        97
+      ],
+      [
+        "for",
+        78
+      ],
+      [
+        "you",
+        73
+      ],
+      [
+        "when",
+        71
+      ],
+      [
+        "in",
+        36
+      ],
+      [
+        "this",
+        32
+      ],
+      [
+        "your",
+        19
+      ],
+      [
+        "some",
+        15
+      ],
+      [
+        "each",
+        15
+      ],
+      [
+        "to",
+        14
+      ]
+    ],
+    "sameOpenerAsPreviousRate": 0.0727
+  },
+  "runsOfThreeSameLengthBand": 0.3392,
+  "presence": null,
+  "presenceReason": "the raw exemplar text is GONE from this machine — the `files` array points into the dead scratchpad d5b9a39f and 2 of 2 basename(s) do not resolve under primary/raw. Re-obtaining the text is an owner act (cost and IP); the three §13.2 lines are NULL rather than fabricated."
+}

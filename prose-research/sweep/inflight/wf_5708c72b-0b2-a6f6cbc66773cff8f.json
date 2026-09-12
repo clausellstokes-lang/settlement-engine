@@ -1,0 +1,20 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 152,
+ "firstTs": "2026-09-12T08:56:56.055Z",
+ "lastTs": "2026-09-12T09:01:29.341Z",
+ "tools": {
+  "Bash": 43
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "Now the pool's shipped rows and the block header.",
+ "run": "wf_5708c72b-0b2",
+ "agent": "a6f6cbc66773cff8f",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/4ed79a2b-6cd2-45cf-ab97-83cdad49c30b/subagents/workflows/wf_5708c72b-0b2/agent-a6f6cbc66773cff8f.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}

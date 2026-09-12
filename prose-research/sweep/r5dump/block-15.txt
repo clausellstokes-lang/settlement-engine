@@ -1,0 +1,349 @@
+### [880] VERIFIED_VERBATIM  {other: vague attribution and weasel wording}
+CLAIM: The WikiProject names as a tell that AI chatbots attribute opinions or claims to a vague authority and exaggerate the number of sources holding them.
+SRC: WikiProject AI Cleanup, Wikipedia:Signs of AI writing, version of 6 September 2026 | https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing
+QUOTE: AI chatbots tend to attribute opinions or claims to some vague authority
+TRUE: AI chatbots tend to attribute opinions or claims to some vague authority—a practice called weasel wording.
+NOTE: Line 227, section 'Vague attributions and overgeneralization of opinions' (heading line 223). Quote verbatim, and the second limb is the following sentence: 'They also commonly exaggerate the quantity of sources that these opinions are attributed to.'
+
+### [882] VERIFIED_VERBATIM  {lexical tells}
+CLAIM: The WikiProject holds that one or two AI-vocabulary words may be coincidence but a post-2022 edit introducing lots of them, lots of times, is one of the strongest tells for AI use.
+SRC: WikiProject AI Cleanup, Wikipedia:Signs of AI writing, version of 6 September 2026 | https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing
+QUOTE: an edit (post-2022) introducing lots of them, lots of times
+TRUE: One or two ... may be coincidental, but an edit (post-2022) introducing lots of them, lots of times, is one of the strongest tells for AI use.
+NOTE: Line 330, section 'High density of "AI vocabulary" words' (heading line 325). Quote verbatim and both limbs (coincidence vs strongest tell) present in the same sentence.
+
+### [883] VERIFIED_VERBATIM  {register measured}
+CLAIM: The WikiProject notes that while most studies of AI vocabulary analysed scientific abstracts or fiction, those words are also ubiquitous in LLM-based encyclopedias such as Grokipedia.
+SRC: WikiProject AI Cleanup, Wikipedia:Signs of AI writing, version of 6 September 2026 | https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing
+QUOTE: "AI vocabulary" words are also ubiquitous in LLM-based encyclopedias
+TRUE: While most of these studies have analyzed scientific abstracts or fiction, "AI vocabulary" words are also ubiquitous in LLM-based encyclopedias, such as Grokipedia
+NOTE: Line 330, same paragraph. Quote verbatim including the quotation marks around 'AI vocabulary'. Grokipedia is named as the example; the page adds 'and in AI-generated Wikipedia text', which the claim omits but does not contradict.
+
+### [884] VERIFIED_VERBATIM  {model era drift}
+CLAIM: The WikiProject records that delve was famously overused by ChatGPT in 2023 and early 2024, became less frequent later in 2024 and dropped off sharply in 2025.
+SRC: WikiProject AI Cleanup, Wikipedia:Signs of AI writing, version of 6 September 2026 | https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing
+QUOTE: the word delve was famously overused by ChatGPT in 2023
+TRUE: the word delve was famously overused by ChatGPT in 2023 and early 2024, but became less frequent later in 2024, then dropped off sharply in 2025.
+NOTE: Line 332, section 'High density of "AI vocabulary" words'. Rendered text matches the quote word for word ('delve' is wikilinked/italicised in wikitext only). All three limbs — 2023/early 2024 overuse, decline later in 2024, sharp drop in 2025 — are on the page.
+
+### [886] VERIFIED_VERBATIM  {lexical tells}
+CLAIM: The WikiProject records Grok as idiosyncratic in overusing superficially scientific words such as causal, empirical and correlate, and in still overusing underscore as of 2026.
+SRC: WikiProject AI Cleanup, Wikipedia:Signs of AI writing, version of 6 September 2026 | https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing
+QUOTE: Grok output is particularly idiosyncratic
+TRUE: Grok output is particularly idiosyncratic: it overuses superficially "scientific" words like causal, empirical, correlate, and continues to overuse underscore as of 2026.
+NOTE: Line 338, section 'High density of "AI vocabulary" words'. Quote verbatim; both limbs (the three scientific words, and continued underscore overuse as of 2026) are in the same sentence.
+
+### [887] VERIFIED_VERBATIM  {other: copula avoidance}
+CLAIM: The WikiProject names as a tell that LLM text replaces copulas such as is or are with constructions like serves as, stands as, marks, features and offers.
+SRC: WikiProject AI Cleanup, Wikipedia:Signs of AI writing, version of 6 September 2026 | https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing
+QUOTE: replaces simple constructions that use copulas such as is or are
+TRUE: LLM-generated text often replaces simple constructions that use copulas such as is or are with constructions such as serves as a or mark the.
+NOTE: Line 378, section 'Avoidance of basic copulatives ("is"/"are" phrases)' (heading line 374). Quote verbatim. Every listed substitute is on the page: the section's words-to-watch box (line 376) reads 'serves as/stands as/marks/functions as/operates as/represents [a], boasts/features/maintains/offers [a], refers to', and the body adds 'marketing-related verbs like features, offers'.
+
+### [888] VERIFIED_VERBATIM  {other: copula avoidance}
+CLAIM: The WikiProject cites a study documenting an over 10% decrease in the usage of the words is and are in academic writing in 2023, with no major change before that.
+SRC: WikiProject AI Cleanup relaying a cited study, Wikipedia:Signs of AI writing | https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing
+QUOTE: decrease in the usage of the words is and are
+TRUE: One study documented an over 10% decrease in the usage of the words is and are in academic writing in 2023, with no major changes in their frequency before that.
+NOTE: Line 378, same section; the study cited is Geng & Trotta, 'Is ChatGPT Transforming Academics' Writing Style?' (arXiv 2404.08627). Quote verbatim and both limbs (over 10% decrease in 2023; no major prior change) supported.
+
+### [889] VERIFIED_VERBATIM  {other: vague connection instead of a stated relation}
+CLAIM: The WikiProject names as a tell that LLMs allude vaguely to two subjects being connected to or associated with each other instead of stating the relation directly.
+SRC: WikiProject AI Cleanup, Wikipedia:Signs of AI writing, version of 6 September 2026 | https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing
+QUOTE: LLMs will often allude vaguely to the two subjects being
+TRUE: LLMs will often allude vaguely to the two subjects being "connected to" or "associated with" each other
+NOTE: Line 397, section 'Vague expression of connection or association' (heading line 393). Quote verbatim; the 'instead of stating the relation directly' limb is the sentence opener: 'Rather than directly stating a connection or relationship between two subjects'.
+
+### [892] VERIFIED_VERBATIM  {other: rule of three}
+CLAIM: The WikiProject names as a tell that LLMs overuse the rule of three, in the form adjective-adjective-adjective or three short phrases.
+SRC: WikiProject AI Cleanup, Wikipedia:Signs of AI writing, version of 6 September 2026 | https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing
+QUOTE: LLMs overuse the rule of three
+TRUE: LLMs overuse the rule of three. This can take different forms, from "adjective, adjective, adjective" to "short phrase, short phrase, and short phrase".
+NOTE: Line 503, section 'Rule of three' (heading line 501). Quote verbatim and both named forms present.
+
+### [893] VERIFIED_VERBATIM  {other: rule of three}
+CLAIM: The WikiProject holds that LLMs use the rule of three to make superficial analyses appear more comprehensive.
+SRC: WikiProject AI Cleanup, Wikipedia:Signs of AI writing, version of 6 September 2026 | https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing
+QUOTE: LLMs often use this structure to make superficial analyses appear more comprehensive.
+TRUE: LLMs often use this structure to make superficial analyses appear more comprehensive.
+NOTE: Line 503, section 'Rule of three', the sentence immediately after the rule-of-three forms. Quote verbatim in rendered text ('superficial analyses' carries an internal wikilink in the wikitext only).
+
+### [894] VERIFIED_VERBATIM  {reader and expert judgment}
+CLAIM: The WikiProject warns that humans are notoriously bad at distinguishing human and LLM-generated text and cites a 2025 study finding human ability no better than chance.
+SRC: WikiProject AI Cleanup, Wikipedia:Signs of AI writing, version of 6 September 2026 | https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing
+QUOTE: Humans are notoriously bad at distinguishing human and LLM-generated text.
+TRUE: Humans are notoriously bad at distinguishing human and LLM-generated text.
+NOTE: Raw wikitext via Special:Export, revision 2026-09-06T13:13:42Z (matches 'version of 6 September 2026'). Section ==Caveats== / ===Your detection ability===. Quote exact; page adds 'a 2025 study has shown that human ability to distinguish LLM text from human is no better than random chance' (Cheng et al., Advances in Simulation). Both limbs supported.
+
+### [895] VERIFIED_VERBATIM  {reader and expert judgment}
+CLAIM: The WikiProject cites a 2025 preprint finding that heavy users of LLMs correctly determine whether an article was AI-generated about 90% of the time, while light users did only slightly better than chance.
+SRC: WikiProject AI Cleanup relaying a 2025 preprint, Wikipedia:Signs of AI writing | https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing
+QUOTE: heavy users of LLMs can correctly determine whether an article was
+TRUE: heavy users of LLMs can correctly determine whether an article was
+NOTE: Same section. Page: 'A 2025 preprint has shown that heavy users of LLMs can correctly determine whether an article was generated by AI about 90% of the time... Study participants who didn't use LLMs much did only slightly better than random chance.' 'light users' is a fair paraphrase of 'didn't use LLMs much'. All limbs supported.
+
+### [896] VERIFIED_VERBATIM  {detection and its failures}
+CLAIM: The WikiProject advises against relying solely on AI-detection tools such as GPTZero and Pangram because they have non-trivial error rates and are susceptible to paraphrasing and markup changes.
+SRC: WikiProject AI Cleanup, Wikipedia:Signs of AI writing, version of 6 September 2026 | https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing
+QUOTE: these tools have non-trivial error rates
+TRUE: these tools have non-trivial error rates
+NOTE: Section ==Caveats== / ===AI detection tools===. Page: 'Do not solely rely on artificial intelligence content detection tools (such as GPTZero and Pangram)... these tools have non-trivial error rates. Detectors can be susceptible to factors such as text modifications (e.g. paraphrasing, markup, and spacing changes)...'. Every limb — GPTZero, Pangram, error rates, paraphrasing and markup — is on the page.
+
+### [897] VERIFIED_VERBATIM  {other: sensory language attached to the immaterial}
+CLAIM: Sam Kriss argues that AI works sensory language into its prose but, lacking an anchor in the real world, attaches all of it to the immaterial.
+SRC: Sam Kriss, The New York Times Magazine, 2025 | https://www.nytimes.com/2025/12/03/magazine/chatbot-writing-style.html
+QUOTE: all of its sensory language ends up getting attached to the immaterial
+TRUE: all of its sensory language ends up getting attached to the immaterial
+NOTE: NYT live URL returned HTTP 403; recovered via Wayback raw capture https://web.archive.org/web/20251221211413id_/... which carries the full article body through the print footer ('Page 36 of the Sunday Magazine with the headline: The Omniwriter') — raw page reached, not a summary. Page: 'A.I. does still try to work sensory language into its writing, presumably because it correlates with good prose. But without any anchor in the real world, all of its sensory language ends up getting attached to the immaterial.' Directly follows the Woolf 'great plateful of blue water' passage, as the locator says.
+
+### [898] VERIFIED_VERBATIM  {lexical tells}
+CLAIM: Kriss reports that AI-generated fiction is obsessed with ghosts and that in machine-written fiction everything is spectral, a shadow, a memory or a whisper.
+SRC: Sam Kriss, The New York Times Magazine, 2025 | https://www.nytimes.com/2025/12/03/magazine/chatbot-writing-style.html
+QUOTE: In machine-written fiction, everything is spectral.
+TRUE: In machine-written fiction, everything is spectral.
+NOTE: Same Wayback raw capture. Page: 'You'll notice, for instance, that A.I.s are absolutely obsessed with ghosts. In machine-written fiction, everything is spectral. Everything is a shadow, or a memory, or a whisper.' In the section beginning 'But if you task an A.I. with the production of culture itself', as the locator says. All limbs supported.
+
+### [899] VERIFIED_VERBATIM  {lexical tells}
+CLAIM: Kriss reports that AI fiction describes things as quiet or softly humming for no obvious reason and often against the logic of the narrative.
+SRC: Sam Kriss, The New York Times Magazine, 2025 | https://www.nytimes.com/2025/12/03/magazine/chatbot-writing-style.html
+QUOTE: They also love quietness.
+TRUE: They also love quietness.
+NOTE: Page, immediately after the spectral passage: 'They also love quietness. For no obvious reason, and often against the logic of a narrative, they will describe things as being quiet, or softly humming.' Claim's 'the narrative' for the page's 'a narrative' is paraphrase outside the quoted text. All limbs supported.
+
+### [900] VERIFIED_VERBATIM  {other: measured tell count in one generated story}
+CLAIM: Kriss counted seven words in the roughly 1,100-word ChatGPT story Sam Altman presented as evidence of creative-writing ability: quiet, hum, humming, echo twice, liminal and ghosts.
+SRC: Sam Kriss, The New York Times Magazine, 2025 | https://www.nytimes.com/2025/12/03/magazine/chatbot-writing-style.html
+QUOTE: A.I.s are absolutely obsessed with ghosts
+TRUE: seven of those words were quiet, hum, humming, echo (twice!), liminal and ghosts
+NOTE: Page: 'As evidence, the company's chief executive, Sam Altman, presented a short story it wrote... The story it produced was about 1,100 words long; seven of those words were "quiet," "hum," "humming," "echo" (twice!), "liminal" and "ghosts."' Every limb — Altman, evidence of creative writing, ~1,100 words, seven words, the exact list — is supported. The supplied quote is verbatim but sits one paragraph earlier than the locator implies: 'A.I.s are absolutely obsessed with ghosts' is in the preceding ghosts paragraph, not the Altman paragraph. Locator nit only; no claim limb affected.
+
+### [901] VERIFIED_VERBATIM  {other: reaching for the marker of a quality instead of the quality}
+CLAIM: Kriss's mechanism for the tells is that the model is constantly tickling the Simpsons: knowing good writing is subtle, it screams at the top of its voice that everything is subtle and quiet.
+SRC: Sam Kriss, The New York Times Magazine, 2025 | https://www.nytimes.com/2025/12/03/magazine/chatbot-writing-style.html
+QUOTE: it’s constantly tickling the Simpsons
+TRUE: it’s constantly tickling the Simpsons
+NOTE: Page: 'A lot of A.I.'s choices make sense when you understand that it's constantly tickling the Simpsons. The A.I. is trying to write well. It knows that good writing involves subtlety... So to reproduce the effect, it screams at the top of its voice about how absolutely everything in sight is shadowy, subtle and quiet.' Follows the ChatGPT-5 examples, as the locator says. All limbs supported.
+
+### [902] VERIFIED_VERBATIM  {other: overfitting as the mechanism}
+CLAIM: Kriss names overfitting as the technical term for the pattern in which the model reproduces a marker correlated with a quality instead of the quality itself.
+SRC: Sam Kriss, The New York Times Magazine, 2025 | https://www.nytimes.com/2025/12/03/magazine/chatbot-writing-style.html
+QUOTE: The technical term for this is “overfitting,”
+TRUE: The technical term for this is “overfitting,”
+NOTE: Page: 'The technical term for this is "overfitting," and it's something A.I. does a lot.' The antecedent 'this' is the preceding em-dash paragraph — the model drenching prose in a mark correlated with high quality in order to produce high quality — so the claim's characterisation (reproducing a marker instead of the quality) is exactly what the page names. Locator nit: the sentence introduces, rather than follows, the Simpsons tickling anecdote, which comes later in the same paragraph. No claim limb affected.
+
+### [903] VERIFIED_VERBATIM  {punctuation tics}
+CLAIM: Kriss's explanation for the em dash is that within training data it appears more often in texts marked as well-formed, high-quality prose.
+SRC: Sam Kriss, The New York Times Magazine, 2025 | https://www.nytimes.com/2025/12/03/magazine/chatbot-writing-style.html
+QUOTE: the em dash is more likely to appear in texts
+TRUE: Within the A.I.’s training data, the em dash is more likely to appear
+NOTE: Page: 'This might be the problem: Within the A.I.'s training data, the em dash is more likely to appear in texts that have been marked as well-formed, high-quality prose.' Both limbs supported. Recorded hedge: Kriss offers it as a candidate ('This might be the problem'), not a settled finding — the claim's 'Kriss's explanation' is fair, but do not restate it as established fact.
+
+### [904] VERIFIED_VERBATIM  {steerability}
+CLAIM: Kriss reports that telling a model directly to stop using em dashes typically produces an agreement that itself contains em dashes.
+SRC: Sam Kriss, The New York Times Magazine, 2025 | https://www.nytimes.com/2025/12/03/magazine/chatbot-writing-style.html
+QUOTE: But it’s strangely hard to get rid of them.
+TRUE: But it’s strangely hard to get rid of them.
+NOTE: Page: 'But it's strangely hard to get rid of them. Users have complained that if you directly tell an A.I. to cut it out, it typically replies with something like: "You're totally right—em dashes give the game away. I'll stop using them—and that's a promise."' The quoted reply itself contains two em dashes, supporting the claim's final limb. Kriss relays it as a user report, which is what 'Kriss reports' asserts.
+
+### [906] VERIFIED_VERBATIM  {lexical tells}
+CLAIM: Kriss reports that in PubMed abstracts the word delve appeared in roughly one in every 10,000 abstracts in 2022 and that by 2024 usage had shot up by 2,700 percent.
+SRC: Sam Kriss reporting published research, The New York Times Magazine, 2025 | https://www.nytimes.com/2025/12/03/magazine/chatbot-writing-style.html
+QUOTE: By 2024, usage had shot up by 2,700 percent.
+TRUE: By 2024, usage had shot up by 2,700 percent.
+NOTE: Page: 'In 2022, the word appeared in roughly one in every 10,000 abstracts collected in PubMed. By 2024, usage had shot up by 2,700 percent.' Both figures and the PubMed attribution are supported, and the section opens by crediting researchers who studied PubMed abstracts, matching 'reporting published research'.
+
+### [907] VERIFIED_VERBATIM  {other: rule of three}
+CLAIM: Kriss asserts that AI is extremely fixated on the rule of threes and that in fiction it swaps the not-X-but-Y form for a more literary No X. No Y. Just Z.
+SRC: Sam Kriss, The New York Times Magazine, 2025 | https://www.nytimes.com/2025/12/03/magazine/chatbot-writing-style.html
+QUOTE: A.I. is also extremely fixated on the rule of threes.
+TRUE: A.I. is also extremely fixated on the rule of threes.
+NOTE: Quote verbatim. Second limb supported later in the same section: 'It's almost impossible to make A.I. stop saying "It's not X, it's Y" — unless you tell it to write a story, in which case it'll drop the format for a more literary "No X. No Y. Just Z."' The claim's 'in fiction' matches 'tell it to write a story'; 'not-X-but-Y' is a fair rendering of 'It's not X, it's Y'.
+
+### [908] VERIFIED_VERBATIM  {discourse-level tells}
+CLAIM: Kriss names as a tic that the model stops midway through a sentence to ask itself a question, more often in conversation than in generated essays.
+SRC: Sam Kriss, The New York Times Magazine, 2025 | https://www.nytimes.com/2025/12/03/magazine/chatbot-writing-style.html
+QUOTE: stopping midway through a sentence to ask itself a question
+TRUE: stopping midway through a sentence to ask itself a question
+NOTE: Page: 'For instance, A.I. has a habit of stopping midway through a sentence to ask itself a question. This is more common when the bot is in conversation with a user, rather than generating essays for them.' Both limbs supported. The claim's word 'tic' is a paraphrase of the page's 'habit' (the article does use 'tic' for a sibling pattern nearby).
+
+### [909] VERIFIED_VERBATIM  {metaphor discipline}
+CLAIM: Kriss argues that in the AI dismissive formula an X with Y and Z, one or both attributes are either already implicit in X or make no sense at all.
+SRC: Sam Kriss, The New York Times Magazine, 2025 | https://www.nytimes.com/2025/12/03/magazine/chatbot-writing-style.html
+QUOTE: either already implicit in X
+TRUE: one or both of Y or Z already implicit in X
+NOTE: Raw page reached via Wayback raw capture web.archive.org/web/20251221211413id_/ (live nytimes.com returns 403 to a browser UA; the 20260127 capture is a paywall preview only, the 20251221 one carries the full text). Page: 'When it wants to be lightheartedly dismissive of something, A.I. has another strange tic: It will almost always describe that thing as “an X with Y and Z.” ... A lot of the time, one or both of Y or Z are either already implicit in X (which Reddit trolls don’t have Wi-Fi?) or make no sense at all.' Quote verbatim; every limb supported. Minor: the page hedges with 'A lot of the time', which the claim drops — the claim reads as an unquantified generic, not as 'always', so no limb is unsupported.
+
+### [911] VERIFIED_VERBATIM  {abstraction over the concrete}
+CLAIM: Kriss attributes the failure to the models never having experienced the world, so everything they know reaches them through statistical correlations within quantities of words.
+SRC: Sam Kriss, The New York Times Magazine, 2025 | https://www.nytimes.com/2025/12/03/magazine/chatbot-writing-style.html
+QUOTE: Everything they know about the world comes to them through statistical correlations
+TRUE: they can never experience the world; knowledge is statistical correlation
+NOTE: Page: 'they have a serious disability: They can’t ever actually experience the world... Everything they know about the world comes to them through statistical correlations within large quantities of words.' Quote verbatim; the Woolf 'great plateful of blue water' citation sits in the same paragraph, as the claim's page field says. Every limb supported.
+
+### [912] VERIFIED_VERBATIM  {metaphor discipline}
+CLAIM: Kriss cites a generated phrase describing a studio that smelled of turpentine and dreams as a cheap literary effect that AI cannot avoid, since all it can do is pile concepts until they collapse.
+SRC: Sam Kriss quoting his own ChatGPT-5 output, The New York Times Magazine, 2025 | https://www.nytimes.com/2025/12/03/magazine/chatbot-writing-style.html
+QUOTE: smelled of turpentine and dreams
+TRUE: cheap literary effect; all they can do is pile concepts until they collapse
+NOTE: Page: 'a “cluttered art studio that smelled of turpentine and dreams.” This is a cheap literary effect when humans do it, but A.I.s can’t really write any other way. All they can do is pile concepts on top of one another until they collapse.' Attribution also checks: the quiet-party story was ChatGPT-5's output ('That new model was an early version of ChatGPT-5. When I asked it to write a story about a party...').
+
+### [913] VERIFIED_VERBATIM  {reader and expert judgment}
+CLAIM: Kriss reports that researchers found most people vastly prefer AI-generated poetry to the actual works of Shakespeare, T.S. Eliot and Emily Dickinson.
+SRC: Sam Kriss relaying a study, The New York Times Magazine, 2025 | https://www.nytimes.com/2025/12/03/magazine/chatbot-writing-style.html
+QUOTE: most people vastly prefer A.I.-generated poetry to the actual works of Shakespeare
+TRUE: Researchers found most people vastly prefer A.I.-generated poetry
+NOTE: Page, near the close: 'Researchers found that most people vastly prefer A.I.-generated poetry to the actual works of Shakespeare, T.S. Eliot and Emily Dickinson.' Quote and all three named poets verbatim. Note the essay names no study, journal or authors — the claim correctly attributes it as Kriss relaying researchers, not as a primary finding.
+
+### [914] VERIFIED_VERBATIM  {homogenisation}
+CLAIM: Kriss characterises the resulting public voice as mixed metaphors and empty sincerity, impersonal and overwrought, and says it is how corporations and elected officials now speak.
+SRC: Sam Kriss, The New York Times Magazine, 2025 | https://www.nytimes.com/2025/12/03/magazine/chatbot-writing-style.html
+QUOTE: Mixed metaphors and empty sincerity. Impersonal and overwrought.
+TRUE: Mixed metaphors and empty sincerity. Impersonal and overwrought.
+NOTE: Page, in the Starbucks closure-notice section: 'Every day, another major corporation or elected official or distant family member is choosing to speak to you in this particular voice. This is just what the world sounds like now. This is how everything has chosen to speak. Mixed metaphors and empty sincerity. Impersonal and overwrought.' Quote verbatim, both sentences, and the corporations/elected-officials limb is on the page.
+
+### [915] VERIFIED_VERBATIM  {model era drift}
+CLAIM: Kriss reports that British MPs began opening speeches with 'I rise to speak', an American convention, and that on a single day in June it happened 26 times.
+SRC: Sam Kriss, The New York Times Magazine, 2025 | https://www.nytimes.com/2025/12/03/magazine/chatbot-writing-style.html
+QUOTE: On a single day this June, it happened 26 times.
+TRUE: On a single day this June, it happened 26 times.
+NOTE: Page: 'In the British Parliament, for instance, transcripts show that M.P.s have suddenly started opening their speeches with the phrase “I rise to speak.” On a single day this June, it happened 26 times. ... Among American lawmakers, however, beginning a speech this way is standard practice.' All three limbs — the phrase, the American convention, the 26 counts in one June day — are on the page verbatim.
+
+### [916] VERIFIED_VERBATIM  {model era drift}
+CLAIM: Kriss reports a Max Planck Institute for Human Development study that analysed more than 360,000 YouTube videos of extemporaneous academic talks and found AI language increasingly coming out of human mouths.
+SRC: Sam Kriss relaying a Max Planck study, The New York Times Magazine, 2025 | https://www.nytimes.com/2025/12/03/magazine/chatbot-writing-style.html
+QUOTE: analyzed more than 360,000 YouTube videos
+TRUE: Max Planck study analyzed 360,000+ YouTube videos of academics' talks
+NOTE: Page: 'A recent study from the Max Planck Institute for Human Development analyzed more than 360,000 YouTube videos consisting of extemporaneous talks by flesh-and-blood academics and found that A.I. language is increasingly coming out of human mouths.' Every limb verbatim, including the institute's full name.
+
+### [917] VERIFIED_VERBATIM  {other: what the machine says about itself is wrong}
+CLAIM: Kriss reports that ChatGPT describes its own prose as too clean and neutral, and asserts that this is not remotely true because the writing is not smooth or neutral but weird.
+SRC: Sam Kriss, The New York Times Magazine, 2025 | https://www.nytimes.com/2025/12/03/magazine/chatbot-writing-style.html
+QUOTE: It’s not smooth or neutral at all — it’s weird
+TRUE: not even remotely true; it's not smooth or neutral at all — it's weird
+NOTE: Page, in the section opening 'If we’re going to turn over essentially all communication to the Omniwriter': ChatGPT offers 'false modesty about how its prose is sleek and precise but somehow hollow: too clean, too efficient, too neutral, too perfect... In fact, this is not even remotely true. ... It’s not smooth or neutral at all — it’s weird.' Quote verbatim; both limbs supported.
+
+### [918] VERIFIED_VERBATIM  {other: parody passage in the AI voice}
+CLAIM: Kriss opens the essay with a paragraph written in the AI voice as a demonstration, whose clauses include the claim that the writing does not open up the tapestry of human experience.
+SRC: Sam Kriss, parody passage written by the author in the machine's voice, The New York Times Magazine, 2025 | https://www.nytimes.com/2025/12/03/magazine/chatbot-writing-style.html
+QUOTE: It doesn’t open up the tapestry of human experience
+TRUE: It doesn’t open up the tapestry of human experience
+NOTE: The essay's first paragraph is the AI-voice pastiche and contains the quoted clause verbatim; the second paragraph confirms its demonstrative function ('If you’re anything like me, you did not enjoy reading that paragraph... It’s one of them'). One nuance, not a limb of the claim sentence: the article never states who composed that paragraph, so the source field's 'written by the author' is an inference the page neither confirms nor denies.
+
+### [919] VERIFIED_VERBATIM  {register measured}
+CLAIM: Taha Yasseri compared 1,800 matched article pairs and found Grokipedia averages about 14,200 words against 9,400 on Wikipedia.
+SRC: Taha Yasseri, Trinity College Dublin, arXiv:2510.26899v2 | https://arxiv.org/html/2510.26899v2
+QUOTE: Grokipedia articles average about 14,200 words versus 9,400 on Wikipedia
+TRUE: average about 14,200 words versus 9,400 on Wikipedia
+NOTE: arxiv.org/html/2510.26899v2 fetched live (HTTP 200). §3.2: 'Across the enlarged dataset, Grokipedia articles average about 14,200 words versus 9,400 on Wikipedia'. The 1,800 matched-pairs limb is the abstract's own figure ('a large-scale computational comparison of 1,800 matched article pairs'); Table 1's exact N is 1,811 and its Wikipedia mean 9,360 [4,710], both consistent with the rounded prose.
+
+### [920] VERIFIED_VERBATIM  {register measured}
+CLAIM: Yasseri measured a mean Flesch-Kincaid grade of 19.3 for Grokipedia against 12.8 for Wikipedia across 1,811 matched pairs.
+SRC: Taha Yasseri, Trinity College Dublin, arXiv:2510.26899v2 | https://arxiv.org/html/2510.26899v2
+QUOTE: indicating more syntactically complex and less reader-friendly prose
+TRUE: Flesch–Kincaid grade 19.3 [6.6] vs 12.8 [9.9]
+NOTE: Table 1 (N=1,811, values are means [SD]): Flesch–Kincaid grade 19.3 [6.6] Grokipedia against 12.8 [9.9] Wikipedia, Δ +6.5, p < 10^-100. Quote verbatim from §3.2: 'Readability, measured by the Flesch–Kincaid grade level (panel B of Figure 2), is again higher on Grokipedia, indicating more syntactically complex and less reader-friendly prose.' Every limb supported.
+
+### [921] VERIFIED_VERBATIM  {other: citation density}
+CLAIM: Yasseri measured 21.4 references per thousand words on Grokipedia against 90.2 on Wikipedia, and 2.87 headings per thousand words against 5.58.
+SRC: Taha Yasseri, Trinity College Dublin, arXiv:2510.26899v2 | https://arxiv.org/html/2510.26899v2
+QUOTE: longer but less lexically diverse articles, with fewer references per word
+TRUE: references/1k 21.4 vs 90.2; headings/1k 2.87 vs 5.58
+NOTE: Table 1: 'References per 1k words 21.4 [7.4] | 90.2 [218]' and 'Headings (H2–H4)/1k words 2.87 [1.20] | 5.58 [8.32]'. Quote verbatim from the abstract ('it typically produces longer but less lexically diverse articles, with fewer references per word and greater structural variability'). Both figure pairs exact; note Wikipedia's reference SD (218) is more than twice its mean, so that comparison is heavily dispersed — the paper reports it without that caveat.
+
+### [922] VERIFIED_VERBATIM  {counter-evidence}
+CLAIM: Yasseri's measured lexical diversity gap is very small: type-token ratio 0.244 on Grokipedia against 0.248 on Wikipedia, a difference of 0.004 at p equals 0.02.
+SRC: Taha Yasseri, Trinity College Dublin, arXiv:2510.26899v2 | https://arxiv.org/html/2510.26899v2
+QUOTE: inflates sentence length and readability grade without a proportional increase in lexical variety
+TRUE: TTR 0.244 vs 0.248, Δ −0.004, p = 0.02
+NOTE: Table 1: 'Lexical diversity (TTR) 0.244 [0.057] | 0.248 [0.049] | −0.004 | 0.02'. Quote verbatim from §4: 'Grokipedia’s language inflates sentence length and readability grade without a proportional increase in lexical variety.' The figures and the p-value are exact. 'Very small' is the claimant's gloss, not the paper's word — the paper says only 'lower lexical diversity' — but it is an arithmetic reading of the table's own Δ, and the SDs (0.057, 0.049) are more than ten times the gap, so the counter-evidence framing is sound.
+
+### [923] VERIFIED_VERBATIM  {discourse-level tells}
+CLAIM: Yasseri concludes that AI-generated encyclopedic content mirrors Wikipedia's informational scope but diverges in editorial norms, favouring narrative expansion over citation-based verification.
+SRC: Taha Yasseri, Trinity College Dublin, arXiv:2510.26899v2 | https://arxiv.org/html/2510.26899v2
+QUOTE: favoring narrative expansion over citation-based verification
+TRUE: mirrors Wikipedia’s informational scope but diverges in editorial norms
+NOTE: Abstract, verbatim: 'These findings suggest that AI-generated encyclopedic content currently mirrors Wikipedia’s informational scope but diverges in editorial norms, favoring narrative expansion over citation-based verification.' Every limb present; the paper's hedge 'currently' and 'suggest' are softer than the claim's 'concludes', but the same sentence recurs as a conclusion in §4 ('It mirrors Wikipedia’s informational scope and linguistic tone but replaces community deliberation with algorithmic synthesis').
+
+### [924] VERIFIED_VERBATIM  {homogenisation}
+CLAIM: Robin Sloan writes that the AI companies may wreck every creative industry and flood the internet with garbage while culture fades into a sort of oatmeal sludge.
+SRC: Robin Sloan, novelist, robinsloan.com lab blog, 2025 | https://www.robinsloan.com/lab/is-it-okay/
+QUOTE: 
+TRUE: wreck every creative industry, flood the internet with garbage
+NOTE: Raw page fetched live (robinsloan.com, HTTP 200, browser UA). Passage: 'Can't these companies simply promise ... and meanwhile, wreck every creative industry, flood the internet with garbage, grow rich on the value of Everything? Let us cook - while culture fades into a sort of oatmeal sludge.' Sits exactly where the page hint says, right after 'But what if that isn't the primary application?'. The claim's 'may' is supported by Sloan's follow-on 'They can do that! They probably will.' Chunk supplied no quote string, so nothing to mismatch; the claim's own distinctive wording is on the page word for word.
+
+### [925] VERIFIED_VERBATIM  {other: writing produced for a real reason}
+CLAIM: Sloan hypothesises that commissioned training text would lack the grain and umami of writing actually produced for its own varied reasons.
+SRC: Robin Sloan, novelist, robinsloan.com lab blog, 2025 | https://www.robinsloan.com/lab/is-it-okay/
+QUOTE: The same grain. The same umami.
+TRUE: Your document doesn't have the same grain, the same umami
+NOTE: Quote 'The same grain. The same umami.' appears verbatim. Full context: 'I have a hypothesis, which naturally might be wrong: that it is precisely the naivete of Everything, the fact that its writing was actually produced for all those different reasons, that makes it so valuable. Composing a fake corporate email, knowing it will be used to train a language model ... you're not doing the same thing as the real email-writer.' Every limb - hypothesis framing, commissioned/clean-room corpus, writing produced for its own varied reasons - is on the page.
+
+### [926] VERIFIED_VERBATIM  {detection and its failures}
+CLAIM: Neil Clarke asserts that generative AI use differs from plagiarism in that proving it to a legal standard is significantly more complex, since few leave a prompt in or admit what they did.
+SRC: Neil Clarke, editor of Clarkesworld, 2026 | https://neil-clarke.com/ai-and-short-fiction-2/
+QUOTE: proving it to a legal standard is significantly more complex
+TRUE: one important difference from plagiarism: proving it to a legal standard
+NOTE: neil-clarke.com/ai-and-short-fiction-2/ fetched live (HTTP 200), post dated 07/16/2026. Page: 'The use of generative "AI" in submissions is not the same as plagiarism ... it has one important difference from plagiarism: proving it to a legal standard is significantly more complex. Very few will leave a prompt in or admit what they've done.' Quote verbatim; both limbs (the plagiarism contrast, the prompt/admission rationale) supported; context is indeed the argument against naming names.
+
+### [927] VERIFIED_VERBATIM  {reader and expert judgment}
+CLAIM: Clarke states that a handful of publishers are willing to publish generated slop and that at minimum they should be transparent about it.
+SRC: Neil Clarke, editor of Clarkesworld, 2026 | https://neil-clarke.com/ai-and-short-fiction-1/
+QUOTE: There are a handful of publishers that are ok with generated slop.
+TRUE: a handful of publishers that are ok with generated slop
+NOTE: neil-clarke.com/ai-and-short-fiction-1/ fetched live (HTTP 200), post dated 07/14/2026. Final bullet is headed 'YOU MAY DISCOVER THEY DO NOT CARE' and reads: 'There are a handful of publishers that are ok with generated slop. Horrifying, I know. At the bare minimum, they should be transparent about what they are doing and own it, but that's not always the case.' Quote verbatim, both limbs supported, page location exactly as hinted.
+
+### [928] VERIFIED_VERBATIM  {other: the first draft is not the same object}
+CLAIM: Ted Chiang argues that a writer's first draft is not an unoriginal idea expressed clearly but an original idea expressed poorly.
+SRC: Ted Chiang, The New Yorker, 2023 | https://www.newyorker.com/tech/annals-of-technology/chatgpt-is-a-blurry-jpeg-of-the-web
+QUOTE: it’s an original idea expressed poorly
+TRUE: Your first draft isn't an unoriginal idea expressed clearly
+NOTE: New Yorker page fetched live in full (HTTP 200, datePublished 2023-02-09; article text complete through the closing bullet). Page: 'Your first draft isn't an unoriginal idea expressed clearly; it's an original idea expressed poorly.' Quote verbatim; the claim's two-sided contrast is exactly the sentence's structure, in the passage arguing against starting original work from generated text.
+
+### [929] VERIFIED_VERBATIM  {other: revision is where quality is made}
+CLAIM: Chiang holds that the dissatisfaction accompanying a human first draft is what directs rewriting, and that this is one of the things lacking when a writer starts from generated text.
+SRC: Ted Chiang, The New Yorker, 2023 | https://www.newyorker.com/tech/annals-of-technology/chatgpt-is-a-blurry-jpeg-of-the-web
+QUOTE: your awareness of the distance between what it says and what you want
+TRUE: That's what directs you during rewriting
+NOTE: Same paragraph as 928: '... accompanied by your amorphous dissatisfaction, your awareness of the distance between what it says and what you want it to say. That's what directs you during rewriting, and that's one of the things lacking when you start with text generated by an A.I.' The supplied quote is a word-for-word prefix of Chiang's sentence (page continues 'it to say'); both limbs - dissatisfaction directs rewriting, and it is lacking when starting from generated text - are explicit.
+
+### [930] VERIFIED_VERBATIM  {other: surface polish with nothing underneath}
+CLAIM: Chiang argues that because a model rephrases rather than quotes, it creates the illusion that it understands the material.
+SRC: Ted Chiang, The New Yorker, 2023 | https://www.newyorker.com/tech/annals-of-technology/chatgpt-is-a-blurry-jpeg-of-the-web
+QUOTE: it creates the illusion that ChatGPT understands the material
+TRUE: rephrases material from the Web instead of quoting it word for word
+NOTE: Page: 'The fact that ChatGPT rephrases material from the Web instead of quoting it word for word makes it seem like a student expressing ideas in her own words ...; it creates the illusion that ChatGPT understands the material.' Quote verbatim; the causal limb (because it rephrases rather than quotes) is the same sentence. Paragraph is the lossless-vs-lossy explanation, as the page hint says.
+
+### [931] VERIFIED_VERBATIM  {other: surface polish with nothing underneath}
+CLAIM: Chiang states that when dealing with sequences of words, lossy compression looks smarter than lossless compression.
+SRC: Ted Chiang, The New Yorker, 2023 | https://www.newyorker.com/tech/annals-of-technology/chatgpt-is-a-blurry-jpeg-of-the-web
+QUOTE: lossy compression looks smarter than lossless compression
+TRUE: When we're dealing with sequences of words
+NOTE: Closing sentence of that same paragraph: 'When we're dealing with sequences of words, lossy compression looks smarter than lossless compression.' Quote verbatim and the whole claim is that sentence.
+
+### [932] VERIFIED_VERBATIM  {abstraction over the concrete}
+CLAIM: Chiang concludes from GPT-3's arithmetic failures that its statistical analysis produces a superficial approximation of the real thing and no more.
+SRC: Ted Chiang, The New Yorker, 2023 | https://www.newyorker.com/tech/annals-of-technology/chatgpt-is-a-blurry-jpeg-of-the-web
+QUOTE: a superficial approximation of the real thing
+TRUE: GPT-3's statistical analysis ... but no more than that
+NOTE: Page: 'GPT-3's statistical analysis of examples of arithmetic enables it to produce a superficial approximation of the real thing, but no more than that.' Quote verbatim. The 'concludes from GPT-3's arithmetic failures' limb is supported by the preceding sentences - accuracy falling to ten per cent at five digits, and the observation that it doesn't carry the '1'.
+
+### [933] VERIFIED_VERBATIM  {homogenisation}
+CLAIM: Chiang predicted that the more model-generated text is published, the more the Web becomes a blurrier version of itself.
+SRC: Ted Chiang, The New Yorker, 2023 | https://www.newyorker.com/tech/annals-of-technology/chatgpt-is-a-blurry-jpeg-of-the-web
+QUOTE: the more the Web becomes a blurrier version of itself
+TRUE: the more that text generated by large language models gets published
+NOTE: Page: 'the more that text generated by large language models gets published on the Web, the more the Web becomes a blurrier version of itself.' Quote verbatim, in the content-mill passage as hinted. One framing caveat, not a limb failure: Chiang states this as a present-tense dynamic rather than labelling it a prediction (his explicitly labelled 'prediction' two paragraphs later is about GPT-4's training data); written Feb 2023, the sentence is forward-looking, so 'predicted' is fair paraphrase.
+
+### [934] VERIFIED_VERBATIM  {detection and its failures}
+CLAIM: Mark Williams ran the opening paragraphs of The Cuckoo's Calling through six free AI-detection tools and got three entirely different verdicts, from ZeroGPT's 50.9% AI-generated and TextGuard's 73% to three tools returning 100% human.
+SRC: Mark Williams, editor of The New Publishing Standard, 2026 | https://thenewpublishingstandard.com/2026/06/09/david-shelley-ai-detection-publishing/
+QUOTE: Six tools. The same text. Three entirely different verdicts.
+TRUE: Six tools. The same text. Three entirely different verdicts.
+NOTE: thenewpublishingstandard.com fetched live (HTTP 200), 'Posted by Mark Williams | Jun 9, 2026'. Section 'The Experiment' lists ZeroGPT 50.9% AI-generated, TextGuard 73% AI-generated, Grammarly 39%, and GPTZero/Quillbot/Copyleaks each 100% human, then 'Six tools. The same text. Three entirely different verdicts.' All figures and the three-100%-human count check out; the tools are described as 'six of the most widely used free AI detection tools'. Minor wording point only: the Cuckoo's Calling run is written in the passive ('were run through'), the first-person 'ran' appears for his other tests.
+
+### [935] VERIFIED_VERBATIM  {detection and its failures}
+CLAIM: Williams reports that Quillbot rated the 1965 Gambian national anthem 100% AI-generated while rating actual AI output 100% human.
+SRC: Mark Williams, editor of The New Publishing Standard, 2026 | https://thenewpublishingstandard.com/2026/06/09/david-shelley-ai-detection-publishing/
+QUOTE: formal ceremonial writing is, by design, controlled and consistent
+TRUE: was run through Quillbot. The result: 100% AI-generated.
+NOTE: Page: 'the Gambian national anthem - formal, ceremonial, metrically structured, written by human beings with great deliberate care back in 1965 - was run through Quillbot. The result: 100% AI-generated.' And of the deliberately AI-written answers: 'Quillbot's verdict: 100% human.' Both limbs and the 1965 date verified. The supplied quote, 'formal ceremonial writing is, by design, controlled and consistent', also appears verbatim, in the later explanatory section as the page field indicates.

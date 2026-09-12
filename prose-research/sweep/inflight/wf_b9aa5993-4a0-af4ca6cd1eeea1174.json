@@ -1,0 +1,21 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 106,
+ "firstTs": "2026-09-12T01:18:43.726Z",
+ "lastTs": "2026-09-12T01:23:58.577Z",
+ "tools": {
+  "Bash": 28,
+  "Read": 7
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "I will begin by checking whether an earlier attempt left a packet file, then read the pool's kept rows, draft, skeleton, and the voice documents.",
+ "run": "wf_b9aa5993-4a0",
+ "agent": "af4ca6cd1eeea1174",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/4ed79a2b-6cd2-45cf-ab97-83cdad49c30b/subagents/workflows/wf_b9aa5993-4a0/agent-af4ca6cd1eeea1174.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}

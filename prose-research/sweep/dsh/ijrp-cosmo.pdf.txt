@@ -1,0 +1,525 @@
+139
+The Role of the Cosmographer
+Abstract: This article suggests that the most distinctive element of role-playing games is not that they allow players 
+to take on the role of fictional characters but that they represent a historically significant development of humanity’s 
+capacity for imagining other worlds. It describes this development as an innovation in cosmographic technology, 
+or interlocking procedures and techniques that enhance our ability to imagine and explore worlds. In other 
+words, the most essential role that a player takes on in a role-playing game is that of cosmographer, or explorer of 
+multiversal possibility. The novel cosmographic development represented by the first RPGs came from a synthesis 
+of two imaginative technologies: the ironic imagination of early speculative fiction and the oracular simulations 
+of wargaming. RPGs draw on technologies for simulating space and time, but most importantly they draw on the 
+oracular technology of using probabilities and dice to propel games into cosmographic territory that the human 
+players could not have imagined unaided. Through the synthesis of these elements RPGs enhance human imaginative 
+capacities offering players the ability to take on the role of cosmographers utilizing powerful technologies to access 
+vast and unexplored swathes of possible worlds.
+Keywords: Cosmographer, TRPG, Cosmagraphic Technology, Oracular Simulation
+Nicholas J. Mizer
+Rensselaer Polytechnic Institute
+mizern@rpi.edu
+International Journal of Role-Playing - Issue 18    
+1. INTRODUCTION
+The 2025 Role-Play in Games Conference called on participants to think about the foundations 
+of role-playing in a game, breaking that down by historical, cultural, theoretical, and critical 
+angles. This included “alternative historical trajectories of other critical lines, events or ideas 
+that came together to form role-playing in games as we know it” (Games As Art Center 2025). 
+In this essay I put forward the notion that role-play, in the traditionally understood sense of 
+taking on the role of a fictional character, is neither the most distinctive nor the most important 
+element of role-playing games. Instead, I argue that tabletop role-playing games ( TRPGs) 
+represent a historically significant development of humanity’s capacity for imagining other 
+worlds. I describe this development as an innovation in cosmographic technology, or interlocking 
+procedures and techniques that enhance our ability to imagine and explore worlds. In other 
+words, I contend that the most essential role that a player takes on in a role-playing game is 
+that of cosmographer, or explorer of multiversal possibility.
+In the first section of the essay I will contextualize my use of the term “cosmography,” 
+positioning it in relationship to other uses of the term, Curtis Carbonell’s (2019) concept of 
+“realized worlds,” and Chloe Germaine’s (2025) eco-weird description of “co-worlding” with 
+games. I position cosmography as exploration of a spatialized field of possibility, drawing on 
+Mark JP Wolf’s (2012) model of imagined worlds, and considering the limits of our imagination 
+as a horizon which we can expand. In the second section I argue for a definition of games as a 
+cosmographic technology that harnesses play’s exploration of the possible, and present role-
+playing games as a particularly powerful development of that technology. Having developed 
+a model for conceptualizing TRPGs as cosmographic technology, I offer a brief retelling of 
+their origins in that light, describing the particular developments that led to the publication 
+of Dungeons & Dragons as a synthesis of different streams of cosmographic innovations. In 
+the conclusion of the essay I suggest that this conceptualization of TRPGs provides a fruitful 
+model for understanding their potential as tools for radical social change.
+140
+1.1 Cosmography
+I describe the exploration of possible worlds as cosmography, a term used in various enough ways 
+that it deserves clarification here. I do not intend to invoke the cosmography of Astrophysics, 
+concerned with matter distribution in the empirically observable universe. Neither am I using 
+the term as a synonym for cosmology, in the sense of a philosophical model of reality like Plato’s 
+Timaeus. My meaning is closer to Peter Heylyn’s 1652 Cosmography, in which he describes a 
+fusion of history and geography that promises “universal Comprehension of Naturall and 
+Civill story,” in the sense that Heylyn the cosmographer sought to document not just gaia 
+but cosmos (quoted in Gagné 2021, 39). My aims are both humbler and wider than Heylyn’s. 
+Humbler, in that I do not expect any cosmographer to approach “universal Comprehension” 
+of the cosmos; this is necessarily so, in that my wider conception of cosmos includes not only the 
+actual world but all possible worlds. I might specify multiversal cosmography, but wherever 
+and however possible worlds can be said to exist, they must exist in that totality which we 
+can only call the universe. In most respects my meaning is closest to that developed by Renaud 
+Gagné (2021), who defines cosmography as “the composition of possible worlds that coexist 
+on a stage of conflicts and alternatives” (2021, 27). Gagné is concerned with the poetics of 
+worlding and conducts a “slow reading” of how Greek cosmographers from Pindar forward 
+composed possible worlds that intersect through the nexus of the land of Hyperborea.
+Within role-playing game studies, Curtis Carbonell (2019) has developed a similar 
+approach that describes “realized worlds” as a central feature of “the modern fantastic,” a 
+reworking of Michael Saler’s (2012) argument that the 20
+th century’s “ironic imagination” gave 
+rise to a new kind of “virtual world.” Carbonell centers space as a key concept for understanding 
+TRPGs and describes how the modern fantastic’s “geographies of imagination” (Anderson 
+1991; Said 1997) “combine the imaginary with the real (Carbonell 2019, 24). “Realized” also 
+emphasizes that ironic engagement with worlds involves a process of realization, allowing 
+for a powerful synthesis with Deleuze’s concept of the virtual as that which “emerges out of 
+‘actual’ material life as the ‘real’” (2016, 26). The resulting picture is of TRPGs as key tools in 
+the modern fantastic’s “inflection of modernity, in which lived spaces oscillate between the 
+real and the imaginary” (Carbonell 2019, 9). 
+While my cosmographic model does not contradict Carbonell’s, it approaches role-
+playing games from a different disciplinary angle, which produces a different inflection and 
+set of affordances. Like Gagné, Carbonell approaches his subject from the angle of literature, 
+conceptualizing TRPGs as, first and foremost, “literary gametexts” (2019, 3). This emphasis on 
+poetics and composition is where my angle of entry into the subject differs from Gagné and 
+Carbonell. Without denying the validity of this approach, I come to TRPGs from the perspective 
+of anthropology and folklore, considering them first as a kind of verbal performance. While 
+written text clearly forms a key piece of a form sometimes called “pencil and paper” games, I 
+will argue the role-playing game emerges as a set of practices which are only later codified in the 
+formulation of a gametext. This difference leads my conception of cosmography to emphasize 
+the discovery and exploration, rather than the composition, of worlds. A cosmographer is not 
+so much a worldbuilder as a world-hopper.
+Although she doesn’t use the term cosmography, Chloe Germaine’s eco-weird 
+description of “tabletop gameplay as a mode of co-worlding” resonates strongly with my 
+conception of the cosmographic, especially when she speaks of TRPGs’ “potential to bring 
+forth as-yet unrealized possibilities from the virtual into the actual” (2025, 182). In drawing 
+on Deleuze’s concept of the virtual, Germaine differs from Gagné in one important matter: 
+the ontological question of if and how these worlds exist. Whereas Gagné denies the existence 
+International Journal of Role-Playing - Issue 18   
+141
+of Hyperborea outside of the discourses that construct it, like Carbonell Germaine draws on 
+Deleuze’s concept of virtuality. Even more than Carbonell, Germaine emphatically asserts 
+with Deleuze that the “virtual is ‘fully real,’ a realm of reality in which all objects partially 
+exist, and from which actual objects, relations, and situations arise” (Germaine 2025, 185). The 
+difference is more than a philosophical quibble and had real implications for our conception 
+of RPGs.
+Emphasizing, as Gagné does, the non-existence of imagined worlds pairs with his 
+emphasis on rhetoric, the individual artist, and cosmography as the composing of worlds . 
+Allowing for the existence of imagined worlds opens up new and fruitful ways of thinking 
+and acting with RPGs. As Germaine says, “Games do not simply straddle the real and the 
+imagined, paltry half-and-half things; they provide a passage between the virtual and the 
+actual (2025, 185). Her use of the term “passage” here points towards one important shift: 
+the virtual reality of other worlds raises the question of where these worlds exist, guiding us 
+towards a fruitful spatial model for cosmography. Where Gagné’s cosmography is primarily 
+a matter of composing worlds, the cosmographer of virtual worlds explores and discovers 
+worlds rather than composing or creating them. More than a shift in metaphor or image, this 
+spatialized, virtual cosmography has real implications for the ethical and political capacities 
+of TRPGs. Germaine draws attention to the ethical dimension of this difference, noting that 
+connecting the virtual and the actual “allows for thinking through the futural dimension 
+of games. The virtual in games comprises possible forms that do not exist but that could 
+give rise to new, transformed conditions of reality” (2025, 186). I have explored role-playing 
+games’ cosmographic potential to catalyze real-world changes elsewhere (Mizer 2025), but 
+like Germaine I argue that they can serve as assistive technology for exploring and realizing 
+better worlds.
+1.2 The Atomic Model of Possibility
+In seeking to understand how games connect the virtual and actual, I have adapted a model 
+developed by Mark JP Wolf in Building Imaginary Worlds (2012). While Wolf uses the model to 
+explain his concept of secondary worlds as a distinct category of robustly described imagined 
+worlds, I find the relationship between the possible and the imagined more fruitful in the 
+context of cosmography. I describe this as an atomic model of the cosmos. 
+Here I should note that while I find Germaine’s invocation of Deleuzean virtuality both 
+compelling and useful, this atomic model works even if it is methodological and conceptual 
+rather than ontological. That is, my primary intent here is to develop a useful way of thinking 
+about other worlds, not to fully defend claims about the existence, non-existence, or virtual 
+existence of other worlds.
+That said, the model begins with “Prime Reality,” the world where if I stub my toe I feel 
+the pain as a mandatory and direct experience. This world forms the nucleus, as central and 
+defined and ultimately unknowable in the atom as in our experience. The set of all possible 
+worlds surrounds our world like an electron cloud surrounding the nucleus of the real. In 
+this spatialization of possibility, “near” worlds are more similar to our own and “far” worlds 
+are dissimilar. One world over, my shirt is green instead of blue. Further out, the walls of 
+my office are lined with semi-intelligent vines that serve me coffee when I need a break from 
+writing. Between the borders of Prime Reality and the sum total of all possible worlds, the 
+sphere of imagined worlds continues to expand just as it has ever since humans (or, more 
+likely, pre-human hominids) first developed the capacity to imagine worlds different from 
+our own. Here we find Gilgamesh, Izanagi and Izanami, Tolkien’s Arda, Gygax’s Oerth, and 
+every dream a human has ever had.
+International Journal of Role-Playing - Issue 18   
+142
+1.3 Imaginative Horizons
+Presumably, the farthest reaches of possibility space extend beyond human comprehension 
+or ability to imagine. Much closer to the actual, however, lie important regions of the possible 
+that we cannot currently imagine. Just as each of us has an outer limit to how far away we 
+can see, just as there is an upper limit to how fast a human can currently move, there exists 
+an imaginative horizon, beyond which it is difficult or impossible to effectively imagine. While 
+it might have been theoretically possible for a Haudenosaunee living in the 13th century 
+to imagine the world of N. K. Jemisin’s Broken Earth series, practically speaking that world 
+existed beyond the imaginative horizon of anyone alive until quite recently.
+This cosmographic limitation applies beyond our ability to imagine “fictional worlds.” 
+When we say that it is easier to imagine the end of the world than the end of capitalism, we 
+are referring to our imaginative horizon. As Ursula K. Le Guin, a masterful cosmographer 
+in her own right, said in her 2014 acceptance speech for the Distinguished Contribution to 
+American Letters Award, “We live in capitalism. Its power seems inescapable. So did the 
+divine right of kings.” In response to this “capitalist realism,” (Fisher 2022) Le Guin calls for 
+those “who can see alternatives to how we live now … realists of a larger reality” (2014). Our 
+challenges in imagining alternative worlds, the shape of our imaginative horizon, are not just 
+natural states, but are in part the result of ideological power structures. The Marxist aesthetics 
+approach of Jennifer Ponce de Léon and Gabriel Rockhill, which they call a “compositional 
+model of ideology,” describes capitalism as “a multidimensional world-making mechanism” 
+that “strives to impose its definition of reality as the only one possible, while seeking to 
+destroy, discredit, or render inapprehensible all other worlds and possibilities of world-
+making” (2020, 2-3). Effective imagination, imagination that can help humans find better ways 
+of being, depends on understanding, utilizing, and advancing cosmographic technologies 
+that can overcome the ideologically sedimented barriers that limit our imaginative horizons. 
+Role-playing games are among such technologies.
+2. COSMOGRAPHIC TECHNOLOGY
+My use of “technology” here does not refer to video games, or even to particularly material 
+human innovations. The common description of game rules as “mechanics” imply a general 
+understanding of the interlocking systems of play as a kind of technology. Carbonell argues 
+that “an engineering ethos invigorates the mechanics of realized worlds,” and describes the 
+“modern fantastic” as combining the technocratic and literary modes (2019, 6). Germaine 
+builds on this by describing role-playing games as operating in three modalities, one of which 
+is as “ludic technologies … that generate potential.” (Germaine 2021, 129). Similarly, Ryan, 
+Dixon, and MacCallum-Stewart describe games of emergent narrative as “narrative machines—
+mechanical systems that create narrative experiences” (2020, 179). This more-than-material 
+understanding of technology follows similar usage in some meditative traditions, such as 
+Antonio de Nicolás’s (1986) analysis of Ignatian spiritual practice as a technological system. 
+De Nicolás defines a primary technology as “the habituation in the ordering and repetition of 
+certain mental acts and languages to extend the human sensorium as far as the technology is 
+able to reach’ (1986, xxi). This approach is consonant with Heidegger’s definition of technology 
+as a “mode of revealing” in which he points out the root term Technē refers not only to material 
+crafts but to “the arts of the mind” (1977, 13). This understanding of technology synthesizes 
+the aesthetic and the material. Ponce de León and Rockhill describe aesthetics as “the collective 
+composition of a shared sensorium” while affirming that this composition is achieved through 
+material sociohistorical practices (2020, 2).
+International Journal of Role-Playing - Issue 18   
+143
+Although we might call these practices techniques, “cosmographic technology” has 
+the benefit of drawing connections to media theorist Marshall McLuhan’s (2003) concept of 
+technologies as enhancement of human capacities. The telescope serves as an extension of our 
+ability to detect energy in the spectrum of visible light, a capacity we call “sight.” The hammer 
+serves as an extension of our ability to move objects in space, a capacity we call “strength.” 
+Similarly, cosmographic technologies enhance our capacity to explore the possible. In the 
+following section I will argue that this capacity is best described as “play.” 
+2.1 Games as Cosmographic Technology
+Classical definitions of play are, as Aaron Trammell (2023) points out, fraught along many 
+lines. Against saccharine, hegemonic portrayals of play as purely liberatory and uplifting, 
+Trammell calls for a reparative understanding of play that “is as painful as it is pleasurable, 
+as individual as it is universal, and as mandatory as it is voluntary” (2023, 8). Jaakko Stenros 
+argues that the distinction between the activity of play and the attitude of playfulness helps 
+to account for the existence of mandatory and painful play, and describes the “core of play 
+that most conceptualizations agree on” as “playful play” (2015, 93). Surrounding this core 
+are many types of play that might be excluded in some definitions, but that Stenros includes, 
+such as describing bullying (or, to Trammell’s point, torture) as one-sided social play. This 
+definition of play includes “all activity done for its own sake” intentionally affording a 
+“wide conceptualization of play” that “lets us explore and discover, see connections and 
+juxtapositions, and improvise and play with the theory of play” (2015, 78-79). In this spirit, 
+I submit a working definition of play that considers play not only a “fundamental condition 
+in human and animal life,” but as a fundamental feature of the cosmos: play is autotelic 
+exploration of possibility.
+This definition synthesizes Csikszentmihalyi’s (1975) emphasis on the autotelic nature 
+of play (i.e., play as that which is done for its own end), the idea that exploration and play 
+might be coterminous (Weisler and McCall 1976) and Sutton-Smith’s concept of adaptive 
+variability (1997). Whereas Sutton-Smith’s biological definition can identify the evolutionary 
+benefits of play, my definition would include evolution as play in that the process explores the 
+full range of biological possibility. In other words, I do not conceptualize play as an activity 
+so much as a force or phenomenon, a pneumatic tendency of reality to expand outwards into 
+possibility space. This tendency is not dissimilar from what Teilhard de Chardin describes as 
+“the law of complexification” (2008, 48)
+When explaining this concept to my students, I draw two lines on the board. The first 
+line is straight, the second line curves and bends across the chalkboard. When I ask my students 
+which line is more playful, they inevitably choose the curvy line (unless, of course, they are 
+offering a playful response). This is anecdotal evidence of course, but it connects to other 
+definitions of play developed outside the central play studies canon. Germaine, for example, 
+claims that “all play is movement forward and backward,” (2025, 191) and draws on Hans 
+Georg Gadamer’s portrayal of play “as an impersonal agency,” even denying the necessity of 
+a playing subject (Gadamer 1994, 106). A notion of play as movement is compatible with my 
+concept of exploration of possibility. Conceived this way, play is a force or energy expanding 
+outward into possibility space, some territories of which are full of oppression and others 
+liberation. Play is essential to the human way of being in the world, but play is bigger than 
+humanity. Huizinga begins Homo Ludens (1950) by reminding us that animals did not wait for 
+humans to teach them play. Anthropologist David Graeber (2014), using a definition similar 
+to my own, of play as autotelic exercise of “an entity’s most complex powers or capacities,” 
+International Journal of Role-Playing - Issue 18   
+144
+even speculates about the play of electrons. Like sight, like strength, play is a capacity that 
+humans use in particular ways but that is not unique to humanity.
+If we are looking for the distinctively human use of play, we find games. Games harness, 
+structure, and direct play’s exploration of possibility, like a water wheel redirecting the energy 
+of a river. Games are technologies of play that allow us to perceive further into the possible 
+than other living things seem to. In other words, games are cosmographic technologies that 
+we use to navigate through possibility space.
+ Our use of cosmographic technologies is distinctive to our way of being in the world, 
+leading to Marx’s famous observation that the difference between the worst human architect 
+and the best bee is that the human “raises his structure in imagination before he erects it 
+in reality” (1887). The architect looks out from prime reality and sees a range of possible 
+worlds that include variants of the structure they might build. To refine and focus their vision, 
+they might use any number of cosmographic technologies. Language itself is a cosmographic 
+technology, a structured play of symbols, that the architect can use to connect others to imagined 
+worlds that include the new building. Language is the foundational technology for nearly all 
+expansion of our imaginative range. In Tolkien’s words, “When we can take green from grass, 
+blue from heaven, and red from blood, we have already an enchanter’s power—upon one 
+plane; and the desire to wield that power in the world external to our minds awakes.” (2008, 
+41). Fictional narrative is a development of the language technology, one that allows us to 
+playfully assemble counterfactuals and create linkages between them. We could describe any 
+number of human cultural patterns in this way, but these examples suffice to contextualize 
+my claim that role-playing games are particularly powerful and significant developments of 
+cosmographic technology.
+2.2 Role-Playing Games as Cosmographic Technology
+It may seem odd to argue that the most distinctive feature of “role-playing” games has little 
+to do with “role-playing,” and my reference to the “role” of the cosmographer in the title 
+to this essay is admittedly a dodge. However, in many ways it is an historical accident that 
+emergent tradition of “Midwestern folk art of the 1970s” (Lawrie and Phipps 2019, 12) came to 
+be called “role-playing games.” It is possible that this has led us to overemphasize characters 
+and roles in our understanding of these games. A comparable accident occurred in the history 
+of video games when games that emphasized exploration and puzzle were called “adventure” 
+games, largely because the first major example of the genre was called Colossal Cave Adventure 
+(Reed et al. 2020). The subject matter of an adventure game does not need to be particularly 
+adventurous, nor does a narrative of adventure make a first-person shooter an adventure 
+game. Similarly, “role-playing” is not necessarily the most distinctive feature of “role-playing 
+games” simply because it is in the title.
+The term “role-playing” entered English in 1925 when Jakob Moreno brought his 
+Rollenspiel group psychotherapy techniques to the United States (Peterson 2012, 373). Its 
+first application to hobby gaming, in 1973, referred to specific  Diplomacy-influenced games 
+simulating “hypothetical crisis problems” (Peterson 2012, 457). Dave Arneson and the Twin 
+Cities gamers do not seem to have described their Blackmoor games as “role-playing”, and 
+when Arneson and Gygax collaborated in systematizing Blackmoor into the little brown books 
+of 1974 Dungeons & Dragons, they used the famously awkward subtitle “Rules for Fantastic 
+Medieval Wargames Campaigns Playable with Paper and Pencil and Miniature Figures.” The 
+term “role-playing game” only came to be used in something like its current meaning when 
+developers of other games, such as Tunnels & Trolls, needed a term to signal similarity to, but 
+legal distinction from, Dungeons & Dragons (Peterson 2012, 556).
+International Journal of Role-Playing - Issue 18   
+145
+Taking on the role of a fictional character is certainly an important aspect of RPGs, but 
+it is hardly a unique feature. Humans have taken on the role of fictional characters for at least 
+as long as theater has existed. Even within the sphere of games, players did not wait for the 
+development of RPGs to take on roles in wargames, improvisational theater games, and any 
+number of other games. Neither is taking on a character role a deciding criterion for inclusion 
+in the fuzzy set (if not the strict definition) of RPGs. In The Quiet Year (Alder 2019), for example, 
+players collaboratively imagine a small community of survivors but do not take on the role 
+of any individual characters within the community. True, we might more accurately call  The 
+Quiet Year a worldbuilding game than a role-playing game, but in everyday language most 
+people are unlikely to pause at the misnomer. 
+More important than the complicated Venn diagrams of role-taking and various games, 
+it is fairly clear that early role-playing games offered little new assistance or techniques for 
+developing more immersive role-taking or stronger connections between the player and 
+the fictional character. This paucity of role-playing technology in early RPGs is precisely 
+what drove players in the 1990s towards more character-immersive games like Vampire: The 
+Masquerade (Bowman 2010). To understand the key innovation of “role-playing games” for 
+the history of games, we must look away from roles and towards cosmography.
+3. THE MIDWESTERN SYNTHESIS
+The novel cosmographic development represented by the first RPGs came from a synthesis 
+of two imaginative technologies: the ironic imagination of early speculative fiction and the 
+oracular simulations of wargaming. The “ironic imagination” is Michael Saler’s term for a 
+fundamental shift in approaches to imagination and worldbuilding which emerged in the 
+speculative fiction of the early 20
+th century (Saler 2012). The other half of the synthesis comes 
+from wargames’ use of the oracular technology of probabilities and dice to propel players into 
+cosmographic territory that they could not have imagined unaided. Through the synthesis of 
+these elements RPGs enhance human imaginative capacities, offering players the ability to take 
+on the role of cosmographers utilizing powerful technologies to access vast and unexplored 
+swathes of possible worlds. Because these two threads of ironic imagination and oracular 
+simulation came together through the experimentation of Midwestern wargamers who were 
+fans of pulp literature, and because it is more fun to have catchy titles for ideas than not, I call 
+this development The Midwestern Synthesis.
+3.1 Oracular Simulation
+The importance of wargaming for the development of role-playing games is well-established, 
+and Peterson (2012) offers a particularly detailed tracing of rules and mechanics from the 
+Taktisches Kriegs-Spiel cabinet that George Leopold von Reisswitz presented to the king of 
+Prussia in 1812. It is easy to pass over the leap in cosmographic technology, however, because 
+it has so fundamentally shaped ways of interacting with other worlds as to become almost 
+invisible. Simply describing this innovation as simulation, as when Peterson describes “the 
+game of the Reisswitz family” the first game “worthy to be deemed a simulation” (2016,10) 
+is to shorthand the innovation so much as to obscure its components. Specifically, Kriegsspiel 
+handled space, time, and probability such that it offered access to more fully realized worlds 
+than perhaps any preceding cosmographic technology.
+These changes are easier to see if we contrast Kriegsspiel with chess and the similar 
+chaturanga-derived games that immediately preceded Reisswitz’s innovation. In chess, of 
+course, it would be a category error to ask the scale of representation. A chess board is sixty-
+International Journal of Role-Playing - Issue 18   
+146
+four square units of abstraction. Once Reisswitz departs from this and indicates that the scale 
+is 1:2373 and specifies how far an infantry unit can move in a turn, then suddenly not only 
+space but time leap into existence within the world accessed through the game.
+Similarly, in chess there is never any question of what will happen when a black 
+pawn moves into the space occupied by a white knight. In Kriegsspiel, an interaction between 
+military units can lead to a number of possible worlds, depending on the roll of the dice. 
+By introducing the probabilistically oracular dice and combat results table, Reisswitz adapts 
+a powerful piece of technology to the imaginative enterprise of simulation, expanding the 
+cosmographic technology of any given Kriegsspiel far beyond chess’s already quite large 
+possibility space. Even further, the fact that a Kriegsspiel scenario can begin in any number of 
+possible world states, compared to the singular origin point of a chess game, means that the 
+wargame provides access to a near-limitless cosmographic territory. Of course, in every one 
+of those worlds, generals lead men to kill each other on the battlefield for the sake of empire. 
+Imagining worlds outside the cosmographic regions of warfare would take very different 
+technology.
+3.2 Ironic Imagination
+In a middle way between Germaine and Gagné, Michael Saler describes a sort of methodological 
+relativism towards the status of other worlds that emerged over the course of the 20
+th century. 
+This technology, which Saler calls the ironic imagination, involves “the willing activation of 
+pretense” to act “as-if” imagined worlds are “real” without fully committing to such a stance 
+(2012, 28). This, Saler says, offered “delight without delusion” (2012, 57) to readers of the 
+genre fiction that emerged in the late 19th and early 20th century. This approach allowed 
+them to access worlds even beyond those described by the stories they read. The Baker Street 
+Irregulars, for example, playfully imagined themselves in a world where Sherlock Holmes 
+was a real detective and Sir Arthur Conan Doyle was only Watson’s literary agent (Saler 2012, 
+104).
+The ironic imagination allows a cosmographer to leverage what Wolf calls “world 
+gestalten” (2012, 52), using gaps in a world’s description to fill in details and imagine even 
+further into possibility space. Tolkien’s maps of Middle-earth, for example, include places 
+not described in The Lord of the Rings, inviting readers to speculate about them and thereby 
+explore any number of worlds adjacent to Tolkien’s “canonical” world. Treating the world 
+as if it is real aids in this effort; if we think that Arda only exists in Tolkien’s mind, we might 
+speculate about what he will publish about it, but are less likely to speculate about details 
+that Tolkien does not provide. Saler points to the importance of pulp authors like Robert 
+E. Howard, H.P. Lovecraft, and Clark Ashton Smith in the development of this imaginative 
+tradition. These very same authors were influential on Gary Gygax, Dave Arneson, and the 
+broader hobby gaming community out of which Dungeons & Dragons and role-playing games 
+as we know them emerged.
+3.3 From Strategos to Blackmoor
+The oracular cosmographic tradition of Reisswitzian Kriegsspiel came to the Twin Cities 
+wargaming scene through David Wesely’s adaptation of Totten’s Strategos into Strategos N 
+(Peterson 2016). This quickly led to the development of more free-form games that explored 
+cosmographic territory far outside of the referees’ intent when players like Dave Arneson 
+brought the ironic imagination to those campaigns. They began taking seriously the existence 
+of villages placed on the battle map as more than obstacles to navigate units around, straining 
+International Journal of Role-Playing - Issue 18   
+147
+the rules of the game by doing things like sending messengers to the villagers or using 
+deconstructed structures to build bridges across rivers (Morgan and Graves 2019).
+This cosmography of the ironic imagination led to Wesely’s development of the 
+Braunstein games, in which players took on the roles of those villagers directly rather than 
+interacting with them through the wargame lens. The resulting expanse of cosmographic 
+territory opened up through this technology led the first game far out of Wesely’s control, 
+leading him to what could be described as a kind of cosmographic agoraphobia. In the 
+second Braunstein he tightened control of the cosmographic exploration so greatly that the 
+players complained that the magic of the first experience had vanished (Morgan and Graves 
+2019). Notably, the change was not in how immersively the players inhabited the roles of 
+the characters but in how freely they were able to exercise their role as cosmographers of the 
+possibility space that Wesely had sketched out for them.
+Braunstein’s cosmographic range was still limited by a few factors: first, both the 
+Strategos N  and the Braunstein games were in “realistic” rather than “fantastic” settings, 
+not fully integrating the ironic imagination’s capacity for removing the tether to the actual. 
+Second, although Wesely embraced the asymmetric goals and conflicts of n-player games, the 
+possibility space was largely shaped by conflict between players. The possibility space being 
+explored was the possibility space of the conflict, not primarily the possibility space of the 
+imagined world. Finally, it was limited by Wesely’s limited utilization of oracular methods, 
+limiting the imaginative range to what he and the players considered most probable rather 
+than launching them outward into unknown, improbable territory and asking them to make 
+sense of it.
+The synthesis of the ironic imagination and oracular cosmography came to the point 
+of exothermic fusion in Dave Arneson’s Blackmoor games. Arneson approached the oracular 
+wargaming technology of Chainmail with a fully ironic imagination, leading his players into 
+distant and unknown cosmographic territory where anything could be around the next corner 
+and the players had no idea what world they were in. The exploration of conflict space was 
+augmented with exploration of the ironically imagined world, and the more richly oracular 
+approach drawn from Chainmail allowed for exploring cosmographic territory that neither the 
+player nor the referee could have previously imagined.
+In short, this fusion of imaginative technologies allowed for wider-ranging, more 
+collaborative, more intersubjective cosmographic exploration than had ever been accessible. 
+Here was a set of imaginative tools that could be easily operated by almost anyone, with no 
+particular literary or artistic training necessary, a framework offering the promise of near-
+limitless exploration of possible worlds.
+4. CONCLUSION
+Like any technology, like play itself, cosmographic exploration of worlds is not inherently 
+liberatory. If TRPGs have the potential to help us discover and realize worlds that reveal new 
+possibilities and ways of becoming, they can also be used to foreclose those same possibilities. 
+Conceptualizing TRPGs as cosmographic technology does not solve the problem of how to 
+use them to bring a better world into being. Indeed, that is only partly necessary; as Raúl 
+Zibechi points out, this new world already exists, “built by indigenous people, peasants, and 
+urban poor on conquered lands, woven into the base of new social relations between human 
+beings.” The task at hand, he argues, is to help defend this “series of multiple realities, nascent 
+and fragile” (2012, 20). To the extent that effective praxis succeeds through structuring the 
+exploration of possibility, we might even consider cultural revolution as occurring through 
+a series of cosmographic games showing “that another possible world is actual” (Ponce de 
+International Journal of Role-Playing - Issue 18   
+148
+León and Rockhill 2020, 16). Again, calling games cosmographic technology or calling radical 
+worldbuilding a kind of game does not do this work for us, but it does suggest important 
+areas to shore up and provides a framework for understanding how TRPGs relate to that 
+work. 
+REFERENCES
+Alder, Avery. 2019. The Quiet Year. Buried Without Ceremony.
+ 
+Bowman, Sarah Lynne. 2010. The Functions of Role-Playing Games: How Participants Create 
+Community, Solve Problems and Explore Identity. Jefferson, NC: McFarland & Co.
+Carbonell, Curtis D. 2019. Dread Trident: Tabletop Role-Playing Games and the Modern Fantastic. 
+Liverpool: Liverpool University Press.
+Csikszentmihalyi, Mihaly. 1975. Beyond Boredom and Anxiety. Jossey-Bass Publishers.
+De Nicolás, Antonio T. 1986. Ignatius de Loyola, Powers of Imagining: A Philosophical Hermeneutic 
+of Imagining through the Collected Works of Ignatius de Loyola, with a Translation of These 
+Works. Albany: State University of New York Press.
+Fisher, Mark. 2022. Capitalist Realism: Is There No Alternative? Second edition. Zer0 Classics. 
+Winchester, UK Washington, USA: Zero Books.
+Gadamer, Hans-Georg. 1994. Truth and Method. 2nd rev. ed. New York, NY: Continuum. 
+Gagné, Renaud. 2021. Cosmography and the Idea of Hyperborea in Ancient Greece: A Philology of 
+Worlds. Cambridge Classical Studies. Cambridge, United Kingdom New York (NY): 
+Cambridge University Press.
+Games As Art Center. n.d. “Role-Play in Games Conference 2025.” Games As Art Center, n.d. 
+Link here.
+Germaine, Chloe. 2021. “Dark Forests and Doomed Adventurers: An Ecocritical Reading of 
+Horror Roleplaying Games.” In Generation Analog: The Tabletop Games and Education 
+Conference. Online: ETC Press. Link here.
+Germaine, Chloe. 2025. “Tabletop Eco-Weird: Gameplay Experience and Ecological Ethics.” In 
+The Call of the Eco-Weird in Fiction, Films, and Games, edited by Brian Hisao Onishi and 
+Nathan M. Bell. Cham: Springer Nature Switzerland. Link here.
+Graeber, David. 2014. “What’s the Point If We Can’t Have Fun?” The Baffler. June 12, 2014. 
+Link here.
+Gygax, Gary, and Dave Arneson. 1974. Dungeons & Dragons: Rules for Fantastic Medieval 
+Wargames Playable with Paper and Pencil and Miniature Figures. Lake Geneva, WI: Tactical 
+Studies Rules.
+Heidegger, Martin. 1977. “The Question Concerning Technology.” In The Question Concerning 
+Technology and Other Essays, translated by William Lovitt. New York: Garland Publishing.
+International Journal of Role-Playing - Issue 18   
+149
+Huizinga, Johan H. 1950. Homo Ludens: A Study of the Play-Element in Culture . Boston: Beacon 
+Press.
+Lawrie, Kali and Dan Phipps. 2019. High Magic Lowlives.
+Le Guin, Ursula K. 2014. “Ursula K Le Guin’s Speech at National Book Awards: ‘Books Aren’t 
+Just Commodities.’” The Guardian, 2014, sec. Books. Link here.
+Marx, Karl. 1887. Capital. Translated by Samuel Moore and Edward Aveling. Moscow: Progress 
+Publishers.
+McLuhan, Marshall. 2003. Understanding Media: The Extensions of Man. Edited by W. Terrence 
+Gordon. Critical ed. Corte Madera, CA: Gingko Press. 
+Mizer, Nicholas J. 2025. “Staying with the Weird: Apophatic Wonder and Cosmographic 
+Exploration in Eco-Weird Games.” In The Call of the Eco-Weird in Fiction, Films, and 
+Games, edited by Brian Hisao Onishi and Nathan M. Bell. Cham: Springer Nature 
+Switzerland. Link here.
+Morgan, Griffith M, and Chris Graves, dirs. 2019. Secrets of Blackmoor. The Fellowship of the 
+Thing, Ltd.
+Peterson, Jon. 2012. Playing at the World: A History of Simulating Wars, People and Fantastic 
+Adventure, from Chess to Role-Playing Games. San Diego, CA: Unreason Press.
+Peterson, Jon. 2016. “ A Game Out of All Proportions: How a Hobby Miniaturized War.” In 
+Zones of Control: Perspectives on Wargaming , edited by Pat Harrigan and Matthew G. 
+Kirschenbaum. Game Histories. The MIT Press. Link here.
+Ponce De León, Jennifer, and Gabriel Rockhill. 2020. “Towards a Compositional Model of 
+Ideology: Materialism, Aesthetics, and Cultural Revolution.” Philosophy Today 64 (1): 
+95–116. Link here.
+Reed, Aaron, John Murray, and Anastasia Salter. 2020. Adventure Games: Playing the Outsider. 
+Approaches to Digital Game Studies 7. New York: Bloomsbury Academic.
+Ryan, Malcolm, Robin Dixon, and Esther MacCallum-Stewart. 2020. “Narrative Machines: A 
+Ludological Approach to Narrative Design.” In Rerolling Boardgames: Essays on Themes, 
+Systems, Experiences and Ideologies , edited by Douglas Brown and Esther MacCallum-
+Stewart, 179–94. McFarland & Co.
+Saler, Michael T. 2012. As If: Modern Enchantment and the Literary Pre-History of Virtual Reality. 
+Oxford; New York: Oxford University Press.
+Stenros, Jaakko. 2015. Playfulness, Play, and Games: A Constructionist Ludology Approach . 
+Tampere, Finland: Tampere University Press. Link here.
+Sutton-Smith, Brian. 1997. The Ambiguity of Play. Harvard University Press.
+International Journal of Role-Playing - Issue 18   
+150
+International Journal of Role-Playing - Issue 18   
+Nicholas J. Mizer is an Assistant Professor of Games and Experiential 
+Media at Rensselaer Polytechnic Institute in Troy, New York. His 
+anthropological research focuses on collaborative worldbuilding,  
+place, and embodied play. He is the author of Tabletop Role-Playing 
+Games and the Experience of Imagined Worlds. Living in the 
+traditional and unceded territory of the Haudenosaunee Confederacy, 
+his goal is to better imagine the life of the place where he dwells.
+Teilhard de Chardin, Pierre. 2008. The Phenomenon of Man. 1st Harper Perennial Modern 
+Thought ed. Harper Perennial Modern Thought.
+Trammell, Aaron. 2022. Repairing Play. MIT Press.
+Weisler, Ann & McCall, Robert B. (1976): “Exploration and Play. Résumé and Redirection”, 
+American Psychologist. July 1976, Vol. 31, 492-508. Link here.
+Wolf, Mark J.P. 2012. Building Imaginary Worlds: The Theory and History of Subcreation. Routledge.
+Zibechi, Raúl. Territories in Resistance: A Cartography of Latin American Social Movements . 
+Translated by Ramor Ryan. Oakland: AK Press, 2012.

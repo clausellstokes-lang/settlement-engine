@@ -1,0 +1,21 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 105,
+ "firstTs": "2026-09-11T21:33:42.285Z",
+ "lastTs": "2026-09-11T21:44:53.987Z",
+ "tools": {
+  "Bash": 20,
+  "Read": 9
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "ows only: zero em dashes, exclamations, digits, percents, `which`-clauses and questions; zero barred words (force · watch · garrison · muster · material · manning · gate · verdict · record nouns); no `for`/`so`/`because` joints; `{settlement}` present in all twelve; no face opens on the proper slot.",
+ "run": "wf_b9aa5993-4a0",
+ "agent": "a2a9df8437223fd26",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/4ed79a2b-6cd2-45cf-ab97-83cdad49c30b/subagents/workflows/wf_b9aa5993-4a0/agent-a2a9df8437223fd26.jsonl",
+ "journal": "result",
+ "checkpointFile": null
+}

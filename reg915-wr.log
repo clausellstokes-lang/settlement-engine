@@ -1,0 +1,3 @@
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.502.lock as PID 88675 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+writer-reach WRITE — cohort 1322 → 1322; 0 stale folded out; 0 registered rows now lit.
+WRWALKER HOLD — judged 6532 · LIT 560 · LIT-NAME 4646 · DARK 1326 (reviewable 526) · pending-surface debt: isolationSupport on settlement → web-display (§12 WRW-2, the owner row that rules whether the isolation-support finding is shown); magicDependent on isolationSupport → web-display (§12 WRW-2, the owner row that rules whether the isolation-support finding is shown); requiredCapacity on isolationSupport → web-display (§12 WRW-2, the owner row that rules whether the isolation-support finding is shown)

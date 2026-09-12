@@ -1,0 +1,593 @@
+ 
+ Chapter 14: Social Construction of Reality 
+ contents bibliography sfra home page 
+ Transition: 
+ The Social Construction of Reality 
+ (Background for Four Ways to Forgiveness and A Fisherman 
+ of the Inland Sea ) 
+ Readers approaching the novellas collected in Ursula K. Le Guin's Four Ways 
+ to Forgiveness and, much more so, the major stories in A Fisherman of 
+ the Inland Sea will benefit from knowing that many in the original audience 
+ for these tales could see them in terms of a debate on "the social construction 
+ of reality." In terms of that debate, the doctrine that "All human knowledge 
+ is local" in Four Ways can be seen as a "weak," epistemological form 
+ of the idea that reality is locally created. And in Fisherman , "Newton's 
+ Sleep," "The Shobies' Story," and "Dancing to Ganam" may be read as rather realistic 
+ fiction: not merely as literalizations of a figure of speech concerning how 
+ our psychologies, stories, and interpretations "construct reality" but instead 
+ as representations of a pure case of the social construction of reality in action, 
+ with social construction seen as the most real of phenomena. Below I tell several 
+ stories showing why "social constructivism" should be taken seriously and (in 
+ its "weak" form) accepted. Readers who dislike philosophy as gyring narratives 
+ or who are offended by nontechnical sources, readers suspicious of the sciences 
+ and who dislike reformulations of subtle theories for "first-approximation" 
+ popularization in altered frames of reference-such readers should definitely 
+ consider moving on to my discussion of Le Guin's fiction in the 1990s. Readers 
+ without a background in philosophy should note that I usually clarify technical 
+ terms within my text, but you still might want to have a dictionary handy. 
+ So, again, CAUTION, another Kulturkampf zone: a discussion by someone with 
+ little training in philosophy attempting to render a fictional premise plausible. 
+ College students in courses stressing social construction should keep in mind 
+ that their instructors may find the social construction of reality the only 
+ truth there is, and my approach to that sole truth repugnant. 1   
+ * 
+ Physics/Philosophy of Science: 
+ I was taught at the outset of Chemistry 101 (in 1961) the scientific principle, 
+ "The observer is part of the system." I.e., in no science can one talk of some 
+ phenomenon in itself but only the phenomenon as observed. Most famously, it 
+ is impossible to determine simultaneously both the location and (vector) velocity 
+ of an electron. I would later learn that this indeterminacy means that the universe 
+ is not a machine whose future can be (theoretically) predicted; so Enlightenment 
+ scientists like Pierre Simon Laplace (math, astronomy, 1749-1827) and other 
+ really strict determinists will be disappointed in their hopes for at least 
+ theoretical certainty and predictability (Capra 45; ch. 4). But I was not doing 
+ philosophy in Chem. 101, and The Uncertainty Principle is still beyond me; what 
+ we could understand as first-year students is that all observations either potentially 
+ change the thing observed or are necessarily limited by the range of capabilities 
+ of the observer. An ethnographer cannot effectively observe "the village as 
+ such," but only the village plus an ethnographer living in the village. Astronomers 
+ cannot objectively observe the Crab Nebula, not because they change a nebula 
+ by observing it but because they are limited in their observations by being 
+ human astronomers on Earth or (later) sending instruments from Earth. The most 
+ interesting things about the Crab Nebula may have to do with phenomena not detectable 
+ on Earth and/or which humans have not evolved to perceive, not even with instruments 
+ we can conceive and build. More generally, we can say along with the followers 
+ of the eighteenth-century philosopher Immanuel Kant that no one can observe 
+ and report on any "thing in itself" because we must observe the thing and perceive 
+ it in terms of human categories ("Kantianism," DoP ). 
+ If strict objectivity is impossible in the sciences, then even scientific knowledge 
+ is in some degree "constructed." If even scientific knowledge is constructed, 
+ in some sense (if not yet necessarily an important one), our entire vision of 
+ reality, to a significant degree may be not passively perceived but actively 
+ constructed. This much could be clear even to an orthodox materialist and empiricist 
+ in Chem. 101. Modern physics, however, goes farther. 
+ When dealing with the exceedingly small, in the quantum world of the subatomic, 
+ "The observer is part of the system" can have a very strong meaning. This is 
+ a world in which particles are processes and arise and disappear out of a quantum 
+ field Fritjof Capra can present quite convincingly as philosophically equivalent 
+ to Dao, Brahman, Dharmakaya or Tathata: the Void of myth and mystics ( Tao 
+ of Physics ch. 13, p. 175; ch. 14, esp. 198-201). "The crucial feature of 
+ atomic physics," in Capra's statement of orthodox doctrine out of Werner Heisenberg 
+ et al., "is that the human observer is not only necessary to observe the properties 
+ of an object, but is necessary even to define these properties. In atomic physics, 
+ we cannot talk about the properties of an object as such. They are meaningfully 
+ only in the context of the object's interactions with the observer" (126; ch. 
+ 10). In the "S matrix" interpretation of subatomic particles, this "impossibility 
+ of separating the scientific observer from the observed phenomenon" appears 
+ "in its most extreme form. It implies, ultimately, that the structures and phenomena 
+ we observe in nature are nothing but creatures of our measuring and categorizing 
+ mind"-i.e. those structures and phenomena are maya in Hindu terms: "illusion" 
+ (Capra 266; ch. 17). 
+ The unity of observer and observed can go at least three steps further. Stepping 
+ in one direction, one could come to solipsistic Idealism, where we each individually 
+ dream the world between our ears, or we come to a shared, corporate Ideal: what 
+ we may call in a good sense, a consensus reality (Jrgen Habermas, Antonio 
+ Gramsci), or, hostilely, "Collective solipsism" (George Orwell). Stepping in 
+ another direction, the more wildly Idealistic among speculative cosmologists 
+ have noted that the universe took many unlikely evolutionary twists to get to 
+ a state that could sustain human life-and have added to that unimpeachable assertion 
+ the idea from quantum theory that an observer is necessary to collapse probability 
+ waves and get quantum events to happen. The steps from there can lead to the 
+ idea that the universe evolved to allow for humans to observe quantum events, 
+ thereby allowing the universe to evolve. In that case, human consciousness does 
+ not just construct reality but is the literal cause of the physical universe. 
+ The Greeks had a label for such a notion, hubris (noble pride, leading 
+ to a fall); Ashkenazi Jews call it chutzpah (comic arrogance); still, 
+ it is not quite absurd, and it is, paradoxically, a wildly woolly, Idealist 
+ idea arising out of the "hard," material science of modern physics: the Universe 
+ may exist because people perceive it; the Universe may exist so that people 
+ can perceive it. 
+ Biology, Physiology, Psychology: 
+ It is axiomatic in the biology I was taught that (ignoring free will), 
+ environment 
+ genotype-----------------------> phenotype. 
+ time 
+ That is, the genetic complement of an organism interacting with the environment 
+ over time yields what that organism is, at least is in terms of what 
+ can be observed and measured. The most immediate environment for any human organism 
+ is the person's society, and (with trivial exceptions) all of the environment 
+ is mediated by the person's culture. Hence, in a formulation of Arnold Gehlen, 
+ quoted with strong approval by the ethologist Konrad Lorenz, we humans are by 
+ nature (with trivial exceptions) creatures of culture (Lorenz, On Aggression 
+ 256; ch. 13). Our being creatures of culture is significant for our ways of 
+ perceiving the world. 2   
+ In the late nineteenth and early twentieth century, the American psychologist 
+ William James postulated that the world to human infants is, initially, a "blooming, 
+ buzzing confusion." 3   
+This doesn't seem to be the case, "Rather, even infants one or two days old 
+ are capable of refined visual discriminations" (Dember, "Perception" 41). One 
+ reason for this is summed up in a line by the character Forest in Le Guin's 
+ "Dancing to Ganam": ". . . we filter out most of what our senses report" 
+ ( FIS 132). I.e., we individually filter out much of what we are capable 
+ of perceiving; to this add that there has been a historical filtering of data 
+ reaching us because our perceptions start out highly limited by the highly evolved 
+ organs we are born with: we see only a small part of the electromagnetic spectrum, 
+ hear only a range of sounds, and smell a millionth or far less of what an olfactorily 
+ well-equipped animal such as a dog smells. And the data received and used 
+ by the brain are fewer still (the lab frog starving to death in the midst of 
+ minced flies both does and does not perceive the fly meat). 
+ As human infants grow into adulthood, our perceptions become even clearer, 
+ if not necessarily more reliable, in part because of training and expectations. 
+ Among older children and adults, there are variations in perceptions-experimentally 
+ testable variations-according to age, sex, and culture. For an example highly 
+ relevant for Le Guin, there are "differences in the style with which people 
+ perceive" as seen in "extremes of response to context." Some people perceive 
+ "the world as highly differentiated" and tend "to resist contextual influences" 
+ and are "said to be field independent"; people who perceive "in an extremely 
+ diffuse style" are called "field-dependent" and tend "to be highly susceptible 
+ to contextual effects. Thus, field-independent people are superior in locating 
+ a simple visual figure (e.g., a triangle) embedded in a complex pattern" or 
+ adjusting a rod to vertical in the absence of visual background cues. In North 
+ American, older people tend to be more field-independent than younger people; 
+ girls, "especially after puberty," and women tend to be more field-dependent 
+ than boys and men. "Perhaps these results are distinctive of cultures in which 
+ females are at least implicitly trained to be passive and perceptually diffuse, 
+ and in which males are encouraged to assume an active, perceptually articulated 
+ stance" (Dember, "Perception" 44). And perhaps some Daoists, Romantics, 
+ and ecoFeminists are right in seeing children and women more embedded in nature 
+ and the world, in which case being relatively "field-dependent" would simply 
+ correlate with women's and children's reality. What is significant here is that 
+ the world appears differently to people in even slightly different subcultures: 
+ North Americans of different age and/or gender. Little girls are more likely 
+ to perceive things as part of a whole more than boys will; little boys will 
+ see contexts-usually-more readily than old men. "Beyond sex differences," psychologists 
+ have found evidence that "the type of physical environment people construct 
+ for themselves or choose to inhabit can influence their style of perceiving," 
+ e.g., traditional Zulus and Bushmen, "whose environments are virtually lacking 
+ in rectangular forms" see things somewhat differently-literally see things differently-from 
+ people brought up in "the carpentered, right-angled world of people in Western 
+ cultures" (Dember, "Perception" 44). 
+ Sociology: 
+ We shape each other to be human . . . .-Le 
+ Guin, "Coming of Age in Karhide" (1995) 
+ In 1966, the same year as Jacques Derrida "subversively declared that structuralism 
+ was finished" and to be supplanted by poststructuralism (Lehman 97), Peter L. 
+ Berger and Thomas Luckmann published The Social Construction of Reality: 
+ A Treatise in the Sociology of Knowledge . For Berger and Luckmann, "reality," 
+ in quotation marks, is the subjective world that we human are "biologically 
+ predestined to construct and to inhabit," a social world of self and others. 
+ For each human, this subjective, learned world "becomes . . . the 
+ dominant and definitive reality. Its limits are set by nature, but once constructed, 
+ this world acts back upon nature," e.g., determining what of all the biologically 
+ possible foods people (ordinarily) will actually eat, what of all the possible 
+ sexual acts most people in a culture will actually perform. "In the dialectic 
+ between nature and the socially constructed world the human organism itself 
+ is transformed. In this same dialectic man produces reality and thereby produces 
+ himself" (183 [see also 180])-i.e., produces our social selves, our roles, our 
+ identities. Burger and Luckmann present an excellent and persuasive analysis 
+ of a "weak" form of social construction of reality, but still a powerful thesis. 
+ Human beings are socialized into human identities in specific societies, and 
+ those primary socializations give us, if not our worlds, at least our initial, 
+ and very strong worldviews: "The child does not internalize the world of his 
+ [initial] significant others as one of many possible worlds. He internalizes 
+ it as the world, the only existent and only conceivable world . . ." 
+ ; these primary socializations give each of us, "the world of childhood . . . . 
+ the 'home world' (134, 136; ch. 3). 
+ Myths of Origin: 
+ According to a very early account of Creation, that of Hesiod, "First of all 
+ the Void," Chaos , "came into being, next broad-bosomed Earth, the solid 
+ and eternal home of all, and Eros [Desire], the most beautiful of the immortal 
+ gods . . . ." From Earth comes Sky, parthenogenetically, and 
+ then mountains and "the barren waters." Then Earth lies with Sky and produces 
+ Ocean and the first generation of gods ( Theogony II.116-53 [56]). Later 
+ creation myths had less symbolic sexual action, and more dialog. According to 
+ the Fourth Gospel of Christian Scripture, "In the beginning was the Word," the 
+ Logos , "and the Word was with God, and the Word was God," and "all things 
+ were made through him" (John 1.1-3). That is, out of nothing came all, via the 
+ Word. According to the P-code, in one Hebrew version, "When God," Elohim , 
+ "began to create heaven and earth-the earth being unformed and void, with darkness 
+ over the surface of the deep and a wind from God sweeping over the water-God 
+ said, 'Let there be light'; and there was light . . . " (Gen. 
+ 1.1-5, Tanakh ). I.e., language for the P-code authors and for John, "is 
+ not only a means of communication but also [is] an operational agent destined 
+ to produce being-it has an ontological value," and perhaps still does (Vajda 
+ 10.184). Doing some very rough and ready creative comparative mythology, then, 
+ one could say that in the beginning was Void, Chaos-a very active and potential 
+ Nothingness-out of which came All. Mediating the shift from nothing to all was 
+ either Desire and a Yin-Yang-like mystic marriage of the primal deities, or 
+ there was the Word or words: the Logos or logoi or, I will suggest, 
+ a conversation among elohim : the gods (see Gen. 1.26). 
+ Alternatively-and a very significant alternative it is-that which was at the 
+ beginning and is now and is all that truly is is Brahman, "the one Being," 
+ that than which there is nothing greater ("Indian Philosophy" 9.316). "Not this 
+ . . . not that" but Being itself, what is left over after all things 
+ are removed, as opposed to maya , illusion, the "relative" world of appearances 
+ ( Bhagavad-Gita 74-75; VIII. 73-74; VII. 39; II). 59-60; V), the world 
+ of "individual and separate things" (Capra 85; ch. 6). If we would free ourselves 
+ from maya , some mystic disciplines tell us, we must free ourselves from 
+ the chatter of the world, pre-eminently the chatter of our own stream of consciousness: 
+ "to silence the thinking mind" (Capra 25; ch. 2), to end "the mind's endless, 
+ idiot monologue" (Huxley 217; ch. 15). If the task at hand, though, is to recreate 
+ maya after immersion in Brahman, then, perhaps, the way is through chatter 
+ seen much more positively: the word as human conversation, social narrative, 
+ the telling of stories. As Le Guin suggests in her image of us "huddling about 
+ the campfire" telling tales: In the beginning of the human world, and so even 
+ now, was and is the human word, telling our stories, re-forming the (human) 
+ world, if not creating ourselves, at least preventing "our dissolution into 
+ the surroundings." 4   
+ * 
+ According to the J-code version of creation, ". . . the Lord God 
+ formed man from the dust of the earth. He blew into his nostrils the breath 
+ of life, and man became a living being" (Gen. 2.7). I.e., human beings are one, 
+ psycho/somatic being: earth plus breath. Still, in spite of the resistance of 
+ the Temple elite, and, apparently, that of some of the delegates to the Council 
+ of Nicea, both Judaism and Christianity took "the breath of life" and made it 
+ into soul : a separable soul, dwelling in the body as a god in a temple, 
+ or a prisoner in a dungeon, with Christianity going for the soul big time. 5 
+ Secularized, this split became, in Gilbert Ryle's phrase, "the ghost in the 
+ machine": mind within body. To resolve the split, one could become a materialist, 
+ and say that mind is a product of matter. Alternatively one could say-and Bishop 
+ George Berkeley did say in the eighteenth century-that "'To be,' said 
+ of the object, means to be perceived; 'to be,' said of the subject, means to 
+ perceive" ("Berkeley, George" 2.847). Among simple souls-and to the author of 
+ the Encyclopaedia Britannica 's Micropaedia's entry for Berkeley-Berkeley's 
+ insight got simplified to "to be is to be perceived." More specifically, in 
+ the Treatise Concerning the Principles of Human Knowledge , Part I (1710), 
+ Bishop Berkeley "brought all objects of sense, including tangibles, within the 
+ mind," rejecting the possibility of "material substance" ("Berkeley" 847). So 
+ if materialism is one extreme, balancing it after Bishop Berkeley is idealism: 
+ the world as idea, and the being of matter a function of its being perceived. 
+ Hence, as our ideas of the world change, the world changes: necessarily changes, 
+ ontologically changes, really changes. 
+ Linguistics/Feminism/Physics: 
+ Daphne Patai and Noretta Koertge call attention to the Sapir-Whorf, or Whorfian 
+ hypothesis (republished 1956), "according to which the structure and lexicon 
+ of a language," its set of grammar plus vocabulary, "both molds and reveals 
+ a culture's basic categories of thought and perception." In Edward Sapir's formulation, 
+ "Human beings do not live in the objective world alone, ... but are very much 
+ at the mercy of the particular language which has become the medium of expression 
+ for their society ... The fact of the matter is that the 'real world' is to 
+ a large extent unconsciously built up on the language habits of the group ... 
+ We see and hear and otherwise experience very largely as we do because the language 
+ habits of our community predispose certain choices of interpretation" (Bright 
+ 13.212). Obviously, there are limits to the theory: "German has no single word 
+ for what we call 'efficiency,' but one can hardly claim that Germans have no 
+ such concept. The Hungarian language has no gender, yet patriarchy exists in 
+ Hungary nonetheless" (Patai and Koertge 133). Still Patai and Koertge note that 
+ the Whorfian hypothesis and other forms of social construction have been applied 
+ in very strong forms in a fair amount of recent academic work: They cite the 
+ assertion by Michel Foucault in History of Sexuality that there were 
+ no homosexuals before the late nineteenth century and the invention of the term/category 
+ "homosexual." 
+ But what are we to make of certainly followers of Foucault? Bruno Latour, 
+ for example, contends that no anthrax existed before Pasteur, and Ian 
+ Hacking says there were no battered babies before 1962. . . . 
+ [Patai and Koertge give rational explanations: Pasteur added isolated 
+ anthrax to the "material culture of science"; Hacking may have] merely 
+ intended to make an assertion similar to Joel Best's [in Threatened 
+ Children ], namely, that the battering of babies was not regarded as 
+ a serious social problem until physicians defined it as a syndrome in 
+ 1962. But each author, in the argument he makes, seems to do his best 
+ to block such a charitable interpretation of his words. (137). * * * 
+ [Patai and Koertge note] much more startling assertions, such as the 
+ insistence of Women's Studies students in a class taught by one of us 
+ that the pain of childbirth is socially constructed by patriarchy and 
+ would not happen in a feminist society. (139) 
+ Both Le Guin and many of her SF readers would know about the Whorfian hypothesis, 
+ including the possibility of very strong formulations, wherein language structures 
+ the world. Benjamin Whorf (1897-1941) was a famous student of Native American 
+ languages, and the daughter of Alfred and Theodora Kroeber would be unlikely 
+ to have missed exposure to his thoughts as she got informally socialized into 
+ what Carol D. Stevens has called "the family business": anthropology, starting 
+ with the ethnography of Native Americans. Additionally, anyone sophisticated 
+ in science fiction would get an introduction to Sapir-Whorf. The restructuring 
+ of reality by language is a strong theme in Robert A. Heinlein's Stranger 
+ in a Strange Land (1961); and Peter Nicholls cites a number of other works 
+ using Sapir-Whorf, including Jack Vance's The Languages of Pao (1958) 
+ and Samuel R. Delany's Babel-17 (1966). According to Nicholls, in the 
+ 1975 essay "Towards an Alien Linguistics," Ian Watson has used the linguistic 
+ theories of Noam Chomsky-with S.F. expansion-to suggest "that there may be 'a 
+ topological grammar of the universe, which reflects itself in the grammars of 
+ actual languages.'" And, Nicholls concludes his article, Watson has "used arguments 
+ from quantum mechanics to support the solipsistic view that the Universe exists 
+ as an external structure only through the consciousness of its participants 
+ and observers; language, in Watson's scheme, is reflexive, Nature sending a 
+ message to itself. . ." ("Linguistics"). 
+ Marxism: 
+ Writing in 1909, E. M. Forster could see and foresee a world in flight from 
+ the human body and the world of matter. In the beginning of the third and last 
+ section of his far-future dystopia, "The Machine Stops," moving toward the end 
+ of the imagined world of the Machine, Forster presents "one of the most advanced" 
+ of future intellectuals, an antiEmpiricist historian who warns his audience 
+ to "Beware of first-hand ideas!" and asserts that "First-hand ideas do not really 
+ exist. They are but the physical impressions produced by love and fear, and 
+ on this gross foundation who could erect a philosophy?" Forster's crank exhorts 
+ his audience to let their ideas "be second-hand, and if possible tenth-hand, 
+ for then they will be far removed from that disturbing element-direct observation." 
+ Actually, the crank isn't all that crazy in suggesting getting a number 
+ of different points of view on a historical event, in this case, his specialty, 
+ the French Revolution. What is disturbing, though, even to those of us who want 
+ knowledge carefully located, is his idea that the farther away from events we 
+ get the better we can judge, until ". . . there will come a generation 
+ that has got beyond facts, beyond impressions, a generation absolutely colourless, 
+ a generation 'seraphically free / From taint of personality,' which will see 
+ the French Revolution not as it happened, nor as they would like it to have 
+ happened, but as it would have happened, had it taken place in the days of the 
+ Machine," i.e., in their own time, as ideologically constructed. "Tremendous 
+ applause greeted this lecture," Forster's Narrator tells us, because it "did 
+ but voice a feeling already latent in the minds of men-a feeling that terrestrial 
+ facts must be ignored" (Forster 191). 
+ Not very much later in the century, advanced thinkers will bring back the idea 
+ that "terrestrial facts" don't even exist. 
+ According to Roy Bhaskar, there is "abundant textual evidence" for Karl Marx's 
+ " simple , commonsense realism ," the sort of everyday, colloquial 
+ realism that asserts "the reality, independence, [and] externality of objects": 
+ i.e., that the "real" world we see out there is really there. 6 
+Most modestly stated, as a character in "Dancing to Ganan" puts it, simple realism 
+ is "the notion that there is, somewhere, if one could just find it, a fact" 
+ ( FIS 118), maybe even many facts. There is also evidence, Bhaskar says, 
+ for Marx's "scientific realism": i.e., his belief in the reality of "the objects 
+ of scientific thought" and structures scientifically inferred-but scientific 
+ realism need not concern us. What should concern us is that "an entire tradition" 
+ of Marxism, i.e., much of "Western Marxism," has "interpreted Marx as rejecting" 
+ simple realism and has very influentially tended toward "some variety of epistemological 
+ idealism, normally anti-naturalistic and judgmentally relativistic" ("Realism" 
+ 407, 408). 
+ Bhaskar traces this tradition back to Gyrgy Lukcs's 1923 History and Class 
+ Consciousness , where Lukcs rejects "any distinction between thought and 
+ being as a 'false and rigid duality.'" This anti-realist tradition "proceeds 
+ down to the extraordinary claims made on behalf of Marx by e.g. [Leszek] Kolakowski 
+ that the very existence of things comes into being simultaneously with their 
+ appearance in the human mind' (1958 . . .) and [Alfred] Schmidt that 
+ 'material reality is from the beginning socially mediated' [1962]" ("Realism" 
+ 408). According to Bhaskar, no less a figure than Antonio Gramsci found "the 
+ very idea of a reality-in-itself . . . a religious residue." In his 
+ Prison Notebooks (1929-35), Gramsci redefined "the objectivity of things 
+ . . . in terms of a universal intersubjectivity of persons; i.e. as 
+ a cognitive consensus, asymptotically approached in history but only finally 
+ realized under communism." Pushing the matter, Gramsci, in Bhaskar's reading, 
+ holds "that human history is not explained by the atomistic theory, but that 
+ the reverse is the case: the atomistic theory, like all other scientific hypotheses 
+ and opinions, is part of the superstructure,'" i.e., part of the cultural superstructure 
+ raised up upon a deeper and more significant (human) reality. Suggesting that 
+ we take Gramsci on atomic theory quite literally-that atomic reactions happen 
+ because humans theorize atomic reactions-Bhaskar says that Gramsci's remark 
+ here "reminds one of Marx's jibe against [Pierre-Joseph] Proudhon that like 
+ 'the true idealist' he is, he no doubt believes that 'the circulation of the 
+ blood must be a consequence of Harvey's theory" of the circulation of blood 
+ ( Poverty of Philosophy , ch. 2, sect. 3). Bhaskar finds Gramsci and some 
+ other Western Marxists "in favour of a historicized anthropomorphic monism," 
+ maintaining that "nature, as we know it, is part of human history." I.e., Bhaskar 
+ says these Western Marxist teach that the world is One and that One is centered 
+ in and made by humanity and our history ("Knowledge" 258-59)-an idea Bhaskar 
+ does not seem to like. Alternatively, we can see these Western Marxists returning, 
+ ironically, to the German Idealism of Georg Wilhelm Friedrich Hegel (1770-1831), 
+ where "The categories of human thought are . . . at the same time 
+ objective forms of Being, and logic is . . . ontology"-a path I will 
+ not follow (Fetscher 198). 7   
+ Whatever its sources, it is something like Gramsci's vision of reality as the 
+ "intersubjectivity of persons" and "cognitive consensus" that George Orwell 
+ attacks in what is sometimes called The Grand Inquisitor section of Nineteen 
+ Eighty-Four (III.3-III.5). Orwell's immediate concern was the falsification 
+ of history under Hitler and Stalin (see Crick 119); still, at least for satiric 
+ purposes, Orwell in Nineteen Eighty-Four comes down squarely for old-fashioned 
+ British commonsense empiricism against the extreme idealism of Winston Smith's 
+ Inner Party torturer and instructor, O'Brien. O'Brien tells Smith, 
+ The first thing you must realize is that power is collective. The individual 
+ only has power in so far as he ceases to be an individual. . . . 
+ [I]f he can make complete, utter submission, if he can escape from his 
+ identity, if he can merge himself in the party so that he is the 
+ Party, then he is all-powerful and immortal. 8   
+ The second thing for you to realize is that power is power over human 
+ beings. Over the body-but, above all, over the mind. Power over matter-external 
+ reality as you would call it-is not important. Already our control over 
+ matter is absolute. * * * 
+ . . . We control matter because we control the mind. Reality 
+ is inside the skull. . . . You must get rid of those nineteenth-century 
+ ideas about the laws of nature. We make the laws of nature. * * * 
+ . . . Before man there was nothing. After man, if he could 
+ come to an end, there would be nothing. Outside man there is nothing. 
+ * * * 
+  . . . This is not solipsism. Collective solipsism, if 
+ you like. But that is a different thing; in fact the opposite thing." 
+ (218-19; III.3) 9   
+ I doubt that Orwell's criticisms had much effect, but there was this much change 
+ in Western Marxism in the generation following Orwell: Jrgen Habermas, in Knowledge 
+ and Human Interests (1972), at least according to Bhaskar, allowed for the 
+ origin of "the human species as a purely natural process" even while seeing 
+ "reality, including nature, as constituted in and by human activity." And Theodor 
+ Adorno, a little earlier- Negative Dialectics (1966)-advised giving up 
+ trying to resolve objectivity and subjectivity "and argues against any attempt 
+ to base thought on a non-presuppositionless [sic] foundation and for the immanence 
+ of all critique" ("Knowledge" 260). 
+ I'll put the matter that, by the 1970s, there was a long-standing debate on 
+ the Left that had pretty well concluded on the impossibility of finding transcendent 
+ epistemological "Archimedean points" outside the world from which to observe 
+ the world. This meant the inevitability of "the immanence of all critique." 
+ We judge situations more or less from within them and cannot get a godlike overview; 
+ we are located at certain points in space-time, and that is that. So our judgments 
+ are relative. At least among people with a lot of academic philosophy-including 
+ those coming from very unMarxist positions-this lead to a kind of crisis in 
+ epistemology. Matters soon got worse. In the words of my friend and colleague 
+ John H. Crow, Modernism's "Epistemological uncertainty yielded (to) ontological 
+ instability"-postmodernism. 
+ Linguistics/Postmodernism-Poststructuralism/Feminism: 
+ In the 5th century BCE, in Elea, in southern Italy, the Greek philosopher Parmenides 
+ reacted against Heraclitus's theory of flux by, among other things, composing 
+ a poem "On Nature," privileging among the "ways of research" the "absolutely 
+ noncontradictory way that says only what is, Being, is really true." If you 
+ think something, you assert its existence (an idea that will get a lot of play 
+ later, with the Cartesian variation that one must first think oneself). Reality, 
+ then, is that which can be truly thought: grasped and communicated, and that 
+ which can be thought and communicated is reality. "The primal source of the 
+ Eleatic philosophy thus lies in the archaic sense of language, according to 
+ which one cannot pronounce 'yes' and 'no' without deciding upon the reality 
+ or unreality of the objects of the statements." So human language is not merely 
+ symbolic but "corresponds to reality in its structure," and it is "From the 
+ premise of the essential coalescence of language and reality follows Parmenides's 
+ theory of Being . . . " (Calogero and Starkey 6.526; see also Benjamin 
+ 8-10). Parmenides and his school, then, introduced into philosophy ideas similar 
+ to those in magic, myth, and mysticism. 10   
+ By the early twentieth century, the linguistic ideas of Parmenides et al. were 
+ again very fashionable in philosophy. Fritz Mauthner, one of the founders of 
+ modern linguistic analysis in philosophy, could hold that "Every attempt to 
+ tell what is true just leads back to linguistic formulations, not to objective 
+ states of affairs"-a position that "bears some affinities to the views expressed 
+ in Ludwig Wittgenstein's Tractus Logico-Philosophicus (Popkin 16.855), 
+ another road I decline to travel. By the middle of the twentieth century, there 
+ was a good deal of emphasis among the intelligentsia for placing reality in 
+ words, but there was some hope that "The Age of Analysis" could produce, a science 
+ of "semiology" or a grounded philosophy of language, or (at least) an exposition 
+ of structures, that could serve well enough as a philosophy of the world. 
+ As David Lehman tells the story-hostilely, among other things-that hope was 
+ called into question at Johns Hopkins in 1966 with Jacques Derrida's paper "Structure, 
+ Sign and Play and the Discourse of the Human Sciences" (coll. and trans. Writing 
+ and Difference 1978). The key passage, according to Lehman, takes precisely 
+ the view that can easily, and I stress can , lead to a vision of social 
+ construction. The moment came, Derrida asserts, in the development of the concept 
+ of structure "when language invaded the universal problematic, the moment when, 
+ in the absence of a center of origin, everything became discourse . . . 
+ that is to say, a system in which the central signified, the original or transcendental 
+ signified, is never absolutely present outside a system of differences. The 
+ absence of the transcendental signified extends the domain and the play of signification 
+ infinitely" ( Writing and Difference 278-80). Lehman paraphrases this-usefully 
+ for us, though arguably-as "Nothing exists ahead of language or outside it; 
+ there are no things or ideas except in words." 11   
+Alternatively put, "Il n'y a rien hors du texte," which Andreas Huyssen renders 
+ "there is nothing outside the text." Possibly looking to J. Hillis Miller's 
+ statement that "Language . . . thinks man and his 'world' . . . 
+ if he will allow it to do so" (Miller 224), Huyssen couples Derrida on the textuality 
+ of reality with the "insight that the [perceiving] subject is constituted in 
+ language" (Huyssen 259). 12   
+Or in Lehman's unnuanced reading, " Words speak us ," whether we "allow" 
+ them or not: ". . . we are merely passive conductors of language" 
+ (106). Le Guin may agree; at least she does in a 1988 poem "For Helene Cixous" 
+ ( Wild Oats 60). 
+ Human beings, according to such theories, seem to be in a Westernized, secularized, 
+ language-centered version of the relationships among "the personal self and 
+ the Self that is identical with Brahman, between the individual ego and the 
+ Buddhawomb or Universal Mind." For the individual human mind, the mystic Huang 
+ Po taught, to go into the state of "no-mind," one "must not try to think it, 
+ but rather permit ourselves to be thought by it" (paraphrased Huxley 73; ch. 
+ 4). As the comedian George Carlin could state as part of his early-1970s act, 
+ "All we have is words," except Carlin's we in this sentence may also be 
+ constructed by words, so that instead of Universal Mind thinking us, we are 
+ spoken by language. 
+ In modernism of the J-P Sartrean Existentialist variety, there was no God to 
+ create us; our existence preceded any essence we might have, which was our job 
+ to create. Philosophically, the action was in the perceiving subject rather 
+ heroically making something of himself (and that's him self: Existentialism 
+ is masculinist). Roughly speaking, consciousness was king. 
+ Seyla Benhabib can sum up for the (post)modern philosophers-and help illustrate 
+ why I have avoided technical sources: 
+ Whether in analytic philosophy, contemporary hermeneutics, or French 
+ poststructuralism, the paradigm of language has replaced the paradigm 
+ of consciousness. . . . [T]he focus is no longer on the 
+ epistemic subject [a potential knower] nor on the private contents of 
+ its consciousness but on the public, signifying activities of a collection 
+ of subjects. . . . The identify of the epistemic subject 
+ has changed as well: The bearer of the sign cannot be an isolated self-there 
+ is no private language as Wittgenstein has observed; it is a community 
+ of selves whose identity extends as far as their horizon of interpretations 
+ ([Hans-Georg] Gadamer) or it is a social community of actual language 
+ users (Wittgenstein). This enlargement of the relevant epistemic subject 
+ is one option. A second option, followed by French structuralism, is to 
+ deny that, in order to make sense of the epistemic object [something external, 
+ potentially knowable], one need appeal to an epistemic subject at all. 
+ The subject is replaced by a system of structures, oppositions, and diffrances {sic} 
+ which, to be intelligible, need not be viewed as products of a living 
+ subjectivity at all. (112) 
+ If our (post)moderns are correct, there is no single, unified, perceiving "I"; 
+ if the crucial structure is language, perhaps there is no world outside of the 
+ discourse among many "subject positions"-the people who say "I" and construct 
+ themselves and the world(s) they talk about. Again George Carlin: "All we have 
+ is words"-literally, except the words may have us even more. If this theory 
+ is correct, all we can do (and do do) to create the facts of our world is 
+ tell one another fictions, stories. This is an idea Le Guin is willing to play 
+ with seriously, and possibly believe; but I think Le Guin remains with what 
+ Aldous Huxley has called "The Perennial Philosophy"- and remains (as a 
+ pretty consistent Daoist) a romantic affirming the worth of anarchic individuals. 13   
+With her favorite old mystics, I believe Le Guin believes in the ultimate reality 
+ indeed of only the Dao, the Brahman, but of the validity also of individual 
+ life among the "ten thousand things," illusory or not, the validity of living 
+ with others in the world of maya . 
+ Transition: 
+ Social Construction: Endnotes   
+ 1 My thanks to Dennis McGucken for making clear to me in a long e-mail message 
+ the limits of my sources on Western Marxism (Roy Bhaskar) and Jacques Derrida 
+ (David Lehman).   McGucken does 
+ a beautiful job locating Derrida in terms of a highly nuanced philosophical 
+ debate, but Lehman may be more helpful for the ideas that entered the more 
+ popular discourse of the academy and America's bicoastal intelligensia.
+ 2 See Erlich, "On the Necessary Uncertainty of Historical Criticism."
+ 3 The William James line is quoted in Le Guin's "The Field of Vision" 
+ ( WTQ 231).
+ 4 "It Was a Dark and Stormy Night," esp. DEW 28-29. 
+ 5 The Nicene Creed insists upon affirmation that the believer looks "forward 
+ to the resurrection of the dead, and the life of the world to come," 
+ which allows one to be a "mortalist" and believe that even when 
+ good Christians are dead, they are dead, and remain dead until the end of 
+ history and the universe, when, again one thing, body/breath are joined for 
+ "the life of the world to come."
+ 6 Bhaskar carefully defines the realism 
+ he refers to because of the ongoing debate that got formulated in the Middle 
+ Ages as nominalism vs. Realism, where the Realists are what many would call 
+ Idealists.   I.e., Realists believe 
+ in the real reality of abstract Forms, Universals.   Nominalists (like me) say that those "Universals" 
+ or forms are just names (Latin nomen ) 
+ people give to abstractions, mere categories of the human mind.   
+ See below for highly radical nominalists becoming poststructuralists, 
+ postmodernists.
+ 7 We might also see them returning to a formulation by Oscar Wilde (d. 1900) 
+ complementing his idea of life imitating art: "Nature is no great mother 
+ who has borne us.   She is our 
+ creation" (qtd. David Denby, "In Darwin's Wake," The 
+ New Yorker 70.2 [21 July 1997]: 60).   
+ Denby quotes Wilde, "Decay" (40 [my colleague J. Kerry Powell 
+ noted "Decay" as a probable source for the quotation and recommended 
+ that essay and also Wilde's "The Critic as Artist]).   
+ As with Orestes in Sartre's Flies a 
+ murderer of his mother, acquitted by an argument privileging fathers in reproductionnote 
+ the sexual and gender implications in the lines quoted.
+ 8 Cf. and much more so contrast 
+ merging with the Dao or Brahman, attaining Nirvana.   
+ Cf. Le Guin's highly negative view of merging with some "Unist"falsely 
+ Onemovement; and strongly contrast Le Guin's favorable imagery of occasional , 
+ fleeting touch with Reality.   The 
+ temptation to lose self through merging with a Party, Church, or other mass 
+ movement is discussed in detail in Hoffer's The 
+ True Believer .   The Grand 
+ Inquisitor section of 1984 can 
+ be read usefully for Le Guin's presentation of such villains as Dr. Haber 
+ in LoH , Cob in FS , and Aspen in Tehanu .
+ 9 I am not the only one to cite Orwell against contemporary Idealists.  
+ Cf. Tzvetan Todorov, "Crimes Against Humanities," New 
+ Republic 3 July 1989, cited Lehman 45-46.  Lehman's Index cites Orwell 
+ eight times (314).
+ 10 And which would go from 
+ philosophy back into systems of western mysticism; e.g., the ongoing "ontological 
+ value" of language in Jewish mysticism may derive from Greek philosophy 
+ as much as from the Hebraic idea of the mshl 
+ (language working in the world).
+ 11 Some of the philosophically sophisticated may spot a figurative 
+ cloven hoof in my "usefully" in this sentence.   My one philosophy instructor was appalled to infer that I was 
+ a pragmatist .   And I still am, in part, but nowadays I''ll make that a vulgar 
+ pragmatist to differentiate myself from such respectable thinkers of "a 
+ resurgent pragmatism" (in Daniel Callahan's phrase) as Richard Rorty 
+ and Linda J. Nicholson.
+ 12 I get the quotation from Writing 
+ and Discourse from Lehman 97 (my emphasis); the Miller quotation is from 
+ Lehman 106.
+ 13 Huxley got the "Perennial Philosophy" phrase from Gottfried Wilhelm 
+ von Leibnitz (vii).
+ contents bibliography sfra home page 
