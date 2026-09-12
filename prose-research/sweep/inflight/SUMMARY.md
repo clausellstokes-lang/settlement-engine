@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-11 21:09:43 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-11 21:15:44 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -143,7 +143,7 @@
 | ? | other |  | failed | 0 | — | — | 21:45:41 |
 | ? | other |  | failed | 0 | — | — | 21:45:42 |
 | ? | other |  | result | 0 | refine.md | — | 00:52:32 |
-| ? | other |  | in-flight | 0 | — | — | 01:09:42 |
+| ? | other |  | in-flight | 0 | — | — | 01:15:40 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 20:42:32 |
 | ? | other |  | result | 0 | — | — | 20:51:56 |
 | ? | other |  | result | 0 | refine.md | — | 00:28:33 |
