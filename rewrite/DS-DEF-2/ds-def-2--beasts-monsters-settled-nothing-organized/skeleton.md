@@ -4,7 +4,7 @@ Seat: MARKER (opus), DS-DEF-2 · pool `Beasts & Monsters: settled, nothing organ
 
 Three shipped variants, vids 1 to 3, angles `[ledger]` `[street]` `[visitor]` in that order. The rows below are the annex's at the dock tip `f20532e18` (`docs/content/RECEIPT_POOLS_DOSSIER_STATE.md` lines 2625 to 2628) and the generated leaf carries the same three texts with the same vids, angles and slot sets (`src/data/dossierStateProse/defense.generated.js:530-552`; the pool's manifest row at `:1114-1128` reads `role: spine`, `variantCount: 3`, `faceCounts: [1,1,1]`, `vids: [1,2,3]`, `readsCount: 1`, `attach: []`). The writer rewrites these three, one for one, and gives each its four `[face]` sub-rows.
 
-⚠ **THE SLOT SETS ARE NOT UNIFORM ACROSS THIS POOL, and that is a wall.** Vid 1 and vid 3 carry `{settlement}`; **vid 2 carries NO SLOT AT ALL** (`"slots": []` at `defense.generated.js:543`). A face's slot set must equal its parent's (ARCH §2.5's face-row refusals), so **vid 2's four faces never name the town** and vid 1's and vid 3's four faces each carry `{settlement}` exactly once. A face that adds the town's name to vid 2, or drops it from vid 1 or vid 3, is refused by the projector before any reader sees it.
+⚠ **THE SLOT SETS ARE NOT UNIFORM ACROSS THIS POOL, and that is a wall.** Vid 1 and vid 3 carry `{settlement}`; **vid 2 carries NO SLOT AT ALL** (`"slots": []` at `defense.generated.js:542`). A face's slot set must equal its parent's (ARCH §2.5's face-row refusals), so **vid 2's four faces never name the town** and vid 1's and vid 3's four faces each carry `{settlement}` exactly once. A face that adds the town's name to vid 2, or drops it from vid 1 or vid 3, is refused by the projector before any reader sees it.
 
 **THE TEST THIS PACKET IS MARKED UNDER (ADDENDUM 14, the owner 2026-09-12).** A face is LAWFUL unless it CONTRADICTS the record. Silence is permission. "The card does not license it" is not a finding and the tag `unlicensed` does not appear anywhere below. Claims are tagged SAFE, CONTRADICTED (with the field, file and line, and which of the two is the record) or FLOOR-2.
 
@@ -160,9 +160,9 @@ The card licenses a citation of the muster where the budget allows. The ceiling 
 `settled country, neither` fires on **every town whose measured monster family is `settled` and whose live roster carries no walls-bucket member, no garrison-bucket member and no militia-bucket member**, and on NOTHING ELSE about the town. That is:
 
 - **Chiefly the small tiers.** At hamlet the whole Defense section is `Citizen militia` at `baseChance: 0.15` and `Palisade or earthworks` at `0.12` (`institutionalCatalog.js:334-349`); at village they are `0.22` and `0.18` (`:866-889`). **So the overwhelming majority of heartland thorps, hamlets and villages land in this pool** — it is the largest preimage of the seven beasts rows.
-- **And a large share of towns.** At town tier `Town walls` is `baseChance: 0.5` and `Barracks` is `0.3` (`:1335-1369`), so a heartland town with neither reads this pool — **and it carries a `required: true` Town watch while doing so** (`:1348-1355`). That is the range's sharpest corner and §1.2's first row.
+- **And a large share of towns.** At town tier `Town walls` is `baseChance: 0.5` and `Barracks` is `0.3` (`:1332-1339` and `:1363-1369`), so a heartland town with neither reads this pool — **and it carries a `required: true` Town watch while doing so** (`:1348-1355`). That is the range's sharpest corner and §1.2's first row.
 - **City and metropolis, only through the ruin path or custom content.** At city both `City walls and gates` and `Garrison` are `required: true` (`:1910-1929`), so a generated city cannot reach this key at birth; but `standingDefenseForces` reads `liveInstitutions` and is ruin-filtered (`defenseInstitutionBuckets.js:162-182`), so **a city whose walls and garrison rows have been ruined reads this pool with a metropolis's population standing in it.**
-- **With bodies the key cannot see.** A charter hall, a mercenary company, a `Free company hall` ("a billet and contracting office for a band of professional soldiers", `:1370-1376`, in NO bucket), a `Veteran's lodge` at village (`:882-888`, in no bucket), a `Warden's Lodge` that keeps tabs on beast migrations (`:1409-1418`, in no bucket), a wizard's tower, a healer. **Any of these may stand on a town this pool selects.**
+- **With bodies the key cannot see.** A charter hall, a mercenary company, a `Free company hall` ("a billet and contracting office for a band of professional soldiers", `:1370-1376`, in NO bucket), a `Veteran's lodge` at village (`:881-888`, in no bucket), a `Warden's Lodge` that keeps tabs on beast migrations (`:1409-1418`, in no bucket), a wizard's tower, a healer. **Any of these may stand on a town this pool selects.**
 - **Every stress state.** No key function of this block reads `config.stressTypes`. This pool prints under `monster_pressure`, `under_siege`, `occupied`, `famine`, `plague_onset` and `wartime`, each of which renders its own banner on the same dossier. **A face about an untroubled country is absurd under an ACTIVE SIEGE banner, and the siege is the record.**
 - **Every route, culture, prosperity rung and population band**, none of which the key reads.
 - **Both clocks, and they disagree here.** The PROSE key reads the LIVE ruin-filtered roster (`defenseStateProse.js:623`); the BADGE beside it is `defenseProfile.scores.monster`, judged at generation and never re-judged — the tab's own caption says so in as many words ("as judged at the first survey", `DefenseTab.jsx:313`). **After a ruin the sentence moves and the badge does not.**
@@ -190,3 +190,141 @@ Vid 1 not first, or not `[ledger]`, or its slot set not `{settlement}` alone, or
 - **The muster's return on this town is three empty columns, and the ledger angle owns that.** The walls, the garrison and the militia are all the muster's records (`holderTable.js:188-190`), and all three are measured negatives here rather than silences. What the office holds on this town is a roll with nothing written in the three places a roll would carry a defence — and a country measured from the road, by a different holder, which agrees with it. **Two records that agree is a shape the register has almost never used**, and it needs no citation to be visible.
 - **The thing the badge is made of is somewhere else entirely.** On this key the monster score begins at zero and the only things that can lift it are a chartered company, a hospital, a wizard, a priest or a druid (`defenseGenerator.js:200-211`). So where a heartland town has any answer at all to the country, that answer is **a hall, a shop, a tower or a lodge, and not a line** — old soldiers drinking at a village lodge with no muster to join, a ranger's waypost keeping tabs on beast migrations for a town with nothing standing against them, a contracting office for soldiers who are between campaigns and not employed here. The record is silent about far more than it denies, and every one of those is a rostered row the key cannot see.
 - **The absence has a shape and it is not emptiness.** Nothing here is ARRANGED as defence. The fields run to the treeline. What is kept against the country is kept by households, not by an office. None of that is a count, a date or an elapsed course; all of it is a standing condition, and a standing condition opens a question where a date closes one.
+
+---
+
+## VARIANT 2 · vid 2 · `[street]` · slots **NONE**
+
+⛔ **This variant names no town.** Its slot set is `[]` (`defense.generated.js:539-544`) and its four faces must each carry no slot at all. It is the one row of the pool that a reader meets with the town's name nowhere in it, which is also the register's own preference (R-DA-17: the town's name is not the default opener) and which makes the pool's opener histogram healthy. Keep it slotless.
+
+### 2.1 The shipped sentence, verbatim
+
+> The town has never needed to think about what is outside it, and does not.
+
+### 2.2 Every claim it makes, on the new test
+
+- **The town has NEVER needed to.** — **FLOOR-2b** (an elapsed course). "Never" ranges over the town's whole past. The key is a standing boolean over today's live roster joined to a birth configuration; `history.age` is frozen at birth and rerollable, `ageBands.js`'s `HISTORICIZE_BAND` is `'years-past'`, and NO state-prose pool key reads a history field. The lawful form of the same idea is a STANDING one: what the town is arranged for now, not what it has been spared.
+- **It has never NEEDED to** — i.e. the country has never made it necessary. — **CONTRADICTED** where a stress stands. `config.stressTypes` forces `monster_pressure` or `under_siege` outright with no roll consulted (`stressGenerator.js:110` onward), the heartland multiplier is three tenths and not zero (`:121`), and `monster_pressure` deducts up to twenty from the monster score on this very page (`defenseGenerator.js:432-441`). **The stress roster is the record.** Row **F1-34**.
+- **The town does NOT THINK about what is outside it.** — **CONTRADICTED** on the same ground as vid 1's first row, and more sharply, because this clause names the activity rather than the body. At town tier the roster's required civilian-defence row is "Part-time guards. Night patrol and gate duty." (`institutionalCatalog.js:1348-1355`) — a nightly round is exactly a standing arrangement about what is outside, and it is `required: true`. A `Warden's Lodge` keeps tabs on beast migrations (`:1409-1418`). **The record is the roster.**
+- **What the town thinks, as a body, about anything.** — **FLOOR-2** (a dependence on an unobserved field), and it stands beside a REFUSED COLUMN. No field carries what a settlement has considered, assumed or taken for granted, and a clause that puts one mind behind every resident is a totality over persons, which the card refuses always. MOVE-GRAMMAR §1.3 holds no FEELING move and no MEANING move for the same reason. The lawful conversion is the one the register already knows: **an act, an arrangement or an absence of one, never an interior.** What a town DOES is free; what a town THINKS is not a field.
+- **The two halves join on "and does not", carrying the verb forward.** — **SAFE as a form.** The elision is a rhythm and the register spends rhythm freely. It is the only shipped row of the pool that is short, and the short line exists (R-DA-05: rhythm follows load). Keep at least one face of this variant short.
+
+### 2.3 The reads this pool reaches (material for the rewrite of vid 2)
+
+The same three as §1.3, read from the street rather than from the roll: the country's band is the thing anyone on the road can see, and the three absences are the things a resident would notice by their absence — no line to stand on, nobody paid to stand, nobody mustering. The watch, the lodge, the charter hall and the badge remain outside the key and are the writer's boundary.
+
+### 2.4 ⭐ WHAT WOULD BE FALSE HERE
+
+Every row of the table at §1.4 applies. The rows this variant walks into by its own shape:
+
+| row | the claim that would be false | the field that denies it |
+|---|---|---|
+| **F2-06** | "never", "has not had to", "has not been troubled", "no one here has seen", "not in living memory" — any elapsed course | no history field is read by any state-prose key; `history.age` is frozen at birth and rerollable |
+| **F1-34** | the same course written as a totality about the country | `stressGenerator.js:110-125`; `config.stressTypes` |
+| **the refused column** | a state of mind, an assumption, a habit of thought, a complacency, an expectation, held by "the town" as one body | no field; and a totality over persons is refused on the card always. **Also**: the register assigns no reaction (R-DA-01, R-DA-14) |
+| **F1-01 / F1-02** | "nobody watches", "no one keeps an eye out", "nobody is charged with it" | `defenseInstitutionBuckets.js:94-107`; `institutionalCatalog.js:1348-1355` — the watch bucket is unread by the key and required at town tier |
+| **A2 / THE PROMISE** | "will not need to", "would not know what to do", "if something came, the town would" as a FATE rather than a subjunctive edge | no move has a future indicative; the edge is subjunctive and the pulse adjudicates predictions |
+
+The closed rosters and the not-a-faith-pool line at §1.4 bind here unchanged.
+
+### 2.5 ⭐ THE PREIMAGE
+
+As §1.5, with one emphasis this variant makes acute: **the slotless row prints identically in every town the key selects**, from a heartland thorp of a few dozen to a ruined city with a metropolis's population still living in it. There is no `{settlement}` to anchor it and no tier word in the bag, so a face here must be true of ALL of them at once. A clause that fits a hamlet and reads absurd in a town of thousands has no name in it to blame.
+
+### 2.6 The angle's stance in one sentence
+
+`[street]` is the town's own ordinary practice seen at ground level: what is done and not done here as a matter of course, stated flatly as a standing arrangement that everybody in it lives inside, never as what anybody thinks, feels, assumes or has learned, and never as a history of how it came to be that way.
+
+### 2.7 The turns worth keeping
+
+- The SHORTNESS. It is the pool's only short line and the register's own rule is that the short line exists. At least one face of this variant should stay under a dozen words.
+- The elided second clause (*and does not*) is a clean, plain, unmannered joint that spends rhythm and buys no claim. The move is reusable even where the words are not.
+- The refusal to name the town. Keep it, in every face.
+
+### 2.8 What would make the rewrite of vid 2 a regression
+
+Vid 2 not second, or not `[street]`, or gaining a slot, or fewer than four faces. Any face that carries a town-wide interior, an elapsed course, a "never", a future, or a totality about the country. Any face in which all four wordings are long — the variant's one structural asset is that it is the short one. A face that reads as a hamlet's alone, since the same bytes print in a ruined city.
+
+### 2.9 ⭐ WHERE THE FLAVOUR IS (vid 2)
+
+- **At town tier there is a nightly round and no gate to do duty at.** The required row's own words are "Night patrol and gate duty" (`institutionalCatalog.js:1352`), and this key denies the entire walls keyword set, gatehouse row included. **A duty on the books whose object does not exist** is a genuinely dossier-shaped particular: the record holds the duty; the world holds no gate. It is available to a face as a standing condition and needs no count, date or cause.
+- **Nothing here is anybody's job.** The three empty buckets are exactly the three that would put a person on a roll for the country. Whatever is done about what is outside is done by whoever is out there — a household, a herd, a field's edge — and not by an office with a name. The street angle owns that distinction and the record holds it without a word of interiority.
+- **The ordinary thing is the direction of attention.** Everything the town has built is arranged toward itself and the road, not against the country: a village's lodge full of retired soldiers and no muster for them to join, a town's contracting office for soldiers between campaigns who are not employed here, a warden's waypost whose business is the country but whose town has nothing standing in it. Those are rostered rows the key cannot see, they are visible from the street, and the shipped line never reached for one of them.
+- **The absence to write is the absence of an occasion, not of a feeling.** There is no muster ground, no roll to be on, no night the town is called out for, no arrangement that would need to be stood down. Write what does not happen here, which the record holds, rather than what nobody thinks, which it does not.
+
+---
+
+## VARIANT 3 · vid 3 · `[visitor]` · slots `{settlement}`
+
+### 3.1 The shipped sentence, verbatim
+
+> A stranger walks out of {settlement} in any direction at any hour and meets nothing that would justify a watch.
+
+### 3.2 Every claim it makes, on the new test
+
+- **A stranger may walk out IN ANY DIRECTION AT ANY HOUR.** — **CONTRADICTED**: a totality over the country and the clock. `heartland` multiplies the monster and siege roll by three tenths and never to zero (`stressGenerator.js:121`), and `config.stressTypes` can force `monster_pressure` or `under_siege` outright (`:110` onward). None of this block's five key functions reads a stress field, so **this sentence prints under an ACTIVE SIEGE banner on the same dossier**. Row **F1-34**; and the block's own set says it in terms — `settled` is the LOW monster-and-raider tier and never "no live threat".
+- **He MEETS NOTHING.** — **CONTRADICTED** on the same field, and it is the harder half: "nothing" is an absolute over the whole country and every hour of it, where the record holds a multiplier and a band word.
+- **Nothing out there WOULD JUSTIFY A WATCH.** — **CONTRADICTED TWICE, and this is the sharpest row in the packet.** First on the totality above. Second, and independently: **the key does not read the watch bucket at all** (`defenseStateProse.js:654` passes `garrison || militia`; the `watch` bucket is `defenseInstitutionBuckets.js:94-97`), and at TOWN tier `Town watch` is `required: true` with `baseChance: 1` (`institutionalCatalog.js:1348-1355`). So on every town-tier settlement this pool selects, **the face says the country would not justify a watch while the town's roster carries one.** The record is the roster. The word `watch` is also the block's own alias trap: it may NAME a body only on a resolved watch row, and this key cannot tell whether one resolved.
+- **A STRANGER is the subject, and he walks.** — **SAFE.** He bears no proper name, no office and no fate, so F1-126 and the product-scope column are untouched. A visitor-angle face may put a person on the page as long as he stays a role and takes at most one act.
+- **The town is a place one walks OUT OF.** — **SAFE**, and it is the variant's best structural asset: it puts the reader at the boundary, which is exactly where this key's three absences live.
+- **Implicitly: what the stranger sees is what is the case.** — **SAFE** as long as the sentence lands on a standing condition. A visitor face that reports an IMPRESSION ("seems", "feels", "looks like a place where") is hedging on behalf of a person, which the register refuses (the vague-authority floor of R-DA-13, executable now). **Say what is there.**
+
+### 3.3 The reads this pool reaches (material for the rewrite of vid 3)
+
+The same three as §1.3, met at the town's edge: a country in the low band that anyone on the road can see; no wall, no bank, no palisade and no gatehouse to pass; nobody paid to stand and no citizenry mustering. What is NOT reached and is the boundary of this face in particular: **the watch**, the mercenary company, the charter hall, the magical defences, the readiness badge, every stress on the page.
+
+### 3.4 ⭐ WHAT WOULD BE FALSE HERE
+
+Every row of the table at §1.4 applies. The rows this variant walks into by its own shape:
+
+| row | the claim that would be false | the field that denies it |
+|---|---|---|
+| **F1-34** | "meets nothing", "in any direction", "at any hour", "unbothered", "a country that sends nothing at it" | `stressGenerator.js:110-125`; `monsterThreat.js:22-27`; `config.stressTypes` unread by every key of this block |
+| **F1-02** | naming a watch at all — asserting one, denying one, or saying the country would or would not warrant one | `defenseInstitutionBuckets.js:94-97` (the `watch` bucket is not an argument to this key); `institutionalCatalog.js:1348-1355` (`required: true` at town tier). **This is the shipped clause that must not be carried forward** |
+| **F1-07 / F1-32** | anything the stranger PASSES on the way out — a gate, a bar, a gatehouse, a stockade, a ditch read as works | the key's `perimeter === false` over the closed keyword set, gatehouse row included |
+| **R-DA-13** | "seems", "feels", "has the look of", "you would not know", "it is said" — a hedge or a vague authority on a visitor's behalf | the vague-authority floor is EXECUTABLE now and stands at zero; the register hedges by distance and by a named roll, never by an impression |
+| **F1-126** | naming the road he takes, the inn he left, the house at the edge, anybody he meets | no `{npc}` slot and no name authority on this pool; the same bytes print in every matching town |
+| **A5 / R-DA-01** | addressing the reader as the stranger ("you walk out"), or assigning him a reaction | no "you" in this register; the compiler shows only through what the record holds |
+
+The closed rosters and the not-a-faith-pool line at §1.4 bind here unchanged.
+
+### 3.5 ⭐ THE PREIMAGE
+
+As §1.5. The corner this variant must survive: **the town-tier town with a required watch** (the sentence's own noun), **the ruined city** (a stranger walking out of a place with a metropolis's population and a collapsed wall line), and **the town under an active `monster_pressure` or `under_siege` banner** (where walking out in any direction at any hour is the one thing the dossier's other panels say he must not do). A face that is true in a heartland hamlet and false in those three has not cleared the preimage.
+
+### 3.6 The angle's stance in one sentence
+
+`[visitor]` is the outside eye on a standing arrangement: what a person arriving or leaving actually encounters, reported as fact and not as impression, landing on the civic thing that is or is not there — so here it may put the reader at a town edge that has nothing in it, and must not name what the country would or would not warrant, nor hedge, nor total the country, nor be addressed.
+
+### 3.7 The turns worth keeping
+
+- *A stranger walks OUT of* — the direction is the asset. Coming in is the sibling row's move; going out is this one's, and it is where the three absences are.
+- The two-part shape (a person does a plain thing; the plain thing meets a standing condition) is the visitor angle's own grammar and reusable across four faces with different nouns.
+- Nothing else. The clause *meets nothing that would justify a watch* is named in the block's contradiction set as a clause that must not be carried forward, on both of its halves.
+
+### 3.8 What would make the rewrite of vid 3 a regression
+
+Vid 3 not third, or not `[visitor]`, or its slot set not `{settlement}` alone, or fewer than four faces. Any face that keeps the word `watch`, or any face that keeps a totality of safety in a new vocabulary ("meets nothing", "sees no reason", "is troubled by nothing"). Any face that hedges on the stranger's behalf, addresses the reader, or names a road, a house or a person. Any face that has the stranger PASS a perimeter thing on the way out. A face that opens on the `{settlement}` proper slot (T-F8).
+
+### 3.9 ⭐ WHERE THE FLAVOUR IS (vid 3)
+
+- **He is not admitted anywhere; he simply stops being in the town.** With the whole walls keyword set denied and the gatehouse row denied with it, **there is no moment of leaving** — no leaf, no bar, no arch, no one to pass, nothing that marks the difference between inside and out except the last building. A visitor face can put the reader at a boundary that is not a boundary, which is a concrete, particular, entirely licensed thing and which no shipped row in this pool has used.
+- **Nobody counts him, either way.** The three empty buckets are the three that would put a person at the edge with a reason to ask his business. So arriving costs him nothing, leaving is unremarked, and whatever record this town keeps of strangers is kept by whoever happened to be looking. The absence of an accounting is as concrete as an accounting and the record holds it as three measured negatives.
+- **What he would actually notice is what the town spent on instead.** On this key the town's only possible answers to the country are a lodge, a hall, a shop or a tower (`defenseGenerator.js:200-211`) — a drinking hall of retired soldiers with no muster to join, a warden's waypost that tracks beast migrations for a town with nothing standing against them, a contracting office for soldiers who are between campaigns and not hired here. A stranger walking out past one of those, on a road with nothing at its end to stop him, is the pool's best unused picture.
+- **The country itself is a visible thing and the road is the holder of that fact.** The tier is the ROAD's record (`holderTable.js:234`, "the look of the country, which anyone travelling it can see"), so the one thing this angle may honestly say about what is out there is what the country LOOKS like at the low rung of a ladder of three — worked ground, a treeline that nobody has cleared back, tracks that go somewhere. Never what it holds, never what it sends, never nothing.
+
+---
+
+## 4. WHAT THE POOL OWES ACROSS ITS THREE VARIANTS
+
+- **Twelve faces, four per variant**, each a different vocabulary or rhythm inside the voice and never a paraphrase of its sibling. The counts only rise (Part B §22); a face that fails the gate stays in the annex as a refusal row with its measurement.
+- **Slot sets per parent, not per pool:** `{settlement}` · none · `{settlement}`. See the wall at the head of this file.
+- **Distinct level-1 grammars.** A pool of three carries three distinct members of MOVE-GRAMMAR §2.1's V1–V8, filtered to what this block licenses. V2 (`PRESENT → CONSEQUENCE(structural)`), V3 (`PRESENT → LACK`) and V1 (`PRESENT` alone) are all drawable here; V7 is not (no event provenance) and V8 is not (no typed `not-held` field). ⚠ **V3's LACK may not open a sentence and may not sit beside another ABSENCE** (order wall 3), which is a real constraint in a pool whose whole subject is an absence: at most one variant may lead with the lack, and the other two must open on the country, on the road, on an act or on a thing that is there.
+- **A11's spread:** no two variants of this pool share their first two words, and the shipped three already differ (`{settlement}` · `The town` · `A stranger`). Four faces per variant multiplies that, so the spread is measured over all twelve.
+- **The settlement token opens at most one variant per pool** (R-DA-17; T-F8 refuses a sentence face opening on a `proper`-typed slot outright), so no face of vid 1 or vid 3 may begin on the town's name.
+- **The pool's one discriminating claim is the COUNTRY.** The `Invasion & War` row printed directly beneath is FIXED to `neither walls nor force` whenever this pool fires (`defenseStateProse.js:654-655`), and it already carries the bare absence. Every one of the twelve faces must hold the quiet band, or the reader meets the same fact twice in two panels.
+- **Leave one matter standing open.** The register's own constraint (fault 7's licence, the OPEN QUESTION move as a declarative) is easy to honour here and hard to honour anywhere else in the block: the record holds a town with nothing arranged against a country it has measured, and says nothing whatever about why. A face that declines to supply the reason — as vid 1's *whatever ... is for* sibling does one pool over — is doing the register's own work.
+
+---
+
+**Marked by:** MARKER (opus), 2026-09-12, against the dock `laneRW-DEF2` at `f20532e18`. Nothing in this file is a face; every line above is material, a refusal, or a boundary.
