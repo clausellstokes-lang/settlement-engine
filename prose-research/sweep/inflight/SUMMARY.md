@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-12 01:54:52 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-12 02:00:54 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -90,7 +90,7 @@
 | ? | other |  | result | 0 | refute-round-1.md | — | 01:57:30 |
 | ? | other |  | result | 0 | — | — | 01:49:18 |
 | ? | other |  | result | 0 | — | — | 00:17:54 |
-| ? | other |  | in-flight | 0 | — | — | 05:54:52 |
+| ? | other |  | result | 0 | — | — | 05:59:30 |
 | ? | other |  | result | 0 | refine.md | — | 01:07:37 |
 | ? | other |  | result | 0 | — | — | 03:24:10 |
 | ? | other |  | failed | 0 | — | — | 21:45:42 |
@@ -145,6 +145,7 @@
 | ? | other |  | result | 0 | — | — | 00:52:25 |
 | ? | other |  | result | 0 | — | — | 19:38:34 |
 | ? | other |  | result | 0 | — | — | 20:46:10 |
+| ? | other |  | in-flight | 0 | — | — | 06:00:54 |
 | ? | other |  | result | 0 | cure-round-1.md | — | 03:19:54 |
 | ? | other |  | failed | 0 | — | — | 21:45:41 |
 | ? | other |  | result | 0 | — | — | 21:04:52 |
