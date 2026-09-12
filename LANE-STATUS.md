@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-12 07:05:10 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-12 07:10:47 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = b1e87d40e §919.5: the retro record's six FIDELITY packets land — a commit defect of the chair's o
 
@@ -43,11 +43,14 @@ product claude/composite-r4 = f73bdbf16 · ledger = b1e87d40e §919.5: the retro
       | 
       | Every figure below comes from a command that ran in this dock with its exit code captured. A figure
       | without a command is not in this file. ZERO reader-facing bytes is the car's own fence: the manifest
-- **DS-DEF-2 (waits for the tables)** dock `laneRW-DEF2` HEAD f20532e18 · 6 cars over f2da5a3ee · porcelain 0 · last commits:
+- **DS-DEF-2 (waits for the tables)** dock `laneRW-DEF2` HEAD f20532e18 · 6 cars over f2da5a3ee · porcelain 2 · last commits:
     f20532e18 REWRITE 8b DS-DEF-2: the licence-test rewrite is reverted to the shipped rows, and the re-cut starts from the original
     1afa97391 REWRITE 8b: the licence card stops teaching the struck law (brief ADDENDUM 14/16)
     471ce894a REWRITE 8b DS-DEF-2: 50/78 variants kept as refined · 31 faces reverted · 99 cure target(s) — the Fable judge rulings applied
     402d592df REWRITE 8b DS-DEF-2 refine: 23/26 kept, 3 reverted
+    porcelain (uncommitted work in the dock — commit it FIRST after re-proving):
+       M docs/content/RECEIPT_POOLS_DOSSIER_STATE.md
+       M src/data/dossierStateProse/defense.generated.js
     receipt `receipt-rewrite.md` (mtime 09-09 14:58) head:
       | # RECEIPT — the REWRITE train
       | 
@@ -289,7 +292,7 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `aea2c2cb5` WRITER Disasters & Famine: granary, NO medical provision r1 · DONE · transcript 09-12 06:55 668 KB · 32 tool calls · files: draft-round-1.md, draft-round-1.md · result: **PACKET:** `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--disaste
     - `add970a6d` WRITER Disasters & Famine: NO reserves, hospital present r1 · DONE · transcript 09-12 06:55 645 KB · 31 tool calls · files: ct-floors.txt, draft-round-1.md · result: PACKET: `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--disasters-f
     - `a662d722f` WRITER Disasters & Famine: NO reserves, NO medical provision r1 · DONE · transcript 09-12 07:04 857 KB · 38 tool calls · files: $D/draft-round-1.md, draft-round-1.md · result: The packet is complete and verified.  **PACKET:** `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratch
-    - `a97888883` GATE r1 · IN FLIGHT · transcript 09-12 07:05 223 KB · 14 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
+    - `a97888883` GATE r1 · IN FLIGHT · transcript 09-12 07:10 516 KB · 45 tool calls · files: docs/content/RECEIPT_POOLS_DOSSIER_STATE.md, "$SCR/annex.head.md, "$SCR/apply-report.json · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
 - **wf_574fe3cb-fe3** (mtime 09-12 04:15): agent calls 6 (6 distinct) · DONE 6 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 0 — mirror `_progress/wf_574fe3cb-fe3/`
     - `af22a9af8` ? · DONE · transcript 09-12 04:20 328 KB · 12 tool calls · files: items-W1-W10.md, appendix-W1-W10.md, items-W1-W10.md · result: {"slice": "W1-W10", "newFindingRowsAdded": 6, "authoredCellsMarked": 2, "foldAuthoredCells": 14, "newBarsAmongThem": ["\u26a0 NEW BAR \u00b7 NF-2 \u2014 the tow
     - `a32d8e55f` ? · DONE · transcript 09-12 04:19 344 KB · 12 tool calls · files: items-W11-W19.md · result: {"slice": "W11-W19", "newFindingRowsAdded": 8, "authoredCellsMarked": 3, "foldAuthoredCells": 58, "newBarsAmongThem": ["NF-1 \u2014 the militia and the watch ar
@@ -630,4 +633,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `ad30ac0bb` FOLDER · DONE · transcript 09-11 06:02 1531 KB · 36 tool calls · files: _partD.md, _partE.md, _partF.md, _partG.md · result: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/entailment/ENTAILMENT-TABLE.draft.md
 
 ## PROCESSES: 57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 2.48 2.39 2.34
+load: 2.33 2.38 2.35
