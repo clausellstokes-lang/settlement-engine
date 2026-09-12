@@ -1,5 +1,5 @@
 # SKELETON — DS-DEF-2 · pool `Disasters & Famine: granary, NO medical provision`
-Seat: MARKER (opus). Status: IN PROGRESS (checkpoint law — rewritten section by section).
+Seat: MARKER (opus). Status: COMPLETE (all three variants marked; §0 and §4 written).
 Variants: 3 shipped (vids 1, 2, 3). Nothing in this file is a face.
 
 ---
@@ -327,3 +327,80 @@ Curing the two futures by flattening the variant into a present-tense inventory.
 - **The ground is still called the PARISH's, and there is no parish.** On a town or a city that reached this pool by having its churches struck out, the required burial row keeps its name. A stranger reads *parish* on the one civic ground and finds no parish anywhere behind it. That is a genuine, typed, on-the-roster oddity and nobody has written it.
 - **What the absence looks like on the ground:** there is nowhere to take a sick person, so a sick person stays in the house they fell ill in, and containment is a matter of doors rather than of a ward. A traveller who falls ill on this road becomes a householder's problem rather than an institution's. **Note the line:** that is a description of an arrangement (SAFE) and becomes a forecast the moment it says what happens next.
 
+---
+
+## VARIANT 3 · vid 3 · `[street]` · slots `{settlement}`
+
+### 3.1 The shipped sentence, verbatim
+
+> `[street]` The town can outlast a hungry year at {settlement} and has no answer at all to a sick one, and knows which of the two it fears.
+
+**Shape:** one sentence, three segments, two `and` joints in a row. The slot is stranded mid-clause ("The town … at {settlement}"), so the town is named twice in eight words by two different terms.
+
+### 3.2 Every claim it makes, on the new test
+
+| # | the claim | verdict |
+|---|---|---|
+| 1 | a granary stands on this settlement's roster | **SAFE** — the key's own predicate |
+| 2 | the town **can outlast a hungry year** | **CONTRADICTED** — the same row as vid 1 claim 3, in its sharpest form: *a year* is named outright. `foodGenerator.js:161-165` holds **5 months at town**, 3.5 at village, 5 or 7 at city; only the metropolis state-granary branch reaches twelve. **The generator is the record.** Also floor 2a on a boolean key |
+| 3 | the town **has no answer at all to a sick one** | **SAFE** — the key's own branch; a civic totality over the closed roster. The parallelism *a hungry year … a sick one* is the best turn in the variant |
+| 4 | the town **knows** something | **FLOOR-2** *a dependence on an unobserved field*, and a WALL besides: the FEELING move does not exist anywhere in the estate (MOVE-GRAMMAR §1.3 — no field carries motive, belief or mood; the reaction is an ACT). Nothing holds what this town knows |
+| 5 | the town **fears** one of the two more than the other | **FLOOR-2** on the same ground, doubled: it is an interior AND a comparison of two interiors. No field holds either term |
+| 6 | the town's people hold that fear collectively ("the town … fears") | **FLOOR-2**, and it edges the REFUSED COLUMNS line — a totality over persons wearing a civic noun |
+| 7 | (implied) the sickness is the worse of the two here | **SAFE as a civic reading** — it follows from claims 1 and 3 at the level of what the town has built, and it is the pool's actual content. ⚠ **It is safe as an ARRANGEMENT and unsafe as a SENTIMENT.** The rewrite's whole job on this variant is to move that reading from the second form into the first |
+
+### 3.3 The reads this pool reaches (material for the rewrite of vid 3)
+
+As §0.5. For `[street]` in particular: the material is what a person in the town would DO, not what they would feel — where a sick person is taken, what door is closed, which building the grain goes into and which building the sick do not go into. The register card's line is exact: **the reaction is an ACT.**
+
+### 3.4 ⭐ WHAT WOULD BE FALSE HERE (vid 3)
+
+1. **Every verb of interior state:** knows, fears, worries, expects, trusts, prefers, understands, remembers, has learned, has come to rely on, takes seriously, does not think about. The `[street]` angle is the one that reaches for these and the wall does not bend for it.
+2. **Any totality over persons:** "everybody here", "nobody", "the whole town", "anyone can tell you", "they all know".
+3. **The year.** Any duration for the store.
+4. **A collective preference or priority** — "the town has spent its thinking on the grain", "cares more about", "would rather". That is claim 7 in its unsafe form.
+5. **A named voice, a saying, a thing people say.** No saying row exists in a typed table (the SAYING non-move), and no citation is licensed.
+
+### 3.5 The preimage, as it bites vid 3
+
+`[street]` on a metropolis is a different sentence from `[street]` on a struck-out market town, and the same face prints on both. **So the street face may not describe a street.** No lane, no square, no market day, no crowd size, no district — the key reads no tier, no population and no terrain. What survives across the whole range is the CIVIC ARRANGEMENT seen from ground level: the thing you can walk to, and the thing you cannot.
+
+### 3.6 The angle's stance in one sentence
+
+`[street]` may state the arrangement as it is met by a person standing in the town — **what is done, where a thing is taken, what is available at the point of need** — in the clerk's third person, as an act or a standing practice, never as a mood, a knowledge or a collective opinion.
+
+### 3.7 The turns worth keeping
+
+- ⭐ **"a hungry year … a sick one"** — the pool's best turn by a distance. One adjective pair carrying the entire two-sided key, with the second half compressed to a pronoun. **This is the density law's kind of compression and it should survive into at least one face, in some form.** ⚠ It carries the contradicted *year*; the parallelism has to be rebuilt on a noun the record holds.
+- **"no answer at all to"** — the same flat totality as vid 1's "nothing at all against", in a different rhythm. Two lawful forms of one claim, and the pool has room for both.
+
+### 3.8 What would make the rewrite of vid 3 a regression
+
+Losing the parallel construction in the process of curing the fear clause. The parallelism IS the variant; the interior is a tail bolted to it. **Cut the tail, keep the spine, and let the last move be an act or a standing condition rather than a state of mind** (R-DA-04's close kinds: a condition · a prohibition · an absence · an object · a name not given).
+
+Also: fix the double naming. "The town … at {settlement}" names the same thing twice by two terms in one clause, which is R-DA-22's one-term-for-one-thing breach dressed as a slot placement.
+
+### 3.9 ⭐ WHERE THE FLAVOUR IS (vid 3)
+
+- **There is a place to take grain and no place to take a person.** That is the whole pool in one concrete, ground-level asymmetry, and it is an ACT rather than a feeling: the grain goes somewhere; the sick stay where they are. Nobody has written the pool from the point of view of *where a thing is carried*.
+- **The care the town does get is domestic, and the record is silent about it, which is permission.** With no hospital, no monastery, no healer and no priest on the roster, the tending that happens happens in houses, by whoever is there. **A face may describe that arrangement** — a sick person is a household's business — **and may not turn it into a count, a named person, a virtue or an outcome.** The silence here is the widest in the pool and it is the writer's to use.
+- **A stranger falling ill in this town has nowhere to be taken, and a stranger is exactly who the `[street]` and `[visitor]` material is for.** The catalog carries `Travelers' inn` and its kin at these tiers; the traveller arrives, and the one civic answer to a body is the one the town has not built. That is a concrete, licensed, wholly unused situation.
+- **What someone would complain about:** not the absence in the abstract, but the practical consequence of it — that containment here is a matter of a closed door rather than of a ward, and that the closed door is a neighbour's door. ⚠ Write the arrangement, never the outcome; the outcome is the pulse's.
+
+---
+
+## 4. THE PACKET'S OWN VERDICT, for the writer's first pass
+
+**What this pool actually says, stripped to the record:** *a name matching `granar` is on this town's roster, and not one of twelve care-and-faith keywords is.* One thing built against the bad harvest; the whole other column empty. Everything else in the twelve faces has to come from the shape of that asymmetry, from what the catalog names the granary, and from the silence around the sick — never from a quantity, a duration, a course, a history, a forecast or an interior.
+
+**The three faults all three shipped variants share, and which the rewrite must not carry forward:**
+
+1. **The duration.** All three assert that the store answers a YEAR or a HARVEST. `foodSecurity.storageMonths` says five months on a plain-granary town. **This is the pool's one true contradiction and it is in every shipped row.**
+2. **The course.** Two of three narrate the sickness running to an end — an elapsed course on a key with no event provenance, in the indicative, on a matter the pulse adjudicates.
+3. **The interior.** One of three closes on what the town knows and fears; the FEELING move does not exist.
+
+**What is SAFE and under-used, and where the twelve faces should be spent:** the granary as an ADMINISTERED, COMMUNAL or STATE-MANAGED object named three ways by the catalog; the absence as a SHAPE rather than an abstraction (the whole care column, empty, on a roster rich enough to hold a state granary); the burial provision this range always carries against the care provision it never does; the domestic tending the record is silent about; and the stranger who falls ill with nowhere to be taken.
+
+**The thread to write against:** this paragraph is always LAST and always follows an `Economic Survival` sentence about money, pay or funding. It closes the whole threat block. Carry a noun forward rather than a theme, and do not let all four faces of a variant close on the same kind.
+
+**Twelve faces, three variants, no slot on vid 2.** Nothing in this file is a face.
