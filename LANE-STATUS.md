@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-11 22:13:31 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-11 22:19:15 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = 3706c6df7 §919.2: the OPUS CHAIR MANUAL amended — the refuter and re-refuter seat is OPUS at the 
 
@@ -214,7 +214,7 @@ stat: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-
 - **L-PROBE-2 (chair)**: cheap /6 tips · full:  · bracket: 
 ## REWRITE 8b PACKETS (rewrite/DS-DEF-n/<pool>/: skeleton · draft-round-N · refine · kept · refute* · cure-round-N · cured-round-N; JUDGMENT.md / JUDGMENT-cure.md per block; the entailment + referent tables)
 - DS-DEF-11: pools 5 · skeleton 5 · draft 5 · refine 5 · kept 5 · refute 13 · cure 10 · cured 10 · JUDGMENT yes · JUDGMENT-cure yes
-- DS-DEF-2: pools 26 · skeleton 26 · draft 36 · refine 26 · kept 26 · refute 29 · cure 0 · cured 0 · JUDGMENT no · JUDGMENT-cure no
+- DS-DEF-2: pools 26 · skeleton 26 · draft 36 · refine 26 · kept 26 · refute 31 · cure 0 · cured 0 · JUDGMENT no · JUDGMENT-cure no
 - entailment: surveys 6 · refutes 6 · ENTAILMENT-TABLE.draft.md 09-11 06:07 346945 B · referent surveys 6 · referent refutes 6 · REFERENT-TABLE.draft.md 09-11 11:01 285943 B
 - HOLD-VITEST absent · runner count 0
 
@@ -231,7 +231,7 @@ json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
 - LAST-RUNS: tolkien r7-not-launched/(none — nothingToRun 17:26), kay r8/wf_d76e605d-6d1, leguin r11/wf_49ef9b66-2e6, wolfe r8/wf_8cd21474-a7b, martin r8/wf_0cd91522-1ce, hobb r7/wf_255b6391-7fb, dnd r13/wf_2c525e43-1f2, ai r12/wf_6dd3b009-2b0, dnd_r13 r13/wf_2c525e43-1f2, leguin_r11 r11/wf_49ef9b66-2e6, dnd_r14 r14/
 
 ## WORKFLOW RUNS of chair session 4ed79a2b-6cd2-45cf-ab97-83cdad49c30b — PER AGENT, PER LANE (owner 09-11: save progress per agent per lane; a run dies with the session, its journal + the packets + the dock commits are the checkpoint; journals mirrored under $SC/_progress/<wf>/)
-- **wf_b9aa5993-4a0** (mtime 09-11 22:10): agent calls 131 (105 distinct) · DONE 98 · FAILED (not retried) 0 · RETRIED (superseded attempts) 23 · IN FLIGHT 10 — mirror `_progress/wf_b9aa5993-4a0/`
+- **wf_b9aa5993-4a0** (mtime 09-11 22:10): agent calls 131 (105 distinct) · DONE 101 · FAILED (not retried) 0 · RETRIED (superseded attempts) 23 · IN FLIGHT 7 — mirror `_progress/wf_b9aa5993-4a0/`
     - `addd4fc66` ? · DONE · transcript 09-11 15:37 609 KB · 39 tool calls · files: skeleton.md, skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--economic-su
     - `a9316f3de` MARKER Economic Survival: WEAK · DONE · transcript 09-11 15:35 540 KB · 30 tool calls · files: "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--economic-survival-weak/skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--economic-su
     - `ad9a7c83a` MARKER Economic Survival: CRITICAL · DONE · transcript 09-11 15:36 658 KB · 42 tool calls · files: def2-block.txt, skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--economic-su
@@ -358,11 +358,11 @@ json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
     - `a27b63356` REFUTER Economic Survival: ADEQUATE · DONE · transcript 09-11 22:07 634 KB · 30 tool calls · files: skel2.txt, refute-round-1.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--economic-su
     - `a5f86b5e7` REFUTER Economic Survival: WEAK · DONE · transcript 09-11 22:10 735 KB · 32 tool calls · files: "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--economic-survival-weak/refute-round-1.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--economic-su
     - `a5f6f28ba` REFUTER Economic Survival: CRITICAL · DONE · transcript 09-11 22:12 663 KB · 25 tool calls · files: "$D/refute-round-1.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--economic-su
-    - `ae1692a23` REFUTER Disasters & Famine: granary AND hospital · IN FLIGHT · transcript 09-11 22:08 633 KB · 31 tool calls · files: "$D/refute-round-2.md · last: Bash SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
+    - `ae1692a23` REFUTER Disasters & Famine: granary AND hospital · DONE · transcript 09-11 22:15 789 KB · 33 tool calls · files: "$D/refute-round-2.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--disasters-f
     - `a3a2294a9` REFUTER Disasters & Famine: granary AND parish care only · DONE · transcript 09-11 22:13 690 KB · 27 tool calls · files: $P/refute-round-1.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--disasters-f
-    - `af029ef61` REFUTER Disasters & Famine: granary, NO medical provision · IN FLIGHT · transcript 09-11 22:08 512 KB · 28 tool calls · last: Bash SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
-    - `ac81c30e5` REFUTER Disasters & Famine: NO reserves, hospital present · IN FLIGHT · transcript 09-11 22:10 541 KB · 30 tool calls · last: Bash SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
-    - `ac786186d` REFUTER Disasters & Famine: NO reserves, NO medical provision · IN FLIGHT · transcript 09-11 22:12 549 KB · 34 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
+    - `af029ef61` REFUTER Disasters & Famine: granary, NO medical provision · DONE · transcript 09-11 22:17 727 KB · 35 tool calls · files: refute-round-1.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--disasters-f
+    - `ac81c30e5` REFUTER Disasters & Famine: NO reserves, hospital present · DONE · transcript 09-11 22:17 702 KB · 32 tool calls · files: "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--disasters-famine-no-reserves-hospital-present/refute-round-2.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--disasters-f
+    - `ac786186d` REFUTER Disasters & Famine: NO reserves, NO medical provision · IN FLIGHT · transcript 09-11 22:18 692 KB · 36 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
 - **wf_2e33aae5-027** (mtime 09-11 15:16): agent calls 68 (56 distinct) · DONE 18 · FAILED (not retried) 32 · RETRIED (superseded attempts) 12 · IN FLIGHT 6 — mirror `_progress/wf_2e33aae5-027/`
     - `a8df09f92` MARKER Beasts & Monsters: plagued, perimeter AND organized force · DONE · transcript 09-11 11:12 801 KB · 43 tool calls · files: "$D/skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--beasts-mons
     - `a2d2b0711` MARKER Beasts & Monsters: plagued, perimeter but NO force to hold it · DONE · transcript 09-11 11:12 667 KB · 27 tool calls · files: "$SC/rewrite/DS-DEF-2/ds-def-2--beasts-monsters-plagued-perimeter-but-no-force-t/skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--beasts-mons
@@ -490,4 +490,4 @@ json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
     - `ad30ac0bb` FOLDER · DONE · transcript 09-11 06:02 1531 KB · 36 tool calls · files: _partD.md, _partE.md, _partF.md, _partG.md · result: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/entailment/ENTAILMENT-TABLE.draft.md
 
 ## PROCESSES: 57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 2.22 2.12 2.17
+load: 2.02 2.10 2.16
