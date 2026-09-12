@@ -1,0 +1,21 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 51,
+ "firstTs": "2026-09-12T01:26:12.864Z",
+ "lastTs": "2026-09-12T01:30:58.908Z",
+ "tools": {
+  "Bash": 10,
+  "Read": 1
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "Now the draft, the refine record, and the two law tables' relevant rows.",
+ "run": "wf_b9aa5993-4a0",
+ "agent": "a425c0a03ada6fe46",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/4ed79a2b-6cd2-45cf-ab97-83cdad49c30b/subagents/workflows/wf_b9aa5993-4a0/agent-a425c0a03ada6fe46.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}
