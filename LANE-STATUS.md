@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-12 04:04:53 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-12 04:10:34 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = 999fa681b §919.3: THE RE-CUT'S RETROSPECTIVE VALIDATION RECORD (part 1 of 2) — the owner's word o
 
@@ -238,19 +238,19 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
 - LAST-RUNS: 
 
 ## WORKFLOW RUNS of chair session 4ed79a2b-6cd2-45cf-ab97-83cdad49c30b — PER AGENT, PER LANE (owner 09-11: save progress per agent per lane; a run dies with the session, its journal + the packets + the dock commits are the checkpoint; journals mirrored under $SC/_progress/<wf>/)
-- **wf_11bb797e-f25** (mtime 09-12 04:04): agent calls 12 (12 distinct) · DONE 6 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 6 — mirror `_progress/wf_11bb797e-f25/`
+- **wf_11bb797e-f25** (mtime 09-12 04:04): agent calls 12 (12 distinct) · DONE 8 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 4 — mirror `_progress/wf_11bb797e-f25/`
     - `a507343ec` ? · DONE · transcript 09-12 04:00 292 KB · 13 tool calls · files: items-W1-W10.md · result: {"slice": "W1-W10 \u2014 the ten writer rules W1\u2013W10 plus ADDENDUM 12's chair rulings R-i, R-ii, R-iii, R-iv, R-vi, R-viii\u2032 (as amended 2026-09-10)", 
     - `a5adaf2e5` ? · DONE · transcript 09-12 04:01 267 KB · 6 tool calls · files: items-W11-W19.md · result: {"slice": "W11\u2013W19 \u2014 the writer bars of brief ADDENDUM 13 part A, section B (defense, crisis and faith desks), re-cut under ADDENDUM 14 from LICENCE t
     - `ac712a154` ? · DONE · transcript 09-12 04:01 272 KB · 8 tool calls · files: items-W20-W27.md · result: {"slice": "W20\u2013W27 \u2014 the eight referent bars (layer \u00b7 baked-power \u00b7 person \u00b7 fused-agent \u00b7 record-word \u00b7 external-body \u00b7
     - `af023ddf4` ? · DONE · transcript 09-12 04:04 488 KB · 26 tool calls · files: items-ET-2.md · result: {"slice": "ET-2 \u2014 section 2 of the ratified ENTAILMENT TABLE: all six desk tables and their REFUSED sub-tables (D-1..D-32, D-R1..D-R5; G-1..G-23, G-R1..G-R
     - `a9e4874c9` ? · DONE · transcript 09-12 04:01 396 KB · 22 tool calls · files: et34-head.md, et34-foot.md, items-ET-3-4.md · result: {"slice": "ENTAILMENT TABLE sections 3 and 4 \u2014 135 LABEL TRAPS (L-1\u2026L-135) and 41 ALIAS TRAPS (A-1\u2026A-41), re-cut under ADDENDUM 14 (LICENCE \u219
     - `ac97eb271` ? · DONE · transcript 09-12 04:04 465 KB · 31 tool calls · files: head.md, tail.md, $B/items-RT-2-5.md · result: {"slice": "RT-2-5 \u2014 the REFERENT TABLE \u00a7\u00a72 (six desks' noun rows + six REFUSED tables), 3 (overlaps OV-1\u2026OV-39), 4 (29 power slots \u00b7 19
-    - `a2b3b7bd3` ? · IN FLIGHT · transcript 09-12 04:04 202 KB · 5 tool calls · last: Bash cd "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scra
-    - `a54561d56` ? · IN FLIGHT · transcript 09-12 04:04 232 KB · 6 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchp
-    - `a1986f57c` ? · IN FLIGHT · transcript 09-12 04:04 207 KB · 7 tool calls · last: Bash sed -n '155,195p' "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d
-    - `a06969752` ? · IN FLIGHT · transcript 09-12 04:04 241 KB · 7 tool calls · files: arch_ids.txt, src_ids.txt · last: Bash cd "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scra
-    - `a48e82400` ? · IN FLIGHT · transcript 09-12 04:04 186 KB · 6 tool calls · last: Bash cd "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scra
-    - `aea8fef96` ? · IN FLIGHT · transcript 09-12 04:04 259 KB · 9 tool calls · last: Bash cd "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scra
+    - `a2b3b7bd3` ? · DONE · transcript 09-12 04:10 345 KB · 13 tool calls · files: "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/retro/fidelity-W1-W10.md · result: **VERDICT: FAITHFUL WITH NOTED DEFECTS — 24 items checked.**  Report written to `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-
+    - `a54561d56` ? · IN FLIGHT · transcript 09-12 04:09 388 KB · 15 tool calls · files: diffout.txt · last: Bash cd "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scra
+    - `a1986f57c` ? · DONE · transcript 09-12 04:10 341 KB · 14 tool calls · files: fidelity-W20–W27 — the eight referent bars (layer · baked-power · person · fused-agent · record-word · external-body · visibility · angle-tag) of brief ADDENDUM 13 PART B, decomposed into 20 items.md · result: VERDICT: **FAITHFUL WITH NOTED DEFECTS** — 20 of 20 items checked (every item in the source), including all 7 SPLIT items on both halves, all 6 NEW FINDINGS, an
+    - `a06969752` ? · IN FLIGHT · transcript 09-12 04:09 462 KB · 29 tool calls · files: arch_ids.txt, src_ids.txt · last: Bash cd "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scra
+    - `a48e82400` ? · IN FLIGHT · transcript 09-12 04:10 488 KB · 30 tool calls · last: Bash cd "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4ed79a2b-6cd2-45cf-ab97-83cdad49c30b/scra
+    - `aea8fef96` ? · IN FLIGHT · transcript 09-12 04:10 553 KB · 34 tool calls · last: Bash cd "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scra
 - **wf_c1990c61-ad7** (mtime 09-12 03:10): agent calls 14 (14 distinct) · DONE 14 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 0 — mirror `_progress/wf_c1990c61-ad7/`
     - `a39f4c8b2` ? · DONE · transcript 09-12 02:28 460 KB · 28 tool calls · files: convert-W1-W10.md · result: {"slice": "ADDENDUM 12: the ten writer rules W1\u2013W10 and the chair's rulings R-i, R-ii, R-iii, R-iv, R-vi, R-viii\u2032 (as amended) \u2014 re-classified un
     - `a60b1ed6c` ? · DONE · transcript 09-12 02:32 635 KB · 48 tool calls · files: convert-W11-W19.md · result: {"slice": "Writer bars W11\u2013W19 of ADDENDUM 13 part A (the entailment bars: material, garrison, watch, label, alias, the gate word, crisis, stress-record, f
@@ -571,4 +571,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `ad30ac0bb` FOLDER · DONE · transcript 09-11 06:02 1531 KB · 36 tool calls · files: _partD.md, _partE.md, _partF.md, _partG.md · result: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/entailment/ENTAILMENT-TABLE.draft.md
 
 ## PROCESSES: 57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 2.34 2.33 2.25
+load: 1.84 1.96 2.09
