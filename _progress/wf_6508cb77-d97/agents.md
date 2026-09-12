@@ -1,4 +1,4 @@
-# wf_6508cb77-d97 — per-agent progress, 2026-09-12 17:07:10
+# wf_6508cb77-d97 — per-agent progress, 2026-09-12 17:12:46
     - `a87757ba9` REFUTER defense · RETRIED (a later attempt on the same key runs) · transcript 09-11 06:25 526 KB · 21 tool calls
     - `a29122cfc` REFUTER general · RETRIED (a later attempt on the same key runs) · transcript 09-11 06:25 509 KB · 22 tool calls · files: general.referent.refute.md
     - `ace38485c` REFUTER economy · RETRIED (a later attempt on the same key runs) · transcript 09-11 06:26 613 KB · 47 tool calls · files: $SC/rewrite/entailment/economy.referent.refute.md
