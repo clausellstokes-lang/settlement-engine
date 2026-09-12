@@ -11,7 +11,7 @@ Test applied: **a face is LAWFUL unless it CONTRADICTS the record.** "The card d
 4. **Record words, citation rules, standpoints and constructions are STRUCK wholesale.** W24's ratified-noun table, arm A13's citation ban, the `[ledger]`/`[elder]`/`[visitor]` stance rules, R-i…R-iv, R-vi, the maxim-frame and doubled-beat rules policed tone.
 5. **An unnamed person is now a plot hook.** W22 survives only as floor 3: a NAMED character with a fate, and nothing predicated of a deity. "Somebody is carrying a leash", "who is holding the keys", "the clerks have decided", "the collectors travel in pairs" are all licensed.
 
-Counts: **CONTRADICTION 171 · MODEL 14 · SCOPE 9 · SPLIT 21 · STRUCK 312** over 527 items.
+Counts: **CONTRADICTION 193 · MODEL 13 · SCOPE 10 · SPLIT 24 · STRUCK 327** over 567 items (every row of §2's six desks and six REFUSED tables, §3's 39 overlaps, §4's 29 slots and 19 visibility rows, §5's 189 findings).
 
 Column key: **id** · **gist** · **verdict** · **field / ground** (for CONTRADICTION and MODEL this is the field, file and line that denies the face) · **what a writer may now do**.
 
@@ -472,3 +472,248 @@ Note for the chair: ADDENDUM 14's four floors do not name an AUDIENCE floor. Whe
 | VIS-17 | `'Corrupt Official'` — a mandated NPC role naming the corrupt officer OPENLY in a public roster string | MODEL | `npcGenerator.js:1524`, `:1532` — the engine publishes it, so prose may not call that corruption hidden | — |
 | VIS-18 | the desks' DM faces in general (§0e's editorial test) | STRUCK | an authored editorial test, not a field | — |
 | VIS-19 | the caller-side carriers (`audience`, `publicDossier` nulling the desk, the DS-POW-7 secrets filter) | STRUCK | an engine gate no writer can breach | — |
+
+## 5.1 THE DEFENSE DESK'S WRONG-LAYER FINDINGS
+
+| id | quote | verdict | field / ground | a writer may now |
+|---|---|---|---|---|
+| D-F1 | "stands better than the watch that should man it" | CONTRADICTION | `hasWatch` false on much of WALLED-STRAINED; `safetyProfile.js:300` prints the absence beside it | write the wall against its keeping, where a watch stands |
+| D-F2 | "The watch at {settlement} has been overwhelmed" (×8 on the safety label) | CONTRADICTION | the safety label is reachable with NO law body (`safetyProfile.js:56-62`): FALSE at thorp/hamlet/village | — |
+| D-F3 | "doing less each season as the watch thins" on a NO-force branch | CONTRADICTION | `hasWatch` / the roster | — |
+| D-F4 | "rely on that rather than on the watch's temper" on a `court ; prison` read | CONTRADICTION | `hasWatch` | write the watch's temper where the watch stands |
+| D-F5 | "it is not the watch's doing" from a NAME classification | CONTRADICTION | `hasWatch` | — |
+| D-F6 | "Somebody at the {seat} of {settlement} is carrying a leash" | STRUCK | floor 3 relaxed: an UNNAMED person may act and hold a leash | keep it — it is the plot hook the owner asked for |
+| D-F7 | "counted at the gate by somebody whose job that is" | SPLIT | KEPT: "the gate" imports a wall the pool never read (`hasWalls`). STRUCK: the person-as-agent charge | give the job to somebody, on a walled town |
+| D-F8 | "depends on who is holding the keys" | STRUCK | ADDENDUM 14 names "keep a key" as licensed | — |
+| D-F9 | "drifts with whoever is doing the holding" | STRUCK | as D-F8 | — |
+| D-F10 | "as far as somebody willing to enforce it is standing" | STRUCK | as D-F8 | — |
+| D-F11 | "is somebody's charge rather than nobody's" | STRUCK | as D-F8 | — |
+| D-F12 | "does not run through somebody's permission" | STRUCK | an unmodelled permission is silence | — |
+| D-F13 | "the comfort has somebody maintaining it" | STRUCK | as D-F8 | — |
+| D-F14 | "A thinner watch or a bolder operator would show up" | CONTRADICTION | the counterfactual presupposes a watch; `hasWatch` may be false | the operator half is now free |
+| D-F15 | "The people who would have to hold {settlement} … are already owed" | STRUCK | the debt IS the producer's own reading of the band (`defenseDisplay.js:221`); persons are licensed | — |
+| D-F16 | "the town has decided that arming itself when needed costs less" | STRUCK | a cause the record is silent on — silence is permission | give the town a reason |
+| D-F17 | "what stands between the town and one is the cost" | STRUCK | as D-F16 | — |
+| D-F18 | "an end … the town has not yet had to think about" | STRUCK | as D-F16 | — |
+| D-F19 | "the town is being administered by its syndicate" | SPLIT | KEPT: "syndicate" is the `organized` key's own label (`defenseDisplay.js:183-195`) and contradicts a `diffuse` panel. STRUCK: the untyped possessive | write the possessive; match the structure word to the panel |
+| D-F20 | "The hall … moves against the operators and the operators move back" | STRUCK | a reciprocal relation the ladder does not record — silence | keep the movement |
+| D-F21 | "the town's courts are spending down a reputation" | STRUCK | `hasCourtSystem` is the engine's own court claim; "courts" as a functional plural is idiom | — |
+| D-F22 | "the hall's decisions are the hall's" (×8) | SPLIT | KEPT: the hall's EXISTENCE below town tier and any claim denying the `{seat}` label. STRUCK: the baked-power bar — the module's own comment accepts "the hall" as the fallback | write the hall at town and up |
+| D-F23 | "a falling-out with the hall" on a block with no `{seat}` | STRUCK | as D-F22's struck half | — |
+| D-F24 | "how much of the perimeter has nobody on it" | CONTRADICTION | `hasWalls` — the perimeter asserted from a five-arm summary that can be reached unwalled | write the manning; the perimeter needs the works |
+| D-F25 | "the garrison can be kept paid while they last" | CONTRADICTION | `forces.garrison.present` / `hasGarrison` on an economic band read | write the paying; name the body the town has |
+| D-F26 | "keeps a watch, which is a matter of order rather than of war" | SPLIT | KEPT: the imported `walls` the pool does not read. STRUCK: the body/organ layer-crossing on the one pool that guarantees the watch | narrate the watch's order on the watch pool |
+| D-F27 | "Nothing criminal has reached the {seat} at {settlement}" | CONTRADICTION | `rulingStructure.js:284`, `:452` — at `Corrupt Council` the sentence denies the label rendered inside it | — |
+| D-F28 | "the muster behind it is thinning" | CONTRADICTION | `forces.militia.present` / `hasGarrison` — wrong on the walled watch-only town | — |
+
+## 5.2 THE GENERAL DESK'S FINDINGS
+
+| id | quote | verdict | field / ground | a writer may now |
+|---|---|---|---|---|
+| G-F1 | "The muster roll at {settlement} is long and current" | CONTRADICTION | roster `Citizen militia` — the muster's only holder (`holderTable.js:280-287`) | — |
+| G-F2 | "The watch at {settlement} is a watch and not a garrison" | CONTRADICTION | a garrisoned town reaches WEAK (`10 + 28 × 0.6`); the roster prints `Garrison` | — |
+| G-F3 | "counted in … what the hall issues" | STRUCK | a place-metonym of the power | — |
+| G-F4 | "{settlement} keeps no muster worth the name" | CONTRADICTION | negates a body the roster may print | — |
+| G-F5 | "The watch at {settlement} answers what is reported to it" | SPLIT | KEPT: `hasWatch`. STRUCK: the unrecorded-duty bar (`dutyNamed: 0`) | say what the watch is for |
+| G-F6 | "more going on … than the watch troubles itself with" | CONTRADICTION | `hasLawInfra` is satisfied with no watch at all | — |
+| G-F7 | "Walls, garrison and stores at {settlement} are all of a piece" | CONTRADICTION | three bodies on a Fortress label reachable without all three | — |
+| G-F8 | "{settlement} has walls in the sense that there is a line" | CONTRADICTION | the band is reachable with `hasWalls` false | — |
+| G-F9 | "The watch's book at {settlement} is thick" | CONTRADICTION | `hasWatch` (the record word itself is struck) | let the watch keep a thick book — where there is a watch |
+| G-F10 | "the watch takes the complaint" | CONTRADICTION | `hasWatch` on a tension read | — |
+| G-F11 | "Whatever holds {settlement}'s streets after dark, … not the watch" | CONTRADICTION | negates a body the roster may print | — |
+| G-F12 | "The watch's returns at {settlement} are short" | CONTRADICTION | `hasWatch` — the safetyLabel pool fires on watchless towns; *returns* itself is now free | — |
+| G-F13 | "The watch … is stretched across more than it can cover" | CONTRADICTION | `hasWatch` | the capacity claim is now free |
+| G-F14 | "the fraction is not chosen by the watch" | CONTRADICTION | `hasWatch`; the unnamed chooser is now free | — |
+| G-F15 | "the burial rolls run longer than the harvest explains" | STRUCK | a record word (W24) | — |
+| G-F16 | "what the market can sell and what the levy can raise" | STRUCK | a capacity phrase, not an existence claim | — |
+| G-F17 | "The departure rolls are empty" | STRUCK | a record word | — |
+| G-F18 | "{settlement}'s complaint book has more entries opened than closed" | STRUCK | a record word and a comparative — not a count | — |
+| G-F19 | "a habit of the gate, not a policy of the hall" | CONTRADICTION | "the gate" imports `hasWalls`; the hall metonym is struck | — |
+| G-F20 | "{settlement} has a hall and a seat in it" | CONTRADICTION | an EXISTENCE claim; no hall row below town tier | — |
+| G-F21 | "neither holds enough of the hall to end the argument" | STRUCK | a metonym | — |
+| G-F22 | "{settlement} kept its own hall through the occupation" | CONTRADICTION | an existence claim across a recorded occupation | — |
+| G-F23 | "what is argued in the hall now" | STRUCK | a metonym | — |
+| G-F24 | "who will hold the seat next" · "The seat is held firmly enough" | STRUCK | the seat is the power's own class word | — |
+| G-F25 | "arrangements the hall would rather not itemise" | STRUCK | a metonym | — |
+| G-F26 | "its own hall still governs" · "The occupier collects and does not administer" | STRUCK | a metonym and a class word | — |
+| G-F27 | "The seat in {settlement} decides" · "they meet in the market rather than in the hall" | STRUCK | `{govFaction}` exists; the class word was always available | — |
+| G-F28 | "{settlement}'s hall put it where it is" | STRUCK | a decreeing body the steading record does not name — silence | keep it |
+| G-F29 | "both halls are working to keep those two facts apart" | STRUCK | a metonym ×2 | — |
+| G-F30 | "Instructions from {settlement}'s hall are being complied with slowly" | STRUCK | a metonym | — |
+| G-F31 | "{settlement}'s hall, and the rooms that matter more" | STRUCK | a metonym | — |
+| G-F32 | "the arrangement holds, and it holds on one person's word" | STRUCK | an unnamed person as the load-bearing referent is now licensed | — |
+| G-F33 | "rules here have rooms, and the rooms have officers" | STRUCK | the role bar | — |
+| G-F34 | "the founders' argument has not yet been improved on" | STRUCK | atmosphere on a founding-age read; no date, no count | — |
+| G-F35 | "you will be given a name in {counterpart} more often" | STRUCK | an unnamed person | — |
+| G-F36 | "it belongs to a few people on each side" | STRUCK | persons | — |
+| G-F37 | "both sides have begun naming individuals rather than practices" | STRUCK | persons | — |
+| G-F38 | "a careful eye goes looking for a patron" | STRUCK | a typed power with no read — silence is permission | — |
+| G-F39 | "{settlement} pays for its own defense in wages, not only in stone" | CONTRADICTION | DS-GEN-17 GARRISONED's key is satisfied by `walls` · `citadel` · `Watchtower` alone (`priorityHelpers.js:45`) — a pay claim the key denies | — |
+| G-F40 | "{faction} holds {band} of the power in {settlement}" | STRUCK | the layer is right; the slots are a wiring defect | — |
+| G-F41 | "{settlement}'s trade is strained and its watch is not distracted" | CONTRADICTION | `hasWatch` on a `chain.status` trigger | — |
+| G-F42 | "{settlement}'s food chain is strained and its granary is not" | CONTRADICTION | `hasGranary` is a separate boolean the trigger does not read | — |
+| G-F43 | "keeps stores against the bad season and care for the bad year" | CONTRADICTION | asserts BOTH disjuncts of `hasGranary ‖ hasHospital` | assert one |
+| G-F44-48 | the `hookEscalation.js` stages that bake a council, the watch, a person, an assembly and `{controller}` as an agent | STRUCK | the ENGINE's own strings on the same page (OV-24) — they cannot be a writer's finding, though they are an engine defect (newFindings) | — |
+| G-F49-83 | the 35 record-word rows ("the rolls carry it", "the books show", "off the rolls" …) | STRUCK | W24 and the metonym-vs-citation question are struck wholesale; the two wrong-organ cites go with them | write rolls, books, counts, ledgers on any read |
+
+## 5.3 THE ECONOMY DESK'S FINDINGS
+
+| id | quote | verdict | field / ground | a writer may now |
+|---|---|---|---|---|
+| E-F1 | "the town has arranged its light, its roads and its watch around them" | CONTRADICTION | `hasWatch` on a terrain read, RESOLVED, mounted and player-audible | — |
+| E-F2 | "{institution} at {settlement} is open and short of what it works with" | STRUCK | the fill names a row the town HAS; the layer crossing is struck | — |
+| E-F3 | "The guilds are losing their grip a little further each season" | CONTRADICTION | `hasGuild` fires on `Thieves' guild` (`priorityHelpers.js:57`) — the roster says which guild | write the guilds where a craft or merchant guild stands |
+| E-F4 | "The duties collected fall well short of the trade actually done" | STRUCK | a record word | — |
+| E-F5 | "No single trade … is large enough to dictate to the hall" | STRUCK | a metonym and a fused relation | — |
+| E-F6 | "The granary doors open more often than they shut" | CONTRADICTION | `hasGranary` | — |
+| E-F7 | "The granary door is watched now." | CONTRADICTION | `hasGranary`; the recency word is now free | — |
+| E-F8 | "The gate returns are thin in both columns." | STRUCK | *returns* is free and the pool is WIRING-UNRESOLVED (it never fires) | — |
+| E-F9 | "A real portion of {settlement}'s trade sits outside the rolls" | STRUCK | recorded as licensed even under the old law | — |
+| E-F10 | "The {chain} is on the rolls and off the road." | STRUCK | a record word on authored-only pools | — |
+| E-F11 | "{faction} is not paying what he is paying." | STRUCK | a wiring finding (the slot can never render) | — |
+| E-F12 | "{faction} takes its portion and has never reached for a second" | STRUCK | a negative history is atmosphere, not an invented date or count | — |
+| E-F13 | "Inside it, one name sits on every stage." | STRUCK | an oblique power was a permission dodge; obliquity is now the hook | — |
+| E-F14 | "The {chain} runs on {institution}'s craft" | STRUCK | an unwired pool; the fused relation is free | — |
+| E-F15 | "{institution} sells work rather than goods." | STRUCK | an institution as an economic agent is now free | — |
+| E-F16 | "There is some thieving and some selling without a licence." | STRUCK | a record/instrument word | — |
+| E-F17 | "there is nobody guarding the region's roads" | STRUCK | an absence at region scope the record does not deny | — |
+| E-F18 | "Merchants operating in the shadow economy have a cost advantage" | CONTRADICTION | `EconomicsTab.jsx:664` — a FROZEN literal with no `dm-only` mark inside a block the annex declares wholly `dm-only` | — |
+| E-F19 | "The water is {settlement}'s road and its mill both" | CONTRADICTION | the roster names the mill; `river_mills` is an `infrastructure` resource, not a mill row | write the water as the road |
+| E-F20 | "{settlement}'s books close with a margin" (+ 19 `books`/`accounts`/`ledgers` rows) | STRUCK | W24 and the `[ledger]` standpoint question — both struck | — |
+| E-F21 | "the market is not empty" on a TOLL-BAR read | STRUCK | a wrong-organ (layer) charge | — |
+
+## 5.4 THE POWER DESK'S FINDINGS
+
+| id | quote | verdict | field / ground | a writer may now |
+|---|---|---|---|---|
+| P-R1a | "Crime finds little room … and the watch is not the reason" | CONTRADICTION | `hasWatch` on a legitimacy band | — |
+| P-R1b | "it governs rationing, the gates and the watch rota" | CONTRADICTION | `hasWalls` + `hasWatch` on a stability string | — |
+| P-R1c | "not the harvest, not the watch, not the walls" | CONTRADICTION | a three-body negation against the roster | — |
+| P-R1d | "Prosperity and a working watch did what no investigation did" | CONTRADICTION | `hasWatch`; the fused agency is now free | — |
+| P-R1e | "the somewhere is the part the watch has never reached" | CONTRADICTION | `hasWatch` | — |
+| P-R1f | "is being judged at the granary door, and the granary is not helping" | CONTRADICTION | `hasGranary` | — |
+| P-R1g | the hall, 50 occurrences across six blocks | STRUCK | a place-metonym at town+ (the existence case is RT2.4-02) | write the hall |
+| P-R1h | "Goods reach {settlement} around the customs rather than through them" | CONTRADICTION | the roster: `Customs house` (`institutionServices.js:530`) | — |
+| P-R1i | "moved back into lawful circulation through a clearinghouse" | STRUCK | a body word with no engine row anywhere — silence is permission | keep the clearinghouse |
+| P-R1j | "A council falls to unrest rather than to a rival" | STRUCK | the pool's own key IS the `council` ruling-power value | — |
+| P-R4a | "the clerks record almost nothing they have had to chase" | STRUCK | `'City Clerk'` is emitted, and the act charge rested on the person bar | — |
+| P-R4b | "the exceptions are few enough that the clerks can name them" | STRUCK | as P-R4a | — |
+| P-R4c | "the clerks who keep them have stopped chasing what is missing" | STRUCK | as P-R4a | — |
+| P-R4d | "enough officials are agreeable for it to be routine" | STRUCK | a person with a disposition is now licensed | — |
+| P-R4e | "The person who speaks for {faction} … is not free to speak" | STRUCK | an unnamed person; the `dm-only` mark carries the visibility | — |
+| P-R4f | "leaves an operator very few doors to lean on" | STRUCK | a criminal person unnamed | — |
+| P-R4g | "A leader who bound the combination … left the seat" | STRUCK | an unnamed leader | — |
+| P-R4h | "a ruler with the town behind them can do things" | STRUCK | the maxim-frame rule (W5) policed construction | — |
+| P-R5a | "A house that keeps re-learning who it answers to gets less done" | STRUCK | a fused agent — silence | — |
+| P-R5b | "Somebody well down inside {faction} … is answering elsewhere" | SPLIT | KEPT: `{faction}` renders the RULING STRUCTURE's own name, so the accusation lands on the governing body (`powerStateProse.js:900-901`). STRUCK: the person, the depth and the relation | keep the somebody; not inside that slot |
+| P-R5c | "A small interest buys a great deal here" | STRUCK | a power-layer purchase on an unread scalar — silence | — |
+| P-R5d | "{faction} outweighs everyone who wants the {seat}" | CONTRADICTION | both slots render the SAME STRING (`powerStateProse.js:860`) — one actor outweighing itself | — |
+| P-R2 | `{seat}` + `{faction}` from one `governing` | CONTRADICTION | `powerStateProse.js:875-876`, `:909`, `:953`, `:962` | — |
+| P-R3 | DS-POW-6's `{faction}` documented as the captured house, filled with the governing body | CONTRADICTION | `powerStateProse.js:900-901`, `:962` | — |
+| P-R6 | "{settlement} has a governing body and it has a government" | CONTRADICTION | `factionDynamics.js:132-133` — a second unnamed power coextensive with the band | — |
+| P-W1 | DS-POW-1's card: "NAMED BUT NEVER FILLED: {seat}" while 38 of 41 variants carry it | CONTRADICTION | `resolveBag` first-match at `powerStateProse.js:634` — the instrument denies the leaf | — |
+| P-W2 | DS-POW-5's card licenses the COURT's bloc record on a ruling-power classification pool | CONTRADICTION | `powerStateProse.js:709-713` — a layer error created by the instrument | — |
+
+## 5.5 THE STRESSORS DESK'S FINDINGS
+
+| id | quote | verdict | field / ground | a writer may now |
+|---|---|---|---|---|
+| S-F1 | "The garrison is the danger. It drilled at midnight without orders" | SPLIT | KEPT: `hasGarrison` — the roster may carry no garrison. STRUCK: the "invented" charge; the sentence is the engine's own hook (`stressorDynamics.js:689`) | keep the drill, on a garrisoned town |
+| S-F2 | "armed, disciplined, and already inside the walls by right" | CONTRADICTION | `hasWalls` | — |
+| S-F3 | "the houses that finance {settlement} have decided to finance something else" | STRUCK | a class plural and a decision — both free | — |
+| S-F4 | "it is being asked from a pulpit" | CONTRADICTION | `hasChurch` / the roster's religious rows | write the asking; the pulpit needs a house |
+| S-F5 | "Wards around the council hall have failed more than once" | STRUCK | the engine's own hook (`:701`); the per-institution failure is silence | — |
+| S-F6 | "A rump session voted itself emergency powers while the chamber stood" | STRUCK | the engine's own hook (`:705`) | — |
+| S-F7 | "The garrison is quartered inside the walls" | CONTRADICTION | `forces.garrison.present` + `hasWalls` — the occupier's force in the town's own bucket word | write the occupier's men |
+| S-F8 | "the treasury and the thin garrison, not in the walls" | STRUCK | a dark pool with no read; it never fires | — |
+| S-F9 | "Garrisons, administrators and suppression tie down strength" | STRUCK | a dark pool carrying the producer's own description | — |
+| S-F10 | "The watch's patrols at {settlement} have been rewritten" | CONTRADICTION | `hasWatch` — `'local watch'` prints below town only where the flag resolves | write patrols (`patrol` is a `force`-class token) |
+| S-F11 | "{settlement} keeps more watch than it can afford" | STRUCK | "keeps watch" is definitional and the watch arms BOTH purses (`defenseGenerator.js:244-253`) — the pay read is licensed | — |
+| S-F12 | "The levies of a drowning treasury finally broke the commons" | STRUCK | VERBATIM the record's own `reason` (`stressorDynamics.js:844`) | — |
+| S-F13 | "the town's own hall now advises rather than decides" (+2) | SPLIT | KEPT: at thorp there is no hall of any kind — the roster denies it. STRUCK: the hall-as-agent bar | write the hall deciding, at town and up |
+| S-F14 | "{settlement}'s granary holds… issued by rule rather than by price" | CONTRADICTION | `hasGranary` | write the issuing rule |
+| S-F15 | "The market has grain, and the price of it has become" | CONTRADICTION | `hasMarket` / the roster at small tiers | write the price |
+| S-F16 | "The altars… are tended and the tending is new" | CONTRADICTION | the roster's religious rows; the recency is now free | — |
+| S-F17 | "claim the same seal, the same office and the same tax" | STRUCK | the engine's own hook (`:706`) | — |
+| S-F18 | "now a person with dangerous knowledge and no protection" | STRUCK | an unnamed person — the ADDENDUM 14 example | — |
+| S-F19 | "the clerks have quietly decided which to obey" | STRUCK | an unnamed role with agency | — |
+| S-F20 | "The overseers keep order in the daylight hours" | STRUCK | `'overseer'` is an engine role token; the agency is now licensed | — |
+| S-F21 | "Collectors travel in pairs, then in fours, and lately not at all" | STRUCK | the engine's own hook (`:717`) | — |
+| S-F22 | "officers loyal to the ruler are posted to the walls one by one" | SPLIT | KEPT: `hasWalls`. STRUCK: the role plural, the loyalty and the person-shaped "ruler" (the hook says "loyal to the seat") | keep the posting, on a walled town |
+| S-F23 | "the healers are the busiest people here" | STRUCK | already REFUTED: `'healer'` is a role token, a catalog row and a mandated role | — |
+| S-F24 | "Scouts could put a name to it; nobody has yet" | STRUCK | the hook `:679` | — |
+| S-F25 | "the mages responsible shrug" · "Hedge wizards are leaving {settlement} quietly" | STRUCK | engine role tokens; the movement claims are free | — |
+| S-F26 | "Two officials claim the same seal… The town pays whichever collector" | STRUCK | the hook `:706` | — |
+| S-F27 | "The soldiers here have stopped being the seat's instrument" | STRUCK | a collective person with an intention | — |
+| S-F28 | "keeps more watch" vs "The watch's patrols" on one Overview page | STRUCK | an activity and a body under one word misinform no reader | — |
+| S-F29 | "The factions each hold enough to block and none hold enough to rule" | CONTRADICTION | `powerStructure.factions[].power` printed on the Power surface — an arithmetic the page can deny | write the deadlock without the arithmetic |
+| S-F30 | "The resistance is bleeding the garrison… costs the occupier more each season" | STRUCK | a dark pool; the three-party relation is silence | — |
+| S-F31 | DS-STR-2's anaphora ("the trouble", "this") binding to the DS-STR-1 banner above | CONTRADICTION | `.find()` chooses a DIFFERENT record class — the page attaches the sentence to the wrong crisis | name the crisis |
+| S-F32 | `INFILTRATED` #5 tagged `[ledger · dm-only]` on a `covert: false` row | STRUCK | an instrument mismatch | — |
+| S-F33 | "reaches past the person responsible" · "somebody it had reason to trust" | STRUCK | unnamed persons | — |
+| S-F34 | "issued against a list" · "tally" · "bill" | STRUCK | record words | — |
+
+## 5.6 THE WARFAITH DESK'S FINDINGS
+
+| id | quote | verdict | field / ground | a writer may now |
+|---|---|---|---|---|
+| W-1 | "The hall still sits, the market still opens" | CONTRADICTION | two EXISTENCE claims (`hasMarket`, the hall row) on an Occupied read touching no institution | — |
+| W-2 | "neither soldiers nor temples worth remarking on" | CONTRADICTION | a Garrison + Parish church town draws it — the negation denies the roster | — |
+| W-3 | "the shrines answer to no named god" | CONTRADICTION | the roster's religious rows (`Wayside shrine` never consulted) | the deity half is lawful — no predicate on a deity |
+| W-4 | "shrines at crossroads and doorframes, none of them a creed's" | CONTRADICTION | as W-3 | keep the crossroads |
+| W-5 | "Its shrine is real, its calendar is observed" | CONTRADICTION | a body existence claim from a SHARE band | write the calendar |
+| W-6 | "a real congregation, a real house" | CONTRADICTION | a house asserted from a share band; the person-totality is free | — |
+| W-7 | "Shrines stand unclaimed, and an arriving creed would find space" | STRUCK | the pool is not routed | — |
+| W-8 | "The creed followed the garrison, and the calendar changed" | CONTRADICTION | `hasGarrison` | — |
+| W-9 | "Its shrines are closed, its days unmarked" | CONTRADICTION | a body claim from a cause token | write the unmarked days |
+| W-10 | "the clerks who load them have stopped remarking" | STRUCK | a role plural + an organ word | — |
+| W-11 | "nobody in the hall can say in advance which demand" | STRUCK | a person-plural inside a metonym | — |
+| W-12 | "the not-spending is a choice somebody made" | STRUCK | an unnamed decider | — |
+| W-13 | "Somebody at {settlement} is being funded from outside" | STRUCK | an unnamed person; the `dm-only` mark carries the visibility | — |
+| W-14 | "There are people at the hall who are not the town's" | STRUCK | a person-plural | — |
+| W-15 | "a decision nobody in the hall has been willing" | STRUCK | as W-11 | — |
+| W-16 | "Its shepherd holds an ordinary clerical post under another creed's" | STRUCK | an unnamed person; the field has no writer so the pool is undrawable | — |
+| W-17 | "Its clergy speak with the confidence of people who" | CONTRADICTION | `governanceNarrative.js:128-130` conditions "the clergy" on a church / cathedral / parish row | — |
+| W-18 | "its clergy speak to rulers rather than about them" | CONTRADICTION | as W-17; the "rulers" plural is now free | — |
+| W-19 | "What its councils say about the lawfulness of magic" | STRUCK | an organ invented for a creed — silence is permission | keep the councils |
+| W-20 | "The faith's treasury is full. It is among the richest" | STRUCK | `templeWealth` has no writer; the pool is unroutable | — |
+| W-21 | "the ruler's writ carries a weight the office alone" | STRUCK | bare organ and role words | — |
+| W-22 | "in the rolls, in the feast days, in who" | STRUCK | record words on a dark pool | — |
+| W-23 | the seat: "The installed seat at {settlement} still sits" vs "It holds the seat on numbers alone" | CONTRADICTION | `treatyDocument.js:73` vs `religionState.js:620` — a treaty-installed POWER and a FAITH standing under one word, both authored here | name which seat |
+| W-24 | the garrison: the occupier's expense vs "The creed followed the garrison" | CONTRADICTION | `occupationStatus.js:95-103` (no garrison field) + `hasGarrison` | — |
+| W-25 | the muster: "answers {counterpart}'s muster" vs "no muster gathers where the terms forbid one" | CONTRADICTION | `treatyDocument.js:58` vs `:63` — opposite directions, one word, adjacent pools | seat the possessor |
+| W-26 | the court as the record's keeper and as a room with a door on one page | STRUCK | both senses are true of a court | — |
+| W-27 | "the garrison at {settlement} is stronger for the occupier's other" | CONTRADICTION | `holderTable.js:599-615` — `occupierHoldings.*` is the OCCUPIER's position; the slot roles are inverted against the reader | — |
+| W-28 | "what the ruling power asks, the patron's clergy have already" | STRUCK | a fused sequencing relation — silence | — |
+| W-29 | "the shortness is felt at the harvest and the gate" | CONTRADICTION | `hasWalls` / `hasGates` on a deployment read | — |
+| W-30 | the three PLAYER `mobilization:` pools carded `audience: DM only` | STRUCK | an instrument defect (`row.covert` reads the token) | — |
+| W-31 | `mobilization: COVERT` vs DS-WAR-5's `posture COVERT`, fenced by a note | STRUCK | the fence is vacuous while DS-WAR-5 is dark | — |
+| W-32 | "the clerks who load them" · "the observers are seeing less than they are owed" | STRUCK | the `[ledger]` standpoint promoted into an organ with agents | — |
+| W-33 | the desk's 20 `[elder]` variants | STRUCK | an angle tag is not a body | — |
+| W-34 | "{settlement} answers {counterpart}'s muster" | CONTRADICTION | `warFaithStateProse.js:930-933` — the slot fills from the occupier or the siege party, never the signatory | — |
+| W-35 | `occupierHoldings.*`'s muster citation | CONTRADICTION | `holderTable.js:599-615` — the OCCUPIED town's militia cited for the OCCUPIER's overextension | — |
+
+---
+
+## NEW FINDINGS — real contradictions this slice's research shows that no bar ever stated
+
+These are not re-classifications. They are page-level or engine-level self-contradictions the tables uncovered while answering a different question. Each is a refuter's finding under floor 1 today, or a wiring row the chair should charter.
+
+1. **A Hireling-hall town contradicts itself with no face involved.** `priorityHelpers.js:49-51` sets `hasMercenary: true` while `defenseInstitutionBuckets.js:98-100` leaves `forces.mercenary.present: false` (the row is in two FLAGS and NO bucket). No sentence can satisfy both surfaces. (OV-7, RT2.2-04, RT2.6-08.)
+2. **A thorp with a `Household levy` prints a roster row beside a projection denying it.** `institutionalCatalog.js:104` seats the levy; `defenseStateProse.js:1273-1274` renders `NO organized force at all`. (OV-27, RT2.1-39.)
+3. **Custom content is invisible to the buckets and visible to the security regex.** The buckets and `linkToInst` test `nativeSemanticName`, which returns `''` for materialized custom rows (`customContentSemanticAuthority.js:40-48`), while `SECURITY_INSTITUTION_RE` and `nameMatches` test raw `inst.name` (`corruption.js:665-666`). A custom "Night Watch" is a corruptible security body that the defense projection prints as absent — the roster and the projection disagree on the same page. This is the custom-content parity question of FOLD 59 arriving as a truth defect.
+4. **DS-GEN-17 GARRISONED's own gloss is false of its key.** The gloss says "a force the town PAYS for"; the key is satisfied by `walls` · `citadel` · a `Watchtower` alone (`priorityHelpers.js:45`). A writer briefed by the gloss writes a pay claim the key denies. (G-F39, OV-6.)
+5. **The licence card lies about audience on three shipped PLAYER pools.** `row.covert = reads.some(isCovertPath)` reads the TOKEN, not the branch, so DS-WAR-1's three non-covert `mobilization:` cards print `audience: DM only` (`wiringCensus.js:1681`; `warFaithStateProse.js:251-262`). (W-30, OV-36, VIS-09.)
+6. **A covert-economy sentence is player-audible today.** DS-ECO-6's two canonical-at-zero rows are FROZEN component literals with no `dm-only` mark inside a block the annex declares wholly `dm-only` (`economy.generated.js:1595`; `EconomicsTab.jsx:664`). (E-F18, VIS-14.)
+7. **The power desk prints one actor as two.** `{seat}` and `{faction}` fill from ONE `governingName` string (`powerStateProse.js:860`, `:875-876`), and DS-POW-6's `{faction}` is documented as the CAPTURED HOUSE while filled with the GOVERNING body — so an accusation lands on the wrong power by the fill, not by the writer. (P-R2, P-R3, P-R5b, P-R5d.)
+8. **`occupierHoldings.*` cites the wrong town.** The muster holder resolves on the settlement passed, so the OCCUPIED town's militia is cited for the OCCUPIER's overextension (`holderTable.js:599-615`). (W-27, W-35, OV-5.)
+9. **DS-POW-1's card prints the wrong slot bag.** `resolveBag` first-match at `powerStateProse.js:634` tells a writer the block may name `{npc}` and may NOT name `{seat}` — the inverse of the leaf, where 38 of 41 variants carry `{seat}`. (P-W1.)
+10. **A page-level referent error no per-pool bar can see.** DS-STR-2's anaphora binds to the DS-STR-1 banner above it, a different record class chosen by `.find()` — the sentence attaches to the wrong crisis (`:4222-4224`, `:4403-4405`). Under the re-cut this is exactly floor 1 and it needs a PAGE-grain refuter, not a pool-grain one.
+11. **`'Unknown Faction (hidden)'` reaches a player face.** `stressFactions.js:105-107` gives it power 15 and the note "its presence is not known to the settlement"; `properFill` does not reject `(hidden)`; DS-POW-4 Contested/Critical carry 0 `dm-only` marks. (PS-10, VIS-16.)
+12. **The engine's own voice gives "the muster" two opposite referents on one page.** `treatyDocument.js:58` ("the compelled banner still answers the muster" — the COUNTERPART's call) against `:63` ("no muster gathers where none is allowed" — the TOWN's arms). The contradiction ships today with no corpus sentence involved. (W-25, OV-34.)
+13. **The safety label is reachable with NO law body at all** — a thorp reads `Moderate` off a community bonus (`safetyProfile.js:56-62`). Every "the watch"/"the guard" sentence on a safety-label read is therefore a LIVE label trap, not a hypothetical, and `safetyProfile.js:300` prints "There is no meaningful guard presence." on the same panel. (D-F2, RT2.1-47.)
+
+### TWO GAPS IN THE FOLD'S OWN VOCABULARY (the chair may want to rule)
+
+- **Floor 2 (THE PROMISE) has no verdict token.** CONTRADICTION · MODEL · SCOPE · STRUCK cover floors 1, 4 and 3. Nothing in this slice turned on an invented date or count once the comparatives were struck, so I have used no token for it — but a refuter needs one, because "forty on the roll" contradicts no field and must still fail.
+- **Visibility with no field has no floor.** VIS-12 (foreign funding) and VIS-18 (the desks' §0e editorial marks) rest on AUTHORED marks alone. Under the four floors as written, a player face carrying them is unrefutable. Either the audience contract becomes a fifth floor or the leaks are accepted; I have marked those two STRUCK and kept every visibility row with a real `covert` field as CONTRADICTION.

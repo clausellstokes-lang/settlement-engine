@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-12 02:40:22 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-12 02:46:01 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = 3706c6df7 §919.2: the OPUS CHAIR MANUAL amended — the refuter and re-refuter seat is OPUS at the 
 
@@ -235,13 +235,13 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
 - LAST-RUNS: 
 
 ## WORKFLOW RUNS of chair session 4ed79a2b-6cd2-45cf-ab97-83cdad49c30b — PER AGENT, PER LANE (owner 09-11: save progress per agent per lane; a run dies with the session, its journal + the packets + the dock commits are the checkpoint; journals mirrored under $SC/_progress/<wf>/)
-- **wf_c1990c61-ad7** (mtime 09-12 02:20): agent calls 6 (6 distinct) · DONE 4 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 2 — mirror `_progress/wf_c1990c61-ad7/`
+- **wf_c1990c61-ad7** (mtime 09-12 02:20): agent calls 6 (6 distinct) · DONE 5 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 1 — mirror `_progress/wf_c1990c61-ad7/`
     - `a39f4c8b2` ? · DONE · transcript 09-12 02:28 460 KB · 28 tool calls · files: convert-W1-W10.md · result: {"slice": "ADDENDUM 12: the ten writer rules W1\u2013W10 and the chair's rulings R-i, R-ii, R-iii, R-iv, R-vi, R-viii\u2032 (as amended) \u2014 re-classified un
     - `a60b1ed6c` ? · DONE · transcript 09-12 02:32 635 KB · 48 tool calls · files: convert-W11-W19.md · result: {"slice": "Writer bars W11\u2013W19 of ADDENDUM 13 part A (the entailment bars: material, garrison, watch, label, alias, the gate word, crisis, stress-record, f
     - `a4846e7dc` ? · DONE · transcript 09-12 02:29 485 KB · 35 tool calls · files: convert-W20-W27.md · result: {"items": [{"id": "W20", "gist": "THE LAYER BAR: a noun is used at the layer of its READ; a body word on an AGGREGATE or NONE read is refused (a readiness band,
-    - `a4c12e06b` ? · IN FLIGHT · transcript 09-12 02:39 754 KB · 19 tool calls · files: convert-ET-2.md, '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/recut/convert-ET-2.md · last: Bash cd '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scra
+    - `a4c12e06b` ? · DONE · transcript 09-12 02:45 937 KB · 20 tool calls · files: convert-ET-2.md, '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/recut/convert-ET-2.md · result: {"items": [{"id": "D-1", "gist": "palisade: timber only as a bare word; no rot; not 'could not afford stone'", "verdict": "SPLIT", "field": "defenseGenerator.js
     - `a55204c8f` ? · DONE · transcript 09-12 02:40 753 KB · 19 tool calls · files: convert-ET-3-4.md · result: {"items": [{"id": "L-1", "gist": "`plagued` is MONSTER activity, never disease", "verdict": "MODEL", "field": "config.monsterThreat", "ground": "monsterThreat.j
-    - `a6615c776` ? · IN FLIGHT · transcript 09-12 02:40 894 KB · 32 tool calls · files: x5.txt, x6.txt, x7.txt, convert-RT-2-5.md · last: Bash cat >> /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/s
+    - `a6615c776` ? · IN FLIGHT · transcript 09-12 02:43 976 KB · 37 tool calls · files: x6.txt, x7.txt, convert-RT-2-5.md, convert-RT-2-5.md · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
 - **wf_b9aa5993-4a0** (mtime 09-12 02:16): agent calls 177 (151 distinct) · DONE 137 · FAILED (not retried) 5 · RETRIED (superseded attempts) 23 · IN FLIGHT 12 — mirror `_progress/wf_b9aa5993-4a0/`
     - `addd4fc66` ? · DONE · transcript 09-11 15:37 609 KB · 39 tool calls · files: skeleton.md, skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--economic-su
     - `a9316f3de` MARKER Economic Survival: WEAK · DONE · transcript 09-11 15:35 540 KB · 30 tool calls · files: "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--economic-survival-weak/skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--economic-su
@@ -547,4 +547,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `ad30ac0bb` FOLDER · DONE · transcript 09-11 06:02 1531 KB · 36 tool calls · files: _partD.md, _partE.md, _partF.md, _partG.md · result: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/entailment/ENTAILMENT-TABLE.draft.md
 
 ## PROCESSES: 57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 2.02 1.96 2.15
+load: 1.98 1.71 1.95
