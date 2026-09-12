@@ -1,0 +1,3 @@
+# PARKED 2026-09-11 20:5x — superseded by the owner's word "Just refute everything with opus"
+
+The comparison (`rewrite/refuter-compare.workflow.js`, arms S and P, one Fable adjudicator per block and arm, `COMPARE-TABLE.md`) was built on the owner's 17:1x 'Do that then!' to decide whether Opus could take the refuter seat. The owner decided directly at 20:5x; the seat is Opus from DEF-2's refute phase on. The inputs stay here (`args-DEF11.json`: 48 faces, 25 Fable FAIL; `casebook-refute.md`) should a calibration of the Opus refuters against the Fable verdicts of DS-DEF-11 ever be wanted. Not a lane; not queued.
