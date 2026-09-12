@@ -1,0 +1,20 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 60,
+ "firstTs": "2026-09-12T11:14:02.469Z",
+ "lastTs": "2026-09-12T11:16:31.383Z",
+ "tools": {
+  "Bash": 14
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "Confirmed by reading the detector: `first` word of each sentence, `/ing$/` minus a small exception list. Exactly one face matches — variant 3, face 1, opening on \"Washing\". Now the required reading.",
+ "run": "wf_5708c72b-0b2",
+ "agent": "ab35deb4b82531bdc",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/4ed79a2b-6cd2-45cf-ab97-83cdad49c30b/subagents/workflows/wf_5708c72b-0b2/agent-ab35deb4b82531bdc.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}

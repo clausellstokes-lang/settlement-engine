@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-12 07:10:47 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-12 07:16:23 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = b1e87d40e §919.5: the retro record's six FIDELITY packets land — a commit defect of the chair's o
 
@@ -43,14 +43,11 @@ product claude/composite-r4 = f73bdbf16 · ledger = b1e87d40e §919.5: the retro
       | 
       | Every figure below comes from a command that ran in this dock with its exit code captured. A figure
       | without a command is not in this file. ZERO reader-facing bytes is the car's own fence: the manifest
-- **DS-DEF-2 (waits for the tables)** dock `laneRW-DEF2` HEAD f20532e18 · 6 cars over f2da5a3ee · porcelain 2 · last commits:
+- **DS-DEF-2 (waits for the tables)** dock `laneRW-DEF2` HEAD a3e877e6e · 8 cars over f2da5a3ee · porcelain 0 · last commits:
+    a3e877e6e REWRITE 8b DS-DEF-2 draft round 1: THREE FIGURES IN 8e549c4a6's message CORRECTED
+    8e549c4a6 REWRITE 8b DS-DEF-2 draft round 1: 10/26
     f20532e18 REWRITE 8b DS-DEF-2: the licence-test rewrite is reverted to the shipped rows, and the re-cut starts from the original
     1afa97391 REWRITE 8b: the licence card stops teaching the struck law (brief ADDENDUM 14/16)
-    471ce894a REWRITE 8b DS-DEF-2: 50/78 variants kept as refined · 31 faces reverted · 99 cure target(s) — the Fable judge rulings applied
-    402d592df REWRITE 8b DS-DEF-2 refine: 23/26 kept, 3 reverted
-    porcelain (uncommitted work in the dock — commit it FIRST after re-proving):
-       M docs/content/RECEIPT_POOLS_DOSSIER_STATE.md
-       M src/data/dossierStateProse/defense.generated.js
     receipt `receipt-rewrite.md` (mtime 09-09 14:58) head:
       | # RECEIPT — the REWRITE train
       | 
@@ -239,7 +236,7 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
 - LAST-RUNS: 
 
 ## WORKFLOW RUNS of chair session 4ed79a2b-6cd2-45cf-ab97-83cdad49c30b — PER AGENT, PER LANE (owner 09-11: save progress per agent per lane; a run dies with the session, its journal + the packets + the dock commits are the checkpoint; journals mirrored under $SC/_progress/<wf>/)
-- **wf_5708c72b-0b2** (mtime 09-12 07:04): agent calls 53 (53 distinct) · DONE 52 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 1 — mirror `_progress/wf_5708c72b-0b2/`
+- **wf_5708c72b-0b2** (mtime 09-12 07:14): agent calls 59 (59 distinct) · DONE 53 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 6 — mirror `_progress/wf_5708c72b-0b2/`
     - `abf7c6766` MARKER Beasts & Monsters: plagued, perimeter AND organized force · DONE · transcript 09-12 05:11 907 KB · 62 tool calls · files: $D/skeleton.md, '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--beasts-monsters-plagued-perimeter-and-organized-/skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--beasts-mons
     - `aa2100e3d` MARKER Beasts & Monsters: plagued, perimeter but NO force to hold it · DONE · transcript 09-12 05:10 861 KB · 55 tool calls · files: skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--beasts-mons
     - `ad70ac481` MARKER Beasts & Monsters: plagued, NO perimeter and NO force · DONE · transcript 09-12 05:04 583 KB · 40 tool calls · files: "$D/skeleton.md, skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--beasts-mons
@@ -292,7 +289,13 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `aea2c2cb5` WRITER Disasters & Famine: granary, NO medical provision r1 · DONE · transcript 09-12 06:55 668 KB · 32 tool calls · files: draft-round-1.md, draft-round-1.md · result: **PACKET:** `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--disaste
     - `add970a6d` WRITER Disasters & Famine: NO reserves, hospital present r1 · DONE · transcript 09-12 06:55 645 KB · 31 tool calls · files: ct-floors.txt, draft-round-1.md · result: PACKET: `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--disasters-f
     - `a662d722f` WRITER Disasters & Famine: NO reserves, NO medical provision r1 · DONE · transcript 09-12 07:04 857 KB · 38 tool calls · files: $D/draft-round-1.md, draft-round-1.md · result: The packet is complete and verified.  **PACKET:** `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratch
-    - `a97888883` GATE r1 · IN FLIGHT · transcript 09-12 07:10 516 KB · 45 tool calls · files: docs/content/RECEIPT_POOLS_DOSSIER_STATE.md, "$SCR/annex.head.md, "$SCR/apply-report.json · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
+    - `a97888883` GATE r1 · DONE · transcript 09-12 07:14 637 KB · 62 tool calls · files: docs/content/RECEIPT_POOLS_DOSSIER_STATE.md, "$SCR/annex.head.md, "$SCR/apply-report.json, (git commit) · result: {"commit": "8e549c4a6 (the draft round 1 commit: annex + regenerated defense leaf); dock tip is a3e877e6e, an empty commit carrying a correction of three hand-w
+    - `a763669f4` WRITER Beasts & Monsters: plagued, perimeter but NO force to hold it r2 · IN FLIGHT · transcript 09-12 07:16 367 KB · 19 tool calls · last: Bash SK=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
+    - `ab78df282` WRITER Beasts & Monsters: plagued, NO perimeter and NO force r2 · IN FLIGHT · transcript 09-12 07:16 368 KB · 15 tool calls · last: Bash SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
+    - `ae4e81325` WRITER Beasts & Monsters: frontier, credible deterrence r2 · IN FLIGHT · transcript 09-12 07:15 348 KB · 15 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
+    - `ae700b0f7` WRITER Beasts & Monsters: frontier, force without a perimeter r2 · IN FLIGHT · transcript 09-12 07:15 217 KB · 8 tool calls · last: Bash cd "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scra
+    - `ab35deb4b` WRITER Beasts & Monsters: settled, defenses beyond the need r2 · IN FLIGHT · transcript 09-12 07:16 313 KB · 13 tool calls · last: Bash SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
+    - `a9eb73a8b` WRITER Beasts & Monsters: settled, nothing organized r2 · IN FLIGHT · transcript 09-12 07:16 361 KB · 22 tool calls · files: skel2.txt · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
 - **wf_574fe3cb-fe3** (mtime 09-12 04:15): agent calls 6 (6 distinct) · DONE 6 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 0 — mirror `_progress/wf_574fe3cb-fe3/`
     - `af22a9af8` ? · DONE · transcript 09-12 04:20 328 KB · 12 tool calls · files: items-W1-W10.md, appendix-W1-W10.md, items-W1-W10.md · result: {"slice": "W1-W10", "newFindingRowsAdded": 6, "authoredCellsMarked": 2, "foldAuthoredCells": 14, "newBarsAmongThem": ["\u26a0 NEW BAR \u00b7 NF-2 \u2014 the tow
     - `a32d8e55f` ? · DONE · transcript 09-12 04:19 344 KB · 12 tool calls · files: items-W11-W19.md · result: {"slice": "W11-W19", "newFindingRowsAdded": 8, "authoredCellsMarked": 3, "foldAuthoredCells": 58, "newBarsAmongThem": ["NF-1 \u2014 the militia and the watch ar
@@ -633,4 +636,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `ad30ac0bb` FOLDER · DONE · transcript 09-11 06:02 1531 KB · 36 tool calls · files: _partD.md, _partE.md, _partF.md, _partG.md · result: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/entailment/ENTAILMENT-TABLE.draft.md
 
 ## PROCESSES: 57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 2.33 2.38 2.35
+load: 3.03 3.19 2.76
