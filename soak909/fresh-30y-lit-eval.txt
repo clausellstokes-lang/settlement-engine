@@ -1,6 +1,0 @@
-# tripwire evaluation — w0-soak (30y × 4s, schema 5)
-  FINDING  w0-soak · capacity_realm_load — realm load 0.5449 outside the plateau window [0.6, 1.05]
-  annotation: deterministicFirings 1 · fullInstrument true · provisional false · rolling false · restored false · behavioralPropertiesPassing UNSTATED
-annotated receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/soak909/fresh-30y-lit-annotated.json
-
-FIRED: 1 deterministic finding(s) over 1 cell(s); 0 host-observability note(s)

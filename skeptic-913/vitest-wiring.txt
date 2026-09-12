@@ -1,9 +1,0 @@
-
- RUN  v4.1.11 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/laneLMAT
-
-
- Test Files  1 passed (1)
-      Tests  12 passed (12)
-   Start at  19:37:16
-   Duration  2.16s (transform 1.22s, setup 29ms, import 1.12s, tests 911ms, environment 0ms)
-

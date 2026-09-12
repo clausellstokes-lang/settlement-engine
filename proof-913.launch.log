@@ -1,7 +1,0 @@
-  probe: load=2.86 workers=0 streak=1 waited=0s
-  probe: load=2.03 workers=0 streak=2 waited=60s
-  probe: load=4.19 workers=0 streak=0 waited=120s
-  probe: load=2.55 workers=0 streak=1 waited=180s
-  probe: load=3.88 workers=0 streak=2 waited=240s
-  probe: load=3.51 workers=0 streak=3 waited=300s
-QUIET CONFIRMED after 300s
