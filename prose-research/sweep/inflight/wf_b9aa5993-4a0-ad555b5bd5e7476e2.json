@@ -1,0 +1,21 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 118,
+ "firstTs": "2026-09-12T03:05:40.419Z",
+ "lastTs": "2026-09-12T03:08:05.906Z",
+ "tools": {
+  "Bash": 31,
+  "Read": 2
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "Creating the packet file first (checkpoint law), seeded with the byte-identical HEAD rows.",
+ "run": "wf_b9aa5993-4a0",
+ "agent": "ad555b5bd5e7476e2",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/4ed79a2b-6cd2-45cf-ab97-83cdad49c30b/subagents/workflows/wf_b9aa5993-4a0/agent-ad555b5bd5e7476e2.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}
