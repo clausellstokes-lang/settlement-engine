@@ -1,19 +1,7 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-12 09:59:36 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-12 10:05:37 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
-| ? | other |  | result | 0 | — | — | 08:11:21 |
-| ? | other |  | result | 0 | — | — | 08:01:37 |
-| ? | other |  | result | 0 | — | — | 08:04:01 |
-| ? | other |  | result | 0 | items-W11-W19.md | — | 08:01:13 |
-| ? | other |  | result | 0 | — | — | 08:01:01 |
-| ? | other |  | result | 0 | — | — | 08:14:41 |
-| ? | other |  | result | 0 | — | — | 08:12:53 |
-| ? | other |  | result | 0 | fidelity-W11-W19.md | — | 08:11:23 |
-| ? | other |  | result | 0 | fidelity-W20–W27 — the eight referent bars (layer · baked-power · person · fused | — | 08:10:04 |
-| ? | other |  | result | 0 | — | — | 08:04:18 |
-| ? | other |  | result | 0 | — | — | 08:10:22 |
-| ? | other |  | result | 0 | — | — | 08:00:46 |
 | ? | other |  | result | 0 | skeleton.md | — | 09:53:48 |
 | ? | other |  | result | 0 | — | — | 09:50:38 |
 | ? | other |  | result | 0 | draft-round-2.md | — | 11:20:19 |
