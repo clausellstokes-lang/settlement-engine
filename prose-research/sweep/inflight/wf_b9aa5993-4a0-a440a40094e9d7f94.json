@@ -1,0 +1,20 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 80,
+ "firstTs": "2026-09-12T03:14:26.328Z",
+ "lastTs": "2026-09-12T03:16:07.445Z",
+ "tools": {
+  "Bash": 22
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "Now the required reading. Let me create the packet stub first (checkpoint law), then read the voice documents.",
+ "run": "wf_b9aa5993-4a0",
+ "agent": "a440a40094e9d7f94",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/4ed79a2b-6cd2-45cf-ab97-83cdad49c30b/subagents/workflows/wf_b9aa5993-4a0/agent-a440a40094e9d7f94.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}
