@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-12 09:09:28 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-12 09:13:29 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -90,19 +90,5 @@
 | ? | other |  | result | 0 | items-W1-W10.md, appendix-W1-W10.md | — | 08:20:42 |
 | ? | other |  | result | 0 | items-W20-W27.md | — | 08:20:42 |
 | ? | other |  | result | 0 | — | — | 08:26:07 |
-| ? | other |  | result | 0 | exemplars-martin-hobb.md | — | 06:56:03 |
-| ? | other |  | result | 0 | convert-ET-3-4.md | — | 06:40:18 |
-| ? | other |  | result | 0 | convert-ET-2.md | — | 06:45:30 |
-| ? | other |  | result | 0 | — | — | 06:50:24 |
-| ? | other |  | result | 0 | stress-1.md | — | 07:09:10 |
-| ? | other |  | result | 0 | convert-W20-W27.md | — | 06:29:03 |
-| ? | other |  | result | 0 | stress-2.md | — | 07:08:05 |
-| ? | other |  | result | 0 | exemplars-tolkien-kay.md | — | 06:55:38 |
-| ? | other |  | result | 0 | exemplars-leguin-wolfe.md | — | 06:56:47 |
-| ? | other |  | result | 0 | exemplars-dnd-ai.md | — | 06:55:53 |
-| ? | other |  | result | 0 | — | — | 06:28:56 |
-| ? | other |  | result | 0 | CHAIR-NOTE.md, CONTRADICTION-TABLE.md, EXEMPLAR-PACK.md | — | 07:34:42 |
-| ? | other |  | result | 0 | — | — | 06:32:59 |
-| ? | other |  | result | 0 | stress-3.md | — | 07:10:40 |
 
 RECOVERY after a cutoff: for a finder whose journal says in-flight/failed and whose checkpoint is absent or complete=false, its urlsFetched list is the seed for the re-run (`mk-round.py … --inflight` folds it into the angle prompt as PRIOR PROGRESS); a verifier chunk without its verdict file simply re-runs (15 claims).
