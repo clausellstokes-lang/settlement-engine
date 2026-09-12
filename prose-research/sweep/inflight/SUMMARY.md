@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-12 02:29:02 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-12 02:35:04 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -179,11 +179,11 @@
 | ? | other |  | failed | 0 | — | — | 21:45:42 |
 | ? | other |  | result | 0 | — | — | 06:09:12 |
 | ? | other |  | result | 0 | — | — | 03:25:29 |
-| ? | other |  | in-flight | 0 | — | — | 06:28:47 |
-| ? | other |  | in-flight | 0 | — | — | 06:21:43 |
-| ? | other |  | in-flight | 0 | — | — | 06:24:42 |
-| ? | other |  | in-flight | 0 | convert-W20-W27.md | — | 06:27:41 |
+| ? | other |  | in-flight | 0 | — | — | 06:29:37 |
+| ? | other |  | in-flight | 0 | convert-ET-2.md | — | 06:34:50 |
+| ? | other |  | in-flight | 0 | — | — | 06:33:58 |
+| ? | other |  | result | 0 | convert-W20-W27.md | — | 06:29:03 |
 | ? | other |  | result | 0 | — | — | 06:28:56 |
-| ? | other |  | in-flight | 0 | — | — | 06:28:09 |
+| ? | other |  | result | 0 | — | — | 06:32:59 |
 
 RECOVERY after a cutoff: for a finder whose journal says in-flight/failed and whose checkpoint is absent or complete=false, its urlsFetched list is the seed for the re-run (`mk-round.py … --inflight` folds it into the angle prompt as PRIOR PROGRESS); a verifier chunk without its verdict file simply re-runs (15 claims).
