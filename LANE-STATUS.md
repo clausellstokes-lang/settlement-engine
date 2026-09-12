@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-12 05:57:51 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-12 06:03:28 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = b1e87d40e §919.5: the retro record's six FIDELITY packets land — a commit defect of the chair's o
 
@@ -236,7 +236,7 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
 - LAST-RUNS: 
 
 ## WORKFLOW RUNS of chair session 4ed79a2b-6cd2-45cf-ab97-83cdad49c30b — PER AGENT, PER LANE (owner 09-11: save progress per agent per lane; a run dies with the session, its journal + the packets + the dock commits are the checkpoint; journals mirrored under $SC/_progress/<wf>/)
-- **wf_5708c72b-0b2** (mtime 09-12 05:47): agent calls 26 (26 distinct) · DONE 25 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 1 — mirror `_progress/wf_5708c72b-0b2/`
+- **wf_5708c72b-0b2** (mtime 09-12 06:03): agent calls 32 (32 distinct) · DONE 26 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 6 — mirror `_progress/wf_5708c72b-0b2/`
     - `abf7c6766` MARKER Beasts & Monsters: plagued, perimeter AND organized force · DONE · transcript 09-12 05:11 907 KB · 62 tool calls · files: $D/skeleton.md, '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--beasts-monsters-plagued-perimeter-and-organized-/skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--beasts-mons
     - `aa2100e3d` MARKER Beasts & Monsters: plagued, perimeter but NO force to hold it · DONE · transcript 09-12 05:10 861 KB · 55 tool calls · files: skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--beasts-mons
     - `ad70ac481` MARKER Beasts & Monsters: plagued, NO perimeter and NO force · DONE · transcript 09-12 05:04 583 KB · 40 tool calls · files: "$D/skeleton.md, skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--beasts-mons
@@ -262,7 +262,13 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `aee052341` MARKER Disasters & Famine: granary AND parish care only · DONE · transcript 09-12 05:50 685 KB · 53 tool calls · files: "$D/skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--disasters-f
     - `a39f7e615` MARKER Disasters & Famine: granary, NO medical provision · DONE · transcript 09-12 05:53 793 KB · 65 tool calls · files: $D/skeleton.md, skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--disasters-f
     - `a385201a8` MARKER Disasters & Famine: NO reserves, hospital present · DONE · transcript 09-12 05:56 737 KB · 65 tool calls · files: "$P/skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--disasters-f
-    - `a36353ec3` MARKER Disasters & Famine: NO reserves, NO medical provision · IN FLIGHT · transcript 09-12 05:57 658 KB · 47 tool calls · files: "$D/skeleton.md · last: Bash D=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratc
+    - `a36353ec3` MARKER Disasters & Famine: NO reserves, NO medical provision · DONE · transcript 09-12 06:03 762 KB · 54 tool calls · files: "$D/skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--disasters-f
+    - `af040a210` WRITER Beasts & Monsters: plagued, perimeter AND organized force r1 · IN FLIGHT · transcript 09-12 06:03 146 KB · 4 tool calls · last: Bash SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
+    - `a302313f3` WRITER Beasts & Monsters: plagued, perimeter but NO force to hold it r1 · IN FLIGHT · transcript 09-12 06:03 143 KB · 4 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
+    - `ad00b153b` WRITER Beasts & Monsters: plagued, NO perimeter and NO force r1 · IN FLIGHT · transcript 09-12 06:03 173 KB · 4 tool calls · last: Bash SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
+    - `a65ab06c2` WRITER Beasts & Monsters: frontier, credible deterrence r1 · IN FLIGHT · transcript 09-12 06:03 146 KB · 4 tool calls · last: Bash SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
+    - `ad700ffec` WRITER Beasts & Monsters: frontier, force without a perimeter r1 · IN FLIGHT · transcript 09-12 06:03 145 KB · 4 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
+    - `adb36ae06` WRITER Beasts & Monsters: settled, defenses beyond the need r1 · IN FLIGHT · transcript 09-12 06:03 146 KB · 4 tool calls · last: Bash SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
 - **wf_574fe3cb-fe3** (mtime 09-12 04:15): agent calls 6 (6 distinct) · DONE 6 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 0 — mirror `_progress/wf_574fe3cb-fe3/`
     - `af22a9af8` ? · DONE · transcript 09-12 04:20 328 KB · 12 tool calls · files: items-W1-W10.md, appendix-W1-W10.md, items-W1-W10.md · result: {"slice": "W1-W10", "newFindingRowsAdded": 6, "authoredCellsMarked": 2, "foldAuthoredCells": 14, "newBarsAmongThem": ["\u26a0 NEW BAR \u00b7 NF-2 \u2014 the tow
     - `a32d8e55f` ? · DONE · transcript 09-12 04:19 344 KB · 12 tool calls · files: items-W11-W19.md · result: {"slice": "W11-W19", "newFindingRowsAdded": 8, "authoredCellsMarked": 3, "foldAuthoredCells": 58, "newBarsAmongThem": ["NF-1 \u2014 the militia and the watch ar
@@ -603,4 +609,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `ad30ac0bb` FOLDER · DONE · transcript 09-11 06:02 1531 KB · 36 tool calls · files: _partD.md, _partE.md, _partF.md, _partG.md · result: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/entailment/ENTAILMENT-TABLE.draft.md
 
 ## PROCESSES: 57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 2.46 2.33 2.34
+load: 2.41 2.28 2.30
