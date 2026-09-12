@@ -63,7 +63,7 @@ Read this list before you read the table. A refuter trained on the old law will 
 | **binds** | the desks this row reaches. `ALL` = every desk. |
 | **folded** | the source ids from the six slices this row consolidates. |
 
-Rows are grouped by floor, then by reach (cross-desk first, then per desk). **1,075 items were classified across the six slices; 641 carry teeth; they fold into the 164 rows below.** The fold is by FIELD: where twenty source ids name one field, they are one row. Appendix B indexes every surviving id to its row.
+Rows are grouped by floor, then by reach (cross-desk first, then per desk). **1,075 items were classified across the six slices; 641 carry teeth; they fold into the 179 finding rows below (plus 13 reconciliations).** The fold is by FIELD: where twenty source ids name one field, they are one row. Appendix B indexes every surviving id to its row.
 
 ---
 
@@ -338,7 +338,7 @@ The defense tab is **two clocks**. `generateDefenseProfile` has exactly ONE call
 
 Every id is listed in the `folded` column of the row it belongs to. To find a bar you remember: grep this file for its id. Ids that return nothing were STRUCK; check Appendix A, then stop — **it is not a finding.**
 
-Coverage check: 641 surviving items → 164 rows (116 floor 1, 19 frozen/live wiring rows, 9 floor 2, 6 floor 3, 19 floor 4, 13 reconciliations). The compression is honest: 193 of the RT slice's surviving items and 64 of ET-2's name ONE field family — `priorityHelpers.js:45-77` and the safety panel that prints its denial — and folding them into §1.1's thirty rows is what makes the instrument holdable. **A refuter who reads §1.1 and §F2 has 80 % of the estate's real findings in two pages.**
+Coverage check: 641 surviving items → 179 finding rows — 126 floor 1, 9 floor 2, 6 floor 3, 19 floor 4, and 19 frozen/live wiring rows — plus 13 reconciliations. The compression is honest: 193 of the RT slice's surviving items and 64 of ET-2's name ONE field family — `priorityHelpers.js:45-77` and the safety panel that prints its denial — and folding them into §1.1's thirty rows is what makes the instrument holdable. **A refuter who reads §1.1 and §F2 has 80 % of the estate's real findings in two pages.**
 
 ---
 
