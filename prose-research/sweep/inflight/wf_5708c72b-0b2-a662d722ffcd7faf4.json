@@ -1,0 +1,20 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 114,
+ "firstTs": "2026-09-12T10:47:55.196Z",
+ "lastTs": "2026-09-12T10:50:34.391Z",
+ "tools": {
+  "Bash": 30
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "No prior packet exists. Let me read the voice documents.",
+ "run": "wf_5708c72b-0b2",
+ "agent": "a662d722ffcd7faf4",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/4ed79a2b-6cd2-45cf-ab97-83cdad49c30b/subagents/workflows/wf_5708c72b-0b2/agent-a662d722ffcd7faf4.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}
