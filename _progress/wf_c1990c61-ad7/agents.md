@@ -1,4 +1,4 @@
-# wf_c1990c61-ad7 — per-agent progress, 2026-09-12 03:14:18
+# wf_c1990c61-ad7 — per-agent progress, 2026-09-12 03:19:55
     - `a39f4c8b2` ? · DONE · transcript 09-12 02:28 460 KB · 28 tool calls · files: convert-W1-W10.md · result: {"slice": "ADDENDUM 12: the ten writer rules W1\u2013W10 and the chair's rulings R-i, R-ii, R-iii, R-iv, R-vi, R-viii\u2032 (as amended) \u2014 re-classified un
     - `a60b1ed6c` ? · DONE · transcript 09-12 02:32 635 KB · 48 tool calls · files: convert-W11-W19.md · result: {"slice": "Writer bars W11\u2013W19 of ADDENDUM 13 part A (the entailment bars: material, garrison, watch, label, alias, the gate word, crisis, stress-record, f
     - `a4846e7dc` ? · DONE · transcript 09-12 02:29 485 KB · 35 tool calls · files: convert-W20-W27.md · result: {"items": [{"id": "W20", "gist": "THE LAYER BAR: a noun is used at the layer of its READ; a body word on an AGGREGATE or NONE read is refused (a readiness band,
@@ -12,4 +12,4 @@
     - `a7132d459` ? · DONE · transcript 09-12 03:09 675 KB · 47 tool calls · files: stress-1.md · result: `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/recut/stress-1.md`  **Headline.** The 
     - `ab8c63e79` ? · DONE · transcript 09-12 03:08 619 KB · 47 tool calls · files: stress-2.md · result: `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/recut/stress-2.md`  # STRESS-2 — findi
     - `a846ad521` ? · DONE · transcript 09-12 03:10 967 KB · 77 tool calls · files: stress-3.md · result: The findings are written to `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/recut/stre
-    - `adf26d736` ? · IN FLIGHT · transcript 09-12 03:12 801 KB · 25 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchp
+    - `adf26d736` ? · IN FLIGHT · transcript 09-12 03:15 858 KB · 26 tool calls · last: mcp__ccd_session__mark_chapter {"title": "The recut fold", "summary": "Folding six convert slices, four exemplar packets and three stress pac

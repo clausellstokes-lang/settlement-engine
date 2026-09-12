@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-12 03:13:16 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-12 03:19:18 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -190,7 +190,7 @@
 | ? | other |  | result | 0 | exemplars-leguin-wolfe.md | — | 06:56:47 |
 | ? | other |  | result | 0 | exemplars-dnd-ai.md | — | 06:55:53 |
 | ? | other |  | result | 0 | — | — | 06:28:56 |
-| ? | other |  | in-flight | 0 | — | — | 07:12:22 |
+| ? | other |  | in-flight | 0 | — | — | 07:15:00 |
 | ? | other |  | result | 0 | — | — | 06:32:59 |
 | ? | other |  | result | 0 | stress-3.md | — | 07:10:40 |
 
