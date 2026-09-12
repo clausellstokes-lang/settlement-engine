@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-11 20:35:48 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-11 20:41:32 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = 33db59adb §919.1: THE OPUS CHAIR MANUAL — the procedures, the architecture of a block run, the la
 
@@ -213,7 +213,7 @@ stat: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-
 - **L-PROBE-2 (chair)**: cheap /6 tips · full:  · bracket: 
 ## REWRITE 8b PACKETS (rewrite/DS-DEF-n/<pool>/: skeleton · draft-round-N · refine · kept · refute* · cure-round-N · cured-round-N; JUDGMENT.md / JUDGMENT-cure.md per block; the entailment + referent tables)
 - DS-DEF-11: pools 5 · skeleton 5 · draft 5 · refine 5 · kept 5 · refute 13 · cure 10 · cured 10 · JUDGMENT yes · JUDGMENT-cure yes
-- DS-DEF-2: pools 26 · skeleton 26 · draft 36 · refine 15 · kept 0 · refute 0 · cure 0 · cured 0 · JUDGMENT no · JUDGMENT-cure no
+- DS-DEF-2: pools 26 · skeleton 26 · draft 36 · refine 16 · kept 0 · refute 0 · cure 0 · cured 0 · JUDGMENT no · JUDGMENT-cure no
 - entailment: surveys 6 · refutes 6 · ENTAILMENT-TABLE.draft.md 09-11 06:07 346945 B · referent surveys 6 · referent refutes 6 · REFERENT-TABLE.draft.md 09-11 11:01 285943 B
 - HOLD-VITEST absent · runner count 0
 
@@ -230,7 +230,7 @@ json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
 - LAST-RUNS: tolkien r7-not-launched/(none — nothingToRun 17:26), kay r8/wf_d76e605d-6d1, leguin r11/wf_49ef9b66-2e6, wolfe r8/wf_8cd21474-a7b, martin r8/wf_0cd91522-1ce, hobb r7/wf_255b6391-7fb, dnd r13/wf_2c525e43-1f2, ai r12/wf_6dd3b009-2b0, dnd_r13 r13/wf_2c525e43-1f2, leguin_r11 r11/wf_49ef9b66-2e6, dnd_r14 r14/
 
 ## WORKFLOW RUNS of chair session 4ed79a2b-6cd2-45cf-ab97-83cdad49c30b — PER AGENT, PER LANE (owner 09-11: save progress per agent per lane; a run dies with the session, its journal + the packets + the dock commits are the checkpoint; journals mirrored under $SC/_progress/<wf>/)
-- **wf_b9aa5993-4a0** (mtime 09-11 20:33): agent calls 88 (73 distinct) · DONE 59 · FAILED (not retried) 11 · RETRIED (superseded attempts) 12 · IN FLIGHT 6 — mirror `_progress/wf_b9aa5993-4a0/`
+- **wf_b9aa5993-4a0** (mtime 09-11 20:38): agent calls 91 (73 distinct) · DONE 62 · FAILED (not retried) 8 · RETRIED (superseded attempts) 15 · IN FLIGHT 6 — mirror `_progress/wf_b9aa5993-4a0/`
     - `addd4fc66` ? · DONE · transcript 09-11 15:37 609 KB · 39 tool calls · files: skeleton.md, skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--economic-su
     - `a9316f3de` MARKER Economic Survival: WEAK · DONE · transcript 09-11 15:35 540 KB · 30 tool calls · files: "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--economic-survival-weak/skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--economic-su
     - `ad9a7c83a` MARKER Economic Survival: CRITICAL · DONE · transcript 09-11 15:36 658 KB · 42 tool calls · files: def2-block.txt, skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--economic-su
@@ -293,9 +293,9 @@ json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
     - `a6474d696` REFINER Internal Security: full legal chain (court AND prison) · RETRIED (a later attempt on the same key runs) · transcript 09-11 17:45 124 KB · 0 tool calls
     - `a34e7217c` REFINER Internal Security: court without detention r1 · RETRIED (a later attempt on the same key runs) · transcript 09-11 17:45 124 KB · 0 tool calls
     - `a738b7a38` REFINER Internal Security: detention without process · RETRIED (a later attempt on the same key runs) · transcript 09-11 17:45 124 KB · 0 tool calls
-    - `ad55877b9` REFINER Internal Security: no legal infrastructure · FAILED · transcript 09-11 17:45 124 KB · 0 tool calls
-    - `aacc86078` REFINER Economic Survival: STRONG · FAILED · transcript 09-11 17:45 124 KB · 0 tool calls
-    - `a57cd1f39` REFINER Economic Survival: ADEQUATE · FAILED · transcript 09-11 17:45 124 KB · 0 tool calls
+    - `ad55877b9` REFINER Internal Security: no legal infrastructure · RETRIED (a later attempt on the same key runs) · transcript 09-11 17:45 124 KB · 0 tool calls
+    - `aacc86078` REFINER Economic Survival: STRONG · RETRIED (a later attempt on the same key runs) · transcript 09-11 17:45 124 KB · 0 tool calls
+    - `a57cd1f39` REFINER Economic Survival: ADEQUATE · RETRIED (a later attempt on the same key runs) · transcript 09-11 17:45 124 KB · 0 tool calls
     - `a288baed5` REFINER Economic Survival: WEAK · FAILED · transcript 09-11 17:45 124 KB · 0 tool calls
     - `a9366bdac` REFINER Economic Survival: CRITICAL · FAILED · transcript 09-11 17:45 124 KB · 0 tool calls
     - `a507cc247` REFINER Disasters & Famine: granary AND hospital · FAILED · transcript 09-11 17:45 124 KB · 0 tool calls
@@ -313,12 +313,15 @@ json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
     - `ae8eaabbf` REFINER Invasion & War: walls AND professional garrison · DONE · transcript 09-11 20:28 690 KB · 25 tool calls · files: refine.md, scratchpad_rows.txt · result: PACKET: `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--invasion-wa
     - `ad6cc5eb0` REFINER Invasion & War: walls with citizen militia · DONE · transcript 09-11 20:32 734 KB · 32 tool calls · files: refine.md · result: **Packet:** `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--invasio
     - `acedfeac7` REFINER Invasion & War: walls with NO force · DONE · transcript 09-11 20:33 685 KB · 28 tool calls · files: refine.md · result: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--invasion-war-walls-w
-    - `a02c64d67` REFINER Invasion & War: force with NO walls · IN FLIGHT · transcript 09-11 20:25 504 KB · 32 tool calls · files: refine.md · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
-    - `a6d85e600` REFINER Invasion & War: militia only · IN FLIGHT · transcript 09-11 20:25 441 KB · 26 tool calls · files: refine.md · last: Bash SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
-    - `af345ce71` REFINER Invasion & War: neither walls nor force · IN FLIGHT · transcript 09-11 20:35 687 KB · 28 tool calls · files: "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--invasion-war-neither-walls-nor-force/refine.md · last: Bash cat > "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/s
-    - `ab6f3f225` REFINER Internal Security: full legal chain (court AND prison) · IN FLIGHT · transcript 09-11 20:30 414 KB · 26 tool calls · files: "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--internal-security-full-legal-chain-court-and-pri/refine.md · last: Bash SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
+    - `a02c64d67` REFINER Invasion & War: force with NO walls · DONE · transcript 09-11 20:38 776 KB · 34 tool calls · files: refine.md · result: The packet is written and mechanically clean (zero em dashes, exclamations, digits, percents, `which`-clauses, colons, semicolons or questions; slot sets identi
+    - `a6d85e600` REFINER Invasion & War: militia only · DONE · transcript 09-11 20:37 718 KB · 29 tool calls · files: refine.md · result: PACKET: `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--invasion-wa
+    - `af345ce71` REFINER Invasion & War: neither walls nor force · DONE · transcript 09-11 20:37 728 KB · 32 tool calls · files: "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--invasion-war-neither-walls-nor-force/refine.md · result: The packet is written and verified.  **Packet:** `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchp
+    - `ab6f3f225` REFINER Internal Security: full legal chain (court AND prison) · IN FLIGHT · transcript 09-11 20:41 654 KB · 29 tool calls · files: "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--internal-security-full-legal-chain-court-and-pri/refine.md, rows.txt, sents.txt · last: Bash cd /tmp && sed -E 's/^[0-9]+\. `\[[a-z]+\]` //; s/^   - `\[face\]` //' rows.txt > sents.txt; grep -nE '—|!|[0-
     - `a59cf93aa` REFINER Internal Security: court without detention r1 · IN FLIGHT · transcript 09-11 20:33 451 KB · 22 tool calls · files: "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--internal-security-court-without-detention/refine.md · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchp
     - `a7c2d0bdb` REFINER Internal Security: detention without process · IN FLIGHT · transcript 09-11 20:34 344 KB · 19 tool calls · last: Bash SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
+    - `ab63587d2` REFINER Internal Security: no legal infrastructure · IN FLIGHT · transcript 09-11 20:39 436 KB · 21 tool calls · last: Bash SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
+    - `aa05035c6` REFINER Economic Survival: STRONG · IN FLIGHT · transcript 09-11 20:39 477 KB · 27 tool calls · files: "$SC/rewrite/DS-DEF-2/ds-def-2--economic-survival-strong/refine.md · last: Bash SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
+    - `ad78f92f1` REFINER Economic Survival: ADEQUATE · IN FLIGHT · transcript 09-11 20:40 479 KB · 27 tool calls · last: Bash F=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratc
 - **wf_2e33aae5-027** (mtime 09-11 15:16): agent calls 68 (56 distinct) · DONE 18 · FAILED (not retried) 32 · RETRIED (superseded attempts) 12 · IN FLIGHT 6 — mirror `_progress/wf_2e33aae5-027/`
     - `a8df09f92` MARKER Beasts & Monsters: plagued, perimeter AND organized force · DONE · transcript 09-11 11:12 801 KB · 43 tool calls · files: "$D/skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--beasts-mons
     - `a2d2b0711` MARKER Beasts & Monsters: plagued, perimeter but NO force to hold it · DONE · transcript 09-11 11:12 667 KB · 27 tool calls · files: "$SC/rewrite/DS-DEF-2/ds-def-2--beasts-monsters-plagued-perimeter-but-no-force-t/skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--beasts-mons
@@ -446,4 +449,4 @@ json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
     - `ad30ac0bb` FOLDER · DONE · transcript 09-11 06:02 1531 KB · 36 tool calls · files: _partD.md, _partE.md, _partF.md, _partG.md · result: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/entailment/ENTAILMENT-TABLE.draft.md
 
 ## PROCESSES: 57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 2.46 2.58 2.54
+load: 2.09 2.20 2.36
