@@ -1,4 +1,4 @@
-# wf_c1990c61-ad7 — per-agent progress, 2026-09-12 03:03:00
+# wf_c1990c61-ad7 — per-agent progress, 2026-09-12 03:08:40
     - `a39f4c8b2` ? · DONE · transcript 09-12 02:28 460 KB · 28 tool calls · files: convert-W1-W10.md · result: {"slice": "ADDENDUM 12: the ten writer rules W1\u2013W10 and the chair's rulings R-i, R-ii, R-iii, R-iv, R-vi, R-viii\u2032 (as amended) \u2014 re-classified un
     - `a60b1ed6c` ? · DONE · transcript 09-12 02:32 635 KB · 48 tool calls · files: convert-W11-W19.md · result: {"slice": "Writer bars W11\u2013W19 of ADDENDUM 13 part A (the entailment bars: material, garrison, watch, label, alias, the gate word, crisis, stress-record, f
     - `a4846e7dc` ? · DONE · transcript 09-12 02:29 485 KB · 35 tool calls · files: convert-W20-W27.md · result: {"items": [{"id": "W20", "gist": "THE LAYER BAR: a noun is used at the layer of its READ; a body word on an AGGREGATE or NONE read is refused (a readiness band,
@@ -9,6 +9,6 @@
     - `ad822b6d8` ? · DONE · transcript 09-12 02:56 653 KB · 23 tool calls · files: exemplars-martin-hobb.md · result: 3,284 words. Longest quotation is 14 words (the owner's own directive); every author/critic quotation is 12 words or fewer, in quotation marks, attributed, and 
     - `aa17ccdfe` ? · DONE · transcript 09-12 02:56 681 KB · 29 tool calls · files: exemplars-leguin-wolfe.md · result: `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/recut/exemplars-leguin-wolfe.md` (3,93
     - `a2db87d61` ? · DONE · transcript 09-12 02:55 782 KB · 29 tool calls · files: exemplars-dnd-ai.md · result: `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/recut/exemplars-dnd-ai.md` (3,282 word
-    - `a7132d459` ? · IN FLIGHT · transcript 09-12 03:02 525 KB · 34 tool calls · last: Bash D=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratc
-    - `ab8c63e79` ? · IN FLIGHT · transcript 09-12 03:02 514 KB · 38 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
-    - `a846ad521` ? · IN FLIGHT · transcript 09-12 03:02 704 KB · 54 tool calls · last: Bash D=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratc
+    - `a7132d459` ? · IN FLIGHT · transcript 09-12 03:08 664 KB · 46 tool calls · files: stress-1.md · last: Bash D=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratc
+    - `ab8c63e79` ? · DONE · transcript 09-12 03:08 619 KB · 47 tool calls · files: stress-2.md · result: `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/recut/stress-2.md`  # STRESS-2 — findi
+    - `a846ad521` ? · IN FLIGHT · transcript 09-12 03:07 900 KB · 74 tool calls · last: Bash mkdir -p /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db
