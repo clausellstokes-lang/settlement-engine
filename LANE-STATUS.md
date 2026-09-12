@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-12 02:57:17 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-12 03:02:56 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = 3706c6df7 §919.2: the OPUS CHAIR MANUAL amended — the refuter and re-refuter seat is OPUS at the 
 
@@ -246,9 +246,9 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `ad822b6d8` ? · DONE · transcript 09-12 02:56 653 KB · 23 tool calls · files: exemplars-martin-hobb.md · result: 3,284 words. Longest quotation is 14 words (the owner's own directive); every author/critic quotation is 12 words or fewer, in quotation marks, attributed, and 
     - `aa17ccdfe` ? · DONE · transcript 09-12 02:56 681 KB · 29 tool calls · files: exemplars-leguin-wolfe.md · result: `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/recut/exemplars-leguin-wolfe.md` (3,93
     - `a2db87d61` ? · DONE · transcript 09-12 02:55 782 KB · 29 tool calls · files: exemplars-dnd-ai.md · result: `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/recut/exemplars-dnd-ai.md` (3,282 word
-    - `a7132d459` ? · IN FLIGHT · transcript 09-12 02:57 243 KB · 7 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
-    - `ab8c63e79` ? · IN FLIGHT · transcript 09-12 02:57 228 KB · 8 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchp
-    - `a846ad521` ? · IN FLIGHT · transcript 09-12 02:57 217 KB · 7 tool calls · last: Bash D=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratc
+    - `a7132d459` ? · IN FLIGHT · transcript 09-12 03:02 525 KB · 34 tool calls · last: Bash D=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratc
+    - `ab8c63e79` ? · IN FLIGHT · transcript 09-12 03:02 514 KB · 38 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
+    - `a846ad521` ? · IN FLIGHT · transcript 09-12 03:02 704 KB · 54 tool calls · last: Bash D=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratc
 - **wf_b9aa5993-4a0** (mtime 09-12 02:16): agent calls 177 (151 distinct) · DONE 137 · FAILED (not retried) 5 · RETRIED (superseded attempts) 23 · IN FLIGHT 12 — mirror `_progress/wf_b9aa5993-4a0/`
     - `addd4fc66` ? · DONE · transcript 09-11 15:37 609 KB · 39 tool calls · files: skeleton.md, skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--economic-su
     - `a9316f3de` MARKER Economic Survival: WEAK · DONE · transcript 09-11 15:35 540 KB · 30 tool calls · files: "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--economic-survival-weak/skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--economic-su
@@ -554,4 +554,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `ad30ac0bb` FOLDER · DONE · transcript 09-11 06:02 1531 KB · 36 tool calls · files: _partD.md, _partE.md, _partF.md, _partG.md · result: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/entailment/ENTAILMENT-TABLE.draft.md
 
 ## PROCESSES: 57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 2.54 2.12 1.99
+load: 2.22 2.00 1.96
