@@ -1,0 +1,21 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 146,
+ "firstTs": "2026-09-12T09:08:02.493Z",
+ "lastTs": "2026-09-12T09:11:50.433Z",
+ "tools": {
+  "Bash": 39,
+  "Read": 4
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "Now the code facts for this pool. Let me create the packet directory and gather in parallel.",
+ "run": "wf_5708c72b-0b2",
+ "agent": "a8ce72511722e87e9",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/4ed79a2b-6cd2-45cf-ab97-83cdad49c30b/subagents/workflows/wf_5708c72b-0b2/agent-a8ce72511722e87e9.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}

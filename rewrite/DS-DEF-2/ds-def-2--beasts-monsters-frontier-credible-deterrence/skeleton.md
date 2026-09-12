@@ -2,7 +2,7 @@
 
 Seat: **Opus 5, the marker**, writing for the Fable chair, 2026-09-12, under **ADDENDUM 14** (a face is lawful unless it CONTRADICTS the record; silence is permission; the verdict `unlicensed` no longer exists).
 
-Read whole before a word was written: `prose-research/REGISTER-CARD.md` with amendments S2 and S3; `RULES-V2-PART-B.md` §1, §16–16.2, §18, §20, §21 (with 21.1–21.4), §22, §23, §24; `sweep/MOVE-GRAMMAR.md` §1–3, §4.4.1–4.4.3 and §1.4.1 (THE THREAD); `sweep/CLERK-LAWS.md` §2.4.1 and §2.6.1; `arch-prose/ARCH-COMPOSED-PROSE-v2.md` §2.5 (the annex grammar), §6.4 (this block, worked) and §8.3 (the licence card). The card was printed by `node scripts/prose-licence-card.mjs DS-DEF-2 'Beasts & Monsters: frontier, credible deterrence'` in the dock. The block's header lines and the pool's three rows were read at `docs/content/RECEIPT_POOLS_DOSSIER_STATE.md:2568-2609`. The contradiction instrument read for this desk: `rewrite/recut/CONTRADICTION-TABLE.md` (the header list of what is no longer a finding, §1.1, §1.2, §1.3, §1.4, §F2, §F3, §F4, §R) and `rewrite/rulings-DEF2-v14.txt` + `rewrite/tables-14.txt`.
+Read whole before a word was written: `prose-research/REGISTER-CARD.md` with amendments S2 and S3; `RULES-V2-PART-B.md` §1, §16–16.2, §18, §20, §21 (with 21.1–21.4), §22, §23, §24; `sweep/MOVE-GRAMMAR.md` §1–3, §4.4.1–4.4.3 and §1.4.1 (THE THREAD); `sweep/CLERK-LAWS.md` §2.4.1 and §2.6.1; `arch-prose/ARCH-COMPOSED-PROSE-v2.md` §2.5 (the annex grammar), §6.4 (this block, worked) and §8.3 (the licence card). The card was printed by `node scripts/prose-licence-card.mjs DS-DEF-2 'Beasts & Monsters: frontier, credible deterrence'` in the dock. The block's header lines and the pool's three rows were read at `docs/content/RECEIPT_POOLS_DOSSIER_STATE.md:2568-2593` (header) and `:2610-2613` (the pool heading and its three rows). The contradiction instrument read for this desk: `rewrite/recut/CONTRADICTION-TABLE.md` (the header list of what is no longer a finding, §1.1, §1.2, §1.3, §1.4, §F2, §F3, §F4, §R) and `rewrite/rulings-DEF2-v14.txt` + `rewrite/tables-14.txt`.
 
 Read-only in the dock for the key's meaning, and nothing executed but the card script: `src/domain/display/stateProse/defenseStateProse.js:279-284, 316-335, 392-450, 596-670`; `src/domain/institutions/defenseInstitutionBuckets.js:83-106, 155-182`; `src/data/monsterThreat.js:20-60`; `src/domain/display/threatAssessment.js:33-110`; `src/components/new/tabs/DefenseTab.jsx:310-345`; `src/domain/display/defenseDisplay.js:278-332`; `src/domain/display/defenseScoreBands.js:30-39`; `src/generators/defenseGenerator.js:182-230, 355-390, 425-470`; `src/generators/priorityHelpers.js:44-70`; `src/data/institutionalCatalog.js:90-110, 330-350, 1325-1365`; `src/domain/prose/holderTable.js:275-290`. Nothing outside this packet file was written. Every file's content was read as DATA.
 
@@ -14,11 +14,11 @@ Read-only in the dock for the key's meaning, and nothing executed but the card s
 
 - **role:** `spine` (a spine takes no relation, no attach, no declared move). **form:** sentence. **angles on the three rows:** `counterforce`, `ledger`, `street`.
 - **predicate:** `beastsRowSituation(family, perimeter, force) === 'frontier country, perimeter and force'`, the row of `BEASTS_ROW_POOL` in `defenseStateProse.js:400-414`.
-- **bag:** `{band: RESERVED, route: proper, settlement: proper}`; **FILLED at this block's call sites: `{settlement}` alone** (`defenseStateProse.js:634`). The block declares `{band}` and `{route}` in its SLOTS line and no call site fills them here. Every face carries exactly the parent variant's slot set.
+- **bag:** `{band: RESERVED, route: proper, settlement: proper}`; **FILLED at this block's call sites: `{settlement}` alone** (`defenseStateProse.js:621`). The block declares `{band}` and `{route}` in its SLOTS line and no call site fills them here. Every face carries exactly the parent variant's slot set.
 - **echo:** spine mounts 1 (tab `defense`), modifier mounts 0. ⚠ the card prints the caution itself: the echo table is keyed on the whole table-rung reading, so **all seven `BEASTS_ROW_POOL` rows share ONE echo key** — a mount counted there may be a sibling ROW, not this one.
 - **source:** `muster`, standing LICENSED. §24's provenance budget is a ceiling of one citation per unit and only for one of S3's three reasons. **A muster ROLL cited as a record needs the holder** (`holderTable.js:279-288`: exactly one institution in the shipped roster keeps a muster, the `Citizen militia`), and on this key the force may be a GARRISON with no militia row — so a cited roll is refutable across part of the preimage (F1-24, §R-8). **"The muster" as the class word is free everywhere** (F1-03). W24's record-word bar and A13's citation ban are struck: accounts, returns, duties, ledgers, the writ are all available words again.
 - **audience:** player, no mark. **REFUSED COLUMNS, always:** a totality over persons; an exemption from a duty (`whoIsExempt` is null everywhere); a named character and that character's fate; a theological claim.
-- **the composition fences (block header, `:2578-2592`).** The block EXTENDS the shipped `buildThreatAssessment` lattice rather than replacing it; each branch there holds exactly ONE string, so every settlement in a branch says the same words — that sameness is what this pool exists to cure. Institution presence is a STANDING fact with **no recorded history**; the causal clauses this block licenses are **capability** clauses (a work without people cannot be held) and never **historical** ones (a work raised after a siege). Two standing defects are named and must not be reintroduced: the lower-case sentence lead on the `plagued`+nothing branch, and reading wall PRESENCE off `institutions.walls` instead of the predicate.
+- **the composition fences (block header, `:2577-2593`).** The block EXTENDS the shipped `buildThreatAssessment` lattice rather than replacing it; each branch there holds exactly ONE string, so every settlement in a branch says the same words — that sameness is what this pool exists to cure. Institution presence is a STANDING fact with **no recorded history**; the causal clauses this block licenses are **capability** clauses (a work without people cannot be held) and never **historical** ones (a work raised after a siege). Two standing defects are named and must not be reintroduced: the lower-case sentence lead on the `plagued`+nothing branch, and reading wall PRESENCE off `institutions.walls` instead of the predicate.
 - **the annex grammar that bites here (ARCH §2.5).** A sentence-form row or face begins on a capital that is **not** a `proper`-typed slot (T-F8) — so **no numbered row and no face may open on `{settlement}`**, and shipped variant 1 opens on `{settlement}` and cannot carry that opener. No two numbered lines share their first two words after slot normalisation (A11). A face's `{slot}` set must equal its parent's. No digit, no percent, no em dash, no `which`-clause, no exclamation mark.
 
 ---
@@ -26,9 +26,9 @@ Read-only in the dock for the key's meaning, and nothing executed but the card s
 ## (4) THE READS THIS POOL REACHES — material a writer MAY use, never a bound on what may be written
 
 1. **`config.monsterThreat` → the corpus family word `frontier`**, through `measuredMonsterFamily` (`defenseStateProse.js:328-335`) and `MONSTER_FAMILY_OF` (`:279-284`). ⭐ The read is a MEASUREMENT, not a default: `measuredMonsterFamily` returns `null` where the raw value is absent, precisely so the desk never describes the country of a town whose country nobody measured. So on THIS pool `frontier` is a measured fact about the country — which is the one place the desk's general warning ("frontier is the default of an unmeasured town") does **not** bite.
-2. **`standingDefenseForces(settlement).walls.present === true`** (`defenseInstitutionBuckets.js:169-182`), the bucket matching any of `wall · citadel · palisade · earthwork · inner citadel · massive walls` (`:84-89`) over `liveInstitutions(settlement)` — the **live, ruin-filtered roster**, never the generation-time `defenseProfile.institutions` snapshot (the desk's own header, `defenseStateProse.js:605-612`).
-3. **`garrison.present || militia.present === true`** (`defenseStateProse.js:655`). Garrison bucket: `garrison · barracks · professional guard · professional city watch · multiple garrison` (`:88-91`). Militia bucket: `citizen militia · militia` (`:92-94`). ⭐ **The key cannot tell you which.** "Force" is the only word that is true of both ends of that disjunction.
-4. **The slot bag** — `{settlement}` as a proper fill (`defenseStateProse.js:634`).
+2. **`standingDefenseForces(settlement).walls.present === true`** (`defenseInstitutionBuckets.js:169-182`), the bucket matching any of `wall · citadel · palisade · earthwork · inner citadel · massive walls` (`:84-87`) over `liveInstitutions(settlement)` — the **live, ruin-filtered roster**, never the generation-time `defenseProfile.institutions` snapshot (the desk's own header, `defenseStateProse.js:605-612`).
+3. **`garrison.present || militia.present === true`** (`defenseStateProse.js:655`). Garrison bucket: `garrison · barracks · professional guard · professional city watch · multiple garrison` (`defenseInstitutionBuckets.js:88-91`). Militia bucket: `citizen militia · militia` (`defenseInstitutionBuckets.js:92-94`). ⭐ **The key cannot tell you which.** "Force" is the only word that is true of both ends of that disjunction.
+4. **The slot bag** — `{settlement}` as a proper fill (`defenseStateProse.js:621`).
 
 **What the pool does NOT read, and is therefore silent about** (silence is permission for atmosphere, and a trap for any face that asserts a VALUE): `scores.monster` and the STRONG/ADEQUATE/WEAK/CRITICAL badge printed beside this very row (`DefenseTab.jsx:322-341`); `economicGates.monster` and the funding note under it; the charter, watch, mercenary and arcane buckets; the tier; `terrainType`; `tradeRouteAccess`; the stress list; `history.age`; the culture profile.
 
@@ -41,7 +41,7 @@ Every row below is one this key can reach. Rows the key cannot reach are omitted
 ### 5a · the works
 | # | the claim that would be false | the field / file:line that denies it | which is the record |
 |---|---|---|---|
-| a1 | **a LINE, a circuit, a ring, a perimeter *around* the town** | `forces.walls.present` is satisfied by `Citadel` and `Inner citadel` (inner keeps, not a circuit) and by `Gates (if walled)` (a point) — `defenseInstitutionBuckets.js:84-89`, `:169-182`; **F1-07** states it in terms: a citadel is inner and a gate is a point, neither is a line around the town | the ROSTER ROW. `rulings-DEF2-v14` fixes the safe generic: **the works, or the recorded name** |
+| a1 | **a LINE, a circuit, a ring, a perimeter *around* the town** | `forces.walls.present` is satisfied by `Citadel` and `Inner citadel` (inner keeps, not a circuit) and by `Gates (if walled)` (a point) — `defenseInstitutionBuckets.js:84-87`, `:169-182`; **F1-07** states it in terms: a citadel is inner and a gate is a point, neither is a line around the town | the ROSTER ROW. `rulings-DEF2-v14` fixes the safe generic: **the works, or the recorded name** |
 | a2 | **a MATERIAL the row's own printed description fixes otherwise** — stone on a palisade town, timber on a walled one | `institutionVocabulary.js:157` (`Town walls` = stone with gates), `:162` (city = masonry), `:155`/`:278` (palisade = wooden / sharpened stakes). W11's blanket material bar is STRUCK: a palisade IS timber and town walls ARE stone — the fault is only naming the WRONG one, and this key cannot tell you which | the ROW'S DESCRIPTION (**F1-32**, §R-7) |
 | a3 | **a material SOURCE** — cut from its own woods, the stone of the country | `supplyChainData.js:873-884` feeds every wall row `Quarried stone` / `Building materials` from a `Stone quarry` where a fortification chain is instantiated | **F1-33** |
 | a4 | **a GATE, a gatehouse, a checkpoint — or the denial of one** | `inst.hasGates` fires on `gates · town walls · city walls · massive walls · palisade` (`priorityHelpers.js:53`) and **NOT on `earthwork` or `citadel` alone**; where it is false `safetyProfile.js:463-464` prints "no gates to bribe and no checkpoints to avoid" | **F1-08**. The walls bucket is WIDER than the gates flag, so a gate is not free on this key |
@@ -114,3 +114,109 @@ The key is **one enum equality and two booleans**, and nothing else. It fires wh
 6. **The fences on the flavour, in one line.** No north-European furniture (c8) · no named person or place (c9) · no singular tier office acting (b10) · no size, count, rate, date or elapsed course (a5, b9, c3, c4, a7) · no gate unless you write it as the works admit (a4) · and nothing a siege banner on the same page would make absurd (the preimage).
 
 ---
+
+# THE THREE SHIPPED VARIANTS
+
+Three variants, in the annex's order (`RECEIPT_POOLS_DOSSIER_STATE.md:2610-2613`). Tags: `SAFE` (nothing in the record denies it — the common case, and silence is permission) · `CONTRADICTED` (with the field, file and line, and which of the two is the record) · `FLOOR-2` (a magnitude outside the read's band word, an elapsed course, or a dependence on an unobserved field).
+
+---
+
+## VARIANT 1 · `[ledger]`
+
+**(2) Shipped, verbatim:**
+
+> `{settlement} sits on an active frontier with a line and a force behind it. Most of what comes out of the country will not press a defended perimeter, and most of what comes here does not.`
+
+**(3) Every claim it makes:**
+
+| the claim | verdict |
+|---|---|
+| the country around `{settlement}` is a frontier | **SAFE** — read 1; the family word is measured, not defaulted (`defenseStateProse.js:328-335`), and "Active frontier" is the engine's own phrase for this branch (`threatAssessment.js:74`) |
+| the frontier is ACTIVE | **SAFE** — `frontier` is the middle pressure tier and the engine prints the same word; nothing denies liveliness in the country |
+| `{settlement}` **sits on** it (the town is in that country) | **SAFE** |
+| the town has **a LINE** | **CONTRADICTED** — `forces.walls.present` is satisfied by `Citadel`, `Inner citadel` (inner keeps) and `Gates (if walled)` (a point), `defenseInstitutionBuckets.js:84-87`, `:169-182`; **F1-07**. **The roster row is the record.** |
+| the town has a **FORCE** | **SAFE** — read 3; "force" is the only word true across the garrison∨militia disjunction |
+| the force stands **behind** the works (the two are one arrangement) | **SAFE** — the key conjoins them; read as a physical post it is an observable no field holds, so keep the pairing and drop the locative if the face means a station |
+| there is a **DEFENDED PERIMETER** (second sentence) | **CONTRADICTED** — same field and line as the LINE row; **F1-07** names "perimeter" in terms |
+| **MOST** of what comes out of the country will not press it | **FLOOR-2** — a magnitude in a word over an unrecorded population of events (F2-01) and a rate (F2-06) |
+| …**will not** press it (the modal future) | **FLOOR-2** — a prediction the pulse adjudicates (F2-05); `monster_pressure` subtracts up to 20 on the same record (`defenseGenerator.js:432-440`) |
+| **MOST** of what comes **here** does not press it — an outcome over this town's own creature events | **FLOOR-2** (F2-06) and, where `monster_pressure` or a siege banner is live on the dossier, **CONTRADICTED** by that banner (**F1-107**) |
+| the deterrence is credible — the arrangement is what keeps the pressure off | **SAFE** as a standing posture; it is the key's own name and the engine's own reading (`threatAssessment.js:75`). It becomes a floor-2 claim only when it is cashed as an outcome over events, which is exactly what the second sentence does |
+
+⚠ **Craft note, not a finding.** The second sentence is lifted near-verbatim from the engine's own hardcoded assess string, which sits one click away in the same box (`threatAssessment.js:76-77`). Under §R-1 engine prose is not the record and the face is not refutable for agreeing with it — but the whole point of this block is that the branch holds ONE string today, and a rewrite that re-says it in the same words has bought nothing (W-16's craft rider).
+
+**(7) The angle's stance.** `[ledger]` enters the pair as the office's books hold it: the country's tier on one side, the two standing things on the other, set down in the order a clerk would, landing on a civic thing and stopping. It may name the works and the force flatly, may state the pairing as one condition, and may let the second beat be a second FACT of a varied kind. It may **not** turn the ledger into a tally (a count, a size, a share), into an outcome (what comes and what turns back), or into a forecast. It is the one angle here that may sound like a record and should.
+
+**(8) The turns worth keeping.**
+- **`sits on an active frontier`** — carry it whole. It is the engine's own word, it is licensed, and it puts the country before the town without spending the town's name on the opener.
+- **`a force behind it`** — the noun `force` is the exact word for a disjunction the key cannot resolve, and the shipped row found it. Keep the noun; the possessive frame around it is free.
+- **the two-beat shape** (a long first sentence stating the condition, a second beat that does something else) is word order and punctuation, spendable and worth spending. Only the CONTENT of the shipped second beat goes.
+- **What cannot be carried:** the opener on `{settlement}` (T-F8 bars a sentence face opening on a `proper`-typed slot), `a line`, `a defended perimeter`, and both halves of `most … will not … most … does not`.
+
+---
+
+## VARIANT 2 · `[street]`
+
+**(2) Shipped, verbatim:**
+
+> `The town takes the frontier seriously and has taken it seriously long enough that the arrangements are ordinary rather than anxious.`
+
+**(3) Every claim it makes:**
+
+| the claim | verdict |
+|---|---|
+| the town treats the country's pressure as real ("takes the frontier seriously") | **SAFE** — a collective disposition, unnamed and unpersonned; W22's person bar and W27's stance rules are struck, and nothing in the record denies it |
+| there ARE arrangements | **SAFE** — reads 2 and 3 are the arrangements |
+| **has taken it seriously LONG ENOUGH THAT** — a duration, and a state reached through elapsed time | **FLOOR-2** — the perfect plus a duration (F2-02, F2-05); `ageBands.js`'s `HISTORICIZE_BAND` pin is the constitution's own: a birth-time state carries no origin stamp and can bear no temporal register |
+| the arrangements are **ORDINARY** (routine, unremarked) | **SAFE** — nothing bands the town's own attitude to its own standing arrangements |
+| the arrangements are **NOT ANXIOUS** | **SAFE** in the general case; ⚠ **CONTRADICTED** on the part of the preimage carrying `monster_pressure`, a siege or an occupation banner, all of which print on the same dossier (**F1-107**; `defenseGenerator.js:432-440`, `stressTypes.js`) |
+| the ordinariness FOLLOWS FROM the duration (the causal frame) | **FLOOR-2** — it rests entirely on the elapsed course above |
+| — | ⚠ **Discrimination note, not a finding.** This variant states neither of the pool's two reads. Word for word it would print true on `frontier, force without a perimeter` and on `settled, defenses beyond the need`. Under ADDENDUM 14 that is not a fault at the face; at the POOL grain it is the **DULL** verdict's raw material, because a face that cannot tell you which cell you are in has bought the reader nothing. |
+
+**(7) The angle's stance.** `[street]` is the town at its own grain: what is done, by whom, how it is spoken of, what nobody remarks on any more. It may reach for scene words, a bystander, a plural, a trade, a complaint, a thing avoided. It may state a collective disposition and the ordinariness of a duty. It may **not** seat a named person, the singular office the tier emits (F3-06), a rate ("most nights"), a duration, or any body the roster does not carry. Ease at the town's own grain is explicitly free (**F1-34**'s rider: children on the earthwork, a bar not dropped in years — minus the rate).
+
+**(8) The turns worth keeping.**
+- **`ordinary rather than anxious`** — the sharpest four words in the pool and fully lawful. The contrast is a posture, not a magnitude, and it is exactly what "credible deterrence" means at the street's grain. Carry it, or carry the shape of it.
+- **`The town`** as the opener of a sentence-form row: a capital that is not a proper slot, lawful under T-F8, and the row already owns it — so if variant 1 moves off `{settlement}`, it must not move onto `The town` (A11, the shared-opener arm).
+- **What cannot be carried:** `has taken it seriously long enough that` — the whole elapsed frame. What replaces it must reach the same landing (ordinary, unremarked) from a STANDING condition rather than from time: the conversion §F2 asks for is *not* "long enough that it is ordinary" but a standing fact whose ordinariness is visible in it.
+
+---
+
+## VARIANT 3 · `[counterforce]`
+
+**(2) Shipped, verbatim:**
+
+> `Very little reaches {settlement} out of the wild country, and the reason is that the arrangements are visible from a long way off.`
+
+**(3) Every claim it makes:**
+
+| the claim | verdict |
+|---|---|
+| there IS a country outside the town with creatures in it | **SAFE** — read 1; `frontier` is a live monster-and-raider tier (`monsterThreat.js:20-28`) |
+| the country is **WILD** | **SAFE** — nothing denies it; ⚠ weak adjacency risk only: `terrainType` and the cultivated-land readings print on the overview (**F1-102**), so "wild" is safest read as what is IN the country rather than as uncultivated ground |
+| **VERY LITTLE REACHES** the town — an outcome over creature events | **FLOOR-2** — a magnitude over an unrecorded population (F2-01) and an implied rate (F2-06). ⚠ **CONTRADICTED** where `monster_pressure` is live (`defenseGenerator.js:432-440`, the banner on the same dossier) or where the beasts badge reads WEAK or CRITICAL, which this key permits across its whole domain (**F1-40**, §5c c5) |
+| there ARE arrangements | **SAFE** — reads 2 and 3 |
+| the arrangements are **VISIBLE FROM A LONG WAY OFF** | **FLOOR-2** — a magnitude of the works (height, extent, sightline) that no field bands; the roster names the row and never its size. The same fault as the struck shipped clause "substantial works" (`rulings-DEF2-v14`) |
+| the visibility is **THE REASON** little comes (deterrence by appearance, not by use) | **SAFE** as a standing capability clause — the block's header licenses exactly this class (a capability clause, never a historical one) and the key's own name is "credible deterrence". It is sound in itself and unsound here only because both of its terms above are floor-2 |
+
+**(7) The angle's stance.** `[counterforce]` states what is holding a pressure back, and reads the negative case as the record: the thing that does not happen, and the standing arrangement that is why. On this pool it is the angle closest to the key's own meaning and therefore the one most tempted into an outcome. What it may do: name the arrangement as a deterrent in the **subjunctive** (what would have to be attempted; what an attempt would meet), state the capability as a standing fact, and land on the civic thing. What it may not do: count what has come, rate what comes, forecast what will come, or size the works. **State never fate** — the edge is subjunctive, and the subjunctive is this angle's licensed instrument here.
+
+**(8) The turns worth keeping.**
+- **The IDEA of the whole sentence** — that what deters is what is *seen*, not what is used — is the pool key's own sense, is the sharpest thing any of the three rows reaches for, and is lawful once it stops being cashed in events and distances. Keep it; re-seat it in the subjunctive or as a standing capability.
+- **`out of the ... country`** — the country as the source of what comes is licensed and is the pool's own subject; keep the preposition and the noun.
+- **`and the reason is that`** — a plain joint that asserts a capability edge without a `which` and without a cause the record does not hold. Lawful, and worth keeping as a rhythm if not as these words.
+- **What cannot be carried:** `Very little reaches`, and `visible from a long way off`.
+
+---
+
+## WHAT THE POOL'S REWRITE MUST HOLD ACROSS THE THREE (for the drafter and the refuters)
+
+- **Three variants, three grammars, three openers.** A pool of k carries min(k, 8) distinct level-1 grammars (MOVE-GRAMMAR §2.1). No two numbered rows share their first two words after slot normalisation (A11), and **no row and no face opens on `{settlement}`** (T-F8) — which variant 1 does today and cannot keep. `The town` is variant 2's opener and is spoken for.
+- **The two reads are the pool's discriminator.** Variant 2 states neither, and would print true on three other cells of this same row. The rewrite is free to leave a face abstract, but a pool in which no face tells you that **both** the works and the people are standing has not earned its cell.
+- **The word "force" is load-bearing.** It is the only noun true of both a barracks garrison and a part-time citizen militia. Every sharper word for the people — soldiers, professionals, the garrison, the militia, the watch, paid men — is false on part of the preimage (§5b).
+- **The works cannot be named sharply either**, for the same reason (citadel, gate, palisade, earthwork, town walls, massive walls all satisfy one flag). The sharpness available is not the material but the **shape and the labour**: what has been kept clear outside it, what it costs to maintain, who is on it and what else they do.
+- **The thread** (MOVE-GRAMMAR §1.4.1, a wall). This pool is the SPINE and composes with zero modifiers today, so no face turns outward. Where a face runs to two sentences, the second carries a noun forward from the first — the works, the force, the country, the town — or it is a disconnect a refuter will name. The composer orders modifiers by salience with the spine first, and the drafter does not choose the face's place: **every face must read well immediately after nothing at all.**
+- **Four faces per variant**, each a different vocabulary or rhythm inside the voice, never a paraphrase of a sibling; an unweighted seeded roll picks one at render, so each stands alone. Never trim: a face that fails stays in the annex as a refusal row with its measurement.
+- **The ceiling, not the middle** (§21.1–21.4). Density and idiom that reward the reader are part of the ceiling; "unclear" is not a finding unless a law is broken; a refinement that makes a lawful line plainer with no law behind the change is the regression.
+
+*End of packet. Marker: Opus 5. Nothing outside this file was written; only `scripts/prose-licence-card.mjs` was executed.*

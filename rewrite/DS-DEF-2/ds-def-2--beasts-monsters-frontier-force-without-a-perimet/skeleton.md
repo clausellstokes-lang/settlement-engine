@@ -146,3 +146,113 @@ A body the roster does not carry may not be asserted. Four closed sets reach thi
 **f) What the absence is NOT.** It is not a ruin, not a stump of old work, not a wall they never got round to, not weather (CR-16, CR-17, CR-20, F4-01). The record holds a standing absence of a class of thing and no story whatever about it. **The licensed sharpening of an absence is a present consequence, never a past**: not *they never built one*, but *there is nothing here that has to be opened in the morning*.
 
 ---
+# §V1 · VARIANT 1
+
+**(1) Number and angle tag:** vid **1** · `[ledger]`
+
+**(2) Shipped, verbatim:**
+> {settlement} keeps armed people on an open frontier, which means the defense is reactive: whatever comes chooses where the fighting happens, and the town arrives afterwards.
+
+**(3) Every claim it makes, one per line, on the new test:**
+
+- {settlement} keeps armed people — **SAFE.** The force read. ⭐ *armed people* is deliberately bucket-agnostic and is the one phrase in the pool that survives BOTH halves of the range (CR-1, CR-2). The best thing in the shipped rows.
+- the town's frontier is **open**, i.e. unenclosed — **SAFE.** `walls.present` false. Reads as *no perimeter*, not as *flat country*; if a face lets it slide toward terrain it becomes CR-12.
+- the country is a **frontier** — **SAFE.** The tier word is the engine's own, one of exactly three.
+- the defence is **reactive** — **SAFE**, and strongly so: it is the engine's own word for this exact branch (`threatAssessment.js:88-89`, *"Defense is reactive."*). ⚠ craft note, not a finding: lifting an engine string verbatim is the one thing the block's PROVENANCE fence says this corpus exists to replace (*each branch currently holds exactly ONE string, so every settlement in a given branch says the same words*).
+- whatever comes **chooses where the fighting happens** — **SAFE.** The engine's own (`:89-90`, *"Attackers choose the point of engagement."*). ⭐ note the discipline: *whatever comes* names no creature, which is correct — no creature vocabulary exists anywhere this key reads (CR-13).
+- the town **arrives afterwards** — **SAFE.** A standing disposition, not an elapsed course; nothing in the record models a response time in either direction. Silence is permission.
+- **FORM (not a claim tag).** *which means* is a which-clause, refused outright by the register card and by the annex's connective contract (`ARCH §2.5`: no `which` in the connectives leaf). It is also the sentence's only joint and it is doing summary work — the gloss the record never performs. Both of the sentence's halves are licensed; the seam between them is not.
+- **FORM.** The unit is one sentence carrying four moves through a colon and two commas. S2 licenses ONE joint on a computed consequence; this is three.
+
+**(4) The reads this variant touches:** all three, and it is the only shipped variant that states the tier word outright. See the pool table above.
+
+**(5) The rows it can walk into:** CR-12 (if *open* drifts to terrain), CR-13 (if *whatever comes* acquires a kind), CR-16 (if *arrives afterwards* acquires a tense), CR-22 (if *reactive* is escalated into a verdict on the town's readiness).
+
+**(6) Preimage:** clean across the whole range as written — nothing here predicates the body's kind, the tier, a watch, or pay. **This is the variant that already obeys the preimage, and the rewrite must not lose that by sharpening it into a garrison or a militia.**
+
+**(7) The angle's stance — `[ledger]`:** the compiled record's own view: what the books, rolls and counts show, set down in the order a clerk sets things down, landing on the civic thing the fact names and stopping there. Here that is the force, the missing works, and the consequence the arrangement has as a standing fact. It may weigh two facts against each other because the record holds both. It may cite a holder at most once and only for an S3 reason (two accounts that disagree; a count from an interested party; a keeper who is a power) — **none of the three is present at this key**, so the recommended citation count is zero, and per CR-9 the one licensed holder may not even resolve on half the range. It may NOT gloss, sum up, or tell the reader what the arrangement means.
+
+**(8) Turns worth keeping, verbatim:**
+- ⭐ `keeps armed people` — carry this into at least one face unchanged. It is the pool's only class-blind name for the force and the whole preimage rests on it.
+- `on an open frontier` — compact, lawful, and does two reads in four words.
+- `whatever comes` — the correct evasion of a creature vocabulary the record does not have.
+- `the town arrives afterwards` — lawful, and the sharpest clause in the pool. ⚠ it is also the clause nearest to being a story; keep it as a standing disposition.
+- **Not kept:** `which means` (form); `the defense is reactive` as a lifted engine string (keep the fact, not the phrasing).
+
+**(9) Flavour for this variant specifically:** the ledger stance is the one that may say plainly what the arrangement costs the town as a STANDING fact, and §9(d) is its material — the people who stand are the people who are needed elsewhere while they stand. It is also the stance that may state the fork the record itself draws (the sibling key `frontier, credible deterrence` exists, so the alternative is a real sibling and R-DA-02 is satisfied).
+
+---
+
+# §V2 · VARIANT 2
+
+**(1) Number and angle tag:** vid **2** · `[visitor]`
+
+**(2) Shipped, verbatim:**
+> A stranger finds soldiers at {settlement} and no wall for them to stand on, and can see how that would go against anything that arrived in more than one place.
+
+**(3) Every claim it makes, one per line, on the new test:**
+
+- a stranger comes to the town and looks at it — **SAFE.** W27's stance rules are struck; a stranger may act, be turned away, be told the wrong thing, pay twice.
+- ⛔ **the armed people are SOLDIERS** — **CONTRADICTED** on the militia half of this pool's range. `inst.hasGarrison` false (`priorityHelpers.js:46`); the garrison bucket empty (`defenseInstitutionBuckets.js:88-91`); and the harder denial is the row's own printed description, which the reader sees on the same tab: `Citizen militia` is *"Able-bodied residents drill and muster… Part-time service."* (`institutionalCatalog.js:335-341`), *"Organised community defense."* (`:867-873`), *"All able-bodied citizens obligated to defend town. Part-time service."* (`:1340-1347`). **The ROSTER ROW is the record.** (CR-1; F1-02, F1-27's principle.) ⭐ **This is the pool's one hard finding, and it is structural rather than careless: the key collapses `garrison || militia` into one boolean, so ANY face that names the body's kind is false on half its own range.**
+- no wall stands for them to stand on — **SAFE.** `walls.present` false; and F1-25's negation bar does not bite, because the roster prints no wall to deny.
+- a stranger **can see** this — **SAFE.** An observable of the two facts already stated; no interior, no belief, no verdict.
+- an attack **arriving in more than one place** would go badly for the town — **SAFE.** Subjunctive, so state-never-fate holds; and it is the engine's own reading of this branch (`threatAssessment.js:90`, *exposed to anything coordinated*). ⚠ *more than one place* sits one word away from CR-14: it is a claim about the SHAPE of a hypothetical, not a magnitude of any field, and it stays safe only while it stays hypothetical and uncounted.
+- ⚠ **PAGE-GRAIN, not a claim:** this sentence is a near-twin of the `Invasion & War` row printed two paragraphs below it on every town in this range — *"A stranger sees soldiers at {settlement} and no line for them to stand behind, and can see how that decides where any fight would happen."* Same stance, same stranger, same two nouns, same subjunctive close. **CR-25 / F1-107 / §R-12.** It is not a contradiction; it is the pool's worst craft fault and the rewrite's clearest target.
+
+**(4) The reads this variant touches:** the perimeter read and the force read, both stated; the tier word is absent from this variant entirely (the frontier is implied by *anything that arrived*, not stated).
+
+**(5) The rows it can walk into:** **CR-1 (it walks into it as shipped)**, CR-25 (it walks into that too), CR-14 (*more than one place*), CR-19 (if the stranger's counterpart becomes the one who keeps the gate).
+
+**(6) Preimage:** ⛔ **this variant is false on the hamlet/village half of its own range as written**, and on any town tier where the seated body is the militia. A face here must name the force in a way that is true of a part-time citizen body AND of multiple standing garrisons, or must not name its kind at all.
+
+**(7) The angle's stance — `[visitor]`:** what a person arriving from outside meets and can tell without being told, set down in the record's third person and never in the stranger's interior. The visitor may act, be stopped or not stopped, be answered or not answered, and may draw the inference any arriving person would draw from what is in front of him. He may NOT carry a named identity, a fate, a feeling assigned to him, or knowledge of a field he could not see from the road. ⭐ his privileged material at this key is §9(b): he is the one who notices that nothing stopped him.
+
+**(8) Turns worth keeping, verbatim:**
+- `no wall for them to stand on` — lawful and physical. ⚠ but the sibling row one paragraph below says *no line for them to stand behind*; at most ONE face may keep this shape, and it would be better spent elsewhere.
+- `can see how that would go` — the correct subjunctive register for an edge.
+- **Not kept:** `soldiers` (CR-1, the finding); `A stranger finds… at {settlement}` as an opening formula, since the sibling row opens *A stranger sees… at {settlement}* on the same page; `in more than one place` if any face lets it harden into a count.
+
+**(9) Flavour for this variant specifically:** §9(b) belongs to this angle and is entirely unused — the engine prints *no gates to bribe and no checkpoints to avoid* (`safetyProfile.js:463-464`) on this very dossier, so the visitor face may write the thing a stranger actually experiences: that he walked in, and that nobody stopped, asked, counted or turned him, and that nobody local thought this worth remarking on. That is a licensed observation with the engine's own denial standing behind it, it is not the sibling row's sentence, and it puts a person in front of the reader instead of an argument.
+
+---
+# §V3 · VARIANT 3
+
+**(1) Number and angle tag:** vid **3** · `[street]`
+
+**(2) Shipped, verbatim:**
+> The town can answer trouble and cannot prevent it, and the difference costs it something every season.
+
+**(3) Every claim it makes, one per line, on the new test:**
+
+- the town can answer trouble — **SAFE.** The force read; and *answer* is class-blind, so it survives the whole preimage.
+- the town cannot prevent trouble — **SAFE.** The perimeter read, and the engine's own reading of this branch (an attacker chooses the point of engagement). ⚠ it is a capability clause, which is exactly what the block's PROVENANCE fence licenses (*walls without people cannot be held*) and it stays on the right side of that fence as long as it is not turned into an incident.
+- the difference between answering and preventing costs the town something — **SAFE in substance.** No purse is split and no magnitude is named, so F4-02/F4-03 do not fire and CR-14 does not fire. Nothing in the record denies that an unenclosed arrangement costs the town; the cost is left unpriced, which is the licensed form.
+- ⛔ **the cost falls EVERY SEASON** — **FLOOR-2.** Two floors at once: **F2-02** (*ANY date, year, season, month or duration*) names the season by itself, and **F2-06** (*A RATE*) names the recurrence — *"nothing bands a rate anywhere in the engine"*, and the chair explicitly withdrew the rate form of its own worked example. There is no clock on this dossier that turns, and a birth-time state carries no origin stamp to count from (`ageBands.js`, `HISTORICIZE_BAND = 'years-past'`). **The record is the pin; the face is wrong.**
+- **FORM.** The variant carries **no slot at all.** Per ARCH §2.5 every one of its four faces must also carry none — a face that reaches for `{settlement}` here is refused by the projector before any refuter reads it.
+- **FORM.** Two balanced clauses on one `and`, then a third clause on a second `and`. The register card's *a qualification is a sentence, never a tail* reads the third clause as a tail; S2 would license it only as a computed consequence of the sentence's own fact on ONE joint, and this unit already spent its joint.
+
+**(4) The reads this variant touches:** the force read and the perimeter read, both as capabilities. The tier word is absent; *trouble* stands in for it, which is lawful (no creature vocabulary exists) but also the vaguest word in the pool.
+
+**(5) The rows it can walk into:** **CR-15 (it walks into it as shipped — the season and the rate)**, CR-21 (if *costs it something* acquires a purse or a payer), CR-16 (if the cost acquires a trend), CR-14 (if it acquires a size).
+
+**(6) Preimage:** clean across the range apart from the season. Nothing here predicates the body, the tier, a watch, terrain or pay. **Its failure is temporal, not referential** — the opposite of vid 2's, which is worth saying plainly to the writer: this pool's two faults are one of each kind, and a rewrite that cures only the obvious one leaves half the pool broken.
+
+**(7) The angle's stance — `[street]`:** the town's own understanding of its own arrangement, in the record's third person and never in a townsman's interior. It may state what the town takes for granted, what it does not pretend, what it is used to and what it has not settled — and it holds the register card's licence to leave one matter standing open. It may NOT quantify over persons (*nobody in the town thinks…*, *everyone here knows…* — a totality over persons is a REFUSED COLUMN on the card, always), may not report a belief as a fact about minds, and may not close on a maxim, a moral or an epigram.
+
+**(8) Turns worth keeping, verbatim:**
+- ⭐ `can answer trouble and cannot prevent it` — the pool's thesis in seven words, class-blind, tense-free and true of every town in the range. The single most reusable clause the shipped pool holds; carry it into a face intact.
+- `the difference` — lawful as the subject of a cost, and a genuinely good compression.
+- **Not kept:** `every season` (CR-15, the finding); `costs it something` if it stays this vague across all four faces, since an unpriced cost repeated four ways is the DULL verdict at the pool grain.
+
+**(9) Flavour for this variant specifically:** the street stance owns §9(c) and §9(d) — the decision about which way to go, taken by somebody, in the dark; the outlying houses on the wrong side of nothing; who is defended first, which in a walled town is not a question and here is; and the argument the town has not settled about whether armed people are the answer to a country like this one or the cheaper half of one. It also owns the plural unnamed person (§9(e)), which no row in this pool uses and which ADDENDUM 14 freed by name.
+
+---
+
+# §X · WHAT THE REWRITE OWES, IN ONE PLACE
+
+1. **Twelve faces** — four per variant, each a different vocabulary or rhythm inside the voice, never a paraphrase of its sibling; never trim; every face stands alone under an unweighted seeded roll.
+2. **Two shipped claims are wrong and must not survive in any face:** `soldiers` (vid 2, CR-1, contradicted on half the range) and `every season` (vid 3, CR-15, floor 2 twice over).
+3. **The class-blind rule is this pool's whole discipline.** `garrison || militia` is one boolean over a part-time citizen body and multiple standing garrisons. No face may predicate the body's kind. The safe register is what the shipped rows already found once: *armed people*, *can answer*, *the town's own*.
+4. **Slot sets are fixed:** vid 1 and vid 2 carry `{settlement}`, vid 3 carries none. Only `{settlement}` is ever filled at this block's call sites. At most one variant's faces open on the settlement token, and today that is vid 1.
+5. **Do not re-use the sibling's sentence.** `Invasion & War` prints *a stranger, soldiers, no line to stand behind* two paragraphs below on every town in this range. The visitor face must find its own observation, and §9(b) is sitting unused.
+6. **The flavour brief in one line:** three rows of institutional abstraction where the record left a stranger nobody stopped, a gate that does not exist to be closed, a militia that drills and then goes back to work, a decision taken in the dark about which way to ride, and an argument the town has not settled. The record is silent about all of it, and silence is permission.
