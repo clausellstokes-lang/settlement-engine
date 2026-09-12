@@ -1,0 +1,21 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 74,
+ "firstTs": "2026-09-12T06:06:14.125Z",
+ "lastTs": "2026-09-12T06:08:53.526Z",
+ "tools": {
+  "Bash": 16,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "The packet is complete and verified. Final diff against the annex at HEAD shows exactly six differing lines (three `<`/`>` pairs) — precisely the three targets, with all nine other faces byte-identical.",
+ "run": "wf_b9aa5993-4a0",
+ "agent": "a418785372353ae5c",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/4ed79a2b-6cd2-45cf-ab97-83cdad49c30b/subagents/workflows/wf_b9aa5993-4a0/agent-a418785372353ae5c.jsonl",
+ "journal": "result",
+ "checkpointFile": null
+}
