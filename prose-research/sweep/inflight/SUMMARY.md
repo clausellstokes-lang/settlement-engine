@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-11 20:57:40 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-11 21:03:41 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -82,7 +82,7 @@
 | ? | other |  | result | 0 | refine.md | — | 21:44:06 |
 | ? | other |  | failed | 0 | — | — | 21:45:40 |
 | ? | other |  | failed | 0 | — | — | 21:48:44 |
-| ? | other |  | in-flight | 0 | — | — | 00:53:21 |
+| ? | other |  | in-flight | 0 | — | — | 01:03:36 |
 | ? | other |  | result | 0 | — | — | 21:44:46 |
 | ? | other |  | result | 0 | — | — | 21:12:02 |
 | ? | other |  | result | 0 | — | — | 21:22:21 |
@@ -129,7 +129,7 @@
 | ? | other |  | failed | 0 | — | — | 21:45:40 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 20:12:23 |
 | ? | other |  | result | 0 | — | — | 21:25:36 |
-| ? | other |  | in-flight | 0 | — | — | 00:46:01 |
+| ? | other |  | result | 0 | refine.md | — | 01:02:57 |
 | ? | other |  | result | 0 | — | — | 21:44:53 |
 | ? | other |  | failed | 0 | — | — | 21:45:42 |
 | ? | other |  | result | 0 | — | — | 20:50:10 |
@@ -137,7 +137,7 @@
 | ? | other |  | result | 0 | draft-round-1.md | — | 20:39:01 |
 | ? | other |  | result | 0 | — | — | 21:09:05 |
 | ? | other |  | result | 0 | — | — | 19:59:19 |
-| ? | other |  | in-flight | 0 | — | — | 00:54:20 |
+| ? | other |  | in-flight | 0 | — | — | 01:03:36 |
 | ? | other |  | result | 0 | — | — | 00:15:29 |
 | ? | other |  | failed | 0 | — | — | 21:45:41 |
 | ? | other |  | failed | 0 | — | — | 21:45:41 |
@@ -146,7 +146,7 @@
 | ? | other |  | result | 0 | draft-round-1.md | — | 20:42:32 |
 | ? | other |  | result | 0 | — | — | 20:51:56 |
 | ? | other |  | result | 0 | refine.md | — | 00:28:33 |
-| ? | other |  | in-flight | 0 | — | — | 00:48:17 |
+| ? | other |  | result | 0 | refine.md | — | 01:01:22 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 20:13:24 |
 | ? | other |  | result | 0 | refine.md | — | 00:46:04 |
 | ? | other |  | result | 0 | — | — | 00:37:41 |
