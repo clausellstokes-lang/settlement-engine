@@ -1,0 +1,20 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 67,
+ "firstTs": "2026-09-12T07:56:23.548Z",
+ "lastTs": "2026-09-12T07:59:17.702Z",
+ "tools": {
+  "Bash": 15
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "Now I'll build the archive file, joining the verbatim law with the fold's verdicts.",
+ "run": "wf_11bb797e-f25",
+ "agent": "a9e4874c929b045ee",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/4ed79a2b-6cd2-45cf-ab97-83cdad49c30b/subagents/workflows/wf_11bb797e-f25/agent-a9e4874c929b045ee.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}

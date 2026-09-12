@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-12 03:53:33 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-12 03:59:12 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = 3706c6df7 §919.2: the OPUS CHAIR MANUAL amended — the refuter and re-refuter seat is OPUS at the 
 
@@ -238,6 +238,13 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
 - LAST-RUNS: 
 
 ## WORKFLOW RUNS of chair session 4ed79a2b-6cd2-45cf-ab97-83cdad49c30b — PER AGENT, PER LANE (owner 09-11: save progress per agent per lane; a run dies with the session, its journal + the packets + the dock commits are the checkpoint; journals mirrored under $SC/_progress/<wf>/)
+- **wf_11bb797e-f25** (mtime 09-12 03:56): agent calls 6 (6 distinct) · DONE 0 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 6 — mirror `_progress/wf_11bb797e-f25/`
+    - `a507343ec` ? · IN FLIGHT · transcript 09-12 03:58 235 KB · 10 tool calls · last: Bash git show HEAD:src/components/new/tabs/OverviewTab.jsx | grep -n "r\.tier\|hist\.age\|historicalCharacter" | he
+    - `a5adaf2e5` ? · IN FLIGHT · transcript 09-12 03:57 200 KB · 3 tool calls · last: Bash S=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratc
+    - `ac712a154` ? · IN FLIGHT · transcript 09-12 03:57 210 KB · 5 tool calls · last: Bash SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
+    - `af023ddf4` ? · IN FLIGHT · transcript 09-12 03:58 357 KB · 18 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
+    - `a9e4874c9` ? · IN FLIGHT · transcript 09-12 03:59 327 KB · 15 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
+    - `ac97eb271` ? · IN FLIGHT · transcript 09-12 03:59 318 KB · 16 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
 - **wf_c1990c61-ad7** (mtime 09-12 03:10): agent calls 14 (14 distinct) · DONE 14 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 0 — mirror `_progress/wf_c1990c61-ad7/`
     - `a39f4c8b2` ? · DONE · transcript 09-12 02:28 460 KB · 28 tool calls · files: convert-W1-W10.md · result: {"slice": "ADDENDUM 12: the ten writer rules W1\u2013W10 and the chair's rulings R-i, R-ii, R-iii, R-iv, R-vi, R-viii\u2032 (as amended) \u2014 re-classified un
     - `a60b1ed6c` ? · DONE · transcript 09-12 02:32 635 KB · 48 tool calls · files: convert-W11-W19.md · result: {"slice": "Writer bars W11\u2013W19 of ADDENDUM 13 part A (the entailment bars: material, garrison, watch, label, alias, the gate word, crisis, stress-record, f
@@ -558,4 +565,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `ad30ac0bb` FOLDER · DONE · transcript 09-11 06:02 1531 KB · 36 tool calls · files: _partD.md, _partE.md, _partF.md, _partG.md · result: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/entailment/ENTAILMENT-TABLE.draft.md
 
 ## PROCESSES: 57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 2.06 2.11 2.09
+load: 2.54 2.29 2.17
