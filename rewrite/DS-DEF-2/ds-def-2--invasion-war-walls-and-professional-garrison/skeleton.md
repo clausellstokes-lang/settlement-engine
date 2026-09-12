@@ -215,3 +215,159 @@ A face must contradict no state in that range, not merely the town on this skele
 Vid 1 not first, or not `[ledger]`, or its slot set not `{settlement}` alone, or fewer than four faces, or no longer the pool's canonical index-zero line. Any face that loses the PAIRING — a work and a paid force together — because that is the pool's discriminating claim and without it a face is claim-identical to `walls with NO force`'s or to `force with NO walls`'s. Any face carrying the siege prediction or the stores condition in any spelling. A face that fixes a material or a shape the roster row denies, or that calls the garrison-bucket force soldiers where the row is a watch or a barracks. A face carrying a which-clause, an em dash, a digit, a count, a date or a rate. A face that splits the purse, reverses the gates' direction, asserts a total non-payment, or states a headcount. A face that mints a proper name or puts an act on the tier's one Guard Captain. A face that opens on the `{settlement}` proper slot where a sibling already does (order constraint 10) or closes on a set-up rather than a standing fact.
 
 ---
+
+## VARIANT 2 · vid 2 · `[visitor]` · slots `{settlement}`
+
+### 2.1 The shipped sentence, verbatim
+
+> A stranger sizing {settlement} up sees the two things that matter together (the wall and the men who belong to it) and revises what an attempt would cost.
+
+### 2.2 Every claim it makes, on the new test
+
+- **A stranger arrives, looks, and forms an estimate.** — **SAFE.** W27's stance rules are struck entire: a stance may reach for its own nouns and rhythm, and a stranger may act, be turned away, be told the wrong thing, pay twice. Nothing in the record denies what a stranger notices or how he reads it.
+- **There is a WALL.** — **CONTRADICTED in the word on part of the range**, exactly as vid 1's *line*. A `Citadel` is inner and `Gates (if walled)` is a point (**F1-07**, `defenseInstitutionBuckets.js:84-89`, `:169-182`), and where the row is a `Palisade` the material is a ring of sharpened stakes (**F1-32**, `institutionVocabulary.js:278`). The record is the roster row. ⚠ This is the variant where the cost is highest, because a visitor face is at its best on the concrete thing — so the cure is not to retreat to a generic but to reach for what the row itself supplies, which is different on every tier.
+- **There are MEN, and they BELONG TO the wall.** — **SAFE as a keeping, CONTRADICTED as a posting on part of the range.** `garrison.present` is true by the predicate and R-3 makes the word lawful. But *belong to it* is read by any reader as men who are at it: at posture `deployed` the engine's own reason string is **"army committed in the field"** (`mobilization.js:306-315`; `mobilizationStatus.js:29` phrases it *army in the field*), and under an occupation the men who hold the gate are the occupier's and take a possessive (**F1-121**, `occupationStatus.js:74-103`). The record is the posture record and the occupation record. **F1-83** in terms: *write the empty town with its men gone.* A face that says the town KEEPS a paid force survives the whole range; a face that stations it on the wall does not.
+- **Those men are the WALL's men rather than the town's, or the town's rather than a lord's.** — **CONTRADICTED on part of the range if the face fixes it either way.** `Garrison` is *Professional soldiers kept under a noble or royal banner* (`institutionVocabulary.js:164`; `institutionalCatalog.js:1927`), so the men may answer outside the town entirely; `Professional city watch` is the town's own full-time law enforcement (`:1918-1923`). **Possessor binding itself is struck** (W1 struck by name: "its muster", "the wall's men" are flavour), so a loose possessive is free; what is not free is naming the banner, the lord or the town as the employer where the row says otherwise.
+- **The TWO THINGS MATTER, and they matter TOGETHER.** — **SAFE, and it is the pool's own reading.** The key pairs them by construction and floor 4 computes the pairing: walls multiply the siege roll by 0.6 and a military body by 0.7 (`stressGenerator.js:118-125`). The pairing is the discriminating claim and must survive into every face.
+- **An attempt would cost MORE than the stranger first thought — a revision upward.** — **SAFE.** It is subjunctive (*would*), which A2 licenses as the edge, and it is an estimate held by a person rather than an outcome asserted of the world. ⚠ It sits one word away from **F2-05**'s modal future: *would cost* is lawful, *will cost* and *could not be taken* are not, and the second of those is additionally **F1-34** because the engine's multipliers never reach zero.
+- **The stranger is unnamed and meets nothing named.** — **SAFE**, and it must stay that way: **F1-126**, a minted proper name borne by the face prints identically across every town whose key matches. This pool's only slot is `{settlement}`.
+- **The parenthesis names the two things as an aside.** — a craft matter, not a claim. The parenthesis is an appositive restating the subject, not a second fact, so S2 is not engaged; but it is the shipped row's weakest joint and it is the one turn the rewrite should not keep in all four faces.
+
+### 2.3 The reads this pool reaches (material for the rewrite of vid 2)
+
+- `walls.present`: the work itself, standing today, ruin-filtered, with its roster name and its catalogue description available — a ring of sharpened stakes, a wooden palisade or an earthen bank, stone walls and gates ringing a town, masonry with towers and gatehouses, an inner fortress and last refuge, layered rings with an inner keep, controlled entry points with gatekeepers who decide what passes and what waits outside.
+- `garrison.present`: a paid standing force, and the vocabulary rows behind it — a noble or royal banner, quarters where the armed hand of the settlement sleeps and eats, soldiers in separate quarters because no single barracks holds a city this size.
+- The key's pairing, which is exactly what a stranger CAN see from outside: a work and people kept for it.
+- Free to the `[visitor]` stance and not reached by the key, therefore silence and therefore permission: what a stranger is asked at the entry, what he is not asked, what he is charged, where he is sent, who does not look up, what a road does when it reaches the works.
+- NOT reached: the militia, the country's monster tier, the stress banner, the food stores, the posture record, the badge, the other four arms.
+
+### 2.4 ⭐ WHAT WOULD BE FALSE HERE
+
+The table at §1.4 binds this variant unchanged. The rows this `[visitor]` variant walks into HARDEST, because a stranger's eye goes straight to a body and a shape:
+
+| row | the trap this variant specifically invites |
+|---|---|
+| **F1-07 / F1-32** | *the wall*, *the ramparts*, *a circuit*, *a line* on a citadel or a gate row; a material the row's own description fixes otherwise. The visitor angle wants the concrete thing and the concrete thing is different on every tier of the range. |
+| **F1-83** | men shown ON the works where the posture reads `deployed` — "army committed in the field" (`mobilization.js:306-315`). The face that survives says the town KEEPS them, not that they are standing there. |
+| **F1-121** | "the garrison" bare where an occupier is on the page. Costs one possessive: *the occupier's men*, *the men who hold the gate now*. |
+| **F1-27 / F1-29** | the men called soldiers or an army where the standing member is a `Professional city watch` (full-time law enforcement) or a `Barracks` (housing); at city, the watch and the garrison contrasted as two bodies where ONE row sits in both buckets. |
+| **F1-01 / F1-04** | a WATCH as a standing body where `hasWatch` is false — a `Garrison`-only town has no watch row. ⚠ **"keeps watch", "the night is watched" and PATROLS are free anywhere** (`patrol` is a `force`-class token, not a body), and **"the guard" is free here**, because a garrison IS a law body and the engine's own word for it is the guard (`safetyProfile.js:273`, `:281`). |
+| **F1-34** | the stranger's reading widened into a totality — *nothing takes this town*, *no one would try*. The multipliers are 0.6 and 0.7, never zero. Ease and reluctance at the town's own grain are free. |
+| **F1-126** | a minted proper name — a captain, a gate's name, an inn the stranger stops at, a family. The stranger stays unnamed and meets nothing named. |
+| **F3-05** | the stranger's road furnished from the exemplar pack — thatch, hearth-smoke, a market green, snow, a north-European village — on a town whose culture profile is `arabic`, `east_asian`, `mesoamerican`, `south_asian` or `steppe` (`cultureProfiles.js:50-600`). **No defense pool reads the profile**, so a visitor face that furnishes the approach is at the highest risk in the block. |
+| **F3-06** | the person the stranger MEETS. The tier seats exactly one **Guard Captain** per village-plus with a generated disposition and secret (`npcGenerator.js:1511-1537`), so "the one at the gate who decides" reads as a statement about him. A plural, a trade, or a bystander is safe; the singular office is not. |
+| **F2-01** | a magnitude in the sizing up — how many on the wall, how high, how thick, how far off it is seen from. F2-01 names a garrison's size in terms. |
+| **F2-05 / F2-07** | an elapsed course in the noticing ("has stood", "no longer", "as ever", "again"); an age of fabric against the printed age. ⚠ age-FLAVOUR is free where the printed number does not deny it (`OverviewTab.jsx:251`, `:259`). |
+| **F2-06** | a RATE in what the stranger meets — "most travellers are stopped", "the gate is usually shut". *The gate is shut* is lawful; the rate form is not. |
+| **F1-102** | the approach named against the config — a pass on a `road` town, a harbour inland, a river where the terrain is desert. |
+
+**THE CLOSED ROSTERS**, as at §1.4: the live institution roster; the force buckets `garrison · militia · watch · mercenary · charter` and `magicDef`; the walls bucket's six keywords; the faction list; the faith entries; the NPC office roster. Not a faith pool: no deity axis, derived temper, pantheon rank, settlement standing or suppressed flag arises.
+
+### 2.5 ⭐ THE PREIMAGE
+
+As §1.5, unchanged, with the three lines that bite this variant restated. **The key never reads the militia**, so the pool fires with a citizen body and without one; **the key never reads the posture**, so the same sentence prints on a town whose army is in the field; and **the key never reads the stress roster**, so it prints under an active siege, under an occupation, and under a famine, each with its own banner on the same dossier. A `[visitor]` face is the most exposed of the three, because a stranger who walks up to a town and reports what he sees is implicitly reporting a moment, and the moment the key guarantees is only this: a work stands and a paid force is kept. Everything else on the page can be at war.
+
+### 2.6 The angle's stance in one sentence
+
+`[visitor]` is what a stranger notices first, without being told, so here it may report the work as a thing met on the road, the keeping of a paid force as a thing a town's approach makes obvious, and what that does to an outsider's arithmetic — and it may NOT station a body on the works, name anything or anybody, count, date or measure what it sees, furnish the approach from a culture the town does not hold, or turn the stranger's estimate into the world's outcome.
+
+### 2.7 The turns worth keeping
+
+- *sizing {settlement} up* — the APPRAISAL move is the angle's sharpest instrument and is entirely lawful. Keep the move; change what is appraised and what the appraisal costs.
+- *the two things that matter together* — the pairing again, in the visitor's own idiom. Keep the CLAIM in every face; the phrase itself is near-verbatim shared with vid 1's *a line and professionals to hold it* and the two rows must not converge on one compression.
+- *revises what an attempt would cost* — the subjunctive edge, correctly held. Keep the subjunctive; it is the one lawful way this pool reaches an outcome at all.
+- ⛔ The parenthesis is the row's weakest joint and reads as a gloss; at most one of the four faces should carry an aside of any kind.
+
+### 2.8 ⭐ WHERE THE FLAVOUR IS (vid 2)
+
+- **The gate is the whole visitor encounter and no row of this pool has one in it.** `Gates (if walled)` reads *Controlled entry points in the wall, manned by gatekeepers who decide what passes and what waits outside* (`institutionVocabulary.js:159`; catalogue `institutionalCatalog.js:1359` "Controlled entry points with gatekeepers"), and `Town watch` carries `Gate duty: {on: true}` as a live service row (`institutionServices.js:1324`). The engine's own surfaces argue about whether there are gates to bribe, and **§1.4 W-08 rules that a writer agreeing with either surface cannot be failed.** What the record leaves silent is the ARRIVAL, and silence is permission: what a stranger is asked, what he is not asked, what waits outside with him, how long the deciding takes, who does the deciding and does not look up while doing it.
+- **A town that keeps professionals is a town a stranger is PROCESSED by, and that is a texture nothing else on the desk supplies.** The sibling pools give a stranger a wall with nobody at it, or people with no wall, or neither. This pool is the only one where the outsider meets a standing arrangement that has an opinion about him before he opens his mouth. The recut handed back the stance entire — a stranger may be turned away, be told the wrong thing, pay twice — and none of the three shipped rows uses a single one of those.
+- **What a stranger revises is the ARITHMETIC of an attempt, and the engine agrees with him to the digit.** Walls ×0.6, a military body ×0.7 (`stressGenerator.js:118-125`): the model's own answer to "what would this cost" is *less likely, never impossible*. That is a rarer and better sentence than deterrence, because it is honest in both directions — a stranger who concludes the place is not worth the trouble and a stranger who concludes it is merely dearer are both reading the same true number. The shipped row takes only the first half.
+- **The inner fortress is the one thing on this key that is not for the town.** `Citadel` reads *An inner fortress and last refuge, built to hold when the outer walls have fallen* (`institutionVocabulary.js:165`). Where the walls-bucket member is a citadel, what a stranger sees from the road is a place inside the place, and the arrangement tells him plainly who gets inside it and who does not. That is a standing condition, not a history, and no field denies it.
+
+### 2.9 What would make the rewrite of vid 2 a regression
+
+Vid 2 not second, or not `[visitor]`, or its slot set not `{settlement}` alone, or fewer than four faces. A face that loses the pairing. Any face that stations a body on the works, or that names a watch, militia, mercenary company or charter hall as a standing body, or that calls the garrison-bucket force soldiers where the row is a watch or a barracks. A face that fixes a material or a shape the roster row denies. A face that mints a proper name, or that puts the encounter on the tier's one Guard Captain. A face that furnishes the approach with north-European village furniture. A face that turns the stranger's subjunctive estimate into an indicative outcome, or that widens his reluctance into a safe town. A face carrying a magnitude, a date, an elapsed course or a rate. A pool in which all four of this row's faces open on `{settlement}` or all four carry an aside.
+
+---
+
+## VARIANT 3 · vid 3 · `[street]` · slots NONE
+
+### 3.1 The shipped sentence, verbatim
+
+> The town believes it could be held, and the belief is founded on something rather than on hope.
+
+**⛔ This row carries NO SLOT** (`defense.generated.js:574`, `"slots": []`). Every face of vid 3 must name no town, fill nothing, and stand on the common noun alone. That is a constraint and it is also the row's best property: it is the only line in the pool that could be spoken by somebody who lives there.
+
+### 3.2 Every claim it makes, on the new test
+
+- **The TOWN BELIEVES something — a civic confidence.** — **SAFE on the new test, with two live cautions.** Nothing in the record denies it; no field carries belief either way, and silence is permission. ⚠ Caution one: **read as a totality over persons it is a REFUSED COLUMN on the card** ("a totality over persons", printed on every card of this block), so *everybody here believes* is refused where *the town's own talk runs this way* is not. ⚠ Caution two, a VOICE matter and not a finding: the register card says no field carries motive, belief or mood, and MOVE-GRAMMAR §1.3 lists FEELING among the moves that do not exist — the record shows a disposition only through what people DO. A refuter cannot fail the face for it, but the flavour section below hands the writer conduct instead, which is both lawful and better.
+- **It COULD BE HELD — the town's works and men would serve in a defence.** — **SAFE, and it is the most economical licensed claim in the pool.** The modal is subjunctive, which A2 licenses as the edge; it is a capability of a standing arrangement, which the block's own fence names in terms (*the causal clauses here are CAPABILITY clauses and never HISTORICAL ones*); and floor 4 computes it (`stressGenerator.js:118-125`). ⚠ The neighbouring forms are barred: *will hold*, *would hold*, *cannot be taken* are **F2-05** and **F1-34**, and vid 1's *not rated for a long siege* is the same claim inverted and is floor 2.
+- **The belief is FOUNDED ON SOMETHING.** — **SAFE**, and it is the pool's discriminating claim in five words: something stands and somebody is kept for it. This is what separates the row from `militia only` and `neither walls nor force`.
+- **RATHER THAN ON HOPE — an implied contrast with towns that have only hope.** — **SAFE.** Order constraint 5 licenses a CONTRAST where a sibling pool key names the rejected alternative, and two siblings do: `Invasion & War: militia only` and `Invasion & War: neither walls nor force`, whose own shipped row reads *what preserves the town is distance, diplomacy, or being beneath notice*. The contrast is the key's, not the writer's. ⚠ It is not fronted here, which is correct: the constraint bars a fronted contrast and bars it as the closing move of more than one variant per pool.
+- **The town can STATE its own position — the belief is articulate.** — **SAFE** by silence, and it is the `[street]` angle's own ground. Note the sibling `neither walls nor force` row already spends this exact turn (*everybody here can state the plan*), so a face here that reaches for articulacy in the same shape collides with a sibling pool across the same table rung.
+- **No town is named.** — **SAFE and REQUIRED**, and additionally the one thing that makes this row immune to **F1-126** by construction.
+
+### 3.3 The reads this pool reaches (material for the rewrite of vid 3)
+
+- `walls.present` and `garrison.present`, together and in the town's own hearing: a thing that stands and people kept for it, both of which the people who live there see every day and neither of which they had to be told about.
+- The key's pairing as a CAPABILITY, which the block's own fence licenses by name.
+- Floor 4's honest arithmetic, available as common sense rather than as a figure: the works and the force make an attempt dearer and do not make it impossible.
+- The whole conduct vocabulary the recut handed back: an UNNAMED person may appear, act, keep a key, chase, refuse, be avoided, be resented; the hall, the chamber, the long table are all scene words again; two things may act on each other.
+- NOT reached: the militia, the monster country, the stress banner, the posture, the stores, the badge, the tier word, any history.
+
+### 3.4 ⭐ WHAT WOULD BE FALSE HERE
+
+The table at §1.4 binds unchanged. The rows this `[street]` variant walks into HARDEST, because the town's own talk is where a totality and a person sneak in:
+
+| row | the trap this variant specifically invites |
+|---|---|
+| **the card's REFUSED COLUMN** | **a totality over persons** — *everybody here*, *nobody in this town*, *all of them*. The card refuses it on every pool of this block, always, and the `[street]` angle is where it costs nothing to write by accident. A civic talk, a common view, what is said in one place, what nobody bothers arguing about: all lawful. |
+| **F3-06** | the person who says it. The tier seats exactly ONE **Guard Captain**, one Mayor and one High Priest per village-plus, each with a generated personality, disposition and secret (`npcGenerator.js:1511-1537`, `:117-149`). "The one who would give the order" is a statement about a named NPC on another tab. A plural, a trade, an unnamed bystander or an office the roster does not seat is safe. |
+| **F1-25** | the NEGATION direction in the town's own voice — *nobody here worries about an army*, *no one has ever had to*, *there is nothing to stop anyone*. The first two are **F1-34**'s totality; the third denies the roster's own rows. |
+| **F1-34** | the confidence widened into a safe country. The engine's multipliers are 0.6 and 0.7 and `threatAssessment.js:113-130` builds this row for EVERY town. Ease at the town's own grain is free; *nothing comes here* is not. |
+| **F1-03 / F1-26** | a militia or a citizen turnout as the thing the confidence rests on. The key does not read `militia`, and `Citizen militia` is present only where no professional watch exists (`institutionalCatalog.js:1340-1347`). The sibling pool `walls with citizen militia` owns that claim. |
+| **F1-27** | the town calling its own men soldiers where the standing row is a `Professional city watch` or a `Barracks`. |
+| **F1-121** | the town's confidence in "the garrison" where an occupier is on the page and the men who hold the gate are his. |
+| **F1-83** | a confidence that rests on men the posture record says are in the field (`mobilization.js:306-315`). |
+| **F2-05** | the elapsed course, which a street voice reaches for first: *has held before*, *nobody has tried since*, *it held the last time*, *still stands*. Every one of those is a history the record does not carry, and no state-prose key reads a history field (**F2-09**). |
+| **F2-06** | a RATE in the talk — *it comes up most winters*, *the question is asked every year*. |
+| **F2-01** | a magnitude in the talk — how many would turn out, how long it would last, how many are kept. |
+| **F3-05** | the street furnished from a culture the profile denies — the market green, the churchyard, the alehouse hearth — on an `arabic`, `east_asian`, `mesoamerican`, `south_asian` or `steppe` town. ⚠ A `[street]` face is furniture by nature; this is the row where floor 3 bites hardest. |
+| **F1-31** | the town sizing itself in the strip's own words — *a place this small*, *too small for stone* is free; naming the tier is not. |
+| **F4-02 / F4-04** | the street's account of the money — *they keep the wall up and let the wages go*, *nobody has been paid*. One purse, one direction, a floor under it; slow drift off the strength is the model's own word and a headcount is not. |
+
+**THE CLOSED ROSTERS**, as at §1.4. Not a faith pool: no deity axis, derived temper, pantheon rank, settlement standing or suppressed flag arises here, and no face may reach for them.
+
+### 3.5 ⭐ THE PREIMAGE
+
+As §1.5, with the one line that matters most to this variant restated: **the key reads no stress field and no posture.** The same unslotted sentence prints in the mouth of a town that is quietly garrisoned in a settled country, and in the mouth of a town that is under siege right now, occupied right now, or whose army marched out last tick — with the banner for each of those rendered above it on the same dossier. **A face about what the town believes is absurd under an ACTIVE SIEGE banner if it is written as calm; it is not absurd if it is written as a position the town holds.** The block's own contradiction set says it flatly: *write nothing that a siege, an occupation or a famine on the same page would make absurd.* And because this row carries no slot, it has one advantage the other two do not: it is the most portable line in the pool and therefore the one most likely to be read in a state its author did not picture.
+
+### 3.6 The angle's stance in one sentence
+
+`[street]` is the town's own talk — what is said there, what is not worth saying there, and what people do about it without discussing it — so here it may put the standing arrangement into the mouths and habits of the people who live inside it, and it may NOT speak for every person in the town, put an act on the office the tier names, recall a time it was tested, count anything, date anything, or let the talk turn into a rate.
+
+### 3.7 The turns worth keeping
+
+- *it could be held* — the single best compression in the pool and the most economical licensed claim on the key. Keep the CLAIM in every face; the exact phrase should not survive into all four.
+- *founded on something rather than on hope* — the sibling-licensed CONTRAST, correctly unfronted and correctly at the close. Keep the MOVE; the word *hope* is the writer's and can go.
+- The single-sentence, single-joint shape. It is the shortest line in the pool and the register says the short line exists; if all four of this row's faces run long, the pool loses its one change of pace.
+- ⚠ *The town believes* is worth keeping as EVIDENCE of what the row wants — a civic disposition — but the register shows a disposition through conduct, and the flavour below is where the conduct is.
+
+### 3.8 ⭐ WHERE THE FLAVOUR IS (vid 3)
+
+- **A confidence a town does not discuss is the truest form of it, and the record leaves the whole of that silent.** What a garrisoned walled town's street actually looks like is not people saying they feel safe; it is a set of things nobody bothers to arrange. Doors that are not barred because the barring is somebody else's job now. An argument about the wall that is about the cost of it and never about whether it would work. Children on the earthwork — **F1-34's own row names that as free, in terms.** None of this is a count, a date, an elapsed course or a body the roster denies, and none of it is a totality: it is what is ordinary in one place.
+- **The men are kept and the town pays, and a street knows exactly what that feels like.** One purse covers *garrison wages, wall maintenance* together (`defenseGenerator.js:182`, `:189-192`) and the row can print *Upkeep underfunded: garrison pay at 60%* directly beneath the prose (`defenseDisplay.js:280`). So the arrangement the town's confidence rests on is also a standing charge the town carries, and the street's own view of a paid force is the oldest one there is: they are ours, they are expensive, and they are not from here. `Garrison` reads *Professional soldiers kept under a noble or royal banner* (`institutionVocabulary.js:164`) — a town whose safety is guaranteed by somebody else's men has a relationship with them, and the record denies nothing about what that relationship is like.
+- **The engine itself will call the garrison a formality on the same page, and the street is the only angle that can hold both.** `safetyProfile.js` prints, depending on the town's safety rung: *The garrison patrols the main paths* (`:288`), *The garrison is overwhelmed or corrupt* (`:296`), *The garrison is a formality: present on paper, absent in practice* (`:306`). The pool fires across all of those. **A face that praises the force is refutable on part of the range; a face that says the town's position rests on the arrangement rather than on the men's quality survives all of it** — and the gap between what a town relies on and what it privately thinks of the people it relies on is the most human thing available on this key, free, and unused by all three shipped rows.
+- **The absence with the sharpest shape here is a record, not a thing.** One institution in the whole roster keeps a muster, and it is the `Citizen militia`, which this key does not consult (`holderTable.js:279-288`). On a great many of these towns there are men under arms and no list of them anywhere. What that looks like from the street: the town knows the force by sight and not by name, knows where they sleep and not where they are from, and has no way of saying how many there are that does not begin with *about*. The record is silent on every part of that, and silence is permission.
+
+---
+
+## 4. THE POOL AS A WHOLE — what the writer must not lose
+
+- **The discriminating claim is the PAIRING**: a standing perimeter work AND a paid standing force, on one town, at once. Every one of the twelve faces must carry it, or the face is claim-identical to a sibling row of the same table rung — `walls with NO force`, `force with NO walls`, `walls with citizen militia`, `militia only`, `neither walls nor force` — and the pool has failed the only job its key gives it. The echo key is the whole table rung, so those five siblings are the nearest neighbours in every sense.
+- **Three angles, three different things the pairing IS**: `[ledger]` two charges on one account and a force the books hold without naming; `[visitor]` a work met on the road and an arrangement that has an opinion about the arrival; `[street]` a position the town holds and does not discuss. If two of the three rows could swap angles without anybody noticing, the pool is DULL at the pool grain, which is the one craft verdict the refuter may return.
+- **The four claims that must not be carried forward in any spelling**, each named above with its ground: vid 1's *not rated for a long siege* (a prediction the pulse adjudicates), vid 1's *without stores behind it* (a field the key cannot see), vid 1's *which* clause (barred by the owner's rules), and any face that stations men bodily on the works (the `deployed` posture and the occupier's possessive). **Everything else the shipped rows say is available again** — the old law struck many of those clauses for being unlicensed, and unlicensed is no longer a fault.
+- **The three facts this pool has and no sibling has**, and which the rewrite should spend: the force may answer a banner that is not the town's; one purse pays the wall and the wages in one stroke and prints *garrison pay* when it is short; and the men are on the ground with no roll of them, because the only muster-keeping institution in the roster is the one this key never consults.
+- **The pool-grain spread rules**: no two variants of one pool share their first two words (A11); the settlement token opens at most one variant per pool and never two adjacent (order constraint 10) — and vid 3 carries no token at all, which makes vids 1 and 2 the only candidates; a pool of three carries three DISTINCT level-1 grammars; a CONTRAST is never the closing move of more than one variant per pool, and vid 3 already closes on one; a pool whose renderings collapse onto one construction or one vocabulary is DULL.
+- **The page fact, last, because it is the one no gate sees**: this sentence is the second of five consecutive paragraphs about one town's defences, and the paragraph above it is the Beasts row's — which on a walled, forced town is about the very same wall. A face that opens on the works in the same words the line above it just used reads as a stammer to every reader and to no instrument.
