@@ -4,7 +4,7 @@ Seat: MARKER (opus), DS-DEF-2 · pool `Disasters & Famine: granary AND parish ca
 
 Three shipped variants, vids 1 to 3, angles `[ledger]` `[street]` `[visitor]` in that order. The rows below are the annex's (`docs/content/RECEIPT_POOLS_DOSSIER_STATE.md:2705-2708`) and the generated leaf carries the same three texts with the same vids, angles and slot sets (`src/data/dossierStateProse/defense.generated.js:920-943`; the pool's manifest row at `:1370-1384` reads `role: spine`, `variantCount: 3`, `faceCounts: [1,1,1]`, `vids: [1,2,3]`, `readsCount: 1`, `attach: []`). The writer rewrites these three, one for one, and gives each its four `[face]` sub-rows.
 
-⚠ **THE SLOT SETS ARE NOT UNIFORM ACROSS THIS POOL, and that is a wall.** Vid 1 and vid 3 carry `{settlement}`; **vid 2 carries NO SLOT AT ALL** (`"slots": []` at `defense.generated.js:933`). A face's slot set must equal its parent's (ARCH §2.5's face-row refusals), so **vid 2's four faces never name the town** and vid 1's and vid 3's four faces each carry `{settlement}` exactly once. A sentence-form face may not OPEN on a `proper`-typed slot either (T-F8), so `{settlement}` sits inside the sentence, never first.
+⚠ **THE SLOT SETS ARE NOT UNIFORM ACROSS THIS POOL, and that is a wall.** Vid 1 and vid 3 carry `{settlement}`; **vid 2 carries NO SLOT AT ALL** (`"slots": []` at `defense.generated.js:932`). A face's slot set must equal its parent's (ARCH §2.5's face-row refusals), so **vid 2's four faces never name the town** and vid 1's and vid 3's four faces each carry `{settlement}` exactly once. A sentence-form face may not OPEN on a `proper`-typed slot either (T-F8), so `{settlement}` sits inside the sentence, never first.
 
 **THE TEST THIS PACKET IS MARKED UNDER (ADDENDUM 14, the owner 2026-09-12).** A face is LAWFUL unless it CONTRADICTS the record. Silence is permission. "The card does not license it" is not a finding and the tag `unlicensed` does not appear anywhere below. Claims are tagged SAFE, CONTRADICTED (with the field, file and line, and which of the two is the record) or FLOOR-2.
 
@@ -235,3 +235,208 @@ The block's own set is `rewrite/rulings-DEF2-v14.txt`. The rows below are the on
 A face must contradict no state in that range, not merely the town on this skeleton.
 
 ---
+
+## VARIANT 1 · vid 1 · `[ledger]` · slots `{settlement}` · canonical at index zero
+
+### 1.1 The shipped sentence, verbatim
+
+> There is food stored at {settlement} and there are clergy who tend the sick: reserves against hunger, and against disease something better than nothing and well short of a hospital.
+
+⚠ **This sentence is the legacy display string rewritten close to the bone, and BOTH halves are inherited.** `threatAssessment.js:176-188` reads *"Granary provides food buffer. The community can absorb a bad harvest without immediate hardship."* + *"Parish clergy provide basic wound care: better than nothing, worse than a hospital."* **The shipped variant's *something better than nothing and well short of a hospital* is that second string with the words moved**, and its first half is the first string's buffer reading. Naming the inheritance is the point: the legacy string is the reason the error reads as authoritative, and it sits one click below the sentence on the same tab.
+
+### 1.2 Every claim it makes, on the new test
+
+- **FOOD IS STORED at the town — a stock, asserted as present.** — ⛔ **CONTRADICTED, and this is the packet's first principal finding.** `hasGranary` matched the substring `granar` on the roster (`priorityHelpers.js:63`) and nothing more. The block's set rules in as many words: *hasGranary is a TIER PROXY (every town-plus, no village-and-below) and says nothing whatever about the stock inside it*. The stock is `economicState.foodSecurity.storageMonths`, re-derived every tick by the world pulse with its `blockaded`, `famished` and `tithed` flags (`foodStockpile.js:404-430`). **The stockpile is the record; the sentence is wrong.** A granary emptied by a blockade still reads `hasGranary: true`, and the badge printed beside this sentence will have fallen while the sentence has not (§0.9).
+- **THERE ARE CLERGY.** — **SAFE, and it is stronger than the shipped line makes it sound.** `Parish churches (2-5)` is `required: true, baseChance: 1` at the town tier and `Parish churches (10-30)` is the same at city (`institutionalCatalog.js:1260-1265, 1828-1833`), so across nearly the whole preimage the parishes are IN the town, PLURAL, and the clergy resident. ⭐ And the key's FALSE leg positively excludes the monastic reading: `monastery` and `friary` are on `hasHospital`'s list as well as `hasChurch`'s, so **these are parish clergy and never a religious community** (`priorityHelpers.js:64-65`).
+- **THE CLERGY TEND THE SICK.** — ⛔⛔ **CONTRADICTED, and it is the one clause in the whole block that the block's contradiction set names by name.** `rewrite/rulings-DEF2-v14.txt`, under *THE FOUR SHIPPED CLAUSES THAT ARE STILL FALSE and must not be carried forward*: **`clergy who tend the sick` (hasChurch records parishes, not care)**. The catalog's own service lists for the matching rows are *religious services*, *pilgrimage*, *theological education* (`economicData.js:390-400`); the parish rows' descs are *Multiple parishes within town* and *One per neighborhood*. **The block's set is the record.** ⚠ The estate's legacy strings at `threatAssessment.js:186` and `defenseDisplay.js:239` assert the care reading too, and they are display prose rather than typed fields — **the ruling governs and the neighbour string is not a defence.**
+- **RESERVES AGAINST HUNGER.** — ⛔ **CONTRADICTED twice.** It is the stock claim restated (above), and *reserves* is additionally a magnitude the read has no band word for (floor 2a). ⚠ Note how close the legitimate word sits: the catalog's own service string for the granary rows is literally `emergency reserves` (`economicData.js:56-57`). **The building's stated PURPOSE is reserves; the town's possession of reserves is the contradiction.** That distinction is the whole craft problem of this pool and the writer should hold it exactly: *a building for holding grain against a later day stands here* is safe; *there is grain in it* is not.
+- **AGAINST DISEASE, SOMETHING** — i.e. the town HAS medical provision of some degree. — ⛔ **CONTRADICTED.** It is the care reading in its weakest form and it is still the care reading. The key's medical leg is FALSE, and what the true leg holds is a parish, not a provision.
+- **BETTER THAN NOTHING.** — ⛔ **CONTRADICTED as written; the SHAPE is licensed and worth keeping.** It rates the care that the record denies. But the move underneath it is legitimate: R-DA-02 licenses a contrast where the rejected alternative names a sibling pool, and **both siblings exist by name** — `granary, NO medical provision` on one side and `granary AND hospital` on the other. **This variant sits exactly between two branches of the same table, and that position is a real fact the writer may use.** It is the position that must be stated, never the quality of the care.
+- **WELL SHORT OF A HOSPITAL.** — **the CLAIM is SAFE; the WORDING carries a magnitude.** *There is no hospital here* is the key's own FALSE leg, flatly true, and it is the ABSENCE move (class (a), LACK — a `none-exists` world field) which R-DA-02 and MOVE-GRAMMAR §1.2 row 11 both license, provided it does not open the variant and does not sit beside another absence. **But *well short of* rates a distance nothing measures** — floor 2a. ⭐ And the absence is bigger and more specific than the shipped line admits: it is **no hospital, no monastery, no friary and no healer**, four named roster rows at once (`institutionalCatalog.js:845, 1267, 1275, 1805, 1814, 2378, 2385`). The shipped line spends the pool's best licensed fact on a comparison instead of stating it.
+- **The colon and the coordinated tail.** — not a claim, but it LEAVES with the rewrite. The colon is licensed as one chosen joint (R-DA-06), but what rides behind it is a second and a third fact joined by *and*. R-DA-03: the qualification gets its own sentence, never a tail, never a third. Amendment S2 admits one computed consequence as a clause and this is not one.
+- **Implicitly: the town WEIGHED the two provisions, or settled for less.** — the face does not quite assert it and must not. There is no decision field and no ancestry behind an institution boolean; the block's fence says these are capability clauses and never historical ones. **FLOOR-2b** if written.
+
+### 1.3 The reads this pool reaches (material for the rewrite of vid 1)
+
+- **The granary as a BUILDING OF A NAMED PURPOSE.** The catalog's own descs are the estate's: *Communal grain storage. Buffers harvests, prevents famine.* (town, `:928`), *Multiple large grain stores distribute food across the city. State managed.* (city, `:1593`), *State-administered granary network holding strategic reserves.* (metropolis, `:2508`). The service lists add `grain storage`, `emergency reserves`, `rationing`, `strategic reserve` (`economicData.js:50-88`). **All of that is what the building IS FOR. None of it is what the building CONTAINS.**
+- **The granary is REQUIRED at town and at city** (`required: true, baseChance: 1`, `:926-927, 1591-1592`), so across most of the preimage this is not a thing the town acquired — it is a thing every place of this size has.
+- **The parishes, plural, resident, and required at town and city.**
+- **The FALSE medical leg as a four-name absence** — the single most specific licensed fact in the pool.
+- **The pool's POSITION between two named sibling branches** of the same table.
+- REACHED BY THE ENGINE AND NOT BY THE KEY, and therefore the writer's boundary: the stock, the months, the deficit, the blockade, the famine flag, the relief gate, the badge, every stress, the route, the port, the tier name, the population, every other institution.
+
+### 1.4 ⭐ WHAT WOULD BE FALSE HERE (vid 1)
+
+Every row of §0.8 is reachable from this variant. The five it walks into hardest:
+
+| row | why this variant, specifically |
+|---|---|
+| **the care reading** | the shipped line breaks it outright and the block's set names the clause. **No clergy who tend, nurse, treat, care for, look after or attend anyone. No wound care, no sickbed, no infirmary, no healer** |
+| **the stock** | the shipped line breaks it twice (*food stored*, *reserves*). The `[ledger]` angle will reach for a quantity by reflex and there is no quantity here at all |
+| **a magnitude** | *well short of*, *something better than nothing*, *modest*, *substantial*, *ample* are each a measurement of a thing the read does not measure |
+| **a named holder** | the `[ledger]` angle plus a parish is the strongest pull to a refused citation in the block (§0.6). **No register, no roll, no tally, no book, no count, no sexton, no warden** |
+| **a decision** | *settled for*, *chose*, *has not built*, *makes do with* each assert an ancestry the institution booleans do not carry |
+
+### 1.5 The preimage, as it bites vid 1
+
+See §0.9 whole. For this variant in particular: the face prints on a town, a city and a metropolis; on a town with a wall and professionals and on one with neither; **under an ACTIVE FAMINE banner and under a PLAGUE-ONSET banner**; over its own *Upkeep underfunded: relief funding at NN%* note; and **beside a live badge that may read CRITICAL while the sentence describes a granary.** *There is a granary and there are parishes* survives every one of those. *There is food stored* survives a famine banner badly and a blockade not at all. *Clergy who tend the sick* survives nothing, because the ruling denies it on every town in the range at once.
+
+### 1.6 The angle's stance in one sentence
+
+`[ledger]` is the clerk's view, what the books, rolls and counts show (the annex's own gloss at `RECEIPT_POOLS_DOSSIER_STATE.md:120`) — so here it may set down flatly WHAT STANDS and WHAT DOES NOT, in the order a clerk would, giving the absence its own weight and putting the qualification in its own sentence; **but on this pool it may not name a book, a roll, a register or a keeper**, because the card resolves no holder and the parish register is the very record it would reach for, so its ledger quality must come from the ORDER and the FLATNESS of the sentence and never from a cited record.
+
+### 1.7 The turns worth keeping
+
+- ***short of a hospital*** — the claim is the key's own FALSE leg and it is the pool's best licensed fact. Worth carrying into ONE face as a flat absence with the magnitude removed, and finding three other constructions of the same absence for the rest.
+- **The two-part shape: what the town has against hunger, then what it has against sickness.** That is the key's own structure (two legs, one branch) and it is licensed. **What must change is the content of the second part.**
+- **The position between the siblings** — the contrast move, kept as a POSITION and never as a rating.
+- What to drop: *food stored* and *reserves* (contradicted), *clergy who tend the sick* (contradicted and named), *something better than nothing* (rates the denied care), *well short of* (a magnitude), the colon's coordinated third fact (barred).
+
+### 1.8 What would make the rewrite of vid 1 a regression
+
+Vid 1 not first, or not `[ledger]`, or its slot set not `{settlement}` alone, or fewer than four faces, or no longer the pool's canonical index-zero line. A face that opens on the `{settlement}` proper slot (T-F8). A face carrying a which-tail, an em dash, a digit, a spelled count, a third sentence, or a summarising second sentence that says what the first one MEANT. **Any face that carries the care reading forward in new words — *the priests do what they can*, *the church takes the sick in*, *the parish is what passes for medicine here* are all the same finding.** Any face that asserts grain, a stock or a quantity. Any face that names a record or its keeper. Any face that opens on the absence (wall 3) or sets two absences side by side.
+
+### 1.9 ⭐ WHERE THE FLAVOUR IS (vid 1)
+
+- ⭐⭐ **THE PARISH'S RECORDED WORK WITH A PLAGUE IN THIS ESTATE IS THE GROUND, NOT THE SICKBED — and that is licensed, concrete, and exactly the sentence the ruling leaves standing.** Burial is `required: true, baseChance: 1` at every tier in the range: `Parish burial grounds` at town, whose desc says *each parish keeps its own ground beside its church, and a parish that has filled its ground buries beyond the gate instead*; `Burial grounds and charnel house` at city, where *the parish grounds inside the walls filled generations ago* and *the carts that go out at dusk are a fixed part of the city's evening*; `Cemetery network` at metropolis (`institutionalCatalog.js:1289-1294, 1835-1840, 2392-2396`). **So the true shape of this town's answer to a sickness is not that the clergy nurse anybody. It is that the parishes are where the dead go, and they are already set up for it.** That is a genuinely grim, genuinely particular, entirely licensed reading of the same two legs, and no shipped row in the block has come near it. ⚠ Keep it a STANDING arrangement (the ground is beside the church, the parishes each keep their own) and never an elapsed course (not *the ground filled after the last outbreak*).
+- ⭐ **THE ABSENCE HAS A SHAPE A STRANGER COULD WALK.** The FALSE leg is four named rows missing at once, and two of them are BUILDINGS a town of this size normally has — `Small hospital` at town, `Monastery or friary` at town at a `baseChance` of 0.4 with the desc *Religious community. May operate hospital/school.* (`:1267-1273`). **So this is a town where the monastery roll missed.** What that looks like on the ground is a place with districts, markets and several parishes and **no door anywhere that is for being ill behind.** Not a lack of kindness; a lack of an address.
+- ⭐ **WHAT THE TOWN DOES HAVE IS ALMOST CERTAINLY A SHOP.** `Apothecary (established)` sits at the town tier at a `baseChance` of 0.8, tagged `healing`, with the desc *a proper shop with a trained herbalist, stocked inventory, and a back room for consultations… Some double as chirurgeons* — **and `apothecary` matches none of `hasHospital`'s four substrings, so it is invisible to this key and does not disturb the branch** (`institutionalCatalog.js:1166-1171`, `priorityHelpers.js:64`). ⚠ **A face may not ASSERT one** (0.8 is not 1, and floor 1 bars a body the roster may not carry), **but the writer should know it**, because it is the reason the honest sentence here is not *there is nothing* — it is that what there is was never organised for it. The thing the record denies is a SYSTEM, not a remedy.
+- **The granary is not an achievement.** `required: true, baseChance: 1` at town and city. **Every place this size has one.** So the `[ledger]` register for the first leg is the flattest possible: it is the thing that is there because places of this size have one, and the record notes it the way a record notes a market square. Any warmth in the sentence belongs to the second leg or to nothing.
+
+---
+
+## VARIANT 2 · vid 2 · `[street]` · slots **NONE** · two sentences
+
+### 2.1 The shipped sentence, verbatim
+
+> The town can eat through a bad year. What it does about a plague is pray and nurse, in that order.
+
+⚠ **THIS VARIANT NAMES NO TOWN AND ITS FOUR FACES MAY NOT EITHER.** `"slots": []` at `defense.generated.js:932`. A face whose slot set differs from its parent's is refused by the projector (ARCH §2.5's face-row refusals). **Every face of vid 2 says *the town* or an equivalent and never `{settlement}`.** That is a constraint and also a gift: this is the one variant in the pool free of the proper-noun opener problem, and it may open on any plain civic fact it likes.
+
+### 2.2 Every claim it makes, on the new test
+
+- **THE TOWN CAN EAT THROUGH A BAD YEAR.** — ⛔ **CONTRADICTED twice over, and it is the stock claim in its most confident form.** (a) The stock: *hasGranary is a TIER PROXY and says nothing whatever about the stock inside it* (the block's set); the live quantity is `foodSecurity.storageMonths`, moved every tick by the pulse (`foodStockpile.js:404-407`). (b) The outcome: **a bad year is exactly what the world pulse adjudicates** — the deficit, the relief, the capacity, the blockade and the `famished` flag are all its arithmetic (`:390-473`) — so this is FLOOR-2b, a prediction the simulation decides, in the same family as the block set's struck *takes this town with ladders*. **The pulse is the record.** ⚠ And the preimage makes it worse than abstract: **this face prints under an ACTIVE FAMINE banner**, where the record is saying on the same screen that the town is not eating through the year.
+- **A BAD YEAR IS A THING THAT HAPPENS TO THIS TOWN.** — **SAFE as a conditional frame**, and the granary rows' own descs carry it (*Buffers harvests, prevents famine*, `institutionalCatalog.js:928`). ⚠ Safe only in the subjunctive or the general-conditional; a face that says a bad year is coming, or that the last one was survived, is FLOOR-2b.
+- **WHAT THE TOWN DOES ABOUT A PLAGUE IS PRAY.** — **SAFE.** The parishes are present and required across the range, and that the town prays is CULTURE, which the deity doctrine permits. ⚠ **The line it must not cross is theology:** that the town prays is a practice; that the praying helps, that the god answers, that faith holds the sickness off is a theological claim and refused outright. ⭐ Note that the estate has already written this exact idea from inside a different field: the almshouse's residents *receive food and shelter; in return they pray for their benefactors* (`institutionalCatalog.js:1285`). Praying as a recorded civic act is the estate's own register.
+- **AND NURSE.** — ⛔ **CONTRADICTED. It is the named-false care clause in one word.** *hasChurch records parishes, not care*. The whole weight of vid 1's finding lands on this single verb.
+- **IN THAT ORDER.** — ⛔ **falls with the care claim, and carries its own fault besides.** It asserts a PRIORITY between two practices, which is a judgment about how the town conducts itself that no field holds; and the second of the two practices does not exist in the record. ⚠ The turn is genuinely good writing and the writer will want to save it — **it can only be saved by finding two things the record DOES hold whose order is itself a recorded fact**, and the record holds no such ordering here.
+- **THE TOWN HAS AN ANSWER TO A PLAGUE.** — ⛔ **CONTRADICTED by the key's own FALSE leg.** Whatever the town does when a sickness comes, the record's statement about it is that there is no hospital, no monastery, no friary and no healer. **The honest second sentence is about what is not arranged, not about what is done instead.**
+- **The two-sentence shape and the flat second-sentence turn.** — not a claim, and it is the best-built thing in the pool. A1 admits one or two sentences; the second sentence is a second FACT of a varied kind and not a gloss of the first (MOVE-GRAMMAR §1.3). **The SHAPE survives the rewrite intact; only the content of the second sentence must go.**
+
+### 2.3 The reads this pool reaches (material for the rewrite of vid 2)
+
+- **The town's own talk about two arrangements: one building that is there because every place this size has one, and no building at all for the other thing.**
+- **Prayer as a recorded civic practice**, with the parishes present, plural and required.
+- **The four-name medical absence**, which is the whole of the second leg's licensed content.
+- **The pool's position between its two named siblings.**
+- REACHED BY THE ENGINE AND NOT BY THE KEY: everything in §0.5.2. ⚠ For this variant specifically, the writer must remember that **`plague_onset` is a real stress state this face prints under** and that nothing in the key knows whether it is running.
+
+### 2.4 ⭐ WHAT WOULD BE FALSE HERE (vid 2)
+
+| row | why this variant, specifically |
+|---|---|
+| **the care reading** | one verb, *nurse*, and it is the named clause. Also barred: *tends*, *treats*, *sees to*, *takes in*, *looks after*, *does what it can for* |
+| **a prediction the pulse adjudicates** | *can eat through*, *will get through*, *would last*, *sees out*, *rides out*, *comes through* are each the pulse's verdict taken in advance |
+| **the stock** | the first sentence is the stock claim with a verb on it |
+| **a theological claim** | the `[street]` angle plus prayer is the one place in DS-DEF-2 where the deity doctrine can actually be broken. **The town praying is safe; the prayer working is not** |
+| **the famine and plague banners** | ⛔ this is the variant most exposed to the stress preimage, because both of its sentences are about the two things the banners name. **Nothing reassuring, nothing settled, nothing in the past tense** |
+
+### 2.5 The preimage, as it bites vid 2
+
+See §0.9 whole. This variant carries no slot, so it prints identically on every town in the range with no proper noun to soften it — **the same twelve words on a metropolis with a state granary complex and on a town whose granary is the one required building of its kind.** And the confident first sentence prints under a famine banner on any town the stress roll has touched. ⚠ **`[street]` is the angle that invites a settled, communal, we-know-what-we-do register, and the preimage is the reason that register must stay a description of arrangements rather than of outcomes.**
+
+### 2.6 The angle's stance in one sentence
+
+`[street]` is the town's own talk about its condition (the annex's gloss at `:121`) — so here it may say plainly what the place is set up for and what it is not, in the flat idiom of people who have never had to think about it; **but it may not report what the town gets through, what it manages, or what it has learned**, because those are the pulse's verdicts and an ancestry the record does not hold.
+
+### 2.7 The turns worth keeping
+
+- **The two-sentence shape with the turn at the second sentence.** It is the pool's best structure and it survives the rewrite.
+- **The flat, unrhetorical second-sentence opener** (*What it does about X is…*). ⚠ Worth ONE face at most — it is a distinctive construction and four faces of it would be a template rather than a family.
+- **Prayer as the named practice** — licensed, and the shipped line's one wholly safe content word.
+- **The plague as the thing the second leg is about.** The subject is right; the predicate is wrong.
+- What to drop: *can eat through a bad year* (contradicted and a forecast), *nurse* (the named-false clause), *in that order* (falls with it).
+
+### 2.8 What would make the rewrite of vid 2 a regression
+
+Vid 2 not second, or not `[street]`, or **carrying any slot at all**, or fewer than four faces. A face carrying a which-tail, an em dash, a digit, a spelled count, a third sentence, or a summarising second sentence. Any face that predicts an outcome. Any face that asserts the stock. Any face that carries the care reading forward. **Any face that makes prayer efficacious**, which converts a licensed cultural fact into a refused theological one. Four faces that all use the *What it does about X is Y* construction.
+
+### 2.9 ⭐ WHERE THE FLAVOUR IS (vid 2)
+
+- ⭐ **THE ORDINARINESS IS THE FACT, and it is the `[street]` angle's own property.** The granary is `required: true` at town and city: **nobody in this town thinks of it as a provision, because there has never been a version of the place without one.** The parishes are the same — required, plural, one per neighbourhood at city (`:1830`). **So the town's own talk about the first half of this row is no talk at all**, which is a genuinely different sentence from a town congratulating itself, and it is what the record actually supports.
+- ⭐ **THE ASYMMETRY IS WHAT A TOWNSMAN WOULD ACTUALLY NAME.** One of these two things has a building, a purpose written on it and a reason everyone can state. The other has a set of parishes whose recorded work is the ground outside the gate. **What someone here would complain about is not that there is no care; it is that the two halves of the same row are not the same kind of thing at all** — and that asymmetry is exactly what the key holds and what no shipped row has said.
+- ⭐ **A TOWN THIS SIZE WITH NO HOUSE FOR IT IS A TOWN WHERE THE SICK STAY HOME.** That is not asserted anywhere and nothing denies it: the record holds no hospital, no monastery, no friary and no healer, and a place with districts and several parishes and none of those four has nowhere for anybody to be moved TO. **What the absence looks like on the ground is that nothing moves** — no cart, no door, no ward, no separate place — and the writer may reach for that shape without asserting an act. ⚠ Keep it a standing arrangement of the town and never a narration of an outbreak.
+- **What a stranger would avoid.** Nothing, and that is the point: **there is no quarter of this town to keep clear of, because the town has never concentrated the thing anywhere.** The absence of a hospital is also the absence of a place a sickness is known to be.
+
+---
+
+## VARIANT 3 · vid 3 · `[visitor]` · slots `{settlement}`
+
+### 3.1 The shipped sentence, verbatim
+
+> A stranger finds a full store and a modest infirmary at {settlement}, and can see which of the two the town has spent its thinking on.
+
+⭐ **This is the most contradicted single sentence in the pool: it asserts a magnitude the read cannot hold, a stock the read does not reach, a BUILDING the read's own FALSE leg positively excludes, and a decision the record has no field for — four findings in twenty words.**
+
+### 3.2 Every claim it makes, on the new test
+
+- **A STRANGER CAN FIND THESE THINGS BY LOOKING.** — **SAFE as the angle's frame.** `[visitor]` is *what a stranger notices first, without being told* (`RECEIPT_POOLS_DOSSIER_STATE.md:122`), and a granary and parish churches are large, sited, public buildings. The frame is licensed; what the stranger is said to find is not.
+- **A STORE EXISTS.** — **SAFE.** It is the granary leg.
+- **THE STORE IS FULL.** — ⛔ **CONTRADICTED twice.** (a) The stock: *hasGranary is a TIER PROXY and says nothing whatever about the stock inside it* — **the flag is TRUE on a granary blockaded to the boards** (`foodStockpile.js`'s `blockaded` and `famished` flags, `:418-421`). (b) The magnitude: the read has no band word at all, so *full* measures something nothing measures (floor 2a). **The stockpile is the record.**
+- **A MODEST INFIRMARY EXISTS.** — ⛔⛔ **CONTRADICTED at the roster, and this is the hardest single contradiction in the packet, because the sentence asserts the very object class the key's FALSE leg denies.** `hasHospital` is FALSE here, and it matches `hospital`, `monastery`, `healer` and `friary` (`priorityHelpers.js:64`): **there is no hospital, no monastery, no friary and no healer on this town's roster, and an infirmary is a building of exactly that class.** Floor 1, the closed roster: a body the roster does not carry may not be asserted. The block's set adds the same finding from the other side: *hasHospital fires on a first-level divine healer (a person) and on a monastery that MAY run one, so a house that takes in the sick is licensed only on a hospital-named row* — **and this is not a hospital-named row; it is the row where those rows are absent.** ⚠ *Modest* also rates a size nothing holds.
+- **THE TOWN HAS SPENT ITS THINKING ON ONE OF THE TWO.** — ⛔ **FLOOR-2b, and it is the pool's clearest example of an ancestry the record does not carry.** There is no decision field, no priority field and no history behind an institution boolean; the block's fence rules that the clauses here are CAPABILITY clauses and never HISTORICAL ones unless the history surface supplies the ancestry, and it does not. ⚠ Sharper still: **the granary is `required: true, baseChance: 1` at town and at city** (`institutionalCatalog.js:926-927, 1591-1592`) — **nobody decided anything.** The town has it because every place of that size has it. The sentence attributes a judgment to a town that made none.
+- **A STRANGER CAN SEE THE COMPARISON.** — ⛔ falls with the clause above. The comparison is of two investments the record does not measure, so there is nothing to see.
+- **The two things are COMPARABLE, of a kind, sited near one another, weighable against each other.** — **SAFE as a shape and this is what should survive.** The key really does hold two legs of one branch, and R-DA-02 licenses a contrast where the rejected alternative names a sibling. **The comparison is licensed; its terms are not.**
+
+### 3.3 The reads this pool reaches (material for the rewrite of vid 3)
+
+- **Two buildings-classes a stranger can see from the street: the granary, and the parish churches.** Both are large, sited, public and required across nearly the whole range.
+- **A third thing a stranger CANNOT see, because it is not there** — and for the visitor angle, that is the strongest licensed move in the pool: **the ABSENCE is what a stranger discovers by looking for something and not finding it**, which is class (a) LACK, flat, and licensed (MOVE-GRAMMAR §1.2 row 11). ⚠ It may not OPEN the variant and may not sit beside a second absence (wall 3).
+- **The tier floor**: this is always a town, a city or a metropolis (§0.5.1), so the stranger is always in a place with districts, market squares and more than one parish. **A stranger's frame here can be a walk across a real place, not a glance at a hamlet.**
+- REACHED BY THE ENGINE AND NOT BY THE KEY: everything in §0.5.2 — and for this variant especially, **the route and the port, which are DS-DEF-6's surviving lens and the most natural thing for a visitor face to reach for** (§0.7.4).
+
+### 3.4 ⭐ WHAT WOULD BE FALSE HERE (vid 3)
+
+| row | why this variant, specifically |
+|---|---|
+| **an infirmary, a sick-house, a healer's door, a hospice, a ward** | ⛔ the key's FALSE leg excludes four named roster rows at once. **This is the one contradiction in the pool that a reader could catch from the tab alone**, because the Medical Readiness row beside it prints status `Clergy care`, not a building |
+| **a full store, a stocked store, sacks to the roof, a lean store, an empty one** | the stock is not read here in EITHER direction. **A face may not say the granary is full and may not say it is empty** |
+| **a decision, a preference, a priority, what the town cares about** | the granary is a required building at this tier. Nobody chose it |
+| **the road, the port, the carts, what supplies the place** | DS-DEF-6's `Logistics & Supply` is the one lens on this tab that survived precisely because it owns the granary-against-the-route reading and nothing else can see it (`defenseStateProse.js:1483-1486`). **A visitor face arriving by road is one clause from taking it** |
+| **a magnitude** | *full*, *modest*, *considerable*, *a good size*, *a poor one* — the read holds no quantity of any kind |
+| **a named person: the man at the granary door, the priest who answers** | product scope, and a pooled face prints identically across a region |
+
+### 3.5 The preimage, as it bites vid 3
+
+See §0.9 whole. The visitor frame is the one most exposed to the TIER SPREAD: the same stranger walks into a town with one required granary and a handful of parishes, and into a metropolis with a state granary complex and parish churches by the hundred (`institutionalCatalog.js:2364-2369, 2505-2510`). **A face that describes the size, the number or the grandeur of either thing is false at one end of that range or the other.** What holds across all of it is that both are PRESENT and public, and that the medical class is ABSENT. ⚠ And the stranger arrives under whatever banner the stress roll set: **a visitor face written as a pleasant arrival prints under a plague-onset banner.**
+
+### 3.6 The angle's stance in one sentence
+
+`[visitor]` is what a stranger notices first, without being told (`:122`) — so here it may report what is visible from the street of a place with districts, and above all **it may report the thing that is looked for and not found**, which is the one angle in the pool that can spend the FALSE leg as an experience rather than as an entry; **but it may not appraise, size, count, or read a town's intentions off its buildings.**
+
+### 3.7 The turns worth keeping
+
+- **The stranger-finds frame**, which suits the pool's two visible buildings. ⚠ The shipped opener *A stranger finds…* is used by the `[visitor]` variants of several sibling pools in this block (`Beasts & Monsters: plagued, perimeter but NO force`, `Invasion & War: walls with NO force`, `Disasters & Famine: NO reserves, NO medical provision` and others). **Wall 10 and R-DA-17 both bear on that: four faces here all opening *A stranger…* would be the template the whole rewrite exists to remove.** Vary the entry across the four.
+- **The comparison of the two legs**, kept as a position and never as an appraisal.
+- **The absence as something DISCOVERED rather than recorded** — the shipped sibling pool for `NO reserves, NO medical provision` already does this well (*is directed to neither, because there is neither*), and **the same move is available here for the medical half alone.**
+- What to drop: *a full store* (contradicted, twice), *a modest infirmary* (contradicted at the roster), *which of the two the town has spent its thinking on* (FLOOR-2b), *modest* and *full* as magnitudes.
+
+### 3.8 What would make the rewrite of vid 3 a regression
+
+Vid 3 not third, or not `[visitor]`, or its slot set not `{settlement}` alone, or fewer than four faces. A face that opens on the `{settlement}` proper slot (T-F8). A face carrying a which-tail, an em dash, a digit, a spelled count, a third sentence, or a summarising second sentence. **Any face asserting a building of the medical class in any word** — infirmary, sick-house, hospice, ward, hospital, healer's door, a house that takes anyone in. Any face asserting the stock in either direction. Any face reading an intention off a building. Any face that opens on the absence or sets two absences side by side. Four faces that all open *A stranger*.
+
+### 3.9 ⭐ WHERE THE FLAVOUR IS (vid 3)
+
+- ⭐⭐ **WHAT A STRANGER WOULD NOTICE IS THAT THE TWO THINGS ARE NOT THE SAME KIND OF BUILDING.** The granary is a single named purpose with a door and a use written on it — *communal grain storage* at town, *multiple large grain stores distribute food across the city. State managed.* at city (`:928, 1593`). The parishes are the opposite: **not one building but several, distributed, one per neighbourhood at city scale** (`:1830`), each with its own ground beside it. **So the town's answer to hunger is a place, and its answer to sickness is a geography.** That is visible from the street, entirely licensed, and no shipped row in the block has used it.
+- ⭐ **THE THING A STRANGER WOULD ACTUALLY ASK FOR AND NOT GET IS A DIRECTION.** The sibling pool for `NO reserves, NO medical provision` closes on being *directed to neither, because there is neither* — and half of that experience is available here exactly: **ask for the granary and you are pointed at it; ask where the sick are taken and the question has no address.** ⚠ Keep it as the shape of the town rather than as a narrated encounter with a named person, and give it its own sentence: it is the ABSENCE move and it may not open the variant.
+- ⭐ **THE PARISH GROUND IS VISIBLE AND IT IS THE PART A VISITOR READS WRONG.** Every tier in the range has required burial ground beside or beyond the parish — at city, *new ground has been bought outside the gates, and the carts that go out at dusk are a fixed part of the city's evening* (`:1838`). **A stranger arriving in the evening sees the carts and reads them as ordinary, because they are.** That is a licensed, concrete, wholly un-inventoried thing the record makes available, and it says what this pool says without once claiming anybody was nursed.
+- **What nobody complains about.** The granary; it is required and universal at this size. **What somebody would complain about is the distance** — with the parishes distributed one per neighbourhood and no single house for the sick, whatever is done is done wherever the person already is. The record does not deny it and the key does not read it.
+
+---
+
+## 4. WHAT THE PACKET LEAVES FOR THE CHAIR
+
+- ⭐ **THE ESTATE CONTRADICTS ITSELF ACROSS SURFACES ON THIS POOL AND THE RULING RESOLVES IT ONLY FOR THE PROSE.** `threatAssessment.js:186` prints *Parish clergy provide basic wound care*, `defenseDisplay.js:237-239` prints status `Clergy care` and note *Parish care. Basic wound and disease management.*, and the block's contradiction set rules the same reading FALSE for this pool's prose. **After this rewrite, the prose paragraph and the expandable row directly beneath it will disagree about whether anybody is cared for.** That is a display-string question, not a corpus one, and it is not this lane's to decide — recorded here so it is not re-found.
+- **THE DS-DEF-6 C3 JUSTIFICATION IS TOUCHED.** The three `Medical Readiness` pools are blocked on the ground that this row *speaks BOTH the reserve and the medical halves* (`defenseStateProse.js:1476-1479`). After the rewrite this row speaks the medical half as an ABSENCE rather than as a provision. The block still holds on the reserve half and on the absence, but the justification's wording is now wider than the row's content.
+- **THE BADGE AND THE PROSE ARE ON DIFFERENT CLOCKS AND THIS IS THE ONLY ROW IN THE BLOCK WHERE THEY ARE.** The world pulse re-judges `scores.disaster` every tick (`foodStockpile.js:390-473`); the prose key reads three frozen institution booleans. No face can cure this and none should try; it is a wiring observation for whoever owns the composed tab.
+- **THE `no reserves, parish care` GAP IS THE CORPUS'S, NOT A BUG.** The desk's docblock says so in its own words (`defenseStateProse.js:572-576`): the situation set is five and not six because the corpus wrote this pool but no matching no-reserves twin, so **for a town with no granary the church is not consulted at all.** Deliberately deferred, documented, not a bug to re-find.
