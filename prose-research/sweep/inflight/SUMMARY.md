@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-12 02:35:04 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-12 02:39:06 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -179,9 +179,9 @@
 | ? | other |  | failed | 0 | — | — | 21:45:42 |
 | ? | other |  | result | 0 | — | — | 06:09:12 |
 | ? | other |  | result | 0 | — | — | 03:25:29 |
-| ? | other |  | in-flight | 0 | — | — | 06:29:37 |
-| ? | other |  | in-flight | 0 | convert-ET-2.md | — | 06:34:50 |
-| ? | other |  | in-flight | 0 | — | — | 06:33:58 |
+| ? | other |  | in-flight | 0 | convert-ET-3-4.md | — | 06:35:48 |
+| ? | other |  | in-flight | 0 | convert-ET-2.md | — | 06:36:23 |
+| ? | other |  | in-flight | 0 | — | — | 06:38:52 |
 | ? | other |  | result | 0 | convert-W20-W27.md | — | 06:29:03 |
 | ? | other |  | result | 0 | — | — | 06:28:56 |
 | ? | other |  | result | 0 | — | — | 06:32:59 |
