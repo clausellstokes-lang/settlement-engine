@@ -55,7 +55,13 @@ export const REFUSED_COLUMNS = Object.freeze([
  * standing list and the pool's own additions are computed beside them.
  */
 export const REFUSED_CLAIMS = Object.freeze([
-  'a count', 'a cause', 'a season', 'a future', 'a standpoint', 'a second fact',
+  // RE-CUT 2026-09-12 to brief ADDENDUM 14/16 (the owner's non-contradiction test).
+  // STRUCK: 'a standpoint' and 'a second fact' — the angle IS a standpoint (W27 struck) and
+  // the one-fact-per-unit rule (W23) was the single largest killer of flavour. What remains
+  // is floor 2, and each clause names the floor so a seat cannot re-derive the receipt test.
+  'a magnitude outside the read\'s own band word (floor 2a)',
+  'an elapsed course, a dated cause or a season (floor 2b)',
+  'a prediction the pulse adjudicates (floor 2b)',
 ]);
 
 /** @param {unknown} value @returns {string} */
@@ -405,6 +411,9 @@ export function licenceCardLines(input) {
   lines.push(`              ${echoKeyNote(field)}`);
   lines.push(`  covert:     ${covert ? `YES — every variant carries \`dm-only\` (T-F5); unmarked variants: ${unmarked}` : 'no'}`);
   lines.push(`  source:     ${sourceText(row?.source)}`);
+  lines.push('  THE TEST (ADDENDUM 14, the owner 2026-09-12): a face is LAWFUL unless it CONTRADICTS the record.');
+  lines.push('              SILENCE IN THE RECORD IS PERMISSION. "The card does not license it" is NOT a finding.');
+  lines.push('              This card says what the read REACHES, never the bounds of what may be written.');
   lines.push(`  may claim:  ${mayClaimText({ reads: row?.reads || [], predicate: row?.predicate || [] })}`);
   lines.push(`  may NOT:    ${mayNotText({ spineFields, objectClass: row?.objectClass || null })}`);
   lines.push(`  audience:   ${covert ? 'DM only (`dm-only` on every variant)' : `player (no mark)${marks.length ? ` · marks in this pool: ${marks.join(' ')}` : ''}`}`);
