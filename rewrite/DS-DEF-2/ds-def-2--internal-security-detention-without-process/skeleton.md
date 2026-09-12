@@ -221,3 +221,168 @@ The card prints `source: (none) · standing SOURCE-UNRESOLVED`, so no holder res
 - Adding a magnitude, a duration or a perfect tense to buy weight — vid 1 is clean on floor 2 today and that is not free to lose.
 - Keeping the `, which` tail, or replacing it with a second which-clause, a colon gloss or a summarising second sentence (the MEANING non-move).
 - Trading the conjunction for one half of it. A face that says only *the town can hold people* has spent the pool key and could be drawn in the `full legal chain` pool.
+
+---
+
+## VARIANT 2 · vid 2 · `[visitor]` · slots `{settlement}`
+
+### 2.1 The shipped sentence, verbatim
+
+> A stranger at {settlement} is careful in a way he would not need to be in a town with courts, and cannot say precisely why.
+
+### 2.2 Every claim it makes, on the new test
+
+- **A STRANGER is at the town, and can be.** — **SAFE.** No field bars a visitor; the visitor stance is the block's own declared angle for this pool (`angle: ledger street visitor` on the card) and the recut struck W27's stance rules by name: *a stranger may act, be turned away, be told the wrong thing, pay twice*.
+- **The stranger is CAREFUL — a disposition assigned to an unnamed person.** — **SAFE on the new test.** W22a/W22b and W27 are struck; an unnamed person may act and may be shown behaving. ⚠ **But this is the pool's one REGISTER exposure rather than a floor exposure.** The register card bars an assigned reaction and a named interior, and MOVE-GRAMMAR §1.3 lists FEELING as a move that does not exist anywhere in the estate (*no field carries motive, belief or mood; the reaction is an ACT*). *Careful* is close to the line and *cannot say precisely why* is over it — the second half states what is inside a person's head. The licensed conversion is the ACT: what a stranger does differently, what he leaves undone, where he does not go.
+- **The care is CAUSED by the absence of courts — "in a way he would not need to be in a town with courts".** — **SAFE, and the contrast is sibling-licensed.** R-DA-02 keeps a contrast only where the rejected alternative names a sibling pool key or sibling band: *a town with courts* is exactly the sibling keys `Internal Security: court without detention` and `Internal Security: full legal chain (court AND prison)` (`defenseStateProse.js:507-508`). The alternative is a state the town could be in, which is the test.
+- **The town's arrangement is ILLEGIBLE — the stranger "cannot say precisely why".** — **SAFE as written, with a ⚠ rider.** Read strictly the claim is about the stranger's own inability to articulate, and no field denies that. **But the neighbouring reading — that the arrangement is not visible — sits against the record on part of the range:** the town-tier row is literally *"Holding cells and **public punishment**"* (`institutionalCatalog.js:1564-1569`), and the C3-blocked sibling on the same fact opens *"A stranger at {settlement} sees both buildings on the same square"* (`RECEIPT_POOLS_DOSSIER_STATE.md:2992-2994`). A rewrite that pushes this into *nothing here shows you what the town does* would be **CONTRADICTED** on every town whose gaol row is the town-tier one, with the row's own printed description as the record. **The safer and better move is the opposite one: what a stranger CAN see, and what seeing it does not tell him.**
+- **There is nothing for the stranger to ask.** — implied, not asserted; **SAFE**, and it is the pool's own key read the useful way.
+- **"HE"** — a gendered pronoun on an unnamed stranger. — **not a claim and not a finding**, since no field is consulted; but it is a craft defect the estate has been bitten by before (the 234 gendered R6 lines against a 50/50 field, CLERK-LAWS §2.2 C3 arm a). The rewrite should not carry a pronoun it has no field for.
+- **No magnitude, no date, no duration, no rate.** — **CLEAN ON FLOOR 2**, except that *would not need to be* is a subjunctive and therefore lawful (A2: the edge is subjunctive, never a fate).
+
+### 2.3 The reads this pool reaches (material for the rewrite of vid 2)
+
+Everything in §0.5 and §1.3, plus the two things that are specifically a visitor's:
+
+- **What is on the roster is on the page.** The gaol is a named institution row that prints beside the prose — a stranger can be shown meeting the building, not the abstraction.
+- **What is NOT on the roster is a place he cannot be sent to.** There is no hall, no courthouse and no assembly, so there is nowhere to take a complaint, no door to knock on, nobody sitting. That is a visitor's fact before it is a clerk's.
+- NOT reached: the watch (so nobody stops him), the walls and the gates (so no checkpoint), the safety label, the score, the country, the history.
+
+### 2.4 ⭐ WHAT WOULD BE FALSE HERE
+
+**§1.4's table binds in full.** The rows this variant adds or sharpens:
+
+| row | the claim that would be false | the field that denies it |
+|---|---|---|
+| **F1-08** | **A GATE, a checkpoint or a toll-bar** a stranger passes, **or the denial of one** | `inst.hasGates` (`priorityHelpers.js:53`) — a separate flag this key never reads. Where it is false, `safetyProfile.js:463-464` prints *"no gates to bribe and no checkpoints to avoid"* |
+| **F1-01 / F1-04** | somebody STOPPING, questioning or watching the stranger — the watch, the guard, a patrol as a body | neither flag is read here; `safetyProfile.js:300`, `:309` print the denial where no law body stands. **A stranger may be careful of nobody in particular; he may not be stopped by a body the roster does not carry** |
+| **F1-12** | a stranger being told where to take a complaint, or watching a hearing | `hasCourtSystem` false is this pool's own predicate |
+| **F1-32 (its shape, on a legal row)** | fixing what the gaol LOOKS like against the row's own printed description — a great stone block on a `Small prison/stocks` town, a lock-up on a `Massive prison` metropolis | `institutionalCatalog.js:1564-1569`, `:2282-2287`, `:2514-2519`. Cells and a punishment frame are free at town; a state complex with separated wings is free at metropolis; neither is free on the other |
+| **F1-107** | a frightened, watchful or hostile town where the expandable row beneath prints `Internal security: Very Safe.` or the badge reads STRONG | `threatAssessment.js:140` (the label leads the row); `DefenseTab.jsx:322-341` (the badge). ⚠ **W-10 holds the intensity question open**, but the LABEL is a printed string and a face that fights it is charged |
+| **F3-05** | the stranger's road, inn, square, churchyard or market green as north-European furniture | `cultureProfiles.js:50-600`; no defense pool reads the profile. **Write what he meets, not the village he meets it in** |
+| **F3-06** | the stranger dealing with *the one who keeps the key* or *the officer on duty* as a singular office | `npcGenerator.js:1511-1537` — the tier emits exactly one Guard Captain. A plural, a trade or a bystander is free |
+| **F2-05** | *he would have been told*, *he has learned*, *by the second day* — any elapsed course laid over the visit | `ageBands.js`'s `HISTORICIZE_BAND` pin; a birth-time state bears no temporal register |
+
+### 2.5 ⭐ THE PREIMAGE
+
+As §1.5: town and above on every generated world, any country, any stress, any culture, any score, any safety label. **The specific visitor consequence:** the stranger cannot be a stranger to a small place — no hamlet lane, no single street, no everyone-turns-to-look. He arrives somewhere with a gaol on its roster and no hall, which on this range means somewhere of size whose civic room was deliberately left out.
+
+### 2.6 The angle's stance in one sentence
+
+`[visitor]` is what a person who does not live there meets and what he does about it: an outsider's ACTS — where he goes, what he does not do, what he is not told — never his interior, and never a verdict on the town.
+
+### 2.7 The turns worth keeping
+
+- **"in a town with courts"** — the sibling-licensed contrast, carried in four words, and the cheapest legal way to say what this town lacks. Worth keeping verbatim in at least one face.
+- **"is careful in a way he would not need to be"** — the subjunctive comparison is lawful and the rhythm is good; what needs replacing is the interior, not the shape.
+- **"cannot say precisely why"** — the TURN is the right one (the town does not explain itself) and the CARRIER is wrong (it states what is in a head). Re-seat it on an act or on an absence: there is nobody to ask, and nothing to read.
+
+### 2.8 ⭐ WHERE THE FLAVOUR IS (vid 2)
+
+- ⭐ **THE FRAME IN THE OPEN.** A town-tier gaol row is *"Holding cells and public punishment"* — so the thing a stranger meets first is not a door, it is a fixture in a public place, and the ordinary people walking past it are not looking at it. **That is what a stranger notices and what a resident has stopped noticing**, and it is the single strongest unused image in this pool.
+- ⭐ **THERE IS NOWHERE TO TAKE IT.** The court flag being false means no hall, no courthouse, no assembly — so a stranger with a complaint has no door. The sibling pool `no legal infrastructure` already owns *"has nowhere to take it"*, so this pool's version must be the sharper one: **there is somewhere to be taken TO, and nowhere to take anything.** The asymmetry is this pool's alone.
+- **WHAT A STRANGER WOULD AVOID.** Nothing in the record stops the face from noting the practical cost: a stranger has no standing here and no procedure to appeal to, so the prudent thing is to settle matters before they become matters. That is an ACT, it is licensed, and it is the conversion of *careful* into something a game master can play.
+
+### 2.9 What would make the rewrite of vid 2 a regression
+
+- Keeping the interior (*careful*, *cannot say why*, *uneasy*, *senses*) instead of converting it to an act — the register's FEELING non-move and the one thing this variant actually needs fixed.
+- Pushing the illegibility into the WORLD (*nothing here shows what the town does*), which the town-tier row's *public punishment* denies.
+- Seating a body to do the frightening — the watch, the guard, a patrol.
+- Carrying the bare "he" forward with no field behind it.
+
+---
+
+## VARIANT 3 · vid 3 · `[street]` · slots `{settlement}`
+
+### 3.1 The shipped sentence, verbatim
+
+> The town can put a person away at {settlement} and cannot say on what grounds, and has learned not to ask on whose.
+
+### 3.2 Every claim it makes, on the new test
+
+- **The town CAN PUT A PERSON AWAY.** — **SAFE**, as vid 1's first claim, on `hasPrison` and the engine's own *"Offenders can be jailed"* (`safetyProfile.js:331`, `:467`).
+- **The town CANNOT SAY ON WHAT GROUNDS.** — **SAFE.** `hasCourtSystem` false is the pool's own predicate; `safetyProfile.js:331-332` and `defenseDisplay.js:233` say *arbitrary* in terms. The compression (*on what grounds*) is exact and free.
+- **There is a WHOSE — somebody on whose authority the holding runs, unnamed.** — **SAFE.** The recut struck the person bar by name; an unnamed person may hold a key, decide, be avoided, be resented. ⚠ The bar is only the tier's SINGULAR mandated office (F3-06) and any body the roster denies (F1-01 to F1-06).
+- **THE TOWN HAS LEARNED not to ask.** — ⛔ **FLOOR-2.** *Has learned* is a perfect: it asserts a past process the record did not run and a prior state in which the town did ask. F2-05 names the perfect and the elapsed course in terms (*has stood*, *no longer*, *again*); `ageBands.js` pins `HISTORICIZE_BAND = 'years-past'` and a birth-time STATE carries no origin stamp at all, so it can bear no temporal register whatever; F2-09 adds that **no state-prose pool key in the estate reads a history field**, so the allusion desyncs on a reroll button, not only on a tick. ⭐ **The turn is worth saving and the tense is not:** the conversion the table itself recommends is a standing condition — the question is not put; nobody asks; there is no one to ask it of.
+- **The asking is SUPPRESSED — asking would be unwise.** — **SAFE** as a standing condition once the perfect is removed. Nothing denies it and F4-13's positive move supports the shape: the player face may say the town does not know, and the not-knowing is the hook.
+- **"THE TOWN" as an agent that can and cannot SAY.** — **SAFE.** The aggregate is the engine's own idiom throughout `safetyProfile.js` and the corpus, and W20's layer bar is struck: a band, a label or a stock may be narrated through the bodies the town actually holds.
+- **No magnitude, no date, no rate.** — clean, apart from the perfect above.
+
+⚠ **A craft note, not a claim.** The unit names the town twice — once as *The town*, once as the `{settlement}` fill mid-sentence — and the fill sits in an adverbial position (*put a person away at {settlement}*) that reads as a location tag rather than as a subject. Every face of this vid carries `{settlement}`; a face that makes the fill the subject reads better and costs nothing.
+
+### 3.3 The reads this pool reaches (material for the rewrite of vid 3)
+
+Everything in §0.5 and §1.3, plus what belongs to the street:
+
+- The people who are held are the town's own, and they go somewhere the town can point at.
+- The absence of the hall means there is no public occasion on which anything is decided — nothing is heard, nothing is read out, nobody sits.
+- The purse's own words: the keeping of the held is a line in the same allowance as the watch's wages (`defenseGenerator.js:249-254`).
+- NOT reached: every force bucket, the walls, the gates, the country, the score, the safety label, the stress banner, the history.
+
+### 3.4 ⭐ WHAT WOULD BE FALSE HERE
+
+**§1.4's table binds in full.** The rows this variant adds or sharpens:
+
+| row | the claim that would be false | the field that denies it |
+|---|---|---|
+| **F2-05** | ⛔ **the shipped row's own `has learned`** — and every sibling of it: *since*, *no longer*, *used to*, *these days*, *any more*, *the way it was before*, *has stopped* | `ageBands.js` (`HISTORICIZE_BAND = 'years-past'`); `activeConditions.js:879-902` (birth conditions at `elapsedTicks: 0`); F2-09 (`historyPreservation.js:1-30` — a reroll replaces `settlement.history` wholesale and no state-prose key reads it) |
+| **F2-04** | the EVENT behind the learning — somebody asked once and was taken, a case went wrong, a complaint was made | `previousGovernments` empty on 48 of 48 generated towns (`rulingPower.js:400-404`); nothing records an institution's departure or a prior procedure |
+| **F1-01 / F1-02 / F1-04** | **who does the taking, named as a body** — the watch takes people, the guard comes at night, the garrison holds them | none of those flags is read by this key; `safetyProfile.js:300`, `:309` print *"There is no meaningful guard presence."* where no law body stands. ⭐ The shipped row's agentlessness is a deliberate strength |
+| **F3-06** | *on whose* resolved to the tier's singular office — the captain, the mayor, the priest | `npcGenerator.js:1511-1537`; each carries a generated disposition and secret, so the sentence reads as a claim about a NAMED NPC. **Keep the whose indefinite, or make it a plural or a trade** |
+| **F1-34** | a TOTALITY over persons — *anyone can be taken*, *nobody is safe*, *every household has lost somebody* | the refused column on the card, in terms |
+| **F1-49 / F1-56** | attributing the holding to the SEAT or the governing body by name, or asserting there is no authority | the power surface prints the seat's own label and its vacancy line (`PowerTab.jsx:117`; `SummaryTab.jsx:32`); this key reads neither. **The whose stays unresolved, which is also the better sentence** |
+| **F4-13** | a PLAYER face asserting a covert fact as known | `corruption.js:670-681`; `settlementPolitics.js:423-436`. The licensed and stronger move is the town's NOT knowing |
+| **F1-126** | naming the person, the street, the cell or the family | a pooled face is authored once and prints identically across every matching town |
+
+### 3.5 ⭐ THE PREIMAGE
+
+As §1.5: town and above, any country, any stress, any culture, any safety label, any score. **The street consequence:** this is not a place where everyone knows everyone. It is a town or larger, with enough people that a person can be taken and the taking not be the whole town's business by evening — which is precisely what makes *not asking* possible and worth writing.
+
+### 3.6 The angle's stance in one sentence
+
+`[street]` is what the town's own people treat as ordinary: the practice rather than the provision, stated without comment, landing on what is done and what is not done — never a moral, never a verdict, never a named person.
+
+### 3.7 The turns worth keeping
+
+- **"cannot say on what grounds"** — the pool's core fact in five words, exact and free. Carry it.
+- **"not to ask on whose"** — the best turn in the whole pool: it converts the missing court into a missing question and leaves the authority standing open, which is the register card's own instruction (*leave one matter standing open in every town, stated, never asked*). ⭐ **Keep the turn; re-seat it off the perfect.**
+- **"put a person away"** — plain, idiomatic, and it names no body and no building; it is stronger than *detain* and costs nothing.
+
+### 3.8 ⭐ WHERE THE FLAVOUR IS (vid 3)
+
+- ⭐ **THE QUESTION THAT IS NOT PUT.** The record holds no court and no hall, so there is no occasion on which anybody is obliged to answer. What that looks like on the ground is not fear: it is a subject that does not come up — a thing people step around in a conversation, the way they step around the frame in the square.
+- ⭐ **THE DEBTORS.** At city the roster row's own first word is *Debtors* (`institutionalCatalog.js:2282-2287`): the people inside are not all wrongdoers, and some of them are there over money. **No shipped row in this block has ever noticed that the hold is also a creditor's instrument** — and on a street face that is the most playable fact available, because it makes the holding somebody's interest rather than nobody's.
+- **WHO FEEDS THEM.** The keeping of the held is a line in the same allowance as the watch's wages, with a floor and no ceiling above identity (`defenseGenerator.js:249-254`). The street version of that is not a figure: it is that somebody's household carries the difference, and nothing written says whose.
+
+### 3.9 What would make the rewrite of vid 3 a regression
+
+- Keeping the perfect (*has learned*, *no longer asks*, *stopped asking*) — the one outright FLOOR-2 breach in the pool, and the reason this variant needs the most work.
+- Resolving the *whose* — to a body (F1-01/F1-02/F1-04), to a named office (F3-06), or to the seat (F1-49).
+- Trading the compression for plainness: *the town cannot say why somebody is being held* is legal and flat; **the density law forbids that trade** (Part B §21.4).
+- Turning the not-asking into a moral, a verdict or a summarising second sentence.
+
+---
+
+## 4. THE POOL AS A WHOLE — what the writer must not lose
+
+**⛔ THE POOL IS THE PAGE'S ONLY VOICE ON THE LEGAL CHAIN.** DS-DEF-6's `Legal Infrastructure: Prison only` pool is C3-BLOCKED (`defenseStateProse.js:221-229`), and `DEF6_FACT_SPOKEN_AT` routes the fact to `defense.threatAssessment` — this block, this row. So there is no second sentence anywhere in the page-set to carry what this pool leaves out. **And the blocked pool's three rows must not be re-written here**, because they are a different pool's slots and are what the C3 ruling silenced: for the record they read *"{settlement} can detain without any settled process for deciding whom; enforcement here is arbitrary in the exact sense, and depends on who is holding the keys"* · *"People are taken at {settlement} and the taking is not explained, and the town has learned not to press for the explanation"* · *"What {settlement} holds people for drifts with whoever is doing the holding, and the drift is not written anywhere it could be corrected"* (`RECEIPT_POOLS_DOSSIER_STATE.md:3001-3005`). ⚠ Note the second of those carries the SAME `has learned` breach as vid 3, and the third carries an elapsed *drift*. The writer should read them once, to know what has already been said and not to say it again.
+
+**⭐ THE POOL-GRAIN DULL VERDICT IS ALREADY EARNED, AND THE REWRITE'S FIRST JOB IS TO BREAK IT.** Two of the three shipped rows are the same construction:
+
+- vid 1: *can hold people* **and** *has no settled way of deciding*
+- vid 3: *can put a person away* **and** *cannot say on what grounds*
+
+Both are `CAN X and CANNOT Y`, both are one sentence, both join on a bare *and*, and both land on the same abstraction. Only vid 2 varies the shape. Under Part B §21.4 and the recut's craft verdict, a pool whose renderings collapse onto one construction is DULL at the pool grain — **and with four faces per variant the collapse would be twelve deep instead of three.** The twelve faces must spread across constructions, not merely across words: a bare standing fact; an object-first opening (V4 — the cells, the frame, the hall that is not there); an institution-first opening (V5); a state with its structural consequence (V2); a state with a typed LACK (V3, licensed here by the court read read the other way); a state with its standing-open matter (V6, and the *on whose* is already that). MOVE-GRAMMAR §2.1's level-1 set is the menu, and a pool of three carries at least three distinct grammars by A11.
+
+**THE CLAIM SET THAT MAY NOT MOVE (arm C).** Every face of every vid asserts exactly two things and no more: **(a) the town has somewhere to hold people; (b) no court or hall stands behind the holding.** A face that carries only (a) belongs to `full legal chain`; a face that carries only (b) belongs to `no legal infrastructure`; a face that carries neither belongs nowhere. The angle, the vocabulary and the rhythm are what vary.
+
+**THE SPREAD RULES THAT BIND THE TWELVE FACES.** No two variants of one pool share their first two words (A11); the settlement token opens at most one variant per pool and never two adjacent (R-DA-17, wall 10); no `, which` (R-DA-03, wall 6); a qualification takes its own sentence, never a tail, never a third (R-DA-03); the close is a standing fact of a KIND drawn from a closed set — a condition, a prohibition, an absence, an object, a name not given — varied across the pool (R-DA-04); ABSENCE never opens and never sits beside another ABSENCE (wall 3), which matters here because the missing court is an absence and is available to at most some of the twelve.
+
+**THE FOUR THINGS THIS POOL HAS AND THE SHIPPED ROWS NEVER SPENT**, gathered in one place so the writer can see the whole purse:
+
+1. **The cells and the frame** — `Small prison/stocks` is *"Holding cells and public punishment"* in one row: a door that locks and a fixture in the open. Neither has ever been written.
+2. **The room that is not there** — `hasCourtSystem` false means no town hall or city hall, whose own desc is *"Meeting place and administrative center"*. The town has a place to put a person and no place to put the question.
+3. **The debtors** — at city the hold's own printed description leads with them; at metropolis the held are separated by kind. The hold is a creditor's instrument as well as a keeper's.
+4. **The one allowance** — *"watch wages, court and gaol funding"* on a single multiplier with a floor of 0.65, a third of whose heading pays for nothing.
+
+**AND THE ONE SENTENCE THE WHOLE PACKET REDUCES TO.** Do not seat a watch, a guard, a garrison, a magistrate or a named officer; do not stage a trial, a hearing or a sentence; do not date, count, or let anything have *happened*; do not outrun the badge or the safety label printed beside the line; and do not write the north-European village around the gaol. **Everything else — the cells, the frame in the square, the missing room, the debtors, the keys, the question nobody puts — is yours.**

@@ -1,0 +1,21 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 120,
+ "firstTs": "2026-09-12T09:37:02.329Z",
+ "lastTs": "2026-09-12T09:40:04.514Z",
+ "tools": {
+  "Bash": 30,
+  "Read": 4
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "The `&` was HTML-escaped in my brief. Let me retry with the literal key and read the voice documents.",
+ "run": "wf_5708c72b-0b2",
+ "agent": "a73cc72ec5c3aaa8a",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/4ed79a2b-6cd2-45cf-ab97-83cdad49c30b/subagents/workflows/wf_5708c72b-0b2/agent-a73cc72ec5c3aaa8a.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}

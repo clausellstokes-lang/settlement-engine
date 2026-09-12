@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-12 05:34:06 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-12 05:40:08 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -14,6 +14,7 @@
 | ? | other |  | result | 0 | — | — | 08:04:18 |
 | ? | other |  | result | 0 | — | — | 08:10:22 |
 | ? | other |  | result | 0 | — | — | 08:00:46 |
+| ? | other |  | in-flight | 0 | — | — | 09:40:06 |
 | ? | other |  | result | 0 | skeleton.md | — | 09:32:41 |
 | ? | other |  | result | 0 | skeleton.md | — | 09:04:37 |
 | ? | other |  | result | 0 | skeleton.md | — | 09:08:02 |
@@ -21,17 +22,19 @@
 | ? | other |  | result | 0 | — | — | 09:08:39 |
 | ? | other |  | result | 0 | — | — | 09:16:14 |
 | ? | other |  | result | 0 | — | — | 09:28:11 |
-| ? | other |  | in-flight | 0 | — | — | 09:33:59 |
-| ? | other |  | in-flight | 0 | — | — | 09:33:20 |
+| ? | other |  | result | 0 | — | — | 09:36:55 |
+| ? | other |  | in-flight | 0 | — | — | 09:40:04 |
+| ? | other |  | in-flight | 0 | — | — | 09:39:38 |
+| ? | other |  | in-flight | 0 | skeleton.md | — | 09:38:49 |
 | ? | other |  | result | 0 | — | — | 09:24:57 |
-| ? | other |  | in-flight | 0 | skeleton.md | — | 09:33:18 |
+| ? | other |  | result | 0 | skeleton.md | — | 09:37:02 |
 | ? | other |  | result | 0 | — | — | 09:23:02 |
-| ? | other |  | in-flight | 0 | — | — | 09:34:06 |
+| ? | other |  | in-flight | 0 | — | — | 09:39:50 |
 | ? | other |  | result | 0 | — | — | 09:11:38 |
-| ? | other |  | in-flight | 0 | — | — | 09:33:42 |
+| ? | other |  | in-flight | 0 | skeleton.md | — | 09:39:34 |
 | ? | other |  | result | 0 | — | — | 09:08:38 |
 | ? | other |  | result | 0 | skeleton.md | — | 09:10:45 |
-| ? | other |  | in-flight | 0 | skeleton.md | — | 09:33:03 |
+| ? | other |  | result | 0 | skeleton.md | — | 09:37:49 |
 | ? | other |  | result | 0 | — | — | 09:19:01 |
 | ? | other |  | result | 0 | skeleton.md | — | 09:22:13 |
 | ? | other |  | result | 0 | items-W11-W19.md | — | 08:19:37 |

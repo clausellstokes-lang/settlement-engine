@@ -303,3 +303,87 @@ As §1.5, unchanged, with the three lines that bite this variant restated. **The
 Vid 2 not second, or not `[street]`, **or any face carrying a slot** — the row is slot-free and the projector refuses a face whose slot set differs from its parent's. Fewer than four faces. Any face that loses either half of the pair (it names, it cannot keep), because the pair is the pool's discriminating claim. Any face naming the stocks, a pillory, a post, a cell or a night held. Any face asserting a criminal trial. Any face that furnishes its street from the exemplar pack's north-European kit, or stages an exchange with a singular magistrate. Any face carrying a count, a share, a rate, a date, a perfect tense, or an event the record did not run. A face that denies the law outright, or widens into "nothing is ever punished". A face that shares its first two words with a sibling (A11), or that merely re-spells the shipped clause four times.
 
 ---
+
+## VARIANT 3 · vid 3 · `[unfolding]` · slots `{settlement}` (mid-sentence, not the opener)
+
+### 3.1 The shipped sentence, verbatim
+
+> Each judgment {settlement} cannot enforce costs the next one a little of its weight, and the town's courts are spending down a reputation they cannot replace.
+
+### 3.2 Every claim it makes, on the new test
+
+- **There are JUDGMENTS — the body decides.** — **SAFE** in itself (the predicate), **CONTRADICTED where *judgment* is read as a criminal verdict** on the hall-only slice, exactly as vid 1's *tries offences*. **Row F1-12.** The `Courthouse`'s own printed words are *judgement handed down* (`institutionVocabulary.js:284`), so the noun is the engine's own where that row stands; the `Town hall` hands down an arbitration and the `Democratic assembly` hands down nothing.
+- **EACH judgment CANNOT BE ENFORCED.** — ⭐ **CONTRADICTED by floor 4, and this is the variant's central and most serious fault.** The engine models the court as WORKING: `hasCourtSystem` adds **+20** to internal order (`defenseGenerator.js:232`), and `courtOrderFloor` raises a settlement carrying organised crime to a Moderate safety floor at town (1.20) and city (1.25) on the code's own comment — *A court system actively suppresses crime even if not eliminating it* (`safetyProfile.js:62-71`) — while `:283` prints *A functioning court system means organized crime operates with greater caution* on the same dossier. **The record is the score and the printed panel.** A blanket non-enforcement claim is denied by the engine's positive model (floor 4) as well as being the exact inverse of what the badge beside the prose is computed from.
+- **EACH ONE COSTS THE NEXT ONE — an accumulating series over time.** — ⭐ **FLOOR-2. Rows F2-05 and F2-08.** *Each … the next* is an elapsed course and a trend in one clause; it asserts a sequence of past judgements the engine does not hold and will later compute differently. The card prints `may NOT: an elapsed course` in terms. `ageBands.js`'s `HISTORICIZE_BAND` pin is the constitution's own: a birth-time STATE carries no origin stamp at all, so it can bear no temporal register whatever.
+- **A LITTLE OF ITS WEIGHT — a quantified decrement.** — **FLOOR-2 (F2-01).** A magnitude the read does not hand the writer, in a word rather than a digit. The band vocabularies are closed.
+- **THE TOWN'S COURTS, plural.** — **CONTRADICTED on the town slice (F1-12's family).** At town the guaranteed row is one `Town hall`; the plural is the city's own reading (`Multiple courthouses`, `Multiple court buildings`). The pool key cannot tell.
+- **THEY ARE SPENDING DOWN A REPUTATION.** — **FLOOR-2 twice over.** It is a trend (F2-08), and *spending down* presupposes a higher past state the record does not hold (F2-05). It is additionally a figure on an abstraction, which the register card bars outright: a comparison is a measurement in words, and reputation is not a stock the engine banks.
+- **THEY CANNOT REPLACE IT — a prediction about what will not happen.** — **FLOOR-2 (F2-05, the modal future; and the card's `a prediction the pulse adjudicates`).** Nothing takes the future; the edge is subjunctive, never a fate.
+- **⛔ THE VARIANT'S STRUCTURAL PROBLEM, stated once.** Four of its seven claims are floor-2 and one is floor-4. The `[unfolding]` angle wants motion and **floor 2 forbids elapsed motion outright**, so this variant cannot be rewritten by patching its words. **It must find its motion in a STANDING TENSION rather than in a course** — what the arrangement IS doing to the town as a present condition, what the arrangement leaves permanently open, what it makes true every time rather than more true each time. See §3.6 and §3.8.
+
+### 3.3 The reads this pool reaches (material for the rewrite of vid 3)
+
+- `hasCourtSystem` and `hasPrison === false`, taken **as a shape rather than as a history**: a chain with a link out of it. The decision is complete; the thing that would follow it is not there. That is a standing structural fact and it is the whole licensed content of an unfolding reading here.
+- **The engine's own asymmetry, which is structural and not temporal:** the bench's contribution to order is real and bounded (+20), the crime pressure subtracts against it (`crimEffective × 0.4`, `defenseGenerator.js:256`), and the order purse funds *watch wages, court and gaol funding* as one charge with a floor (`:246-251`). **Every one of those is a present balance, not a slope.**
+- **The two sentences, as the only instruments in reach:** money, and the road. What a bench does when the third instrument is missing is reach further with the two it has — a present fact about how the two get used, never a claim that they are used more each season.
+- **The open matter.** The register card requires every town to leave one civic matter standing open, stated and never asked. **This variant is the pool's natural home for it**, and the record supplies one without any invention: a town that can decide and cannot detain has no settled answer to the person who will neither pay nor go, and the record holds no answer either. That is a STANDING gap, not an elapsed one.
+- NOT reached: the badge, the safety label, the criminal structure, the capture rung, the stress banner, the walls, any force, the tier, **the history**.
+
+### 3.4 ⭐ WHAT WOULD BE FALSE HERE
+
+The table at §1.4 binds this variant unchanged. The rows this `[unfolding]` variant walks into HARDEST — and unlike its siblings, most of them are floor 2, which is decidable from the face's grammar alone:
+
+| row | the trap this variant specifically invites |
+|---|---|
+| **F2-05** ⭐⭐ | **the elapsed course, in every disguise** — the perfect (*has lost*, *has become*), the durative (*keeps losing*), the comparative-against-a-past (*less than it was*, *thinner*), the ordinal over events (*each*, *the next*, *again*, *the second time*), the modal future (*will*, *would not last*), and the bare adverbs *still*, *no longer*, *since*, *as ever*. **An unfolding face is one careless auxiliary from this row.** |
+| **F2-08** ⭐ | **the trend** — anything charted: worse, growing, mounting, accumulating, wearing away, spending down. A trend asserts past states the engine does not hold |
+| **F2-01** | a quantified decrement — *a little of its weight*, *some of it*, *half as much*, *most of the time*. The shipped row commits this |
+| **F4** (the model) ⭐ | **futility** — that judgements go unenforced, that the bench is disregarded, that decisions mean nothing. `defenseGenerator.js:232` (+20) and `safetyProfile.js:62-71`/`:283` (the court actively suppresses crime, and lifts the safety floor). **This is the one thematic direction the engine positively forbids** |
+| **F1-12** | *judgment* / *courts* read criminally or plurally on a hall-only town |
+| **F1-40 / W-10** | an unfolding face implying a DECLINING band beside a badge that can read STRONG. The badge is `scoreBand(scores.internal)` and the court is +20 of it |
+| **F2-04** | an event the record did not run, smuggled in as the start of the course — *the gaol fell out of use*, *they stopped building it*, *the last time anyone was held* |
+| **F2-03 / F2-07** | a founding or an age — *the hall was raised before the town needed a gaol*. ⚠ age-FLAVOUR is free where the printed age (`OverviewTab.jsx:251`) does not deny it: *a room older than the business now done in it* is lawful; a date is not |
+| **F2-09** | the allusion to a past that no key function of this block can see. `historyPreservation.js:1-30`: a reroll replaces `settlement.history` wholesale, so a historical allusion desyncs on a button press |
+| **F3-06** | the singular office carrying the decline — *the magistrate who has stopped bothering*. `npcGenerator.js:1527`, `:1530`, `:1532` seat a **Chief Magistrate** under three stresses the key never reads |
+| **F1-34** | the decline widened into a totality — *nothing binds here any more*, *no judgement is worth anything* |
+| **F3-05** | the unfolding scene furnished against the culture profile |
+
+**THE CLOSED ROSTERS**, as at §1.4: the **court grep set**, the **detention grep set** (all four false), the live roster over the frozen snapshot, the NPC office roster, the faction list. **Not a faith pool:** no deity axis, derived temper, pantheon rank, settlement standing or `suppressed` flag arises.
+
+### 3.5 ⭐ THE PREIMAGE
+
+As §1.5, unchanged, with the line that bites this variant hardest restated: **the key reads no clock at all.** Every settlement it selects is at the same point in its own life — the first survey — and the pool fires identically on a four-hundred-year metropolis and on a town founded in the same breath as the seed. `history.age` is frozen at birth, user-settable and rerollable (`ConfigurationPanel.jsx:419-431`), and **no state-prose pool key in the estate reads a history field** (F2-09). So an unfolding face has **no time axis available to it whatever**: whatever it says must be true of a town on its first recorded day, and must stay true after the owner rerolls the history behind it. That is not a narrow constraint on this variant; it is the constraint that defines it.
+
+### 3.6 The angle's stance in one sentence
+
+`[unfolding]` is the record noticing that an arrangement has a shape with a consequence in it — so here it may state the standing tension between a body that can decide and a town that cannot hold, and may leave the matter that arrangement never settles standing open; and it may NOT date it, chart it, accumulate it, quantify its decrement, predict its end, or say that the deciding is futile, because the engine models the deciding as working.
+
+### 3.7 The turns worth keeping
+
+- The IDEA of the shipped row — that the missing link has a cost — is the right idea and the only one of the three variants that reaches for a consequence at all. **Keep the idea; discard every word that makes it a course.**
+- *cannot enforce* — the verb is salvageable if what cannot be enforced is narrowed from *each judgment* (false: judgements are enforced by fine and by the road) to the specific thing the record denies: **a judgement whose answer would have been keeping the person.** That is exact, licensed, and sharper than the shipped claim.
+- ⛔ *Each … the next one*, *a little of its weight*, *spending down*, *cannot replace* — all four go. Nothing in that clause survives floor 2.
+- ⛔ *the town's courts* plural — goes, or becomes singular, or becomes the law / the bench / the hall.
+- The `{settlement}` slot sits mid-sentence here and vid 1 opens on it. **Keep that distribution** (order constraint 10) — all four faces of vid 3 should carry `{settlement}` somewhere other than the first word.
+
+### 3.8 ⭐ WHERE THE FLAVOUR IS (vid 3)
+
+- ⭐ **THE PERSON WHO WILL NEITHER PAY NOR GO.** The record gives this town two sentences and takes away the only instrument that compels either. **Nothing in the record says what happens to the person who declines both** — and nothing denies it either, which makes it the pool's one perfect standing-open matter: stated, never asked, never resolved. It is a present condition rather than a course, so it is floor-2 clean; it is a plot hook of exactly the kind the dossier exists to hand a game master; and it is the licensed form of the futility the shipped row reaches for illegally. **This is the single best thing available to the rewrite of vid 3.**
+- **THE TOWN CAN DECIDE FASTER THAN IT CAN DO ANYTHING ABOUT IT.** Two of the three recorded court procedures are administrative — permits, taxes, contracts, licences, record filing (`institutionServices.js:1622-1633`) — and those the town CAN complete, on the spot, with a stamp and an entry. The one thing that would need holding is the one thing that stops at the door. **So the same room finishes some of its business entirely and none of the rest**, and a reader can see that shape on the page without being told a story about it. A standing asymmetry, no clock required.
+- **THE LINE ITEM CARRIES A HEAD THE TOWN NEVER SPENDS AGAINST.** *Watch wages, court and gaol funding* is one charge (`defenseGenerator.js:246`) and this town has no gaol. ⚠ F4-02/F4-03 bar splitting the purse, so the licensed reading is not that the gaol money goes elsewhere; it is that **the charge is written for a chain the town does not complete** — which is a fact about the arrangement's shape, exactly what this angle is for.
+- **THE WORKHOUSE, WHERE ONE STANDS.** At city, `baseChance: 0.25`, *the able-bodied poor given shelter and food in return for hard, compulsory labour, kept deliberately harsh* (`institutionVocabulary.js:290`; `institutionalCatalog.js:2289-2295`) — **and invisible to `hasPrison`.** A city that can decide and cannot detain may still hold people by another name for another reason, and the record keeps the two apart. Nothing licenses a face that says the bench sends anyone there; everything licenses a face that notices both standing in one town. **What someone would avoid; what the absence looks like on the ground.**
+
+### 3.9 What would make the rewrite of vid 3 a regression
+
+Vid 3 not third, or not `[unfolding]`, or its slot set not `{settlement}` exactly once, or `{settlement}` moved to the opener (vid 1 holds that position), or fewer than four faces. **Any face carrying an elapsed course, a trend, a perfect tense, a durative, a comparative against a past, an ordinal over events, a modal future, or *still* / *no longer* / *since* / *again*** — this is the variant where floor 2 does the killing and it is decidable from the grammar alone. Any face asserting that judgements go unenforced or that the bench is disregarded, because the engine models the court as suppressing crime and lifting the safety floor. Any face quantifying a decrement. Any face with plural courts or a criminal trial. Any face that resolves the standing-open matter instead of leaving it open. Any face that reads as a paraphrase of a sibling, or that shares its first two words with one (A11).
+
+---
+
+## CLOSING NOTES FOR THE WRITER
+
+1. **The one row that governs this packet is F1-12.** Two booleans stand in front of six different buildings, and one of those buildings hears no crime at all while another hears nothing whatever. Every face must be true of the `Town hall` town and of the six-bench city at once. **The cure the shipped set already found is vid 2's *can name a wrong*** — reach for that shape, in four different vocabularies.
+2. **The absence is wider than the reader will assume.** `hasPrison` greps `stocks`, so this town has no cell, no lock-up, no post, no pillory and no public punishment of any kind. The physical furniture of small-town justice is entirely gone, and that is a concrete, particular, unused fact.
+3. **The engine says the bench works.** Futility is the one theme floor 4 forbids. The licensed and better story is a working instrument with one arm missing.
+4. **Floor 2 is the killer on vid 3 and the sleeper on the other two.** No count, no date, no rate, no perfect tense, no trend, no prediction. The conversion is always the same: turn the history you wanted into a standing condition.
+5. **Zero citations; free record vocabulary.** The card resolves no holder, so name no keeper — but the docket, the entry, the roll, the minutes, the writ, the register and the licence are all free words.
+6. **Slot discipline:** vid 1 `{settlement}` as the opener · vid 2 **no slot at all** · vid 3 `{settlement}` mid-sentence. Every face inherits its parent's slot set exactly.
