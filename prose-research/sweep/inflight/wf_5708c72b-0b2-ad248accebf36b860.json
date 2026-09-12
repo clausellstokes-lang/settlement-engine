@@ -1,0 +1,21 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 89,
+ "firstTs": "2026-09-12T11:27:44.059Z",
+ "lastTs": "2026-09-12T11:29:53.527Z",
+ "tools": {
+  "Bash": 16,
+  "Read": 8
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "Round 1 exists. Let me read it, the skeleton, and the voice documents.",
+ "run": "wf_5708c72b-0b2",
+ "agent": "ad248accebf36b860",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/4ed79a2b-6cd2-45cf-ab97-83cdad49c30b/subagents/workflows/wf_5708c72b-0b2/agent-ad248accebf36b860.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}
