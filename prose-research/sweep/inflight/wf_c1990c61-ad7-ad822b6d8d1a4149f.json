@@ -1,0 +1,21 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 40,
+ "firstTs": "2026-09-12T06:50:25.718Z",
+ "lastTs": "2026-09-12T06:51:07.735Z",
+ "tools": {
+  "Bash": 6,
+  "Read": 2
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "I'll start by reading the brief's addenda and the two source sweeps.",
+ "run": "wf_c1990c61-ad7",
+ "agent": "ad822b6d8d1a4149f",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/4ed79a2b-6cd2-45cf-ab97-83cdad49c30b/subagents/workflows/wf_c1990c61-ad7/agent-ad822b6d8d1a4149f.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}
