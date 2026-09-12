@@ -1,0 +1,21 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 46,
+ "firstTs": "2026-09-12T01:51:15.776Z",
+ "lastTs": "2026-09-12T01:51:58.538Z",
+ "tools": {
+  "Bash": 9,
+  "Read": 2
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "I'll start by reading the required documents and the packet state.",
+ "run": "wf_b9aa5993-4a0",
+ "agent": "a8c4b216d4fadd96e",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/4ed79a2b-6cd2-45cf-ab97-83cdad49c30b/subagents/workflows/wf_b9aa5993-4a0/agent-a8c4b216d4fadd96e.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}
