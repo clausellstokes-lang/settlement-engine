@@ -2593,158 +2593,158 @@ supplies the ancestry.
 **PDF PARITY:** parity (`viewModel.js` defense slice).
 
 **`Beasts & Monsters`: `plagued`, perimeter AND organized force**
-1. `[ledger]` The country around {settlement} carries creatures, and the works and the muster are entered as standing.
-   - `[face]` The works at {settlement} are carried standing, and the muster with them, in a country where the creatures are.
-   - `[face]` Creatures are in the country around {settlement}, and entered to the town's name are a wall and a muster.
-   - `[face]` In the country around {settlement} there are creatures, and the town's wall and the town's muster both stand.
+1. `[ledger]` The country around {settlement} carries creatures. Entered to the town's name are a wall and a muster.
+   - `[face]` In a country where creatures are abroad, the works and the muster of {settlement} are carried standing.
+   - `[face]` Creatures range the country around {settlement}, and the town's wall and its muster both stand.
+   - `[face]` A wall and a muster are entered as standing at {settlement}, and creature country lies around the town.
 2. `[street]` Defense at {settlement} is a wall and a muster, and creatures press the country outside.
-   - `[face]` The town has a wall at {settlement} and a muster to its name, and the creatures are out in the country.
-   - `[face]` A wall and a muster stand at {settlement}, and the country around the town carries creatures.
+   - `[face]` The town has a wall at {settlement} and a muster of its own, and the creatures are out in the country.
+   - `[face]` Creatures are abroad in the country around {settlement}, and the town's own wall and muster stand.
    - `[face]` The creatures are in the country around {settlement}, and what the town has is a wall and a force.
 3. `[unfolding]` What {settlement} has built is in place and the muster with it, and the creature pressure out of the country stands unmet.
-   - `[face]` The wall at {settlement} stands and so does the muster, and what stands open is the pressure from the country's creatures.
-   - `[face]` At {settlement} the muster is in place and the wall as well, and the pressure of creatures in the country is unresolved.
+   - `[face]` The wall at {settlement} stands and so does the muster, and what lies open is the pressure from the country's creatures.
+   - `[face]` At {settlement} the muster stands and the wall as well, and the pressure of creatures in the country stands open.
    - `[face]` Both the works and the town's force at {settlement} are in place, and the pressure out of the country, where the creatures are, is unsettled.
 
 **`Beasts & Monsters`: `plagued`, perimeter but NO force to hold it**
-1. `[ledger]` The town of {settlement} has its works and no force to hold them. The country about the town is plagued with beasts.
-   - `[face]` At {settlement} the works stand in a country plagued with beasts, and the town carries neither garrison nor militia.
-   - `[face]` Plagued country lies about {settlement}, and the works of the town stand in it with no force of the muster's kind at them.
-   - `[face]` Beasts are abroad in the country around {settlement}. The town's works stand inside that country, and nothing of the muster holds them.
-2. `[visitor]` A stranger at {settlement} finds the works standing and no force of the muster's kind at them, in a country where beasts are abroad.
-   - `[face]` In a country plagued with beasts, a stranger at {settlement} meets the works standing and neither garrison nor militia at them.
-   - `[face]` To a stranger at {settlement}, the works stand in a country where creatures press, and at them stands nothing of the muster.
-   - `[face]` What the town has built stands at {settlement}, in a country plagued with beasts, and a stranger sees no garrison and no militia at the works.
+1. `[ledger]` The town of {settlement} has its works and no force to hold them. Beasts are abroad in the country about the town.
+   - `[face]` Neither garrison nor militia is entered at {settlement}, where the works stand in a country plagued with monsters.
+   - `[face]` Creatures plague the country outside {settlement}, and the works standing in it have nothing of the muster.
+   - `[face]` What the town has built at {settlement} stands with no force of the muster's kind at it, in a country where beasts press.
+2. `[visitor]` A stranger at {settlement} finds the works standing and no garrison or militia at them, in a country where beasts are abroad.
+   - `[face]` In the country about {settlement} the monsters are abroad. A stranger there meets what the town has built, and at it nothing of the muster.
+   - `[face]` To a stranger at {settlement}, the works stand with neither garrison nor militia at them, in a country where creatures press.
+   - `[face]` What a stranger finds at {settlement}, in a country plagued with beasts, is the works standing and no force of the muster's kind.
 3. `[unfolding]` The works at {settlement} stand in a country plagued with beasts, and the force to hold them is wanting.
-   - `[face]` In plagued country the works of {settlement} stand. The holding of them is open, and no force of the muster's kind is at them.
-   - `[face]` Creatures press on the country about {settlement}. Inside it the town's works stand, and the holding of them is open, with neither garrison nor militia at the works.
-   - `[face]` A country plagued with beasts lies about {settlement}. The works of the town stand in it, and the holding of them wants a garrison or a militia.
+   - `[face]` The country {settlement} sits in is plagued with monsters, and the works of the town stand in it. The holding of them stands open.
+   - `[face]` Creatures press on the country about {settlement}, and the works stand in it unheld.
+   - `[face]` Monsters plague the country round {settlement}. Inside it the works stand, and the holding of them wants a garrison or a militia.
 
 **`Beasts & Monsters`: `plagued`, NO perimeter and NO force**
-1. `[ledger]` An embattled country of monsters lies around {settlement}, and neither a wall nor a force stands in the place.
-   - `[face]` Creatures range the country around {settlement}, and the place holds neither wall nor muster.
-   - `[face]` Around {settlement} the country is plagued with monsters, and the place is entered as neither walled nor mustered.
-   - `[face]` Monster country is what {settlement} sits in, and the place stands without a wall or a force.
-2. `[street]` In a country of monsters, {settlement} stands open and unmustered.
-   - `[face]` Out in monster country {settlement} keeps no muster and no wall.
-   - `[face]` A plagued country of monsters surrounds {settlement}, a place with no wall and no muster.
-   - `[face]` At {settlement} the country is thick with monsters, and the place itself stands with neither a wall nor a force.
-3. `[visitor]` A stranger comes to {settlement} through a country of monsters and finds there neither a wall nor a force.
-   - `[face]` What a stranger sees at {settlement} is a country of monsters and a place without a wall or a muster.
-   - `[face]` The place a stranger finds at {settlement} stands open and unmustered, and around it lies a country of beasts.
-   - `[face]` The first thing a stranger meets at {settlement} is monster country, and the next is a place open and unmustered.
+1. `[ledger]` An embattled country of monsters lies around {settlement}, and the place stands inside it without works or muster.
+   - `[face]` Creatures range the country around {settlement}. The place has neither muster nor works.
+   - `[face]` The country about {settlement} is plagued with monsters, and the place is entered as wanting works and muster.
+   - `[face]` Monsters are abroad in the country around {settlement}, and nothing of works or muster stands in the place.
+2. `[street]` In a country plagued with monsters, {settlement} stands open and unmustered.
+   - `[face]` Out in monster country {settlement} keeps neither works nor muster.
+   - `[face]` A country of monsters surrounds {settlement}, a place with no works and no muster.
+   - `[face]` Beasts are thick in the country around {settlement}, and the place itself stands with no works and no force.
+3. `[visitor]` A stranger comes to {settlement} through a country plagued with monsters, and finds neither works nor muster in the place.
+   - `[face]` What a stranger sees at {settlement} is a country of monsters, and a place in it with no works and no muster.
+   - `[face]` The place a stranger finds at {settlement} stands open and unmustered, and around it lies an embattled country of beasts.
+   - `[face]` The first thing a stranger meets at {settlement} is monster country, and the next is a place with no muster and no works.
 
 **`Beasts & Monsters`: `frontier`, credible deterrence**
 1. `[ledger]` Around {settlement} lies frontier country, and the town's works stand in it. A force stands behind the works.
-   - `[face]` The works at {settlement} stand on an active frontier. With the works stands the town's force.
-   - `[face]` At {settlement} the works are carried as standing, and a force with them. The country the works stand in is frontier country.
-   - `[face]` A force stands at {settlement}, and the country it stands in is frontier country. What the town has built stands with the force.
-2. `[street]` Frontier country lies outside the town, and what stands inside it are the works and a force.
-   - `[face]` The works are up and a force stands with them in frontier country.
+   - `[face]` The works at {settlement} sit on an active frontier. With the works stands the town's force.
+   - `[face]` At the town of {settlement} the works are carried as standing, and a force with them. The country that surrounds the town is frontier country.
+   - `[face]` A force is entered at {settlement}, and the country about it is frontier country. What the town has built stands with the force.
+2. `[street]` Frontier country lies outside the town, and inside it stand the works and a force.
+   - `[face]` What the town has built is up, and a force stands with it in frontier country.
    - `[face]` In frontier country the town has a force, and that force stands behind the works.
-   - `[face]` The town's force stands behind what the town has built, and the country outside is frontier country.
-3. `[counterforce]` The works at {settlement} stand against frontier country, and behind the works the town's force.
-   - `[face]` At {settlement} the works are not without a force, and the country outside them is frontier country.
+   - `[face]` The muster stands with the works, and the country beyond the town is frontier.
+3. `[counterforce]` Against frontier country the town of {settlement} has its works standing, and behind them a force.
+   - `[face]` At {settlement} the works are not without a force, and the country outside is frontier country.
    - `[face]` Outside {settlement} the country is frontier country, and inside the town a force stands with the works.
-   - `[face]` In the frontier country around {settlement} the town's force stands with what the town has built.
+   - `[face]` The town's force stands in the frontier country about {settlement}, and with it what the town has built.
 
 **`Beasts & Monsters`: `frontier`, force without a perimeter**
-1. `[ledger]` At {settlement} armed people stand in an unwalled town, and the country about it is frontier.
-   - `[face]` The town at {settlement} is unwalled, and holds armed people in frontier country.
-   - `[face]` Armed people are kept at {settlement} in frontier country, and the town stands without a wall.
-   - `[face]` Frontier country lies about {settlement}. Inside that country the town keeps armed people, and stands unwalled.
-2. `[visitor]` A stranger passes no wall coming into {settlement}, and finds armed people in a town set in frontier country.
-   - `[face]` A newcomer to {settlement} comes out of frontier country and meets people under arms in an unwalled town.
-   - `[face]` Out of frontier country a stranger comes into {settlement} without passing a wall, and stands among armed people.
-   - `[face]` Inside {settlement} a stranger comes upon armed people, and about the town finds nothing walled. The country outside the town is frontier.
-3. `[street]` In frontier country the town keeps armed people, and stands unwalled.
+1. `[ledger]` At {settlement} the muster stands in an unwalled town, and the country outside is frontier.
+   - `[face]` The town at {settlement} is set down unwalled, and in frontier country it keeps people under arms.
+   - `[face]` Armed people are carried standing at {settlement} in a country entered as frontier, and no wall stands about the town.
+   - `[face]` Frontier country lies about {settlement}. The town in that country holds a force under arms, and no works stand.
+2. `[visitor]` A stranger passes no wall coming into {settlement}, and finds armed people in a town standing in frontier country.
+   - `[face]` A newcomer to {settlement} comes in out of frontier country, and meets people under arms in a town with no wall.
+   - `[face]` Out of frontier country a stranger comes into {settlement} past no wall, and stands among armed people.
+   - `[face]` Inside {settlement} a stranger comes upon armed people, and about the town finds nothing walled. Outside that town the country is frontier.
+3. `[street]` In frontier country the town stands unwalled, and keeps armed people.
    - `[face]` The country here is frontier, and the town's force stands where no wall does.
-   - `[face]` People under arms stand here in a town with no wall, and the country outside is frontier.
-   - `[face]` Here the town goes without works and holds armed people, in frontier country.
+   - `[face]` People under arms stand here in frontier country, and the town has no wall.
+   - `[face]` Here the town goes without works and holds armed people. What lies outside the town is frontier country.
 
 **`Beasts & Monsters`: `settled`, defenses beyond the need**
-1. `[counterforce]` There is very little in the country around {settlement}, and the works stand.
+1. `[counterforce]` There is very little of beast or monster in the country around {settlement}, and the works stand.
    - `[face]` The country around {settlement} is a quiet one in the way of beasts, and what the town has built stands.
-   - `[face]` Works stand at {settlement}, and the country around the town carries little in the way of creatures.
-   - `[face]` Creatures come to little in the country around {settlement}; the town's works stand.
+   - `[face]` Works stand at {settlement}, and the country around the town is little troubled by creatures.
+   - `[face]` Monsters come to little in the country around {settlement}; the town's works stand.
 2. `[ledger]` {settlement} is entered as provided against beasts, and the country around the town as quiet.
-   - `[face]` The works at {settlement} are carried as standing, and the country around the town is entered as little troubled by creatures.
-   - `[face]` Little troubles the country around {settlement}, and what the town has built is carried as standing.
-   - `[face]` Provision against beasts is entered at {settlement}, and the country around the town is set down as a quiet one.
-3. `[visitor]` A stranger notices the perimeter at {settlement} first, and then how little the country around the town holds.
-   - `[face]` The works at {settlement} are what a stranger sees first, and little shows in the country around the town.
-   - `[face]` To a stranger the country around {settlement} is a quiet one, and the works stand at the town.
-   - `[face]` What a stranger sees at {settlement} is the works standing, and the country around the town carrying little in the way of beasts.
+   - `[face]` The works at {settlement} are carried as standing, and the creatures of the country around the town come to little.
+   - `[face]` Little of beast or monster troubles the country around {settlement}, and what the town has built there is set down as standing.
+   - `[face]` Provision against beasts is entered at {settlement}, and the country around the town is a quiet one.
+3. `[visitor]` A stranger notices the perimeter at {settlement} first, and then how quiet the country around the town is of beasts.
+   - `[face]` What a stranger sees at {settlement} is the works standing, and few creatures in the country around the town.
+   - `[face]` To a stranger the country around {settlement} is quiet in the way of creatures, and the works stand at the town.
+   - `[face]` A stranger comes on works standing at {settlement}. Monsters are little seen in the country around the town.
 
 **`Beasts & Monsters`: `settled`, nothing organized**
-1. `[ledger]` {settlement} keeps no works and no muster against the country, and the country runs low in beasts.
-   - `[face]` The beasts about {settlement} are few, and the town keeps neither works nor muster.
-   - `[face]` The town of {settlement} holds no works and keeps no muster, and the country about it is entered as quiet.
-   - `[face]` Little comes out of the country about {settlement}. Against that country the town keeps no muster, and no works stand.
+1. `[ledger]` {settlement} keeps no works and no muster against the country, and that country runs low in beasts.
+   - `[face]` The beasts about {settlement} are few, and neither works nor muster stands in the town.
+   - `[face]` The town of {settlement} is entered with no works and no muster, and the country beyond is entered as quiet.
+   - `[face]` Little comes out of the country about {settlement}. Against that country the town holds no muster, and no works stand.
 2. `[street]` The town stands without works or muster, and what is outside it is quiet.
-   - `[face]` The country outside is quiet, and the town facing it has neither works nor muster.
-   - `[face]` Beasts are few out in the country. The town has no works against that country and keeps no muster.
-   - `[face]` What comes out of the country is little. Against that country the town holds no works and no muster.
+   - `[face]` The country outside carries few beasts, and the town facing that country keeps neither works nor muster.
+   - `[face]` Beasts are few out in the country. No works stand against that country, and the town keeps no muster.
+   - `[face]` What comes out of the country is little. The town holds no works and no muster against that country.
 3. `[visitor]` A stranger walks out of {settlement} past no works and no muster, and meets few creatures in the country.
-   - `[face]` Coming on {settlement} out of a quiet country, a stranger passes no works and finds no muster in the town.
-   - `[face]` Neither works nor muster meets a stranger at {settlement}, and beyond the town the country carries few beasts.
-   - `[face]` Few creatures meet a stranger in the country about {settlement}. The town in that country shows no works, and keeps no muster.
+   - `[face]` Out of a country low in beasts a stranger comes on {settlement} and finds no works and no muster in the town.
+   - `[face]` No works and no muster meet a stranger at {settlement}, and beyond the town the country shows little.
+   - `[face]` Few creatures meet a stranger in the country about {settlement}. The town in that country has no works and keeps no muster.
 
 **`Invasion & War`: walls AND professional garrison**
-1. `[ledger]` The works at {settlement} are entered as standing, and so are the soldiers.
-   - `[face]` Soldiers are carried standing at {settlement}, and with them the works the town has built.
-   - `[face]` Two things are entered at {settlement} and entered together, the works and the town's muster.
-   - `[face]` Both the town's works and the town's force are set down at {settlement} as standing.
+1. `[ledger]` The works at {settlement} stand entered, and so do the soldiers.
+   - `[face]` Soldiers are carried standing at {settlement}, and what the town has built is carried standing.
+   - `[face]` Two things are entered together at {settlement}, the works and the town's muster.
+   - `[face]` Both the works and the town's force are set down at {settlement} as standing.
 2. `[visitor]` A stranger at {settlement} sees the works and the soldiers together.
-   - `[face]` What a stranger sees at {settlement} is the works and, with the works, the soldiers.
-   - `[face]` At {settlement} a stranger sees both the town's force and the works the town has built.
-   - `[face]` A stranger reaches {settlement} and finds the works standing. The town's muster stands with the works.
-3. `[street]` The town has the works, and with the works it has soldiers.
-   - `[face]` Soldiers are in the town, and the works stand with them.
-   - `[face]` The town keeps its works. With those works stands the town's force.
-   - `[face]` What the town has is the works, and the muster besides.
+   - `[face]` What meets a stranger at {settlement} is the works, and the soldiers.
+   - `[face]` At {settlement} a stranger sees both the muster and the works.
+   - `[face]` A stranger reaches {settlement} and finds the works standing. The stranger finds the town's force.
+3. `[street]` The town has the works, and the muster besides.
+   - `[face]` The works are up, and the soldiers are standing.
+   - `[face]` The town keeps its works. In the town stand the soldiers.
+   - `[face]` What the town holds is the works, and the town's force.
 
 **`Invasion & War`: walls with citizen militia**
 1. `[ledger]` Walls at {settlement} with townspeople behind them, a part-time force raised off its own work.
-   - `[face]` The town of {settlement} has walls, and the muster behind them is part-time, drawn from the townspeople.
-   - `[face]` A part-time muster of the townspeople is carried standing at {settlement}, behind the town's walls.
-   - `[face]` The works at {settlement} are entered standing, and the force behind them is the townspeople, part-time.
+   - `[face]` The town of {settlement} has walls, and the militia is part-time, drawn from the townspeople.
+   - `[face]` A part-time muster of the townspeople is carried standing at {settlement}, and so are the walls the town has built.
+   - `[face]` The works at {settlement} are entered standing, and the force entered with them is the townspeople, part-time.
 2. `[street]` The force behind the walls is the townspeople themselves, a part-time muster that turns out off its own work.
-   - `[face]` The walls stand, and what turns out behind them is the townspeople, part-time.
+   - `[face]` The town's walls stand, and what turns out behind them is the townspeople, part-time.
    - `[face]` The townspeople turn out part-time behind the town's walls.
    - `[face]` Behind the walls the muster is part-time. The townspeople in it turn out and go back to their own work.
-3. `[unfolding]` What {settlement} has standing is walls, and the force behind them is the townspeople, part-time and off their own work.
+3. `[unfolding]` What {settlement} has standing is walls, and the town's force with them is the townspeople, raised part-time off their own work.
    - `[face]` Walls stand at {settlement}, and behind them is a force of the townspeople. It is part-time, raised off its own work.
-   - `[face]` The walls at {settlement} are up, and the townspeople behind them are the town's force, part-time.
-   - `[face]` At {settlement} the walls are in place, and behind them is the town's force. That force is the townspeople, raised part-time.
+   - `[face]` The walls at {settlement} are up, and the townspeople behind them are the town's force, raised part-time.
+   - `[face]` At {settlement} the walls are in place, and the town's force stands with them. That force is a militia of the townspeople, part-time.
 
 **`Invasion & War`: walls with NO force**
 1. `[ledger]` The works at {settlement} are entered as standing, and to hold them the town has neither garrison nor militia.
    - `[face]` No force stands at {settlement}, and what stands is the works.
-   - `[face]` Set down at {settlement} are the works standing, and no force in the town.
-   - `[face]` What the town has built at {settlement} stands entered. To hold the works the town has no force.
+   - `[face]` Set down at {settlement} are the works standing, and no garrison or militia in the town.
+   - `[face]` At {settlement} the town carries no force of its own, and its works stand entered.
 2. `[visitor]` A stranger at {settlement} sees the works standing and no force at them.
-   - `[face]` What a stranger finds at {settlement} is the works, and neither garrison nor militia.
-   - `[face]` A stranger finds no force at {settlement}, and sees the works.
-   - `[face]` A stranger comes to {settlement} and sees the works. No garrison and no militia stand at the works.
+   - `[face]` To a stranger at {settlement} the works stand, and with them stands neither garrison nor militia.
+   - `[face]` A stranger finds no force at {settlement}, and the works standing.
+   - `[face]` A stranger comes to the town of {settlement} and sees the works. No garrison and no militia stand in the town.
 3. `[street]` The town has the works and neither a garrison nor a militia to hold them.
-   - `[face]` What the town has built stands, and no force is kept in the town.
-   - `[face]` The town is without a garrison and without a militia, and what it has is the works.
-   - `[face]` The town has the works. The town keeps no garrison and no militia.
+   - `[face]` What the town has built stands, and the town keeps no garrison and no militia.
+   - `[face]` The town is without a garrison and without a militia. The town's works stand.
+   - `[face]` The works stand, and the town has no garrison and no militia.
 
 **`Invasion & War`: force with NO walls**
-1. `[ledger]` {settlement} keeps a standing force and no perimeter.
-   - `[face]` People under arms stand at {settlement}, and no works stand about the town.
-   - `[face]` A force is carried standing at {settlement}. The town it stands in has no wall.
-   - `[face]` The muster stands at {settlement}, an unwalled town.
+1. `[ledger]` {settlement} carries a standing force and no perimeter.
+   - `[face]` People under arms are entered at {settlement}, and the town keeps no works.
+   - `[face]` A force is carried standing at {settlement}. Nothing about the town is walled.
+   - `[face]` The muster stands at {settlement}, a town with no wall.
 2. `[street]` The town's defense is people rather than works.
-   - `[face]` This town is defended by people and by no wall.
-   - `[face]` The defense of this place is people. Nothing about the place is walled.
-   - `[face]` People under arms make up the defense of this unwalled town.
+   - `[face]` This place is defended by its own force and by no wall.
+   - `[face]` What the town has under arms is people, and nothing built stands about the place.
+   - `[face]` People under arms make up the defense here, and the place has no perimeter.
 3. `[visitor]` A stranger sees a force under arms at {settlement} and no line.
-   - `[face]` A newcomer meets a standing force at {settlement} and no works about the town.
-   - `[face]` An arrival at {settlement} comes upon people under arms. The town shows no wall.
-   - `[face]` A traveller sees the town's force at {settlement}, and the place stands unwalled.
+   - `[face]` What a newcomer notices at {settlement} is a standing force and no works about the town.
+   - `[face]` A traveller comes upon people under arms at {settlement}. The town shows no wall.
+   - `[face]` The force a stranger meets at {settlement} stands in a place with no perimeter.
 
 **`Invasion & War`: militia only**
 1. `[ledger]` A citizen militia at {settlement} answers a raid on its own ground, in place of a professional garrison, with nothing built around the town for it to stand behind.
@@ -2762,45 +2762,45 @@ supplies the ancestry.
 
 **`Invasion & War`: neither walls nor force**
 1. `[ledger]` {settlement} is entered with no wall and no force.
-   - `[face]` For war, the town of {settlement} has no force and no wall.
+   - `[face]` For war, the town of {settlement} has no force and no works.
    - `[face]` Neither garrison nor militia is kept at {settlement}, and no wall stands.
-   - `[face]` The town of {settlement} stands unwalled. Against organized aggression, the town keeps no force.
+   - `[face]` The town of {settlement} stands unwalled. Against organized aggression, the town keeps no muster.
 2. `[counterforce]` Against an army, {settlement} has neither wall nor force.
-   - `[face]` What {settlement} has for war is neither wall nor muster.
-   - `[face]` At {settlement} the town stands with no force and no wall.
-   - `[face]` No muster is kept at {settlement} for war. The town stands unwalled.
-3. `[street]` The place has no wall and no force for war.
+   - `[face]` What {settlement} has for war is no wall and no muster.
+   - `[face]` At {settlement} the town keeps no force and stands with no wall.
+   - `[face]` No muster is kept at {settlement} against a force in order. The town is unwalled.
+3. `[street]` The place has no wall about it and keeps no force.
    - `[face]` Unwalled, the town keeps no force against an army.
    - `[face]` Against war, the town is without a muster or a wall.
-   - `[face]` This town keeps no force, and no wall stands about the place.
+   - `[face]` This town keeps no force, and no wall rings the town.
 
 **`Internal Security`: full legal chain (court AND prison)**
 1. `[ledger]` The town's law at {settlement} stands entered, and so does a place of confinement.
-   - `[face]` At {settlement} the town has its law entered, and a place where people can be held.
-   - `[face]` A place where a person can be held is entered at {settlement}, and entered with it is the town's law.
+   - `[face]` In the town of {settlement} the law is entered, and people can be held there.
+   - `[face]` A place where a person can be held is entered at {settlement}. The law that town keeps is entered as standing.
    - `[face]` People can be held at {settlement}; the town's law stands entered.
 2. `[street]` A thing done wrong at {settlement} goes to the town's law, and the town keeps a place of confinement.
-   - `[face]` A person can be held at {settlement}, and what is done wrong there goes to the town's law.
-   - `[face]` A wrong done at {settlement} goes to the town's law. The town keeps a place where a person can be held.
-   - `[face]` The town has law to hand at {settlement}, and a place of confinement.
+   - `[face]` The town of {settlement} can hold a person, and a wrong done there goes to the town's law.
+   - `[face]` At {settlement} the town has its law to hand for a wrong done there. A person can be held in that town.
+   - `[face]` A person can be held at {settlement}, and the town has law to hand for what is done wrong there.
 3. `[visitor]` A stranger who comes to {settlement} finds the town's law standing, and finds a place where a person can be held.
-   - `[face]` What a stranger finds at {settlement} is the town's law, and a place of confinement.
-   - `[face]` On arrival at {settlement} a stranger sees a place of confinement, and the town's law.
-   - `[face]` To a stranger at {settlement} a place of confinement stands, and standing with it is the town's law.
+   - `[face]` What a stranger finds standing at {settlement} is a place where a person can be held, and the town's law.
+   - `[face]` To a stranger at {settlement} the town's law stands, and a place of confinement stands.
+   - `[face]` On arrival at {settlement} a stranger finds a place of confinement. The law of that town stands.
 
 **`Internal Security`: court without detention**
-1. `[ledger]` Formal law stands entered at {settlement}, and the town holds no place of confinement.
-   - `[face]` The town of {settlement} is entered with formal law, and has no gaol under that law.
-   - `[face]` Law at {settlement} is formal in its standing. Beside that law the town carries nothing to hold under.
-   - `[face]` What {settlement} keeps is formal law, and it keeps no gaol.
-2. `[street]` The town's law is formal, and the town keeps no gaol.
-   - `[face]` Here the law is formal, and there is nowhere in the town to hold under that law.
-   - `[face]` This town's law is formal. Beneath that law the town carries no place of confinement.
-   - `[face]` Law here is formal, and no gaol stands under that law.
+1. `[ledger]` Formal law stands entered at {settlement}, and the town holds no gaol.
+   - `[face]` The town of {settlement} is entered with formal law, and has no place of confinement.
+   - `[face]` At {settlement} the law is formal in its standing. The town carries nothing to hold under that law.
+   - `[face]` What {settlement} keeps is formal law, and no prison.
+2. `[street]` The town's law is formal; the town keeps no gaol.
+   - `[face]` Here the law is formal, and the town is without a place of confinement.
+   - `[face]` This town's law is formal. Beneath that law the town has nowhere to hold.
+   - `[face]` Law here is formal, and under it stands no gaol.
 3. `[unfolding]` Law is formal at {settlement}, and its holding half stands open.
    - `[face]` Under formal law at {settlement}, detention stands unmet.
-   - `[face]` At {settlement} the law is formal. Holding under that law is the half not in place.
-   - `[face]` The law {settlement} keeps is formal, and a place of confinement under it is wanting.
+   - `[face]` Law stands formal at {settlement}. The holding under that law is not in place.
+   - `[face]` The law {settlement} keeps is formal, and a place of confinement is wanting.
 
 **`Internal Security`: detention without process**
 1. `[ledger]` A person can be held at {settlement} and brought before no court.
@@ -2817,88 +2817,88 @@ supplies the ancestry.
    - `[face]` People can be locked up at {settlement}, and no court has a say.
 
 **`Internal Security`: no legal infrastructure**
-1. `[ledger]` No court sits at {settlement} to try a charge, and the one a charge names is kept in no cell.
-   - `[face]` What stands at {settlement} against a wrong done inside the town is neither a cell to hold the one charged nor a court for the charge.
-   - `[face]` Neither a court for a charge nor a cell for the one it names is entered as standing at {settlement}.
-   - `[face]` A court to hear a charge and a cell to hold an accused are things {settlement} does without.
-2. `[street]` A wrong done here comes before no court, and the one it names sits in no cell.
-   - `[face]` The town goes without a cell for the one a quarrel names, and without a court for the quarrel.
-   - `[face]` No cell here holds the one a charge names, and no court the charge.
-   - `[face]` Neither the court a case would come before nor the cell for the one complained of has a place in this town.
-3. `[visitor]` A stranger carrying a complaint into {settlement} would find no cell for the one complained of and no court to hear the complaint.
-   - `[face]` The cell a stranger would look for at {settlement} is absent, and so is the court that would hear a complaint.
-   - `[face]` What a stranger notices first at {settlement} is that no cell holds the one a charge names and no court hears the charge.
-   - `[face]` A stranger's complaint at {settlement} finds no court, and the one it names no cell.
+1. `[ledger]` Neither a court to try a charge nor a place of confinement to hold under one is entered as standing at {settlement}.
+   - `[face]` What stands at {settlement} against a wrong done inside the town is no court to try it, and no cell.
+   - `[face]` The town of {settlement} is entered with no gaol to hold under an offence and no court to try the offence.
+   - `[face]` A court for a charge and a cell for the one it names are what {settlement} does without.
+2. `[street]` A wrong done here comes before no court, and no cell is kept in the town.
+   - `[face]` Here the town keeps no court against a quarrel, and no gaol.
+   - `[face]` For a wrong done here this town keeps no court to try it, and no place of confinement.
+   - `[face]` Neither the court a charge would come before nor the cell that would hold under it stands in this town.
+3. `[visitor]` A stranger who comes to {settlement} with a complaint finds no cell for the one complained of, and no court to hear the complaint.
+   - `[face]` The court a stranger would look for at {settlement} does not stand, nor does the cell.
+   - `[face]` To a stranger at {settlement} no cell stands for the one a charge names, and no court for the charge.
+   - `[face]` What a stranger sees at {settlement} is the town's want of a court and of a place of confinement.
 
 **`Economic Survival`: `STRONG`**
-1. `[ledger]` Through a crisis, holding is entered strong at {settlement}.
-   - `[face]` What {settlement} can carry through a crisis is well covered.
-   - `[face]` Economic survival at {settlement} is set down as a pressure the town carries well.
-   - `[face]` That {settlement} absorbs a crisis well is carried as standing.
+1. `[ledger]` Entered at {settlement}, holding through a crisis is strong.
+   - `[face]` What {settlement} would bear in a crisis is entered as well covered.
+   - `[face]` Economic survival at {settlement} is set down as a pressure the town meets well.
+   - `[face]` That {settlement} can absorb a crisis well is carried as standing.
 2. `[street]` The town could go through a crisis well.
-   - `[face]` A crisis is a pressure the town is well covered for.
+   - `[face]` A crisis is a pressure the town has well covered.
    - `[face]` Strong is how the town carries a crisis.
-   - `[face]` Where a crisis would have to be carried, the town is strong.
+   - `[face]` Where a crisis would have to be borne, the town is strong.
 3. `[counterforce]` What stands at {settlement} against a crisis is the town's carrying. That carrying is strong.
-   - `[face]` A crisis is the pressure {settlement} is measured against. The town carries that pressure well.
+   - `[face]` A crisis is the pressure {settlement} is measured against. The town is well covered for that pressure.
    - `[face]` The town of {settlement} can hold through a crisis. Against that pressure the holding is strong.
-   - `[face]` Well covered at {settlement} is the pressure of a crisis. The town's carrying is what stands under that pressure.
+   - `[face]` Well covered at {settlement} is the pressure of a crisis. What stands under that pressure is the town's carrying.
 
 **`Economic Survival`: `ADEQUATE`**
-1. `[ledger]` The capacity {settlement} holds against a crisis measures adequate. The margin on that capacity is little.
-   - `[face]` Against a crisis {settlement} is covered. The covering is thin at its edge.
-   - `[face]` Through a crisis the town of {settlement} holds. The margin the town holds by is narrow.
-   - `[face]` Adequate is the word entered for {settlement} against a crisis. The margin that word leaves is not a wide one.
-2. `[unfolding]` The town's capacity against a crisis is real, and the margin left standing on it is little.
-   - `[face]` Set against a crisis the town's standing is adequate, and what that standing leaves open is a little margin.
-   - `[face]` Here a crisis is met on a little margin, and there the margin is left.
-   - `[face]` What covers the town against a crisis holds, and the little margin on it is where the matter stands.
-3. `[threshold]` The standing {settlement} carries against a crisis is adequate, and the margin the town would hold by is little.
+1. `[ledger]` The capacity {settlement} holds against a crisis measures adequate. That capacity is carried with little margin.
+   - `[face]` Against a crisis {settlement} is covered. The cover is thin at its edge.
+   - `[face]` Economic survival at {settlement} stands adequate. That standing sits on a narrow margin.
+   - `[face]` Adequate is the word entered for {settlement} against a crisis. Under that word the margin is not wide.
+2. `[unfolding]` The town's capacity to meet a crisis is real, and the margin left standing on it is little.
+   - `[face]` Set against a crisis the town's standing is adequate, and the little margin is what that standing leaves open.
+   - `[face]` This town holds through an emergency on a little margin, and that margin stands open.
+   - `[face]` What covers the town against a crisis holds, and the little margin on that cover is the matter left standing.
+3. `[threshold]` Cover against a crisis is adequate at {settlement}, and the margin under it would be little.
    - `[face]` A crisis would be met at {settlement}, and met on a little margin.
    - `[face]` The covering at {settlement} stands, and in a crisis its edge would be close.
-   - `[face]` In a crisis {settlement} is covered, and the margin of the cover would be little.
+   - `[face]` The town of {settlement} is covered against a crisis, and the cover would hold by a narrow margin.
 
 **`Economic Survival`: `WEAK`**
-1. `[ledger]` Against a crisis, {settlement} is entered thinly covered, and a real one would strain the cover.
-   - `[face]` What the town holds against a crisis at {settlement} is entered thin. A real crisis would strain what the town holds.
-   - `[face]` The thin cover entered for {settlement} limits what the town can do in an emergency, and a real crisis would strain that cover.
-   - `[face]` The town is entered weak at {settlement} on what it could do about a crisis, and a real one would strain that capacity.
-2. `[street]` Thin cover is what {settlement} has to meet a crisis with, and a real crisis would strain that cover.
-   - `[face]` What the town can do in an emergency is thin at {settlement}, and a real crisis would strain what the town can do.
-   - `[face]` The town's capacity to hold through a crisis is thin at {settlement}, and a real crisis would strain that capacity.
-   - `[face]` Against a crisis the town has thin cover at {settlement}. A real one would strain that cover.
-3. `[unfolding]` The cover {settlement} keeps against a crisis stands thin, and a real crisis would strain it where it stands.
-   - `[face]` What the town could do about a crisis stands thin at {settlement}, and a real crisis would strain that capacity as it stands.
-   - `[face]` A real crisis would strain what {settlement} keeps against one, and what the town keeps now stands thin.
-   - `[face]` The town stands thinly covered at {settlement} against a crisis. A real crisis would strain that cover as things stand.
+1. `[ledger]` Against a crisis the town of {settlement} is entered thinly covered, and a real one would strain the cover.
+   - `[face]` The holding the town of {settlement} keeps against a crisis is entered thin. A real crisis would strain that holding.
+   - `[face]` The thin cover entered for {settlement} limits what the town can do in an emergency; a real crisis would strain that cover.
+   - `[face]` A real crisis would strain the cover the town of {settlement} keeps against one, and that cover is entered weak.
+2. `[street]` Thin cover is what the town of {settlement} would have to meet a crisis with, and a real one would strain that cover.
+   - `[face]` What cover the town of {settlement} has against a crisis is thin. A real one would strain that cover.
+   - `[face]` The capacity {settlement} has to hold through a crisis runs thin, and a real one would strain that capacity.
+   - `[face]` Under a real crisis the cover the town of {settlement} has would strain, and that cover is weak.
+3. `[unfolding]` The cover {settlement} keeps against a crisis stands thin, and a real one would strain that cover as things stand.
+   - `[face]` What the town of {settlement} could do about a crisis is thin, and a real one would strain that capacity as it stands.
+   - `[face]` The town of {settlement} is thinly covered against a crisis. A real one would strain that cover where it stands.
+   - `[face]` In a real crisis the cover kept at {settlement} would strain, and that cover now stands thin.
 
 **`Economic Survival`: `CRITICAL`**
-1. `[ledger]` Against a crisis, {settlement} stands effectively uncovered. The town's capacity is entered critical.
-   - `[face]` Economic survival at {settlement} is entered critical. The town holds no cover against a crisis.
-   - `[face]` Critical is the standing entered at {settlement} for economic survival. The town cannot hold through a crisis.
-   - `[face]` Measured against a crisis, the cover the town of {settlement} keeps would not hold. The town's economic survival is entered critical.
-2. `[unfolding]` The cover the town keeps against a crisis reads critical, and the matter stands open.
-   - `[face]` For a crisis the town has no cover, and that want goes on standing.
-   - `[face]` Held against a crisis, the town's cover reads critical, and the town now stands uncovered.
-   - `[face]` What the town could set against a crisis reads critical, and stands unmet.
-3. `[street]` Whatever the town of {settlement} has against a crisis, it would not hold.
+1. `[ledger]` Economic survival is entered critical at {settlement}. The capacity so entered would not hold through a crisis.
+   - `[face]` The town's capacity against a crisis is entered critical at {settlement}. Under that pressure the town stands effectively uncovered.
+   - `[face]` Critical is the standing entered at {settlement} on economic survival. The cover the town would have through a crisis is effectively none.
+   - `[face]` The cover {settlement} has against a crisis is entered critical. Through that pressure the town's capacity could not hold.
+2. `[unfolding]` The capacity the town has against a crisis reads critical, and the want of cover stands open.
+   - `[face]` Against a crisis the town's cover reads critical, and the town now stands uncovered.
+   - `[face]` What the town could set against a crisis would not hold, and the matter is open now.
+   - `[face]` The town's cover through a crisis stands at critical, and the want it leaves is open.
+3. `[street]` Whatever the town of {settlement} has against a crisis, that cover would not meet the pressure.
    - `[face]` The town of {settlement} could not hold through a crisis.
    - `[face]` A crisis would be more than the town of {settlement} could hold.
-   - `[face]` Set against a crisis, the town of {settlement} has no cover.
+   - `[face]` Set against a crisis, the town of {settlement} has effectively no cover.
 
 **`Disasters & Famine`: granary AND hospital**
 1. `[ledger]` The granary at {settlement} is entered as standing, a place for grain against hunger. Those tending the sick are entered beside it, against sickness.
-   - `[face]` Those tending the sick are set down at {settlement} as standing, against sickness. The granary is set down beside them, a place for grain against hunger.
-   - `[face]` A granary stands at {settlement} and grain is stored in it against hunger. Those tending the sick are entered with the granary, against sickness.
-   - `[face]` Entered as standing at {settlement} are those tending the sick and a granary where grain is stored. They stand against sickness and hunger.
+   - `[face]` Those tending the sick are set down at {settlement} as standing, against sickness. The granary where grain is stored is set down with them, against hunger.
+   - `[face]` A granary stands at {settlement} and grain is stored in it against hunger. Those tending the sick are entered with it, against sickness.
+   - `[face]` Entered as standing at {settlement} are those tending the sick against sickness and a granary where grain is stored. It stands against hunger.
 2. `[street]` The town has a place for grain against hunger, and those tending the sick against sickness.
-   - `[face]` Grain has its place in the town, and those who tend the sick are there as well, against hunger and against sickness.
+   - `[face]` Grain has its place in the town against hunger, and those who tend the sick are there against sickness.
    - `[face]` What the town has against hunger is a place for grain, and against sickness those tending the sick.
-   - `[face]` A place for grain and those tending the sick, the town has these against hunger and against sickness.
+   - `[face]` A place for grain and those tending the sick, the town has these against hunger and sickness.
 3. `[counterforce]` Against hunger at {settlement} stands a granary where grain is stored, and against sickness those tending the sick.
-   - `[face]` Those who tend the sick stand at {settlement} against sickness, and against hunger the granary where grain is stored.
-   - `[face]` What stands against hunger at {settlement} is a granary where grain is stored, and what stands against sickness are those tending the sick.
-   - `[face]` Hunger at {settlement} has a granary standing against it, where grain is stored, and sickness has those tending the sick.
+   - `[face]` Those who tend the sick stand against sickness at {settlement}, and the granary where grain is stored against hunger.
+   - `[face]` What stands against hunger at {settlement} is a granary where grain is stored, and those tending the sick stand against sickness.
+   - `[face]` Hunger at {settlement} has a place for grain standing against it, and sickness those tending the sick.
 
 **`Disasters & Famine`: granary AND parish care only**
 1. `[ledger]` The granary at {settlement} holds grain against a failed harvest and a house of the faith stands in the town; no infirmary stands at all.
@@ -2915,46 +2915,46 @@ supplies the ancestry.
    - `[face]` The parish is what a stranger finds standing at {settlement}, with no hospital in the town. The granary holds the town's grain against a failed harvest.
 
 **`Disasters & Famine`: granary, NO medical provision**
-1. `[ledger]` A granary stands at {settlement}, and neither an infirmary nor a parish stands in the town.
-   - `[face]` Grain is held in store at {settlement}, and the town has neither a parish nor a sick-house.
-   - `[face]` A store of grain is kept at {settlement}, and neither an infirmary nor a parish stands beside the granary.
-   - `[face]` Carried as standing at {settlement} is a granary; an infirmary and a parish are not.
-2. `[unfolding]` Grain stays in store here, and the town stays without an infirmary or a parish.
-   - `[face]` The store goes on holding grain, and the town goes on with neither a parish nor an infirmary.
-   - `[face]` Stored grain stays stored, and no sick-house or parish stands in the town.
-   - `[face]` Here the grain keeps its store, and an infirmary and a parish stay absent from the town.
-3. `[street]` The granary at {settlement} is where the grain is; the sick-house and the parish are not here.
-   - `[face]` Grain sits in the store at {settlement}, and no infirmary or parish is part of the town.
-   - `[face]` The grain has its store at {settlement}, and an infirmary and a parish are things the town is without.
-   - `[face]` Grain has a store at {settlement}, and no infirmary or parish stands in this town.
+1. `[ledger]` A granary is entered at {settlement}, and the town has neither a parish nor a house for the sick.
+   - `[face]` A store of grain is set down at {settlement}, and the town is without a house for the sick or a parish.
+   - `[face]` The town of {settlement} has grain in store. Beside the store no house for the sick or parish stands.
+   - `[face]` Carried as standing at {settlement} is a granary, and a house for the sick and a parish are not.
+2. `[unfolding]` Grain stays in store here, and the town stays without a parish or a house for the sick.
+   - `[face]` The store goes on holding grain, and the town goes on with neither a house for the sick nor a parish.
+   - `[face]` Stored grain stays stored, and no house for the sick or parish stands in the town.
+   - `[face]` Here the store keeps its grain, and a parish and a house for the sick stay absent.
+3. `[street]` The granary at {settlement} is where the grain is, and a parish and a house for the sick are not in the town.
+   - `[face]` Grain lies in the store at {settlement}, and no house for the sick or parish is part of the place.
+   - `[face]` Grain is in the granary at {settlement}, with neither a parish nor a house for the sick on the same ground.
+   - `[face]` What sits in the store at {settlement} is grain, and a parish and a house for the sick are absent from the town's ground.
 
 **`Disasters & Famine`: NO reserves, hospital present**
-1. `[ledger]` Those tending the sick are entered at {settlement}, and against hunger no granary is entered.
-   - `[face]` Carried at {settlement} are those tending the sick. The town carries no granary against hunger.
-   - `[face]` Set down at {settlement} are those tending the sick, and against hunger no granary is set down.
-   - `[face]` The town of {settlement} has those tending the sick entered, and against hunger no granary is entered.
-2. `[street]` The town has those tending the sick. Against hunger the town keeps no granary.
-   - `[face]` Those tending the sick are in the town, and against hunger it has no granary.
-   - `[face]` What the town has are those tending the sick, and against hunger no granary.
-   - `[face]` In the town are those tending the sick, and against hunger no granary at all.
+1. `[ledger]` Those tending the sick are entered at {settlement}, and against hunger no granary.
+   - `[face]` Set down at {settlement} are those tending the sick. The town carries no granary against hunger.
+   - `[face]` The town of {settlement} has those tending the sick entered, and against hunger sets down no granary.
+   - `[face]` What is entered at {settlement} are those tending the sick, and no granary against hunger is carried.
+2. `[street]` The town has those tending the sick. It keeps no granary against hunger.
+   - `[face]` Those tending the sick are in the town, and against hunger the town is without a granary.
+   - `[face]` What the town has are those tending the sick, and against hunger no granary at all.
+   - `[face]` In the town are those tending the sick, and against hunger no granary is kept.
 3. `[unfolding]` Those tending the sick stand at {settlement}, and against hunger no granary stands.
-   - `[face]` Here at {settlement} stand those tending the sick. Against hunger the town stands with no granary.
-   - `[face]` What stands at {settlement} are those tending the sick, and what does not stand is a granary against hunger.
-   - `[face]` The town of {settlement} has those tending the sick standing and no granary standing against hunger.
+   - `[face]` Here at {settlement} stand those tending the sick. Against hunger no granary stands in the town.
+   - `[face]` What stands at {settlement} are those tending the sick, and what does not is a granary against hunger.
+   - `[face]` The town of {settlement} has those tending the sick standing, and against hunger no granary.
 
 **`Disasters & Famine`: NO reserves, NO medical provision**
-1. `[ledger]` {settlement} keeps no granary to hold grain back, and nothing standing takes the sick in.
-   - `[face]` A storehouse for grain is not entered at {settlement}, nor an infirmary.
-   - `[face]` No house stands at {settlement} to treat the sick, and the granary that would hold grain back is not built.
-   - `[face]` Nowhere at {settlement} takes the sick in, and no granary stands.
-2. `[street]` Neither a granary nor a house for the sick stands at the community.
-   - `[face]` The place is without a house for the sick and without a granary to hold grain back.
+1. `[ledger]` {settlement} keeps no granary to hold grain back, and no infirmary stands to treat the sick.
+   - `[face]` No house that takes in the sick stands at {settlement}, nor any storehouse for grain.
+   - `[face]` The granary that would store grain is not built at {settlement}, and neither is a house for the sick.
+   - `[face]` No infirmary is carried standing at {settlement}, and no granary.
+2. `[street]` No granary stands in the place, and no infirmary.
+   - `[face]` The community stands with neither a house that takes in the sick nor a granary.
    - `[face]` A granary is not among the buildings of the place, nor a house for the sick.
-   - `[face]` The community stands with neither granary nor house for the sick.
-3. `[visitor]` A stranger looking for the granary at {settlement} finds no such building, and no house that takes the sick in.
-   - `[face]` A stranger crossing {settlement} passes no infirmary, and no storehouse for grain.
-   - `[face]` The granary a stranger looks for at {settlement} is not built, and no house takes the sick in.
-   - `[face]` A stranger arrives at {settlement} and meets neither a granary nor anywhere for the sick.
+   - `[face]` The place is without a granary, and without anywhere for the sick.
+3. `[visitor]` A stranger looking for the granary at {settlement} finds no such building, and no house that takes in the sick.
+   - `[face]` A stranger crossing {settlement} passes no infirmary, and sees no storehouse for grain.
+   - `[face]` The infirmary a stranger looks for at {settlement} is not built, and no granary stands.
+   - `[face]` A stranger arrives at {settlement} and comes upon no granary, and no house for the sick.
 
 ---
 
