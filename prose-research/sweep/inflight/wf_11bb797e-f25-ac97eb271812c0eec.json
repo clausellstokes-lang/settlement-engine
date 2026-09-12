@@ -3,11 +3,12 @@
  "name": null,
  "angle": null,
  "tag": null,
- "lines": 69,
+ "lines": 121,
  "firstTs": "2026-09-12T07:56:23.549Z",
- "lastTs": "2026-09-12T07:59:11.017Z",
+ "lastTs": "2026-09-12T08:03:29.473Z",
  "tools": {
-  "Bash": 16
+  "Bash": 29,
+  "SendUserFile": 1
  },
  "urlsFetched": [],
  "filesWritten": [],
