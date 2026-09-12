@@ -345,34 +345,3 @@ Coverage check: 641 surviving items → 179 finding rows — 126 floor 1, 9 floo
 ## THE ONE SENTENCE
 
 **Do not seat a body, a building, a record-keeper, a force or a faith-house the town's roster does not hold; do not read an engine label at its English sense where the engine prints its own sense beside the prose; do not speak a magnitude or a tense the record does not hand you; and do not deny what the engine positively models.** Everything else is yours.
-
----
-
-# §D. THE FAITH DESK — THE DEITY ROWS (added by the chair 2026-09-12, brief ADDENDUM 15 as corrected by ADDENDUM 16)
-
-⚠ THESE ROWS WERE NOT IN THE FOLD. `wf_c1990c61-ad7` launched BEFORE ADDENDUM 15, so its `W11-W19` slice classified W19 (the faith bar) under the OLD deity doctrine. The chair wrote these rows by hand from the measured record and VERIFIED each by running the code. They bind the FAITH desk (DS-FTH-*); no defense block reads any of this.
-
-**THE LICENCE (ADDENDUM 15).** The FOLLOWERS act; the god does not. A creed's people may be shown behaving in a manner consonant with the record. The deity is a NAME with no predicate.
-
-| id | the claim that would be FALSE | the field that denies it | floor |
-|---|---|---|---|
-| D-01 | the god as the subject of ANY verb — demands, sends, answers, appears, wills, punishes, blesses, is angered, is pleased, exists | no field models a deity as an actor; the FAITH-AGNOSTICISM LAW (owner 2026-08-06) — the engine simulates the congregation, never the miracle | 3 |
-| D-02 | a cosmology, an afterlife, a rival pantheon's reality, a miracle as fact, that any devotion is warranted | as D-01; the deity doctrine, constitutional | 3 |
-| D-03 | a NAMED priest's or devotee's fate | product scope; and F3-06's rider — the tier's SINGULAR office (`TIER_MANDATORY_ROLES`) is not the "unnamed person" the relaxation reaches | 3 |
-| D-04 | peaceable conduct on a WARLIKE temper, or bellicose conduct on a PEACELIKE one | `deityTemper(deity)` (`worldPulse/deityAxes.js:148`) | 1 |
-| D-05 | ⚠ conduct keyed on the STORED `temperamentAxis` where it disagrees with the derived/authored temper | the stored axis is INERT (Phase 4 W-F5); `deityTemper()` is what the engine drives | 1 |
-| D-06 | ⭐ treating "evil" and "warlike" (or "good" and "peacelike") as TWO facts about a deity with NO `authoredTemper` | VERIFIED BY EXECUTION: `deriveTemper` = `0.7×(evil01−0.5) + 0.3×(chaos01−0.5)`, dead band 0.15 ⇒ good→peacelike, neutral→neutral, evil→warlike at EVERY law position. For a derived deity the temper IS alignment restated; `lawAxis` is INERT to it. Not a contradiction but PADDING — the CRAFT verdict refuses it | craft |
-| D-07 | conduct attributed to the LAW axis through temper ("lawful, therefore calm") | as D-06: `lawAxis` never moves the derived temper. Its real couplings are `law_order` and corruption tolerance | 1 |
-| D-08 | "what they do goes unexamined" / an unpoliced evil creed, where the safety or capture surface denies it | `alignmentAxis:'evil'` is a coefficient on the corruption ONSET RATE (`DEITY_CORRUPTION_TUNING.axisSign.evil = −1`), not a record that anything went unexamined; at birth the clock has not run, and the face would print beside `Very Safe` + STRONG internal order. Licensed forms: wary · closed · unwelcome | 1 |
-| D-09 | reading the PANTHEON rank off the SETTLEMENT standing, or the reverse | `rankAxis` major/minor/cult (`deityConstants.js`, lift 18/10/5) vs `standing` cult/established/ascendant (`religionState.js:151-154`). A cult-ranked deity can be a town's ascendant creed; a major deity can sit at cult standing | 1 |
-| D-10 | a cult's people running the town, setting the calendar, or being deferred to | `standing:'cult'` (share < 15) and the authority lift of 5 | 1 |
-| D-11 | the patron's creed as one sect among equals, or two patrons | exactly ONE patron per settlement (`religionState.js`, `patronRef`) | 1 |
-| D-12 | a creed acting, observing or being seen where `suppressed` is set | `suppressDeity` writes `{suppressed:true, share:0, standing:'cult'}` (`religionState.js:276`) — ⚠ the marker MUST surface `suppressed` BESIDE `standing`, or this row collides with D-10's cult licence on one record | 1 |
-| D-13 | any faith prose at all in a settlement with NO deity entry | THE DORMANCY GUARANTEE (`deityConstants.js` header; the certified-inert ground state) | 1 |
-| D-14 | a share or following spoken outside the band word | `shareBandLabel` is a closed vocabulary — floor 2a: a magnitude the read does not carry is not spoken, as a digit OR as a word | 2 |
-| D-15 | a tenure, a founding, a conversion date, "for six generations", "since the founding" | `tenure` and `heresyStain` are counters the pulse moves, not readings a face may date — floor 2b | 2 |
-| D-16 | a manner of a patron's fall other than the recorded one | the frozen four: `discredited` · `displaced` · `imposed` · `suppressed` (`patronFall.js`), each with its own panel sentence | 1 |
-| D-17 | a legitimacy read as settled where the band is `contested`, or as contested where it is not | `legitimacyBand` (`faithPanelModel.js:39-43`) | 1 |
-| D-18 | two deities in one niche | `niche` = temperament × alignment, ONE deity per niche (`religionState.js` header) | 1 |
-
-**NOT A FINDING ON THE FAITH DESK** (struck with the rest of the old law): that a creed's conduct is "unlicensed"; a record word for the parish or the register beyond W24's struck table; a person as a load-bearing referent, where unnamed and outside the tier's singular office; a standpoint; a second fact in one unit.

@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-12 03:36:40 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-12 03:42:17 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = 3706c6df7 §919.2: the OPUS CHAIR MANUAL amended — the refuter and re-refuter seat is OPUS at the 
 
@@ -43,11 +43,14 @@ product claude/composite-r4 = f73bdbf16 · ledger = 3706c6df7 §919.2: the OPUS 
       | 
       | Every figure below comes from a command that ran in this dock with its exit code captured. A figure
       | without a command is not in this file. ZERO reader-facing bytes is the car's own fence: the manifest
-- **DS-DEF-2 (waits for the tables)** dock `laneRW-DEF2` HEAD 471ce894a · 4 cars over f2da5a3ee · porcelain 0 · last commits:
+- **DS-DEF-2 (waits for the tables)** dock `laneRW-DEF2` HEAD 471ce894a · 4 cars over f2da5a3ee · porcelain 2 · last commits:
     471ce894a REWRITE 8b DS-DEF-2: 50/78 variants kept as refined · 31 faces reverted · 99 cure target(s) — the Fable judge rulings applied
     402d592df REWRITE 8b DS-DEF-2 refine: 23/26 kept, 3 reverted
     fa973a884 REWRITE 8b DS-DEF-2 draft round 2: 24/26
     8540c87eb REWRITE 8b DS-DEF-2 draft round 1: 17/26
+    porcelain (uncommitted work in the dock — commit it FIRST after re-proving):
+       M scripts/lib/prose-licence-card.mjs
+      ?? scripts/lib/prose-licence-card.mjs.pre-add14-recut
     receipt `receipt-rewrite.md` (mtime 09-09 14:58) head:
       | # RECEIPT — the REWRITE train
       | 
@@ -555,4 +558,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `ad30ac0bb` FOLDER · DONE · transcript 09-11 06:02 1531 KB · 36 tool calls · files: _partD.md, _partE.md, _partF.md, _partG.md · result: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/entailment/ENTAILMENT-TABLE.draft.md
 
 ## PROCESSES: 57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 2.05 2.28 2.19
+load: 1.72 1.99 2.08
