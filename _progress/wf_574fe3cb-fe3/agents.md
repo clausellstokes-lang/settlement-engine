@@ -1,7 +1,7 @@
-# wf_574fe3cb-fe3 — per-agent progress, 2026-09-12 04:16:17
-    - `af22a9af8` ? · IN FLIGHT · transcript 09-12 04:16 185 KB · 4 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchp
-    - `a32d8e55f` ? · IN FLIGHT · transcript 09-12 04:16 224 KB · 4 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchp
-    - `a9b28da5a` ? · IN FLIGHT · transcript 09-12 04:16 193 KB · 4 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchp
-    - `a5b79631d` ? · IN FLIGHT · transcript 09-12 04:16 156 KB · 4 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
-    - `a023e5ead` ? · IN FLIGHT · transcript 09-12 04:16 184 KB · 3 tool calls · last: Bash cat "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scr
-    - `a27ae581b` ? · IN FLIGHT · transcript 09-12 04:16 192 KB · 4 tool calls · last: Bash cd "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scra
+# wf_574fe3cb-fe3 — per-agent progress, 2026-09-12 04:22:04
+    - `af22a9af8` ? · DONE · transcript 09-12 04:20 328 KB · 12 tool calls · files: items-W1-W10.md, appendix-W1-W10.md, items-W1-W10.md · result: {"slice": "W1-W10", "newFindingRowsAdded": 6, "authoredCellsMarked": 2, "foldAuthoredCells": 14, "newBarsAmongThem": ["\u26a0 NEW BAR \u00b7 NF-2 \u2014 the tow
+    - `a32d8e55f` ? · DONE · transcript 09-12 04:19 344 KB · 12 tool calls · files: items-W11-W19.md · result: {"slice": "W11-W19", "newFindingRowsAdded": 8, "authoredCellsMarked": 3, "foldAuthoredCells": 58, "newBarsAmongThem": ["NF-1 \u2014 the militia and the watch ar
+    - `a9b28da5a` ? · DONE · transcript 09-12 04:20 344 KB · 15 tool calls · files: items-W20-W27.md, items-W20-W27.md · result: {"slice": "W20-W27 \u2014 the eight referent bars of ADDENDUM 13 PART B (20 items)", "newFindingRowsAdded": 6, "authoredCellsMarked": 5, "foldAuthoredCells": 15
+    - `a5b79631d` ? · IN FLIGHT · transcript 09-12 04:21 348 KB · 19 tool calls · files: perm71.txt · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
+    - `a023e5ead` ? · IN FLIGHT · transcript 09-12 04:21 379 KB · 20 tool calls · last: Bash cd "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scra
+    - `a27ae581b` ? · IN FLIGHT · transcript 09-12 04:21 405 KB · 22 tool calls · last: Bash cd "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scra

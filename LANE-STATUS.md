@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-12 04:16:13 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-12 04:22:02 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = 999fa681b §919.3: THE RE-CUT'S RETROSPECTIVE VALIDATION RECORD (part 1 of 2) — the owner's word o
 
@@ -238,13 +238,13 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
 - LAST-RUNS: 
 
 ## WORKFLOW RUNS of chair session 4ed79a2b-6cd2-45cf-ab97-83cdad49c30b — PER AGENT, PER LANE (owner 09-11: save progress per agent per lane; a run dies with the session, its journal + the packets + the dock commits are the checkpoint; journals mirrored under $SC/_progress/<wf>/)
-- **wf_574fe3cb-fe3** (mtime 09-12 04:15): agent calls 6 (6 distinct) · DONE 0 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 6 — mirror `_progress/wf_574fe3cb-fe3/`
-    - `af22a9af8` ? · IN FLIGHT · transcript 09-12 04:16 185 KB · 4 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchp
-    - `a32d8e55f` ? · IN FLIGHT · transcript 09-12 04:16 224 KB · 4 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchp
-    - `a9b28da5a` ? · IN FLIGHT · transcript 09-12 04:16 193 KB · 4 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchp
-    - `a5b79631d` ? · IN FLIGHT · transcript 09-12 04:16 156 KB · 4 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
-    - `a023e5ead` ? · IN FLIGHT · transcript 09-12 04:16 184 KB · 3 tool calls · last: Bash cat "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scr
-    - `a27ae581b` ? · IN FLIGHT · transcript 09-12 04:16 192 KB · 4 tool calls · last: Bash cd "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scra
+- **wf_574fe3cb-fe3** (mtime 09-12 04:15): agent calls 6 (6 distinct) · DONE 3 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 3 — mirror `_progress/wf_574fe3cb-fe3/`
+    - `af22a9af8` ? · DONE · transcript 09-12 04:20 328 KB · 12 tool calls · files: items-W1-W10.md, appendix-W1-W10.md, items-W1-W10.md · result: {"slice": "W1-W10", "newFindingRowsAdded": 6, "authoredCellsMarked": 2, "foldAuthoredCells": 14, "newBarsAmongThem": ["\u26a0 NEW BAR \u00b7 NF-2 \u2014 the tow
+    - `a32d8e55f` ? · DONE · transcript 09-12 04:19 344 KB · 12 tool calls · files: items-W11-W19.md · result: {"slice": "W11-W19", "newFindingRowsAdded": 8, "authoredCellsMarked": 3, "foldAuthoredCells": 58, "newBarsAmongThem": ["NF-1 \u2014 the militia and the watch ar
+    - `a9b28da5a` ? · DONE · transcript 09-12 04:20 344 KB · 15 tool calls · files: items-W20-W27.md, items-W20-W27.md · result: {"slice": "W20-W27 \u2014 the eight referent bars of ADDENDUM 13 PART B (20 items)", "newFindingRowsAdded": 6, "authoredCellsMarked": 5, "foldAuthoredCells": 15
+    - `a5b79631d` ? · IN FLIGHT · transcript 09-12 04:21 348 KB · 19 tool calls · files: perm71.txt · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
+    - `a023e5ead` ? · IN FLIGHT · transcript 09-12 04:21 379 KB · 20 tool calls · last: Bash cd "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scra
+    - `a27ae581b` ? · IN FLIGHT · transcript 09-12 04:21 405 KB · 22 tool calls · last: Bash cd "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scra
 - **wf_11bb797e-f25** (mtime 09-12 04:04): agent calls 12 (12 distinct) · DONE 12 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 0 — mirror `_progress/wf_11bb797e-f25/`
     - `a507343ec` ? · DONE · transcript 09-12 04:00 292 KB · 13 tool calls · files: items-W1-W10.md · result: {"slice": "W1-W10 \u2014 the ten writer rules W1\u2013W10 plus ADDENDUM 12's chair rulings R-i, R-ii, R-iii, R-iv, R-vi, R-viii\u2032 (as amended 2026-09-10)", 
     - `a5adaf2e5` ? · DONE · transcript 09-12 04:01 267 KB · 6 tool calls · files: items-W11-W19.md · result: {"slice": "W11\u2013W19 \u2014 the writer bars of brief ADDENDUM 13 part A, section B (defense, crisis and faith desks), re-cut under ADDENDUM 14 from LICENCE t
@@ -578,4 +578,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `ad30ac0bb` FOLDER · DONE · transcript 09-11 06:02 1531 KB · 36 tool calls · files: _partD.md, _partE.md, _partF.md, _partG.md · result: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/entailment/ENTAILMENT-TABLE.draft.md
 
 ## PROCESSES: 57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 2.21 2.09 2.11
+load: 2.45 2.25 2.18

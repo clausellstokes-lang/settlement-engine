@@ -1,0 +1,21 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 90,
+ "firstTs": "2026-09-12T08:15:59.595Z",
+ "lastTs": "2026-09-12T08:21:37.058Z",
+ "tools": {
+  "Bash": 19,
+  "Read": 2
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "Now I have what I need. Let me verify the row structure before editing.",
+ "run": "wf_574fe3cb-fe3",
+ "agent": "a27ae581b6862ca0d",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/4ed79a2b-6cd2-45cf-ab97-83cdad49c30b/subagents/workflows/wf_574fe3cb-fe3/agent-a27ae581b6862ca0d.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}
