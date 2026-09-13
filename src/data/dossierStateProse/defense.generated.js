@@ -571,7 +571,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
-          "text": "A traveller says the line is there to be seen, and that he takes it what is in the country sees it too.",
+          "text": "A traveller says he came on the line before he came on the town, and that he takes it what is in the country sees it too.",
           "slots": [],
           "vid": 3,
           "wordings": [

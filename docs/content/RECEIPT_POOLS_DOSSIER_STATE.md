@@ -2667,7 +2667,7 @@ supplies the ancestry.
    - `[face]` `[market]` At the market they say the stalls go up whatever the country is doing.
    - `[face]` `[court]` The court says a dispute over the toll is settled on the day it is brought, and that the country brings it none.
    - `[face]` `[elders]` The elders say the young stand the nights and the old say how they are stood.
-3. `[counterforce]` A traveller says the line is there to be seen, and that he takes it what is in the country sees it too.
+3. `[counterforce]` A traveller says he came on the line before he came on the town, and that he takes it what is in the country sees it too.
    - `[face]` `[market]` Stallholders say the trade comes in through the bar by daylight and does not say what it saw on the road.
    - `[face]` `[register]` The sexton says the ones the country takes are taken on the road.
    - `[face]` `[gate]` Those who hold the way through keep a light at the bar after dark and say it is there to be seen from the country.
