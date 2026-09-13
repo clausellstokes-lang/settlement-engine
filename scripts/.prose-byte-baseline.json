@@ -55,8 +55,8 @@
   },
   "leaves": {
     "src/data/dossierStateProse/defense.generated.js": {
-      "raw": 157125,
-      "gzip": 23708,
+      "raw": 157209,
+      "gzip": 23723,
       "ceilingRaw": 488168,
       "ceilingGzip": 108482
     },
@@ -187,6 +187,14 @@
       "toRaw": 157125,
       "gzipAfter": 23708,
       "reason": "⛔ THIS ROW IS LATE AND THE LATENESS IS THE FINDING. The bytes moved when the first v3 pool took its faces — `DS-DEF-2 :: Invasion & War: walls with NO force` grew from one face per variant to four, and each face carries a `sources` entry, a `pairs` entry and (on two variants) role and verb slots. The +2,007 B is that pool and nothing else: the projector's `--check` is green, the census verifies 708 pools / 2,266 variants, and no other leaf moved a byte. What did NOT happen is the declared row: cars 18c, 18i, 18k, 18l and 18m each landed green on their own gates and none of them ran this ratchet, so the growth sat undeclared until car 8b-W-18o-r ran the full byte measurement the brief asked for (reconciliation item 9) and the ratchet named the leaf and the delta — which is exactly what it is for. The row is appended here rather than in a car of its own because the chain must reach today's bytes for the instrument to work at all, and a red ratchet helps nobody. ⭐ NO CEILING IS TOUCHED AND NONE IS NEAR: the leaf sits at 157,125 of an owner-signed 488,168 (32.2 per cent), and the six state leaves together at 887,260 of 2,800,000 (31.7 per cent). The ceilings are ARCH §10's and the owner's; this row moves only the MEASUREMENT. ⚠ THE HAZARD, NAMED SO THE NEXT LANE DOES NOT REPEAT IT: this ratchet is not in the per-commit gate list any 8b car has been running (`git show 95760e212` names the suites and this is not among them). Every v3 pool from here grows its leaf, so every cure commit owes a declared row — add `npx vitest run tests/lint/proseCorpusBytes.test.js` to the lane's gate."
+    },
+    {
+      "car": "REWRITE car 8b-W-18n/18o (C) — THE FIRST POOL RE-CUT under rulings 27, 28, 30, 37 and 40",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 157125,
+      "toRaw": 157209,
+      "gzipAfter": 23723,
+      "reason": "The first v3 pool takes the two forms ADDENDUM 18 created and loses the frames ruling 40 struck. TWO FACES ADDED: an `[archiver · observed]` face on variant 2 and a `[public]` face on variant 3 (faceCounts 4,4,4 → 4,5,5; the shift register's `face-count-per-variant` row carries the re-roll). Against that, THREE SPINES AND THE HALL'S PAIR HALF WERE SHORTENED: ruling 40 struck 'The survey finds …' and 'Entered here as kept.' from spine 1 and 'The survey finds the watch on the walls …' from the watch's face, and ruling 30 cut the hall's half from two sentences to one so the pair is compoundable. The net is small because the re-cut gives back nearly what the new faces cost, which is the cap doing its work. ⭐ NO CEILING IS NEAR: the leaf sits far under the owner-signed 488,168. ⚠ AND THIS COMMIT IS THE FIRST 8b CURE TO RUN THIS RATCHET AT ALL — the row before it banks the growth five earlier cars left undeclared."
     }
   ]
 }

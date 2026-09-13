@@ -525,8 +525,13 @@ describe('⭐ WHERE THE ATTRIBUTION SLOTS SHIP — one pool, named; everywhere e
   it('⭐⭐ ONLY DS-DEF-2\'s NINE RE-CUT FACES name an attribution slot; the other five leaves carry none', () => {
     // The mechanism landed at car 8b-W-18l with a global zero-shift arm, because no shipped
     // sentence named a slot. The re-cut of `Invasion & War: walls with NO force` lawfully
-    // ended that, so the arm is RE-PINNED rather than deleted: the nine faces are named, the
-    // other five leaves are asserted empty, and a tenth face landing reds here by name.
+    // ended that, so the arm is RE-PINNED rather than deleted: the faces are counted, the
+    // other five leaves are asserted empty, and one more landing reds here by name.
+    // ⭐ RE-FROZEN AGAIN AT CARS 8b-W-18n/18o: TEN, not nine. The pool gained TWO faces and
+    // only ONE of them names a slot — the `[public]` face carries `{public}` like any source,
+    // and the `[archiver · observed]` face carries NONE, because the archiver is not a source
+    // and has no roster to draw a person from (ruling 27). The count moving by one where two
+    // faces landed is the observation's defining property, measured.
     const LEAVES = ['defense', 'economy', 'general', 'power', 'stressors', 'warFaith'];
     const slotRe = new RegExp(`\\{(?:${ROLE_SLOTS.join('|')})\\}|\\{v:[a-z]+\\}`);
     /** @type {string[]} */
@@ -545,10 +550,13 @@ describe('⭐ WHERE THE ATTRIBUTION SLOTS SHIP — one pool, named; everywhere e
       'an attribution slot outside the defense leaf').toEqual([]);
     // And the defense leaf carries EXACTLY the nine re-cut faces, one per source.
     const faces = carrying.map((row) => row.replace(/^defense: /, '').replace(/^"|",?$/g, ''));
-    expect(faces.length, 'the re-cut faces').toBe(9);
+    expect(faces.length, 'the re-cut faces that name a slot').toBe(10);
     const bySlot = ROLE_SLOTS.filter((slot) => faces.some((f) => f.includes(`{${slot}}`)));
+    // ⭐ THE PUBLIC JOINS THEM AT CARS 8b-W-18n/18o (ruling 28) — a source in every mechanical
+    // respect, so it names a slot like the other eight. The ARCHIVER does not appear here and
+    // cannot: it is not in `ROLE_SLOTS` at all.
     expect(bySlot.sort(), 'the sources the re-cut gave a voice')
-      .toEqual(['court', 'elders', 'gate', 'guild', 'hall', 'stranger', 'tavern', 'watch']);
+      .toEqual(['court', 'elders', 'gate', 'guild', 'hall', 'public', 'stranger', 'tavern', 'watch']);
     // Every one of them carries at least one verb slot, or the attribution has no verb to
     // agree with and the re-cut left a class word standing somewhere.
     expect(faces.filter((f) => !/\{v:[a-z]+\}/.test(f)), 'a re-cut face with no verb slot')

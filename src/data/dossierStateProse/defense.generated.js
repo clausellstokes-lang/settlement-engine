@@ -603,15 +603,15 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "Invasion & War: walls with NO force": [
         {
           "angle": "ledger",
-          "text": "The survey finds the walls at {settlement} kept and no force under arms behind them. Entered here as kept.",
+          "text": "The walls at {settlement} are kept and no force under arms stands behind them.",
           "slots": [
             "settlement"
           ],
           "vid": 1,
           "wordings": [
             "{elders} {v:keep} a custom that says which households owe work on the walls. It says nothing about who is owed for it.",
-            "{hall} {v:put} the walls' keeping under the military purse. At the hall it is not a thing in dispute.",
-            "{guild} {v:pay} into the military purse and {v:hold} that the keeping is in dispute wherever the guilds are asked, and that the purse has bought a wall and no soldiers to hold it."
+            "{hall} {v:put} the walls' keeping under the military purse and {v:say} the matter is not in dispute.",
+            "{guild} {v:pay} into the same purse and {v:hold} that the keeping is disputed wherever the question is asked."
           ],
           "sources": [
             null,
@@ -634,36 +634,47 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "A stranger reports the walls up and kept, and no soldiers of the town's own behind them. The people he saw at work on them were the town's own households.",
+          "text": "Along the walk the stone is kept sound, and no soldiers of the town's own stand on it.",
           "slots": [],
           "vid": 2,
           "wordings": [
             "{stranger} {v:find} a stair up to the walk with somebody's stores stacked on it.",
             "{tavern} {v:name} who would turn out if the walls were ever wanted, and nobody at the table is surprised by the names.",
-            "{gate} {v:stop} a stranger and {v:ask} his business before letting him through."
+            "{gate} {v:stop} a stranger and {v:ask} his business before letting him through.",
+            "No soldier has been seen on the wall at night."
           ],
           "sources": [
             null,
             "stranger",
             "tavern",
-            "gate"
+            "gate",
+            "archiver"
+          ],
+          "observed": [
+            false,
+            false,
+            false,
+            false,
+            true
           ]
         },
         {
           "angle": "street",
-          "text": "The households say the walls are theirs to keep up. By their own account there is no wage in the work, and the town keeps no soldiers to stand behind the walls.",
+          "text": "There are no soldiers of the town's own here, and the walls are kept up all the same.",
           "slots": [],
           "vid": 3,
           "wordings": [
             "{elders} {v:take} the walls for a boundary before anything else, and where the line runs is the older argument.",
-            "{watch} {v:say} the hall's record has the walls in it and not the walk along them. The survey finds the watch on the walls after dark all the same.",
-            "{court} {v:hear} what is disputed about the walls, and it is always who owes the work on them. Nothing that comes there is about who would hold them."
+            "{watch} {v:say} the hall's record has the walls in it and not the walk along them, and {v:walk} it after dark regardless.",
+            "{court} {v:hear} what is disputed about the walls, and it is always who owes the work on them. Nothing that comes there is about who would hold them.",
+            "{public} {v:have} seen the wall kept and no soldiers on it, and {v:take} it that nobody is coming."
           ],
           "sources": [
             null,
             "elders",
             "watch",
-            "court"
+            "court",
+            "public"
           ]
         }
       ],
@@ -1208,8 +1219,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         "variantCount": 3,
         "faceCounts": [
           4,
-          4,
-          4
+          5,
+          5
         ],
         "vids": [
           1,

@@ -1437,7 +1437,13 @@ const ENTRY_HEADS = Object.freeze(['entered', 'recorded', 'noted', 'kept,', 'lis
 const ATTRIBUTION_NOUNS = Object.freeze([
   'account', 'accounts', 'reading', 'reckoning', 'telling', 'showing', 'own account',
 ]);
-const ATTRIBUTION_RE = new RegExp(`^by\\s+[^.?!]{0,40}?\\b(?:${ATTRIBUTION_NOUNS.join('|')})\\b`, 'i');
+// ⛔ THE CLASS IS `[^.?]` AND NOT `[^.?!]`, AND THE BANG'S ABSENCE IS DELIBERATE. This is a
+// TEMPLATE literal, and the E2 ratchet counts an exclamation mark inside a string literal as
+// copy debt (`tests/copy/voiceMechanics.test.js`) — it reds on this file, which carries none.
+// Excluding the bang here would buy nothing anyway: §0d bans it from the corpus outright, so
+// no face can contain one for the class to stop at. Found by running that ratchet, which is
+// the second time this file has learned the same lesson (see `STOP_THEN_SPACE` above).
+const ATTRIBUTION_RE = new RegExp(`^by\\s+[^.?]{0,40}?\\b(?:${ATTRIBUTION_NOUNS.join('|')})\\b`, 'i');
 /** Determiners, for the fronted-object approximation. */
 const DETERMINERS = Object.freeze(['the', 'a', 'an', 'this', 'that', 'these', 'those']);
 /**

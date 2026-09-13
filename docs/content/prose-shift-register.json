@@ -34,7 +34,7 @@
     {
       "id": "face-count-per-variant",
       "mechanism": "the number of wording faces a variant carries, which is the modulus of the face draw on the `::w` suffix key",
-      "shift": "1 — the REWRITE + FACES freeze (cars 8a-8n), one owner re-record amended per sub-car. ⭐ 8b DS-DEF-2 (the first v3 pool to ship): THE GROW IS DECLARED AND ONE-TIME-PER-POOL. `DS-DEF-2 :: Invasion & War: walls with NO force` is the first pool whose three variants carry wording faces at all, so its faceCounts row moves 1,1,1 → 4,4,4: the corpus sum rises 2266 → 2275 (+9, three faces on each of three variants), the largest entry anywhere rises 1 → 4, and the per-pool digest moves with them. THIS IS A GROW AND ONLY A GROW — no pool falls, so the FACE-COUNT RATCHET beside this row is untouched, and every other one of the 707 pools still measures 1. Each later v3 pool amends these three pins in ITS OWN cure commit, by the idiom below.",
+      "shift": "1 — the REWRITE + FACES freeze (cars 8a-8n), one owner re-record amended per sub-car. ⭐ 8b DS-DEF-2 (the first v3 pool to ship): THE GROW IS DECLARED AND ONE-TIME-PER-POOL. `DS-DEF-2 :: Invasion & War: walls with NO force` is the first pool whose three variants carry wording faces at all, so its faceCounts row moves 1,1,1 → 4,4,4: the corpus sum rises 2266 → 2275 (+9, three faces on each of three variants), the largest entry anywhere rises 1 → 4, and the per-pool digest moves with them. THIS IS A GROW AND ONLY A GROW — no pool falls, so the FACE-COUNT RATCHET beside this row is untouched, and every other one of the 707 pools still measures 1. Each later v3 pool amends these three pins in ITS OWN cure commit, by the idiom below. ⭐⭐ SECOND GROW, CAR 8b-W-18n/18o/(C) — THE SAME POOL, A SECOND TIME, AND THE IDIOM ABOVE IS WHY THAT IS LAWFUL RATHER THAN A BREACH OF THE FREEZE. `DS-DEF-2 :: Invasion & War: walls with NO force` takes the two forms ADDENDUM 18 rulings 27 and 28 created: an `[archiver · observed]` face on variant 2 (the archiver's own observation, the one archiver row that draws alone) and a `[public]` face on variant 3 (the town's people as a whole). Its faceCounts row moves 4,4,4 → 4,5,5: the corpus sum rises 2275 → 2277 (+2, one face on each of two variants), the largest entry anywhere rises 4 → 5, and the per-pool digest moves with them. A GROW AND ONLY A GROW — no pool falls, the FACE-COUNT RATCHET is untouched, and the other 707 pools still measure 1. ⛔ AND THE GROW RE-ROLLS THIS POOL'S FACE DRAW ON EVERY TOWN THAT HEARS VARIANT 2 OR 3, because the modulus is the eligible count: a town whose roster admits four faces of variant 3 now admits five (the public is seated EVERYWHERE, so it is admitted on every town without exception), and `eligible[h % 5]` is not `eligible[h % 4]`. That is the declared cost of the two new forms and it is the reason this row exists.",
       "door": "the projection contract, against poolMeta.faceCounts — the FACE-COUNT RATCHET (REWRITE car 8a-7; SITTING §T.4 adopting agenda C′; Part B §22 d) sits beside the variant ratchet in the same file and reds on any FALL, estate-wide and per pool",
       "idiom": "a declared sub-car; after the freeze a new wording goes in a NEW KEY and never in an existing set (read-specs S9). The seven `canonical` rows keep ONE face by refusal (P-F6) and are NAMED one by one in the contract test, derived as the pools whose vid list contains 0. A per-pool floor ABOVE a pool's own variant count is a DECLARED ROW in `floors` below, written in the same commit as the growth and SHRINK-ONLY: a floor may be added or raised and never lowered.",
       "floors": {},
@@ -42,18 +42,18 @@
         {
           "kind": "integer",
           "over": "the sum of every faceCounts entry over all 708 pools",
-          "value": 2275
+          "value": 2277
         },
         {
           "kind": "integer",
           "over": "the largest faceCounts entry anywhere in the corpus",
-          "value": 4
+          "value": 5
         },
         {
           "kind": "digest",
           "algo": "sha256",
           "over": "poolMeta.faceCounts per pool, joined by commas",
-          "value": "e7ed66962b713592aa012812b30d985d282707a68eef72f342934cfc9601ab4b"
+          "value": "a184264b85117ae3c6a6bf0f9177144be8d4611c75f027904f853ac2cadf19f8"
         }
       ]
     },

@@ -218,13 +218,40 @@ describe('⭐ THE SEAM COMPOSES TO THE KERNEL — an empty candidate list moves 
     // NON-VACUITY OF THE CARVE-OUT: the faced pool really does move.
     // ⭐ AND THE KIND OF MOVE CHANGED AT CAR 8b-W-18l, which is worth stating rather than
     // loosening silently. Until the re-cut, the faced pool's disagreement with the kernel was
-    // TEXT + SPINE: the composer drew a face and the kernel read the spine. Now the faces name
-    // ATTRIBUTION SLOTS, and this sweep hands the composer no `roles` (it composes the shipped
-    // corpus with nothing but a bag), so a drawn face FAILS CLOSED and the whole unit is
-    // silent — NULLNESS. That is the designed behaviour, asserted here as the exact kind:
-    // a read that skipped `withFaceSources` may silence a rung and may never print `{hall}`.
+    // TEXT + SPINE: the composer drew a face and the kernel read the spine. Then the faces
+    // named ATTRIBUTION SLOTS, and this sweep hands the composer no `roles` (it composes the
+    // shipped corpus with nothing but a bag), so every drawn face FAILED CLOSED and the whole
+    // unit was silent — NULLNESS. A read that skipped `withFaceSources` may silence a rung and
+    // may never print `{hall}`.
+    //
+    // ⭐⭐ AND IT CHANGED AGAIN AT THE POOL RE-CUT OF CARS 8b-W-18n/18o, back to TEXT + SPINE,
+    // FOR A REASON THAT IS THE NEW FORM'S WHOLE DEFINITION. The pool now carries an
+    // `[archiver · observed]` face (ADDENDUM 18 ruling 27) and the archiver IS NOT A SOURCE: it
+    // has no roster to draw a person from, so it names NO attribution slot and prints in the
+    // archiver's own hand. It is THE ONE FACE OF THIS POOL THAT CAN SPEAK ON A READ WITH NO
+    // ROLES AT ALL — not a loosening of the fail-closed rule, but a face the rule has nothing
+    // to close on.
+    //
+    // ⛔ AND ON THESE SIX SEEDS IT IS THE ONE THAT DRAWS, WHICH IS THE DECLARED RE-ROLL AND NOT
+    // A LOST PROPERTY. Variant #1's eligible list grew from four faces to five when the
+    // observation was seated, and `h % 5` is not `h % 4`: both drifting seeds (`Thornwall::1`
+    // and `town-42`) now land on face 4, the observation, where they used to land on a sourced
+    // face and fail closed. The shift register's `face-count-per-variant` row carries that
+    // re-roll by name. The arm below proves the fail-closed path is still THERE rather than
+    // trusting these six seeds to have covered it.
     expect(faced.length, 'the named mover moved').toBeGreaterThan(0);
-    expect([...new Set(faced.map((row) => row.split(' ')[0]))].sort()).toEqual(['NULLNESS']);
+    expect([...new Set(faced.map((row) => row.split(' ')[0]))].sort()).toEqual(['SPINE', 'TEXT']);
+    // ⛔⛔ NON-VACUITY OF THE FAIL-CLOSED PATH. A read with no roles MUST still silence a face
+    // that names an attribution slot — if this ever passed by drawing the observation every
+    // time, the sweep above would have stopped testing the thing it exists for. Driven on a
+    // seed that lands on a sourced face, named rather than searched for.
+    const facedRow = SHIPPED_POOLS.find((r) => `${r.blockId} :: ${r.poolKey}` === FACED_AT);
+    expect(facedRow, 'the faced pool is in the sweep at all').toBeTruthy();
+    const silenced = ['b', 'f'].map((seed) => composeStateProse(CORPUS, FACED_BLOCK, {
+      spineKey: FACED_POOL, seed, audience: 'dm', slots: bagFor(facedRow.pool), dimensions: {},
+    }));
+    expect(silenced.every((u) => u === null), 'a face naming {hall} on a roles-less read is SILENT')
+      .toBe(true);
     // ANTI-VACUITY: an equality over an empty sweep is free.
     expect(checks).toBe(708 * 2 * SWEEP_SEEDS.length);
     expect(composed, 'and most of the sweep really did compose a unit').toBeGreaterThan(6000);

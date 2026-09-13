@@ -257,17 +257,34 @@ describe('THE GRAMMAR — every refusal driven by a plant', () => {
   });
 });
 
-describe('ZERO TEXT SHIFT — the whole car is inert on the corpus that ships', () => {
-  it('⛔ no shipped variant carries an `observed` list or a `public` face', () => {
+describe('WHERE THE TWO NEW FORMS SHIP — one pool, named face by face', () => {
+  // ⭐ RE-FROZEN AT THE POOL RE-CUT. When car 8b-W-18n landed, the arms here asserted the
+  // corpus carried NEITHER form, which was the car's zero-shift ground. The pool re-cut of the
+  // same lane lawfully ended that — which is the whole purpose of the mechanism — so the arms
+  // are RE-PINNED to name the ONE pool that carries them, and a second pool landing either
+  // form reds here by name and is re-pinned in its own cure commit.
+  const FACED = 'DS-DEF-2 :: Invasion & War: walls with NO force';
+
+  it('⭐ exactly one variant carries an `observed` list, and exactly one carries a `public` face', () => {
     const observed = EVERY_VARIANT.filter(({ variant }) => Array.isArray(variant.observed));
     const publics = EVERY_VARIANT.filter(({ variant }) => Array.isArray(variant.sources)
       && variant.sources.includes(PUBLIC_SOURCE));
-    expect(observed.map((r) => `${r.blockId} :: ${r.poolKey}`)).toEqual([]);
-    expect(publics.map((r) => `${r.blockId} :: ${r.poolKey}`)).toEqual([]);
-    process.stdout.write(`\n[18n] ${EVERY_VARIANT.length} shipped variants: 0 observed · 0 public\n`);
+    expect(observed.map((r) => `${r.blockId} :: ${r.poolKey}`)).toEqual([FACED]);
+    expect(publics.map((r) => `${r.blockId} :: ${r.poolKey}`)).toEqual([FACED]);
+    // ⛔ AND THE OBSERVED FACE IS THE ARCHIVER'S, ALONE, AND CARRIES NO PAIR — the three rules
+    // of ruling 27 asserted against the shipped leaf rather than against a fixture.
+    const [row] = observed;
+    const at = row.variant.observed.indexOf(true);
+    expect(row.variant.observed.filter(Boolean).length, 'one per variant').toBe(1);
+    expect(row.variant.sources[at]).toBe(ARCHIVER_SOURCE);
+    expect(row.variant.pairs).toBeUndefined();
+    expect(row.variant.wordings[at - 1], 'a BARE PASSIVE with no observer named (ruling 40)')
+      .toBe('No soldier has been seen on the wall at night.');
+    expect(row.variant.wordings[at - 1]).not.toMatch(/\{/);
+    process.stdout.write(`\n[18n] ${EVERY_VARIANT.length} shipped variants: 1 observed · 1 public\n`);
   });
 
-  it('⛔ and the eligible list is therefore what it was, variant for variant', () => {
+  it('⛔ and every OTHER variant\'s eligible list is what it was, variant for variant', () => {
     // THE ZERO-SHIFT ARGUMENT, EXECUTED rather than argued: for every shipped variant and
     // every roster the estate can produce, the eligible list this car computes is the list the
     // pre-18n predicate computed. The old predicate is re-spelled here on purpose — a copy of
@@ -286,13 +303,23 @@ describe('ZERO TEXT SHIFT — the whole car is inert on the corpus that ships', 
     };
     const rosters = [new Set(), new Set(['hall', 'guild', 'elders']), new Set(FACE_SOURCES)];
     let compared = 0;
+    let moved = 0;
     for (const { blockId, poolKey, variant } of EVERY_VARIANT) {
+      const faced = `${blockId} :: ${poolKey}` === FACED;
       for (const roster of rosters) {
-        expect(eligibleFaces(variant, roster), `${blockId} :: ${poolKey}`).toEqual(before(variant, roster));
+        const now = eligibleFaces(variant, roster);
+        const then = before(variant, roster);
+        if (faced) { if (JSON.stringify(now) !== JSON.stringify(then)) moved += 1; } else {
+          expect(now, `${blockId} :: ${poolKey}`).toEqual(then);
+        }
         compared += 1;
       }
     }
     expect(compared).toBe(EVERY_VARIANT.length * rosters.length);
-    process.stdout.write(`[18n] ${compared} eligible lists compared against the pre-18n predicate: 0 moved\n`);
+    // ⭐ NON-VACUITY: the faced pool really DID move, which is the declared re-roll the shift
+    // register's `face-count-per-variant` row carries. An arm that carved it out without
+    // proving it moved would be a carve-out around nothing.
+    expect(moved, 'the named mover moved').toBeGreaterThan(0);
+    process.stdout.write(`[18n] ${compared} eligible lists against the pre-18n predicate: ${moved} moved, all in ${FACED}\n`);
   });
 });

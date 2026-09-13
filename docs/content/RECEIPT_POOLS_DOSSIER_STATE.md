@@ -2673,18 +2673,20 @@ supplies the ancestry.
 3. `[unfolding]` What {settlement} has would hold against the first thing and is unlikely to hold against the second, and nothing in hand changes that.
 
 **`Invasion & War`: walls with NO force**
-1. `[ledger]` The survey finds the walls at {settlement} kept and no force under arms behind them. Entered here as kept.
+1. `[ledger]` The walls at {settlement} are kept and no force under arms stands behind them.
    - `[face]` `[elders]` {elders} {v:keep} a custom that says which households owe work on the walls. It says nothing about who is owed for it.
-   - `[face]` `[hall · pair 1 · disagree]` {hall} {v:put} the walls' keeping under the military purse. At the hall it is not a thing in dispute.
-   - `[face]` `[guild · pair 1 · disagree]` {guild} {v:pay} into the military purse and {v:hold} that the keeping is in dispute wherever the guilds are asked, and that the purse has bought a wall and no soldiers to hold it.
-2. `[visitor]` A stranger reports the walls up and kept, and no soldiers of the town's own behind them. The people he saw at work on them were the town's own households.
+   - `[face]` `[hall · pair 1 · disagree]` {hall} {v:put} the walls' keeping under the military purse and {v:say} the matter is not in dispute.
+   - `[face]` `[guild · pair 1 · disagree]` {guild} {v:pay} into the same purse and {v:hold} that the keeping is disputed wherever the question is asked.
+2. `[visitor]` Along the walk the stone is kept sound, and no soldiers of the town's own stand on it.
    - `[face]` `[stranger]` {stranger} {v:find} a stair up to the walk with somebody's stores stacked on it.
    - `[face]` `[tavern]` {tavern} {v:name} who would turn out if the walls were ever wanted, and nobody at the table is surprised by the names.
    - `[face]` `[gate]` {gate} {v:stop} a stranger and {v:ask} his business before letting him through.
-3. `[street]` The households say the walls are theirs to keep up. By their own account there is no wage in the work, and the town keeps no soldiers to stand behind the walls.
+   - `[face]` `[archiver · observed]` No soldier has been seen on the wall at night.
+3. `[street]` There are no soldiers of the town's own here, and the walls are kept up all the same.
    - `[face]` `[elders]` {elders} {v:take} the walls for a boundary before anything else, and where the line runs is the older argument.
-   - `[face]` `[watch]` {watch} {v:say} the hall's record has the walls in it and not the walk along them. The survey finds the watch on the walls after dark all the same.
+   - `[face]` `[watch]` {watch} {v:say} the hall's record has the walls in it and not the walk along them, and {v:walk} it after dark regardless.
    - `[face]` `[court]` {court} {v:hear} what is disputed about the walls, and it is always who owes the work on them. Nothing that comes there is about who would hold them.
+   - `[face]` `[public]` {public} {v:have} seen the wall kept and no soldiers on it, and {v:take} it that nobody is coming.
 
 **`Invasion & War`: force with NO walls**
 1. `[ledger]` {settlement} keeps a professional force and no perimeter. It answers raiders well and cannot hold a siege, because there is nothing here to hold.

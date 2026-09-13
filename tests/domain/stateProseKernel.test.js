@@ -1402,10 +1402,13 @@ describe('the state-prose reader — ONE FACE PER POWER: the source filter and t
       .toEqual(SOURCED_TODAY);
     expect(LIVE_POOLS.length).toBeGreaterThanOrEqual(700);
     // The roster face by face, and the one pair carried by exactly two faces of variant #0.
+    // ⭐ RE-FROZEN AT THE POOL RE-CUT OF CARS 8b-W-18n/18o: variant #1 gains the ARCHIVER'S
+    // OWN OBSERVATION (ruling 27) and variant #2 gains the PUBLIC (ruling 28), the two forms
+    // those cars created taking their first seats in the corpus.
     expect(rows.map(({ v }) => v.sources)).toEqual([
       [null, 'elders', 'hall', 'guild'],
-      [null, 'stranger', 'tavern', 'gate'],
-      [null, 'elders', 'watch', 'court'],
+      [null, 'stranger', 'tavern', 'gate', 'archiver'],
+      [null, 'elders', 'watch', 'court', 'public'],
     ]);
     expect(rows.map(({ v }) => v.pairs)).toEqual([
       [null, null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }],
@@ -1422,8 +1425,14 @@ describe('the state-prose reader — ONE FACE PER POWER: the source filter and t
           sourcedChecked += 1;
           // On the sourced pool the roster DOES decide: no roster is the stranger alone
           // (floor 1 fail-closed), the full roster admits every face.
-          expect(eligibleFaces(v, new Set(FACE_SOURCES))).toEqual([0, 1, 2, 3]);
-          expect(eligibleFaces(v, undefined).length).toBeLessThanOrEqual(4);
+          // ⭐ RE-FROZEN AT CARS 8b-W-18n/18o: variants #1 and #2 carry FIVE faces, having
+          // gained the archiver's observation and the public. The full roster admits all of
+          // them, so the list is `[0..n-1]` where n is the variant's own face count — asserted
+          // as that rather than as a literal, so the next grow reds on the CEILING below and
+          // not on this line.
+          const n = 1 + v.wordings.length;
+          expect(eligibleFaces(v, new Set(FACE_SOURCES))).toEqual([...Array(n).keys()]);
+          expect(eligibleFaces(v, undefined).length).toBeLessThanOrEqual(n);
           continue;
         }
         expect(eligibleFaces(v, undefined)).toEqual([0]);

@@ -1948,12 +1948,16 @@ describe('SEAM car 4 — §2.5\'s grammar, and every refusal it declares', () =>
       sources: [null, 'elders', 'hall', 'guild'],
       pairs: [null, null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }],
     },
+    // ⭐ RE-FROZEN AT THE POOL RE-CUT OF CARS 8b-W-18n/18o. Variant #1 gains the ARCHIVER'S
+    // OWN OBSERVATION (ruling 27) and variant #2 gains the PUBLIC (ruling 28) — the two forms
+    // those cars created, taking their first seats in the corpus. Both are a GROW and the
+    // register's `face-count-per-variant` row carries the declared numbers (4,4,4 → 4,5,5).
     'DS-DEF-2 :: Invasion & War: walls with NO force #1': {
-      sources: [null, 'stranger', 'tavern', 'gate'],
+      sources: [null, 'stranger', 'tavern', 'gate', 'archiver'],
       pairs: undefined,
     },
     'DS-DEF-2 :: Invasion & War: walls with NO force #2': {
-      sources: [null, 'elders', 'watch', 'court'],
+      sources: [null, 'elders', 'watch', 'court', 'public'],
       pairs: undefined,
     },
   });
@@ -1975,11 +1979,19 @@ describe('SEAM car 4 — §2.5\'s grammar, and every refusal it declares', () =>
       .filter(({ v }) => v.sources !== undefined || v.pairs !== undefined)
       .map(({ id, pool, at }) => `${id} :: ${pool} #${at}`);
     expect(elsewhere).toEqual([]);
-    // And the counts the shift register's `face-count-per-variant` row now pins: 9 sourced
+    // And the counts the shift register's `face-count-per-variant` row now pins: 11 sourced
     // faces over 3 variants, and ONE pair carried by exactly two of them.
     const sourced = rows.reduce((n, r) => n + (r.v.sources || []).filter((x) => x !== null).length, 0);
     const paired = rows.reduce((n, r) => n + (r.v.pairs || []).filter((x) => x !== null).length, 0);
-    expect([rows.length, sourced, paired]).toEqual([3, 9, 2]);
+    expect([rows.length, sourced, paired]).toEqual([3, 11, 2]);
+    // ⭐ AND THE OBSERVED LIST IS EMITTED ON EXACTLY ONE VARIANT, which is the mark's own
+    // zero-shift ground: a variant with no observed face carries no `observed` key at all.
+    const observed = allStateBlocks.flatMap(([id, b]) => Object.entries(b.pools)
+      .flatMap(([pool, variants]) => variants.map((v, at) => ({ key: `${id} :: ${pool} #${at}`, v }))))
+      .filter(({ v }) => v.observed !== undefined);
+    expect(observed.map((r) => r.key))
+      .toEqual(['DS-DEF-2 :: Invasion & War: walls with NO force #1']);
+    expect(observed[0].v.observed).toEqual([false, false, false, false, true]);
   });
 
   it('PLANT: a RENUMBERING that would move an existing vid, and a count above its pin', () => {
