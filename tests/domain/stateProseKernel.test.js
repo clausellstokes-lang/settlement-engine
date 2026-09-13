@@ -564,9 +564,19 @@ describe('the state-prose reader — the wording face (ARCH §2.6)', () => {
     // further pool landing faces reds here by name.
     // ⭐ RE-PINNED AT THE 8b DS-DEF-2 DRAFT GATE (v3) from the single `walls with NO force`
     // roster: three more pools of the same block landed faces in one commit.
+    // ⭐⭐ RE-PINNED AT THE DRAFT GATE'S THIRD SITTING: FIVE more pools of the block landed faces
+    // in one commit, so the roster is forty-two variants of fourteen pools. A sixth packet was
+    // REFUSED at that gate (`Disasters & Famine: granary AND parish care only`) and is absent here
+    // by the refusal. Everything outside DS-DEF-2 still takes no hash and still draws face 0.
     const FACED_TODAY = ['DS-DEF-2 :: Beasts & Monsters: frontier, credible deterrence #0',
       'DS-DEF-2 :: Beasts & Monsters: frontier, credible deterrence #1',
       'DS-DEF-2 :: Beasts & Monsters: frontier, credible deterrence #2',
+      'DS-DEF-2 :: Beasts & Monsters: frontier, force without a perimeter #0',
+      'DS-DEF-2 :: Beasts & Monsters: frontier, force without a perimeter #1',
+      'DS-DEF-2 :: Beasts & Monsters: frontier, force without a perimeter #2',
+      'DS-DEF-2 :: Beasts & Monsters: plagued, perimeter but NO force to hold it #0',
+      'DS-DEF-2 :: Beasts & Monsters: plagued, perimeter but NO force to hold it #1',
+      'DS-DEF-2 :: Beasts & Monsters: plagued, perimeter but NO force to hold it #2',
       'DS-DEF-2 :: Disasters & Famine: NO reserves, NO medical provision #0',
       'DS-DEF-2 :: Disasters & Famine: NO reserves, NO medical provision #1',
       'DS-DEF-2 :: Disasters & Famine: NO reserves, NO medical provision #2',
@@ -576,6 +586,12 @@ describe('the state-prose reader — the wording face (ARCH §2.6)', () => {
       'DS-DEF-2 :: Economic Survival: STRONG #0',
       'DS-DEF-2 :: Economic Survival: STRONG #1',
       'DS-DEF-2 :: Economic Survival: STRONG #2',
+      'DS-DEF-2 :: Economic Survival: WEAK #0',
+      'DS-DEF-2 :: Economic Survival: WEAK #1',
+      'DS-DEF-2 :: Economic Survival: WEAK #2',
+      'DS-DEF-2 :: Internal Security: court without detention #0',
+      'DS-DEF-2 :: Internal Security: court without detention #1',
+      'DS-DEF-2 :: Internal Security: court without detention #2',
       'DS-DEF-2 :: Internal Security: full legal chain (court AND prison) #0',
       'DS-DEF-2 :: Internal Security: full legal chain (court AND prison) #1',
       'DS-DEF-2 :: Internal Security: full legal chain (court AND prison) #2',
@@ -590,7 +606,10 @@ describe('the state-prose reader — the wording face (ARCH §2.6)', () => {
       'DS-DEF-2 :: Invasion & War: walls AND professional garrison #2',
       'DS-DEF-2 :: Invasion & War: walls with NO force #0',
       'DS-DEF-2 :: Invasion & War: walls with NO force #1',
-      'DS-DEF-2 :: Invasion & War: walls with NO force #2'];
+      'DS-DEF-2 :: Invasion & War: walls with NO force #2',
+      'DS-DEF-2 :: Invasion & War: walls with citizen militia #0',
+      'DS-DEF-2 :: Invasion & War: walls with citizen militia #1',
+      'DS-DEF-2 :: Invasion & War: walls with citizen militia #2'];
     const withWordings = SHIPPED_POOLS
       .flatMap(({ desk, blockId, poolKey, pool }) => pool
         .map((variant, at) => ({ desk, blockId, poolKey, at, variant }))
@@ -637,7 +656,9 @@ describe('the state-prose reader — the wording face (ARCH §2.6)', () => {
       // ⭐ RE-PINNED AT THE 8b DS-DEF-2 DRAFT GATE (v3): twelve, not three — the block's four
       // faced pools, three variants each. A GROW, and the ratchet that reds on a FALL is the
       // shift register's `face-count-per-variant` row, not this line.
-      expect(hashedRows, 'and exactly twenty-seven variants ship more than one face').toBe(27);
+      // ⭐⭐ RE-PINNED AGAIN AT THE DRAFT GATE'S THIRD SITTING: forty-two, not twenty-seven — five
+      // more of the block's pools landed faces in one commit, three variants each. A GROW.
+      expect(hashedRows, 'and exactly forty-two variants ship more than one face').toBe(42);
     } finally {
       spy.mockRestore();
     }
@@ -1423,9 +1444,22 @@ describe('the state-prose reader — ONE FACE PER POWER: the source filter and t
     // landing faces reds here by name and is re-pinned in the commit that lands it.
     // ⭐ RE-PINNED AT THE 8b DS-DEF-2 DRAFT GATE (v3): three more pools of the SAME block
     // landed faces in one commit, so the roster is twelve variants of four pools.
+    // ⭐⭐ RE-PINNED AGAIN AT THE DRAFT GATE'S THIRD SITTING, which landed FIVE more pools of the
+    // block — Beasts plagued-perimeter-but-NO-force, Beasts frontier force-without-a-perimeter,
+    // Invasion walls-with-citizen-militia, Internal Security court-without-detention and Economic
+    // Survival WEAK. The roster is now FORTY-TWO variants of FOURTEEN pools; a sixth packet was
+    // REFUSED at the gate and keeps its shipped spine rows. None of the five seats the `archiver`,
+    // the `public`, an `observed` mark or a `weigh`, so those arms are untouched; the zero-shift arm
+    // over every OTHER block is unchanged, which is the arm that matters.
     const SOURCED_TODAY = ['DS-DEF-2 :: Beasts & Monsters: frontier, credible deterrence #0',
       'DS-DEF-2 :: Beasts & Monsters: frontier, credible deterrence #1',
       'DS-DEF-2 :: Beasts & Monsters: frontier, credible deterrence #2',
+      'DS-DEF-2 :: Beasts & Monsters: frontier, force without a perimeter #0',
+      'DS-DEF-2 :: Beasts & Monsters: frontier, force without a perimeter #1',
+      'DS-DEF-2 :: Beasts & Monsters: frontier, force without a perimeter #2',
+      'DS-DEF-2 :: Beasts & Monsters: plagued, perimeter but NO force to hold it #0',
+      'DS-DEF-2 :: Beasts & Monsters: plagued, perimeter but NO force to hold it #1',
+      'DS-DEF-2 :: Beasts & Monsters: plagued, perimeter but NO force to hold it #2',
       'DS-DEF-2 :: Disasters & Famine: NO reserves, NO medical provision #0',
       'DS-DEF-2 :: Disasters & Famine: NO reserves, NO medical provision #1',
       'DS-DEF-2 :: Disasters & Famine: NO reserves, NO medical provision #2',
@@ -1435,6 +1469,12 @@ describe('the state-prose reader — ONE FACE PER POWER: the source filter and t
       'DS-DEF-2 :: Economic Survival: STRONG #0',
       'DS-DEF-2 :: Economic Survival: STRONG #1',
       'DS-DEF-2 :: Economic Survival: STRONG #2',
+      'DS-DEF-2 :: Economic Survival: WEAK #0',
+      'DS-DEF-2 :: Economic Survival: WEAK #1',
+      'DS-DEF-2 :: Economic Survival: WEAK #2',
+      'DS-DEF-2 :: Internal Security: court without detention #0',
+      'DS-DEF-2 :: Internal Security: court without detention #1',
+      'DS-DEF-2 :: Internal Security: court without detention #2',
       'DS-DEF-2 :: Internal Security: full legal chain (court AND prison) #0',
       'DS-DEF-2 :: Internal Security: full legal chain (court AND prison) #1',
       'DS-DEF-2 :: Internal Security: full legal chain (court AND prison) #2',
@@ -1449,7 +1489,10 @@ describe('the state-prose reader — ONE FACE PER POWER: the source filter and t
       'DS-DEF-2 :: Invasion & War: walls AND professional garrison #2',
       'DS-DEF-2 :: Invasion & War: walls with NO force #0',
       'DS-DEF-2 :: Invasion & War: walls with NO force #1',
-      'DS-DEF-2 :: Invasion & War: walls with NO force #2'];
+      'DS-DEF-2 :: Invasion & War: walls with NO force #2',
+      'DS-DEF-2 :: Invasion & War: walls with citizen militia #0',
+      'DS-DEF-2 :: Invasion & War: walls with citizen militia #1',
+      'DS-DEF-2 :: Invasion & War: walls with citizen militia #2'];
     const rows = LIVE_POOLS
       .flatMap(({ blockId, poolKey, pool }) => pool.map((v, at) => ({ blockId, poolKey, at, v })))
       .filter(({ v }) => Array.isArray(v.sources) || Array.isArray(v.pairs));
@@ -1470,9 +1513,15 @@ describe('the state-prose reader — ONE FACE PER POWER: the source filter and t
     // the shift register's `face-count-per-variant` row is UNTOUCHED: this is a re-seat, not a
     // grow, and the `pairs` arm below is unchanged by construction.
     expect(rows.map(({ v }) => v.sources)).toEqual([
+      [null, 'gate', 'hall', 'watch', 'guild', 'stranger', 'register', 'court', 'tavern', 'market', 'elders'], 
+      [null, 'gate', 'hall', 'watch', 'guild', 'tavern', 'register', 'market', 'court', 'elders'], 
+      [null, 'stranger', 'gate', 'watch', 'hall', 'tavern', 'court', 'guild', 'register', 'elders'], 
       [null, 'stranger', 'gate', 'elders', 'hall', 'guild', 'tavern', 'register', 'muster', 'court', 'garrison', 'market'], 
       [null, 'stranger', 'gate', 'register', 'hall', 'watch', 'tavern', 'garrison', 'guild', 'market', 'court', 'elders'], 
       [null, 'market', 'register', 'gate', 'court', 'muster', 'tavern', 'garrison', 'guild', 'hall', 'elders'], 
+      [null, 'elders', 'stranger', 'tavern', 'muster', 'register', 'hall', 'guild', 'market', 'watch', 'garrison', 'court'], 
+      [null, 'stranger', 'elders', 'guild', 'muster', 'watch', 'tavern', 'hall', 'market', 'register', 'garrison', 'court'], 
+      [null, 'muster', 'elders', 'register', 'stranger', 'tavern', 'hall', 'guild', 'watch', 'market', 'garrison', 'court'], 
       [null, 'guild', 'market', 'tavern', 'hall', 'gate'], 
       // ⭐ RE-PINNED AT THE 8b DS-DEF-2 CURE GATE (v3): `Invasion & War: walls AND professional
       // garrison` #1 face 5 moved `elders` -> `tavern`, the cure's one target. `elders` seats on
@@ -1480,6 +1529,9 @@ describe('the state-prose reader — ONE FACE PER POWER: the source filter and t
       // seats on every tier. A MOUTH moved, not a face count: the row below is one word wide.
       [null, 'gate', 'hall', 'court', 'stranger', 'tavern'], 
       [null, 'stranger', 'tavern', 'register', 'garrison', 'watch'], 
+      [null, 'stranger', 'gate', 'market', 'tavern', 'elders', 'muster'], 
+      [null, 'gate', 'elders', 'muster', 'tavern', 'stranger', 'muster', 'tavern'], 
+      [null, 'gate', 'market', 'stranger', 'elders', 'tavern', 'elders', 'muster'], 
       [null, 'elders', 'hall', 'guild'], 
       [null, 'stranger', 'tavern', 'gate', 'archiver'], 
       [null, 'elders', 'watch', 'court', 'public'], 
@@ -1489,12 +1541,18 @@ describe('the state-prose reader — ONE FACE PER POWER: the source filter and t
       [null, 'hall', 'tavern', 'watch', 'guild', 'court', 'market', 'gate', 'garrison', 'stranger'], 
       [null, 'watch', 'hall', 'tavern', 'court', 'stranger', 'register', 'market', 'garrison', 'guild', 'gate'], 
       [null, 'hall', 'stranger', 'court', 'tavern', 'watch', 'garrison', 'guild', 'market', 'gate'], 
+      [null, 'watch', 'court', 'hall', 'market', 'register', 'guild', 'tavern', 'stranger', 'gate', 'garrison'], 
+      [null, 'tavern', 'court', 'gate', 'watch', 'market', 'hall', 'stranger'], 
+      [null, 'watch', 'hall', 'market', 'court', 'tavern', 'guild', 'garrison', 'gate'], 
       [null, 'stranger', 'tavern', 'register', 'elders', 'gate', 'muster', 'tavern', 'market', 'elders', 'muster'], 
       [null, 'stranger', 'elders', 'tavern', 'elders', 'muster', 'gate', 'register'], 
       [null, 'stranger', 'tavern', 'elders', 'register', 'gate', 'muster', 'market'], 
       [null, 'hall', 'watch', 'archiver', 'register', 'tavern', 'guild', 'stranger', 'garrison', 'archiver', 'market', 'hall'], 
       [null, 'hall', 'guild', 'archiver', 'watch', 'gate', 'stranger', 'tavern', 'garrison', 'market', 'register'], 
       [null, 'watch', 'garrison', 'hall', 'guild', 'stranger', 'register', 'hall', 'court'], 
+      [null, 'gate', 'register', 'stranger', 'muster', 'elders', 'tavern', 'garrison', 'watch', 'market', 'court'], 
+      [null, 'stranger', 'elders', 'tavern', 'register', 'gate', 'muster', 'market', 'watch', 'garrison'], 
+      [null, 'stranger', 'register', 'elders', 'tavern', 'muster', 'gate', 'market', 'garrison'], 
       [null, 'hall', 'market', 'register', 'tavern', 'watch', 'stranger', 'gate', 'guild', 'garrison'], 
       [null, 'hall', 'market', 'watch', 'tavern', 'register', 'stranger', 'guild', 'gate', 'garrison'], 
       [null, 'hall', 'tavern', 'market', 'register', 'watch', 'gate', 'stranger', 'guild', 'garrison'], 
@@ -1503,12 +1561,21 @@ describe('the state-prose reader — ONE FACE PER POWER: the source filter and t
       [null, 'stranger', 'tavern', 'elders', 'register', 'market'], 
     ]);
     expect(rows.map(({ v }) => v.pairs)).toEqual([
+      [null, null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null, null, null, null, null, null, null], 
+      undefined, 
+      [null, null, null, { id: 5, kind: 'disagree' }, { id: 5, kind: 'disagree' }, { id: 6, kind: 'view' }, { id: 6, kind: 'view' }, null, null, null], 
       [null, null, null, null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null, null, null, null, null, null], 
       [null, null, { id: 5, kind: 'aside' }, { id: 5, kind: 'aside' }, { id: 2, kind: 'disagree' }, { id: 2, kind: 'disagree' }, null, null, null, null, null, null], 
       undefined, 
+      [null, null, null, null, null, null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null, null, null, null], 
+      [null, null, null, null, null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, { id: 2, kind: 'view' }, { id: 2, kind: 'view' }, null, null, null], 
+      [null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null, null, null, null, null, null, null, null, null], 
       [null, null, null, null, { id: 1, kind: 'view' }, { id: 1, kind: 'view' }], 
       [null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null, null, null], 
       [null, null, null, null, { id: 3, kind: 'view' }, { id: 3, kind: 'view' }], 
+      [null, null, null, null, null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }], 
+      [null, null, null, null, null, null, { id: 2, kind: 'disagree' }, { id: 2, kind: 'disagree' }], 
+      [null, null, null, null, null, null, { id: 3, kind: 'disagree' }, { id: 3, kind: 'disagree' }], 
       [null, null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }], 
       undefined, 
       undefined, 
@@ -1518,12 +1585,18 @@ describe('the state-prose reader — ONE FACE PER POWER: the source filter and t
       undefined, 
       [null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null, null, null, { id: 2, kind: 'aside' }, { id: 2, kind: 'aside' }, null, null, null], 
       [null, { id: 3, kind: 'disagree' }, { id: 3, kind: 'disagree' }, null, null, null, null, null, null, null], 
+      [null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null, null, null, null, null, null, null, null], 
+      [null, { id: 2, kind: 'disagree' }, { id: 2, kind: 'disagree' }, null, null, null, null, null], 
+      [null, null, null, null, null, null, null, { id: 3, kind: 'reinforce' }, { id: 3, kind: 'reinforce' }], 
       [null, { id: 1, kind: 'view' }, null, null, { id: 1, kind: 'view' }, { id: 2, kind: 'reinforce' }, null, { id: 2, kind: 'reinforce' }, null, null, null], 
       undefined, 
       undefined, 
       [null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, { id: 1, kind: 'weigh' }, null, null, null, null, null, null, null, null], 
       [null, { id: 2, kind: 'disagree' }, { id: 2, kind: 'disagree' }, { id: 2, kind: 'weigh' }, null, null, null, null, null, null, null], 
       [null, { id: 2, kind: 'reinforce' }, { id: 2, kind: 'reinforce' }, null, null, null, null, null, null], 
+      [null, null, null, null, null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null, null, null, null], 
+      undefined, 
+      [null, null, { id: 3, kind: 'reinforce' }, { id: 3, kind: 'reinforce' }, null, null, null, null, null], 
       [null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null, { id: 2, kind: 'reinforce' }, { id: 2, kind: 'reinforce' }, null, null, null, null], 
       [null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null, { id: 2, kind: 'view' }, { id: 2, kind: 'view' }, null, null, null, null], 
       [null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null, null, null, null, null, null, null], 
@@ -1565,7 +1638,7 @@ describe('the state-prose reader — ONE FACE PER POWER: the source filter and t
         expect(eligibleFaces(v, new Set(FACE_SOURCES))).toEqual([0]);
       }
     }
-    expect(sourcedChecked, 'the twenty-seven sourced variants were reached').toBe(27);
+    expect(sourcedChecked, 'the forty-two sourced variants were reached').toBe(42);
     expect(checked).toBeGreaterThanOrEqual(2266);
   });
 });

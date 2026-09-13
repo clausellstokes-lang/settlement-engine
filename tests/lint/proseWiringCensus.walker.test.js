@@ -701,8 +701,17 @@ describe('THE MAP READ THE OTHER WAY — fact → text, and the three tiers', ()
     // moves `slots {settlement}` → `slots {none}` and it lands COVERED. MISSING does not move
     // (34), no held fact gained or lost a pool.
     expect(counts.get(TIERS.MISSING), 'held facts with no pool keyed on them').toBe(34);
-    expect(counts.get(TIERS.THIN), 'pools with one variant, one grammar, or {settlement} alone').toBe(479);
-    expect(counts.get(TIERS.COVERED), 'and the rest').toBe(229);
+    // ⭐⭐⭐⭐ THIN 479 → 478 AND COVERED 229 → 230 AT THE DRAFT GATE'S THIRD SITTING, THE SAME WIN
+    // AND THE SAME REASON AS THE SECOND'S. FIVE pools landed faces there and exactly ONE crosses
+    // the line: `Economic Survival: WEAK`, whose selector's spines carry NO slot at all, so its
+    // count moves `slots {settlement}` → `slots {none}` and it lands COVERED — the mirror of
+    // `Economic Survival: STRONG` one sitting earlier. The other four (`Beasts & Monsters:
+    // plagued, perimeter but NO force to hold it`, `Beasts & Monsters: frontier, force without a
+    // perimeter`, `Invasion & War: walls with citizen militia`, `Internal Security: court without
+    // detention`) all keep `{settlement}` in spine 1, so they stay THIN on the SLOT clause however
+    // many grammars their faces give them. MISSING does not move (34).
+    expect(counts.get(TIERS.THIN), 'pools with one variant, one grammar, or {settlement} alone').toBe(478);
+    expect(counts.get(TIERS.COVERED), 'and the rest').toBe(230);
     expect(counts.get(TIERS.THIN) + counts.get(TIERS.COVERED), 'every pool lands in one of the two pool tiers')
       .toBe(spines.length);
     for (const row of tiers) {

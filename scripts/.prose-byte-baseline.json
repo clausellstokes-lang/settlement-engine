@@ -55,8 +55,8 @@
   },
   "leaves": {
     "src/data/dossierStateProse/defense.generated.js": {
-      "raw": 192616,
-      "gzip": 30821,
+      "raw": 217867,
+      "gzip": 35505,
       "ceilingRaw": 488168,
       "ceilingGzip": 108482
     },
@@ -211,6 +211,14 @@
       "toRaw": 192616,
       "gzipAfter": 30821,
       "reason": "The 8b DS-DEF-2 DRAFT gate lands FIVE MORE POOLS of the block under the v3 workflow, each replacing three bare spine rows with a spine plus its wording faces, applied VERBATIM from the selectors' packets. `Beasts & Monsters: frontier, credible deterrence` 1,1,1 → 12,12,11 (eleven, eleven and ten faces behind the spines); `Invasion & War: walls AND professional garrison` 1,1,1 → 6,6,6; `Internal Security: full legal chain (court AND prison)` 1,1,1 → 10,11,10; `Economic Survival: STRONG` 1,1,1 → 12,11,9; `Disasters & Famine: granary AND hospital` 1,1,1 → 10,10,10. ONE HUNDRED AND THIRTY-ONE new wording rows and twenty-three marked pairs plus TWO ARCHIVER WEIGH ROWS in all, against fifteen spine rows re-cut and no row removed. ⭐ THE GROWTH IS THE FACES THEMSELVES and two marks taking their first corpus seats: `Economic Survival: STRONG` is the first pool anywhere to carry the archiver's `weigh` (ruling 22) and the `compromised` flag (ruling 26), and it takes a second seat for the archiver's `observed` (ruling 27). The shift register's `face-count-per-variant` row carries the corpus sum 2331 → 2462, the largest entry 11 → 12 and the per-pool digest. ⭐ NO CEILING IS NEAR — 192,616 raw against the owner-signed 488,168, and 30,821 gzip against 108,482."
+    },
+    {
+      "car": "REWRITE 8b DS-DEF-2 draft (v3), THIRD SITTING — FIVE OF SIX PACKETS APPLIED VERBATIM AT THE DRAFT GATE, THE SIXTH REFUSED",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 192616,
+      "toRaw": 217867,
+      "gzipAfter": 35505,
+      "reason": "The 8b DS-DEF-2 DRAFT gate lands FIVE MORE POOLS of the block under the v3 workflow, each replacing three bare spine rows with a spine plus its wording faces, applied VERBATIM from the selectors' packets. `Beasts & Monsters: plagued, perimeter but NO force to hold it` 1,1,1 → 11,10,10; `Beasts & Monsters: frontier, force without a perimeter` 1,1,1 → 12,12,12 (eleven faces behind every one of its three spines); `Invasion & War: walls with citizen militia` 1,1,1 → 7,8,8; `Internal Security: court without detention` 1,1,1 → 11,8,9; `Economic Survival: WEAK` 1,1,1 → 11,10,9. ONE HUNDRED AND THIRTY-THREE new wording rows and fifteen marked pairs (30 half rows) in all, against fifteen spine rows re-cut and no row removed. ⛔ A SIXTH PACKET WAS REFUSED AT THE GATE AND IS NOT IN THESE BYTES: `Disasters & Famine: granary AND parish care only` keeps its three shipped spine rows, because its spine 3 carries `from the road` — a PROVENANCE move the detector counts — which would take the shrink-only citation ratchet in `tests/lint/proseComposed.walker.test.js` from 7 to 8. That pool is the chair's to cut and re-gate. ⭐ THE GROWTH IS THE FACES THEMSELVES and nothing else: no slot, no mark and no leaf key was added, no `archiver`, `public`, `observed` or `weigh` is seated by any of the five, and the shift register's `face-count-per-variant` row carries the corpus sum 2462 → 2595, the largest entry UNCHANGED at 12 and the per-pool digest. ⭐ NO CEILING IS NEAR — 217,867 raw against the owner-signed 488,168 (44.6 per cent), and 35,505 gzip against 108,482."
     }
   ]
 }

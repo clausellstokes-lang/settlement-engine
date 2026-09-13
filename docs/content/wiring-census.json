@@ -37,8 +37,8 @@
     "syntheticTableFields": 122,
     "tiers": {
       "MISSING": 34,
-      "THIN": 479,
-      "COVERED": 229,
+      "THIN": 478,
+      "COVERED": 230,
       "MISSING-AT-TIER": 45
     },
     "tierSilences": 352,
@@ -860,7 +860,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [
         {
           "field": "beastsRowSituation(family, perimeter, force) (via BEASTS_ROW_POOL in defenseStateProse.js)",
@@ -1506,7 +1506,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [
         {
           "field": "court",
@@ -1802,13 +1802,11 @@
         "defmaterial",
         "settlement"
       ],
-      "slotsNamed": [
-        "settlement"
-      ],
+      "slotsNamed": [],
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 1,
+      "grammars": 2,
       "predicate": [
         {
           "field": "scoreBand(economicScore) (via ECONOMIC_ROW_POOL in defenseStateProse.js)",
@@ -39153,7 +39151,7 @@
         "DS-DEF-2 :: Beasts & Monsters: settled, nothing organized"
       ],
       "variants": 21,
-      "grammars": 10,
+      "grammars": 9,
       "blocks": [
         "DS-DEF-2"
       ]
@@ -39252,7 +39250,7 @@
         "DS-DEF-2 :: Internal Security: court without detention"
       ],
       "variants": 6,
-      "grammars": 4,
+      "grammars": 3,
       "blocks": [
         "DS-DEF-2"
       ]
@@ -39695,7 +39693,7 @@
         "DS-DEF-2 :: Economic Survival: CRITICAL"
       ],
       "variants": 12,
-      "grammars": 5,
+      "grammars": 6,
       "blocks": [
         "DS-DEF-2"
       ]
@@ -48248,7 +48246,7 @@
         "beastsRowSituation(family, perimeter, force) (via BEASTS_ROW_POOL in defenseStateProse.js)"
       ],
       "readingFunction": "BEASTS_ROW_POOL",
-      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -48349,7 +48347,7 @@
         "court"
       ],
       "readingFunction": "internalRowPoolKey",
-      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -48388,14 +48386,14 @@
       "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
-      "tier": "THIN",
+      "tier": "COVERED",
       "block": "DS-DEF-2",
       "subject": "Economic Survival: WEAK",
       "fields": [
         "scoreBand(economicScore) (via ECONOMIC_ROW_POOL in defenseStateProse.js)"
       ],
       "readingFunction": "ECONOMIC_ROW_POOL",
-      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 2 grammar(s) · slots {none}"
     },
     {
       "tier": "THIN",

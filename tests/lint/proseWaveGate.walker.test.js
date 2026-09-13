@@ -172,7 +172,12 @@ describe('the CARTESIAN unit set is the attach set times the spines times the fa
     // ⭐ MOVED AGAIN AT THE 8b DS-DEF-2 DRAFT GATE'S SECOND SITTING: five more pools of the
     // block take the section 448 → 579 (+131 wording faces, +15 spines re-cut, nothing
     // removed). A RISE, which is the only direction this line may move while the REWRITE runs.
-    expect(total, 'the units actually compared').toBe(579);
+    // ⭐⭐ MOVED AGAIN AT THE DRAFT GATE'S THIRD SITTING: five more pools of the block take the
+    // section 579 → 712 (+133 wording faces, +15 spines re-cut, nothing removed). A sixth packet
+    // was REFUSED at that gate (`Disasters & Famine: granary AND parish care only`) and its three
+    // shipped spine rows are still counted here as three units, unchanged. A RISE, which is the
+    // only direction this line may move while the REWRITE runs.
+    expect(total, 'the units actually compared').toBe(712);
     // AND THE FLAG IS A FLAG: without `bareSpine` the lib answers the SHAPE REPORT's question
     // (the units a corpus LICENSES), which on a spine pool is none. The two populations are
     // different on purpose, and this is the line that says so.
