@@ -175,10 +175,34 @@ describe('CAR 5(c) — the licensed level-1 members per block, on the COMPOSED f
       + '    contested / pending STATE field — SITTING A12)\n'
       + `  settlement-only blocks: ${settlementOnly.map((r) => r.block).join(', ')}\n`);
     expect(blocks).toHaveLength(68);
-    // ⚠ THE SITTING'S A12 SAYS "20 of 68 settlement-only". This lane measures TWENTY-TWO by a
+    // ⚠ THE SITTING'S A12 SAYS "20 of 68 settlement-only". This lane measures TWENTY-ONE by a
     // different method (resolving every composer bag from source). The list is printed above
     // so the chair can diff it rather than take either number on trust.
-    expect(settlementOnly.length).toBe(22);
+    //
+    // ⛔ RE-RECORDED FROM 22 AT THE REWRITE'S INSTRUMENT-DEBT CAR (2026-09-13), WITH THE CAUSE
+    // NAMED AND THE DIRECTION FENCED. This is a LIVE INVARIANT over the composer bags, not a
+    // calibration: it counts what the CODE mounts, so re-pointing it at the shipped corpus
+    // would measure a tree nobody is working in. The block that left the set is DS-DEF-2, and
+    // it left BY A DECLARED ACT — `{defmaterial}` landed as a second fill site at 6e5ee9716
+    // (REWRITE 8b-W-18b, ADDENDUM 18 ruling 10), so its bag is now
+    // ["defmaterial", "settlement"] where every other DEF block is ["settlement"]. Measured
+    // at this tip, DS-DEF-2 is the only block absent from an otherwise complete DEF run.
+    //
+    // ⭐ AND IT IS A CEILING RATHER THAN AN EQUALITY, WHICH IS WHAT STOPS IT REDDING EVERY
+    // BATCH WITHOUT LOSING ITS TEETH. The REWRITE's direction on this figure is one way: every
+    // fill site it lands takes a block OUT of the settlement-only set and none puts one back,
+    // so the count SHRINKS. A GROWTH would mean a fill was LOST — a block's composer bag
+    // narrowing back to `settlement` alone — which is a regression this arm should still red.
+    // The exact figure stays printed above, so a fall is visible on every run and pinned by
+    // nothing; when the sitting wants the new number it reads the line and lowers the ceiling.
+    expect(settlementOnly.length,
+      'the settlement-ONLY bag count GREW — a block\'s composer bag narrowed back to'
+      + ' `settlement` alone, which means a fill site was lost. This is SHRINK-ONLY: the'
+      + ' REWRITE only ever takes blocks OUT of this set. Find the block in the printed list'
+      + ' above, do not raise the ceiling.')
+      .toBeLessThanOrEqual(21);
+    expect(settlementOnly.length, 'and the set is not empty — an arm measuring nothing would'
+      + ' satisfy the ceiling above').toBeGreaterThan(0);
     expect(oneMember.length).toBe(33);
   });
 });
