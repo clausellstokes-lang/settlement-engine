@@ -1,15 +1,18 @@
-# LANE-STATUS — written 2026-09-13 16:50:29 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-13 16:55:42 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = c2b72466a Plan: wave 3 has begun — batch 2 of DS-DEF-2 (three pools) through draft 065b9ded6 and c
 
 ## BUILD / KIT LANES (dock · base · cars · porcelain · receipt)
 - REWRITE 8b DS-DEF-11 (the validation block; cure round): dock laneRW-DEF11 ABSENT
 - REWRITE 8b-W (the wiring car, landed in its dock = the consist lineage): dock laneRW-DEFW ABSENT
-- **DS-DEF-2 (waits for the tables)** dock `laneRW-DEF2` HEAD ad7f3667c · 38 cars over f2da5a3ee · porcelain 0 · last commits:
+- **DS-DEF-2 (waits for the tables)** dock `laneRW-DEF2` HEAD ad7f3667c · 38 cars over f2da5a3ee · porcelain 2 · last commits:
     ad7f3667c REWRITE 8b DS-DEF-2 cure 6 (the chair's cut by name): the elders stop citing and the guilds stop remembering
     73d32a126 REWRITE 8b DS-DEF-2 cure (v3): 6/6 pools
     d794c3a78 REWRITE 8b DS-DEF-2 draft (v3): 5/6 pools
     b6f1a4695 REWRITE 8b: CONTROL 4 measures the corpus the research measured — the live figure is reported beside it, never pinned
+    porcelain (uncommitted work in the dock — commit it FIRST after re-proving):
+       M docs/content/RECEIPT_POOLS_DOSSIER_STATE.md
+       M src/data/dossierStateProse/defense.generated.js
     receipt `receipt-rewrite.md` (mtime 09-12 20:49) head:
       | # RECEIPT — the REWRITE train
       | 
@@ -229,4 +232,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `ab8783d22` WRITER Invasion & War: walls with NO force · DONE · transcript 09-13 02:30 725 KB · 17 tool calls · files: candidates-2.md, facetext.txt, ft2.txt · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasio
 
 ## PROCESSES: 
-load: 2.12 2.16 2.20
+load: 1.86 1.96 2.09
