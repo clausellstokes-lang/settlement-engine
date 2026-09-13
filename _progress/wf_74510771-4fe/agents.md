@@ -1,4 +1,4 @@
-# wf_74510771-4fe — per-agent progress, 2026-09-13 11:20:10
+# wf_74510771-4fe — per-agent progress, 2026-09-13 11:25:26
     - `aae3b7721` MARKER Invasion & War: walls AND professional garrison · DONE · transcript 09-13 08:05 1088 KB · 63 tool calls · files: card-mech.txt, card-79.md, card.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasio
     - `a14855157` MARKER Internal Security: full legal chain (court AND prison) · DONE · transcript 09-13 08:01 868 KB · 41 tool calls · files: card.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--interna
     - `a54b8e93a` MARKER Economic Survival: STRONG · DONE · transcript 09-13 08:05 893 KB · 49 tool calls · files: $D/card.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--economi
@@ -20,4 +20,4 @@
     - `aa965ebe5` SELECTOR Disasters & Famine: granary AND hospital · DONE · transcript 09-13 08:53 1185 KB · 17 tool calls · files: draft.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--disaste
     - `ae8b427cd` SELECTOR Beasts & Monsters: frontier, credible deterrence · DONE · transcript 09-13 08:44 1098 KB · 27 tool calls · files: "$D/draft.md, rows_check.txt · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--beasts-
     - `a57e7fc30` GATE r1 · RETRIED (a later attempt on the same key runs) · transcript 09-13 08:57 616 KB · 28 tool calls
-    - `ab170197f` GATE r1 · IN FLIGHT · transcript 09-13 11:19 799 KB · 55 tool calls · files: sourced_new.txt, kernel.txt · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `ab170197f` GATE r1 · IN FLIGHT · transcript 09-13 11:25 1029 KB · 98 tool calls · files: sourced_new.txt, kernel.txt · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
