@@ -3,7 +3,7 @@
 <!-- GROUND READ: the exemplar pack whole; the card whole (§2b, §2b′, §2c, §2d, §5 as the marker's correction supersedes it, §6, §7, §8, §9); speakers.md (the seat order is kept face for face, so v1f4 and v2f10 remain the two targets); refute.md whole (26 PASS · 2 FAIL · 2 WITHHELD · CRAFT DULL); the rows at HEAD d57c601cf. -->
 <!-- THE TWO TARGETS ARE CURED AS THE REFUTER NAMED THEM. v1 f4 (guild) now AFFIRMS the Town hall's `Dispute arbitration`: the trade brings its quarrels to the hall. v2 f10 (gate) drops "the watch or", so it no longer negates `Town watch` → `Gate duty` on the town tier where that face draws. -->
 <!-- AND THE POOL WAS RULED DULL ON SYNTAX, so every face is rewritten. The content did not have to move and mostly has not: the same ten speakers, the same stakes drawn from the same fields, the same three pairs, the same two weighings. What moved is the SHAPE. -->
-<!-- THE MOULD IS BROKEN. [attribution] + [claim] + "and (that)" + [second claim] carried nineteen of twenty-eight faces, all three spines, both weighings, all three public candidates and two notebook notes. In these rows it carries none of them as its main hinge: THIRTEEN OF TWENTY-EIGHT FACES ARE NOW TWO SENTENCES (the fact, then the stop), two spines are two sentences, one face hinges on "though" (v1 f4), and four faces are object-fronted or attribution-last (v1 f6, v2 f4, v2 f7, v3 f3, v3 f5, v3 f6). -->
+<!-- THE MOULD IS BROKEN. [attribution] + [claim] + "and (that)" + [second claim] carried nineteen of twenty-eight faces, all three spines, both weighings, all three public candidates and two notebook notes. In these rows it carries none of them as its main hinge: THIRTEEN OF TWENTY-EIGHT FACES ARE NOW TWO SENTENCES (the fact, then the stop), two spines are two sentences, one face hinges on "though" (v1 f4), and four faces are object-fronted or attribution-last (v1 f6, v2 f4, v2 f7, v3 f3, v3 f5). -->
 <!-- THE OBJECT RATION GOES FROM ONE TO THREE, one per variant, so no rendered page carries two: variant 1 THE ROOM WITH THE LOCK (spine 1 alone, and the [public] candidate that is already about it); variant 2 THE DOOR A MAN COMES OUT BY and, under NOTES, THE BENCH WHERE PEOPLE WAIT (the observed candidate, moved off the lock); variant 3 THE FINE THAT SECURES RELEASE (v3 f4). All three are card §9's own named objects. -->
 
 **`Internal Security`: full legal chain (court AND prison)**
@@ -12,7 +12,7 @@
    - `[face]` `[hall]` By the hall's own account the watch, the hearing and the cells come out of one purse. The hall would rather the three were counted together than apart.
    - `[face]` `[tavern]` At the tavern the cells are talked about by people who have never seen the inside of one.
    - `[face]` `[watch]` One of the watch puts it that a man taken up is a street left unwalked while he is walked in. The watch does not say which street.
-   - `[face]` `[guild]` Among the trades it is said that the hall gets their quarrels and the cells get nobody, though they pay for the keeping of both.
+   - `[face]` `[guild]` Among the trades it is said that the hall gets their quarrels and the cells get nobody, though the trades pay for the keeping of both.
    - `[face]` `[court]` A magistrate holds that the court costs the town less than the town supposes. What it does cost is the court's own business.
    - `[face]` `[market]` The coin that keeps the watch and the cells is taken at the stall, the traders say. Where it goes after that they do not claim to know.
    - `[face]` `[gate]` Whoever keeps the gate says the first question a stranger answers here is asked at the gate.
@@ -22,20 +22,20 @@
    - `[face]` `[watch · pair 1 · disagree]` One of the watch says the patrol brings a man to a door it does not open.
    - `[face]` `[hall · pair 1 · disagree]` A clerk in the hall says nothing comes to the hall that the hall does not hear.
    - `[face]` `[tavern]` At the tavern a man taken up is a subject for the evening. Which door he comes out by is the part they argue over.
-   - `[face]` `[court]` What is put in front of them is heard, those who sit that day say. They go looking for nothing else.
+   - `[face]` `[court]` What is put in front of the court is heard, those who sit that day say. They go looking for nothing else.
    - `[face]` `[stranger]` A drover says a man who asks here where to take a complaint gets two answers. Both are given with confidence.
    - `[face]` `[register · pair 2 · aside]` The sexton holds that the parish is told of a matter when the matter is over.
    - `[face]` `[market · pair 2 · aside]` The stall stays shut while the matter is heard, the traders say.
-   - `[face]` `[garrison]` The garrison's view is that the town's quarrels are not the garrison's until one of them comes to the wall.
+   - `[face]` `[garrison]` A soldier of the garrison says the town's quarrels are not the garrison's until one of them comes to the wall.
    - `[face]` `[guild]` The trades settle their own quarrels first, by a guild factor's account. What they cannot settle goes to the hall.
    - `[face]` `[gate]` Those who keep the gate say a person is stopped there before the hearing ever sees him. The hall gives a different answer about where the town's law begins.
 3. `[visitor]` A traveller who brings a complaint here is shown where it is heard and where the person he names would be kept.
    - `[face]` `[hall · pair 3 · disagree]` A clerk in the hall says a man waits because the matter before his is being heard properly.
    - `[face]` `[stranger · pair 3 · disagree]` A drover says a man waits because nobody has said whose business he is.
-   - `[face]` `[court]` A traveller's complaint is heard like any other, by the magistrate's account. Whether the traveller stays for it is the traveller's own affair.
-   - `[face]` `[tavern]` At the tavern the saying is that a man is called in for who he knows and let out for what he can pay.
+   - `[face]` `[court]` A traveller's complaint is heard like any other, by a magistrate's account. Whether the traveller stays for it is the traveller's own affair.
+   - `[face]` `[tavern]` At the tavern they say a man is called in for who he knows and let out for what he can pay.
    - `[face]` `[watch]` The wage is the same whether the night is quiet or a man is walked in, one of the watch says.
-   - `[face]` `[garrison]` A stranger stopped at the gate is the garrison's until his business is asked, a soldier of the garrison says. After that he is the watch's.
+   - `[face]` `[garrison]` A soldier of the garrison puts it that a stranger stopped at the gate is the garrison's until his business is asked. After that he is the watch's.
    - `[face]` `[guild]` A guild factor says the trade pays for the waiting twice, in the man who waits and in the work that waits with him.
    - `[face]` `[market]` By the stallholders' account a stranger cheated at the market is told where to bring it. A stallholder cheated by a stranger is told the same, after the stranger has gone.
    - `[face]` `[gate]` Those who keep the gate say a stranger with a complaint against him waits at the gate until somebody comes for him.
@@ -52,7 +52,7 @@ THE DULL VERDICT — WHAT WAS DONE, MEASURED
 - **The mould, before and after.** The refuter counted the `[attribution] + [claim] + "and (that)" + [second claim]` mould at v1 1, 5, 6, 9 · v2 1, 3, 5, 6, 7, 8, 9, 10 · v3 3, 5, 6, 7, 8, 9 — nineteen of twenty-eight, plus all three spines, both weighings, all three `[public]` candidates and two of three notebook notes. NO FACE IN THESE ROWS CARRIES IT AS ITS MAIN HINGE. Where an `and` remains it joins a compound object or a compound predicate inside ONE claim (v1 f8 "the watch's to fill and the garrison's to walk past"; v3 f4 "called in for who he knows and let out for what he can pay"; v3 f7 "in the man who waits and in the work that waits with him") — the shape the pack licenses, not the shape it measured.
 - **THIRTEEN OF TWENTY-EIGHT FACES ARE TWO SENTENCES** (v1 1, 3, 5, 6, 9 · v2 3, 4, 5, 9, 10 · v3 3, 6, 8), and each second sentence does a job the pack names: the stake (v1 1), the withheld thing (v1 3, v1 5, v1 6), contrast (v1 9, v3 6), the reversal on a full stop (v3 8), the dispute left standing (v2 10). The six pair halves stay ONE sentence each (ruling 30) and the two-sentence faces are all unpaired, so no drawn unit exceeds three sentences.
 - **The spines.** Spine 1 is now the fact and then the stop, which is the voice's signature and was absent from the whole pool; spine 2 states the seeing and then the perception without the `and takes it that` hinge; spine 3 stands unchanged at one sentence, so the three spines differ in length as well as in shape (fact · public · stranger).
-- **Openers and closes.** Four faces are object-fronted or attribution-last (v1 6, v2 4, v2 7, v3 3, v3 5, v3 6 — six), two are place-first (v1 2, v3 4), one is the trades' talk with its place named (v1 4), one is prepositional (v3 8). NO RUN OF THREE in one opener class survives in any variant, and no attribution verb runs three deep (checked variant by variant below). Closes: withheld thing ×4, contrast ×2, reversal ×1, question left standing ×3, fronted last noun ×3.
+- **Openers and closes.** Four faces are object-fronted or attribution-last (v1 6, v2 4, v2 7, v3 3, v3 5 — five), two are place-first (v1 2, v3 4), one is the trades' talk with its place named (v1 4), one is prepositional (v3 8). NO RUN OF THREE in one opener class survives in any variant, and no attribution verb runs three deep (checked variant by variant below). Closes: withheld thing ×4, contrast ×2, reversal ×1, question left standing ×3, fronted last noun ×3.
 - **The object ration, one to three.** The lock-and-door cluster carried seven appearances in the draft. It now carries spine 1 and the v1 `[public]` candidate, and nothing else in variant 1. Variant 2's object is the DOOR A MAN COMES OUT BY (v2 f3) with THE BENCH under NOTES as the observed candidate. Variant 3's object is THE FINE THAT SECURES RELEASE (v3 f4). All three are card §9's own list; the name taken down at the gate stays unused, because F1-24 is this pool's signature finding and a name WRITTEN at the gate reads as a record where `Gate control` prints no service text at city.
 - **What was deliberately NOT moved,** the refuter having recorded it as not wrong: the ten speakers, the stakes (the one purse, the wage, the private settling, the gate's precedence, the garrison's indifference, the stranger's two confident answers), the three pairs, the two weighings, and the step around F1-24 — not one face in these rows cites a court book, a gaol roll, a warrant or a filed report.
 
@@ -71,27 +71,27 @@ FACES — variant 2
 - watch, pair 1 disagree | one clause, joinable ("…, though a clerk in the hall says…"), and it disputes the JOIN rather than the chain's capacity.
 - hall, pair 1 disagree | one clause, affirms `Dispute arbitration` rather than denying it, stands alone on every preimage town.
 - tavern | the pool's one time-and-place opener kept, now with a second sentence that leaves the argument running instead of closing it.
-- court | object-fronted with the attribution last, then a four-word stop.
+- court | object-fronted with the attribution last, then a four-word stop. The fronted object names the court rather than a pronoun, so the face stands alone at a glance.
 - stranger | two answers, both confident; the second sentence is the dry note.
 - register, pair 2 aside | one clause; says the parish is TOLD, cites no book, so it survives at city where the `parish` record does not resolve.
 - market, pair 2 aside | THE BILL for this variant, written to the refuter's own suggested shape: object-fronted, attribution-last, nine words.
-- garrison | the indifference reported flat, and the wall is the point at which it ends. Draws only where the garrison and the wall are both required.
+- garrison | the indifference reported flat, and the wall is the point at which it ends. Draws only where the garrison and the wall are both required. The frame differs from variant 1's garrison, which carries its attribution as a possessive rather than a verb.
 - guild | attribution-last, then the sentence that affirms the hall hears what the trades cannot settle.
 - gate | THE CURED FACE. See the target sheet above.
 
 FACES — variant 3
 - hall, pair 3 disagree | unchanged in substance: why a man waits, from the hall. Joinable.
 - stranger, pair 3 disagree | unchanged in substance: the same man, the other cause. The refuter called this the best unit in the pool and nothing was done to it but leave it alone.
-- court | object-fronted, attribution-last, then the shrug.
+- court | object-fronted, attribution-last, then the shrug. "A magistrate", never "the magistrate": a Chief Magistrate is a mandated role on any `recently_betrayed`, `succession_void` or `insurgency` town (F3-06).
 - tavern | the variant's OBJECT, the fine that secures release (card §9), inside the tavern's talk where it is an opinion and not a procedure asserted by the page. `Fine payment` is printed at the town row; at city `Bail hearings` is off by default, and an off service is not a denial.
 - watch | attribution-last; the wage as a flat fact, which is the watch's grievance without a shortfall claimed.
-- garrison | subject-first with the attribution last, then a five-word handover. Gate duty is the garrison's own printed service at the tiers where it is seated.
+- garrison | "puts it that" breaks the verb run and keeps this face from sharing an attribution frame with the watch's face above it, which carries its attribution last. Then a five-word handover. Gate duty is the garrison's own printed service at the tiers where it is seated.
 - guild | THE BILL for this variant, landed on a trade the town-tier roster holds; "twice" is an idiom enumerated by its own two clauses.
 - market | the reversal on a full stop (the pack's move 5, re-cut off the semicolon): the same procedure seen from each end, and the second end is worse.
 - gate | the gate's procedure for the complaint that comes the other way; no duration fixed.
 
 ORDER AND VARIETY (the assembly vetoes, re-run on these rows)
-- Attribution verbs, variant by variant. v1: by the hall's account · they say · puts it · it is said (place named) · holds · the traders say · says · the garrison's view is · says. v2: says · says (the pair, which shares its frame on purpose for the compound joint) · no verb · say · says · holds · the traders say · the garrison's view is · by a guild factor's account · say. v3: says · says (the pair) · by the magistrate's account · they say · says · says · says · by the stallholders' account · say. ⚠ v3 f5, f6, f7 are three `says` in a row at the verb grain, though f5 and f6 carry theirs at the END of the sentence and f7 at the front, so no two adjacent faces share a FRAME. Recorded rather than cured by a mannered substitute, ruling 36 reading this as a rate and not a ban.
+- Attribution verbs, variant by variant. v1: by the hall's account · they say · puts it · it is said (place named) · holds · the traders say · says · the garrison's view is · says. v2: says · says (the pair, which shares its frame on purpose for the compound joint) · no verb · say · says · holds · the traders say · says · by a guild factor's account · say. v3: says · says (the pair) · by a magistrate's account · they say · says (last) · puts it · says · by the stallholders' account · say. No run of three at the verb grain and no two adjacent faces sharing a frame: v3 f5 carries its attribution at the end and v3 f6 at the front, on a different verb.
 - No two adjacent faces share an attribution frame except a marked pair's two halves.
 - No variant sits its faces on one grammatical subject; the subjects across variant 1 alone are the purse, the cells, a man taken up, the trades, the court, the coin, the first question, the cells again and a drover.
 - The survey's own clause appears nowhere (ruling 40). No face carries `{settlement}`; spine 1 carries it once and no other unit does.
