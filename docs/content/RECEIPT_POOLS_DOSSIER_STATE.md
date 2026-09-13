@@ -2643,9 +2643,41 @@ supplies the ancestry.
 3. `[visitor]` A stranger arriving at {settlement} understands the danger before anybody explains it, because nothing about the place is arranged as though danger were expected to be met.
 
 **`Beasts & Monsters`: `frontier`, credible deterrence**
-1. `[ledger]` {settlement} sits on an active frontier with a line and a force behind it. Most of what comes out of the country will not press a defended perimeter, and most of what comes here does not.
-2. `[street]` The town takes the frontier seriously and has taken it seriously long enough that the arrangements are ordinary rather than anxious.
-3. `[counterforce]` Very little reaches {settlement} out of the wild country, and the reason is that the arrangements are visible from a long way off.
+1. `[ledger]` {settlement} sits on an active frontier with a line around it and a force behind the line. Most of what comes out of the country does not press a kept perimeter.
+   - `[face]` `[stranger]` A stranger says he was kept at the way through while somebody went to ask, and that he was never told who was asked.
+   - `[face]` `[gate]` Those who hold the way through say they can say who came in, and that nobody asks them who went out.
+   - `[face]` `[elders]` The elders hold that a household behind the line owes a day on it. The day is owed whether the household has a man to send or not.
+   - `[face]` `[hall · pair 1 · disagree]` A clerk in the hall says the line is kept out of the common purse.
+   - `[face]` `[guild · pair 1 · disagree]` The guilds say openly that it is kept out of the toll the trades pay at the way through.
+   - `[face]` `[tavern]` At the tavern they say the men on the line are paid out of the same purse that keeps the line, and which of the two is paid first is the evening's argument.
+   - `[face]` `[register]` The sexton says the ground is filled by the ordinary causes, and the country outside is not much among them.
+   - `[face]` `[muster]` The muster says it would hold the line against whatever the country sends, and that nobody asks it what the holding takes.
+   - `[face]` `[court]` What reaches the court from the frontier is a dispute over what was counted at the way through, and the court says it hears no other kind.
+   - `[face]` `[garrison]` One of the garrison says the same purse keeps the line and feeds the men on it, and asks which the hall would sooner see short.
+   - `[face]` `[market]` Stallholders say everything on the tables came in through the way through and was counted there.
+2. `[street]` Everyone here knows what is in the country, and nobody here talks about it. The town takes that as the arrangement working.
+   - `[face]` `[stranger]` A pedlar says nobody here asked him what he had seen on the road, and that he had an answer ready.
+   - `[face]` `[gate · pair 5 · aside]` Those who hold the way through say the bar is dropped at dusk by whoever is nearest to it.
+   - `[face]` `[register · pair 5 · aside]` At the church it is said that the men on the line are prayed for in the same breath as the roads.
+   - `[face]` `[hall · pair 2 · disagree]` The hall says nothing about the nights has come to it as a complaint.
+   - `[face]` `[watch · pair 2 · disagree]` The watch says the complaints are made at the way through and go no further.
+   - `[face]` `[tavern]` At the tavern the talk is of who turns out and who is only on the roll, and the country itself does not come up.
+   - `[face]` `[garrison]` The garrison says nobody comes out of the town to watch a drill.
+   - `[face]` `[guild]` A guild factor says the toll at the way through is paid by the trades. The line it keeps is counted as everyone's.
+   - `[face]` `[market]` At the market they say the stalls go up whatever the country is doing.
+   - `[face]` `[court]` The court says a dispute over the toll is settled on the day it is brought, and that the country brings it none.
+   - `[face]` `[elders]` The elders say the young stand the nights and the old say how they are stood.
+3. `[counterforce]` A traveller says the line is seen from a long way down the road, and that he takes it what is in the country sees it too.
+   - `[face]` `[market]` Stallholders say the trade comes in through the bar by daylight and does not say what it saw on the road.
+   - `[face]` `[register]` The sexton says that whatever the country takes it takes on the road and not inside the line.
+   - `[face]` `[gate]` Those who hold the way through keep a light at the bar after dark and say it is there to be seen from the country.
+   - `[face]` `[court]` The court says leaving the way through open is a matter it hears, and hears quickly.
+   - `[face]` `[muster]` The muster says being on the line in daylight is as much of the work as being on it after dark.
+   - `[face]` `[tavern]` At the tavern a carter says the road in is walked in company. The company is paid for by whoever is carrying the most.
+   - `[face]` `[garrison]` The garrison says the country is walked so that it does not have to be fought.
+   - `[face]` `[guild]` The guilds say the trade pays at the bar and works the road beyond it.
+   - `[face]` `[hall]` The hall calls the arrangement adequate, and uses the word to anyone who asks.
+   - `[face]` `[elders]` One of the elders says the line stands where the country can see it, and the village lives where the line can be seen from the doors.
 
 **`Beasts & Monsters`: `frontier`, force without a perimeter**
 1. `[ledger]` {settlement} keeps armed people on an open frontier, which means the defense is reactive: whatever comes chooses where the fighting happens, and the town arrives afterwards.
@@ -2663,9 +2695,24 @@ supplies the ancestry.
 3. `[visitor]` A stranger walks out of {settlement} in any direction at any hour and meets nothing that would justify a watch.
 
 **`Invasion & War`: walls AND professional garrison**
-1. `[ledger]` {settlement} has a line and professionals to hold it, which is real deterrence against raiding and against a conventional assault; it is not a posture rated for a long siege without stores behind it.
-2. `[visitor]` A stranger sizing {settlement} up sees the two things that matter together (the wall and the men who belong to it) and revises what an attempt would cost.
-3. `[street]` The town believes it could be held, and the belief is founded on something rather than on hope.
+1. `[ledger]` Entry into {settlement} is controlled and the town pays soldiers of its own. The levy at the gate falls on whoever is passing through it.
+   - `[face]` `[guild]` A guild factor says the trades pay at the gate and pay again into the purse that keeps the gate.
+   - `[face]` `[market]` The stallholders say the levy is paid by whoever carries the goods and borne by whoever eats them. A household at that stall pays it without ever standing at the gate.
+   - `[face]` `[tavern]` At the tavern the soldiers are counted as custom, and the talk is which of them is off duty and which is not.
+   - `[face]` `[hall · pair 1 · view]` A clerk in the hall says what the gate takes reaches the purse whole.
+   - `[face]` `[gate · pair 1 · view]` The people on the gate say they hand over what they take and hear nothing of it after.
+2. `[visitor]` A traveller meets the town in the order the town means him to, stopped at the gate and counted before he is let through. What he is let into is a place that pays soldiers of its own to keep it.
+   - `[face]` `[gate · pair 1 · disagree]` The men on the gate say a stranger pays the gate, and the gate settles with the hall in its own time.
+   - `[face]` `[hall · pair 1 · disagree]` A clerk in the hall says a stranger who pays at the gate has paid the town, whatever the men at the gate tell him.
+   - `[face]` `[court]` The court holds that the toll can be argued before it by anyone who paid it, a stranger as much as a carter.
+   - `[face]` `[stranger]` A pedlar says his pack was opened at the gate and nothing was taken from it but the toll.
+   - `[face]` `[elders]` One of the elders says the town has never been asked whether it wants soldiers, only what they cost.
+3. `[street]` The keeping of the gate and the soldiers' wages come out of one purse, and the town has settled which of the two it complains about.
+   - `[face]` `[stranger]` A traveller says the town talks about what its soldiers cost and not at all about what they are for.
+   - `[face]` `[tavern]` At the tavern a woman at the long table says the town would have the gate shut earlier if the shutting cost it nothing.
+   - `[face]` `[register]` The sexton's view is that the town's confidence is well founded, and that the parish keeps ground ready in case it is not.
+   - `[face]` `[garrison · pair 3 · view]` The soldiers say the town is glad of them after dark and has nothing to say to them before it.
+   - `[face]` `[watch · pair 3 · view]` One of the watch says the nights and the way through are one duty to the town and two to the people who keep them.
 
 **`Invasion & War`: walls with citizen militia**
 1. `[ledger]` Walls at {settlement} with townspeople behind them: credible against raiders, and inadequate against anybody who arrives professionally and brought siege gear.
@@ -2719,9 +2766,37 @@ supplies the ancestry.
 3. `[street]` The town's plan for an army is to not be interesting to one, and everybody here can state the plan.
 
 **`Internal Security`: full legal chain (court AND prison)**
-1. `[ledger]` {settlement} can arrest, try and hold, and having all three means the town's law is a process rather than a threat.
-2. `[street]` A thing done wrong at {settlement} goes somewhere and takes time, and the town has come to rely on that rather than on the watch's temper.
-3. `[visitor]` A stranger who brings a complaint at {settlement} is given a procedure rather than a favour, and the procedure runs.
+1. `[ledger]` {settlement} keeps a watch to take a person up, a place to hear the matter, and a room with a lock on the outside of its door.
+   - `[face]` `[hall]` A clerk in the hall says the watch, the hearing and the cells are paid out of one purse, and that the hall hears complaints about all three.
+   - `[face]` `[tavern]` At the tavern they say the cells are talked of more than they are seen from the inside.
+   - `[face]` `[watch]` By the night patrol's account a person taken up is a street left unwalked while they walk him in.
+   - `[face]` `[guild]` A guild factor says the trade pays for a court it does not use.
+   - `[face]` `[court]` A magistrate holds that the court costs the town less than the town supposes, and does not say what it costs.
+   - `[face]` `[market]` The traders say the town's coin keeps a room that nobody they know has been inside, and that they can name what else it might have kept.
+   - `[face]` `[gate]` Whoever keeps the gate says a name is asked there before it is asked anywhere else in the town.
+   - `[face]` `[garrison]` The garrison's view is that the cells are the watch's to fill and the garrison's to walk past.
+   - `[face]` `[stranger]` A drover says that in some towns a man pays to be heard, and that here he is told to sit and wait instead.
+2. `[street]` It is common knowledge here that a person the watch takes up goes to a hearing and to the cells, and the town takes it that this is what settles a quarrel.
+   - `[face]` `[watch · pair 1 · disagree]` One of the watch says the patrol brings people to a door, and that the door is opened or not by whoever is inside.
+   - `[face]` `[hall · pair 1 · disagree]` A clerk in the hall says nothing is brought to the hall that the hall does not hear.
+   - `[face]` `[tavern]` At the tavern, when somebody is taken up, the talk is of which door he comes out by and who was waiting at it.
+   - `[face]` `[court]` Those who sit that day say they hear what is put in front of them and do not go looking for the rest.
+   - `[face]` `[stranger]` A drover says a man who asks here where to take a complaint gets two answers, and both are given with confidence.
+   - `[face]` `[register · pair 2 · aside]` The sexton holds that the parish hears of a matter when it is over and not while the watch has it.
+   - `[face]` `[market · pair 2 · aside]` The traders say a matter that starts at a stall ends at the hall, and the stall is shut while it is heard.
+   - `[face]` `[garrison]` By the garrison's account taking up townsfolk is the watch's work, and the garrison is content to leave it there.
+   - `[face]` `[guild]` A guild factor says the trades settle their own and bring the hall only what they cannot.
+   - `[face]` `[gate]` Those who keep the gate say a person is stopped there before the watch or the hearing ever sees him, and that the town's law begins at the gate whatever the hall says.
+3. `[visitor]` A traveller who brings a complaint here is shown where it is heard and where the person he names would be kept.
+   - `[face]` `[hall · pair 3 · disagree]` A clerk in the hall says a man waits because the matter before his is being heard properly.
+   - `[face]` `[stranger · pair 3 · disagree]` A drover says a man waits because nobody has said whose business he is.
+   - `[face]` `[court]` A magistrate holds that a traveller's complaint is heard like any other, and that whether the traveller stays to hear it is the traveller's affair.
+   - `[face]` `[tavern]` At the tavern they say a man is called in sooner for who he knows than for what he brought.
+   - `[face]` `[watch]` One of the watch says his part of it ends at the door with the lock, and that what is on the other side of the door is not asked of him.
+   - `[face]` `[garrison]` A soldier of the garrison puts it that a stranger stopped at the gate is the garrison's for as long as it takes to ask his business, and the watch's after that.
+   - `[face]` `[guild]` A guild factor says the trade pays for the waiting twice, in the man who waits and in the work that waits with him.
+   - `[face]` `[market]` By the stallholders' account a stranger cheated at the market is told where to bring it, and a stallholder cheated by a stranger is told the same after the stranger has gone.
+   - `[face]` `[gate]` Those who keep the gate say a stranger with a complaint is let in for it, and a stranger with a complaint against him is kept at the gate until somebody comes for him.
 
 **`Internal Security`: court without detention**
 1. `[ledger]` {settlement} tries offences it cannot hold anyone for; the sentences available here are money and exile, and both of them fall unevenly.
@@ -2763,9 +2838,38 @@ supplies the ancestry.
    - `[face]` `[market]` The market's word is that a stranger cheated here has no board to go to, and would do better to come back to the stall.
 
 **`Economic Survival`: `STRONG`**
-1. `[ledger]` {settlement} can absorb a sustained crisis out of its own revenue: emergency measures can be paid for and the garrison can be kept paid while they last.
-2. `[street]` The town could go through a bad season with its arrangements intact, and the people who would have to be paid through one know it.
-3. `[counterforce]` Trouble at {settlement} has not turned into a collapse, and the reason is money. A town that can pay through a crisis mostly does.
+1. `[ledger]` The town can be fed and supplied through a crisis. Nobody here has had to find the bottom of the stores.
+   - `[face]` `[hall · pair 1 · disagree]` The hall says the wage is met as far as the purse reaches.
+   - `[face]` `[watch · pair 1 · disagree]` The watch says the purse reaches further than the hall lets it.
+   - `[face]` `[archiver · pair 1 · weigh]` It may be that both are right, and the one purse is full for one thing and short for another.
+   - `[face]` `[register]` The register holds that a town which puts grain by for its living should put something by for its dead, and says so to the hall.
+   - `[face]` `[tavern]` At the tavern they say the people who would have to turn out in a crisis are the same people who are owed.
+   - `[face]` `[guild]` The guilds say openly that what fills the granary is bought at the market and taxed at the same market, and that the trades pay at both ends.
+   - `[face]` `[stranger]` A stranger sees the granary kept and nothing to say what the town is short of.
+   - `[face]` `[garrison]` The soldiers say the town has never been short of anything to give them except the wage.
+   - `[face]` `[archiver · observed]` The granary has been seen opened and has not been seen empty.
+   - `[face]` `[market]` At the market they say the taking is done there and the deciding is done at the hall.
+   - `[face]` `[hall · compromised]` The hall says there is nothing in its accounts worth a stranger's time, and that the granary is the thing worth looking at.
+2. `[street]` Everyone in the town has seen the granary kept stocked, and takes it that a crisis would find the place ready.
+   - `[face]` `[hall · pair 2 · disagree]` The hall says the trades are asked for no more than the trades can carry.
+   - `[face]` `[guild · pair 2 · disagree]` The guilds say the carrying is theirs and the asking is not.
+   - `[face]` `[archiver · pair 2 · weigh]` The guilds' account is the likelier, the hall having a purse to defend and the guilds only a bill.
+   - `[face]` `[watch]` The watch says the rounds are kept by people who are owed for keeping them.
+   - `[face]` `[gate]` At the gate they say a cart bound for the granary is not kept waiting, whatever else is.
+   - `[face]` `[stranger]` A stranger who sits at the tavern hears the granary praised and the wage complained of, by the same people.
+   - `[face]` `[tavern]` At the tavern they say the watch is a trade that drinks on what it is owed.
+   - `[face]` `[garrison]` The garrison's account is that a town with full stores and an unmet wage has decided something, and has not said what.
+   - `[face]` `[market]` At the market they say the stallholders settle what the hall is owed before they settle anything of their own.
+   - `[face]` `[register]` The register says the town keeps its word to the dead before it keeps its word to the living.
+3. `[counterforce]` The hall holds that the town could be fed and supplied through a crisis, and at the tavern they say the people who would be paid through one are paid short already.
+   - `[face]` `[watch · pair 2 · reinforce]` The watch says the purse that pays it is opened last.
+   - `[face]` `[garrison · pair 2 · reinforce]` The soldiers say they are paid out of the same purse and in the same order.
+   - `[face]` `[hall]` The hall's answer, when the wage is raised, is the granary.
+   - `[face]` `[guild]` The guilds say openly that the provision is the trades' doing and the shortfall is the hall's.
+   - `[face]` `[stranger]` A stranger smells grain at the granary door and hears the wage complained of at the tavern.
+   - `[face]` `[register]` The register says it asks for nothing the town has not already promised it, and does not say what it has been given.
+   - `[face]` `[hall · compromised]` Asked about the purse, the hall talks about the granary, and asked again, talks about the granary again.
+   - `[face]` `[court]` The court says nobody has brought it the question of the watch's wage. It does not expect the hall to.
 
 **`Economic Survival`: `ADEQUATE`**
 1. `[ledger]` {settlement} can fund a short crisis. A long one begins eating reserves within a few months, and the reserves are not deep enough to hide that from anybody.
@@ -2783,9 +2887,36 @@ supplies the ancestry.
 3. `[street]` The town could not pay for a bad month at {settlement}, and the people who would have to be paid know it.
 
 **`Disasters & Famine`: granary AND hospital**
-1. `[ledger]` {settlement} holds food against a bad year and has somewhere to put the sick; between them the town can take a failed harvest or an outbreak without either becoming a catastrophe.
-2. `[street]` The town has a place for grain and a place for the ill, and knows exactly what having both is worth.
-3. `[counterforce]` Neither a failed harvest nor an outbreak turns into a catastrophe at {settlement}, and the reason is in the two buildings rather than in the luck.
+1. `[ledger]` {settlement} holds grain against a bad year and takes the sick in. It is not recorded whose word opens the granary.
+   - `[face]` `[hall · pair 1 · disagree]` A clerk in the hall says the grain is the town's and the key to the granary door is kept at the hall.
+   - `[face]` `[market · pair 1 · disagree]` At the market they say the granary door opens on the word of whoever fills the store, and that the hall is told afterwards.
+   - `[face]` `[register]` The sexton's view is that the house for the sick sends fewer to the ground than the town supposes, and that the ones it sends are the ones nobody else would have carried.
+   - `[face]` `[tavern · pair 2 · reinforce]` At the tavern the granary door is called the best kept thing in the town.
+   - `[face]` `[watch · pair 2 · reinforce]` One of the watch says the granary door is the first bar the night round is told to try.
+   - `[face]` `[stranger]` By a pedlar's account the way to the granary is pointed out here before the way to the inn.
+   - `[face]` `[gate]` At the gate the word is that the toll comes off grain as it comes off anything else, and that the store pays it like anyone.
+   - `[face]` `[guild]` The guilds say the trades pay toward a granary they have no hand in opening.
+   - `[face]` `[garrison]` One of the garrison says the store is what a siege is about, and that the door to it is not the garrison's to hold.
+2. `[street]` Everyone in the town knows which door the grain is behind and which door the sick are carried through, and takes it that the town is provided for.
+   - `[face]` `[hall · pair 1 · disagree]` The store is kept for a bad year and not for a bad week, a clerk in the hall says.
+   - `[face]` `[market · pair 1 · disagree]` The stallholders say a store that is not drawn on in a dear year is a store kept for somebody other than the town.
+   - `[face]` `[watch]` The watch holds that a full granary is a quieter thing to walk past than an empty one, and that it would rather the town never learned the difference.
+   - `[face]` `[tavern · pair 2 · view]` At the tavern the house for the sick is spoken of as somewhere a person is carried to and walks home from, and that is said with some pride.
+   - `[face]` `[register · pair 2 · view]` Those who bury say the dead that come from the house for the sick come washed, and the dead that come from anywhere else come as they are.
+   - `[face]` `[stranger]` A carter says that anyone asked the way to the house for the sick walks the asker there rather than pointing.
+   - `[face]` `[guild]` By the guilds' account the keeping of the granary falls on the trades and the deciding falls to the hall.
+   - `[face]` `[gate]` At the gate they say the grain carts are the loads least argued over, and that the toll on them is paid before it is asked for.
+   - `[face]` `[garrison]` The sick are taken in first and the wage settled after, the garrison says, and leaves it there.
+3. `[counterforce]` Who says when the granary door opens is answered one way at the hall and another at the market. The grain is in store and the door to it is kept.
+   - `[face]` `[hall · pair 1 · disagree]` A clerk in the hall holds that the grain is the town's and that, for the purpose of the door, the hall is the town.
+   - `[face]` `[tavern · pair 1 · disagree]` At the tavern they say the granary is minded by the hall and opened by whoever the hall listens to.
+   - `[face]` `[market]` The grain in store has an owner, the stallholders say, and the owner is not at the market.
+   - `[face]` `[register]` The register holds that whoever takes the sick in answers somewhere other than the hall, and does not say where.
+   - `[face]` `[watch]` The granary is on the night round and the sick are not, the watch says, and gives no reason for it.
+   - `[face]` `[gate]` Whoever holds the way through says what comes in for the store is passed on the hall's word and asked nothing after.
+   - `[face]` `[stranger]` A traveller reports that the town answers a question about the granary with a question about who is asking.
+   - `[face]` `[guild]` The trades are told the granary is for a bad year, the guilds say, and are not told what counts as one.
+   - `[face]` `[garrison]` The garrison says nobody has asked it to guard the grain, and does not say whether it would if asked.
 
 **`Disasters & Famine`: granary AND parish care only**
 1. `[ledger]` There is food stored at {settlement} and there are clergy who tend the sick: reserves against hunger, and against disease something better than nothing and well short of a hospital.

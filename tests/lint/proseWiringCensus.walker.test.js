@@ -690,9 +690,19 @@ describe('THE MAP READ THE OTHER WAY — fact → text, and the three tiers', ()
     // line the moment their wording faces gave them a second. The REWRITE's whole purpose is
     // to move pools across exactly this line, so the two counts move together, three for
     // three, and MISSING does not move at all (no held fact gained or lost a pool).
+    // ⭐⭐⭐ THIN 480 → 479 AND COVERED 228 → 229 AT THE 8b DS-DEF-2 DRAFT GATE'S SECOND SITTING,
+    // AND IT IS A WIN BANKED, NOT A DRIFT — but only ONE of the five pools landed there crosses
+    // the line, and the reason is worth writing down because it is not the one a reader expects.
+    // FOUR of the five already read `2 grammar(s)` (or gained a second from their faces:
+    // `Internal Security: full legal chain` 1 → 2, `Disasters & Famine: granary AND hospital`
+    // 1 → 3) and still carry `{settlement}` in a spine, and this tier's rule is `{settlement}`
+    // ALONE — so they stay THIN on the SLOT clause, not on the grammar clause. `Economic
+    // Survival: STRONG` crosses because the selector's spines carry NO slot at all: its count
+    // moves `slots {settlement}` → `slots {none}` and it lands COVERED. MISSING does not move
+    // (34), no held fact gained or lost a pool.
     expect(counts.get(TIERS.MISSING), 'held facts with no pool keyed on them').toBe(34);
-    expect(counts.get(TIERS.THIN), 'pools with one variant, one grammar, or {settlement} alone').toBe(480);
-    expect(counts.get(TIERS.COVERED), 'and the rest').toBe(228);
+    expect(counts.get(TIERS.THIN), 'pools with one variant, one grammar, or {settlement} alone').toBe(479);
+    expect(counts.get(TIERS.COVERED), 'and the rest').toBe(229);
     expect(counts.get(TIERS.THIN) + counts.get(TIERS.COVERED), 'every pool lands in one of the two pool tiers')
       .toBe(spines.length);
     for (const row of tiers) {

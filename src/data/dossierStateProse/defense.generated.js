@@ -457,25 +457,148 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "Beasts & Monsters: frontier, credible deterrence": [
         {
           "angle": "ledger",
-          "text": "{settlement} sits on an active frontier with a line and a force behind it. Most of what comes out of the country will not press a defended perimeter, and most of what comes here does not.",
+          "text": "{settlement} sits on an active frontier with a line around it and a force behind the line. Most of what comes out of the country does not press a kept perimeter.",
           "slots": [
             "settlement"
           ],
-          "vid": 1
+          "vid": 1,
+          "wordings": [
+            "A stranger says he was kept at the way through while somebody went to ask, and that he was never told who was asked.",
+            "Those who hold the way through say they can say who came in, and that nobody asks them who went out.",
+            "The elders hold that a household behind the line owes a day on it. The day is owed whether the household has a man to send or not.",
+            "A clerk in the hall says the line is kept out of the common purse.",
+            "The guilds say openly that it is kept out of the toll the trades pay at the way through.",
+            "At the tavern they say the men on the line are paid out of the same purse that keeps the line, and which of the two is paid first is the evening's argument.",
+            "The sexton says the ground is filled by the ordinary causes, and the country outside is not much among them.",
+            "The muster says it would hold the line against whatever the country sends, and that nobody asks it what the holding takes.",
+            "What reaches the court from the frontier is a dispute over what was counted at the way through, and the court says it hears no other kind.",
+            "One of the garrison says the same purse keeps the line and feeds the men on it, and asks which the hall would sooner see short.",
+            "Stallholders say everything on the tables came in through the way through and was counted there."
+          ],
+          "sources": [
+            null,
+            "stranger",
+            "gate",
+            "elders",
+            "hall",
+            "guild",
+            "tavern",
+            "register",
+            "muster",
+            "court",
+            "garrison",
+            "market"
+          ],
+          "pairs": [
+            null,
+            null,
+            null,
+            null,
+            {
+              "id": 1,
+              "kind": "disagree"
+            },
+            {
+              "id": 1,
+              "kind": "disagree"
+            },
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
         },
         {
           "angle": "street",
-          "text": "The town takes the frontier seriously and has taken it seriously long enough that the arrangements are ordinary rather than anxious.",
+          "text": "Everyone here knows what is in the country, and nobody here talks about it. The town takes that as the arrangement working.",
           "slots": [],
-          "vid": 2
+          "vid": 2,
+          "wordings": [
+            "A pedlar says nobody here asked him what he had seen on the road, and that he had an answer ready.",
+            "Those who hold the way through say the bar is dropped at dusk by whoever is nearest to it.",
+            "At the church it is said that the men on the line are prayed for in the same breath as the roads.",
+            "The hall says nothing about the nights has come to it as a complaint.",
+            "The watch says the complaints are made at the way through and go no further.",
+            "At the tavern the talk is of who turns out and who is only on the roll, and the country itself does not come up.",
+            "The garrison says nobody comes out of the town to watch a drill.",
+            "A guild factor says the toll at the way through is paid by the trades. The line it keeps is counted as everyone's.",
+            "At the market they say the stalls go up whatever the country is doing.",
+            "The court says a dispute over the toll is settled on the day it is brought, and that the country brings it none.",
+            "The elders say the young stand the nights and the old say how they are stood."
+          ],
+          "sources": [
+            null,
+            "stranger",
+            "gate",
+            "register",
+            "hall",
+            "watch",
+            "tavern",
+            "garrison",
+            "guild",
+            "market",
+            "court",
+            "elders"
+          ],
+          "pairs": [
+            null,
+            null,
+            {
+              "id": 5,
+              "kind": "aside"
+            },
+            {
+              "id": 5,
+              "kind": "aside"
+            },
+            {
+              "id": 2,
+              "kind": "disagree"
+            },
+            {
+              "id": 2,
+              "kind": "disagree"
+            },
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
         },
         {
           "angle": "counterforce",
-          "text": "Very little reaches {settlement} out of the wild country, and the reason is that the arrangements are visible from a long way off.",
-          "slots": [
-            "settlement"
+          "text": "A traveller says the line is seen from a long way down the road, and that he takes it what is in the country sees it too.",
+          "slots": [],
+          "vid": 3,
+          "wordings": [
+            "Stallholders say the trade comes in through the bar by daylight and does not say what it saw on the road.",
+            "The sexton says that whatever the country takes it takes on the road and not inside the line.",
+            "Those who hold the way through keep a light at the bar after dark and say it is there to be seen from the country.",
+            "The court says leaving the way through open is a matter it hears, and hears quickly.",
+            "The muster says being on the line in daylight is as much of the work as being on it after dark.",
+            "At the tavern a carter says the road in is walked in company. The company is paid for by whoever is carrying the most.",
+            "The garrison says the country is walked so that it does not have to be fought.",
+            "The guilds say the trade pays at the bar and works the road beyond it.",
+            "The hall calls the arrangement adequate, and uses the word to anyone who asks.",
+            "One of the elders says the line stands where the country can see it, and the village lives where the line can be seen from the doors."
           ],
-          "vid": 3
+          "sources": [
+            null,
+            "market",
+            "register",
+            "gate",
+            "court",
+            "muster",
+            "tavern",
+            "garrison",
+            "guild",
+            "hall",
+            "elders"
+          ]
         }
       ],
       "Beasts & Monsters: frontier, force without a perimeter": [
@@ -555,25 +678,110 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "Invasion & War: walls AND professional garrison": [
         {
           "angle": "ledger",
-          "text": "{settlement} has a line and professionals to hold it, which is real deterrence against raiding and against a conventional assault; it is not a posture rated for a long siege without stores behind it.",
+          "text": "Entry into {settlement} is controlled and the town pays soldiers of its own. The levy at the gate falls on whoever is passing through it.",
           "slots": [
             "settlement"
           ],
-          "vid": 1
+          "vid": 1,
+          "wordings": [
+            "A guild factor says the trades pay at the gate and pay again into the purse that keeps the gate.",
+            "The stallholders say the levy is paid by whoever carries the goods and borne by whoever eats them. A household at that stall pays it without ever standing at the gate.",
+            "At the tavern the soldiers are counted as custom, and the talk is which of them is off duty and which is not.",
+            "A clerk in the hall says what the gate takes reaches the purse whole.",
+            "The people on the gate say they hand over what they take and hear nothing of it after."
+          ],
+          "sources": [
+            null,
+            "guild",
+            "market",
+            "tavern",
+            "hall",
+            "gate"
+          ],
+          "pairs": [
+            null,
+            null,
+            null,
+            null,
+            {
+              "id": 1,
+              "kind": "view"
+            },
+            {
+              "id": 1,
+              "kind": "view"
+            }
+          ]
         },
         {
           "angle": "visitor",
-          "text": "A stranger sizing {settlement} up sees the two things that matter together (the wall and the men who belong to it) and revises what an attempt would cost.",
-          "slots": [
-            "settlement"
+          "text": "A traveller meets the town in the order the town means him to, stopped at the gate and counted before he is let through. What he is let into is a place that pays soldiers of its own to keep it.",
+          "slots": [],
+          "vid": 2,
+          "wordings": [
+            "The men on the gate say a stranger pays the gate, and the gate settles with the hall in its own time.",
+            "A clerk in the hall says a stranger who pays at the gate has paid the town, whatever the men at the gate tell him.",
+            "The court holds that the toll can be argued before it by anyone who paid it, a stranger as much as a carter.",
+            "A pedlar says his pack was opened at the gate and nothing was taken from it but the toll.",
+            "One of the elders says the town has never been asked whether it wants soldiers, only what they cost."
           ],
-          "vid": 2
+          "sources": [
+            null,
+            "gate",
+            "hall",
+            "court",
+            "stranger",
+            "elders"
+          ],
+          "pairs": [
+            null,
+            {
+              "id": 1,
+              "kind": "disagree"
+            },
+            {
+              "id": 1,
+              "kind": "disagree"
+            },
+            null,
+            null,
+            null
+          ]
         },
         {
           "angle": "street",
-          "text": "The town believes it could be held, and the belief is founded on something rather than on hope.",
+          "text": "The keeping of the gate and the soldiers' wages come out of one purse, and the town has settled which of the two it complains about.",
           "slots": [],
-          "vid": 3
+          "vid": 3,
+          "wordings": [
+            "A traveller says the town talks about what its soldiers cost and not at all about what they are for.",
+            "At the tavern a woman at the long table says the town would have the gate shut earlier if the shutting cost it nothing.",
+            "The sexton's view is that the town's confidence is well founded, and that the parish keeps ground ready in case it is not.",
+            "The soldiers say the town is glad of them after dark and has nothing to say to them before it.",
+            "One of the watch says the nights and the way through are one duty to the town and two to the people who keep them."
+          ],
+          "sources": [
+            null,
+            "stranger",
+            "tavern",
+            "register",
+            "garrison",
+            "watch"
+          ],
+          "pairs": [
+            null,
+            null,
+            null,
+            null,
+            {
+              "id": 3,
+              "kind": "view"
+            },
+            {
+              "id": 3,
+              "kind": "view"
+            }
+          ]
         }
       ],
       "Invasion & War: walls with citizen militia": [
@@ -822,27 +1030,137 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "Internal Security: full legal chain (court AND prison)": [
         {
           "angle": "ledger",
-          "text": "{settlement} can arrest, try and hold, and having all three means the town's law is a process rather than a threat.",
+          "text": "{settlement} keeps a watch to take a person up, a place to hear the matter, and a room with a lock on the outside of its door.",
           "slots": [
             "settlement"
           ],
-          "vid": 1
+          "vid": 1,
+          "wordings": [
+            "A clerk in the hall says the watch, the hearing and the cells are paid out of one purse, and that the hall hears complaints about all three.",
+            "At the tavern they say the cells are talked of more than they are seen from the inside.",
+            "By the night patrol's account a person taken up is a street left unwalked while they walk him in.",
+            "A guild factor says the trade pays for a court it does not use.",
+            "A magistrate holds that the court costs the town less than the town supposes, and does not say what it costs.",
+            "The traders say the town's coin keeps a room that nobody they know has been inside, and that they can name what else it might have kept.",
+            "Whoever keeps the gate says a name is asked there before it is asked anywhere else in the town.",
+            "The garrison's view is that the cells are the watch's to fill and the garrison's to walk past.",
+            "A drover says that in some towns a man pays to be heard, and that here he is told to sit and wait instead."
+          ],
+          "sources": [
+            null,
+            "hall",
+            "tavern",
+            "watch",
+            "guild",
+            "court",
+            "market",
+            "gate",
+            "garrison",
+            "stranger"
+          ]
         },
         {
           "angle": "street",
-          "text": "A thing done wrong at {settlement} goes somewhere and takes time, and the town has come to rely on that rather than on the watch's temper.",
-          "slots": [
-            "settlement"
+          "text": "It is common knowledge here that a person the watch takes up goes to a hearing and to the cells, and the town takes it that this is what settles a quarrel.",
+          "slots": [],
+          "vid": 2,
+          "wordings": [
+            "One of the watch says the patrol brings people to a door, and that the door is opened or not by whoever is inside.",
+            "A clerk in the hall says nothing is brought to the hall that the hall does not hear.",
+            "At the tavern, when somebody is taken up, the talk is of which door he comes out by and who was waiting at it.",
+            "Those who sit that day say they hear what is put in front of them and do not go looking for the rest.",
+            "A drover says a man who asks here where to take a complaint gets two answers, and both are given with confidence.",
+            "The sexton holds that the parish hears of a matter when it is over and not while the watch has it.",
+            "The traders say a matter that starts at a stall ends at the hall, and the stall is shut while it is heard.",
+            "By the garrison's account taking up townsfolk is the watch's work, and the garrison is content to leave it there.",
+            "A guild factor says the trades settle their own and bring the hall only what they cannot.",
+            "Those who keep the gate say a person is stopped there before the watch or the hearing ever sees him, and that the town's law begins at the gate whatever the hall says."
           ],
-          "vid": 2
+          "sources": [
+            null,
+            "watch",
+            "hall",
+            "tavern",
+            "court",
+            "stranger",
+            "register",
+            "market",
+            "garrison",
+            "guild",
+            "gate"
+          ],
+          "pairs": [
+            null,
+            {
+              "id": 1,
+              "kind": "disagree"
+            },
+            {
+              "id": 1,
+              "kind": "disagree"
+            },
+            null,
+            null,
+            null,
+            {
+              "id": 2,
+              "kind": "aside"
+            },
+            {
+              "id": 2,
+              "kind": "aside"
+            },
+            null,
+            null,
+            null
+          ]
         },
         {
           "angle": "visitor",
-          "text": "A stranger who brings a complaint at {settlement} is given a procedure rather than a favour, and the procedure runs.",
-          "slots": [
-            "settlement"
+          "text": "A traveller who brings a complaint here is shown where it is heard and where the person he names would be kept.",
+          "slots": [],
+          "vid": 3,
+          "wordings": [
+            "A clerk in the hall says a man waits because the matter before his is being heard properly.",
+            "A drover says a man waits because nobody has said whose business he is.",
+            "A magistrate holds that a traveller's complaint is heard like any other, and that whether the traveller stays to hear it is the traveller's affair.",
+            "At the tavern they say a man is called in sooner for who he knows than for what he brought.",
+            "One of the watch says his part of it ends at the door with the lock, and that what is on the other side of the door is not asked of him.",
+            "A soldier of the garrison puts it that a stranger stopped at the gate is the garrison's for as long as it takes to ask his business, and the watch's after that.",
+            "A guild factor says the trade pays for the waiting twice, in the man who waits and in the work that waits with him.",
+            "By the stallholders' account a stranger cheated at the market is told where to bring it, and a stallholder cheated by a stranger is told the same after the stranger has gone.",
+            "Those who keep the gate say a stranger with a complaint is let in for it, and a stranger with a complaint against him is kept at the gate until somebody comes for him."
           ],
-          "vid": 3
+          "sources": [
+            null,
+            "hall",
+            "stranger",
+            "court",
+            "tavern",
+            "watch",
+            "garrison",
+            "guild",
+            "market",
+            "gate"
+          ],
+          "pairs": [
+            null,
+            {
+              "id": 3,
+              "kind": "disagree"
+            },
+            {
+              "id": 3,
+              "kind": "disagree"
+            },
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
         }
       ],
       "Internal Security: court without detention": [
@@ -1006,25 +1324,195 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "Economic Survival: STRONG": [
         {
           "angle": "ledger",
-          "text": "{settlement} can absorb a sustained crisis out of its own revenue: emergency measures can be paid for and the garrison can be kept paid while they last.",
-          "slots": [
-            "settlement"
+          "text": "The town can be fed and supplied through a crisis. Nobody here has had to find the bottom of the stores.",
+          "slots": [],
+          "vid": 1,
+          "wordings": [
+            "The hall says the wage is met as far as the purse reaches.",
+            "The watch says the purse reaches further than the hall lets it.",
+            "It may be that both are right, and the one purse is full for one thing and short for another.",
+            "The register holds that a town which puts grain by for its living should put something by for its dead, and says so to the hall.",
+            "At the tavern they say the people who would have to turn out in a crisis are the same people who are owed.",
+            "The guilds say openly that what fills the granary is bought at the market and taxed at the same market, and that the trades pay at both ends.",
+            "A stranger sees the granary kept and nothing to say what the town is short of.",
+            "The soldiers say the town has never been short of anything to give them except the wage.",
+            "The granary has been seen opened and has not been seen empty.",
+            "At the market they say the taking is done there and the deciding is done at the hall.",
+            "The hall says there is nothing in its accounts worth a stranger's time, and that the granary is the thing worth looking at."
           ],
-          "vid": 1
+          "sources": [
+            null,
+            "hall",
+            "watch",
+            "archiver",
+            "register",
+            "tavern",
+            "guild",
+            "stranger",
+            "garrison",
+            "archiver",
+            "market",
+            "hall"
+          ],
+          "pairs": [
+            null,
+            {
+              "id": 1,
+              "kind": "disagree"
+            },
+            {
+              "id": 1,
+              "kind": "disagree"
+            },
+            {
+              "id": 1,
+              "kind": "weigh"
+            },
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "compromised": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            true
+          ],
+          "observed": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            true,
+            false,
+            false
+          ]
         },
         {
           "angle": "street",
-          "text": "The town could go through a bad season with its arrangements intact, and the people who would have to be paid through one know it.",
+          "text": "Everyone in the town has seen the granary kept stocked, and takes it that a crisis would find the place ready.",
           "slots": [],
-          "vid": 2
+          "vid": 2,
+          "wordings": [
+            "The hall says the trades are asked for no more than the trades can carry.",
+            "The guilds say the carrying is theirs and the asking is not.",
+            "The guilds' account is the likelier, the hall having a purse to defend and the guilds only a bill.",
+            "The watch says the rounds are kept by people who are owed for keeping them.",
+            "At the gate they say a cart bound for the granary is not kept waiting, whatever else is.",
+            "A stranger who sits at the tavern hears the granary praised and the wage complained of, by the same people.",
+            "At the tavern they say the watch is a trade that drinks on what it is owed.",
+            "The garrison's account is that a town with full stores and an unmet wage has decided something, and has not said what.",
+            "At the market they say the stallholders settle what the hall is owed before they settle anything of their own.",
+            "The register says the town keeps its word to the dead before it keeps its word to the living."
+          ],
+          "sources": [
+            null,
+            "hall",
+            "guild",
+            "archiver",
+            "watch",
+            "gate",
+            "stranger",
+            "tavern",
+            "garrison",
+            "market",
+            "register"
+          ],
+          "pairs": [
+            null,
+            {
+              "id": 2,
+              "kind": "disagree"
+            },
+            {
+              "id": 2,
+              "kind": "disagree"
+            },
+            {
+              "id": 2,
+              "kind": "weigh"
+            },
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
         },
         {
           "angle": "counterforce",
-          "text": "Trouble at {settlement} has not turned into a collapse, and the reason is money. A town that can pay through a crisis mostly does.",
-          "slots": [
-            "settlement"
+          "text": "The hall holds that the town could be fed and supplied through a crisis, and at the tavern they say the people who would be paid through one are paid short already.",
+          "slots": [],
+          "vid": 3,
+          "wordings": [
+            "The watch says the purse that pays it is opened last.",
+            "The soldiers say they are paid out of the same purse and in the same order.",
+            "The hall's answer, when the wage is raised, is the granary.",
+            "The guilds say openly that the provision is the trades' doing and the shortfall is the hall's.",
+            "A stranger smells grain at the granary door and hears the wage complained of at the tavern.",
+            "The register says it asks for nothing the town has not already promised it, and does not say what it has been given.",
+            "Asked about the purse, the hall talks about the granary, and asked again, talks about the granary again.",
+            "The court says nobody has brought it the question of the watch's wage. It does not expect the hall to."
           ],
-          "vid": 3
+          "sources": [
+            null,
+            "watch",
+            "garrison",
+            "hall",
+            "guild",
+            "stranger",
+            "register",
+            "hall",
+            "court"
+          ],
+          "pairs": [
+            null,
+            {
+              "id": 2,
+              "kind": "reinforce"
+            },
+            {
+              "id": 2,
+              "kind": "reinforce"
+            },
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "compromised": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            true,
+            false
+          ]
         }
       ],
       "Economic Survival: ADEQUATE": [
@@ -1104,25 +1592,158 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "Disasters & Famine: granary AND hospital": [
         {
           "angle": "ledger",
-          "text": "{settlement} holds food against a bad year and has somewhere to put the sick; between them the town can take a failed harvest or an outbreak without either becoming a catastrophe.",
+          "text": "{settlement} holds grain against a bad year and takes the sick in. It is not recorded whose word opens the granary.",
           "slots": [
             "settlement"
           ],
-          "vid": 1
+          "vid": 1,
+          "wordings": [
+            "A clerk in the hall says the grain is the town's and the key to the granary door is kept at the hall.",
+            "At the market they say the granary door opens on the word of whoever fills the store, and that the hall is told afterwards.",
+            "The sexton's view is that the house for the sick sends fewer to the ground than the town supposes, and that the ones it sends are the ones nobody else would have carried.",
+            "At the tavern the granary door is called the best kept thing in the town.",
+            "One of the watch says the granary door is the first bar the night round is told to try.",
+            "By a pedlar's account the way to the granary is pointed out here before the way to the inn.",
+            "At the gate the word is that the toll comes off grain as it comes off anything else, and that the store pays it like anyone.",
+            "The guilds say the trades pay toward a granary they have no hand in opening.",
+            "One of the garrison says the store is what a siege is about, and that the door to it is not the garrison's to hold."
+          ],
+          "sources": [
+            null,
+            "hall",
+            "market",
+            "register",
+            "tavern",
+            "watch",
+            "stranger",
+            "gate",
+            "guild",
+            "garrison"
+          ],
+          "pairs": [
+            null,
+            {
+              "id": 1,
+              "kind": "disagree"
+            },
+            {
+              "id": 1,
+              "kind": "disagree"
+            },
+            null,
+            {
+              "id": 2,
+              "kind": "reinforce"
+            },
+            {
+              "id": 2,
+              "kind": "reinforce"
+            },
+            null,
+            null,
+            null,
+            null
+          ]
         },
         {
           "angle": "street",
-          "text": "The town has a place for grain and a place for the ill, and knows exactly what having both is worth.",
+          "text": "Everyone in the town knows which door the grain is behind and which door the sick are carried through, and takes it that the town is provided for.",
           "slots": [],
-          "vid": 2
+          "vid": 2,
+          "wordings": [
+            "The store is kept for a bad year and not for a bad week, a clerk in the hall says.",
+            "The stallholders say a store that is not drawn on in a dear year is a store kept for somebody other than the town.",
+            "The watch holds that a full granary is a quieter thing to walk past than an empty one, and that it would rather the town never learned the difference.",
+            "At the tavern the house for the sick is spoken of as somewhere a person is carried to and walks home from, and that is said with some pride.",
+            "Those who bury say the dead that come from the house for the sick come washed, and the dead that come from anywhere else come as they are.",
+            "A carter says that anyone asked the way to the house for the sick walks the asker there rather than pointing.",
+            "By the guilds' account the keeping of the granary falls on the trades and the deciding falls to the hall.",
+            "At the gate they say the grain carts are the loads least argued over, and that the toll on them is paid before it is asked for.",
+            "The sick are taken in first and the wage settled after, the garrison says, and leaves it there."
+          ],
+          "sources": [
+            null,
+            "hall",
+            "market",
+            "watch",
+            "tavern",
+            "register",
+            "stranger",
+            "guild",
+            "gate",
+            "garrison"
+          ],
+          "pairs": [
+            null,
+            {
+              "id": 1,
+              "kind": "disagree"
+            },
+            {
+              "id": 1,
+              "kind": "disagree"
+            },
+            null,
+            {
+              "id": 2,
+              "kind": "view"
+            },
+            {
+              "id": 2,
+              "kind": "view"
+            },
+            null,
+            null,
+            null,
+            null
+          ]
         },
         {
           "angle": "counterforce",
-          "text": "Neither a failed harvest nor an outbreak turns into a catastrophe at {settlement}, and the reason is in the two buildings rather than in the luck.",
-          "slots": [
-            "settlement"
+          "text": "Who says when the granary door opens is answered one way at the hall and another at the market. The grain is in store and the door to it is kept.",
+          "slots": [],
+          "vid": 3,
+          "wordings": [
+            "A clerk in the hall holds that the grain is the town's and that, for the purpose of the door, the hall is the town.",
+            "At the tavern they say the granary is minded by the hall and opened by whoever the hall listens to.",
+            "The grain in store has an owner, the stallholders say, and the owner is not at the market.",
+            "The register holds that whoever takes the sick in answers somewhere other than the hall, and does not say where.",
+            "The granary is on the night round and the sick are not, the watch says, and gives no reason for it.",
+            "Whoever holds the way through says what comes in for the store is passed on the hall's word and asked nothing after.",
+            "A traveller reports that the town answers a question about the granary with a question about who is asking.",
+            "The trades are told the granary is for a bad year, the guilds say, and are not told what counts as one.",
+            "The garrison says nobody has asked it to guard the grain, and does not say whether it would if asked."
           ],
-          "vid": 3
+          "sources": [
+            null,
+            "hall",
+            "tavern",
+            "market",
+            "register",
+            "watch",
+            "gate",
+            "stranger",
+            "guild",
+            "garrison"
+          ],
+          "pairs": [
+            null,
+            {
+              "id": 1,
+              "kind": "disagree"
+            },
+            {
+              "id": 1,
+              "kind": "disagree"
+            },
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
         }
       ],
       "Disasters & Famine: granary AND parish care only": [
@@ -1344,9 +1965,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         "role": "spine",
         "variantCount": 3,
         "faceCounts": [
-          1,
-          1,
-          1
+          12,
+          12,
+          11
         ],
         "vids": [
           1,
@@ -1408,9 +2029,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         "role": "spine",
         "variantCount": 3,
         "faceCounts": [
-          1,
-          1,
-          1
+          6,
+          6,
+          6
         ],
         "vids": [
           1,
@@ -1504,9 +2125,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         "role": "spine",
         "variantCount": 3,
         "faceCounts": [
-          1,
-          1,
-          1
+          10,
+          11,
+          10
         ],
         "vids": [
           1,
@@ -1568,9 +2189,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         "role": "spine",
         "variantCount": 3,
         "faceCounts": [
-          1,
-          1,
-          1
+          12,
+          11,
+          9
         ],
         "vids": [
           1,
@@ -1632,9 +2253,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         "role": "spine",
         "variantCount": 3,
         "faceCounts": [
-          1,
-          1,
-          1
+          10,
+          10,
+          10
         ],
         "vids": [
           1,

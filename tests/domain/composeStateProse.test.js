@@ -163,11 +163,21 @@ const FACED_AT = `${FACED_BLOCK} :: ${FACED_POOL}`;
 // still assert the equality over the other 704 pools BY MEASUREMENT. ⛔ THE NEW THREE NAME NO
 // ATTRIBUTION SLOT, so unlike `walls with NO force` they do not fail closed on a roles-less
 // read: their drift is TEXT + SPINE on every seed that draws a face other than the spine.
+// ⭐⭐⭐ RE-PINNED AGAIN AT THE 8b DS-DEF-2 DRAFT GATE'S SECOND SITTING (v3). FIVE more pools of
+// the SAME block landed wording faces in one commit, so the list is nine. Every entry is still
+// inside DS-DEF-2 — nothing outside this block carries a face — and the arms below still assert
+// the equality over the other 699 pools BY MEASUREMENT. ⛔ THE NEW FIVE NAME NO ATTRIBUTION SLOT
+// either, so their drift is TEXT + SPINE on every seed that draws a face other than the spine.
 const FACED_POOLS = Object.freeze([
   FACED_POOL,
   'Invasion & War: force with NO walls',
   'Internal Security: no legal infrastructure',
   'Disasters & Famine: NO reserves, NO medical provision',
+  'Beasts & Monsters: frontier, credible deterrence',
+  'Invasion & War: walls AND professional garrison',
+  'Internal Security: full legal chain (court AND prison)',
+  'Economic Survival: STRONG',
+  'Disasters & Famine: granary AND hospital',
 ]);
 const FACED_ATS = Object.freeze(FACED_POOLS.map((pool) => `${FACED_BLOCK} :: ${pool}`));
 /** @param {string} row a drift line @param {boolean} [prefix] match at the head only */
@@ -374,9 +384,18 @@ describe('⭐ THE BASE-SIDE SYNTHESIS — every recorded cell, against the compo
     expect(real.length).toBe(0);
     // AND THE CARVE-OUT IS BOUNDED: every blind cell is a faced pool's, records the exact
     // `-1/-1` against `null/null` shape, and agrees with the recorder on the face itself.
+    // ⛔⛔ RE-PINNED AT THE 8b DS-DEF-2 DRAFT GATE'S SECOND SITTING, AND THE BLIND SPOT GREW
+    // WITH THE LANDING RATHER THAN BEING WIDENED BY THIS ARM: four of the five pools landed
+    // here name no attribution slot either, so their faces draw on a roles-less read and the
+    // recorder cannot name the variant behind a rendered FACE. The list is NAMED pool by pool
+    // and the count is PINNED, so any pool that goes blind without being landed still reds.
     expect([...new Set(blind.map((row) => row.pool))].sort(), 'the blind cells are the faced pools\' own')
-      .toEqual(['Internal Security: no legal infrastructure']);
-    expect(blind.length, 'and the blind spot is the size the gate measured').toBe(504);
+      .toEqual(['Disasters & Famine: granary AND hospital',
+        'Economic Survival: STRONG',
+        'Internal Security: full legal chain (court AND prison)',
+        'Internal Security: no legal infrastructure',
+        'Invasion & War: walls AND professional garrison']);
+    expect(blind.length, 'and the blind spot is the size the gate measured').toBe(2080);
     expect(checked, 'the whole recorded table').toBe(run.cells.length);
     expect(run.rows.size, 'and the table is the full DRIFT corpus').toBe(1050);
     // NON-VACUITY OF THE RE-PIN: the DRIFT run really does reach the one faced pool, and

@@ -264,24 +264,42 @@ describe('WHERE THE TWO NEW FORMS SHIP — one pool, named face by face', () => 
   // are RE-PINNED to name the ONE pool that carries them, and a second pool landing either
   // form reds here by name and is re-pinned in its own cure commit.
   const FACED = 'DS-DEF-2 :: Invasion & War: walls with NO force';
+  // ⭐⭐ RE-FROZEN AT THE 8b DS-DEF-2 DRAFT GATE'S SECOND SITTING. `Economic Survival: STRONG`
+  // is the SECOND pool in the corpus to carry the archiver's OBSERVATION (ruling 27) — and the
+  // first to carry the archiver's WEIGH (ruling 22) and the `compromised` flag (ruling 26). It
+  // carries NO public face, so the `public` arm below is unchanged and still names one pool.
+  // Both movers are named here, and a third pool landing either form reds by name.
+  const FACED_OBSERVED = 'DS-DEF-2 :: Economic Survival: STRONG';
+  const MOVERS = [FACED, FACED_OBSERVED];
 
   it('⭐ exactly one variant carries an `observed` list, and exactly one carries a `public` face', () => {
     const observed = EVERY_VARIANT.filter(({ variant }) => Array.isArray(variant.observed));
     const publics = EVERY_VARIANT.filter(({ variant }) => Array.isArray(variant.sources)
       && variant.sources.includes(PUBLIC_SOURCE));
-    expect(observed.map((r) => `${r.blockId} :: ${r.poolKey}`)).toEqual([FACED]);
+    expect(observed.map((r) => `${r.blockId} :: ${r.poolKey}`)).toEqual([FACED, FACED_OBSERVED]);
     expect(publics.map((r) => `${r.blockId} :: ${r.poolKey}`)).toEqual([FACED]);
     // ⛔ AND THE OBSERVED FACE IS THE ARCHIVER'S, ALONE, AND CARRIES NO PAIR — the three rules
     // of ruling 27 asserted against the shipped leaf rather than against a fixture.
-    const [row] = observed;
-    const at = row.variant.observed.indexOf(true);
-    expect(row.variant.observed.filter(Boolean).length, 'one per variant').toBe(1);
-    expect(row.variant.sources[at]).toBe(ARCHIVER_SOURCE);
-    expect(row.variant.pairs).toBeUndefined();
-    expect(row.variant.wordings[at - 1], 'a BARE PASSIVE with no observer named (ruling 40)')
+    // ⭐ THE THREE RULES OF RULING 27 ON EVERY OBSERVED VARIANT, not just the first: one mark
+    // per variant, the archiver's own, and no slot in the sentence. ⛔ `pairs` is asserted
+    // ABSENT only on the pool that has no pair at all — `Economic Survival: STRONG` carries the
+    // archiver's WEIGH beside its observation, so the rule that binds there is the narrower one
+    // ruling 27 actually states: the OBSERVED face itself carries no pair mark.
+    for (const row of observed) {
+      const at = row.variant.observed.indexOf(true);
+      expect(row.variant.observed.filter(Boolean).length, 'one per variant').toBe(1);
+      expect(row.variant.sources[at]).toBe(ARCHIVER_SOURCE);
+      expect((row.variant.pairs || [])[at] ?? null, 'the observed face carries no pair').toBe(null);
+      expect(row.variant.wordings[at - 1]).not.toMatch(/\{/);
+    }
+    expect(observed[0].variant.pairs).toBeUndefined();
+    expect(observed[0].variant.wordings[observed[0].variant.observed.indexOf(true) - 1],
+      'a BARE PASSIVE with no observer named (ruling 40)')
       .toBe('No soldier has been seen on the wall at night.');
-    expect(row.variant.wordings[at - 1]).not.toMatch(/\{/);
-    process.stdout.write(`\n[18n] ${EVERY_VARIANT.length} shipped variants: 1 observed · 1 public\n`);
+    expect(observed[1].variant.wordings[observed[1].variant.observed.indexOf(true) - 1],
+      'and the second observation is a BARE PASSIVE too')
+      .toBe('The granary has been seen opened and has not been seen empty.');
+    process.stdout.write(`\n[18n] ${EVERY_VARIANT.length} shipped variants: 2 observed · 1 public\n`);
   });
 
   it('⛔ and every OTHER variant\'s eligible list is what it was, variant for variant', () => {
@@ -305,7 +323,7 @@ describe('WHERE THE TWO NEW FORMS SHIP — one pool, named face by face', () => 
     let compared = 0;
     let moved = 0;
     for (const { blockId, poolKey, variant } of EVERY_VARIANT) {
-      const faced = `${blockId} :: ${poolKey}` === FACED;
+      const faced = MOVERS.includes(`${blockId} :: ${poolKey}`);
       for (const roster of rosters) {
         const now = eligibleFaces(variant, roster);
         const then = before(variant, roster);
@@ -320,6 +338,6 @@ describe('WHERE THE TWO NEW FORMS SHIP — one pool, named face by face', () => 
     // register's `face-count-per-variant` row carries. An arm that carved it out without
     // proving it moved would be a carve-out around nothing.
     expect(moved, 'the named mover moved').toBeGreaterThan(0);
-    process.stdout.write(`[18n] ${compared} eligible lists against the pre-18n predicate: ${moved} moved, all in ${FACED}\n`);
+    process.stdout.write(`[18n] ${compared} eligible lists against the pre-18n predicate: ${moved} moved, all in ${MOVERS.join(' | ')}\n`);
   });
 });

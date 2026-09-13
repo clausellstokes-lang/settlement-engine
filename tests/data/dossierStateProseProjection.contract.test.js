@@ -2017,6 +2017,75 @@ describe('SEAM car 4 — §2.5\'s grammar, and every refusal it declares', () =>
       sources: [null, 'stranger', 'tavern', 'elders', 'register', 'market'],
       pairs: undefined,
     },
+    // ⭐⭐⭐ RE-PINNED AT THE 8b DS-DEF-2 DRAFT GATE (v3), SECOND SITTING, which landed FIVE MORE
+    // pools of this same block in one commit: `Beasts & Monsters: frontier, credible deterrence`,
+    // `Invasion & War: walls AND professional garrison`, `Internal Security: full legal chain
+    // (court AND prison)`, `Economic Survival: STRONG` and `Disasters & Famine: granary AND
+    // hospital`. `Economic Survival: STRONG` is the FIRST pool anywhere to carry the archiver's
+    // `weigh` (ruling 22) and the `compromised` mark (ruling 26), and it takes a SECOND seat for
+    // the archiver's `observed` (ruling 27) — so the observed arm below moves from one variant to
+    // two and is re-pinned by name rather than widened to a predicate. Nothing OUTSIDE DS-DEF-2
+    // carries a face, and that arm is unchanged.
+    'DS-DEF-2 :: Beasts & Monsters: frontier, credible deterrence #0': {
+      sources: [null, 'stranger', 'gate', 'elders', 'hall', 'guild', 'tavern', 'register', 'muster', 'court', 'garrison', 'market'],
+      pairs: [null, null, null, null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null, null, null, null, null, null],
+    },
+    'DS-DEF-2 :: Beasts & Monsters: frontier, credible deterrence #1': {
+      sources: [null, 'stranger', 'gate', 'register', 'hall', 'watch', 'tavern', 'garrison', 'guild', 'market', 'court', 'elders'],
+      pairs: [null, null, { id: 5, kind: 'aside' }, { id: 5, kind: 'aside' }, { id: 2, kind: 'disagree' }, { id: 2, kind: 'disagree' }, null, null, null, null, null, null],
+    },
+    'DS-DEF-2 :: Beasts & Monsters: frontier, credible deterrence #2': {
+      sources: [null, 'market', 'register', 'gate', 'court', 'muster', 'tavern', 'garrison', 'guild', 'hall', 'elders'],
+      pairs: undefined,
+    },
+    'DS-DEF-2 :: Invasion & War: walls AND professional garrison #0': {
+      sources: [null, 'guild', 'market', 'tavern', 'hall', 'gate'],
+      pairs: [null, null, null, null, { id: 1, kind: 'view' }, { id: 1, kind: 'view' }],
+    },
+    'DS-DEF-2 :: Invasion & War: walls AND professional garrison #1': {
+      sources: [null, 'gate', 'hall', 'court', 'stranger', 'elders'],
+      pairs: [null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null, null, null],
+    },
+    'DS-DEF-2 :: Invasion & War: walls AND professional garrison #2': {
+      sources: [null, 'stranger', 'tavern', 'register', 'garrison', 'watch'],
+      pairs: [null, null, null, null, { id: 3, kind: 'view' }, { id: 3, kind: 'view' }],
+    },
+    'DS-DEF-2 :: Internal Security: full legal chain (court AND prison) #0': {
+      sources: [null, 'hall', 'tavern', 'watch', 'guild', 'court', 'market', 'gate', 'garrison', 'stranger'],
+      pairs: undefined,
+    },
+    'DS-DEF-2 :: Internal Security: full legal chain (court AND prison) #1': {
+      sources: [null, 'watch', 'hall', 'tavern', 'court', 'stranger', 'register', 'market', 'garrison', 'guild', 'gate'],
+      pairs: [null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null, null, null, { id: 2, kind: 'aside' }, { id: 2, kind: 'aside' }, null, null, null],
+    },
+    'DS-DEF-2 :: Internal Security: full legal chain (court AND prison) #2': {
+      sources: [null, 'hall', 'stranger', 'court', 'tavern', 'watch', 'garrison', 'guild', 'market', 'gate'],
+      pairs: [null, { id: 3, kind: 'disagree' }, { id: 3, kind: 'disagree' }, null, null, null, null, null, null, null],
+    },
+    'DS-DEF-2 :: Economic Survival: STRONG #0': {
+      sources: [null, 'hall', 'watch', 'archiver', 'register', 'tavern', 'guild', 'stranger', 'garrison', 'archiver', 'market', 'hall'],
+      pairs: [null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, { id: 1, kind: 'weigh' }, null, null, null, null, null, null, null, null],
+    },
+    'DS-DEF-2 :: Economic Survival: STRONG #1': {
+      sources: [null, 'hall', 'guild', 'archiver', 'watch', 'gate', 'stranger', 'tavern', 'garrison', 'market', 'register'],
+      pairs: [null, { id: 2, kind: 'disagree' }, { id: 2, kind: 'disagree' }, { id: 2, kind: 'weigh' }, null, null, null, null, null, null, null],
+    },
+    'DS-DEF-2 :: Economic Survival: STRONG #2': {
+      sources: [null, 'watch', 'garrison', 'hall', 'guild', 'stranger', 'register', 'hall', 'court'],
+      pairs: [null, { id: 2, kind: 'reinforce' }, { id: 2, kind: 'reinforce' }, null, null, null, null, null, null],
+    },
+    'DS-DEF-2 :: Disasters & Famine: granary AND hospital #0': {
+      sources: [null, 'hall', 'market', 'register', 'tavern', 'watch', 'stranger', 'gate', 'guild', 'garrison'],
+      pairs: [null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null, { id: 2, kind: 'reinforce' }, { id: 2, kind: 'reinforce' }, null, null, null, null],
+    },
+    'DS-DEF-2 :: Disasters & Famine: granary AND hospital #1': {
+      sources: [null, 'hall', 'market', 'watch', 'tavern', 'register', 'stranger', 'guild', 'gate', 'garrison'],
+      pairs: [null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null, { id: 2, kind: 'view' }, { id: 2, kind: 'view' }, null, null, null, null],
+    },
+    'DS-DEF-2 :: Disasters & Famine: granary AND hospital #2': {
+      sources: [null, 'hall', 'tavern', 'market', 'register', 'watch', 'gate', 'stranger', 'guild', 'garrison'],
+      pairs: [null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null, null, null, null, null, null, null],
+    },
   });
 
   it('⭐ exactly ONE pool ships `sources`/`pairs` — DS-DEF-2, named face by face; every other block is still the zero-shift ground of car 8b-W-18c', () => {
@@ -2037,19 +2106,33 @@ describe('SEAM car 4 — §2.5\'s grammar, and every refusal it declares', () =>
       .map(({ id, pool, at }) => `${id} :: ${pool} #${at}`);
     expect(elsewhere).toEqual([]);
     // And the counts the shift register's `face-count-per-variant` row now pins: 65 sourced
-    // faces over 12 variants of FOUR pools, and SEVEN pairs, each carried by exactly two faces
-    // (14 paired halves). Re-pinned at the 8b DS-DEF-2 draft gate from [3, 11, 2].
+    // faces over 27 variants of NINE pools, and 25 pair marks' worth of halves and weighings
+    // (50 rows carrying a pair id: 23 pairs of halves plus two archiver `weigh` rows). Re-pinned
+    // at the 8b DS-DEF-2 draft gate's SECOND sitting from [12, 65, 14], itself from [3, 11, 2].
     const sourced = rows.reduce((n, r) => n + (r.v.sources || []).filter((x) => x !== null).length, 0);
     const paired = rows.reduce((n, r) => n + (r.v.pairs || []).filter((x) => x !== null).length, 0);
-    expect([rows.length, sourced, paired]).toEqual([12, 65, 14]);
+    expect([rows.length, sourced, paired]).toEqual([27, 196, 50]);
     // ⭐ AND THE OBSERVED LIST IS EMITTED ON EXACTLY ONE VARIANT, which is the mark's own
     // zero-shift ground: a variant with no observed face carries no `observed` key at all.
     const observed = allStateBlocks.flatMap(([id, b]) => Object.entries(b.pools)
       .flatMap(([pool, variants]) => variants.map((v, at) => ({ key: `${id} :: ${pool} #${at}`, v }))))
       .filter(({ v }) => v.observed !== undefined);
     expect(observed.map((r) => r.key))
-      .toEqual(['DS-DEF-2 :: Invasion & War: walls with NO force #1']);
+      .toEqual(['DS-DEF-2 :: Invasion & War: walls with NO force #1',
+        'DS-DEF-2 :: Economic Survival: STRONG #0']);
     expect(observed[0].v.observed).toEqual([false, false, false, false, true]);
+    expect(observed[1].v.observed)
+      .toEqual([false, false, false, false, false, false, false, false, false, true, false, false]);
+    // ⭐ AND THE COMPROMISED LIST, WHOSE ZERO-SHIFT GROUND ENDS HERE (ruling 26): `Economic
+    // Survival: STRONG` is the first pool in the corpus to mark a face compromised, on two of
+    // its three variants and on the `hall` both times, which is inside the closed table.
+    const compromised = allStateBlocks.flatMap(([id, b]) => Object.entries(b.pools)
+      .flatMap(([pool, variants]) => variants.map((v, at) => ({ key: `${id} :: ${pool} #${at}`, v }))))
+      .filter(({ v }) => v.compromised !== undefined);
+    expect(compromised.map((r) => r.key))
+      .toEqual(['DS-DEF-2 :: Economic Survival: STRONG #0',
+        'DS-DEF-2 :: Economic Survival: STRONG #2']);
+    expect(compromised.map((r) => r.v.compromised.filter(Boolean).length)).toEqual([1, 1]);
   });
 
   it('PLANT: a RENUMBERING that would move an existing vid, and a count above its pin', () => {

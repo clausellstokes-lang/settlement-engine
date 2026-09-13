@@ -37,8 +37,8 @@
     "syntheticTableFields": 122,
     "tiers": {
       "MISSING": 34,
-      "THIN": 480,
-      "COVERED": 228,
+      "THIN": 479,
+      "COVERED": 229,
       "MISSING-AT-TIER": 45
     },
     "tierSilences": 352,
@@ -1433,7 +1433,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 1,
+      "grammars": 2,
       "predicate": [
         {
           "field": "court",
@@ -1686,9 +1686,7 @@
         "defmaterial",
         "settlement"
       ],
-      "slotsNamed": [
-        "settlement"
-      ],
+      "slotsNamed": [],
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
@@ -1928,7 +1926,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 1,
+      "grammars": 3,
       "predicate": [
         {
           "field": "disasterRowSituation(granary, hospital, church) (via DISASTER_ROW_POOL in defenseStateProse.js)",
@@ -39254,7 +39252,7 @@
         "DS-DEF-2 :: Internal Security: court without detention"
       ],
       "variants": 6,
-      "grammars": 3,
+      "grammars": 4,
       "blocks": [
         "DS-DEF-2"
       ]
@@ -39280,7 +39278,7 @@
         "DS-DEF-2 :: Disasters & Famine: NO reserves, NO medical provision"
       ],
       "variants": 15,
-      "grammars": 8,
+      "grammars": 10,
       "blocks": [
         "DS-DEF-2"
       ]
@@ -39604,7 +39602,7 @@
         "DS-DEF-2 :: Internal Security: full legal chain (court AND prison)"
       ],
       "variants": 3,
-      "grammars": 1,
+      "grammars": 2,
       "blocks": [
         "DS-DEF-2"
       ]
@@ -48341,7 +48339,7 @@
         "prison"
       ],
       "readingFunction": "internalRowPoolKey",
-      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -48370,14 +48368,14 @@
       "count": "3 variant(s) · 2 grammar(s) · slots {none}"
     },
     {
-      "tier": "THIN",
+      "tier": "COVERED",
       "block": "DS-DEF-2",
       "subject": "Economic Survival: STRONG",
       "fields": [
         "scoreBand(economicScore) (via ECONOMIC_ROW_POOL in defenseStateProse.js)"
       ],
       "readingFunction": "ECONOMIC_ROW_POOL",
-      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 2 grammar(s) · slots {none}"
     },
     {
       "tier": "THIN",
@@ -48417,7 +48415,7 @@
         "disasterRowSituation(granary, hospital, church) (via DISASTER_ROW_POOL in defenseStateProse.js)"
       ],
       "readingFunction": "DISASTER_ROW_POOL",
-      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 3 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
