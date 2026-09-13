@@ -1,15 +1,15 @@
-# LANE-STATUS — written 2026-09-13 13:20:16 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-13 13:25:32 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = c2b72466a Plan: wave 3 has begun — batch 2 of DS-DEF-2 (three pools) through draft 065b9ded6 and c
 
 ## BUILD / KIT LANES (dock · base · cars · porcelain · receipt)
 - REWRITE 8b DS-DEF-11 (the validation block; cure round): dock laneRW-DEF11 ABSENT
 - REWRITE 8b-W (the wiring car, landed in its dock = the consist lineage): dock laneRW-DEFW ABSENT
-- **DS-DEF-2 (waits for the tables)** dock `laneRW-DEF2` HEAD db54f803b · 32 cars over f2da5a3ee · porcelain 0 · last commits:
+- **DS-DEF-2 (waits for the tables)** dock `laneRW-DEF2` HEAD 31d845621 · 33 cars over f2da5a3ee · porcelain 0 · last commits:
+    31d845621 REWRITE 8b DS-DEF-2 cure 4 (the chair's cut by name): the frontier packet lands minus one citation, and the garrison stops presupposing a wall
     db54f803b REWRITE 8b DS-DEF-2 cure (v3): 4/5 pools
     d57c601cf REWRITE 8b DS-DEF-2 draft (v3): 5/5 pools
     fb81210b2 REWRITE 8b DS-DEF-2 cure (v3): 3/3 pools
-    065b9ded6 REWRITE 8b DS-DEF-2 draft (v3): 3/3 pools
     receipt `receipt-rewrite.md` (mtime 09-12 20:49) head:
       | # RECEIPT — the REWRITE train
       | 
@@ -167,4 +167,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `ab8783d22` WRITER Invasion & War: walls with NO force · DONE · transcript 09-13 02:30 725 KB · 17 tool calls · files: candidates-2.md, facetext.txt, ft2.txt · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasio
 
 ## PROCESSES: 
-load: 1.92 2.34 2.26
+load: 2.28 2.32 2.27
