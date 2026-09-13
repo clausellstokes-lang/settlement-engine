@@ -10,6 +10,21 @@ import { registerStep } from '../pipeline.js';
 import { getMirrorFactionLabel, getOpposeFactionLabel, getMundaneLoreFactionLabel } from '../neighbourGenerator.js';
 import { renormalizeFactionPower } from '../power/rulingStructure.js';
 import { recordTrace } from '../../domain/trace.js';
+import { backedArchetypesOf } from '../../domain/factionBacking.js';
+
+/**
+ * The neighbour bias's faction TYPE vocabulary (neighbourGenerator's
+ * dominantFactionTypes / FACTION_OPPOSITION keys) → the standing powers that type
+ * seats here. `government` is absent on purpose: the seat is never gated (R14).
+ * @type {Readonly<Record<string, ReadonlyArray<string>>>}
+ */
+const NEIGHBOUR_TYPE_POWERS = Object.freeze({
+  military: Object.freeze(['military']),
+  religious: Object.freeze(['religious']),
+  criminal: Object.freeze(['criminal']),
+  magic: Object.freeze(['arcane']),
+  economy: Object.freeze(['merchant', 'craft']),
+});
 
 // Mirror applyLegitimacyMultipliers' label bands (factionDynamics.js) — injected
 // neighbour factions are added AFTER that pass runs (in generatePower), so they
@@ -53,7 +68,7 @@ export function labelUnderWorldLaw(kind, label, worldLaw, relType, neighbourName
 
 registerStep('neighbourFactions', {
   deps: ['generatePower', 'resolveNeighbour'],
-  reads: ['neighbourFacBias', 'neighbourProfile'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
+  reads: ['institutions', 'neighbourFacBias', 'neighbourProfile'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract); `institutions` is the backing read (ADDENDUM 18 ruling 16)
   provides: [],
   mutates: ['powerStructure'], // mirrors neighbour-derived factions into powerStructure.factions in place when a neighbour is bound (A+ P1.7)
   phase: 'power',
@@ -70,6 +85,19 @@ registerStep('neighbourFactions', {
   const { mirrorFactions, opposeFactions, mirrorWeight, opposeWeight } = neighbourFacBias;
   const relType = neighbourProfile?.relationshipType || 'neutral';
 
+  // ADDENDUM 18 ruling 16 — a neighbour's shadow can seat a power here only where an
+  // institution row of this town represents it (a mirror 'military' faction needs a
+  // force row; 'economy' needs a market, merchant house, guild or workshop; 'government'
+  // is the seat itself and is never gated). The check runs AFTER every draw the branch
+  // makes, so the step's rng stream is byte-identical to the ungated one and the only
+  // difference is the push that does not happen.
+  const backedPowers = backedArchetypesOf({ institutions: ctx.institutions });
+  const hasBacking = (/** @type {string} */ fType) => {
+    const powers = NEIGHBOUR_TYPE_POWERS[fType];
+    if (!powers) return true;
+    return powers.some((p) => Array.isArray(backedPowers[p]) && backedPowers[p].length > 0);
+  };
+
   // Mirror factions
   for (const fType of mirrorFactions) {
     if (!existingTypes.has(fType) && rng.chance(mirrorWeight)) {
@@ -79,6 +107,7 @@ registerStep('neighbourFactions', {
       );
       if (mirrorLabel) {
         const power = rng.randInt(10, 30);
+        if (!hasBacking(fType)) continue;
         powerStructure.factions.push({
           faction:       mirrorLabel,
           category:      fType,
@@ -118,6 +147,7 @@ registerStep('neighbourFactions', {
       );
       if (opposeLabel) {
         const power = rng.randInt(8, 26);
+        if (!hasBacking(fType)) continue;
         powerStructure.factions.push({
           faction:       opposeLabel,
           category:      fType,

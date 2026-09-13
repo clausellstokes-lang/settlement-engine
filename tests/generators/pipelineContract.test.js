@@ -99,11 +99,25 @@ describe('pipeline data-flow contract — bound-neighbour branch (the writes nul
   // observable marker of each — so the strict assertion above is load-bearing:
   // drop any of the three `mutates` declarations and runPipeline throws here.
   it('all three bound-neighbour in-place writes fire and are declared (strict has teeth)', () => {
-    const seed = 'contract-bound-all-writes';
+    // Seed re-pinned 2026-09-13 (car 8b-W-18e): the forced rows below change the roster and
+    // so the later steps' draws; '-1' is the first seed on the toggled fixture where the
+    // bias rolls a faction (Anti-Agiisk Underground, criminal) AND the econ bias binds.
+    const seed = 'contract-bound-all-writes-1';
     const rng = createPRNG(seed);
     const cfg = {
       settType: 'hamlet', culture: 'germanic', terrain: 'river',
       tradeRouteAccess: 'road', _neighbourRelType: 'hostile',
+      // ADDENDUM 18 ruling 16 (car 8b-W-18e): a neighbour's mirror/opposition faction seats
+      // here only where an institution row backs its type. The teeth case forces one row
+      // per power-bearing class so the faction write can fire whatever type the bias rolls;
+      // the rows are pushed after the rolls, so the step's draws are unchanged.
+      _institutionToggles: {
+        'hamlet::Defense::Citizen militia': { allow: true, require: true },
+        'hamlet::Economy::Periodic market': { allow: true, require: true },
+        'hamlet::Religious::Wayside shrine': { allow: true, require: true },
+        'hamlet::Criminal::Smuggling waypoint': { allow: true, require: true },
+        'hamlet::Magic::Alchemist shop': { allow: true, require: true },
+      },
     };
     const ic = { config: cfg, importedNeighbour: NEIGHBOUR, _seed: seed, _traceClock: 0 };
     let ctx;

@@ -92,16 +92,21 @@ describe('bounded final economy -> power reconciliation', () => {
     // bounded closeout re-derives from the FINAL economy. Two powers traded one point
     // (Craft Guilds 9 to 8, Merchant City Council 18 to 19); the total still sums to 100
     // and the prosperity-contribution claim above (0, not the stale +8) is unchanged.
+    // Re-pinned 2026-09-13 (car 8b-W-18e, ADDENDUM 18 ruling 16): a power exists only
+    // where an institution row represents it. This city rolls no lord's / governor's /
+    // royal row, so 'Noble Families' is no longer minted and its 5 points renormalise
+    // across the rest (Merchant Guilds 13→15, Military/Guard 22→23, Craft Guilds 8→9,
+    // Arcane Orders 5→6); the total still sums to 100 and the prosperity-contribution
+    // claim above is unchanged.
     expect(snapshots.powerEconomyReconcilePass.powers).toEqual({
-      'Military/Guard': 22,
+      'Military/Guard': 23,
       'Merchant City Council': 19,
-      'Merchant Guilds': 13,
+      'Merchant Guilds': 15,
       'Religious Authorities': 12,
-      'Craft Guilds': 8,
+      'Craft Guilds': 9,
       'War Council': 8,
       "Thieves' Guild": 8,
-      'Noble Families': 5,
-      'Arcane Orders': 5,
+      'Arcane Orders': 6,
     });
     expect(powerByFaction(settlement)).toEqual(
       snapshots.powerEconomyReconcilePass.powers,
@@ -234,6 +239,16 @@ describe('bounded final economy -> power reconciliation', () => {
         culture: 'imperial',
         tradeRouteAccess: 'road',
         _neighbourRelType: 'allied',
+        // ADDENDUM 18 ruling 16 (car 8b-W-18e): a neighbour faction seats only where a row
+        // backs its type; one forced row per class keeps this thorp's single rolled
+        // neighbour faction seatable whatever type the bias draws (draws unchanged).
+        _institutionToggles: {
+          'thorp::Defense::Citizen militia': { allow: true, require: true },
+          'thorp::Economy::Periodic market': { allow: true, require: true },
+          'thorp::Religious::Wayside shrine': { allow: true, require: true },
+          'thorp::Criminal::Smuggling waypoint': { allow: true, require: true },
+          'thorp::Magic::Alchemist shop': { allow: true, require: true },
+        },
       },
       neighbour,
       {

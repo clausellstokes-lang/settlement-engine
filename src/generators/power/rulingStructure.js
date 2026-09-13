@@ -23,6 +23,7 @@ import {
   nativeSemanticNames,
 } from '../../domain/content/customContentSemanticAuthority.js';
 import { resolveGenerationWorldLaw } from '../generationContext.js';
+import { backedArchetypesOf } from '../../domain/factionBacking.js';
 
 // renormalizeFactionPower — rescale every faction's `power` to integer
 // percentage points summing to exactly 100, using largest-remainder rounding
@@ -107,6 +108,15 @@ export const generatePowerStructure = (
     priorities = getPriorities(config),
     instFlags = getInstFlags(config, institutions),
     stressFlags = getStressFlags(config, institutions),
+    // ADDENDUM 18 ruling 16 — A POWER EXISTS ONLY WHERE AN INSTITUTION CAN REPRESENT
+    // IT. The archetypes at least one institution ROW of this roster represents
+    // (domain/factionBacking.js: the enumerated class → powers table; custom rows by
+    // their declared class). Every standing-power mint below asks `backed(...)` beside
+    // its old numeric predicate; the governing seat is never gated (R14) and the
+    // stress-minted crisis factions are exempt (events, not standing powers).
+    backedPowers = backedArchetypesOf({ institutions }),
+    backed = (/** @type {string} */ archetype) =>
+      Array.isArray(backedPowers[archetype]) && backedPowers[archetype].length > 0,
     factions = /** @type {Array<any>} */ ([]),
     baseGovPower = tier === 'metropolis' ? 35 : tier === 'city' ? 33 : tier === 'town' ? 31 : 30,
     merchantPower = Math.round(25 * priorityToMultiplier(instFlags.economyOutput)),
@@ -460,7 +470,8 @@ export const generatePowerStructure = (
       desc: govDesc,
       isGoverning: true,
     }),
-    merchantPower > 5 &&
+    backed('merchant') &&
+      merchantPower > 5 &&
       !(tier === 'thorp' && merchantPower < 12) &&
       (!['thorp', 'hamlet', 'village'].includes(tier) ||
         nativeInstitutions.some(function (inst) {
@@ -508,7 +519,7 @@ export const generatePowerStructure = (
       desc: merchantDesc,
     });
   }
-  if (noblePower > (tier === 'town' && !hasNobleInst ? 10 : 5)) {
+  if (backed('noble') && noblePower > (tier === 'town' && !hasNobleInst ? 10 : 5)) {
     const nobleGoverns =
         governingFaction &&
         (governingFaction.includes('Feudal') ||
@@ -567,7 +578,7 @@ export const generatePowerStructure = (
       desc: nobleDesc,
     });
   }
-  if (militaryPower > 5 && (tier !== 'thorp' || priorities.military > 60)) {
+  if (backed('military') && militaryPower > 5 && (tier !== 'thorp' || priorities.military > 60)) {
     const militaryDesc =
         priorityToCategory(priorities.military) === 'very_high'
           ? militaryPower > 25
@@ -611,7 +622,7 @@ export const generatePowerStructure = (
           name.includes('graveyard'))
     ),
     religiousGate = ['village', 'town', 'city', 'metropolis'].includes(tier) || hasReligiousInst;
-  if (religiousPower > 5 && religiousGate) {
+  if (backed('religious') && religiousPower > 5 && religiousGate) {
     const religiousDesc =
       priorities.criminal > 70 && priorities.religion < 35 && instFlags.criminalEffective > 60
         ? 'Clergy operate here but the church holds little civic authority; organised crime has crowded out most formal moral influence.'
@@ -641,7 +652,8 @@ export const generatePowerStructure = (
     });
   }
   if (
-    (craftPower > 5 &&
+    (backed('craft') &&
+      craftPower > 5 &&
       priorities.economy > 22 &&
       factions.push({
         faction: 'Craft Guilds',
@@ -655,7 +667,7 @@ export const generatePowerStructure = (
               ? 'Craft guilds regulating production and apprenticeships; a reliable secondary presence in civic life.'
               : 'Artisan guilds maintaining standards in a thin economy; not politically weak by choice, but by circumstance.',
       }),
-    criminalPower > 5)
+    backed('criminal') && criminalPower > 5)
   ) {
     const criminalDesc =
       criminalPower > 22
@@ -677,7 +689,8 @@ export const generatePowerStructure = (
     governingFaction && governingFaction.includes('Arcane Council')
       ? Math.max(arcanePower, Math.max(12, Math.round(14 * priorityToMultiplier(instFlags.magicInfluence))))
       : arcanePower;
-  arcaneAdjPower > 5 &&
+  backed('arcane') &&
+    arcaneAdjPower > 5 &&
     factions.push({
       faction: 'Arcane Orders',
       power: arcaneAdjPower,
@@ -693,7 +706,16 @@ export const generatePowerStructure = (
   const stressType = (config == null ? void 0 : config.stressType) || null,
     stressTypes = (config == null ? void 0 : config.stressTypes) || (stressType ? [stressType] : []),
     hasStress = (s) => stressTypes.includes(s);
+  // THE CRISIS CLASS (ADDENDUM 18 ruling 16, the chair's decision): every faction the
+  // stress injector mints is an EVENT, not a standing power — exempt from the
+  // institution rule, stamped here so the pulse's backing mark and the density pool
+  // can tell it from a standing power without re-deriving the stress that minted it.
+  // Only the occupation pair is retired with its crisis today
+  // (applyWorldPulseOccupationAuthority); the rest persist, and that is reported, not
+  // cured, in this car.
+  const standingCount = factions.length;
   applyStressEventFactions(factions, hasStress, governingFaction, hasNobleInst, config, institutions);
+  for (let i = standingCount; i < factions.length; i += 1) factions[i].crisis = true;
   normalizeAndAnnotateFactions(factions);
   // Tag each faction with a category for power-economy correlation
   factions.forEach((f) => {

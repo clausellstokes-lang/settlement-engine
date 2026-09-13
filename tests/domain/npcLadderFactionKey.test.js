@@ -29,10 +29,17 @@ const LADDER_SLUG = { sep: '_', max: 80, fallback: 'unknown', empty: 'unknown' }
 
 const economicState = { tier: 'city', economyOutput: 70, wealthLevel: 'wealthy' };
 const richCity = { priorities: { economy: 80, military: 70, religion: 65, criminal: 30 } };
+// ADDENDUM 18 ruling 16 (car 8b-W-18e): a power exists only where an institution row
+// represents it, so a city handed NO roster seats only its government. These rows back
+// the merchant, military, religious, craft and criminal powers the cases below need.
+const CITY_ROWS = [
+  { name: 'Daily markets' }, { name: 'Garrison' }, { name: 'Parish churches (10-30)' },
+  { name: 'Craft guilds (30-80)' }, { name: "Thieves' guild chapter" },
+];
 
 describe('THE FACTION-KEY BUG: real .faction records key distinctly (write side)', () => {
   it('a genuine multi-faction powerStructure keys each faction to its OWN slug, not fac.unknown', () => {
-    const { factions } = generatePowerStructure('city', economicState, null, richCity, []);
+    const { factions } = generatePowerStructure('city', economicState, null, richCity, CITY_ROWS);
     expect(factions.length).toBeGreaterThan(1);
     // The real record shape: `.faction` present, `.name`/`.id` absent (guards the shape).
     for (const f of factions) {
@@ -90,7 +97,7 @@ describe('THE FACTION-KEY BUG: the read side resolves the real slug (mirror look
 
 describe('THE FACTION-KEY BUG: end-to-end — the kernel grows ONE ladder per real faction', () => {
   it('genuine records + affiliated NPCs yield DISTINCT ladders (pre-fix: all merge / vanish)', () => {
-    const { factions } = generatePowerStructure('city', economicState, null, richCity, []);
+    const { factions } = generatePowerStructure('city', economicState, null, richCity, CITY_ROWS);
     const [f0, f1, f2] = factions;
     // A senior office-holder in each of three distinct real factions (importance 'pillar'
     // clears the rung-eligible floor — the ladder derivation fixture idiom).
@@ -156,7 +163,7 @@ describe('THE CROSS-LAYER JOIN: traditions ownerKey must equal the ladder key', 
   // lookup could never hit. Fixing the ladder key ACTIVATES this coupling — festival outcomes
   // become ladder-churn-sensitive once both flags are lit. Pin the parity so it cannot drift.
   it('factionOwnerKey and ladderFactionKey agree on every real generated faction', () => {
-    const { factions } = generatePowerStructure('city', economicState, null, richCity, []);
+    const { factions } = generatePowerStructure('city', economicState, null, richCity, CITY_ROWS);
     expect(factions.length).toBeGreaterThan(1);
     for (const f of factions) {
       expect(factionOwnerKey(f)).toBe(ladderFactionKey(f));

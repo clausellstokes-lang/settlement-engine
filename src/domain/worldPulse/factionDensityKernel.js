@@ -95,9 +95,10 @@ import { planDensityCadence } from '../density/densityCadence.js';
 import { importanceForRung } from '../density/densityRungs.js';
 import { seatKey } from '../density/seatKey.js';
 import { createNpc } from '../entities/npcs.js';
-import { liveInstitutions } from '../institutions/institutionRoster.js';
+import { backedArchetypesOf } from '../factionBacking.js';
 import { slugify } from '../../kernel/slugify.js';
 import { advanceNpcGrowthWithFabricAndConsequenceAndLadderAndTraditionsAndRoadsAndCommonsAndAssize } from './assizeKernel.js';
+import { advanceFactionBacking } from './factionBackingKernel.js';
 
 /** The mark an emptied ruling house carries while its succession is unresolved.
  *  It is BOTH the once-per-state-change latch for the beat AND the named seam a
@@ -350,20 +351,19 @@ const POWER_STANDING_FIELD = Object.freeze({
   criminal: 'criminalEffective',
 });
 
-/** Faction-category ← institution-category. Both vocabularies are the tree's own; this
- *  is the join between them, written once. An institution category that is nobody's
- *  power base (Infrastructure, Entertainment) is deliberately absent.
- *  ⚠ The index signature is declared rather than inferred: these are string→string
- *  LOOKUPS whose miss is a real answer ("this category is nobody's power base"), and the
- *  `if (!name)` guard on every read is what makes the widening honest.
- *  @type {Readonly<Record<string, string>>} */
-const POWER_CATEGORY_OF_INSTITUTION = Object.freeze({
-  economy: 'economy',
-  crafts: 'economy',
-  religious: 'religious',
-  defense: 'military',
-  magic: 'arcane',
-  criminal: 'criminal',
+/** Faction-category ← the BACKED archetypes (domain/factionBacking.js) that seat it.
+ *  Both vocabularies are the tree's own; this is the join between them, written once.
+ *  ADDENDUM 18 ruling 16 replaced the earlier institution-SECTION join (which let a
+ *  lone wall seat a military power and a lone shed seat a merchant one) with the
+ *  enumerated class → powers table, so the cadence and the generation gate answer
+ *  from ONE fact. A category that is nobody's power base is deliberately absent.
+ *  @type {Readonly<Record<string, ReadonlyArray<string>>>} */
+const POWER_CATEGORY_BACKED = Object.freeze({
+  economy: Object.freeze(['merchant', 'craft']),
+  religious: Object.freeze(['religious']),
+  military: Object.freeze(['military']),
+  arcane: Object.freeze(['arcane']),
+  criminal: Object.freeze(['criminal']),
 });
 
 /** The display name an unrepresented power of each category takes when it seats. Fixed
@@ -399,9 +399,17 @@ const ECONOMICS_CATEGORIES = new Set(['economy', 'criminal']);
 export function densityCandidatePowersFrom(settlement) {
   /** @type {Set<string>} */
   const present = new Set();
-  for (const raw of liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (settlement))) {
-    const category = POWER_CATEGORY_OF_INSTITUTION[String(asObject(raw).category || '').toLowerCase()];
-    if (category) present.add(category);
+  // ADDENDUM 18 ruling 16 — THE SAME FACT AS THE GENERATION GATE. The pool reads
+  // `backedArchetypesOf` (ruin-filtered through the canonical accessor inside it), so a
+  // category qualifies only where an institution ROW represents its power: a lone wall
+  // no longer seats 'Sworn Companies', a lone carpenter's shed no longer seats 'Rising
+  // Merchants', and the temple a game master builds in play is exactly the row that
+  // lets this cadence mint the 'Devout Assembly' it now backs (the symmetric half).
+  const backedPowers = backedArchetypesOf(
+    /** @type {Parameters<typeof backedArchetypesOf>[0]} */ (settlement),
+  );
+  for (const [category, powers] of Object.entries(POWER_CATEGORY_BACKED)) {
+    if (powers.some(p => Array.isArray(backedPowers[p]) && backedPowers[p].length > 0)) present.add(category);
   }
   if (!present.size) return [];
 
@@ -776,11 +784,21 @@ export function advanceNpcGrowthWithFabricAndConsequenceAndLadderAndTraditionsAn
     tick: a.tick,
     now: a.now,
   });
-  if (!density.changed) return prior;
+  // THE BACKING MARK (ADDENDUM 18 ruling 16) runs AFTER density, over the same settled
+  // tick, on EVERY world — it is not v2-gated, because the rule binds the roster the
+  // product makes today. It takes no draw and returns its inputs by reference when no
+  // faction's `unbacked` mark changes, so a world where nothing was ruined or built
+  // this tick is byte-identical. Composed here, in the leaf, so the frozen kernel
+  // changes by not one byte (the name-swap idiom, one level down).
+  const backing = advanceFactionBacking({
+    snapshot: a.snapshot,
+    settlementUpdates: density.settlementUpdates,
+  });
+  if (!density.changed && !backing.changed) return prior;
   return {
     worldState: /** @type {typeof prior.worldState} */ (/** @type {unknown} */ (density.worldState)),
-    settlementUpdates: /** @type {typeof prior.settlementUpdates} */ (/** @type {unknown} */ (density.settlementUpdates)),
-    changed: prior.changed || density.changed,
+    settlementUpdates: /** @type {typeof prior.settlementUpdates} */ (/** @type {unknown} */ (backing.settlementUpdates)),
+    changed: prior.changed || density.changed || backing.changed,
     newsEntries: [...prior.newsEntries, ...(/** @type {typeof prior.newsEntries} */ (/** @type {unknown} */ (density.newsEntries)))],
   };
 }

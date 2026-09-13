@@ -37,7 +37,15 @@ import { factionArchetype } from '../../src/domain/factionArchetypes.js';
 import { rulerLens } from '../../src/domain/worldPulse/religionLegitimacy.js';
 
 /** A real generated power structure. @param {string} tier @param {string} prosperity */
-const realPs = (tier, prosperity) => generatePowerStructure(tier, { prosperity }, null, {}, []);
+// ADDENDUM 18 ruling 16 (car 8b-W-18e): a power exists only where an institution row
+// represents it, so the bare step is handed a roster that backs every standing power —
+// without one a structure seats only its government and the shape sweep has one record.
+const BACKING_ROWS = [
+  { name: 'Weekly market' }, { name: 'Citizen militia' }, { name: 'Parish church' },
+  { name: 'Craft guilds (5-15)' }, { name: 'Street gang' }, { name: "Lord's steward" },
+  { name: "Mages' guild" },
+];
+const realPs = (tier, prosperity) => generatePowerStructure(tier, { prosperity }, null, {}, BACKING_ROWS);
 /** @param {string} tier @param {string} prosperity */
 const realSettlement = (tier, prosperity) => ({
   tier, powerStructure: realPs(tier, prosperity), npcs: [], institutions: [], config: {},
@@ -168,8 +176,12 @@ describe('rulerLens reads the canonical governing seat', () => {
     const wrongPick = highestPower(s.powerStructure);
     expect(nameOf(seat)).toBe('Elected Reeve');
     expect(nameOf(wrongPick)).toBe('Religious Authorities');
-    expect(Number(seat.power)).toBe(12);
-    expect(Number(wrongPick.power)).toBe(39);
+    // Re-pinned 2026-09-13 (car 8b-W-18e, ADDENDUM 18 ruling 16): this seed's village
+    // carries no lord's row, so its Manor Household is no longer minted and the shares
+    // renormalise 12→13 / 39→41. The seat is still out-powered by the temple, which is
+    // the whole point of the case.
+    expect(Number(seat.power)).toBe(13);
+    expect(Number(wrongPick.power)).toBe(41);
     expect(factionArchetype(seat)).toBe('government');     // from the name ('reeve')
     expect(factionArchetype(wrongPick)).toBe('religious'); // from the category
 

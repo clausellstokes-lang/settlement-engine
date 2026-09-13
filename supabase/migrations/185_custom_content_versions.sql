@@ -119,6 +119,21 @@ declare
         "m": 40,
         "i": 160
       },
+      "backsPowers": {
+        "t": "string-or-string-list",
+        "m": 8,
+        "i": 16,
+        "v": [
+          "merchant",
+          "noble",
+          "military",
+          "religious",
+          "craft",
+          "criminal",
+          "arcane",
+          "government"
+        ]
+      },
       "essential": {
         "t": "boolean"
       },

@@ -592,6 +592,13 @@ registerStep('assembleInstitutions', {
         ? item.tags
         : (typeof item.tags === 'string' ? item.tags.split(',').map(s => s.trim()).filter(Boolean) : []),
       description: item.description || '',
+      // ADDENDUM 18 ruling 16 (the custom-content clause): a custom row may NAME the
+      // powers it backs; absent, domain/factionBacking.js derives them from its
+      // declared class (authority > category > tags > name). Carried verbatim so the
+      // materialized row answers the backing read; validated at the read, never here.
+      ...(Array.isArray(item.backsPowers) && item.backsPowers.length
+        ? { backsPowers: item.backsPowers.slice() }
+        : {}),
       localUid,
       customDefinitionCategory: 'institutions',
       ...identity,

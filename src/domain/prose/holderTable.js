@@ -96,7 +96,7 @@ export const INTERESTED = 'INTERESTED';
  * ⛔ THE GROUND, AND WHY IT IS FOUR AND NOT TWELVE. Car 5b reported capture "structurally
  * absent at birth" and measured INTERESTED at 0 on all 768 RATE towns. The figure was right
  * and the ground was false: every generated town carries `powerStructure.criminalCaptureState`
- * (`src/generators/power/rulingStructure.js:797` — the very line this table maps to the WATCH),
+ * (`src/generators/power/rulingStructure.js:819` — the very line this table maps to the WATCH),
  * on the same five-rung ladder `standingOf` already consumes, reading none 495 · adversarial
  * 194 · equilibrium 64 · corrupted 15 over the corpus, with 79 towns carrying a non-`none`
  * `captureState` on a faction entry. The car reported the fact ABSENT rather than asking
@@ -208,7 +208,7 @@ export const HOLDER_SOURCES = Object.freeze({
       + ' grain: the muster roll counts men under arms, and the watch keeps its own count.',
   }),
   blackMarketCapture: Object.freeze({ kind: 'watch', cite: 'src/generators/safetyProfile.js:684', read: true }),
-  criminalCaptureState: Object.freeze({ kind: 'watch', cite: 'src/generators/power/rulingStructure.js:797', read: true }),
+  criminalCaptureState: Object.freeze({ kind: 'watch', cite: 'src/generators/power/rulingStructure.js:819', read: true }),
   safetyProfile: Object.freeze({ kind: 'watch', cite: 'src/generators/economy/economicState.js:873', read: true }),
 
   // ── the court: the seat, its legitimacy, the blocs under it and the treaties it signs ──
@@ -216,8 +216,8 @@ export const HOLDER_SOURCES = Object.freeze({
   governanceFractured: Object.freeze({ kind: 'court', cite: 'src/generators/factionDynamics.js:133', read: true }),
   breakdown: Object.freeze({ kind: 'court', cite: 'src/generators/factionDynamics.js:179', read: true }),
   blocs: Object.freeze({ kind: 'court', cite: 'src/domain/worldPulse/settlementPolitics.js:992', read: true }),
-  stability: Object.freeze({ kind: 'court', cite: 'src/generators/power/rulingStructure.js:702', read: true }),
-  recentConflict: Object.freeze({ kind: 'court', cite: 'src/generators/power/rulingStructure.js:702', read: true }),
+  stability: Object.freeze({ kind: 'court', cite: 'src/generators/power/rulingStructure.js:724', read: true }),
+  recentConflict: Object.freeze({ kind: 'court', cite: 'src/generators/power/rulingStructure.js:724', read: true }),
   termLines: Object.freeze({ kind: 'court', cite: 'src/domain/display/treatyDocument.js:362', read: true }),
   fraying: Object.freeze({ kind: 'court', cite: 'src/domain/worldPulse/peaceTermsDocument.js:233', read: true }),
   yearsRemaining: Object.freeze({ kind: 'court', cite: 'src/domain/worldPulse/peaceTermsDocument.js:230', read: true }),

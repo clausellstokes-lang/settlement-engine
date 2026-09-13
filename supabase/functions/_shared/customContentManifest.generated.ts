@@ -125,6 +125,33 @@ export const CUSTOM_CONTENT_MANIFEST = deepFreeze({
           "activationMode": "always"
         },
         {
+          "type": "string-or-string-list",
+          "values": [
+            "merchant",
+            "noble",
+            "military",
+            "religious",
+            "craft",
+            "criminal",
+            "arcane",
+            "government"
+          ],
+          "maxItems": 8,
+          "itemMaxLength": 16,
+          "key": "backsPowers",
+          "label": "Backs powers",
+          "hint": "The standing powers this institution represents (ADDENDUM 18 ruling 16). Leave empty to derive from the authority, category and tags.",
+          "effect": "mechanical",
+          "activation": "conditional",
+          "condition": "When a settlement is generated, and each pulse tick: a power is minted (or keeps its standing) only where an institution row backs it.",
+          "consumers": [
+            "factionBacking"
+          ],
+          "effectKind": "mechanical",
+          "activationMode": "conditional",
+          "explanation": "When a settlement is generated, and each pulse tick: a power is minted (or keeps its standing) only where an institution row backs it."
+        },
+        {
           "type": "boolean",
           "key": "essential",
           "effect": "mechanical",
