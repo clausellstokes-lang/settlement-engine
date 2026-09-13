@@ -1,0 +1,1161 @@
+TOTAL 290 Counter({'**STRUCK**': 184, '**CONTRADICTION**': 77, '**SPLIT**': 15, '**MODEL**': 8, '**SCOPE**': 6})
+
+=== RT2.1-01 [**SPLIT**] noun: wall · walls
+  GROUND: KEPT: `forces.walls.present` false / `hasWalls` (`priorityHelpers.js:52`) — DS-DEF-5 prints walls ABSENT on the same desk. STRUCK: the muster-HOLDER layer and the "the line" restriction
+  PERM: call the wall anything, at any layer, on any pool — but not on a pool that can fire unwalled
+
+=== RT2.1-02 [**SPLIT**] noun: citadel · palisade · earthwork · massive walls
+  GROUND: KEPT: the catalogue row fixes the material (`Palisade` → timber; `Town walls` · `City walls and gates` · `Massive walls and fortifications` → stone; O-1's value table). STRUCK: the bar on naming any material at all
+  PERM: call a palisade timber and a town wall stone; never the reverse, and never a material SOURCE the fortification chain contradicts
+
+=== RT2.1-03 [**CONTRADICTION**] noun: gate · gates
+  GROUND: `hasGates` needs a wall-class row (`priorityHelpers.js:52-53`); DS-DEF-5 prints walls ABSENT beside it
+  PERM: write the gate freely on a walled town, including on a palisade (`hasGates` fires there — the engine's own reading)
+
+=== RT2.1-04 [**STRUCK**] noun: `{defwork}` (the slot)
+  GROUND: a fill mechanic owed to CAR 8b-W-2, never a writer's claim
+  PERM: write the slot; the residual grammar is the register car's problem
+
+=== RT2.1-05 [**CONTRADICTION**] noun: garrison
+  GROUND: `forces.garrison.present` (`defenseStateProse.js:655`), `priorityHelpers.js:46`
+  PERM: name the garrison wherever the bucket resolves — including off a `Barracks`, which IS a garrison-bucket row
+
+=== RT2.1-06 [**STRUCK**] noun: barracks
+  GROUND: `defenseInstitutionBuckets.js:89` puts barracks IN the garrison bucket, so the projection prints garrison present
+  PERM: call a Barracks town's force the garrison — the engine already does
+
+=== RT2.1-07 [**STRUCK**] noun: professional guard
+  GROUND: a measured absence; silence is permission
+  PERM: use the phrase as flavour; it asserts no row
+
+=== RT2.1-08 [**CONTRADICTION**] noun: militia · citizen militia
+  GROUND: `forces.militia.present` / roster `Citizen militia` (`holderTable.js:279-288`) — a walled Town-watch-only town keeps no roll
+  PERM: say "the muster" as the class word anywhere; assert a militia or a roll only where the row stands
+
+=== RT2.1-09 [**CONTRADICTION**] noun: mercenary company · mercenary quarter · hired muscle
+  GROUND: `forces.mercenary.present` (`defenseStateProse.js:1284`)
+  PERM: name hired companies where the bucket resolves
+
+=== RT2.1-10 [**CONTRADICTION**] noun: adventurers' charter hall
+  GROUND: `forces.charter.present` (`priorityHelpers.js:51`)
+  PERM: name the charter hall where it resolves
+
+=== RT2.1-11 [**STRUCK**] noun: magicDef bodies (wizard · mages' guild · academy · alchemist · golem workforce)
+  GROUND: a census under-report (M-12); the code reads `forces.magicDef.present`
+  PERM: write arcane provision on DS-DEF-5's arcane pools; the licence card's silence is a wiring defect
+
+=== RT2.1-12 [**STRUCK**] noun: `force` (the token)
+  GROUND: a token fact; the presence traps are carried by the body rows
+  PERM: use any force word; only the roster binds
+
+=== RT2.1-13 [**SPLIT**] noun: watch
+  GROUND: KEPT: the label trap — `hasWatch` (`priorityHelpers.js:48`) false, and `safetyProfile.js:300` prints "There is no meaningful guard presence." beside it. STRUCK: rule 5's pay-gate bar (`defenseGenerator.js:177-178` counts `hasWatch`; `fieldSynonyms.js:51` calls the gate "the town's pay for its watch")
+  PERM: say the watch is paid for, kept, short of pay — on any town that HAS a watch row
+
+=== RT2.1-14 [**STRUCK**] noun: court · courthouse
+  GROUND: `hasCourtSystem` is satisfied by the REQUIRED town/city HALL (`priorityHelpers.js:55`) — the engine's own reading of a court system
+  PERM: call it the court, the town's law, the bench, wherever `hasCourtSystem` holds
+
+=== RT2.1-15 [**CONTRADICTION**] noun: prison · gaol · stocks
+  GROUND: `hasPrison` (`priorityHelpers.js:54`); DS-DEF-6 prints Legal Infrastructure: None beside it
+  PERM: write the gaol where the flag holds
+
+=== RT2.1-16 [**STRUCK**] noun: treasury
+  GROUND: a record-word/layer bar (W24)
+  PERM: use purse, chest, coffer on any money sentence
+
+=== RT2.1-17 [**STRUCK**] noun: office
+  GROUND: arm A13's citation rule policed provenance, not truth
+  PERM: cite the record, or not, as the sentence wants
+
+=== RT2.1-18 [**SPLIT**] noun: granary · the stores
+  GROUND: KEPT: `hasGranary` false (`priorityHelpers.js:63`). STRUCK: the building/stock word-split
+  PERM: say the granary doors, the stores, the loft — where the flag holds
+
+=== RT2.1-19 [**STRUCK**] noun: hospital · infirmary
+  GROUND: the engine sets `hasHospital` on all four (`priorityHelpers.js:64`)
+  PERM: call a friary's care an infirmary; the engine does
+
+=== RT2.1-20 [**CONTRADICTION**] noun: church · parish · clergy
+  GROUND: `priorityHelpers.js:65` — the label trap; the town's roster carries no church row
+  PERM: write faith freely; assert a church BUILDING here only where a religious row stands
+
+=== RT2.1-21 [**CONTRADICTION**] noun: port · docks · harbour
+  GROUND: `PORT_INFRA_RE` (`priorityHelpers.js:32`); the sea only off a `Shipyard` row or `maritimeSupported`
+  PERM: write the water approach, the wharf, the quay on `hasPort`; the open sea needs the other row
+
+=== RT2.1-22 [**STRUCK**] noun: navy · fleet
+  GROUND: a roster question owed to the register car
+  PERM: write ships where a naval row resolves; the pool may simply never fire
+
+=== RT2.1-23 [**STRUCK**] noun: road
+  GROUND: a holder-layer bar — STRUCK as a LAYER BAR: it policed which noun a read EARNED (a permission grammar), not whether any claim was false.
+  PERM: write the road as a road
+
+=== RT2.1-24 [**CONTRADICTION**] noun: `{seat}` (the slot)
+  GROUND: `rulingStructure.js:284`, `:452`, `:443-452` — the rendered label is printed on the same page
+  PERM: surround the slot with anything that does not deny the label it renders
+
+=== RT2.1-25 [**STRUCK**] noun: the ruling structure
+  GROUND: a safe-word permission
+  PERM: use it, or the seat, or the town's own arrangement
+
+=== RT2.1-26 [**MODEL**] noun: `criminalCaptureState` (the ladder)
+  GROUND: `rulingStructure.js:762-767` — `adversarial` "asserts enforcement is WINNING"; world capture only at `corrupted`/`capture` (`holderTable.js:661`)
+  PERM: write the rung's own meaning; never the underworld in charge at `adversarial`
+
+=== RT2.1-27 [**STRUCK**] noun: per-faction `captureState`
+  GROUND: no face reaches it — STRUCK because NO SHIPPED FACE READS IT: the row policed a read no writer can reach, so it removed no live sentence.
+  PERM: [archivist's reading] nothing is handed back on this desk — no shipped face here uses the word, so the strike lifts a bar nobody was hitting; elsewhere the noun stands or falls on its own row.
+
+=== RT2.1-28 [**STRUCK**] noun: `{faction}` (the slot)
+  GROUND: wiring — STRUCK for POLICING WIRING, not truth: the row named a slot, field or pool that nothing fills or routes at this tip, so no writer could breach it.
+  PERM: [archivist's reading] nothing is handed back — the row is a wiring, count or research note for the register car, so the strike returns no permission a writer was being denied.
+
+=== RT2.1-29 [**SCOPE**] noun: `{npc}` (the slot)
+  GROUND: floor 3: a NAMED character with a fate — FLOOR 3 (product scope + the deity doctrine): no NAMED character given a fate, and nothing predicated of a deity.
+  PERM: an UNNAMED person may carry the leash, hold the key, be resented
+
+=== RT2.1-30 [**CONTRADICTION**] noun: the criminal interest · the operators · the syndicate
+  GROUND: `defenseDisplay.js:183-195` prints the structure label (`diffuse` / `informal` / `organized`) on the same panel; `Organized Syndicate` is the `organized` key's own label
+  PERM: write the criminal interest, the trade, the quiet arrangement anywhere; "syndicate" only on the organized key
+
+=== RT2.1-31 [**STRUCK**] noun: a corruption impairment
+  GROUND: no face today; the covert rule lives at VIS-01
+  PERM: [archivist's reading] nothing is handed back on this desk — no shipped face here uses the word, so the strike lifts a bar nobody was hitting; elsewhere the noun stands or falls on its own row.
+
+=== RT2.1-32 [**STRUCK**] noun: a brokerage PATRON
+  GROUND: no face — STRUCK because NO SHIPPED FACE READS IT: the row policed a read no writer can reach, so it removed no live sentence.
+  PERM: [archivist's reading] nothing is handed back on this desk — no shipped face here uses the word, so the strike lifts a bar nobody was hitting; elsewhere the noun stands or falls on its own row.
+
+=== RT2.1-33 [**STRUCK**] noun: practitioner(s)
+  GROUND: the ROLE bar policed tone — STRUCK as the ROLE-LAYER BAR: it policed naming a person or role where the read named a body — tone and grammar, not truth.
+  PERM: a practitioner may act, refuse, charge, leave
+
+=== RT2.1-34 [**STRUCK**] noun: `Town Mayor` · `Elected Reeve` · `Feudal Appointee`
+  GROUND: the role-word bar; the string is the engine's own
+  PERM: write around whatever the slot renders
+
+=== RT2.1-35 [**SPLIT**] noun: soldiers (missed noun)
+  GROUND: KEPT: the wall (`hasWalls`). STRUCK: the manning bar — no field records manning, so silence is permission (`priorityHelpers.js:52`)
+  PERM: put men on the wall of a walled town
+
+=== RT2.1-36 [**STRUCK**] noun: army (the enemy's; the town's abroad)
+  GROUND: the possessor-stating requirement was a construction rule
+  PERM: write the besieger, their army, the column on the road
+
+=== RT2.1-37 [**STRUCK**] noun: the line
+  GROUND: rule 3 (same word, same referent) is a construction rule; no reader is misinformed
+  PERM: use the line for either
+
+=== RT2.1-38 [**CONTRADICTION**] noun: specialists · specialist recourse
+  GROUND: `forces.charter.present` false; the roster denies a charter hall
+  PERM: write specialists where the charter row stands
+
+=== RT2.1-39 [**CONTRADICTION**] noun: `Household levy`
+  GROUND: `institutionalCatalog.js:104` vs `defenseStateProse.js:1273-1274` — the roster prints the levy while the projection denies any force (an ENGINE contradiction; see newFindings)
+  PERM: nothing until the register car rules; today the page contradicts itself
+
+=== RT2.1-40 [**STRUCK**] noun: `{counterpart}` (the slot)
+  GROUND: wiring — STRUCK for POLICING WIRING, not truth: the row named a slot, field or pool that nothing fills or routes at this tip, so no writer could breach it.
+  PERM: [archivist's reading] nothing is handed back — the row is a wiring, count or research note for the register car, so the strike returns no permission a writer was being denied.
+
+=== RT2.1-41 [**STRUCK**] noun: `{institution}` (the slot)
+  GROUND: wiring — STRUCK for POLICING WIRING, not truth: the row named a slot, field or pool that nothing fills or routes at this tip, so no writer could breach it.
+  PERM: [archivist's reading] nothing is handed back — the row is a wiring, count or research note for the register car, so the strike returns no permission a writer was being denied.
+
+=== RT2.1-42 [**SPLIT**] noun: the occupier · the people who put them here
+  GROUND: KEPT: the town's own `forces.garrison.present` false. STRUCK: W12/W25's bar on "the occupier's garrison" — the occupation record's silence is now permission
+  PERM: call the occupier's force a garrison; do not call it the TOWN's
+
+=== RT2.1-43 [**STRUCK**] noun: the purse
+  GROUND: an organ-word bar
+  PERM: use it anywhere money is meant
+
+=== RT2.1-44 [**STRUCK**] noun: the town's law · the law
+  GROUND: the agent bar policed tone
+  PERM: the law may reach, wait, look away
+
+=== RT2.1-45 [**CONTRADICTION**] noun: fences · bandits · small operators
+  GROUND: `defenseDisplay.js:189` — the panel prints `Organized Syndicate` beside a face saying "a few fences"
+  PERM: write the small operators on a diffuse structure
+
+=== RT2.1-46 [**STRUCK**] noun: the sick-house · infirmary · the parish
+  GROUND: a layer restatement of rows 19 and 20
+  PERM: [corrected] nothing is handed back: the fold's ground is *"a layer restatement of rows 19 and 20"*, and the nouns are governed by those rows — `RT2.1-20` keeps *church · parish · clergy* as CONTRADICTION on the `hasChurch` label trap (`priorityHelpers.js:65`). A restatement strikes no bar of its own and hands back no permission of its own.
+
+=== RT2.1-47 [**SPLIT**] noun: per-arm badge · overall readiness · safety label · criminal structure · military posture · live readiness band · supporting-capability status
+  GROUND: KEPT: the safety label is reachable with NO law body at all (a thorp reads `Moderate` off a community bonus, `safetyProfile.js:56-62`) — so a body named here is the live label trap. STRUCK: the rule that an aggregate read may name no body
+  PERM: name the town's bodies on a band read, as long as the town has them
+
+=== RT2.1R-01 [**STRUCK**] noun: **assignment tried (survey):** "the wall family has NO organ, NO power and NO role layer anywhere in the engin
+  GROUND: research; the layer vocabulary is struck — STRUCK as RESEARCH, not a bar: the row recorded a survey finding about the layer vocabulary itself; no sentence could ever be false by it.
+  PERM: [archivist's reading] nothing is handed back — the row is a wiring, count or research note for the register car, so the strike returns no permission a writer was being denied.
+
+=== RT2.1R-02 [**MODEL**] noun: **assignment tried (survey):** `hasWatch` "consumed by safetyProfile, never by a DS-DEF pool" ‖ **refuter's ve
+  GROUND: `defenseGenerator.js:177-178`, `:189-191` — `hasAnyDefense` counts the watch
+  PERM: say the town pays for its watch
+
+=== RT2.1R-03 [**STRUCK**] noun: **assignment tried (survey):** "the engine's own prose never bakes 'the watch'" ‖ **refuter's verdict:** REFUT
+  GROUND: `safetyProfile.js:281`, `:288`, `:297`, `:307` bake it
+  PERM: use the engine's own word where the row resolves
+
+=== RT2.1R-04 [**STRUCK**] noun: **assignment tried (survey):** DS-DEF-5 arcane pools "read `magicWorks`, not the bucket — a wiring row" ‖ **re
+  GROUND: wiring (M-12) — STRUCK for POLICING WIRING, not truth: the row named a slot, field or pool that nothing fills or routes at this tip, so no writer could breach it.
+  PERM: [archivist's reading] nothing is handed back — the row is a wiring, count or research note for the register car, so the strike returns no permission a writer was being denied.
+
+=== RT2.1R-05 [**CONTRADICTION**] noun: **assignment tried (survey):** `NO organized force at all` reads "the same four" buckets ‖ **refuter's verdict
+  GROUND: `defenseStateProse.js:1273` — a face naming any of the six on that pool is denied by the pool's own key
+  PERM: say no contracted, chartered or arcane body stands — the key licenses it
+
+=== RT2.1R-06 [**MODEL**] noun: **assignment tried (survey):** O-2 "a pay/upkeep read does not reach the watch bucket" (as an engine fact) ‖ *
+  GROUND: the gate's producer counts `hasWatch`; `fieldSynonyms.js:51`
+  PERM: [archivist's reading] nothing is handed back — the engine positively models this, so a face saying otherwise is still false.
+
+=== RT2.1R-07 [**STRUCK**] noun: **assignment tried (survey):** O-12 "four bucket keywords match no shipped row" ‖ **refuter's verdict:** REFUT
+  GROUND: a count — STRUCK as a COUNT: an arithmetic correction to the survey's own tally; it barred no face.
+  PERM: [archivist's reading] nothing is handed back — the row is a wiring, count or research note for the register car, so the strike returns no permission a writer was being denied.
+
+=== RT2.1R-08 [**STRUCK**] noun: **assignment tried (survey):** "a law expensive at the ROLE layer costs this desk nothing" ‖ **refuter's verdi
+  GROUND: the role bar is struck; the fact feeds RT2.1-24 — STRUCK as the ROLE-LAYER BAR: it policed naming a person or role where the read named a body — tone and grammar, not truth.
+  PERM: [archivist's reading] write the sentence: the bar is struck and no field in the record denies it.
+
+=== RT2.1R-09 [**STRUCK**] noun: **assignment tried (survey):** §0 "`--section` handling does not exist at this tip" ‖ **refuter's verdict:** R
+  GROUND: tooling — STRUCK as TOOLING: a note about the survey's own instrument, policing nothing a writer writes.
+  PERM: [archivist's reading] nothing is handed back — the row is a wiring, count or research note for the register car, so the strike returns no permission a writer was being denied.
+
+=== RT2.1R-10 [**CONTRADICTION**] noun: **assignment tried (survey):** "the guard · the garrison" as the always-safe body words (the guard = the garri
+  GROUND: `safetyProfile.js:300` prints "There is no meaningful guard presence." where no law body resolves
+  PERM: write "the guard" wherever any law body stands — the engine's own class word
+
+=== RT2.1R-11 [**STRUCK**] noun: **assignment tried (survey):** law item 5 as drafted ("until cured a face never uses 'the watch' for a pay-gat
+  GROUND: ADDENDUM 14 confirms the strike
+  PERM: [archivist's reading] write the sentence: the bar is struck and no field in the record denies it.
+
+=== RT2.1R-12 [**STRUCK**] noun: **assignment tried (survey):** "the desk names no role anywhere" (as a rendered fact) ‖ **refuter's verdict:**
+  GROUND: research — STRUCK as RESEARCH, not a bar: the row recorded a survey finding about the layer vocabulary itself; no sentence could ever be false by it.
+  PERM: [archivist's reading] nothing is handed back — the row is a wiring, count or research note for the register car, so the strike returns no permission a writer was being denied.
+
+=== RT2.1R-13 [**STRUCK**] noun: **assignment tried (survey):** "INTERESTED reaches the four organs" only ‖ **refuter's verdict:** CONDITIONAL 
+  GROUND: the citation machinery is struck — STRUCK because it policed PROVENANCE — whether the face named the record it drew on — and never whether the sentence was true.
+  PERM: [archivist's reading] write the sentence: the bar is struck and no field in the record denies it.
+
+=== RT2.1R-14 [**STRUCK**] noun: **assignment tried (survey):** 7.1 the `watch PRESENT` citation "licensed only while the town is not captured"
+  GROUND: the citation bar is struck — STRUCK because it policed PROVENANCE — whether the face named the record it drew on — and never whether the sentence was true.
+  PERM: cite the watch on a captured town
+
+=== RT2.2-01 [**SPLIT**] noun: the watch
+  GROUND: KEPT: `hasWatch` false (`priorityHelpers.js:48`) — the safety panel denies it. STRUCK: the duty bar — an unrecorded duty is silence, and silence is permission
+  PERM: say what the watch is FOR, what it neglects, when it walks
+
+=== RT2.2-02 [**CONTRADICTION**] noun: the garrison
+  GROUND: `hasGarrison` (`priorityHelpers.js:46`); the roster
+  PERM: name it where the row stands
+
+=== RT2.2-03 [**CONTRADICTION**] noun: the militia · the muster
+  GROUND: roster `Citizen militia` (`holderTable.js:280-287`)
+  PERM: "the muster" as the class word anywhere
+
+=== RT2.2-04 [**CONTRADICTION**] noun: the mercenary company · free company
+  GROUND: `priorityHelpers.js:49-51` (`hasMercenary: true`) vs `forces.mercenary.present: false` — TWO engine surfaces disagree on a Hireling-hall town (see newFindings)
+  PERM: nothing safe on that town until the register car rules
+
+=== RT2.2-05 [**CONTRADICTION**] noun: the charter hall
+  GROUND: `hasCharterHall` (`priorityHelpers.js:51`)
+  PERM: [archivist's reading] nothing is handed back — the face stays refused, but now because it contradicts the field named at left, not because no card licensed it.
+
+=== RT2.2-06 [**CONTRADICTION**] noun: the walls · the gates
+  GROUND: `hasWalls` (`priorityHelpers.js:52-53`)
+  PERM: write gates on any walled town
+
+=== RT2.2-07 [**STRUCK**] noun: the court
+  GROUND: the flag is the engine's own reading
+  PERM: call it the court at any `hasCourtSystem` town
+
+=== RT2.2-08 [**CONTRADICTION**] noun: the prison · the gaol
+  GROUND: `hasPrison` (`priorityHelpers.js:54`)
+  PERM: [archivist's reading] nothing is handed back — the face stays refused, but now because it contradicts the field named at left, not because no card licensed it.
+
+=== RT2.2-09 [**STRUCK**] noun: the magistrate · the constable
+  GROUND: a role word, and `magistrate` is in the ROLE instrument
+  PERM: write a magistrate as a person of the town
+
+=== RT2.2-10 [**SPLIT**] noun: the hall · the council · the seat
+  GROUND: KEPT: the hall's EXISTENCE below town tier, where no hall row is seated, and any claim denying the `{seat}` label rendered beside it. STRUCK: the baked-noun bar at town+ where `Town hall` / `City hall` is REQUIRED
+  PERM: write the hall, the council chamber, the room where it is decided — at town and up
+
+=== RT2.2-11 [**CONTRADICTION**] noun: the elders
+  GROUND: roster `Household elder · Village elder · Village headman · Town council` (`holderTable.js:332-336`) — except where the engine itself emits "the village elders" as a small-tier council label (`governanceNarrative.js:101-105`)
+  PERM: write the elders wherever the engine's own label does
+
+=== RT2.2-12 [**STRUCK**] noun: the reeve · the headman · the steward · the appointee
+  GROUND: the person bar; floor 3 relaxed
+  PERM: a reeve may be slow to open the books
+
+=== RT2.2-13 [**STRUCK**] noun: the treasury
+  GROUND: the citation rule — STRUCK because it policed PROVENANCE — whether the face named the record it drew on — and never whether the sentence was true.
+  PERM: cite the purse freely
+
+=== RT2.2-14 [**STRUCK**] noun: the office
+  GROUND: the citation rule — STRUCK because it policed PROVENANCE — whether the face named the record it drew on — and never whether the sentence was true.
+  PERM: [archivist's reading] write the sentence: the bar is struck and no field in the record denies it.
+
+=== RT2.2-15 [**STRUCK**] noun: the toll-bar
+  GROUND: a holder-layer bar — STRUCK as a LAYER BAR: it policed which noun a read EARNED (a permission grammar), not whether any claim was false.
+  PERM: [archivist's reading] write the sentence: the bar is struck and no field in the record denies it.
+
+=== RT2.2-16 [**STRUCK**] noun: the census
+  GROUND: a record-word bar — STRUCK as a RECORD-WORD BAR (W24's ratified-noun table): it policed which noun could name a record — a construction rule, not a truth rule.
+  PERM: write the roll, the count, the reckoning
+
+=== RT2.2-17 [**STRUCK**] noun: the tradition
+  GROUND: "nothing citable" is a citation bar
+  PERM: write custom, memory, the way it has been done
+
+=== RT2.2-18 [**STRUCK**] noun: the road (holder)
+  GROUND: layer — STRUCK as a LAYER BAR: it policed which noun a read EARNED (a permission grammar), not whether any claim was false.
+  PERM: [archivist's reading] write the sentence: the bar is struck and no field in the record denies it.
+
+=== RT2.2-19 [**CONTRADICTION**] noun: the market · the stalls · the exchange
+  GROUND: `generalStateProse.js:1109`, `:1138-1152`; a town whose only market row is a Black market resolves MARKET-OPEN and the roster prints the illegal row
+  PERM: write the trade, the stalls, what the town sells — asserting a LAWFUL market needs a licit row
+
+=== RT2.2-20 [**CONTRADICTION**] noun: the church · the temple · the parish
+  GROUND: `priorityHelpers.js:65-67` — the label trap
+  PERM: [archivist's reading] nothing is handed back — the face stays refused, but now because it contradicts the field named at left, not because no card licensed it.
+
+=== RT2.2-21 [**STRUCK**] noun: the granary · the storehouse
+  GROUND: a word-split rule
+  PERM: [archivist's reading] write the sentence: the bar is struck and no field in the record denies it.
+
+=== RT2.2-22 [**STRUCK**] noun: the hospital · the healer
+  GROUND: the flag catches four kinds; the engine's own reading
+  PERM: [archivist's reading] write the sentence: the bar is struck and no field in the record denies it.
+
+=== RT2.2-23 [**CONTRADICTION**] noun: the port · the harbour · the navy
+  GROUND: `hasPort` / `PORT_INFRA_RE` (`priorityHelpers.js:32`, `:61-62`)
+  PERM: [archivist's reading] nothing is handed back — the face stays refused, but now because it contradicts the field named at left, not because no card licensed it.
+
+=== RT2.2-24 [**CONTRADICTION**] noun: the guild · the trade
+  GROUND: `priorityHelpers.js:57-58`; the roster prints which guild
+  PERM: write the trades, the companies; "the craft guilds" needs a craft row
+
+=== RT2.2-25 [**CONTRADICTION**] noun: the magic house
+  GROUND: `priorityHelpers.js:68-71`
+  PERM: [archivist's reading] nothing is handed back — the face stays refused, but now because it contradicts the field named at left, not because no card licensed it.
+
+=== RT2.2-26 [**CONTRADICTION**] noun: the criminal house
+  GROUND: `priorityHelpers.js:72-76`; `criminalCaptureState: none` printed beside a face asserting an underworld
+  PERM: write the underworld where a criminal row or a criminal faction stands
+
+=== RT2.2-27 [**STRUCK**] noun: `{institution}` (a workshop)
+  GROUND: wiring (`generalStateProse.js:1259`) — STRUCK for POLICING WIRING, not truth: the row named a slot, field or pool that nothing fills or routes at this tip, so no writer could breach it.
+  PERM: [archivist's reading] nothing is handed back — the row is a wiring, count or research note for the register car, so the strike returns no permission a writer was being denied.
+
+=== RT2.2-28 [**STRUCK**] noun: `{steading}` · `{ruin}`
+  GROUND: no bar — STRUCK because the row recorded a PERMISSION, not a bar: nothing here was policing truth in the first place.
+  PERM: [archivist's reading] write the sentence: the bar is struck and no field in the record denies it.
+
+=== RT2.2-29 [**CONTRADICTION**] noun: the watchtower (missed noun)
+  GROUND: `institutionServices.js:1561-1565`; DS-GEN-17 GARRISONED fires on a Watchtower alone while its gloss says "a force the town PAYS for"
+  PERM: write the tower, the signal fire, the night watching; not a paid force
+
+=== RT2.2-30 [**STRUCK**] noun: the assembly · the royal seat (missed)
+  GROUND: research — STRUCK as RESEARCH, not a bar: the row recorded a survey finding about the layer vocabulary itself; no sentence could ever be false by it.
+  PERM: [archivist's reading] nothing is handed back — the row is a wiring, count or research note for the register car, so the strike returns no permission a writer was being denied.
+
+=== RT2.2-31 [**STRUCK**] noun: the mayor · the lord · the sexton · the warden (missed)
+  GROUND: the role bar — STRUCK as the ROLE-LAYER BAR: it policed naming a person or role where the read named a body — tone and grammar, not truth.
+  PERM: [archivist's reading] write the sentence: the bar is struck and no field in the record denies it.
+
+=== RT2.2-32 [**STRUCK**] noun: `{faction}` · `{faction2}`
+  GROUND: wiring — STRUCK for POLICING WIRING, not truth: the row named a slot, field or pool that nothing fills or routes at this tip, so no writer could breach it.
+  PERM: [archivist's reading] nothing is handed back — the row is a wiring, count or research note for the register car, so the strike returns no permission a writer was being denied.
+
+=== RT2.2-33 [**STRUCK**] noun: `{govFaction}`
+  GROUND: wiring — STRUCK for POLICING WIRING, not truth: the row named a slot, field or pool that nothing fills or routes at this tip, so no writer could breach it.
+  PERM: [archivist's reading] nothing is handed back — the row is a wiring, count or research note for the register car, so the strike returns no permission a writer was being denied.
+
+=== RT2.2-34 [**STRUCK**] noun: `{governing}`
+  GROUND: wiring — STRUCK for POLICING WIRING, not truth: the row named a slot, field or pool that nothing fills or routes at this tip, so no writer could breach it.
+  PERM: [archivist's reading] nothing is handed back — the row is a wiring, count or research note for the register car, so the strike returns no permission a writer was being denied.
+
+=== RT2.2-35 [**STRUCK**] noun: `{controller}`
+  GROUND: wiring (`supplyChainState.js:486`) — either the gloss or the fill is wrong
+  PERM: [archivist's reading] nothing is handed back — the row is a wiring, count or research note for the register car, so the strike returns no permission a writer was being denied.
+
+=== RT2.2-36 [**MODEL**] noun: `powerStructure.government` / `.governingName` · `criminalCaptureState` · per-faction `captureState` · a corruption impairment · a brokerage PATRON
+  GROUND: `holderTable.js:141` (birth, `adversarial`) · `:659-661` (world, `corrupted`/`capture`) · `rulingStructure.js:762-767`
+  PERM: write each rung at its own meaning
+
+=== RT2.2-37 [**SCOPE**] noun: `{npc}`
+  GROUND: floor 3 — FLOOR 3 (product scope + the deity doctrine): no NAMED character given a fate, and nothing predicated of a deity.
+  PERM: print the NAME; predicate no fate on the person
+
+=== RT2.2-38 [**STRUCK**] noun: `link` + `localRelationshipRole` (`patron` / `client`)
+  GROUND: the tie's own word
+  PERM: [archivist's reading] write the sentence: the bar is struck and no field in the record denies it.
+
+=== RT2.2-39 [**SPLIT**] noun: DS-GEN-3's bands (military · internal · monster · economic · magical axes; readiness label; safety head; prosperity; foodSecurity)
+  GROUND: KEPT: the label trap (a band reachable by a town lacking the body it names). STRUCK: the rule that a band read may name no body
+  PERM: name bodies on a band, where the town has them
+
+=== RT2.2R-01 [**CONTRADICTION**] noun: **assignment tried (survey):** "the guard" as the always-safe BODY word for the watch/garrison ‖ **refuter's v
+  GROUND: `safetyProfile.js:300`; `factionDynamics.js:232`
+  PERM: use "the guard" where any law body stands
+
+=== RT2.2R-02 [**STRUCK**] noun: **assignment tried (survey):** the magistrate · the constable · **the barracks** "exist ONLY as members of `SE
+  GROUND: a bar removed — STRUCK because the row recorded a PERMISSION, not a bar: nothing here was policing truth in the first place.
+  PERM: [archivist's reading] write the sentence: the bar is struck and no field in the record denies it.
+
+=== RT2.2R-03 [**CONTRADICTION**] noun: **assignment tried (survey):** "the market body" (MARKET_NAME resolves a market) ‖ **refuter's verdict:** REFU
+  GROUND: `generalStateProse.js:1109`
+  PERM: [archivist's reading] nothing is handed back — the face stays refused, but now because it contradicts the field named at left, not because no card licensed it.
+
+=== RT2.2R-04 [**STRUCK**] noun: **assignment tried (survey):** "For those ten [STATE-ORGAN] pools, `sourceOfForTown` will return INTERESTED on
+  GROUND: citation machinery — STRUCK because it policed PROVENANCE — whether the face named the record it drew on — and never whether the sentence was true.
+  PERM: [archivist's reading] write the sentence: the bar is struck and no field in the record denies it.
+
+=== RT2.2R-05 [**STRUCK**] noun: **assignment tried (survey):** "A ROLE WORD IN THIS ENGINE IS A BODY ROW, NOT A PERSON" (as a general law) ‖ *
+  GROUND: the role bar — STRUCK as the ROLE-LAYER BAR: it policed naming a person or role where the read named a body — tone and grammar, not truth.
+  PERM: [archivist's reading] write the sentence: the bar is struck and no field in the record denies it.
+
+=== RT2.2R-06 [**STRUCK**] noun: **assignment tried (survey):** "no typed NPC→institution edge exists" (as "the engine never joins a person to 
+  GROUND: research; the PERSON rule stands on scope alone — STRUCK as RESEARCH, not a bar: the row recorded a survey finding about the layer vocabulary itself; no sentence could ever be false by it.
+  PERM: [archivist's reading] nothing is handed back — the row is a wiring, count or research note for the register car, so the strike returns no permission a writer was being denied.
+
+=== RT2.2R-07 [**STRUCK**] noun: **assignment tried (survey):** "the frozen covert list is `impairment.covert`, `mobilization.covert`, `blocs.c
+  GROUND: research; the covert rule lives at VIS-01 — STRUCK as RESEARCH, not a bar: the row recorded a survey finding about the layer vocabulary itself; no sentence could ever be false by it.
+  PERM: [archivist's reading] nothing is handed back — the row is a wiring, count or research note for the register car, so the strike returns no permission a writer was being denied.
+
+=== RT2.2R-08 [**STRUCK**] noun: **assignment tried (survey):** readiness = "the AVERAGE of the five axes" ‖ **refuter's verdict:** CONDITIONAL
+  GROUND: a computation detail
+  PERM: [archivist's reading] nothing is handed back — the row is a wiring, count or research note for the register car, so the strike returns no permission a writer was being denied.
+
+=== RT2.2R-09 [**STRUCK**] noun: **assignment tried (survey):** the muster kind "= walls · garrison · militia · mercenary · charter plus `force
+  GROUND: research — STRUCK as RESEARCH, not a bar: the row recorded a survey finding about the layer vocabulary itself; no sentence could ever be false by it.
+  PERM: [archivist's reading] nothing is handed back — the row is a wiring, count or research note for the register car, so the strike returns no permission a writer was being denied.
+
+=== RT2.2R-10 [**MODEL**] noun: **assignment tried (survey):** "all four [purses] published side by side on `economicGates`" ‖ **refuter's ver
+  GROUND: `defenseGenerator.js:462-472`; R-viii′'s one purse over wall maintenance and wages
+  PERM: write the keeping as one purse; never the wall paid and the muster not
+
+=== RT2.2R-11 [**STRUCK**] noun: **assignment tried (survey):** `narrativeGenerator.js:632` for the `{govFaction}` note string ‖ **refuter's ve
+  GROUND: a cite — STRUCK because it policed PROVENANCE — whether the face named the record it drew on — and never whether the sentence was true.
+  PERM: [corrected] nothing is handed back: the row policed nothing — it is a correction to a CITE (a line number, a path, a count) inside the survey's own record, not a bar on anything a writer writes. Nothing was struck, and no permission follows.
+
+=== RT2.3-01 [**STRUCK**] noun: `{institution}` on DS-ECO-11 (exploitation lens)
+  GROUND: the fill is true of the town; the overlaps are wiring
+  PERM: write around whatever the slot renders
+
+=== RT2.3-02 [**STRUCK**] noun: `{institution}` on DS-SUP-3 (impaired lens)
+  GROUND: OW-8 — a wiring defect, never a writer's choice; the fill names a row the town HAS
+  PERM: [archivist's reading] nothing is handed back — the row is a wiring, count or research note for the register car, so the strike returns no permission a writer was being denied.
+
+=== RT2.3-03 [**STRUCK**] noun: `{faction}`
+  GROUND: wiring — STRUCK for POLICING WIRING, not truth: the row named a slot, field or pool that nothing fills or routes at this tip, so no writer could breach it.
+  PERM: [archivist's reading] nothing is handed back — the row is a wiring, count or research note for the register car, so the strike returns no permission a writer was being denied.
+
+=== RT2.3-04 [**STRUCK**] noun: `{access}`
+  GROUND: wiring (O-R1) — STRUCK for POLICING WIRING, not truth: the row named a slot, field or pool that nothing fills or routes at this tip, so no writer could breach it.
+  PERM: [archivist's reading] nothing is handed back — the row is a wiring, count or research note for the register car, so the strike returns no permission a writer was being denied.
+
+=== RT2.3-05 [**STRUCK**] noun: the granary
+  GROUND: a layer bar — STRUCK as a LAYER BAR: it policed which noun a read EARNED (a permission grammar), not whether any claim was false.
+  PERM: write the granary doors on a stock read
+
+=== RT2.3-06 [**CONTRADICTION**] noun: the market
+  GROUND: `priorityHelpers.js:56`; the roster prints `Black market`
+  PERM: [archivist's reading] nothing is handed back — the face stays refused, but now because it contradicts the field named at left, not because no card licensed it.
+
+=== RT2.3-07 [**CONTRADICTION**] noun: its mill
+  GROUND: `foodStockpile.js:194`; the roster names which mill
+  PERM: write the mill; call it a grain mill only where the row is one
+
+=== RT2.3-08 [**CONTRADICTION**] noun: the guilds · a guild
+  GROUND: `priorityHelpers.js:57-58` — `hasGuild` fires on `Thieves' guild`
+  PERM: [archivist's reading] nothing is handed back — the face stays refused, but now because it contradicts the field named at left, not because no card licensed it.
+
+=== RT2.3-09 [**STRUCK**] noun: the hall · the halls
+  GROUND: an organ-mismatch and a fused relation; both policed tone
+  PERM: write the hall as the place a trade leans on
+
+=== RT2.3-10 [**STRUCK**] noun: the gates · the gate returns
+  GROUND: a record-word bar; the pool is WIRING-UNRESOLVED and never fires
+  PERM: [archivist's reading] nothing is handed back — the row is a wiring, count or research note for the register car, so the strike returns no permission a writer was being denied.
+
+=== RT2.3-11 [**CONTRADICTION**] noun: the walls · a wall
+  GROUND: `hasWalls` — the Defense panel prints the works on the same dossier (`priorityHelpers.js:52`)
+  PERM: write inside the walls of a walled town
+
+=== RT2.3-12 [**CONTRADICTION**] noun: its watch
+  GROUND: `hasWatch` — DS-ECO-11 Forest fires on watchless towns (`priorityHelpers.js:48`)
+  PERM: [archivist's reading] nothing is handed back — the face stays refused, but now because it contradicts the field named at left, not because no card licensed it.
+
+=== RT2.3-13 [**STRUCK**] noun: the warehouses · the workshops · the yard · the stalls · the house · the quarter · the workings · the stores
+  GROUND: civic-class generics
+  PERM: [archivist's reading] write the sentence: the bar is struck and no field in the record denies it.
+
+=== RT2.3-14 [**STRUCK**] noun: the books · the accounts · the ledgers · the rolls · the returns · the duties · fees / a licence · the survey · the counts · the purse / the chest (record words)
+  GROUND: W24 — the ratified-noun table policed vocabulary, not truth
+  PERM: use any record noun the sentence wants
+
+=== RT2.3-15 [**STRUCK**] noun: a stranger (×42) · the crier (×5) · a clerk / the clerks (×3) · the men · Merchants · [elder]
+  GROUND: role/standpoint words; floor 3 relaxed (the `Merchants` visibility fault is E-F18)
+  PERM: write the crier, the clerks, the stranger at the gate
+
+=== RT2.3-16 [**STRUCK**] noun: the road · the roads (missed noun, 31 occurrences)
+  GROUND: a citation question — STRUCK because it policed PROVENANCE — whether the face named the record it drew on — and never whether the sentence was true.
+  PERM: write the road as a road
+
+=== RT2.3-17 [**STRUCK**] noun: the hands (as a POWER) · one name
+  GROUND: the oblique naming was a permission dodge
+  PERM: name a power obliquely; that IS the hook
+
+=== RT2.3-18 [**STRUCK**] noun: Customs house · Warden's Lodge · Workhouse · Hunter's lodge · Adventurers' charter hall (missed)
+  GROUND: research — STRUCK as RESEARCH, not a bar: the row recorded a survey finding about the layer vocabulary itself; no sentence could ever be false by it.
+  PERM: [archivist's reading] nothing is handed back — the row is a wiring, count or research note for the register car, so the strike returns no permission a writer was being denied.
+
+=== RT2.3-19 [**STRUCK**] noun: `rank` · `foodBalance.*` · `granary.*` (band) · `readings.flowDrift.band` · `text(terrainKey)` · `readings.notableAbsences` · `leading.bucket`
+  GROUND: W20's core; the label traps are carried by the body rows
+  PERM: name a body on a band read where the town has it
+
+=== RT2.3-20 [**CONTRADICTION**] noun: `eco.safetyProfile.blackMarketCapture`
+  GROUND: `safetyProfile.js:619-638` vs `criminalCaptureState` printed on the Power surface (O-R6)
+  PERM: write the shadow trade's weight; never "the watch is bought" from this read while the ladder reads `none`
+
+=== RT2.3-21 [**CONTRADICTION**] noun: `eco.incomeSources` (+ `.length` · `.reduce` · `.filter`)
+  GROUND: `holderTable.js:166`; the ladder on the same dossier
+  PERM: write the criminal line in the mix; not the underworld holding the purse
+
+=== RT2.3-22 [**STRUCK**] noun: `eco.foodSecurity.stockpile.blockaded` · `.blockadeBypass`
+  GROUND: layer — STRUCK as a LAYER BAR: it policed which noun a read EARNED (a permission grammar), not whether any claim was false.
+  PERM: [archivist's reading] write the sentence: the bar is struck and no field in the record denies it.
+
+=== RT2.3-23 [**STRUCK**] noun: `readings.exportPosture.status` · `analysis.economicStrengths` · `.strategicValue` · `eco.isEntrepot` · `.localProduction` · `.primaryExports` · `.primaryImports`
+  GROUND: layer — STRUCK as a LAYER BAR: it policed which noun a read EARNED (a permission grammar), not whether any claim was false.
+  PERM: [archivist's reading] write the sentence: the bar is struck and no field in the record denies it.
+
+=== RT2.3R-01 [**STRUCK**] noun: **assignment tried (survey):** LAYER = BODY on `rank`, `foodBalance.*`, `granary.*`, `readings.flowDrift.band`
+  GROUND: the layer vocabulary — STRUCK as a LAYER BAR: it policed which noun a read EARNED (a permission grammar), not whether any claim was false.
+  PERM: [archivist's reading] nothing is handed back — the row is a wiring, count or research note for the register car, so the strike returns no permission a writer was being denied.
+
+=== RT2.3R-02 [**STRUCK**] noun: **assignment tried (survey):** LAYER = ORGAN-UNDER-POWER on `blackMarketCapture` and `incomeSources` (as if th
+  GROUND: unwired — STRUCK for POLICING WIRING, not truth: nothing fills the slot at this tip.
+  PERM: [archivist's reading] nothing is handed back — the row is a wiring, count or research note for the register car, so the strike returns no permission a writer was being denied.
+
+=== RT2.3R-03 [**STRUCK**] noun: **assignment tried (survey):** "BODY, cited to an organ" on `stockpile.blockaded/.blockadeBypass`, `exportPost
+  GROUND: layer — STRUCK as a LAYER BAR: it policed which noun a read EARNED (a permission grammar), not whether any claim was false.
+  PERM: [archivist's reading] write the sentence: the bar is struck and no field in the record denies it.
+
+=== RT2.3R-04 [**STRUCK**] noun: **assignment tried (survey):** *duties* = "the toll-bar/treasury duty vocabulary (`DUTY_SERVICE_KINDS`)" ‖ **r
+  GROUND: W24 — STRUCK as a RECORD-WORD BAR (W24's ratified-noun table): it policed which noun could name a record — a construction rule, not a truth rule.
+  PERM: write duties, returns, ledgers
+
+=== RT2.3R-05 [**STRUCK**] noun: **assignment tried (survey):** "the market body" / "toll-bar organ" as words ‖ **refuter's verdict:** REFUTED 
+  GROUND: vocabulary — STRUCK as a VOCABULARY note for the register car: a naming collision, not a claim a face could make false.
+  PERM: [archivist's reading] nothing is handed back — the row is a wiring, count or research note for the register car, so the strike returns no permission a writer was being denied.
+
+=== RT2.3R-06 [**CONTRADICTION**] noun: **assignment tried (survey):** *Merchants operating in the shadow economy…* = `economicDragDesc` scaleNote ‖ *
+  GROUND: `EconomicsTab.jsx:664`; the annex declares DS-ECO-6 wholly `dm-only` — the two surfaces disagree
+  PERM: — (a wiring fix, not a writer's)
+
+=== RT2.3R-07 [**STRUCK**] noun: **assignment tried (survey):** *a clerk* at DS-ECO-6 ≥30 v1 ‖ **refuter's verdict:** CONDITIONAL — count right
+  GROUND: a cite — STRUCK because it policed PROVENANCE — whether the face named the record it drew on — and never whether the sentence was true.
+  PERM: [corrected] nothing is handed back: the row policed nothing — it is a correction to a CITE (a line number, a path, a count) inside the survey's own record, not a bar on anything a writer writes. Nothing was struck, and no permission follows.
+
+=== RT2.3R-08 [**STRUCK**] noun: **assignment tried (survey):** `properFill` "refused 1 of 25: `Bakers (5-15)`" as a DS-ECO-11 `{institution}` 
+  GROUND: a cite — STRUCK because it policed PROVENANCE — whether the face named the record it drew on — and never whether the sentence was true.
+  PERM: [corrected] nothing is handed back: the row policed nothing — it is a correction to a CITE (a line number, a path, a count) inside the survey's own record, not a bar on anything a writer writes. Nothing was struck, and no permission follows.
+
+=== RT2.3R-09 [**STRUCK**] noun: **assignment tried (survey):** the `watch` token row at `holderTable.js:203-209`; the census "`fieldSynonyms` 
+  GROUND: a cite — STRUCK because it policed PROVENANCE — whether the face named the record it drew on — and never whether the sentence was true.
+  PERM: [corrected] nothing is handed back: the row policed nothing — it is a correction to a CITE (a line number, a path, a count) inside the survey's own record, not a bar on anything a writer writes. Nothing was struck, and no permission follows.
+
+=== RT2.3R-10 [**STRUCK**] noun: **assignment tried (survey):** paths: `institutionTable.js`, `ServicesTab.jsx`, `serviceCategoryTables.js` ‖ *
+  GROUND: cites — STRUCK because it policed PROVENANCE — whether the face named the record it drew on — and never whether the sentence was true.
+  PERM: [corrected] nothing is handed back: the row policed nothing — it is a correction to a CITE (a line number, a path, a count) inside the survey's own record, not a bar on anything a writer writes. Nothing was struck, and no permission follows.
+
+=== RT2.4-01 [**CONTRADICTION**] noun: the watch
+  GROUND: `hasWatch` / the roster; `safetyProfile.js:300`
+  PERM: write the watch on a power page — where the town has one
+
+=== RT2.4-02 [**SPLIT**] noun: the hall
+  GROUND: KEPT: the hall's existence below town tier, and any claim denying the `{seat}` label. STRUCK: the baked-power bar
+  PERM: write the hall as the place power sits, at town and up
+
+=== RT2.4-03 [**CONTRADICTION**] noun: the walls · the gates
+  GROUND: `hasWalls` (`priorityHelpers.js:52`)
+  PERM: [archivist's reading] nothing is handed back — the face stays refused, but now because it contradicts the field named at left, not because no card licensed it.
+
+=== RT2.4-04 [**CONTRADICTION**] noun: the granary
+  GROUND: `hasGranary` (`priorityHelpers.js:63`)
+  PERM: [archivist's reading] nothing is handed back — the face stays refused, but now because it contradicts the field named at left, not because no card licensed it.
+
+=== RT2.4-05 [**CONTRADICTION**] noun: the customs
+  GROUND: `institutionServices.js:530` — the roster
+  PERM: [archivist's reading] nothing is handed back — the face stays refused, but now because it contradicts the field named at left, not because no card licensed it.
+
+=== RT2.4-06 [**CONTRADICTION**] noun: the market
+  GROUND: `priorityHelpers.js:56`; `criminalOpRole.js:38-57` prints the role label beside it
+  PERM: write the operation by its own role label; "the market" needs a market row
+
+=== RT2.4-07 [**STRUCK**] noun: the court
+  GROUND: the assembly sense is silence, and silence is permission
+  PERM: write a divided court
+
+=== RT2.4-08 [**CONTRADICTION**] noun: the council
+  GROUND: `readings.structuralLens.rulingPower` / `powerStructure.governingName` — a council named where the value is `autocrat` or `theocracy`
+  PERM: write the council on the council lens
+
+=== RT2.4-09 [**STRUCK**] noun: the workshops · the tables · the clearinghouse · the temple / `{institution}` · the prison / the gaol
+  GROUND: an invention where the record is silent is now licensed
+  PERM: write a clearinghouse
+
+=== RT2.4-10 [**STRUCK**] noun: the muster
+  GROUND: no bar — STRUCK because the row recorded a PERMISSION, not a bar: nothing here was policing truth in the first place.
+  PERM: [archivist's reading] write the sentence: the bar is struck and no field in the record denies it.
+
+=== RT2.4-11 [**STRUCK**] noun: the rolls · the records · the accounts · the books · the returns · the manifests · the minutes · the writ
+  GROUND: W24 + the "roll as an agent-source" bar; both policed tone
+  PERM: let the rolls show, carry, refuse
+
+=== RT2.4-12 [**STRUCK**] noun: the houses · a house
+  GROUND: a vocabulary collision — STRUCK as a VOCABULARY note for the register car: a naming collision, not a claim a face could make false.
+  PERM: [archivist's reading] nothing is handed back — the row is a wiring, count or research note for the register car, so the strike returns no permission a writer was being denied.
+
+=== RT2.4-13 [**STRUCK**] noun: the combination · the bloc · the majority
+  GROUND: the shipped word is licensed
+  PERM: [archivist's reading] write the sentence: the bar is struck and no field in the record denies it.
+
+=== RT2.4-14 [**STRUCK**] noun: the criminal interest · the operator
+  GROUND: the class word was always safe; the name is unwired
+  PERM: [archivist's reading] nothing is handed back — the row is a wiring, count or research note for the register car, so the strike returns no permission a writer was being denied.
+
+=== RT2.4-15 [**STRUCK**] noun: the office (missed noun, 5 uses)
+  GROUND: layer — STRUCK as a LAYER BAR: it policed which noun a read EARNED (a permission grammar), not whether any claim was false.
+  PERM: [archivist's reading] write the sentence: the bar is struck and no field in the record denies it.
+
+=== RT2.4-16 [**STRUCK**] noun: the clerks · the officials · an operator · a leader · the person who speaks for {faction} · the incumbent / the challenger · a ruler
+  GROUND: the ACT charges rested on the person bar; floor 3 relaxed
+  PERM: a clerk may chase, an official may be agreeable, an operator may lean on a door
+
+=== RT2.4-17 [**SCOPE**] noun: `{npc}`
+  GROUND: floor 3 — FLOOR 3 (product scope + the deity doctrine): no NAMED character given a fate, and nothing predicated of a deity.
+  PERM: print the name; predicate no fate
+
+=== RT2.4-18 [**STRUCK**] noun: the reeve · the headman · the mayor · the priest · elder · the captain
+  GROUND: the role bar — STRUCK as the ROLE-LAYER BAR: it policed naming a person or role where the read named a body — tone and grammar, not truth.
+  PERM: [archivist's reading] write the sentence: the bar is struck and no field in the record denies it.
+
+=== RT2.4-19 [**CONTRADICTION**] noun: `{seat}`
+  GROUND: `rulingStructure.js:787`, `:792`; the rendered label is on the page
+  PERM: write around the label; never deny it
+
+=== RT2.4-20 [**CONTRADICTION**] noun: `{faction}`
+  GROUND: `powerStateProse.js:860`, `:876`, `:900-901`, `:953`, `:962` — one referent printed as two actors, and an accusation landing on the wrong power
+  PERM: never name both in one unit until the register car separates them
+
+=== RT2.4-21 [**CONTRADICTION**] noun: `{counterpart}`
+  GROUND: `stressFactions.js:105-107` — "its presence is not known to the settlement", rendered on a player face with 0 dm-only marks
+  PERM: [archivist's reading] nothing is handed back — the face stays refused, but now because it contradicts the field named at left, not because no card licensed it.
+
+=== RT2.4-22 [**CONTRADICTION**] noun: the ruling structure (as a CLASS) · the patron
+  GROUND: `settlementPolitics.js:461-465`; `brokeragePatronage.js:60` — the bloc's end token is not a patronage record
+  PERM: write the combination's end in the bloc's own terms
+
+=== RT2.4-23 [**CONTRADICTION**] noun: an army · the harvest · the government / the governing body (missed)
+  GROUND: `factionDynamics.js:132-133`; the predicate is COEXTENSIVE with the crisis band (`score < 30`), and the record names one government
+  PERM: write a legitimacy below thirty; never a second government
+
+=== RT2.4R-01 [**SCOPE**] noun: **assignment tried (survey):** PERSON — "`holderRole` is a hardcoded null: no typed NPC→institution edge exist
+  GROUND: floor 3 — FLOOR 3 (product scope + the deity doctrine): no NAMED character given a fate, and nothing predicated of a deity.
+  PERM: [archivist's reading] nothing is handed back — product scope or the deity doctrine still refuses it.
+
+=== RT2.4R-02 [**CONTRADICTION**] noun: **assignment tried (survey):** "the guard" — zero occurrences; the safe BODY word for the garrison bucket ‖ **
+  GROUND: `safetyProfile.js:300`; `rulingStructure.js:596`
+  PERM: [archivist's reading] nothing is handed back — the face stays refused, but now because it contradicts the field named at left, not because no card licensed it.
+
+=== RT2.4R-03 [**STRUCK**] noun: **assignment tried (survey):** "the captain · the factor — not part of this desk's vocabulary; captain matches
+  GROUND: a bar removed — STRUCK because the row recorded a PERMISSION, not a bar: nothing here was policing truth in the first place.
+  PERM: write a watch captain, a garrison commander
+
+=== RT2.4R-04 [**STRUCK**] noun: **assignment tried (survey):** Q-7 / "draft law 4 currently has NO mechanical carrier on this desk; visibility
+  GROUND: wiring; the audience rule lives at VIS-19 — STRUCK for POLICING WIRING, not truth: the row named a slot, field or pool that nothing fills or routes at this tip, so no writer could breach it.
+  PERM: [archivist's reading] nothing is handed back — the row is a wiring, count or research note for the register car, so the strike returns no permission a writer was being denied.
+
+=== RT2.4R-05 [**STRUCK**] noun: **assignment tried (survey):** POWER (INTERESTED) — "the four state organs become interested parties" ‖ **refu
+  GROUND: unwired — STRUCK for POLICING WIRING, not truth: nothing fills the slot at this tip.
+  PERM: [archivist's reading] nothing is handed back — the row is a wiring, count or research note for the register car, so the strike returns no permission a writer was being denied.
+
+=== RT2.4R-06 [**STRUCK**] noun: **assignment tried (survey):** a corruption impairment = the covert channel ‖ **refuter's verdict:** CONDITION
+  GROUND: wiring (see newFindings: custom content) — STRUCK for POLICING WIRING, not truth: the row named a slot, field or pool that nothing fills or routes at this tip, so no writer could breach it.
+  PERM: [archivist's reading] nothing is handed back — the row is a wiring, count or research note for the register car, so the strike returns no permission a writer was being denied.
+
+=== RT2.4R-07 [**STRUCK**] noun: **assignment tried (survey):** "the ladder names no faction … none typed — the criminal party is never named b
+  GROUND: research — STRUCK as RESEARCH, not a bar: the row recorded a survey finding about the layer vocabulary itself; no sentence could ever be false by it.
+  PERM: [archivist's reading] nothing is handed back — the row is a wiring, count or research note for the register car, so the strike returns no permission a writer was being denied.
+
+=== RT2.4R-08 [**STRUCK**] noun: **assignment tried (survey):** "66 of 256 variants carry at least one body word" ‖ **refuter's verdict:** COND
+  GROUND: a count — STRUCK as a COUNT: an arithmetic correction to the survey's own tally; it barred no face.
+  PERM: [archivist's reading] nothing is handed back — the row is a wiring, count or research note for the register car, so the strike returns no permission a writer was being denied.
+
+=== RT2.4R-09 [**STRUCK**] noun: **assignment tried (survey):** cite corrections (claims hold) ‖ **refuter's verdict:** cite REFUTED ‖ **eviden
+  GROUND: cites — STRUCK because it policed PROVENANCE — whether the face named the record it drew on — and never whether the sentence was true.
+  PERM: [corrected] nothing is handed back: the row policed nothing — it is a correction to a CITE (a line number, a path, a count) inside the survey's own record, not a bar on anything a writer writes. Nothing was struck, and no permission follows.
+
+=== RT2.5-01 [**CONTRADICTION**] noun: walls · wall (13 uses)
+  GROUND: `hasWalls` (`priorityHelpers.js:53`) — the Defense panel on the same dossier
+  PERM: write the walls of a walled town on any crisis
+
+=== RT2.5-02 [**CONTRADICTION**] noun: gates · gate (3)
+  GROUND: `hasGates` / `hasWalls` (`priorityHelpers.js:52`)
+  PERM: [archivist's reading] nothing is handed back — the face stays refused, but now because it contradicts the field named at left, not because no card licensed it.
+
+=== RT2.5-03 [**CONTRADICTION**] noun: garrison · garrisons (7)
+  GROUND: `hasGarrison` (`priorityHelpers.js:46`)
+  PERM: [archivist's reading] nothing is handed back — the face stays refused, but now because it contradicts the field named at left, not because no card licensed it.
+
+=== RT2.5-04 [**STRUCK**] noun: soldiers · officers (1 face)
+  GROUND: a person-plural — STRUCK under the relaxed PERSON rule: floor 3 reaches only a NAMED character given a fate, so an unnamed person acting is a plot hook, not a breach.
+  PERM: [archivist's reading] write the sentence: the bar is struck and no field in the record denies it.
+
+=== RT2.5-05 [**CONTRADICTION**] noun: watch (2: a verb at 4145, a body at 4155)
+  GROUND: `hasWatch`; `safetyProfile.js:30-35` prints `'local watch'` only where `hasWatch` resolves
+  PERM: say "keeps watch" anywhere; assert the watch as a body where the row stands
+
+=== RT2.5-06 [**STRUCK**] noun: army (2)
+  GROUND: `activeConditions.js:342`
+  PERM: [archivist's reading] write the sentence: the bar is struck and no field in the record denies it.
+
+=== RT2.5-07 [**CONTRADICTION**] noun: granary (2) · stores (2)
+  GROUND: `hasGranary` (`priorityHelpers.js:63`)
+  PERM: [archivist's reading] nothing is handed back — the face stays refused, but now because it contradicts the field named at left, not because no card licensed it.
+
+=== RT2.5-08 [**CONTRADICTION**] noun: market (6)
+  GROUND: `hasMarket` / the licit-member trap (`priorityHelpers.js:56`)
+  PERM: [archivist's reading] nothing is handed back — the face stays refused, but now because it contradicts the field named at left, not because no card licensed it.
+
+=== RT2.5-09 [**CONTRADICTION**] noun: warehouse · warehouses (2)
+  GROUND: `hasWarehouse` (`priorityHelpers.js:60`)
+  PERM: [archivist's reading] nothing is handed back — the face stays refused, but now because it contradicts the field named at left, not because no card licensed it.
+
+=== RT2.5-10 [**SPLIT**] noun: hall (4) · council (2) · chamber (1) · seat (12) · office / offices (5)
+  GROUND: KEPT: the hall's existence at thorp/hamlet, where no hall row is seated. STRUCK: the class refusal and the layer split
+  PERM: write the chamber, the office, the seat as places
+
+=== RT2.5-11 [**CONTRADICTION**] noun: courthouse (1)
+  GROUND: the roster (`hasCourtSystem` may be a hall, not a courthouse) (`priorityHelpers.js:55`)
+  PERM: write the court; a courthouse BUILDING needs the row
+
+=== RT2.5-12 [**STRUCK**] noun: treasury (2)
+  GROUND: the phrase is VERBATIM the record's own `reason` (`stressorDynamics.js:844`)
+  PERM: let the treasury drown, grasp, run dry
+
+=== RT2.5-13 [**SPLIT**] noun: altars · pulpit · sanctuary · observances · rite · creed · congregations (8)
+  GROUND: KEPT: a religious BODY where the roster carries no religious row, and floor 3 (nothing predicated of a deity). STRUCK: the civic-class token filter, which never saw "pulpit" or "altars" anyway
+  PERM: write the rite, the observance, the tending; a shrine BUILDING needs a row
+
+=== RT2.5-14 [**STRUCK**] noun: roads · road (2) · routes · arteries (missed)
+  GROUND: a route word
+  PERM: [archivist's reading] write the sentence: the bar is struck and no field in the record denies it.
+
+=== RT2.5-15 [**STRUCK**] noun: workshops (1) · workroom (missed)
+  GROUND: the craft class is generic; no single row is asserted
+  PERM: [archivist's reading] write the sentence: the bar is struck and no field in the record denies it.
+
+=== RT2.5-16 [**STRUCK**] noun: schools (1) · taverns (1) · camps (2)
+  GROUND: research — STRUCK as RESEARCH, not a bar: the row recorded a survey finding about the layer vocabulary itself; no sentence could ever be false by it.
+  PERM: [archivist's reading] nothing is handed back — the row is a wiring, count or research note for the register car, so the strike returns no permission a writer was being denied.
+
+=== RT2.5-17 [**STRUCK**] noun: houses (merchant sense, 2)
+  GROUND: an archetype class word
+  PERM: [archivist's reading] write the sentence: the bar is struck and no field in the record denies it.
+
+=== RT2.5-18 [**STRUCK**] noun: institutions · institution (4)
+  GROUND: asserts no row
+  PERM: [archivist's reading] write the sentence: the bar is struck and no field in the record denies it.
+
+=== RT2.5-19 [**STRUCK**] noun: healers (1)
+  GROUND: `institutionalCatalog.js:845`; `npcGenerator.js:1035`
+  PERM: [archivist's reading] write the sentence: the bar is struck and no field in the record denies it.
+
+=== RT2.5-20 [**STRUCK**] noun: barracks · militia · mercenary · charter · citadel · palisade · prison · gaol · muster (0 uses)
+  GROUND: never rendered
+  PERM: [archivist's reading] nothing is handed back on this desk — no shipped face here uses the word, so the strike lifts a bar nobody was hitting; elsewhere the noun stands or falls on its own row.
+
+=== RT2.5-21 [**STRUCK**] noun: rolls (3) · registers (verb) · books (2) · accounts (2) · ledgers (1) · seal(s) (2) · writ (1) · licence / permission (2) · tax / levy / levies (6) · quarantine (1) · lists / tally / bill (missed)
+  GROUND: W24; `quarantine` alone has no record at all (a Defense-tab display posture) and should not be asserted against a Defense tab printing no quarantine
+  PERM: write any register word; check the Defense posture before declaring a quarantine
+
+=== RT2.5-22 [**STRUCK**] noun: "another power" / "an outside power" (2)
+  GROUND: it was never a bar — STRUCK because the row recorded a PERMISSION, not a bar: nothing here was policing truth in the first place.
+  PERM: [archivist's reading] write the sentence: the bar is struck and no field in the record denies it.
+
+=== RT2.5-23 [**STRUCK**] noun: authority (5)
+  GROUND: `publicLegitimacy` is not a holder token; a class word
+  PERM: [archivist's reading] write the sentence: the bar is struck and no field in the record denies it.
+
+=== RT2.5-24 [**STRUCK**] noun: government / governments (7) · the ruling power (1) · the seat (12)
+  GROUND: class words
+  PERM: [archivist's reading] write the sentence: the bar is struck and no field in the record denies it.
+
+=== RT2.5-25 [**STRUCK**] noun: ruler / rulers (2)
+  GROUND: the engine's own hook says "loyal to the seat"; floor 3 relaxed
+  PERM: write the ruler
+
+=== RT2.5-26 [**STRUCK**] noun: occupier (2)
+  GROUND: wiring; the class word was always safe — STRUCK for POLICING WIRING, not truth: the row named a slot, field or pool that nothing fills or routes at this tip, so no writer could breach it.
+  PERM: write the occupier
+
+=== RT2.5-27 [**STRUCK**] noun: creditor / creditors (2) · sponsor (2) · faction / factions (2) · religious authority (1) · the houses that finance (1) · neighbour (missed) · conspiracy / conspirators / the plot (missed) · resistance / armed movement (missed)
+  GROUND: POWER class words with unwired names
+  PERM: write them all as class words
+
+=== RT2.5-28 [**STRUCK**] noun: clerks (3) · collector(s) (3) · officers (1) · administrators (1) · scouts (1) · handler / asset (1)
+  GROUND: floor 3 relaxed — FLOOR 3 (product scope + the deity doctrine): no NAMED character given a fate, and nothing predicated of a deity.
+  PERM: let the collectors travel in pairs
+
+=== RT2.5-29 [**STRUCK**] noun: overseers (2) · officials (1) · healers (1) · mages / casters / hedge wizards (4) · captain · reeve · elder · priest · factor (0 uses)
+  GROUND: agency is now licensed
+  PERM: [archivist's reading] write the sentence: the bar is struck and no field in the record denies it.
+
+=== RT2.5-30 [**STRUCK**] noun: heir (missed) · the person responsible · somebody it had reason to trust · Somebody … answers elsewhere (missed)
+  GROUND: unnamed persons — STRUCK under the relaxed PERSON rule: floor 3 reaches only a NAMED character given a fate, so an unnamed person acting is a plot hook, not a breach.
+  PERM: [archivist's reading] write the sentence: the bar is struck and no field in the record denies it.
+
+=== RT2.5-31 [**STRUCK**] noun: collaborators / patriots · commons / households / population / people (23) · the men · hands · the street / the crowd · badge · the works
+  GROUND: "a totality over persons" policed tone
+  PERM: write the street, the crowd, the households
+
+=== RT2.5-32 [**STRUCK**] noun: `{counterpart}`
+  GROUND: wiring — STRUCK for POLICING WIRING, not truth: the row named a slot, field or pool that nothing fills or routes at this tip, so no writer could breach it.
+  PERM: [archivist's reading] nothing is handed back — the row is a wiring, count or research note for the register car, so the strike returns no permission a writer was being denied.
+
+=== RT2.5-33 [**CONTRADICTION**] noun: `attackerLabel`
+  GROUND: `stressorDynamics.js:787-796`; `stressors.js:610-627` — on an `unattributed` origin the record states that nobody knows
+  PERM: say the town does not know; naming the attacker denies the origin token
+
+=== RT2.5-34 [**CONTRADICTION**] noun: `originContext.variant` (17 ORIGIN pools)
+  GROUND: `stressorDynamics.js:877`, `:886-893`; `palace_coup` is archetype `noble` OR THE DEFAULT (B-12)
+  PERM: write the origin's own archetype; the fallbacks name nobody
+
+=== RT2.5-35 [**STRUCK**] noun: `condition.archetype` (3 written of 46)
+  GROUND: research — STRUCK as RESEARCH, not a bar: the row recorded a survey finding about the layer vocabulary itself; no sentence could ever be false by it.
+  PERM: [archivist's reading] nothing is handed back — the row is a wiring, count or research note for the register car, so the strike returns no permission a writer was being denied.
+
+=== RT2.5-36 [**STRUCK**] noun: the other reads: `token (via CRISIS_POOL_OF)` ×15 · ARITY ×2 · `worldStressor.lifecycleStage` ×5 · COUNTERFORCE / SYNERGY (dark) ×10 · `condition.severity` ×4 · DIRECTION ×2 · PROVENANCE ×2 · DURATION ×1 · FAMILY (dark) ×6
+  GROUND: the layer bar; the records' own `description` / `hooks` / `reason` strings carry the engine's body words
+  PERM: write a crisis in the town's own furniture
+
+=== RT2.5R-01 [**STRUCK**] noun: **assignment tried (survey):** variants 99 · 96 · 51 ‖ **refuter's verdict:** REFUTED (per block; the total 24
+  GROUND: a count — STRUCK as a COUNT: an arithmetic correction to the survey's own tally; it barred no face.
+  PERM: [archivist's reading] nothing is handed back — the row is a wiring, count or research note for the register car, so the strike returns no permission a writer was being denied.
+
+=== RT2.5R-02 [**STRUCK**] noun: **assignment tried (survey):** "the desk's implementation `stressorsStateProse.js` — leaf map `prose-licence-c
+  GROUND: a cite — STRUCK because it policed PROVENANCE — whether the face named the record it drew on — and never whether the sentence was true.
+  PERM: [corrected] nothing is handed back: the row policed nothing — it is a correction to a CITE (a line number, a path, a count) inside the survey's own record, not a bar on anything a writer writes. Nothing was struck, and no permission follows.
+
+=== RT2.5R-03 [**STRUCK**] noun: **assignment tried (survey):** "the addendum's `holderTable.js:129-143` CORRECTED: the function opens at `:127
+  GROUND: a cite — STRUCK because it policed PROVENANCE — whether the face named the record it drew on — and never whether the sentence was true.
+  PERM: [corrected] nothing is handed back: the row policed nothing — it is a correction to a CITE (a line number, a path, a count) inside the survey's own record, not a bar on anything a writer writes. Nothing was struck, and no permission follows.
+
+=== RT2.5R-04 [**STRUCK**] noun: **assignment tried (survey):** `hasWatch` "town tier and up only (`:48`)" ‖ **refuter's verdict:** CONDITIONAL
+  GROUND: a bar removed — STRUCK because the row recorded a PERMISSION, not a bar: nothing here was policing truth in the first place.
+  PERM: write a watch at any tier where the row stands
+
+=== RT2.5R-05 [**STRUCK**] noun: **assignment tried (survey):** `FACTION_ROLES` "the ONLY typed role vocabulary" ‖ **refuter's verdict:** CONDI
+  GROUND: research — STRUCK as RESEARCH, not a bar: the row recorded a survey finding about the layer vocabulary itself; no sentence could ever be false by it.
+  PERM: [archivist's reading] nothing is handed back — the row is a wiring, count or research note for the register car, so the strike returns no permission a writer was being denied.
+
+=== RT2.5R-06 [**STRUCK**] noun: **assignment tried (survey):** `worldState.stressors[]` "institution ref: none"; `settlement.activeConditions[
+  GROUND: research — STRUCK as RESEARCH, not a bar: the row recorded a survey finding about the layer vocabulary itself; no sentence could ever be false by it.
+  PERM: [archivist's reading] nothing is handed back — the row is a wiring, count or research note for the register car, so the strike returns no permission a writer was being denied.
+
+=== RT2.5R-07 [**STRUCK**] noun: **assignment tried (survey):** "on this desk EVERY institution-class noun is rendered on a read whose RECORD h
+  GROUND: research — STRUCK as RESEARCH, not a bar: the row recorded a survey finding about the layer vocabulary itself; no sentence could ever be false by it.
+  PERM: [archivist's reading] nothing is handed back — the row is a wiring, count or research note for the register car, so the strike returns no permission a writer was being denied.
+
+=== RT2.5R-08 [**STRUCK**] noun: **assignment tried (survey):** warehouse "no body row" · schools / taverns "no roster row" · healers "no engin
+  GROUND: bars removed — STRUCK because the row recorded a PERMISSION, not a bar: nothing here was policing truth in the first place.
+  PERM: [archivist's reading] write the sentence: the bar is struck and no field in the record denies it.
+
+=== RT2.5R-09 [**STRUCK**] noun: **assignment tried (survey):** "authority" → `publicLegitimacy` → court kind ‖ **refuter's verdict:** REFUTED 
+  GROUND: a cite — STRUCK because it policed PROVENANCE — whether the face named the record it drew on — and never whether the sentence was true.
+  PERM: [corrected] nothing is handed back: the row policed nothing — it is a correction to a CITE (a line number, a path, a count) inside the survey's own record, not a bar on anything a writer writes. Nothing was struck, and no permission follows.
+
+=== RT2.5R-10 [**STRUCK**] noun: **assignment tried (survey):** "occupier — typed, by name, unread; DS-STR-1 UNDER OCCUPATION renders 'the occu
+  GROUND: wiring — STRUCK for POLICING WIRING, not truth: the row named a slot, field or pool that nothing fills or routes at this tip, so no writer could breach it.
+  PERM: [archivist's reading] nothing is handed back — the row is a wiring, count or research note for the register car, so the strike returns no permission a writer was being denied.
+
+=== RT2.5R-11 [**STRUCK**] noun: **assignment tried (survey):** `tax_revolt` "a CAUSAL SCORE read"; `internal_conspiracy` / `unattributed` "the
+  GROUND: research — STRUCK as RESEARCH, not a bar: the row recorded a survey finding about the layer vocabulary itself; no sentence could ever be false by it.
+  PERM: [archivist's reading] nothing is handed back — the row is a wiring, count or research note for the register car, so the strike returns no permission a writer was being denied.
+
+=== RT2.5R-12 [**STRUCK**] noun: **assignment tried (survey):** `corruption_exposed` "the only organ-under-power archetype" ‖ **refuter's verdi
+  GROUND: research — STRUCK as RESEARCH, not a bar: the row recorded a survey finding about the layer vocabulary itself; no sentence could ever be false by it.
+  PERM: [archivist's reading] nothing is handed back — the row is a wiring, count or research note for the register car, so the strike returns no permission a writer was being denied.
+
+=== RT2.5R-13 [**STRUCK**] noun: **assignment tried (survey):** O-1 "at thorp/hamlet/village the word names nothing at all" ‖ **refuter's verdi
+  GROUND: a bar removed — STRUCK because the row recorded a PERMISSION, not a bar: nothing here was policing truth in the first place.
+  PERM: [archivist's reading] write the sentence: the bar is struck and no field in the record denies it.
+
+=== RT2.5R-14 [**STRUCK**] noun: **assignment tried (survey):** O-8 `[elder]` "seven times" at the listed lines ‖ **refuter's verdict:** REFUTE
+  GROUND: a count — STRUCK as a COUNT: an arithmetic correction to the survey's own tally; it barred no face.
+  PERM: [archivist's reading] nothing is handed back — the row is a wiring, count or research note for the register car, so the strike returns no permission a writer was being denied.
+
+=== RT2.5R-15 [**MODEL**] noun: **assignment tried (survey):** safe word "the watch — only for an order read; never for a pay read" ‖ **refute
+  GROUND: `defenseGenerator.js:177-178`, `:244-253` ("watch wages, court and gaol funding")
+  PERM: write the watch's pay
+
+=== RT2.5R-16 [**STRUCK**] noun: **assignment tried (survey):** safe word "the muster" ‖ **refuter's verdict:** CONDITIONAL ‖ **evidence:** saf
+  GROUND: a vocabulary note — STRUCK as a VOCABULARY note for the register car: a naming collision, not a claim a face could make false.
+  PERM: [archivist's reading] nothing is handed back — the row is a wiring, count or research note for the register car, so the strike returns no permission a writer was being denied.
+
+=== RT2.5R-17 [**STRUCK**] noun: **assignment tried (survey):** F1, F5, F6, F12, F21, F22, F26 as "invented" body/role words ‖ **refuter's verd
+  GROUND: `stressorDynamics.js:657-729`, `:738`, `:844` — the engine's own words cannot be a finding
+  PERM: [archivist's reading] write the sentence: the bar is struck and no field in the record denies it.
+
+=== RT2.5R-18 [**STRUCK**] noun: **assignment tried (survey):** F10 (c) "patrols is not a watch service" ‖ **refuter's verdict:** HOLDS but inc
+  GROUND: a bar removed — STRUCK because the row recorded a PERMISSION, not a bar: nothing here was policing truth in the first place.
+  PERM: write patrols
+
+=== RT2.5R-19 [**STRUCK**] noun: **assignment tried (survey):** `src/domain/institutionStatusModel.js` ‖ **refuter's verdict:** path REFUTED (l
+  GROUND: a cite — STRUCK because it policed PROVENANCE — whether the face named the record it drew on — and never whether the sentence was true.
+  PERM: [corrected] nothing is handed back: the row policed nothing — it is a correction to a CITE (a line number, a path, a count) inside the survey's own record, not a bar on anything a writer writes. Nothing was struck, and no permission follows.
+
+=== RT2.6-01 [**STRUCK**] noun: the army · the field force
+  GROUND: a vocabulary bar — STRUCK as a VOCABULARY note for the register car: a naming collision, not a claim a face could make false.
+  PERM: write the column, the field force
+
+=== RT2.6-02 [**STRUCK**] noun: the soldiers · the men
+  GROUND: the occupation record's silence is permission
+  PERM: write the occupier's men, their soldiers, the men in the square
+
+=== RT2.6-03 [**CONTRADICTION**] noun: the muster
+  GROUND: `treatyDocument.js:58` ("the compelled banner still answers the muster" = the COUNTERPART's call) vs `:63` ("no muster gathers where none is allowed" = the TOWN's arms)
+  PERM: write the muster with the possessor seated; unseated it can state the wrong power's call
+
+=== RT2.6-04 [**STRUCK**] noun: the banner
+  GROUND: the family rows carry no reads
+  PERM: write the banner
+
+=== RT2.6-05 [**CONTRADICTION**] noun: the garrison
+  GROUND: `forces.garrison.present` / `hasGarrison`; `occupationStatus.js:95-103`
+  PERM: write the occupier's men; the TOWN's garrison needs the row
+
+=== RT2.6-06 [**CONTRADICTION**] noun: the walls · the gate
+  GROUND: `hasWalls`; `treatyDocument.js:68` bakes "The garrison keeps the walls" on the same page
+  PERM: write walls on a walled town, on any desk
+
+=== RT2.6-07 [**STRUCK**] noun: the militia
+  GROUND: no face — STRUCK because NO SHIPPED FACE READS IT: the row policed a read no writer can reach, so it removed no live sentence.
+  PERM: [archivist's reading] nothing is handed back on this desk — no shipped face here uses the word, so the strike lifts a bar nobody was hitting; elsewhere the noun stands or falls on its own row.
+
+=== RT2.6-08 [**STRUCK**] noun: a mercenary company · hireling hall · free company
+  GROUND: not rendered; the flag/bucket split is RT2.2-04's wiring fault
+  PERM: [archivist's reading] nothing is handed back — the row is a wiring, count or research note for the register car, so the strike returns no permission a writer was being denied.
+
+=== RT2.6-09 [**STRUCK**] noun: the charter hall
+  GROUND: no face — STRUCK because NO SHIPPED FACE READS IT: the row policed a read no writer can reach, so it removed no live sentence.
+  PERM: [archivist's reading] nothing is handed back on this desk — no shipped face here uses the word, so the strike lifts a bar nobody was hitting; elsewhere the noun stands or falls on its own row.
+
+=== RT2.6-10 [**STRUCK**] noun: the watch
+  GROUND: a permission bar; the label trap binds wherever the word IS used
+  PERM: write the watch on a war or faith page, where the town has one
+
+=== RT2.6-11 [**STRUCK**] noun: the barracks
+  GROUND: no face — STRUCK because NO SHIPPED FACE READS IT: the row policed a read no writer can reach, so it removed no live sentence.
+  PERM: [archivist's reading] nothing is handed back on this desk — no shipped face here uses the word, so the strike lifts a bar nobody was hitting; elsewhere the noun stands or falls on its own row.
+
+=== RT2.6-12 [**SPLIT**] noun: the hall
+  GROUND: KEPT: existence below town tier. STRUCK: "the hall is the power desk's organ"
+  PERM: write the hall at town and up
+
+=== RT2.6-13 [**MODEL**] noun: the court
+  GROUND: `rulingStructure.js:762-767` — `adversarial` asserts enforcement is WINNING
+  PERM: write the court under pressure at the rung the record gives
+
+=== RT2.6-14 [**CONTRADICTION**] noun: the seat
+  GROUND: `treatyDocument.js:72-76` vs `religionState.js:620` — two referents under one word on one page
+  PERM: name which seat
+
+=== RT2.6-15 [**CONTRADICTION**] noun: the occupier · the occupation authority
+  GROUND: `occupationStatus.js:96` (the occupier SETTLEMENT) vs `warStatus.js:318-335` (the OCCUPIED town's installed `governingName`)
+  PERM: name the occupier as a foreign town or as the installed seat — not as one thing
+
+=== RT2.6-16 [**STRUCK**] noun: the ruling structure · the government
+  GROUND: the authored phrase renders only where `mandateGovWeight > 0`
+  PERM: surround the phrase
+
+=== RT2.6-17 [**STRUCK**] noun: the faction · the house
+  GROUND: a vocabulary collision — STRUCK as a VOCABULARY note for the register car: a naming collision, not a claim a face could make false.
+  PERM: [archivist's reading] nothing is handed back — the row is a wiring, count or research note for the register car, so the strike returns no permission a writer was being denied.
+
+=== RT2.6-18 [**STRUCK**] noun: the treasury
+  GROUND: the pool is unroutable — wiring, not a bar
+  PERM: [corrected] nothing is handed back: the face exists — its own words are quoted at left — but its POOL is unroutable (`templeWealth` has no writer), so nothing of it ships and no permission follows. The earlier reading here, that no shipped face uses the word, was wrong.
+
+=== RT2.6-19 [**STRUCK**] noun: the market
+  GROUND: no face — STRUCK because NO SHIPPED FACE READS IT: the row policed a read no writer can reach, so it removed no live sentence.
+  PERM: [archivist's reading] nothing is handed back on this desk — no shipped face here uses the word, so the strike lifts a bar nobody was hitting; elsewhere the noun stands or falls on its own row.
+
+=== RT2.6-20 [**CONTRADICTION**] noun: the granary · the stores · the wagons
+  GROUND: `hasGranary` (`priorityHelpers.js:63`)
+  PERM: [archivist's reading] nothing is handed back — the face stays refused, but now because it contradicts the field named at left, not because no card licensed it.
+
+=== RT2.6-21 [**STRUCK**] noun: the rolls · the books · the ledger · the records
+  GROUND: W24 + the standpoint rule — STRUCK as a RECORD-WORD BAR (W24's ratified-noun table): it policed which noun could name a record — a construction rule, not a truth rule.
+  PERM: let the clerk's view name the books
+
+=== RT2.6-22 [**STRUCK**] noun: the elders
+  GROUND: not used as a body
+  PERM: write the elders where the roster seats them
+
+=== RT2.6-23 [**STRUCK**] noun: the parish
+  GROUND: a licence, not a bar — STRUCK because the row recorded a PERMISSION, not a bar: nothing here was policing truth in the first place.
+  PERM: [archivist's reading] write the sentence: the bar is struck and no field in the record denies it.
+
+=== RT2.6-24 [**STRUCK**] noun: the toll-bar · the census · the road · the tradition
+  GROUND: no face — STRUCK because NO SHIPPED FACE READS IT: the row policed a read no writer can reach, so it removed no live sentence.
+  PERM: [archivist's reading] nothing is handed back on this desk — no shipped face here uses the word, so the strike lifts a bar nobody was hitting; elsewhere the noun stands or falls on its own row.
+
+=== RT2.6-25 [**CONTRADICTION**] noun: the treaty · the instrument · the document
+  GROUND: `treatyDocument.js:359-361`; `treatyOrientation.js:166`, `:171-176` — a face naming the winner can invert the sides against the reader
+  PERM: write the instrument; name a winner only from the orientation reader
+
+=== RT2.6-26 [**STRUCK**] noun: the term · the clause (`{term}`)
+  GROUND: the engine's own strings arriving through a proper slot; "the installed seat" beside `{term}` is a duplication (construction)
+  PERM: write around the label
+
+=== RT2.6-27 [**SCOPE**] noun: the creed · the faith · the rite (`{creed}`, `{rival_creed}`)
+  GROUND: floor 3, the deity doctrine: the creed by the deity's NAME, nothing predicated of the deity
+  PERM: write the observance, the calendar, the quarrel between creeds
+
+=== RT2.6-28 [**CONTRADICTION**] noun: the patron
+  GROUND: `religionState.js:620` vs `brokeragePatronage.js:60` — one word, two records, both able to ship on one dossier
+  PERM: name which patron
+
+=== RT2.6-29 [**CONTRADICTION**] noun: the temple · church · shrine · cathedral · monastery (`{institution}`)
+  GROUND: `priorityHelpers.js:65`; the roster names the row
+  PERM: write the observance; a cathedral needs a cathedral row
+
+=== RT2.6-30 [**STRUCK**] noun: the parish church · the graveyard / burial ground / cemetery network
+  GROUND: a holder fact
+  PERM: [archivist's reading] write the sentence: the bar is struck and no field in the record denies it.
+
+=== RT2.6-31 [**CONTRADICTION**] noun: the clergy
+  GROUND: `governanceNarrative.js:128-130` — a church, cathedral or parish row on the roster
+  PERM: write the clergy where a religious row stands
+
+=== RT2.6-32 [**STRUCK**] noun: the congregation · the faithful · the households
+  GROUND: the person-totality bar — STRUCK under the relaxed PERSON rule: floor 3 reaches only a NAMED character given a fate, so an unnamed person acting is a plot hook, not a breach.
+  PERM: write the following, the households, the faithful
+
+=== RT2.6-33 [**STRUCK**] noun: the house · the benches · the building · the roof · the stonework · the fabric
+  GROUND: silence is permission — STRUCK because the record is SILENT either way, so no sentence here can contradict it.
+  PERM: write the fabric of the place
+
+=== RT2.6-34 [**STRUCK**] noun: the faith's treasury · the coffer · the tithe · the councils (of a faith)
+  GROUND: `templeWealth` has no writer; the pools are unroutable
+  PERM: [corrected] nothing is handed back: the faces exist — `W-20` quotes one of them — but the POOLS are unroutable (`templeWealth` has no writer), so nothing of them ships and no permission follows. The earlier reading here, that no shipped face uses the words, was wrong.
+
+=== RT2.6-35 [**STRUCK**] noun: cults[] · the lesser rites
+  GROUND: a standing fact
+  PERM: [archivist's reading] write the sentence: the bar is struck and no field in the record denies it.
+
+=== RT2.6-36 [**STRUCK**] noun: the ruler
+  GROUND: the phrase is the engine's
+  PERM: write the ruler
+
+=== RT2.6-37 [**STRUCK**] noun: the pilgrim road · the inns
+  GROUND: wiring — STRUCK for POLICING WIRING, not truth: the row named a slot, field or pool that nothing fills or routes at this tip, so no writer could breach it.
+  PERM: [archivist's reading] nothing is handed back — the row is a wiring, count or research note for the register car, so the strike returns no permission a writer was being denied.
+
+=== RT2.6-38 [**STRUCK**] noun: the captain · the priest / high priestess · the reeve · the elder · the factor · the magistrate · the mayor / lord mayor · the guildmaster · the clerk(s) · the sexton · the bearers · the shepherd / observers / watchers
+  GROUND: the role bar; floor 3 relaxed — STRUCK as the ROLE-LAYER BAR: it policed naming a person or role where the read named a body — tone and grammar, not truth.
+  PERM: write any of them, acting
+
+=== RT2.6-39 [**STRUCK**] noun: the ranks · {counterpart}'s company · the harbour / the roads · the coffer · a clerical post · the hall (asked) · the impairment (a blockade) (missed)
+  GROUND: borrowed vocabulary — STRUCK as a VOCABULARY note for the register car: a naming collision, not a claim a face could make false.
+  PERM: [archivist's reading] nothing is handed back — the row is a wiring, count or research note for the register car, so the strike returns no permission a writer was being denied.
+
+=== RT2.6-40 [**SPLIT**] noun: the reads by layer: `statusLabel: On campaign` (muster) · `Occupied` · `At war` · the two `mobilization: climbing` (muster) · `occupierHoldings.stretchedThin / .strengthened` (muster) · the four court rows · the two parish rows · the rest
+  GROUND: KEPT: `occupierHoldings.*` is ANOTHER power's position and its holder resolves on the OCCUPIED town's militia (`holderTable.js:599-615`) — binding it to this town's own force denies the reader. STRUCK: the citation ban on the other 125 rows
+  PERM: cite freely; do not bind the occupier's overextension to this town's arms
+
+=== RT2.6R-01 [**STRUCK**] noun: **assignment tried (survey):** "{counterpart}'s garrison" as the safe word for the occupier's soldiers; the ga
+  GROUND: silence is permission — STRUCK because the record is SILENT either way, so no sentence here can contradict it.
+  PERM: write the occupier's garrison
+
+=== RT2.6R-02 [**CONTRADICTION**] noun: **assignment tried (survey):** "the guard (a body word of the garrison bucket, as ADDENDUM 11 rules)" ‖ **refu
+  GROUND: `governanceNarrative.js:98`, `:148`; `safetyProfile.js:300`
+  PERM: [archivist's reading] nothing is handed back — the face stays refused, but now because it contradicts the field named at left, not because no card licensed it.
+
+=== RT2.6R-03 [**STRUCK**] noun: **assignment tried (survey):** `Hireling hall` as the mercenary bucket's roster ‖ **refuter's verdict:** REFUT
+  GROUND: research feeding RT2.2-04 — STRUCK as RESEARCH, not a bar: the row recorded a survey finding about the layer vocabulary itself; no sentence could ever be false by it.
+  PERM: [archivist's reading] nothing is handed back — the row is a wiring, count or research note for the register car, so the strike returns no permission a writer was being denied.
+
+=== RT2.6R-04 [**CONTRADICTION**] noun: **assignment tried (survey):** `{counterpart}` on a treaty pool = "whose call it answers" (the document's othe
+  GROUND: `warFaithStateProse.js:690-694`, `:795`, `:930-933`; `treatyDocument.js:359-361` — the possessor may be the WRONG power
+  PERM: use the side-neutral cells and `{term}`
+
+=== RT2.6R-05 [**CONTRADICTION**] noun: **assignment tried (survey):** the occupier "two spellings of one referent" ‖ **refuter's verdict:** CONDITION
+  GROUND: as RT2.6-15 — i.e. this row falls exactly as **RT2.6-15** does; read that row's ground.
+  PERM: [archivist's reading] nothing is handed back — the face stays refused, but now because it contradicts the field named at left, not because no card licensed it.
+
+=== RT2.6R-06 [**CONTRADICTION**] noun: **assignment tried (survey):** O-6 "the muster's three rows are the same referent's layers, unlike the watch" 
+  GROUND: as RT2.6-03 — i.e. this row falls exactly as **RT2.6-03** does; read that row's ground.
+  PERM: [archivist's reading] nothing is handed back — the face stays refused, but now because it contradicts the field named at left, not because no card licensed it.
+
+=== RT2.6R-07 [**SCOPE**] noun: **assignment tried (survey):** PERSON — the GROUND "no typed NPC→institution edge exists anywhere in the estat
+  GROUND: floor 3 — FLOOR 3 (product scope + the deity doctrine): no NAMED character given a fate, and nothing predicated of a deity.
+  PERM: [archivist's reading] nothing is handed back — product scope or the deity doctrine still refuses it.
+
+=== RT2.6R-08 [**MODEL**] noun: **assignment tried (survey):** "captured" as one reading of the ladder ‖ **refuter's verdict:** REFUTED — THRE
+  GROUND: `holderTable.js:141`, `:661`; `rulingStructure.js:762-767`
+  PERM: [archivist's reading] nothing is handed back — the engine positively models this, so a face saying otherwise is still false.
+
+=== RT2.6R-09 [**STRUCK**] noun: **assignment tried (survey):** the corruption impairment = the covert channel ‖ **refuter's verdict:** CONDITI
+  GROUND: wiring — STRUCK for POLICING WIRING, not truth: the row named a slot, field or pool that nothing fills or routes at this tip, so no writer could breach it.
+  PERM: [archivist's reading] nothing is handed back — the row is a wiring, count or research note for the register car, so the strike returns no permission a writer was being denied.
+
+=== RT2.6R-10 [**STRUCK**] noun: **assignment tried (survey):** "the banner" licensed on the family pools (holder court) ‖ **refuter's verdict:
+  GROUND: the licence question is struck
+  PERM: [archivist's reading] write the sentence: the bar is struck and no field in the record denies it.
+
+=== RT2.6R-11 [**STRUCK**] noun: **assignment tried (survey):** "the muster" as a posture-rung STATE word ‖ **refuter's verdict:** CONDITIONAL 
+  GROUND: vocabulary — STRUCK as a VOCABULARY note for the register car: a naming collision, not a claim a face could make false.
+  PERM: [archivist's reading] nothing is handed back — the row is a wiring, count or research note for the register car, so the strike returns no permission a writer was being denied.
+
+=== RT2.6R-12 [**CONTRADICTION**] noun: **assignment tried (survey):** `occupierHoldings.*` "BODY-adjacent … holder muster" ‖ **refuter's verdict:** H
+  GROUND: `holderTable.js:199`, `:599-615`
+  PERM: [archivist's reading] nothing is handed back — the face stays refused, but now because it contradicts the field named at left, not because no card licensed it.
+
+=== RT2.6R-13 [**STRUCK**] noun: **assignment tried (survey):** `statusLabel: Occupied` a muster-licensed BODY-adjacent read ‖ **refuter's verd
+  GROUND: the citation rule — STRUCK because it policed PROVENANCE — whether the face named the record it drew on — and never whether the sentence was true.
+  PERM: [archivist's reading] write the sentence: the bar is struck and no field in the record denies it.
+
+=== RT2.6R-14 [**CONTRADICTION**] noun: **assignment tried (survey):** the clergy "no row, no field; asserts a body the engine does not count" ‖ **ref
+  GROUND: `governanceNarrative.js:128-130`
+  PERM: [archivist's reading] nothing is handed back — the face stays refused, but now because it contradicts the field named at left, not because no card licensed it.
+
+=== RT2.6R-15 [**STRUCK**] noun: **assignment tried (survey):** "the ruler is the ruling STRUCTURE, not a person" ‖ **refuter's verdict:** COND
+  GROUND: the regex admits person-shaped words
+  PERM: [archivist's reading] write the sentence: the bar is struck and no field in the record denies it.
+
+=== RT2.6R-16 [**STRUCK**] noun: **assignment tried (survey):** F-1 row 10 `economic · honored` "(holder court)" ‖ **refuter's verdict:** CONDI
+  GROUND: a cite — STRUCK because it policed PROVENANCE — whether the face named the record it drew on — and never whether the sentence was true.
+  PERM: [corrected] nothing is handed back: the row policed nothing — it is a correction to a CITE (a line number, a path, a count) inside the survey's own record, not a bar on anything a writer writes. Nothing was struck, and no permission follows.
+
+=== RT2.6R-17 [**STRUCK**] noun: **assignment tried (survey):** "a town-tier town holds the parish record only through its burial grounds" ‖ **
+  GROUND: research — STRUCK as RESEARCH, not a bar: the row recorded a survey finding about the layer vocabulary itself; no sentence could ever be false by it.
+  PERM: [archivist's reading] nothing is handed back — the row is a wiring, count or research note for the register car, so the strike returns no permission a writer was being denied.
+
+=== RT2.6R-18 [**STRUCK**] noun: **assignment tried (survey):** "26 catalog types" ‖ **refuter's verdict:** CONDITIONAL (not re-counted) ‖ **ev
+  GROUND: a count — STRUCK as a COUNT: an arithmetic correction to the survey's own tally; it barred no face.
+  PERM: [archivist's reading] nothing is handed back — the row is a wiring, count or research note for the register car, so the strike returns no permission a writer was being denied.
+
+=== RT2.6R-19 [**STRUCK**] noun: **assignment tried (survey):** cites: `factionRoles.js:44-46/47-49/51/56-58` → `:41-43/:44-46/:47-50/:55-57`; 
+  GROUND: cites — STRUCK because it policed PROVENANCE — whether the face named the record it drew on — and never whether the sentence was true.
+  PERM: [corrected] nothing is handed back: the row policed nothing — it is a correction to a CITE (a line number, a path, a count) inside the survey's own record, not a bar on anything a writer writes. Nothing was struck, and no permission follows.

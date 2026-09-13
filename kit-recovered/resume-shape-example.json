@@ -1,0 +1,26 @@
+{
+ "fromRunId": "wf_2e33aae5-027",
+ "markedDirs": [
+  "ds-def-2--beasts-monsters-settled-defenses-beyond-the-need",
+  "ds-def-2--beasts-monsters-plagued-perimeter-but-no-force-t",
+  "ds-def-2--beasts-monsters-plagued-perimeter-and-organized-",
+  "ds-def-2--beasts-monsters-frontier-credible-deterrence",
+  "ds-def-2--beasts-monsters-plagued-no-perimeter-and-no-forc",
+  "ds-def-2--beasts-monsters-frontier-force-without-a-perimet",
+  "ds-def-2--beasts-monsters-settled-nothing-organized",
+  "ds-def-2--invasion-war-walls-with-citizen-militia",
+  "ds-def-2--invasion-war-walls-with-no-force",
+  "ds-def-2--invasion-war-militia-only",
+  "ds-def-2--invasion-war-force-with-no-walls",
+  "ds-def-2--invasion-war-walls-and-professional-garrison",
+  "ds-def-2--internal-security-full-legal-chain-court-and-pri",
+  "ds-def-2--invasion-war-neither-walls-nor-force",
+  "ds-def-2--internal-security-detention-without-process",
+  "ds-def-2--economic-survival-strong",
+  "ds-def-2--internal-security-court-without-detention",
+  "ds-def-2--internal-security-no-legal-infrastructure"
+ ],
+ "draftRoundsDone": 0,
+ "draftCommit": null,
+ "cureRoundsDone": 0
+}

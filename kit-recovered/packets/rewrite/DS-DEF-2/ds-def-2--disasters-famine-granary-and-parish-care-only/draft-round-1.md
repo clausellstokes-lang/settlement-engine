@@ -1,0 +1,24 @@
+# DRAFT ROUND 1 — DS-DEF-2 · pool `Disasters & Famine: granary AND parish care only`
+
+Seat: Opus 5 (WRITER, Fable-unvalidated). Variants: **3**, in place, same vids, same angle tags, same order.
+Faces: **4 per variant** (the numbered line plus three `[face]` sub-rows) = **12**.
+Written to the marker skeleton at `skeleton.md`, under ADDENDUM 13 PART A (W11–W19) and PART B (W20–W27), beside W1–W10.
+
+---
+
+## THE ROWS, READY TO PASTE UNDER THE POOL'S HEADING
+
+1. `[ledger]` The granary at {settlement} holds grain against a failed harvest and a house of the faith stands in the town; no infirmary stands at all.
+   - `[face]` Grain is held in the granary at {settlement}, reserves against hunger, and the parish stands on the town's ground. No house that takes in the sick stands in the town.
+   - `[face]` What the town holds back is grain against a failed harvest, and a house of the faith stands at {settlement}; no ward for the sick is kept in the town.
+   - `[face]` Against a failed harvest the granary at {settlement} holds grain in store, and a house of the faith keeps its ground in the town. The town has no hospital.
+2. `[street]` The parish stands at {settlement} and the town has no infirmary. Grain sits in the town's granary against hunger.
+   - `[face]` The town has a house of the faith and no ward for the sick. At {settlement} the town's grain is in store against a failed harvest.
+   - `[face]` Grain is held back at {settlement} against a failed harvest, and no house that takes in the sick stands in the town. The town's house of the faith stands on its own ground.
+   - `[face]` A house of the faith is on the town's ground at {settlement}, and no infirmary is. The granary keeps the town's grain against a failed harvest.
+3. `[visitor]` A stranger finds a house of the faith at {settlement} and no infirmary in the town. The town's granary holds grain against a failed harvest.
+   - `[face]` A stranger comes to {settlement} and sees a house of the faith standing and no ward for the sick in the town. Grain is held in the town's granary against hunger.
+   - `[face]` To a stranger arriving at {settlement} a house of the faith stands in plain sight, and no house that takes in the sick stands in the town. The town's granary holds back grain against a failed harvest.
+   - `[face]` The parish is what a stranger finds standing at {settlement}, with no hospital in the town. The granary holds the town's grain against a failed harvest.
+
+---

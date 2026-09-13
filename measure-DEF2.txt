@@ -1,0 +1,4 @@
+SHIPPED  f2da5a3ee: units 78 | sample 78u/1905tok | DISTINCT 519 | content types 489 | mean words 24.4 | ',and' joins 63%
+   top content words: {settlement} x58, town x34, can x25, against x20, here x15, stranger x14, nothing x14, would x14
+AFTER    471ce894a: units 312 | sample 108u/1902tok | DISTINCT 168 | content types 143 | mean words 17.4 | ',and' joins 74%
+   top content words: country x91, {settlement} x88, works x63, town x60, muster x38, force x36, stands x28, stranger x24
