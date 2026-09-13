@@ -27,13 +27,19 @@ perimeter` 21 = row 204 EXACT, `settled, nothing organized` 116 = row 129 EXACT.
 
 # ⭐ THE DS-DEF-2 THREE — the batch waits on these
 
-| block | pool | class | VERDICT | ground |
-| --- | --- | --- | --- | --- |
-| DS-DEF-2 | Beasts & Monsters: plagued, NO perimeter and NO force | SILENT | **DEAD BY CONSTRUCTION** | `src/generators/threatDefensePolicy.js:72-92` — a named, deterministic policy whose whole job is to forbid exactly this combination. See below. |
-| DS-DEF-2 | Internal Security: detention without process | SILENT | **DEAD BY CONSTRUCTION** | A prison-keyword institution exists at NO tier below `town`, and at every tier that has one a court-keyword institution is `required: true`. See below. |
-| DS-DEF-2 | Disasters & Famine: granary, NO medical provision | SILENT | **DEAD BY CONSTRUCTION** | A granary-keyword institution exists at NO tier below `town`, and at every tier that has one a church-keyword institution is `required: true`. See below. |
+| block | pool | class | VERDICT | ground | what the chair should do |
+| --- | --- | --- | --- | --- | --- |
+| DS-DEF-2 | Beasts & Monsters: plagued, NO perimeter and NO force | SILENT | **OUT OF GRID** | The generator refuses to BUILD such a town (`src/generators/threatDefensePolicy.js:72-92`), but a campaign can MAKE one by ruining the walls, and the desk then produces the key. PROBED, key returned. | **write it after a corpus that reaches it — DO NOT STRIKE IT** |
+| DS-DEF-2 | Internal Security: detention without process | SILENT | **DEAD BY CONSTRUCTION** | A prison-keyword institution exists at NO tier below `town`, and at every tier that has one a court-keyword institution is `required: true`. The read is a generation-time snapshot the ruin path cannot move. | leave the shipped rows and never write it |
+| DS-DEF-2 | Disasters & Famine: granary, NO medical provision | SILENT | **DEAD BY CONSTRUCTION** | A granary-keyword institution exists at NO tier below `town`, and at every tier that has one a church-keyword institution is `required: true`. Same snapshot immunity. | leave the shipped rows and never write it |
 
-**What the chair should do with all three: LEAVE THE SHIPPED ROWS AND NEVER WRITE THEM.**
+⭐ **THE CHAIR'S OWN CASE WAS RIGHT TO BE SUSPICIOUS, AND THE ANSWER IS NOT THE ONE THE ZERO
+SUGGESTED.** `plagued, NO perimeter and NO force` is NOT dead. It is the AFTERMATH pool, not
+the ordinary pool: the generator guarantees every plagued settlement a perimeter and a force
+at birth, so no freshly generated town can draw it — but nothing re-establishes that
+guarantee afterwards, and a calamity that ruins the palisade and the levy leaves a plagued
+town reading exactly this key. The RATE corpus cannot reach it because a world-less town is
+never ruined. **Two of the three may be struck; the first must be kept.**
 
 ## 1. Beasts & Monsters: plagued, NO perimeter and NO force
 
@@ -90,6 +96,61 @@ HIT 'Beasts & Monsters: plagued, NO perimeter and NO force':  0
 
 Both unwalled cases are the predicted `Barracks` case, and both render the corpus's silence,
 not this pool. **0 hits in 6,768.**
+
+### ⭐ AND THEN THE LIFECYCLE PATHS, WHICH OVERTURN THE VERDICT
+
+The paragraphs above prove only that **no freshly generated settlement** can draw this key.
+The doctrine's lifecycle trace — create · read · persist · regenerate · undo · migrate —
+finds two live paths that do, and a probe returns the key on both.
+
+`threatDefensePlan`'s `hasSemantic` (`threatDefensePolicy.js:48-56`) reads
+`String(institution?.name || '')` on the RAW roster. The desk's `standingDefenseForces`
+(`src/domain/institutions/defenseInstitutionBuckets.js:169-178`) reads
+`liveInstitutions(settlement)` — ruin-filtered — through `nativeSemanticName` — custom-content
+blind. The two predicates therefore disagree in two ways, and each disagreement is a route in.
+
+**PATH 1 — THE RUIN PATH.** Every ruin path in the estate (calamityKernel,
+institutionLifecycle, tierOutcomeApply, settlementLifecycleFirstClass, magicRegimeLifecycle)
+stamps `{ ...inst, status: 'ruined', _worldPulseInactive: true }`. The stamp does not change
+the NAME, so `hasSemantic` still sees a palisade where there is rubble and the reconciliation
+adds nothing back.
+
+**PATH 2 — CUSTOM CONTENT.** `nativeSemanticName` returns `''` for any row carrying
+`isCustom`/`source: 'custom'`/`customDefinitionId` (`customContentSemanticAuthority.js:41-47`)
+— the declared rule that "a stamped custom label cannot acquire built-in physics merely
+through spelling". The policy has no such filter, so a custom wall suppresses the palisade the
+policy would otherwise add, and the desk cannot see the custom wall either.
+
+**THE PROBE** (a plagued isolated thorp, seed `lifecycle-1`):
+
+```
+BASE   walls/garrison/militia = true false false
+BASE   beastsKey = Beasts & Monsters: plagued, perimeter but NO force to hold it
+BASE   defence names = [ 'Palisade', 'Household levy' ]
+
+RUINED walls/garrison/militia = false false false
+RUINED beastsKey = "Beasts & Monsters: plagued, NO perimeter and NO force"     ← THE KEY
+RUINED threatDefensePlan on the ruined roster = []   ← and nothing is added back
+
+CUSTOM walls/garrison/militia = false false false
+CUSTOM beastsKey = "Beasts & Monsters: plagued, NO perimeter and NO force"     ← THE KEY
+CUSTOM threatDefensePlan = []
+```
+
+So the pool is **reachable and stable** in the product: a plagued town whose walls are thrown
+down stays that way, and the desk says so. The RATE corpus cannot reach it for exactly the
+reason `pool-rates.md` LIMIT 1 names — a world-less town is never ruined and carries no custom
+content. **VERDICT: OUT OF GRID. The chair must NOT strike this pool.**
+
+⚠ Whether the policy's ruin-blindness is itself a DEFECT: **NO, not as such.** The policy runs
+at generation and at final reconciliation, both BEFORE any ruin can occur, so filtering there
+would be a no-op — the same reasoning `defenseInstitutionBuckets.js:36-46` already sets down
+for the generator's own buckets. The honest statement is that the threat-defence guarantee is
+a BIRTH guarantee that no later path renews, which is defensible product behaviour and is the
+very story the corpus wrote a pool for. The custom-content half is the weaker of the two: the
+policy reading custom names where every consumer is native-only is an inconsistency worth a
+row. Not cured here — a change there moves generated worlds for every custom-content user,
+which is a behaviour shift and owner-gated, not a "small and certain" fix.
 
 ⚠ RAISED, NOT CURED — a latent predicate gap worth a row, not a fix here. On those 2 towns
 (~0.03 %) the generator believes it has given a plagued town a defensible perimeter
@@ -177,6 +238,42 @@ The chair's mechanism would matter only if a granary could appear at hamlet; it 
 
 The 11 churchless thorps are the only churchless settlements the grid produces, and a thorp
 has no granary, so they fall in `no reserves, no medical provision` and never here.
+
+## 4. WHY THE SAME LIFECYCLE PATHS DO NOT REOPEN POOLS 2 AND 3
+
+Pool 1 turned on the desk re-deriving from the LIVE roster. The internal and disaster rows do
+not: they read `settlement.economicState.compound.inst`, which is
+`getInstFlags(config, institutions)` computed ONCE inside `generateEconomicState`
+(`src/generators/economy/economicState.js:51`, stored at `:872`) and never rebuilt. So:
+
+- **The ruin path cannot reach them.** PROBED — a town and a city with every hall, court and
+  church stamped `status: 'ruined', _worldPulseInactive: true`:
+  ```
+  town BEFORE internal: full legal chain (court AND prison) | disaster: granary AND parish care only
+  town AFTER  internal: full legal chain (court AND prison) | disaster: granary AND parish care only
+  town ruined rows: Parish churches (2-5) · Free company hall · Hireling hall · Adventurers' charter hall · Town hall · Courthouse
+  city BEFORE internal: court without detention | disaster: granary AND parish care only
+  city AFTER  internal: court without detention | disaster: granary AND parish care only
+  city ruined rows: Parish churches (10-30) · Gambling halls · City hall · Multiple courthouses
+  ```
+  Neither key moves. The snapshot immunises both pools against ruin.
+- **Custom content cannot reach them either.** `getInstitutionNames` reads through
+  `nativeSemanticNames` (`priorityHelpers.js:41-42`), so a custom "Stocks" cannot set
+  `hasPrison` and a custom shrine cannot set `hasChurch`. Custom content can move these flags
+  in NEITHER direction.
+
+Both pools therefore stay **DEAD BY CONSTRUCTION**. The chair may strike them.
+
+⛔ **RAISED, AND IT IS THE REWRITE'S OWN BUSINESS — NOT THIS CAR'S TO CURE.** The same probe
+shows DS-DEF-2's internal row asserting `full legal chain (court AND prison)` about a town
+whose Town hall, Courthouse and prison are all rubble, and the disaster row asserting
+`granary AND parish care only` about a town whose parish churches are ruined. This is exactly
+the ruin-blindness class `defenseInstitutionBuckets.js:28-49` cured for the DEFENCE rows of
+this same block and did not cure for the CIVIC rows, because the civic rows read a producer
+snapshot rather than the live roster. It matters to the REWRITE directly: prose written for
+those two pools can state, of a ruined town, something the settlement's own roster refutes —
+a floor-1 self-contradiction reachable without any authoring error. A row for the chair's
+ledger, an owner-gated fix (it moves a shipped reading), and not a dark-pool question.
 
 ---
 
