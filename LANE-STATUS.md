@@ -1,17 +1,15 @@
-# LANE-STATUS — written 2026-09-13 17:16:30 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-13 17:21:46 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = c2b72466a Plan: wave 3 has begun — batch 2 of DS-DEF-2 (three pools) through draft 065b9ded6 and c
 
 ## BUILD / KIT LANES (dock · base · cars · porcelain · receipt)
 - REWRITE 8b DS-DEF-11 (the validation block; cure round): dock laneRW-DEF11 ABSENT
 - REWRITE 8b-W (the wiring car, landed in its dock = the consist lineage): dock laneRW-DEFW ABSENT
-- **DS-DEF-2 (waits for the tables)** dock `laneRW-DEF2` HEAD b4c8d6e04 · 39 cars over f2da5a3ee · porcelain 1 · last commits:
-    b4c8d6e04 REWRITE 8b DS-DEF-2: the WEAK pool stops landing on what is not there
-    ad7f3667c REWRITE 8b DS-DEF-2 cure 6 (the chair's cut by name): the elders stop citing and the guilds stop remembering
-    73d32a126 REWRITE 8b DS-DEF-2 cure (v3): 6/6 pools
-    d794c3a78 REWRITE 8b DS-DEF-2 draft (v3): 5/6 pools
-    porcelain (uncommitted work in the dock — commit it FIRST after re-proving):
-       M tests/fixtures/.golden-freeze-register.json
+- **DS-DEF-2 (waits for the tables)** dock `laneRW-DEF2` HEAD 49183bafe · 43 cars over f2da5a3ee · porcelain 0 · last commits:
+    49183bafe INSTRUMENT DEBT 4/4: two line-number addresses cured (one of them was a FALSE GREEN), two live counts fenced shrink-only
+    850a5f0a9 INSTRUMENT DEBT 3/4: the settlement-only census falls to 21 because {defmaterial} landed — re-recorded as a CEILING, with the block named
+    ede649e6a INSTRUMENT DEBT 2/4: the lighting census is re-measured through its own door, with the nine files named
+    1ca8fa080 INSTRUMENT DEBT 1/4: the voice-arms env spelling gets a disposition — a GENUINE DEFECT, not a pin to move
     receipt `receipt-rewrite.md` (mtime 09-12 20:49) head:
       | # RECEIPT — the REWRITE train
       | 
@@ -231,4 +229,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `ab8783d22` WRITER Invasion & War: walls with NO force · DONE · transcript 09-13 02:30 725 KB · 17 tool calls · files: candidates-2.md, facetext.txt, ft2.txt · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasio
 
 ## PROCESSES: 
-load: 1.92 2.11 2.13
+load: 2.68 2.38 2.24
