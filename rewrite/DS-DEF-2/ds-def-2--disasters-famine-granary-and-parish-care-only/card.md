@@ -693,3 +693,46 @@ THE CARD (mechanical sections) — block DS-DEF-2 · pool `Disasters & Famine: g
   city: the hall: City hall · the tavern: Inns and taverns (district) · the guilds: — · the register (parish): Parish churches (10-30), Burial grounds and charnel house · the elders: —
   metropolis: the hall: — · the tavern: — · the guilds: — · the register (parish): Cemetery network · the elders: —
   the key on the force buckets and the gates: watch: OPEN · garrison: OPEN · militia: OPEN · mercenary: OPEN · charter: OPEN · gates: OPEN
+
+--------------------------------------------------------------------------------
+
+(0) ⛔ THE MARKER'S CORRECTION TO THE MACHINE SECTIONS — READ BEFORE (5) AND (7)
+
+The instrument reads `institutionalCatalog.metropolis` as the metropolis's catalogue. The
+generator does not. `src/generators/steps/assembleInstitutions.js:243-245`:
+
+    const catalogForTier = tier === 'metropolis'
+      ? mergeCatalogs(institutionalCatalog['city'] || {}, institutionalCatalog['metropolis'] || {})
+      : institutionalCatalog[tier] || {};
+
+`mergeCatalogs` (`:117`) is a per-category shallow merge, so **every CITY row survives into the
+metropolis unless a metropolis row of the same NAME overrides it.** Section (2)'s
+"metropolis (1): Cemetery network" is the metropolis BLOCK, not the metropolis ROSTER.
+Therefore the city's thirteen `required: true` rows are required at metropolis as well:
+
+    Aqueduct or water system · Burial grounds and charnel house · City granaries · City hall ·
+    City walls and gates · Garrison · Housing (1000-5000 structures) · Inns and taverns
+    (district) · Multiple courthouses · Multiple market squares · Parish churches (10-30) ·
+    Professional city watch · Warehouse district
+
+Section (5) is wrong in the same place and every correction runs one way — toward MORE closed:
+
+  • **watch — CLOSED TRUE ON THE WHOLE PREIMAGE**, not "open at metropolis". `Town watch` is
+    required at town, `Professional city watch` at city and (by the merge) metropolis.
+    **This is the Fable sitting's own named failure mode and it is live here:** "nobody is set
+    up to respond", "no one is charged with any of it", "there is nobody to send for" are
+    floor 1 on every town this pool draws.
+  • **garrison — required at city AND metropolis; OPEN at town only.**
+  • **walls and gates — required at city AND metropolis; OPEN at town only.**
+  • **granary · market · hall · court · church — required at all three tiers.**
+  • genuinely OPEN across the preimage: **militia · mercenary · charter · prison.**
+
+And two corrections that run against the brief's standing roster:
+
+  • **THE GUILDS ARE NOT A UNIVERSAL SOURCE ON THIS POOL.** `Craft guilds (5-15)` is
+    `required: true` at TOWN only. No guild row is required at city; at metropolis
+    `Craft guilds (100-150+)` / `Merchant guilds (50-100+)` are `required: false`. The brief
+    seats the guilds at "town and above"; the catalogue seats them at town and nowhere else.
+  • **THE ELDERS ARE NOT A SPEAKER.** The brief seats them below town; this pool's silent
+    tiers are thorp, hamlet and village. It never draws below town.
+
