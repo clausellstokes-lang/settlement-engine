@@ -408,10 +408,30 @@ describe('THE ANTI-VACUITY GUARD — the walker must fail on the corpus it ships
       const arms = walkEntry(entry, withEntryContext(base, {})).fails.map((f) => f.arm);
       expect(arms, `${breach.where} must fail on ${breach.arm}`).toContain(breach.arm);
     }
-    // The fourth: the ANNEX row, cited by its own line number.
+    // The fourth: the ANNEX row.
+    //
+    // ⛔ IT USED TO BE CITED BY ITS LINE NUMBER (`row.line === 5233`) AND THAT WAS A DEFECT OF
+    // THIS INSTRUMENT, cured at the REWRITE's instrument-debt car (2026-09-13). A line number
+    // is an address into a document the REWRITE INSERTS INTO: the row itself never moved and
+    // never stopped failing, but every face the rewrite adds ABOVE it slides it down, and the
+    // arm then reds with "did not load" — which reads as a row the parser cannot read and is
+    // nothing of the kind. Measured at the cure: the row sits at annex 5619 today and at 5233
+    // in the shipped tree `f2da5a3ee`, and `loadStateAnnex()` parses it in both.
+    //
+    // ⭐ SO IT IS ADDRESSED BY ITS CONTENT, THE WAY THE OTHER THREE BREACHES ALREADY ARE. The
+    // breach text is the roster's own `find` string, so the annex half and the leaf half can
+    // never drift apart, and a row that genuinely LEAVES the corpus still reds — on the
+    // roster's own message ("the breach text is no longer in the corpus"), which is the
+    // failure this arm actually means.
+    const ANNEX_BREACH = BREACHES.find((b) => b.where.includes('general.generated.js'));
     const annexRow = joinAnnexToLeaves(loadStateAnnex(), leaves).joined
-      .find((row) => row.line === 5233);
-    expect(annexRow, 'RECEIPT_POOLS_DOSSIER_STATE.md:5233 did not load').toBeTruthy();
+      .find((row) => row.text.includes(ANNEX_BREACH.find));
+    expect(annexRow, `the annex twin of "${ANNEX_BREACH.find}" is no longer in`
+      + ' RECEIPT_POOLS_DOSSIER_STATE.md').toBeTruthy();
+    // AND THE JOIN STILL CARRIES THE ADDRESS, which is the coverage the line-number lookup
+    // was incidentally providing: a joined row with no `line` would make every annex citation
+    // in this estate unwritable, and that must red here rather than nowhere.
+    expect(typeof annexRow.line, 'the annex join no longer carries a line number').toBe('number');
     expect(walkEntry(annexRow, withEntryContext(base, {})).fails.map((f) => f.arm))
       .toContain('exemption on a null column');
   });
@@ -467,8 +487,22 @@ describe('THE ANTI-VACUITY GUARD — the walker must fail on the corpus it ships
     // SCOPE fault (a military-doctrine sentence under an economic-base key — R-DA-19), and
     // this walker carries no scope arm. So it cannot serve as a C3-lexical anchor, and the
     // roster's fifth entry is NOT-EXECUTABLE with its reason rather than silently absent.
-    const row = joined.find((r) => r.line === 2247);
-    expect(row, 'RECEIPT_POOLS_DOSSIER_STATE.md:2247 did not load').toBeTruthy();
+    // ⛔⛔ THIS ARM WAS A FALSE GREEN AND NOBODY WOULD HAVE FOUND IT, because it was PASSING.
+    // Cured at the REWRITE's instrument-debt car (2026-09-13), in the same cut as the sibling
+    // line-number address above. It read `joined.find((r) => r.line === 2247)`, and 2247 was
+    // the turtling row at the shipped tree `f2da5a3ee`. It is not the turtling row today: the
+    // REWRITE's inserted faces slid that row to annex 2282, and line 2247 now resolves to a
+    // COMPLETELY DIFFERENT sentence — "The town does not wait long for an answer and does not
+    // always like the answer it gets…" — which ALSO happens to fire no arm of this walker. So
+    // the arm went on passing while measuring a row its own docblock does not describe: the
+    // anchor's NOT-EXECUTABLE reason above ("a pool-key SCOPE fault — a military-doctrine
+    // sentence under an economic-base key, R-DA-19") was being asserted about a sentence that
+    // is not a military-doctrine sentence at all. A green that means nothing is worse than a
+    // red, and a line number into a document the REWRITE inserts into is how you get one.
+    const row = joined.find((r) => /turtles the chokepoints/.test(r.text));
+    expect(row, 'the `[counterforce]` turtling row named by ANCHOR 5 is no longer in'
+      + ' RECEIPT_POOLS_DOSSIER_STATE.md — the anchor names a row that must exist to be'
+      + ' NOT-EXECUTABLE for the reason above').toBeTruthy();
     for (const eventProvenance of [true, false]) {
       expect(walkEntry(row, withEntryContext(base, { eventProvenance })).fails).toEqual([]);
     }
@@ -494,9 +528,35 @@ describe('THE ANTI-VACUITY GUARD — the walker must fail on the corpus it ships
       + `  entries carrying a provenance-class phrase: ${notExecutable} (NOT-EXECUTABLE without the flag)\n`
       + `  the same entries WITH \`eventProvenance: false\`: ${fails} FAIL\n`
       + `${anchors.map((a) => `    ${a}`).join('\n')}\n`);
-    // The two figures are the same 44 entries seen twice, which is the whole explanation.
-    expect(notExecutable).toBe(44);
-    expect(fails).toBe(44);
+    // ⭐ THE TWO FIGURES ARE THE SAME ENTRIES SEEN TWICE, WHICH IS THE WHOLE EXPLANATION — and
+    // THAT is the claim, so it stays an EXACT EQUALITY and always will. What was re-recorded
+    // at the REWRITE's instrument-debt car (2026-09-13) is only the ABSOLUTE count, from 44
+    // to a shrink-only ceiling, with the cause declared: the REWRITE is removing citing
+    // constructions from the corpus pool by pool, and this arm counts them.
+    //
+    // ⛔ AND IT IS DELIBERATELY *NOT* RE-POINTED AT THE SHIPPED CORPUS THE WAY CONTROL 4 IS
+    // (`tests/lint/proseMoveGrammar.walker.test.js`, commit b6f1a4695). That precedent applies
+    // to a CALIBRATION — an arm whose subject is the walker, which happens to be spelled as a
+    // corpus figure. This one is the opposite: its describe block is "THE ANTI-VACUITY GUARD —
+    // THE WALKER MUST FAIL ON THE CORPUS IT SHIPS BESIDE". An anti-vacuity guard pointed at a
+    // frozen fixture guards nothing; it must bite on TODAY'S leaves or it is the false green
+    // it exists to prevent. So the live reading is kept and only the exact pin is relaxed.
+    //
+    // THE DIRECTION IS THE PROGRAMME'S, not a convenience: `tests/lint/proseComposed.walker`
+    // already carries a SHRINK-ONLY citation ratchet at 7 over the same corpus, on the same
+    // ground. A GROWTH here means a new face has been written that cites a record — which is
+    // exactly what this desk refuses — so it must still red. Measured at this tip: 43, down
+    // from the 44 pinned before the REWRITE began.
+    expect(notExecutable, 'the provenance-class count GREW — a face has been written that'
+      + ' cites a record. This is SHRINK-ONLY: the REWRITE only ever removes citing'
+      + ' constructions. Find the new one in the printed anchors above, do not raise the'
+      + ' ceiling.').toBeLessThanOrEqual(44);
+    expect(notExecutable, 'and the class is not empty — a ceiling an empty corpus satisfies'
+      + ' would make this whole anti-vacuity guard vacuous').toBeGreaterThan(0);
+    expect(fails, 'THE CLAIM, and it stays exact: the flagless walk\'s NOT-EXECUTABLE set and'
+      + ' the flagged walk\'s FAIL set are the SAME entries seen twice. A divergence here means'
+      + ' the lexical half and the flagged half have stopped reading the same rows, which is a'
+      + ' defect of the walker and never a corpus figure.').toBe(notExecutable);
     // PRESENT-THEN-ABSENT on one of them, so the arm is proved rather than counted.
     const anchor = corpus.find((entry) => walkEntry(entry, withEntryContext(base, { eventProvenance: false }))
       .fails.some((f) => f.klass === 'C3'));
@@ -648,7 +708,30 @@ describe('THE ANTI-VACUITY GUARD — the walker must fail on the corpus it ships
     // R1, or "every variant is withheld" would satisfy the line above.
     const carrying = leaves.filter((e) => walkEntry(e, ground).withheld
       .some((f) => f.klass === 'Q' && /trailing coordinate/.test(f.arm)));
-    expect(carrying.length, 'entries carrying the trailing-coordinate class, at this tip').toBe(329);
+    // ⛔ RE-RECORDED FROM AN EXACT 329 TO A SHRINK-ONLY CEILING at the REWRITE's
+    // instrument-debt car (2026-09-13), cause declared. This is a LIVE INVARIANT over the
+    // corpus the REWRITE rewrites, and it moved because the REWRITE is DRIVING IT DOWN: the
+    // trailing coordinate is the `, and …` join the refuters charge as a craft collapse pool
+    // by pool (DS-DEF-2's `Economic Survival: WEAK` alone went 18 joins to 17 in the commit
+    // before this one). Measured at this tip: 323, from 329 before the rewrite began and 325
+    // before this lane's last two cures.
+    //
+    // NOT re-pointed at the shipped corpus, for the reason the C3 arm above states at length:
+    // this is an anti-vacuity guard over the corpus that SHIPS, and a guard pointed at a
+    // frozen fixture guards nothing. The exact figure is PRINTED below on every run — reported
+    // and pinned by nothing — so the sitting reads the drift there and lowers the ceiling when
+    // it wants the new number.
+    //
+    // ⭐ THE CEILING HAS TEETH. A GROWTH means a REWRITE batch has ADDED trailing coordinates
+    // to the corpus, which is the craft regression the refuters exist to catch and is worth
+    // redding on. The MINORITY assertion below is untouched and is the independent floor: it
+    // is what stops "every variant is withheld" from satisfying the arm.
+    expect(carrying.length, 'the trailing-coordinate class GREW — a batch has ADDED `, and`'
+      + ' joins to the corpus, which is the craft collapse the refuters charge. This is'
+      + ' SHRINK-ONLY. Do not raise the ceiling; find the batch.')
+      .toBeLessThanOrEqual(329);
+    expect(carrying.length, 'and the class is not empty — a ceiling nothing carries would make'
+      + ' the WITHHELD assertion above unfalsifiable').toBeGreaterThan(0);
     expect(carrying.length, 'and it is a minority of the 2,266 R1 variants').toBeLessThan(leaves.length / 2);
     console.log(`  Q · trailing coordinate: ${carrying.length} of ${leaves.length} R1 entries carry the class`);
   });
