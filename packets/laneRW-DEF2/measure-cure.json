@@ -1,7 +1,7 @@
 {
  "arm": "cure",
  "round": 1,
- "at": "2026-09-13T20:36:01",
+ "at": "2026-09-13T21:05:55",
  "roster": {
   "pools": 126,
   "why": "--section defense over 11 block(s) of its own leaf"
@@ -26710,8 +26710,8 @@
    "walk": {
     "verdicts": {
      "FAIL": 0,
-     "WITHHELD": 11,
-     "PASS": 19
+     "WITHHELD": 13,
+     "PASS": 17
     },
     "findings": [
      {
@@ -26727,19 +26727,9 @@
      {
       "channel": "WITHHELD",
       "id": "DS-DEF-2 :: Economic Survival: WEAK",
-      "klass": "C3",
-      "arm": "is this clause historical?",
-      "clause": "The question was never put to those doors.",
-      "column": "provenance",
-      "value": "semantic",
-      "description": "a past-tense or formerly-construction: whether it asserts history is A6, the refuter's"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-2 :: Economic Survival: WEAK",
       "klass": "Q",
       "arm": "a second sentence naming no second field",
-      "clause": "The question was never put to those doors.",
+      "clause": "Whoever lifts it leaves it to the next of those doors.",
       "column": "(second typed field)",
       "value": "reads [scoreBand(economicScore) (via ECONOMIC_ROW_POOL in defenseStateProse.js)]; none claimed",
       "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
@@ -26803,6 +26793,16 @@
      {
       "channel": "WITHHELD",
       "id": "DS-DEF-2 :: Economic Survival: WEAK",
+      "klass": "Q",
+      "arm": "a second sentence naming no second field",
+      "clause": "What is put in is remembered by the neighbours better than any count.",
+      "column": "(second typed field)",
+      "value": "reads [scoreBand(economicScore) (via ECONOMIC_ROW_POOL in defenseStateProse.js)]; none claimed",
+      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Economic Survival: WEAK",
       "arm": "A3",
       "subject": "the band half is the refuter's",
       "value": "and not one of the doors opens.",
@@ -26813,7 +26813,7 @@
       "id": "DS-DEF-2 :: Economic Survival: WEAK",
       "klass": "Q",
       "arm": "a second sentence naming no second field",
-      "clause": "No floor is lifted for a visitor.",
+      "clause": "The neighbours know which floor covers what and say as much to a visitor.",
       "column": "(second typed field)",
       "value": "reads [scoreBand(economicScore) (via ECONOMIC_ROW_POOL in defenseStateProse.js)]; none claimed",
       "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
@@ -26835,9 +26835,19 @@
       "subject": "a cited holder the census does not license",
       "value": "Economic Survival: WEAK: SOURCE-UNRESOLVED",
       "description": "the fact's source is unresolved or is the office's own books, so the citation cites the speaker rather than a record"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Economic Survival: WEAK",
+      "klass": "Q",
+      "arm": "a second sentence naming no second field",
+      "clause": "Everyone at the table can name the ones who stay behind their own door.",
+      "column": "(second typed field)",
+      "value": "reads [scoreBand(economicScore) (via ECONOMIC_ROW_POOL in defenseStateProse.js)]; none claimed",
+      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
      }
     ],
-    "findingCount": 13
+    "findingCount": 14
    },
    "lengths": {
     "form": "sentence",
@@ -26847,7 +26857,7 @@
       "vid": 1,
       "faces": [
        15,
-       27,
+       30,
        21,
        22,
        24,
@@ -26855,7 +26865,7 @@
        21,
        28,
        25,
-       23,
+       20,
        25
       ]
      },
@@ -26866,7 +26876,7 @@
        22,
        25,
        28,
-       27,
+       28,
        27,
        25,
        23,
@@ -26878,14 +26888,14 @@
       "vid": 3,
       "faces": [
        19,
-       23,
+       30,
        18,
-       22,
-       28,
-       24,
+       23,
+       27,
+       23,
        21,
-       21,
-       23
+       19,
+       27
       ]
      }
     ]
@@ -26924,7 +26934,7 @@
       "maxOverlapBp": 1429,
       "medianOverlapBp": 0,
       "sameOpenerPairs": 0,
-      "sameSegmentPairs": 36,
+      "sameSegmentPairs": 29,
       "nearest": {
        "a": 1,
        "b": 6,
@@ -26943,16 +26953,16 @@
      "spread": {
       "pairs": 36,
       "minOverlapBp": 0,
-      "maxOverlapBp": 909,
+      "maxOverlapBp": 714,
       "medianOverlapBp": 0,
       "sameOpenerPairs": 1,
       "sameSegmentPairs": 22,
       "nearest": {
        "a": 2,
-       "b": 8,
+       "b": 3,
        "sameOpener": false,
        "sameSegments": true,
-       "overlapBp": 909
+       "overlapBp": 714
       },
       "why": ""
      }
@@ -26989,16 +26999,16 @@
       },
       "corpus": {
        "executable": true,
-       "sentences": 36,
+       "sentences": 37,
        "scored": 13,
        "exceeded": 8,
        "exceededShare": 0.615,
        "deepest": {
         "metric": "wordsPerSentence.neighbourVariation",
-        "depth": 0.665,
+        "depth": 0.574,
         "side": "under"
        },
-       "meanDistanceFromMedian": 0.479,
+       "meanDistanceFromMedian": 0.417,
        "budgetOk": true,
        "depthOk": true,
        "perfectionSuspect": false,
@@ -27036,16 +27046,16 @@
       },
       "corpus": {
        "executable": true,
-       "sentences": 36,
+       "sentences": 37,
        "scored": 13,
        "exceeded": 8,
        "exceededShare": 0.615,
        "deepest": {
         "metric": "wordsPerSentence.neighbourVariation",
-        "depth": 0.665,
+        "depth": 0.574,
         "side": "under"
        },
-       "meanDistanceFromMedian": 0.479,
+       "meanDistanceFromMedian": 0.417,
        "budgetOk": true,
        "depthOk": true,
        "perfectionSuspect": false,
@@ -27083,16 +27093,16 @@
       },
       "corpus": {
        "executable": true,
-       "sentences": 36,
+       "sentences": 37,
        "scored": 13,
        "exceeded": 8,
        "exceededShare": 0.615,
        "deepest": {
         "metric": "wordsPerSentence.neighbourVariation",
-        "depth": 0.665,
+        "depth": 0.574,
         "side": "under"
        },
-       "meanDistanceFromMedian": 0.479,
+       "meanDistanceFromMedian": 0.417,
        "budgetOk": true,
        "depthOk": true,
        "perfectionSuspect": false,
@@ -27130,16 +27140,16 @@
       },
       "corpus": {
        "executable": true,
-       "sentences": 36,
+       "sentences": 37,
        "scored": 13,
        "exceeded": 8,
        "exceededShare": 0.615,
        "deepest": {
         "metric": "wordsPerSentence.neighbourVariation",
-        "depth": 0.665,
+        "depth": 0.574,
         "side": "under"
        },
-       "meanDistanceFromMedian": 0.479,
+       "meanDistanceFromMedian": 0.417,
        "budgetOk": true,
        "depthOk": true,
        "perfectionSuspect": false,
@@ -27177,16 +27187,16 @@
       },
       "corpus": {
        "executable": true,
-       "sentences": 36,
+       "sentences": 37,
        "scored": 13,
        "exceeded": 8,
        "exceededShare": 0.615,
        "deepest": {
         "metric": "wordsPerSentence.neighbourVariation",
-        "depth": 0.665,
+        "depth": 0.574,
         "side": "under"
        },
-       "meanDistanceFromMedian": 0.479,
+       "meanDistanceFromMedian": 0.417,
        "budgetOk": true,
        "depthOk": true,
        "perfectionSuspect": false,
@@ -27224,16 +27234,16 @@
       },
       "corpus": {
        "executable": true,
-       "sentences": 36,
+       "sentences": 37,
        "scored": 13,
        "exceeded": 8,
        "exceededShare": 0.615,
        "deepest": {
         "metric": "wordsPerSentence.neighbourVariation",
-        "depth": 0.665,
+        "depth": 0.574,
         "side": "under"
        },
-       "meanDistanceFromMedian": 0.479,
+       "meanDistanceFromMedian": 0.417,
        "budgetOk": true,
        "depthOk": true,
        "perfectionSuspect": false,
@@ -27271,16 +27281,16 @@
       },
       "corpus": {
        "executable": true,
-       "sentences": 36,
+       "sentences": 37,
        "scored": 13,
        "exceeded": 8,
        "exceededShare": 0.615,
        "deepest": {
         "metric": "wordsPerSentence.neighbourVariation",
-        "depth": 0.665,
+        "depth": 0.574,
         "side": "under"
        },
-       "meanDistanceFromMedian": 0.479,
+       "meanDistanceFromMedian": 0.417,
        "budgetOk": true,
        "depthOk": true,
        "perfectionSuspect": false,
@@ -27318,16 +27328,16 @@
       },
       "corpus": {
        "executable": true,
-       "sentences": 36,
+       "sentences": 37,
        "scored": 13,
        "exceeded": 8,
        "exceededShare": 0.615,
        "deepest": {
         "metric": "wordsPerSentence.neighbourVariation",
-        "depth": 0.665,
+        "depth": 0.574,
         "side": "under"
        },
-       "meanDistanceFromMedian": 0.479,
+       "meanDistanceFromMedian": 0.417,
        "budgetOk": true,
        "depthOk": true,
        "perfectionSuspect": false,
@@ -27365,16 +27375,16 @@
       },
       "corpus": {
        "executable": true,
-       "sentences": 36,
+       "sentences": 37,
        "scored": 13,
        "exceeded": 8,
        "exceededShare": 0.615,
        "deepest": {
         "metric": "wordsPerSentence.neighbourVariation",
-        "depth": 0.665,
+        "depth": 0.574,
         "side": "under"
        },
-       "meanDistanceFromMedian": 0.479,
+       "meanDistanceFromMedian": 0.417,
        "budgetOk": true,
        "depthOk": true,
        "perfectionSuspect": false,
@@ -27412,16 +27422,16 @@
       },
       "corpus": {
        "executable": true,
-       "sentences": 36,
+       "sentences": 37,
        "scored": 13,
        "exceeded": 8,
        "exceededShare": 0.615,
        "deepest": {
         "metric": "wordsPerSentence.neighbourVariation",
-        "depth": 0.665,
+        "depth": 0.574,
         "side": "under"
        },
-       "meanDistanceFromMedian": 0.479,
+       "meanDistanceFromMedian": 0.417,
        "budgetOk": true,
        "depthOk": true,
        "perfectionSuspect": false,
@@ -27459,16 +27469,16 @@
       },
       "corpus": {
        "executable": true,
-       "sentences": 36,
+       "sentences": 37,
        "scored": 13,
        "exceeded": 8,
        "exceededShare": 0.615,
        "deepest": {
         "metric": "wordsPerSentence.neighbourVariation",
-        "depth": 0.665,
+        "depth": 0.574,
         "side": "under"
        },
-       "meanDistanceFromMedian": 0.479,
+       "meanDistanceFromMedian": 0.417,
        "budgetOk": true,
        "depthOk": true,
        "perfectionSuspect": false,
@@ -27506,16 +27516,16 @@
       },
       "corpus": {
        "executable": true,
-       "sentences": 36,
+       "sentences": 37,
        "scored": 13,
        "exceeded": 8,
        "exceededShare": 0.615,
        "deepest": {
         "metric": "wordsPerSentence.neighbourVariation",
-        "depth": 0.665,
+        "depth": 0.574,
         "side": "under"
        },
-       "meanDistanceFromMedian": 0.479,
+       "meanDistanceFromMedian": 0.417,
        "budgetOk": true,
        "depthOk": true,
        "perfectionSuspect": false,
@@ -27553,16 +27563,16 @@
       },
       "corpus": {
        "executable": true,
-       "sentences": 36,
+       "sentences": 37,
        "scored": 13,
        "exceeded": 8,
        "exceededShare": 0.615,
        "deepest": {
         "metric": "wordsPerSentence.neighbourVariation",
-        "depth": 0.665,
+        "depth": 0.574,
         "side": "under"
        },
-       "meanDistanceFromMedian": 0.479,
+       "meanDistanceFromMedian": 0.417,
        "budgetOk": true,
        "depthOk": true,
        "perfectionSuspect": false,
@@ -27600,16 +27610,16 @@
       },
       "corpus": {
        "executable": true,
-       "sentences": 36,
+       "sentences": 37,
        "scored": 13,
        "exceeded": 8,
        "exceededShare": 0.615,
        "deepest": {
         "metric": "wordsPerSentence.neighbourVariation",
-        "depth": 0.665,
+        "depth": 0.574,
         "side": "under"
        },
-       "meanDistanceFromMedian": 0.479,
+       "meanDistanceFromMedian": 0.417,
        "budgetOk": true,
        "depthOk": true,
        "perfectionSuspect": false,
@@ -27647,16 +27657,16 @@
       },
       "corpus": {
        "executable": true,
-       "sentences": 36,
+       "sentences": 37,
        "scored": 13,
        "exceeded": 8,
        "exceededShare": 0.615,
        "deepest": {
         "metric": "wordsPerSentence.neighbourVariation",
-        "depth": 0.665,
+        "depth": 0.574,
         "side": "under"
        },
-       "meanDistanceFromMedian": 0.479,
+       "meanDistanceFromMedian": 0.417,
        "budgetOk": true,
        "depthOk": true,
        "perfectionSuspect": false,
@@ -27668,7 +27678,7 @@
      "vid": 2,
      "face": 4,
      "executable": true,
-     "sentences": 1,
+     "sentences": 2,
      "scored": 8,
      "exceeded": 0,
      "exceededShare": 0,
@@ -27681,7 +27691,7 @@
      "grains": {
       "face": {
        "executable": true,
-       "sentences": 1,
+       "sentences": 2,
        "scored": 8,
        "exceeded": 0,
        "exceededShare": 0,
@@ -27694,16 +27704,16 @@
       },
       "corpus": {
        "executable": true,
-       "sentences": 36,
+       "sentences": 37,
        "scored": 13,
        "exceeded": 8,
        "exceededShare": 0.615,
        "deepest": {
         "metric": "wordsPerSentence.neighbourVariation",
-        "depth": 0.665,
+        "depth": 0.574,
         "side": "under"
        },
-       "meanDistanceFromMedian": 0.479,
+       "meanDistanceFromMedian": 0.417,
        "budgetOk": true,
        "depthOk": true,
        "perfectionSuspect": false,
@@ -27741,16 +27751,16 @@
       },
       "corpus": {
        "executable": true,
-       "sentences": 36,
+       "sentences": 37,
        "scored": 13,
        "exceeded": 8,
        "exceededShare": 0.615,
        "deepest": {
         "metric": "wordsPerSentence.neighbourVariation",
-        "depth": 0.665,
+        "depth": 0.574,
         "side": "under"
        },
-       "meanDistanceFromMedian": 0.479,
+       "meanDistanceFromMedian": 0.417,
        "budgetOk": true,
        "depthOk": true,
        "perfectionSuspect": false,
@@ -27788,16 +27798,16 @@
       },
       "corpus": {
        "executable": true,
-       "sentences": 36,
+       "sentences": 37,
        "scored": 13,
        "exceeded": 8,
        "exceededShare": 0.615,
        "deepest": {
         "metric": "wordsPerSentence.neighbourVariation",
-        "depth": 0.665,
+        "depth": 0.574,
         "side": "under"
        },
-       "meanDistanceFromMedian": 0.479,
+       "meanDistanceFromMedian": 0.417,
        "budgetOk": true,
        "depthOk": true,
        "perfectionSuspect": false,
@@ -27835,16 +27845,16 @@
       },
       "corpus": {
        "executable": true,
-       "sentences": 36,
+       "sentences": 37,
        "scored": 13,
        "exceeded": 8,
        "exceededShare": 0.615,
        "deepest": {
         "metric": "wordsPerSentence.neighbourVariation",
-        "depth": 0.665,
+        "depth": 0.574,
         "side": "under"
        },
-       "meanDistanceFromMedian": 0.479,
+       "meanDistanceFromMedian": 0.417,
        "budgetOk": true,
        "depthOk": true,
        "perfectionSuspect": false,
@@ -27882,16 +27892,16 @@
       },
       "corpus": {
        "executable": true,
-       "sentences": 36,
+       "sentences": 37,
        "scored": 13,
        "exceeded": 8,
        "exceededShare": 0.615,
        "deepest": {
         "metric": "wordsPerSentence.neighbourVariation",
-        "depth": 0.665,
+        "depth": 0.574,
         "side": "under"
        },
-       "meanDistanceFromMedian": 0.479,
+       "meanDistanceFromMedian": 0.417,
        "budgetOk": true,
        "depthOk": true,
        "perfectionSuspect": false,
@@ -27929,16 +27939,16 @@
       },
       "corpus": {
        "executable": true,
-       "sentences": 36,
+       "sentences": 37,
        "scored": 13,
        "exceeded": 8,
        "exceededShare": 0.615,
        "deepest": {
         "metric": "wordsPerSentence.neighbourVariation",
-        "depth": 0.665,
+        "depth": 0.574,
         "side": "under"
        },
-       "meanDistanceFromMedian": 0.479,
+       "meanDistanceFromMedian": 0.417,
        "budgetOk": true,
        "depthOk": true,
        "perfectionSuspect": false,
@@ -27976,16 +27986,16 @@
       },
       "corpus": {
        "executable": true,
-       "sentences": 36,
+       "sentences": 37,
        "scored": 13,
        "exceeded": 8,
        "exceededShare": 0.615,
        "deepest": {
         "metric": "wordsPerSentence.neighbourVariation",
-        "depth": 0.665,
+        "depth": 0.574,
         "side": "under"
        },
-       "meanDistanceFromMedian": 0.479,
+       "meanDistanceFromMedian": 0.417,
        "budgetOk": true,
        "depthOk": true,
        "perfectionSuspect": false,
@@ -28023,16 +28033,16 @@
       },
       "corpus": {
        "executable": true,
-       "sentences": 36,
+       "sentences": 37,
        "scored": 13,
        "exceeded": 8,
        "exceededShare": 0.615,
        "deepest": {
         "metric": "wordsPerSentence.neighbourVariation",
-        "depth": 0.665,
+        "depth": 0.574,
         "side": "under"
        },
-       "meanDistanceFromMedian": 0.479,
+       "meanDistanceFromMedian": 0.417,
        "budgetOk": true,
        "depthOk": true,
        "perfectionSuspect": false,
@@ -28070,16 +28080,16 @@
       },
       "corpus": {
        "executable": true,
-       "sentences": 36,
+       "sentences": 37,
        "scored": 13,
        "exceeded": 8,
        "exceededShare": 0.615,
        "deepest": {
         "metric": "wordsPerSentence.neighbourVariation",
-        "depth": 0.665,
+        "depth": 0.574,
         "side": "under"
        },
-       "meanDistanceFromMedian": 0.479,
+       "meanDistanceFromMedian": 0.417,
        "budgetOk": true,
        "depthOk": true,
        "perfectionSuspect": false,
@@ -28117,16 +28127,16 @@
       },
       "corpus": {
        "executable": true,
-       "sentences": 36,
+       "sentences": 37,
        "scored": 13,
        "exceeded": 8,
        "exceededShare": 0.615,
        "deepest": {
         "metric": "wordsPerSentence.neighbourVariation",
-        "depth": 0.665,
+        "depth": 0.574,
         "side": "under"
        },
-       "meanDistanceFromMedian": 0.479,
+       "meanDistanceFromMedian": 0.417,
        "budgetOk": true,
        "depthOk": true,
        "perfectionSuspect": false,
@@ -28164,16 +28174,16 @@
       },
       "corpus": {
        "executable": true,
-       "sentences": 36,
+       "sentences": 37,
        "scored": 13,
        "exceeded": 8,
        "exceededShare": 0.615,
        "deepest": {
         "metric": "wordsPerSentence.neighbourVariation",
-        "depth": 0.665,
+        "depth": 0.574,
         "side": "under"
        },
-       "meanDistanceFromMedian": 0.479,
+       "meanDistanceFromMedian": 0.417,
        "budgetOk": true,
        "depthOk": true,
        "perfectionSuspect": false,
@@ -28211,16 +28221,16 @@
       },
       "corpus": {
        "executable": true,
-       "sentences": 36,
+       "sentences": 37,
        "scored": 13,
        "exceeded": 8,
        "exceededShare": 0.615,
        "deepest": {
         "metric": "wordsPerSentence.neighbourVariation",
-        "depth": 0.665,
+        "depth": 0.574,
         "side": "under"
        },
-       "meanDistanceFromMedian": 0.479,
+       "meanDistanceFromMedian": 0.417,
        "budgetOk": true,
        "depthOk": true,
        "perfectionSuspect": false,
@@ -28258,16 +28268,16 @@
       },
       "corpus": {
        "executable": true,
-       "sentences": 36,
+       "sentences": 37,
        "scored": 13,
        "exceeded": 8,
        "exceededShare": 0.615,
        "deepest": {
         "metric": "wordsPerSentence.neighbourVariation",
-        "depth": 0.665,
+        "depth": 0.574,
         "side": "under"
        },
-       "meanDistanceFromMedian": 0.479,
+       "meanDistanceFromMedian": 0.417,
        "budgetOk": true,
        "depthOk": true,
        "perfectionSuspect": false,
@@ -28305,16 +28315,16 @@
       },
       "corpus": {
        "executable": true,
-       "sentences": 36,
+       "sentences": 37,
        "scored": 13,
        "exceeded": 8,
        "exceededShare": 0.615,
        "deepest": {
         "metric": "wordsPerSentence.neighbourVariation",
-        "depth": 0.665,
+        "depth": 0.574,
         "side": "under"
        },
-       "meanDistanceFromMedian": 0.479,
+       "meanDistanceFromMedian": 0.417,
        "budgetOk": true,
        "depthOk": true,
        "perfectionSuspect": false,
@@ -28352,16 +28362,16 @@
       },
       "corpus": {
        "executable": true,
-       "sentences": 36,
+       "sentences": 37,
        "scored": 13,
        "exceeded": 8,
        "exceededShare": 0.615,
        "deepest": {
         "metric": "wordsPerSentence.neighbourVariation",
-        "depth": 0.665,
+        "depth": 0.574,
         "side": "under"
        },
-       "meanDistanceFromMedian": 0.479,
+       "meanDistanceFromMedian": 0.417,
        "budgetOk": true,
        "depthOk": true,
        "perfectionSuspect": false,
@@ -28376,22 +28386,22 @@
    },
    "corpusBand": {
     "executable": true,
-    "sentences": 36,
+    "sentences": 37,
     "scored": 13,
     "exceeded": 8,
     "exceededShare": 0.615,
     "deepest": {
      "metric": "wordsPerSentence.neighbourVariation",
-     "depth": 0.665,
+     "depth": 0.574,
      "side": "under"
     },
-    "meanDistanceFromMedian": 0.479,
+    "meanDistanceFromMedian": 0.417,
     "budgetOk": true,
     "depthOk": true,
     "perfectionSuspect": false,
     "grain": "corpus"
    },
-   "corpusWords": 691,
+   "corpusWords": 700,
    "owned": {
     "verdicts": {
      "FAIL": 0,
@@ -28414,22 +28424,12 @@
      "count": 1
     },
     {
-     "label": "C3 · is this clause historical?",
-     "arm": "is this clause historical?",
-     "klass": "C3",
-     "channel": "WITHHELD",
-     "spineKey": "Economic Survival: WEAK",
-     "clause": "The question was never put to those doors.",
-     "description": "a past-tense or formerly-construction: whether it asserts history is A6, the refuter's",
-     "count": 1
-    },
-    {
      "label": "Q · a second sentence naming no second field",
      "arm": "a second sentence naming no second field",
      "klass": "Q",
      "channel": "WITHHELD",
      "spineKey": "Economic Survival: WEAK",
-     "clause": "The question was never put to those doors.",
+     "clause": "Whoever lifts it leaves it to the next of those doors.",
      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call",
      "count": 1
     },
@@ -28484,6 +28484,16 @@
      "count": 1
     },
     {
+     "label": "Q · a second sentence naming no second field",
+     "arm": "a second sentence naming no second field",
+     "klass": "Q",
+     "channel": "WITHHELD",
+     "spineKey": "Economic Survival: WEAK",
+     "clause": "What is put in is remembered by the neighbours better than any count.",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call",
+     "count": 1
+    },
+    {
      "label": "A3 · the band half is the refuter's",
      "arm": "A3",
      "klass": "",
@@ -28499,7 +28509,7 @@
      "klass": "Q",
      "channel": "WITHHELD",
      "spineKey": "Economic Survival: WEAK",
-     "clause": "No floor is lifted for a visitor.",
+     "clause": "The neighbours know which floor covers what and say as much to a visitor.",
      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call",
      "count": 1
     },
@@ -28512,9 +28522,19 @@
      "clause": "Those who keep the ground say a burying is the one thing here that waits for no purse.",
      "description": "the copula entails the subject is the column's only value; the column is not closed",
      "count": 1
+    },
+    {
+     "label": "Q · a second sentence naming no second field",
+     "arm": "a second sentence naming no second field",
+     "klass": "Q",
+     "channel": "WITHHELD",
+     "spineKey": "Economic Survival: WEAK",
+     "clause": "Everyone at the table can name the ones who stay behind their own door.",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call",
+     "count": 1
     }
    ],
-   "inheritedCount": 13,
+   "inheritedCount": 14,
    "spineWithheld": true,
    "qVocabulary": [
     {
@@ -28530,7 +28550,7 @@
      "synonymTable": "a word-level synonym table ships and was applied"
     },
     {
-     "clause": "The question was never put to those doors.",
+     "clause": "Whoever lifts it leaves it to the next of those doors.",
      "spineKey": "Economic Survival: WEAK",
      "count": 1,
      "reads": [
@@ -28554,7 +28574,31 @@
      "synonymTable": "a word-level synonym table ships and was applied"
     },
     {
-     "clause": "No floor is lifted for a visitor.",
+     "clause": "What is put in is remembered by the neighbours better than any count.",
+     "spineKey": "Economic Survival: WEAK",
+     "count": 1,
+     "reads": [
+      "scoreBand(economicScore) (via ECONOMIC_ROW_POOL in defenseStateProse.js)"
+     ],
+     "mapped": [],
+     "executable": false,
+     "verdict": "NOT-EXECUTABLE: the recovered reading is the census's own synthetic table label and not a field path, so no text can claim it",
+     "synonymTable": "a word-level synonym table ships and was applied"
+    },
+    {
+     "clause": "The neighbours know which floor covers what and say as much to a visitor.",
+     "spineKey": "Economic Survival: WEAK",
+     "count": 1,
+     "reads": [
+      "scoreBand(economicScore) (via ECONOMIC_ROW_POOL in defenseStateProse.js)"
+     ],
+     "mapped": [],
+     "executable": false,
+     "verdict": "NOT-EXECUTABLE: the recovered reading is the census's own synthetic table label and not a field path, so no text can claim it",
+     "synonymTable": "a word-level synonym table ships and was applied"
+    },
+    {
+     "clause": "Everyone at the table can name the ones who stay behind their own door.",
      "spineKey": "Economic Survival: WEAK",
      "count": 1,
      "reads": [
@@ -64815,8 +64859,8 @@
   "sampleSha": "acbd89fb529f588adb58e45c172371aa61ec04105d55bdb127702947152cbf47",
   "verdicts": {
    "FAIL": 14,
-   "WITHHELD": 252,
-   "PASS": 468
+   "WITHHELD": 254,
+   "PASS": 466
   }
  },
  "manifest": {
