@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-13 03:06:26 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-13 03:11:42 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = 0167b831e Plan: rulings 20–23 recorded (plain language, not casual; the archiver weighs in on a pa
 
@@ -93,15 +93,16 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
 - LAST-RUNS: 
 
 ## WORKFLOW RUNS of chair session 4e3d2f70-f45f-4e14-b571-514c339cfa17 — PER AGENT, PER LANE (owner 09-11: save progress per agent per lane; a run dies with the session, its journal + the packets + the dock commits are the checkpoint; journals mirrored under $SC/_progress/<wf>/)
-- **wf_fef9717d-ad4** (mtime 09-13 03:01): agent calls 4 (4 distinct) · DONE 3 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 1 — mirror `_progress/wf_fef9717d-ad4/`
+- **wf_fef9717d-ad4** (mtime 09-13 03:09): agent calls 5 (5 distinct) · DONE 4 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 1 — mirror `_progress/wf_fef9717d-ad4/`
     - `ae1e5e82c` SELECTOR Invasion & War: walls with NO force · DONE · transcript 09-13 02:42 954 KB · 31 tool calls · files: draft.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasio
     - `afe1e560d` GATE r1 · DONE · transcript 09-13 02:51 807 KB · 70 tool calls · files: rows.txt, "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasion-war-walls-with-no-force/speakers.md, gate-out.txt, (git commit) · result: {"pools": [{"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def
     - `ab25b0b9f` REFUTER Invasion & War: walls with NO force · DONE · transcript 09-13 03:01 787 KB · 27 tool calls · files: "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasion-war-walls-with-no-force/refute.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasio
-    - `a902f9cc6` CURER Invasion & War: walls with NO force · IN FLIGHT · transcript 09-13 03:02 499 KB · 9 tool calls · last: Bash F="/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `a902f9cc6` CURER Invasion & War: walls with NO force · DONE · transcript 09-13 03:09 684 KB · 13 tool calls · files: cure.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasio
+    - `ac97b7e2e` GATE r1 · IN FLIGHT · transcript 09-13 03:11 440 KB · 17 tool calls · files: cure-rows.txt, "$SC/cure-rows.txt, "$SC/face-prose.txt · last: Bash SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
 - **wf_208f835e-a94** (mtime 09-13 02:21): agent calls 3 (3 distinct) · DONE 3 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 0 — mirror `_progress/wf_208f835e-a94/`
     - `a76ef67c1` MARKER Invasion & War: walls with NO force · DONE · transcript 09-13 02:21 728 KB · 28 tool calls · files: card.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasio
     - `a3e5e33ce` WRITER Invasion & War: walls with NO force · DONE · transcript 09-13 02:28 656 KB · 15 tool calls · files: shipped-f2da5a3ee.md, candidates-1.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasio
     - `ab8783d22` WRITER Invasion & War: walls with NO force · DONE · transcript 09-13 02:30 725 KB · 17 tool calls · files: candidates-2.md, facetext.txt, ft2.txt · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasio
 
 ## PROCESSES: 
-load: 2.17 2.20 2.22
+load: 2.24 2.37 2.28
