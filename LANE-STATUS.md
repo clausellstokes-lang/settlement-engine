@@ -1,26 +1,15 @@
-# LANE-STATUS — written 2026-09-13 07:08:13 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-13 07:13:22 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = 85a3d71f2 Plan: HANDOFF_CURRENT refreshed to the re-cut machinery's first pool (§919.6 and after: t
 
 ## BUILD / KIT LANES (dock · base · cars · porcelain · receipt)
 - REWRITE 8b DS-DEF-11 (the validation block; cure round): dock laneRW-DEF11 ABSENT
 - REWRITE 8b-W (the wiring car, landed in its dock = the consist lineage): dock laneRW-DEFW ABSENT
-- **DS-DEF-2 (waits for the tables)** dock `laneRW-DEF2` HEAD f6bdcf591 · 28 cars over f2da5a3ee · porcelain 10 · last commits:
+- **DS-DEF-2 (waits for the tables)** dock `laneRW-DEF2` HEAD 065b9ded6 · 29 cars over f2da5a3ee · porcelain 0 · last commits:
+    065b9ded6 REWRITE 8b DS-DEF-2 draft (v3): 3/3 pools
     f6bdcf591 REWRITE 8b DS-DEF-2 cure 3: the archiver witnesses, the town's people speak, and the fair copy stops citing itself — the first pool re-cut under rulings 27, 28, 30, 37 and 40, and every one of its twelve faces now reaches a real page
     f75050761 REWRITE 8b-W-18o-r: the no-repeat state becomes the PAGE's instead of each desk's, a dropped sentence stops consuming a person, and three mechanisms that were re-rolling the page enter the shift register that exists to catch exactly that (the research reconciliation, slice E); ONE declared text shift, measured
     0b71a8ef7 REWRITE 8b-W-18o: the page gets an instrument for how a sentence OPENS and how it CLOSES, and the unit gets its ceiling — and the survey frames the same car was chartered to build were struck by the owner before they landed (ADDENDUM 18 rulings 29, 30, 34, 36, 37 and 40); zero text moved today
-    0389fe89c REWRITE 8b-W-18n: the archiver may WITNESS and the town's people may SPEAK — the one archiver row that draws alone, and a fourteenth source nothing can capture (ADDENDUM 18 rulings 27 and 28, the owner's); zero text moved today
-    porcelain (uncommitted work in the dock — commit it FIRST after re-proving):
-      M  docs/content/RECEIPT_POOLS_DOSSIER_STATE.md
-      M  docs/content/prose-shift-register.json
-      M  docs/content/wiring-census.json
-      M  scripts/.prose-byte-baseline.json
-      M  src/data/dossierStateProse/defense.generated.js
-      M  tests/data/dossierStateProseProjection.contract.test.js
-      M  tests/domain/composeStateProse.test.js
-      M  tests/domain/stateProseKernel.test.js
-      M  tests/lint/proseWaveGate.walker.test.js
-      M  tests/lint/proseWiringCensus.walker.test.js
     receipt `receipt-rewrite.md` (mtime 09-12 20:49) head:
       | # RECEIPT — the REWRITE train
       | 
@@ -104,7 +93,7 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
 - LAST-RUNS: 
 
 ## WORKFLOW RUNS of chair session 4e3d2f70-f45f-4e14-b571-514c339cfa17 — PER AGENT, PER LANE (owner 09-11: save progress per agent per lane; a run dies with the session, its journal + the packets + the dock commits are the checkpoint; journals mirrored under $SC/_progress/<wf>/)
-- **wf_c31490ff-2d1** (mtime 09-13 06:43): agent calls 13 (13 distinct) · DONE 12 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 1 — mirror `_progress/wf_c31490ff-2d1/`
+- **wf_c31490ff-2d1** (mtime 09-13 07:09): agent calls 16 (16 distinct) · DONE 13 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 3 — mirror `_progress/wf_c31490ff-2d1/`
     - `af733d6a7` MARKER Invasion & War: force with NO walls · DONE · transcript 09-13 06:14 817 KB · 36 tool calls · files: mark-out.txt, "$D/card.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasio
     - `a81ba66ec` MARKER Internal Security: no legal infrastructure · DONE · transcript 09-13 06:14 845 KB · 36 tool calls · files: "$D/card.md, "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--internal-security-no-legal-infrastructure/card.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--interna
     - `afe66b63c` MARKER Disasters & Famine: NO reserves, NO medical provision · DONE · transcript 09-13 06:15 809 KB · 44 tool calls · files: card.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--disaste
@@ -117,7 +106,10 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `a2c6fee01` SELECTOR Invasion & War: force with NO walls · DONE · transcript 09-13 06:43 1083 KB · 24 tool calls · files: draft.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasio
     - `ab79e5f9e` SELECTOR Internal Security: no legal infrastructure · DONE · transcript 09-13 06:41 1045 KB · 34 tool calls · files: draft.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--interna
     - `a707efadd` SELECTOR Disasters & Famine: NO reserves, NO medical provision · DONE · transcript 09-13 06:41 1008 KB · 31 tool calls · files: "$D/draft.md, draft.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--disaste
-    - `afc0f79bf` GATE r1 · IN FLIGHT · transcript 09-13 07:07 1350 KB · 136 tool calls · files: stateProseKernel.test.js, composeStateProse.test.js, proseWiringCensus.walker.test.js, proseWaveGate.walker.test.js · last: Bash D=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc
+    - `afc0f79bf` GATE r1 · DONE · transcript 09-13 07:09 1418 KB · 142 tool calls · files: proseWiringCensus.walker.test.js, proseWaveGate.walker.test.js, commit-msg.txt, (git commit) · result: {"commit": "065b9ded6744685dd71379b242ebfa21a0c86b46", "measurement": "SHIPPED f2da5a3ee: pools 26 | units 78 | DISTINCT 519 | content types 489 | mean words 24
+    - `adb9e90da` REFUTER Invasion & War: force with NO walls · IN FLIGHT · transcript 09-13 07:10 541 KB · 12 tool calls · last: Bash sed -n '700,908p' /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514
+    - `a0d612094` REFUTER Internal Security: no legal infrastructure · IN FLIGHT · transcript 09-13 07:12 628 KB · 25 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `a5ffcfd3a` REFUTER Disasters & Famine: NO reserves, NO medical provision · IN FLIGHT · transcript 09-13 07:12 567 KB · 16 tool calls · last: Bash cd "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scra
 - **wf_fef9717d-ad4** (mtime 09-13 03:09): agent calls 5 (5 distinct) · DONE 5 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 0 — mirror `_progress/wf_fef9717d-ad4/`
     - `ae1e5e82c` SELECTOR Invasion & War: walls with NO force · DONE · transcript 09-13 02:42 954 KB · 31 tool calls · files: draft.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasio
     - `afe1e560d` GATE r1 · DONE · transcript 09-13 02:51 807 KB · 70 tool calls · files: rows.txt, "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasion-war-walls-with-no-force/speakers.md, gate-out.txt, (git commit) · result: {"pools": [{"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def
@@ -130,4 +122,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `ab8783d22` WRITER Invasion & War: walls with NO force · DONE · transcript 09-13 02:30 725 KB · 17 tool calls · files: candidates-2.md, facetext.txt, ft2.txt · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasio
 
 ## PROCESSES: 
-load: 2.42 2.41 2.33
+load: 1.94 2.42 2.37
