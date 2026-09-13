@@ -1007,36 +1007,62 @@ const COHERENCE_POOL_OF = Object.freeze({
 });
 
 /**
- * ⛔ FIVE OF THE SIX COHERENCE POOLS ARE ROUTED AND UNREACHED, AND THE CAUSE IS UPSTREAM.
+ * ⛔ FIVE OF THE SIX COHERENCE POOLS ARE ROUTED AND UNREACHED — AND TWO OF THE FOUR REASONS
+ * THIS NOTE USED TO GIVE WERE WRONG. RE-MEASURED 2026-09-13 (the dark-pool defect car).
  *
- * The routing above is total and correct. What is not correct is `genCoherence` itself, and
- * the numbers below are measured over generated settlements rather than reasoned about:
+ * The routing above is total and correct; the producer is still what leaves the pools dark.
+ * But the earlier note's SAMPLE WAS TOO NARROW IN THE ONE DIMENSION THAT MATTERS — it never
+ * varied the five priority sliders, which a wizard user sets on every generation — and a
+ * stale measurement inside a docblock is exactly the shape that darkens a pool by argument.
+ * Corrected here rather than deleted, because the reason a pool is called dead is the thing
+ * the next lane re-derives. Every figure below was re-taken at this tip.
  *
- *   • THE TWO CRIMINAL NOTES ARE DEAD BY THRESHOLD. They require a crime-named faction with
- *     `power > 20` and `power > 35`. Across 291 factions on 48 settlements the generator
- *     wrote 48 crime-named factions and their power took exactly three values — 5, 6 and 7.
- *     The ceiling is a third of the lower threshold. Neither note can fire.
- *   • THE RECOVERY NARRATIVE IS DEAD BY NAME. It requires an event whose `name` contains
- *     `Boom` or `Trade Route Opened`. Across 708 generated historical events with 28
- *     distinct names, ZERO carry either string — the two spellings exist in the tree only
- *     inside `npcGenerator.js`'s related-event lookup, which never names an event on this
- *     record. The `Collapse`/`Famine` half of the same predicate matches 17 times, so the
- *     note is half-live and can never complete. This is a filter reading a key no writer
- *     writes, one layer up from the pool.
- *   • THE OCCUPATION NOTE never fired on 96 settlements carrying the `occupied` stress,
- *     because it additionally requires the stability text NOT to mention occupation.
- *   • THE TEMPLE-ECONOMY NOTE is the one of the five that is merely RARE rather than
- *     unreachable: `prosperity.js` really does write "The church controls most economic
- *     activity" into `situationDesc`, and none of the 384 sampled configs reached it.
+ *   • THE TRANSIT-HUB NOTE IS NOT DEAD BY THRESHOLD. IT IS SLIDER-GATED. The old note said
+ *     crime-faction power "took exactly three values — 5, 6 and 7". Over the shipped
+ *     768-town RATE grid it takes SEVENTEEN distinct values — 5..18, 20, 33, 43 — on the
+ *     272 towns that carry a crime-named faction: min 5, p50 7, p90 13, p99 20, MAX 43.
+ *     Two of those towns already clear the note's own `power > 20`. And once
+ *     `priorityCriminal` moves, the note FIRES: over a 1,728-settlement sweep
+ *     (priorityCriminal 50..95 × priorityMilitary 10..50 × priorityReligion 50..90 ×
+ *     priorityEconomy 20..80) the shipped `coherencePoolKey` produced
+ *     `power_economic: criminal faction in a transit hub` FIFTY times.
+ *   • THE TEMPLE-ECONOMY NOTE IS NOT "MERELY RARE" EITHER — IT IS GATED ON THE SAME AXIS.
+ *     `priorityHelpers.js:526-531` requires `pri.religion >= 70 && pri.economy <= 42 &&
+ *     (religion − economy) >= 28`. The old sample held both at the default 50, so the gate
+ *     was arithmetically shut on every one of its 384 configs. Above that line the note is
+ *     ordinary: 147 towns of the same 1,728 write "church controls" into `situationDesc`
+ *     and the shipped key produced the pool ONE HUNDRED AND NINETEEN times.
+ *   • THE PROSPEROUS-UNDERWORLD NOTE IS DEAD, AND THE MECHANISM IS AN ANTI-CORRELATION
+ *     RATHER THAN A CEILING. It needs `power > 35` AND prosperity in
+ *     {Prosperous, Wealthy, Thriving}. The only lever that raises faction power is
+ *     `priorityCriminal`, and `criminalEffective >= 65` SUBTRACTS a prosperity rung
+ *     (`prosperity.js:151`), so the two antecedents are pushed apart by the same dial.
+ *     1,080 settlements at priorityCriminal 60..95 × priorityEconomy 70..95: the joint cell
+ *     is EMPTY (842 `power<=35 / below`, 238 `power<=35 / Prosperous+`, 0 above 35 in
+ *     either), highest crime power seen 29. ⚠ THE LEAST CERTAIN VERDICT ON THIS LIST: the
+ *     five-dimensional slider space was not exhausted, and the narrow question that would
+ *     harden it is *can any config put a crime faction above 35 % power on a town whose
+ *     prosperity label is Prosperous or better?*
+ *   • THE OCCUPATION NOTE IS DEAD BY CONSTRUCTION, AND THE NOTE NEGATES ITS OWN PRODUCER.
+ *     It requires the `occupied` stress AND a stability text mentioning neither
+ *     "occupation" nor "suppress". Over 336 settlements forced to that stress the stability
+ *     text is a SINGLE CONSTANT — `Suppressed (under occupation: resistance simmers)` —
+ *     which contains BOTH forbidden words. Omissions: 0 of 336.
+ *   • THE RECOVERY NARRATIVE IS DEAD BY NAME, and this one stands as written, re-measured
+ *     wider: across 1,355 generated historical events with 28 distinct names, ZERO contain
+ *     `Boom` or `Trade Route Opened`. The `Collapse`/`Famine` half of the same predicate
+ *     does match, so the note is half-live and can never complete — a filter reading a key
+ *     no writer writes, one layer up from the pool.
  *
- * Only `stress_economic` fires in the wild — 79 instances in a 1,440-settlement sweep.
- *
- * ⇒ THE BLOCK IS STILL MOUNTED, and that is the right call rather than a compromise: its
- * other two pools (`structuralViolations[]` and `structuralSuggestions[]`) are written at
- * generation on ordinary settlements and are measured live, and the siege note is live. The
- * five unreached pools are a FINDING about the producer, declared and pinned, not a defect
- * in this desk — and every cure for them is a generation-side change to thresholds or to a
- * name predicate, which moves same-seed output and is not a display lane's to take.
+ * ⇒ THE BLOCK IS STILL MOUNTED, and that is still the right call: its other two pools
+ * (`structuralViolations[]` and `structuralSuggestions[]`) are written at generation on
+ * ordinary settlements, and the siege note is live. But the DISPOSITION of the five has
+ * changed: TWO of them (transit hub, temple economy) are not producer defects at all — they
+ * are pools the MEASURING CORPUS cannot reach because it pins every slider at 50, and they
+ * fire on ordinary configurations a paying user can select from the wizard. Those two want
+ * WRITING, not a generation-side cure. Only the remaining three need a producer change to a
+ * threshold, an anti-correlation or a name predicate, which moves same-seed output and is
+ * not a display lane's to take.
  */
 
 /**

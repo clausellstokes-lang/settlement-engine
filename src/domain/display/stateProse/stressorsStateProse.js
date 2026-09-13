@@ -293,6 +293,49 @@ export function conditionDurationPoolKey(condition) {
  * silent — which is the honest state, and it costs nothing later: rule a `{reason}` fill
  * vocabulary and the pool lights with NO desk change at all. The untraced pool beside it
  * has `{settlement}`-only variants and speaks today.
+ *
+ * ── ⭐ WHAT THE RECORD ACTUALLY CARRIES, MEASURED 2026-09-13 (the dark-pool defect car) ──
+ *
+ * The note above is RIGHT and its last sentence is too hopeful, so the measurement is set
+ * down here rather than left for the pool run to re-derive. This pool is not rare: the key
+ * resolves on **235 of the 768 RATE-grid towns — 100 % of the towns that carry a condition
+ * at all — and composes to NOTHING on every one of them.** It is the largest single block of
+ * silently-dropped content the dark-pool census found. But a `{defmaterial}`-style FILL
+ * cannot cure it, because that precedent's whole basis is quoting a word THE RECORD'S OWN
+ * DESCRIPTION ALREADY FIXES, and this record fixes none. Over all 242 conditions on those
+ * 235 towns the provenance is exactly three fields, and each refuses the fill for its own
+ * reason:
+ *
+ *  1. `causes[].source` — ONE distinct value, `generation`, on 242 of 242. A fill from it
+ *     prints the same word about every town in every world: a default wearing a reading's
+ *     clothes. And on a PLAYED world it does not become a vocabulary — it becomes an
+ *     IDENTIFIER NAMESPACE (an occupier's settlement id at `worldPulse/occupation.js:942`,
+ *     an upstream `world_stressor.*` id at `worldPulse/narrativeTempo.js:180`), which is
+ *     worse in a sentence, not better.
+ *  2. `causes[].detail` — present on 242 of 242 and IT IS A MACHINE SENTENCE ABOUT THE
+ *     GENERATOR: `Settlement generated under stressor "Famine".` Printing it would have the
+ *     dossier speak of being generated, which breaks the frame the whole product keeps.
+ *  3. `triggeredAt.sourceEventType` — ONE distinct value, `GENERATION`, on 242 of 242.
+ *
+ * ⚠ AND THE ONE READER-FACING TOKEN INSIDE `detail` IS ALREADY SPOKEN NEXT DOOR. The only
+ * words in the record that belong in prose are the quoted stressor name (`"Famine"`,
+ * `"Recently Betrayed"`), and this same block's ARCHETYPE rung already narrates that
+ * archetype — so a fill parsed out of `detail` would have the provenance line restate the
+ * line above it, on every town that draws both.
+ *
+ * ⛔ THE ONE CLOSED, READER-FACING CAUSE VOCABULARY THE ESTATE OWNS IS NOT JOINED TO THIS
+ * RECORD. `worldPulse/causeVocabulary.js`'s `CAUSE_CLASSES[].label` is exactly the register
+ * these variants want — `funds run short`, `a broken supply chain`, `the occupier's hand` —
+ * and NOTHING in the tree writes a cause class onto a condition's `causes[]`. Wiring that
+ * is a generation / world-pulse act, not a desk one, and it would still render nothing at
+ * birth, where all 235 of these towns live.
+ *
+ * ⇒ BOTH CURES ARE WRITING ACTS AND BELONG TO A POOL RUN, NOT TO A CODE CAR: either the
+ * chair RULES a `{reason}` fill vocabulary (and, since the record supplies no word to quote,
+ * that ruling is an authoring act however it is implemented), or the three variants are
+ * RE-CUT so at least one of them does not name `{reason}` and the pool degrades into it.
+ * The second is the cheaper of the two and is what the untraced pool beside this one already
+ * does. Left undone deliberately — documented, not a bug to re-find.
  */
 
 /**
