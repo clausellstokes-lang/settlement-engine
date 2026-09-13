@@ -6,8 +6,16 @@ only in use or in dispute. **Voice:** the master archiver's hand (ADDENDUM 18 ru
 owner qualified it); a fact the engine holds stands bare (ruling 40), every account names its
 source through a role.
 
-**Status:** complete. Three spines, thirty-eight face candidates in the rows, twelve candidates
-held under NOTES (observed · public · weighings · notebook). Verified counts at the foot.
+**Status:** complete, and re-verified against the card on a second pass. Three spines,
+thirty-eight face candidates in the rows, twelve candidates held under NOTES (observed · public ·
+weighings · notebook). Verified counts at the foot. **The second pass changed two things and is
+recorded rather than quietly absorbed:** v1's garrison face lost an elapsed *nobody has come from
+the hall*, whose course would have run over `institutions[bucket=garrison]` (38 pulse writers,
+LIVE, refused by ruling 11a), and reads in the present instead; and the floor-2 durative census
+in THE SCAN was re-run mechanically over every candidate line rather than recalled, which raised
+the true count from the four it named to six and corrected one variant attribution. Every
+mechanical claim in THE SCAN below is now the output of a scan executed over this file, not a
+recollection of drafting.
 
 **The objects this packet works with**, each in use or in dispute and never as bare furniture:
 the store door and the one key to it · the lock the tending does not have · the grain dust
@@ -31,7 +39,7 @@ the stone the grain comes to · the church door open at night while the store do
    - `[face]` `[stranger]` The dust off the store carries as far as the lane, and a drover took that for a town expecting to need its grain. <!-- physical particular: grain dust, smelled. Bare observation in the first clause, the account in the second. -->
    - `[face]` `[guild]` A guild factor says the grain the trades see is the grain already let go of, and that the rest of it stays behind the store door. <!-- seat: TOWN ONLY. Craft guilds (5-15) is required at town and nowhere else; Mills (2-5) likewise, which is what seats the stone below. -->
    - `[face]` `[gate]` One of those on the gate says a cart carrying for the store goes through ahead of a cart carrying for a stall. <!-- seat: CITY, METROPOLIS. City walls and gates, Gate control p 1.0. Not seated at town. -->
-   - `[face]` `[garrison]` One of the garrison says a siege would be decided by the store, and that nobody has come from the hall to ask the garrison about the grain. <!-- seat: CITY, METROPOLIS. 'would be' is the conditional, not the future indicative (ruling 33). -->
+   - `[face]` `[garrison]` One of the garrison says a siege would be decided by the store, and that nobody comes from the hall to ask the garrison about the grain. <!-- seat: CITY, METROPOLIS. 'would be' is the conditional, not the future indicative (ruling 33). Re-cut off an elapsed 'nobody has come': the elapsed course would have run over institutions[bucket=garrison], 38 pulse writers, LIVE. The present tense says the same thing and is shorter. -->
    - `[face]` `[court]` A clerk who hears the town's disputes says the quarrels brought over grain are about weight, and that none is brought about the store. <!-- circumlocution, not a named office; at town the court IS the hall (hasCourtSystem keyword 'town hall'), so the selector should not seat this beside a hall face on one page -->
 
 2. `[street]` Everyone here has seen the store kept full, and everyone here knows that a sickness in a house is answered by whoever the parish sends.
@@ -161,12 +169,26 @@ the capacity is written down and not used, which is the pool's disagreement with
 phrase carries a time word and is flagged for the refuter rather than hidden: spine 1's *against a
 bad year*, which names no year, asserts no failed harvest, and restates the engine's own
 "can absorb a bad harvest without immediate hardship" — the shipped variant 2 of this very pool
-carries "can eat through a bad year", so the form is this pool's own precedent. The duratives that
-appear — *nobody at the table knows the hand*, *has never been asked to keep anything against
-sickness*, *nobody born here asks for the house*, *nobody has come from the hall* — run over
-`hasGranary` / `hasHospital` / `hasChurch`, which carry zero pulse writers and are FROZEN
-(ruling 11b). Nothing elapses over `defenseProfile.scores.disaster`, which `foodStockpile.js:473`
-moves.
+carries "can eat through a bad year", so the form is this pool's own precedent. **The durative
+census is exhaustive, scanned for the perfect and for *ever · never · always · still · since*,
+not recalled.** SIX candidates carry an elapsed course, counting the NOTES, and every one is
+lawful. Four run over a FROZEN read (ruling 11b): v1's second market face (*nobody selling there
+has ever been asked what is in the store*) and v2's second hall face (*nobody has ever asked it
+to keep anything against sickness*) run over `hasGranary` and `hasHospital`; spine 2's public
+carrier (*everyone here has seen the store kept full*) and the v1 public candidate under NOTES
+(*everyone here has seen the store filled and nobody here has seen it emptied*) run over
+`hasGranary`, and both take the exemplar's own licensed form for a public face. The remaining
+two run over no engine field at all and so cannot elapse over a live one: the first notebook
+note's *nobody has had to decide it yet*, and the pair-2 weighing's *nobody has settled it*,
+which are the archiver's own conjecture about a dispute and not a claim about a town's state. All four fields carry
+ZERO pulse writers. A FIFTH was found by the scan and CUT rather than argued: v1's garrison face
+read *nobody has come from the hall*, whose elapsed course would have run over
+`institutions[bucket=garrison]` — 38 pulse writers, LIVE, and refused by ruling 11a — so the
+face is re-cut to the present, which says the same thing in fewer words. Everything else the
+scan flagged is a present-tense stative and not a durative at all: *nobody at the table knows
+the hand*, *nobody born here asks for the house*, *the purse has no line in it for a parish*,
+*the store has a door and a lock*. Nothing elapses over `defenseProfile.scores.disaster`, which
+`foodStockpile.js:473` moves, and nothing elapses over any `institutions` bucket.
 
 **Floor 3.** No minted name and no named office as a subject or an attribution: never the mayor,
 the guard captain, the high priest, **the parish priest**, **the healer**, the guild master, the
