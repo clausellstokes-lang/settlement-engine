@@ -16,3 +16,16 @@ Dock: `$SC/kit/laneRW-DEF2` (a git worktree of the product; HEAD must be clean b
 
 ## Return exactly
 COMMIT (sha in the dock) · FILES (path: what changed) · PINS (+N, file names) · SHIFT (the generated files byte-identical: yes/no with the diff stat) · GATE (the exact command lines you ran and their totals) · HAZARDS (anything a successor must know) · OPEN (what you left undone and why).
+
+---
+
+# RIDING WITH 18i, AS SEPARATE COMMITS IN THIS ORDER: 18j THEN 18i THEN 18k
+
+## CAR 8b-W-18j — FACE_PIN IS A CEILING THAT BINDS (ruling 21 reconciliation 2; measured on the first pool)
+`scripts/generate-dossier-state-prose.mjs` holds `const FACE_PIN = 4` (a spine + three faces per variant). Under ruling 15 (one face per SEATED SOURCE) the card seated TEN sources on the walls-with-no-force preimage and the Fable selector could slot nine; the register and the market were excluded by the pin, not on quality. Raise the pin to `1 + FACE_SOURCES.length` (import the kernel's vocabulary; today 12 → 13; 18i's `archiver` token joins the vocabulary, so after 18i the pin follows automatically) so one face per seated source always fits. Every pool today is at or under 4, so the generated files are byte-identical (prove it: `--check` and `git diff --stat src/data/dossierStateProse/`). If the face-count register (`docs/content/prose-shift-register.json` or wherever `pinnedFaceCount` is frozen) pins the OLD ceiling, re-freeze it as a GROW with plain `--write`, declared in the commit body as a one-time deliberate shift. Pin: a test that the pin equals the vocabulary size plus one, so the two can never drift apart.
+
+## CAR 8b-W-18k — THE CARD PRINTS WHAT A FACE MAY NOT DENY OF A REQUIRED ROW (the first pool's shared writer error)
+Both writer seats denied arms of the persons on gate duty ("Nobody who asked him was under arms") where a `required: true` `Town watch` row seats Gate duty (p 0.8) and `deriveArmedForces` files the watch under `standing`; and both placed the burial ground outside the wall where the card says "most towns, not all". `scripts/prose-mark-card.mjs` (the marker's mechanical instrument, sections 1–6): add a section — "WHAT A FACE MAY NOT DENY OF THE REQUIRED ROWS" — that, for each `required: true` row on every tier of the preimage, prints the row's services with p ≥ 0.8 (from `src/data/institutionServices.js`) and the derivation that files the row (standing force / court / record filing …), in the form: `<row> (required at <tiers>) — a face may not deny: <service> (p) · filed under <bucket>`; and, for any placement the card states with a hedge ("most towns"), print it under "PLACEMENTS A FACE MAY NOT ASSERT". Keep the section mechanical (no prose judgment); the marker's sections 7–9 stay the reader's. Prove it on `node scripts/prose-mark-card.mjs DS-DEF-2 'Invasion & War: walls with NO force'` — the Town watch → Gate duty line must appear. Pin: a test on that output.
+
+## Return, per car
+COMMIT · FILES · PINS · SHIFT · GATE · HAZARDS · OPEN — three blocks, one per car, in the order landed. If the session limit cuts you, the files on disk and the commits made so far are the state; say so in the last line you can write.
