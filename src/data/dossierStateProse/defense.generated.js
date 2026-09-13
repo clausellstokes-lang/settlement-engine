@@ -611,7 +611,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "wordings": [
             "The custom the elders keep says which households owe work on the walls. It says nothing about who is owed for it.",
             "A clerk in the hall puts the walls' keeping under the military purse. At the hall it is not a thing in dispute.",
-            "The guilds pay into the military purse. A factor for them holds that the walls are kept up by the households and not out of that purse."
+            "The guilds pay into the military purse. A factor for them holds that the keeping is in dispute wherever the guilds are asked, and that the purse has bought a wall and no soldiers to hold it."
           ],
           "sources": [
             null,
@@ -634,7 +634,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "A stranger reports the walls up and kept, and no force under arms behind them. The people he saw at work on them were the town's own households.",
+          "text": "A stranger reports the walls up and kept, and no soldiers of the town's own behind them. The people he saw at work on them were the town's own households.",
           "slots": [],
           "vid": 2,
           "wordings": [
@@ -651,7 +651,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "The households say the walls are theirs to keep up. By their own account there is no wage in the work, and no force under arms behind the walls.",
+          "text": "The households say the walls are theirs to keep up. By their own account there is no wage in the work, and the town keeps no soldiers to stand behind the walls.",
           "slots": [],
           "vid": 3,
           "wordings": [

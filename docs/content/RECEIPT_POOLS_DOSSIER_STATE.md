@@ -2642,12 +2642,12 @@ supplies the ancestry.
 1. `[ledger]` The survey finds the walls at {settlement} kept and no force under arms behind them. Entered here as kept.
    - `[face]` `[elders]` The custom the elders keep says which households owe work on the walls. It says nothing about who is owed for it.
    - `[face]` `[hall · pair 1 · disagree]` A clerk in the hall puts the walls' keeping under the military purse. At the hall it is not a thing in dispute.
-   - `[face]` `[guild · pair 1 · disagree]` The guilds pay into the military purse. A factor for them holds that the walls are kept up by the households and not out of that purse.
-2. `[visitor]` A stranger reports the walls up and kept, and no force under arms behind them. The people he saw at work on them were the town's own households.
+   - `[face]` `[guild · pair 1 · disagree]` The guilds pay into the military purse. A factor for them holds that the keeping is in dispute wherever the guilds are asked, and that the purse has bought a wall and no soldiers to hold it.
+2. `[visitor]` A stranger reports the walls up and kept, and no soldiers of the town's own behind them. The people he saw at work on them were the town's own households.
    - `[face]` `[stranger]` A traveller found a stair up to the walk with somebody's stores stacked on it.
    - `[face]` `[tavern]` At the tavern they name who would turn out if the walls were ever wanted, and nobody at the table is surprised by the names.
    - `[face]` `[gate]` Whoever holds the way in stops a stranger and asks his business before letting him through.
-3. `[street]` The households say the walls are theirs to keep up. By their own account there is no wage in the work, and no force under arms behind the walls.
+3. `[street]` The households say the walls are theirs to keep up. By their own account there is no wage in the work, and the town keeps no soldiers to stand behind the walls.
    - `[face]` `[elders]` Among the elders the walls are a boundary before they are anything else, and where the line runs is the older argument.
    - `[face]` `[watch]` The watch says the hall's record has the walls in it and not the walk along them. The survey finds them on the walls after dark all the same.
    - `[face]` `[court]` The matters that reach the court about the walls are about who owes the work on them. None of them are about who would hold them.
