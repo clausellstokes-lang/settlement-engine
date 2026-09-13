@@ -31,9 +31,11 @@ row resolves. Nothing on the force appears in an untagged, `[stranger]`, `[publi
    why the works went up. It is refused in every candidate: not one says when, against what, or
    at whose order.
 5. F2-05, the elapsed course over a LIVE field. `institutions[bucket=walls]` carries thirty-eight
-   pulse writers, so no candidate carries a perfect or a durative over the works. Duratives over
-   the country would be lawful; I did not need one and took none, so the packet has no durative
-   to argue about at all, on either page.
+   pulse writers, so no candidate carries a perfect or a durative over the works, over any force
+   row, or over any other live field. A durative over the country would have been lawful, the
+   `monsterThreat` read being frozen, and I took none, so there is no durative on either page for
+   the refuter to check a field under. The one perfect in the packet is the ladder observation,
+   and it runs over a particular no field records at all.
 6. F1-08, the gate in both directions. Every bar, every way through and every asking of a
    stranger's business sits inside a `[gate]`-tagged candidate, which draws only where
    `GATE_NAMES` resolves. No untagged candidate assumes an arrival is stopped, and none assumes
@@ -63,7 +65,7 @@ the stranger. The angle tags are exactly as they stand in the current rows.
 1. `[counterforce]` The country around {settlement} is quiet. The town keeps built work facing that country.
 
    - `[face]` `[stranger]` A pedlar says the first thing he saw on the works was a line of washing put out to dry.
-   - `[face]` `[stranger]` A drover says he was asked three questions about the road he came in on and none about the road he was leaving by. <!-- speaker: a drover on the road -->
+   - `[face]` `[stranger]` A drover says he watered at a trough set against the works and was asked about the road he came in on before he was asked his name. <!-- speaker: a drover off the road -->
    - `[face]` `[gate]` Whoever holds the way through says the bar is dropped at dusk, and that what it turns back is stock straying in off the road.
    - `[face]` `[hall · pair 1 · reinforce]` The hall says the keeping of the works is met out of the common purse like any other charge the town carries.
    - `[face]` `[court · pair 1 · reinforce]` The court says nothing about the keeping comes before it except the question of who owes the work.
@@ -89,11 +91,11 @@ the stranger. The angle tags are exactly as they stand in the current rows.
    - `[face]` `[register]` The register says the money for the ground has to be asked for and the money for the works does not.
    - `[face]` `[watch]` The watch says nothing on the works asks anything of it, and that the round goes along them all the same.
    - `[face]` `[market]` At the market they reckon what is taken off the stalls goes into the same purse the works are kept out of.
-   - `[face]` `[gate]` Whoever holds the way through says the bar is heavy and the lifting of it falls to whoever is nearest.
+   - `[face]` `[gate]` Whoever holds the way through says the lamp is found for him and the oil is not.
    - `[face]` `[elders]` The elders say the keeping is work owed and not work paid for, and that what is owed is written down nowhere.
    - `[face]` `[muster]` The muster says it costs the town nothing and is reminded of it.
    - `[face]` `[stranger]` A traveller says he was told what the works cost the town before he was told the town's name.
-   - `[face]` `[tavern]` At the tavern they say the wood that gets stacked against the works is the only return anybody here can point to.
+   - `[face]` `[tavern]` At the tavern they say the wood that gets stacked against the works is the return the town can point to.
 
 ## Variant 3 — what the town has stopped seeing
 
@@ -130,9 +132,9 @@ carries a durative, so nothing here runs over the LIVE walls row, and neither ha
 anything about who mans the works — the card's (2b′) list bars the public from claiming it did
 not see what a required row seats.
 
-   - `[face]` `[public]` Everyone here sees the works kept and the country quiet, and the town takes the one for the reason the other stays so.  *(variant 1)*
-   - `[face]` `[public]` Everyone here knows what the works cost the town, and the town counts the cost cheap against a country it does not have to think about.  *(variant 2)*
-   - `[face]` `[public]` Everyone here sees strangers stop on the road to look at the works, and the town takes the stopping for a compliment.  *(variant 3)*
+   - `[face]` `[public]` Everyone here sees the works kept and the country quiet, and the town takes the one for the reason the other stays so.  <!-- variant 1 -->
+   - `[face]` `[public]` Everyone here knows what the works cost the town, and the town counts the cost cheap against a country it does not have to think about.  <!-- variant 2 -->
+   - `[face]` `[public]` Everyone here sees strangers stop on the road to look at the works, and the town takes the stopping for a compliment.  <!-- variant 3 -->
 
 ### The archiver as witness — the bare observation (ruling 27, as ruling 40 re-cut the frame)
 
@@ -140,9 +142,9 @@ One per variant, bare passive, no observer named, no self-naming, no elapsed cou
 number. Each is a fact the page claims, so each was written against the card's (2b′) list: not
 one of them infers into a silence a required row denies, and not one touches the force.
 
-   - `[face]` `[archiver · observed]` A ladder has been left lying at the foot of the works.  *(variant 1)*
-   - `[face]` `[archiver · observed]` The works are being mended at the point where a cart track runs up to them.  *(variant 2)*
-   - `[face]` `[archiver · observed]` Marks of a cart's wheels run up to the works and stop at them.  *(variant 3)*
+   - `[face]` `[archiver · observed]` A ladder has been left lying at the foot of the works.  <!-- variant 1 -->
+   - `[face]` `[archiver · observed]` The works are being mended at the point where a cart track runs up to them.  <!-- variant 2 -->
+   - `[face]` `[archiver · observed]` Marks of a cart's wheels run up to the works and stop at them.  <!-- variant 3 -->
 
 ### The archiver's weighing (ruling 22) — one per pair, and every one of them opens
 
@@ -151,11 +153,11 @@ page may close a question here. Each is a conjecture, a plain statement that the
 or a confidence with its reason drawn from the other source's stake. No source is favoured twice
 across the block.
 
-   - `[face]` `[archiver · pair 1 · weigh]` On this the two agree, and there is no cause to doubt them.
-   - `[face]` `[archiver · pair 2 · weigh]` It may be that the shelter is the only thing the works give the town that the town would miss.
+   - `[face]` `[archiver · pair 1 · weigh]` The two tell it the same way, and neither has anything to gain by telling it so.
+   - `[face]` `[archiver · pair 2 · weigh]` It may be that the shelter is what the town would miss first.
    - `[face]` `[archiver · pair 3 · weigh]` Which of the two is right is argued in the town and is not settled.
    - `[face]` `[archiver · pair 4 · weigh]` It may be that both are true, a thing kept for the look of it being kept all the same.
-   - `[face]` `[archiver · pair 5 · weigh]` The watch is the likelier of the two, a house that sells drink having small reason to believe a traveller.
+   - `[face]` `[archiver · pair 5 · weigh]` The watch is the likelier of the two, the tavern having small reason to believe a traveller and good reason to enjoy doubting one.
    - `[face]` `[archiver · pair 6 · weigh]` It may be that a stranger does both, and prices the town high before he prices a sack low.
 
 ### The notebook — dm-only candidates, if the block wants them here
@@ -181,3 +183,24 @@ leaves the question standing. Floor 2 holds — no sum, no date, no count.
    stock, the pitch in the lee, the stacked wood, the hen-coop, the boots, the door in one
    household's part, the tools, the ladder, the cart track. They are all different objects and
    no two variants share one.
+3. **The second candidates, and where a source stands in a pair and alone in the same variant.**
+   The hall and the stranger carry two candidates in variant 1, the tavern two in variant 2. In
+   variant 1 the hall is also half of pair 1, and in variant 2 the tavern is also half of pair 4:
+   the draw keeps one face per source, so the selector takes either the pair or the lone face and
+   never both. The lone ones are there because each source had a second thing worth saying, not
+   to pad the count.
+4. **Where each pair can actually draw, since a pair renders whole or not at all.**
+   Pair 1 (hall · court) and pair 3 (hall · guild) need a hall, so town and city only, and the
+   guild is required at town alone. Pair 2 (market · guild) and pair 6 (guild · market) are town
+   and city. Pair 4 (garrison · tavern) needs both, which is the city end of the preimage, where
+   `Garrison` and `Inns and taverns (district)` are required together. Pair 5 (tavern · watch) is
+   town and city. None of the six pairs reaches the thorp, the village or the metropolis, so the
+   thin end of this preimage draws lone faces only: there the elders, the muster, the stranger
+   and the gate are most of what resolves, and each of them carries a candidate in all three
+   variants for that reason.
+5. **What I did NOT write, and why it may look like a gap.** There is no candidate about who
+   stands on the works, none about a wall-walk, none about a bell or a horn sounding, none about
+   what the works were built for or when, and none that reckons the excess in any quantity. Each
+   of those is the pool's most natural sentence and each is a floor under the card. The excess is
+   shown here only as the card's section (9) licenses it: as a kept thing with no occasion, met
+   at the grain of the object a source has a reason to notice.
