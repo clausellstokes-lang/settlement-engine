@@ -142,6 +142,35 @@ down stays that way, and the desk says so. The RATE corpus cannot reach it for e
 reason `pool-rates.md` LIMIT 1 names — a world-less town is never ruined and carries no custom
 content. **VERDICT: OUT OF GRID. The chair must NOT strike this pool.**
 
+### HOW EASILY A REAL CAMPAIGN REACHES IT — tier by tier
+
+The obvious objection to the ruin path is that calamity may not be ALLOWED to ruin defences:
+`calamityKernel.js:12,403` bounds the strike to **non-required** institutions
+("selectStrikeTargets filters `required` out BEFORE any draw"). So the question is whether the
+policy's own additions are required. They are not, mostly — the materialization spreads the
+catalogue entry verbatim (`steps/assembleInstitutions.js:702`, `source: 'coherence_repair'`,
+which is NOT `'custom'`, so the desk still sees it):
+
+| tier | policy's fortification | policy's first force | can a calamity strike take the perimeter? |
+| --- | --- | --- | --- |
+| thorp | `Palisade` req=false | `Household levy` req=false | **yes — and the force too** |
+| hamlet | `Palisade or earthworks` req=false | `Citizen militia` req=false | **yes — and the force too** |
+| village | `Palisade or earthworks` req=false | `Citizen militia` req=false | **yes — and the force too** |
+| town | `Town walls` req=false | `Town watch` req=**true** | **yes — and the force need not fall at all** |
+| city | `City walls and gates` req=**true** | `Garrison` req=**true** | no (this route is closed at city) |
+| metropolis | `Massive walls and fortifications` req=false | `Multiple garrisons` req=false | **yes — and the force too** |
+
+⭐ **TOWN IS THE CHEAPEST ROUTE IN, AND THE SHIPPED RATE TABLE ALREADY SHOWS ITS SIGNATURE.**
+At town the policy's force is `Town watch`, and the desk's garrison keywords are
+`garrison · barracks · professional guard · professional city watch · multiple garrison` —
+a plain `Town watch` matches none of them, and the militia keywords none either. So a plagued
+town supplied with a watch reads `force = FALSE` **before any calamity at all**. That is
+exactly why `Beasts & Monsters: plagued, perimeter but NO force to hold it` fires on tiers
+`thorp · town` and no others (pool-rates row 192, 42 towns — reproduced by probe): thorp and
+town are precisely the two tiers whose policy-supplied force is invisible to the desk. Those
+42 towns are ONE non-required strike on `Town walls` away from this dark pool. It is not an
+exotic state; it is the neighbouring state of a state that already fires on 42 of 768.
+
 ⚠ Whether the policy's ruin-blindness is itself a DEFECT: **NO, not as such.** The policy runs
 at generation and at final reconciliation, both BEFORE any ruin can occur, so filtering there
 would be a no-op — the same reasoning `defenseInstitutionBuckets.js:36-46` already sets down
@@ -300,9 +329,128 @@ ledger, an owner-gated fix (it moves a shipped reading), and not a dark-pool que
 
 ---
 
-# THE REMAINING 53 — IN PROGRESS
+# THE REMAINING 53
 
-(rows appended as they are settled)
+## ⛔⛔ SLICE A — AND IT FOUND A DEFECT IN THE MEASUREMENT ITSELF (21 pools)
+
+### GROUND A — `DS-STR-1 :: CRISIS_POOL_OF` is NOT DARK. THE INSTRUMENT NEVER ASKED IT. (14 pools)
+
+`CRISIS_POOL_OF` is reachable only through `crisisBannerRung`
+(`src/domain/display/stateProse/stressorsStateProse.js:519`) — a SECOND entry point beside the
+page-wide desk. The shipped product calls it once per active crisis
+(`src/components/new/tabs/OverviewTab.jsx:298`, suppressed only on the public dossier). The
+RATE corpus does not: `scripts/prose-rate-corpus.mjs:307-311` calls
+`stressors.stressorsStateProse(s, {banners, conditions, worldStressor})` and nothing else, so
+only `crisisArityPoolKey` and `crisisFramingPoolKey` ever run. That is exactly why the block
+reads live (framing 235/768, arity 7/768) while the rung reads dark.
+
+**It is the same defect class this very script already documents and cured for a sibling desk**
+— its own note at `prose-rate-corpus.mjs:187-193`, "three FOOD pools could never fire on the
+RATE corpus", because the economy desk was called with its readings absent. The stressor
+desk's per-banner recipe never got the same cure.
+
+**THE PROBE** — the shipped per-banner entry point driven over the IDENTICAL 768-town grid
+with the IDENTICAL provenance walk:
+
+```
+banners seen: 242 | crisisBannerPoolKey returned null on 0 | rung null on 0
+  26 SUCCESSION VOID       17 MASS MIGRATION        16 BEAST & RAIDER THREAT
+  25 POLITICALLY FRACTURED 17 RECENTLY BETRAYED     14 UNDER SIEGE
+  24 FAMINE                17 INDEBTED TO AN OUTSIDE POWER
+  21 INSURGENCY            18 DISEASE OUTBREAK      13 INFILTRATED
+  20 WARTIME                8 UNDER OCCUPATION       6 RELIGIOUS CRISIS
+```
+
+**Fourteen pools compose on towns already in the corpus, at 78–339 bp. They are not zeros;
+they were never measured.** The chair must NOT strike them. Verdict for all fourteen:
+**DEFECT — fix the instrument, then write them.**
+
+### GROUND B — SLAVE REVOLT is the fifteenth, and it is different
+
+`resolveStress` filters generator-owned entities through the generation content profile
+(`src/generators/steps/resolveStress.js:194-232`, `allowsGeneratedContent`). The default is
+`grounded` (`src/domain/generationContentProfile.js:134`), whose `slavery` boundary is `false`,
+and "Slave Revolt" matches `TOPIC_PATTERNS.slavery`. The grid never sets `config.contentProfile`.
+
+```
+profile grounded  topics=["slavery"] allows=false
+profile grim      topics=["slavery"] allows=true
+contentProfile=grounded: 1500 town+ settlements, SLAVE REVOLT banners = 0
+contentProfile=grim:     1500 town+ settlements, SLAVE REVOLT banners = 6
+  composed rung provenance: {"blockId":"DS-STR-1","poolKey":"SLAVE REVOLT"}
+```
+Corroboration that the roll is not the cause: 200,000 direct `generateStress` rolls at `city`
+return `slave_revolt` 845 times (0.422 %), so ~14 were expected in a 3,000-town sweep and 0
+appeared. Verdict: **OUT OF GRID** (Ground A's defect also sits underneath it).
+
+### GROUND C — the granary and blockade rungs read the WORLD PULSE's stockpile (6 pools)
+
+`granaryPoolKey` needs `deriveGranaryOutlook().available`
+(`src/domain/display/dossierViewModel.js:325-332`), false without
+`economicState.foodSecurity.stockpile.season`. `foodSecurityPoolKey` reads
+`stockpile.blockaded` / `.blockadeBypass` (`economyStateProse.js:395-401`).
+`foodSecurity.stockpile` has exactly ONE writer, `advanceFoodStockpile`
+(`src/domain/worldPulse/foodStockpile.js:410`), called only from `pulseKernel.js:543`, and
+`season` exists only when `simulationRules.seasonsEnabled === true` (`pulseKernel.js:483`).
+**Measured: 0 of 768 grid towns carry a stockpile at all.**
+
+```
+settlements pulsed: 120 (no food ledger: 0)
+COMPOSED: GRANARY: well stocked 113 · GRANARY: stocked 7 · DS-ECO-9 :: BLOCKADED 60
+60 towns x 36 besieged months — granaryPoolKey:
+  well stocked 241 · stocked 613 · thin 193 · nearly empty 1113
+  end-state composed: nearly empty 47 · stocked 12 · well stocked 1
+with a Teleportation Circle: blockaded=true blockadeBypass='teleport'
+  composed: ['DS-ECO-9 :: BLOCKADE BYPASSED']
+ALL 768 RATE-grid towns, resolveBlockadeBypassChannel: { none: 768 }
+600 town+ at priorityMagic=100: { none: 258, teleport: 327, airship: 15 }
+```
+
+⭐ **AND A SECOND UN-SWEPT AXIS FALLS OUT OF THIS.** The grid's config carries only
+`settType · tradeRouteAccess · monsterThreat · culture · terrainOverride`
+(`prose-rate-corpus.mjs:92-117`), so **all five priority sliders sit at the default 50 on every
+one of the 768 towns** — measured as one distinct triple, `E50 C50 M50`. At 50 no town ever
+receives a teleportation circle or an airship dock; raise `priorityMagic` and 57 % do. That is
+a whole configuration axis the corpus does not vary, and it plausibly darkens pools outside
+this slice.
+
+| block | pool | verdict | ground | what the chair should do |
+| --- | --- | --- | --- | --- |
+| DS-STR-1 | BEAST & RAIDER THREAT | **DEFECT** | GROUND A — composes 16/768 when called | fix the defect then write it |
+| DS-STR-1 | DISEASE OUTBREAK | **DEFECT** | GROUND A — 18/768 | fix the defect then write it |
+| DS-STR-1 | FAMINE | **DEFECT** | GROUND A — 24/768 | fix the defect then write it |
+| DS-STR-1 | INDEBTED TO AN OUTSIDE POWER | **DEFECT** | GROUND A — 17/768 | fix the defect then write it |
+| DS-STR-1 | INFILTRATED | **DEFECT** | GROUND A — 13/768 | fix the defect then write it |
+| DS-STR-1 | INSURGENCY | **DEFECT** | GROUND A — 21/768 | fix the defect then write it |
+| DS-STR-1 | MASS MIGRATION | **DEFECT** | GROUND A — 17/768 | fix the defect then write it |
+| DS-STR-1 | POLITICALLY FRACTURED | **DEFECT** | GROUND A — 25/768 | fix the defect then write it |
+| DS-STR-1 | RECENTLY BETRAYED | **DEFECT** | GROUND A — 17/768 | fix the defect then write it |
+| DS-STR-1 | RELIGIOUS CRISIS | **DEFECT** | GROUND A — 6/768 | fix the defect then write it |
+| DS-STR-1 | SUCCESSION VOID | **DEFECT** | GROUND A — 26/768 | fix the defect then write it |
+| DS-STR-1 | UNDER OCCUPATION | **DEFECT** | GROUND A — 8/768 | fix the defect then write it |
+| DS-STR-1 | UNDER SIEGE | **DEFECT** | GROUND A — 14/768 | fix the defect then write it |
+| DS-STR-1 | WARTIME | **DEFECT** | GROUND A — 20/768 | fix the defect then write it |
+| DS-STR-1 | SLAVE REVOLT | OUT OF GRID | GROUND B — the grid does not vary `config.contentProfile` | write it after a corpus that reaches it |
+| DS-ECO-2 | GRANARY: well stocked | OUT OF GRID | GROUND C — composes 113/120 after one pulsed tick | write it after a corpus that reaches it |
+| DS-ECO-2 | GRANARY: stocked | OUT OF GRID | GROUND C — 613 town-months | write it after a corpus that reaches it |
+| DS-ECO-2 | GRANARY: thin | OUT OF GRID | GROUND C — 193 town-months under drawdown | write it after a corpus that reaches it |
+| DS-ECO-2 | GRANARY: nearly empty | OUT OF GRID | GROUND C — composes 47/60 at end state | write it after a corpus that reaches it |
+| DS-ECO-9 | BLOCKADED | OUT OF GRID | GROUND C — composes 60/120 with a siege stressor | write it after a corpus that reaches it |
+| DS-ECO-9 | BLOCKADE BYPASSED | OUT OF GRID | GROUND C — needs the blockade AND a magical transport channel; the grid varies neither | write it after a corpus that reaches it |
+
+**Nothing in slice A is DEAD BY CONSTRUCTION. Not one of these 21 pools may be struck.**
+
+Slice A's own limits: the full 273-row table was NOT re-taken with a corrected `deskReturns`
+(that would mean editing the read-only dock), so the chair owes a re-take after the cure —
+adding a per-banner return also moves `bareSentences`, the pair distribution and the
+tier-silence findings, which `rateTable` computes over the same `fired` list. The granary and
+blockade probes call `advanceFoodStockpile` directly rather than driving a full campaign tick,
+so the pool keys are proven but the FREQUENCY a played campaign yields is not. `SLAVE REVOLT`
+carries an owner-gated question slice A did not decide: `grim` is a shipped, player-selectable
+profile, so the pool is reachable — but whether the corpus should sweep `contentProfile` is a
+policy call, not a measurement one.
+
+## SLICES B, C, D — IN PROGRESS
 
 ---
 
