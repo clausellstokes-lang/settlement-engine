@@ -1,7 +1,7 @@
 # THE RE-CUT PROGRAMME — the machinery follows the law (plan)
 
 > **Progress** (append after every wave — this blockquote alone must reconstruct program state)
-> - Wave 0 (in flight) — the sitting document, 1,137 VALIDATION cells, CONTRADICTION-TABLE §V (35 finding rows, the floors re-worded, 6 new wiring rows, 2 new §1.1 rows), CHAIR-NOTE E-4(b) struck by annotation, ADDENDUM 18 (13 rulings) into the kit brief and `verbatim/`, `items-ADDENDUM-18.md` (13 rows), the kit's law files under `docs/rewrite-kit/`.
+> - Wave 0 (shipped, `b9c3fe322` §919.6, sealed `refs/preserve/fable-sitting-2026-09-12`) — the sitting document, 1,137 VALIDATION cells, CONTRADICTION-TABLE §V (35 finding rows, the floors re-worded, 6 new wiring rows, 2 new §1.1 rows), CHAIR-NOTE E-4(b) struck by annotation, ADDENDUM 18 (13 rulings) into the kit brief and `verbatim/`, `items-ADDENDUM-18.md` (13 rows), the kit's law files under `docs/rewrite-kit/`.
 > - Program opened 2026-09-12 ~21:00 (session 4e3d2f70, Fable chair) from the FABLE SITTING of the same evening (`docs/rewrite-retro-2026-09-12/FABLE-SITTING-2026-09-12.md`) at the owner's word: *"along this new direction, i am amenable to other changes to previously stated laws and rules that help get to the intent behind why we did everything … without the machinery becoming the very obstacle for its completion. do you have any other suggestions?"* → seven suggestions → **"do all of that."** → four taste additions → **"do it all."** → the owner's two observations (no `{settlement}` inside a face; THE CLERKS) = thirteen rulings, brief ADDENDUM 18.
 
 ## Sources
