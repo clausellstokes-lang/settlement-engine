@@ -565,9 +565,15 @@ describe('the state-prose reader — the wording face (ARCH §2.6)', () => {
     // ⭐ RE-PINNED AT THE 8b DS-DEF-2 DRAFT GATE (v3) from the single `walls with NO force`
     // roster: three more pools of the same block landed faces in one commit.
     // ⭐⭐ RE-PINNED AT THE DRAFT GATE'S THIRD SITTING: FIVE more pools of the block landed faces
-    // in one commit, so the roster is forty-two variants of fourteen pools. A sixth packet was
-    // REFUSED at that gate (`Disasters & Famine: granary AND parish care only`) and is absent here
-    // by the refusal. Everything outside DS-DEF-2 still takes no hash and still draws face 0.
+    // in one commit, so the roster was forty-two variants of fourteen pools. A sixth packet was
+    // REFUSED at that gate (`Disasters & Famine: granary AND parish care only`) and was absent
+    // here by the refusal. Everything outside DS-DEF-2 still takes no hash and still draws face 0.
+    // ⭐⭐⭐ RE-PINNED AT THE 8b DS-DEF-2 CURE GATE (v3), AND THE REFUSED POOL IS WHY. Six cure
+    // packets landed; five re-cut wordings inside counts they already had and move nothing here.
+    // The whole of this move is `Disasters & Famine: granary AND parish care only`, whose cure
+    // removes the one PROVENANCE citation the draft gate refused it for (`from the road` →
+    // `from outside`) and which therefore takes its seat for the first time. The roster is now
+    // FORTY-FIVE variants of FIFTEEN pools, +3 and +1 — a GROW only, no pool lost a face.
     const FACED_TODAY = ['DS-DEF-2 :: Beasts & Monsters: frontier, credible deterrence #0',
       'DS-DEF-2 :: Beasts & Monsters: frontier, credible deterrence #1',
       'DS-DEF-2 :: Beasts & Monsters: frontier, credible deterrence #2',
@@ -583,6 +589,9 @@ describe('the state-prose reader — the wording face (ARCH §2.6)', () => {
       'DS-DEF-2 :: Disasters & Famine: granary AND hospital #0',
       'DS-DEF-2 :: Disasters & Famine: granary AND hospital #1',
       'DS-DEF-2 :: Disasters & Famine: granary AND hospital #2',
+      'DS-DEF-2 :: Disasters & Famine: granary AND parish care only #0',
+      'DS-DEF-2 :: Disasters & Famine: granary AND parish care only #1',
+      'DS-DEF-2 :: Disasters & Famine: granary AND parish care only #2',
       'DS-DEF-2 :: Economic Survival: STRONG #0',
       'DS-DEF-2 :: Economic Survival: STRONG #1',
       'DS-DEF-2 :: Economic Survival: STRONG #2',
@@ -658,7 +667,7 @@ describe('the state-prose reader — the wording face (ARCH §2.6)', () => {
       // shift register's `face-count-per-variant` row, not this line.
       // ⭐⭐ RE-PINNED AGAIN AT THE DRAFT GATE'S THIRD SITTING: forty-two, not twenty-seven — five
       // more of the block's pools landed faces in one commit, three variants each. A GROW.
-      expect(hashedRows, 'and exactly forty-two variants ship more than one face').toBe(42);
+      expect(hashedRows, 'and exactly forty-five variants ship more than one face').toBe(45);
     } finally {
       spy.mockRestore();
     }
@@ -1447,8 +1456,10 @@ describe('the state-prose reader — ONE FACE PER POWER: the source filter and t
     // ⭐⭐ RE-PINNED AGAIN AT THE DRAFT GATE'S THIRD SITTING, which landed FIVE more pools of the
     // block — Beasts plagued-perimeter-but-NO-force, Beasts frontier force-without-a-perimeter,
     // Invasion walls-with-citizen-militia, Internal Security court-without-detention and Economic
-    // Survival WEAK. The roster is now FORTY-TWO variants of FOURTEEN pools; a sixth packet was
-    // REFUSED at the gate and keeps its shipped spine rows. None of the five seats the `archiver`,
+    // Survival WEAK. A sixth packet was REFUSED at that gate for one PROVENANCE citation and kept
+    // its shipped spine rows; its CURE packet removes the citing clause, so at the 8b DS-DEF-2
+    // CURE gate `Disasters & Famine: granary AND parish care only` takes its seat and the roster
+    // is FORTY-FIVE variants of FIFTEEN pools. None of the five seats the `archiver`,
     // the `public`, an `observed` mark or a `weigh`, so those arms are untouched; the zero-shift arm
     // over every OTHER block is unchanged, which is the arm that matters.
     const SOURCED_TODAY = ['DS-DEF-2 :: Beasts & Monsters: frontier, credible deterrence #0',
@@ -1466,6 +1477,9 @@ describe('the state-prose reader — ONE FACE PER POWER: the source filter and t
       'DS-DEF-2 :: Disasters & Famine: granary AND hospital #0',
       'DS-DEF-2 :: Disasters & Famine: granary AND hospital #1',
       'DS-DEF-2 :: Disasters & Famine: granary AND hospital #2',
+      'DS-DEF-2 :: Disasters & Famine: granary AND parish care only #0',
+      'DS-DEF-2 :: Disasters & Famine: granary AND parish care only #1',
+      'DS-DEF-2 :: Disasters & Famine: granary AND parish care only #2',
       'DS-DEF-2 :: Economic Survival: STRONG #0',
       'DS-DEF-2 :: Economic Survival: STRONG #1',
       'DS-DEF-2 :: Economic Survival: STRONG #2',
@@ -1519,7 +1533,13 @@ describe('the state-prose reader — ONE FACE PER POWER: the source filter and t
       [null, 'stranger', 'gate', 'elders', 'hall', 'guild', 'tavern', 'register', 'muster', 'court', 'garrison', 'market'], 
       [null, 'stranger', 'gate', 'register', 'hall', 'watch', 'tavern', 'garrison', 'guild', 'market', 'court', 'elders'], 
       [null, 'market', 'register', 'gate', 'court', 'muster', 'tavern', 'garrison', 'guild', 'hall', 'elders'], 
-      [null, 'elders', 'stranger', 'tavern', 'muster', 'register', 'hall', 'guild', 'market', 'watch', 'garrison', 'court'], 
+      // ⭐ RE-FROZEN AT THE 8b DS-DEF-2 CURE GATE (v3): `Beasts & Monsters: frontier, force
+      // without a perimeter` #0. The DULL re-cut gave the variant a `reinforce` pair on its
+      // two UNIVERSAL sources (stranger + muster, so it renders on every town) and renumbered
+      // the variant's pairs — pair 1 the new reinforce, pair 2 the hall and the guilds,
+      // unchanged in claim. It repurposed two STANDING faces and added none, so the face
+      // count does not move and the `face-count-per-variant` register is untouched by it.
+      [null, 'elders', 'stranger', 'muster', 'tavern', 'register', 'hall', 'guild', 'market', 'watch', 'garrison', 'court'], 
       [null, 'stranger', 'elders', 'guild', 'muster', 'watch', 'tavern', 'hall', 'market', 'register', 'garrison', 'court'], 
       [null, 'muster', 'elders', 'register', 'stranger', 'tavern', 'hall', 'guild', 'watch', 'market', 'garrison', 'court'], 
       [null, 'guild', 'market', 'tavern', 'hall', 'gate'], 
@@ -1556,6 +1576,15 @@ describe('the state-prose reader — ONE FACE PER POWER: the source filter and t
       [null, 'hall', 'market', 'register', 'tavern', 'watch', 'stranger', 'gate', 'guild', 'garrison'], 
       [null, 'hall', 'market', 'watch', 'tavern', 'register', 'stranger', 'guild', 'gate', 'garrison'], 
       [null, 'hall', 'tavern', 'market', 'register', 'watch', 'gate', 'stranger', 'guild', 'garrison'], 
+      // ⭐⭐ NEW AT THE 8b DS-DEF-2 CURE GATE (v3) — `Disasters & Famine: granary AND parish
+      // care only`, the pool the DRAFT gate refused whole for one PROVENANCE citation. Its
+      // cure's own target v3/0 removes the citing clause (`from the road` → `from outside`),
+      // so the pool takes its seat here for the first time: three variants, 22 faces, two
+      // marked pairs. This is the WHOLE of the cure gate's grow; the other five packets
+      // re-cut wordings inside counts they already had.
+      [null, 'hall', 'market', 'watch', 'register', 'guild', 'tavern', 'gate', 'garrison'], 
+      [null, 'register', 'hall', 'tavern', 'market', 'guild', 'watch', 'stranger', 'court'], 
+      [null, 'register', 'market', 'tavern', 'watch', 'guild', 'court'], 
       [null, 'elders', 'stranger', 'market', 'register', 'tavern'], 
       [null, 'elders', 'tavern', 'stranger', 'market', 'register'], 
       [null, 'stranger', 'tavern', 'elders', 'register', 'market'], 
@@ -1567,7 +1596,13 @@ describe('the state-prose reader — ONE FACE PER POWER: the source filter and t
       [null, null, null, null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null, null, null, null, null, null], 
       [null, null, { id: 5, kind: 'aside' }, { id: 5, kind: 'aside' }, { id: 2, kind: 'disagree' }, { id: 2, kind: 'disagree' }, null, null, null, null, null, null], 
       undefined, 
-      [null, null, null, null, null, null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null, null, null, null], 
+      // ⭐ RE-FROZEN AT THE 8b DS-DEF-2 CURE GATE (v3): `Beasts & Monsters: frontier, force
+      // without a perimeter` #0. The DULL re-cut gave the variant a `reinforce` pair on its
+      // two UNIVERSAL sources (stranger + muster, so it renders on every town) and renumbered
+      // the variant's pairs — pair 1 the new reinforce, pair 2 the hall and the guilds,
+      // unchanged in claim. It repurposed two STANDING faces and added none, so the face
+      // count does not move and the `face-count-per-variant` register is untouched by it.
+      [null, null, { id: 1, kind: 'reinforce' }, { id: 1, kind: 'reinforce' }, null, null, { id: 2, kind: 'disagree' }, { id: 2, kind: 'disagree' }, null, null, null, null], 
       [null, null, null, null, null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, { id: 2, kind: 'view' }, { id: 2, kind: 'view' }, null, null, null], 
       [null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null, null, null, null, null, null, null, null, null], 
       [null, null, null, null, { id: 1, kind: 'view' }, { id: 1, kind: 'view' }], 
@@ -1600,6 +1635,15 @@ describe('the state-prose reader — ONE FACE PER POWER: the source filter and t
       [null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null, { id: 2, kind: 'reinforce' }, { id: 2, kind: 'reinforce' }, null, null, null, null], 
       [null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null, { id: 2, kind: 'view' }, { id: 2, kind: 'view' }, null, null, null, null], 
       [null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null, null, null, null, null, null, null], 
+      // ⭐⭐ NEW AT THE 8b DS-DEF-2 CURE GATE (v3) — `Disasters & Famine: granary AND parish
+      // care only`, the pool the DRAFT gate refused whole for one PROVENANCE citation. Its
+      // cure's own target v3/0 removes the citing clause (`from the road` → `from outside`),
+      // so the pool takes its seat here for the first time: three variants, 22 faces, two
+      // marked pairs. This is the WHOLE of the cure gate's grow; the other five packets
+      // re-cut wordings inside counts they already had.
+      [null, { id: 1, kind: 'reinforce' }, { id: 1, kind: 'reinforce' }, null, null, null, null, null, null], 
+      [null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null, null, null, null, null, null], 
+      undefined, 
       [null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null, null, null], 
       [null, { id: 2, kind: 'disagree' }, { id: 2, kind: 'disagree' }, null, null, null], 
       undefined, 
@@ -1638,7 +1682,7 @@ describe('the state-prose reader — ONE FACE PER POWER: the source filter and t
         expect(eligibleFaces(v, new Set(FACE_SOURCES))).toEqual([0]);
       }
     }
-    expect(sourcedChecked, 'the forty-two sourced variants were reached').toBe(42);
+    expect(sourcedChecked, 'the forty-five sourced variants were reached').toBe(45);
     expect(checked).toBeGreaterThanOrEqual(2266);
   });
 });

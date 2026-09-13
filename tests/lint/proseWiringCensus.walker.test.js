@@ -710,8 +710,17 @@ describe('THE MAP READ THE OTHER WAY — fact → text, and the three tiers', ()
     // perimeter`, `Invasion & War: walls with citizen militia`, `Internal Security: court without
     // detention`) all keep `{settlement}` in spine 1, so they stay THIN on the SLOT clause however
     // many grammars their faces give them. MISSING does not move (34).
-    expect(counts.get(TIERS.THIN), 'pools with one variant, one grammar, or {settlement} alone').toBe(478);
-    expect(counts.get(TIERS.COVERED), 'and the rest').toBe(230);
+    // ⭐⭐⭐⭐⭐ THIN 478 → 477 AND COVERED 230 → 231 AT THE 8b DS-DEF-2 CURE GATE, BY ONE POOL AND
+    // FOR THE SAME REASON THE LAST TWO SITTINGS CROSSED ONE EACH. Six cure packets landed; five
+    // were already seated and re-cut wordings inside their counts, so they cross nothing. The
+    // sixth is `Disasters & Famine: granary AND parish care only`, the pool the DRAFT gate refused
+    // whole for one PROVENANCE citation and whose cure removes the citing clause. Its rows carry
+    // NO slot at all, so its census count moves `slots {settlement}` → `slots {none}` and its
+    // grammars 1 → 3, and it lands COVERED. MEASURED by the census's own writer
+    // (`node scripts/wiring-census.mjs`, rebuilt in this commit), not asserted. MISSING does not
+    // move (34), and no held fact gained or lost a pool.
+    expect(counts.get(TIERS.THIN), 'pools with one variant, one grammar, or {settlement} alone').toBe(477);
+    expect(counts.get(TIERS.COVERED), 'and the rest').toBe(231);
     expect(counts.get(TIERS.THIN) + counts.get(TIERS.COVERED), 'every pool lands in one of the two pool tiers')
       .toBe(spines.length);
     for (const row of tiers) {

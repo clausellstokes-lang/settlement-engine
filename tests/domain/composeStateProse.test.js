@@ -190,6 +190,16 @@ const FACED_POOLS = Object.freeze([
   'Invasion & War: walls with citizen militia',
   'Internal Security: court without detention',
   'Economic Survival: WEAK',
+  // ⭐⭐⭐⭐⭐ RE-PINNED AT THE 8b DS-DEF-2 CURE GATE (v3), BY ONE POOL — THE ONE THE DRAFT GATE
+  // REFUSED. `Disasters & Famine: granary AND parish care only` kept its shipped spine rows at
+  // that gate because its spine 3 carried a PROVENANCE citation (`from the road`) that would
+  // have taken a shrink-only ratchet from 7 to 8. Its CURE packet's own target v3/0 removes the
+  // citing clause, so the pool lands whole here and joins this list: 3 spines, 22 faces. The
+  // list is fifteen. The other five packets this gate applied were ALREADY on this list and
+  // re-cut wordings inside the counts they had, so they move nothing here. Every entry is still
+  // inside DS-DEF-2, and the arms below still assert the equality over the other 693 pools BY
+  // MEASUREMENT.
+  'Disasters & Famine: granary AND parish care only',
 ]);
 const FACED_ATS = Object.freeze(FACED_POOLS.map((pool) => `${FACED_BLOCK} :: ${pool}`));
 /** @param {string} row a drift line @param {boolean} [prefix] match at the head only */
@@ -409,8 +419,13 @@ describe('⭐ THE BASE-SIDE SYNTHESIS — every recorded cell, against the compo
     // faces and stay readable, so they are NOT here — the arm doing its work rather than being
     // widened to fit. The list is still NAMED pool by pool, so any pool that goes blind without
     // being landed still reds.
+    // ⛔⛔⛔⛔ RE-PINNED AT THE 8b DS-DEF-2 CURE GATE (v3) BY ONE POOL, AND BY THE SAME MECHANISM:
+    // `Disasters & Famine: granary AND parish care only` names no attribution slot either, so the
+    // recorder cannot name the variant behind a rendered FACE and its cells are blind. It is here
+    // because this gate LANDED it, which is the only reason a pool may join this list.
       .toEqual(['Beasts & Monsters: plagued, perimeter but NO force to hold it',
         'Disasters & Famine: granary AND hospital',
+        'Disasters & Famine: granary AND parish care only',
         'Economic Survival: STRONG',
         'Economic Survival: WEAK',
         'Internal Security: court without detention',
@@ -462,7 +477,26 @@ describe('⭐ THE BASE-SIDE SYNTHESIS — every recorded cell, against the compo
     // REASONED; the figures above are EXECUTED. ⛔ IT IS A NARROWING IN BOTH DIRECTIONS THAT
     // MATTER: `real.length` is still 0, so no cell anywhere is a coordinate DISAGREEMENT, and no
     // pool went blind that this commit did not land.
-    expect(blind.length, 'and the blind spot is the size the gate measured').toBe(2028);
+    // ⛔⛔⛔ RE-PINNED AT THE 8b DS-DEF-2 CURE GATE (v3) — 2028 -> 2174 — AND THE WHOLE OF THE MOVE
+    // IS THE ONE POOL THIS GATE LANDED. MEASURED per pool at this head, by the same probe as the
+    // rows above, against the figures the draft gate's third sitting recorded:
+    //   Disasters & Famine: granary AND parish care only      0 ->  146  (NEW — the landed pool)
+    //   Internal Security: no legal infrastructure          504 ->  504  unchanged
+    //   Internal Security: full legal chain                 486 ->  486  unchanged
+    //   Invasion & War: walls AND professional garrison      396 ->  396  unchanged
+    //   Economic Survival: STRONG                           402 ->  402  unchanged
+    //   Economic Survival: WEAK                             168 ->  168  unchanged
+    //   Internal Security: court without detention           52 ->   52  unchanged
+    //   Disasters & Famine: granary AND hospital             18 ->   18  unchanged
+    //   Beasts & Monsters: plagued, perimeter but NO force    2 ->    2  unchanged
+    // 146 is exactly 2174 - 2028, so NOTHING ELSE MOVED. ⭐ THAT IS WORTH SAYING PLAINLY BECAUSE
+    // THE LAST TWO GATES BOTH CARRIED A CROSS-POOL SHIFT and this one does not: the page-level
+    // no-repeat register (car 8b-W-18o-r) re-rolls neighbouring units when a block's pools start
+    // offering faces, and five of DS-DEF-2's six pools here were ALREADY offering them — only the
+    // sixth is new, and its neighbours had already absorbed that shift at the draft gate. ⛔ THE
+    // ARM THAT GUARDS CORRECTNESS IS UNTOUCHED AND STILL GREEN: `real.length` is 0, so no cell
+    // anywhere is a coordinate DISAGREEMENT, and no pool went blind that this commit did not land.
+    expect(blind.length, 'and the blind spot is the size the gate measured').toBe(2174);
     expect(checked, 'the whole recorded table').toBe(run.cells.length);
     expect(run.rows.size, 'and the table is the full DRIFT corpus').toBe(1050);
     // NON-VACUITY OF THE RE-PIN: the DRIFT run really does reach the one faced pool, and

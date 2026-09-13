@@ -37,8 +37,8 @@
     "syntheticTableFields": 122,
     "tiers": {
       "MISSING": 34,
-      "THIN": 478,
-      "COVERED": 230,
+      "THIN": 477,
+      "COVERED": 231,
       "MISSING-AT-TIER": 45
     },
     "tierSilences": 352,
@@ -1982,13 +1982,11 @@
         "defmaterial",
         "settlement"
       ],
-      "slotsNamed": [
-        "settlement"
-      ],
+      "slotsNamed": [],
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 1,
+      "grammars": 3,
       "predicate": [
         {
           "field": "disasterRowSituation(granary, hospital, church) (via DISASTER_ROW_POOL in defenseStateProse.js)",
@@ -39276,7 +39274,7 @@
         "DS-DEF-2 :: Disasters & Famine: NO reserves, NO medical provision"
       ],
       "variants": 15,
-      "grammars": 10,
+      "grammars": 12,
       "blocks": [
         "DS-DEF-2"
       ]
@@ -48416,14 +48414,14 @@
       "count": "3 variant(s) · 3 grammar(s) · slots {settlement}"
     },
     {
-      "tier": "THIN",
+      "tier": "COVERED",
       "block": "DS-DEF-2",
       "subject": "Disasters & Famine: granary AND parish care only",
       "fields": [
         "disasterRowSituation(granary, hospital, church) (via DISASTER_ROW_POOL in defenseStateProse.js)"
       ],
       "readingFunction": "DISASTER_ROW_POOL",
-      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 3 grammar(s) · slots {none}"
     },
     {
       "tier": "THIN",

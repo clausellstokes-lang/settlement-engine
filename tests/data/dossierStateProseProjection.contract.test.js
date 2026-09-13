@@ -2005,6 +2005,24 @@ describe('SEAM car 4 — §2.5\'s grammar, and every refusal it declares', () =>
       sources: [null, 'stranger', 'tavern', 'elders', 'register', 'gate', 'muster', 'market'],
       pairs: undefined,
     },
+    // ⭐⭐ NEW AT THE 8b DS-DEF-2 CURE GATE (v3) — THE POOL THE DRAFT GATE REFUSED. `Disasters &
+    // Famine: granary AND parish care only` carried NO faces at the dock's head (d794c3a78),
+    // because the draft gate refused its packet whole for one PROVENANCE citation (`from the
+    // road`, moveGrammar.js:225) that would have taken the shrink-only ratchet from 7 to 8. The
+    // CURE packet's own target v3/0 removes that clause (`from outside`), so the pool lands here
+    // for the first time: 3 spines and 22 faces, a GROW of three sourced variants.
+    'DS-DEF-2 :: Disasters & Famine: granary AND parish care only #0': {
+      sources: [null, 'hall', 'market', 'watch', 'register', 'guild', 'tavern', 'gate', 'garrison'],
+      pairs: [null, { id: 1, kind: 'reinforce' }, { id: 1, kind: 'reinforce' }, null, null, null, null, null, null],
+    },
+    'DS-DEF-2 :: Disasters & Famine: granary AND parish care only #1': {
+      sources: [null, 'register', 'hall', 'tavern', 'market', 'guild', 'watch', 'stranger', 'court'],
+      pairs: [null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null, null, null, null, null, null],
+    },
+    'DS-DEF-2 :: Disasters & Famine: granary AND parish care only #2': {
+      sources: [null, 'register', 'market', 'tavern', 'watch', 'guild', 'court'],
+      pairs: undefined,
+    },
     'DS-DEF-2 :: Disasters & Famine: NO reserves, NO medical provision #0': {
       sources: [null, 'elders', 'stranger', 'market', 'register', 'tavern'],
       pairs: [null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null, null, null],
@@ -2111,9 +2129,15 @@ describe('SEAM car 4 — §2.5\'s grammar, and every refusal it declares', () =>
       sources: [null, 'stranger', 'gate', 'watch', 'hall', 'tavern', 'court', 'guild', 'register', 'elders'],
       pairs: [null, null, null, { id: 5, kind: 'disagree' }, { id: 5, kind: 'disagree' }, { id: 6, kind: 'view' }, { id: 6, kind: 'view' }, null, null, null],
     },
+    // ⭐ RE-FROZEN AT THE 8b DS-DEF-2 CURE GATE (v3). The DULL re-cut of this pool gave variant
+    // #0 a `reinforce` pair on its two UNIVERSAL sources (stranger + muster), which renders on
+    // every town, and renumbered the variant's pairs accordingly: pair 1 is the new reinforce,
+    // pair 2 is the hall and the guilds, unchanged in claim. A MOUTH ORDER and a PAIR KIND
+    // moved; the face COUNT did not (12 before, 12 after), so the `face-count-per-variant`
+    // register is untouched by this row.
     'DS-DEF-2 :: Beasts & Monsters: frontier, force without a perimeter #0': {
-      sources: [null, 'elders', 'stranger', 'tavern', 'muster', 'register', 'hall', 'guild', 'market', 'watch', 'garrison', 'court'],
-      pairs: [null, null, null, null, null, null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null, null, null, null],
+      sources: [null, 'elders', 'stranger', 'muster', 'tavern', 'register', 'hall', 'guild', 'market', 'watch', 'garrison', 'court'],
+      pairs: [null, null, { id: 1, kind: 'reinforce' }, { id: 1, kind: 'reinforce' }, null, null, { id: 2, kind: 'disagree' }, { id: 2, kind: 'disagree' }, null, null, null, null],
     },
     'DS-DEF-2 :: Beasts & Monsters: frontier, force without a perimeter #1': {
       sources: [null, 'stranger', 'elders', 'guild', 'muster', 'watch', 'tavern', 'hall', 'market', 'register', 'garrison', 'court'],
@@ -2178,15 +2202,25 @@ describe('SEAM car 4 — §2.5\'s grammar, and every refusal it declares', () =>
       .filter(({ v }) => v.sources !== undefined || v.pairs !== undefined)
       .map(({ id, pool, at }) => `${id} :: ${pool} #${at}`);
     expect(elsewhere).toEqual([]);
-    // And the counts the shift register's `face-count-per-variant` row now pins: 329 sourced
-    // faces over 42 variants of FOURTEEN pools, and 40 pair marks' worth of halves and weighings
-    // (80 rows carrying a pair id: 38 pairs of halves plus two archiver `weigh` rows). Re-pinned
-    // at the 8b DS-DEF-2 draft gate's THIRD sitting from [27, 196, 50], itself from [12, 65, 14]
-    // and from [3, 11, 2]. The move is +15 variants, +133 faces and +30 pair rows (15 pairs), and
-    // it is a GROW ONLY: no pool of the twenty-seven already pinned lost a face or a pair.
+    // And the counts the shift register's `face-count-per-variant` row now pins: 351 sourced
+    // faces over 45 variants of FIFTEEN pools, and 43 pair marks' worth of halves and weighings
+    // (86 rows carrying a pair id: 41 pairs of halves plus two archiver `weigh` rows). Re-pinned
+    // at the 8b DS-DEF-2 CURE gate from [42, 329, 80], itself from [27, 196, 50], [12, 65, 14]
+    // and [3, 11, 2].
+    //
+    // ⭐ THE MOVE, AND WHY IT IS SMALLER THAN THE POOLS THE CURE GATE TOUCHED. Six cure packets
+    // landed; FIVE of them were already seated at the draft gate and re-cut wordings inside the
+    // counts they already had, so they move nothing here. The whole of this move is the SIXTH:
+    // `Disasters & Famine: granary AND parish care only`, the pool the draft gate refused whole
+    // for one PROVENANCE citation, whose cure removes the citing clause and which therefore
+    // takes its seat here for the first time — +3 variants, +22 faces, +4 pair rows (2 pairs).
+    // It is a GROW ONLY: no pool of the forty-two already pinned lost a face or a pair. The one
+    // row that changed WITHOUT changing a count is `Beasts & Monsters: frontier, force without
+    // a perimeter #0`, whose DULL re-cut added a `reinforce` pair on two standing faces and
+    // renumbered the variant's pairs: +2 pair rows against a face count that did not move.
     const sourced = rows.reduce((n, r) => n + (r.v.sources || []).filter((x) => x !== null).length, 0);
     const paired = rows.reduce((n, r) => n + (r.v.pairs || []).filter((x) => x !== null).length, 0);
-    expect([rows.length, sourced, paired]).toEqual([42, 329, 80]);
+    expect([rows.length, sourced, paired]).toEqual([45, 351, 86]);
     // ⭐ AND THE OBSERVED LIST IS EMITTED ON EXACTLY ONE VARIANT, which is the mark's own
     // zero-shift ground: a variant with no observed face carries no `observed` key at all.
     const observed = allStateBlocks.flatMap(([id, b]) => Object.entries(b.pools)
