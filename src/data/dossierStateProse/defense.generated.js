@@ -2022,7 +2022,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "slots": [],
           "vid": 1,
           "wordings": [
-            "The bar at the way through is kept by the doors nearest it, those who hold the way say. The question was never put to those doors.",
+            "The bar at the way through is kept by the doors nearest it, those who hold the way say. Whoever lifts it leaves it to the next of those doors.",
             "Those who keep the ground say nobody is turned away from the digging, and whoever owns the spade brings the spade.",
             "The pails at the water each carry a household's own mark, a stranger says, and a visitor is handed the unmarked pail.",
             "The muster says the bows and the spears it would carry are the ones it hunts with. Nobody ever promised it a better spear.",
@@ -2030,7 +2030,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "At the tavern they say the turn comes round to the same backs and never as far as the next roof.",
             "The store the soldiers eat out of is the store the place eats out of, by their own account, and no one has walked them past its shelves.",
             "One of the watch says the round is walked before anything is settled, and the purse comes after the roof, the water and the grain.",
-            "The ask falls on whoever sets out a stall, the stallholders say, and never on the one who comes only with a basket.",
+            "The ask falls on whoever sets out a stall, the stallholders say, and everybody else comes in with a basket.",
             "Those who hear disputes say the quarrel that reaches them is over who owed a turn, and the turn itself was taken by a neighbour."
           ],
           "sources": [
@@ -2075,7 +2075,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "What is put into a hand here is goods and not coin, a stranger says, and no apology comes with the sack.",
             "The elders hold that an ask is made out loud here and in front of the neighbours. A refusal is heard by the same ears.",
             "The loudest at the table is the household that would be asked last, they say at the tavern, and the ones asked first sit quiet over their cups.",
-            "Those who keep the ground say a household gives toward a burying whatever it has, and no one has ever stood at the ground keeping a count.",
+            "Those who keep the ground say a household gives toward a burying whatever it has. What is put in is remembered by the neighbours better than any count.",
             "The bar coming down is heard at the far doors, by the account of those who hold the way through, and not one of the doors opens.",
             "The muster says what comes up from a door is a body or a tool, and the tool is remembered as well as the body.",
             "At the market they say the place takes from whoever can be found, and there is nothing easier to find than a stall.",
@@ -2101,14 +2101,14 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "slots": [],
           "vid": 3,
           "wordings": [
-            "A household's store is in its own cellar and under its own floor, a stranger says. No floor is lifted for a visitor.",
+            "A household's store is in its own cellar and under its own floor, a stranger says. The neighbours know which floor covers what and say as much to a visitor.",
             "Those who keep the ground say a burying is the one thing here that waits for no purse.",
-            "The elders hold that a household with nothing else to spare still finds the cost of putting its own in the ground.",
-            "It is the same backs that come out, they say at the tavern. Nobody has ever put the question to the ones who stay behind their own door.",
-            "The muster says the ground it would gather on is somebody's own field, and nothing has ever been offered that somebody for the crop.",
+            "The elders hold that a household with nothing else to spare still finds what it takes to put its own in the ground.",
+            "It is the same backs that come out, they say at the tavern. Everyone at the table can name the ones who stay behind their own door.",
+            "The muster says the ground it would gather on is somebody's own field, and that somebody would bear the trampling of the crop.",
             "Those who hold the way through say nobody set the hour the bar comes down, and the hour follows the light.",
-            "The shortfall comes off the stalls, they say at the market, and the argument comes from the people with no stall.",
-            "The soldiers say the place says plainly what it wants of them, and the people here say nothing at all about the purse."
+            "The shortfall comes off the stalls, they say at the market, and the argument comes from behind every stall.",
+            "The soldiers say the place says plainly what it wants of them, and the people here ask them straight out to put a shoulder to a load."
           ],
           "sources": [
             null,
