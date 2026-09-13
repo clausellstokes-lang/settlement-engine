@@ -88,7 +88,7 @@ Two riders, and ruling 25 split the second one in half.
 
 **And the singular office the tier already names is barred as a face's SUBJECT, not as its attribution.** There is exactly one Guard Captain per village-plus, with a generated personality and a secret of their own on the NPC tab, and the engine owns that person's name and fate. So do not make them ACT in a pooled face: use a plural, a trade, a bystander, or an office the roster does not seat. *Whoever keeps the gate-house key decides what gets looked at* — not the captain, by name or by office. But ruling 25a puts the office TITLE on the attribution roll wherever the town's roster prints it, so the same office may SPEAK:
 
-> Licensed as attribution: *The guard captain says the gate is kept as it has always been kept.*
+> Licensed as attribution: *The guard captain says the gate is kept as it has always been kept.* *(the durative runs over a frozen read, ruling 11)*
 > Refused as subject: *The guard captain keeps the gate-house key and decides what gets looked at.*
 
 The title speaks; the office-holder never acts; the holder's own name is never printed. The old circumlocution — *whoever keeps the toll book*, never *the toll-keeper* — stays one more option on the roll and is no longer the only one.
@@ -211,7 +211,7 @@ The concealment takes more than one shape, on purpose, because a role that alway
 
 > Dismiss: *A clerk in the hall says there is nothing in the accounts worth a stranger's time.*
 > Reassure: *The parish priest holds that the parish is at peace and asks that it be left so.*
-> Minimise: *The guard captain says the gate is kept as it has always been kept, and that talk at the tavern is talk.*
+> Minimise: *The guard captain says the gate is kept as it has always been kept, and that talk at the tavern is talk.* *(the durative runs over a frozen read, ruling 11)*
 > Change the subject: *One of the aldermen says the accounts can wait and the roof over them cannot.*
 > Blame the talk: *A guild factor says the count is the count, and whoever says otherwise has a reason of their own.*
 > Say nothing beyond the form: *A clerk in the hall says what a clerk is required to say, that the accounts are open to anyone who asks.*
@@ -465,9 +465,88 @@ The product is **setting-agnostic** and carries twelve culture profiles — germ
 
 One unit, three sentences at most: either a bare fact, or one account, or a pair, or a pair and a weighing. Everything above is the pool the draw reaches into, not the page.
 
-**The scan on these lines.** No invented number, date, rate or magnitude. No named character, and the one named OFFICE speaks and never acts. No `{settlement}` in any face. No semicolon, no em dash, no exclamation mark, no digit, no contraction. No which-clause closer, no summarising close, no antithesis pair, no clever last beat, and the two reassurances are on faces tagged `compromised`, where the reassurance is the move. Every line stops on its noun.
+**The scan on these lines.** No invented number, date, rate or magnitude. No named character, and the one named OFFICE speaks and never acts. No `{settlement}` in any face. No semicolon, no em dash, no exclamation mark, no digit, no contraction. No self-citation: nothing says *the survey*, *the record* or *this office*. No which-clause closer, no summarising close, no antithesis pair, no clever last beat, and the two reassurances are on faces tagged `compromised`, where the reassurance is the move. Every line stops on its noun.
+
+**Three lines carry something the floor-2 grammar test flags, and all three are licensed.** Line 8 has *would stand*, a CONDITIONAL, which ruling 33 keeps while barring the future indicative. Lines 14, 15 and 16 carry an ELAPSED COURSE — *has been seen*, *has seen* — over frozen reads, licensed by ruling 11 and, for the bare observation, by ruling 40's re-cut of the witness frame. Line 18 has *as it has always been kept*, a durative in a `compromised` source's mouth, over the same frozen read. A durative is not a fault to be cut on sight; it is a claim to be checked against the field underneath it.
 
 *(The line this section replaced carried a self-check that read: "has been owed a while" is an elapsed claim and would be cut. **That self-check is withdrawn.** Under ruling 11 elapsed-course language is licensed over the pool key's own reads and over frozen fields, so a durative like "has been owed" is lawful where the field it runs over is frozen and unlawful only over history the pulse writes. The honest draft does not cut the durative; it checks which field is underneath it. Lines 14, 15 and 16 above all carry one, over frozen reads.)*
+
+---
+
+# PART V — THE NOTEBOOK
+
+*New, 2026-09-13. Ruling 17 built a whole second register and no line of this pack covered it, so writers aimed at the fair copy and improvised the game master's face. This part is the aim for the other page.*
+
+### 28. What the notebook is
+
+The player reads the **fair copy**: the fact stated, the account attributed, the stop. The game master reads the same page **plus the archiver's notebook** — short working notes in which the archiver thinks on the page about what does not add up.
+
+It is **a professional's working notes kept for a successor**, never a diary. Somebody else will hold this office and will pick the thread up cold, so the note names what it circles and why. That is the whole of its manner, and everything below follows from it.
+
+**And it is the one place exempt from ruling 40.** The fair copy does not refer to itself; a working note is allowed to know which desk it is on — *this office*, *whoever reads this next* are its nature. But a note's ENGINE FACTS are still bare: *the store is low*, never *by the survey's account the store is low*.
+
+### 29. The register, in six bars
+
+1. **Third person. No "I".** The archiver thinks on the page without appearing on it.
+2. **Two sentences at most.** The rhythm loosens; the length does not.
+3. **Nothing assumed of the reader's memory.** The note names the thing it circles, so a successor reading cold knows what is being talked about.
+4. **The devices, which the fair copy does not have.** The ellipsis. The colon. The aside set off in commas. The clause left unfinished. A question left hanging without its mark. A word picked up again.
+5. **Never the em dash, never the exclamation mark, never a digit.** The ratchet bars all three in every face, and the em dash was the machine tell the programme fought hardest.
+6. **Floor 2 does not bend.** *The figures do not close*, never a sum. Restraint bends in the notebook on purpose; the floors do not.
+
+> *The toll figures do not close… the bar takes what it takes, the hall's return is short of it, and nobody at the hall has asked why.*
+
+### 30. The four shades, one example each
+
+The notes vary in **shade**, and the selector spreads them across a block so they never read as one suspicion in five coats.
+
+> **Accusatory** — *Whoever keeps the toll book keeps a second one, and the hall knows which of them it is shown.*
+> **Conjecture** — *It may be that the second purse is the bar's own: nothing in the accounts says otherwise.*
+> **Unsure** — *The figures do not close, or do not close yet… it is possible the arithmetic is only late.*
+> **Hearsay** — *It is said at the tavern that the watch draws on a second purse, and the tavern would say that.*
+
+An accusation is still a NOTE and not a verdict. It never names the tier's singular office as a person, and it never points away from the recorded fact.
+
+*(Note the hearsay line: ruling 39 licenses "it is said" only where the unit names WHERE. The bare form is refused on both pages.)*
+
+### 31. The seven feelings, one example each
+
+Ruling 17 as widened gives the archiver a range, in the third person, as the plainest way of telling a game master what is at stake. Greed, pride, fear, grievance and zeal are the SOURCES' and never the archiver's; these seven are what an unbiased professional may feel about a town.
+
+> **Worry** — *It is to be hoped that the watch is not tempted to open the way at night, or to mutiny over it.*
+> **Hope** — *If the purse is only late, the keeping holds and the town keeps its temper: that is the better reading, and worth holding to.*
+> **Eagerness** — *If the second purse is the bar's, then the bar can be asked, and it would be worth the asking.*
+> **Clarity** — *The figures do not close, and there is only one hand they pass through: whoever keeps the toll book.*
+> **Surprise** — *The register is full for a place this size… fuller than the tavern's account of who turns out. One of the two is counting wrong.*
+> **Curiosity** — *Where the second purse comes from is in no account at all. It would be worth knowing who fills it.*
+> **Unease** — *Nothing in the hall's answer was wrong. That is the part of it that sits badly.*
+
+**Temperament sets the mix, not the set** (reconciliation 3). An anxious archiver worries more often, an exact one settles more often, a fond one hopes. Every temperament may use every feeling; the default is exact, so nothing changes until it is chosen.
+
+### 32. The clarity test
+
+**A game master should be able to say in one breath what the note suspects and what could come of it.** A note that needs three steps of inference fails, however well it is written.
+
+> Fails: *Whoever is paid last is the one who opens the way at first light.*
+> Passes: *The watch is paid after everyone else, and the gate is theirs at night.*
+
+That is the test on every shade and every feeling. Wolfe is the model for the note that circles: his records leave the objective trace before the reader needs it and never label it as evidence — but Wolfe's reader has four hundred pages and a game master has a glance, so the note names its object where Wolfe would let it sit. **Circle the thing, then name what you circled.**
+
+### 33. The one place the dossier settles a question
+
+Everywhere else, the dossier opens and never closes: the game master decides what actually happens, and a weighing or a note that closes a question is refused for that reason alone.
+
+**The exception is a fact the ENGINE holds** — a hidden capture, a covert bloc, an officer not yet exposed. There the matter IS settled, because the engine settled it, and the notebook is where it is settled. Three riders on that:
+
+- **The note points TOWARD the recorded fact and never away from it.** On a captured hall, *it may be that the hall is clean* is a field's opposite in a softer coat, and it is refused.
+- **The panel beside the note states the fact plainly** for the game master who wants it plain. The note is the texture; the panel is the answer.
+- **Weight follows the kind of fact** (ruling 17b). A hard covert state gets a note that carries it (*the books do not close*). A genuinely fleeting fact gets the lightest touch. The card marks which kind each covert field is.
+
+**And where the dossier holds no such fact, nothing on either page decides the question.** The player page leaves the dispute standing and the notebook suspects without concluding. At most one verdict-shaped note per page (ruling 38).
+
+### 34. What the notebook is NOT
+
+It is not the fair copy in a dressing gown. It is not a first-person voice, not a confession, not a joke, not a place to spend a clever beat the player page would not take. And it is not a second chance at a fact: an engine fact is bare on both pages, and what the notebook adds is doubt, not information.
 
 ---
 
@@ -486,8 +565,20 @@ Not a gate. The questions a good writer asks themselves.
 9. **Is the furniture this town's own culture's?**
 10. **Is there anything here a game master could start a session with tonight?**
 
+And nine more, added 2026-09-13 with the rulings they come from.
+
+11. **Does every ACCOUNT name its source, and does every engine FACT stand bare?** No *the survey finds*, no *this office*, no *entered as*, anywhere on a player face (ruling 40).
+12. **Is the source printed as a ROLE the town's own rows resolve, and not as a class word?** A clerk in the hall, not the hall (25). Does the verb follow the role's number? Does any role speak twice on this page?
+13. **Is there one face per seated source and no padding?** A thin roster is a thin pool (15, reconciliation 2).
+14. **Is the drawn unit three sentences at most, with a pair's halves one sentence each?** (30, 37.)
+15. **Is there ONE physical particular on the page, and only one?** A thing seen, heard or smelled (31).
+16. **Where a cost is landed, is the bearer a row this town actually holds?** (32.)
+17. **Did a weighing close anything?** A conjecture is a guess, a dispute stays a dispute, and the game master decides what happened (22).
+18. **Did I write *will* or *shall* before a verb?** No forecast, on either page (33).
+19. **For the notebook: what shade and what feeling is this note, and is the block spreading them?** Can a game master say in one breath what it suspects and what could come of it (17, the clarity test)?
+
 ---
 
 **The aim, in one line: write the sentence a game master would read aloud to the table without changing it.**
 
-*Ends. Nothing above is a bar. Nothing above is citable as a finding.*
+*Ends. Nothing above is a refuter's finding. All of it is the selector's ground.*

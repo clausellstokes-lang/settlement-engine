@@ -1,7 +1,7 @@
 {
  "arm": "cure",
  "round": 1,
- "at": "2026-09-13T09:00:06",
+ "at": "2026-09-13T09:27:38",
  "roster": {
   "pools": 126,
   "why": "--section defense over 11 block(s) of its own leaf"
@@ -45773,8 +45773,8 @@
   "totalUnits": 392,
   "n": 392,
   "exhaustive": true,
-  "msPerUnit": 0.175,
-  "exhaustiveMs": 69,
+  "msPerUnit": 0.185,
+  "exhaustiveMs": 73,
   "confidence": "the whole population is walked, so every arm rate is exact and no interval applies",
   "sampleSha": "36ec79104a5658a32526211b2d58860ce4016f8640b13706080f16267c34c25b",
   "verdicts": {
