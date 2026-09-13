@@ -2709,13 +2709,13 @@ supplies the ancestry.
 
 **`Beasts & Monsters`: `frontier`, force without a perimeter**
 1. `[ledger]` {settlement} keeps people under arms and nothing for them to stand behind. What comes chooses the ground, and the muster goes out to it.
-   - `[face]` `[elders]` What calls the households out is a shout carried house to house, the elders say, and the houses furthest out hear it last.
+   - `[face]` `[elders]` One of the elders has it that what calls the households out is a shout carried house to house, and that the houses furthest out hear it last.
    - `[face]` `[stranger · pair 1 · reinforce]` A traveller reports that he was put up in one of the last houses on the edge, and that nobody in it thought the edge worth remarking on.
    - `[face]` `[muster · pair 1 · reinforce]` The muster has it that the households that turn out are the households with the least between them and the country.
    - `[face]` `[tavern]` At the tavern the account is that the ones who turn out and the ones who talk about turning out are not the same people.
    - `[face]` `[register]` The register says those who went out and those who stayed in come to it on the same terms.
    - `[face]` `[hall · pair 2 · disagree]` The hall calls the arrangement the one the town settled on.
-   - `[face]` `[guild · pair 2 · disagree]` The guilds put it that the trades were not in the room when it was settled.
+   - `[face]` `[guild · pair 2 · disagree]` The guilds put it that nobody asks the trades what the arrangement costs them.
    - `[face]` `[market]` At the market the talk is that who walks out with whom is arranged between the carters and by nobody here.
    - `[face]` `[watch]` The watch says the round it walks ends where the houses end, and that what lies past the last house is nobody's round.
    - `[face]` `[garrison]` The garrison says the town found it a roof and never found it anywhere to stand.
@@ -2734,7 +2734,7 @@ supplies the ancestry.
    - `[face]` `[court]` The court holds that a stranger may bring a complaint and be heard, and that hearing it out means staying in a place where nothing stopped him coming in and nothing would keep him.
 3. `[street]` Everyone here has seen the muster go out to meet what comes, and takes the going out for the line the place does not have.
    - `[face]` `[muster · pair 1 · disagree]` The muster holds that the obligation runs to whoever turns out and not to any ground.
-   - `[face]` `[elders · pair 1 · disagree]` The elders say the obligation runs with the ground a household holds.
+   - `[face]` `[elders · pair 1 · disagree]` One of the elders puts the obligation on the ground a household holds.
    - `[face]` `[register]` The going out is a duty the households owe each other, the register says, and not one it can excuse them from.
    - `[face]` `[stranger]` A stranger's report is that when the talk here turns to trouble, what gets named is fields and tracks and never anything built.
    - `[face]` `[tavern]` At the tavern an account is kept of who goes out and who is seen turning back, and nobody writes it down.
