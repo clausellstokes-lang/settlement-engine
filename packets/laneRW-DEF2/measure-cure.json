@@ -1,7 +1,7 @@
 {
  "arm": "cure",
  "round": 1,
- "at": "2026-09-13T09:37:45",
+ "at": "2026-09-13T10:02:11",
  "roster": {
   "pools": 126,
   "why": "--section defense over 11 block(s) of its own leaf"
@@ -19995,8 +19995,8 @@
    "variants": 3,
    "faces": [
     4,
-    4,
-    4
+    5,
+    5
    ],
    "attach": [],
    "rateBp": 1628,
@@ -20007,12 +20007,12 @@
     "refineB": false,
     "files": []
    },
-   "units": 12,
+   "units": 14,
    "walk": {
     "verdicts": {
      "FAIL": 0,
-     "WITHHELD": 8,
-     "PASS": 4
+     "WITHHELD": 3,
+     "PASS": 11
     },
     "findings": [
      {
@@ -20020,47 +20020,7 @@
       "id": "DS-DEF-2 :: Invasion & War: walls with NO force",
       "klass": "Q",
       "arm": "a second sentence naming no second field",
-      "clause": "Entered here as kept.",
-      "column": "(second typed field)",
-      "value": "reads [invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)]; none claimed",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-2 :: Invasion & War: walls with NO force",
-      "klass": "Q",
-      "arm": "a second sentence naming no second field",
       "clause": "It says nothing about who is owed for it.",
-      "column": "(second typed field)",
-      "value": "reads [invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)]; none claimed",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-2 :: Invasion & War: walls with NO force",
-      "klass": "Q",
-      "arm": "a second sentence naming no second field",
-      "clause": "At the hall it is not a thing in dispute.",
-      "column": "(second typed field)",
-      "value": "reads [invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)]; none claimed",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-2 :: Invasion & War: walls with NO force",
-      "klass": "C3",
-      "arm": "is this clause historical?",
-      "clause": "A stranger reports the walls up and kept, and no soldiers of the town's own behind them. The people he saw at work on them were the town's own households.",
-      "column": "provenance",
-      "value": "semantic",
-      "description": "a past-tense or formerly-construction: whether it asserts history is A6, the refuter's"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-2 :: Invasion & War: walls with NO force",
-      "klass": "Q",
-      "arm": "a second sentence naming no second field",
-      "clause": "The people he saw at work on them were the town's own households.",
       "column": "(second typed field)",
       "value": "reads [invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)]; none claimed",
       "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
@@ -20080,33 +20040,13 @@
       "id": "DS-DEF-2 :: Invasion & War: walls with NO force",
       "klass": "Q",
       "arm": "a second sentence naming no second field",
-      "clause": "By their own account there is no wage in the work, and the town keeps no soldiers to stand behind the walls.",
-      "column": "(second typed field)",
-      "value": "reads [invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)]; none claimed",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-2 :: Invasion & War: walls with NO force",
-      "klass": "Q",
-      "arm": "a second sentence naming no second field",
-      "clause": "The survey finds the watch on the walls after dark all the same.",
-      "column": "(second typed field)",
-      "value": "reads [invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)]; none claimed",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-2 :: Invasion & War: walls with NO force",
-      "klass": "Q",
-      "arm": "a second sentence naming no second field",
       "clause": "Nothing that comes there is about who would hold them.",
       "column": "(second typed field)",
       "value": "reads [invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)]; none claimed",
       "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
      }
     ],
-    "findingCount": 9
+    "findingCount": 3
    },
    "lengths": {
     "form": "sentence",
@@ -20115,28 +20055,30 @@
      {
       "vid": 1,
       "faces": [
-       19,
+       14,
        22,
-       19,
-       33
+       17,
+       18
       ]
      },
      {
       "vid": 2,
       "faces": [
-       30,
+       18,
        14,
        22,
-       12
+       12,
+       10
       ]
      },
      {
       "vid": 3,
       "faces": [
-       32,
+       18,
        19,
-       29,
-       28
+       22,
+       28,
+       18
       ]
      }
     ]
@@ -20150,60 +20092,60 @@
      "spread": {
       "pairs": 6,
       "minOverlapBp": 0,
-      "maxOverlapBp": 2857,
-      "medianOverlapBp": 718,
-      "sameOpenerPairs": 0,
-      "sameSegmentPairs": 3,
-      "nearest": {
-       "a": 2,
-       "b": 3,
-       "sameOpener": false,
-       "sameSegments": false,
-       "overlapBp": 2857
-      },
-      "why": ""
-     }
-    },
-    {
-     "vid": 2,
-     "faces": 4,
-     "synonymSwaps": 0,
-     "notExecutable": 0,
-     "spread": {
-      "pairs": 6,
-      "minOverlapBp": 0,
-      "maxOverlapBp": 1111,
-      "medianOverlapBp": 0,
+      "maxOverlapBp": 1667,
+      "medianOverlapBp": 769,
       "sameOpenerPairs": 0,
       "sameSegmentPairs": 3,
       "nearest": {
        "a": 0,
        "b": 2,
        "sameOpener": false,
-       "sameSegments": false,
-       "overlapBp": 1111
+       "sameSegments": true,
+       "overlapBp": 1667
+      },
+      "why": ""
+     }
+    },
+    {
+     "vid": 2,
+     "faces": 5,
+     "synonymSwaps": 0,
+     "notExecutable": 0,
+     "spread": {
+      "pairs": 10,
+      "minOverlapBp": 0,
+      "maxOverlapBp": 833,
+      "medianOverlapBp": 0,
+      "sameOpenerPairs": 0,
+      "sameSegmentPairs": 10,
+      "nearest": {
+       "a": 0,
+       "b": 1,
+       "sameOpener": false,
+       "sameSegments": true,
+       "overlapBp": 833
       },
       "why": ""
      }
     },
     {
      "vid": 3,
-     "faces": 4,
+     "faces": 5,
      "synonymSwaps": 0,
      "notExecutable": 0,
      "spread": {
-      "pairs": 6,
-      "minOverlapBp": 500,
-      "maxOverlapBp": 1176,
-      "medianOverlapBp": 557,
+      "pairs": 10,
+      "minOverlapBp": 0,
+      "maxOverlapBp": 2500,
+      "medianOverlapBp": 646,
       "sameOpenerPairs": 0,
-      "sameSegmentPairs": 3,
+      "sameSegmentPairs": 6,
       "nearest": {
        "a": 0,
-       "b": 3,
+       "b": 4,
        "sameOpener": false,
        "sameSegments": true,
-       "overlapBp": 1176
+       "overlapBp": 2500
       },
       "why": ""
      }
@@ -20214,7 +20156,7 @@
      "vid": 1,
      "face": 0,
      "executable": true,
-     "sentences": 2,
+     "sentences": 1,
      "scored": 8,
      "exceeded": 0,
      "exceededShare": 0,
@@ -20227,7 +20169,7 @@
      "grains": {
       "face": {
        "executable": true,
-       "sentences": 2,
+       "sentences": 1,
        "scored": 8,
        "exceeded": 0,
        "exceededShare": 0,
@@ -20240,16 +20182,16 @@
       },
       "corpus": {
        "executable": true,
-       "sentences": 10,
+       "sentences": 6,
        "scored": 13,
        "exceeded": 12,
        "exceededShare": 0.923,
        "deepest": {
-        "metric": "closers.pronounRate",
-        "depth": 5.652,
+        "metric": "shapes.thereIsOpenerRate",
+        "depth": 2.057,
         "side": "over"
        },
-       "meanDistanceFromMedian": 0.98,
+       "meanDistanceFromMedian": 0.814,
        "budgetOk": false,
        "depthOk": false,
        "perfectionSuspect": false,
@@ -20287,16 +20229,16 @@
       },
       "corpus": {
        "executable": true,
-       "sentences": 10,
+       "sentences": 6,
        "scored": 13,
        "exceeded": 12,
        "exceededShare": 0.923,
        "deepest": {
-        "metric": "closers.pronounRate",
-        "depth": 5.652,
+        "metric": "shapes.thereIsOpenerRate",
+        "depth": 2.057,
         "side": "over"
        },
-       "meanDistanceFromMedian": 0.98,
+       "meanDistanceFromMedian": 0.814,
        "budgetOk": false,
        "depthOk": false,
        "perfectionSuspect": false,
@@ -20308,7 +20250,7 @@
      "vid": 1,
      "face": 2,
      "executable": true,
-     "sentences": 2,
+     "sentences": 1,
      "scored": 8,
      "exceeded": 0,
      "exceededShare": 0,
@@ -20321,7 +20263,7 @@
      "grains": {
       "face": {
        "executable": true,
-       "sentences": 2,
+       "sentences": 1,
        "scored": 8,
        "exceeded": 0,
        "exceededShare": 0,
@@ -20334,16 +20276,16 @@
       },
       "corpus": {
        "executable": true,
-       "sentences": 10,
+       "sentences": 6,
        "scored": 13,
        "exceeded": 12,
        "exceededShare": 0.923,
        "deepest": {
-        "metric": "closers.pronounRate",
-        "depth": 5.652,
+        "metric": "shapes.thereIsOpenerRate",
+        "depth": 2.057,
         "side": "over"
        },
-       "meanDistanceFromMedian": 0.98,
+       "meanDistanceFromMedian": 0.814,
        "budgetOk": false,
        "depthOk": false,
        "perfectionSuspect": false,
@@ -20381,16 +20323,16 @@
       },
       "corpus": {
        "executable": true,
-       "sentences": 10,
+       "sentences": 6,
        "scored": 13,
        "exceeded": 12,
        "exceededShare": 0.923,
        "deepest": {
-        "metric": "closers.pronounRate",
-        "depth": 5.652,
+        "metric": "shapes.thereIsOpenerRate",
+        "depth": 2.057,
         "side": "over"
        },
-       "meanDistanceFromMedian": 0.98,
+       "meanDistanceFromMedian": 0.814,
        "budgetOk": false,
        "depthOk": false,
        "perfectionSuspect": false,
@@ -20402,7 +20344,7 @@
      "vid": 2,
      "face": 0,
      "executable": true,
-     "sentences": 2,
+     "sentences": 1,
      "scored": 8,
      "exceeded": 0,
      "exceededShare": 0,
@@ -20415,7 +20357,7 @@
      "grains": {
       "face": {
        "executable": true,
-       "sentences": 2,
+       "sentences": 1,
        "scored": 8,
        "exceeded": 0,
        "exceededShare": 0,
@@ -20428,16 +20370,16 @@
       },
       "corpus": {
        "executable": true,
-       "sentences": 10,
+       "sentences": 6,
        "scored": 13,
        "exceeded": 12,
        "exceededShare": 0.923,
        "deepest": {
-        "metric": "closers.pronounRate",
-        "depth": 5.652,
+        "metric": "shapes.thereIsOpenerRate",
+        "depth": 2.057,
         "side": "over"
        },
-       "meanDistanceFromMedian": 0.98,
+       "meanDistanceFromMedian": 0.814,
        "budgetOk": false,
        "depthOk": false,
        "perfectionSuspect": false,
@@ -20475,16 +20417,16 @@
       },
       "corpus": {
        "executable": true,
-       "sentences": 10,
+       "sentences": 6,
        "scored": 13,
        "exceeded": 12,
        "exceededShare": 0.923,
        "deepest": {
-        "metric": "closers.pronounRate",
-        "depth": 5.652,
+        "metric": "shapes.thereIsOpenerRate",
+        "depth": 2.057,
         "side": "over"
        },
-       "meanDistanceFromMedian": 0.98,
+       "meanDistanceFromMedian": 0.814,
        "budgetOk": false,
        "depthOk": false,
        "perfectionSuspect": false,
@@ -20522,16 +20464,16 @@
       },
       "corpus": {
        "executable": true,
-       "sentences": 10,
+       "sentences": 6,
        "scored": 13,
        "exceeded": 12,
        "exceededShare": 0.923,
        "deepest": {
-        "metric": "closers.pronounRate",
-        "depth": 5.652,
+        "metric": "shapes.thereIsOpenerRate",
+        "depth": 2.057,
         "side": "over"
        },
-       "meanDistanceFromMedian": 0.98,
+       "meanDistanceFromMedian": 0.814,
        "budgetOk": false,
        "depthOk": false,
        "perfectionSuspect": false,
@@ -20569,16 +20511,63 @@
       },
       "corpus": {
        "executable": true,
-       "sentences": 10,
+       "sentences": 6,
        "scored": 13,
        "exceeded": 12,
        "exceededShare": 0.923,
        "deepest": {
-        "metric": "closers.pronounRate",
-        "depth": 5.652,
+        "metric": "shapes.thereIsOpenerRate",
+        "depth": 2.057,
         "side": "over"
        },
-       "meanDistanceFromMedian": 0.98,
+       "meanDistanceFromMedian": 0.814,
+       "budgetOk": false,
+       "depthOk": false,
+       "perfectionSuspect": false,
+       "grain": "corpus"
+      }
+     }
+    },
+    {
+     "vid": 2,
+     "face": 4,
+     "executable": true,
+     "sentences": 1,
+     "scored": 8,
+     "exceeded": 0,
+     "exceededShare": 0,
+     "deepest": null,
+     "meanDistanceFromMedian": 0.259,
+     "budgetOk": true,
+     "depthOk": true,
+     "perfectionSuspect": true,
+     "grain": "face",
+     "grains": {
+      "face": {
+       "executable": true,
+       "sentences": 1,
+       "scored": 8,
+       "exceeded": 0,
+       "exceededShare": 0,
+       "deepest": null,
+       "meanDistanceFromMedian": 0.259,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": true,
+       "grain": "face"
+      },
+      "corpus": {
+       "executable": true,
+       "sentences": 6,
+       "scored": 13,
+       "exceeded": 12,
+       "exceededShare": 0.923,
+       "deepest": {
+        "metric": "shapes.thereIsOpenerRate",
+        "depth": 2.057,
+        "side": "over"
+       },
+       "meanDistanceFromMedian": 0.814,
        "budgetOk": false,
        "depthOk": false,
        "perfectionSuspect": false,
@@ -20590,7 +20579,7 @@
      "vid": 3,
      "face": 0,
      "executable": true,
-     "sentences": 2,
+     "sentences": 1,
      "scored": 8,
      "exceeded": 0,
      "exceededShare": 0,
@@ -20603,7 +20592,7 @@
      "grains": {
       "face": {
        "executable": true,
-       "sentences": 2,
+       "sentences": 1,
        "scored": 8,
        "exceeded": 0,
        "exceededShare": 0,
@@ -20616,16 +20605,16 @@
       },
       "corpus": {
        "executable": true,
-       "sentences": 10,
+       "sentences": 6,
        "scored": 13,
        "exceeded": 12,
        "exceededShare": 0.923,
        "deepest": {
-        "metric": "closers.pronounRate",
-        "depth": 5.652,
+        "metric": "shapes.thereIsOpenerRate",
+        "depth": 2.057,
         "side": "over"
        },
-       "meanDistanceFromMedian": 0.98,
+       "meanDistanceFromMedian": 0.814,
        "budgetOk": false,
        "depthOk": false,
        "perfectionSuspect": false,
@@ -20663,16 +20652,16 @@
       },
       "corpus": {
        "executable": true,
-       "sentences": 10,
+       "sentences": 6,
        "scored": 13,
        "exceeded": 12,
        "exceededShare": 0.923,
        "deepest": {
-        "metric": "closers.pronounRate",
-        "depth": 5.652,
+        "metric": "shapes.thereIsOpenerRate",
+        "depth": 2.057,
         "side": "over"
        },
-       "meanDistanceFromMedian": 0.98,
+       "meanDistanceFromMedian": 0.814,
        "budgetOk": false,
        "depthOk": false,
        "perfectionSuspect": false,
@@ -20684,7 +20673,7 @@
      "vid": 3,
      "face": 2,
      "executable": true,
-     "sentences": 2,
+     "sentences": 1,
      "scored": 8,
      "exceeded": 0,
      "exceededShare": 0,
@@ -20697,7 +20686,7 @@
      "grains": {
       "face": {
        "executable": true,
-       "sentences": 2,
+       "sentences": 1,
        "scored": 8,
        "exceeded": 0,
        "exceededShare": 0,
@@ -20710,16 +20699,16 @@
       },
       "corpus": {
        "executable": true,
-       "sentences": 10,
+       "sentences": 6,
        "scored": 13,
        "exceeded": 12,
        "exceededShare": 0.923,
        "deepest": {
-        "metric": "closers.pronounRate",
-        "depth": 5.652,
+        "metric": "shapes.thereIsOpenerRate",
+        "depth": 2.057,
         "side": "over"
        },
-       "meanDistanceFromMedian": 0.98,
+       "meanDistanceFromMedian": 0.814,
        "budgetOk": false,
        "depthOk": false,
        "perfectionSuspect": false,
@@ -20757,16 +20746,63 @@
       },
       "corpus": {
        "executable": true,
-       "sentences": 10,
+       "sentences": 6,
        "scored": 13,
        "exceeded": 12,
        "exceededShare": 0.923,
        "deepest": {
-        "metric": "closers.pronounRate",
-        "depth": 5.652,
+        "metric": "shapes.thereIsOpenerRate",
+        "depth": 2.057,
         "side": "over"
        },
-       "meanDistanceFromMedian": 0.98,
+       "meanDistanceFromMedian": 0.814,
+       "budgetOk": false,
+       "depthOk": false,
+       "perfectionSuspect": false,
+       "grain": "corpus"
+      }
+     }
+    },
+    {
+     "vid": 3,
+     "face": 4,
+     "executable": true,
+     "sentences": 1,
+     "scored": 8,
+     "exceeded": 0,
+     "exceededShare": 0,
+     "deepest": null,
+     "meanDistanceFromMedian": 0.259,
+     "budgetOk": true,
+     "depthOk": true,
+     "perfectionSuspect": true,
+     "grain": "face",
+     "grains": {
+      "face": {
+       "executable": true,
+       "sentences": 1,
+       "scored": 8,
+       "exceeded": 0,
+       "exceededShare": 0,
+       "deepest": null,
+       "meanDistanceFromMedian": 0.259,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": true,
+       "grain": "face"
+      },
+      "corpus": {
+       "executable": true,
+       "sentences": 6,
+       "scored": 13,
+       "exceeded": 12,
+       "exceededShare": 0.923,
+       "deepest": {
+        "metric": "shapes.thereIsOpenerRate",
+        "depth": 2.057,
+        "side": "over"
+       },
+       "meanDistanceFromMedian": 0.814,
        "budgetOk": false,
        "depthOk": false,
        "perfectionSuspect": false,
@@ -20781,27 +20817,27 @@
    },
    "corpusBand": {
     "executable": true,
-    "sentences": 10,
+    "sentences": 6,
     "scored": 13,
     "exceeded": 12,
     "exceededShare": 0.923,
     "deepest": {
-     "metric": "closers.pronounRate",
-     "depth": 5.652,
+     "metric": "shapes.thereIsOpenerRate",
+     "depth": 2.057,
      "side": "over"
     },
-    "meanDistanceFromMedian": 0.98,
+    "meanDistanceFromMedian": 0.814,
     "budgetOk": false,
     "depthOk": false,
     "perfectionSuspect": false,
     "grain": "corpus"
    },
-   "corpusWords": 279,
+   "corpusWords": 252,
    "owned": {
     "verdicts": {
      "FAIL": 0,
      "WITHHELD": 0,
-     "PASS": 12
+     "PASS": 14
     },
     "findings": [],
     "findingCount": 0,
@@ -20814,47 +20850,7 @@
      "klass": "Q",
      "channel": "WITHHELD",
      "spineKey": "Invasion & War: walls with NO force",
-     "clause": "Entered here as kept.",
-     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call",
-     "count": 1
-    },
-    {
-     "label": "Q · a second sentence naming no second field",
-     "arm": "a second sentence naming no second field",
-     "klass": "Q",
-     "channel": "WITHHELD",
-     "spineKey": "Invasion & War: walls with NO force",
      "clause": "It says nothing about who is owed for it.",
-     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call",
-     "count": 1
-    },
-    {
-     "label": "Q · a second sentence naming no second field",
-     "arm": "a second sentence naming no second field",
-     "klass": "Q",
-     "channel": "WITHHELD",
-     "spineKey": "Invasion & War: walls with NO force",
-     "clause": "At the hall it is not a thing in dispute.",
-     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call",
-     "count": 1
-    },
-    {
-     "label": "C3 · is this clause historical?",
-     "arm": "is this clause historical?",
-     "klass": "C3",
-     "channel": "WITHHELD",
-     "spineKey": "Invasion & War: walls with NO force",
-     "clause": "A stranger reports the walls up and kept, and no soldiers of the town's own behind them. The people he saw at work on them were the town's own households.",
-     "description": "a past-tense or formerly-construction: whether it asserts history is A6, the refuter's",
-     "count": 1
-    },
-    {
-     "label": "Q · a second sentence naming no second field",
-     "arm": "a second sentence naming no second field",
-     "klass": "Q",
-     "channel": "WITHHELD",
-     "spineKey": "Invasion & War: walls with NO force",
-     "clause": "The people he saw at work on them were the town's own households.",
      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call",
      "count": 1
     },
@@ -20874,96 +20870,16 @@
      "klass": "Q",
      "channel": "WITHHELD",
      "spineKey": "Invasion & War: walls with NO force",
-     "clause": "By their own account there is no wage in the work, and the town keeps no soldiers to stand behind the walls.",
-     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call",
-     "count": 1
-    },
-    {
-     "label": "Q · a second sentence naming no second field",
-     "arm": "a second sentence naming no second field",
-     "klass": "Q",
-     "channel": "WITHHELD",
-     "spineKey": "Invasion & War: walls with NO force",
-     "clause": "The survey finds the watch on the walls after dark all the same.",
-     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call",
-     "count": 1
-    },
-    {
-     "label": "Q · a second sentence naming no second field",
-     "arm": "a second sentence naming no second field",
-     "klass": "Q",
-     "channel": "WITHHELD",
-     "spineKey": "Invasion & War: walls with NO force",
      "clause": "Nothing that comes there is about who would hold them.",
      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call",
      "count": 1
     }
    ],
-   "inheritedCount": 9,
+   "inheritedCount": 3,
    "spineWithheld": true,
    "qVocabulary": [
     {
-     "clause": "Entered here as kept.",
-     "spineKey": "Invasion & War: walls with NO force",
-     "count": 1,
-     "reads": [
-      "invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)"
-     ],
-     "mapped": [],
-     "executable": false,
-     "verdict": "NOT-EXECUTABLE: the recovered reading is the census's own synthetic table label and not a field path, so no text can claim it",
-     "synonymTable": "a word-level synonym table ships and was applied"
-    },
-    {
      "clause": "It says nothing about who is owed for it.",
-     "spineKey": "Invasion & War: walls with NO force",
-     "count": 1,
-     "reads": [
-      "invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)"
-     ],
-     "mapped": [],
-     "executable": false,
-     "verdict": "NOT-EXECUTABLE: the recovered reading is the census's own synthetic table label and not a field path, so no text can claim it",
-     "synonymTable": "a word-level synonym table ships and was applied"
-    },
-    {
-     "clause": "At the hall it is not a thing in dispute.",
-     "spineKey": "Invasion & War: walls with NO force",
-     "count": 1,
-     "reads": [
-      "invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)"
-     ],
-     "mapped": [],
-     "executable": false,
-     "verdict": "NOT-EXECUTABLE: the recovered reading is the census's own synthetic table label and not a field path, so no text can claim it",
-     "synonymTable": "a word-level synonym table ships and was applied"
-    },
-    {
-     "clause": "The people he saw at work on them were the town's own households.",
-     "spineKey": "Invasion & War: walls with NO force",
-     "count": 1,
-     "reads": [
-      "invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)"
-     ],
-     "mapped": [],
-     "executable": false,
-     "verdict": "NOT-EXECUTABLE: the recovered reading is the census's own synthetic table label and not a field path, so no text can claim it",
-     "synonymTable": "a word-level synonym table ships and was applied"
-    },
-    {
-     "clause": "By their own account there is no wage in the work, and the town keeps no soldiers to stand behind the walls.",
-     "spineKey": "Invasion & War: walls with NO force",
-     "count": 1,
-     "reads": [
-      "invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)"
-     ],
-     "mapped": [],
-     "executable": false,
-     "verdict": "NOT-EXECUTABLE: the recovered reading is the census's own synthetic table label and not a field path, so no text can claim it",
-     "synonymTable": "a word-level synonym table ships and was applied"
-    },
-    {
-     "clause": "The survey finds the watch on the walls after dark all the same.",
      "spineKey": "Invasion & War: walls with NO force",
      "count": 1,
      "reads": [
@@ -45770,17 +45686,17 @@
   }
  ],
  "walk": {
-  "totalUnits": 392,
-  "n": 392,
+  "totalUnits": 394,
+  "n": 394,
   "exhaustive": true,
   "msPerUnit": 0.17,
   "exhaustiveMs": 67,
   "confidence": "the whole population is walked, so every arm rate is exact and no interval applies",
-  "sampleSha": "36ec79104a5658a32526211b2d58860ce4016f8640b13706080f16267c34c25b",
+  "sampleSha": "3c70e932d4f910740072e331a4e227feb4df200e29f14b96616d3822cbb5ffbe",
   "verdicts": {
    "FAIL": 11,
-   "WITHHELD": 168,
-   "PASS": 213
+   "WITHHELD": 163,
+   "PASS": 220
   }
  },
  "manifest": {
