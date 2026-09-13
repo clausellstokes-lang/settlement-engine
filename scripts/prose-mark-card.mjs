@@ -47,6 +47,7 @@ import { parse } from 'espree';
 import {
   ROOT, parseFile, normaliseRead, producerReads, clockOf, parsePulseTree, frozenFieldCensus,
   preimageOfPoolKey, requiredRowsByTier, bucketsSeatedByRequired, ROSTER_BUCKETS, BUCKET_OF_PARAM,
+  domainFor, paramNamesOf,
   TIERS, SERVICE_P_BAR, armedForcesFiling, placementClaimsIn, servicesAtOrAboveBar,
 } from './lib/prose-mark-fields.mjs';
 import { buildSiblingPack } from './sibling-string-pack.mjs';
@@ -237,6 +238,39 @@ export async function buildCard(block, pool) {
     }
   }
   const preimage = preimageOfPoolKey(deskModule, pool);
+  // ⭐⭐ (2d) THE KEY'S SIBLING RUNGS (ADDENDUM 18 ruling 35, the chair's, at the research
+  // reconciliation: *"the card prints the key's SIBLING RUNGS so a face that reads as the
+  // neighbouring rung is a floor-1 finding"*).
+  //
+  // ⛔ THE DEFECT THIS ADDRESSES IS THE HARDEST ONE TO SEE. Section (1) says what the key FIXES
+  // — walls true, garrison false, militia false. It does NOT say what the key would have been
+  // had one of those been otherwise, and that is precisely the sentence a writer reaches for by
+  // accident: a face about a town with walls and no force that reads as though it were about a
+  // town with a militia is not unlicensed, it is CONTRADICTORY, and under the re-cut that is
+  // the only kind of finding there is. The refuter cannot make it without the neighbours in
+  // hand, so the card puts them there.
+  //
+  // MECHANICAL: each FIXED parameter is varied over its own declared domain, the others held,
+  // and the key function is asked what it answers. Nothing is judged.
+  const siblingRungs = [];
+  if (preimage) {
+    const base = preimage.combos[0] || {};
+    const fn = deskModule[preimage.fn];
+    for (const param of paramNamesOf(fn)) {
+      const domain = domainFor(param);
+      if (!domain || domain.length > 12) continue;
+      const here = base[param];
+      const neighbours = [];
+      for (const value of domain) {
+        if (JSON.stringify(value) === JSON.stringify(here)) continue;
+        let key;
+        try { key = fn(...paramNamesOf(fn).map((q) => (q === param ? value : base[q]))); } catch { continue; }
+        if (typeof key !== 'string' || key === pool) continue;
+        if (!neighbours.some((n) => n.key === key)) neighbours.push({ value, key });
+      }
+      if (neighbours.length) siblingRungs.push({ param, here, neighbours });
+    }
+  }
   const byTier = rateRow?.byTier || {};
   const preimageTiers = TIERS.filter((t) => (byTier[t]?.towns || 0) > 0);
 
@@ -403,6 +437,7 @@ export async function buildCard(block, pool) {
   return {
     covert,
     block, pool, dir: slug(`${block}-${pool}`), censusRow: { keyFunction: row.keyFunction, rung: row.rung, predicate: row.predicate, sites: row.sites, source: row.source },
+    siblingRungs,
     key: { fields: keyFields, preimage: preimage ? { fn: preimage.fn, params: preimage.params, fixed: preimage.fixed, open: preimage.open, combos: preimage.combos.length } : null, byTier, preimageTiers, rateBp: rateRow?.rateBp ?? null, towns: rateRow?.towns ?? null },
     required: Object.fromEntries(preimageTiers.map((t) => [t, required[t]])),
     mayNotDeny, placementBars, serviceBar: SERVICE_P_BAR, armedForcesFiling: filing,
@@ -483,6 +518,16 @@ export function cardLines(c) {
     L.push(`        the data says: "${p.sentence}"`);
   }
   L.push('  ⛔ A FACE DRAWS ON EVERY TOWN OF THE PREIMAGE, so a placement the data states only at the city is an INVENTION on the thorp (floor 2), and a hedged one is a tendency rather than this town\'s fact.');
+  L.push('');
+  L.push('(2d) THE KEY\'S SIBLING RUNGS — what this pool\'s key would have been had ONE of the fields it fixes been otherwise');
+  if (!c.siblingRungs || c.siblingRungs.length === 0) {
+    L.push('    (none: no field this key fixes has a small declared domain, so no neighbour can be enumerated)');
+  }
+  for (const row of (c.siblingRungs || [])) {
+    L.push(`    ${row.param} = ${JSON.stringify(row.here)} HERE`);
+    for (const n of row.neighbours) L.push(`        ${row.param} = ${JSON.stringify(n.value)} -> \`${n.key}\``);
+  }
+  L.push('  \u26d4 A FACE THAT READS AS A NEIGHBOURING RUNG IS A FLOOR-1 FINDING (ADDENDUM 18 ruling 35). These pools have their OWN faces and their own towns: a sentence here that would sit as comfortably on one of them is either saying nothing this key fixes, or is saying something this key fixes is FALSE. The refuter names the rung.');
   L.push('');
   L.push(`(3) THE SAME-PAGE READ SET — tab \`${c.samePage.tab}\`: corpus blocks ${c.samePage.blocks.join(', ')} + machine producers`);
   for (const f of c.samePage.fields) L.push(`  ${f.field.padEnd(52)} [${f.clock}] writers ${String(f.writers).padStart(2)}   <- ${f.from.join(', ')}`);

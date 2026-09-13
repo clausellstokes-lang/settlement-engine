@@ -637,12 +637,29 @@ function compromisedFace(variant, blockId, poolKey, read) {
  *   `fillSlots` then turns into the same silence an unfilled slot gives
  */
 function faceRoleRaw(variant, at, read, blockId, poolKey) {
+  /** @type {string[]} */
+  const claimed = [];
   const filled = fillRoleSlots(faceRawOf(variant, at), {
     roles: read.roles instanceof Map ? read.roles : null,
     printed: read.printedRoles instanceof Set ? read.printedRoles : null,
+    claimed,
     key: `${read.seed}::${blockId}::${poolKey}::r${at}`,
   });
-  return filled === null ? '' : filled;
+  return { text: filled === null ? '' : filled, claimed };
+}
+
+/**
+ * ⭐⭐ COMMIT A PIECE'S ROLES TO THE PAGE (the research reconciliation's slice E; car
+ * 8b-W-18o-r). Called ONLY where the piece has landed — its text filled, its slots resolved,
+ * its piece pushed. A piece that is dropped consumes NOTHING, which is the defect this pair of
+ * functions exists to end: the reader must never get a different person because of a sentence
+ * they did not see.
+ * @param {{printedRoles?: unknown}} read
+ * @param {ReadonlyArray<string>} claimed
+ */
+function commitRoles(read, claimed) {
+  if (!(read.printedRoles instanceof Set)) return;
+  for (const role of claimed) read.printedRoles.add(role);
 }
 
 /**
@@ -704,8 +721,15 @@ function drawPiece(block, blockId, poolKey, role, read, typing = {}) {
    * @param {number} at
    * @returns {string}
    */
+  // ⭐⭐ A ROLE IS CLAIMED HERE AND COMMITTED WHERE THE PIECE LANDS (the research
+  // reconciliation's slice E; car 8b-W-18o-r). `roleRawOf` no longer touches the page's set: it
+  // reports what it drew, and every `return` below commits exactly the claims of the pieces it
+  // is actually returning. A dropped partner, a dropped weighing and a dropped spine all
+  // consume NOTHING, so the reader never gets a different person because of a sentence that was
+  // never printed.
   const roleRawOf = (at) => faceRoleRaw(variant, at, read, blockId, poolKey);
-  const raw = roleRawOf(face);
+  const own = roleRawOf(face);
+  const raw = own.text;
   const text = fillSlots(raw, read.slots);
   if (text === null) return null;
   const source = faceSourceOf(variant, face);
@@ -714,11 +738,14 @@ function drawPiece(block, blockId, poolKey, role, read, typing = {}) {
   });
   const partner = facePartner(variant, face, read.sources);
   if (partner === null) {
+    commitRoles(read, own.claimed);
     return { variant, raw, text, source, pieces: [drawn] };
   }
-  const partnerRaw = roleRawOf(partner);
+  const partnerOwn = roleRawOf(partner);
+  const partnerRaw = partnerOwn.text;
   const partnerText = fillSlots(partnerRaw, read.slots);
   if (partnerText === null) {
+    commitRoles(read, own.claimed);
     return { variant, raw, text, source, pieces: [drawn] };
   }
   const mark = facePairOf(variant, face);
@@ -748,13 +775,17 @@ function drawPiece(block, blockId, poolKey, role, read, typing = {}) {
   // unfilled weigh row silences ITSELF and leaves the pair standing — the same rule the
   // partner takes above, for the same reason: a rendered `{slot}` is worse than no sentence.
   const weigh = faceWeigh(variant, face);
-  const weighText = weigh === null ? null : fillSlots(roleRawOf(weigh), read.slots);
+  const weighOwn = weigh === null ? null : roleRawOf(weigh);
+  const weighText = weighOwn === null ? null : fillSlots(weighOwn.text, read.slots);
   if (weigh !== null && weighText !== null) {
     pieces.push(composedPieceOf(pool, variant, poolKey, {
       role, face: weigh, audience: read.audience, relation: typing.relation, seat: typing.seat,
       source: faceSourceOf(variant, weigh), pairOf: face, pairKind: WEIGH_KIND,
     }));
   }
+  commitRoles(read, own.claimed);
+  commitRoles(read, partnerOwn.claimed);
+  if (weighOwn !== null && weighText !== null) commitRoles(read, weighOwn.claimed);
   return {
     variant,
     raw: first ? partnerRaw : raw,

@@ -300,8 +300,14 @@ describe('the fill — number, capital, exclusion (ruling 25 edge (d) and (e))',
     const roles = new Map([['hall', roster]]);
     const printed = new Set();
     const seen = [];
+    // ⭐ RE-FROZEN AT CAR 8b-W-18o-r. `fillRoleSlots` no longer MUTATES the page's set — it
+    // REPORTS what it drew through `claimed` and the caller commits when its piece lands (the
+    // research reconciliation's slice E). The page behaviour this arm protects is unchanged;
+    // what moved is who commits, and the arm below is the reason it had to.
     for (let i = 0; i < 3; i += 1) {
-      seen.push(fillRoleSlots('{hall} {v:say} so.', { roles, printed, key: `k${i}` }));
+      const claimed = [];
+      seen.push(fillRoleSlots('{hall} {v:say} so.', { roles, printed, claimed, key: `k${i}` }));
+      for (const role of claimed) printed.add(role);
     }
     // Three draws, three DIFFERENT roles — the set emptied the roster exactly once.
     expect(new Set(seen).size, `three draws gave ${JSON.stringify(seen)}`).toBe(3);
@@ -310,6 +316,47 @@ describe('the fill — number, capital, exclusion (ruling 25 edge (d) and (e))',
     const fourth = fillRoleSlots('{hall} {v:say} so.', { roles, printed, key: 'k3' });
     expect(fourth).not.toBe(null);
     expect(seen).toContain(fourth);
+  });
+
+  it('⛔⛔ A DRAW THAT IS NOT COMMITTED CONSUMES NOTHING — the dropped piece defect, driven', () => {
+    // THE DEFECT THIS ENDS. `fillRoleSlots` used to add each role to `printed` as it drew, so a
+    // face whose piece was then DROPPED (an unfilled `{slot}` elsewhere makes `fillSlots` answer
+    // null) still consumed a person from the page's roster. The next face, on another desk of
+    // the same page, drew somebody else because of a sentence the reader never saw.
+    const roster = [
+      { role: 'a clerk in the hall', n: 'sg' },
+      { role: 'one of the aldermen', n: 'sg' },
+    ];
+    const roles = new Map([['hall', roster]]);
+    const printed = new Set();
+    const dropped = [];
+    const first = fillRoleSlots('{hall} {v:say} so.', { roles, printed, claimed: dropped, key: 'k0' });
+    expect(first).not.toBe(null);
+    expect(dropped.length, 'the call reports what it drew').toBe(1);
+    expect(printed.size, 'and commits NOTHING on its own').toBe(0);
+    // The caller drops this piece, so it commits nothing. The next face draws as if the first
+    // had never happened — same key, same role, every time.
+    const again = [];
+    expect(fillRoleSlots('{hall} {v:say} so.', { roles, printed, claimed: again, key: 'k0' }))
+      .toBe(first);
+    expect(again).toEqual(dropped);
+  });
+
+  it('⛔ but a FACE naming two sources still cannot draw one person twice', () => {
+    // The one thing the old mutation gave for free and that had to be kept: the candidate
+    // filter is `printed` UNION what THIS call has claimed so far.
+    const roster = [
+      { role: 'a clerk in the hall', n: 'sg' },
+      { role: 'one of the aldermen', n: 'sg' },
+    ];
+    const roles = new Map([['hall', roster]]);
+    const claimed = [];
+    const out = fillRoleSlots('{hall} {v:say} so, and {hall} {v:agree}.', {
+      roles, printed: new Set(), claimed, key: 'k',
+    });
+    expect(out).not.toBe(null);
+    expect(claimed.length).toBe(2);
+    expect(new Set(claimed).size, `two slots drew ${JSON.stringify(claimed)}`).toBe(2);
   });
 
   it('⭐ the draw is DETERMINISTIC: one key, one role, over ten thousand repeats', () => {

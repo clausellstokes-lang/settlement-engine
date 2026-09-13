@@ -379,6 +379,11 @@ export function withFaceSources(settlement, options) {
   const given = options && typeof options === 'object' ? options : {};
   const held = given.sources;
   if (held instanceof Set || Array.isArray(held)) {
+    // ⭐⭐ THIS IS THE SHARING PATH, AND IT IS THE WHOLE OF `pageProse` (car 8b-W-18o-r). A
+    // caller that already holds a roster is handed back the SAME OBJECT, identity and all — so
+    // the page-level Sets and Arrays on it are the same Sets and Arrays every desk of that page
+    // sees. Minting a new object here would silently give each desk its own no-repeat state,
+    // which is exactly the defect slice E named.
     return /** @type {T & {sources: ReadonlySet<string>|ReadonlyArray<string>}} */ (
       /** @type {unknown} */ (given)
     );
@@ -395,6 +400,11 @@ export function withFaceSources(settlement, options) {
       // ⭐ ONE EXCLUSION SET PER DESK ENTRY (ruling 25 edge (e)): the composer adds each role
       // it prints, and the draw skips what is already in it until the roster is exhausted.
       printedRoles: given.printedRoles instanceof Set ? given.printedRoles : new Set(),
+      // ⭐ THE PAGE'S OPENER TRAIL (ADDENDUM 18 rulings 29 and 36; car 8b-W-18o). An ARRAY the
+      // composer pushes each drawn unit's opener class onto; the draw prefers a face that does
+      // not open the way the last one did. It rides here for the same reason the exclusion set
+      // does — it is the PAGE's state and the composer may not read a settlement.
+      drawnOpeners: Array.isArray(given.drawnOpeners) ? given.drawnOpeners : [],
       // ⭐ THE COVERT HALF (ruling 26; car 8b-W-18m): which sources the engine holds a secret
       // about, the settlement's id and the year the roll turns on. All three ride here for the
       // same reason the roster does — the composer may not read a settlement.
@@ -404,4 +414,43 @@ export function withFaceSources(settlement, options) {
       year: renderYearOf(settlement),
     })
   );
+}
+
+/**
+ * ⭐⭐ THE PAGE'S OWN READ — ONE PER PAGE RENDER, NOT ONE PER DESK (ADDENDUM 18, the research
+ * reconciliation's slice E, "THE ARCHITECTURE'S RISK"; car 8b-W-18o-r).
+ *
+ * ⛔ THE DEFECT THIS ENDS, MEASURED RATHER THAN ASSERTED. Every desk entry point calls
+ * `withFaceSources`, and `withFaceSources` mints the no-repeat state when the caller hands none.
+ * The Defense tab calls SEVEN entry points to render ONE page. So the page carried seven
+ * independent `printedRoles` Sets, and "the same role never twice on one page" (ruling 25 edge
+ * (e)) was true of a DESK and false of the page: one clerk in the hall could be printed seven
+ * times on one screen, once per desk, and nothing could see it.
+ *
+ * ⛔ AND THE STATE MUST BE DETERMINISTIC, which is the other half of slice E. It is a function
+ * of exactly three things and nothing else:
+ *   (seed, year)              handed in, and the same on every re-read of the same year
+ *   the page's TRAVERSAL ORDER  fixed by the caller's source code, never by a clock or a map
+ *                             iteration whose order could differ between two devices
+ * There is no randomness here and no time: the same seed and the same year give the same page,
+ * which is THE PROMISE, and the suite drives it over two hundred seeds rather than reading it.
+ *
+ * ⛔ IT IS NOT A CACHE AND MUST NOT BE REUSED ACROSS PAGES. Two renders of one settlement are
+ * two pages and each gets its own state; a state carried between them would make the second
+ * page depend on whether the first was ever drawn. Callers mint it per render, which is what
+ * "one per page render" means.
+ *
+ * @template {object} T
+ * @param {{institutions?: unknown, [key: string]: unknown}|null|undefined} settlement
+ * @param {T} [options] the caller's own read — `seed`, `audience`, anything else
+ * @returns {T & {sources: ReadonlySet<string>|ReadonlyArray<string>}} the read to hand to
+ *   EVERY desk entry of this page, unchanged
+ */
+export function pageProse(settlement, options) {
+  const given = options && typeof options === 'object' ? options : /** @type {T} */ ({});
+  // ⛔ IT IS `withFaceSources` AND NOTHING ELSE, deliberately. A second builder here would be a
+  // second place the page's keys are listed, and a key added to one and not the other is
+  // exactly the trap the composer's read records at its own head. This function exists to give
+  // the PAGE a name to call, not to build anything the desks do not already build.
+  return withFaceSources(settlement, given);
 }

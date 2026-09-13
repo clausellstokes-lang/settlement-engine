@@ -1,12 +1,8 @@
 {
   "_doc": "THE SHIFT REGISTER (ARCH-COMPOSED-PROSE §8.6; lane SEAM car 4). EVERY MECHANISM WHOSE CHANGE RE-ROLLS A DRAWN INDEX, each with its PIN, its DOOR and its declared-row idiom. THE PROMISE (W3): a FACT shift is forbidden; a TEXT shift is declared and owner-signed. v1 of the architecture declared two shifts and carried at least three more undeclared, which is the failure this file exists to make impossible: a mechanism absent from this register is a same-seed text shift nobody signed. Consumed by tests/data/dossierStateProseProjection.contract.test.js, which PRINTS the register and RECOMPUTES every pin from the leaves themselves. Nothing reads this at runtime and nothing ships it.",
-
   "_pinIdiom": "A PIN IS A MEASUREMENT, NOT A PROMISE. Each row's `pin` is recomputed by the contract test from the committed leaves (`integer` and `map` compared directly, `digest` re-derived over the named material, `source` asserted as a substring of the named file), so a mechanism that moves without its row moving reds NAMING THE MECHANISM. A car that intends the move edits the row IN THE SAME COMMIT as the change and records the shift class; a car that did not intend it has just been told. This is the `.prose-byte-baseline.json` declared-row idiom applied to draw mechanisms instead of bytes.",
-
   "_digestMaterial": "Every `digest` pin is sha256 over one line per pool, the pools ordered by `${block} :: ${pool}` ascending, joined by a single newline with no trailing newline. The line is `${block} :: ${pool} :: ${value}` except for `pool-key-rename`, whose line is `${block} :: ${pool}` alone, and for `norm-bit`, whose line is `${blockId}::${poolKey} ${departure}` over the norm leaf's own rows in key order. A digest is used wherever the mechanism is per-pool: 708 integers cannot be read by a person, and a digest that moves names the mechanism while the diff names the pool.",
-
   "_shiftClasses": "ARCH §8.6 declares FOUR text-shift classes and nothing else re-rolls a drawn index: 1 the REWRITE + FACES freeze (car 8a-8n, one owner re-record); 2 the list-position keys (car 10); 3 THIN-pool growth (car 9b); 4 TURNS (car 11). Each row below names the class it would land under. A row whose `shift` is `none` names a mechanism that must NEVER move: a renumbering, and a pool-key rename.",
-
   "measuredAt": {
     "car": "SEAM car 4 (ARCH §12 row 4) — M2, the schema, added keys only",
     "tip": "the six state leaves at the car-4 projection; base c45a46a78",
@@ -14,7 +10,6 @@
     "pools": 708,
     "variants": 2266
   },
-
   "mechanisms": [
     {
       "id": "variant-count-per-pool",
@@ -23,8 +18,17 @@
       "door": "the projection contract's variant ratchet, and poolMeta.variantCount per pool",
       "idiom": "a declared car; the classifier prints RE-INDEXED per pool with its town count (about 75.71 per cent of that pool's reads move under `% length`)",
       "pin": [
-        { "kind": "integer", "over": "the sum of poolMeta.variantCount over all 708 pools", "value": 2266 },
-        { "kind": "digest", "algo": "sha256", "over": "poolMeta.variantCount per pool", "value": "b0dcbe38d43731d6d75692a1f91670bae05932def2bdd893b914bc2371b175f1" }
+        {
+          "kind": "integer",
+          "over": "the sum of poolMeta.variantCount over all 708 pools",
+          "value": 2266
+        },
+        {
+          "kind": "digest",
+          "algo": "sha256",
+          "over": "poolMeta.variantCount per pool",
+          "value": "b0dcbe38d43731d6d75692a1f91670bae05932def2bdd893b914bc2371b175f1"
+        }
       ]
     },
     {
@@ -35,9 +39,22 @@
       "idiom": "a declared sub-car; after the freeze a new wording goes in a NEW KEY and never in an existing set (read-specs S9). The seven `canonical` rows keep ONE face by refusal (P-F6) and are NAMED one by one in the contract test, derived as the pools whose vid list contains 0. A per-pool floor ABOVE a pool's own variant count is a DECLARED ROW in `floors` below, written in the same commit as the growth and SHRINK-ONLY: a floor may be added or raised and never lowered.",
       "floors": {},
       "pin": [
-        { "kind": "integer", "over": "the sum of every faceCounts entry over all 708 pools", "value": 2275 },
-        { "kind": "integer", "over": "the largest faceCounts entry anywhere in the corpus", "value": 4 },
-        { "kind": "digest", "algo": "sha256", "over": "poolMeta.faceCounts per pool, joined by commas", "value": "e7ed66962b713592aa012812b30d985d282707a68eef72f342934cfc9601ab4b" }
+        {
+          "kind": "integer",
+          "over": "the sum of every faceCounts entry over all 708 pools",
+          "value": 2275
+        },
+        {
+          "kind": "integer",
+          "over": "the largest faceCounts entry anywhere in the corpus",
+          "value": 4
+        },
+        {
+          "kind": "digest",
+          "algo": "sha256",
+          "over": "poolMeta.faceCounts per pool, joined by commas",
+          "value": "e7ed66962b713592aa012812b30d985d282707a68eef72f342934cfc9601ab4b"
+        }
       ]
     },
     {
@@ -47,7 +64,12 @@
       "door": "the projection contract, against poolMeta.vids; `vidsOf` in scripts/lib/dossier-annex-grammar.mjs throws",
       "idiom": "a new variant takes the NEXT number; nothing is ever deleted and nothing is renumbered (NEVER TRIM, §2.6)",
       "pin": [
-        { "kind": "digest", "algo": "sha256", "over": "poolMeta.vids per pool, joined by commas", "value": "42bb876078541a86a816db3d2fc95f2b468e81eb2d0b969aed9560f160e389b9" }
+        {
+          "kind": "digest",
+          "algo": "sha256",
+          "over": "poolMeta.vids per pool, joined by commas",
+          "value": "42bb876078541a86a816db3d2fc95f2b468e81eb2d0b969aed9560f160e389b9"
+        }
       ]
     },
     {
@@ -57,7 +79,12 @@
       "door": "the projection contract's key diff (0 ADDED / 0 REMOVED / 0 CHANGED)",
       "idiom": "renameable only while the corpus is dark; a live rename is the owner's row",
       "pin": [
-        { "kind": "digest", "algo": "sha256", "over": "`${block} :: ${pool}` for all 708 pools, in order", "value": "346451703b9b7934636988a77a9c13ce7377f58d5268342eaeb8131620887dbc" }
+        {
+          "kind": "digest",
+          "algo": "sha256",
+          "over": "`${block} :: ${pool}` for all 708 pools, in order",
+          "value": "346451703b9b7934636988a77a9c13ce7377f58d5268342eaeb8131620887dbc"
+        }
       ]
     },
     {
@@ -67,7 +94,16 @@
       "door": "the connectives leaf's pinned header and §7b's own pin column",
       "idiom": "the sitting authored all four to their floor of three at REWRITE car 8a-9 (S12; SITTING §T.2) as PUBLIC-COPY DRAFTS, SIGNED AT THE WALK (§13 row 27); growth after that is a declared row here",
       "pin": [
-        { "kind": "map", "over": "the length of each list in src/data/dossierConnectives.generated.js", "value": { "consequence.clause": 3, "tension.sentence": 3, "contrast.sentence": 3, "addition.sentence": 3 } }
+        {
+          "kind": "map",
+          "over": "the length of each list in src/data/dossierConnectives.generated.js",
+          "value": {
+            "consequence.clause": 3,
+            "tension.sentence": 3,
+            "contrast.sentence": 3,
+            "addition.sentence": 3
+          }
+        }
       ]
     },
     {
@@ -77,10 +113,27 @@
       "door": "src/data/proseNorms.generated.js, projected from the census's RATE corpus",
       "idiom": "the sitting authored all four to their floor of three at REWRITE car 8a-9 (S12; SITTING §T.2) as PUBLIC-COPY DRAFTS, SIGNED AT THE WALK (§13 row 27); growth after that is a declared row here",
       "pin": [
-        { "kind": "integer", "over": "the number of pools carrying a measured bit", "value": 271 },
-        { "kind": "integer", "over": "the number of those bits that read 1", "value": 72 },
-        { "kind": "integer", "over": "the departure line, in basis points, in the census's rate.departureReport", "value": 1000 },
-        { "kind": "digest", "algo": "sha256", "over": "the norm leaf's rows as `${key} ${departure}`", "value": "820cda139c5111e74e89440c7797eefa9fd5c972cb67704b68d0ba6c26e29a2d" }
+        {
+          "kind": "integer",
+          "over": "the number of pools carrying a measured bit",
+          "value": 271
+        },
+        {
+          "kind": "integer",
+          "over": "the number of those bits that read 1",
+          "value": 72
+        },
+        {
+          "kind": "integer",
+          "over": "the departure line, in basis points, in the census's rate.departureReport",
+          "value": 1000
+        },
+        {
+          "kind": "digest",
+          "algo": "sha256",
+          "over": "the norm leaf's rows as `${key} ${departure}`",
+          "value": "820cda139c5111e74e89440c7797eefa9fd5c972cb67704b68d0ba6c26e29a2d"
+        }
       ]
     },
     {
@@ -90,8 +143,17 @@
       "door": "the projection contract, against poolMeta.attach",
       "idiom": "the sitting authored all four to their floor of three at REWRITE car 8a-9 (S12; SITTING §T.2) as PUBLIC-COPY DRAFTS, SIGNED AT THE WALK (§13 row 27); growth after that is a declared row here",
       "pin": [
-        { "kind": "integer", "over": "the number of pools whose attach set is non-empty", "value": 0 },
-        { "kind": "digest", "algo": "sha256", "over": "poolMeta.attach per pool, joined by pipes", "value": "c24f2c9b7fb9bf8067097458264d0b160c994f6a7ffd337c8d380db39af00c59" }
+        {
+          "kind": "integer",
+          "over": "the number of pools whose attach set is non-empty",
+          "value": 0
+        },
+        {
+          "kind": "digest",
+          "algo": "sha256",
+          "over": "poolMeta.attach per pool, joined by pipes",
+          "value": "c24f2c9b7fb9bf8067097458264d0b160c994f6a7ffd337c8d380db39af00c59"
+        }
       ]
     },
     {
@@ -101,7 +163,15 @@
       "door": "src/domain/display/stateProse/stateProseKernel.js, and the classifier (scripts/prose-manifest-diff.mjs over two runs of scripts/prose-manifest-cells.mjs), whose RE-INDEXED count is the owner's veto surface and is declared in `reIndexed` below",
       "idiom": "the sitting authored all four to their floor of three at REWRITE car 8a-9 (S12; SITTING §T.2) as PUBLIC-COPY DRAFTS, SIGNED AT THE WALK (§13 row 27); growth after that is a declared row here",
       "pin": [
-        { "kind": "source", "file": "src/domain/display/stateProse/stateProseKernel.js", "contains": ["const digest = avalanche32(fnv1a32(`${parent}::v${vid}`));", "if (digest > bestHash || (digest === bestHash && vid < bestVid)) {", "if (vid === null) return eligible[avalanche32(fnv1a32(parent)) % eligible.length];"] }
+        {
+          "kind": "source",
+          "file": "src/domain/display/stateProse/stateProseKernel.js",
+          "contains": [
+            "const digest = avalanche32(fnv1a32(`${parent}::v${vid}`));",
+            "if (digest > bestHash || (digest === bestHash && vid < bestVid)) {",
+            "if (vid === null) return eligible[avalanche32(fnv1a32(parent)) % eligible.length];"
+          ]
+        }
       ],
       "reIndexed": {
         "_doc": "THE ONE-TIME RE-INDEX, DECLARED. This is the record §N.2 makes the owner's veto stand on: `the classifier prints RE-INDEXED per cell at Shift 1 and the owner's veto stands until that record is signed`. It cannot be a `pin`, because nothing here is recomputable from the leaves — it takes a DRIFT run at two shas — so it is a declared row that the contract test PRINTS and holds to its own arithmetic.",
@@ -110,9 +180,26 @@
         "corpus": "DRIFT — 525 configurations x 2 audiences",
         "measuredBy": "node scripts/prose-manifest-cells.mjs --out <file> at each sha, then node scripts/prose-manifest-diff.mjs <base> <tip>",
         "cells": 73284,
-        "byClass": { "REPLACED": 0, "RE-INDEXED": 43685, "ADDITIVE": 0, "WORDING-ONLY": 0, "UNCHANGED": 29599, "ADDED": 0, "REMOVED": 0 },
+        "byClass": {
+          "REPLACED": 0,
+          "RE-INDEXED": 43685,
+          "ADDITIVE": 0,
+          "WORDING-ONLY": 0,
+          "UNCHANGED": 29599,
+          "ADDED": 0,
+          "REMOVED": 0
+        },
         "indexOnly": 0,
-        "byAudience": { "dm": { "cells": 36660, "reIndexed": 21994 }, "player": { "cells": 36624, "reIndexed": 21691 } },
+        "byAudience": {
+          "dm": {
+            "cells": 36660,
+            "reIndexed": 21994
+          },
+          "player": {
+            "cells": 36624,
+            "reIndexed": 21691
+          }
+        },
         "blocksTouched": 40,
         "blocksUntouched": 0,
         "deepest": "DS-GEN-5 and DS-STR-1, both 100.00 per cent of their cells",
@@ -127,20 +214,50 @@
       "door": "src/domain/prose/passageShapes.js (the closed set and the draw) and src/domain/display/stateProse/composeStateProse.js `arrange` (the shipped arrangement). The second pin is the one that matters: it reds the day the composer takes a shape, which is the declared act",
       "idiom": "the set is CLOSED AT THREE by the owner's ruling (a) and a fourth is an owner act, never an author's; the shape is a SURFACE like a face and moves no fact between the record and the pen; a shape is LICENSED by the composition and never rescued by it, so the lawful set is computed first and the draw only selects among it",
       "pin": [
-        { "kind": "source", "file": "src/domain/prose/passageShapes.js", "contains": ["'spine-then-sentence', 'sentence-then-spine', 'clause-seat',", "export const SHIPPED_SHAPE = 'spine-then-sentence';"] },
-        { "kind": "source", "file": "src/domain/display/stateProse/composeStateProse.js", "contains": ["const opener = asOpener(modifier.phrase);", "if (!opener) return `${spineText} ${modifier.text}`;"] }
+        {
+          "kind": "source",
+          "file": "src/domain/prose/passageShapes.js",
+          "contains": [
+            "'spine-then-sentence', 'sentence-then-spine', 'clause-seat',",
+            "export const SHIPPED_SHAPE = 'spine-then-sentence';"
+          ]
+        },
+        {
+          "kind": "source",
+          "file": "src/domain/display/stateProse/composeStateProse.js",
+          "contains": [
+            "const opener = asOpener(modifier.phrase);",
+            "if (!opener) return `${spineText} ${modifier.text}`;"
+          ]
+        }
       ],
       "measured": {
         "_doc": "THE DISTRIBUTION TABLE ruling (c) asks the sitting for. It cannot be read on the SHIPPED corpus and the reason is pinned two rows below: `attach-set` is 0, so no unit has a modifier and no unit has a shape question. The figures here are the script DRIVEN on the taste's committed dock (laneTASTE f07b98529, read-only history), which is the only corpus carrying attach rows at this date. 8b re-runs it on the defense section and the sitting rules there.",
         "measuredBy": "node scripts/prose-shape-report.mjs --corpus <corpus.json>",
         "corpus": "laneTASTE @ f07b98529 — 7 attach-bearing pools, 408 composable units, 64 fixed seeds, 26,112 draws",
         "shippedCorpusUnits": 0,
-        "marginal": { "spine-then-sentence": "91.56 %", "sentence-then-spine": "8.44 %", "clause-seat": "0.00 %" },
-        "conditional": { "lawful set = {1} (n 21824)": { "spine-then-sentence": "100.00 %" }, "lawful set = {1,2} (n 4288)": { "spine-then-sentence": "48.58 %", "sentence-then-spine": "51.42 %" } },
+        "marginal": {
+          "spine-then-sentence": "91.56 %",
+          "sentence-then-spine": "8.44 %",
+          "clause-seat": "0.00 %"
+        },
+        "conditional": {
+          "lawful set = {1} (n 21824)": {
+            "spine-then-sentence": "100.00 %"
+          },
+          "lawful set = {1,2} (n 4288)": {
+            "spine-then-sentence": "48.58 %",
+            "sentence-then-spine": "51.42 %"
+          }
+        },
         "reading": "SHAPE 1's MARGINAL DOMINANCE IS NOT A TIC, which is the exact discrimination ruling (c) was written to make. Conditional on both shapes being lawful the draw splits 48.58 / 51.42 per cent, so shape 1 leads the marginal only because it is the sole lawful shape on 21,824 of 26,112 draws. 341 of the 408 units refuse shape 2 for want of a noun carried into the spine, so the thread rule is the binding constraint and not the draw.",
-        "duplicateUnitRateBp": { "fixed": 9844, "licensedDraw": 9818 },
+        "duplicateUnitRateBp": {
+          "fixed": 9844,
+          "licensedDraw": 9818
+        },
         "note": "The duplicate-unit rate moves 26 basis points, which is small and is reported as small: shape variation is not a lever on repetition at this sample, and ruling (c) pairs the two columns precisely so a small movement there cannot be sold as a large one."
-      }
+      },
+      "note": "⭐⭐ RE-POINTED AT CAR 8b-W-18o (ADDENDUM 18 rulings 29 and 40). This row was the estate's only instrument for SENTENCE SHAPE, and it measures the ARRANGEMENT of a spine against its modifiers — which is inert, because `attach-set` is 0 and no shipped unit has a modifier. Ruling 29 asked for variety in how a sentence OPENS, which this row cannot see at all. That variety now has its own mechanism and its own row: `openerClassOf` in the kernel (seven closed classes, computed at render) and the `opener-adjacency` row below, which is the thing that actually re-rolls a draw. ⛔ AND RULING 40 (the owner, 2026-09-13 ~13:3x) STRUCK THE OTHER HALF OF RULING 29 BEFORE IT LANDED: there is no `SURVEY_FRAMES` table and no `{survey}` slot anywhere, so no row here points at one and none should be added. This row keeps its own pins and its own arrangement question, unchanged."
     },
     {
       "id": "face-draw-key",
@@ -150,8 +267,125 @@
       "idiom": "the suffix is `::w` and the script that measures it must spell `::w` (P-F10); a face row is `- `[face]` `[hall]` …` or `- `[face]` `[tavern · pair 1 · disagree]` …`, the tag stripped at projection; the leaf carries `sources: [null, …]` and `pairs: [null, …]` parallel to `[text, …wordings]` only where a face carries one, so `faceCounts` — the row above — does not move and a leaf with no sourced face is byte-identical",
       "note": "⭐ 8b-W-18m (ADDENDUM 18 ruling 26): the composer's ONE call site is now `compromisedFace`, which is `drawFace` on every pool no covert field marks and the COMPROMISED path on the one or two it does — so BOTH spellings are pinned below and a car that dropped either reds here by name. 8b-W-18c: the face draw filters by source (ADDENDUM 18 ruling 15) — a declared text shift inside the REWRITE + FACES freeze. The first pin below is the car-3a key, unchanged; the next three are the filter, the fallback and the modulus, so a car that widened the eligible set back to every face, or dropped the fallback, reds here by name; the last is the pair draw's one call site. ⭐ 8b-W-18i added the archiver's exclusion and the weighing row's one call site; ZERO MOVED, because no shipped variant carries an archiver face and the exclusion is a `continue` ABOVE the pinned filter line. ⭐⭐ 8b-W-18n RE-CUT TWO OF THESE PINNED LINES AND MOVED NOTHING, which is the only reason they could be re-frozen rather than argued with (ADDENDUM 18 rulings 27 and 28). (1) The universal test widened from `source === UNIVERSAL_SOURCE` to `UNIVERSAL_SOURCES.includes(source)`, because the PUBLIC is a second source seated by nothing and therefore seated everywhere; on the shipped corpus no variant carries a `public` face, so the predicate answers identically on every one of the 2,266. (2) The archiver's `continue` became a branch that admits the face when it is marked `observed` (ruling 27, the one archiver row that draws alone); on the shipped corpus no variant carries an `observed` list at all, so `faceIsObserved` is false everywhere and the branch is the old `continue` byte for byte. Both new pins name the NEW line, so a car that widened either back reds here.",
       "pin": [
-        { "kind": "source", "file": "src/domain/display/stateProse/stateProseKernel.js", "contains": ["`${seed}::${blockId}::${poolKey}::w`", "if (source === null || UNIVERSAL_SOURCES.includes(source) || roster.has(source)) eligible.push(face);", "return eligible.length === 0 ? all : eligible;", "return eligible[hashKey(`${seed}::${blockId}::${poolKey}::w`) % eligible.length];", "if (faceIsObserved(variant, face)) eligible.push(face);"] },
-        { "kind": "source", "file": "src/domain/display/stateProse/composeStateProse.js", "contains": ["const face = compromisedFace(variant, blockId, poolKey, read);", "return drawFace(variant, blockId, poolKey, read.seed, read.sources);", "const partner = facePartner(variant, face, read.sources);", "const weigh = faceWeigh(variant, face);"] }
+        {
+          "kind": "source",
+          "file": "src/domain/display/stateProse/stateProseKernel.js",
+          "contains": [
+            "`${seed}::${blockId}::${poolKey}::w`",
+            "if (source === null || UNIVERSAL_SOURCES.includes(source) || roster.has(source)) eligible.push(face);",
+            "return eligible.length === 0 ? all : eligible;",
+            "return eligible[hashKey(`${seed}::${blockId}::${poolKey}::w`) % eligible.length];",
+            "if (faceIsObserved(variant, face)) eligible.push(face);"
+          ]
+        },
+        {
+          "kind": "source",
+          "file": "src/domain/display/stateProse/composeStateProse.js",
+          "contains": [
+            "const face = compromisedFace(variant, blockId, poolKey, read);",
+            "return drawFace(variant, blockId, poolKey, read.seed, read.sources);",
+            "const partner = facePartner(variant, face, read.sources);",
+            "const weigh = faceWeigh(variant, face);"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "role-draw-key",
+      "mechanism": "THE ATTRIBUTION ROLE DRAW (ADDENDUM 18 ruling 25, the owner's; car 8b-W-18l). The page prints a ROLE, never an institution: a `{hall}` slot on a face is replaced at render by a person drawn from the TOWN'S OWN institution rows (`institutionRoles.js` through `faceSources.js` `rolesOf`), on the key `${seed}::${blockId}::${poolKey}::r${face}::${source}::${offset}` — a suffix of the variant key carrying the FACE INDEX and the SLOT'S CHARACTER OFFSET, so a face naming two sources draws two different people on one seed and the variant and face draws above are untouched. The candidate list is the source's roster MINUS every role already printed ON THIS PAGE, and an exhausted roster repeats rather than silencing the face. ⛔ IT WAS ABSENT FROM THIS REGISTER UNTIL CAR 8b-W-18o-r, which is the defect this row cures: a mechanism absent from the register is a same-seed text shift nobody signed, and this one re-rolls a PERSON'S NAME on every face that carries a slot.",
+      "shift": "1 — the REWRITE + FACES freeze. The roster is a fact about the TOWN, so a car that adds a catalogue row to `INSTITUTION_ROLES`, or that changes which rows a source lends, re-rolls every role that source prints on every town holding that row — the modulus is the roster's length. ⭐ AND THE PAGE'S EXCLUSION SET IS PART OF THE MECHANISM (car 8b-W-18o-r): a role commits to that set only WHEN ITS PIECE LANDS, so a dropped piece consumes nothing; before that car a dropped piece consumed a person and the next face on the page drew somebody else because of a sentence the reader never saw.",
+      "door": "src/domain/display/stateProse/stateProseKernel.js `drawRole` and `fillRoleSlots`; src/data/institutionRoles.js (the table, `SOURCE_FALLBACK_ROLES` and `PUBLIC_ROLES_BY_TIER`); src/domain/display/stateProse/faceSources.js `rolesOf` and `pageProse`; src/domain/display/stateProse/composeStateProse.js `faceRoleRaw` and `commitRoles`",
+      "idiom": "a row added to the role table is a declared car on THIS row, because the modulus of every source that row lends moves. A role is never DELETED (the same NEVER TRIM rule the pools keep); a fallback roster is the floor and is never lowered.",
+      "pin": [
+        {
+          "kind": "source",
+          "file": "src/domain/display/stateProse/stateProseKernel.js",
+          "contains": [
+            "const drawn = drawRole(roles.get(source), seen, `${key}::${source}::${at}`);",
+            "return pool[hashKey(key) % pool.length];",
+            "claimed.push(drawn.role);"
+          ]
+        },
+        {
+          "kind": "source",
+          "file": "src/domain/display/stateProse/composeStateProse.js",
+          "contains": [
+            "key: `${read.seed}::${blockId}::${poolKey}::r${at}`,",
+            "function commitRoles(read, claimed) {"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "opener-adjacency",
+      "mechanism": "THE OPENER PREFERENCE (ADDENDUM 18 rulings 29 (II) and 36, the owner's; car 8b-W-18o, threaded at 8b-W-18o-r). Before the face modulus runs, the eligible list is narrowed to the faces whose OPENER CLASS differs from the last unit drawn ON THIS PAGE (`openerClassOf` in the kernel: attributed · place · time · fronted · expletive · entry · subject). The KEY IS UNCHANGED — `${seed}::${blockId}::${poolKey}::w`, the same suffix `drawFace` has always used — so what moves is the MODULUS AND THE LIST, never the digest. A PREFERENCE AND NEVER A BAN (ruling 36: \"the draw's preference … never on every repeat; no exemplar's same-opener rate is zero\"): where narrowing would empty the list, or would change nothing, `preferOpener` answers `null` and the draw is `drawFace` itself, byte for byte.",
+      "shift": "1 — the REWRITE + FACES freeze. ⭐ DECLARED AND MEASURED AT CAR 8b-W-18o-r, the car that THREADS the page state and therefore the car that lights this. At 8b-W-18o the mechanism landed INERT (nothing passed `drawnOpeners`, so the previous class was always null and the preference always answered null; the 40-town page render hashed identically on both sides). At 8b-W-18o-r the Defense tab began handing ONE read to all seven of its desk entries, the trail became the page's, and the preference started biting. MEASURED over the first 250 rate-grid towns: the pool `DS-DEF-2 :: Invasion & War: walls with NO force` is drawn 31 times and 7 of those draws MOVE (22.6 per cent). The face distribution moves 8/9/8/6 → 4/12/8/7 — AWAY from face 0, which is the spine and opens on the SUBJECT, and that is the ruling working rather than a defect: the previous unit on the page also opened on the subject, so the page stops opening two units running the same way. NOTHING ELSE IN THE CORPUS MOVES, because 707 of the 708 pools carry one face per variant and a list of one cannot narrow.",
+      "door": "src/domain/display/stateProse/stateProseKernel.js `openerClassOf` and `OPENER_CLASSES` (the classifier, closed and asserted TOTAL at projection); src/domain/display/stateProse/composeStateProse.js `preferOpener` and the `drawnOpeners` trail; src/domain/display/stateProse/faceSources.js `pageProse` (the page's one read). The projector asserts the classifier is total over every face it projects, so a face that could not be classified is a refusal at generation rather than a silent `subject`.",
+      "idiom": "a car that changes the CLASSIFIER changes this row, because a face that re-classifies re-rolls every page whose previous unit shared its old class. The classes are CLOSED at seven and a new one is a declared car. ⛔ THE PREFERENCE MAY NEVER BECOME A BAN: a narrowing that empties the list must answer `null` and never silence a rung — ruling 36 is explicit, and kernel law 1 says the same thing in the other direction.",
+      "pin": [
+        {
+          "kind": "source",
+          "file": "src/domain/display/stateProse/composeStateProse.js",
+          "contains": [
+            "function preferOpener(variant, eligible, lastOpener) {",
+            "return different.length > 0 && different.length < all.length ? different : null;",
+            "if (narrowed === null) return drawFace(variant, blockId, poolKey, read.seed, read.sources);",
+            "if (Array.isArray(read.drawnOpeners)) read.drawnOpeners.push(openerClassOf(head.raw));"
+          ]
+        },
+        {
+          "kind": "source",
+          "file": "src/domain/display/stateProse/stateProseKernel.js",
+          "contains": [
+            "export const OPENER_CLASSES = Object.freeze([",
+            "export function openerClassOf(text) {"
+          ]
+        }
+      ],
+      "measured": {
+        "_doc": "Measured at car 8b-W-18o-r by rendering the whole Defense tab through `scripts/lib/prose-render-defense-page.mjs` on the first 250 rate-grid towns, before and after the page-state threading, and diffing the (cell, vid, face) triple of every draw of the one multi-face pool.",
+        "corpus": "the first 250 towns of the rate grid; the one pool in the corpus carrying more than one face per variant",
+        "drawsOfThePool": 31,
+        "drawsMoved": 7,
+        "shareBp": 2258,
+        "faceHistogramBefore": {
+          "0": 8,
+          "1": 9,
+          "2": 8,
+          "3": 6
+        },
+        "faceHistogramAfter": {
+          "0": 4,
+          "1": 12,
+          "2": 8,
+          "3": 7
+        },
+        "otherPoolsMoved": 0
+      }
+    },
+    {
+      "id": "compromised-year-roll",
+      "mechanism": "THE COMPROMISED SOURCE'S SPEAKS-OR-SILENT ROLL (ADDENDUM 18 ruling 26, the owner's; car 8b-W-18m). On a pool whose SYMPTOM a covert field marks, a roll seeded on `${seed}::${poolKey}::${settlementId}::${year}::compromised` decides whether the compromised source speaks (and is FORCED into the unit with its concealing candidate preferred) or says nothing (and is dropped from the draw). The share is `COMPROMISED_SPEAKS`, 0.7, compared against the uint32 digest's position in its range rather than a modulus, so the rate is exact to one part in 2^32.",
+      "shift": "1 — the REWRITE + FACES freeze. ⛔⛔ AND THIS ROW CARRIES THE FLAG THE REGISTER DID NOT HAVE A PLACE FOR UNTIL NOW: **`year` IS THE FIRST DRAW INPUT IN THE WHOLE DOSSIER BEYOND THE SEED AND A POOL'S IDENTITY.** Every other mechanism in this file keys on (seed, blockId, poolKey) and a suffix; this one also keys on the SETTLEMENT and on TIME. That is a change in kind, not in degree, and the principle that bounds it is written beside the function and asserted by a test: A YEAR-SEEDED ROLL DECIDES WHO SPEAKS, NEVER WHAT IS TRUE. It chooses between two lawful pages and can make no false sentence true. THE PROMISE holds — same seed, same year, same page — because the year is an INPUT and not a clock: `renderYearOf` reads `history.age`, which advances when the world advances and is constant on a re-read. A later car that rolled a FACT, a field or a number on the year would be a PROMISE violation and not a text shift, and the test that names this sentence is what stands between the two.",
+      "door": "src/domain/display/stateProse/stateProseKernel.js `compromisedSpeaks`, `COMPROMISED_SPEAKS`, `compromisedDraw`; src/domain/display/stateProse/faceSources.js `compromisedSourcesOf` and `renderYearOf` (the year's ONE reader); src/domain/display/stateProse/composeStateProse.js `compromisedFace` and the symptom marks",
+      "idiom": "the RATE is one line and is the owner's to tune (the arithmetic for 0.6 / 0.7 / 0.8 is in the docblock so the owner checks the reasoning rather than the conclusion). A change to the rate, to the key's spelling, or to which pools a symptom marks, is a declared car here. ⛔ NOTHING DOWNSTREAM OF THIS ROLL MAY EVER BE A FIELD, A NUMBER OR A STATE.",
+      "pin": [
+        {
+          "kind": "source",
+          "file": "src/domain/display/stateProse/stateProseKernel.js",
+          "contains": [
+            "const key = `${seed}::${poolKey}::${settlementId}::${year}::compromised`;",
+            "return hashKey(key) / 4294967296 < rate;",
+            "export const COMPROMISED_SPEAKS = 0.7;"
+          ]
+        },
+        {
+          "kind": "source",
+          "file": "src/domain/display/stateProse/faceSources.js",
+          "contains": [
+            "export function renderYearOf(settlement) {"
+          ]
+        }
       ]
     },
     {
@@ -161,9 +395,52 @@
       "door": "src/domain/display/stateProse/stateProseKernel.js `PAIR_JOINTS`, `pairJoint`, `faceIsCompoundable`, `faceSentenceCount`, `openLowercased`, `joinPairFaces`, `faceWeigh`; src/domain/display/stateProse/composeStateProse.js `drawPiece`; the projector's `parseFaceRow` and `assertFaces` (scripts/lib/dossier-annex-grammar.mjs), which own the weighing row's refusals",
       "idiom": "a declared sub-car. The FULL STOP is a member of EVERY kind's list and sits LAST in it, so appending a compound joint to a kind never moves the stop's own index and a new joint takes only the reads it wins; a kind holding one joint takes no hash at all. A key of its own (`::pairjoint`) so the variant draw, the face draw (`::w`) and the modifier joint (`::joint::`) are untouched by a joint arriving. ⛔ AND A COMPOUND SPENDS ONE SENTENCE WHERE TWO STOOD, so a unit's SENTENCE seat is OPEN where a stopped pair closes it — inert while no shipped pool declares `role: modifier` (the projector's tally: 708 sentence / 0 clause, every one not-a-modifier), and a declared consequence of ruling 23 the day one does",
       "pin": [
-        { "kind": "source", "file": "src/domain/display/stateProse/stateProseKernel.js", "contains": ["return joints[hashKey(`${seed}::${blockId}::${poolKey}::pairjoint`) % joints.length];", "if (joint === FULL_STOP_JOINT || !faceIsCompoundable(lead) || !faceIsCompoundable(trail)) {", "return `${String(lead).replace(/\\.\\s*$/, '')}${joint}${openLowercased(trailRaw, trail)}`;", "if (/^\\s*\\{/.test(String(raw))) return text;", "if (/[A-Z]/.test(first.slice(1))) return text;"] },
-        { "kind": "source", "file": "src/domain/display/stateProse/composeStateProse.js", "contains": ["const joint = pairJoint(mark ? mark.kind : '', blockId, poolKey, read.seed);", "const weigh = faceWeigh(variant, face);"] },
-        { "kind": "map", "over": "the kernel's exported PAIR_JOINTS, kind -> joint list", "value": {"disagree": [", though ", ", but ", ", while ", ", and yet ", ". "], "reinforce": [", and ", ", as ", ". "], "aside": [". "], "view": [". "], "weigh": [". "]} }
+        {
+          "kind": "source",
+          "file": "src/domain/display/stateProse/stateProseKernel.js",
+          "contains": [
+            "return joints[hashKey(`${seed}::${blockId}::${poolKey}::pairjoint`) % joints.length];",
+            "if (joint === FULL_STOP_JOINT || !faceIsCompoundable(lead) || !faceIsCompoundable(trail)) {",
+            "return `${String(lead).replace(/\\.\\s*$/, '')}${joint}${openLowercased(trailRaw, trail)}`;",
+            "if (/^\\s*\\{/.test(String(raw))) return text;",
+            "if (/[A-Z]/.test(first.slice(1))) return text;"
+          ]
+        },
+        {
+          "kind": "source",
+          "file": "src/domain/display/stateProse/composeStateProse.js",
+          "contains": [
+            "const joint = pairJoint(mark ? mark.kind : '', blockId, poolKey, read.seed);",
+            "const weigh = faceWeigh(variant, face);"
+          ]
+        },
+        {
+          "kind": "map",
+          "over": "the kernel's exported PAIR_JOINTS, kind -> joint list",
+          "value": {
+            "disagree": [
+              ", though ",
+              ", but ",
+              ", while ",
+              ", and yet ",
+              ". "
+            ],
+            "reinforce": [
+              ", and ",
+              ", as ",
+              ". "
+            ],
+            "aside": [
+              ". "
+            ],
+            "view": [
+              ". "
+            ],
+            "weigh": [
+              ". "
+            ]
+          }
+        }
       ]
     },
     {
@@ -173,7 +450,13 @@
       "door": "src/domain/display/stateProse/composeStateProse.js `drawConnective`",
       "idiom": "no hash at all while the list holds one phrase, which is both shipped lists today",
       "pin": [
-        { "kind": "source", "file": "src/domain/display/stateProse/composeStateProse.js", "contains": ["`${seed}::${blockId}::${spineKey}::joint::${modifierKey}`"] }
+        {
+          "kind": "source",
+          "file": "src/domain/display/stateProse/composeStateProse.js",
+          "contains": [
+            "`${seed}::${blockId}::${spineKey}::joint::${modifierKey}`"
+          ]
+        }
       ]
     },
     {
@@ -184,9 +467,29 @@
       "idiom": "never a locale API anywhere a draw is ordered (the lint ban in the composer's fence); and the kinship signal is PROJECTED, never computed at render — ARCH §4.1 refuses a `src/domain/prose/` import in the composer, measured with scripts/lib/module-closure.mjs at 4 files and 150,231 B onto a 70,252 B closure",
       "note": "⛔ THE BAND RULE WAS UNPINNED UNTIL SEAM CAR 5c (the seam fold's R3; SITTING §R cure 3). The row was named `comparator-and-band-rule` while its only pin covered the salience DRAW KEY and the comparator's TIE-BREAK; `bandOf` and `departureBit` appeared in ZERO pins register-wide, so a car that made `consequence` count toward the band, or added a fourth signal, would have re-ordered every multi-candidate rung for every existing world with this register GREEN and the shift undeclared — the one thing the register exists to make impossible. Pin 1 now carries the combining rule verbatim: the tension signal's own test, the three-signal sum, and the departure bit's threshold. Pin 2 holds the LEAF side of the same rule, so the mitigation the schema lens measured (no rung has two candidates today) is itself a measurement rather than an assurance. ⭐ REWRITE car 8a-4 ADDED THE KINSHIP HEAD and pinned it here in the same commit, which is this row working as designed. The lexical work is done ONCE at projection (`kinSpines`, scripts/lib/dossier-annex-grammar.mjs: a spine is kin only where every face of every variant of the modifier shares a content word with every face of every variant of that spine, so no face draw can move the order) and the composer reads a frozen array. `kin` is a MECHANISM and not a reserved key, because the composer reads it; it ships on 0 pools and the projection contract holds it there beside `relation`, `form` and `move`.",
       "pin": [
-        { "kind": "source", "file": "src/domain/display/stateProse/composeStateProse.js", "contains": ["`${seed}::${blockId}::${spineKey}::salience::${row.key}`", "return a.key < b.key ? -1 : 1;", "if (aKin !== bKin) return bKin - aKin;", "if (!meta || !Array.isArray(meta.kin)) return 1;", "const tension = row.meta.relation === 'tension' || row.meta.relation === 'contrast' ? 1 : 0;", "return departureBit(norms, blockId, row.key) + tension + row.change;", "return row && row.departure === 1 ? 1 : 0;"] },
-        { "kind": "integer", "over": "pools whose DECLARED relation contributes the band's tension signal (relation tension or contrast)", "value": 0 },
-        { "kind": "integer", "over": "pools shipping a non-empty `kin` list, which only a MODIFIER can carry", "value": 0 }
+        {
+          "kind": "source",
+          "file": "src/domain/display/stateProse/composeStateProse.js",
+          "contains": [
+            "`${seed}::${blockId}::${spineKey}::salience::${row.key}`",
+            "return a.key < b.key ? -1 : 1;",
+            "if (aKin !== bKin) return bKin - aKin;",
+            "if (!meta || !Array.isArray(meta.kin)) return 1;",
+            "const tension = row.meta.relation === 'tension' || row.meta.relation === 'contrast' ? 1 : 0;",
+            "return departureBit(norms, blockId, row.key) + tension + row.change;",
+            "return row && row.departure === 1 ? 1 : 0;"
+          ]
+        },
+        {
+          "kind": "integer",
+          "over": "pools whose DECLARED relation contributes the band's tension signal (relation tension or contrast)",
+          "value": 0
+        },
+        {
+          "kind": "integer",
+          "over": "pools shipping a non-empty `kin` list, which only a MODIFIER can carry",
+          "value": 0
+        }
       ]
     },
     {
@@ -196,7 +499,14 @@
       "door": "src/domain/display/stateProse/composeStateProse.js COMPOSITION_BOUNDS",
       "idiom": "one frozen record, at zero in the tuning register (P2); a raise is a declared row here and an amendment to ARCH §4.4",
       "pin": [
-        { "kind": "map", "over": "the composer's exported COMPOSITION_BOUNDS", "value": { "facts": 3, "modifierBearingRungs": 2 } }
+        {
+          "kind": "map",
+          "over": "the composer's exported COMPOSITION_BOUNDS",
+          "value": {
+            "facts": 3,
+            "modifierBearingRungs": 2
+          }
+        }
       ]
     },
     {
@@ -206,7 +516,11 @@
       "door": "scripts/lib/dossier-annex-grammar.mjs TURN_KEY_REGISTRY, and the projector's EXPLAINS refusal",
       "idiom": "the classifier prints REPLACED per turn class with the towns; tiers 1a to 1c are AVAILABLE and both tier-2 forms are REFUSED at the dossier",
       "pin": [
-        { "kind": "integer", "over": "the number of pools declaring role `turn`", "value": 0 }
+        {
+          "kind": "integer",
+          "over": "the number of pools declaring role `turn`",
+          "value": 0
+        }
       ]
     },
     {
@@ -216,11 +530,14 @@
       "door": "src/domain/display/stateProse/generalStateProse.js and generalDeskRead.js; the projector's ATTACH refusal on the index-paired blocks lifts with it",
       "idiom": "every moved list row named by the classifier; until then modifiers are REFUSED on DS-GEN-2, DS-GEN-8 and DS-REL-1",
       "pin": [
-        { "kind": "integer", "over": "the number of pools in an index-paired block carrying a non-empty attach set", "value": 0 }
+        {
+          "kind": "integer",
+          "over": "the number of pools in an index-paired block carrying a non-empty attach set",
+          "value": 0
+        }
       ]
     }
   ],
-
   "notMechanisms": [
     {
       "id": "readsCount",
@@ -243,11 +560,27 @@
       "why": "IT IS NOT A MECHANISM OF THIS REGISTER AT THIS TIP, and that is a measurement rather than a judgment: the licence resolves to `sentence` on all 708 pools with the reason `not-a-modifier` on every one, so no value of it reaches a draw at all. It is not a modulus, not a key, not an ordering and not an eligibility test — `drawVariant` reads `blockId` and `poolKey` and never a pool's fields (ARCH §2.1) — and what it decides is ARRANGEMENT: which of two seats a modifier takes, and which connective list the joint is drawn from. ⛔ IT BECOMES SHIFT-CLASS THE DAY THE FIRST `consequence` ROW IS LICENSED. A pool moving from `sentence` to `clause` moves the connective draw onto a different list and re-arranges the unit, so the car that lands an alias joining a relation endpoint to a desk read root promotes this row to a mechanism with its pin, its door and its shift class — and the register says so here rather than in a lane's receipt. Until then: the join is 0 of 165 (car 0's F1, re-derived in the projection contract), no shipped pool declares `role: modifier`, and the key is emitted nowhere, because an ABSENT seat reads in the composer as the sentence.",
       "pinNote": "⛔ THE ONE REGISTER ENTRY CARRIED BY ARGUMENT RATHER THAN BY A PIN, UNTIL SEAM CAR 5c (the seam fold; SITTING §R cure 4). The argument above is sound and the skeptic could not refute it — but nothing RED if a later car started emitting `seat` on a spine, because the recompute loop walked `mechanisms` only. The pin below is the promotion trigger made executable: the day the count leaves zero, this row must be moved to `mechanisms` with its door and its shift class, and the register says so before the car does.",
       "pin": [
-        { "kind": "integer", "over": "pools carrying a seat key", "value": 0 }
+        {
+          "kind": "integer",
+          "over": "pools carrying a seat key",
+          "value": 0
+        }
       ],
       "reserved": [
-        { "key": "seatReason", "emittedBy": "scripts/lib/dossier-annex-grammar.mjs:519", "shippedOn": 0, "readBy": "(no module)", "why": "the resolver's closed-vocabulary reason for a SENTENCE seat, emitted on a modifier only and therefore on no shipped pool. It is a diagnostic for the WAVE, not an input: naming it RESERVED here closes the chair's `a reader or named reserved` rule, and the projection contract's stray-key arm reads THIS LIST, so a car that started shipping it on a spine reds by name." },
-        { "key": "seatRow", "emittedBy": "scripts/lib/dossier-annex-grammar.mjs:520", "shippedOn": 0, "readBy": "(no module)", "why": "the relation row ids that licensed a CLAUSE seat, emitted on a modifier only and therefore on no shipped pool. Same disposition as `seatReason`: a WAVE diagnostic, reserved rather than read, and held at zero by the stray-key arm." }
+        {
+          "key": "seatReason",
+          "emittedBy": "scripts/lib/dossier-annex-grammar.mjs:519",
+          "shippedOn": 0,
+          "readBy": "(no module)",
+          "why": "the resolver's closed-vocabulary reason for a SENTENCE seat, emitted on a modifier only and therefore on no shipped pool. It is a diagnostic for the WAVE, not an input: naming it RESERVED here closes the chair's `a reader or named reserved` rule, and the projection contract's stray-key arm reads THIS LIST, so a car that started shipping it on a spine reds by name."
+        },
+        {
+          "key": "seatRow",
+          "emittedBy": "scripts/lib/dossier-annex-grammar.mjs:520",
+          "shippedOn": 0,
+          "readBy": "(no module)",
+          "why": "the relation row ids that licensed a CLAUSE seat, emitted on a modifier only and therefore on no shipped pool. Same disposition as `seatReason`: a WAVE diagnostic, reserved rather than read, and held at zero by the stray-key arm."
+        }
       ]
     }
   ]

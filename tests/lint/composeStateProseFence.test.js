@@ -453,8 +453,31 @@ describe('the roster reader\'s import fence (car 8b-W-18c)', () => {
     expect(bannedApisIn(read(FACE_SOURCES_MODULE)), 'no locale API on a seeded path').toEqual([]);
   });
 
+  /**
+   * ⭐⭐ THE ONE PAGE THAT MAY IMPORT THE ROSTER READER, added at car 8b-W-18o-r and named here
+   * rather than waved through.
+   *
+   * The fence's ground is that a DESK reads the roster and the composer and kernel may not. A
+   * PAGE is a third thing, and slice E of the research reconciliation is what made it one: the
+   * no-repeat state (ruling 25 edge (e), "the same role never twice on one page") is the PAGE's
+   * and not the desk's, and only the page can mint it once and hand it to all seven of its desk
+   * entries. `DefenseTab.jsx` calls `pageProse` exactly once and passes the result down; it
+   * reads no roster of its own and takes nothing else from the module.
+   *
+   * ⛔ A SECOND TAB ADDED HERE IS A DELIBERATE ACT AND NOT A REPAIR. Every other tab still gets
+   * per-desk state, which is the OLD behaviour and is lawful; a tab joins this list on the car
+   * that threads its page, with its own measurement of what moved.
+   */
+  const PAGE_CALLERS = Object.freeze(['src/components/new/tabs/DefenseTab.jsx']);
+
   test('⭐ every routed desk imports the roster reader; the composer and the kernel do not', () => {
-    expect(importersOf(FACE_SOURCES_MODULE, LIVE_FILES)).toEqual([...ROUTED_COMPOSERS]);
+    expect(importersOf(FACE_SOURCES_MODULE, LIVE_FILES))
+      .toEqual([...PAGE_CALLERS, ...ROUTED_COMPOSERS].sort());
+    // And the page caller takes ONLY the page's own entry point — not `sourcesOf`, not
+    // `rolesOf`, not the covert reader. A tab that read a roster itself would be a second
+    // answer to "which powers speak here" living outside the one module that answers it.
+    const tab = read(PAGE_CALLERS[0]);
+    expect(tab.match(/import \{ ([^}]*) \} from '[^']*faceSources\.js'/)[1].trim()).toBe('pageProse');
     expect(specifiersIn(read(COMPOSER)).filter((s) => /faceSources/.test(s))).toEqual([]);
     expect(specifiersIn(read('src/domain/display/stateProse/stateProseKernel.js')), 'the kernel imports nothing').toEqual([]);
     // And each desk's entry points put the roster on the read: one `withFaceSources` per exported

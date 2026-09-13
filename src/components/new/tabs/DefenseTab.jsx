@@ -8,6 +8,7 @@ import {NarrativeNote} from '../NarrativeNote';
 import { criminalOpNote, deriveCriminalStructure, deriveDefenseReadiness, deriveSupportingCapabilities, deriveGuardAssessment, deriveDefenseVulnerabilities, DEFENSE_STRESS_STATUS } from '../../../domain/display/defenseDisplay.js';
 import { safetySeverityOf } from '../../../domain/display/safetySeverity.js';
 import { scoreBand, scoreColor } from '../../../domain/display/defenseScoreBands.js';
+import { pageProse } from '../../../domain/display/stateProse/faceSources.js';
 import { defenseCriminalProse, defenseForcesProse, defenseMilitaryStatusProse, defensePostureProse, defenseStateProse, defenseSupportingProse, defenseThreatProse, defenseWallRationaleProse } from '../../../domain/display/stateProse/defenseStateProse.js';
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
 import { truncateAtWord } from '../../../lib/text.js';
@@ -89,12 +90,20 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
   // THE DEFENSE DESK. THE PUBLIC GATE (§885.3): a public gallery dossier is a PAID surface
   // and the `defense` tab is not filtered off one, so the desk is NOT DRAWN there. The
   // audience follows kernel law 2's fail-closed default, stated rather than defaulted.
+  // ⭐⭐ ONE PAGE READ FOR THE WHOLE TAB (ADDENDUM 18 ruling 25 edge (e); car 8b-W-18o-r).
+  // Seven desk entry points render this one page, and each of them used to mint its own
+  // no-repeat state — so "the same role never twice on one page" was true of a DESK and false
+  // of the PAGE: one clerk in the hall could be printed seven times on one screen. `pageProse`
+  // builds the state ONCE and `withFaceSources` hands the same object back to every desk, so
+  // the Sets and Arrays on it are shared by identity. Minted per render and never cached: two
+  // renders are two pages.
+  const pageRead = pageProse(r, {
+    seed: String(r?._seed ?? r?.id ?? ''),
+    audience: playerView ? 'player' : 'dm',
+  });
   const deskProse = publicDossier
     ? Object.freeze({ publicOrder: null, firstSurvey: null })
-    : defenseStateProse(r, {
-      seed: String(r?._seed ?? r?.id ?? ''),
-      audience: playerView ? 'player' : 'dm',
-    });
+    : defenseStateProse(r, pageRead);
   // `drawnAtMount` routes the RUNG the projection carries; the `beside` line is only
   // rendered when the registry lets that rung speak, so flipping the row to `glance`
   // silences the machine line and leaves the DM's field untouched.
@@ -106,20 +115,14 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
   // frames no DM-editable field, so these are plain rungs rather than projections.
   const threatProse = publicDossier
     ? Object.freeze({ beasts: null, invasion: null, internal: null, economic: null, disaster: null })
-    : defenseThreatProse(r, {
-      seed: String(r?._seed ?? r?.id ?? ''),
-      audience: playerView ? 'player' : 'dm',
-    });
+    : defenseThreatProse(r, pageRead);
   const threatLines = ['beasts', 'invasion', 'internal', 'economic', 'disaster']
     .map((k) => drawnAtMount(THREAT_MOUNT, threatProse[k])?.sentence).filter(Boolean);
   // DS-DEF-5, the armed-forces lenses. Same public gate as above, stated rather than
   // defaulted; DS-DEF-5 frames no DM-editable field, so these are plain rungs too.
   const forcesProse = publicDossier
     ? Object.freeze({ fortification: null, force: null, contracted: null, charter: null, arcane: null })
-    : defenseForcesProse(r, {
-      seed: String(r?._seed ?? r?.id ?? ''),
-      audience: playerView ? 'player' : 'dm',
-    });
+    : defenseForcesProse(r, pageRead);
   const forceLines = ['fortification', 'force', 'contracted', 'charter', 'arcane']
     .map((k) => drawnAtMount(FORCES_MOUNT, forcesProse[k])?.sentence).filter(Boolean);
   // DS-DEF-1, the posture header. Same public gate; it frames no DM-editable field either
@@ -127,10 +130,7 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
   // the Guard Assessment paragraph rather than over it.
   const postureProse = publicDossier
     ? Object.freeze({ posture: null, terrain: null, prize: null })
-    : defensePostureProse(r, {
-      seed: String(r?._seed ?? r?.id ?? ''),
-      audience: playerView ? 'player' : 'dm',
-    });
+    : defensePostureProse(r, pageRead);
   // ⚠ Like the public-order banner, these arrive already PROJECTED BESIDE the DM's field —
   // `guardEffectivenessDesc`, which `deriveGuardAssessment` returns verbatim just above. The
   // `beside` line is only taken when the registry lets that rung SPEAK, so flipping the row
@@ -142,29 +142,20 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
   // (the banner renders generator-authored `summary` / `viabilityNote`), so plain rungs.
   const statusProse = publicDossier
     ? Object.freeze({ override: null, viability: null })
-    : defenseMilitaryStatusProse(r, {
-      seed: String(r?._seed ?? r?.id ?? ''),
-      audience: playerView ? 'player' : 'dm',
-    });
+    : defenseMilitaryStatusProse(r, pageRead);
   const statusLines = ['override', 'viability']
     .map((k) => drawnAtMount(MILITARY_STATUS_MOUNT, statusProse[k])?.sentence).filter(Boolean);
   // DS-DEF-11, why the wall and why not. Same public gate; no DM-editable field, plain rung.
   const wallProse = publicDossier
     ? Object.freeze({ rationale: null })
-    : defenseWallRationaleProse(r, {
-      seed: String(r?._seed ?? r?.id ?? ''),
-      audience: playerView ? 'player' : 'dm',
-    });
+    : defenseWallRationaleProse(r, pageRead);
   const wallLine = drawnAtMount(WALL_RATIONALE_MOUNT, wallProse.rationale)?.sentence || null;
   // DS-DEF-6, the supporting capabilities. Same public gate as every other mount on this
   // tab; no DM-editable field, so plain rungs. Only the logistics and naval lenses are
   // read — the desk states, and the suite pins, why the other four must stay silent.
   const supportingProse = publicDossier
     ? Object.freeze({ logistics: null, naval: null })
-    : defenseSupportingProse(r, {
-      seed: String(r?._seed ?? r?.id ?? ''),
-      audience: playerView ? 'player' : 'dm',
-    });
+    : defenseSupportingProse(r, pageRead);
   const supportingLines = ['logistics', 'naval']
     .map((k) => drawnAtMount(SUPPORTING_MOUNT, supportingProse[k])?.sentence).filter(Boolean);
   const stresses = (Array.isArray(r.stress)?r.stress:r.stress?[r.stress]:[]).filter(Boolean);
@@ -221,10 +212,7 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
   // and the classification beneath it cannot be about two different readings.
   const criminalProse = publicDossier
     ? Object.freeze({ structure: null, capture: null })
-    : defenseCriminalProse(r, crimStructure, {
-      seed: String(r?._seed ?? r?.id ?? ''),
-      audience: playerView ? 'player' : 'dm',
-    });
+    : defenseCriminalProse(r, crimStructure, pageRead);
   const criminalLines = ['structure', 'capture']
     .map((k) => drawnAtMount(CRIMINAL_MOUNT, criminalProse[k])?.sentence).filter(Boolean);
 

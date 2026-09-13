@@ -20,11 +20,34 @@
  *    never a stub, never a gap, never "no data". R-DST-K: the absence of a surface is
  *    the absence of a sentence.
  *
- * 2. FAIL-CLOSED AUDIENCE (§0e, J-CPL-5). A variant marked `dm-only` is covert. The
- *    player projection truncates to SILENCE, never to a hint: a page over a state with
- *    a covert seam must be byte-identical to a page over a state that genuinely lacks
- *    one. An unrecognised audience is treated as the player's — the restrictive read is
- *    the safe one when the caller is wrong.
+ * 2. FAIL-CLOSED AUDIENCE (§0e, J-CPL-5) — ⭐⭐ RE-CUT AT CAR 8b-W-18o-r, AND THE RE-CUT
+ *    NARROWS IT ON PURPOSE. A variant marked `dm-only` is covert, and the player projection
+ *    truncates it to SILENCE, never to a hint.
+ *
+ *    THE LAW IS: **THE PLAYER PAGE NEVER STATES A COVERT FACT.**
+ *
+ *    ⛔ IT USED TO BE STATED AS "a page over a state with a covert seam must be
+ *    BYTE-IDENTICAL to a page over a state that genuinely lacks one", and that sentence is
+ *    now FALSE — not because the law weakened, but because ADDENDUM 18 ruling 26 (the
+ *    owner's) made it impossible to keep and still obey. A compromised source SPEAKS, and
+ *    speaks to reassure: the player page over a captured hall is DIFFERENT from the page
+ *    over an honest one, and that difference is the whole point — *"it shows the compromised
+ *    power BEHAVING, and the notebook beside it carries the fact"*. A byte-equality arm
+ *    would have refused the ruling.
+ *
+ *    ⛔ SO THE ARM THAT ENFORCES THIS IS NO LONGER A BYTE COMPARISON BETWEEN TWO TOWNS. It
+ *    is the AUDIENCE GATE, which car 8b-W-18m already added and which is the thing that was
+ *    always doing the work: no `compromised` face may carry a `dm-only` mark, and the
+ *    player's text never contains the covert field's name or value. What a covert fact may
+ *    change is WHICH LAWFUL SENTENCE is drawn; what it may never do is put the fact on the
+ *    page. An unrecognised audience is still treated as the player's — the restrictive read
+ *    is the safe one when the caller is wrong.
+ *
+ *    ⚠ AND THE OLD FORM STILL BINDS WHEREVER NO RULING HAS LICENSED A DIFFERENCE: a covert
+ *    VARIANT is truncated to silence and a rung never goes blank for want of one, which is
+ *    why `compromisedDraw` refuses to empty an eligible list. A silence that blanked a rung
+ *    would be the covert fact visible AS AN ABSENCE, which is the leak the narrow form still
+ *    forbids.
  *
  * 3. THE AVALANCHE-MIXED DRAW, never a raw FNV modulo. FNV-1a's low bit is a PARITY,
  *    not a hash: bit 0 of the digest is the XOR of bit 0 of every input character, so a
@@ -1138,12 +1161,27 @@ export function drawRole(roles, printed, key) {
  * A text naming neither slot comes back unchanged, which is why every shipped one-face pool
  * passes through untouched and this car moves no byte of the corpus it did not re-cut.
  *
+ * ⛔⛔ AND IT NO LONGER MUTATES THE PAGE'S SET (ADDENDUM 18, the research reconciliation's
+ * slice E; car 8b-W-18o-r). It used to add each drawn role to `printed` AS IT DREW, which made
+ * a role COMMIT before its piece had landed — and a piece is dropped whenever `fillSlots`
+ * answers `null` on some other slot of the same face. A dropped piece was therefore CONSUMING a
+ * role from the page's roster: the next face, on another desk of the same page, drew a
+ * different person because of a sentence the reader never saw. The roles a call draws are now
+ * reported through `opts.claimed` and the CALLER commits them when its piece lands.
+ *
+ * ⛔ THE EXCLUSION STILL COVERS THE FACE'S OWN SLOTS. A face naming two sources must not draw
+ * one person twice, so the candidate filter is `printed` UNION what this call has claimed so
+ * far — which is what the old mutation gave for free and is the one thing that had to be kept.
+ *
  * @param {string} text the face's raw text
  * @param {object} opts
  * @param {ReadonlyMap<string, ReadonlyArray<{role: string, n: string}>>|null} [opts.roles]
  *   source → the roster that source has on THIS town (`faceSources.js` `rolesOf`)
- * @param {Set<string>|null} [opts.printed] the roles this render has already printed; MUTATED,
- *   because the exclusion is the page's and not the face's
+ * @param {ReadonlySet<string>|null} [opts.printed] the roles this PAGE has already printed;
+ *   READ ONLY — see above
+ * @param {string[]|null} [opts.claimed] appended with each role this call draws, so the caller
+ *   can commit them to `printed` when the piece lands; absent is lawful and the roles are lost,
+ *   which is the right answer for a caller with no page (a walker, a census)
  * @param {string} [opts.key] the seeded draw key prefix (seed :: blockId :: poolKey :: face)
  * @returns {string|null}
  */
@@ -1153,6 +1191,7 @@ export function fillRoleSlots(text, opts) {
   if (!ROLE_OR_VERB_RE.test(text)) return text;
   const roles = opts && opts.roles instanceof Map ? opts.roles : new Map();
   const printed = opts && opts.printed instanceof Set ? opts.printed : new Set();
+  const claimed = opts && Array.isArray(opts.claimed) ? opts.claimed : [];
   const key = opts && typeof opts.key === 'string' ? opts.key : '';
   /** The number of the last role slot filled, and where it sat. */
   let lastNumber = '';
@@ -1162,9 +1201,11 @@ export function fillRoleSlots(text, opts) {
   const out = text.replace(ROLE_OR_VERB_RE, (whole, source, verb, at) => {
     if (refused) return whole;
     if (source) {
-      const drawn = drawRole(roles.get(source), printed, `${key}::${source}::${at}`);
+      // THE CANDIDATE FILTER IS THE PAGE'S SET UNION THIS CALL'S OWN CLAIMS — see the docblock.
+      const seen = claimed.length === 0 ? printed : new Set([...printed, ...claimed]);
+      const drawn = drawRole(roles.get(source), seen, `${key}::${source}::${at}`);
       if (drawn === null) { refused = true; return whole; }
-      printed.add(drawn.role);
+      claimed.push(drawn.role);
       lastNumber = drawn.n === 'pl' ? 'pl' : 'sg';
       lastAt = at;
       return atSentenceHead(text, at) ? capitaliseRole(drawn.role) : drawn.role;

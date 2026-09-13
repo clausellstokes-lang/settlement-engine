@@ -20,6 +20,7 @@
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import * as defense from '../../src/domain/display/stateProse/defenseStateProse.js';
 import { drawnAtMount } from '../../src/domain/display/stateProse/dossierMounts.js';
+import { pageProse } from '../../src/domain/display/stateProse/faceSources.js';
 import { buildThreatAssessment } from '../../src/domain/display/threatAssessment.js';
 import {
   deriveDefenseReadiness, deriveGuardAssessment, deriveCriminalStructure,
@@ -58,7 +59,10 @@ function projectedBeside(entry, mount) {
 export function renderDefensePage(s, options = {}) {
   const r = s || {};
   const seed = String(r._seed ?? r.id ?? '');
-  const opts = { seed, audience: options.audience || 'dm' };
+  // ⭐⭐ ONE PAGE READ FOR THE WHOLE TAB (car 8b-W-18o-r), exactly as `DefenseTab.jsx` does it —
+  // this renderer follows that file line by line and must follow it here too, or the refuter
+  // would read a page whose no-repeat state is not the page's.
+  const opts = pageProse(r, { seed, audience: options.audience || 'dm' });
   /** @type {PageLine[]} */
   const out = [];
   const push = (section, kind, text, extra = {}) => { if (text) out.push({ section, kind, text: String(text), ...extra }); };
