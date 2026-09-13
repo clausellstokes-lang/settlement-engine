@@ -1435,8 +1435,16 @@ describe('SEAM car 4 — the three leaves, at their floors', () => {
 
   it('NORMS: a bit per FIRED pool, frozen, and absent where the corpus never fired', () => {
     const keys = Object.keys(DOSSIER_PROSE_NORMS);
-    expect(keys.length).toBe(271);
-    expect(Object.values(DOSSIER_PROSE_NORMS).filter((v) => v.departure === 1).length).toBe(72);
+    // ⭐ 271 -> 290 AND 72 -> 89 AT THE DARK-POOL DEFECT CAR, landed in the SHIFT REGISTER in
+    // the same commit (`docs/content/prose-shift-register.json`, mechanism `norm-bit`). The
+    // cause is that the RATE instrument was BLIND, not that the prose moved: `deskReturns`
+    // never called `crisisBannerRung`, the stressor desk's second entry point which the
+    // product calls once per active crisis, so DS-STR-1's fourteen CRISIS_POOL_OF pools were
+    // recorded as zeros that had never been asked. Every one of the seventeen new bits reads
+    // DEPARTURE — a pool firing on 6 to 26 of 768 towns is exactly what a blind instrument
+    // loses first — which is why the two integers move by 19 and 17 rather than together.
+    expect(keys.length).toBe(290);
+    expect(Object.values(DOSSIER_PROSE_NORMS).filter((v) => v.departure === 1).length).toBe(89);
     const values = new Set(Object.values(DOSSIER_PROSE_NORMS).map((v) => v.departure));
     expect([...values].sort()).toEqual([0, 1]);
     // Every key is a LIVE (block, pool) of the shipped corpus, and every bit is the census's

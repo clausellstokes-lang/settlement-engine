@@ -2351,13 +2351,32 @@ describe('car 0 — the RATE corpus, its per-tier arm and the occurrence bound',
     // from the predicate's own rate, not from what seated) and its five firing modifier pools
     // each gained a row. That MEASURE lands here; its five rows do not, because this tree has
     // no modifier pool for the corpus walk to fire. The figure is the shipped one.
-    expect(rate.rows.length, 'pools that fired somewhere on the grid').toBe(271);
+    // ⭐⭐ 271 BECAME 290 AT THE DARK-POOL DEFECT CAR (2026-09-13), AND THE RE-TAKE SPLITS
+    // CLEANLY IN TWO. The committed column was a FROZEN 2026-09-08 ARTEFACT: re-running the
+    // corpus at the 2026-09-13 tip with NO car change at all already gives 273 rows and moves
+    // 63 of them, so two of the nineteen new rows and all the rate drift are the tree moving
+    // under a column nobody re-took. The car adds the other SEVENTEEN, each one a pool a
+    // reader could already reach:
+    //   · 14 × DS-STR-1 CRISIS_POOL_OF — `deskReturns` never called `crisisBannerRung`, the
+    //     desk's SECOND entry point, which the product calls once per active crisis
+    //     (OverviewTab.jsx:298). Fourteen pools were recorded as zeros that had never been
+    //     asked. Same defect class as the economy-desk omission this file records above.
+    //   · 2 × DS-POW-2 share pools — a lens that asked a TOTAL predicate before a SELECTIVE
+    //     one, dark on the product's path too.
+    //   · 1 × DS-GEN-18 HOME-FED — a join spelled as a case-fold across two vocabularies.
+    // ⛔ A ZERO FROM A QUESTION NEVER ASKED IS NOT A ZERO, which is the whole reason this
+    // figure is pinned rather than trusted.
+    expect(rate.rows.length, 'pools that fired somewhere on the grid').toBe(290);
     // The one-config 200-town probe reached 181; the grid reaches more, which is the point.
     expect(rate.rows.length, 'more than the single-configuration probe could reach').toBeGreaterThan(181);
   });
 
   test('a pool silent at a tier where its block MOUNTS is a per-tier finding', () => {
-    expect(committed.rate.tierSilences.length, '(pool, tier) rows on the shipped grid').toBe(352);
+    // 352 → 375 at the dark-pool defect car, split: +10 is the frozen column's own drift (a
+    // no-car re-take at this tip reads 362) and +13 is the car's seventeen new pools, each
+    // lawfully silent at the tiers its crisis does not reach. MISSING-AT-TIER is UNMOVED at
+    // 45 — the new rows added no rung that goes dark at a size it speaks at elsewhere.
+    expect(committed.rate.tierSilences.length, '(pool, tier) rows on the shipped grid').toBe(375);
     for (const row of committed.rate.tierSilences) {
       expect(row.sites, 'every finding is on a MOUNTED block').toBeGreaterThan(0);
       expect(row.firedOverall, 'and on a pool that fired somewhere').toBeGreaterThan(0);
@@ -2391,9 +2410,12 @@ describe('car 0 — the RATE corpus, its per-tier arm and the occurrence bound',
     const silences = committed.rate.tierSilences;
     const lawful = silences.filter((r) => r.verdict === 'LAWFUL');
     const missing = silences.filter((r) => r.verdict === 'MISSING-AT-TIER');
-    expect(lawful.length, 'lawful silences, at 128 towns per tier').toBe(307);
+    // 307 → 317 (the frozen column's drift) → 330 (the car's fourteen crisis pools and three
+    // cured lenses). THE WAVE'S OWN NUMBER IS UNMOVED: 45 MISSING-AT-TIER before and after,
+    // which is the check that matters — the re-take lit pools, it did not darken a rung.
+    expect(lawful.length, 'lawful silences, at 128 towns per tier').toBe(330);
     expect(missing.length, 'and the rows the authoring wave inherits').toBe(45);
-    expect(lawful.length + missing.length, 'the two limbs partition the finding').toBe(352);
+    expect(lawful.length + missing.length, 'the two limbs partition the finding').toBe(375);
     expect(new Set(lawful.map((r) => r.limb)), 'each names the limb that answered it').toEqual(new Set(['value-class']));
     expect(new Set(missing.map((r) => r.limb))).toEqual(new Set(['rung-dark']));
     // THE FOURTH TIER, in the table the authoring wave reads and not in a second list.
@@ -2409,7 +2431,11 @@ describe('car 0 — the RATE corpus, its per-tier arm and the occurrence bound',
     // the function carrying its `||` fallback, where the two halves cannot see each other.
     // Both are DECLARED with their integers rather than cured behind the verdict.
     expect(missing.filter((r) => r.siblingRungSpoke).length, 'every one of them').toBe(45);
-    expect(missing.filter((r) => r.splitLadder).length, 'the split-ladder shape, counted').toBe(12);
+    // 12 → 15 AND NOT ONE OF THE THREE IS THIS CAR'S. The dark-pool defect car's re-take of
+    // the frozen 2026-09-08 rate column moved it; the added rows are
+    // `DS-DEF-6 :: Naval Defense: Port only` at thorp, hamlet and village, and the no-car
+    // re-take at this tip reads 15 exactly as the cured one does.
+    expect(missing.filter((r) => r.splitLadder).length, 'the split-ladder shape, counted').toBe(15);
     expect(new Set(missing.map((r) => r.block)).size, 'over this many blocks').toBe(7);
     // ⛔ THE THIRD COARSENESS, DECLARED WITH ITS INTEGER (the fold's P6, receipt row 17). The
     // LAWFUL limb requires ANOTHER pool of the SAME RUNG to have fired at that tier, so a rung
@@ -2467,8 +2493,14 @@ describe('car 0 — the RATE corpus, its per-tier arm and the occurrence bound',
     const pairs = committed.rate.pairs;
     expect(pairs.n).toBe(768);
     expect(pairs.boundCount, 'the census carries the bound it was measured at').toBe(51);
-    expect(pairs.rows.length, 'distinct co-occurring fact pairs with no pool keyed on both').toBe(729);
-    expect(pairs.clearing, 'pairs clearing the bound, ALL members').toBe(590);
+    // ⚠ 729 → 1,116, AND ALMOST ALL OF IT IS THE FROZEN COLUMN RATHER THAN THIS CAR. A no-car
+    // re-take at the 2026-09-13 tip already reads 1,069; the car's seventeen pools add the
+    // last 47. The same split holds for `clearing`: 590 → 918 (drift) → 961 (car). The pairs
+    // half moves furthest of anything in the rate table when the column is left to freeze,
+    // because it is quadratic in the facts a town carries — which is the argument for
+    // re-taking the column whenever a desk's reads change, not once a fold.
+    expect(pairs.rows.length, 'distinct co-occurring fact pairs with no pool keyed on both').toBe(1116);
+    expect(pairs.clearing, 'pairs clearing the bound, ALL members').toBe(961);
     // ⛔ AND THE HALF THE CHAIR MUST SET THE FLOOR FROM. `coOccurringPairs` builds a town's
     // facts from PREDICATE fields, two of whose shapes are this instrument's own bookkeeping:
     // the table rung's synthetic label and a bare unrooted parameter. A floor set on the
@@ -2480,20 +2512,28 @@ describe('car 0 — the RATE corpus, its per-tier arm and the occurrence bound',
     // on it. SITTING §O.3 sets the co-occurrence floor over the USABLE pairs, so 11 % of the
     // licensed list was a method call until this cure.
     expect(pairs.usable, 'pairs whose BOTH members are dotted reading paths').toBe(205);
-    expect(pairs.usableClearing, 'and those clearing the bound').toBe(151);
+    // 151 → 150 at the dark-pool defect car's re-take, and it is DRIFT, not the car: the
+    // no-car re-take at this tip reads 150 too, and `usable` is unmoved at 205 in both.
+    expect(pairs.usableClearing, 'and those clearing the bound').toBe(150);
     expect(pairMemberClass('eco.incomeSources.reduce'), 'the tail is a builtin, never a fact').toBe('method');
     expect(pairMemberClass('eco.incomeSources'), 'and the reading it was called on is a fact').toBe('fact');
     expect(pairMemberClass('granary'), 'a bare key-function parameter is unrooted').toBe('unrooted');
     expect(pairMemberClass('x (via TABLE in f.js)'), 'and the table rung\'s own label is synthetic').toBe('synthetic');
     expect(JS_METHOD_TAILS.has('reduce'), 'the excluded list is published as a frozen constant').toBe(true);
     expect(JS_METHOD_TAILS.has('stockpile'), 'and it does not swallow a real settlement field').toBe(false);
+    // 38 → 47 at the dark-pool defect car's re-take: 8 of the 9 are the frozen column's own
+    // drift (a no-car re-take at this tip reads 46), 1 is the car's new pools.
     expect(pairs.rows.filter((p) => p.aClass === 'method' || p.bClass === 'method').length,
-      'the pairs the exclusion removed, counted rather than dropped in silence').toBe(38);
+      'the pairs the exclusion removed, counted rather than dropped in silence').toBe(47);
     // ⛔ NO FLOOR IS SET HERE. The distribution ships; the floor is the chair's.
     expect(committed.rate.departureReport.lineBp, 'the departure line is a REPORT at 10 %').toBe(1000);
-    expect(committed.rate.departureReport.uncommon, 'the departure bits at the report line').toBe(72);
+    // 72 → 89, split: the frozen column's own drift carries it to 74, and the car's seventeen
+    // new pools add 15 — every one of them under 340 bp, so every one of them is UNCOMMON at
+    // the 1,000 bp report line. That is not an accident of the cure: a pool that fires on
+    // 6 to 26 of 768 towns is exactly what a blind instrument loses first.
+    expect(committed.rate.departureReport.uncommon, 'the departure bits at the report line').toBe(89);
     expect(committed.rate.departureReport.uncommon
-      + committed.rate.departureReport.common, 'over every fired pool').toBe(271);
+      + committed.rate.departureReport.common, 'over every fired pool').toBe(290);
   });
 
   test('the wizard-default weighting ships as a REPORT column beside every rate', () => {

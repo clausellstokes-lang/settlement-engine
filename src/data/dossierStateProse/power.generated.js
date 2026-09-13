@@ -1050,7 +1050,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
-        "readsCount": 1,
+        "readsCount": 2,
         "attach": []
       }
     }

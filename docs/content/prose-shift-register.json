@@ -109,19 +109,19 @@
     {
       "id": "norm-bit",
       "mechanism": "the DEPARTURE bit per pool, which is one of the three signals of the salience BAND and so decides which candidate is ranked first",
-      "shift": "a declared row of its own — a longer list re-rolls every joint already drawn on it; a list of length one takes no hash at all. ⛔ THE 8a-9 GROWTH (0/0/1/1 -> 3/3/3/3) RE-ROLLED NOTHING, and that is a measurement rather than an argument: no shipped pool declares `role: modifier`, so the composer draws no joint on any town and the classifier printed every one of the 73,284 cells UNCHANGED. The two former OWED lists are still UNLICENSED — `seatOf` answers `not-consequence` on all 708 pools — so having the words is not having a seat.",
+      "shift": "a declared row of its own — a longer list re-rolls every joint already drawn on it; a list of length one takes no hash at all. ⛔ THE 8a-9 GROWTH (0/0/1/1 -> 3/3/3/3) RE-ROLLED NOTHING, and that is a measurement rather than an argument: no shipped pool declares `role: modifier`, so the composer draws no joint on any town and the classifier printed every one of the 73,284 cells UNCHANGED. The two former OWED lists are still UNLICENSED — `seatOf` answers `not-consequence` on all 708 pools — so having the words is not having a seat. ⭐⭐ LANDED AGAIN AT THE DARK-POOL DEFECT CAR (2026-09-13): 271 -> 290 pools with a measured bit, 72 -> 89 departures, and the row digest re-rolled. THE CAUSE IS THAT THE INSTRUMENT WAS BLIND, NOT THAT THE PROSE MOVED. `scripts/prose-rate-corpus.mjs`'s `deskReturns` never called `crisisBannerRung`, the stressor desk's SECOND entry point, which the product calls once per active crisis (OverviewTab.jsx:298) — so DS-STR-1's fourteen CRISIS_POOL_OF pools were recorded as zeros that had never been asked. Two further pools (DS-POW-2's share pair) and one (DS-GEN-18 HOME-FED) were cured in the same car. SPLIT, measured: a NO-CAR re-take at this tip already reads 273 rows and moves 63 rateBp values, so the frozen 2026-09-08 column accounts for 2 of the 19 new rows and all the drift; the car accounts for 17. ⛔ AND IT RE-ROLLED NOTHING DRAWN, on the same measurement the 8a-9 row rests on and re-taken here: ZERO pools declare `role: \"modifier\"` in any of the six shipped leaves, so the composer draws no joint on any town and no reader's sentence changes because of this bit.",
       "door": "src/data/proseNorms.generated.js, projected from the census's RATE corpus",
       "idiom": "the sitting authored all four to their floor of three at REWRITE car 8a-9 (S12; SITTING §T.2) as PUBLIC-COPY DRAFTS, SIGNED AT THE WALK (§13 row 27); growth after that is a declared row here",
       "pin": [
         {
           "kind": "integer",
           "over": "the number of pools carrying a measured bit",
-          "value": 271
+          "value": 290
         },
         {
           "kind": "integer",
           "over": "the number of those bits that read 1",
-          "value": 72
+          "value": 89
         },
         {
           "kind": "integer",
@@ -132,7 +132,7 @@
           "kind": "digest",
           "algo": "sha256",
           "over": "the norm leaf's rows as `${key} ${departure}`",
-          "value": "820cda139c5111e74e89440c7797eefa9fd5c972cb67704b68d0ba6c26e29a2d"
+          "value": "e5b7bc1ae8d7fbe9c41668026f0d909d6b50ba5c51f2893305dc73df27a712fd"
         }
       ]
     },

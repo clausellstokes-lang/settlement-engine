@@ -304,11 +304,32 @@ export function deskReturns(s, opts, onThrow) {
     'defenseSupportingProse', 'defenseMagicDependencyProse']) {
     desk(name, () => defense[name](s, opts));
   }
+  const banners = Array.isArray(s.stress) ? s.stress : (s.stress ? [s.stress] : []);
   desk('stressors', () => stressors.stressorsStateProse(s, {
-    banners: Array.isArray(s.stress) ? s.stress : (s.stress ? [s.stress] : []),
+    banners,
     conditions: deriveAllActiveConditions(s),
     worldStressor: null,
   }, opts));
+  // ⛔⛔ THE STRESSOR DESK HAS TWO ENTRY POINTS AND THIS INSTRUMENT ONLY ASKED ONE — THE SAME
+  // DEFECT CLASS THIS SCRIPT'S OWN HEADER ALREADY RECORDS FOR THE ECONOMY DESK, twenty lines
+  // up ("three FOOD pools could never fire on the RATE corpus"). `stressorsStateProse` reaches
+  // `crisisArityPoolKey` and `crisisFramingPoolKey`; `DS-STR-1`'s CRISIS_POOL_OF lens is
+  // reachable ONLY through `crisisBannerRung` (stressorsStateProse.js), which the shipped
+  // product calls ONCE PER ACTIVE CRISIS at `OverviewTab.jsx:298`, suppressed only on the
+  // public dossier. Until 2026-09-13 nothing here called it, so FOURTEEN pools were recorded
+  // as zeros that had never been measured at all — the chair planned on this instrument and
+  // it was blind on that lens. A zero from a question never asked is not a zero.
+  //
+  // THE RECIPE IS THE TAB'S, COPIED RATHER THAN RE-DERIVED: the same banner list the desk
+  // above is handed, the banner row ITSELF (the rung reads `banner.type` and `banner.label`
+  // and nothing else), and the tab's own per-banner seed `${deskSeed}::${type}` — a seed that
+  // varied per TOWN but not per BANNER would draw the same variant for every crisis on a town
+  // and quietly understate the corpus's variety.
+  for (const banner of banners) {
+    const type = String(banner?.type ?? '');
+    desk(`stressorsBanner:${type}`,
+      () => stressors.crisisBannerRung(s, banner, { ...opts, seed: `${opts.seed}::${type}` }));
+  }
   desk('warFaith', () => {
     const model = faithPanelModel(s);
     return warFaith.warFaithStateProse(s, { faith: model, hasPatron: !!model.hasEmbed }, opts);

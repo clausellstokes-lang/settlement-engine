@@ -3,8 +3,8 @@
 // wiring census's RATE corpus and FROZEN at the pool's birth car (P-F4).
 // A BIT AND NOT A RATE, deliberately: a rate re-measured by an unrelated car would re-order
 // installed worlds without anyone intending it. The measured rate stays a REPORT in the census.
-// MEASURED: 271 of 708 pools fired on the RATE corpus (768 towns,
-// 192 cells, 4 seeds); 72 of them read 1 at the departure line of
+// MEASURED: 290 of 708 pools fired on the RATE corpus (768 towns,
+// 192 cells, 4 seeds); 89 of them read 1 at the departure line of
 // 1000 basis points.
 // A POOL WITH NO ROW IS ABSENT, NOT ZERO, and the composer reads an absent row as "not a
 // departure": the same reading as 0, and the honest one. A pool the RATE corpus never fired
@@ -392,7 +392,7 @@ export const DOSSIER_PROSE_NORMS = /* #__PURE__ */ Object.freeze({
     "departure": 0
   },
   "DS-GEN-3::scores.monster: ADEQUATE": {
-    "departure": 0
+    "departure": 1
   },
   "DS-GEN-3::scores.monster: WEAK": {
     "departure": 0
@@ -676,6 +676,9 @@ export const DOSSIER_PROSE_NORMS = /* #__PURE__ */ Object.freeze({
   "DS-GEN-18::STALLED": {
     "departure": 0
   },
+  "DS-GEN-18::HOME-FED": {
+    "departure": 1
+  },
   "DS-GEN-18::BOUGHT-IN": {
     "departure": 0
   },
@@ -730,7 +733,16 @@ export const DOSSIER_PROSE_NORMS = /* #__PURE__ */ Object.freeze({
   "DS-POW-2::no token matched: unclassified (the plain-description floor)": {
     "departure": 0
   },
+  "DS-POW-2::governing faction holds a DOMINANT share": {
+    "departure": 0
+  },
+  "DS-POW-2::governing faction holds a NARROW plurality": {
+    "departure": 0
+  },
   "DS-POW-2::recentConflict present": {
+    "departure": 0
+  },
+  "DS-POW-4::riskLabel: Stable (no challengers)": {
     "departure": 0
   },
   "DS-POW-4::riskLabel: Holding": {
@@ -781,6 +793,9 @@ export const DOSSIER_PROSE_NORMS = /* #__PURE__ */ Object.freeze({
   "DS-POW-6::capture reached an AGENT of a faction": {
     "departure": 1
   },
+  "DS-POW-6::capture reached a LEADER": {
+    "departure": 1
+  },
   "DS-POW-6::operation role parallel marketplace": {
     "departure": 1
   },
@@ -801,6 +816,48 @@ export const DOSSIER_PROSE_NORMS = /* #__PURE__ */ Object.freeze({
   },
   "DS-POW-7::layer DORMANT (no ledger materialized)": {
     "departure": 0
+  },
+  "DS-STR-1::UNDER SIEGE": {
+    "departure": 1
+  },
+  "DS-STR-1::FAMINE": {
+    "departure": 1
+  },
+  "DS-STR-1::UNDER OCCUPATION": {
+    "departure": 1
+  },
+  "DS-STR-1::POLITICALLY FRACTURED": {
+    "departure": 1
+  },
+  "DS-STR-1::INDEBTED TO AN OUTSIDE POWER": {
+    "departure": 1
+  },
+  "DS-STR-1::RECENTLY BETRAYED": {
+    "departure": 1
+  },
+  "DS-STR-1::INFILTRATED": {
+    "departure": 1
+  },
+  "DS-STR-1::DISEASE OUTBREAK": {
+    "departure": 1
+  },
+  "DS-STR-1::SUCCESSION VOID": {
+    "departure": 1
+  },
+  "DS-STR-1::BEAST & RAIDER THREAT": {
+    "departure": 1
+  },
+  "DS-STR-1::INSURGENCY": {
+    "departure": 1
+  },
+  "DS-STR-1::RELIGIOUS CRISIS": {
+    "departure": 1
+  },
+  "DS-STR-1::WARTIME": {
+    "departure": 1
+  },
+  "DS-STR-1::MASS MIGRATION": {
+    "departure": 1
   },
   "DS-STR-1::ARITY: several banners standing at once": {
     "departure": 1
