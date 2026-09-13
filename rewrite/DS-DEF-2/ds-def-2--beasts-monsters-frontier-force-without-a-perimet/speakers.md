@@ -1,10 +1,10 @@
 variant 1 face 1 | elders | -
-variant 1 face 2 | stranger | -
-variant 1 face 3 | tavern | -
-variant 1 face 4 | muster | -
+variant 1 face 2 | stranger | pair 1 · reinforce
+variant 1 face 3 | muster | pair 1 · reinforce
+variant 1 face 4 | tavern | -
 variant 1 face 5 | register | -
-variant 1 face 6 | hall | pair 1 · disagree
-variant 1 face 7 | guild | pair 1 · disagree
+variant 1 face 6 | hall | pair 2 · disagree
+variant 1 face 7 | guild | pair 2 · disagree
 variant 1 face 8 | market | -
 variant 1 face 9 | watch | -
 variant 1 face 10 | garrison | -
