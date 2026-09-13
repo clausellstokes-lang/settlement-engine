@@ -1,0 +1,7 @@
+{"type":"launched"}
+{"type":"started","key":"v2:ae61c5f8ca9a5e5a81917de1b11d431b23c65c2307461eef97acb4d0a7234861","agentId":"a35500bf140ffd2e3","label":"DS-DEF-2:mark:ds-def-2--beasts-monsters-plagued-perimeter-and-organized-","phase":"Mark"}
+{"type":"started","key":"v2:8290e0f2c34e8946ea4632b7ae4265cde6700acd8ec7953f8ac00ef8ac4f54b7","agentId":"aeadaf802d2df7e09","label":"DS-DEF-2:mark:ds-def-2--beasts-monsters-plagued-no-perimeter-and-no-forc","phase":"Mark"}
+{"type":"started","key":"v2:4e704210f3b00deac05275bfd9463afef4c9ea6923ace60003a8ea6696f6fd7b","agentId":"a256461d300372545","label":"DS-DEF-2:mark:ds-def-2--beasts-monsters-settled-defenses-beyond-the-need","phase":"Mark"}
+{"type":"started","key":"v2:c5cdb441de75ce9864f6ae57b6f51fbde045829d51214d65d4fcb7f35bd3a234","agentId":"afe0291727fa3ed88","label":"DS-DEF-2:mark:ds-def-2--beasts-monsters-settled-nothing-organized","phase":"Mark"}
+{"type":"started","key":"v2:0c0f32b75b846c714a95c8b8e6d1c7a1881a2be5defad09f0b15072305912e47","agentId":"ac1decf7a2ce9fb50","label":"DS-DEF-2:mark:ds-def-2--invasion-war-militia-only","phase":"Mark"}
+{"type":"started","key":"v2:b5d5cc9b29df293e3000d2a473adc7bb7dc66addea62fb0bf4b1c2c4911fa8dd","agentId":"ac523e41ca3683d3d","label":"DS-DEF-2:mark:ds-def-2--invasion-war-neither-walls-nor-force","phase":"Mark"}
