@@ -28,8 +28,8 @@
 // words and the pair kinds a `[face]` row may carry are CLOSED at the kernel, and a grammar
 // that re-spelled them would be a second home for a list that must not drift.
 import {
-  ARCHIVER_SOURCE, FACE_SOURCES, PAIR_KINDS, ROLE_SLOTS, UNIVERSAL_SOURCE,
-  WEIGHABLE_KINDS, WEIGH_KIND, faceSentenceCount,
+  ARCHIVER_SOURCE, COMPROMISABLE_SOURCES, COMPROMISED_MARK, FACE_SOURCES, PAIR_KINDS,
+  ROLE_SLOTS, UNIVERSAL_SOURCE, WEIGHABLE_KINDS, WEIGH_KIND, faceSentenceCount,
 } from '../../src/domain/display/stateProse/stateProseKernel.js';
 
 /** ARCH §2.3: the three roles a pool may declare. */
@@ -227,16 +227,34 @@ function refuse(label, message) {
  * a fourth token. `null` where the row carries no tag at all — a bare face, the stranger's.
  * @param {string} rest everything after `` `[face]` `` — `FACE_ROW_RE`'s first group
  * @param {string} label where the row stands, for the refusal
- * @returns {{text: string, source: string|null, pair: {id: number, kind: string}|null}}
+ * @returns {{text: string, source: string|null, pair: {id: number, kind: string}|null,
+ *   compromised: boolean}} `compromised` is ruling 26's flag; see the mark's refusals below
  */
 export function parseFaceRow(rest, label) {
   const tagged = String(rest).match(FACE_TAG_RE);
-  if (!tagged) return { text: String(rest), source: null, pair: null };
-  const tokens = tagged[1].split('·').map((token) => token.trim()).filter(Boolean);
-  const source = tokens[0] || '';
+  if (!tagged) return { text: String(rest), source: null, pair: null, compromised: false };
+  const raw = tagged[1].split('·').map((token) => token.trim()).filter(Boolean);
+  const source = raw[0] || '';
   if (!FACE_SOURCES.includes(source)) {
     refuse(label, `a [face] row names the source \`${source}\`, which is not a power of the`
       + ` town — the vocabulary is CLOSED at the kernel (ADDENDUM 18 ruling 15): ${FACE_SOURCES.join(' · ')}`);
+  }
+  // ⭐⭐ THE COMPROMISED MARK (ADDENDUM 18 ruling 26; car 8b-W-18m). It is a FLAG, not a
+  // position: `[hall · compromised]` and `[hall · pair 1 · disagree · compromised]` are both
+  // lawful, because a compromised face may stand alone OR be one half of a pair (the ruling:
+  // "as the single account, or as one half of a pair"). It is lifted out of the token list
+  // here so everything below reads exactly the tag shape car 8b-W-18c defined.
+  const compromised = raw.includes(COMPROMISED_MARK);
+  const tokens = raw.filter((token) => token !== COMPROMISED_MARK);
+  if (compromised && !COMPROMISABLE_SOURCES.includes(source)) {
+    refuse(label, `a [face] row marks \`${source}\` as \`${COMPROMISED_MARK}\`, and no covert field`
+      + ` of the engine can compromise it. The table is CLOSED (ADDENDUM 18 ruling 26 (c)):`
+      + ` ${COMPROMISABLE_SOURCES.join(' · ')}. A register under a cult's hand and an unexposed`
+      + ' officer are named by the ruling and recorded by NO field, so neither may be tagged');
+  }
+  if (compromised && source === ARCHIVER_SOURCE) {
+    refuse(label, `a [face] row marks the \`${ARCHIVER_SOURCE}\` \`${COMPROMISED_MARK}\`. The archiver`
+      + ' is not a power of the town and holds no secret of its own (ADDENDUM 18 ruling 22)');
   }
   if (tokens.length === 1) {
     // ⛔ A WEIGH WITH NO PAIR. The archiver's row exists only to close a pair; untagged with a
@@ -247,7 +265,7 @@ export function parseFaceRow(rest, label) {
         + ' sentence CLOSES a pair and never stands alone (ADDENDUM 18 ruling 22): tag it'
         + ` \`${ARCHIVER_SOURCE} · pair N · ${WEIGH_KIND}\` naming the pair it weighs`);
     }
-    return { text: tagged[2], source, pair: null };
+    return { text: tagged[2], source, pair: null, compromised };
   }
   const pairToken = tokens[1].match(PAIR_TOKEN_RE);
   if (!pairToken) {
@@ -261,7 +279,7 @@ export function parseFaceRow(rest, label) {
     refuse(label, `a [face] row marks pair ${id} with the kind \`${kind}\`, which is not one of the`
       + ` PAIR KINDS (the owner's refinement of ruling 15, 2026-09-13): ${PAIR_KINDS.join(' · ')}`);
   }
-  if (tokens.length > 3) refuse(label, `a [face] row's tag carries ${tokens.length} tokens; the most is three: SOURCE · pair N · KIND`);
+  if (tokens.length > 3) refuse(label, `a [face] row's tag carries ${tokens.length} tokens; the most is three besides the \`${COMPROMISED_MARK}\` flag: SOURCE · pair N · KIND`);
   // ⭐ THE WEIGHING ROW IS THE ARCHIVER'S AND THE ARCHIVER'S ONLY (ADDENDUM 18 ruling 22; car
   // 8b-W-18i). Both halves of that rule are decidable from THIS ROW ALONE — the source and the
   // kind stand in one tag — so the refusal is taken here, where a writer reads it beside the
@@ -277,7 +295,7 @@ export function parseFaceRow(rest, label) {
       + ` \`${kind}\`. The archiver is not a power of the town and never half of a pair; the`
       + ` only mark it takes is \`${WEIGH_KIND}\` (ADDENDUM 18 ruling 22)`);
   }
-  return { text: tagged[2], source, pair: { id, kind } };
+  return { text: tagged[2], source, pair: { id, kind }, compromised };
 }
 
 /**
@@ -753,6 +771,8 @@ export function seatMeta(input) {
  * @param {ReadonlyArray<string|null>} [input.sources] parallel to `faces` (NOT to the leaf's
  *   `[spine, ...faces]` — the spine carries none); absent reads as all-null
  * @param {ReadonlyArray<{id: number, kind: string}|null>} [input.pairs] parallel to `faces`
+ * @param {ReadonlyArray<boolean>} [input.compromised] parallel to `faces` (ruling 26); absent
+ *   reads as all-false
  * @param {number} input.pinnedFaceCount
  * @param {(slot: string) => string|undefined} input.shapeOf
  * @param {ReadonlyArray<string>} input.clauseOpeners
@@ -765,6 +785,39 @@ export function assertFaces(input) {
   const pairs = Array.isArray(input.pairs) ? input.pairs : faces.map(() => null);
   if (sources.length !== faces.length || pairs.length !== faces.length) {
     refuse(label, `${faces.length} faces against ${sources.length} sources and ${pairs.length} pair marks — the three lists are parallel by construction`);
+  }
+  // ⭐⭐ THE COMPROMISED MARKS (ADDENDUM 18 ruling 26; car 8b-W-18m), checked from the LEAF's
+  // side as well as at the annex row, because a leaf projected by something other than
+  // `parseFaceRow` must not be able to put a conspiracy the engine never held on the page.
+  const compromised = Array.isArray(input.compromised)
+    ? input.compromised : faces.map(() => false);
+  if (compromised.length !== faces.length) {
+    refuse(label, `${faces.length} faces against ${compromised.length} compromised marks — the lists are parallel by construction`);
+  }
+  /** @type {Map<string, number[]>} */
+  const compromisedBySource = new Map();
+  compromised.forEach((mark, at) => {
+    if (mark !== true) return;
+    const source = sources[at] || UNIVERSAL_SOURCE;
+    if (!COMPROMISABLE_SOURCES.includes(source)) {
+      refuse(label, `face ${at + 1} is marked \`${COMPROMISED_MARK}\` and speaks for \`${source}\`,`
+        + ' which no covert field of the engine can compromise. The table is CLOSED (ADDENDUM 18'
+        + ` ruling 26 (c)): ${COMPROMISABLE_SOURCES.join(' · ')}`);
+    }
+    const held = compromisedBySource.get(source) || [];
+    held.push(at + 1);
+    compromisedBySource.set(source, held);
+  });
+  for (const [source, at] of compromisedBySource) {
+    if (at.length > 1) {
+      // ⛔ ONE PER SOURCE PER VARIANT. The draw PREFERS the compromised candidate when the roll
+      // says speak, and "the compromised candidate" has to name one row: a second would make
+      // the concealment a second draw inside the first, and the ruling's variety of
+      // concealment (edge (f)) lives ACROSS variants and pools, never inside one variant.
+      refuse(label, `faces ${at.join(' and ')} both mark \`${source}\` \`${COMPROMISED_MARK}\` on one`
+        + ' variant. A source offers ONE compromised candidate per variant (ADDENDUM 18 ruling 26):'
+        + ' the concealment varies across variants and pools, never inside one variant');
+    }
   }
   sources.forEach((source, at) => {
     if (source !== null && !FACE_SOURCES.includes(source)) {

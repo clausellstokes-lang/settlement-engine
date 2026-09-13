@@ -451,6 +451,7 @@ function parseAnnex(src, headerRe, label, options = {}) {
       last.wordings.push(cleanText(row.text));
       last.sources.push(row.source);
       last.pairs.push(row.pair);
+      last.compromised.push(row.compromised === true);
       continue;
     }
 
@@ -507,6 +508,7 @@ function parseAnnex(src, headerRe, label, options = {}) {
           wordings: [],
           sources: [],
           pairs: [],
+          compromised: [],
           text: cleanText(lead ? m[3].slice(lead[0].length) : m[3]),
         });
       }
@@ -528,7 +530,7 @@ function parseAnnex(src, headerRe, label, options = {}) {
       // family, and the few single-state blocks); '*' is its reserved key.
       if (!pool) openPool(SOLE_POOL);
       pool.variants.push({
-        index: 0, angle: 'canonical', marks: [], grammar: null, wordings: [], sources: [], pairs: [], text: cleanText(canonical[2]),
+        index: 0, angle: 'canonical', marks: [], grammar: null, wordings: [], sources: [], pairs: [], compromised: [], text: cleanText(canonical[2]),
       });
       lastIndex = 0;
       continue;
@@ -557,6 +559,7 @@ function parseAnnex(src, headerRe, label, options = {}) {
         wordings: [],
         sources: [],
         pairs: [],
+        compromised: [],
         text: cleanText(variant[4]),
       });
       continue;
@@ -809,6 +812,7 @@ function projectBlocks(blocks, options = {}) {
             faces: v.wordings,
             sources: v.sources,
             pairs: v.pairs,
+            compromised: v.compromised,
             pinnedFaceCount: FACE_PIN,
             shapeOf: meta.shapeOf,
             clauseOpeners: meta.clauseOpeners,
@@ -829,6 +833,10 @@ function projectBlocks(blocks, options = {}) {
         // the stranger's is byte-identical to the leaf before this car.
         ...(v.sources.some((source) => source !== null) ? { sources: [null, ...v.sources] } : {}),
         ...(v.pairs.some((pair) => pair !== null) ? { pairs: [null, ...v.pairs] } : {}),
+        // ⭐ THE COMPROMISED MARKS (car 8b-W-18m), the same shape and the same discipline:
+        // emitted ONLY where a face carries one, so a leaf with no compromised face is
+        // byte-identical and `poolMeta.faceCounts` does not move.
+        ...(v.compromised.some((mark) => mark === true) ? { compromised: [false, ...v.compromised] } : {}),
         ...(v.grammar ? { grammar: v.grammar } : {}),
       }));
       if (meta) {

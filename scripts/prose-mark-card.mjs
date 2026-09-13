@@ -50,6 +50,41 @@ import {
   TIERS, SERVICE_P_BAR, armedForcesFiling, placementClaimsIn, servicesAtOrAboveBar,
 } from './lib/prose-mark-fields.mjs';
 import { buildSiblingPack } from './sibling-string-pack.mjs';
+import { COMPROMISED_SYMPTOM_POOLS } from '../src/domain/display/stateProse/composeStateProse.js';
+import { COMPROMISABLE_SOURCES, COMPROMISED_SPEAKS } from '../src/domain/display/stateProse/stateProseKernel.js';
+
+/**
+ * ⭐ THE COVERT FIELDS, ONE ROW EACH, with the source each compromises and the symptom a
+ * compromised face of that source may conceal (ADDENDUM 18 ruling 26 (g)). The reader of this
+ * table is the REFUTER: a compromised face is judged under the inverted test, and the test is
+ * "does it conceal on THIS symptom and deny nothing else".
+ *
+ * Held to `faceSources.js` `compromisedSourcesOf` by name in the suite — the card describing a
+ * covert field the engine no longer holds would be worse than printing nothing.
+ */
+const COVERT_FIELDS = Object.freeze([
+  Object.freeze({
+    field: 'powerStructure.criminalCaptureState at `corrupted` or `capture`',
+    source: 'hall',
+    symptom: 'THE PURSE AND THE ACCOUNTS — what the hall says the town\'s money does, and who '
+      + 'decides it. DS-DEF-4 says the fact outright ("the hall\'s decisions are not the '
+      + 'hall\'s"), so a hall face on a purse pool may reassure that the accounts are in order '
+      + 'and may deny NOTHING ELSE.',
+  }),
+  Object.freeze({
+    field: 'a bloc carrying `covert: true` (settlementPolitics)',
+    source: 'watch',
+    symptom: 'THE WATCH\'S OWN KEEPING — the circuit, the wage, who is on the walk after dark. '
+      + 'A watch face on an internal-security pool may say the patrol is kept as it has always '
+      + 'been kept, and may deny nothing about the court, the purse or the walls.',
+  }),
+  Object.freeze({
+    field: 'a bloc carrying `covert: true` (settlementPolitics)',
+    source: 'court',
+    symptom: 'WHAT REACHES THE LAW AND WHAT IT DOES WITH IT — a court face on a legal-chain '
+      + 'pool may hold that matters are heard as they should be, and may deny nothing else.',
+  }),
+]);
 
 /** The desk file each block prefix is authored in. */
 export const DESK_FILE_OF = Object.freeze({
@@ -350,7 +385,23 @@ export async function buildCard(block, pool) {
   ];
   const sources = Object.fromEntries(preimageTiers.map((t) => [t, Object.fromEntries(SOURCE_ROWS.map(([name, re]) => [name, required[t].filter((r) => re.test(r.name)).map((r) => r.name)]))]));
 
+  // ⭐⭐ (2c) THE COVERT FIELDS AND THEIR SYMPTOMS (ADDENDUM 18 ruling 26 (g); car 8b-W-18m).
+  // The refuter judges a compromised face under the INVERTED test — it must reassure or
+  // conceal ON THE SYMPTOM OF ITS OWN FIELD and deny nothing else — and that test is
+  // unreadable without knowing which field, which source and which symptom. So the card
+  // prints them per block, from the SAME table the composer draws on, never a second copy:
+  // a symptom pool added to the composer and not to the card is impossible by construction.
+  const covert = COVERT_FIELDS.map((f) => ({
+    ...f,
+    marks: COMPROMISED_SYMPTOM_POOLS
+      .filter((r) => r.block === block && r.source === f.source)
+      .flatMap((r) => [...r.pools]),
+    hereNow: COMPROMISED_SYMPTOM_POOLS
+      .some((r) => r.block === block && r.source === f.source && r.pools.includes(pool)),
+  }));
+
   return {
+    covert,
     block, pool, dir: slug(`${block}-${pool}`), censusRow: { keyFunction: row.keyFunction, rung: row.rung, predicate: row.predicate, sites: row.sites, source: row.source },
     key: { fields: keyFields, preimage: preimage ? { fn: preimage.fn, params: preimage.params, fixed: preimage.fixed, open: preimage.open, combos: preimage.combos.length } : null, byTier, preimageTiers, rateBp: rateRow?.rateBp ?? null, towns: rateRow?.towns ?? null },
     required: Object.fromEntries(preimageTiers.map((t) => [t, required[t]])),
@@ -390,6 +441,22 @@ export function cardLines(c) {
     L.push(`  ${r.name} (required at ${r.at.join(', ')}) — a face may not deny: ${services} · ${filed}`);
   }
   L.push('  ⛔ A SERVICE AT OR ABOVE THE BAR IS A THING THE TOWN\'S OWN MODEL SAYS THIS BODY DOES: denying it is floor 1, whatever the face is otherwise about. A row filed under `standing` is UNDER ARMS in the engine\'s reading even where the key fixes no garrison and no militia.');
+  L.push('');
+  L.push(`(2c) COVERT FIELDS AND THEIR SYMPTOMS ON THIS BLOCK (ADDENDUM 18 ruling 26) — the INVERTED test the refuter judges a \`compromised\` face under`);
+  if (!c.covert || c.covert.every((f) => f.marks.length === 0)) {
+    L.push('    (none: no covert field of the engine marks a symptom pool on this block, so no face of this block may carry the `compromised` tag)');
+  }
+  for (const f of (c.covert || [])) {
+    if (f.marks.length === 0) continue;
+    L.push(`    ${f.source} ← ${f.field}`);
+    L.push(`        SYMPTOM: ${f.symptom}`);
+    L.push(`        marks the pools: ${f.marks.join(' · ')}`);
+    L.push(`        ${f.hereNow ? '⭐ THIS POOL IS ONE OF THEM' : 'this pool is NOT one of them — here the source draws as any source'}`);
+  }
+  L.push(`  ⛔ THE INVERTED TEST. A face tagged \`compromised\` is the ONE place the reassurance tell is the point (ruling 26 (a)), and FLOOR 1 IS RE-POINTED FOR IT ALONE (26 (b)): it may deny the VISIBLE SYMPTOM of the very field it is compromised by, in the direction of CONCEALMENT ONLY. It never denies an unrelated field, never a required row, and never names the covert fact. The archiver reports it as flatly as any account: no wink.`);
+  L.push(`  ⛔ THE CONCEALMENT MUST NOT IDENTIFY (26 (f)): offer more than one shape — dismiss · reassure · minimise · change the subject · blame the source of the talk · say nothing beyond the form. An HONEST source may also reassure truthfully on a small share of honest towns, so a reassurance on the page is a question and never an answer.`);
+  L.push(`  ⛔ AND THE SOURCE IS SILENT SOME OF THE TIME (26 (h)): where a compromised source is present on a marked pool, a roll seeded on the world seed, the pool key, the settlement and the CURRENT YEAR decides whether it speaks (${COMPROMISED_SPEAKS}) or says nothing. Its silence is a behaviour, and the roll decides WHO SPEAKS and never WHAT IS TRUE.`);
+  L.push(`  ⛔ THE TAG IS REFUSED on any source no covert field can compromise; the table is CLOSED: ${COMPROMISABLE_SOURCES.join(' · ')}.`);
   L.push('');
   L.push('  PLACEMENTS A FACE MAY NOT ASSERT — where a body STANDS, stated by the data at some preimage tiers and not others, or stated with a hedge');
   if (c.placementBars.length === 0) L.push('    (none: no required row of this preimage states a placement at all, so a face states none)');

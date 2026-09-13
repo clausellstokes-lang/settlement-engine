@@ -81,6 +81,9 @@ import {
   faceWeigh,
   fillSlots,
   hashKey,
+  compromisedDraw,
+  compromisedSpeaks,
+  eligibleFaces,
   fillRoleSlots,
   joinPairFaces,
   pairJoint,
@@ -447,6 +450,115 @@ function faceRawOf(variant, face) {
 }
 
 /**
+ * ⭐⭐ THE SYMPTOM POOLS (ADDENDUM 18 ruling 26 edge (i), the chair's refinement).
+ *
+ * THE FORCING IS SCOPED, AND THE SCOPE IS THE WHOLE REASON THE ROLL MEANS ANYTHING. A
+ * compromised source is forced only into the units of pools whose SYMPTOM its covert field
+ * marks — one or two on a page. Forced everywhere, the page would print the same voice five
+ * times and the pattern would identify the secret to an attentive reader, which is the defect
+ * edge (f) exists to prevent. On every other pool the compromised source draws as any source.
+ *
+ * ⛔ AN ARRAY OF ROWS, NEVER AN OBJECT KEYED ON A SOURCE WORD: `watch` and `court` are fields
+ * the desks READ and the wiring census reads an object-literal key under `src/domain/**` as a
+ * WRITE of world state. The discipline `faceSources.js` records at its head.
+ *
+ * SMALL AND RECORDED, per the brief. DS-DEF-2 only, because DS-DEF-2 is the only block with a
+ * v3 pool today:
+ *   the HALL's symptom is THE PURSE — the `Economic Survival` rows are where a captured
+ *     council's accounts show, and `Invasion & War: walls with NO force` is where the military
+ *     purse is argued over by name (it is the pool whose pair is about who pays).
+ *   the WATCH's and the COURT's symptom is THE WAY IN AND THE LAW — the `Internal Security`
+ *     rows, where enforcement and the legal chain are the subject.
+ * @type {ReadonlyArray<{block: string, source: string, pools: ReadonlyArray<string>}>}
+ */
+export const COMPROMISED_SYMPTOM_POOLS = Object.freeze([
+  Object.freeze({
+    block: 'DS-DEF-2',
+    source: 'hall',
+    pools: Object.freeze([
+      'Invasion & War: walls with NO force',
+      'Economic Survival: STRONG',
+      'Economic Survival: ADEQUATE',
+      'Economic Survival: WEAK',
+    ]),
+  }),
+  Object.freeze({
+    block: 'DS-DEF-2',
+    source: 'watch',
+    pools: Object.freeze([
+      'Internal Security: full legal chain (court AND prison)',
+      'Internal Security: detention without process',
+      'Internal Security: no legal infrastructure',
+    ]),
+  }),
+  Object.freeze({
+    block: 'DS-DEF-2',
+    source: 'court',
+    pools: Object.freeze([
+      'Internal Security: full legal chain (court AND prison)',
+      'Internal Security: court without detention',
+    ]),
+  }),
+]);
+
+/**
+ * Which compromised source of this town, if any, this pool's SYMPTOM marks. At most one: the
+ * table gives a source at most one row per block, and the first match wins so the page can
+ * never print two forced voices in one unit.
+ * @param {string} blockId
+ * @param {string} poolKey
+ * @param {ReadonlySet<string>|ReadonlyArray<string>|null} compromised
+ * @returns {string|null}
+ */
+function symptomSourceOf(blockId, poolKey, compromised) {
+  if (!compromised) return null;
+  const held = compromised instanceof Set ? compromised : new Set(compromised);
+  if (held.size === 0) return null;
+  for (const row of COMPROMISED_SYMPTOM_POOLS) {
+    if (row.block !== blockId || !held.has(row.source)) continue;
+    if (row.pools.includes(poolKey)) return row.source;
+  }
+  return null;
+}
+
+/**
+ * ⭐⭐ THE FACE DRAW, WITH THE COMPROMISED PATH (ADDENDUM 18 ruling 26; car 8b-W-18m).
+ *
+ * On a pool no covert field marks — which is every pool of every town with no secret, and
+ * every pool but one or two of a town with one — this is `drawFace` and nothing else, so the
+ * whole mechanism is inert wherever the engine holds no secret.
+ *
+ * On a marked pool the year-seeded roll decides. SPEAKS: the compromised source is forced into
+ * the unit and its `compromised` candidate preferred. SILENT: the source is dropped from the
+ * draw entirely and the other sources speak.
+ *
+ * ⛔ THE ROLL DECIDES WHO SPEAKS, NEVER WHAT IS TRUE (ruling 26 edge (j)). It chooses between
+ * two lawful pages and can make no sentence true that was false.
+ * @param {import('./stateProseKernel.js').StateProseVariant} variant
+ * @param {string} blockId
+ * @param {string} poolKey
+ * @param {{seed: string, sources: unknown, compromised?: unknown, settlementId?: unknown,
+ *   year?: unknown}} read
+ * @returns {number}
+ */
+function compromisedFace(variant, blockId, poolKey, read) {
+  const source = symptomSourceOf(blockId, poolKey, /** @type {never} */ (read.compromised));
+  if (source === null) return drawFace(variant, blockId, poolKey, read.seed, read.sources);
+  const speaks = compromisedSpeaks(
+    read.seed, poolKey,
+    typeof read.settlementId === 'string' ? read.settlementId : '',
+    typeof read.year === 'number' || typeof read.year === 'string' ? read.year : 0,
+  );
+  const { eligible, forced } = compromisedDraw(
+    variant, eligibleFaces(variant, /** @type {never} */ (read.sources)), source, speaks,
+  );
+  if (forced !== null) return forced;
+  if (eligible.length === 1) return eligible[0];
+  if (!read.seed) return eligible[0];
+  return eligible[hashKey(`${read.seed}::${blockId}::${poolKey}::w`) % eligible.length];
+}
+
+/**
  * ⭐⭐ ONE FACE'S TEXT WITH ITS ROLE AND VERB SLOTS FILLED (ADDENDUM 18 ruling 25; car
  * 8b-W-18l) — or its raw text unchanged when it names neither, which is every face of the
  * shipped corpus this car does not re-cut, and is why the car moves no byte it did not mean to.
@@ -520,7 +632,7 @@ function drawPiece(block, blockId, poolKey, role, read, typing = {}) {
   const eligible = eligibleVariants(pool, read);
   const variant = drawVariant(eligible, blockId, poolKey, read.seed);
   if (!variant) return null;
-  const face = drawFace(variant, blockId, poolKey, read.seed, read.sources);
+  const face = compromisedFace(variant, blockId, poolKey, read);
   /**
    * ⭐ THE ROLE FILL RUNS FIRST, AND ITS OUTPUT IS THE `raw` EVERY LATER STEP READS (ADDENDUM
    * 18 ruling 25; car 8b-W-18l). Two reasons, both mechanical rather than stylistic:
@@ -994,6 +1106,11 @@ export function composeStateProse(corpus, blockId, options = {}) {
     // this comment names the trap rather than just fixing it.
     roles: rolesMapOf(options.roles),
     printedRoles: options.printedRoles instanceof Set ? options.printedRoles : new Set(),
+    // ⭐ THE COVERT HALF (ADDENDUM 18 ruling 26; car 8b-W-18m). Absent on every read that does
+    // not come from `withFaceSources`, and absent is the honest default: no secret, no forcing.
+    compromised: rosterOf(options.compromised),
+    settlementId: typeof options.settlementId === 'string' ? options.settlementId : '',
+    year: typeof options.year === 'number' || typeof options.year === 'string' ? options.year : 0,
   };
 
   const turn = seatedTurn(block, spineKey, options.turns, read);
@@ -1101,6 +1218,11 @@ export function composeStateProseMount(corpus, blockId, rungs, options = {}) {
     // this comment names the trap rather than just fixing it.
     roles: rolesMapOf(options.roles),
     printedRoles: options.printedRoles instanceof Set ? options.printedRoles : new Set(),
+    // ⭐ THE COVERT HALF (ADDENDUM 18 ruling 26; car 8b-W-18m). Absent on every read that does
+    // not come from `withFaceSources`, and absent is the honest default: no secret, no forcing.
+    compromised: rosterOf(options.compromised),
+    settlementId: typeof options.settlementId === 'string' ? options.settlementId : '',
+    year: typeof options.year === 'number' || typeof options.year === 'string' ? options.year : 0,
   };
 
   const ranked = rows.map((rung, at) => {

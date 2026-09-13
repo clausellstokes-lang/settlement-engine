@@ -1800,18 +1800,21 @@ describe('SEAM car 4 — §2.5\'s grammar, and every refusal it declares', () =>
     const row = '  - `[face]` `[hall]` The hall would like it noted that the circuit is kept.';
     const m = row.match(FACE_ROW_RE);
     expect(m, 'FACE_ROW_RE is unchanged and still takes a tagged row').toBeTruthy();
-    expect(parseFaceRow(m[1], 'x')).toEqual({ text: 'The hall would like it noted that the circuit is kept.', source: 'hall', pair: null });
+    // ⭐ `compromised` JOINS THE PARSED SHAPE AT CAR 8b-W-18m (ADDENDUM 18 ruling 26): a FLAG
+    // rather than a position, false on every row that does not carry the mark — which is every
+    // row of the shipped corpus, so nothing the projector emits moves.
+    expect(parseFaceRow(m[1], 'x')).toEqual({ text: 'The hall would like it noted that the circuit is kept.', source: 'hall', pair: null, compromised: false });
     // A bare face is the stranger's: no tag, no source, no pair — the shape every face had before this car.
-    expect(parseFaceRow('The circuit is kept.', 'x')).toEqual({ text: 'The circuit is kept.', source: null, pair: null });
+    expect(parseFaceRow('The circuit is kept.', 'x')).toEqual({ text: 'The circuit is kept.', source: null, pair: null, compromised: false });
     // The pair, with its KIND (the owner's refinement, 2026-09-13).
     expect(parseFaceRow('`[tavern · pair 1 · disagree]` Nobody stands on it, says the tavern.', 'x'))
-      .toEqual({ text: 'Nobody stands on it, says the tavern.', source: 'tavern', pair: { id: 1, kind: 'disagree' } });
+      .toEqual({ text: 'Nobody stands on it, says the tavern.', source: 'tavern', pair: { id: 1, kind: 'disagree' }, compromised: false });
     for (const kind of PAIR_KINDS.filter((k) => k !== WEIGH_KIND)) {
       expect(parseFaceRow(`\`[watch · pair 3 · ${kind}]\` text`, 'x').pair).toEqual({ id: 3, kind });
     }
     // ⭐ THE FIFTH KIND IS THE ARCHIVER'S AND ONLY THE ARCHIVER'S (car 8b-W-18i).
     expect(parseFaceRow(`\`[${ARCHIVER_SOURCE} · pair 3 · ${WEIGH_KIND}]\` It may be that both are right.`, 'x'))
-      .toEqual({ text: 'It may be that both are right.', source: ARCHIVER_SOURCE, pair: { id: 3, kind: WEIGH_KIND } });
+      .toEqual({ text: 'It may be that both are right.', source: ARCHIVER_SOURCE, pair: { id: 3, kind: WEIGH_KIND }, compromised: false });
     expect(FACE_TAG_RE.test('`[hall]` text')).toBe(true);
     expect(FACE_TAG_RE.test('The hall text')).toBe(false);
     // Every word of the vocabulary parses; the vocabulary is the kernel's, not a copy.

@@ -1092,3 +1092,142 @@ export function fillRoleSlots(text, opts) {
   });
   return refused ? null : out;
 }
+
+/**
+ * ── ⭐⭐ THE COMPROMISED ROLE (ADDENDUM 18 ruling 26, the owner's; car 8b-W-18m) ────────
+ *
+ * THE OWNER'S WORD, 2026-09-13 ~09:4x: *"a special rule if one of the roles is compromised,
+ * that specific role will be the one or one of the two accounts and they would dismiss anything
+ * out of the ordinary or say everything is all right. this would be them being active."*
+ *
+ * Where the engine holds a COVERT FACT that compromises a source — a captured hall, a watch or
+ * court under a covert criminal bloc — the draw on that town FORCES that source into the unit
+ * and prefers its `compromised` candidate: the source dismisses what is out of the ordinary or
+ * says that all is well. The player page never states the compromise; it shows the compromised
+ * power BEHAVING, and the notebook beside it carries the fact.
+ *
+ * ⛔⛔ AND A YEAR-SEEDED ROLL DECIDES **WHO SPEAKS, NEVER WHAT IS TRUE** (ruling 26 edge (j)).
+ * This is the FIRST time-varying draw in the dossier and the principle is written beside it so
+ * no later hand rolls a FACT on the year. The roll chooses between two lawful pages — one where
+ * the compromised source speaks and one where it is silent — and its silence is a behaviour
+ * too. Nothing it decides could make a false sentence true, and nothing downstream of it may
+ * ever be a field, a number or a state. THE PROMISE holds: the same seed and the same year
+ * always give the same page.
+ */
+
+/** The face tag that marks a source's concealing candidate. */
+export const COMPROMISED_MARK = 'compromised';
+
+/**
+ * ⭐ THE CLOSED TABLE OF WHAT CAN BE COMPROMISED (ruling 26 edge (c) and the grammar's refusal).
+ * A `[<source> · compromised]` tag is refused on any source NO covert field of the engine can
+ * compromise, so a writer cannot invent a conspiracy the simulation does not hold:
+ *   hall   a captured council — `powerStructure.criminalCaptureState` at `corrupted` or `capture`
+ *   watch  enforcement under a covert criminal bloc
+ *   court  the law under the same covert bloc
+ * ⛔ THE REGISTER IS NOT HERE, and the omission is the finding rather than an oversight: ruling
+ * 26 names "a register under a cult's hand", and the engine records a creed's settlement
+ * standing (`cult` / `established` / `ascendant`) with NO covert flag anywhere beside it. A
+ * standing is public. Until a field records that a creed's hand on the register is HIDDEN,
+ * admitting `register` here would let a writer tag a conspiracy the engine never held.
+ * Reported OPEN.
+ * @type {ReadonlyArray<string>}
+ */
+export const COMPROMISABLE_SOURCES = Object.freeze(['hall', 'watch', 'court']);
+
+/**
+ * ⭐⭐ `COMPROMISED_SPEAKS` — THE RATE, THE CHAIR'S NUMBER AT THE OWNER'S WORD, VETOABLE.
+ *
+ * The owner: *"make it so that they only do the face 60% of the time if a compromised shows up
+ * … the other 40% they just say nothing"*, then *"you pick the right percentage number then"*.
+ *
+ * THE CHAIR'S REASONING, written here because a constant with no argument beside it is a
+ * constant nobody can veto. The concealment should read as the compromised power's STANDING
+ * POSTURE and the silence as the exception a game master NOTICES. Over a three-year run:
+ *
+ *   rate   falls silent at least once   never speaks at all
+ *   0.6            78 %                       6.4 %
+ *   0.7            66 %                       2.7 %
+ *   0.8            49 %                       0.8 %
+ *
+ * At 0.6 silence is the more common story and the reassurance is too intermittent to read as a
+ * posture. At 0.8 half of all three-year runs never show the silence at all, so the behaviour
+ * the owner asked for is invisible to most tables. 0.7 keeps the concealment the norm (seven
+ * runs in ten speak every year of the three) while still showing the silence to two thirds of
+ * three-year runs. The owner's to tune: change this line and nothing else.
+ * @type {number}
+ */
+export const COMPROMISED_SPEAKS = 0.7;
+
+/**
+ * ⭐ THE SPEAKS-OR-SILENT ROLL, seeded on (world seed, pool key, settlement, CURRENT YEAR).
+ *
+ * Re-rolled at generation and at every advance of time, and never drifting on a re-read of the
+ * same year — which is what makes the silence a behaviour rather than a flicker. The year is
+ * the LAST component on purpose: two adjacent years of one town are two unrelated draws rather
+ * than two neighbouring ones, because `hashKey` avalanches the whole string.
+ *
+ * ⛔ IT DECIDES WHO SPEAKS AND NEVER WHAT IS TRUE. See the section head.
+ * @param {string} seed the world seed
+ * @param {string} poolKey
+ * @param {string} settlementId
+ * @param {string|number} year the current year the render sees
+ * @param {number} [rate] the speak share; `COMPROMISED_SPEAKS` unless a caller is measuring
+ * @returns {boolean} true when the compromised source speaks this year
+ */
+export function compromisedSpeaks(seed, poolKey, settlementId, year, rate = COMPROMISED_SPEAKS) {
+  const key = `${seed}::${poolKey}::${settlementId}::${year}::compromised`;
+  // The hash is a uint32; the share is its position in that range, so the rate is exact to
+  // one part in 2^32 rather than to the eight buckets a modulus would give.
+  return hashKey(key) / 4294967296 < rate;
+}
+
+/**
+ * The index of a variant's `compromised` face for one source, or `null`. A variant carries at
+ * most ONE per source (the grammar refuses a second), so the first match is the only match.
+ * @param {StateProseVariant|null|undefined} variant
+ * @param {string} source
+ * @returns {number|null}
+ */
+export function compromisedFaceOf(variant, source) {
+  const marks = variant ? variant.compromised : undefined;
+  if (!Array.isArray(marks)) return null;
+  for (let face = 0; face < marks.length; face += 1) {
+    if (marks[face] === true && faceSourceOf(variant, face) === source) return face;
+  }
+  return null;
+}
+
+/**
+ * ⭐⭐ THE COMPROMISED DRAW (ruling 26 edges (h) and (i)).
+ *
+ * On a pool whose SYMPTOM the covert field marks, and only there:
+ *   · the roll says SPEAK → the compromised source is FORCED into the unit, and its
+ *     `compromised` candidate is preferred over its ordinary face;
+ *   · the roll says SILENT → that source is dropped from the unit's draw entirely, and the
+ *     other sources speak. Its silence is the behaviour.
+ * On every other pool the compromised source draws as any source: this function is not called.
+ *
+ * ⛔ THE FORCING NEVER EMPTIES THE DRAW. If excluding the silent source would leave nothing
+ * eligible, the eligible list comes back untouched — a silence that blanked the rung would be
+ * the covert fact deciding whether the town has a defense section, which is exactly the kind
+ * of leak ruling 26 (a) forbids.
+ *
+ * @param {StateProseVariant|null|undefined} variant
+ * @param {ReadonlyArray<number>} eligible the faces this town could draw
+ * @param {string} source the compromised source on this town
+ * @param {boolean} speaks the roll
+ * @returns {{eligible: number[], forced: number|null}}
+ */
+export function compromisedDraw(variant, eligible, source, speaks) {
+  const all = Array.isArray(eligible) ? [...eligible] : [];
+  if (!variant || typeof source !== 'string' || source === '') return { eligible: all, forced: null };
+  if (speaks) {
+    const marked = compromisedFaceOf(variant, source);
+    if (marked !== null && all.includes(marked)) return { eligible: all, forced: marked };
+    const ordinary = all.filter((face) => faceSourceOf(variant, face) === source);
+    return { eligible: all, forced: ordinary.length > 0 ? ordinary[0] : null };
+  }
+  const without = all.filter((face) => faceSourceOf(variant, face) !== source);
+  return { eligible: without.length > 0 ? without : all, forced: null };
+}

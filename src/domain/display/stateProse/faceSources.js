@@ -62,7 +62,7 @@ import { nativeSemanticName } from '../../content/customContentSemanticAuthority
 import {
   INSTITUTION_ROLES, ROSTER_OFFICE_TITLES, SOURCE_FALLBACK_ROLES,
 } from '../../../data/institutionRoles.js';
-import { FACE_SOURCES, UNIVERSAL_SOURCE } from './stateProseKernel.js';
+import { COMPROMISABLE_SOURCES, FACE_SOURCES, UNIVERSAL_SOURCE } from './stateProseKernel.js';
 
 /** The sources that resolve on every town, whatever it holds. */
 export const ALWAYS_SOURCES = Object.freeze([UNIVERSAL_SOURCE]);
@@ -261,6 +261,89 @@ export function rolesOf(settlement) {
 }
 
 /**
+ * ⭐⭐ WHICH OF THIS TOWN'S SOURCES THE ENGINE HOLDS A SECRET ABOUT (ADDENDUM 18 ruling 26;
+ * car 8b-W-18m).
+ *
+ * A source is COMPROMISED where a COVERT FIELD of the simulation puts it under somebody else's
+ * hand. The page never says so; the draw makes that source speak, and what it says is its own
+ * concealment (`compromisedDraw` in the kernel). This function is the ONE reader of which
+ * covert fields exist, and it reads the settlement and nothing else.
+ *
+ * ── THE COVERT FIELDS, EACH NAMED WITH WHAT IT COMPROMISES ──────────────────────────
+ *   `powerStructure.criminalCaptureState` at `corrupted` or `capture` → the HALL.
+ *     The producer's own five-state ladder (`defenseStateProse.js` CRIMINAL_CAPTURE_POOL, and
+ *     DS-DEF-4's own pools say it in words: at `corrupted` "the hall's decisions are not the
+ *     hall's"). The two lower rungs are NOT covert — `adversarial` is an open fight and
+ *     `equilibrium` an open accommodation — so they compromise nothing.
+ *   a bloc carrying `covert: true` → the WATCH and the COURT.
+ *     `settlementPolitics`'s covert bloc, the same field `powerStateProse.js` reads at its
+ *     presence lens (`blocs.some((b) => b?.covert === true)`). A conspiracy that has not been
+ *     dragged into the light holds enforcement and law before it holds anything else.
+ *
+ * ⛔ TWO THINGS RULING 26 NAMES THAT THE ENGINE DOES NOT RECORD, omitted and reported OPEN:
+ *   THE UNEXPOSED OFFICER. The roster's `Corrupt Official` is a role the dossier PRINTS, on
+ *     the `occupied` and `insurgency` stresses — a public fact, not a covert one. There is no
+ *     field anywhere that records an officer whose corruption is still hidden.
+ *   THE CULT'S HAND ON THE REGISTER. A creed's settlement standing is recorded (`cult` /
+ *     `established` / `ascendant`) and it is PUBLIC: no covert flag stands beside it. Until a
+ *     field records that the hand is hidden, `register` is not compromisable — and the
+ *     kernel's `COMPROMISABLE_SOURCES` refuses the tag on it, so a writer cannot tag a
+ *     conspiracy the simulation never held.
+ *
+ * ⚠ AND THE FIELDS ARE WORLD-PULSE FIELDS, measured rather than assumed: over forty freshly
+ * generated towns `criminalCaptureState` is `none` on all forty, and no fresh settlement
+ * carries `blocs` at all. The mechanism is therefore INERT on a fresh generation and lights
+ * only on a world that has been advanced — which is the same shape as every other pulse field
+ * the desks read, and is why the suite drives it on a settlement whose fields are set by hand.
+ *
+ * ⛔ A `Set` BUILT WITH `add` ON STRING LITERALS, never an object keyed on a source word: the
+ * wiring census would read `watch` and `court` as WRITES of world state. The discipline this
+ * file keeps throughout.
+ *
+ * @param {{powerStructure?: unknown, [key: string]: unknown}|null|undefined} settlement
+ * @returns {Set<string>} a subset of the kernel's `COMPROMISABLE_SOURCES`
+ */
+export function compromisedSourcesOf(settlement) {
+  /** @type {Set<string>} */
+  const out = new Set();
+  if (!settlement || typeof settlement !== 'object') return out;
+  const power = /** @type {Record<string, unknown>} */ (settlement.powerStructure) || {};
+  const capture = typeof power.criminalCaptureState === 'string' ? power.criminalCaptureState : '';
+  if (capture === 'corrupted' || capture === 'capture') out.add('hall');
+  const blocs = Array.isArray(power.blocs) ? power.blocs : [];
+  if (blocs.some((bloc) => bloc && typeof bloc === 'object' && bloc.covert === true)) {
+    out.add('watch');
+    out.add('court');
+  }
+  // The closed table is the kernel's; a word added above and not there is a defect this line
+  // makes loud in the suite rather than silent on the page.
+  for (const word of out) if (!COMPROMISABLE_SOURCES.includes(word)) out.delete(word);
+  return out;
+}
+
+/**
+ * ⭐ THE YEAR THE RENDER SEES (ADDENDUM 18 ruling 26 edge (h)).
+ *
+ * ⛔ THE FINDING, RECORDED BECAUSE THE BRIEF ASKED WHERE THE YEAR IS AND THE ANSWER IS "NOWHERE
+ * OBVIOUS". `/usr/bin/grep -rn "currentYear" src` returns NOTHING: no field of that name exists
+ * anywhere in the tree, and the composer and the composed walker carry no time at all. The one
+ * time quantity the display path can reach on the settlement itself is `history.age` — the
+ * town's own recorded count of years, which ADVANCES when the world advances and is CONSTANT on
+ * a re-read of the same year. That is exactly the two properties ruling 26 (h) asks of the
+ * roll's year component, so it is the year, and this is a chair's judgment: vetoable, and
+ * replaced by one line the day a `currentYear` exists.
+ * @param {{history?: unknown, [key: string]: unknown}|null|undefined} settlement
+ * @returns {number}
+ */
+export function renderYearOf(settlement) {
+  const history = settlement && typeof settlement === 'object'
+    ? /** @type {Record<string, unknown>} */ (settlement.history) : null;
+  const age = history && typeof history.age === 'number' && Number.isFinite(history.age)
+    ? history.age : 0;
+  return age;
+}
+
+/**
  * ⭐ THE DESK'S ONE LINE. Every exported entry point of the six desks takes `(settlement, …,
  * options)` and spreads `options` into each composer call; this puts the town's roster on it
  * ONCE per entry, and leaves a roster the caller already supplied untouched — so an outer
@@ -292,6 +375,13 @@ export function withFaceSources(settlement, options) {
       // ⭐ ONE EXCLUSION SET PER DESK ENTRY (ruling 25 edge (e)): the composer adds each role
       // it prints, and the draw skips what is already in it until the roster is exhausted.
       printedRoles: given.printedRoles instanceof Set ? given.printedRoles : new Set(),
+      // ⭐ THE COVERT HALF (ruling 26; car 8b-W-18m): which sources the engine holds a secret
+      // about, the settlement's id and the year the roll turns on. All three ride here for the
+      // same reason the roster does — the composer may not read a settlement.
+      compromised: compromisedSourcesOf(settlement),
+      settlementId: settlement && typeof settlement === 'object'
+        ? String(settlement.id ?? settlement._seed ?? '') : '',
+      year: renderYearOf(settlement),
     })
   );
 }
