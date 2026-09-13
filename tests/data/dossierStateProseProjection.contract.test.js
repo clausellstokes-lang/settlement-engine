@@ -1931,12 +1931,49 @@ describe('SEAM car 4 — §2.5\'s grammar, and every refusal it declares', () =>
     expect(() => assertFaces({ ...lawful, pinnedFaceCount: 3 })).toThrow(/against a pin of 3/);
   });
 
-  it('the shipped leaves carry no `sources` and no `pairs` on any variant — the zero-shift ground of car 8b-W-18c', () => {
-    const carrying = allStateBlocks.flatMap(([id, b]) => Object.entries(b.pools)
-      .flatMap(([pool, variants]) => variants.map((v, at) => ({ id, pool, at, v }))))
+  // ⭐ THE ZERO-SHIFT GROUND OF CAR 8b-W-18c HAS BEEN LAWFULLY ENDED BY THE FIRST v3 POOL, and
+  // the arm is re-pinned rather than deleted: `DS-DEF-2 :: Invasion & War: walls with NO force`
+  // is the ONE pool that ships sourced faces today, its roster is named here face by face, and
+  // EVERY OTHER BLOCK still carries no `sources` and no `pairs` at all. A second pool landing
+  // faces reds this arm by name and is re-pinned in its own cure commit, exactly as the shift
+  // register's `face-count-per-variant` row is.
+  const SOURCED_TODAY = Object.freeze({
+    'DS-DEF-2 :: Invasion & War: walls with NO force #0': {
+      sources: [null, 'elders', 'hall', 'guild'],
+      pairs: [null, null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }],
+    },
+    'DS-DEF-2 :: Invasion & War: walls with NO force #1': {
+      sources: [null, 'stranger', 'tavern', 'gate'],
+      pairs: undefined,
+    },
+    'DS-DEF-2 :: Invasion & War: walls with NO force #2': {
+      sources: [null, 'elders', 'watch', 'court'],
+      pairs: undefined,
+    },
+  });
+
+  it('⭐ exactly ONE pool ships `sources`/`pairs` — DS-DEF-2, named face by face; every other block is still the zero-shift ground of car 8b-W-18c', () => {
+    const rows = allStateBlocks.flatMap(([id, b]) => Object.entries(b.pools)
+      .flatMap(([pool, variants]) => variants.map((v, at) => ({ key: `${id} :: ${pool} #${at}`, id, v }))))
+      .filter(({ v }) => v.sources !== undefined || v.pairs !== undefined);
+    // The roster, exactly: no more variants carry a face than these, and no fewer.
+    expect(rows.map((r) => r.key).sort()).toEqual(Object.keys(SOURCED_TODAY).sort());
+    for (const row of rows) {
+      expect(row.v.sources, `${row.key} sources`).toEqual(SOURCED_TODAY[row.key].sources);
+      expect(row.v.pairs, `${row.key} pairs`).toEqual(SOURCED_TODAY[row.key].pairs);
+    }
+    // THE ZERO-SHIFT ARM THAT SURVIVES: every block but DS-DEF-2 carries nothing at all.
+    const elsewhere = allStateBlocks.filter(([id]) => id !== 'DS-DEF-2')
+      .flatMap(([id, b]) => Object.entries(b.pools)
+        .flatMap(([pool, variants]) => variants.map((v, at) => ({ id, pool, at, v }))))
       .filter(({ v }) => v.sources !== undefined || v.pairs !== undefined)
       .map(({ id, pool, at }) => `${id} :: ${pool} #${at}`);
-    expect(carrying).toEqual([]);
+    expect(elsewhere).toEqual([]);
+    // And the counts the shift register's `face-count-per-variant` row now pins: 9 sourced
+    // faces over 3 variants, and ONE pair carried by exactly two of them.
+    const sourced = rows.reduce((n, r) => n + (r.v.sources || []).filter((x) => x !== null).length, 0);
+    const paired = rows.reduce((n, r) => n + (r.v.pairs || []).filter((x) => x !== null).length, 0);
+    expect([rows.length, sourced, paired]).toEqual([3, 9, 2]);
   });
 
   it('PLANT: a RENUMBERING that would move an existing vid, and a count above its pin', () => {

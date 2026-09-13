@@ -30,14 +30,14 @@
     {
       "id": "face-count-per-variant",
       "mechanism": "the number of wording faces a variant carries, which is the modulus of the face draw on the `::w` suffix key",
-      "shift": "1 — the REWRITE + FACES freeze (cars 8a-8n), one owner re-record amended per sub-car",
+      "shift": "1 — the REWRITE + FACES freeze (cars 8a-8n), one owner re-record amended per sub-car. ⭐ 8b DS-DEF-2 (the first v3 pool to ship): THE GROW IS DECLARED AND ONE-TIME-PER-POOL. `DS-DEF-2 :: Invasion & War: walls with NO force` is the first pool whose three variants carry wording faces at all, so its faceCounts row moves 1,1,1 → 4,4,4: the corpus sum rises 2266 → 2275 (+9, three faces on each of three variants), the largest entry anywhere rises 1 → 4, and the per-pool digest moves with them. THIS IS A GROW AND ONLY A GROW — no pool falls, so the FACE-COUNT RATCHET beside this row is untouched, and every other one of the 707 pools still measures 1. Each later v3 pool amends these three pins in ITS OWN cure commit, by the idiom below.",
       "door": "the projection contract, against poolMeta.faceCounts — the FACE-COUNT RATCHET (REWRITE car 8a-7; SITTING §T.4 adopting agenda C′; Part B §22 d) sits beside the variant ratchet in the same file and reds on any FALL, estate-wide and per pool",
       "idiom": "a declared sub-car; after the freeze a new wording goes in a NEW KEY and never in an existing set (read-specs S9). The seven `canonical` rows keep ONE face by refusal (P-F6) and are NAMED one by one in the contract test, derived as the pools whose vid list contains 0. A per-pool floor ABOVE a pool's own variant count is a DECLARED ROW in `floors` below, written in the same commit as the growth and SHRINK-ONLY: a floor may be added or raised and never lowered.",
       "floors": {},
       "pin": [
-        { "kind": "integer", "over": "the sum of every faceCounts entry over all 708 pools", "value": 2266 },
-        { "kind": "integer", "over": "the largest faceCounts entry anywhere in the corpus", "value": 1 },
-        { "kind": "digest", "algo": "sha256", "over": "poolMeta.faceCounts per pool, joined by commas", "value": "0fa317c13a7610e23ae250994e5dea69ef29be857417b5b2aca7a70936bda366" }
+        { "kind": "integer", "over": "the sum of every faceCounts entry over all 708 pools", "value": 2275 },
+        { "kind": "integer", "over": "the largest faceCounts entry anywhere in the corpus", "value": 4 },
+        { "kind": "digest", "algo": "sha256", "over": "poolMeta.faceCounts per pool, joined by commas", "value": "e7ed66962b713592aa012812b30d985d282707a68eef72f342934cfc9601ab4b" }
       ]
     },
     {

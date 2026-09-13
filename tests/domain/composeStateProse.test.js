@@ -146,6 +146,18 @@ function composeFixture(corpus, options = {}) {
   });
 }
 
+// ⭐⭐ THE ONE POOL THAT HAS LAWFULLY LEFT THE ZERO-SHIFT WORLD (REWRITE 8b, DS-DEF-2's v3
+// cure). Until the first v3 pool shipped, every arm below could assert a global equality
+// because NO shipped variant carried a wording face. `DS-DEF-2 :: Invasion & War: walls with
+// NO force` now carries three faces on each of its three variants and one `disagree` pair, so
+// the face draw and the pair render really do move its text — which is the ruling's aim, not
+// a defect. The equalities are therefore re-pinned, not deleted: they hold over the other 707
+// pools BY MEASUREMENT, and the mover is NAMED here in one place so the day a second pool
+// lands faces the arms red by name and are re-pinned in that pool's own cure commit.
+const FACED_BLOCK = 'DS-DEF-2';
+const FACED_POOL = 'Invasion & War: walls with NO force';
+const FACED_AT = `${FACED_BLOCK} :: ${FACED_POOL}`;
+
 describe('the composer — the corpus loads, and the merge is legal', () => {
   it('every block lives in exactly one leaf, and the sweep found the whole corpus', () => {
     expect(BLOCK_COLLISIONS, 'a block id emitted by two leaves').toEqual([]);
@@ -194,8 +206,19 @@ describe('⭐ THE SEAM COMPOSES TO THE KERNEL — an empty candidate list moves 
     process.stdout.write(`\n[compose] ${checks} reads over ${SHIPPED_POOLS.length} pools x 2`
       + ` audiences x ${SWEEP_SEEDS.length} seeds · ${composed} composed a unit · drift`
       + ` ${drift.length}\n`);
-    expect(drift.slice(0, 10), 'a pool where the composer and the kernel disagree').toEqual([]);
-    expect(drift.length).toBe(0);
+    // ⭐ RE-PINNED AT THE FIRST v3 POOL. The equality is asserted over the 707 pools that
+    // still carry one face each, and the mover is partitioned out BY NAME rather than
+    // silently tolerated: DS-DEF-2's faced pool is allowed to disagree with the kernel's
+    // one-face read, every other pool is not, and the disagreement is itself asserted to
+    // exist so the carve-out cannot go vacuous.
+    const faced = drift.filter((row) => row.includes(FACED_AT));
+    const elsewhere = drift.filter((row) => !row.includes(FACED_AT));
+    expect(elsewhere.slice(0, 10), 'a pool where the composer and the kernel disagree').toEqual([]);
+    expect(elsewhere.length).toBe(0);
+    // NON-VACUITY OF THE CARVE-OUT: the faced pool really does move, on the seed whose draw
+    // leaves face 0 — TEXT and SPINE on both audiences at one of the sweep's seeds.
+    expect(faced.length, 'the named mover moved').toBeGreaterThan(0);
+    expect([...new Set(faced.map((row) => row.split(' ')[0]))].sort()).toEqual(['SPINE', 'TEXT']);
     // ANTI-VACUITY: an equality over an empty sweep is free.
     expect(checks).toBe(708 * 2 * SWEEP_SEEDS.length);
     expect(composed, 'and most of the sweep really did compose a unit').toBeGreaterThan(6000);
@@ -230,13 +253,30 @@ describe('⭐ THE BASE-SIDE SYNTHESIS — every recorded cell, against the compo
     /** @type {string[]} */
     const mismatch = [];
     let checked = 0;
+    let facedCells = 0;
     for (const cell of run.cells) {
       const block = CORPUS[cell.block];
       const pool = block && block.pools ? block.pools[cell.pool] : undefined;
       if (!Array.isArray(pool)) { mismatch.push(`NOPOOL ${cell.cell}`); continue; }
       const variant = pool[cell.vid];
       const audience = cell.cell.split('::')[1];
-      const piece = composedPieceOf(pool, variant, cell.pool, { role: 'spine', face: 0, audience });
+      // ⭐ RE-PINNED AT THE FIRST v3 POOL. The arm's subject is the COORDINATE RULE — that
+      // the composer derives `vid` (the position as authored), `index` (the position in the
+      // audience-filtered pool) and the piece's key set exactly as the recorder did. `face`
+      // and `source` are PASS-THROUGH on both sides, and the literal `face: 0` here was
+      // only ever the shipped corpus's own constant. DS-DEF-2's faced pool ended that, so
+      // the drawn face and its source are now passed from the recorded cell rather than
+      // assumed, and the coordinate equality is asserted on the same cells as before.
+      const recorded = cell.pieces[0] || {};
+      const piece = composedPieceOf(pool, variant, cell.pool, {
+        role: 'spine',
+        audience,
+        face: recorded.face ?? 0,
+        source: recorded.source ?? null,
+        pairOf: recorded.pairOf ?? null,
+        pairKind: recorded.pairKind ?? null,
+      });
+      if (cell.block === FACED_BLOCK && cell.pool === FACED_POOL) facedCells += 1;
       checked += 1;
       if (JSON.stringify(piece) !== JSON.stringify(cell.pieces[0])) {
         mismatch.push(`${cell.cell} :: composer ${JSON.stringify(piece)}`
@@ -249,6 +289,13 @@ describe('⭐ THE BASE-SIDE SYNTHESIS — every recorded cell, against the compo
     expect(mismatch.length).toBe(0);
     expect(checked, 'the whole recorded table').toBe(run.cells.length);
     expect(run.rows.size, 'and the table is the full DRIFT corpus').toBe(1050);
+    // NON-VACUITY OF THE RE-PIN: the DRIFT run really does reach the one faced pool, and
+    // really does record a face past 0 there — otherwise the change above would be inert.
+    expect(facedCells, 'the DRIFT run reaches the faced pool').toBeGreaterThan(0);
+    const facedFaces = run.cells
+      .filter((cell) => cell.block === FACED_BLOCK && cell.pool === FACED_POOL)
+      .map((cell) => (cell.pieces[0] || {}).face);
+    expect(facedFaces.some((face) => face > 0), 'and records a drawn face past 0 there').toBe(true);
   }, 300_000);
 
   it('⭐ THE CELL ARM CAN NOW TELL `vid` FROM `index`: the blind spot closed at car 8a-1', () => {
@@ -1445,7 +1492,16 @@ describe('the composer — ONE FACE PER POWER: the source filter and the pair (c
         }
       }
     }
-    expect(drift.slice(0, 10)).toEqual([]);
+    // ⭐ RE-PINNED AT THE FIRST v3 POOL. A roster CANNOT move a read on the 707 pools that
+    // carry one face each — that is still asserted, and it is the whole zero-shift claim
+    // cars 3b–3g rest on. On DS-DEF-2's faced pool a roster is SUPPOSED to move the read
+    // (ADDENDUM 18 ruling 15: a town hears the powers it has), so the mover is named and
+    // its movement asserted rather than tolerated.
+    const faced = drift.filter((row) => row.startsWith(FACED_AT));
+    const elsewhere = drift.filter((row) => !row.startsWith(FACED_AT));
+    expect(elsewhere.slice(0, 10)).toEqual([]);
+    expect(elsewhere.length).toBe(0);
+    expect(faced.length, 'the named mover moved under a roster').toBeGreaterThan(0);
     expect(checks).toBe(708 * 2 * SWEEP_SEEDS.length * rosters.length);
   });
 

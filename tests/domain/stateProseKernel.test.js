@@ -555,30 +555,60 @@ describe('the state-prose reader — the wording face (ARCH §2.6)', () => {
     }
   });
 
-  it('⭐ THE WHOLE SHIPPED CORPUS TAKES NO HASH, and the corpus is read live', () => {
-    // The claim car 3a rests on: today the composer's face draw is byte-identical BY
-    // CONSTRUCTION, because no variant that ships carries a `wordings` list. Measured over
-    // the live leaves rather than a fixture, so the day the rewrite wave banks a face this
-    // arm moves with it instead of describing a corpus that no longer exists.
+  it('⭐ THE SHIPPED CORPUS TAKES NO HASH EXCEPT ON THE ONE v3 POOL, and the corpus is read live', () => {
+    // The claim car 3a rested on: the composer's face draw was byte-identical BY CONSTRUCTION,
+    // because no variant that shipped carried a `wordings` list. THE FIRST v3 POOL HAS ENDED
+    // THAT LAWFULLY, so the arm is re-pinned rather than deleted: `DS-DEF-2 :: Invasion & War:
+    // walls with NO force` is the ONE pool with faces today — three variants, three wordings
+    // each — and it is NAMED. Everything else still takes no hash and still draws face 0.
+    // Measured over the live leaves, so a second pool landing faces reds here by name.
+    const FACED_TODAY = ['DS-DEF-2 :: Invasion & War: walls with NO force #0',
+      'DS-DEF-2 :: Invasion & War: walls with NO force #1',
+      'DS-DEF-2 :: Invasion & War: walls with NO force #2'];
     const withWordings = SHIPPED_POOLS
       .flatMap(({ desk, blockId, poolKey, pool }) => pool
         .map((variant, at) => ({ desk, blockId, poolKey, at, variant }))
         .filter((row) => Array.isArray(row.variant.wordings)))
-      .map((row) => `${row.desk} :: ${row.blockId} :: ${row.poolKey} #${row.at}`);
-    expect(withWordings.slice(0, 5), 'a shipped variant carrying faces').toEqual([]);
+      .map((row) => `${row.blockId} :: ${row.poolKey} #${row.at}`);
+    expect(withWordings.sort(), 'the shipped variants carrying faces').toEqual(FACED_TODAY);
     expect(SHIPPED_POOLS.length, 'and the sweep found the corpus').toBeGreaterThanOrEqual(700);
     const spy = vi.spyOn(Math, 'imul');
     let faces = 0;
     let nonZero = 0;
+    let hashedRows = 0;
     try {
       for (const row of SHIPPED_POOLS) {
-        for (const variant of row.pool) {
+        for (let at = 0; at < row.pool.length; at += 1) {
+          const variant = row.pool[at];
           faces += 1;
-          if (drawFace(variant, row.blockId, row.poolKey, 'corpus-probe') !== 0) nonZero += 1;
+          const faced = Array.isArray(variant.wordings);
+          if (faced) hashedRows += 1;
+          const before = spy.mock.calls.length;
+          const drawn = drawFace(variant, row.blockId, row.poolKey, 'corpus-probe');
+          const hashed = spy.mock.calls.length > before;
+          if (!faced) {
+            if (drawn !== 0) nonZero += 1;
+            expect(hashed, `${row.blockId} :: ${row.poolKey} #${at} took the hash with one face`).toBe(false);
+            continue;
+          }
+          // THE ONE POOL THAT CAN HASH. With NO roster the read is the stranger alone
+          // (floor 1 fail-closed), so a variant whose faces are all seated — #0 and #2 —
+          // still short-circuits on one eligible face; #1 carries the universal `stranger`
+          // and folds. The hash is taken exactly when the eligible list has more than one
+          // member, and never otherwise: that equality IS the arm.
+          expect(hashed, `${row.blockId} :: ${row.poolKey} #${at} on no roster`)
+            .toBe(eligibleFaces(variant, undefined).length > 1);
+          // And on the full roster all four faces are eligible, so the fold must run and
+          // the draw must land inside the list. This is what proves the spy is awake.
+          const rostered = spy.mock.calls.length;
+          const full = drawFace(variant, row.blockId, row.poolKey, 'corpus-probe', new Set(FACE_SOURCES));
+          expect(spy.mock.calls.length > rostered, `${row.blockId} #${at} did NOT fold on the full roster`).toBe(true);
+          expect(full).toBeGreaterThanOrEqual(0);
+          expect(full).toBeLessThanOrEqual(variant.wordings.length);
         }
       }
-      expect(nonZero, 'every shipped variant draws face 0').toBe(0);
-      expect(spy.mock.calls.length, 'and not one of them touched the hash pair').toBe(0);
+      expect(nonZero, 'every shipped variant with ONE face draws face 0').toBe(0);
+      expect(hashedRows, 'and exactly three variants ship more than one face').toBe(3);
     } finally {
       spy.mockRestore();
     }
@@ -1353,22 +1383,49 @@ describe('the state-prose reader — ONE FACE PER POWER: the source filter and t
     expect(faceWeigh(null, 0)).toBe(null);
   });
 
-  it('⭐ THE SHIPPED CORPUS CARRIES NO SOURCED FACE AND NO PAIR — the zero-shift ground, read live', () => {
-    const sourced = LIVE_POOLS
+  it('⭐ ONE SHIPPED POOL CARRIES SOURCED FACES AND ONE PAIR, and every other block is still the zero-shift ground — read live', () => {
+    // Re-pinned at the first v3 pool: the corpus is no longer sourceless, so the arm names
+    // the ONE pool that is and holds the old ground over everything else. A second pool
+    // landing faces reds here by name and is re-pinned in its own cure commit.
+    const SOURCED_TODAY = ['DS-DEF-2 :: Invasion & War: walls with NO force #0',
+      'DS-DEF-2 :: Invasion & War: walls with NO force #1',
+      'DS-DEF-2 :: Invasion & War: walls with NO force #2'];
+    const rows = LIVE_POOLS
       .flatMap(({ blockId, poolKey, pool }) => pool.map((v, at) => ({ blockId, poolKey, at, v })))
-      .filter(({ v }) => Array.isArray(v.sources) || Array.isArray(v.pairs))
-      .map(({ blockId, poolKey, at }) => `${blockId} :: ${poolKey} #${at}`);
-    expect(sourced.slice(0, 5), 'a shipped variant carrying a source or a pair list').toEqual([]);
+      .filter(({ v }) => Array.isArray(v.sources) || Array.isArray(v.pairs));
+    expect(rows.map(({ blockId, poolKey, at }) => `${blockId} :: ${poolKey} #${at}`).sort())
+      .toEqual(SOURCED_TODAY);
     expect(LIVE_POOLS.length).toBeGreaterThanOrEqual(700);
-    // And so every shipped variant's eligible list is [0] whatever the roster.
+    // The roster face by face, and the one pair carried by exactly two faces of variant #0.
+    expect(rows.map(({ v }) => v.sources)).toEqual([
+      [null, 'elders', 'hall', 'guild'],
+      [null, 'stranger', 'tavern', 'gate'],
+      [null, 'elders', 'watch', 'court'],
+    ]);
+    expect(rows.map(({ v }) => v.pairs)).toEqual([
+      [null, null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }],
+      undefined, undefined,
+    ]);
+    // THE ZERO-SHIFT ARM THAT SURVIVES: every OTHER shipped variant's eligible list is [0]
+    // whatever the roster, so no roster can move a single read outside DS-DEF-2.
     let checked = 0;
-    for (const { pool } of LIVE_POOLS) {
+    let sourcedChecked = 0;
+    for (const { blockId, pool } of LIVE_POOLS) {
       for (const v of pool) {
         checked += 1;
+        if (blockId === 'DS-DEF-2' && Array.isArray(v.sources)) {
+          sourcedChecked += 1;
+          // On the sourced pool the roster DOES decide: no roster is the stranger alone
+          // (floor 1 fail-closed), the full roster admits every face.
+          expect(eligibleFaces(v, new Set(FACE_SOURCES))).toEqual([0, 1, 2, 3]);
+          expect(eligibleFaces(v, undefined).length).toBeLessThanOrEqual(4);
+          continue;
+        }
         expect(eligibleFaces(v, undefined)).toEqual([0]);
         expect(eligibleFaces(v, new Set(FACE_SOURCES))).toEqual([0]);
       }
     }
+    expect(sourcedChecked, 'the three sourced variants were reached').toBe(3);
     expect(checked).toBeGreaterThanOrEqual(2266);
   });
 });
