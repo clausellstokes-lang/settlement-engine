@@ -1,19 +1,15 @@
-# LANE-STATUS — written 2026-09-13 19:22:58 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-13 19:28:13 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = c2b72466a Plan: wave 3 has begun — batch 2 of DS-DEF-2 (three pools) through draft 065b9ded6 and c
 
 ## BUILD / KIT LANES (dock · base · cars · porcelain · receipt)
 - REWRITE 8b DS-DEF-11 (the validation block; cure round): dock laneRW-DEF11 ABSENT
 - REWRITE 8b-W (the wiring car, landed in its dock = the consist lineage): dock laneRW-DEFW ABSENT
-- **DS-DEF-2 (waits for the tables)** dock `laneRW-DEF2` HEAD a921d54b4 · 45 cars over f2da5a3ee · porcelain 3 · last commits:
+- **DS-DEF-2 (waits for the tables)** dock `laneRW-DEF2` HEAD 4884e5ccb · 46 cars over f2da5a3ee · porcelain 0 · last commits:
+    4884e5ccb DARK POOLS 2/5: DS-GEN-18 HOME-FED — the docblock specified the canonical token and the code case-folded, so two resource vocabularies never met on any of 768 towns
     a921d54b4 DARK POOLS 1/5: the two DS-POW-2 share pools were dark to READERS, not just to the instrument — the lens asked a TOTAL predicate before a SELECTIVE one
     507ff2637 REWRITE 8b DS-DEF-2 draft (v3): 6/6 pools
     49183bafe INSTRUMENT DEBT 4/4: two line-number addresses cured (one of them was a FALSE GREEN), two live counts fenced shrink-only
-    850a5f0a9 INSTRUMENT DEBT 3/4: the settlement-only census falls to 21 because {defmaterial} landed — re-recorded as a CEILING, with the block named
-    porcelain (uncommitted work in the dock — commit it FIRST after re-proving):
-       M docs/content/wiring-census.json
-       M src/domain/display/stateProse/generalStateProse.js
-       M tests/domain/generalStateProseDesk.test.js
     receipt `receipt-rewrite.md` (mtime 09-12 20:49) head:
       | # RECEIPT — the REWRITE train
       | 
@@ -130,9 +126,9 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `ac602f570` REFUTER Invasion & War: militia only · DONE · transcript 09-13 19:16 900 KB · 39 tool calls · files: rows.txt, shipped.md, "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasion-war-militia-only/refute.md · result: {"dir": "ds-def-2--invasion-war-militia-only", "verdicts": [{"variant": 1, "face": 0, "verdict": "PASS", "floor": "\u2014", "field": "key fixes walls=false/garr
     - `a5f31fb6b` REFUTER Invasion & War: neither walls nor force · DONE · transcript 09-13 19:16 854 KB · 16 tool calls · files: $D/refute.md, pool.txt · result: {"craft": {"verdict": "DULL", "speakers": 9, "collapse": "The pool reads as one sentence twelve times: [a source] says [a thing], and [a thing that is not there
     - `a3f0fbe40` CURER Beasts & Monsters: plagued, perimeter AND organized force · IN FLIGHT · transcript 09-13 19:21 494 KB · 9 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
-    - `ac88f4bc6` CURER Beasts & Monsters: plagued, NO perimeter and NO force · IN FLIGHT · transcript 09-13 19:22 656 KB · 23 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `ac88f4bc6` CURER Beasts & Monsters: plagued, NO perimeter and NO force · IN FLIGHT · transcript 09-13 19:23 670 KB · 25 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
     - `a7ae5fc74` CURER Beasts & Monsters: settled, defenses beyond the need · IN FLIGHT · transcript 09-13 19:21 638 KB · 17 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
-    - `ae0315d93` CURER Beasts & Monsters: settled, nothing organized · IN FLIGHT · transcript 09-13 19:22 591 KB · 20 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `ae0315d93` CURER Beasts & Monsters: settled, nothing organized · IN FLIGHT · transcript 09-13 19:26 701 KB · 22 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
     - `a0ab562ba` CURER Invasion & War: militia only · IN FLIGHT · transcript 09-13 19:21 577 KB · 15 tool calls · last: Bash cat "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scr
     - `a9936dd02` CURER Invasion & War: neither walls nor force · IN FLIGHT · transcript 09-13 19:21 572 KB · 14 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
 - **wf_9121cfb9-53a** (mtime 09-13 16:08): agent calls 61 (61 distinct) · DONE 49 · FAILED (not retried) 12 · RETRIED (superseded attempts) 0 · IN FLIGHT 0 — mirror `_progress/wf_9121cfb9-53a/`
@@ -271,4 +267,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `ab8783d22` WRITER Invasion & War: walls with NO force · DONE · transcript 09-13 02:30 725 KB · 17 tool calls · files: candidates-2.md, facetext.txt, ft2.txt · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasio
 
 ## PROCESSES: 
-load: 4.95 3.35 3.04
+load: 2.60 2.80 2.87
