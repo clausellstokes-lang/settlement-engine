@@ -18,6 +18,27 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-09-13 — CAR 8b-W-18e: A POWER EXISTS ONLY WHERE AN INSTITUTION CAN REPRESENT IT (brief
+ *   ADDENDUM 18 ruling 16, the owner 2026-09-13 ~02:0x; §919.6). 525 OF 525 ROWS MOVED, predicted
+ *   and held through the signed door (docs/shift-records/2026-09-13-power-backing-ruling-16.json).
+ *   Two causes, both declared: (i) every standing power is now minted only where an institution
+ *   ROW of the live roster represents it (src/domain/factionBacking.js) — on the 768-town rate
+ *   grid 532 towns lose a faction (Merchant Guilds 219, Noble Families 121, Landed Gentry 88,
+ *   Manor Household 64, Military/Guard 58, Noble Houses 28, Arcane Orders 26, Thieves' Guild 1),
+ *   and the freed points renormalise across the rest; (ii) every stress-minted faction is stamped
+ *   `crisis: true`, and every row of this corpus carries a stress, so the stamp alone moves the
+ *   rows the gate did not. Re-recorded at the clean tip d8a77df97 (the door refuses a dirty tree,
+ *   so the re-record is the commit AFTER the car, not the car's own).
+ *   ⚠ THE FIRST GENERATOR-GOLDEN SHIFT SINCE THE SIGNED DOOR LANDED, AND THE REGISTER IS STILL
+ *   UNFROZEN. The bytes below WERE produced through tests/helpers/goldenRecordDoor.js (form
+ *   verified, 525 rows predicted and held, all-or-none), but the walker's unfrozen law forbids
+ *   what the door also writes — a measured register value and a signed record under
+ *   docs/shift-records/ — until the TE-GOLDEN-1 freeze act cuts the genesis record. So the
+ *   register was restored to its unfrozen state and the signed record withdrawn to the car's
+ *   packet (its text is in the commit body); this header row is the record, exactly as every
+ *   pre-door re-record above was recorded. The chair's call at the freeze act: cut this shift's
+ *   record then, or veto this commit and hold the golden red until genesis.
+ *
  * 2026-09-02 — T13 TRANS: THE CROSS-ENGINE TRANSCENDENTAL RETIREMENT (ODQ §883; the §879.11
  *   REC's declared-shift window). ZERO ROWS OF 525 MOVED IN THIS MANIFEST — it is NOT
  *   re-recorded, and this block is the trace that a re-record which never happened must
