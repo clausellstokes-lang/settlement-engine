@@ -1,15 +1,23 @@
-# LANE-STATUS — written 2026-09-12 21:33:28 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-12 21:38:45 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = b32e2cc28 Plan: Wave 0 shipped (§919.6 b9c3fe322); the sitting sealed; wave 1 the machinery re-cut 
 
 ## BUILD / KIT LANES (dock · base · cars · porcelain · receipt)
 - REWRITE 8b DS-DEF-11 (the validation block; cure round): dock laneRW-DEF11 ABSENT
 - REWRITE 8b-W (the wiring car, landed in its dock = the consist lineage): dock laneRW-DEFW ABSENT
-- **DS-DEF-2 (waits for the tables)** dock `laneRW-DEF2` HEAD a3e877e6e · 8 cars over f2da5a3ee · porcelain 0 · last commits:
+- **DS-DEF-2 (waits for the tables)** dock `laneRW-DEF2` HEAD a3e877e6e · 8 cars over f2da5a3ee · porcelain 7 · last commits:
     a3e877e6e REWRITE 8b DS-DEF-2 draft round 1: THREE FIGURES IN 8e549c4a6's message CORRECTED
     8e549c4a6 REWRITE 8b DS-DEF-2 draft round 1: 10/26
     f20532e18 REWRITE 8b DS-DEF-2: the licence-test rewrite is reverted to the shipped rows, and the re-cut starts from the original
     1afa97391 REWRITE 8b: the licence card stops teaching the struck law (brief ADDENDUM 14/16)
+    porcelain (uncommitted work in the dock — commit it FIRST after re-proving):
+       M scripts/lib/dossier-annex-grammar.mjs
+       M scripts/prose-wave-gate.mjs
+       M src/domain/display/stateProse/stateProseKernel.js
+       M src/domain/prose/composedWalker.js
+       M tests/data/dossierStateProseProjection.contract.test.js
+       M tests/lint/proseComposed.walker.test.js
+       M tests/lint/proseWaveGate.walker.test.js
     receipt `receipt-rewrite.md` (mtime 09-12 20:49) head:
       | # RECEIPT — the REWRITE train
       | 
@@ -504,4 +512,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `ad30ac0bb` FOLDER · DONE · transcript 09-11 06:02 1531 KB · 36 tool calls · files: _partD.md, _partE.md, _partF.md, _partG.md · result: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/entailment/ENTAILMENT-TABLE.draft.md
 
 ## PROCESSES: 
-load: 2.08 2.67 2.77
+load: 1.39 2.01 2.43
