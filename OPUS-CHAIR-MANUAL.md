@@ -152,6 +152,9 @@ One block, one dock, one run. Phases in order; every phase's outputs are FILES (
 - Opus MARKS (`markModel`) · writer 1 OPUS under lens 1 and writer 2 FABLE under lens 2 (`WRITER_MODELS`, override with `args.writerModels`) · FABLE SELECTS (`selectModel`) · Opus REFUTES and CURES (`refuteModel`, `cureModel`; the 09-11 word). The selector's NOTES carry a 'SEATS:' tally per pool — read it after every pool and keep the running count in the note.
 - Flip rules (the chair's, recorded): Fable wins the shared lens two to one across two consecutive pools → set both writers to fable; the weekly limit within a day → both writers opus, Fable keeps the selector only. Any other change to the seats is a Fable sitting's (7.2).
 
+### 6.5c The face-count register is HAND-EDITED (learned 2026-09-13 12:3x)
+- `docs/content/prose-shift-register.json` row `face-count-per-variant` has NO `--write` path: the contract test `tests/data/dossierStateProseProjection.contract.test.js` recomputes the three values (sum · largest · digest) and reds when they differ. When a landed pool lawfully moves them, edit the row by hand to the test's printed values, put the grow in the row's `shift` field, and DECLARE it in the commit body. A v3 gate that lands sourced faces without doing this leaves the dock red for every later car (it happened at `569e01793`; cured at `95760e212`).
+
 ### 6.6 When a workflow returns an error or an empty result
 - Read `<transcript dir>/journal.jsonl` before diagnosing: the `result` lines are the truth; a `failed` line names the cause ("You've hit your session limit · resets …" = the window; a stream event shows as "[Request interrupted by user]" in the agent transcript with an immediate retry on the same key).
 - A guard's throw ("… INCOMPLETE … resume by run id") is a clean stop: resume (6.4 or 6.5). A cascade (later phases failed on empty results) means an old script; check `grep -c "throw new Error" rewrite-block-v2.workflow.js` ≥ 13.
