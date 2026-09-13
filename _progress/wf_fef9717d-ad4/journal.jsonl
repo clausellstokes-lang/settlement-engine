@@ -1,2 +1,4 @@
 {"type":"launched"}
 {"type":"started","key":"v2:d4238616720eac688b4dca0a1dcb4c34da0c227fd38d7270bd4a05ca6216f3f8","agentId":"ae1e5e82c71a95ada","label":"DS-DEF-2:select:ds-def-2--invasion-war-walls-with-no-force","phase":"Draft"}
+{"type":"result","key":"v2:d4238616720eac688b4dca0a1dcb4c34da0c227fd38d7270bd4a05ca6216f3f8","agentId":"ae1e5e82c71a95ada","result":{"dir":"/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasion-war-walls-with-no-force","path":"/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasion-war-walls-with-no-force/draft.md","speakers":8,"settlementUnits":1,"worthKeeping":12}}
+{"type":"started","key":"v2:a6af954781db76d0beee2b38653d4dbb68e772399ccc76fc81d64ee3d880aff8","agentId":"afe1e560d019b7611","label":"DS-DEF-2:gate:draft","phase":"Draft"}
