@@ -1746,6 +1746,43 @@ describe('SEAM car 4 — §2.5\'s grammar, and every refusal it declares', () =>
     expect(() => assertFaces({ ...frag, faces: ['and thin'] })).toThrow(/a word of a clause list/);
   });
 
+  it('⭐ THE FACE PIN IS DERIVED FROM THE SOURCE VOCABULARY, so the ceiling and the powers cannot drift apart (car 8b-W-18j)', () => {
+    // ⛔ WHY A SOURCE SCAN AND NOT AN IMPORT. `scripts/generate-dossier-state-prose.mjs` is a
+    // top-level script with no exports and no main guard: importing it to read `FACE_PIN`
+    // would run the whole projection inside a unit test. The estate's own idiom for a
+    // constant that lives in a script is therefore the scan (the `kind: source` pins on the
+    // shift register, and the GRAMMAR_TAG_RE arm above), and the arm below drives the real
+    // mechanism — `assertFaces` at the derived pin — so the scan is not the only proof.
+    const src = readFileSync(resolve(ROOT, 'scripts/generate-dossier-state-prose.mjs'), 'utf8');
+    expect(src, 'the pin is the spine plus one face per power, spelled as a derivation')
+      .toContain('const FACE_PIN = 1 + FACE_SOURCES.length;');
+    expect(src, 'and the vocabulary comes from the kernel, not a copy in the script')
+      .toContain("import { FACE_SOURCES } from '../src/domain/display/stateProse/stateProseKernel.js';");
+    // ⛔ THE NEGATIVE HALF: a literal would pass the `toContain` above if somebody added one
+    // beside the derivation, so the numeric spelling is refused by name.
+    expect(src.match(/const FACE_PIN\s*=\s*\d+\s*;/), 'no numeric literal ceiling survives').toBe(null);
+    // THE MECHANISM, DRIVEN. At the derived pin a variant may carry one face per power and
+    // exactly one more is refused — which is what "a ceiling that binds" means.
+    const pin = 1 + FACE_SOURCES.length;
+    const base = {
+      label: 'j',
+      parent: { angle: 'plain', text: 'the muster is thin', slots: [] },
+      faces: [],
+      pinnedFaceCount: pin,
+      shapeOf: () => 'bare-common',
+      clauseOpeners: ['and', 'so'],
+      form: 'sentence',
+    };
+    const faces = (n) => Array.from({ length: n }, (_, i) => `the muster is thin, reading ${'x'.repeat(i + 1)}`);
+    expect(() => assertFaces({ ...base, faces: faces(pin - 1) }), 'one face per power fits under the spine').not.toThrow();
+    expect(() => assertFaces({ ...base, faces: faces(pin) })).toThrow(new RegExp(`against a pin of ${pin}`));
+    // ⛔ AND IT IS A CEILING, NOT A FLOOR: every pool the corpus ships stands well under it,
+    // which is the whole zero-shift argument for this car.
+    const counts = allStateBlocks.flatMap(([, b]) => Object.values(b.pools).flat())
+      .map((v) => 1 + (v.wordings ? v.wordings.length : 0));
+    expect(Math.max(...counts), 'the largest face count in the shipped corpus').toBeLessThanOrEqual(pin);
+  });
+
   it('⭐ ONE FACE PER POWER — the source tag parses, is stripped from the text, and an unknown source is refused NAMING the vocabulary (ADDENDUM 18 ruling 15; car 8b-W-18c)', () => {
     // The row shape, end to end: FACE_ROW_RE takes the row, parseFaceRow the rest.
     const row = '  - `[face]` `[hall]` The hall would like it noted that the circuit is kept.';

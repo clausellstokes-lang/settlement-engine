@@ -35,6 +35,7 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import url from 'node:url';
 import { ECONOMY_FRESHNESS_SENTENCES } from '../src/domain/display/economyFreshness.js';
+import { FACE_SOURCES } from '../src/domain/display/stateProse/stateProseKernel.js';
 import { isCovertPath } from '../src/domain/prose/wiringCensus.js';
 import { parseSlotShapes, mergeSlotShapes, assertSlotShapesTotal } from './lib/dossier-slot-shapes.mjs';
 import {
@@ -708,10 +709,32 @@ function assertSectionTargets(blocks, label) {
 }
 
 /**
- * THE MAXIMUM FACES A VARIANT MAY CARRY (ARCH §2.6). One today on every row; four after
- * Shift 1, and the seven `canonical` rows keep one by refusal.
+ * ⭐ THE MAXIMUM FACES A VARIANT MAY CARRY — A CEILING THAT BINDS, DERIVED FROM THE SOURCE
+ * VOCABULARY (ARCH §2.6; REWRITE car 8b-W-18j, ADDENDUM 18 ruling 21 reconciliation 2).
+ *
+ * WHY IT IS NO LONGER THE LITERAL FOUR. Under ruling 15 a pool carries ONE FACE PER SEATED
+ * SOURCE, and the town decides how many sources are seated, not the annex. Measured on the
+ * first pool of the re-cut (DS-DEF-2, 'Invasion & War: walls with NO force'): the marker's
+ * card seated TEN sources on the preimage and the selector could slot nine — and the
+ * REGISTER and the MARKET were dropped by this pin, at four, rather than on quality. A
+ * ceiling that silently decides which powers may speak is a taste verdict wearing a
+ * mechanism's coat, and ADDENDUM 18 ruling 1 puts taste at the pool grain and nowhere else.
+ *
+ * WHY IT IS DERIVED AND NOT A BIGGER LITERAL. `1 + FACE_SOURCES.length` is the spine plus one
+ * face per power the kernel's CLOSED vocabulary names, which is exactly the most a lawful
+ * variant can ever carry: a pair is two POWERS (`assertFaces`), so no source speaks twice.
+ * Spelling a number here would let the two drift the first time the vocabulary grows — and it
+ * grows in the very next car (8b-W-18i adds the archiver's `weigh` token), which this
+ * derivation absorbs with no edit. The contract test pins the derivation, not the number.
+ *
+ * ⛔ IT IS A CEILING AND NEVER A FLOOR. Reconciliation 2 of §10: "the old four faces per
+ * variant is not a floor anywhere in the grammar". Every pool in the corpus today stands at
+ * or under four, so raising the ceiling moves no byte of any leaf — proved by `--check` and
+ * an empty `git diff --stat src/data/dossierStateProse/`. The FACE-COUNT RATCHET on the shift
+ * register pins the corpus's OWN counts (sum 2,266, largest 1) and not this constant, so a
+ * raise here is not a re-freeze there.
  */
-const FACE_PIN = 4;
+const FACE_PIN = 1 + FACE_SOURCES.length;
 
 /**
  * A modifier's DERIVED attach set (ARCH §2.5, E-F1): every RESOLVED spine of THIS block whose
