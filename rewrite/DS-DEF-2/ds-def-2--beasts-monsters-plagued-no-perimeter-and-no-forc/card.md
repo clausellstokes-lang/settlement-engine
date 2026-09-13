@@ -611,3 +611,303 @@ THE CARD (mechanical sections) — block DS-DEF-2 · pool `Beasts & Monsters: pl
 
 (7) THE UNIVERSAL SOURCES the required rows seat at each preimage tier (the marker adds the interests and the named offices)
   the key on the force buckets and the gates: watch: OPEN · garrison: OPEN · militia: OPEN · mercenary: OPEN · charter: OPEN · gates: OPEN
+
+  ── THE MARKER'S READING OF (1)–(6), BEFORE THE SPEAKERS ──────────────────────────────
+
+  ⭐⭐ THE INSTRUMENT PRINTED SECTION (2) EMPTY, AND THAT IS THE MOST DANGEROUS LINE ON THIS
+  CARD. It is empty because the preimage measured NULL on the 768-town rate grid, so the tool
+  had no tier to list required rows for. It is NOT empty because this key seats no required
+  rows. The marker derived the preimage by hand from the catalogue, executed:
+
+    institutionalCatalog required:true, by tier (executed against the dock's own module)
+      thorp   (5)  Burial ground · Dwellings (4-16) · Water source · Access to external mill
+                   · Subsistence farming
+      hamlet  (7)  + Access to parish church ("Walk 2-5km to village church") · Common grazing land
+      village (7)  Parish church · Priest (resident) · Graveyard · Mill · Farmland
+                   · Multiple water sources · Dwellings (80-180)
+      town   (13)  Town granary · Market square · Weekly market · Craft guilds (5-15)
+                   · Inn (multiple) · Taverns (5-20) · Mills (2-5) · Parish churches (2-5)
+                   · Parish burial grounds · ⛔ TOWN WATCH · ⛔ TOWN HALL
+                   · Housing (180-1000) · Multiple water sources
+      city   (14)  ⛔ CITY WALLS AND GATES · ⛔ PROFESSIONAL CITY WATCH · ⛔ GARRISON
+                   · City granaries · Multiple market squares · Daily markets · Warehouse
+                   district · Inns and taverns (district) · Parish churches (10-30) · Burial
+                   grounds and charnel house · City hall · Multiple courthouses · Housing
+                   (1000-5000) · Aqueduct or water system
+      metropolis   MERGES THE CITY CATALOGUE (`assembleInstitutions.js:244`
+                   `mergeCatalogs(catalog['city'], catalog['metropolis'])`) + Cemetery network
+
+  ⇒ THE PREIMAGE, DERIVED: **thorp · hamlet · village · town at birth.** `City walls and gates`
+    sits in the `walls` bucket and `Garrison` in the `garrison` bucket, both `required: true`,
+    so the key's `perimeter=false, force=false` CANNOT hold at city or metropolis at birth.
+    Those two tiers enter the preimage ONLY through a post-generation removal from the LIVE
+    roster — calamity (`calamityKernel.js`) or razing (`razingExecution.js`); the purse closure
+    is exempt for `City walls and gates` (F4-01's rider). The key reads
+    `standingDefenseForces` off `liveInstitutions`, which filters ruined rows, while §V.0
+    floor 1 holds the INSTITUTION roster (the printed one, ruin stamps and all) closed to the
+    keys. ⛔ SO ON A RUINED CITY THE PAGE STILL PRINTS A Garrison ROW AND A City walls ROW, as
+    ruined: a face that says the town never had soldiers, or has no wall at all, contradicts a
+    printed row there. Write the absence as an absence of a STANDING force, never as an absence
+    of a HISTORY or a FABRIC.
+
+  ⛔⛔ AND AT TOWN THE KEY IS SILENT ABOUT A BODY THE CATALOGUE REQUIRES. `Town watch` is
+    `required: true` at town and sits in the `watch` bucket ONLY — `defenseInstitutionBuckets.js`
+    watch keywords are 'town watch' / 'city watch' / 'professional city watch'; the garrison
+    keywords are 'garrison' / 'barracks' / 'professional guard' / 'professional city watch' /
+    'multiple garrison' and the militia keywords 'citizen militia' / 'militia'. A Town watch
+    therefore matches NEITHER force bucket, and `force = garrison || militia`
+    (`defenseStateProse.js:712`). ⇒ **A TOWN DRAWING THIS KEY HAS A REQUIRED TOWN WATCH AND A
+    REQUIRED TOWN HALL.** "Nobody is set up to answer", "no one keeps any kind of guard",
+    "nothing in the town begins with it" is FLOOR 1 at town — the sitting's own named failure
+    mode, FLOOR 1 BY INFERENCE, walked into on this exact key.
+
+  ⚠ THE SAME ROW CARRIES ITS OWN TENSION: `Town watch` is described "Part-time guards. Night
+    patrol and **gate duty**" (`institutionalCatalog.js:1348-1354`) on a town this key fixes as
+    gateless. Do not repeat the engine's seam as if it were a fact; do not build a face on gate
+    duty here.
+
+  ⭐ THE KEY'S OWN DENIALS, EXACT. `perimeter` is the `walls` bucket, whose keywords are
+    'wall' · 'citadel' · 'palisade' · 'earthwork' · 'inner citadel' · 'massive walls'. So the
+    key denies a wall, a palisade, an earthwork, a citadel, any ring or line around the town.
+    `hasGates` (`priorityHelpers.js:53`) fires on 'gates' / 'town walls' / 'city walls' /
+    'massive walls' / 'palisade' — with the walls bucket empty it is FALSE, so **THERE IS NO
+    GATE AND NO TOLL-BAR ON THIS POOL**, and `safetyProfile.js:463-464` will print "no gates to
+    bribe and no checkpoints to avoid" wherever smuggling is seated. `force` denies a garrison,
+    a barracks, a professional guard and a citizen militia. It denies NOTHING ELSE: the
+    **watch**, the **mercenary** and the **charter** buckets are OPEN (F4-18 is DS-DEF-5's key,
+    not this one — it does not reach here).
+
+  ⭐ THE MUSTER IS UNRESOLVED ON EVERY TOWN OF THIS POOL. `holderTable.js` HOLDER_RECORDS: the
+    `muster` kind's ONLY service is `Muster training` and its only institution is `Citizen
+    militia`. The key fixes militia FALSE ⇒ **no muster roll may ever be cited here** (F1-24).
+    The `toll-bar` kind's holders are `Gates (if walled)` · `Major Port` · `Town council` — the
+    gate is denied by the key, so a toll book resolves only through a port or a town council.
+    The `parish` kind's holders are `Parish burial grounds` · `Cemetery network` · `Parish
+    church`: NO parish register at thorp or hamlet (the hamlet's church is 2-5 km away —
+    V-29's last case, F1-11).
+
+  ⛔ AND THE POOL CARRIED NO CITATION. The three shipped spines (`f2da5a3ee`) name no record at
+    all. Under the citation rule — never spend a citation the pool did not already carry — **NO
+    NAMED RECORD MAY BE WRITTEN ON THIS POOL.** Every account names its source through a ROLE.
+
+  ⭐ FLOOR 2's LICENCE HERE IS WIDE. `config.monsterThreat` is FROZEN (writers 0, section 6) and
+    the three bucket reads are the KEY'S OWN READS (ruling 11a: a face is drawn only while its
+    key holds). So the perfect and the durative are LICENSED over the plagued country and over
+    the absence of a wall and a force: "no soldier of the town's own has stood between the
+    houses and the country" is lawful. `safetyLabel`, `scores.military`, `scores.monster`,
+    `guardEffectivenessDesc`, `economicGates.military`, `stress`, `compound.inst.*` are ALL
+    FROZEN too (section 6) — the durative reaches them. The LIVE fields are the roster buckets
+    themselves (38 writers), `name` (201), and `defenseProfile` / `scores` / `scores.disaster`
+    (1 each, `foodStockpile.js:471-473`).
+
+────────────────────────────────────────────────────────────────────────────────────────
+(7) THE SOURCES — WHO CAN SPEAK ON EVERY TOWN THIS POOL DRAWS, AND WHAT EACH WANTS
+────────────────────────────────────────────────────────────────────────────────────────
+
+⭐ UNIVERSAL — present on every town of the derived preimage (thorp · hamlet · village · town,
+and on the ruin-only city), so a face built on one of these draws safely anywhere:
+
+  1. THE STRANGER / A TRAVELLER — seated by nothing, denied by nothing; the brief seats a
+     stranger always. INTEREST: what is visible on arrival. On this key what is visible is that
+     there is no edge — no line, no bar, no one to be stopped by. A stranger is the only source
+     who can say what the town has stopped noticing, and the only one with somewhere else to
+     go. Stake: they intend to leave, and the leaving is the fact.
+
+  2. THE TOWN'S PEOPLE AS A WHOLE (`[public]`, ruling 28; kept under NOTES until car 18n) —
+     owed to no power. INTEREST: what everyone saw at once and nobody disputes. Here that is
+     the plain fact that nothing stands between the houses and the country, and the town's
+     shared reading of it — which may be mistaken about MEANING and never about the thing seen.
+     Plural roles only: 'the townsfolk', 'anyone here'.
+
+  3. THE ARCHIVER (the joins, the bare recorded facts, the notebook, and at most one
+     `[archiver · observed]` face per variant, kept under NOTES until car 18n). Temperament
+     from the card's print; default exact.
+
+  4. WHOEVER SAYS THE WORDS OVER THE DEAD — ⭐ THE ONE ROSTER ROW REQUIRED AT EVERY TIER OF THE
+     PREIMAGE: `Burial ground` (thorp, hamlet) → `Graveyard` (village) → `Parish burial grounds`
+     (town) → `Burial grounds and charnel house` (city). At thorp the row's own description
+     says no clergy lives near enough, "so the words are said by whoever knew the dead best" —
+     which is why the SPEAKER is a role and never an office. INTEREST: this source counts what
+     the country takes, and is the only universal source with a number it may not speak (F2-01
+     bars the count; the source may carry the grievance without it). Say 'whoever tends the
+     burial ground', 'those who dig', 'a local who says the words' — NEVER 'the sexton' below
+     town (that word belongs to the register, which the hamlet and thorp do not hold).
+
+  5. THE HOUSEHOLDS — `Dwellings (4-16)` / `(17-80)` / `(80-180)` / `Housing (180-1000)` is
+     required at every tier. INTEREST: with no perimeter the outermost houses ARE the edge, and
+     the engine says so in its own words beside the prose (`threatAssessment.js:64` "Creatures
+     that get past initial response reach homes directly"). A household speaks for its own door
+     and for nobody else's. Plural, unnamed, no office.
+
+  6. THE WATER — `Water source` / `Multiple water sources` / `Aqueduct` required at every tier.
+     INTEREST: at thorp and hamlet it is a well or a spring and the walk to it is outside
+     whatever the houses make; the source who fetches has a stake in the hour they go.
+
+⚠ CONDITIONAL — present only on some towns of the preimage. A face built on one of these is an
+invention on the tiers that lack it (a face draws on every town of the preimage):
+
+  · THE HALL, or a clerk in the hall — TOWN and above (`Town hall` / `City hall` required at
+    town+; at thorp and hamlet the governing institution is a CONSENSUS and not a room, F1-20).
+    INTEREST: the purse. ONE military purse pays the wall's keeping and the wage together
+    (`defenseGenerator.js:177-192`, `milUpkeepMult = min(1, 0.6 + econOutput/50 × 0.4)`), and on
+    this key the wall half of that purse buys nothing, because there is no wall. The hall
+    defends what it spends instead on. Say 'the hall' or 'a clerk in the hall' — never 'the
+    clerk', never 'the mayor'. ⚠ THE HALL IS NOT COMPROMISED ON THIS POOL: section (2c) marks
+    the hall's covert symptom on four pools and names this one as NOT among them, so no
+    `[compromised]` candidate is offered here for any source. The table is closed — hall, watch,
+    court — and none of the three is marked for this key.
+  · THE WATCH — TOWN and above ONLY (`Town watch` required at town; NO watch row exists below
+    town, so any watch as a body below town contradicts `hasWatch` false — V-23, F1-01).
+    INTEREST: it is the ONLY body under this key that is paid, and it is paid out of BOTH purses
+    (F4-19: `hasAnyDefense` counts `hasWatch`; `fieldSynonyms.js:51` "the town's pay for its
+    watch"; the order purse at `:244-253` pays "watch wages"). It is PART-TIME by the row's own
+    words and may never be written as professional, full-time, or soldiers (F1-27). Its
+    grievance is the obvious one: it is asked to be a perimeter it is not.
+  · THE TAVERN — TOWN and above (`Taverns (5-20)`, `Inn (multiple)` required at town).
+    INTEREST: the safety label and the stress at hand; who turns out, and who does not.
+  · THE GUILDS, or a guild's factor — TOWN and above (`Craft guilds (5-15)` required at town).
+    INTEREST: what the absence of an edge costs them in goods moved, and what they decline to
+    pay toward.
+  · THE REGISTER / THE SEXTON — VILLAGE and above (`Parish church` + `Priest (resident)` +
+    `Graveyard` at village; `Parish churches (2-5)` + `Parish burial grounds` at town). NOT at
+    hamlet (the church is 2-5 km off) and NOT at thorp.
+  · THE ELDERS — BELOW TOWN, and at village through `Village elder` / `Village headman`
+    (`holderTable.js` elders kind). INTEREST: the record of custom; what was done before anyone
+    asked whether it worked.
+  · THE MARKET / THE GRANARY — TOWN and above only (F1-09: no granary row below town; F1-10:
+    the market class admits a Black market or an Annual fair, so the roster names which).
+  · THE MILL — at thorp and hamlet the row is `Access to external mill`, "must travel to the
+    manor mill": the mill is OUTSIDE the settlement. At village and above it stands in it.
+  · THE CHARTER HALL / SPECIALIST RECOURSE — OPEN, never guaranteed, and it FLIPS THE MACHINE
+    SENTENCE BESIDE THE FACE (`threatAssessment.js:64` with a charter hall, `:70` without).
+    ⚠ `hasCharterHall` also fires on a `Hireling hall` (`priorityHelpers.js`), which the
+    catalogue calls a job board for torchbearers and porters (F1-05).
+
+⛔ NEVER A SPEAKER ON THIS POOL:
+  · THE MUSTER — the key fixes militia false; the muster kind has one holder and it is the
+    `Citizen militia` (F1-03, F1-24).
+  · THE GARRISON — the key fixes it false (F1-02); a `Barracks` would have set it.
+  · WHOEVER HOLDS THE WAY THROUGH — there is no gate. `hasGates` is false with the walls bucket
+    empty, so the gate, the bar, the checkpoint and the toll book are all unseated (F1-08, and
+    its DENIAL direction is equally barred where a custom row seats one — F1-30).
+  · THE CROWN'S ASSESSOR — no typed collector exists in the engine.
+  · THE MERCENARY COMPANY as a body unless the roster prints one (F1-05).
+
+⛔ THE NAMED OFFICES A SPEAKER MUST NEVER BE (`npcGenerator.js:1511-1537`, over the preimage's
+tiers) — each of these is a generated NPC on the next tab with a personality, a disposition and
+a secret, and F3-06 bars an unnamed person acting in the singular office:
+      thorp      Elder · (a derived second role)
+      hamlet     Elder · Parish Priest
+      village    Mayor · Guard Captain
+      town       Mayor · Guard Captain · High Priest
+      city       Mayor · Guard Captain · High Priest · Wealthiest Merchant
+      metropolis Governor · City Watch Chief · High Priest · Guild Archmage · Wealthiest Merchant
+  ⛔⛔ THE TRAP THIS KEY SETS: **a village and a town emit a GUARD CAPTAIN as a mandatory NPC
+  while carrying no garrison and no militia at all.** So "there is nobody here whose job this
+  is" is floor 1 from the NPC roster at village and above, quite apart from the Town watch.
+  ⛔ STRESS ADDS MORE (`STRESS_MANDATORY_ROLES`): `monster_pressure` → Garrison Commander +
+  Retired Adventurer; `plague_onset` → Healer + Parish Priest; `famine` → Healer + Guild Master;
+  `occupied` / `insurgency` → Corrupt Official. `stress` is in the same-page read set and the
+  key does not fix it, so a face must hold at any value it admits.
+
+────────────────────────────────────────────────────────────────────────────────────────
+(8) WHAT WOULD BE FALSE
+────────────────────────────────────────────────────────────────────────────────────────
+
+The rows of the CONTRADICTION TABLE this key can actually walk into, each with the field that
+denies the sentence. Read `plagued` first: **F4-05** — `plagued` is MONSTER activity and never
+disease (`monsterThreat.js:28`; `SummaryTab.jsx:28`, `:37` print "plagued by MONSTER activity";
+disease is the separate `plague_onset` stress, `stressTypes.js:84-92`), and the same page can
+print "The constant monster threat keeps the guard exceptionally well-drilled and alert"
+(`safetyProfile.js:276`, firing at `Very Safe` on `threat === 'plagued'` with `lawRef` falling
+through to "law enforcement" where no body is seated), so a cowed, sickened or shut-up town is
+refused at any value `safetyLabel` admits — and `safetyLabel` is in the read set at `Very Safe`,
+where the same producer prints "Visitors can move freely at all hours", which is the sharpest
+same-page trap on this pool and kills every face built on a town that does not move after dark.
+The key's own denials give **F1-07** (a wall, a circuit, a perimeter, a line, a palisade, an
+earthwork, a citadel — `walls` bucket empty), **F1-08** (a gate, a checkpoint, a toll-bar, *and
+the denial of one* — `hasGates` false, `safetyProfile.js:463-464` prints the engine's own
+denial), **F1-02** (a garrison, a barracks — `priorityHelpers.js:46`), **F1-03** (a militia as a
+standing body, and a muster ROLL as a cited record — `holderTable.js` seats the muster kind on
+`Citizen militia` alone), and **V-27** (an ORGANISED or STANDING manning — a rotation, a force,
+soldiers — where no force row resolves, `threatAssessment.js:119-120`, `:80`). Running the other
+way, and this is where the re-cut prose actually fails, **F1-25 the NEGATION direction** and the
+sitting's closing sentence (*do not infer a body into a key's silence that a `required: true`
+row or a same-tab sentence denies*) bar "nobody is set up to respond", "no one keeps any kind of
+guard", "nothing here begins with it": at TOWN the catalogue requires a `Town watch` and a `Town
+hall`, at VILLAGE and above `npcGenerator.js:1511-1517` emits a mandatory Guard Captain and a
+Mayor, and where a charter hall is seated `threatAssessment.js:64` prints "the charter hall
+provides specialist response" beside the face — so the shipped spine's own "no specialist
+recourse" is itself a finding on the towns that hold one (**F1-06** read in the negation
+direction, **F1-30**: write around an absence, never assert it). **F1-01** bars a watch as a
+body BELOW town (V-23, `hasWatch` false, no catalogue row under town) while **F1-27** bars
+calling the town's required watch professional, full-time or soldiers, and **F1-04** turns on
+`hasMilitaryInst`, which the Town watch sets — so "the guard" is the engine's own word at town
+and an invention at thorp. **F1-24** refuses any record cited to an unresolved keeper: the
+muster roll everywhere on this pool, the toll book wherever no port or town council stands, the
+parish register at hamlet and thorp (the hamlet's church is 2-5 km away, **F1-11**, V-29) — and
+because the three shipped spines cite no record at all, the citation rule bars a named record
+outright here; attribute through a ROLE. Below town add **F1-20** (a hall, chamber or council
+room as a place — the governing institution is a consensus), **F1-09** (a granary building — no
+row below town), **F1-10** (a lawful standing market), **F1-16** (a craft or merchant guild),
+and **F1-22** (the elders as a body outside the kind's four names); at every tier **F1-31**
+(naming a tier the identity strip does not print) and **F1-30** (denying a body a custom row
+supplies). On the ruin-only city and metropolis, **F1-28** bites in reverse: `Garrison` and
+`City walls and gates` are `required: true` and their rows still PRINT once ruined, so the
+absence must be written as an absence of a STANDING force, never of a history or a fabric — and
+**F1-29** as §V.2 corrects it (`Garrison` and `Professional city watch` are two rows at every
+city, so the contrast is refused only at town). Floor 2 binds hard and its licence is wide:
+**F2-01** (any magnitude in a digit or a word — a count of the dead, "a handful", "most of the
+outlying households"), **F2-02** (any date, season or duration), **F2-06** (any rate — "most
+nights", "every spring", "more often than not"), **F2-03** (a founding or a raising narrated),
+**F2-04** (an event the record did not run — the mill burned, the healer left), **F2-07** (an
+age of fabric against the printed `{hist.age}`), **F2-08** (a trend), **F2-09** (any allusion to
+the town's past, since this key reads no history field) — BUT **the perfect and the durative are
+LICENSED** over `config.monsterThreat` (FROZEN, writers 0) and over the key's own three bucket
+reads (ruling 11a), and over `safetyLabel`, `guardEffectivenessDesc`, `scores.military`,
+`scores.monster`, `economicGates.military`, `stress` and `compound.inst.*`, every one of which
+section 6 prints FROZEN; **V-04** still refuses a COURSE ("thinner than it was") and refuses a
+thinning muster outright on a no-force key. Floor 3: **F3-06** as section 7 lists it (never the
+Guard Captain, the Mayor, the High Priest, the Elder, the Parish Priest, or a stress-mandated
+Healer, Garrison Commander, Retired Adventurer or Corrupt Official), **F3-01** (a named
+character's fate), **F3-02** (anything predicated of a deity — the followers act), **F3-05**
+(cultural furniture the town's own profile denies: eleven profiles ship, so no thatch, no
+churchyard, no market green, no snow on the road unless the profile carries them). Floor 4:
+**F4-02** and **F4-03** (ONE military purse, the wall's keeping and the wage together — and on
+this key the wall half buys nothing, which is a hook and not a second purse; the four gates
+differ in degree, never in direction), **F4-04** (no total collapse of pay — short, late and thin
+are the licensed extreme), **F4-19** (the pay gate DOES reach the watch), **F4-06** (the
+readiness band is not explained by the works), **F4-07** (a river or coast does something
+positive for defence), **F4-08** (magic where magic does not work), **F4-01** (no decay clock,
+and no permanence either — mostly moot with no fabric to decay), **F4-13** (a player face naming
+a covert fact — and note that section (2c) marks NO source compromised on this pool, so no
+`[compromised]` candidate is offered and none would be judged). Finally **ruling 12**:
+`{settlement}` may appear in at most one unit of the pool and never in a `[face]` sub-row — the
+three shipped spines spend it twice, and the rewrite may not.
+
+────────────────────────────────────────────────────────────────────────────────────────
+(9) WHERE THE FLAVOUR IS
+────────────────────────────────────────────────────────────────────────────────────────
+
+WHAT IS IN USE. The outermost houses are the line, because the engine says so beside the prose
+("Creatures that get past initial response reach homes directly"), so the concrete things are
+doors, shutters, the order in which lamps go out, and which household sleeps nearest the
+country. The burial ground is required at every tier of this preimage and it is the one place
+that keeps a running account of what the country takes — at thorp with no clergy at all, the
+words said by whoever knew the dead best. The water source is outside whatever the houses make,
+and the hour a household chooses to fetch is a decision anybody can see being made.
+
+WHAT IS IN DISPUTE. At town there is exactly one paid body and it is part-time: a `Town watch`
+described as night patrol and gate duty on a town with no gate, drawing on the same single
+military purse whose other half — the wall's keeping — has nothing to keep. The hall spends and
+the watch stands, the guilds count what the missing edge costs them in goods that must travel,
+and where a charter hall is seated somebody is on retainer for the thing everyone else is not
+paid for. Two sources will read the same short wage differently and the archiver sets both down.
+
+WHAT THE ABSENCE LOOKS LIKE ON THE GROUND. Not emptiness — the town is full, it works, the
+market is held, the mill turns, the market at town and the walk to the manor mill below it. The
+absence is negative space in ordinary arrangements: no bar to drop, no bell that means anything
+in particular, no direction from which trouble is expected because every direction is open, no
+hour at which a stranger is stopped or asked anything. A traveller walks in and is halfway
+through before the town knows, and the town's own reading of that is the hook — because what
+everyone MAKES of what they all saw may be wrong, and the game master decides.
