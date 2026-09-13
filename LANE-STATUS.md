@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-13 15:21:13 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-13 15:26:29 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = c2b72466a Plan: wave 3 has begun — batch 2 of DS-DEF-2 (three pools) through draft 065b9ded6 and c
 
@@ -72,7 +72,7 @@ stat: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-
 - **L-PROBE-2 (chair)**: cheap /6 tips · full:  · bracket: 
 ## REWRITE 8b PACKETS (rewrite/DS-DEF-n/<pool>/: skeleton · draft-round-N · refine · kept · refute* · cure-round-N · cured-round-N; JUDGMENT.md / JUDGMENT-cure.md per block; the entailment + referent tables)
 - DS-DEF-11: pools 5 · skeleton 5 · draft 5 · refine 5 · kept 5 · refute 13 · cure 10 · cured 10 · JUDGMENT yes · JUDGMENT-cure yes
-- DS-DEF-2: pools 26 · skeleton 26 · draft 39 · refine 0 · kept 0 · refute 10 · cure 0 · cured 0 · JUDGMENT no · JUDGMENT-cure no
+- DS-DEF-2: pools 26 · skeleton 26 · draft 39 · refine 0 · kept 0 · refute 11 · cure 0 · cured 0 · JUDGMENT no · JUDGMENT-cure no
 - DS-DEF-2.licence-test-attempt: pools 26 · skeleton 26 · draft 36 · refine 26 · kept 26 · refute 32 · cure 24 · cured 0 · JUDGMENT yes · JUDGMENT-cure no
 - entailment: surveys 6 · refutes 6 · ENTAILMENT-TABLE.draft.md 09-12 20:49 346945 B · referent surveys 6 · referent refutes 6 · REFERENT-TABLE.draft.md 09-12 20:49 285943 B
 - HOLD-VITEST absent · runner count 0
@@ -136,12 +136,12 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `add4c8dfc` SELECTOR Disasters & Famine: granary AND parish care only · DONE · transcript 09-13 14:51 961 KB · 27 tool calls · files: "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--disasters-famine-granary-and-parish-care-only/draft.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--disaste
     - `ab3ada693` SELECTOR Beasts & Monsters: frontier, force without a perimeter · DONE · transcript 09-13 14:48 931 KB · 15 tool calls · files: draft.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--beasts-
     - `a128d75d1` GATE r1 · DONE · transcript 09-13 15:20 1548 KB · 173 tool calls · files: msg.txt, (git commit) · result: {"commit": "d794c3a78d6dfbdd789fb1f652f38410c2b015ff", "measurement": "SHIPPED f2da5a3ee: pools 26 | units 78 | sample 78u/1905tok | DISTINCT 519 | content type
-    - `a9eab3ebe` REFUTER Beasts & Monsters: plagued, perimeter but NO force to hold it · IN FLIGHT · transcript 09-13 15:21 431 KB · 6 tool calls · last: Bash cd "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scra
-    - `aa77ce7e0` REFUTER Invasion & War: walls with citizen militia · IN FLIGHT · transcript 09-13 15:21 399 KB · 5 tool calls · last: Bash sed -n '1,220p' "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c
-    - `ae41bb8e2` REFUTER Internal Security: court without detention · IN FLIGHT · transcript 09-13 15:21 422 KB · 7 tool calls · last: Bash cd "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scra
-    - `abf05a429` REFUTER Economic Survival: WEAK · IN FLIGHT · transcript 09-13 15:21 395 KB · 6 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
-    - `a070186cf` REFUTER Disasters & Famine: granary AND parish care only · IN FLIGHT · transcript 09-13 15:21 423 KB · 6 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
-    - `aeab4cf4f` REFUTER Beasts & Monsters: frontier, force without a perimeter · IN FLIGHT · transcript 09-13 15:21 376 KB · 5 tool calls · files: "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--beasts-monsters-frontier-force-without-a-perimet/refute.md · last: Bash cat > "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/s
+    - `a9eab3ebe` REFUTER Beasts & Monsters: plagued, perimeter but NO force to hold it · IN FLIGHT · transcript 09-13 15:26 672 KB · 18 tool calls · files: "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--beasts-monsters-plagued-perimeter-but-no-force-t/refute.md, shipped.md, current.md · last: Bash sed -n '2640,2700p' /tmp/current.md
+    - `aa77ce7e0` REFUTER Invasion & War: walls with citizen militia · IN FLIGHT · transcript 09-13 15:24 658 KB · 20 tool calls · last: Bash D="/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `ae41bb8e2` REFUTER Internal Security: court without detention · IN FLIGHT · transcript 09-13 15:26 665 KB · 15 tool calls · last: Bash cd "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scra
+    - `abf05a429` REFUTER Economic Survival: WEAK · IN FLIGHT · transcript 09-13 15:25 655 KB · 19 tool calls · last: Bash a="/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `a070186cf` REFUTER Disasters & Famine: granary AND parish care only · IN FLIGHT · transcript 09-13 15:25 647 KB · 18 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `aeab4cf4f` REFUTER Beasts & Monsters: frontier, force without a perimeter · IN FLIGHT · transcript 09-13 15:26 650 KB · 17 tool calls · files: "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--beasts-monsters-frontier-force-without-a-perimet/refute.md · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
 - **wf_74510771-4fe** (mtime 09-13 12:23): agent calls 37 (36 distinct) · DONE 36 · FAILED (not retried) 0 · RETRIED (superseded attempts) 1 · IN FLIGHT 0 — mirror `_progress/wf_74510771-4fe/`
     - `aae3b7721` MARKER Invasion & War: walls AND professional garrison · DONE · transcript 09-13 08:05 1088 KB · 63 tool calls · files: card-mech.txt, card-79.md, card.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasio
     - `a14855157` MARKER Internal Security: full legal chain (court AND prison) · DONE · transcript 09-13 08:01 868 KB · 41 tool calls · files: card.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--interna
@@ -216,4 +216,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `ab8783d22` WRITER Invasion & War: walls with NO force · DONE · transcript 09-13 02:30 725 KB · 17 tool calls · files: candidates-2.md, facetext.txt, ft2.txt · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasio
 
 ## PROCESSES: 
-load: 2.27 2.31 2.46
+load: 2.23 2.27 2.40
