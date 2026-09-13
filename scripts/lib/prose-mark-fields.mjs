@@ -505,19 +505,138 @@ export const BUCKET_OF_PARAM = Object.freeze({
 
 /**
  * `institutionalCatalog[tier][section][name].required === true`, per tier.
- * @returns {Promise<Record<string, Array<{section: string, name: string}>>>}
+ *
+ * ⭐ THE ROW'S OWN `desc` RIDES ALONG (REWRITE car 8b-W-18k), because section (2b) of the
+ * marker's card reads the PLACEMENT the data states — or does not state — about each required
+ * row, and the catalog's prose is where that is said. Additive: every existing reader takes
+ * `section` and `name` and is untouched.
+ * @returns {Promise<Record<string, Array<{section: string, name: string, desc: string}>>>}
  */
 export async function requiredRowsByTier() {
   const mod = await import(url.pathToFileURL(path.join(ROOT, 'src/data/institutionalCatalog.js')).href);
   const catalog = mod.institutionalCatalog;
-  /** @type {Record<string, Array<{section: string, name: string}>>} */
+  /** @type {Record<string, Array<{section: string, name: string, desc: string}>>} */
   const out = {};
   for (const tier of TIERS) {
     out[tier] = [];
     for (const [section, rows] of Object.entries(catalog[tier] || {})) {
       for (const [name, row] of Object.entries(rows)) {
-        if (row && row.required === true) out[tier].push({ section, name });
+        if (row && row.required === true) out[tier].push({ section, name, desc: String(row.desc || '') });
       }
+    }
+  }
+  return out;
+}
+
+/**
+ * ⭐ THE SERVICE BAR (REWRITE car 8b-W-18k). A service the data turns ON at or above this
+ * probability is a thing the settlement's own model says the body does; a face that denies it
+ * contradicts the engine (floor 1). Below the bar the service is a possibility and a face may
+ * say either way. 0.8 is the brief's own number, not a tuning.
+ */
+export const SERVICE_P_BAR = 0.8;
+
+/**
+ * The services `src/data/institutionServices.js` gives one catalogued row, at or above the bar.
+ *
+ * ⛔ `on` IS CARRIED AND NEVER FILTERED ON. A row with `on: false` is off by default rather
+ * than absent, so the card prints it BESIDE the on-by-default ones with its flag, and the
+ * marker reads which is which. Filtering here would decide a question the card exists to show.
+ * @param {string} name the catalogued row name, exactly as the catalog spells it
+ * @param {number} [bar]
+ * @returns {Promise<Array<{service: string, p: number, on: boolean, desc: string}>>}
+ */
+export async function servicesAtOrAboveBar(name, bar = SERVICE_P_BAR) {
+  const mod = await import(url.pathToFileURL(path.join(ROOT, 'src/data/institutionServices.js')).href);
+  const menu = mod.INSTITUTION_SERVICES[name];
+  if (!menu || typeof menu !== 'object') return [];
+  return Object.entries(menu)
+    .filter(([, row]) => row && typeof row.p === 'number' && row.p >= bar)
+    .map(([service, row]) => ({ service, p: row.p, on: row.on === true, desc: String(row.desc || '') }))
+    .sort((a, b) => b.p - a.p || (a.service < b.service ? -1 : 1));
+}
+
+/**
+ * ⭐ WHICH DERIVATION FILES WHICH ROSTER BUCKET — READ FROM THE DERIVATION'S OWN AST, never
+ * from a table in this file (REWRITE car 8b-W-18k).
+ *
+ * `deriveArmedForces` folds several institution buckets into one field each — the measured
+ * case this car comes from is the WATCH, which is filed under `standing`, so "nobody is under
+ * arms" contradicts a required Town watch even on a town with no garrison and no militia. A
+ * hand-written map of that would be a second home for the filing and would go stale the first
+ * time somebody moved a bucket; this walks the returned object literal instead, so the card
+ * reds by saying nothing rather than by saying something false.
+ * @param {string} [rel]
+ * @param {string} [fnName]
+ * @returns {Record<string, string>} institution bucket -> the field it is filed under
+ */
+export function armedForcesFiling(rel = 'src/domain/display/defenseDisplay.js', fnName = 'deriveArmedForces') {
+  const { source, ast } = parseFile(rel);
+  const fn = functionsOf(ast).get(fnName);
+  /** @type {Record<string, string>} */
+  const out = {};
+  if (!fn) return out;
+  walk(fn.body, (node) => {
+    if (node.type !== 'ReturnStatement' || node.argument?.type !== 'ObjectExpression') return undefined;
+    for (const prop of node.argument.properties) {
+      if (prop.type !== 'Property' || prop.computed) continue;
+      const field = prop.key.name || prop.key.value;
+      for (const m of srcOf(prop.value, source).matchAll(/\binst\.([A-Za-z0-9_$]+)/g)) out[m[1]] = String(field);
+    }
+    return false;
+  });
+  return out;
+}
+
+/**
+ * ⭐ THE PLACEMENT VOCABULARY (REWRITE car 8b-W-18k). Where a body STANDS, as the engine's own
+ * data says it — the class of claim both writer seats of the first pool got wrong by inference
+ * (a burial ground placed outside the wall on a tier whose catalog row says nothing about a
+ * wall at all).
+ * @type {ReadonlyArray<RegExp>}
+ */
+export const PLACEMENT_PHRASES = Object.freeze([
+  /\b(?:just )?(?:in|out)side the (?:wall|walls|gate|gates|perimeter|circuit)\b/i,
+  /\bbeyond the (?:wall|walls|gate|gates)\b/i,
+  /\bwithin the (?:wall|walls|precinct|close)\b/i,
+  // ⛔ EVERY ALTERNATION IS GROUPED. An ungrouped `\bat|by the gate` reads as `\bat` OR
+  // `by the gate` and matches the word "Attendance", which put four false bars on the first
+  // card this section printed. Measured, not reasoned: the bars fell from 5 to 2 when it landed.
+  /\b(?:at|by) the (?:gate|gates)\b/i,
+  /\bin the (?:churchyard|market ?place|square|close|precinct|ward|quarter)\b/i,
+  /\b(?:at|on) the (?:edge|outskirts|far side|road out)\b/i,
+  /\bout through the gate\b/i,
+  /\bunder the (?:wall|walls)\b/i,
+]);
+
+/**
+ * The words that make a statement a TENDENCY rather than a fact of this town. A placement
+ * carrying one of these is not something a face may assert flatly.
+ * @type {ReadonlyArray<RegExp>}
+ */
+export const HEDGE_WORDS = Object.freeze([
+  /\bmost\b/i, /\busually\b/i, /\btypically\b/i, /\boften\b/i, /\bcommonly\b/i, /\bgenerally\b/i,
+  /\bwhere (?:there is|applicable|possible|they|someone|anyone)\b/i, /\bmore often than\b/i,
+  /\bas often as\b/i, /\bnot all\b/i, /\btend(?:s|ed)? to\b/i, /\bmay\b/i, /\bcan be\b/i,
+]);
+
+/**
+ * Every placement claim one piece of the engine's prose makes, with whether the data hedged it.
+ * @param {string} text
+ * @returns {Array<{phrase: string, hedged: boolean, sentence: string}>}
+ */
+export function placementClaimsIn(text) {
+  /** @type {Array<{phrase: string, hedged: boolean, sentence: string}>} */
+  const out = [];
+  for (const sentence of String(text || '').split(/(?<=[.?!])\s+/)) {
+    for (const re of PLACEMENT_PHRASES) {
+      const m = sentence.match(re);
+      if (!m) continue;
+      out.push({
+        phrase: m[0],
+        hedged: HEDGE_WORDS.some((h) => h.test(sentence)),
+        sentence: sentence.trim(),
+      });
     }
   }
   return out;

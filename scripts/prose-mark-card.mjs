@@ -3,8 +3,9 @@
  * scripts/prose-mark-card.mjs — THE MARKER'S CARD, SECTIONS (1)–(7), PRINTED MECHANICALLY
  * (brief ADDENDUM 18 ruling 4 — "the marker writes what would be false"; ruling 11 — the
  * frozen-field census is the licence for the perfect and the durative; the workflow's MARK
- * prompt in rewrite-block-v3.workflow.js names the nine sections; this prints (1)–(6) whole and
- * the mechanical half of (7) so the marker COMPOSES the card rather than re-deriving it).
+ * prompt in rewrite-block-v3.workflow.js names the nine sections; this prints (1)–(6) whole,
+ * the mechanical (2b), and the mechanical half of (7) so the marker COMPOSES the card rather
+ * than re-deriving it). Sections (8) and (9) are the marker's own and are never printed here.
  *
  *   node scripts/prose-mark-card.mjs <BLOCK> '<pool key>' [--json]
  *   node scripts/prose-mark-card.mjs DS-DEF-2 'Invasion & War: militia only'
@@ -14,6 +15,14 @@
  *     and the key's PREIMAGE by tier from the 768-town rate table; the parameters the key FIXES
  *     and the ones it leaves OPEN (the exported *PoolKey function enumerated over its domains).
  * (2) REQUIRED ROWS at every tier with towns > 0 in the preimage (institutionalCatalog).
+ * (2b) WHAT A FACE MAY NOT DENY OF THOSE ROWS (REWRITE car 8b-W-18k): per required row, the
+ *     services `institutionServices.js` gives it at p >= 0.8 (with `on` carried, never filtered
+ *     on) and the derivation that FILES it — read from `deriveArmedForces`' own AST, so a row
+ *     the engine folds into `standing` is under arms whatever the key fixes. Then PLACEMENTS A
+ *     FACE MAY NOT ASSERT: where the catalog's or the menu's own prose states where a body
+ *     STANDS at some preimage tiers and not others, or states it with a hedge. Numbered (2b)
+ *     rather than (3) because it elaborates (2) and because the workflow's MARK prompt names
+ *     NINE sections by number.
  * (3) THE SAME-PAGE READ SET: the union of the normalised reads of every corpus row mounted on
  *     the same tab PLUS the fields the non-corpus producers on that tab read (an espree
  *     member-expression walk), each with its clock.
@@ -38,7 +47,7 @@ import { parse } from 'espree';
 import {
   ROOT, parseFile, normaliseRead, producerReads, clockOf, parsePulseTree, frozenFieldCensus,
   preimageOfPoolKey, requiredRowsByTier, bucketsSeatedByRequired, ROSTER_BUCKETS, BUCKET_OF_PARAM,
-  TIERS,
+  TIERS, SERVICE_P_BAR, armedForcesFiling, placementClaimsIn, servicesAtOrAboveBar,
 } from './lib/prose-mark-fields.mjs';
 import { buildSiblingPack } from './sibling-string-pack.mjs';
 
@@ -199,6 +208,68 @@ export async function buildCard(block, pool) {
   // (2) REQUIRED ROWS
   const required = await requiredRowsByTier();
 
+  // ⭐⭐ (2b) WHAT A FACE MAY NOT DENY OF THE REQUIRED ROWS (REWRITE car 8b-W-18k).
+  //
+  // THE MEASURED CAUSE. On the first pool of the re-cut BOTH writer seats denied arms of the
+  // persons on gate duty ("Nobody who asked him was under arms") on a preimage whose every tier
+  // requires a `Town watch` — a row whose service menu turns `Gate duty` on at p 0.8 and which
+  // `deriveArmedForces` files under `standing`. And both placed the burial ground outside the
+  // wall on tiers whose catalog row says nothing about a wall. Section (2) named the rows; it
+  // never said what the rows MEAN, so a writer inferred the rest, which is floor 1 by inference.
+  //
+  // ⛔ MECHANICAL ONLY. Every figure here is read from the engine's own data — the catalog, the
+  // service menu, the derivation's AST — and nothing is judged. Sections (8) and (9) stay the
+  // marker's own. It is numbered (2b) and not (3) ON PURPOSE: it elaborates (2)'s rows, and the
+  // workflow's MARK prompt names NINE sections by number, so a new (3) would renumber six of
+  // them and desync a prompt this car does not own.
+  const filing = armedForcesFiling();
+  const requiredNames = [...new Set(preimageTiers.flatMap((t) => required[t].map((r) => r.name)))].sort();
+  const mayNotDeny = [];
+  for (const name of requiredNames) {
+    const at = preimageTiers.filter((t) => required[t].some((r) => r.name === name));
+    const services = await servicesAtOrAboveBar(name);
+    const buckets = Object.entries(bucketsSeatedByRequired([{ section: '', name }]))
+      .map(([bucket]) => ({ bucket, filed: filing[bucket] || null }));
+    // The placement the DATA states about this row, per tier, out of the catalog's own prose.
+    const placements = [];
+    for (const tier of at) {
+      const row = required[tier].find((r) => r.name === name);
+      for (const claim of placementClaimsIn(row?.desc || '')) placements.push({ tier, ...claim, from: 'the catalog row' });
+    }
+    for (const s of services) {
+      for (const claim of placementClaimsIn(s.desc)) placements.push({ tier: at.join('+'), ...claim, from: `the \`${s.service}\` service` });
+    }
+    mayNotDeny.push({ name, at, services, buckets, placements });
+  }
+  // ⛔ A PLACEMENT IS ASSERTABLE ONLY WHERE THE DATA STATES IT UNHEDGED ON EVERY PREIMAGE TIER.
+  // Stated at one tier and silent at another is exactly the burial-ground error: the face draws
+  // on every town of the preimage, so a placement true of the city is an invention on the thorp.
+  const placementBars = [];
+  for (const row of mayNotDeny) {
+    const byPhrase = new Map();
+    for (const p of row.placements) {
+      const held = byPhrase.get(p.phrase.toLowerCase()) || { phrase: p.phrase, tiers: new Set(), hedged: false, from: new Set(), sentence: p.sentence };
+      held.tiers.add(p.tier);
+      held.hedged = held.hedged || p.hedged;
+      held.from.add(p.from);
+      byPhrase.set(p.phrase.toLowerCase(), held);
+    }
+    for (const held of byPhrase.values()) {
+      const tiers = [...held.tiers].flatMap((t) => t.split('+'));
+      const everywhere = preimageTiers.every((t) => tiers.includes(t));
+      if (everywhere && !held.hedged) continue;
+      placementBars.push({
+        row: row.name,
+        phrase: held.phrase,
+        why: held.hedged
+          ? 'the data HEDGES it, so it is a tendency and not a fact of this town'
+          : `stated only at ${[...new Set(tiers)].join(', ')} — silent at ${preimageTiers.filter((t) => !tiers.includes(t)).join(', ')}`,
+        from: [...held.from].join(' · '),
+        sentence: held.sentence,
+      });
+    }
+  }
+
   // (3) SAME-PAGE READ SET
   const site = (row.sites || [])[0] || '';
   const mount = mounts.DOSSIER_MOUNTS.find((m) => m.blockId === block && m.rung === 'sentence') || null;
@@ -283,6 +354,7 @@ export async function buildCard(block, pool) {
     block, pool, dir: slug(`${block}-${pool}`), censusRow: { keyFunction: row.keyFunction, rung: row.rung, predicate: row.predicate, sites: row.sites, source: row.source },
     key: { fields: keyFields, preimage: preimage ? { fn: preimage.fn, params: preimage.params, fixed: preimage.fixed, open: preimage.open, combos: preimage.combos.length } : null, byTier, preimageTiers, rateBp: rateRow?.rateBp ?? null, towns: rateRow?.towns ?? null },
     required: Object.fromEntries(preimageTiers.map((t) => [t, required[t]])),
+    mayNotDeny, placementBars, serviceBar: SERVICE_P_BAR, armedForcesFiling: filing,
     samePage: { tab, blocks: tabBlocks, fields: [...samePage.entries()].map(([f, v]) => ({ field: f, clock: v.clock, writers: v.writers, from: [...v.from] })), producerFields, unresolvedReads },
     siblings, rosters, frozenFields, sources,
   };
@@ -306,6 +378,26 @@ export function cardLines(c) {
   L.push('');
   L.push('(2) THE REQUIRED ROWS (institutionalCatalog required: true) at every preimage tier — bodies a face may not deny or infer away');
   for (const [tier, rows] of Object.entries(c.required)) L.push(`  ${tier} (${rows.length}): ${rows.map((r) => `${r.name} [${r.section}]`).join(' · ')}`);
+  L.push('');
+  L.push(`(2b) WHAT A FACE MAY NOT DENY OF THE REQUIRED ROWS — the services the engine's own menu turns on at p ≥ ${c.serviceBar}, and the derivation that files the row`);
+  for (const r of c.mayNotDeny) {
+    const services = r.services.length
+      ? r.services.map((s) => `${s.service} (p ${s.p}${s.on ? '' : ', OFF by default'})`).join(' · ')
+      : '(no service menu at or above the bar)';
+    const filed = r.buckets.length
+      ? r.buckets.map((b) => `filed under ${b.filed ? `${b.filed} (deriveArmedForces)` : `the \`${b.bucket}\` roster`}`).join(' · ')
+      : 'filed under no closed roster';
+    L.push(`  ${r.name} (required at ${r.at.join(', ')}) — a face may not deny: ${services} · ${filed}`);
+  }
+  L.push('  ⛔ A SERVICE AT OR ABOVE THE BAR IS A THING THE TOWN\'S OWN MODEL SAYS THIS BODY DOES: denying it is floor 1, whatever the face is otherwise about. A row filed under `standing` is UNDER ARMS in the engine\'s reading even where the key fixes no garrison and no militia.');
+  L.push('');
+  L.push('  PLACEMENTS A FACE MAY NOT ASSERT — where a body STANDS, stated by the data at some preimage tiers and not others, or stated with a hedge');
+  if (c.placementBars.length === 0) L.push('    (none: no required row of this preimage states a placement at all, so a face states none)');
+  for (const p of c.placementBars) {
+    L.push(`    ${p.row}: "${p.phrase}" — ${p.why}   [${p.from}]`);
+    L.push(`        the data says: "${p.sentence}"`);
+  }
+  L.push('  ⛔ A FACE DRAWS ON EVERY TOWN OF THE PREIMAGE, so a placement the data states only at the city is an INVENTION on the thorp (floor 2), and a hedged one is a tendency rather than this town\'s fact.');
   L.push('');
   L.push(`(3) THE SAME-PAGE READ SET — tab \`${c.samePage.tab}\`: corpus blocks ${c.samePage.blocks.join(', ')} + machine producers`);
   for (const f of c.samePage.fields) L.push(`  ${f.field.padEnd(52)} [${f.clock}] writers ${String(f.writers).padStart(2)}   <- ${f.from.join(', ')}`);
