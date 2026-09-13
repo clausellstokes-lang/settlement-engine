@@ -90,7 +90,7 @@ The muster and the garrison are fixed false by the key and speak nowhere.
 ### universal
 
    - `[face]` `[stranger]` A traveller says the wall was in sight before anybody was, and that he saw no one under arms on it at all.
-   - `[face]` `[stranger · pair 2 · aside]` A traveller says there is a stair up to the walk with somebody's stores stacked on it.
+   - `[face]` `[stranger · pair 2 · aside]` A traveller found a stair up to the walk with somebody's stores stacked on it.
 
 ### below town · seated by the household elder, the village elder, the village headman
 
@@ -139,7 +139,7 @@ The muster and the garrison are fixed false by the key and speak nowhere.
 ### universal
 
    - `[face]` `[stranger]` A traveller says he heard about the keeping of the wall before he heard about anything else here.
-   - `[face]` `[stranger]` A traveller says the people here talk about the wall as work, and never as a defence.
+   - `[face]` `[stranger]` What a traveller hears here is the wall spoken of as work, and never as a defence.
 
 ### below town · seated by the household elder, the village elder, the village headman
 

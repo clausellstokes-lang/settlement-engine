@@ -1,0 +1,28 @@
+{
+ "block": "DS-DEF-2",
+ "dock": "laneRW-DEF2",
+ "pools": [
+  {
+   "pool": "Invasion & War: walls with NO force",
+   "dir": "ds-def-2--invasion-war-walls-with-no-force",
+   "role": "spine",
+   "status": "RESOLVED",
+   "variants": 3
+  }
+ ],
+ "rulings": "WHAT WOULD BE FALSE ON DS-DEF-2 (the five threat rows; the block's own contradiction set under ADDENDUM 14). THE ENGINE MEANINGS, which are contradictions when read as English: plagued is MONSTER ACTIVITY and never disease; settled is the LOW monster-and-raider tier of the country (the stress roll multiplies siege and monster by 0.3) and never 'no live threat' and never the centre of a realm; frontier is the DEFAULT of an unmeasured town, so it is never read as a measured fact; 'perimeter' is FALSE of a Citadel (inner) and of Gates (a point), so the safe generic on those rows is the works or the recorded name; 'organized force' is the force BUCKETS and never 'the guard' (which is the power generator's FALLBACK label on a town whose safety profile prints 'no meaningful guard presence'); hasGranary is a TIER PROXY (every town-plus, no village-and-below) and says nothing whatever about the stock inside it; hasHospital fires on a first-level divine healer (a person) and on a monastery that MAY run one, so a house that takes in the sick is licensed only on a hospital-named row; hasChurch fires on every hamlet from a church in ANOTHER settlement and records parishes rather than care; hasCourtSystem is every town and city from a meeting hall (a civil arbitration is recorded, a criminal trial is not) and Small prison/stocks DOES hold cells; the readiness band word is exactly the ladder's reading and a badge on one arm says nothing of another; the economic-survival arm is FOOD-STORAGE-driven resilience and never prosperity. THE ALIAS CONTRADICTIONS: 'the garrison' only where a Garrison or Multiple garrisons row resolves (city tier), and where an occupation is on the page the face says whose; 'the watch' as a NAME only on a resolved watch row (town-plus), and never both a watch and a militia on one town; 'the militia' only where the militia row resolves. THE PAY GATE: one military purse over wall maintenance and garrison wages together, so a face never pays the wall and not the muster; the wall STANDS THROUGH a shortfall; the shortfall is bounded and never total. A slowly thinning muster is MODEL-TRUE and is no longer barred (ruling R-9), but a HEADCOUNT is DS-DEF-5's cell and stating one here collides with that surface. THE FOUR SHIPPED CLAUSES THAT ARE STILL FALSE and must not be carried forward: 'substantial works' (a magnitude no field holds - floor 2); 'how relaxed the people on it are' (manning asserted from a summary whose own fence says it asserts nothing about any arm); 'takes this town with ladders' (a prediction the simulation adjudicates, and an earth berm needs none); 'clergy who tend the sick' (hasChurch records parishes, not care). EVERYTHING ELSE THE SHIPPED ROWS SAY IS AVAILABLE TO YOU AGAIN - the old law struck many of those clauses for being unlicensed, and unlicensed is no longer a fault. THE PREIMAGE: four of this block's five rows are keyed on BOOLEANS, so one face prints across every tier, country and stress state the key admits; none of the five key functions reads config.stressTypes, so a face about a quiet gate can print under an ACTIVE SIEGE banner. Write nothing that a siege, an occupation or a famine on the same page would make absurd.",
+ "markModel": "opus",
+ "selectModel": "fable",
+ "refuteModel": "opus",
+ "cureModel": "opus",
+ "overrides": [],
+ "resume": {
+  "fromRunId": "wf_208f835e-a94",
+  "markedDirs": [
+   "ds-def-2--invasion-war-walls-with-no-force"
+  ],
+  "candidateDirs": [
+   "ds-def-2--invasion-war-walls-with-no-force"
+  ]
+ }
+}
