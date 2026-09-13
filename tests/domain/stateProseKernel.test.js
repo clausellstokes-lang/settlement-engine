@@ -1112,9 +1112,14 @@ describe('the state-prose reader — ONE FACE PER POWER: the source filter and t
     expect(FACE_SOURCES).toEqual([
       'stranger', 'elders', 'hall', 'tavern', 'guild', 'register',
       'muster', 'watch', 'garrison', 'gate', 'market', 'court',
-      // ⭐ THE THIRTEENTH WORD IS NOT A POWER (ADDENDUM 18 ruling 22; car 8b-W-18i). It is in
+      // ⭐ THE THIRTEENTH WORD IS A POWER OF NOBODY (ADDENDUM 18 ruling 28; car 8b-W-18n). The
+      // town's people as a whole, owed to no power and backed by no row — so it is seated by
+      // NOTHING, which is why it is seated EVERYWHERE, exactly as the stranger is.
+      'public',
+      // ⭐ THE FOURTEENTH WORD IS NOT A POWER (ADDENDUM 18 ruling 22; car 8b-W-18i). It is in
       // the list because a `[face]` tag may carry it and for no other reason — it seats on no
-      // town, and the arms below prove it never draws.
+      // town, and the arms below prove it never draws, unless it is marked `observed`
+      // (ruling 27; car 8b-W-18n), which is the one archiver row that stands alone.
       'archiver',
     ]);
     expect(UNIVERSAL_SOURCE).toBe('stranger');

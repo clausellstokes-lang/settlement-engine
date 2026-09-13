@@ -17,13 +17,14 @@ import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import {
-  CUSTOM_ROLE_FIELD, INSTITUTION_ROLES, ROSTER_OFFICE_TITLES, SOURCE_FALLBACK_ROLES,
+  CUSTOM_ROLE_FIELD, INSTITUTION_ROLES, PUBLIC_ROLES_BY_TIER, ROSTER_OFFICE_TITLES,
+  SOURCE_FALLBACK_ROLES,
 } from '../../src/data/institutionRoles.js';
 import {
   rolesOf, sourcesOf, sourcesOfRowName, withFaceSources,
 } from '../../src/domain/display/stateProse/faceSources.js';
 import {
-  FACE_SOURCES, ROLE_SLOTS, agreeVerb, drawRole, fillRoleSlots,
+  FACE_SOURCES, PUBLIC_SOURCE, ROLE_SLOTS, agreeVerb, drawRole, fillRoleSlots,
 } from '../../src/domain/display/stateProse/stateProseKernel.js';
 import { institutionalCatalog } from '../../src/data/institutionalCatalog.js';
 import { composeStateProse } from '../../src/domain/display/stateProse/composeStateProse.js';
@@ -164,12 +165,23 @@ describe('the role table — its shape (ADDENDUM 18 ruling 25)', () => {
     const missing = ROLE_SLOTS.filter((slot) => !walker.includes(`'${slot}'`));
     expect(missing, 'an attribution slot the walker\'s re-spelling does not carry').toEqual([]);
     expect(walker).toMatch(/ATTRIBUTION_SLOTS/);
-    expect(ROLE_SLOTS.length, 'and the kernel list is the twelve seatable sources').toBe(12);
+    // ⭐ RE-FROZEN AT CAR 8b-W-18n: thirteen, the public joining the twelve (ADDENDUM 18
+    // ruling 28). This count is the whole point of the arm — it is what turns 'the walker
+    // carries every word' from a check into a RATCHET, so a fourteenth added to the kernel
+    // and forgotten here reds by number even if the walker happened to spell it.
+    expect(ROLE_SLOTS.length, 'and the kernel list is the thirteen seatable sources').toBe(13);
   });
 
   it('the fallback roster covers every seatable source, and only those', () => {
     const covered = SOURCE_FALLBACK_ROLES.map((row) => row.source).sort();
-    expect(covered).toEqual([...ROLE_SLOTS].sort());
+    // ⭐ RE-FROZEN AT CAR 8b-W-18n (ADDENDUM 18 ruling 28). The PUBLIC is a role slot like any
+    // other and it is NOT in the fallback roster, on purpose: the fallback is where a source
+    // lands when the catalogue rows that back it carry no entry, and the public has no
+    // catalogue row to fall through FROM. What it is called is a fact about the TIER, so it is
+    // seated from `PUBLIC_ROLES_BY_TIER` in `rolesOf` directly. The arm below proves the
+    // seating actually happened, which is the thing this arm was protecting.
+    expect(covered).toEqual([...ROLE_SLOTS].filter((w) => w !== PUBLIC_SOURCE).sort());
+    expect(ROLE_SLOTS).toContain(PUBLIC_SOURCE);
     expect(ROLE_SLOTS).not.toContain('archiver');
     expect(FACE_SOURCES).toContain('archiver');
     for (const { source, roles } of SOURCE_FALLBACK_ROLES) {
@@ -334,7 +346,11 @@ describe('the seating — a role exists only where its row does (ruling 25 edge 
   it('⭐ a town with no roster at all gets the stranger, with the roads roster behind him', () => {
     for (const nothing of [null, undefined, {}, { institutions: null }]) {
       const roles = rolesOf(/** @type {never} */ (nothing));
-      expect([...sourcesOf(/** @type {never} */ (nothing))]).toEqual(['stranger']);
+      // ⭐ RE-FROZEN AT CAR 8b-W-18n: the public is seated by nothing, so a settlement that IS
+      // nothing still seats it — and it still has a roster, because `tiers: null` matches.
+      expect([...sourcesOf(/** @type {never} */ (nothing))]).toEqual(['stranger', PUBLIC_SOURCE]);
+      expect(roles.get(PUBLIC_SOURCE).length, 'the public roster is total').toBeGreaterThanOrEqual(3);
+      expect(roles.get(PUBLIC_SOURCE).every((r) => r.n === 'pl'), 'plural only').toBe(true);
       expect(roles.get('stranger').length, 'the roads roster').toBeGreaterThanOrEqual(6);
       expect(roles.get('stranger').map((r) => r.role)).toContain('a traveller');
       expect(roles.get('stranger').map((r) => r.role)).toContain('a pedlar');

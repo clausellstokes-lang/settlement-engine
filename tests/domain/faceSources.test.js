@@ -21,7 +21,9 @@ import { describe, expect, it } from 'vitest';
 import {
   ALWAYS_SOURCES, PRIORITY_HELPER_LISTS, sourcesOf, withFaceSources,
 } from '../../src/domain/display/stateProse/faceSources.js';
-import { FACE_SOURCES, UNIVERSAL_SOURCE } from '../../src/domain/display/stateProse/stateProseKernel.js';
+import {
+  FACE_SOURCES, PUBLIC_SOURCE, UNIVERSAL_SOURCE, UNIVERSAL_SOURCES,
+} from '../../src/domain/display/stateProse/stateProseKernel.js';
 import { standingDefenseForces } from '../../src/domain/institutions/defenseInstitutionBuckets.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { ROOT } from '../helpers/dossierCorpus.js';
@@ -48,7 +50,14 @@ describe('faceSources — the seating of the powers on generated towns', () => {
       for (const word of sources) expect(FACE_SOURCES, `${tier} seats ${word}`).toContain(word);
       expect(sources.has(town.tier), 'the tier word never leaks into the set').toBe(false);
     }
-    expect(ALWAYS_SOURCES).toEqual([UNIVERSAL_SOURCE]);
+    // ⭐ RE-FROZEN AT CAR 8b-W-18n (ADDENDUM 18 ruling 28): the PUBLIC joins the stranger as a
+    // source seated by NOTHING and therefore seated everywhere. The list is the kernel's own, so
+    // a word added to one and not the other is a defect rather than a silence.
+    expect(ALWAYS_SOURCES).toEqual([UNIVERSAL_SOURCE, PUBLIC_SOURCE]);
+    expect(ALWAYS_SOURCES).toBe(UNIVERSAL_SOURCES);
+    for (const [tier, town] of Object.entries(towns)) {
+      expect(sourcesOf(town).has(PUBLIC_SOURCE), `${tier} hears the public`).toBe(true);
+    }
     process.stdout.write(`\n[faceSources] ${Object.entries(towns).map(([tier, town]) => `${tier}: ${[...sourcesOf(town)].join(' ')}`).join('\n[faceSources] ')}\n`);
   });
 
@@ -102,7 +111,10 @@ describe('faceSources — the seating of the powers on generated towns', () => {
 
   it('is total: a missing, empty or roster-less settlement is the stranger alone, never a throw', () => {
     for (const bad of [null, undefined, {}, { tier: 'town' }, { institutions: 'nope' }, { institutions: [null, 7, { name: 3 }] }]) {
-      expect([...sourcesOf(/** @type {any} */ (bad))].filter((w) => w !== 'elders')).toEqual([UNIVERSAL_SOURCE]);
+      // ⭐ RE-FROZEN AT CAR 8b-W-18n: "the stranger alone" is now "the stranger and the public",
+      // and for the same reason — neither is seated by anything a broken settlement could lack.
+      expect([...sourcesOf(/** @type {any} */ (bad))].filter((w) => w !== 'elders'))
+        .toEqual([UNIVERSAL_SOURCE, PUBLIC_SOURCE]);
     }
     expect(sourcesOf({ tier: 'village' }).has('elders'), 'the tier alone seats the elders').toBe(true);
   });

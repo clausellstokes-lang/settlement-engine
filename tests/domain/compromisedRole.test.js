@@ -319,13 +319,14 @@ describe('the grammar — the tag, and what it refuses', () => {
 
   it('⭐ the tag parses standing alone and as one half of a pair', () => {
     expect(parseFaceRow('`[hall · compromised]` The accounts are in order.', 'X'))
-      .toEqual({ text: 'The accounts are in order.', source: 'hall', pair: null, compromised: true });
+      .toEqual({ text: 'The accounts are in order.', source: 'hall', pair: null, compromised: true, observed: false });
     expect(parseFaceRow('`[hall · pair 1 · disagree · compromised]` The accounts are in order.', 'X'))
       .toEqual({
         text: 'The accounts are in order.',
         source: 'hall',
         pair: { id: 1, kind: 'disagree' },
         compromised: true,
+        observed: false,
       });
     // An untagged row and an ordinary tagged row both read `compromised: false`.
     expect(parseFaceRow('a bare face.', 'X').compromised).toBe(false);
@@ -339,10 +340,13 @@ describe('the grammar — the tag, and what it refuses', () => {
       .toThrow(/The table is CLOSED/);
     expect(() => faces(['All is well.'], ['tavern'], [true]))
       .toThrow(/which no covert field of the engine can compromise/);
-    // And the archiver holds no secret of its own — caught by the CLOSED TABLE first, which
-    // is the stronger refusal of the two and the one a writer reads.
+    // And the archiver holds no secret of its own — caught at car 8b-W-18n by the NEVER
+    // COMPROMISABLE table, which now takes this refusal ahead of the closed table because it
+    // holds the PUBLIC too (ADDENDUM 18 ruling 28 (a): nothing backs it, so nothing takes it).
     expect(() => parseFaceRow('`[archiver · pair 1 · weigh · compromised]` It is disputed.', 'X'))
-      .toThrow(/marks `archiver` as `compromised`/);
+      .toThrow(/marks `archiver` `compromised`, and nothing can capture it/);
+    expect(() => parseFaceRow('`[public · compromised]` All is well.', 'X'))
+      .toThrow(/marks `public` `compromised`, and nothing can capture it/);
   });
 
   it('⛔ REFUSED: two compromised candidates for one source on one variant', () => {

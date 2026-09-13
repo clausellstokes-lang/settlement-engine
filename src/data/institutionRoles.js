@@ -757,6 +757,72 @@ export const SOURCE_FALLBACK_ROLES = Object.freeze([
 ]);
 
 /**
+ * ⭐⭐ THE PUBLIC'S ROSTER, BY TIER (ADDENDUM 18 ruling 28, the owner's; car 8b-W-18n).
+ *
+ * THE OWNER'S WORD, 2026-09-13 ~10:5x: *"the public observes. the general public of the town
+ * owed to no singular group"*. The public is seated by NO institution row and by no tier gate —
+ * it resolves on every town, as the stranger does — but WHAT IT IS CALLED follows the tier,
+ * because "the townsfolk" is not a word for nine households and "the whole thorp" is not a word
+ * for a city. Ruling 28 edge (f) names the shape: *"tier-fitting plurals … never a singular and
+ * never an office"*.
+ *
+ * ── THE THREE RULES THIS TABLE OBEYS, EACH PINNED ────────────────────────────────────
+ * 1. PLURAL ONLY. Every entry carries `n: 'pl'`. A singular public would be one person with an
+ *    opinion, which is a SOURCE with a stake — the tavern, the elders, a household — and ruling
+ *    28 edge (e) holds those apart from the public by name. The pin is a scan of the table.
+ * 2. NEVER AN OFFICE. No entry carries `office: true`, and none may: an office is a power's
+ *    seat and the public is owed to no power. The pin refuses the key outright.
+ * 3. THE TOWN NEVER NAMES ITSELF (ruling 12). 'the people of the town', never '{settlement}'.
+ *
+ * ⛔ AN ARRAY OF ROWS, NEVER AN OBJECT KEYED ON A TIER, and never one keyed on `public` — the
+ * discipline `SOURCE_FALLBACK_ROLES` records above, kept here so a later move of this table
+ * into `src/domain/**` cannot mint a false producer.
+ *
+ * ⛔ A TIER THIS TABLE DOES NOT NAME FALLS BACK TO THE LAST ROW, which is the town-and-above
+ * roster: total by construction, because `tiers: null` matches everything and sits last.
+ *
+ * @type {ReadonlyArray<{tiers: ReadonlyArray<string>|null, roles: ReadonlyArray<RoleEntry>}>}
+ */
+export const PUBLIC_ROLES_BY_TIER = Object.freeze([
+  Object.freeze({
+    tiers: Object.freeze(['thorp']),
+    roles: Object.freeze([
+      { role: 'the whole thorp', n: 'pl' },
+      { role: 'every household here', n: 'pl' },
+      { role: 'anyone here', n: 'pl' },
+      { role: 'the people of the place', n: 'pl' },
+    ]),
+  }),
+  Object.freeze({
+    tiers: Object.freeze(['hamlet']),
+    roles: Object.freeze([
+      { role: 'the whole hamlet', n: 'pl' },
+      { role: 'every household here', n: 'pl' },
+      { role: 'anyone in the hamlet', n: 'pl' },
+      { role: 'the people of the place', n: 'pl' },
+    ]),
+  }),
+  Object.freeze({
+    tiers: Object.freeze(['village']),
+    roles: Object.freeze([
+      { role: 'the whole village', n: 'pl' },
+      { role: 'anyone in the village', n: 'pl' },
+      { role: 'every household here', n: 'pl' },
+      { role: 'the people of the village', n: 'pl' },
+    ]),
+  }),
+  Object.freeze({
+    tiers: null,
+    roles: Object.freeze([
+      { role: 'the townsfolk', n: 'pl' },
+      { role: 'the people of the town', n: 'pl' },
+      { role: 'anyone in the town', n: 'pl' },
+      { role: 'every household here', n: 'pl' },
+    ]),
+  }),
+]);
+
+/**
  * ⭐ EVERY OFFICE STRING THE NPC ROSTER CAN PRINT, and the office phrase this table spells for
  * it. An `office: true` role above is admitted on a town ONLY when one of these strings is in
  * the town's own printed roster (`officesOf`, src/domain/institutions/institutionTable.js).

@@ -22,6 +22,9 @@
  *
  * ── THE SEATING (ADDENDUM 18 ruling 13b, measured on the holder table) ───────────────
  *   stranger   everywhere — the universal source; a face with no tag is his
+ *   public     everywhere — the town's people as a whole, owed to no power and backed by no
+ *              row (ADDENDUM 18 ruling 28; car 8b-W-18n). Its ROLES follow the tier
+ *              (`PUBLIC_ROLES_BY_TIER`), plural always, never an office.
  *   elders     below town (thorp · hamlet · village), the tier's `Record of custom`
  *   hall       a live `Town hall` / `City hall` row
  *   tavern     a live taverns / inn / alehouse row (`Alehouse` at hamlet, `Taverns (5-20)`
@@ -60,12 +63,19 @@ import { standingDefenseForces } from '../../institutions/defenseInstitutionBuck
 import { officesOf } from '../../institutions/institutionTable.js';
 import { nativeSemanticName } from '../../content/customContentSemanticAuthority.js';
 import {
-  INSTITUTION_ROLES, ROSTER_OFFICE_TITLES, SOURCE_FALLBACK_ROLES,
+  INSTITUTION_ROLES, PUBLIC_ROLES_BY_TIER, ROSTER_OFFICE_TITLES, SOURCE_FALLBACK_ROLES,
 } from '../../../data/institutionRoles.js';
-import { COMPROMISABLE_SOURCES, FACE_SOURCES, UNIVERSAL_SOURCE } from './stateProseKernel.js';
+import {
+  COMPROMISABLE_SOURCES, FACE_SOURCES, PUBLIC_SOURCE, UNIVERSAL_SOURCES,
+} from './stateProseKernel.js';
 
-/** The sources that resolve on every town, whatever it holds. */
-export const ALWAYS_SOURCES = Object.freeze([UNIVERSAL_SOURCE]);
+/**
+ * The sources that resolve on every town, whatever it holds: the STRANGER, who has the roads,
+ * and the PUBLIC (ADDENDUM 18 ruling 28; car 8b-W-18n), who is the town's people as a whole and
+ * is seated by nothing because nothing backs it. The list is the kernel's, so a word added to
+ * one and not the other is a defect rather than a silence.
+ */
+export const ALWAYS_SOURCES = UNIVERSAL_SOURCES;
 
 /** The tiers below town, where the elders keep the record of custom (ruling 13b). */
 const ELDER_TIERS = Object.freeze(['thorp', 'hamlet', 'village']);
@@ -227,6 +237,8 @@ export function rolesOf(settlement) {
   /** @type {Map<string, Array<{role: string, n: string}>>} */
   const out = new Map();
   const seated = sourcesOf(settlement);
+  const publicTier = settlement && typeof settlement === 'object' && typeof settlement.tier === 'string'
+    ? settlement.tier.toLowerCase() : '';
   if (settlement && typeof settlement === 'object') {
     const printed = officesOf(/** @type {never} */ (settlement)) || [];
     /** @type {Set<string>} */
@@ -248,6 +260,14 @@ export function rolesOf(settlement) {
     // The elders are seated by TIER, so their rows are the tier's government rows — already
     // walked above where one of them is in the table — and the fallback below covers the rest.
   }
+  // ⭐⭐ THE PUBLIC'S ROSTER IS THE TIER'S (ADDENDUM 18 ruling 28 edge (f); car 8b-W-18n).
+  // It is set HERE rather than in `SOURCE_FALLBACK_ROLES` because the public is not a source
+  // that fell through the table — it has no catalogue row to fall through FROM, and what it is
+  // called is a fact about the tier and nothing else. `tiers: null` matches every tier and sits
+  // last, so an unknown or missing tier reads as the town-and-above roster rather than silence.
+  const publicRow = PUBLIC_ROLES_BY_TIER.find((r) => r.tiers === null || r.tiers.includes(publicTier))
+    || PUBLIC_ROLES_BY_TIER[PUBLIC_ROLES_BY_TIER.length - 1];
+  out.set(PUBLIC_SOURCE, publicRow.roles.map((entry) => ({ role: entry.role, n: entry.n })));
   for (const { source, roles } of SOURCE_FALLBACK_ROLES) {
     if (!seated.has(source)) continue;
     const held = out.get(source) || [];

@@ -28,8 +28,9 @@
 // words and the pair kinds a `[face]` row may carry are CLOSED at the kernel, and a grammar
 // that re-spelled them would be a second home for a list that must not drift.
 import {
-  ARCHIVER_SOURCE, COMPROMISABLE_SOURCES, COMPROMISED_MARK, FACE_SOURCES, PAIR_KINDS,
-  ROLE_SLOTS, UNIVERSAL_SOURCE, WEIGHABLE_KINDS, WEIGH_KIND, faceSentenceCount,
+  ARCHIVER_SOURCE, COMPROMISABLE_SOURCES, COMPROMISED_MARK, FACE_SOURCES, NEVER_COMPROMISABLE,
+  OBSERVED_MARK, PAIR_KINDS, ROLE_SLOTS, UNIVERSAL_SOURCE, WEIGHABLE_KINDS, WEIGH_KIND,
+  faceSentenceCount,
 } from '../../src/domain/display/stateProse/stateProseKernel.js';
 
 /** ARCH §2.3: the three roles a pool may declare. */
@@ -228,11 +229,12 @@ function refuse(label, message) {
  * @param {string} rest everything after `` `[face]` `` — `FACE_ROW_RE`'s first group
  * @param {string} label where the row stands, for the refusal
  * @returns {{text: string, source: string|null, pair: {id: number, kind: string}|null,
- *   compromised: boolean}} `compromised` is ruling 26's flag; see the mark's refusals below
+ *   compromised: boolean, observed: boolean}} `compromised` is ruling 26's flag and `observed`
+ *   is ruling 27's; see each mark's refusals below
  */
 export function parseFaceRow(rest, label) {
   const tagged = String(rest).match(FACE_TAG_RE);
-  if (!tagged) return { text: String(rest), source: null, pair: null, compromised: false };
+  if (!tagged) return { text: String(rest), source: null, pair: null, compromised: false, observed: false };
   const raw = tagged[1].split('·').map((token) => token.trim()).filter(Boolean);
   const source = raw[0] || '';
   if (!FACE_SOURCES.includes(source)) {
@@ -245,27 +247,51 @@ export function parseFaceRow(rest, label) {
   // "as the single account, or as one half of a pair"). It is lifted out of the token list
   // here so everything below reads exactly the tag shape car 8b-W-18c defined.
   const compromised = raw.includes(COMPROMISED_MARK);
-  const tokens = raw.filter((token) => token !== COMPROMISED_MARK);
+  // ⭐⭐ THE OBSERVED MARK (ADDENDUM 18 ruling 27; car 8b-W-18n). A second FLAG, lifted out of
+  // the token list beside the first, under which the `archiver` token DRAWS ALONE: the face is
+  // the archiver's own observation and not an addition to anybody's account.
+  const observed = raw.includes(OBSERVED_MARK);
+  const tokens = raw.filter((token) => token !== COMPROMISED_MARK && token !== OBSERVED_MARK);
+  if (observed && source !== ARCHIVER_SOURCE) {
+    refuse(label, `a [face] row marks \`${source}\` \`${OBSERVED_MARK}\`. An observation is the`
+      + ` ARCHIVER'S OWN (ADDENDUM 18 ruling 27, the owner's): only \`${ARCHIVER_SOURCE}\` takes the`
+      + ' mark, because only the archiver is present as a witness — a power that saw a thing'
+      + ' REPORTS it, and that is an ordinary face of that source');
+  }
+  if (compromised && NEVER_COMPROMISABLE.includes(source)) {
+    refuse(label, `a [face] row marks \`${source}\` \`${COMPROMISED_MARK}\`, and nothing can capture`
+      + ` it. The archiver is not a power of the town and holds no secret of its own (ruling 22);`
+      + ' the PUBLIC is owed to no power and backed by no row, so there is no institution for a'
+      + ` conspiracy to take (ADDENDUM 18 ruling 28 (a)): ${NEVER_COMPROMISABLE.join(' · ')}`);
+  }
   if (compromised && !COMPROMISABLE_SOURCES.includes(source)) {
     refuse(label, `a [face] row marks \`${source}\` as \`${COMPROMISED_MARK}\`, and no covert field`
       + ` of the engine can compromise it. The table is CLOSED (ADDENDUM 18 ruling 26 (c)):`
       + ` ${COMPROMISABLE_SOURCES.join(' · ')}. A register under a cult's hand and an unexposed`
       + ' officer are named by the ruling and recorded by NO field, so neither may be tagged');
   }
-  if (compromised && source === ARCHIVER_SOURCE) {
-    refuse(label, `a [face] row marks the \`${ARCHIVER_SOURCE}\` \`${COMPROMISED_MARK}\`. The archiver`
-      + ' is not a power of the town and holds no secret of its own (ADDENDUM 18 ruling 22)');
-  }
   if (tokens.length === 1) {
     // ⛔ A WEIGH WITH NO PAIR. The archiver's row exists only to close a pair; untagged with a
     // pair id it would be a bare assertion in the archiver's own hand, which is the one thing
     // §4 of the law says the selector refuses outright.
-    if (source === ARCHIVER_SOURCE) {
+    // ⭐ AND THE ONE EXCEPTION IS THE OBSERVATION (ruling 27): `[archiver · observed]` is a
+    // whole face that stands by itself, so the tag carries its source and no pair at all.
+    if (source === ARCHIVER_SOURCE && !observed) {
       refuse(label, `a [face] row speaks for the \`${ARCHIVER_SOURCE}\` with no pair. The archiver's`
-        + ' sentence CLOSES a pair and never stands alone (ADDENDUM 18 ruling 22): tag it'
-        + ` \`${ARCHIVER_SOURCE} · pair N · ${WEIGH_KIND}\` naming the pair it weighs`);
+        + ' sentence CLOSES a pair and never stands alone (ADDENDUM 18 ruling 22), unless it is'
+        + ` the archiver's OWN OBSERVATION (ruling 27): tag it \`${ARCHIVER_SOURCE} · pair N ·`
+        + ` ${WEIGH_KIND}\` naming the pair it weighs, or \`${ARCHIVER_SOURCE} · ${OBSERVED_MARK}\``);
     }
-    return { text: tagged[2], source, pair: null, compromised };
+    return { text: tagged[2], source, pair: null, compromised, observed };
+  }
+  // ⛔ AN OBSERVATION IS NEVER HALF OF A PAIR AND NEVER A WEIGHING (ruling 27). A pair is two
+  // POWERS reading one state (ruling 15) and the archiver is not a power; a weighing closes an
+  // account that already stands, and an observation opens one of its own.
+  if (observed) {
+    refuse(label, `a [face] row marks \`${OBSERVED_MARK}\` and a pair. The archiver's observation is`
+      + ' a whole face that stands ALONE (ADDENDUM 18 ruling 27): a pair is two POWERS reading'
+      + ' one state and the archiver is not a power, so the tag is `archiver · observed` and'
+      + ' nothing else');
   }
   const pairToken = tokens[1].match(PAIR_TOKEN_RE);
   if (!pairToken) {
@@ -295,7 +321,7 @@ export function parseFaceRow(rest, label) {
       + ` \`${kind}\`. The archiver is not a power of the town and never half of a pair; the`
       + ` only mark it takes is \`${WEIGH_KIND}\` (ADDENDUM 18 ruling 22)`);
   }
-  return { text: tagged[2], source, pair: { id, kind }, compromised };
+  return { text: tagged[2], source, pair: { id, kind }, compromised, observed };
 }
 
 /**
@@ -773,6 +799,8 @@ export function seatMeta(input) {
  * @param {ReadonlyArray<{id: number, kind: string}|null>} [input.pairs] parallel to `faces`
  * @param {ReadonlyArray<boolean>} [input.compromised] parallel to `faces` (ruling 26); absent
  *   reads as all-false
+ * @param {ReadonlyArray<boolean>} [input.observed] parallel to `faces` (ruling 27); absent reads
+ *   as all-false
  * @param {number} input.pinnedFaceCount
  * @param {(slot: string) => string|undefined} input.shapeOf
  * @param {ReadonlyArray<string>} input.clauseOpeners
@@ -794,6 +822,35 @@ export function assertFaces(input) {
   if (compromised.length !== faces.length) {
     refuse(label, `${faces.length} faces against ${compromised.length} compromised marks — the lists are parallel by construction`);
   }
+  // ⭐⭐ THE OBSERVED MARKS (ADDENDUM 18 ruling 27; car 8b-W-18n), checked from the LEAF's side
+  // for the same reason the compromised ones are: `parseFaceRow` is not the only thing that can
+  // build a leaf, and an observation is the ONE archiver row that draws alone — so a leaf that
+  // could smuggle one onto a power, or two onto one variant, would put a witness where a source
+  // stands, or bury the sources behind the witness (edge (e)).
+  const observed = Array.isArray(input.observed) ? input.observed : faces.map(() => false);
+  if (observed.length !== faces.length) {
+    refuse(label, `${faces.length} faces against ${observed.length} observed marks — the lists are parallel by construction`);
+  }
+  const observedAt = observed.map((mark, at) => (mark === true ? at + 1 : 0)).filter(Boolean);
+  if (observedAt.length > 1) {
+    refuse(label, `faces ${observedAt.join(' and ')} are all marked \`${OBSERVED_MARK}\`. A variant`
+      + ' carries AT MOST ONE observed face (ADDENDUM 18 ruling 27 (e), the owner\'s): an'
+      + ' observation is one candidate class beside the sources, and more than one would let the'
+      + ' sources vanish behind the witness');
+  }
+  observed.forEach((mark, at) => {
+    if (mark !== true) return;
+    if (sources[at] !== ARCHIVER_SOURCE) {
+      refuse(label, `face ${at + 1} is marked \`${OBSERVED_MARK}\` and speaks for`
+        + ` \`${sources[at] || UNIVERSAL_SOURCE}\`. An observation is the ARCHIVER'S OWN (ADDENDUM 18`
+        + ' ruling 27): a power that saw a thing REPORTS it, and that is an ordinary face');
+    }
+    if (pairs[at] !== null && pairs[at] !== undefined) {
+      refuse(label, `face ${at + 1} is marked \`${OBSERVED_MARK}\` and carries a pair mark. An`
+        + ' observation stands ALONE (ADDENDUM 18 ruling 27): a pair is two POWERS reading one'
+        + ' state and the archiver is not a power');
+    }
+  });
   /** @type {Map<string, number[]>} */
   const compromisedBySource = new Map();
   compromised.forEach((mark, at) => {
@@ -832,10 +889,13 @@ export function assertFaces(input) {
   sources.forEach((source, at) => {
     const pair = pairs[at];
     if (pair === null || pair.kind !== WEIGH_KIND) {
-      if (source === ARCHIVER_SOURCE) {
-        refuse(label, `face ${at + 1} speaks for the \`${ARCHIVER_SOURCE}\` and is not a`
-          + ` \`${WEIGH_KIND}\`. The archiver is not a power of the town: its one sentence CLOSES`
-          + ' a pair and never stands alone or reads the state (ADDENDUM 18 ruling 22)');
+      // ⭐ THE OBSERVATION IS THE EXCEPTION (ruling 27; car 8b-W-18n): `[archiver · observed]`
+      // is a whole face that stands by itself, and it is the only archiver row that does.
+      if (source === ARCHIVER_SOURCE && observed[at] !== true) {
+        refuse(label, `face ${at + 1} speaks for the \`${ARCHIVER_SOURCE}\` and is neither a`
+          + ` \`${WEIGH_KIND}\` nor \`${OBSERVED_MARK}\`. The archiver is not a power of the town: its`
+          + ' one sentence CLOSES a pair (ADDENDUM 18 ruling 22), or it is the archiver\'s own'
+          + ' OBSERVATION and stands alone (ruling 27)');
       }
       return;
     }

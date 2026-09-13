@@ -452,6 +452,7 @@ function parseAnnex(src, headerRe, label, options = {}) {
       last.sources.push(row.source);
       last.pairs.push(row.pair);
       last.compromised.push(row.compromised === true);
+      last.observed.push(row.observed === true);
       continue;
     }
 
@@ -509,6 +510,7 @@ function parseAnnex(src, headerRe, label, options = {}) {
           sources: [],
           pairs: [],
           compromised: [],
+          observed: [],
           text: cleanText(lead ? m[3].slice(lead[0].length) : m[3]),
         });
       }
@@ -530,7 +532,7 @@ function parseAnnex(src, headerRe, label, options = {}) {
       // family, and the few single-state blocks); '*' is its reserved key.
       if (!pool) openPool(SOLE_POOL);
       pool.variants.push({
-        index: 0, angle: 'canonical', marks: [], grammar: null, wordings: [], sources: [], pairs: [], compromised: [], text: cleanText(canonical[2]),
+        index: 0, angle: 'canonical', marks: [], grammar: null, wordings: [], sources: [], pairs: [], compromised: [], observed: [], text: cleanText(canonical[2]),
       });
       lastIndex = 0;
       continue;
@@ -560,6 +562,7 @@ function parseAnnex(src, headerRe, label, options = {}) {
         sources: [],
         pairs: [],
         compromised: [],
+        observed: [],
         text: cleanText(variant[4]),
       });
       continue;
@@ -813,6 +816,7 @@ function projectBlocks(blocks, options = {}) {
             sources: v.sources,
             pairs: v.pairs,
             compromised: v.compromised,
+            observed: v.observed,
             pinnedFaceCount: FACE_PIN,
             shapeOf: meta.shapeOf,
             clauseOpeners: meta.clauseOpeners,
@@ -837,6 +841,10 @@ function projectBlocks(blocks, options = {}) {
         // emitted ONLY where a face carries one, so a leaf with no compromised face is
         // byte-identical and `poolMeta.faceCounts` does not move.
         ...(v.compromised.some((mark) => mark === true) ? { compromised: [false, ...v.compromised] } : {}),
+        // ⭐ AND THE OBSERVED MARKS (ADDENDUM 18 ruling 27; car 8b-W-18n), on the same terms:
+        // emitted ONLY where a variant carries an observed face, so a leaf with none is
+        // byte-identical and nothing downstream reads a list that is not there.
+        ...(v.observed.some((mark) => mark === true) ? { observed: [false, ...v.observed] } : {}),
         ...(v.grammar ? { grammar: v.grammar } : {}),
       }));
       if (meta) {

@@ -461,17 +461,37 @@ export function hashKey(key) {
  *
  * ⛔ THE THIRTEENTH WORD IS NOT A POWER. `archiver` (car 8b-W-18i) is in this list because it
  * is a word a `[face]` tag may carry, and for no other reason: it seats nowhere, `sourcesOf`
- * never emits it, and `eligibleFaces` refuses to draw it. See `ARCHIVER_SOURCE`.
+ * never emits it, and `eligibleFaces` refuses to draw it unless it is marked `observed`
+ * (ADDENDUM 18 ruling 27; car 8b-W-18n). See `ARCHIVER_SOURCE` and `OBSERVED_MARK`.
+ *
+ * ⭐ THE FOURTEENTH WORD IS A POWER OF NOBODY. `public` (ADDENDUM 18 ruling 28, the owner's;
+ * car 8b-W-18n) is the town's people as a whole, *"owed to no singular group"*: it is seated by
+ * no institution row and by no tier, so it resolves EVERYWHERE, exactly as the stranger does.
+ * It is a source in every other respect — it takes a role slot, its roles are drawn from the
+ * town's own tier, and it may be half of a pair — and it is the one source NOTHING can capture
+ * (`NEVER_COMPROMISABLE`), because nothing backs it.
  * @type {ReadonlyArray<string>}
  */
 export const FACE_SOURCES = Object.freeze([
   'stranger', 'elders', 'hall', 'tavern', 'guild', 'register',
   'muster', 'watch', 'garrison', 'gate', 'market', 'court',
-  'archiver',
+  'public', 'archiver',
 ]);
 
 /** The one source that resolves on EVERY town — a face with no tag is this source's. */
 export const UNIVERSAL_SOURCE = 'stranger';
+
+/** The town's people as a whole (ADDENDUM 18 ruling 28). Seated by nothing, so seated everywhere. */
+export const PUBLIC_SOURCE = 'public';
+
+/**
+ * ⭐ THE SOURCES THAT RESOLVE ON EVERY TOWN, WHATEVER IT HOLDS (ruling 28 edge (f): *"like the
+ * stranger it draws on every town"*). `eligibleFaces` admits these without consulting a roster,
+ * so a reader that cannot say what a town has still hears them — which is the SAME fail-closed
+ * reading the untagged face has always taken, widened by exactly one word.
+ * @type {ReadonlyArray<string>}
+ */
+export const UNIVERSAL_SOURCES = Object.freeze([UNIVERSAL_SOURCE, PUBLIC_SOURCE]);
 
 /**
  * ⭐ THE ARCHIVER — A WORD OF THE FACE VOCABULARY THAT IS NOT A POWER OF THE TOWN (ADDENDUM 18
@@ -483,12 +503,67 @@ export const UNIVERSAL_SOURCE = 'stranger';
  * state at all: it is ONE SENTENCE THAT CLOSES A PAIR — a conjecture, a plain "a matter of
  * debate", or a reasoned confidence.
  *
- * ⛔ SO IT NEVER DRAWS ALONE. `eligibleFaces` excludes it outright, which means the face draw
- * can never land on it and `facePartner` can never return it; it reaches the page only through
- * `faceWeigh` below, beside the pair it weighs. That is the mechanical form of the ruling's
- * "it opens and never closes": nothing the archiver adds may stand as a town's account.
+ * ⛔ SO IT NEVER DRAWS ALONE — WITH ONE MARKED EXCEPTION. `eligibleFaces` excludes it outright,
+ * which means the face draw can never land on it and `facePartner` can never return it; it
+ * reaches the page only through `faceWeigh` below, beside the pair it weighs. That is the
+ * mechanical form of the ruling's "it opens and never closes": nothing the archiver adds may
+ * stand as a town's account. The exception is `OBSERVED_MARK` (ruling 27), under which the
+ * archiver is not adding to an account at all but making one of its own.
  */
 export const ARCHIVER_SOURCE = 'archiver';
+
+/**
+ * ── ⭐⭐ THE ARCHIVER AS WITNESS (ADDENDUM 18 ruling 27, the owner's; car 8b-W-18n) ─────
+ *
+ * THE OWNER'S WORD, 2026-09-13 ~10:4x: *"an additional alternative to attribution, it can
+ * simply be observations … the archiver, themselves being a witness can plainly state"*.
+ *
+ * A face tagged `[archiver · observed]` is THE ARCHIVER'S OWN OBSERVATION, and it is the one
+ * archiver row that DRAWS ALONE. Three mechanical consequences, each of them a refusal
+ * somewhere else in this file or in the grammar:
+ *
+ *   1. IT IS ELIGIBLE ON EVERY TOWN. The archiver is the hand the dossier is written in, so
+ *      there is no institution whose absence could silence it — the same argument `faceWeigh`
+ *      already takes for the weighing row, applied to a row that stands by itself.
+ *   2. IT IS NEVER HALF OF A PAIR. A pair is two POWERS reading one state (ruling 15) and the
+ *      archiver is not a power: the grammar refuses a pair mark beside `observed`, and
+ *      `facePartner` skips an observed face so a leaf projected by something else cannot make
+ *      one a partner either.
+ *   3. IT CARRIES NO ROLE SLOT. The archiver is not a source, so it has no roster to draw a
+ *      person from: it prints in the archiver's own frame, which the writer writes literally
+ *      ("In the survey's time here…", "It is observed that…"). `ROLE_SLOTS` excludes the
+ *      archiver by construction and `assertFaces` refuses any other source's slot on it, so
+ *      this needs no third rule — it is what the two that exist already say.
+ *
+ * ⛔ AT MOST ONE PER VARIANT (edge (e): *"so the sources do not vanish behind the witness"*),
+ * refused in the grammar where the whole variant is in hand.
+ */
+export const OBSERVED_MARK = 'observed';
+
+/**
+ * ⭐ THE SOURCES NOTHING CAN CAPTURE (ADDENDUM 18 rulings 27 and 28; car 8b-W-18n). The
+ * `compromised` tag of ruling 26 is refused on both by name, and for two different reasons:
+ *   `archiver`  is not a power of the town and holds no secret of its own (ruling 22).
+ *   `public`    *"is still the one voice nothing captures, since nothing backs it"* (ruling 28
+ *               edge (a)). A conspiracy captures an institution; there is no institution here.
+ * ⛔ THE TWO TABLES ARE HELD DISJOINT BY A PIN, not by care: a word that entered both would let
+ * the grammar accept a tag the composer could never honour.
+ * @type {ReadonlyArray<string>}
+ */
+export const NEVER_COMPROMISABLE = Object.freeze([ARCHIVER_SOURCE, PUBLIC_SOURCE]);
+
+/**
+ * Is this face the archiver's own observation? Reads the leaf's `observed` list, which the
+ * projector emits ONLY where a variant carries one — so every shipped variant answers `false`
+ * with no list at all.
+ * @param {StateProseVariant|null|undefined} variant
+ * @param {number} face
+ * @returns {boolean}
+ */
+export function faceIsObserved(variant, face) {
+  const marks = variant ? variant.observed : undefined;
+  return Array.isArray(marks) && marks[face] === true;
+}
 
 /**
  * ⭐ THE PAIR KINDS (the owner's refinement of ruling 15, 2026-09-13, received at car
@@ -635,8 +710,14 @@ export function eligibleFaces(variant, sources) {
     // not a reading of the state — it is the archiver closing a pair — so it is never a
     // candidate for the draw and never a partner. `faceWeigh` is the only door it has, and it
     // opens only where the pair it weighs has already been drawn whole.
-    if (source === ARCHIVER_SOURCE) continue;
-    if (source === null || source === UNIVERSAL_SOURCE || roster.has(source)) eligible.push(face);
+    // ⭐⭐ UNLESS IT IS THE ARCHIVER'S OWN OBSERVATION (ruling 27; car 8b-W-18n), which is not
+    // an addition to an account but an account of its own, and which is eligible on EVERY town
+    // because no institution's absence could silence the hand that writes the page.
+    if (source === ARCHIVER_SOURCE) {
+      if (faceIsObserved(variant, face)) eligible.push(face);
+      continue;
+    }
+    if (source === null || UNIVERSAL_SOURCES.includes(source) || roster.has(source)) eligible.push(face);
   }
   return eligible.length === 0 ? all : eligible;
 }
@@ -712,8 +793,13 @@ export function facePartner(variant, face, sources = null) {
   // stands so that a caller holding a face index of its own cannot turn the archiver into
   // half of a pair by asking the wrong question.
   if (pair.kind === WEIGH_KIND) return null;
+  // ⛔ AND AN OBSERVED FACE IS NEVER HALF OF A PAIR (ruling 27; car 8b-W-18n). The grammar
+  // refuses a pair mark beside `observed` at the annex row and again from the leaf's side, so
+  // this line is unreachable on a lawful corpus; it stands for the same reason the weigh guard
+  // above it does — a leaf projected by something else must not be able to pair the archiver.
+  if (faceIsObserved(variant, face)) return null;
   for (const other of eligibleFaces(variant, sources)) {
-    if (other === face) continue;
+    if (other === face || faceIsObserved(variant, other)) continue;
     const mark = facePairOf(variant, other);
     if (mark !== null && mark.id === pair.id && mark.kind !== WEIGH_KIND) return other;
   }
@@ -1131,6 +1217,10 @@ export const COMPROMISED_MARK = 'compromised';
  * standing is public. Until a field records that a creed's hand on the register is HIDDEN,
  * admitting `register` here would let a writer tag a conspiracy the engine never held.
  * Reported OPEN.
+ *
+ * ⛔ AND IT IS DISJOINT FROM `NEVER_COMPROMISABLE` BY PIN (car 8b-W-18n). The archiver holds no
+ * secret of its own and the public is backed by nothing, so neither can be captured; a word in
+ * both tables would be a tag the grammar accepts and the composer can never honour.
  * @type {ReadonlyArray<string>}
  */
 export const COMPROMISABLE_SOURCES = Object.freeze(['hall', 'watch', 'court']);

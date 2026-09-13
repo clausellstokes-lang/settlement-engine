@@ -442,6 +442,24 @@ export function cardLines(c) {
   }
   L.push('  ⛔ A SERVICE AT OR ABOVE THE BAR IS A THING THE TOWN\'S OWN MODEL SAYS THIS BODY DOES: denying it is floor 1, whatever the face is otherwise about. A row filed under `standing` is UNDER ARMS in the engine\'s reading even where the key fixes no garrison and no militia.');
   L.push('');
+  // ⭐⭐ (2b′) THE OBSERVER'S AND THE PUBLIC'S LIST (ADDENDUM 18 rulings 27 (a) and 28 (a); car
+  // 8b-W-18n). Both new forms are FACTS SOMEBODY CLAIMS TO HAVE SEEN — the archiver as witness,
+  // and the town's people as a whole — so floor 1 binds them in full and HARDEST, and both
+  // rulings name THE SAME LIST as the instrument: *"the card's section (2b) is the observer's
+  // list of what it may not have seen"*. So the rows are (2b)'s rows verbatim under a heading
+  // that says what they are FOR here. MECHANICAL, and deliberately not a second derivation: a
+  // service added to (2b) and not to this list would let a witness un-see what a source may not
+  // deny, which is floor 1 by inference wearing the one coat that sounds like evidence.
+  L.push('(2b\u2032) THE OBSERVER\'S AND THE PUBLIC\'S LIST: what neither may claim to have seen');
+  for (const r of c.mayNotDeny) {
+    const services = r.services.length
+      ? r.services.map((s) => s.service).join(' · ')
+      : '(no service menu at or above the bar)';
+    L.push(`  ${r.name} (required at ${r.at.join(', ')}) — NOT SEEN is a claim about: ${services}`);
+  }
+  L.push('  \u26d4 AN OBSERVATION AND A PUBLIC FACE ARE FACTS THEIR SPEAKER CLAIMS (rulings 27 (a), 28 (a)), so neither may INFER INTO A SILENCE a required row denies. On a preimage carrying a `Town watch`, "no member of the watch has walked the wall" is floor 1 in a witness\'s coat; "no soldier has been seen on the wall" is true on every town that draws a key fixing no garrison and no militia. The PUBLIC\'s second half — what everyone MAKES of what it saw — is a perception and may be mistaken; the seeing may not.');
+  L.push('  \u26d4 AND THE FAIR COPY DOES NOT CITE ITSELF (ADDENDUM 18 ruling 40, the owner\'s): an observation is a BARE PASSIVE with no observer named — never "in the survey\'s time here", "on the nights the survey kept", "it is observed that", "this office".');
+  L.push('');
   L.push(`(2c) COVERT FIELDS AND THEIR SYMPTOMS ON THIS BLOCK (ADDENDUM 18 ruling 26) — the INVERTED test the refuter judges a \`compromised\` face under`);
   if (!c.covert || c.covert.every((f) => f.marks.length === 0)) {
     L.push('    (none: no covert field of the engine marks a symptom pool on this block, so no face of this block may carry the `compromised` tag)');

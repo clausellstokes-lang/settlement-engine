@@ -774,7 +774,7 @@ function armC6(entry, ground, out) {
  * A `{hall}` on a face is not a fill of the variant's bag: it is the ROLE the composer draws
  * from the town's own institution rows before the bag is applied (`stateProseKernel.js`
  * `fillRoleSlots`). The spine has no source and therefore cannot declare one, so arm D's
- * question — "does the variant declare this slot?" — has no answer for these twelve words and
+ * question — "does the variant declare this slot?" — has no answer for these thirteen words and
  * asking it convicts every lawful face. `assertFaces` licenses them by the same name at the
  * projector; this is the instrument side of that one amendment.
  *
@@ -788,6 +788,10 @@ function armC6(entry, ground, out) {
 const ATTRIBUTION_SLOTS = Object.freeze([
   'stranger', 'elders', 'hall', 'tavern', 'guild', 'register',
   'muster', 'watch', 'garrison', 'gate', 'market', 'court',
+  // ⭐ THE THIRTEENTH, at car 8b-W-18n (ADDENDUM 18 ruling 28): the PUBLIC is the town's people
+  // as a whole and takes a role slot like any source. Added here because the suite's arm read
+  // this list against `ROLE_SLOTS` and named the omission — the mechanism working, not a habit.
+  'public',
 ]);
 
 /**

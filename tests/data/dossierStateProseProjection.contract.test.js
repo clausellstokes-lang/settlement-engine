@@ -1803,18 +1803,18 @@ describe('SEAM car 4 — §2.5\'s grammar, and every refusal it declares', () =>
     // ⭐ `compromised` JOINS THE PARSED SHAPE AT CAR 8b-W-18m (ADDENDUM 18 ruling 26): a FLAG
     // rather than a position, false on every row that does not carry the mark — which is every
     // row of the shipped corpus, so nothing the projector emits moves.
-    expect(parseFaceRow(m[1], 'x')).toEqual({ text: 'The hall would like it noted that the circuit is kept.', source: 'hall', pair: null, compromised: false });
+    expect(parseFaceRow(m[1], 'x')).toEqual({ text: 'The hall would like it noted that the circuit is kept.', source: 'hall', pair: null, compromised: false, observed: false });
     // A bare face is the stranger's: no tag, no source, no pair — the shape every face had before this car.
-    expect(parseFaceRow('The circuit is kept.', 'x')).toEqual({ text: 'The circuit is kept.', source: null, pair: null, compromised: false });
+    expect(parseFaceRow('The circuit is kept.', 'x')).toEqual({ text: 'The circuit is kept.', source: null, pair: null, compromised: false, observed: false });
     // The pair, with its KIND (the owner's refinement, 2026-09-13).
     expect(parseFaceRow('`[tavern · pair 1 · disagree]` Nobody stands on it, says the tavern.', 'x'))
-      .toEqual({ text: 'Nobody stands on it, says the tavern.', source: 'tavern', pair: { id: 1, kind: 'disagree' }, compromised: false });
+      .toEqual({ text: 'Nobody stands on it, says the tavern.', source: 'tavern', pair: { id: 1, kind: 'disagree' }, compromised: false, observed: false });
     for (const kind of PAIR_KINDS.filter((k) => k !== WEIGH_KIND)) {
       expect(parseFaceRow(`\`[watch · pair 3 · ${kind}]\` text`, 'x').pair).toEqual({ id: 3, kind });
     }
     // ⭐ THE FIFTH KIND IS THE ARCHIVER'S AND ONLY THE ARCHIVER'S (car 8b-W-18i).
     expect(parseFaceRow(`\`[${ARCHIVER_SOURCE} · pair 3 · ${WEIGH_KIND}]\` It may be that both are right.`, 'x'))
-      .toEqual({ text: 'It may be that both are right.', source: ARCHIVER_SOURCE, pair: { id: 3, kind: WEIGH_KIND }, compromised: false });
+      .toEqual({ text: 'It may be that both are right.', source: ARCHIVER_SOURCE, pair: { id: 3, kind: WEIGH_KIND }, compromised: false, observed: false });
     expect(FACE_TAG_RE.test('`[hall]` text')).toBe(true);
     expect(FACE_TAG_RE.test('The hall text')).toBe(false);
     // Every word of the vocabulary parses; the vocabulary is the kernel's, not a copy.
@@ -1910,7 +1910,10 @@ describe('SEAM car 4 — §2.5\'s grammar, and every refusal it declares', () =>
     expect(() => assertFaces({ ...lawful, sources: ['hall', 'tavern', 'court'] }))
       .toThrow(/face 3 is marked `weigh` but speaks for `court`/);
     expect(() => assertFaces({ ...lawful, pairs: [{ id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null] }))
-      .toThrow(/face 3 speaks for the `archiver` and is not a `weigh`/);
+            // ⭐ RE-WORDED AT CAR 8b-W-18n: the refusal now names BOTH doors the archiver has —
+      // the weighing (ruling 22) and the observation (ruling 27) — because a writer who
+      // reads only the first would delete a lawful observed face to satisfy it.
+      .toThrow(/face 3 speaks for the `archiver` and is neither a `weigh` nor `observed`/);
     // ⛔ MORE THAN ONE SENTENCE IN THE ARCHIVER'S HAND — three in the unit at most.
     expect(() => assertFaces({
       ...lawful,
