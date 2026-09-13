@@ -541,3 +541,235 @@ THE CARD (mechanical sections) — block DS-DEF-2 · pool `Invasion & War: walls
   village: the hall: — · the tavern: — · the guilds: — · the register (parish): Parish church, Priest (resident), Graveyard · the elders: —
   town: the hall: Town hall · the tavern: Taverns (5-20) · the guilds: Craft guilds (5-15) · the register (parish): Parish churches (2-5), Parish burial grounds · the elders: —
   the key on the force buckets and the gates: watch: OPEN · garrison: FIXED FALSE by the key · militia: FIXED FALSE by the key · mercenary: OPEN · charter: OPEN · gates: OPEN
+
+────────────────────────────────────────────────────────────────────────
+THE MARKER'S SECTIONS (seat: opus · written against brief ADDENDUM 14/18
+and CONTRADICTION-TABLE §V, which governs where it and an earlier row disagree)
+────────────────────────────────────────────────────────────────────────
+
+(7) THE SOURCES
+
+  ⛔ READ THIS FIRST. The preimage runs thorp 60 · hamlet 6 · village 8 · town 51 of 128.
+  Thorp and town are the two masses and they are DIFFERENT WORLDS: a thorp carries five
+  required rows (dwellings, water, a burial ground, an external mill, subsistence farming)
+  and a town carries thirteen, INCLUDING a Town watch, a Town hall, a Town granary, a market
+  square, craft guilds and taverns. There is almost no seated body in common. Any face that
+  leans on a hall, a tavern, a guild, a market, a granary, a register or a watch is a TOWN
+  face and must be offered as one; any face that leans on a town having none of those is a
+  BELOW-TOWN face. A face written for "the whole pool" can rest on four things only: the
+  wall, the households, the burial ground, and the road.
+
+  ── UNIVERSAL (exists on every town this pool can draw) ──
+
+  • THE SURVEY — the archiver's own compiled dossier; the source for every fact that is the
+    engine's own (the wall standing, no force under arms, the threat row, the badge).
+    Seated by construction (`holderTable.js` OFFICE_KIND, `:78-81`).
+    INTEREST: none, and that is its stake — it is the record, and the archiver's own
+    professional standing rides on it. ⚠ The survey REPORTS and never CITES: a fact sourced
+    at the office and then cited to a record is the record citing the speaker
+    (`holderTable.js` office note; F1-24). Write "the survey finds the wall kept and no force
+    under arms", "entered here as kept", "it is not recorded that…".
+
+  • THE STRANGER / the traveller on the road — seated by the road kind (`terrainType`,
+    `monsterThreat`, `holderTable.js:233-234`), which needs no roster row; anyone who walked
+    in can see it.
+    INTEREST: what is visible on arrival, and what was NOT done to him. He is this pool's
+    sharpest source, because the pool's whole content is a perimeter and a question about
+    who is on it. On a `Town walls` town he was stopped and taxed ("Gate control", on, p 1.0);
+    on a bare `Earthworks` town there is nothing to stop him. Both are his report.
+
+  • THE HOUSEHOLDS — the dwellings row is required at every preimage tier (Dwellings 4-16 /
+    17-80 / 80-180 / Housing 180-1000), and BELOW TOWN the governing institution IS the
+    households (`Head-of-household consensus` / `Informal elder consensus`;
+    `institutionServices.js:1448-1453`; F1-20 — a consensus, never a room).
+    INTEREST: the wall is work they do and are not paid for. `communityMilBase` is the
+    unpaid community baseline the upkeep gate EXEMPTS entirely
+    (`defenseGenerator.js:182`, `:186-192`) — the engine's own model of a defence that costs
+    the purse nothing because it costs the households instead. That grievance is licensed
+    everywhere in this pool and is its richest vein.
+    ⛔ Plural and unnamed ONLY. "The elder" singular is the thorp's and the hamlet's
+    mandated NPC (F3-06).
+
+  • WHOEVER TENDS THE BURIAL GROUND — a burial ground stands at every preimage tier
+    (thorp/hamlet `Burial ground`, village `Graveyard`, town `Parish burial grounds`).
+    INTEREST: the ground lies outside or against the wall on most towns; the person who digs
+    is the one who walks the outside of it as a matter of course.
+    ⛔ AS A PERSON, NOT AS A RECORD, BELOW TOWN. `Burial ground` and `Graveyard` carry no
+    register service at all (`institutionServices.js`: Burial · Grave marking · Grave
+    maintenance). `Register of the dead` exists on ONE row in this preimage —
+    `Parish burial grounds`, town, and even there at p 0.8. "The sexton records" / "the
+    register shows" below town is F1-24 with no holder. "Whoever digs the ground" is safe.
+
+  ── CONDITIONAL (the field that seats each) ──
+
+  • THE HALL / a clerk in the hall — TOWN ONLY (`Town hall`, required: true at town; F1-20
+    bars a hall, chamber or council room as a PLACE below town).
+    INTEREST: the purse and the legitimacy. ONE military purse pays the wall's keeping and
+    any wages together (`defenseGenerator.js:182`, `:189-192`,
+    `milUpkeepMult = min(1, 0.6 + econOutput/50 × 0.4)`), so the hall is defending a line of
+    spending that buys a wall and no men. `Town hall` services seat it: "Tax payment" (p 0.9),
+    "Dispute arbitration" (p 0.8), "Record filing" (p 0.6).
+    ⛔ "the hall" or "a clerk in the hall" — NEVER "the clerk", never the Mayor.
+
+  • THE TAVERN — TOWN ONLY (`Taverns (5-20)`, `Inn (multiple)`, required at town).
+    INTEREST: the safety label and the stranger traffic. The tavern is where the account of
+    who turns out lives, and it is the one source whose view of the wall is about people
+    rather than about stone.
+
+  • THE GUILDS / a guild's factor — TOWN ONLY (`Craft guilds (5-15)`, required at town).
+    INTEREST: influence and the town's prosperity; the wall protects their stock and their
+    stalls and the hall's spending on it comes off a purse they pay into. Write them from
+    their influence rank where the card prints one (ruling 18).
+
+  • WHOEVER HOLDS THE WAY THROUGH — CONDITIONAL, and the card must be read before a gate is
+    written. `hasGates` fires on `gates` · `town walls` · `city walls` · `massive walls` ·
+    `palisade` (`priorityHelpers.js:53`) and NOT on `earthwork` or `citadel` alone, which the
+    walls bucket admits (`defenseInstitutionBuckets.js` walls keywords). So the key leaves the
+    gate OPEN. Where it fires the engine seats the way through hard:
+      `Town walls` → "Gate control" on, p 1.0 — control who enters and exits, levy tolls
+      `Palisade or earthworks` → "Gated entry" on, p 1.0 — strangers must state business
+      `Gates (if walled)` → "Toll collection" on, p 1.0; "Entry inspection" p 0.8
+    Where it does not, `safetyProfile.js:463-464` prints the denial on the same tab.
+    INTEREST: the toll and the discretion. The person on the bar is the only person in this
+    pool with a defensive duty and no defensive body behind them.
+    ⛔ BOTH DIRECTIONS ARE FINDINGS (F1-08): asserting a gate AND denying one.
+
+  • THE WATCH — TOWN ONLY, and then REQUIRED. `Town watch` is required: true at town
+    (`institutionalCatalog.js:1348-1354`), sits in the watch bucket, and the key does not
+    touch that bucket. Its own services: "Night patrol" on, p 1.0; "Gate duty" p 0.8.
+    Below town `hasWatch` is false and ANY watch as a body is F1-01 / V-23.
+    INTEREST: the pay. The military upkeep gate DOES reach the watch (F4-19, V-07:
+    `defenseGenerator.js:177-178`, `:190`; `fieldSynonyms.js:51`), so on 51 of 128 preimage
+    towns somebody IS thinly paid to stand — but part-time, with day jobs
+    (`Town watch` = part-time guards; calling them professional, full-time or soldiers is F1-27).
+
+  • THE REGISTER / THE SEXTON — TOWN ONLY as a record-keeper (see the burial ground above).
+    At village a `Parish church` and a resident `Priest` stand but `Records` is on: false,
+    p 0.5. At HAMLET the row is `Access to parish church` — "walk 2-5km to village church"
+    (`institutionalCatalog.js:50-54`): the church is NOT in the settlement (F1-11). At thorp
+    there is no church and `hasChurch` is false.
+    INTEREST: the dead go outside the wall; whoever carries them is outside it after dark.
+    Write the creed's people from their standing where the card prints one (D-04–D-10).
+
+  • THE ELDERS — BELOW TOWN (`Household elder` / `Village elder` / `Village headman`, all
+    carrying "Record of custom", p 0.7–0.8; F1-22). At town the kind resolves only through a
+    `Town council`, which is not a required row.
+    INTEREST: the wall is a boundary and a customary obligation — "Record of custom" is
+    literally the memory of boundaries and old agreements.
+
+  • THE MARKET · THE GRANARY — TOWN ONLY (`Market square` + `Weekly market`; `Town granary`;
+    no granary row exists below town at all). F1-10, F1-09.
+
+  • NEVER A SPEAKER ON THIS KEY: the garrison and the militia (FIXED FALSE — F1-02, F1-03);
+    the mercenary company and the charter hall (OPEN, never assert — F1-05, F1-06, and W-01's
+    flag/bucket collision means no face may be charged on a Hireling-hall town either way);
+    THE CROWN'S ASSESSOR (no typed collector exists anywhere in the engine).
+
+  ── THE NAMED OFFICES A SPEAKER MUST NEVER BE (`npcGenerator.js:1511-1537`, this preimage) ──
+    thorp: Elder + a derived second role · hamlet: Elder, Parish Priest
+    village: Mayor, GUARD CAPTAIN · town: Mayor, GUARD CAPTAIN, High Priest
+  ⛔⛔ THE GUARD CAPTAIN IS THIS POOL'S TRAP. Village and town each emit exactly ONE Guard
+  Captain as a named NPC with a personality, a disposition and a secret — on a town the key
+  says has no garrison and no militia. Every "the one who holds the wall keys", "the one who
+  is supposed to answer at night", "whoever is meant to be in charge of the gate" reads, to
+  every reader, as a predicate on Guard Captain ⟨Name⟩ on the next tab. That is F3-06 on 59
+  of 128 preimage towns. Write the households, the hall, the gate's holder or nobody.
+  Stress can add more (`STRESS_MANDATORY_ROLES`): Garrison Commander, Corrupt Official,
+  Healer, Moneylender, Chief Magistrate, Guild Master, Council Member, Retired Adventurer.
+
+(8) WHAT WOULD BE FALSE
+
+  The key fixes three facts and three only — a walls-bucket row stands, no garrison row, no
+  militia row — and everything else on the page is open, so the findings this pool walks into
+  are almost all OVER-READING THE ABSENCE. The engine denies "nobody is set up to respond"
+  on most of the preimage: at TOWN a `Town watch` and a `Town hall` are required: true
+  (`institutionalCatalog.js:1348-1354`, `925-930` and the town block), the watch's own
+  services carry Night patrol (p 1.0) and Gate duty (p 0.8), and F4-19/V-07 put the military
+  purse behind it — so "nobody is paid to stand on it", "nobody walks it after dark",
+  "no one would answer" are F1-25 negations at town, and on ANY tier whose wall row is
+  `Palisade or earthworks` the row's own "Night watch" service (on, p 1.0 for Gated entry,
+  p 0.8 for Night watch) denies them again; the safe absence across the whole preimage is
+  narrow and is exactly the key's own — no standing force under arms, no garrison, no militia
+  (V-27 is the row: an ORGANISED or STANDING manning — a rotation, a force, soldiers — where
+  no force row resolves, against `threatAssessment.js:119` "Walls present but no organized
+  military force to man them", which FIRES ON EVERY TOWN IN THIS PREIMAGE). Going the other
+  way, do not seat bodies the key is silent about: a watch as a body below town (F1-01, V-23),
+  a garrison (F1-02), a militia or a muster ROLL cited with no `Citizen militia` to keep it
+  (F1-03, F1-24, §R-8 — the word "the muster" is free, the roll as a record is not), a
+  mercenary company (F1-05), a charter hall (F1-06), a hall or council room below town (F1-20),
+  a granary or a market or craft guilds below town (F1-09, F1-10, F1-16), a church standing
+  IN a hamlet whose row is `Access to parish church` at 2-5km or in a thorp that has none
+  (F1-11), a toll book or a register cited to a keeper that does not resolve — the register
+  of the dead sits on `Parish burial grounds` alone, town only (F1-24). THE GATE CUTS BOTH
+  WAYS (F1-08): `hasGates` is open across the preimage, so asserting a gate on an
+  earthworks-or-citadel town contradicts `safetyProfile.js:463-464`'s printed "no gates to
+  bribe and no checkpoints to avoid", and denying one on a `Town walls` or `Palisade` town
+  contradicts that row's own on-by-default Gate control / Gated entry service. The PAY claim
+  is the other reversible trap: `hasMilitaryInst` fires on the bare word `walls`
+  (`priorityHelpers.js:45`), so the same page can print "local guard" off a wall and no men —
+  §1.4 W-04 rules the KEY the record and makes a PAY claim (F1-04/F1-02) the finding, while
+  F4-02 bars the SPLIT in the other direction (one multiplier covers "garrison wages, wall
+  maintenance" together, `defenseGenerator.js:182`, `:189-192`: "the wall was kept and the men
+  were not" as a CHOICE is false; "the wall is kept, there are no men" as a ROSTER FACT is
+  lawful and is this pool's spine), F4-03 bars splitting the four gates' direction, and F4-04
+  bars the total collapse — the floors are 0.55–0.7 and the community baseline is exempt, so
+  short, late and thin are licensed and "nothing has been paid" is not. On the fabric,
+  F4-01 as §V.0 re-cuts it bars BOTH halves: no decay clock (no rot, no weathering, no
+  erosion, no "timber rots" even where sense agrees) AND no permanence, because calamity,
+  razing and the purse's own economic-distress closure (`institutionLifecycle.js:792-848`,
+  reaching `Palisade or earthworks` and `Town walls`) all remove built fabric. Because this
+  key POOLS palisade towns with stone-walled towns, V-06 keeps the MATERIAL bar at the pool
+  grain until `{defmaterial}` lands — "the stone ring", "the timber line", "the bank of
+  earth" are all wrong on some town that draws the face — and F1-33 bars the material's
+  SOURCE outright. Floor 2 is decidable from the grammar and this pool invites every row of
+  it: no magnitude in digit or word (no headcount, no length of wall, not "a handful", not
+  "most of it") F2-01; no date, season or duration F2-02; no raising narrated F2-03; no event
+  the record did not run F2-04; no RATE — "the gate stands open" is lawful, "more often than
+  not" is not (F2-06, §S-3); no age of fabric against the printed `{hist.age} years old`
+  (F2-07); and no elapsed course over a LIVE field (F2-05) — BUT the perfect and the durative
+  ARE licensed over the key's own reads (ruling 11a) and over the frozen fields listed at (6),
+  so "nobody has been asked to stand on the works" is lawful where the works and the force
+  are the key's own. Floor 3: no named character's fate (F3-01), nothing predicated of a god
+  (F3-02 — the followers act), no culture furniture the profile denies across eleven profiles
+  (F3-05: no thatch, no churchyard, no market green, no snow on the road), and the
+  Guard-Captain rider above (F3-03/F3-06 as §V.0 widens it). And the smaller ones this key can
+  genuinely reach: F1-31 the tier word, on a preimage spanning thorp to town; F1-34 a totality
+  of safety, since an `Invasion & War` row is built for EVERY town; F1-40 / F1-107 outrunning
+  or explaining the readiness badge, which moves on `avgScore + tierBonus − threatPenalty`
+  while every wall and row is unchanged (F4-06); F1-102 the approach against `terrainType` /
+  `tradeRouteAccess`; F4-05 `plagued` read as disease rather than monsters; F4-07 the river or
+  coast doing nothing; F4-13 a covert fact on a player face; F1-126 a minted proper name;
+  F1-117/F1-118 a clause arguing with a rendered `{seat}` fill. What is NOT a finding, by
+  name: that the card does not license it; the spelling lists; the layer bar; the record-word
+  bar; the person bar beyond floor 3 — an unnamed person may keep the wall key, refuse, be
+  resented, be avoided, so long as the tier does not emit that office as an NPC.
+
+(9) WHERE THE FLAVOUR IS
+
+  • WHAT IS IN USE. The wall is doing ordinary work and the engine says so in service rows,
+    not in defence rows: `Town walls` levies tolls on goods that pass its gate; `Palisade or
+    earthworks` makes strangers state their business and offers "Emergency shelter" and
+    "Refuge in crisis" — the wall's on-page job is to take a toll and to hold the country
+    people when something comes. Everything else a wall is for here is domestic: it is the
+    line the stock does not cross, the thing the burial ground lies outside of, the windbreak,
+    the wall a household stacks its firewood against. At town the granary, the market square,
+    the taverns and the hall are all inside it and a part-time watch with day jobs walks it
+    after dark. Write what the wall is USED for, not what it is FOR.
+
+  • WHAT IS IN DISPUTE. One purse covers the wall's keeping and any wages together, and the
+    community baseline is exempt from the gate — so the dispute is not "who defends us" but
+    "what does a wall cost a town with nobody on it, and who carries that cost". The hall
+    defends the line of spending; the guilds pay into the purse and want it elsewhere; the
+    households do the unpaid work the gate never sees; the gate's holder collects a toll that
+    funds something he is not part of. And on the same page the machine says flatly that a
+    determined attacker takes these walls with ladders and time — which the hall knows and
+    the tavern says aloud. Two sources reading one fact differently IS the session.
+
+  • WHAT THE ABSENCE LOOKS LIKE ON THE GROUND. Not ruin and not emptiness — both are barred.
+    It is a maintained thing with nobody appointed to it: the stair to the parapet with
+    someone's stores on it; the walk along the top that is a path because people cross it,
+    not because anyone patrols it; a gate that is a doorway rather than a post; the bracket
+    where a horn or a bell would hang and the question of whose job it would be to sound it;
+    the country people who know they are to come inside, and no arrangement for who opens to
+    them. The absence is ADMINISTRATIVE, not physical. That is the distinction this whole
+    pool turns on, and it is where every lawful hook in it lives.

@@ -1,2 +1,4 @@
-# wf_208f835e-a94 — per-agent progress, 2026-09-13 02:19:03
-    - `a76ef67c1` MARKER Invasion & War: walls with NO force · IN FLIGHT · transcript 09-13 02:18 655 KB · 25 tool calls · files: card.md · last: Bash D=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc
+# wf_208f835e-a94 — per-agent progress, 2026-09-13 02:24:19
+    - `a76ef67c1` MARKER Invasion & War: walls with NO force · DONE · transcript 09-13 02:21 728 KB · 28 tool calls · files: card.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasio
+    - `a3e5e33ce` WRITER Invasion & War: walls with NO force · IN FLIGHT · transcript 09-13 02:22 470 KB · 9 tool calls · files: shipped-f2da5a3ee.md · last: Bash sed -n '2640,2646p' /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-5
+    - `ab8783d22` WRITER Invasion & War: walls with NO force · IN FLIGHT · transcript 09-13 02:22 478 KB · 7 tool calls · last: Bash cd "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scra
