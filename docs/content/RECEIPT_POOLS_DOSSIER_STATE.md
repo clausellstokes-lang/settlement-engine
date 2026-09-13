@@ -2645,8 +2645,8 @@ supplies the ancestry.
 **`Beasts & Monsters`: `frontier`, credible deterrence**
 1. `[ledger]` {settlement} sits on an active frontier with a line around it and a force behind the line. Most of what comes out of the country does not press a kept perimeter.
    - `[face]` `[stranger]` A stranger says he was kept at the way through while somebody went to ask, and that he was never told who was asked.
-   - `[face]` `[gate]` Those who hold the way through say they can say who came in, and that nobody asks them who went out.
-   - `[face]` `[elders]` The elders hold that a household behind the line owes a day on it. The day is owed whether the household has a man to send or not.
+   - `[face]` `[gate]` Those who hold the way through say they can say who came in and who went out, and that nobody asks them for either.
+   - `[face]` `[elders]` The elders hold that a household behind the line owes work on it. The work is owed whether the household has somebody to send or not.
    - `[face]` `[hall · pair 1 · disagree]` A clerk in the hall says the line is kept out of the common purse.
    - `[face]` `[guild · pair 1 · disagree]` The guilds say openly that it is kept out of the toll the trades pay at the way through.
    - `[face]` `[tavern]` At the tavern they say the men on the line are paid out of the same purse that keeps the line, and which of the two is paid first is the evening's argument.
@@ -2654,22 +2654,22 @@ supplies the ancestry.
    - `[face]` `[muster]` The muster says it would hold the line against whatever the country sends, and that nobody asks it what the holding takes.
    - `[face]` `[court]` What reaches the court from the frontier is a dispute over what was counted at the way through, and the court says it hears no other kind.
    - `[face]` `[garrison]` One of the garrison says the same purse keeps the line and feeds the men on it, and asks which the hall would sooner see short.
-   - `[face]` `[market]` Stallholders say everything on the tables came in through the way through and was counted there.
+   - `[face]` `[market]` Stallholders say what comes from outside comes in through the way through and is counted there.
 2. `[street]` Everyone here knows what is in the country, and nobody here talks about it. The town takes that as the arrangement working.
    - `[face]` `[stranger]` A pedlar says nobody here asked him what he had seen on the road, and that he had an answer ready.
-   - `[face]` `[gate · pair 5 · aside]` Those who hold the way through say the bar is dropped at dusk by whoever is nearest to it.
+   - `[face]` `[gate · pair 5 · aside]` Those who hold the way through say the bar is dropped at dusk and the hour is never argued over.
    - `[face]` `[register · pair 5 · aside]` At the church it is said that the men on the line are prayed for in the same breath as the roads.
    - `[face]` `[hall · pair 2 · disagree]` The hall says nothing about the nights has come to it as a complaint.
    - `[face]` `[watch · pair 2 · disagree]` The watch says the complaints are made at the way through and go no further.
-   - `[face]` `[tavern]` At the tavern the talk is of who turns out and who is only on the roll, and the country itself does not come up.
+   - `[face]` `[tavern]` At the tavern the talk is of who stands the nights, and the country itself does not come up.
    - `[face]` `[garrison]` The garrison says nobody comes out of the town to watch a drill.
    - `[face]` `[guild]` A guild factor says the toll at the way through is paid by the trades. The line it keeps is counted as everyone's.
    - `[face]` `[market]` At the market they say the stalls go up whatever the country is doing.
    - `[face]` `[court]` The court says a dispute over the toll is settled on the day it is brought, and that the country brings it none.
    - `[face]` `[elders]` The elders say the young stand the nights and the old say how they are stood.
-3. `[counterforce]` A traveller says the line is seen from a long way down the road, and that he takes it what is in the country sees it too.
+3. `[counterforce]` A traveller says the line is there to be seen, and that he takes it what is in the country sees it too.
    - `[face]` `[market]` Stallholders say the trade comes in through the bar by daylight and does not say what it saw on the road.
-   - `[face]` `[register]` The sexton says that whatever the country takes it takes on the road and not inside the line.
+   - `[face]` `[register]` The sexton says the ones the country takes are taken on the road.
    - `[face]` `[gate]` Those who hold the way through keep a light at the bar after dark and say it is there to be seen from the country.
    - `[face]` `[court]` The court says leaving the way through open is a matter it hears, and hears quickly.
    - `[face]` `[muster]` The muster says being on the line in daylight is as much of the work as being on it after dark.
@@ -2784,7 +2784,7 @@ supplies the ancestry.
    - `[face]` `[stranger]` A drover says a man who asks here where to take a complaint gets two answers. Both are given with confidence.
    - `[face]` `[register · pair 2 · aside]` The sexton holds that the parish is told of a matter when the matter is over.
    - `[face]` `[market · pair 2 · aside]` The stall stays shut while the matter is heard, the traders say.
-   - `[face]` `[garrison]` A soldier of the garrison says the town's quarrels are not the garrison's until one of them comes to the wall.
+   - `[face]` `[garrison]` A soldier of the garrison says the town's quarrels are not the garrison's until somebody brings one to the garrison.
    - `[face]` `[guild]` The trades settle their own quarrels first, by a guild factor's account. What they cannot settle goes to the hall.
    - `[face]` `[gate]` Those who keep the gate say a person is stopped there before the hearing ever sees him. The hall gives a different answer about where the town's law begins.
 3. `[visitor]` A traveller who brings a complaint here is shown where it is heard and where the person he names would be kept.
