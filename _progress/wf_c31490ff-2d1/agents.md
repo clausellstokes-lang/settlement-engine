@@ -1,0 +1,4 @@
+# wf_c31490ff-2d1 — per-agent progress, 2026-09-13 06:10:26
+    - `af733d6a7` MARKER Invasion & War: force with NO walls · IN FLIGHT · transcript 09-13 06:10 672 KB · 27 tool calls · files: mark-out.txt, "$D/card.md · last: Bash C="/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `a81ba66ec` MARKER Internal Security: no legal infrastructure · IN FLIGHT · transcript 09-13 06:10 689 KB · 25 tool calls · files: "$D/card.md · last: Bash L=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc
+    - `afe66b63c` MARKER Disasters & Famine: NO reserves, NO medical provision · IN FLIGHT · transcript 09-13 06:10 605 KB · 24 tool calls · files: card.md · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
