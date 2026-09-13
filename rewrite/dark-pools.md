@@ -632,7 +632,114 @@ renders a legacy save through `generalDeskLines` is outside this car.
 
 ---
 
-LAST LINE — SETTLED: the DS-DEF-2 THREE. `Internal Security: detention without process` and
+---
+
+# THE TALLY — ALL 56, AND WHAT THE CHAIR MAY STRIKE
+
+| verdict | pools | share |
+| --- | ---: | ---: |
+| **DEFECT** — something prevents a state that should occur | **18** | 32 % |
+| **OUT OF GRID** — reachable in the product, absent from this corpus | **24** | 43 % |
+| **DEAD BY CONSTRUCTION** — the combination cannot occur | **12** | 21 % |
+| **SPLIT / UNSETTLED** — dead at some tiers, open at others | **2** | 4 % |
+
+By slice: DS-DEF-2 (mine) 2 DEAD · 1 OUT OF GRID. Slice A 14 DEFECT · 7 OUT OF GRID.
+Slice B 3 DEFECT · 9 OUT OF GRID · 1 DEAD. Slice C 1 DEFECT · 4 OUT OF GRID · 6 DEAD.
+Slice D 3 OUT OF GRID · 3 DEAD · 2 SPLIT. Total 18 + 24 + 12 + 2 = **56**.
+
+## ⭐⭐ THE HEADLINE: THE PREMISE OF THE CAR DOES NOT SURVIVE THE MEASUREMENT
+
+The car was chartered on the possibility that ~56 pools could be struck for ~67M tokens. **They
+cannot. Only 12 may be struck, worth 14.4M tokens** — and 44 of the 56 are pools a reader can
+reach, or could reach if a defect were cured.
+
+| | pools | at 1.2M a pool |
+| --- | ---: | ---: |
+| the car's opening hypothesis (strike all 56) | 56 | ~67.2M |
+| **actually strikeable (DEAD BY CONSTRUCTION)** | **12** | **14.4M** |
+| of those, conservatively strikeable — excluding the 3 that are dead only for GENERATED records and light on a stored or hand-authored one (DS-GEN-11 MARGINAL · DS-GEN-14 GROWN-UNRECORDED · DS-GEN-3 Poverty/Impoverished) | **9** | **10.8M** |
+| must be KEPT and written | 42 | ~50.4M |
+| held pending one roster walk (the two DS-SUP-3 gaps) | 2 | ~2.4M |
+
+**The twelve strikeable pools:** DS-DEF-2 `Internal Security: detention without process` ·
+DS-DEF-2 `Disasters & Famine: granary, NO medical provision` · DS-POW-2 `critical matched` ·
+DS-DEF-6 `Naval Defense: Naval force` · DS-ECO-10 `POSTURE: import_dependent` ·
+DS-ECO-11 `ECONOMIC STRENGTHS: none recorded` · DS-GEN-3 `prosperity: Poverty / Impoverished` ·
+DS-GEN-7 `power_economic: powerful criminal faction in a prosperous settlement` ·
+DS-GEN-7 `power_stress: occupation against stated stability` ·
+DS-GEN-7 `historical_economic: the recovery narrative` ·
+DS-GEN-11 `the MARGINAL arm` · DS-GEN-14 `GROWN-UNRECORDED`.
+
+## THE 18 DEFECTS, GROUPED BY CURE
+
+1. **THE INSTRUMENT NEVER ASKS THE RUNG (14 pools).** `prose-rate-corpus.mjs:307-311` omits
+   `crisisBannerRung`. Cure: add the per-banner return, then RE-TAKE THE WHOLE TABLE — it also
+   moves `bareSentences`, the pair distribution and the tier silences.
+2. **THE PROSE COMPOSES TO NOTHING (1 pool).** DS-CND-1 `PROVENANCE: causes[] populated` keys
+   correctly on 235/768 towns and every variant names a `{reason}` slot nothing fills. Cure is
+   a corpus act — a fill vocabulary, or a `{reason}`-free variant — and is the chair's choice.
+3. **THE CALL SITE SHORT-CIRCUITS THE KEY (2 pools).** DS-POW-2's two share pools: the state
+   exists on 132 and 116 towns and `stabilityLensPoolKey` returns first, on the instrument's
+   path AND the product's. **A reader can never see these either.**
+4. **THE JOIN IS SPELLED WRONG (1 pool).** DS-GEN-18 `HOME-FED` — the docblock says the join
+   is on the canonical token; the shipped code does a bare `.toLowerCase()`. 0 towns join;
+   normalised, 20 do. Necessary but not sufficient — the annex's order still pre-empts.
+
+## ⭐ THE ONE FINDING THREE INVESTIGATORS FOUND INDEPENDENTLY
+
+**The RATE grid pins all five priority sliders at 50.** Slices A, C and D each arrived at it
+from a different pool. `rateGrid()` writes only `settType · tradeRouteAccess · monsterThreat ·
+culture · terrainOverride`, so `priorityEconomy/Military/Magic/Religion/Criminal` are the
+wizard default 50 on every one of the 768 towns — a single distinct value. And the consequence
+is arithmetic, not probabilistic: `priorityHelpers.js:468-477` computes
+`threshold = |(e*7 + m*13 + r*17 + mg*19 + c*23) % 97|` = **exactly 70** at all-50, while every
+`fires(n)` call uses `n ≤ 65`, so **all thirteen compound-stress flags are false on all 768
+towns whatever their institutions**. The sliders are a first-class wizard input. At least
+6 of the 24 OUT OF GRID pools are darkened by this one un-swept axis alone.
+
+**The corpus's other un-swept inputs, named:** the world/campaign tick (no ruin, no stockpile,
+no world stressors, no condition ageing) · `config.contentProfile` · `options.customContent` ·
+the five priority sliders. A corpus that swept the sliders costs one grid dimension and would
+light pools in four different blocks.
+
+---
+
+# LIMITS OF THIS CAR AS A WHOLE
+
+1. **No investigator ran a real world tick.** Every OUT OF GRID verdict that turns on the
+   campaign world (ruin, stockpile, condition ageing, world stressors) is grounded in the
+   producer's source plus a state shaped exactly as that producer shapes it — not in an
+   executed `advanceCampaignWorld`. The pool keys are proven; the RATES a played campaign
+   would show are unmeasured, and no corpus here can supply them.
+2. **The 14 DS-STR-1 figures are what a corrected instrument WOULD report**, taken by driving
+   the shipped `crisisBannerRung` over the identical grid. The full 273-row table was not
+   re-taken, because that needs an edit to a read-only dock.
+3. **Two pools are genuinely unsettled** — the DS-SUP-3 FOOD and HEALING gaps. Dead below
+   village by a `required: true` row; NOT structurally barred at town+ / metropolis, yet zero
+   hits in 7,824 settlements. One roster walk settles them.
+4. **One DEAD verdict is soft** — DS-GEN-7 `powerful criminal faction in a prosperous
+   settlement`. 2,808 settlements searched across three sliders; the five-dimensional space
+   was not exhausted.
+5. **Three DEAD verdicts are "dead for GENERATED records"** and light on a stored or
+   hand-authored one. Whether the estate renders such records through these desks is a
+   product-history question outside this car, and it is why the conservative strike count is
+   9 rather than 12.
+6. **DS-DEF-6 `Naval Defense: Naval force` has one unclosed path**: a GM-added, non-custom-
+   stamped row named "navy". The generator can never produce it either way.
+7. **Nothing was written to the dock.** Porcelain verified before and after; the only entries
+   throughout were the running workflow's own modified tracked files. One untracked file of
+   mine (`def2-joint.json`) was created by a relative-path write while cwd was the dock and
+   was removed the moment it was seen — the hazard is written into this file's header so the
+   next seat does not repeat it.
+8. **No DEFECT was fixed.** Each of the four cures moves generated output, a shipped reading,
+   or the measurement instrument itself — behaviour shifts, not "small and certain" repairs.
+   They are recorded for the chair, not taken.
+
+LAST LINE — SETTLED: all 56, none by argument alone. **The car's premise does not survive:
+only 12 of the 56 may be struck (14.4M tokens at 1.2M a pool), 9 of them conservatively — not
+56 for 67M. Eighteen are DEFECTS denying readers content, fourteen of those because the
+measuring instrument never asks the rung.** The DS-DEF-2 THREE, which the batch waits on:
+`Internal Security: detention without process` and
 `Disasters & Famine: granary, NO medical provision` are DEAD BY CONSTRUCTION — strike them,
 never write them — proved by an exhaustive walk of the shipped catalogue's `required` rows
 and by 11,568 generated settlements with zero hits, including a failed refutation attempt
