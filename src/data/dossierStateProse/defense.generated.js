@@ -720,7 +720,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "slots": [],
           "vid": 2,
           "wordings": [
-            "One of the watch says the watch walks the streets at night after a day's work. The day's work is the watchman's own trade, and the trade is a hand short for it.",
+            "One of the watch says the watch walks the streets at night after a day's work. The day's work is the watchman's own trade, and the trade goes short for it.",
             "A traveller says he passed the soldiers in the street as he would pass anyone, and was not sure until later that they were the town's.",
             "The hall holds that paid men can be sent to where the trouble is and a wall cannot be.",
             "At the tavern they say anyone who wants past the soldiers has only to pick a street they are not in.",
@@ -751,7 +751,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "What a traveller meets first here is armed men, and the town has nothing built for them to hold.",
+          "text": "What a traveller meets here is armed men, and the town has no line for them to hold.",
           "slots": [],
           "vid": 3,
           "wordings": [
@@ -908,10 +908,10 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "The elders say that what they decide has no room to be decided in and needs none.",
             "At the gate they say a man asked at the bar goes on through either way.",
             "The muster holds that it turns out for what the households cannot settle, and that nobody asks it what it thinks of the settling.",
-            "The watch says a man taken up is let go again.",
+            "The tavern's account is that a man taken up is let go again.",
             "At the market they say a short weight is argued at the stall, and that there is no board to take it to.",
-            "The guilds' word is that a debt here is the creditor's to collect, and the trades keep their own reckoning of who owes whom.",
-            "The garrison says that with no gaol to put a man in, what it does with him is done at once and not written down."
+            "The elders' word is that a debt here is the creditor's to collect, and the households keep their own reckoning of who owes whom.",
+            "The muster says that with no gaol to put a man in, what it does with him is done at once and not written down."
           ],
           "sources": [
             null,
@@ -921,10 +921,10 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "elders",
             "gate",
             "muster",
-            "watch",
+            "tavern",
             "market",
-            "guild",
-            "garrison"
+            "elders",
+            "muster"
           ],
           "pairs": [
             null,
@@ -959,7 +959,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "vid": 2,
           "wordings": [
             "A pedlar says a short payment here is argued out on the doorstep where it was made, and that the doorstep is where it stays.",
-            "The garrison's view is that the households may settle what they like among themselves, and that what reaches the garrison is settled the garrison's way.",
+            "The elders' view is that the households may settle what they like among themselves, and that what reaches the elders is settled the elders' way.",
             "At the tavern it is said that the households which do the settling are the ones with the most fields.",
             "The elders say a boundary is walked and talked over until it is agreed. The walking is done by the two households, in time neither can spare.",
             "By the muster's account it is expected to stand behind whatever the households decide and is not asked first.",
@@ -969,7 +969,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "sources": [
             null,
             "stranger",
-            "garrison",
+            "elders",
             "tavern",
             "elders",
             "muster",
@@ -988,8 +988,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "The elders hold that a stranger's wrong is heard as anyone's is, and that a stranger who does not stay for the answer was not much wronged.",
             "The register says the ground takes a stranger on the same terms as anyone, whatever was or was not agreed about him.",
             "At the gate they say a stranger is looked over on the way in, and that nothing is kept of the looking.",
-            "A stranger who complains to the watch is told, by the watch's own account, that there is no gaol for the man he complains of and none for him either.",
-            "The guilds' view is that a stranger cheated here has no board to go to and would do better to come to them."
+            "A stranger who complains to the muster is told, by the muster's own account, that there is no gaol for the man he complains of and none for him either.",
+            "The market's word is that a stranger cheated here has no board to go to, and would do better to come back to the stall."
           ],
           "sources": [
             null,
@@ -998,8 +998,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "elders",
             "register",
             "gate",
-            "watch",
-            "guild"
+            "muster",
+            "market"
           ]
         }
       ],
@@ -1207,7 +1207,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "The older households say a place this size has no call for a granary.",
             "A drover says a place this size is exactly where one would be wanted.",
             "Grain is bought here to eat and not to keep, in the account of those who sell at the market.",
-            "Those who bury the dead hold that they are sent for when the bread stops coming to a door, and not before.",
+            "Those who bury the dead hold that they are sent for when the food stops coming to a door, and not before.",
             "At the tavern they say a sack is weighed by whoever grinds it and weighed again by whoever owns it, and the difference is the standing argument."
           ],
           "sources": [
@@ -1240,8 +1240,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "vid": 2,
           "wordings": [
             "The older households say a sick house here is never left to itself.",
-            "At the tavern they say the houses that are sat up with are the houses that have sat up with others.",
-            "The bread left on a step is how a sick house is known from the lane, a traveller reports.",
+            "At the tavern they say the houses that are sat up with are the houses that sit up with others.",
+            "The food left on a step is how a sick house is known from the lane, a traveller reports.",
             "At the market they say a house with somebody ill in it comes for vinegar and roots, and that whoever has them names the price.",
             "Those who bury the dead say they are the one trade here that is sent for in a bad year and not thanked for coming."
           ],

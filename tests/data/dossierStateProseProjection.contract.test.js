@@ -1983,17 +1983,26 @@ describe('SEAM car 4 — §2.5\'s grammar, and every refusal it declares', () =>
       sources: [null, 'garrison', 'gate', 'hall', 'market', 'register'],
       pairs: undefined,
     },
+    // ⭐ RE-FROZEN AT THE 8b DS-DEF-2 CURE GATE (v3). The refuter charged SIX faces of this
+    // pool on FLOOR 1 and one fault only — a source tag the preimage cannot seat — and the curer
+    // re-seated all six, changing the SOURCE and nothing structural. `watch`, `guild` and
+    // `garrison` leave this pool entirely: `sourcesOf` seats none of the three on any of the 384
+    // preimage towns, so those six faces were dead rows on every page they printed on. THE COUNTS
+    // DO NOT MOVE — eleven, eight and eight faces as before, the same two pairs with the same ids
+    // and the same kinds — so the shift register's `face-count-per-variant` row is UNTOUCHED and
+    // this is a re-seat, not a grow. v1 f7 watch→tavern (pair 2's second half), f9 guild→elders,
+    // f10 garrison→muster; v2 f2 garrison→elders; v3 f6 watch→muster, f7 guild→market.
     'DS-DEF-2 :: Internal Security: no legal infrastructure #0': {
-      sources: [null, 'stranger', 'tavern', 'register', 'elders', 'gate', 'muster', 'watch', 'market', 'guild', 'garrison'],
+      sources: [null, 'stranger', 'tavern', 'register', 'elders', 'gate', 'muster', 'tavern', 'market', 'elders', 'muster'],
       pairs: [null, { id: 1, kind: 'view' }, null, null, { id: 1, kind: 'view' },
         { id: 2, kind: 'reinforce' }, null, { id: 2, kind: 'reinforce' }, null, null, null],
     },
     'DS-DEF-2 :: Internal Security: no legal infrastructure #1': {
-      sources: [null, 'stranger', 'garrison', 'tavern', 'elders', 'muster', 'gate', 'register'],
+      sources: [null, 'stranger', 'elders', 'tavern', 'elders', 'muster', 'gate', 'register'],
       pairs: undefined,
     },
     'DS-DEF-2 :: Internal Security: no legal infrastructure #2': {
-      sources: [null, 'stranger', 'tavern', 'elders', 'register', 'gate', 'watch', 'guild'],
+      sources: [null, 'stranger', 'tavern', 'elders', 'register', 'gate', 'muster', 'market'],
       pairs: undefined,
     },
     'DS-DEF-2 :: Disasters & Famine: NO reserves, NO medical provision #0': {

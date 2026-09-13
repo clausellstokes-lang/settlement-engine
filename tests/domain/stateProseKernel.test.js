@@ -1432,6 +1432,13 @@ describe('the state-prose reader — ONE FACE PER POWER: the source filter and t
     // those cars created taking their first seats in the corpus.
     // ⭐ AND THE DRAFT GATE'S THREE POOLS BESIDE IT, in corpus order. None of them carries the
     // archiver or the public: those two forms still stand only where 18n/18o seated them.
+    // ⭐ RE-FROZEN AGAIN AT THE 8b DS-DEF-2 CURE GATE (v3), on `Internal Security: no legal
+    // infrastructure` and on that pool ONLY. Six faces were charged on FLOOR 1 for one fault —
+    // a source tag the preimage cannot seat — and re-seated: `watch`, `guild` and `garrison`
+    // leave the pool entirely, because `sourcesOf` seats none of the three on any of the 384
+    // preimage towns. THE COUNTS DO NOT MOVE (11, 8, 8 as before) and neither do the pairs, so
+    // the shift register's `face-count-per-variant` row is UNTOUCHED: this is a re-seat, not a
+    // grow, and the `pairs` arm below is unchanged by construction.
     expect(rows.map(({ v }) => v.sources)).toEqual([
       [null, 'elders', 'hall', 'guild'],
       [null, 'stranger', 'tavern', 'gate', 'archiver'],
@@ -1439,9 +1446,9 @@ describe('the state-prose reader — ONE FACE PER POWER: the source filter and t
       [null, 'hall', 'guild', 'watch', 'tavern', 'elders'],
       [null, 'watch', 'stranger', 'hall', 'tavern', 'garrison'],
       [null, 'garrison', 'gate', 'hall', 'market', 'register'],
-      [null, 'stranger', 'tavern', 'register', 'elders', 'gate', 'muster', 'watch', 'market', 'guild', 'garrison'],
-      [null, 'stranger', 'garrison', 'tavern', 'elders', 'muster', 'gate', 'register'],
-      [null, 'stranger', 'tavern', 'elders', 'register', 'gate', 'watch', 'guild'],
+      [null, 'stranger', 'tavern', 'register', 'elders', 'gate', 'muster', 'tavern', 'market', 'elders', 'muster'],
+      [null, 'stranger', 'elders', 'tavern', 'elders', 'muster', 'gate', 'register'],
+      [null, 'stranger', 'tavern', 'elders', 'register', 'gate', 'muster', 'market'],
       [null, 'elders', 'stranger', 'market', 'register', 'tavern'],
       [null, 'elders', 'tavern', 'stranger', 'market', 'register'],
       [null, 'stranger', 'tavern', 'elders', 'register', 'market'],

@@ -55,8 +55,8 @@
   },
   "leaves": {
     "src/data/dossierStateProse/defense.generated.js": {
-      "raw": 167290,
-      "gzip": 26151,
+      "raw": 167288,
+      "gzip": 26147,
       "ceilingRaw": 488168,
       "ceilingGzip": 108482
     },
@@ -200,9 +200,9 @@
       "car": "REWRITE 8b DS-DEF-2 draft (v3) — THREE POOLS APPLIED VERBATIM AT THE DRAFT GATE",
       "leaf": "src/data/dossierStateProse/defense.generated.js",
       "fromRaw": 157209,
-      "toRaw": 167290,
-      "gzipAfter": 26151,
-      "reason": "The 8b DS-DEF-2 DRAFT gate lands THREE MORE POOLS of the block under the v3 workflow, each replacing three bare spine rows with a spine plus its wording faces, applied VERBATIM from the selectors' packets. `Invasion & War: force with NO walls` 1,1,1 → 6,6,6 (five faces a variant); `Internal Security: no legal infrastructure` 1,1,1 → 11,8,8 (the block's widest seated roster, ten faces behind variant 1's spine); `Disasters & Famine: NO reserves, NO medical provision` 1,1,1 → 6,6,6. Forty-five new wording rows and seven marked pairs in all, against nine spine rows re-cut and no row removed. ⭐ THE GROWTH IS THE FACES THEMSELVES and nothing else: no slot, no mark and no leaf key was added, and the shift register's `face-count-per-variant` row carries the corpus sum 2277 → 2331, the largest entry 5 → 11 and the per-pool digest. ⭐ NO CEILING IS NEAR — 167,290 raw against the owner-signed 488,168, and 26,151 gzip against 108,482."
+      "toRaw": 167288,
+      "gzipAfter": 26147,
+      "reason": "The 8b DS-DEF-2 DRAFT gate lands THREE MORE POOLS of the block under the v3 workflow, each replacing three bare spine rows with a spine plus its wording faces, applied VERBATIM from the selectors' packets. `Invasion & War: force with NO walls` 1,1,1 → 6,6,6 (five faces a variant); `Internal Security: no legal infrastructure` 1,1,1 → 11,8,8 (the block's widest seated roster, ten faces behind variant 1's spine); `Disasters & Famine: NO reserves, NO medical provision` 1,1,1 → 6,6,6. Forty-five new wording rows and seven marked pairs in all, against nine spine rows re-cut and no row removed. ⭐ THE GROWTH IS THE FACES THEMSELVES and nothing else: no slot, no mark and no leaf key was added, and the shift register's `face-count-per-variant` row carries the corpus sum 2277 → 2331, the largest entry 5 → 11 and the per-pool digest. ⭐ NO CEILING IS NEAR — 167,290 raw against the owner-signed 488,168, and 26,151 gzip against 108,482. ⛔ TERMINUS RE-POINTED BY A SHRINK, NOT BY A NEW GROW: the 8b DS-DEF-2 CURE gate (v3) applied eleven cured faces across the same three pools and the leaf FELL 167,290 → 167,288 raw and 26,151 → 26,147 gzip. A shrink owes no declared row (this instrument's own TO-COMPLY idiom), so no row was appended; but the chain must land EXACTLY on the committed bytes, so THIS row's `toRaw` and `gzipAfter` were lowered onto them and the win is banked. The DRAFT car's landing is unchanged in every other respect and is stated above; only the terminus moved, and it moved DOWN."
     }
   ]
 }
