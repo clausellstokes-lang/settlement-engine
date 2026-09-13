@@ -1455,23 +1455,40 @@ describe('DS-GEN-18 — why these workshops, and the blocker that was in the wro
     expectSentence(drawCraft(allGlossed), 'BOUGHT-IN, every import glossed');
   });
 
-  it('⛔ HOME-FED IS ALL BUT UNREACHABLE, and the route that would light it is a DEFAULT', () => {
-    // The two ledgers speak different vocabularies: the chain rows name their feed
-    // `Grazing land` / `Iron ore deposits`, the exploitation rows name theirs `livestock` /
-    // `wool` / `timber`. The desk keys the join on the canonical token anyway, because the
-    // reading is TRUE where it holds — and the tempting alternative, `resourceActive`, is
-    // true on every chain of every town and would print the home-fed sentence everywhere.
+  it('⛔ THE JOIN IS ON THE CANONICAL TOKEN, and a bare case-fold is the defect it replaced', () => {
+    // ⛔ THIS IS THE PIN ON A CURED DEFECT, 2026-09-13. `homeFedChain`'s docblock always
+    // specified the canonical token; the body compared a bare `.toLowerCase()`, and the two
+    // ledgers differ by far more than case — `computeActiveChains` writes DISPLAY LABELS and
+    // the exploitation rows write CATALOGUE TOKENS. Over the shipped 768-town RATE grid the
+    // case-fold joined 0 towns, a spaces→underscores normalisation 20, and the canonical
+    // reduction 51 (of which 18 survive the annex's `STALLED`-first order to compose).
+    // THE THREE SHAPES THE CURE MUST GET RIGHT, each its own assertion:
+    // (a) label vs token, the case the case-fold missed entirely.
+    expect(craftReasonPoolKey({
+      activeChains: [CHAIN({ resource: 'Camel Herds' })],
+      exploitation: { partiallyExploited: [{ rawResource: 'camel_herds' }] },
+    }), 'a display label and its catalogue token are the same resource').toBe('HOME-FED');
+    // (b) an ALIAS, which no space-substitution reaches — and which is the whole 20→51 gap.
+    expect(craftReasonPoolKey({
+      activeChains: [CHAIN({ resource: 'Alpine Pastures' })],
+      exploitation: { fullyExploited: [{ rawResource: 'alpine_pasture' }] },
+    }), 'the catalogue\'s own alias, not a string transformation').toBe('HOME-FED');
+    // (c) AND IT IS NOT A WIDENING. Two genuinely different resources still do not join, so
+    // the cure did not buy its 51 towns by making the predicate promiscuous.
     const disjoint = {
       activeChains: [CHAIN({ resource: 'Grazing land' })],
       exploitation: { partiallyExploited: [{ rawResource: 'livestock' }] },
     };
     expect(craftReasonPoolKey(disjoint), 'the vocabularies agreed when they should not').toBeNull();
     expect(disjoint.activeChains[0].upstreamMissing).toHaveLength(0);
-    // …and it DOES hold where the two records really name the same thing.
+    // (d) A RESOURCE THE CATALOGUE DOES NOT KNOW falls back to its own lower-cased self —
+    // the shipped behaviour, deliberately kept, so an unknown joins only its own spelling.
     expect(craftReasonPoolKey({
       activeChains: [CHAIN({ resource: 'Livestock' })],
       exploitation: { fullyExploited: [{ rawResource: 'livestock' }] },
-    })).toBe('HOME-FED');
+    }), 'neither side reduces, so the fold is all there is').toBe('HOME-FED');
+    // AND THE TEMPTING ALTERNATIVE STAYS REFUSED: `resourceActive` is true on every chain of
+    // every town and would print the home-fed sentence over every town in every world.
   });
 });
 

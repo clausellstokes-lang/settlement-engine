@@ -72,6 +72,14 @@
 import { DOSSIER_STATE_PROSE_GENERAL } from '../../../data/dossierStateProse/general.generated.js';
 import { scoreBand } from '../defenseScoreBands.js';
 import { liveInstitutions } from '../../institutions/institutionRoster.js';
+// ⭐ DS-GEN-18's JOIN, AND THE WEIGHT IS ALREADY PAID. `homeFedChain` must reduce two
+// ledgers that speak different resource vocabularies to one token, and this is the estate's
+// single canonical reduction — the same one `computeActiveChains.js:190` applies to the
+// chain side. Its whale, `data/resourceData.js`, is ALREADY in the eager `data` chunk with
+// its own first-paint consumer (vite.config.js:806, FP-G11), so the desk takes on the
+// reducer and not the table. A second, desk-local spelling of the reduction is the fork
+// that drifts — and it is precisely the fork that darkened this pool for 768 towns.
+import { resourceKeyForLabel } from '../../resourceSemantics.js';
 // FREE: `heraldCausalGrammar.js` is a ZERO-IMPORT display leaf, and it holds §0d's own
 // six-band duration table in its four print positions. ⚠ TWO SIBLING DESKS DECLINED
 // `{timeband_age}` FOR WANT OF A "duration former in the tree" (powerStateProse.js:900,
@@ -1311,20 +1319,26 @@ function chainRows(chains) {
  * workshop. Where none holds the block offers NO VARIANT — an else-arm here would put an
  * authored sentence on an empty record, and R-DST-K already means silence.
  *
- * ⛔⛔ `HOME-FED` IS ALL BUT UNREACHABLE AT THIS TIP, AND IT IS A FINDING RATHER THAN A ROUTE
- * DEFECT. Its antecedent is "a chain row whose `resource` appears in `fullyExploited` or
- * `partiallyExploited`", and the two ledgers speak DIFFERENT VOCABULARIES: the chain rows are
- * `computeActiveChains`'s need-keyed families and name their feed `Grazing land`,
- * `Iron ore deposits`, `Managed woodland`; the exploitation rows are `resourceGenerator`'s
- * RESOURCE_CHAINS and name theirs `livestock`, `wool`, `hides`, `timber`. MEASURED over 24
- * settlements with the canonical `resourceKeyForLabel` join applied: the two agree on 3 of 24
- * towns, and 0 of 24 reach the key under the annex's order because `STALLED` or `BOUGHT-IN`
- * fires first. The desk keys it anyway and keys it on the canonical token, because the reading
- * is TRUE where it holds and the alternative — reading `resourceActive === true`, which is
- * 24 of 24 — is a default wearing a reading's clothes: it would print "the ground gives it,
- * so the workshop is here" over every town in every world. ⚠ RAISED FOR THE CHAIR: lighting
- * `HOME-FED` properly needs a resource-vocabulary join the estate does not have, which is a
- * generation-side act and not a desk one.
+ * ⛔⛔ `HOME-FED` WAS DARK, AND THE CAUSE WAS A DEFECT IN THIS FILE RATHER THAN THE FINDING
+ * THIS NOTE USED TO RECORD. The paragraph that stood here said the desk "keys it on the
+ * canonical token" and reported the join MEASURED "with the canonical `resourceKeyForLabel`
+ * join applied". `homeFedChain` did no such thing: it compared a bare `.toLowerCase()` on
+ * both sides. The measurement was therefore taken of a join the shipped code never performed,
+ * and the note's confidence is exactly how a pool comes to be dark by argument. Corrected
+ * 2026-09-13; the join now IS the canonical one and `homeFedChain`'s own docblock carries the
+ * figures.
+ *
+ * ⚠ WHAT REMAINS IS THE ANNEX'S ORDER, AND IT IS A LAW QUESTION RATHER THAN A DEFECT. The
+ * two ledgers do speak different vocabularies — `computeActiveChains` names a feed
+ * `Camel Herds`, `Alpine Pastures`; the exploitation rows name theirs `camel_herds`,
+ * `alpine_pasture` — and reduced to the canonical token they agree on 51 of the 768 RATE-grid
+ * towns, against 0 before the cure. But `STALLED` is evaluated first and holds on 33 of those
+ * 51, so the key resolves to `HOME-FED` on 18. The alternative — reading
+ * `resourceActive === true` — stays refused: it is true of nearly every town and would be a
+ * default wearing a reading's clothes, printing "the ground gives it, so the workshop is
+ * here" over every town in every world. ⚠ RAISED FOR THE CHAIR, NOT TAKEN HERE: whether a
+ * stalled chain should still speak first when the town's own ground demonstrably feeds
+ * another chain is the ANNEX'S ordering to settle, not this desk's to reorder.
  * @param {{activeChains?: unknown, exploitation?: {fullyExploited?: unknown,
  *   partiallyExploited?: unknown, unexploited?: unknown}|null, isEntrepot?: unknown,
  *   primaryImports?: unknown}} readings
@@ -1357,14 +1371,42 @@ function rawResources(list) {
  * The chain row whose feed the town's own ground is measured to work. Keyed on the canonical
  * resource token both sides can be reduced to, never on either side's display label — the
  * standing label-trap rule, applied across two ledgers rather than within one.
+ *
+ * ⛔ THE DOCBLOCK ABOVE WAS THE SPECIFICATION AND THE CODE DID NOT MEET IT, WHICH IS WHY THIS
+ * NOTE EXISTS. Until 2026-09-13 the body compared a bare `.toLowerCase()` on both sides. The
+ * two ledgers do not merely differ in case: `computeActiveChains` writes DISPLAY LABELS
+ * (`Camel Herds`, `Mountain Timber`, `Alpine Pastures`) and `resourceGenerator`'s exploitation
+ * rows write CATALOGUE TOKENS (`camel_herds`, `mountain_timber`, `alpine_pasture`), so a
+ * case-fold joins the two vocabularies never. Measured over the shipped 768-town RATE grid:
+ *
+ *   bare `.toLowerCase()` (as shipped)            0 of 768 towns join
+ *   spaces → underscores                         20 of 768
+ *   `resourceKeyForLabel` — THE CANONICAL TOKEN  51 of 768
+ *
+ * The canonical join is not merely the docblock's word, it is 31 towns better than the naive
+ * normalisation, and the gap is the ALIASES: `Alpine Pastures` reduces to `alpine_pasture`
+ * and `Fine Glass Sand` to `glass_sand`, which no space-substitution reaches. That function
+ * is also the same reduction `computeActiveChains.js:190` applies to its own side, so this
+ * desk now reads the chain ledger in the ledger's own terms rather than in its spelling.
+ *
+ * ⚠ THE FALLBACK IS DELIBERATE AND IS THE OLD BEHAVIOUR, NOT A WIDENING. `resourceKeyForLabel`
+ * returns null for prose the catalogue does not know (its own docblock refuses fuzzy matching
+ * on purpose). Such a row falls back to its lower-cased self, so an unknown resource joins
+ * only its own identical spelling — exactly what the shipped compare did, and never a new
+ * pairing invented by this cure.
+ *
+ * ⚠ CURING THE JOIN IS NECESSARY AND NOT SUFFICIENT, AND THE REST IS THE ANNEX'S ORDER, NOT
+ * THIS FUNCTION'S: `craftReasonPoolKey` evaluates `STALLED` first and `BOUGHT-IN` third, and
+ * on 33 of the 51 joining towns a stalled chain speaks first. See that function's docblock.
  * @param {unknown} chains @param {ReadonlyArray<string>} worked
  * @returns {ChainRow|null}
  */
 function homeFedChain(chains, worked) {
-  const keys = new Set(worked.map((r) => r.toLowerCase()));
+  const canonical = (/** @type {string} */ r) => resourceKeyForLabel(r) || r.toLowerCase();
+  const keys = new Set(worked.map(canonical));
   return chainRows(chains).find((c) => {
     const label = text(c.resource);
-    return label !== '' && keys.has(label.toLowerCase());
+    return label !== '' && keys.has(canonical(label));
   }) || null;
 }
 
