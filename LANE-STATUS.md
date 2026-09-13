@@ -1,19 +1,25 @@
-# LANE-STATUS — written 2026-09-13 05:54:43 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-13 05:59:57 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = 85a3d71f2 Plan: HANDOFF_CURRENT refreshed to the re-cut machinery's first pool (§919.6 and after: t
 
 ## BUILD / KIT LANES (dock · base · cars · porcelain · receipt)
 - REWRITE 8b DS-DEF-11 (the validation block; cure round): dock laneRW-DEF11 ABSENT
 - REWRITE 8b-W (the wiring car, landed in its dock = the consist lineage): dock laneRW-DEFW ABSENT
-- **DS-DEF-2 (waits for the tables)** dock `laneRW-DEF2` HEAD f75050761 · 27 cars over f2da5a3ee · porcelain 3 · last commits:
+- **DS-DEF-2 (waits for the tables)** dock `laneRW-DEF2` HEAD f75050761 · 27 cars over f2da5a3ee · porcelain 9 · last commits:
     f75050761 REWRITE 8b-W-18o-r: the no-repeat state becomes the PAGE's instead of each desk's, a dropped sentence stops consuming a person, and three mechanisms that were re-rolling the page enter the shift register that exists to catch exactly that (the research reconciliation, slice E); ONE declared text shift, measured
     0b71a8ef7 REWRITE 8b-W-18o: the page gets an instrument for how a sentence OPENS and how it CLOSES, and the unit gets its ceiling — and the survey frames the same car was chartered to build were struck by the owner before they landed (ADDENDUM 18 rulings 29, 30, 34, 36, 37 and 40); zero text moved today
     0389fe89c REWRITE 8b-W-18n: the archiver may WITNESS and the town's people may SPEAK — the one archiver row that draws alone, and a fourteenth source nothing can capture (ADDENDUM 18 rulings 27 and 28, the owner's); zero text moved today
     48b58031a REWRITE 8b-W-18m: a COMPROMISED role speaks to reassure, and says nothing three years in ten — the covert fields, the symptom pools and the first year-seeded roll in the dossier (ADDENDUM 18 ruling 26); zero text moved today
     porcelain (uncommitted work in the dock — commit it FIRST after re-proving):
        M docs/content/RECEIPT_POOLS_DOSSIER_STATE.md
+       M docs/content/prose-shift-register.json
        M docs/content/wiring-census.json
        M src/data/dossierStateProse/defense.generated.js
+       M tests/data/dossierStateProseProjection.contract.test.js
+       M tests/domain/composeStateProse.test.js
+       M tests/domain/institutionRoles.test.js
+       M tests/domain/stateProseKernel.test.js
+       M tests/domain/witnessAndPublic.test.js
     receipt `receipt-rewrite.md` (mtime 09-12 20:49) head:
       | # RECEIPT — the REWRITE train
       | 
@@ -109,4 +115,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `ab8783d22` WRITER Invasion & War: walls with NO force · DONE · transcript 09-13 02:30 725 KB · 17 tool calls · files: candidates-2.md, facetext.txt, ft2.txt · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasio
 
 ## PROCESSES: 
-load: 2.16 2.54 2.55
+load: 2.93 2.65 2.58
