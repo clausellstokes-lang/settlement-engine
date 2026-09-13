@@ -580,9 +580,21 @@ describe('the state-prose reader — the wording face (ARCH §2.6)', () => {
       'DS-DEF-2 :: Beasts & Monsters: frontier, force without a perimeter #0',
       'DS-DEF-2 :: Beasts & Monsters: frontier, force without a perimeter #1',
       'DS-DEF-2 :: Beasts & Monsters: frontier, force without a perimeter #2',
+      'DS-DEF-2 :: Beasts & Monsters: plagued, NO perimeter and NO force #0',
+      'DS-DEF-2 :: Beasts & Monsters: plagued, NO perimeter and NO force #1',
+      'DS-DEF-2 :: Beasts & Monsters: plagued, NO perimeter and NO force #2',
+      'DS-DEF-2 :: Beasts & Monsters: plagued, perimeter AND organized force #0',
+      'DS-DEF-2 :: Beasts & Monsters: plagued, perimeter AND organized force #1',
+      'DS-DEF-2 :: Beasts & Monsters: plagued, perimeter AND organized force #2',
       'DS-DEF-2 :: Beasts & Monsters: plagued, perimeter but NO force to hold it #0',
       'DS-DEF-2 :: Beasts & Monsters: plagued, perimeter but NO force to hold it #1',
       'DS-DEF-2 :: Beasts & Monsters: plagued, perimeter but NO force to hold it #2',
+      'DS-DEF-2 :: Beasts & Monsters: settled, defenses beyond the need #0',
+      'DS-DEF-2 :: Beasts & Monsters: settled, defenses beyond the need #1',
+      'DS-DEF-2 :: Beasts & Monsters: settled, defenses beyond the need #2',
+      'DS-DEF-2 :: Beasts & Monsters: settled, nothing organized #0',
+      'DS-DEF-2 :: Beasts & Monsters: settled, nothing organized #1',
+      'DS-DEF-2 :: Beasts & Monsters: settled, nothing organized #2',
       'DS-DEF-2 :: Disasters & Famine: NO reserves, NO medical provision #0',
       'DS-DEF-2 :: Disasters & Famine: NO reserves, NO medical provision #1',
       'DS-DEF-2 :: Disasters & Famine: NO reserves, NO medical provision #2',
@@ -610,6 +622,12 @@ describe('the state-prose reader — the wording face (ARCH §2.6)', () => {
       'DS-DEF-2 :: Invasion & War: force with NO walls #0',
       'DS-DEF-2 :: Invasion & War: force with NO walls #1',
       'DS-DEF-2 :: Invasion & War: force with NO walls #2',
+      'DS-DEF-2 :: Invasion & War: militia only #0',
+      'DS-DEF-2 :: Invasion & War: militia only #1',
+      'DS-DEF-2 :: Invasion & War: militia only #2',
+      'DS-DEF-2 :: Invasion & War: neither walls nor force #0',
+      'DS-DEF-2 :: Invasion & War: neither walls nor force #1',
+      'DS-DEF-2 :: Invasion & War: neither walls nor force #2',
       'DS-DEF-2 :: Invasion & War: walls AND professional garrison #0',
       'DS-DEF-2 :: Invasion & War: walls AND professional garrison #1',
       'DS-DEF-2 :: Invasion & War: walls AND professional garrison #2',
@@ -667,7 +685,7 @@ describe('the state-prose reader — the wording face (ARCH §2.6)', () => {
       // shift register's `face-count-per-variant` row, not this line.
       // ⭐⭐ RE-PINNED AGAIN AT THE DRAFT GATE'S THIRD SITTING: forty-two, not twenty-seven — five
       // more of the block's pools landed faces in one commit, three variants each. A GROW.
-      expect(hashedRows, 'and exactly forty-five variants ship more than one face').toBe(45);
+      expect(hashedRows, 'and exactly sixty-three variants ship more than one face').toBe(63);
     } finally {
       spy.mockRestore();
     }
@@ -1468,9 +1486,21 @@ describe('the state-prose reader — ONE FACE PER POWER: the source filter and t
       'DS-DEF-2 :: Beasts & Monsters: frontier, force without a perimeter #0',
       'DS-DEF-2 :: Beasts & Monsters: frontier, force without a perimeter #1',
       'DS-DEF-2 :: Beasts & Monsters: frontier, force without a perimeter #2',
+      'DS-DEF-2 :: Beasts & Monsters: plagued, NO perimeter and NO force #0',
+      'DS-DEF-2 :: Beasts & Monsters: plagued, NO perimeter and NO force #1',
+      'DS-DEF-2 :: Beasts & Monsters: plagued, NO perimeter and NO force #2',
+      'DS-DEF-2 :: Beasts & Monsters: plagued, perimeter AND organized force #0',
+      'DS-DEF-2 :: Beasts & Monsters: plagued, perimeter AND organized force #1',
+      'DS-DEF-2 :: Beasts & Monsters: plagued, perimeter AND organized force #2',
       'DS-DEF-2 :: Beasts & Monsters: plagued, perimeter but NO force to hold it #0',
       'DS-DEF-2 :: Beasts & Monsters: plagued, perimeter but NO force to hold it #1',
       'DS-DEF-2 :: Beasts & Monsters: plagued, perimeter but NO force to hold it #2',
+      'DS-DEF-2 :: Beasts & Monsters: settled, defenses beyond the need #0',
+      'DS-DEF-2 :: Beasts & Monsters: settled, defenses beyond the need #1',
+      'DS-DEF-2 :: Beasts & Monsters: settled, defenses beyond the need #2',
+      'DS-DEF-2 :: Beasts & Monsters: settled, nothing organized #0',
+      'DS-DEF-2 :: Beasts & Monsters: settled, nothing organized #1',
+      'DS-DEF-2 :: Beasts & Monsters: settled, nothing organized #2',
       'DS-DEF-2 :: Disasters & Famine: NO reserves, NO medical provision #0',
       'DS-DEF-2 :: Disasters & Famine: NO reserves, NO medical provision #1',
       'DS-DEF-2 :: Disasters & Famine: NO reserves, NO medical provision #2',
@@ -1498,6 +1528,12 @@ describe('the state-prose reader — ONE FACE PER POWER: the source filter and t
       'DS-DEF-2 :: Invasion & War: force with NO walls #0',
       'DS-DEF-2 :: Invasion & War: force with NO walls #1',
       'DS-DEF-2 :: Invasion & War: force with NO walls #2',
+      'DS-DEF-2 :: Invasion & War: militia only #0',
+      'DS-DEF-2 :: Invasion & War: militia only #1',
+      'DS-DEF-2 :: Invasion & War: militia only #2',
+      'DS-DEF-2 :: Invasion & War: neither walls nor force #0',
+      'DS-DEF-2 :: Invasion & War: neither walls nor force #1',
+      'DS-DEF-2 :: Invasion & War: neither walls nor force #2',
       'DS-DEF-2 :: Invasion & War: walls AND professional garrison #0',
       'DS-DEF-2 :: Invasion & War: walls AND professional garrison #1',
       'DS-DEF-2 :: Invasion & War: walls AND professional garrison #2',
@@ -1527,9 +1563,18 @@ describe('the state-prose reader — ONE FACE PER POWER: the source filter and t
     // the shift register's `face-count-per-variant` row is UNTOUCHED: this is a re-seat, not a
     // grow, and the `pairs` arm below is unchanged by construction.
     expect(rows.map(({ v }) => v.sources)).toEqual([
+    // ⭐⭐ RE-FROZEN AT THE 8b DS-DEF-2 DRAFT GATE (v3, sitting 4) — THE BLOCK'S LAST SIX POOLS.
+    // `Beasts & Monsters: plagued, perimeter AND organized force`, in corpus order.
+      [null, 'gate', 'stranger', 'muster', 'hall', 'guild', 'tavern', 'register', 'garrison', 'court', 'market', 'elders'], 
+      [null, 'gate', 'tavern', 'stranger', 'register', 'muster', 'watch', 'guild', 'hall', 'market', 'elders'], 
+      [null, 'stranger', 'muster', 'guild', 'hall', 'garrison', 'market', 'watch', 'register', 'tavern', 'court', 'elders'], 
       [null, 'gate', 'hall', 'watch', 'guild', 'stranger', 'register', 'court', 'tavern', 'market', 'elders'], 
       [null, 'gate', 'hall', 'watch', 'guild', 'tavern', 'register', 'market', 'court', 'elders'], 
       [null, 'stranger', 'gate', 'watch', 'hall', 'tavern', 'court', 'guild', 'register', 'elders'], 
+    // `Beasts & Monsters: plagued, NO perimeter and NO force` (sitting 4).
+      [null, 'hall', 'watch', 'tavern', 'elders', 'register', 'stranger'], 
+      [null, 'market', 'hall', 'court', 'tavern', 'elders', 'watch', 'guild', 'stranger'], 
+      [null, 'market', 'guild', 'watch', 'tavern', 'elders', 'register', 'court', 'stranger'], 
       [null, 'stranger', 'gate', 'elders', 'hall', 'guild', 'tavern', 'register', 'muster', 'court', 'garrison', 'market'], 
       [null, 'stranger', 'gate', 'register', 'hall', 'watch', 'tavern', 'garrison', 'guild', 'market', 'court', 'elders'], 
       [null, 'market', 'register', 'gate', 'court', 'muster', 'tavern', 'garrison', 'guild', 'hall', 'elders'], 
@@ -1542,6 +1587,13 @@ describe('the state-prose reader — ONE FACE PER POWER: the source filter and t
       [null, 'elders', 'stranger', 'muster', 'tavern', 'register', 'hall', 'guild', 'market', 'watch', 'garrison', 'court'], 
       [null, 'stranger', 'elders', 'guild', 'muster', 'watch', 'tavern', 'hall', 'market', 'register', 'garrison', 'court'], 
       [null, 'muster', 'elders', 'register', 'stranger', 'tavern', 'hall', 'guild', 'watch', 'market', 'garrison', 'court'], 
+    // `Beasts & Monsters: settled, defenses beyond the need` and `settled, nothing organized` (sitting 4).
+      [null, 'hall', 'guild', 'stranger', 'court', 'tavern', 'watch', 'register', 'garrison', 'market', 'muster', 'elders', 'gate'], 
+      [null, 'hall', 'tavern', 'stranger', 'court', 'guild', 'market', 'watch', 'register', 'garrison', 'muster', 'gate', 'elders'], 
+      [null, 'tavern', 'watch', 'hall', 'court', 'register', 'gate', 'market', 'guild', 'garrison', 'muster', 'elders'], 
+      [null, 'stranger', 'elders', 'register', 'hall', 'watch', 'guild', 'tavern', 'market', 'court'], 
+      [null, 'stranger', 'guild', 'hall', 'register', 'elders', 'tavern', 'watch'], 
+      [null, 'stranger', 'tavern', 'hall', 'market', 'guild', 'court', 'watch', 'elders'], 
       [null, 'guild', 'market', 'tavern', 'hall', 'gate'], 
       // ⭐ RE-PINNED AT THE 8b DS-DEF-2 CURE GATE (v3): `Invasion & War: walls AND professional
       // garrison` #1 face 5 moved `elders` -> `tavern`, the cure's one target. `elders` seats on
@@ -1558,6 +1610,13 @@ describe('the state-prose reader — ONE FACE PER POWER: the source filter and t
       [null, 'hall', 'guild', 'watch', 'tavern', 'elders'], 
       [null, 'watch', 'stranger', 'hall', 'tavern', 'garrison'], 
       [null, 'garrison', 'gate', 'hall', 'market', 'register'], 
+    // `Invasion & War: militia only` and `neither walls nor force` (sitting 4).
+      [null, 'muster', 'market', 'stranger', 'elders', 'tavern', 'register'], 
+      [null, 'tavern', 'muster', 'stranger', 'elders', 'market', 'register'], 
+      [null, 'muster', 'market', 'elders', 'register'], 
+      [null, 'market', 'stranger', 'elders', 'court', 'register', 'tavern', 'guild', 'hall', 'watch'], 
+      [null, 'watch', 'tavern', 'hall', 'market', 'guild', 'court', 'elders', 'register'], 
+      [null, 'stranger', 'elders', 'market', 'tavern', 'watch', 'court', 'register', 'guild', 'hall'], 
       [null, 'hall', 'tavern', 'watch', 'guild', 'court', 'market', 'gate', 'garrison', 'stranger'], 
       [null, 'watch', 'hall', 'tavern', 'court', 'stranger', 'register', 'market', 'garrison', 'guild', 'gate'], 
       [null, 'hall', 'stranger', 'court', 'tavern', 'watch', 'garrison', 'guild', 'market', 'gate'], 
@@ -1590,9 +1649,18 @@ describe('the state-prose reader — ONE FACE PER POWER: the source filter and t
       [null, 'stranger', 'tavern', 'elders', 'register', 'market'], 
     ]);
     expect(rows.map(({ v }) => v.pairs)).toEqual([
+    // ⭐⭐ RE-FROZEN AT THE 8b DS-DEF-2 DRAFT GATE (v3, sitting 4) — THE BLOCK'S LAST SIX POOLS.
+    // `Beasts & Monsters: plagued, perimeter AND organized force`, in corpus order.
+      [null, null, null, null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null, null, null, null, null, null], 
+      [null, { id: 3, kind: 'disagree' }, { id: 3, kind: 'disagree' }, null, null, null, null, null, null, null, null], 
+      [null, null, null, null, { id: 6, kind: 'disagree' }, { id: 6, kind: 'disagree' }, null, null, null, null, null, null], 
       [null, null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null, null, null, null, null, null, null], 
       undefined, 
       [null, null, null, { id: 5, kind: 'disagree' }, { id: 5, kind: 'disagree' }, { id: 6, kind: 'view' }, { id: 6, kind: 'view' }, null, null, null], 
+    // `Beasts & Monsters: plagued, NO perimeter and NO force` (sitting 4).
+      [null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null, null, null, null], 
+      undefined, 
+      [null, { id: 5, kind: 'reinforce' }, { id: 5, kind: 'reinforce' }, null, null, null, { id: 6, kind: 'aside' }, { id: 6, kind: 'aside' }, null], 
       [null, null, null, null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null, null, null, null, null, null], 
       [null, null, { id: 5, kind: 'aside' }, { id: 5, kind: 'aside' }, { id: 2, kind: 'disagree' }, { id: 2, kind: 'disagree' }, null, null, null, null, null, null], 
       undefined, 
@@ -1605,6 +1673,13 @@ describe('the state-prose reader — ONE FACE PER POWER: the source filter and t
       [null, null, { id: 1, kind: 'reinforce' }, { id: 1, kind: 'reinforce' }, null, null, { id: 2, kind: 'disagree' }, { id: 2, kind: 'disagree' }, null, null, null, null], 
       [null, null, null, null, null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, { id: 2, kind: 'view' }, { id: 2, kind: 'view' }, null, null, null], 
       [null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null, null, null, null, null, null, null, null, null], 
+    // `Beasts & Monsters: settled, defenses beyond the need` and `settled, nothing organized` (sitting 4).
+      [null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null, null, null, null, null, null, null, null, null, null], 
+      [null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null, null, null, null, null, null, null, null, null, null], 
+      [null, { id: 5, kind: 'disagree' }, { id: 5, kind: 'disagree' }, null, null, null, { id: 2, kind: 'reinforce' }, { id: 2, kind: 'reinforce' }, null, null, null, null], 
+      [null, { id: 2, kind: 'reinforce' }, { id: 2, kind: 'reinforce' }, null, null, null, null, null, null, null], 
+      [null, null, null, null, null, null, { id: 3, kind: 'disagree' }, { id: 3, kind: 'disagree' }], 
+      [null, { id: 5, kind: 'disagree' }, { id: 5, kind: 'disagree' }, null, null, null, null, null, null], 
       [null, null, null, null, { id: 1, kind: 'view' }, { id: 1, kind: 'view' }], 
       [null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null, null, null], 
       [null, null, null, null, { id: 3, kind: 'view' }, { id: 3, kind: 'view' }], 
@@ -1617,6 +1692,13 @@ describe('the state-prose reader — ONE FACE PER POWER: the source filter and t
       [null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null, null, null], 
       [null, null, null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null], 
       undefined, 
+    // `Invasion & War: militia only` and `neither walls nor force` (sitting 4).
+      undefined, 
+      [null, { id: 2, kind: 'disagree' }, { id: 2, kind: 'disagree' }, null, null, null, null], 
+      [null, { id: 3, kind: 'disagree' }, { id: 3, kind: 'disagree' }, null, null], 
+      [null, null, null, null, null, null, null, null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }], 
+      [null, null, null, null, null, null, null, { id: 2, kind: 'view' }, { id: 2, kind: 'view' }], 
+      [null, null, null, null, null, null, null, null, { id: 3, kind: 'reinforce' }, { id: 3, kind: 'reinforce' }], 
       undefined, 
       [null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null, null, null, { id: 2, kind: 'aside' }, { id: 2, kind: 'aside' }, null, null, null], 
       [null, { id: 3, kind: 'disagree' }, { id: 3, kind: 'disagree' }, null, null, null, null, null, null, null], 
@@ -1682,7 +1764,7 @@ describe('the state-prose reader — ONE FACE PER POWER: the source filter and t
         expect(eligibleFaces(v, new Set(FACE_SOURCES))).toEqual([0]);
       }
     }
-    expect(sourcedChecked, 'the forty-five sourced variants were reached').toBe(45);
+    expect(sourcedChecked, 'the sixty-three sourced variants were reached').toBe(63);
     expect(checked).toBeGreaterThanOrEqual(2266);
   });
 });

@@ -2183,6 +2183,86 @@ describe('SEAM car 4 — §2.5\'s grammar, and every refusal it declares', () =>
       sources: [null, 'stranger', 'register', 'elders', 'tavern', 'muster', 'gate', 'market', 'garrison'],
       pairs: [null, null, { id: 3, kind: 'reinforce' }, { id: 3, kind: 'reinforce' }, null, null, null, null, null],
     },
+    // ⭐⭐ RE-PINNED AT THE 8b DS-DEF-2 DRAFT GATE (v3, sitting 4), which lands the BLOCK'S LAST
+    // SIX POOLS in one commit: the four remaining Beasts rows (`plagued`, perimeter AND organized
+    // force · `plagued`, NO perimeter and NO force · `settled`, defenses beyond the need ·
+    // `settled`, nothing organized) and the two remaining Invasion rows (`militia only` and
+    // `neither walls nor force`). +18 variants, +155 sourced faces, +36 pair rows (18 pairs).
+    // A GROW AND ONLY A GROW: not one of the forty-five variants already pinned loses a face or a
+    // pair, and nothing OUTSIDE DS-DEF-2 gains one. No `archiver`, no `public`, no `observed` and
+    // no `compromised` mark anywhere in the six, so those three arms below are UNCHANGED.
+    'DS-DEF-2 :: Beasts & Monsters: plagued, perimeter AND organized force #0': {
+      sources: [null, 'gate', 'stranger', 'muster', 'hall', 'guild', 'tavern', 'register', 'garrison', 'court', 'market', 'elders'],
+      pairs: [null, null, null, null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null, null, null, null, null, null],
+    },
+    'DS-DEF-2 :: Beasts & Monsters: plagued, perimeter AND organized force #1': {
+      sources: [null, 'gate', 'tavern', 'stranger', 'register', 'muster', 'watch', 'guild', 'hall', 'market', 'elders'],
+      pairs: [null, { id: 3, kind: 'disagree' }, { id: 3, kind: 'disagree' }, null, null, null, null, null, null, null, null],
+    },
+    'DS-DEF-2 :: Beasts & Monsters: plagued, perimeter AND organized force #2': {
+      sources: [null, 'stranger', 'muster', 'guild', 'hall', 'garrison', 'market', 'watch', 'register', 'tavern', 'court', 'elders'],
+      pairs: [null, null, null, null, { id: 6, kind: 'disagree' }, { id: 6, kind: 'disagree' }, null, null, null, null, null, null],
+    },
+    'DS-DEF-2 :: Beasts & Monsters: plagued, NO perimeter and NO force #0': {
+      sources: [null, 'hall', 'watch', 'tavern', 'elders', 'register', 'stranger'],
+      pairs: [null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null, null, null, null],
+    },
+    'DS-DEF-2 :: Beasts & Monsters: plagued, NO perimeter and NO force #1': {
+      sources: [null, 'market', 'hall', 'court', 'tavern', 'elders', 'watch', 'guild', 'stranger'],
+      pairs: undefined,
+    },
+    'DS-DEF-2 :: Beasts & Monsters: plagued, NO perimeter and NO force #2': {
+      sources: [null, 'market', 'guild', 'watch', 'tavern', 'elders', 'register', 'court', 'stranger'],
+      pairs: [null, { id: 5, kind: 'reinforce' }, { id: 5, kind: 'reinforce' }, null, null, null, { id: 6, kind: 'aside' }, { id: 6, kind: 'aside' }, null],
+    },
+    'DS-DEF-2 :: Beasts & Monsters: settled, defenses beyond the need #0': {
+      sources: [null, 'hall', 'guild', 'stranger', 'court', 'tavern', 'watch', 'register', 'garrison', 'market', 'muster', 'elders', 'gate'],
+      pairs: [null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null, null, null, null, null, null, null, null, null, null],
+    },
+    'DS-DEF-2 :: Beasts & Monsters: settled, defenses beyond the need #1': {
+      sources: [null, 'hall', 'tavern', 'stranger', 'court', 'guild', 'market', 'watch', 'register', 'garrison', 'muster', 'gate', 'elders'],
+      pairs: [null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null, null, null, null, null, null, null, null, null, null],
+    },
+    'DS-DEF-2 :: Beasts & Monsters: settled, defenses beyond the need #2': {
+      sources: [null, 'tavern', 'watch', 'hall', 'court', 'register', 'gate', 'market', 'guild', 'garrison', 'muster', 'elders'],
+      pairs: [null, { id: 5, kind: 'disagree' }, { id: 5, kind: 'disagree' }, null, null, null, { id: 2, kind: 'reinforce' }, { id: 2, kind: 'reinforce' }, null, null, null, null],
+    },
+    'DS-DEF-2 :: Beasts & Monsters: settled, nothing organized #0': {
+      sources: [null, 'stranger', 'elders', 'register', 'hall', 'watch', 'guild', 'tavern', 'market', 'court'],
+      pairs: [null, { id: 2, kind: 'reinforce' }, { id: 2, kind: 'reinforce' }, null, null, null, null, null, null, null],
+    },
+    'DS-DEF-2 :: Beasts & Monsters: settled, nothing organized #1': {
+      sources: [null, 'stranger', 'guild', 'hall', 'register', 'elders', 'tavern', 'watch'],
+      pairs: [null, null, null, null, null, null, { id: 3, kind: 'disagree' }, { id: 3, kind: 'disagree' }],
+    },
+    'DS-DEF-2 :: Beasts & Monsters: settled, nothing organized #2': {
+      sources: [null, 'stranger', 'tavern', 'hall', 'market', 'guild', 'court', 'watch', 'elders'],
+      pairs: [null, { id: 5, kind: 'disagree' }, { id: 5, kind: 'disagree' }, null, null, null, null, null, null],
+    },
+    'DS-DEF-2 :: Invasion & War: militia only #0': {
+      sources: [null, 'muster', 'market', 'stranger', 'elders', 'tavern', 'register'],
+      pairs: undefined,
+    },
+    'DS-DEF-2 :: Invasion & War: militia only #1': {
+      sources: [null, 'tavern', 'muster', 'stranger', 'elders', 'market', 'register'],
+      pairs: [null, { id: 2, kind: 'disagree' }, { id: 2, kind: 'disagree' }, null, null, null, null],
+    },
+    'DS-DEF-2 :: Invasion & War: militia only #2': {
+      sources: [null, 'muster', 'market', 'elders', 'register'],
+      pairs: [null, { id: 3, kind: 'disagree' }, { id: 3, kind: 'disagree' }, null, null],
+    },
+    'DS-DEF-2 :: Invasion & War: neither walls nor force #0': {
+      sources: [null, 'market', 'stranger', 'elders', 'court', 'register', 'tavern', 'guild', 'hall', 'watch'],
+      pairs: [null, null, null, null, null, null, null, null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }],
+    },
+    'DS-DEF-2 :: Invasion & War: neither walls nor force #1': {
+      sources: [null, 'watch', 'tavern', 'hall', 'market', 'guild', 'court', 'elders', 'register'],
+      pairs: [null, null, null, null, null, null, null, { id: 2, kind: 'view' }, { id: 2, kind: 'view' }],
+    },
+    'DS-DEF-2 :: Invasion & War: neither walls nor force #2': {
+      sources: [null, 'stranger', 'elders', 'market', 'tavern', 'watch', 'court', 'register', 'guild', 'hall'],
+      pairs: [null, null, null, null, null, null, null, null, { id: 3, kind: 'reinforce' }, { id: 3, kind: 'reinforce' }],
+    },
   });
 
   it('⭐ exactly ONE pool ships `sources`/`pairs` — DS-DEF-2, named face by face; every other block is still the zero-shift ground of car 8b-W-18c', () => {
@@ -2220,7 +2300,7 @@ describe('SEAM car 4 — §2.5\'s grammar, and every refusal it declares', () =>
     // renumbered the variant's pairs: +2 pair rows against a face count that did not move.
     const sourced = rows.reduce((n, r) => n + (r.v.sources || []).filter((x) => x !== null).length, 0);
     const paired = rows.reduce((n, r) => n + (r.v.pairs || []).filter((x) => x !== null).length, 0);
-    expect([rows.length, sourced, paired]).toEqual([45, 351, 86]);
+    expect([rows.length, sourced, paired]).toEqual([63, 506, 122]);
     // ⭐ AND THE OBSERVED LIST IS EMITTED ON EXACTLY ONE VARIANT, which is the mark's own
     // zero-shift ground: a variant with no observed face carries no `observed` key at all.
     const observed = allStateBlocks.flatMap(([id, b]) => Object.entries(b.pools)

@@ -55,8 +55,8 @@
   },
   "leaves": {
     "src/data/dossierStateProse/defense.generated.js": {
-      "raw": 223024,
-      "gzip": 36728,
+      "raw": 253573,
+      "gzip": 41881,
       "ceilingRaw": 488168,
       "ceilingGzip": 108482
     },
@@ -227,6 +227,14 @@
       "toRaw": 223024,
       "gzipAfter": 36728,
       "reason": "The 8b DS-DEF-2 CURE gate applies all SIX curers' packets verbatim. FIVE of them were already seated at the draft gate and re-cut wordings INSIDE the face counts they already had — those five move the payload by re-wording alone, not by adding rows. The SIXTH is the pool the DRAFT GATE REFUSED: `Disasters & Famine: granary AND parish care only` kept its three shipped spine rows there because its spine 3 carried `from the road`, a PROVENANCE move of `moveGrammar.js:225` that would have taken the shrink-only citation ratchet in `tests/lint/proseComposed.walker.test.js` from 7 to 8. THE CURE PACKET'S OWN TARGET v3/0 REMOVES THAT CLAUSE (`from the road` → `from outside`, which no detector in CLAUSE_DETECTORS reads), so the ground for the refusal is gone and the pool lands whole: faceCounts 1,1,1 → 9,9,7, twenty-two new wording rows and two marked pairs against three spine rows re-cut and no row removed. MEASURED, not asserted: the walker reads 84 passed (84) with this pool landed, so the citing-variant count is still the 7 it pins. The raw leaf grows 217,867 → 223,024 (+5,157) and gzip 35,505 → 36,728 (+1,223) against an owner-signed raw ceiling of 488,168 — 45.7 per cent of it. BOTH ARMS MOVED FOR THE SAME REASON and the gzip move is the payload's, not a zlib build change: the RAW arm reds first and did."
+    },
+    {
+      "car": "REWRITE 8b DS-DEF-2 draft (v3), FOURTH SITTING \u2014 SIX OF SIX PACKETS APPLIED VERBATIM AT THE DRAFT GATE, NOTHING REFUSED",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 223024,
+      "toRaw": 253573,
+      "gzipAfter": 41881,
+      "reason": "The 8b DS-DEF-2 DRAFT gate lands the BLOCK'S LAST SIX POOLS under the v3 workflow, each replacing three bare spine rows with a spine plus its wording faces, applied VERBATIM from the selectors' packets: `Beasts & Monsters: plagued, perimeter AND organized force` (3 spines + 32 faces, 3 pairs), `Beasts & Monsters: plagued, NO perimeter and NO force` (3 + 22, 3 pairs), `Beasts & Monsters: settled, defenses beyond the need` (3 + 35, 4 pairs), `Beasts & Monsters: settled, nothing organized` (3 + 24, 3 pairs), `Invasion & War: militia only` (3 + 16, 2 pairs) and `Invasion & War: neither walls nor force` (3 + 26, 3 pairs). 155 face rows and eighteen re-cut spines; NOTHING WAS REFUSED AT THIS GATE, so with this commit all twenty-six pools of DS-DEF-2 carry faces and no pool of the block is a bare spine. RAW 223,024 -> 253,573 (+30,549) against an owner-signed ceiling of 488,168, which is 51.9 per cent of it; GZIP 36,728 -> 41,881 against a ceiling of 108,482, which is 38.6 per cent. The gzip move is a PAYLOAD move and not a zlib-build move: the RAW arm moves with it and by the larger share."
     }
   ]
 }
