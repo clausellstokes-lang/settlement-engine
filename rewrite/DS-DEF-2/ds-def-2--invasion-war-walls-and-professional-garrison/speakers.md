@@ -7,7 +7,7 @@ variant 2 face 1 | gate | pair 1 · disagree
 variant 2 face 2 | hall | pair 1 · disagree
 variant 2 face 3 | court | -
 variant 2 face 4 | stranger | -
-variant 2 face 5 | elders | -
+variant 2 face 5 | tavern | -
 variant 3 face 1 | stranger | -
 variant 3 face 2 | tavern | -
 variant 3 face 3 | register | -
