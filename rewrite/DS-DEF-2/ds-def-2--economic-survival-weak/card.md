@@ -733,3 +733,408 @@ THE CARD (mechanical sections) — block DS-DEF-2 · pool `Economic Survival: WE
   town: the hall: Town hall · the tavern: Taverns (5-20) · the guilds: Craft guilds (5-15) · the register (parish): Parish churches (2-5), Parish burial grounds · the elders: —
   city: the hall: City hall · the tavern: Inns and taverns (district) · the guilds: — · the register (parish): Parish churches (10-30), Burial grounds and charnel house · the elders: —
   the key on the force buckets and the gates: watch: OPEN · garrison: OPEN · militia: OPEN · mercenary: OPEN · charter: OPEN · gates: OPEN
+
+================================================================================
+THE MARKER'S SECTIONS BEGIN HERE. Everything above is `node scripts/prose-mark-card.mjs
+DS-DEF-2 'Economic Survival: WEAK'` run read-only in the dock, verbatim, unedited.
+================================================================================
+
+(7) THE SPEAKERS
+
+⛔ READ THIS FIRST — THREE THINGS THE INSTRUMENT'S OWN LINES ESTABLISH, AND TWO IT CANNOT.
+
+  A. **THE PREIMAGE IS SMALL TIERS, ALMOST ENTIRELY.** thorp 106/128 · hamlet 95/128 ·
+     village 55/128 · **town 1/128 · city 2/128**; silent at metropolis. This is the mirror
+     image of the STRONG desk. The brief's town-and-above roster — the hall, the tavern, the
+     guilds, the register — **is not seated here**; the ELDERS are, and almost nothing else is.
+  B. **THE KEY FIXES EXACTLY ONE FIELD** — `defenseProfile.scores.economic` in [20,39] — and
+     section (2d) confirms it enumerates no sibling rung. Everything else on the page is OPEN.
+  C. **THAT ONE FIELD IS FROZEN** (writers 0). It is the key's own read AND a zero-writer read,
+     so ruling 11 licenses the perfect and the durative over it twice over.
+  D. What the instrument cannot print, and the marker measured: **the band is cut in half by a
+     machine threshold the key does not fix** (`econScore >= 25`), so two mutually opposite
+     machine sentences fire across one pool and a face may deny neither.
+  E. And: **not one roster row by name stands on all 260 towns of this preimage.** Not one.
+
+--- ⭐ THE MARKER'S MEASUREMENT (executed, read-only, in the dock) ---
+
+  Method: `rateGrid()` from `scripts/prose-rate-corpus.mjs` (768 rows), each generated through
+  `generateSettlementPipeline(config, null, {seed, customContent: {}})`, then filtered to
+  `defenseProfile.scores.economic` in [20,39]. **N = 260** (thorp 106 · hamlet 96 · village 55 ·
+  town 1 · city 2), against the instrument's 259 — a one-row tier-resolution gap, not a
+  different population. Nothing was written; every figure below is a count over those 260.
+  Measured score: min 20 · median 23 · max 39.
+
+  ⭐⭐ **THE BAND STRADDLES THE ENGINE'S OWN 25-POINT THRESHOLD.** `econScore < 25` on **133**
+     of 260 and `>= 25` on **127**. So BOTH arms of `threatAssessment.js:171/:173` fire across
+     this single pool — "Chronic underfunding limits emergency response. A sustained crisis
+     will exhaust reserves and undermine garrison morale." on 127, and "Economic base cannot
+     support crisis response. Any sustained threat quickly overwhelms the capacity to respond."
+     on 133 — and so do both arms of `defenseDisplay.js:221`, "Irregular pay, worn equipment,
+     morale risk." against "Cannot sustain forces. Systemic breakdown."
+     ⛔ **A FACE DRAWS ON ALL 260 AND MAY DENY NEITHER.** "There is still something in hand, it
+     simply will not last" is refused by 133 towns; "there is nothing at all to spend" is
+     refused by 127. What is licensed across the whole preimage is the SHORTFALL ITSELF and its
+     consequence, never a reading of how much is left.
+
+  ⭐⭐ **NO ROSTER ROW BY NAME IS UNIVERSAL.** The intersection over 260 towns is EMPTY. The
+     best-held single row is `Subsistence farming` at 221. Universal only by CLASS:
+       a burial place 260/260  (`Burial ground` 202 · `Graveyard` 55 · `Parish burial grounds` 1
+                                · `Burial grounds and charnel house` 2)
+       water          260/260  (`Water source` 202 · `Multiple water sources` 56 · aqueduct 2)
+       dwellings      260/260  · food grown or stored 260/260 · a mill of some kind 258/260
+       a faith place or resident priest 252/260
+     And the brief's named sources, measured: **a drinking house 122/260 · a market of any kind
+     73/260 · a hall as a BUILDING 3/260 · a guild row 3/260.** Under half, an eighth, and one
+     percent. Every named body on this card is conditional.
+
+  ⭐⭐ **THE GOVERNING BODY IS A CONSENSUS, NOT A ROOM.** `Informal elder consensus` 104 ·
+     `Lord's steward` 70 · `Village reeve` 34 · `Head-of-household consensus` 33 · `Lord's
+     reeve` 3 · `Village headman` 2 · `City hall` 2 · `Mayor and council` 1 · `Town hall` 1 —
+     and **11 towns carry no governing row at all**. The governing NAME reads Elder Council 77 ·
+     Feudal Stewardship 70 · Free Elder Council 43 · Elected Reeve 34 · Household Council 33 ·
+     Merchant Guild Council 2 · Town Council 1. [F1-20 is live on 257 of 260 towns.]
+
+  ⭐ **THE PURSE.** `economicGates.economic` present 260/260 and **below ×1.0 on 210** (min
+     0.67), so the Defense tab prints `Upkeep underfunded: crisis logistics at 67-99%`
+     (`defenseDisplay.js:320`, `:282`) **on this pool's own row** on four towns in five; monster
+     and disaster likewise 210. `economicGates.military` is present on only **134** (below 1 on
+     100, min 0.76) — on the other 126 there is no funded force for it to gate. `internal` is
+     present on 3. ⚠ F4-19 still binds: where the military gate exists it IS the watch's pay.
+
+  FLAGS (of 260): hasChurch 252 · hasWalls 103 · hasGates 103 · hasMilitaryInst 71 ·
+     hasMilitia 60 · hasCharterHall 35 · hasMercenary 16 · hasMagicInst 15 · hasHospital 9 ·
+     **hasWatch 3 · hasGranary 3 · hasCourtSystem 3 · hasGarrison 2 · hasPrison 2** ·
+     hasMerchantGuild 2 · hasGangInfra 2 · hasPort 1 · hasThievesGuild 1 · hasSmuggling 1 ·
+     **hasNavy 0**.
+  BUCKETS (`standingDefenseForces`): walls 103 · militia 60 · charter 34 · magicDef 15 ·
+     watch 3 · garrison 2.
+  FORCE ROWS BY NAME: `Citizen militia` 60 · `Household levy` 45 · `Adventurers' charter hall`
+     32 · `Professional city watch` 2 · `Garrison` 2 · `Town watch` 1. **144 towns carry no
+     force row of any kind.**
+  WALL ROWS: `Palisade or earthworks` 51 · `Palisade` 50 · `City walls and gates` 2 ·
+     `Citadel` 2. ⚠ V-06 keeps the material bar at the POOL grain: the pool is 101 timber towns
+     and 2 masonry ones, so no wall material may stand for the pool [F1-32].
+  ⚠ **THE `Household levy` IS THE §1.4 W-02 WIRING ROW, ON 45 TOWNS** — a force row on the
+     roster (`institutionalCatalog.js:104-110`) that the buckets do not see. No face may be
+     charged on those towns in either direction.
+  PROSPERITY: Poor 129 · Moderate 57 · **Comfortable 38 · Prosperous 4** · Struggling 32. So
+     161 are Poor-or-Struggling — and **"this is a poor place" is contradicted on 42**.
+  FOOD: `Import-Dependent` 110 · `Pressured` 58 · `Deficit` 50 · `Secure` 42 [F1-44 — `Secure`
+     is not "feeds itself"]. `storageMonths` 1.9 on 202 · 1.3 on 55 · 7 on 2 · 6.3 on 1.
+     ⚠ **W-07 IS THIS POOL'S OWN CONDITION**: a granary READING prints with no granary row
+     (`foodStockpile.js:190-193`) — about two months of food stored, and a granary BUILDING on
+     three towns. `economicViability.viable` is false on 47.
+  STRESS: none 204 · monster_pressure 9 · infiltrated 8 · succession_void 8 ·
+     politically_fractured 7 · wartime 6 · recently_betrayed 4 · mass_migration 4 ·
+     under_siege 3 · religious_conversion 2 · insurgency 2 · occupied 2 · plague_onset 1.
+     ⭐ **`famine` and `slave_revolt` never occur on this preimage.**
+  THREAT: frontier 97 · heartland 92 · **plagued 71** [F4-05: monsters, never disease].
+  ROUTE: road 52 · none 42 · mountain_pass 40 · river 37 · port 37 · crossroads 27 ·
+     isolated 25 — ⚠ and `hasPort` fires on ONE town, so `port` here is a river dock or a
+     landing [F1-18]. CULTURE: all eleven profiles, 19 to 27 towns each [F3-05].
+  CAPTURE: none 257 · equilibrium 2 · adversarial 1 — **`corrupted` 0 and `capture` 0**.
+
+--- ⭐⭐ THE MACHINE SENTENCES THAT ACTUALLY PRINT (measured, not predicted) ---
+
+  `guardEffectivenessDesc` over the 260:
+     **189** — "There is no formal enforcement body. Order is maintained through community
+               social pressure, the authority of established families, and the implicit threat
+               of collective action against those who break the peace. This works until it
+               doesn't."  (`safetyProfile.js:380`)
+      58 — the citizen militia musters when needed but cannot maintain consistent patrol
+       7 — the adventurers' charter hall coordinates emergency response
+       2 — garrison and city watch · 2 — a well-organised militia · 2 — a mercenary company
+  `safetyDesc` over the 260: **"Locals watch over the main paths" on 142** · "Militia
+     volunteers patrol the main paths" on 43 · "There is effectively no law enforcement" on 19 ·
+     "There is no meaningful guard presence" on 4 · the rest are the stress arms.
+
+  ⛔⛔ **THIS IS THE SITTING'S NAMED FAILURE MODE AND IT SITS ON 189 OF 260 TOWNS.** "Nobody is
+  set up to respond", "nothing here is arranged for it", "there is no one whose business it is",
+  "the town has no answer to anything" are **FLOOR 1 BY INFERENCE** on this desk: the machine's
+  own sentence on the same tab says order IS maintained — by community pressure, by the
+  authority of established families, by the threat of collective action — and on 142 towns says
+  the locals DO watch the main paths. The absence this key licenses is of a FUNDED, PAID,
+  STANDING body. It is never an absence of arrangement, of people, or of anybody caring.
+
+--- ⭐⭐ THE RECORD MEASUREMENT, AND THE RULING THAT FOLLOWS FROM IT ---
+
+  `holdersOf(kind, settlement)` over all twelve `HOLDER_KINDS` on the 260:
+
+      treasury  23/260      elders  13/260      watch  2/260      court  2/260
+      parish     1/260      market   1/260      road   1/260
+      **muster 0 · census 0 · toll-bar 0 · tradition 0 · office 0**
+
+  ⛔⛔ **NOT ONE KIND REACHES A TENTH OF THIS PREIMAGE.** The best-held record in the engine's
+  whole table stands on nine percent of these towns. A face draws on every town of the preimage,
+  so **THE WRITERS MAY CITE NO RECORD BY NAME ON THIS POOL AT ALL** — not the accounts, not the
+  toll book, not the parish register, not the record of custom, not the market's book, and above
+  all **not a muster roll, which resolves to nobody on all 260** [F1-24, §R-8, V-01, and the
+  sitting's own named failure mode]. Attribution here runs to PEOPLE and never to books. The
+  record WORDS stay free in a sentence that does not cite one as a source (W24 is struck): a
+  reeve may keep a tally, and the households may be asked what they owe.
+
+--- THE SPEAKERS THE BRIEF SEATS ON EVERY TOWN OF THIS PREIMAGE ---
+
+  1. **THE STRANGER** — seated by the brief, needing no row. On this card the ONLY speaker with
+     no condition on it at all. INTEREST: arrives at a place that is visibly working and
+     visibly short, where there is nobody to complain to and nothing organised to complain
+     about, and can say so because nobody here has to.
+     ⚠ bounded by (2b′): a stranger reports what could be SEEN, and may not have failed to see
+     the service of a row the tier requires.
+
+  2. ⭐ **THE ELDERS** — the brief's below-town source, and this pool's own trap.
+     SEATED: `Informal elder consensus` 104 + `Head-of-household consensus` 33 = 137 of 260 as
+     a governing row; the governing NAME reads an elder or household council on 153; and the
+     engine's own council label at these tiers is **"the household heads"** at thorp and **"the
+     village elders"** at hamlet and village (`governanceNarrative.js:101-105`) — which is
+     F1-22's own exception, so the word is the engine's here and not the writer's.
+     INTEREST: they are the body that decides without a purse, a room, or a record. On a pool
+     whose whole subject is a shortfall, the elders are the source that must say WHAT WAS NOT
+     DONE and who bore it.
+     ⛔⛔ **THE `elders` RECORD RESOLVES ON 13 OF 260** (`Household elder` · `Village elder` ·
+     `Village headman`), so the elders SPEAK and never cite a record of custom [F1-24].
+     ⛔⛔ **AND "Elder" IS A MINTED NPC ON EVERY THORP AND EVERY HAMLET — 202 OF 260**
+     (`npcGenerator.js:1512-1513`). The PLURAL is the source; the singular "the elder" is a
+     generated person on the next tab with a personality and a secret [F3-06]. Say "the village
+     elders", "the household heads", "those the place listens to" — never "the elder", never
+     "the headman" (a roster row on two towns).
+
+  3. **THE TOWN'S OWN PEOPLE** — the public, for what everyone saw at once. The engine's own
+     words for them at these tiers are worth having: **"The community"** is the defence group
+     label on every small tier (`governanceNarrative.js:499-506`) and **"the able-bodied"** is
+     the watch label where no force row stands (`:95-98`). ⚠ the `[public]` tag stays under
+     NOTES until car 18n lands.
+
+--- CONDITIONAL SPEAKERS (with the field that seats each, and how often it does) ---
+
+  ⭐ **THE LORD'S MAN** — `Lord's steward` 70 · `Village reeve` 34 · `Lord's reeve` 3 = **107 of
+    260**, the second-best-seated source on the whole card and the most under-used.
+    INTEREST: ⭐ **HE IS NOT THE TOWN'S OFFICER.** His stake is what LEAVES — the dues, the
+    render, the lord's share — where every other mouth on this pool is complaining about what
+    does not come in. On a desk whose subject is a shortfall, a source whose interest runs the
+    other way is worth more than a fourth voice agreeing. And F3-06 is SILENT on him: no tier
+    and no stress on this preimage mandates a Reeve or a Steward NPC (measured: `House Steward`
+    appears on 8 villages as an ordinary roll, never as a mandated office).
+    ADDENDUM 18's archaism licence fits him exactly: "the reeve" is welcome in a sentence that
+    shows the reeve collecting.
+
+  **THE DRINKING HOUSE** — `Alehouse` 84 · `Wayside inn` 60 · `Travelers' inn` 50 · `Ale house`
+    47 · the town and city rows 4; **122 of 260 carry one**. The brief's "tavern" is a
+    town-and-above source and here it is CONDITIONAL, on under half the preimage. Where a row
+    seats it, name the row's own kind — the alehouse, the wayside inn — and never assume it.
+    INTEREST: who turns out, and who is owed. Safety label reads `Moderate` on 185.
+
+  **THE FAITH** — 252 of 260 by class. ⚠ but **`Access to parish church` (192 towns) is a WALK
+    OF TWO TO FIVE KILOMETRES TO SOMEBODY ELSE'S CHURCH** (`institutionalCatalog.js:50-54`;
+    F1-11), so on three towns in four the church IS NOT HERE. `Parish church` + `Priest
+    (resident)` stand on the 55 villages; `Wayside shrine` on 28 thorps, with no clergy.
+    INTEREST: the rites, the burial ground, and what a place with nothing to spare still puts
+    by for its dead. ⛔ `Parish Priest` is MINTED on all 96 hamlets and under plague_onset and
+    religious_conversion; `Village Priest` and `High Priestess` are rolled besides. Say "those
+    who keep the ground", "whoever says the words over them" — never "the priest".
+
+  **THE MUSTER** — `Citizen militia` 60 (the bucket's only row) and `Household levy` 45 (the
+    W-02 wiring row). At most 105 towns, and the `muster` KIND resolves on **0 of 260** — no
+    muster roll, no levy roll, no list of any kind, anywhere [F1-03, F1-24].
+    ⛔⛔ **AND NEITHER OF THEM IS PAID** — see (8); this is the card's sharpest single row.
+
+  **WHOEVER HOLDS THE WAY THROUGH** — `hasGates` 103/260, fired off the palisade rows. ⚠ F1-08
+    binds BOTH directions, and the `toll-bar` kind resolves on **0 of 260**: the gate speaks and
+    never cites a toll book.
+  **THE WALLS' KEEPERS** — 103/260, timber on 101 of them.
+  **THE CHARTER HALL** 34 · **THE SMITH** 103 · **A MARKET of any kind** 73 · **THE MILL** — a
+    mill of some kind on 258, but `Access to external mill` (219) is the MANOR'S mill, up the
+    road and not the town's [F1-15]; a `Mill` the town owns stands on the 55 villages.
+  **A WATCH** 3 · **A GARRISON** 2 · **A GRANARY** 3 · **A COURT** 3 · **A PRISON** 2 ·
+    **A HOSPITAL** 9 · **A PORT** 1 · **A NAVY** 0.
+
+  ⛔ **NOT SPEAKERS ANYWHERE HERE:** the HALL, as a body or a room — the governing institution
+    at thorp and hamlet is a CONSENSUS and a hall BUILDING stands on 3 of 260 [F1-20] · the
+    GUILDS (3 of 260) · the crown's assessor (no typed producer, the brief) · and every record
+    in the engine's table, by the measurement above.
+
+--- THE NAMED OFFICES A SPEAKER MUST NEVER BE (`npcGenerator.js:1511-1537`, F3-06) ---
+
+  thorp (106):  **Elder** + a derived second role (`npc/thorpSecondRole.js:13`) — measured:
+                Fisherman 49 · Miller 24 · Woodcutter 23 · Shepherd 18 · Widowed Farmer 9 ·
+                Blacksmith 6 · Village Priest 4 · Wounded Soldier 4 · Shrine Keeper 3 …
+  hamlet (96):  **Elder · Parish Priest** (both on all 96)
+  village (55): **Mayor** (55) · **Guard Captain** (42; `worldLaw.allowsRole` filters the rest)
+  town (1):     Mayor · Guard Captain · High Priest
+  city (2):     Mayor · Guard Captain · High Priest · Wealthiest Merchant
+  and by the stresses that actually occur here: monster_pressure → Garrison Commander, Retired
+  Adventurer · succession_void → Council Member, Chief Magistrate · politically_fractured →
+  Council Member ×2 · wartime → Garrison Commander, Guild Master · recently_betrayed → Chief
+  Magistrate · mass_migration → Guild Master, Healer · under_siege → Garrison Commander, Guard
+  Captain · insurgency → Chief Magistrate, Corrupt Official · occupied → Corrupt Official ·
+  religious_conversion → Parish Priest, Council Member · plague_onset → Healer, Parish Priest.
+
+  ⛔⛔ **THE TRAP THIS POOL WALKS INTO IS THE ELDER AND THE TRADE.** The brief's own safe
+  below-town source is "the elders" and its SINGULAR is minted on 202 of 260 towns. And the
+  thorp's second mandated NPC is drawn from the town's own trades — a Fisherman on 49, a Miller
+  on 24, a Woodcutter on 23, a Shepherd on 18 — which is exactly the pool of concrete,
+  particular people a writer reaching for texture on a thorp will reach for first. **The plural
+  and the trade stay free; the singular with a doing does not.** "the households that still have
+  seed to hold back" · "those who grind for the rest" · "the ones who are owed" — never "the
+  miller", "the shepherd", "the elder", "the mayor", "the guard captain", "the parish priest".
+
+--- THE TWO NPC SEAMS THE WRITERS MUST KNOW ABOUT ---
+
+  ⚠ **EVERY VILLAGE MINTS A MAYOR, AND 42 OF 55 MINT A GUARD CAPTAIN**, while the watch bucket
+  stands on 3 towns of the whole preimage and the militia bucket on 60. There IS a person whose
+  office is this town's defence, on the next tab. There is frequently no body under him. Write
+  the shortfall as the body's pay and the body's absence — never as "there is nobody in charge".
+  ⚠ **EVERY THORP AND HAMLET MINTS AN ELDER** while the `elders` record resolves on 13. The
+  people are seated; the book is not. Nothing here is written down, and that is the licence.
+
+  ⭐ **THE `compromised` TAG IS A DEAD LETTER ON THIS POOL.** Section (2c) marks `Economic
+  Survival: WEAK` for the hall under `criminalCaptureState` `corrupted`/`capture`. Measured over
+  the 260: none 257 · equilibrium 2 · adversarial 1 — **`corrupted` 0, `capture` 0** — and a
+  hall stands as a body on three towns. The (2c) row is right about the pool's NAME and blind to
+  its towns: the same key at town-and-above would carry it, and this preimage is 257/260 below
+  town. The writers should offer no `[hall · compromised]` candidate here; a refuter asked to
+  judge one should ask which town it stands on.
+
+--------------------------------------------------------------------------------
+
+(8) WHAT WOULD BE FALSE
+
+The pool's subject is a shortfall and its single richest trap is that **the bodies which would
+be short are, on this preimage, bodies the engine says are not paid at all**: `Citizen militia`
+is glossed "Part-time soldiers with their own tools and no pay" (`institutionVocabulary.js:153`)
+and `Household levy` musters with hunting bows, spears and farm tools (`institutionalCatalog.js:
+104-110`), and those two rows are **105 of the 116 force-carrying towns** measured, with 144
+towns carrying no force row at all — so **no wage, no arrears, no "already owed", no "irregular
+pay" may be predicated of the force on this pool** [V-09, and the shipped spines walk into it
+twice: "the pay is irregular" and "The people who would have to hold {settlement} through
+something are already owed"], while F4-19 keeps the military gate's shortfall real wherever a
+funded body exists (present on 134 of 260, below ×1.0 on 100) and F4-04 forbids the other
+extreme absolutely — short, late, thin are licensed, "nothing has been paid", "there is nobody
+left to pay" are not, because every gate has a floor and `communityMilBase` is exempt
+(`defenseGenerator.js:186-192`); V-04 allows a thin muster as a STANDING STATE and never as a
+course; F4-02 keeps wall-keeping and wages in ONE purse (`:182`, `:189-192`) so the palisade
+maintained while the muster goes without is false, and F4-03 keeps the four gates differing in
+degree and never in direction. The second great hazard is the one the instrument cannot see:
+**the band straddles `econScore >= 25`**, so `threatAssessment.js:171` ("Chronic underfunding …
+will exhaust reserves and undermine garrison morale") fires on 127 towns and `:173` ("Economic
+base cannot support crisis response") on 133, and `defenseDisplay.js:221` splits the same way —
+a face may deny neither, so both "there is still a little in hand" and "there is nothing to
+spend" are refused, and what survives is the shortfall itself without a reading of how much
+remains. The third is the sitting's own named failure mode and it is quantified here:
+**`guardEffectivenessDesc` prints "There is no formal enforcement body. Order is maintained
+through community social pressure, the authority of established families, and the implicit
+threat of collective action" on 189 of 260**, and `safetyDesc` prints "Locals watch over the
+main paths" on 142, so "nobody is set up to respond", "nothing here is arranged for it", "there
+is no one whose business it is" are floor 1 BY INFERENCE on three towns in four [V.0 floor 1,
+F1-25, F1-30 — write AROUND an absence, never assert it]. On the rosters the closed lists bite
+almost entirely as bodies a face may not INVENT, because this preimage has so few: a watch on 3
+towns [F1-01, V-23 — any watch as a body below town contradicts `hasWatch` false], a garrison on
+2 [F1-02], "the guard" as a body where `hasMilitaryInst` is false on 189 [F1-04], a militia or a
+muster ROLL [F1-03], a mercenary company on 16 [F1-05], a charter hall on 34 [F1-06], walls on
+103 and their denial equally barred on the other 157 [F1-07, F1-25], a gate and the denial of
+one both [F1-08], **a GRANARY BUILDING on 3 towns while about two months of grain is stored on
+all of them** — W-07 is this pool's own condition, the reading prints with no row
+(`foodStockpile.js:190-193`) so write the store and never the building [F1-09] — a market on 73
+[F1-10], a church standing HERE where 192 towns hold only `Access to parish church`, a walk of
+two to five kilometres [F1-11], a trial, sentence or courthouse where `hasCourtSystem` is true
+on 3 [F1-12], a gaol on 2 [F1-13], a hospital or infirmary on 9 [F1-14], a grain mill the town
+owns where 219 hold only the manor's [F1-15], a guild on 3 [F1-16], the sea on a preimage whose
+`hasPort` fires once [F1-18], a warehouse [F1-19], and above all **a HALL, chamber or council
+room as a PLACE, which is false on 257 of 260 because the governing institution below town is a
+consensus and not a room** [F1-20], with THE ELDERS as a body governed by F1-22's own exception
+(the engine says "the village elders" and "the household heads" at these tiers, so the words are
+its own). The record rule is absolute here and sharper than on any sibling desk: `holdersOf`
+over all twelve kinds returns treasury 23 · elders 13 · watch 2 · court 2 · parish 1 · market 1 ·
+road 1 · **muster, census, toll-bar, tradition and office 0** — **no kind reaches a tenth of the
+preimage**, so a face may name NO record whatever [F1-24, §R-8, V-01], attribution runs to people
+and never to books, and the record WORDS remain free where they cite nothing (W24 struck). On
+floor 2 this pool is a magnet for every barred form because its subject is quantity and its
+tense wants to be the past: no count, share, sum, price or headcount in a digit or a word — "two
+months' grain", "a handful of households", "most of what it owes" are magnitudes [F2-01]; no
+date, season or arrears period — "since the winter", "three months behind", "a bad season"
+[F2-02]; no founding or raising narrated [F2-03, V-05]; no event the record did not run — a
+harvest that failed, a levy that was called, a store that was opened, a man who left [F2-04, and
+note `famine` and `slave_revolt` occur on NO town of this preimage, so a face turning on either
+describes a town this key does not select]; no elapsed course over a live field — "no longer",
+"thinner than it was", "again" [F2-05]; no rate — "most winters", "more often than not", "every
+spring" [F2-06]; no trend [F2-08]; and nothing alluding to a past this key cannot read [F2-09].
+⭐ Against all that, the licence, and it is large: `scores.economic` is the key's OWN read and
+carries **zero pulse writers**, and so do `hasGranary`, `hasHospital`, `hasChurch`,
+`hasCourtSystem`, `hasPrison`, `hasPort`, `tradeRouteAccess`, `monsterThreat`, `stress`,
+`safetyLabel`, `guardEffectivenessDesc`, every `economicGates` leaf, `foodSecurity.
+resilienceScore`, the `stockpile` fields and every `defenseProfile.institutions.*` flag — **the
+perfect and the durative are lawful over all of these** (ruling 11b): "nobody has been asked to
+open the store", "the households have never been called out together", "no one has had to find
+the bottom of it" are licensed sentences on this desk. They are NOT lawful over `institutions`
+at any bucket grain (38 writers), over `name` (201), or over `defenseProfile` / `scores` /
+`scores.disaster` (1 each) — the instrument's ⚠ SEAM says why: the flags are frozen while the
+live roster can lose a row to a ruin, so write the durative over the STATE and never over the
+BODY. On floor 3 the office list is long and this pool's own entry heads it — **Elder, minted on
+202 of 260** — with Parish Priest on 96, Mayor on 55, Guard Captain on 42, and the thorp's
+trade-drawn second role (Fisherman, Miller, Woodcutter, Shepherd) on all 106, so the singular of
+any of them with a doing is [F3-06]; the culture bar stands at eleven profiles, all of them
+present here in near-equal numbers, so no thatch, no churchyard, no market green, no snow on the
+road [F3-05]; nothing may be predicated of a deity, the followers act and the god does not
+[F3-02, ADDENDUM 15]; the tier word may not be spelled [F1-31, V-03]; and the approach may not
+be named against `tradeRouteAccess`, which runs road 52 · none 42 · mountain_pass 40 · river 37 ·
+port 37 · crossroads 27 · isolated 25 [F1-102, V-08]. On floor 4, besides the purse rows: no
+decay clock and no permanence over fabric, and note that the purse's own distress closure
+reaches `Palisade or earthworks` (`institutionLifecycle.js:1016`), which is 51 of this
+preimage's 103 wall rows [F4-01, V.0 floor 4]; `plagued` is MONSTERS and 71 of these towns carry
+it [F4-05]; a blockade does close the sea supply [F4-09, V-24]; occupation diminishes the town's
+own force and never removes it [V-16, on 2 towns]; naming any of the six buckets on a no-force
+key is [F4-18]; and a covert fact never reaches a player face [F4-13] — which on this pool means
+nothing at all, since `criminalCaptureState` reads `corrupted` and `capture` on **no town of the
+preimage**. Last, the shipped rows themselves, since the writers will have read them: all three
+predicate pay or debt on forces that are unpaid by definition or absent entirely [V-09]; "the
+pay is irregular" is also a rate [F2-06]; "each season of it removes a little more" is both a
+rate and an elapsed course [F2-05, F2-06]; "chronic rather than sudden" is a trend [F2-08]; and
+`{settlement}` stands in all three, where ruling 12 allows it in at most one unit of the pool
+and never in a face.
+
+--------------------------------------------------------------------------------
+
+(9) WHERE THE FLAVOUR IS
+
+  WHAT IS IN USE. Everything, and none of it spare. This is a preimage of thorps and hamlets —
+  a hundred and six of one, ninety-six of the other — where the universal facts are a burial
+  place, water, roofs, a field, and a mill that on two hundred and nineteen towns belongs to
+  somebody else and is up the road. About two months of food is stored, and there is no granary
+  to store it in: it is in cellars and lofts and under the floor, and the engine says so by
+  printing the reading with no building behind it. The tools are the flavour — the levy musters
+  with hunting bows, spears and farm tools, the palisade is a ring of sharpened stakes on fifty
+  towns, the alehouse is on fewer than half of them and the lord's steward is on a hundred and
+  seven. Nothing here is institutional, so every concrete noun a writer wants has to be a thing
+  a household owns.
+
+  WHAT IS IN DISPUTE. Who bears it, since there is no purse to argue over. On four towns in
+  five the page says the crisis logistics are funded somewhere between two-thirds and
+  all-but-nothing, while the people who would answer a crisis are the able-bodied of the place
+  and are owed nothing because they were never promised anything. That is the pool's real
+  quarrel, and it belongs to mouths that disagree about duty rather than about money: the
+  village elders who decide without a treasury and must say what was not done, the lord's
+  steward whose interest runs the other way entirely — what leaves, not what fails to arrive —
+  the households that turned out last time and the households that did not, and a stranger who
+  can see in an afternoon what nobody here has any reason to put into words. And underneath it,
+  quietly, the fact that forty-two of these towns are Comfortable or Prosperous on their own
+  Economics tab while wearing a badge that reads WEAK: being poor and being unprovided are two
+  different facts, and this key fixes only the second.
+
+  WHAT THE ABSENCE LOOKS LIKE ON THE GROUND. Not emptiness — informality. Order IS kept here:
+  the machine's own sentence on a hundred and eighty-nine of these towns says community
+  pressure, the authority of established families, and the implicit threat of collective action,
+  and on a hundred and forty-two says the locals watch the main paths. What is missing is
+  anything written down and anybody paid. Not one record-keeping kind in the engine's table
+  stands on a tenth of these towns, so the whole arrangement lives in what people know and what
+  they will admit to knowing, and every obligation on this desk is a custom rather than a
+  contract. The hook is the untested custom: enough food for about two months, an arrangement
+  that has never been called on, and no one in the place who could say whose job it would be if
+  it were.
+
+================================================================================
+END OF THE MARKER'S SECTIONS. The instruments were run READ-ONLY in the dock; the
+marker's measurement was an inline `node --input-type=module -e` over `rateGrid()`,
+`generateSettlementPipeline`, `holdersOf` and `standingDefenseForces`, wrote no file,
+and touched no dock state. This packet file is the only file written.
+================================================================================

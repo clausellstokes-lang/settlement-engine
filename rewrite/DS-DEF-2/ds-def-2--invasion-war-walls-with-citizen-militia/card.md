@@ -621,3 +621,328 @@ THE CARD (mechanical sections) — block DS-DEF-2 · pool `Invasion & War: walls
   hamlet: the hall: — · the tavern: — · the guilds: — · the register (parish): Access to parish church, Burial ground · the elders: —
   village: the hall: — · the tavern: — · the guilds: — · the register (parish): Parish church, Priest (resident), Graveyard · the elders: —
   the key on the force buckets and the gates: watch: OPEN · garrison: FIXED FALSE by the key · militia: FIXED TRUE by the key · mercenary: OPEN · charter: OPEN · gates: OPEN
+
+────────────────────────────────────────────────────────────────────────────────────────────
+THE MARKER'S SECTIONS (seat: opus) — written against the instrument above, every figure below
+EXECUTED over the key's own 79-town preimage via `findTownsWhereKeyFires('DS-DEF-2', 'Invasion
+& War: walls with citizen militia', 999)` (returns exactly 79 = the rate row's own count).
+────────────────────────────────────────────────────────────────────────────────────────────
+
+(7) THE SPEAKER ROSTER
+
+  ⛔⛔ READ THIS FIRST: THIS PREIMAGE IS ENTIRELY BELOW TOWN. hamlet 36 · village 43 · nothing
+  else. Every habit carried over from the walled-garrison and walled-no-force packets is wrong
+  here, because those pools live at town, city and metropolis. MEASURED on the 79: **ZERO hall
+  rows. ZERO guild rows. ZERO watch rows. ZERO garrison rows. ZERO market-as-a-body on 33 of
+  79.** The hall, the guilds and the watch are NOT speakers on this pool and never will be —
+  the brief seats them "at town and above", and this pool never reaches town.
+
+  ⭐⭐ AND THE ROSTER IS TWO ROWS WIDE. Of every institution in the catalogue, EXACTLY TWO stand
+  on all 79 towns:
+      79/79  `Citizen militia`        — the whole of the force
+      79/79  `Palisade or earthworks` — the whole of the fabric
+  Nothing else is universal. Not the church building, not the priest, not the mill, not the
+  market, not the smith, not the tavern. A face draws on every town of the preimage, so ONLY
+  these two rows and the flags below may be leaned on without a hedge.
+
+  ── THE ENGINE'S OWN TWO SENTENCES, which are this pool entire (`institutionVocabulary.js`
+     :153, :155, imported by `defenseStateProse.js` — the pool's own module) ──
+    `Citizen militia`        "Ordinary residents who drill and muster against local threats.
+                             Part-time soldiers with their own tools and no pay."
+    `Palisade or earthworks` "A wooden palisade or earthen bank thrown up to slow raiders and
+                             beasts. Rough defence for a place that cannot afford stone."
+  ⛔ THOSE TWO SENTENCES DECIDE MOST OF SECTION (8). No pay. Their own tools. Cannot afford
+  stone. Each is a field that DENIES the sentence a writer reaches for by reflex.
+
+  ── UNIVERSAL SPEAKERS (present, or seated by a p 1.0 service, on all 79) ──
+
+  • ⭐ THE MUSTER — `Citizen militia`, 79/79, the key's own read. Its service `Emergency
+    defense` is on at p 1.0 on all 79: "Armed citizen response to external threats and raids."
+    ITS INTEREST IS NOT A WAGE, BECAUSE IT HAS NONE. It is the TURN, the TIME and the TOOLS:
+    who stands, whose night it is, whose field goes unworked while he stands, and whose own
+    spear is being carried. The class word "the muster" is free; so are "the turnout", "those
+    who stand", "the households that turn out".
+    ⛔ AND IT KEEPS NO RECORD. EXECUTED: `holdersOf('muster', s)` returns NOTHING on 79 of 79,
+    because the muster's only qualifying service `Muster training` is `on: false, p: 0.5`
+    (`institutionServices.js:837`) and instantiated on ZERO of the 79. The holder table's own
+    note (`holderTable.js:279-288`) predicted a garrison town with "men under arms and no roll
+    of them"; MEASURED, this is worse and sharper — **this town has the militia itself and
+    still no roll of it.** A cited muster roll is F1-24 / §R-8 / V-01 here exactly as on the
+    garrison pool, and the writer will feel far more entitled to it. There is no roll.
+
+  • ⭐ WHOEVER HOLDS THE WAY THROUGH — seated by the palisade itself. `hasGates` is TRUE on
+    79/79 because `priorityHelpers.js:53` matches the substring 'palisade'. The palisade's own
+    service `Gated entry` is on at p 1.0 on all 79: "Controlled access through the perimeter.
+    Strangers must state business." So a controlled entrance, and a person at it, exist on
+    every town; denying either is floor 1.
+    ⛔⛔ BUT IT IS NOT A TILL, AND THIS IS THE EXACT INVERSE OF THE GARRISON POOL. There is no
+    `Gates (if walled)` row at these tiers (it is a TOWN row), so no `Toll collection`, no
+    `Entry inspection`, no `Gate control`. EXECUTED: `holdersOf('toll-bar')` NONE on 79/79.
+    **The way through on this pool takes no money and keeps no book.** Every gate-as-revenue
+    hook the walled-garrison packet is built on is an invention here.
+
+  • THE HOUSEHOLDS, AND THEY ARE THE SAME PEOPLE AS THE MUSTER. The militia IS the households
+    ("Ordinary residents"; catalog "All able-bodied citizens obligated to defend"). And at
+    hamlet the `Burial ground` row is "kept by the households in turn" — the same rota logic
+    on the other end of life. A genuinely universal collective speaker with a real stake.
+
+  • THE PUBLIC (ruling 28) and THE STRANGER (always). The stranger is unusually well seated
+    here: the gate's own text makes the stranger the person the procedure is ABOUT ("Strangers
+    must state business"), and four stress branches on this preimage print heightened suspicion
+    of strangers.
+
+  • SOMEONE WHO SPEAKS FOR THE PLACE — 79/79 by union, but NEVER as "the hall". MEASURED:
+    `Lord's steward` 41 · `Village reeve` 24 · `Informal elder consensus` 13 · `Village headman`
+    1. Zero towns with no governance row.
+    ⛔ THE FOUR ARE NOT INTERCHANGEABLE AND TWO ARE OPPOSITES. `Lord's steward` is "A lord's
+    agent [who] manages the lands, collects rents, and enforces noble authority"; `Informal
+    elder consensus` is "A FREE hamlet with NO lord's representative." A face may not assume a
+    lord and may not assume there is none. Write the function ("whoever answers for the place",
+    "those who decide such things", "the elders") and never the seat.
+
+  • A HOUSE OF THE FAITH — `hasChurch` true 79/79, and burial is universal (`Graveyard` 43 +
+    `Burial ground` 36 = 79). BUT THE BUILDING AND THE PRIEST ARE NOT. At the 36 hamlets the
+    row is `Access to parish church`, whose desc is "Walk 2-5km to village church for
+    services" — **there is no church building in the settlement and no resident clergy**;
+    `Priest (resident)` stands on 43 of 79, the villages only. And EXECUTED, `holdersOf('parish')`
+    is NONE on 79/79: no town of this pool keeps a register of any kind.
+    So: the dead are buried here on every town; worship on 36 of them is a walk out of the
+    place; and nothing anywhere is written down. Burial is the safe universal; the bell, the
+    churchyard, the priest and the register are not.
+
+  ── CONDITIONAL SPEAKERS (the field that seats each, measured) ──
+    the tavern / the alehouse   67/79  (`Alehouse` 40 · `Travelers' inn` 39 · `Ale house` 34 ·
+                                `Wayside inn` 31 · `Waystation` 11 · `Caravanserai` 9) — 12
+                                towns have NO drinking house at all. Interest: the safety
+                                label and who came off the walk with a thirst.
+    the smith                   63/79 — ⭐ the best-seated conditional speaker on this pool,
+                                because the militia carries ITS OWN TOOLS and he is the one who
+                                makes and mends them. His interest is being paid for war-work
+                                by people who are not paid to do the war.
+    a market                    46/79 (`hasMarket`) — "the market" as a BODY is F1-10 on 33.
+    the charter hall            39/79 — and the threat row PRINTS its presence or absence on the
+                                same page: "Charter hall provides specialist backup." /
+                                "No specialist monster hunters." Interest: it is the professional
+                                answer standing beside the amateur one.
+    a healer / midwife / apothecary  37/79 ; `hasHospital` 13/79.
+    `Veteran's lodge`            9/79 — "A drinking hall for old soldiers and mercenaries."
+                                ⚠⚠ W-01 / V-34 LIVES ON EXACTLY THESE NINE TOWNS: the lodge sets
+                                `hasMercenary: true` (`priorityHelpers.js:49` lists "veteran's
+                                lodge") while the mercenary BUCKET stays FALSE (measured: no
+                                bucket row on any of the 79). Two engine surfaces disagree; NO
+                                FACE MAY BE CHARGED EITHER WAY on those towns, and no face
+                                should lean on either reading.
+
+  ── NEVER A SPEAKER, AND NEVER A BODY, ON THIS KEY ──
+  • ⛔⛔ THE WATCH. `hasWatch` FALSE on 79/79; no `Town watch` row exists in the catalogue at
+    hamlet or village at all. **V-23 is explicit and was re-cut FOR this case: "any watch as a
+    body below town contradicts `hasWatch` false", and the old "'local watch' — use it"
+    permission is WITHDRAWN by name.** No watch, no watchman, no watch captain, no "the gate's
+    watch" (V-02 — a possessive may not seat a body the roster denies).
+    ⚠ AND THE PAGE WILL ARGUE WITH YOU, WHICH IS A SEAM AND NOT A LICENCE: the same-tab machine
+    prints "Watch rotations are thin" on 76/79, "The watch is uncertain whose orders to follow"
+    on 3, and "The watch is overwhelmed by unfamiliar faces" on 2. Those are engine-side mints
+    of the W-19 / W-22 family. The ROTATIONS are real and are the MILITIA'S — write the turn,
+    the rota, who stands tonight. The WATCH as a body is still refused.
+  • ⛔ THE HALL, and every hall-shaped word. Zero hall rows on 79/79 (F1-20; V-29 names "the
+    hall at a hamlet" as a surviving label trap). No town hall, no moot house, no chamber, no
+    long table, no clerk in the hall.
+  • ⛔ THE GUILDS. Zero guild rows on 79/79. Not a speaker, not a body, not a stake.
+  • ⛔ THE GARRISON, SOLDIERS OF THE TOWN'S OWN, A BARRACKS. `hasGarrison` false 79/79; the key
+    fixes it. And "soldiers" is wrong even of the militia in the ordinary sense — the engine
+    calls them "Part-time soldiers with their own tools and no pay", which is a phrase the ROW
+    owns, not a licence to write a soldiery.
+  • ⛔ A MERCENARY COMPANY (F1-05) · A PRISON, A COURT, A GAOL (`hasCourtSystem` and `hasPrison`
+    FALSE 79/79) · A GRANARY OR ANY STORE (`hasGranary` FALSE 79/79) · A PORT (FALSE 79/79) ·
+    A CITADEL, an inner keep, a last refuge (F1-07; no such row at these tiers).
+  • ⛔ THE CROWN'S ASSESSOR — the engine has no typed crown collector anywhere, and a
+    `Lord's steward` on 41 towns makes one feel natural. It is not a speaker.
+
+  ── THE NAMED OFFICES A SPEAKER MUST NEVER BE (`npcGenerator.js:1511-1537`) ──
+    hamlet  (36/79)   **Elder** · **Parish Priest**
+    village (43/79)   **Mayor** · **Guard Captain**
+  ⛔⛔ THIS POOL'S FLOOR-3 TRAP IS SHARPER THAN ANY WALLED POOL'S, FOR THREE REASONS.
+    (a) **'Elder' is a mandatory NPC at every hamlet.** The brief seats "the elders" below town
+        as a safe speaker and it stays safe AS A PLURAL CLASS — but "the elder", "the oldest
+        here", "the one they defer to" is Elder ⟨Name⟩ on the next tab, with a personality and
+        a secret. Keep it plural, always.
+    (b) **'Guard Captain' is mandatory at every one of the 43 villages** — on a town with no
+        garrison, no watch and no paid force whatever. So "whoever calls the muster out",
+        "the one who says where they stand", "whoever decides who is let through" all read as
+        Guard Captain ⟨Name⟩. Write the muster acting for itself, or a plural, or a bystander.
+    (c) **'Parish Priest' is mandatory at every hamlet** — the same 36 towns where the
+        institution roster holds NO resident clergy and the church is a 2-5km walk. The engine
+        seats a priest NPC where the roster seats no priest. Do not resolve that seam in prose:
+        never "the priest", and the register is barred independently.
+  Stress adds more, and these fired ON THIS PREIMAGE (measured): `under_siege` 3 → Garrison
+  Commander + Guard Captain · famine 5 → Healer + Guild Master · succession_void 3 → Council
+  Member + Chief Magistrate · politically_fractured 2 → Council Member ×2 · recently_betrayed 2
+  → Chief Magistrate · insurgency 2 → Chief Magistrate + Corrupt Official · mass_migration 2 →
+  Guild Master + Healer · wartime 2 → Garrison Commander + Guild Master · plague_onset 2 →
+  Healer + Parish Priest · monster_pressure 1 → Garrison Commander + Retired Adventurer ·
+  religious_conversion 1 → Parish Priest + Council Member.
+  ⚠ Note the engine emits a GARRISON COMMANDER on siege/wartime/monster-pressure towns of a
+  pool whose key fixes no garrison. Another W-19-family seam: do not write him, do not deny him.
+
+(8) WHAT WOULD BE FALSE
+
+  Start from the two sentences the engine prints about the only two rows this pool universally
+  holds, because between them they kill the three hooks a writer arrives carrying. **THE
+  MILITIA HAS NO PAY** — `institutionVocabulary.js:153` "Part-time soldiers with their own tools
+  and no pay", and V-09 is the sitting's own row on exactly this, splitting W16e to keep "no
+  wage, pay or arrears predicated of a `Citizen militia`" as a floor-1 finding. So "the muster
+  is paid late", "the wage is short", "the coin never reaches the men on the bank", "they are
+  owed for the winter" are ALL contradictions here, and they are the walled-garrison packet's
+  central hook imported wholesale: on that pool the wage IS the flavour, on this one there is no
+  wage to be short. **THEIR TOOLS ARE THEIR OWN** — so an armoury, a town store of arms, issued
+  spears, a rack by the gate, anything the place hands out, is an invention against the row.
+  **THE PLACE CANNOT AFFORD STONE** — `institutionVocabulary.js:155`, "A wooden palisade or
+  earthen bank thrown up to slow raiders and beasts. Rough defence for a place that cannot
+  afford stone" — so the stone ring, the masonry, the curtain wall, the parapet, the wall-walk,
+  the stair to the walk, the battlements, the towers, the gatehouse are not merely unlicensed,
+  they are the printed row's opposite (V-06, F1-32; and F1-33 still bars the SOURCE of any
+  material). MEASURED, the fabric is `Palisade or earthworks` on 79 of 79 and `Town walls`
+  never; the same-tab Beasts row prints the word **"Palisade"** on all 79, so *palisade*,
+  *bank*, *earthwork*, *berm*, *stakes* are the page's own vocabulary and safe — but the row is
+  ONE row covering a timber palisade OR an earthen bank, so a face that predicates timber of it
+  is asserting half a disjunction the record leaves open, and a face that predicates a WALK, a
+  height a man stands on, or an inside-and-outside of a berm is inventing a shape. Going the
+  other way, the denials are worse, because the four same-page producers fire in the engine's
+  own hand on every town: `threatAssessment` prints **"Walls with citizen militia: credible
+  deterrence against raiders, inadequate against any professional force with siege capability"
+  on 79/79**, the palisade's `Gated entry` service is on at p 1.0 on 79/79 ("Controlled access
+  through the perimeter. Strangers must state business"), and the militia's `Emergency defense`
+  is on at p 1.0 on 79/79 ("Armed citizen response to external threats and raids"). So "nobody
+  is set up to respond", "nothing here is organised", "there is no one at the way in", "the bank
+  is decoration", "anyone may walk in" are floor-1 negations of printed rows — and "the militia
+  patrols reliably", "the turns are well kept", "they hold the line" are the OPPOSITE floor-1
+  error, because `guardEffectivenessDesc` prints on 77/79 "The citizen militia musters when
+  needed but cannot maintain consistent patrol. Volunteers with other work to do; reliable in a
+  crisis, absent during routine crime." The lawful band is that sentence's own shape and nothing
+  wider: **turnout in a crisis, absence in the routine.** ⛔ AND THE NIGHT IS THE ONE THING THIS
+  POOL MAY NOT SETTLE IN EITHER DIRECTION: the palisade's `Night watch` service ("Basic patrol
+  of the perimeter after dark") instantiated on only **29 of 79** towns, so asserting a nightly
+  patrol invents it on 50 and denying one contradicts 29 — write the night as a question, a
+  dispute or a silence, never as a fact, and note that `safetyDesc` on 54/79 independently says
+  "Militia volunteers patrol the main paths; quieter spots after dark carry genuine risk", which
+  a face claiming either an empty night or a covered one contradicts. **NOTHING ON THIS POOL IS
+  WRITTEN DOWN, AND THIS IS THE HARDEST BAR ON THE CARD** (ruling 40, F1-24, §R-8, V-01):
+  EXECUTED over the 79, every single record-holder kind resolves to NOBODY — `muster` NONE
+  79/79, `parish` NONE 79/79, `toll-bar` NONE 79/79, `census` NONE 79/79, `court` NONE 79/79,
+  `market` NONE 79/79, `road` NONE 79/79, `tradition` NONE 79/79, `watch` NONE 79/79, with
+  `treasury` resolving on 12 (`Weekly market`) and `elders` on 1 (`Village headman`). **NO
+  NAMED RECORD MAY BE CITED ANYWHERE ON THIS POOL** — not the muster roll (the militia is here
+  and still keeps none), not the parish register, not the toll book, not the accounts, not the
+  returns, not "the books". Every account names its source through a ROLE, and there is no
+  exception on this key. Then the bodies the roster denies outright, all measured FALSE on
+  79/79: a court, a trial, a sentence, a magistrate hearing, a gaol or stocks (`hasCourtSystem`
+  and `hasPrison` false; and the same tab prints **"No legal infrastructure: order relies on
+  force alone"** on 79/79 and "Without courts or prison, enforcement relies entirely on fines,
+  exile, or summary violence" on 79/79 — F1-12, F1-13, §R-4, the WORD court still free); a
+  granary, a store, a reserve, provisioning for a siege (`hasGranary` false, and the Disasters
+  row prints **"No food reserves"** on 79/79 — F1-09, and it means a siege face may not have the
+  place stocked); a port or anything by sea (`hasPort` false 79/79, so F4-09's blockade re-cut
+  cannot arise); smuggling as an activity (`hasSmuggling` false 79/79, which makes the 2/79
+  "chokehold on smuggling routes" clause engine-side only); a hall, a guild, a market as a body
+  on the 33 without one (F1-20, F1-10, V-29); a mercenary company (F1-05), with the nine
+  `Veteran's lodge` towns unchargeable either way under W-01 / V-34; a charter hall on the 40
+  without one, whose absence the threat row PRINTS. On floor 2 this key invites every row and
+  the preimage's spread refuses the easy ones: **F1-31 the tier word is wrong on part of the
+  preimage whatever you choose**, since hamlet 36 and village 43 both draw the same face — "a
+  place this size" is the form, never a village, never a hamlet; no magnitude in digit or word
+  (no headcount of the muster, no "a handful on the bank", no length of the perimeter, no
+  distance — and note the hamlet church row's own "2-5km" is the ROW's figure and never the
+  writer's, F2-01); no date, season or duration (F2-02); no raising of the bank narrated, which
+  is the single most tempting sentence available here since the row says it was "thrown up"
+  (F2-03); no event the record did not run — no raid turned back, no night the bank held, no
+  beast killed at the ditch (F2-04); no rate — "the gate is shut at dusk" is lawful, "most
+  nights" is not (F2-06, §S-3); no age of the fabric (F2-07); no trend (F2-08); no history at
+  all, this key reading no history field (F2-09); and no elapsed course over a LIVE field
+  (F2-05) — though **V-04 / R-9's thin-muster permission IS live on this key** (it is refused
+  only "on a no-force key" and this key fixes a force), so "the muster is thin", "turns stand
+  unfilled" are lawful as a STANDING STATE, never as "thinner than it was". The perfect and
+  durative are otherwise licensed exactly over the frozen census at (6) and over the key's own
+  three LIVE reads by ruling 11a. Floor 3: the OFFICE RIDER of section (7) is this pool's
+  likeliest failure by a wide margin, with **Guard Captain mandatory on all 43 villages and
+  Elder and Parish Priest on all 36 hamlets** (F3-06, V-22); no named character's fate (F3-01);
+  nothing predicated of a deity (F3-02, D-04–D-10); and **all ELEVEN culture profiles fire on
+  this preimage (measured: germanic 9, slavic 9, arabic 8, celtic 8, east_asian 8, greek 7,
+  latin 7, mesoamerican 7, norse 7, steppe 5, south_asian 4)**, so no thatch — even though a
+  `Thatcher` row stands on 33 towns — no churchyard, no market green, no snow, and none of the
+  exemplar pack's north-European furniture (F3-05, and a palisaded farming settlement is
+  precisely where a writer reaches for it by reflex). On floor 4: F4-01 bars both halves of the
+  fabric question and bites unusually hard here, because **`institutionLifecycle.js:1016`
+  reaches `Palisade or earthworks` BY NAME** in the purse's economic-distress closure (§V.0
+  floor 4; only `City walls and gates` is exempt) — so no decay clock AND no permanence, and a
+  face calling this bank a thing that will outlast them is denying a modelled removal path;
+  F4-02 bars the split purse and F4-19 / V-07 put every defence on the one military line, which
+  on this key compounds with V-09 into a double falsity ("they spent it on the bank instead of
+  the men" splits a purse that is one AND pays men who are not paid); F4-04 bars the total
+  collapse, `communityMilBase` being exempt by name at `defenseGenerator.js:186-193` — which is
+  precisely this pool's unpaid militia, so "nothing has been paid" is wrong twice over; F4-06
+  bars explaining the readiness band by the works (measured spread 7 to 49 across the 79, so no
+  readiness word survives the preimage anyway); F4-07 bars the terrain doing nothing; F4-08
+  bars magic where it does not work; and **F4-05 is live and dangerous here: `monsterThreat` is
+  `plagued` on 76 of 79 and `frontier` on 3, with NO `settled` town at all — `plagued` is
+  MONSTERS, never disease**, while two separate towns carry `plague_onset` stress and a
+  "Restricted — Plague Conditions" label, so the two readings genuinely collide on the same
+  page and a face must not fuse them. F1-34's totality bar holds in both directions (label
+  spread: Moderate 54, then Strained ×8 kinds, Unsafe 4, Dangerous 1, Restricted 2, Tense 2 —
+  so neither "safe enough" nor "a place under siege" is true of the pool). Ruling 35 last: the
+  neighbours are `Invasion & War: militia only` (walls false), `walls AND professional garrison`
+  (garrison true) and `walls with NO force` (militia false), so a face about a bare bank with
+  nobody behind it belongs to the third, a face about a turnout with nothing to stand behind
+  belongs to the first, and a face here must need BOTH the perimeter AND the unpaid citizen
+  force to be true. **And what is NOT a finding, by name:** that the card does not license it;
+  "keep every claim, add none"; the same claim set on every face; the always-safe spelling
+  lists; the layer bar; the record-word bar as a class (accounts, duties, returns, minutes are
+  free WORDS — it is the CITED record with no resolving holder that is barred here, and on this
+  pool that is all of them); the per-face taste bands; the person bar beyond floor 3 — an
+  unnamed person may act, hold a key, refuse, be resented, be slow, be absent from his turn, so
+  long as the tier does not emit that office as an NPC; and DULLNESS, which is a pool-grain
+  craft verdict and never a face-grain finding.
+
+(9) WHERE THE FLAVOUR IS
+
+  • WHAT IS IN USE — A BANK OF EARTH, A WAY THROUGH THAT TAKES NO MONEY, AND TOOLS THAT GO
+    HOME AT NIGHT. The engine's own words are "thrown up to slow raiders and beasts" and
+    "rough defence for a place that cannot afford stone", and the way through it runs on one
+    p 1.0 service: "Controlled access through the perimeter. Strangers must state business."
+    That is the whole apparatus — a bank, a gap in it, and somebody standing in the gap asking
+    a stranger what he wants. **And unlike every walled pool above town, nothing is collected
+    there**: no toll row exists at these tiers, `holdersOf('toll-bar')` is empty on all 79, and
+    no book is kept. The concrete particulars are therefore a person and a question, not a coin
+    and a ledger: who was asked and who was not, who was let through because he was known, whose
+    own spear is leaning by the gap because the man carrying it owns it and will want it back
+    for the hedging. Write what the bank and the turnout are USED for, and remember the smith
+    on 63 of 79 towns is the one mending the tools nobody is paid to carry.
+
+  • WHAT IS IN DISPUTE — THE TURN, NEVER THE WAGE. This is the pool's signature and the thing
+    that makes it not the garrison pool: there is no wage to argue about (V-09), so the whole
+    argument is about WHOSE NIGHT IT IS and WHOSE WORK STOPS. The engine hands the disagreement
+    over ready-made and prints it on the same page: "musters when needed but cannot maintain
+    consistent patrol. Volunteers with other work to do; reliable in a crisis, absent during
+    routine crime." Two honest sources read that oppositely and both are right — the muster
+    saying it will stand tomorrow and does stand when it matters, and anyone whose quiet corner
+    goes unwalked on a Tuesday saying it does not stand at all. **And the night is genuinely
+    unsettled in the record** (the perimeter patrol fires on 29 of 79), so the archiver can set
+    both accounts down and weigh in without closing it, which is exactly ruling 22's shape: the
+    weighing OPENS. Beside it sits the same rota logic on the other end of life — the burial
+    ground "kept by the households in turn" — and the charter hall on 39 of 79, the paid
+    professional answer standing next to the unpaid amateur one, whose presence or absence the
+    threat row prints beside the prose.
+
+  • WHAT THE ABSENCE LOOKS LIKE ON THE GROUND — NOTHING IS WRITTEN DOWN, AND NOTHING CAN BE
+    LOOKED UP. This pool's absence is not a missing body; it is a missing PAPER, and it is
+    total. Executed over 79 towns, not one keeps a muster roll, a parish register, a toll book,
+    a court record, a census or a road book; the treasury resolves on 12 and the elders on 1.
+    The militia stands on every town and no list says who is on it. The church is universal and
+    keeps no register — on the 36 hamlets it is not even a building here, but a two-to-five
+    kilometre walk to somebody else's village. There is no court and no gaol on any of the 79,
+    and the tab says plainly what fills the gap: "order relies on force alone… fines, exile, or
+    summary violence." There is no granary on any of them either: "No food reserves." So a
+    dispute is settled by whoever turns out, a debt is remembered rather than recorded, a
+    stranger is judged at the gap in the bank by a person with no book to check him against,
+    and a bad winter has nothing behind it. That is a whole notebook of conjecture available to
+    the archiver, and every word of it is the engine's own arithmetic rather than the writer's
+    invention.

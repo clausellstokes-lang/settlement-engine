@@ -736,3 +736,330 @@ And two corrections that run against the brief's standing roster:
   • **THE ELDERS ARE NOT A SPEAKER.** The brief seats them below town; this pool's silent
     tiers are thorp, hamlet and village. It never draws below town.
 
+
+--------------------------------------------------------------------------------
+
+(7) THE SPEAKERS
+
+The preimage is **entirely town and above** — town 33/128, city 60/128, metropolis 19/128;
+`silent tiers: thorp, hamlet, village`. Read (0) first: the metropolis merge closes more of the
+roster than section (5) says, and two entries of the brief's standing roster are not available.
+
+  • **THE ELDERS ARE NOT A SPEAKER.** The brief seats them below town. This pool never draws
+    below town. "The older households" has no row here.
+  • **THE GUILDS ARE CONDITIONAL**, not universal — see (0) and the conditional list below.
+  • **THE MUSTER IS NOT A SPEAKER AND NOT A BODY AT TOWN.** `Citizen militia` carries
+    `exclusiveGroup: 'civilianDefense'` and "Present only when no professional watch exists";
+    `Town watch` shares that group and is `required: true` at town. A militia and the required
+    watch cannot both stand there [F1-26]. The militia bucket is OPEN across the preimage and
+    fixed on no town of it, so there is no muster and no muster roll.
+  • **THE CROWN'S ASSESSOR IS NOT A SPEAKER** anywhere — no typed producer (the brief).
+
+--- UNIVERSAL (a `required: true` row on every preimage tier seats them) ---
+
+  1. THE HALL — `Town hall` (town) / `City hall` (city, metropolis by the merge).
+     INTEREST: the purse and the four calls on it. One military purse runs the wall's keeping
+     and the soldiers' wages together (`defenseGenerator.js:177-192`,
+     `milUpkeepMult = min(1, 0.6 + econOutput/50 × 0.4)`, floor 0.6 at `:189`), and the
+     DISASTER side is a SECOND GATE ON THE SAME ECONOMIC INPUT (`:613-617`,
+     `disasterGate = min(1, 0.55 + econOut/50 × 0.45)`, floor 0.55). So on this pool the hall
+     is not arbitrating between defence and relief out of two purses; it is running both off
+     one number, and its legitimacy is what it is defending when it answers.
+     ⚠ Say "the hall" or "a clerk in the hall". **Never "the clerk", never "the mayor"** —
+     `Mayor` (town, city) and `Governor` (metropolis) are minted NPCs.
+     ⚠ **THE HALL KEEPS NO CITABLE ARCHIVE.** `Town hall`'s `Record filing` is `on: false,
+     p 0.6`; `City hall`'s `Public record access` is `on: false, p 0.6`. See the F1-24 row
+     in (8): the hall's accounts are not a citable record on this pool.
+
+  2. THE TAVERN — `Taverns (5-20)` (town) / `Inns and taverns (district)` (city, metropolis).
+     INTEREST: the safety label, the price of bread, and who is actually short. `Information`
+     (`off p 0.7`) at town and `Information hub` (`off p 0.7`) at city are BELOW THE BAR, so
+     the tavern is a VIEW and never intelligence the engine warrants — exactly the standing an
+     unverifiable account should have. Its own bar work is `Drink service` p 1.0 and `Meals`
+     p 0.8 (`Short accommodation` is on at p 0.6, under the bar).
+     ⚠ Say "at the tavern they say". Plural rows at every tier; never one named house.
+
+  3. ⭐ THE PARISH, AND THOSE WHO BURY — **this pool's whole subject and its sharpest speaker.**
+     `Parish churches (2-5)` + `Parish burial grounds` (town) · `Parish churches (10-30)` +
+     `Burial grounds and charnel house` (city) · the same two plus `Cemetery network`
+     (metropolis, by the merge).
+     INTEREST: **it is the town's entire medical provision and NO SERVICE ROW PAYS IT FOR
+     THAT.** The panel prints `Medical Readiness → "Clergy care"` on every town of this
+     preimage (`defenseDisplay.js:237`), and the parish's own menu is `Religious services`
+     p 1.0, `Life ceremonies` p 1.0 and `Record keeping` `off p 0.6` — there is no healing
+     service at or above the bar anywhere in the required rows of any preimage tier. The care
+     is asserted by a MACHINE SENTENCE and seated in NO institution's menu. That asymmetry is
+     the parish's grievance and it is true, not invented: it does the work the dossier credits
+     it with and the catalogue does not list.
+     ⚠ **THE REGISTER IS NOT UNIFORM ACROSS THE PREIMAGE.** `Register of the dead` is at the
+     bar at TOWN (p 0.8, "The sexton records who lies where"); at CITY the charnel-house row
+     carries `Burial` p 1.0 and `Lifting and ossuary` p 0.7 and **no register at all**; at
+     METROPOLIS `Central register` returns at p 0.9. The sexton's book resolves on two tiers
+     of three, which is what closes F1-24 in (8).
+     ⚠ Say "the register", "the sexton", "a local priest", "those who bury the dead".
+     **Never "the priest", "the parish priest", "the high priest"** — `High Priest` is minted
+     at all three tiers and `Parish Priest` under `plague_onset` and `religious_conversion`.
+
+  4. THE WATCH — `Town watch` (town) / `Professional city watch` (city, metropolis). Per (0)
+     this is CLOSED TRUE on the whole preimage, which makes the watch a safe speaker here.
+     INTEREST: what a hungry or a sick town does to a patrol, and who pays for it. Its work is
+     fixed and narrow at town — `Night patrol` p 1.0, `Gate duty` p 0.8, "Part-time guards" —
+     and professional at city and above — `Law enforcement` p 1.0, `Crime reporting` p 0.8.
+     It is paid out of the military purse (F4-19; `defenseGenerator.js:177-178`, `:190`).
+     ⚠ **F1-27:** never professional, full-time, or soldiers at TOWN — that is a city row's
+     word on a town's roster. Write its WORK, which is the same at every tier.
+     ⚠ **F1-29 as §V.2 corrects it:** at city and metropolis `Garrison` and `Professional city
+     watch` are two distinct required rows and the contrast holds there; at town no garrison
+     row is required at all, so a face drawing across the preimage may not set the two against
+     each other.
+     ⚠ Never "the guard captain" (town, city) or "the city watch chief" (metropolis).
+
+  5. THE MARKET — `Market square` + `Weekly market` (town) / `Multiple market squares` +
+     `Daily markets` (city, metropolis).
+     INTEREST: the price of bread and who takes a share of it. `Tax collection` is at the bar
+     at TOWN (p 0.9, "Toll collected on goods sold"); at city and metropolis the toll moves to
+     the gate (`City walls and gates`, `Gate control` p 1.0). So the market speaks to what
+     grain costs on every tier; WHO takes the cut is tier-dependent and may not be settled.
+     ⚠ **F1-10:** the class admits `Black market`, `Whisper market`. The required rows here are
+     ordinary produce markets — the word is safe, a particular market's trade is not.
+
+  6. THE GRANARY'S KEEPERS — **fixed TRUE by the key.** `Town granary` (town) / `City
+     granaries` (city, metropolis) / `State granary complex` (metropolis, `required: false`).
+     INTEREST: the stores are theirs to hold and not theirs to open. `City granaries` is
+     "Large-scale municipal grain reserves against famine and siege" — municipal, which is to
+     say the hall's. This is the pool's own best disagreement.
+     ⚠ **THE SECOND SERVICES ARE ALL OFF.** `Town granary`'s `Milling service` `off p 0.5`;
+     `City granaries`' `Rationing` `off p 0.6` and `Grain loans` `off p 0.4`; `State granary
+     complex`'s `Price stabilisation` `off p 0.5`. See (8) — the capacity is written down and
+     the town does not use it.
+
+  7. THE STRANGER — seated by the brief on every town, needing no row.
+     INTEREST: arrives at a town that looks provided for and finds out on asking that the
+     church is also the hospital. At city and metropolis they arrive through a required gate
+     and are counted at it. ⚠ their eye is bounded by (2b′): only what could be SEEN.
+
+--- CONDITIONAL (the field that seats each, and where it does not) ---
+
+  THE GUILDS — `Craft guilds (5-15)` `required: true` at TOWN ONLY; nothing required at city;
+    `Craft guilds (100-150+)` / `Merchant guilds (50-100+)` `required: false` at metropolis.
+    INTEREST: the trades want the market fed and the toll lower. `Quality certification` p 1.0
+    and `Apprenticeship programs` p 0.8 are at the bar; `Trade regulation` and `Dispute
+    resolution` are not. ⚠ Never "the guild master" (minted under famine, mass_migration,
+    wartime). ⚠ Never lean on the plural ("the guilds, all of them") — ruling 25.
+  THE MILLERS — `Mills (2-5)` `required: true` at TOWN ONLY, `Grain grinding` p 1.0. The
+    grain's choke point between the store and the loaf is a TOWN-TIER fact here and may not be
+    asserted at city or metropolis.
+  WHOEVER HOLDS THE WAY THROUGH — `City walls and gates` required at city and metropolis, OPEN
+    at town. `Gate control` p 1.0 carries the customs check and the toll.
+    INTEREST: what comes in and what it is worth to let it in. Do not seat a gate at town.
+  THE GARRISON — required at city and metropolis, OPEN at town. `Defence services` p 1.0,
+    `Equipment purchase` p 0.7, `Mercenary hire` p 0.6. Paid from the military purse [F4-02].
+  THE WAREHOUSES — `Warehouse district` required at city and metropolis only, `Goods storage`
+    p 1.0. **It is NOT a granary and does not fire `hasGranary`** [F1-19, F1-09].
+  ⭐ A MONASTIC HOUSE — **a trap, and it runs the opposite way from the rest of this card.**
+    `hasHospital` matches the substrings `hospital · monastery · healer · friary`
+    (`priorityHelpers.js:64`), and **`Multiple monasteries` (city, 0.60) and `Major monasteries
+    (5-10)` (metropolis, 0.55) contain neither `monastery` nor `friary`** (executed: both read
+    `hasHospital=false`, `hasChurch=false`). So a monastic house CAN stand on this key at city
+    and metropolis, carrying `Religious network` p 1.0 and `Educational network` p 0.7 — and
+    NO healing at the bar (`Higher healing` is `off p 0.5`). At TOWN it cannot: `Monastery or
+    friary` DOES match and the key's `hospital=false` forbids it. **So: never assert a
+    monastery, and never deny one either.**
+  THE MILITIA · THE MERCENARIES · THE CHARTER · THE PRISON — OPEN across the preimage; never
+    asserted, never denied [F1-05, F1-06, F1-25, F1-30]. The militia is additionally barred at
+    TOWN by the `civilianDefense` exclusive group.
+
+--- THE NAMED OFFICES A SPEAKER MUST NEVER BE (`npcGenerator.js:1511-1537`, F3-06) ---
+
+  town:        **Mayor · Guard Captain · High Priest**
+  city:        **Mayor · Guard Captain · High Priest · Wealthiest Merchant**
+  metropolis:  **Governor · City Watch Chief · High Priest · Guild Archmage ·
+                Wealthiest Merchant**
+  and by stress, on any tier: famine → **Healer · Guild Master** · plague_onset → **Healer ·
+  Parish Priest** · indebted → **Moneylender** · under_siege / wartime / monster_pressure /
+  slave_revolt → **Garrison Commander · Guard Captain** · occupied / insurgency → **Corrupt
+  Official** · recently_betrayed / succession_void → **Chief Magistrate** ·
+  politically_fractured / religious_conversion / succession_void → **Council Member** ·
+  mass_migration → **Guild Master · Healer** · monster_pressure → **Retired Adventurer**.
+
+  ⛔ SO, ON THIS POOL: never the mayor, the governor, the guard captain, the city watch chief,
+  the high priest, **the parish priest**, the wealthiest merchant, the guild archmage, the
+  guild master, **the healer**, the moneylender, the chief magistrate, the garrison commander.
+  Each is one generated person on the next tab with a personality and a secret. The plural, the
+  trade and the ground are free: a clerk in the hall · the sexton · whoever keeps the granary
+  door · those who sit up with the sick · the night patrol · a carter · a local priest.
+
+--- THE SEAM THE WRITERS MUST KNOW ABOUT ---
+
+  ⚠ **A FAMINE OR PLAGUE-ONSET TOWN MINTS A `Healer` ON THE NPC TAB WHILE THIS KEY GUARANTEES
+  THE ROSTER CARRIES NO MEDICAL BODY AT ALL.** `hospital = false` removes four rows by name
+  from the preimage — `Monastery or friary` and `Small hospital` (town), `Major hospital`
+  (city), `Hospital network` (metropolis) — and the two stresses this pool's subject invites
+  most are exactly the two that mint a Healer. The person exists; the institution does not.
+  So a face reaching for "nobody here knows medicine" collides with a generated person on the
+  same dossier, and a face reaching for "the healer" collides with F3-06. Write the parish's
+  WORK and the sick person's HOUSE, and neither trap closes.
+
+--------------------------------------------------------------------------------
+
+(8) WHAT WOULD BE FALSE
+
+The key fixes THREE flags — `hasGranary` true, `hasHospital` **false**, `hasChurch` true — and
+the false one is where almost every finding on this card lives. `hasGranary` matches the bare
+substring `granar` (`priorityHelpers.js:63`), so an actual grain store always stands; `hasChurch`
+matches `church · cathedral · temple · monastery · friary · shrine · priest · abbey` (`:65`) and
+the required `Parish churches` rows satisfy it at every preimage tier anyway, so the key's third
+read fixes nothing the roster had not already closed; and `hasHospital` matches `hospital ·
+monastery · healer · friary` (`:64`), so **`hospital = false` strikes four rows off the roster
+by name** — `Monastery or friary` and `Small hospital` at town, `Major hospital` at city,
+`Hospital network` at metropolis. Therefore "the hospital", "the infirmary", "the ward", "the
+beds", "the sick-house", "the physicians", "the order that takes them in" are all false on every
+town this face draws, and the SHIPPED row's own word is the finding: variant 3's "a modest
+infirmary" asserts precisely the body the key denies, since `Hospital network` is the engine's
+own "Multiple hospitals and infirmaries across districts" row [F1-14, F1-25]. But the strike is
+NOT total, and this is the card's one reversal: `Multiple monasteries` (city) and `Major
+monasteries (5-10)` (metropolis) contain neither substring and read `hasHospital=false`
+(executed), so a monastic house stands freely on this key at city and metropolis and may be
+neither asserted nor denied — only at TOWN does `hospital = false` genuinely forbid one, through
+`Monastery or friary`. The machine sentences then fence the writer on BOTH sides, and all four
+**fire on every preimage town**: `threatAssessment.js:181` prints "Granary provides food buffer.
+The community can absorb a bad harvest without immediate hardship." and " Parish clergy provide
+basic wound care: better than nothing, worse than a hospital."; `defenseDisplay.js:237-239`
+prints the Medical Readiness row as status "Clergy care" with the note "Parish care. Basic wound
+and disease management."; `:243` prints Logistics as "Granary present". So no face may say the
+sick have nobody, that the clergy do not tend them, that there is no answer to disease here,
+that nothing is put by, that the stores are empty, or that a bad harvest bites the same season —
+the red branch's own string ("No dedicated healers. Plague burns unchecked.") is the sibling
+rung's and cannot fire here — AND equally no face may raise the care to the other rung's level:
+containment, quarantine, recovery capacity, systematic treatment and "casualty treatment" are
+`hasHospital`'s words at `:239` and this key is not on that rung. The panel's own colour says
+it — amber `#7a5010`, the middle of three — and the engine states both directions in one
+sentence. The neighbouring rungs bind next and are one clause away (2d, ruling 35):
+`granary = false` is `NO reserves, NO medical provision`, `hospital = true` is `granary AND
+hospital`, `church = false` is `granary, NO medical provision` — so a face whose provision is a
+BUILDING is writing one sibling's sentence and a face whose town has NO answer to sickness is
+writing another's. Next, the care has **no institutional row at all**: the parish's whole menu
+is `Religious services` p 1.0, `Life ceremonies` p 1.0 and `Record keeping` `off p 0.6`, and no
+required row of any preimage tier carries a healing service at or above the bar. The tending is
+a machine SENTENCE, not a service — so the clergy tend the sick (licensed; the engine says so
+twice) but they do not run a house for it, keep beds or a ward, hold a stock of medicines, take
+payment for it, or teach it, and none of that may be written [F1-30]. The granary's second
+services fail the same way and must not be asserted: `Town granary`'s `Milling service`
+`off p 0.5`, `City granaries`' `Rationing` `off p 0.6` ("Controlled distribution in times of
+shortage. Prevents hoarding") and `Grain loans` `off p 0.4`, `State granary complex`'s `Price
+stabilisation` `off p 0.5` — so no face may say the grain is rationed, that distribution is
+controlled, that hoarding is prevented, that seed is advanced against a coming harvest, that
+stored grain is released to hold prices down, or that the granary grinds [F1-30]. The RECORD bar
+closes tighter than it looks and **no cited record resolves on all three preimage tiers**:
+`Register of the dead` is at the bar at town (p 0.8) and returns at metropolis as `Central
+register` (p 0.9) but is **absent at city**, where the charnel-house row carries only `Burial`
+and `Lifting and ossuary`; the hall's archive is below the bar at every tier (`Record filing`
+`off p 0.6`, `Public record access` `off p 0.6`); the watch records at city and metropolis
+(`Crime reporting` p 0.8) and not at town (`Crime response` `off p 0.7`); the parish's own
+`Record keeping` is `off p 0.6` at town and absent at city; the toll sits at the market at town
+(`Tax collection` p 0.9) and at the gate at city and metropolis, and the gate is not fixed at
+town. So the accounts, the register, the parish rolls, the toll book and the muster roll each
+fail F1-24 on at least one tier this face will draw on; "the books" as a generic is barred
+outright; and — the measured hazard — **the shipped rows of this pool cite NO record**, so there
+is no citation precedent here to spend and a named record would raise a SHRINK-ONLY corpus
+ceiling and red the whole packet [F1-24 / §R-8, V-01]. The four rosters then bite as SILENCES,
+corrected as (0) corrects them: **the watch is CLOSED TRUE on the whole preimage**, so "nobody is
+set up to respond", "there is nobody to send for", "no one is charged with any of it" is floor 1
+on every town here and is the Fable sitting's own named failure mode; the hall, the market and
+the church are closed true everywhere; walls, gates and a garrison are closed true at city and
+metropolis and OPEN at town, so neither a perimeter nor soldiers may be asserted on a face that
+draws at town and neither may be denied on any [F1-25, F1-30]; a militia may not stand at town
+beside the required `Town watch` (`exclusiveGroup: 'civilianDefense'`, "Present only when no
+professional watch exists") and there is accordingly no muster and no muster roll [F1-26]; a
+court may be named as a word, since `hasCourtSystem`'s keyword list includes `town hall`, but
+the only recorded procedures are civil (`Dispute arbitration` p 0.8, `Appeals court` p 0.8) so no
+trial, gaoling, gallows or courthouse follows from a hall [F1-12, R-4]; and no prison row is
+required at any preimage tier. `{defmaterial}` is **not offered on this pool** (ADDENDUM 18
+ruling 10 fences it to the seven perimeter and walls pools), and V-06 bars a material clause in
+a pooled key regardless, so no wall or building material anywhere. On PLACE, the instrument's own
+(2c) rows bar four statements a writer will reach for naturally: "inside the walls" and "outside
+the gates" for the burial ground are stated only at city, "in the square" for civic
+announcements only at town, and "beyond the gate" for the parish ground only at town — none may
+be asserted across the pool. On FLOOR 2 this subject is a magnet for every barred form: no count
+of what is stored, of who is sick, of sacks or of months of grain, in a digit or in a word ("a
+few sacks", "most of the town", "a handful" are magnitudes) [F2-01]; no season, month, date or
+"until the spring" [F2-02]; no rate ("every winter", "each harvest", "most nights") [F2-06]; no
+harvest that failed, no sickness that came, no granary that was built, no house that was given
+over [F2-03, F2-04]. The elapsed licence in exchange is real and generous: `hasGranary`,
+`hasHospital` and `hasChurch` carry **zero pulse writers** and are the key's own reads, so the
+perfect and the durative ARE lawful over them — "the stores have been kept here longer than
+anybody asks about", "nobody sick has had to be carried out of the town" — and the census marks
+as equally FROZEN `safetyLabel`, `guardEffectivenessDesc`, `stress`, `config.monsterThreat`,
+`config.tradeRouteAccess`, `foodSecurity.resilienceScore`, `foodSecurity.stockpile*`, `hasPort`,
+`hasNavy`, `hasCourtSystem`, `hasPrison`, `economicGates.*`, `scores.military`,
+`scores.internal`, `scores.monster`, `scores.economic`, `defenseProfile.institutions.*` and
+`standingDefenseForces`; **refused** over `institutions` at every bucket grain (38 writers),
+`name` (201 writers), `defenseProfile` and `defenseProfile.scores` (`foodStockpile.js:471`,
+`:473`), and — the one that will catch a writer out on this pool above all others —
+**`defenseProfile.scores.disaster`, which `foodStockpile.js:473` moves**: the disaster readiness
+band a reader sees beside this very row is LIVE, so no elapsed course over the town's
+preparedness itself [ruling 11, §V.0 floor 2]. On FLOOR 3 the singular offices listed in (7) are
+barred — `Healer` and `Parish Priest` most sharply, since famine and plague_onset mint them and
+this pool's subject invites both; nothing may be predicated of a deity, though a creed's people
+may keep a duty or neglect it [F3-02], and the temptation here is to write the clergy's care as
+piety rather than as work, which crosses that line; and **F3-05 bites this pool harder than
+most** — eleven culture profiles ship and no defense pool reads one, so thatch, the churchyard,
+the market green, harvest-home, the lychgate and snow on the road are all barred, and a pool
+whose furniture is grain, bread, a burial ground and a parish will reach for every one of them.
+On FLOOR 4: one purse runs the wall's keeping and the soldiers' wages together and the disaster
+side is a SECOND GATE ON THE SAME INPUT (`defenseGenerator.js:177-192`, floor 0.6; `:613-617`,
+floor 0.55), so no split purse, no relief fund separate from the defence money, and no total
+collapse of pay [F4-02, F4-03, F4-04, F4-19]; no permanence and no material decay clock over any
+fabric, since calamity, razing and the purse remove it [F4-01]; **`plagued` is MONSTERS and never
+disease**, and on this pool of all pools the word is nearly irresistible — the sickness this row
+is about is the separate `plague_onset` stress [F4-05]; a plague may not be denied where the
+panel names it [F1-36, F1-63]; and the supply picture is NOT fixed, because three different
+notes can sit beside the granary line — "Granary + sea access", "Granary in isolation. Endurance
+depends entirely on stored reserves", "Granary with road supply. Cut the roads, cut the supply"
+(`defenseDisplay.js:245`) — so no face may settle where the food comes from, and a blockade does
+close the sea supply absent teleport or airship [F4-09 as re-cut, V-24]. Finally, section (2c)
+records that **no covert field marks this pool**: the `compromised` tag is REFUSED here, every
+source draws honest, and nothing on either page may close a question the engine left open. No
+totality of safety [F1-34]; no explaining the tension away, since a town arranged well against
+hunger and barely against sickness is exactly what `contradictions.js` prints as a feature
+[F1-112]; and `{settlement}` in at most ONE unit of the pool and never in a `[face]` sub-row
+[ruling 12] — the three shipped rows name the town in all three, which the re-cut must not
+carry forward.
+
+--------------------------------------------------------------------------------
+
+(9) WHERE THE FLAVOUR IS
+
+  WHAT IS IN USE. A green row and an amber one on the same panel, and the town uses both every
+  ordinary week. The granary is a door that opens on somebody's decision — "municipal" is the
+  city row's own word, so the grain behind it is simultaneously the town's insurance and the
+  hall's asset. The care has no premises at all: the parish churches do religious services and
+  life ceremonies, the tending happens wherever the sick person is, and the thing that arrives
+  is a person and a basket rather than a building. Between the two stands the ordinary
+  machinery of bread — the mills grind at town, the market prices the loaf weekly and takes its
+  toll off it, and at city the toll moves to the gate and the market keeps only the price.
+
+  WHAT IS IN DISPUTE. Whether the care is care. The engine says it twice in one breath, better
+  than nothing and worse than a hospital, and the two halves belong to different speakers: the
+  parish holds that it does the work nobody pays it for and has no room to do it in, the hall
+  holds that the panel says the town is provided for and the panel does say so. Second, whose
+  stores. Rationing, grain loans and price stabilisation are all written into the granary's own
+  service list and every one of them sits BELOW the bar — the capacity is recorded and the town
+  does not use it, which is a disagreement with two honest sides: one purse answering four
+  calls, against a store nobody is allowed to draw on being a store in name. Third, the
+  register. At town the sexton writes down who lies where and at city nobody does, and the
+  difference between a town that counts its dead and one that does not is a difference this
+  pool can dramatise without ever asserting a number.
+
+  WHAT THE ABSENCE LOOKS LIKE ON THE GROUND. There is exactly one true lack here and it is a
+  building: no ward, no beds, no house kept for the sick, no order that keeps one — four rows
+  struck off the roster by name. What stands in its place is a front room and whoever the
+  parish sends. And the lack is invisible from the street, which is the hook: a stranger walks
+  in past a full granary and a working church, sees a town that looks provided for, and finds
+  out only on asking that the second of the two is also the hospital. The gap this pool gives a
+  game master is not a hole in the town — it is the distance between what the place looks like
+  it has and what it has, and the fact that nobody here has yet had to find out.
+
+================================================================================
+END OF THE MARKER'S SECTIONS.
+================================================================================
