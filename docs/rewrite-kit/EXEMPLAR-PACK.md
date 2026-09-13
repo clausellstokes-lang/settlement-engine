@@ -1,4 +1,4 @@
-> ⚠ **RE-CUT BY THE FABLE SITTING, 2026-09-12 (brief ADDENDUM 18 ruling 5): every example line in this pack was scanned by the floor-2 grammar test (`rewrite/scan-floor2.py`) and the lines that carried a RATE or an ELAPSED COURSE over a live read were rewritten — a writer aims at nothing a refuter refuses. Under ruling 11 a durative over a FROZEN read is lawful and one example keeps it, marked. Under rulings 12 and 13 the town is not named inside a face and every face has a SPEAKER with a stake; the moves below are read through that voice. The pre-recut text is `EXEMPLAR-PACK.md.pre-add18`.**
+> ⚠ **RE-CUT BY THE FABLE SITTING, 2026-09-12, and again 2026-09-13 ~05:1x under rulings 12, 14 and 20 (no {settlement} inside an example face; no which-clause closers; plain words — 'goods' not 'in kind', 'the hall' not 'the moot', a named record not 'the books'; the date example withdrawn). Earlier (ruling 5): every example line in this pack was scanned by the floor-2 grammar test (`rewrite/scan-floor2.py`) and the lines that carried a RATE or an ELAPSED COURSE over a live read were rewritten — a writer aims at nothing a refuter refuses. Under ruling 11 a durative over a FROZEN read is lawful and one example keeps it, marked. Under rulings 12 and 13 the town is not named inside a face and every face has a SPEAKER with a stake; the moves below are read through that voice. The pre-recut text is `EXEMPLAR-PACK.md.pre-add18`.**
 
 # THE EXEMPLAR PACK — what to aim at
 
@@ -37,7 +37,7 @@ Three things happened there and none was a new fact: an object, a smell, and a g
 
 You hold `walls.present` and `economicGates.military < 1`. Two facts. You cannot get twelve renderings of two facts; you can get twelve **meetings** with a town where those two facts hold.
 
-> *The {defwork} at {settlement} is up and the work of keeping it is not in dispute. What is in dispute is the wage.*
+> *The {defwork} is up and keeping it is not in dispute. The wage is.*
 
 **Describe a thing when it is in dispute or in use, never because it exists** (Page, on Hobb). Describe the mill because two wards claim it. Describe the gate because it is shut earlier than it used to be.
 
@@ -46,14 +46,14 @@ You hold `walls.present` and `economicGates.military < 1`. Two facts. You cannot
 When you cannot find an angle, ask which of three a fact would show up in. These three carry almost any block.
 
 **NOTICED** — the stranger's eye, the incomer, the carter.
-> *A stranger notices the wall first and the watch-house second, which is the wrong order, and the town knows it.*
+> *A stranger sees the wall first and the watch-house second. The town knows that is the wrong order.*
 
 **AVOIDED** — the cheapest uncanny there is. Martin's supernatural is a custom, a stone, a skeleton in a church, never an explanation.
 > *The flat stone at the ford is stepped around, not over. Nobody will say why, and the record does not either.*
 
 **COMPLAINED OF** — the most efficient civic sentence in the form: a complaint carries the fact, the stake and a voice at once, and invents nothing.
 > Receipt: *the town's upkeep for its defences is constrained.*
-> Complaint: *At {settlement} the keeping of the {defwork} and the muster's wages come off one purse, and which gets paid first is the standing argument.*
+> Complaint: *The {defwork}'s upkeep and the muster's wages come out of one purse, and which gets paid first is the standing argument.*
 
 Same fact. The second is a faction seed.
 
@@ -61,7 +61,7 @@ Same fact. The second is a faction seed.
 
 Floor 3 was relaxed by name: **an unnamed person may appear, act, keep a key, chase, refuse, be avoided, be resented.** A reeve slow to open the books is a licensed plot hook. Nineteen of one desk's twenty-eight old "wrong-layer findings" were this bar; every one is now a hook.
 
-> *Somebody keeps the key to the gate-house, and whoever is on the book that night decides what gets looked at.*
+> *Somebody keeps the key to the gate-house, and whoever has it that night decides what gets looked at.*
 
 Two riders, both cheap. **Never a minted proper NAME** — a pooled face is written once and drawn by every matching town, so a christened person prints identically across a region and reads as a bug. And **not in the singular office the tier already names** (exactly one Guard Captain per village-plus, with a generated personality and a secret of their own on the NPC tab); use a plural, a trade, a bystander, or an office the roster does not seat.
 
@@ -78,8 +78,8 @@ Our measured failure: **seventy-one per cent of units were a two-clause `and` jo
 
 Three clauses never earn their place: the **restatement**, the **reassurance** (*but the town endures*), and the **abstraction pair** (*both practical and symbolic*). Those three are the bulk of what we have been shipping.
 
-> Unearned: *A {defwork} stands at {settlement}, and the town has a {defwork} it does not fully fund.*
-> Earned: *A {defwork} stands at {settlement}, and the purse that keeps it is the same one the muster is paid from.*
+> Unearned: *A {defwork} stands, and the town has a {defwork} it does not fully fund.*
+> Earned: *A {defwork} stands, and the purse that keeps it is the one the muster is paid from.*
 
 Two sentences beat a limp join. The short line exists; use it.
 
@@ -88,13 +88,13 @@ Two sentences beat a limp join. The short line exists; use it.
 Hobb's most distinctive habit is negative narration: sentences opening on what is *not*. The effect, per Oliver, is training the reader to see what is not there. It is also **free under the floors** — an absence invents no number and no date.
 
 > *No boat crosses after dark. There is no rule about it.*
-> *Nothing marks where {settlement} ends; the town and the country have simply agreed to differ.*
+> *Nothing marks where the town ends; the town and the country have agreed to differ.*
 
 For a town with no wall, no watch, no market, this is the whole game: the absence is the most usable sentence in the dossier, because it implies a decision somebody made.
 
 Four clean forms of not-knowing, from a gazetteer entry and worth stealing whole: **the unaccounted** (two went in; neither has given an account) · **the disputed** (which came first is a matter of some dispute, and the entry does not settle it) · **the reported** (there have been reports, unconfirmed) · **the controlled** (access is by leave, and the leave is somebody's to give).
 
-> *Who ordered the {defwork} at {settlement} is not recorded, and the town gives more than one answer.*
+> *Who ordered the {defwork} is not recorded, and the town gives more than one answer.*
 
 **Then do not close it.** A face that raises a tension and resolves it in its own last clause has handed the author nothing. At least one civic matter in any town should be *standing*, not concluded.
 
@@ -105,7 +105,7 @@ Four clean forms of not-knowing, from a gazetteer entry and worth stealing whole
 
 Kay's most-repeated principle: an emperor's death far off matters less to a farmhand than a hired hand's broken leg. **A civic fact lands on a trade, a door, or a household, in the same unit** — the upkeep shortfall lands on the coin the muster was promised, the keeping-work done anyway, the season's work not let out to contract.
 
-> *At {settlement} the {defwork} is kept up by men who are owed for the keeping.*
+> *The {defwork} is kept up by people who are owed for the work.*
 
 ### 7. Turn the history you wanted into a standing condition
 
@@ -122,13 +122,13 @@ A date closes a question; a standing condition opens one.
 The licensed substitute for the dates floor 2 forbids, and not a consolation prize. Wolfe's records never number their ages: many generations, before the founding, longer than anyone troubles to say. The older past survives as relics with forgotten purposes, and the entry names the relic, not the age.
 
 > Refused: *The {defwork} was raised three winters ago.*
-> Aimed: *The {defwork} at {settlement} is older than the arrangement that pays for it.*
+> Aimed: *The {defwork} is older than the arrangement that pays for it.*
 
 ### 9. Two accounts, neither settled
 
 Kay keeps competing versions side by side and adjudicates neither; Martin invented contradictory sources precisely so he would not have to make up his mind. Two versions of one fact is a session premise, and it asserts no cause — only that the town disagrees about one.
 
-> *The ward says the toll was always taken in kind. The toll-book says otherwise, and the toll-book is the older hand.*
+> *The ward says the toll is paid in kind, goods not coin. The toll book says coin, and the toll book is the one that counts.*
 
 ### 10. The craft lexicon supplies nouns, never figures
 
@@ -138,16 +138,16 @@ Kay's mosaicist's principle — you contrast colours, you do not blend them. **O
 
 Wolfe: the novice's paragon has virtues that *"are only talked about. Never shown."* The record never says a family is cruel or a watch corrupt. It records what happened and stops. Never *the court handles disputes* (a category) — instead the sequence, the exception, and the thing everybody knows and nobody writes down.
 
-> Stated: *The watch at {settlement} is corrupt and unpopular.*
-> Shown: *At {settlement} the matter goes to the watch, and then it goes quiet.*
-> *The court at {settlement} sits when there is something to sit on, and the cases that never reach it are the ones everybody can name.*
+> Stated: *The watch is corrupt and unpopular.*
+> Shown: *A matter goes to the watch, and then it goes quiet.*
+> *The court sits when there is something to sit on. The cases that never reach it are the ones everybody can name.*
 
 ### 12. Two registers in one breath, and the consequence chain
 
 Martin's method: there is room for both plagues and pageantry, rooted in reality first. **Hold the fair and the fever in the same sentence** — then trace the consequence one step further than feels necessary. A river has a ferry; a ferry has a toll; a toll has a dispute.
 
 > *The device over the gate is kept painted. The hinges are not.*
-> *The toll at the ford is taken in kind. What is taken in kind is weighed by whoever holds the scales, and the scales are the miller's.*
+> *The toll at the ford is paid in kind, goods not coin. The goods are weighed by whoever holds the scales, and the scales are the miller's.*
 
 ### 13. Belief as civic fact, with no wink — and the followers act
 
@@ -155,7 +155,7 @@ Kay's rule is to write the world as its inhabitants believe it, which removes th
 
 ADDENDUM 15 opens this ground: **the followers act, the god never does.** The congregation, the observance, the rites, an unnamed devotee — all may act, be noticed, be avoided, be deferred to, keep or neglect a duty, consonant with the recorded axes and proportionate to the recorded standing.
 
-> *Those who keep the feast at {settlement} are slow to answer a provocation, and the town has learned to send them first to a quarrel.*
+> *The people who keep the feast are slow to answer a provocation, so the town sends them into a quarrel first.*
 
 Subject: the people. Content: the recorded temper. No god, no cosmology, no count, no date. The most under-used licence in the estate.
 
@@ -172,14 +172,14 @@ Nothing is asserted, and a GM has a plot before the line ends.
 The sharpest measured failure in this register is a relation **gestured at** — two facts placed side by side so the reader infers a link no record holds. If you know the relation, name it. If you don't, two sentences, and let the GM link them; that is their pleasure.
 
 > Gestured: *the market and the garrison are closely connected in the life of the town.*
-> Named: *The muster drills on market day, which the stallholders do not forgive.*
-> Honest: *Market day is the seventh. The muster drills when it drills.*
+> Named: *The muster drills on market day. The stallholders do not forgive it.*
+> Honest: *There is a market day. The muster drills when it drills.*
 
 ### 16. The dry note
 
 The register's only permitted humour, and it is one move: wry cataloguing inside a plain statement of fact. Le Guin delivers a fiscal verdict on a whole people in two words — *currently untaxable*. No wink, no joke told; the humour is in the arrangement of two true things.
 
-> *The tithe barn is the largest building at {settlement} and the emptiest.*
+> *The tithe barn is the largest building in the town and the emptiest.*
 
 ### 17. Witness, doubt, and the conspicuously short entry
 
@@ -199,8 +199,8 @@ If variant 1 is the ledger's flat measure, variant 2 should stand somewhere else
 
 Tolkien's own diagnosis: modern English is *"regrettably looser, more full of little 'empty' words."* Strike *there is, it was, very, that, in terms of*, and put the noun the sentence is about early.
 
-> Flat: *In place at {settlement} is a {defwork}, and the upkeep of the muster is unmet.*
-> Weighted: *{settlement} keeps a {defwork} up and its muster underpaid.*
+> Flat: *In place is a {defwork}, and the upkeep of the muster is unmet.*
+> Weighted: *The town keeps its {defwork} up and its muster underpaid.*
 
 Then let the verb do the work an adverb would. A causeway *climbs*; it does not *rise*. Civic equivalents: *stands, holds, carries, comes short, falls to, is let, is owed, goes unmade, keeps.* If you have written an adverb of manner, the verb was the wrong one. (Plain verbs — *is, has, keeps, owes, pays* — are welcome and always were; what to avoid is the verb chosen because it sounded weightier than *is*.)
 
@@ -222,7 +222,7 @@ Read the line aloud before you keep it — the most testable instruction in the 
 
 **Land the period on the strong noun.**
 > Weak: *The gate is shut early, for reasons that remain unclear.*
-> Strong: *The gate is shut early. Nobody at the moot will give a reason.*
+> Strong: *The gate is shut early. Nobody at the hall will give a reason.*
 
 **Flow between sentences is the litmus test** (Germani, on Martin). No sentence is a monument; the passage moves. If a comma is doing a full stop's work, cut it. **Three is the ceiling for a list** — a roll of names is this register's known failure — but let a list run to its true count: two guilds, five wards, one ferry. **No paired near-synonyms**; *low, quiet* is one word said twice.
 
@@ -238,7 +238,7 @@ Kay's modulation is never free-floating: the priest's procession is high, the sw
 
 The last sentence is short, may be two words, does not summarise, and carries its implication past the end.
 
-> *…The books say what it went on instead. Nobody asks.*
+> *…The hall's accounts say what it went on instead. Nobody asks.*
 
 The summarising close — *…which leaves the town exposed* — is the opposite move and is our commonest ending. If your final clause could be moved to the top as a thesis, it is a summary, not an ending. **A town is allowed to have fallen and stayed fallen.** Keep one flat contemporary line per unit for the matter that is done with; the plainest sentence is why the others land: *The {defwork} at {settlement} stands. That much is settled.*
 
