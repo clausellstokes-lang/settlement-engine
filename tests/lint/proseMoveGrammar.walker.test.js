@@ -14,12 +14,28 @@
  * enough to fail a pool on one reading. The corpus figures it produces are printed and
  * carried to the chair; the gate is on the INSTRUMENT.
  *
- * ── CONTROL 4's CALIBRATION IS EXACT ───────────────────────────────────────────────
+ * ── CONTROL 4's CALIBRATION IS EXACT, AND ITS SUBSTRATE IS THE FROZEN CORPUS ───────
  * The sitting re-cut MOVE-GRAMMAR §4.4's control 4 at 407/708 and asked for the SEGMENT
  * DEFINITION to be pinned in writing. It is pinned in `grammarWalker.segmentCount`'s doc, and
  * this file asserts both of PROBE_ALL's figures — 407/708 uniform and 79/708 repeated-opener
  * — as exact integers. A calibration that reproduces to the unit is a walker reading the same
  * corpus the probe read.
+ *
+ * ⛔ THAT LAST SENTENCE IS A CONDITION, AND THE REWRITE BROKE IT. The arm used to count those
+ * two figures over the LIVE leaves, which was correct for exactly as long as the live leaves
+ * WERE the corpus PROBE_ALL read. The REWRITE is deliberately moving that corpus pool by pool,
+ * so from its first landed batch the exact pins began measuring DRIFT while this docblock went
+ * on claiming they measured the INSTRUMENT — and re-pinning them each batch would be recording
+ * a number to match whatever had just been written, which is the false green the register
+ * exists to prevent. So the calibration now reads the SHIPPED leaves at `f2da5a3ee`
+ * (`tests/fixtures/move-grammar-control4-shipped-corpus.json`, the same base the kit's
+ * `rewrite/measure-block.py` takes), where 407 and 79 are exact and STAY exact for the rest of
+ * the programme, and the LIVE figure is printed beside them as a REPORTED line that never
+ * fails — so the drift the REWRITE creates is visible on every run and pinned by nothing.
+ * CONTROL 4's SECOND HALF still reads TODAY'S leaves, because what it says is that today's
+ * leaves RED ON ARM E; its closing cross-check — that `armESpread` and the two helpers count
+ * the same pools to the unit — is now made against a LIVE hand count rather than against a
+ * literal that moves under it, which is the same claim with nothing pinned.
  *
  * @see src/domain/prose/grammarWalker.js
  * @see src/domain/prose/moveGrammar.js
@@ -48,6 +64,50 @@ import { composedFillByBlock, fillSites } from '../helpers/dossierComposedFill.j
 
 /** @param {import('../../src/domain/prose/grammarWalker.js').GrammarReport} r */
 const armsThatFailed = (r) => [...new Set(r.fails.map((f) => f.arm))].sort();
+
+/**
+ * THE SHIPPED CORPUS CONTROL 4 CALIBRATES AGAINST — the R1 state leaves as they stood at
+ * `f2da5a3ee`, carried as a fixture rather than read out of git at run time.
+ *
+ * WHY A FIXTURE AND NOT `git show`. The leaves are ES MODULES and one of them
+ * (`economy.generated.js`) imports `../../domain/display/economyFreshness.js`, so six blobs
+ * materialised into a scratch directory do not import — their relative specifiers resolve
+ * against the scratch tree, whose transitive closure is unbounded. The fixture was derived
+ * ONCE by extracting the whole frozen tree (`git archive f2da5a3ee | tar -x`) and running the
+ * loader inside it, where every specifier resolves to the frozen file it named. The loader
+ * (`tests/helpers/dossierCorpus.js`) and the detector (`src/domain/prose/grammarWalker.js`)
+ * are byte-identical at `f2da5a3ee` and at the tip that cut the fixture, so the extraction
+ * reproduces the shipped reading rather than re-deriving it through a moved instrument.
+ *
+ * ⛔ IT HAS NO CAPTURE ARM AND NO REFRESH RITUAL, DELIBERATELY. It is not a golden that
+ * tracks the tree; it is a historical record of the corpus PROBE_ALL read, and the whole
+ * point of the re-point is that nothing in the REWRITE may move it.
+ */
+const SHIPPED_CORPUS = JSON.parse(readFileSync(
+  join(ROOT, 'tests/fixtures/move-grammar-control4-shipped-corpus.json'), 'utf8',
+));
+/** @type {string[][]} the frozen pools, each an array of its variants' texts */
+const SHIPPED_POOLS = Object.values(SHIPPED_CORPUS.cells);
+
+/**
+ * CONTROL 4's TWO FIGURES, COUNTED THE ONE WAY. The frozen side and the live side go through
+ * this same function, so any difference the REPORTED line prints can only be the corpus and
+ * never a second reading of it.
+ * @param {ReadonlyArray<ReadonlyArray<string>>} pools
+ * @returns {{uniformSegments: number, repeatedOpener: number, pools: number}}
+ */
+function shapesOf(pools) {
+  let uniformSegments = 0;
+  let repeatedOpener = 0;
+  for (const texts of pools) {
+    if (new Set(texts.map((t) => segmentCount(t))).size === 1) uniformSegments += 1;
+    if (new Set(texts.map((t) => openerOf(t))).size < texts.length) repeatedOpener += 1;
+  }
+  return { uniformSegments, repeatedOpener, pools: pools.length };
+}
+
+/** The live pools as bare text arrays, so `shapesOf` reads both corpora in one shape. */
+const textsOf = (cells) => [...cells.values()].map((pool) => pool.map((v) => v.text));
 
 describe('the ceilings — read from n, never fixed', () => {
   it('is min(1/n + 0.10, 1.5/n) for n ≥ 3 and NOT-EXECUTABLE at n ≤ 2', () => {
@@ -96,21 +156,40 @@ describe('the four negative controls and the positive one (MOVE-GRAMMAR §4.4, a
     expect(rows.every((r) => r.entropy === 0)).toBe(true);
   });
 
-  it('CONTROL 4 — today\'s R1 leaves reproduce PROBE_ALL\'s two figures EXACTLY, with the segment definition pinned', async () => {
-    const leaves = await loadStateLeaves();
-    const cells = poolCells(leaves);
-    let uniformSegments = 0;
-    let repeatedOpener = 0;
-    for (const pool of cells.values()) {
-      if (new Set(pool.map((v) => segmentCount(v.text))).size === 1) uniformSegments += 1;
-      if (new Set(pool.map((v) => openerOf(v.text))).size < pool.length) repeatedOpener += 1;
-    }
-    expect(cells.size).toBe(708);
+  it('CONTROL 4 — the SHIPPED leaves at f2da5a3ee reproduce PROBE_ALL\'s two figures EXACTLY, with the segment definition pinned', async () => {
+    // FAIL-CLOSED ON THE FIXTURE FIRST, in the `refuseEmpty` discipline: a fixture that has
+    // been half-edited, truncated or re-pointed arrives as a corpus of some other size, and a
+    // smaller corpus that happens to count 407 would otherwise read as a calibration holding.
+    expect(SHIPPED_CORPUS.refShort).toBe('f2da5a3ee');
+    expect(SHIPPED_POOLS.length).toBe(SHIPPED_CORPUS.pools);
+    expect(SHIPPED_POOLS.reduce((n, pool) => n + pool.length, 0)).toBe(SHIPPED_CORPUS.variants);
+
+    const shipped = shapesOf(SHIPPED_POOLS);
+    expect(shipped.pools).toBe(708);
     // SITTING B.3 / Part B §14: 407 of 708, not the 408 MOVE-GRAMMAR §0 first printed.
-    expect(uniformSegments).toBe(407);
-    expect(repeatedOpener).toBe(79);
-    expect(uniformSegments / cells.size).toBeCloseTo(0.575, 3);
-    expect(repeatedOpener / cells.size).toBeCloseTo(0.112, 3);
+    expect(shipped.uniformSegments).toBe(407);
+    expect(shipped.repeatedOpener).toBe(79);
+    expect(shipped.uniformSegments / shipped.pools).toBeCloseTo(0.575, 3);
+    expect(shipped.repeatedOpener / shipped.pools).toBeCloseTo(0.112, 3);
+
+    // ⛔ REPORTED, NEVER PINNED. The live corpus is the one the REWRITE is moving, so its two
+    // figures are PRINTED beside the frozen ones and asserted by nothing. A seat reading this
+    // run sees the drift the programme has created to date without any arm of the gate being
+    // re-recorded to accommodate it; the day the sitting wants a budget on that drift, it is
+    // this line it reads and a NEW arm it cuts, never this one.
+    const live = shapesOf(textsOf(poolCells(await loadStateLeaves())));
+    console.log(`\nCONTROL 4 · the calibration is against the SHIPPED corpus; the LIVE corpus is REPORTED\n`
+      + `  SHIPPED f2da5a3ee   pools ${shipped.pools}  uniformSegments ${shipped.uniformSegments}`
+      + ` (${(shipped.uniformSegments / shipped.pools).toFixed(4)})  repeatedOpener ${shipped.repeatedOpener}`
+      + ` (${(shipped.repeatedOpener / shipped.pools).toFixed(4)})   <- PINNED EXACT\n`
+      + `  LIVE    this tree   pools ${live.pools}  uniformSegments ${live.uniformSegments}`
+      + ` (${(live.uniformSegments / live.pools).toFixed(4)})  repeatedOpener ${live.repeatedOpener}`
+      + ` (${(live.repeatedOpener / live.pools).toFixed(4)})   <- REPORTED, never asserted\n`
+      + `  DRIFT SO FAR        pools ${live.pools - shipped.pools >= 0 ? '+' : ''}${live.pools - shipped.pools}`
+      + `  uniformSegments ${live.uniformSegments - shipped.uniformSegments >= 0 ? '+' : ''}`
+      + `${live.uniformSegments - shipped.uniformSegments}`
+      + `  repeatedOpener ${live.repeatedOpener - shipped.repeatedOpener >= 0 ? '+' : ''}`
+      + `${live.repeatedOpener - shipped.repeatedOpener}\n`);
   });
 
   it('CONTROL 4, SECOND HALF — the R1 leaves RED ON ARM E, which is what the control actually says', async () => {
@@ -128,11 +207,22 @@ describe('the four negative controls and the positive one (MOVE-GRAMMAR §4.4, a
     expect(spreadFails.length).toBeGreaterThan(0);
     expect(spreadFails.map((f) => f.detail).join(' ')).toMatch(/uniformSegments/);
     expect(spreadFails.map((f) => f.detail).join(' ')).toMatch(/repeatedOpener/);
-    // The arm reads the SAME pools the calibration counted, to the unit.
+    // The arm reads the SAME pools the two helpers count, to the unit.
+    //
+    // ⛔ NOT AGAINST 407/79 ANY MORE, AND THE CLAIM IS UNCHANGED. What this cross-check says is
+    // that `armESpread`'s shares and `segmentCount`/`openerOf` are reading one corpus and not
+    // two — a statement about the INSTRUMENT, which was merely SPELLED as the calibration's
+    // literals back when the live corpus and the shipped corpus were the same bytes. The
+    // REWRITE moves the live corpus, so spelling it that way now pins a moving number on an
+    // arm that never meant to carry one. It is spelled as what it means instead: the arm's
+    // figures against a LIVE hand count of the LIVE pools this same `report` walked. The
+    // frozen 407/79 keep their exact pin one arm up, where the corpus cannot move.
     const figures = /** @type {any} */ (report.figures.spread);
-    expect(figures.pools).toBe(708);
-    expect(Math.round(figures.uniformSegmentShare * 708)).toBe(407);
-    expect(Math.round(figures.repeatedOpenerShare * 708)).toBe(79);
+    const liveCells = poolCells(leaves);
+    const live = shapesOf(textsOf(liveCells));
+    expect(figures.pools).toBe(live.pools);
+    expect(Math.round(figures.uniformSegmentShare * live.pools)).toBe(live.uniformSegments);
+    expect(Math.round(figures.repeatedOpenerShare * live.pools)).toBe(live.repeatedOpener);
   });
 
   it('ARM E is NOT-EXECUTABLE without spread ceilings — never a pass on a number it invented', () => {
