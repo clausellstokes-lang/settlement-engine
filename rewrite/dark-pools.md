@@ -450,7 +450,185 @@ carries an owner-gated question slice A did not decide: `grim` is a shipped, pla
 profile, so the pool is reachable — but whether the corpus should sweep `contentProfile` is a
 policy call, not a measurement one.
 
-## SLICES B, C, D — IN PROGRESS
+## ⛔ SLICE B — TWO MORE DEFECT FAMILIES, ONE OF THEM READER-FACING (13 pools)
+
+Instrument check passed exactly: `DIRECTION: worsening` 180, `SEVERITY: high` 128,
+`SEVERITY: medium` 51, `SEVERITY: critical` 56, `DS-POW-2 :: stable matched` 431,
+`recentConflict present` 763, `DS-POW-7 :: layer DORMANT` 763.
+
+**G1 — the condition substrate is born at tick zero, crisis-only, and ALWAYS traced.**
+`promoteStressorsToConditions` (`conditionPromotion.js:195-209`) is the only generation-time
+condition source. It always stamps `triggeredAt.sourceEventType: 'GENERATION'` and a
+`causes: [{source:'generation'}]`; it never passes `status` or `duration`, so every born
+condition sits at `elapsedTicks: 0`. Its 14 reachable archetypes are all `defaultStatus`
+worsening or stable, all `defaultSeverity` ≥ 0.45. Measured: 235 condition-towns of 768,
+`{worsening:185, stable:57}`, `elapsedTicks` 0 on 235/235, `causes.length ≥ 1` on 235/235.
+
+**G2 — the other half of the condition lifecycle is the WORLD PULSE, which the grid has none
+of.** `upswingKernel.js` mints `reconstruction` (:571-579), `boom` (:689-694) and
+`flourishing` (:~735-745) with no `causes` and no `triggeredAt`;
+`withTickedConditionDurations` (`activeConditions.js:863-910`) is the only thing that advances
+`elapsedTicks` and the only thing that forces `status: 'easing'` (:880-881).
+
+**G3 — `recentConflict` is TOTAL.** `deriveBaselineConflict`
+(`governanceNarrative.js:372-486`) ends in an unconditional return. Measured present on
+**768 of 768** — and that totality is what darkens the DS-POW-2 share pools.
+
+| block | pool | verdict | ground | what the chair should do |
+| --- | --- | --- | --- | --- |
+| DS-CND-1 | ARCHETYPE: boom | OUT OF GRID | G2 — `upswingKernel.js:689-694`, world tick only | write it after a corpus that reaches it |
+| DS-CND-1 | ARCHETYPE: flourishing | OUT OF GRID | G2 — `upswingKernel.js:~735-745` | write it after a corpus that reaches it |
+| DS-CND-1 | ARCHETYPE: reconstruction | OUT OF GRID | G2 — `upswingKernel.js:571-579` | write it after a corpus that reaches it |
+| DS-CND-1 | PROVENANCE: causes[] or sourceEventType populated | **DEFECT** | The key IS produced on **235/768** (100 % of condition towns) and composes to NOTHING: all three variants name `{reason}` (`src/data/dossierStateProse/stressors.generated.js:2539, 2547, 2556`), no `{reason}` producer exists, and anchored liveness drops the pool empty. Routed at `stressorsStateProse.js:487` | fix the defect then write it |
+| DS-CND-1 | PROVENANCE: no causes[] and no sourceEventType | OUT OF GRID | G1 forbids it at birth; G2's pulse mints pass neither field and it fires there | write it after a corpus that reaches it |
+| DS-CND-1 | DURATION: inside the expiry wind-down window | OUT OF GRID | G1/G2 — `elapsedTicks` 0 on 235/235; fires at elapsed 4.8/6 | write it after a corpus that reaches it |
+| DS-CND-1 | DIRECTION: easing | OUT OF GRID | G1 — no rule-reachable archetype defaults to `easing`; 0 of 894 conditions over 3,840 towns | write it after a corpus that reaches it |
+| DS-CND-1 | SEVERITY: low | OUT OF GRID (sampling depth, not a missing axis) | **It DOES fire in the shipped product** — 11 firings in a 3,072-town heartland sweep, none in the 768 grid | write it after a corpus that reaches it |
+| DS-POW-2 | governing faction holds a DOMINANT share | **DEFECT** | G3 + the lens order at `powerStateProse.js:377-380`: `stabilityLensPoolKey` returns `recentConflict present` before `governingSharePoolKey` is called. The state exists on **132/768**. `PowerTab.jsx:223` calls the same function, **so it is dark for real readers too** | fix the defect then write it |
+| DS-POW-2 | governing faction holds a NARROW plurality | **DEFECT** | Same defect; state exists on **116/768** | fix the defect then write it |
+| DS-POW-2 | critical matched | **DEAD BY CONSTRUCTION** | The only `Critical` stability string in the tree is `governanceNarrative.js:289` `'Critical (active siege — survival priority)'`, and the siege branch at `powerStateProse.js:328` matches first. No world-pulse writer sets `powerStructure.stability`. The desk already declares this at `powerStateProse.js:295-305` | leave the shipped rows and never write it |
+| DS-POW-6 | present: false (no legitimacy reading) | OUT OF GRID | `computePublicLegitimacy` is unconditional (`rulingStructure.js:767`) ⇒ ledger present on **768/768**. Only reader is a save written before the field existed | write it after a corpus that reaches it |
+| DS-POW-7 | an opposition bloc forms COVERT under an autarchy | OUT OF GRID | `settlementBlocs({worldState: null, …})` returns null on **768/768** (`politicsRead.js:112-118`); the ruling-power half is ordinary (`autocrat` on 83/768) | write it after a corpus that reaches it |
+
+⭐ **THE DS-POW-2 SHARE PAIR IS A WORSE SHAPE THAN DS-POW-3's.** DS-POW-3 is dark because the
+instrument never calls its entry point. These two are dark because the key function IS called
+on every town and its CALL SITE short-circuits before it — on the instrument's path AND on
+the product's. A reader can never see them either. That is a live content loss, not a
+measurement artefact.
+
+⭐ **AND THE DS-CND-1 PROVENANCE DEFECT IS THE PUREST ONE IN THE CAR.** The rung is built on
+all 235 condition towns, the key is correct, and `composeStateProse` hands back
+`sentence: null, provenance: null` — because every variant names a `{reason}` slot nothing
+fills. 235 towns of content, silently dropped. Its CURE is a corpus act (a fill vocabulary, or
+a `{reason}`-free variant) and `stressorsStateProse.js:~560` already argues a desk must not
+invent that vocabulary — so the choice between those two cures is the chair's, not the
+investigator's.
+
+Slice B's own limits: no real world tick was run, so every G2 verdict rests on the producer's
+source plus a state shaped exactly as that producer shapes it, and the rates those pools would
+show on a played world are unmeasured. The DS-CND-1 desk reads `conditions[0]` only
+(`stressorsStateProse.js:~470`), which narrows every DS-CND-1 pool's real rate and was not
+quantified. `SEVERITY: low`'s true grid rate was bounded but not settled — "the grid was
+unlucky" versus "4 seeds a cell is structurally too few" is not separated. **DS-POW-6
+`present: false` is the one verdict slice B could not close**: no generated settlement reaches
+it and no live code path constructs one, so its only reader is a pre-field save; if no such
+saves exist in the wild, that pool is DEAD rather than OUT OF GRID.
+
+## SLICE D — THE FIRST REAL DEAD POOLS, AND THE SLIDER AXIS CONFIRMED INDEPENDENTLY (8 pools)
+
+Instrument check passed: `Naval Defense: Port only` 105 ✔ · DS-SUP-3 593/54/117/4 ✔ ·
+DS-ECO-10 399/163/146/48/12 ✔ · DS-DEF-3 Dangerous 24 ✔ Unsafe 11 ✔ Safe 2 ✔. (DS-DEF-3
+`Moderate` reads 509 against the corpus's 507 because 5 towns compose nothing downstream of a
+correct key — the same 5 that make `First-Survey` 763. The ladder reproduces; the delta is the
+composer.)
+
+⭐ **THE SLIDER AXIS, FOUND TWICE INDEPENDENTLY.** Slice A noticed it in passing; slice D
+proves it arithmetically. `rateGrid()` (`prose-rate-corpus.mjs:92-116`) writes exactly five
+config keys, so `priorityEconomy/Military/Magic/Religion/Criminal` sit at the wizard default
+50 on all 768 towns. `priorityHelpers.js:468-477` computes
+`threshold = |(e*7 + m*13 + r*17 + mg*19 + c*23) % 97|`; at all-50 that is **exactly 70**, and
+every `fires(n)` call in the function uses `n ∈ {45,48,50,52,55,62,65}` — all ≤ 65. So
+`fires(n) = threshold < n` is **false for all thirteen compound-stress flags on every one of
+the 768 towns, whatever their institutions**. That is not a rare draw; it is arithmetic.
+
+| block | pool | verdict | ground | what the chair should do |
+| --- | --- | --- | --- | --- |
+| DS-DEF-3 | Very Safe | OUT OF GRID | Bar is `effectiveSafety >= 3.5` (`safetyProfile.js:261`). Over the 768: ratio min 0.2 · p50 0.8 · p90 1.4 · p99 1.8 · **MAX 2.5** — a full 1.0 short, and `crimEff` never drops below 16.5 so the `max(8,·)` floor never helps. Un-pin the sliders and it fires freely: **1,247 of 6,174** swept towns read Very Safe, max ratio 12.5 | write it after a corpus that reaches it |
+| DS-DEF-6 | Naval Defense: Naval force | **DEAD BY CONSTRUCTION** | Keys on `hasNavy` = `hasAny(names,['navy','major port'])`. **The catalogue contains ZERO rows matching either** — `priorityHelpers.js:31` says so itself: *"(and Major port/Navy if ever cataloged)"*. Custom content cannot supply it (`nativeSemanticName` returns `''`). `hasNavy` true on 0 of 768 and 0 of 6,174 | leave the shipped rows and never write it |
+| DS-DEF-6 | Naval Defense: Under blockade | OUT OF GRID | `stockpile` null on 768 of 768; sole writer is the campaign tick `foodStockpile.js:410-418`. The missing input is the WORLD TICK, not the trade route | write it after a corpus that reaches it |
+| DS-ECO-10 | POSTURE: import_dependent | **DEAD BY CONSTRUCTION** | `exportPosture.js:58-63` — the if-chain has exactly **five** arms and no sixth. `import_dependent` exists in that file ONLY as a key of `EXPORT_STATUS_LABEL` (:25), an **orphaned label**. A world changes nothing; the derivation reads only `economicState` + `config` | leave the shipped rows and never write it |
+| DS-ECO-11 | ECONOMIC STRENGTHS: none recorded | **DEAD BY CONSTRUCTION** | `resourceGenerator.js:499` assigns `terrain.economicStrengths` verbatim and **all seven `TERRAIN_DATA` rows carry exactly four entries**. An invalid terrain errors and carries no array, which the key routes to `null`, not to the empty pool. `strengths length histogram: {4: 768}`, 0 empty rosters across 6,174 | leave the shipped rows and never write it |
+| DS-REL-2 | flagDriven count > 0 | OUT OF GRID | `npcGenerator.js:1694-1701`. **The archetype half already passes** — `mil_crim_corruption` occurs 197 times over 13,904 relationship rows. The sole blocker is `anyActive`, false by the slider arithmetic. **NOT world-dependent**: `getStressFlags(config, institutions)` reads no world. Un-pin the sliders and **1,055 of 6,174** towns carry it | write it after a corpus that reaches it |
+| DS-SUP-3 | THE FOOD GAP | SPLIT — DEAD at thorp/hamlet/village, UNSETTLED at town+ | **The chair's ordering hypothesis is settled and is the OPPOSITE of what was suspected:** `serviceCatalogPoolKey` (`economyStateProse.js:786-800`) tests `food` first and `healing` second, BEFORE the count arms — the named gaps SHADOW the generic pools, never the reverse. They are dark because `food` never appears in `deriveNotableAbsences` (absence keys over 768: `{transport: 104, information: 21}` and nothing else). Below town a `required: true` row yields a `p:1` food service; at town+ no required row guarantees food, yet 0 hits in 7,824 settlements | hold — see the limit |
+| DS-SUP-3 | THE HEALING GAP | SPLIT — DEAD at thorp–city, UNSETTLED at metropolis | Same ladder, same ordering. Guaranteed `required: true` healing rows exist at every tier through city; **metropolis alone has none**, yet 0 hits in 7,824 (min metropolis healing bucket 2) | hold — see the limit |
+
+⚠ **AN ADJACENT DEFECT SLICE D RAISED BUT DID NOT CLAIM AS THIS POOL'S:**
+`worldPulse/navalStrength.js:77` calls `hasNavy` *"the dead hasNavy boolean"* and ships
+`hasWarNavy(digest,item,id)` as its live replacement — which this desk, and
+`defenseDisplay.js:259`, do not read. The pool is dead; the reason it is dead is a read that
+the estate has already superseded elsewhere and not here.
+
+Slice D's own limits: **the two DS-SUP-3 gaps are the one split verdict in the whole car and
+it was deliberately not rounded up.** Below village the gap is barred by a required row; at
+town+/metropolis it is NOT barred, yet did not occur in 7,824 settlements across the whole
+slider space reachable. What would settle it: a walk of the town+/metropolis roster asking
+whether any non-required food-service row is effectively certain (an `exclusiveGroup` whose
+members exhaust the space, or a coherence-repair pass back-filling an empty essential bucket).
+No food fallback was found in `servicesGenerator.js` the way the criminal bucket has one
+(`:92-110`), which is what leaves the door ajar. `Very Safe` and `flagDriven > 0` are proved
+REACHABLE on one named input (the sliders) but not proved TYPICAL — the wizard-draw corpus was
+not run. For `Naval Defense: Naval force`, one path is not closed: if the GM edit path writes a
+non-custom-stamped row whose name contains "navy", the pool would be GM-only rather than dead;
+the generator can never produce it either way.
+
+## SLICE C — THE GEN BLOCKS, AND THE SLIDER AXIS A THIRD TIME (11 pools)
+
+Instrument note: slice C's instrument is the shipped key function called on dumped fields — a
+strict SUPERSET of the rate table, which additionally requires the compose step to draw.
+Reproduction: DS-GEN-11 `viable: true/false` **610 / 158 exact** · DS-GEN-14 `FOUNDED-YOUNG`
+**76 exact** · DS-GEN-3 food `Secure/Deficit/Deficit × Active Famine` **131 / 120 / 24 exact**.
+Where it differs it is always ≥ the corpus (prosperity 323 vs 321, FOUNDED-OLD 692 vs 687),
+consistent with ~5 towns per block that key but do not draw. **So a zero in this instrument is
+a zero in the corpus** — the only direction this car needs.
+
+**GROUND A (a THIRD independent discovery of the slider axis).** `getPriorities`
+(`priorityHelpers.js:14-20`) defaults all five sliders to 50 when config omits them, and
+`rateGrid()` omits them. Measured: every one of the 768 towns reads
+`priorityeconomy/religion/magic/criminal/military: [50]`, a single distinct value.
+The sliders are a first-class wizard input (`src/components/generate/PrioritySliders.jsx`).
+**GROUND B.** The grid also pins `customContent: {}` (`prose-rate-corpus.mjs:359`).
+
+| block | pool | verdict | ground | what the chair should do |
+| --- | --- | --- | --- | --- |
+| DS-GEN-3 | foodSecurity.label: Surplus | OUT OF GRID (B) — borderline, see limit | Gate is `surplusPct > 40` (`foodGenerator.js:353-355`). Native ceiling: `TERRAIN_AGRI.plains 1.0` + `agriMod` cap 0.5 = 1.50 → **ratio 1.3846 = 38 %, two points under the gate, at every tier**. Realized over 1,408 towns: best surplusPct **33**. Custom items declaring `foodImpact:'produces'` add up to +0.6 and **light it 10/12 seeds at 4 producers** | write it after a corpus that reaches it |
+| DS-GEN-3 | prosperity: Poverty / Impoverished | **DEAD BY CONSTRUCTION** | `deriveProsperityLabel` closes over `LABELS = ['Struggling','Poor','Moderate','Comfortable','Prosperous','Wealthy']` (`prosperity.js:124`). The pool is routed ONLY from `Subsistence`/`Impoverished`/`Destitute` (`generalStateProse.js:209-211`), none of which is in LABELS; `Subsistence` is re-mapped to Struggling/Poor at `prosperity.js:127-131` | leave the shipped rows and never write it |
+| DS-GEN-3 | prosperity: Wealthy / Thriving | OUT OF GRID (A) | `Wealthy` needs `econOut >= 70` (`prosperity.js:135`); with `pri.economy` pinned at 50 the product tops out at **50.40** over 768 towns — 19.6 short, and `magicBoostEconomy` is exactly 1.0 because `pri.magic` is pinned too. Sweep economy 80–95: **Wealthy on 73 of 288**, desk fires the pool. Not clamped, not band-gated — slider-gated | write it after a corpus that reaches it |
+| DS-GEN-7 | power_economic: criminal faction in a transit hub | OUT OF GRID (A) | Needs crime power > 20 AND `isEntrepot` (`narrativeGenerator.js:581-589`). Grid: crime power p99 = 20 (max 43), entrepot on 148, conjunction **0/768**. Sweep `priorityCriminal` → 95: **50 hits, pool produced 50 times** | write it after a corpus that reaches it |
+| DS-GEN-7 | power_economic: temple economy under a secular seat | OUT OF GRID (A) | Needs `situationDesc` to contain "church controls", gated at `pri.religion >= 70 && pri.economy <= 42 && (religion − economy) >= 28` (`priorityHelpers.js:526-531`). Both pinned at 50 → **0/768**. Swept: 147 towns write it, **119 pool keys produced** | write it after a corpus that reaches it |
+| DS-GEN-7 | power_economic: powerful criminal faction in a prosperous settlement | **DEAD BY CONSTRUCTION** — least certain row in the car | Needs power > 35 AND prosperity ∈ {Prosperous, Wealthy, Thriving}. **The antecedents are anti-correlated on one slider**: the only lever raising faction power is `priorityCriminal`, and `criminalEffective >= 65` SUBTRACTS a prosperity rung (`prosperity.js:151`). 1,080 settlements at criminal 60–95 × economy 70–95: the joint cell is **0**, and both `power>35` cells stayed empty | leave the shipped rows and never write it |
+| DS-GEN-7 | power_stress: occupation against stated stability | **DEAD BY CONSTRUCTION** — the note negates its own producer | Requires the `occupied` stress AND `powerStructure.stability` NOT containing "occupation" or "suppress" (`narrativeGenerator.js:605-611`). Forced on **336 settlements**: the stability text is a single constant, `'Suppressed (under occupation: resistance simmers)'`, which contains **both** forbidden words. Omissions: 0 of 336 | leave the shipped rows and never write it |
+| DS-GEN-7 | historical_economic: the recovery narrative | **DEAD BY CONSTRUCTION** — a filter reading a key no writer writes | Requires an event `name` containing `Boom` or `Trade Route Opened` (`narrativeGenerator.js:652-655`). Over **1,355 generated events, 28 distinct names, ZERO matches**. The `Collapse|Famine` half matches 47 towns, so the predicate is half-live and can never complete | leave the shipped rows and never write it |
+| DS-GEN-11 | the MARGINAL arm: neither verdict returned | **DEAD BY CONSTRUCTION** for generated records | `economicViability.viable` was `typeof 'boolean'` on **768/768** and 610 + 158 = 768 exactly. The key is an honest fail-open for a record with no verdict, not a third generated state | leave the shipped rows and never write it |
+| DS-GEN-14 | GROWN-UNRECORDED | **DEAD BY CONSTRUCTION** for generated records | Needs `!history.founding`; present on **768/768** and 144/144 further. The route is live (`foundedPoolKey({})` does return it) — only a record lacking the founding block reaches it | leave the shipped rows and never write it |
+| DS-GEN-18 | HOME-FED | **DEFECT** (plus an ordering blocker) | `homeFedChain` (`generalStateProse.js:1363-1369`) joins `activeChains[].resource` to the exploitation ledger on a bare `.toLowerCase()`, but the two writers use different token shapes — chains write `Camel Herds`, `Mountain Timber`; exploitation writes `camel_herds`, `mountain_timber`. **The shipped bare-lowercase compare joins 0 towns of 768; normalising spaces→underscores joins 20.** The desk's own docblock at `:1314-1330` asserts the join is "on the canonical `resourceKeyForLabel` token" — **the shipped code never applies it.** ⚠ Curing it is necessary but NOT sufficient: on all 20 towns `STALLED` or `BOUGHT-IN` pre-empts | fix the defect then write it |
+
+### ⭐ SLICE C SETTLED THE DS-ECO-2 TENSION — AND FOUND A PRODUCER MISCALIBRATION
+
+There is **no plumbing defect** between the two food readings. They read the SAME two numbers
+and diverge only on a threshold 40 points apart: `economyStateProse.js:414` calls it a surplus
+at `foodBalance.surplus > 0` — one unit of grain — while `foodGenerator.js:354` requires
+`surplusPct > 40`. All 21 DS-ECO-2 "surplus" towns sit at a 6–22 % margin and read **Secure**
+in the food ladder (`fsProd === fbProd` and `fsNeed === fbNeed` on every one).
+
+And the squeeze is structural: plains carries the best base capacity (1.0) but cannot carry the
+river-keyed `agriMod` rows; riverside carries them but loses 0.1 of base. Measured ceilings
+over 1,408 towns: plains → effectiveAgri **1.35**, riverside → **1.34**; surplus needs > 1.4045
+at the luckiest harvest. **The `> 40` gate sits above the food model's own zero-luck maximum of
+38.** That is a producer miscalibration the chair may want to raise separately — it is not a
+dark-pool question, but it is why this pool is dark.
+
+### ⚠ AND THE SOURCE'S OWN DOCBLOCK IS STALE AT THIS TIP
+
+`generalStateProse.js:979-1032` records that the two criminal notes are "dead by threshold —
+their power took exactly three values, 5, 6 and 7". **At the dock tip crime-faction power on
+the RATE grid reaches 43 (p99 = 20)**, and the transit-hub note is not dead by threshold at
+all — it is slider-gated and fires 50 times once `priorityCriminal` moves. The same block calls
+the temple-economy note "merely RARE"; it is not rare, it is gated at `pri.religion >= 70` and
+fires 119 times above that line. Worth correcting when that block is next touched — a stale
+measurement in a docblock is exactly the shape that darkens a pool by argument.
+
+Slice C's own limits: **`powerful criminal faction in a prosperous settlement` is the least
+certain verdict in the whole car** — 2,808 settlements searched across three sliders without
+the antecedents co-occurring, and the mechanism named, but the five-dimensional slider space
+was not exhausted and institution-roster or culture overrides that might raise faction power
+without raising `criminalEffective` were not tried. The narrow question to harden it: *can any
+config put a Thieves' Guild above 35 % power on a town whose prosperity label is Prosperous or
+better?* **`foodSecurity.label: Surplus` is a borderline OUT-OF-GRID / DEAD call** — on the
+NATIVE catalogue alone it is dead, and if the chair's corpus will never carry custom content,
+treat it as DEAD. HOME-FED's ordering blocker is a law question, not a measurement one, and was
+left to the chair. And the three "DEAD for generated records" rows (MARGINAL, GROWN-UNRECORDED,
+Poverty/Impoverished) all light on a stored or hand-authored record; whether the estate ever
+renders a legacy save through `generalDeskLines` is outside this car.
 
 ---
 
