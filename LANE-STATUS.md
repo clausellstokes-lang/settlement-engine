@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-13 12:38:09 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-13 12:43:25 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = c2b72466a Plan: wave 3 has begun — batch 2 of DS-DEF-2 (three pools) through draft 065b9ded6 and c
 
@@ -93,7 +93,7 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
 - LAST-RUNS: 
 
 ## WORKFLOW RUNS of chair session 4e3d2f70-f45f-4e14-b571-514c339cfa17 — PER AGENT, PER LANE (owner 09-11: save progress per agent per lane; a run dies with the session, its journal + the packets + the dock commits are the checkpoint; journals mirrored under $SC/_progress/<wf>/)
-- **wf_74510771-4fe** (mtime 09-13 12:23): agent calls 37 (36 distinct) · DONE 35 · FAILED (not retried) 0 · RETRIED (superseded attempts) 1 · IN FLIGHT 1 — mirror `_progress/wf_74510771-4fe/`
+- **wf_74510771-4fe** (mtime 09-13 12:23): agent calls 37 (36 distinct) · DONE 36 · FAILED (not retried) 0 · RETRIED (superseded attempts) 1 · IN FLIGHT 0 — mirror `_progress/wf_74510771-4fe/`
     - `aae3b7721` MARKER Invasion & War: walls AND professional garrison · DONE · transcript 09-13 08:05 1088 KB · 63 tool calls · files: card-mech.txt, card-79.md, card.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasio
     - `a14855157` MARKER Internal Security: full legal chain (court AND prison) · DONE · transcript 09-13 08:01 868 KB · 41 tool calls · files: card.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--interna
     - `a54b8e93a` MARKER Economic Survival: STRONG · DONE · transcript 09-13 08:05 893 KB · 49 tool calls · files: $D/card.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--economi
@@ -128,7 +128,7 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `a8f40ea49` CURER Beasts & Monsters: frontier, credible deterrence · DONE · transcript 09-13 11:50 577 KB · 12 tool calls · files: rows_raw.txt, cure.md, check.txt · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--beasts-
     - `a989454e9` GATE r1 · DONE · transcript 09-13 12:23 1247 KB · 113 tool calls · files: (git commit) · result: {"commit": "db54f803b", "pools": [{"dir": "ds-def-2--invasion-war-walls-and-professional-garrison", "applied": true, "refusals": []}, {"dir": "ds-def-2--interna
     - `afc51a746` REFUTER Invasion & War: walls AND professional garrison · DONE · transcript 09-13 12:32 823 KB · 37 tool calls · files: rerefute.md · result: {"dir": "ds-def-2--invasion-war-walls-and-professional-garrison", "verdicts": [{"variant": 2, "face": 5, "verdict": "PASS", "floor": "\u2014", "field": "institu
-    - `a3778a702` REFUTER Internal Security: full legal chain (court AND prison) · IN FLIGHT · transcript 09-13 12:37 1046 KB · 45 tool calls · files: rerefute.md · last: Bash cd "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scra
+    - `a3778a702` REFUTER Internal Security: full legal chain (court AND prison) · DONE · transcript 09-13 12:39 1134 KB · 46 tool calls · files: rerefute.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--interna
     - `a8d51461b` REFUTER Economic Survival: STRONG · DONE · transcript 09-13 12:31 772 KB · 25 tool calls · files: d1.txt, draft_rows.txt, cure_rows.txt, "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--economic-survival-strong/rerefute.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--economi
     - `a532b863a` REFUTER Disasters & Famine: granary AND hospital · DONE · transcript 09-13 12:29 736 KB · 24 tool calls · files: cure_rows.txt, draft_rows.txt, rerefute.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--disaste
 - **wf_c31490ff-2d1** (mtime 09-13 07:43): agent calls 23 (23 distinct) · DONE 23 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 0 — mirror `_progress/wf_c31490ff-2d1/`
@@ -167,4 +167,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `ab8783d22` WRITER Invasion & War: walls with NO force · DONE · transcript 09-13 02:30 725 KB · 17 tool calls · files: candidates-2.md, facetext.txt, ft2.txt · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasio
 
 ## PROCESSES: 
-load: 2.16 2.13 2.16
+load: 2.42 2.19 2.17
