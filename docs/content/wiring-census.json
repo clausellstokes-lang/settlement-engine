@@ -5,7 +5,7 @@
       "src/domain/display/stateProse/generalStateProse.js": "ab4ed0fce45d2d0b3a81cbfca929b1dda17c2b26038e68643616c5590f54c9ce",
       "src/domain/display/stateProse/powerStateProse.js": "25683c4233065281f1e879c284249d5b2165fcf0c3e39235e093717dccb0c95a",
       "src/domain/display/stateProse/economyStateProse.js": "19782d3f280828fdd9b6ad1270aa647edcf3ea2e5696fc61e6c8918f9feff9f4",
-      "src/domain/display/stateProse/defenseStateProse.js": "0bc366748d629dbe09126e051dfe0a977c261ad2418b7e23c1198017d32f057b",
+      "src/domain/display/stateProse/defenseStateProse.js": "33c65670b64c3e2c7be8bf458f3dfd0b313b179c9a02a2e5f38d4b6cc1f62b13",
       "src/domain/display/stateProse/stressorsStateProse.js": "e51c4df98e6941f6ea8d2f94665aabf143813189c0b787bd289dc9a55765d8ad",
       "src/domain/display/stateProse/warFaithStateProse.js": "cf003edcea618016dbd640dbe5ca3c68e5dae52fe08ac3af4dd23ac80995f9d8",
       "src/domain/display/stateProse/dossierMounts.js": "b9314c6d9cb005166297370d350ad2d7294b7c7a87ae5ceecdfdf17526140603"
@@ -30,7 +30,7 @@
     "resolvedWithCleanPredicate": 229,
     "keyFunctions": 118,
     "keyFunctionsConsulted": 118,
-    "keyTables": 38,
+    "keyTables": 39,
     "slotless": 65,
     "bagless": 140,
     "predicatesOverUnreadFields": 99,
@@ -593,6 +593,7 @@
       "block": "DS-DEF-2",
       "pool": "Beasts & Monsters: plagued, perimeter AND organized force",
       "slotsFilled": [
+        "defmaterial",
         "settlement"
       ],
       "slotsNamed": [
@@ -657,6 +658,7 @@
       "block": "DS-DEF-2",
       "pool": "Beasts & Monsters: plagued, perimeter but NO force to hold it",
       "slotsFilled": [
+        "defmaterial",
         "settlement"
       ],
       "slotsNamed": [
@@ -721,6 +723,7 @@
       "block": "DS-DEF-2",
       "pool": "Beasts & Monsters: plagued, NO perimeter and NO force",
       "slotsFilled": [
+        "defmaterial",
         "settlement"
       ],
       "slotsNamed": [
@@ -785,6 +788,7 @@
       "block": "DS-DEF-2",
       "pool": "Beasts & Monsters: frontier, credible deterrence",
       "slotsFilled": [
+        "defmaterial",
         "settlement"
       ],
       "slotsNamed": [
@@ -847,6 +851,7 @@
       "block": "DS-DEF-2",
       "pool": "Beasts & Monsters: frontier, force without a perimeter",
       "slotsFilled": [
+        "defmaterial",
         "settlement"
       ],
       "slotsNamed": [
@@ -911,6 +916,7 @@
       "block": "DS-DEF-2",
       "pool": "Beasts & Monsters: settled, defenses beyond the need",
       "slotsFilled": [
+        "defmaterial",
         "settlement"
       ],
       "slotsNamed": [
@@ -973,6 +979,7 @@
       "block": "DS-DEF-2",
       "pool": "Beasts & Monsters: settled, nothing organized",
       "slotsFilled": [
+        "defmaterial",
         "settlement"
       ],
       "slotsNamed": [
@@ -1035,6 +1042,7 @@
       "block": "DS-DEF-2",
       "pool": "Invasion & War: walls AND professional garrison",
       "slotsFilled": [
+        "defmaterial",
         "settlement"
       ],
       "slotsNamed": [
@@ -1099,6 +1107,7 @@
       "block": "DS-DEF-2",
       "pool": "Invasion & War: walls with citizen militia",
       "slotsFilled": [
+        "defmaterial",
         "settlement"
       ],
       "slotsNamed": [
@@ -1163,6 +1172,7 @@
       "block": "DS-DEF-2",
       "pool": "Invasion & War: walls with NO force",
       "slotsFilled": [
+        "defmaterial",
         "settlement"
       ],
       "slotsNamed": [
@@ -1225,6 +1235,7 @@
       "block": "DS-DEF-2",
       "pool": "Invasion & War: force with NO walls",
       "slotsFilled": [
+        "defmaterial",
         "settlement"
       ],
       "slotsNamed": [
@@ -1287,6 +1298,7 @@
       "block": "DS-DEF-2",
       "pool": "Invasion & War: militia only",
       "slotsFilled": [
+        "defmaterial",
         "settlement"
       ],
       "slotsNamed": [
@@ -1351,6 +1363,7 @@
       "block": "DS-DEF-2",
       "pool": "Invasion & War: neither walls nor force",
       "slotsFilled": [
+        "defmaterial",
         "settlement"
       ],
       "slotsNamed": [
@@ -1413,6 +1426,7 @@
       "block": "DS-DEF-2",
       "pool": "Internal Security: full legal chain (court AND prison)",
       "slotsFilled": [
+        "defmaterial",
         "settlement"
       ],
       "slotsNamed": [
@@ -1485,6 +1499,7 @@
       "block": "DS-DEF-2",
       "pool": "Internal Security: court without detention",
       "slotsFilled": [
+        "defmaterial",
         "settlement"
       ],
       "slotsNamed": [
@@ -1552,6 +1567,7 @@
       "block": "DS-DEF-2",
       "pool": "Internal Security: detention without process",
       "slotsFilled": [
+        "defmaterial",
         "settlement"
       ],
       "slotsNamed": [
@@ -1611,6 +1627,7 @@
       "block": "DS-DEF-2",
       "pool": "Internal Security: no legal infrastructure",
       "slotsFilled": [
+        "defmaterial",
         "settlement"
       ],
       "slotsNamed": [
@@ -1670,6 +1687,7 @@
       "block": "DS-DEF-2",
       "pool": "Economic Survival: STRONG",
       "slotsFilled": [
+        "defmaterial",
         "settlement"
       ],
       "slotsNamed": [
@@ -1728,6 +1746,7 @@
       "block": "DS-DEF-2",
       "pool": "Economic Survival: ADEQUATE",
       "slotsFilled": [
+        "defmaterial",
         "settlement"
       ],
       "slotsNamed": [
@@ -1786,6 +1805,7 @@
       "block": "DS-DEF-2",
       "pool": "Economic Survival: WEAK",
       "slotsFilled": [
+        "defmaterial",
         "settlement"
       ],
       "slotsNamed": [
@@ -1844,6 +1864,7 @@
       "block": "DS-DEF-2",
       "pool": "Economic Survival: CRITICAL",
       "slotsFilled": [
+        "defmaterial",
         "settlement"
       ],
       "slotsNamed": [
@@ -1902,6 +1923,7 @@
       "block": "DS-DEF-2",
       "pool": "Disasters & Famine: granary AND hospital",
       "slotsFilled": [
+        "defmaterial",
         "settlement"
       ],
       "slotsNamed": [
@@ -1965,6 +1987,7 @@
       "block": "DS-DEF-2",
       "pool": "Disasters & Famine: granary AND parish care only",
       "slotsFilled": [
+        "defmaterial",
         "settlement"
       ],
       "slotsNamed": [
@@ -2028,6 +2051,7 @@
       "block": "DS-DEF-2",
       "pool": "Disasters & Famine: granary, NO medical provision",
       "slotsFilled": [
+        "defmaterial",
         "settlement"
       ],
       "slotsNamed": [
@@ -2091,6 +2115,7 @@
       "block": "DS-DEF-2",
       "pool": "Disasters & Famine: NO reserves, hospital present",
       "slotsFilled": [
+        "defmaterial",
         "settlement"
       ],
       "slotsNamed": [
@@ -2154,6 +2179,7 @@
       "block": "DS-DEF-2",
       "pool": "Disasters & Famine: NO reserves, NO medical provision",
       "slotsFilled": [
+        "defmaterial",
         "settlement"
       ],
       "slotsNamed": [

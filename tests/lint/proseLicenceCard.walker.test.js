@@ -45,7 +45,7 @@ const BLOCK = 'DS-DEF-11';
 const POOL = 'WALLED-STRAINED';
 
 /** A tiny shape register, so the arm does not depend on the annex parser. */
-const SHAPES = { settlement: 'proper', defwork: 'bare-common' };
+const SHAPES = { settlement: 'proper', defwork: 'bare-common', defmaterial: 'bare-common' };
 
 /**
  * The card for one (block, pool), optionally over a DOCTORED row — the plant's only entry.

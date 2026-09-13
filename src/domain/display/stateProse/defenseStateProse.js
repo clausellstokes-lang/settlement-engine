@@ -120,16 +120,12 @@ const CORPUS = /** @type {import('./stateProseKernel.js').StateProseCorpus} */ (
  * @type {Readonly<Record<string, string>>}
  */
 export const SLOT_FILL_SHAPES = Object.freeze({
-  settlement: 'proper', defwork: 'bare-common', seat: 'proper', good: 'bare-common',
+  settlement: 'proper', defwork: 'bare-common', defmaterial: 'bare-common', seat: 'proper',
+  good: 'bare-common',
 });
 
-/**
- * This desk owns NO literal fill table, and says so rather than omitting the field — the
- * projection contract's guard treats an exported string map as a candidate fill table and
- * refuses one this does not name.
- * @type {Readonly<Record<string, Readonly<Record<string, string>>>>}
- */
-export const SLOT_FILL_TABLES = Object.freeze({});
+// `SLOT_FILL_TABLES` is declared beside `DEFMATERIAL_OF` (the one literal fill table this
+// desk owns, under `{defwork}`'s note) — a `const` cannot be named before its line runs.
 
 /**
  * ── ⭐⭐ DS-DEF-3's TWO KEY TABLES — THE LABEL BANNER LEAVES THE FOURTH RUNG ──────────
@@ -492,6 +488,41 @@ export function invasionRowPoolKey(walls, garrison, militia) {
 }
 
 /**
+ * ⭐ THE DS-DEF-2 POOLS WHOSE KEY FIXES A STANDING WALL — the only pools of this block that
+ * are offered `{defmaterial}` (ADDENDUM 18 ruling 10, THE FILLS).
+ *
+ * COMPUTED FROM THE KEY FUNCTIONS, NEVER LISTED: a key is here when the beasts or invasion
+ * reader reaches it with the perimeter flag TRUE and never reaches it with the flag FALSE.
+ * Listing the seven names would let a renamed or re-cut pool keep a material slot its key no
+ * longer earns; deriving them means the set moves with the readers, and the desk suite pins
+ * the seven so a move is seen. ⚠ The other three rows (internal, economic, disaster) never
+ * read the wall and are never here, and the beasts row's silences (`''`) contribute nothing.
+ *
+ * A frozen ARRAY rather than a Set on purpose: the projection contract classifies every
+ * exported string-valued OBJECT as a candidate fill table, and this is a roster, not a fill.
+ * @type {ReadonlyArray<string>}
+ */
+export const WALLED_DEF2_POOLS = Object.freeze((() => {
+  const walled = new Set();
+  const unwalled = new Set();
+  for (const family of ['plagued', 'frontier', 'settled']) {
+    for (const force of [true, false]) {
+      const w = BEASTS_ROW_POOL[beastsRowSituation(family, true, force)];
+      const u = BEASTS_ROW_POOL[beastsRowSituation(family, false, force)];
+      if (w) walled.add(w);
+      if (u) unwalled.add(u);
+    }
+  }
+  for (const garrison of [true, false]) {
+    for (const militia of [true, false]) {
+      walled.add(invasionRowPoolKey(true, garrison, militia));
+      unwalled.add(invasionRowPoolKey(false, garrison, militia));
+    }
+  }
+  return [...walled].filter((key) => !unwalled.has(key)).sort();
+})());
+
+/**
  * DS-DEF-2 row 3 — INTERNAL SECURITY: a court against a place to hold people.
  * TOTAL over the four combinations — the corpus wrote all four, including both halves
  * without the other, because "detention without process" is a different town from
@@ -625,6 +656,14 @@ export function defenseThreatProse(settlement, options = {}) {
   const garrison = forces.garrison.present;
   const militia = forces.militia.present;
 
+  // ⭐ THE WALLED BAG (ADDENDUM 18 ruling 10, THE FILLS). `{defmaterial}` is offered ONLY to
+  // the pools of `WALLED_DEF2_POOLS` — the keys that can fire on a walled town and on no
+  // other — so the licence a writer reads off this block never shows a material slot on a
+  // pool an unwalled town can draw. The fill itself is `undefined` wherever no wall row
+  // fixes a material (a citadel-only city, a custom row), and the kernel's anchored liveness
+  // then drops the variants that name it (R-DST-K), exactly as `{defwork}` degrades.
+  const walledSlots = { ...slots, defmaterial: defmaterialFill(forces) };
+
   // ⭐ ROUTED THROUGH THE COMPOSER (SEAM car 3f), as is every entry point on this leaf. The
   // spine key is this desk's own key function and every bag is unchanged; the candidates
   // leaf is EMPTY until car 9 authors it, and an empty list composes to the kernel's own
@@ -648,8 +687,22 @@ export function defenseThreatProse(settlement, options = {}) {
       candidates: defenseStateProseCandidates('DS-DEF-2', settlement),
     })
     : null);
+  // A SECOND CALL SITE rather than a ternary inside the bag, because the composed-fill
+  // census reads bags by NAME (`slots: walledSlots` resolves; `slots: cond ? a : b` does not)
+  // and the licence card is projected from what that census can read.
   /** @param {string|null} poolKey */
-  const rung = (poolKey) => (poolKey ? legibilityRung('', line(poolKey), []) : null);
+  const walledLine = (poolKey) => (poolKey
+    ? composeStateProse(CORPUS, 'DS-DEF-2', {
+      ...options,
+      slots: walledSlots,
+      spineKey: poolKey,
+      candidates: defenseStateProseCandidates('DS-DEF-2', settlement),
+    })
+    : null);
+  /** @param {string|null} poolKey */
+  const rung = (poolKey) => (poolKey
+    ? legibilityRung('', WALLED_DEF2_POOLS.includes(poolKey) ? walledLine(poolKey) : line(poolKey), [])
+    : null);
 
   return Object.freeze({
     beasts: rung(beastsRowPoolKey(settlement?.config?.monsterThreat, walls, garrison || militia)),
@@ -1035,6 +1088,94 @@ export function defworkFill(forces) {
 }
 
 /**
+ * ── ⭐ `{defmaterial}`: THE STAKES OR THE STONE, FIXED BY THE ROW'S OWN PRINTED DESCRIPTION ──
+ *
+ * ADDENDUM 18 ruling 10 (THE FILLS): a typed slot so a pooled face can name the material of
+ * the town's wall and be TRUE on every town that draws it. What fixes the material is the
+ * catalogue row's printed description in `src/domain/display/institutionVocabulary.js`
+ * (CONTRADICTION-TABLE F1-32); the fortification chain in `supplyChainData.js` fixes only
+ * the material's SOURCE, which stays barred (F1-33) and is not a slot.
+ *
+ * THE TABLE IS KEYED ON THE CATALOGUE ROW NAME, which is what `standingDefenseForces` puts
+ * in `walls.names` (`nativeSemanticName` of a live native row; a custom row reads `''` and
+ * is never here). Each word is quoted from the row's own description:
+ *   `Palisade`               :278 "A ring of sharpened STAKES"                → stakes
+ *   `Palisade or earthworks` :155 "A WOODEN palisade or EARTHEN bank"         → timber or earth
+ *   `Town walls`             :157 "STONE walls and gates ringing a town"      → stone
+ *   `City walls and gates`   :162 "MASONRY walls with towers and gatehouses"  → masonry
+ *
+ * ⛔ TWO WALL ROWS FIX NO MATERIAL AND ARE DELIBERATELY ABSENT: `Citadel` (:165, "An inner
+ * fortress and last refuge") and `Massive walls and fortifications` (:166, "Layered wall
+ * systems with outer rings, inner keep") name none, and F1-32 rules them free. So is `Gates
+ * (if walled)` (:159), which the `walls` bucket catches on the substring "wall" and which
+ * names no material either. A town whose wall rows are only these gets `undefined` from
+ * `defmaterialFill`, and the kernel's anchored liveness then DROPS every variant that names
+ * `{defmaterial}` on that town (R-DST-K) — the pool degrades to the variants that never
+ * needed it, exactly as `{defwork}` degrades on a name outside its vocabulary. Refusing is
+ * the designed behaviour; guessing "stone" for a citadel is how a page starts asserting a
+ * material the record never fixed.
+ *
+ * JUDGMENT (vetoable) on `Palisade or earthworks`: the row's description is a DISJUNCTION
+ * ("a wooden palisade OR an earthen bank"), so neither `earthworks` nor `stakes and earth`
+ * is true on every hamlet that draws the row — each asserts one half the record leaves
+ * open. `timber or earth` is what the description actually fixes (F1-32's own gloss:
+ * "wooden/earthen"), passes the `bare-common` shape (lowercase, no determiner, no dash, no
+ * digit), and is the one form that cannot contradict the row beside it. Say "veto" to take
+ * a single-word form and accept the half-claim.
+ *
+ * Frozen and exported so the projection contract classifies it as the fill table it is and
+ * checks every word against the `bare-common` shape; declared in `SLOT_FILL_TABLES` below.
+ * @type {Readonly<Record<string, string>>}
+ */
+export const DEFMATERIAL_OF = Object.freeze({
+  Palisade: 'stakes',
+  'Palisade or earthworks': 'timber or earth',
+  'Town walls': 'stone',
+  'City walls and gates': 'masonry',
+});
+
+/**
+ * The wall-class catalogue rows that FIX NO MATERIAL, named so the desk suite can hold the
+ * two lists total against the catalogue's `walls` bucket: every native wall row is in one
+ * list or the other, and a row added to the catalogue reds rather than silently reading as
+ * material-less.
+ * @type {ReadonlyArray<string>}
+ */
+export const DEFMATERIAL_UNFIXED_ROWS = Object.freeze([
+  'Citadel', 'Massive walls and fortifications', 'Gates (if walled)',
+]);
+
+/**
+ * The one literal fill table this desk owns, declared against its slot so the projection
+ * contract's guard (which treats every exported string map as a candidate fill table) checks
+ * its words against the annex shape rather than refusing an unclassified map. Declared HERE
+ * and not beside `SLOT_FILL_SHAPES` because a `const` cannot be named before its line runs.
+ * @type {Readonly<Record<string, Readonly<Record<string, string>>>>}
+ */
+export const SLOT_FILL_TABLES = Object.freeze({ defmaterial: DEFMATERIAL_OF });
+
+/**
+ * The `{defmaterial}` fill for a settlement: the material of its first STANDING wall-class
+ * row whose printed description fixes one, or `undefined` when no standing row does.
+ *
+ * ⚠ ROSTER ORDER DECIDES on a town with two fixed rows, which the shipped catalogue never
+ * produces (a city carries `City walls and gates` beside `Citadel`, a town `Town walls`
+ * beside `Gates (if walled)` — one fixed row each). `{defwork}` walks the same roster in
+ * the same order, so a face naming both slots names the same row on every shipped roster.
+ * @param {Readonly<Record<string, {names: ReadonlyArray<string>}>>} forces
+ * @returns {string|undefined}
+ */
+export function defmaterialFill(forces) {
+  for (const name of forces.walls.names) {
+    const material = DEFMATERIAL_OF[text(name)];
+    if (!material) continue;
+    const fill = bareCommonFill(material);
+    if (fill) return fill;
+  }
+  return undefined;
+}
+
+/**
  * DS-DEF-11's pool key.
  *
  * JUDGMENT (vetoable): among the three WALLED pools, STRAINED OUTRANKS THREATENED OUTRANKS
@@ -1081,9 +1222,13 @@ export function wallRationalePoolKey(walls, monsterThreat, militaryGate, tier) {
  */
 export function defenseWallRationaleProse(settlement, options = {}) {
   const forces = standingDefenseForces(settlement);
+  // Every DS-DEF-11 pool key either fixes a standing wall (`WALLED-*`) or reads the wall's
+  // absence (`UNWALLED-*`); on the second the fill is `undefined` and the slot inert, so
+  // ONE bag serves the block (ADDENDUM 18 ruling 10 — `{defmaterial}` beside `{defwork}`).
   const slots = {
     settlement: properFill(text(settlement?.name)),
     defwork: defworkFill(forces),
+    defmaterial: defmaterialFill(forces),
   };
   const poolKey = wallRationalePoolKey(
     forces.walls.present,

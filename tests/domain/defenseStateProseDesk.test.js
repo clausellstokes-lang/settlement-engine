@@ -23,6 +23,7 @@ import {
   terrainDefencePoolKey, activeDefenceStress, defenseMilitaryStatusProse,
   militaryOverridePoolKey, viabilityUnderStressPoolKey, DEF8_UNREACHABLE_POOLS,
   defenseWallRationaleProse, defworkFill, wallRationalePoolKey,
+  DEFMATERIAL_OF, DEFMATERIAL_UNFIXED_ROWS, WALLED_DEF2_POOLS, defmaterialFill,
   criminalCapturePoolKey, criminalStructurePoolKey, defenseCriminalProse,
   CRIMINAL_CAPTURE_STATES, RECOGNISED_CRIMINAL_STRUCTURES,
   TERRAIN_DEFENCE_NAMES, TERRAIN_PRIZE_NAMES,
@@ -33,8 +34,10 @@ import {
   namedMagicChainGood,
 } from '../../src/domain/display/stateProse/defenseStateProse.js';
 import {
-  DEFENSE_BUCKET_KEYS, standingDefenseForces,
+  DEFENSE_BUCKET_KEYS, DEFENSE_BUCKET_KEYWORDS, standingDefenseForces,
 } from '../../src/domain/institutions/defenseInstitutionBuckets.js';
+import { institutionalCatalog } from '../../src/data/institutionalCatalog.js';
+import { INSTITUTION_IDENTITY } from '../../src/domain/display/institutionVocabulary.js';
 import { generateDefenseProfile } from '../../src/generators/defenseGenerator.js';
 import { getInstFlags } from '../../src/generators/priorityHelpers.js';
 import { MONSTER_THREAT_TIERS, normalizeMonsterThreat } from '../../src/data/monsterThreat.js';
@@ -50,7 +53,7 @@ import { STRESS_TYPE_MAP } from '../../src/data/stressTypes.js';
 import { SMALL_TIERS, TIER_ORDER, TOWN_PLUS_TIERS } from '../../src/data/constants.js';
 import { DOSSIER_STATE_PROSE_DEFENSE } from '../../src/data/dossierStateProse/defense.generated.js';
 import { DOSSIER_MOUNTS, UNMOUNTED_BLOCKS, sentenceMountForBlock } from '../../src/domain/display/stateProse/dossierMounts.js';
-import { parseSlotShapes, mergeSlotShapes } from '../../scripts/lib/dossier-slot-shapes.mjs';
+import { parseSlotShapes, mergeSlotShapes, fillShapeViolation } from '../../scripts/lib/dossier-slot-shapes.mjs';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 /**
@@ -137,11 +140,13 @@ describe('the defense desk — the label vocabulary is the producer\'s', () => {
       .toBe('COMPOUND override (a crisis stress has rewritten the label)');
   });
 
-  it('the declared slot shapes equal the annex register, and the desk owns no fill table', () => {
+  it('the declared slot shapes equal the annex register, and the desk owns ONE fill table', () => {
     for (const [slot, shape] of Object.entries(SLOT_FILL_SHAPES)) {
       expect(SHAPES.shapeOf(slot), `slot {${slot}}`).toBe(shape);
     }
-    expect(SLOT_FILL_TABLES).toEqual({});
+    // `{defmaterial}`'s row-name → material word map (ADDENDUM 18 ruling 10) is the one
+    // literal table this desk owns, declared so the projection contract checks its words.
+    expect(SLOT_FILL_TABLES).toEqual({ defmaterial: DEFMATERIAL_OF });
     // Every DS-DEF-3 variant names {settlement} and nothing else.
     const slots = new Set(Object.values(DEF3_POOLS).flat().flatMap((v) => v.slots || []));
     expect([...slots]).toEqual(['settlement']);
@@ -1008,11 +1013,101 @@ describe('DS-DEF-11 — the wall rationale, and the slot that refuses a name', (
     expect(fill('Vaelthorn Bastion')).toBeUndefined();
     expect(fill('The Old Wall')).toBeUndefined();
     expect(defworkFill(standingDefenseForces({ institutions: [] }))).toBeUndefined();
-    // The declared shape is the annex register's, and the desk still owns no fill TABLE —
-    // the fill comes off the roster, so there is no literal map to drift.
+    // The declared shape is the annex register's. `{defwork}` itself owns no fill TABLE —
+    // the fill comes off the roster, so there is no literal map to drift; the desk's one
+    // table is `{defmaterial}`'s, pinned in the arm below.
     expect(SLOT_FILL_SHAPES.defwork).toBe('bare-common');
     expect(SHAPES.shapeOf('defwork')).toBe('bare-common');
-    expect(SLOT_FILL_TABLES).toEqual({});
+    expect(Object.keys(SLOT_FILL_TABLES)).toEqual(['defmaterial']);
+  });
+
+  it('⭐ `{defmaterial}` is the STAKES OR THE STONE the row\'s own printed description fixes, and nothing else (ADDENDUM 18 ruling 10)', () => {
+    // F1-32: the material is fixed by the catalogue row's printed description in
+    // `institutionVocabulary.js` and by nothing else. `Citadel` and `Massive walls and
+    // fortifications` name none, so a town walled by those alone is offered no fill and the
+    // kernel drops the variants that name the slot — the `{defwork}` degradation, one slot over.
+    const fill = (...names) => defmaterialFill(standingDefenseForces({
+      institutions: names.map((name) => ({ name })),
+    }));
+    expect(fill('Town walls')).toBe('stone');
+    expect(fill('Palisade')).toBe('stakes');
+    expect(fill('City walls and gates')).toBe('masonry');
+    expect(fill('Palisade or earthworks')).toBe('timber or earth');
+    expect(fill('Citadel')).toBeUndefined();
+    expect(fill('Massive walls and fortifications')).toBeUndefined();
+    expect(fill('Gates (if walled)')).toBeUndefined();
+    expect(fill('Vaelthorn Bastion')).toBeUndefined();
+    expect(fill()).toBeUndefined();
+    // The shipped two-row rosters: the fixed row speaks, the unfixed one beside it is silent.
+    expect(fill('City walls and gates', 'Citadel')).toBe('masonry');
+    expect(fill('Town walls', 'Gates (if walled)')).toBe('stone');
+    // A ruined wall is not standing and fixes nothing.
+    expect(defmaterialFill(standingDefenseForces({
+      institutions: [{ name: 'Town walls', status: 'ruined', _worldPulseInactive: true }],
+    }))).toBeUndefined();
+
+    // THE TABLE IS HELD AGAINST ITS SOURCE. Every word is quoted from the row's own
+    // description, so a re-worded row reds here rather than leaving a stale material.
+    const evidence = {
+      Palisade: /sharpened stakes/i,
+      'Palisade or earthworks': /wooden palisade or earthen bank/i,
+      'Town walls': /^Stone walls/,
+      'City walls and gates': /^Masonry walls/,
+    };
+    for (const [row, word] of Object.entries(DEFMATERIAL_OF)) {
+      expect(INSTITUTION_IDENTITY[row], `${row} is a catalogue row with a printed description`).toMatch(evidence[row]);
+      expect(fillShapeViolation('bare-common', word), `"${word}" is bare-common`).toBe('');
+    }
+    for (const row of DEFMATERIAL_UNFIXED_ROWS) {
+      expect(INSTITUTION_IDENTITY[row], `${row} has a description`).toBeTruthy();
+      expect(INSTITUTION_IDENTITY[row]).not.toMatch(/\b(stone|masonry|stakes|timber|wooden|earthen)\b/i);
+    }
+
+    // TOTAL AGAINST THE CATALOGUE. Every native row the `walls` bucket catches is in one
+    // list or the other, so a wall row added to the catalogue reds instead of silently
+    // reading as material-less.
+    const wallRows = new Set();
+    for (const tierCatalog of Object.values(institutionalCatalog)) {
+      for (const category of Object.values(tierCatalog)) {
+        for (const name of Object.keys(category)) {
+          if (DEFENSE_BUCKET_KEYWORDS.walls.some((kw) => name.toLowerCase().includes(kw))) wallRows.add(name);
+        }
+      }
+    }
+    expect([...wallRows].sort()).toEqual([...Object.keys(DEFMATERIAL_OF), ...DEFMATERIAL_UNFIXED_ROWS].sort());
+    expect(SLOT_FILL_SHAPES.defmaterial).toBe('bare-common');
+    expect(SHAPES.shapeOf('defmaterial')).toBe('bare-common');
+  });
+
+  it('⭐ `{defmaterial}` is offered to the SEVEN DS-DEF-2 pools a wall fixes, and to no pool an unwalled town can draw', () => {
+    // Derived from the key functions, pinned by name so a move is seen.
+    expect(WALLED_DEF2_POOLS).toEqual([
+      'Beasts & Monsters: frontier, credible deterrence',
+      'Beasts & Monsters: plagued, perimeter AND organized force',
+      'Beasts & Monsters: plagued, perimeter but NO force to hold it',
+      'Beasts & Monsters: settled, defenses beyond the need',
+      'Invasion & War: walls AND professional garrison',
+      'Invasion & War: walls with NO force',
+      'Invasion & War: walls with citizen militia',
+    ]);
+    // Every key the readers reach with the perimeter flag FALSE is outside the set.
+    for (const family of MONSTER_THREAT_TIERS) {
+      for (const force of [true, false]) {
+        const key = beastsRowPoolKey(family, false, force);
+        if (key) expect(WALLED_DEF2_POOLS, key).not.toContain(key);
+      }
+    }
+    for (const garrison of [true, false]) {
+      for (const militia of [true, false]) {
+        expect(WALLED_DEF2_POOLS).not.toContain(invasionRowPoolKey(false, garrison, militia));
+        expect(WALLED_DEF2_POOLS).toContain(invasionRowPoolKey(true, garrison, militia));
+      }
+    }
+    // The three rows that never read the wall contribute nothing.
+    for (const key of WALLED_DEF2_POOLS) expect(key).toMatch(/^(Beasts & Monsters|Invasion & War): /);
+    // And every one of the seven is a pool the corpus actually carries.
+    const pools = Object.keys(DOSSIER_STATE_PROSE_DEFENSE['DS-DEF-2'].pools);
+    for (const key of WALLED_DEF2_POOLS) expect(pools).toContain(key);
   });
 
   it('⛔ A RUINED WALL IS DESCRIBED AS AN ABSENCE, not asked why the town keeps it', () => {

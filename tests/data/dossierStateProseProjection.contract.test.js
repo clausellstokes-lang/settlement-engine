@@ -497,6 +497,48 @@ describe('the slot SHAPE contract — a fill obeys the grammar its seam assumes'
     expect(defects).toEqual([]);
   });
 
+  it('⭐ `{defmaterial}` (ADDENDUM 18 ruling 10) is registered bare-common, mirrored by the desk, and renders through every seam its sibling `{defwork}` occupies', async () => {
+    // THE SLOT LANDS BEFORE ANY FACE USES IT, so `USED_SLOTS` cannot exercise it and the arm
+    // above never renders it. This arm stands in until a face does: the register row, the
+    // desk's mirror, the declared palette of the two blocks that offer it, and a render of
+    // the desk's OWN four words through every `{defwork}` seam — the seams a material word
+    // will actually meet — plus the fixture render the arm above would run.
+    expect(SHAPES.shapeOf('defmaterial')).toBe('bare-common');
+    const desks = await loadDeskModules();
+    const defense = desks.find((d) => d.file === 'defenseStateProse.js');
+    expect(defense?.mirror.defmaterial).toBe('bare-common');
+    expect(Object.keys(defense?.declared.defmaterial || {}).sort()).toEqual(
+      ['City walls and gates', 'Palisade', 'Palisade or earthworks', 'Town walls'],
+    );
+    for (const id of ['DS-DEF-2', 'DS-DEF-11']) {
+      const block = allBlocks.find(([blockId]) => blockId === id)?.[1];
+      expect(block?.slots, `${id} declares the slot on its SLOTS line`).toContain('defmaterial');
+    }
+    const defects = [];
+    let renders = 0;
+    const words = ['x', ...Object.values(defense?.declared.defmaterial || {})];
+    for (const [id, block] of allBlocks) {
+      for (const [key, pool] of Object.entries(block.pools)) {
+        for (const variant of pool) {
+          if (!variant.slots.includes('defwork')) continue;
+          // The same sentence with `{defmaterial}` standing where `{defwork}` stood.
+          const twin = { ...variant, text: variant.text.replace(/\{defwork\}/g, '{defmaterial}') };
+          for (const word of words) {
+            renders += 1;
+            defects.push(...fillDefects(`${id} :: ${key} (defmaterial for defwork)`, twin,
+              (s) => (s === 'defmaterial'
+                ? (word === 'x' ? conformantFill(SHAPES.shapeOf(s), s) : word)
+                : conformantFill(SHAPES.shapeOf(s), s))));
+          }
+        }
+      }
+    }
+    expect(defects).toEqual([]);
+    // Non-vacuity: DS-DEF-11's three walled pools name `{defwork}` on SEVEN variants at this
+    // tip (measured: 2 + 3 + 2), each rendered with the fixture and the four table words.
+    expect(renders).toBeGreaterThanOrEqual(7 * words.length);
+  });
+
   it('convicts a determiner-bearing fixture — the detectors are not vacuous', () => {
     // THE POSITIVE CONTROL. The arm above asserts an empty list, and an empty list is what
     // a detector that stopped matching also produces. This is the same corpus rendered

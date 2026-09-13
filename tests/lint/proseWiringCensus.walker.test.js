@@ -841,7 +841,12 @@ describe('the source readers themselves', () => {
     // two counts are asserted EQUAL, so the next same-named pair cannot go quiet.
     expect(census.consulted, 'and the ladder actually walks every one of them').toBe(census.functions);
     expect(census.consulted, 'as an integer, not only as an equality').toBe(118);
-    expect(census.tables, 'module-level key tables (object shape and pair-array shape)').toBe(38);
+    // 39, NOT 38, since ADDENDUM 18 ruling 10: the table reader takes every UPPER_CASE
+    // string map, and `defenseStateProse.js`'s `DEFMATERIAL_OF` (catalogue row → material
+    // word, the `{defmaterial}` FILL table) is one. It is a fill table and not a key table —
+    // no pool key is "stone" — so the ladder never consults it; it is counted here because
+    // the reader cannot tell the two shapes apart, which is recorded rather than hidden.
+    expect(census.tables, 'module-level key tables (object shape and pair-array shape)').toBe(39);
   });
 
   test('a reader that went dark would report zero, so both readers are pinned against a fixture', () => {
