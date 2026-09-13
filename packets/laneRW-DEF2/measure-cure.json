@@ -1,7 +1,7 @@
 {
  "arm": "cure",
  "round": 1,
- "at": "2026-09-13T07:52:18",
+ "at": "2026-09-13T07:59:04",
  "roster": {
   "pools": 126,
   "why": "--section defense over 11 block(s) of its own leaf"
@@ -20056,17 +20056,9 @@
      {
       "channel": "WITHHELD",
       "id": "DS-DEF-2 :: Invasion & War: walls with NO force",
-      "arm": "A3",
-      "subject": "the band half is the refuter's",
-      "value": "and not out of that purse.",
-      "description": "no sibling KEY names this alternative; whether a sibling BAND supplies it is the refuter's (siblings: Beasts & Monsters: plagued, perimeter AND organized force | Beasts & Monsters: plagued, perimeter but NO force to hold it | Beasts & Monsters: plagued, NO perimeter and NO force | Beasts & Monsters: frontier, credible deterrence)"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-2 :: Invasion & War: walls with NO force",
       "klass": "Q",
       "arm": "a second sentence naming no second field",
-      "clause": "A factor for them holds that the walls are kept up by the households and not out of that purse.",
+      "clause": "A factor for them holds that the keeping is in dispute wherever the guilds are asked, and that the purse has bought a wall and no soldiers to hold it.",
       "column": "(second typed field)",
       "value": "reads [invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)]; none claimed",
       "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
@@ -20076,7 +20068,7 @@
       "id": "DS-DEF-2 :: Invasion & War: walls with NO force",
       "klass": "C3",
       "arm": "is this clause historical?",
-      "clause": "A stranger reports the walls up and kept, and no force under arms behind them. The people he saw at work on them were the town's own households.",
+      "clause": "A stranger reports the walls up and kept, and no soldiers of the town's own behind them. The people he saw at work on them were the town's own households.",
       "column": "provenance",
       "value": "semantic",
       "description": "a past-tense or formerly-construction: whether it asserts history is A6, the refuter's"
@@ -20106,7 +20098,7 @@
       "id": "DS-DEF-2 :: Invasion & War: walls with NO force",
       "klass": "Q",
       "arm": "a second sentence naming no second field",
-      "clause": "By their own account there is no wage in the work, and no force under arms behind the walls.",
+      "clause": "By their own account there is no wage in the work, and the town keeps no soldiers to stand behind the walls.",
       "column": "(second typed field)",
       "value": "reads [invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)]; none claimed",
       "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
@@ -20132,7 +20124,7 @@
       "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
      }
     ],
-    "findingCount": 12
+    "findingCount": 11
    },
    "lengths": {
     "form": "sentence",
@@ -20144,13 +20136,13 @@
        19,
        22,
        23,
-       27
+       37
       ]
      },
      {
       "vid": 2,
       "faces": [
-       28,
+       30,
        15,
        25,
        16
@@ -20159,7 +20151,7 @@
      {
       "vid": 3,
       "faces": [
-       29,
+       32,
        22,
        29,
        26
@@ -20175,9 +20167,9 @@
      "notExecutable": 0,
      "spread": {
       "pairs": 6,
-      "minOverlapBp": 625,
-      "maxOverlapBp": 2143,
-      "medianOverlapBp": 1291,
+      "minOverlapBp": 0,
+      "maxOverlapBp": 2222,
+      "medianOverlapBp": 625,
       "sameOpenerPairs": 0,
       "sameSegmentPairs": 6,
       "nearest": {
@@ -20185,7 +20177,7 @@
        "b": 3,
        "sameOpener": false,
        "sameSegments": true,
-       "overlapBp": 2143
+       "overlapBp": 2222
       },
       "why": ""
      }
@@ -20198,7 +20190,7 @@
      "spread": {
       "pairs": 6,
       "minOverlapBp": 0,
-      "maxOverlapBp": 952,
+      "maxOverlapBp": 1053,
       "medianOverlapBp": 0,
       "sameOpenerPairs": 0,
       "sameSegmentPairs": 3,
@@ -20207,7 +20199,7 @@
        "b": 2,
        "sameOpener": false,
        "sameSegments": false,
-       "overlapBp": 952
+       "overlapBp": 1053
       },
       "why": ""
      }
@@ -20272,10 +20264,10 @@
        "exceededShare": 0.769,
        "deepest": {
         "metric": "closers.pronounRate",
-        "depth": 2.778,
+        "depth": 3.353,
         "side": "over"
        },
-       "meanDistanceFromMedian": 0.68,
+       "meanDistanceFromMedian": 0.697,
        "budgetOk": false,
        "depthOk": false,
        "perfectionSuspect": false,
@@ -20319,10 +20311,10 @@
        "exceededShare": 0.769,
        "deepest": {
         "metric": "closers.pronounRate",
-        "depth": 2.778,
+        "depth": 3.353,
         "side": "over"
        },
-       "meanDistanceFromMedian": 0.68,
+       "meanDistanceFromMedian": 0.697,
        "budgetOk": false,
        "depthOk": false,
        "perfectionSuspect": false,
@@ -20366,10 +20358,10 @@
        "exceededShare": 0.769,
        "deepest": {
         "metric": "closers.pronounRate",
-        "depth": 2.778,
+        "depth": 3.353,
         "side": "over"
        },
-       "meanDistanceFromMedian": 0.68,
+       "meanDistanceFromMedian": 0.697,
        "budgetOk": false,
        "depthOk": false,
        "perfectionSuspect": false,
@@ -20413,10 +20405,10 @@
        "exceededShare": 0.769,
        "deepest": {
         "metric": "closers.pronounRate",
-        "depth": 2.778,
+        "depth": 3.353,
         "side": "over"
        },
-       "meanDistanceFromMedian": 0.68,
+       "meanDistanceFromMedian": 0.697,
        "budgetOk": false,
        "depthOk": false,
        "perfectionSuspect": false,
@@ -20460,10 +20452,10 @@
        "exceededShare": 0.769,
        "deepest": {
         "metric": "closers.pronounRate",
-        "depth": 2.778,
+        "depth": 3.353,
         "side": "over"
        },
-       "meanDistanceFromMedian": 0.68,
+       "meanDistanceFromMedian": 0.697,
        "budgetOk": false,
        "depthOk": false,
        "perfectionSuspect": false,
@@ -20507,10 +20499,10 @@
        "exceededShare": 0.769,
        "deepest": {
         "metric": "closers.pronounRate",
-        "depth": 2.778,
+        "depth": 3.353,
         "side": "over"
        },
-       "meanDistanceFromMedian": 0.68,
+       "meanDistanceFromMedian": 0.697,
        "budgetOk": false,
        "depthOk": false,
        "perfectionSuspect": false,
@@ -20554,10 +20546,10 @@
        "exceededShare": 0.769,
        "deepest": {
         "metric": "closers.pronounRate",
-        "depth": 2.778,
+        "depth": 3.353,
         "side": "over"
        },
-       "meanDistanceFromMedian": 0.68,
+       "meanDistanceFromMedian": 0.697,
        "budgetOk": false,
        "depthOk": false,
        "perfectionSuspect": false,
@@ -20601,10 +20593,10 @@
        "exceededShare": 0.769,
        "deepest": {
         "metric": "closers.pronounRate",
-        "depth": 2.778,
+        "depth": 3.353,
         "side": "over"
        },
-       "meanDistanceFromMedian": 0.68,
+       "meanDistanceFromMedian": 0.697,
        "budgetOk": false,
        "depthOk": false,
        "perfectionSuspect": false,
@@ -20648,10 +20640,10 @@
        "exceededShare": 0.769,
        "deepest": {
         "metric": "closers.pronounRate",
-        "depth": 2.778,
+        "depth": 3.353,
         "side": "over"
        },
-       "meanDistanceFromMedian": 0.68,
+       "meanDistanceFromMedian": 0.697,
        "budgetOk": false,
        "depthOk": false,
        "perfectionSuspect": false,
@@ -20695,10 +20687,10 @@
        "exceededShare": 0.769,
        "deepest": {
         "metric": "closers.pronounRate",
-        "depth": 2.778,
+        "depth": 3.353,
         "side": "over"
        },
-       "meanDistanceFromMedian": 0.68,
+       "meanDistanceFromMedian": 0.697,
        "budgetOk": false,
        "depthOk": false,
        "perfectionSuspect": false,
@@ -20742,10 +20734,10 @@
        "exceededShare": 0.769,
        "deepest": {
         "metric": "closers.pronounRate",
-        "depth": 2.778,
+        "depth": 3.353,
         "side": "over"
        },
-       "meanDistanceFromMedian": 0.68,
+       "meanDistanceFromMedian": 0.697,
        "budgetOk": false,
        "depthOk": false,
        "perfectionSuspect": false,
@@ -20789,10 +20781,10 @@
        "exceededShare": 0.769,
        "deepest": {
         "metric": "closers.pronounRate",
-        "depth": 2.778,
+        "depth": 3.353,
         "side": "over"
        },
-       "meanDistanceFromMedian": 0.68,
+       "meanDistanceFromMedian": 0.697,
        "budgetOk": false,
        "depthOk": false,
        "perfectionSuspect": false,
@@ -20813,16 +20805,16 @@
     "exceededShare": 0.769,
     "deepest": {
      "metric": "closers.pronounRate",
-     "depth": 2.778,
+     "depth": 3.353,
      "side": "over"
     },
-    "meanDistanceFromMedian": 0.68,
+    "meanDistanceFromMedian": 0.697,
     "budgetOk": false,
     "depthOk": false,
     "perfectionSuspect": false,
     "grain": "corpus"
    },
-   "corpusWords": 281,
+   "corpusWords": 296,
    "owned": {
     "verdicts": {
      "FAIL": 0,
@@ -20875,22 +20867,12 @@
      "count": 1
     },
     {
-     "label": "A3 · the band half is the refuter's",
-     "arm": "A3",
-     "klass": "",
-     "channel": "WITHHELD",
-     "spineKey": "Invasion & War: walls with NO force",
-     "clause": "and not out of that purse.",
-     "description": "no sibling KEY names this alternative; whether a sibling BAND supplies it is the refuter's (siblings: Beasts & Monsters: plagued, perimeter AND organized force | Beasts & Monsters: plagued, perimeter but NO force to hold it | Beasts & Monsters: plagued, NO perimeter and NO force | Beasts & Monsters: frontier, credible deterrence)",
-     "count": 1
-    },
-    {
      "label": "Q · a second sentence naming no second field",
      "arm": "a second sentence naming no second field",
      "klass": "Q",
      "channel": "WITHHELD",
      "spineKey": "Invasion & War: walls with NO force",
-     "clause": "A factor for them holds that the walls are kept up by the households and not out of that purse.",
+     "clause": "A factor for them holds that the keeping is in dispute wherever the guilds are asked, and that the purse has bought a wall and no soldiers to hold it.",
      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call",
      "count": 1
     },
@@ -20900,7 +20882,7 @@
      "klass": "C3",
      "channel": "WITHHELD",
      "spineKey": "Invasion & War: walls with NO force",
-     "clause": "A stranger reports the walls up and kept, and no force under arms behind them. The people he saw at work on them were the town's own households.",
+     "clause": "A stranger reports the walls up and kept, and no soldiers of the town's own behind them. The people he saw at work on them were the town's own households.",
      "description": "a past-tense or formerly-construction: whether it asserts history is A6, the refuter's",
      "count": 1
     },
@@ -20930,7 +20912,7 @@
      "klass": "Q",
      "channel": "WITHHELD",
      "spineKey": "Invasion & War: walls with NO force",
-     "clause": "By their own account there is no wage in the work, and no force under arms behind the walls.",
+     "clause": "By their own account there is no wage in the work, and the town keeps no soldiers to stand behind the walls.",
      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call",
      "count": 1
     },
@@ -20955,7 +20937,7 @@
      "count": 1
     }
    ],
-   "inheritedCount": 12,
+   "inheritedCount": 11,
    "spineWithheld": true,
    "qVocabulary": [
     {
@@ -20995,7 +20977,7 @@
      "synonymTable": "a word-level synonym table ships and was applied"
     },
     {
-     "clause": "A factor for them holds that the walls are kept up by the households and not out of that purse.",
+     "clause": "A factor for them holds that the keeping is in dispute wherever the guilds are asked, and that the purse has bought a wall and no soldiers to hold it.",
      "spineKey": "Invasion & War: walls with NO force",
      "count": 1,
      "reads": [
@@ -21019,7 +21001,7 @@
      "synonymTable": "a word-level synonym table ships and was applied"
     },
     {
-     "clause": "By their own account there is no wage in the work, and no force under arms behind the walls.",
+     "clause": "By their own account there is no wage in the work, and the town keeps no soldiers to stand behind the walls.",
      "spineKey": "Invasion & War: walls with NO force",
      "count": 1,
      "reads": [
@@ -45841,8 +45823,8 @@
   "totalUnits": 392,
   "n": 392,
   "exhaustive": true,
-  "msPerUnit": 0.185,
-  "exhaustiveMs": 73,
+  "msPerUnit": 0.17,
+  "exhaustiveMs": 67,
   "confidence": "the whole population is walked, so every arm rate is exact and no interval applies",
   "sampleSha": "36ec79104a5658a32526211b2d58860ce4016f8640b13706080f16267c34c25b",
   "verdicts": {

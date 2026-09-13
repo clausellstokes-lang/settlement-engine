@@ -1,15 +1,18 @@
-# LANE-STATUS — written 2026-09-13 03:53:50 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-13 03:59:07 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
-product claude/composite-r4 = f73bdbf16 · ledger = 0167b831e Plan: rulings 20–23 recorded (plain language, not casual; the archiver weighs in on a pa
+product claude/composite-r4 = f73bdbf16 · ledger = 7b91cc148 Plan: rulings 24–26 recorded (the seats — Opus + Fable draft, Fable selects, Opus refu
 
 ## BUILD / KIT LANES (dock · base · cars · porcelain · receipt)
 - REWRITE 8b DS-DEF-11 (the validation block; cure round): dock laneRW-DEF11 ABSENT
 - REWRITE 8b-W (the wiring car, landed in its dock = the consist lineage): dock laneRW-DEFW ABSENT
-- **DS-DEF-2 (waits for the tables)** dock `laneRW-DEF2` HEAD 7761350e1 · 19 cars over f2da5a3ee · porcelain 0 · last commits:
+- **DS-DEF-2 (waits for the tables)** dock `laneRW-DEF2` HEAD 7761350e1 · 19 cars over f2da5a3ee · porcelain 2 · last commits:
     7761350e1 REWRITE 8b-W-18k: the card prints what a face may not DENY of a required row, and where it may not say a body STANDS — the first pool's shared writer error cured at the instrument (ADDENDUM 18 ruling 4); zero product bytes
     a8fd854ff REWRITE 8b-W-18i: the archiver may weigh a pair, and a pair may be one compound sentence (ADDENDUM 18 rulings 22 and 23, the owner's) — the weighing row never draws alone, the joint is drawn seeded from the kind's own closed list, and zero text moved today
     d02764539 REWRITE 8b-W-18j: the face pin is a CEILING THAT BINDS — one face per seated source always fits, because the pin is derived from the source vocabulary and no longer a literal four (ADDENDUM 18 ruling 21, reconciliation 2); zero text moved
     569e01793 REWRITE 8b DS-DEF-2 cure (v3): 1/1 pools
+    porcelain (uncommitted work in the dock — commit it FIRST after re-proving):
+       M docs/content/RECEIPT_POOLS_DOSSIER_STATE.md
+       M src/data/dossierStateProse/defense.generated.js
     receipt `receipt-rewrite.md` (mtime 09-12 20:49) head:
       | # RECEIPT — the REWRITE train
       | 
@@ -75,7 +78,7 @@ stat: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-
 - DS-DEF-2: pools 26 · skeleton 26 · draft 39 · refine 0 · kept 0 · refute 1 · cure 0 · cured 0 · JUDGMENT no · JUDGMENT-cure no
 - DS-DEF-2.licence-test-attempt: pools 26 · skeleton 26 · draft 36 · refine 26 · kept 26 · refute 32 · cure 24 · cured 0 · JUDGMENT yes · JUDGMENT-cure no
 - entailment: surveys 6 · refutes 6 · ENTAILMENT-TABLE.draft.md 09-12 20:49 346945 B · referent surveys 6 · referent refutes 6 · REFERENT-TABLE.draft.md 09-12 20:49 285943 B
-- HOLD-VITEST absent · runner count 4
+- HOLD-VITEST absent · runner count 0
 
 ## RESEARCH SWEEPS (state = claims/verdicts/kept; verdict files; section/critic mtimes) — round tags in sweep/LAST-RUNS.json
 Traceback (most recent call last):
@@ -105,4 +108,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `ab8783d22` WRITER Invasion & War: walls with NO force · DONE · transcript 09-13 02:30 725 KB · 17 tool calls · files: candidates-2.md, facetext.txt, ft2.txt · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasio
 
 ## PROCESSES: 
-load: 3.35 2.94 2.55
+load: 4.16 4.33 3.30
