@@ -1,7 +1,7 @@
 {
  "arm": "cure",
  "round": 1,
- "at": "2026-09-13T08:27:40",
+ "at": "2026-09-13T08:47:30",
  "roster": {
   "pools": 126,
   "why": "--section defense over 11 block(s) of its own leaf"
@@ -20011,8 +20011,8 @@
    "walk": {
     "verdicts": {
      "FAIL": 0,
-     "WITHHELD": 9,
-     "PASS": 3
+     "WITHHELD": 8,
+     "PASS": 4
     },
     "findings": [
      {
@@ -20024,14 +20024,6 @@
       "column": "(second typed field)",
       "value": "reads [invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)]; none claimed",
       "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-2 :: Invasion & War: walls with NO force",
-      "arm": "A13",
-      "subject": "a holder with no institution",
-      "value": "Invasion & War: walls with NO force: muster",
-      "description": "the holder kind resolves to no institution in this town's roster, so the cited record has nobody keeping it"
      },
      {
       "channel": "WITHHELD",
@@ -20049,16 +20041,6 @@
       "klass": "Q",
       "arm": "a second sentence naming no second field",
       "clause": "At the hall it is not a thing in dispute.",
-      "column": "(second typed field)",
-      "value": "reads [invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)]; none claimed",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-2 :: Invasion & War: walls with NO force",
-      "klass": "Q",
-      "arm": "a second sentence naming no second field",
-      "clause": "A factor for them holds that the keeping is in dispute wherever the guilds are asked, and that the purse has bought a wall and no soldiers to hold it.",
       "column": "(second typed field)",
       "value": "reads [invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)]; none claimed",
       "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
@@ -20088,7 +20070,7 @@
       "id": "DS-DEF-2 :: Invasion & War: walls with NO force",
       "klass": "C3",
       "arm": "is this clause historical?",
-      "clause": "At the tavern they name who would turn out if the walls were ever wanted, and nobody at the table is surprised by the names.",
+      "clause": "{tavern} {v:name} who would turn out if the walls were ever wanted, and nobody at the table is surprised by the names.",
       "column": "provenance",
       "value": "semantic",
       "description": "a past-tense or formerly-construction: whether it asserts history is A6, the refuter's"
@@ -20108,7 +20090,7 @@
       "id": "DS-DEF-2 :: Invasion & War: walls with NO force",
       "klass": "Q",
       "arm": "a second sentence naming no second field",
-      "clause": "The survey finds them on the walls after dark all the same.",
+      "clause": "The survey finds the watch on the walls after dark all the same.",
       "column": "(second typed field)",
       "value": "reads [invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)]; none claimed",
       "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
@@ -20118,13 +20100,13 @@
       "id": "DS-DEF-2 :: Invasion & War: walls with NO force",
       "klass": "Q",
       "arm": "a second sentence naming no second field",
-      "clause": "None of them are about who would hold them.",
+      "clause": "Nothing that comes there is about who would hold them.",
       "column": "(second typed field)",
       "value": "reads [invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)]; none claimed",
       "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
      }
     ],
-    "findingCount": 11
+    "findingCount": 9
    },
    "lengths": {
     "form": "sentence",
@@ -20135,26 +20117,26 @@
       "faces": [
        19,
        22,
-       23,
-       37
+       19,
+       33
       ]
      },
      {
       "vid": 2,
       "faces": [
        30,
-       15,
-       25,
-       16
+       14,
+       22,
+       12
       ]
      },
      {
       "vid": 3,
       "faces": [
        32,
-       22,
+       19,
        29,
-       26
+       28
       ]
      }
     ]
@@ -20168,16 +20150,16 @@
      "spread": {
       "pairs": 6,
       "minOverlapBp": 0,
-      "maxOverlapBp": 2222,
-      "medianOverlapBp": 625,
+      "maxOverlapBp": 2857,
+      "medianOverlapBp": 718,
       "sameOpenerPairs": 0,
-      "sameSegmentPairs": 6,
+      "sameSegmentPairs": 3,
       "nearest": {
        "a": 2,
        "b": 3,
        "sameOpener": false,
-       "sameSegments": true,
-       "overlapBp": 2222
+       "sameSegments": false,
+       "overlapBp": 2857
       },
       "why": ""
      }
@@ -20190,7 +20172,7 @@
      "spread": {
       "pairs": 6,
       "minOverlapBp": 0,
-      "maxOverlapBp": 1053,
+      "maxOverlapBp": 1111,
       "medianOverlapBp": 0,
       "sameOpenerPairs": 0,
       "sameSegmentPairs": 3,
@@ -20199,7 +20181,7 @@
        "b": 2,
        "sameOpener": false,
        "sameSegments": false,
-       "overlapBp": 1053
+       "overlapBp": 1111
       },
       "why": ""
      }
@@ -20211,9 +20193,9 @@
      "notExecutable": 0,
      "spread": {
       "pairs": 6,
-      "minOverlapBp": 476,
+      "minOverlapBp": 500,
       "maxOverlapBp": 1176,
-      "medianOverlapBp": 516,
+      "medianOverlapBp": 557,
       "sameOpenerPairs": 0,
       "sameSegmentPairs": 3,
       "nearest": {
@@ -20258,16 +20240,16 @@
       },
       "corpus": {
        "executable": true,
-       "sentences": 20,
+       "sentences": 10,
        "scored": 13,
-       "exceeded": 10,
-       "exceededShare": 0.769,
+       "exceeded": 12,
+       "exceededShare": 0.923,
        "deepest": {
         "metric": "closers.pronounRate",
-        "depth": 3.353,
+        "depth": 5.652,
         "side": "over"
        },
-       "meanDistanceFromMedian": 0.697,
+       "meanDistanceFromMedian": 0.98,
        "budgetOk": false,
        "depthOk": false,
        "perfectionSuspect": false,
@@ -20305,16 +20287,16 @@
       },
       "corpus": {
        "executable": true,
-       "sentences": 20,
+       "sentences": 10,
        "scored": 13,
-       "exceeded": 10,
-       "exceededShare": 0.769,
+       "exceeded": 12,
+       "exceededShare": 0.923,
        "deepest": {
         "metric": "closers.pronounRate",
-        "depth": 3.353,
+        "depth": 5.652,
         "side": "over"
        },
-       "meanDistanceFromMedian": 0.697,
+       "meanDistanceFromMedian": 0.98,
        "budgetOk": false,
        "depthOk": false,
        "perfectionSuspect": false,
@@ -20352,16 +20334,16 @@
       },
       "corpus": {
        "executable": true,
-       "sentences": 20,
+       "sentences": 10,
        "scored": 13,
-       "exceeded": 10,
-       "exceededShare": 0.769,
+       "exceeded": 12,
+       "exceededShare": 0.923,
        "deepest": {
         "metric": "closers.pronounRate",
-        "depth": 3.353,
+        "depth": 5.652,
         "side": "over"
        },
-       "meanDistanceFromMedian": 0.697,
+       "meanDistanceFromMedian": 0.98,
        "budgetOk": false,
        "depthOk": false,
        "perfectionSuspect": false,
@@ -20373,7 +20355,7 @@
      "vid": 1,
      "face": 3,
      "executable": true,
-     "sentences": 2,
+     "sentences": 1,
      "scored": 8,
      "exceeded": 0,
      "exceededShare": 0,
@@ -20386,7 +20368,7 @@
      "grains": {
       "face": {
        "executable": true,
-       "sentences": 2,
+       "sentences": 1,
        "scored": 8,
        "exceeded": 0,
        "exceededShare": 0,
@@ -20399,16 +20381,16 @@
       },
       "corpus": {
        "executable": true,
-       "sentences": 20,
+       "sentences": 10,
        "scored": 13,
-       "exceeded": 10,
-       "exceededShare": 0.769,
+       "exceeded": 12,
+       "exceededShare": 0.923,
        "deepest": {
         "metric": "closers.pronounRate",
-        "depth": 3.353,
+        "depth": 5.652,
         "side": "over"
        },
-       "meanDistanceFromMedian": 0.697,
+       "meanDistanceFromMedian": 0.98,
        "budgetOk": false,
        "depthOk": false,
        "perfectionSuspect": false,
@@ -20446,16 +20428,16 @@
       },
       "corpus": {
        "executable": true,
-       "sentences": 20,
+       "sentences": 10,
        "scored": 13,
-       "exceeded": 10,
-       "exceededShare": 0.769,
+       "exceeded": 12,
+       "exceededShare": 0.923,
        "deepest": {
         "metric": "closers.pronounRate",
-        "depth": 3.353,
+        "depth": 5.652,
         "side": "over"
        },
-       "meanDistanceFromMedian": 0.697,
+       "meanDistanceFromMedian": 0.98,
        "budgetOk": false,
        "depthOk": false,
        "perfectionSuspect": false,
@@ -20493,16 +20475,16 @@
       },
       "corpus": {
        "executable": true,
-       "sentences": 20,
+       "sentences": 10,
        "scored": 13,
-       "exceeded": 10,
-       "exceededShare": 0.769,
+       "exceeded": 12,
+       "exceededShare": 0.923,
        "deepest": {
         "metric": "closers.pronounRate",
-        "depth": 3.353,
+        "depth": 5.652,
         "side": "over"
        },
-       "meanDistanceFromMedian": 0.697,
+       "meanDistanceFromMedian": 0.98,
        "budgetOk": false,
        "depthOk": false,
        "perfectionSuspect": false,
@@ -20540,16 +20522,16 @@
       },
       "corpus": {
        "executable": true,
-       "sentences": 20,
+       "sentences": 10,
        "scored": 13,
-       "exceeded": 10,
-       "exceededShare": 0.769,
+       "exceeded": 12,
+       "exceededShare": 0.923,
        "deepest": {
         "metric": "closers.pronounRate",
-        "depth": 3.353,
+        "depth": 5.652,
         "side": "over"
        },
-       "meanDistanceFromMedian": 0.697,
+       "meanDistanceFromMedian": 0.98,
        "budgetOk": false,
        "depthOk": false,
        "perfectionSuspect": false,
@@ -20587,16 +20569,16 @@
       },
       "corpus": {
        "executable": true,
-       "sentences": 20,
+       "sentences": 10,
        "scored": 13,
-       "exceeded": 10,
-       "exceededShare": 0.769,
+       "exceeded": 12,
+       "exceededShare": 0.923,
        "deepest": {
         "metric": "closers.pronounRate",
-        "depth": 3.353,
+        "depth": 5.652,
         "side": "over"
        },
-       "meanDistanceFromMedian": 0.697,
+       "meanDistanceFromMedian": 0.98,
        "budgetOk": false,
        "depthOk": false,
        "perfectionSuspect": false,
@@ -20634,16 +20616,16 @@
       },
       "corpus": {
        "executable": true,
-       "sentences": 20,
+       "sentences": 10,
        "scored": 13,
-       "exceeded": 10,
-       "exceededShare": 0.769,
+       "exceeded": 12,
+       "exceededShare": 0.923,
        "deepest": {
         "metric": "closers.pronounRate",
-        "depth": 3.353,
+        "depth": 5.652,
         "side": "over"
        },
-       "meanDistanceFromMedian": 0.697,
+       "meanDistanceFromMedian": 0.98,
        "budgetOk": false,
        "depthOk": false,
        "perfectionSuspect": false,
@@ -20681,16 +20663,16 @@
       },
       "corpus": {
        "executable": true,
-       "sentences": 20,
+       "sentences": 10,
        "scored": 13,
-       "exceeded": 10,
-       "exceededShare": 0.769,
+       "exceeded": 12,
+       "exceededShare": 0.923,
        "deepest": {
         "metric": "closers.pronounRate",
-        "depth": 3.353,
+        "depth": 5.652,
         "side": "over"
        },
-       "meanDistanceFromMedian": 0.697,
+       "meanDistanceFromMedian": 0.98,
        "budgetOk": false,
        "depthOk": false,
        "perfectionSuspect": false,
@@ -20728,16 +20710,16 @@
       },
       "corpus": {
        "executable": true,
-       "sentences": 20,
+       "sentences": 10,
        "scored": 13,
-       "exceeded": 10,
-       "exceededShare": 0.769,
+       "exceeded": 12,
+       "exceededShare": 0.923,
        "deepest": {
         "metric": "closers.pronounRate",
-        "depth": 3.353,
+        "depth": 5.652,
         "side": "over"
        },
-       "meanDistanceFromMedian": 0.697,
+       "meanDistanceFromMedian": 0.98,
        "budgetOk": false,
        "depthOk": false,
        "perfectionSuspect": false,
@@ -20775,16 +20757,16 @@
       },
       "corpus": {
        "executable": true,
-       "sentences": 20,
+       "sentences": 10,
        "scored": 13,
-       "exceeded": 10,
-       "exceededShare": 0.769,
+       "exceeded": 12,
+       "exceededShare": 0.923,
        "deepest": {
         "metric": "closers.pronounRate",
-        "depth": 3.353,
+        "depth": 5.652,
         "side": "over"
        },
-       "meanDistanceFromMedian": 0.697,
+       "meanDistanceFromMedian": 0.98,
        "budgetOk": false,
        "depthOk": false,
        "perfectionSuspect": false,
@@ -20794,27 +20776,27 @@
     }
    ],
    "provenance": {
-    "citations": 1,
-    "a13": 1
+    "citations": 0,
+    "a13": 0
    },
    "corpusBand": {
     "executable": true,
-    "sentences": 20,
+    "sentences": 10,
     "scored": 13,
-    "exceeded": 10,
-    "exceededShare": 0.769,
+    "exceeded": 12,
+    "exceededShare": 0.923,
     "deepest": {
      "metric": "closers.pronounRate",
-     "depth": 3.353,
+     "depth": 5.652,
      "side": "over"
     },
-    "meanDistanceFromMedian": 0.697,
+    "meanDistanceFromMedian": 0.98,
     "budgetOk": false,
     "depthOk": false,
     "perfectionSuspect": false,
     "grain": "corpus"
    },
-   "corpusWords": 296,
+   "corpusWords": 279,
    "owned": {
     "verdicts": {
      "FAIL": 0,
@@ -20837,16 +20819,6 @@
      "count": 1
     },
     {
-     "label": "A13 · a holder with no institution",
-     "arm": "A13",
-     "klass": "",
-     "channel": "WITHHELD",
-     "spineKey": "Invasion & War: walls with NO force",
-     "clause": "Invasion & War: walls with NO force: muster",
-     "description": "the holder kind resolves to no institution in this town's roster, so the cited record has nobody keeping it",
-     "count": 1
-    },
-    {
      "label": "Q · a second sentence naming no second field",
      "arm": "a second sentence naming no second field",
      "klass": "Q",
@@ -20863,16 +20835,6 @@
      "channel": "WITHHELD",
      "spineKey": "Invasion & War: walls with NO force",
      "clause": "At the hall it is not a thing in dispute.",
-     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call",
-     "count": 1
-    },
-    {
-     "label": "Q · a second sentence naming no second field",
-     "arm": "a second sentence naming no second field",
-     "klass": "Q",
-     "channel": "WITHHELD",
-     "spineKey": "Invasion & War: walls with NO force",
-     "clause": "A factor for them holds that the keeping is in dispute wherever the guilds are asked, and that the purse has bought a wall and no soldiers to hold it.",
      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call",
      "count": 1
     },
@@ -20902,7 +20864,7 @@
      "klass": "C3",
      "channel": "WITHHELD",
      "spineKey": "Invasion & War: walls with NO force",
-     "clause": "At the tavern they name who would turn out if the walls were ever wanted, and nobody at the table is surprised by the names.",
+     "clause": "{tavern} {v:name} who would turn out if the walls were ever wanted, and nobody at the table is surprised by the names.",
      "description": "a past-tense or formerly-construction: whether it asserts history is A6, the refuter's",
      "count": 1
     },
@@ -20922,7 +20884,7 @@
      "klass": "Q",
      "channel": "WITHHELD",
      "spineKey": "Invasion & War: walls with NO force",
-     "clause": "The survey finds them on the walls after dark all the same.",
+     "clause": "The survey finds the watch on the walls after dark all the same.",
      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call",
      "count": 1
     },
@@ -20932,12 +20894,12 @@
      "klass": "Q",
      "channel": "WITHHELD",
      "spineKey": "Invasion & War: walls with NO force",
-     "clause": "None of them are about who would hold them.",
+     "clause": "Nothing that comes there is about who would hold them.",
      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call",
      "count": 1
     }
    ],
-   "inheritedCount": 11,
+   "inheritedCount": 9,
    "spineWithheld": true,
    "qVocabulary": [
     {
@@ -20977,18 +20939,6 @@
      "synonymTable": "a word-level synonym table ships and was applied"
     },
     {
-     "clause": "A factor for them holds that the keeping is in dispute wherever the guilds are asked, and that the purse has bought a wall and no soldiers to hold it.",
-     "spineKey": "Invasion & War: walls with NO force",
-     "count": 1,
-     "reads": [
-      "invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)"
-     ],
-     "mapped": [],
-     "executable": false,
-     "verdict": "NOT-EXECUTABLE: the recovered reading is the census's own synthetic table label and not a field path, so no text can claim it",
-     "synonymTable": "a word-level synonym table ships and was applied"
-    },
-    {
      "clause": "The people he saw at work on them were the town's own households.",
      "spineKey": "Invasion & War: walls with NO force",
      "count": 1,
@@ -21013,7 +20963,7 @@
      "synonymTable": "a word-level synonym table ships and was applied"
     },
     {
-     "clause": "The survey finds them on the walls after dark all the same.",
+     "clause": "The survey finds the watch on the walls after dark all the same.",
      "spineKey": "Invasion & War: walls with NO force",
      "count": 1,
      "reads": [
@@ -21025,7 +20975,7 @@
      "synonymTable": "a word-level synonym table ships and was applied"
     },
     {
-     "clause": "None of them are about who would hold them.",
+     "clause": "Nothing that comes there is about who would hold them.",
      "spineKey": "Invasion & War: walls with NO force",
      "count": 1,
      "reads": [
@@ -45829,8 +45779,8 @@
   "sampleSha": "36ec79104a5658a32526211b2d58860ce4016f8640b13706080f16267c34c25b",
   "verdicts": {
    "FAIL": 11,
-   "WITHHELD": 169,
-   "PASS": 212
+   "WITHHELD": 168,
+   "PASS": 213
   }
  },
  "manifest": {

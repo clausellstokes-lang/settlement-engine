@@ -1,23 +1,15 @@
-# LANE-STATUS — written 2026-09-13 04:46:35 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-13 04:51:50 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = 7b91cc148 Plan: rulings 24–26 recorded (the seats — Opus + Fable draft, Fable selects, Opus refu
 
 ## BUILD / KIT LANES (dock · base · cars · porcelain · receipt)
 - REWRITE 8b DS-DEF-11 (the validation block; cure round): dock laneRW-DEF11 ABSENT
 - REWRITE 8b-W (the wiring car, landed in its dock = the consist lineage): dock laneRW-DEFW ABSENT
-- **DS-DEF-2 (waits for the tables)** dock `laneRW-DEF2` HEAD 311589326 · 22 cars over f2da5a3ee · porcelain 7 · last commits:
+- **DS-DEF-2 (waits for the tables)** dock `laneRW-DEF2` HEAD 60efe812b · 23 cars over f2da5a3ee · porcelain 0 · last commits:
+    60efe812b REWRITE 8b-W-18l (the re-cut): DS-DEF-2's nine faces stop saying "the hall" and start printing a person — and rendering the page found the defect that would have silenced every one of them
     311589326 REWRITE 8b-W-18l: the page prints a ROLE, never an institution — the attribution slots, the number-aware verb and the town's own roster of speakers (ADDENDUM 18 ruling 25); zero text moved today
     95760e212 REWRITE 8b dock hygiene: the first v3 pool has lawfully ended the zero-shift world, so the face-count register row is re-frozen as a DECLARED GROW and all six zero-shift arms are re-pinned to name their one mover
     e075b0769 REWRITE 8b DS-DEF-2 cure 2 (v3, the chair's cut by name): 1·3 disagrees on the dispute, not on who pays; spines 2 and 3 in the engine's own words
-    7761350e1 REWRITE 8b-W-18k: the card prints what a face may not DENY of a required row, and where it may not say a body STANDS — the first pool's shared writer error cured at the instrument (ADDENDUM 18 ruling 4); zero product bytes
-    porcelain (uncommitted work in the dock — commit it FIRST after re-proving):
-       M docs/content/RECEIPT_POOLS_DOSSIER_STATE.md
-       M src/data/dossierStateProse/defense.generated.js
-       M src/data/institutionRoles.js
-       M src/domain/display/stateProse/composeStateProse.js
-       M src/domain/display/stateProse/faceSources.js
-       M tests/domain/composeStateProse.test.js
-       M tests/domain/institutionRoles.test.js
     receipt `receipt-rewrite.md` (mtime 09-12 20:49) head:
       | # RECEIPT — the REWRITE train
       | 
@@ -83,7 +75,7 @@ stat: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-
 - DS-DEF-2: pools 26 · skeleton 26 · draft 39 · refine 0 · kept 0 · refute 1 · cure 0 · cured 0 · JUDGMENT no · JUDGMENT-cure no
 - DS-DEF-2.licence-test-attempt: pools 26 · skeleton 26 · draft 36 · refine 26 · kept 26 · refute 32 · cure 24 · cured 0 · JUDGMENT yes · JUDGMENT-cure no
 - entailment: surveys 6 · refutes 6 · ENTAILMENT-TABLE.draft.md 09-12 20:49 346945 B · referent surveys 6 · referent refutes 6 · REFERENT-TABLE.draft.md 09-12 20:49 285943 B
-- HOLD-VITEST absent · runner count 26
+- HOLD-VITEST absent · runner count 0
 
 ## RESEARCH SWEEPS (state = claims/verdicts/kept; verdict files; section/critic mtimes) — round tags in sweep/LAST-RUNS.json
 Traceback (most recent call last):
@@ -113,4 +105,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `ab8783d22` WRITER Invasion & War: walls with NO force · DONE · transcript 09-13 02:30 725 KB · 17 tool calls · files: candidates-2.md, facetext.txt, ft2.txt · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasio
 
 ## PROCESSES: 
-load: 3.49 3.01 2.74
+load: 2.17 2.88 2.81
