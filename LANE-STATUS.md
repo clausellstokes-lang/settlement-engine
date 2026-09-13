@@ -1,15 +1,19 @@
-# LANE-STATUS — written 2026-09-13 03:27:31 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-13 03:32:46 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = 0167b831e Plan: rulings 20–23 recorded (plain language, not casual; the archiver weighs in on a pa
 
 ## BUILD / KIT LANES (dock · base · cars · porcelain · receipt)
 - REWRITE 8b DS-DEF-11 (the validation block; cure round): dock laneRW-DEF11 ABSENT
 - REWRITE 8b-W (the wiring car, landed in its dock = the consist lineage): dock laneRW-DEFW ABSENT
-- **DS-DEF-2 (waits for the tables)** dock `laneRW-DEF2` HEAD d02764539 · 17 cars over f2da5a3ee · porcelain 0 · last commits:
+- **DS-DEF-2 (waits for the tables)** dock `laneRW-DEF2` HEAD d02764539 · 17 cars over f2da5a3ee · porcelain 3 · last commits:
     d02764539 REWRITE 8b-W-18j: the face pin is a CEILING THAT BINDS — one face per seated source always fits, because the pin is derived from the source vocabulary and no longer a literal four (ADDENDUM 18 ruling 21, reconciliation 2); zero text moved
     569e01793 REWRITE 8b DS-DEF-2 cure (v3): 1/1 pools
     180acd14d REWRITE 8b DS-DEF-2 draft (v3): 1/1 pools
     6275e8027 REWRITE 8b-W-18e (golden): the generator golden master re-recorded at the clean tip d8a77df97 — 525 of 525 rows moved under ADDENDUM 18 ruling 16, predicted and held through the signed door; the register stays UNFROZEN and the signed record is withdrawn to the packet until the freeze act
+    porcelain (uncommitted work in the dock — commit it FIRST after re-proving):
+       M scripts/lib/dossier-annex-grammar.mjs
+       M src/domain/display/stateProse/composeStateProse.js
+       M src/domain/display/stateProse/stateProseKernel.js
     receipt `receipt-rewrite.md` (mtime 09-12 20:49) head:
       | # RECEIPT — the REWRITE train
       | 
@@ -105,4 +109,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `ab8783d22` WRITER Invasion & War: walls with NO force · DONE · transcript 09-13 02:30 725 KB · 17 tool calls · files: candidates-2.md, facetext.txt, ft2.txt · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasio
 
 ## PROCESSES: 
-load: 4.41 3.16 2.62
+load: 2.65 2.47 2.42
