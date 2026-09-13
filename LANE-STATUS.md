@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-13 06:15:39 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-13 06:20:52 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = 85a3d71f2 Plan: HANDOFF_CURRENT refreshed to the re-cut machinery's first pool (§919.6 and after: t
 
@@ -97,12 +97,12 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `af733d6a7` MARKER Invasion & War: force with NO walls · DONE · transcript 09-13 06:14 817 KB · 36 tool calls · files: mark-out.txt, "$D/card.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasio
     - `a81ba66ec` MARKER Internal Security: no legal infrastructure · DONE · transcript 09-13 06:14 845 KB · 36 tool calls · files: "$D/card.md, "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--internal-security-no-legal-infrastructure/card.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--interna
     - `afe66b63c` MARKER Disasters & Famine: NO reserves, NO medical provision · DONE · transcript 09-13 06:15 809 KB · 44 tool calls · files: card.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--disaste
-    - `a05d1ed9b` WRITER Invasion & War: force with NO walls · IN FLIGHT · transcript 09-13 06:15 387 KB · 2 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
-    - `afdc60ca8` WRITER Invasion & War: force with NO walls · IN FLIGHT · transcript 09-13 06:15 328 KB · 1 tool calls · last: Bash ls -la /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/s
-    - `a94f7f3d0` WRITER Internal Security: no legal infrastructure · IN FLIGHT · transcript 09-13 06:15 396 KB · 2 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
-    - `a87bfbbc2` WRITER Disasters & Famine: NO reserves, NO medical provision · IN FLIGHT · transcript 09-13 06:15 453 KB · 2 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
-    - `adf46824f` WRITER Internal Security: no legal infrastructure · IN FLIGHT · transcript 09-13 06:15 327 KB · 1 tool calls · last: Bash ls -la /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/s
-    - `ac1bc6847` WRITER Disasters & Famine: NO reserves, NO medical provision · IN FLIGHT · transcript 09-13 06:15 165 KB · 0 tool calls
+    - `a05d1ed9b` WRITER Invasion & War: force with NO walls · IN FLIGHT · transcript 09-13 06:16 544 KB · 13 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `afdc60ca8` WRITER Invasion & War: force with NO walls · IN FLIGHT · transcript 09-13 06:16 540 KB · 11 tool calls · last: Bash git show f2da5a3ee:docs/content/RECEIPT_POOLS_DOSSIER_STATE.md | sed -n '2645,2720p' | awk 'NR==1{print;next} 
+    - `a94f7f3d0` WRITER Internal Security: no legal infrastructure · IN FLIGHT · transcript 09-13 06:16 534 KB · 12 tool calls · last: Bash sed -n '330,573p' /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514
+    - `a87bfbbc2` WRITER Disasters & Famine: NO reserves, NO medical provision · IN FLIGHT · transcript 09-13 06:16 541 KB · 8 tool calls · last: Bash git -C "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/
+    - `adf46824f` WRITER Internal Security: no legal infrastructure · IN FLIGHT · transcript 09-13 06:16 540 KB · 9 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `ac1bc6847` WRITER Disasters & Famine: NO reserves, NO medical provision · IN FLIGHT · transcript 09-13 06:15 533 KB · 7 tool calls · last: Read /Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/
 - **wf_fef9717d-ad4** (mtime 09-13 03:09): agent calls 5 (5 distinct) · DONE 5 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 0 — mirror `_progress/wf_fef9717d-ad4/`
     - `ae1e5e82c` SELECTOR Invasion & War: walls with NO force · DONE · transcript 09-13 02:42 954 KB · 31 tool calls · files: draft.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasio
     - `afe1e560d` GATE r1 · DONE · transcript 09-13 02:51 807 KB · 70 tool calls · files: rows.txt, "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasion-war-walls-with-no-force/speakers.md, gate-out.txt, (git commit) · result: {"pools": [{"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def
@@ -115,4 +115,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `ab8783d22` WRITER Invasion & War: walls with NO force · DONE · transcript 09-13 02:30 725 KB · 17 tool calls · files: candidates-2.md, facetext.txt, ft2.txt · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasio
 
 ## PROCESSES: 
-load: 3.54 2.75 2.62
+load: 1.98 2.29 2.46
