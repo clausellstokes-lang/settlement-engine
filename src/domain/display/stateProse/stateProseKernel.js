@@ -1321,3 +1321,226 @@ export function compromisedDraw(variant, eligible, source, speaks) {
   const without = all.filter((face) => faceSourceOf(variant, face) !== source);
   return { eligible: without.length > 0 ? without : all, forced: null };
 }
+
+/**
+ * ── ⭐⭐ THE OPENER AND THE CLOSE (ADDENDUM 18 rulings 29, 34 and 40; car 8b-W-18o) ─────
+ *
+ * THE OWNER, 2026-09-13 ~11:1x: *"The survey finds is beginning to be repetitive … can you also
+ * have some sentence structure variation as well?"* — and then, ~13:3x, RULING 40: *"the survey
+ * should not refer to itself … the survey is self referential. we already have the public to
+ * take its place."*
+ *
+ * ⛔⛔ WHAT RULING 40 STRUCK BEFORE IT LANDED, RECORDED HERE BECAUSE A STRUCK MECHANISM LEAVES
+ * NO DIFF AND A LATER SEAT WOULD OTHERWISE BUILD IT AGAIN. Ruling 29 chartered a closed
+ * `SURVEY_FRAMES` table and a `{survey}` slot — twelve frames for the engine's own fact, drawn
+ * seeded with a page-level no-repeat. Ruling 40 struck BOTH by name: a recorded fact cannot be
+ * wrong, so citing it adds nothing, and the exemplars cite nothing. The engine's fact is now a
+ * PLAIN STATEMENT in the archiver's hand — *The walls are kept, the garrison is paid, and the
+ * council sits* — and ALL of ruling 29's variety is carried by the OPENER CLASSES below, which
+ * is the half of ruling 29 that survives intact. Neither the table nor the slot exists in this
+ * file, and that absence is the ruling. *Reversal: the survey speaks by name.*
+ *
+ * ── WHY THESE ARE FUNCTIONS AND NOT FIELDS ON THE LEAF (the chair's call, vetoable) ───
+ * The brief chartered the opener class "computed at generation and stored on the leaf". It is
+ * computed at RENDER instead, from the same pure function, for three measured reasons:
+ *   1. IT IS A PURE FUNCTION OF THE FACE TEXT. Stored, it is a CACHE and not a fact — and a
+ *      cache that can drift from its source is exactly the defect class the shift register
+ *      exists to end. Computed, it cannot disagree with the sentence it describes.
+ *   2. THE BYTES ARE OWNER-SIGNED. A per-face string on all 2,266 variants adds to six
+ *      generated leaves measured against three first-paint ceilings nobody has signed a rise
+ *      for, and buys no behaviour a call cannot.
+ *   3. THE GUARANTEE THAT MATTERED IS KEPT ANYWAY. "Computed at generation" was there so no
+ *      face could be UNCLASSIFIABLE. The projector asserts the classifier is TOTAL over every
+ *      face it projects, so that guarantee is taken at generation with none of the bytes.
+ * *Reversal: emit `openers` and `closes` parallel to the faces, and read them here.*
+ */
+
+/**
+ * ⭐ THE OPENER CLASSES (ruling 29 (II), the owner's list). CLOSED and TOTAL: `openerClassOf`
+ * returns one of these seven for any string whatever, `subject` being the default rather than a
+ * failure. `attributed` covers the survey slot's old ground too, now that the fact stands bare.
+ * @type {ReadonlyArray<string>}
+ */
+export const OPENER_CLASSES = Object.freeze([
+  'attributed', 'place', 'time', 'fronted', 'expletive', 'entry', 'subject',
+]);
+
+/** The heads that make an opener a TIME rather than a place. Checked FIRST: the narrower list. */
+const TIME_HEADS = Object.freeze([
+  'since', 'after', 'before', 'when', 'while', 'once', 'until', 'whenever', 'each', 'every',
+  'lately', 'nowadays', 'afterwards', 'meanwhile',
+]);
+/** Multi-word time openers, which share their first word with the place prepositions. */
+const TIME_PHRASES = Object.freeze([
+  'on the night', 'on the nights', 'at night', 'at dusk', 'at dawn', 'at nightfall',
+  'in the season', 'in the years', 'in the winter', 'in the summer', 'in living memory',
+  'by night', 'by day', 'through the winter', 'through the season', 'on any night',
+]);
+/** The prepositions of PLACE (ruling 29: "At/In/On/By/Along/Outside…"). */
+const PLACE_HEADS = Object.freeze([
+  'at', 'in', 'on', 'by', 'along', 'outside', 'inside', 'beyond', 'across', 'under', 'over',
+  'behind', 'beside', 'near', 'within', 'above', 'below', 'around', 'through', 'up', 'down',
+  'where', 'from',
+]);
+/** The ENTRY form's heads (ruling 29's "Entered as kept: …"). */
+const ENTRY_HEADS = Object.freeze(['entered', 'recorded', 'noted', 'kept,', 'listed', 'filed']);
+/**
+ * ⭐ AN ATTRIBUTION THAT OPENS ON `By` IS TOLD FROM A PLACE THAT OPENS ON `By` BY ITS NOUN, not
+ * by its preposition — "By the tavern's ACCOUNT the watch is paid late" against "By the north
+ * gate the stores are stacked". FOUND BY THE SUITE: the first spelling tested `by the` alone
+ * and read the north gate as an attribution, which would have made the adjacency preference
+ * incoherent wherever a face opens on a place. The list is CLOSED and short, and a `By` with
+ * none of these words on it is a PLACE — the safe default, because a place is what the
+ * preposition says and an attribution is what the noun says.
+ */
+const ATTRIBUTION_NOUNS = Object.freeze([
+  'account', 'accounts', 'reading', 'reckoning', 'telling', 'showing', 'own account',
+]);
+const ATTRIBUTION_RE = new RegExp(`^by\\s+[^.?!]{0,40}?\\b(?:${ATTRIBUTION_NOUNS.join('|')})\\b`, 'i');
+/** Determiners, for the fronted-object approximation. */
+const DETERMINERS = Object.freeze(['the', 'a', 'an', 'this', 'that', 'these', 'those']);
+/**
+ * Finite verb forms common enough that their presence before a comma means the head noun phrase
+ * is the SUBJECT and not a fronted object. Short and declared, per the approximation below.
+ */
+const FINITE_HEADS = Object.freeze([
+  'is', 'are', 'was', 'were', 'has', 'have', 'had', 'does', 'do', 'did', 'will', 'would',
+  'can', 'could', 'may', 'might', 'must', 'stands', 'stand', 'keeps', 'keep', 'says', 'say',
+  'holds', 'hold', 'runs', 'run', 'pays', 'pay', 'sits', 'sit', 'goes', 'go', 'comes', 'come',
+]);
+
+/** The face's opening words, lower-cased, punctuation kept where it is part of the head. */
+function openerWords(text) {
+  return String(text).trim().toLowerCase().split(/\s+/);
+}
+
+/**
+ * ⭐⭐ THE OPENER CLASS OF ONE FACE — closed, total, and computed on the RAW text so that a
+ * `{role}` slot at the head reads as an attribution, which is what it will render as.
+ *
+ * THE ORDER IS THE RULE, and it is written down because a classifier's order IS its semantics:
+ *   1. `attributed`  a role slot at the head, or `By …` / `According to …`. Checked first
+ *                    because `by` is also a preposition of place, and an attribution that read
+ *                    as a place would make the whole adjacency preference incoherent.
+ *   2. `expletive`   `It is` / `There are` — a closed four-word test, never `It` alone, which
+ *                    is a pronoun subject.
+ *   3. `entry`       `Entered` / `Recorded` / `Kept,` — the record's own form.
+ *   4. `time`        the closed TIME head list, then the multi-word TIME phrases. BEFORE
+ *                    `place`, because `on`, `at`, `in` and `by` head both and the time list is
+ *                    the narrow one: a head that is not on it is a place.
+ *   5. `place`       the prepositions of place.
+ *   6. `fronted`     ⚠ AN APPROXIMATION, and declared as one (ruling 29's mechanism says
+ *                    "approximate"). A determiner-headed noun phrase, a comma inside the first
+ *                    eight words, and NO finite verb form before that comma. "The stair to the
+ *                    walk, a drover found with stores on it" is fronted; "The walls are kept,
+ *                    and nobody stands on them" is not, because `are` precedes the comma.
+ *                    THE FALSE NEGATIVE IS THE SAFE ONE and it is the one this takes: a fronted
+ *                    object with no comma reads as `subject`, which costs the draw a preference
+ *                    and never a refusal, because NOTHING IS REFUSED ON THIS CLASSIFIER.
+ *   7. `subject`     everything else, which is most sentences.
+ * @param {string} text the face's raw text, slots and all
+ * @returns {string} one word of `OPENER_CLASSES`
+ */
+export function openerClassOf(text) {
+  const raw = String(text == null ? '' : text).trim();
+  if (raw === '') return 'subject';
+  const head = raw.toLowerCase();
+  const words = openerWords(raw);
+  const slot = raw.match(/^\{([a-zA-Z_][a-zA-Z0-9_]*)\}/);
+  if (slot && ROLE_SLOTS.includes(slot[1])) return 'attributed';
+  if (/^according to\b/.test(head) || ATTRIBUTION_RE.test(head)) return 'attributed';
+  if (/^(it is|it was|there is|there are|there was|there were)\b/.test(head)) return 'expletive';
+  if (ENTRY_HEADS.includes(words[0])) return 'entry';
+  if (TIME_HEADS.includes(words[0])) return 'time';
+  if (TIME_PHRASES.some((phrase) => head.startsWith(phrase))) return 'time';
+  if (PLACE_HEADS.includes(words[0])) return 'place';
+  if (DETERMINERS.includes(words[0])) {
+    const comma = words.findIndex((word) => word.endsWith(','));
+    if (comma > 0 && comma < 8) {
+      const before = words.slice(0, comma + 1).map((word) => word.replace(/[^a-z]/g, ''));
+      if (!before.some((word) => FINITE_HEADS.includes(word))) return 'fronted';
+    }
+  }
+  return 'subject';
+}
+
+/**
+ * ⭐ THE CLOSE CLASSES (ADDENDUM 18 ruling 34, the chair's, at the research reconciliation:
+ * *"a mechanical CLOSE CLASS beside the opener class … reported; the one refusal is
+ * `reassurance` on a face not tagged compromised"*).
+ *
+ * ⛔ WHY THIS EXISTS AT ALL. §6's veto list — the which-clause closer, the summarising close,
+ * the antithesis pair, the reassurance, the clever last beat — is ENTIRELY about how a face
+ * ENDS, and until this car it had no instrument: a refuter judged it by eye and the block
+ * measure could not count it. This names the shapes so they can be COUNTED. It refuses nothing
+ * (ruling 1, and ruling 35: no gate returns) with the one exception ruling 34 names.
+ * @type {ReadonlyArray<string>}
+ */
+export const CLOSE_CLASSES = Object.freeze([
+  'which-tail', 'summary', 'antithesis', 'reassurance', 'question', 'plain',
+]);
+
+/** The reassurance tell, which is lawful ONLY on a face tagged `compromised` (ruling 26 (a)). */
+const REASSURANCE_RE = /(?:all is well|nothing to fear|in good order|as it should be|nothing amiss|no cause for alarm)[.?!]?\s*$/i;
+/** A final clause opening on ", which" — §6's which-clause closer. */
+const WHICH_TAIL_RE = /,\s*which\b[^.?!]*[.?!]?\s*$/i;
+/** The summarising close: a final clause that restates rather than adds. */
+const SUMMARY_RE = /(?:,\s*(?:and that is|which is to say|so)\b|\.\s+(?:and that is|which is to say)\b)[^.?!]*[.?!]?\s*$/i;
+/** The antithesis pair: "…, and not X" / "…, never X". */
+const ANTITHESIS_RE = /,\s*(?:and not|but not|never|not)\b[^.?!]*[.?!]?\s*$/i;
+/** A question left hanging without its mark (§7's device, counted wherever it stands). */
+const QUESTION_RE = /,\s*(?:whether|who|what|where|why|how)\b[^.?!]*\.\s*$/i;
+
+/**
+ * ⭐⭐ THE CLOSE CLASS OF ONE FACE — closed, total, and ORDERED, because more than one shape can
+ * match one sentence and the order decides which is reported.
+ *
+ * `reassurance` is FIRST and that is deliberate: it is the only one of the six that is ever
+ * REFUSED, so a sentence that is both a reassurance and a which-tail must report as the
+ * refusable one or the refusal would be evadable by adding a clause.
+ * @param {string} text
+ * @returns {string} one word of `CLOSE_CLASSES`
+ */
+export function closeClassOf(text) {
+  const raw = String(text == null ? '' : text).trim();
+  if (raw === '') return 'plain';
+  if (REASSURANCE_RE.test(raw)) return 'reassurance';
+  if (WHICH_TAIL_RE.test(raw)) return 'which-tail';
+  if (SUMMARY_RE.test(raw)) return 'summary';
+  if (ANTITHESIS_RE.test(raw)) return 'antithesis';
+  if (QUESTION_RE.test(raw)) return 'question';
+  return 'plain';
+}
+
+/**
+ * ── ⭐⭐ THE UNIT CAP (ADDENDUM 18 ruling 30, the owner's, AS SOFTENED BY RULING 37) ────
+ *
+ * THE OWNER, 2026-09-13 ~11:3x: *"for simple descriptions… we would like to cap it at 2-3
+ * sentences at most. Think about what we learned from the D&D prose research."*
+ *
+ * What the page prints for one pool on one town — THE DRAWN UNIT — is at most THREE sentences.
+ * Ruling 30 made a pair's halves ONE sentence each as a rule; ruling 37 (the research
+ * reconciliation) softened that to a DEFAULT, because the research is right that a two-sentence
+ * half sometimes earns its second sentence. The arithmetic below is the softened form, and it
+ * is the one the grammar enforces:
+ *
+ *   a lone face                     1 or 2 sentences
+ *   a pair's half                   1 by default, 2 at the ceiling
+ *   a pair with a WEIGHING          the two halves total 2 (so 1 + 1) and the weigh is 1 = 3
+ *   a pair with NO weighing         the two halves total 3 at most (so 1 + 2 or 2 + 1)
+ *   a `simple` pool's face          2 at the ceiling
+ *
+ * ⛔ AND A 2+1 PAIR IS LAWFUL BUT NOT COMPOUNDABLE, which needed no new code: `joinPairFaces`
+ * already falls back to the full stop unless BOTH halves are one sentence, so the compound form
+ * is unavailable to a 2+1 pair by construction rather than by a second rule. That is the whole
+ * reason ruling 37's softening is safe — a two-sentence half cannot smuggle a four-sentence
+ * unit onto the page through the joint.
+ * @type {number}
+ */
+export const UNIT_SENTENCE_CAP = 3;
+/** A pair half's ceiling (ruling 37: one by default, two where the selector keeps it). */
+export const PAIR_HALF_SENTENCE_CAP = 2;
+/** The two halves' total where the archiver also weighs (ruling 30's arithmetic). */
+export const WEIGHED_PAIR_HALVES_TOTAL = 2;
+/** A `simple` pool's per-face ceiling (ruling 37: two, not one). */
+export const SIMPLE_POOL_SENTENCE_CAP = 2;

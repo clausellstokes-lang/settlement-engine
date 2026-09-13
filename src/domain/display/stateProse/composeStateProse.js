@@ -88,6 +88,9 @@ import {
   joinPairFaces,
   pairJoint,
   variantIsAudible,
+  openerClassOf,
+  faceSentenceCount,
+  UNIT_SENTENCE_CAP,
   WEIGH_KIND,
 } from './stateProseKernel.js';
 // ⭐ THE FIRST OF ARCH §4.1's THREE FROZEN LEAVES, WIRED (REWRITE car 8a-11, SITTING §U c-5).
@@ -522,6 +525,45 @@ function symptomSourceOf(blockId, poolKey, compromised) {
 }
 
 /**
+ * ⭐⭐ THE OPENER ADJACENCY PREFERENCE (ADDENDUM 18 ruling 29 (II), the owner's, AS RATE-BANDED
+ * BY RULING 36; car 8b-W-18o).
+ *
+ * THE OWNER: *"can you also have some sentence structure variation as well?"* — and the page is
+ * where the repetition is VISIBLE, because a page carries several pools and each draws a unit.
+ * Measured over the corpus this car classifies, 2,114 of 2,275 faces open on the SUBJECT: the
+ * complaint is real and it is 93 per cent.
+ *
+ * SO THE DRAW PREFERS A FACE THAT DOES NOT OPEN THE WAY THE LAST DRAWN UNIT DID. A PREFERENCE
+ * AND NEVER A BAN, which is ruling 36 in one line: *"the draw's preference and the selector's
+ * veto on a RUN of three, never on every repeat (no exemplar's same-opener rate is zero)"*. If
+ * every eligible face opens the way the last one did, the list comes back UNTOUCHED and the
+ * repeat stands — a page never goes silent, and never loses a face, for want of variety.
+ *
+ * ⛔ IT NEVER OVERRIDES THE COMPROMISED FORCING. A forced face is the behaviour of a power the
+ * engine holds a secret about (ruling 26); a preference about sentence shape may not decide who
+ * speaks on a page where a secret is being kept. The caller applies this only where nothing is
+ * forced, and the order is asserted by the suite rather than left to reading order.
+ *
+ * ⛔ AND IT ANSWERS `null` WHEN IT NARROWS NOTHING, which is the whole zero-shift argument and
+ * is why it is spelled this way rather than returning the list unchanged. "The preference did
+ * nothing" is then a NAMED BRANCH at the call site, and that branch calls `drawFace` — the same
+ * function, on the same key, that drew before this car existed. On 707 of the corpus's 708
+ * pools a one-face list cannot narrow; on the first unit of every page there is no previous
+ * class to differ from; so the shipped draw is not merely equal to the old one, it IS the old
+ * one, taken through the same door.
+ * @param {import('./stateProseKernel.js').StateProseVariant} variant
+ * @param {ReadonlyArray<number>} eligible
+ * @param {string|null} lastOpener the opener class of the previous unit drawn on this page
+ * @returns {number[]|null} the narrowed list, or `null` where the preference changes nothing
+ */
+function preferOpener(variant, eligible, lastOpener) {
+  const all = Array.isArray(eligible) ? eligible : [];
+  if (!variant || all.length < 2 || typeof lastOpener !== 'string' || lastOpener === '') return null;
+  const different = all.filter((face) => openerClassOf(faceRawOf(variant, face)) !== lastOpener);
+  return different.length > 0 && different.length < all.length ? different : null;
+}
+
+/**
  * ⭐⭐ THE FACE DRAW, WITH THE COMPROMISED PATH (ADDENDUM 18 ruling 26; car 8b-W-18m).
  *
  * On a pool no covert field marks — which is every pool of every town with no secret, and
@@ -542,8 +584,19 @@ function symptomSourceOf(blockId, poolKey, compromised) {
  * @returns {number}
  */
 function compromisedFace(variant, blockId, poolKey, read) {
+  const last = Array.isArray(read.drawnOpeners) && read.drawnOpeners.length > 0
+    ? read.drawnOpeners[read.drawnOpeners.length - 1] : null;
   const source = symptomSourceOf(blockId, poolKey, /** @type {never} */ (read.compromised));
-  if (source === null) return drawFace(variant, blockId, poolKey, read.seed, read.sources);
+  if (source === null) {
+    // ⭐ THE ORDINARY PATH. The preference narrows the eligible list BEFORE the modulus, on the
+    // UNCHANGED key; where it narrows nothing it says so, and the draw is `drawFace` itself.
+    const narrowed = preferOpener(
+      variant, eligibleFaces(variant, /** @type {never} */ (read.sources)), last,
+    );
+    if (narrowed === null) return drawFace(variant, blockId, poolKey, read.seed, read.sources);
+    if (narrowed.length === 1 || !read.seed) return narrowed[0];
+    return narrowed[hashKey(`${read.seed}::${blockId}::${poolKey}::w`) % narrowed.length];
+  }
   const speaks = compromisedSpeaks(
     read.seed, poolKey,
     typeof read.settlementId === 'string' ? read.settlementId : '',
@@ -552,10 +605,14 @@ function compromisedFace(variant, blockId, poolKey, read) {
   const { eligible, forced } = compromisedDraw(
     variant, eligibleFaces(variant, /** @type {never} */ (read.sources)), source, speaks,
   );
+  // ⛔ THE FORCING WINS. A preference about sentence shape may not decide who speaks on a town
+  // where the engine holds a secret — the return is BEFORE the narrowing, and the suite asserts
+  // that order rather than trusting it to reading order.
   if (forced !== null) return forced;
-  if (eligible.length === 1) return eligible[0];
-  if (!read.seed) return eligible[0];
-  return eligible[hashKey(`${read.seed}::${blockId}::${poolKey}::w`) % eligible.length];
+  const preferred = preferOpener(variant, eligible, last) || eligible;
+  if (preferred.length === 1) return preferred[0];
+  if (!read.seed) return preferred[0];
+  return preferred[hashKey(`${read.seed}::${blockId}::${poolKey}::w`) % preferred.length];
 }
 
 /**
@@ -1111,6 +1168,13 @@ export function composeStateProse(corpus, blockId, options = {}) {
     compromised: rosterOf(options.compromised),
     settlementId: typeof options.settlementId === 'string' ? options.settlementId : '',
     year: typeof options.year === 'number' || typeof options.year === 'string' ? options.year : 0,
+    // ⭐ THE PAGE'S OPENER TRAIL (ADDENDUM 18 rulings 29 and 36; car 8b-W-18o). An ARRAY the
+    // composer PUSHES each drawn unit's opener class onto, never an object keyed on a class
+    // word — the wiring census reads an object-literal key under `src/domain/**` as a WRITE of
+    // world state, and the discipline `faceSources.js` records at its head holds here too. The
+    // preference reads only the LAST entry; the whole trail is kept because ruling 36's "veto
+    // on a RUN of three" needs it and because the block measure can count it.
+    drawnOpeners: Array.isArray(options.drawnOpeners) ? options.drawnOpeners : [],
   };
 
   const turn = seatedTurn(block, spineKey, options.turns, read);
@@ -1154,12 +1218,29 @@ export function composeStateProse(corpus, blockId, options = {}) {
     seats[seat] = false;
   }
 
+  // ⭐⭐ THE UNIT CAP, ASSERTED WHERE THE UNIT IS FINISHED (ADDENDUM 18 ruling 30, the owner's;
+  // car 8b-W-18o). The grammar caps a pair's halves at projection, where it can see the whole
+  // variant; NOTHING at projection can see a spine plus the modifiers a desk seats beside it,
+  // because that arrangement exists only here. So this is the one place the DRAWN UNIT — the
+  // thing the page actually prints for one pool on one town — can be counted.
+  //
+  // ⛔ IT IS A REPORT AND NOT A REFUSAL, and that is deliberate. A throw here would blank a
+  // rung on a reader's page over a taste rule, which is the trade kernel law 1 refuses
+  // everywhere else (the absence of a surface is the absence of a sentence, never a crash).
+  // The refusals live at PROJECTION, where a writer can still read them; the estate's suites
+  // drive this counter over the corpus and RED there. `unitSentences` rides on the unit so a
+  // walker, a gate and the block measure all read one number rather than three counters.
+  const unitSentences = faceSentenceCount(text);
+  if (Array.isArray(read.drawnOpeners)) read.drawnOpeners.push(openerClassOf(head.raw));
   return Object.freeze({
     blockId,
     poolKey: spineKey,
     angle: head.variant.angle || '',
     ...(head.source ? { source: head.source } : {}),
     text,
+    unitSentences,
+    opener: openerClassOf(head.raw),
+    overCap: unitSentences > UNIT_SENTENCE_CAP,
     pieces: Object.freeze(pieces),
   });
 }
@@ -1223,6 +1304,13 @@ export function composeStateProseMount(corpus, blockId, rungs, options = {}) {
     compromised: rosterOf(options.compromised),
     settlementId: typeof options.settlementId === 'string' ? options.settlementId : '',
     year: typeof options.year === 'number' || typeof options.year === 'string' ? options.year : 0,
+    // ⭐ THE PAGE'S OPENER TRAIL (ADDENDUM 18 rulings 29 and 36; car 8b-W-18o). An ARRAY the
+    // composer PUSHES each drawn unit's opener class onto, never an object keyed on a class
+    // word — the wiring census reads an object-literal key under `src/domain/**` as a WRITE of
+    // world state, and the discipline `faceSources.js` records at its head holds here too. The
+    // preference reads only the LAST entry; the whole trail is kept because ruling 36's "veto
+    // on a RUN of three" needs it and because the block measure can count it.
+    drawnOpeners: Array.isArray(options.drawnOpeners) ? options.drawnOpeners : [],
   };
 
   const ranked = rows.map((rung, at) => {

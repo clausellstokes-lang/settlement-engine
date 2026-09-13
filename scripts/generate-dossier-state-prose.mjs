@@ -41,6 +41,7 @@ import { parseSlotShapes, mergeSlotShapes, assertSlotShapesTotal } from './lib/d
 import {
   CONNECTIVES_HEADING_RE, FACE_ROW_RE, GRAMMAR_TAG_RE, applyDeclaration, assertCensusCurrent,
   assertFaces, assertNoAuthoringMarker, assertPoolDeclaration, isDeclarationLine, kinSpines, parseFaceRow,
+  poolIsSimple,
   parseConnectives, readDeclarations, seatMeta, seatOf, vidsOf,
 } from './lib/dossier-annex-grammar.mjs';
 // ⭐ THE ESTATE'S ONE STOP LIST, read HERE and never in the composer (ARCH §4.1 refuses a
@@ -821,6 +822,9 @@ function projectBlocks(blocks, options = {}) {
             shapeOf: meta.shapeOf,
             clauseOpeners: meta.clauseOpeners,
             form,
+            // ⭐ THE `simple` MARK (ADDENDUM 18 ruling 30 (b); car 8b-W-18o) — a judgment about
+            // the pool's SUBJECT, declared in the grammar's own table and read here.
+            simple: poolIsSimple(b.id, p.key),
           });
         }
       }

@@ -28,10 +28,41 @@
 // words and the pair kinds a `[face]` row may carry are CLOSED at the kernel, and a grammar
 // that re-spelled them would be a second home for a list that must not drift.
 import {
-  ARCHIVER_SOURCE, COMPROMISABLE_SOURCES, COMPROMISED_MARK, FACE_SOURCES, NEVER_COMPROMISABLE,
-  OBSERVED_MARK, PAIR_KINDS, ROLE_SLOTS, UNIVERSAL_SOURCE, WEIGHABLE_KINDS, WEIGH_KIND,
-  faceSentenceCount,
+  ARCHIVER_SOURCE, CLOSE_CLASSES, COMPROMISABLE_SOURCES, COMPROMISED_MARK, FACE_SOURCES,
+  NEVER_COMPROMISABLE, OBSERVED_MARK, OPENER_CLASSES, PAIR_HALF_SENTENCE_CAP, PAIR_KINDS,
+  ROLE_SLOTS, SIMPLE_POOL_SENTENCE_CAP, UNIVERSAL_SOURCE, WEIGHABLE_KINDS, WEIGHED_PAIR_HALVES_TOTAL,
+  WEIGH_KIND, closeClassOf, faceSentenceCount, openerClassOf,
 } from '../../src/domain/display/stateProse/stateProseKernel.js';
+
+/**
+ * ⭐⭐ THE `simple` POOLS (ADDENDUM 18 ruling 30 (b), as softened by ruling 37; car 8b-W-18o).
+ *
+ * A `simple` pool is *"a boolean key with one thing to say"*, and its faces are capped at
+ * `SIMPLE_POOL_SENTENCE_CAP` sentences rather than the ordinary two. The mark is a JUDGMENT
+ * about a pool's SUBJECT, not a measurement of its text, so it cannot be derived — it is
+ * declared here, one row per block, and read by the projector.
+ *
+ * ⛔ EMPTY AT THIS CAR, AND THE EMPTINESS IS THE RECORD. The first v3 pool, `DS-DEF-2 ::
+ * Invasion & War: walls with NO force`, is judged NOT SIMPLE and is therefore absent: its key
+ * fixes THREE things (walls true, garrison false, militia false) and the pool's own faces argue
+ * about a fourth the key does not fix — who pays for the keeping — which is the opposite of one
+ * thing to say. Recording the judgment rather than the row is the point: a later seat reading
+ * an empty table would otherwise think nobody had looked.
+ *
+ * ⛔ AN ARRAY OF ROWS, never an object keyed on a block id, for the reason `faceSources.js`
+ * records at its head and `COMPROMISED_SYMPTOM_POOLS` repeats.
+ * @type {ReadonlyArray<{block: string, pools: ReadonlyArray<string>}>}
+ */
+export const SIMPLE_POOLS = Object.freeze([]);
+
+/**
+ * Is this (block, pool) declared `simple`? Total: an unlisted pool is not simple, which is the
+ * ordinary cap and the safe default.
+ * @param {string} block @param {string} pool @returns {boolean}
+ */
+export function poolIsSimple(block, pool) {
+  return SIMPLE_POOLS.some((row) => row.block === block && row.pools.includes(pool));
+}
 
 /** ARCH §2.3: the three roles a pool may declare. */
 export const POOL_ROLES = Object.freeze(['spine', 'modifier', 'turn']);
@@ -801,6 +832,8 @@ export function seatMeta(input) {
  *   reads as all-false
  * @param {ReadonlyArray<boolean>} [input.observed] parallel to `faces` (ruling 27); absent reads
  *   as all-false
+ * @param {boolean} [input.simple] this pool is declared `simple` (`SIMPLE_POOLS`), so its faces
+ *   cap at `SIMPLE_POOL_SENTENCE_CAP` rather than the ordinary two (rulings 30 (b), 37)
  * @param {number} input.pinnedFaceCount
  * @param {(slot: string) => string|undefined} input.shapeOf
  * @param {ReadonlyArray<string>} input.clauseOpeners
@@ -954,6 +987,30 @@ export function assertFaces(input) {
     // owner's word: "after a `disagree` or `reinforce` pair"). An `aside` is two unrelated
     // facts and a `view` is two takes neither of which denies the other, so there is nothing
     // in the air for the archiver's conjecture or confidence to be about.
+    // ⭐⭐ THE CAP'S ARITHMETIC (ADDENDUM 18 ruling 30, the owner's, AS SOFTENED BY RULING 37).
+    // The DRAWN UNIT is at most three sentences, and a pair is the only shape that can exceed
+    // it by accident, because its two halves are authored apart and met only at render.
+    //   a half             at most PAIR_HALF_SENTENCE_CAP  (one by default, two at the ceiling)
+    //   halves + a weigh   the halves total WEIGHED_PAIR_HALVES_TOTAL, so 1 + 1 + 1 = 3
+    //   halves alone       3 at most, which the two rules above already give
+    // ⛔ AND A 2+1 PAIR CANNOT COMPOUND, which needed NO rule here: `joinPairFaces` falls back
+    // to the full stop unless BOTH halves are one sentence. That is what makes ruling 37's
+    // softening safe — a two-sentence half cannot reach the page through the joint.
+    const stated = members.map((at) => faceSentenceCount(faces[at]));
+    members.forEach((at, half) => {
+      if (stated[half] <= PAIR_HALF_SENTENCE_CAP) return;
+      refuse(label, `face ${at + 1} is half of pair ${id} and states ${stated[half]} sentences.`
+        + ` A pair's half is ONE sentence by default and ${PAIR_HALF_SENTENCE_CAP} at the ceiling`
+        + ' (ADDENDUM 18 ruling 30, the owner\'s, as softened by ruling 37): the DRAWN UNIT is'
+        + ' three sentences at most, and a pair is the one shape authored apart and met at render');
+    });
+    const total = stated[0] + stated[1];
+    if (weighs.length === 1 && total > WEIGHED_PAIR_HALVES_TOTAL) {
+      refuse(label, `pair ${id} states ${stated[0]} + ${stated[1]} sentences and carries a`
+        + ` weighing row, which is ${total + 1} in the unit. Where the archiver weighs, the two`
+        + ` halves total ${WEIGHED_PAIR_HALVES_TOTAL} — one each — so the unit is three`
+        + ' (ADDENDUM 18 ruling 30): either cut a half to one sentence or drop the weighing');
+    }
     if (weighs.length === 1 && !WEIGHABLE_KINDS.includes(kindA)) {
       refuse(label, `pair ${id} is a \`${kindA}\` and carries a weighing row. The archiver weighs a`
         + ` \`${WEIGHABLE_KINDS.join('` or a `')}\` pair only — an aside is two unrelated facts and a view`
@@ -1027,6 +1084,41 @@ export function assertFaces(input) {
     // `{settlement}` appears in at most ONE unit per pool and never in a `[face]` sub-row; the
     // face says "the town", "here", "the place", or leaves it implied. Measured cause: the
     // settlement token was the most frequent content token in all three corpora.
+    // ⭐⭐ THE REASSURANCE IS REFUSED UNLESS THE FACE IS COMPROMISED (ADDENDUM 18 ruling 34,
+    // the chair's; ruling 26 (a) is what made it lawful THERE). §6's tell list has five entries
+    // and this is the only one that is ever a LIE rather than a mannerism: a source that says
+    // all is well is either concealing (ruling 26, where it is the whole point) or is the
+    // archiver's own voice leaking into a power's mouth. The other four tells — the which-tail,
+    // the summary, the antithesis, the clever beat — are COUNTED and never refused (ruling 1,
+    // ruling 35: no gate returns), which is why `closeClassOf` reports six classes and this
+    // refuses exactly one of them.
+    if (closeClassOf(face) === 'reassurance' && compromised[at] !== true) {
+      refuse(label, `face ${at + 1} closes on a REASSURANCE ("${String(face).trim().slice(-48)}")`
+        + ` and is not tagged \`${COMPROMISED_MARK}\`. A source that says all is well is either`
+        + ' concealing something the engine records (ADDENDUM 18 ruling 26, where the tag makes'
+        + ' it lawful and the notebook carries the fact) or is the archiver\'s own voice in a'
+        + ' power\'s mouth (§6\'s tell list). The other four tells are counted, never refused');
+    }
+    // ⛔ THE CLASSIFIERS ARE TOTAL, ASSERTED AT GENERATION. The opener and close classes are
+    // computed at RENDER rather than stored on the leaf (the kernel records why), so this is
+    // where the guarantee that motivated "computed at generation" is actually taken: no face
+    // the projector accepts can be UNCLASSIFIABLE by either classifier.
+    const opener = openerClassOf(face);
+    if (!OPENER_CLASSES.includes(opener)) {
+      refuse(label, `face ${at + 1} classifies as the opener \`${opener}\`, which is not one of`
+        + ` the CLOSED classes (ADDENDUM 18 ruling 29): ${OPENER_CLASSES.join(' · ')}`);
+    }
+    const close = closeClassOf(face);
+    if (!CLOSE_CLASSES.includes(close)) {
+      refuse(label, `face ${at + 1} classifies as the close \`${close}\`, which is not one of the`
+        + ` CLOSED classes (ADDENDUM 18 ruling 34): ${CLOSE_CLASSES.join(' · ')}`);
+    }
+    // ⭐ A `simple` POOL CAPS ITS FACES (ruling 30 (b), softened to two by ruling 37).
+    if (input.simple === true && faceSentenceCount(face) > SIMPLE_POOL_SENTENCE_CAP) {
+      refuse(label, `face ${at + 1} states ${faceSentenceCount(face)} sentences on a \`simple\``
+        + ` pool, whose ceiling is ${SIMPLE_POOL_SENTENCE_CAP} (ADDENDUM 18 ruling 30 (b), as`
+        + ' softened by ruling 37). A boolean key with one thing to say says it and stops');
+    }
     if (slots.includes('settlement')) {
       refuse(label, 'a face names {settlement} — the town never names itself inside a [face]'
         + ' (ADDENDUM 18 ruling 12): the reader is standing in the dossier, so the face says'
