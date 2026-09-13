@@ -1,5 +1,3 @@
-> ⚠ **RE-CUT BY THE FABLE SITTING, 2026-09-12 (brief ADDENDUM 18 ruling 5): every example line in this pack was scanned by the floor-2 grammar test (`rewrite/scan-floor2.py`) and the lines that carried a RATE or an ELAPSED COURSE over a live read were rewritten — a writer aims at nothing a refuter refuses. Under ruling 11 a durative over a FROZEN read is lawful and one example keeps it, marked. Under rulings 12 and 13 the town is not named inside a face and every face has a SPEAKER with a stake; the moves below are read through that voice. The pre-recut text is `EXEMPLAR-PACK.md.pre-add18`.**
-
 # THE EXEMPLAR PACK — what to aim at
 
 *Folded from four packets over the exhaustive sweeps of Tolkien, Kay, Martin, Hobb, Le Guin, Wolfe, the D&D corpus and the AI-tell research (~1.5 MB, `prose-research/sweep/`). Those sweeps were once converted into bars a refuter could cite — the wrong reading of what the research found. ADDENDUM 14 reverses it: the references are **guideposts, not laws**. Moves from copyrighted texts are paraphrased and the illustrations are our own; named critics attribute the move, not the wording.*
@@ -31,7 +29,7 @@ The single highest-yield move in every packet. A place is not conveyed by a cate
 Name the object, never the class. Beeswax, not lighting. Clean straw, not bedding. A brazier, not defensive infrastructure.
 
 > Tired: *The settlement maintains adequate defensive works and a functioning watch.*
-> Aimed: *The gate-bar is kept oiled. The brazier beside it burns whatever the ward can spare, and what it burns is sea-coal, which everyone at the gate complains of.*
+> Aimed: *The gate-bar is kept oiled. The brazier beside it burns whatever the ward can spare, and lately that is sea-coal, which everyone at the gate complains of.*
 
 Three things happened there and none was a new fact: an object, a smell, and a grievance.
 
@@ -53,7 +51,7 @@ When you cannot find an angle, ask which of three a fact would show up in. These
 
 **COMPLAINED OF** — the most efficient civic sentence in the form: a complaint carries the fact, the stake and a voice at once, and invents nothing.
 > Receipt: *the town's upkeep for its defences is constrained.*
-> Complaint: *At {settlement} the keeping of the {defwork} and the muster's wages come off one purse, and which gets paid first is the standing argument.*
+> Complaint: *At {settlement} the keeping of the {defwork} and the muster's wages come off one purse, and every year somebody argues about which gets paid first.*
 
 Same fact. The second is a faction seed.
 
@@ -98,8 +96,8 @@ Four clean forms of not-knowing, from a gazetteer entry and worth stealing whole
 
 **Then do not close it.** A face that raises a tension and resolves it in its own last clause has handed the author nothing. At least one civic matter in any town should be *standing*, not concluded.
 
-> Closed: *The gate is shut early, though the town remains secure.*
-> Open: *The gate is shut early. No one gives a reason that the ward accepts.*
+> Closed: *The gate is shut early these days, though the town remains secure.*
+> Open: *The gate is shut early these days. No one has given a reason that the ward accepts.*
 
 ### 6. Land the great fact on the small household
 
@@ -146,7 +144,7 @@ Wolfe: the novice's paragon has virtues that *"are only talked about. Never show
 
 Martin's method: there is room for both plagues and pageantry, rooted in reality first. **Hold the fair and the fever in the same sentence** — then trace the consequence one step further than feels necessary. A river has a ferry; a ferry has a toll; a toll has a dispute.
 
-> *The device over the gate is kept painted. The hinges are not.*
+> *The device over the gate is repainted every spring. The hinges are not.*
 > *The toll at the ford is taken in kind. What is taken in kind is weighed by whoever holds the scales, and the scales are the miller's.*
 
 ### 13. Belief as civic fact, with no wink — and the followers act
@@ -163,7 +161,7 @@ Subject: the people. Content: the recorded temper. No god, no cosmology, no coun
 
 Wolfe's central engine: what a record withholds leaves objective evidence in the record, placed before the reader needs it and never labelled as evidence. The smaller version: an entry admits **one** strange particular among its ordinary furniture and explains nothing, the sentences around it staying level. If the sentence flinches, the particular becomes a special effect.
 
-> *A {defwork} stands, and the stretch beside the mill has been left to the brambles on purpose.* *(a durative — lawful over a FROZEN read only, ADDENDUM 18 ruling 11; the walls read on this pool is frozen)*
+> *A {defwork} stands at {settlement}, and the stretch beside the mill has been left to the brambles on purpose.*
 
 Nothing is asserted, and a GM has a plot before the line ends.
 
@@ -172,7 +170,7 @@ Nothing is asserted, and a GM has a plot before the line ends.
 The sharpest measured failure in this register is a relation **gestured at** — two facts placed side by side so the reader infers a link no record holds. If you know the relation, name it. If you don't, two sentences, and let the GM link them; that is their pleasure.
 
 > Gestured: *the market and the garrison are closely connected in the life of the town.*
-> Named: *The muster drills on market day, which the stallholders do not forgive.*
+> Named: *The muster drills on market day, which the stallholders have never forgiven.*
 > Honest: *Market day is the seventh. The muster drills when it drills.*
 
 ### 16. The dry note
@@ -221,7 +219,7 @@ Read the line aloud before you keep it — the most testable instruction in the 
 **Length follows load.** One fact, short sentence. Three holdings, long sentence. Generated prose is metronomic because nothing rewards variation; human prose varies because the load does. A rota of long-short-long is the same failure in a different coat. Our panels are one to three sentences, so this collapses to one instruction: **do not write two sentences of the same length and the same grammar.**
 
 **Land the period on the strong noun.**
-> Weak: *The gate is shut early, for reasons that remain unclear.*
+> Weak: *The gate is shut early these days, for reasons that remain unclear.*
 > Strong: *The gate is shut early. Nobody at the moot will give a reason.*
 
 **Flow between sentences is the litmus test** (Germani, on Martin). No sentence is a monument; the passage moves. If a comma is doing a full stop's work, cut it. **Three is the ceiling for a list** — a roll of names is this register's known failure — but let a list run to its true count: two guilds, five wards, one ferry. **No paired near-synonyms**; *low, quiet* is one word said twice.
