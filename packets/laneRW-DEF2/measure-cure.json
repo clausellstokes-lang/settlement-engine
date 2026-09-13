@@ -1,7 +1,7 @@
 {
  "arm": "cure",
  "round": 1,
- "at": "2026-09-13T10:02:11",
+ "at": "2026-09-13T11:39:54",
  "roster": {
   "pools": 126,
   "why": "--section defense over 11 block(s) of its own leaf"
@@ -14209,13 +14209,13 @@
    "block": "DS-DEF-2",
    "pool": "Disasters & Famine: NO reserves, NO medical provision",
    "dir": "ds-def-2-disasters-famine-no-reserves-no-medical-provision",
-   "verdict": "WITHHELD",
+   "verdict": "FAIL",
    "why": "",
    "variants": 3,
    "faces": [
-    1,
-    1,
-    1
+    6,
+    6,
+    6
    ],
    "attach": [],
    "rateBp": 4596,
@@ -14226,20 +14226,20 @@
     "refineB": false,
     "files": []
    },
-   "units": 3,
+   "units": 18,
    "walk": {
     "verdicts": {
-     "FAIL": 0,
-     "WITHHELD": 2,
-     "PASS": 1
+     "FAIL": 2,
+     "WITHHELD": 3,
+     "PASS": 13
     },
     "findings": [
      {
       "channel": "WITHHELD",
       "id": "DS-DEF-2 :: Disasters & Famine: NO reserves, NO medical provision",
       "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "a failed harvest is immediate hardship here and a plague runs until it burns out.",
+      "arm": "a second sentence naming no second field",
+      "clause": "The grain is ground on somebody else's stone.",
       "column": "(second typed field)",
       "value": "reads [disasterRowSituation(granary, hospital, church) (via DISASTER_ROW_POOL in defenseStateProse.js)]; none claimed",
       "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
@@ -14247,15 +14247,51 @@
      {
       "channel": "WITHHELD",
       "id": "DS-DEF-2 :: Disasters & Famine: NO reserves, NO medical provision",
+      "arm": "A3",
+      "subject": "the band half is the refuter's",
+      "value": "and not before.",
+      "description": "no sibling KEY names this alternative; whether a sibling BAND supplies it is the refuter's (siblings: Beasts & Monsters: plagued, perimeter AND organized force | Beasts & Monsters: plagued, perimeter but NO force to hold it | Beasts & Monsters: plagued, NO perimeter and NO force | Beasts & Monsters: frontier, credible deterrence)"
+     },
+     {
+      "channel": "FAIL",
+      "id": "DS-DEF-2 :: Disasters & Famine: NO reserves, NO medical provision",
+      "klass": "C2",
+      "arm": "exemption on a null column",
+      "clause": "and the town does not count either as a lack.",
+      "column": "whoIsExempt",
+      "value": "null",
+      "description": "\"does not count\" asserts an exemption; the whoIsExempt column holds nothing"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Disasters & Famine: NO reserves, NO medical provision",
+      "arm": "A3",
+      "subject": "the band half is the refuter's",
+      "value": "and not thanked for coming.",
+      "description": "no sibling KEY names this alternative; whether a sibling BAND supplies it is the refuter's (siblings: Beasts & Monsters: plagued, perimeter AND organized force | Beasts & Monsters: plagued, perimeter but NO force to hold it | Beasts & Monsters: plagued, NO perimeter and NO force | Beasts & Monsters: frontier, credible deterrence)"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Disasters & Famine: NO reserves, NO medical provision",
       "klass": "X",
       "arm": "exhaustivity over an open column",
-      "clause": "The town's answer to a bad season is the same as its answer to a sickness, which is to endure it and count afterwards.",
+      "clause": "Those who bury the dead say they are the one trade here that is sent for in a bad year and not thanked for coming.",
       "column": "office|institution",
       "value": "open",
       "description": "the copula entails the subject is the column's only value; the column is not closed"
+     },
+     {
+      "channel": "FAIL",
+      "id": "DS-DEF-2 :: Disasters & Famine: NO reserves, NO medical provision",
+      "klass": "C2",
+      "arm": "exemption on a null column",
+      "clause": "not counted coming back",
+      "column": "whoIsExempt",
+      "value": "null",
+      "description": "\"not counted\" asserts an exemption; the whoIsExempt column holds nothing"
      }
     ],
-    "findingCount": 2
+    "findingCount": 6
    },
    "lengths": {
     "form": "sentence",
@@ -14264,19 +14300,34 @@
      {
       "vid": 1,
       "faces": [
-       30
+       20,
+       14,
+       14,
+       20,
+       22,
+       27
       ]
      },
      {
       "vid": 2,
       "faces": [
-       24
+       30,
+       13,
+       20,
+       19,
+       25,
+       25
       ]
      },
      {
       "vid": 3,
       "faces": [
-       19
+       23,
+       21,
+       22,
+       26,
+       24,
+       23
       ]
      }
     ]
@@ -14284,50 +14335,68 @@
    "siblings": [
     {
      "vid": 1,
-     "faces": 1,
+     "faces": 6,
      "synonymSwaps": 0,
-     "notExecutable": 1,
+     "notExecutable": 0,
      "spread": {
-      "pairs": 0,
-      "minOverlapBp": null,
-      "maxOverlapBp": null,
-      "medianOverlapBp": null,
+      "pairs": 15,
+      "minOverlapBp": 0,
+      "maxOverlapBp": 1000,
+      "medianOverlapBp": 0,
       "sameOpenerPairs": 0,
-      "sameSegmentPairs": 0,
-      "nearest": null,
-      "why": "NOT-EXECUTABLE: a distance needs two faces and this variant carries 1"
+      "sameSegmentPairs": 10,
+      "nearest": {
+       "a": 1,
+       "b": 2,
+       "sameOpener": false,
+       "sameSegments": true,
+       "overlapBp": 1000
+      },
+      "why": ""
      }
     },
     {
      "vid": 2,
-     "faces": 1,
+     "faces": 6,
      "synonymSwaps": 0,
-     "notExecutable": 1,
+     "notExecutable": 0,
      "spread": {
-      "pairs": 0,
-      "minOverlapBp": null,
-      "maxOverlapBp": null,
-      "medianOverlapBp": null,
-      "sameOpenerPairs": 0,
-      "sameSegmentPairs": 0,
-      "nearest": null,
-      "why": "NOT-EXECUTABLE: a distance needs two faces and this variant carries 1"
+      "pairs": 15,
+      "minOverlapBp": 0,
+      "maxOverlapBp": 2308,
+      "medianOverlapBp": 0,
+      "sameOpenerPairs": 1,
+      "sameSegmentPairs": 15,
+      "nearest": {
+       "a": 1,
+       "b": 3,
+       "sameOpener": false,
+       "sameSegments": true,
+       "overlapBp": 2308
+      },
+      "why": ""
      }
     },
     {
      "vid": 3,
-     "faces": 1,
+     "faces": 6,
      "synonymSwaps": 0,
-     "notExecutable": 1,
+     "notExecutable": 0,
      "spread": {
-      "pairs": 0,
-      "minOverlapBp": null,
-      "maxOverlapBp": null,
-      "medianOverlapBp": null,
-      "sameOpenerPairs": 0,
-      "sameSegmentPairs": 0,
-      "nearest": null,
-      "why": "NOT-EXECUTABLE: a distance needs two faces and this variant carries 1"
+      "pairs": 15,
+      "minOverlapBp": 0,
+      "maxOverlapBp": 4545,
+      "medianOverlapBp": 0,
+      "sameOpenerPairs": 1,
+      "sameSegmentPairs": 15,
+      "nearest": {
+       "a": 0,
+       "b": 2,
+       "sameOpener": false,
+       "sameSegments": true,
+       "overlapBp": 4545
+      },
+      "why": ""
      }
     }
    ],
@@ -14336,6 +14405,53 @@
      "vid": 1,
      "face": 0,
      "executable": true,
+     "sentences": 2,
+     "scored": 8,
+     "exceeded": 0,
+     "exceededShare": 0,
+     "deepest": null,
+     "meanDistanceFromMedian": 0.259,
+     "budgetOk": true,
+     "depthOk": true,
+     "perfectionSuspect": true,
+     "grain": "face",
+     "grains": {
+      "face": {
+       "executable": true,
+       "sentences": 2,
+       "scored": 8,
+       "exceeded": 0,
+       "exceededShare": 0,
+       "deepest": null,
+       "meanDistanceFromMedian": 0.259,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": true,
+       "grain": "face"
+      },
+      "corpus": {
+       "executable": true,
+       "sentences": 19,
+       "scored": 13,
+       "exceeded": 7,
+       "exceededShare": 0.538,
+       "deepest": {
+        "metric": "wordsPerSentence.neighbourVariation",
+        "depth": 0.99,
+        "side": "under"
+       },
+       "meanDistanceFromMedian": 0.485,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": false,
+       "grain": "corpus"
+      }
+     }
+    },
+    {
+     "vid": 1,
+     "face": 1,
+     "executable": true,
      "sentences": 1,
      "scored": 8,
      "exceeded": 0,
@@ -14362,18 +14478,206 @@
       },
       "corpus": {
        "executable": true,
-       "sentences": 3,
+       "sentences": 19,
        "scored": 13,
-       "exceeded": 13,
-       "exceededShare": 1,
+       "exceeded": 7,
+       "exceededShare": 0.538,
        "deepest": {
-        "metric": "punctuation.semicolonRate",
-        "depth": 1.862,
-        "side": "over"
+        "metric": "wordsPerSentence.neighbourVariation",
+        "depth": 0.99,
+        "side": "under"
        },
-       "meanDistanceFromMedian": 0.754,
-       "budgetOk": false,
-       "depthOk": false,
+       "meanDistanceFromMedian": 0.485,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": false,
+       "grain": "corpus"
+      }
+     }
+    },
+    {
+     "vid": 1,
+     "face": 2,
+     "executable": true,
+     "sentences": 1,
+     "scored": 8,
+     "exceeded": 0,
+     "exceededShare": 0,
+     "deepest": null,
+     "meanDistanceFromMedian": 0.259,
+     "budgetOk": true,
+     "depthOk": true,
+     "perfectionSuspect": true,
+     "grain": "face",
+     "grains": {
+      "face": {
+       "executable": true,
+       "sentences": 1,
+       "scored": 8,
+       "exceeded": 0,
+       "exceededShare": 0,
+       "deepest": null,
+       "meanDistanceFromMedian": 0.259,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": true,
+       "grain": "face"
+      },
+      "corpus": {
+       "executable": true,
+       "sentences": 19,
+       "scored": 13,
+       "exceeded": 7,
+       "exceededShare": 0.538,
+       "deepest": {
+        "metric": "wordsPerSentence.neighbourVariation",
+        "depth": 0.99,
+        "side": "under"
+       },
+       "meanDistanceFromMedian": 0.485,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": false,
+       "grain": "corpus"
+      }
+     }
+    },
+    {
+     "vid": 1,
+     "face": 3,
+     "executable": true,
+     "sentences": 1,
+     "scored": 8,
+     "exceeded": 0,
+     "exceededShare": 0,
+     "deepest": null,
+     "meanDistanceFromMedian": 0.259,
+     "budgetOk": true,
+     "depthOk": true,
+     "perfectionSuspect": true,
+     "grain": "face",
+     "grains": {
+      "face": {
+       "executable": true,
+       "sentences": 1,
+       "scored": 8,
+       "exceeded": 0,
+       "exceededShare": 0,
+       "deepest": null,
+       "meanDistanceFromMedian": 0.259,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": true,
+       "grain": "face"
+      },
+      "corpus": {
+       "executable": true,
+       "sentences": 19,
+       "scored": 13,
+       "exceeded": 7,
+       "exceededShare": 0.538,
+       "deepest": {
+        "metric": "wordsPerSentence.neighbourVariation",
+        "depth": 0.99,
+        "side": "under"
+       },
+       "meanDistanceFromMedian": 0.485,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": false,
+       "grain": "corpus"
+      }
+     }
+    },
+    {
+     "vid": 1,
+     "face": 4,
+     "executable": true,
+     "sentences": 1,
+     "scored": 8,
+     "exceeded": 0,
+     "exceededShare": 0,
+     "deepest": null,
+     "meanDistanceFromMedian": 0.259,
+     "budgetOk": true,
+     "depthOk": true,
+     "perfectionSuspect": true,
+     "grain": "face",
+     "grains": {
+      "face": {
+       "executable": true,
+       "sentences": 1,
+       "scored": 8,
+       "exceeded": 0,
+       "exceededShare": 0,
+       "deepest": null,
+       "meanDistanceFromMedian": 0.259,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": true,
+       "grain": "face"
+      },
+      "corpus": {
+       "executable": true,
+       "sentences": 19,
+       "scored": 13,
+       "exceeded": 7,
+       "exceededShare": 0.538,
+       "deepest": {
+        "metric": "wordsPerSentence.neighbourVariation",
+        "depth": 0.99,
+        "side": "under"
+       },
+       "meanDistanceFromMedian": 0.485,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": false,
+       "grain": "corpus"
+      }
+     }
+    },
+    {
+     "vid": 1,
+     "face": 5,
+     "executable": true,
+     "sentences": 1,
+     "scored": 8,
+     "exceeded": 0,
+     "exceededShare": 0,
+     "deepest": null,
+     "meanDistanceFromMedian": 0.259,
+     "budgetOk": true,
+     "depthOk": true,
+     "perfectionSuspect": true,
+     "grain": "face",
+     "grains": {
+      "face": {
+       "executable": true,
+       "sentences": 1,
+       "scored": 8,
+       "exceeded": 0,
+       "exceededShare": 0,
+       "deepest": null,
+       "meanDistanceFromMedian": 0.259,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": true,
+       "grain": "face"
+      },
+      "corpus": {
+       "executable": true,
+       "sentences": 19,
+       "scored": 13,
+       "exceeded": 7,
+       "exceededShare": 0.538,
+       "deepest": {
+        "metric": "wordsPerSentence.neighbourVariation",
+        "depth": 0.99,
+        "side": "under"
+       },
+       "meanDistanceFromMedian": 0.485,
+       "budgetOk": true,
+       "depthOk": true,
        "perfectionSuspect": false,
        "grain": "corpus"
       }
@@ -14385,50 +14689,277 @@
      "executable": true,
      "sentences": 1,
      "scored": 8,
-     "exceeded": 1,
-     "exceededShare": 0.125,
-     "deepest": {
-      "metric": "shapes.whichTailRate",
-      "depth": 26.027,
-      "side": "over"
-     },
-     "meanDistanceFromMedian": 3.536,
+     "exceeded": 0,
+     "exceededShare": 0,
+     "deepest": null,
+     "meanDistanceFromMedian": 0.259,
      "budgetOk": true,
-     "depthOk": false,
-     "perfectionSuspect": false,
+     "depthOk": true,
+     "perfectionSuspect": true,
      "grain": "face",
      "grains": {
       "face": {
        "executable": true,
        "sentences": 1,
        "scored": 8,
-       "exceeded": 1,
-       "exceededShare": 0.125,
-       "deepest": {
-        "metric": "shapes.whichTailRate",
-        "depth": 26.027,
-        "side": "over"
-       },
-       "meanDistanceFromMedian": 3.536,
+       "exceeded": 0,
+       "exceededShare": 0,
+       "deepest": null,
+       "meanDistanceFromMedian": 0.259,
        "budgetOk": true,
-       "depthOk": false,
-       "perfectionSuspect": false,
+       "depthOk": true,
+       "perfectionSuspect": true,
        "grain": "face"
       },
       "corpus": {
        "executable": true,
-       "sentences": 3,
+       "sentences": 19,
        "scored": 13,
-       "exceeded": 13,
-       "exceededShare": 1,
+       "exceeded": 7,
+       "exceededShare": 0.538,
        "deepest": {
-        "metric": "punctuation.semicolonRate",
-        "depth": 1.862,
-        "side": "over"
+        "metric": "wordsPerSentence.neighbourVariation",
+        "depth": 0.99,
+        "side": "under"
        },
-       "meanDistanceFromMedian": 0.754,
-       "budgetOk": false,
-       "depthOk": false,
+       "meanDistanceFromMedian": 0.485,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": false,
+       "grain": "corpus"
+      }
+     }
+    },
+    {
+     "vid": 2,
+     "face": 1,
+     "executable": true,
+     "sentences": 1,
+     "scored": 8,
+     "exceeded": 0,
+     "exceededShare": 0,
+     "deepest": null,
+     "meanDistanceFromMedian": 0.259,
+     "budgetOk": true,
+     "depthOk": true,
+     "perfectionSuspect": true,
+     "grain": "face",
+     "grains": {
+      "face": {
+       "executable": true,
+       "sentences": 1,
+       "scored": 8,
+       "exceeded": 0,
+       "exceededShare": 0,
+       "deepest": null,
+       "meanDistanceFromMedian": 0.259,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": true,
+       "grain": "face"
+      },
+      "corpus": {
+       "executable": true,
+       "sentences": 19,
+       "scored": 13,
+       "exceeded": 7,
+       "exceededShare": 0.538,
+       "deepest": {
+        "metric": "wordsPerSentence.neighbourVariation",
+        "depth": 0.99,
+        "side": "under"
+       },
+       "meanDistanceFromMedian": 0.485,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": false,
+       "grain": "corpus"
+      }
+     }
+    },
+    {
+     "vid": 2,
+     "face": 2,
+     "executable": true,
+     "sentences": 1,
+     "scored": 8,
+     "exceeded": 0,
+     "exceededShare": 0,
+     "deepest": null,
+     "meanDistanceFromMedian": 0.259,
+     "budgetOk": true,
+     "depthOk": true,
+     "perfectionSuspect": true,
+     "grain": "face",
+     "grains": {
+      "face": {
+       "executable": true,
+       "sentences": 1,
+       "scored": 8,
+       "exceeded": 0,
+       "exceededShare": 0,
+       "deepest": null,
+       "meanDistanceFromMedian": 0.259,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": true,
+       "grain": "face"
+      },
+      "corpus": {
+       "executable": true,
+       "sentences": 19,
+       "scored": 13,
+       "exceeded": 7,
+       "exceededShare": 0.538,
+       "deepest": {
+        "metric": "wordsPerSentence.neighbourVariation",
+        "depth": 0.99,
+        "side": "under"
+       },
+       "meanDistanceFromMedian": 0.485,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": false,
+       "grain": "corpus"
+      }
+     }
+    },
+    {
+     "vid": 2,
+     "face": 3,
+     "executable": true,
+     "sentences": 1,
+     "scored": 8,
+     "exceeded": 0,
+     "exceededShare": 0,
+     "deepest": null,
+     "meanDistanceFromMedian": 0.259,
+     "budgetOk": true,
+     "depthOk": true,
+     "perfectionSuspect": true,
+     "grain": "face",
+     "grains": {
+      "face": {
+       "executable": true,
+       "sentences": 1,
+       "scored": 8,
+       "exceeded": 0,
+       "exceededShare": 0,
+       "deepest": null,
+       "meanDistanceFromMedian": 0.259,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": true,
+       "grain": "face"
+      },
+      "corpus": {
+       "executable": true,
+       "sentences": 19,
+       "scored": 13,
+       "exceeded": 7,
+       "exceededShare": 0.538,
+       "deepest": {
+        "metric": "wordsPerSentence.neighbourVariation",
+        "depth": 0.99,
+        "side": "under"
+       },
+       "meanDistanceFromMedian": 0.485,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": false,
+       "grain": "corpus"
+      }
+     }
+    },
+    {
+     "vid": 2,
+     "face": 4,
+     "executable": true,
+     "sentences": 1,
+     "scored": 8,
+     "exceeded": 0,
+     "exceededShare": 0,
+     "deepest": null,
+     "meanDistanceFromMedian": 0.259,
+     "budgetOk": true,
+     "depthOk": true,
+     "perfectionSuspect": true,
+     "grain": "face",
+     "grains": {
+      "face": {
+       "executable": true,
+       "sentences": 1,
+       "scored": 8,
+       "exceeded": 0,
+       "exceededShare": 0,
+       "deepest": null,
+       "meanDistanceFromMedian": 0.259,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": true,
+       "grain": "face"
+      },
+      "corpus": {
+       "executable": true,
+       "sentences": 19,
+       "scored": 13,
+       "exceeded": 7,
+       "exceededShare": 0.538,
+       "deepest": {
+        "metric": "wordsPerSentence.neighbourVariation",
+        "depth": 0.99,
+        "side": "under"
+       },
+       "meanDistanceFromMedian": 0.485,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": false,
+       "grain": "corpus"
+      }
+     }
+    },
+    {
+     "vid": 2,
+     "face": 5,
+     "executable": true,
+     "sentences": 1,
+     "scored": 8,
+     "exceeded": 0,
+     "exceededShare": 0,
+     "deepest": null,
+     "meanDistanceFromMedian": 0.259,
+     "budgetOk": true,
+     "depthOk": true,
+     "perfectionSuspect": true,
+     "grain": "face",
+     "grains": {
+      "face": {
+       "executable": true,
+       "sentences": 1,
+       "scored": 8,
+       "exceeded": 0,
+       "exceededShare": 0,
+       "deepest": null,
+       "meanDistanceFromMedian": 0.259,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": true,
+       "grain": "face"
+      },
+      "corpus": {
+       "executable": true,
+       "sentences": 19,
+       "scored": 13,
+       "exceeded": 7,
+       "exceededShare": 0.538,
+       "deepest": {
+        "metric": "wordsPerSentence.neighbourVariation",
+        "depth": 0.99,
+        "side": "under"
+       },
+       "meanDistanceFromMedian": 0.485,
+       "budgetOk": true,
+       "depthOk": true,
        "perfectionSuspect": false,
        "grain": "corpus"
       }
@@ -14464,18 +14995,253 @@
       },
       "corpus": {
        "executable": true,
-       "sentences": 3,
+       "sentences": 19,
        "scored": 13,
-       "exceeded": 13,
-       "exceededShare": 1,
+       "exceeded": 7,
+       "exceededShare": 0.538,
        "deepest": {
-        "metric": "punctuation.semicolonRate",
-        "depth": 1.862,
-        "side": "over"
+        "metric": "wordsPerSentence.neighbourVariation",
+        "depth": 0.99,
+        "side": "under"
        },
-       "meanDistanceFromMedian": 0.754,
-       "budgetOk": false,
-       "depthOk": false,
+       "meanDistanceFromMedian": 0.485,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": false,
+       "grain": "corpus"
+      }
+     }
+    },
+    {
+     "vid": 3,
+     "face": 1,
+     "executable": true,
+     "sentences": 1,
+     "scored": 8,
+     "exceeded": 0,
+     "exceededShare": 0,
+     "deepest": null,
+     "meanDistanceFromMedian": 0.259,
+     "budgetOk": true,
+     "depthOk": true,
+     "perfectionSuspect": true,
+     "grain": "face",
+     "grains": {
+      "face": {
+       "executable": true,
+       "sentences": 1,
+       "scored": 8,
+       "exceeded": 0,
+       "exceededShare": 0,
+       "deepest": null,
+       "meanDistanceFromMedian": 0.259,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": true,
+       "grain": "face"
+      },
+      "corpus": {
+       "executable": true,
+       "sentences": 19,
+       "scored": 13,
+       "exceeded": 7,
+       "exceededShare": 0.538,
+       "deepest": {
+        "metric": "wordsPerSentence.neighbourVariation",
+        "depth": 0.99,
+        "side": "under"
+       },
+       "meanDistanceFromMedian": 0.485,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": false,
+       "grain": "corpus"
+      }
+     }
+    },
+    {
+     "vid": 3,
+     "face": 2,
+     "executable": true,
+     "sentences": 1,
+     "scored": 8,
+     "exceeded": 0,
+     "exceededShare": 0,
+     "deepest": null,
+     "meanDistanceFromMedian": 0.259,
+     "budgetOk": true,
+     "depthOk": true,
+     "perfectionSuspect": true,
+     "grain": "face",
+     "grains": {
+      "face": {
+       "executable": true,
+       "sentences": 1,
+       "scored": 8,
+       "exceeded": 0,
+       "exceededShare": 0,
+       "deepest": null,
+       "meanDistanceFromMedian": 0.259,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": true,
+       "grain": "face"
+      },
+      "corpus": {
+       "executable": true,
+       "sentences": 19,
+       "scored": 13,
+       "exceeded": 7,
+       "exceededShare": 0.538,
+       "deepest": {
+        "metric": "wordsPerSentence.neighbourVariation",
+        "depth": 0.99,
+        "side": "under"
+       },
+       "meanDistanceFromMedian": 0.485,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": false,
+       "grain": "corpus"
+      }
+     }
+    },
+    {
+     "vid": 3,
+     "face": 3,
+     "executable": true,
+     "sentences": 1,
+     "scored": 8,
+     "exceeded": 0,
+     "exceededShare": 0,
+     "deepest": null,
+     "meanDistanceFromMedian": 0.259,
+     "budgetOk": true,
+     "depthOk": true,
+     "perfectionSuspect": true,
+     "grain": "face",
+     "grains": {
+      "face": {
+       "executable": true,
+       "sentences": 1,
+       "scored": 8,
+       "exceeded": 0,
+       "exceededShare": 0,
+       "deepest": null,
+       "meanDistanceFromMedian": 0.259,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": true,
+       "grain": "face"
+      },
+      "corpus": {
+       "executable": true,
+       "sentences": 19,
+       "scored": 13,
+       "exceeded": 7,
+       "exceededShare": 0.538,
+       "deepest": {
+        "metric": "wordsPerSentence.neighbourVariation",
+        "depth": 0.99,
+        "side": "under"
+       },
+       "meanDistanceFromMedian": 0.485,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": false,
+       "grain": "corpus"
+      }
+     }
+    },
+    {
+     "vid": 3,
+     "face": 4,
+     "executable": true,
+     "sentences": 1,
+     "scored": 8,
+     "exceeded": 0,
+     "exceededShare": 0,
+     "deepest": null,
+     "meanDistanceFromMedian": 0.259,
+     "budgetOk": true,
+     "depthOk": true,
+     "perfectionSuspect": true,
+     "grain": "face",
+     "grains": {
+      "face": {
+       "executable": true,
+       "sentences": 1,
+       "scored": 8,
+       "exceeded": 0,
+       "exceededShare": 0,
+       "deepest": null,
+       "meanDistanceFromMedian": 0.259,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": true,
+       "grain": "face"
+      },
+      "corpus": {
+       "executable": true,
+       "sentences": 19,
+       "scored": 13,
+       "exceeded": 7,
+       "exceededShare": 0.538,
+       "deepest": {
+        "metric": "wordsPerSentence.neighbourVariation",
+        "depth": 0.99,
+        "side": "under"
+       },
+       "meanDistanceFromMedian": 0.485,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": false,
+       "grain": "corpus"
+      }
+     }
+    },
+    {
+     "vid": 3,
+     "face": 5,
+     "executable": true,
+     "sentences": 1,
+     "scored": 8,
+     "exceeded": 0,
+     "exceededShare": 0,
+     "deepest": null,
+     "meanDistanceFromMedian": 0.259,
+     "budgetOk": true,
+     "depthOk": true,
+     "perfectionSuspect": true,
+     "grain": "face",
+     "grains": {
+      "face": {
+       "executable": true,
+       "sentences": 1,
+       "scored": 8,
+       "exceeded": 0,
+       "exceededShare": 0,
+       "deepest": null,
+       "meanDistanceFromMedian": 0.259,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": true,
+       "grain": "face"
+      },
+      "corpus": {
+       "executable": true,
+       "sentences": 19,
+       "scored": 13,
+       "exceeded": 7,
+       "exceededShare": 0.538,
+       "deepest": {
+        "metric": "wordsPerSentence.neighbourVariation",
+        "depth": 0.99,
+        "side": "under"
+       },
+       "meanDistanceFromMedian": 0.485,
+       "budgetOk": true,
+       "depthOk": true,
        "perfectionSuspect": false,
        "grain": "corpus"
       }
@@ -14488,27 +15254,27 @@
    },
    "corpusBand": {
     "executable": true,
-    "sentences": 3,
+    "sentences": 19,
     "scored": 13,
-    "exceeded": 13,
-    "exceededShare": 1,
+    "exceeded": 7,
+    "exceededShare": 0.538,
     "deepest": {
-     "metric": "punctuation.semicolonRate",
-     "depth": 1.862,
-     "side": "over"
+     "metric": "wordsPerSentence.neighbourVariation",
+     "depth": 0.99,
+     "side": "under"
     },
-    "meanDistanceFromMedian": 0.754,
-    "budgetOk": false,
-    "depthOk": false,
+    "meanDistanceFromMedian": 0.485,
+    "budgetOk": true,
+    "depthOk": true,
     "perfectionSuspect": false,
     "grain": "corpus"
    },
-   "corpusWords": 73,
+   "corpusWords": 388,
    "owned": {
     "verdicts": {
      "FAIL": 0,
      "WITHHELD": 0,
-     "PASS": 3
+     "PASS": 18
     },
     "findings": [],
     "findingCount": 0,
@@ -14516,13 +15282,43 @@
    },
    "inherited": [
     {
-     "label": "Q · a trailing coordinate naming no second field",
-     "arm": "a trailing coordinate naming no second field",
+     "label": "Q · a second sentence naming no second field",
+     "arm": "a second sentence naming no second field",
      "klass": "Q",
      "channel": "WITHHELD",
      "spineKey": "Disasters & Famine: NO reserves, NO medical provision",
-     "clause": "a failed harvest is immediate hardship here and a plague runs until it burns out.",
+     "clause": "The grain is ground on somebody else's stone.",
      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call",
+     "count": 1
+    },
+    {
+     "label": "A3 · the band half is the refuter's",
+     "arm": "A3",
+     "klass": "",
+     "channel": "WITHHELD",
+     "spineKey": "Disasters & Famine: NO reserves, NO medical provision",
+     "clause": "and not before.",
+     "description": "no sibling KEY names this alternative; whether a sibling BAND supplies it is the refuter's (siblings: Beasts & Monsters: plagued, perimeter AND organized force | Beasts & Monsters: plagued, perimeter but NO force to hold it | Beasts & Monsters: plagued, NO perimeter and NO force | Beasts & Monsters: frontier, credible deterrence)",
+     "count": 1
+    },
+    {
+     "label": "C2 · exemption on a null column",
+     "arm": "exemption on a null column",
+     "klass": "C2",
+     "channel": "FAIL",
+     "spineKey": "Disasters & Famine: NO reserves, NO medical provision",
+     "clause": "and the town does not count either as a lack.",
+     "description": "\"does not count\" asserts an exemption; the whoIsExempt column holds nothing",
+     "count": 1
+    },
+    {
+     "label": "A3 · the band half is the refuter's",
+     "arm": "A3",
+     "klass": "",
+     "channel": "WITHHELD",
+     "spineKey": "Disasters & Famine: NO reserves, NO medical provision",
+     "clause": "and not thanked for coming.",
+     "description": "no sibling KEY names this alternative; whether a sibling BAND supplies it is the refuter's (siblings: Beasts & Monsters: plagued, perimeter AND organized force | Beasts & Monsters: plagued, perimeter but NO force to hold it | Beasts & Monsters: plagued, NO perimeter and NO force | Beasts & Monsters: frontier, credible deterrence)",
      "count": 1
     },
     {
@@ -14531,16 +15327,26 @@
      "klass": "X",
      "channel": "WITHHELD",
      "spineKey": "Disasters & Famine: NO reserves, NO medical provision",
-     "clause": "The town's answer to a bad season is the same as its answer to a sickness, which is to endure it and count afterwards.",
+     "clause": "Those who bury the dead say they are the one trade here that is sent for in a bad year and not thanked for coming.",
      "description": "the copula entails the subject is the column's only value; the column is not closed",
+     "count": 1
+    },
+    {
+     "label": "C2 · exemption on a null column",
+     "arm": "exemption on a null column",
+     "klass": "C2",
+     "channel": "FAIL",
+     "spineKey": "Disasters & Famine: NO reserves, NO medical provision",
+     "clause": "not counted coming back",
+     "description": "\"not counted\" asserts an exemption; the whoIsExempt column holds nothing",
      "count": 1
     }
    ],
-   "inheritedCount": 2,
+   "inheritedCount": 6,
    "spineWithheld": true,
    "qVocabulary": [
     {
-     "clause": "a failed harvest is immediate hardship here and a plague runs until it burns out.",
+     "clause": "The grain is ground on somebody else's stone.",
      "spineKey": "Disasters & Famine: NO reserves, NO medical provision",
      "count": 1,
      "reads": [
@@ -14556,13 +15362,7 @@
    "failing": [],
    "report": {
     "band": [],
-    "depth": [
-     {
-      "measure": "band depth · shapes.whichTailRate (over)",
-      "value": "26.027 band-widths on 1 of 3 face(s)",
-      "band": "DEPTH at most 1.75 band-widths on every face (REPORTED, refuses nothing — ADDENDUM 18 ruling 1)"
-     }
-    ],
+    "depth": [],
     "budget": [],
     "composedWalk": []
    }
@@ -18279,9 +19079,9 @@
    "why": "",
    "variants": 3,
    "faces": [
-    1,
-    1,
-    1
+    11,
+    8,
+    8
    ],
    "attach": [],
    "rateBp": 5000,
@@ -18292,26 +19092,186 @@
     "refineB": false,
     "files": []
    },
-   "units": 3,
+   "units": 27,
    "walk": {
     "verdicts": {
      "FAIL": 0,
-     "WITHHELD": 1,
-     "PASS": 2
+     "WITHHELD": 12,
+     "PASS": 15
     },
     "findings": [
      {
       "channel": "WITHHELD",
       "id": "DS-DEF-2 :: Internal Security: no legal infrastructure",
       "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "order here rests on force alone, and force alone deters only while it is present.",
+      "arm": "a second sentence naming no second field",
+      "clause": "A wrong is settled where it happens, and no judgement is written down.",
       "column": "(second typed field)",
       "value": "reads [court, prison]; none claimed",
       "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Internal Security: no legal infrastructure",
+      "klass": "C3",
+      "arm": "is this clause historical?",
+      "clause": "and that nothing of what was settled comes with him.",
+      "column": "provenance",
+      "value": "semantic",
+      "description": "a past-tense or formerly-construction: whether it asserts history is A6, the refuter's"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Internal Security: no legal infrastructure",
+      "klass": "F25",
+      "arm": "a cited record's content",
+      "clause": "The register has",
+      "column": "(cited record)",
+      "value": "unresolved",
+      "description": "the predicate is attributed to a record; fault 25 asks what that record HOLDS, and no loader reaches its fields yet"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Internal Security: no legal infrastructure",
+      "arm": "A13",
+      "subject": "a cited holder the census does not license",
+      "value": "Internal Security: no legal infrastructure: SOURCE-UNRESOLVED",
+      "description": "the fact's source is unresolved or is the office's own books, so the citation cites the speaker rather than a record"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Internal Security: no legal infrastructure",
+      "klass": "X",
+      "arm": "exhaustivity over an open column",
+      "clause": "The elders' word is that a debt here is the creditor's to collect, and the households keep their own reckoning of who owes whom.",
+      "column": "office|institution",
+      "value": "open",
+      "description": "the copula entails the subject is the column's only value; the column is not closed"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Internal Security: no legal infrastructure",
+      "arm": "A3",
+      "subject": "the band half is the refuter's",
+      "value": "and not written down.",
+      "description": "no sibling KEY names this alternative; whether a sibling BAND supplies it is the refuter's (siblings: Beasts & Monsters: plagued, perimeter AND organized force | Beasts & Monsters: plagued, perimeter but NO force to hold it | Beasts & Monsters: plagued, NO perimeter and NO force | Beasts & Monsters: frontier, credible deterrence)"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Internal Security: no legal infrastructure",
+      "klass": "C3",
+      "arm": "is this clause historical?",
+      "clause": "The muster says that with no gaol to put a man in, what it does with him is done at once and not written down.",
+      "column": "provenance",
+      "value": "semantic",
+      "description": "a past-tense or formerly-construction: whether it asserts history is A6, the refuter's"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Internal Security: no legal infrastructure",
+      "klass": "C3",
+      "arm": "is this clause historical?",
+      "clause": "and it stays settled for as long as everyone who was there goes on agreeing that it was.",
+      "column": "provenance",
+      "value": "semantic",
+      "description": "a past-tense or formerly-construction: whether it asserts history is A6, the refuter's"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Internal Security: no legal infrastructure",
+      "klass": "C3",
+      "arm": "is this clause historical?",
+      "clause": "A pedlar says a short payment here is argued out on the doorstep where it was made",
+      "column": "provenance",
+      "value": "semantic",
+      "description": "a past-tense or formerly-construction: whether it asserts history is A6, the refuter's"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Internal Security: no legal infrastructure",
+      "arm": "A13",
+      "subject": "a cited holder the census does not license",
+      "value": "Internal Security: no legal infrastructure: SOURCE-UNRESOLVED",
+      "description": "the fact's source is unresolved or is the office's own books, so the citation cites the speaker rather than a record"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Internal Security: no legal infrastructure",
+      "klass": "C1",
+      "arm": "a figure outside the closed vocabulary",
+      "clause": "The walking is done by the two households",
+      "column": "whoIsCounted",
+      "value": "two",
+      "description": "\"two\" counts \"households\" outside QUANTITY_BANDS; the record speaks counts as band words"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Internal Security: no legal infrastructure",
+      "klass": "Q",
+      "arm": "a second sentence naming no second field",
+      "clause": "The walking is done by the two households, in time neither can spare.",
+      "column": "(second typed field)",
+      "value": "reads [court, prison]; none claimed",
+      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Internal Security: no legal infrastructure",
+      "klass": "C3",
+      "arm": "is this clause historical?",
+      "clause": "not what was decided",
+      "column": "provenance",
+      "value": "semantic",
+      "description": "a past-tense or formerly-construction: whether it asserts history is A6, the refuter's"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Internal Security: no legal infrastructure",
+      "arm": "A3",
+      "subject": "the band half is the refuter's",
+      "value": "and not wait on coin.",
+      "description": "no sibling KEY names this alternative; whether a sibling BAND supplies it is the refuter's (siblings: Beasts & Monsters: plagued, perimeter AND organized force | Beasts & Monsters: plagued, perimeter but NO force to hold it | Beasts & Monsters: plagued, NO perimeter and NO force | Beasts & Monsters: frontier, credible deterrence)"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Internal Security: no legal infrastructure",
+      "arm": "A13",
+      "subject": "a cited holder the census does not license",
+      "value": "Internal Security: no legal infrastructure: SOURCE-UNRESOLVED",
+      "description": "the fact's source is unresolved or is the office's own books, so the citation cites the speaker rather than a record"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Internal Security: no legal infrastructure",
+      "klass": "C3",
+      "arm": "is this clause historical?",
+      "clause": "and that a stranger who does not stay for the answer was not much wronged.",
+      "column": "provenance",
+      "value": "semantic",
+      "description": "a past-tense or formerly-construction: whether it asserts history is A6, the refuter's"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Internal Security: no legal infrastructure",
+      "klass": "C3",
+      "arm": "is this clause historical?",
+      "clause": "whatever was",
+      "column": "provenance",
+      "value": "semantic",
+      "description": "a past-tense or formerly-construction: whether it asserts history is A6, the refuter's"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Internal Security: no legal infrastructure",
+      "klass": "F25",
+      "arm": "a cited record's content",
+      "clause": "The register says",
+      "column": "(cited record)",
+      "value": "unresolved",
+      "description": "the predicate is attributed to a record; fault 25 asks what that record HOLDS, and no loader reaches its fields yet"
      }
     ],
-    "findingCount": 1
+    "findingCount": 18
    },
    "lengths": {
     "form": "sentence",
@@ -18320,355 +19280,42 @@
      {
       "vid": 1,
       "faces": [
+       23,
+       24,
+       18,
+       23,
+       17,
+       16,
+       24,
+       13,
+       23,
+       24,
+       25
+      ]
+     },
+     {
+      "vid": 2,
+      "faces": [
+       29,
+       25,
+       25,
+       20,
+       27,
+       19,
+       28,
        22
       ]
      },
      {
-      "vid": 2,
-      "faces": [
-       13
-      ]
-     },
-     {
       "vid": 3,
       "faces": [
-       19
-      ]
-     }
-    ]
-   },
-   "siblings": [
-    {
-     "vid": 1,
-     "faces": 1,
-     "synonymSwaps": 0,
-     "notExecutable": 1,
-     "spread": {
-      "pairs": 0,
-      "minOverlapBp": null,
-      "maxOverlapBp": null,
-      "medianOverlapBp": null,
-      "sameOpenerPairs": 0,
-      "sameSegmentPairs": 0,
-      "nearest": null,
-      "why": "NOT-EXECUTABLE: a distance needs two faces and this variant carries 1"
-     }
-    },
-    {
-     "vid": 2,
-     "faces": 1,
-     "synonymSwaps": 0,
-     "notExecutable": 1,
-     "spread": {
-      "pairs": 0,
-      "minOverlapBp": null,
-      "maxOverlapBp": null,
-      "medianOverlapBp": null,
-      "sameOpenerPairs": 0,
-      "sameSegmentPairs": 0,
-      "nearest": null,
-      "why": "NOT-EXECUTABLE: a distance needs two faces and this variant carries 1"
-     }
-    },
-    {
-     "vid": 3,
-     "faces": 1,
-     "synonymSwaps": 0,
-     "notExecutable": 1,
-     "spread": {
-      "pairs": 0,
-      "minOverlapBp": null,
-      "maxOverlapBp": null,
-      "medianOverlapBp": null,
-      "sameOpenerPairs": 0,
-      "sameSegmentPairs": 0,
-      "nearest": null,
-      "why": "NOT-EXECUTABLE: a distance needs two faces and this variant carries 1"
-     }
-    }
-   ],
-   "band": [
-    {
-     "vid": 1,
-     "face": 0,
-     "executable": true,
-     "sentences": 1,
-     "scored": 8,
-     "exceeded": 0,
-     "exceededShare": 0,
-     "deepest": null,
-     "meanDistanceFromMedian": 0.259,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": true,
-     "grain": "face",
-     "grains": {
-      "face": {
-       "executable": true,
-       "sentences": 1,
-       "scored": 8,
-       "exceeded": 0,
-       "exceededShare": 0,
-       "deepest": null,
-       "meanDistanceFromMedian": 0.259,
-       "budgetOk": true,
-       "depthOk": true,
-       "perfectionSuspect": true,
-       "grain": "face"
-      },
-      "corpus": {
-       "executable": true,
-       "sentences": 3,
-       "scored": 13,
-       "exceeded": 11,
-       "exceededShare": 0.846,
-       "deepest": {
-        "metric": "shapes.thereIsOpenerRate",
-        "depth": 5.143,
-        "side": "over"
-       },
-       "meanDistanceFromMedian": 1.063,
-       "budgetOk": false,
-       "depthOk": false,
-       "perfectionSuspect": false,
-       "grain": "corpus"
-      }
-     }
-    },
-    {
-     "vid": 2,
-     "face": 0,
-     "executable": true,
-     "sentences": 1,
-     "scored": 8,
-     "exceeded": 0,
-     "exceededShare": 0,
-     "deepest": null,
-     "meanDistanceFromMedian": 0.259,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": true,
-     "grain": "face",
-     "grains": {
-      "face": {
-       "executable": true,
-       "sentences": 1,
-       "scored": 8,
-       "exceeded": 0,
-       "exceededShare": 0,
-       "deepest": null,
-       "meanDistanceFromMedian": 0.259,
-       "budgetOk": true,
-       "depthOk": true,
-       "perfectionSuspect": true,
-       "grain": "face"
-      },
-      "corpus": {
-       "executable": true,
-       "sentences": 3,
-       "scored": 13,
-       "exceeded": 11,
-       "exceededShare": 0.846,
-       "deepest": {
-        "metric": "shapes.thereIsOpenerRate",
-        "depth": 5.143,
-        "side": "over"
-       },
-       "meanDistanceFromMedian": 1.063,
-       "budgetOk": false,
-       "depthOk": false,
-       "perfectionSuspect": false,
-       "grain": "corpus"
-      }
-     }
-    },
-    {
-     "vid": 3,
-     "face": 0,
-     "executable": true,
-     "sentences": 1,
-     "scored": 8,
-     "exceeded": 0,
-     "exceededShare": 0,
-     "deepest": null,
-     "meanDistanceFromMedian": 0.259,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": true,
-     "grain": "face",
-     "grains": {
-      "face": {
-       "executable": true,
-       "sentences": 1,
-       "scored": 8,
-       "exceeded": 0,
-       "exceededShare": 0,
-       "deepest": null,
-       "meanDistanceFromMedian": 0.259,
-       "budgetOk": true,
-       "depthOk": true,
-       "perfectionSuspect": true,
-       "grain": "face"
-      },
-      "corpus": {
-       "executable": true,
-       "sentences": 3,
-       "scored": 13,
-       "exceeded": 11,
-       "exceededShare": 0.846,
-       "deepest": {
-        "metric": "shapes.thereIsOpenerRate",
-        "depth": 5.143,
-        "side": "over"
-       },
-       "meanDistanceFromMedian": 1.063,
-       "budgetOk": false,
-       "depthOk": false,
-       "perfectionSuspect": false,
-       "grain": "corpus"
-      }
-     }
-    }
-   ],
-   "provenance": {
-    "citations": 0,
-    "a13": 0
-   },
-   "corpusBand": {
-    "executable": true,
-    "sentences": 3,
-    "scored": 13,
-    "exceeded": 11,
-    "exceededShare": 0.846,
-    "deepest": {
-     "metric": "shapes.thereIsOpenerRate",
-     "depth": 5.143,
-     "side": "over"
-    },
-    "meanDistanceFromMedian": 1.063,
-    "budgetOk": false,
-    "depthOk": false,
-    "perfectionSuspect": false,
-    "grain": "corpus"
-   },
-   "corpusWords": 54,
-   "owned": {
-    "verdicts": {
-     "FAIL": 0,
-     "WITHHELD": 0,
-     "PASS": 3
-    },
-    "findings": [],
-    "findingCount": 0,
-    "byLabel": []
-   },
-   "inherited": [
-    {
-     "label": "Q · a trailing coordinate naming no second field",
-     "arm": "a trailing coordinate naming no second field",
-     "klass": "Q",
-     "channel": "WITHHELD",
-     "spineKey": "Internal Security: no legal infrastructure",
-     "clause": "order here rests on force alone, and force alone deters only while it is present.",
-     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call",
-     "count": 1
-    }
-   ],
-   "inheritedCount": 1,
-   "spineWithheld": true,
-   "qVocabulary": [
-    {
-     "clause": "order here rests on force alone, and force alone deters only while it is present.",
-     "spineKey": "Internal Security: no legal infrastructure",
-     "count": 1,
-     "reads": [
-      "court",
-      "prison"
-     ],
-     "mapped": [],
-     "executable": true,
-     "verdict": "the clause names no field the spine declares it reads, under the vocabulary the census supplies",
-     "synonymTable": "a word-level synonym table ships and was applied"
-    }
-   ],
-   "inBand": true,
-   "failing": [],
-   "report": {
-    "band": [],
-    "depth": [],
-    "budget": [],
-    "composedWalk": []
-   }
-  },
-  {
-   "block": "DS-DEF-2",
-   "pool": "Invasion & War: force with NO walls",
-   "dir": "ds-def-2-invasion-war-force-with-no-walls",
-   "verdict": "WITHHELD",
-   "why": "",
-   "variants": 3,
-   "faces": [
-    1,
-    1,
-    1
-   ],
-   "attach": [],
-   "rateBp": 169,
-   "departure": 1,
-   "rounds": {
-    "draftRounds": 0,
-    "refineA": false,
-    "refineB": false,
-    "files": []
-   },
-   "units": 3,
-   "walk": {
-    "verdicts": {
-     "FAIL": 0,
-     "WITHHELD": 2,
-     "PASS": 1
-    },
-    "findings": [
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-2 :: Invasion & War: force with NO walls",
-      "klass": "Q",
-      "arm": "a second sentence naming no second field",
-      "clause": "It answers raiders well and cannot hold a siege, because there is nothing here to hold.",
-      "column": "(second typed field)",
-      "value": "reads [invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)]; none claimed",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-2 :: Invasion & War: force with NO walls",
-      "arm": "A3",
-      "subject": "the band half is the refuter's",
-      "value": "rather than works",
-      "description": "no sibling KEY names this alternative; whether a sibling BAND supplies it is the refuter's (siblings: Beasts & Monsters: plagued, perimeter AND organized force | Beasts & Monsters: plagued, perimeter but NO force to hold it | Beasts & Monsters: plagued, NO perimeter and NO force | Beasts & Monsters: frontier, credible deterrence)"
-     }
-    ],
-    "findingCount": 2
-   },
-   "lengths": {
-    "form": "sentence",
-    "ceiling": null,
-    "rows": [
-     {
-      "vid": 1,
-      "faces": [
-       24
-      ]
-     },
-     {
-      "vid": 2,
-      "faces": [
-       14
-      ]
-     },
-     {
-      "vid": 3,
-      "faces": [
+       19,
+       24,
+       20,
+       27,
+       22,
+       22,
+       30,
        25
       ]
      }
@@ -18677,50 +19324,68 @@
    "siblings": [
     {
      "vid": 1,
-     "faces": 1,
+     "faces": 11,
      "synonymSwaps": 0,
-     "notExecutable": 1,
+     "notExecutable": 0,
      "spread": {
-      "pairs": 0,
-      "minOverlapBp": null,
-      "maxOverlapBp": null,
-      "medianOverlapBp": null,
-      "sameOpenerPairs": 0,
-      "sameSegmentPairs": 0,
-      "nearest": null,
-      "why": "NOT-EXECUTABLE: a distance needs two faces and this variant carries 1"
+      "pairs": 55,
+      "minOverlapBp": 0,
+      "maxOverlapBp": 1250,
+      "medianOverlapBp": 0,
+      "sameOpenerPairs": 5,
+      "sameSegmentPairs": 45,
+      "nearest": {
+       "a": 0,
+       "b": 10,
+       "sameOpener": false,
+       "sameSegments": false,
+       "overlapBp": 1250
+      },
+      "why": ""
      }
     },
     {
      "vid": 2,
-     "faces": 1,
+     "faces": 8,
      "synonymSwaps": 0,
-     "notExecutable": 1,
+     "notExecutable": 0,
      "spread": {
-      "pairs": 0,
-      "minOverlapBp": null,
-      "maxOverlapBp": null,
-      "medianOverlapBp": null,
-      "sameOpenerPairs": 0,
-      "sameSegmentPairs": 0,
-      "nearest": null,
-      "why": "NOT-EXECUTABLE: a distance needs two faces and this variant carries 1"
+      "pairs": 28,
+      "minOverlapBp": 0,
+      "maxOverlapBp": 1875,
+      "medianOverlapBp": 516,
+      "sameOpenerPairs": 2,
+      "sameSegmentPairs": 21,
+      "nearest": {
+       "a": 0,
+       "b": 2,
+       "sameOpener": false,
+       "sameSegments": true,
+       "overlapBp": 1875
+      },
+      "why": ""
      }
     },
     {
      "vid": 3,
-     "faces": 1,
+     "faces": 8,
      "synonymSwaps": 0,
-     "notExecutable": 1,
+     "notExecutable": 0,
      "spread": {
-      "pairs": 0,
-      "minOverlapBp": null,
-      "maxOverlapBp": null,
-      "medianOverlapBp": null,
-      "sameOpenerPairs": 0,
-      "sameSegmentPairs": 0,
-      "nearest": null,
-      "why": "NOT-EXECUTABLE: a distance needs two faces and this variant carries 1"
+      "pairs": 28,
+      "minOverlapBp": 0,
+      "maxOverlapBp": 1250,
+      "medianOverlapBp": 625,
+      "sameOpenerPairs": 2,
+      "sameSegmentPairs": 28,
+      "nearest": {
+       "a": 0,
+       "b": 1,
+       "sameOpener": false,
+       "sameSegments": true,
+       "overlapBp": 1250
+      },
+      "why": ""
      }
     }
    ],
@@ -18755,18 +19420,488 @@
       },
       "corpus": {
        "executable": true,
-       "sentences": 4,
+       "sentences": 29,
        "scored": 13,
-       "exceeded": 12,
-       "exceededShare": 0.923,
+       "exceeded": 9,
+       "exceededShare": 0.692,
        "deepest": {
-        "metric": "shapes.antithesisRate",
-        "depth": 6.58,
-        "side": "over"
+        "metric": "wordsPerSentence.neighbourVariation",
+        "depth": 0.829,
+        "side": "under"
        },
-       "meanDistanceFromMedian": 0.972,
+       "meanDistanceFromMedian": 0.501,
        "budgetOk": false,
-       "depthOk": false,
+       "depthOk": true,
+       "perfectionSuspect": false,
+       "grain": "corpus"
+      }
+     }
+    },
+    {
+     "vid": 1,
+     "face": 1,
+     "executable": true,
+     "sentences": 1,
+     "scored": 8,
+     "exceeded": 0,
+     "exceededShare": 0,
+     "deepest": null,
+     "meanDistanceFromMedian": 0.259,
+     "budgetOk": true,
+     "depthOk": true,
+     "perfectionSuspect": true,
+     "grain": "face",
+     "grains": {
+      "face": {
+       "executable": true,
+       "sentences": 1,
+       "scored": 8,
+       "exceeded": 0,
+       "exceededShare": 0,
+       "deepest": null,
+       "meanDistanceFromMedian": 0.259,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": true,
+       "grain": "face"
+      },
+      "corpus": {
+       "executable": true,
+       "sentences": 29,
+       "scored": 13,
+       "exceeded": 9,
+       "exceededShare": 0.692,
+       "deepest": {
+        "metric": "wordsPerSentence.neighbourVariation",
+        "depth": 0.829,
+        "side": "under"
+       },
+       "meanDistanceFromMedian": 0.501,
+       "budgetOk": false,
+       "depthOk": true,
+       "perfectionSuspect": false,
+       "grain": "corpus"
+      }
+     }
+    },
+    {
+     "vid": 1,
+     "face": 2,
+     "executable": true,
+     "sentences": 1,
+     "scored": 8,
+     "exceeded": 0,
+     "exceededShare": 0,
+     "deepest": null,
+     "meanDistanceFromMedian": 0.259,
+     "budgetOk": true,
+     "depthOk": true,
+     "perfectionSuspect": true,
+     "grain": "face",
+     "grains": {
+      "face": {
+       "executable": true,
+       "sentences": 1,
+       "scored": 8,
+       "exceeded": 0,
+       "exceededShare": 0,
+       "deepest": null,
+       "meanDistanceFromMedian": 0.259,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": true,
+       "grain": "face"
+      },
+      "corpus": {
+       "executable": true,
+       "sentences": 29,
+       "scored": 13,
+       "exceeded": 9,
+       "exceededShare": 0.692,
+       "deepest": {
+        "metric": "wordsPerSentence.neighbourVariation",
+        "depth": 0.829,
+        "side": "under"
+       },
+       "meanDistanceFromMedian": 0.501,
+       "budgetOk": false,
+       "depthOk": true,
+       "perfectionSuspect": false,
+       "grain": "corpus"
+      }
+     }
+    },
+    {
+     "vid": 1,
+     "face": 3,
+     "executable": true,
+     "sentences": 1,
+     "scored": 8,
+     "exceeded": 0,
+     "exceededShare": 0,
+     "deepest": null,
+     "meanDistanceFromMedian": 0.259,
+     "budgetOk": true,
+     "depthOk": true,
+     "perfectionSuspect": true,
+     "grain": "face",
+     "grains": {
+      "face": {
+       "executable": true,
+       "sentences": 1,
+       "scored": 8,
+       "exceeded": 0,
+       "exceededShare": 0,
+       "deepest": null,
+       "meanDistanceFromMedian": 0.259,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": true,
+       "grain": "face"
+      },
+      "corpus": {
+       "executable": true,
+       "sentences": 29,
+       "scored": 13,
+       "exceeded": 9,
+       "exceededShare": 0.692,
+       "deepest": {
+        "metric": "wordsPerSentence.neighbourVariation",
+        "depth": 0.829,
+        "side": "under"
+       },
+       "meanDistanceFromMedian": 0.501,
+       "budgetOk": false,
+       "depthOk": true,
+       "perfectionSuspect": false,
+       "grain": "corpus"
+      }
+     }
+    },
+    {
+     "vid": 1,
+     "face": 4,
+     "executable": true,
+     "sentences": 1,
+     "scored": 8,
+     "exceeded": 0,
+     "exceededShare": 0,
+     "deepest": null,
+     "meanDistanceFromMedian": 0.259,
+     "budgetOk": true,
+     "depthOk": true,
+     "perfectionSuspect": true,
+     "grain": "face",
+     "grains": {
+      "face": {
+       "executable": true,
+       "sentences": 1,
+       "scored": 8,
+       "exceeded": 0,
+       "exceededShare": 0,
+       "deepest": null,
+       "meanDistanceFromMedian": 0.259,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": true,
+       "grain": "face"
+      },
+      "corpus": {
+       "executable": true,
+       "sentences": 29,
+       "scored": 13,
+       "exceeded": 9,
+       "exceededShare": 0.692,
+       "deepest": {
+        "metric": "wordsPerSentence.neighbourVariation",
+        "depth": 0.829,
+        "side": "under"
+       },
+       "meanDistanceFromMedian": 0.501,
+       "budgetOk": false,
+       "depthOk": true,
+       "perfectionSuspect": false,
+       "grain": "corpus"
+      }
+     }
+    },
+    {
+     "vid": 1,
+     "face": 5,
+     "executable": true,
+     "sentences": 1,
+     "scored": 8,
+     "exceeded": 0,
+     "exceededShare": 0,
+     "deepest": null,
+     "meanDistanceFromMedian": 0.259,
+     "budgetOk": true,
+     "depthOk": true,
+     "perfectionSuspect": true,
+     "grain": "face",
+     "grains": {
+      "face": {
+       "executable": true,
+       "sentences": 1,
+       "scored": 8,
+       "exceeded": 0,
+       "exceededShare": 0,
+       "deepest": null,
+       "meanDistanceFromMedian": 0.259,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": true,
+       "grain": "face"
+      },
+      "corpus": {
+       "executable": true,
+       "sentences": 29,
+       "scored": 13,
+       "exceeded": 9,
+       "exceededShare": 0.692,
+       "deepest": {
+        "metric": "wordsPerSentence.neighbourVariation",
+        "depth": 0.829,
+        "side": "under"
+       },
+       "meanDistanceFromMedian": 0.501,
+       "budgetOk": false,
+       "depthOk": true,
+       "perfectionSuspect": false,
+       "grain": "corpus"
+      }
+     }
+    },
+    {
+     "vid": 1,
+     "face": 6,
+     "executable": true,
+     "sentences": 1,
+     "scored": 8,
+     "exceeded": 0,
+     "exceededShare": 0,
+     "deepest": null,
+     "meanDistanceFromMedian": 0.259,
+     "budgetOk": true,
+     "depthOk": true,
+     "perfectionSuspect": true,
+     "grain": "face",
+     "grains": {
+      "face": {
+       "executable": true,
+       "sentences": 1,
+       "scored": 8,
+       "exceeded": 0,
+       "exceededShare": 0,
+       "deepest": null,
+       "meanDistanceFromMedian": 0.259,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": true,
+       "grain": "face"
+      },
+      "corpus": {
+       "executable": true,
+       "sentences": 29,
+       "scored": 13,
+       "exceeded": 9,
+       "exceededShare": 0.692,
+       "deepest": {
+        "metric": "wordsPerSentence.neighbourVariation",
+        "depth": 0.829,
+        "side": "under"
+       },
+       "meanDistanceFromMedian": 0.501,
+       "budgetOk": false,
+       "depthOk": true,
+       "perfectionSuspect": false,
+       "grain": "corpus"
+      }
+     }
+    },
+    {
+     "vid": 1,
+     "face": 7,
+     "executable": true,
+     "sentences": 1,
+     "scored": 8,
+     "exceeded": 0,
+     "exceededShare": 0,
+     "deepest": null,
+     "meanDistanceFromMedian": 0.259,
+     "budgetOk": true,
+     "depthOk": true,
+     "perfectionSuspect": true,
+     "grain": "face",
+     "grains": {
+      "face": {
+       "executable": true,
+       "sentences": 1,
+       "scored": 8,
+       "exceeded": 0,
+       "exceededShare": 0,
+       "deepest": null,
+       "meanDistanceFromMedian": 0.259,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": true,
+       "grain": "face"
+      },
+      "corpus": {
+       "executable": true,
+       "sentences": 29,
+       "scored": 13,
+       "exceeded": 9,
+       "exceededShare": 0.692,
+       "deepest": {
+        "metric": "wordsPerSentence.neighbourVariation",
+        "depth": 0.829,
+        "side": "under"
+       },
+       "meanDistanceFromMedian": 0.501,
+       "budgetOk": false,
+       "depthOk": true,
+       "perfectionSuspect": false,
+       "grain": "corpus"
+      }
+     }
+    },
+    {
+     "vid": 1,
+     "face": 8,
+     "executable": true,
+     "sentences": 1,
+     "scored": 8,
+     "exceeded": 0,
+     "exceededShare": 0,
+     "deepest": null,
+     "meanDistanceFromMedian": 0.259,
+     "budgetOk": true,
+     "depthOk": true,
+     "perfectionSuspect": true,
+     "grain": "face",
+     "grains": {
+      "face": {
+       "executable": true,
+       "sentences": 1,
+       "scored": 8,
+       "exceeded": 0,
+       "exceededShare": 0,
+       "deepest": null,
+       "meanDistanceFromMedian": 0.259,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": true,
+       "grain": "face"
+      },
+      "corpus": {
+       "executable": true,
+       "sentences": 29,
+       "scored": 13,
+       "exceeded": 9,
+       "exceededShare": 0.692,
+       "deepest": {
+        "metric": "wordsPerSentence.neighbourVariation",
+        "depth": 0.829,
+        "side": "under"
+       },
+       "meanDistanceFromMedian": 0.501,
+       "budgetOk": false,
+       "depthOk": true,
+       "perfectionSuspect": false,
+       "grain": "corpus"
+      }
+     }
+    },
+    {
+     "vid": 1,
+     "face": 9,
+     "executable": true,
+     "sentences": 1,
+     "scored": 8,
+     "exceeded": 0,
+     "exceededShare": 0,
+     "deepest": null,
+     "meanDistanceFromMedian": 0.259,
+     "budgetOk": true,
+     "depthOk": true,
+     "perfectionSuspect": true,
+     "grain": "face",
+     "grains": {
+      "face": {
+       "executable": true,
+       "sentences": 1,
+       "scored": 8,
+       "exceeded": 0,
+       "exceededShare": 0,
+       "deepest": null,
+       "meanDistanceFromMedian": 0.259,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": true,
+       "grain": "face"
+      },
+      "corpus": {
+       "executable": true,
+       "sentences": 29,
+       "scored": 13,
+       "exceeded": 9,
+       "exceededShare": 0.692,
+       "deepest": {
+        "metric": "wordsPerSentence.neighbourVariation",
+        "depth": 0.829,
+        "side": "under"
+       },
+       "meanDistanceFromMedian": 0.501,
+       "budgetOk": false,
+       "depthOk": true,
+       "perfectionSuspect": false,
+       "grain": "corpus"
+      }
+     }
+    },
+    {
+     "vid": 1,
+     "face": 10,
+     "executable": true,
+     "sentences": 1,
+     "scored": 8,
+     "exceeded": 0,
+     "exceededShare": 0,
+     "deepest": null,
+     "meanDistanceFromMedian": 0.259,
+     "budgetOk": true,
+     "depthOk": true,
+     "perfectionSuspect": true,
+     "grain": "face",
+     "grains": {
+      "face": {
+       "executable": true,
+       "sentences": 1,
+       "scored": 8,
+       "exceeded": 0,
+       "exceededShare": 0,
+       "deepest": null,
+       "meanDistanceFromMedian": 0.259,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": true,
+       "grain": "face"
+      },
+      "corpus": {
+       "executable": true,
+       "sentences": 29,
+       "scored": 13,
+       "exceeded": 9,
+       "exceededShare": 0.692,
+       "deepest": {
+        "metric": "wordsPerSentence.neighbourVariation",
+        "depth": 0.829,
+        "side": "under"
+       },
+       "meanDistanceFromMedian": 0.501,
+       "budgetOk": false,
+       "depthOk": true,
        "perfectionSuspect": false,
        "grain": "corpus"
       }
@@ -18802,18 +19937,347 @@
       },
       "corpus": {
        "executable": true,
-       "sentences": 4,
+       "sentences": 29,
        "scored": 13,
-       "exceeded": 12,
-       "exceededShare": 0.923,
+       "exceeded": 9,
+       "exceededShare": 0.692,
        "deepest": {
-        "metric": "shapes.antithesisRate",
-        "depth": 6.58,
-        "side": "over"
+        "metric": "wordsPerSentence.neighbourVariation",
+        "depth": 0.829,
+        "side": "under"
        },
-       "meanDistanceFromMedian": 0.972,
+       "meanDistanceFromMedian": 0.501,
        "budgetOk": false,
-       "depthOk": false,
+       "depthOk": true,
+       "perfectionSuspect": false,
+       "grain": "corpus"
+      }
+     }
+    },
+    {
+     "vid": 2,
+     "face": 1,
+     "executable": true,
+     "sentences": 1,
+     "scored": 8,
+     "exceeded": 0,
+     "exceededShare": 0,
+     "deepest": null,
+     "meanDistanceFromMedian": 0.259,
+     "budgetOk": true,
+     "depthOk": true,
+     "perfectionSuspect": true,
+     "grain": "face",
+     "grains": {
+      "face": {
+       "executable": true,
+       "sentences": 1,
+       "scored": 8,
+       "exceeded": 0,
+       "exceededShare": 0,
+       "deepest": null,
+       "meanDistanceFromMedian": 0.259,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": true,
+       "grain": "face"
+      },
+      "corpus": {
+       "executable": true,
+       "sentences": 29,
+       "scored": 13,
+       "exceeded": 9,
+       "exceededShare": 0.692,
+       "deepest": {
+        "metric": "wordsPerSentence.neighbourVariation",
+        "depth": 0.829,
+        "side": "under"
+       },
+       "meanDistanceFromMedian": 0.501,
+       "budgetOk": false,
+       "depthOk": true,
+       "perfectionSuspect": false,
+       "grain": "corpus"
+      }
+     }
+    },
+    {
+     "vid": 2,
+     "face": 2,
+     "executable": true,
+     "sentences": 1,
+     "scored": 8,
+     "exceeded": 0,
+     "exceededShare": 0,
+     "deepest": null,
+     "meanDistanceFromMedian": 0.259,
+     "budgetOk": true,
+     "depthOk": true,
+     "perfectionSuspect": true,
+     "grain": "face",
+     "grains": {
+      "face": {
+       "executable": true,
+       "sentences": 1,
+       "scored": 8,
+       "exceeded": 0,
+       "exceededShare": 0,
+       "deepest": null,
+       "meanDistanceFromMedian": 0.259,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": true,
+       "grain": "face"
+      },
+      "corpus": {
+       "executable": true,
+       "sentences": 29,
+       "scored": 13,
+       "exceeded": 9,
+       "exceededShare": 0.692,
+       "deepest": {
+        "metric": "wordsPerSentence.neighbourVariation",
+        "depth": 0.829,
+        "side": "under"
+       },
+       "meanDistanceFromMedian": 0.501,
+       "budgetOk": false,
+       "depthOk": true,
+       "perfectionSuspect": false,
+       "grain": "corpus"
+      }
+     }
+    },
+    {
+     "vid": 2,
+     "face": 3,
+     "executable": true,
+     "sentences": 1,
+     "scored": 8,
+     "exceeded": 0,
+     "exceededShare": 0,
+     "deepest": null,
+     "meanDistanceFromMedian": 0.259,
+     "budgetOk": true,
+     "depthOk": true,
+     "perfectionSuspect": true,
+     "grain": "face",
+     "grains": {
+      "face": {
+       "executable": true,
+       "sentences": 1,
+       "scored": 8,
+       "exceeded": 0,
+       "exceededShare": 0,
+       "deepest": null,
+       "meanDistanceFromMedian": 0.259,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": true,
+       "grain": "face"
+      },
+      "corpus": {
+       "executable": true,
+       "sentences": 29,
+       "scored": 13,
+       "exceeded": 9,
+       "exceededShare": 0.692,
+       "deepest": {
+        "metric": "wordsPerSentence.neighbourVariation",
+        "depth": 0.829,
+        "side": "under"
+       },
+       "meanDistanceFromMedian": 0.501,
+       "budgetOk": false,
+       "depthOk": true,
+       "perfectionSuspect": false,
+       "grain": "corpus"
+      }
+     }
+    },
+    {
+     "vid": 2,
+     "face": 4,
+     "executable": true,
+     "sentences": 2,
+     "scored": 8,
+     "exceeded": 0,
+     "exceededShare": 0,
+     "deepest": null,
+     "meanDistanceFromMedian": 0.259,
+     "budgetOk": true,
+     "depthOk": true,
+     "perfectionSuspect": true,
+     "grain": "face",
+     "grains": {
+      "face": {
+       "executable": true,
+       "sentences": 2,
+       "scored": 8,
+       "exceeded": 0,
+       "exceededShare": 0,
+       "deepest": null,
+       "meanDistanceFromMedian": 0.259,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": true,
+       "grain": "face"
+      },
+      "corpus": {
+       "executable": true,
+       "sentences": 29,
+       "scored": 13,
+       "exceeded": 9,
+       "exceededShare": 0.692,
+       "deepest": {
+        "metric": "wordsPerSentence.neighbourVariation",
+        "depth": 0.829,
+        "side": "under"
+       },
+       "meanDistanceFromMedian": 0.501,
+       "budgetOk": false,
+       "depthOk": true,
+       "perfectionSuspect": false,
+       "grain": "corpus"
+      }
+     }
+    },
+    {
+     "vid": 2,
+     "face": 5,
+     "executable": true,
+     "sentences": 1,
+     "scored": 8,
+     "exceeded": 0,
+     "exceededShare": 0,
+     "deepest": null,
+     "meanDistanceFromMedian": 0.259,
+     "budgetOk": true,
+     "depthOk": true,
+     "perfectionSuspect": true,
+     "grain": "face",
+     "grains": {
+      "face": {
+       "executable": true,
+       "sentences": 1,
+       "scored": 8,
+       "exceeded": 0,
+       "exceededShare": 0,
+       "deepest": null,
+       "meanDistanceFromMedian": 0.259,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": true,
+       "grain": "face"
+      },
+      "corpus": {
+       "executable": true,
+       "sentences": 29,
+       "scored": 13,
+       "exceeded": 9,
+       "exceededShare": 0.692,
+       "deepest": {
+        "metric": "wordsPerSentence.neighbourVariation",
+        "depth": 0.829,
+        "side": "under"
+       },
+       "meanDistanceFromMedian": 0.501,
+       "budgetOk": false,
+       "depthOk": true,
+       "perfectionSuspect": false,
+       "grain": "corpus"
+      }
+     }
+    },
+    {
+     "vid": 2,
+     "face": 6,
+     "executable": true,
+     "sentences": 1,
+     "scored": 8,
+     "exceeded": 0,
+     "exceededShare": 0,
+     "deepest": null,
+     "meanDistanceFromMedian": 0.259,
+     "budgetOk": true,
+     "depthOk": true,
+     "perfectionSuspect": true,
+     "grain": "face",
+     "grains": {
+      "face": {
+       "executable": true,
+       "sentences": 1,
+       "scored": 8,
+       "exceeded": 0,
+       "exceededShare": 0,
+       "deepest": null,
+       "meanDistanceFromMedian": 0.259,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": true,
+       "grain": "face"
+      },
+      "corpus": {
+       "executable": true,
+       "sentences": 29,
+       "scored": 13,
+       "exceeded": 9,
+       "exceededShare": 0.692,
+       "deepest": {
+        "metric": "wordsPerSentence.neighbourVariation",
+        "depth": 0.829,
+        "side": "under"
+       },
+       "meanDistanceFromMedian": 0.501,
+       "budgetOk": false,
+       "depthOk": true,
+       "perfectionSuspect": false,
+       "grain": "corpus"
+      }
+     }
+    },
+    {
+     "vid": 2,
+     "face": 7,
+     "executable": true,
+     "sentences": 1,
+     "scored": 8,
+     "exceeded": 0,
+     "exceededShare": 0,
+     "deepest": null,
+     "meanDistanceFromMedian": 0.259,
+     "budgetOk": true,
+     "depthOk": true,
+     "perfectionSuspect": true,
+     "grain": "face",
+     "grains": {
+      "face": {
+       "executable": true,
+       "sentences": 1,
+       "scored": 8,
+       "exceeded": 0,
+       "exceededShare": 0,
+       "deepest": null,
+       "meanDistanceFromMedian": 0.259,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": true,
+       "grain": "face"
+      },
+      "corpus": {
+       "executable": true,
+       "sentences": 29,
+       "scored": 13,
+       "exceeded": 9,
+       "exceededShare": 0.692,
+       "deepest": {
+        "metric": "wordsPerSentence.neighbourVariation",
+        "depth": 0.829,
+        "side": "under"
+       },
+       "meanDistanceFromMedian": 0.501,
+       "budgetOk": false,
+       "depthOk": true,
        "perfectionSuspect": false,
        "grain": "corpus"
       }
@@ -18849,18 +20313,347 @@
       },
       "corpus": {
        "executable": true,
-       "sentences": 4,
+       "sentences": 29,
        "scored": 13,
-       "exceeded": 12,
-       "exceededShare": 0.923,
+       "exceeded": 9,
+       "exceededShare": 0.692,
        "deepest": {
-        "metric": "shapes.antithesisRate",
-        "depth": 6.58,
-        "side": "over"
+        "metric": "wordsPerSentence.neighbourVariation",
+        "depth": 0.829,
+        "side": "under"
        },
-       "meanDistanceFromMedian": 0.972,
+       "meanDistanceFromMedian": 0.501,
        "budgetOk": false,
-       "depthOk": false,
+       "depthOk": true,
+       "perfectionSuspect": false,
+       "grain": "corpus"
+      }
+     }
+    },
+    {
+     "vid": 3,
+     "face": 1,
+     "executable": true,
+     "sentences": 1,
+     "scored": 8,
+     "exceeded": 0,
+     "exceededShare": 0,
+     "deepest": null,
+     "meanDistanceFromMedian": 0.259,
+     "budgetOk": true,
+     "depthOk": true,
+     "perfectionSuspect": true,
+     "grain": "face",
+     "grains": {
+      "face": {
+       "executable": true,
+       "sentences": 1,
+       "scored": 8,
+       "exceeded": 0,
+       "exceededShare": 0,
+       "deepest": null,
+       "meanDistanceFromMedian": 0.259,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": true,
+       "grain": "face"
+      },
+      "corpus": {
+       "executable": true,
+       "sentences": 29,
+       "scored": 13,
+       "exceeded": 9,
+       "exceededShare": 0.692,
+       "deepest": {
+        "metric": "wordsPerSentence.neighbourVariation",
+        "depth": 0.829,
+        "side": "under"
+       },
+       "meanDistanceFromMedian": 0.501,
+       "budgetOk": false,
+       "depthOk": true,
+       "perfectionSuspect": false,
+       "grain": "corpus"
+      }
+     }
+    },
+    {
+     "vid": 3,
+     "face": 2,
+     "executable": true,
+     "sentences": 1,
+     "scored": 8,
+     "exceeded": 0,
+     "exceededShare": 0,
+     "deepest": null,
+     "meanDistanceFromMedian": 0.259,
+     "budgetOk": true,
+     "depthOk": true,
+     "perfectionSuspect": true,
+     "grain": "face",
+     "grains": {
+      "face": {
+       "executable": true,
+       "sentences": 1,
+       "scored": 8,
+       "exceeded": 0,
+       "exceededShare": 0,
+       "deepest": null,
+       "meanDistanceFromMedian": 0.259,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": true,
+       "grain": "face"
+      },
+      "corpus": {
+       "executable": true,
+       "sentences": 29,
+       "scored": 13,
+       "exceeded": 9,
+       "exceededShare": 0.692,
+       "deepest": {
+        "metric": "wordsPerSentence.neighbourVariation",
+        "depth": 0.829,
+        "side": "under"
+       },
+       "meanDistanceFromMedian": 0.501,
+       "budgetOk": false,
+       "depthOk": true,
+       "perfectionSuspect": false,
+       "grain": "corpus"
+      }
+     }
+    },
+    {
+     "vid": 3,
+     "face": 3,
+     "executable": true,
+     "sentences": 1,
+     "scored": 8,
+     "exceeded": 0,
+     "exceededShare": 0,
+     "deepest": null,
+     "meanDistanceFromMedian": 0.259,
+     "budgetOk": true,
+     "depthOk": true,
+     "perfectionSuspect": true,
+     "grain": "face",
+     "grains": {
+      "face": {
+       "executable": true,
+       "sentences": 1,
+       "scored": 8,
+       "exceeded": 0,
+       "exceededShare": 0,
+       "deepest": null,
+       "meanDistanceFromMedian": 0.259,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": true,
+       "grain": "face"
+      },
+      "corpus": {
+       "executable": true,
+       "sentences": 29,
+       "scored": 13,
+       "exceeded": 9,
+       "exceededShare": 0.692,
+       "deepest": {
+        "metric": "wordsPerSentence.neighbourVariation",
+        "depth": 0.829,
+        "side": "under"
+       },
+       "meanDistanceFromMedian": 0.501,
+       "budgetOk": false,
+       "depthOk": true,
+       "perfectionSuspect": false,
+       "grain": "corpus"
+      }
+     }
+    },
+    {
+     "vid": 3,
+     "face": 4,
+     "executable": true,
+     "sentences": 1,
+     "scored": 8,
+     "exceeded": 0,
+     "exceededShare": 0,
+     "deepest": null,
+     "meanDistanceFromMedian": 0.259,
+     "budgetOk": true,
+     "depthOk": true,
+     "perfectionSuspect": true,
+     "grain": "face",
+     "grains": {
+      "face": {
+       "executable": true,
+       "sentences": 1,
+       "scored": 8,
+       "exceeded": 0,
+       "exceededShare": 0,
+       "deepest": null,
+       "meanDistanceFromMedian": 0.259,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": true,
+       "grain": "face"
+      },
+      "corpus": {
+       "executable": true,
+       "sentences": 29,
+       "scored": 13,
+       "exceeded": 9,
+       "exceededShare": 0.692,
+       "deepest": {
+        "metric": "wordsPerSentence.neighbourVariation",
+        "depth": 0.829,
+        "side": "under"
+       },
+       "meanDistanceFromMedian": 0.501,
+       "budgetOk": false,
+       "depthOk": true,
+       "perfectionSuspect": false,
+       "grain": "corpus"
+      }
+     }
+    },
+    {
+     "vid": 3,
+     "face": 5,
+     "executable": true,
+     "sentences": 1,
+     "scored": 8,
+     "exceeded": 0,
+     "exceededShare": 0,
+     "deepest": null,
+     "meanDistanceFromMedian": 0.259,
+     "budgetOk": true,
+     "depthOk": true,
+     "perfectionSuspect": true,
+     "grain": "face",
+     "grains": {
+      "face": {
+       "executable": true,
+       "sentences": 1,
+       "scored": 8,
+       "exceeded": 0,
+       "exceededShare": 0,
+       "deepest": null,
+       "meanDistanceFromMedian": 0.259,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": true,
+       "grain": "face"
+      },
+      "corpus": {
+       "executable": true,
+       "sentences": 29,
+       "scored": 13,
+       "exceeded": 9,
+       "exceededShare": 0.692,
+       "deepest": {
+        "metric": "wordsPerSentence.neighbourVariation",
+        "depth": 0.829,
+        "side": "under"
+       },
+       "meanDistanceFromMedian": 0.501,
+       "budgetOk": false,
+       "depthOk": true,
+       "perfectionSuspect": false,
+       "grain": "corpus"
+      }
+     }
+    },
+    {
+     "vid": 3,
+     "face": 6,
+     "executable": true,
+     "sentences": 1,
+     "scored": 8,
+     "exceeded": 0,
+     "exceededShare": 0,
+     "deepest": null,
+     "meanDistanceFromMedian": 0.259,
+     "budgetOk": true,
+     "depthOk": true,
+     "perfectionSuspect": true,
+     "grain": "face",
+     "grains": {
+      "face": {
+       "executable": true,
+       "sentences": 1,
+       "scored": 8,
+       "exceeded": 0,
+       "exceededShare": 0,
+       "deepest": null,
+       "meanDistanceFromMedian": 0.259,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": true,
+       "grain": "face"
+      },
+      "corpus": {
+       "executable": true,
+       "sentences": 29,
+       "scored": 13,
+       "exceeded": 9,
+       "exceededShare": 0.692,
+       "deepest": {
+        "metric": "wordsPerSentence.neighbourVariation",
+        "depth": 0.829,
+        "side": "under"
+       },
+       "meanDistanceFromMedian": 0.501,
+       "budgetOk": false,
+       "depthOk": true,
+       "perfectionSuspect": false,
+       "grain": "corpus"
+      }
+     }
+    },
+    {
+     "vid": 3,
+     "face": 7,
+     "executable": true,
+     "sentences": 1,
+     "scored": 8,
+     "exceeded": 0,
+     "exceededShare": 0,
+     "deepest": null,
+     "meanDistanceFromMedian": 0.259,
+     "budgetOk": true,
+     "depthOk": true,
+     "perfectionSuspect": true,
+     "grain": "face",
+     "grains": {
+      "face": {
+       "executable": true,
+       "sentences": 1,
+       "scored": 8,
+       "exceeded": 0,
+       "exceededShare": 0,
+       "deepest": null,
+       "meanDistanceFromMedian": 0.259,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": true,
+       "grain": "face"
+      },
+      "corpus": {
+       "executable": true,
+       "sentences": 29,
+       "scored": 13,
+       "exceeded": 9,
+       "exceededShare": 0.692,
+       "deepest": {
+        "metric": "wordsPerSentence.neighbourVariation",
+        "depth": 0.829,
+        "side": "under"
+       },
+       "meanDistanceFromMedian": 0.501,
+       "budgetOk": false,
+       "depthOk": true,
        "perfectionSuspect": false,
        "grain": "corpus"
       }
@@ -18868,32 +20661,1330 @@
     }
    ],
    "provenance": {
-    "citations": 0,
-    "a13": 0
+    "citations": 3,
+    "a13": 3
    },
    "corpusBand": {
     "executable": true,
-    "sentences": 4,
+    "sentences": 29,
     "scored": 13,
-    "exceeded": 12,
-    "exceededShare": 0.923,
+    "exceeded": 9,
+    "exceededShare": 0.692,
     "deepest": {
-     "metric": "shapes.antithesisRate",
-     "depth": 6.58,
-     "side": "over"
+     "metric": "wordsPerSentence.neighbourVariation",
+     "depth": 0.829,
+     "side": "under"
     },
-    "meanDistanceFromMedian": 0.972,
+    "meanDistanceFromMedian": 0.501,
     "budgetOk": false,
-    "depthOk": false,
+    "depthOk": true,
     "perfectionSuspect": false,
     "grain": "corpus"
    },
-   "corpusWords": 63,
+   "corpusWords": 614,
    "owned": {
     "verdicts": {
      "FAIL": 0,
      "WITHHELD": 0,
-     "PASS": 3
+     "PASS": 27
+    },
+    "findings": [],
+    "findingCount": 0,
+    "byLabel": []
+   },
+   "inherited": [
+    {
+     "label": "Q · a second sentence naming no second field",
+     "arm": "a second sentence naming no second field",
+     "klass": "Q",
+     "channel": "WITHHELD",
+     "spineKey": "Internal Security: no legal infrastructure",
+     "clause": "A wrong is settled where it happens, and no judgement is written down.",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call",
+     "count": 1
+    },
+    {
+     "label": "C3 · is this clause historical?",
+     "arm": "is this clause historical?",
+     "klass": "C3",
+     "channel": "WITHHELD",
+     "spineKey": "Internal Security: no legal infrastructure",
+     "clause": "and that nothing of what was settled comes with him.",
+     "description": "a past-tense or formerly-construction: whether it asserts history is A6, the refuter's",
+     "count": 1
+    },
+    {
+     "label": "F25 · a cited record's content",
+     "arm": "a cited record's content",
+     "klass": "F25",
+     "channel": "WITHHELD",
+     "spineKey": "Internal Security: no legal infrastructure",
+     "clause": "The register has",
+     "description": "the predicate is attributed to a record; fault 25 asks what that record HOLDS, and no loader reaches its fields yet",
+     "count": 1
+    },
+    {
+     "label": "A13 · a cited holder the census does not license",
+     "arm": "A13",
+     "klass": "",
+     "channel": "WITHHELD",
+     "spineKey": "Internal Security: no legal infrastructure",
+     "clause": "Internal Security: no legal infrastructure: SOURCE-UNRESOLVED",
+     "description": "the fact's source is unresolved or is the office's own books, so the citation cites the speaker rather than a record",
+     "count": 3
+    },
+    {
+     "label": "X · exhaustivity over an open column",
+     "arm": "exhaustivity over an open column",
+     "klass": "X",
+     "channel": "WITHHELD",
+     "spineKey": "Internal Security: no legal infrastructure",
+     "clause": "The elders' word is that a debt here is the creditor's to collect, and the households keep their own reckoning of who owes whom.",
+     "description": "the copula entails the subject is the column's only value; the column is not closed",
+     "count": 1
+    },
+    {
+     "label": "A3 · the band half is the refuter's",
+     "arm": "A3",
+     "klass": "",
+     "channel": "WITHHELD",
+     "spineKey": "Internal Security: no legal infrastructure",
+     "clause": "and not written down.",
+     "description": "no sibling KEY names this alternative; whether a sibling BAND supplies it is the refuter's (siblings: Beasts & Monsters: plagued, perimeter AND organized force | Beasts & Monsters: plagued, perimeter but NO force to hold it | Beasts & Monsters: plagued, NO perimeter and NO force | Beasts & Monsters: frontier, credible deterrence)",
+     "count": 1
+    },
+    {
+     "label": "C3 · is this clause historical?",
+     "arm": "is this clause historical?",
+     "klass": "C3",
+     "channel": "WITHHELD",
+     "spineKey": "Internal Security: no legal infrastructure",
+     "clause": "The muster says that with no gaol to put a man in, what it does with him is done at once and not written down.",
+     "description": "a past-tense or formerly-construction: whether it asserts history is A6, the refuter's",
+     "count": 1
+    },
+    {
+     "label": "C3 · is this clause historical?",
+     "arm": "is this clause historical?",
+     "klass": "C3",
+     "channel": "WITHHELD",
+     "spineKey": "Internal Security: no legal infrastructure",
+     "clause": "and it stays settled for as long as everyone who was there goes on agreeing that it was.",
+     "description": "a past-tense or formerly-construction: whether it asserts history is A6, the refuter's",
+     "count": 1
+    },
+    {
+     "label": "C3 · is this clause historical?",
+     "arm": "is this clause historical?",
+     "klass": "C3",
+     "channel": "WITHHELD",
+     "spineKey": "Internal Security: no legal infrastructure",
+     "clause": "A pedlar says a short payment here is argued out on the doorstep where it was made",
+     "description": "a past-tense or formerly-construction: whether it asserts history is A6, the refuter's",
+     "count": 1
+    },
+    {
+     "label": "C1 · a figure outside the closed vocabulary",
+     "arm": "a figure outside the closed vocabulary",
+     "klass": "C1",
+     "channel": "WITHHELD",
+     "spineKey": "Internal Security: no legal infrastructure",
+     "clause": "The walking is done by the two households",
+     "description": "\"two\" counts \"households\" outside QUANTITY_BANDS; the record speaks counts as band words",
+     "count": 1
+    },
+    {
+     "label": "Q · a second sentence naming no second field",
+     "arm": "a second sentence naming no second field",
+     "klass": "Q",
+     "channel": "WITHHELD",
+     "spineKey": "Internal Security: no legal infrastructure",
+     "clause": "The walking is done by the two households, in time neither can spare.",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call",
+     "count": 1
+    },
+    {
+     "label": "C3 · is this clause historical?",
+     "arm": "is this clause historical?",
+     "klass": "C3",
+     "channel": "WITHHELD",
+     "spineKey": "Internal Security: no legal infrastructure",
+     "clause": "not what was decided",
+     "description": "a past-tense or formerly-construction: whether it asserts history is A6, the refuter's",
+     "count": 1
+    },
+    {
+     "label": "A3 · the band half is the refuter's",
+     "arm": "A3",
+     "klass": "",
+     "channel": "WITHHELD",
+     "spineKey": "Internal Security: no legal infrastructure",
+     "clause": "and not wait on coin.",
+     "description": "no sibling KEY names this alternative; whether a sibling BAND supplies it is the refuter's (siblings: Beasts & Monsters: plagued, perimeter AND organized force | Beasts & Monsters: plagued, perimeter but NO force to hold it | Beasts & Monsters: plagued, NO perimeter and NO force | Beasts & Monsters: frontier, credible deterrence)",
+     "count": 1
+    },
+    {
+     "label": "C3 · is this clause historical?",
+     "arm": "is this clause historical?",
+     "klass": "C3",
+     "channel": "WITHHELD",
+     "spineKey": "Internal Security: no legal infrastructure",
+     "clause": "and that a stranger who does not stay for the answer was not much wronged.",
+     "description": "a past-tense or formerly-construction: whether it asserts history is A6, the refuter's",
+     "count": 1
+    },
+    {
+     "label": "C3 · is this clause historical?",
+     "arm": "is this clause historical?",
+     "klass": "C3",
+     "channel": "WITHHELD",
+     "spineKey": "Internal Security: no legal infrastructure",
+     "clause": "whatever was",
+     "description": "a past-tense or formerly-construction: whether it asserts history is A6, the refuter's",
+     "count": 1
+    },
+    {
+     "label": "F25 · a cited record's content",
+     "arm": "a cited record's content",
+     "klass": "F25",
+     "channel": "WITHHELD",
+     "spineKey": "Internal Security: no legal infrastructure",
+     "clause": "The register says",
+     "description": "the predicate is attributed to a record; fault 25 asks what that record HOLDS, and no loader reaches its fields yet",
+     "count": 1
+    }
+   ],
+   "inheritedCount": 18,
+   "spineWithheld": true,
+   "qVocabulary": [
+    {
+     "clause": "A wrong is settled where it happens, and no judgement is written down.",
+     "spineKey": "Internal Security: no legal infrastructure",
+     "count": 1,
+     "reads": [
+      "court",
+      "prison"
+     ],
+     "mapped": [],
+     "executable": true,
+     "verdict": "the clause names no field the spine declares it reads, under the vocabulary the census supplies",
+     "synonymTable": "a word-level synonym table ships and was applied"
+    },
+    {
+     "clause": "The walking is done by the two households, in time neither can spare.",
+     "spineKey": "Internal Security: no legal infrastructure",
+     "count": 1,
+     "reads": [
+      "court",
+      "prison"
+     ],
+     "mapped": [],
+     "executable": true,
+     "verdict": "the clause names no field the spine declares it reads, under the vocabulary the census supplies",
+     "synonymTable": "a word-level synonym table ships and was applied"
+    }
+   ],
+   "inBand": true,
+   "failing": [],
+   "report": {
+    "band": [],
+    "depth": [],
+    "budget": [],
+    "composedWalk": []
+   }
+  },
+  {
+   "block": "DS-DEF-2",
+   "pool": "Invasion & War: force with NO walls",
+   "dir": "ds-def-2-invasion-war-force-with-no-walls",
+   "verdict": "WITHHELD",
+   "why": "",
+   "variants": 3,
+   "faces": [
+    6,
+    6,
+    6
+   ],
+   "attach": [],
+   "rateBp": 169,
+   "departure": 1,
+   "rounds": {
+    "draftRounds": 0,
+    "refineA": false,
+    "refineB": false,
+    "files": []
+   },
+   "units": 18,
+   "walk": {
+    "verdicts": {
+     "FAIL": 0,
+     "WITHHELD": 7,
+     "PASS": 11
+    },
+    "findings": [
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Invasion & War: force with NO walls",
+      "klass": "Q",
+      "arm": "a second sentence naming no second field",
+      "clause": "They can meet a raid in the open and cannot hold a siege, because there is no line to hold.",
+      "column": "(second typed field)",
+      "value": "reads [invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)]; none claimed",
+      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Invasion & War: force with NO walls",
+      "klass": "C3",
+      "arm": "is this clause historical?",
+      "clause": "A guild factor says the trades pay for the same men once through the purse and again by the day.",
+      "column": "provenance",
+      "value": "semantic",
+      "description": "a past-tense or formerly-construction: whether it asserts history is A6, the refuter's"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Invasion & War: force with NO walls",
+      "klass": "Q",
+      "arm": "a second sentence naming no second field",
+      "clause": "The day's work is the watchman's own trade, and the trade goes short for it.",
+      "column": "(second typed field)",
+      "value": "reads [invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)]; none claimed",
+      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Invasion & War: force with NO walls",
+      "klass": "X",
+      "arm": "exhaustivity over an open column",
+      "clause": "The day's work is the watchman's own trade, and the trade goes short for it.",
+      "column": "office|institution",
+      "value": "open",
+      "description": "the copula entails the subject is the column's only value; the column is not closed"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Invasion & War: force with NO walls",
+      "klass": "C3",
+      "arm": "is this clause historical?",
+      "clause": "and was not sure until later that they were the town's.",
+      "column": "provenance",
+      "value": "semantic",
+      "description": "a past-tense or formerly-construction: whether it asserts history is A6, the refuter's"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Invasion & War: force with NO walls",
+      "arm": "A13",
+      "subject": "a holder with no institution",
+      "value": "Invasion & War: force with NO walls: muster",
+      "description": "the holder kind resolves to no institution in this town's roster, so the cited record has nobody keeping it"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Invasion & War: force with NO walls",
+      "klass": "X",
+      "arm": "exhaustivity over an open column",
+      "clause": "The market says the granary door is the thing worth coming for and the soldiers know it.",
+      "column": "office|institution",
+      "value": "open",
+      "description": "the copula entails the subject is the column's only value; the column is not closed"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Invasion & War: force with NO walls",
+      "klass": "F25",
+      "arm": "a cited record's content",
+      "clause": "The register says",
+      "column": "(cited record)",
+      "value": "unresolved",
+      "description": "the predicate is attributed to a record; fault 25 asks what that record HOLDS, and no loader reaches its fields yet"
+     }
+    ],
+    "findingCount": 8
+   },
+   "lengths": {
+    "form": "sentence",
+    "ceiling": null,
+    "rows": [
+     {
+      "vid": 1,
+      "faces": [
+       28,
+       22,
+       20,
+       21,
+       21,
+       24
+      ]
+     },
+     {
+      "vid": 2,
+      "faces": [
+       24,
+       31,
+       26,
+       19,
+       21,
+       24
+      ]
+     },
+     {
+      "vid": 3,
+      "faces": [
+       18,
+       14,
+       24,
+       27,
+       17,
+       19
+      ]
+     }
+    ]
+   },
+   "siblings": [
+    {
+     "vid": 1,
+     "faces": 6,
+     "synonymSwaps": 0,
+     "notExecutable": 0,
+     "spread": {
+      "pairs": 15,
+      "minOverlapBp": 0,
+      "maxOverlapBp": 1875,
+      "medianOverlapBp": 667,
+      "sameOpenerPairs": 0,
+      "sameSegmentPairs": 10,
+      "nearest": {
+       "a": 0,
+       "b": 4,
+       "sameOpener": false,
+       "sameSegments": false,
+       "overlapBp": 1875
+      },
+      "why": ""
+     }
+    },
+    {
+     "vid": 2,
+     "faces": 6,
+     "synonymSwaps": 0,
+     "notExecutable": 0,
+     "spread": {
+      "pairs": 15,
+      "minOverlapBp": 0,
+      "maxOverlapBp": 2308,
+      "medianOverlapBp": 0,
+      "sameOpenerPairs": 0,
+      "sameSegmentPairs": 10,
+      "nearest": {
+       "a": 3,
+       "b": 5,
+       "sameOpener": false,
+       "sameSegments": true,
+       "overlapBp": 2308
+      },
+      "why": ""
+     }
+    },
+    {
+     "vid": 3,
+     "faces": 6,
+     "synonymSwaps": 0,
+     "notExecutable": 0,
+     "spread": {
+      "pairs": 15,
+      "minOverlapBp": 0,
+      "maxOverlapBp": 1333,
+      "medianOverlapBp": 714,
+      "sameOpenerPairs": 0,
+      "sameSegmentPairs": 15,
+      "nearest": {
+       "a": 3,
+       "b": 4,
+       "sameOpener": false,
+       "sameSegments": true,
+       "overlapBp": 1333
+      },
+      "why": ""
+     }
+    }
+   ],
+   "band": [
+    {
+     "vid": 1,
+     "face": 0,
+     "executable": true,
+     "sentences": 2,
+     "scored": 8,
+     "exceeded": 0,
+     "exceededShare": 0,
+     "deepest": null,
+     "meanDistanceFromMedian": 0.259,
+     "budgetOk": true,
+     "depthOk": true,
+     "perfectionSuspect": true,
+     "grain": "face",
+     "grains": {
+      "face": {
+       "executable": true,
+       "sentences": 2,
+       "scored": 8,
+       "exceeded": 0,
+       "exceededShare": 0,
+       "deepest": null,
+       "meanDistanceFromMedian": 0.259,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": true,
+       "grain": "face"
+      },
+      "corpus": {
+       "executable": true,
+       "sentences": 20,
+       "scored": 13,
+       "exceeded": 10,
+       "exceededShare": 0.769,
+       "deepest": {
+        "metric": "wordsPerSentence.neighbourVariation",
+        "depth": 0.858,
+        "side": "under"
+       },
+       "meanDistanceFromMedian": 0.563,
+       "budgetOk": false,
+       "depthOk": true,
+       "perfectionSuspect": false,
+       "grain": "corpus"
+      }
+     }
+    },
+    {
+     "vid": 1,
+     "face": 1,
+     "executable": true,
+     "sentences": 1,
+     "scored": 8,
+     "exceeded": 0,
+     "exceededShare": 0,
+     "deepest": null,
+     "meanDistanceFromMedian": 0.259,
+     "budgetOk": true,
+     "depthOk": true,
+     "perfectionSuspect": true,
+     "grain": "face",
+     "grains": {
+      "face": {
+       "executable": true,
+       "sentences": 1,
+       "scored": 8,
+       "exceeded": 0,
+       "exceededShare": 0,
+       "deepest": null,
+       "meanDistanceFromMedian": 0.259,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": true,
+       "grain": "face"
+      },
+      "corpus": {
+       "executable": true,
+       "sentences": 20,
+       "scored": 13,
+       "exceeded": 10,
+       "exceededShare": 0.769,
+       "deepest": {
+        "metric": "wordsPerSentence.neighbourVariation",
+        "depth": 0.858,
+        "side": "under"
+       },
+       "meanDistanceFromMedian": 0.563,
+       "budgetOk": false,
+       "depthOk": true,
+       "perfectionSuspect": false,
+       "grain": "corpus"
+      }
+     }
+    },
+    {
+     "vid": 1,
+     "face": 2,
+     "executable": true,
+     "sentences": 1,
+     "scored": 8,
+     "exceeded": 0,
+     "exceededShare": 0,
+     "deepest": null,
+     "meanDistanceFromMedian": 0.259,
+     "budgetOk": true,
+     "depthOk": true,
+     "perfectionSuspect": true,
+     "grain": "face",
+     "grains": {
+      "face": {
+       "executable": true,
+       "sentences": 1,
+       "scored": 8,
+       "exceeded": 0,
+       "exceededShare": 0,
+       "deepest": null,
+       "meanDistanceFromMedian": 0.259,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": true,
+       "grain": "face"
+      },
+      "corpus": {
+       "executable": true,
+       "sentences": 20,
+       "scored": 13,
+       "exceeded": 10,
+       "exceededShare": 0.769,
+       "deepest": {
+        "metric": "wordsPerSentence.neighbourVariation",
+        "depth": 0.858,
+        "side": "under"
+       },
+       "meanDistanceFromMedian": 0.563,
+       "budgetOk": false,
+       "depthOk": true,
+       "perfectionSuspect": false,
+       "grain": "corpus"
+      }
+     }
+    },
+    {
+     "vid": 1,
+     "face": 3,
+     "executable": true,
+     "sentences": 1,
+     "scored": 8,
+     "exceeded": 0,
+     "exceededShare": 0,
+     "deepest": null,
+     "meanDistanceFromMedian": 0.259,
+     "budgetOk": true,
+     "depthOk": true,
+     "perfectionSuspect": true,
+     "grain": "face",
+     "grains": {
+      "face": {
+       "executable": true,
+       "sentences": 1,
+       "scored": 8,
+       "exceeded": 0,
+       "exceededShare": 0,
+       "deepest": null,
+       "meanDistanceFromMedian": 0.259,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": true,
+       "grain": "face"
+      },
+      "corpus": {
+       "executable": true,
+       "sentences": 20,
+       "scored": 13,
+       "exceeded": 10,
+       "exceededShare": 0.769,
+       "deepest": {
+        "metric": "wordsPerSentence.neighbourVariation",
+        "depth": 0.858,
+        "side": "under"
+       },
+       "meanDistanceFromMedian": 0.563,
+       "budgetOk": false,
+       "depthOk": true,
+       "perfectionSuspect": false,
+       "grain": "corpus"
+      }
+     }
+    },
+    {
+     "vid": 1,
+     "face": 4,
+     "executable": true,
+     "sentences": 1,
+     "scored": 8,
+     "exceeded": 0,
+     "exceededShare": 0,
+     "deepest": null,
+     "meanDistanceFromMedian": 0.259,
+     "budgetOk": true,
+     "depthOk": true,
+     "perfectionSuspect": true,
+     "grain": "face",
+     "grains": {
+      "face": {
+       "executable": true,
+       "sentences": 1,
+       "scored": 8,
+       "exceeded": 0,
+       "exceededShare": 0,
+       "deepest": null,
+       "meanDistanceFromMedian": 0.259,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": true,
+       "grain": "face"
+      },
+      "corpus": {
+       "executable": true,
+       "sentences": 20,
+       "scored": 13,
+       "exceeded": 10,
+       "exceededShare": 0.769,
+       "deepest": {
+        "metric": "wordsPerSentence.neighbourVariation",
+        "depth": 0.858,
+        "side": "under"
+       },
+       "meanDistanceFromMedian": 0.563,
+       "budgetOk": false,
+       "depthOk": true,
+       "perfectionSuspect": false,
+       "grain": "corpus"
+      }
+     }
+    },
+    {
+     "vid": 1,
+     "face": 5,
+     "executable": true,
+     "sentences": 1,
+     "scored": 8,
+     "exceeded": 0,
+     "exceededShare": 0,
+     "deepest": null,
+     "meanDistanceFromMedian": 0.259,
+     "budgetOk": true,
+     "depthOk": true,
+     "perfectionSuspect": true,
+     "grain": "face",
+     "grains": {
+      "face": {
+       "executable": true,
+       "sentences": 1,
+       "scored": 8,
+       "exceeded": 0,
+       "exceededShare": 0,
+       "deepest": null,
+       "meanDistanceFromMedian": 0.259,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": true,
+       "grain": "face"
+      },
+      "corpus": {
+       "executable": true,
+       "sentences": 20,
+       "scored": 13,
+       "exceeded": 10,
+       "exceededShare": 0.769,
+       "deepest": {
+        "metric": "wordsPerSentence.neighbourVariation",
+        "depth": 0.858,
+        "side": "under"
+       },
+       "meanDistanceFromMedian": 0.563,
+       "budgetOk": false,
+       "depthOk": true,
+       "perfectionSuspect": false,
+       "grain": "corpus"
+      }
+     }
+    },
+    {
+     "vid": 2,
+     "face": 0,
+     "executable": true,
+     "sentences": 1,
+     "scored": 8,
+     "exceeded": 0,
+     "exceededShare": 0,
+     "deepest": null,
+     "meanDistanceFromMedian": 0.259,
+     "budgetOk": true,
+     "depthOk": true,
+     "perfectionSuspect": true,
+     "grain": "face",
+     "grains": {
+      "face": {
+       "executable": true,
+       "sentences": 1,
+       "scored": 8,
+       "exceeded": 0,
+       "exceededShare": 0,
+       "deepest": null,
+       "meanDistanceFromMedian": 0.259,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": true,
+       "grain": "face"
+      },
+      "corpus": {
+       "executable": true,
+       "sentences": 20,
+       "scored": 13,
+       "exceeded": 10,
+       "exceededShare": 0.769,
+       "deepest": {
+        "metric": "wordsPerSentence.neighbourVariation",
+        "depth": 0.858,
+        "side": "under"
+       },
+       "meanDistanceFromMedian": 0.563,
+       "budgetOk": false,
+       "depthOk": true,
+       "perfectionSuspect": false,
+       "grain": "corpus"
+      }
+     }
+    },
+    {
+     "vid": 2,
+     "face": 1,
+     "executable": true,
+     "sentences": 2,
+     "scored": 8,
+     "exceeded": 0,
+     "exceededShare": 0,
+     "deepest": null,
+     "meanDistanceFromMedian": 0.259,
+     "budgetOk": true,
+     "depthOk": true,
+     "perfectionSuspect": true,
+     "grain": "face",
+     "grains": {
+      "face": {
+       "executable": true,
+       "sentences": 2,
+       "scored": 8,
+       "exceeded": 0,
+       "exceededShare": 0,
+       "deepest": null,
+       "meanDistanceFromMedian": 0.259,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": true,
+       "grain": "face"
+      },
+      "corpus": {
+       "executable": true,
+       "sentences": 20,
+       "scored": 13,
+       "exceeded": 10,
+       "exceededShare": 0.769,
+       "deepest": {
+        "metric": "wordsPerSentence.neighbourVariation",
+        "depth": 0.858,
+        "side": "under"
+       },
+       "meanDistanceFromMedian": 0.563,
+       "budgetOk": false,
+       "depthOk": true,
+       "perfectionSuspect": false,
+       "grain": "corpus"
+      }
+     }
+    },
+    {
+     "vid": 2,
+     "face": 2,
+     "executable": true,
+     "sentences": 1,
+     "scored": 8,
+     "exceeded": 0,
+     "exceededShare": 0,
+     "deepest": null,
+     "meanDistanceFromMedian": 0.259,
+     "budgetOk": true,
+     "depthOk": true,
+     "perfectionSuspect": true,
+     "grain": "face",
+     "grains": {
+      "face": {
+       "executable": true,
+       "sentences": 1,
+       "scored": 8,
+       "exceeded": 0,
+       "exceededShare": 0,
+       "deepest": null,
+       "meanDistanceFromMedian": 0.259,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": true,
+       "grain": "face"
+      },
+      "corpus": {
+       "executable": true,
+       "sentences": 20,
+       "scored": 13,
+       "exceeded": 10,
+       "exceededShare": 0.769,
+       "deepest": {
+        "metric": "wordsPerSentence.neighbourVariation",
+        "depth": 0.858,
+        "side": "under"
+       },
+       "meanDistanceFromMedian": 0.563,
+       "budgetOk": false,
+       "depthOk": true,
+       "perfectionSuspect": false,
+       "grain": "corpus"
+      }
+     }
+    },
+    {
+     "vid": 2,
+     "face": 3,
+     "executable": true,
+     "sentences": 1,
+     "scored": 8,
+     "exceeded": 0,
+     "exceededShare": 0,
+     "deepest": null,
+     "meanDistanceFromMedian": 0.259,
+     "budgetOk": true,
+     "depthOk": true,
+     "perfectionSuspect": true,
+     "grain": "face",
+     "grains": {
+      "face": {
+       "executable": true,
+       "sentences": 1,
+       "scored": 8,
+       "exceeded": 0,
+       "exceededShare": 0,
+       "deepest": null,
+       "meanDistanceFromMedian": 0.259,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": true,
+       "grain": "face"
+      },
+      "corpus": {
+       "executable": true,
+       "sentences": 20,
+       "scored": 13,
+       "exceeded": 10,
+       "exceededShare": 0.769,
+       "deepest": {
+        "metric": "wordsPerSentence.neighbourVariation",
+        "depth": 0.858,
+        "side": "under"
+       },
+       "meanDistanceFromMedian": 0.563,
+       "budgetOk": false,
+       "depthOk": true,
+       "perfectionSuspect": false,
+       "grain": "corpus"
+      }
+     }
+    },
+    {
+     "vid": 2,
+     "face": 4,
+     "executable": true,
+     "sentences": 1,
+     "scored": 8,
+     "exceeded": 0,
+     "exceededShare": 0,
+     "deepest": null,
+     "meanDistanceFromMedian": 0.259,
+     "budgetOk": true,
+     "depthOk": true,
+     "perfectionSuspect": true,
+     "grain": "face",
+     "grains": {
+      "face": {
+       "executable": true,
+       "sentences": 1,
+       "scored": 8,
+       "exceeded": 0,
+       "exceededShare": 0,
+       "deepest": null,
+       "meanDistanceFromMedian": 0.259,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": true,
+       "grain": "face"
+      },
+      "corpus": {
+       "executable": true,
+       "sentences": 20,
+       "scored": 13,
+       "exceeded": 10,
+       "exceededShare": 0.769,
+       "deepest": {
+        "metric": "wordsPerSentence.neighbourVariation",
+        "depth": 0.858,
+        "side": "under"
+       },
+       "meanDistanceFromMedian": 0.563,
+       "budgetOk": false,
+       "depthOk": true,
+       "perfectionSuspect": false,
+       "grain": "corpus"
+      }
+     }
+    },
+    {
+     "vid": 2,
+     "face": 5,
+     "executable": true,
+     "sentences": 1,
+     "scored": 8,
+     "exceeded": 0,
+     "exceededShare": 0,
+     "deepest": null,
+     "meanDistanceFromMedian": 0.259,
+     "budgetOk": true,
+     "depthOk": true,
+     "perfectionSuspect": true,
+     "grain": "face",
+     "grains": {
+      "face": {
+       "executable": true,
+       "sentences": 1,
+       "scored": 8,
+       "exceeded": 0,
+       "exceededShare": 0,
+       "deepest": null,
+       "meanDistanceFromMedian": 0.259,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": true,
+       "grain": "face"
+      },
+      "corpus": {
+       "executable": true,
+       "sentences": 20,
+       "scored": 13,
+       "exceeded": 10,
+       "exceededShare": 0.769,
+       "deepest": {
+        "metric": "wordsPerSentence.neighbourVariation",
+        "depth": 0.858,
+        "side": "under"
+       },
+       "meanDistanceFromMedian": 0.563,
+       "budgetOk": false,
+       "depthOk": true,
+       "perfectionSuspect": false,
+       "grain": "corpus"
+      }
+     }
+    },
+    {
+     "vid": 3,
+     "face": 0,
+     "executable": true,
+     "sentences": 1,
+     "scored": 8,
+     "exceeded": 0,
+     "exceededShare": 0,
+     "deepest": null,
+     "meanDistanceFromMedian": 0.259,
+     "budgetOk": true,
+     "depthOk": true,
+     "perfectionSuspect": true,
+     "grain": "face",
+     "grains": {
+      "face": {
+       "executable": true,
+       "sentences": 1,
+       "scored": 8,
+       "exceeded": 0,
+       "exceededShare": 0,
+       "deepest": null,
+       "meanDistanceFromMedian": 0.259,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": true,
+       "grain": "face"
+      },
+      "corpus": {
+       "executable": true,
+       "sentences": 20,
+       "scored": 13,
+       "exceeded": 10,
+       "exceededShare": 0.769,
+       "deepest": {
+        "metric": "wordsPerSentence.neighbourVariation",
+        "depth": 0.858,
+        "side": "under"
+       },
+       "meanDistanceFromMedian": 0.563,
+       "budgetOk": false,
+       "depthOk": true,
+       "perfectionSuspect": false,
+       "grain": "corpus"
+      }
+     }
+    },
+    {
+     "vid": 3,
+     "face": 1,
+     "executable": true,
+     "sentences": 1,
+     "scored": 8,
+     "exceeded": 0,
+     "exceededShare": 0,
+     "deepest": null,
+     "meanDistanceFromMedian": 0.259,
+     "budgetOk": true,
+     "depthOk": true,
+     "perfectionSuspect": true,
+     "grain": "face",
+     "grains": {
+      "face": {
+       "executable": true,
+       "sentences": 1,
+       "scored": 8,
+       "exceeded": 0,
+       "exceededShare": 0,
+       "deepest": null,
+       "meanDistanceFromMedian": 0.259,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": true,
+       "grain": "face"
+      },
+      "corpus": {
+       "executable": true,
+       "sentences": 20,
+       "scored": 13,
+       "exceeded": 10,
+       "exceededShare": 0.769,
+       "deepest": {
+        "metric": "wordsPerSentence.neighbourVariation",
+        "depth": 0.858,
+        "side": "under"
+       },
+       "meanDistanceFromMedian": 0.563,
+       "budgetOk": false,
+       "depthOk": true,
+       "perfectionSuspect": false,
+       "grain": "corpus"
+      }
+     }
+    },
+    {
+     "vid": 3,
+     "face": 2,
+     "executable": true,
+     "sentences": 1,
+     "scored": 8,
+     "exceeded": 0,
+     "exceededShare": 0,
+     "deepest": null,
+     "meanDistanceFromMedian": 0.259,
+     "budgetOk": true,
+     "depthOk": true,
+     "perfectionSuspect": true,
+     "grain": "face",
+     "grains": {
+      "face": {
+       "executable": true,
+       "sentences": 1,
+       "scored": 8,
+       "exceeded": 0,
+       "exceededShare": 0,
+       "deepest": null,
+       "meanDistanceFromMedian": 0.259,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": true,
+       "grain": "face"
+      },
+      "corpus": {
+       "executable": true,
+       "sentences": 20,
+       "scored": 13,
+       "exceeded": 10,
+       "exceededShare": 0.769,
+       "deepest": {
+        "metric": "wordsPerSentence.neighbourVariation",
+        "depth": 0.858,
+        "side": "under"
+       },
+       "meanDistanceFromMedian": 0.563,
+       "budgetOk": false,
+       "depthOk": true,
+       "perfectionSuspect": false,
+       "grain": "corpus"
+      }
+     }
+    },
+    {
+     "vid": 3,
+     "face": 3,
+     "executable": true,
+     "sentences": 1,
+     "scored": 8,
+     "exceeded": 0,
+     "exceededShare": 0,
+     "deepest": null,
+     "meanDistanceFromMedian": 0.259,
+     "budgetOk": true,
+     "depthOk": true,
+     "perfectionSuspect": true,
+     "grain": "face",
+     "grains": {
+      "face": {
+       "executable": true,
+       "sentences": 1,
+       "scored": 8,
+       "exceeded": 0,
+       "exceededShare": 0,
+       "deepest": null,
+       "meanDistanceFromMedian": 0.259,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": true,
+       "grain": "face"
+      },
+      "corpus": {
+       "executable": true,
+       "sentences": 20,
+       "scored": 13,
+       "exceeded": 10,
+       "exceededShare": 0.769,
+       "deepest": {
+        "metric": "wordsPerSentence.neighbourVariation",
+        "depth": 0.858,
+        "side": "under"
+       },
+       "meanDistanceFromMedian": 0.563,
+       "budgetOk": false,
+       "depthOk": true,
+       "perfectionSuspect": false,
+       "grain": "corpus"
+      }
+     }
+    },
+    {
+     "vid": 3,
+     "face": 4,
+     "executable": true,
+     "sentences": 1,
+     "scored": 8,
+     "exceeded": 0,
+     "exceededShare": 0,
+     "deepest": null,
+     "meanDistanceFromMedian": 0.259,
+     "budgetOk": true,
+     "depthOk": true,
+     "perfectionSuspect": true,
+     "grain": "face",
+     "grains": {
+      "face": {
+       "executable": true,
+       "sentences": 1,
+       "scored": 8,
+       "exceeded": 0,
+       "exceededShare": 0,
+       "deepest": null,
+       "meanDistanceFromMedian": 0.259,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": true,
+       "grain": "face"
+      },
+      "corpus": {
+       "executable": true,
+       "sentences": 20,
+       "scored": 13,
+       "exceeded": 10,
+       "exceededShare": 0.769,
+       "deepest": {
+        "metric": "wordsPerSentence.neighbourVariation",
+        "depth": 0.858,
+        "side": "under"
+       },
+       "meanDistanceFromMedian": 0.563,
+       "budgetOk": false,
+       "depthOk": true,
+       "perfectionSuspect": false,
+       "grain": "corpus"
+      }
+     }
+    },
+    {
+     "vid": 3,
+     "face": 5,
+     "executable": true,
+     "sentences": 1,
+     "scored": 8,
+     "exceeded": 0,
+     "exceededShare": 0,
+     "deepest": null,
+     "meanDistanceFromMedian": 0.259,
+     "budgetOk": true,
+     "depthOk": true,
+     "perfectionSuspect": true,
+     "grain": "face",
+     "grains": {
+      "face": {
+       "executable": true,
+       "sentences": 1,
+       "scored": 8,
+       "exceeded": 0,
+       "exceededShare": 0,
+       "deepest": null,
+       "meanDistanceFromMedian": 0.259,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": true,
+       "grain": "face"
+      },
+      "corpus": {
+       "executable": true,
+       "sentences": 20,
+       "scored": 13,
+       "exceeded": 10,
+       "exceededShare": 0.769,
+       "deepest": {
+        "metric": "wordsPerSentence.neighbourVariation",
+        "depth": 0.858,
+        "side": "under"
+       },
+       "meanDistanceFromMedian": 0.563,
+       "budgetOk": false,
+       "depthOk": true,
+       "perfectionSuspect": false,
+       "grain": "corpus"
+      }
+     }
+    }
+   ],
+   "provenance": {
+    "citations": 1,
+    "a13": 1
+   },
+   "corpusBand": {
+    "executable": true,
+    "sentences": 20,
+    "scored": 13,
+    "exceeded": 10,
+    "exceededShare": 0.769,
+    "deepest": {
+     "metric": "wordsPerSentence.neighbourVariation",
+     "depth": 0.858,
+     "side": "under"
+    },
+    "meanDistanceFromMedian": 0.563,
+    "budgetOk": false,
+    "depthOk": true,
+    "perfectionSuspect": false,
+    "grain": "corpus"
+   },
+   "corpusWords": 400,
+   "owned": {
+    "verdicts": {
+     "FAIL": 0,
+     "WITHHELD": 0,
+     "PASS": 18
     },
     "findings": [],
     "findingCount": 0,
@@ -18906,26 +21997,98 @@
      "klass": "Q",
      "channel": "WITHHELD",
      "spineKey": "Invasion & War: force with NO walls",
-     "clause": "It answers raiders well and cannot hold a siege, because there is nothing here to hold.",
+     "clause": "They can meet a raid in the open and cannot hold a siege, because there is no line to hold.",
      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call",
      "count": 1
     },
     {
-     "label": "A3 · the band half is the refuter's",
-     "arm": "A3",
+     "label": "C3 · is this clause historical?",
+     "arm": "is this clause historical?",
+     "klass": "C3",
+     "channel": "WITHHELD",
+     "spineKey": "Invasion & War: force with NO walls",
+     "clause": "A guild factor says the trades pay for the same men once through the purse and again by the day.",
+     "description": "a past-tense or formerly-construction: whether it asserts history is A6, the refuter's",
+     "count": 1
+    },
+    {
+     "label": "Q · a second sentence naming no second field",
+     "arm": "a second sentence naming no second field",
+     "klass": "Q",
+     "channel": "WITHHELD",
+     "spineKey": "Invasion & War: force with NO walls",
+     "clause": "The day's work is the watchman's own trade, and the trade goes short for it.",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call",
+     "count": 1
+    },
+    {
+     "label": "X · exhaustivity over an open column",
+     "arm": "exhaustivity over an open column",
+     "klass": "X",
+     "channel": "WITHHELD",
+     "spineKey": "Invasion & War: force with NO walls",
+     "clause": "The day's work is the watchman's own trade, and the trade goes short for it.",
+     "description": "the copula entails the subject is the column's only value; the column is not closed",
+     "count": 1
+    },
+    {
+     "label": "C3 · is this clause historical?",
+     "arm": "is this clause historical?",
+     "klass": "C3",
+     "channel": "WITHHELD",
+     "spineKey": "Invasion & War: force with NO walls",
+     "clause": "and was not sure until later that they were the town's.",
+     "description": "a past-tense or formerly-construction: whether it asserts history is A6, the refuter's",
+     "count": 1
+    },
+    {
+     "label": "A13 · a holder with no institution",
+     "arm": "A13",
      "klass": "",
      "channel": "WITHHELD",
      "spineKey": "Invasion & War: force with NO walls",
-     "clause": "rather than works",
-     "description": "no sibling KEY names this alternative; whether a sibling BAND supplies it is the refuter's (siblings: Beasts & Monsters: plagued, perimeter AND organized force | Beasts & Monsters: plagued, perimeter but NO force to hold it | Beasts & Monsters: plagued, NO perimeter and NO force | Beasts & Monsters: frontier, credible deterrence)",
+     "clause": "Invasion & War: force with NO walls: muster",
+     "description": "the holder kind resolves to no institution in this town's roster, so the cited record has nobody keeping it",
+     "count": 1
+    },
+    {
+     "label": "X · exhaustivity over an open column",
+     "arm": "exhaustivity over an open column",
+     "klass": "X",
+     "channel": "WITHHELD",
+     "spineKey": "Invasion & War: force with NO walls",
+     "clause": "The market says the granary door is the thing worth coming for and the soldiers know it.",
+     "description": "the copula entails the subject is the column's only value; the column is not closed",
+     "count": 1
+    },
+    {
+     "label": "F25 · a cited record's content",
+     "arm": "a cited record's content",
+     "klass": "F25",
+     "channel": "WITHHELD",
+     "spineKey": "Invasion & War: force with NO walls",
+     "clause": "The register says",
+     "description": "the predicate is attributed to a record; fault 25 asks what that record HOLDS, and no loader reaches its fields yet",
      "count": 1
     }
    ],
-   "inheritedCount": 2,
+   "inheritedCount": 8,
    "spineWithheld": true,
    "qVocabulary": [
     {
-     "clause": "It answers raiders well and cannot hold a siege, because there is nothing here to hold.",
+     "clause": "They can meet a raid in the open and cannot hold a siege, because there is no line to hold.",
+     "spineKey": "Invasion & War: force with NO walls",
+     "count": 1,
+     "reads": [
+      "invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)"
+     ],
+     "mapped": [],
+     "executable": false,
+     "verdict": "NOT-EXECUTABLE: the recovered reading is the census's own synthetic table label and not a field path, so no text can claim it",
+     "synonymTable": "a word-level synonym table ships and was applied"
+    },
+    {
+     "clause": "The day's work is the watchman's own trade, and the trade goes short for it.",
      "spineKey": "Invasion & War: force with NO walls",
      "count": 1,
      "reads": [
@@ -45686,17 +48849,17 @@
   }
  ],
  "walk": {
-  "totalUnits": 394,
-  "n": 394,
+  "totalUnits": 448,
+  "n": 448,
   "exhaustive": true,
-  "msPerUnit": 0.17,
-  "exhaustiveMs": 67,
+  "msPerUnit": 0.175,
+  "exhaustiveMs": 78,
   "confidence": "the whole population is walked, so every arm rate is exact and no interval applies",
-  "sampleSha": "3c70e932d4f910740072e331a4e227feb4df200e29f14b96616d3822cbb5ffbe",
+  "sampleSha": "58549f469cfcc27821e84df59943d8a28cc7902104bf5095120b8036b33da70e",
   "verdicts": {
-   "FAIL": 11,
-   "WITHHELD": 163,
-   "PASS": 220
+   "FAIL": 13,
+   "WITHHELD": 177,
+   "PASS": 258
   }
  },
  "manifest": {
