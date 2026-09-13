@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-13 11:40:59 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-13 11:46:06 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = c2b72466a Plan: wave 3 has begun — batch 2 of DS-DEF-2 (three pools) through draft 065b9ded6 and c
 
@@ -72,7 +72,7 @@ stat: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-
 - **L-PROBE-2 (chair)**: cheap /6 tips · full:  · bracket: 
 ## REWRITE 8b PACKETS (rewrite/DS-DEF-n/<pool>/: skeleton · draft-round-N · refine · kept · refute* · cure-round-N · cured-round-N; JUDGMENT.md / JUDGMENT-cure.md per block; the entailment + referent tables)
 - DS-DEF-11: pools 5 · skeleton 5 · draft 5 · refine 5 · kept 5 · refute 13 · cure 10 · cured 10 · JUDGMENT yes · JUDGMENT-cure yes
-- DS-DEF-2: pools 26 · skeleton 26 · draft 39 · refine 0 · kept 0 · refute 8 · cure 0 · cured 0 · JUDGMENT no · JUDGMENT-cure no
+- DS-DEF-2: pools 26 · skeleton 26 · draft 39 · refine 0 · kept 0 · refute 9 · cure 0 · cured 0 · JUDGMENT no · JUDGMENT-cure no
 - DS-DEF-2.licence-test-attempt: pools 26 · skeleton 26 · draft 36 · refine 26 · kept 26 · refute 32 · cure 24 · cured 0 · JUDGMENT yes · JUDGMENT-cure no
 - entailment: surveys 6 · refutes 6 · ENTAILMENT-TABLE.draft.md 09-12 20:49 346945 B · referent surveys 6 · referent refutes 6 · REFERENT-TABLE.draft.md 09-12 20:49 285943 B
 - HOLD-VITEST absent · runner count 0
@@ -93,7 +93,7 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
 - LAST-RUNS: 
 
 ## WORKFLOW RUNS of chair session 4e3d2f70-f45f-4e14-b571-514c339cfa17 — PER AGENT, PER LANE (owner 09-11: save progress per agent per lane; a run dies with the session, its journal + the packets + the dock commits are the checkpoint; journals mirrored under $SC/_progress/<wf>/)
-- **wf_74510771-4fe** (mtime 09-13 11:31): agent calls 27 (26 distinct) · DONE 21 · FAILED (not retried) 0 · RETRIED (superseded attempts) 1 · IN FLIGHT 5 — mirror `_progress/wf_74510771-4fe/`
+- **wf_74510771-4fe** (mtime 09-13 11:31): agent calls 27 (26 distinct) · DONE 25 · FAILED (not retried) 0 · RETRIED (superseded attempts) 1 · IN FLIGHT 1 — mirror `_progress/wf_74510771-4fe/`
     - `aae3b7721` MARKER Invasion & War: walls AND professional garrison · DONE · transcript 09-13 08:05 1088 KB · 63 tool calls · files: card-mech.txt, card-79.md, card.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasio
     - `a14855157` MARKER Internal Security: full legal chain (court AND prison) · DONE · transcript 09-13 08:01 868 KB · 41 tool calls · files: card.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--interna
     - `a54b8e93a` MARKER Economic Survival: STRONG · DONE · transcript 09-13 08:05 893 KB · 49 tool calls · files: $D/card.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--economi
@@ -116,11 +116,11 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `ae8b427cd` SELECTOR Beasts & Monsters: frontier, credible deterrence · DONE · transcript 09-13 08:44 1098 KB · 27 tool calls · files: "$D/draft.md, rows_check.txt · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--beasts-
     - `a57e7fc30` GATE r1 · RETRIED (a later attempt on the same key runs) · transcript 09-13 08:57 616 KB · 28 tool calls
     - `ab170197f` GATE r1 · DONE · transcript 09-13 11:31 1312 KB · 137 tool calls · files: gateout.txt, measure.txt, msg.txt, (git commit) · result: {"commit": "d57c601cf2768804c143c36ef2833159c62e58eb", "measurement": "SHIPPED f2da5a3ee: pools 26 | units 78 | DISTINCT 519 | content types 489 | mean words 24
-    - `a3c8ba517` REFUTER Invasion & War: walls AND professional garrison · IN FLIGHT · transcript 09-13 11:40 866 KB · 29 tool calls · files: refute.md, rows.txt, rows.txt · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
-    - `a49623346` REFUTER Internal Security: full legal chain (court AND prison) · IN FLIGHT · transcript 09-13 11:40 716 KB · 16 tool calls · files: refute.md · last: Write /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
-    - `ae79277bd` REFUTER Economic Survival: STRONG · IN FLIGHT · transcript 09-13 11:40 700 KB · 16 tool calls · files: rows.txt, '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--economic-survival-strong/refute.md · last: Bash cat > '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/s
-    - `acfd319b5` REFUTER Disasters & Famine: granary AND hospital · IN FLIGHT · transcript 09-13 11:40 782 KB · 23 tool calls · files: "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--disasters-famine-granary-and-hospital/refute.md · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
-    - `a577697ff` REFUTER Beasts & Monsters: frontier, credible deterrence · IN FLIGHT · transcript 09-13 11:40 810 KB · 17 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `a3c8ba517` REFUTER Invasion & War: walls AND professional garrison · IN FLIGHT · transcript 09-13 11:45 991 KB · 35 tool calls · files: refute.md, rows.txt, rows.txt · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `a49623346` REFUTER Internal Security: full legal chain (court AND prison) · DONE · transcript 09-13 11:41 770 KB · 17 tool calls · files: refute.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--interna
+    - `ae79277bd` REFUTER Economic Survival: STRONG · DONE · transcript 09-13 11:41 761 KB · 17 tool calls · files: rows.txt, '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--economic-survival-strong/refute.md · result: {"craft": {"verdict": "PASS", "speakers": 11, "collapse": "Not DULL and not close to it: 11 voices each with a printed interest, a real dispute (hall vs watch, 
+    - `acfd319b5` REFUTER Disasters & Famine: granary AND hospital · DONE · transcript 09-13 11:41 828 KB · 24 tool calls · files: "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--disasters-famine-granary-and-hospital/refute.md · result: {"craft": {"verdict": "PASS", "speakers": 9, "collapse": "No collapse, but three named risks. (a) THE GRANARY DOOR IS VARIANT 1's REPEATED LANDING NOUN: five of
+    - `a577697ff` REFUTER Beasts & Monsters: frontier, credible deterrence · DONE · transcript 09-13 11:43 941 KB · 20 tool calls · files: refute.md · result: {"craft": {"verdict": "PASS", "speakers": 12, "collapse": "Nearest collapse, named and not charged: three nouns \u2014 the line, the way through, the country \u
 - **wf_c31490ff-2d1** (mtime 09-13 07:43): agent calls 23 (23 distinct) · DONE 23 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 0 — mirror `_progress/wf_c31490ff-2d1/`
     - `af733d6a7` MARKER Invasion & War: force with NO walls · DONE · transcript 09-13 06:14 817 KB · 36 tool calls · files: mark-out.txt, "$D/card.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasio
     - `a81ba66ec` MARKER Internal Security: no legal infrastructure · DONE · transcript 09-13 06:14 845 KB · 36 tool calls · files: "$D/card.md, "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--internal-security-no-legal-infrastructure/card.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--interna
@@ -157,4 +157,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `ab8783d22` WRITER Invasion & War: walls with NO force · DONE · transcript 09-13 02:30 725 KB · 17 tool calls · files: candidates-2.md, facetext.txt, ft2.txt · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasio
 
 ## PROCESSES: 
-load: 2.69 3.08 3.24
+load: 2.05 2.55 2.95
