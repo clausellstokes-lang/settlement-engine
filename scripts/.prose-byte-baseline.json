@@ -55,8 +55,8 @@
   },
   "leaves": {
     "src/data/dossierStateProse/defense.generated.js": {
-      "raw": 157209,
-      "gzip": 23723,
+      "raw": 167290,
+      "gzip": 26151,
       "ceilingRaw": 488168,
       "ceilingGzip": 108482
     },
@@ -195,6 +195,14 @@
       "toRaw": 157209,
       "gzipAfter": 23723,
       "reason": "The first v3 pool takes the two forms ADDENDUM 18 created and loses the frames ruling 40 struck. TWO FACES ADDED: an `[archiver · observed]` face on variant 2 and a `[public]` face on variant 3 (faceCounts 4,4,4 → 4,5,5; the shift register's `face-count-per-variant` row carries the re-roll). Against that, THREE SPINES AND THE HALL'S PAIR HALF WERE SHORTENED: ruling 40 struck 'The survey finds …' and 'Entered here as kept.' from spine 1 and 'The survey finds the watch on the walls …' from the watch's face, and ruling 30 cut the hall's half from two sentences to one so the pair is compoundable. The net is small because the re-cut gives back nearly what the new faces cost, which is the cap doing its work. ⭐ NO CEILING IS NEAR: the leaf sits far under the owner-signed 488,168. ⚠ AND THIS COMMIT IS THE FIRST 8b CURE TO RUN THIS RATCHET AT ALL — the row before it banks the growth five earlier cars left undeclared."
+    },
+    {
+      "car": "REWRITE 8b DS-DEF-2 draft (v3) — THREE POOLS APPLIED VERBATIM AT THE DRAFT GATE",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 157209,
+      "toRaw": 167290,
+      "gzipAfter": 26151,
+      "reason": "The 8b DS-DEF-2 DRAFT gate lands THREE MORE POOLS of the block under the v3 workflow, each replacing three bare spine rows with a spine plus its wording faces, applied VERBATIM from the selectors' packets. `Invasion & War: force with NO walls` 1,1,1 → 6,6,6 (five faces a variant); `Internal Security: no legal infrastructure` 1,1,1 → 11,8,8 (the block's widest seated roster, ten faces behind variant 1's spine); `Disasters & Famine: NO reserves, NO medical provision` 1,1,1 → 6,6,6. Forty-five new wording rows and seven marked pairs in all, against nine spine rows re-cut and no row removed. ⭐ THE GROWTH IS THE FACES THEMSELVES and nothing else: no slot, no mark and no leaf key was added, and the shift register's `face-count-per-variant` row carries the corpus sum 2277 → 2331, the largest entry 5 → 11 and the per-pool digest. ⭐ NO CEILING IS NEAR — 167,290 raw against the owner-signed 488,168, and 26,151 gzip against 108,482."
     }
   ]
 }

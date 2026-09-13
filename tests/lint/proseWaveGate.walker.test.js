@@ -160,8 +160,16 @@ describe('the CARTESIAN unit set is the attach set times the spines times the fa
     }
     expect(disagree.slice(0, 5), 'a pool the two builders read differently').toEqual([]);
     // NON-VACUITY on the only axis that could hide a fork: a comparison over zero units is two
-    // implementations agreeing about nothing. The defense section composes 383 units today.
-    expect(total, 'the units actually compared').toBe(383);
+    // implementations agreeing about nothing. The defense section composes 448 units today.
+    // ⛔ THIS LITERAL WAS ALREADY STALE WHEN THE 8b DS-DEF-2 DRAFT GATE READ IT, and the
+    // staleness is recorded rather than quietly absorbed: at the dock's HEAD (`f6bdcf591`,
+    // cure 3) the section already composed 394 units against this 383 and the arm was RED —
+    // the two faces cure 3 seated (the archiver's observation and the public) and its
+    // re-cut were never carried onto this line. The draft gate's three pools take it to 448
+    // (+45 wording faces, +9 spines re-cut, nothing removed), and the number is moved to
+    // what the builders actually compare. A UNIT COUNT ONLY RISES while the REWRITE runs;
+    // the arm that reds on a FALL is the shift register's `face-count-per-variant` row.
+    expect(total, 'the units actually compared').toBe(448);
     // AND THE FLAG IS A FLAG: without `bareSpine` the lib answers the SHAPE REPORT's question
     // (the units a corpus LICENSES), which on a spine pool is none. The two populations are
     // different on purpose, and this is the line that says so.

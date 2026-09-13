@@ -558,11 +558,22 @@ describe('the state-prose reader — the wording face (ARCH §2.6)', () => {
   it('⭐ THE SHIPPED CORPUS TAKES NO HASH EXCEPT ON THE ONE v3 POOL, and the corpus is read live', () => {
     // The claim car 3a rested on: the composer's face draw was byte-identical BY CONSTRUCTION,
     // because no variant that shipped carried a `wordings` list. THE FIRST v3 POOL HAS ENDED
-    // THAT LAWFULLY, so the arm is re-pinned rather than deleted: `DS-DEF-2 :: Invasion & War:
-    // walls with NO force` is the ONE pool with faces today — three variants, three wordings
-    // each — and it is NAMED. Everything else still takes no hash and still draws face 0.
-    // Measured over the live leaves, so a second pool landing faces reds here by name.
-    const FACED_TODAY = ['DS-DEF-2 :: Invasion & War: walls with NO force #0',
+    // THAT LAWFULLY, so the arm is re-pinned rather than deleted: the FOUR v3 pools with faces
+    // today all sit in `DS-DEF-2` and every one of their twelve variants is NAMED. Everything
+    // else still takes no hash and still draws face 0. Measured over the live leaves, so a
+    // further pool landing faces reds here by name.
+    // ⭐ RE-PINNED AT THE 8b DS-DEF-2 DRAFT GATE (v3) from the single `walls with NO force`
+    // roster: three more pools of the same block landed faces in one commit.
+    const FACED_TODAY = ['DS-DEF-2 :: Disasters & Famine: NO reserves, NO medical provision #0',
+      'DS-DEF-2 :: Disasters & Famine: NO reserves, NO medical provision #1',
+      'DS-DEF-2 :: Disasters & Famine: NO reserves, NO medical provision #2',
+      'DS-DEF-2 :: Internal Security: no legal infrastructure #0',
+      'DS-DEF-2 :: Internal Security: no legal infrastructure #1',
+      'DS-DEF-2 :: Internal Security: no legal infrastructure #2',
+      'DS-DEF-2 :: Invasion & War: force with NO walls #0',
+      'DS-DEF-2 :: Invasion & War: force with NO walls #1',
+      'DS-DEF-2 :: Invasion & War: force with NO walls #2',
+      'DS-DEF-2 :: Invasion & War: walls with NO force #0',
       'DS-DEF-2 :: Invasion & War: walls with NO force #1',
       'DS-DEF-2 :: Invasion & War: walls with NO force #2'];
     const withWordings = SHIPPED_POOLS
@@ -608,7 +619,10 @@ describe('the state-prose reader — the wording face (ARCH §2.6)', () => {
         }
       }
       expect(nonZero, 'every shipped variant with ONE face draws face 0').toBe(0);
-      expect(hashedRows, 'and exactly three variants ship more than one face').toBe(3);
+      // ⭐ RE-PINNED AT THE 8b DS-DEF-2 DRAFT GATE (v3): twelve, not three — the block's four
+      // faced pools, three variants each. A GROW, and the ratchet that reds on a FALL is the
+      // shift register's `face-count-per-variant` row, not this line.
+      expect(hashedRows, 'and exactly twelve variants ship more than one face').toBe(12);
     } finally {
       spy.mockRestore();
     }
@@ -1390,9 +1404,20 @@ describe('the state-prose reader — ONE FACE PER POWER: the source filter and t
 
   it('⭐ ONE SHIPPED POOL CARRIES SOURCED FACES AND ONE PAIR, and every other block is still the zero-shift ground — read live', () => {
     // Re-pinned at the first v3 pool: the corpus is no longer sourceless, so the arm names
-    // the ONE pool that is and holds the old ground over everything else. A second pool
-    // landing faces reds here by name and is re-pinned in its own cure commit.
-    const SOURCED_TODAY = ['DS-DEF-2 :: Invasion & War: walls with NO force #0',
+    // the pools that are and holds the old ground over everything else. A further pool
+    // landing faces reds here by name and is re-pinned in the commit that lands it.
+    // ⭐ RE-PINNED AT THE 8b DS-DEF-2 DRAFT GATE (v3): three more pools of the SAME block
+    // landed faces in one commit, so the roster is twelve variants of four pools.
+    const SOURCED_TODAY = ['DS-DEF-2 :: Disasters & Famine: NO reserves, NO medical provision #0',
+      'DS-DEF-2 :: Disasters & Famine: NO reserves, NO medical provision #1',
+      'DS-DEF-2 :: Disasters & Famine: NO reserves, NO medical provision #2',
+      'DS-DEF-2 :: Internal Security: no legal infrastructure #0',
+      'DS-DEF-2 :: Internal Security: no legal infrastructure #1',
+      'DS-DEF-2 :: Internal Security: no legal infrastructure #2',
+      'DS-DEF-2 :: Invasion & War: force with NO walls #0',
+      'DS-DEF-2 :: Invasion & War: force with NO walls #1',
+      'DS-DEF-2 :: Invasion & War: force with NO walls #2',
+      'DS-DEF-2 :: Invasion & War: walls with NO force #0',
       'DS-DEF-2 :: Invasion & War: walls with NO force #1',
       'DS-DEF-2 :: Invasion & War: walls with NO force #2'];
     const rows = LIVE_POOLS
@@ -1405,14 +1430,34 @@ describe('the state-prose reader — ONE FACE PER POWER: the source filter and t
     // ⭐ RE-FROZEN AT THE POOL RE-CUT OF CARS 8b-W-18n/18o: variant #1 gains the ARCHIVER'S
     // OWN OBSERVATION (ruling 27) and variant #2 gains the PUBLIC (ruling 28), the two forms
     // those cars created taking their first seats in the corpus.
+    // ⭐ AND THE DRAFT GATE'S THREE POOLS BESIDE IT, in corpus order. None of them carries the
+    // archiver or the public: those two forms still stand only where 18n/18o seated them.
     expect(rows.map(({ v }) => v.sources)).toEqual([
       [null, 'elders', 'hall', 'guild'],
       [null, 'stranger', 'tavern', 'gate', 'archiver'],
       [null, 'elders', 'watch', 'court', 'public'],
+      [null, 'hall', 'guild', 'watch', 'tavern', 'elders'],
+      [null, 'watch', 'stranger', 'hall', 'tavern', 'garrison'],
+      [null, 'garrison', 'gate', 'hall', 'market', 'register'],
+      [null, 'stranger', 'tavern', 'register', 'elders', 'gate', 'muster', 'watch', 'market', 'guild', 'garrison'],
+      [null, 'stranger', 'garrison', 'tavern', 'elders', 'muster', 'gate', 'register'],
+      [null, 'stranger', 'tavern', 'elders', 'register', 'gate', 'watch', 'guild'],
+      [null, 'elders', 'stranger', 'market', 'register', 'tavern'],
+      [null, 'elders', 'tavern', 'stranger', 'market', 'register'],
+      [null, 'stranger', 'tavern', 'elders', 'register', 'market'],
     ]);
     expect(rows.map(({ v }) => v.pairs)).toEqual([
       [null, null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }],
       undefined, undefined,
+      [null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null, null, null],
+      [null, null, null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null],
+      undefined,
+      [null, { id: 1, kind: 'view' }, null, null, { id: 1, kind: 'view' },
+        { id: 2, kind: 'reinforce' }, null, { id: 2, kind: 'reinforce' }, null, null, null],
+      undefined, undefined,
+      [null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null, null, null],
+      [null, { id: 2, kind: 'disagree' }, { id: 2, kind: 'disagree' }, null, null, null],
+      undefined,
     ]);
     // THE ZERO-SHIFT ARM THAT SURVIVES: every OTHER shipped variant's eligible list is [0]
     // whatever the roster, so no roster can move a single read outside DS-DEF-2.
@@ -1439,7 +1484,7 @@ describe('the state-prose reader — ONE FACE PER POWER: the source filter and t
         expect(eligibleFaces(v, new Set(FACE_SOURCES))).toEqual([0]);
       }
     }
-    expect(sourcedChecked, 'the three sourced variants were reached').toBe(3);
+    expect(sourcedChecked, 'the twelve sourced variants were reached').toBe(12);
     expect(checked).toBeGreaterThanOrEqual(2266);
   });
 });

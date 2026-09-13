@@ -683,9 +683,16 @@ describe('THE MAP READ THE OTHER WAY — fact → text, and the three tiers', ()
     // crossed the tier line crosses back. `grammars` is `new Set(orderIdOf(classifyMoves(text))
     // || the raw sequence)` per pool. The counts are recomputed FRESH from the live modules
     // here, which is why they move with the classifier rather than with the committed JSON.
+    // ⭐⭐ THIN 483 → 480 AND COVERED 225 → 228 AT THE 8b DS-DEF-2 DRAFT GATE, AND IT IS A WIN
+    // BANKED, NOT A DRIFT. The three pools the gate landed — `Invasion & War: force with NO
+    // walls`, `Internal Security: no legal infrastructure` and `Disasters & Famine: NO
+    // reserves, NO medical provision` — each had three variants of ONE grammar and crossed the
+    // line the moment their wording faces gave them a second. The REWRITE's whole purpose is
+    // to move pools across exactly this line, so the two counts move together, three for
+    // three, and MISSING does not move at all (no held fact gained or lost a pool).
     expect(counts.get(TIERS.MISSING), 'held facts with no pool keyed on them').toBe(34);
-    expect(counts.get(TIERS.THIN), 'pools with one variant, one grammar, or {settlement} alone').toBe(483);
-    expect(counts.get(TIERS.COVERED), 'and the rest').toBe(225);
+    expect(counts.get(TIERS.THIN), 'pools with one variant, one grammar, or {settlement} alone').toBe(480);
+    expect(counts.get(TIERS.COVERED), 'and the rest').toBe(228);
     expect(counts.get(TIERS.THIN) + counts.get(TIERS.COVERED), 'every pool lands in one of the two pool tiers')
       .toBe(spines.length);
     for (const row of tiers) {

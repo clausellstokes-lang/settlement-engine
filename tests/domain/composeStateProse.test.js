@@ -157,6 +157,22 @@ function composeFixture(corpus, options = {}) {
 const FACED_BLOCK = 'DS-DEF-2';
 const FACED_POOL = 'Invasion & War: walls with NO force';
 const FACED_AT = `${FACED_BLOCK} :: ${FACED_POOL}`;
+// ⭐⭐ RE-PINNED AT THE 8b DS-DEF-2 DRAFT GATE (v3). Three more pools of the SAME block landed
+// wording faces in one commit, so the carve-out is a LIST and no longer one name. Every entry
+// is still inside DS-DEF-2 — nothing outside this block carries a face — and the arms below
+// still assert the equality over the other 704 pools BY MEASUREMENT. ⛔ THE NEW THREE NAME NO
+// ATTRIBUTION SLOT, so unlike `walls with NO force` they do not fail closed on a roles-less
+// read: their drift is TEXT + SPINE on every seed that draws a face other than the spine.
+const FACED_POOLS = Object.freeze([
+  FACED_POOL,
+  'Invasion & War: force with NO walls',
+  'Internal Security: no legal infrastructure',
+  'Disasters & Famine: NO reserves, NO medical provision',
+]);
+const FACED_ATS = Object.freeze(FACED_POOLS.map((pool) => `${FACED_BLOCK} :: ${pool}`));
+/** @param {string} row a drift line @param {boolean} [prefix] match at the head only */
+const isFaced = (row, prefix = false) => FACED_ATS
+  .some((at) => (prefix ? row.startsWith(at) : row.includes(at)));
 
 describe('the composer — the corpus loads, and the merge is legal', () => {
   it('every block lives in exactly one leaf, and the sweep found the whole corpus', () => {
@@ -211,8 +227,8 @@ describe('⭐ THE SEAM COMPOSES TO THE KERNEL — an empty candidate list moves 
     // silently tolerated: DS-DEF-2's faced pool is allowed to disagree with the kernel's
     // one-face read, every other pool is not, and the disagreement is itself asserted to
     // exist so the carve-out cannot go vacuous.
-    const faced = drift.filter((row) => row.includes(FACED_AT));
-    const elsewhere = drift.filter((row) => !row.includes(FACED_AT));
+    const faced = drift.filter((row) => isFaced(row));
+    const elsewhere = drift.filter((row) => !isFaced(row));
     expect(elsewhere.slice(0, 10), 'a pool where the composer and the kernel disagree').toEqual([]);
     expect(elsewhere.length).toBe(0);
     // NON-VACUITY OF THE CARVE-OUT: the faced pool really does move.
@@ -283,14 +299,17 @@ describe('⭐ THE BASE-SIDE SYNTHESIS — every recorded cell, against the compo
     // exists in the shipped shape, and car 3a is where the composer is pinned against that
     // table. The COMPOSER'S OWN function is driven — not a second spelling of it — so a
     // change to the coordinate rule reds here rather than passing against a copy of itself.
-    /** @type {string[]} */
+    /** @type {Array<{blind: boolean, pool: string, at: string}>} */
     const mismatch = [];
     let checked = 0;
     let facedCells = 0;
     for (const cell of run.cells) {
       const block = CORPUS[cell.block];
       const pool = block && block.pools ? block.pools[cell.pool] : undefined;
-      if (!Array.isArray(pool)) { mismatch.push(`NOPOOL ${cell.cell}`); continue; }
+      if (!Array.isArray(pool)) {
+        mismatch.push({ blind: false, pool: cell.pool, at: `NOPOOL ${cell.cell}` });
+        continue;
+      }
       const variant = pool[cell.vid];
       const audience = cell.cell.split('::')[1];
       // ⭐ RE-PINNED AT THE FIRST v3 POOL. The arm's subject is the COORDINATE RULE — that
@@ -312,14 +331,52 @@ describe('⭐ THE BASE-SIDE SYNTHESIS — every recorded cell, against the compo
       if (cell.block === FACED_BLOCK && cell.pool === FACED_POOL) facedCells += 1;
       checked += 1;
       if (JSON.stringify(piece) !== JSON.stringify(cell.pieces[0])) {
-        mismatch.push(`${cell.cell} :: composer ${JSON.stringify(piece)}`
-          + ` :: recorder ${JSON.stringify(cell.pieces[0])}`);
+        // THE ONE SHAPE THE RECORDER'S TEMPLATE READER CANNOT ANSWER: a faced pool's cell
+        // whose rendered sentence is a FACE, so the recorder resolved nothing (`vid: null`)
+        // and the composer, handed `pool[null]`, answered `-1`. Everything else is a real
+        // coordinate disagreement. The two must agree on the FACE either way.
+        const blindSpot = isFaced(`${cell.block} :: ${cell.pool}`, true)
+          && cell.resolved === false
+          && recorded.vid === null && recorded.index === null
+          && piece.vid === -1 && piece.index === -1
+          && piece.face === recorded.face && piece.key === recorded.key
+          && piece.role === recorded.role;
+        mismatch.push({
+          blind: blindSpot,
+          pool: cell.pool,
+          at: `${cell.cell} :: composer ${JSON.stringify(piece)}`
+            + ` :: recorder ${JSON.stringify(cell.pieces[0])}`,
+        });
       }
     }
+    // ⛔⛔ THE INSTRUMENT'S OWN BLIND SPOT, NAMED AT THE 8b DS-DEF-2 DRAFT GATE RATHER THAN
+    // TOLERATED, AND IT IS A NARROWING OF THIS ARM. `cellsOfTown` identifies a ONE-PIECE
+    // unit's variant from the RENDERED SENTENCE and reads the composer's own pieces only
+    // when there are TWO OR MORE of them. Three of the four faced pools name NO attribution
+    // slot, so on a roles-less read their faces really draw and the rendered sentence is a
+    // FACE, which no pool template matches: the recorder writes `vid: null, index: null,
+    // resolved: false` and the composer, handed `pool[null]`, answers `-1 / -1`. That is the
+    // READER'S LIMIT and not a coordinate disagreement — so those cells are partitioned out
+    // BY NAME and BY SHAPE, and ANY other disagreement on them still reds here.
+    //
+    // ⛔ THE FIX IS A MACHINERY CAR AND IS NOT TAKEN HERE. Reading the composer's pieces for
+    // a one-piece unit too (`rung.pieces.length >= 1`) closes this AND takes `run.unresolved`
+    // back to 0 — MEASURED at this gate — but it also flips `drawAgrees` from a measured
+    // comparison to an unconditional `true` on 3,912 OTHER cells across ten blocks, which is
+    // the false-green class. The threshold and `drawAgrees` must move together, in their own
+    // car, with the composed path made to measure the draw rather than assert it.
+    const blind = mismatch.filter((row) => row.blind);
+    const real = mismatch.filter((row) => !row.blind);
     process.stdout.write(`[compose] base-side synthesis checked on ${checked} cells of`
-      + ` ${run.rows.size} rows · mismatches ${mismatch.length}\n`);
-    expect(mismatch.slice(0, 5), 'a cell the composer would coordinate differently').toEqual([]);
-    expect(mismatch.length).toBe(0);
+      + ` ${run.rows.size} rows · mismatches ${mismatch.length}`
+      + ` (recorder-blind ${blind.length})\n`);
+    expect(real.slice(0, 5).map((row) => row.at), 'a cell the composer would coordinate differently').toEqual([]);
+    expect(real.length).toBe(0);
+    // AND THE CARVE-OUT IS BOUNDED: every blind cell is a faced pool's, records the exact
+    // `-1/-1` against `null/null` shape, and agrees with the recorder on the face itself.
+    expect([...new Set(blind.map((row) => row.pool))].sort(), 'the blind cells are the faced pools\' own')
+      .toEqual(['Internal Security: no legal infrastructure']);
+    expect(blind.length, 'and the blind spot is the size the gate measured').toBe(504);
     expect(checked, 'the whole recorded table').toBe(run.cells.length);
     expect(run.rows.size, 'and the table is the full DRIFT corpus').toBe(1050);
     // NON-VACUITY OF THE RE-PIN: the DRIFT run really does reach the one faced pool, and
@@ -1530,8 +1587,8 @@ describe('the composer — ONE FACE PER POWER: the source filter and the pair (c
     // cars 3b–3g rest on. On DS-DEF-2's faced pool a roster is SUPPOSED to move the read
     // (ADDENDUM 18 ruling 15: a town hears the powers it has), so the mover is named and
     // its movement asserted rather than tolerated.
-    const faced = drift.filter((row) => row.startsWith(FACED_AT));
-    const elsewhere = drift.filter((row) => !row.startsWith(FACED_AT));
+    const faced = drift.filter((row) => isFaced(row, true));
+    const elsewhere = drift.filter((row) => !isFaced(row, true));
     expect(elsewhere.slice(0, 10)).toEqual([]);
     expect(elsewhere.length).toBe(0);
     expect(faced.length, 'the named mover moved under a roster').toBeGreaterThan(0);

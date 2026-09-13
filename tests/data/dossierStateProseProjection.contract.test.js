@@ -1938,11 +1938,16 @@ describe('SEAM car 4 — §2.5\'s grammar, and every refusal it declares', () =>
   });
 
   // ⭐ THE ZERO-SHIFT GROUND OF CAR 8b-W-18c HAS BEEN LAWFULLY ENDED BY THE FIRST v3 POOL, and
-  // the arm is re-pinned rather than deleted: `DS-DEF-2 :: Invasion & War: walls with NO force`
-  // is the ONE pool that ships sourced faces today, its roster is named here face by face, and
-  // EVERY OTHER BLOCK still carries no `sources` and no `pairs` at all. A second pool landing
-  // faces reds this arm by name and is re-pinned in its own cure commit, exactly as the shift
-  // register's `face-count-per-variant` row is.
+  // the arm is re-pinned rather than deleted: `DS-DEF-2` is the ONE block that ships sourced
+  // faces today, its pools' rosters are named here face by face, and EVERY OTHER BLOCK still
+  // carries no `sources` and no `pairs` at all. A further pool landing faces reds this arm by
+  // name and is re-pinned in the commit that lands it, exactly as the shift register's
+  // `face-count-per-variant` row is.
+  //
+  // ⭐⭐ RE-PINNED AT THE 8b DS-DEF-2 DRAFT GATE (v3), which landed THREE MORE POOLS of this
+  // same block in one commit: `Invasion & War: force with NO walls`, `Internal Security: no
+  // legal infrastructure` and `Disasters & Famine: NO reserves, NO medical provision`. The arm
+  // that survives unchanged is the one that matters — nothing OUTSIDE DS-DEF-2 carries a face.
   const SOURCED_TODAY = Object.freeze({
     'DS-DEF-2 :: Invasion & War: walls with NO force #0': {
       sources: [null, 'elders', 'hall', 'guild'],
@@ -1958,6 +1963,49 @@ describe('SEAM car 4 — §2.5\'s grammar, and every refusal it declares', () =>
     },
     'DS-DEF-2 :: Invasion & War: walls with NO force #2': {
       sources: [null, 'elders', 'watch', 'court', 'public'],
+      pairs: undefined,
+    },
+    // ⭐ THE DRAFT GATE'S THREE POOLS. Five faces on every variant of the two Invasion and
+    // Disasters pools; ten, seven and seven on Internal Security, whose card seats the widest
+    // roster of the block. Two pairs on each Invasion variant pattern, two on Disasters, and
+    // two on Internal Security variant 1 (a `view` and a `reinforce`). No `archiver`, no
+    // `public` and no `observed` mark anywhere in the three: those forms stay where car
+    // 8b-W-18n first seated them, which is why the `observed` arm below is UNCHANGED.
+    'DS-DEF-2 :: Invasion & War: force with NO walls #0': {
+      sources: [null, 'hall', 'guild', 'watch', 'tavern', 'elders'],
+      pairs: [null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null, null, null],
+    },
+    'DS-DEF-2 :: Invasion & War: force with NO walls #1': {
+      sources: [null, 'watch', 'stranger', 'hall', 'tavern', 'garrison'],
+      pairs: [null, null, null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null],
+    },
+    'DS-DEF-2 :: Invasion & War: force with NO walls #2': {
+      sources: [null, 'garrison', 'gate', 'hall', 'market', 'register'],
+      pairs: undefined,
+    },
+    'DS-DEF-2 :: Internal Security: no legal infrastructure #0': {
+      sources: [null, 'stranger', 'tavern', 'register', 'elders', 'gate', 'muster', 'watch', 'market', 'guild', 'garrison'],
+      pairs: [null, { id: 1, kind: 'view' }, null, null, { id: 1, kind: 'view' },
+        { id: 2, kind: 'reinforce' }, null, { id: 2, kind: 'reinforce' }, null, null, null],
+    },
+    'DS-DEF-2 :: Internal Security: no legal infrastructure #1': {
+      sources: [null, 'stranger', 'garrison', 'tavern', 'elders', 'muster', 'gate', 'register'],
+      pairs: undefined,
+    },
+    'DS-DEF-2 :: Internal Security: no legal infrastructure #2': {
+      sources: [null, 'stranger', 'tavern', 'elders', 'register', 'gate', 'watch', 'guild'],
+      pairs: undefined,
+    },
+    'DS-DEF-2 :: Disasters & Famine: NO reserves, NO medical provision #0': {
+      sources: [null, 'elders', 'stranger', 'market', 'register', 'tavern'],
+      pairs: [null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null, null, null],
+    },
+    'DS-DEF-2 :: Disasters & Famine: NO reserves, NO medical provision #1': {
+      sources: [null, 'elders', 'tavern', 'stranger', 'market', 'register'],
+      pairs: [null, { id: 2, kind: 'disagree' }, { id: 2, kind: 'disagree' }, null, null, null],
+    },
+    'DS-DEF-2 :: Disasters & Famine: NO reserves, NO medical provision #2': {
+      sources: [null, 'stranger', 'tavern', 'elders', 'register', 'market'],
       pairs: undefined,
     },
   });
@@ -1979,11 +2027,12 @@ describe('SEAM car 4 — §2.5\'s grammar, and every refusal it declares', () =>
       .filter(({ v }) => v.sources !== undefined || v.pairs !== undefined)
       .map(({ id, pool, at }) => `${id} :: ${pool} #${at}`);
     expect(elsewhere).toEqual([]);
-    // And the counts the shift register's `face-count-per-variant` row now pins: 11 sourced
-    // faces over 3 variants, and ONE pair carried by exactly two of them.
+    // And the counts the shift register's `face-count-per-variant` row now pins: 65 sourced
+    // faces over 12 variants of FOUR pools, and SEVEN pairs, each carried by exactly two faces
+    // (14 paired halves). Re-pinned at the 8b DS-DEF-2 draft gate from [3, 11, 2].
     const sourced = rows.reduce((n, r) => n + (r.v.sources || []).filter((x) => x !== null).length, 0);
     const paired = rows.reduce((n, r) => n + (r.v.pairs || []).filter((x) => x !== null).length, 0);
-    expect([rows.length, sourced, paired]).toEqual([3, 11, 2]);
+    expect([rows.length, sourced, paired]).toEqual([12, 65, 14]);
     // ⭐ AND THE OBSERVED LIST IS EMITTED ON EXACTLY ONE VARIANT, which is the mark's own
     // zero-shift ground: a variant with no observed face carries no `observed` key at all.
     const observed = allStateBlocks.flatMap(([id, b]) => Object.entries(b.pools)
