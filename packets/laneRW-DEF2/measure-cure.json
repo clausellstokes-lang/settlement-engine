@@ -1,7 +1,7 @@
 {
  "arm": "cure",
  "round": 1,
- "at": "2026-09-13T17:23:32",
+ "at": "2026-09-13T17:31:08",
  "roster": {
   "pools": 126,
   "why": "--section defense over 11 block(s) of its own leaf"
@@ -11956,7 +11956,7 @@
      {
       "vid": 3,
       "faces": [
-       23,
+       27,
        21,
        13,
        25,
@@ -12024,16 +12024,16 @@
      "spread": {
       "pairs": 55,
       "minOverlapBp": 0,
-      "maxOverlapBp": 3077,
+      "maxOverlapBp": 2500,
       "medianOverlapBp": 667,
       "sameOpenerPairs": 0,
       "sameSegmentPairs": 45,
       "nearest": {
        "a": 0,
-       "b": 10,
+       "b": 2,
        "sameOpener": false,
        "sameSegments": true,
-       "overlapBp": 3077
+       "overlapBp": 2500
       },
       "why": ""
      }
@@ -12076,10 +12076,10 @@
        "exceededShare": 0.923,
        "deepest": {
         "metric": "wordsPerSentence.neighbourVariation",
-        "depth": 0.577,
+        "depth": 0.545,
         "side": "under"
        },
-       "meanDistanceFromMedian": 0.548,
+       "meanDistanceFromMedian": 0.546,
        "budgetOk": false,
        "depthOk": true,
        "perfectionSuspect": false,
@@ -12123,10 +12123,10 @@
        "exceededShare": 0.923,
        "deepest": {
         "metric": "wordsPerSentence.neighbourVariation",
-        "depth": 0.577,
+        "depth": 0.545,
         "side": "under"
        },
-       "meanDistanceFromMedian": 0.548,
+       "meanDistanceFromMedian": 0.546,
        "budgetOk": false,
        "depthOk": true,
        "perfectionSuspect": false,
@@ -12170,10 +12170,10 @@
        "exceededShare": 0.923,
        "deepest": {
         "metric": "wordsPerSentence.neighbourVariation",
-        "depth": 0.577,
+        "depth": 0.545,
         "side": "under"
        },
-       "meanDistanceFromMedian": 0.548,
+       "meanDistanceFromMedian": 0.546,
        "budgetOk": false,
        "depthOk": true,
        "perfectionSuspect": false,
@@ -12217,10 +12217,10 @@
        "exceededShare": 0.923,
        "deepest": {
         "metric": "wordsPerSentence.neighbourVariation",
-        "depth": 0.577,
+        "depth": 0.545,
         "side": "under"
        },
-       "meanDistanceFromMedian": 0.548,
+       "meanDistanceFromMedian": 0.546,
        "budgetOk": false,
        "depthOk": true,
        "perfectionSuspect": false,
@@ -12264,10 +12264,10 @@
        "exceededShare": 0.923,
        "deepest": {
         "metric": "wordsPerSentence.neighbourVariation",
-        "depth": 0.577,
+        "depth": 0.545,
         "side": "under"
        },
-       "meanDistanceFromMedian": 0.548,
+       "meanDistanceFromMedian": 0.546,
        "budgetOk": false,
        "depthOk": true,
        "perfectionSuspect": false,
@@ -12311,10 +12311,10 @@
        "exceededShare": 0.923,
        "deepest": {
         "metric": "wordsPerSentence.neighbourVariation",
-        "depth": 0.577,
+        "depth": 0.545,
         "side": "under"
        },
-       "meanDistanceFromMedian": 0.548,
+       "meanDistanceFromMedian": 0.546,
        "budgetOk": false,
        "depthOk": true,
        "perfectionSuspect": false,
@@ -12358,10 +12358,10 @@
        "exceededShare": 0.923,
        "deepest": {
         "metric": "wordsPerSentence.neighbourVariation",
-        "depth": 0.577,
+        "depth": 0.545,
         "side": "under"
        },
-       "meanDistanceFromMedian": 0.548,
+       "meanDistanceFromMedian": 0.546,
        "budgetOk": false,
        "depthOk": true,
        "perfectionSuspect": false,
@@ -12405,10 +12405,10 @@
        "exceededShare": 0.923,
        "deepest": {
         "metric": "wordsPerSentence.neighbourVariation",
-        "depth": 0.577,
+        "depth": 0.545,
         "side": "under"
        },
-       "meanDistanceFromMedian": 0.548,
+       "meanDistanceFromMedian": 0.546,
        "budgetOk": false,
        "depthOk": true,
        "perfectionSuspect": false,
@@ -12452,10 +12452,10 @@
        "exceededShare": 0.923,
        "deepest": {
         "metric": "wordsPerSentence.neighbourVariation",
-        "depth": 0.577,
+        "depth": 0.545,
         "side": "under"
        },
-       "meanDistanceFromMedian": 0.548,
+       "meanDistanceFromMedian": 0.546,
        "budgetOk": false,
        "depthOk": true,
        "perfectionSuspect": false,
@@ -12499,10 +12499,10 @@
        "exceededShare": 0.923,
        "deepest": {
         "metric": "wordsPerSentence.neighbourVariation",
-        "depth": 0.577,
+        "depth": 0.545,
         "side": "under"
        },
-       "meanDistanceFromMedian": 0.548,
+       "meanDistanceFromMedian": 0.546,
        "budgetOk": false,
        "depthOk": true,
        "perfectionSuspect": false,
@@ -12546,10 +12546,10 @@
        "exceededShare": 0.923,
        "deepest": {
         "metric": "wordsPerSentence.neighbourVariation",
-        "depth": 0.577,
+        "depth": 0.545,
         "side": "under"
        },
-       "meanDistanceFromMedian": 0.548,
+       "meanDistanceFromMedian": 0.546,
        "budgetOk": false,
        "depthOk": true,
        "perfectionSuspect": false,
@@ -12593,10 +12593,10 @@
        "exceededShare": 0.923,
        "deepest": {
         "metric": "wordsPerSentence.neighbourVariation",
-        "depth": 0.577,
+        "depth": 0.545,
         "side": "under"
        },
-       "meanDistanceFromMedian": 0.548,
+       "meanDistanceFromMedian": 0.546,
        "budgetOk": false,
        "depthOk": true,
        "perfectionSuspect": false,
@@ -12640,10 +12640,10 @@
        "exceededShare": 0.923,
        "deepest": {
         "metric": "wordsPerSentence.neighbourVariation",
-        "depth": 0.577,
+        "depth": 0.545,
         "side": "under"
        },
-       "meanDistanceFromMedian": 0.548,
+       "meanDistanceFromMedian": 0.546,
        "budgetOk": false,
        "depthOk": true,
        "perfectionSuspect": false,
@@ -12687,10 +12687,10 @@
        "exceededShare": 0.923,
        "deepest": {
         "metric": "wordsPerSentence.neighbourVariation",
-        "depth": 0.577,
+        "depth": 0.545,
         "side": "under"
        },
-       "meanDistanceFromMedian": 0.548,
+       "meanDistanceFromMedian": 0.546,
        "budgetOk": false,
        "depthOk": true,
        "perfectionSuspect": false,
@@ -12734,10 +12734,10 @@
        "exceededShare": 0.923,
        "deepest": {
         "metric": "wordsPerSentence.neighbourVariation",
-        "depth": 0.577,
+        "depth": 0.545,
         "side": "under"
        },
-       "meanDistanceFromMedian": 0.548,
+       "meanDistanceFromMedian": 0.546,
        "budgetOk": false,
        "depthOk": true,
        "perfectionSuspect": false,
@@ -12781,10 +12781,10 @@
        "exceededShare": 0.923,
        "deepest": {
         "metric": "wordsPerSentence.neighbourVariation",
-        "depth": 0.577,
+        "depth": 0.545,
         "side": "under"
        },
-       "meanDistanceFromMedian": 0.548,
+       "meanDistanceFromMedian": 0.546,
        "budgetOk": false,
        "depthOk": true,
        "perfectionSuspect": false,
@@ -12828,10 +12828,10 @@
        "exceededShare": 0.923,
        "deepest": {
         "metric": "wordsPerSentence.neighbourVariation",
-        "depth": 0.577,
+        "depth": 0.545,
         "side": "under"
        },
-       "meanDistanceFromMedian": 0.548,
+       "meanDistanceFromMedian": 0.546,
        "budgetOk": false,
        "depthOk": true,
        "perfectionSuspect": false,
@@ -12875,10 +12875,10 @@
        "exceededShare": 0.923,
        "deepest": {
         "metric": "wordsPerSentence.neighbourVariation",
-        "depth": 0.577,
+        "depth": 0.545,
         "side": "under"
        },
-       "meanDistanceFromMedian": 0.548,
+       "meanDistanceFromMedian": 0.546,
        "budgetOk": false,
        "depthOk": true,
        "perfectionSuspect": false,
@@ -12922,10 +12922,10 @@
        "exceededShare": 0.923,
        "deepest": {
         "metric": "wordsPerSentence.neighbourVariation",
-        "depth": 0.577,
+        "depth": 0.545,
         "side": "under"
        },
-       "meanDistanceFromMedian": 0.548,
+       "meanDistanceFromMedian": 0.546,
        "budgetOk": false,
        "depthOk": true,
        "perfectionSuspect": false,
@@ -12969,10 +12969,10 @@
        "exceededShare": 0.923,
        "deepest": {
         "metric": "wordsPerSentence.neighbourVariation",
-        "depth": 0.577,
+        "depth": 0.545,
         "side": "under"
        },
-       "meanDistanceFromMedian": 0.548,
+       "meanDistanceFromMedian": 0.546,
        "budgetOk": false,
        "depthOk": true,
        "perfectionSuspect": false,
@@ -13016,10 +13016,10 @@
        "exceededShare": 0.923,
        "deepest": {
         "metric": "wordsPerSentence.neighbourVariation",
-        "depth": 0.577,
+        "depth": 0.545,
         "side": "under"
        },
-       "meanDistanceFromMedian": 0.548,
+       "meanDistanceFromMedian": 0.546,
        "budgetOk": false,
        "depthOk": true,
        "perfectionSuspect": false,
@@ -13063,10 +13063,10 @@
        "exceededShare": 0.923,
        "deepest": {
         "metric": "wordsPerSentence.neighbourVariation",
-        "depth": 0.577,
+        "depth": 0.545,
         "side": "under"
        },
-       "meanDistanceFromMedian": 0.548,
+       "meanDistanceFromMedian": 0.546,
        "budgetOk": false,
        "depthOk": true,
        "perfectionSuspect": false,
@@ -13110,10 +13110,10 @@
        "exceededShare": 0.923,
        "deepest": {
         "metric": "wordsPerSentence.neighbourVariation",
-        "depth": 0.577,
+        "depth": 0.545,
         "side": "under"
        },
-       "meanDistanceFromMedian": 0.548,
+       "meanDistanceFromMedian": 0.546,
        "budgetOk": false,
        "depthOk": true,
        "perfectionSuspect": false,
@@ -13157,10 +13157,10 @@
        "exceededShare": 0.923,
        "deepest": {
         "metric": "wordsPerSentence.neighbourVariation",
-        "depth": 0.577,
+        "depth": 0.545,
         "side": "under"
        },
-       "meanDistanceFromMedian": 0.548,
+       "meanDistanceFromMedian": 0.546,
        "budgetOk": false,
        "depthOk": true,
        "perfectionSuspect": false,
@@ -13204,10 +13204,10 @@
        "exceededShare": 0.923,
        "deepest": {
         "metric": "wordsPerSentence.neighbourVariation",
-        "depth": 0.577,
+        "depth": 0.545,
         "side": "under"
        },
-       "meanDistanceFromMedian": 0.548,
+       "meanDistanceFromMedian": 0.546,
        "budgetOk": false,
        "depthOk": true,
        "perfectionSuspect": false,
@@ -13251,10 +13251,10 @@
        "exceededShare": 0.923,
        "deepest": {
         "metric": "wordsPerSentence.neighbourVariation",
-        "depth": 0.577,
+        "depth": 0.545,
         "side": "under"
        },
-       "meanDistanceFromMedian": 0.548,
+       "meanDistanceFromMedian": 0.546,
        "budgetOk": false,
        "depthOk": true,
        "perfectionSuspect": false,
@@ -13298,10 +13298,10 @@
        "exceededShare": 0.923,
        "deepest": {
         "metric": "wordsPerSentence.neighbourVariation",
-        "depth": 0.577,
+        "depth": 0.545,
         "side": "under"
        },
-       "meanDistanceFromMedian": 0.548,
+       "meanDistanceFromMedian": 0.546,
        "budgetOk": false,
        "depthOk": true,
        "perfectionSuspect": false,
@@ -13345,10 +13345,10 @@
        "exceededShare": 0.923,
        "deepest": {
         "metric": "wordsPerSentence.neighbourVariation",
-        "depth": 0.577,
+        "depth": 0.545,
         "side": "under"
        },
-       "meanDistanceFromMedian": 0.548,
+       "meanDistanceFromMedian": 0.546,
        "budgetOk": false,
        "depthOk": true,
        "perfectionSuspect": false,
@@ -13392,10 +13392,10 @@
        "exceededShare": 0.923,
        "deepest": {
         "metric": "wordsPerSentence.neighbourVariation",
-        "depth": 0.577,
+        "depth": 0.545,
         "side": "under"
        },
-       "meanDistanceFromMedian": 0.548,
+       "meanDistanceFromMedian": 0.546,
        "budgetOk": false,
        "depthOk": true,
        "perfectionSuspect": false,
@@ -13439,10 +13439,10 @@
        "exceededShare": 0.923,
        "deepest": {
         "metric": "wordsPerSentence.neighbourVariation",
-        "depth": 0.577,
+        "depth": 0.545,
         "side": "under"
        },
-       "meanDistanceFromMedian": 0.548,
+       "meanDistanceFromMedian": 0.546,
        "budgetOk": false,
        "depthOk": true,
        "perfectionSuspect": false,
@@ -13486,10 +13486,10 @@
        "exceededShare": 0.923,
        "deepest": {
         "metric": "wordsPerSentence.neighbourVariation",
-        "depth": 0.577,
+        "depth": 0.545,
         "side": "under"
        },
-       "meanDistanceFromMedian": 0.548,
+       "meanDistanceFromMedian": 0.546,
        "budgetOk": false,
        "depthOk": true,
        "perfectionSuspect": false,
@@ -13533,10 +13533,10 @@
        "exceededShare": 0.923,
        "deepest": {
         "metric": "wordsPerSentence.neighbourVariation",
-        "depth": 0.577,
+        "depth": 0.545,
         "side": "under"
        },
-       "meanDistanceFromMedian": 0.548,
+       "meanDistanceFromMedian": 0.546,
        "budgetOk": false,
        "depthOk": true,
        "perfectionSuspect": false,
@@ -13580,10 +13580,10 @@
        "exceededShare": 0.923,
        "deepest": {
         "metric": "wordsPerSentence.neighbourVariation",
-        "depth": 0.577,
+        "depth": 0.545,
         "side": "under"
        },
-       "meanDistanceFromMedian": 0.548,
+       "meanDistanceFromMedian": 0.546,
        "budgetOk": false,
        "depthOk": true,
        "perfectionSuspect": false,
@@ -13627,10 +13627,10 @@
        "exceededShare": 0.923,
        "deepest": {
         "metric": "wordsPerSentence.neighbourVariation",
-        "depth": 0.577,
+        "depth": 0.545,
         "side": "under"
        },
-       "meanDistanceFromMedian": 0.548,
+       "meanDistanceFromMedian": 0.546,
        "budgetOk": false,
        "depthOk": true,
        "perfectionSuspect": false,
@@ -13674,10 +13674,10 @@
        "exceededShare": 0.923,
        "deepest": {
         "metric": "wordsPerSentence.neighbourVariation",
-        "depth": 0.577,
+        "depth": 0.545,
         "side": "under"
        },
-       "meanDistanceFromMedian": 0.548,
+       "meanDistanceFromMedian": 0.546,
        "budgetOk": false,
        "depthOk": true,
        "perfectionSuspect": false,
@@ -13698,16 +13698,16 @@
     "exceededShare": 0.923,
     "deepest": {
      "metric": "wordsPerSentence.neighbourVariation",
-     "depth": 0.577,
+     "depth": 0.545,
      "side": "under"
     },
-    "meanDistanceFromMedian": 0.548,
+    "meanDistanceFromMedian": 0.546,
     "budgetOk": false,
     "depthOk": true,
     "perfectionSuspect": false,
     "grain": "corpus"
    },
-   "corpusWords": 720,
+   "corpusWords": 724,
    "owned": {
     "verdicts": {
      "FAIL": 0,
