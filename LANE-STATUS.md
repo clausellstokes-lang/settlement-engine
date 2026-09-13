@@ -1,15 +1,17 @@
-# LANE-STATUS — written 2026-09-13 01:42:01 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-13 01:47:18 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = b32e2cc28 Plan: Wave 0 shipped (§919.6 b9c3fe322); the sitting sealed; wave 1 the machinery re-cut 
 
 ## BUILD / KIT LANES (dock · base · cars · porcelain · receipt)
 - REWRITE 8b DS-DEF-11 (the validation block; cure round): dock laneRW-DEF11 ABSENT
 - REWRITE 8b-W (the wiring car, landed in its dock = the consist lineage): dock laneRW-DEFW ABSENT
-- **DS-DEF-2 (waits for the tables)** dock `laneRW-DEF2` HEAD 8a236ea21 · 11 cars over f2da5a3ee · porcelain 0 · last commits:
+- **DS-DEF-2 (waits for the tables)** dock `laneRW-DEF2` HEAD 8a236ea21 · 11 cars over f2da5a3ee · porcelain 1 · last commits:
     8a236ea21 REWRITE 8b-W-18d: the marker's instruments (ADDENDUM 18 rulings 4, 6, 11) — the card prints what would be false, the page renders beside the machine sentences, the frozen-field census is field-grain
     6e5ee9716 REWRITE 8b-W-18b: the round-1 draft retired from the annex (v3 restarts DS-DEF-2 from the shipped rows) and the {defmaterial} fill lands (ADDENDUM 18 ruling 10) — zero text shift beyond the retirement
     6a6c2ddf3 REWRITE 8b-W-18a: the gate refuses nothing on taste (ADDENDUM 18 ruling 1); a face's slots are a subset of its spine's and the town never names itself in a face (ruling 12); the claim-equality prose struck (ruling 2)
     a3e877e6e REWRITE 8b DS-DEF-2 draft round 1: THREE FIGURES IN 8e549c4a6's message CORRECTED
+    porcelain (uncommitted work in the dock — commit it FIRST after re-proving):
+       M src/domain/display/stateProse/stateProseKernel.js
     receipt `receipt-rewrite.md` (mtime 09-12 20:49) head:
       | # RECEIPT — the REWRITE train
       | 
@@ -504,4 +506,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `ad30ac0bb` FOLDER · DONE · transcript 09-11 06:02 1531 KB · 36 tool calls · files: _partD.md, _partE.md, _partF.md, _partG.md · result: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/entailment/ENTAILMENT-TABLE.draft.md
 
 ## PROCESSES: 
-load: 3.73 2.90 2.49
+load: 3.29 2.61 2.45
