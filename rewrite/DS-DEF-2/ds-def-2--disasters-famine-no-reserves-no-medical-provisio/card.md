@@ -656,3 +656,246 @@ THE CARD (mechanical sections) — block DS-DEF-2 · pool `Disasters & Famine: N
   hamlet: the hall: — · the tavern: — · the guilds: — · the register (parish): Access to parish church, Burial ground · the elders: —
   village: the hall: — · the tavern: — · the guilds: — · the register (parish): Parish church, Priest (resident), Graveyard · the elders: —
   the key on the force buckets and the gates: watch: OPEN · garrison: OPEN · militia: OPEN · mercenary: OPEN · charter: OPEN · gates: OPEN
+
+================================================================================
+THE MARKER'S OWN SECTIONS (7)-(9) — seat opus, 2026-09-13, DS-DEF-2 · `Disasters & Famine: NO reserves, NO medical provision`
+================================================================================
+
+(7) THE SPEAKERS
+
+⛔ READ THIS BEFORE THE ROSTER. **The preimage is entirely BELOW TOWN** — thorp 128/128,
+hamlet 128/128, village 97/128, and the instrument's own line reads `silent tiers: town, city,
+metropolis`. The brief's standing roster seats **the hall, the tavern, the guilds and the
+register at town and above**. This pool never draws a town. Therefore, on this card:
+
+  • **THE HALL IS NOT A SPEAKER AND NOT A PLACE.** F1-20: at thorp and hamlet the governing
+    institution is `Head-of-household consensus` / `Informal elder consensus` — a consensus,
+    not a room. No `Town hall` row exists at any preimage tier. V-29 names "the hall at a
+    hamlet" as a live floor-1 finding. No hall, no chamber, no clerk of the hall, no accounts.
+  • **THE TAVERN IS NOT UNIVERSAL.** No drinking row at thorp at all; `Alehouse` 0.55 at
+    hamlet; `Ale house` 0.80 at village. "At the tavern they say" is a conditional source here,
+    not the safe one the brief makes it at town.
+  • **THE GUILDS DO NOT EXIST.** No guild row at thorp, hamlet or village in the catalogue.
+  • **THE WATCH, THE MUSTER AND WHOEVER HOLDS THE WAY THROUGH DO NOT EXIST.** Section (5):
+    watch · garrison · militia · mercenary · charter · walls · gates are ALL **OPEN** — the key
+    fixes none and no required row seats any. They are unavailable as speakers and as bodies.
+  • **THE CROWN'S ASSESSOR IS NOT A SPEAKER** anywhere (no typed producer; the brief).
+
+So the safe roster on this pool is small, and it is made of people and ground, not of offices.
+
+--- UNIVERSAL (a `required: true` row on every preimage tier seats them) ---
+
+  1. THE HOUSEHOLDS WHO FARM — `Dwellings (4-16)/(17-80)/(80-180)` + `Subsistence farming`
+     (thorp, hamlet) / `Farmland` (village), all `required: true`.
+     INTEREST: they carry the whole of the key. The stores that are not kept are theirs to not
+     keep, and a failed harvest lands on them the same season. Their stake is their own year.
+     ⚠ `Subsistence farming` = "Each household farms ~12-16 acres for survival"; `Farmland` =
+     "Open-field agriculture with crop rotation" — the FORM of the farming differs by tier, so
+     write the households, never the field system.
+
+  2. THOSE WHO BURY THE DEAD — `Burial ground` (thorp, hamlet) / `Graveyard` (village),
+     `required: true`, service `Burial` p 1.0 on all three.
+     INTEREST: the only body in this pool whose work rises when the key bites. They bury and
+     **they keep no book**: the register-bearing burial rows are `Parish burial grounds` and
+     `Cemetery network` (service `Register of the dead` / `Central register`), and NEITHER is
+     seated at any preimage tier. See the F1-24 row in (8).
+
+  3. WHOEVER GRINDS THE GRAIN — `Access to external mill` (thorp, hamlet, `required: true`,
+     "Must travel to manor/village mill. Home grinding often illegal") / `Mill` (village,
+     `required: true`, service `Grain milling` p 1.0).
+     INTEREST: the grain passes through one pair of hands before anybody eats it, and on a
+     no-reserves town that is the only choke point the record actually seats. The village row
+     hands you the stake in its own words: the miller is the wealthiest and most resented
+     figure in the village.
+     ⚠ **SPLIT IN PLACE, NOT IN SUBSTANCE.** Below village the mill is OUTSIDE the settlement
+     and the grain travels to it. A face may say the grain goes out to be ground; a face may
+     NOT stand a mill in the settlement (F1-15). And see (8) on the singular "the miller".
+
+  4. THOSE WHO DRAW THE WATER — `Water source` (thorp, hamlet) / `Multiple water sources`
+     (village), `required: true`. No service menu at or above the bar.
+     INTEREST: thin as a speaker, thick as ground. It is where the town gathers without being
+     convened, and on a plague-onset town it is the one place everyone must still go.
+
+  5. THE STRANGER — seated by the brief on every town, needing no row.
+     INTEREST: arrives, looks for the thing a place this size is expected to have, and is
+     directed to nothing. What the town has stopped noticing is visible to them on the first
+     day. ⚠ their eye is bounded by (2b′): they may report only what could be SEEN.
+
+  6. THE ELDERS (plural only) — ⚠ **THE MARKER'S OWN CALL, RECORDED FOR VETO.** The brief
+     seats "the elders below town" as a safe source and F1-22 resolves the `elders` kind on
+     `Household elder · Village elder · Village headman · Town council`. Three of those sit in
+     this preimage at high base chance (`Household elder` 0.90 thorp, `Village headman` 0.90
+     hamlet, `Village elder` 0.95 village) — but **none is `required: true`**, and ADDENDUM 18
+     ruling 16 is strict: a power only where an institution row backs it. I seat them as
+     universal on the brief's word, and I direct the writers to phrase the attribution so it
+     survives a strict reading — "the older households", "those here who have seen a bad year"
+     — rather than "the elders' council", which asserts a body no required row carries.
+     INTEREST: memory without a record. They are the only source on this pool who can say what
+     is usually done, and their authority is that nobody has written anything down.
+
+--- CONDITIONAL (the field that seats each, and where it does not) ---
+
+  THE PARISH — `Access to parish church` (hamlet, required) · `Parish church` + `Priest
+    (resident)` (village, required) · at THORP only `Access to parish church` 0.78 or
+    `Wayside shrine` 0.30, so the parish is **absent on some thorps**.
+    INTEREST: the care nobody is paid for. At village the priest is "often only literate
+    person" — the nearest thing to a record this pool ever holds.
+    ⛔ THREE DIFFERENT SHAPES, AND A FACE DRAWS ACROSS ALL THREE: at hamlet the church is
+    2-5 km AWAY and there is no resident priest row; at village the church and the priest are
+    here; at thorp there may be neither. So: no church BUILDING in the settlement (F1-11,
+    V-29), no "the priest" (no resident-priest row below village, and `Parish Priest` is the
+    hamlet's mandatory NPC), no parish register (see (8)).
+  THE TAVERN — `Alehouse` 0.55 hamlet · `Ale house` 0.80 village · nothing at thorp.
+    INTEREST: the account of who is short and who is not, told where nobody is on the record.
+  THE REEVE OR STEWARD — `Lord's reeve` 0.30 thorp · `Lord's steward` 0.55 hamlet / 0.30
+    village · `Village reeve` 0.92 village.
+    INTEREST: the outside claim on the harvest. The only source on this pool whose stake runs
+    against the town's. ⚠ conditional, and the archaic word is licensed only where the
+    sentence shows the reeve doing the thing (brief, PLAIN LANGUAGE).
+  THE MARKET — `Periodic market` 0.12 hamlet · `Weekly market` 0.60 village. F1-10 binds.
+  THOSE WHO TREAT THE SICK WITHOUT A HOSPITAL — `Midwife` 0.50 village ("The most-used
+    medical service in any settlement") · `Apothecary` 0.45 village · `Traveling hedge wizard`
+    0.20 hamlet. All conditional, none sets `hasHospital`. See (8) — this is the card's
+    sharpest row.
+  THE SHARED STORE — `Communal root cellar` 0.25 thorp: "A shared underground store for grain,
+    roots, and preserved food. **Vital buffer against a bad harvest.**" It does not match
+    `granar`, so it stands on a town this key calls NO reserves. See (8).
+  THE TRADES — `Resident smith (part-time)` 0.40 / `Carpenter` 0.50 hamlet; `Blacksmith` 0.90,
+    `Carpenter` 0.70, `Brewer` 0.45, `Cooper` 0.30 village. `Fishing community` 0.72 /
+    `Woodcutter's camp` 0.55 / `Shepherd collective` 0.35 thorp.
+  ⛔ `Thatcher` 0.60 village is a ROW, never a licence: F3-05 bars thatch on the five
+    non-north-European culture profiles, and no defense pool reads the profile.
+
+--- THE NAMED OFFICES A SPEAKER MUST NEVER BE (`npcGenerator.js:1511-1537`, F3-06) ---
+
+  thorp:   **Elder** + a second role derived from the town's own facts
+           (`npc/thorpSecondRole.js`: Fisherman · Woodcutter · Shepherd · **Miller**)
+  hamlet:  **Elder** · **Parish Priest**
+  village: **Mayor** · **Guard Captain**
+  and by stress, on any tier: famine → **Healer**, **Guild Master** · plague_onset →
+  **Healer**, **Parish Priest** · indebted → **Moneylender** · mass_migration → **Guild
+  Master**, **Healer** · wartime / monster_pressure / under_siege → **Garrison Commander** et al.
+
+  ⛔ SO, ON THIS POOL: never "the elder", never "the priest" or "the parish priest", never
+  "the mayor", never "the guard captain", **never "the miller"** (the thorp's fallback second
+  role), and — on the two stresses this pool's subject invites most — **never "the healer"**.
+  Each is one generated person on the next tab with a personality, a disposition and a secret.
+  The plural, the trade and the ground are all free: the older households · whoever grinds the
+  grain · those who bury · a woman who knows which roots bring a fever down.
+
+--- THE TWO NPC SEAMS THE WRITERS MUST KNOW ABOUT ---
+
+  ⚠ **EVERY VILLAGE MINTS A GUARD CAPTAIN** while (5) leaves watch, garrison and militia all
+  OPEN. A face reading "nobody here is charged with anyone's safety" is contradicted on the NPC
+  tab of every village in the preimage. Write the absence as the ABSENCE OF A BODY, never as
+  the absence of a person.
+  ⚠ **A FAMINE OR PLAGUE-ONSET TOWN MINTS A HEALER** while this key says no medical provision.
+  The two are not the same fact — the key denies the `Healer (divine, 1st level)` ROW, the NPC
+  generator seats a person — but a face that says nobody here has any healing in them collides
+  with that person on the same dossier.
+
+--------------------------------------------------------------------------------
+
+(8) WHAT WOULD BE FALSE
+
+The key fixes two flags and nothing else, and both of them are narrower than their English:
+`hasGranary` false denies only a row matching `granar` (`priorityHelpers.js:63`), and
+`hasHospital` false denies only `hospital · monastery · healer · friary` (`:64`) — so what this
+pool may assert is that the town keeps **no granary building** and holds **no hospital,
+infirmary, monastery, friary or `Healer (divine, 1st level)` row**, and nothing whatever beyond
+that. The single largest hazard on the card, and the one the SHIPPED corpus already walks into,
+is reading "NO medical provision" as "nobody treats the sick": at VILLAGE the `required: true`
+row `Priest (resident)` carries the service **`Healing` — `{ on: true, p: 0.7, "Divine healing
+magic for the sick and injured." }`, the only `Healing` service in the whole service file** —
+so on 97 of the 353 towns a required row heals with divine magic while this key holds, and
+`hasChurch` is TRUE at hamlet and village alike (`Access to parish church` and `Parish church`
+both fire it, `priorityHelpers.js:65`), which means the machine sentence printed two inches
+away on 225 of the 353 towns reads "Parish clergy provide basic wound care: better than
+nothing, worse than a hospital" (`threatAssessment.js:181`) and "Parish care. Basic wound and
+disease management" (`defenseDisplay.js:239`); the shipped `[ledger]` face's "has nobody to
+treat the sick" and its "a plague runs until it burns out" are therefore [F1] on every hamlet
+and village of the preimage, since the sentence they echo ("No medical infrastructure. Plague
+spreads until it burns out.") fires only where `hasChurch` is false — which here is **thorps
+only** — and on top of that a village may carry a `Midwife` ("The most-used medical service in
+any settlement") or an `Apothecary` who "knows which roots treat fever", neither of which
+touches `hasHospital`. The same trap runs on the food side in the other direction: a thorp may
+carry a `Communal root cellar`, "a shared underground store … **vital buffer against a bad
+harvest**", which does not match `granar` and so stands on a town this key calls NO reserves
+[F1-25, F1-30 — never assert the absence, write around it]; the engine itself still prints a
+granary READING with no granary row, capacity falling through to 1.5/2.0 months
+(`foodStockpile.js:190-193`, §1.4 W-07); "there is no food at all" is refused by name
+(F1-76, and `stressorDynamics.js:469` "this famine is not a failure of harvest"); and where
+`tradeRouteAccess === 'port'` the page beside the face reads "No reserves, but sea supply
+continues while port is open" (`defenseDisplay.js:245`), so no face may close the town off
+[F1-79, F1-103, F4-09]. Because the preimage is wholly below town, the four rosters bite
+hardest as SILENCES a face must not fill: there is **no hall, chamber or clerk** [F1-20, V-29],
+**no tavern at thorp**, **no guild anywhere**, and **no watch, garrison, militia, mercenary,
+charter, walls or gates fixed by anything** [F1-01, F1-02, F1-03, F1-07, F1-08, V-23, V-27] —
+and equally no face may DENY them, since they are OPEN and a custom or rolled row can seat any
+of them [F1-25, F1-30]. There is likewise **no record this pool may cite**: the only
+register-bearing burial rows are `Parish burial grounds` and `Cemetery network`, neither seated
+here; `Parish church`'s own `Records` service is `on: false` at p 0.5; no treasury, no toll
+book, no muster roll, no minutes and no accounts exist on any town of this preimage, so any
+cited book is [F1-24 / §R-8] and "the books" as a generic is barred outright (brief, F1-24).
+On place: the church at HAMLET is 2-5 km away, so no church building stands in the settlement
+[F1-11, V-29]; the mill below village is external and "home grinding often illegal", so no mill
+stands in a thorp or hamlet [F1-15]; and the `Burial ground`'s "at the edge" placement is
+stated only at hamlet, so it may not be asserted across the pool (the instrument's own
+placement row). On floor 2, this pool's subject is a magnet for every barred form: no count of
+what is stored or of who is sick, in a digit or a word ("a handful of sacks", "most households"
+are magnitudes) [F2-01]; no season, no month, no "until the spring", no "three months' food"
+[F2-02]; no harvest that failed, no sickness that came, no healer who left [F2-04]; and **no
+elapsed course over a LIVE field** — but note the licence the census hands you: `hasGranary`,
+`hasHospital` and `hasChurch` all carry **zero pulse writers** and are FROZEN, and they are the
+key's own reads, so the perfect and the durative ARE lawful over them ("nothing has ever been
+put by here", "no one has been kept for treating the sick") while `institutions` at any bucket
+grain (38 writers) and `name` (201) are LIVE and refuse it [ruling 11, §V.0 floor 2]. No rate
+("every winter", "most nights") [F2-06]. On floor 3, the singular offices listed in (7) are
+barred, thatch and the churchyard and the market green are barred on five of the eleven culture
+profiles [F3-05], and nothing may be predicated of a deity — the followers act, the god does
+not [F3-02]; a creed's people may keep a duty or neglect it, and that is the whole of what is
+available. On floor 4: no permanence and no decay clock over any fabric [F4-01]; the disaster
+gate is one purse with a floor of 0.55 and never reaches zero, so "nothing has ever been spent
+on it" is refused while "short, late, thin" is licensed [F4-03, F4-04]; `plagued` is MONSTERS
+and never disease [F4-05]; and no face may name a covert fact, though (2c) records that this
+pool marks none, so the `compromised` tag is REFUSED here and every source draws honest. Two
+seams close the paragraph, both of which make a true-sounding sentence false: a **Guard
+Captain** is minted on every village while no force row is fixed, and a **Healer** is minted on
+every famine and plague-onset town while this key denies the healer ROW — so the absence this
+pool describes is an absence of BUILDINGS AND STORES, never of people, and the moment a face
+says nobody here can do a thing, it is contradicted by a person on the next tab.
+
+--------------------------------------------------------------------------------
+
+(9) WHERE THE FLAVOUR IS
+
+  WHAT IS IN USE. The grain leaves before anybody eats it — below village there is no mill
+  here at all and home grinding is illegal, so every household's year goes out on a cart to
+  someone else's stone and comes back lighter; at village the one mill holds the monopoly and
+  the row itself says the miller is the most resented figure in the place. The burial ground is
+  the only thing in this pool that is required, works, and gets busier when the key bites: it
+  buries and it writes nothing down, and at a thorp the words over the grave are said by
+  whoever knew the dead best, because no clergy lives near enough. The water source is where
+  the whole town has to go whether or not anyone wants to be seen.
+
+  WHAT IS IN DISPUTE. Whose year it is. The households farm for survival and the outside claim
+  — a lord's reeve, a steward, a tithe to a church two to five kilometres off — arrives on the
+  same harvest that is the only reserve anyone has. Whether the parish's care counts as care:
+  at village a priest who is often the only literate person does sacraments, tithes and divine
+  healing, and whether that is medicine or something else is exactly the kind of thing two
+  sources will set down differently. Whether anything is stored at all: one town's shared root
+  cellar is the next town's admission that there is nothing to put in it.
+
+  WHAT THE ABSENCE LOOKS LIKE ON THE GROUND. Not emptiness — arrangement. Nobody built the
+  building, so the function lives in people and in ordinary places: the sick are kept in the
+  house they fell ill in; what is put by is put by under one family's floor and not the town's;
+  a stranger asks where the stores are and is shown a field. The town does not experience this
+  as a lack, which is the hook — it is how a place this size has always been arranged, and the
+  question the dossier opens is what happens the first year that arrangement is asked for
+  more than it can give.
+
+================================================================================
+END OF THE MARKER'S SECTIONS. Instruments run clean in the dock (read-only);
+sections (1)-(7-mechanical) above are `node scripts/prose-mark-card.mjs DS-DEF-2
+'Disasters & Famine: NO reserves, NO medical provision'` verbatim.
+================================================================================
