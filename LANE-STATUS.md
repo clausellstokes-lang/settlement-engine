@@ -1,11 +1,11 @@
-# LANE-STATUS — written 2026-09-13 02:03:11 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-13 02:08:27 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
-product claude/composite-r4 = f73bdbf16 · ledger = 3276a2da1 Plan: wave 1 in flight — dock cars 8b-W-18a/18b/18d landed; the owner's rulings 15–17 
+product claude/composite-r4 = f73bdbf16 · ledger = ba6a69b1e Plan: rulings 18 and 19 recorded (a source speaks from its rank and the town's circumstanc
 
 ## BUILD / KIT LANES (dock · base · cars · porcelain · receipt)
 - REWRITE 8b DS-DEF-11 (the validation block; cure round): dock laneRW-DEF11 ABSENT
 - REWRITE 8b-W (the wiring car, landed in its dock = the consist lineage): dock laneRW-DEFW ABSENT
-- **DS-DEF-2 (waits for the tables)** dock `laneRW-DEF2` HEAD 4cf42141b · 12 cars over f2da5a3ee · porcelain 12 · last commits:
+- **DS-DEF-2 (waits for the tables)** dock `laneRW-DEF2` HEAD 4cf42141b · 12 cars over f2da5a3ee · porcelain 17 · last commits:
     4cf42141b REWRITE 8b-W-18c: one face per POWER — the face draw filters by the town's own sources and a marked pair renders both (ADDENDUM 18 ruling 15); the face-draw register row re-recorded as a declared shift; zero text moved today
     8a236ea21 REWRITE 8b-W-18d: the marker's instruments (ADDENDUM 18 rulings 4, 6, 11) — the card prints what would be false, the page renders beside the machine sentences, the frozen-field census is field-grain
     6e5ee9716 REWRITE 8b-W-18b: the round-1 draft retired from the annex (v3 restarts DS-DEF-2 from the shipped rows) and the {defmaterial} fill lands (ADDENDUM 18 ruling 10) — zero text shift beyond the retirement
@@ -14,15 +14,15 @@ product claude/composite-r4 = f73bdbf16 · ledger = 3276a2da1 Plan: wave 1 in fl
        M schema/custom-content.manifest.json
        M src/domain/content/customContentAdmission.generated.js
        M src/domain/content/customContentManifest.generated.js
+       M src/domain/prose/holderTable.js
        M src/domain/worldPulse/factionDensityKernel.js
        M src/generators/power/rulingStructure.js
        M src/generators/steps/assembleInstitutions.js
        M src/generators/steps/neighbourFactions.js
        M supabase/functions/_shared/customContentManifest.generated.ts
        M supabase/migrations/185_custom_content_versions.sql
-      ?? src/domain/factionBacking.js
-      ?? src/domain/worldPulse/factionBackingKernel.js
-      ?? tests/domain/factionBacking.test.js
+       M tests/domain/npcLadderFactionKey.test.js
+       M tests/domain/religionLegitimacyFactionKey.test.js
     receipt `receipt-rewrite.md` (mtime 09-12 20:49) head:
       | # RECEIPT — the REWRITE train
       | 
@@ -517,4 +517,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `ad30ac0bb` FOLDER · DONE · transcript 09-11 06:02 1531 KB · 36 tool calls · files: _partD.md, _partE.md, _partF.md, _partG.md · result: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/entailment/ENTAILMENT-TABLE.draft.md
 
 ## PROCESSES: 
-load: 3.63 3.91 3.21
+load: 2.18 3.04 3.00
