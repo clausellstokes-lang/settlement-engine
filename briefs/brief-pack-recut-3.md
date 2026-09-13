@@ -1,3 +1,5 @@
+⚠ AMENDED 2026-09-13 13:3x BY RULING 40 (the owner: THE FAIR COPY DOES NOT CITE ITSELF): no example line on a player face may say 'the survey', 'the record', 'this office', 'entered as', 'set down here', 'in the survey's time'; an engine fact is stated BARE ('The walls are kept, the garrison is paid, and the council sits.'); every ACCOUNT names its source through a role; the witness observation is a bare passive ('No soldier has been seen on the wall at night'); the notebook (PART V) is exempt and may say 'this office' / 'whoever reads this next'. Where the current pack teaches 'the survey finds' or 'entered here as kept', re-cut it.
+
 # THE EXEMPLAR PACK, RE-CUT A THIRD TIME (before pool 2) — an Opus WRITER's car on the kit doc only
 
 File: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/recut/EXEMPLAR-PACK.md (write it in place; keep a copy of the current file as EXEMPLAR-PACK.pre-recut3.md first). Touch NOTHING else; no dock, no main tree except to READ the law. `/usr/bin/grep`.
