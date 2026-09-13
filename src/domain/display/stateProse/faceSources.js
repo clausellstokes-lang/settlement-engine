@@ -57,7 +57,11 @@
  */
 import { liveInstitutions } from '../../institutions/institutionRoster.js';
 import { standingDefenseForces } from '../../institutions/defenseInstitutionBuckets.js';
+import { officesOf } from '../../institutions/institutionTable.js';
 import { nativeSemanticName } from '../../content/customContentSemanticAuthority.js';
+import {
+  INSTITUTION_ROLES, ROSTER_OFFICE_TITLES, SOURCE_FALLBACK_ROLES,
+} from '../../../data/institutionRoles.js';
 import { FACE_SOURCES, UNIVERSAL_SOURCE } from './stateProseKernel.js';
 
 /** The sources that resolve on every town, whatever it holds. */
@@ -120,21 +124,135 @@ export function sourcesOf(settlement) {
   const names = liveInstitutions(settlement)
     .map((inst) => nativeSemanticName(inst).toLowerCase())
     .filter((name) => name !== '');
-  if (anyNamed(names, HALL_NAMES)) out.add('hall');
-  if (anyNamed(names, TAVERN_NAMES) || names.some((name) => INN_RE.test(name))) out.add('tavern');
-  if (anyNamed(names, GUILD_NAMES)) out.add('guild');
-  if (names.some((name) => !name.startsWith(REGISTER_EXCLUDE_PREFIX)
-    && REGISTER_NAMES.some((keyword) => name.includes(keyword)))) out.add('register');
+  for (const name of names) for (const word of sourcesOfRowName(name)) out.add(word);
   const forces = standingDefenseForces(settlement);
   if (forces.militia.present) out.add('muster');
   if (forces.watch.present) out.add('watch');
   if (forces.garrison.present) out.add('garrison');
-  if (anyNamed(names, GATE_NAMES)) out.add('gate');
-  if (anyNamed(names, MARKET_NAMES)) out.add('market');
-  if (anyNamed(names, COURT_NAMES)) out.add('court');
   // The vocabulary is CLOSED at the kernel; a word added above and not there is a defect
   // this line makes loud in the suite rather than silent on the page.
   for (const word of out) if (!FACE_SOURCES.includes(word)) out.delete(word);
+  return out;
+}
+
+/**
+ * ⭐ WHICH SOURCES ONE CATALOGUE ROW LENDS, by its printed name — the per-row half of
+ * `sourcesOf`, extracted at car 8b-W-18l so `rolesOf` can walk the SAME predicates row by row
+ * instead of a second spelling of them drifting beside the first.
+ *
+ * ⛔ THE FORCE SOURCES ARE NOT HERE, deliberately. `muster`, `watch` and `garrison` are seated
+ * by `standingDefenseForces` — a TYPED bucket with a ruin filter and a count — and not by a
+ * keyword over a name. A row name cannot answer for them, so this function does not pretend
+ * to: both callers read the buckets themselves.
+ *
+ * @param {string} name the row's semantic name, ALREADY lower-cased
+ * @returns {string[]} the source words this row lends; may be empty, or several
+ */
+export function sourcesOfRowName(name) {
+  /** @type {string[]} */
+  const out = [];
+  const names = [name];
+  if (anyNamed(names, HALL_NAMES)) out.push('hall');
+  if (anyNamed(names, TAVERN_NAMES) || INN_RE.test(name)) out.push('tavern');
+  if (anyNamed(names, GUILD_NAMES)) out.push('guild');
+  if (!name.startsWith(REGISTER_EXCLUDE_PREFIX)
+    && REGISTER_NAMES.some((keyword) => name.includes(keyword))) out.push('register');
+  if (anyNamed(names, GATE_NAMES)) out.push('gate');
+  if (anyNamed(names, MARKET_NAMES)) out.push('market');
+  if (anyNamed(names, COURT_NAMES)) out.push('court');
+  return out;
+}
+
+/** The three force buckets, paired with the source each seats. An ARRAY, never a map. */
+const FORCE_BUCKET_SOURCES = Object.freeze([
+  Object.freeze({ bucket: 'militia', source: 'muster' }),
+  Object.freeze({ bucket: 'watch', source: 'watch' }),
+  Object.freeze({ bucket: 'garrison', source: 'garrison' }),
+]);
+
+/** The role table's rows, lower-cased once, so a lookup is by the same key the roster reads. */
+const ROLE_ROWS_BY_LOWER_NAME = new Map(
+  Object.entries(INSTITUTION_ROLES).map(([row, roles]) => [row.toLowerCase(), roles]),
+);
+
+/**
+ * Add every role a named row lends to each source it lends to, skipping an `office` role the
+ * town's own roster does not print (ruling 25 edge (a)).
+ * @param {Map<string, Array<{role: string, n: string}>>} out
+ * @param {ReadonlyArray<string>} sources
+ * @param {string} rowName the row's semantic name, any case
+ * @param {ReadonlySet<string>} offices lower-cased office titles this town prints
+ */
+function addRowRoles(out, sources, rowName, offices) {
+  const roles = ROLE_ROWS_BY_LOWER_NAME.get(String(rowName).toLowerCase());
+  if (!roles || sources.length === 0) return;
+  for (const source of sources) {
+    if (!FACE_SOURCES.includes(source)) continue;
+    const held = out.get(source) || [];
+    for (const entry of roles) {
+      if (entry.office === true && !offices.has(entry.role.toLowerCase())) continue;
+      if (!held.some((row) => row.role === entry.role)) held.push({ role: entry.role, n: entry.n });
+    }
+    out.set(source, held);
+  }
+}
+
+/**
+ * ⭐⭐ THE ROLES EACH SEATED SOURCE CAN SPEAK THROUGH ON THIS TOWN (ADDENDUM 18 ruling 25).
+ *
+ * A `Map` from a source word to the roster the page may draw from — built from the town's LIVE
+ * rows, so a role cannot outlive the institution that lends it, and topped up from
+ * `SOURCE_FALLBACK_ROLES` for any seated source whose rows carry nothing (a custom row, a row
+ * the table has not grown yet, and the two sources that are not rows at all: the `stranger`,
+ * who has the roads, and the `elders`, seated by tier).
+ *
+ * ⛔ A `Map`, NOT AN OBJECT. The wiring census reads an object-literal key under `src/domain/**`
+ * as a WRITE of world state, and `watch`, `court`, `market` and `garrison` are fields the desks
+ * READ: a map keyed on them would mint four false producers. `Map#set` on a string literal is
+ * the same discipline `sourcesOf` keeps with `Set#add`.
+ *
+ * ⭐ THE NAMED OFFICES ARE GATED ON THE TOWN'S OWN ROSTER. `officesOf` is the institution
+ * table's reader of what the dossier actually prints for this settlement (its NPC roles and
+ * titles, and the governing seat). An `office: true` role whose title that roster does not
+ * carry is dropped here, so 'the guard captain' speaks only where a guard captain is printed.
+ *
+ * @param {{tier?: unknown, institutions?: unknown, npcs?: unknown, [key: string]: unknown}|null|undefined} settlement
+ * @returns {Map<string, Array<{role: string, n: string}>>}
+ */
+export function rolesOf(settlement) {
+  /** @type {Map<string, Array<{role: string, n: string}>>} */
+  const out = new Map();
+  const seated = sourcesOf(settlement);
+  if (settlement && typeof settlement === 'object') {
+    const printed = officesOf(/** @type {never} */ (settlement)) || [];
+    /** @type {Set<string>} */
+    const offices = new Set(printed.map((office) => {
+      const row = ROSTER_OFFICE_TITLES.find((r) => r.roster.toLowerCase() === String(office).toLowerCase());
+      return row ? row.title.toLowerCase() : String(office).toLowerCase();
+    }));
+    for (const inst of liveInstitutions(settlement)) {
+      const rowName = nativeSemanticName(inst);
+      if (!rowName) continue;
+      addRowRoles(out, sourcesOfRowName(rowName.toLowerCase()), rowName, offices);
+    }
+    const forces = standingDefenseForces(settlement);
+    for (const { bucket, source } of FORCE_BUCKET_SOURCES) {
+      const held = forces[bucket];
+      if (!held || !held.present) continue;
+      for (const rowName of held.names) addRowRoles(out, [source], rowName, offices);
+    }
+    // The elders are seated by TIER, so their rows are the tier's government rows — already
+    // walked above where one of them is in the table — and the fallback below covers the rest.
+  }
+  for (const { source, roles } of SOURCE_FALLBACK_ROLES) {
+    if (!seated.has(source)) continue;
+    const held = out.get(source) || [];
+    if (held.length > 0) continue;
+    out.set(source, roles.map((entry) => ({ role: entry.role, n: entry.n })));
+  }
+  // A seated source with no roster at all would silence every face that names it; the line
+  // above makes that impossible for the twelve, and this one makes a THIRTEENTH word loud.
+  for (const source of out.keys()) if (!FACE_SOURCES.includes(source)) out.delete(source);
   return out;
 }
 
@@ -158,7 +276,18 @@ export function withFaceSources(settlement, options) {
       /** @type {unknown} */ (given)
     );
   }
+  // ⭐ THE ROLES RIDE WITH THE ROSTER (car 8b-W-18l). They are computed on the same line
+  // because they answer the same question one grain finer — not "which powers speak here"
+  // but "through whom" — and because a read carrying a source word with no role behind it
+  // would silence every face that names its slot.
   return /** @type {T & {sources: ReadonlySet<string>|ReadonlyArray<string>}} */ (
-    /** @type {unknown} */ ({ ...given, sources: sourcesOf(settlement) })
+    /** @type {unknown} */ ({
+      ...given,
+      sources: sourcesOf(settlement),
+      roles: rolesOf(settlement),
+      // ⭐ ONE EXCLUSION SET PER DESK ENTRY (ruling 25 edge (e)): the composer adds each role
+      // it prints, and the draw skips what is already in it until the roster is exhausted.
+      printedRoles: given.printedRoles instanceof Set ? given.printedRoles : new Set(),
+    })
   );
 }

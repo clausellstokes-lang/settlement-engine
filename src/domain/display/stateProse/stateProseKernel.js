@@ -915,3 +915,180 @@ export function hasStateProsePool(corpus, blockId, poolKey) {
   const pool = corpus?.[blockId]?.pools?.[poolKey];
   return Array.isArray(pool) && pool.length > 0;
 }
+
+/**
+ * ── ⭐⭐ ATTRIBUTION BY ROLE (ADDENDUM 18 ruling 25, the owner's; car 8b-W-18l) ────────
+ *
+ * THE SOURCE TAG IS THE MACHINE'S WORD AND THE READER NEVER SEES IT. What the page prints for
+ * a source is a ROLE — 'a clerk in the hall', 'dock workers', 'a local priest' — drawn at
+ * render, seeded, out of the town's OWN institution rows. The writer therefore writes a typed
+ * slot and a number-aware verb:
+ *
+ *     `[face]` `[hall]` {hall} {v:put} the walls' keeping under the military purse.
+ *   → "A clerk in the hall puts the walls' keeping under the military purse."
+ *   → "The clerks who keep the hall put the walls' keeping under the military purse."
+ *
+ * ⛔ WHY THIS LIVES IN THE KERNEL AND TAKES ITS TABLE AS AN ARGUMENT. The kernel imports
+ * NOTHING (its fence is asserted by name in composeStateProseFence.test.js) and the composer
+ * may import only the kernel. The roles are a fact about the TOWN, so `faceSources.js` builds
+ * them once per desk entry (`withFaceSources` → `read.roles`) and this function is handed the
+ * finished map. No module gains an import; the fence holds on both sides.
+ *
+ * ⛔ AND IT FAILS CLOSED. A role slot with no role behind it, or a verb slot with no role
+ * before it in its sentence, returns `null` — the same silence `fillSlots` returns for an
+ * unfilled slot, and for the same reason: a rendered `{hall}` is worse than no sentence.
+ */
+
+/**
+ * The SOURCE SLOTS a face may name: the kernel's own vocabulary minus the archiver, whose
+ * attributions are its own and never a role (ruling 25 edge (c)).
+ * @type {ReadonlyArray<string>}
+ */
+export const ROLE_SLOTS = Object.freeze(FACE_SOURCES.filter((word) => word !== ARCHIVER_SOURCE));
+
+/**
+ * One pass over both slot kinds, IN SOURCE ORDER, because a verb reads the number of the role
+ * that precedes it and a second regex would lose the interleaving.
+ */
+const ROLE_OR_VERB_RE = new RegExp(`\\{(?:(${ROLE_SLOTS.join('|')})|v:([a-z]+))\\}`, 'g');
+
+/**
+ * The verbs whose third-person singular is not the `+s` rule. Kept SHORT on purpose: the
+ * dossier's attribution verbs are plain by law (§6, "never a period word in the attribution
+ * verb"), so the list is the copula, the two auxiliaries and the `-o` verbs the writers use.
+ * An ARRAY of entries, not a map: this is `src/domain/**`, where the wiring census reads an
+ * object-literal key as a WRITE of world state.
+ * @type {ReadonlyArray<{base: string, sg: string, pl: string}>}
+ */
+export const ROLE_VERB_IRREGULARS = Object.freeze([
+  Object.freeze({ base: 'be', sg: 'is', pl: 'are' }),
+  Object.freeze({ base: 'is', sg: 'is', pl: 'are' }),
+  Object.freeze({ base: 'are', sg: 'is', pl: 'are' }),
+  Object.freeze({ base: 'have', sg: 'has', pl: 'have' }),
+  Object.freeze({ base: 'has', sg: 'has', pl: 'have' }),
+  Object.freeze({ base: 'do', sg: 'does', pl: 'do' }),
+  Object.freeze({ base: 'does', sg: 'does', pl: 'do' }),
+]);
+
+/** `-es` after a sibilant or an `-o`; `-ies` after a consonant + `y`; `-s` otherwise. */
+const SIBILANT_END = /(?:s|sh|ch|x|z|o)$/;
+const CONSONANT_Y_END = /[^aeiou]y$/;
+
+/**
+ * ⭐ THE VERB, AGREED TO A NUMBER. `say` + `sg` → `says`; `say` + `pl` → `say`; `hold` + `sg`
+ * → `holds`; `deny` + `sg` → `denies`; `go` + `sg` → `goes`; `have` + `pl` → `have`.
+ * @param {string} base the bare verb the writer named inside `{v:…}`
+ * @param {'sg'|'pl'} number the number of the role that precedes it
+ * @returns {string}
+ */
+export function agreeVerb(base, number) {
+  const word = String(base || '').toLowerCase();
+  if (word === '') return '';
+  const irregular = ROLE_VERB_IRREGULARS.find((row) => row.base === word);
+  if (irregular) return number === 'pl' ? irregular.pl : irregular.sg;
+  if (number === 'pl') return word;
+  if (CONSONANT_Y_END.test(word)) return `${word.slice(0, -1)}ies`;
+  if (SIBILANT_END.test(word)) return `${word}es`;
+  return `${word}s`;
+}
+
+/** Is this offset a SENTENCE HEAD — the start of the face, or just past a stop? */
+function atSentenceHead(text, at) {
+  const before = text.slice(0, at).replace(/\s+$/, '');
+  return before === '' || /[.?!]$/.test(before);
+}
+
+/**
+ * The offset the CURRENT sentence starts at, so "the same sentence" is exact rather than
+ * approximate. ⛔ Walked with a regex rather than three `lastIndexOf` calls on `'. '`, `'? '`
+ * and `'! '`: the E2 string-literal ratchet counts an exclamation mark inside a STRING as copy
+ * debt (`tests/copy/voiceMechanics.test.js`), and a punctuation table is not prose. Found by
+ * running that ratchet, not by remembering it.
+ */
+const STOP_THEN_SPACE = /[.?!]\s/g;
+function sentenceStartBefore(text, at) {
+  const before = String(text).slice(0, at);
+  STOP_THEN_SPACE.lastIndex = 0;
+  let start = 0;
+  for (let m = STOP_THEN_SPACE.exec(before); m !== null; m = STOP_THEN_SPACE.exec(before)) {
+    start = m.index + m[0].length;
+  }
+  return start;
+}
+
+/** First letter up, the rest untouched — 'a clerk in the hall' → 'A clerk in the hall'. */
+function capitaliseRole(phrase) {
+  return phrase.charAt(0).toUpperCase() + phrase.slice(1);
+}
+
+/**
+ * ⭐ THE SEEDED ROLE DRAW, with the page's own exclusion (ruling 25 edge (e): *"variety is the
+ * point … the same role never twice on one page"*).
+ *
+ * The candidate list is the source's roles MINUS everything this render has already printed;
+ * when the exclusion empties the list the FULL list comes back, so an exhausted roster repeats
+ * rather than silencing the face. The key carries the face index and the slot's position, so a
+ * face naming two different sources draws two different roles on one seed.
+ *
+ * @param {ReadonlyArray<{role: string, n: string}>} roles the source's roster on this town
+ * @param {ReadonlySet<string>|null|undefined} printed roles this render has already printed
+ * @param {string} key the seeded draw key
+ * @returns {{role: string, n: string}|null} `null` only when the source has no roles at all
+ */
+export function drawRole(roles, printed, key) {
+  if (!Array.isArray(roles) || roles.length === 0) return null;
+  const unseen = printed instanceof Set ? roles.filter((row) => !printed.has(row.role)) : roles;
+  const pool = unseen.length > 0 ? unseen : roles;
+  if (pool.length === 1) return pool[0];
+  return pool[hashKey(key) % pool.length];
+}
+
+/**
+ * ⭐⭐ FILL THE ROLE AND VERB SLOTS OF ONE FACE.
+ *
+ * Returns the text with every `{<source>}` replaced by a drawn role and every `{v:<verb>}`
+ * agreed to the number of the role that precedes it IN THE SAME SENTENCE, or `null` when the
+ * face cannot be spoken: no roles for a named source, or a verb slot with no role before it.
+ * A text naming neither slot comes back unchanged, which is why every shipped one-face pool
+ * passes through untouched and this car moves no byte of the corpus it did not re-cut.
+ *
+ * @param {string} text the face's raw text
+ * @param {object} opts
+ * @param {ReadonlyMap<string, ReadonlyArray<{role: string, n: string}>>|null} [opts.roles]
+ *   source → the roster that source has on THIS town (`faceSources.js` `rolesOf`)
+ * @param {Set<string>|null} [opts.printed] the roles this render has already printed; MUTATED,
+ *   because the exclusion is the page's and not the face's
+ * @param {string} [opts.key] the seeded draw key prefix (seed :: blockId :: poolKey :: face)
+ * @returns {string|null}
+ */
+export function fillRoleSlots(text, opts) {
+  if (typeof text !== 'string' || text === '') return null;
+  ROLE_OR_VERB_RE.lastIndex = 0;
+  if (!ROLE_OR_VERB_RE.test(text)) return text;
+  const roles = opts && opts.roles instanceof Map ? opts.roles : new Map();
+  const printed = opts && opts.printed instanceof Set ? opts.printed : new Set();
+  const key = opts && typeof opts.key === 'string' ? opts.key : '';
+  /** The number of the last role slot filled, and where it sat. */
+  let lastNumber = '';
+  let lastAt = -1;
+  let refused = false;
+  ROLE_OR_VERB_RE.lastIndex = 0;
+  const out = text.replace(ROLE_OR_VERB_RE, (whole, source, verb, at) => {
+    if (refused) return whole;
+    if (source) {
+      const drawn = drawRole(roles.get(source), printed, `${key}::${source}::${at}`);
+      if (drawn === null) { refused = true; return whole; }
+      printed.add(drawn.role);
+      lastNumber = drawn.n === 'pl' ? 'pl' : 'sg';
+      lastAt = at;
+      return atSentenceHead(text, at) ? capitaliseRole(drawn.role) : drawn.role;
+    }
+    // ⛔ THE VERB READS THE ROLE OF ITS OWN SENTENCE. A `{v:…}` whose nearest role slot sits
+    // behind a full stop has no subject to agree with, and guessing one is exactly the class
+    // of defect the slot-shape register exists to end. The projector refuses this shape at
+    // `assertFaces`; this is the second gate, on the other side of the leaf.
+    if (lastAt < sentenceStartBefore(text, at)) { refused = true; return whole; }
+    return agreeVerb(verb, lastNumber === 'pl' ? 'pl' : 'sg');
+  });
+  return refused ? null : out;
+}

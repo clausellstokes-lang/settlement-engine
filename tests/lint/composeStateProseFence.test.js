@@ -424,14 +424,29 @@ describe('the six candidates leaves are PURE HEADLESS LEAVES (ARCH §4.1, M-F7)'
  */
 describe('the roster reader\'s import fence (car 8b-W-18c)', () => {
   const FACE_SOURCES_MODULE = 'src/domain/display/stateProse/faceSources.js';
+  /**
+   * ⭐ AMENDED BY NAME AT CAR 8b-W-18l (ADDENDUM 18 ruling 25). Two specifiers join the list
+   * and the reason for each is written here rather than left to a reader of the diff:
+   *   `institutionTable.js`  — `officesOf`, the estate's ONE reader of the offices a town's
+   *      own roster prints. Ruling 25 edge (a) admits a NAMED OFFICE to the roll only where
+   *      the dossier prints that office, and re-spelling that reader beside this one is the
+   *      exact drift the `PRIORITY_HELPER_LISTS` note at the head of faceSources.js exists
+   *      to stop. Same directory family as the two institution imports already licensed.
+   *   `institutionRoles.js`  — the role TABLE, pure data under `src/data/`, the same layer
+   *      the desks' generated prose leaves live in. No behaviour, no imports of its own.
+   * Still NOTHING under `src/domain/prose/`: the prose island stays byte-fenced off the
+   * product, and the arm below asserts that separately from the exact-list arm.
+   */
   const LICENSED = Object.freeze([
     '../../institutions/institutionRoster.js',
     '../../institutions/defenseInstitutionBuckets.js',
+    '../../institutions/institutionTable.js',
     '../../content/customContentSemanticAuthority.js',
+    '../../../data/institutionRoles.js',
     './stateProseKernel.js',
   ]);
 
-  test('⭐ faceSources.js imports exactly its licensed four, and nothing from the prose island', () => {
+  test('⭐ faceSources.js imports exactly its licensed six, and nothing from the prose island', () => {
     const specifiers = specifiersIn(read(FACE_SOURCES_MODULE));
     expect(specifiers, 'the whole import list').toEqual([...LICENSED]);
     expect(specifiers.filter((s) => /domain\/prose\//.test(s)), 'a prose-island import').toEqual([]);

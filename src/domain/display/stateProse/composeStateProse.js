@@ -81,6 +81,7 @@ import {
   faceWeigh,
   fillSlots,
   hashKey,
+  fillRoleSlots,
   joinPairFaces,
   pairJoint,
   variantIsAudible,
@@ -435,6 +436,36 @@ function faceRawOf(variant, face) {
 }
 
 /**
+ * ⭐⭐ ONE FACE'S TEXT WITH ITS ROLE AND VERB SLOTS FILLED (ADDENDUM 18 ruling 25; car
+ * 8b-W-18l) — or its raw text unchanged when it names neither, which is every face of the
+ * shipped corpus this car does not re-cut, and is why the car moves no byte it did not mean to.
+ *
+ * ⛔ THE PAGE'S EXCLUSION IS THE `read`'s, NOT THIS FUNCTION'S. `read.printedRoles` is one Set
+ * per desk entry (`withFaceSources` mints it, and an inner entry that reuses the outer's
+ * options reuses the Set), so one role is not printed twice across the faces of one tab.
+ * ⚠ THE LIMIT, RECORDED RATHER THAN IMPLIED: the set spans a DESK ENTRY, not the whole
+ * dossier, so two tabs of one settlement may each print 'a clerk in the hall'. Widening it to
+ * the page needs the page's caller to hand ONE options object to every desk, which is a
+ * surface above this car and is reported OPEN.
+ *
+ * @param {import('./stateProseKernel.js').StateProseVariant} variant
+ * @param {number} at the face index
+ * @param {{seed: string, roles?: unknown, printedRoles?: unknown}} read
+ * @param {string} blockId
+ * @param {string} poolKey
+ * @returns {string} the role-filled text, or `''` when the face cannot be spoken — which
+ *   `fillSlots` then turns into the same silence an unfilled slot gives
+ */
+function faceRoleRaw(variant, at, read, blockId, poolKey) {
+  const filled = fillRoleSlots(faceRawOf(variant, at), {
+    roles: read.roles instanceof Map ? read.roles : null,
+    printed: read.printedRoles instanceof Set ? read.printedRoles : null,
+    key: `${read.seed}::${blockId}::${poolKey}::r${at}`,
+  });
+  return filled === null ? '' : filled;
+}
+
+/**
  * Draw one pool: the variant, its face, its filled text and its piece(s). `null` when the
  * pool is absent, when nothing is eligible, or when the fill fails — the caller DROPS a
  * candidate that answers `null` and walks on, which changes no modulus of any pool it
@@ -479,7 +510,22 @@ function drawPiece(block, blockId, poolKey, role, read, typing = {}) {
   const variant = drawVariant(eligible, blockId, poolKey, read.seed);
   if (!variant) return null;
   const face = drawFace(variant, blockId, poolKey, read.seed, read.sources);
-  const raw = faceRawOf(variant, face);
+  /**
+   * ⭐ THE ROLE FILL RUNS FIRST, AND ITS OUTPUT IS THE `raw` EVERY LATER STEP READS (ADDENDUM
+   * 18 ruling 25; car 8b-W-18l). Two reasons, both mechanical rather than stylistic:
+   *   1. `openLowercased` refuses to lowercase a face whose RAW text opens on a `{slot}`,
+   *      because a proper name riding inside a compound sentence keeps its capital. A ROLE is
+   *      the opposite case — 'A clerk in the hall' must become 'a clerk in the hall' when it
+   *      rides inside one — so the role-FILLED text is what that rule must see. `{settlement}`
+   *      still opens on `{`, so the proper-name refusal is untouched.
+   *   2. `fillSlots` returns `null` on any unfilled `{slot}`, so a role slot left standing
+   *      silences its face. Fail-closed and deliberate: a rendered `{hall}` is worse than no
+   *      sentence, and a read carrying no roles is a read that skipped `withFaceSources`.
+   * @param {number} at
+   * @returns {string}
+   */
+  const roleRawOf = (at) => faceRoleRaw(variant, at, read, blockId, poolKey);
+  const raw = roleRawOf(face);
   const text = fillSlots(raw, read.slots);
   if (text === null) return null;
   const source = faceSourceOf(variant, face);
@@ -490,7 +536,8 @@ function drawPiece(block, blockId, poolKey, role, read, typing = {}) {
   if (partner === null) {
     return { variant, raw, text, source, pieces: [drawn] };
   }
-  const partnerText = fillSlots(faceRawOf(variant, partner), read.slots);
+  const partnerRaw = roleRawOf(partner);
+  const partnerText = fillSlots(partnerRaw, read.slots);
   if (partnerText === null) {
     return { variant, raw, text, source, pieces: [drawn] };
   }
@@ -511,7 +558,7 @@ function drawPiece(block, blockId, poolKey, role, read, typing = {}) {
   const joined = joinPairFaces(
     first ? partnerText : text,
     first ? text : partnerText,
-    faceRawOf(variant, first ? face : partner),
+    first ? raw : partnerRaw,
     joint,
   );
   const pieces = first ? [second, drawn] : [drawn, second];
@@ -521,7 +568,7 @@ function drawPiece(block, blockId, poolKey, role, read, typing = {}) {
   // unfilled weigh row silences ITSELF and leaves the pair standing — the same rule the
   // partner takes above, for the same reason: a rendered `{slot}` is worse than no sentence.
   const weigh = faceWeigh(variant, face);
-  const weighText = weigh === null ? null : fillSlots(faceRawOf(variant, weigh), read.slots);
+  const weighText = weigh === null ? null : fillSlots(roleRawOf(weigh), read.slots);
   if (weigh !== null && weighText !== null) {
     pieces.push(composedPieceOf(pool, variant, poolKey, {
       role, face: weigh, audience: read.audience, relation: typing.relation, seat: typing.seat,
@@ -530,7 +577,7 @@ function drawPiece(block, blockId, poolKey, role, read, typing = {}) {
   }
   return {
     variant,
-    raw: first ? faceRawOf(variant, partner) : raw,
+    raw: first ? partnerRaw : raw,
     text: weigh !== null && weighText !== null ? `${joined} ${weighText}` : joined,
     source,
     pieces,

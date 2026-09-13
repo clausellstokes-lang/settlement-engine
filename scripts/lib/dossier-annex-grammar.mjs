@@ -28,7 +28,8 @@
 // words and the pair kinds a `[face]` row may carry are CLOSED at the kernel, and a grammar
 // that re-spelled them would be a second home for a list that must not drift.
 import {
-  ARCHIVER_SOURCE, FACE_SOURCES, PAIR_KINDS, WEIGHABLE_KINDS, WEIGH_KIND, faceSentenceCount,
+  ARCHIVER_SOURCE, FACE_SOURCES, PAIR_KINDS, ROLE_SLOTS, UNIVERSAL_SOURCE,
+  WEIGHABLE_KINDS, WEIGH_KIND, faceSentenceCount,
 } from '../../src/domain/display/stateProse/stateProseKernel.js';
 
 /** ARCH §2.3: the three roles a pool may declare. */
@@ -864,12 +865,49 @@ export function assertFaces(input) {
     // harmless, an UNFILLED one silences the rung, so a face may omit a slot and never add one.
     // The faces of a pool share SLOTS and MARKS, never a claim set (ruling 2): a face may say
     // nothing about the key, and may not contradict it.
-    const foreign = slots.filter((slot) => !parentSlots.has(slot));
+    // ⭐ THE SUBSET RULE, AMENDED BY NAME AT CAR 8b-W-18l (ADDENDUM 18 ruling 25). The
+    // ATTRIBUTION SLOTS are licensed on EVERY face and are never counted foreign, because
+    // they are not the spine's fills at all: `{hall}` and its eleven siblings are filled by
+    // the composer from the TOWN'S OWN ROLES before `fillSlots` runs, and the spine — which
+    // has no source — could not name them even in principle. The rule's ground is untouched
+    // for every other slot: a face may omit one of the spine's and may never add one, because
+    // an unfilled slot silences the rung.
+    const foreign = slots.filter((slot) => !parentSlots.has(slot) && !ROLE_SLOTS.includes(slot));
     if (foreign.length) {
       refuse(label, `a face names slot(s) {${foreign.join(' ')}} its parent does not name (parent`
         + ` slots {${[...parentSlots].sort().join(' ') || 'none'}}) — a face's slots are a SUBSET of its`
         + ' spine\'s, because the fills are the spine\'s and an unfilled slot silences the rung'
-        + ' (ADDENDUM 18 ruling 12; A6)');
+        + ' (ADDENDUM 18 ruling 12; A6). The attribution slots {'
+        + `${ROLE_SLOTS.join('} {')}} and the verb slots {v:…} are the one exception (ruling 25)`);
+    }
+    // ⭐⭐ AN ATTRIBUTION SLOT MUST BE ITS OWN FACE'S SOURCE (ruling 25: the page prints a role
+    // FOR THE SOURCE THAT SPEAKS). A `{tavern}` in a `[hall]` face would put the tavern's
+    // words in the hall's mouth and would draw from a roster the face's own seating never
+    // filtered on, so it is refused here rather than rendered. The untagged face is the
+    // STRANGER'S (the kernel's universal source), so `{stranger}` is its one lawful slot.
+    const at = faces.indexOf(face);
+    const spoken = sources[at] === null || sources[at] === undefined
+      ? UNIVERSAL_SOURCE : sources[at];
+    const mismatched = slots.filter((slot) => ROLE_SLOTS.includes(slot) && slot !== spoken);
+    if (mismatched.length) {
+      refuse(label, `face ${at + 1} speaks for \`${spoken}\` and names the attribution slot(s)`
+        + ` {${mismatched.join('} {')}}. A face prints a role for ITS OWN source and no other`
+        + ' (ADDENDUM 18 ruling 25); an untagged face is the stranger\'s, so {stranger} is its one'
+        + ' lawful attribution slot');
+    }
+    // ⭐⭐ A VERB SLOT READS THE NUMBER OF THE ROLE BEFORE IT IN ITS OWN SENTENCE (ruling 25
+    // edge (d)). With no role before it the verb has no subject to agree with, and the render
+    // would have to guess one — the exact class of defect the shape register exists to end.
+    // The kernel's `fillRoleSlots` takes the same refusal as a silence; this takes it as a
+    // throw at projection, where a writer can still see it.
+    for (const sentence of String(face).split(/(?<=[.?!])\s+/)) {
+      const firstRole = sentence.search(new RegExp(`\\{(?:${ROLE_SLOTS.join('|')})\\}`));
+      const firstVerb = sentence.search(/\{v:[a-z]+\}/);
+      if (firstVerb >= 0 && (firstRole < 0 || firstRole > firstVerb)) {
+        refuse(label, `face ${at + 1} names a verb slot with no attribution slot before it in the`
+          + ` same sentence ("${sentence.trim().slice(0, 60)}"). A {v:…} agrees with the ROLE that`
+          + ' precedes it, and a verb with no role has no number to take (ADDENDUM 18 ruling 25 (d))');
+      }
     }
     // ⛔ THE TOWN NEVER NAMES ITSELF INSIDE A FACE (ADDENDUM 18 ruling 12, the owner's word of
     // 2026-09-12: "any mention of {settlement} is redundant because it is in its own dossier").
