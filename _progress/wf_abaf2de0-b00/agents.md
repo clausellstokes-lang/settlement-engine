@@ -1,4 +1,4 @@
-# wf_abaf2de0-b00 — per-agent progress, 2026-09-12 20:51:09
+# wf_abaf2de0-b00 — per-agent progress, 2026-09-12 20:56:27
     - `acb131a55` GATE r1 · DONE · transcript 09-11 05:24 559 KB · 56 tool calls · files: x.txt, msg.txt, (git commit) · result: {"commit": "32634b8004831321c2d0b5985766cb8f0ae78590", "pools": [{"dir": "ds-def-11--walled-threatened", "applied": true, "inBand": true, "failing": [], "refusa
     - `af97f6e2b` REFUTER WALLED-THREATENED r1 · DONE · transcript 09-11 05:32 611 KB · 19 tool calls · files: refute-cure-round-1.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-11/ds-def-11--walled-th
     - `afe4107e1` REFUTER WALLED-QUIET r1 · DONE · transcript 09-11 05:33 591 KB · 24 tool calls · files: refute-cure-round-1.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-11/ds-def-11--walled-qu

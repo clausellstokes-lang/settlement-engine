@@ -1,4 +1,4 @@
-# wf_11bb797e-f25 — per-agent progress, 2026-09-12 20:51:08
+# wf_11bb797e-f25 — per-agent progress, 2026-09-12 20:56:26
     - `a507343ec` ? · DONE · transcript 09-12 04:00 292 KB · 13 tool calls · files: items-W1-W10.md · result: {"slice": "W1-W10 \u2014 the ten writer rules W1\u2013W10 plus ADDENDUM 12's chair rulings R-i, R-ii, R-iii, R-iv, R-vi, R-viii\u2032 (as amended 2026-09-10)", 
     - `a5adaf2e5` ? · DONE · transcript 09-12 04:01 267 KB · 6 tool calls · files: items-W11-W19.md · result: {"slice": "W11\u2013W19 \u2014 the writer bars of brief ADDENDUM 13 part A, section B (defense, crisis and faith desks), re-cut under ADDENDUM 14 from LICENCE t
     - `ac712a154` ? · DONE · transcript 09-12 04:01 272 KB · 8 tool calls · files: items-W20-W27.md · result: {"slice": "W20\u2013W27 \u2014 the eight referent bars (layer \u00b7 baked-power \u00b7 person \u00b7 fused-agent \u00b7 record-word \u00b7 external-body \u00b7

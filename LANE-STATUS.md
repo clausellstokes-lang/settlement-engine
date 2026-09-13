@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-12 20:51:06 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-12 20:56:25 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = b1e87d40e §919.5: the retro record's six FIDELITY packets land — a commit defect of the chair's o
 
@@ -503,5 +503,5 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `a52bed9cf` FOLDER · RETRIED (a later attempt on the same key runs) · transcript 09-11 05:36 1146 KB · 24 tool calls · files: _addendum10.verbatim.md, _partA.md, _partB.md
     - `ad30ac0bb` FOLDER · DONE · transcript 09-11 06:02 1531 KB · 36 tool calls · files: _partD.md, _partE.md, _partF.md, _partG.md · result: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/entailment/ENTAILMENT-TABLE.draft.md
 
-## PROCESSES: 20708 sh ./autosave-handoff.sh;
-load: 3.49 2.68 4.27
+## PROCESSES: 
+load: 1.88 2.17 3.53
