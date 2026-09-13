@@ -1,0 +1,56 @@
+
+ RUN  v4.1.11 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneREWRITE
+
+ ❯ tests/lint/sovereigntyLightingContract.walker.test.js (34 tests | 1 failed) 7427ms
+     × THE CENSUS IS AN ASSERTION, NOT A SENTENCE — every stated figure is executed 31ms
+ ❯ tests/lint/seedLoopTotality.walker.test.js (9 tests | 1 failed) 12ms
+     × no NEW bare seed loop anywhere in the test corpus 9ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/lint/seedLoopTotality.walker.test.js > seed-loop totality walker (habitat removal) > no NEW bare seed loop anywhere in the test corpus
+AssertionError: expected [ Array(1) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "tests/domain/stateProseKernel.test.js: 3 bare seed loop(s) at line(s) 349, 907, 935 (frozen ceiling 1). A seed loop that asserts inline stops at the FIRST failing seed, so its failure count is a lower bound and every later seed goes unrun — the fix you verify against it may never have reached the seeds that still fail. Collect instead: const failures = collectSeedFailures(SEEDS, (seed) => { … }); expectNoSeedFailures(failures, '<what this proves>') (tests/helpers/seedFailures.js). Already truthful for another reason? Say why: // seed-loop: collected — <justification>.",
++ ]
+
+ ❯ tests/lint/seedLoopTotality.walker.test.js:354:24
+    352|       }
+    353|     }
+    354|     expect(violations).toEqual([]);
+       |                        ^
+    355|   });
+    356|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/lint/sovereigntyLightingContract.walker.test.js > the sovereignty lighting condition — a marker is EVIDENCE only in a live title > THE CENSUS IS AN ASSERTION, NOT A SENTENCE — every stated figure is executed
+AssertionError: the live TEST-title count moved from SP-C's measured 18,471 — this is the evidence layer, the exact figure two cuts in a row stated wrongly in prose, and the reason it is asserted rather than described: expected 24050 to be 24049 // Object.is equality
+
+- Expected
++ Received
+
+- 24049
++ 24050
+
+ ❯ tests/lint/sovereigntyLightingContract.walker.test.js:7455:8
+    7453|       + ' is the evidence layer, the exact figure two cuts in a row st…
+    7454|       + ' the reason it is asserted rather than described')
+    7455|       .toBe(CENSUS.titles);
+       |        ^
+    7456|     // …AND THE SUITE LAYER IS COUNTED TOO, WHICH IS WHAT MAKES THE SP…
+    7457|     // that merged the two arrays again would leave `titles` at 23,678…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  2 failed | 147 passed (149)
+      Tests  2 failed | 2490 passed (2492)
+   Start at  04:34:03
+   Duration  97.59s (transform 18.27s, setup 4.03s, import 135.60s, tests 478.54s, environment 12ms)
+

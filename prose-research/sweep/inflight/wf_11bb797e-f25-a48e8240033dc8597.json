@@ -1,0 +1,20 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 145,
+ "firstTs": "2026-09-12T08:04:19.991Z",
+ "lastTs": "2026-09-12T08:14:41.143Z",
+ "tools": {
+  "Bash": 34
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "over four keywords\" is sourced nowhere in the slice.\n\nTwo defects (2 and 5) push a reviewer toward under-scrutiny; one (1) overstates a strike's danger. None invalidates a row, but all should be fixed before a Fable seat marks `VALIDATION`, since the front matter is read before the rows are sampled.",
+ "run": "wf_11bb797e-f25",
+ "agent": "a48e8240033dc8597",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/4ed79a2b-6cd2-45cf-ab97-83cdad49c30b/subagents/workflows/wf_11bb797e-f25/agent-a48e8240033dc8597.jsonl",
+ "journal": "result",
+ "checkpointFile": null
+}

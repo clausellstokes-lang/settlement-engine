@@ -1,0 +1,23 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 323,
+ "firstTs": "2026-09-11T09:36:53.965Z",
+ "lastTs": "2026-09-11T09:57:49.948Z",
+ "tools": {
+  "Bash": 91,
+  "Write": 1
+ },
+ "urlsFetched": [],
+ "filesWritten": [
+  "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/entailment/stressors.referent.survey.md"
+ ],
+ "lastAssistantText": "The packet is written. Dock verified untouched (`f2da5a3ee`, `git status --porcelain` empty).",
+ "run": "wf_3252b403-4ff",
+ "agent": "a2c8e439840d47a10",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/4ed79a2b-6cd2-45cf-ab97-83cdad49c30b/subagents/workflows/wf_3252b403-4ff/agent-a2c8e439840d47a10.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}

@@ -1,0 +1,24 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 100,
+ "firstTs": "2026-09-09T23:01:38.989Z",
+ "lastTs": "2026-09-09T23:09:59.098Z",
+ "tools": {
+  "Bash": 18,
+  "Read": 8,
+  "Write": 1
+ },
+ "urlsFetched": [],
+ "filesWritten": [
+  "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--disasters-famine-no-reserves-hospital-present/draft-round-1.md"
+ ],
+ "lastAssistantText": "as a standing fact — a hospital present, no food reserve held — and nothing else. Slot sets match each parent (variants 1 and 3 carry `{settlement}`, variant 2 carries none); no wording opens on the proper-typed slot, so every row parses sentence-form and the settlement token opens none of the pool.",
+ "run": "wf_68d644ef-3dd",
+ "agent": "a2210644c79388cd7",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/67af10e4-7386-48d4-8cd3-b2985d4885c2/subagents/workflows/wf_68d644ef-3dd/agent-a2210644c79388cd7.jsonl",
+ "journal": "result",
+ "checkpointFile": null
+}

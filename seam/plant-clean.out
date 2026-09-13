@@ -1,0 +1,9 @@
+
+ RUN  v4.1.11 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneSEAM
+
+
+ Test Files  1 passed (1)
+      Tests  9 passed (9)
+   Start at  11:49:58
+   Duration  1.45s (transform 31ms, setup 23ms, import 361ms, tests 979ms, environment 0ms)
+

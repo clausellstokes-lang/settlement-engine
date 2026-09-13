@@ -1,0 +1,1001 @@
+ 
+
+ [Review] Gaz 1 The Grand Duchy of Karameikos (DnD Basic): Back to Basics - Age of Dusk 
+
+ Skip to content 
+
+ Age of Dusk 
+
+A blog that only kills animals. 
+
+ Menu 
+
+ Home 
+ About Prince 
+
+ Appendix N 
+
+ For New Readers 
+
+ Reviewing Standards 
+
+ Reviews 
+
+[Review] Gaz 1 The Grand Duchy of Karameikos (DnD Basic): Back to Basics 
+
+ Posted on March 30, 2020 July 4, 2020 by Prince 
+
+ [Campaign Setting]
+
+Gaz 1 The Grand Duchy of Karameikos (1987) 
+
+Aaron Allston (TSR) 
+
+The Gaz series was TSR's attempt to flesh out, in order, the many different lands described in the sample B/X boxed sets. The overall result was a mixed bag, though there were certainly some gems in there. The Grand Duchy belongs without a doubt to the latter category. I'll try to put into words why it works. 
+
+There are reasons why Gaz 1 probably should not have worked. It is a pastiche, cobbled together from sparse information in the B/X set and modules in the B and X series. That means that the focus of Gaz 1 is not on all the exciting adventure locations dotted around The Grand Duchy, but rather, everything around those adventures, setting up the framework for the adventures to take place in. In the hands of a lesser man, a boring encyclopedic recitation of meaningless and sometimes mutually contradictory drivel. In the hands of Aaron Allston exercising full editorial power, the whole becomes compelling and gains a depth to it that would seldom be seen again in the Gaz series. 
+
+I think part of Gaz 1's success is that it knows very well what parts were needed to turn the bulk of the B series into an overlapping campaign setting. It then adds a layer of ambiguity and nuance to the writing that makes it somehow more plausible. AND it does this in about 70 pages. It works because A) It's relatable, B) It's intelligently written and C) It knows almost exactly what information it needs to present in order for you to have a deep ass nerd sandbox campaign in Karameikos. 
+
+Karameikos is a wild place, a sparsely populated coast, connected to mines and logging camps in the mountains via a single road carved out by its duke, surrounded by deep and dark forest, inhabited by monsters. The native Traladarans live in uneasy peace with the Thyatian colonists that captured it but there's also a sense of optimism. For the first time in centuries, the nation is prospering under the leadership of Stefan Karameikos. The writing is good, nuanced and with shades of grey, there's little hints of a medieval grimness to the setting though it stays far away from grimdark crapsack fantasy that has become something of a standard. 
+
+Setting history is given in broad sweeping strokes that serve the goal of hinting at prior ages from which the GM may readibly draw inspiration for a whole flock of dungeons. Less then two pages cover the nation's hero's of legend, their fight against invading hordes of Beastmen (describe in the Song of Halav, which every Traladaran child knows) and the ensuing dark age, culminating in Traladara's rebirth as the young Thyatian Duke Stefan Karameikos trades his ancestral lands against this wild and untamed land, and with the aid of hordes of volunteers and adventurers, proceeds to colonize it. An odd mixture of fantasy Eastern-Europe with some Roman colonists. It reminds me of a more optimistic Sapkowski's Witcher or Pratt's Well of the Unicorn with its quaint medieval villages, humano-centric focus, shades of grey and monster-infested forests. 
+
+Gaz 1 is an odd beast because it doesn't have to introduce us to a whole slew of new items, monsters, classes, races and other content you generally see in new campaign settings. Instead it focuses on existing elements of DnD and how they fit into this setting. Where do the Elves live? How do they interact with the duke? Do they pay taxes? Do wizards get to build a stronghold etc. All this stuff helps give the setting a grounding that you don't often see. 
+
+One of the first thing it focuses on is how to make characters in the setting. Its clever. The native Traladarans have a custom called the Shearing, which involves kicking your sons (and sometimes daughters) out of the house (though he is considered a family friend) and not letting them return until they have made big earnings joining a trade caravan or otherwise having found a way to earn their keep (such as adventuring). It makes less sense that you'd do this to your daughters since they'd probably get knocked up and I don't think Karameikos enforces custody laws outside of wedlock but to Allston's credit he does say women are not Sheared though they may ask for it themselves. The Thyatian colonists have naturally enthusiastically adopted this practice. 
+
+I'm less enthusiastic about tables for starting character family wealth. It's mostly fluff as it doesn't affect your starting GP at all, which I think is a missed opportunity. Why not WHF it up?; if your family is penniless you start with a shirt on your back and an alms bowl, if you start as a direct descendant of the Duke (1% chance) you start with a full plate, a masterwork zweihander and a warhorse in barding. But that wouldn't fit the American Dream type of epos that Karameikos is espousing, where all men are not brothers, but at least making an effort. Allston knows what he is doing. My recommendation is to skip all this random table bullshit, which the gazetteer fully admits you may assign if that seems a better match, MAYBE give the PCs some relatives if you wanna go through the hassle. I likes me some immersion but Allston really cut the brakes on the simulationist-train with this one. 
+
+Perhaps far more interesting, Allston also introduces a nascent non-weapon proficiency system [1] that would become mostly standard operating procedure from 2e onwards [2] and was originally seen in Oriental Adventures. This version doesn't have an exhaustive list of proficiency to choose from and expects the GM to come up with them on the fly, which can create some problems but its a nice addition to B/X. Full disclosure, I always go full on Rules Cyclopedia no-holds-barred Non-weapon-proficiencies and I have not looked back since. Skills in DnD are a godsend. 
+
+There's layers to Karameikos that are intriguing. As we have read in B10 , the actual history of Karameikos is much different. For long centuries the primitive tribesmen were slaves of a race of fox people, who taught them pottery, bronzeworking, architecture and so on. Some of the natives still resent the Duke and the Thyatians for the casualties they inflicted when they took over Specularum and some of the rampant pillaging and disowning of land that happened under his watch…but his policies HAVE made things better. Banditry and humanoids are driven back, tax money has gone into roads, fortresses and a professional army… 
+
+Part of what makes this setting compelling is the human elements. There's a vast amount of potential conflict in the setting that can be mined for adventure seeds. The big bad in The Grand Duchy is not a 20th level Lich in a fortress of doom [3], it's Karameikos's psychopathic 15th level ftr nephew Ludwig Von Hendriks and his dastrardly thug turned wizard Bargle the Infamous, who has turned his barony into a fantasy north korea and is engaging in gleeful slavery, piracy and other atrocities that the Duke does not fully know how to confront. It's the second in command of the old Patriarch, who has always hated Traladarans and will put pressure on them to outlaw their church and start a holy war if anything happens to the old Patriarch. It's the Veiled Society, led by old Traladaran merchant houses, fomenting dissent and plotting assassination and terror. Like in any good S&S setting, the human conflict takes precedent. 
+
+When I talk about depth I mean that Gaz 1 covers areas of a campaign setting that would come up in a game where PCs are expected to eventually gain a name for themselves and gain a domain in their own right, which Gaz 1 does. There's FULL coverage of the process of rising from Freeman [4] to Baron, it covers the rights and oaths of fealty, it goes into laws and punishment in the Grand Duchy…and its done in but a few pages. So many campaigns don't give a fuck about mundane elements that cover BASIC BUILDING BLOCKS IN A CAMPAIGN WORLDS MAKE-UP. At the same time you never get the idea Allston is just jerking off, he takes pains to explain that the purpose of law and procedure in a game of DnD is to lead to exciting adventure not a thing an sich. What if you are an elf? What does the trip from Court Lord to Baron look like? What are some other major players in the game besides the nobility? What if I don't join a Thieves Guild? All answered. 
+
+There's an element which I am sure some might find jarring, that in Basic DnD powerful characters are almost always high level, but in Karameikos it kind of makes sense. Almost all the nobles in the Grand Duchy are second-born nobleman's sons and adventurers that carved out their baronies by hook and crook and most are friends of the Duke. I'd gripe more about the plethora of high level female fighters in the setting, something of a jarring side effect of assuming character generation rules apply to NPCs and represent average ability distribution, but chances are you already know how that argument goes down and have formed some sort of opinion on it. 
+
+Religion in all of B/X is handled weirdly in that the game as a whole seems strangely reluctant to declare whether or not clerics are in fact worshipping the Immortals [5] or are only sponsored by them. This is how The Duchy can have two major churches and one cult and go into their belief systems but neglect to mention what Immortal is even payed homage too. The interesting thing is that both the Church of Karameikos and the Church of Traladara seem to worship more or less the same pantheon of Immortals (Halav, Petra & Zirchev among others) but are completely at odds in how they view Sin, Personal Responsibility and marriage among other things. The Cult of Halav is presented as a bunch of cranks that believe the Duke is the reincarnation of King Halav, and are meant for laughs, but I think an opportunity is missed here to make them be something more. 
+
+Much more interesting is Gaz 1's curious reluctance to go into the philosophy of the badguys. You will occasionally find evil clerics in the B series but there's rarely any explanation of what they believe in or serve beyond Chaos, which I suppose will have to serve. I've always thought this a missed opportunity. 
+
+So unlike other weak ass settings with limp wrists and flacid weiners Gaz 1 has a complete listing of all its major military forces using the too-rarely-used Warmachine stats that essentially enable you to turn your dnd campaign into a full on war game complete with chits, single diceroll battle resolutions and other autistic shit that has fallen out of favor with the newer Avengers-in-Loth-Lorien version of DnD. I'm not kidding its all here, different units, stationed in different fortresses, what time it takes to mobilize additional troops etc. Do you know how long that takes? 2 pages. 
+
+I miss this type of craftmanship in newer campaigns, even though I understand full well that the type of play this supports has become Niche and most games are Murd3rh0b0z t1ll w3 D13. If you are going to do a module, do flash and bang and ooh and aaah. If you expect people to invest time and effort into your setting which is to be able to handle multiple adventures, you better make sure it doesn't fall apart at the first scrutiny. 
+
+There's some fluff stuff that I suppose was obligatory to put in your Serious ™ campaign setting but that could have been shortened without too much loss of value. Notes on dress for Thyatians, Traladarans, nobles, commoners, different classes and so on. Talk of coinage that you can attempt but that most of your Players will probably flat out refuse to adopt [6], even if a sensible point is made that clearly precious metal in Mystara is much more common and thus its value is comparatively less, an explanation that is as good as any other I suppose.
+
+There's a Calender with important holidays and events (i.e. tax collection, something that WILL be applied to PCs, otherwise the GM is to make sure they have to go to a lot of trouble to avoid it) which is nice, but the use of a different calender is jarring, even if 12 months with 28 days each seems more convenient at first. I think people don't fucking realize the immense hassle it is to switch to a different calendar. I'm not even sure Middle Earth has a different calendar. If any of you would be setting writers read this DON'T FUCKING CHANGE THE CALENDAR. 
+
+Contrary to what you might believe there's actual content in this damn Gazzeteer as well. The capital city of Specularum gets an extensive treatment in terms of neighborhoods, main streets, ducal palace etc. There could be more hooks but the clearly defined areas, underworld neighbourhoods (The Nest), crime riddled immigrant's quarter, street of soothsayers and magician's and other features that make the place come alive, and render it suitable for sustained campaigning. A true gritty medieval shithole with narrow streets, filthy open sewers and crime. My kinda place. Many of the hooks presented later on focus on city adventures as well, which is a nice touch, since these are often a bit too straightforward for presentation in a separate module but can nevertheless be worked out into an interesting night of adventure. 
+
+Hooks are alright in this section but could be stronger. Allston will off-handedly point out that here and here is the original site of Lavv, birthplace of King Halav and there might be haunted ruins here or that this site suffers from humanoid attacks but its very light. The most interesting locale is probably Korizegy Keep, site of a cursed castle, where a dynasty sought to forge a pact with the forces of darkness and was cruelly punished by immortals for their infamy, now famously haunted, followed closely by the vampire ruled village of Sulescu. Korizegy keep has a map and some 1 sentence encounters but fuck that, make your own Keep.
+
+What is probably better is that every little settlement fits, is intelligently placed (i.e. trade routes and bodies are considered), has distinguishing features and has a place within Karameikos. Its a coherent whole. It feels GROUNDED. 
+
+If the locations were fairly tame, the section on Characters is positively riddled with potential adventure hooks, which is fortunate since it is the longest section in the book. The Royal Family is described, as well as barons, ambassadors, merchant houses, street beggars, leaders of thieves guilds, noblewomen with a grudge, Chamberlains etc. etc. For a dungeoncrawling campaign? Probably too much. For a dungeoncrawling campaign that slowly turns into a game of gaining influence and intrigue? Perfect. The low point is the ambassadors, some of which are boring and add little, clearly meant to be people the PCs can extract information from. Just do a few sentences and ditch. A hotbed of intrigue and potential conflict with far-reaching ramifications. A noblewoman is finally giving her meltdown speech in the public square before a vast crowd, infiltrated with her soldiers, and starts the riot of her lifetime because the Duke killed Daddy 30 years ago! The Chamberlain's assistant is selling information to the merchant houses! Sheik Abdallah Ibn Hamed is considering kidnapping the Ambassador of Glantri for his hareem . The ambassador of Thyatis is a fucking asshole and he hates your guts! Some of the other ambassadors seem like boring pieces of shit. Oh the Elf ambassador is quite the dandy and doesn't like dwarves? How novel. Please excuse me while I take my cyanide! 
+
+But Prince these sound like hooks for city adventures?!? What about muh dungeons! Ah, says I, but this setting was made when the B10 came out, and there was plentiful access to dungeons using Karameikos as a default setting. Allston collated that and instead gave us EVERYTHING around it. 
+
+The Gazzeteer concludes with a shitton of maps of the city, the grand duchy (in full hexmappery, beautiful), notes on what monsters to use and how frequently they appear in the grand duchy (very intelligent, thank you!) and 3 pages of short adventure seeds. 
+
+These I am least enthusiastic about. Some of them amount to little more then EXPLORE ZIS AREA FOR ZE BARON or ESCORT ZE GNOMISH CARAVAN and the note "have the advantage that they can be repeated" is a bug not a feature in my eyes. There are, however, plenty of quaint adventure hooks that a novice GM should be able to make into something good. One of the character gets mistaken for a gambler, mysterious notes are found hinting at the treachery of the councillor, murder and intrigue in the streets, ancient sorcery unearths legions of undead humanoids buried in a chamber under Lavv, people are hired to infiltrate the Black Barony etc. It ends appropriately at Companion level adventures (levels 15 - 25), when the Barony seems appropriately small for the PCs. All Companion level hooks are setting altering events, which serves as a good indication of what scale is appropriate for what levels. 
+
+These hooks are not brilliant. They are however, perfectly suited to their goal, which is to help the GM use this setting to have his players have exciting adventures. This they do admirably and rather well. 
+
+Grand Duchy is a fine example of a good campaign setting. Its low brow but not stupid, its barrier of entry is low, it has plenty of adventuring possibility yet treats the world as a living, real thing, not as a pretext for adventures, its structure allows for a depth that is almost unheard of in these depressing times and despite its focus on the human elements it still provides plenty of hooks. If you want to take your campaign to Werewolf-haunted, orc-infested Karameikos and you feel like taking your game outside the Dungeon and into the street, and later the court, this baby is EXACTLY what you need. 
+
+Last but not least, and since I had a short discussion with Ash Adler on the subject, the topic of Raise Dead is not mentioned in the Gazzeteer, even though there are numerous examples when such a spell would be of immense use, suggesting that it is a rare art indeed, employed cautiously, if at all. Music to my low fantasy ears. 
+
+Its got its warts, the writing's balls still need to drop and at times it goes on about what the Traladarans dress like, but if you want to turn Karameikos into a big boy setting I think you could do a hell of a lot worse. As a standalone product it would be pretty cool, but as an addition to what has already been laid out in the B series and the B/X expert set its exactly what the doctor ordered to put Mystara on the map. For under 70 pages, damn fucking useful, especially if you are a novice GM. **** 
+
+[1] A skill system for all you new kids out there
+
+[2] I recall the 2e PHB listing NWP's as (optional) but almost everyone I know who played 2e used them.
+
+[3] There's a vampire in charge of a village somewhere but he just pretends he is is son and mostly rules the village fairly well, albeit it there is a voluntary curfew.
+
+[4] There is no slavery in Karameikos
+
+[5] Unlike most DnD settings, all of Mystara's Immortals are ascended mortals and the true nature of the universe is left more or less open
+
+[6] No seriously. Try getting your PCs to call Gold Pieces Crona or Royals or Floopzars or something. The best thing you can do is stubbornly refer to it yourself and MAYBE your players will eventually adopt it but for the most part it adds comparatively little and is more cumbersome then the instantly recognizable GOLD PIECE. 
+
+Share this: 
+
+ Share on X (Opens in new window) 
+ X 
+
+ Share on Facebook (Opens in new window) 
+ Facebook 
+
+ Like Loading... 
+
+ Related 
+
+ Posted in Reviews Tagged **** , Campaign Setting , DnD Basic 
+
+Post navigation 
+
+ [Ramble] On Campaign Settings: Review Standards 
+ [Review] The Barbarian King(OSR); Wight Power 
+
+ 28 thoughts on " [Review] Gaz 1 The Grand Duchy of Karameikos (DnD Basic): Back to Basics " 
+
+ Fiasco says: 
+
+ March 31, 2020 at 1:16 am 
+
+I have most of the Gazeteers and Karameikos is the one I return to the most (though I love the gonzo Principalities of Glantri gazeteer as well). Rules cyclopedia D&D is comprehensive but bland and while there is an element of blandness to Karameikos as presented, there are enough hints there to really punch up the fantastical element. 
+
+You definitely called out one of the best selling points, however, that this supports play right up to companion level. I defy anyone to read this gazeteer and not start daydreaming about being leave to clear out some hexes and found a barony. 
+
+I'll add that Alston does a great job of incorporating materials from the B series modules into the setting though strangely he multiplies the populations by 10. Threshold might make more sense with a population of 5000 instead of 500 (though I would probably opt for something in the mid range between the two) but 50,000 is very, very high for Specularum which arguably shouldn't be that much bigger than a frontier town itself. 
+
+Your comment on Raise Dead stirred a faint memory. I could have sworn the question of accessibility to this spell was addressed, perhaps under the individual patriarch's capable of casting the spell. I could have sworn the write up under Sherlane or one of the other higher level priests it details the priority list of who would benefit from raise dead starting with Duke Stefan and his family down. 
+
+One final call-out is the Iron Ring. They're a great villain organisation introduced in b10 and mentioned in the Gazeteer as well. With links to the Black Eagle barony but also a scope of operations that can reach outside of Karameikos they make a great recurring villain. They can be used as a great way of using the Slaver series modules as well without too much work. 
+
+ Like Like 
+
+ Reply 
+
+ PrinceofNothing says: 
+
+ March 31, 2020 at 5:23 pm 
+
+Glantri was very interesting in an odd-ball fashion I will absolutely grant you. The secret colleges and the Radiance were fascinating mysteries and the general crazyness of the setting makes it oddly compelling. 
+
+[Bland] 
+
+I'll agree with you its a flaw of the entire line as a whole. B/X is too rigid in how it approaches DnD and almost mortally afraid to postulate something outside the narrow confines of its available items, creatures, spells and so on. Its too literal in how it interprets its own fluff. 
+
+[Population] 
+
+Good catch. I sort of agree with you that 50k is high, but it does have large docks and presumably a shipbuilding industry, its port is just about the only focal point of all Trade in the duchy, it is the capital and it houses the largest standing army in Karameikos. I think its plausible, more so then 5k, which is low for a regional capital with these capabilities. 
+
+[Raise Dead] 
+
+I had to reread it, but its not there. It SOUNDS like something B/X would pull but fortunately we are spared that in this gazzeteer. It can be seen as telling that all the high level clerics; Baron Kelvin, Sherlane, Lord Jowett, Alfric, Aleksyev and Aleena all have Raise Dead memorized, indicating that they are at least prepared to use it. I looked on the internet and discovered an article that left a foul taste in my mouth: 
+
+ https://faustusnotes.com/2016/04/30/does-anyone-ever-die-in-karameikos/ 
+
+I read it and I can't stop projectile vomiting. Why do people insist on interpreting DnD in such an asinine fashion? The solution is to apply the fantastical elements in such a way as the described setting becomes feasible, NOT apply the fantastic elements in systematic fashion and extrapolate the mundane consequences that arrive therefrom. You aren't writing Science Fiction, you are making an elfgame. Before you know it you have continual light rock salesmen and sphere of annihilation garbage dumps. Bleeeegh. Lame to the core. 
+
+[Iron Ring] 
+
+Probably the best of the three but they barely get any coverage here. I liked the element of self-perpetuating misery, how their shock troops were people so broken they became fanatically devoted to the Iron Ring. Slavers are pretty creepy and about as evil as you can get. 
+
+ Like Like 
+
+ Reply 
+
+ Ash Adler says: 
+
+ March 31, 2020 at 8:57 pm 
+
+[Raise Dead] 
+
+It's impressive (for a certain definition of "impressive") that that article managed to assume birth/death rates in the real world would apply to a setting with explicit monsters and magic, to assume hit points and physical well-being are the same, and to miss the difference between fantasy and realistic fiction completely. If you're going to follow such a dubious train of logic, at least take it somewhere interesting (like, say, back alley mob priests sustaining women as they birth awesome chaos babies, a Ponzi scheme involving Raise Dead vouchers, or a cold war brewing over restraining the proliferation of immortal serfs, just to pull three ideas off the top of my head) instead of a boring conclusion. 
+
+ Like Like 
+
+ Fiasco says: 
+
+ April 1, 2020 at 4:26 am 
+
+Raise Dead. Your rebuttal had me wracking my brains as I knew I'd read it somewhere. After striking out in B10 and the Expert Rules (which has a 2-3 page section on Karameikos) I finally realised I'd conflated text from N5 Under Illefarn with the write up for Karameikos clerics. 
+
+N5 is a curious beast of a release. The first Forgotten Realms module which is as much a campaign setting as an adventure module. It's the Forgotten Realms take on the Village of Hommlet. Some of the adventures are pedestrian but then there's hints of other things that could be turned into an interesting mini campaign. In any case, Daggerford has one priest capable of casting raise dead. Under the entry of Liam Sunmist it says:
+
+"Campaign use: Liam becomes important if anyone is killed and must be Raised from the Dead. He has his own priority list, which puts the Ducal family at the top, and any member of the nobility next. The he must think in terms of who is most important to the village as a whole. His limited capacity with this spell can make for some serious problems within an adventuring band." 
+
+It just highlights why Raise Dead sucks, at least the versions where it exists on tap. I generally do away with the spell or introduce strong cultural prejudices against those that are raised. Alternatively I might have creepy/nasty side effects from having returned from the dead (the least of those being things like no longer casting a shadow or fresh produce rapidly spoils in their presence). 
+
+The linked article was pretty off, but did lead me to wonder about a setting where high level priests held the entire population to ransom through their power over life and death and their ability to provide food and water. Perhaps an isolated city in a spoiled countryside full of death, mutants and desolation. The priests hold absolute power through their ability to raise dead, cure disease and create food and water to supplement the meager food production in the city. Those who rebel are cast out into the wilderness or perhaps killed and raised as undead to toil in secret caverns below the city. 
+
+ Like Like 
+
+ PrinceofNothing says: 
+
+ April 1, 2020 at 8:34 pm 
+
+[Raise Dead] 
+
+There's a way to make it work so it doesn't get applied wildly yet the player characters have access to it but it takes a sort of finesse to do it properly. I think cultural prejudice is probably the most promising of the bunch. Alternatively you could always rule the types of clerics that act as direct channels of the gods are very common in areas where evil and chaos are rampant and very uncommon in the decadent real-politik spattered halls of the capitol. 
+
+[Raise Dead Scheme] 
+
+To me it sounds like a classic badguy move. A new prophet comes along, tells everyone no one really needs to die and all they have been taught is a lie and pulls some miracles out of his sleeve to prove he is legit. Then he binds everyone to his will and in exchange they can see their loved ones again and live forever in the earthly paradise. Yikes. I think I based some artifact, the Obelisk of Ursk on that, where it offers a cure for all ailments at the price of eternal fealty, but anyone so treated cannot live without repeated applications of the Obelisk's power. Its a classic trope really. 
+
+ Like Like 
+
+ Christopher Potter says: 
+
+ March 31, 2020 at 2:26 pm 
+
+Apparently part of Allstons' inspiration for the Gazetteer was Britain after the Norman invasion. I suppose that makes the Cult of Half stuff a form of Arthur worship. 
+
+ Like Liked by 2 people 
+
+ Reply 
+
+ PrinceofNothing says: 
+
+ March 31, 2020 at 5:28 pm 
+
+Good first comment. 
+
+Welcome to Age of Dusk! 
+
+ Like Like 
+
+ Reply 
+
+ What a Fine Leperchaun says: 
+
+ March 31, 2020 at 2:32 pm 
+
+I do love myself some crazy nobles shenanigans. 
+
+ Like Like 
+
+ Reply 
+
+ Giacomo Cavaglià says: 
+
+ March 31, 2020 at 3:12 pm 
+
+[DON'T FUCKING CHANGE THE CALENDAR.]
+
+Ouch… I just finished my new setting's calendar and it's based on the overlapping cycles of two moons… now I must start all over again… :-[ 
+
+ Like Like 
+
+ Reply 
+
+ PrinceofNothing says: 
+
+ March 31, 2020 at 5:40 pm 
+
+It's al fine if you do the timekeeping yourself. "Today is Glymphorday. and it is the 69th month of Zo'fluk, when the ancient Titan Karbigol the Crusty erected the Turnip of Beffudlement on the Crystalline Meadow of Ying-Sung. It is characterized by its roonishness, as well as its xethundity, and is of varying length depending on the characters wisdom score and the colour of his eyes." 
+
+I can almost hear my own comic book nerd impression: "Actually Exundia uses a hexadecimal system since the advent of the thyolian ascendancy in the year of three flaming swords 635 A.T.C. so your question is noncupatory, begone, I am making love to a beautiful princess and do not wish to be disturbed." 
+
+(I get it, worldbuilding is a fine art. Just don't expect players to take it too seriously unless you tie some sort of game mechanic too it). 
+
+ Like Like 
+
+ Reply 
+
+ Giacomo Cavaglià says: 
+
+ April 1, 2020 at 10:57 am 
+
+Yep, the related game mechanic is that Black Magic and Animistic Magic (the only kinds of magic accessible to PGs) reacts different to moon phases. When one is at its lower the other is more powerful and viceversa. Generate gameplay 'cause if you're going to storm the necromancer tower you better check the moon first or you're in for unpleasant surprises.. 
+
+ Like Like 
+
+ Ash Adler says: 
+
+ March 31, 2020 at 5:07 pm 
+
+WordPress is being a pain about claiming I made a comment that isn't showing up, so hopefully I'm not just being dense about things. 
+
+Anyway, very interesting stuff. I'd skipped over all of the GAZ releases before, but you've got me curious about giving this one a look. 70 pages doesn't sound too bad; I think that's about the length of the Moldvay Basic book. 
+
+Any idea what the inspiration might've been for some of the naming? Most of them sound like actual names instead of typical fantasy letter salad (though "Traladaran" is borderline), which is a nice plus. 
+
+"Allston also introduces a nascent non-weapon proficiency system [1]…"
+
+I can't help wondering why "skills" was such a taboo word around TSR. NWPs feels like even more of a sore thumb in B/X, given the lack of regular weapon proficiencies (unless they were added in RC). 
+
+"[2] I recall the 2e PHB listing NWP's as (optional) but almost everyone I know who played 2e used them."
+
+You recall correctly, and I had the same experience in practice. 
+
+"Religion in all of B/X is handled weirdly…"
+
+D&D started out as a catholic world where a bunch of pagan stuff is objectively true, and I don't think it's ever really been able to reconcile that in a sensible way. I mean, unless you consider the "gods for everything and everyone!" approach as sensible. 
+
+"… the use of a different calender is jarring, even if 12 months with 28 days each seems more convenient at first."
+
+I'm no calendar expert, but that sounds like it could be a real world lunar calendar with different names slapped on it. There are non-Gregorian calendars still in active use. 
+
+That said, like your later point about different currencies, I've found that calendars can usually be handwaved because most players only care about lengths of time and how far off the next festival/holiday/tax collection/etc. is rather than absolute dates. 
+
+"What is probably better is that every little settlement fits, is intelligently placed (i.e. trade routes and bodies are considered), has distinguishing features and has a place within Karameikos. Its a coherent whole. It feels GROUNDED."
+
+This is the sort of content that makes me consider paying money for it. It strains my suspension of disbelief when that stuff clearly makes no sense, but I'm bad at coming up with sensible trade routes and polities and the like on my own. 
+
+"…the topic of Raise Dead is not mentioned in the Gazzeteer, even though there are numerous examples when such a spell would be of immense use, suggesting that it is a rare art indeed, employed cautiously, if at all. Music to my low fantasy ears."
+
+Excellent 🙂 
+
+ Like Like 
+
+ Reply 
+
+ PrinceofNothing says: 
+
+ April 1, 2020 at 8:41 pm 
+
+[Gaz] 
+
+Gaz 1 & 3 is where it's at. MAAAAYBE Some of the Elf or Dwarf ones not sure. 
+
+[Names] 
+
+The traladarans have eastern-european sounding names and all the places in Karameikos have original names in that style. The Thyatians are supposed to be so vast and ethnically mixed that you have a bastardized roman/greek core with german, english and nonsense names sprinkled throughout. Desmond. Ludwig. Severius. It's all good. 
+
+[Calendar] 
+
+I googled and apparently its been proposed but interest waned after WW2. Regardless, a diverging calender is an irritant, like adopting a non-decimal system. 
+
+[Trade-routes] 
+
+This one has rudementary trade routes with surface plausibility. I think Gaz 7? Darokin and Gaz 8 Minrothad tried to add proper trade routes complete with a system and a merchant lord class and everything, with mixed results. Both of those supplements kind of sucked, but the venture capitalist campaign was at least intriguing. 
+
+ Like Like 
+
+ Reply 
+
+ Anon says: 
+
+ April 10, 2020 at 5:31 am 
+
+"Any idea what the inspiration might've been for some of the naming? Most of them sound like actual names instead of typical fantasy letter salad (though 'Traladaran' is borderline), which is a nice plus."
+
+The Kerameikos was the potters' quarter and graveyard of ancient Athens. A lot of the other names in Mystara are also just real-world ones, an interesting distinction from most RPG settings with their word-salad nomenclature and one that seems to me to jive well with the Basic intent of the setting. (It also matches the tendency for the Gazetteer nations to frequently have very close real-world analogues that don't really fit together with one another, frustrating to a superannuated nerd like myself but no doubt a very wise decision for a product line focused on kids who would want to play Vikings, Red Indians, Thief of Bagdad Arabs, or matinee pirates in a straightforward way.) The worst letter-soup stuff, like Traladaran and Bargle, is just shit that Allston got saddled with by the preceding module writers as far as I can tell. 
+
+ Like Liked by 1 person 
+
+ Reply 
+
+ PrinceofNothing says: 
+
+ April 10, 2020 at 7:18 pm 
+
+Damn fine addition. Thanks Anon. 
+
+ Like Like 
+
+ Ash Adler says: 
+
+ April 10, 2020 at 9:14 pm 
+
+Thanks for the insight 🙂 . It's surprising how one can feel the difference between names that were actually used versus salad nomenclature. 
+
+ Like Like 
+
+ shaneward says: 
+
+ April 1, 2020 at 12:45 pm 
+
+I've stated on a few occasions that the information in the karameikos gazateer, the expert set and isle of dread is more than enough information for me to run the world. Anything more starts my brain worrying about canon etc. Mystara is the perfect setting in my opinion. 
+
+ Like Like 
+
+ Reply 
+
+ PrinceofNothing says: 
+
+ April 1, 2020 at 8:42 pm 
+
+I'll say nothing for the later Gazzeteers, but Karameikos and Isle of Dread is a damn fine combination. 
+
+ Like Like 
+
+ Reply 
+
+ the Turnip of Beffudlement says: 
+
+ April 12, 2020 at 5:33 pm 
+
+Happy to see the Glantri GAZ is getting some love. iirc the map is amazeballs. 
+
+On another front, re City Intrigue, you might want to peruse City of Greyhawk. Good boxed set with oodles of plot hooks. 
+
+On a related front, Mines of Bloodstone (H1) has an NPC generator with that shades of grey flavour. Didn't you mention some time ago that you would review that series? 
+
+Always good to see your posts. Stay safe! 
+
+Beffuddlely yours, 
+
+The Turnip 
+
+ Like Liked by 1 person 
+
+ Reply 
+
+ Autistic Scribbles says: 
+
+ July 11, 2020 at 11:45 am 
+
+Nice post. I learn something new and challenging on blogs I stumbleupon everyday. It will always be interesting to read articles from other authors and practice something from their websites. 
+
+ Like Like 
+
+ Reply 
+
+ PrinceofNothing says: 
+
+ September 19, 2020 at 6:08 pm 
+
+Another Voigt-Kampff compliant AI. You guys are learning to be more like us every day. 
+
+ Like Like 
+
+ Reply 
+
+ Jonathan Becker says: 
+
+ September 18, 2020 at 4:04 pm 
+
+@ Prince: 
+
+Nice blog you have here…stumbled across your August 2020 "LichLords" review a week ago or so, and have been spending the last few days combing through your posts and reviews. Pretty good stuff; I'm eagerly awaiting my POD copy of Red Prophet Rises. ; ) 
+
+RE Karameikos 
+
+Back in April of last year (2019) I used that silly A-Z Blog Challenge to do a deep-dive / dissection of GAZ1, including the later 2E setting material from Jeff Grubb. I lean more towards the literary side of fantasy (myth, fairy tale, and S&S) and these days I find a lot of the self-referential vanilla stuff (like the vast bulk of Mystara material) to be gutless and/or boring. But Karameikos has *some* potential…if you push it HARD in the right direction. 
+
+I know some people don't/won't do it, but I draw a hard line of demarcation between B/X and BECMI. The shift in marketing/philosophy at TSR led to all sorts of curtailing of the original material and inspirations in "basic" D&D. BECMI clerics don't even worship deities (check the description of the class in Mentzer's Basic book and compare it to the Tom Moldvay B/X entry) (!!) as the publishers of D&D bent over backwards to neuter themselves in the face of any potential controversy. This is what leads to the strange way religions of Karameikos (the various churches) are portrayed and the issues surrounding what is/is not immortals, etc. 
+
+I give Allston a lot of credit for working in the paradigm he did (and for his compilation of the BECMI rules into the rock solid Rules Cyclopedia), but I'm not a fan of the change in attitude between "old basic" and "new basic." And GAZ1 is firmly a product of the latter. 
+
+BUT…the original version of Karameikos isn't quite so bad; if you go back to the B/X (Cook/Marsh) Expert set you can sniff the potential in the way thay lawless, Old West-like Luln is portrayed as proper "base town" for adventurers, as opposed to Mentzer's prosaic Threshold with its magic carpet taxi service and giant buckets and whatnot. You *can* make Karameikos into something with a little more muscle, but you've got to throw out or modify a lot of the BECMI attitude. 
+
+To each their own, I know. But to me there's a huge difference between a B/X rulebook that lists inspirational reading material like Lovecraft, Leiber, Moorcock, and Wagner in its DM Information section and BECMI's rulebook which lists…um, nothing. Except for references to other TSR game products. Because what more was a kid supposed to need (post-1983) to supplement his/her fantasy acumen but the bland vanilla stylings of mid-80s TSR? 
+
+[for more Karameikos thoughts: http://bxblackrazor.blogspot.com/2019/04/ ] 
+
+ Like Like 
+
+ Reply 
+
+ PrinceofNothing says: 
+
+ September 19, 2020 at 6:26 pm 
+
+[Blog] 
+
+Thanks man. Be sure to let me know what you think about it. 
+
+[Karameikos] 
+
+I think we might have similar taste. From what little I could glean, 2E mystara is shit, plain and simple. The extra detail does little to appeal and The Curse of 2e did not pass it by, which is a shame. 
+
+[Clerics] 
+
+What's interesting to me is that Wrath of the Immortals era Clerics in Mystara did explicitly worship Immortals, to the point of speciality rules for different Immortals (which I use). I think the way churches turned out in Gaz 1 is a blessing in disguise, sadly not carried over by any other supplements. There's something about churches who worship more or less the same pantheon, yet have diametrically opposing viewpoints on many fundamental issues that kind of rings true. 
+
+[Old Karameikos vs New Karameikos] 
+
+That wild-west town, frontier sort of game, that's kind of what I try to run it as. A few disparate outposts and walled enclaves, linked by a patrolled road, with wilderness and danger outside. I absolutely detest commodity based magic item shoppes and rely exclusively on wandering mystics, cantankerous sages and other miscreants for item identification. Even Karameikos's magician's guild is already a little too civilized, but I have decided to adopt that out of respect for Allston's work. 
+
+You might find some solace in Specularum as portrayed in B6, a dirty, crime-ridden, medieval town which could almost be placed in Warhammer Fantasy. I also avoid all the lame shit in the BECMI/Mentzer sillyness, focusing more on the frontier war against humanoids/Chaos themes which I find interesting. 
+
+[Lovecraft, Leiber, Moorcock & Wagner] 
+
+Yeah that sounds pretty close to how I run it. Maybe with a major helping of Howard. 
+
+[More thoughts] 
+
+I might at that. Fare thee well neighbor, and welcome to Age of Dusk. 
+
+ Like Like 
+
+ Reply 
+
+ Jonathan Becker says: 
+
+ September 20, 2020 at 12:10 am 
+
+RE 2E Mystara 
+
+I dislike most 2E. Allston gets credit in the Kingdom of Karameikos (2e supplement) mostly, I think, because much of the writing is cut-and-pasted from GAZ1. Some of the more interesting changes, however, I credit Grubb. Unfortunately, there not nearly enough of those to recommend the thing. 
+
+RE Wrath of the Immortals 
+
+I see a lot of "walk back" on BECMI (and Mentzer-edition D&D) regarding immortals/deities in this book. I actually tried running the WotI campaign from this set back in the early 2000s (probably about the time I gave up 3E). It's…fine. In the way BECMI/RC is "fine" for the sake of a "complete" game system. I like a little more abstraction and mystery to my game (especially with regard to "higher powers" and specific system functionality). Also I hate most of the cartoony interior art of WotI. Why would an ascended mortal choose to look like a cartoon skeleton in a robe (Thanos)? Only a real asshat would do that. Maybe me. 
+
+RE Specularum and B6 
+
+There are some serious differences between the way Specularum, Duke Stefan, and Karameikos itself are portrayed pre-GAZ1 and post-GAZ1. Consider WHF-style Threshold in Nights Dark Terror versus squeaky-clean GAZ1's update. 
+
+B6 (Veiled Society) is one of the last couple TSR modules I purchased new off the shelf and I've kept it to this day. Despite its suck, I have a soft spot for it (I'm a sucker for a Roslov cover). Plus, I've always read Specularum as a "Sanctuary Light" kind of town (that's Sanctuary from the Robert Asprin Thieves World books): the parallels are pretty close, in my opinion. But, as with all things (it sometimes seems) the place is in need of a hard push…or maybe a complete overhaul. Certainly the secret society-like "thieves guild" that is the Veiled Society needs a little more pulp to its mustache-twisting villainy. 
+
+ Like Like 
+
+ Pingback: [Review] Vornheim (Lotfp); Artpunk Ground Zero - Age of Dusk 
+
+ Pingback: [Review] Wandering Heroes of Ogre Gate (Core game) Pt. V; Hey Kid, wanna learn some Magic? - Age of Dusk 
+
+ Anders H says: 
+
+ November 10, 2023 at 10:42 am 
+
+"Skills in DnD are a godsend." 
+
+I'll hold on asking you to return your old-school club card and have your "OSR" tattoo removed, but I do want to ask as a serious question - What exactly do you think it adds to the game? 
+
+ Like Like 
+
+ Reply 
+
+ Prince says: 
+
+ November 10, 2023 at 1:51 pm 
+
+This was an old review, and probably no longer reflects my current position. The last two systems I have used (LL & AD&D 1e) do not make use of proficiencies and the bulk of situations are handled just fine. Ambushing or sneaking goes on the surprise rules etc. There are a few cases where it could be useful (like say, a wizard trying to climb a wall), but in general the game runs perfectly well without them. 
+
+I don't hate the implementation of skills in ACKs, or in Science fiction games where there is a great deal of specialized activity that does not merit its own specific class niche, but in most OSR games, I would not miss them. 
+
+ Like Like 
+
+ Reply 
+
+Leave a comment Cancel reply 
+
+ Δ 
+
+Search 
+
+ Search for: 
+
+ Follow Blog via Email 
+
+Enter your email address to follow this blog and receive notifications of new posts by email. 
+
+ Email Address: 
+
+ Follow 
+
+ Join 404 other subscribers 
+
+History 
+
+ August 2026 (2) 
+
+ July 2026 (1) 
+
+ June 2026 (3) 
+
+ May 2026 (3) 
+
+ April 2026 (4) 
+
+ March 2026 (1) 
+
+ February 2026 (6) 
+
+ January 2026 (7) 
+
+ December 2025 (9) 
+
+ November 2025 (3) 
+
+ October 2025 (2) 
+
+ September 2025 (4) 
+
+ August 2025 (2) 
+
+ July 2025 (4) 
+
+ June 2025 (2) 
+
+ May 2025 (4) 
+
+ April 2025 (1) 
+
+ March 2025 (2) 
+
+ February 2025 (2) 
+
+ January 2025 (8) 
+
+ December 2024 (5) 
+
+ November 2024 (6) 
+
+ October 2024 (10) 
+
+ September 2024 (8) 
+
+ August 2024 (3) 
+
+ July 2024 (5) 
+
+ June 2024 (4) 
+
+ May 2024 (4) 
+
+ April 2024 (6) 
+
+ March 2024 (7) 
+
+ February 2024 (6) 
+
+ January 2024 (5) 
+
+ December 2023 (10) 
+
+ November 2023 (12) 
+
+ October 2023 (14) 
+
+ September 2023 (12) 
+
+ August 2023 (10) 
+
+ July 2023 (10) 
+
+ June 2023 (4) 
+
+ May 2023 (11) 
+
+ April 2023 (9) 
+
+ March 2023 (10) 
+
+ February 2023 (11) 
+
+ January 2023 (16) 
+
+ December 2022 (11) 
+
+ November 2022 (14) 
+
+ October 2022 (19) 
+
+ September 2022 (17) 
+
+ August 2022 (13) 
+
+ July 2022 (8) 
+
+ June 2022 (13) 
+
+ May 2022 (9) 
+
+ April 2022 (8) 
+
+ March 2022 (7) 
+
+ February 2022 (12) 
+
+ January 2022 (11) 
+
+ December 2021 (8) 
+
+ November 2021 (7) 
+
+ October 2021 (7) 
+
+ September 2021 (20) 
+
+ August 2021 (5) 
+
+ July 2021 (10) 
+
+ June 2021 (10) 
+
+ May 2021 (9) 
+
+ April 2021 (6) 
+
+ March 2021 (11) 
+
+ February 2021 (8) 
+
+ January 2021 (14) 
+
+ December 2020 (12) 
+
+ November 2020 (7) 
+
+ October 2020 (8) 
+
+ September 2020 (11) 
+
+ August 2020 (11) 
+
+ July 2020 (13) 
+
+ June 2020 (7) 
+
+ May 2020 (9) 
+
+ April 2020 (9) 
+
+ March 2020 (12) 
+
+ February 2020 (9) 
+
+ January 2020 (6) 
+
+ December 2019 (2) 
+
+ November 2019 (1) 
+
+ October 2019 (12) 
+
+ September 2019 (8) 
+
+ August 2019 (5) 
+
+ July 2019 (1) 
+
+ June 2019 (2) 
+
+ May 2019 (3) 
+
+ April 2019 (5) 
+
+ March 2019 (7) 
+
+ February 2019 (8) 
+
+ January 2019 (10) 
+
+ December 2018 (5) 
+
+ November 2018 (7) 
+
+ October 2018 (3) 
+
+ September 2018 (4) 
+
+ August 2018 (4) 
+
+ July 2018 (5) 
+
+ June 2018 (7) 
+
+ May 2018 (9) 
+
+ April 2018 (9) 
+
+ March 2018 (11) 
+
+ February 2018 (7) 
+
+ January 2018 (8) 
+
+ December 2017 (4) 
+
+ November 2017 (7) 
+
+ October 2017 (7) 
+
+ September 2017 (4) 
+
+ August 2017 (7) 
+
+ July 2017 (4) 
+
+ June 2017 (5) 
+
+ May 2017 (3) 
+
+ April 2017 (8) 
+
+ March 2017 (8) 
+
+ February 2017 (6) 
+
+ January 2017 (6) 
+
+ December 2016 (4) 
+
+ November 2016 (4) 
+
+ October 2016 (3) 
+
+ September 2016 (8) 
+
+ August 2016 (4) 
+
+ July 2016 (7) 
+
+ June 2016 (9) 
+
+ May 2016 (8) 
+
+ April 2016 (5) 
+
+ March 2016 (9) 
+
+ February 2016 (4) 
+
+ January 2016 (3) 
+
+ December 2015 (4) 
+
+ November 2015 (9) 
+
+ October 2015 (7) 
+
+ September 2015 (10) 
+
+ August 2015 (13) 
+
+ July 2015 (13) 
+
+ June 2015 (5) 
+
+Tags * 
+ ** 
+ *** 
+ **** 
+ ***** 
+ 5e 
+ 5what? 
+ Actual Play? Scandalous! 
+ Actual Play Bitches 
+ AD&D 
+ AD&D 1e 
+ AD&D 2e 
+ Adventure 
+ Age of Dusk 
+ anthology 
+ Artpunk Crusade 
+ Beholder magazine 
+ Bestiary 
+ Blood for the fucking Blood God 
+ Bookfagging 
+ Books'n'shit 
+ Breaking News 
+ Campaign Setting 
+ Carcosa 
+ Casus Belli 
+ Core Game 
+ Cosmic Horror 
+ D20 
+ delicious controversy 
+ DnD Basic 
+ Dungeon 
+ Dungeon Magazine 
+ Epic 
+ Essay 
+ Fookin Vampires 
+ Fully functional with multiple techniques 
+ gnashing of teeth 
+ Graetest Gaem Evar? 
+ Haunted House 
+ Historical 
+ Horror 
+ i dont even 
+ Labyrinth Lord 
+ Lamentations of the Flame Princess 
+ Level 10+ 
+ Lvl 1 - 3 
+ Lvl 4 - 6 
+ Lvl 7 - 10 
+ Lvl 10+ 
+ Megadungeon 
+ meh 
+ Mythical 
+ NGR 
+ No Artpunk 
+ NO ARTPUNK CONTEST 
+ OD&D 
+ Oh no its 2e! 
+ OSE 
+ OSR 
+ Planar jaunt 
+ Ranting 
+ Review 
+ Role Aids 
+ sandbox 
+ Setting 
+ Shiny and Chrome 
+ Silly 
+ Sorcery-related Shenanigans 
+ Sourcebook 
+ Space the Final Frontier 
+ Sword & Sorcery 
+ Tombcrawl 
+ WARHAMMER FANTASY 
+ weird 
+ white dwarf 
+Categories Categories 
+ Select Category 
+ Actual Play (98) 
+ Age of Dusk (47) 
+ Booktalk (26) 
+ Carcosa (16) 
+ Cauldron (2) 
+ Essay (6) 
+ Hagiography (4) 
+ Interview (5) 
+ No Artpunk (59) 
+ Ranting (49) 
+ Reviews (596) 
+ Setting Spotlight (4) 
+ Stuff I wrote (21) 
+ Translations (6) 
+ Uncategorized (262) 
+
+Top Posts & Pages 
+ 2026 Reading List - [May-August] 
+ Reviews 
+ [Review] Stonehell Pt. I (LL): Down Night-Haunted Halls; Overlord 
+ [Review] Troika! (Core rules); Artpunk Prime 
+ [Review] In the Shadow of Tower Silveraxe (OSE); Standard Template Construct 
+ Prince on 2026 Reading List - [May-August] September 5, 2026 
+
+Historically, the Night Lords are probably most reminiscent of Hitler's Dirlewanger brigade; a unit recruited from convicted criminals sent to… 
+
+ Simulated Knave on 2026 Reading List - [May-August] September 4, 2026 
+
+The trilogy is very solid, though I think it does gloss over a bit of how horrible they are. It's… 
+
+ Prince on 2026 Reading List - [May-August] September 2, 2026 
+
+It makes sense that after this one they turned a bold new leaf and did a massive space opera with… 
+
+ The Heretic on 2026 Reading List - [May-August] September 2, 2026 
+
+I remember reading the Black Fleet Rising trilogy. The only interesting thing about it was Luke's search for his mother,… 
+
+ Prince on 2026 Reading List - [May-August] September 2, 2026 
+
+Lear the Giant King ey? Ill have to check that one out. My game has been going relatively slowly, with… 
+
+ALL BLOG POSTS AND COMMENTS COPYRIGHT (c) 2015-2023 Prince of Nothing. All Rights Reserved. Reproduction Without Written Permission is Prohibited. Powered by WordPress. 
+
+ Blog at WordPress.com. 
+
+ Comment 
+
+ Reblog 
+
+ Subscribe 
+
+ Subscribed 
+
+ Age of Dusk 
+
+Join 404 other subscribers 
+
+ Sign me up 
+
+ Already have a WordPress.com account? Log in now. 
+
+ Age of Dusk 
+
+ Subscribe 
+
+ Subscribed 
+
+ Sign up 
+
+ Log in 
+
+ Copy shortlink 
+
+ Report this content 
+
+ View post in Reader 
+
+ Manage subscriptions 
+
+ Collapse this bar 
+
+ Loading Comments... 
+
+ Write a Comment... 
+
+ Email (Required) 
+
+ Name (Required) 
+
+ Website 
+
+ %d 
+

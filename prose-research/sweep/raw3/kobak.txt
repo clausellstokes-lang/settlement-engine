@@ -1,0 +1,1081 @@
+ 
+ 
+ 
+ Delving into ChatGPT usage in academic writing through excess vocabulary 
+ 
+ 
+ 
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ Report GitHub Issue 
+ × 
+ 
+
+ 
+ Title: 
+ 
+
+ Content selection saved. Describe the issue below: 
+
+ Description: 
+ 
+ 
+
+ 
+ Submit without GitHub 
+ Submit in GitHub 
+ 
+ 
+ 
+ 
+ arXiv is now an independent nonprofit! 
+ Learn more 
+ × 
+ 
+
+ 
+ 
+ 
+ Back to arXiv 
+ 
+ 
+ 
+ 
+ Why HTML? 
+ 
+ 
+ 
+ 
+ Report Issue 
+ 
+ 
+ 
+ 
+ 
+ 
+ Back to Abstract 
+ 
+ 
+ 
+ 
+ 
+ 
+ Download PDF 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Abstract 
+ 1 Introduction 
+ 2 Results 
+ 3 Discussion 
+ 4 Methods 
+ 
+ 4.1 Dataset 
+ 4.2 Pre-processing 
+ 4.3 Statistical analysis 
+ 4.4 Word annotations 
+ 4.5 Subgroup analysis 
+ 4.6 LLM usage 
+ 4.7 Data and code availability 
+ 
+ References 
+ 
+ 
+ 
+ 
+ 
+ License: CC BY-SA 4.0
+ 
+ 
+arXiv:2406.07016v1 [cs.CL] 11 Jun 2024 
+ 
+ 
+ Delving into ChatGPT usage in academic writing through excess vocabulary 
+ 
+ 
+ Dmitry Kobak  
+ 
+ Affiliation: Hertie Institute for AI in Brain Health, University of Tübingen, Germany
+ 
+ Affiliation: Tübingen AI Center, Tübingen, Germany
+ 
+    
+ Rita González-Márquez
+ 
+ Affiliation: Hertie Institute for AI in Brain Health, University of Tübingen, Germany
+ 
+ Affiliation: Tübingen AI Center, Tübingen, Germany
+ 
+ Affiliation: Alphabetic order
+ 
+    
+ Emőke-Ágnes Horvát  
+ 
+ Affiliation: Northwestern University, Evanston, Illinois, USA
+ 
+ Affiliation: Alphabetic order
+ 
+    
+ Jan Lause  
+ 
+ Affiliation: ✉  dmitry.kobak@uni-tuebingen.de 
+ 
+ Affiliation: Hertie Institute for AI in Brain Health, University of Tübingen, Germany
+ 
+ Affiliation: Tübingen AI Center, Tübingen, Germany
+ 
+ Affiliation: Alphabetic order
+ 
+
+ Abstract 
+ 
+ Recent large language models (LLMs) can generate and revise text with human-level performance, and have been widely commercialized in systems like ChatGPT. These models come with clear limitations: they can produce inaccurate information, reinforce existing biases, and be easily misused. Yet, many scientists have been using them to assist their scholarly writing. How wide-spread is LLM usage in the academic literature currently? To answer this question, we use an unbiased, large-scale approach, free from any assumptions on academic LLM usage. We study vocabulary changes in 14 million PubMed abstracts from 2010–2024, and show how the appearance of LLMs led to an abrupt increase in the frequency of certain style words. Our analysis based on excess words usage suggests that at least 10% of 2024 abstracts were processed with LLMs. This lower bound differed across disciplines, countries, and journals, and was as high as 30% for some PubMed sub-corpora. We show that the appearance of LLM-based writing assistants has had an unprecedented impact in the scientific literature, surpassing the effect of major world events such as the Covid pandemic. 
+ 
+ 
+ 
+ 1 Introduction 
+
+ 
+ When the world changes, human-written text changes. Major events like wars and revolutions affect word frequency distributions in text corpora ( Bochkarev et al., 2014 ) . The rise and fall of scientific disciplines is traceable in scholarly writing ( Hall et al., 2008 ; Bizzoni et al., 2020 ) . Do technological advances leave a similar footprint on our writing? 
+ 
+ 
+ With the release of ChatGPT in November 2022, human writing underwent an unprecedented change: For the first time, a large language model (LLM) was widely available that could generate and revise texts with human-like performance in several domains — including academia ( Ahmed et al., 2023 ) , where many have hoped that LLMs might lead to more equity ( Berdejo-Espinola and Amano, 2023 ) . Many researchers have since integrated LLMs in their daily writing tasks ( Van Noorden and Perkel, 2023 ) and even co-authored papers with LLMs ( Stokel-Walker, 2023 ) . This has led to worries about research integrity, factual mistakes in LLM-generated content ( Mittelstadt et al., 2023 ; Lindsay, 2023 ; Walters and Wilder, 2023 ; Ji et al., 2023 ; Zhang et al., 2023 ) , and misuse of LLMs by so-called paper mills that produce fake publications ( Kendall and Teixeira da Silva, 2024 ) . These worries sparked attempts to track the footprint of LLM-assisted writing in scientific texts. 
+ 
+ 
+ Figure 1: Frequencies of PubMed abstracts containing certain words. Black lines show counterfactual extrapolations from 2021–22 to 2023–24. The first six words are affected by ChatGPT; the last three relate to major events that influenced scientific writing and are shown for comparison. 
+ 
+ 
+ Figure 2: Words showing increased frequency in 2024. (a) Frequencies in 2024 and frequency ratios ( r r ). Both axes are on log-scale. Only a subset of points are labeled for visual clarity. The dashed line shows the threshold defining excess words (see text). Words with r > 90 r>90 are shown at r = 90 r=90 . (b) The same but with frequency gap ( OPEN δ ) \delta) as the vertical axis. 
+ 
+ 
+ Recent approaches attempting to quantify the increasing use of LLMs in scientific papers fall in three groups. One group of studies employed LLM detectors, which are blackbox models trained to detect LLM writing based on ground-truth human and LLM texts ( Akram, 2024 ; Cheng et al., 2024 ; Liu and Bu, 2024 ; Picazo-Sanchez and Ortiz-Martin, 2024 ) . Another group of works explicitly modeled word frequency distribution in scientific corpora as a mixture distribution of texts produced by humans and by LLMs, again estimated using ground-truth human and LLM texts ( Liang et al., 2024b ; Liang et al., 2024a ; Geng and Trotta, 2024 ) . The third group of studies relied on lists of marker words, known to be over-used by LLMs, which are typically stylistic words unrelated to the text content ( Gray, 2024 ; Liu and Bu, 2024 ) . 
+ 
+ 
+ All of these approaches share a common limitation: they require a ground-truth training set of LLM- and human-written texts. Usually, human-written texts are obtained from pre-LLM years, while LLM-written texts are generated by a set of prompts. This setup can introduce biases, as it requires assumptions on which models scientists use for their LLM-assisted writing, and how exactly they prompt them. Furthermore, work based on LLM detector models suffers from their blackbox nature, as it does not allow further interrogation of the results on the word level, which can make their interpretation difficult. Most importantly, all existing work focuses on detecting LLM texts, and none has attempted to systematically compare or relate LLM-induced changes in scientific writing to previous shifts in scholarly texts. This begs the question if the nature and magnitude of the observed changes are comparable to changes that regularly occur due to changing fashions, rising research topics, and global events such as the Covid-19 pandemic—or if LLMs impact scientific writing in an unprecedented way. 
+ 
+ 
+ Here, we suggest a novel, data-driven, and unbiased approach to track LLM usage in academic texts without these limitations: excess word usage.
+We were inspired by studies of excess mortality ( Islam et al., 2021 ; Karlinsky and Kobak, 2021 ; Msemburi et al., 2023 ) that looked at the excess of fatalities during the Covid pandemic compared to pre-Covid mortality. We adapt this idea to LLM-induced changes in word usage and track the excess use of words after the release of ChatGPT-like LLMs compared to pre-LLM years.
+Applying this analysis to the corpus of over 14 million 2010–24 biomedical abstracts from the PubMed library (see Methods) allowed us to track changes in scientific writing over the last decade. We found that the LLM-induced changes were unprecedented in both quality and quantity. 
+ 
+ 
+ 
+ 2 Results 
+
+ 
+ We downloaded all PubMed abstracts until March 2024 and used all 14.2 M English-language abstracts from 2010 onwards, with only minimal filtering (see Methods). We then computed the matrix of word occurrences that shows which abstracts contain which words, resulting in a 14.2 M × \times 2.4 M sparse binary matrix. For each word, we obtained its occurrence frequency per year by normalizing with the total number of papers published in that year. 
+ 
+ 
+ Some words strongly increased their occurrence frequency in 2023–2024 (Figure 1 ). To quantify this increase, we calculated counterfactual expected frequency in 2024 based on the linear extrapolation of word frequencies in 2021 and 2022 (see Methods). Note that we did not use 2023 frequencies for this calculation, because they could already have been affected by ChatGPT. Comparing the empirical 2024 frequency p p with counterfactual projection q q , we obtained the excess frequency gap δ = p − q \delta=p-q and the excess frequency ratio r = p / q r=p/q as two measures of excess usage. These two measures are complementary. The frequency gap is well-suited to highlight excess usage of frequent words, while the frequency ratio points to the excess usage of infrequent words. For example, frequency increases from 0.001 to 0.01 and from 0.5 to 0.6 are both noteworthy in our case. Yet, the first example frequency increase is captured by a high r r value whereas the second example has a high δ \delta value. 
+ 
+ 
+ In the following analysis, we focused on 26.6 K words with frequency p p above 10 − 4 10^{-4} in both 2023 and 2024. With over 1 million abstracts per year, this corresponds to > 100 {>}100 usages per year. Across all these words, we found many with strong excess usage in 2024 (Figure 2 ). Less common words with strong excess usage included delves ( r = 25.2 r=25.2 ), showcasing ( r = 9.2 r=9.2 ) and underscores ( r = 9.1 r=9.1 ), together with their grammatical inflections (Figure 2 a). More common words with excess usage included potential ( δ = 0.041 \delta=0.041 ), findings ( δ = 0.027 \delta=0.027 ), and crucial ( δ = 0.026 \delta=0.026 ) (Figure 2 b). 
+ 
+ 
+ Is this unusual, or do similar frequency changes happen every year? For comparison, we did the same analysis for all years from 2013 to 2023 (Figures S1 – S4 ). We found words like ebola with r = 9.9 r=9.9 in 2015 and zika with r = 40.4 r=40.4 in 2017, but from 2013 until 2019, no single word has ever shown excess frequency gap δ > 0.01 \delta>0.01 . This changed during the Covid pandemic: in 2020–2022 words like coronavirus , lockdown , and pandemic showed very large excess usages (up to r > 1000 r>1000 and δ = 0.037 \delta=0.037 ), in agreement with the observation that the Covid pandemic had an unprecedented effect on biomedical publishing ( González-Márquez et al., 2024 ) . 
+ 
+ 
+ Figure 3: (a) Number of excess words per year, decomposed into the excess content words and excess style words. In each year, we show, as an example, the word with the highest frequency ratio r r among excess words with p > 10 − 3 p>10^{-3} and r > 3 r>3 . (b) Number of excess words per year, decomposed into nouns, verbs, adverbs, and adjectives. 
+ 
+ 
+ To compare the size of excess vocabulary between years, we defined as excess words all words with δ > 0.01 \delta>0.01 or
+ log 10 ⁡ r > log 10 ⁡ 2 4 ​ log 10 ​ p \log_{10}r>\frac{\log_{10}2}{4}\log_{10}p where p p is frequency in 2024 (see dashed lines in Figure 2 ); these thresholds were chosen such that most words in pre-Covid years were well below (Figures S1 – S4 ). The number of excess words showed a marked rise during the Covid pandemic (up to 188 words in 2021) followed by an even larger rise (to 329) in the first quarter of 2024 (Figure 3 ), roughly one year after ChatGPT was released. 
+ 
+ 
+ We manually annotated all 774 unique excess words from 2013–24 into content words, like masks or convolutional , and style words, like intricate or notably (and a small number of ambiguous words, see Methods). The excess vocabulary during the Covid pandemic consisted almost entirely of content words (such as respiratory , remdesivir , etc.), whereas the excess vocabulary in 2024 consisted almost entirely of style words (Figure 3 a). Out of all 280 excess style words in 2024, 66% were verbs and 18% were adjectives. For comparison, most excess words in prior years were nouns (Figure 3 b). 
+ 
+ 
+ Figure 4: (a) Observed frequency ( P P ) and counterfactual expected frequency ( Q Q ) in 2024 of abstracts containing at least one of the excess style words from 2024 with frequency p p below a given threshold. (b) The frequency gap Δ = P − Q \Delta=P-Q as a function of the threshold. 
+ 
+ 
+ Figure 5: (a) Frequency of abstracts containing at least one word from a given word group. (b) Frequency gap estimates for various fields. (c) Frequency gap estimates for various countries. (d) Frequency gap estimates for various journals. Gray circles show multiple journals grouped together. (e) Frequencies as in (a) for various PubMed subsets; Δ = ( Δ common + Δ rare ) / 2 \Delta=(\Delta_{\mathrm{common}}+\Delta_{\mathrm{rare}})/2 values are shown. 
+ 
+ 
+ The unprecedented increase in excess style words in 2024 allows to use them as markers of ChatGPT usage. Each frequency gap δ \delta gives a lower bound on the fraction of abstracts that went through LLMs in 2024. For example, δ = 0.04 \delta=0.04 for the LLM style marker word potential means that in 2024 there were 4 percentage points more abstracts containing that word than expected based on the 2021–22 data, suggesting that at least 4% of all abstracts in 2024 went through an LLM. We reasoned that combining multiple words together can increase the lower bound. For that, we grouped together all 2024 excess style words with frequency p < T p<T and computed the frequency gap Δ = P − Q \Delta=P-Q in abstracts using at least one of these words, as a function of threshold T T (Figure 4 ). Here P P and Q Q are the observed and the expected frequencies of such abstracts in 2024. We obtained the highest Δ \Delta value with T ≈ 0.01 T\approx 0.01 (resulting in 209 words). The frequency gap was Δ rare = 0.103 \Delta_{\mathrm{rare}}=0.103 , putting the lower bound on the LLM usage in 2024 at 10% (‘rare words’ in Figure 5 a). Importantly, this is only a lower bound because some of the abstracts that did go through an LLM may not contain any of the style words we used for this analysis (see Discussion). 
+ 
+ 
+ We found that we could obtain a very similar lower bound using a non-overlapping group of only ten excess style words with high individual δ \delta values: across , additionally , comprehensive , crucial , enhancing , exhibited , insights , notably , particularly , within . We manually selected these ten words to maximize their combined frequency gap in order to get the maximal lower bound. This group yielded a very similar frequency gap: Δ common = 0.098 \Delta_{\mathrm{common}}=0.098 (‘common words’ in Figure 5 a). As the two groups were non-overlapping, this serves as an independent confirmation of the lower bound. 
+ 
+ 
+ Finally, we performed the same analysis by various subgroups of PubMed papers. We computed frequency gaps Δ common \Delta_{\mathrm{common}} and Δ rare \Delta_{\mathrm{rare}} based on the same two word groups for different biomedical fields, affiliation countries, journals, and men and women among the first and the last authors, inferred from their first names (see Methods). We found pronounced heterogeneity among most of these categories. 
+ 
+ 
+ Computational fields like computation and bioinformatics showed Δ = ( Δ common + Δ rare ) / 2 ≈ 0.20 \Delta=(\Delta_{\mathrm{common}}+\Delta_{\mathrm{rare}})/2\approx 0.20 (Figure 5 b). Among countries, some English-speaking countries like United Kingdom and New Zealand showed Δ ≤ 0.03 \Delta\leq 0.03 , while countries like China, South Korea, and Taiwan showed Δ > 0.15 \Delta>0.15 (Figure 5 b). The difference between inferred genders was minor (0.08 for male and 0.07 for female, both for the first and the last authors). 
+ 
+ 
+ Among individual journals, we found very high Δ \Delta values, e.g. 0.24 for Sensors (an open access journal published by MDPI) and 0.20 for Cureus (an open access journal with simplified review process, published by Springer Nature). We analyzed several groups of journals pooled together and found high Δ \Delta for MDPI (0.17) and Frontiers (0.17) journals. For very selective high-prestige journals like Nature , Science , and Cell , and for Nature family journals, Δ \Delta was much lower (0.06 and 0.07 respectively), suggesting that easily-detectable LLM usage was negatively correlated with perceived prestige. 
+ 
+ 
+ To find subgroups with the strongest effect, we looked at intersections of different groups and found Δ = 0.31 \Delta=0.31 for papers from South Korea published in Sensors and Δ = 0.35 \Delta=0.35 for computation papers from China. 
+ 
+ 
+ 
+ 3 Discussion 
+
+ 
+ In this paper, we leveraged excess word usage as a data-driven, principled method to show how LLMs have affected scientific writing. We found that the effect was unprecedented in quality and quantity: hundreds of words have abruptly increased their frequency after ChatGPT became available. In contrast to previous shifts in word popularity, the 2023–24 excess words were not content-related nouns, but rather style-affecting verbs and adjectives that ChatGPT-like LLMs prefer. 
+ 
+ 
+ The following examples from three real 2023 abstracts illustrate this ChatGPT-style flowery language: 
+ 
+ • 
+ 
+ By meticulously delving into the intricate web connecting […] and […], this comprehensive chapter takes a deep dive into their involvement as significant risk factors for […]. 
+ 
+ • 
+ 
+ A comprehensive grasp of the intricate interplay between […] and […] is pivotal for effective therapeutic strategies. 
+ 
+ • 
+ 
+ Initially, we delve into the intricacies of […], accentuating its indispensability in cellular physiology, the enzymatic labyrinth governing its flux, and the pivotal […] mechanisms. 
+ 
+ 
+ Our analysis of the excess frequency of such LLM-preferred style words suggests that at least 10% of 2024 PubMed abstracts were processed with LLMs. With ∼ 1.5 {\sim}1.5 million papers being currently indexed in PubMed per year, this means that LLMs assist in writing at least 150 thousand papers per year. This estimate is based on our emerging lists of LLM marker words that showed large excess usage in 2024, which strongly suggests these words are preferred by LLMs like ChatGPT that became popular by that time. Importantly, this is only a lower bound: abstracts not using any of the LLM marker words are not included in our estimates, so the true fraction of LLM-processed abstracts is likely much higher. 
+ 
+ 
+ Our estimated lower bound on LLM usage ranged from below 5% to over 30% across different academic fields, affiliation countries, and journals. This heterogeneity could correspond to actual differences in LLM adoption. For example, the high lower bound on LLM usage in computational fields (20%) could be due to computer science researchers being more familiar with and willing to adopt LLM technology. In non-English speaking countries, LLMs might indeed help non-natives with editing English texts, which could justify their extensive use. Finally, authors publishing in journals with expedited and/or simplified review processes might be grabbing for LLMs to write low-effort articles. 
+ 
+ 
+ However, the heterogeneity in lower bounds could also point to other factors beyond actual differences in LLM adoption. First, it could highlight non-trivial discrepancies in how authors of different linguistic backgrounds censor suggestions from writing assistants, thereby making the use of LLMs non-detectable for word-based approaches like the one we developed here. It is possible that native and non-native English speakers actually use LLMs equally often, but native speakers may be better at noticing and actively removing unnatural style words from LLM outputs. Our method would not be able to pick up the increased frequency of such disguised LLM usage. Second, publication timelines in computational fields are often shorter than in many biomedical or clinical areas, meaning that any potential increase in LLM usage can be detected earlier in computational journals. Third, the same is true for journals and publishers with faster turnaround times than thoroughly reviewed, high-prestige journals. Our method can easily be used to reevaluate these results after a couple of publication cycles in all fields and journals. We expect the lower bounds documented here to increase with these longer observation windows. 
+ 
+ 
+ Given these potential explanations for the heterogeneity in the lower bound of LLM use for scientific editing, our results indicate widespread usage in most fields, countries, and journals, including the most prestigious ones. We argue that the true LLM usage in academic writing may be closer to the highest lower bounds we observed, as those may be corpora where LLM usage is the least disguised and the easiest to detect. These estimates are around 30%, which is in line with recent surveys on researchers’ use of LLMs for manuscript writing ( Van Noorden and Perkel, 2023 ) . Our results show how those self-reported behaviors translate into real-world LLM usage in final publications. 
+ 
+ 
+ Our results go beyond other studies on detecting LLM fingerprints in academic writing. Gray (2024) described a 2 2 -fold increase in frequency for the words intricate and meticulously in 2023, while Liang et al. (2024b) identified pivotal , intricate , showcasing , and realm as the top LLM-preferred words based on a corpus of LLM-generated text. Our study is the first to perform a systematic search for LLM marker words based on excess usage in published scientific texts. We found 280 style words with highly elevated frequencies, and indeed all the above examples appear in our list. 
+ 
+ 
+ Some studies have reported differences in estimated LLM usage between English- and non-English-speaking countries ( Cheng et al., 2024 ; Liu and Bu, 2024 ; Picazo-Sanchez and Ortiz-Martin, 2024 ) , academic fields ( Akram, 2024 ) , and publishing venues. For example, Liang et al. (2024b) estimated the fraction of LLM-assisted papers in early 2024 to vary between 7% for Nature Portfolio papers and 17% for computer science preprints. Importantly, our analysis is based on 5–200 times more papers per year than these prior works, which allowed us to study LLM adoption with greater statistical power and across a much larger diversity of countries, fields, and journals. 
+ 
+ 
+ Additionally, all of these prior studies relied on ground-truth LLM-generated and human-written scientific texts, with no guarantee that the corpus of LLM-generated texts is representative of all LLM use cases occurring in actual scholarly practice. Our analysis avoids this limitation by detecting emerging LLM fingerprints directly from published abstracts. Furthermore, our approach is not restricted to LLM usage and can be applied to abstracts from previous years. This allowed us to put the LLM-induced changes in scientific writing into a historic context, and to conclude that these changes are without precedent. 
+ 
+ 
+ What are the implications of this ongoing revolution in scientific writing? Scientists use LLM-assisted writing because LLMs can improve grammar, rhetoric, and overall readability of their texts, help translate to English, and quickly generate summaries ( Van Veen et al., 2024 ; Zhang et al., 2024 ) . However, LLMs are infamous for making up references ( Walters and Wilder, 2023 ) , providing inaccurate summaries ( Tang et al., 2024 ; Kim et al., 2024 ) , and making false claims that sound authoritative and convincing ( Mittelstadt et al., 2023 ; Ji et al., 2023 ; Zhang et al., 2023 ; Zheng and Zhan, 2023 ) . While researchers may notice and correct factual mistakes in LLM-assisted summaries of their own work, it may be harder to spot errors in LLM-generated literature reviews or discussion sections. 
+ 
+ 
+ Furthermore, LLMs can mimic biases and other deficiencies from their training data ( Bender et al., 2021 ; Navigli et al., 2023 ; Bai et al., 2024 ; Choudhury, 2023 ) , or even outright plagiarise ( McCoy et al., 2023 ) . This makes LLM outputs less diverse and novel than human-written text ( Padmakumar and He, 2023 ; Alvero et al., 2024 ) . Such homogenisation can degrade the quality of scientific writing. For instance, all LLM-generated introductions on a certain topic might sound the same and would contain the same set of ideas and references, thereby missing out on innovations ( Nakadai et al., 2023 ) and exacerbating citation injustice ( Dworkin et al., 2020 ) .
+Even worse, it is likely that malign actors such as paper mills will employ LLMs to produce fake publications ( Kendall and Teixeira da Silva, 2024 ) . 
+ 
+ 
+ Our work shows that LLM usage for scientific writing is on the rise despite these substantial limitations. How should the academic community deal with this development? Some have suggested to use retrieval-augmented LLMs that provide verifiable facts from trusted sources ( Lewis et al., 2020 ; Borgeaud et al., 2022 ; Ahmed et al., 2023 ) or let the user provide all relevant facts to the LLM in order to protect scientific literature from accumulating subtle inaccuracies ( Mittelstadt et al., 2023 ) . Others think that for certain tasks like peer reviewing, LLMs are ill-suited and should not be used at all ( Lindsay, 2023 ) . As a result, publishers and funding agencies have put out various policies, banning LLMs in peer review ( Kaiser, 2023 ; Brainard, 2023 ) , as co-authors ( Thorp, 2023 ) , or undisclosed resource of any kind ( Brainard, 2023 ) . Data-driven and unbiased analyses like ours can be helpful to monitor whether such policies are ignored or adhered to in practice. 
+ 
+ 
+ In conclusion, our work showed that the effect of LLM usage on scientific writing is truly unprecedented and outshines even the drastic changes in vocabulary induced by the Covid-19 pandemic. This effect will likely become even more pronounced in the future, as one can analyze more publication cycles and LLMs are likely to increase in adoption. At the same time, LLM usage can be well-disguised and hard to detect, so the true extent of their adoption is likely already higher than what we measured. This trend calls for a reassessment of current policies and regulations around the use of LLMs for science. Our analysis can inform the necessary debate around LLM policies by providing a measurement method for LLM usage that is urgently needed ( Brinkmann et al., 2023 ; Heersmink, 2024 ) . Our excess word approach could help to track future LLM usage, including scientific (grant applications and peer review) and non-scientific (news articles, social media, prose) use cases.
+We hope that future work will meticulously delve into tracking LLM usage more accurately and assess which policy changes are crucial to tackle the intricate challenges posed by the rise of LLMs in scientific publishing. 
+ 
+ 
+ 
+ 4 Methods 
+
+ 
+ 4.1 Dataset 
+
+ 
+ The PubMed data until the end of 2023 were collected and shared by González-Márquez et al. (2024) . They used the annual PubMed snapshot from the end of 2023, and parsed the XML files to extract the abstract texts and some metadata, keeping only complete English-language abstracts with length 250–4000 characters. Their resulting dataset contains 23 389 083 abstracts. 
+ 
+ 
+ We added to these data all daily PubMed ( https://pubmed.ncbi.nlm.nih.gov/download ) update files until the end of March 2024, and parsed the XML files in the same way, applying the same filtering criteria as González-Márquez et al. (2024) . We kept the last version of the abstract for each unique PMID (PubMed ID), because the daily update files often contain updated information about the papers that were already listed in previous files. This resulted in 23 839 226 abstracts. 
+ 
+ 
+ We then only analyzed papers with publication years from 2010 to 2024, giving us 14 182 520 abstracts for analysis. 
+ 
+ 
+ 
+ 4.2 Pre-processing 
+
+ 
+ Many abstracts in PubMed data contain strings, usually either in the beginning or in the end, that are not technically part of the abstract text. This can be, for example, “Communicated by:” followed by the name of the editor; or “Copyright ©” followed by the name of the publisher; or “How to cite this article:” followed by the citation string. Such strings often appear in abstracts from a particular journal starting from a particular year, and in this case are picked up by our analysis of excess words. 
+ 
+ 
+ We spent substantial effort to clean the abstracts from all such contaminating strings, using over 100 regular expressions to find and eliminate them. Overall, 264 588 abstracts were affected by our cleaning procedure. We have also entirely erased 3401 abstracts of errata, corrigenda, correction, or retraction notices (identified based on titles). 
+ 
+ 
+ We then computed a binary word occurrence matrix using CountVectorizer(binary=True) from Scikit-learn, obtaining a 14 182 520 × 4 119 741 14\,182\,520\times 4\,119\,741 sparse matrix. We focused the subsequent analysis on 2 388 676 2\,388\,676 words consisting of at least four letters and composed only out of the 26 letters of English alphabet. Note that different strings (e.g. string and strings ) were treated as two distinct words. 
+ 
+ 
+ 
+ 4.3 Statistical analysis 
+
+ 
+ To avoid possible divisions by zero, all frequencies were always computed as p = ( a + 1 ) / ( b + 1 ) p=(a+1)/(b+1) , where a a is the number of abstracts in a given year containing a given word, and b b is the total number of abstracts in that year. 
+ 
+ 
+ When computing excess words in year Y Y , we only looked at words with frequencies above 10 − 4 10^{-4} both in year Y Y and Y − 1 Y-1 . To do the linear extrapolation, we took the frequencies p − 3 p_{-3} in year Y − 3 Y-3 and p − 2 p_{-2} in year Y − 2 Y-2 and computed the counterfactual projection q = p − 2 + 2 ⋅ max ⁡ { p − 2 − p − 3 , 0 } q=p_{-2}+2\cdot\max\{p_{-2}-p_{-3},0\} . This way, q q was always at least as large as p − 2 p_{-2} (see Figure 1 ), resulting in conservative estimates of r = p / q r=p/q and δ = p − q \delta=p-q . 
+ 
+ 
+ 
+ 4.4 Word annotations 
+
+ 
+ We identified 774 unique excess words (surpassing thresholds on r r or δ \delta ) from 2013 to 2024. Some of these words showed excess usage in multiple years. We sorted the list alphabetically and annotated them as content and style words while being blinded to the year in which they were selected as excess words. We assigned parts of speech (nouns, adjectives, verbs, etc.) in the same way. In case of doubt, the words were discussed between the authors. When we were not certain whether a word was content or style because of ambiguous usage, we did not label this word as either content or style. 
+ 
+ 
+ 
+ 4.5 Subgroup analysis 
+
+ 
+ For the analysis presented in Figure 5 we separately analysed the following subgroups: 50 countries with the most papers in our dataset; 100 journals with the most papers in our dataset in 2024; all 39 domains taken from González-Márquez et al. (2024) (where domains were assigned based on the journal names, e.g., assigning all papers from The Journal of Neuroscience to the ‘neuroscience’ domain); male and female inferred genders of the first and of the last authors (inferred via the gender package, Blevins and Mullen, 2015 ). 
+ 
+ 
+ We also analyzed several groups of journals pooled together: (1) Nature , Science , and Cell ; (2) 31 specialized Nature family journals established in 2018 or earlier (from Nature Aging to Nature Sustainability ); (3) all Frontiers journals called Frontiers * ; (4) all journals published by MDPI, selected based on their PubMed names * (Basel, Switzerland) . 
+ 
+ 
+ Subgroups were assigned Δ \Delta values only if they contained at least 300 papers in each year from 2018 to 2023. 
+ 
+ 
+ Our gender inference aims to capture perceived gender based on first name and is only approximate.
+The inference model has clear shortcomings, including limited US-based training data. Moreover, some first names are inherently gender-ambiguous. We were able to infer genders only for 55% of the authors. 
+ 
+ 
+ 
+ 4.6 LLM usage 
+
+ 
+ We did not use ChatGPT or any other LLMs for writing the manuscript or for performing the data analysis. 
+ 
+ 
+ 
+ 4.7 Data and code availability 
+
+ 
+ Our analysis code in Python is available at https://github.com/berenslab/chatgpt-excess-words . The original PubMed data are openly available for bulk download here: https://pubmed.ncbi.nlm.nih.gov/download . 
+ 
+ 
+ 
+ 
+ Acknowledgements 
+
+ 
+ This work was conceived at the Dagstuhl seminar 24122 supported by the Leibniz Center for Informatics. This work was funded by Deutsche Forschungsgemeinschaft (DFG, German Research Foundation) via Germany’s Excellence Strategy (Excellence cluster 2064 “Machine Learning — New Perspectives for Science”, EXC 390727645), the German Ministry of Science and Education (BMBF) via the Tübingen AI Center (01IS18039A) and the Gemeinnützige Hertie-Stiftung. The authors thank the International Max Planck Research School for Intelligent Systems (IMPRS-IS) for supporting RGM.
+EÁH’s work is supported by NSF CAREER Grant No IIS-1943506. 
+ 
+ 
+ 
+ References 
+
+ 
+ 
+ Ahmed et al. (2023) 
+ 
+Abubakari Ahmed, Aceil Al-Khatib, Yap Boum, Humberto Debat, Alonso Gurmendi Dunkelberg, Lisa Janicke Hinchliffe, Frith Jarrad, Adam Mastroianni, Patrick Mineault, Charlotte R Pennington, et al.
+
+ 
+ The future of academic publishing.
+
+ 
+ Nature Human Behaviour , 7(7):1021–1026, 2023.
+
+ 
+ 
+ Akram (2024) 
+ 
+Arslan Akram.
+
+ 
+ Quantitative analysis of AI-generated texts in academic research: A study of AI presence in arxiv submissions using AI detection tool.
+
+ 
+ arXiv preprint arXiv:2403.13812 , 2024.
+
+ 
+ 
+ Alvero et al. (2024) 
+ 
+AJ Alvero, Jinsook Lee, Alejandra Regla-Vargas, Rene Kizilec, Thorsten Joachims, and Anthony Lising Antonio.
+
+ 
+ Large language models, social demography, and hegemony: Comparing authorship in human and synthetic text.
+
+ 
+ OSF.io , 2024.
+
+ 
+ 
+ Bai et al. (2024) 
+ 
+Xuechunzi Bai, Angelina Wang, Ilia Sucholutsky, and Thomas L Griffiths.
+
+ 
+ Measuring implicit bias in explicitly unbiased large language models.
+
+ 
+ arXiv preprint arXiv:2402.04105 , 2024.
+
+ 
+ 
+ Bender et al. (2021) 
+ 
+Emily M Bender, Timnit Gebru, Angelina McMillan-Major, and Shmargaret Shmitchell.
+
+ 
+ On the dangers of stochastic parrots: Can language models be too big?
+
+ 
+ In Proceedings of the 2021 ACM Conference on Fairness, Accountability, and Transparency , pages 610–623, 2021.
+
+ 
+ 
+ Berdejo-Espinola and Amano (2023) 
+ 
+Violeta Berdejo-Espinola and Tatsuya Amano.
+
+ 
+ AI tools can improve equity in science.
+
+ 
+ Science , 379(6636):991–991, 2023.
+
+ 
+ 
+ Bizzoni et al. (2020) 
+ 
+Yuri Bizzoni, Stefania Degaetano-Ortlieb, Peter Fankhauser, and Elke Teich.
+
+ 
+ Linguistic variation and change in 250 years of English scientific writing: A data-driven approach.
+
+ 
+ Frontiers in Artificial Intelligence , 3:73, 2020.
+
+ 
+ 
+ Blevins and Mullen (2015) 
+ 
+Cameron Blevins and Lincoln Mullen.
+
+ 
+ Jane, John… Leslie? A historical method for algorithmic gender prediction.
+
+ 
+ DHQ: Digital Humanities Quarterly , 9(3):000223, 2015.
+
+ 
+ 
+ Bochkarev et al. (2014) 
+ 
+Vladimir Bochkarev, Valery Solovyev, and Søren Wichmann.
+
+ 
+ Universals versus historical contingencies in lexical evolution.
+
+ 
+ Journal of The Royal Society Interface , 11(101):20140841, 2014.
+
+ 
+ 
+ Borgeaud et al. (2022) 
+ 
+Sebastian Borgeaud, Arthur Mensch, Jordan Hoffmann, Trevor Cai, Eliza Rutherford, Katie Millican, George Bm Van Den Driessche, Jean-Baptiste Lespiau, Bogdan Damoc, Aidan Clark, et al.
+
+ 
+ Improving language models by retrieving from trillions of tokens.
+
+ 
+ In International conference on machine learning , pages 2206–2240. PMLR, 2022.
+
+ 
+ 
+ Brainard (2023) 
+ 
+Jeffrey Brainard.
+
+ 
+ As scientists explore AI-written text, journals hammer out policies.
+
+ 
+ Science , 379(6634):740–741, 2023.
+
+ 
+ 
+ Brinkmann et al. (2023) 
+ 
+Levin Brinkmann, Fabian Baumann, Jean-François Bonnefon, Maxime Derex, Thomas F Müller, Anne-Marie Nussberger, Agnieszka Czaplicka, Alberto Acerbi, Thomas L Griffiths, Joseph Henrich, et al.
+
+ 
+ Machine culture.
+
+ 
+ Nature Human Behaviour , 7(11):1855–1868, 2023.
+
+ 
+ 
+ Cheng et al. (2024) 
+ 
+Huzi Cheng, Bin Sheng, Aaron Lee, Varun Chaudhary, Atanas G Atanasov, Nan Liu, Yue Qiu, Tien Yin Wong, Yih-Chung Tham, and Ying-Feng Zheng.
+
+ 
+ Have AI-generated texts from LLM infiltrated the realm of scientific writing? A large-scale analysis of preprint platforms.
+
+ 
+ bioRxiv , pages 2024–03, 2024.
+
+ 
+ 
+ Choudhury (2023) 
+ 
+Monojit Choudhury.
+
+ 
+ Generative AI has a language problem.
+
+ 
+ Nature Human Behaviour , 7(11):1802–1803, 2023.
+
+ 
+ 
+ Dworkin et al. (2020) 
+ 
+Jordan Dworkin, Perry Zurn, and Danielle S Bassett.
+
+ 
+ (in) citing action to realize an equitable future.
+
+ 
+ Neuron , 106(6):890–894, 2020.
+
+ 
+ 
+ Geng and Trotta (2024) 
+ 
+Mingmeng Geng and Roberto Trotta.
+
+ 
+ Is ChatGPT transforming academics’ writing style?
+
+ 
+ arXiv preprint arXiv:2404.08627 , 2024.
+
+ 
+ 
+ González-Márquez et al. (2024) 
+ 
+Rita González-Márquez, Luca Schmidt, Benjamin M Schmidt, Philipp Berens, and Dmitry Kobak.
+
+ 
+ The landscape of biomedical research.
+
+ 
+ Patterns , 2024.
+
+ 
+ 
+ Gray (2024) 
+ 
+Andrew Gray.
+
+ 
+ ChatGPT “contamination”: estimating the prevalence of LLMs in the scholarly literature.
+
+ 
+ arXiv preprint arXiv:2403.16887 , 2024.
+
+ 
+ 
+ Hall et al. (2008) 
+ 
+David Hall, Dan Jurafsky, and Christopher D Manning.
+
+ 
+ Studying the history of ideas using topic models.
+
+ 
+ In Proceedings of the 2008 Conference on Empirical Methods in Natural Language Processing , pages 363–371, 2008.
+
+ 
+ 
+ Heersmink (2024) 
+ 
+Richard Heersmink.
+
+ 
+ Use of large language models might affect our cognitive skills.
+
+ 
+ Nature Human Behaviour , pages 1–2, 2024.
+
+ 
+ 
+ Islam et al. (2021) 
+ 
+Nazrul Islam, Vladimir M Shkolnikov, Rolando J Acosta, Ilya Klimkin, Ichiro Kawachi, Rafael A Irizarry, Gianfranco Alicandro, Kamlesh Khunti, Tom Yates, Dmitri A Jdanov, et al.
+
+ 
+ Excess deaths associated with COVID-19 pandemic in 2020: age and sex disaggregated time series analysis in 29 high income countries.
+
+ 
+ bmj , 373, 2021.
+
+ 
+ 
+ Ji et al. (2023) 
+ 
+Ziwei Ji, Nayeon Lee, Rita Frieske, Tiezheng Yu, Dan Su, Yan Xu, Etsuko Ishii, Ye Jin Bang, Andrea Madotto, and Pascale Fung.
+
+ 
+ Survey of hallucination in natural language generation.
+
+ 
+ ACM Computing Surveys , 55(12):1–38, 2023.
+
+ 
+ 
+ Kaiser (2023) 
+ 
+Jocelyn Kaiser.
+
+ 
+ Funding agencies say no to AI peer review.
+
+ 
+ Science , 381(6655):261, 2023.
+
+ 
+ 
+ Karlinsky and Kobak (2021) 
+ 
+Ariel Karlinsky and Dmitry Kobak.
+
+ 
+ Tracking excess mortality across countries during the COVID-19 pandemic with the World Mortality Dataset.
+
+ 
+ eLife , 10:e69336, 2021.
+
+ 
+ 
+ Kendall and Teixeira da Silva (2024) 
+ 
+Graham Kendall and Jaime A Teixeira da Silva.
+
+ 
+ Risks of abuse of large language models, like ChatGPT, in scientific publishing: Authorship, predatory publishing, and paper mills.
+
+ 
+ Learned Publishing , 37(1):55–62, 2024.
+
+ 
+ 
+ Kim et al. (2024) 
+ 
+Yekyung Kim, Yapei Chang, Marzena Karpinska, Aparna Garimella, Varun Manjunatha, Kyle Lo, Tanya Goyal, and Mohit Iyyer.
+
+ 
+ FABLES: Evaluating faithfulness and content selection in book-length summarization.
+
+ 
+ arXiv preprint arXiv:2404.01261 , 2024.
+
+ 
+ 
+ Lewis et al. (2020) 
+ 
+Patrick Lewis, Ethan Perez, Aleksandra Piktus, Fabio Petroni, Vladimir Karpukhin, Naman Goyal, Heinrich Küttler, Mike Lewis, Wen-tau Yih, Tim Rocktäschel, et al.
+
+ 
+ Retrieval-augmented generation for knowledge-intensive NLP tasks.
+
+ 
+ Advances in Neural Information Processing Systems , 33:9459–9474, 2020.
+
+ 
+ 
+ Liang et al. (2024a) 
+ 
+Weixin Liang, Zachary Izzo, Yaohui Zhang, Haley Lepp, Hancheng Cao, Xuandong Zhao, Lingjiao Chen, Haotian Ye, Sheng Liu, Zhi Huang, et al.
+
+ 
+ Monitoring AI-modified content at scale: A case study on the impact of ChatGPT on AI conference peer reviews.
+
+ 
+ arXiv preprint arXiv:2403.07183 , 2024a.
+
+ 
+ 
+ Liang et al. (2024b) 
+ 
+Weixin Liang, Yaohui Zhang, Zhengxuan Wu, Haley Lepp, Wenlong Ji, Xuandong Zhao, Hancheng Cao, Sheng Liu, Siyu He, Zhi Huang, et al.
+
+ 
+ Mapping the increasing use of LLMs in scientific papers.
+
+ 
+ arXiv preprint arXiv:2404.01268 , 2024b.
+
+ 
+ 
+ Lindsay (2023) 
+ 
+Grace W Lindsay.
+
+ 
+ LLMs are not ready for editorial work.
+
+ 
+ Nature Human Behaviour , 7(11):1814–1815, 2023.
+
+ 
+ 
+ Liu and Bu (2024) 
+ 
+Jialin Liu and Yi Bu.
+
+ 
+ Towards the relationship between AIGC in manuscript writing and author profiles: evidence from preprints in LLMs.
+
+ 
+ arXiv preprint arXiv:2404.15799 , 2024.
+
+ 
+ 
+ McCoy et al. (2023) 
+ 
+R Thomas McCoy, Paul Smolensky, Tal Linzen, Jianfeng Gao, and Asli Celikyilmaz.
+
+ 
+ How much do language models copy from their training data? Evaluating linguistic novelty in text generation using RAVEN.
+
+ 
+ Transactions of the Association for Computational Linguistics , 11:652–670, 2023.
+
+ 
+ 
+ Mittelstadt et al. (2023) 
+ 
+Brent Mittelstadt, Sandra Wachter, and Chris Russell.
+
+ 
+ To protect science, we must use LLMs as zero-shot translators.
+
+ 
+ Nature Human Behaviour , 7(11):1830–1832, 2023.
+
+ 
+ 
+ Msemburi et al. (2023) 
+ 
+William Msemburi, Ariel Karlinsky, Victoria Knutson, Serge Aleshin-Guendel, Somnath Chatterji, and Jon Wakefield.
+
+ 
+ The WHO estimates of excess mortality associated with the COVID-19 pandemic.
+
+ 
+ Nature , 613(7942):130–137, 2023.
+
+ 
+ 
+ Nakadai et al. (2023) 
+ 
+Ryosuke Nakadai, Yo Nakawake, and Shota Shibasaki.
+
+ 
+ AI language tools risk scientific diversity and innovation.
+
+ 
+ Nature Human Behaviour , 7(11):1804–1805, 2023.
+
+ 
+ 
+ Navigli et al. (2023) 
+ 
+Roberto Navigli, Simone Conia, and Björn Ross.
+
+ 
+ Biases in large language models: origins, inventory, and discussion.
+
+ 
+ ACM Journal of Data and Information Quality , 15(2):1–21, 2023.
+
+ 
+ 
+ Padmakumar and He (2023) 
+ 
+Vishakh Padmakumar and He He.
+
+ 
+ Does writing with language models reduce content diversity?
+
+ 
+ arXiv preprint arXiv:2309.05196 , 2023.
+
+ 
+ 
+ Picazo-Sanchez and Ortiz-Martin (2024) 
+ 
+Pablo Picazo-Sanchez and Lara Ortiz-Martin.
+
+ 
+ Analysing the impact of ChatGPT in research.
+
+ 
+ Applied Intelligence , pages 1–17, 2024.
+
+ 
+ 
+ Stokel-Walker (2023) 
+ 
+Chris Stokel-Walker.
+
+ 
+ ChatGPT listed as author on research papers: many scientists disapprove.
+
+ 
+ Nature , 613:620–621, 2023.
+
+ 
+ 
+ Tang et al. (2024) 
+ 
+Liyan Tang, Igor Shalyminov, Amy Wing-mei Wong, Jon Burnsky, Jake W Vincent, Yu’an Yang, Siffi Singh, Song Feng, Hwanjun Song, Hang Su, et al.
+
+ 
+ TofuEval: Evaluating hallucinations of llms on topic-focused dialogue summarization.
+
+ 
+ arXiv preprint arXiv:2402.13249 , 2024.
+
+ 
+ 
+ Thorp (2023) 
+ 
+H Holden Thorp.
+
+ 
+ ChatGPT is fun, but not an author, 2023.
+
+ 
+ 
+ Van Noorden and Perkel (2023) 
+ 
+Richard Van Noorden and Jeffrey M Perkel.
+
+ 
+ AI and science: what 1,600 researchers think.
+
+ 
+ Nature , 621(7980):672–675, 2023.
+
+ 
+ 
+ Van Veen et al. (2024) 
+ 
+Dave Van Veen, Cara Van Uden, Louis Blankemeier, Jean-Benoit Delbrouck, Asad Aali, Christian Bluethgen, Anuj Pareek, Malgorzata Polacin, Eduardo Pontes Reis, Anna Seehofnerová, et al.
+
+ 
+ Adapted large language models can outperform medical experts in clinical text summarization.
+
+ 
+ Nature Medicine , pages 1–9, 2024.
+
+ 
+ 
+ Walters and Wilder (2023) 
+ 
+William H Walters and Esther Isabelle Wilder.
+
+ 
+ Fabrication and errors in the bibliographic citations generated by ChatGPT.
+
+ 
+ Scientific Reports , 13(1):14045, 2023.
+
+ 
+ 
+ Zhang et al. (2024) 
+ 
+Tianyi Zhang, Faisal Ladhak, Esin Durmus, Percy Liang, Kathleen McKeown, and Tatsunori B Hashimoto.
+
+ 
+ Benchmarking large language models for news summarization.
+
+ 
+ Transactions of the Association for Computational Linguistics , 12:39–57, 2024.
+
+ 
+ 
+ Zhang et al. (2023) 
+ 
+Yue Zhang, Yafu Li, Leyang Cui, Deng Cai, Lemao Liu, Tingchen Fu, Xinting Huang, Enbo Zhao, Yu Zhang, Yulong Chen, et al.
+
+ 
+ Siren’s song in the AI ocean: a survey on hallucination in large language models.
+
+ 
+ arXiv preprint arXiv:2309.01219 , 2023.
+
+ 
+ 
+ Zheng and Zhan (2023) 
+ 
+Haoyi Zheng and Huichun Zhan.
+
+ 
+ ChatGPT in scientific writing: a cautionary tale.
+
+ 
+ The American Journal of Medicine , 136(8):725–726, 2023.
+
+ 
+ 
+ 
+ 
+ 
+ 
+ Supplementary Figures 
+
+ 
+ 
+ 
+ Figure S1: Excess words in 2013 and 2014. See Figure 2 for explanations. 
+ 
+ 
+ 
+ 
+ Figure S2: Excess words in 2015–17. See Figure 2 for explanations. Note that the excess word mitogenome (2016) is not shown in Figure 3 a because it was mostly used in a single journal ( Mitochondrial DNA ) and so we considered it not representative of the entire biomedical literature. 
+ 
+ 
+ 
+ 
+ Figure S3: Excess words in 2018–20. See Figure 2 for explanations. 
+ 
+ 
+ 
+ 
+ Figure S4: Excess words in 2021–23. See Figure 2 for explanations. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Experimental support, please
+ view the build logs 
+ for errors. Generated by
+ 
+ 
+ L
+ A 
+ T
+ E 
+ 
+ xml 
+ 
+ .
+ 
+ 
+ Instructions for reporting errors 
+ We are continuing to improve HTML versions of papers, and your feedback helps enhance accessibility and mobile
+ support. To report errors in the HTML that will help us improve conversion and rendering, choose any of the
+ methods listed below: 
+ 
+ Click the "Report Issue" ( 
+ 
+ ) button, located in the page header. 
+ 
+ Tip: You can select the relevant text first, to include it in your report. 
+ Our team has already identified the following issues . We appreciate your time reviewing and reporting rendering errors we
+ may not have found yet. Your efforts will help us improve the HTML versions for all readers, because disability
+ should not be a barrier to accessing research. Thank you for your continued support in championing open access for
+ all. 
+ Have a free development cycle? Help support accessibility at arXiv! Our collaborators at LaTeXML maintain a list of packages that need conversion , and welcome developer contributions . 
+ 
+ 
+ 
+ 
+ 
+ We gratefully acknowledge support from
+ our major funders ,
+ member institutions , ,
+ and all contributors.
+ 
+ 
+ About 
+ · 
+ Help 
+ · 
+ Contact 
+ · 
+ Subscribe 
+ · 
+ Copyright 
+ · 
+ Privacy 
+ · 
+ Accessibility 
+ · 
+ Operational Status (opens in new tab) 
+ 
+ 
+
+ 
+ Major funding support from 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 

@@ -1,0 +1,53 @@
+
+ RUN  v4.1.11 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneINSTR2
+
+ ❯ tests/lint/observedShapeReaders.walker.test.js (44 tests | 2 failed) 39442ms
+       × the door CLEARS exactly its verified identities, and nothing else 9ms
+       × the notice names the door in both states 1ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/lint/observedShapeReaders.walker.test.js > reader-with-no-writer ratchet: the live scan > M13 — the virtual-dormant writer door convicts what it cannot verify > the door CLEARS exactly its verified identities, and nothing else
+AssertionError: expected 6 to be 5 // Object.is equality
+
+- Expected
++ Received
+
+- 5
++ 6
+
+ ❯ tests/lint/observedShapeReaders.walker.test.js:846:50
+    844|       // walker green at every dock but ENC-4b's; a read of a cleared …
+    845|       // exists to clear, and the list is what makes a fifth IDENTITY …
+    846|       expect(live.virtualDormantWriters.cleared).toBe(5);
+       |                                                  ^
+    847|       // …and the cleared read is really GONE from the post-filter fin…
+    848|       // raw scan still holds it — the door narrows the verdict, it do…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/lint/observedShapeReaders.walker.test.js > reader-with-no-writer ratchet: the live scan > M13 — the virtual-dormant writer door convicts what it cannot verify > the notice names the door in both states
+AssertionError: expected 'observed-shape virtual-dormant writer…' to match /cleared 5 read/
+
+- Expected:
+/cleared 5 read/
+
++ Received:
+"observed-shape virtual-dormant writer door: 4 declared row(s) whose pulse writer stands behind a VIRTUAL flag the corpus never lights; cleared 6 read(s) across 4 of them on this scan."
+
+ ❯ tests/lint/observedShapeReaders.walker.test.js:869:70
+    867|
+    868|     test('the notice names the door in both states', () => {
+    869|       expect(virtualDormantWriterNotice(live.virtualDormantWriters)).t…
+       |                                                                      ^
+    870|       expect(virtualDormantWriterNotice({ applied: false })).toMatch(/…
+    871|     });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 42 passed (44)
+   Start at  02:32:33
+   Duration  40.05s (transform 2.75s, setup 24ms, import 493ms, tests 39.44s, environment 0ms)
+

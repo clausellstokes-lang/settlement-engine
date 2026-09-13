@@ -1,0 +1,21 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 84,
+ "firstTs": "2026-09-10T00:13:53.482Z",
+ "lastTs": "2026-09-10T00:39:52.966Z",
+ "tools": {
+  "Bash": 19,
+  "Read": 2
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "inct gate idioms; twelve pairwise-distinct openers, none on the proper slot; zero citations, zero causes, zero shared four-grams with any sibling pool. Three open rows carried unchanged for the chair: the `NARROWS: gate` ruling, the CT-1a structural-cause joint, and `{defwork}`'s printed wiring gap.",
+ "run": "wf_dc0e55ca-00d",
+ "agent": "a09c73ea98cdf15f4",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/67af10e4-7386-48d4-8cd3-b2985d4885c2/subagents/workflows/wf_dc0e55ca-00d/agent-a09c73ea98cdf15f4.jsonl",
+ "journal": "result",
+ "checkpointFile": null
+}

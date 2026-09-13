@@ -1,0 +1,22 @@
+PREDICTED: (E4, §917): totalFiles 2502 -> 2503 (+1: tests/domain/livingContentPromiseBytes.test.js, the lane's one new test file — the fold's U7), entries 3 unchanged (no owed-ledger car; the three banked rows unmoved
+TRUE_EXIT=0
+--- totals car:
+PREDICTED: (E4, §917): totalFiles 2502 -> 2503 (+1: tests/domain/livingContentPromiseBytes.test.js, the lane's one new test file — the fold's U7), entries 3 unchanged (no owed-ledger car; the three
+MEASURED: totalTests=32453 totalFiles=2503 entries=3
+totals: totalTests 32436 -> 32453 · totalFiles 2503 · entries 3 · measuredAt f0f30a270
+TOTALS CAR cf4fb524c committed; cars over 8961388ce=15; sealed light-2026-09-09
+TOTALS_EXIT=0
+totalTests (from the committed baseline) = 32453
+--- capsule car (ACTIVE at rung 18 — the OSR CLI is open):
+CAPSULE_EXIT=0
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.502.lock as PID 23699 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+[base-state-capsule] wrote docs/implementation/BASE_STATE.json stamped at cf4fb524 (20 figures).
+capsule porcelain=[ M docs/implementation/BASE_STATE.json ]
+CAPSULE CAR -> dd0b68c0d
+CARS=16 · HEAD=dd0b68c0d · porcelain=[]
+--- re-stamp the kit at 16 cars:
+  + run-gate-917.sh run-ratchet-917.sh (fill __PREDICTION__)
+kit §917 stamped in /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit: after-cas-917.sh collect-917.sh payload-917.template.json msg-917.txt · dock=laneLIGHT base=8961388ce seal=landing-light-2026-09-09 cars=16 · fill __ROW__/__ROW_BODY__/__CARD__/__CARD_BODY__/__TAIL__/__TAIL_BODY__/__SUBJECT__/__BODY__/__ENROLS__
+23:[ "$CARS" = "16" ] || { echo "REFUSED: expected 16 cars over $BASE, found $CARS"; exit 7; }
+SEALED light-2026-09-09 = dd0b68c0d
+NEXT: launch run-gate-917.sh in the background (quiet law; ~20 min; NO lane vitest meanwhile), then after-cas-917.sh, then fill texts-917 (__CARS__=16 __ENTRIES__ __TESTS__ __TOTALS__) and collect.

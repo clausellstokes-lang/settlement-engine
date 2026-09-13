@@ -1,0 +1,21 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 85,
+ "firstTs": "2026-09-09T23:19:17.543Z",
+ "lastTs": "2026-09-09T23:29:23.605Z",
+ "tools": {
+  "Bash": 21,
+  "Read": 1
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "ns every wording because the spine's own state-key value is the absence; and `wordsPerSentence` sits below the record registers' band, caused by the licence rather than the writing. The spread UNIT is flagged rather than assumed: 4.04 clears the floor per variant, 2.67 does not clear it per wording.",
+ "run": "wf_e7c6cf61-44a",
+ "agent": "a9c0cff5a8a1a7bbc",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/67af10e4-7386-48d4-8cd3-b2985d4885c2/subagents/workflows/wf_e7c6cf61-44a/agent-a9c0cff5a8a1a7bbc.jsonl",
+ "journal": "result",
+ "checkpointFile": null
+}

@@ -1,0 +1,2138 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="profile" href="https://gmpg.org/xfn/11">
+		<link rel="pingback" href="https://emshort.blog/xmlrpc.php">
+		<script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>
+<title>Visualizing Procgen Text, Part Two &#8211; Emily Short&#039;s Interactive Storytelling</title>
+<script type="text/javascript">
+  WebFontConfig = {"google":{"families":["Libre+Baskerville:r,i,b,bi:latin,latin-ext","Arvo:r:latin,latin-ext"]},"api_url":"https:\/\/fonts-api.wp.com\/css"};
+  (function() {
+    var wf = document.createElement('script');
+    wf.src = '/wp-content/plugins/custom-fonts/js/webfont.js';
+    wf.type = 'text/javascript';
+    wf.async = 'true';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(wf, s);
+	})();
+</script><style id="jetpack-custom-fonts-css">.wf-active body, .wf-active button, .wf-active input, .wf-active select, .wf-active textarea{font-family:"Libre Baskerville",serif}.wf-active ::-webkit-input-placeholder{font-family:"Libre Baskerville",serif}.wf-active :-moz-placeholder{font-family:"Libre Baskerville",serif}.wf-active ::-moz-placeholder{font-family:"Libre Baskerville",serif}.wf-active :-ms-input-placeholder{font-family:"Libre Baskerville",serif}.wf-active button, .wf-active button[disabled]:hover, .wf-active button[disabled]:focus, .wf-active input[type="button"], .wf-active input[type="button"][disabled]:hover, .wf-active input[type="button"][disabled]:focus, .wf-active input[type="reset"], .wf-active input[type="reset"][disabled]:hover, .wf-active input[type="reset"][disabled]:focus, .wf-active input[type="submit"], .wf-active input[type="submit"][disabled]:hover, .wf-active input[type="submit"][disabled]:focus, .wf-active .main-navigation, .wf-active .no-comments, .wf-active .tagcloud a, .wf-active .wp_widget_tag_cloud a, .wf-active .top_rated div > p, .wf-active .comments-area #respond .comment-form-fields p.comment-form-posting-as, .wf-active .comments-area #respond .comment-form-fields p.comment-form-log-out, .wf-active .comments-area #respond #comment-form-identity #comment-form-nascar p, .wf-active .comments-area #respond #comment-form-subscribe p, .wf-active .comments-area #respond p.form-submit input#comment-submit, .wf-active .comment-content p.comment-likes span.comment-like-feedback, .wf-active .jp-relatedposts-post-date, .wf-active .jp-relatedposts-post-context{font-family:"Libre Baskerville",serif}.wf-active .post-password-form label, .wf-active .comment-form label, .wf-active .entry-content .contact-form label, .wf-active .post-navigation .meta-nav, .wf-active .image-navigation, .wf-active .comment-navigation, .wf-active .menu-toggle, .wf-active .widget_recent_entries .post-date, .wf-active .widget_rss .rss-date, .wf-active .widget_rss cite, .wf-active .sticky-post, .wf-active .entry-footer, .wf-active .comment-metadata, .wf-active .pingback .edit-link, .wf-active .comment-reply-link, .wf-active .page-links, .wf-active .page-links a, .wf-active .page-links > span, .wf-active .pd-rating, .wf-active .entry-content .portfolio-entry-meta, .wf-active .entry-content #jp-relatedposts h3.jp-relatedposts-headline, .wf-active .hentry div.sharedaddy h3.sd-title, .wf-active .hentry h3.sd-title{font-family:"Libre Baskerville",serif}.wf-active .pagination{font-family:"Libre Baskerville",serif}.wf-active body:not(.logged-in) .site .skip-link{font-family:"Libre Baskerville",serif}.wf-active .site-description, .wf-active .author-bio, .wf-active .taxonomy-description, .wf-active .entry-caption, .wf-active .comment-notes, .wf-active .comment-awaiting-moderation, .wf-active .logged-in-as, .wf-active .form-allowed-tags, .wf-active .site-info, .wf-active .wp-caption .wp-caption-text, .wf-active .gallery-caption, .wf-active .entry-content .portfolio-entry-content p, .wf-active .entry-content .testimonial-entry-title, .wf-active .entry-content .testimonial-entry-content p, .wf-active .entry-content #jp-relatedposts .jp-relatedposts-items p, .wf-active .entry-content #jp-relatedposts .jp-relatedposts-items-visual h4.jp-relatedposts-post-title{font-family:"Libre Baskerville",serif}.wf-active .site-title, .wf-active .post-navigation .post-title, .wf-active .comments-title, .wf-active .comment-reply-title, .wf-active .page-title{font-family:"Arvo",serif;font-style:normal;font-weight:400}.wf-active .widget .widget-title, .wf-active .entry-content .portfolio-entry-title{font-family:"Arvo",serif;font-style:normal;font-weight:400}.wf-active .entry-title{font-family:"Arvo",serif;font-style:normal;font-weight:400}.wf-active .format-aside .entry-title, .wf-active .format-image .entry-title, .wf-active .format-video .entry-title, .wf-active .format-quote .entry-title, .wf-active .format-gallery .entry-title, .wf-active .format-status .entry-title, .wf-active .format-link .entry-title, .wf-active .format-audio .entry-title, .wf-active .format-chat .entry-title{font-style:normal;font-weight:400}@media screen and (min-width: 44.375em){.wf-active .site-title, .wf-active .post-navigation .post-title{font-style:normal;font-weight:400}}@media screen and (min-width: 44.375em){.wf-active .entry-title{font-style:normal;font-weight:400}}@media screen and (min-width: 61.5625em){.wf-active .entry-title{font-style:normal;font-weight:400}}@media screen and (min-width: 61.5625em){.wf-active .format-aside .entry-title, .wf-active .format-image .entry-title, .wf-active .format-video .entry-title, .wf-active .format-quote .entry-title, .wf-active .format-gallery .entry-title, .wf-active .format-status .entry-title, .wf-active .format-link .entry-title, .wf-active .format-audio .entry-title, .wf-active .format-chat .entry-title{font-style:normal;font-weight:400}}</style>
+<meta name='robots' content='max-image-preview:large' />
+<meta name="google-site-verification" content="BitJdEipnXXvDl78I83xuBk4L1npPX_qzaiIPlXBURk" />
+
+<!-- Async WordPress.com Remote Login -->
+<script id="wpcom_remote_login_js">
+var wpcom_remote_login_extra_auth = '';
+function wpcom_remote_login_remove_dom_node_id( element_id ) {
+	var dom_node = document.getElementById( element_id );
+	if ( dom_node ) { dom_node.parentNode.removeChild( dom_node ); }
+}
+function wpcom_remote_login_remove_dom_node_classes( class_name ) {
+	var dom_nodes = document.querySelectorAll( '.' + class_name );
+	for ( var i = 0; i < dom_nodes.length; i++ ) {
+		dom_nodes[ i ].parentNode.removeChild( dom_nodes[ i ] );
+	}
+}
+function wpcom_remote_login_final_cleanup() {
+	wpcom_remote_login_remove_dom_node_classes( "wpcom_remote_login_msg" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_key" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_validate" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_js" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_request_access_iframe" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_request_access_styles" );
+}
+
+// Watch for messages back from the remote login
+window.addEventListener( "message", function( e ) {
+	if ( e.origin === "https://r-login.wordpress.com" ) {
+		var data = {};
+		try {
+			data = JSON.parse( e.data );
+		} catch( e ) {
+			wpcom_remote_login_final_cleanup();
+			return;
+		}
+
+		if ( data.msg === 'LOGIN' ) {
+			// Clean up the login check iframe
+			wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_key" );
+
+			var id_regex = new RegExp( /^[0-9]+$/ );
+			var token_regex = new RegExp( /^.*|.*|.*$/ );
+			if (
+				token_regex.test( data.token )
+				&& id_regex.test( data.wpcomid )
+			) {
+				// We have everything we need to ask for a login
+				var script = document.createElement( "script" );
+				script.setAttribute( "id", "wpcom_remote_login_validate" );
+				script.src = '/remote-login.php?wpcom_remote_login=validate'
+					+ '&wpcomid=' + data.wpcomid
+					+ '&token=' + encodeURIComponent( data.token )
+					+ '&host=' + window.location.protocol
+					+ '//' + window.location.hostname
+					+ '&postid=24784'
+					+ '&is_singular=1';
+				document.body.appendChild( script );
+			}
+
+			return;
+		}
+
+		// Safari ITP, not logged in, so redirect
+		if ( data.msg === 'LOGIN-REDIRECT' ) {
+			window.location = 'https://wordpress.com/log-in?redirect_to=' + window.location.href;
+			return;
+		}
+
+		// Safari ITP, storage access failed, remove the request
+		if ( data.msg === 'LOGIN-REMOVE' ) {
+			var css_zap = 'html { -webkit-transition: margin-top 1s; transition: margin-top 1s; } /* 9001 */ html { margin-top: 0 !important; } * html body { margin-top: 0 !important; } @media screen and ( max-width: 782px ) { html { margin-top: 0 !important; } * html body { margin-top: 0 !important; } }';
+			var style_zap = document.createElement( 'style' );
+			style_zap.type = 'text/css';
+			style_zap.appendChild( document.createTextNode( css_zap ) );
+			document.body.appendChild( style_zap );
+
+			var e = document.getElementById( 'wpcom_request_access_iframe' );
+			e.parentNode.removeChild( e );
+
+			document.cookie = 'wordpress_com_login_access=denied; path=/; max-age=31536000';
+
+			return;
+		}
+
+		// Safari ITP
+		if ( data.msg === 'REQUEST_ACCESS' ) {
+			console.log( 'request access: safari' );
+
+			// Check ITP iframe enable/disable knob
+			if ( wpcom_remote_login_extra_auth !== 'safari_itp_iframe' ) {
+				return;
+			}
+
+			// If we are in a "private window" there is no ITP.
+			var private_window = false;
+			try {
+				var opendb = window.openDatabase( null, null, null, null );
+			} catch( e ) {
+				private_window = true;
+			}
+
+			if ( private_window ) {
+				console.log( 'private window' );
+				return;
+			}
+
+			var iframe = document.createElement( 'iframe' );
+			iframe.id = 'wpcom_request_access_iframe';
+			iframe.setAttribute( 'scrolling', 'no' );
+			iframe.setAttribute( 'sandbox', 'allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-top-navigation-by-user-activation' );
+			iframe.src = 'https://r-login.wordpress.com/remote-login.php?wpcom_remote_login=request_access&origin=' + encodeURIComponent( data.origin ) + '&wpcomid=' + encodeURIComponent( data.wpcomid );
+
+			var css = 'html { -webkit-transition: margin-top 1s; transition: margin-top 1s; } /* 9001 */ html { margin-top: 46px !important; } * html body { margin-top: 46px !important; } @media screen and ( max-width: 660px ) { html { margin-top: 71px !important; } * html body { margin-top: 71px !important; } #wpcom_request_access_iframe { display: block; height: 71px !important; } } #wpcom_request_access_iframe { border: 0px; height: 46px; position: fixed; top: 0; left: 0; width: 100%; min-width: 100%; z-index: 99999; background: #23282d; } ';
+
+			var style = document.createElement( 'style' );
+			style.type = 'text/css';
+			style.id = 'wpcom_request_access_styles';
+			style.appendChild( document.createTextNode( css ) );
+			document.body.appendChild( style );
+
+			document.body.appendChild( iframe );
+		}
+
+		if ( data.msg === 'DONE' ) {
+			wpcom_remote_login_final_cleanup();
+		}
+	}
+}, false );
+
+// Inject the remote login iframe after the page has had a chance to load
+// more critical resources
+window.addEventListener( "DOMContentLoaded", function( e ) {
+	var iframe = document.createElement( "iframe" );
+	iframe.style.display = "none";
+	iframe.setAttribute( "scrolling", "no" );
+	iframe.setAttribute( "id", "wpcom_remote_login_key" );
+	iframe.src = "https://r-login.wordpress.com/remote-login.php"
+		+ "?wpcom_remote_login=key"
+		+ "&origin=aHR0cHM6Ly9lbXNob3J0LmJsb2c%3D"
+		+ "&wpcomid=702124"
+		+ "&time=" + Math.floor( Date.now() / 1000 );
+	document.body.appendChild( iframe );
+}, false );
+</script>
+<link rel='dns-prefetch' href='//s0.wp.com' />
+<link rel='dns-prefetch' href='//widgets.wp.com' />
+<link rel="alternate" type="application/rss+xml" title="Emily Short&#039;s Interactive Storytelling &raquo; Feed" href="https://emshort.blog/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Emily Short&#039;s Interactive Storytelling &raquo; Comments Feed" href="https://emshort.blog/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Emily Short&#039;s Interactive Storytelling &raquo; Visualizing Procgen Text, Part&nbsp;Two Comments Feed" href="https://emshort.blog/2016/09/12/visualizing-procgen-text-part-two/feed/" />
+	<script type="text/javascript">
+		/* <![CDATA[ */
+		function addLoadEvent(func) {
+			var oldonload = window.onload;
+			if (typeof window.onload != 'function') {
+				window.onload = func;
+			} else {
+				window.onload = function () {
+					oldonload();
+					func();
+				}
+			}
+		}
+		/* ]]> */
+	</script>
+	<style id="wp-img-auto-sizes-contain-inline-css">
+img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
+/*# sourceURL=wp-img-auto-sizes-contain-inline-css */
+</style>
+<link crossorigin='anonymous' rel='stylesheet' id='all-css-2-1' href='/_static/??-eJyVjMEKwjAQRH/IuOrB4kH8lpAOmjabXdwNrX9vK4LgQZCBgQczjyYNSaqjOnELWto1V6MBrjGNbyYWWatvBUZ+AyO4SDFKwhqdfFr+D8uzA3WbzDb0v/eOEh19UDH/ol/Kkkd8xC9a5xc+77tud1pyOA5PXPBXBA==&cssminify=yes' type='text/css' media='all' />
+<style id="wp-emoji-styles-inline-css">
+
+	img.wp-smiley, img.emoji {
+		display: inline !important;
+		border: none !important;
+		box-shadow: none !important;
+		height: 1em !important;
+		width: 1em !important;
+		margin: 0 0.07em !important;
+		vertical-align: -0.1em !important;
+		background: none !important;
+		padding: 0 !important;
+	}
+/*# sourceURL=wp-emoji-styles-inline-css */
+</style>
+<style id="wp-block-library-inline-css">
+:root{--wp-block-synced-color:#7a00df;--wp-block-synced-color--rgb:122,0,223;--wp-bound-block-color:var(--wp-block-synced-color);--wp-editor-canvas-background:#ddd;--wp-admin-theme-color:#007cba;--wp-admin-theme-color--rgb:0,124,186;--wp-admin-theme-color-darker-10:#006ba1;--wp-admin-theme-color-darker-10--rgb:0,107,160.5;--wp-admin-theme-color-darker-20:#005a87;--wp-admin-theme-color-darker-20--rgb:0,90,135;--wp-admin-border-width-focus:2px}@media (min-resolution:192dpi){:root{--wp-admin-border-width-focus:1.5px}}.wp-element-button{cursor:pointer}:root .has-very-light-gray-background-color{background-color:#eee}:root .has-very-dark-gray-background-color{background-color:#313131}:root .has-very-light-gray-color{color:#eee}:root .has-very-dark-gray-color{color:#313131}:root .has-vivid-green-cyan-to-vivid-cyan-blue-gradient-background{background:linear-gradient(135deg,#00d084,#0693e3)}:root .has-purple-crush-gradient-background{background:linear-gradient(135deg,#34e2e4,#4721fb 50%,#ab1dfe)}:root .has-hazy-dawn-gradient-background{background:linear-gradient(135deg,#faaca8,#dad0ec)}:root .has-subdued-olive-gradient-background{background:linear-gradient(135deg,#fafae1,#67a671)}:root .has-atomic-cream-gradient-background{background:linear-gradient(135deg,#fdd79a,#004a59)}:root .has-nightshade-gradient-background{background:linear-gradient(135deg,#330968,#31cdcf)}:root .has-midnight-gradient-background{background:linear-gradient(135deg,#020381,#2874fc)}:root{--wp--preset--font-size--normal:16px;--wp--preset--font-size--huge:42px}.has-regular-font-size{font-size:1em}.has-larger-font-size{font-size:2.625em}.has-normal-font-size{font-size:var(--wp--preset--font-size--normal)}.has-huge-font-size{font-size:var(--wp--preset--font-size--huge)}:root .has-text-align-center{text-align:center}:root .has-text-align-left{text-align:left}:root .has-text-align-right{text-align:right}.has-fit-text{white-space:nowrap!important}#end-resizable-editor-section{display:none}.aligncenter{clear:both}.items-justified-left{justify-content:flex-start}.items-justified-center{justify-content:center}.items-justified-right{justify-content:flex-end}.items-justified-space-between{justify-content:space-between}.screen-reader-text{word-wrap:normal!important;border:0;clip-path:inset(50%);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;word-break:normal!important}.screen-reader-text:focus{background-color:#ddd;clip-path:none;color:#444;display:block;font-size:1em;height:auto;left:5px;line-height:normal;padding:15px 23px 14px;text-decoration:none;top:5px;width:auto;z-index:100000}html :where(.has-border-color){border-style:solid}html :where([style^=border-color],[style*=";border-color"],[style*="; border-color"]){border-style:solid}html :where([style^=border-top-color],[style*=";border-top-color"],[style*="; border-top-color"]){border-top-style:solid}html :where([style^=border-right-color],[style*=";border-right-color"],[style*="; border-right-color"]){border-right-style:solid}html :where([style^=border-bottom-color],[style*=";border-bottom-color"],[style*="; border-bottom-color"]){border-bottom-style:solid}html :where([style^=border-left-color],[style*=";border-left-color"],[style*="; border-left-color"]){border-left-style:solid}html :where([style^=border-width],[style*=";border-width"],[style*="; border-width"]){border-style:solid}html :where([style^=border-top-width],[style*=";border-top-width"],[style*="; border-top-width"]){border-top-style:solid}html :where([style^=border-right-width],[style*=";border-right-width"],[style*="; border-right-width"]){border-right-style:solid}html :where([style^=border-bottom-width],[style*=";border-bottom-width"],[style*="; border-bottom-width"]){border-bottom-style:solid}html :where([style^=border-left-width],[style*=";border-left-width"],[style*="; border-left-width"]){border-left-style:solid}html :where(img[class*=wp-image-]){height:auto;max-width:100%}:where(figure){margin:0 0 1em}html :where(.is-position-sticky){--wp-admin--admin-bar--position-offset:var(--wp-admin--admin-bar--height,0px)}@media screen and (max-width:600px){html :where(.is-position-sticky){--wp-admin--admin-bar--position-offset:0px}}
+
+/*# sourceURL=/wp-content/plugins/gutenberg-core/v23.9.0/build/styles/block-library/common.min.css */
+</style>
+<style id="wp-block-library-inline-css-extra">
+.has-text-align-justify {
+	text-align:justify;
+}
+.has-text-align-justify{text-align:justify;}
+/*# sourceURL=wp-block-library-inline-css */
+</style>
+
+<style id="classic-theme-styles-inline-css">
+.wp-block-button__link{background-color:#32373c;border-radius:9999px;box-shadow:none;color:#fff;font-size:1.125em;padding:calc(.667em + 2px) calc(1.333em + 2px);text-decoration:none}.wp-block-file__button{background:#32373c;color:#fff}.wp-block-accordion-heading{margin:0}.wp-block-accordion-heading__toggle{background-color:inherit!important;color:inherit!important}.wp-block-accordion-heading__toggle:not(:focus-visible){outline:none}.wp-block-accordion-heading__toggle:focus,.wp-block-accordion-heading__toggle:hover{background-color:inherit!important;border:none;box-shadow:none;color:inherit;padding:var(--wp--preset--spacing--20,1em) 0;text-decoration:none}.wp-block-accordion-heading__toggle:focus-visible{outline:auto;outline-offset:0}.wp-block-tab:not(.has-text-color){color:inherit!important}.wp-block-tab:not(.has-background){background-color:inherit!important}.wp-block-tab:focus,.wp-block-tab:hover{text-decoration:none}.wp-block-tab:focus-visible{outline:auto;outline-offset:0}
+/*# sourceURL=/wp-content/plugins/gutenberg-core/v23.9.0/build/styles/block-library/classic.min.css */
+</style>
+
+<style id="coblocks-inline-format-inline-css">
+.uppercase{text-transform:uppercase}
+/*# sourceURL=coblocks-inline-format-inline-css */
+</style>
+<link crossorigin='anonymous' rel='stylesheet' id='all-css-12-1' href='/_static/??/wp-content/mu-plugins/core-compat/wp-mediaelement.css,/wp-content/mu-plugins/wpcom-bbpress-premium-themes.css?m=1432920480j&cssminify=yes' type='text/css' media='all' />
+<style id="global-styles-inline-css">
+:root{--wp--preset--aspect-ratio--square: 1;--wp--preset--aspect-ratio--4-3: 4/3;--wp--preset--aspect-ratio--3-4: 3/4;--wp--preset--aspect-ratio--3-2: 3/2;--wp--preset--aspect-ratio--2-3: 2/3;--wp--preset--aspect-ratio--16-9: 16/9;--wp--preset--aspect-ratio--9-16: 9/16;--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #fff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--color--dark-gray: #1a1a1a;--wp--preset--color--medium-gray: #686868;--wp--preset--color--light-gray: #e5e5e5;--wp--preset--color--blue-gray: #4d545c;--wp--preset--color--bright-blue: #007acc;--wp--preset--color--light-blue: #9adffd;--wp--preset--color--dark-brown: #402b30;--wp--preset--color--medium-brown: #774e24;--wp--preset--color--dark-red: #640c1f;--wp--preset--color--bright-red: #ff675f;--wp--preset--color--yellow: #ffef8e;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgb(6,147,227) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgb(252,185,0) 0%,rgb(255,105,0) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgb(255,105,0) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--font-family--albert-sans: 'Albert Sans', sans-serif;--wp--preset--font-family--alegreya: Alegreya, serif;--wp--preset--font-family--arvo: Arvo, serif;--wp--preset--font-family--bodoni-moda: 'Bodoni Moda', serif;--wp--preset--font-family--bricolage-grotesque: 'Bricolage Grotesque', sans-serif;--wp--preset--font-family--cabin: Cabin, sans-serif;--wp--preset--font-family--chivo: Chivo, sans-serif;--wp--preset--font-family--commissioner: Commissioner, sans-serif;--wp--preset--font-family--cormorant: Cormorant, serif;--wp--preset--font-family--courier-prime: 'Courier Prime', monospace;--wp--preset--font-family--crimson-pro: 'Crimson Pro', serif;--wp--preset--font-family--dm-mono: 'DM Mono', monospace;--wp--preset--font-family--dm-sans: 'DM Sans', sans-serif;--wp--preset--font-family--dm-serif-display: 'DM Serif Display', serif;--wp--preset--font-family--domine: Domine, serif;--wp--preset--font-family--eb-garamond: 'EB Garamond', serif;--wp--preset--font-family--epilogue: Epilogue, sans-serif;--wp--preset--font-family--fahkwang: Fahkwang, sans-serif;--wp--preset--font-family--figtree: Figtree, sans-serif;--wp--preset--font-family--fira-sans: 'Fira Sans', sans-serif;--wp--preset--font-family--fjalla-one: 'Fjalla One', sans-serif;--wp--preset--font-family--fraunces: Fraunces, serif;--wp--preset--font-family--gabarito: Gabarito, system-ui;--wp--preset--font-family--ibm-plex-mono: 'IBM Plex Mono', monospace;--wp--preset--font-family--ibm-plex-sans: 'IBM Plex Sans', sans-serif;--wp--preset--font-family--ibarra-real-nova: 'Ibarra Real Nova', serif;--wp--preset--font-family--instrument-serif: 'Instrument Serif', serif;--wp--preset--font-family--inter: Inter, sans-serif;--wp--preset--font-family--josefin-sans: 'Josefin Sans', sans-serif;--wp--preset--font-family--jost: Jost, sans-serif;--wp--preset--font-family--libre-baskerville: 'Libre Baskerville', serif;--wp--preset--font-family--libre-franklin: 'Libre Franklin', sans-serif;--wp--preset--font-family--literata: Literata, serif;--wp--preset--font-family--lora: Lora, serif;--wp--preset--font-family--merriweather: Merriweather, serif;--wp--preset--font-family--montserrat: Montserrat, sans-serif;--wp--preset--font-family--newsreader: Newsreader, serif;--wp--preset--font-family--noto-sans-mono: 'Noto Sans Mono', sans-serif;--wp--preset--font-family--nunito: Nunito, sans-serif;--wp--preset--font-family--open-sans: 'Open Sans', sans-serif;--wp--preset--font-family--overpass: Overpass, sans-serif;--wp--preset--font-family--pt-serif: 'PT Serif', serif;--wp--preset--font-family--petrona: Petrona, serif;--wp--preset--font-family--piazzolla: Piazzolla, serif;--wp--preset--font-family--playfair-display: 'Playfair Display', serif;--wp--preset--font-family--plus-jakarta-sans: 'Plus Jakarta Sans', sans-serif;--wp--preset--font-family--poppins: Poppins, sans-serif;--wp--preset--font-family--raleway: Raleway, sans-serif;--wp--preset--font-family--roboto: Roboto, sans-serif;--wp--preset--font-family--roboto-slab: 'Roboto Slab', serif;--wp--preset--font-family--rubik: Rubik, sans-serif;--wp--preset--font-family--rufina: Rufina, serif;--wp--preset--font-family--sora: Sora, sans-serif;--wp--preset--font-family--source-sans-3: 'Source Sans 3', sans-serif;--wp--preset--font-family--source-serif-4: 'Source Serif 4', serif;--wp--preset--font-family--space-mono: 'Space Mono', monospace;--wp--preset--font-family--syne: Syne, sans-serif;--wp--preset--font-family--texturina: Texturina, serif;--wp--preset--font-family--urbanist: Urbanist, sans-serif;--wp--preset--font-family--work-sans: 'Work Sans', sans-serif;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgb(255, 255, 255), 6px 6px rgb(0, 0, 0);--wp--preset--shadow--crisp: 6px 6px 0px rgb(0, 0, 0);}.wp-block-button{--wp--preset--dimension--25: 25%;--wp--preset--dimension--50: 50%;--wp--preset--dimension--75: 75%;--wp--preset--dimension--100: 100%;}:where(body) { margin: 0; }:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}body{padding-top: 0px;padding-right: 0px;padding-bottom: 0px;padding-left: 0px;}:root :where(.wp-element-button, .wp-block-button__link){background-color: #32373c;border-width: 0;color: #fff;font-family: inherit;font-size: inherit;font-style: inherit;font-weight: inherit;letter-spacing: inherit;line-height: inherit;padding-top: calc(0.667em + 2px);padding-right: calc(1.333em + 2px);padding-bottom: calc(0.667em + 2px);padding-left: calc(1.333em + 2px);text-decoration: none;text-transform: inherit;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-dark-gray-color{color: var(--wp--preset--color--dark-gray) !important;}.has-medium-gray-color{color: var(--wp--preset--color--medium-gray) !important;}.has-light-gray-color{color: var(--wp--preset--color--light-gray) !important;}.has-blue-gray-color{color: var(--wp--preset--color--blue-gray) !important;}.has-bright-blue-color{color: var(--wp--preset--color--bright-blue) !important;}.has-light-blue-color{color: var(--wp--preset--color--light-blue) !important;}.has-dark-brown-color{color: var(--wp--preset--color--dark-brown) !important;}.has-medium-brown-color{color: var(--wp--preset--color--medium-brown) !important;}.has-dark-red-color{color: var(--wp--preset--color--dark-red) !important;}.has-bright-red-color{color: var(--wp--preset--color--bright-red) !important;}.has-yellow-color{color: var(--wp--preset--color--yellow) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-dark-gray-background-color{background-color: var(--wp--preset--color--dark-gray) !important;}.has-medium-gray-background-color{background-color: var(--wp--preset--color--medium-gray) !important;}.has-light-gray-background-color{background-color: var(--wp--preset--color--light-gray) !important;}.has-blue-gray-background-color{background-color: var(--wp--preset--color--blue-gray) !important;}.has-bright-blue-background-color{background-color: var(--wp--preset--color--bright-blue) !important;}.has-light-blue-background-color{background-color: var(--wp--preset--color--light-blue) !important;}.has-dark-brown-background-color{background-color: var(--wp--preset--color--dark-brown) !important;}.has-medium-brown-background-color{background-color: var(--wp--preset--color--medium-brown) !important;}.has-dark-red-background-color{background-color: var(--wp--preset--color--dark-red) !important;}.has-bright-red-background-color{background-color: var(--wp--preset--color--bright-red) !important;}.has-yellow-background-color{background-color: var(--wp--preset--color--yellow) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-dark-gray-border-color{border-color: var(--wp--preset--color--dark-gray) !important;}.has-medium-gray-border-color{border-color: var(--wp--preset--color--medium-gray) !important;}.has-light-gray-border-color{border-color: var(--wp--preset--color--light-gray) !important;}.has-blue-gray-border-color{border-color: var(--wp--preset--color--blue-gray) !important;}.has-bright-blue-border-color{border-color: var(--wp--preset--color--bright-blue) !important;}.has-light-blue-border-color{border-color: var(--wp--preset--color--light-blue) !important;}.has-dark-brown-border-color{border-color: var(--wp--preset--color--dark-brown) !important;}.has-medium-brown-border-color{border-color: var(--wp--preset--color--medium-brown) !important;}.has-dark-red-border-color{border-color: var(--wp--preset--color--dark-red) !important;}.has-bright-red-border-color{border-color: var(--wp--preset--color--bright-red) !important;}.has-yellow-border-color{border-color: var(--wp--preset--color--yellow) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}.has-albert-sans-font-family{font-family: var(--wp--preset--font-family--albert-sans) !important;}.has-alegreya-font-family{font-family: var(--wp--preset--font-family--alegreya) !important;}.has-arvo-font-family{font-family: var(--wp--preset--font-family--arvo) !important;}.has-bodoni-moda-font-family{font-family: var(--wp--preset--font-family--bodoni-moda) !important;}.has-bricolage-grotesque-font-family{font-family: var(--wp--preset--font-family--bricolage-grotesque) !important;}.has-cabin-font-family{font-family: var(--wp--preset--font-family--cabin) !important;}.has-chivo-font-family{font-family: var(--wp--preset--font-family--chivo) !important;}.has-commissioner-font-family{font-family: var(--wp--preset--font-family--commissioner) !important;}.has-cormorant-font-family{font-family: var(--wp--preset--font-family--cormorant) !important;}.has-courier-prime-font-family{font-family: var(--wp--preset--font-family--courier-prime) !important;}.has-crimson-pro-font-family{font-family: var(--wp--preset--font-family--crimson-pro) !important;}.has-dm-mono-font-family{font-family: var(--wp--preset--font-family--dm-mono) !important;}.has-dm-sans-font-family{font-family: var(--wp--preset--font-family--dm-sans) !important;}.has-dm-serif-display-font-family{font-family: var(--wp--preset--font-family--dm-serif-display) !important;}.has-domine-font-family{font-family: var(--wp--preset--font-family--domine) !important;}.has-eb-garamond-font-family{font-family: var(--wp--preset--font-family--eb-garamond) !important;}.has-epilogue-font-family{font-family: var(--wp--preset--font-family--epilogue) !important;}.has-fahkwang-font-family{font-family: var(--wp--preset--font-family--fahkwang) !important;}.has-figtree-font-family{font-family: var(--wp--preset--font-family--figtree) !important;}.has-fira-sans-font-family{font-family: var(--wp--preset--font-family--fira-sans) !important;}.has-fjalla-one-font-family{font-family: var(--wp--preset--font-family--fjalla-one) !important;}.has-fraunces-font-family{font-family: var(--wp--preset--font-family--fraunces) !important;}.has-gabarito-font-family{font-family: var(--wp--preset--font-family--gabarito) !important;}.has-ibm-plex-mono-font-family{font-family: var(--wp--preset--font-family--ibm-plex-mono) !important;}.has-ibm-plex-sans-font-family{font-family: var(--wp--preset--font-family--ibm-plex-sans) !important;}.has-ibarra-real-nova-font-family{font-family: var(--wp--preset--font-family--ibarra-real-nova) !important;}.has-instrument-serif-font-family{font-family: var(--wp--preset--font-family--instrument-serif) !important;}.has-inter-font-family{font-family: var(--wp--preset--font-family--inter) !important;}.has-josefin-sans-font-family{font-family: var(--wp--preset--font-family--josefin-sans) !important;}.has-jost-font-family{font-family: var(--wp--preset--font-family--jost) !important;}.has-libre-baskerville-font-family{font-family: var(--wp--preset--font-family--libre-baskerville) !important;}.has-libre-franklin-font-family{font-family: var(--wp--preset--font-family--libre-franklin) !important;}.has-literata-font-family{font-family: var(--wp--preset--font-family--literata) !important;}.has-lora-font-family{font-family: var(--wp--preset--font-family--lora) !important;}.has-merriweather-font-family{font-family: var(--wp--preset--font-family--merriweather) !important;}.has-montserrat-font-family{font-family: var(--wp--preset--font-family--montserrat) !important;}.has-newsreader-font-family{font-family: var(--wp--preset--font-family--newsreader) !important;}.has-noto-sans-mono-font-family{font-family: var(--wp--preset--font-family--noto-sans-mono) !important;}.has-nunito-font-family{font-family: var(--wp--preset--font-family--nunito) !important;}.has-open-sans-font-family{font-family: var(--wp--preset--font-family--open-sans) !important;}.has-overpass-font-family{font-family: var(--wp--preset--font-family--overpass) !important;}.has-pt-serif-font-family{font-family: var(--wp--preset--font-family--pt-serif) !important;}.has-petrona-font-family{font-family: var(--wp--preset--font-family--petrona) !important;}.has-piazzolla-font-family{font-family: var(--wp--preset--font-family--piazzolla) !important;}.has-playfair-display-font-family{font-family: var(--wp--preset--font-family--playfair-display) !important;}.has-plus-jakarta-sans-font-family{font-family: var(--wp--preset--font-family--plus-jakarta-sans) !important;}.has-poppins-font-family{font-family: var(--wp--preset--font-family--poppins) !important;}.has-raleway-font-family{font-family: var(--wp--preset--font-family--raleway) !important;}.has-roboto-font-family{font-family: var(--wp--preset--font-family--roboto) !important;}.has-roboto-slab-font-family{font-family: var(--wp--preset--font-family--roboto-slab) !important;}.has-rubik-font-family{font-family: var(--wp--preset--font-family--rubik) !important;}.has-rufina-font-family{font-family: var(--wp--preset--font-family--rufina) !important;}.has-sora-font-family{font-family: var(--wp--preset--font-family--sora) !important;}.has-source-sans-3-font-family{font-family: var(--wp--preset--font-family--source-sans-3) !important;}.has-source-serif-4-font-family{font-family: var(--wp--preset--font-family--source-serif-4) !important;}.has-space-mono-font-family{font-family: var(--wp--preset--font-family--space-mono) !important;}.has-syne-font-family{font-family: var(--wp--preset--font-family--syne) !important;}.has-texturina-font-family{font-family: var(--wp--preset--font-family--texturina) !important;}.has-urbanist-font-family{font-family: var(--wp--preset--font-family--urbanist) !important;}.has-work-sans-font-family{font-family: var(--wp--preset--font-family--work-sans) !important;}
+/*# sourceURL=global-styles-inline-css */
+</style>
+
+<link crossorigin='anonymous' rel='stylesheet' id='all-css-14-1' href='/wp-content/mu-plugins/jetpack-mu-wpcom-plugin/moon/jetpack_vendor/automattic/jetpack-mu-wpcom/src/build/verbum-comments/verbum-comments.css?m=1785895867i&cssminify=yes' type='text/css' media='all' />
+<link rel='stylesheet' id='verbum-gutenberg-css-css' href='https://widgets.wp.com/verbum-block-editor/block-editor.css?ver=1771405207' media='all' />
+<link crossorigin='anonymous' rel='stylesheet' id='all-css-16-1' href='/_static/??-eJyNjbEOgzAQQ3+o1KBK0AXxKVU5nSCQXKLeRcDfN6o6dGDoZlvPNrZUURRjMYRcJZ8nJ4qFLT1p/XqEGAUPJ4SJhV+uNPRcXkn1gp9RmzmwIuURtpXgULcbs0Dt8Pw/XkCMPtL6uRhC33Rd09bt7V4vb1EVSjI=&cssminify=yes' type='text/css' media='all' />
+<link crossorigin='anonymous' rel='stylesheet' id='all-css-22-1' href='/_static/??-eJx9y0EOwjAMRNELYUxEK7FBnKWNTAhK7Kh2lPb2pGyADbv5Iz1sBbywERvagzIpljqjtX5sGlcjYvSqqLYlgla85GPvA37BXKGkGiIrLjQnCX2Gt/rkPxRIIImfLAr/BNzTFJed3vLVjW4YT2fnLs8X8DhDqQ==&cssminify=yes' type='text/css' media='all' />
+<style id="jetpack-global-styles-frontend-style-inline-css">
+:root { --font-headings: unset; --font-base: unset; --font-headings-default: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif; --font-base-default: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;}
+/*# sourceURL=jetpack-global-styles-frontend-style-inline-css */
+</style>
+<link crossorigin='anonymous' rel='stylesheet' id='all-css-24-1' href='/_static/??-eJyNjcEKAjEMRH/ImhVlqwfxU6TbhrZrmhTTIv69u+JFvHgZ5sHwBh7VeOGG3KB0U6nHzAoztur87cNQRNYInVBBk7tjcCE83zVz3HrVDfxvumb2MPVMAVR8dmRIougX/DhbwrK8pwNEksnROriU884e9+PJDnaYXxwFS20=&cssminify=yes' type='text/css' media='all' />
+<script id="jetpack_related-posts-js-extra">
+var related_posts_js_options = {"post_heading":"h4"};
+//# sourceURL=jetpack_related-posts-js-extra
+</script>
+<script id="wpcom-actionbar-placeholder-js-extra">
+var actionbardata = {"siteID":"702124","postID":"24784","siteURL":"https://emshort.blog","xhrURL":"https://emshort.blog/wp-admin/admin-ajax.php","nonce":"634d7729f3","isLoggedIn":"","statusMessage":"","subsEmailDefault":"instantly","proxyScriptUrl":"https://s0.wp.com/wp-content/js/wpcom-proxy-request.js?m=1513050504i&amp;ver=20211021","shortlink":"https://wp.me/p2WEA-6rK","i18n":{"followedText":"New posts from this site will now appear in your \u003Ca href=\"https://wordpress.com/reader\"\u003EReader\u003C/a\u003E","foldBar":"Collapse this bar","unfoldBar":"Expand this bar","shortLinkCopied":"Shortlink copied to clipboard."}};
+//# sourceURL=wpcom-actionbar-placeholder-js-extra
+</script>
+<script id="jetpack-mu-wpcom-settings-js-before">
+var JETPACK_MU_WPCOM_SETTINGS = {"assetsUrl":"https://s0.wp.com/wp-content/mu-plugins/jetpack-mu-wpcom-plugin/moon/jetpack_vendor/automattic/jetpack-mu-wpcom/src/build/"};
+//# sourceURL=jetpack-mu-wpcom-settings-js-before
+</script>
+<script crossorigin='anonymous' type='text/javascript'  src='/_static/??-eJxdjEsOwjAMRC9E6lIpsEIcBfVj0YTYsWpHbW/fILEAlm9m3sAqbsxsyAZUnKTyDKwQ0aQfXx8GypnhEXiEoYQ0wYKpN5ycZDX9pYYCN1FP8HUc6yaZkyVv+39nMxIqSBnA1hrsGjZD5Lc0GyVfhTvdzlfv2/bSdT4e2plCCA=='></script>
+<script id="rlt-proxy-js-after">
+	rltInitialize( {"token":null,"iframeOrigins":["https:\/\/widgets.wp.com"]} );
+//# sourceURL=rlt-proxy-js-after
+</script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://emshort.wordpress.com/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress.com" />
+<link rel="canonical" href="https://emshort.blog/2016/09/12/visualizing-procgen-text-part-two/" />
+<link rel='shortlink' href='https://wp.me/p2WEA-6rK' />
+<link rel="alternate" type="application/json+oembed" href="https://public-api.wordpress.com/oembed/?format=json&amp;url=https%3A%2F%2Femshort.blog%2F2016%2F09%2F12%2Fvisualizing-procgen-text-part-two%2F&amp;for=wpcom-auto-discovery" /><link rel="alternate" type="application/xml+oembed" href="https://public-api.wordpress.com/oembed/?format=xml&amp;url=https%3A%2F%2Femshort.blog%2F2016%2F09%2F12%2Fvisualizing-procgen-text-part-two%2F&amp;for=wpcom-auto-discovery" />
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Visualizing Procgen Text, Part Two" />
+<meta property="og:url" content="https://emshort.blog/2016/09/12/visualizing-procgen-text-part-two/" />
+<meta property="og:description" content="In a previous post (now several months ago — sorry!) I wrote about visualization strategies for looking at procedurally generated text from The Mary Jane of Tomorrow and determining whether the pro…" />
+<meta property="article:published_time" content="2016-09-12T08:15:06+00:00" />
+<meta property="article:modified_time" content="2016-09-12T10:05:47+00:00" />
+<meta property="og:site_name" content="Emily Short&#039;s Interactive Storytelling" />
+<meta property="og:image" content="https://emshort.blog/wp-content/uploads/2016/09/screen-shot-2016-09-11-at-4-45-52-pm.png?w=600" />
+<meta property="og:image:width" content="300" />
+<meta property="og:image:height" content="108" />
+<meta property="og:image:alt" content="screen-shot-2016-09-11-at-4-45-52-pm" />
+<meta property="og:locale" content="en_US" />
+<meta property="article:publisher" content="https://www.facebook.com/WordPresscom" />
+<meta name="twitter:creator" content="@emshort" />
+<meta name="twitter:text:title" content="Visualizing Procgen Text, Part&nbsp;Two" />
+<meta name="twitter:image" content="https://emshort.blog/wp-content/uploads/2016/09/screen-shot-2016-09-11-at-4-45-52-pm.png?w=144" />
+<meta name="twitter:image:alt" content="screen-shot-2016-09-11-at-4-45-52-pm" />
+<meta name="twitter:card" content="summary" />
+
+<!-- End Jetpack Open Graph Tags -->
+<link rel="shortcut icon" type="image/x-icon" href="https://s0.wp.com/i/favicon.ico?m=1713425267i" sizes="16x16 24x24 32x32 48x48" />
+<link rel="icon" type="image/x-icon" href="https://s0.wp.com/i/favicon.ico?m=1713425267i" sizes="16x16 24x24 32x32 48x48" />
+<link rel="apple-touch-icon" href="https://s0.wp.com/i/webclip.png?m=1713868326i" />
+<link rel='openid.server' href='https://emshort.blog/?openidserver=1' />
+<link rel='openid.delegate' href='https://emshort.blog/' />
+<link rel="search" type="application/opensearchdescription+xml" href="https://emshort.blog/osd.xml" title="Emily Short&#039;s Interactive Storytelling" />
+<link rel="search" type="application/opensearchdescription+xml" href="https://s1.wp.com/opensearch.xml" title="WordPress.com" />
+<meta name="theme-color" content="#161854" />
+<style>.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>		<style type="text/css">
+			.recentcomments a {
+				display: inline !important;
+				padding: 0 !important;
+				margin: 0 !important;
+			}
+
+			table.recentcommentsavatartop img.avatar, table.recentcommentsavatarend img.avatar {
+				border: 0px;
+				margin: 0;
+			}
+
+			table.recentcommentsavatartop a, table.recentcommentsavatarend a {
+				border: 0px !important;
+				background-color: transparent !important;
+			}
+
+			td.recentcommentsavatarend, td.recentcommentsavatartop {
+				padding: 0px 0px 1px 0px;
+				margin: 0px;
+			}
+
+			td.recentcommentstextend {
+				border: none !important;
+				padding: 0px 0px 2px 10px;
+			}
+
+			.rtl td.recentcommentstextend {
+				padding: 0px 10px 2px 0px;
+			}
+
+			td.recentcommentstexttop {
+				border: none;
+				padding: 0px 0px 0px 10px;
+			}
+
+			.rtl td.recentcommentstexttop {
+				padding: 0px 10px 0px 0px;
+			}
+		</style>
+		<meta name="description" content="In a previous post (now several months ago — sorry!) I wrote about visualization strategies for looking at procedurally generated text from The Mary Jane of Tomorrow and determining whether the procedural generation was being used to best effect. There, I proposed looking at salience (how many aspects of the world model are reflected by&hellip;" />
+<style id="custom-background-css">
+body.custom-background { background-color: #161854; }
+</style>
+<style type="text/css" id="custom-colors-css">	input[type="text"],
+	input[type="email"],
+	input[type="url"],
+	input[type="password"],
+	input[type="search"],
+	input[type="tel"],
+	input[type="number"],
+	textarea {
+		background: #f7f7f7;
+		color: #686868;
+	}
+
+	input[type="text"]:focus,
+	input[type="email"]:focus,
+	input[type="url"]:focus,
+	input[type="password"]:focus,
+	input[type="search"]:focus,
+	input[type="tel"]:focus,
+	input[type="number"]:focus,
+	textarea:focus {
+		background-color: #fff;
+		color: #1a1a1a;
+	}
+body { background-color: #161854;}
+.site,
+		.main-navigation ul ul li { background-color: #ffffff;}
+body #infinite-footer .container { background-color: #ffffff;}
+body #infinite-footer .container { background-color: rgba( 255, 255, 255, 0.9 );}
+.main-navigation ul ul:after { border-top-color: #ffffff;}
+.main-navigation ul ul:after { border-bottom-color: #ffffff;}
+mark,
+		ins,
+		button,
+		button[disabled]:hover,
+		button[disabled]:focus,
+		input[type="button"],
+		input[type="button"][disabled]:hover,
+		input[type="button"][disabled]:focus,
+		input[type="reset"],
+		input[type="reset"][disabled]:hover,
+		input[type="reset"][disabled]:focus,
+		input[type="submit"],
+		input[type="submit"][disabled]:hover,
+		input[type="submit"][disabled]:focus,
+		.menu-toggle.toggled-on,
+		.menu-toggle.toggled-on:hover,
+		.menu-toggle.toggled-on:focus,
+		.pagination .prev,
+		.pagination .next,
+		.pagination .prev:hover,
+		.pagination .prev:focus,
+		.pagination .next:hover,
+		.pagination .next:focus,
+		.pagination .nav-links:before,
+		.pagination .nav-links:after,
+		.widget_calendar tbody a,
+		.widget_calendar tbody a:hover,
+		.widget_calendar tbody a:focus,
+		.page-links a,
+		.page-links a:hover,
+		.page-links a:focus,
+		.site-main #infinite-handle span,
+		.wp-block-button .wp-block-button__link:active,
+		.wp-block-button .wp-block-button__link:focus,
+		.wp-block-button .wp-block-button__link:hover,
+		.is-style-outline>.wp-block-button__link:not(.has-text-color):active,
+		.is-style-outline>.wp-block-button__link:not(.has-text-color):focus,
+		.is-style-outline>.wp-block-button__link:not(.has-text-color):hover { color: #ffffff;}
+.menu-toggle:hover,
+		.menu-toggle:focus,
+		a,
+		.main-navigation a:hover,
+		.main-navigation a:focus,
+		.dropdown-toggle:hover,
+		.dropdown-toggle:focus,
+		.social-navigation a:hover:before,
+		.social-navigation a:focus:before,
+		.post-navigation a:hover .post-title,
+		.post-navigation a:focus .post-title,
+		.tagcloud a:hover,
+		.tagcloud a:focus,
+		.site-branding .site-title a:hover,
+		.site-branding .site-title a:focus,
+		.entry-title a:hover,
+		.entry-title a:focus,
+		.entry-footer a:hover,
+		.entry-footer a:focus,
+		.comment-metadata a:hover,
+		.comment-metadata a:focus,
+		.pingback .comment-edit-link:hover,
+		.pingback .comment-edit-link:focus,
+		.comment-reply-link,
+		.comment-reply-link:hover,
+		.comment-reply-link:focus,
+		.required,
+		.site-info a:hover,
+		.site-info a:focus,
+		.main-navigation li:hover > a,
+		.main-navigation li.focus > a,
+		.comments-area #respond .comment-form-service a,
+		.widget_flickr #flickr_badge_uber_wrapper a,
+		.widget_flickr #flickr_badge_uber_wrapper a:link,
+		.widget_flickr #flickr_badge_uber_wrapper a:active,
+		.widget_flickr #flickr_badge_uber_wrapper a:visited,
+		.wp_widget_tag_cloud a:hover,
+		.wp_widget_tag_cloud a:focus,
+		body #infinite-footer .blog-info a:hover,
+		body #infinite-footer .blog-info a:focus,
+		body #infinite-footer .blog-info a:hover,
+		body #infinite-footer .blog-info a:focus,
+		body #infinite-footer .blog-credits a:hover,
+		body #infinite-footer .blog-credits a:focus,
+		.is-style-outline>.wp-block-button__link:not(.has-text-color) { color: #007ACC;}
+mark,
+		ins,
+		button:hover,
+		button:focus,
+		input[type="button"]:hover,
+		input[type="button"]:focus,
+		input[type="reset"]:hover,
+		input[type="reset"]:focus,
+		input[type="submit"]:hover,
+		input[type="submit"]:focus,
+		.pagination .prev:hover,
+		.pagination .prev:focus,
+		.pagination .next:hover,
+		.pagination .next:focus,
+		.widget_calendar tbody a,
+		.page-links a:hover,
+		.page-links a:focus,
+		#infinite-handle span:hover,
+		#infinite-handle span:focus,
+		.wp-block-button .wp-block-button__link { background-color: #007ACC;}
+input[type="text"]:focus,
+		input[type="email"]:focus,
+		input[type="url"]:focus,
+		input[type="password"]:focus,
+		input[type="search"]:focus,
+		textarea:focus,
+		.tagcloud a:hover,
+		.tagcloud a:focus,
+		.menu-toggle:hover,
+		.menu-toggle:focus,
+		.comments-area #respond #comment-form-comment.active,
+		.comments-area #comment-form-share-text-padder.active,
+		.comments-area #respond .comment-form-fields div.comment-form-input.active,
+		.wp_widget_tag_cloud a:hover,
+		.wp_widget_tag_cloud a:focus,
+		.wp-block-button .wp-block-button__link { border-color: #007ACC;}
+body,
+		blockquote cite,
+		blockquote small,
+		.main-navigation a,
+		.menu-toggle,
+		.dropdown-toggle,
+		.social-navigation a,
+		.post-navigation a,
+		.widget-title a,
+		.site-branding .site-title a,
+		.entry-title a,
+		.page-links > .page-links-title,
+		.comment-author,
+		.comment-reply-title small a:hover,
+		.comment-reply-title small a:focus { color: #1A1A1A;}
+blockquote,
+		.menu-toggle.toggled-on,
+		.menu-toggle.toggled-on:hover,
+		.menu-toggle.toggled-on:focus,
+		.post-navigation,
+		.post-navigation div + div,
+		.pagination,
+		.widget,
+		.page-header,
+		.page-links a,
+		.comments-title,
+		.comment-reply-title,
+		.wp-block-button .wp-block-button__link:active,
+		.wp-block-button .wp-block-button__link:focus,
+		.wp-block-button .wp-block-button__link:hover,
+		.is-style-outline>.wp-block-button__link:not(.has-text-color):active,
+		.is-style-outline>.wp-block-button__link:not(.has-text-color):focus,
+		.is-style-outline>.wp-block-button__link:not(.has-text-color):hover { border-color: #1A1A1A;}
+button,
+		button[disabled]:hover,
+		button[disabled]:focus,
+		input[type="button"],
+		input[type="button"][disabled]:hover,
+		input[type="button"][disabled]:focus,
+		input[type="reset"],
+		input[type="reset"][disabled]:hover,
+		input[type="reset"][disabled]:focus,
+		input[type="submit"],
+		input[type="submit"][disabled]:hover,
+		input[type="submit"][disabled]:focus,
+		.menu-toggle.toggled-on,
+		.menu-toggle.toggled-on:hover,
+		.menu-toggle.toggled-on:focus,
+		.pagination:before,
+		.pagination:after,
+		.pagination .prev,
+		.pagination .next,
+		.page-links a,
+		.site-main #infinite-handle span,
+		.wp-block-button .wp-block-button__link:active,
+		.wp-block-button .wp-block-button__link:focus,
+		.wp-block-button .wp-block-button__link:hover,
+		.is-style-outline>.wp-block-button__link:not(.has-text-color):active,
+		.is-style-outline>.wp-block-button__link:not(.has-text-color):focus,
+		.is-style-outline>.wp-block-button__link:not(.has-text-color):hover { background-color: #1A1A1A;}
+fieldset,
+		pre,
+		abbr,
+		acronym,
+		table,
+		th,
+		td,
+		input[type="text"],
+		input[type="email"],
+		input[type="url"],
+		input[type="password"],
+		input[type="search"],
+		textarea,
+		.main-navigation li,
+		.main-navigation .primary-menu,
+		.menu-toggle,
+		.dropdown-toggle:after,
+		.social-navigation a,
+		.image-navigation,
+		.comment-navigation,
+		.tagcloud a,
+		.entry-content,
+		.entry-summary,
+		.page-links a,
+		.page-links > span,
+		.comment-list article,
+		.comment-list .pingback,
+		.comment-list .trackback,
+		.comment-reply-link,
+		.no-comments,
+		.main-navigation ul ul,
+		.main-navigation ul ul li,
+		.comments-area #respond #comment-form-comment,
+		.comments-area #comment-form-share-text-padder,
+		.comments-area #respond .comment-form-fields div.comment-form-input,
+		.comments-area #respond .comment-form-service,
+		.wp_widget_tag_cloud a,
+		body #infinite-footer .container { border-color: #1a1a1a;}
+fieldset,
+		pre,
+		abbr,
+		acronym,
+		table,
+		th,
+		td,
+		input[type="text"],
+		input[type="email"],
+		input[type="url"],
+		input[type="password"],
+		input[type="search"],
+		textarea,
+		.main-navigation li,
+		.main-navigation .primary-menu,
+		.menu-toggle,
+		.dropdown-toggle:after,
+		.social-navigation a,
+		.image-navigation,
+		.comment-navigation,
+		.tagcloud a,
+		.entry-content,
+		.entry-summary,
+		.page-links a,
+		.page-links > span,
+		.comment-list article,
+		.comment-list .pingback,
+		.comment-list .trackback,
+		.comment-reply-link,
+		.no-comments,
+		.main-navigation ul ul,
+		.main-navigation ul ul li,
+		.comments-area #respond #comment-form-comment,
+		.comments-area #comment-form-share-text-padder,
+		.comments-area #respond .comment-form-fields div.comment-form-input,
+		.comments-area #respond .comment-form-service,
+		.wp_widget_tag_cloud a,
+		body #infinite-footer .container { border-color: rgba( 26, 26, 26, 0.2 );}
+.main-navigation ul ul:before { border-top-color: #1a1a1a;}
+.main-navigation ul ul:before { border-top-color: rgba( 26, 26, 26, 0.2 );}
+.main-navigation ul ul:before { border-bottom-color: #1a1a1a;}
+.main-navigation ul ul:before { border-bottom-color: rgba( 26, 26, 26, 0.2 );}
+hr,
+		code { background-color: #1a1a1a;}
+hr,
+		code { background-color: rgba( 26, 26, 26, 0.2 );}
+blockquote,
+		.post-password-form label,
+		a:hover,
+		a:focus,
+		a:active,
+		.post-navigation .meta-nav,
+		.image-navigation,
+		.comment-navigation,
+		.widget_recent_entries .post-date,
+		.widget_rss .rss-date,
+		.widget_rss cite,
+		.site-description,
+		body:not(.search-results) .entry-summary,
+		.author-bio,
+		.entry-footer,
+		.entry-footer a,
+		.sticky-post,
+		.taxonomy-description,
+		.entry-caption,
+		.comment-metadata,
+		.pingback .edit-link,
+		.comment-metadata a,
+		.pingback .comment-edit-link,
+		.comment-form label,
+		.comment-notes,
+		.comment-awaiting-moderation,
+		.logged-in-as,
+		.form-allowed-tags,
+		.site-info,
+		.site-info a,
+		.wp-caption .wp-caption-text,
+		.gallery-caption,
+		.jp-relatedposts-post-aoverlay:hover .jp-relatedposts-post-title a,
+		.jp-relatedposts-post-aoverlay:focus .jp-relatedposts-post-title a,
+		.comments-area #respond .comment-form-fields label,
+		.comments-area #respond .comment-form-fields label span.required,
+		.comments-area #respond .comment-form-fields label span.nopublish,
+		.comments-area #respond .comment-form-service a:hover,
+		.comments-area #respond .comment-form-service a:focus,
+		.comments-area #respond .comment-form-fields p.comment-form-posting-as,
+		.comments-area #respond .comment-form-fields p.comment-form-log-out,
+		.comments-area #respond #comment-form-identity #comment-form-nascar p,
+		.comments-area #respond #comment-form-subscribe p,
+		.comment-content p.comment-likes span.comment-like-feedback,
+		.widget_flickr #flickr_badge_uber_wrapper a:focus,
+		.widget_flickr #flickr_badge_uber_wrapper a:hover,
+		.top_rated div > p,
+		body #infinite-footer .blog-info a,
+		body #infinite-footer .blog-credits,
+		body #infinite-footer .blog-credits a { color: #686868;}
+#respond.js .comment-form-fields label,
+		#respond.js .comment-form-fields label span.required,
+		#respond.js .comment-form-fields label span.nopublish { color: #686868;}
+.widget_calendar tbody a:hover,
+		.widget_calendar tbody a:focus { background-color: #686868;}
+</style>
+<link crossorigin='anonymous' rel='stylesheet' id='all-css-6-3' href='/_static/??-eJyNjMEKhDAMBX9IfaiIXsRPWdxskGqbFNPi7y+CevY4wzA4YkkqiSUh5DL6vDgxrJziTNvFCKqCjxPC1yttBjtc5L0iswLvD0F/2bOB5l2zsX+iW5zDKYx1P3RN07b1sP4BKPs7aw==&cssminify=yes' type='text/css' media='all' />
+<style id="jetpack-subscriptions-inline-css">
+#subscribe-email input {
+	width: 95%;
+}
+
+.comment-subscription-form {
+	margin-bottom: 1em;
+}
+
+.comment-subscription-form .subscribe-label {
+	display: inline !important;
+}
+
+/*
+Text meant only for screen readers.
+Provides support for themes that do not bundle this CSS yet.
+@see https://make.wordpress.org/accessibility/2015/02/09/hiding-text-for-screen-readers-with-wordpress-core/
+***********************************/
+.screen-reader-text {
+	border: 0;
+	clip-path: inset(50%);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute !important;
+	width: 1px;
+	overflow-wrap: normal !important;
+}
+
+/*# sourceURL=/wp-content/mu-plugins/jetpack-plugin/moon/_inc/build/subscriptions/subscriptions.min.css */
+</style>
+
+</head>
+
+<body class="wp-singular post-template-default single single-post postid-24784 single-format-standard custom-background wp-embed-responsive wp-theme-pubtwentysixteen customizer-styles-applied group-blog jetpack-reblog-enabled custom-colors">
+<div id="page" class="site">
+	<div class="site-inner">
+		<a class="skip-link screen-reader-text" href="#content">
+			Skip to content		</a>
+
+		<header id="masthead" class="site-header">
+			<div class="site-header-main">
+				<div class="site-branding">
+					<a href="https://emshort.blog/" class="site-logo-link" rel="home" itemprop="url"></a>
+											<p class="site-title"><a href="https://emshort.blog/" rel="home">Emily Short&#039;s Interactive Storytelling</a></p>
+												<p class="site-description">Narrative in games and new media</p>
+									</div><!-- .site-branding -->
+
+									<button id="menu-toggle" class="menu-toggle">Menu</button>
+
+					<div id="site-header-menu" class="site-header-menu">
+													<nav id="site-navigation" class="main-navigation" aria-label="Primary Menu">
+								<div class="menu-about-container"><ul id="menu-about" class="primary-menu"><li id="menu-item-2540" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-2540"><a href="https://emshort.blog/contact/">Contact and FAQ</a>
+<ul class="sub-menu">
+	<li id="menu-item-39954" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-39954"><a href="https://emshort.blog/contact/if-meetup-recording/">IF Meetup Recording</a></li>
+</ul>
+</li>
+<li id="menu-item-2538" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-2538"><a href="https://emshort.blog/my-work/">My Work</a>
+<ul class="sub-menu">
+	<li id="menu-item-39951" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-39951"><a href="https://emshort.blog/commercial-portfolio/">Games</a></li>
+	<li id="menu-item-40574" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-40574"><a href="https://emshort.blog/tools/">Tools</a></li>
+	<li id="menu-item-40489" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-40489"><a href="https://emshort.blog/publications/">Publications</a></li>
+	<li id="menu-item-39953" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-39953"><a href="https://emshort.blog/talks/">Talks</a></li>
+	<li id="menu-item-40467" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-40467"><a href="https://emshort.blog/services/">Consulting Services</a></li>
+</ul>
+</li>
+</ul></div>							</nav><!-- .main-navigation -->
+						
+											</div><!-- .site-header-menu -->
+							</div><!-- .site-header-main -->
+
+					</header><!-- .site-header -->
+
+		<div id="content" class="site-content">
+
+<div id="primary" class="content-area">
+	<main id="main" class="site-main">
+		
+<article id="post-24784" class="post-24784 post type-post status-publish format-standard hentry category-craft category-interactive-fiction category-procedural-text tag-procedural-generation tag-processing tag-the-mary-jane-of-tomorrow tag-visualization">
+	<header class="entry-header">
+		<h1 class="entry-title">Visualizing Procgen Text, Part&nbsp;Two</h1>	</header><!-- .entry-header -->
+
+	
+	
+	<div class="entry-content">
+		<p>In <a href="https://emshort.wordpress.com/2016/06/13/visualizing-procgen-text/">a previous post</a> (now several months ago — sorry!) I wrote about visualization strategies for looking at procedurally generated text from <a href="http://ifdb.tads.org/viewgame?id=27ztb4iulm9l7sqe">The Mary Jane of Tomorrow</a> and determining whether the procedural generation was being used to best effect.</p>
+<p>There, I proposed looking at salience (how many aspects of the world model are reflected by this text?), variety (how many options are there to fill this particular slot?) and distribution of varying sections (which parts of a sentence are being looked up elsewhere?)</p>
+<p>It&#8217;s probably worth having a look back at that post for context if you&#8217;re interested in this one, because there&#8217;s quite a lot of explanation there which I won&#8217;t try to duplicate here. But I&#8217;ve taken many of the examples from that post and run them through a <a href="https://processing.org">Processing</a> script that does the following things:</p>
+<p><strong>Underline text that has been expanded from a grammar token.</strong></p>
+<p>Underlining is not the prettiest thing, but the intent here is to expose the template-<img data-attachment-id="24786" data-permalink="https://emshort.blog/2016/09/12/visualizing-procgen-text-part-two/screen-shot-2016-09-11-at-4-45-52-pm/" data-orig-file="https://emshort.blog/wp-content/uploads/2016/09/screen-shot-2016-09-11-at-4-45-52-pm.png" data-orig-size="622,224" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="screen-shot-2016-09-11-at-4-45-52-pm" data-image-description="" data-image-caption="" data-large-file="https://emshort.blog/wp-content/uploads/2016/09/screen-shot-2016-09-11-at-4-45-52-pm.png?w=622" class=" size-medium wp-image-24786 alignright" src="https://emshort.blog/wp-content/uploads/2016/09/screen-shot-2016-09-11-at-4-45-52-pm.png?w=300&#038;h=108" alt="screen-shot-2016-09-11-at-4-45-52-pm" width="300" height="108" srcset="https://emshort.blog/wp-content/uploads/2016/09/screen-shot-2016-09-11-at-4-45-52-pm.png?w=600 600w, https://emshort.blog/wp-content/uploads/2016/09/screen-shot-2016-09-11-at-4-45-52-pm.png?w=300 300w, https://emshort.blog/wp-content/uploads/2016/09/screen-shot-2016-09-11-at-4-45-52-pm.png?w=150 150w" sizes="(max-width: 300px) 85vw, 300px" />structure of the text. The phrase &#8220;diced spam pie&#8221; is the result of expanding four layers of grammar tokens; in the last iteration, the Diced Spam is generated by one token that generates meat types, and the Pie by another token that generates types of dish.</p>
+<p>This method also draws attention to cases where the chunks of composition are too large or are inconsistent in size, as in the case of the generated limericks for this game:</p>
+<p><img data-attachment-id="24789" data-permalink="https://emshort.blog/2016/09/12/visualizing-procgen-text-part-two/screen-shot-2016-09-11-at-4-45-28-pm/" data-orig-file="https://emshort.blog/wp-content/uploads/2016/09/screen-shot-2016-09-11-at-4-45-28-pm.png" data-orig-size="1014,414" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="screen-shot-2016-09-11-at-4-45-28-pm" data-image-description="" data-image-caption="" data-large-file="https://emshort.blog/wp-content/uploads/2016/09/screen-shot-2016-09-11-at-4-45-28-pm.png?w=840" class="alignnone size-medium wp-image-24789" src="https://emshort.blog/wp-content/uploads/2016/09/screen-shot-2016-09-11-at-4-45-28-pm.png?w=300&#038;h=122" alt="screen-shot-2016-09-11-at-4-45-28-pm" width="300" height="122" srcset="https://emshort.blog/wp-content/uploads/2016/09/screen-shot-2016-09-11-at-4-45-28-pm.png?w=600 600w, https://emshort.blog/wp-content/uploads/2016/09/screen-shot-2016-09-11-at-4-45-28-pm.png?w=300 300w, https://emshort.blog/wp-content/uploads/2016/09/screen-shot-2016-09-11-at-4-45-28-pm.png?w=150 150w" sizes="(max-width: 300px) 85vw, 300px" /></p>
+<p>Though various factors (limerick topic, chosen rhyme scheme) have to be considered in selecting each line, the lines themselves don&#8217;t have room for a great deal of variation, and are likely to seem conspicuously same-y after a fairly short period of time. The first line of text locks in the choice of surrounding rhyme, which is part of why the later lines have to operate within a much smaller possibility space.</p>
+<p><strong><img data-attachment-id="24788" data-permalink="https://emshort.blog/2016/09/12/visualizing-procgen-text-part-two/screen-shot-2016-09-11-at-4-45-36-pm/" data-orig-file="https://emshort.blog/wp-content/uploads/2016/09/screen-shot-2016-09-11-at-4-45-36-pm.png" data-orig-size="872,246" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="screen-shot-2016-09-11-at-4-45-36-pm" data-image-description="" data-image-caption="" data-large-file="https://emshort.blog/wp-content/uploads/2016/09/screen-shot-2016-09-11-at-4-45-36-pm.png?w=840" class=" size-medium wp-image-24788 alignright" src="https://emshort.blog/wp-content/uploads/2016/09/screen-shot-2016-09-11-at-4-45-36-pm.png?w=300&#038;h=85" alt="screen-shot-2016-09-11-at-4-45-36-pm" width="300" height="85" srcset="https://emshort.blog/wp-content/uploads/2016/09/screen-shot-2016-09-11-at-4-45-36-pm.png?w=600 600w, https://emshort.blog/wp-content/uploads/2016/09/screen-shot-2016-09-11-at-4-45-36-pm.png?w=300 300w, https://emshort.blog/wp-content/uploads/2016/09/screen-shot-2016-09-11-at-4-45-36-pm.png?w=150 150w" sizes="(max-width: 300px) 85vw, 300px" />Increase the font size of text if it is more salient. </strong>Here the words &#8220;canard&#8221; and &#8220;braised&#8221; appear only because we&#8217;re matching a number of different tags in the world model: the character is able to cook, and she&#8217;s acquainted with French. By contrast, the phrase &#8220;this week&#8221; is randomized and does not depend on any world model features in order to appear, so even though there are some variants that could have been slotted in, the particular choice of text is not especially a better fit than another other piece of text.</p>
+<p>This particular example came out pretty ugly and looks like bad web-ad text even if you don&#8217;t read the actual content. I think that&#8217;s not coincidental.</p>
+<p><strong><img data-attachment-id="24785" data-permalink="https://emshort.blog/2016/09/12/visualizing-procgen-text-part-two/screen-shot-2016-09-11-at-4-45-59-pm/" data-orig-file="https://emshort.blog/wp-content/uploads/2016/09/screen-shot-2016-09-11-at-4-45-59-pm.png" data-orig-size="556,226" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="screen-shot-2016-09-11-at-4-45-59-pm" data-image-description="" data-image-caption="" data-large-file="https://emshort.blog/wp-content/uploads/2016/09/screen-shot-2016-09-11-at-4-45-59-pm.png?w=556" loading="lazy" class=" size-medium wp-image-24785 alignright" src="https://emshort.blog/wp-content/uploads/2016/09/screen-shot-2016-09-11-at-4-45-59-pm.png?w=300&#038;h=122" alt="screen-shot-2016-09-11-at-4-45-59-pm" width="300" height="122" srcset="https://emshort.blog/wp-content/uploads/2016/09/screen-shot-2016-09-11-at-4-45-59-pm.png?w=300 300w, https://emshort.blog/wp-content/uploads/2016/09/screen-shot-2016-09-11-at-4-45-59-pm.png?w=150 150w, https://emshort.blog/wp-content/uploads/2016/09/screen-shot-2016-09-11-at-4-45-59-pm.png 556w" sizes="auto, (max-width: 300px) 85vw, 300px" />Color the font to reflect how much variation was possible</strong>. Specifically, what this does is increase the red component of a piece of text to maximum; then the green component; and then the blue component. The input is the log of the number of possible variant texts that were available to be slotted into that position.</p>
+<p>This was the trickiest rule to get to where I wanted it. I wanted to suggest that both very high-variance and very low-variance phrases were less juicy than phrases with a moderate number of plausible substitutions. That meant picking a scheme in which low-variance phrases would be very dark red or black; the desirable medium-variance phrases are brighter red or orange; and high-variance phrases turn grey or white.</p>
+<p>Here &#8220;wordless&#8221; and &#8220;lusty&#8221; are adjectives chosen randomly from a huge adjective list, with no tags connecting them to the model world. As a result, even though there are a lot of possibilities, they&#8217;re likely not to resonate much with the reader; they&#8217;ll feel obviously just random after a little while. (In the same way, in the Braised Butterflied Canard example above, the word &#8220;seraphic&#8221; is highly randomized.)</p>
+<p>Finally, here&#8217;s the visualization result I got for the piece of generated text I liked best in that initial analysis:</p>
+<p><img data-attachment-id="24787" data-permalink="https://emshort.blog/2016/09/12/visualizing-procgen-text-part-two/screen-shot-2016-09-11-at-4-45-44-pm/" data-orig-file="https://emshort.blog/wp-content/uploads/2016/09/screen-shot-2016-09-11-at-4-45-44-pm.png" data-orig-size="588,234" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="screen-shot-2016-09-11-at-4-45-44-pm" data-image-description="" data-image-caption="" data-large-file="https://emshort.blog/wp-content/uploads/2016/09/screen-shot-2016-09-11-at-4-45-44-pm.png?w=588" loading="lazy" class="alignnone size-medium wp-image-24787" src="https://emshort.blog/wp-content/uploads/2016/09/screen-shot-2016-09-11-at-4-45-44-pm.png?w=300&#038;h=119" alt="screen-shot-2016-09-11-at-4-45-44-pm" width="300" height="119" srcset="https://emshort.blog/wp-content/uploads/2016/09/screen-shot-2016-09-11-at-4-45-44-pm.png?w=300 300w, https://emshort.blog/wp-content/uploads/2016/09/screen-shot-2016-09-11-at-4-45-44-pm.png?w=150 150w, https://emshort.blog/wp-content/uploads/2016/09/screen-shot-2016-09-11-at-4-45-44-pm.png 588w" sizes="auto, (max-width: 300px) 85vw, 300px" /></p>
+<p>We see that this text is more uniform in size and color than most of the others, that the whole thing has a fair degree of salience, and that special substitution words occur about as often as stressed words might in a poem.</p>
+<p>*<img data-attachment-id="24855" data-permalink="https://emshort.blog/2016/09/12/visualizing-procgen-text-part-two/screen-shot-2016-09-11-at-5-25-03-pm/" data-orig-file="https://emshort.blog/wp-content/uploads/2016/09/screen-shot-2016-09-11-at-5-25-03-pm.png" data-orig-size="1058,236" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="screen-shot-2016-09-11-at-5-25-03-pm" data-image-description="" data-image-caption="" data-large-file="https://emshort.blog/wp-content/uploads/2016/09/screen-shot-2016-09-11-at-5-25-03-pm.png?w=840" loading="lazy" class=" size-medium wp-image-24855 aligncenter" src="https://emshort.blog/wp-content/uploads/2016/09/screen-shot-2016-09-11-at-5-25-03-pm.png?w=300&#038;h=67" alt="screen-shot-2016-09-11-at-5-25-03-pm" width="300" height="67" srcset="https://emshort.blog/wp-content/uploads/2016/09/screen-shot-2016-09-11-at-5-25-03-pm.png?w=600 600w, https://emshort.blog/wp-content/uploads/2016/09/screen-shot-2016-09-11-at-5-25-03-pm.png?w=300 300w, https://emshort.blog/wp-content/uploads/2016/09/screen-shot-2016-09-11-at-5-25-03-pm.png?w=150 150w" sizes="auto, (max-width: 300px) 85vw, 300px" /></p>
+<p>There&#8217;s another evaluative criterion we don&#8217;t get from this strategy, namely the ability to visualize the whole expansion space implicit in a single grammar token.</p>
+<p><span id="more-24784"></span></p>
+<p>By this I don&#8217;t mean the sort of generic chart you get if you <a href="https://www.google.co.uk/webhp?sourceid=chrome-instant&amp;ion=1&amp;espv=2&amp;ie=UTF-8#q=visualize%20context%20free%20grammar">look up visualize context free grammar on Google</a> — those are generally aimed at understanding the structural space for the purposes of parsing rather than generation, and in particular aren&#8217;t designed to help the user visualize the richness of the space they&#8217;re creating.</p>
+<p>But having some such strategy is important because (as I found working on both <a href="https://emshort.wordpress.com/2015/12/07/procjam-entries-nanogenmo-and-my-generated-generation-guidebook/">Annals of the Parrigues</a> and <em>The Mary Jane of Tomorrow</em>) it&#8217;s easy to get bogged down expanding the text space in ways that don&#8217;t help very visibly or even that are <em>actively counterproductive</em> in terms of the reader/player&#8217;s experience of the generated text.</p>
+<p>For instance, let&#8217;s go back to the following table from <em>Mary Jane</em>, which describes the ways that the tag [fruit]&#8221; might be expanded:</p>
+<blockquote><p>Table of Dubious Fruits<br />
+tag-list description<br />
+{ { } } &#8220;[one of]Lime[or]Orange[or]Banana[or]Pear[or]Lemon[or]Pineapple[or]Cranberry[or]Apple[at random]&#8221;<br />
+{ { cowgirl, pos } } &#8220;Prickly Pear&#8221;<br />
+{ { french, pos } } &#8220;[one of]Fraise[or]Framboise[at random]&#8221;<br />
+{ { innuendo, pos } } &#8220;[one of]Mango[or]Passionfruit[at random]&#8221;<br />
+{ { botany, pos } } &#8220;[Table of Cultivars type] Apple&#8221;</p></blockquote>
+<p>This table means that, if no world model features apply, the player could receive any of the eight random fruits listed on the first line. If they&#8217;re training a cowgirl, &#8220;Prickly Pear&#8221; comes into play as an option; if French, &#8220;Fraise/Framboise&#8221; becomes available, and so on. [Table of Cultivars] actually calls out to a whole other <em>massive</em> expansion table, containing hundreds of apple species names, which I unapologetically yanked from <a href="https://github.com/dariusk/corpora">Darius Kazemi&#8217;s corpora set</a>. In theory, the presence of that table massively expands the number of conceivable fruit descriptions in the game, but in practice, it&#8217;s far enough down the chain of grammar, and contingent enough on other world model features, that it is unlikely to be consulted very often. Putting it there was fun, and I enjoyed having really specific species names available for the botanical version of the robot, but if my aim had strictly been to increase the experienced richness and variety of the text, that addition would&#8217;ve been a big waste of time.</p>
+<p>There&#8217;s something even worse one could do, though, which is to start with this:</p>
+<blockquote><p>Table of Dubious Fruits<br />
+tag-list description<br />
+{ { } } &#8220;[one of]Lime[or]Orange[or]Banana[or]Pear[or]Lemon[or]Pineapple[or]Cranberry[or]Apple[at random]&#8221;</p></blockquote>
+<p>where the player has a 1 in 8 chance of randomly getting each fruit, and expand it to this:</p>
+<blockquote><p>Table of Dubious Fruits<br />
+tag-list description<br />
+{ { } } &#8220;[one of]Lime[or]Orange[or]Banana[or]Pear[or]Lemon[or]Pineapple[or]Cranberry[or]Apple[at random]&#8221;<br />
+{ { } } &#8220;Prickly Pear&#8221;</p></blockquote>
+<p>&#8230;where the player now has a 1/16 chance of getting any of the first fruits, and a 1/2 chance of getting Prickly Pear, with the result that, though I just added content, the player is much likelier to see repetitions, and it will <em>feel</em> as though the content space is actually smaller.</p>
+<p>This is a deliberately simple example in order to illustrate the point, but the same problem can arise in sneakier ways, if we add a grammar token with only a few possible expansions alongside another token with many possible expansions.</p>
+<p>All kinds of other implementation complications can come into play here: some procedural grammar systems also use percentages to control the rate at which particular elements are used, for instance. So one possible strategy would be to make the system self-balancing — able to assess how many possible expansions there were down each grammatical route and then set its own probabilities accordingly, so that it would select the 8-fruit token eight times out of nine, and the 1-fruit token only one time in nine.</p>
+<p>This would, I think, require that there not be any loops in the grammar production (or else that the system halted its self-analysis if it discovered any). And, of course, perfect balance of production is not necessarily what we&#8217;re trying for anyway.</p>
+<p>I&#8217;m still thinking about some of the visualization angles on this one.</p>
+<div id="jp-post-flair" class="sharedaddy sd-like-enabled sd-sharing-enabled"><div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-icon-text sd-sharing"><h3 class="sd-title">Share this:</h3><div class="sd-content"><ul><li class="share-twitter"><a rel="nofollow noopener noreferrer"
+				data-shared="sharing-twitter-24784"
+				class="share-twitter sd-button share-icon"
+				href="https://emshort.blog/2016/09/12/visualizing-procgen-text-part-two/?share=twitter"
+				target="_blank"
+				aria-labelledby="sharing-twitter-24784"
+				>
+				<span id="sharing-twitter-24784" hidden>Share on X (Opens in new window)</span>
+				<span>X</span>
+			</a></li><li class="share-facebook"><a rel="nofollow noopener noreferrer"
+				data-shared="sharing-facebook-24784"
+				class="share-facebook sd-button share-icon"
+				href="https://emshort.blog/2016/09/12/visualizing-procgen-text-part-two/?share=facebook"
+				target="_blank"
+				aria-labelledby="sharing-facebook-24784"
+				>
+				<span id="sharing-facebook-24784" hidden>Share on Facebook (Opens in new window)</span>
+				<span>Facebook</span>
+			</a></li><li class="share-end"></li></ul></div></div></div><div class='sharedaddy sd-block sd-like jetpack-likes-widget-wrapper jetpack-likes-widget-unloaded' id='like-post-wrapper-702124-24784-6a9e779591e22' data-src='//widgets.wp.com/likes/index.html?ver=20260907#blog_id=702124&amp;post_id=24784&amp;origin=emshort.wordpress.com&amp;obj_id=702124-24784-6a9e779591e22&amp;domain=emshort.blog' data-name='like-post-frame-702124-24784-6a9e779591e22' data-title='Like or Reblog'><div class='likes-widget-placeholder post-likes-widget-placeholder' style='height: 55px;'><span class='button'><span>Like</span></span> <span class='loading'>Loading...</span></div><span class='sd-text-color'></span><a class='sd-link-color'></a></div>
+<div id='jp-relatedposts' class='jp-relatedposts' >
+	<h3 class="jp-relatedposts-headline"><em>Related</em></h3>
+</div></div>	</div><!-- .entry-content -->
+
+	<footer class="entry-footer">
+		<span class="byline"><span class="author vcard"><span class="screen-reader-text">Author </span> <a class="url fn n" href="https://emshort.blog/author/emshortif/">emshortif</a></span></span><span class="posted-on"><span class="screen-reader-text">Posted on </span><a href="https://emshort.blog/2016/09/12/visualizing-procgen-text-part-two/" rel="bookmark"><time class="entry-date published" datetime="2016-09-12T08:15:06+00:00">September 12, 2016</time><time class="updated" datetime="2016-09-12T10:05:47+00:00">September 12, 2016</time></a></span><span class="cat-links"><span class="screen-reader-text">Categories </span><a href="https://emshort.blog/category/craft/" rel="category tag">craft</a>, <a href="https://emshort.blog/category/interactive-fiction/" rel="category tag">interactive fiction</a>, <a href="https://emshort.blog/category/procedural-text/" rel="category tag">procedural text</a></span><span class="tags-links"><span class="screen-reader-text">Tags </span><a href="https://emshort.blog/tag/procedural-generation/" rel="tag">procedural generation</a>, <a href="https://emshort.blog/tag/processing/" rel="tag">processing</a>, <a href="https://emshort.blog/tag/the-mary-jane-of-tomorrow/" rel="tag">the mary jane of tomorrow</a>, <a href="https://emshort.blog/tag/visualization/" rel="tag">visualization</a></span>			</footer><!-- .entry-footer -->
+</article><!-- #post-24784 -->
+
+<div id="comments" class="comments-area">
+
+			<h2 class="comments-title">
+			7 thoughts on &ldquo;Visualizing Procgen Text, Part&nbsp;Two&rdquo;		</h2>
+
+		
+		<ol class="comment-list">
+					<li id="comment-65096" class="comment even thread-even depth-1 parent">
+			<article id="div-comment-65096" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+												<b class="fn">dryman</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://emshort.blog/2016/09/12/visualizing-procgen-text-part-two/#comment-65096"><time datetime="2016-09-15T00:12:49+00:00">September 15, 2016 at 12:12 am</time></a>					</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Interesting post, and it&#8217;s good to know you are continuing to work on procedurally generated prose (and limericks!). I wanted to say that I actually greatly enjoyed your Annals of the Parrigues, and have been looking forward to more from you along those lines &#8211; I hadn&#8217;t heard about The Mary Jane of Tomorrow but will try it out quicker than you can procedurally generate 17 permutations of Diced Spam Pie.</p>
+<p>I was wondering if you&#8217;d been following some of the recent games criticism discussing where procedural content has ultimately failed to be very interesting or engaging (in games such as Spore or No Man&#8217;s Sky), and might have some general thoughts about how procedurally generated text content can potentially be made to resonate more strongly than was the case for the largely graphical reskins in those games. Much of the discussion has focused on what Kate Compton has called the problem of &#8220;procedural oatmeal&#8221; &#8211; i.e. it is very easy to pour 10,000 bowls of plain oatmeal, with each oat being in a different position and each bowl essentially unique, but it is very hard to make these differences *matter* to an audience, and be perceived as truly different in any memorable or thought-provoking way.</p>
+<p><a href="http://motherboard.vice.com/read/no-mans-sky-review" rel="nofollow ugc">http://motherboard.vice.com/read/no-mans-sky-review</a></p>
+<div class="embed-tumblr">
+<div class="tumblr-post" data-href="https://embed.tumblr.com/embed/post/Gtw1yD3e-b2lNDU8OV1AkA/139774965871" data-did="089a9a35a79e74f3f49f9b31b65da77a0acdd31d"><a href="https://galaxykate0.tumblr.com/post/139774965871/so-you-want-to-build-a-generator">https://galaxykate0.tumblr.com/post/139774965871/so-you-want-to-build-a-generator</a></div>
+<p><script async src="https://assets.tumblr.com/post.js"></script></div>
+<p>It seems to me that well-crafted procedurally generated text (even non-interactive text like the Annals were) may have much greater potential to create something truly interesting for human audiences. For me at least, the Annals were a surprisingly engaging diversion; I read them straight through over Christmas and thoroughly enjoyed myself. I also enjoyed reading about their generation at the end &#8211; I think it helped that there were multiple hidden layers to the generation process (the tarot system giving a subtly idiosyncratic mood or tone to each province, overlaid with the evolving relationship between the narrators sometimes modifying how their surroundings were described), and this made differences between provinces much more nuanced and unexpected. Unlike procgen graphics, text can describe a large number of subtle differences (cultural, interpersonal, historical) that are important to people, and throw them together in unexpected ways that can sometimes have thought-provoking results. As a result, I found that this quaint little travelogue held my interest even when its procedurally generated nature was often very salient, while I expect visiting as many different gorgeously colored planets and animals in No Man&#8217;s Sky could start to pale rapidly (though I haven&#8217;t played that yet, as a disclaimer).</p>
+<p>Anyway, consider this a call for further exploration of procedurally-generated literature of any kind (be it IF, limericks, or noninteractive prose). Some potentially interesting directions could be:<br />
+1) a noninteractive work like the Annals, where the reader can adjust certain seed parameters and regenerate the work, either to achieve a goal or just explore the possible states for their own sake<br />
+2) true procedurally generated IF: perhaps an attempt at open-world exploration along the lines of No Man&#8217;s Sky, with the aim of finding out whether this can be made interesting enough that people actually want to explore it</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://emshort.blog/2016/09/12/visualizing-procgen-text-part-two/?replytocom=65096#respond" data-commentid="65096" data-postid="24784" data-belowelement="div-comment-65096" data-respondelement="respond" data-replyto="Reply to dryman" aria-label="Reply to dryman">Reply</a></div>			</article><!-- .comment-body -->
+		<ol class="children">
+		<li id="comment-65110" class="comment byuser comment-author-saucersofmud odd alt depth-2">
+			<article id="div-comment-65110" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+												<b class="fn"><a href="http://saucersofmud.wordpress.com/" class="url" rel="ugc external nofollow">matt w</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://emshort.blog/2016/09/12/visualizing-procgen-text-part-two/#comment-65110"><time datetime="2016-09-17T15:45:46+00:00">September 17, 2016 at 3:45 pm</time></a>					</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Thanks for that extremely interesting post!</p>
+<p>Speaking only for myself, obviously, one of the hitches with using procgen text to describe those subtle differences is that it&#8217;s hard to get the text to run together without throwing the procedural generation in the reader&#8217;s face, and that tends to override the subtlety. If you have four procedurally generated graphic models and you put them together it looks like something, without much effort required on your part. If you have some procedurally generated sentences and you put them together it reads like (one of mine):<br />
+&#8220;To the west you can see a disturbance in the air.<br />
+To the northwest you can see something.<br />
+To the northwest you can see something brown.&#8221;<br />
+which is clunkily mechanical. And it takes a lot of effort to make it not mechanical. Annals of the Parrigues is truly exceptional among the procedurally generated prose I&#8217;ve read (not that there aren&#8217;t great things&#8211;I Waded In Clear Water is amazing, but it&#8217;s not meant to read naturally). Even making English articles behave properly can be non-trivial.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://emshort.blog/2016/09/12/visualizing-procgen-text-part-two/?replytocom=65110#respond" data-commentid="65110" data-postid="24784" data-belowelement="div-comment-65110" data-respondelement="respond" data-replyto="Reply to matt w" aria-label="Reply to matt w">Reply</a></div>			</article><!-- .comment-body -->
+		</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-65102" class="comment byuser comment-author-rocketnia even thread-odd thread-alt depth-1 parent">
+			<article id="div-comment-65102" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+												<b class="fn"><a href="http://www.rocketnia.com/" class="url" rel="ugc external nofollow">Ross Angle</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://emshort.blog/2016/09/12/visualizing-procgen-text-part-two/#comment-65102"><time datetime="2016-09-15T22:02:41+00:00">September 15, 2016 at 10:02 pm</time></a>					</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Toward the end of the article, you mentioned the option of selecting uniformly across the space of all possibilities. For one simple project I made (currently located at <a href="https://rocketnia.github.io/monday-comics/" rel="nofollow ugc">https://rocketnia.github.io/monday-comics/</a>), I did that. I had it track how many possibilities in total could be produced by any given production rule, so whenever it was expanding a rule, it could look up how many possibilities were along each branch and weight its immediate choice based on that. I was already determined not to have any loops, so I didn&#8217;t mind that limitation.</p>
+<p>I wasn&#8217;t sure I liked the resulting distribution at first. It gives preference to root structures that have a lot of moving parts, making almost every result a high-complexity result. Yet, despite the overwhelming complexity, the root structure itself gets samey fast. I addressed this by simplifying some complex options that were hogging the spotlight and adding a little more complexity to options I liked that weren&#8217;t being selected.</p>
+<p>So the opinion I came to in that project was that I wanted the immediate expansions of a rule to be almost balanced with each other in terms of the number of full expansions they each lead to. In other words, for most of my written content, I&#8217;d like (selecting uniformly at random from all possibilities) and (selecting uniformly at random from the immediate expansions of each production rule along the way) to be roughly equivalent distributions.</p>
+<p>If I have a good reason to diverge from this, I figure I should probably spend time tuning and testing to be able to substantiate that good reason. The ongoing progress of that effort can be accounted for in the form of an explicit weight annotation; as I devote my attention to that effort, I make tweaks to the weight annotation, and the annotation itself calls my attention to the fact that there&#8217;s something to maintain here. So, it could be interesting to pursue a tool where if two expansions of a production rule lack weight annotations *and* have much differently sized possibility spaces, they&#8217;re automatically highlighted or warned about.</p>
+<p>How much is &#8220;much differently sized&#8221; seems like a matter of degree, so colors and sizes like you&#8217;re using, or like Ice-Bound has used (<a href="http://ice-bound.com/news/visualizing-the-combinatorial/" rel="nofollow ugc">http://ice-bound.com/news/visualizing-the-combinatorial/</a>), is a good idea. In particular, where you&#8217;re coloring parts of a generated text to indicate whether they vary too much or too little, maybe the source code could be colored by the same scheme, highlighting the expansions of a production rule relative to each other.</p>
+<p>&#8230;And this is leading me to some other rather specific design thoughts: Instead of weighting an expansion with an absolute percentage chance, maybe it would make more sense for the annotation to be a function of other expansions&#8217; weights, sort of to say &#8220;Yes, I do expect this to be picked half as much as the others,&#8221; or to say &#8220;Yes, I do expect this to be picked as often as hypothetical options X and Y put together.&#8221; That way, even an annotated expansion can be highlighted according to whether the expected imbalance is up-to-date relative to the actual imbalance.</p>
+<p>As always, thanks for sharing the considerations you&#8217;re trying to address and the techniques you&#8217;re using to address them. I hoped this anecdote of mine could give back a bit, but I didn&#8217;t know I&#8217;d come out of this comment with a better idea of what kind of weighting system to try. :)</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://emshort.blog/2016/09/12/visualizing-procgen-text-part-two/?replytocom=65102#respond" data-commentid="65102" data-postid="24784" data-belowelement="div-comment-65102" data-respondelement="respond" data-replyto="Reply to Ross Angle" aria-label="Reply to Ross Angle">Reply</a></div>			</article><!-- .comment-body -->
+		<ol class="children">
+		<li id="comment-65109" class="comment byuser comment-author-saucersofmud odd alt depth-2">
+			<article id="div-comment-65109" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+												<b class="fn"><a href="http://saucersofmud.wordpress.com/" class="url" rel="ugc external nofollow">matt w</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://emshort.blog/2016/09/12/visualizing-procgen-text-part-two/#comment-65109"><time datetime="2016-09-17T15:13:41+00:00">September 17, 2016 at 3:13 pm</time></a>					</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>&#8220;I wasn’t sure I liked the resulting distribution at first. It gives preference to root structures that have a lot of moving parts, making almost every result a high-complexity result. Yet, despite the overwhelming complexity, the root structure itself gets samey fast. I addressed this by simplifying some complex options that were hogging the spotlight and adding a little more complexity to options I liked that weren’t being selected.&#8221;</p>
+<p>This squares with my experience, such as it is. Here&#8217;s some output from Garbage Collection, which is a <a href="http://www.intfiction.org/forum/viewtopic.php?p=108215#p108215" rel="nofollow">small generator done in a hurry</a> (with the &#8220;do you want to continue&#8221; prompts stripped):</p>
+<blockquote><p>A yellow slick stains a fragment of rope.<br />
+A piece of rock is stuck to a smooth plastic fragment.<br />
+A jagged piece of glass.<br />
+Out of a rope string wells a white film.<br />
+In the pits of a block of rock gathers a black secretion, which wells out of the fleshy surface that is smeared on it.<br />
+A smashed plastic panel.<br />
+A sharp piece of glass is stuck to a cracked metal panel.<br />
+A white liquid spreads across a plastic panel.<br />
+A pink slick stains a frayed rope fragment.<br />
+A fleshy chunk is smeared on a fragment of wood.<br />
+Out of a fragment of rope wells a green secretion.<br />
+Into a mass of meat sinks a maroon ooze.<br />
+A fleshy blob.<br />
+A jagged piece of plastic.<br />
+A blue film wells out of a dirt surface.</p></blockquote>
+<p>IMO things like &#8220;A jagged piece of glass. A smashed plastic panel. A fleshy blob. A jagged piece of plastic&#8221; feel less samey than &#8220;A sharp piece of glass is stuck to a cracked metal panel. A white liquid spreads across a plastic panel. A pink slick stains a frayed rope fragment. A fleshy chunk is smeared on a fragment of wood. Out of a fragment of rope wells a green secretion. Into a mass of meat sinks a maroon ooze.&#8221; The shorter ones are in a way more repetitive, but repeated short bits are more natural-sounding than repeated medium-length bits with the same rhythm. And the second excerpt doesn&#8217;t even come from the same root structure (there&#8217;s two each of solid thing attached to solid thing, liquid described before solid thing, and solid thing described before liquid)&#8211;which is I guess part of the problem, because I have several different root structures that produce sentences with similar lengths and rhythms.</p>
+<p>A bit of writing advice that I read somewhere is to vary the lengths of your sentences. That seems particularly important for procgen text&#8211;maybe it&#8217;s important to bias the generator toward sentences that don&#8217;t have the same complexity/rhythm/length as the last one you generated, and also to try to be sparing with the highest-complexity ones (the ones Stella Gibbons would mark with three asterisks).</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://emshort.blog/2016/09/12/visualizing-procgen-text-part-two/?replytocom=65109#respond" data-commentid="65109" data-postid="24784" data-belowelement="div-comment-65109" data-respondelement="respond" data-replyto="Reply to matt w" aria-label="Reply to matt w">Reply</a></div>			</article><!-- .comment-body -->
+		</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-65130" class="pingback even thread-even depth-1">
+			<div class="comment-body">
+				Pingback: <a href="https://emshort.wordpress.com/2016/09/21/bowls-of-oatmeal-and-text-generation/" class="url" rel="ugc external nofollow">Bowls of Oatmeal and Text Generation | Emily Short&#039;s Interactive Storytelling</a> 			</div>
+		</li><!-- #comment-## -->
+		<li id="comment-65655" class="comment byuser comment-author-johnicholas odd alt thread-odd thread-alt depth-1">
+			<article id="div-comment-65655" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+												<b class="fn"><a href="http://gravatar.com/johnicholas" class="url" rel="ugc external nofollow">johnicholas</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://emshort.blog/2016/09/12/visualizing-procgen-text-part-two/#comment-65655"><time datetime="2016-09-30T17:51:54+00:00">September 30, 2016 at 5:51 pm</time></a>					</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>This is awesome. Thank you for posting it!</p>
+<p>Regarding expanding a context-free grammar &#8220;uniformly&#8221; even with loops:</p>
+<p>Essentially, the problem is that a context-free grammar with loops usually has an infinite number of possible parse trees. There is no uniform probability distribution over a countably infinite set. By choosing a bijection between the parse trees and the natural numbers, you can offer the user the choice of distribution over the natural numbers &#8211; possibly a nice smooth exponential function, or perhaps they would like a uniform distribution over the first ten million numbers, or some combination &#8211; uniform up to a soft limit then tailing off with an exponential. </p>
+<p>Then you can generate a random parse tree from the grammar by choosing a random number from the distribution, and putting it through the bijection to find the corresponding parse tree.</p>
+<p>So the only slightly tricky part is writing code that takes an arbitrary context free grammar, and outputs a bijective function from the natural numbers to the parse trees of that grammar. That&#8217;s what I&#8217;ve done &#8211; the code&#8217;s very clumsy but it does work, and you can contact me at <a href="mailto:my-first-name@the-same-name.com">my-first-name@the-same-name.com</a> if you want to look at it.</p>
+<p>The usual way (that, if I understand correctly, Tracery uses) of generating a parse tree from a context free grammar is unfortunately prone to explosions if the grammar includes a rule like &#8220;foo: [&#8220;bar&#8221;, &#8220;#foo# #foo# #foo#&#8221;, &#8220;#foo# #foo# #foo# #foo#&#8221;]. The problem is that on average, expanding a single #foo# in a partially-expanded parse tree will increase the number of #foo# to be expanded, not decrease it, which means that there is (in principle) a nonzero probability that the expansion process will go on forever. </p>
+<p>In practice what happens is that something bottoms out &#8211; the call stack, or some size limit &#8211; and either the system finishes off the tree in a hurry somehow or throws the partially-expanded parse tree away entirely and tries again.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://emshort.blog/2016/09/12/visualizing-procgen-text-part-two/?replytocom=65655#respond" data-commentid="65655" data-postid="24784" data-belowelement="div-comment-65655" data-respondelement="respond" data-replyto="Reply to johnicholas" aria-label="Reply to johnicholas">Reply</a></div>			</article><!-- .comment-body -->
+		</li><!-- #comment-## -->
+		<li id="comment-65792" class="pingback even thread-even depth-1">
+			<div class="comment-body">
+				Pingback: <a href="https://emshort.wordpress.com/2016/10/27/casual-procgen-text-tools/" class="url" rel="ugc external nofollow">Casual Procgen Text Tools | Emily Short&#039;s Interactive Storytelling</a> 			</div>
+		</li><!-- #comment-## -->
+		</ol><!-- .comment-list -->
+
+		
+	
+	
+		<div id="respond" class="comment-respond">
+		<h2 id="reply-title" class="comment-reply-title">Leave a comment <small><a rel="nofollow" id="cancel-comment-reply-link" href="/2016/09/12/visualizing-procgen-text-part-two/#respond" style="display:none;">Cancel reply</a></small></h2><form action="https://emshort.blog/wp-comments-post.php" method="post" id="commentform" class="comment-form">
+
+
+<div class="comment-form__verbum transparent"></div><div class="verbum-form-meta"><input type='hidden' name='comment_post_ID' value='24784' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+
+			<input type="hidden" name="highlander_comment_nonce" id="highlander_comment_nonce" value="6d40dd0292" />
+			<input type="hidden" name="verbum_show_subscription_modal" value="" /></div><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="b381a387f9" /></p><p style="display: none !important;" class="akismet-fields-container" data-prefix="ak_"><label>&#916;<textarea name="ak_hp_textarea" cols="45" rows="8" maxlength="100"></textarea></label><input type="hidden" id="ak_js_1" name="ak_js" value="61"/><script>
+document.getElementById( "ak_js_1" ).setAttribute( "value", ( new Date() ).getTime() );
+</script>
+</p></form>	</div><!-- #respond -->
+	
+</div><!-- .comments-area -->
+
+	<nav class="navigation post-navigation" aria-label="Posts">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://emshort.blog/2016/09/11/aviary-attorney-sketchy-logic/" rel="prev"><span class="meta-nav" aria-hidden="true">Previous</span> <span class="screen-reader-text">Previous post:</span> <span class="post-title">Aviary Attorney (Sketchy&nbsp;Logic)</span></a></div><div class="nav-next"><a href="https://emshort.blog/2016/09/15/mid-september-link-assortment/" rel="next"><span class="meta-nav" aria-hidden="true">Next</span> <span class="screen-reader-text">Next post:</span> <span class="post-title">Mid-September Link Assortment</span></a></div></div>
+	</nav>
+	</main><!-- .site-main -->
+
+	<aside id="content-bottom-widgets" class="content-bottom-widgets">
+	
+			<div class="widget-area">
+			<section id="blog_subscription-3" class="widget widget_blog_subscription jetpack_subscription_widget"><h2 class="widget-title"><label for="subscribe-field">Email Subscription</label></h2>
+
+			<div class="wp-block-jetpack-subscriptions__container">
+			<form
+				action="https://subscribe.wordpress.com"
+				method="post"
+				accept-charset="utf-8"
+				data-blog="702124"
+				data-post_access_level="everybody"
+				id="subscribe-blog"
+			>
+				<p>Enter your email address to subscribe to this blog and receive notifications of new posts by email.</p>
+				<p id="subscribe-email">
+					<label
+						id="subscribe-field-label"
+						for="subscribe-field"
+						class="screen-reader-text"
+					>
+						Email Address:					</label>
+
+					<input
+							type="email"
+							name="email"
+							autocomplete="email"
+							
+							style="width: 95%; padding: 1px 10px"
+							placeholder="Email Address"
+							value=""
+							id="subscribe-field"
+							required
+						/>				</p>
+
+				<p id="subscribe-submit"
+									>
+					<input type="hidden" name="action" value="subscribe"/>
+					<input type="hidden" name="blog_id" value="702124"/>
+					<input type="hidden" name="source" value="https://emshort.blog/2016/09/12/visualizing-procgen-text-part-two/"/>
+					<input type="hidden" name="sub-type" value="widget"/>
+					<input type="hidden" name="redirect_fragment" value="subscribe-blog"/>
+					<input type="hidden" id="_wpnonce" name="_wpnonce" value="31dff122aa" />					<button type="submit"
+													class="wp-block-button__link"
+																	>
+						Sign me up!					</button>
+				</p>
+			</form>
+							<div class="wp-block-jetpack-subscriptions__subscount">
+					Join 1,494 other subscribers				</div>
+						</div>
+			
+</section>		</div><!-- .widget-area -->
+	</aside><!-- .content-bottom-widgets -->
+
+</div><!-- .content-area -->
+
+
+	<aside id="secondary" class="sidebar widget-area">
+		<section id="search-4" class="widget widget_search">
+<form role="search" method="get" class="search-form" action="https://emshort.blog/">
+	<label>
+		<span class="screen-reader-text">
+			Search for:		</span>
+		<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" />
+	</label>
+	<button type="submit" class="search-submit"><span class="screen-reader-text">
+		Search	</span></button>
+</form>
+</section><section id="categories-2" class="widget widget_categories"><h2 class="widget-title">Categories</h2><form action="https://emshort.blog" method="get"><label class="screen-reader-text" for="cat">Categories</label><select  name='cat' id='cat' class='postform'>
+	<option value='-1'>Select Category</option>
+	<option class="level-0" value="15948">academic&nbsp;&nbsp;(30)</option>
+	<option class="level-0" value="14067">AI&nbsp;&nbsp;(8)</option>
+	<option class="level-0" value="217">announcements&nbsp;&nbsp;(161)</option>
+	<option class="level-0" value="413">audio&nbsp;&nbsp;(9)</option>
+	<option class="level-0" value="15622">board games&nbsp;&nbsp;(4)</option>
+	<option class="level-0" value="178">books&nbsp;&nbsp;(58)</option>
+	<option class="level-0" value="59991914">characterization in games&nbsp;&nbsp;(13)</option>
+	<option class="level-0" value="325246689">commercial IF&nbsp;&nbsp;(44)</option>
+	<option class="level-0" value="2528">community&nbsp;&nbsp;(91)</option>
+	<option class="level-0" value="472">competition&nbsp;&nbsp;(3)</option>
+	<option class="level-0" value="24514">Competitions&nbsp;&nbsp;(214)</option>
+	<option class="level-0" value="43879036">Conversation modeling&nbsp;&nbsp;(48)</option>
+	<option class="level-0" value="14877">craft&nbsp;&nbsp;(80)</option>
+	<option class="level-0" value="642561">Creation Tools&nbsp;&nbsp;(46)</option>
+	<option class="level-0" value="1313318">CYOA&nbsp;&nbsp;(211)</option>
+	<option class="level-0" value="6725">ebooks&nbsp;&nbsp;(18)</option>
+	<option class="level-0" value="1342">education&nbsp;&nbsp;(26)</option>
+	<option class="level-0" value="924">events&nbsp;&nbsp;(40)</option>
+	<option class="level-0" value="2734659">game lists&nbsp;&nbsp;(26)</option>
+	<option class="level-0" value="386748">gamebooks&nbsp;&nbsp;(9)</option>
+	<option class="level-0" value="608502">graphic adventure&nbsp;&nbsp;(1)</option>
+	<option class="level-0" value="6047783">hardcasual&nbsp;&nbsp;(3)</option>
+	<option class="level-0" value="9339200">IF history&nbsp;&nbsp;(8)</option>
+	<option class="level-0" value="59976785">IF outreach&nbsp;&nbsp;(29)</option>
+	<option class="level-0" value="179318">Inform 7&nbsp;&nbsp;(92)</option>
+	<option class="level-0" value="24120653">interactive comics&nbsp;&nbsp;(9)</option>
+	<option class="level-0" value="387906746">interactive epistolary&nbsp;&nbsp;(2)</option>
+	<option class="level-0" value="61713108">interactive erotica&nbsp;&nbsp;(5)</option>
+	<option class="level-0" value="35103">interactive fiction&nbsp;&nbsp;(1,402)</option>
+	<option class="level-0" value="7274596">interactive film&nbsp;&nbsp;(10)</option>
+	<option class="level-0" value="59976376">interactive nonfiction&nbsp;&nbsp;(9)</option>
+	<option class="level-0" value="2340212">interactive poetry&nbsp;&nbsp;(10)</option>
+	<option class="level-0" value="59979964">interactive romance&nbsp;&nbsp;(29)</option>
+	<option class="level-0" value="387585090">interactive theater&nbsp;&nbsp;(6)</option>
+	<option class="level-0" value="831">interviews&nbsp;&nbsp;(19)</option>
+	<option class="level-0" value="278">lifestyle&nbsp;&nbsp;(7)</option>
+	<option class="level-0" value="1202541">literary hypertext&nbsp;&nbsp;(7)</option>
+	<option class="level-0" value="424600">mailbag&nbsp;&nbsp;(38)</option>
+	<option class="level-0" value="1873457">mobile platforms&nbsp;&nbsp;(55)</option>
+	<option class="level-0" value="117247">multiplayer&nbsp;&nbsp;(9)</option>
+	<option class="level-0" value="9802">my work&nbsp;&nbsp;(19)</option>
+	<option class="level-0" value="64425894">narrative of objects&nbsp;&nbsp;(20)</option>
+	<option class="level-0" value="5426">new media&nbsp;&nbsp;(24)</option>
+	<option class="level-0" value="175743">new work&nbsp;&nbsp;(12)</option>
+	<option class="level-0" value="7792038">non-review&nbsp;&nbsp;(9)</option>
+	<option class="level-0" value="642470">Online play&nbsp;&nbsp;(1)</option>
+	<option class="level-0" value="47812">parser&nbsp;&nbsp;(131)</option>
+	<option class="level-0" value="304821368">parser v choice&nbsp;&nbsp;(13)</option>
+	<option class="level-0" value="1592001">persuasive games&nbsp;&nbsp;(20)</option>
+	<option class="level-0" value="59986576">plot and narrative structure&nbsp;&nbsp;(41)</option>
+	<option class="level-0" value="32215210">procedural map&nbsp;&nbsp;(2)</option>
+	<option class="level-0" value="59989133">procedural narrative&nbsp;&nbsp;(20)</option>
+	<option class="level-0" value="26730834">procedural text&nbsp;&nbsp;(15)</option>
+	<option class="level-0" value="59980204">prose and text in games&nbsp;&nbsp;(47)</option>
+	<option class="level-0" value="40547408">publication announcements&nbsp;&nbsp;(2)</option>
+	<option class="level-0" value="46615">puzzles&nbsp;&nbsp;(29)</option>
+	<option class="level-0" value="63830005">quality-based narrative&nbsp;&nbsp;(33)</option>
+	<option class="level-0" value="1182757">resource list&nbsp;&nbsp;(1)</option>
+	<option class="level-0" value="1745">review&nbsp;&nbsp;(5)</option>
+	<option class="level-0" value="309">Reviews&nbsp;&nbsp;(648)</option>
+	<option class="level-0" value="34108">rides&nbsp;&nbsp;(1)</option>
+	<option class="level-0" value="26406">tabletop games&nbsp;&nbsp;(28)</option>
+	<option class="level-0" value="42375">talks&nbsp;&nbsp;(5)</option>
+	<option class="level-0" value="473427">teasers&nbsp;&nbsp;(4)</option>
+	<option class="level-0" value="12">testing&nbsp;&nbsp;(7)</option>
+	<option class="level-0" value="3549">theory&nbsp;&nbsp;(61)</option>
+	<option class="level-0" value="164369">tie-ins&nbsp;&nbsp;(1)</option>
+	<option class="level-0" value="610014">transmedia&nbsp;&nbsp;(2)</option>
+	<option class="level-0" value="1">Uncategorized&nbsp;&nbsp;(5)</option>
+	<option class="level-0" value="6171">user interface&nbsp;&nbsp;(33)</option>
+	<option class="level-0" value="23838943">versu&nbsp;&nbsp;(7)</option>
+	<option class="level-0" value="1914">video games&nbsp;&nbsp;(165)</option>
+	<option class="level-0" value="532770">visual novel&nbsp;&nbsp;(20)</option>
+	<option class="level-0" value="84761">visual novels&nbsp;&nbsp;(7)</option>
+	<option class="level-0" value="149979">world-building&nbsp;&nbsp;(14)</option>
+</select>
+</form><script>
+( ( dropdownId ) => {
+	const dropdown = document.getElementById( dropdownId );
+	function onSelectChange() {
+		setTimeout( () => {
+			if ( 'escape' === dropdown.dataset.lastkey ) {
+				return;
+			}
+			if ( dropdown.value && parseInt( dropdown.value ) > 0 && dropdown instanceof HTMLSelectElement ) {
+				dropdown.parentElement.submit();
+			}
+		}, 250 );
+	}
+	function onKeyUp( event ) {
+		if ( 'Escape' === event.key ) {
+			dropdown.dataset.lastkey = 'escape';
+		} else {
+			delete dropdown.dataset.lastkey;
+		}
+	}
+	function onClick() {
+		delete dropdown.dataset.lastkey;
+	}
+	dropdown.addEventListener( 'keyup', onKeyUp );
+	dropdown.addEventListener( 'click', onClick );
+	dropdown.addEventListener( 'change', onSelectChange );
+})( "cat" );
+
+//# sourceURL=WP_Widget_Categories%3A%3Awidget
+</script>
+</section><section id="archives-3" class="widget widget_archive"><h2 class="widget-title">Archives</h2>		<label class="screen-reader-text" for="archives-dropdown-3">Archives</label>
+		<select id="archives-dropdown-3" name="archive-dropdown">
+			
+			<option value="">Select Month</option>
+				<option value='https://emshort.blog/2023/11/'> November 2023 &nbsp;(1)</option>
+	<option value='https://emshort.blog/2023/08/'> August 2023 &nbsp;(1)</option>
+	<option value='https://emshort.blog/2023/03/'> March 2023 &nbsp;(1)</option>
+	<option value='https://emshort.blog/2022/10/'> October 2022 &nbsp;(2)</option>
+	<option value='https://emshort.blog/2022/09/'> September 2022 &nbsp;(4)</option>
+	<option value='https://emshort.blog/2022/08/'> August 2022 &nbsp;(2)</option>
+	<option value='https://emshort.blog/2022/07/'> July 2022 &nbsp;(4)</option>
+	<option value='https://emshort.blog/2022/06/'> June 2022 &nbsp;(1)</option>
+	<option value='https://emshort.blog/2022/05/'> May 2022 &nbsp;(2)</option>
+	<option value='https://emshort.blog/2022/04/'> April 2022 &nbsp;(3)</option>
+	<option value='https://emshort.blog/2022/03/'> March 2022 &nbsp;(2)</option>
+	<option value='https://emshort.blog/2022/02/'> February 2022 &nbsp;(2)</option>
+	<option value='https://emshort.blog/2022/01/'> January 2022 &nbsp;(2)</option>
+	<option value='https://emshort.blog/2021/12/'> December 2021 &nbsp;(2)</option>
+	<option value='https://emshort.blog/2021/11/'> November 2021 &nbsp;(2)</option>
+	<option value='https://emshort.blog/2021/10/'> October 2021 &nbsp;(3)</option>
+	<option value='https://emshort.blog/2021/09/'> September 2021 &nbsp;(3)</option>
+	<option value='https://emshort.blog/2021/08/'> August 2021 &nbsp;(4)</option>
+	<option value='https://emshort.blog/2021/07/'> July 2021 &nbsp;(3)</option>
+	<option value='https://emshort.blog/2021/06/'> June 2021 &nbsp;(2)</option>
+	<option value='https://emshort.blog/2021/05/'> May 2021 &nbsp;(2)</option>
+	<option value='https://emshort.blog/2021/04/'> April 2021 &nbsp;(2)</option>
+	<option value='https://emshort.blog/2021/03/'> March 2021 &nbsp;(2)</option>
+	<option value='https://emshort.blog/2021/02/'> February 2021 &nbsp;(2)</option>
+	<option value='https://emshort.blog/2021/01/'> January 2021 &nbsp;(2)</option>
+	<option value='https://emshort.blog/2020/12/'> December 2020 &nbsp;(2)</option>
+	<option value='https://emshort.blog/2020/11/'> November 2020 &nbsp;(2)</option>
+	<option value='https://emshort.blog/2020/10/'> October 2020 &nbsp;(2)</option>
+	<option value='https://emshort.blog/2020/09/'> September 2020 &nbsp;(2)</option>
+	<option value='https://emshort.blog/2020/08/'> August 2020 &nbsp;(2)</option>
+	<option value='https://emshort.blog/2020/07/'> July 2020 &nbsp;(2)</option>
+	<option value='https://emshort.blog/2020/06/'> June 2020 &nbsp;(2)</option>
+	<option value='https://emshort.blog/2020/05/'> May 2020 &nbsp;(3)</option>
+	<option value='https://emshort.blog/2020/04/'> April 2020 &nbsp;(3)</option>
+	<option value='https://emshort.blog/2020/03/'> March 2020 &nbsp;(3)</option>
+	<option value='https://emshort.blog/2020/02/'> February 2020 &nbsp;(6)</option>
+	<option value='https://emshort.blog/2020/01/'> January 2020 &nbsp;(9)</option>
+	<option value='https://emshort.blog/2019/12/'> December 2019 &nbsp;(6)</option>
+	<option value='https://emshort.blog/2019/11/'> November 2019 &nbsp;(7)</option>
+	<option value='https://emshort.blog/2019/10/'> October 2019 &nbsp;(5)</option>
+	<option value='https://emshort.blog/2019/09/'> September 2019 &nbsp;(8)</option>
+	<option value='https://emshort.blog/2019/08/'> August 2019 &nbsp;(9)</option>
+	<option value='https://emshort.blog/2019/07/'> July 2019 &nbsp;(9)</option>
+	<option value='https://emshort.blog/2019/06/'> June 2019 &nbsp;(8)</option>
+	<option value='https://emshort.blog/2019/05/'> May 2019 &nbsp;(8)</option>
+	<option value='https://emshort.blog/2019/04/'> April 2019 &nbsp;(8)</option>
+	<option value='https://emshort.blog/2019/03/'> March 2019 &nbsp;(8)</option>
+	<option value='https://emshort.blog/2019/02/'> February 2019 &nbsp;(8)</option>
+	<option value='https://emshort.blog/2019/01/'> January 2019 &nbsp;(6)</option>
+	<option value='https://emshort.blog/2018/12/'> December 2018 &nbsp;(8)</option>
+	<option value='https://emshort.blog/2018/11/'> November 2018 &nbsp;(9)</option>
+	<option value='https://emshort.blog/2018/10/'> October 2018 &nbsp;(6)</option>
+	<option value='https://emshort.blog/2018/09/'> September 2018 &nbsp;(9)</option>
+	<option value='https://emshort.blog/2018/08/'> August 2018 &nbsp;(7)</option>
+	<option value='https://emshort.blog/2018/07/'> July 2018 &nbsp;(6)</option>
+	<option value='https://emshort.blog/2018/06/'> June 2018 &nbsp;(11)</option>
+	<option value='https://emshort.blog/2018/05/'> May 2018 &nbsp;(7)</option>
+	<option value='https://emshort.blog/2018/04/'> April 2018 &nbsp;(12)</option>
+	<option value='https://emshort.blog/2018/03/'> March 2018 &nbsp;(7)</option>
+	<option value='https://emshort.blog/2018/02/'> February 2018 &nbsp;(8)</option>
+	<option value='https://emshort.blog/2018/01/'> January 2018 &nbsp;(6)</option>
+	<option value='https://emshort.blog/2017/12/'> December 2017 &nbsp;(8)</option>
+	<option value='https://emshort.blog/2017/11/'> November 2017 &nbsp;(7)</option>
+	<option value='https://emshort.blog/2017/10/'> October 2017 &nbsp;(6)</option>
+	<option value='https://emshort.blog/2017/09/'> September 2017 &nbsp;(4)</option>
+	<option value='https://emshort.blog/2017/08/'> August 2017 &nbsp;(4)</option>
+	<option value='https://emshort.blog/2017/07/'> July 2017 &nbsp;(13)</option>
+	<option value='https://emshort.blog/2017/06/'> June 2017 &nbsp;(16)</option>
+	<option value='https://emshort.blog/2017/05/'> May 2017 &nbsp;(9)</option>
+	<option value='https://emshort.blog/2017/04/'> April 2017 &nbsp;(12)</option>
+	<option value='https://emshort.blog/2017/03/'> March 2017 &nbsp;(5)</option>
+	<option value='https://emshort.blog/2017/02/'> February 2017 &nbsp;(9)</option>
+	<option value='https://emshort.blog/2017/01/'> January 2017 &nbsp;(4)</option>
+	<option value='https://emshort.blog/2016/12/'> December 2016 &nbsp;(8)</option>
+	<option value='https://emshort.blog/2016/11/'> November 2016 &nbsp;(7)</option>
+	<option value='https://emshort.blog/2016/10/'> October 2016 &nbsp;(12)</option>
+	<option value='https://emshort.blog/2016/09/'> September 2016 &nbsp;(13)</option>
+	<option value='https://emshort.blog/2016/08/'> August 2016 &nbsp;(7)</option>
+	<option value='https://emshort.blog/2016/07/'> July 2016 &nbsp;(4)</option>
+	<option value='https://emshort.blog/2016/06/'> June 2016 &nbsp;(13)</option>
+	<option value='https://emshort.blog/2016/05/'> May 2016 &nbsp;(10)</option>
+	<option value='https://emshort.blog/2016/04/'> April 2016 &nbsp;(18)</option>
+	<option value='https://emshort.blog/2016/03/'> March 2016 &nbsp;(14)</option>
+	<option value='https://emshort.blog/2016/02/'> February 2016 &nbsp;(10)</option>
+	<option value='https://emshort.blog/2016/01/'> January 2016 &nbsp;(15)</option>
+	<option value='https://emshort.blog/2015/12/'> December 2015 &nbsp;(8)</option>
+	<option value='https://emshort.blog/2015/11/'> November 2015 &nbsp;(19)</option>
+	<option value='https://emshort.blog/2015/10/'> October 2015 &nbsp;(50)</option>
+	<option value='https://emshort.blog/2015/09/'> September 2015 &nbsp;(16)</option>
+	<option value='https://emshort.blog/2015/08/'> August 2015 &nbsp;(16)</option>
+	<option value='https://emshort.blog/2015/07/'> July 2015 &nbsp;(15)</option>
+	<option value='https://emshort.blog/2015/06/'> June 2015 &nbsp;(13)</option>
+	<option value='https://emshort.blog/2015/05/'> May 2015 &nbsp;(16)</option>
+	<option value='https://emshort.blog/2015/04/'> April 2015 &nbsp;(12)</option>
+	<option value='https://emshort.blog/2015/03/'> March 2015 &nbsp;(6)</option>
+	<option value='https://emshort.blog/2015/02/'> February 2015 &nbsp;(10)</option>
+	<option value='https://emshort.blog/2015/01/'> January 2015 &nbsp;(9)</option>
+	<option value='https://emshort.blog/2014/12/'> December 2014 &nbsp;(14)</option>
+	<option value='https://emshort.blog/2014/11/'> November 2014 &nbsp;(14)</option>
+	<option value='https://emshort.blog/2014/10/'> October 2014 &nbsp;(53)</option>
+	<option value='https://emshort.blog/2014/09/'> September 2014 &nbsp;(8)</option>
+	<option value='https://emshort.blog/2014/08/'> August 2014 &nbsp;(7)</option>
+	<option value='https://emshort.blog/2014/07/'> July 2014 &nbsp;(2)</option>
+	<option value='https://emshort.blog/2014/06/'> June 2014 &nbsp;(5)</option>
+	<option value='https://emshort.blog/2014/05/'> May 2014 &nbsp;(11)</option>
+	<option value='https://emshort.blog/2014/04/'> April 2014 &nbsp;(6)</option>
+	<option value='https://emshort.blog/2014/03/'> March 2014 &nbsp;(16)</option>
+	<option value='https://emshort.blog/2014/02/'> February 2014 &nbsp;(7)</option>
+	<option value='https://emshort.blog/2014/01/'> January 2014 &nbsp;(4)</option>
+	<option value='https://emshort.blog/2013/12/'> December 2013 &nbsp;(1)</option>
+	<option value='https://emshort.blog/2013/11/'> November 2013 &nbsp;(5)</option>
+	<option value='https://emshort.blog/2013/10/'> October 2013 &nbsp;(42)</option>
+	<option value='https://emshort.blog/2013/09/'> September 2013 &nbsp;(2)</option>
+	<option value='https://emshort.blog/2013/07/'> July 2013 &nbsp;(2)</option>
+	<option value='https://emshort.blog/2013/06/'> June 2013 &nbsp;(2)</option>
+	<option value='https://emshort.blog/2013/05/'> May 2013 &nbsp;(7)</option>
+	<option value='https://emshort.blog/2013/04/'> April 2013 &nbsp;(14)</option>
+	<option value='https://emshort.blog/2013/03/'> March 2013 &nbsp;(3)</option>
+	<option value='https://emshort.blog/2013/02/'> February 2013 &nbsp;(3)</option>
+	<option value='https://emshort.blog/2013/01/'> January 2013 &nbsp;(7)</option>
+	<option value='https://emshort.blog/2012/12/'> December 2012 &nbsp;(4)</option>
+	<option value='https://emshort.blog/2012/11/'> November 2012 &nbsp;(20)</option>
+	<option value='https://emshort.blog/2012/10/'> October 2012 &nbsp;(24)</option>
+	<option value='https://emshort.blog/2012/09/'> September 2012 &nbsp;(3)</option>
+	<option value='https://emshort.blog/2012/08/'> August 2012 &nbsp;(3)</option>
+	<option value='https://emshort.blog/2012/07/'> July 2012 &nbsp;(4)</option>
+	<option value='https://emshort.blog/2012/06/'> June 2012 &nbsp;(8)</option>
+	<option value='https://emshort.blog/2012/05/'> May 2012 &nbsp;(6)</option>
+	<option value='https://emshort.blog/2012/03/'> March 2012 &nbsp;(3)</option>
+	<option value='https://emshort.blog/2012/02/'> February 2012 &nbsp;(4)</option>
+	<option value='https://emshort.blog/2011/12/'> December 2011 &nbsp;(3)</option>
+	<option value='https://emshort.blog/2011/11/'> November 2011 &nbsp;(4)</option>
+	<option value='https://emshort.blog/2011/10/'> October 2011 &nbsp;(38)</option>
+	<option value='https://emshort.blog/2011/09/'> September 2011 &nbsp;(8)</option>
+	<option value='https://emshort.blog/2011/08/'> August 2011 &nbsp;(3)</option>
+	<option value='https://emshort.blog/2011/07/'> July 2011 &nbsp;(22)</option>
+	<option value='https://emshort.blog/2011/06/'> June 2011 &nbsp;(6)</option>
+	<option value='https://emshort.blog/2011/05/'> May 2011 &nbsp;(4)</option>
+	<option value='https://emshort.blog/2011/04/'> April 2011 &nbsp;(15)</option>
+	<option value='https://emshort.blog/2011/03/'> March 2011 &nbsp;(13)</option>
+	<option value='https://emshort.blog/2011/02/'> February 2011 &nbsp;(9)</option>
+	<option value='https://emshort.blog/2011/01/'> January 2011 &nbsp;(14)</option>
+	<option value='https://emshort.blog/2010/12/'> December 2010 &nbsp;(4)</option>
+	<option value='https://emshort.blog/2010/11/'> November 2010 &nbsp;(15)</option>
+	<option value='https://emshort.blog/2010/10/'> October 2010 &nbsp;(20)</option>
+	<option value='https://emshort.blog/2010/09/'> September 2010 &nbsp;(7)</option>
+	<option value='https://emshort.blog/2010/08/'> August 2010 &nbsp;(6)</option>
+	<option value='https://emshort.blog/2010/07/'> July 2010 &nbsp;(8)</option>
+	<option value='https://emshort.blog/2010/06/'> June 2010 &nbsp;(9)</option>
+	<option value='https://emshort.blog/2010/05/'> May 2010 &nbsp;(6)</option>
+	<option value='https://emshort.blog/2010/04/'> April 2010 &nbsp;(15)</option>
+	<option value='https://emshort.blog/2010/03/'> March 2010 &nbsp;(5)</option>
+	<option value='https://emshort.blog/2010/02/'> February 2010 &nbsp;(5)</option>
+	<option value='https://emshort.blog/2010/01/'> January 2010 &nbsp;(12)</option>
+	<option value='https://emshort.blog/2009/12/'> December 2009 &nbsp;(9)</option>
+	<option value='https://emshort.blog/2009/11/'> November 2009 &nbsp;(23)</option>
+	<option value='https://emshort.blog/2009/10/'> October 2009 &nbsp;(27)</option>
+	<option value='https://emshort.blog/2009/09/'> September 2009 &nbsp;(9)</option>
+	<option value='https://emshort.blog/2009/08/'> August 2009 &nbsp;(17)</option>
+	<option value='https://emshort.blog/2009/07/'> July 2009 &nbsp;(16)</option>
+	<option value='https://emshort.blog/2009/06/'> June 2009 &nbsp;(16)</option>
+	<option value='https://emshort.blog/2009/05/'> May 2009 &nbsp;(13)</option>
+	<option value='https://emshort.blog/2009/04/'> April 2009 &nbsp;(19)</option>
+	<option value='https://emshort.blog/2009/03/'> March 2009 &nbsp;(10)</option>
+	<option value='https://emshort.blog/2009/02/'> February 2009 &nbsp;(18)</option>
+	<option value='https://emshort.blog/2009/01/'> January 2009 &nbsp;(12)</option>
+	<option value='https://emshort.blog/2008/12/'> December 2008 &nbsp;(20)</option>
+	<option value='https://emshort.blog/2008/11/'> November 2008 &nbsp;(20)</option>
+	<option value='https://emshort.blog/2008/10/'> October 2008 &nbsp;(49)</option>
+	<option value='https://emshort.blog/2008/09/'> September 2008 &nbsp;(9)</option>
+	<option value='https://emshort.blog/2008/08/'> August 2008 &nbsp;(9)</option>
+	<option value='https://emshort.blog/2008/07/'> July 2008 &nbsp;(17)</option>
+	<option value='https://emshort.blog/2008/06/'> June 2008 &nbsp;(18)</option>
+	<option value='https://emshort.blog/2008/05/'> May 2008 &nbsp;(14)</option>
+	<option value='https://emshort.blog/2008/04/'> April 2008 &nbsp;(13)</option>
+	<option value='https://emshort.blog/2008/03/'> March 2008 &nbsp;(13)</option>
+	<option value='https://emshort.blog/2008/02/'> February 2008 &nbsp;(17)</option>
+	<option value='https://emshort.blog/2008/01/'> January 2008 &nbsp;(7)</option>
+	<option value='https://emshort.blog/2007/12/'> December 2007 &nbsp;(10)</option>
+	<option value='https://emshort.blog/2007/11/'> November 2007 &nbsp;(9)</option>
+	<option value='https://emshort.blog/2007/10/'> October 2007 &nbsp;(37)</option>
+	<option value='https://emshort.blog/2007/09/'> September 2007 &nbsp;(9)</option>
+	<option value='https://emshort.blog/2007/08/'> August 2007 &nbsp;(12)</option>
+	<option value='https://emshort.blog/2007/07/'> July 2007 &nbsp;(7)</option>
+	<option value='https://emshort.blog/2007/06/'> June 2007 &nbsp;(3)</option>
+	<option value='https://emshort.blog/2007/05/'> May 2007 &nbsp;(7)</option>
+	<option value='https://emshort.blog/2007/04/'> April 2007 &nbsp;(9)</option>
+	<option value='https://emshort.blog/2007/03/'> March 2007 &nbsp;(4)</option>
+	<option value='https://emshort.blog/2007/02/'> February 2007 &nbsp;(4)</option>
+	<option value='https://emshort.blog/2007/01/'> January 2007 &nbsp;(1)</option>
+	<option value='https://emshort.blog/2006/12/'> December 2006 &nbsp;(5)</option>
+	<option value='https://emshort.blog/2006/11/'> November 2006 &nbsp;(1)</option>
+	<option value='https://emshort.blog/2006/10/'> October 2006 &nbsp;(1)</option>
+	<option value='https://emshort.blog/2006/08/'> August 2006 &nbsp;(1)</option>
+	<option value='https://emshort.blog/2006/03/'> March 2006 &nbsp;(1)</option>
+	<option value='https://emshort.blog/2004/08/'> August 2004 &nbsp;(1)</option>
+	<option value='https://emshort.blog/2004/07/'> July 2004 &nbsp;(1)</option>
+	<option value='https://emshort.blog/2004/04/'> April 2004 &nbsp;(1)</option>
+	<option value='https://emshort.blog/2004/03/'> March 2004 &nbsp;(1)</option>
+	<option value='https://emshort.blog/2004/01/'> January 2004 &nbsp;(1)</option>
+	<option value='https://emshort.blog/2003/11/'> November 2003 &nbsp;(1)</option>
+	<option value='https://emshort.blog/2003/09/'> September 2003 &nbsp;(1)</option>
+	<option value='https://emshort.blog/2003/05/'> May 2003 &nbsp;(1)</option>
+	<option value='https://emshort.blog/2003/02/'> February 2003 &nbsp;(1)</option>
+	<option value='https://emshort.blog/2002/11/'> November 2002 &nbsp;(1)</option>
+
+		</select>
+
+			<script>
+( ( dropdownId ) => {
+	const dropdown = document.getElementById( dropdownId );
+	function onSelectChange() {
+		setTimeout( () => {
+			if ( 'escape' === dropdown.dataset.lastkey ) {
+				return;
+			}
+			if ( dropdown.value ) {
+				document.location.href = dropdown.value;
+			}
+		}, 250 );
+	}
+	function onKeyUp( event ) {
+		if ( 'Escape' === event.key ) {
+			dropdown.dataset.lastkey = 'escape';
+		} else {
+			delete dropdown.dataset.lastkey;
+		}
+	}
+	function onClick() {
+		delete dropdown.dataset.lastkey;
+	}
+	dropdown.addEventListener( 'keyup', onKeyUp );
+	dropdown.addEventListener( 'click', onClick );
+	dropdown.addEventListener( 'change', onSelectChange );
+})( "archives-dropdown-3" );
+
+//# sourceURL=WP_Widget_Archives%3A%3Awidget
+</script>
+</section>
+		<section id="recent-posts-3" class="widget widget_recent_entries">
+		<h2 class="widget-title">Recent Posts</h2><nav aria-label="Recent Posts">
+		<ul>
+											<li>
+					<a href="https://emshort.blog/2023/11/22/dialogue-expressiveness-in-mask-of-the-rose/">Dialogue Expressiveness in Mask of the&nbsp;Rose</a>
+									</li>
+											<li>
+					<a href="https://emshort.blog/2023/08/31/end-of-august-links/">End of August&nbsp;Links</a>
+									</li>
+											<li>
+					<a href="https://emshort.blog/2023/03/03/status/">Status</a>
+									</li>
+											<li>
+					<a href="https://emshort.blog/2022/10/31/end-of-october-link-assortment-7/">End of October Link&nbsp;Assortment</a>
+									</li>
+											<li>
+					<a href="https://emshort.blog/2022/10/15/mid-october-link-assortment-8/">Mid-October Link Assortment</a>
+									</li>
+					</ul>
+
+		</nav></section><section id="recent-comments-2" class="widget widget_recent_comments"><h2 class="widget-title">Recent Comments</h2>				<ul id="recentcomments">
+											<li class="recentcomments">
+							<a href="http://www.postcardgames.com" class="url" rel="ugc external nofollow">Joseph Limbaugh</a> on <a href="https://emshort.blog/2023/03/03/status/#comment-134293">Status</a>						</li>
+
+												<li class="recentcomments">
+							Lukasz on <a href="https://emshort.blog/2023/11/22/dialogue-expressiveness-in-mask-of-the-rose/#comment-134280">Dialogue Expressiveness in Mask of the&nbsp;Rose</a>						</li>
+
+												<li class="recentcomments">
+							<a href="https://emshort.wordpress.com/" class="url" rel="ugc external nofollow">Emily Short</a> on <a href="https://emshort.blog/2015/04/15/inform-extension-updating/#comment-134278">Inform extension updating</a>						</li>
+
+												<li class="recentcomments">
+							<a href="https://emshort.wordpress.com/" class="url" rel="ugc external nofollow">Emily Short</a> on <a href="https://emshort.blog/2018/11/01/restless/#comment-134277">Restless</a>						</li>
+
+												<li class="recentcomments">
+							<a href="https://baseball-bros.org" class="url" rel="ugc external nofollow">Baseball Bros</a> on <a href="https://emshort.blog/2011/10/08/if-comp-2011-fan-interference/#comment-134276">IF Comp 2011: Fan&nbsp;Interference</a>						</li>
+
+										</ul>
+				</section><section id="rss-2" class="widget widget_rss"><h2 class="widget-title"><a class="rsswidget" href="http://atom.xml" title="Syndicate this content"><img style="background: orange; color: white; border: none;" width="14" height="14" src="https://s.wordpress.com/wp-includes/images/rss.png?m=1354137473i" alt="RSS" /></a> <a class="rsswidget" href="" title="">On  Planet-IF</a></h2><ul><li>An error has occurred; the feed is probably down. Try again later.</li></ul></section><section id="linkcat-1356" class="widget widget_links"><h2 class="widget-title">Blogroll</h2>
+	<ul class='xoxo blogroll'>
+<li><a href="http://rcveeder.net/clash/" title="IF played with commentary">Clash of the Type-Ins (podcast)</a></li>
+<li><a href="http://electricarchaeologist.wordpress.com/" title="&#8220;Agent based modeling, games, virtual worlds, and online education for archaeology and history.&#8221;">Electric Archaeology</a></li>
+<li><a href="http://www.gamesetwatch.com/column_homer_in_silicon/" title="My GameSetWatch column">Homer in Silicon (archival)</a></li>
+<li><a href="https://iftechfoundation.org/" title="Non-profit that supports the IF Comp, archiving, education and accessibility initiatives, and other general support of IF community resources">IF Technology Foundation</a></li>
+<li><a href="feed://inform7.com/extensions/I7ExtensionsRSS.xml" title="RSS feed announcing new extensions">Inform 7 Extensions feed</a></li>
+<li><a href="http://inkypath.wordpress.com/" title="Inky Path IF zine. Now discontinued, but the website is (for now) still available.">Inky Path (archival)</a></li>
+<li><a href="https://narrascope.org/" title="US-based conference focused on narrative games, with a strong IF presence">NarraScope</a></li>
+<li><a href="http://pissylittlesausages.wordpress.com/" title="IF reviews, with attitude">Pissy Little Sausages</a></li>
+<li><a href="http://www.planet-if.com/" title="Aggregated IF Feeds">Planet IF</a></li>
+<li><a href="http://bluerenga.wordpress.com/" title="Observations on playing IF and related games">Renga in Blue</a></li>
+<li><a href="http://www.sibylmoon.com/" title="Posts about parser games and game development by Carolyn VanEseltine">Sibyl Moon</a></li>
+<li><a href="http://gamingphilosopher.blogspot.com/" title="Victor Gijsbers&#8217; thoughts on IF, RPGs, and related topics">The Gaming Philosopher</a></li>
+<li><a href="http://www.wurb.com/stack/" title="Baf (as in Baf&#8217;s Guide) blogs about games, including IF">The Stack</a></li>
+<li><a href="https://www.titansoftext.com/" title="Interviews about various types of text gaming, including text adventures and MUDs">Titans of Text (podcast)</a></li>
+<li><a href="http://www.z-machine-matter.com" title="Articles and reviews">Z-Machine Matter</a></li>
+<li><a href="http://blog.zarfhome.com/" title="Posts and reviews from Andrew Plotkin">Zarfhome</a></li>
+
+	</ul>
+</section>
+<section id="linkcat-325251551" class="widget widget_links"><h2 class="widget-title">Collections</h2>
+	<ul class='xoxo blogroll'>
+<li><a href="https://twitter.com/philomela_twine" title="Feed of newly listed Twine works on the Philome.la hosting service">@philomela_twine</a></li>
+<li><a href="http://eliterature.org/" title="Directory of new media work by the Electronic Literature Organization, including some IF">ELO Directory</a></li>
+<li><a href="https://www.pinterest.com/emshortif/if-interfaces/" title="Pinterest board showing many different types of interface for interactive story work">IF Interfaces</a></li>
+<li><a href="http://ifdb.org/" title="A site for reviews and user recommendations, also providing game download links and displaying cover art.">IFDB</a></li>
+<li><a href="http://docubase.mit.edu/" title="Collection of interactive documentaries">MIT Docubase</a></li>
+<li><a href="http://textadventures.co.uk/" title="A database and online play front-end for games in Quest, Twine, and Inform">Textadventures</a></li>
+
+	</ul>
+</section>
+<section id="linkcat-101821775" class="widget widget_links"><h2 class="widget-title">Commercial IF</h2>
+	<ul class='xoxo blogroll'>
+<li><a href="https://www.choiceofgames.com/" title="Choice-based interactive fiction served for multiple mobile devices">Choice of Games</a></li>
+<li><a href="http://www.codenamecygnus.com/" title="Interactive audio drama">Codename Cygnus</a></li>
+<li><a href="http://www.cubusgames.com/" title="Illustrated gamebook apps">Cubus Games</a></li>
+<li><a href="http://darnedsock.com/loose-strands/" title="Interactive story app for children">Darned Sock Productions</a></li>
+<li><a href="http://failbettergames.com" title="Purveyors of Fallen London">Failbetter Games</a></li>
+<li><a href="http://inklestudios.com" title="IF for mobile devices, including Sorcery! gamebook apps">inkle</a></li>
+<li><a href="http://sixtostart.com/onetoread/" title="ARGS, situated storytelling, television and ebook tie-ins, transmedia">Six To Start</a></li>
+<li><a href="https://sub-q.com/" title="Magazine paying pro rates for interactive stories">Sub-Q Magazine</a></li>
+<li><a href="http://tinmangames.com.au/blog/" title="Gamebook apps">Tin Man Games</a></li>
+<li><a href="http://versu.com" rel="me" title="Character-AI driven interactive fiction">Versu (archival)</a></li>
+
+	</ul>
+</section>
+<section id="linkcat-24514" class="widget widget_links"><h2 class="widget-title">Competitions</h2>
+	<ul class='xoxo blogroll'>
+<li><a href="http://www.ifcomp.org/" title="Yearly, major competition for games playable in 2 hours or less">IF Comp</a></li>
+<li><a href="http://introcomp.org/" title="Yearly competition for prologue games">Introcomp</a></li>
+<li><a href="https://github.com/dariusk/NaNoGenMo-2014" title="Month-long jam to create story generators">NaNoGenMo</a></li>
+<li><a href="http://www.saugus.net/Contests/Halloween/" title="A Halloween ghost story contest with an interactive division">Saugus Halloween Contest</a></li>
+<li><a href="https://www.springthing.net/" title="Yearly competition for longer games">Spring Thing</a></li>
+<li><a href="http://www.arborell.com/windhammer_prize.html" title="Prize for the creation of paper/PDF gamebooks. This has not run in a few years, but the site currently retains archives">Windhammer Prize</a></li>
+<li><a href="http://xyzzyawards.org/" title="The Oscars of IF">XYZZY Awards</a></li>
+
+	</ul>
+</section>
+<section id="linkcat-325249949" class="widget widget_links"><h2 class="widget-title">Conferences and Events</h2>
+	<ul class='xoxo blogroll'>
+<li><a href="http://adventurexpo.org/" title="Narrative games conference held annually in London in the fall">AdventureX</a></li>
+<li><a href="http://www.foundationsofdigitalgames.org/" title="Concerning the scientific foundations of digital games, technology used to develop digital games, and the study of digital games and their design">Foundations of Digital Games</a></li>
+<li><a href="http://computationalcreativity.net/iccc2015/" title="International Conference on Computational Creativity">ICCC</a></li>
+<li><a href="http://www.icids.org/" title="International Conference on Interactive Digital Storytelling, academic focus">ICIDS</a></li>
+<li><a href="http://handeyesociety.com/wordplay/" title="Annual one-day festival of text games, held in Toronto in November">Wordplay</a></li>
+
+	</ul>
+</section>
+<section id="linkcat-642561" class="widget widget_links"><h2 class="widget-title">Creation Tools</h2>
+	<ul class='xoxo blogroll'>
+<li><a href="https://docs.google.com/spreadsheets/d/1-B1yKIateTpwTdRNT9W_ZjDzC6XnFpHXrcZ4nr_x7LQ/edit#gid=0" title="Large list of IF engines, with links and comments about features">&quot;Another IF Engine List&quot;</a></li>
+<li><a href="http://www.adrift.co/">ADRIFT</a></li>
+<li><a href="http://www.welcome.to/alan-if">Alan</a></li>
+<li><a href="http://sm.axmasoft.com/en/">Axma Story Maker</a></li>
+<li><a href="http://www.choiceofgames.com/make-your-own-games/choicescript-intro/" title="Branching choice plus a certain amount of world state">ChoiceScript</a></li>
+<li><a href="http://chooseyourstory.com/" title="Web-based CYOA collection">Choose Your Story</a></li>
+<li><a href="https://fungusgames.com/" title="Tool for writing branching dialogue and similar content for Unity">Fungus</a></li>
+<li><a href="http://www.inform-fiction.org/inform6.html">Inform 6</a></li>
+<li><a href="http://www.inform7.com">Inform 7</a></li>
+<li><a href="https://www.inklestudios.com/ink/" title="Pro-quality tool for writing branching narratives, compatible with Unity">ink</a></li>
+<li><a href="http://www.textadventures.co.uk/" title="IF language oriented towards ease of use, with in-browser game development and play.">Quest</a></li>
+<li><a href="http://www.renpy.org/" title="Branching storytelling at about the same level of complexity as ChoiceScript games, plus tools for visual presentation">Ren&#039;Py</a></li>
+<li><a href="http://www.tads.org/">TADS 2 and 3</a></li>
+<li><a href="https://joshuagrams.github.io/tiny-qbn/" title="Tool for building storylet-based narratives (or &#8220;quality-based&#8221;, hence QBN)">Tiny QBN</a></li>
+<li><a href="http://twinery.org/" title="Development tool for traditionally branching CYOA with some variable-tracking">Twine</a></li>
+<li><a href="http://tyranobuilder.com/" title="Visual novel tool for multiple platforms">TyranoBuilder</a></li>
+<li><a href="http://vorple-if.com/" title="Front-end features for browser-based Undum and Inform games (and perhaps others in the future)">Vorple</a></li>
+<li><a href="https://github.com/lizadaly/windrift" title="Tools for making attractive hypertext on a JavaScript framework; expects JS familiarity">Windrift</a></li>
+<li><a href="https://www.secretlab.com.au/blog/2016/2/10/yarn-spinner" title="Tool for use with Yarn (itself a Twine-like)">Yarn Spinner</a></li>
+
+	</ul>
+</section>
+<section id="linkcat-234872" class="widget widget_links"><h2 class="widget-title">Design Articles</h2>
+	<ul class='xoxo blogroll'>
+<li><a href="http://www.ifwiki.org/index.php/Main_Page" title="A host of different material here, in wiki form">ifwiki</a></li>
+<li><a href="http://www.ifwiki.org/index.php/Past_raif_topics" title="Organized collection of old discussions on craft">Past RAIF Threads</a></li>
+<li><a href="https://web.archive.org/web/20140304130156/http://www.xyzzynews.com/" title="No longer active, but an archived webzine with a lot to say about the history of text adventure craft">XYZZYNews</a></li>
+
+	</ul>
+</section>
+<section id="linkcat-117" class="widget widget_links"><h2 class="widget-title">Forums</h2>
+	<ul class='xoxo blogroll'>
+<li><a href="http://forum.adrift.co/" title="Forum for ADRIFT users">ADRIFT Forum</a></li>
+<li><a href="http://www.caad.es/foro/index.php" title="Spanish-language IF forum">CAAD (Spanish)</a></li>
+<li><a href="http://ifmud.port4000.com/" title="A live chat, including the facilities to play IF collaboratively online">ifMUD</a></li>
+<li><a href="http://www.ifwiki.org/index.php/Main_Page" title="A host of different material here, in wiki form">ifwiki</a></li>
+<li><a href="http://www.facebook.com/home.php?sk=group_188527774524536&#038;ap=1" title="Formerly for Vancouver meetups, now a more general group">Interactive Fiction Facebook group</a></li>
+<li><a href="http://www.intfiction.org/forum/" title="Discussion on writing and playing IF">intfiction.org</a></li>
+<li><a href="http://forum.textadventures.co.uk/viewforum.php?f=10">Quest Forum</a></li>
+
+	</ul>
+</section>
+<section id="linkcat-128572" class="widget widget_links"><h2 class="widget-title">Local Groups</h2>
+	<ul class='xoxo blogroll'>
+<li><a href="https://www.facebook.com/groups/baltdcifmeetup/" title="Baltimore/DC-area live meetups">Baltimore/Washington DC</a></li>
+<li><a href="http://www.meetup.com/Oxford-and-London-Interactive-Fiction-Group/" title="Meetups alternately in Oxford and London">Oxford and London IF Group</a></li>
+<li><a href="http://pr-if.org/" title="Group meeting monthly at MIT for Boston-area IF enthusiasts.">People&#039;s Republic of IF (Boston)</a></li>
+<li><a href="http://www.meetup.com/sf-bay-area-interactive-fiction/" title="Meetings for IF enthusiasts in the SF Bay Area">San Francisco Bay Area IF</a></li>
+<li><a href="http://groups.google.com/group/seattle-if?lnk=srg" title="Group meeting monthly (or sometimes more often) for Seattle-area IF enthusiasts">Seattle</a></li>
+
+	</ul>
+</section>
+<section id="linkcat-642470" class="widget widget_links"><h2 class="widget-title">Online play</h2>
+	<ul class='xoxo blogroll'>
+<li><a href="http://adventurecow.com/" title="A collection of Twine and other web-playable pieces, typically choice-based">Adventure Cow</a></li>
+<li><a href="http://www.ifiction.org/" title="Many IF works installed to play online without a download">ifiction</a></li>
+<li><a href="http://ifmud.port4000.com/" title="A live chat, including the facilities to play IF collaboratively online">ifMUD</a></li>
+
+	</ul>
+</section>
+<section id="linkcat-309" class="widget widget_links"><h2 class="widget-title">Reviews</h2>
+	<ul class='xoxo blogroll'>
+<li><a href="https://web.archive.org/web/20161117220409/ministryofpeace.com/if-review" title="Long, in-depth reviews of games; Wayback Machine version is linked here since the site is no longer live">IF-Review</a></li>
+<li><a href="http://spac.caad.es/" title="Reviews and articles in Spanish, about Spanish (and other) IF">SPAC (Spanish)</a></li>
+<li><a href="http://www.spagmag.org/" title="Webzine with editorials, interviews, and many reviews">SPAG</a></li>
+
+	</ul>
+</section>
+<section id="linkcat-293729" class="widget widget_links"><h2 class="widget-title">Walkthroughs</h2>
+	<ul class='xoxo blogroll'>
+<li><a href="http://solutionarchive.com/" title="Equal parts solution/map resource and classic text adventure database. It features close to 3,800 adventure games, cataloging for the 8-bit and 16-bit platforms.">Classic Adventure Solution Archive</a></li>
+<li><a href="http://plover.net/~davidw/sol/idx_walk.html" title="A large collection of meticulously-written walkthroughs and maps for modern IF">David Welbourn’s Walkthroughs</a></li>
+
+	</ul>
+</section>
+<section id="meta-2" class="widget widget_meta"><h2 class="widget-title">Meta</h2><nav aria-label="Meta">
+		<ul>
+			<li><a class="click-register" href="https://wordpress.com/start?ref=wplogin">Create account</a></li>			<li><a href="https://emshort.wordpress.com/wp-login.php">Log in</a></li>
+			<li><a href="https://emshort.blog/feed/">Entries feed</a></li>
+			<li><a href="https://emshort.blog/comments/feed/">Comments feed</a></li>
+
+			<li><a href="https://wordpress.com/" title="Powered by WordPress, state-of-the-art semantic personal publishing platform.">WordPress.com</a></li>
+		</ul>
+
+		</nav></section>	</aside><!-- .sidebar .widget-area -->
+
+		</div><!-- .site-content -->
+
+		<footer id="colophon" class="site-footer">
+							<nav class="main-navigation" aria-label="Footer Primary Menu">
+					<div class="menu-about-container"><ul id="menu-about-1" class="primary-menu"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-2540"><a href="https://emshort.blog/contact/">Contact and FAQ</a>
+<ul class="sub-menu">
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-39954"><a href="https://emshort.blog/contact/if-meetup-recording/">IF Meetup Recording</a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-2538"><a href="https://emshort.blog/my-work/">My Work</a>
+<ul class="sub-menu">
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-39951"><a href="https://emshort.blog/commercial-portfolio/">Games</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-40574"><a href="https://emshort.blog/tools/">Tools</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-40489"><a href="https://emshort.blog/publications/">Publications</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-39953"><a href="https://emshort.blog/talks/">Talks</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-40467"><a href="https://emshort.blog/services/">Consulting Services</a></li>
+</ul>
+</li>
+</ul></div>				</nav><!-- .main-navigation -->
+			
+			
+			<div class="site-info">
+								<span class="site-title"><a href="https://emshort.blog/" rel="home">Emily Short&#039;s Interactive Storytelling</a></span>
+								<a href="https://wordpress.com/?ref=footer_blog" rel="nofollow">Blog at WordPress.com.</a>
+			</div><!-- .site-info -->
+		</footer><!-- .site-footer -->
+	</div><!-- .site-inner -->
+</div><!-- .site -->
+
+<!--  -->
+<script type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":["/wp-*.php","/wp-admin/*","/files/*","/wp-content/*","/wp-content/plugins/*","/wp-content/themes/pub/twentysixteen/*","/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
+</script>
+	<div style="display:none">
+	</div>
+		<div id="actionbar" dir="ltr" style="display: none;"
+			class="actnbr-pub-twentysixteen actnbr-has-follow actnbr-has-actions">
+		<ul>
+								<li class="actnbr-btn actnbr-hidden">
+						<a class="actnbr-action actnbr-actn-comment" href="https://emshort.blog/2016/09/12/visualizing-procgen-text-part-two/#comments">
+							<svg class="gridicon gridicons-comment" height="20" width="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path d="M12 16l-5 5v-5H5c-1.1 0-2-.9-2-2V5c0-1.1.9-2 2-2h14c1.1 0 2 .9 2 2v9c0 1.1-.9 2-2 2h-7z"/></g></svg>							<span>Comment						</span>
+						</a>
+					</li>
+									<li class="actnbr-btn actnbr-hidden">
+						<a class="actnbr-action actnbr-actn-reblog" href="">
+							<svg class="gridicon gridicons-reblog" height="20" width="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path d="M22.086 9.914L20 7.828V18c0 1.105-.895 2-2 2h-7v-2h7V7.828l-2.086 2.086L14.5 8.5 19 4l4.5 4.5-1.414 1.414zM6 16.172V6h7V4H6c-1.105 0-2 .895-2 2v10.172l-2.086-2.086L.5 15.5 5 20l4.5-4.5-1.414-1.414L6 16.172z"/></g></svg><span>Reblog</span>
+						</a>
+					</li>
+									<li class="actnbr-btn actnbr-hidden">
+								<a class="actnbr-action actnbr-actn-follow " href="">
+			<svg class="gridicon" height="20" width="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path clip-rule="evenodd" d="m4 4.5h12v6.5h1.5v-6.5-1.5h-1.5-12-1.5v1.5 10.5c0 1.1046.89543 2 2 2h7v-1.5h-7c-.27614 0-.5-.2239-.5-.5zm10.5 2h-9v1.5h9zm-5 3h-4v1.5h4zm3.5 1.5h-1v1h1zm-1-1.5h-1.5v1.5 1 1.5h1.5 1 1.5v-1.5-1-1.5h-1.5zm-2.5 2.5h-4v1.5h4zm6.5 1.25h1.5v2.25h2.25v1.5h-2.25v2.25h-1.5v-2.25h-2.25v-1.5h2.25z"  fill-rule="evenodd"></path></svg>
+			<span>Subscribe</span>
+		</a>
+		<a class="actnbr-action actnbr-actn-following  no-display" href="">
+			<svg class="gridicon" height="20" width="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M16 4.5H4V15C4 15.2761 4.22386 15.5 4.5 15.5H11.5V17H4.5C3.39543 17 2.5 16.1046 2.5 15V3H17.5V12.5H16V4.5ZM5.5 6.5H14.5V8H5.5V6.5ZM5.5 9.5H9.5V11H5.5V9.5ZM12 11H13V12H12V11ZM10.5 9.5H14.5V13.5H10.5V9.5ZM5.5 12H9.5V13.5H5.5V12Z" fill="#008A20"></path><path d="M19.5303 15.0303L15.5 19.0605L12.9697 16.5303L14.0303 15.4697L15.5 16.9395L18.4697 13.9697L19.5303 15.0303Z" fill="#008A20"></path></svg>
+			<span>Subscribed</span>
+		</a>
+							<div class="actnbr-popover tip tip-top-left actnbr-notice" id="follow-bubble">
+							<div class="tip-arrow"></div>
+							<div class="tip-inner actnbr-follow-bubble">
+															<ul>
+											<li class="actnbr-sitename">
+			<a href="https://emshort.blog">
+				<img loading='lazy' alt='' src='https://s0.wp.com/i/logo/wpcom-gray-white.png?m=1479929237i' srcset='https://s0.wp.com/i/logo/wpcom-gray-white.png 1x' class='avatar avatar-50' height='50' width='50' />				Emily Short&#039;s Interactive Storytelling			</a>
+		</li>
+										<div class="actnbr-message no-display"></div>
+									<form method="post" action="https://subscribe.wordpress.com" accept-charset="utf-8" style="display: none;">
+																						<div class="actnbr-follow-count">Join 1,494 other subscribers</div>
+																					<div>
+										<input type="email" name="email" placeholder="Enter your email address" class="actnbr-email-field" aria-label="Enter your email address" />
+										</div>
+										<input type="hidden" name="action" value="subscribe" />
+										<input type="hidden" name="blog_id" value="702124" />
+										<input type="hidden" name="source" value="https://emshort.blog/2016/09/12/visualizing-procgen-text-part-two/" />
+										<input type="hidden" name="sub-type" value="actionbar-follow" />
+										<input type="hidden" id="_wpnonce" name="_wpnonce" value="31dff122aa" />										<div class="actnbr-button-wrap">
+											<button type="submit" value="Sign me up">
+												Sign me up											</button>
+										</div>
+									</form>
+									<li class="actnbr-login-nudge">
+										<div>
+											Already have a WordPress.com account? <a href="https://wordpress.com/log-in?redirect_to=https%3A%2F%2Fr-login.wordpress.com%2Fremote-login.php%3Faction%3Dlink%26back%3Dhttps%253A%252F%252Femshort.blog%252F2016%252F09%252F12%252Fvisualizing-procgen-text-part-two%252F">Log in now.</a>										</div>
+									</li>
+								</ul>
+															</div>
+						</div>
+					</li>
+							<li class="actnbr-ellipsis actnbr-hidden">
+				<svg class="gridicon gridicons-ellipsis" height="24" width="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path d="M7 12c0 1.104-.896 2-2 2s-2-.896-2-2 .896-2 2-2 2 .896 2 2zm12-2c-1.104 0-2 .896-2 2s.896 2 2 2 2-.896 2-2-.896-2-2-2zm-7 0c-1.104 0-2 .896-2 2s.896 2 2 2 2-.896 2-2-.896-2-2-2z"/></g></svg>				<div class="actnbr-popover tip tip-top-left actnbr-more">
+					<div class="tip-arrow"></div>
+					<div class="tip-inner">
+						<ul>
+								<li class="actnbr-sitename">
+			<a href="https://emshort.blog">
+				<img loading='lazy' alt='' src='https://s0.wp.com/i/logo/wpcom-gray-white.png?m=1479929237i' srcset='https://s0.wp.com/i/logo/wpcom-gray-white.png 1x' class='avatar avatar-50' height='50' width='50' />				Emily Short&#039;s Interactive Storytelling			</a>
+		</li>
+								<li class="actnbr-folded-follow">
+										<a class="actnbr-action actnbr-actn-follow " href="">
+			<svg class="gridicon" height="20" width="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path clip-rule="evenodd" d="m4 4.5h12v6.5h1.5v-6.5-1.5h-1.5-12-1.5v1.5 10.5c0 1.1046.89543 2 2 2h7v-1.5h-7c-.27614 0-.5-.2239-.5-.5zm10.5 2h-9v1.5h9zm-5 3h-4v1.5h4zm3.5 1.5h-1v1h1zm-1-1.5h-1.5v1.5 1 1.5h1.5 1 1.5v-1.5-1-1.5h-1.5zm-2.5 2.5h-4v1.5h4zm6.5 1.25h1.5v2.25h2.25v1.5h-2.25v2.25h-1.5v-2.25h-2.25v-1.5h2.25z"  fill-rule="evenodd"></path></svg>
+			<span>Subscribe</span>
+		</a>
+		<a class="actnbr-action actnbr-actn-following  no-display" href="">
+			<svg class="gridicon" height="20" width="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M16 4.5H4V15C4 15.2761 4.22386 15.5 4.5 15.5H11.5V17H4.5C3.39543 17 2.5 16.1046 2.5 15V3H17.5V12.5H16V4.5ZM5.5 6.5H14.5V8H5.5V6.5ZM5.5 9.5H9.5V11H5.5V9.5ZM12 11H13V12H12V11ZM10.5 9.5H14.5V13.5H10.5V9.5ZM5.5 12H9.5V13.5H5.5V12Z" fill="#008A20"></path><path d="M19.5303 15.0303L15.5 19.0605L12.9697 16.5303L14.0303 15.4697L15.5 16.9395L18.4697 13.9697L19.5303 15.0303Z" fill="#008A20"></path></svg>
+			<span>Subscribed</span>
+		</a>
+								</li>
+														<li class="actnbr-signup"><a href="https://wordpress.com/start/">Sign up</a></li>
+							<li class="actnbr-login"><a href="https://wordpress.com/log-in?redirect_to=https%3A%2F%2Fr-login.wordpress.com%2Fremote-login.php%3Faction%3Dlink%26back%3Dhttps%253A%252F%252Femshort.blog%252F2016%252F09%252F12%252Fvisualizing-procgen-text-part-two%252F">Log in</a></li>
+																<li class="actnbr-shortlink">
+										<a href="https://wp.me/p2WEA-6rK">
+											<span class="actnbr-shortlink__text">Copy shortlink</span>
+											<span class="actnbr-shortlink__icon"><svg class="gridicon gridicons-checkmark" height="16" width="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path d="M9 19.414l-6.707-6.707 1.414-1.414L9 16.586 20.293 5.293l1.414 1.414"/></g></svg></span>
+										</a>
+									</li>
+																<li class="flb-report">
+									<a href="https://wordpress.com/abuse/?report_url=https://emshort.blog/2016/09/12/visualizing-procgen-text-part-two/" target="_blank" rel="noopener noreferrer">
+										Report this content									</a>
+								</li>
+															<li class="actnbr-reader">
+									<a href="https://wordpress.com/reader/blogs/702124/posts/24784">
+										View post in Reader									</a>
+								</li>
+															<li class="actnbr-subs">
+									<a href="https://subscribe.wordpress.com/">Manage subscriptions</a>
+								</li>
+																<li class="actnbr-fold"><a href="">Collapse this bar</a></li>
+														</ul>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+	
+<script>
+window.addEventListener( "DOMContentLoaded", function( event ) {
+	var link = document.createElement( "link" );
+	link.href = "/wp-content/mu-plugins/actionbar/actionbar.css?v=20250116";
+	link.type = "text/css";
+	link.rel = "stylesheet";
+	document.head.appendChild( link );
+
+	var script = document.createElement( "script" );
+	script.src = "/wp-content/mu-plugins/actionbar/actionbar.js?v=20250204";
+	document.body.appendChild( script );
+} );
+</script>
+
+			<div id="jp-carousel-loading-overlay" style="display: none;">
+			<div id="jp-carousel-loading-wrapper">
+				<span id="jp-carousel-library-loading"><svg class="jetpack-spinner" width="40" height="40" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><circle cx="50" cy="50" r="46" fill="none" stroke="#ddd" stroke-width="8"/><path d="M 50 4 A 46 46 0 0 1 96 50" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round"><animateTransform attributeName="transform" type="rotate" dur="1.4s" from="0 50 50" to="360 50 50" repeatCount="indefinite"/></path></svg></span>
+			</div>
+		</div>
+		<div class="jp-carousel-overlay" style="display: none;">
+
+		<div class="jp-carousel-container">
+			<!-- The Carousel Swiper -->
+			<div
+				class="jp-carousel-wrap swiper jp-carousel-swiper-container jp-carousel-transitions"
+				itemscope
+				itemtype="https://schema.org/ImageGallery">
+				<div class="jp-carousel swiper-wrapper"></div>
+				<div class="jp-swiper-button-prev swiper-button-prev">
+					<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<mask id="maskPrev" mask-type="alpha" maskUnits="userSpaceOnUse" x="8" y="6" width="9" height="12">
+							<path d="M16.2072 16.59L11.6496 12L16.2072 7.41L14.8041 6L8.8335 12L14.8041 18L16.2072 16.59Z" fill="white"/>
+						</mask>
+						<g mask="url(#maskPrev)">
+							<rect x="0.579102" width="23.8823" height="24" fill="#FFFFFF"/>
+						</g>
+					</svg>
+				</div>
+				<div class="jp-swiper-button-next swiper-button-next">
+					<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<mask id="maskNext" mask-type="alpha" maskUnits="userSpaceOnUse" x="8" y="6" width="8" height="12">
+							<path d="M8.59814 16.59L13.1557 12L8.59814 7.41L10.0012 6L15.9718 12L10.0012 18L8.59814 16.59Z" fill="white"/>
+						</mask>
+						<g mask="url(#maskNext)">
+							<rect x="0.34375" width="23.8822" height="24" fill="#FFFFFF"/>
+						</g>
+					</svg>
+				</div>
+			</div>
+			<!-- The main close buton -->
+			<div class="jp-carousel-close-hint">
+				<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<mask id="maskClose" mask-type="alpha" maskUnits="userSpaceOnUse" x="5" y="5" width="15" height="14">
+						<path d="M19.3166 6.41L17.9135 5L12.3509 10.59L6.78834 5L5.38525 6.41L10.9478 12L5.38525 17.59L6.78834 19L12.3509 13.41L17.9135 19L19.3166 17.59L13.754 12L19.3166 6.41Z" fill="white"/>
+					</mask>
+					<g mask="url(#maskClose)">
+						<rect x="0.409668" width="23.8823" height="24" fill="#FFFFFF"/>
+					</g>
+				</svg>
+			</div>
+			<!-- Image info, comments and meta -->
+			<div class="jp-carousel-info">
+				<div class="jp-carousel-info-footer">
+					<div class="jp-carousel-pagination-container">
+						<div class="jp-swiper-pagination swiper-pagination"></div>
+						<div class="jp-carousel-pagination"></div>
+					</div>
+					<div class="jp-carousel-photo-title-container">
+						<div class="jp-carousel-photo-caption"></div>
+					</div>
+					<div class="jp-carousel-photo-icons-container">
+						<a href="#" class="jp-carousel-icon-btn jp-carousel-icon-info" aria-label="Toggle photo metadata visibility">
+							<span class="jp-carousel-icon">
+								<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<mask id="maskInfo" mask-type="alpha" maskUnits="userSpaceOnUse" x="2" y="2" width="21" height="20">
+										<path fill-rule="evenodd" clip-rule="evenodd" d="M12.7537 2C7.26076 2 2.80273 6.48 2.80273 12C2.80273 17.52 7.26076 22 12.7537 22C18.2466 22 22.7046 17.52 22.7046 12C22.7046 6.48 18.2466 2 12.7537 2ZM11.7586 7V9H13.7488V7H11.7586ZM11.7586 11V17H13.7488V11H11.7586ZM4.79292 12C4.79292 16.41 8.36531 20 12.7537 20C17.142 20 20.7144 16.41 20.7144 12C20.7144 7.59 17.142 4 12.7537 4C8.36531 4 4.79292 7.59 4.79292 12Z" fill="white"/>
+									</mask>
+									<g mask="url(#maskInfo)">
+										<rect x="0.8125" width="23.8823" height="24" fill="#FFFFFF"/>
+									</g>
+								</svg>
+							</span>
+						</a>
+												<a href="#" class="jp-carousel-icon-btn jp-carousel-icon-comments" aria-label="Toggle photo comments visibility">
+							<span class="jp-carousel-icon">
+								<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<mask id="maskComments" mask-type="alpha" maskUnits="userSpaceOnUse" x="2" y="2" width="21" height="20">
+										<path fill-rule="evenodd" clip-rule="evenodd" d="M4.3271 2H20.2486C21.3432 2 22.2388 2.9 22.2388 4V16C22.2388 17.1 21.3432 18 20.2486 18H6.31729L2.33691 22V4C2.33691 2.9 3.2325 2 4.3271 2ZM6.31729 16H20.2486V4H4.3271V18L6.31729 16Z" fill="white"/>
+									</mask>
+									<g mask="url(#maskComments)">
+										<rect x="0.34668" width="23.8823" height="24" fill="#FFFFFF"/>
+									</g>
+								</svg>
+
+								<span class="jp-carousel-has-comments-indicator" aria-label="This image has comments."></span>
+							</span>
+						</a>
+											</div>
+				</div>
+				<div class="jp-carousel-info-extra">
+					<div class="jp-carousel-info-content-wrapper">
+						<div class="jp-carousel-photo-title-container">
+							<div class="jp-carousel-photo-title"></div>
+						</div>
+						<div class="jp-carousel-comments-wrapper">
+															<div id="jp-carousel-comments-loading">
+									<span>Loading Comments...</span>
+								</div>
+								<div class="jp-carousel-comments"></div>
+								<div id="jp-carousel-comment-form-container">
+									<span id="jp-carousel-comment-form-spinner"><svg class="jetpack-spinner" width="20" height="20" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><circle cx="50" cy="50" r="46" fill="none" stroke="#ddd" stroke-width="8"/><path d="M 50 4 A 46 46 0 0 1 96 50" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round"><animateTransform attributeName="transform" type="rotate" dur="1.4s" from="0 50 50" to="360 50 50" repeatCount="indefinite"/></path></svg></span>
+									<div id="jp-carousel-comment-post-results"></div>
+																														<form id="jp-carousel-comment-form">
+												<label for="jp-carousel-comment-form-comment-field" class="screen-reader-text">Write a Comment...</label>
+												<textarea
+													name="comment"
+													class="jp-carousel-comment-form-field jp-carousel-comment-form-textarea"
+													id="jp-carousel-comment-form-comment-field"
+													placeholder="Write a Comment..."
+												></textarea>
+												<div id="jp-carousel-comment-form-submit-and-info-wrapper">
+													<div id="jp-carousel-comment-form-commenting-as">
+																													<fieldset>
+																<label for="jp-carousel-comment-form-email-field">Email (Required)</label>
+																<input type="text" name="email" class="jp-carousel-comment-form-field jp-carousel-comment-form-text-field" id="jp-carousel-comment-form-email-field" />
+															</fieldset>
+															<fieldset>
+																<label for="jp-carousel-comment-form-author-field">Name (Required)</label>
+																<input type="text" name="author" class="jp-carousel-comment-form-field jp-carousel-comment-form-text-field" id="jp-carousel-comment-form-author-field" />
+															</fieldset>
+															<fieldset>
+																<label for="jp-carousel-comment-form-url-field">Website</label>
+																<input type="text" name="url" class="jp-carousel-comment-form-field jp-carousel-comment-form-text-field" id="jp-carousel-comment-form-url-field" />
+															</fieldset>
+																											</div>
+													<input
+														type="submit"
+														name="submit"
+														class="jp-carousel-comment-form-button"
+														id="jp-carousel-comment-form-button-submit"
+														value="Post Comment" />
+												</div>
+											</form>
+																											</div>
+													</div>
+						<div class="jp-carousel-image-meta">
+							<div class="jp-carousel-title-and-caption">
+								<div class="jp-carousel-photo-info">
+									<div class="jp-carousel-caption" itemprop="caption description"></div>
+								</div>
+
+								<div class="jp-carousel-photo-description"></div>
+							</div>
+							<a class="jp-carousel-image-download" href="#" aria-label="Download image" target="_blank" style="display: none;">
+								<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="3" y="3" width="19" height="18">
+										<path fill-rule="evenodd" clip-rule="evenodd" d="M5.84615 5V19H19.7775V12H21.7677V19C21.7677 20.1 20.8721 21 19.7775 21H5.84615C4.74159 21 3.85596 20.1 3.85596 19V5C3.85596 3.9 4.74159 3 5.84615 3H12.8118V5H5.84615ZM14.802 5V3H21.7677V10H19.7775V6.41L9.99569 16.24L8.59261 14.83L18.3744 5H14.802Z" fill="white"/>
+									</mask>
+									<g mask="url(#mask0)">
+										<rect x="0.870605" width="23.8823" height="24" fill="#FFFFFF"/>
+									</g>
+								</svg>
+								<span class="jp-carousel-download-text"></span>
+							</a>
+							<div class="jp-carousel-image-map" style="display: none;"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		</div>
+		
+	<script type="text/javascript">
+		window.WPCOM_sharing_counts = {"https://emshort.blog/2016/09/12/visualizing-procgen-text-part-two/":24784};
+	</script>
+				
+	<script type="text/javascript">
+		(function () {
+			var wpcom_reblog = {
+				source: 'toolbar',
+
+				toggle_reblog_box_flair: function (obj_id, post_id) {
+
+					// Go to site selector. This will redirect to their blog if they only have one.
+					const postEndpoint = `https://wordpress.com/post`;
+
+					// Ideally we would use the permalink here, but fortunately this will be replaced with the 
+					// post permalink in the editor.
+					const originalURL = `${ document.location.href }?page_id=${ post_id }`; 
+					
+					const url =
+						postEndpoint +
+						'?url=' +
+						encodeURIComponent( originalURL ) +
+						'&is_post_share=true' +
+						'&v=5';
+
+					const redirect = function () {
+						if (
+							! window.open( url, '_blank' )
+						) {
+							location.href = url;
+						}
+					};
+
+					if ( /Firefox/.test( navigator.userAgent ) ) {
+						setTimeout( redirect, 0 );
+					} else {
+						redirect();
+					}
+				},
+			};
+
+			window.wpcom_reblog = wpcom_reblog;
+		})();
+	</script>
+<script crossorigin='anonymous' type='text/javascript'  src='/wp-content/mu-plugins/likes/queuehandler.js?m=1741961244i'></script>
+<script id="wp-hooks-js" src="/wp-content/plugins/gutenberg-core/v23.9.0/build/scripts/hooks/index.min.js?m=1788366818i&#038;ver=f0f188028580e8dc1255"></script>
+<script id="wp-i18n-js" src="/wp-content/plugins/gutenberg-core/v23.9.0/build/scripts/i18n/index.min.js?m=1788366818i&#038;ver=1dfe7db3940c23ea9216"></script>
+<script id="wp-i18n-js-after">
+wp.i18n.setLocaleData( { 'text direction\u0004ltr': [ 'ltr' ] } );
+//# sourceURL=wp-i18n-js-after
+</script>
+<script id="verbum-settings-js-before">
+window.VerbumComments = {"Log in or provide your name and email to leave a reply.":"Log in or provide your name and email to leave a reply.","Log in or provide your name and email to leave a comment.":"Log in or provide your name and email to leave a comment.","Receive web and mobile notifications for posts on this site.":"Receive web and mobile notifications for posts on this site.","Name":"Name","Email (address never made public)":"Email (address never made public)","Website (optional)":"Website (optional)","Leave a reply. (log in optional)":"Leave a reply. (log in optional)","Leave a comment. (log in optional)":"Leave a comment. (log in optional)","Log in to leave a reply.":"Log in to leave a reply.","Log in to leave a comment.":"Log in to leave a comment.","Logged in via %s":"Logged in via %s","Log out":"Log out","Your browser is blocking the cookies needed to log in and comment here. Allow cookies in your privacy settings, then reload the page.":"Your browser is blocking the cookies needed to log in and comment here. Allow cookies in your privacy settings, then reload the page.","Email":"Email","(Address never made public)":"(Address never made public)","Instantly":"Instantly","Daily":"Daily","Reply":"Reply","Comment":"Comment","WordPress":"WordPress","Weekly":"Weekly","Notify me of new posts":"Notify me of new posts","Email me new posts":"Email me new posts","Email me new comments":"Email me new comments","Cancel":"Cancel","Write a comment...":"Write a comment...","Write a reply...":"Write a reply...","Website":"Website","Optional":"Optional","We'll keep you in the loop!":"We'll keep you in the loop!","Loading your comment...":"Loading your comment...","Discover more from":"Discover more from Emily Short's Interactive Storytelling","Subscribe now to keep reading and get access to the full archive.":"Subscribe now to keep reading and get access to the full archive.","Continue reading":"Continue reading","Never miss a beat!":"Never miss a beat!","Interested in getting blog post updates? Simply click the button below to stay in the loop!":"Interested in getting blog post updates? Simply click the button below to stay in the loop!","Enter your email address":"Enter your email address","Subscribe":"Subscribe","Comment sent successfully":"Comment sent successfully","Save my name, email, and website in this browser for the next time I comment.":"Save my name, email, and website in this browser for the next time I comment.","hovercardi18n":{"Edit your profile \u2192":"Edit your profile \u2192","View profile \u2192":"View profile \u2192","Contact":"Contact","Send money":"Send money","Gravatar not found.":"Gravatar not found.","This profile is private.":"This profile is private.","Too Many Requests.":"Too Many Requests.","Internal Server Error.":"Internal Server Error.","Sorry, we are unable to load this Gravatar profile.":"Sorry, we are unable to load this Gravatar profile."},"siteId":702124,"postId":24784,"mustLogIn":false,"requireNameEmail":true,"commentRegistration":false,"connectURL":"https://emshort.wordpress.com/public.api/connect/?action=request\u0026domain=emshort.blog","logoutURL":"https://emshort.wordpress.com/wp-login.php?action=logout\u0026_wpnonce=07b34f6555","homeURL":"https://emshort.blog/","subscribeToBlog":true,"subscribeToComment":true,"isJetpackCommentsLoggedIn":false,"jetpackUsername":"","jetpackUserId":0,"jetpackSignature":"","jetpackAvatar":null,"enableBlocks":true,"enableSubscriptionModal":true,"currentLocale":"en","isJetpackComments":false,"allowedBlocks":["core/paragraph","core/list","core/code","core/list-item","core/quote","core/image","core/embed","core/quote","core/code"],"embedNonce":"d6e5359cc9","verbumBundleUrl":"/wp-content/mu-plugins/jetpack-mu-wpcom-plugin/moon/jetpack_vendor/automattic/jetpack-mu-wpcom/src/features/verbum-comments/dist/index.js","isRTL":false,"vbeCacheBuster":1771405207,"iframeUniqueId":0,"colorScheme":false}
+//# sourceURL=verbum-settings-js-before
+</script>
+<script data-wp-strategy="defer" defer id="verbum-dynamic-loader-js" src="/wp-content/mu-plugins/jetpack-mu-wpcom-plugin/moon/jetpack_vendor/automattic/jetpack-mu-wpcom/src/build/verbum-comments/assets/dynamic-loader.js?m=1772518873i&#038;minify=false&#038;ver=8b5296f9195db92c42e4"></script>
+<script id="twentysixteen-script-js-extra">
+var screenReaderText = {"expand":"expand child menu","collapse":"collapse child menu"};
+//# sourceURL=twentysixteen-script-js-extra
+</script>
+<script id="jetpack-carousel-js-extra">
+var jetpackSwiperLibraryPath = {"url":"/wp-content/mu-plugins/jetpack-plugin/moon/_inc/blocks/swiper.js"};
+var jetpackCarouselStrings = {"widths":[370,700,1000,1200,1400,2000],"is_logged_in":"","lang":"en","ajaxurl":"https://emshort.blog/wp-admin/admin-ajax.php","nonce":"d91f2e73fa","display_exif":"1","display_comments":"1","single_image_gallery":"1","single_image_gallery_media_file":"","background_color":"black","comment":"Comment","post_comment":"Post Comment","write_comment":"Write a Comment...","loading_comments":"Loading Comments...","image_label":"Open image in full-screen.","download_original":"View full size \u003Cspan class=\"photo-size\"\u003E{0}\u003Cspan class=\"photo-size-times\"\u003E\u00d7\u003C/span\u003E{1}\u003C/span\u003E","no_comment_text":"Please be sure to submit some text with your comment.","no_comment_email":"Please provide an email address to comment.","no_comment_author":"Please provide your name to comment.","comment_post_error":"Sorry, but there was an error posting your comment. Please try again later.","comment_approved":"Your comment was approved.","comment_unapproved":"Your comment is in moderation.","camera":"Camera","aperture":"Aperture","shutter_speed":"Shutter Speed","focal_length":"Focal Length","copyright":"Copyright","comment_registration":"0","require_name_email":"1","login_url":"https://emshort.wordpress.com/wp-login.php?redirect_to=https%3A%2F%2Femshort.blog%2F2016%2F09%2F12%2Fvisualizing-procgen-text-part-two%2F","blog_id":"702124","meta_data":["camera","aperture","shutter_speed","focal_length","copyright"],"stats_query_args":"blog=702124&v=wpcom&tz=0&user_id=0&subd=emshort","is_public":"1"};
+//# sourceURL=jetpack-carousel-js-extra
+</script>
+<script id="sharing-js-js-extra">
+var sharing_js_options = {"lang":"en","counts":"1","is_stats_active":"1"};
+//# sourceURL=sharing-js-js-extra
+</script>
+<script id="jetpack-script-data-js-before">
+window.JetpackScriptData = {"site":{"host":"wpcom","is_wpcom_platform":true}};
+//# sourceURL=jetpack-script-data-js-before
+</script>
+<script crossorigin='anonymous' type='text/javascript'  src='/_static/??-eJydkOFuwyAMhF9ohE7T2u7HtEepKDitEzAIm6V5+6E2RFU1TdX+wfnOn856SspGEiDRcoYArFM5apmqMDNeBID0wJpHTMojjaqPtrDq8dIN/KJrHMn64mqw2mwMoSZVhuTnLiA10zOMvpAVjMSPoVBU8uWEVBkgydhRVWlKlbYMdIiR2vDwDeRi1qZIDEYE7RozzCCsjwW9W0W2GZMoZ8Q8Qb4HHmr3ZZk1ORYGv/qa8NsV7taaETmAqLduc1vXhD5fze6PbEPcTvHw/X8VPpsMzjg3X59Ip6XDV/h83e13H++b/XY7/AAoeddI'></script>
+<script id="sharing-js-js-after">
+window.WPCOM_sharing_popups = window.WPCOM_sharing_popups || {};
+window.WPCOM_sharing_popups[ "twitter" ] = "menubar=1,resizable=1,width=600,height=350";
+window.WPCOM_sharing_popups = window.WPCOM_sharing_popups || {};
+window.WPCOM_sharing_popups[ "facebook" ] = "menubar=1,resizable=1,width=600,height=400";
+//# sourceURL=sharing-js-js-after
+</script>
+<script id="wp-emoji-settings" type="application/json">
+{"baseUrl":"https://s0.wp.com/wp-content/mu-plugins/wpcom-smileys/twemoji/2/72x72/","ext":".png","svgUrl":"https://s0.wp.com/wp-content/mu-plugins/wpcom-smileys/twemoji/2/svg/","svgExt":".svg","source":{"concatemoji":"/wp-includes/js/wp-emoji-release.min.js?m=1783090810i&ver=7.1-RC3-63320"}}
+</script>
+<script type="module">
+/*! This file is auto-generated */
+var e="script#wp-emoji-settings",t=document.querySelector(e);if(!(t instanceof HTMLScriptElement))throw new Error("Element missing: "+e);const r=JSON.parse(t.text),s=(window._wpemojiSettings=r,"wpEmojiSettingsSupports"),o=["flag","emoji"];function i(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(s,JSON.stringify(t))}catch(e){}}function c(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0);const r=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);return t.every((e,t)=>e===r[t])}function p(e,t){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var n=e.getImageData(16,16,1,1);for(let e=0;e<n.data.length;e++)if(0!==n.data[e])return!1;return!0}function u(e,t,n,r){switch(t){case"flag":return n(e,"\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!n(e,"\ud83c\udde8\ud83c\uddf6","\ud83c\udde8\u200b\ud83c\uddf6")&&!n(e,"\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!r(e,"\ud83e\u1fac8")}return!1}function f(e,t,n,r){let a;const s=(a="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):document.createElement("canvas")).getContext("2d",{willReadFrequently:!0}),o=(s.textBaseline="top",s.font="600 32px Arial",{});return e.forEach(e=>{o[e]=t(s,e,n,r)}),o}function a(e){var t=document.createElement("script");t.src=e,t.defer=!0,document.head.appendChild(t)}r.supports={everything:!0,everythingExceptFlag:!0},new Promise(t=>{let n=function(){try{var e=JSON.parse(sessionStorage.getItem(s));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+f.toString()+"("+[JSON.stringify(o),u.toString(),c.toString(),p.toString()].join(",")+"));",r=new Blob([e],{type:"text/javascript"});const a=new Worker(URL.createObjectURL(r),{name:"wpTestEmojiSupports"});return void(a.onmessage=e=>{i(n=e.data),a.terminate(),t(n)})}catch(e){}i(n=f(o,u,c,p))}t(n)}).then(e=>{for(const n in e)r.supports[n]=e[n],r.supports.everything=r.supports.everything&&r.supports[n],"flag"!==n&&(r.supports.everythingExceptFlag=r.supports.everythingExceptFlag&&r.supports[n]);var t;r.supports.everythingExceptFlag=r.supports.everythingExceptFlag&&!r.supports.flag,r.supports.everything||((t=r.source||{}).concatemoji?a(t.concatemoji):t.wpemoji&&t.twemoji&&(a(t.twemoji),a(t.wpemoji)))});
+//# sourceURL=/wp-includes/js/wp-emoji-loader.min.js
+</script>
+	<iframe src='https://widgets.wp.com/likes/master.html?ver=20260907#ver=20260907' scrolling='no' id='likes-master' name='likes-master' style='display:none;'></iframe>
+	<div id='likes-other-gravatars' role="dialog" aria-hidden="true" tabindex="-1"><div class="likes-text"><span>%d</span></div><ul class="wpl-avatars sd-like-gravatars"></ul></div>
+	<script src="//stats.wp.com/w.js?69" defer></script> <script type="text/javascript">
+_tkq = window._tkq || [];
+_stq = window._stq || [];
+_tkq.push(['storeContext', {'blog_id':'702124','blog_tz':'0','user_lang':'en','blog_lang':'en','user_id':'0'}]);
+		// Prevent sending pageview tracking from WP-Admin pages.
+		_stq.push(['view', {'blog':'702124','v':'wpcom','tz':'0','user_id':'0','post':'24784','subd':'emshort'}]);
+		_stq.push(['extra', {'crypt':'UE5tW3cvZGQ/JUs1UEo9WXFZM2k9fDlzc2JWP3hETzFRNDFNOT11fjNqYVJdS3BRJnMxSTNjVmxZNUo0dG9iTzB6WDd5UCViLFdjUFQ9YnBSNVZUN1pNTXw1fEQlcjdwWXNQSFhfbEtmMC9CNy5Kfj9ZbEcxNjdteHU3LXZ0NlBGQW1ucnMmSHdobDY2Rl1tcDl0OVtBTjVoVTNSbVM3aC9jSlFXTWU3Ykt4T1dUREhJODJYLUhkUjktUDUrUXpUJU83SmRyTWYrP2MvQnhoWmRnUFo2Sy0sWEtYayxbd0dnU0N6SmZBS3VhdXlWY0IufitvSnMwRElvTQ=='}]);
+_stq.push([ 'clickTrackerInit', '702124', '24784' ]);
+</script>
+<noscript><img src="https://pixel.wp.com/b.gif?v=noscript" style="height:1px;width:1px;overflow:hidden;position:absolute;bottom:1px;" alt="" /></noscript>
+<meta id="bilmur" property="bilmur:data" content="" data-provider="wordpress.com" data-service="simple" data-site-tz="Etc/GMT-0" data-custom-props="{&quot;logged_in&quot;:&quot;0&quot;,&quot;wptheme&quot;:&quot;pub\/twentysixteen&quot;,&quot;wptheme_is_block&quot;:&quot;0&quot;}"   >
+		<script defer src="/wp-content/js/bilmur.min.js?i=17&amp;m=202637"></script> 	
+<script>
+(function() {
+	'use strict';
+
+	const fetches = {};
+	const promises = {};
+	const urls = {
+		'wp-polyfill': '/wp-includes/js/dist/vendor/wp-polyfill.min.js?m=1786440387i&ver=3.15.0',
+		'verbum': '/wp-content/mu-plugins/jetpack-mu-wpcom-plugin/moon/jetpack_vendor/automattic/jetpack-mu-wpcom/src/build/verbum-comments/verbum-comments.js?m=1785895867i&minify=false&ver=ecf5cfe8827907d3ea28'
+	};
+	const loaders = {
+		'verbum': () => {
+			fetchExternalScript('wp-polyfill');
+			fetchExternalScript('verbum');
+			promises['wp-polyfill'] = promises['wp-polyfill'] || loadWPScript('wp-polyfill');
+			promises['verbum'] = promises['verbum'] || promises['wp-polyfill'].then( () => loadWPScript('verbum') );
+			return promises['verbum'];
+		},
+		
+	};
+	const scriptExtras = {
+		
+	};
+
+	window.WP_Enqueue_Dynamic_Script = {
+		loadScript: (handle) => {
+			if (!loaders[handle]) {
+				console.error('WP_Enqueue_Dynamic_Script: unregistered script `' + handle + '`.');
+			}
+			return loaders[handle]();
+		}
+	};
+
+	function fetchExternalScript(handle) {
+		if (!urls[handle]) {
+			return Promise.resolve();
+		}
+
+		fetches[handle] = fetches[handle] || fetch(urls[handle], { mode: 'no-cors' });
+		return fetches[handle];
+	}
+
+	function runExtraScript(handle, type, index) {
+		const id = 'wp-enqueue-dynamic-script:' + handle + ':' + type + ':' + (index + 1);
+		const template = document.getElementById(id);
+		if (!template) {
+			return Promise.reject();
+		}
+
+		const script = document.createElement( 'script' );
+		script.innerHTML = template.innerHTML;
+		document.body.appendChild( script );
+		return Promise.resolve();
+	}
+
+	function loadExternalScript(handle) {
+		if (!urls[handle]) {
+			return Promise.resolve();
+		}
+
+		return fetches[handle].then(() => {
+			return new Promise((resolve, reject) => {
+				const script = document.createElement('script');
+				script.onload = () => resolve();
+				script.onerror = (e) => reject(e);
+				script.src = urls[handle];
+				document.body.appendChild(script);
+			});
+		});
+	}
+
+	function loadExtra(handle, pos) {
+		const count = (scriptExtras[handle] && scriptExtras[handle][pos]) || 0;
+		let promise = Promise.resolve();
+
+		for (let i = 0; i < count; i++) {
+			promise = promise.then(() => runExtraScript(handle, pos, i));
+		}
+
+		return promise;
+	}
+
+	function loadWPScript(handle) {
+		// Core loads scripts in this order. See: https://github.com/WordPress/WordPress/blob/a59eb9d39c4fcba834b70c9e8dfd64feeec10ba6/wp-includes/class-wp-scripts.php#L428.
+		return loadExtra(handle, 'translations')
+			.then(() => loadExtra(handle, 'before'))
+			.then(() => loadExternalScript(handle))
+			.then(() => loadExtra(handle, 'after'));
+	}
+} )();
+</script>
+</body>
+</html>
+<!--
+	generated in 0.308 seconds
+	192271 bytes batcached for 300 seconds
+-->

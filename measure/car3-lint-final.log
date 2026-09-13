@@ -1,0 +1,9 @@
+
+ RUN  v4.1.11 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneMEASURE
+
+
+ Test Files  147 passed (147)
+      Tests  2391 passed (2391)
+   Start at  09:34:08
+   Duration  105.86s (transform 22.55s, setup 4.23s, import 144.22s, tests 510.35s, environment 15ms)
+

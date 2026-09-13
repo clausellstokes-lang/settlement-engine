@@ -1,0 +1,47 @@
+TASTE MEASURE · arm draft · 2026-09-09T02:28:12
+  projection: GREEN — [dossier-prose] verified 68 state blocks / 2273 variants across 6 desks, 78 causal families / 468 variants
+  exemplar bands: 21 metric(s) over 10 leaves
+
+  ── DS-DEF-11 :: country: pressed (walled)   [WITHHELD]
+     1 of 1 variant(s) still carry ⟦TO-AUTHOR⟧: the wording set has not been written, so every measure below is NOT-EXECUTABLE
+     variants 1 · faces 1 · attach 1 · units 0 · rate 6693 bp · departure 0
+     rounds: draft 0 · refine-A no · refine-B no
+
+  ── DS-DEF-11 :: country: pressed (unwalled)   [WITHHELD]
+     1 of 1 variant(s) still carry ⟦TO-AUTHOR⟧: the wording set has not been written, so every measure below is NOT-EXECUTABLE
+     variants 1 · faces 1 · attach 2 · units 0 · rate 6693 bp · departure 0
+     rounds: draft 0 · refine-A no · refine-B no
+
+  ── DS-DEF-11 :: watch: bought (revealed)   [WITHHELD]
+     1 of 1 variant(s) still carry ⟦TO-AUTHOR⟧: the wording set has not been written, so every measure below is NOT-EXECUTABLE
+     variants 1 · faces 1 · attach 3 · units 0 · rate ABSENT · departure ABSENT
+     rounds: draft 0 · refine-A no · refine-B no
+
+  ── DS-DEF-11 :: watch: bought (covert)   [WITHHELD]
+     1 of 1 variant(s) still carry ⟦TO-AUTHOR⟧: the wording set has not been written, so every measure below is NOT-EXECUTABLE
+     variants 1 · faces 1 · attach 3 · units 0 · rate ABSENT · departure ABSENT
+     rounds: draft 0 · refine-A no · refine-B no
+
+  ── DS-DEF-2 :: stores: short   [WITHHELD]
+     1 of 1 variant(s) still carry ⟦TO-AUTHOR⟧: the wording set has not been written, so every measure below is NOT-EXECUTABLE
+     variants 1 · faces 1 · attach 1 · units 0 · rate 1563 bp · departure 0
+     rounds: draft 0 · refine-A no · refine-B no
+
+  ── DS-DEF-2 :: stores: import-fed   [WITHHELD]
+     1 of 1 variant(s) still carry ⟦TO-AUTHOR⟧: the wording set has not been written, so every measure below is NOT-EXECUTABLE
+     variants 1 · faces 1 · attach 1 · units 0 · rate 4010 bp · departure 0
+     rounds: draft 0 · refine-A no · refine-B no
+
+  ── DS-GEN-3 :: purse: short   [WITHHELD]
+     1 of 1 variant(s) still carry ⟦TO-AUTHOR⟧: the wording set has not been written, so every measure below is NOT-EXECUTABLE
+     variants 1 · faces 1 · attach 2 · units 0 · rate 6641 bp · departure 0
+     rounds: draft 0 · refine-A no · refine-B no
+
+  WALK: 0 unit(s) · N 0 (EXHAUSTIVE) · 0 microseconds per unit · sha e3b0c44298fc1c14
+        the whole population is walked, so every arm rate is exact and no interval applies
+        sample verdicts: FAIL 0 · WITHHELD 0 · PASS 0
+  MANIFEST: NOT-EXECUTABLE — no --base cells table was supplied, so no cell can be classified
+  VARIETY: NOT-EXECUTABLE — the VARIETY run was not asked for (--variety 0)
+  TIES: 4 multi-candidate rung(s) · 0 of 30 pair(s) tie · 0 bp
+  0 s
+  wrote /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/taste/measure-draft.json

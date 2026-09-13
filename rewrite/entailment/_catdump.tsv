@@ -1,0 +1,316 @@
+thorp	Government	Informal elder consensus	req=0	bc=0.5	xg=government	min=-	ex=-	The eldest or most respected farmer guides communal decisions by consensus.
+thorp	Government	Head-of-household consensus	req=0	bc=0.82	xg=government	min=-	ex=-	All family heads hold equal voice on shared concerns. Slower but more egalitarian.
+thorp	Government	Lord's reeve	req=0	bc=0.3	xg=government	min=-	ex=-	A steward appointed by a distant lord to oversee the settlement. Authority is formal but often resented.
+thorp	Government	Household elder	req=0	bc=0.9	xg=government	min=-	ex=-	One household head acts as de facto voice for the settlement. No formal appointment, no title. Just the person everyone goes to when something needs deciding.
+thorp	Religious	Wayside shrine	req=0	bc=0.3	xg=religiousCenter	min=-	ex=-	Simple prayer marker. No resident clergy.
+thorp	Religious	Access to parish church	req=0	bc=0.78	xg=-	min=-	ex=-	Walk 2-5km to village church for services.
+thorp	Religious	Burial ground	req=1	bc=1	xg=-	min=-	ex=-	A corner of the holding left out of the plough, banked with turf and marked with fieldstones. No clergy lives near enough to speak over anyone, so the words are said by whoever knew the dead best. The oldest markers have lost their names to the weather and are kept clear anyway.
+thorp	Criminal	Local fence	req=0	bc=0.1	xg=-	min=-	ex=-	Somebody in this settlement buys things without asking where they came from. Everyone knows who. Nobody says it directly.
+thorp	Criminal	Outlaw shelter	req=0	bc=0.08	xg=-	min=-	ex=-	Someone here provides cover for people who need to disappear. A barn, a cellar, an arrangement that isn't discussed.
+thorp	Infrastructure	Dwellings (4-16)	req=1	bc=1	xg=-	min=-	ex=-	Wattle-and-daub or timber. 1-2 rooms per household.
+thorp	Infrastructure	Water source	req=1	bc=1	xg=waterSupply	min=-	ex=-	Well or spring. 2-4 gallons/person/day minimum.
+thorp	Infrastructure	Palisade	req=0	bc=0.3	xg=-	min=-	ex=-	Sharpened stakes encircling the settlement. Offers minimal protection but enough to deter casual raiders.
+thorp	Infrastructure	Household levy	req=0	bc=0.18	xg=-	min=-	ex=-	One able-bodied adult from each household musters with hunting bows, spears, and farm tools when danger reaches the fields.
+thorp	Infrastructure	Communal root cellar	req=0	bc=0.25	xg=-	min=-	ex=-	A shared underground store for grain, roots, and preserved food. Vital buffer against a bad harvest.
+thorp	Economy	Access to external mill	req=1	bc=1	xg=-	min=-	ex=-	Must travel to manor/village mill. Home grinding often illegal.
+thorp	Economy	Subsistence farming	req=1	bc=1	xg=-	min=-	ex=-	Each household farms ~12-16 acres for survival.
+thorp	Economy	Fishing community	req=0	bc=0.72	xg=-	min=-	ex=-	Nets, traps, and drying racks. The settlement's economy is inseparable from the water.
+thorp	Economy	Shepherd collective	req=0	bc=0.35	xg=-	min=-	ex=-	Communal flock management. The rhythms of the settlement follow the grazing calendar.
+thorp	Economy	Woodcutter's camp	req=0	bc=0.55	xg=-	min=-	ex=-	Seasonal felling and timber stacking. The whole settlement smells of fresh sawdust and pine resin.
+hamlet	Crafts	Resident smith (part-time)	req=0	bc=0.4	xg=-	min=-	ex=-	Repairs tools, shoes horses. Farms also.
+hamlet	Crafts	Carpenter (part-time)	req=0	bc=0.5	xg=-	min=-	ex=-	Builds/repairs buildings and tools.
+hamlet	Crafts	Fisher's landing	req=0	bc=0.55	xg=-	min=-	ex=-	A rough landing with racks for drying and salting fish. Primary protein source near water.
+hamlet	Crafts	Hunter's lodge	req=0	bc=0.25	xg=-	min=-	ex=-	Hunters pool knowledge, prepare game, and sell pelts. Tracks routes, seasons, and dangerous animals.
+hamlet	Crafts	Charcoal burner	req=0	bc=0.2	xg=-	min=-	ex=-	Operates kilns in nearby woodland. Supplies fuel for smithing and baking. Essential intermediate step between forest and forge.
+hamlet	Crafts	Maltster	req=0	bc=0.15	xg=-	min=-	ex=-	Converts barley into malt for brewing. Small operation supplying local alehouses. Requires grain surplus.
+hamlet	Crafts	Peat cutter	req=0	bc=0.18	xg=-	min=-	ex=-	Cuts and dries peat blocks from nearby marshland for domestic fuel. Seasonal. Sells winter warmth.
+hamlet	Crafts	Stable yard	req=0	bc=0.25	xg=-	min=-	ex=-	Communal stable where travelers can leave horses. Stableman provides basic farriery and fodder.
+hamlet	Crafts	Mine (open cast)	req=0	bc=0.2	xg=-	min=-	ex=-	A shallow excavation or shaft dug to extract iron ore, coal, or stone. Employs the poorest labourers. Dangerous, dirty, and essential.
+hamlet	Crafts	Stone quarry	req=0	bc=0.18	xg=-	min=-	ex=-	Cuts and dresses stone blocks for construction. A crew of quarrymen with picks and wedges. Slow but the only way to get proper building material.
+hamlet	Crafts	Pack animal trader	req=0	bc=0.2	xg=-	min=-	ex=-	Buys and sells mules, donkeys, and draft horses. Rents animals to travellers and merchants who need load-carrying capacity for the road.
+hamlet	Crafts	Dairy farmer	req=0	bc=0.25	xg=-	min=-	ex=-	Keeps cattle or goats for milk, butter, and cheese. The only reliable fat and protein source during grain shortages. Seasonal. Production peaks in summer.
+hamlet	Crafts	Shepherd	req=0	bc=0.22	xg=-	min=-	ex=-	Manages sheep flocks for wool and meat. Seasonal transhumance. Moves flocks between lowland winter pasture and upland summer grazing. Key supplier to the textile trade.
+hamlet	Crafts	Salt works	req=0	bc=0.2	xg=-	min=-	ex=-	Evaporates naturally saline brine into the raw salt used for preservation. Viable only where salt flats, springs, or other workable brine deposits provide a local supply.
+hamlet	Government	Lord's steward	req=0	bc=0.55	xg=government	min=-	ex=-	A lord's agent manages the hamlet's lands, collects rents, and enforces noble authority.
+hamlet	Government	Informal elder consensus	req=0	bc=0.85	xg=government	min=-	ex=-	A free hamlet with no lord's representative. Communal elder consensus governs shared affairs.
+hamlet	Government	Village headman	req=0	bc=0.9	xg=government	min=-	ex=-	A single respected figure acts as de facto authority. Not elected, not appointed, simply acknowledged. Decisions are practical rather than formal.
+hamlet	Religious	Wayside shrine	req=0	bc=0.5	xg=religiousCenter	min=-	ex=-	Simple prayer location. No clergy.
+hamlet	Religious	Access to parish church	req=1	bc=1	xg=religiousCenter	min=-	ex=-	Travel to village church. 2-5km distance typical.
+hamlet	Religious	Burial ground	req=1	bc=1	xg=-	min=-	ex=-	A walled plot at the edge of the settlement, gated against livestock and kept by the households in turn. The rite is held when a priest comes through, and the burial itself does not wait for one. Families lie in rows by household rather than by standing, which is custom here rather than poverty.
+hamlet	Magic	Traveling hedge wizard	req=0	bc=0.2	xg=-	min=-	ex=-	Occasional visits. The smallest spells only.
+hamlet	Magic	Adventurers' charter hall	req=0	bc=0.12	xg=-	min=-	ex=-	A rough hall operating under a regional adventurers' charter. Posts bounties, shelters monster hunters, and coordinates local defense when the garrison cannot. Common on dangerous frontiers.
+hamlet	Defense	Citizen militia	req=0	bc=0.15	xg=-	min=-	ex=-	Able-bodied residents drill and muster against local threats. Part-time service.
+hamlet	Defense	Palisade or earthworks	req=0	bc=0.12	xg=defenseLevel	min=-	ex=-	Basic wooden palisade or earthwork berm. Slows raids and creature incursions.
+hamlet	Criminal	Fence (word of mouth)	req=0	bc=0.12	xg=-	min=-	ex=-	Stolen goods move through this hamlet quietly. The contact is known by face, not name.
+hamlet	Criminal	Bandit affiliate	req=0	bc=0.1	xg=-	min=-	ex=-	One or more households here have ties to bandit groups operating the surrounding roads. Information, shelter, and supply flow both ways.
+hamlet	Criminal	Smuggling waypoint	req=0	bc=0.09	xg=-	min=-	ex=-	Goods pass through here to avoid toll roads or customs checkpoints. The hamlet benefits from fees paid in kind.
+hamlet	Infrastructure	Dwellings (17-80)	req=1	bc=1	xg=-	min=-	ex=-	Timber-frame with thatched roofs.
+hamlet	Infrastructure	Water source	req=1	bc=1	xg=waterSupply	min=-	ex=-	Well or spring access.
+hamlet	Economy	Alehouse	req=0	bc=0.55	xg=-	min=-	ex=-	Home-brewed ale sold from someone's back room. The hamlet's main gathering place. News, disputes, and arrangements all happen here.
+hamlet	Economy	Wayside inn	req=0	bc=0.2	xg=-	min=-	ex=-	A room above a stable and a common meal for travelers passing through. Exists because the road does.
+hamlet	Economy	Caravanserai	req=0	bc=0.15	xg=-	min=-	ex=-	A walled waystation providing secure overnight lodging for merchants, animals, and goods. The centre of desert trade: water, fodder, and protection available for a fee. Without one, caravans cannot safely cross the surrounding terrain.
+hamlet	Economy	Periodic market	req=0	bc=0.12	xg=marketScale	min=-	ex=-	Monthly or seasonal trading day. No charter. Just habit, proximity, and a flat piece of ground.
+hamlet	Economy	Pawnbroker	req=0	bc=0.15	xg=-	min=-	ex=-	Lending against pledged goods. High interest, no questions. The only credit available to peasants and small craftsmen.
+hamlet	Economy	Access to external mill	req=1	bc=1	xg=-	min=-	ex=-	Manor mill with milling monopoly (banalité).
+hamlet	Economy	Subsistence farming	req=1	bc=1	xg=-	min=-	ex=-	Strip farming in open fields.
+hamlet	Economy	Common grazing land	req=1	bc=1	xg=-	min=-	ex=-	Shared pasture for village livestock.
+village	Infrastructure	Multiple water sources	req=1	bc=1	xg=waterSupply	min=-	ex=-	Wells and springs throughout village.
+village	Infrastructure	Dwellings (80-180)	req=1	bc=1	xg=-	min=-	ex=-	Timber construction with stone foundations.
+village	Economy	Farmland	req=1	bc=1	xg=-	min=-	ex=-	Open-field agriculture with crop rotation.
+village	Economy	Travelers' inn	req=0	bc=0.6	xg=-	min=-	ex=-	A single inn serving traders, pilgrims, and travelers passing through. Rooms, stabling, and a common meal.
+village	Economy	Weekly market	req=0	bc=0.6	xg=marketScale	min=-	ex=-	Local produce and goods. Requires royal/noble charter.
+village	Economy	Ale house	req=0	bc=0.8	xg=-	min=-	ex=-	Home-based. Women brew and sell ale.
+village	Economy	River ferry	req=0	bc=0.45	xg=-	min=-	ex=-	A flat-bottomed ferry crossing the river. The ferryman's family has held the crossing rights for generations. Essential for anyone who doesn't want a long walk to the nearest bridge.
+village	Economy	River boatyard	req=0	bc=0.3	xg=-	min=-	ex=-	Builds and repairs flat-bottomed river craft: barges, punts, ferries, fishing boats. Specialist knowledge of river construction: shallow draft, flexible hull, replaceable parts.
+village	Economy	Fish market	req=0	bc=0.3	xg=-	min=-	ex=-	An open-air stall or small covered market where the day's catch is sold. Prices drop fast. Fish doesn't wait.
+village	Economy	Toll bridge	req=0	bc=0.2	xg=-	min=-	ex=-	A bridge with a toll house. The keeper collects passage fees and performs basic maintenance. Minor but steady revenue.
+village	Economy	Waystation	req=0	bc=0.25	xg=-	min=-	ex=-	A fortified overnight stop with stabling, a well, and basic provisions. Serves merchant caravans and long-distance travellers. Distinct from the inn. Built for animals and loaded wagons, not comfort.
+village	Economy	Caravanserai	req=0	bc=0.2	xg=-	min=-	ex=-	A substantial walled compound for desert merchants: stabling for camels, locked storage, a well, and sleeping quarters for fifty. The economic hub of any desert settlement that sees caravan traffic.
+village	Crafts	Mill	req=1	bc=1	xg=-	min=-	ex=-	Water or windmill with monopoly milling rights. The miller is often the wealthiest and most resented figure in the village.
+village	Crafts	Blacksmith	req=0	bc=0.9	xg=-	min=-	ex=-	Full-time metalworker. Essential for tools and horseshoes.
+village	Crafts	Carpenter	req=0	bc=0.7	xg=-	min=-	ex=-	Builds houses, carts, furniture.
+village	Crafts	Thatcher	req=0	bc=0.6	xg=-	min=-	ex=-	Roof repair and construction.
+village	Crafts	Cooper	req=0	bc=0.3	xg=-	min=-	ex=-	Makes barrels for storage and transport.
+village	Crafts	Apothecary	req=0	bc=0.45	xg=-	min=-	ex=-	Sells herbal medicines, poultices, and common remedies. Distinct from the alchemist. No magical compounds, no acid flasks. Knows which roots treat fever and which mushrooms kill. Stocked with herbalism supplies.
+village	Crafts	Bowyer & fletcher	req=0	bc=0.6	xg=-	min=-	ex=-	Makes bows, crossbows, and arrows. Sells finished ammunition and takes custom bow commissions. The first stop for any adventurer whose quiver is empty.
+village	Crafts	Sawmill	req=0	bc=0.35	xg=-	min=-	ex=-	Water- or ox-powered saw. Converts raw logs to planks and beams. Expands construction and furniture output.
+village	Crafts	Mine	req=0	bc=0.12	xg=-	min=-	ex=-	A shaft or excavation to extract iron ore, coal, or stone. Requires capital and organisation a thorp cannot sustain, but a village near deposits can. Employs the poorest labourers.
+village	Crafts	Stone quarry	req=0	bc=0.15	xg=-	min=-	ex=-	Systematic extraction of building stone. A village on good quarry land can supply half a region's construction needs, and the quarry master knows it.
+village	Crafts	Charcoal burner	req=0	bc=0.18	xg=-	min=-	ex=-	Operates kilns in the surrounding woodland, supplying fuel for smithing, baking, and heating. The settlement's most reliable fuel source when timber is abundant.
+village	Crafts	Dairy farmer	req=0	bc=0.22	xg=-	min=-	ex=-	Keeps cattle or goats for milk, butter, and soft cheese. Essential protein and fat during lean grain seasons. Sells surplus at the weekly market.
+village	Crafts	Salt works	req=0	bc=0.14	xg=-	min=-	ex=-	Evaporation pans or brine processing along the coast or riverbank. Salt is the settlement's most traded commodity by weight. Every household needs it.
+village	Crafts	Tannery	req=0	bc=0.3	xg=-	min=-	ex=-	Converts hides into leather using oak bark. Foul-smelling. Placed downstream. Essential for shoes, harness, and straps.
+village	Crafts	Fuller	req=0	bc=0.2	xg=-	min=-	ex=-	Finishes woven cloth by cleaning and thickening it. Often water-powered. Transforms raw weave into durable textile.
+village	Crafts	Dyer	req=0	bc=0.2	xg=-	min=-	ex=-	Applies colour to raw or woven cloth. Essential for producing anything beyond undyed grey wool.
+village	Crafts	Potter	req=0	bc=0.35	xg=-	min=-	ex=-	Wheel-thrown pottery for domestic use. Plates, jugs, storage vessels. Fired in a small kiln.
+village	Crafts	Brickmaker	req=0	bc=0.25	xg=-	min=-	ex=-	Moulds and fires clay bricks for construction. Enables more permanent buildings. Requires clay deposits and fuel.
+village	Crafts	Brewer	req=0	bc=0.45	xg=-	min=-	ex=-	Converts malted grain to ale in quantity. The largest consumer of grain after bread. Supplies alehouses and households.
+village	Crafts	Stable master	req=0	bc=0.4	xg=-	min=-	ex=-	Maintains stabling, trains horses for riding and draft work. Essential for any settlement on a road.
+village	Crafts	Beekeeper	req=0	bc=0.2	xg=-	min=-	ex=-	Maintains hives for honey and beeswax. Honey sweetens; beeswax makes candles, wax seals, and polish.
+village	Crafts	Fishmonger	req=0	bc=0.35	xg=-	min=-	ex=-	Buys, salts, and sells fish. The link between fishing and consumption. Near water: fresh. Inland: dried or salted.
+village	Crafts	Cobbler	req=0	bc=0.45	xg=-	min=-	ex=-	Makes and repairs shoes and boots. Every person needs footwear. One of the most reliable and consistent trades.
+village	Crafts	Tailor	req=0	bc=0.35	xg=-	min=-	ex=-	Cuts and sews finished cloth into garments. Serves the middle tier between home seamstress and master clothier.
+village	Crafts	Midwife	req=0	bc=0.5	xg=-	min=-	ex=-	Assists with births, manages difficult labours, and provides basic gynecological care. The most-used medical service in any settlement.
+village	Crafts	Village scribe	req=0	bc=0.15	xg=-	min=-	ex=-	Can read and write. Copies letters, draws up simple contracts, reads documents for the illiterate. Often the priest's assistant or a monastery-educated lay person.
+village	Crafts	Wildfowler	req=0	bc=0.15	xg=-	min=-	ex=-	Catches waterfowl and game birds using nets, traps, and trained birds. Supplies the market with ducks, geese, and pigeons.
+village	Crafts	Hunter's lodge	req=0	bc=0.18	xg=-	min=-	ex=-	Organises hunting parties across the surrounding territory. Sells venison, pelts, and game to market. Doubles as a source of local wilderness knowledge: which trails are safe, which aren't.
+village	Crafts	Woodcarver	req=0	bc=0.25	xg=-	min=-	ex=-	Carves functional and decorative items from wood: tool handles, religious figures, furniture inlays. Produces sacred images and reliquaries for the church.
+village	Crafts	Cartographer's workshop	req=0	bc=0.15	xg=-	min=-	ex=-	A craftsman who draws and sells maps: regional road maps, property surveys, and rough wilderness sketches from traveler accounts. Rare enough that most villages don't have one.
+village	Religious	Parish church	req=1	bc=1	xg=religiousCenter	min=-	ex=-	Center of village life. Stone construction. Mandatory tithes.
+village	Religious	Village musician	req=0	bc=0.25	xg=-	min=-	ex=-	A resident singer, fiddler, or piper. Plays at festivals and weddings. Also a keeper of local history through song.
+village	Religious	Priest (resident)	req=1	bc=1	xg=-	min=-	ex=-	Performs sacraments, collects tithes. Often only literate person.
+village	Religious	Graveyard	req=1	bc=1	xg=-	min=-	ex=-	Consecrated ground beside the church, on the parish's own plot, with a resident priest to close it. The rite keeps to the day of the death rather than waiting on a clergyman who comes through, and the parish has begun keeping the names in the same book as the baptisms. The ground nearest the church wall is spoken for generations ahead, and everyone here can say who holds it.
+village	Government	Lord's steward	req=0	bc=0.3	xg=government	min=-	ex=-	A lord's steward collects rents and enforces manor authority over a bound village.
+village	Government	Village reeve	req=0	bc=0.92	xg=government	min=-	ex=-	Elected from the peasantry. Organises labour obligations, mediates disputes, and represents the village to outside authority.
+village	Government	Village elder	req=0	bc=0.95	xg=government	min=-	ex=-	The oldest or most respected resident guides village decisions in the absence of formal authority. Less official than a reeve, more stable than nothing.
+village	Magic	Hedge wizard	req=0	bc=0.3	xg=magicalAuthority	min=-	ex=-	A resident caster of modest reach. Minor spells only.
+village	Magic	Druid Circle	req=0	bc=0.2	xg=-	min=-	ex=-	A circle of druids tied to the land. They regulate the seasons, mediate disputes with wild creatures, and know which streams run clean. More common in forested or isolated settlements, but they adapt. Some circles tend city gardens or hidden urban groves.
+village	Magic	Adventurers' charter hall	req=0	bc=0.2	xg=-	min=-	ex=-	A licensed charter hall providing bounties, monster-hunting coordination, and emergency armed response for the surrounding territory. More common in frontier regions.
+village	Magic	Healer (divine, 1st level)	req=0	bc=0.4	xg=-	min=-	ex=-	Basic healing spells. A closed wound costs 10 in gold.
+village	Defense	Citizen militia	req=0	bc=0.22	xg=-	min=-	ex=-	Organised community defense. Musters for raids and monster incursions. More reliable than hamlet levies.
+village	Defense	Palisade or earthworks	req=0	bc=0.18	xg=defenseLevel	min=-	ex=-	Perimeter palisade or earthwork berm. Controls approach, slows attackers.
+village	Defense	Veteran's lodge	req=0	bc=0.15	xg=-	min=-	ex=-	A drinking hall where retired soldiers and mercenaries gather. Informal security, bar brawls, and the occasional job offer for a group needing swords.
+village	Criminal	Fence (word of mouth)	req=0	bc=0.15	xg=-	min=-	ex=-	Local contact for moving stolen goods quietly. Operates behind another trade.
+village	Criminal	Smuggling network	req=0	bc=0.1	xg=-	min=city	ex=-	Goods move through this village avoiding tolls or legal scrutiny. Usually tied to a specific commodity.
+village	Criminal	Underground network	req=0	bc=0.08	xg=-	min=-	ex=-	Dug smuggling passages beneath the village.
+town	Economy	Town granary	req=1	bc=1	xg=-	min=-	ex=-	Communal grain storage. Buffers harvests, prevents famine.
+town	Economy	Market square	req=1	bc=1	xg=-	min=-	ex=-	Central plaza for weekly markets and fairs. 50-100 yards per side.
+town	Economy	Weekly market	req=1	bc=1	xg=marketScale	min=-	ex=-	Royal charter required. Major economic driver.
+town	Economy	Annual fair	req=0	bc=0.7	xg=-	min=-	ex=-	Regional merchants. Luxury goods available.
+town	Economy	Merchant guilds (3-8)	req=0	bc=0.8	xg=-	min=-	ex=-	Control trade in specific goods.
+town	Economy	Craft guilds (5-15)	req=1	bc=1	xg=-	min=-	ex=-	Regulate quality, prices, and apprenticeships.
+town	Economy	Money changers	req=0	bc=0.5	xg=-	min=-	ex=-	Exchange foreign currency. Early banking (3,000+ population).
+town	Economy	Inn (multiple)	req=1	bc=-	xg=-	min=-	ex=-	Lodging for traveling merchants.
+town	Economy	Taverns (5-20)	req=1	bc=-	xg=-	min=-	ex=-	Drinking establishments. Social hubs.
+town	Economy	Docks/port facilities	req=0	bc=0.55	xg=-	min=-	ex=-	River or coastal dock. Essential for bulk water trade and river transport.
+town	Economy	Carriers' guild	req=0	bc=0.65	xg=-	min=-	ex=-	A guild of professional carters, teamsters, and pack-animal drivers who move goods overland for hire. They know every road, every toll, every seasonal closure, and they charge accordingly.
+town	Economy	Coaching inn	req=0	bc=0.5	xg=-	min=-	ex=-	Purpose-built for road travellers: stabling for relay horses, scheduled coach departures, meals served at fixed hours, and a passenger waiting room. Horses changed here, not just rested.
+town	Economy	Public bathhouse	req=0	bc=0.3	xg=-	min=-	ex=-	Communal bathing facility with heated water. In some cultures a social hub; in others suspect as a venue for vice. Either way, the best place in the town to hear rumour and news.
+town	Economy	Carriers' hiring hall	req=0	bc=0.4	xg=-	min=-	ex=-	A yard where carters, teamsters, and pack-animal drivers can be hired for the road. Returning drivers share road conditions and bandit reports over a cup of ale. Transactional, not institutional.
+town	Economy	Shipyard	req=0	bc=0.35	xg=-	min=-	ex=-	Constructs and repairs ocean-going merchant vessels. Requires steady timber supply, iron fittings, and specialist shipwright labour. A major employer and a significant capital investment.
+town	Economy	Slave market	req=0	bc=0.1	xg=-	min=-	ex=-	Public auction of enslaved persons: war captives, debtors, convicted criminals, and trafficked individuals. Where slavery is legally sanctioned, this is civic commercial infrastructure.
+town	Economy	Cartographer's workshop	req=0	bc=0.4	xg=-	min=-	ex=-	Sells road maps, regional surveys, and coastal charts. Takes commissions for estate surveys and dungeon sketching. Maintains a reference collection of older maps for consultation. Standard stop for adventurers, merchants, and military scouts.
+town	Economy	Assay office	req=0	bc=0.2	xg=-	min=-	ex=-	Tests the purity of precious metals brought to the town. Essential infrastructure for banking and minting. Charges fees per assay.
+town	Economy	Customs house	req=0	bc=0.35	xg=-	min=-	ex=-	Levies duties on goods entering and leaving via the port or main roads. Run by royal or municipal officials.
+town	Economy	Post relay station	req=0	bc=0.3	xg=-	min=-	ex=-	Maintains a team of horses for rapid message relay. Letters and small packages travel far faster than foot traffic. Requires coaching inn.
+town	Economy	Stable district	req=0	bc=0.4	xg=-	min=-	ex=-	Concentrated stabling, horse trading, and farriery. Serves merchants, military, and travelers needing fresh mounts.
+town	Economy	Caravaneer's post	req=0	bc=0.3	xg=-	min=-	ex=-	Coordinates regional caravan assembly, departure schedules, and route intelligence. Merchants register goods, hire guards, and arrange joint ventures here. The town-scale predecessor to the city's Caravan masters' exchange.
+town	Economy	Jeweller	req=0	bc=0.3	xg=-	min=-	ex=-	Works precious metals and gemstones into rings, necklaces, seals, and luxury items. Accepts commissions, appraises stones, and occasionally buys stolen goods from discreet customers.
+town	Economy	Vintner	req=0	bc=0.2	xg=-	min=-	ex=-	Produces and ages wine, either from local grapes or imported must. Sells in bulk to taverns and directly to wealthy clients. A vintner in a non-wine region is an importer-blender.
+town	Economy	Listening post	req=0	bc=0.22	xg=-	min=-	ex=-	A licensed house that pays for road news and keeps the register: who arrived, from where, and what they carried word of. Cheap to run and openly taxed, which is why it appears wherever traffic does and nowhere that it does not.
+town	Crafts	Mills (2-5)	req=1	bc=1	xg=-	min=-	ex=-	Multiple mills for grain, fulling cloth.
+town	Crafts	Blacksmiths (3-10)	req=0	bc=0.95	xg=-	min=-	ex=-	Multiple smiths with specializations.
+town	Crafts	Carpenters (5-15)	req=0	bc=0.9	xg=-	min=-	ex=-	Construction and furniture makers.
+town	Crafts	Weavers/Textile workers	req=0	bc=0.8	xg=-	min=-	ex=-	Cloth production. Often guild-organized.
+town	Crafts	Tanners	req=0	bc=0.7	xg=tanneryScale	min=-	ex=-	Leather production. Foul-smelling; sited by water and toward the settlement edge where the ground allows.
+town	Crafts	Butchers (3-8)	req=0	bc=0.85	xg=-	min=-	ex=-	Meat processing. Strictly regulated.
+town	Crafts	Bakers (5-15)	req=0	bc=0.9	xg=-	min=-	ex=-	Bread production. Guild-regulated prices.
+town	Crafts	Apothecary (established)	req=0	bc=0.8	xg=-	min=-	ex=-	A proper shop with a trained herbalist, stocked inventory, and a back room for consultations. Sells herbalism kit supplies, common antidotes, medicinal herbs, and basic surgical dressings. Some double as chirurgeons.
+town	Crafts	Bowyers & fletchers (guild)	req=0	bc=0.75	xg=-	min=-	ex=-	Multiple craftsmen organized under a guild. Standard arrows by the sheaf, specialty broadheads, composite bows to commission. Restocks merchant caravans and outfits town militias.
+town	Crafts	Smelter	req=0	bc=0.35	xg=-	min=-	ex=-	Converts raw ore to refined metal using charcoal-fueled furnaces. The industrial intermediate between mine and smithy.
+town	Crafts	Sawmill (commercial)	req=0	bc=0.28	xg=-	min=-	ex=-	A water- or ox-powered mill producing planks and beams for the construction trade. A town near timber can supply an entire region's building needs. Employs a permanent crew.
+town	Crafts	Brewery	req=0	bc=0.45	xg=-	min=-	ex=-	Commercial-scale ale and beer production. Supplies the town's taverns and regional distribution. Major grain consumer and employer.
+town	Crafts	Tanner (established)	req=0	bc=0.55	xg=tanneryScale	min=-	ex=-	Full-scale tannery with multiple vats and a guild-trained workforce. Produces high-quality leather for shoes, armour, and saddlery.
+town	Crafts	Cobbler's guild	req=0	bc=0.5	xg=-	min=-	ex=-	Organised shoemakers producing boots, shoes, and sandals for the urban population. Strictly regulated quality.
+town	Crafts	Tailor's guild	req=0	bc=0.55	xg=-	min=-	ex=-	Master clothiers producing garments from finished cloth. Produces everything from working clothes to livery.
+town	Crafts	Chandler	req=0	bc=0.3	xg=-	min=-	ex=-	Makes candles from tallow and beeswax. Also produces soap and rope from similar raw materials. Essential for lighting.
+town	Crafts	Glassblower	req=0	bc=0.25	xg=-	min=-	ex=-	Small-scale glasswork: bottles, window panes, goblets. Requires silica sand, potash, and a skilled furnace operator.
+town	Crafts	Mint	req=0	bc=0.15	xg=-	min=-	ex=-	Converts refined precious metal into standardised coinage. Requires noble or royal charter. Significant revenue for the granting authority.
+town	Crafts	Town crier	req=0	bc=0.45	xg=-	min=-	ex=-	Official announcer who reads proclamations, market prices, and news at fixed times in the market square. Employed by the town or a guild.
+town	Crafts	Ropemaker	req=0	bc=0.3	xg=-	min=-	ex=-	Twists fibres (hemp, flax, or plant matter) into rope and cordage. Essential for ships, construction, and agriculture.
+town	Religious	Parish churches (2-5)	req=1	bc=1	xg=-	min=-	ex=-	Multiple parishes within town.
+town	Religious	Monastery or friary	req=0	bc=0.4	xg=religiousCenter	min=-	ex=-	Religious community. May operate hospital/school.
+town	Religious	Small hospital	req=0	bc=0.3	xg=-	min=-	ex=-	Care for sick poor. Usually religious-run.
+town	Religious	Almshouse	req=0	bc=0.3	xg=-	min=-	ex=-	Charitable house for the destitute poor, aged, and disabled who cannot work. Funded by church endowment and wealthy donors. Residents receive food and shelter; in return they pray for their benefactors.
+town	Religious	Parish burial grounds	req=1	bc=1	xg=-	min=-	ex=-	Each parish keeps its own ground beside its church, and a parish that has filled its ground buries beyond the gate instead. The sexton holds the register of who lies where, which is the town's longest unbroken record and the one it reaches for in an inheritance dispute. Guilds buy plots together so their members lie among their trade.
+town	Government	Mayor and council	req=0	bc=0.5	xg=government	min=-	ex=-	Elected or appointed town leadership.
+town	Government	Guild governance	req=0	bc=0.8	xg=government	min=-	ex=-	Guilds control town politics. The guildmasters sit on the council.
+town	Government	Lord's appointee	req=0	bc=0.45	xg=government	min=-	ex=-	A lord's appointed official governs; noble authority supersedes local custom.
+town	Government	Town council	req=0	bc=0.9	xg=government	min=-	ex=-	An informal council of prominent citizens manages town affairs in the absence of formal authority. Less accountable than an elected council, more stable than nothing.
+town	Defense	Town walls	req=0	bc=0.5	xg=defenseLevel	min=-	ex=-	Stone fortifications with gates. Expensive to build and maintain.
+town	Defense	Citizen militia	req=0	bc=0.6	xg=civilianDefense	min=-	ex=-	All able-bodied citizens obligated to defend town. Part-time service. Present only when no professional watch exists.
+town	Defense	Town watch	req=1	bc=1	xg=civilianDefense	min=-	ex=-	Part-time guards. Night patrol and gate duty.
+town	Defense	Gates (if walled)	req=0	bc=0.5	xg=-	min=-	ex=-	Controlled entry points with gatekeepers.
+town	Defense	Barracks	req=0	bc=0.3	xg=-	min=-	ex=-	Housing for guards or small garrison.
+town	Defense	Free company hall	req=0	bc=0.3	xg=-	min=-	ex=-	A billet and contracting office for a band of professional soldiers available between campaigns. Offers caravan escort, garrison contracts, and short-term military hire at day-wage rates. Cheaper than a standing army, more reliable than a mob. These men fight in formation on salary, not for treasure.
+town	Magic	Wizard's tower	req=0	bc=0.2	xg=magicalAuthority	min=-	ex=-	Individual wizard residence. 1,000+ population viable.
+town	Magic	Elder Grove Council	req=0	bc=0.15	xg=-	min=-	ex=-	A council of senior druids who govern their circle's relationship with the city. They may maintain a hidden grove beneath the streets, mediate between urban expansion and wild places, or serve as ecological advisors to the ruling authority. Found in cities that have made peace with nature magic.
+town	Magic	Alchemist shop	req=0	bc=0.4	xg=-	min=-	ex=-	Potions, alchemical items. Basic healing potions (50 in gold).
+town	Magic	Warden's Lodge	req=0	bc=0.2	xg=-	min=-	ex=-	A ranger station or druid waypost. They monitor the surrounding wilderness, maintain trails, and keep tabs on beast migrations. In times of crisis they serve as emergency scouts and trackers.
+town	Magic	Teleportation circle	req=0	bc=0.08	xg=-	min=-	ex=-	Rare permanent circle. Extremely expensive to construct and maintain. Requires magical expertise beyond typical town resources.
+town	Adventuring	Merchant warehouses	req=0	bc=0.65	xg=-	min=-	ex=-	Warehouse facilities for merchants storing goods awaiting sale, transit, or seasonal distribution. Essential infrastructure for any trade route settlement.
+town	Adventuring	Hireling hall	req=0	bc=0.5	xg=-	min=-	ex=-	Job board for torchbearers (1 in gold a session), porters (5 in gold a session).
+town	Adventuring	Adventurers' charter hall	req=0	bc=0.3	xg=-	min=-	ex=-	A chartered hall serving as the primary adventuring hub for the region. Posts contracts, grades monster threats, maintains gear, and coordinates large-scale operations that militia cannot handle.
+town	Adventuring	Charlatan fortune tellers	req=0	bc=0.3	xg=-	min=-	ex=-	Non-magical 'divination' using Deception. 1-5 in gold.
+town	Adventuring	Beast trainers	req=0	bc=0.3	xg=-	min=-	ex=-	Common animals only. Horses, dogs, falcons.
+town	Criminal	Street gang	req=0	bc=0.55	xg=-	min=-	ex=-	Organized pickpockets and thugs. 10-30 members.
+town	Criminal	Smuggling operation	req=0	bc=0.45	xg=-	min=-	ex=-	Illicit goods trade. Tax evasion.
+town	Criminal	Front businesses	req=0	bc=0.45	xg=-	min=-	ex=-	Legitimate covers for criminal activity.
+town	Criminal	Underground network	req=0	bc=0.15	xg=-	min=-	ex=-	A dug network of smuggling tunnels and cellars.
+town	Criminal	Rookery	req=0	bc=0.16	xg=-	min=-	ex=-	A loft of message birds kept by people who file no returns. Word arrives unsigned and ahead of the watch. Only a standing criminal organization can protect a loft like this, so one never appears without that backing.
+town	Entertainment	Traveling performers	req=0	bc=0.8	xg=-	min=-	ex=-	Bards, jugglers, acrobats visit during fairs.
+town	Entertainment	Gambling den	req=0	bc=0.4	xg=-	min=-	ex=-	Dice, cards, simple games of chance.
+town	Entertainment	Gladiatorial school	req=0	bc=0.15	xg=-	min=-	ex=-	Trains fighters for public spectacle. Recruits from prisoners, debtors, and volunteers. Feeds the arena circuit.
+town	Entertainment	Hired blades	req=0	bc=0.25	xg=-	min=-	ex=-	Individual or small groups of professional fighters available for private contracts: bodyguard work, debt enforcement, or quiet removal of problems.
+town	Entertainment	Brothel	req=0	bc=0.5	xg=-	min=-	ex=-	Tolerated or regulated prostitution.
+town	Infrastructure	Town hall	req=1	bc=1	xg=-	min=-	ex=-	Meeting place and administrative center.
+town	Infrastructure	Courthouse	req=0	bc=0.6	xg=-	min=-	ex=-	Borough court for local justice.
+town	Infrastructure	Small prison/stocks	req=0	bc=0.7	xg=-	min=-	ex=-	Holding cells and public punishment.
+town	Infrastructure	Housing (180-1000 structures)	req=1	bc=1	xg=-	min=-	ex=-	Multi-story timber and stone buildings.
+town	Infrastructure	Multiple water sources	req=1	bc=1	xg=waterSupply	min=-	ex=-	Wells, fountains, or piped water.
+city	Economy	City granaries	req=1	bc=1	xg=-	min=-	ex=-	Multiple large grain stores distribute food across the city. State managed.
+city	Economy	Multiple market squares	req=1	bc=1	xg=-	min=-	ex=-	Multiple permanent market squares serve different districts.
+city	Economy	Daily markets	req=1	bc=1	xg=marketScale	min=-	ex=-	Permanent market activity in multiple locations.
+city	Economy	Inns and taverns (district)	req=1	bc=-	xg=-	min=-	ex=-	Multiple inn districts catering to merchants, travelers, and long-term visitors.
+city	Economy	Major annual fairs	req=0	bc=0.9	xg=-	min=-	ex=-	International merchants. Letters of credit accepted.
+city	Economy	Banking houses	req=0	bc=0.7	xg=-	min=-	ex=-	Loans, currency exchange, letters of credit. Basic banking (5,000+).
+city	Economy	Merchant guilds (15-40)	req=0	bc=0.95	xg=-	min=-	ex=-	Powerful political force.
+city	Economy	Craft guilds (30-80)	req=0	bc=0.98	xg=-	min=-	ex=-	Extreme specialization (gold-beaters, mirror-makers).
+city	Economy	Warehouse district	req=1	bc=-	xg=-	min=-	ex=-	Storage for merchant goods.
+city	Economy	Docks/port facilities	req=0	bc=0.6	xg=-	min=-	ex=-	If coastal or river access. Essential for bulk trade.
+city	Economy	Barge and river transport company	req=0	bc=0.55	xg=-	min=-	ex=-	Operates a fleet of river barges on scheduled and commissioned runs. Carries bulk cargo, passengers, and military supply along the river network.
+city	Economy	Caravan masters' exchange	req=0	bc=0.6	xg=-	min=-	ex=-	The city-scale version: permanent offices where caravan masters, merchants, and armed escorts transact. Bonded freight, route intelligence, armed convoy assembly, and commercial dispute resolution.
+city	Economy	Shipyard	req=0	bc=0.45	xg=-	min=-	ex=-	City-scale shipyard constructing large merchant and war vessels. Multiple dry docks, ropewalk, sail loft, and dedicated ironworks. A major employer and a strategic military asset.
+city	Economy	Slave market	req=0	bc=0.3	xg=-	min=-	ex=-	Established auction block with holding facilities, registered brokers, and provenance documentation. Legally sanctioned commerce in persons: taxed, regulated, and embedded in the city economy.
+city	Economy	Slave market district	req=0	bc=0.25	xg=-	min=-	ex=-	A permanent, licensed district for commerce in persons: auction halls, holding compounds, broker offices, and associated legal and financial infrastructure. Operates at a scale beyond a single market block.
+city	Economy	Cartographer's guild	req=0	bc=0.65	xg=-	min=-	ex=-	A guild of professional cartographers producing regional maps, sea charts, property surveys, and military reconnaissance maps. Sells off-the-shelf maps and takes commissions. The city's maps are the most accurate in the region.
+city	Economy	Apothecary district	req=0	bc=0.7	xg=-	min=-	ex=-	Multiple apothecary shops clustered together. Competition drives specialization. Some focus on chirurgery, others on herbal preparations, others on imported medicines. Herbalism kits, medicinal herbs, surgical supplies, and basic antidotes all available.
+city	Economy	Mint (official)	req=0	bc=0.4	xg=-	min=-	ex=-	State or noble-chartered coin production. Standardises currency across the region. Significant ongoing revenue via seigniorage.
+city	Economy	Auction house	req=0	bc=0.35	xg=-	min=-	ex=-	Formal venue for selling high-value goods: estates, ships, livestock, art, and occasionally persons. Charges buyer's and seller's premiums.
+city	Economy	Harbour master's office	req=0	bc=0.4	xg=-	min=-	ex=-	Regulates harbour and river-port traffic, collects anchorage fees, assigns berths, and enforces port law. Navigable-water cities only.
+city	Economy	Furrier's district	req=0	bc=0.35	xg=-	min=-	ex=-	Fur processors, traders, and retailers concentrated in one area. High-value trade. Quality furs are luxury goods.
+city	Economy	Listening post	req=0	bc=0.28	xg=-	min=-	ex=-	A licensed house that pays for road news and keeps the register: who arrived, from where, and what they carried word of. Cheap to run and openly taxed, which is why it appears wherever traffic does and nowhere that it does not.
+city	Economy	Chroniclers' exchange	req=0	bc=0.3	xg=-	min=-	ex=-	The guild form of the listening house: paid correspondents on several roads, an archive that cross-checks one road against another, and a standing rate for a written answer. Expensive to keep, and the only counter in the city where a claim is graded before it is sold.
+city	Crafts	Specialized metalworkers	req=0	bc=0.9	xg=-	min=-	ex=-	Armorers, swordsmiths, jewelers. Separate guilds.
+city	Crafts	Luxury goods quarter	req=0	bc=0.8	xg=-	min=-	ex=-	Silks, spices, precious goods.
+city	Crafts	Printing house	req=0	bc=0.3	xg=-	min=-	ex=-	Books and broadsheets (if technology exists).
+city	Crafts	Glassmakers	req=0	bc=0.5	xg=-	min=-	ex=-	Windows, vessels, mirrors. Requires expertise.
+city	Religious	Cathedral (10,000+ only)	req=0	bc=0.3	xg=religiousCenter(coexist)	min=-	ex=-	Bishop's seat. Requires 10,000+ population minimum. Defines major city status.
+city	Religious	Multiple monasteries	req=0	bc=0.6	xg=religiousCenter(coexist)	min=-	ex=-	Different religious orders.
+city	Religious	Major hospital	req=0	bc=0.5	xg=-	min=-	ex=-	Large facility for sick poor. 50-100 beds.
+city	Religious	Foundling home	req=0	bc=0.2	xg=-	min=-	ex=-	Receives abandoned infants and young children, providing basic care until they can be apprenticed, placed with families, or raised within the institution. Usually church-run. The wheel in the wall allows anonymous deposit at night.
+city	Religious	Parish churches (10-30)	req=1	bc=1	xg=-	min=-	ex=-	One per neighborhood.
+city	Religious	Burial grounds and charnel house	req=1	bc=1	xg=-	min=-	ex=-	The parish grounds inside the walls filled generations ago, so the dead are lifted once their term is up and their bones stacked in the charnel house to make room for the next. New ground has been bought outside the gates, and the carts that go out at dusk are a fixed part of the city's evening. Who is lifted and who is left where they lie is settled by what a family endowed.
+city	Government	Mayor and council	req=0	bc=0.5	xg=government	min=-	ex=-	Elected civic council with full administrative apparatus.
+city	Government	Guild consortium	req=0	bc=0.6	xg=government	min=-	ex=-	A consortium of guild masters holds effective civic power.
+city	Government	Noble governor	req=0	bc=0.55	xg=government	min=-	ex=-	A royal or ducal appointee governs; the city operates as a noble fief.
+city	Government	Merchant oligarchy	req=0	bc=0.5	xg=government	min=-	ex=-	Wealthy merchant families hold exclusive civic power; political office is effectively purchased.
+city	Government	City-state government	req=0	bc=0.25	xg=government	min=-	ex=-	The settlement governs itself and its surrounding territory as an independent polity. No higher lord, no external charter.
+city	Government	Democratic assembly	req=0	bc=0.2	xg=government	min=-	ex=-	A citizen assembly holds formal authority; eligible voters debate and vote on major ordinances and appointments.
+city	Government	Royal seat	req=0	bc=0.2	xg=government	min=-	ex=-	A royal governor or viceroy administers directly on behalf of the crown. High status, high scrutiny.
+city	Government	City administration	req=0	bc=0.92	xg=government	min=-	ex=-	An administrative apparatus of officials, clerks, and ward officers manages city affairs. Less formally constituted than a council but functional. Governance by bureaucratic inertia.
+city	Defense	City walls and gates	req=1	bc=0.9	xg=defenseLevel	min=-	ex=-	Masonry walls with towers. Multiple gatehouses.
+city	Defense	Professional city watch	req=1	bc=0.9	xg=-	min=-	ex=-	Full-time law enforcement. ~1% of population.
+city	Defense	Garrison	req=1	bc=-	xg=-	min=-	ex=-	Professional soldiers. Noble or royal.
+city	Defense	Citadel	req=0	bc=0.4	xg=-	min=-	ex=-	Inner fortress. Last refuge in siege.
+city	Magic	Wizard's tower	req=0	bc=0.4	xg=magicalAuthority	min=-	ex=-	High-level spellcaster residence. Multiple towers possible.
+city	Magic	Mages' guild	req=0	bc=0.3	xg=-	min=-	ex=-	Organization of magic users. 2,000-5,000 population for chapter.
+city	Magic	Alchemist quarter	req=0	bc=0.5	xg=-	min=-	ex=-	Multiple alchemical workshops. Guild organization.
+city	Magic	Enchanter's shop	req=0	bc=0.4	xg=-	min=-	ex=-	Magic item creation. 5,000+ population typically.
+city	Magic	Scroll scribe	req=0	bc=0.5	xg=-	min=-	ex=-	Spell scrolls for sale. 25 in gold for the smallest charm, 500 and up for a greater working.
+city	Magic	Teleportation circle	req=0	bc=0.15	xg=-	min=-	ex=-	Permanent teleportation circle. Access is controlled and expensive to maintain. Transformative infrastructure for any settlement lucky enough to have one.
+city	Criminal	Thieves' guild chapter	req=0	bc=0.6	xg=criminalPower	min=-	ex=-	Organized crime chapter. 10,000+ population for viable operation. 30-100 members.
+city	Criminal	Multiple criminal factions	req=0	bc=0.5	xg=criminalPower	min=-	ex=-	Competing gangs. Turf disputes.
+city	Criminal	Black market	req=0	bc=0.6	xg=-	min=-	ex=-	Illicit goods trade. Hidden locations.
+city	Criminal	Underground network	req=0	bc=0.22	xg=-	min=-	ex=-	An extensive warren of smuggling tunnels beneath the city.
+city	Criminal	Contract killer	req=0	bc=0.25	xg=-	min=-	ex=-	An individual or small cell operating beneath the assassins guild threshold. Accepts contracts through criminal intermediaries. Less reliable but deniable.
+city	Criminal	Front businesses	req=0	bc=0.7	xg=-	min=-	ex=-	Warehouses, taverns, shops as criminal covers.
+city	Criminal	Kidnapping ring	req=0	bc=0.15	xg=-	min=-	ex=Slave market|Slave market district	Targets free persons for fraudulent insertion into slavery through forged provenance documents. Where no lawful market exists to absorb the traffic, it runs its own holding, its own escorts, and its own silence.
+city	Criminal	Human trafficking network	req=0	bc=0.2	xg=-	min=-	ex=Slave market|Slave market district	Fully clandestine operation moving persons across jurisdictions outside legal channels. Only fires where no legal slave market exists. Distinct logistics, safe houses, and corrupt border infrastructure.
+city	Criminal	Smuggling network	req=0	bc=0.6	xg=-	min=-	ex=-	Organized contraband trade.
+city	Criminal	Rookery	req=0	bc=0.2	xg=-	min=-	ex=-	A loft of message birds kept by people who file no returns. Word arrives unsigned and ahead of the watch. Only a standing criminal organization can protect a loft like this, so one never appears without that backing.
+city	Criminal	Whisper market	req=0	bc=0.18	xg=-	min=-	ex=-	The covert guild form: brokers who buy and sell knowledge by the piece, grade what they sell, and will manufacture a claim for a patron who pays enough. It sites itself where the talk already is, among the fences, the late houses, and the inns that ask nothing.
+city	Entertainment	Theaters	req=0	bc=0.5	xg=theaterScale	min=-	ex=-	Permanent performance venues.
+city	Entertainment	Gambling halls	req=0	bc=0.6	xg=gamblingScale	min=-	ex=-	Dedicated establishments. Some illegal.
+city	Entertainment	Brothel (red light district)	req=0	bc=0.7	xg=redLightScale	min=-	ex=-	Legal or tolerated prostitution quarter.
+city	Entertainment	Fighting pits	req=0	bc=0.3	xg=-	min=-	ex=-	Illegal or semi-legal combat. Underground locations.
+city	Entertainment	Multiple theaters	req=0	bc=0.7	xg=theaterScale	min=metropolis	ex=-	Permanent venues. Professional companies.
+city	Entertainment	Colosseum/arena	req=0	bc=0.4	xg=-	min=metropolis	ex=-	Gladiatorial games or monster fights. Massive scale.
+city	Entertainment	Red light district	req=0	bc=0.9	xg=redLightScale	min=-	ex=-	Large organized prostitution quarter.
+city	Entertainment	Gambling district	req=0	bc=0.8	xg=gamblingScale	min=metropolis	ex=-	Concentrated gaming houses. Play kept honest by compelled truth.
+city	Entertainment	Opera house	req=0	bc=0.3	xg=-	min=metropolis	ex=-	High culture. Elite patronage.
+city	Entertainment	Bardic college	req=0	bc=0.4	xg=-	min=-	ex=-	Formal musical education. Amphitheater, dormitories. 10,000+ for small campus.
+city	Adventuring	Multiple adventurers' guilds	req=0	bc=0.7	xg=-	min=-	ex=-	Competing organizations.
+city	Adventuring	Mercenary quarter	req=0	bc=0.6	xg=-	min=-	ex=-	Organized sellsword companies. Major forces (hundreds to thousands).
+city	Adventuring	Dungeon delving supply district	req=0	bc=0.5	xg=-	min=-	ex=-	Specialized adventuring gear. Warded weapons, silver weapons, etc.
+city	Adventuring	Sage's quarter	req=0	bc=0.5	xg=-	min=-	ex=-	Multiple scholars and researchers.
+city	Exotic	Planar traders	req=0	bc=0.3	xg=-	min=metropolis	ex=-	Goods from other planes of existence.
+city	Exotic	Dragon resident	req=0	bc=0.1	xg=-	min=metropolis	ex=-	Ancient wyrm living in city.
+city	Exotic	Golem workforce	req=0	bc=0.2	xg=-	min=-	ex=-	Constructed servants if magic permits.
+city	Exotic	Undead labor	req=0	bc=0.1	xg=-	min=-	ex=-	Animated corpses working. Controversial.
+city	Exotic	Dream parlors (high magic)	req=0	bc=0.2	xg=-	min=metropolis	ex=-	Dream-walking magic sold as experience. Lucid shared dreams, communication.
+city	Exotic	Airship docking (high magic)	req=0	bc=0.1	xg=-	min=metropolis	ex=-	Mooring towers with magical weather protection.
+city	Exotic	Message network (high magic)	req=0	bc=0.3	xg=-	min=metropolis	ex=-	Paired Speaking Stones set in a network. 250-10,000 in gold per station.
+city	Infrastructure	City hall	req=1	bc=1	xg=-	min=-	ex=-	Impressive civic building.
+city	Infrastructure	Multiple courthouses	req=1	bc=1	xg=-	min=-	ex=-	Commercial, criminal, and ecclesiastical courts.
+city	Infrastructure	Large prison	req=0	bc=0.7	xg=-	min=-	ex=-	Debtors, criminals, political prisoners.
+city	Infrastructure	Workhouse	req=0	bc=0.25	xg=-	min=-	ex=-	The able-bodied poor receive shelter and food in exchange for compulsory labour: textile work, grinding, construction. Not a prison but the line is blurry. Reduces vagrancy and produces goods. Conditions are deliberately harsh to discourage dependency.
+city	Infrastructure	Sewage system	req=0	bc=0.4	xg=-	min=-	ex=-	Underground drainage. Rare but critical for health.
+city	Infrastructure	Housing (1000-5000 structures)	req=1	bc=1	xg=-	min=-	ex=-	Multi-story buildings. Tenements for poor.
+city	Infrastructure	Aqueduct or water system	req=1	bc=1	xg=waterSupply	min=-	ex=-	Engineered water supply. Conduits, cisterns, fountains.
+metropolis	Crafts	Craft guilds (100-150+)	req=0	bc=0.7	xg=-	min=-	ex=-	Over a hundred distinct craft specializations. A guild for every conceivable trade.
+metropolis	Government	Palace/government complex	req=0	bc=0.75	xg=-	min=-	ex=-	Seat of metropolitan or state government: palace, ministries, audience halls, administrative bureaux.
+metropolis	Government	Multiple court buildings	req=0	bc=0.65	xg=-	min=-	ex=-	Specialized courts (commercial, criminal, appellate, ecclesiastical) operating simultaneously.
+metropolis	Defense	Massive walls and fortifications	req=0	bc=0.5	xg=defenseLevel	min=-	ex=-	Layered wall systems: outer wall, inner wall, citadel ring. Multiple garrison zones and gatehouses.
+metropolis	Defense	Multiple garrisons	req=0	bc=0.75	xg=-	min=-	ex=-	Garrison forces distributed across quarters. No single barracks can secure a metropolis.
+metropolis	Religious	Parish churches (50-100+)	req=0	bc=0.8	xg=-	min=-	ex=-	Hundreds of parish churches across all districts. The faith is woven into every neighbourhood.
+metropolis	Religious	Great cathedral	req=0	bc=0.6	xg=-	min=-	ex=-	Metropolitan cathedral. Seat of the highest regional religious authority. Pilgrimage destination.
+metropolis	Religious	Major monasteries (5-10)	req=0	bc=0.55	xg=-	min=-	ex=-	Five to ten major monastic houses: scholarly, contemplative, and charitable functions at scale.
+metropolis	Religious	Hospital network	req=0	bc=0.55	xg=-	min=-	ex=-	Multiple hospitals and infirmaries across districts. Organized medical care at population scale.
+metropolis	Religious	Cemetery network	req=1	bc=1	xg=-	min=-	ex=-	Burial has left the walls entirely: grounds beyond every gate, each with its own road, its own gatekeepers, and a trade in plots that the revenue office watches. The parish registers are copied into a central roll because no parish can any longer say where its own dead are. Wards are assigned to grounds, so a family that moves across the city can find itself divided by the assignment.
+metropolis	Magic	Academy of magic	req=0	bc=0.4	xg=-	min=-	ex=-	Formal institution of arcane learning. Full curriculum, research facilities, visiting scholars.
+metropolis	Magic	Mages' district	req=0	bc=0.45	xg=-	min=-	ex=-	Quarter inhabited by arcane practitioners: towers, workshops, libraries, reagent merchants.
+metropolis	Magic	Great library	req=0	bc=0.4	xg=-	min=-	ex=-	Largest repository of knowledge in the region: thousands of volumes, map archives, historical records.
+metropolis	Magic	Planar embassy	req=0	bc=0.15	xg=-	min=-	ex=-	Formal diplomatic mission from a planar power. Trade, information, occasional intervention.
+metropolis	Criminal	Thieves' guild (powerful)	req=0	bc=0.55	xg=criminalPower	min=-	ex=-	Dominant criminal syndicate. Tolerated because the alternative (gang war) is worse.
+metropolis	Criminal	Black market bazaar	req=0	bc=0.45	xg=-	min=-	ex=-	Permanent underground market: contraband, forged documents, illegal services.
+metropolis	Criminal	Underground city	req=0	bc=0.25	xg=-	min=-	ex=-	Extensive tunnels and catacombs repurposed as criminal and refugee sanctuary.
+metropolis	Criminal	Assassins' guild	req=0	bc=0.2	xg=-	min=-	ex=-	Professional contract killing. Operates through cutouts, never acknowledged officially.
+metropolis	Economy	Daily markets	req=0	bc=0	xg=marketScale	min=-	ex=-	Superseded at metropolis scale.
+metropolis	Economy	District markets (5-10)	req=0	bc=0.8	xg=marketScale	min=-	ex=-	Five to ten permanent specialized market districts: grain, livestock, cloth, metals, exotica.
+metropolis	Economy	Merchant guilds (50-100+)	req=0	bc=0.7	xg=-	min=-	ex=-	Dozens of merchant guilds representing every major trade good and route. A formal guild parliament.
+metropolis	Economy	Banking district	req=0	bc=0.65	xg=-	min=-	ex=-	Consolidated financial quarter: international banking, letters of credit, currency speculation at scale.
+metropolis	Economy	International trade center	req=0	bc=0.55	xg=-	min=-	ex=-	Hub for international merchant representatives, trade arbitration, and commodity exchange.
+metropolis	Economy	State granary complex	req=0	bc=0.7	xg=-	min=-	ex=-	State-administered granary network holding strategic reserves.
+metropolis	Infrastructure	Massive prison	req=0	bc=0.5	xg=-	min=-	ex=-	State prison complex: political prisoners, debtors, convicted criminals held separately.
+metropolis	Infrastructure	Advanced water infrastructure	req=0	bc=0.6	xg=-	min=-	ex=-	Multiple aqueducts, cisterns, and distributed fountains. City-wide water management at scale.

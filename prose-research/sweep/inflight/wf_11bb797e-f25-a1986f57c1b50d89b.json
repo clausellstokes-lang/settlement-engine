@@ -1,0 +1,24 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 63,
+ "firstTs": "2026-09-12T08:04:19.990Z",
+ "lastTs": "2026-09-12T08:10:04.247Z",
+ "tools": {
+  "Read": 2,
+  "Bash": 11,
+  "Write": 1
+ },
+ "urlsFetched": [],
+ "filesWritten": [
+  "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/retro/fidelity-W20–W27 — the eight referent bars (layer · baked-power · person · fused-agent · record-word · external-body · visibility · angle-tag) of brief ADDENDUM 13 PART B, decomposed into 20 items.md"
+ ],
+ "lastAssistantText": "(W25a, W25b, W26a, W22c — \"none of them touches flavour\") has no counterpart in the archive.\n\nNone of these reverses a verdict. All of them would mislead a reviewer working from the archive alone, which is the standard it was built to meet. F1 and F2/F3 should be repaired before the Fable seat sits.",
+ "run": "wf_11bb797e-f25",
+ "agent": "a1986f57c1b50d89b",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/4ed79a2b-6cd2-45cf-ab97-83cdad49c30b/subagents/workflows/wf_11bb797e-f25/agent-a1986f57c1b50d89b.jsonl",
+ "journal": "result",
+ "checkpointFile": null
+}

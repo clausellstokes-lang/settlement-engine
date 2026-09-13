@@ -1,0 +1,56 @@
+
+ RUN  v4.1.11 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneMEASURE
+
+ ❯ tests/lint/sovereigntyLightingContract.walker.test.js (34 tests | 1 failed) 6211ms
+     × THE CENSUS IS AN ASSERTION, NOT A SENTENCE — every stated figure is executed 59ms
+ ❯ tests/lint/negativeAssertionAnchor.walker.test.js (9 tests | 1 failed) 18ms
+     × no NEW un-anchored negative assertion anywhere in the test corpus 10ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/lint/negativeAssertionAnchor.walker.test.js > negative-assertion anchor walker (habitat removal) > no NEW un-anchored negative assertion anywhere in the test corpus
+AssertionError: expected [ Array(1) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "tests/lint/proseCorpusBytes.test.js: 1 un-anchored negative assertion(s) at line(s) 362 (frozen ceiling 0). A bare not.toContain/not.toMatch/not.toHaveProperty passes just as happily when the COLLECTION drifted away as when the member was correctly excluded — it outlives the regression it was written to catch. Pair it with a liveness anchor: expectPresentThenAbsent(before, after, member) for a removal, expectAbsentWithAnchor(collection, member, anchor) for a selection (tests/helpers/anchoredNegatives.js). If the anchor is genuinely structural, say why with an \"// anchored: <reason>\" marker — AND MIND THE RULE, which has cost a lane two attempts: the marker is read ONLY on the assertion's own line or the ONE line immediately above it. A marker WRAPPED across two comment lines does NOT count, because the line abutting the assertion is then the continuation rather than the marker. Keep it on one line, or put \"anchored:\" on the comment's LAST line.",
++ ]
+
+ ❯ tests/lint/negativeAssertionAnchor.walker.test.js:861:24
+    859|       }
+    860|     }
+    861|     expect(violations).toEqual([]);
+       |                        ^
+    862|   });
+    863|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/lint/sovereigntyLightingContract.walker.test.js > the sovereignty lighting condition — a marker is EVIDENCE only in a live title > THE CENSUS IS AN ASSERTION, NOT A SENTENCE — every stated figure is executed
+AssertionError: the estate's file count moved — re-measure, do not re-word: expected 2553 to be 2552 // Object.is equality
+
+- Expected
++ Received
+
+- 2552
++ 2553
+
+ ❯ tests/lint/sovereigntyLightingContract.walker.test.js:7446:8
+    7444|       .toBe(blockKeys.length);
+    7445|     expect(TEST_FILES.length, 'the estate\'s file count moved — re-mea…
+    7446|       .toBe(CENSUS.files);
+       |        ^
+    7447|     expect(parked.length, 'the parked-file count moved from SP-C\'s me…
+    7448|       + ' a rule widened or narrowed, or a lane changed a file\'s shap…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  2 failed | 145 passed (147)
+      Tests  2 failed | 2384 passed (2386)
+   Start at  07:50:21
+   Duration  103.54s (transform 22.69s, setup 4.15s, import 137.81s, tests 503.83s, environment 14ms)
+

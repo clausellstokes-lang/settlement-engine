@@ -1,0 +1,21 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 287,
+ "firstTs": "2026-09-12T01:08:45.437Z",
+ "lastTs": "2026-09-12T01:18:42.100Z",
+ "tools": {
+  "Bash": 76,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "All 26 packets applied, the keep-or-revert rule run, committed at porcelain 0.",
+ "run": "wf_b9aa5993-4a0",
+ "agent": "a05dbfcdb6a48959b",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/4ed79a2b-6cd2-45cf-ab97-83cdad49c30b/subagents/workflows/wf_b9aa5993-4a0/agent-a05dbfcdb6a48959b.jsonl",
+ "journal": "result",
+ "checkpointFile": null
+}

@@ -1,0 +1,22 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 153,
+ "firstTs": "2026-09-12T03:17:54.450Z",
+ "lastTs": "2026-09-12T03:24:10.472Z",
+ "tools": {
+  "Bash": 38,
+  "Read": 3,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "Now I have the full doctrine. Writing the cured packet.",
+ "run": "wf_b9aa5993-4a0",
+ "agent": "a2a22812d8e2fa693",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/4ed79a2b-6cd2-45cf-ab97-83cdad49c30b/subagents/workflows/wf_b9aa5993-4a0/agent-a2a22812d8e2fa693.jsonl",
+ "journal": "result",
+ "checkpointFile": null
+}

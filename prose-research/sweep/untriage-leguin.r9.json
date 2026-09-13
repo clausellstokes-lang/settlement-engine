@@ -1,0 +1,1224 @@
+{
+ "name": "leguin",
+ "writtenAt": "Mon Sep  7 02:03:26 EDT 2026",
+ "critic": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/prose-research/sweep/critic-leguin.md (mtime 2026-09-06T18:59:14-0400)",
+ "rows": [
+  {
+   "index": 388,
+   "feature": "3",
+   "why": "sec.4 table: Jameson and Maslen, unverified second sources for F3's polyphony in one frame"
+  },
+  {
+   "index": 391,
+   "feature": "20",
+   "why": "sec.4 table: Jameson, Theall, Huntington and Mitchell, F20's unverified second sources on economy"
+  },
+  {
+   "index": 393,
+   "feature": "dissent (11, 23, 6)",
+   "why": "critic sec.8 item 1(c): the dissent and period-scoping rows, unverified"
+  },
+  {
+   "index": 395,
+   "feature": "dissent (11, 23, 6)",
+   "why": "critic sec.8 item 1(c): the dissent and period-scoping rows, unverified"
+  },
+  {
+   "index": 398,
+   "feature": "dissent (11, 23, 6)",
+   "why": "critic sec.8 item 1(c): the dissent and period-scoping rows, unverified"
+  },
+  {
+   "index": 400,
+   "feature": "1, 5, 20",
+   "why": "critic sec.1: Theall's 'the characteristic features of an anthropological report'; [403] is also listed in sec.4 as F20's economy-limb second source"
+  },
+  {
+   "index": 401,
+   "feature": "1, 5, 20",
+   "why": "critic sec.1: Theall's 'the characteristic features of an anthropological report'; [403] is also listed in sec.4 as F20's economy-limb second source"
+  },
+  {
+   "index": 402,
+   "feature": "1, 5, 20",
+   "why": "critic sec.1: Theall's 'the characteristic features of an anthropological report'; [403] is also listed in sec.4 as F20's economy-limb second source"
+  },
+  {
+   "index": 403,
+   "feature": "20",
+   "why": "sec.4 table: Jameson, Theall, Huntington and Mitchell, F20's unverified second sources on economy"
+  },
+  {
+   "index": 404,
+   "feature": "1, 5, 20",
+   "why": "critic sec.1: Theall's 'the characteristic features of an anthropological report'; [403] is also listed in sec.4 as F20's economy-limb second source"
+  },
+  {
+   "index": 405,
+   "feature": "1, 5, 20",
+   "why": "critic sec.1: Theall's 'the characteristic features of an anthropological report'; [403] is also listed in sec.4 as F20's economy-limb second source"
+  },
+  {
+   "index": 407,
+   "feature": "6, 11",
+   "why": "critic sec.1: Bierman 'Le Guin is rarely a simple, straightforward storyteller' - the dissent the section lacks"
+  },
+  {
+   "index": 408,
+   "feature": "20",
+   "why": "sec.4 table: Jameson, Theall, Huntington and Mitchell, F20's unverified second sources on economy"
+  },
+  {
+   "index": 417,
+   "feature": "6, 7, 11, 20, 21",
+   "why": "critic sec.1: Mitchell 2015's eleven claims, including [420] 'reads like the retelling of a tale first told centuries', the exact sentence F11 marks relay at [97]; sec.4 puts [422, 423] under F7, [421] under F21, [426] under F20"
+  },
+  {
+   "index": 419,
+   "feature": "6, 11",
+   "why": "critic sec.1: Mitchell 2015 is 'eleven claims' [417] to [427], fetched by close-2 and never graded"
+  },
+  {
+   "index": 420,
+   "feature": "6, 7, 11, 20, 21",
+   "why": "critic sec.1: Mitchell 2015's eleven claims, including [420] 'reads like the retelling of a tale first told centuries', the exact sentence F11 marks relay at [97]; sec.4 puts [422, 423] under F7, [421] under F21, [426] under F20"
+  },
+  {
+   "index": 421,
+   "feature": "21",
+   "why": "sec.4 table: F21's 'land first, no name till late' rests on Merrill, Goss and Eichner each alone; these are the second sources"
+  },
+  {
+   "index": 422,
+   "feature": "6, 7, 11, 20, 21",
+   "why": "critic sec.1: Mitchell 2015's eleven claims, including [420] 'reads like the retelling of a tale first told centuries', the exact sentence F11 marks relay at [97]; sec.4 puts [422, 423] under F7, [421] under F21, [426] under F20"
+  },
+  {
+   "index": 423,
+   "feature": "6, 7, 11, 20, 21",
+   "why": "critic sec.1: Mitchell 2015's eleven claims, including [420] 'reads like the retelling of a tale first told centuries', the exact sentence F11 marks relay at [97]; sec.4 puts [422, 423] under F7, [421] under F21, [426] under F20"
+  },
+  {
+   "index": 424,
+   "feature": "6, 7, 11, 20, 21",
+   "why": "critic sec.1: Mitchell 2015's eleven claims, including [420] 'reads like the retelling of a tale first told centuries', the exact sentence F11 marks relay at [97]; sec.4 puts [422, 423] under F7, [421] under F21, [426] under F20"
+  },
+  {
+   "index": 425,
+   "feature": "6, 11",
+   "why": "critic sec.1: Mitchell 2015 is 'eleven claims' [417] to [427], fetched by close-2 and never graded"
+  },
+  {
+   "index": 426,
+   "feature": "20",
+   "why": "sec.4 table: Jameson, Theall, Huntington and Mitchell, F20's unverified second sources on economy"
+  },
+  {
+   "index": 427,
+   "feature": "6, 11",
+   "why": "critic sec.1: Mitchell 2015 is 'eleven claims' [417] to [427], fetched by close-2 and never graded"
+  },
+  {
+   "index": 428,
+   "feature": "6",
+   "why": "critic sec.1: Atwood NYRB 2002, fetched by close-2 and never graded"
+  },
+  {
+   "index": 429,
+   "feature": "1, 4",
+   "why": "critic sec.4: Atwood is 'the one outside voice' F4 rests on; this row sits in the record-register set"
+  },
+  {
+   "index": 430,
+   "feature": "6",
+   "why": "critic sec.1: Atwood NYRB 2002, fetched by close-2 and never graded"
+  },
+  {
+   "index": 433,
+   "feature": "17",
+   "why": "critic sec.2: the Kirkus primary claims behind [32], the Wikipedia relay feature 17 cites"
+  },
+  {
+   "index": 435,
+   "feature": "17",
+   "why": "critic sec.2: the Kirkus primary claims behind [32], the Wikipedia relay feature 17 cites"
+  },
+  {
+   "index": 437,
+   "feature": "6",
+   "why": "critic sec.1: the Library of America tribute page - Zadie Smith [437] and Bloom [438, 439] - fetched but never graded, so [23, 25] stay relays"
+  },
+  {
+   "index": 438,
+   "feature": "6",
+   "why": "critic sec.1: the Library of America tribute page - Zadie Smith [437] and Bloom [438, 439] - fetched but never graded, so [23, 25] stay relays"
+  },
+  {
+   "index": 439,
+   "feature": "6",
+   "why": "critic sec.1: the Library of America tribute page - Zadie Smith [437] and Bloom [438, 439] - fetched but never graded, so [23, 25] stay relays"
+  },
+  {
+   "index": 440,
+   "feature": "6",
+   "why": "critic sec.1: Craig 2003 WAS reached by close-2; the Coverage paragraph still says it was not, and [21, 42] stay PARTIAL relays for want of these"
+  },
+  {
+   "index": 441,
+   "feature": "6",
+   "why": "critic sec.1: Craig 2003 WAS reached by close-2; the Coverage paragraph still says it was not, and [21, 42] stay PARTIAL relays for want of these"
+  },
+  {
+   "index": 442,
+   "feature": "6, 23",
+   "why": "critic sec.1: Walton's Tehanu and Tombs essays, fetched and never graded, so [31, 34] stay relays; sec.4 makes [445] F23's second source"
+  },
+  {
+   "index": 445,
+   "feature": "6, 23",
+   "why": "critic sec.1: Walton's Tehanu and Tombs essays, fetched and never graded, so [31, 34] stay relays; sec.4 makes [445] F23's second source"
+  },
+  {
+   "index": 446,
+   "feature": "6, 23",
+   "why": "critic sec.1: Walton's Tehanu and Tombs essays, fetched and never graded, so [31, 34] stay relays; sec.4 makes [445] F23's second source"
+  },
+  {
+   "index": 448,
+   "feature": "6, 23",
+   "why": "critic sec.1: Walton's Tehanu and Tombs essays, fetched and never graded, so [31, 34] stay relays; sec.4 makes [445] F23's second source"
+  },
+  {
+   "index": 449,
+   "feature": "6, 23",
+   "why": "critic sec.1: Phillips 2016, fetched and never graded; sec.4 lists [449, 450] among the single-source second sources"
+  },
+  {
+   "index": 450,
+   "feature": "6, 23",
+   "why": "critic sec.1: Phillips 2016, fetched and never graded; sec.4 lists [449, 450] among the single-source second sources"
+  },
+  {
+   "index": 455,
+   "feature": "23",
+   "why": "sec.4 table: Erlich [455] and Guynes [467] are F23's unverified second sources against Ramsay alone"
+  },
+  {
+   "index": 456,
+   "feature": "21",
+   "why": "sec.4 table: F21's 'land first, no name till late' rests on Merrill, Goss and Eichner each alone; these are the second sources"
+  },
+  {
+   "index": 457,
+   "feature": "6, 21, 23",
+   "why": "critic sec.1: Dirda 1990, fetched and never graded, so [33] stays a relay; sec.4 makes [462] F21's second source (the first sentence, Gont, a single mountain) and [459] F23's"
+  },
+  {
+   "index": 458,
+   "feature": "6, 21, 23",
+   "why": "critic sec.1: Dirda 1990, fetched and never graded, so [33] stays a relay; sec.4 makes [462] F21's second source (the first sentence, Gont, a single mountain) and [459] F23's"
+  },
+  {
+   "index": 459,
+   "feature": "6, 21, 23",
+   "why": "critic sec.1: Dirda 1990, fetched and never graded, so [33] stays a relay; sec.4 makes [462] F21's second source (the first sentence, Gont, a single mountain) and [459] F23's"
+  },
+  {
+   "index": 461,
+   "feature": "6, 21, 23",
+   "why": "critic sec.1: Dirda 1990, fetched and never graded, so [33] stays a relay; sec.4 makes [462] F21's second source (the first sentence, Gont, a single mountain) and [459] F23's"
+  },
+  {
+   "index": 462,
+   "feature": "21",
+   "why": "sec.4 table: F21's 'land first, no name till late' rests on Merrill, Goss and Eichner each alone; these are the second sources"
+  },
+  {
+   "index": 463,
+   "feature": "6",
+   "why": "critic sec.1: the NYT obituary 'a lean but lyrical style', fetched but never graded, so [24] stays a relay"
+  },
+  {
+   "index": 464,
+   "feature": "6",
+   "why": "critic sec.1: the NYT obituary 'a lean but lyrical style', fetched but never graded, so [24] stays a relay"
+  },
+  {
+   "index": 465,
+   "feature": "6",
+   "why": "critic sec.1: the NYT obituary 'a lean but lyrical style', fetched but never graded, so [24] stays a relay"
+  },
+  {
+   "index": 467,
+   "feature": "23",
+   "why": "sec.4 table: Erlich [455] and Guynes [467] are F23's unverified second sources against Ramsay alone"
+  },
+  {
+   "index": 473,
+   "feature": "11, 23",
+   "why": "sec.4: Kelso is F23's second source on the sharpening of scale; sec.3 reads the same drift for F11"
+  },
+  {
+   "index": 474,
+   "feature": "11, 23",
+   "why": "sec.4: Kelso is F23's second source on the sharpening of scale; sec.3 reads the same drift for F11"
+  },
+  {
+   "index": 480,
+   "feature": "1",
+   "why": "critic sec.3: Le Guin's records date by numbered years, which refutes F1's limb that the record 'dates itself against the record... and not against a calendar figure'"
+  },
+  {
+   "index": 481,
+   "feature": "1, 4",
+   "why": "sec.4 table: the Seggri frame sentences are F1's unverified second source per form; 481, 482 also stand under F4 'facts exact, gaps declared'"
+  },
+  {
+   "index": 482,
+   "feature": "1, 4",
+   "why": "sec.4 table: the Seggri frame sentences are F1's unverified second source per form; 481, 482 also stand under F4 'facts exact, gaps declared'"
+  },
+  {
+   "index": 483,
+   "feature": "1, 4",
+   "why": "sec.4 table: the Seggri frame sentences are F1's unverified second source per form; 481, 482 also stand under F4 'facts exact, gaps declared'"
+  },
+  {
+   "index": 484,
+   "feature": "1, 4",
+   "why": "sec.4 table: the Seggri frame sentences are F1's unverified second source per form; 481, 482 also stand under F4 'facts exact, gaps declared'"
+  },
+  {
+   "index": 486,
+   "feature": "1, 4",
+   "why": "sec.4 table: the Seggri frame sentences are F1's unverified second source per form; 481, 482 also stand under F4 'facts exact, gaps declared'"
+  },
+  {
+   "index": 488,
+   "feature": "1, 4",
+   "why": "sec.4 table: the Seggri frame sentences are F1's unverified second source per form; 481, 482 also stand under F4 'facts exact, gaps declared'"
+  },
+  {
+   "index": 489,
+   "feature": "1, 4",
+   "why": "sec.4 table: the Seggri frame sentences are F1's unverified second source per form; 481, 482 also stand under F4 'facts exact, gaps declared'"
+  },
+  {
+   "index": 490,
+   "feature": "1, 4",
+   "why": "sec.4 table: the Seggri frame sentences are F1's unverified second source per form; 481, 482 also stand under F4 'facts exact, gaps declared'"
+  },
+  {
+   "index": 496,
+   "feature": "4",
+   "why": "critic sec.1: Le Guin's editorial note on the damaged Kesh manuscript - 'the best primary sentence in the whole state for feature 4's gaps declared'"
+  },
+  {
+   "index": 497,
+   "feature": "4",
+   "why": "critic sec.1: Le Guin's editorial note on the damaged Kesh manuscript - 'the best primary sentence in the whole state for feature 4's gaps declared'"
+  },
+  {
+   "index": 499,
+   "feature": "1, 2, 3, 4, 5",
+   "why": "critic sec.8 item 1(a), the record-register set: 'features 1 to 5 are written almost entirely at second hand while the record-register lane's own harvest of Le Guin's sentences sits unverified'"
+  },
+  {
+   "index": 500,
+   "feature": "1, 2, 3, 4, 5",
+   "why": "critic sec.8 item 1(a), the record-register set: 'features 1 to 5 are written almost entirely at second hand while the record-register lane's own harvest of Le Guin's sentences sits unverified'"
+  },
+  {
+   "index": 502,
+   "feature": "1, 2, 3, 4, 5",
+   "why": "critic sec.8 item 1(a), the record-register set: 'features 1 to 5 are written almost entirely at second hand while the record-register lane's own harvest of Le Guin's sentences sits unverified'"
+  },
+  {
+   "index": 504,
+   "feature": "1, 2, 3, 4, 5",
+   "why": "critic sec.8 item 1(a), the record-register set: 'features 1 to 5 are written almost entirely at second hand while the record-register lane's own harvest of Le Guin's sentences sits unverified'"
+  },
+  {
+   "index": 505,
+   "feature": "1, 2, 3, 4, 5",
+   "why": "critic sec.8 item 1(a), the record-register set: 'features 1 to 5 are written almost entirely at second hand while the record-register lane's own harvest of Le Guin's sentences sits unverified'"
+  },
+  {
+   "index": 506,
+   "feature": "13",
+   "why": "sec.4 table: F13 has '12 sources, but the primaries are relays' - her own Paris Review, the BVC sessions, 'Response' SFS 1975, Reciprocity, Naimon and Cummins are all SKIPPED"
+  },
+  {
+   "index": 507,
+   "feature": "7, 11",
+   "why": "critic sec.3: her own Paris Review account that the formal cadence belonged to her early manner and that she left it; sec.4 puts [514] 'an attempt to be styleless' under F7"
+  },
+  {
+   "index": 508,
+   "feature": "7, 11",
+   "why": "critic sec.3: her own Paris Review account that the formal cadence belonged to her early manner and that she left it; sec.4 puts [514] 'an attempt to be styleless' under F7"
+  },
+  {
+   "index": 509,
+   "feature": "7, 11",
+   "why": "critic sec.3: her own Paris Review account that the formal cadence belonged to her early manner and that she left it; sec.4 puts [514] 'an attempt to be styleless' under F7"
+  },
+  {
+   "index": 510,
+   "feature": "7, 11",
+   "why": "critic sec.3: her own Paris Review account that the formal cadence belonged to her early manner and that she left it; sec.4 puts [514] 'an attempt to be styleless' under F7"
+  },
+  {
+   "index": 511,
+   "feature": "7, 11",
+   "why": "critic sec.3: her own Paris Review account that the formal cadence belonged to her early manner and that she left it; sec.4 puts [514] 'an attempt to be styleless' under F7"
+  },
+  {
+   "index": 512,
+   "feature": "7, 11",
+   "why": "critic sec.3: her own Paris Review account that the formal cadence belonged to her early manner and that she left it; sec.4 puts [514] 'an attempt to be styleless' under F7"
+  },
+  {
+   "index": 514,
+   "feature": "7, 11",
+   "why": "critic sec.3: her own Paris Review account that the formal cadence belonged to her early manner and that she left it; sec.4 puts [514] 'an attempt to be styleless' under F7"
+  },
+  {
+   "index": 515,
+   "feature": "13, 20",
+   "why": "sec.4: F13's primaries are relays (the Paris Review, the BVC sessions, Naimon); these rows are her own words on story and place, unverified"
+  },
+  {
+   "index": 525,
+   "feature": "13, 20",
+   "why": "sec.4: F13's primaries are relays (the Paris Review, the BVC sessions, Naimon); these rows are her own words on story and place, unverified"
+  },
+  {
+   "index": 535,
+   "feature": "13, 20",
+   "why": "sec.4: F13's primaries are relays (the Paris Review, the BVC sessions, Naimon); these rows are her own words on story and place, unverified"
+  },
+  {
+   "index": 541,
+   "feature": "21",
+   "why": "sec.4 table: F21's 'land first, no name till late' rests on Merrill, Goss and Eichner each alone; these are the second sources"
+  },
+  {
+   "index": 543,
+   "feature": "21",
+   "why": "sec.4 table: F21's 'land first, no name till late' rests on Merrill, Goss and Eichner each alone; these are the second sources"
+  },
+  {
+   "index": 546,
+   "feature": "21",
+   "why": "sec.4 table: F21's 'land first, no name till late' rests on Merrill, Goss and Eichner each alone; these are the second sources"
+  },
+  {
+   "index": 555,
+   "feature": "11",
+   "why": "critic sec.3: Erlich 'Her style has gotten more colloquial, lower-flown' - the late-style drift F11 does not admit"
+  },
+  {
+   "index": 556,
+   "feature": "13",
+   "why": "sec.4 table: F13 has '12 sources, but the primaries are relays' - her own Paris Review, the BVC sessions, 'Response' SFS 1975, Reciprocity, Naimon and Cummins are all SKIPPED"
+  },
+  {
+   "index": 558,
+   "feature": "dissent (11, 23, 6)",
+   "why": "critic sec.8 item 1(c): the dissent and period-scoping rows, unverified"
+  },
+  {
+   "index": 568,
+   "feature": "17",
+   "why": "sec.4 table: F17's rationed modifiers rest on Steering the Craft via Kroeker; the Bianchi relay, Marino and Bucknall are the second sources"
+  },
+  {
+   "index": 569,
+   "feature": "17",
+   "why": "sec.4 table: F17's rationed modifiers rest on Steering the Craft via Kroeker; the Bianchi relay, Marino and Bucknall are the second sources"
+  },
+  {
+   "index": 570,
+   "feature": "17",
+   "why": "sec.4 table: F17's rationed modifiers rest on Steering the Craft via Kroeker; the Bianchi relay, Marino and Bucknall are the second sources"
+  },
+  {
+   "index": 571,
+   "feature": "17",
+   "why": "sec.4 table: F17's rationed modifiers rest on Steering the Craft via Kroeker; the Bianchi relay, Marino and Bucknall are the second sources"
+  },
+  {
+   "index": 572,
+   "feature": "7",
+   "why": "sec.4 table: Swanwick, an unverified second source for F7's journalism trap, which rests on Le Guin alone"
+  },
+  {
+   "index": 588,
+   "feature": "11",
+   "why": "critic sec.3: Amenta finds the Polish translation keeps the high solemn tone of only 'some' of her sentences"
+  },
+  {
+   "index": 590,
+   "feature": "6, 15, 16, 17",
+   "why": "sec.4: Marino is F16's second source on Germanic roots and [596] F17's on rationed modifiers; critic sec.3 uses [595] to strike 'short' from F6's rule"
+  },
+  {
+   "index": 591,
+   "feature": "6, 15, 16, 17",
+   "why": "sec.4: Marino is F16's second source on Germanic roots and [596] F17's on rationed modifiers; critic sec.3 uses [595] to strike 'short' from F6's rule"
+  },
+  {
+   "index": 592,
+   "feature": "6, 15, 16, 17",
+   "why": "sec.4: Marino is F16's second source on Germanic roots and [596] F17's on rationed modifiers; critic sec.3 uses [595] to strike 'short' from F6's rule"
+  },
+  {
+   "index": 593,
+   "feature": "6, 15, 16, 17",
+   "why": "sec.4: Marino is F16's second source on Germanic roots and [596] F17's on rationed modifiers; critic sec.3 uses [595] to strike 'short' from F6's rule"
+  },
+  {
+   "index": 594,
+   "feature": "6, 15, 16, 17",
+   "why": "sec.4: Marino is F16's second source on Germanic roots and [596] F17's on rationed modifiers; critic sec.3 uses [595] to strike 'short' from F6's rule"
+  },
+  {
+   "index": 595,
+   "feature": "6, 15, 16, 17",
+   "why": "sec.4: Marino is F16's second source on Germanic roots and [596] F17's on rationed modifiers; critic sec.3 uses [595] to strike 'short' from F6's rule"
+  },
+  {
+   "index": 596,
+   "feature": "17",
+   "why": "sec.4 table: F17's rationed modifiers rest on Steering the Craft via Kroeker; the Bianchi relay, Marino and Bucknall are the second sources"
+  },
+  {
+   "index": 597,
+   "feature": "6, 15, 16, 17",
+   "why": "sec.4: Marino is F16's second source on Germanic roots and [596] F17's on rationed modifiers; critic sec.3 uses [595] to strike 'short' from F6's rule"
+  },
+  {
+   "index": 617,
+   "feature": "16",
+   "why": "sec.4 table: Kunzru 'never tainted by inkhorn medievalism', a second source for F16's Brogan-alone Germanic-diction limb"
+  },
+  {
+   "index": 631,
+   "feature": "3, 21, 23",
+   "why": "sec.4 table: named among the unverified second sources for the single-source limbs (Slusser 1976 [647], Vest, Bucknall)"
+  },
+  {
+   "index": 632,
+   "feature": "3, 21, 23",
+   "why": "sec.4 table: named among the unverified second sources for the single-source limbs (Slusser 1976 [647], Vest, Bucknall)"
+  },
+  {
+   "index": 634,
+   "feature": "13",
+   "why": "sec.4 table: F13 has '12 sources, but the primaries are relays' - her own Paris Review, the BVC sessions, 'Response' SFS 1975, Reciprocity, Naimon and Cummins are all SKIPPED"
+  },
+  {
+   "index": 635,
+   "feature": "3, 5",
+   "why": "sec.4: Cummins [637] is F3's second source and [635] 'it lacks the objective tone of most anthropological writing' is the unmarked dissent F5's reconciliation must meet"
+  },
+  {
+   "index": 636,
+   "feature": "3, 5",
+   "why": "sec.4: Cummins [637] is F3's second source and [635] 'it lacks the objective tone of most anthropological writing' is the unmarked dissent F5's reconciliation must meet"
+  },
+  {
+   "index": 637,
+   "feature": "3, 5",
+   "why": "sec.4: Cummins [637] is F3's second source and [635] 'it lacks the objective tone of most anthropological writing' is the unmarked dissent F5's reconciliation must meet"
+  },
+  {
+   "index": 638,
+   "feature": "3, 5",
+   "why": "sec.4: Cummins [637] is F3's second source and [635] 'it lacks the objective tone of most anthropological writing' is the unmarked dissent F5's reconciliation must meet"
+  },
+  {
+   "index": 642,
+   "feature": "1",
+   "why": "critic sec.1: Bittner on documents 'to create an air of factuality', part of the record-register harvest under F1"
+  },
+  {
+   "index": 643,
+   "feature": "1",
+   "why": "critic sec.1: Bittner on documents 'to create an air of factuality', part of the record-register harvest under F1"
+  },
+  {
+   "index": 644,
+   "feature": "1",
+   "why": "critic sec.1: Bittner on documents 'to create an air of factuality', part of the record-register harvest under F1"
+  },
+  {
+   "index": 645,
+   "feature": "1",
+   "why": "critic sec.1: Bittner on documents 'to create an air of factuality', part of the record-register harvest under F1"
+  },
+  {
+   "index": 647,
+   "feature": "3, 21, 23",
+   "why": "sec.4 table: named among the unverified second sources for the single-source limbs (Slusser 1976 [647], Vest, Bucknall)"
+  },
+  {
+   "index": 648,
+   "feature": "3",
+   "why": "sec.4 table: Slusser 1976 is one of F3's unverified second sources for polyphony in one frame"
+  },
+  {
+   "index": 649,
+   "feature": "dissent (11, 23, 6)",
+   "why": "critic sec.8 item 1(c): the dissent and period-scoping rows, unverified"
+  },
+  {
+   "index": 652,
+   "feature": "28",
+   "why": "sec.4 table: Bloom [652] 'wryly cataloging a weird matter' is the second source for F28's humour, flagged 'four singles'"
+  },
+  {
+   "index": 653,
+   "feature": "28",
+   "why": "sec.4 table: Bloom [652] 'wryly cataloging a weird matter' is the second source for F28's humour, flagged 'four singles'"
+  },
+  {
+   "index": 655,
+   "feature": "6",
+   "why": "critic sec.2: the relay cure for [27] Bloom 1987, one of the sixteen relay PARTIALs curable from the state"
+  },
+  {
+   "index": 656,
+   "feature": "1, 3, 19",
+   "why": "critic sec.3: Cadden [656] is the measured counter-evidence to F19's 'never inside a head'; [658-662] are his three sentences on 'A Description of Earthsea' for F1/F3"
+  },
+  {
+   "index": 658,
+   "feature": "1, 3, 19",
+   "why": "critic sec.3: Cadden [656] is the measured counter-evidence to F19's 'never inside a head'; [658-662] are his three sentences on 'A Description of Earthsea' for F1/F3"
+  },
+  {
+   "index": 659,
+   "feature": "1, 3, 19",
+   "why": "critic sec.3: Cadden [656] is the measured counter-evidence to F19's 'never inside a head'; [658-662] are his three sentences on 'A Description of Earthsea' for F1/F3"
+  },
+  {
+   "index": 660,
+   "feature": "1, 3, 19",
+   "why": "critic sec.3: Cadden [656] is the measured counter-evidence to F19's 'never inside a head'; [658-662] are his three sentences on 'A Description of Earthsea' for F1/F3"
+  },
+  {
+   "index": 661,
+   "feature": "1, 3, 19",
+   "why": "critic sec.3: Cadden [656] is the measured counter-evidence to F19's 'never inside a head'; [658-662] are his three sentences on 'A Description of Earthsea' for F1/F3"
+  },
+  {
+   "index": 662,
+   "feature": "1, 3, 19",
+   "why": "critic sec.3: Cadden [656] is the measured counter-evidence to F19's 'never inside a head'; [658-662] are his three sentences on 'A Description of Earthsea' for F1/F3"
+  },
+  {
+   "index": 668,
+   "feature": "20",
+   "why": "sec.4 table: Olander 'each keystone... joined by red cement', F20's technology-limb second source"
+  },
+  {
+   "index": 670,
+   "feature": "16",
+   "why": "sec.4 table: Spivack 'largely Anglo-Saxon in diction' / 'austerely avoiding the Latinate' and Robinson, F16's unverified second sources"
+  },
+  {
+   "index": 671,
+   "feature": "26",
+   "why": "sec.4 table: Spivack 'The alliteration is pervasive', Pfeiffer and Dirda's teacher's guide against F26's NEA-alone alliteration"
+  },
+  {
+   "index": 672,
+   "feature": "3, 21, 23",
+   "why": "sec.4 table: named among the unverified second sources for the single-source limbs (Slusser 1976 [647], Vest, Bucknall)"
+  },
+  {
+   "index": 673,
+   "feature": "16",
+   "why": "sec.4 table: Spivack 'largely Anglo-Saxon in diction' / 'austerely avoiding the Latinate' and Robinson, F16's unverified second sources"
+  },
+  {
+   "index": 674,
+   "feature": "16",
+   "why": "sec.4 table: Spivack 'largely Anglo-Saxon in diction' / 'austerely avoiding the Latinate' and Robinson, F16's unverified second sources"
+  },
+  {
+   "index": 676,
+   "feature": "dissent (11, 23, 6)",
+   "why": "critic sec.8 item 1(c): the dissent and period-scoping rows, unverified"
+  },
+  {
+   "index": 677,
+   "feature": "dissent (11, 23, 6)",
+   "why": "critic sec.8 item 1(c): the dissent and period-scoping rows, unverified"
+  },
+  {
+   "index": 678,
+   "feature": "17",
+   "why": "sec.4 table: F17's rationed modifiers rest on Steering the Craft via Kroeker; the Bianchi relay, Marino and Bucknall are the second sources"
+  },
+  {
+   "index": 679,
+   "feature": "11",
+   "why": "critic sec.3: Bucknall 'denies her the stately tone outright', against F11's binding of the chronicle line to the 1968 register"
+  },
+  {
+   "index": 683,
+   "feature": "16",
+   "why": "'From Elfland to Poughkeepsie' at the primary; critic sec.3 notes F12's sentence-initial 'And' limb rests on PARTIAL rows only and Elfland p.5 does say it"
+  },
+  {
+   "index": 684,
+   "feature": "16",
+   "why": "'From Elfland to Poughkeepsie' at the primary; critic sec.3 notes F12's sentence-initial 'And' limb rests on PARTIAL rows only and Elfland p.5 does say it"
+  },
+  {
+   "index": 686,
+   "feature": "dissent (11, 23, 6)",
+   "why": "critic sec.8 item 1(c): the dissent and period-scoping rows, unverified"
+  },
+  {
+   "index": 687,
+   "feature": "26",
+   "why": "sec.4 table: Spivack 'The alliteration is pervasive', Pfeiffer and Dirda's teacher's guide against F26's NEA-alone alliteration"
+  },
+  {
+   "index": 691,
+   "feature": "26",
+   "why": "sec.4 table: Spivack 'The alliteration is pervasive', Pfeiffer and Dirda's teacher's guide against F26's NEA-alone alliteration"
+  },
+  {
+   "index": 696,
+   "feature": "dissent (11, 23, 6)",
+   "why": "critic sec.8 item 1(c): the dissent and period-scoping rows, unverified"
+  },
+  {
+   "index": 697,
+   "feature": "dissent (11, 23, 6)",
+   "why": "critic sec.8 item 1(c): the dissent and period-scoping rows, unverified"
+  },
+  {
+   "index": 712,
+   "feature": "1, 3, 5",
+   "why": "sec.4: the Left Hand ansible header and its close reading; [716] 'three distinct voices' is F3's second source, [721] a present-tense record sentence for F5"
+  },
+  {
+   "index": 713,
+   "feature": "1, 3, 5",
+   "why": "sec.4: the Left Hand ansible header and its close reading; [716] 'three distinct voices' is F3's second source, [721] a present-tense record sentence for F5"
+  },
+  {
+   "index": 714,
+   "feature": "1, 3, 5",
+   "why": "sec.4: the Left Hand ansible header and its close reading; [716] 'three distinct voices' is F3's second source, [721] a present-tense record sentence for F5"
+  },
+  {
+   "index": 715,
+   "feature": "1, 3, 5",
+   "why": "sec.4: the Left Hand ansible header and its close reading; [716] 'three distinct voices' is F3's second source, [721] a present-tense record sentence for F5"
+  },
+  {
+   "index": 716,
+   "feature": "1, 3, 5",
+   "why": "sec.4: the Left Hand ansible header and its close reading; [716] 'three distinct voices' is F3's second source, [721] a present-tense record sentence for F5"
+  },
+  {
+   "index": 717,
+   "feature": "1, 3, 5",
+   "why": "sec.4: the Left Hand ansible header and its close reading; [716] 'three distinct voices' is F3's second source, [721] a present-tense record sentence for F5"
+  },
+  {
+   "index": 718,
+   "feature": "1, 3, 5",
+   "why": "sec.4: the Left Hand ansible header and its close reading; [716] 'three distinct voices' is F3's second source, [721] a present-tense record sentence for F5"
+  },
+  {
+   "index": 719,
+   "feature": "1, 3, 5",
+   "why": "sec.4: the Left Hand ansible header and its close reading; [716] 'three distinct voices' is F3's second source, [721] a present-tense record sentence for F5"
+  },
+  {
+   "index": 720,
+   "feature": "1, 3, 5",
+   "why": "sec.4: the Left Hand ansible header and its close reading; [716] 'three distinct voices' is F3's second source, [721] a present-tense record sentence for F5"
+  },
+  {
+   "index": 721,
+   "feature": "1, 3, 5",
+   "why": "sec.4: the Left Hand ansible header and its close reading; [716] 'three distinct voices' is F3's second source, [721] a present-tense record sentence for F5"
+  },
+  {
+   "index": 722,
+   "feature": "5",
+   "why": "critic sec.3: Saleem reads the Kesh notes' permissive 'may' as the opposite of a distancing report - an unmarked dissent to F5"
+  },
+  {
+   "index": 723,
+   "feature": "5",
+   "why": "critic sec.3: Saleem reads the Kesh notes' permissive 'may' as the opposite of a distancing report - an unmarked dissent to F5"
+  },
+  {
+   "index": 724,
+   "feature": "1, 2, 3, 4, 5",
+   "why": "critic sec.8 item 1(a), the record-register set: 'features 1 to 5 are written almost entirely at second hand while the record-register lane's own harvest of Le Guin's sentences sits unverified'"
+  },
+  {
+   "index": 726,
+   "feature": "1, 2, 3, 4, 5",
+   "why": "critic sec.8 item 1(a), the record-register set: 'features 1 to 5 are written almost entirely at second hand while the record-register lane's own harvest of Le Guin's sentences sits unverified'"
+  },
+  {
+   "index": 727,
+   "feature": "1, 2, 3, 4, 5",
+   "why": "critic sec.8 item 1(a), the record-register set: 'features 1 to 5 are written almost entirely at second hand while the record-register lane's own harvest of Le Guin's sentences sits unverified'"
+  },
+  {
+   "index": 729,
+   "feature": "1, 20",
+   "why": "sec.4: the Kesh provenance lines and grammar rule; [731] and [749] are the second sources for F20's civic-lack limb, flagged Tearle-alone"
+  },
+  {
+   "index": 730,
+   "feature": "1, 20",
+   "why": "sec.4: the Kesh provenance lines and grammar rule; [731] and [749] are the second sources for F20's civic-lack limb, flagged Tearle-alone"
+  },
+  {
+   "index": 731,
+   "feature": "1, 20",
+   "why": "sec.4: the Kesh provenance lines and grammar rule; [731] and [749] are the second sources for F20's civic-lack limb, flagged Tearle-alone"
+  },
+  {
+   "index": 732,
+   "feature": "1, 20",
+   "why": "sec.4: the Kesh provenance lines and grammar rule; [731] and [749] are the second sources for F20's civic-lack limb, flagged Tearle-alone"
+  },
+  {
+   "index": 733,
+   "feature": "1, 20",
+   "why": "sec.4: the Kesh provenance lines and grammar rule; [731] and [749] are the second sources for F20's civic-lack limb, flagged Tearle-alone"
+  },
+  {
+   "index": 734,
+   "feature": "1, 20",
+   "why": "sec.4: the Kesh provenance lines and grammar rule; [731] and [749] are the second sources for F20's civic-lack limb, flagged Tearle-alone"
+  },
+  {
+   "index": 739,
+   "feature": "1",
+   "why": "sec.4: the field-note parentheses, an unverified second source for F1's apparatus"
+  },
+  {
+   "index": 740,
+   "feature": "1",
+   "why": "sec.4: the field-note parentheses, an unverified second source for F1's apparatus"
+  },
+  {
+   "index": 741,
+   "feature": "1",
+   "why": "sec.4: the field-note parentheses, an unverified second source for F1's apparatus"
+  },
+  {
+   "index": 743,
+   "feature": "1",
+   "why": "sec.4: the field-note parentheses, an unverified second source for F1's apparatus"
+  },
+  {
+   "index": 744,
+   "feature": "1",
+   "why": "sec.4: the field-note parentheses, an unverified second source for F1's apparatus"
+  },
+  {
+   "index": 745,
+   "feature": "1, 20",
+   "why": "sec.4: the Kesh provenance lines and grammar rule; [731] and [749] are the second sources for F20's civic-lack limb, flagged Tearle-alone"
+  },
+  {
+   "index": 746,
+   "feature": "1, 20",
+   "why": "sec.4: the Kesh provenance lines and grammar rule; [731] and [749] are the second sources for F20's civic-lack limb, flagged Tearle-alone"
+  },
+  {
+   "index": 747,
+   "feature": "1, 20",
+   "why": "sec.4: the Kesh provenance lines and grammar rule; [731] and [749] are the second sources for F20's civic-lack limb, flagged Tearle-alone"
+  },
+  {
+   "index": 748,
+   "feature": "1, 20",
+   "why": "sec.4: the Kesh provenance lines and grammar rule; [731] and [749] are the second sources for F20's civic-lack limb, flagged Tearle-alone"
+  },
+  {
+   "index": 749,
+   "feature": "1, 20",
+   "why": "sec.4: the Kesh provenance lines and grammar rule; [731] and [749] are the second sources for F20's civic-lack limb, flagged Tearle-alone"
+  },
+  {
+   "index": 753,
+   "feature": "1, 5, 20",
+   "why": "sec.4: the planet-O address chain and headnote; [766, 769, 770] are present-tense record sentences for F5, [768] a second source for F20's civic-lack limb"
+  },
+  {
+   "index": 754,
+   "feature": "1, 5, 20",
+   "why": "sec.4: the planet-O address chain and headnote; [766, 769, 770] are present-tense record sentences for F5, [768] a second source for F20's civic-lack limb"
+  },
+  {
+   "index": 755,
+   "feature": "1, 5, 20",
+   "why": "sec.4: the planet-O address chain and headnote; [766, 769, 770] are present-tense record sentences for F5, [768] a second source for F20's civic-lack limb"
+  },
+  {
+   "index": 757,
+   "feature": "1, 5, 20",
+   "why": "sec.4: the planet-O address chain and headnote; [766, 769, 770] are present-tense record sentences for F5, [768] a second source for F20's civic-lack limb"
+  },
+  {
+   "index": 758,
+   "feature": "1, 5, 20",
+   "why": "sec.4: the planet-O address chain and headnote; [766, 769, 770] are present-tense record sentences for F5, [768] a second source for F20's civic-lack limb"
+  },
+  {
+   "index": 760,
+   "feature": "1, 5, 20",
+   "why": "sec.4: the planet-O address chain and headnote; [766, 769, 770] are present-tense record sentences for F5, [768] a second source for F20's civic-lack limb"
+  },
+  {
+   "index": 761,
+   "feature": "1, 5, 20",
+   "why": "sec.4: the planet-O address chain and headnote; [766, 769, 770] are present-tense record sentences for F5, [768] a second source for F20's civic-lack limb"
+  },
+  {
+   "index": 762,
+   "feature": "1, 5, 20",
+   "why": "sec.4: the planet-O address chain and headnote; [766, 769, 770] are present-tense record sentences for F5, [768] a second source for F20's civic-lack limb"
+  },
+  {
+   "index": 764,
+   "feature": "1, 5, 20",
+   "why": "sec.4: the planet-O address chain and headnote; [766, 769, 770] are present-tense record sentences for F5, [768] a second source for F20's civic-lack limb"
+  },
+  {
+   "index": 766,
+   "feature": "1, 5, 20",
+   "why": "sec.4: the planet-O address chain and headnote; [766, 769, 770] are present-tense record sentences for F5, [768] a second source for F20's civic-lack limb"
+  },
+  {
+   "index": 768,
+   "feature": "1, 5, 20",
+   "why": "sec.4: the planet-O address chain and headnote; [766, 769, 770] are present-tense record sentences for F5, [768] a second source for F20's civic-lack limb"
+  },
+  {
+   "index": 769,
+   "feature": "1, 5, 20",
+   "why": "sec.4: the planet-O address chain and headnote; [766, 769, 770] are present-tense record sentences for F5, [768] a second source for F20's civic-lack limb"
+  },
+  {
+   "index": 770,
+   "feature": "1, 5, 20",
+   "why": "sec.4: the planet-O address chain and headnote; [766, 769, 770] are present-tense record sentences for F5, [768] a second source for F20's civic-lack limb"
+  },
+  {
+   "index": 771,
+   "feature": "1, 5, 20",
+   "why": "sec.4: the planet-O address chain and headnote; [766, 769, 770] are present-tense record sentences for F5, [768] a second source for F20's civic-lack limb"
+  },
+  {
+   "index": 772,
+   "feature": "1, 5, 20",
+   "why": "sec.4: the planet-O address chain and headnote; [766, 769, 770] are present-tense record sentences for F5, [768] a second source for F20's civic-lack limb"
+  },
+  {
+   "index": 773,
+   "feature": "1, 5, 20",
+   "why": "sec.4: the planet-O address chain and headnote; [766, 769, 770] are present-tense record sentences for F5, [768] a second source for F20's civic-lack limb"
+  },
+  {
+   "index": 775,
+   "feature": "1, 4",
+   "why": "sec.4: the Rocannon's World handbook lines; [779] 'grades its own evidence' for F4. Critic sec.3 also calls [776, 777, 786] verbless record syntax the section never describes"
+  },
+  {
+   "index": 776,
+   "feature": "1, 4",
+   "why": "sec.4: the Rocannon's World handbook lines; [779] 'grades its own evidence' for F4. Critic sec.3 also calls [776, 777, 786] verbless record syntax the section never describes"
+  },
+  {
+   "index": 777,
+   "feature": "1, 4",
+   "why": "sec.4: the Rocannon's World handbook lines; [779] 'grades its own evidence' for F4. Critic sec.3 also calls [776, 777, 786] verbless record syntax the section never describes"
+  },
+  {
+   "index": 779,
+   "feature": "1, 4",
+   "why": "sec.4: the Rocannon's World handbook lines; [779] 'grades its own evidence' for F4. Critic sec.3 also calls [776, 777, 786] verbless record syntax the section never describes"
+  },
+  {
+   "index": 780,
+   "feature": "1, 4",
+   "why": "sec.4: the Rocannon's World handbook lines; [779] 'grades its own evidence' for F4. Critic sec.3 also calls [776, 777, 786] verbless record syntax the section never describes"
+  },
+  {
+   "index": 782,
+   "feature": "1, 4",
+   "why": "sec.4: the Rocannon's World handbook lines; [779] 'grades its own evidence' for F4. Critic sec.3 also calls [776, 777, 786] verbless record syntax the section never describes"
+  },
+  {
+   "index": 785,
+   "feature": "1, 4",
+   "why": "sec.4: the Rocannon's World handbook lines; [779] 'grades its own evidence' for F4. Critic sec.3 also calls [776, 777, 786] verbless record syntax the section never describes"
+  },
+  {
+   "index": 786,
+   "feature": "1, 4",
+   "why": "sec.4: the Rocannon's World handbook lines; [779] 'grades its own evidence' for F4. Critic sec.3 also calls [776, 777, 786] verbless record syntax the section never describes"
+  },
+  {
+   "index": 787,
+   "feature": "1, 4",
+   "why": "sec.4: the Rocannon's World handbook lines; [779] 'grades its own evidence' for F4. Critic sec.3 also calls [776, 777, 786] verbless record syntax the section never describes"
+  },
+  {
+   "index": 789,
+   "feature": "1, 4",
+   "why": "sec.4: the Rocannon's World handbook lines; [779] 'grades its own evidence' for F4. Critic sec.3 also calls [776, 777, 786] verbless record syntax the section never describes"
+  },
+  {
+   "index": 791,
+   "feature": "1, 4",
+   "why": "sec.4: the Rocannon's World handbook lines; [779] 'grades its own evidence' for F4. Critic sec.3 also calls [776, 777, 786] verbless record syntax the section never describes"
+  },
+  {
+   "index": 795,
+   "feature": "16",
+   "why": "'From Elfland to Poughkeepsie' at the primary; critic sec.3 notes F12's sentence-initial 'And' limb rests on PARTIAL rows only and Elfland p.5 does say it"
+  },
+  {
+   "index": 834,
+   "feature": "13",
+   "why": "sec.4 table: F13 has '12 sources, but the primaries are relays' - her own Paris Review, the BVC sessions, 'Response' SFS 1975, Reciprocity, Naimon and Cummins are all SKIPPED"
+  },
+  {
+   "index": 835,
+   "feature": "13",
+   "why": "sec.4 table: F13 has '12 sources, but the primaries are relays' - her own Paris Review, the BVC sessions, 'Response' SFS 1975, Reciprocity, Naimon and Cummins are all SKIPPED"
+  },
+  {
+   "index": 836,
+   "feature": "13",
+   "why": "sec.4 table: F13 has '12 sources, but the primaries are relays' - her own Paris Review, the BVC sessions, 'Response' SFS 1975, Reciprocity, Naimon and Cummins are all SKIPPED"
+  },
+  {
+   "index": 837,
+   "feature": "13",
+   "why": "sec.4 table: F13 has '12 sources, but the primaries are relays' - her own Paris Review, the BVC sessions, 'Response' SFS 1975, Reciprocity, Naimon and Cummins are all SKIPPED"
+  },
+  {
+   "index": 838,
+   "feature": "13",
+   "why": "sec.4 table: F13 has '12 sources, but the primaries are relays' - her own Paris Review, the BVC sessions, 'Response' SFS 1975, Reciprocity, Naimon and Cummins are all SKIPPED"
+  },
+  {
+   "index": 845,
+   "feature": "20",
+   "why": "sec.4 table: Le Guin's own Horb demonstration - her two specimen sentences about an invented town - against F20's Ashkenazi-alone economy limb"
+  },
+  {
+   "index": 846,
+   "feature": "20",
+   "why": "sec.4 table: Le Guin's own Horb demonstration - her two specimen sentences about an invented town - against F20's Ashkenazi-alone economy limb"
+  },
+  {
+   "index": 847,
+   "feature": "20",
+   "why": "sec.4 table: Le Guin's own Horb demonstration - her two specimen sentences about an invented town - against F20's Ashkenazi-alone economy limb"
+  },
+  {
+   "index": 850,
+   "feature": "13, 20",
+   "why": "sec.4: F13's primaries are relays (the Paris Review, the BVC sessions, Naimon); these rows are her own words on story and place, unverified"
+  },
+  {
+   "index": 854,
+   "feature": "13, 20",
+   "why": "sec.4: F13's primaries are relays (the Paris Review, the BVC sessions, Naimon); these rows are her own words on story and place, unverified"
+  },
+  {
+   "index": 857,
+   "feature": "11",
+   "why": "critic sec.1: Locus 2001 'Fiction needs a certain roughness' / 'overpolished fiction... kind of a bore' - dissent in the skipped set"
+  },
+  {
+   "index": 858,
+   "feature": "11",
+   "why": "critic sec.1: Locus 2001 'Fiction needs a certain roughness' / 'overpolished fiction... kind of a bore' - dissent in the skipped set"
+  },
+  {
+   "index": 860,
+   "feature": "4",
+   "why": "sec.4 table: Locus 'I went into the archives', an unverified second source for F4, where Atwood is the one outside voice"
+  },
+  {
+   "index": 871,
+   "feature": "5",
+   "why": "sec.4 table: '[871] actually distances the story' and '[873] It locates itself in the past' are F5's unverified second sources on tense as distance"
+  },
+  {
+   "index": 873,
+   "feature": "5",
+   "why": "sec.4 table: '[871] actually distances the story' and '[873] It locates itself in the past' are F5's unverified second sources on tense as distance"
+  },
+  {
+   "index": 876,
+   "feature": "1",
+   "why": "critic sec.1: named among the record-register lane's own harvest (the Tolfink runes and the Dancing essays) that F1 to F5 lack; [881, 882] are also F20's technology/economy second source"
+  },
+  {
+   "index": 877,
+   "feature": "1",
+   "why": "critic sec.1: named among the record-register lane's own harvest (the Tolfink runes and the Dancing essays) that F1 to F5 lack; [881, 882] are also F20's technology/economy second source"
+  },
+  {
+   "index": 878,
+   "feature": "1",
+   "why": "critic sec.1: named among the record-register lane's own harvest (the Tolfink runes and the Dancing essays) that F1 to F5 lack; [881, 882] are also F20's technology/economy second source"
+  },
+  {
+   "index": 879,
+   "feature": "1",
+   "why": "critic sec.1: named among the record-register lane's own harvest (the Tolfink runes and the Dancing essays) that F1 to F5 lack; [881, 882] are also F20's technology/economy second source"
+  },
+  {
+   "index": 880,
+   "feature": "1",
+   "why": "critic sec.1: named among the record-register lane's own harvest (the Tolfink runes and the Dancing essays) that F1 to F5 lack; [881, 882] are also F20's technology/economy second source"
+  },
+  {
+   "index": 881,
+   "feature": "1",
+   "why": "critic sec.1: named among the record-register lane's own harvest (the Tolfink runes and the Dancing essays) that F1 to F5 lack; [881, 882] are also F20's technology/economy second source"
+  },
+  {
+   "index": 882,
+   "feature": "1",
+   "why": "critic sec.1: named among the record-register lane's own harvest (the Tolfink runes and the Dancing essays) that F1 to F5 lack; [881, 882] are also F20's technology/economy second source"
+  },
+  {
+   "index": 883,
+   "feature": "1",
+   "why": "critic sec.1: named among the record-register lane's own harvest (the Tolfink runes and the Dancing essays) that F1 to F5 lack; [881, 882] are also F20's technology/economy second source"
+  },
+  {
+   "index": 884,
+   "feature": "1",
+   "why": "critic sec.1: named among the record-register lane's own harvest (the Tolfink runes and the Dancing essays) that F1 to F5 lack; [881, 882] are also F20's technology/economy second source"
+  },
+  {
+   "index": 886,
+   "feature": "13",
+   "why": "sec.4 table: F13 has '12 sources, but the primaries are relays' - her own Paris Review, the BVC sessions, 'Response' SFS 1975, Reciprocity, Naimon and Cummins are all SKIPPED"
+  },
+  {
+   "index": 887,
+   "feature": "13",
+   "why": "sec.4 table: F13 has '12 sources, but the primaries are relays' - her own Paris Review, the BVC sessions, 'Response' SFS 1975, Reciprocity, Naimon and Cummins are all SKIPPED"
+  },
+  {
+   "index": 888,
+   "feature": "13",
+   "why": "sec.4 table: F13 has '12 sources, but the primaries are relays' - her own Paris Review, the BVC sessions, 'Response' SFS 1975, Reciprocity, Naimon and Cummins are all SKIPPED"
+  },
+  {
+   "index": 897,
+   "feature": "dissent (11, 23, 6)",
+   "why": "critic sec.8 item 1(c): the dissent and period-scoping rows, unverified"
+  },
+  {
+   "index": 900,
+   "feature": "13",
+   "why": "sec.4 table: F13 has '12 sources, but the primaries are relays' - her own Paris Review, the BVC sessions, 'Response' SFS 1975, Reciprocity, Naimon and Cummins are all SKIPPED"
+  },
+  {
+   "index": 901,
+   "feature": "13",
+   "why": "sec.4 table: F13 has '12 sources, but the primaries are relays' - her own Paris Review, the BVC sessions, 'Response' SFS 1975, Reciprocity, Naimon and Cummins are all SKIPPED"
+  },
+  {
+   "index": 902,
+   "feature": "13",
+   "why": "sec.4 table: F13 has '12 sources, but the primaries are relays' - her own Paris Review, the BVC sessions, 'Response' SFS 1975, Reciprocity, Naimon and Cummins are all SKIPPED"
+  },
+  {
+   "index": 903,
+   "feature": "13",
+   "why": "sec.4 table: F13 has '12 sources, but the primaries are relays' - her own Paris Review, the BVC sessions, 'Response' SFS 1975, Reciprocity, Naimon and Cummins are all SKIPPED"
+  },
+  {
+   "index": 904,
+   "feature": "13",
+   "why": "sec.4 table: F13 has '12 sources, but the primaries are relays' - her own Paris Review, the BVC sessions, 'Response' SFS 1975, Reciprocity, Naimon and Cummins are all SKIPPED"
+  },
+  {
+   "index": 905,
+   "feature": "3",
+   "why": "sec.4 table: Jameson and Maslen, unverified second sources for F3's polyphony in one frame"
+  },
+  {
+   "index": 906,
+   "feature": "1",
+   "why": "critic sec.1: Galt's annals 'kept and dated year by year', part of the record-register harvest sitting unverified under F1"
+  },
+  {
+   "index": 907,
+   "feature": "1",
+   "why": "critic sec.1: Galt's annals 'kept and dated year by year', part of the record-register harvest sitting unverified under F1"
+  },
+  {
+   "index": 909,
+   "feature": "1",
+   "why": "critic sec.1: Galt's annals 'kept and dated year by year', part of the record-register harvest sitting unverified under F1"
+  },
+  {
+   "index": 910,
+   "feature": "1",
+   "why": "critic sec.1: Galt's annals 'kept and dated year by year', part of the record-register harvest sitting unverified under F1"
+  },
+  {
+   "index": 911,
+   "feature": "1",
+   "why": "critic sec.1: Galt's annals 'kept and dated year by year', part of the record-register harvest sitting unverified under F1"
+  },
+  {
+   "index": 912,
+   "feature": "1",
+   "why": "critic sec.1: Galt's annals 'kept and dated year by year', part of the record-register harvest sitting unverified under F1"
+  },
+  {
+   "index": 915,
+   "feature": "1",
+   "why": "critic sec.1: Galt's annals 'kept and dated year by year', part of the record-register harvest sitting unverified under F1"
+  },
+  {
+   "index": 917,
+   "feature": "1",
+   "why": "critic sec.1: Galt's annals 'kept and dated year by year', part of the record-register harvest sitting unverified under F1"
+  },
+  {
+   "index": 918,
+   "feature": "1",
+   "why": "critic sec.1: Galt's annals 'kept and dated year by year', part of the record-register harvest sitting unverified under F1"
+  },
+  {
+   "index": 921,
+   "feature": "16",
+   "why": "sec.4 table: Spivack 'largely Anglo-Saxon in diction' / 'austerely avoiding the Latinate' and Robinson, F16's unverified second sources"
+  }
+ ],
+ "count": 243,
+ "notes": "Method: rows are the priority list the critic's section 8 item 1 ('verify-skipped (Opus verifier, no finder)') gives as (a) the record-register set, (b) the relay cures, (c) the dissent and period-scoping rows, (d) the second sources for the single-source limbs. Every index in those four lists was checked against state-leguin.json: all 220 named (216 distinct; 403, 462, 426 and 421 appear in two groups) are SKIPPED_TRIAGE, so nothing was dropped - rows the critic named that are not skipped: 418=VERIFIED_VERBATIM, 460=VERIFIED_VERBATIM. Feature attributions are the critic's own: the section-4 table ('Claims resting on one source - and the second source already in the state') keys most rows to a numbered feature; sections 1 and 3 key the relay cures to the Coverage paragraph and feature 6, and the dissent rows to features 5, 7, 11 and 23. Where the critic names only the group's purpose, the feature field carries the group's feature range (1-5 for the record-register set) rather than a guess. Ranges expanded in full: 480-484, 488-490, 712-724, 729-734, 739-741, 743-749, 753-755, 760-762, 768-773, 775-777, 785-787, 876-884, 909-912, 400-405, 635-638, 642-645, 658-662, 437-442, 457-459, 461-465, 507-512, 676-679, 590-597, 845-847. Group (e) of the critic's item 1 ('the rest, minus the ~45 rows that duplicate an already-kept quotation') is deliberately NOT enumerated here: the critic gives it no per-row feature tie and marks the duplicate blocks ([561-565], [680-682], [792-794], [606-611], [866-868], [698-701], [813, 814], [820, 821]) as 'duplicate quotation of #N' without a fetch. The full skipped set is 378 rows; this list is the 243 the critic ties to a feature. Beyond the four item-1 groups this list also takes every row the critic's section-4 table marks '- SKIPPED' as the unverified second source for a single-source limb but section 8 did not repeat: [568-571] (the Bianchi relay, F17), [572] (Swanwick, F7), [388, 905] (Jameson and Maslen, F3), [860] (Locus, F4) and F13's whole primary set [506, 556, 634, 834-838, 886-888, 900-904]. It also expands two ranges section 1 gives that section 8 abbreviates: Mitchell 2015 '[417] to [427], eleven claims' (adding 419, 425, 427; 418 is VERIFIED_VERBATIM) and Dirda 1990 '[457] to [462]' (460 is VERIFIED_VERBATIM). Two rows the critic flags but which are NOT SKIPPED_TRIAGE and so are absent: [32] (VERIFIED_VERBATIM, a Wikipedia relay the critic says should be PARTIAL) and [140] (VERIFIED_VERBATIM, fourteen words and unflagged). Both are regrade business (item 2), not verify-only business."
+}

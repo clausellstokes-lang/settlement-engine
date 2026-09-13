@@ -1,0 +1,31 @@
+RATE corpus · 768 towns · genThrows 0 · 12 s
+LICENSED census rows walked per town: 114
+towns with at least one interested fact: 0
+settlement-wide criminalCaptureState: none 495 · adversarial 194 · equilibrium 64 · corrupted 15
+standing facts ABSENT on every RATE town: captured (no faction states: worldPulse/factionCapture.js:136 reads factionStates) | controlled (no world state: worldPulse/brokeragePatronage.js:228 reads a worldState)
+tier        towns   (row,town) pairs   holder named   INTERESTED   interested bp
+thorp         128             14592             78            0               0
+hamlet        128             14592              5            0               0
+village       128             14592            640            0               0
+town          128             14592           6497            0               0
+city          128             14592           2741            0               0
+metropolis    128             14592           3284            0               0
+per KIND, towns whose roster names a holder / towns where that holder is INTERESTED:
+  treasury   held  151  interested    0
+  muster     held    0  interested    0
+  census     held    0  interested    0
+  parish     held  166  interested    0
+  toll-bar   held   81  interested    0
+  market     held  140  interested    0
+  watch      held  173  interested    0
+  court      held  339  interested    0
+  elders     held   13  interested    0
+  tradition  held    0  interested    0
+  road       held   53  interested    0
+  office     held    2  interested    0
+  thorp       kinds held: elders 10 · treasury 2
+  hamlet      kinds held: elders 1
+  village     kinds held: treasury 45 · elders 2
+  town        kinds held: market 128 · treasury 101 · court 83 · toll-bar 81 · parish 65 · road 23
+  city        kinds held: court 128 · watch 82 · road 15 · treasury 1 · office 1
+  metropolis  kinds held: court 128 · parish 101 · watch 91 · road 15 · market 12 · treasury 2 · office 1

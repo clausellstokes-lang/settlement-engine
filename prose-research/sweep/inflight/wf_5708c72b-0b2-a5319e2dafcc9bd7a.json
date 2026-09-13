@@ -1,0 +1,22 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 173,
+ "firstTs": "2026-09-12T09:08:38.765Z",
+ "lastTs": "2026-09-12T09:19:01.008Z",
+ "tools": {
+  "Bash": 40,
+  "Read": 5,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "The packet is complete and verified on disk.",
+ "run": "wf_5708c72b-0b2",
+ "agent": "a5319e2dafcc9bd7a",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/4ed79a2b-6cd2-45cf-ab97-83cdad49c30b/subagents/workflows/wf_5708c72b-0b2/agent-a5319e2dafcc9bd7a.jsonl",
+ "journal": "result",
+ "checkpointFile": null
+}

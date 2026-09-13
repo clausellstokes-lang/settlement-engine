@@ -1,0 +1,160 @@
+{
+  "label": "leguin-nonfiction-spoken",
+  "files": [
+    "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/prose-research/primary/raw/leguin_nonfiction_spoken.txt"
+  ],
+  "paragraphs": 72,
+  "sentences": 351,
+  "wordsPerSentence": {
+    "mean": 13.9,
+    "sd": 10.3,
+    "p10": 4,
+    "p50": 11,
+    "p90": 29,
+    "shareUnder8": 0.3333,
+    "shareOver30": 0.094,
+    "neighbourVariation": 0.771
+  },
+  "sentencesPerParagraph": 4.88,
+  "punctuation": {
+    "semicolonRate": 0.0085,
+    "colonRate": 0.0085,
+    "emDashRate": 0.0513,
+    "questionRate": 0.037,
+    "exclamationRate": 0.0427,
+    "parenthesisRate": 0
+  },
+  "shapes": {
+    "antithesisRate": 0.0085,
+    "triadRate": 0.0427,
+    "participialOpenerRate": 0.0057,
+    "whichTailRate": 0.037,
+    "doubledAdjectiveRate": 0.0057,
+    "adverbsPerSentence": 0.219,
+    "thereIsOpenerRate": 0.0484,
+    "dialogueShare": 0.0541
+  },
+  "closers": {
+    "abstractNounRate": 0.0399,
+    "pronounRate": 0.1083,
+    "topClosers": [
+      [
+        "it",
+        16
+      ],
+      [
+        "that",
+        9
+      ],
+      [
+        "so",
+        6
+      ],
+      [
+        "me",
+        6
+      ],
+      [
+        "way",
+        5
+      ],
+      [
+        "on",
+        5
+      ],
+      [
+        "book",
+        4
+      ],
+      [
+        "about",
+        3
+      ],
+      [
+        "know",
+        3
+      ],
+      [
+        "don’t",
+        3
+      ],
+      [
+        "novel",
+        3
+      ],
+      [
+        "work",
+        3
+      ]
+    ]
+  },
+  "openers": {
+    "topOpeners": [
+      [
+        "i",
+        59
+      ],
+      [
+        "it’s",
+        24
+      ],
+      [
+        "and",
+        23
+      ],
+      [
+        "it",
+        19
+      ],
+      [
+        "the",
+        16
+      ],
+      [
+        "but",
+        13
+      ],
+      [
+        "that",
+        11
+      ],
+      [
+        "there",
+        10
+      ],
+      [
+        "so",
+        9
+      ],
+      [
+        "that’s",
+        7
+      ],
+      [
+        "he",
+        7
+      ],
+      [
+        "a",
+        6
+      ]
+    ],
+    "sameOpenerAsPreviousRate": 0.0769
+  },
+  "runsOfThreeSameLengthBand": 0.1538,
+  "presence": {
+    "sensoryNounsPerHundredWords": 0.429,
+    "texturedParagraphShare": 0.2083,
+    "senseSpreadEntropy": 0.7,
+    "senseShares": {
+      "sight": 0.8636363636363636,
+      "hearing": 0.045454545454545456,
+      "smell": 0,
+      "touch": 0,
+      "taste": 0.09090909090909091
+    },
+    "words": 5128,
+    "paragraphs": 72,
+    "lexicon": "src/domain/prose/presenceMeasure.js SENSORY_NOUNS — 166 nouns in five buckets, a partition"
+  }
+}

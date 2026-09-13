@@ -1,0 +1,976 @@
+{
+ "arm": "draft",
+ "round": 1,
+ "at": "2026-09-09T02:27:22",
+ "projection": {
+  "ok": true,
+  "waivers": [
+   "[dossier-prose] ⛔ --taste WAIVED 11 refusal(s) that the shipped build makes. The shipped projector (no --taste) refuses each of these BY NAME:",
+   "[dossier-prose]   DOSSIER_STATE DS-DEF-2 :: stores: short: ATTACH `Disasters & Famine: granary AND hospital`: the spine's key and the modifier's key name the same civic object class `store`, which is a restatement the field guard cannot see (T-F12)",
+   "[dossier-prose]   DOSSIER_STATE DS-DEF-2 :: stores: import-fed: ATTACH `Disasters & Famine: granary AND hospital`: the spine's key and the modifier's key name the same civic object class `store`, which is a restatement the field guard cannot see (T-F12)",
+   "[dossier-prose]   DS-DEF-2 :: stores: import-fed: variant 1 carries the authoring marker ⟦TO-AUTHOR⟧: the pool's wording set has not been written. The marker is admitted ONLY under `node scripts/generate-dossier-state-prose.mjs --taste`, which the shipped build never passes (TASTE car 6, ARCH §12 row 6)",
+   "[dossier-prose]   DS-GEN-3 :: purse: short: variant 1 carries the authoring marker ⟦TO-AUTHOR⟧: the pool's wording set has not been written. The marker is admitted ONLY under `node scripts/generate-dossier-state-prose.mjs --taste`, which the shipped build never passes (TASTE car 6, ARCH §12 row 6)",
+   "[dossier-prose]   DOSSIER_STATE DS-DEF-11 :: country: pressed (walled): ATTACH `WALLED-STRAINED`: the spine's key and the modifier's key name the same civic object class `wall`, which is a restatement the field guard cannot see (T-F12)",
+   "[dossier-prose]   DS-DEF-11 :: country: pressed (walled): variant 1 carries the authoring marker ⟦TO-AUTHOR⟧: the pool's wording set has not been written. The marker is admitted ONLY under `node scripts/generate-dossier-state-prose.mjs --taste`, which the shipped build never passes (TASTE car 6, ARCH §12 row 6)",
+   "[dossier-prose]   DOSSIER_STATE DS-DEF-11 :: country: pressed (unwalled): ATTACH `UNWALLED-LARGE`: the spine's key and the modifier's key name the same civic object class `wall`, which is a restatement the field guard cannot see (T-F12)",
+   "[dossier-prose]   DOSSIER_STATE DS-DEF-11 :: country: pressed (unwalled): ATTACH `UNWALLED-SMALL`: the spine's key and the modifier's key name the same civic object class `wall`, which is a restatement the field guard cannot see (T-F12)",
+   "[dossier-prose]   DS-DEF-11 :: country: pressed (unwalled): variant 1 carries the authoring marker ⟦TO-AUTHOR⟧: the pool's wording set has not been written. The marker is admitted ONLY under `node scripts/generate-dossier-state-prose.mjs --taste`, which the shipped build never passes (TASTE car 6, ARCH §12 row 6)",
+   "[dossier-prose]   DS-DEF-11 :: watch: bought (revealed): variant 1 carries the authoring marker ⟦TO-AUTHOR⟧: the pool's wording set has not been written. The marker is admitted ONLY under `node scripts/generate-dossier-state-prose.mjs --taste`, which the shipped build never passes (TASTE car 6, ARCH §12 row 6)",
+   "[dossier-prose]   DS-DEF-11 :: watch: bought (covert): variant 1 carries the authoring marker ⟦TO-AUTHOR⟧: the pool's wording set has not been written. The marker is admitted ONLY under `node scripts/generate-dossier-state-prose.mjs --taste`, which the shipped build never passes (TASTE car 6, ARCH §12 row 6)"
+  ],
+  "detail": "[dossier-prose] verified 68 state blocks / 2275 variants across 6 desks, 78 causal families / 468 variants"
+ },
+ "exemplars": {
+  "dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/prose-research/primary",
+  "labels": [
+   "leguin-fiction",
+   "leguin-nonfiction-spoken",
+   "leguin-nonfiction-written",
+   "martin-chronicle",
+   "martin-narrative",
+   "tolkien-elevated",
+   "tolkien-plain",
+   "dnd-flavor",
+   "dnd-rules",
+   "dnd-rules-srd52"
+  ],
+  "metricsBanded": 21,
+  "why": ""
+ },
+ "pools": [
+  {
+   "block": "DS-DEF-11",
+   "pool": "country: pressed (walled)",
+   "dir": "def11-country-walled",
+   "verdict": "WITHHELD",
+   "why": "1 of 1 variant(s) still carry ⟦TO-AUTHOR⟧: the wording set has not been written, so every measure below is NOT-EXECUTABLE",
+   "variants": 1,
+   "faces": [
+    1
+   ],
+   "attach": [
+    "WALLED-STRAINED"
+   ],
+   "rateBp": 6693,
+   "departure": 0,
+   "rounds": {
+    "draftRounds": 0,
+    "refineA": false,
+    "refineB": false,
+    "files": []
+   },
+   "units": 0,
+   "walk": null,
+   "lengths": null,
+   "siblings": null,
+   "band": null,
+   "provenance": null
+  },
+  {
+   "block": "DS-DEF-11",
+   "pool": "country: pressed (unwalled)",
+   "dir": "def11-country-unwalled",
+   "verdict": "WITHHELD",
+   "why": "1 of 1 variant(s) still carry ⟦TO-AUTHOR⟧: the wording set has not been written, so every measure below is NOT-EXECUTABLE",
+   "variants": 1,
+   "faces": [
+    1
+   ],
+   "attach": [
+    "UNWALLED-LARGE",
+    "UNWALLED-SMALL"
+   ],
+   "rateBp": 6693,
+   "departure": 0,
+   "rounds": {
+    "draftRounds": 0,
+    "refineA": false,
+    "refineB": false,
+    "files": []
+   },
+   "units": 0,
+   "walk": null,
+   "lengths": null,
+   "siblings": null,
+   "band": null,
+   "provenance": null
+  },
+  {
+   "block": "DS-DEF-11",
+   "pool": "watch: bought (revealed)",
+   "dir": "def11-watch-revealed",
+   "verdict": "WITHHELD",
+   "why": "1 of 1 variant(s) still carry ⟦TO-AUTHOR⟧: the wording set has not been written, so every measure below is NOT-EXECUTABLE",
+   "variants": 1,
+   "faces": [
+    1
+   ],
+   "attach": [
+    "WALLED-QUIET",
+    "WALLED-STRAINED",
+    "WALLED-THREATENED"
+   ],
+   "rateBp": null,
+   "departure": null,
+   "rounds": {
+    "draftRounds": 0,
+    "refineA": false,
+    "refineB": false,
+    "files": []
+   },
+   "units": 0,
+   "walk": null,
+   "lengths": null,
+   "siblings": null,
+   "band": null,
+   "provenance": null
+  },
+  {
+   "block": "DS-DEF-11",
+   "pool": "watch: bought (covert)",
+   "dir": "def11-watch-covert",
+   "verdict": "WITHHELD",
+   "why": "1 of 1 variant(s) still carry ⟦TO-AUTHOR⟧: the wording set has not been written, so every measure below is NOT-EXECUTABLE",
+   "variants": 1,
+   "faces": [
+    1
+   ],
+   "attach": [
+    "WALLED-QUIET",
+    "WALLED-STRAINED",
+    "WALLED-THREATENED"
+   ],
+   "rateBp": null,
+   "departure": null,
+   "rounds": {
+    "draftRounds": 0,
+    "refineA": false,
+    "refineB": false,
+    "files": []
+   },
+   "units": 0,
+   "walk": null,
+   "lengths": null,
+   "siblings": null,
+   "band": null,
+   "provenance": null
+  },
+  {
+   "block": "DS-DEF-2",
+   "pool": "stores: short",
+   "dir": "def2-stores-short",
+   "verdict": "WITHHELD",
+   "why": "",
+   "variants": 3,
+   "faces": [
+    4,
+    4,
+    4
+   ],
+   "attach": [
+    "Disasters & Famine: granary AND hospital"
+   ],
+   "rateBp": 1563,
+   "departure": 0,
+   "rounds": {
+    "draftRounds": 0,
+    "refineA": false,
+    "refineB": false,
+    "files": []
+   },
+   "units": 36,
+   "walk": {
+    "verdicts": {
+     "FAIL": 0,
+     "WITHHELD": 36,
+     "PASS": 0
+    },
+    "findings": [
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
+      "klass": "Q",
+      "arm": "a second sentence naming no second field",
+      "clause": "The stores behind that provision are short of what the year asks of them.",
+      "column": "(second typed field)",
+      "value": "settlement",
+      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
+      "klass": "Q",
+      "arm": "a trailing coordinate naming no second field",
+      "clause": "between them the town can take a failed harvest or an outbreak without either becoming a catastrophe.",
+      "column": "(second typed field)",
+      "value": "settlement",
+      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
+      "klass": "Q",
+      "arm": "a second sentence naming no second field",
+      "clause": "What is held back against a bad season does not cover the season.",
+      "column": "(second typed field)",
+      "value": "settlement",
+      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
+      "klass": "Q",
+      "arm": "a trailing coordinate naming no second field",
+      "clause": "between them the town can take a failed harvest or an outbreak without either becoming a catastrophe.",
+      "column": "(second typed field)",
+      "value": "settlement",
+      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
+      "klass": "Q",
+      "arm": "a second sentence naming no second field",
+      "clause": "The reserve stands under its own mark, and the shortfall is on the record.",
+      "column": "(second typed field)",
+      "value": "settlement",
+      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
+      "klass": "Q",
+      "arm": "a trailing coordinate naming no second field",
+      "clause": "between them the town can take a failed harvest or an outbreak without either becoming a catastrophe.",
+      "column": "(second typed field)",
+      "value": "settlement",
+      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
+      "klass": "Q",
+      "arm": "a second sentence naming no second field",
+      "clause": "Against a hungry year the town is holding less than a year needs.",
+      "column": "(second typed field)",
+      "value": "settlement",
+      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
+      "klass": "Q",
+      "arm": "a trailing coordinate naming no second field",
+      "clause": "between them the town can take a failed harvest or an outbreak without either becoming a catastrophe.",
+      "column": "(second typed field)",
+      "value": "settlement",
+      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
+      "arm": "A3",
+      "subject": "the band half is the refuter's",
+      "value": "less put by than its own reckoning calls for",
+      "description": "no sibling KEY names this alternative; whether a sibling BAND supplies it is the refuter's (siblings: Beasts & Monsters: plagued, perimeter AND organized force | Beasts & Monsters: plagued, perimeter but NO force to hold it | Beasts & Monsters: plagued, NO perimeter and NO force | Beasts & Monsters: frontier, credible deterrence)"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
+      "klass": "Q",
+      "arm": "a second sentence naming no second field",
+      "clause": "The town keeps less put by than its own reckoning calls for.",
+      "column": "(second typed field)",
+      "value": "settlement",
+      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
+      "klass": "Q",
+      "arm": "a trailing coordinate naming no second field",
+      "clause": "between them the town can take a failed harvest or an outbreak without either becoming a catastrophe.",
+      "column": "(second typed field)",
+      "value": "settlement",
+      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
+      "klass": "Q",
+      "arm": "a second sentence naming no second field",
+      "clause": "Provision runs under the figure the record sets for it.",
+      "column": "(second typed field)",
+      "value": "settlement",
+      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
+      "klass": "Q",
+      "arm": "a trailing coordinate naming no second field",
+      "clause": "between them the town can take a failed harvest or an outbreak without either becoming a catastrophe.",
+      "column": "(second typed field)",
+      "value": "settlement",
+      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
+      "klass": "Q",
+      "arm": "a second sentence naming no second field",
+      "clause": "The margin the town keeps has thinned below its own standard.",
+      "column": "(second typed field)",
+      "value": "settlement",
+      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
+      "klass": "Q",
+      "arm": "a trailing coordinate naming no second field",
+      "clause": "between them the town can take a failed harvest or an outbreak without either becoming a catastrophe.",
+      "column": "(second typed field)",
+      "value": "settlement",
+      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
+      "klass": "Q",
+      "arm": "a second sentence naming no second field",
+      "clause": "What the record calls sufficient and what is held are not the same amount.",
+      "column": "(second typed field)",
+      "value": "settlement",
+      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
+      "klass": "Q",
+      "arm": "a trailing coordinate naming no second field",
+      "clause": "between them the town can take a failed harvest or an outbreak without either becoming a catastrophe.",
+      "column": "(second typed field)",
+      "value": "settlement",
+      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
+      "klass": "Q",
+      "arm": "a second sentence naming no second field",
+      "clause": "Supply is short by the record's own reckoning.",
+      "column": "(second typed field)",
+      "value": "settlement",
+      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
+      "klass": "Q",
+      "arm": "a trailing coordinate naming no second field",
+      "clause": "between them the town can take a failed harvest or an outbreak without either becoming a catastrophe.",
+      "column": "(second typed field)",
+      "value": "settlement",
+      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
+      "klass": "Q",
+      "arm": "a second sentence naming no second field",
+      "clause": "The account of what is held reads under the account of what is needed.",
+      "column": "(second typed field)",
+      "value": "settlement",
+      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
+      "klass": "Q",
+      "arm": "a trailing coordinate naming no second field",
+      "clause": "between them the town can take a failed harvest or an outbreak without either becoming a catastrophe.",
+      "column": "(second typed field)",
+      "value": "settlement",
+      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
+      "arm": "A3",
+      "subject": "the band half is the refuter's",
+      "value": "less put by than the office's figure allows for",
+      "description": "no sibling KEY names this alternative; whether a sibling BAND supplies it is the refuter's (siblings: Beasts & Monsters: plagued, perimeter AND organized force | Beasts & Monsters: plagued, perimeter but NO force to hold it | Beasts & Monsters: plagued, NO perimeter and NO force | Beasts & Monsters: frontier, credible deterrence)"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
+      "klass": "Q",
+      "arm": "a second sentence naming no second field",
+      "clause": "There is less put by than the office's figure allows for.",
+      "column": "(second typed field)",
+      "value": "settlement",
+      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
+      "klass": "Q",
+      "arm": "a trailing coordinate naming no second field",
+      "clause": "between them the town can take a failed harvest or an outbreak without either becoming a catastrophe.",
+      "column": "(second typed field)",
+      "value": "settlement",
+      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
+      "klass": "Q",
+      "arm": "a second sentence naming no second field",
+      "clause": "The holding falls under the mark the record keeps for it.",
+      "column": "(second typed field)",
+      "value": "settlement",
+      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
+      "klass": "Q",
+      "arm": "a trailing coordinate naming no second field",
+      "clause": "between them the town can take a failed harvest or an outbreak without either becoming a catastrophe.",
+      "column": "(second typed field)",
+      "value": "settlement",
+      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
+      "klass": "Q",
+      "arm": "a second sentence naming no second field",
+      "clause": "The stores behind that provision are short of what the year asks of them.",
+      "column": "(second typed field)",
+      "value": "none",
+      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
+      "klass": "Q",
+      "arm": "a second sentence naming no second field",
+      "clause": "What is held back against a bad season does not cover the season.",
+      "column": "(second typed field)",
+      "value": "none",
+      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
+      "klass": "Q",
+      "arm": "a second sentence naming no second field",
+      "clause": "The reserve stands under its own mark, and the shortfall is on the record.",
+      "column": "(second typed field)",
+      "value": "none",
+      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
+      "klass": "Q",
+      "arm": "a second sentence naming no second field",
+      "clause": "Against a hungry year the town is holding less than a year needs.",
+      "column": "(second typed field)",
+      "value": "none",
+      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
+      "arm": "A3",
+      "subject": "the band half is the refuter's",
+      "value": "less put by than its own reckoning calls for",
+      "description": "no sibling KEY names this alternative; whether a sibling BAND supplies it is the refuter's (siblings: Beasts & Monsters: plagued, perimeter AND organized force | Beasts & Monsters: plagued, perimeter but NO force to hold it | Beasts & Monsters: plagued, NO perimeter and NO force | Beasts & Monsters: frontier, credible deterrence)"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
+      "klass": "Q",
+      "arm": "a second sentence naming no second field",
+      "clause": "The town keeps less put by than its own reckoning calls for.",
+      "column": "(second typed field)",
+      "value": "none",
+      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
+      "klass": "Q",
+      "arm": "a second sentence naming no second field",
+      "clause": "Provision runs under the figure the record sets for it.",
+      "column": "(second typed field)",
+      "value": "none",
+      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
+      "klass": "Q",
+      "arm": "a second sentence naming no second field",
+      "clause": "The margin the town keeps has thinned below its own standard.",
+      "column": "(second typed field)",
+      "value": "none",
+      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
+      "klass": "Q",
+      "arm": "a second sentence naming no second field",
+      "clause": "What the record calls sufficient and what is held are not the same amount.",
+      "column": "(second typed field)",
+      "value": "none",
+      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
+      "klass": "Q",
+      "arm": "a second sentence naming no second field",
+      "clause": "Supply is short by the record's own reckoning.",
+      "column": "(second typed field)",
+      "value": "none",
+      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
+      "klass": "Q",
+      "arm": "a second sentence naming no second field",
+      "clause": "The account of what is held reads under the account of what is needed.",
+      "column": "(second typed field)",
+      "value": "none",
+      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
+      "arm": "A3",
+      "subject": "the band half is the refuter's",
+      "value": "less put by than the office's figure allows for",
+      "description": "no sibling KEY names this alternative; whether a sibling BAND supplies it is the refuter's (siblings: Beasts & Monsters: plagued, perimeter AND organized force | Beasts & Monsters: plagued, perimeter but NO force to hold it | Beasts & Monsters: plagued, NO perimeter and NO force | Beasts & Monsters: frontier, credible deterrence)"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
+      "klass": "Q",
+      "arm": "a second sentence naming no second field",
+      "clause": "There is less put by than the office's figure allows for.",
+      "column": "(second typed field)",
+      "value": "none",
+      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
+      "klass": "Q",
+      "arm": "a second sentence naming no second field",
+      "clause": "The holding falls under the mark the record keeps for it.",
+      "column": "(second typed field)",
+      "value": "none",
+      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
+     }
+    ],
+    "findingCount": 66
+   },
+   "lengths": {
+    "form": "sentence",
+    "ceiling": null,
+    "rows": [
+     {
+      "vid": 1,
+      "faces": [
+       14,
+       13,
+       14,
+       13
+      ]
+     },
+     {
+      "vid": 2,
+      "faces": [
+       12,
+       10,
+       11,
+       14
+      ]
+     },
+     {
+      "vid": 3,
+      "faces": [
+       8,
+       14,
+       11,
+       11
+      ]
+     }
+    ]
+   },
+   "siblings": [
+    {
+     "vid": 1,
+     "faces": 4,
+     "synonymSwaps": 0,
+     "notExecutable": 0
+    },
+    {
+     "vid": 2,
+     "faces": 4,
+     "synonymSwaps": 0,
+     "notExecutable": 0
+    },
+    {
+     "vid": 3,
+     "faces": 4,
+     "synonymSwaps": 0,
+     "notExecutable": 0
+    }
+   ],
+   "band": [
+    {
+     "vid": 1,
+     "face": 0,
+     "executable": true,
+     "sentences": 1,
+     "scored": 21,
+     "exceeded": 13,
+     "exceededShare": 0.619,
+     "deepest": {
+      "metric": "closers.pronounRate",
+      "depth": 10.249,
+      "side": "over"
+     },
+     "meanDistanceFromMedian": 0.966,
+     "budgetOk": true,
+     "depthOk": false,
+     "perfectionSuspect": false
+    },
+    {
+     "vid": 1,
+     "face": 1,
+     "executable": true,
+     "sentences": 1,
+     "scored": 21,
+     "exceeded": 13,
+     "exceededShare": 0.619,
+     "deepest": {
+      "metric": "wordsPerSentence.neighbourVariation",
+      "depth": 1.597,
+      "side": "under"
+     },
+     "meanDistanceFromMedian": 0.486,
+     "budgetOk": true,
+     "depthOk": true,
+     "perfectionSuspect": false
+    },
+    {
+     "vid": 1,
+     "face": 2,
+     "executable": true,
+     "sentences": 1,
+     "scored": 21,
+     "exceeded": 13,
+     "exceededShare": 0.619,
+     "deepest": {
+      "metric": "wordsPerSentence.neighbourVariation",
+      "depth": 1.597,
+      "side": "under"
+     },
+     "meanDistanceFromMedian": 0.486,
+     "budgetOk": true,
+     "depthOk": true,
+     "perfectionSuspect": false
+    },
+    {
+     "vid": 1,
+     "face": 3,
+     "executable": true,
+     "sentences": 1,
+     "scored": 21,
+     "exceeded": 13,
+     "exceededShare": 0.619,
+     "deepest": {
+      "metric": "wordsPerSentence.neighbourVariation",
+      "depth": 1.597,
+      "side": "under"
+     },
+     "meanDistanceFromMedian": 0.486,
+     "budgetOk": true,
+     "depthOk": true,
+     "perfectionSuspect": false
+    },
+    {
+     "vid": 2,
+     "face": 0,
+     "executable": true,
+     "sentences": 1,
+     "scored": 21,
+     "exceeded": 13,
+     "exceededShare": 0.619,
+     "deepest": {
+      "metric": "shapes.antithesisRate",
+      "depth": 30.091,
+      "side": "over"
+     },
+     "meanDistanceFromMedian": 1.928,
+     "budgetOk": true,
+     "depthOk": false,
+     "perfectionSuspect": false
+    },
+    {
+     "vid": 2,
+     "face": 1,
+     "executable": true,
+     "sentences": 1,
+     "scored": 21,
+     "exceeded": 13,
+     "exceededShare": 0.619,
+     "deepest": {
+      "metric": "closers.pronounRate",
+      "depth": 10.249,
+      "side": "over"
+     },
+     "meanDistanceFromMedian": 0.966,
+     "budgetOk": true,
+     "depthOk": false,
+     "perfectionSuspect": false
+    },
+    {
+     "vid": 2,
+     "face": 2,
+     "executable": true,
+     "sentences": 1,
+     "scored": 21,
+     "exceeded": 13,
+     "exceededShare": 0.619,
+     "deepest": {
+      "metric": "wordsPerSentence.neighbourVariation",
+      "depth": 1.597,
+      "side": "under"
+     },
+     "meanDistanceFromMedian": 0.486,
+     "budgetOk": true,
+     "depthOk": true,
+     "perfectionSuspect": false
+    },
+    {
+     "vid": 2,
+     "face": 3,
+     "executable": true,
+     "sentences": 1,
+     "scored": 21,
+     "exceeded": 13,
+     "exceededShare": 0.619,
+     "deepest": {
+      "metric": "wordsPerSentence.neighbourVariation",
+      "depth": 1.597,
+      "side": "under"
+     },
+     "meanDistanceFromMedian": 0.486,
+     "budgetOk": true,
+     "depthOk": true,
+     "perfectionSuspect": false
+    },
+    {
+     "vid": 3,
+     "face": 0,
+     "executable": true,
+     "sentences": 1,
+     "scored": 21,
+     "exceeded": 13,
+     "exceededShare": 0.619,
+     "deepest": {
+      "metric": "wordsPerSentence.neighbourVariation",
+      "depth": 1.597,
+      "side": "under"
+     },
+     "meanDistanceFromMedian": 0.486,
+     "budgetOk": true,
+     "depthOk": true,
+     "perfectionSuspect": false
+    },
+    {
+     "vid": 3,
+     "face": 1,
+     "executable": true,
+     "sentences": 1,
+     "scored": 21,
+     "exceeded": 13,
+     "exceededShare": 0.619,
+     "deepest": {
+      "metric": "wordsPerSentence.neighbourVariation",
+      "depth": 1.597,
+      "side": "under"
+     },
+     "meanDistanceFromMedian": 0.486,
+     "budgetOk": true,
+     "depthOk": true,
+     "perfectionSuspect": false
+    },
+    {
+     "vid": 3,
+     "face": 2,
+     "executable": true,
+     "sentences": 1,
+     "scored": 21,
+     "exceeded": 13,
+     "exceededShare": 0.619,
+     "deepest": {
+      "metric": "shapes.antithesisRate",
+      "depth": 30.091,
+      "side": "over"
+     },
+     "meanDistanceFromMedian": 2.778,
+     "budgetOk": true,
+     "depthOk": false,
+     "perfectionSuspect": false
+    },
+    {
+     "vid": 3,
+     "face": 3,
+     "executable": true,
+     "sentences": 1,
+     "scored": 21,
+     "exceeded": 13,
+     "exceededShare": 0.619,
+     "deepest": {
+      "metric": "closers.pronounRate",
+      "depth": 10.249,
+      "side": "over"
+     },
+     "meanDistanceFromMedian": 0.966,
+     "budgetOk": true,
+     "depthOk": false,
+     "perfectionSuspect": false
+    }
+   ],
+   "provenance": {
+    "citations": 0,
+    "a13": 0
+   }
+  },
+  {
+   "block": "DS-DEF-2",
+   "pool": "stores: import-fed",
+   "dir": "def2-stores-importfed",
+   "verdict": "WITHHELD",
+   "why": "1 of 1 variant(s) still carry ⟦TO-AUTHOR⟧: the wording set has not been written, so every measure below is NOT-EXECUTABLE",
+   "variants": 1,
+   "faces": [
+    1
+   ],
+   "attach": [
+    "Disasters & Famine: granary AND hospital"
+   ],
+   "rateBp": 4010,
+   "departure": 0,
+   "rounds": {
+    "draftRounds": 0,
+    "refineA": false,
+    "refineB": false,
+    "files": []
+   },
+   "units": 0,
+   "walk": null,
+   "lengths": null,
+   "siblings": null,
+   "band": null,
+   "provenance": null
+  },
+  {
+   "block": "DS-GEN-3",
+   "pool": "purse: short",
+   "dir": "gen3-purse-short",
+   "verdict": "WITHHELD",
+   "why": "1 of 1 variant(s) still carry ⟦TO-AUTHOR⟧: the wording set has not been written, so every measure below is NOT-EXECUTABLE",
+   "variants": 1,
+   "faces": [
+    1
+   ],
+   "attach": [
+    "scores.military: CRITICAL",
+    "scores.military: WEAK"
+   ],
+   "rateBp": 6641,
+   "departure": 0,
+   "rounds": {
+    "draftRounds": 0,
+    "refineA": false,
+    "refineB": false,
+    "files": []
+   },
+   "units": 0,
+   "walk": null,
+   "lengths": null,
+   "siblings": null,
+   "band": null,
+   "provenance": null
+  }
+ ],
+ "walk": {
+  "totalUnits": 36,
+  "n": 36,
+  "exhaustive": true,
+  "msPerUnit": 0.5277777777777778,
+  "exhaustiveMs": 19,
+  "confidence": "the whole population is walked, so every arm rate is exact and no interval applies",
+  "sampleSha": "7d466d01d107c75232983263c6b0feb2fc76f5f3eddc4ffb52f8c3540443fdc1",
+  "verdicts": {
+   "FAIL": 0,
+   "WITHHELD": 36,
+   "PASS": 0
+  }
+ },
+ "manifest": {
+  "base": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/taste/m3/cells-base.json",
+  "cells": 73284,
+  "byClass": {
+   "REPLACED": 0,
+   "RE-INDEXED": 0,
+   "ADDITIVE": 182,
+   "WORDING-ONLY": 0,
+   "UNCHANGED": 73102
+  },
+  "added": 0,
+  "removed": 0,
+  "indexOnly": 0,
+  "lines": [
+   "PROSE MANIFEST DIFF · 73284 cells on the tip side",
+   "  REPLACED       cells       0 · towns     0",
+   "  RE-INDEXED     cells       0 · towns     0",
+   "  ADDITIVE       cells     182 · towns    91",
+   "  WORDING-ONLY   cells       0 · towns     0",
+   "  UNCHANGED      cells   73102 · towns   525",
+   "  ADDED          cells       0",
+   "  REMOVED        cells       0",
+   "  (of the UNCHANGED, cells whose audience-filtered INDEX moved with no reader-visible change: 0)"
+  ],
+  "stop": false
+ },
+ "variety": {
+  "seeds": 1,
+  "towns": 525,
+  "units": 65393,
+  "duplicateUnits": 64000,
+  "rateBp": 9787,
+  "distinctPairs": 6140,
+  "pairsSeenTwice": 4747
+ },
+ "ties": {
+  "rungs": 8,
+  "multiCandidateRungs": 4,
+  "pairs": 30,
+  "ties": 0,
+  "tieBp": 0,
+  "note": ""
+ },
+ "seconds": 31
+}

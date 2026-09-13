@@ -1,0 +1,13 @@
+      dm::economics.foodTile|economics.seasonTile::0         units   4200 · duplicated   4180
+      dm::economics.commercialProfile::0                     units   4200 · duplicated   4164
+      dm::economics.commercialProfile::1                     units   4200 · duplicated   4179
+      dm::economics.exportPosture::0                         units   4200 · duplicated   4200
+      dm::resources.groundAndWorkings::0                     units   4200 · duplicated   4200
+      dm::resources.groundAndWorkings::1                     units   4200 · duplicated   4200
+      dm::resources.groundAndWorkings::2                     units   4200 · duplicated   4200
+  ── THE REPEAT CENSUS, per (position, pool) ───────────────────────
+    groups 636 · EXECUTABLE 349 · NOT-EXECUTABLE 287 (fewer than 8 independent draws, or a one-variant pool)
+    groups showing fewer than half the distinct texts the chance floor expects: 2
+      dm::viability.verdict::1 @@ DS-GEN-11 :: criticalIssueCount: distinct 1 of 3 · expected 28829 bp · draws 8 · towns 540
+      player::viability.verdict::1 @@ DS-GEN-11 :: criticalIssueCo distinct 1 of 3 · expected 28829 bp · draws 8 · towns 540
+  wrote /dev/null

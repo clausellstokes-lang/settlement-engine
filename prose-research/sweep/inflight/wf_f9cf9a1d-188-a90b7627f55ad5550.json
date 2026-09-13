@@ -1,0 +1,23 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 126,
+ "firstTs": "2026-09-09T18:15:25.139Z",
+ "lastTs": "2026-09-09T18:26:05.665Z",
+ "tools": {
+  "Bash": 33,
+  "Write": 1
+ },
+ "urlsFetched": [],
+ "filesWritten": [
+  "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--economic-survival-strong/draft-round-1.md"
+ ],
+ "lastAssistantText": " know it\" (standpoint) from vid 2; \"has not turned into a collapse\" (history), \"the reason is money\" (cause) and the closing maxim (life-general closer) from vid 3. No claim added. No citation anywhere — the card prints `source: (none) · SOURCE-UNRESOLVED`, so zero is mandatory, not a budget choice.",
+ "run": "wf_f9cf9a1d-188",
+ "agent": "a90b7627f55ad5550",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/67af10e4-7386-48d4-8cd3-b2985d4885c2/subagents/workflows/wf_f9cf9a1d-188/agent-a90b7627f55ad5550.jsonl",
+ "journal": "result",
+ "checkpointFile": null
+}

@@ -1,0 +1,23 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 101,
+ "firstTs": "2026-09-09T15:48:55.846Z",
+ "lastTs": "2026-09-09T16:03:32.059Z",
+ "tools": {
+  "Bash": 24,
+  "Write": 1
+ },
+ "urlsFetched": [],
+ "filesWritten": [
+  "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--internal-security-court-without-detention/draft-round-1.md"
+ ],
+ "lastAssistantText": "one call.\n2. Once the licence is applied, the three variants are claim-identical and differ by angle, grammar and rhythm alone; the shipped pool's semantic spread lived entirely in the three removed groups. Nothing is merged or trimmed, but the chair may want a licensed second field for this branch.",
+ "run": "wf_183dda09-702",
+ "agent": "ae7e9314bc9abff02",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/67af10e4-7386-48d4-8cd3-b2985d4885c2/subagents/workflows/wf_183dda09-702/agent-ae7e9314bc9abff02.jsonl",
+ "journal": "result",
+ "checkpointFile": null
+}

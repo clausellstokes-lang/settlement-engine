@@ -1,0 +1,863 @@
+{
+ "arm": "probe",
+ "round": 0,
+ "at": "2026-09-09T02:29:31",
+ "projection": {
+  "ok": true,
+  "waivers": [
+   "[dossier-prose] ⛔ --taste WAIVED 12 refusal(s) that the shipped build makes. The shipped projector (no --taste) refuses each of these BY NAME:",
+   "[dossier-prose]   DOSSIER_STATE DS-DEF-2 :: stores: short: ATTACH `Disasters & Famine: granary AND hospital`: the spine's key and the modifier's key name the same civic object class `store`, which is a restatement the field guard cannot see (T-F12)",
+   "[dossier-prose]   DS-DEF-2 :: stores: short: variant 1 carries the authoring marker ⟦TO-AUTHOR⟧: the pool's wording set has not been written. The marker is admitted ONLY under `node scripts/generate-dossier-state-prose.mjs --taste`, which the shipped build never passes (TASTE car 6, ARCH §12 row 6)",
+   "[dossier-prose]   DOSSIER_STATE DS-DEF-2 :: stores: import-fed: ATTACH `Disasters & Famine: granary AND hospital`: the spine's key and the modifier's key name the same civic object class `store`, which is a restatement the field guard cannot see (T-F12)",
+   "[dossier-prose]   DS-DEF-2 :: stores: import-fed: variant 1 carries the authoring marker ⟦TO-AUTHOR⟧: the pool's wording set has not been written. The marker is admitted ONLY under `node scripts/generate-dossier-state-prose.mjs --taste`, which the shipped build never passes (TASTE car 6, ARCH §12 row 6)",
+   "[dossier-prose]   DS-GEN-3 :: purse: short: variant 1 carries the authoring marker ⟦TO-AUTHOR⟧: the pool's wording set has not been written. The marker is admitted ONLY under `node scripts/generate-dossier-state-prose.mjs --taste`, which the shipped build never passes (TASTE car 6, ARCH §12 row 6)",
+   "[dossier-prose]   DOSSIER_STATE DS-DEF-11 :: country: pressed (walled): ATTACH `WALLED-STRAINED`: the spine's key and the modifier's key name the same civic object class `wall`, which is a restatement the field guard cannot see (T-F12)",
+   "[dossier-prose]   DS-DEF-11 :: country: pressed (walled): variant 1 carries the authoring marker ⟦TO-AUTHOR⟧: the pool's wording set has not been written. The marker is admitted ONLY under `node scripts/generate-dossier-state-prose.mjs --taste`, which the shipped build never passes (TASTE car 6, ARCH §12 row 6)",
+   "[dossier-prose]   DOSSIER_STATE DS-DEF-11 :: country: pressed (unwalled): ATTACH `UNWALLED-LARGE`: the spine's key and the modifier's key name the same civic object class `wall`, which is a restatement the field guard cannot see (T-F12)",
+   "[dossier-prose]   DOSSIER_STATE DS-DEF-11 :: country: pressed (unwalled): ATTACH `UNWALLED-SMALL`: the spine's key and the modifier's key name the same civic object class `wall`, which is a restatement the field guard cannot see (T-F12)",
+   "[dossier-prose]   DS-DEF-11 :: country: pressed (unwalled): variant 1 carries the authoring marker ⟦TO-AUTHOR⟧: the pool's wording set has not been written. The marker is admitted ONLY under `node scripts/generate-dossier-state-prose.mjs --taste`, which the shipped build never passes (TASTE car 6, ARCH §12 row 6)",
+   "[dossier-prose]   DS-DEF-11 :: watch: bought (revealed): variant 1 carries the authoring marker ⟦TO-AUTHOR⟧: the pool's wording set has not been written. The marker is admitted ONLY under `node scripts/generate-dossier-state-prose.mjs --taste`, which the shipped build never passes (TASTE car 6, ARCH §12 row 6)",
+   "[dossier-prose]   DS-DEF-11 :: watch: bought (covert): variant 1 carries the authoring marker ⟦TO-AUTHOR⟧: the pool's wording set has not been written. The marker is admitted ONLY under `node scripts/generate-dossier-state-prose.mjs --taste`, which the shipped build never passes (TASTE car 6, ARCH §12 row 6)"
+  ],
+  "detail": "[dossier-prose] verified 68 state blocks / 2273 variants across 6 desks, 78 causal families / 468 variants"
+ },
+ "exemplars": {
+  "dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/prose-research/primary",
+  "labels": [
+   "leguin-fiction",
+   "leguin-nonfiction-spoken",
+   "leguin-nonfiction-written",
+   "martin-chronicle",
+   "martin-narrative",
+   "tolkien-elevated",
+   "tolkien-plain",
+   "dnd-flavor",
+   "dnd-rules",
+   "dnd-rules-srd52"
+  ],
+  "metricsBanded": 21,
+  "why": ""
+ },
+ "pools": [
+  {
+   "block": "DS-DEF-11",
+   "pool": "country: pressed (walled)",
+   "dir": "def11-country-walled",
+   "verdict": "WITHHELD",
+   "why": "",
+   "variants": 1,
+   "faces": [
+    1
+   ],
+   "attach": [
+    "WALLED-STRAINED"
+   ],
+   "rateBp": 6693,
+   "departure": 0,
+   "rounds": {
+    "draftRounds": 0,
+    "refineA": false,
+    "refineB": false,
+    "files": []
+   },
+   "units": 2,
+   "walk": {
+    "verdicts": {
+     "FAIL": 0,
+     "WITHHELD": 2,
+     "PASS": 0
+    },
+    "findings": [
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-11 :: WALLED-STRAINED",
+      "klass": "C3",
+      "arm": "a processing claim on a goods sentence",
+      "clause": "pressed (walled)",
+      "column": "supplyChainState chain row",
+      "value": "unresolved",
+      "description": "\"pressed\" asserts a processing fact; a flow word is licensed by the field, a processing step by a chain row"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-11 :: WALLED-STRAINED",
+      "klass": "Q",
+      "arm": "a trailing coordinate naming no second field",
+      "clause": "stone keeps itself, and wages do not. ⟦TO-AUTHOR⟧ country: pressed (walled)",
+      "column": "(second typed field)",
+      "value": "settlement, defwork",
+      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-11 :: WALLED-STRAINED",
+      "klass": "C3",
+      "arm": "a processing claim on a goods sentence",
+      "clause": "pressed (walled)",
+      "column": "supplyChainState chain row",
+      "value": "unresolved",
+      "description": "\"pressed\" asserts a processing fact; a flow word is licensed by the field, a processing step by a chain row"
+     }
+    ],
+    "findingCount": 3
+   },
+   "lengths": {
+    "form": "sentence",
+    "ceiling": null,
+    "rows": [
+     {
+      "vid": 1,
+      "faces": [
+       4
+      ]
+     }
+    ]
+   },
+   "siblings": [
+    {
+     "vid": 1,
+     "faces": 1,
+     "synonymSwaps": 0,
+     "notExecutable": 1
+    }
+   ],
+   "band": [
+    {
+     "vid": 1,
+     "face": 0,
+     "executable": true,
+     "sentences": 1,
+     "scored": 21,
+     "exceeded": 15,
+     "exceededShare": 0.714,
+     "deepest": {
+      "metric": "punctuation.colonRate",
+      "depth": 6.987,
+      "side": "over"
+     },
+     "meanDistanceFromMedian": 1.128,
+     "budgetOk": false,
+     "depthOk": false,
+     "perfectionSuspect": false
+    }
+   ],
+   "provenance": {
+    "citations": 0,
+    "a13": 0
+   }
+  },
+  {
+   "block": "DS-DEF-11",
+   "pool": "country: pressed (unwalled)",
+   "dir": "def11-country-unwalled",
+   "verdict": "WITHHELD",
+   "why": "",
+   "variants": 1,
+   "faces": [
+    1
+   ],
+   "attach": [
+    "UNWALLED-LARGE",
+    "UNWALLED-SMALL"
+   ],
+   "rateBp": 6693,
+   "departure": 0,
+   "rounds": {
+    "draftRounds": 0,
+    "refineA": false,
+    "refineB": false,
+    "files": []
+   },
+   "units": 4,
+   "walk": {
+    "verdicts": {
+     "FAIL": 0,
+     "WITHHELD": 4,
+     "PASS": 0
+    },
+    "findings": [
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-11 :: UNWALLED-LARGE",
+      "klass": "C3",
+      "arm": "a processing claim on a goods sentence",
+      "clause": "pressed (unwalled)",
+      "column": "supplyChainState chain row",
+      "value": "unresolved",
+      "description": "\"pressed\" asserts a processing fact; a flow word is licensed by the field, a processing step by a chain row"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-11 :: UNWALLED-LARGE",
+      "klass": "Q",
+      "arm": "a trailing coordinate naming no second field",
+      "clause": "whether that is confidence or thrift, the openness is itself a statement. ⟦TO-AUTHOR⟧ country: pressed (unwalled)",
+      "column": "(second typed field)",
+      "value": "settlement",
+      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-11 :: UNWALLED-LARGE",
+      "klass": "C3",
+      "arm": "a processing claim on a goods sentence",
+      "clause": "pressed (unwalled)",
+      "column": "supplyChainState chain row",
+      "value": "unresolved",
+      "description": "\"pressed\" asserts a processing fact; a flow word is licensed by the field, a processing step by a chain row"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-11 :: UNWALLED-LARGE",
+      "klass": "F25",
+      "arm": "a cited record's content",
+      "clause": "the books say",
+      "column": "(cited record)",
+      "value": "unresolved",
+      "description": "the predicate is attributed to a record; fault 25 asks what that record HOLDS, and no loader reaches its fields yet"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-11 :: UNWALLED-SMALL",
+      "klass": "C3",
+      "arm": "a processing claim on a goods sentence",
+      "clause": "pressed (unwalled)",
+      "column": "supplyChainState chain row",
+      "value": "unresolved",
+      "description": "\"pressed\" asserts a processing fact; a flow word is licensed by the field, a processing step by a chain row"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-11 :: UNWALLED-SMALL",
+      "klass": "Q",
+      "arm": "a trailing coordinate naming no second field",
+      "clause": "the town's safety is its neighbours, its distance, and its unimportance. ⟦TO-AUTHOR⟧ country: pressed (unwalled)",
+      "column": "(second typed field)",
+      "value": "settlement",
+      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-11 :: UNWALLED-SMALL",
+      "klass": "C3",
+      "arm": "a processing claim on a goods sentence",
+      "clause": "pressed (unwalled)",
+      "column": "supplyChainState chain row",
+      "value": "unresolved",
+      "description": "\"pressed\" asserts a processing fact; a flow word is licensed by the field, a processing step by a chain row"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-11 :: UNWALLED-SMALL",
+      "klass": "Q",
+      "arm": "a trailing coordinate naming no second field",
+      "clause": "at this size the country and the town simply agree to differ. ⟦TO-AUTHOR⟧ country: pressed (unwalled)",
+      "column": "(second typed field)",
+      "value": "settlement",
+      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
+     }
+    ],
+    "findingCount": 8
+   },
+   "lengths": {
+    "form": "sentence",
+    "ceiling": null,
+    "rows": [
+     {
+      "vid": 1,
+      "faces": [
+       4
+      ]
+     }
+    ]
+   },
+   "siblings": [
+    {
+     "vid": 1,
+     "faces": 1,
+     "synonymSwaps": 0,
+     "notExecutable": 1
+    }
+   ],
+   "band": [
+    {
+     "vid": 1,
+     "face": 0,
+     "executable": true,
+     "sentences": 1,
+     "scored": 21,
+     "exceeded": 15,
+     "exceededShare": 0.714,
+     "deepest": {
+      "metric": "punctuation.colonRate",
+      "depth": 6.987,
+      "side": "over"
+     },
+     "meanDistanceFromMedian": 1.128,
+     "budgetOk": false,
+     "depthOk": false,
+     "perfectionSuspect": false
+    }
+   ],
+   "provenance": {
+    "citations": 0,
+    "a13": 0
+   }
+  },
+  {
+   "block": "DS-DEF-11",
+   "pool": "watch: bought (revealed)",
+   "dir": "def11-watch-revealed",
+   "verdict": "WITHHELD",
+   "why": "",
+   "variants": 1,
+   "faces": [
+    1
+   ],
+   "attach": [
+    "WALLED-QUIET",
+    "WALLED-STRAINED",
+    "WALLED-THREATENED"
+   ],
+   "rateBp": null,
+   "departure": null,
+   "rounds": {
+    "draftRounds": 0,
+    "refineA": false,
+    "refineB": false,
+    "files": []
+   },
+   "units": 8,
+   "walk": {
+    "verdicts": {
+     "FAIL": 0,
+     "WITHHELD": 4,
+     "PASS": 4
+    },
+    "findings": [
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-11 :: WALLED-QUIET",
+      "klass": "Q",
+      "arm": "a trailing coordinate naming no second field",
+      "clause": "built work stands on its own patience. ⟦TO-AUTHOR⟧ watch: bought (revealed)",
+      "column": "(second typed field)",
+      "value": "defwork",
+      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-11 :: WALLED-STRAINED",
+      "klass": "Q",
+      "arm": "a trailing coordinate naming no second field",
+      "clause": "stone keeps itself, and wages do not. ⟦TO-AUTHOR⟧ watch: bought (revealed)",
+      "column": "(second typed field)",
+      "value": "settlement, defwork",
+      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-11 :: WALLED-THREATENED",
+      "klass": "Q",
+      "arm": "a trailing coordinate naming no second field",
+      "clause": "the threat is on the town's books as plainly as the grain. ⟦TO-AUTHOR⟧ watch: bought (revealed)",
+      "column": "(second typed field)",
+      "value": "settlement, defwork",
+      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-11 :: WALLED-THREATENED",
+      "klass": "Q",
+      "arm": "a trailing coordinate naming no second field",
+      "clause": "the town knows what it is for and checks it. ⟦TO-AUTHOR⟧ watch: bought (revealed)",
+      "column": "(second typed field)",
+      "value": "settlement, defwork",
+      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
+     }
+    ],
+    "findingCount": 4
+   },
+   "lengths": {
+    "form": "sentence",
+    "ceiling": null,
+    "rows": [
+     {
+      "vid": 1,
+      "faces": [
+       4
+      ]
+     }
+    ]
+   },
+   "siblings": [
+    {
+     "vid": 1,
+     "faces": 1,
+     "synonymSwaps": 0,
+     "notExecutable": 1
+    }
+   ],
+   "band": [
+    {
+     "vid": 1,
+     "face": 0,
+     "executable": true,
+     "sentences": 1,
+     "scored": 21,
+     "exceeded": 15,
+     "exceededShare": 0.714,
+     "deepest": {
+      "metric": "punctuation.colonRate",
+      "depth": 6.987,
+      "side": "over"
+     },
+     "meanDistanceFromMedian": 1.128,
+     "budgetOk": false,
+     "depthOk": false,
+     "perfectionSuspect": false
+    }
+   ],
+   "provenance": {
+    "citations": 0,
+    "a13": 0
+   }
+  },
+  {
+   "block": "DS-DEF-11",
+   "pool": "watch: bought (covert)",
+   "dir": "def11-watch-covert",
+   "verdict": "WITHHELD",
+   "why": "",
+   "variants": 1,
+   "faces": [
+    1
+   ],
+   "attach": [
+    "WALLED-QUIET",
+    "WALLED-STRAINED",
+    "WALLED-THREATENED"
+   ],
+   "rateBp": null,
+   "departure": null,
+   "rounds": {
+    "draftRounds": 0,
+    "refineA": false,
+    "refineB": false,
+    "files": []
+   },
+   "units": 8,
+   "walk": {
+    "verdicts": {
+     "FAIL": 0,
+     "WITHHELD": 4,
+     "PASS": 4
+    },
+    "findings": [
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-11 :: WALLED-QUIET",
+      "klass": "Q",
+      "arm": "a trailing coordinate naming no second field",
+      "clause": "built work stands on its own patience. ⟦TO-AUTHOR⟧ watch: bought (covert)",
+      "column": "(second typed field)",
+      "value": "defwork",
+      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-11 :: WALLED-STRAINED",
+      "klass": "Q",
+      "arm": "a trailing coordinate naming no second field",
+      "clause": "stone keeps itself, and wages do not. ⟦TO-AUTHOR⟧ watch: bought (covert)",
+      "column": "(second typed field)",
+      "value": "settlement, defwork",
+      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-11 :: WALLED-THREATENED",
+      "klass": "Q",
+      "arm": "a trailing coordinate naming no second field",
+      "clause": "the threat is on the town's books as plainly as the grain. ⟦TO-AUTHOR⟧ watch: bought (covert)",
+      "column": "(second typed field)",
+      "value": "settlement, defwork",
+      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-11 :: WALLED-THREATENED",
+      "klass": "Q",
+      "arm": "a trailing coordinate naming no second field",
+      "clause": "the town knows what it is for and checks it. ⟦TO-AUTHOR⟧ watch: bought (covert)",
+      "column": "(second typed field)",
+      "value": "settlement, defwork",
+      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
+     }
+    ],
+    "findingCount": 4
+   },
+   "lengths": {
+    "form": "sentence",
+    "ceiling": null,
+    "rows": [
+     {
+      "vid": 1,
+      "faces": [
+       4
+      ]
+     }
+    ]
+   },
+   "siblings": [
+    {
+     "vid": 1,
+     "faces": 1,
+     "synonymSwaps": 0,
+     "notExecutable": 1
+    }
+   ],
+   "band": [
+    {
+     "vid": 1,
+     "face": 0,
+     "executable": true,
+     "sentences": 1,
+     "scored": 21,
+     "exceeded": 15,
+     "exceededShare": 0.714,
+     "deepest": {
+      "metric": "punctuation.colonRate",
+      "depth": 6.987,
+      "side": "over"
+     },
+     "meanDistanceFromMedian": 1.128,
+     "budgetOk": false,
+     "depthOk": false,
+     "perfectionSuspect": false
+    }
+   ],
+   "provenance": {
+    "citations": 0,
+    "a13": 0
+   }
+  },
+  {
+   "block": "DS-DEF-2",
+   "pool": "stores: short",
+   "dir": "def2-stores-short",
+   "verdict": "WITHHELD",
+   "why": "",
+   "variants": 1,
+   "faces": [
+    1
+   ],
+   "attach": [
+    "Disasters & Famine: granary AND hospital"
+   ],
+   "rateBp": 1563,
+   "departure": 0,
+   "rounds": {
+    "draftRounds": 0,
+    "refineA": false,
+    "refineB": false,
+    "files": []
+   },
+   "units": 3,
+   "walk": {
+    "verdicts": {
+     "FAIL": 0,
+     "WITHHELD": 2,
+     "PASS": 1
+    },
+    "findings": [
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
+      "klass": "Q",
+      "arm": "a trailing coordinate naming no second field",
+      "clause": "between them the town can take a failed harvest or an outbreak without either becoming a catastrophe. ⟦TO-AUTHOR⟧ stores: short",
+      "column": "(second typed field)",
+      "value": "settlement",
+      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
+      "arm": "A3",
+      "subject": "the band half is the refuter's",
+      "value": "rather than in the luck",
+      "description": "no sibling KEY names this alternative; whether a sibling BAND supplies it is the refuter's (siblings: Beasts & Monsters: plagued, perimeter AND organized force | Beasts & Monsters: plagued, perimeter but NO force to hold it | Beasts & Monsters: plagued, NO perimeter and NO force | Beasts & Monsters: frontier, credible deterrence)"
+     }
+    ],
+    "findingCount": 2
+   },
+   "lengths": {
+    "form": "sentence",
+    "ceiling": null,
+    "rows": [
+     {
+      "vid": 1,
+      "faces": [
+       3
+      ]
+     }
+    ]
+   },
+   "siblings": [
+    {
+     "vid": 1,
+     "faces": 1,
+     "synonymSwaps": 0,
+     "notExecutable": 1
+    }
+   ],
+   "band": [
+    {
+     "vid": 1,
+     "face": 0,
+     "executable": true,
+     "sentences": 1,
+     "scored": 21,
+     "exceeded": 14,
+     "exceededShare": 0.667,
+     "deepest": {
+      "metric": "punctuation.colonRate",
+      "depth": 6.987,
+      "side": "over"
+     },
+     "meanDistanceFromMedian": 0.957,
+     "budgetOk": true,
+     "depthOk": false,
+     "perfectionSuspect": false
+    }
+   ],
+   "provenance": {
+    "citations": 0,
+    "a13": 0
+   }
+  },
+  {
+   "block": "DS-DEF-2",
+   "pool": "stores: import-fed",
+   "dir": "def2-stores-importfed",
+   "verdict": "WITHHELD",
+   "why": "",
+   "variants": 1,
+   "faces": [
+    1
+   ],
+   "attach": [
+    "Disasters & Famine: granary AND hospital"
+   ],
+   "rateBp": 4010,
+   "departure": 0,
+   "rounds": {
+    "draftRounds": 0,
+    "refineA": false,
+    "refineB": false,
+    "files": []
+   },
+   "units": 3,
+   "walk": {
+    "verdicts": {
+     "FAIL": 0,
+     "WITHHELD": 2,
+     "PASS": 1
+    },
+    "findings": [
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
+      "klass": "Q",
+      "arm": "a trailing coordinate naming no second field",
+      "clause": "between them the town can take a failed harvest or an outbreak without either becoming a catastrophe. ⟦TO-AUTHOR⟧ stores: import-fed",
+      "column": "(second typed field)",
+      "value": "settlement",
+      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
+      "arm": "A3",
+      "subject": "the band half is the refuter's",
+      "value": "rather than in the luck",
+      "description": "no sibling KEY names this alternative; whether a sibling BAND supplies it is the refuter's (siblings: Beasts & Monsters: plagued, perimeter AND organized force | Beasts & Monsters: plagued, perimeter but NO force to hold it | Beasts & Monsters: plagued, NO perimeter and NO force | Beasts & Monsters: frontier, credible deterrence)"
+     }
+    ],
+    "findingCount": 2
+   },
+   "lengths": {
+    "form": "sentence",
+    "ceiling": null,
+    "rows": [
+     {
+      "vid": 1,
+      "faces": [
+       3
+      ]
+     }
+    ]
+   },
+   "siblings": [
+    {
+     "vid": 1,
+     "faces": 1,
+     "synonymSwaps": 0,
+     "notExecutable": 1
+    }
+   ],
+   "band": [
+    {
+     "vid": 1,
+     "face": 0,
+     "executable": true,
+     "sentences": 1,
+     "scored": 21,
+     "exceeded": 14,
+     "exceededShare": 0.667,
+     "deepest": {
+      "metric": "punctuation.colonRate",
+      "depth": 6.987,
+      "side": "over"
+     },
+     "meanDistanceFromMedian": 0.957,
+     "budgetOk": true,
+     "depthOk": false,
+     "perfectionSuspect": false
+    }
+   ],
+   "provenance": {
+    "citations": 0,
+    "a13": 0
+   }
+  },
+  {
+   "block": "DS-GEN-3",
+   "pool": "purse: short",
+   "dir": "gen3-purse-short",
+   "verdict": "WITHHELD",
+   "why": "",
+   "variants": 1,
+   "faces": [
+    1
+   ],
+   "attach": [
+    "scores.military: CRITICAL",
+    "scores.military: WEAK"
+   ],
+   "rateBp": 6641,
+   "departure": 0,
+   "rounds": {
+    "draftRounds": 0,
+    "refineA": false,
+    "refineB": false,
+    "files": []
+   },
+   "units": 6,
+   "walk": {
+    "verdicts": {
+     "FAIL": 0,
+     "WITHHELD": 2,
+     "PASS": 4
+    },
+    "findings": [
+     {
+      "channel": "WITHHELD",
+      "id": "DS-GEN-3 :: scores.military: CRITICAL",
+      "klass": "Q",
+      "arm": "a trailing coordinate naming no second field",
+      "clause": "the gate is shut at night by whoever is nearest to it. ⟦TO-AUTHOR⟧ purse: short",
+      "column": "(second typed field)",
+      "value": "settlement",
+      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-GEN-3 :: scores.military: WEAK",
+      "arm": "A3",
+      "subject": "the band half is the refuter's",
+      "value": "rather than in what the hall issues",
+      "description": "no sibling KEY names this alternative; whether a sibling BAND supplies it is the refuter's (siblings: scores.military: STRONG | scores.military: ADEQUATE | scores.military: WEAK | scores.military: CRITICAL)"
+     }
+    ],
+    "findingCount": 2
+   },
+   "lengths": {
+    "form": "sentence",
+    "ceiling": null,
+    "rows": [
+     {
+      "vid": 1,
+      "faces": [
+       3
+      ]
+     }
+    ]
+   },
+   "siblings": [
+    {
+     "vid": 1,
+     "faces": 1,
+     "synonymSwaps": 0,
+     "notExecutable": 1
+    }
+   ],
+   "band": [
+    {
+     "vid": 1,
+     "face": 0,
+     "executable": true,
+     "sentences": 1,
+     "scored": 21,
+     "exceeded": 14,
+     "exceededShare": 0.667,
+     "deepest": {
+      "metric": "punctuation.colonRate",
+      "depth": 6.987,
+      "side": "over"
+     },
+     "meanDistanceFromMedian": 0.957,
+     "budgetOk": true,
+     "depthOk": false,
+     "perfectionSuspect": false
+    }
+   ],
+   "provenance": {
+    "citations": 0,
+    "a13": 0
+   }
+  }
+ ],
+ "walk": {
+  "totalUnits": 34,
+  "n": 34,
+  "exhaustive": true,
+  "msPerUnit": 0.38235294117647056,
+  "exhaustiveMs": 13,
+  "confidence": "the whole population is walked, so every arm rate is exact and no interval applies",
+  "sampleSha": "c8c4b10ebd94e1853a126723fea82919962dad54461ba4482b93b27e0fff2496",
+  "verdicts": {
+   "FAIL": 0,
+   "WITHHELD": 17,
+   "PASS": 17
+  }
+ },
+ "manifest": {
+  "executable": false,
+  "why": "no --base cells table was supplied, so no cell can be classified"
+ },
+ "variety": {
+  "executable": false,
+  "why": "the VARIETY run was not asked for (--variety 0)"
+ },
+ "ties": {
+  "rungs": 8,
+  "multiCandidateRungs": 4,
+  "pairs": 30,
+  "ties": 0,
+  "tieBp": 0,
+  "note": ""
+ },
+ "seconds": 0
+}

@@ -1,0 +1,976 @@
+81 Crannogman - uma análise da tradução de neologismos de George R. R. Martin com o 
+auxílio da linguística de corpus 
+Revista Colineares, Mossoró/RN, v. 9, n. 2, Jul./Dez, 2022, p.81-98. 
+ 
+ 
+CRANNOGMAN - UMA ANÁLISE DA TRADUÇÃO DE NEOLOGISMOS DE 
+GEORGE R. R. MARTIN COM O AUXÍLIO DA LINGUÍSTICA DE CORPUS 
+CRANNOGMAN - AN ANALYSIS OF THE TRANSLATION OF NEOLOGISMS 
+BY GEORGE R. R. MARTIN WITH THE AID OF CORPUS LINGUISTICS 
+ 
+Vinícius Gomes de Morais1  
+Nilson Roberto Barros da Silva 2 
+ 
+RESUMO: Este artigo possui como objetivo analisar as estratégias de tradução dos 
+neologismos criados pelo escritor americano George R. R. Martin presentes nas obras 
+de literatura fantástica da série de livros em língua  inglesa A Song of Ice and Fire  (As 
+Crônicas de Gelo e Fogo) . Primeiramente, encontraram-se os neologismos do corpus 
+de estudo em sua língua de partida  (língua inglesa), usando a Linguística de Corpus 
+com auxílio do software para análise linguística em corpora Wordsmith Tools 8.0  
+(SCOTT, 2021) . Em seguida, foram categorizadas  as criações lexicais em língua 
+inglesa com base nos processos linguísticos que as formam (STEINBERG, 2003), 
+assim como identificaram-se os procedimentos ou técnicas utilizadas ao tradu zir seus 
+correspondentes em língua portuguesa (NEWMARK, 1988) e (BEDNARSKA, 2015) . 
+Finalmente, analisou-se como um dos neologismos foi formado e de que modo a 
+tradução dele se configur ou. A abordagem metodológica dessa pesquisa possui 
+caráter quali-quantitivo e descritivo. Qualitativo, como é próprio dos estudos realizados 
+na área das ciências humanas e linguísticas e quantitativo porque levou-se em conta a 
+quantidade de neologismos encontrados através da coleta de dados.  Ao concluir este 
+artigo, tem -se com o principais achados os estudos acerca da linguística de corpus 
+que, ao encontrar os neologismos dentro de um corpus tão vasto como o utilizado, 
+colaborou para a realização dessa pesquisa, sobretudo no fator tempo. A teoria sobre 
+Neologia e Neologismos demonstrou como determinar o que é um neologismo , bem 
+como deu suporte à compreensão da formação de uma nova palavra e ao 
+entendimento das traduções. 
+ 
+Palavras-chave: Linguística de Corpus; Tradução literária ; Neologismos; Neologia; 
+George R. R. Martin. 
+                                                             
+1 Mestrando do PPCL - Pós-Graduação em Ciências da Linguagem da Universidade do Estado 
+do Rio Grande do Norte (UERN). E-mail: viniciusgomes@alu.uern.br 
+2 Possui doutorado em Estudos Linguísticos e Literários em Inglês pelo Programa de Pós -
+Graduação em Estudos Linguísticos e Literários em Ingl ês da Universidade de São Paulo  
+(USP). É professor do quadro permanente do Programa de Pós-Graduação em Ciências da  
+Linguagem (PPCL) da Universidade do Estado do Rio Gr ande do Norte (UERN) e líder do  
+Grupo de Estudos da Tradução (GET) – UERN/CNPQ. E-mail: nilsonbarros@uern.br.  
+
+82 Crannogman - uma análise da tradução de neologismos de George R. R. Martin com o 
+auxílio da linguística de corpus 
+Revista Colineares, Mossoró/RN, v. 9, n. 2, Jul./Dez, 2022, p.81-98. 
+ 
+ABSTRACT: This article aims to analyze the translation strategies of the neologisms 
+created by the American writer George R. R. Martin present in the fantastic literature 
+works of the series of books in English language A Song of Ice and Fire . First, the 
+neologisms of the study corpus were found in their source language (English), using 
+Corpus Linguistics with the aid of software for linguistic analysis in corpora Wordsmith 
+Tools 8.0 (SCOTT, 2021). Then, the lexical creations in English were categorized 
+based on the linguistic processes that form them (STEINBERG, 2003), as well as the 
+procedures or techniques used when translating their correspondents in Portuguese 
+(NEWMARK, 1988) and (BEDNARSKA , 2015). Finally, it was analyzed how one of the 
+neologisms was form ed and how its translation was configured. The methodological 
+approach of this research has a quali -quantitative and descriptive character. 
+Qualitative, as it is characteristic of studies carried out in the field of humanities and 
+linguistics, and quantita tive, because the number of neologisms found through data 
+collection was considered. At the end of this article, the main findings are the studies 
+on corpus linguistics which, by finding the neologisms within a corpus as vast as the 
+one used, collaborated to carry out this research, especially in terms of time. The 
+theory on Neology and Neologisms demonstrated how to determine what a neologism 
+is, as well as supporting the understanding of new word formation and the 
+understanding of translations. 
+ 
+Keywords: Corpus Linguistics; Literary translation; Neologisms; Neology; George R.R. 
+Martin. 
+ 
+1 INTRODUÇÃO 
+ A renovação lexical de uma determinada língua é um fenômeno 
+constante. Provavelmente, é uma manifestação linguística incessante, ao 
+menos, até que os seres i natos à linguagem desapareçam por completo. Tal 
+fato evidencia a competência linguística dos falantes em poder se adaptarem a 
+contextos e necessidades linguísticas diversas. Como exemplos, podemos citar 
+os contextos técnicos e tecnológicos, onde criações l exicais são recorrentes, 
+devido à vitalidade que essas áreas possuem. Podemos citar também o 
+contexto literário, no qual os autores utilizam -se do recurso da criação de 
+palavras para imprimir suas marcas características enquanto escritores, assim 
+como para fornecer identidade peculiar às suas obras. 
+ 
+2 FUNDAMENTAÇÃO TEÓRICA 
+ 
+ A fundamentação teórica deste artigo configura-se na seguinte estrutura: 
+Neologia; Neologismos; Tipos de neologismos e suas categorias; Neologismos 
+literários e tradução. 
+ 
+2.1 Neologia 
+ 
+ Para fins de contextualização dentro da temática na qual este artigo 
+possui seus fundamentos, há de se introduzir a  Neologia. Segundo Alves 
+(2007, p. 5), “o acervo lexical de todas as línguas se renova. Enquanto algumas 
+palavras deixam de ser utilizadas  e tornam -se arcaicas, uma grande 
+quantidade de unidades léxicas é criada”, sejam elas pelos falantes ou por 
+escritores literários ou jornalísticos etc. Denomina-se esse processo de criação 
+lexical de Neologia. 
+83 Crannogman - uma análise da tradução de neologismos de George R. R. Martin com o 
+auxílio da linguística de corpus 
+Revista Colineares, Mossoró/RN, v. 9, n. 2, Jul./Dez, 2022, p.81-98. 
+ 
+Pode-se entender a neologia sob duas concepçõ es diferentes de acordo 
+com Correia e Almeida (2012, p. 17) , quais sejam: “como capacidade de 
+renovação do léxico e como objeto de estudo com metodologia específica.” Em 
+uma perspectiva mais detalhada nesse sentido, 
+ 
+ A neologia traduz a capacidade natural de renovação do 
+léxico de uma língua pela criação e incorporação de unidades 
+novas, os neologismos. 
+ A neologia é entendida, ainda, como o estudo (observação, 
+registro, descrição e análise) dos neologismos que vão 
+surgindo na língua (CORREIA e ALMEIDA, 2012, p. 17)  
+  
+Em outras palavras, a Neologia pode ser o fenômeno linguístico inerente 
+à capacidade linguística na qual usuários da língua criam palavras. Neologia 
+também é a área de estudo da linguística que se ocupa de estudar, observar, 
+descrever e analisar tal fenômeno em uma dada língua. 
+ Conforme Correia e Almeida (2012), há dois tipos de Neologia sob a 
+ótica de fenômeno linguístico. A denominativa, que é decorrente da 
+necessidade de dar nomes a novos acontecimentos, realidades, objetos etc. , 
+que não existem e a estilística, que consiste em fornecer maior expressividade 
+e nova visão a ideias anteriormente concebidas. O corpus de estudo des ta 
+pesquisa, por exemplo, constitui -se em sua maior parte por palavras 
+decorrentes da neologia estilística.  
+As palavr as que resultam da neologia denominativa tendem a ser 
+incluídas no sistema linguístico de uma dada língua, pois são criadas pela 
+necessidade de nomear algo inédito e por isso são mais frequentemente 
+estudadas. Por sua vez, as unidades lexicais resultantes da neologia estilística 
+excepcionalmente entram em um idioma porque são pertencentes a contextos 
+mais contidos como a literatura. Elas são vistas como criações linguísticas e 
+“por vezes até violadoras do sistema linguístico, podendo, pois, dar indícios de 
+mudanças no sistema, e os seus produtos passar a ser interessantes objetos 
+de estudo para muitos morfologistas.” (CORREIA e ALMEIDA, 2012, p. 20).  
+Os neologismos estilísticos são vistos como ‘violadores do sistema 
+linguístico’ ou digamos, apresentam insta bilidade na escrita, por exemplo, 
+quando são formados por composição de partes de palavras ou em inglês 
+blends, que é a junção de duas palavras já existentes para formar uma só. 
+Veremos esse conceito mais adiante. Desde que os textos que compõem o 
+corpus sejam publicados antes da criação do neologismo buscado , essas 
+criações não são encontradas em corpora gerais de línguas e em dicionários, o 
+que é visto como um critério para determinação do caráter neológico. 
+Entendemos assim, que os neologismos estilístic os podem ser classificados 
+também como neologismos literários, pois são criações lexicais que expressam 
+a visão que um dado autor possui para determinadas realidades e que 
+possuem originalidade uma vez que causam efeito de sentido novo em certos 
+contextos. 
+ 
+2.1.1 Neologismos 
+ 
+Considerando do que se trata a Neologia, compreendemos que as 
+unidades lexicais, ou mais simplesmente as palavras, que nascem desse 
+processo são chamadas de Neologismos. Os Neologismos “podem ser 
+84 Crannogman - uma análise da tradução de neologismos de George R. R. Martin com o 
+auxílio da linguística de corpus 
+Revista Colineares, Mossoró/RN, v. 9, n. 2, Jul./Dez, 2022, p.81-98. 
+ 
+definidos como unidades lexicais recentemente inventadas ou unidades lexicais 
+já existentes que adquirem novos sentidos.” (NEWMARK, 1988, p. 140) 3 É 
+importante debater sobre ‘recentemente inventadas’. Uma palavra nova é 
+assim considerada em uma dada época na qual foi inventada, mas o período 
+que isso aconteceu é apenas uma característica perceptível acerca do que se 
+trata a inovação. Nesse sentido, Fischer (1998) define “neologismo como uma 
+unidade lexical que não mais é uma palavra que foi usada apenas uma vez, 
+mas que ainda é nova para a maior ia dos falantes .” (FISCHER, 1998, p. 3) 4 
+Deste modo, a novidade no âmbito da criação lexical é um fenômeno subjetivo 
+a um dado grupo de falantes e não um fenômeno temporal. Mais dois critérios 
+são mencionados por Fischer (1998): frequência e difusão social . Um 
+neologismo é caracterizado quando possui certa frequência em determinados 
+contextos para os quais ele foi criado, mas também pode o ser, ainda que 
+possua baixa frequência, mesmo quando é usado em contextos além do tipo 
+de texto no qual foi visto pela primeira vez. Portanto, um dado neologismo pode 
+ter sido usado poucas vezes dentro de um corpus literário onde foi 
+originalmente concebido, mas ser usado inúmeras vezes e assim ser 
+convencionalizado por críticos, leitores etc. em outras situações de 
+comunicação. 
+O conceito da novidade sobre a definição de neologismo é relacionado 
+com os dicionários através das seguintes questões: “Essa palavra existe? Se 
+não está no dicionário, podemos usá -la?” (ALVES; MARONEZE 2018, p. 9) . 
+Segundo eles, historicamente, os dicionários são usados desde a década de 
+1960 para estabelecer a novidade de uma unidade lexical. Tal critério foi 
+determinado com o surgimento do primeiro observatório de neologia, que foi 
+inaugurado pelo lexicólogo e lexicógrafo francês Bernard Quemada, na França. 
+Boulanger (1979) evidenciou tal procedimento metodológico como 
+ 
+Longo e por vezes exigente para o terminólogo. Para analisar e 
+reconhecer o estatuto neológico ou lexicalizado da unidade 
+terminológica que se processa, desenvolveu -se um suporte de  
+trabalho denominado ficha do corpus lexicográfico e de 
+exclusão terminológica. Esse suporte constitui um filtro 
+linguístico. (BOULANGER, 1979, link, tradução nossa)5 
+ 
+Boulanger (1979) nomeou essa metodologia de ‘ corpus de exclusão’ e é 
+utilizada até hoje como mais um critério para determinação do caráter 
+neológico de uma palavra.  
+Ao mesmo tempo que a ciência da informática se desenvolveu, a 
+metodologia para a determinação dos neologismos através de corpus de 
+exclusão progrediu. Em um dado idioma, corpora digitais contendo gêneros 
+diversos, tais como revistas de diferentes assuntos, livros, notícias, entrevistas, 
+páginas da web, textos acadêmicos, legendas de filmes e séries, língua falada 
+                                                             
+3 No original: Neologisms can be defined as newly coined lexical units or existing lexical units 
+that acquire a new sense. 
+4 No original: a neologism is a word which has lost its status of a nonce-formation but is still one 
+which is considered new by the majority of the members of a speech community. 
+5 No original: longue, et parfois astreignante pour le terminologue. Un support de travail, appelé 
+fiche du corpus d ’exclusion lexicographique et terminologique, a été élaboré afin d’analyser et 
+de reconnaître le statut néologique ou lexicalisé de l’unité terminologique qui est traitée. Ce 
+support constitue un filtre linguistique. 
+85 Crannogman - uma análise da tradução de neologismos de George R. R. Martin com o 
+auxílio da linguística de corpus 
+Revista Colineares, Mossoró/RN, v. 9, n. 2, Jul./Dez, 2022, p.81-98. 
+ 
+etc. passaram a desempenhar a função de constatar a ausência de um 
+provável candidato a neologismo. Função essa que era limitada às obras 
+lexicográficas, os dicionários. Tais corpora propiciam saber quando uma dada 
+palavra foi utilizada pela primeira vez dentro de um determinado período, 
+tornando, assim, a determinação de uma palavra como neológica ainda mais 
+precisa. Essa também é a visão de Alves e Maroneze (2018, p.  13),  “as 
+ferramentas computacionais atuais representam uma grande facilitação do 
+trabalho de identificação e coleta de neologismos. ” É importante destacar e  
+será visto mais adiante nessa pesquisa que, ainda que o uso de ferramentas 
+computacionais auxilie o processo para encontrar e determinar neologismos, a 
+mediação do ser humano para chegar a tal descoberta é fundamental, pois 
+determinados comandos manuais são necessários para assistir o computador. 
+Uma segunda ‘limitação’ ainda nessa perspectiva computacional, de 
+acordo com Alves e Maroneze, é a identificação dos neologismos semânticos, 
+que são palavras iguais, já existentes dentro do sistema lexical de uma língua, 
+mas com ‘novos’ significados. Nesse sentido, o indivíduo interessado no 
+reconhecimento de um neologismo semântico deveria fazê -lo manualmente, 
+pois 
+ 
+É necessário que uma ferramenta seja capaz de identificar as 
+diversas acepções das unidades lexicai s para, assim, 
+identificar uma acepção ainda não registrada. Já há, no âmbito 
+da Linguística Computacional, experimentos que envolvem 
+identificação automática de acepções e desambiguação de 
+homônimos; é possível que, no futuro, esses algoritmos 
+venham a se r adaptados para a identificação de neologismos 
+semânticos. (ALVES e MARONEZE, 2018, p. 13) 
+ 
+ Ao debater sobre neologismos semânticos, é fundamental contextualizá -
+los na perspectiva do sentimento de novidade de uma dada palavra. Segundo 
+Correia e Almeida (2012), os neologismos podem apresentar novidade formal e 
+semântica. A formal é percebida “quando o neologismo apresenta uma forma 
+não atestada no estágio anterior do registro de língua.” Isto é, a palavra nova 
+pode ser notada pelo ineditismo de sua escrita , ou seja, nunca vista antes, ou 
+também por apresentar ‘instabilidade formal’, que é quando uma unidade 
+lexical parece com uma já existente, mas possui modificações do ponto de 
+vista morfológico, fonético ou ortográfico. Os neologismos formais também são 
+chamados de lexicais. A novidade semântica, como anteriormente 
+apresentada, ocorre “quando o neologismo corresponde a uma nova 
+associação significado-significante” (CORREIA; ALMEIDA, 2012, p. 24 -25), ou 
+seja, uma palavra que já existe manifesta nova definição.  
+ Levando-se em consideração o que foi abordado, o conceito de 
+Neologismo pode aparentar ser uma nomenclatura falsa. Tem -se essa 
+compreensão à primeira vista porque quando se olha para sua principal 
+definição, julga -se que é somente assim quando se é u ma palavra nova ou 
+recente. Isso seria uma simplificação.  
+Observando os critérios apresentados, a definição do que é Neologismo 
+vai além da própria nomenclatura. “ Em função dessas observações, pode -se 
+considerar que se trata de um conceito pragmático, met odológico, sem dúvida 
+86 Crannogman - uma análise da tradução de neologismos de George R. R. Martin com o 
+auxílio da linguística de corpus 
+Revista Colineares, Mossoró/RN, v. 9, n. 2, Jul./Dez, 2022, p.81-98. 
+ 
+trivial, mas não de um pseudoconceito .” (REY, 1976, p. 17) 6 Os critérios aqui 
+apresentados trazem o entendimento do neologismo como tendo sua função 
+prática quando é necessário assim ser. Isto é, que não se resume somente à 
+novidade temporal, mas que também possui bases para não deixar incertezas 
+quanto à determinação do que são neologismos.  Em síntese, entende -se o 
+‘neologismo’ na acepção do termo, quando é uma nova palavra no sentido da 
+novidade em função do período no qual foi inve ntada e adicionalmente para 
+efeitos deste artigo, compreendemos também como ‘Criação Lexical’ quando é 
+usada em outros tempos diferentes. 
+ 
+2.1.1.1 Tipos de neologismos e suas categorias 
+ 
+ De acordo com Steinberg (2003), a estruturação dos neologismos segue  
+as regras morfológicas, isto é, de formação de palavras, da língua na qual são 
+criados. Em virtude dessa observação, é possível categorizá -los em diversos 
+tipos. Neste artigo, os tipos de neologismos serão denominados também como 
+processos linguísticos de  neologismos. Steinberg (2003) elenca tipos de 
+neologismos que advém da língua inglesa, sobretudo da variante norte -
+americana, porém, lista alguns exemplos que são comuns à variação britânica.  
+Por sua vez, as teóricas Correia e Almeida (2012), respectivam ente 
+portuguesa e brasileira, fazem um aporte teórico e procedimental acerca dos 
+tipos e processos de neologismos em língua portuguesa. Todavia, são 
+processos, em sua maioria, similares aos de língua inglesa e quando forem, 
+sempre que possível, iremos comp ará-los a fim de complementar os que são 
+apresentados por Steinberg (2003). 
+Na língua inglesa, a formação das criações lexicais fundamenta -se nos 
+seguintes processos linguísticos: 
+  
+a) Empréstimo, Empréstimo duplo, Tradução de empréstimos  
+ 
+Segundo Steinberg (2003), são as palavras adotadas de outras línguas 
+que passam por modificações ou adaptações de pronúncia e/ou escrita. Há 
+também os empréstimos que são incorporados e não passam por mudança. O 
+sentido também pode passar por mudanças. Os empréstimos ori ginam outros 
+neologismos através de outros processo s. Seus subtipos são empréstimos das 
+línguas indígenas, francesa, espanhola, holandesa e alemã. Grande parte das 
+palavras emprestadas pelas línguas indígenas caíram em desuso, mas podem 
+ser vistas até hoje  como topônimos (nomes de lugares) ao observar o mapa 
+dos EUA. Os empréstimos duplos são os neologismos originados ao pegar 
+uma palavra de uma língua que já havia sido apropriada de outra. Há os 
+empréstimos que são traduzidos, isto é, apropria -se de um ter mo que não 
+existia na língua inglesa ao fazer a tradução. 
+ 
+b) Mudança de categoria gramatical 
+ 
+De acordo com Steinberg (2003), a língua inglesa oportuniza a transição 
+e mudança de uma palavra pertencente a uma classe para outra, tornando 
+assim possível o s urgimento de neologismos. A mudança mais frequente, 
+                                                             
+6 No original: Compte tenu de ces remar ques, on pourra considérer qu’il s’agit d’un concept 
+pragmatique, méthodologique, sans doute trivial, mais non pas d’un pseudo-concept. 
+87 Crannogman - uma análise da tradução de neologismos de George R. R. Martin com o 
+auxílio da linguística de corpus 
+Revista Colineares, Mossoró/RN, v. 9, n. 2, Jul./Dez, 2022, p.81-98. 
+ 
+nesse sentido, é a de substantivo para verbo. O inverso pode acontecer, mas 
+não tão comumente. Ademais, verbos podem tornar-se adjetivos etc.  
+ 
+c) Compostos 
+ 
+Conforme Steinberg (2003), neologismos compost os podem ser escritos 
+com seus elementos juntos, separadamente ou juntos por hífen. Seus subtipos 
+são os compostos britânicos e os compostos compartilhados entre inglês 
+americano e britânico. O princípio que caracteriza uma palavra composta é o 
+som, podend o ser manifestado pelo acento ou pela entoação. As palavras 
+compostas têm na primeira parte de sua composição a entonação mais forte, 
+diferentemente dos adjetivos que possuem no substantivo, que é o segundo 
+elemento em língua inglesa, a tonicidade na pronú ncia. Algumas criações 
+lexicais compostas foram realizadas para nomear, principalmente, plantas e 
+animais que eram desconhecidos pelos colonizadores ingleses em território 
+norte-americano, destaca Steinberg (2003). 
+  
+d) Afixação 
+ 
+ O processo linguístico no qual neologismos de afixação são formados se 
+caracteriza pelo uso de prefixos e sufixos na estrutura das palavras novas. 
+Steinberg (2003) salienta que alguns dos sufixos são empréstimos do francês, 
+latim, espanhol e alemão.  
+ 
+e) Redução 
+ 
+ A redução aconte ce quando uma palavra já existente passa a ter uma 
+forma mais curta. As reduções são diferentes das abreviações. Steinberg 
+(2003) especifica que a redução é uma palavra resultante de outra que sofre 
+uma perda na pronúncia e passa a ter uma nova manifestaçã o escrita. Tal 
+processo pode ser também chamado de Truncação. Adicionalmente, o 
+neologismo de redução é criado com o intuito de tornar a nova unidade lexical 
+“mais facilmente memorizável e utilizável”. (CORREIA; ALMEIDA, 2012, p. 57)  
+Segundo Steinberg, os  subtipos de neologismo de redução são 
+inúmeros, tais como de sílaba(s) no final e início de palavras, com alteração 
+ortográfica, por analogia com paradigma já existente etc. bem como podem ser 
+reduções norte -americanas, britânicas, compartilhadas entre as  variações do 
+inglês, idênticas, de nomes próprios etc.  
+ 
+f) Reduplicação  
+ 
+ Em conformidade com Steinberg (2003, p. 86), o neologismo de 
+reduplicação é “formado pela repetição de uma palavra ou parte dela”, ou até 
+mesmo realizando modificações ou adições de vogais ou consoantes a partes 
+de palavras repetidas, tornando assim esses neologismos caracterizados por 
+onomatopeias. Seus subtipos podem ser nomeados por reduplicação sem 
+alteração, com alternância vocálica, com alternância consonantal, com adição 
+de sufixo no primeiro componente, com adição de fonema no segundo 
+componente, com adição de fonema no primeiro elemento, com rima vocálica 
+88 Crannogman - uma análise da tradução de neologismos de George R. R. Martin com o 
+auxílio da linguística de corpus 
+Revista Colineares, Mossoró/RN, v. 9, n. 2, Jul./Dez, 2022, p.81-98. 
+ 
+ou consonantal, em estrutura de coordenação, com ‘a’ conectivo; de três 
+componentes e fraseológica. 
+ 
+g) Composição de partes de palavras (blends) 
+ 
+ São nomeadas também de Amálgamas e são criações lexicais 
+produzidas por junção de partes de outras palavras. São regularmente 
+encontradas na linguagem publicitária, e sobretudo pelos escritores na 
+linguagem literária, que é cara cterizada pelo estilo do autor, ressaltam Correia 
+e Almeida (2012, p. 57). Em sintonia com Steinberg  (2003), são neologismos 
+resultantes de outras palavras já existentes, que podem ser formados por “uma 
+ou duas sílabas da palavra inicial + palavra completa , palavra completa + parte 
+de outra palavra, parte inicial de uma palavra e parte final de outra palavra, 
+parte inicial de palavra + parte inicial de palavra e acrônimos.” (STEINBERG, 
+2003, p. 102). Os acrônimos são somente as letras iniciais das palavras.  
+ 
+h) Acrônimos 
+ 
+ Conforme Steinberg (2003), os acrônimos ou siglas são neologismos 
+criados a partir da junção de sílabas ou letras iniciais de palavras e podem 
+nomear associações políticas, esportivas, acadêmicas, comerciais e nos dias 
+de hoje, de forma bastante frequente, são vistos na linguagem da internet.  
+  
+i) Back formation (Derivação regressiva) 
+ 
+ Conforme Steinberg (2003), nesse processo, um verbo é formado a 
+partir de um substantivo ou adjetivo, suprimindo-se um sufixo. 
+ 
+j) Eufemismos 
+ 
+ São os neo logismos criados para substituir palavras ou expressões por 
+equivalentes menos agressivos. Steinberg (2003, p. 113) ressalta que os 
+eufemismos mereciam “um livro à parte, tal a riqueza desse tipo de 
+neologismo.” 
+ 
+k) Pejorativos 
+ 
+ Os neologismos pejorativos  são resultantes de palavras que existem e 
+que passam por modificações de significado. Segundo Steinberg (2003), são 
+usados para denominar pessoas referindo-se aos seus aspectos negativos.  
+ 
+l) Neologismos gráficos 
+ 
+ Segundo Steinberg (2003), são criações lexicais que se assemelham às 
+suas versões originais, passando por alterações em algumas letras na escrita.  
+ 
+2.1.1.1.1 Neologismos literários e tradução 
+ 
+ De modo geral, tarefa tradutória é compreendida como uma atividade de 
+recriação. De acordo com Luiz (2022), "a tradução gera um novo texto, um 
+89 Crannogman - uma análise da tradução de neologismos de George R. R. Martin com o 
+auxílio da linguística de corpus 
+Revista Colineares, Mossoró/RN, v. 9, n. 2, Jul./Dez, 2022, p.81-98. 
+ 
+novo original [...] no sentido de que há sempre uma evocação ao texto -base e 
+que se torna um outro texto -base." (LUIZ, 2022, p. 6). Esta premissa da 
+atividade tradutológica, estende -se, portanto, ao s neologismos l iterários ou 
+estilísticos. Pois, podem ser demasiadamente complicados de traduzir para 
+uma dada língua de chegada. Isso deve -se ao fato de os neologismos 
+estilísticos possuírem a singularidade do seu autor. O criador de neologismos 
+literários pensa e os in venta para que eles habitem e sejam parte orgânica de 
+um determinado contexto e assim torna -os repletos de marcas, o que pode 
+dificultar o trabalho dos tradutores.  
+ Especificamente, ao observarmos as criações lexicais advindas da 
+literatura fantástica, vemos que, em sua maioria, são neologismos lexicais, que 
+são novas palavras formadas, sobretudo, por processos de afixação (prefixos e 
+sufixos) ou composição de duas ou mais palavras já existentes.  
+ A tradução de neologismos é complicada, pois além de trata r dos 
+aspectos culturais de diferentes línguas, é necessário lidar com o significado de 
+novas palavras. Apesar de árdua a tarefa, o tradutor leva em conta fatores 
+básicos como a análise da estrutura que forma a nova palavra e seu contexto. 
+Embora compreenda a formação da nova palavra, bem como seu uso, traduzir 
+uma criação lexical é, por vezes, criar um neologismo na língua de chegada e 
+por outras produzir novos significados.  
+ É necessário entender de que maneiras os neologismos são formados a 
+fim de sugerir como eles podem ser recriados em outra língua, pois, no que se 
+refere à tradução de criações lexicais, os dicionários bilíngues não fornecem 
+traduções. Com base nisso, entende -se que o processo de tradução de 
+neologismos fundamenta -se em aplicar não ape nas um novo significado ou 
+sentido, mas também uma nova função que a nova palavra irá cumprir. Esses 
+aspectos tornam, assim como são os neologismos estilísticos, a tarefa de 
+traduzir criações lexicais algo bastante peculiar, isto é, o significado e função 
+de um neologismo traduzido para uma língua de chegada depende 
+inteiramente das compreensões e das decisões do tradutor. 
+ Embora leve -se em consideração o pensamento anteriormente citado, 
+que possui natureza descritiva, e que não exista um documento que pre screva 
+como traduzir neologismos de modo perfeito, Peter Newmark propõe que a 
+tradução pode seguir procedimentos básicos, os quais “são usados para frases 
+e unidades menores de linguagem.” (NEWMARK, 1988, p. 81) 7. Dessa forma, 
+entendemos que procedimentos podem vir a ser úteis para auxiliar na tradução 
+e na análise de menores porções da linguagem, como palavras, e não textos 
+inteiros. De fato, almejar estabelecer uma metodologia para traduzirem -se 
+textos em massa é algo mais do que prescritivo. Todavia, pro cedimentos no 
+nível da tradução de palavras, tais como neologismos, podem ser aliados à 
+compreensão dos processos linguísticos de inovação lexical. Com base em 
+Newmark (1988), existem especificamente procedimentos para traduzir 
+neologismos. Newmark (1988, p. 150) apresenta um quadro de referência tanto 
+para entender os processos de formação e tipos quanto para a tradução de 
+neologismos, do qual destacaremos apenas os procedimentos para a tradução 
+no Quadro 1 a seguir: 
+ 
+Quadro 1 – Procedimentos de Tradução para Neologismos de Peter Newmark 
+                                                             
+7 No original: are used for sentences and the smaller units of Language 
+90 Crannogman - uma análise da tradução de neologismos de George R. R. Martin com o 
+auxílio da linguística de corpus 
+Revista Colineares, Mossoró/RN, v. 9, n. 2, Jul./Dez, 2022, p.81-98. 
+ 
+ 
+Procedimento 
+ 
+Explicação 
+ 
+ 
+Transferência 
+Transferência de uma palavra da língua de partida para a língua de 
+chegada através do processo de conversão de alfabetos, tais como 
+de escrita arábica, hebraica e russa, evidencia Newmark (1988). 
+Segue a ideia apresentada dos empréstimos por Martha Steinberg 
+(2003, p. 20-37). 
+Neologismo da 
+língua de chegada 
+Tradução de um neologismo da língua de partida por um da língua de 
+chegada. 
+Afixos da língua 
+de chegada 
+Tradução usando prefixos e sufixos da língua de chegada.  
+Naturalização Tem a ideia de suceder a Transferência, realizando adaptações 
+fonéticas nas palavras da língua de partida e em seguida adaptações 
+morfológicas das palavras para a língua de chegada. 
+Tradução da 
+língua de chegada 
+reconhecida 
+Traduções que já possuem traduções oficiais ou comumente aceitas 
+na língua de chegada. 
+Termo descritivo Tradução usando uma descrição do termo e não um termo único na 
+língua de chegada. Segundo Newmark (1988), a descrição pode ser 
+realizada junto com a função do termo. 
+Combinações de 
+procedimentos 
+Tradução que utiliza mais de um procedimento. 
+Through-
+translation8 
+“É a tradução de compostos comuns, nomes de organizações, partes 
+de compostos e talvez frases, é conhecida como calque ou tradução 
+por empréstimo.” (NEWMARK, 1988, p. 84)9 
+Estrangeirismo Uso de uma palavra de uma língua de partida na língua de chegada 
+sem alteração. 
+Fonte: (NEWMARK, 1988, p. 20-85) 
+ 
+De modo a complementar, bem como sintetizar os procedimentos 
+sugeridos por Newmark (1988), Katarzyna (2015) lista três tipos de técnicas 
+para a tradução de neologismos. É importante destacar que ela realiza em seu 
+trabalho a análise das traduções de neologismos do Inglês para o Polonês e 
+Esloveno em uma das obras que compõem o corpus de estudo (A Song of Ice 
+and Fire - As Crônicas de Gelo e Fogo) dest e artigo. Tal corpus de estudo 
+possui como importante particularidade os neologismos estilísticos. Eles são 
+constituídos, em boa parte, como nomes de objetos, animais, personagens e 
+lugares fictícios. As técnicas usadas por Bednarska (2015, p. 23 -24) são 
+descritas no Quadro 2 a seguir: 
+ 
+Quadro 2 – Técnicas de Tradução para Neologismos de Katarzyna Bednarska 
+ 
+Técnica 
+ 
+Explicação 
+ “Utiliza-se um neologismo original na lingua de chegada sem 
+mudanças ou com pequenas mudanças fonéticas (por exemplo a 
+transcrição). [...] É uma técnica comumente utilizada ao traduzir 
+                                                             
+8 Não encontramos tradução reconhecida para esse procedimento.  
+9 No original: The literal translation of common collocations, names of organisations, the com -
+ponents of compounds and perhaps phrases, is known as calque or loan translation. 
+91 Crannogman - uma análise da tradução de neologismos de George R. R. Martin com o 
+auxílio da linguística de corpus 
+Revista Colineares, Mossoró/RN, v. 9, n. 2, Jul./Dez, 2022, p.81-98. 
+ 
+Empréstimo nomes próprios, sobretudo topônimos (nomes de lugares).” 
+(BEDNARSKA, 2015, p. 23) 10 Essa técnica se assemelha aos 
+procedimentos de transferência e naturalização propostos por Peter 
+Newmark. 
+Equivalência Tradução por um termo já existente no vocabulário da lingua de 
+chegada. Segundo Bednarska (2015), é a forma mais difícil de se 
+traduzir neologismos da literatura fantást ica, visto que muitos não 
+possuem sentido literal na língua do texto traduzido. 
+Criação neológica Tradução que consiste em produzir uma nova criação lexical na 
+língua de chegada. 
+Fonte: (BEDNARSKA, 2015, p. 23-25) 
+ Ao finalizar es ta seção, portanto, temo s em mente os processos de 
+criação neológica em língua inglesa, bem como alguns dos procedimentos e 
+técnicas disponíveis para auxiliar, bem como compreender um pouco do 
+processo da tradução de neologismos. Todavia, devemos levar em 
+consideração que esse ar cabouço de conhecimento s pode vir a não ser 
+suficiente tanto para criar quanto para traduzir neologismos. Além disso, é 
+provavelmente necessário descrever e analisar como são produzidas e 
+traduzidas novas unidades lexicais em uma dada língua. Fato esse, qu e 
+começará a ser abordado nas próximas seções deste artigo. 
+ 
+3 METODOLOGIA 
+ 
+ A abordagem deste artigo possui caráter quali-quantitivo e descritivo. Foi 
+feita a categorização dos processos pelos quais cada um dos neologismos foi 
+criado. Em seguida, foi real izada a classificação quanto ao tipo de 
+procedimento ou técnica de tradução. Por fim, tendo em vista a limitação de 
+espaço, realizou-se a análise tradutória de apenas uma criação lexical, apesar 
+do volume bastante significativo de neologismos encontrados. 
+ No sentido de delinear a metodologia aplicada, em primeiro lugar, 
+detalha-se de que modo se configurou a composição do corpus de estudo. Em 
+seguida, apresentam-se os aspectos do corpus de referência. Posteriormente , 
+especificam-se as etapas da coleta de d ados com o auxílio  das ferramentas 
+computacionais utilizadas. Na sequência, tratamos da utilização de dicionários 
+e um corpus online, a fim de explicitar como foram obtidos os dados 
+quantitativos. Por fim, evidenciam -se os meios para a descrição e análise dos 
+dados. 
+  
+3.1 Corpus de estudo e Corpus de referência 
+  
+ Para a compilação do corpus de estudo foram selecionadas as cinco 
+obras publicadas até hoje da série de literatura fantástica A Song of Ice and 
+Fire do escritor norte-americano George R. R. Martin em suas versões originais 
+escritas em língua inglesa e respectivas traduções para a língua portuguesa. 
+                                                             
+10 No original: It consists in applying an original neologism to  the target language without 
+changes or with small phonetic changes (for example transcription). Translators often apply this 
+technique when translating proper names, especially toponyms. 
+ 
+92 Crannogman - uma análise da tradução de neologismos de George R. R. Martin com o 
+auxílio da linguística de corpus 
+Revista Colineares, Mossoró/RN, v. 9, n. 2, Jul./Dez, 2022, p.81-98. 
+ 
+Os textos foram compilados em formato digital TXT (texto sem formatação), 
+que é legível pelo programa computacional utilizado na pesquisa, o WordSmith 
+Tools 8,0. 
+É necessário esclarecer e contextualizar que o corpus de estudo tem 
+sua versão traduzida para o português na variação de Portugal, com exceção 
+da quinta obra. No Brasil, adotou -se essa mesma versão. A série de literatura 
+fantástica As Crônicas de Gelo e Fogo teve suas obras lançadas no Brasil pela 
+editora Leya, cujas versões usadas até o quarto volume foram traduzidas por 
+Jorge Candeias natural de Portimão, em Portugal. Os quatro volumes 
+traduzidos por Jorge Candeias foram destinados aos leitores tanto de Portugal 
+quanto aos do Brasil. O quinto volume foi traduzido por Marcia Blasques que é 
+brasileira. Destaca -se aqui que, segundo Blasques, a orientação da editora 
+Leya foi a de permanecer com os neologismos traduzidos por Candeias. Dessa 
+forma, par a fins do objeto de estudo deste artigo, os neologismos traduzidos 
+para a língua de chegada são os mesmos nas duas variações da língua 
+portuguesa. Portanto, conforme Quadro 3 contendo os títulos, anos de 
+publicação nos EUA e no Brasil e o tamanho em número  de tokens (palavras 
+totais) e types (palavras distintas), o corpus de estudo se configurou da 
+seguinte forma: 
+ 
+Quadro 3 – Textos de partida e chegada que formam o corpus de estudo 
+ 
+Corpus de estudo 
+ 
+Tamanho (Tokens/Types) 
+ 
+A Game of Thrones (1996) 
+A Guerra dos Tronos (2010) 
+ 
+296.956/11.725 
+300.807/17.441 
+ 
+A Clash of Kings (1998) 
+A Fúria dos Reis (2011) 
+ 
+325.618/13.604 
+333.842/19.370 
+ 
+A Storm of Swords (2000) 
+A Tormenta de Espadas (2011) 
+ 
+423.627/14.687 
+434.133/20.989 
+ 
+A Feast for Crows (2005) 
+O Festim dos Corvos (2012) 
+ 
+307.772/13.568 
+312.900/19.146 
+ 
+A Dance with Dragons (2011) 
+A Dança dos Dragões (2012) 
+ 
+426.577/15.392 
+420.392/21.353 
+Fonte: autoria própria 
+ 
+ Para a compilação do corpus de referência foram selecionadas 214 
+obras da literatura fantástica escritas em língua inglesa lançadas entre os anos 
+de 1990 e 2011. Tal critério referente ao início do intervalo de tempo, foi 
+pensado para se ter como referência obras lançadas alguns anos antes em 
+relação à primeira obra publicada do corpus de estudo, o que aconteceu em 
+1996. O critério para selecionar as obras que compõem o do corpus de 
+referência foi o de cem melhores avaliações entre os leitores atestadas pelo 
+site goodreads.com nas listas de Best Fantasy of the 90s (Melhores da 
+literatura fantástica da década de 1990) e Best Fantasy of the 2000s (Melhores 
+da literatura fantástica da década de 2000). Foram também adicionados alguns 
+das melhores obras desse mesmo gênero, observando o mesmo critério do 
+ano 2011 para contemplar o último ano de referência. 
+93 Crannogman - uma análise da tradução de neologismos de George R. R. Martin com o 
+auxílio da linguística de corpus 
+Revista Colineares, Mossoró/RN, v. 9, n. 2, Jul./Dez, 2022, p.81-98. 
+ 
+ 
+3.1.1 Wordsmith Tools 8.0 
+ 
+ Apresentam-se no Quadro 6 a seguir, especificamente, as ferramentas 
+computacionais encontradas no software Wordsmith Tools 8.0 (doravante WST 
+8.0), que é o programa de análise linguística utilizado na seção da análise 
+deste a rtigo. A versão 8.0 do programa foi lançada em 2021, permanece em 
+constante atualização até a data em que esse texto está sendo escrito, sendo 
+também a versão mais recente. Em consonância com Michael Scott (2021), 
+desenvolvedor do software, as principais ferramentas disponíveis são: 
+ 
+Quadro 4 – v Tools 8.0 
+Ferramenta Função 
+ 
+Concordance 
+ 
+Gerar linhas de concordância para encontrar todos os exemplos de uma 
+palavra ou frase. 
+ 
+Keywords 
+Listar palavras que ocorrem com frequência incomum em comparação 
+com algum tipo de corpus de referência. Ao lado de cada palavra -chave, 
+há vários números que indicam a frequência de cada uma delas no(s) 
+texto(s) de origem e como isso se compara à sua frequência no corpus 
+de referência. 
+ 
+Wordlist 
+ 
+Listar todas as palavras de um  corpus e mostrar com que frequência 
+cada palavra ocorre nos arquivos de texto, qual é a porcentagem das 
+palavras em execução no texto e em quantos arquivos de texto cada 
+palavra foi encontrada. 
+Fonte: (SCOTT, WordSmith Tools 8.0, 2021) 
+ 
+ Além das ferrame ntas principais do WST 8.0 demonstradas acima, 
+existem, digamos, ferramentas extras utilitárias que possuem funções ainda 
+mais variadas, no entanto, específicas e que podem vir a contemplar diversos 
+objetivos de análise. É importante destacar que a função Aligner é exclusiva 
+deste software, cuja função é útil a esta pesquisa quando do advento das 
+análises. 
+ Uma vez compilados os corpora de estudo e de referência, foi 
+necessário recodificar os textos para novas versões com codificação 
+UNICODE, a qual é legív el pelo programa. Essa etapa foi realizada através da 
+ferramenta Text Converter no programa WST 8.0.  
+Com o propósito de listar todas as palavras para dar início à 
+identificação dos neologismos, foi utilizada a ferramenta WordList em ambos os 
+corpora, mas separadamente. Isto é, realizou -se uma lista de palavras para o 
+corpus de estudo e outra para o de referência. 
+ As obras que compõem o que é chamado de subcorpus 1 na língua de 
+partida (língua inglesa) foram selecionadas. Em seguida, foi efetuado o 
+comando para o software realizar a lista de palavras a partir dessa seleção.  
+ A lista de palavras do subcorpus 1 está demonstrada apenas em parte, 
+tendo em vista que elencou um total de 24,533 tokens (palavras distintas) nas 
+94 Crannogman - uma análise da tradução de neologismos de George R. R. Martin com o 
+auxílio da linguística de corpus 
+Revista Colineares, Mossoró/RN, v. 9, n. 2, Jul./Dez, 2022, p.81-98. 
+ 
+cinco obras que o compõem. Um número bastante elevado de palavras, o que 
+tornaria inviável demonstrar por completo.  
+ Posteriormente, com o intuito de realizar uma outra lista de palavras, 
+mas essa a partir do corpus de referência, foram selecionadas as obras que o 
+compõem e foi efetuado o me smo comando. A lista do corpus de referência 
+consiste em 177,551 tokens (palavras distintas) nas 214 obras compiladas. 
+ Após a obtenção das listas de palavras, a ferramenta utilizada foi a 
+KeyWords. Tal ferramenta cria uma lista de palavras -chave, comparando-se as 
+listas de palavras obtidas, na qual é possível verificar quais palavras possuem 
+frequência incomum no corpus de referência. Desse modo, pode -se identificar 
+quais palavras estão frequentemente presentes em ambos os corpora ou quais 
+estão presentes apenas no corpus de estudo ou somente no de referência. 
+ Com base nisso, é estabelecido o primeiro critério de exclusão para 
+identificar e extrair os neologismos. O software encontrou 4,917 palavras -
+chave, das quais 1,552 estão presentes somente no corpus de estudo. Tal 
+número representa as primeiras palavras candidatas a criações lexicais. 
+ A LC por meio do software adotado evidencia a importância do seu uso, 
+pois dessa forma, tornou a coleta de dados bastante eficiente sob o ponto de 
+vista de economia de tempo. Caso contrário, realizar essa primeira etapa, que 
+se caracteriza por ser automática para determinar os neologismos, teria exigido 
+uma quantidade de tempo muitas vezes maior, tornando o objetivo desta 
+pesquisa praticamente inviável. Com base nesses p rimeiros dados, a 
+observação dos primeiros candidatos a neologismos passou a ser manual.  
+ 
+3.1.1.1 Dicionários online e corpus COCA 
+ 
+ Antes de seguir para os dicionários online como corpora de exclusão, as 
+1,552 palavras não presentes no corpus de referência foram analisadas. Muitas 
+das quais foram descartadas e desconsideradas como neológicas por serem 
+nomes próprios de personagens e lugares dentro da obra literária e por não 
+terem em sua morfologia características de nomes próprios da língua inglesa, 
+sendo assim não traduzidos para a língua portuguesa. Muitos desses nomes 
+próprios também foram listados com o caso genitivo da língua inglesa (’s). 
+Destaca-se aqui também, que o mesmo caso genitivo aconteceu com 
+candidatos a neologismos, além de palavras no pl ural, o que identificamos 
+como palavras repetidas, devendo ser também descartadas. Com base nessa 
+evidência, os candidatos a neologismos passaram a ser 309. 
+ O segundo critério passou a ser a utilização de dicionários online tais 
+como o etymonline.com e o thefreedictionary.com. Usou-se o primeiro por se 
+tratar de um dicionário que indica a origem e evolução das palavras da língua 
+inglesa. Nesse sentido, as palavras não encontradas lá permaneceram como 
+candidatas a neológicas. O segundo foi escolhido por ser  um dos dicionários 
+mais completos, especialmente sob a ótica da contemporaneidade, tornando -o 
+assim capaz de realizar buscas em vários bancos de dados na rede mundial de 
+computadores, por exemplo, Wikipedia e várias outras fontes de áreas de 
+especialidades.  
+ O fato de incluir fontes da Wikipedia foi de grande valia, pois, tal site é 
+alimentado por pessoas da sociedade comum, incluindo nesse rol fãs e leitores 
+do corpus de estudo dessa pesquisa. Por exemplo, embora não encontrasse 
+um candidato a neologismo  no etymonline.com, isso não era motivo absoluto 
+95 Crannogman - uma análise da tradução de neologismos de George R. R. Martin com o 
+auxílio da linguística de corpus 
+Revista Colineares, Mossoró/RN, v. 9, n. 2, Jul./Dez, 2022, p.81-98. 
+ 
+para determinar caráter neológico, pois aquele vocábulo poderia ser 
+encontrado no thefreedictionary.com, o que aconteceu com alguns dos 
+candidatos, que apareceram em contextos que variam desde nomes de 
+cidades oriundos de países de língua inglesa a nomes de personagens em 
+diversos contextos que datam de antes de 1996. Após a realização dessa 
+busca, 202 candidatos a neologismos permaneceram. 
+ No intuito de continuar determinando as criações lexicais do autor, foi 
+estabelecido o terceiro e último critério para determinar os neologismos, que foi 
+buscar esses últimos candidatos no corpus online COCA (Corpus of 
+Contemporary American English) . Esse se trata do único corpus do inglês 
+americano contemporâneo que conhecemos, é constituído por mais de 1 bilhão 
+de palavras que datam dos anos de 1990 -2019, que se constitui de oito 
+gêneros: língua falada, ficção, revistas populares, jornais, textos acadêmicos; e 
+passou por uma atualização em março de 2020 para incluir legen das de filmes, 
+blogs e outras páginas da internet. 
+ Como filtro para efetuar as buscas, foram selecionados os anos do 
+período 1990-1995. O primeiro por ser o início do banco de dados fornecidos 
+pelo COCA e o segundo por ser o ano anterior a 1996, que é o p rimeiro ano de 
+publicação do subcorpus de estudo na língua de partida. Assim, caso os 
+candidatos a neologismos não aparecessem nos textos do período, seriam 
+determinados como criações lexicais pertencentes ao autor. 
+A palavra Riverrun, por exemplo,  até ent ão, pensada como um 
+neologismo estilístico da obra, foi descartada, pois foi encontrada no COCA no 
+intervalo de tempo estabelecido como filtro. Por sua vez, a palavra Lordsport 
+não foi encontrada e assim determinada como tendo sua primeira aparição na 
+língua inglesa dentro do subcorpus de estudo, ou seja, trata -se de um 
+neologismo. Após essas buscas seguindo os critérios estabelecidos, foi 
+possível determinar que 170 palavras são criações lexicais ou neologismos 
+criados pelo autor George R. R. Martin. 
+ A fe rramenta Aligner permite realizar o alinhamento dos subcorpora 
+compostos por dez textos. O subcorpus 1 que é a versão na língua de partida – 
+Inglês e subcorpus 2 que é a versão na língua de chegada – Português). No 
+caso desta pesquisa, o uso  da ferramenta permitiu visualizar cada um dos 
+neologismos determinados juntamente com sua respectiva tradução.  
+4 ANÁLISE 
+ Em virtude da limitação de espaço que é característica a este artigo, 
+apenas um neologismo foi analisado de os quais foram encontrados . Contudo, 
+em razão das particularidades de formação neológica e processo de tradução, 
+entende-se que é uma amostra significativa para a compreensão do objetivo 
+deste artigo, que é entender tanto como nascem os neologismos autorais de 
+George R. R. Martin, quanto como eles são traduzidos na língua portuguesa.  
+4.1 Crannogman         Cranogmano 
+ 
+[…] the crannogman, Howland Reed […] (Martin, A Game of Thrones, 1996, p. 422) 
+ 
+[...] o cranogmano, Howland Reed [...] (Martin, A Guerra dos Tronos, 2019, p. 460) 
+ 
+ O processo li nguístico de criação de Crannogman é Composição, 
+utilizando a junção de dois substantivos. Conforme Steinberg (2003), 
+96 Crannogman - uma análise da tradução de neologismos de George R. R. Martin com o 
+auxílio da linguística de corpus 
+Revista Colineares, Mossoró/RN, v. 9, n. 2, Jul./Dez, 2022, p.81-98. 
+ 
+neologismos compostos podem ser escritos com seus elementos juntos, 
+separadamente ou juntos por hífen. Seus subtipos são os compostos brit ânicos 
+e os compostos compartilhados entre inglês americano e britânico. De acordo 
+com Steinberg (2003, p. 39), o princípio para determinar “se duas ou mais 
+palavras juntas se configuram numa palavra composta é prosódica.” Ou seja, o 
+que caracteriza uma palavra composta é o som, podendo ser manifestado pelo 
+acento ou pela entoação. Uma palavra composta, portanto, possui o acento 
+tônico na primeira parte da composição. Por sua vez, em língua inglesa, 
+adjetivos possuem acento tônico no segundo elemento, isto é, no substantivo.  
+ Crannogman é formado, em sua primeira parte , pelo substantivo  
+crannog do idioma  Gaélico Irlandês  de acordo com o thefreedictionary.com, 
+cuja definição seria  “uma pequena ilha artificial fortificada construída em 
+pântanos na antiga Escó cia e Irlanda. ” ( THEFREEDICTIONARY.COM)11. 
+Destaca-se que  a obra de George Martin  possui diversas características  
+ambientais e linguísticas advindas  da Europa medieval , sendo crannog 
+também uma palavra que  faz referência , na obra,  ao recluso que vive nos 
+pântanos. Além disso,  a composição utiliza o substantivo man, que significa 
+homem em português.  
+Em relação à tradução, os procedimentos/técnicas de tradução de 
+Cranogmano são Naturalização e Neologismo da Língua de Chegada/Criação 
+Neológica. Naturalização, que de acordo com Newmark (1988, p. 150), é a 
+tradução que consiste em realizar adaptações fonéticas nas palavras da língua 
+de partida e em seguida adaptações morfológicas (escrita) para a língua de 
+chegada. Esses aspectos são vistos em ambas as porções da  palavra. Cranog 
+passou a ter um n suprimido. Por sua vez, mano teve adição da letra o, 
+transmitindo a ideia de que man, da língua inglesa , significa mano. Assim, 
+pode-se entender também, que se usou um Afixo proveniente da língua de 
+chegada. Mano remete à  ideia de Humano. Um Cranogmano seria um 
+humano habitante dos pântanos no contexto da obra. Trata-se de um 
+Neologismo da língua de chegada/Criação neológica, que segundo Peter 
+Newmark (1988, p. 150) e Katarzyna Bednarska (2015, p. 23 -24) 
+respectivamente, é a tradução de  um neologismo da língua de partida por um 
+da língua de chegada ou tradução que consiste em produzir uma nova criação 
+lexical na língua de chegada.  Na língua portuguesa, portanto, o tradutor 
+realizou adaptações de escrita e pronúncia, criando uma palavra. 
+Com o advento desta análise, nota-se o arcabouço linguístico que possui 
+o autor George R. R. Martin ao criar neologismos. Da mesma forma, percebe -
+se o conhecimento por parte do tradutor tanto da língua de partida (Inglês) 
+quanto da língua de chegada (Português). É importante ressaltar que o tradutor 
+tanto respeitou a palavra neológica, pois não realizou modificações profundas 
+na forma da palavra no ato de traduzir, quanto criou um neologismo em língua 
+portuguesa. Obviamente, exerceu tal ato de  inovação lexical tomando como 
+base a palavra original da língua inglesa. 
+ 
+5. CONCLUSÕES 
+ 
+ Este artigo possuiu como objetivo analisar as estratégias de tradução 
+dos neologismos criados pelo escritor americano George R. R. Martin nas 
+                                                             
+11 No original: a small, artificial, fortified island constructed in  bogs in ancient Scotland and 
+Ireland. 
+97 Crannogman - uma análise da tradução de neologismos de George R. R. Martin com o 
+auxílio da linguística de corpus 
+Revista Colineares, Mossoró/RN, v. 9, n. 2, Jul./Dez, 2022, p.81-98. 
+ 
+obras que compõem o corpus de estudo. A teoria de base utilizada quanto aos 
+processos linguísticos de criação neológica, bem como a dos procedimentos e 
+técnicas de tradução tornaram -se ferramentas relevantes para contemplar tal 
+objetivo. 
+ Conforme os procedimentos metodológicos,  foram encontrados os 
+neologismos do corpus de estudo em língua inglesa, usando a Linguística de 
+Corpus através do  software Wordsmith Tools 8.0 . Foi também possível 
+categorizar as criações lexicais do autor, observando os processos linguísticos 
+que as formam, da mesma forma que se pode identificar os procedimentos ou 
+técnicas utilizadas na tradução dos seus correspondentes na versão de língua 
+portuguesa. 
+ Além da obtenção dos objetivos, ao concluir essa pesquisa, destacam -
+se como principais achados os estud os acerca da linguística de corpus, que 
+possibilitaram compreender tal abordagem para análise linguística e as 
+possibilidades que proporciona, assim como, através do software utilizado, 
+encontrar os neologismos dentro de um corpus de estudo tão vasto como o 
+utilizado neste artigo. Fato este que colaborou demasiadamente para a 
+realização dessa pesquisa. Do contrário, a não utilização da linguística de 
+corpus acarretaria um tempo incalculável para se conseguir os dados obtidos. 
+Da mesma forma, a teoria de bas e apresentada sobre a Neologia e os 
+Neologismos, demonstrou como são determinadas as criações lexicais, bem 
+como deu suporte à compreensão da formação de uma nova palavra e ao 
+entendimento das traduções. 
+ Possivelmente, há uma limitação nessa pesquisa no q ue se diz respeito 
+aos “Procedimentos de Tradução para Neologismos propostos por Peter 
+Newmark” e nas “Técnicas de Tradução para Neologismos de Katarzyna 
+Bednarska”, pois esses dois pontos aparentam ser prescrições dentro dos 
+estudos da tradução. No entant o, é importante ressaltar que a partir deles, foi 
+possível analisar e compreender as estratégias de tradução utilizadas nos 
+neologismos na língua de chegada. Para a realização des te artigo e para 
+contemplar o objetivo, foram de suma importância. 
+ 
+REFERÊNCIAS BIBLIOGRÁFICAS 
+ 
+BEDNARSKA, Katarzyna. “Author’s neologisms in George R. R. Martin’s A 
+Game of Thrones and their Polish and Slovene translations”. Białostockie 
+Archiwum Językowe 15: 21-32. https://doi.org/10.15290/baj.2015.15.02. 2015. 
+ 
+BOULANGER, Jean-Claude. Problématique d’une méthodologie 
+d’identification des néologismes en terminologie. Néologie et lexicologie. 
+Hommage à Louis Guilbert, Paris, Larousse Université, coll. Langue et langage, 
+p. 36-46. [article] Disponível em: 
+https://boulanger.recherche.usherbrooke.ca/document-article-boulanger_1979. 
+Acesso em: 21 de Fev. 2023. 
+ 
+CORREIA, Margarita; ALMEIDA, Gladis. Neologia em Português. São Paulo: 
+Parábola Editorial. 2012. 
+ 
+98 Crannogman - uma análise da tradução de neologismos de George R. R. Martin com o 
+auxílio da linguística de corpus 
+Revista Colineares, Mossoró/RN, v. 9, n. 2, Jul./Dez, 2022, p.81-98. 
+ 
+FISCHER, Roswitha. Lexical Change in Present-day English: A Corpus-
+based Study of the Motivation, Institutionalization, and Productivity of 
+Creative Neologisms. Narr. Tubingen-Germany. 1998. 
+ 
+LUIZ, T. M. Romeu e J ulieta em Pocahontas: estudos da adaptação, literatura 
+comparada e a teoria da intertextualidade . COLINEARES, Mossoró, Brasil, v. 
+9, n. 1, p. 86–102, 2022.  
+ 
+MARTIN, George R. R. A Game of Thrones. A Song of Ice and Fire Series. 
+Bantam Books. US. 1996. 
+ 
+MARTIN, George R. R. A Guerra dos Tronos. As Crônicas de Gelo e Fogo. 
+Tradução: Jorge Candeias. Grupo Companhia das Letras – Editora Suma. Rio 
+de Janeiro. 2019. 
+ 
+NEWMARK, Peter. A Textbook of Translation. Shangai Foreign Language 
+Education Press / Prentice Hall International. 1988. 
+ 
+REY, A. Néologisme: un pseudo-concept? Cahiers de Lexicologie, v. 28, n. 1, 
+p. 3-17, 1976. 
+ 
+SCOTT, Michael. WordSmith Tools. Published by Lexical Analysis 
+Software and Oxford University Press since 1996. Versão 8.0. 2021. 
+ 
+STEINBERG, Martha. Neologismos de Língua Inglesa. São Paulo: Editora 
+Nova Alexandria. 2003. 

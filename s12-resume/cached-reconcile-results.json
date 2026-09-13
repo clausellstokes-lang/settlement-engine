@@ -1,0 +1,1403 @@
+{
+ "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/prose-research/sweep/reconcile-dossier-archivist.md": {
+  "register": "dossier-archivist \u2014 the settlement dossier: a record of a place, its institutions and people, in the clerk's third person. PROBE_ALL columns in scope: R1 dossier-native STATE (n=2262), R2 causal join (467), R7 institution/service gazetteer (2169), R8 world-data prose (1738), R14 generators prose tables (561), R15 src long tail (3883; reader-facing residue only), R17 legacy rumour subject phrases (1293), R18 inline in-function prose (5673; reader-facing residue only), and the annex rows A-U (4626 unwired) and A-W (4276 wired control).",
+  "allocation": "ALLOCATE, NEVER AVERAGE. The allocation is made against this register's five measured failures, not against author fame; no weight appears anywhere in the file. The failures (PROBE_ALL \u00a73, best-own): (1) antithesis \u2014 R1 \"rather than\" 0.113 (255/2262), shape 0.139 vs an exemplar band 0.0082\u20130.0401 and 5.33 per 1k words vs 0.00\u20130.32; (2) the gloss tail \u2014 R1 \", which\" 0.066, R2 0.054, A-U 0.062 vs martin-chronicle 0.0000 in 12,422 words, and summarising 2nd sentence 0.035 vs bible 0.000; (3) rhythm \u2014 neighbour variation 0.399 vs 0.495\u20130.805, sd 7.2 vs 8.5\u201316.0, over-30 0.021 vs 0.049\u20130.338, same-opener-as-previous 0.1321, 79/708 pools share a two-word opener, 0.576 uniform; (4) the pronoun close 0.133 vs a band topping out at 0.1083; (5) the whole apparatus family unmeasured by any of the 47 metrics. ALLOCATION: WOLFE to the apparatus, evidence discipline and withholding (17 S13 the record with a stated origin; 7 S12 omission is information; 9 S15 the evidence placed before it is needed \u2014 the highest-sourced row in the sweep; 3 S10, 15 S8, 27 S8, 24 S8, 31 S8, 35 S8, 12 S8; 40 S5/41 S5 the coherence-vs-particulars discrimination) because the record that omits is the one thing this register does not do at all. LE GUIN to the sentence, plainness and the declared gap (19 S12 \u2014 the highest diction count in the sweep; 23 S9+, 24 S6, 25 S6, 27 S4, 21 S7, 47 S8, 4 S3 the declared gap, 34 S5 impartial but not dispassionate as the guard against 20 S4's flatness). KAY to the civic noun, the close, the household bill and the thresholds (20 S7, 24 S8, 44 S8 \u2014 the only file supplying the instrument form for a rate; 30 S6, 26 S6, 14 S7, 16 S6, 12 S8, 11 S3, 9 S5, 29 S5). MARTIN to rhythm, omission-with-a-cause and name fixity (2 S9, 9 S7, 36 S7, 31 S7, 26 S3, 44 S3, 45 S5, 38 S4, 22 S6) plus his chronicle fingerprint as the control that supplies DA-2/3/13's numbers (25.9 words, sd 12.7, over-30 0.3382, which-tail 0.0000, pronoun closer 0.0543, same-opener 0.0334). HOBB to consequence and evidential distance (8 S10 \u2014 the strongest-evidenced technique in any file; 17 S10, 10 S9, 1 S9, 20 S7, 13 S7, 25 S8, 19 S5 the correlation condition on the gap, 32 S4, 30 S5). D&D to the gazetteer half only, on the measurement that R7 is a rules-register shape (8.8 words, 47.2% under eight, abstract closers 0.086): 1 S5, 2 S5, 14 S7, 15 S4, 23 S4, 31 S6, 39 S3, 28 S4, 43 S6, 45 S4, 7 S6; 46 carried PROVISIONAL by its own file. TOLKIEN NARROWLY, to the frame, the apparatus and the negative catalogue (F1 S9, F2 S5, D1 S8, D2 S4, E1 S6, E3 S5, F3 S3, G1 S6, G2 S3, B1 S5, I1 S8/I2 S9/I3 S8 as walker checks) with A1/A2/A3, C3/C4 and F5 refused. ai is inverted, as constraints only. Our own prose is the control and keeps what it already earns (two-sentence ceiling 0.004, zero em dashes/digits/questions/exclamations, doubled adjectives 0.009, triad 0.011 clearing the rule-of-three fault). No author is allocated to \"the whole voice\"; three SINGLE-graded shortlisted techniques are refused on grade alone.",
+  "rules": [
+   {
+    "id": "DA-1",
+    "statement": "In R1, R2 and the annex, keep a contrast only when the rejected alternative names a sibling pool key or a sibling band of the same block; everywhere else rewrite it as two plain facts or one, and never as a bare \"X, not Y\".",
+    "sourceCount": 22,
+    "authors": [
+     "ai",
+     "martin",
+     "kay",
+     "hobb"
+    ],
+    "rows": [
+     "ai:3",
+     "martin:2",
+     "kay:9",
+     "hobb:5"
+    ],
+    "figure": "PROBE_ALL R1 \"rather than\" rate 0.113 \u2192 \u22640.030 and antithesis SHAPE 0.139 \u2192 \u22640.040; R2 0.077 \u2192 \u22640.040; A-W control 0.082 \u2192 \u22640.040. DIRECTION down. SIZE 0.040 is the top of the exemplar band (tolkien-elevated 0.0401), the tighter of the two available anchors since the bible sits at 0.045.",
+    "faultGuard": "ai fault 3 (reflexive antithesis, STRONG, archival YES). Guard: the rubric counts the SHAPE not the phrase \u2014 U4 measured eight \"rather than\" removals of which six survived as a bare \"not\" and one was promoted to grammatical subject \u2014 and the KEEP test executes against the block's actual pool keys AND sibling bands before any cut (U1: three inversions, two citing the rule as the reason to cut).",
+    "grammar": "A CONTRAST move licensed only by a sibling-key or sibling-band field; not an ordering constraint, and it may not be the closing move of more than one variant per pool.",
+    "obeys": [
+     "(2) its standing is the measured exemplar band, not Kay's fame",
+     "(6) B-CLAIM \u2014 where a sibling names the alternative the contrast IS a claim and is not spendable",
+     "(7) finite semantics \u2014 the rejected alternative must be a state the town could be in"
+    ],
+    "test": "check-pair.mjs arms R4 (CUT a word that names a SIBLING pool key), the withheld R4-BAND / R4-BAND-TEXT arms, ANTITHESIS SHAPE ADDED, and the NOTE arm for \"rather than\" \u2192 bare \"not\"; plus a fingerprint delta on shapes.antithesisRate over the six dossierStateProse leaves. Acceptance: U1 and U4.",
+    "strength": "STRONG",
+    "changesShippedSurface": false
+   },
+   {
+    "id": "DA-2",
+    "statement": "No \", which\" / \"which is\" / \"which means\" tail in R1, R2 or the annex; the claim moves into a second short sentence, never into an em dash, and the variant never becomes three sentences.",
+    "sourceCount": 25,
+    "authors": [
+     "martin",
+     "leguin",
+     "kay",
+     "dnd"
+    ],
+    "rows": [
+     "martin:26",
+     "leguin:24",
+     "kay:24",
+     "dnd:10"
+    ],
+    "figure": "R1 gloss tail 0.066 \u2192 \u22640.010; R2 0.054 \u2192 \u22640.010; A-U 0.062 \u2192 \u22640.010; 2nd-sentence summary R1 0.035 \u2192 \u22640.010. SIZE anchored on martin-chronicle's measured 0.0000 which-tails in 12,422 words and the exemplar ceiling 0.037 (leguin-nonfiction-spoken); 0.010 is the level no exemplar record register exceeds. 3+-segment share holds at \u22640.004 as a shrink-only ratchet (house rate 11 of 2,734).",
+    "faultGuard": "ai fault 1 (the gloss / summary second sentence; archival YES). Guard: A9 gated by A8 \u2014 a \"That is / This is\" sentence carrying the pool key's discriminating claim is not a gloss (U9 found this twice, at the two items where the cut destroyed the fact) \u2014 and the gnomic closer is carved out to DA-11 rather than swept up here.",
+    "grammar": "A QUALIFY move, admitted only where the tail carries a claim no other move in the block carries; forbidden as the closing move in more than one variant of a pool.",
+    "obeys": [
+     "(6) B-CLAIM \u2014 punctuation and word order are spendable, the claim is not",
+     "(3) the second sentence is a licensed move, never a slot every entry fills",
+     "(7) zero em dashes; B0.2's em-dash alternative stays refused and the period is the instrument"
+    ],
+    "test": "check-pair.mjs arm THREE+ SENTENCES (n); a walker counting \", which\" per variant against 0.010 over the six R1 leaves plus dossierCausalProse.generated.js. Acceptance: U2 (the ceiling would have caught all four sample breaches automatically) and U9.",
+    "strength": "STRONG",
+    "changesShippedSurface": false
+   },
+   {
+    "id": "DA-3",
+    "statement": "A variant's last word is a civic noun, a name, or a named absence drawn from the block's own fields \u2014 never it/them/there/this/that/one \u2014 and the KIND of standing fact at the close varies across the pool: a condition, a prohibition, an absence, an object, a name not given.",
+    "sourceCount": 27,
+    "authors": [
+     "kay",
+     "wolfe",
+     "leguin",
+     "dnd"
+    ],
+    "rows": [
+     "kay:30",
+     "wolfe:27",
+     "leguin:47",
+     "dnd:2"
+    ],
+    "figure": "R1 pronoun closer 0.133 \u2192 \u22640.055 (253 of 2,914 sentences end on \"it\" \u2192 \u2264120); R2 0.125 \u2192 \u22640.055; A-U 0.123 and A-W 0.114 \u2192 \u22640.055. SIZE is martin-chronicle's measured 0.0543 \u2014 an exemplar's own record register, not a novel. Guard figure: R1 abstract-noun closer 0.044 must not rise above 0.060 (the bible's own rate) absorbing the cut.",
+    "faultGuard": "ai fault 9 \u2014 \"always end on an object\" is itself a fixed move, which is Kay 30's own guard. The latent form is the varied KIND of close with a walker ceiling on any single kind, plus B0.3's discipline that this is checked, not claimed: U5 found the close-on-a-thing rule cited eight times in the taste sample and delivered exactly once.",
+    "grammar": "The CLOSE is a move whose kind is drawn per seed from a closed set; the flat contemporary line may land first, third or buried (kay:24), so the close is not a position rule.",
+    "obeys": [
+     "(5) the closing noun must be a field the block holds \u2014 a clerk cannot name a thing the table does not carry",
+     "(3) the kind varies by seeded choice among a closed set",
+     "(6) the close may not acquire a claim the BEFORE did not carry"
+    ],
+    "test": "check-pair.mjs arm PRONOUN CLOSER ADDED (land on the civic noun); a fingerprint delta on closers.pronounRate and closers.abstractNounRate over the six R1 leaves; a walker histogram of close-KINDS per pool with a ceiling. Acceptance: U5.",
+    "strength": "STRONG",
+    "changesShippedSurface": false
+   },
+   {
+    "id": "DA-4",
+    "statement": "Within one pool key, no two variants share their first two words, and where the variants differed in sentence count they keep differing; a rewrite that flattens either is refused even when it is shorter and cleaner.",
+    "sourceCount": 30,
+    "authors": [
+     "leguin",
+     "kay",
+     "martin",
+     "wolfe",
+     "tolkien",
+     "dnd"
+    ],
+    "rows": [
+     "leguin:24",
+     "kay:44",
+     "martin:26",
+     "wolfe:36",
+     "tolkien:B1",
+     "dnd:46"
+    ],
+    "figure": "R1 pools with repeated 2-word opener 0.112 (79 of 708) \u2192 \u22640.030; R1 pools uniform in segment count 0.576 \u2192 \u22640.400 (SIZE is R14's own measured 0.400, the estate's internal proof, not an exemplar import); mean within-pool word sd 2.9 \u2192 \u22654.0 (R14 4.8, bible 6.5); same-opener-as-previous 0.1321 \u2192 \u22640.090 (band 0.0334\u20130.1667, D&D columns 0.060\u20130.073). R2: repeated opener 0.231 \u2192 \u22640.050, uniform 0.513 \u2192 \u22640.400.",
+    "faultGuard": "ai fault 5 in its trap form \u2014 \"vary the lengths\" as an alternation is a metronome at a longer period (leguin:24), and a threshold hit exactly IS the fault (kay:44). Guard: length follows load, and every threshold is a distribution with required variance \u2014 never a rota, never a target.",
+    "grammar": "An ORDER CONSTRAINT: the B-GRAMMAR walker refuses any single grammar above a ceiling within a pool and refuses a same-grammar-as-previous run.",
+    "obeys": [
+     "(3) directly \u2014 this rule is the mechanism of controlled variation",
+     "(6) B-GRAMMAR (the taste sample must show one block in two grammars) and B-CLAIM's second half (a pool's spread is not spendable)"
+    ],
+    "test": "check-pair.mjs arms A11 SHARED OPENER CREATED and A11 POOL SPREAD FLATTENED, with the A11 SPREAD / A11 PRE-EXISTING notes; a fingerprint delta on openers.sameOpenerAsPreviousRate and wordsPerSentence.sd. Acceptance: U10 (R5 was asserted rather than measured and the sample breached it twice, once under a citation of itself).",
+    "strength": "STRONG",
+    "changesShippedSurface": false
+   },
+   {
+    "id": "DA-5",
+    "statement": "The settlement slot opens no more than one variant in five in any pool, and the opening move is drawn per seed from a closed set of at least four grammars \u2014 land first, the plain civic fact, two contrasting tiles with a name planted, the head record's plain fact, the material before the office, the person by one recorded deed.",
+    "sourceCount": 33,
+    "authors": [
+     "leguin",
+     "wolfe",
+     "kay",
+     "dnd"
+    ],
+    "rows": [
+     "leguin:44",
+     "wolfe:26",
+     "kay:29",
+     "dnd:21",
+     "dnd:42",
+     "dnd:14"
+    ],
+    "figure": "{settlement} opens 610 of 2,914 R1 sentences (0.209) \u2014 the second-commonest opener after \"the\" at 928, and no rule sets the rate today (own row 16). DIRECTION down. SIZE \u22640.200 as a hard ceiling and \u22640.150 as the target, with no single grammar of the set above 0.350 of a register's openings.",
+    "faultGuard": "ai fault 9 (11 documents) and fault 10 (12 documents): one plan re-skinned is the fault, and a fixed opening is that fault at sentence scale. Guard: the seeded draw with a walker ceiling and a no-repeat-of-previous rule, and only members at three or more sources entered \u2014 leguin:45 (1), kay:28 (1) and martin:15 (HIGH risk by its own file) are excluded.",
+    "grammar": "The OPENING move, a closed set, each member with its own licensing field: land-first needs a geography field, the head record a rank-and-rule field, person-by-deed an office roll, material-first a built-fabric field. A member whose field is null is not drawn \u2014 it is not written empty.",
+    "obeys": [
+     "(3) verbatim \u2014 this is the rule that answers the owner's four example grammars",
+     "(5) each member is licensed by a typed field",
+     "(2) SINGLE-graded and HIGH-risk members refused on grade, not taste"
+    ],
+    "test": "The B-GRAMMAR walker over the six R1 leaves: an opener-grammar histogram per pool with a ceiling, plus the same-order-as-previous run check; a fingerprint delta on openers.topOpeners. Acceptance: U6 (R1 restated as STATE first, subordinate to \u00a70b) and U10.",
+    "strength": "STRONG",
+    "changesShippedSurface": false
+   },
+   {
+    "id": "DA-6",
+    "statement": "A declared limit \u2014 the roll lost, the register naming nobody, the count standing uncorrected \u2014 may be written only where a typed field records an absence the world actually has; it fires rarely, in a different shape each time, and it is never a slot every entry fills.",
+    "sourceCount": 38,
+    "authors": [
+     "tolkien",
+     "hobb",
+     "leguin",
+     "kay",
+     "martin",
+     "dnd",
+     "ai"
+    ],
+    "rows": [
+     "tolkien:F2",
+     "hobb:19",
+     "leguin:4",
+     "kay:11",
+     "martin:10",
+     "dnd:23",
+     "ai:24"
+    ],
+    "figure": "No PROBE_ALL metric measures this family \u2014 the probe's 47 metrics name none of T2/T3/T4/T5/T7/T17/T18/T38 (best-own \u00a75b). DIRECTION up from a measured zero. Proposed instrument and SIZE: a new probe metric `apparatus rate`, target band 0 < rate \u2264 0.020 per variant in R1 \u2014 at most one apparatus sentence per dossier block, no more than one dossier in three carrying one at all.",
+    "faultGuard": "ai fault 5 in its archival form (hobb:19's metronome of lacunae; dnd:23's rare, specific, different in shape each time) and ai fault 24 in reverse: a gap written where the world holds a fact is fabrication. Guard: hobb:19's correlation condition \u2014 the gap tracks something the simulation knows, a fire, a bad year, a change of office \u2014 and leguin:4's placement, the gap in the record and never in the world.",
+    "grammar": "A typed ABSENCE move licensed only by a null-with-provenance field; forbidden adjacent to another absence move in the same block, and never the opening move.",
+    "obeys": [
+     "(4) it is the mechanism of the honest absence, and the reason the absence ruling is two tiers",
+     "(5) no sentence buys an effect with a fact",
+     "(7) finite semantics \u2014 typed buckets, the AI a clerk"
+    ],
+    "test": "A new walker arm asserting every apparatus sentence resolves to a field whose value is a RECORDED null, refusing one that resolves to a field the block simply lacks; run over all 2,734 variants and the 4,626 A-U rows. Acceptance: U11 and U12.",
+    "strength": "STRONG",
+    "changesShippedSurface": false
+   },
+   {
+    "id": "DA-7",
+    "statement": "No sentence in any dossier register may name who holds an office, who counts, who is counted, who is exempt, or what an institution does, unless a typed institution field carries it; the sentence is generated FROM the table row and never fitted to it afterwards.",
+    "sourceCount": 47,
+    "authors": [
+     "wolfe",
+     "hobb",
+     "tolkien",
+     "dnd",
+     "kay",
+     "ai"
+    ],
+    "rows": [
+     "wolfe:24",
+     "hobb:20",
+     "tolkien:F3",
+     "dnd:22",
+     "dnd:27",
+     "kay:7",
+     "ai:24"
+    ],
+    "figure": "The rule builds machinery, so the figure it moves is the gazetteer's: R7 abstract-noun closer 0.086 \u2192 \u22640.060 (the bible's rate) once entries close on the office's actual duty rather than its quality, and R7 digits-in-prose 0.03 \u2192 0 pending the contextual-numeral chair ruling. Scope figure: R7 n=2,169 plus R15's reader residue, whose three densest files are tradeGoodsData.js 934 reader rows, store/selectors.js 274 and cultureProfiles.js 207 (reader share 70.8%, strict floor 57.8%).",
+    "faultGuard": "ai fault 9 in its institutional form \u2014 the summary paragraph, \"The Tanners' Guild governs\u2026\" (wolfe:24) \u2014 and fault 4, the bare roll as a quadricolon generator (hobb:20). Guard: the function DEVELOPS in the course of the entry; the roll is rare and sometimes incomplete (hobb:20 with hobb:19); the duty is stated flatly and the reader draws the inference (tolkien:F3).",
+    "grammar": "An INSTITUTION move typed by {office, holder, counts, counted, exempt, duty}; a sentence about an exemption requires a non-null `exempt`; the move may lead in at most one grammar of DA-5's closed set.",
+    "obeys": [
+     "(5) the Brackwater lesson's first named consequence \u2014 the bailiff-and-priest sentence becomes writable only when the table says so",
+     "(4) the element gets its full form: a row for every institution the world holds, all slots present",
+     "(7) the AI is a clerk, never a writer"
+    ],
+    "test": "A source-scan walker (registration-manifest shape) asserting every R7 and R15 reader-facing institution sentence resolves each named office, count and exemption to a live field; a check-pair.mjs extension failing any rewrite that introduces an office, a count or an exemption the BEFORE did not carry. Acceptance: U12 (four field-licence breaches in forty items, two of them in KEEPs).",
+    "strength": "STRONG",
+    "changesShippedSurface": true
+   },
+   {
+    "id": "DA-8",
+    "statement": "Every variant is checked against its own block's facts and against the pool's sibling variants before it can be drawn; a sentence that asserts what a sibling denies, or what the block's fields do not hold, is refused \u2014 and the check must allow small particulars to differ while structural facts cohere.",
+    "sourceCount": 34,
+    "authors": [
+     "wolfe",
+     "tolkien",
+     "martin"
+    ],
+    "rows": [
+     "wolfe:40",
+     "wolfe:31",
+     "wolfe:41",
+     "tolkien:E1",
+     "tolkien:G4",
+     "martin:45",
+     "martin:2"
+    ],
+    "figure": "The instrument gap is measured, not guessed: B-CLAIM records that check-pair.mjs sees sibling KEYS but not sibling BANDS, and that nothing mechanises A11's pool-spread rule (both slipped in the illustration pairs). Baseline from the refutation: 5 field-licence breaches in 40 items (12.5%) and 3 R4 inversions. SIZE: zero unresolved contradictions over 2,734 variants and 4,626 annex rows at the freeze.",
+    "faultGuard": "The guard is against the walker itself: conflict 3.22 is settled by two files independently \u2014 structural facts cohere, small particulars of date, name and wording may vary \u2014 so a checker written without that allowance would erase wolfe:41 (two records carrying one fact differently, neither corrected), a device the register wants.",
+    "grammar": "Not a move: a GATE under every move, and the enforcement point for DA-1's sibling test, DA-6's null test and DA-7's field test.",
+    "obeys": [
+     "(5) the Brackwater lesson's second named consequence, verbatim",
+     "(6) B-CLAIM \u2014 the check is what makes \"may not spend a claim\" executable",
+     "(7) THE PROMISE \u2014 nothing re-labels an installed world"
+    ],
+    "test": "The walker is the test: run over all 2,734 variants plus A-U, reporting per variant the fields each assertion resolves to and each sibling it contradicts. Acceptance: U1, U9 and U12 \u2014 the three under-specifications this instrument closes.",
+    "strength": "STRONG",
+    "changesShippedSurface": false
+   },
+   {
+    "id": "DA-9",
+    "statement": "The household-and-its-bill move is written only in R2 and in annex blocks carrying an event-provenance field; a standing configuration field licenses a structural clause about how the town is arranged and never a historical clause about what happened to it.",
+    "sourceCount": 33,
+    "authors": [
+     "hobb",
+     "kay",
+     "martin",
+     "dnd",
+     "wolfe"
+    ],
+    "rows": [
+     "hobb:8",
+     "kay:14",
+     "kay:16",
+     "martin:38",
+     "dnd:25",
+     "wolfe:28"
+    ],
+    "figure": "R2 is the register that has the provenance: n=467, slot-bearing 0.953, mean pool size 6.0; R1 is a STATE register by R-DST-B. DIRECTION: the best-evidenced import in the matrix is admitted to R2 and A-U ONLY. SIZE: at most one bill per block, and in at least half the instances the bill sits in a different sentence, a later block or a parenthesis (kay:16's own guard).",
+    "faultGuard": "ai fault 3 \u2014 the great-against-small pairing becomes a metronome if every block ends on its small counterweight (kay:14) \u2014 and fault 1, the stamped equation (hobb:8). Guard: persistence is shown by a NEW fact, never by re-narrating (hobb:9), and some bills go unnamed and are recoverable only elsewhere.",
+    "grammar": "A CONSEQUENCE move licensed by event-provenance; forbidden as the closing move of more than one variant per pool; forbidden entirely in R1.",
+    "obeys": [
+     "(5) the field licenses the sentence",
+     "(7) product scope \u2014 the household is a standing civic fact, never followed to a named person's outcome",
+     "(3) it is one move among several, not a block's spine"
+    ],
+    "test": "check-pair.mjs arms DURATION/TIME words ADDED, COUNT words ADDED, COUNT words LOST (band noun moved?), plus the per-item R-DST-B refuter pass against the block's STATE-KEY. Acceptance: U12, and U11 for the band vocabulary the move must not invent.",
+    "strength": "STRONG",
+    "changesShippedSurface": false
+   },
+   {
+    "id": "DA-10",
+    "statement": "The state leads and the cause follows where a cause exists; a [threshold] variant states its edge in the conditional or subjunctive and never in a bare future indicative, and no variant assigns the reader a reaction or predicts a crossing.",
+    "sourceCount": 27,
+    "authors": [
+     "dnd",
+     "wolfe",
+     "leguin",
+     "kay"
+    ],
+    "rows": [
+     "dnd:2",
+     "dnd:1",
+     "wolfe:27",
+     "leguin:13",
+     "kay:23"
+    ],
+    "figure": "A figure to HOLD, not move: R1 \"There/It is\" opener 0.051 sits inside the exemplar band (0.0016 dnd-flavor to 0.0556 leguin-fiction) and needs no cure here \u2014 the register that needs it is R6. What this rule moves is the FATE-breach count, measured at 0 today by check-pair.mjs and at 2 of 40 in the refuted taste sample (#7's future-indicative necessity kept without comment, #19's subjunctive deleted). SIZE: zero future-indicative necessity forms and zero subjunctive removals across the wave.",
+    "faultGuard": "ai fault 2's register form \u2014 no assigned reaction, no prediction (dnd:2). Guard against over-correction: dnd:9's measured caution that the copula is KEPT, because \"the mill grinds\" for every \"the mill is\" reads as machine-avoidance and is its own tell.",
+    "grammar": "An ORDER CONSTRAINT binding every grammar in the closed set: the STATE move precedes the CAUSE move wherever both appear, and a THRESHOLD move is always conditional. It constrains two moves and leaves the rest free, which is why it does not become a template.",
+    "obeys": [
+     "(7) THE PROMISE and state-never-fate",
+     "(3) it binds every grammar without fixing any sequence",
+     "(6) a modality is not spendable"
+    ],
+    "test": "check-pair.mjs arms FUTURE INDICATIVE ADDED (STATE never FATE), SUBJUNCTIVE \"would\" REMOVED, and EXISTENTIAL OPENER ADDED. Acceptance: U6 and U7 (the screen was inverted between two items of the sample).",
+    "strength": "STRONG",
+    "changesShippedSurface": false
+   },
+   {
+    "id": "DA-11",
+    "statement": "A general truth the family states may close a variant only where the pool key's own claim is that generality; at most one per block, none where a sibling variant already carries one, and a rewrite never creates one where the BEFORE had none.",
+    "sourceCount": 21,
+    "authors": [
+     "kay",
+     "leguin",
+     "wolfe",
+     "martin",
+     "tolkien",
+     "dnd"
+    ],
+    "rows": [
+     "kay:26",
+     "leguin:40",
+     "wolfe:44",
+     "martin:21",
+     "tolkien:H3",
+     "dnd:2"
+    ],
+    "figure": "The gap is in the rule set, not the corpus: U9 shows the same device praised at two items, CREATED at one, shortened at one and cut at one, with no test separating them. The nearest corpus figure is the A-U tic `grudge with` at 13 rows, whose printed example is a gnomic closer. DIRECTION: a ceiling where none exists. SIZE: \u22641 per block and \u22640.010 per variant in R1, measured by a new walker arm before any is written.",
+    "faultGuard": "ai fault 6 (the evaluative close \u2014 kay:17 calls it the most recognisable AI paragraph ending) and fault 19. Guard: kay:26's own split \u2014 a concrete refrain is permitted, a general aphorism is barred \u2014 plus the hard prohibition on CREATING one in a rewrite.",
+    "grammar": "One member of DA-3's closed set of CLOSE-kinds, carrying the lowest ceiling of the set.",
+    "obeys": [
+     "(6) B-CLAIM \u2014 a rewrite may not spend or manufacture a claim, and a gnomic closer is a claim about the world",
+     "(3) a ceiling with variation, not a slot",
+     "(7) product scope \u2014 the generality is about an institution, never a person's fate"
+    ],
+    "test": "A walker counting gnomic closers per block against 1 and per variant against 0.010, plus check-pair.mjs's existing RATIONED WORD ADDED family. Acceptance: U9.",
+    "strength": "MODERATE",
+    "changesShippedSurface": false
+   },
+   {
+    "id": "DA-12",
+    "statement": "Within a pool the concrete noun and the working verb differ across variants; every particular is a typed field value, and no precise-sounding detail is invented to make a sentence land.",
+    "sourceCount": 53,
+    "authors": [
+     "wolfe",
+     "hobb",
+     "martin",
+     "leguin",
+     "dnd",
+     "kay"
+    ],
+    "rows": [
+     "wolfe:3",
+     "wolfe:10",
+     "hobb:10",
+     "martin:36",
+     "leguin:21",
+     "dnd:8",
+     "kay:20"
+    ],
+    "figure": "TTR 0.211 at a fixed 4,000-token window \u2014 the lowest of eight columns \u2192 \u22650.240, the exemplar floor (B0.6). Guard figure: R1 triad-list rate 0.011 must stay \u22640.020, because own row 21 grades our near-absence of the tricolon a compliance STRENGTH and ai fault 4 is cleared by it \u2014 so this rule raises vocabulary without raising the triad.",
+    "faultGuard": "ai fault 24's hollow specificity \u2014 a precise-sounding particular the engine does not hold is the fault, not the cure \u2014 and fault 4, concrete nouns listed rather than working (wolfe:3). Guard: the noun sits in a WORKING sentence, not an inventory, and the object is described only when contested or in use (hobb:10's gate, flagged Page alone, SINGLE, in its own file).",
+    "grammar": "Not a move: a per-pool dispersion floor on FILLS, under the finite-semantics law.",
+    "obeys": [
+     "(7) finite semantics \u2014 typed buckets, the AI a clerk",
+     "(5) every particular is licensed by a field",
+     "(2) the floor is the measured exemplar band, not an author's preference"
+    ],
+    "test": "A fingerprint delta on type-token ratio at a fixed 4,000-token window over the six R1 leaves against the estate control's 0.211; plus DA-8's walker refusing any particular that resolves to no field. Acceptance: U11.",
+    "strength": "STRONG",
+    "changesShippedSurface": false
+   },
+   {
+    "id": "DA-13",
+    "statement": "In R2 the sentence stays one, but the joint is chosen rather than stapled \u2014 a colon where a cause is named, a period where the semicolon was habit \u2014 and every pool carries at least one short variant; the relief is never bought by a third sentence.",
+    "sourceCount": 31,
+    "authors": [
+     "leguin",
+     "martin",
+     "kay",
+     "wolfe"
+    ],
+    "rows": [
+     "leguin:39",
+     "leguin:24",
+     "martin:26",
+     "kay:44",
+     "kay:24",
+     "wolfe:36"
+    ],
+    "figure": "R2 semicolon 0.360 \u2192 \u22640.130 (the estate control's own 0.1325 and the exemplar ceiling tolkien-elevated 0.122 agree on the number); R2 colon 0.364 HOLDS \u2014 it is the register's licensed causal joint and cutting both would flatten the register; R2 share under eight words 0.017 \u2192 \u22650.029 hard and \u22650.060 target (0.0292 is martin-chronicle's own floor, the one exemplar column that is a record register of the same length); R2 share over thirty 0.491 \u2192 \u22640.340 (martin-chronicle 0.3382, the highest any exemplar reaches).",
+    "faultGuard": "ai fault 5 and fault 17 (repetition without relief). Guard: the relief is a SHORT one-sentence variant, never a cascade \u2014 U2 measured four of thirty-one AFTERs at three sentences, a 13% rate against a house shape of 0.4%, one of them citing a rule to license the cascade outright.",
+    "grammar": "A JOINT constraint on the CAUSE move plus a pool-composition requirement; it adds no move.",
+    "obeys": [
+     "(6) punctuation is spendable and the causal claim is not",
+     "(3) the joint varies by seeded choice among colon, period and the rationed semicolon"
+    ],
+    "test": "check-pair.mjs arm THREE+ SENTENCES; a fingerprint delta on punctuation.semicolonRate, wordsPerSentence.shareUnder8 and shareOver30 for dossierCausalProse.generated.js. Acceptance: U2.",
+    "strength": "STRONG",
+    "changesShippedSurface": false
+   },
+   {
+    "id": "DA-14",
+    "statement": "A single-writer term registry governs R1, R2, R7, R8, R14, R15, R17, R18 and the annex; a term is defined once and never traded for a synonym, and a name appears in one form in the record's own narration.",
+    "sourceCount": 35,
+    "authors": [
+     "dnd",
+     "hobb",
+     "martin",
+     "leguin",
+     "wolfe"
+    ],
+    "rows": [
+     "dnd:39",
+     "dnd:28",
+     "hobb:32",
+     "martin:44",
+     "martin:24",
+     "martin:45",
+     "leguin:43",
+     "wolfe:35"
+    ],
+    "figure": "own row 55: 12 terminology-registry breaches (\"DM-private\" 5, \"publicly visible\" 4, \"profit enormously\" 3), all in JSX, and Axis A does not measure them; own row 54: \"the PCs\" at historyData.js:1326, the estate's one hard-rule breach, and it is in R8. DIRECTION: 12 \u2192 0 and 1 \u2192 0, as an inventory ratchet that only shrinks.",
+    "faultGuard": "ai fault 10 (sameness, 12 documents) and fault 22 (canon breaks and instruction residue). Guard against over-application: dnd:39's own bound \u2014 the METHOD crosses and the publisher's own words never do; a house lexicon is not another world's vocabulary (D N15).",
+    "grammar": "Not a move: a LEXICON GATE under every move, with the registry as the single writer of each term.",
+    "obeys": [
+     "(7) the archivist voice is never transplanted onto chrome, and the registry is what keeps the two lexicons apart",
+     "(4) the form is held even where a slot has no content",
+     "(2) the rule's standing is eight files agreeing, not one house preference"
+    ],
+    "test": "A source-scan walker over the eight registers plus JSX, with an only-shrinks inventory ratchet on the breach count and the `the PCs` count asserted at zero. Acceptance: this rule has NO U of its own; the nearest is U11, whose finding is that the closed vocabularies were absent from the rule set entirely \u2014 the absence this rule closes for terms.",
+    "strength": "STRONG",
+    "changesShippedSurface": true
+   },
+   {
+    "id": "DA-15",
+    "statement": "R17 is a phrase register; cure its head noun's dispersion across the pool and import no sentence law from R1 into it, and keep the rumour family fenced from the record body.",
+    "sourceCount": 10,
+    "authors": [
+     "dnd",
+     "kay",
+     "wolfe"
+    ],
+    "rows": [
+     "dnd:43",
+     "kay:11",
+     "wolfe:14"
+    ],
+    "figure": "R17 is a phrase register by measurement: terminal-stop share 0, segments/variant 1.000, 7.5 words a phrase. Its tics are one head noun: `travellers finding` 29 (2.2%), `travellers told` 14, `travellers passing` 11, `travellers advised` 10 \u2014 64 of 1,293 (0.050) across four of the top ten rows. DIRECTION down. SIZE: no single head noun above 0.030 of the register. Its uniformity figures (pools uniform 1.000, repeated 2-word opener 0.006) are the register's SHAPE and are not moved.",
+    "faultGuard": "ai fault 10 \u2014 ten interchangeable rumours per settlement (dnd:43, Gus L). Guard: dnd:43's own acceptance test, that each generated rumour adds local colour, and the standing fence from RULES Part B \u2014 truth prose never draws from the belief ledgers.",
+    "grammar": "A PLACEMENT rule, not a move: the rumour family is fenced and the dossier carries placement only.",
+    "obeys": [
+     "(7) the fence, and the deity doctrine's neighbour that belief is not truth",
+     "(2) the phrase register is scored on its own unit \u2014 the probe's own [R-12] records that Axis B mixed units and scored phrase registers on sentence metrics",
+     "(3) dispersion, not a new template"
+    ],
+    "test": "A walker over display/rumorPhrasePools.js and its two siblings counting head-noun share per pool against 0.030. A fingerprint delta is NOT a valid test here \u2014 the instrument is sentence-based and this register has no terminal stops. Acceptance: U10.",
+    "strength": "MODERATE",
+    "changesShippedSurface": false
+   },
+   {
+    "id": "DA-16",
+    "statement": "A-U and A-W are one corpus in the doc; every annex row is rewritten beside the wired sibling it authors, the edit is made in docs/content/RECEIPT_POOLS_*.md, and the generated leaves are rebuilt rather than hand-edited.",
+    "sourceCount": 12,
+    "authors": [
+     "martin",
+     "dnd",
+     "hobb"
+    ],
+    "rows": [
+     "martin:45",
+     "dnd:39",
+     "hobb:32"
+    ],
+    "figure": "A-U carries the same debt at scale: \", which\" 0.062, rationed pet words 0.287, pronoun closers 0.123 over 4,626 rows. DIRECTION: the A-U figures move with DA-1/2/3's targets unchanged \u2014 \", which\" \u2192 \u22640.010, pronoun closers \u2192 \u22640.055. Instrument caution from the probe's own correction: the numbered-line join reads 8 rows wired where a raw-byte scan reads 129 (17.2%), and 13 line-wrapped rows are truncated by the join [R-5], so the pairing must be made on the byte scan.",
+    "faultGuard": "The fault here is ours, not an author's: a cure applied to the projection and not to the source ghosts on the next regeneration \u2014 the estate's most-bitten bug class. Guard: the wave's write target is the annex file and the leaf is a build output.",
+    "grammar": "none",
+    "obeys": [
+     "(7) THE PROMISE \u2014 a regeneration must not undo a signed text",
+     "(2) the rule's authority is the measured identity of the two columns, not an author's practice"
+    ],
+    "test": "Re-run the join by raw-byte scan and assert that every edited wired row's annex source moved with it, and that no leaf differs from a rebuild. Acceptance: no U of its own; the nearest is U3, whose finding is that a ration must be a per-variant net test at the point of edit rather than a per-file aggregate checked afterwards \u2014 the same shape of error.",
+    "strength": "MODERATE",
+    "changesShippedSurface": false
+   }
+  ],
+  "refusedTechniques": [
+   {
+    "name": "Tolkien A1 / A2 / A3 \u2014 the antique air by archaic syntax, the older grammatical pattern, the single fronting",
+    "why": "Tolkien's own precedence sentence says the body does not rise; kay:19 (S7) holds the dossier to the plain register, hobb:30 (S5) is the register quarantine, leguin:20 (S4) calls the archaic manner a trap, and A3's corpus reading is partly refuted by Holmes. Conflict 3.5 is OPEN with three verified mechanisms for one permission \u2014 a permission that contested does not enter the register already carrying the estate's largest fault. Ruling (7)."
+   },
+   {
+    "name": "Kay's prolepsis and the retrospective clause",
+    "why": "THE PROMISE: a seed is a starting world forever and lived history is immutable. Kay's own not-transferable list bars it from the record, and FAC A1's note is explicit that it is forbidden on the dossier body. Ruling (7)."
+   },
+   {
+    "name": "The compiler who shows through \u2014 martin:5 (S5), leguin:42 (S4), kay:4 (SINGLE, ceiling only)",
+    "why": "Ruling (7)'s self-effacing law, with tolkien:D1 (S8), kay:34 (S5) and hobb:29 (S4) against them and tolkien:F6 routing the irony to the DM page. Conflict 3.6 is OPEN and its resolution is the owner's (Q12). Nothing evaluative enters the archivist body in this reconciliation."
+   },
+   {
+    "name": "Martin's dialogue engine and every quoted-line technique",
+    "why": "Settled by the register map and by measurement \u2014 dialogue is 0.0003 in dossier-state, and conflict 3.1 rules no dialogue technique from any exemplar transfers here. Speech survives only mediated, as a saying, or as an untagged quoted voice in the Herald, which is not this register."
+   },
+   {
+    "name": "Hobb 18 (the qualification rhythm) and Hobb 5 (negative narration)",
+    "why": "Both SINGLE (Page alone; Oliver alone), and this is the one register where the evidence forbids them: \"rather than\" runs at 5.33 per thousand words here against 0.00\u20130.32 in every exemplar. Admitting a negation rhythm into the register carrying the estate's largest antithesis fault is exactly the trade ruling (6) refuses."
+   },
+   {
+    "name": "The em dash as the qualification's instrument (B0.2's rejected alternative)",
+    "why": "The owner's zero-em-dash law under ruling (7); the register holds 0 em dashes today and the period is the estate's instrument. B0.2's own note already refuses the lane's em-dash alternative."
+   },
+   {
+    "name": "D&D 16 \u2014 empty slots omitted, never filled",
+    "why": "Superseded for this register by ruling (4). D 16 survives only as the shape constraint it shares with dnd:23 \u2014 an omission is never made by a pretext \u2014 and the two-tier absence ruling replaces it."
+   },
+   {
+    "name": "D&D N6 \u2014 description sized by purpose in play",
+    "why": "Refused by the owner on 2026-09-07: D&D's size rules transfer as HOW an element is written, never as WHICH elements are written or how much. Ruling (4)."
+   },
+   {
+    "name": "Wolfe 26b \u2014 \"the first sentence short, the next two longer\"",
+    "why": "SINGLE (one poster counting one paragraph of one book) and its own file flags it a VISIBLE TEMPLATE \u2014 the precise thing ruling (3) forbids. Refused on grade and on kind."
+   },
+   {
+    "name": "Le Guin 45 (the report that climbs outward) and Kay 28 (place before people) as members of the grammar set",
+    "why": "Both SINGLE; kay:28 is a two-star complaint whose opposite habit two skipped readers observed. Under ruling (2) a SINGLE grade does not buy a seat in the closed set. Held for Q3."
+   },
+   {
+    "name": "Martin 15 (the short hop) and Martin 12 (summary\u2013descent\u2013return) as members of the grammar set",
+    "why": "Both flagged HIGH fixed-move-order risk by their own file. A member of the closed set that is itself a template defeats the set \u2014 ruling (3)."
+   },
+   {
+    "name": "Second person (\"You see\u2026\") in R1 and R2",
+    "why": "30 of 2,734 is a rationed house device that sits against the register's own law \u2014 the town's own voice about the town \u2014 and against the never-presume-the-reader's-action rule. Legitimate only in R14's arrival tables, which are read aloud, and R14 is engine-side and untouched."
+   },
+   {
+    "name": "Tolkien F5 \u2014 the dense name-stock as a rate",
+    "why": "F5's compass rule is refuted by its own exemplar, and conflict 3.9 leaves the rate open (Q15). The familiar/alien split survives as a shape; the density does not enter as a number."
+   },
+   {
+    "name": "Any digit, dated header or percentage in prose",
+    "why": "Ruling (7). The register holds digits at 0.000 today and that is kept; R7's contextual numeral is a chair ruling, not a rewrite."
+   },
+   {
+    "name": "The triad as scaffolding",
+    "why": "Our 0.011 is a compliance strength that clears ai fault 4. B0.5 licenses the triad only where the form is exact and per instance; DA-12 holds the ceiling at 0.020 and conflict 6 records that raising it further is unsettled."
+   }
+  ],
+  "conflicts": [
+   "What carries the antique air \u2014 tolkien:A1 (6 sources, syntax with ordinary vocabulary) and tolkien:A3 (7, one fronting to mark a turn) against kay:24 (8, the archaism in the noun, zero syntactic inversion) and kay:41 (3), against leguin:20 (4) and hobb:29 (4) \u2014 no costume at all, a cadence and a stance. Three verified mechanisms for one permission, and Tolkien's own corpus reading is reported as tending to refute the prevalence of archaic inversion. The dossier BODY is settled plain so no rule here is affected, but the conflict decides whether a quoted charter (T8) or a founding entry may rise at all. Q9/Q11.",
+   "Rival accounts: silence or a stated preference \u2014 martin:2 (9) and kay:9 (5) and wolfe:41 (5) give both versions and adjudicate neither, against ai fault 26's archival form and martin:43's alternative clause, where the record names both and says which the office follows. Both are anti-AI-safe and they are DIFFERENT devices, not degrees of one. DA-8's walker must not assume either, and does not. Q13.",
+   "Whether any compiler-shows-through device reaches the archivist \u2014 tolkien:D1 (8), kay:34 (5) and hobb:29 (4) say none, with the irony routed to the DM page (tolkien:F6), against martin:5 (5, the fawning short entry as information), leguin:42 (4, the deadpan two-word verdict) and kay:4 (1, one evaluative word as a ceiling). The files agree on a partial resolution \u2014 take only the ceiling; dryness in juxtaposition, never a joke told \u2014 but not on whether the ceiling is zero. Refused here pending the owner. Q12.",
+   "Coverage by consequence or the courtier's allocation by rank \u2014 martin:17 (5, no roll-call) with Martin's features 44/45 (weight by consequence, never by rank) against martin:5 (5, the living power short and flattering, the fallen one long and frank, deliberately uneven). The owner's full-form ruling cuts against martin:5 as a LENGTH rule but leaves it standing as a possible TONE rule, and Martin's own file says the engine must pick one and mark the other a DM-page fact. Unsettled as tone. Q14.",
+   "Which register is fast and low-density and which slow and dense \u2014 martin:26 (3, the low-density line, the paragraph whose first sentence stands alone) against kay:20 (7) and kay:24 (8, the biting civic noun, periodic but not tangled). The method demands an allocation and the evidence does not make it. DA-4 and DA-13 allocate R1 to the varied-and-shorter end and R2 to the long-with-relief end; THAT ALLOCATION IS THIS LANE'S, NOT THE EVIDENCE'S, and it is the single largest unsupported choice in this file. Q18.",
+   "The triad floor \u2014 own row 21 (0.009 in the fingerprint, 0.011 in R1; a compliance STRENGTH, ai fault 4 cleared by absence) against B0.5 and martin:36 (7), with martin-chronicle measuring 0.2129. Raising the floor moves a dial the AI catalogue currently clears. DA-12 holds it at \u22640.020; whether it may be licensed per instance above that is unsettled. Q31.",
+   "A clue given once or recurrence as the claim \u2014 wolfe:11a (1, SINGLE) against wolfe:11b (5), with martin:30 (2) and tolkien:B2 (6) on the recurrence side. The chair's puzzle-clue / world-fact split is named in the fold as a hypothesis to measure, not a finding. DA-12's dispersion floor is neutral between them by design. Q16.",
+   "The D&D spread profile that DA-4 partly rests on \u2014 dnd:46 (three documents, an in-house instrument, a second-seat re-derivation) against dnd:46's own file, which marks the whole profile PROVISIONAL because the measured text is cosmology and not settlement prose, and against the critic's pass over the questioned settlement text reading a mean near sixteen, floorless and digit-heavy. If the re-measure moves, DA-4's SIZE moves with it; the device survives on five other sources but the number would not. Q29.",
+   "Parataxis at the event \u2014 tolkien:A4 (6, clauses chained with the causal connective withheld) and kay:25 (1) against hobb:15 (3, the breach limb, Oliver alone: extensive parataxis marks the moment the record voice breaks). Settled AGAINST the dossier body by both readings, so no rule admits it \u2014 but it is open for the annex rows, which carry semicolon 0.187 and are edited by DA-16 alongside their wired siblings. Q10.",
+   "Whether the gazetteer is one register with the dossier body or two \u2014 the fold's shortlist treats dossier-archivist as ONE register with one list of thirteen, against PROBE_ALL, which separates them decisively (R7 8.8 words a segment and 47.2% under eight against R1's 16.8 and 13.0%; R7's 3+-segment share 0.069 against R1's 0.004). This lane SPLIT them: DA-1 through DA-6 and DA-9 through DA-13 bind R1/R2/A-U only, while DA-7 and DA-14 bind the gazetteer half. The split is the chair's, not the evidence's, and it is the second-largest unsupported choice here."
+  ],
+  "absenceRule": "TWO TIERS, and the tiering is the register decision. (1) WHERE THE ENGINE HOLDS A RECORDED NULL \u2014 a field that exists and whose value is \\\"no entry\\\", \\\"not held\\\", \\\"lost\\\", \\\"names nobody\\\" \u2014 THE ABSENCE IS WRITTEN, in the clerk's third person, as an honest absence. It is a sentence like any other and it is licensed by that field exactly as every other sentence is licensed; it fires rarely, in a different shape each time, and no dossier block carries more than one (DA-6). (2) WHERE THE ENGINE HOLDS NO FIELD AT ALL \u2014 the world has not merely an empty value but no question \u2014 THE SLOT IS OMITTED, SILENTLY, and the omission is not itself announced. WHY TWO AND NOT ONE: ruling (4) gives every element its full FORM, and the owner's own qualification is decisive \u2014 full form is not full content, and a slot the world has no fact for is an honest absence rather than a manufactured detail. But ruling (5) is equally binding, and best-ai.md fault 24 (15 documents, STRONG, archival YES) names the inverse fabrication directly: a gap written where the world holds a fact, or where the world holds no question at all, is a hole invented to look like a record. A uniform \\\"no entry\\\" line would also be exactly hobb:19's metronome of lacunae and dnd:23's pretext, and it would defeat leguin:4's placement rule that the gap lives in the record and never in the world. So the FORM is full \u2014 every element the world holds gets its entry, its slots and its typography, sized by the place's own rank and never by its importance in play \u2014 and the CONTENT of a slot is written, declared absent, or absent-and-unmentioned, in that order, according to what the engine actually holds. RATE AND SHAPE are dnd:23's and hobb:19's: rare, specific, different in shape each time, correlated with something the simulation knows (a fire, a bad year, a change of office). Proposed instrument and target: DA-6's new `apparatus rate`, 0 < rate \u2264 0.020 per variant in R1, at most one dossier in three carrying one at all \u2014 PROPOSED, NOT MEASURED, since no current probe metric counts it. The DM page's empty slot (silent omission or the absence line there too) is Q5 and is not this register's to decide.",
+  "openQuestions": [
+   "Q18 / conflict 5 \u2014 the fast-vs-dense allocation. DA-4 and DA-13 place R1 at the varied-and-shorter end and R2 at the long-with-relief end. The evidence names the choice as necessary (allocate, never average) but does not make it. This is the largest unsupported choice in the file and the owner should ratify or reverse it before any SIZE is pinned.",
+   "Whether the gazetteer half (R7, R15's reader residue) is one register with the dossier body or two. PROBE separates them by every length metric; the fold's shortlist merges them. This lane split them and bound only DA-7 and DA-14 to the gazetteer. Ratify the split or collapse it.",
+   "Q29 \u2014 DA-4's SIZE partly rests on dnd:46, which its own file marks PROVISIONAL because the measured text is cosmology, not settlement prose. Authorise the re-measure over the lawful specimens already on disk before any generator is pinned to a spread number.",
+   "Q5 \u2014 the honest-absence rate and shape, and whether the DM page's empty slot takes the absence line too. DA-6's 0.020 ceiling is a proposal against a measured zero; the metric does not exist yet.",
+   "Q12 \u2014 does ANY compiler-shows-through device reach the archivist (leguin:42's two-word verdict, kay:4's one-word ceiling, martin:7's aside once a document), or is it routed wholly to the DM page? This reconciliation refused all of it; a reversal changes DA-3's and DA-11's close sets.",
+   "Q13 \u2014 rival accounts: silence (martin:2, kay:9) or a stated preference (ai fault 26). DA-8's walker is deliberately neutral and cannot stay neutral once the register writes them.",
+   "Q31 / Q32 \u2014 the triad floor and the D&D flavour dials. DA-12 holds the triad at \u22640.020; B0.7 proposes the dossier sit nearer flavor than rules, which moves R1's triad, doubled-adjective and adverb dials upward from floors the AI catalogue currently clears.",
+   "Q24 \u2014 the contextual numeral ruling that DA-7's digits target (R7 0.03 \u2192 0) waits on. This is a chair ruling, not a rewrite, and DA-7 cannot land its digit half without it.",
+   "Q23 \u2014 R7's mean pool size of 2.0 against a derived floor of 8/6/4. A7 forbids appending, so the cure is a chair act minting new pool keys, and nothing in this reconciliation or elsewhere schedules one.",
+   "DA-7 and DA-14 change golden-bound, generation-input bytes (institutionalCatalog.js, institutionServices.js, tradeGoodsData.js, historyData.js) and are marked OWNER-SIGNED. They cannot proceed on the chair's delegated authority.",
+   "settlementRumors.js's engine-vs-display route was not established in this lane; DA-15 is marked display-side on the strength of its two sibling homes only, and that is an owed check.",
+   "DA-6's apparatus walker and DA-8's contradiction walker do not exist. Both rules propose instruments, and their sizes should be read as \"test this, don't trust it\" until the instruments run.",
+   "Every sourceCount here is a cross-author union of heterogeneous units (voices, witnesses, documents, speakers). The union is a floor, not a homogeneous total; each STRONG grade rests on at least one citing file's own three-or-more count in that file's unit, and the chair should decide whether the union may be reported at all."
+  ],
+  "file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/prose-research/sweep/reconcile-dossier-archivist.md"
+ },
+ "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/prose-research/sweep/reconcile-herald-pools.md": {
+  "register": "herald-pools (R3 Herald receipt pools, 1,212 variants / 12 files, ENGINE-SIDE golden-bound \u00b7 R4 Herald causal grammar + join molds, 133 PHRASES / 2 files \u00b7 R4b Herald disclosure + cause-lifecycle, 50 variants / 3 files \u00b7 R5 Herald crier voice, 373 variants / 2 files. 1,768 admitted variants in 19 files.)",
+  "allocation": "GUARD CLEARED: sweep/EXEMPLAR-BEST-PARTS.md exists (86,609 bytes, mtime 09-07 09:38), read in full. Counting convention stated before any count: only VERIFIED rows; the unit travels with the count (Tolkien's S9 is nine scholars, D&D's S7 seven designers/templates, Wolfe's includes speakers); cross-author duplicates deducted BY NAME (Le Guin is a counted source inside tolkien:C1 and tolkien:B1, so she is one hand wherever a Le Guin row is also cited); within one author, where two cited rows do not print source lists, take the LARGER and add only nameable distinct sources (a deliberate under-count); best-own.md contributes INSTRUMENTS (I1-I11), never sources, so it never raises a count; best-ai.md contributes DOCUMENTS evidencing a FAULT, counted only where the rule says so.\n\nTHREE MEASURED FACTS decide the allocation, and no author is weighted (the proposal's Kay 35 / Tolkien 30 / Le Guin 20 / Hobb 10 / Wolfe 5 are UNSUPPORTED at 0 sources, FIVE_AUTHOR_CHECK C1). (i) The Herald is the estate's ONLY surface carrying a quoted in-world voice \u2014 R5 is ruled a quoted voice (A'-R5, R-DST-I) and is settlement-agnostic by construction, slot-bearing 0.032 (own row 40). (ii) It is a SPOKEN register \u2014 unit the headline fragment, terminal-stop 0.847, 1-segment 0.832, 12.2 words (own row 41). (iii) It is the ONE register with EVENT PROVENANCE, so under R-DST-B the exemplars' best-evidenced move (the event landing on a household with its cost) has a lawful home here and nowhere else in the estate (EXEMPLAR-BEST-PARTS \u00a75, closing note on T13).\n\nFIVE LAYERS, ALLOCATED: (1) THE QUOTED VOICE \u2014 tolkien:C1 (9), wolfe:20 (7) + wolfe:22 (4, subsumed), hobb:14 (6, Registers line reads \"herald-pools (primary); NOT dossier-archivist\"), martin:25 (4), leguin:12 (4), dnd:5 (5). Four independent authors converge on ONE mechanism (syntax, never accent/spelling/word-list); tolkien:C1 is graded by its own file the strongest-evidenced technique in that author for this register, and Wolfe's file calls 20 the single most useful item for herald-pools. (2) THE SPOKEN LINE \u2014 dnd:40 (7, \"YES as a band; NO as a number\"), dnd:41 (1, \"the Herald's receipts are exactly the register this governs\"), dnd:12 (4), leguin:24 (6), leguin:30 (6), leguin:41 (1, Registers: herald-pools primary), tolkien:B1 (5), kay:40 (2). (3) REPORT MODE AND THE CLOSE \u2014 wolfe:15 (8), kay:30 (6), kay:2 (5), kay:26 (6), tolkien:A5 (3), martin:33 (5), dnd:2 (5). (4) THE EVENT'S LANDING \u2014 hobb:8 (10, the strongest-evidenced technique in that author), kay:14 (7) + kay:16, martin:38 (4); allocated HERE AND NOWHERE ELSE because only here does a provenance field exist. (5) THE FORMULA AND THE FRAME \u2014 martin:31 (7), kay:26 (6), tolkien:B2 (6), wolfe:11b (5); martin:31 IS the metronome fault named and bounded by an author who defended the practice and lost to his own editor, and it maps one-to-one onto R5's measured defect (same-opener-as-previous 0.4242, the estate's worst).\n\nNOT DRAWN ON, with reasons: the whole document-frame apparatus (T1-T5, T7, T17, T18, T38) belongs to the dossier-archivist and the chronicle \u2014 the Herald's unit is a headline fragment with no apparatus and no front matter; the sole exception is R4b, which IS the Herald's apparatus voice (HP-11). Kay's prolepsis/elegy (chronicle only, K 17 capped at zero per dossier block by its own file). Tolkien's elevated register and antique syntax \u2014 dnd:5 supplies the POSITIVE reason: the Herald is the plainer register, \"and this is a reason, not a preference\". hobb:17 / martin:4's evidential hedge \u2014 dnd:3's Registers line puts herald-pools at \"no hedge at all\". Martin's dialogue engine \u2014 \u00a73.1 SETTLED, dialogue measured 0.000 in the crier (own row 52, fault 13 cleared by absence).",
+  "rules": [
+   {
+    "id": "HP-1",
+    "statement": "In the crier (R5), vary the FRAME across a pool and never the vocabulary inside it: no two variants of one pool may open on the same frame. The crier keeps a formula \u2014 it is a quoted in-world voice \u2014 but the formula belongs to the crier's office, not to a place, because R5 names no place.",
+    "sourceCount": 24,
+    "authors": [
+     "martin",
+     "kay",
+     "tolkien",
+     "wolfe"
+    ],
+    "rows": [
+     "martin:31",
+     "kay:26",
+     "tolkien:B2",
+     "wolfe:11b"
+    ],
+    "figure": "R5 same-opener-as-previous 0.4242 (fingerprint; the estate's worst) against an exemplar band 0.033 (martin) - 0.167 (leguin-fiction) \u2192 DOWN to \u22640.15, a cut of 0.27 (~65%); set at the TOP of the band, not Martin's floor, because K 44 makes an exactly-hit threshold the fault and M 31 licenses the formula. Second figure: R5 pools-with-repeated-two-word-opener 0.224 (PROBE_ALL \u00a73) \u2192 pools sharing the FRAME GRAM = 0 (binary, not a distribution: A11 forbids it in terms). Anchor tic: `and the country` 26 of 373 (7.0%, lift 1,192), with [R-7]'s caution that tic rows are not additive.",
+    "faultGuard": "Fault 9 (the fixed move order, 11 documents) at a longer period, plus fault 17 (the loop, 19 documents), if applied as 'rotate the frames'. GUARDS, all from the authors: M 31's bound that a licensed recurrence must be one the world itself repeats \u2014 and since R5 is place-free (slot-bearing 0.032), the crier's licensed recurrence is his OFFICE's saying, never a town's; K 26's generalisation test, walkable (does the line name a thing in this world, or does it name life?); T B2's tripling DROPPED, not templated, by its own file.",
+    "grammar": "A typed FRAME element at the head of a crier line, drawn per-variant from a frame pool that must be DISJOINT within a pool key. The licensing field already exists \u2014 newsVoice.js keys VOICE_LINES by category \u00d7 bucket. No new field is invented.",
+    "obeys": [
+     "(1) allocate \u2014 Martin, Kay, Tolkien and Wolfe are each drawn on because each measured this exact failure; no weights.",
+     "(2) evidence resets \u2014 martin:31 at 7 sources is why this rule leads, not any author's fame.",
+     "(3) latent grammar \u2014 the frame varies by seeded choice among a closed set, never as a visible rota.",
+     "(6) B-GRAMMAR \u2014 the walker refuses a same-frame-as-previous run.",
+     "(7) the archivist voice is never transplanted onto chrome or the crier: R5 is a quoted voice and stays one."
+    ],
+    "test": "A walker over newsVoice.js VOICE_LINES recomputing same-opener-as-previous and per-pool frame-gram collision, plus check-pair.mjs's A11 arm extended to a Herald corpus. Acceptance U10 (R5's spread rule was asserted rather than measured and the sample breached it twice; evaluate against the pool's other variants AT EDIT TIME). Negative control: run the walker on today's `and the country` (26 of 373) and require it to fire.",
+    "strength": "STRONG",
+    "changesShippedSurface": true
+   },
+   {
+    "id": "HP-2",
+    "statement": "Change no byte of the Herald receipt pools (R3) before the owner's signature at the fixture. Take the rhythm and uniformity measurement now, present it with the same-seed pick delta it would cost, and let the owner rule; every rule below that moves an R3 figure is deferred to this signature and says so.",
+    "sourceCount": 11,
+    "authors": [
+     "kay",
+     "dnd"
+    ],
+    "rows": [
+     "kay:44",
+     "dnd:46"
+    ],
+    "figure": "R3 runs-of-three-in-one-length-band 0.5973 (fingerprint) against an exemplar band 0.154 (leguin-fiction) - 0.408 (dnd-rules-srd52) \u2192 DOWN to \u22640.40 (the D&D rules ceiling, because B0.7 places the news line nearest the rules column and that column pays for its metronome deliberately, to be scannable); R3 neighbour variation 0.330 against 0.495-0.805 \u2192 UP to \u22650.50 (the dnd-flavor floor). BOTH ARE THE ASK; NEITHER IS EXECUTED BY THIS RULE.",
+    "faultGuard": "Fault 5 (the metronome, 15 documents), which best-ai.md names hardest in this exact register \u2014 short pools have the least room to vary. The guard that matters is on the DEFERRAL: a measurement presented as a cure is how a park-red surface moves by accident. A7 (the pool is a seed input: no variant added, removed or reordered), A17 (pool key and block id are hash inputs), and dnd:46's own PROVISIONAL flag \u2014 adopt the instrument, hold the figures loosely, re-measure before pinning anything.",
+    "grammar": "none \u2014 this rule constrains WHEN, not what.",
+    "obeys": [
+     "(7) THE PROMISE, directly and centrally \u2014 a seed is a starting world forever and lived history is immutable, so a same-seed pick shift would re-label a world already lived in; that is why R3 is the owner's and not the chair's.",
+     "(2) evidence resets \u2014 the measurement, not a preference, is what goes to the owner (kay:44: the walker measures and the owner sets).",
+     "(5) the clerk law is not relaxed by deferral."
+    ],
+    "test": "Run fingerprint.mjs over the R3 homes at the current HEAD and at any proposed rewrite, and require the eventProse.js same-seed pick set to be re-derived and the moved-pick count printed BEFORE the signature is asked for; the goldens-regen-once receipt is the artefact. Acceptance U2 (the two-sentence ceiling as a hard line, a measurable ratchet at 11 of 2,734) and U11 (digit-free is not band-clean) must both pass on any deferred edit when it eventually runs.",
+    "strength": "STRONG",
+    "changesShippedSurface": true
+   },
+   {
+    "id": "HP-3",
+    "statement": "In the Herald, cap a spoken unit by a BAND with a real distribution \u2014 never a fixed sentence count \u2014 and stop the line where a hearer could answer. The two-sentence ceiling holds absolutely; within it the crier's variants must differ in length, and some must be short.",
+    "sourceCount": 23,
+    "authors": [
+     "dnd",
+     "leguin",
+     "tolkien"
+    ],
+    "rows": [
+     "dnd:40",
+     "dnd:41",
+     "dnd:12",
+     "leguin:24",
+     "leguin:30",
+     "tolkien:B1"
+    ],
+    "figure": "R5 share-of-segments-under-8-words 0.078 (PROBE_ALL \u00a76: 0.17\u00d7 the 0.46 median, and the LOWEST of the four Herald columns) \u2192 UP to a band of 0.15-0.25 (exemplar range 0.029-0.333; the estate's own healthy Herald column R3 sits at 0.204). R5 words/segment sd 4.7 \u2192 UP to \u22657.0, set deliberately BELOW the D&D floor of 8.5 because B0.4 is explicit the cure is not longer sentences by default. R5 2-segment share 0.062 against R3's 0.167; R5 3+-segment share HELD at 0.000.",
+    "faultGuard": "Fault 5, named by dnd:40 itself \u2014 every pool line arriving at exactly two sentences is audible within four lines. GUARDS: D 40's own 'a band with a distribution, never a target'; L 24's \u2014 variety is driven by WHAT THE SENTENCE CARRIES, and 'vary the lengths' implemented as an alternation is a metronome at a longer period; T B1's \u2014 the enforcement of the two-beat rhythm is its IRREGULARITY, and a generator that hits the beat reliably produces the droning cadence the hostile critics named.",
+    "grammar": "A length-band constraint over the move SET, not over the order. The licensing field is the news bucket's significance rank \u2014 the same rank kindPoolWalker.js already uses to derive the kind-pool floor (routine 8 / notable 6 / major 4), so the band is keyed to something the engine holds. Order constraint: the STOP falls at the reaction point (dnd:41), so no move may be appended after the point a hearer could act.",
+    "obeys": [
+     "(3) a band with required variance is the anti-template form, and the move ORDER is untouched by it.",
+     "(6) B-CLAIM \u2014 length is punctuation-and-word-order spend, never a claim spend; B-GRAMMAR's walker is where the band lives.",
+     "(2) dnd:40 at 7 sources is why the band and not the number.",
+     "(7) the two-sentence read-aloud law is the estate's own and is unchanged."
+    ],
+    "test": "A Herald arm of check-pair.mjs carrying the existing THREE+ SENTENCES arm plus a new segment-count-distribution arm that fails any pool whose variants all carry the same segment count \u2014 the A11 gap B-CLAIM records as UNMECHANISED today. Acceptance U2 (both corpora's two-sentence law breached at 32\u00d7 the house shape; R10 subordinate to it) and U10 (evaluate against the pool's other variants).",
+    "strength": "STRONG",
+    "changesShippedSurface": true
+   },
+   {
+    "id": "HP-4",
+    "statement": "In the Herald, differentiate a quoted voice by sentence length, clause habit and trade vocabulary \u2014 in that order \u2014 and never by dropped letters, phonetic spelling or a per-role word list applied as a lookup. No role-differentiated line may be written where no typed field holds the role.",
+    "sourceCount": 34,
+    "authors": [
+     "tolkien",
+     "wolfe",
+     "hobb",
+     "martin",
+     "leguin",
+     "dnd"
+    ],
+    "rows": [
+     "tolkien:C1",
+     "wolfe:20",
+     "wolfe:22",
+     "hobb:14",
+     "martin:25",
+     "leguin:12",
+     "dnd:5"
+    ],
+    "figure": "R5 mean within-pool word sd 1.3 (PROBE_ALL \u00a73; the estate's second-lowest after chrome's 0.9) against R3's 2.1, the causal join's 5.1 and the voice bible's 6.5 \u2192 UP to \u22652.1, a rise of 0.8, anchored INTERNALLY on R3's own figure rather than an exemplar column, because the crier is phrase-bounded and B0.4 forbids buying variance with length. HELD: R5 slot-bearing share 0.032 must not rise as a side-effect \u2014 a crier that starts naming places to sound differentiated has broken its own construction (own row 40).",
+    "faultGuard": "Fault 13 (dialogue \u2014 one voice with swapped vocabulary; 14 documents) and, at pool level, fault 9 (each people's register as a fixed tic list \u2014 tolkien:C1 names this itself). GUARDS: W 20's 'a register is a syntax difference, not a word-list difference', with Gary K. Wolfe's negative case as the diagnostic (voices prohibited from developing their own); H 14's ordering \u2014 length and clause habit FIRST, vocabulary second, because a per-speaker word list applied as a lookup produces caricature on a metronome; M 25's \u2014 dropping letters to signal rank is a tell and an insult at once; T C1's \u2014 the mediating figure's RANGE is itself a characterising fact, so one voice must carry a wide range or the set is a lookup table.",
+    "grammar": "THE LICENSING FIELD IS MISSING TODAY AND THE RULE SAYS SO: VOICE_LINES is keyed by category \u00d7 bucket and carries no speaker role. Under R-DST-B a role-keyed register may not be written where no typed office field exists \u2014 the rule constrains emission, it does not licence inventing a role. This is HP-6's law applied to voice.",
+    "obeys": [
+     "(5) THE BRACKWATER LESSON \u2014 a voice differentiated by a role the data does not hold is a sentence buying an effect with a fact; the rule refuses to fire rather than manufacture the role.",
+     "(7) product scope \u2014 a role, never a NAMED character's fate; and the archivist never borrows a speaker's register (hobb:14's own boundary).",
+     "(1) allocate \u2014 six authors converge on one mechanism, which is why this is the register's load-bearing rule and not an average of six."
+    ],
+    "test": "Measure per-pool within-pool word sd and clause-count spread over newsVoice.js. The real test is the negative control: STRIP THE VOCABULARY from two role-differentiated pools and check whether a blind reader still separates them by syntax alone \u2014 the rename test (tolkien:C5, dnd:45, tolkien:I3's register-variance-across-speakers walker check). Acceptance U10 and U12 (R-DST-B is in no rule and four items breached it; a role asserted from a field that does not carry it is the same breach).",
+    "strength": "STRONG",
+    "changesShippedSurface": true
+   },
+   {
+    "id": "HP-5",
+    "statement": "In the Herald, no sentence names what a fact means. Where a receipt carries a second sentence, that sentence carries a NEW FACT, and its kind varies \u2014 a condition, a prohibition, an absence, an object, a name not given. A 'That is / This is' tail carrying the pool's own discriminating claim is not a gloss and is not cut.",
+    "sourceCount": 27,
+    "authors": [
+     "wolfe",
+     "kay",
+     "dnd",
+     "martin",
+     "tolkien"
+    ],
+    "rows": [
+     "wolfe:15",
+     "kay:30",
+     "dnd:2",
+     "martin:33",
+     "tolkien:A5"
+    ],
+    "figure": "R3 gloss tail ', which' 0.034 \u2014 8.5\u00d7 the 0.004 median, PROBE_ALL \u00a76's own outlier row \u2014 against ZERO which-tails in Martin's 12,422-word chronicle (B0.2) \u2192 DOWN to \u22640.010, a cut of 0.024 (~70%), NOT to zero, because A9 protects the tail carrying the pool key's discriminating claim and U9 proves the estate cut exactly that twice. Second: R3 2nd-sentence-summary rate 0.016, held at or below present. BOTH HALVES ARE R3 AND ARE DEFERRED TO HP-2's SIGNATURE; the rule binds R4b and R5 immediately, where the gloss rate is already 0.000 \u2014 a hold, not a cure.",
+    "faultGuard": "Fault 1 (the gloss, 14 documents) in its cruellest form (wolfe:15's own): the flat report, then one sentence telling the reader it was terrible. GUARDS: W 15's \u2014 the whole technique is the MISSING second sentence, and Beck's 'morally inconsistent' matters because perfectly even coldness is its own mannerism, so the rate is not zero; K 30's \u2014 'always end on an object' is itself a fixed move, so the KIND of standing fact varies across a pool; T A5's \u2014 the short sentence is earned only when it carries new fact, never a verdict on the previous fact.",
+    "grammar": "A typed CLOSE move whose kind is drawn, seeded, from kay:30's five kinds. R-DST-B binds it: a receipt closing on a consequence needs the consequence RECORDED, not inferred \u2014 an event move only where an event-provenance field exists, and a standing configuration field licenses a structural clause and never a historical one.",
+    "obeys": [
+     "(5) THE BRACKWATER LESSON directly \u2014 the kicker sentence asserting a fact the generator holds no data for is exactly what this bars; its positive form is that a second sentence must be a SECOND FACT, not a meaning.",
+     "(6) B-CLAIM \u2014 a claim may not be spent and a meaning may not be bought.",
+     "(3) the close is a seeded choice among five kinds, never one shape."
+    ],
+    "test": "The Herald arm's 2nd-sentence-summary and ', which' counters, plus kay:30's walkable question \u2014 does the last sentence assert a present condition? Acceptance U9 (the gloss test has no guard for the case where the gloss is the band's distinguishing claim; run the sibling-pool check BEFORE the cut fires) and U5 (a close-on-a-thing rule was cited eight times and delivered once \u2014 the walker must assert DELIVERY, never citation).",
+    "strength": "STRONG",
+    "changesShippedSurface": true
+   },
+   {
+    "id": "HP-6",
+    "statement": "In the Herald, every office, exemption, count, actor and saying named in a line must come from a typed row the engine holds. Where the table has no row, the line is not written. A price may be named without a figure; an office may not be named without an office.",
+    "sourceCount": 25,
+    "authors": [
+     "wolfe",
+     "hobb",
+     "dnd",
+     "kay",
+     "leguin"
+    ],
+    "rows": [
+     "wolfe:3",
+     "hobb:19",
+     "dnd:23",
+     "kay:11",
+     "leguin:4"
+    ],
+    "figure": "The exposure is R5's slot-bearing share 0.032 (PROBE_ALL \u00a73; own row 40) \u2014 12 of 373 crier lines carry a slot, so 361 assert on the crier's own authority \u2014 against R3's 0.578 (4.28\u00d7 the median) and R4b's 0.500 (3.7\u00d7), where the slot machinery already does most of the licensing. DIRECTION: the count of un-slotted OFFICE / EXEMPTION / COUNT nouns in R5 \u2192 0 unlicensed. SIZE: NOT MEASURED \u2014 the census is owed (open question 5). The rate 0.032 must NOT be moved by this rule: the cure is not to slot the crier (that breaks its settlement-agnostic construction) but to bar the unlicensed noun.",
+    "faultGuard": "Fault 24 (fabrication in the record, 15 documents STRONG), whose own constraint sentence is the whole rule (the finite-semantics law), with its named trap: HOLLOW SPECIFICITY \u2014 a precise-sounding particular the engine does not hold is the fault, not the cure. Plus fault 11 (the vague authority, 24 documents). GUARD AGAINST OVER-CORRECTION: wolfe:3's positive form \u2014 the concrete in a WORKING SENTENCE, never an inventory, and the price without the number (row 1028, named by its file the model for our no-digits rule); kay:11's \u2014 the four forms are a pool drawn with long gaps, never a checklist, and some entries fire none.",
+    "grammar": "This rule creates the register's licensing spine. Ruling (5) owes an INSTITUTION TABLE: typed rows for who holds office, who counts, who is exempt, what each institution does. Every PARTY, BILL and SAYING move is licensed by that table and nothing else. The BILL move is DOUBLE-licensed: event provenance AND an institution row.",
+    "obeys": [
+     "(5) verbatim and centrally \u2014 the generator is a clerk, never a writer; no sentence may buy an effect with a fact. The Brackwater kicker fails this rule at the bailiff and again at the priest.",
+     "(7) FINITE SEMANTICS \u2014 typed buckets, the AI a clerk never a writer; and DEITY DOCTRINE, since a priest named by a Herald line is a culture's officer, never a theological claim.",
+     "(4) full FORM is not full CONTENT \u2014 the rule refuses the manufactured detail while leaving the form intact."
+    ],
+    "test": "The SAME-ENTRY CONTRADICTION WALKER ruling (5) owes: an entry's sentences checked against its own facts and against the pool's sibling variants. Negative control, executable by hand today: run it on the Brackwater line itself and require it to fire on the exemption clause about the priest and the counting clause about the bailiff. Acceptance U12 (R-DST-B is in no rule and four items breached it) and U11 (\u00a70d's closed count and duration vocabularies are absent from every drafted rule; digit-free is not band-clean).",
+    "strength": "STRONG",
+    "changesShippedSurface": true
+   },
+   {
+    "id": "HP-7",
+    "statement": "In the Herald, no line hedges a quantity, a strength or a likelihood. A provenance hedge \u2014 naming where a report came from \u2014 is licensed only inside the information family, never twice in one entry, and never on a belief.",
+    "sourceCount": 10,
+    "authors": [
+     "dnd",
+     "kay",
+     "wolfe"
+    ],
+    "rows": [
+     "dnd:3",
+     "dnd:13",
+     "kay:11",
+     "wolfe:16"
+    ],
+    "figure": "R3 AI-tells/variant EXOGENOUS 0.004 (half the 0.008 median) and R4 0.000 \u2014 the Herald's receipt half is already the cleanest column in the estate on this axis, so the rule is a HOLD there. The exposure is R4b at 0.020 (2.5\u00d7) and R5 at 0.024 (3\u00d7, the corpus's highest). SIZE: R5 exogenous tells 0.024 \u2192 \u22640.008 (the median), which on 373 variants is 9 variants \u2192 \u22643; R4b 0.020 \u2192 \u22640.010, which on 50 variants is 1 variant \u2192 0, and is therefore a ONE-ROW ACT rather than a distribution \u2014 the rule says so rather than dressing a single row as a rate.",
+    "faultGuard": "Fault 11 (the vague authority: 'it is said') in the over-hedging direction, and fault 19 in the over-correction direction \u2014 a copula purge to avoid a hedge produces machine-avoidance prose, refuted directly by dnd:9's in-house measurement (is/are 24.84 per thousand against was/were 0.65). GUARD: keep the plain copula; a hedge marks a SOURCE, never a quantity, and never twice in one entry (dnd:3's own rule). Note the honest deduction: dnd:3's archivist half rests on Alexander alone and does NOT count here; only the three-source no-hedge limb does.",
+    "grammar": "A prohibition on a modifier class, not a move. Its one licensed exception is a PLACEMENT rule: the provenance hedge lives in the R3 information family, which is the Wolfe fence's existing home (RULES Part B: truth prose never draws from the belief ledgers).",
+    "obeys": [
+     "(6) B-CLAIM \u2014 a modality may not be spent, and a hedge added is a modality spent in the other direction.",
+     "(7) the deity doctrine, via wolfe:16 \u2014 a hedge never softens a belief, because a belief is a cultural fact and not a claim about the world.",
+     "(2) the no-hedge limb is taken at its own three sources and the archivist limb's single source is left where it belongs."
+    ],
+    "test": "A hedge-lexicon counter over the four Herald homes, split into quantity hedges (fail) and provenance hedges (pass only inside informationReceiptPools.js). Acceptance U3 (the ration is a PER-VARIANT NET TEST at the point of edit, not a per-file aggregate checked afterwards \u2014 four additions slipped a sample written to demonstrate the rule) and U8 (before cutting a rationed adverb, check whether a sibling pool exists that the adverb distinguishes the variant from).",
+    "strength": "STRONG",
+    "changesShippedSurface": true
+   },
+   {
+    "id": "HP-8",
+    "statement": "In the Herald, a line meant to move is earned by a plain fact stated in the sentence before it, and it fires in a minority of entries. No entry closes on a moral, a summary, an aphorism or an uplift. The crier may hold one such line; the receipt pools ordinarily hold none.",
+    "sourceCount": 7,
+    "authors": [
+     "kay",
+     "wolfe",
+     "leguin",
+     "dnd"
+    ],
+    "rows": [
+     "kay:38",
+     "wolfe:15",
+     "leguin:41",
+     "dnd:41"
+    ],
+    "figure": "R5 abstract-noun closer 0.020 (PROBE_ALL \u00a76: 0.35\u00d7 the 0.057 median) and the `came to nothing` family at 8 of 373 (2.1%, \u00a74's tic table) \u2014 the estate's nearest measurable proxy for an uplift or anti-climax close. DIRECTION: hold both. SIZE: R5 abstract closer held at \u22640.030 and the uplift-closer family held at \u22640.02 while the moving line is admitted. THE MOVING LINE'S OWN RATE IS NOT MEASURED; kay:38 sets no rate and the census is owed \u2014 this rule is a direction with no number and says so.",
+    "faultGuard": "Fault 6 (the evaluative close, 6 documents STRONG), named by kay:38 itself \u2014 the earned line becoming a per-entry slot is the closing-uplift metronome. GUARDS: K 38's own 'most Herald entries should contain no such line'; K 26's bar on the general aphorism, walkable (does the sentence name a thing in this world, or does it name life?); A9's \u2014 a gnomic closer is never CREATED where the BEFORE had none.",
+    "grammar": "A rationed optional move at the tail of a crier line only, licensed by the fact stated in the move before it (kay:38's earning condition expressed as a grammar dependency): the MOVING move may not be first, and may not follow another MOVING move in the same pool.",
+    "obeys": [
+     "(3) a rationed move whose firing is seeded is the definition of a latent grammar; fired per entry it is the visible template the owner's directive names.",
+     "(7) product scope \u2014 a moving line about the world, never about a named character's fate.",
+     "(1) allocate \u2014 Kay alone carries the mechanism, with two SINGLE-source corroborations named as single rather than averaged in."
+    ],
+    "test": "A walker counting the moving-line move per register and failing on any run of two, plus kay:26's generalisation test run over R5's closers. Acceptance U9's second limb (the gnomic closer is ruled three ways across five items and needs its own explicit rule \u2014 this is that rule) and U5 (assert delivery, never citation).",
+    "strength": "STRONG",
+    "changesShippedSurface": true
+   },
+   {
+    "id": "HP-9",
+    "statement": "In the Herald, record a civic event where it strikes \u2014 on a household, a trade or an office the engine holds as a standing civic fact \u2014 and put the cost in a DIFFERENT sentence, a later receipt, or nowhere. Some bills go unnamed. The household is never followed to an outcome.",
+    "sourceCount": 21,
+    "authors": [
+     "hobb",
+     "kay",
+     "martin"
+    ],
+    "rows": [
+     "hobb:8",
+     "kay:14",
+     "kay:16",
+     "martin:38"
+    ],
+    "figure": "R3 triad-list rate 0.012 (0.44\u00d7 the 0.027 median) \u2014 HELD at \u22640.020, because martin:38's own named risk is that cause-effect-effect at fixed length is a tricolon in disguise. R3 pronoun closer 0.0769 (fingerprint) against martin-chronicle 0.054 and the bible 0.015 \u2192 DOWN to \u22640.055, a cut of 0.022, anchored on Martin's chronicle, the exemplar column that argues by concrete civic nouns. BOTH ARE R3 AND ARE DEFERRED TO HP-2's SIGNATURE. B0.3's caveat binds: name the referent at the close ONLY where the referent is a civic thing \u2014 the illustration refuter proved the rule does not reach an abstraction (ill-1 bought an echo for nothing).",
+    "faultGuard": "Fault 3 (the great-against-small pairing as a metronome if every entry ends on its small counterweight \u2014 kay:14 names it), fault 1 (hobb:8's 'a levy is a daughter's dowry deferred' as a stamped equation appended to every entry), fault 4 (kay:7 and hobb:8's tricolon of consequences). GUARDS: K 16's \u2014 put the bill in a different sentence, a later block or a parenthesis, and let some bills be recoverable only elsewhere; H 9's \u2014 persistence is shown by a NEW FACT, never by re-narrating; K 7's \u2014 two trades or four, never habitually three; M 38's \u2014 vary how far a consequence runs, and some stop at one.",
+    "grammar": "The BILL move, licensed by event provenance AND an institution row (HP-6). Order constraint, the rule's teeth: BILL MAY NOT IMMEDIATELY FOLLOW DEED IN THE SAME SENTENCE \u2014 that adjacency is the stamped equation. R-DST-B: this move exists in the Herald and nowhere else in the estate, because only here does a provenance field exist.",
+    "obeys": [
+     "(7) THE PROMISE and product scope \u2014 kay:14's own guard, that the household is a STANDING CIVIC FACT never followed to an outcome, is the fate law stated by an exemplar; and hobb:8's own line, the household persists and the person is a role in it, keeps a NAMED character's fate out.",
+     "(5) the household and the office must be world-held rows, or HP-6 refuses the line.",
+     "(2) hobb:8 at 10 sources is why this rule exists at all, and why it lives here rather than in R1."
+    ],
+    "test": "A walker over the R3 homes counting DEED\u2192BILL adjacency, consequence-chain length distribution and the pronoun-closer rate; plus check-pair.mjs's existing PRONOUN CLOSER ADDED arm, which needs only the Herald corpus. Acceptance U12 (R-DST-B) and U5 (the close-on-a-thing rule must be delivered, not cited).",
+    "strength": "STRONG",
+    "changesShippedSurface": true
+   },
+   {
+    "id": "HP-10",
+    "statement": "In the Herald's causal grammar and join molds (R4), keep every mold family populated across all four argument forms (N / F / V / A), let no composed chain use one connective pool twice, and measure R4's spread INSIDE the estate \u2014 never against an exemplar column, because R4 is a phrase register.",
+    "sourceCount": 15,
+    "authors": [
+     "kay",
+     "hobb",
+     "dnd"
+    ],
+    "rows": [
+     "kay:44",
+     "hobb:32",
+     "dnd:39"
+    ],
+    "figure": "R4 pronoun closer 0.128 (PROBE_ALL \u00a76: 2.56\u00d7 the 0.050 median) \u2014 the join molds land on 'it', and a mold's closer becomes the composed chain's closer \u2192 DOWN to \u22640.077, a cut of 0.051, anchored on R3's OWN figure and deliberately not on an exemplar column per [R-12] (R4 is a phrase register scored on sentence metrics, so exemplar comparison is invalid). R4 mean within-pool word sd 0.6, the estate's lowest \u2192 UP to \u22651.0, still the estate's low end (R5 is 1.3), because a four-to-seven-word phrase cannot carry more without becoming a clause.",
+    "faultGuard": "Fault 9 at the connective level \u2014 sixteen connective pools and two terminals, and if one dominates every composed chain reads the same (R4's top gram `and the` is 14 of 133, 10.5%) \u2014 plus fault 17. GUARDS: [R-12]'s caveat made a RULE (never compare a phrase register to a prose column); hobb:32's \u2014 term consistency requires the WORD to repeat while the FACT must not, and the engine must tell them apart or it will suppress the wrong repetition; hobb:32's inverse risk, the thesaurus in reverse, which bars curing a dominant connective by minting an uncommon one.",
+    "grammar": "This IS the grammar's connective layer: eight typed edges (\u00a70c) \u00d7 sixteen connective pools \u00d7 the four argument forms. The closed set of orders draws its joints from here, and the order constraint is that no chain repeats a connective pool. The F/N split \u2014 named by the inventory the load-bearing rule of the whole section \u2014 is not touched.",
+    "obeys": [
+     "(3) B-GRAMMAR's substrate \u2014 a closed set of orders needs a populated joint vocabulary, or the 'variation' is one connective wearing five orders.",
+     "(6) B-CLAIM \u2014 a connective is word order, which is spendable; the edge TYPE is a claim, which is not.",
+     "(2) kay:44 at 8 sources supplies the distribution law this rule is an instance of."
+    ],
+    "test": "A walker over heraldCausalGrammar.js and heraldJoinMolds.js counting per-family argument-form occupancy, per-chain connective reuse and the closer distribution; the avalanche32(fnv1a32(seed)) selection must be re-derived because FNV-1a's low bit is a parity and a raw % 8 on a power-of-two pool leaves half the pool unreachable (PROSE_INVENTORY \u00a77.4, measured). Acceptance U10 (measured against the pool's other variants) and U4 (count the SHAPE, not the phrase \u2014 a connective swapped for a synonym moves the column without moving the failure).",
+    "strength": "STRONG",
+    "changesShippedSurface": true
+   },
+   {
+    "id": "HP-11",
+    "statement": "In the Herald's disclosure and lifecycle family (R4b), write an absence in the clerk's third person, and only where the simulation knows why the gap exists. No frame gram appears in more than one line in ten of the family. Some events fire no disclosure at all.",
+    "sourceCount": 23,
+    "authors": [
+     "tolkien",
+     "hobb",
+     "dnd",
+     "kay",
+     "leguin",
+     "martin"
+    ],
+    "rows": [
+     "tolkien:F2",
+     "hobb:19",
+     "dnd:23",
+     "kay:11",
+     "leguin:4",
+     "martin:10"
+    ],
+    "figure": "R4b colon rate 0.280 \u2014 3.54\u00d7 the 0.079 median (PROBE_ALL \u00a76) \u2014 which is the `traces back to one thing: {cause}` frame measured \u2192 DOWN to \u22640.150, a cut of 0.13 (roughly half the family losing the colon frame; the exemplar colon range is 0.000-0.125 and tolkien-elevated's 0.125 is the ceiling I stop just above, because a disclosure line has a real use for a colon a narrative sentence does not). R4b `the compromise` 8 of 50 (16.0%, lift 448) \u2192 \u22645 of 50 (0.16 \u2192 \u22640.10). HELD: R4b pools-uniform-in-segment-count 0.455, the best figure in the whole Herald and better than the corpus median \u2014 it must not regress while the frames are spread.",
+    "faultGuard": "Fault 5 in its lacunae form \u2014 dnd:23's own warning about a disclosure repeated across a dossier, and hobb:19's 'a metronome of lacunae'. GUARDS: kay:11's \u2014 the four forms are a pool with long gaps and some entries fire none; hobb:19's \u2014 the gap must correlate with something the simulation knows (a fire, a bad year, a change of office), so an absence is a CONSEQUENCE OF WORLD STATE, never a decoration; leguin:4's \u2014 the gap is in the RECORD, never in the world, which keeps a disclosure from becoming an assertion that a thing did not happen.",
+    "grammar": "The WITHHOLD move, R4b only, licensed by an absence the simulation can name. Grammar G5 (DEED \u2192 WITHHOLD) is the only order it enters, and its firing is seeded with a long gap rather than per-event.",
+    "obeys": [
+     "(4) EVERY DOSSIER ELEMENT GETS THE FULL FORM, in the one place in this register where the absence is WRITTEN rather than omitted \u2014 and full form is not full content, so a disclosure names a gap the world holds and never manufactures one.",
+     "(5) an absence the simulation cannot name is a fact bought for an effect, in the negative.",
+     "(3) the four forms are a seeded draw, never a rotation."
+    ],
+    "test": "A walker over heraldIntegrity.js DISCLOSURE_LINES, causeLifecycleVocabulary.js and causeWalk.js counting per-gram share, colon rate and inter-firing gap, plus a check that every disclosure resolves to a world-state cause. Acceptance U9 (a 'That is / This is' second sentence carrying the pool key's discriminating claim is not a gloss \u2014 a disclosure line is exactly that shape and must not be cut as one) and U12.",
+    "strength": "STRONG",
+    "changesShippedSurface": true
+   },
+   {
+    "id": "HP-12",
+    "statement": "The Herald carries no question, no digit, no em dash and no exclamation. Retire the crier's two interrogatives \u2014 the estate's only diegetic questions \u2014 by rewriting each to its declarative claim, and cut the crier's exogenous AI-lexicon tells to the corpus median.",
+    "sourceCount": 18,
+    "authors": [
+     "ai",
+     "dnd",
+     "own"
+    ],
+    "rows": [
+     "ai:19",
+     "ai:27",
+     "dnd:13",
+     "own:26",
+     "own:50"
+    ],
+    "figure": "R5 question rate 0.005 \u2014 PROBE_ALL \u00a76 grades it \u221e against a corpus median of 0 \u2014 which on 396 segments is EXACTLY 2 SEGMENTS \u2192 0 (an exact zero is correct because it is a binary law, not a distribution: the estate has 0 questions in R1, R2, R3, R4, R4b, R6, R17, A-U and A-W). R5 AI-tells/variant EXOGENOUS 0.024, 3\u00d7 the 0.008 median and the corpus's highest, which on 373 variants is 9 variants \u2192 \u22640.008, i.e. \u22643. Note: R5 is the ONE register whose raw and exogenous tell rates are identical at 0.024 \u2014 none of the crier's tells is product vocabulary, so none is excusable as the lexicon.",
+    "faultGuard": "Fault 19 in reverse \u2014 the lexicon swap as a false cure, which is the owner's own ruling ('AI prose with better vocabulary'). GUARD: own row 50 shows the LEXICAL half of the catalogue already cleared at 0.004 exogenous in R1 and R3 and states plainly that the STRUCTURAL half (faults 5, 9, 15) is where the estate still resembles the machine \u2014 so this rule is explicitly a MECHANICAL TIDY, NOT A CURE, and must not be reported as one. best-ai.md's closing note settles it: the discriminating signal is structural (93.2% macro-F1 from narrative features alone), so a de-slopping pass on vocabulary leaves it untouched.",
+    "grammar": "none \u2014 a mechanical prohibition on a character class and a word list, at the lexeme level, below the grammar.",
+    "obeys": [
+     "(7) the standing laws directly \u2014 no digits in prose, and B0.8's four absolutes kept on purpose.",
+     "(2) graded on 18 documents and reported as mechanical, not as taste.",
+     "(6) B-CLAIM \u2014 a lexeme is spendable, but the two questions are the exception: a question is a MODALITY, so each must be rewritten to its declarative claim, never merely deleted."
+    ],
+    "test": "check-pair.mjs's existing DIGIT / EM DASH / EXCLAMATION arms plus a new question arm, run over a Herald corpus; PROBE_ALL's metrics.mjs AI-tell counter re-run on newsVoice.js with the exogenous filter. Acceptance U11 (digit-free is not band-clean \u2014 the count and duration vocabularies checked in the same pass) and U4 (count the shape, not the phrase).",
+    "strength": "STRONG",
+    "changesShippedSurface": true
+   }
+  ],
+  "refusedTechniques": [
+   {
+    "name": "Kay's prolepsis and the told outcome (kay:6, S3; \u00a73.2 leaves the CHRONICLE open)",
+    "why": "THE PROMISE makes lived history immutable and a seed a starting world forever; A2 makes a bare future indicative a FATE breach ANYWHERE, and check-pair.mjs's FUTURE INDICATIVE ADDED arm already exists for exactly this. \u00a73.2 is open for the chronicle line only, and the Herald is not the chronicle. Kay's own bound \u2014 at most one clause \u2014 is not offered here."
+   },
+   {
+    "name": "Hobb's saying-from-a-closed-pool as a Herald OPENER (hobb:21, SINGLE, graded PARTIAL by its own file)",
+    "why": "Refused as an opener; admitted only under HP-6's licensing. Its own conflict field is the reason: an unexplained saying that carries load becomes the block's thesis (against hobb:7), and the DEITY DOCTRINE requires a saying to stay a CUSTOM OF THE PLACE and never a doctrine the record endorses. martin:40's transmission form \u2014 the record shows a saying passing from mouth to mouth rather than asserting it exists \u2014 is the licensed shape, and it needs a saying row the world holds."
+   },
+   {
+    "name": "Tolkien's alliterative prose and the elevated register (tolkien:B2's alliteration limb; tolkien:A1-A3, C4)",
+    "why": "tolkien:B2's own gate is that alliteration crosses into prose ONLY where a people's verse has just been heard, and that trigger does not exist in the product; B2 is graded PARTIAL for this reason and its tripling is dropped rather than templated. Positively: dnd:5 makes the Herald the PLAINER register by design, and \u00a73.5's antique-air conflict is unsettled with three verified mechanisms for one permission \u2014 a register with no need of the permission does not adjudicate it."
+   },
+   {
+    "name": "Wolfe's unreliable record (wolfe:13b) as a property of the receipt itself",
+    "why": "\u00a73.14 is SETTLED as a PRODUCT LAW, never as a Wolfe claim: the dossier is the ground truth the game state reconciles against, so a receipt that lies breaks the save contract, not merely the voice. wolfe:14 (SINGLE) IS admitted as the escape valve \u2014 a voice quoted inside the record may lie and the record does not say so \u2014 with W 14's own guard that a tag ('he claimed', 'so he said') destroys it, which is HP-7's no-hedge rule from the other side."
+   },
+   {
+    "name": "Martin's dialogue engine (\u00a73.1, SETTLED)",
+    "why": "Dialogue is measured at 0.000 in the crier and the ladder and 0.0003 in dossier-state (own row 52; fault 13 'cleared by absence'). Speech survives only mediated (martin:4), as a saying (kay:39), or as an untagged quoted voice (wolfe:20 \u2014 HP-4). Two speakers explaining the world to each other is fault 13's canonical form, and wolfe:21's own file names its author doing it."
+   },
+   {
+    "name": "The moving or evaluative line as a per-entry SLOT (kay:38 applied per entry; kay:26's aphorism; A9's created gnomic closer)",
+    "why": "Refused as a slot, admitted rationed at HP-8. kay:38's own guard is the refusal \u2014 most Herald entries should contain no such line \u2014 and A9 bars CREATING a gnomic closer where the BEFORE had none. Fault 6 (6 documents) is the shape it becomes."
+   },
+   {
+    "name": "The exemplars' punctuation freedoms (B0.8): em dashes, questions, exclamations, digits",
+    "why": "Kept at zero ON PURPOSE by the voice bible and ruling (7); every exemplar column breaches at least one. R5's two questions (0.005 on 396 segments) are the estate's only diegetic breach and HP-12 retires them. NEAR-REFUSAL RECORDED: dnd:27's person-of-record minimum (6 sources) is admitted because a receipt names people, but its own HIGH anti-AI grade is carried \u2014 three-beat person lines across many residents is the purest metronome in the design \u2014 and its full form is owner question Q7, which this reconciliation does not answer."
+   }
+  ],
+  "conflicts": [
+   "PARATAXIS AT THE EVENT (\u00a73.4, OPEN). FOR: tolkien:A4 (6 \u2014 clauses chained with 'and', the causal connective withheld at the event; Bolding 663's cultural split), kay:25 (1, the polysyndetic chain reserved for loss), leguin:39 (1). AGAINST: hobb:15 (3, Oliver alone on the breach limb \u2014 extensive parataxis marks the moment the record voice BREAKS). Both verified. The Herald is one of the two registers where the conflict is live, and HP-10 deliberately does NOT decide it: it constrains spread only. Our own figures say we have neither device today (R3 semicolon 0.136, R5 0.198, R3 triad 0.012). Q10 is the owner's.",
+   "WHETHER A CRIER LINE MAY CARRY WOLFE'S EXAMINATION FORM (\u00a73.1's one open limb). FOR: wolfe:21 (3, 'the form is admitted, the exposition is not'; Registers: H primary) and leguin:41 (1, a line that expects an answer \u2014 the Herald is the one product surface that addresses somebody). AGAINST: fault 13 at 14 documents \u2014 the line that ends on a hook, and dialogue that states what the speaker wants. They do not settle each other because they address different halves: leguin:41 licenses ADDRESS, fault 13 bars the HOOK, and no evidence says whether an addressed line can be held short of a hook by a pool. The count is also lopsided the wrong way: 1 and 3 sources for the permission against 14 documents for the fault.",
+   "THE MOVING LINE'S RATE (kay:38's own boundary). kay:38 states that the boundary between the Herald and the archivist RESTS ENTIRELY on this technique being rationed, and gives no rate; the estate measures no proxy for it. HP-8 therefore sets a direction with no number \u2014 a rule with a hole in it, recorded as such rather than filled by invention.",
+   "WHICH LENGTH LAW GOVERNS THE CRIER. dnd:40 (7) reads 'one or two brief sentences, rarely three, never past four'; the annex's own HEADLINE definition (RECEIPT_POOLS_CAUSAL.md \u00a70a) reads one sentence with multi-link chains FORBIDDEN. R3 keeps the annex law (1.170 segments a variant). R5's measured shape (1.062 segments, p50 18 words \u2014 2.25\u00d7 the corpus median) is a LONG SINGLE SENTENCE, which neither law describes well. Unsettled: whether the crier is a HEADLINE at all, or a fourth Herald register the annex never named.",
+   "THE ANTIQUE AIR'S MECHANISM (\u00a73.5, three verified mechanisms for one permission). tolkien:A3 (7, fronting once to mark a turn \u2014 but Holmes reports the corpus tending to REFUTE the prevalence of archaic inversions, row 666) \u00b7 kay:24 (8, the archaism carried in the noun, zero syntactic inversion) \u00b7 leguin:20 (4) and FAC L4: no costume at all. The crier's frame is the estate's nearest thing to an antique manner, so this has a live surface here even though HP-1 does not touch it. Refused for now by REGISTER, not by evidence.",
+   "R3's ENGINE-SIDE LINE AGAINST R3's MEASURED RHYTHM DEFECT. A16 and own row 41 call R3 the one strength the wave must not touch; own row 9 and the fingerprint make its runs-of-three 0.5973 and neighbour variation 0.330 the register's real defect. The evidence does not settle it because the question is a COST question (goldens, same-seed picks, an installed world), not a prose question. Q21 is the owner's, exactly as EXEMPLAR-BEST-PARTS frames it.",
+   "WHETHER R17 BELONGS TO THIS REGISTER AT ALL. best-own.md's register map puts R17 (1,293 rumor subject phrases \u2014 42% LARGER than R3) inside herald-pools; PROBE_ALL's A\u2032 gives R17 no row; own row 49 grades it 'Undercovered'; this brief's register definition names only R3, R4, R4b and R5. The membership is unsettled and it matters: R17 carries a measured head-noun concentration (travellers finding 29, travellers told 14, travellers passing 11, travellers advised 10 \u2014 64 of 1,293 on four grams of one head), pools-uniform 1.000, and A15 defers the Herald's Part A without naming it."
+  ],
+  "absenceRule": "THE RULING FOR THIS REGISTER: **OMIT in R3, R4 and R5; WRITE in R4b.**\\n\\nWHY OMIT IN R3/R4/R5. The Herald is a FEED, not a record with a slot grid. Its unit is a headline fragment that fires when an event occurs (terminal-stop share 0.847, 1-segment share 0.832, 1.170 segments a variant \u2014 own row 41), and R5 is a place-free crier line with a slot-bearing share of 0.032. There is no empty slot to leave blank: there is an event or there is not. An absence line in a feed is a NON-EVENT ANNOUNCED, which is fault 15 (manufactured emphasis) and fault 5 (the metronome of lacunae, dnd:23 and hobb:19) at once. The owner's ruling (4) names 'every dossier element'; a receipt is not a dossier element, it is a record of a thing that happened to one.\\n\\nTHE ESTATE'S OWN WORKED COUNTER-EXAMPLE, which is the strongest evidence available and is OURS: the R12 quiet-week pool \u2014 four near-identical lines announcing that nothing happened, READ WEEKLY \u2014 is graded FAULT under faults 10 and 17 by own row 44, with a repeated-two-word-opener share of 0.667 and a uniform-pool share of 1.000. That is precisely what a feed's honest absence becomes when it is written rather than omitted, measured, in this codebase. dnd:16 (S6) says the same from outside: the editors dislike printing that a room is empty.\\n\\nWHY WRITE IN R4b, AND ONLY THERE. R4b IS the Herald's apparatus voice \u2014 heraldIntegrity.js's DISCLOSURE_LINES, the cause-lifecycle vocabulary and the cause walk \u2014 and declaring what the record does not hold is its whole business. The five verified authorities for the written absence all land here: tolkien:F2 (5), kay:11 (3, the four forms), leguin:4 (3, the gap is in the record never in the world), dnd:23 (4, honest and never by a pretext), hobb:19 (5, correlated with what the simulation knows). Ruling (4) is honoured in the register that has a place for it, and HP-11 caps its rate (colon 0.280 \u2192 \u22640.150; `the compromise` 8/50 \u2192 \u22645/50) and varies its shape so the honouring does not become fault 5.\\n\\nTHE CLERK'S THIRD PERSON, EVERYWHERE. Where an absence is written it names a gap in the RECORD, never a state of the world \u2014 leguin:4's own distinction. A disclosure saying nothing happened is an assertion; a disclosure saying the record does not hold it is a declaration. Only the second is licensed.\\n\\nFULL FORM IS NOT FULL CONTENT, STATED FOR THIS REGISTER: the Herald's full form is the receipt firing with every move its typed fields license, in one of the closed set of grammars, at the band HP-3 sets. A move whose field is empty is NOT WRITTEN AND NOT STUBBED \u2014 HP-6 refuses to manufacture it, and the omission is invisible because a feed has no grid to show a hole in.",
+  "openQuestions": [
+   "THE INSTRUMENT DOES NOT EXIST. Measured: check-pair.mjs loads src/data/dossierStateProse/ and src/data/dossierCausalProse.generated.js and NOTHING ELSE \u2014 there is no Herald corpus in the pair checker, so EVERY TEST IN \u00a74 IS UNRUNNABLE TODAY. A Herald arm (the 19 files of R3/R4/R4b/R5, with the arrow-function pools materialised by call or template-parse) is the first car of any Herald wave, and nothing schedules it.",
+   "THE HERALD HAS NEVER HAD A PART A. A15 defers it in terms and says the dossier-state laws are NOT assumed to transfer. Everything in this file is Part B written against A\u2032 and the fingerprints; the Herald's own Part A (the news address law, the two-sentence read-aloud law, the kind-pool floors, the seeded-pick laws) is still owed and would sit ABOVE these twelve rules.",
+   "THE INSTITUTION TABLE ruling (5) owes has no shape, no home and no schedule. HP-6 and HP-9 both depend on it. Who holds office, who counts, who is exempt, what each institution does \u2014 and where those rows live relative to worldPulse and the dossier's own institution registers (R7, 2,169 rows in 6 files) \u2014 is unanswered.",
+   "THE SAME-ENTRY CONTRADICTION WALKER ruling (5) owes is likewise unbuilt, and its hardest part is unspecified: checking an entry against THE POOL'S SIBLING VARIANTS requires a definition of which siblings are in scope for a feed, where the dossier has a block.",
+   "THE OFFICE-NOUN CENSUS IN R5 IS OWED. 373 lines, 12 slot-bearing; nobody has counted how many of the remaining 361 name an office, an exemption or a count that no table holds. HP-6's SIZE is 'none measured' until it is run, and it is cheap.",
+   "THE TWO CRIER QUESTIONS ARE UNIDENTIFIED. The rate 0.005 on 396 segments is exactly 2 segments; the strings have not been named, and HP-12 cannot be executed until they are.",
+   "THE CLOSED SET'S MEMBERSHIP AND THE WALKER'S CEILINGS are the Opus seat's proposal, not a finding. The proposed set: G1 DEED\u2192PARTY\u2192PLACE (dnd:21 S5) \u00b7 G2 PARTY\u2192DEED\u2192BILL (hobb:8 S10 / kay:14 S7) \u00b7 G3 PLACE\u2192DEED\u2192STANDING (kay:28 \u2014 SINGLE and a two-star complaint; enters only if the owner rules) \u00b7 G4 STANDING\u2192DEED (wolfe:26 S8) \u00b7 G5 DEED\u2192WITHHOLD (R4b only). Proposed ceilings, offered as 'test this, don't trust it': no single grammar above 0.35 of a register's lines (below R5's runs-of-three 0.727 and the D&D rules column's 0.408, deliberately above 0.20 which with five grammars would force a rota) and no same-grammar-as-previous run above 0.15. Q3 and Q4 are already the owner's.",
+   "THE MOVING LINE'S RATE (conflict 3) and R17's REGISTER MEMBERSHIP (conflict 7) are open the same way: a rule exists with no number, and a register boundary exists with no ruling. R17's cure would additionally need a chair act minting a new pool key, because A7 forbids appending (Q23).",
+   "dnd:46's PROFILE IS PROVISIONAL and HP-2 leans on it. Q29 asks whether to re-measure against the lawful settlement specimens already on disk before any generator is pinned to those figures; the critic's own rough pass over the questioned settlement text read a mean near sixteen, floorless and digit-heavy \u2014 shorter and rougher than the appendix HP-2 cites.",
+   "NOTHING HERE IS VALIDATED. The Fable chair retrovalidates through docs/FABLE_RETROVALIDATION_QUEUE.md. Until that sitting these twelve rules are twelve proposals with receipts, and the three that would move engine-side bytes (HP-2's deferral, HP-5's R3 half, HP-9's R3 half) are additionally owner-gated at the fixture."
+  ],
+  "file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/prose-research/sweep/reconcile-herald-pools.md"
+ },
+ "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/prose-research/sweep/reconcile-npc-ladder.md": {
+  "register": "npc-ladder",
+  "allocation": "HOBB is the anchor, but only on the check's own evidence, not the proposal's weight: FIVE_AUTHOR_CHECK A14 is the ONE rule candidate in the whole check whose register column names R6 by name (\"Hobb -> the NPC cause-conjunction ladder (R6), ROLE-bound; never a named character's interior fate\"), standing at 16 documents / 12 witnesses / 11 non-Hobb, third-largest bucket of 363 kept rows (hobb:207 \"the same duty manifests both domestically and politically\"; hobb:325; hobb:278 no melodrama). It enters in the check's CORRECTED form with both stripped limbs left behind - \"what it meant\" CONTRADICTED for a record register by five documents (C14), \"what they kept\" refused on one off-shape hit (C15). D&D is allocated because this register is SPOKEN (PROSE_INVENTORY:257 \"read-aloud causal receipts\"; A'-R6): kept-dnd.json carries 99 read-aloud rows against 0 in Hobb and 0 in Martin, and its sources DISAGREE on the number (dnd:94 two sentences, dnd:314 one-or-two, dnd:98 three-never-five, dnd:97 four under 100 words, dnd:99 under 250) - the disagreement is what licenses a band rather than a threshold. TOLKIEN is allocated for parataxis and AGAINST our use of it: six collapsed sources (tolkien:54 Turner, 157 McIntosh, 254 Shippey, 656/657 Kullmann & Siepmann, 663 Bolding) all make the and-chain a MARKED register split culturally between peoples, while the ladder runs \", and\" at 0.715 and a three-part clause chain at 0.600 - Tolkien is the strongest evidence that we use his marked device as wallpaper. WOLFE for the office as executor (wolfe:443 \"the torturers are the executors of a sentence decided elsewhere\") and the metronome comparison (wolfe:891, Kim Stanley Robinson). LE GUIN for the rhythm charter (leguin:264 \"There is no optimum sentence length. The optimum is variety.\") and the absence form (leguin:481), plus leguin:241/531 as the GUARD against an expletive purge. KAY for the register contrast and the cost (kay:5 Randall, kay:244, kay:94, kay:128). MARTIN for the narrator's stance (martin:424 dry omniscient, no inner feelings) and the repetition warning in his own voice (martin:632 \"on the road toward stagnation and self-parody\"). ai only as constraints, above all ai:936 (Williams: AI prose tends to \"uniform sentence lengths, typically fifteen to twenty-five words\") - the ladder's p10 19 / p50 22 / p90 28 / mean 22.6 / sd 4.0 sits INSIDE the named signature band with a quarter of the nearest exemplar's variance. NOT allocated: the whole document-frame family (T1-T4, T7, T8, T51 - the ladder is one spoken sentence on a card, not a document); the chronicle family (T15, T34-as-annal, T43); the Herald crier's formula licence A'-R5 (the crier may keep a formula because it is a quoted in-world VOICE under R-DST-I; the ladder is not - dialogue share measured 0.000 - so it inherits none of that permission, and this is the single most important non-transfer for the register, because the ladder's six stage formulas LOOK like the crier's licensed frame and are not); chrome's mechanics.",
+  "rules": [
+   {
+    "id": "NPC-L1",
+    "statement": "In this register the connective and the disclosure formula are chosen by what the line carries, never by its lifecycleStage; no stage may hold any single joint (semicolon, colon, comma-conjunction) above a ceiling, and no stage may sit at zero on two of the three.",
+    "sourceCount": 7,
+    "authors": [
+     "ai (constraint)",
+     "Le Guin",
+     "Kay"
+    ],
+    "rows": [
+     "ai:98",
+     "ai:665",
+     "ai:936",
+     "ai:657",
+     "ai:27",
+     "leguin:264",
+     "kay:5"
+    ],
+    "figure": "PROBE_ALL R6 semicolon 0.540 (4.15x median) and colon 0.138 are an average over six mutually exclusive regimes. Measured at 29a4ff20d: re-adjudicated semicolon 0/182, colon 0/182, ', and' 182/182; historicized semicolon 180/184 (0.978), ', and' 5/184; exposed-public colon 0.43 / semicolon 0.09; reformed semicolon 0.88. DIRECTION: flatten the stage->joint correlation. SIZE: no stage above 0.55 on any one joint (the register's own current semicolon rate, so no stage may be more joint-uniform than the register already is), each stage at >=0.10 on at least two of three. The licensing numbers are the observed maxima 1.00 and 0.978.",
+    "faultGuard": "Fault 9 (fixed move order), the loudest fault in the catalogue at 13 rows. The cure's trap is worse than the fault: a per-stage quota is a rota, and L 24's own warning is that alternation is a metronome at a longer period. GUARD: the joint is picked by a SEEDED draw over the joints the line's own clause count admits (a two-part line cannot take colon-plus-semicolon), never by a per-stage budget, and the walker measures the resulting distribution rather than enforcing a rota.",
+    "grammar": "A constraint on order plus a licensing field: the joint is a typed MOVE whose licensing field is the clause count the causeClass mechanism supplies, never lifecycleStage. R-DST-B holds - the joint is structure, licensed by a standing configuration field.",
+    "obeys": [
+     "(1) allocated to Le Guin/Kay/ai on evidence, no weights used",
+     "(2) standing is the 7-source count, not the authors' fame",
+     "(3) this IS the latent-grammar directive applied to punctuation - six visible templates replaced by a seeded choice",
+     "(5) no new fact enters; only the joint moves, so no sentence buys an effect with a fact",
+     "(6) B-CLAIM: punctuation is spendable, a claim is not",
+     "(7) no digits, no em dashes, nothing asserted changes"
+    ],
+    "test": "New check-pair.mjs arm STAGE-JOINT plus a standalone walker computing per-stage joint shares over the 14 files. PREREQUISITE: check-pair.mjs loads only src/data/dossierStateProse and the causal pools (lines 16-31) and must gain an R6 loader first. Acceptance U4 (count the SHAPE not the phrase - a semicolon rewritten as a colon at the same position moves a column, not the failure), U10 (evaluated against the pool's other variants at edit time), U2 (the two-sentence ceiling is not breached to buy a joint).",
+    "strength": "STRONG",
+    "changesShippedSurface": true
+   },
+   {
+    "id": "NPC-L2",
+    "statement": "A three-clause chain is reserved for the line that has three things to say; it is never the default arc. The chain's length follows how many things happened, and a chain is admitted at most once per pool.",
+    "sourceCount": 8,
+    "authors": [
+     "Tolkien",
+     "Kay",
+     "ai (constraint)"
+    ],
+    "rows": [
+     "tolkien:54",
+     "tolkien:157",
+     "tolkien:254",
+     "tolkien:295",
+     "tolkien:656",
+     "tolkien:657",
+     "tolkien:663",
+     "kay:49",
+     "ai:73"
+    ],
+    "figure": "Measured at 29a4ff20d: clause-chain arity 3 in 998 of 1,662 lines (0.600); ', and' in 1,202 of 1,680 (0.715). THIS INSTRUMENT DOES NOT EXIST IN PROBE_ALL - its triad-list rate (R6 0.055, 2.04x median) counts NOUN triads and reads the register as almost clean, so the largest structural tell here has never been measured. DIRECTION: down. SIZE: arity-3 share 0.600 -> <=0.25, with arity-2 and arity-4+ each >=0.15; ', and' line share 0.715 -> <=0.40. Licensed by ai:73's measured human-expert tricolon rate of 3.73 per document against the LLM's 7.13 (ratio 0.523; 0.600 x 0.523 = 0.31) and by K 25's stricter bound (two or four-or-more, never three).",
+    "faultGuard": "Fault 4 (the rule of three, 6 rows) and fault 5 (the metronome). The over-correction is the danger: ai:229 establishes the tricolon as a canonical HUMAN device (Caesar, Lincoln, the fairy tales), so a ban produces an arity-2 metronome instead. GUARD: chain length is irregular and driven by how many things happened (tolkien:54); the chain is CULTURALLY split, not authorially applied (tolkien:663, Rohirrim vs Gondor) - here the split is by causeClass, so a chained pool and an unchained pool are different mechanisms, not different moods; kay:49 reserves the polysyndetic chain for loss.",
+    "grammar": "A MOVE with an order constraint: [mechanism] -> [what the office does] -> [what the town has now] is one grammar among a closed set, not the grammar. Licensing field is causeClass - a mechanism with two consequences gets two clauses.",
+    "obeys": [
+     "(1) Tolkien allocated here on 6 collapsed sources although the proposal gave him nothing in this register",
+     "(2) the standing is 8 sources; ai:229 is cited for the guard and deliberately not counted",
+     "(3) the closed set gains members and the claim never varies",
+     "(6) B-CLAIM: word order is spendable",
+     "(7) no digits; nothing rises in register"
+    ],
+    "test": "Walker arm CHAIN-ARITY over the 14 files reporting the arity histogram per causeClass and per stage; a check-pair.mjs arm refusing a rewrite that RAISES arity. Acceptance U2 (a chain may not be broken into three sentences to lower arity), U4 (arity 3 -> 2 that keeps the same three claims in two clauses has moved a column, not the failure), U11 (no count or duration word added to fill a fourth clause).",
+    "strength": "STRONG",
+    "changesShippedSurface": true
+   },
+   {
+    "id": "NPC-L3",
+    "statement": "This register carries short lines. A line whose load is one fact is written at the length of one fact, and no stage is written at a single length.",
+    "sourceCount": 14,
+    "authors": [
+     "Le Guin",
+     "D&D",
+     "Tolkien",
+     "Kay",
+     "Wolfe",
+     "ai (constraint)"
+    ],
+    "rows": [
+     "leguin:264",
+     "dnd:94",
+     "dnd:97",
+     "dnd:98",
+     "dnd:99",
+     "dnd:100",
+     "dnd:314",
+     "dnd:12",
+     "dnd:103",
+     "tolkien:656",
+     "kay:5",
+     "wolfe:891",
+     "ai:936",
+     "ai:98"
+    ],
+    "figure": "Measured at 29a4ff20d: under-8 segments 13 of 1,713 (0.0076); p10 19; min 1, max 39; sd 4.0. PROBE: 0.01x the corpus median of 0.46 [R-15]; sd 4.0 against an exemplar band of 8.5-16.0 and against martin-chronicle's under-8 floor of 0.029, the lowest of fourteen exemplar columns. DIRECTION: up, on variance first. SIZE: under-8 share 0.0076 -> 0.06-0.10; sd 4.0 -> 6.5-8.0. Licensed because 0.029 is the lowest under-8 share any exemplar sustains (so at or under it is indefensible as a house voice) and 0.06 is twice that floor while still a quarter of leguin-fiction's 0.241; and because THE ESTATE'S OWN arrival tables already reach sd 8.1 (own row 8, A'-R14) - an achieved internal figure, not an aspiration. The MEAN is deliberately NOT moved (see conflict C6).",
+    "faultGuard": "Fault 5 (the metronome) and fault 10 (sameness). The cure's own trap is named by the same lane: ai:103 - short punchy standalone fragments used for manufactured emphasis is its own tell - and ai:572/ai:536 show a diversity knob costs coherence. GUARD: length follows LOAD (leguin:264; never alternate by rota); the short line carries a NEW FACT, never a verdict (T A5); the shortest line lands at the highest impact rather than at a fixed position (kay:5, where short-and-concrete is a register contrast bound to who is perceiving).",
+    "grammar": "A licensing field, not a move: the causeClass mechanism phrase is one fact, so a line carrying only it is licensed to be short. R-DST-B holds - a short line asserts less, never more.",
+    "obeys": [
+     "(1) the D&D lane is allocated because this register is spoken, evidenced at 99 read-aloud rows against 0 in Hobb and Martin",
+     "(2) 14 distinct sources",
+     "(3) variance is the mechanism by which no order becomes visible",
+     "(4) length is HOW an element is written, never WHICH gets written - D N6's size-to-purpose is refused and does not enter",
+     "(6) B-CLAIM: shortening may not spend a claim; the checker's LONGER and R4 arms both fire",
+     "(7) no digits appear in a shortened line"
+    ],
+    "test": "Fingerprint delta: re-run fingerprint.mjs over the reconstructed R6 and require sd >= 6.5 and under-8 >= 0.06 with the same-seed pick set unchanged. check-pair.mjs arms already present: THREE+ SENTENCES, LONGER, R4, A11 SPREAD. Acceptance U2 (never three sentences), U5 (a shortened line must still close on a checkable thing - B0.3 was cited eight times and delivered once), U3 (no rationed word added to pad a short line into a chain).",
+    "strength": "STRONG",
+    "changesShippedSurface": true
+   },
+   {
+    "id": "NPC-L4",
+    "statement": "'It is / There is / It was / There are' opens this register rarely and never as a stage's signature. Strike the expletive; keep the plain copula.",
+    "sourceCount": 6,
+    "authors": [
+     "D&D",
+     "Le Guin (guard)"
+    ],
+    "rows": [
+     "dnd:112",
+     "dnd:183",
+     "dnd:998",
+     "dnd:907",
+     "dnd:1011",
+     "leguin:241",
+     "leguin:531"
+    ],
+    "figure": "PROBE_ALL section 6: 'There/It is' opener rate 0.110 against a corpus median 0.006 - 18.3x, the single largest outlier in the estate. Measured at 29a4ff20d: 184 of 1,680 lines open with it; 143 are 'It is public', 34 'It is out', and 177 of the 184 sit inside ONE stage. My measurement also settles PROBE's flagged [P-4] discrepancy: 184 line-initial of 1,680 (0.1095) and 185 any-segment of 1,713 (0.1080) are both real and different, exactly as the refuter said; the published 0.110 is sound and only the denominator was confused. DIRECTION: down and spread. SIZE: register-wide 0.110 -> <=0.035, and <=0.20 within any single stage. Licensed because the exemplar band runs 0.0016 (dnd-flavor) to 0.0556 (leguin-fiction) and our own dossier-state sits at 0.0515, so 0.035 is inside the exemplar band and below our worst diegetic register while staying above dnd-rules' 0.0027, which would be a purge.",
+    "faultGuard": "Faults 9, 14 and 19. The over-correction is the whole risk: dnd:1011 measures the SRD at is/are 24.84 per thousand words against was/were 0.65 - a rules register overwhelmingly copular that reads as plain, not as machine-avoidance. GUARD: D 9's own limb - writing 'the mill grinds' for every 'the mill is' reads as machine-avoidance; leguin:241 - the passive is one of the lovely versatile tools where it belongs; leguin:484/490 show a civic record legitimately reporting in the agentless passive. ONLY the expletive There/It + BE in OPENING position is rationed; nothing else about the copula moves.",
+    "grammar": "The existential disclosure is one MOVE in the closed opening set (NPC-L9); its licensing field is lifecycleStage = exposed-public. A licence is not a mandate, and a move firing on 0.476 of its licensed lines is a template.",
+    "obeys": [
+     "(1) D&D allocated on a present-tense/active-voice body of 6 sources; Le Guin allocated purely as the guard against over-correction",
+     "(2) counted, not famous",
+     "(3) removing a stage's signature opener is exactly 'the move ORDER varies by a seeded choice'",
+     "(5) an expletive carries no fact, so nothing is bought or lost",
+     "(6) B-CLAIM: word order is spendable",
+     "(7) present tense and the record register are unchanged"
+    ],
+    "test": "check-pair.mjs already carries EXISTENTIAL OPENER ADDED (line 127) - the arm exists and needs only the R6 corpus loader. Plus a fingerprint delta on shapes.thereIsOpenerRate. Acceptance U6 (the STATE comes first - a rewritten opener may not front the cause to escape the expletive), U5 (the rewritten line still lands on a checkable thing), U9 (a 'That is / This is' replacement carrying the pool key's discriminating claim is not a gloss and is not cut).",
+    "strength": "MODERATE",
+    "changesShippedSurface": true
+   },
+   {
+    "id": "NPC-L5",
+    "statement": "A line may name only the bearer's own role noun and the institution its causeClass mechanism actually carries. Any other office - a guild, a council, an auditor, a magistrate, a census, a tithe - is written only where a typed INSTITUTION TABLE says the settlement has one, and never as a kicker.",
+    "sourceCount": 7,
+    "authors": [
+     "Tolkien",
+     "Wolfe",
+     "Hobb",
+     "Martin",
+     "ai (constraint)"
+    ],
+    "rows": [
+     "tolkien:404",
+     "wolfe:443",
+     "hobb:466",
+     "martin:711",
+     "ai:276",
+     "ai:259",
+     "ai:333",
+     "ai:334"
+    ],
+    "figure": "Measured at 29a4ff20d: 90 of 1,662 lines (0.054) name an institution outside the vocabulary of their own line's causeClass - guild 18, council 12, tithe 11, magistrate(s) 11, auditor(s) 10, court 7, creditor(s) 6, roll 5, census 5, inspector(s) 5, duty sergeant 1. The conjunction key holds {role, situation, causeClass, lifecycleStage, ageBand} and NO institution field, NO relation field, NO exemption field. This figure is an UPPER BOUND from my own licensing regex and certainly contains false positives (a muster 'roll' under garrison-drained). DIRECTION: the genuinely unlicensed subset to 0. SIZE: after per-line adjudication the unlicensed residue goes to 0; there is no rate at which an unheld fact is acceptable - this is the Brackwater lesson and the ratio is not a dial.",
+    "faultGuard": "ai:276 (Shao et al.) names the exact failure: generated prose 'connects separate facts into unverifiable relationships (red-herring / overspeculation), a failure DISTINCT from outright hallucination'. That is the Brackwater sentence - the bailiff who counts and the priest who is not counted - and it is why a fact-checker does not satisfy this rule. Also fault 24's inverse (a FACT where the world holds a gap). GUARD: the office is described by what it actually DOES (tolkien:404 - the Shirriffs' chief duty is rounding up stray livestock) and by the procedure that reaches it (wolfe:443 - executors of a sentence decided elsewhere), so an institution enters as a duty performed, never as a summary paragraph (W 24's fault); the roll stays rare and sometimes incomplete (H 20); a bare enumeration is licensed only where the world enumerates (hobb:466).",
+    "grammar": "A LICENSING FIELD, and the one this reconciliation asks the owner to build. R-DST-B at its sharpest: an institution is a standing configuration fact licensing a STRUCTURAL clause; the moment a line says the guild DID something it needs event provenance the key does not carry. Owed consequence of ruling (5): an institution table typed as {settlement, office, holder-role, what it does, who it counts, who is exempt}, with the ladder permitted to name only offices the table returns for that settlement.",
+    "obeys": [
+     "(1) four authors allocated because each supplies a different half - Tolkien the duty, Wolfe the procedure, Hobb the enumeration bound, Martin the consequence (martin:711 'when kingdoms ignore debts, the bankers show up' is an institution arriving because a typed fact obliged it)",
+     "(2) 7 distinct sources",
+     "(4) an institution the world has no fact for is an honest absence, never a manufactured detail",
+     "(5) this rule IS ruling (5) stated for this register - both its owed consequences are named",
+     "(6) B-CLAIM: removing an unlicensed office removes a claim the world never held, the one removal the rule requires",
+     "(7) FINITE SEMANTICS - the clerk fills only from a typed bucket; DEITY DOCTRINE - a tithe or temple office is culture and its theology is never asserted"
+    ],
+    "test": "Two instruments. (a) A SAME-ENTRY CONTRADICTION WALKER (ruling 5's second owed consequence): for every line resolve its {role, causeClass, stage}, refuse any office noun the institution table does not return for that key, and refuse any line whose facts contradict a sibling variant of the same pool. (b) A per-line adjudication of the 90 by a skeptic, producing the true count before any byte moves. Acceptance U12 (R-DST-B - an unlicensed office is the same class of breach as 'the town is arranged around it'), U9 (an institution clause that IS the pool key's discriminating claim is not cut), U1 (the sibling-key test runs before the cut, not after).",
+    "strength": "STRONG",
+    "changesShippedSurface": true
+   },
+   {
+    "id": "NPC-L6",
+    "statement": "This register records what an office-holder did and what it costs the town. It does not record what the bearer wants, fears, believes, regrets or is ashamed of. 'The town knows' is licensed by the stage; 'the priest believes' is licensed by nothing.",
+    "sourceCount": 7,
+    "authors": [
+     "Martin",
+     "Kay",
+     "Hobb",
+     "Tolkien",
+     "Wolfe"
+    ],
+    "rows": [
+     "martin:424",
+     "kay:128",
+     "kay:720",
+     "hobb:278",
+     "tolkien:479",
+     "wolfe:372",
+     "tolkien:647"
+    ],
+    "figure": "Measured at 29a4ff20d: 112 of 1,662 lines (0.067) carry an interior predicate, but 36 are 'the town knows / is learning', which is the exposed-public stage's own definition and stays. The residue attributed to the BEARER is ~76 lines (0.046): fear 25, want 15, believe 7, shame 6, loyalty 5, appetite 3, conviction 2, guilt 1. DIRECTION: bearer-interior to 0; the town's knowing kept. SIZE: 0.046 -> 0.000 for the bearer. Licensed because the key holds no motive field at all, so the licensed rate is exactly zero - this is not a ration. Reinforced by FIVE_AUTHOR_CHECK C14, where 'what it meant' is CONTRADICTED for a record register by five further independent documents.",
+    "faultGuard": "Fault 1 in its cruellest form (W 15's flat deed followed by 'it was terrible') and fault 9 (a fixed motive slot in every entry). GUARD: the technique IS the missing second sentence (W 2); some office-holders are recorded by an office alone with no deed (K 37); the reaction is an ACT, never a feeling (H 24). The over-correction - a register with no people in it - is guarded by kay:128 (revelation of character THROUGH ACTION) and hobb:278 (dramatic events rendered without melodrama, a positive craft rather than an absence).",
+    "grammar": "A licensing field with an empty domain. R-DST-B: no field on the key carries motive, so no clause may assert it. R-DST-B's state-never-fate limb also binds - the bearer's compromise is a STATE at a stage, never a trajectory.",
+    "obeys": [
+     "(1) five authors allocated, each supplying an independent form of the same prohibition",
+     "(2) 7 sources plus C14's five",
+     "(3) removing the motive clause removes a slot appearing at a fixed position",
+     "(4) the interior is a slot the world has no fact for, and this register's answer is OMIT",
+     "(5) a motive is the purest case of a sentence buying an effect with a fact",
+     "(7) THE PROMISE and PRODUCT SCOPE - measured, capitalised mid-sentence tokens 0 and second person 0, so no named character and no reader-addressed fate exists here today and this rule is the ratchet that keeps it so; Hobb's 'what it meant' (C14) and 'what they kept' (C15) do not ride along"
+    ],
+    "test": "A MENTAL-PREDICATE WALKER over the 14 files keyed on grammatical subject: a mental predicate whose subject is 'the town' or a collective passes; one whose subject is the bearer's role noun fails. Built as an inventory ratchet (only-shrinks) so a future authoring pass cannot reintroduce the class. check-pair.mjs arm FUTURE INDICATIVE ADDED (STATE never FATE) at line 123. Acceptance U12 (the field-licence test), U5 (the line still closes on a checkable thing once the motive clause goes), U3 (no rationed word added in its place).",
+    "strength": "STRONG",
+    "changesShippedSurface": true
+   },
+   {
+    "id": "NPC-L7",
+    "statement": "Record, do not silently carry, that half this register's pools offer the seed nothing to choose - and record that A7's stated cure is UNAVAILABLE here, so growing a pool requires an owner-gated one-time re-draw or nothing changes.",
+    "sourceCount": 7,
+    "authors": [
+     "ai (constraint)",
+     "Martin"
+    ],
+    "rows": [
+     "ai:50",
+     "ai:76",
+     "ai:781",
+     "ai:782",
+     "ai:783",
+     "ai:536",
+     "ai:507",
+     "ai:740",
+     "martin:632"
+    ],
+    "figure": "Measured at 29a4ff20d: 546 of 1,110 pools are singletons (0.492). Three of six lifecycle stages are singleton BY CONSTRUCTION - re-caused 182 pools / 182 lines, historicized 183/184, re-adjudicated 182/182 - so 548 lines (0.330 of the register) show every NPC in every town at that key the identical sentence. PROBE's own row 45 records R6 mean pool size 2.0 against derived floors of 8/6/4. DIRECTION: up. SIZE: none set - this is a schedule question, not a dial. THE REGISTER-SPECIFIC FINDING: EXEMPLAR-BEST-PARTS Q23 proposes the cure as 'a chair act minting new pool keys'; that act is NOT AVAILABLE in R6. The key is the closed cross-product {role x causeClass x lifecycleStage} derived from the worldPulse stamp by normalizeKey, and conjunctionVariantsFor addresses only those keys, so an authored key nothing stamps is dead data. The only lawful growth is APPENDING, which A7 forbids and which the standing hazard 'a pool's length is a seed input' prices exactly - variants[fnv1a32(seedId::keyStr) % variants.length] means appending to a pool of two moves roughly a third of that key's bearers and to a pool of one moves half.",
+    "faultGuard": "Fault 10 (sameness) and fault 17 (the loop); martin:632 names the destination in the author's own voice - 'on the road toward stagnation and self-parody'. GUARD: ai:50, ai:76, ai:781-783, ai:536 and ai:507 between them establish that NO prompt, temperature, penalty or model swap restores diversity, so nothing at render time may be offered as this problem's answer - the fold's closing note is exact: if it cannot be expressed as pool structure it has not been transferred.",
+    "grammar": "None directly; it is the precondition for every seeded-variation rule above. A seeded choice over a set of one is not a choice, so NPC-L1, L2 and L9 cannot show variation on 33% of this register until this is settled.",
+    "obeys": [
+     "(2) the standing is 7 distinct sources",
+     "(3) B-GRAMMAR is unimplementable on a singleton pool, so this is the directive's blocking dependency",
+     "(7) THE PROMISE - a re-draw changes which sentence an ALREADY-INSTALLED world shows for an already-lived compromise, which is why it is owner-gated and cannot be decided here"
+    ],
+    "test": "A POOL-FLOOR RATCHET: an only-shrinks test asserting the count of singleton pools per stage never rises, run NOW to pin the 546 before anything moves. Then, if and only if the owner buys the re-draw, a same-seed diff over a fixed NPC roster reporting exactly how many bearers change line. Acceptance U10 (R5/A11 evaluated against the pool's other variants - with one variant there is nothing to evaluate, which is the finding), U2 (any new variant is one or two sentences).",
+    "strength": "STRONG",
+    "changesShippedSurface": true
+   },
+   {
+    "id": "NPC-L8",
+    "statement": "Length in this register is a distribution, never a number and never a function of the rung a line was authored at. A line stops where the DM would stop and the table would answer.",
+    "sourceCount": 9,
+    "authors": [
+     "D&D"
+    ],
+    "rows": [
+     "dnd:660",
+     "dnd:314",
+     "dnd:94",
+     "dnd:97",
+     "dnd:118",
+     "dnd:98",
+     "dnd:99",
+     "dnd:100",
+     "dnd:12",
+     "dnd:103"
+    ],
+    "figure": "Measured at 29a4ff20d: the FULL rung's 24 lines run 31-41 words with ZERO under 31; the role rung means 22.9 and the class rung 21.7; the attributed stage means 27.0 (max 39). So the register pays for drama in length at both the tier and the stage level. DIRECTION: decouple length from rung and from stage. SIZE: the FULL rung's floor from 31 -> the register's own p10 of 19 or below; the register's maximum from 41 -> <=34. Licensed because the lane's own bounds span more than an order of magnitude - two sentences (dnd:94), one-or-two brief (dnd:314), three lines never five (dnd:98), four sentences under 100 words (dnd:97), under 250 words (dnd:99) - which is why a band and not a number; and 34 is our own p90 (28) plus one sd (4, rising to 6.5 under NPC-L3), keeping the long tail without the 41-word line.",
+    "faultGuard": "Fault 5. dnd:94's finding is behavioural rather than aesthetic - 'you get two sentences. Period' before players stack dice - and dnd:103 reports the failure state, the players on their phones. GUARD: the reaction point is a PLACE in the description past which the world must not move without the players (dnd:660), so the stop is chosen by content and not counted; the band has a distribution (D 40); and dnd:118's test is the ear, not the ruler - read it aloud.",
+    "grammar": "An order constraint: the last move in any grammar is the one the table can answer, so a line may not end on a move that only sets up another. The licensing field is lifecycleStage for WHAT is disclosed and never for HOW LONG.",
+    "obeys": [
+     "(1) D&D allocated alone here on a body of 99 read-aloud rows, because this register is spoken and Hobb and Martin carry zero rows on it",
+     "(2) 9 distinct sources, whose disagreement is carried rather than averaged",
+     "(3) a fixed length per rung is a visible template",
+     "(4) D N6's size-to-purpose-in-play is REFUSED as a rule about which elements get written and enters only as HOW a line is written",
+     "(6) B-CLAIM: a shortened line keeps its claim, its modality and its threat class",
+     "(7) read-aloud is the register's own law and nothing rises"
+    ],
+    "test": "A TIER-LENGTH walker reporting the length distribution per rung and per stage, requiring the rung distributions to overlap; plus a fingerprint delta on wordsPerSentence.p90 and shareOver30. Acceptance U2 (never more than two sentences whatever the rung), U5 (the new close is a checkable thing), U7 (a [threshold]-shaped edge stays subjunctive when a long line is cut).",
+    "strength": "STRONG",
+    "changesShippedSurface": true
+   },
+   {
+    "id": "NPC-L9",
+    "statement": "No single opening move may hold this register. The move is drawn by seed from the closed set, and the pool-level spread the register already achieves is extended to the register level.",
+    "sourceCount": 4,
+    "authors": [
+     "Kay",
+     "Le Guin",
+     "ai (constraint)"
+    ],
+    "rows": [
+     "kay:680",
+     "kay:976",
+     "leguin:264",
+     "kay:5",
+     "ai:98"
+    ],
+    "figure": "Measured at 29a4ff20d: seven opening moves - the-noun-other 790 (0.475), state-copula 312 (0.188), subordinate-circumstance 228 (0.137), existential-disclosure 184 (0.111), other 80, wh-nominal 40, indefinite-noun 28; first word 'the' in 1,111 of 1,680 (0.661); fingerprint sameOpenerAsPreviousRate 0.344 against an exemplar band of 0.033-0.167. BUT within a pool only 34 of 558 multi-variant pools (0.061) give every variant the same move, and EXACTLY ONE pool of 564 shares a two-word opener (PROBE 0.002, the estate's BEST figure on that metric - R1 sits at 79 of 708). So the pool-level mechanism already works and the failure is the register-level monopoly. DIRECTION: the monopoly down, the pool-level spread untouched. SIZE: no single opening move above 0.30 (from 0.475), every member of the set at >=0.05; sameOpenerAsPreviousRate 0.344 -> <=0.20. Licensed because 0.167 is the exemplar band's top (leguin-fiction) and 0.20 is one notch above it, chosen deliberately so the threshold is not hit exactly (K 44).",
+    "faultGuard": "Fault 9. The trap is that a ceiling becomes a quota and the moves cycle. GUARD: the move is chosen by a SEEDED draw whose input is the key, so two pools with the same shape do not alternate; and the register's own pool-level behaviour is the working proof, so the cure extends a mechanism that already works rather than importing one.",
+    "grammar": "This is the grammar rule proper: the opening move is the first typed MOVE, the set is closed, the draw is seeded, and the walker refuses any single order above the ceiling and any same-order-as-previous run (B-GRAMMAR, verbatim). MEMBERSHIP of the set is deferred to Q3 as the owner's; this rule sets the ceiling only.",
+    "obeys": [
+     "(1) Kay and Le Guin allocated for the mechanism (punctuation and length varied by context and speaker), never for a voice",
+     "(3) this IS the owner's directive, and its verbatim warning about 'Present state. Historical sentence. Official account.' over and over is the 0.475 figure",
+     "(6) B-GRAMMAR's own acceptance bar: the taste sample must show one block in two grammars",
+     "(7) nothing asserted changes when the opening move changes"
+    ],
+    "test": "The B-GRAMMAR WALKER: per-move share, same-move-as-previous run length, and a refusal above the ceiling; plus a fingerprint delta on openers.sameOpenerAsPreviousRate. Acceptance U10 (R5 evaluated against the pool's other variants at edit time - the arm A11 SHARED OPENER CREATED at check-pair.mjs:120 already exists), U6 (the STATE stays first - a new opening move may not front the cause), U1 (a moved opener may not drop a word naming a sibling key).",
+    "strength": "MODERATE",
+    "changesShippedSurface": true
+   },
+   {
+    "id": "NPC-L10",
+    "statement": "Adjudicate the sixteen lines carrying will/shall one by one before any is touched: a habitual or generic 'will' is a standing fact; a bare future indicative about the bearer or the town is a FATE breach.",
+    "sourceCount": 3,
+    "authors": [
+     "D&D"
+    ],
+    "rows": [
+     "dnd:112",
+     "dnd:998",
+     "dnd:183"
+    ],
+    "figure": "Measured at 29a4ff20d: will/shall in 16 lines; would/could/might in 35. Examples that must split in adjudication: 'The tainted priests will consecrate anything for the right fee' (habitual, a standing fact) against 'There is an investigation the watch will never open' (a standing negative, not a forecast). DIRECTION: adjudicate, then zero the forecasts only. SIZE: none - 16 lines is a per-line question, and a rate would be a licence to leave some.",
+    "faultGuard": "Fault 7 (forced closure) and the register-costume form K 6 names - 'it would later be said...' is the metronome in period dress. GUARD: dnd:112's cure is the present indicative in hypotheticals ('Keletny burns the car'), not a modal purge; the subjunctive is the corpus's own device for an edge (A2's [threshold]), and check-pair.mjs:124 already fires on SUBJUNCTIVE 'would' REMOVED precisely because the last reconstruction deleted one (refuter U7, item #19).",
+    "grammar": "A licensing field: lifecycleStage describes where a compromise STANDS. No field carries what happens next, so no move may forecast.",
+    "obeys": [
+     "(2) 3 sources, graded honestly as the weakest rule here",
+     "(5) a forecast is the clearest case of a sentence asserting what no field holds",
+     "(6) B-CLAIM: a modality may not be spent - this is the rule's whole content",
+     "(7) PRODUCT SCOPE and THE PROMISE - never a named character's fate, and no sentence that predicts one"
+    ],
+    "test": "check-pair.mjs arms FUTURE INDICATIVE ADDED (STATE never FATE) at line 123 and SUBJUNCTIVE 'would' REMOVED at line 124, both already written; plus a skeptic adjudication of the 16 before any edit. Acceptance U7, verbatim - it is the U that invented these arms.",
+    "strength": "SINGLE",
+    "changesShippedSurface": true
+   }
+  ],
+  "refusedTechniques": [
+   {
+    "name": "T1 the compiled record with a declared vantage (W 17 S13, T F1 S9, five more)",
+    "why": "The ladder is one spoken sentence on a card, not a document. A per-line frame is fault 9 in its named form - M 1's 'same three-clause attribution paragraph pasted at the head of every dossier'. The vantage is declared once elsewhere or not at all (D 4)."
+   },
+   {
+    "name": "T2 the apparatus declares its own limits (T F2 S5, H 19 S5, L 4 S3, D 23 S4)",
+    "why": "The ladder's RUNG is its declared limit, structurally. A textual gap line repeated across a stage becomes H 19's 'metronome of lacunae' immediately - this register has only six stages over 1,662 lines and no long document to hide a lacuna in."
+   },
+   {
+    "name": "T15 elegy as a standing fact (K 17 S6, T H1 S6, L 47 S8)",
+    "why": "K 17 names the valedictory close 'the single most recognisable AI paragraph ending'. The register's closers already land on a noun or a thing in 0.797 of lines; an elegy would import fault 6 into the one place it is absent."
+   },
+   {
+    "name": "T43 the backward gaze / prolepsis (K 6 S3; conflict 3.2 OPEN for the chronicle)",
+    "why": "Settled here by THE PROMISE and PRODUCT SCOPE: the ladder states a STATE at a STAGE, and a told outcome makes a bearer's fate. Kay's own not-transferable list bars it from the record."
+   },
+   {
+    "name": "T6 the compiler shows through / the dry aside (M 5 S5, L 42 S4, T F6 M2)",
+    "why": "Conflict 3.6 is OPEN and Q12 is the owner's. Independently: this register has no compiler. The line is a receipt a DM speaks, and an aside inside it becomes a persona - W's not-transferable 12, 'very mannered and arch'."
+   },
+   {
+    "name": "T20 register by standing, with an untagged quoted voice (T C1 S9, W 20 S7, D 5 S5)",
+    "why": "Dialogue share measured 0.000. Conflict 3.1 is SETTLED - no dialogue technique from any exemplar transfers to a record register - and the crier's quoted-voice licence (R-DST-I, A'-R5) does not extend here. This is the register's most dangerous near-miss: its six stage formulas LOOK like the crier's licensed frame and are not."
+   },
+   {
+    "name": "T37 negative narration / H 18's rhythm of buts (H 5 1, H 18 1, L 18 M2)",
+    "why": "Antithesis shape here is 0.007, the lowest of any estate register and below the whole exemplar band. Importing a first-half negation would MANUFACTURE the exact fault (fault 3, 7 documents) that the dossier register is being cured of. Conflict 3.18's direction is settled; the rate for R6 is zero."
+   },
+   {
+    "name": "T27 the figure policy beyond the literal (K 21 S3, L 28 S6)",
+    "why": "The Brackwater lesson generalises: a figure that implies a fact asserts it. With no institution table, a metaphor about counting, tithing or weighing is an unlicensed claim wearing a vehicle. K 21's 'no extended metaphor' is the floor here, not the ceiling."
+   },
+   {
+    "name": "T38 counts as words, time by reign, the dated census (K 22 S5, D 31 S6, M 14 M2)",
+    "why": "Measured: digits 0, count words 0, duration bands 0. A4 binds; the key carries no count, and only the FLOOR reads ageBand. A worded count would need a field that does not exist."
+   },
+   {
+    "name": "T7 the palimpsest (K 36 S4, W 23 S6, D 44 S5)",
+    "why": "No provenance field beyond ageBand, which the role and class rungs never read. 'What stood before' is exactly the historicized stage's job and is already a stage, not a device."
+   },
+   {
+    "name": "Hobb's 'what it meant' (H1's third limb)",
+    "why": "CONTRADICTED for a record register by five independent documents (FIVE_AUTHOR_CHECK C14); the verified carriers point to meaning by OMISSION instead. It does not ride along with A14 into this register."
+   },
+   {
+    "name": "Hobb's 'what they kept' (H1's fourth limb)",
+    "why": "Refused on one off-shape hit in 363 rows, and the row of that shape was struck at r7 (C15). Revival is owner-gated on the triage re-key."
+   },
+   {
+    "name": "D&D's second person / 'as you approach' (dnd:104, dnd:107)",
+    "why": "Measured second person 0. dnd:104 is the lane's own cure ('Move from the second-person point of view to the third person') and dnd:107 bars predicting the party's future. Held at zero, and NPC-L6's walker is the ratchet."
+   },
+   {
+    "name": "Wolfe's lying narrator (W 13b M2; W 14 1 the escape valve)",
+    "why": "Settled as a product law (conflict 3.14): the dossier is the ground truth the game state reconciles against. W 14's escape valve is a QUOTED voice, and this register has none."
+   },
+   {
+    "name": "D N6 description sized by purpose in play",
+    "why": "Refused by the owner 2026-09-07 01:20. It enters only as HOW a line is written (NPC-L8), never as which conjunctions get authored or how much each gets."
+   }
+  ],
+  "conflicts": [
+   "C1 - A7 PRESCRIBES A CURE THIS REGISTER CANNOT EXECUTE. Side one: A7 verbatim, 'a sentence that must say something new goes in a NEW pool key by a chair act, never appended', and Q23 schedules that act for R6 and R7. Side two: the code - normalizeKey plus conjunctionVariantsFor address only the closed cross-product {role x causeClass x lifecycleStage} derived from the worldPulse stamp, so an authored key nothing stamps is dead data; the only growth path is appending, and variants[fnv1a32(...) % variants.length] makes the pool's length a seed input. OPEN: the evidence leaves exactly one route - an owner-gated one-time same-seed re-draw - and no source or standing law authorises it.",
+   "C2 - TOLKIEN'S PARATAXIS AND HOBB'S PARATAXIS LAND ON THE SAME 0.715 AND PRESCRIBE DIFFERENT CURES. Side one: T A4 (tolkien:54, 157, 254, 656, 657, 663) makes the and-chain the EVENT marker, stylistically marked, split CULTURALLY between two peoples; cure is to reserve it. Side two: H 15 (hobb:86, hobb:90 - Matthew Oliver, Mythlore 41.1, ALONE; my re-count confirms one distinct source against Tolkien's six) makes it the marker of the record voice BREAKING; cure is to expel it. OPEN (conflict 3.4, Q10). Neither reading licenses 0.715, but T reserves and H expels, and no evidence adjudicates; NPC-L2's ceiling is compatible with both and commits to neither.",
+   "C3 - THE situation DIMENSION IS DROPPED FOR 1,638 OF 1,662 LINES WHILE A5 SAYS AUDIENCE IS INHERITED. Side one: the module's own header - 'rungs 2-3 are situation-agnostic (one line serves covert and revealed where the read does not change - the brief's rule)' - and the dossier is the DM's document, so a covert compromise stated plainly leaks to nobody. Side two: A5 and the refuter's finding 4.1, 'whatever walker the wave gets must read marks from the leaf, not from the author's memory'; npcComponents.jsx:235 renders the phrase on npc.corrupt alone with no publicSafe or dm-only gate in the path. OPEN - a product ruling about who reads the NPC card, which I did not establish, flagged because it is a standing-law surface.",
+   "C4 - THE READ-ALOUD BAND IS LICENSED BUT ITS EDGES ARE NOT. Side one: nine D&D sources give two / one-or-two / three / four / five sentences and 100 / 250 words, a spread over an order of magnitude that licenses a band. Side two: K 44 S8 - 'a threshold hit exactly IS the fault' - and Q4 makes the walker's ceiling the owner's number. OPEN in the number; NPC-L8's 34-word maximum is derived from our own p90 plus one sd and is offered as 'test this, don't trust it'.",
+   "C5 - IS 'THE TOWN KNOWS' A LICENSED PUBLIC FACT OR AN INTERIORITY BREACH? Side one: it is the exposed-public stage's own definition - the stage IS the knowing - and 36 lines depend on it. Side two: martin:424 and C14 forbid a record stating inner life at all, and NO FIELD distinguishes 'the town knows' from 'the town believes', while belief is DEITY-DOCTRINE-adjacent the moment it touches a temple office (11 tithe lines). Ruled here as licensed for 'knows' at exposed-public only, and carried OPEN for the general case: a 'believes' with no belief field is unlicensed and nothing currently tells them apart.",
+   "C6 - DOES ai:936 CONVICT OUR MEAN OR OUR VARIANCE? Side one: ai:936 (Williams) names uniform LENGTHS, 'typically fifteen to twenty-five words', and our mean of 22.6 is inside it. Side two: ai:98, ai:665, ai:657 and Holtzman (ai:1044/1045) all name the low VARIATION rather than the mean, and martin-chronicle sits at a HIGHER mean (25.9) with sd 12.7 and reads as a chronicle. OPEN because no source separates the two claims; NPC-L3 therefore moves the variance and HOLDS the mean, explicitly as a hypothesis to measure, per 'charter the permission, measure the mechanism'."
+  ],
+  "absenceRule": "OMITTED - and the absence is carried STRUCTURALLY by the rung the ladder falls to, never written as a sentence saying nothing is known. WHY: ruling (4) requires the full FORM and leaves omit-vs-'no entry' to the register. This register has NO SLOTS - a line is one sentence, not a form with fields, so there is nothing to write 'no entry' into. What it has instead is a four-rung fallback whose declared purpose is exactly this (causeLifecycleVocabulary.js header: 'THIS file is the generic FLOOR so no surface ever renders empty'). The full form is therefore ALWAYS delivered - every conjunction key resolves to a line - and the honest absence is that the line becomes LESS SPECIFIC, never that it becomes more specific about less: full rung (role x situation x cause x stage all worth hand-authoring together) -> role rung (situation not distinctive) -> class rung (role unknown or unbuilt, {role} slot filled by lookup) -> floor (cause and stage alone, generic template, age band read). THE RULE THIS RECONCILIATION STATES: a lower rung may never carry a fact a higher rung would have needed a field for. THE LIVE BREACH IT NAMES: the 90 unlicensed-institution lines of NPC-L5 are exactly this - the class rung's 126 role-agnostic lines and the role rung name guilds, councils, auditors and censuses that no rung's key holds, so the ladder is INVENTING where it should be GENERALISING; descending a rung is supposed to remove specificity and today it sometimes adds it. THE SECOND HALF IS A PROHIBITION: an absence here is never written as prose - 'the reason is not recorded', 'the record does not say', 'how it began is unknown' may not be authored, because with six stages and one sentence apiece a gap line becomes D 23's repetition-across-a-dossier and H 19's metronome of lacunae within four NPCs. leguin:481 is the model that is admitted and the one that is not: the Seggri frame records a killing by naming exactly what the record does not contain, and it works because it happens ONCE in a long document. This register has no long document to hide it in. The rung is the record of how much is known, and it is silent about itself. Under ruling (4)'s wording, 'we provide the full thing for each element' is satisfied by the LADDER, and writing the absence would itself be the manufactured detail.",
+  "openQuestions": [
+   "The 90 unlicensed-institution lines need per-line adjudication by a skeptic before any byte moves. My licensing regex is an UPPER BOUND and certainly contains false positives (a muster 'roll' under garrison-drained; a 'council' under occupation). The true count is unknown and is the input to NPC-L5's size.",
+   "check-pair.mjs cannot run on this register today: its corpus loader (lines 16-31) reads src/data/dossierStateProse and the causal pools only. Every arm cited above needs an R6 loader that walks ROLE_CONTENT / CLASS_CONTENT / FULL_CONTENT to their array leaves and reconstructs the pool key as role|causeClass|stage. That is a prerequisite car, not a rule.",
+   "Is the FULL rung's 31-41-word floor authored intent or drift? Twenty-four lines, zero under 31. If drama was deliberately priced in length, NPC-L8 contradicts an authoring decision and the owner should say so.",
+   "The institution table's shape is proposed, not specified. {settlement, office, holder-role, what it does, who it counts, who is exempt} is my reading of ruling (5)'s wording; whether it is a per-settlement generated table or a closed vocabulary is an architecture decision outside this reconciliation.",
+   "The em-dash residue in causeLifecycleVocabulary.js (2 instances) sits outside R6's measured 14-file roster - which is why PROBE_ALL's 'R6 em dashes = 0' is CONFIRMED rather than wrong - and as far as I can tell outside R15/R18's classified residue too. Two bytes of a hard rule, belonging to whoever owns the floor module.",
+   "Q23's schedule for R6: given C1, the question the owner is actually being asked is not 'when do we mint keys' but 'do we buy a one-time same-seed re-draw on installed worlds, and for which of the three singleton stages first'.",
+   "Membership of the closed opening set (Q3) is not decided here, so NPC-L9 sets a ceiling over the seven moves the register happens to have rather than over an authored set.",
+   "PROSE_INVENTORY:260 names display/discourseKernel.js as a second reader of this register; that file does not exist in this checkout, and the working-tree import census returns exactly one importer (components/new/npcComponents.jsx:11). A16's display-side classification therefore holds by census today, but the inventory line should be reconciled before it is relied on again."
+  ],
+  "file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/prose-research/sweep/reconcile-npc-ladder.md"
+ }
+}

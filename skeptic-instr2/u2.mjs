@@ -1,0 +1,15 @@
+import { generateSettlementPipeline } from '../skepINSTR2/src/generators/generateSettlementPipeline.js';
+import { instantiatedServices, DUTY_SERVICE_KINDS } from '../skepINSTR2/src/domain/institutions/institutionTable.js';
+const town=(tier,seed)=>generateSettlementPipeline({settType:tier,culture:'germanic',terrain:'grassland',tradeRouteAccess:'road'},null,{seed,customContent:{}});
+let rows=0, live=0, duty=0, schemaServices=0, n=0;
+const DUTY=DUTY_SERVICE_KINDS;
+const nonLive=[];
+for (const tier of ['thorp','hamlet','village','town','city','metropolis']) for(let i=0;i<5;i+=1){
+  const s=town(tier,`estate-${tier}-${i}`); n+=1;
+  const svc=instantiatedServices(s); rows+=svc.length;
+  const roster=new Set((s.institutions||[]).map(x=>String(x?.name||x)));
+  for (const r of svc){ if(!r.institution || roster.has(r.institution)) live+=1; else nonLive.push(`${tier}|${r.name}|${r.institution}`); if(DUTY.test(r.name)) duty+=1; }
+  schemaServices += Array.isArray(s.services)? s.services.length : (s.services?Object.keys(s.services).length:0);
+}
+console.log('settlements',n,'rows',rows,'live-or-none',live,'nonLive',nonLive.length,'duty-ish',duty,'settlement.services',schemaServices);
+console.log('nonLive sample:', [...new Set(nonLive.map(x=>x.split('|')[2]))].join(' · '));

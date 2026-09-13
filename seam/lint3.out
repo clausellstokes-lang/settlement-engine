@@ -1,0 +1,32 @@
+
+ RUN  v4.1.11 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneSEAM
+
+ ❯ tests/lint/proseWiringCensus.walker.test.js (57 tests | 1 failed) 8375ms
+     × the committed census is byte-identical to a fresh build, and the stamp is live 34ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/lint/proseWiringCensus.walker.test.js > car 0 — the committed JSON and its interlock > the committed census is byte-identical to a fresh build, and the stamp is live
+AssertionError: the committed file is current: expected 'stale-bytes' to be '' // Object.is equality
+
+- Expected
++ Received
+
++ stale-bytes
+
+ ❯ tests/lint/proseWiringCensus.walker.test.js:1437:61
+    1435|     const text = readFileSync(CENSUS_JSON, 'utf8');
+    1436|     const verdict = censusCheck(text, committed);
+    1437|     expect(verdict.reason, 'the committed file is current').toBe('');
+       |                                                             ^
+    1438|     expect(verdict.ok).toBe(true);
+    1439|     expect(text, 'and byte-identical to what the script would write').…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 147 passed (148)
+      Tests  1 failed | 2399 passed (2400)
+   Start at  12:07:33
+   Duration  93.97s (transform 22.92s, setup 3.69s, import 125.53s, tests 455.68s, environment 12ms)
+

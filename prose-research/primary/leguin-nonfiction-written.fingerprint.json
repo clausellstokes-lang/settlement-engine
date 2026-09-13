@@ -1,0 +1,160 @@
+{
+  "label": "leguin-nonfiction-written",
+  "files": [
+    "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/prose-research/primary/raw/leguin_nonfiction_written.txt"
+  ],
+  "paragraphs": 81,
+  "sentences": 281,
+  "wordsPerSentence": {
+    "mean": 17,
+    "sd": 11.9,
+    "p10": 5,
+    "p50": 14,
+    "p90": 33,
+    "shareUnder8": 0.2349,
+    "shareOver30": 0.121,
+    "neighbourVariation": 0.708
+  },
+  "sentencesPerParagraph": 3.47,
+  "punctuation": {
+    "semicolonRate": 0.0676,
+    "colonRate": 0.0569,
+    "emDashRate": 0.1032,
+    "questionRate": 0.0961,
+    "exclamationRate": 0.0214,
+    "parenthesisRate": 0.0178
+  },
+  "shapes": {
+    "antithesisRate": 0.0178,
+    "triadRate": 0.0747,
+    "participialOpenerRate": 0.0249,
+    "whichTailRate": 0.0178,
+    "doubledAdjectiveRate": 0.032,
+    "adverbsPerSentence": 0.246,
+    "thereIsOpenerRate": 0.0249,
+    "dialogueShare": 0.0783
+  },
+  "closers": {
+    "abstractNounRate": 0.0534,
+    "pronounRate": 0.089,
+    "topClosers": [
+      [
+        "it",
+        17
+      ],
+      [
+        "writer",
+        5
+      ],
+      [
+        "one",
+        4
+      ],
+      [
+        "truth",
+        4
+      ],
+      [
+        "writing",
+        3
+      ],
+      [
+        "book",
+        3
+      ],
+      [
+        "words",
+        3
+      ],
+      [
+        "art",
+        3
+      ],
+      [
+        "about",
+        3
+      ],
+      [
+        "inside",
+        3
+      ],
+      [
+        "them",
+        3
+      ],
+      [
+        "novel",
+        3
+      ]
+    ]
+  },
+  "openers": {
+    "topOpeners": [
+      [
+        "the",
+        24
+      ],
+      [
+        "but",
+        13
+      ],
+      [
+        "i",
+        13
+      ],
+      [
+        "and",
+        11
+      ],
+      [
+        "you",
+        10
+      ],
+      [
+        "in",
+        9
+      ],
+      [
+        "it",
+        9
+      ],
+      [
+        "they",
+        7
+      ],
+      [
+        "a",
+        5
+      ],
+      [
+        "this",
+        4
+      ],
+      [
+        "we",
+        4
+      ],
+      [
+        "to",
+        4
+      ]
+    ],
+    "sameOpenerAsPreviousRate": 0.0605
+  },
+  "runsOfThreeSameLengthBand": 0.21,
+  "presence": {
+    "sensoryNounsPerHundredWords": 0.306,
+    "texturedParagraphShare": 0.1605,
+    "senseSpreadEntropy": 1.533,
+    "senseShares": {
+      "sight": 0.5333333333333333,
+      "hearing": 0.3333333333333333,
+      "smell": 0,
+      "touch": 0.06666666666666667,
+      "taste": 0.06666666666666667
+    },
+    "words": 4899,
+    "paragraphs": 81,
+    "lexicon": "src/domain/prose/presenceMeasure.js SENSORY_NOUNS — 166 nouns in five buckets, a partition"
+  }
+}

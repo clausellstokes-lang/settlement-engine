@@ -1,0 +1,9 @@
+import { INSTITUTION_SERVICES as S } from '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneRW-DEFW/src/data/institutionServices.js';
+import { DEFENSE_BUCKET_KEYWORDS as B } from '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneRW-DEFW/src/domain/institutions/defenseInstitutionBuckets.js';
+const names = Object.keys(S); console.log('roster rows', names.length);
+const SEC = /(watch|garrison|constab|guard|magistrate|court|barracks)/i;
+console.log('SECURITY_RE matches:', names.filter(n=>SEC.test(n)).join(' · '));
+for (const [b,kws] of Object.entries(B)) console.log('bucket', b, '=>', names.filter(n=>kws.some(k=>n.toLowerCase().includes(k))).join(' · '));
+const REC = { treasury:['Tax collection','Tax payment','Taxation and tolls','Tithe and dues'], muster:['Muster training'], census:['Citizen registration','Noble registration'], parish:['Register of the dead','Central register','Records'], 'toll-bar':['Toll collection','Customs brokerage','Market charter and tolls'], market:['Weekly market','Public auctions'], watch:['Crime reporting','Crime response','Missing persons'], court:['Criminal trials','Civil disputes','Notary services','Criminal proceedings','Civil litigation','Appeals'], elders:['Record of custom'], road:['Road register','Way-bill registration'], office:['Public records','Public record access','Record filing'] };
+for (const [k,svcs] of Object.entries(REC)) console.log('holder', k, '=>', names.filter(n=>Object.keys(S[n]||{}).some(s=>svcs.includes(s))).join(' · '));
+console.log('names with guard/watch/reeve/mayor/captain/steward/magistrate/sheriff/constable/elder/headman:', names.filter(n=>/guard|watch|reeve|mayor|captain|steward|magistrate|sheriff|constab|elder|headman|marshal|bailiff/i.test(n)).join(' · '));

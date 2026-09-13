@@ -1,0 +1,1164 @@
+{
+ "name": "ai",
+ "writtenAt": "Mon Sep  7 03:06:19 EDT 2026",
+ "critic": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/prose-research/sweep/critic-ai.md (mtime 2026-09-07T02:10:05-0400)",
+ "rows": [
+  {
+   "index": 571,
+   "feature": "r5",
+   "why": "One of the ten r5 skips the critic lists among the rows a rule depends on"
+  },
+  {
+   "index": 591,
+   "feature": "r5",
+   "why": "One of the ten r5 skips the critic lists among the rows a rule depends on"
+  },
+  {
+   "index": 661,
+   "feature": "r5",
+   "why": "One of the ten r5 skips the critic lists among the rows a rule depends on"
+  },
+  {
+   "index": 670,
+   "feature": "r5",
+   "why": "One of the ten r5 skips the critic lists among the rows a rule depends on"
+  },
+  {
+   "index": 817,
+   "feature": "r5",
+   "why": "One of the ten r5 skips the critic lists among the rows a rule depends on"
+  },
+  {
+   "index": 832,
+   "feature": "r5",
+   "why": "One of the ten r5 skips the critic lists among the rows a rule depends on"
+  },
+  {
+   "index": 842,
+   "feature": "r5",
+   "why": "One of the ten r5 skips the critic lists among the rows a rule depends on"
+  },
+  {
+   "index": 881,
+   "feature": "r5",
+   "why": "One of the ten r5 skips the critic lists among the rows a rule depends on"
+  },
+  {
+   "index": 890,
+   "feature": "r5",
+   "why": "One of the ten r5 skips the critic lists among the rows a rule depends on"
+  },
+  {
+   "index": 891,
+   "feature": "r5",
+   "why": "One of the ten r5 skips the critic lists among the rows a rule depends on"
+  },
+  {
+   "index": 941,
+   "feature": "34,15",
+   "why": "Sato's \"indelible mark\" and \"untimely demise\"; one row is the obituary's word list that feature 15's biographical lexicon needs"
+  },
+  {
+   "index": 943,
+   "feature": "34,15",
+   "why": "Sato's \"indelible mark\" and \"untimely demise\"; one row is the obituary's word list that feature 15's biographical lexicon needs"
+  },
+  {
+   "index": 944,
+   "feature": "34,15",
+   "why": "Sato's \"indelible mark\" and \"untimely demise\"; one row is the obituary's word list that feature 15's biographical lexicon needs"
+  },
+  {
+   "index": 945,
+   "feature": "34,15",
+   "why": "Sato's \"indelible mark\" and \"untimely demise\"; one row is the obituary's word list that feature 15's biographical lexicon needs"
+  },
+  {
+   "index": 949,
+   "feature": "34,15",
+   "why": "Sato's \"indelible mark\" and \"untimely demise\"; one row is the obituary's word list that feature 15's biographical lexicon needs"
+  },
+  {
+   "index": 951,
+   "feature": "34,15",
+   "why": "Sato's \"indelible mark\" and \"untimely demise\"; one row is the obituary's word list that feature 15's biographical lexicon needs"
+  },
+  {
+   "index": 963,
+   "feature": "34,15",
+   "why": "Ward, a row features 34 and 15 depend on"
+  },
+  {
+   "index": 964,
+   "feature": "34,15",
+   "why": "Cole on steerability, a row features 34 and 15 depend on"
+  },
+  {
+   "index": 978,
+   "feature": "34,15",
+   "why": "Crow, a row features 34 and 15 depend on"
+  },
+  {
+   "index": 980,
+   "feature": "34,15",
+   "why": "Dyer's counter-evidence, a counter-evidence row the triage skipped"
+  },
+  {
+   "index": 981,
+   "feature": "34,15",
+   "why": "Dyer's counter-evidence, a counter-evidence row the triage skipped"
+  },
+  {
+   "index": 982,
+   "feature": "34,15",
+   "why": "The guide, a row features 34 and 15 depend on"
+  },
+  {
+   "index": 983,
+   "feature": "34,15",
+   "why": "The guide, a row features 34 and 15 depend on"
+  },
+  {
+   "index": 990,
+   "feature": "34,15",
+   "why": "The guide, a row features 34 and 15 depend on"
+  },
+  {
+   "index": 999,
+   "feature": "34,15",
+   "why": "Treadway, a row features 34 and 15 depend on"
+  },
+  {
+   "index": 1001,
+   "feature": "34,15",
+   "why": "McGreevy, a row features 34 and 15 depend on"
+  },
+  {
+   "index": 1002,
+   "feature": "34,15",
+   "why": "McGreevy, a row features 34 and 15 depend on"
+  },
+  {
+   "index": 1003,
+   "feature": "34,15",
+   "why": "McGreevy, a row features 34 and 15 depend on"
+  },
+  {
+   "index": 1005,
+   "feature": "34,15",
+   "why": "Raicu, a row features 34 and 15 depend on"
+  },
+  {
+   "index": 1032,
+   "feature": "34,15",
+   "why": "Min, a row features 34 and 15 depend on"
+  },
+  {
+   "index": 1037,
+   "feature": "34,15",
+   "why": "Seife, a row features 34 and 15 depend on"
+  },
+  {
+   "index": 1038,
+   "feature": "34,15",
+   "why": "Seife, a row features 34 and 15 depend on"
+  },
+  {
+   "index": 1044,
+   "feature": "31,32",
+   "why": "Holtzman's Table 1 figures, the critic's own carve-out being the three already verified rows in the range"
+  },
+  {
+   "index": 1045,
+   "feature": "31,32",
+   "why": "Holtzman's Table 1 figures, the critic's own carve-out being the three already verified rows in the range"
+  },
+  {
+   "index": 1049,
+   "feature": "31,32",
+   "why": "Holtzman's Table 1 figures, the critic's own carve-out being the three already verified rows in the range"
+  },
+  {
+   "index": 1050,
+   "feature": "31,32",
+   "why": "Holtzman's Table 1 figures, the critic's own carve-out being the three already verified rows in the range"
+  },
+  {
+   "index": 1051,
+   "feature": "31,32",
+   "why": "Holtzman's Table 1 figures, the critic's own carve-out being the three already verified rows in the range"
+  },
+  {
+   "index": 1052,
+   "feature": "31,32",
+   "why": "Holtzman's Table 1 figures, the critic's own carve-out being the three already verified rows in the range"
+  },
+  {
+   "index": 1053,
+   "feature": "31,32",
+   "why": "Holtzman's Table 1 figures, the critic's own carve-out being the three already verified rows in the range"
+  },
+  {
+   "index": 1056,
+   "feature": "31,32",
+   "why": "Typical sampling, a rule the section depends on left SKIPPED_TRIAGE"
+  },
+  {
+   "index": 1057,
+   "feature": "31,32",
+   "why": "Typical sampling, a rule the section depends on left SKIPPED_TRIAGE"
+  },
+  {
+   "index": 1058,
+   "feature": "31,32",
+   "why": "Typical sampling, a rule the section depends on left SKIPPED_TRIAGE"
+  },
+  {
+   "index": 1059,
+   "feature": "31,32",
+   "why": "Typical sampling, a rule the section depends on left SKIPPED_TRIAGE"
+  },
+  {
+   "index": 1061,
+   "feature": "31,32",
+   "why": "Nguyen et al. min-p, zero verified: the ICLR 2025 human evaluation, min-p 7.57 against standard sampling 6.83 at temperature 3, the peer-reviewed counter the section lacks"
+  },
+  {
+   "index": 1062,
+   "feature": "31,32",
+   "why": "Nguyen et al. min-p, zero verified: the ICLR 2025 human evaluation, min-p 7.57 against standard sampling 6.83 at temperature 3, the peer-reviewed counter the section lacks"
+  },
+  {
+   "index": 1063,
+   "feature": "31,32",
+   "why": "Nguyen et al. min-p, zero verified: the ICLR 2025 human evaluation, min-p 7.57 against standard sampling 6.83 at temperature 3, the peer-reviewed counter the section lacks"
+  },
+  {
+   "index": 1064,
+   "feature": "31,32",
+   "why": "Nguyen et al. min-p, zero verified: the ICLR 2025 human evaluation, min-p 7.57 against standard sampling 6.83 at temperature 3, the peer-reviewed counter the section lacks"
+  },
+  {
+   "index": 1065,
+   "feature": "31,32",
+   "why": "Nguyen et al. min-p, zero verified: the ICLR 2025 human evaluation, min-p 7.57 against standard sampling 6.83 at temperature 3, the peer-reviewed counter the section lacks"
+  },
+  {
+   "index": 1066,
+   "feature": "31,32",
+   "why": "Nguyen et al. min-p, zero verified: the ICLR 2025 human evaluation, min-p 7.57 against standard sampling 6.83 at temperature 3, the peer-reviewed counter the section lacks"
+  },
+  {
+   "index": 1069,
+   "feature": "31,32",
+   "why": "Mirostat, including the model-era drift row the section itself names as not citable"
+  },
+  {
+   "index": 1070,
+   "feature": "31,32",
+   "why": "Mirostat, including the model-era drift row the section itself names as not citable"
+  },
+  {
+   "index": 1071,
+   "feature": "31,32",
+   "why": "Mirostat, including the model-era drift row the section itself names as not citable"
+  },
+  {
+   "index": 1072,
+   "feature": "31,32",
+   "why": "Mirostat, including the model-era drift row the section itself names as not citable"
+  },
+  {
+   "index": 1075,
+   "feature": "31,32",
+   "why": "Su, a rule the section depends on left SKIPPED_TRIAGE"
+  },
+  {
+   "index": 1076,
+   "feature": "31,32",
+   "why": "Su, a rule the section depends on left SKIPPED_TRIAGE"
+  },
+  {
+   "index": 1077,
+   "feature": "31,32",
+   "why": "Su, a rule the section depends on left SKIPPED_TRIAGE"
+  },
+  {
+   "index": 1078,
+   "feature": "31,32",
+   "why": "Su, a rule the section depends on left SKIPPED_TRIAGE"
+  },
+  {
+   "index": 1079,
+   "feature": "31,32",
+   "why": "Su, a rule the section depends on left SKIPPED_TRIAGE"
+  },
+  {
+   "index": 1080,
+   "feature": "31,32",
+   "why": "Schaeffer et al. \"Min-p, Max Exaggeration\", zero verified: the rebuttal, so the section holds neither side of the dispute it must adjudicate"
+  },
+  {
+   "index": 1081,
+   "feature": "31,32",
+   "why": "Schaeffer et al. \"Min-p, Max Exaggeration\", zero verified: the rebuttal, so the section holds neither side of the dispute it must adjudicate"
+  },
+  {
+   "index": 1082,
+   "feature": "31,32",
+   "why": "Schaeffer et al. \"Min-p, Max Exaggeration\", zero verified: the rebuttal, so the section holds neither side of the dispute it must adjudicate"
+  },
+  {
+   "index": 1083,
+   "feature": "31,32",
+   "why": "Schaeffer et al. \"Min-p, Max Exaggeration\", zero verified: the rebuttal, so the section holds neither side of the dispute it must adjudicate"
+  },
+  {
+   "index": 1084,
+   "feature": "31,32",
+   "why": "Schaeffer et al. \"Min-p, Max Exaggeration\", zero verified: the rebuttal, so the section holds neither side of the dispute it must adjudicate"
+  },
+  {
+   "index": 1085,
+   "feature": "31,32",
+   "why": "Schaeffer et al. \"Min-p, Max Exaggeration\", zero verified: the rebuttal, so the section holds neither side of the dispute it must adjudicate"
+  },
+  {
+   "index": 1086,
+   "feature": "31,32",
+   "why": "Schaeffer et al. \"Min-p, Max Exaggeration\", zero verified: the rebuttal, so the section holds neither side of the dispute it must adjudicate"
+  },
+  {
+   "index": 1087,
+   "feature": "31,32",
+   "why": "Antislop, a rule the section depends on left SKIPPED_TRIAGE"
+  },
+  {
+   "index": 1088,
+   "feature": "31,32",
+   "why": "Antislop, a rule the section depends on left SKIPPED_TRIAGE"
+  },
+  {
+   "index": 1089,
+   "feature": "31,32",
+   "why": "Antislop, a rule the section depends on left SKIPPED_TRIAGE"
+  },
+  {
+   "index": 1090,
+   "feature": "31,32",
+   "why": "Antislop, a rule the section depends on left SKIPPED_TRIAGE"
+  },
+  {
+   "index": 1091,
+   "feature": "31,32",
+   "why": "Antislop, a rule the section depends on left SKIPPED_TRIAGE"
+  },
+  {
+   "index": 1092,
+   "feature": "31,32",
+   "why": "Antislop, a rule the section depends on left SKIPPED_TRIAGE"
+  },
+  {
+   "index": 1093,
+   "feature": "31,32",
+   "why": "Antislop, a rule the section depends on left SKIPPED_TRIAGE"
+  },
+  {
+   "index": 1095,
+   "feature": "31,32",
+   "why": "The antislop README, a rule the section depends on left SKIPPED_TRIAGE"
+  },
+  {
+   "index": 1096,
+   "feature": "31,32",
+   "why": "The antislop README, a rule the section depends on left SKIPPED_TRIAGE"
+  },
+  {
+   "index": 1097,
+   "feature": "31,32",
+   "why": "Slop Score, a rule the section depends on left SKIPPED_TRIAGE"
+  },
+  {
+   "index": 1098,
+   "feature": "31,32",
+   "why": "Slop Score, a rule the section depends on left SKIPPED_TRIAGE"
+  },
+  {
+   "index": 1101,
+   "feature": "31,32",
+   "why": "Wiher, a rule the section depends on left SKIPPED_TRIAGE"
+  },
+  {
+   "index": 1102,
+   "feature": "31,32",
+   "why": "Wiher, a rule the section depends on left SKIPPED_TRIAGE"
+  },
+  {
+   "index": 1103,
+   "feature": "31,32",
+   "why": "Wiher, a rule the section depends on left SKIPPED_TRIAGE"
+  },
+  {
+   "index": 1104,
+   "feature": "31,32",
+   "why": "Wiher, a rule the section depends on left SKIPPED_TRIAGE"
+  },
+  {
+   "index": 1106,
+   "feature": "31,32",
+   "why": "Hewitt, a rule the section depends on left SKIPPED_TRIAGE"
+  },
+  {
+   "index": 1107,
+   "feature": "31,32",
+   "why": "Hewitt, a rule the section depends on left SKIPPED_TRIAGE"
+  },
+  {
+   "index": 1109,
+   "feature": "31,32",
+   "why": "Hewitt, a rule the section depends on left SKIPPED_TRIAGE"
+  },
+  {
+   "index": 1118,
+   "feature": "31,32",
+   "why": "Shi et al., a rule the section depends on left SKIPPED_TRIAGE"
+  },
+  {
+   "index": 1119,
+   "feature": "31,32",
+   "why": "Shi et al., a rule the section depends on left SKIPPED_TRIAGE"
+  },
+  {
+   "index": 1120,
+   "feature": "31,32",
+   "why": "Shi et al., a rule the section depends on left SKIPPED_TRIAGE"
+  },
+  {
+   "index": 1124,
+   "feature": "31,32",
+   "why": "Zhang's Verbalized Sampling, a rule the section depends on left SKIPPED_TRIAGE"
+  },
+  {
+   "index": 1125,
+   "feature": "31,32",
+   "why": "Zhang's Verbalized Sampling, a rule the section depends on left SKIPPED_TRIAGE"
+  },
+  {
+   "index": 1126,
+   "feature": "31,32",
+   "why": "Zhang's Verbalized Sampling, a rule the section depends on left SKIPPED_TRIAGE"
+  },
+  {
+   "index": 1127,
+   "feature": "31,32",
+   "why": "Zhang's Verbalized Sampling, a rule the section depends on left SKIPPED_TRIAGE"
+  },
+  {
+   "index": 1128,
+   "feature": "31,32",
+   "why": "DivEye, a rule the section depends on left SKIPPED_TRIAGE"
+  },
+  {
+   "index": 1129,
+   "feature": "31,32",
+   "why": "DivEye, a rule the section depends on left SKIPPED_TRIAGE"
+  },
+  {
+   "index": 1130,
+   "feature": "31,32",
+   "why": "DivEye, a rule the section depends on left SKIPPED_TRIAGE"
+  },
+  {
+   "index": 1131,
+   "feature": "31,32",
+   "why": "DivEye, a rule the section depends on left SKIPPED_TRIAGE"
+  },
+  {
+   "index": 1149,
+   "feature": "35",
+   "why": "WhatamIdoing's false positive, counter-evidence the triage skipped"
+  },
+  {
+   "index": 1150,
+   "feature": "35",
+   "why": "WhatamIdoing's false positive, counter-evidence the triage skipped"
+  },
+  {
+   "index": 1152,
+   "feature": "35",
+   "why": "LPfi's draft, a row feature 35's omitted-war limb depends on"
+  },
+  {
+   "index": 1153,
+   "feature": "35",
+   "why": "LPfi's draft, a row feature 35's omitted-war limb depends on"
+  },
+  {
+   "index": 1154,
+   "feature": "35",
+   "why": "LPfi's draft, a row feature 35's omitted-war limb depends on"
+  },
+  {
+   "index": 1155,
+   "feature": "35",
+   "why": "LPfi's draft, a row feature 35's omitted-war limb depends on"
+  },
+  {
+   "index": 1167,
+   "feature": "35",
+   "why": "Which?, a row feature 35's rule depends on"
+  },
+  {
+   "index": 1170,
+   "feature": "35",
+   "why": "Which?, a row feature 35's rule depends on"
+  },
+  {
+   "index": 1171,
+   "feature": "35",
+   "why": "Which?, a row feature 35's rule depends on"
+  },
+  {
+   "index": 1172,
+   "feature": "35",
+   "why": "Which?, a row feature 35's rule depends on"
+  },
+  {
+   "index": 1173,
+   "feature": "35",
+   "why": "Which?, a row feature 35's rule depends on"
+  },
+  {
+   "index": 1185,
+   "feature": "35",
+   "why": "Rettberg's mechanism and retraction; the retraction row is the false positive withdrawn after the NYT confirmed the reporter used no AI"
+  },
+  {
+   "index": 1186,
+   "feature": "35",
+   "why": "Rettberg's mechanism and retraction; the retraction row is the false positive withdrawn after the NYT confirmed the reporter used no AI"
+  },
+  {
+   "index": 1189,
+   "feature": "35",
+   "why": "Koehlert and Governing, a row feature 35's rule depends on"
+  },
+  {
+   "index": 1190,
+   "feature": "35",
+   "why": "Koehlert and Governing, a row feature 35's rule depends on"
+  },
+  {
+   "index": 1194,
+   "feature": "35",
+   "why": "Ghani, a row feature 35's rule depends on"
+  },
+  {
+   "index": 1195,
+   "feature": "35",
+   "why": "The survey, a row feature 35's rule depends on"
+  },
+  {
+   "index": 1196,
+   "feature": "35",
+   "why": "The survey, a row feature 35's rule depends on"
+  },
+  {
+   "index": 1197,
+   "feature": "35",
+   "why": "The September 2025 deletion vote, a row feature 35's rule depends on"
+  },
+  {
+   "index": 1199,
+   "feature": "35",
+   "why": "The September 2025 deletion vote, a row feature 35's rule depends on"
+  },
+  {
+   "index": 1200,
+   "feature": "35",
+   "why": "The September 2025 deletion vote, a row feature 35's rule depends on"
+  },
+  {
+   "index": 1204,
+   "feature": "35",
+   "why": "Zhao, a source features 35 and 3 both depend on, left SKIPPED_TRIAGE"
+  },
+  {
+   "index": 1205,
+   "feature": "35",
+   "why": "Zhao, a source features 35 and 3 both depend on, left SKIPPED_TRIAGE"
+  },
+  {
+   "index": 1208,
+   "feature": "35",
+   "why": "Zhao, a source features 35 and 3 both depend on, left SKIPPED_TRIAGE"
+  },
+  {
+   "index": 1209,
+   "feature": "35",
+   "why": "Gao, a row feature 35's rule depends on"
+  },
+  {
+   "index": 1210,
+   "feature": "35",
+   "why": "Gao, a row feature 35's rule depends on"
+  },
+  {
+   "index": 1214,
+   "feature": "36",
+   "why": "HiST-LLM, a row feature 36's rule depends on"
+  },
+  {
+   "index": 1216,
+   "feature": "36",
+   "why": "HiST-LLM, a row feature 36's rule depends on"
+  },
+  {
+   "index": 1218,
+   "feature": "36",
+   "why": "HiST-LLM, a row feature 36's rule depends on"
+  },
+  {
+   "index": 1219,
+   "feature": "36",
+   "why": "The HiST-LLM reporting, a row feature 36's rule depends on"
+  },
+  {
+   "index": 1220,
+   "feature": "36",
+   "why": "The HiST-LLM reporting, a row feature 36's rule depends on"
+  },
+  {
+   "index": 1222,
+   "feature": "36",
+   "why": "The HiST-LLM reporting, a row feature 36's rule depends on"
+  },
+  {
+   "index": 1223,
+   "feature": "36",
+   "why": "The HiST-LLM reporting, a row feature 36's rule depends on"
+  },
+  {
+   "index": 1225,
+   "feature": "36",
+   "why": "The HiST-LLM reporting, a row feature 36's rule depends on"
+  },
+  {
+   "index": 1228,
+   "feature": "36",
+   "why": "ASIC, a source feature 36's rule depends on, fetched then left SKIPPED_TRIAGE"
+  },
+  {
+   "index": 1229,
+   "feature": "36",
+   "why": "ASIC, a source feature 36's rule depends on, fetched then left SKIPPED_TRIAGE"
+  },
+  {
+   "index": 1230,
+   "feature": "36",
+   "why": "ASIC, a source feature 36's rule depends on, fetched then left SKIPPED_TRIAGE"
+  },
+  {
+   "index": 1231,
+   "feature": "36",
+   "why": "ASIC, a source feature 36's rule depends on, fetched then left SKIPPED_TRIAGE"
+  },
+  {
+   "index": 1234,
+   "feature": "36",
+   "why": "ASIC, a source feature 36's rule depends on, fetched then left SKIPPED_TRIAGE"
+  },
+  {
+   "index": 1235,
+   "feature": "36",
+   "why": "ASIC, a source feature 36's rule depends on, fetched then left SKIPPED_TRIAGE"
+  },
+  {
+   "index": 1239,
+   "feature": "36",
+   "why": "ASIC, a source feature 36's rule depends on, fetched then left SKIPPED_TRIAGE"
+  },
+  {
+   "index": 1240,
+   "feature": "36",
+   "why": "ASIC, a source feature 36's rule depends on, fetched then left SKIPPED_TRIAGE"
+  },
+  {
+   "index": 1244,
+   "feature": "36",
+   "why": "BBC, a row feature 36's rule depends on"
+  },
+  {
+   "index": 1245,
+   "feature": "36",
+   "why": "BBC, a row feature 36's rule depends on"
+  },
+  {
+   "index": 1248,
+   "feature": "36",
+   "why": "BBC, a row feature 36's rule depends on"
+  },
+  {
+   "index": 1249,
+   "feature": "36",
+   "why": "BBC, a row feature 36's rule depends on"
+  },
+  {
+   "index": 1252,
+   "feature": "36",
+   "why": "Dahl's temporal gradient, a row feature 36's legal limb depends on"
+  },
+  {
+   "index": 1253,
+   "feature": "36",
+   "why": "Dahl's temporal gradient, a row feature 36's legal limb depends on"
+  },
+  {
+   "index": 1254,
+   "feature": "36",
+   "why": "Dahl's temporal gradient, a row feature 36's legal limb depends on"
+  },
+  {
+   "index": 1256,
+   "feature": "36",
+   "why": "Dahl's temporal gradient, a row feature 36's legal limb depends on"
+  },
+  {
+   "index": 1257,
+   "feature": "36",
+   "why": "Dahl's temporal gradient, a row feature 36's legal limb depends on"
+  },
+  {
+   "index": 1260,
+   "feature": "36",
+   "why": "SimpleQA, a row feature 36's rule depends on"
+  },
+  {
+   "index": 1261,
+   "feature": "36",
+   "why": "SimpleQA, a row feature 36's rule depends on"
+  },
+  {
+   "index": 1264,
+   "feature": "36",
+   "why": "The Lexis vendor claim, a row feature 36's rule depends on"
+  },
+  {
+   "index": 1265,
+   "feature": "36",
+   "why": "The Lexis vendor claim, a row feature 36's rule depends on"
+  },
+  {
+   "index": 1270,
+   "feature": "36",
+   "why": "Tow, a row feature 36's rule depends on"
+  },
+  {
+   "index": 1271,
+   "feature": "36",
+   "why": "Tow, a row feature 36's rule depends on"
+  },
+  {
+   "index": 1273,
+   "feature": "36",
+   "why": "Tow, a row feature 36's rule depends on"
+  },
+  {
+   "index": 1274,
+   "feature": "36",
+   "why": "ProHist, a row feature 36's rule depends on"
+  },
+  {
+   "index": 1277,
+   "feature": "36",
+   "why": "ProHist, a row feature 36's rule depends on"
+  },
+  {
+   "index": 1278,
+   "feature": "36",
+   "why": "ProHist, a row feature 36's rule depends on"
+  },
+  {
+   "index": 1279,
+   "feature": "36",
+   "why": "ProHist, a row feature 36's rule depends on"
+  },
+  {
+   "index": 1280,
+   "feature": "37",
+   "why": "The live G15 policy text, the record-register enforcement rule that the critic says has no verified row at all"
+  },
+  {
+   "index": 1281,
+   "feature": "37",
+   "why": "The live G15 policy text, the record-register enforcement rule that the critic says has no verified row at all"
+  },
+  {
+   "index": 1282,
+   "feature": "37",
+   "why": "The live G15 policy text, the record-register enforcement rule that the critic says has no verified row at all"
+  },
+  {
+   "index": 1283,
+   "feature": "37",
+   "why": "The live G15 policy text, the record-register enforcement rule that the critic says has no verified row at all"
+  },
+  {
+   "index": 1294,
+   "feature": "37",
+   "why": "Herbold et al. 2023: teachers rated ChatGPT essays a point higher on a seven-point scale; words per sentence 18.60 vs 19.57; every generated conclusion opens the same way"
+  },
+  {
+   "index": 1295,
+   "feature": "37",
+   "why": "Herbold et al. 2023: teachers rated ChatGPT essays a point higher on a seven-point scale; words per sentence 18.60 vs 19.57; every generated conclusion opens the same way"
+  },
+  {
+   "index": 1296,
+   "feature": "37",
+   "why": "Herbold et al. 2023: teachers rated ChatGPT essays a point higher on a seven-point scale; words per sentence 18.60 vs 19.57; every generated conclusion opens the same way"
+  },
+  {
+   "index": 1297,
+   "feature": "37",
+   "why": "Herbold et al. 2023: teachers rated ChatGPT essays a point higher on a seven-point scale; words per sentence 18.60 vs 19.57; every generated conclusion opens the same way"
+  },
+  {
+   "index": 1298,
+   "feature": "37",
+   "why": "Herbold et al. 2023: teachers rated ChatGPT essays a point higher on a seven-point scale; words per sentence 18.60 vs 19.57; every generated conclusion opens the same way"
+  },
+  {
+   "index": 1299,
+   "feature": "37",
+   "why": "HC3, the human-vs-ChatGPT comparison corpus; the critic marks one of its four rows verified, the rest triaged out and still uncited"
+  },
+  {
+   "index": 1300,
+   "feature": "37",
+   "why": "HC3, the human-vs-ChatGPT comparison corpus; the critic marks one of its four rows verified, the rest triaged out and still uncited"
+  },
+  {
+   "index": 1302,
+   "feature": "37",
+   "why": "HC3, the human-vs-ChatGPT comparison corpus; the critic marks one of its four rows verified, the rest triaged out and still uncited"
+  },
+  {
+   "index": 1303,
+   "feature": "37",
+   "why": "Jentzsch and Kersting: 90 per cent of 1,008 jokes were 25 jokes"
+  },
+  {
+   "index": 1304,
+   "feature": "37",
+   "why": "Naous et al., fetched by the second-catalogue finder then skipped by the count-keyed triage"
+  },
+  {
+   "index": 1305,
+   "feature": "37",
+   "why": "Mohammadi, fetched by the second-catalogue finder then skipped by the count-keyed triage"
+  },
+  {
+   "index": 1306,
+   "feature": "37",
+   "why": "Mohammadi, fetched by the second-catalogue finder then skipped by the count-keyed triage"
+  },
+  {
+   "index": 1307,
+   "feature": "37",
+   "why": "Yakura et al., a primary behind a relay the section still counts as support, fetched then skipped by the triage"
+  },
+  {
+   "index": 1308,
+   "feature": "37",
+   "why": "Yakura et al., a primary behind a relay the section still counts as support, fetched then skipped by the triage"
+  },
+  {
+   "index": 1309,
+   "feature": "37",
+   "why": "Huang's Table 1, fetched then skipped by the count-keyed triage"
+  },
+  {
+   "index": 1310,
+   "feature": "37",
+   "why": "Huang's Table 1, fetched then skipped by the count-keyed triage"
+  },
+  {
+   "index": 1311,
+   "feature": "37",
+   "why": "Huang's Table 1, fetched then skipped by the count-keyed triage"
+  },
+  {
+   "index": 1312,
+   "feature": "37",
+   "why": "Huang's Table 1, fetched then skipped by the count-keyed triage"
+  },
+  {
+   "index": 1314,
+   "feature": "37",
+   "why": "Triedman and Mantzarlis, fetched then skipped by the count-keyed triage"
+  },
+  {
+   "index": 1315,
+   "feature": "37",
+   "why": "Triedman and Mantzarlis, fetched then skipped by the count-keyed triage"
+  },
+  {
+   "index": 1317,
+   "feature": "37",
+   "why": "The G15 RfC closes, fetched then triaged out, so still uncited"
+  },
+  {
+   "index": 1318,
+   "feature": "37",
+   "why": "The G15 RfC closes, fetched then triaged out, so still uncited"
+  },
+  {
+   "index": 1319,
+   "feature": "37",
+   "why": "The G15 RfC closes, fetched then triaged out, so still uncited"
+  },
+  {
+   "index": 1320,
+   "feature": "37",
+   "why": "The G15 RfC closes, fetched then triaged out, so still uncited"
+  },
+  {
+   "index": 1322,
+   "feature": "37",
+   "why": "The Observatoire report, fetched by the second-catalogue finder then skipped by the triage"
+  },
+  {
+   "index": 1323,
+   "feature": "37",
+   "why": "The Observatoire report, fetched by the second-catalogue finder then skipped by the triage"
+  },
+  {
+   "index": 1324,
+   "feature": "37",
+   "why": "The Observatoire report, fetched by the second-catalogue finder then skipped by the triage"
+  },
+  {
+   "index": 1325,
+   "feature": "37",
+   "why": "The Observatoire report, fetched by the second-catalogue finder then skipped by the triage"
+  },
+  {
+   "index": 1327,
+   "feature": "37",
+   "why": "The Observatoire report, fetched by the second-catalogue finder then skipped by the triage"
+  },
+  {
+   "index": 1328,
+   "feature": "37",
+   "why": "The German \"Anzeichen für KI-generierte Inhalte\" page, the third catalogue, zero verified rows"
+  },
+  {
+   "index": 1329,
+   "feature": "37",
+   "why": "The German \"Anzeichen für KI-generierte Inhalte\" page, the third catalogue, zero verified rows"
+  },
+  {
+   "index": 1330,
+   "feature": "37",
+   "why": "The German \"Anzeichen für KI-generierte Inhalte\" page, the third catalogue, zero verified rows"
+  },
+  {
+   "index": 1331,
+   "feature": "37",
+   "why": "The German \"Anzeichen für KI-generierte Inhalte\" page, the third catalogue, zero verified rows"
+  },
+  {
+   "index": 1332,
+   "feature": "37",
+   "why": "The German \"Anzeichen für KI-generierte Inhalte\" page, the third catalogue, zero verified rows"
+  },
+  {
+   "index": 1336,
+   "feature": "37",
+   "why": "Wiki Education's other rows, fetched then skipped by the count-keyed triage"
+  },
+  {
+   "index": 1339,
+   "feature": "37",
+   "why": "Wiki Education's other rows, fetched then skipped by the count-keyed triage"
+  },
+  {
+   "index": 1340,
+   "feature": "37",
+   "why": "Chambers and Kelley, fetched at [550], four rows triaged; the critic says one verification closes it"
+  },
+  {
+   "index": 1341,
+   "feature": "37",
+   "why": "Chambers and Kelley, fetched at [550], four rows triaged; the critic says one verification closes it"
+  },
+  {
+   "index": 1342,
+   "feature": "37",
+   "why": "Chambers and Kelley, fetched at [550], four rows triaged; the critic says one verification closes it"
+  },
+  {
+   "index": 1343,
+   "feature": "37",
+   "why": "Chambers and Kelley, fetched at [550], four rows triaged; the critic says one verification closes it"
+  },
+  {
+   "index": 1345,
+   "feature": "37",
+   "why": "Reinhart at the PDF, fetched then skipped by the count-keyed triage"
+  },
+  {
+   "index": 1346,
+   "feature": "37",
+   "why": "Reinhart at the PDF, fetched then skipped by the count-keyed triage"
+  },
+  {
+   "index": 1347,
+   "feature": "37",
+   "why": "Reinhart at the PDF, fetched then skipped by the count-keyed triage"
+  },
+  {
+   "index": 1348,
+   "feature": "37",
+   "why": "Reinhart at the PDF, fetched then skipped by the count-keyed triage"
+  },
+  {
+   "index": 1349,
+   "feature": "37",
+   "why": "Reinhart at the PDF, fetched then skipped by the count-keyed triage"
+  },
+  {
+   "index": 1350,
+   "feature": "37",
+   "why": "Reinhart at the PDF, fetched then skipped by the count-keyed triage"
+  },
+  {
+   "index": 1351,
+   "feature": "37",
+   "why": "Kobak at the PDF, fetched then skipped by the count-keyed triage"
+  },
+  {
+   "index": 1352,
+   "feature": "37",
+   "why": "Kobak at the PDF, fetched then skipped by the count-keyed triage"
+  },
+  {
+   "index": 1353,
+   "feature": "37",
+   "why": "Kobak at the PDF, fetched then skipped by the count-keyed triage"
+  },
+  {
+   "index": 1354,
+   "feature": "37",
+   "why": "Brooks re-verified, fetched then skipped by the count-keyed triage"
+  },
+  {
+   "index": 1355,
+   "feature": "37",
+   "why": "Brooks re-verified, fetched then skipped by the count-keyed triage"
+  },
+  {
+   "index": 1356,
+   "feature": "37",
+   "why": "The Russell, Karpinska and Iyyer primary, fetched then skipped by the count-keyed triage"
+  },
+  {
+   "index": 1357,
+   "feature": "37",
+   "why": "The Russell, Karpinska and Iyyer primary, fetched then skipped by the count-keyed triage"
+  },
+  {
+   "index": 1358,
+   "feature": "37",
+   "why": "The Russell, Karpinska and Iyyer primary, fetched then skipped by the count-keyed triage"
+  },
+  {
+   "index": 1359,
+   "feature": "37",
+   "why": "The Russell, Karpinska and Iyyer primary, fetched then skipped by the count-keyed triage"
+  },
+  {
+   "index": 1361,
+   "feature": "38",
+   "why": "r/worldbuilding's rule, reached by the finder and then skipped by the triage"
+  },
+  {
+   "index": 1363,
+   "feature": "38",
+   "why": "Appelcline, a row feature 38's generated-archive rule depends on"
+  },
+  {
+   "index": 1365,
+   "feature": "38",
+   "why": "Codega, a row feature 38's generated-archive rule depends on"
+  },
+  {
+   "index": 1369,
+   "feature": "38",
+   "why": "Codega, a row feature 38's generated-archive rule depends on"
+  },
+  {
+   "index": 1377,
+   "feature": "38",
+   "why": "Peltast, a row feature 38's generated-archive rule depends on"
+  },
+  {
+   "index": 1380,
+   "feature": "38",
+   "why": "Peltast, a row feature 38's generated-archive rule depends on"
+  },
+  {
+   "index": 1381,
+   "feature": "38",
+   "why": "Peltast, a row feature 38's generated-archive rule depends on"
+  },
+  {
+   "index": 1385,
+   "feature": "38",
+   "why": "Shea, a worldbuilding-community row the rule depends on"
+  },
+  {
+   "index": 1387,
+   "feature": "38",
+   "why": "Furze, a worldbuilding-community row the rule depends on"
+  },
+  {
+   "index": 1390,
+   "feature": "38",
+   "why": "Obsidian Portal, reached by the finder and then skipped by the triage"
+  },
+  {
+   "index": 1391,
+   "feature": "38",
+   "why": "Tabletop Sentinel, a worldbuilding-community row the rule depends on"
+  },
+  {
+   "index": 1392,
+   "feature": "38",
+   "why": "EN World, reached by the finder and then skipped by the triage"
+  },
+  {
+   "index": 1393,
+   "feature": "38",
+   "why": "The itch.io jam policy, reached by the finder and then skipped by the triage"
+  },
+  {
+   "index": 1395,
+   "feature": "38",
+   "why": "The Three Witches review, a row feature 38's generated-archive rule depends on"
+  },
+  {
+   "index": 1396,
+   "feature": "38",
+   "why": "The Three Witches review, a row feature 38's generated-archive rule depends on"
+  },
+  {
+   "index": 1398,
+   "feature": "38",
+   "why": "The Three Witches review, a row feature 38's generated-archive rule depends on"
+  }
+ ],
+ "count": 231,
+ "notes": "Reader 2, independent: I expanded every bracketed number in critic-ai.md section 2 and section 5.A item A with python3 (ranges [a]-[b] inclusive, comma lists individually) and cross-checked the hand-built groups against a regex sweep of those same two sections, which agreed exactly at 238 bracketed indices with no index shared between the two sections. Rule 2 then removed the four the critic itself calls verified - one HC3 row (VERIFIED_VERBATIM) and the Holtzman 1044-1053 carve-out, which resolved against the state to exactly three rows (1046, 1047, 1048, all VERIFIED_SUBSTANCE), matching the critic's wording - leaving a raw candidate count of 234 before the state check. Each of those 234 was looked up in state-ai.json verdicts by string key, 231 came back SKIPPED_TRIAGE and are included while the other 3 are reported in notSkipped with their verdicts rather than dropped; note that \"35, the NYT rows above\" in 5.A carries no bracketed number inside 5.A itself (those indices sit in section 3, which this reader was told not to use), so no NYT row is claimed here."
+}

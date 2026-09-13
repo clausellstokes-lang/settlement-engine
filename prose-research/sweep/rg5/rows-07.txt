@@ -1,0 +1,499 @@
+### 626 [VERIFIED_VERBATIM] src=George R.R. Martin, "Critics and Reviewers" (1979-09-29)
+CLAIM: Martin says the ideal reader is absorbed into the narrative and lives events as the viewpoint character lives them, learning things as he learns them.
+TW: lives events as the viewpoint character lives them
+NOTE: Speech: 'Ideally a reader is absorbed into a narratives and lives events as the viewpoint character lives them, learns things as he learns them, and so on.' Quote verbatim; all three limbs present ('narratives' is a typo in the page text).
+
+### 627 [VERIFIED_VERBATIM] src=George R.R. Martin, "Critics and Reviewers" (1979-09-29)
+CLAIM: Martin says that when he writes a story he organises events and information as carefully as he can to give the reader a vicarious experience.
+TW: I organize things - events and information and the like
+NOTE: Speech: 'Look, when I sit down and write a story, I'm trying to give my reader a vicarious experience. I organize things - events and information and the like - as carefully as I can'. Quote verbatim (em dashes match); both limbs present.
+
+### 628 [VERIFIED_VERBATIM] src=George R.R. Martin, "Critics and Reviewers" (1979-09-29)
+CLAIM: Martin says we read fiction to find out what happens.
+TW: We read fiction to find out what happens
+NOTE: Speech, immediately after the Garp/Jillsy Sloper quotation: 'We eat to fuel our bodies, We read fiction to find out what happens.' Quote verbatim; the section placement in the claim's page field is correct.
+
+### 629 [VERIFIED_VERBATIM] src=George R.R. Martin, "Critics and Reviewers" (1979-09-29)
+CLAIM: Martin says the ending of a piece of fiction should grow out of what has gone before and be logical, consistent and integral to the rest of the story.
+TW: it needs to be logical and consistent and integral
+NOTE: Speech, in the passage on the sacrosanct protected ending: 'The ending of a piece of fiction should grow out of what has gone before; it needs to be logical and consistent and integral to the rest of the story.' Quote verbatim; both limbs present.
+
+### 630 [VERIFIED_VERBATIM] src=George R.R. Martin, "On Fantasy" (1996)
+CLAIM: Martin writes that the best fantasy is written in the language of dreams.
+TW: The best fantasy is written in the language of dreams
+NOTE: Verbatim opening sentence of the essay body on the live georgerrmartin.com page (HTTP 200, raw HTML read). All limbs supported.
+
+### 631 [VERIFIED_VERBATIM] src=George R.R. Martin, "On Fantasy" (1996)
+CLAIM: In "On Fantasy" Martin sets fantasy against reality using named concrete places, among them the strip malls of Burbank and the smokestacks of Cleveland.
+TW: Reality is the strip malls of Burbank, the smokestacks of Cleveland
+NOTE: Second body paragraph, verbatim: 'Reality is the strip malls of Burbank, the smokestacks of Cleveland, a parking garage in Newark.' The paragraph sets Fantasy against Reality throughout ('Fantasy is the towers of Minas Tirith…'), so the named-concrete-places limb holds.
+
+### 632 [VERIFIED_VERBATIM] src=George R.R. Martin, "The Usual", GoH speech, Windycon X (1983-10-07)
+CLAIM: Martin says a writer who repeats himself too often is on the road toward stagnation and self-parody.
+TW: on the road toward stagnation and self-parody
+NOTE: Live page, raw HTML: 'I think the work has to change, that a writer who repeats himself too often is on the road toward stagnation and self-parody.' Page header confirms provenance: 'Guest of Honor Speech / Delivered at Windycon X / October 7, 1983', and the passage sits in the paragraph introducing The Armageddon Rag.
+
+### 633 [VERIFIED_VERBATIM] src=George R.R. Martin, "The Usual" (1983-10-07)
+CLAIM: Martin says all writers repeat themselves to a certain extent, that themes recur and a distinctive voice develops.
+TW: themes recur, a distinctive voice develops
+NOTE: Verbatim: 'All writers repeat themselves to a certain extent, of course; themes recur, a distinctive voice develops, characteristic concerns and literary motifs become discernible.' Same paragraph as index 632.
+
+### 634 [VERIFIED_VERBATIM] src=Unsigned Citadel review, westeros.org (site copyright Elio M. García Jr. and Linda Antonss
+CLAIM: The Westeros.org Citadel review says the history in A Game of Thrones is unveiled slowly, piece by piece like a jigsaw puzzle forming into place haphazardly.
+TW: piece-by-piece like a jigsaw puzzle forming into place haphazardly
+NOTE: Wayback raw id_ capture fetched (HTTP 200): 'Slowly the history is unveiled, piece-by-piece like a jigsaw puzzle forming into place haphazardly, and layers of events are formed…' — fifth paragraph, as cited. Page footer confirms 'copyright © 1999-2001 Elio M. García and Linda Antonsson'; the review carries no byline.
+
+### 635 [VERIFIED_VERBATIM] src=Unsigned Citadel review, westeros.org (site copyright Elio M. García Jr. and Linda Antonss
+CLAIM: The Westeros.org Citadel review says A Game of Thrones has more than a few point-of-view characters whose chapters are always divided by other points of view lying in between.
+TW: more than a few POV characters whose chapters are always divided by other POVs lying in-between
+NOTE: Verbatim on the page. Note the framing is a negative conditional — 'If you want something written… without a huge cast of characters and more than a few POV characters whose chapters are always divided by other POVs lying in-between, then A Game of Thrones may not be for you' — so the review attributes the feature to the book by clear implication rather than by direct assertion.
+
+### 636 [VERIFIED_VERBATIM] src=Unsigned Citadel review, westeros.org (site copyright Elio M. García Jr. and Linda Antonss
+CLAIM: The Westeros.org Citadel review says that where The Lord of the Rings is inspired by epic legends and myth, A Game of Thrones is more grounded in history and reality.
+TW: this one is more grounded in history and reality
+NOTE: Verbatim: 'Where that great work is inspired by epic legends and myth, this one is more grounded in history and reality,' the sentence immediately after naming The Lord of the Rings. Both limbs supported.
+
+### 637 [VERIFIED_VERBATIM] src=Dimitris Spathis, Medium, 29 March 2015
+CLAIM: Spathis's text-mining comparison of four best-selling series reports that A Song of Ice and Fire lacks -ly adverbs relative to the other three series.
+TW: the lack of -ly adverbs in Game of Thrones
+NOTE: Section '4) Adverbs', verbatim: 'The first observation is the lack of -ly adverbs in Game of Thrones.' Four-series text-mining comparison confirmed ('4 authors. 19 books. 3,896,568 words.'; Martin's series explicitly glossed as A Song of Ice and Fire). The relative-to-the-other-three limb is carried by the article's comparative frame and by the key takeaway 'significantly fewer -ly adverbs'. Medium live URL returned HTTP 403 to a browser UA; recovered by Wayback raw id_ captures 20150830212411 (original 2015 page) and 20250828164038 — both carry identical wording.
+
+### 638 [VERIFIED_VERBATIM] src=Dimitris Spathis, Medium, 29 March 2015
+CLAIM: Spathis's key-takeaway list states that Game of Thrones contains significantly fewer -ly adverbs than the other series analysed.
+TW: Game of Thrones contains significantly fewer -ly adverbs.
+NOTE: Key takeaways bullet, verbatim. The comparator ('than the other series analysed') is not spelled out in the bullet but is unambiguous in a four-series comparison whose other bullets name the rival series. Medium live URL returned HTTP 403 to a browser UA; recovered by Wayback raw id_ captures 20150830212411 (original 2015 page) and 20250828164038 — both carry identical wording.
+
+### 639 [VERIFIED_VERBATIM] src=Dimitris Spathis, Medium, 29 March 2015
+CLAIM: Spathis's adverb finding is stated only for the -ly suffixed form of the adverb, never for adverbs as a whole class.
+TW: significantly fewer -ly adverbs
+NOTE: Checked the full raw article text: every adverb finding specifies the -ly form — section 4 ('the lack of -ly adverbs in Game of Thrones') and the key takeaway ('significantly fewer -ly adverbs'); the only other adverb mentions are the section heading '4) Adverbs', the contents line 'Top adverbs', an aside about Tolkien 'abusing swiftly', and the lexical-density definition. No whole-class adverb finding appears in the text. The unread chart image is not a statement. Medium live URL returned HTTP 403 to a browser UA; recovered by Wayback raw id_ captures 20150830212411 (original 2015 page) and 20250828164038 — both carry identical wording.
+
+### 640 [VERIFIED_SUBSTANCE] src=Dimitris Spathis, Medium, 29 March 2015
+CLAIM: Spathis reports no numeric adverb rate in the article's running text; the adverb comparison is carried entirely by a chart image.
+TW: Section 4 gives no figures; only a chart image follows.
+NOTE: No quote supplied and none needed: section '4) Adverbs' is two sentences plus an aside, containing no rate, count or percentage, and is followed by an embedded figure (the 2025 capture renders the placeholder 'Press enter or click to view image in full size'; the contents list names 'Top adverbs' as a chart section). The quantitative comparison is therefore carried by the image alone. Medium live URL returned HTTP 403 to a browser UA; recovered by Wayback raw id_ captures 20150830212411 (original 2015 page) and 20250828164038 — both carry identical wording.
+
+### 641 [VERIFIED_VERBATIM] src=Dimitris Spathis, Medium, 29 March 2015
+CLAIM: Spathis removed character names, along with very frequent words and phrases, as stopwords before ranking parts of speech.
+TW: as well as character names
+NOTE: 'Technical' section, verbatim: 'Very frequent words and phrases such as of, the or i don’t, would you etc. were eliminated as stopwords, as well as character names.' The 'before ranking parts of speech' limb is not stated as an explicit ordering, but stopword elimination necessarily precedes the frequency rankings the article reports (top nouns/verbs/adverbs/adjectives). Medium live URL returned HTTP 403 to a browser UA; recovered by Wayback raw id_ captures 20150830212411 (original 2015 page) and 20250828164038 — both carry identical wording.
+
+### 642 [VERIFIED_VERBATIM] src=Dimitris Spathis, Medium, 29 March 2015
+CLAIM: Spathis's corpus is 3,896,568 words drawn from nineteen books by four authors.
+TW: 4 authors. 19 books. 3,896,568 words.
+NOTE: Verbatim in the introduction; the preceding sentence names the four authors (Rowling, Martin, Collins, Tolkien). Every limb supported. Medium live URL returned HTTP 403 to a browser UA; recovered by Wayback raw id_ captures 20150830212411 (original 2015 page) and 20250828164038 — both carry identical wording.
+
+### 643 [VERIFIED_VERBATIM] src=Dimitris Spathis, Medium, 29 March 2015
+CLAIM: Spathis's Automated Readability Index result places Game of Thrones at the comprehension level of 11-year-olds.
+TW: Game of Thrones to 11-year-olds
+NOTE: Section '7) Understandability', verbatim: 'So, on average, the thresholds for understanding are: Hunger Games correspond to 10-year-olds, Game of Thrones to 11-year-olds, Lord of the Rings to 14-year-olds and Harry Potter to 15-year-olds.' The section is explicitly the Automated Readability Index (ARI). Medium live URL returned HTTP 403 to a browser UA; recovered by Wayback raw id_ captures 20150830212411 (original 2015 page) and 20250828164038 — both carry identical wording.
+
+### 644 [VERIFIED_VERBATIM] src=Dimitris Spathis, Medium, 29 March 2015
+CLAIM: Spathis reports that Martin's most frequent colour adjectives across the series are red, white and grey.
+TW: Martin mentions red, white, grey most
+NOTE: Section '5) Adjectives', verbatim: 'Notable is the usage of colors by author: Martin mentions red, white, grey most, Rowling black, Collins white and Tolkien black, white, grey and green.' The quoted fragment appears word for word and the colour trio matches. Medium live URL returned HTTP 403 to a browser UA; recovered by Wayback raw id_ captures 20150830212411 (original 2015 page) and 20250828164038 — both carry identical wording.
+
+### 645 [VERIFIED_VERBATIM] src=Dimitris Spathis, Medium, 29 March 2015
+CLAIM: Spathis reports that lady and queen are among the most frequent nouns in the Game of Thrones books.
+TW: Gender equality is probably apparent in Game of Thrones lady, queen
+NOTE: Section '2) Nouns' reads: "Gender “equality” is probably apparent in Game of Thrones lady, queen as well as in Hunger Games mother"; quote appears word for word. Key takeaways add "high occurrence of words such as lady, queen and mother". Raw page reached via Wayback capture 20250828164038id_ (live Medium returned 403).
+
+### 646 [VERIFIED_VERBATIM] src=Dimitris Spathis, Medium, 29 March 2015
+CLAIM: Spathis offers Stephen King's advice against adverbs only as speculation about why Martin's -ly count is low, not as anything Martin said.
+TW: Perhaps George Martin follows Stephen King’s advice
+NOTE: Section '4) Adverbs' reads: "The first observation is the lack of -ly adverbs in Game of Thrones. Perhaps George Martin follows Stephen King’s advice ‘The adverb is not your friend...’". Quote verbatim; 'Perhaps' marks it as Spathis's own speculation, and nothing on the page attributes it to Martin. Raw page via Wayback.
+
+### 647 [VERIFIED_VERBATIM] src=Dimitris Spathis, Medium, 29 March 2015
+CLAIM: Spathis reports that the largest books in his four-series analysis score low on lexical density.
+TW: Indeed, the largest books of our analysis behave poorly
+NOTE: Section '6) Lexical Density' reads: "It is obvious to draw parallels between the book length and its lexical density... Indeed, the largest books of our analysis behave poorly." Quote verbatim; the analysis covers four series / 19 books. Raw page via Wayback.
+
+### 648 [VERIFIED_VERBATIM] src=WordsRated (Danny McLoughlin), 'Game of Thrones Book Stats'
+CLAIM: WordsRated's length table totals 344 chapters across the five published A Song of Ice and Fire novels.
+TW: Total | 4,224 | 344 | 1,736,054
+NOTE: Table 'Length of A Song of Ice and Fire books' Total row gives Chapters 344 across the five published novels (73+70+82+46+73=344). Raw page reached via Wayback capture 20260210045808id_ (live wordsrated.com returned a WAF '454 Request blocked' interstitial to curl).
+
+### 649 [VERIFIED_VERBATIM] src=WordsRated (Danny McLoughlin), 'Game of Thrones Book Stats'
+CLAIM: WordsRated's length table totals 1,736,054 words across the five published novels.
+TW: Total | 4,224 | 344 | 1,736,054
+NOTE: Same Total row gives Words 1,736,054; page adds "There are more than 1.7 million words in the 5 A Song of Ice and Fire novels". Raw page via Wayback.
+
+### 650 [VERIFIED_VERBATIM] src=WordsRated (Danny McLoughlin), 'Game of Thrones Book Stats'
+CLAIM: WordsRated's length table gives A Storm of Swords 414,604 words in 82 chapters.
+TW: A Storm of Swords | 973 | 82 | 414,604
+NOTE: Table row for A Storm of Swords: Pages 973, Chapters 82, Words 414,604 — both limbs of the claim present. Raw page via Wayback.
+
+### 651 [VERIFIED_VERBATIM] src=WordsRated (Danny McLoughlin), 'Game of Thrones Book Stats'
+CLAIM: WordsRated states that the A Song of Ice and Fire novels are written in third person limited.
+TW: The books are written in 3rd person limited.
+NOTE: Section 'Characters, narrative device and perspective' opens with that exact sentence. Raw page via Wayback.
+
+### 652 [VERIFIED_VERBATIM] src=WordsRated (Danny McLoughlin), 'Game of Thrones Book Stats'
+CLAIM: WordsRated counts nine point-of-view characters in the first novel.
+TW: The first book takes place from the perspective of 9 different characters
+NOTE: Bullet under 'How many chapters are there from each character’s perspective in GOT?' reads exactly that; the next bullet gives 31 by the fifth book. Raw page via Wayback.
+
+### 653 [VERIFIED_VERBATIM] src=Nicolangelo Becce, Anglistica AION 22.2 (2018), 83-94
+CLAIM: Becce's LIWC measurement of the dialogue in Martin's A Game of Thrones gives 11,02 words per sentence for male characters and 10,59 for female characters.
+TW: Words/sentence 11,02 10,59 (GoT dialogues, male/female)
+NOTE: Tab. 1, p. 88: the Words/sentence row under 'GoT dialogues' gives 11,02 (Male Characters) and 10,59 (Female Characters). The LIWC limb holds — the methodology section names LIWC2015 as the tool. PDF fetched directly (HTTP 200) and text extracted with pypdf.
+
+### 654 [VERIFIED_VERBATIM] src=Nicolangelo Becce, Anglistica AION 22.2 (2018), 83-94
+CLAIM: Becce measures the male characters' dialogue in Martin's novel at 81890 words, 84% of all dialogue in the book.
+TW: Word count (%) 81890 (84%) 15026 (16%)
+NOTE: Tab. 1, p. 88, first row, GoT dialogues: male characters 81890 (84%) against female 15026 (16%); surrounding prose confirms these are all dialogues in the novel. PDF text extracted directly.
+
+### 655 [VERIFIED_VERBATIM] src=Nicolangelo Becce, Anglistica AION 22.2 (2018), 83-94
+CLAIM: Becce finds that in every one of the three versions of the story the male characters' utterances have longer sentences and longer words than the female characters'.
+TW: in each and every case the male characters’ utterances are characterized by having longer sentences
+NOTE: p. 88: "While the difference ... is less conspicuous, in each and every case the male characters’ utterances are characterized by having longer sentences and using longer words compared to the female counterparts" — said of all three versions (novel, graphic novel, TV series). Quote verbatim.
+
+### 656 [VERIFIED_VERBATIM] src=Nicolangelo Becce, Anglistica AION 22.2 (2018), 83-94
+CLAIM: Becce reports that among the eight viewpoint characters the one exception to the pattern is words per sentence in the novel, where the female viewpoint characters lead.
+TW: Except for the number of words per sentence ... the female characters have a slight advantage
+NOTE: p. 89, discussion of Tab. 2 (the eight viewpoint characters): "only in one case do the female characters ‘perform better’... Except for the number of words per sentence in the original version of A Game of Thrones, where the female characters have a slight advantage". Tab. 2 confirms: GoT Words/sentence male AVG 10,11 vs female AVG 10,61. Quote verbatim.
+
+### 657 [VERIFIED_VERBATIM] src=A. R. Rivera, 'A Brief Linguistic Exam of A Song Of Ice And Fire', 10 September 2023
+CLAIM: Rivera observes that the high-born and low-born characters of the novels are given different speech, a dialect ruled by rank rather than region.
+TW: The high-born characters also speak differently than the characters of lower birth. A sort of dialect ruled by rank rather than region.
+NOTE: Both limbs are consecutive sentences on the page, and the m’Lord / my Lord / your Grace examples follow. Live page fetched directly with a browser user agent (HTTP 200).
+
+### 658 [VERIFIED_VERBATIM] src=A. R. Rivera, 'A Brief Linguistic Exam of A Song Of Ice And Fire', 10 September 2023
+CLAIM: Rivera counts the insult against Jon Snow repeated five times within a few paragraphs of A Game of Thrones and calls it lexical cohesion.
+TW: In just a few paragraphs, the insult is repeated five times for emphasis
+NOTE: The sentence follows a block cited "(A Game Of Thrones, Martin, pp. 118-19)" about the insult 'bastard' slung at Jon Snow, and continues "this kind of repetition is called lexical cohesion". Every limb supported. Live page fetched directly.
+
+### 659 [VERIFIED_VERBATIM] src=A. R. Rivera, 'A Brief Linguistic Exam of A Song Of Ice And Fire', 10 September 2023
+CLAIM: Rivera reports a lexical density score of between 4 and 4.5 for A Game of Thrones, which she calls quite low.
+TW: A Game of Thrones has a score between 4 and 4.5, which is quite low
+NOTE: Lexical-density paragraph, compared against the first Harry Potter book. Quote verbatim; 'quite low' is the page's own wording. Live page fetched directly.
+
+### 660 [VERIFIED_VERBATIM] src=A. R. Rivera, 'A Brief Linguistic Exam of A Song Of Ice And Fire', 10 September 2023
+CLAIM: Rivera argues Martin's archaic diction works because each old term sits in a context that lets the reader decipher its older meaning without disruption.
+TW: Each term is used in a context that provides a reader with the ability to decipher the older meaning
+NOTE: Raw page fetched live (HTTP 200). Quote 'not only archaic diction, but synonymy and antonymy, semantic shifts, and varying registers' is verbatim in the opening paragraph; the deciphering limb is carried verbatim by the sentence closing the 'elsewise'/'without' paragraph: 'Each term is used in a context that provides a reader with the ability to decipher the older meaning, thus enriching the reading experience without disruption.' Every limb supported.
+
+### 661 [VERIFIED_VERBATIM] src=David J. Peterson, 'The Header Script', Dothraki.com, 21 September 2011
+CLAIM: Peterson states that as of 21 September 2011 the Dothraki he built had reached 3,163 words.
+TW: Dothraki is now up to 3,163 words
+NOTE: Raw page fetched live (HTTP 200). Verbatim near the end of the post: 'Also, for the curious, Dothraki is now up to 3,163 words: More words than Mr. Padre Tony Gwynn has hits...'. Byline 'Published September 21, 2011 By David J. Peterson' supports the date and the authorship limb.
+
+### 662 [VERIFIED_VERBATIM] src=David J. Peterson, 'Developing Canon', Dothraki.com, 18 March 2012
+CLAIM: Peterson treats the spellings of the Dothraki words printed in Martin's books as canon that his own language had to accommodate.
+TW: The spellings in the books are canon.
+NOTE: Raw page fetched live (HTTP 200). Verbatim as principle 1 of the numbered list, introduced by 'In analyzing the words in the books, I held to the following principles'. The accommodation limb is further supported by 'This doesn't mean, though, that the spellings in the books ought to change... jh is just the book's way of spelling Dothraki zh'.
+
+### 663 [VERIFIED_VERBATIM] src=David J. Peterson, 'Developing Canon', Dothraki.com, 18 March 2012
+CLAIM: Peterson reports that in Martin's Dothraki material the letters p and b occur only in the two names Pono and Bharbo.
+TW: they only appear in two places: In the names Pono and Bharbo
+NOTE: Raw page fetched live (HTTP 200). Full sentence pair: 'The letters p and b occur almost nowhere in Dothraki. In fact they only appear in two places: In the names Pono and Bharbo.' The post's frame is the book-attested corpus ('the Dothraki that existed in the books before I took a crack at it'), and the follow-on 'have them survive only in names' confirms the reading. Note the page's own hedge 'almost nowhere' sits beside the absolute 'only appear in two places'; the claim tracks the latter.
+
+### 664 [VERIFIED_VERBATIM] src=David J. Peterson, 'Developing Canon', Dothraki.com, 18 March 2012
+CLAIM: Peterson describes the Dothraki in Martin's books as a body of material that already existed before he began work on the language.
+TW: the Dothraki that existed in the books before I took a crack at it
+NOTE: Raw page fetched live (HTTP 200). Verbatim in the second paragraph: 'let's take a look at the Dothraki that existed in the books before I took a crack at it.' Every limb supported.
+
+### 665 [VERIFIED_VERBATIM] src=HBO official press release, dothraki.conlang.org, 12 April 2010
+CLAIM: HBO's 2010 press release credits the Dothraki language with a vocabulary of more than 1,800 words at the time of the announcement.
+TW: an extensive vocabulary of more than 1,800 words
+NOTE: Live host dothraki.conlang.org does not resolve (curl exit 6, DNS timeout on the subdomain). Recovered via Wayback raw capture https://web.archive.org/web/20200817120827id_/http://dothraki.conlang.org/official-hbo-press-release/ (HTTP 200, 6858 bytes). Quote verbatim: 'It has its own unique sound, an extensive vocabulary of more than 1,800 words and a complex grammatical structure.' Page is dated 'April 12th, 2010' and headed 'EXPERT CREATES LANGUAGE FOR NEW HBO SERIES GAME OF THRONES', supporting the announcement-time limb.
+
+### 668 [VERIFIED_VERBATIM] src=DeAnna Knippling, Wonderland Press, 'A Song of Ice and Fire: Structure/Word Count Case Stu
+CLAIM: Knippling argues Martin's main point-of-view character in each book holds an undistinguished share of chapters in the first half and dominates the second.
+TW: the main POV has an undistinguished number of chapters in the first half of the book, and then comes to dominate the number of chapters in the latter half
+NOTE: Raw page fetched live (HTTP 200). Quote verbatim; the preceding clause supplies the first-half limb and 'There is a main plot and a main character to each book' supplies the per-book limb. The page hedges with 'usually' and closes 'this is really tentative', which the claim's 'argues' fairly carries.
+
+### 669 [VERIFIED_VERBATIM] src=Monika Kirner-Ludwig, Springer VS chapter, 2022
+CLAIM: Kirner-Ludwig concludes that the archaisms in the Game of Thrones scripted dialogues are not frequent in token terms yet are highly salient.
+TW: archaisms and particularly pseudo-archaisms in Game of Thrones may not be particularly frequent token-wise, but are highly salient
+NOTE: link.springer.com served a Cloudflare-style 'Client Challenge' interstitial to a browser user agent (3038 bytes, no content). Recovered via Wayback raw capture https://web.archive.org/web/20250801025545id_/https://link.springer.com/chapter/10.1007/978-3-658-36145-7_6 (HTTP 200, 102593 bytes), which carries the COMPLETE open-access chapter text - abstract, sections 1-6, Notes and References - so all six Kirner-Ludwig claims were checked against raw body text, not a landing-page abstract. Quote verbatim in the Abstract; the Conclusion restates it ('language seems to play a comparably marginal role frequency-wise').
+
+### 670 [VERIFIED_VERBATIM] src=Monika Kirner-Ludwig, Springer VS chapter, 2022
+CLAIM: Kirner-Ludwig states that Game of Thrones does not overdo pseudo-archaisms or archaic pronouns.
+TW: GoT does not overdo the use of pseudo-archaisms or, e.g., archaic pronouns at all.
+NOTE: Wayback raw capture (see 669). Verbatim in section '6 Conclusion'; the page's own wording covers both limbs of the claim (pseudo-archaisms and archaic pronouns) in one sentence.
+
+### 671 [VERIFIED_VERBATIM] src=Monika Kirner-Ludwig, Springer VS chapter, 2022
+CLAIM: Kirner-Ludwig's corpus is the full Game of Thrones transcripts covering 8 seasons and 73 episodes, analysed in Sketch Engine.
+TW: the full GoT transcripts covering 8 seasons and 73 episodes
+NOTE: Wayback raw capture (see 669). Quote verbatim in section '1 Introduction: Object of this Study'. Section '4 Data and Method' corroborates: 'a corpus including all 73 episodes in all released 8 seasons of GoT (2011-2019)... compiled as a corpus of all in all 506,540 words'. Sketch Engine limb supported twice - Abstract ('By making use of the corpus tool Sketch Engine') and body ('Due to Sketch Engine's automated parts of speech (POS) tagging function').
+
+### 672 [VERIFIED_VERBATIM] src=Monika Kirner-Ludwig, Springer VS chapter, 2022
+CLAIM: Kirner-Ludwig measures function words at about 43% of the Game of Thrones transcript corpus.
+TW: Function words make up for ca. 43% of the corpus
+NOTE: Wayback raw capture (see 669). Verbatim in section 5: 'Function words make up for ca. 43% of the corpus, which left me with 57% of the word stock to work with.' Corpus is the GoT transcripts (506,540 words), supporting that limb.
+
+### 673 [VERIFIED_VERBATIM] src=Monika Kirner-Ludwig, Springer VS chapter, 2022
+CLAIM: Kirner-Ludwig finds that only 7.6% of the transcripts' lexical word stock belongs to the medieval and fantasy-medieval semantic fields she investigated.
+TW: Out of that, only 7.6% responded to the lexico-semantic fields or frames under investigation
+NOTE: Wayback raw capture (see 669). Verbatim in section 5, immediately after the 43%/57% sentence, so 'Out of that' means out of the 57% non-function-word stock - exactly the claim's 'lexical word stock', not the whole corpus. The cited Table 3 is captioned 'Stereotypically medieval and fantasy-medieval frames as represented in GoT', supporting the semantic-fields limb; the next sentence reads 'those small groupings making up less than 8% of the vocabulary'.
+
+### 674 [VERIFIED_VERBATIM] src=Monika Kirner-Ludwig, Springer VS chapter, 2022
+CLAIM: Kirner-Ludwig measures 42,426 tokens, 8.38% of her corpus, as names of persons, places and languages.
+TW: 42,426 tokens (8.38%) cover names of persons, places and languages
+NOTE: Wayback raw capture (see 669). Verbatim as note 6 in the 'Notes' list (the footnote marker sits on the 7.6% sentence in section 5, matching the claim's 'endnote 6'); it continues 'and were thus not included in any further deliberations'. Arithmetic corroborates the 'of her corpus' limb: 42,426 / 506,540 = 8.38%.
+
+### 675 [VERIFIED_VERBATIM] src=Monika Kirner-Ludwig, Springer VS chapter, 2022
+CLAIM: Kirner-Ludwig asserts that Martin himself lacks expert knowledge of the historical stages of English.
+TW: That is even true for George R. R. Martin himself.
+NOTE: Raw route: live link.springer.com served a JS 'Client Challenge' block; recovered via Wayback raw capture 20250801025545id_ of the exact URL (open-access chapter, full body present). Page: screenplay writers 'will usually lack any expert knowledge about the historical stages of English. That is even true for George R. R. Martin himself.' Quote exact; every limb supported. Metadata nit only (not a claim limb): the passage sits in section 3.2 'Archaisms and Pseudo-Archaisms', not section 4.
+
+### 676 [VERIFIED_VERBATIM] src=Gessey-Jones et al., PNAS 117(46), 2020
+CLAIM: The PNAS study states that A Song of Ice and Fire is presented from the personal perspectives of 24 point of view characters.
+TW: Ice and Fire is presented from the personal perspectives of 24 point of view (POV) characters.
+NOTE: Live pnas.org returned HTTP 403; verified on TWO raw routes that both carry the full text: Wayback raw capture 20250710185328id_ of the exact URL, and PMC7682562 efetch XML. Quote exact in both. It is the first sentence of Results, as the claim's page field states.
+
+### 677 [VERIFIED_VERBATIM] src=Gessey-Jones et al., PNAS 117(46), 2020
+CLAIM: The PNAS study counts 14 of the point of view characters as major, defined as having eight or more chapters.
+TW: Of these, we consider 14 to be major: eight or more chapters.
+NOTE: Same two raw routes (Wayback id_ capture + PMC XML); quote exact in both. The page's full criterion reads 'eight or more chapters, mostly titled with their names, are relayed from their perspectives' - the claim quotes the chapter threshold only, but that threshold is stated as the criterion and is what excludes Arys Oakheart in the paper's own example, so no limb is unsupported.
+
+### 678 [VERIFIED_VERBATIM] src=Gessey-Jones et al., PNAS 117(46), 2020
+CLAIM: The PNAS study counts 343 chapters across the five published novels and identifies 2,007 characters in them.
+TW: From the five books containing 343 chapters, 2,007 characters were identified.
+NOTE: Same two raw routes; quote exact in both, in Results / 'Evolution of the Social Network Structure' exactly as the page field states. Both limbs (343 chapters across five books; 2,007 characters identified) explicit.
+
+### 679 [VERIFIED_VERBATIM] src=Gessey-Jones et al., PNAS 117(46), 2020
+CLAIM: The PNAS study finds 1,806 of the identified characters interact with another character at least once.
+TW: of which 1,806 interact with another at least once
+NOTE: Same two raw routes; quote exact in both, same sentence as index 678 in 'Evolution of the Social Network Structure'.
+
+### 680 [VERIFIED_VERBATIM] src=Gessey-Jones et al., PNAS 117(46), 2020
+CLAIM: The PNAS study finds the intervals between significant deaths measured in chapters are geometrically rather than power-law distributed, which it reads as measurable support for the deaths being unpredictable chapter by chapter.
+TW: it is geometric rather than power law
+NOTE: Same two raw routes; quote exact in the Abstract, which also carries the second limb verbatim: 'This provides measurable support for the widely held view that significant deaths in A Song of Ice and Fire are unpredictable chapter by chapter,' and 'intervals between significant deaths in chapters'.
+
+### 681 [VERIFIED_VERBATIM] src=Gessey-Jones et al., PNAS 117(46), 2020
+CLAIM: The PNAS study reports that the order and pacing of deaths differ greatly between discourse time and story time in the novels.
+TW: the order and pacing of deaths differ greatly between discourse time and story time
+NOTE: Same two raw routes; quote exact, in the discussion paragraph immediately preceding Materials and Methods. Page defines discourse time as 'the order and pacing of events as experienced by the reader'.
+
+### 682 [VERIFIED_VERBATIM] src=Richard Vale, 'Bayesian Prediction for The Winds of Winter', arXiv:1409.5830, 2014
+CLAIM: Vale counts 24 point of view characters in the first five novels once prologue and epilogue chapters are set aside.
+TW: So far, ignoring prologue and epilogue chapters, 24 characters have had POV chapters.
+NOTE: arXiv abstract page carries only the abstract, so I fetched the paper PDF (arxiv.org/pdf/1409.5830v1, 8 pp) and extracted its text. Section 1.1 reads: 'Five books have so far been published... So far, ignoring prologue and epilogue chapters in some of the books, 24 characters have had chapters told from their point of view.' Quote exact; every limb (five novels, prologue/epilogue set aside, 24) supported, in section 1.1 as stated.
+
+### 683 [VERIFIED_VERBATIM] src=Maksim W. Kyrchanoff, Journal of Frontier Studies 2018 no. 1
+CLAIM: Kyrchanoff argues that the authors of The World of Ice and Fire imitated the style of the medieval chronicle and synthesised it with simplified modern historical representations.
+TW: the real authors of the text actually imitated the style of the medieval chronicle
+NOTE: Fetched the cyberleninka PDF directly (HTTP 200, 30 pp) and extracted text. Full sentence: '...the real authors of the text actually imitated the style of the medieval chronicle, synthesized it with modern simplistic historical representations.' Quote exact; the synthesis limb is explicit ('simplified' = the page's 'simplistic').
+
+### 684 [VERIFIED_VERBATIM] src=Maksim W. Kyrchanoff, Journal of Frontier Studies 2018 no. 1
+CLAIM: Kyrchanoff notes the imagined chronicler of The World of Ice and Fire gives the age of the world as a range from 40 to 500 thousand years rather than a fixed figure.
+TW: the imagined author... allowed himself reasoning about the age of the world; his estimates ranged from 40 to 500 thousand years
+NOTE: Same PDF. Quote exact. 'Rather than a fixed figure' is carried by the page's own 'estimates ranged from...to'; the chronicler is 'the imagined author of the historical chronicle'.
+
+### 685 [VERIFIED_VERBATIM] src=Martin, Antonsson and Garcia, The World of Ice and Fire (2014), p. 79, as quoted by Kyrcha
+CLAIM: The passage Kyrchanoff quotes from The World of Ice and Fire page 79 shows the chronicler correcting his own titulature in a parenthesis, noting Dorne had not submitted.
+TW: ("Seven Kingdoms" was the style used, though Dorne had not submitted. Nor would it, for more than a century to come) (Martin, Antonsson, & Garcia, 2014, p. 79)
+NOTE: Same PDF. Quote exact, and the parenthesis, the p. 79 citation, and the Dorne limb are all on the page: the block quote proclaims Aegon 'Lord of the Seven Kingdoms' and then qualifies that style in the parenthesis. 'Correcting his own titulature' is the analyst's characterization of what the page shows as a parenthetical self-qualification of the style just used - substantively supported, not a separate assertion.
+
+### 686 [VERIFIED_VERBATIM] src=Kirkus Reviews (unsigned), review of A Game of Thrones, 1 July 1996
+CLAIM: Kirkus's unsigned 1996 review of A Game of Thrones calls the series title A Song of Ice and Fire insipid.
+TW: the first of a fantasy series entitled, insipidly enough, A Song of Ice and Fire
+NOTE: Live kirkusreviews.com fetched with a browser UA (HTTP 200). Quote exact, in the review's opening sentence. Review carries no byline (unsigned) and the page states 'Kirkus Reviews Issue: July 1, 1996'.
+
+### 687 [VERIFIED_VERBATIM] src=Kirkus Reviews (unsigned), review of A Game of Thrones, 1 July 1996
+CLAIM: Kirkus's 1996 review credits A Game of Thrones with an intricate plot articulated against a backdrop of real depth and texture.
+TW: A vast, rich saga... an intricate plot flawlessly articulated against a backdrop of real depth and texture.
+NOTE: Same live Kirkus page. Quote exact, in the closing verdict; 'and texture' follows immediately, so the claim's 'depth and texture' limb is on the page.
+
+### 688 [VERIFIED_VERBATIM] src=Kirkus Reviews (unsigned), review of A Game of Thrones, 1 July 1996
+CLAIM: Kirkus's 1996 review describes A Game of Thrones as 672 pages and calls those pages dense.
+TW: Still, after 672 dense pages, were you expecting a satisfying resolution?
+NOTE: Same live Kirkus page. Quote exact, and the page's metadata independently reads 'Page Count: 672'.
+
+### 689 [VERIFIED_VERBATIM] src=Publishers Weekly (unsigned starred review), A Game of Thrones, 29 July 1996
+CLAIM: The 1996 Publishers Weekly review names accomplished prose as one of three qualities that make A Game of Thrones stand out from similar work.
+TW: the book stands out from similar work by Eddings, Brooks and others by virtue of its superbly developed characters, accomplished prose and sheer bloody-mindedness
+NOTE: Live publishersweekly.com fetched with a browser UA (HTTP 200). Quote exact; accomplished prose is the second of exactly three named qualities, and the 'stand out from similar work' limb is the same sentence. Page states 'Reviewed on: 07/29/1996'.
+
+### 690 [VERIFIED_VERBATIM] src=Publishers Weekly (unsigned starred review), A Game of Thrones, 29 July 1996
+CLAIM: The 1996 Publishers Weekly review calls A Game of Thrones conventional in form.
+TW: 
+NOTE: publishersweekly.com/9780553103540 fetched raw (HTTP 200, browser UA). Review body: 'Although conventional in form, the book stands out from similar work by Eddings, Brooks and others by virtue of its superbly developed characters, accomplished prose and sheer bloody-mindedness.' Page metadata 'Reviewed on: 07/29/1996' confirms the 29 July 1996 date; a sidebar entry confirms PW starred it. Quote exact; every limb supported.
+
+### 691 [VERIFIED_VERBATIM] src=Paul Levinson, review of A Game of Thrones, Tangent #16, Fall 1996 (reposted by the author
+CLAIM: Paul Levinson's 1996 Tangent review praises Martin for writing convincingly of tart juices oozing from an apple and of sleet on a mountainside.
+TW: 
+NOTE: paullevinson.blogspot.com post fetched raw (HTTP 200). Header on the post: 'from Tangent Magazine, #16, Fall 1996 ... Reviewed by Paul Levinson'; body: 'Martin writes as convincingly of tart juices oozing from an apple as of sleet on the side of a mountain'. Quote exact; 'sleet on a mountainside' is the page's 'sleet on the side of a mountain'. Levinson notes in the comments that the URL's '2006' is his own typo and the review is 1996.
+
+### 692 [VERIFIED_VERBATIM] src=Paul Levinson, review of A Game of Thrones, Tangent #16, Fall 1996 (reposted by the author
+CLAIM: Levinson's 1996 review says A Game of Thrones is as much an adventure of the senses as of the mind.
+TW: 
+NOTE: Same page, same sentence's continuation: 'and his book is as much an adventure of the senses as it is of the mind.' Quote exact; claim fully supported.
+
+### 693 [VERIFIED_VERBATIM] src=Paul Levinson, review of A Game of Thrones, Tangent #16, Fall 1996 (reposted by the author
+CLAIM: Levinson's 1996 review calls the settings of A Game of Thrones equally diverse and evocative.
+TW: 
+NOTE: Same page, paragraph 2: 'The settings are equally diverse and evocative.' Quote exact as a full sentence; claim fully supported.
+
+### 694 [VERIFIED_VERBATIM] src=Paul Levinson, review of A Game of Thrones, Tangent #16, Fall 1996 (reposted by the author
+CLAIM: Levinson's 1996 review says the descriptive passages of the Daenerys thread let the reader smell and taste the spice in the wine.
+TW: 
+NOTE: Same page, paragraph beginning 'But the dragon thread has other problems.': 'The descriptive passages are marvelous - you can smell the spice, and taste it in every cup of wine Martin renders'. Quote exact. The review never uses the name Daenerys: it calls this 'the dragon thread' and identifies it as the 'Blood of the Dragon' novella following the pretender's sister, given as bride to a 'Ghenghis Khan-type character' — i.e. unambiguously the Daenerys thread, so the claim's label is a naming of what the page describes, not an added assertion.
+
+### 695 [VERIFIED_VERBATIM] src=Paul Levinson, review of A Game of Thrones, Tangent #16, Fall 1996 (reposted by the author
+CLAIM: Levinson's 1996 review argues that the on-page appearance of Martin's cold creatures has far less impact than their suggestion.
+TW: 
+NOTE: Same page, supernatural paragraph: 'But the actual brief appearance of these cold nightmares-come-true has far less impact than their suggestion.' Quote exact; the 'cold creatures' limb is the page's 'cold, slouching beast[s]' / 'cold nightmares-come-true'.
+
+### 696 [VERIFIED_VERBATIM] src=Paul Levinson, review of A Game of Thrones, Tangent #16, Fall 1996 (reposted by the author
+CLAIM: Levinson's 1996 review says Martin's dragons work better as natural history, their skeletons admired, feared and lamented by characters, than as living hatchlings.
+TW: 
+NOTE: Same page, next sentence: 'Similarly, the dragons work better as natural history - they're believed to have died out over a century before the action begins in this book, and their skeletons are admired, feared, and lamented by various characters who contemplate them - than as actual hatchlings at the end of the novel.' Quote exact; every limb (natural history, skeletons admired/feared/lamented by characters, versus living hatchlings) is on the page.
+
+### 698 [VERIFIED_VERBATIM] src=Steve Jeffery, review of A Game of Thrones, Vector 192 (BSFA), March/April 1997, p.19
+CLAIM: Jeffery's 1997 Vector review lists an appendix cast list among the distinguishing features of A Game of Thrones as a fantasy blockbuster.
+TW: 
+NOTE: Same PDF page: 'A Game of Thrones appears with all the distinguishing features of the fantasy blockbuster, as Book One of A Song of Fire and Ice. Those distinguishing features include a map, cunningly divided into The North and The South, an Appendix listing a cast of Cecil B. DeMille proportions, and the obligatory jacket blurb...'. Quote exact; the appendix cast list is explicitly one of the listed 'distinguishing features of the fantasy blockbuster'.
+
+### 699 [VERIFIED_VERBATIM] src=Steve Jeffery, review of A Game of Thrones, Vector 192 (BSFA), March/April 1997, p.19
+CLAIM: Jeffery's 1997 Vector review rejects the jacket blurb's 'true heir to Tolkien' framing as gushing hype that does the book no favours.
+TW: 
+NOTE: Same PDF page: the blurb quoted by Jeffery announces 'the most imaginative, ambitious and compelling fantasy epic since Lord of the Rings' and Martin as yet another 'true heir' to Tolkien; the next paragraph opens 'This sort of gushing hype does no favours to anybody, least of all Martin.' and the paragraph closes 'A Game of Thrones deserves better.' Quote exact (including the trailing comma); the 'no favours to the book' limb is carried by 'deserves better'.
+
+### 700 [VERIFIED_VERBATIM] src=Publishers Weekly (unsigned), A Dance with Dragons, 30 May 2011
+CLAIM: The 2011 Publishers Weekly review of A Dance with Dragons identifies a few recurring images — the game cyvasse, small rivers flowing into larger ones, and storm-battered ships and armies — running through the book.
+TW: 
+NOTE: publishersweekly.com/9780553801477 fetched raw (HTTP 200). First sentence: 'A few images recur in the enormously complex fifth installment of Martin's massively multicharacter epic: the chess-like game cyvasse, small rivers flowing into larger ones, ships and armies battered by terrible storms.' Quote exact; all three images and the 2011 date ('Reviewed on: 05/30/2011') confirmed.
+
+### 701 [VERIFIED_VERBATIM] src=Kirkus Reviews (unsigned), A Dance with Dragons, posted online 26 September 2011
+CLAIM: Kirkus's 2011 review calls the dialogue of A Dance with Dragons the usual swords-and-sorcery dialogue and quotes three lines as its evidence.
+TW: 
+NOTE: kirkusreviews.com raw page fetched (HTTP 200, browser UA). Paragraph 2: 'There's the usual blend of exposition, sometimes seemingly endless, and the usual swords-and-sorcery dialogue:' followed by exactly three quoted lines ('The plunder from Astapor...', 'Two kings to wake the dragon...', 'False friends, treacherous servants...'). 'Review Posted Online: Sept. 26, 2011' confirms the date. Quote exact; the three-lines limb confirmed by count.
+
+### 702 [VERIFIED_VERBATIM] src=Kirkus Reviews (unsigned), A Dance with Dragons, posted online 26 September 2011
+CLAIM: Kirkus's 2011 review describes the exposition in A Dance with Dragons as sometimes seemingly endless.
+TW: 
+NOTE: Same Kirkus page, same sentence: 'There's the usual blend of exposition, sometimes seemingly endless'. Quote exact; claim fully supported.
+
+### 703 [VERIFIED_VERBATIM] src=Kirkus Reviews (unsigned), A Dance with Dragons, posted online 26 September 2011
+CLAIM: Kirkus's 2011 review says Tolkien was never as ponderous as Martin.
+TW: 
+NOTE: Same Kirkus page: 'Martin has been likened to J.R.R. Tolkien, but Tolkien was never quite so ponderous, and certainly not so obsessed with bodily functions of various sorts'. Quote exact; the comparison's implied second term is Martin, named in the same sentence.
+
+### 704 [VERIFIED_VERBATIM] src=Kirkus Reviews (unsigned), A Dance with Dragons, posted online 26 September 2011
+CLAIM: Kirkus's 2011 review charges Martin with being obsessed with bodily functions of various sorts, quoting two lines as evidence.
+TW: 
+NOTE: Same Kirkus sentence continues '...and certainly not so obsessed with bodily functions of various sorts:' followed by exactly two quoted lines ('The Grand Maester befouled himself in dying...' and 'When you bugger a man you expect a squeal or two.'), then 'Indeed.' Quote exact; the charge lands on Martin by the Tolkien contrast, and the two-lines limb is confirmed by count.
+
+### 705 [VERIFIED_VERBATIM] src=Bill Sheehan, The Washington Post, 12 July 2011
+CLAIM: Bill Sheehan's 2011 Washington Post review says A Dance with Dragons is filled with vividly rendered set pieces.
+TW: Filled with vividly rendered set pieces
+NOTE: WaPo live fetch failed (HTTP/2 INTERNAL_ERROR); reached raw via Wayback id_ capture 20230306235122. Byline 'By Bill Sheehan', 'July 12, 2011'. Final content paragraph reads 'Filled with vividly rendered set pieces, unexpected turnings, assorted cliffhangers and moments of appalling cruelty, “A Dance With Dragons” is epic fantasy as it should be written'. Every limb supported.
+
+### 706 [VERIFIED_VERBATIM] src=Bill Sheehan, The Washington Post, 12 July 2011
+CLAIM: Sheehan's 2011 review calls A Dance with Dragons epic fantasy as it should be written: passionate, compelling, convincingly detailed and thoroughly imagined.
+TW: epic fantasy as it should be written: passionate, compelling, convincingly detailed and thoroughly imagined
+NOTE: Same WaPo Wayback raw capture, same final paragraph: '“A Dance With Dragons” is epic fantasy as it should be written: passionate, compelling, convincingly detailed and thoroughly imagined.' Quote exact; author, outlet, date all match the page.
+
+### 707 [VERIFIED_VERBATIM] src=Bill Sheehan, The Washington Post, 12 July 2011
+CLAIM: Sheehan's 2011 review says the series feels grounded in the brutal reality of medieval times despite its overtly fantastic elements.
+TW: the book — and the series as a whole — feels grounded in the brutal reality of medieval times
+NOTE: Same WaPo Wayback raw capture: 'Despite a number of overtly fantastic elements (dragons, seers, shape shifters and sorcerers), the book — and the series as a whole — feels grounded in the brutal reality of medieval times and has more in common with the Wars of the Roses than it does with “The Lord of the Rings.”' Both limbs (series-level, overtly fantastic elements) supported.
+
+### 708 [VERIFIED_VERBATIM] src=David Orr, 'Dragons Ascendant', The New York Times Sunday Book Review, 12 August 2011
+CLAIM: David Orr's 2011 New York Times essay says every town in Martin's series has an elaborately recalled series of triumphs and troubles.
+TW: Every town has an elaborately recalled series of triumphs and troubles.
+NOTE: NYT live fetch 403; reached raw via Wayback id_ capture 20251027173637. Page is 'Dragons Ascendant: George R. R. Martin and the Rise of Fantasy', By David Orr, Aug. 12, 2011, printed Page 31 of the Sunday Book Review. Sentence appears verbatim in the paragraph beginning 'Martin’s second virtue'.
+
+### 709 [VERIFIED_VERBATIM] src=David Orr, 'Dragons Ascendant', The New York Times Sunday Book Review, 12 August 2011
+CLAIM: Orr's 2011 essay says Martin's historical asides are inseparable from the books' larger narratives.
+TW: Moreover, historical asides are inseparable from the books’ larger narratives
+NOTE: Same NYT Wayback raw capture, same 'Martin’s second virtue' paragraph. Quote exact including the curly apostrophe in 'books’'.
+
+### 710 [VERIFIED_VERBATIM] src=David Orr, 'Dragons Ascendant', The New York Times Sunday Book Review, 12 August 2011
+CLAIM: Orr's 2011 essay says all of Martin's hundreds of characters carry grace notes of history and personality that advance a plot line.
+TW: All of his hundreds of characters have grace notes of history and personality that advance a plot line.
+NOTE: Same NYT Wayback raw capture, same paragraph. 'hundreds of characters', 'grace notes of history and personality', and 'advance a plot line' are all on the page in one sentence.
+
+### 711 [VERIFIED_VERBATIM] src=David Orr, 'Dragons Ascendant', The New York Times Sunday Book Review, 12 August 2011
+CLAIM: Orr's 2011 essay illustrates the realism for which Martin's books are praised with the example that when kingdoms ignore debts, the bankers show up.
+TW: Martin’s books, however, are generally praised for their realism. When people are stabbed, they die; when kingdoms ignore debts, the bankers show up.
+NOTE: Same NYT Wayback raw capture, closing section. The realism limb and the bankers example sit in adjacent sentences exactly as the claim frames them.
+
+### 712 [VERIFIED_VERBATIM] src=David Orr, 'Dragons Ascendant', The New York Times Sunday Book Review, 12 August 2011
+CLAIM: Orr's 2011 essay counts Tyrion 'waddling' at least 12 times in A Dance with Dragons.
+TW: Tyrion “waddles” at least 12 times here
+NOTE: Same NYT Wayback raw capture. Quote 'at least 12 times here' is exact; 'here' is “A Dance With Dragons”, named two sentences earlier. The page uses 'waddles' and later 'the “waddling”', so the claim's gerund is on the page too. Locator field says the paragraph begins 'This series is long' — that phrase is mid-paragraph, not at its start; a locator nit only, no claim limb affected.
+
+### 713 [VERIFIED_VERBATIM] src=David Orr, 'Dragons Ascendant', The New York Times Sunday Book Review, 12 August 2011
+CLAIM: Orr's 2011 essay asserts that the series' unnecessary length hurts Martin's prose.
+TW: Such length isn’t necessary, and it hurts Martin’s prose and his plot mechanics.
+NOTE: Same NYT Wayback raw capture. Claim's two limbs (length unnecessary, hurts prose) both explicit; the page adds 'and his plot mechanics', which the claim does not deny.
+
+### 714 [VERIFIED_VERBATIM] src=David Orr, 'Dragons Ascendant', The New York Times Sunday Book Review, 12 August 2011
+CLAIM: Orr's 2011 essay likens reading Martin to riding a wave moving away from shore, the water beneath growing deeper as speed increases.
+TW: the sensation is like riding a wave that’s somehow moving away from shore, with the water beneath you growing deeper and more shadowed as your speed increases
+NOTE: Same NYT Wayback raw capture, same 'Martin’s second virtue' paragraph. All three limbs — wave moving away from shore, water beneath growing deeper, speed increasing — are in the sentence.
+
+### 715 [VERIFIED_VERBATIM] src=David Orr, 'Dragons Ascendant', The New York Times Sunday Book Review, 12 August 2011
+CLAIM: Orr's 2011 essay says Martin must let readers feel the strangeness of the magical elements as the characters do rather than simply explaining it to death.
+TW: Martin now must find a way to let us feel that strangeness as the characters themselves do, rather than simply explaining it to death.
+NOTE: Same NYT Wayback raw capture, closing sentence. 'that strangeness' refers to 'the magical elements of his books ... not, in fact, within the characters’ understanding at all', so the claim's 'strangeness of the magical elements' limb is supported.
+
+### 716 [VERIFIED_VERBATIM] src=Megan Wasson, The Christian Science Monitor, 12 July 2011
+CLAIM: Megan Wasson's 2011 Christian Science Monitor review calls Martin's prose concise but pithy.
+TW: Martin’s prose is concise but pithy, begging to be devoured over and over again.
+NOTE: CSM live fetch 404; reached raw via Wayback id_ capture 20251117164216. Byline 'By Megan Wasson', 'July 12, 2011, 7:05 a.m. ET'. Quote exact, in the last body paragraph before the contributor line.
+
+### 717 [VERIFIED_VERBATIM] src=Megan Wasson, The Christian Science Monitor, 12 July 2011
+CLAIM: Wasson's 2011 review says Martin needs to be read with an encyclopedia at hand to catch the layered, subtle hints and details he leaves through his books.
+TW: Martin is the kind of writer who needs to be read with an “A Song of Ice and Fire” encyclopedia at hand to catch all the layered, subtle hints and details that he leaves throughout his books.
+NOTE: Same CSM Wayback raw capture, middle of the review. Quote exact. The page specifies an 'A Song of Ice and Fire' encyclopedia where the claim says just 'an encyclopedia' — a generalization the page supports rather than contradicts.
+
+### 718 [VERIFIED_VERBATIM] src=Megan Wasson, The Christian Science Monitor, 12 July 2011
+CLAIM: Wasson's 2011 review says Martin's writing style tends to start slow and build to a climax.
+TW: his writing style tends to start slow and build to a climax
+NOTE: Same CSM Wayback raw capture: 'Diehard George R. R. Martin fans will know that his writing style tends to start slow and build to a climax'. Quote exact and the claim's full sentence is on the page.
+
+### 719 [VERIFIED_VERBATIM] src=Rachael Brown, The Atlantic, 11 July 2011 (review preface to her Martin interview)
+CLAIM: Rachael Brown's 2011 Atlantic review charges that Martin's characters use the same idioms no matter their ethnicity, social class, or continent.
+TW: characters who use the same idioms (and have sex in exactly the same manner) no matter their ethnicity, social class, or continent
+NOTE: Atlantic fetched live raw with a browser UA (HTTP 200, no archive needed). Byline 'By Rachael Brown July 11, 2011'. The review preface lists weaknesses: 'too much repetition, unexceptional prose, and characters who use the same idioms (and have sex in exactly the same manner) no matter their ethnicity, social class, or continent.' Every limb supported.
+
+### 720 [VERIFIED_VERBATIM] src=Rachael Brown, The Atlantic, 11 July 2011
+CLAIM: Brown's 2011 Atlantic review names too much repetition and unexceptional prose among the weaknesses that have plagued Martin's books.
+TW: too much repetition, unexceptional prose
+NOTE: Atlantic (live, 200): "Weaknesses that have plagued Martin's previous books are also present: too much repetition, unexceptional prose, and characters who use the same idioms..." Quote verbatim; every limb supported.
+
+### 721 [VERIFIED_VERBATIM] src=Rachael Brown, The Atlantic, 11 July 2011
+CLAIM: Brown's 2011 Atlantic review says A Dance with Dragons cries out for better editing yet remains entirely engrossing.
+TW: cries out for better editing, it remains entirely engrossing
+NOTE: Atlantic (live): "But while A Dance with Dragons cries out for better editing, it remains entirely engrossing." Quote verbatim; both limbs on page.
+
+### 722 [VERIFIED_VERBATIM] src=George R.R. Martin, interviewed by Rachael Brown, The Atlantic, 11 July 2011
+CLAIM: Martin tells The Atlantic in July 2011 that he has always agreed with Faulkner that the human heart in conflict with itself is the only thing worth writing about.
+TW: I've always agreed with William Faulkner
+NOTE: Atlantic (live), Martin's first answer: "I've always agreed with William Faulkner-- he said that the human heart in conflict with itself is the only thing worth writing about." Verbatim.
+
+### 723 [VERIFIED_VERBATIM] src=George R.R. Martin, interviewed by Rachael Brown, The Atlantic, 11 July 2011
+CLAIM: Martin tells The Atlantic in July 2011 that once the human heart in conflict with itself is the subject, everything else — dragons and settings included — is just set dressing.
+TW: and the rest is just set dressing
+NOTE: Atlantic (live): "I've always taken that as my guiding principle, and the rest is just set dressing. I mean, you can have a dragon, you can have a science fiction story set on a distant planet with aliens and starships..." Dragons and settings limb supported by the following sentence.
+
+### 724 [VERIFIED_VERBATIM] src=Dana Jennings, 'Books of The Times', The New York Times, 14 July 2011
+CLAIM: Dana Jennings's 2011 New York Times review finds bliss in Martin's word-drunk naming of places, citing the Frostfangs, Sea Dragon Point and Rook's Rest.
+TW: bliss to be found in the word-drunk naming of places
+NOTE: NYT via Wayback raw capture 20251024170837id_ (live URL 403, DataDome): "Still, there's bliss to be found in the word-drunk naming of places -- the Frostfangs, Sea Dragon Point, Rook's Rest -- and people". All three place names present.
+
+### 725 [VERIFIED_VERBATIM] src=Dana Jennings, 'Books of The Times', The New York Times, 14 July 2011
+CLAIM: Jennings's 2011 review lists Martin's person-names — among them Wick Whittlestick and Pinchface Jon Myre — as one of the book's pleasures.
+TW: Wick Whittlestick and Pinchface Jon Myre
+NOTE: NYT (Wayback raw): the same 'bliss' sentence continues "...and people: Homeless Harry Strickland and Bloodbeard, Cotter Pyke and Three-Finger Hobb, Wick Whittlestick and Pinchface Jon Myre." Person-names framed as bliss/pleasure.
+
+### 726 [VERIFIED_VERBATIM] src=Dana Jennings, 'Books of The Times', The New York Times, 14 July 2011
+CLAIM: Jennings's 2011 review credits Martin with a blunt and bawdy earthiness befitting the son of a Bayonne longshoreman.
+TW: a blunt and bawdy earthiness that befits the son of a Bayonne, N.J., longshoreman
+NOTE: NYT (Wayback raw), para 2: "Mr. Martin writes fantasy for grown-ups, with a blunt and bawdy earthiness that befits the son of a Bayonne, N.J., longshoreman." Verbatim.
+
+### 727 [VERIFIED_VERBATIM] src=Dana Jennings, 'Books of The Times', The New York Times, 14 July 2011
+CLAIM: Jennings's 2011 review says the series is more Balzac and Dickens than Tolkien, a panoramic nineteenth-century novel turned out in fantasy motley.
+TW: a sprawling and panoramic 19th-century novel turned out in fantasy motley
+NOTE: NYT (Wayback raw), para 2: "The series... is like a sprawling and panoramic 19th-century novel turned out in fantasy motley, more Balzac and Dickens than Tolkien." Both limbs verbatim.
+
+### 728 [VERIFIED_VERBATIM] src=Dana Jennings, 'Books of The Times', The New York Times, 14 July 2011
+CLAIM: Jennings's 2011 review says that in a work of this size a summary up front would be useful to the reader.
+TW: In a work this size... a summary up front would be useful
+NOTE: NYT (Wayback raw): "In a work this size it's the reader who must embark on a harrowing quest, and a summary up front would be useful." 'to the reader' is the same sentence's subject.

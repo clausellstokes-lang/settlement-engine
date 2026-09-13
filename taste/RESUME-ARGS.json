@@ -1,0 +1,26 @@
+{
+ "maxRounds": 8,
+ "fromDraft": {
+  "commit": "4935b86c3b5fa55a063531a057ca78138a029543",
+  "rounds": {
+   "def11-country-walled": 4,
+   "def11-country-unwalled": 4,
+   "def11-watch-revealed": 4,
+   "def11-watch-covert": 4,
+   "def2-stores-short": 4,
+   "def2-stores-importfed": 4,
+   "gen3-purse-short": 4
+  },
+  "inBand": [
+   "def11-country-walled",
+   "def11-country-unwalled",
+   "def11-watch-revealed",
+   "def2-stores-short",
+   "def2-stores-importfed",
+   "gen3-purse-short"
+  ],
+  "refused": {
+   "def11-watch-covert": "band depth · closers.abstractNounRate (over) — variant 2, face 0, the `[plain · dm-only]` line \"Under a covert arrangement a buyer has the watch of {settlement}.\" = 8.6 band-widths on 1 of 12 face(s)"
+  }
+ }
+}

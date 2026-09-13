@@ -1,0 +1,349 @@
+### [772] VERIFIED_VERBATIM  {other: mechanism of mode collapse}
+CLAIM: Padmakumar and He attribute the diversity loss mainly to InstructGPT contributing less diverse text to the co-written essays.
+SRC: Padmakumar and He (NYU), ICLR 2024 | https://arxiv.org/pdf/2309.05196
+QUOTE: this effect is mainly attributable to InstructGPT
+TRUE: this effect is mainly attributable to InstructGPT contributing less diverse text to co-written essays
+NOTE: Same PDF, Abstract: 'We additionally find that this effect is mainly attributable to InstructGPT contributing less diverse text to co-written essays.' Supplied quote verbatim; attribution limb supported.
+
+### [773] VERIFIED_VERBATIM  {counter-evidence}
+CLAIM: Padmakumar and He report that the user-contributed text remained unaffected by model collaboration.
+SRC: Padmakumar and He (NYU), ICLR 2024 | https://arxiv.org/pdf/2309.05196
+QUOTE: text remains unaffected by model collaboration
+TRUE: In contrast, the user-contributed text remains unaffected by model collaboration
+NOTE: Same PDF, Abstract: 'In contrast, the user-contributed text remains unaffected by model collaboration.' Supplied quote verbatim; 'user-contributed' limb present on the page.
+
+### [774] VERIFIED_VERBATIM  {homogenisation}
+CLAIM: Lu et al. measured the Creativity Index of professional human authors at 66.2% higher on average than that of LLMs.
+SRC: Lu, Sclar, Hallinan, Mireshghallah, Liu, Han, Ettinger, Jiang, Chandu, Dziri and Choi (UW/AI2), arXiv 2410.04265 v2 | https://arxiv.org/pdf/2410.04265
+QUOTE: human authors is on average 66.2% higher than that of LLMs
+TRUE: Creativity Index of professional human authors is on average 66.2% higher than that of LLMs
+NOTE: arXiv 2410.04265 PDF (30MB) fetched raw and text-extracted over 50 pages; Abstract: 'the CREATIVITY INDEX of professional human authors is on average 66.2% higher than that of LLMs'. Supplied quote verbatim; repeated in Sec 1 contributions.
+
+### [775] VERIFIED_VERBATIM  {other: mechanism of mode collapse}
+CLAIM: Lu et al. measured the Creativity Index of LLMs falling by an average of 30.1% after RLHF on verbatim matches.
+SRC: Lu, Sclar, Hallinan, Mireshghallah, Liu, Han, Ettinger, Jiang, Chandu, Dziri and Choi (UW/AI2), arXiv 2410.04265 v2 | https://arxiv.org/pdf/2410.04265
+QUOTE: by an average of 30.1% after RLHF
+TRUE: Based on verbatim match alone, Creativity Index of LLMs reduces by an average of 30.1% after RLHF
+NOTE: Same PDF, Sec 4 'What impact does RLHF have on model creativity?': 'Based on verbatim match alone, the CREATIVITY INDEX of LLMs reduces by an average of 30.1% after RLHF (p = 1.3 x 10^-12; N = 600).' Supplied quote verbatim, and the 'on verbatim matches' limb is explicit (the verbatim+semantic figure is 8.9%).
+
+### [776] VERIFIED_VERBATIM  {steerability}
+CLAIM: Lu et al. found the Creativity Index of ChatGPT differed only minimally across prompts written to encourage creativity, with no statistical significance.
+SRC: Lu, Sclar, Hallinan, Mireshghallah, Liu, Han, Ettinger, Jiang, Chandu, Dziri and Choi (UW/AI2), arXiv 2410.04265 v2 | https://arxiv.org/pdf/2410.04265
+QUOTE: across different prompts is minimal, with no
+TRUE: difference in Creativity Index of ChatGPT across different prompts is minimal, with no statistical significance
+NOTE: Same PDF, Sec 4 prompt-format ablation: 'We found that the difference in the CREATIVITY INDEX of ChatGPT across different prompts is minimal, with no statistical significance (p = 0.23; N = 600).' Prompts explicitly encouraged creativity ('be bold and creative', 'you are a creative writer'). p and N in the locator match the page.
+
+### [777] VERIFIED_VERBATIM  {steerability}
+CLAIM: Lu et al. found that varying the top-p decoding value changed the Creativity Index only minimally and not significantly.
+SRC: Lu, Sclar, Hallinan, Mireshghallah, Liu, Han, Ettinger, Jiang, Chandu, Dziri and Choi (UW/AI2), arXiv 2410.04265 v2 | https://arxiv.org/pdf/2410.04265
+QUOTE: the difference was minimal and not statistically significant
+TRUE: varying p in top-p decoding: the difference was minimal and not statistically significant
+NOTE: Same PDF, same paragraph: 'We also experimented with different decoding strategies by varying the p value in top-p decoding (Fig. 4 b). Although a higher p value resulted in a marginally higher CREATIVITY INDEX, the difference was minimal and not statistically significant (p = 0.23; N = 600).' Supplied quote verbatim; the identical p = 0.23; N = 600 in the locator is genuinely what the paper prints for both ablations.
+
+### [778] VERIFIED_VERBATIM  {register measured}
+CLAIM: Lu et al. measured their human-versus-model creativity gap on novel snippets, modern poems and speech transcripts.
+SRC: Lu, Sclar, Hallinan, Mireshghallah, Liu, Han, Ettinger, Jiang, Chandu, Dziri and Choi (UW/AI2), arXiv 2410.04265 v2 | https://arxiv.org/pdf/2410.04265
+QUOTE: modern poems, and speech transcripts
+TRUE: gap consistent across domains - novel snippets, modern poems, and speech transcripts
+NOTE: Same PDF, Sec 1 contributions: 'This creativity gap is consistent across various domains - novel snippets, modern poems, and speech transcripts - at both verbatim and semantic levels.' Supplied quote verbatim; the three registers are exactly those named (Sec 4 reports them as novel writing, poetry composition, speech drafting).
+
+### [779] VERIFIED_VERBATIM  {other: mechanism of mode collapse}
+CLAIM: Lu et al. speculate that models learned certain linguistic styles preferred by humans during RLHF, decreasing surface-form diversity.
+SRC: Lu, Sclar, Hallinan, Mireshghallah, Liu, Han, Ettinger, Jiang, Chandu, Dziri and Choi (UW/AI2), arXiv 2410.04265 v2 | https://arxiv.org/pdf/2410.04265
+QUOTE: learned certain linguistic styles preferred by humans during RLHF
+TRUE: models might have learned certain linguistic styles preferred by humans during RLHF
+NOTE: Same PDF, Sec 4: 'We speculate that models might have learned certain linguistic styles preferred by humans during RLHF, leading to a decreased surface form diversity in its outputs.' Supplied quote verbatim; the claim preserves the paper's hedge by saying 'speculate', and the surface-form-diversity limb is on the page.
+
+### [780] VERIFIED_SUBSTANCE  {other: mechanism of mode collapse}
+CLAIM: Yun et al. attribute a diversity collapse in instruction-tuned LLMs to the structural tokens of the chat template rather than to decoding randomness.
+SRC: Yun, An, Wang, Peng and Shang (UC San Diego), arXiv 2505.18949 v1 | https://arxiv.org/pdf/2505.18949
+QUOTE: 
+TRUE: diversity primarily governed by presence or absence of structural tokens
+NOTE: arXiv 2505.18949v1 PDF fetched raw. Quote field empty, and the claim is a paraphrase, so graded on substance. Abstract carries both limbs: 'output diversity is primarily governed by the presence or absence of structural tokens, with minimal formatting yielding the most diverse outputs', and '(1) diversity collapse persists even under high-temperature sampling, and (2) structural tokens in templates significantly constrain the model's output space' - i.e. not decoding randomness. Sec 5.4 confirms temperature raises diversity but templates mute the gain.
+
+### [781] VERIFIED_VERBATIM  {steerability}
+CLAIM: Yun et al. found that prompting for diversity inside a chat template still failed to close the gap with a minimal prompt.
+SRC: Yun, An, Wang, Peng and Shang (UC San Diego), arXiv 2505.18949 v1 | https://arxiv.org/pdf/2505.18949
+QUOTE: still fails to close the gap with Simple
+TRUE: prompting for diversity ... still fails to close the gap with Simple Steer
+NOTE: Same PDF, Sec 5.5 'Explicit Prompts for Diversity Still Fall Short': 'prompting for diversity does yield noticeable improvements over the default template in some cases ... but still fails to close the gap with Simple Steer.' Supplied quote verbatim; the paper itself calls Simple Steer a minimal prompt ('minimal prompts (e.g., Simple Steer)'), supporting the claim's 'minimal prompt' limb.
+
+### [782] VERIFIED_VERBATIM  {steerability}
+CLAIM: Yun et al. report that prompts using full chat templates gain substantially less diversity from temperature scaling than simple steer prompts do.
+SRC: Yun, An, Wang, Peng and Shang (UC San Diego), arXiv 2505.18949 v1 | https://arxiv.org/pdf/2505.18949
+QUOTE: from temperature scaling are substantially smaller
+TRUE: full chat templates: gains from temperature scaling are substantially smaller than simple steer
+NOTE: Same PDF, Sec 5.4 'Effect of Decoding Temperature on Diversity': 'prompts using full chat templates exhibit a muted response: their gains from temperature scaling are substantially smaller than those under simple steer prompts.' Supplied quote verbatim; Figure 7 measures semantic diversity and entropy, supporting the 'diversity' limb.
+
+### [783] VERIFIED_VERBATIM  {steerability}
+CLAIM: In Yun et al.'s WritingPrompts task the semantic diversity was 0.3291 under the full chat template, 0.4767 under a simple steer prompt and 0.3427 under the template with an explicit diversity instruction.
+SRC: Yun, An, Wang, Peng and Shang (UC San Diego), arXiv 2505.18949 v1 | https://arxiv.org/pdf/2505.18949
+QUOTE: 
+TRUE: Table 5, WritingPrompts row: 0.3291 / 0.4767 / 0.3427.
+NOTE: Raw PDF text of arXiv:2505.18949v1 (Yun, An, Wang, Peng, Shang; UCSD). Table 5, Semantic Diversity block, WritingPrompts row, columns Full Template / Simple Steer / Full Template w/ Diversity = 0.3291 / 0.4767 / 0.3427, exactly as claimed (Llama-3b model). Claim carries no quote; all three figures and their column assignment appear verbatim.
+
+### [784] VERIFIED_VERBATIM  {counter-evidence}
+CLAIM: Gerstgrasser et al. demonstrate that accumulating successive generations of synthetic data alongside the original real data avoids model collapse.
+SRC: Gerstgrasser, Schaeffer, Dey, Rafailov et al. (Stanford and others), arXiv 2404.01413 | https://arxiv.org/pdf/2404.01413
+QUOTE: generations of synthetic data alongside the original real data avoids model
+TRUE: Accumulating synthetic data alongside the original real data avoids model collapse.
+NOTE: Raw PDF text of arXiv:2404.01413v2, Abstract: 'then demonstrate that accumulating the successive generations of synthetic data alongside the original real data avoids model collapse; these results hold across a range of model sizes, architectures, and hyperparameters.' Quote fragment matches word for word across the PDF line break; Gerstgrasser/Schaeffer/Dey/Rafailov (Stanford et al.) confirmed on page 1.
+
+### [785] VERIFIED_VERBATIM  {other: mechanism of mode collapse}
+CLAIM: Gerstgrasser et al. confirm that replacing the original real data by each generation's synthetic data does tend towards model collapse.
+SRC: Gerstgrasser, Schaeffer, Dey, Rafailov et al. (Stanford and others), arXiv 2404.01413 | https://arxiv.org/pdf/2404.01413
+QUOTE: the original real data by each generation
+TRUE: Replacing real data by each generation's synthetic data does tend toward collapse.
+NOTE: Raw PDF text of arXiv:2404.01413v2, Abstract: 'We confirm that replacing the original real data by each generation's synthetic data does indeed tend towards model collapse'. Quote fragment verbatim; the claim's 'confirm' matches the paper's own verb.
+
+### [786] VERIFIED_VERBATIM  {homogenisation}
+CLAIM: Murthy, Ullman and Hu found aligned models generally display less conceptual diversity than their instruction fine-tuned counterparts.
+SRC: Murthy, Ullman and Hu (Harvard / Kempner Institute), arXiv 2411.04427 | https://arxiv.org/pdf/2411.04427
+QUOTE: display less diversity than their instruction fine-
+TRUE: Aligned models generally display less diversity than instruction fine-tuned counterparts.
+NOTE: Raw PDF text of arXiv:2411.04427 (Murthy, Ullman, Hu; Harvard/Kempner), Abstract: 'While no model reaches human-like diversity, aligned models generally display less diversity than their instruction fine-tuned counterparts.' Quote verbatim across the hyphenated line break. The 'conceptual' qualifier the claim adds is the paper's own framing (title: 'Alignment reduces language models' conceptual diversity'; Introduction: 'aligned models generally display less conceptual diversity than their non-aligned, fine-tuned counterparts').
+
+### [787] VERIFIED_VERBATIM  {homogenisation}
+CLAIM: Murthy, Ullman and Hu report that no model in their study reached human-like conceptual diversity.
+SRC: Murthy, Ullman and Hu (Harvard / Kempner Institute), arXiv 2411.04427 | https://arxiv.org/pdf/2411.04427
+QUOTE: While no model reaches
+TRUE: While no model reaches human-like diversity.
+NOTE: Raw PDF text of arXiv:2411.04427, Abstract: 'While no model reaches human-like diversity...'. Quote verbatim. The 'conceptual' limb is carried by the Introduction ('no model approaches human-like conceptual diversity') and the Conclusion ('no model reached human-level conceptual diversity').
+
+### [788] VERIFIED_VERBATIM  {counter-evidence}
+CLAIM: Shypula et al. find that preference-tuned models exhibit greater effective semantic diversity than SFT or base models once quality thresholds are applied.
+SRC: Shypula, Li, Zhang, Padmakumar, Yin and Bastani (Penn / NYU / Berkeley), COLM 2025 | https://arxiv.org/pdf/2504.12522
+QUOTE: models exhibit greater effective semantic diversity
+TRUE: Preference-tuned models exhibit greater effective semantic diversity than SFT or base.
+NOTE: Raw PDF text of arXiv:2504.12522 (COLM 2025; Shypula, Li, Zhang, Padmakumar, Yin, Bastani), Section 1: 'in both code generation and creative writing, we find that preference-tuned models exhibit greater effective semantic diversity.' Abstract adds the comparison class: 'these same preference-tuned models generate greater effective semantic diversity than SFT or base models.' The claim's 'once quality thresholds are applied' is the paper's own definition of effective semantic diversity ('diversity among outputs that meet quality thresholds').
+
+### [790] VERIFIED_VERBATIM  {counter-evidence}
+CLAIM: Shypula et al. report that for open-ended creative writing preference tuning is linked to greater diversity in lexical patterns.
+SRC: Shypula, Li, Zhang, Padmakumar, Yin and Bastani (Penn / NYU / Berkeley), COLM 2025 | https://arxiv.org/pdf/2504.12522
+QUOTE: preference tuning is linked to greater diversity in lexical patterns
+TRUE: For open-ended creative writing, preference tuning links to greater lexical diversity.
+NOTE: Raw PDF text of arXiv:2504.12522, Section 1: 'For open-ended creative writing, preference tuning is linked to greater diversity in lexical patterns.' Quote verbatim, whole sentence, including the creative-writing scope the claim preserves.
+
+### [791] VERIFIED_VERBATIM  {steerability}
+CLAIM: Chung et al. report that their trained models had higher diversity than GPT-4o-iter, a baseline that used diversity-inducing prompts.
+SRC: Chung, Padmakumar, Roemmele, Sun and Kreminski (Midjourney / NYU), arXiv 2503.17126 | https://arxiv.org/pdf/2503.17126
+QUOTE: even higher than •GPT-4o-iter, which used diversity-inducing prompts
+TRUE: Trained models had higher diversity than diversity-prompted GPT-4o-iter.
+NOTE: Raw PDF text of arXiv:2503.17126 (Chung, Padmakumar, Roemmele, Sun, Kreminski; Midjourney/NYU), Section 5.2 Results: 'our trained models had higher diversity than existing models (even higher than *GPT-4o-iter, which used diversity-inducing prompts)'. Quote verbatim including the bullet marker before GPT-4o-iter.
+
+### [792] VERIFIED_VERBATIM  {reader and expert judgment}
+CLAIM: Chung et al. report that human-crafted gold stories scored lower on their reward model than the instruction-tuned models but were far more diverse.
+SRC: Chung, Padmakumar, Roemmele, Sun and Kreminski (Midjourney / NYU), arXiv 2503.17126 | https://arxiv.org/pdf/2503.17126
+QUOTE: these models but the diversity was far higher
+TRUE: Gold scored lower reward than those models but diversity was far higher.
+NOTE: Raw PDF text of arXiv:2503.17126, Section 5.2: 'Human-crafted *Gold showed a lower reward score than these models but the diversity was far higher.' 'These models' is the preceding sentence's cluster of instruction-tuned models (GPT-4o, GPT-4o-iter, o1, Claude-3.5-sonnet, DeepSeek-R1, Instruct), and the reward is reddit-reward, a reward model the authors trained themselves (Section 4: 'we trained a reward model out of (x, y, s) triplets in the dataset'). Every limb holds.
+
+### [793] VERIFIED_VERBATIM  {steerability}
+CLAIM: Chung et al. report an 8B-parameter model trained with their deviation-weighted objective achieving diversity on par with a human-created dataset.
+SRC: Chung, Padmakumar, Roemmele, Sun and Kreminski (Midjourney / NYU), arXiv 2503.17126 | https://arxiv.org/pdf/2503.17126
+QUOTE: achieve on-par diversity as a human-created
+TRUE: Best 8B model achieved on-par diversity as a human-created dataset.
+NOTE: Raw PDF text of arXiv:2503.17126, Abstract: 'Our best model with 8B parameters could achieve on-par diversity as a human-created dataset while having output quality similar to the best instruction-tuned models we examined, GPT-4o and DeepSeek-R1.' Quote verbatim. The 'deviation-weighted objective' limb is the paper's method: 'we weighted the pair's training objective with the deviation of the winning [instances]' (DDPO/DORPO), and Section 5.2 names the Llama-3.1-8B DDPO-both model as the best on both axes.
+
+### [794] VERIFIED_VERBATIM  {other: mechanism of mode collapse}
+CLAIM: Xiao et al. argue the Kullback-Leibler-based regularization in RLHF carries an algorithmic bias that in extreme cases produces preference collapse.
+SRC: Xiao, Li, Xie, Getzen, Fang, Long and Su, Journal of the American Statistical Association (arXiv 2405.16455 v2) | https://arxiv.org/pdf/2405.16455
+QUOTE: this bias could lead to a phenomenon we term preference collapse
+TRUE: KL-based regularization bias could in extreme cases cause preference collapse.
+NOTE: Raw PDF text of arXiv:2405.16455v2, Abstract: 'suffers from an inherent algorithmic bias due to its Kullback-Leibler-based regularization in optimization. In extreme cases, this bias could lead to a phenomenon we term preference collapse, where minority preferences are virtually disregarded.' Quote verbatim. Page 1 confirms JASA acceptance. Note the paper hedges with 'could lead to' where the claim says 'produces', but the claim retains 'in extreme cases', so the conditionality survives.
+
+### [795] VERIFIED_VERBATIM  {steerability}
+CLAIM: Xiao et al. report their preference-matching RLHF variant improved alignment with human preferences by 29% to 41% over standard RLHF on one metric.
+SRC: Xiao, Li, Xie, Getzen, Fang, Long and Su, Journal of the American Statistical Association (arXiv 2405.16455 v2) | https://arxiv.org/pdf/2405.16455
+QUOTE: 
+TRUE: 29% to 41% improvement in alignment, by one metric, over standard RLHF.
+NOTE: Raw PDF text of arXiv:2405.16455v2, Abstract: 'demonstrating a 29% to 41% improvement in alignment with human preferences, as measured by a certain metric, compared to standard RLHF.' Claim carries no quote; both figures appear verbatim. Introduction supplies the metric and mechanism: preference matching divergence falls from 2.23 to 1.57 (Llama-2-7B) and 1.16 to 0.68 (OPT-1.3B), 'marking improvements of approximately 29% and 41%, respectively' - so the claim's 'on one metric' is exact.
+
+### [797] VERIFIED_VERBATIM  {steerability}
+CLAIM: janus argues that raising the sampling temperature flattens the rest of the output distribution into undifferentiated goo before it helps escape a high-confidence attractor.
+SRC: janus, 'Mysteries of mode collapse', LessWrong / AI Alignment Forum, 8 November 2022 | https://www.lesswrong.com/posts/t9svvNPNmFf5Qa3TA/mysteries-of-mode-collapse
+QUOTE: will flatten the rest of the output distribution into undifferentiated goo
+TRUE: Higher temperature flattens the distribution into undifferentiated goo first.
+NOTE: Same three routes as index 796 (Wayback raw capture of the lesswrong URL, Alignment Forum copy, greaterwrong mirror), section 'Why not just turn up the temperature?': 'Increasing the sampling temperature will flatten the rest of the output distribution into undifferentiated goo before it begins to be helpful for escaping from the high confidence attractor.' Quote verbatim; every limb of the claim is in that one sentence.
+
+### [798] VERIFIED_VERBATIM  {steerability}
+CLAIM: janus argues the mode collapse he observed is irreducible to an effective decrease in temperature.
+SRC: janus, 'Mysteries of mode collapse', LessWrong / AI Alignment Forum, 8 November 2022 | https://www.lesswrong.com/posts/t9svvNPNmFf5Qa3TA/mysteries-of-mode-collapse
+QUOTE: is irreducible to an effective decrease in temperature
+TRUE: "mode collapse" is irreducible to an effective decrease in temperature
+NOTE: Raw page reached via Wayback raw capture 20260725093614id_ (live lesswrong.com returned HTTP 429 Vercel checkpoint). Byline and date confirmed on page: 'Mysteries of mode collapse by janus 8th Nov 2022 AI Alignment Forum'. Full sentence: 'Yet it was primarily text-davinci-002's behavior over multiple steps and across different prompts that convinced me that "mode collapse" is irreducible to an effective decrease in temperature or any simple modification of that hypothesis.' Quote verbatim; every limb supported. Only unverifiable token is the pronoun 'he' - the page never states janus's gender - which is a stylistic choice, not a factual limb.
+
+### [799] VERIFIED_VERBATIM  {steerability}
+CLAIM: janus reports it is sometimes possible to avoid mode collapse using prompt engineering.
+SRC: janus, 'Mysteries of mode collapse', LessWrong / AI Alignment Forum, 8 November 2022 | https://www.lesswrong.com/posts/t9svvNPNmFf5Qa3TA/mysteries-of-mode-collapse
+QUOTE: possible to avoid mode collapse using prompt engineering
+TRUE: it is sometimes possible to avoid mode collapse using prompt engineering
+NOTE: Same Wayback raw capture. Page: 'Another observation is that it is sometimes possible to avoid mode collapse using prompt engineering (e.g. the Python interpreter prompt for random numbers, or few shot examples...)'. Quote verbatim, 'sometimes' present, all limbs supported.
+
+### [800] VERIFIED_VERBATIM  {counter-evidence}
+CLAIM: Borji concludes from kernel-density-estimate resampling experiments that the outcomes Shumailov et al. report are a statistical phenomenon and may be unavoidable.
+SRC: Ali Borji, 'A Note on Shumailov et al. (2024)', arXiv 2410.12954 v2 | https://arxiv.org/pdf/2410.12954
+QUOTE: the outcomes reported are a statistical phenomenon and may be unavoidable
+TRUE: Our results indicate that the outcomes reported are a statistical phenomenon and may be unavoidable
+NOTE: Raw PDF fetched from arxiv.org/pdf/2410.12954 and text-extracted. Stamp 'arXiv:2410.12954v2 [cs.LG] 24 Oct 2024', title 'A Note on Shumailov et al. (2024)', author Ali Borji, June 2024. Abstract: 'we investigate the effects of fitting a distribution (through Kernel Density Estimation, or KDE) or a model to the data, followed by repeated sampling from it... Our results indicate that the outcomes reported are a statistical phenomenon and may be unavoidable.' Quote verbatim; the KDE-resampling limb is explicit in the same abstract.
+
+### [801] VERIFIED_VERBATIM  {register measured}
+CLAIM: Brooks, Eggert and Peskoff detect as many as 5% of 2,909 English Wikipedia articles created in August 2024 as containing significant AI-generated content.
+SRC: Brooks, Eggert and Peskoff (Princeton), First Workshop on Advancing NLP for Wikipedia (WikiNLP), ACL 2024 | https://aclanthology.org/2024.wikinlp-1.12.pdf
+QUOTE: we detect that as many as 5% of 2,909 English
+TRUE: we detect that as many as 5% of 2,909 English Wikipedia articles created in August 2024 contain significant AI-generated content
+NOTE: Raw PDF from aclanthology.org/2024.wikinlp-1.12.pdf. Title 'The Rise of AI-Generated Content in Wikipedia', Brooks/Eggert/Peskoff, Princeton; proceedings header 'First Workshop on Advancing Natural Language Processing for Wikipedia, November 16, 2024, ACL'. Figure 1 caption carries the quote verbatim. Noted for context, not as a defect: the body text states the point estimate as 4.36% and the abstract says 'over 5%', but the claim reproduces the caption's own wording.
+
+### [802] VERIFIED_VERBATIM  {detection and its failures}
+CLAIM: Brooks, Eggert and Peskoff report that the Wikipedia articles their detectors flagged are typically of lower quality.
+SRC: Brooks, Eggert and Peskoff (Princeton), First Workshop on Advancing NLP for Wikipedia (WikiNLP), ACL 2024 | https://aclanthology.org/2024.wikinlp-1.12.pdf
+QUOTE: Flagged Wikipedia articles are typically
+TRUE: Flagged Wikipedia articles are typically of lower quality
+NOTE: Same raw PDF. Abstract, final sentence: 'Flagged Wikipedia articles are typically of lower quality and are often self-promotional or partial towards a specific viewpoint on controversial topics.' Quote verbatim; body Section 5 corroborates ('The quality of articles detected as AI-generated is generally lower on at least two axes').
+
+### [803] VERIFIED_VERBATIM  {detection and its failures}
+CLAIM: Shaib et al. state there is no standard method to measure lexical diversity in language-model output.
+SRC: Shaib, Govindarajan, Barrow, Sun, Siu, Wallace and Nenkova, arXiv 2403.00553 | https://arxiv.org/pdf/2403.00553
+QUOTE: there is no standard method to measure
+TRUE: High lexical diversity is often desirable, but there is no standard method to measure this property
+NOTE: Raw PDF from arxiv.org/pdf/2403.00553 (stamp 'arXiv:2403.00553v3 [cs.CL] 18 Feb 2026'), title 'Standardizing the Measurement of Text Diversity', authors Shaib, Govindarajan, Barrow, Sun, Siu, Wallace, Nenkova - matches the cited author list. Quote verbatim in the abstract; 'this property' resolves to lexical diversity, and the abstract's opening sentence ('The diversity across outputs generated by LLMs...') supports the 'in language-model output' limb.
+
+### [804] VERIFIED_VERBATIM  {steerability}
+CLAIM: Peeperkorn et al. found temperature only weakly correlated with novelty in a narrative generation task.
+SRC: Peeperkorn, Kouwenhoven, Brown and Jordanous, 'Is Temperature the Creativity Parameter of Large Language Models?', ICCC 2024 (arXiv 2405.00492) | https://arxiv.org/pdf/2405.00492
+QUOTE: temperature is weakly correlated with novelty
+TRUE: We find that temperature is weakly correlated with novelty
+NOTE: Raw PDF from arxiv.org/pdf/2405.00492 (stamp 'arXiv:2405.00492v1 [cs.CL] 1 May 2024'). Abstract: 'we investigate this claim using a narrative generation task with a predetermined fixed context, model and prompt... We find that temperature is weakly correlated with novelty'. Quote verbatim; the narrative-generation-task limb is in the same abstract.
+
+### [805] VERIFIED_VERBATIM  {steerability}
+CLAIM: Peeperkorn et al. conclude that raising temperature does not enable access to a larger slice of the probability distribution.
+SRC: Peeperkorn, Kouwenhoven, Brown and Jordanous, ICCC 2024 (arXiv 2405.00492) | https://arxiv.org/pdf/2405.00492
+QUOTE: does not enable access to a larger slice of the probability
+TRUE: overall, does not enable access to a larger slice of the probability distribution
+NOTE: Same raw PDF, closing findings list: 'When generating a limited number of samples, temperature increases the chance to generate more variety, but overall, does not enable access to a larger slice of the probability distribution.' Quote verbatim and it is the stated overall finding. Context worth carrying forward (not an unsupported limb): the same bullet allows that temperature does increase variety when only a limited number of samples is drawn.
+
+### [806] VERIFIED_VERBATIM  {steerability}
+CLAIM: Peeperkorn et al. describe the influence of temperature on creativity as far more nuanced and weak than the creativity-parameter claim suggests.
+SRC: Peeperkorn, Kouwenhoven, Brown and Jordanous, ICCC 2024 (arXiv 2405.00492) | https://arxiv.org/pdf/2405.00492
+QUOTE: far more nuanced and weak
+TRUE: the influence of temperature on creativity is far more nuanced and weak than the "creativity parameter" claim suggests
+NOTE: Same raw PDF; the phrase occurs three times (abstract, introduction summary, conclusion), each time attached to 'the influence of temperature on creativity'. Quote verbatim; all limbs supported.
+
+### [807] VERIFIED_VERBATIM  {other: mechanism of mode collapse}
+CLAIM: O'Mahony et al. find that supervised fine-tuning is largely responsible for the drop in next-token prediction diversity.
+SRC: O'Mahony, Grinsztajn, Schoelkopf and Biderman (EleutherAI / Limerick / INRIA), ICLR 2024 ME-FoMo workshop | https://openreview.net/pdf?id=3pDMYjpOxk
+QUOTE: We find that SFT is largely responsible for the drop
+TRUE: We find that SFT is largely responsible for the drop in next-token prediction diversity metrics
+NOTE: Live openreview.net/pdf?id=3pDMYjpOxk returned HTTP 403 (Vercel security checkpoint); recovered as the raw PDF via Wayback capture 20260302103430id_ and text-extracted. Header confirms 'Published at the ICLR 2024 Workshop on Understanding of Foundation Models (ME-FoMo)', title 'Attributing Mode Collapse in the Fine-Tuning of Large Language Models', authors O'Mahony (EleutherAI/Limerick), Grinsztajn (EleutherAI/INRIA), Schoelkopf, Biderman. Quote verbatim, in the final paragraph of Section 1 Introduction; the sentence continues 'with reward-based fine-tuning having only a small additional effect.'
+
+### [808] VERIFIED_VERBATIM  {other: mechanism of mode collapse}
+CLAIM: O'Mahony et al. find the reward-based fine-tuning step causes a dramatic decrease in output diversity not present in its SFT precursor.
+SRC: O'Mahony, Grinsztajn, Schoelkopf and Biderman (EleutherAI / Limerick / INRIA), ICLR 2024 ME-FoMo workshop | https://openreview.net/pdf?id=3pDMYjpOxk
+QUOTE: dramatic decrease in output diversity which is not present
+TRUE: the reward-based fine-tuning step causes a dramatic decrease in output diversity which is not present in its SFT precursor version
+NOTE: Same Wayback raw PDF, Section 1 Introduction, sentence immediately after the SFT finding. Quote verbatim; every limb supported.
+
+### [809] VERIFIED_VERBATIM  {register measured}
+CLAIM: O'Mahony et al. observed notably lower diversity for creative-type prompts than factual ones on both of their generation metrics.
+SRC: O'Mahony, Grinsztajn, Schoelkopf and Biderman (EleutherAI / Limerick / INRIA), ICLR 2024 ME-FoMo workshop | https://openreview.net/pdf?id=3pDMYjpOxk
+QUOTE: lower diversity for creative type prompts for both metrics
+TRUE: a notably lower diversity for creative type prompts for both metrics
+NOTE: Same Wayback raw PDF, Section 3.2 Model Generation Diversity: 'Observing the curves for self-BLEU for both factual and creative prompts, we see that the DPO models show considerably more "mode collapse" at the output generation level than at the token level as in section 3.1, with a notably lower diversity for creative type prompts for both metrics.' Quote verbatim. The 'than factual ones' comparison is carried by the sentence's own factual-vs-creative framing and by Figure 1 (factual left, creative right), plus the conclusion 'we observe a much larger drop in diversity for creative type tasks'; the two metrics are the generation-level self-BLEU and cosine similarity.
+
+### [810] VERIFIED_VERBATIM  {lexical tells}
+CLAIM: O'Mahony et al. give Llama-2-chat repeating the invented word Frumplenook each time as an example of mode collapse.
+SRC: O'Mahony, Grinsztajn, Schoelkopf and Biderman (EleutherAI / Limerick / INRIA), ICLR 2024 ME-FoMo workshop | https://openreview.net/pdf?id=3pDMYjpOxk
+QUOTE: Llama-2-chat repeats the term “Frumplenook” each time
+TRUE: models are asked to invent a new word, and Llama-2-chat repeats the term “Frumplenook” each time
+NOTE: Same Wayback raw PDF, Section 1 Introduction: 'we build on janus (2022), who find evidence of "mode collapse", defined as an excessive and harmful reduction in output diversity... An example of this is shown in the appendix A.4, where models are asked to invent a new word, and Llama-2-chat repeats the term “Frumplenook” each time.' Quote verbatim (curly quotes as given); 'an example of this' refers to mode collapse, and the Appendix A.4 pointer matches the cited page.
+
+### [811] VERIFIED_VERBATIM  {homogenisation}
+CLAIM: O'Mahony et al. found industrially fine-tuned models to have very poor output diversity results.
+SRC: O'Mahony, Grinsztajn, Schoelkopf and Biderman (EleutherAI / Limerick / INRIA), ICLR 2024 ME-FoMo workshop | https://openreview.net/pdf?id=3pDMYjpOxk
+QUOTE: find industrially fine-tuned models to have very poor output diversity results
+TRUE: we find industrially fine-tuned models to have very poor output diversity results
+NOTE: Same Wayback raw PDF, Section 1 Introduction. Quote verbatim; corroborated in the discussion ('the industrially fine-tuned Llama-2-chat exhibits a far lower level of diversity across all output level metrics than any of the fine-tuned versions').
+
+### [812] VERIFIED_VERBATIM  {discourse-level tells}
+CLAIM: The Dramatica Co. asserts that stylistic tells are the easiest AI signals to train away, so removing them does not make the underlying story more human.
+SRC: The Dramatica Co., Dramatica Blog, 2026 | https://dramatica.com/blog/the-ai-tells-are-in-the-story
+QUOTE: But style tells are the easiest ones to train away.
+TRUE: But style tells are the easiest ones to train away.
+NOTE: Live page fetched raw with a browser user agent and stripped to text. Byline 'The Dramatica Co. May 29, 2026'. Opening runs: 'The em dash was never the interesting tell... But style tells are the easiest ones to train away. A model can be prompted out of a favorite word... A rewrite pass can roughen the surface until the sentence looks less machine-made. That does not mean the story underneath has become more human.' Quote verbatim including the sentence-final period, and both limbs - easiest to train away, and removal does not humanise the underlying story - are on the page. Cited page location ('opening, after “The em dash was never the interesting tell”') is exact.
+
+### [813] VERIFIED_VERBATIM  {steerability}
+CLAIM: The Dramatica Co. asserts that asking a model for ambiguity returns ambiguity as surface texture rather than as a structural consequence of the story.
+SRC: The Dramatica Co., Dramatica Blog, 2026 | https://dramatica.com/blog/the-ai-tells-are-in-the-story
+QUOTE: ambiguity as a texture rather than as a structural consequence
+TRUE: ask for ambiguity and receive ambiguity as a texture
+NOTE: Raw page fetched (HTTP 200, browser UA). Quote appears word for word in 'Put the Narrative First': 'You can ask for ambiguity and receive ambiguity as a texture rather than as a structural consequence.' Byline 'The Dramatica Co., May 29, 2026' confirms attribution and year. Claim's 'surface texture' and 'of the story' are glosses the surrounding argument (surface vs structure) supports.
+
+### [814] VERIFIED_VERBATIM  {steerability}
+CLAIM: The Dramatica Co. asserts that prompting away AI punctuation leaves the model's narrative habits intact.
+SRC: The Dramatica Co., Dramatica Blog, 2026 | https://dramatica.com/blog/the-ai-tells-are-in-the-story
+QUOTE: prompt away the punctuation and still leave the machine’s narrative habits intact
+TRUE: prompt away the punctuation, narrative habits stay intact
+NOTE: Raw page. Verbatim in the same paragraph of 'Put the Narrative First': 'You can prompt away the punctuation and still leave the machine's narrative habits intact.' Framed there as why 'make it sound more human' is the wrong repair. Every limb supported.
+
+### [815] VERIFIED_VERBATIM  {no subtext}
+CLAIM: Mohammad Siam, replying on X to Ethan Mollick's StoryScope post, wrote that AI explains where humans imply.
+SRC: Mohammad Siam, X reply, 27 May 2026, relayed verbatim by the Dramatica Blog | https://dramatica.com/blog/the-ai-tells-are-in-the-story
+QUOTE: AI explains. Humans imply.
+TRUE: AI explains. Humans imply.
+NOTE: Raw page. Pull-quote in 'AI Likes the Clean Line' reads exactly 'AI explains. Humans imply.' attributed 'Mohammad Siam, X, May 27, 2026', introduced as one of 'The replies under Mollick's post'. Chain of custody is the blog's relay of the X reply, which the claim's source field states explicitly; the X post itself was not independently reached, and the claim does not assert it was.
+
+### [816] VERIFIED_VERBATIM  {discourse-level tells}
+CLAIM: Ethan Mollick, posting on X about the StoryScope preprint, used the phrase 'AI narrative tells' for the layer beneath stylistic tells.
+SRC: Ethan Mollick, X, 27 May 2026, relayed as a pull-quote by the Dramatica Blog | https://dramatica.com/blog/the-ai-tells-are-in-the-story
+QUOTE: AI narrative tells
+TRUE: the paper is looking at AI narrative tells
+NOTE: Raw page. Pull-quote 'AI narrative tells' attributed 'Ethan Mollick, X, May 27, 2026', with body text: 'Ethan Mollick pointed to the more important layer in a fresh X post about StoryScope... His framing was simple: the paper is looking at AI narrative tells, not merely stylistic ones.' Supports both 'about the StoryScope preprint' (April 2026 arXiv) and 'the layer beneath stylistic tells'. Locator nit only: the pull-quote sits BEFORE the 'The Paper Finds Structure, Not Just Style' heading, not after it; the claim sentence is unaffected.
+
+### [818] VERIFIED_VERBATIM  {other: what a human editor sees first}
+CLAIM: Alex Mahadevan, director of Poynter's MediaWise, told the Reuters Institute that most editors shown AI-generated text shake their heads because it is empty.
+SRC: Alex Mahadevan (Poynter/MediaWise) quoted by Marina Adami, Reuters Institute, 2025 | https://reutersinstitute.politics.ox.ac.uk/news/how-ai-generated-prose-diverges-human-writing-and-why-it-matters
+QUOTE: they will shake their heads, because it is empty
+TRUE: most editors will shake their heads, because it is empty
+NOTE: Raw page (Marina Adami, 9 December 2025). Section 4 verbatim: 'If you put AI-generated text in front of most editors, they will shake their heads, because it is empty.' Speaker identity confirmed earlier: 'Alex Mahadevan is a journalist and director of MediaWise, the Poynter Institute's digital media literacy programme.' All limbs supported.
+
+### [819] VERIFIED_VERBATIM  {gloss and over-explaining}
+CLAIM: Mahadevan told the Reuters Institute his dead giveaway for AI writing is a lot of words that do not say anything.
+SRC: Alex Mahadevan (Poynter/MediaWise) quoted by Marina Adami, Reuters Institute, 2025 | https://reutersinstitute.politics.ox.ac.uk/news/how-ai-generated-prose-diverges-human-writing-and-why-it-matters
+QUOTE: it's a lot of words that don't say anything
+TRUE: The dead giveaway for me is just that
+NOTE: Raw page, section 4, same quoted block as 818: 'The dead giveaway for me is just that it's a lot of words that don't say anything.' Verbatim and fully attributed to Mahadevan.
+
+### [821] VERIFIED_VERBATIM  {homogenisation}
+CLAIM: Mahadevan predicted that heavy reliance on AI writing would make every news homepage blur into the same voice.
+SRC: Alex Mahadevan (Poynter/MediaWise) quoted by Marina Adami, Reuters Institute, 2025 | https://reutersinstitute.politics.ox.ac.uk/news/how-ai-generated-prose-diverges-human-writing-and-why-it-matters
+QUOTE: every homepage blurs into the same voice
+TRUE: every homepage blurs into the same voice
+NOTE: Raw page, section 4, verbatim: 'If journalists lean on that, local crime stories start to read like police press releases, climate coverage starts to echo corporate sustainability reports and every homepage blurs into the same voice.' The 'heavy reliance' limb is carried by the preceding sentence: 'Mahadevan worries that an over-reliance on AI writing will lead to...'. News-homepage reading is correct in context.
+
+### [822] VERIFIED_VERBATIM  {homogenisation}
+CLAIM: Mahadevan asserted the AI default style smooths out dialects, activist language and the ways specific communities actually talk.
+SRC: Alex Mahadevan (Poynter/MediaWise) quoted by Marina Adami, Reuters Institute, 2025 | https://reutersinstitute.politics.ox.ac.uk/news/how-ai-generated-prose-diverges-human-writing-and-why-it-matters
+QUOTE: smooth out dialects, activist language and ways specific communities actually talk
+TRUE: That default style also tends to smooth out dialects
+NOTE: Raw page, section 4, verbatim within Mahadevan's quote: 'That default style also tends to smooth out dialects, activist language and ways specific communities actually talk, which is bad for fair and equitable coverage.' 'Default style' refers to the AI writing style under discussion. Minor hedge loss only: the source says 'tends to smooth out'; the claim states 'smooths out' flatly — an idiomatic paraphrase of a tendency, not a change of substance.
+
+### [823] VERIFIED_VERBATIM  {other: surface polish with nothing underneath}
+CLAIM: Dr Tom S. Juzek of Florida State University told the Reuters Institute that ChatGPT broke the link readers used to make between quality of form and quality of content.
+SRC: Tom S. Juzek (Florida State University) quoted by Marina Adami, Reuters Institute, 2025 | https://reutersinstitute.politics.ox.ac.uk/news/how-ai-generated-prose-diverges-human-writing-and-why-it-matters
+QUOTE: quality of form and quality of content, and ChatGPT broke that
+TRUE: people were too quick to make the link
+NOTE: Raw page, section 4, verbatim: Juzek — 'In the past, people were too quick to make the link between quality of form and quality of content, and ChatGPT broke that.' Identity confirmed: 'Dr Tom S. Juzek, assistant professor of computational linguistics at Florida State University.' Wording note (not a limb failure): the source says 'people', not specifically 'readers'; the passage is about reassessing quality markers in writing, so the narrowing is benign.
+
+### [824] VERIFIED_VERBATIM  {steerability}
+CLAIM: Juzek and Ward re-ran reinforcement learning from human feedback with their own recruited testers and found that those testers preferred outputs containing AI buzzwords.
+SRC: Marina Adami reporting Juzek and Ward's experiment, Reuters Institute, 2025 | https://reutersinstitute.politics.ox.ac.uk/news/how-ai-generated-prose-diverges-human-writing-and-why-it-matters
+QUOTE: their testers did prefer outputs that contained AI buzzwords
+TRUE: their testers did prefer outputs that contained AI buzzwords
+NOTE: Raw page, section 2, verbatim: 'The researchers tried to replicate reinforcement learning from human feedback themselves for a base model, recruiting English-speaking testers from the Global South... Their research found that their testers did prefer outputs that contained AI buzzwords.' Confirms the re-run, the own-recruited testers, and the preference finding.
+
+### [825] VERIFIED_VERBATIM  {model era drift}
+CLAIM: In Juzek and Ward's RLHF replication the participants who otherwise favoured AI buzzwords tended not to prefer texts containing 'delve' and 'nuanced'.
+SRC: Marina Adami reporting Juzek and Ward's experiment, Reuters Institute, 2025 | https://reutersinstitute.politics.ox.ac.uk/news/how-ai-generated-prose-diverges-human-writing-and-why-it-matters
+QUOTE: tended not to prefer texts containing ‘delve’ and ‘nuanced’
+TRUE: while overall favouring AI buzzwords, tended not to prefer 'delve'
+NOTE: Raw page, section 4, verbatim: 'In Juzek and Ward's experiments, recruiting humans to mimic reinforcement learning from human feedback, they note that their participants, while overall favouring AI buzzwords, tended not to prefer texts containing 'delve' and 'nuanced', possibly because they're so often talked about as hallmarks of ChatGPT.' The 'who otherwise favoured AI buzzwords' limb is explicitly supported.
