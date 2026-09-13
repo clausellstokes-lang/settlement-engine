@@ -26,6 +26,8 @@ import {
   FACE_SOURCES, ROLE_SLOTS, agreeVerb, drawRole, fillRoleSlots,
 } from '../../src/domain/display/stateProse/stateProseKernel.js';
 import { institutionalCatalog } from '../../src/data/institutionalCatalog.js';
+import { composeStateProse } from '../../src/domain/display/stateProse/composeStateProse.js';
+import { DOSSIER_STATE_PROSE_DEFENSE } from '../../src/data/dossierStateProse/defense.generated.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const read = (rel) => readFileSync(join(ROOT, rel), 'utf8');
@@ -116,6 +118,53 @@ describe('the role table — its shape (ADDENDUM 18 ruling 25)', () => {
     // No fallback roster carries an office at all: a fallback fires where the ROWS are silent,
     // and an office belongs to a row.
     expect(ALL_FALLBACK.filter((e) => e.office === true)).toEqual([]);
+  });
+
+  it('⭐⭐ A ROW THAT LENDS TWO SOURCES SPLITS ITS ROLES, and only those two rows do', () => {
+    // ⛔ FOUND BY RENDERING THE FIRST RE-CUT POOL, not by reasoning: a `[court]` face drew
+    // 'a clerk in the hall', because `COURT_NAMES` seats the court wherever the town's meeting
+    // hall stands and the row's roles went to BOTH words. Every entry of a two-source row now
+    // declares `for`, and this arm holds both halves of that: which rows are two-source, and
+    // that each of their entries is scoped.
+    const twoSource = Object.keys(INSTITUTION_ROLES)
+      .filter((row) => sourcesOfRowName(row.toLowerCase()).length > 1).sort();
+    expect(twoSource, 'the rows that lend two source words').toEqual(['City hall', 'Town hall']);
+    for (const row of twoSource) {
+      expect(sourcesOfRowName(row.toLowerCase()).sort()).toEqual(['court', 'hall']);
+      const unscoped = INSTITUTION_ROLES[row].filter((entry) => !Array.isArray(entry.for));
+      expect(unscoped.map((e) => e.role), `${row}: an entry with no \`for\``).toEqual([]);
+      // Both halves are really populated, or the split is a filter that empties one source.
+      for (const source of ['hall', 'court']) {
+        expect(INSTITUTION_ROLES[row].filter((e) => e.for.includes(source)).length,
+          `${row} → ${source}`).toBeGreaterThanOrEqual(4);
+      }
+    }
+    // A one-source row declares no `for` at all: scoping where nothing forks is dead syntax.
+    const overScoped = Object.entries(INSTITUTION_ROLES)
+      .filter(([row]) => !twoSource.includes(row))
+      .flatMap(([row, roles]) => roles.filter((e) => Array.isArray(e.for)).map((e) => `${row}: ${e.role}`));
+    expect(overScoped, 'a `for` on a row that lends one source or none').toEqual([]);
+    // AND THE COURT REALLY DOES SPEAK AS THE COURT on a town whose only court row is the hall.
+    const town = { tier: 'town', institutions: [{ name: 'Town hall' }], npcs: [] };
+    const roles = rolesOf(/** @type {never} */ (town));
+    expect(roles.get('court').map((r) => r.role)).toContain('a clerk of the court');
+    expect(roles.get('court').map((r) => r.role)).not.toContain('a clerk in the hall');
+    expect(roles.get('hall').map((r) => r.role)).toContain('a clerk in the hall');
+    expect(roles.get('hall').map((r) => r.role)).not.toContain('a bailiff');
+  });
+
+  it('⛔ THE INSTRUMENT\'S RE-SPELLING IS HELD TO THE KERNEL BY NAME (arm D, entryWalker.js)', () => {
+    // The wave gate's arm D asks "does the variant declare this slot?" — a question the
+    // attribution slots have no answer to, because the spine has no source and cannot declare
+    // one. Un-amended it convicted all nine re-cut faces and turned the pool's verdict from
+    // WITHHELD to FAIL. `entryWalker.js` is the prose ISLAND and may not import a display
+    // leaf, so its list is RE-SPELLED — and held here, the same cure faceSources.js keeps for
+    // the generator's keyword lists.
+    const walker = read('src/domain/prose/entryWalker.js');
+    const missing = ROLE_SLOTS.filter((slot) => !walker.includes(`'${slot}'`));
+    expect(missing, 'an attribution slot the walker\'s re-spelling does not carry').toEqual([]);
+    expect(walker).toMatch(/ATTRIBUTION_SLOTS/);
+    expect(ROLE_SLOTS.length, 'and the kernel list is the twelve seatable sources').toBe(12);
   });
 
   it('the fallback roster covers every seatable source, and only those', () => {
@@ -340,8 +389,81 @@ describe('the seating — a role exists only where its row does (ruling 25 edge 
   });
 });
 
-describe('⭐ THE ZERO-TEXT-SHIFT PROOF — the mechanism is inert on the shipped corpus', () => {
-  it('no shipped variant, spine or face, names an attribution slot', () => {
+describe('⛔⛔ THE READ CARRIES THE ROLES — the trap this car fell into, driven end to end', () => {
+  const KEY = 'Invasion & War: walls with NO force';
+
+  /** The shipped pool, composed through the real composer on a town that seats every source. */
+  const compose = (seed, options) => composeStateProse(DOSSIER_STATE_PROSE_DEFENSE, 'DS-DEF-2', {
+    slots: { settlement: 'Thornwall' },
+    seed,
+    audience: 'dm',
+    spineKey: KEY,
+    candidates: [],
+    turns: [],
+    ...options,
+  });
+  const TOWN = {
+    tier: 'town',
+    institutions: [
+      { name: 'Town hall' }, { name: 'Taverns (5-20)' }, { name: 'Craft guilds (5-15)' },
+      { name: 'Parish church' }, { name: 'Town walls' }, { name: 'Weekly market' },
+      { name: 'Courthouse' }, { name: 'Town watch' },
+    ],
+    npcs: [],
+  };
+
+  it('⛔⛔ A FACE THAT DRAWS REALLY SPEAKS: the pool renders a ROLE, and never a silence', () => {
+    // ⛔ THE DEFECT THIS ARM EXISTS FOR, recorded because it was nearly shipped. The composer's
+    // `read` is a CLOSED object built key by key, not a spread of `options`, so `roles` and
+    // `printedRoles` — added to `withFaceSources` in this same car — were dropped on the floor.
+    // Every face that drew then failed closed: `fillRoleSlots` returned null, `fillSlots` turned
+    // the empty raw into silence, and the WHOLE RUNG vanished. It looked like nothing was wrong,
+    // because the towns that survived were exactly the towns whose draw landed on the spine, and
+    // a page of spine lines reads perfectly well. Found by RENDERING the pool, not by a test.
+    const read = withFaceSources(/** @type {never} */ (TOWN), {});
+    let spoke = 0;
+    let silent = 0;
+    const roles = new Set();
+    for (let i = 0; i < 120; i += 1) {
+      const unit = compose(`role-seed-${i}`, read);
+      if (unit === null) { silent += 1; continue; }
+      for (const piece of unit.pieces) if (piece.face > 0) spoke += 1;
+      // A rendered attribution slot is the failure this whole mechanism exists to prevent.
+      expect(unit.text).not.toMatch(/\{[a-z]/);
+      // The role is drawn, so the SAME face on two seeds is two different sentences: count
+      // the distinct openings of the faces that drew, which is the variance ruling 25 is for.
+      if (unit.pieces.some((piece) => piece.face > 0)) {
+        roles.add(unit.text.split(/\s+/).slice(0, 5).join(' '));
+      }
+    }
+    expect(silent, 'a seed on which the pool went silent').toBe(0);
+    expect(spoke, 'the faces that drew past the spine').toBeGreaterThan(30);
+    expect(roles.size, `the distinct role openings seen: ${[...roles].join(' | ')}`)
+      .toBeGreaterThanOrEqual(6);
+  });
+
+  it('⛔ AND WITHOUT THE ROLES IT FAILS CLOSED rather than printing a slot', () => {
+    // The other half of the same fact: a read that skipped `withFaceSources` must SILENCE a
+    // face that names a slot, never render `{hall}`. Handed the roster but no roles, the pool
+    // goes quiet on exactly the seeds whose draw lands on a sourced face — which is the
+    // behaviour that hid the defect above, asserted here so it can never hide it again.
+    const sources = new Set(['stranger', 'hall', 'guild', 'tavern', 'gate', 'watch', 'court', 'market', 'register']);
+    let silent = 0;
+    for (let i = 0; i < 120; i += 1) {
+      const unit = compose(`role-seed-${i}`, { sources });
+      if (unit === null) { silent += 1; continue; }
+      expect(unit.text, 'a raw attribution slot reached the page').not.toMatch(/\{[a-z]/);
+    }
+    expect(silent, 'the seeds a roles-less read silences').toBeGreaterThan(20);
+  });
+});
+
+describe('⭐ WHERE THE ATTRIBUTION SLOTS SHIP — one pool, named; everywhere else inert', () => {
+  it('⭐⭐ ONLY DS-DEF-2\'s NINE RE-CUT FACES name an attribution slot; the other five leaves carry none', () => {
+    // The mechanism landed at car 8b-W-18l with a global zero-shift arm, because no shipped
+    // sentence named a slot. The re-cut of `Invasion & War: walls with NO force` lawfully
+    // ended that, so the arm is RE-PINNED rather than deleted: the nine faces are named, the
+    // other five leaves are asserted empty, and a tenth face landing reds here by name.
     const LEAVES = ['defense', 'economy', 'general', 'power', 'stressors', 'warFaith'];
     const slotRe = new RegExp(`\\{(?:${ROLE_SLOTS.join('|')})\\}|\\{v:[a-z]+\\}`);
     /** @type {string[]} */
@@ -350,12 +472,24 @@ describe('⭐ THE ZERO-TEXT-SHIFT PROOF — the mechanism is inert on the shippe
     for (const leaf of LEAVES) {
       const src = read(`src/data/dossierStateProse/${leaf}.generated.js`);
       for (const line of src.split('\n')) {
-        if (!/"(?:text|wordings)"/.test(line) && !/^\s*"/.test(line)) continue;
+        if (!/^\s*"/.test(line)) continue;
         texts += 1;
-        if (slotRe.test(line)) carrying.push(`${leaf}: ${line.trim().slice(0, 70)}`);
+        if (slotRe.test(line)) carrying.push(`${leaf}: ${line.trim()}`);
       }
     }
-    expect(carrying, 'a shipped sentence naming an attribution slot').toEqual([]);
+    // The five leaves that carry nothing at all — the zero-shift arm that survives.
+    expect(carrying.filter((row) => !row.startsWith('defense: ')),
+      'an attribution slot outside the defense leaf').toEqual([]);
+    // And the defense leaf carries EXACTLY the nine re-cut faces, one per source.
+    const faces = carrying.map((row) => row.replace(/^defense: /, '').replace(/^"|",?$/g, ''));
+    expect(faces.length, 'the re-cut faces').toBe(9);
+    const bySlot = ROLE_SLOTS.filter((slot) => faces.some((f) => f.includes(`{${slot}}`)));
+    expect(bySlot.sort(), 'the sources the re-cut gave a voice')
+      .toEqual(['court', 'elders', 'gate', 'guild', 'hall', 'stranger', 'tavern', 'watch']);
+    // Every one of them carries at least one verb slot, or the attribution has no verb to
+    // agree with and the re-cut left a class word standing somewhere.
+    expect(faces.filter((f) => !/\{v:[a-z]+\}/.test(f)), 'a re-cut face with no verb slot')
+      .toEqual([]);
     expect(texts, 'and the sweep really read the leaves').toBeGreaterThan(2000);
   });
 });

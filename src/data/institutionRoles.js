@@ -31,6 +31,13 @@
  *    `STRESS_MANDATORY_ROLES`, src/generators/npcGenerator.js), matched case-insensitively.
  * 4. NUMBER IS DECLARED, NOT GUESSED. Each entry carries `n: 'sg'` or `n: 'pl'`, and the
  *    `{v:…}` verb slot beside the role reads it. 'dock workers say', 'a wherryman says'.
+ * 5. A ROW THAT LENDS TWO SOURCES SPLITS ITS ROLES BETWEEN THEM (`for`). ⛔ FOUND BY RENDERING
+ *    THE FIRST RE-CUT POOL, not by reasoning: `Town hall` and `City hall` are the only two rows
+ *    that lend TWO source words — `hall` AND `court`, because `COURT_NAMES` seats the court
+ *    wherever the town's meeting hall is (`faceSources.js`, verbatim from the generator's
+ *    `hasCourtSystem`). Without a split, a `[court]` face drew 'a clerk in the hall' and the
+ *    court spoke in the hall's voice. An entry may therefore declare `for: ['court']`; an
+ *    entry with no `for` goes to every source its row lends, which is every other row here.
  *
  * ── ⛔ THE REALM ROLES ARE NOT HERE, AND THE REASON IS RECORDED ───────────────────────
  * Ruling 25 licenses a realm role ('a subject of the king', 'a crown tenant') ONLY where the
@@ -78,6 +85,8 @@ export const CUSTOM_ROLE_FIELD = 'roles';
  * @property {string} role the phrase the page prints — a common-noun phrase or an office title
  * @property {'sg'|'pl'} n grammatical number, which the `{v:…}` slot beside it reads
  * @property {true} [office] an OFFICE TITLE: admitted only where the town's roster prints it
+ * @property {ReadonlyArray<string>} [for] the source words this entry speaks for, where its row
+ *   lends more than one; absent means every source the row lends
  */
 
 /**
@@ -90,22 +99,35 @@ export const CUSTOM_ROLE_FIELD = 'roles';
  */
 export const INSTITUTION_ROLES = Object.freeze({
   // ── THE HALL ────────────────────────────────────────────────────────────────────────
+  // ⛔ THE TWO SPLIT ROWS. A meeting hall seats BOTH the `hall` and the `court` (the
+  // generator's own `hasCourtSystem` reading), so every entry here declares which of the two
+  // it speaks for. Without this a `[court]` face drew 'a clerk in the hall' — found by
+  // rendering the first re-cut pool.
   'Town hall': Object.freeze([
-    { role: 'a clerk in the hall', n: 'sg' },
-    { role: 'one of the aldermen', n: 'sg' },
-    { role: "the hall's doorkeeper", n: 'sg' },
-    { role: 'the clerks who keep the hall', n: 'pl' },
-    { role: 'a man who sits on the council', n: 'sg' },
-    { role: 'the mayor', n: 'sg', office: true },
+    { role: 'a clerk in the hall', n: 'sg', for: ['hall'] },
+    { role: 'one of the aldermen', n: 'sg', for: ['hall'] },
+    { role: "the hall's doorkeeper", n: 'sg', for: ['hall'] },
+    { role: 'the clerks who keep the hall', n: 'pl', for: ['hall'] },
+    { role: 'a man who sits on the council', n: 'sg', for: ['hall'] },
+    { role: 'the mayor', n: 'sg', office: true, for: ['hall'] },
+    { role: 'a bailiff', n: 'sg', for: ['court'] },
+    { role: 'a clerk of the court', n: 'sg', for: ['court'] },
+    { role: 'one who waits on the court day', n: 'sg', for: ['court'] },
+    { role: 'the officers of the court', n: 'pl', for: ['court'] },
+    { role: 'the chief magistrate', n: 'sg', office: true, for: ['court'] },
   ]),
   'City hall': Object.freeze([
-    { role: 'a clerk in the hall', n: 'sg' },
-    { role: 'one of the aldermen', n: 'sg' },
-    { role: "a secretary of the city's offices", n: 'sg' },
-    { role: 'the under-clerks of the hall', n: 'pl' },
-    { role: 'a woman who keeps the hall books', n: 'sg' },
-    { role: 'the mayor', n: 'sg', office: true },
-    { role: 'the governor', n: 'sg', office: true },
+    { role: 'a clerk in the hall', n: 'sg', for: ['hall'] },
+    { role: 'one of the aldermen', n: 'sg', for: ['hall'] },
+    { role: "a secretary of the city's offices", n: 'sg', for: ['hall'] },
+    { role: 'the under-clerks of the hall', n: 'pl', for: ['hall'] },
+    { role: 'a woman who keeps the hall books', n: 'sg', for: ['hall'] },
+    { role: 'the mayor', n: 'sg', office: true, for: ['hall'] },
+    { role: 'the governor', n: 'sg', office: true, for: ['hall'] },
+    { role: 'a bailiff', n: 'sg', for: ['court'] },
+    { role: 'a clerk of the court', n: 'sg', for: ['court'] },
+    { role: 'the officers of the court', n: 'pl', for: ['court'] },
+    { role: 'the chief magistrate', n: 'sg', office: true, for: ['court'] },
   ]),
   'Mayor and council': Object.freeze([
     { role: 'one of the council', n: 'sg' },

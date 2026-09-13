@@ -215,10 +215,16 @@ describe('⭐ THE SEAM COMPOSES TO THE KERNEL — an empty candidate list moves 
     const elsewhere = drift.filter((row) => !row.includes(FACED_AT));
     expect(elsewhere.slice(0, 10), 'a pool where the composer and the kernel disagree').toEqual([]);
     expect(elsewhere.length).toBe(0);
-    // NON-VACUITY OF THE CARVE-OUT: the faced pool really does move, on the seed whose draw
-    // leaves face 0 — TEXT and SPINE on both audiences at one of the sweep's seeds.
+    // NON-VACUITY OF THE CARVE-OUT: the faced pool really does move.
+    // ⭐ AND THE KIND OF MOVE CHANGED AT CAR 8b-W-18l, which is worth stating rather than
+    // loosening silently. Until the re-cut, the faced pool's disagreement with the kernel was
+    // TEXT + SPINE: the composer drew a face and the kernel read the spine. Now the faces name
+    // ATTRIBUTION SLOTS, and this sweep hands the composer no `roles` (it composes the shipped
+    // corpus with nothing but a bag), so a drawn face FAILS CLOSED and the whole unit is
+    // silent — NULLNESS. That is the designed behaviour, asserted here as the exact kind:
+    // a read that skipped `withFaceSources` may silence a rung and may never print `{hall}`.
     expect(faced.length, 'the named mover moved').toBeGreaterThan(0);
-    expect([...new Set(faced.map((row) => row.split(' ')[0]))].sort()).toEqual(['SPINE', 'TEXT']);
+    expect([...new Set(faced.map((row) => row.split(' ')[0]))].sort()).toEqual(['NULLNESS']);
     // ANTI-VACUITY: an equality over an empty sweep is free.
     expect(checks).toBe(708 * 2 * SWEEP_SEEDS.length);
     expect(composed, 'and most of the sweep really did compose a unit').toBeGreaterThan(6000);

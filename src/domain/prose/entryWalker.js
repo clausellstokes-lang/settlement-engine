@@ -769,6 +769,28 @@ function armC6(entry, ground, out) {
 }
 
 /**
+ * ⭐ THE ATTRIBUTION SLOTS, WHICH ARM D MUST NOT COUNT (ADDENDUM 18 ruling 25; car 8b-W-18l).
+ *
+ * A `{hall}` on a face is not a fill of the variant's bag: it is the ROLE the composer draws
+ * from the town's own institution rows before the bag is applied (`stateProseKernel.js`
+ * `fillRoleSlots`). The spine has no source and therefore cannot declare one, so arm D's
+ * question — "does the variant declare this slot?" — has no answer for these twelve words and
+ * asking it convicts every lawful face. `assertFaces` licenses them by the same name at the
+ * projector; this is the instrument side of that one amendment.
+ *
+ * ⛔ RE-SPELLED, NOT IMPORTED, and held to the kernel BY NAME in the suite. This module is the
+ * prose ISLAND, byte-fenced off the product, and may not import a display leaf — the same
+ * constraint `faceSources.js` records for the generator's keyword lists, and the same cure: a
+ * test reads this file and asserts every word of the kernel's `ROLE_SLOTS` appears in it, so a
+ * word added there and forgotten here reds by name rather than failing a pool silently.
+ * @type {ReadonlyArray<string>}
+ */
+const ATTRIBUTION_SLOTS = Object.freeze([
+  'stranger', 'elders', 'hall', 'tavern', 'guild', 'register',
+  'muster', 'watch', 'garrison', 'gate', 'market', 'court',
+]);
+
+/**
  * ARM D — the LICENCE, read against the block's COMPOSED FILL. A variant naming a slot the
  * composer never fills is UNREACHABLE: anchored liveness drops it at every draw, so it is
  * authored prose no reader can ever meet. That is not a contradiction — it is a licence
@@ -779,7 +801,8 @@ function armC6(entry, ground, out) {
  * @param {WalkResult} out
  */
 function armD(entry, ground, out) {
-  const named = [...new Set([...String(entry.text).matchAll(SLOT_RE)].map((m) => m[1]))];
+  const named = [...new Set([...String(entry.text).matchAll(SLOT_RE)].map((m) => m[1]))]
+    .filter((slot) => !ATTRIBUTION_SLOTS.includes(slot));
   const declared = Array.isArray(entry.slots) ? entry.slots : [];
   for (const slot of named) {
     if (!declared.includes(slot)) {

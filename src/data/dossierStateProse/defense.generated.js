@@ -609,9 +609,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           ],
           "vid": 1,
           "wordings": [
-            "The custom the elders keep says which households owe work on the walls. It says nothing about who is owed for it.",
-            "A clerk in the hall puts the walls' keeping under the military purse. At the hall it is not a thing in dispute.",
-            "The guilds pay into the military purse. A factor for them holds that the keeping is in dispute wherever the guilds are asked, and that the purse has bought a wall and no soldiers to hold it."
+            "{elders} {v:keep} a custom that says which households owe work on the walls. It says nothing about who is owed for it.",
+            "{hall} {v:put} the walls' keeping under the military purse. At the hall it is not a thing in dispute.",
+            "{guild} {v:pay} into the military purse and {v:hold} that the keeping is in dispute wherever the guilds are asked, and that the purse has bought a wall and no soldiers to hold it."
           ],
           "sources": [
             null,
@@ -638,9 +638,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "slots": [],
           "vid": 2,
           "wordings": [
-            "A traveller found a stair up to the walk with somebody's stores stacked on it.",
-            "At the tavern they name who would turn out if the walls were ever wanted, and nobody at the table is surprised by the names.",
-            "Whoever holds the way in stops a stranger and asks his business before letting him through."
+            "{stranger} {v:find} a stair up to the walk with somebody's stores stacked on it.",
+            "{tavern} {v:name} who would turn out if the walls were ever wanted, and nobody at the table is surprised by the names.",
+            "{gate} {v:stop} a stranger and {v:ask} his business before letting him through."
           ],
           "sources": [
             null,
@@ -655,9 +655,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "slots": [],
           "vid": 3,
           "wordings": [
-            "Among the elders the walls are a boundary before they are anything else, and where the line runs is the older argument.",
-            "The watch says the hall's record has the walls in it and not the walk along them. The survey finds them on the walls after dark all the same.",
-            "The matters that reach the court about the walls are about who owes the work on them. None of them are about who would hold them."
+            "{elders} {v:take} the walls for a boundary before anything else, and where the line runs is the older argument.",
+            "{watch} {v:say} the hall's record has the walls in it and not the walk along them. The survey finds the watch on the walls after dark all the same.",
+            "{court} {v:hear} what is disputed about the walls, and it is always who owes the work on them. Nothing that comes there is about who would hold them."
           ],
           "sources": [
             null,

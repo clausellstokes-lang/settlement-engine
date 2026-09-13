@@ -191,6 +191,10 @@ function addRowRoles(out, sources, rowName, offices) {
     const held = out.get(source) || [];
     for (const entry of roles) {
       if (entry.office === true && !offices.has(entry.role.toLowerCase())) continue;
+      // ⛔ A ROW THAT LENDS TWO SOURCES SPLITS ITS ROLES (`for`). The meeting hall seats both
+      // the `hall` and the `court`, and without the split a `[court]` face spoke in the
+      // hall's voice. An entry with no `for` goes to every source its row lends.
+      if (Array.isArray(entry.for) && !entry.for.includes(source)) continue;
       if (!held.some((row) => row.role === entry.role)) held.push({ role: entry.role, n: entry.n });
     }
     out.set(source, held);

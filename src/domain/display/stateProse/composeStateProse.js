@@ -376,6 +376,17 @@ function rosterOf(sources) {
 }
 
 /**
+ * The town's roles, typed at the boundary the same way the roster is: a `Map` from a source
+ * word to its roster on this town (`faceSources.js` `rolesOf`), or `null`. Anything else is
+ * not a roles table and is refused here rather than crashing a draw.
+ * @param {unknown} roles
+ * @returns {Map<string, Array<{role: string, n: string}>>|null}
+ */
+function rolesMapOf(roles) {
+  return roles instanceof Map ? /** @type {never} */ (roles) : null;
+}
+
+/**
  * ⭐ THE SPINE PIECE — the composer's own coordinate rule, and the one the composed-prose
  * manifest's base-side synthesis is pinned against on every recorded cell.
  *
@@ -974,6 +985,15 @@ export function composeStateProse(corpus, blockId, options = {}) {
     audience: audienceOf(options.audience),
     dimensions: options.dimensions || {},
     sources: rosterOf(options.sources),
+    // ⭐ THE ROLES AND THE PAGE'S EXCLUSION SET (ADDENDUM 18 ruling 25; car 8b-W-18l). ⛔ THE
+    // READ IS A CLOSED OBJECT, NOT A SPREAD OF `options`, and that is deliberate — but it
+    // means a key added to `withFaceSources` and not added HERE is silently dropped. It was:
+    // the first render of the re-cut pool silenced every face that drew, because `read.roles`
+    // was undefined, `fillRoleSlots` returned null and `fillSlots` turned the empty raw into
+    // silence. Fail-closed did its job and hid the defect behind a spine line, which is why
+    // this comment names the trap rather than just fixing it.
+    roles: rolesMapOf(options.roles),
+    printedRoles: options.printedRoles instanceof Set ? options.printedRoles : new Set(),
   };
 
   const turn = seatedTurn(block, spineKey, options.turns, read);
@@ -1072,6 +1092,15 @@ export function composeStateProseMount(corpus, blockId, rungs, options = {}) {
     audience: audienceOf(options.audience),
     dimensions: options.dimensions || {},
     sources: rosterOf(options.sources),
+    // ⭐ THE ROLES AND THE PAGE'S EXCLUSION SET (ADDENDUM 18 ruling 25; car 8b-W-18l). ⛔ THE
+    // READ IS A CLOSED OBJECT, NOT A SPREAD OF `options`, and that is deliberate — but it
+    // means a key added to `withFaceSources` and not added HERE is silently dropped. It was:
+    // the first render of the re-cut pool silenced every face that drew, because `read.roles`
+    // was undefined, `fillRoleSlots` returned null and `fillSlots` turned the empty raw into
+    // silence. Fail-closed did its job and hid the defect behind a spine line, which is why
+    // this comment names the trap rather than just fixing it.
+    roles: rolesMapOf(options.roles),
+    printedRoles: options.printedRoles instanceof Set ? options.printedRoles : new Set(),
   };
 
   const ranked = rows.map((rung, at) => {
