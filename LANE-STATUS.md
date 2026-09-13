@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-13 07:55:26 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-13 08:00:41 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = c2b72466a Plan: wave 3 has begun — batch 2 of DS-DEF-2 (three pools) through draft 065b9ded6 and c
 
@@ -94,11 +94,11 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
 
 ## WORKFLOW RUNS of chair session 4e3d2f70-f45f-4e14-b571-514c339cfa17 — PER AGENT, PER LANE (owner 09-11: save progress per agent per lane; a run dies with the session, its journal + the packets + the dock commits are the checkpoint; journals mirrored under $SC/_progress/<wf>/)
 - **wf_74510771-4fe** (mtime 09-13 07:53): agent calls 5 (5 distinct) · DONE 0 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 5 — mirror `_progress/wf_74510771-4fe/`
-    - `aae3b7721` MARKER Invasion & War: walls AND professional garrison · IN FLIGHT · transcript 09-13 07:55 658 KB · 25 tool calls · files: card-mech.txt · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
-    - `a14855157` MARKER Internal Security: full legal chain (court AND prison) · IN FLIGHT · transcript 09-13 07:55 628 KB · 22 tool calls · files: card.md · last: Bash D=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc
-    - `a54b8e93a` MARKER Economic Survival: STRONG · IN FLIGHT · transcript 09-13 07:55 522 KB · 19 tool calls · last: Bash L=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc
-    - `a2ed3002f` MARKER Disasters & Famine: granary AND hospital · IN FLIGHT · transcript 09-13 07:55 553 KB · 21 tool calls · last: Bash R=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc
-    - `afb443b37` MARKER Beasts & Monsters: frontier, credible deterrence · IN FLIGHT · transcript 09-13 07:55 547 KB · 20 tool calls · files: mark-bmfcd.txt · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `aae3b7721` MARKER Invasion & War: walls AND professional garrison · IN FLIGHT · transcript 09-13 08:00 926 KB · 57 tool calls · files: card-mech.txt · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `a14855157` MARKER Internal Security: full legal chain (court AND prison) · IN FLIGHT · transcript 09-13 07:58 770 KB · 37 tool calls · files: card.md · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `a54b8e93a` MARKER Economic Survival: STRONG · IN FLIGHT · transcript 09-13 08:00 752 KB · 43 tool calls · last: Bash R=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc
+    - `a2ed3002f` MARKER Disasters & Famine: granary AND hospital · IN FLIGHT · transcript 09-13 08:00 793 KB · 46 tool calls · last: Bash L=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc
+    - `afb443b37` MARKER Beasts & Monsters: frontier, credible deterrence · IN FLIGHT · transcript 09-13 07:59 823 KB · 44 tool calls · files: mark-bmfcd.txt · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
 - **wf_c31490ff-2d1** (mtime 09-13 07:43): agent calls 23 (23 distinct) · DONE 23 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 0 — mirror `_progress/wf_c31490ff-2d1/`
     - `af733d6a7` MARKER Invasion & War: force with NO walls · DONE · transcript 09-13 06:14 817 KB · 36 tool calls · files: mark-out.txt, "$D/card.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasio
     - `a81ba66ec` MARKER Internal Security: no legal infrastructure · DONE · transcript 09-13 06:14 845 KB · 36 tool calls · files: "$D/card.md, "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--internal-security-no-legal-infrastructure/card.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--interna
@@ -135,4 +135,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `ab8783d22` WRITER Invasion & War: walls with NO force · DONE · transcript 09-13 02:30 725 KB · 17 tool calls · files: candidates-2.md, facetext.txt, ft2.txt · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasio
 
 ## PROCESSES: 
-load: 2.60 2.47 2.32
+load: 2.40 2.36 2.29
