@@ -1,28 +1,15 @@
-# LANE-STATUS — written 2026-09-13 02:08:27 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-13 02:13:44 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = ba6a69b1e Plan: rulings 18 and 19 recorded (a source speaks from its rank and the town's circumstanc
 
 ## BUILD / KIT LANES (dock · base · cars · porcelain · receipt)
 - REWRITE 8b DS-DEF-11 (the validation block; cure round): dock laneRW-DEF11 ABSENT
 - REWRITE 8b-W (the wiring car, landed in its dock = the consist lineage): dock laneRW-DEFW ABSENT
-- **DS-DEF-2 (waits for the tables)** dock `laneRW-DEF2` HEAD 4cf42141b · 12 cars over f2da5a3ee · porcelain 17 · last commits:
+- **DS-DEF-2 (waits for the tables)** dock `laneRW-DEF2` HEAD 6275e8027 · 14 cars over f2da5a3ee · porcelain 0 · last commits:
+    6275e8027 REWRITE 8b-W-18e (golden): the generator golden master re-recorded at the clean tip d8a77df97 — 525 of 525 rows moved under ADDENDUM 18 ruling 16, predicted and held through the signed door; the register stays UNFROZEN and the signed record is withdrawn to the packet until the freeze act
+    d8a77df97 REWRITE 8b-W-18e: a power exists only where an institution can represent it (ADDENDUM 18 ruling 16) — the faction roster gated on the live institution roster per archetype; a declared simulation shift: 532 of 768 sample towns lose Merchant Guilds (219), Noble Families (121), Landed Gentry (88), Manor Household (64), Military/Guard (58), Noble Houses (28), Arcane Orders (26), Thieves' Guild (1)
     4cf42141b REWRITE 8b-W-18c: one face per POWER — the face draw filters by the town's own sources and a marked pair renders both (ADDENDUM 18 ruling 15); the face-draw register row re-recorded as a declared shift; zero text moved today
     8a236ea21 REWRITE 8b-W-18d: the marker's instruments (ADDENDUM 18 rulings 4, 6, 11) — the card prints what would be false, the page renders beside the machine sentences, the frozen-field census is field-grain
-    6e5ee9716 REWRITE 8b-W-18b: the round-1 draft retired from the annex (v3 restarts DS-DEF-2 from the shipped rows) and the {defmaterial} fill lands (ADDENDUM 18 ruling 10) — zero text shift beyond the retirement
-    6a6c2ddf3 REWRITE 8b-W-18a: the gate refuses nothing on taste (ADDENDUM 18 ruling 1); a face's slots are a subset of its spine's and the town never names itself in a face (ruling 12); the claim-equality prose struck (ruling 2)
-    porcelain (uncommitted work in the dock — commit it FIRST after re-proving):
-       M schema/custom-content.manifest.json
-       M src/domain/content/customContentAdmission.generated.js
-       M src/domain/content/customContentManifest.generated.js
-       M src/domain/prose/holderTable.js
-       M src/domain/worldPulse/factionDensityKernel.js
-       M src/generators/power/rulingStructure.js
-       M src/generators/steps/assembleInstitutions.js
-       M src/generators/steps/neighbourFactions.js
-       M supabase/functions/_shared/customContentManifest.generated.ts
-       M supabase/migrations/185_custom_content_versions.sql
-       M tests/domain/npcLadderFactionKey.test.js
-       M tests/domain/religionLegitimacyFactionKey.test.js
     receipt `receipt-rewrite.md` (mtime 09-12 20:49) head:
       | # RECEIPT — the REWRITE train
       | 
@@ -517,4 +504,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `ad30ac0bb` FOLDER · DONE · transcript 09-11 06:02 1531 KB · 36 tool calls · files: _partD.md, _partE.md, _partF.md, _partG.md · result: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/entailment/ENTAILMENT-TABLE.draft.md
 
 ## PROCESSES: 
-load: 2.18 3.04 3.00
+load: 2.43 2.79 2.90
