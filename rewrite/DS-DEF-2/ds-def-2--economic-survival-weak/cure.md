@@ -26,7 +26,7 @@ unclaimed, at §E.
    - `[face]` `[gate]` The bar at the way through is kept by the doors nearest it, those who hold the way say. The question was never put to those doors.
    - `[face]` `[register]` Those who keep the ground say nobody is turned away from the digging, and whoever owns the spade brings the spade.
    - `[face]` `[stranger]` The pails at the water each carry a household's own mark, a stranger says, and a visitor is handed the unmarked pail.
-   - `[face]` `[muster]` The muster says the bows and the spears it would carry are the ones it hunts with, and no one ever promised it a better spear.
+   - `[face]` `[muster]` The muster says the bows and the spears it would carry are the ones it hunts with. Nobody ever promised it a better spear.
    - `[face]` `[elders · pair 1 · disagree]` The elders say the turn comes round to everyone who can spare a back.
    - `[face]` `[tavern · pair 1 · disagree]` At the tavern they say the turn comes round to the same backs and never as far as the next roof.
    - `[face]` `[garrison]` The store the soldiers eat out of is the store the place eats out of, by their own account, and no one has walked them past its shelves.
@@ -42,7 +42,7 @@ unclaimed, at §E.
    - `[face]` `[muster]` The muster says what comes up from a door is a body or a tool, and the tool is remembered as well as the body.
    - `[face]` `[market]` At the market they say the place takes from whoever can be found, and there is nothing easier to find than a stall.
    - `[face]` `[watch]` One of the watch says the same corners get stood in whether the purse is settled or not, and the round ends where it starts, at the water.
-   - `[face]` `[garrison]` Nobody here asks the soldiers their business and everybody here asks them for a hand, the soldiers say.
+   - `[face]` `[garrison]` Nobody here asks the soldiers their business, the soldiers say, and everybody here asks them for a hand.
 3. `[unfolding]` What the arrangement here would cost, and whose the cost would be, has never been settled between the households.
    - `[face]` `[stranger]` A household's store is in its own cellar and under its own floor, a stranger says. No floor is lifted for a visitor.
    - `[face]` `[register · pair 3 · reinforce]` Those who keep the ground say a burying is the one thing here that waits for no purse.
@@ -125,22 +125,28 @@ bare coordinating *and* carrying the same withheld second beat, nine of variant 
 shape end to end.
 
 > **Counted in this file: the string *and that* appears in ZERO of twenty-seven faces.** The withheld
-> beat is now carried by the ORDER, as the refuter asked. The architectures in play, spread so that no
-> shape runs three in a row: object fronted with the attribution mid (6) · front attribution with an
-> earning second clause (11) · front attribution, single clause (4) · attribution carried across a full
-> stop into a second sentence (4) · trailing attribution (1) · attribution mid with a three-item list
-> (1). Variant 1, which was nine-of-ten on one shape, now runs mid · front · mid · front · front ·
-> front · mid · front · mid · front, with the two short pair halves sitting together where a pair wants
-> them.
+> beat is now carried by the ORDER, as the refuter asked. Counted on two axes. **Attribution position:**
+> object or subject fronted with the attribution MID, 11 of 27 (V1 F1, F3, F7, F9 · V2 F1, F3, F5, F9 ·
+> V3 F1, F4, F7); front, 16. **Clause architecture:** front attribution with an earning second clause,
+> 11 · attribution mid with an earning second clause, 8 · a face of two sentences, the attribution
+> carried across the full stop, 5 (V1 F1, F4 · V2 F2 · V3 F1, F4) · front attribution, single clause, 4
+> (the four pair halves, which is where a shared shape belongs) · and one of those eleven carrying a
+> three-item list (V1 F8). Variant 1, which was nine-of-ten on one shape, now runs mid · front · mid ·
+> front · front · front · mid · front · mid · front on the attribution and six distinct architectures
+> underneath it; the only place three fronts fall together is F4 followed by the two pair halves, and
+> the three are a two-sentence face and two single clauses.
 
 **2. NOT ONE FACE LANDED ON A CONCRETE NOUN** — twenty-seven of twenty-seven closed on a pronoun, a
 particle, a participle or an abstract.
 
-> **Counted in this file: twenty-two of twenty-seven close on a concrete noun.** In order: doors ·
-> spade · pail · spear · back · roof · shelves · grain · basket · neighbour · sack · ears · cups ·
-> count · opens · body · stall · water · hand · visitor · purse · ground · door · crop · light · stall ·
-> purse. The five that do not are *count*, *opens*, *hand*, *visitor* and *light*, each of which is the
-> thing the sentence is actually about; none is a pronoun and none is a particle. **Fifteen faces
+> **Counted in this file: twenty-five of twenty-seven close on a concrete noun.** The last word of every
+> face, in order: doors · spade · pail · spear · back · roof · shelves · grain · basket · neighbour ·
+> sack · ears · cups · count · opens · body · stall · water · hand · visitor · purse · ground · door ·
+> crop · light · stall · purse. **Not one is a pronoun, a particle or a participle**, which is the whole
+> of the ruling's second finding. The two that are not concrete nouns are *count*, an abstract noun and
+> the pool's own thesis word, and *opens*, a verb. Against `draft.md`'s twenty-seven of twenty-seven
+> closing on *wanted to · anything · to use · them · take it · the rest · in it · after · are not*, that
+> is the axis turned over. **Fifteen faces
 > closed on a negation in `draft.md`; one does here** (*not one of the doors opens*, the variant's
 > heard particular, kept because the question it leaves hanging is one of ruling 34's two non-plain
 > closes and the pool should not lose both).
