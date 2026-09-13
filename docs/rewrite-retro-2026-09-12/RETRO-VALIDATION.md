@@ -107,3 +107,10 @@ Stated first, so a reviewer does not have to find them:
 ### 6.4 The five strikes the archive itself nominates first, in one slice alone
 
 The W1-W10 slice argued against its own decisions hard enough to be worth lifting here. A reviewer should start with these: **R-i** (the thread at k=0 — struck citing a mechanical guard that exists only when k ≥ 1, i.e. provably absent in exactly the case the rule was written for, and the residual harm is a dangling referent, which is a floor-1 defect not a matter of taste) · **W1** (possessor binding — struck by reading a holder table as licensing possession, which the ratified entailment law forbids, and ADDENDUM 12 records this construction as the route by which the shipped watch got asserted of a wall) · **R-vi/W7** (see 6.2 — resolved, but on a ground the slice did not have) · **R-viii′'s headcount half** (struck as a cell-overlap rule, when cell overlap is floor 1 in operational dress: two desks narrating one quantity) · **W4** (the construction contract — the one strike that removes an arm which demonstrably CAUGHT a regression, in favour of a pool-grain craft verdict that **does not yet exist and has never run**).
+
+
+---
+
+## 7. THE FABLE SITTING SAT — 2026-09-12 evening
+
+The validation this record was built for happened: **`FABLE-SITTING-2026-09-12.md`**. Fourteen Fable seats validated every row (1,137: 925 OK · 149 CHALLENGE · 63 REVERSE), the floors' twelve code claims, and 684 faces across the three corpora. Every `VALIDATION` cell in the six items files is filled. The reversals are finding rows in `evidence/CONTRADICTION-TABLE.md` §V, which governs where it and an earlier row disagree; CHAIR-NOTE §2.2 E-4(b) is struck by annotation. The owner's word on the verdict became brief **ADDENDUM 18** (`verbatim/BRIEF-ADDENDUM-18.as-signed.md`; its re-pointings of ratified law rowed in `items-ADDENDUM-18.md`). ⚠ §6.3's citation rule still binds: the dock at `f2da5a3ee`.
