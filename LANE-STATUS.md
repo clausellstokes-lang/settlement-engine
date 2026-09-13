@@ -1,15 +1,17 @@
-# LANE-STATUS — written 2026-09-13 18:30:15 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-13 18:35:32 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = c2b72466a Plan: wave 3 has begun — batch 2 of DS-DEF-2 (three pools) through draft 065b9ded6 and c
 
 ## BUILD / KIT LANES (dock · base · cars · porcelain · receipt)
 - REWRITE 8b DS-DEF-11 (the validation block; cure round): dock laneRW-DEF11 ABSENT
 - REWRITE 8b-W (the wiring car, landed in its dock = the consist lineage): dock laneRW-DEFW ABSENT
-- **DS-DEF-2 (waits for the tables)** dock `laneRW-DEF2` HEAD 49183bafe · 43 cars over f2da5a3ee · porcelain 0 · last commits:
+- **DS-DEF-2 (waits for the tables)** dock `laneRW-DEF2` HEAD 49183bafe · 43 cars over f2da5a3ee · porcelain 1 · last commits:
     49183bafe INSTRUMENT DEBT 4/4: two line-number addresses cured (one of them was a FALSE GREEN), two live counts fenced shrink-only
     850a5f0a9 INSTRUMENT DEBT 3/4: the settlement-only census falls to 21 because {defmaterial} landed — re-recorded as a CEILING, with the block named
     ede649e6a INSTRUMENT DEBT 2/4: the lighting census is re-measured through its own door, with the nine files named
     1ca8fa080 INSTRUMENT DEBT 1/4: the voice-arms env spelling gets a disposition — a GENUINE DEFECT, not a pin to move
+    porcelain (uncommitted work in the dock — commit it FIRST after re-proving):
+      ?? def2-joint.json
     receipt `receipt-rewrite.md` (mtime 09-12 20:49) head:
       | # RECEIPT — the REWRITE train
       | 
@@ -114,8 +116,8 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `a1ccf9eb0` WRITER Invasion & War: neither walls nor force · DONE · transcript 09-13 18:07 840 KB · 17 tool calls · files: shipped.md, candidates-2.md, rows.txt · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasio
     - `a294680b2` SELECTOR Beasts & Monsters: plagued, perimeter AND organized force · DONE · transcript 09-13 18:28 1151 KB · 33 tool calls · files: draft.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--beasts-
     - `ad80b91e6` SELECTOR Beasts & Monsters: plagued, NO perimeter and NO force · DONE · transcript 09-13 18:26 1027 KB · 29 tool calls · files: shipped.md, "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--beasts-monsters-plagued-no-perimeter-and-no-forc/draft.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--beasts-
-    - `ab3a4605d` SELECTOR Beasts & Monsters: settled, defenses beyond the need · IN FLIGHT · transcript 09-13 18:21 938 KB · 17 tool calls · last: Bash sed -n '1,120p' /Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b5
-    - `a5f7a85df` SELECTOR Beasts & Monsters: settled, nothing organized · IN FLIGHT · transcript 09-13 18:30 1094 KB · 17 tool calls · files: draft.md · last: Bash mkdir -p /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17
+    - `ab3a4605d` SELECTOR Beasts & Monsters: settled, defenses beyond the need · IN FLIGHT · transcript 09-13 18:35 1321 KB · 30 tool calls · files: draft.md · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `a5f7a85df` SELECTOR Beasts & Monsters: settled, nothing organized · IN FLIGHT · transcript 09-13 18:35 1270 KB · 26 tool calls · files: draft.md · last: Bash cat > /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/sc
     - `acb4f8a66` SELECTOR Invasion & War: militia only · DONE · transcript 09-13 18:21 944 KB · 24 tool calls · files: "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasion-war-militia-only/draft.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasio
     - `a95de8736` SELECTOR Invasion & War: neither walls nor force · DONE · transcript 09-13 18:27 1037 KB · 26 tool calls · files: "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasion-war-neither-walls-nor-force/draft.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasio
 - **wf_9121cfb9-53a** (mtime 09-13 16:08): agent calls 61 (61 distinct) · DONE 49 · FAILED (not retried) 12 · RETRIED (superseded attempts) 0 · IN FLIGHT 0 — mirror `_progress/wf_9121cfb9-53a/`
@@ -254,4 +256,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `ab8783d22` WRITER Invasion & War: walls with NO force · DONE · transcript 09-13 02:30 725 KB · 17 tool calls · files: candidates-2.md, facetext.txt, ft2.txt · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasio
 
 ## PROCESSES: 
-load: 2.34 2.41 2.35
+load: 2.19 2.40 2.37
