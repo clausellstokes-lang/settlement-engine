@@ -3,7 +3,7 @@
   "stamp": {
     "files": {
       "src/domain/display/stateProse/generalStateProse.js": "ce977e6b51961f665b428132f10f46a341652a96a72fd3c344d02acd055d45a4",
-      "src/domain/display/stateProse/powerStateProse.js": "050f93469c7b5403244e661df9103f85e0676171aea9f86d7a78f99a52cd5429",
+      "src/domain/display/stateProse/powerStateProse.js": "0395b57b13194985ada13bfef0e6f3e5503227358d12b332a4e53c9dca13d62b",
       "src/domain/display/stateProse/economyStateProse.js": "408db8e8fd53dd51762b4f8e26fc5e32bc108804d91fa6cbbf1809e64a1be45f",
       "src/domain/display/stateProse/defenseStateProse.js": "9b3bf689cd12374ab214b4938375877c8799d353f75eaf1bc40179cacc35a845",
       "src/domain/display/stateProse/stressorsStateProse.js": "b8973ebedc9e6ce761e2484adcd5d1efd2aa76dd1b92e454cd366ccb40412d7b",
@@ -49,7 +49,7 @@
     "objectClassed": 99,
     "mountedRows": 566,
     "absent": {
-      "measured": 367,
+      "measured": 368,
       "default": 3,
       "not-produced": 60,
       "method-call": 18
@@ -59,7 +59,7 @@
     "kNotExecutable": 347,
     "branchGrainRows": 330,
     "functionGrainRows": 378,
-    "customReachableRows": 29,
+    "customReachableRows": 30,
     "relationRows": 165,
     "relationRowsJoinable": 0,
     "ratifiedAliases": 3,
@@ -24988,6 +24988,7 @@
       "grammars": 3,
       "predicate": [],
       "branchReads": [
+        "power.factions",
         "power.recentConflict"
       ],
       "fieldsRead": [
@@ -24999,11 +25000,13 @@
       "keyFunction": "stabilityLensPoolKey",
       "rung": "literal",
       "reads": [
+        "power.factions",
         "power.recentConflict"
       ],
       "readsGrain": "branch",
       "narrowed": false,
       "absent": {
+        "power.factions": "measured",
         "power.recentConflict": "measured"
       },
       "covert": false,
@@ -25013,7 +25016,7 @@
         "power.stabilityHeader"
       ],
       "attach": [],
-      "k": 2,
+      "k": 1,
       "rateBp": 9935,
       "departure": null,
       "source": {
@@ -25022,6 +25025,7 @@
           "court"
         ],
         "fields": {
+          "power.factions": "",
           "power.recentConflict": "court"
         },
         "holder": null,
@@ -42617,9 +42621,9 @@
     {
       "block": "DS-POW-2",
       "spines": 8,
-      "facts": 5,
+      "facts": 6,
       "spinesReachedBp": 10000,
-      "meanReachBp": 7500
+      "meanReachBp": 7708
     },
     {
       "block": "DS-POW-3",
@@ -44402,9 +44406,9 @@
     {
       "block": "DS-POW-2",
       "spines": 8,
-      "facts": 5,
+      "facts": 6,
       "spinesReachedBp": 10000,
-      "meanReachBp": 7500,
+      "meanReachBp": 7708,
       "byFact": [
         {
           "field": "factions",
@@ -44435,6 +44439,18 @@
             "governing faction holds a DOMINANT share",
             "governing faction holds a NARROW plurality",
             "recentConflict present"
+          ]
+        },
+        {
+          "field": "power.factions",
+          "attach": [
+            "stable matched",
+            "unstable matched",
+            "critical matched",
+            "siege matched",
+            "Desperate matched",
+            "governing faction holds a DOMINANT share",
+            "governing faction holds a NARROW plurality"
           ]
         },
         {
@@ -45372,11 +45388,11 @@
       ],
       [
         1,
-        79
+        80
       ],
       [
         2,
-        234
+        233
       ]
     ]
   },
@@ -45400,11 +45416,11 @@
         ],
         [
           1,
-          79
+          80
         ],
         [
           2,
-          234
+          233
         ]
       ],
       "blocksWithSpine": 51,
@@ -45430,7 +45446,7 @@
         "DS-STR-1",
         "DS-WAR-3"
       ],
-      "readPaths": 570,
+      "readPaths": 571,
       "modifierEligibleFactsByTab": [
         [
           "viability",
@@ -45624,7 +45640,7 @@
       ],
       [
         "factions",
-        2
+        3
       ],
       [
         "stressors",
@@ -45830,6 +45846,13 @@
         "on": "factions"
       },
       {
+        "block": "DS-POW-2",
+        "pool": "recentConflict present",
+        "kind": "factions",
+        "via": "bucket",
+        "on": "factions"
+      },
+      {
         "block": "DS-CND-1",
         "pool": "SEVERITY: critical",
         "kind": "services",
@@ -45954,7 +45977,7 @@
       "fields": {
         "LICENSED": 191,
         "OFFICE": 5,
-        "SOURCE-UNRESOLVED": 444
+        "SOURCE-UNRESOLVED": 445
       },
       "byKind": [
         [
@@ -45999,7 +46022,7 @@
         ]
       ],
       "unresolvedGrounds": {
-        "no-mapping": 444,
+        "no-mapping": 445,
         "no-institution-in-roster": 0
       },
       "twoSourceRows": 10,
@@ -47592,6 +47615,11 @@
       "roll",
       "rolls",
       "watch"
+    ],
+    "power.factions": [
+      "record",
+      "roll",
+      "rolls"
     ],
     "power.recentConflict": [
       "record",

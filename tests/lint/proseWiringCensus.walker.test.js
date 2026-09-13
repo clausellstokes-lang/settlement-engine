@@ -1054,7 +1054,13 @@ describe('car 0 — `absent`: a measurement, or a default wearing a reading\'s c
     // ⚠ THE THREE MOVED WITH THE GRAIN (car 0e). `absent` is keyed on `reads`, so the branch
     // grain shrinks the read paths from 757 to 529 and the distribution with them; nothing
     // about a path's absence semantics changed, only how many paths a pool is entitled to.
-    expect(totals.measured, 'read paths whose absence a predicate can see').toBe(367);
+    // ⭐ 367 → 368 AT THE DARK-POOL DEFECT CAR, AND THE CAUSE IS ONE LENS ORDER. DS-POW-2's
+    // `stabilityLensPoolKey` now asks the SHARE before the conflict (see `powerStateProse.js`
+    // — conflict-first had driven both share pools to 0/768 on the product's own path), so
+    // `DS-POW-2 :: recentConflict present` genuinely reads `power.factions` as well as
+    // `power.recentConflict`: it fires only where the share is silent. One read path added to
+    // one pool, measured, not one path's absence SEMANTICS changed.
+    expect(totals.measured, 'read paths whose absence a predicate can see').toBe(368);
     expect(totals.default, 'read paths where a fallback hides it').toBe(3);
     expect(totals['not-produced'], 'read paths no writer in the estate produces').toBe(60);
     // ⭐ THE FOURTH LABEL, ADDED AT MEASURE CAR 3 (the fold's cure 8, and the shape its P5
@@ -1064,7 +1070,7 @@ describe('car 0 — `absent`: a measurement, or a default wearing a reading\'s c
     // eighteen cells, and every one of them was a wrong verdict rather than a finding.
     expect(totals['method-call'], 'read paths whose tail is a builtin, not a field').toBe(18);
     expect(Object.values(totals).reduce((a, b) => a + b, 0), 'and the four labels partition the read paths')
-      .toBe(448);
+      .toBe(449);
     // ⛔ THE TABLE RUNG CARRIES NO ABSENCE RECORD (car 10, cure 4, applied to a new column).
     // Rung 3's field is `"<reader> (via <TABLE> in <file>)"` — this instrument's own label —
     // so asking a producer index about it answers `not-produced` on every table row BY
@@ -1857,18 +1863,24 @@ describe('SEAM car 5b — THE HOLDER CENSUS: the source of each construction (SI
     expect(summary.rows, 'ROWS by source standing').toEqual({
       LICENSED: 114, OFFICE: 3, 'SOURCE-UNRESOLVED': 591,
     });
+    // ⭐ 444 → 445 AT THE DARK-POOL DEFECT CAR, +1 AND NAMED. DS-POW-2's lens now asks the
+    // SHARE before the conflict, so `DS-POW-2 :: recentConflict present` carries a second
+    // field, `power.factions` — SOURCE-UNRESOLVED on the same `no-mapping` ground as the
+    // share pools' own copy of it. No row changed standing and no row was added.
     expect(summary.fields, 'FIELDS by source standing').toEqual({
-      LICENSED: 191, OFFICE: 5, 'SOURCE-UNRESOLVED': 444,
+      LICENSED: 191, OFFICE: 5, 'SOURCE-UNRESOLVED': 445,
     });
     expect(Object.values(summary.rows).reduce((a, b) => a + b, 0),
       'and every pool lands in exactly one row standing').toBe(spines.length);
     expect(Object.values(summary.fields).reduce((a, b) => a + b, 0),
-      'over this many sourced field entries').toBe(640);
+      'over this many sourced field entries').toBe(641);
     expect(summary.twoSourceRows, 'rows whose fields resolve to more than one kind').toBe(10);
     expect(summary.rowsWithNoReading, 'and rows the census recovered no reading for at all').toBe(347);
     // THE TWO UNRESOLVED GROUNDS STAY APART: a field no mapping row names is a different debt
     // from a kind with no institution behind it, and collapsing them would hide which is which.
-    expect(summary.unresolvedGrounds).toEqual({ 'no-mapping': 444, 'no-institution-in-roster': 0 });
+    // 444 → 445: the one `power.factions` field DS-POW-2's corrected lens order adds to
+    // `recentConflict present`. The GROUND is unchanged — a caller path no mapping row resolves.
+    expect(summary.unresolvedGrounds).toEqual({ 'no-mapping': 445, 'no-institution-in-roster': 0 });
     expect(summary.byKind, 'the licensed field count per kind').toEqual([
       ['muster', 61], ['market', 49], ['treasury', 22], ['court', 21], ['toll-bar', 13],
       ['watch', 9], ['road', 7], ['elders', 5], ['office', 5], ['parish', 4],

@@ -531,14 +531,46 @@ describe('DS-POW-2 — the share lens, and the silence in the middle', () => {
     expect(governingSharePoolKey(null)).toBeNull();
   });
 
-  it('LENS ORDER: a recent conflict speaks before the share, so both stay reachable', () => {
-    // The share is determinate for almost every generated town, so preferring it would
-    // leave `recentConflict present` reachable only on the rare town with no share.
+  it('LENS ORDER: the SHARE speaks before the conflict, so all three stay reachable', () => {
+    // ⛔ THIS ORDER IS A CORRECTION AND THE ASSERTION IS THE PIN ON IT. The earlier order
+    // put the conflict first on the premise that "the share is determinate for almost every
+    // generated town". Measured over the shipped 768-town RATE grid, both halves are false:
+    // `deriveBaselineConflict` ends in an unconditional return, so `recentConflict` is
+    // non-empty on 768/768, while the share is determinate on only 248/768 (DOMINANT 132,
+    // NARROW 116). Conflict-first therefore drove the two share pools to 0/768 — on this
+    // desk's path AND on PowerTab's — which is a reader denied prose that is already
+    // written. A TOTAL predicate ahead of a SELECTIVE one can only darken the selective one.
     expect(stabilityLensPoolKey('a quarrel over the levy', DOMINANT_FACTIONS))
-      .toBe('recentConflict present');
-    // THE CONTROL: same factions, no conflict ⇒ the share speaks, proving the ORDER.
-    expect(stabilityLensPoolKey(null, DOMINANT_FACTIONS))
       .toBe('governing faction holds a DOMINANT share');
+    expect(stabilityLensPoolKey('a quarrel over the levy', NARROW_FACTIONS))
+      .toBe('governing faction holds a NARROW plurality');
+    // THE CONTROL: the silent middle band has no share to offer, so the conflict speaks —
+    // which is the 520 of 768 that keep `recentConflict present` an ordinary pool.
+    const middle = [
+      { faction: 'Merchant Council', isGoverning: true, power: 40 },
+      { faction: 'Craft Guilds', power: 30 },
+      { faction: 'Arcane Orders', power: 25 },
+    ];
+    expect(governingSharePoolKey(middle)).toBeNull();
+    expect(stabilityLensPoolKey('a quarrel over the levy', middle))
+      .toBe('recentConflict present');
+    // And with neither reading available the lens is silent rather than inventing one.
+    expect(stabilityLensPoolKey(null, middle)).toBeNull();
+  });
+
+  it('PRODUCER PIN: the conflict string is unconditional, which is WHY it goes second', () => {
+    // The premise the corrected order rests on, pinned against the producer rather than
+    // trusted from a comment: if `deriveBaselineConflict` ever gains a path that returns
+    // nothing, `recentConflict present` stops being total and this order is worth re-asking.
+    const source = readFileSync(
+      new URL('../../src/generators/power/governanceNarrative.js', import.meta.url), 'utf8',
+    );
+    const body = source.slice(source.indexOf('const deriveBaselineConflict'));
+    const end = body.indexOf('\n};');
+    expect(end, 'deriveBaselineConflict no longer ends where this pin expects').toBeGreaterThan(0);
+    const tail = body.slice(0, end).trimEnd().split('\n').pop() || '';
+    expect(tail.trim(), 'deriveBaselineConflict no longer ends in an unconditional string return')
+      .toMatch(/^return '.+';$/);
   });
 });
 
@@ -569,7 +601,16 @@ describe('DS-POW-2 — ALIVENESS: all nine pools fire, and {seat} stays delibera
     // The three lens pools, each over its own state.
     const dominant = powerStateProse(ruled('Stable', { factions: DOMINANT_FACTIONS }), {}, { seed: 'd' });
     const narrow = powerStateProse(ruled('Stable', { factions: NARROW_FACTIONS }), {}, { seed: 'n' });
-    const conflict = powerStateProse(ruled('Stable', { factions: DOMINANT_FACTIONS, recentConflict: 'a quarrel over the levy' }), {}, { seed: 'c' });
+    // ⛔ THE CONFLICT CASE CARRIES MIDDLE-BAND FACTIONS, NOT DOMINANT ONES, because the
+    // lens reads the share first (see LENS ORDER above). That is not a workaround: the
+    // silent middle is the state 520 of the 768 grid towns are actually in, so this is the
+    // real shape that reaches the pool rather than a state the generator never builds.
+    const MIDDLE_FACTIONS = Object.freeze([
+      { faction: 'Merchant Council', isGoverning: true, power: 40 },
+      { faction: 'Craft Guilds', power: 30 },
+      { faction: 'Arcane Orders', power: 25 },
+    ]);
+    const conflict = powerStateProse(ruled('Stable', { factions: MIDDLE_FACTIONS, recentConflict: 'a quarrel over the levy' }), {}, { seed: 'c' });
     expect(dominant.stabilityLens.provenance.poolKey).toBe('governing faction holds a DOMINANT share');
     expect(narrow.stabilityLens.provenance.poolKey).toBe('governing faction holds a NARROW plurality');
     expect(conflict.stabilityLens.provenance.poolKey).toBe('recentConflict present');

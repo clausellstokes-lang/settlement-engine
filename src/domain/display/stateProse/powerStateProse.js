@@ -364,19 +364,44 @@ export function governingSharePoolKey(factions) {
 const NARROW_MARGIN = 0.15;
 
 /**
- * DS-POW-2's lens, underneath the stability line. RECENT CONFLICT FIRST, and for the same
- * reachability reason DS-POW-1's lens orders itself: the share is determinate for almost
- * every generated town, so preferring it would leave `recentConflict present` reachable
- * only on the rare town with no computable share. Ordering the conflict first makes both
- * pools ordinary — a town with a recent quarrel tells that story, and every other town
- * tells the share story.
+ * DS-POW-2's lens, underneath the stability line. THE SHARE FIRST, THE CONFLICT SECOND —
+ * and this order is a CORRECTION, recorded here because the version it replaces was right
+ * about the rule and wrong about the inputs.
+ *
+ * ⛔ THE RULE IS DS-POW-1'S: order the lens so that no pool becomes unreachable. What the
+ * earlier order got wrong was which of the two is the rare one. It reasoned that "the share
+ * is determinate for almost every generated town, so preferring it would leave
+ * `recentConflict present` reachable only on the rare town with no computable share".
+ * Both halves are false at this tip, and both were MEASURED over the shipped 768-town RATE
+ * grid (`scripts/prose-rate-corpus.mjs` `rateGrid()`), 2026-09-13:
+ *
+ * - `recentConflict` is TOTAL, not occasional. `deriveBaselineConflict`
+ *   (`src/generators/power/governanceNarrative.js:372-487`) ends in an UNCONDITIONAL
+ *   return, so every settlement the generator builds carries a conflict string.
+ *   Measured: non-empty on **768 of 768**.
+ * - The share is determinate on **248 of 768 (32 %)** — `DOMINANT` 132, `NARROW` 116 —
+ *   because the ordinary middle band deliberately renders nothing (see
+ *   `governingSharePoolKey`). It is the SELECTIVE reading, not the determinate one.
+ *
+ * So conflict-first did not make both pools ordinary; it made the share pair UNREACHABLE —
+ * `recentConflict present` 768/768 and the two share pools 0/768, on this desk's path and
+ * on `PowerTab.jsx`'s alike, which is a reader never seeing prose that is already written.
+ * Share-first restores the rule's intent on the true inputs: `DOMINANT` 132, `NARROW` 116,
+ * `recentConflict present` 520 — all three ordinary. A total predicate placed ahead of a
+ * selective one can only ever darken the selective one, whatever the subject matter.
+ *
+ * ⚠ The conflict line is not lost by moving second: every town still has a conflict string,
+ * and the 520 towns whose share falls in the silent middle are exactly the towns with no
+ * second reading to offer instead.
  * @param {unknown} recentConflict
  * @param {ReadonlyArray<{faction?: unknown, isGoverning?: unknown, power?: unknown}>|null|undefined} factions
  * @returns {string|null}
  */
 export function stabilityLensPoolKey(recentConflict, factions) {
+  const share = governingSharePoolKey(factions);
+  if (share) return share;
   if (text(recentConflict)) return 'recentConflict present';
-  return governingSharePoolKey(factions);
+  return null;
 }
 
 /**
