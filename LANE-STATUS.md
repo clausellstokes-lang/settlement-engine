@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-13 07:23:54 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-13 07:29:10 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = 85a3d71f2 Plan: HANDOFF_CURRENT refreshed to the re-cut machinery's first pool (§919.6 and after: t
 
@@ -111,7 +111,7 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `a0d612094` REFUTER Internal Security: no legal infrastructure · DONE · transcript 09-13 07:17 772 KB · 28 tool calls · files: rows.txt, "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--internal-security-no-legal-infrastructure/refute.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--interna
     - `a5ffcfd3a` REFUTER Disasters & Famine: NO reserves, NO medical provision · DONE · transcript 09-13 07:21 867 KB · 33 tool calls · files: rows.txt, refute.md · result: {"craft": {"verdict": "PASS", "speakers": 5, "collapse": "No collapse reaching DULL, but one repeated construction named: the NEGATED COUNTERPOINT, \"A, and not
     - `a68cc0845` CURER Invasion & War: force with NO walls · DONE · transcript 09-13 07:23 495 KB · 9 tool calls · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasio
-    - `abbd94d69` CURER Internal Security: no legal infrastructure · IN FLIGHT · transcript 09-13 07:21 440 KB · 4 tool calls · last: Bash cat "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scr
+    - `abbd94d69` CURER Internal Security: no legal infrastructure · IN FLIGHT · transcript 09-13 07:29 684 KB · 17 tool calls · files: cure.md, a.txt, b.txt · last: Bash cd "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scra
     - `a60d16947` CURER Disasters & Famine: NO reserves, NO medical provision · DONE · transcript 09-13 07:23 492 KB · 10 tool calls · files: a.txt, b.txt · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--disaste
 - **wf_fef9717d-ad4** (mtime 09-13 03:09): agent calls 5 (5 distinct) · DONE 5 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 0 — mirror `_progress/wf_fef9717d-ad4/`
     - `ae1e5e82c` SELECTOR Invasion & War: walls with NO force · DONE · transcript 09-13 02:42 954 KB · 31 tool calls · files: draft.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasio
@@ -125,4 +125,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `ab8783d22` WRITER Invasion & War: walls with NO force · DONE · transcript 09-13 02:30 725 KB · 17 tool calls · files: candidates-2.md, facetext.txt, ft2.txt · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasio
 
 ## PROCESSES: 
-load: 1.97 2.13 2.23
+load: 1.55 1.85 2.08
