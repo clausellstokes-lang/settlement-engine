@@ -1,0 +1,192 @@
+# CANDIDATES — writer 1 of 2 · block DS-DEF-2 · pool `Disasters & Famine: granary AND parish care only`
+
+**Seat:** Opus 5. **Lens:** THE TELLING PARTICULAR — one object with a weight, an owner or a
+smell, always inside somebody's account or the archiver's own observation, and the thing appears
+only in use or in dispute. **Voice:** the master archiver's hand (ADDENDUM 18 ruling 13a as the
+owner qualified it); a fact the engine holds stands bare (ruling 40), every account names its
+source through a role.
+
+**Status:** complete. Three spines, forty-one face candidates in the rows, sixteen candidates
+held under NOTES (observed · public · weighings · notebook). Counts at the foot.
+
+---
+
+## THE ROWS
+
+1. `[ledger]` Grain is stored here against a bad year. Against sickness there is the parish, and no house kept for it.
+   - `[face]` `[hall · pair 1 · disagree]` A clerk in the hall says the store is kept full and not kept open. <!-- speaker: a clerk in the hall · joinable -->
+   - `[face]` `[market · pair 1 · disagree]` Those who sell at the market say what is behind the store door sets no price on the stall. <!-- speaker: a stallholder · joinable -->
+   - `[face]` `[hall]` A clerk in the hall says every call on the town comes out of one purse, and that the store is a call like any other.
+   - `[face]` `[market]` Those who sell at the market say a stall sells what a stall has, and that nobody selling has ever been asked what the store holds.
+   - `[face]` `[tavern]` At the tavern they say the grain is counted going into the store and nobody at the table has seen it counted coming out.
+   - `[face]` `[register]` A local priest says the store has a door and a lock. The tending has neither. <!-- speaker: a local priest; second sentence is the bare fact under §17 rider 4 — the care has no institutional row at any preimage tier. Two sentences, so not pairable. -->
+   - `[face]` `[watch · pair 4 · reinforce]` One of the night patrol says the store door is the one on the round that is looked at twice. <!-- joinable -->
+   - `[face]` `[stranger · pair 4 · reinforce]` A drover says the store looked cared for from the road. <!-- joinable -->
+   - `[face]` `[watch]` One of the watch says the church door stands open at night and the store door does not.
+   - `[face]` `[stranger]` A drover reports that the dust off the store carries as far as the lane, and that a town keeping grain that carefully expects to need it. <!-- carries the pool's physical particular: grain dust, smelled -->
+   - `[face]` `[guild]` A guild factor says what comes to the stone is what somebody has already decided to part with. <!-- seat: TOWN ONLY. Craft guilds (5-15) is required at town and nowhere else; Mills (2-5) likewise. Both halves of this face are town-tier facts. -->
+   - `[face]` `[gate]` One of those on the gate says what comes in for the store is looked over and let through ahead of anything else. <!-- seat: CITY, METROPOLIS. City walls and gates, Gate control p 1.0. Not seated at town. -->
+   - `[face]` `[garrison]` One of the garrison says a store is what a siege would be decided by, and that nobody has asked the garrison what is in this one. <!-- seat: CITY, METROPOLIS. Conditional, not asserted at town. 'would be' is the conditional, not the future indicative (ruling 33). -->
+   - `[face]` `[court]` A clerk who hears the town's disputes says the quarrels brought over grain are about weight, and that none is brought about the store. <!-- speaker circumlocution, not a named office; at town the court IS the hall (hasCourtSystem keyword 'town hall'), so the selector should not seat this beside a hall face on the same page -->
+
+2. `[street]` Everyone here has seen the store kept full, and everyone here knows that a sickness in a house is answered by whoever the parish sends.
+   - `[face]` `[register · pair 2 · disagree]` A local priest says the tending falls to the parish and is paid for by nobody. <!-- joinable -->
+   - `[face]` `[hall · pair 2 · disagree]` A clerk in the hall says the parish does what a parish is for, and that nothing is owed for it. <!-- joinable -->
+   - `[face]` `[register]` The sexton says the parish is sent for twice in the same house. It is paid for neither time. <!-- two sentences, not pairable -->
+   - `[face]` `[hall]` A clerk in the hall says the town keeps a store against hunger and has never been asked to keep anything against sickness. <!-- durative over hasHospital, zero pulse writers, FROZEN (ruling 11b) -->
+   - `[face]` `[tavern]` At the tavern they say the one who comes to sit up and the one who comes to dig are the same trade.
+   - `[face]` `[watch]` One of the watch says a house with somebody ill in it is known on the round by the door being left on the latch. <!-- physical particular: the latch, seen -->
+   - `[face]` `[market]` Those who sell at the market say the household with somebody ill in it comes late and buys small, and that the row knows it before the parish does.
+   - `[face]` `[stranger]` A traveller says that asking after the sick here gets a person and asking after the grain gets a building.
+   - `[face]` `[guild]` A guild factor says the hands that stay at home with a sick house are hands the trade is short. Nobody makes that good. <!-- seat: TOWN ONLY (Craft guilds). THE BILL, ruling 32: the cost lands on the trades, a row this tier holds. Two sentences, not pairable. -->
+   - `[face]` `[gate]` One of those on the gate says the carts that come in heavy are the ones that are looked at, and the ones that go out heavy are not. <!-- seat: CITY, METROPOLIS -->
+   - `[face]` `[garrison]` One of the garrison says the sick are not the garrison's work and that the store is. <!-- seat: CITY, METROPOLIS -->
+   - `[face]` `[court]` A clerk who hears the town's disputes says a quarrel between neighbours over who sat up last is not a thing the hall can settle. <!-- Dispute arbitration p 0.8 / Appeals court p 0.8 are the only recorded procedures; no trial, gaol or gallows follows -->
+
+3. `[visitor]` A drover says the town looks provided for from the road, and that whoever tends a sick house here comes out of the church.
+   - `[face]` `[stranger · pair 3 · view]` A traveller says the store is the first building worth looking at on the way in. <!-- joinable -->
+   - `[face]` `[tavern · pair 3 · view]` At the tavern they say a stranger who asks where the sick are taken is told who comes and not where they go. <!-- joinable -->
+   - `[face]` `[stranger]` A pedlar says the store can be found from the road and the parish has to be asked for.
+   - `[face]` `[tavern]` At the tavern they say strangers walk up to look at the store, and that nobody here does.
+   - `[face]` `[hall]` A clerk in the hall says a stranger who wants to see what the town keeps may see the store, and that there is nothing else to be shown.
+   - `[face]` `[register]` A local priest says a stranger asks for a house and is given a person, and that nobody here asks for the house any more.
+   - `[face]` `[watch]` One of the watch says the strangers who come in after dark ask the way to the inn and the way to the store, in that order. <!-- Inn (multiple) at town, Inns and taverns (district) at city and, by the merge, metropolis -->
+   - `[face]` `[market]` Those who sell at the market say a stranger can carry grain away from here and has nowhere to keep it.
+   - `[face]` `[guild]` A guild factor says what a stranger takes for provision is a store the trades filled and cannot open. <!-- seat: TOWN ONLY (Craft guilds) -->
+   - `[face]` `[gate]` One of those on the gate says a stranger coming in is asked their business, and that the answer is usually grain. <!-- seat: CITY, METROPOLIS -->
+   - `[face]` `[garrison]` One of the garrison says a stranger looking for what the town could hold out on would be looking at the store. <!-- seat: CITY, METROPOLIS -->
+   - `[face]` `[court]` A clerk who hears the town's disputes says a stranger is heard the same as anyone here and waits longer for it.
+
+---
+
+## NOTES — candidates the projector refuses today, held for the selector
+
+### THE ARCHIVER'S OBSERVATION (ruling 27; car 18n NOT landed) — one per variant, bare passive, no observer named
+
+- v1 · `[archiver · observed]` The store door is shut and the church door is not.
+- v2 · `[archiver · observed]` A basket is left inside the door of a house where somebody is ill, and nobody knocks.
+- v3 · `[archiver · observed]` Grain dust settles on the sill of the store and is swept off again. <!-- physical particular -->
+
+Each was scanned against (2b′): none infers into a silence a required row denies. No watch, hall,
+market or church is unseen in any of the three; the Fable sitting's named failure mode ("nobody is
+set up to respond") is nowhere in this packet, since the watch is CLOSED TRUE on the whole
+preimage per the marker's correction (0).
+
+### THE PUBLIC (ruling 28; same car) — what everyone saw, and what everyone makes of it
+
+- v1 · `[public]` Everyone here has seen the store filled and nobody here has seen it emptied, and the town takes that for provision.
+- v2 · `[public]` It is common knowledge here that whoever comes to a sick house comes from the church, and the town counts that as being looked after.
+- v3 · `[public]` Anyone here can say where the grain is kept, and nobody here has thought to ask where the sick are kept.
+
+The seeing half of each is true on every preimage town (the store stands, the parish tends, the
+care has no premises); the second half of each is the town's own perception and is where the
+game master's hook sits — the town takes provision for provision and has not yet had to find out.
+
+### THE ARCHIVER'S WEIGHING (ruling 22; car 18i NOT landed) — one sentence, and it opens
+
+- pair 1 (hall · market, disagree) — `[archiver · pair 1 · weigh]` It may be that both are right, and a full store is a comfort to the town and nothing at all to the stall.
+- pair 2 (register · hall, disagree) — `[archiver · pair 2 · weigh]` Which of the two is owed is argued here, and nobody has settled it.
+- pair 4 (watch · stranger, reinforce) — `[archiver · pair 4 · weigh]` On this the two agree, and there is no cause to doubt them.
+
+No weighing is offered on pair 3: it is a `view` pair, and ruling 22 licenses a weighing only on
+`disagree` and `reinforce`. None of the three closes a question — the card records that NO covert
+field marks this pool, so nothing on either page may settle anything the engine left open.
+
+### THE NOTEBOOK (ruling 17) — three shades, three feelings, no covert fact to point at
+
+- `[dm-only]` (conjecture · curiosity) The store is kept full and the door is kept shut, and nothing here says who decides which of those two comes first… it may be that nobody has had to decide it yet. Whoever reads this next would do well to find out whose decision it is before the town needs it made.
+- `[dm-only]` (unsure · unease) Nothing about the arrangement here is wrong: there is grain, and there are people who come when somebody is ill. What sits badly is that the second of those is nobody's charge, and nobody at the hall seems to have noticed that it is nobody's.
+- `[dm-only]` (conjecture · eagerness) If the tending is the parish's and the paying is nobody's, then the parish can be asked what it costs them, and it would be worth the asking.
+
+Third person throughout, two sentences at most, no digit, no em dash, no sum. Each passes the
+clarity test in one breath: nobody owns the decision to open the store · the town's whole medical
+provision is nobody's charge · the parish can be asked what it is carrying unpaid.
+
+### THE COMPROMISED ROLE (ruling 26) — NONE OFFERED
+
+Section (2c) of the card records that the hall, the watch and the court are compromisable on this
+block and that **this pool is not one of the pools any of the three marks**. The `compromised`
+tag is refused here and every source in this packet draws honest. No reassurance appears on any
+face in the rows.
+
+---
+
+## THE SCAN ON THIS PACKET
+
+**Mechanical.** No em dash, no exclamation mark, no digit, no semicolon, no contraction anywhere.
+No `{settlement}` in any spine or any face — the three shipped rows named the town in all three,
+and the card is explicit that the re-cut must not carry that forward.
+
+**Ruling 40.** No face says *the survey*, *this office*, *the record*, *entered as* or *set down
+here*. The only bare statements are engine facts (spine 1; the second sentence of v1's register
+face; the second sentence of v2's register face). Every opinion and every report names its source
+through a role.
+
+**Floor 1, the strike.** The four rows `hospital = false` removes by name are never asserted:
+the words *hospital*, *infirmary*, *ward*, *beds*, *sick-house*, *physicians* appear nowhere in
+the rows. The shipped variant 3's "a modest infirmary" is the finding this packet exists to
+correct. Equally, nothing raises the care to the other rung: no containment, no quarantine, no
+recovery, no treatment, no stock of medicines, no payment taken for the tending, no house kept
+for it. A monastic house is never asserted and never denied.
+
+**Floor 1, the silences.** The watch, the hall, the market and the church are closed true on the
+whole preimage and no face denies any of them. Walls, gates and a garrison are closed true at
+city and metropolis and OPEN at town, so every gate and garrison face carries its seat in a
+comment and none draws at town. The guilds and the mills are required at TOWN ONLY, so every
+guild face carries that seat. The elders and the muster are not speakers here and appear nowhere
+— the pool never draws below town, and `Citizen militia` cannot stand beside the required
+`Town watch`. The crown's assessor appears nowhere.
+
+**F1-24, the record bar.** No record is cited anywhere in this packet, by name or as a generic.
+No accounts, no register as a book, no parish rolls, no toll book, no muster roll, no "the books".
+The shipped rows of this pool cite none, so there is no citation precedent to spend, and a named
+record here would raise a shrink-only corpus ceiling and red the whole packet. The register
+appears only as PEOPLE — a local priest, the sexton, those who bury the dead.
+
+**The granary's off services.** No face says the grain is rationed, that distribution is
+controlled, that hoarding is prevented, that seed is advanced, that stored grain is released
+against a price, or that the store grinds. The v1 hall/market pair turns on exactly the fact that
+the capacity is written down and not used, which is the disagreement with two honest sides.
+
+**Floor 2.** No count, no magnitude in words, no season, month or date, no rate, no event. The
+duratives that appear — *nobody at the table has seen it counted coming out*, *has never been
+asked to keep anything against sickness*, *nobody here asks for the house any more* — all run
+over `hasGranary` / `hasHospital` / `hasChurch`, which carry zero pulse writers and are FROZEN
+(ruling 11b). Nothing elapses over `defenseProfile.scores.disaster`, which `foodStockpile.js:473`
+moves.
+
+**Floor 3.** No minted name and no named office as a subject or an attribution: never the mayor,
+the guard captain, the high priest, **the parish priest**, **the healer**, the guild master, the
+wealthiest merchant, the governor, the city watch chief. The roles used are the card's own free
+list — a clerk in the hall, a local priest, the sexton, one of the watch, one of the night patrol,
+a guild factor, those who sell at the market, one of those on the gate, one of the garrison, a
+drover, a traveller, a pedlar. Nothing is predicated of a deity; the clergy's care is written as
+WORK and never as piety, which is the line F3-02 draws here. No culture furniture: no thatch, no
+churchyard, no market green, no harvest-home, no lychgate, no snow on the road.
+
+**Floor 4.** One purse, never two: v1's second hall face states it and no face anywhere splits a
+relief fund from the defence money or collapses the pay. The word *plagued* appears nowhere —
+it is monsters in the engine, and this row's sickness is the separate stress.
+
+**Ruling 35, the sibling rungs.** Every face in the rows asserts the store, the tending, or the
+absence of a house for the tending, so none of them would sit as comfortably on
+`NO reserves, NO medical provision` (which has no store), on `granary AND hospital` (which has the
+building), or on `granary, NO medical provision` (which has no parish to send anybody).
+
+**Ruling 29, the shapes.** The three spines take three shapes: a bare fact stated plainly and
+stopped (v1), the public as carrier (v2), and a source's account (v3). Inside the rows the
+openers vary — the attribution first, the object fronted, the place first, the bare second
+sentence — and no attribution verb runs three times in a row within a variant.
+
+**Ruling 31, the senses.** Three candidates carry a physical particular and no more: the grain
+dust off the store (v1 stranger, smelled), the latch on a sick house's door (v2 watch, seen), and
+the dust on the sill (v3 observed, seen). One per rendered page is the selector's to keep.
+
+**Ruling 30, the unit cap.** Every pair half in this packet is a single sentence. The four
+two-sentence faces — v1 register, v2 register, v2 guild, and the first notebook note — are marked
+as not pairable.
+
+**Counts.** 3 spines · 41 face candidates in the rows (v1 fourteen · v2 twelve · v3 twelve, plus
+the three spines) · 4 marked pairs (1 disagree, 2 disagree, 3 view, 4 reinforce) · 16 candidates
+under NOTES (3 observed · 3 public · 3 weighings · 3 notebook, and the compromised heading
+deliberately empty). 44 candidate lines in the rows counting the spines.
