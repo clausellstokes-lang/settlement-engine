@@ -610,8 +610,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "vid": 1,
           "wordings": [
             "The custom the elders keep says which households owe work on the walls. It says nothing about who is owed for it.",
-            "The hall holds that the walls are kept out of the military purse and that the keeping is not in dispute.",
-            "The guilds hold that they pay into the purse that keeps the walls and that no garrison came of it."
+            "A clerk in the hall puts the walls' keeping under the military purse. At the hall it is not a thing in dispute.",
+            "The guilds pay into the military purse. A factor for them holds that the walls are kept up by the households and not out of that purse."
           ],
           "sources": [
             null,
@@ -634,13 +634,13 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "The stranger reports the walls kept and no force under arms behind them. The survey finds the same and enters it.",
+          "text": "A stranger reports the walls up and kept, and no force under arms behind them. The people he saw at work on them were the town's own households.",
           "slots": [],
           "vid": 2,
           "wordings": [
             "A traveller found a stair up to the walk with somebody's stores stacked on it.",
-            "At the tavern the stranger was given one account of what the walls are for, and then another from further along the table.",
-            "The stranger was stopped at the bar and asked his business before he was let through. Nobody who asked him was under arms."
+            "At the tavern they name who would turn out if the walls were ever wanted, and nobody at the table is surprised by the names.",
+            "Whoever holds the way in stops a stranger and asks his business before letting him through."
           ],
           "sources": [
             null,
@@ -651,12 +651,12 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "The households hold that keeping the walls up is their own work. The survey finds the walls kept and no force under arms.",
+          "text": "The households say the walls are theirs to keep up. By their own account there is no wage in the work, and no force under arms behind the walls.",
           "slots": [],
           "vid": 3,
           "wordings": [
             "Among the elders the walls are a boundary before they are anything else, and where the line runs is the older argument.",
-            "The watch says the keeping the hall enters is not the same thing as the walk they keep, and that the difference falls on them.",
+            "The watch says the hall's record has the walls in it and not the walk along them. The survey finds them on the walls after dark all the same.",
             "The matters that reach the court about the walls are about who owes the work on them. None of them are about who would hold them."
           ],
           "sources": [
