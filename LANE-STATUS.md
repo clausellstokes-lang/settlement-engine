@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-13 11:51:14 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-13 11:56:21 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = c2b72466a Plan: wave 3 has begun — batch 2 of DS-DEF-2 (three pools) through draft 065b9ded6 and c
 
@@ -122,7 +122,7 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `acfd319b5` REFUTER Disasters & Famine: granary AND hospital · DONE · transcript 09-13 11:41 828 KB · 24 tool calls · files: "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--disasters-famine-granary-and-hospital/refute.md · result: {"craft": {"verdict": "PASS", "speakers": 9, "collapse": "No collapse, but three named risks. (a) THE GRANARY DOOR IS VARIANT 1's REPEATED LANDING NOUN: five of
     - `a577697ff` REFUTER Beasts & Monsters: frontier, credible deterrence · DONE · transcript 09-13 11:43 941 KB · 20 tool calls · files: refute.md · result: {"craft": {"verdict": "PASS", "speakers": 12, "collapse": "Nearest collapse, named and not charged: three nouns \u2014 the line, the way through, the country \u
     - `a9e01a571` CURER Invasion & War: walls AND professional garrison · DONE · transcript 09-13 11:50 590 KB · 16 tool calls · files: cure.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasio
-    - `ac60ec8a7` CURER Internal Security: full legal chain (court AND prison) · IN FLIGHT · transcript 09-13 11:47 608 KB · 15 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `ac60ec8a7` CURER Internal Security: full legal chain (court AND prison) · IN FLIGHT · transcript 09-13 11:54 782 KB · 16 tool calls · files: cure.md · last: Bash cat > /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/sc
     - `a3f92eb52` CURER Economic Survival: STRONG · DONE · transcript 09-13 11:49 539 KB · 16 tool calls · files: rowsblock.txt, cure.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--economi
     - `a03eba76f` CURER Disasters & Famine: granary AND hospital · DONE · transcript 09-13 11:49 604 KB · 23 tool calls · files: cure.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--disaste
     - `a8f40ea49` CURER Beasts & Monsters: frontier, credible deterrence · DONE · transcript 09-13 11:50 577 KB · 12 tool calls · files: rows_raw.txt, cure.md, check.txt · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--beasts-
@@ -162,4 +162,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `ab8783d22` WRITER Invasion & War: walls with NO force · DONE · transcript 09-13 02:30 725 KB · 17 tool calls · files: candidates-2.md, facetext.txt, ft2.txt · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasio
 
 ## PROCESSES: 
-load: 2.01 2.36 2.75
+load: 1.71 2.00 2.46
