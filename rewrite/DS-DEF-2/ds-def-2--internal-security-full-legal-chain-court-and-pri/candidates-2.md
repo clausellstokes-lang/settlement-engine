@@ -5,6 +5,8 @@
 
 **THE POOL'S OWN CONTENT, taken from the card §7/§8:** `hasCourtSystem` is automatic on every town of the preimage and carries no information, so a face whose content is "there is a court here" is the neighbouring rung. The content is **the DETENTION and the CHAIN between the two**, and under this lens it is **the one purse** (watch wages, court and gaol funding on a single multiplier), **the join** (the walk takes people up, the hall disposes of them, and nobody owns the seam), and **the two rooms with doors** (a bench outside one, a lock on the outside of the other).
 
+**THE TALLY: 85 candidates.** 3 spines (one per variant) · 57 `[face]` rows (30 lone candidates, one per seated source per variant; 18 pair halves in 9 marked pairs, three per variant, across all four kinds — disagree, reinforce, view, aside; 9 second candidates) · 25 held under NOTES until their cars land (6 archiver's weighings, 3 bare observations, 3 public faces, 6 compromised-role faces, 1 honest untagged reassurance, 6 notebook notes).
+
 **THE THREE SPINE SHAPES (ruling 29):** 1 the bare fact, subject first · 2 carried by the public · 3 place first, description leading with the observable thing. `{settlement}` appears in ONE unit of the pool (variant 3's spine) and in no face.
 
 ---
@@ -143,31 +145,31 @@ Each opens and none closes: a conjecture is offered as a guess, a dispute is lef
 
 Bare passive, no observer named, at most one per variant. §2b′ bites hard on this pool: a **watch is required on every town of the preimage** and a **garrison and walls at city and metropolis**, so the usual absences are floor 1 in a witness's coat here. These claim only what the key itself seats, and each carries an elapsed course over a FROZEN read (`hasPrison`, `hasCourtSystem`, both zero writers, §6).
 
-- variant 1 — *The bench outside the door where matters are heard is worn at the ends and not in the middle.*
-- variant 2 — *The cells have stood empty, and the door to them is kept shut anyway.*
-- variant 3 — *The door that locks from the outside has a bolt on it and no handle on the far side.*
+- variant 1 · *The bench outside the door where matters are heard is worn at the ends and not in the middle.*
+- variant 2 · *The cells have stood empty, and the door to them is kept shut anyway.*
+- variant 3 · *The door that locks from the outside has a bolt on it and no handle on the far side.*
 
 ## C. The public — `[public]` (ruling 28; same car)
 
 What everyone SAW binds under floor 1 in full; what everyone MAKES OF IT is the town's perception and may be mistaken.
 
-- variant 1 — *Everyone here can say which of the town's charges comes out of the common purse, and the town counts that as knowing where its money goes.*
-- variant 2 — *Everyone in the town knows the sound the bolt on that door makes, and takes it that somebody is inside whenever it is heard.* — THE PHYSICAL PARTICULAR, heard rather than seen (ruling 31); one per rendered page.
-- variant 3 — *Anyone here can point to the bench and to the door, and the town counts the two of them together as the law.*
+- variant 1 · *Everyone here can say which of the town's charges comes out of the common purse, and the town counts that as knowing where its money goes.*
+- variant 2 · *Everyone in the town knows the sound the bolt on that door makes, and takes it that somebody is inside whenever it is heard.* · THE PHYSICAL PARTICULAR, heard rather than seen (ruling 31); one per rendered page.
+- variant 3 · *Anyone here can point to the bench and to the door, and the town counts the two of them together as the law.*
 
 ## D. The compromised role — `[<source> · compromised]` (§2c, ruling 26; car 18m NOT YET LANDED)
 
 The card marks this pool for **watch** (a covert bloc seating the watch) and **court** (a covert bloc seating the court). The shapes differ across the variants so the reassurance is never the signal, and each denies only the visible symptom of its own field.
 
 **watch — conceals about THE WATCH'S OWN KEEPING (the circuit, the wage, who is on the walk after dark) and denies nothing about the court, the purse or the walls:**
-- variant 1, *minimise* — *One of the night patrol says the walk is kept as it has always been kept, and that the wage is nobody's business but the men's.*
-- variant 2, *blame the talk* — *One of the night patrol says whoever has been counting who is on the walk at night has counted wrong, and had a reason for counting.*
-- variant 3, *say nothing beyond the form* — *One of the night patrol says what a patrolman is required to say, that the streets are walked after dark.*
+- variant 1, *minimise* · *One of the night patrol says the walk is kept as it has always been kept, and that the wage is nobody's business but the men's.*
+- variant 2, *blame the talk* · *One of the night patrol says whoever has been counting who is on the walk at night has counted wrong, and had a reason for counting.*
+- variant 3, *say nothing beyond the form* · *One of the night patrol says what a patrolman is required to say, that the streets are walked after dark.*
 
 **court — conceals about WHAT REACHES THE LAW AND WHAT IT DOES WITH IT, and denies nothing else:**
-- variant 1, *reassure* — *A magistrate says matters are heard as they should be heard, and asks that the town be left to it.*
-- variant 2, *dismiss* — *A magistrate says there is nothing in what is heard here worth a stranger's time.*
-- variant 3, *change the subject* — *A magistrate says the bench outside wants mending more than the business inside wants discussing.*
+- variant 1, *reassure* · *A magistrate says matters are heard as they should be heard, and asks that the town be left to it.*
+- variant 2, *dismiss* · *A magistrate says there is nothing in what is heard here worth a stranger's time.*
+- variant 3, *change the subject* · *A magistrate says the bench outside wants mending more than the business inside wants discussing.*
 
 **The honest reassurance, untagged, offered once for the pool** (so a reassurance on the page is a question and never an answer; the internal upkeep multiplier has a floor of 0.65 and reaches 1 on a strong economy, so this is true on real towns):
 - *A clerk in the hall says the purse has kept the court, the cells and the walk, and that it has not fallen behind.*
@@ -176,12 +178,12 @@ The card marks this pool for **watch** (a covert bloc seating the watch) and **c
 
 Third person throughout, two sentences at most, the notebook's devices only. Shades and feelings spread. Each points TOWARD a covert fact the card marks for this pool and never away from it, and each names the thing it circles so a successor picks it up cold.
 
-- *conjecture · curiosity* — The men on the walk after dark are not put there by the hall, or not only by it: whoever does the putting is in no account here, and it would be worth knowing who.
-- *accusatory · clarity* — The hearing takes what is brought and does not ask after what was not brought. If somebody is choosing what is brought, then that somebody is the law here and the hall is not it.
-- *unsure · unease* — The hall answers about the purse without being asked twice, and answers the same way each time… a thing said the same way every time was decided on before anybody asked.
-- *hearsay · worry* — It is said at the tavern that a man with a friend in the hall is not kept waiting, and the tavern would say that. If it holds, the waiting is a measure of standing and of nothing else.
-- *conjecture · eagerness* — What the walk brings in and what the hall hears are not the same thing, and nobody here is placed to see both… whoever is placed to see both is worth finding.
-- *conjecture · surprise* — The room that locks is kept shut on nobody, and kept shut all the same: somebody is paying to keep an empty room ready, and nothing here says who told them to.
+- *conjecture · curiosity* · The men on the walk after dark are not put there by the hall, or not only by it: whoever does the putting is in no account here, and it would be worth knowing who.
+- *accusatory · clarity* · The hearing takes what is brought and does not ask after what was not brought. If somebody is choosing what is brought, then that somebody is the law here and the hall is not it.
+- *unsure · unease* · The hall answers about the purse without being asked twice, and the answer does not vary… a thing said the same way every time was decided on before anybody asked.
+- *hearsay · worry* · It is said at the tavern that a man with a friend in the hall is not kept waiting, and the tavern would say that. If it holds, the waiting is a measure of standing and of nothing else.
+- *conjecture · eagerness* · What the walk brings in and what the hall hears are not the same thing, and nobody here is placed to see both… whoever is placed to see both is worth finding.
+- *conjecture · surprise* · The room that locks is kept shut on nobody, and kept shut all the same: somebody is paying to keep an empty room ready, and nothing here says who told them to.
 
 ## F. Hazards this writer steered around, named so the selector knows they were not missed
 
@@ -203,6 +205,6 @@ Third person throughout, two sentences at most, the notebook's devices only. Sha
 
 ## G. The mechanical scan on this packet
 
-No em dash, no exclamation mark, no digit inside any face or note. No semicolon. No contraction. No `will` or `shall` before a verb; `would` and `may` are conditional and subjunctive and stay. No `{settlement}` in any face, and one unit of the pool carries it (variant 3's spine). No self-citation: nothing on a player face says the survey, the record, this office, entered as, set down here, or so far as the survey can find; `this office` appears nowhere at all, the notebook having been written without it. No which-clause closer, no summarising close, no antithesis pair, no reassurance outside the `compromised` set and the one honest reassurance in D. Every pair half is a single sentence, so every pair can take the compound joint or the full stop and can carry a weighing within the three-sentence unit. The two-sentence faces (variant 1 hall, variant 3 spine) are marked by their shape and are not offered as pair halves.
+No em dash, no exclamation mark, no digit inside any face, spine or offered candidate (the em dashes in this packet are in the writer's own commentary, never in a line offered for the page). No semicolon. No contraction. No `will` or `shall` before a verb; `would` and `may` are conditional and subjunctive and stay. No `{settlement}` in any face, and one unit of the pool carries it (variant 3's spine). No self-citation: nothing on a player face says the survey, the record, this office, entered as, set down here, or so far as the survey can find; `this office` appears nowhere at all, the notebook having been written without it. No which-clause closer, no summarising close, no antithesis pair, no reassurance outside the `compromised` set and the one honest reassurance in D. Every pair half is a single sentence, so every pair can take the compound joint or the full stop and can carry a weighing within the three-sentence unit. The two-sentence faces (variant 1 hall, variant 3 spine) are marked by their shape and are not offered as pair halves.
 
 **Elapsed courses in this packet, each over a FROZEN read (§6, ruling 11b), listed so the refuter need not hunt them:** "has never reached the parish", "has never had a coin", "the town has never gone a season without keeping its own law", "nobody has ever told them how", "the two have never needed to speak", "it has never been moved", "has never once been asked", "the cells have stood empty", "the walk is kept as it has always been kept", "it has not fallen behind". `hasCourtSystem`, `hasPrison`, `safetyLabel`, `guardEffectivenessDesc`, `scores.internal`, `compound.inst` and `economicGates.military` all carry zero writers under `src/domain/worldPulse/`.
