@@ -87,29 +87,29 @@ Block DS-DEF-2 · pool `Beasts & Monsters: frontier, force without a perimeter`
 
 What everyone SAW binds under floor 1 in full; what everyone MAKES OF IT is the town's perception and may be mistaken. Nothing here claims a seeing that section (2b′) denies: armed people exist on every town of this preimage, and at town a night patrol is at p 1, so neither is unseen anywhere below.
 
-- V1 — `[face]` `[public]` Everybody here has seen the muster gather and go out, and the town takes it that anything coming would be seen first.
-- V2 — `[face]` `[public]` Anyone here can name the house a stranger slept in, and nobody can name who asked him his business.
-- V3 — `[face]` `[public]` Everyone in the town has seen which households walk out and which do not, and the town counts the walking as a thing owed rather than a thing chosen.
+- V1: `[face]` `[public]` Everybody here has seen the muster gather and go out, and the town takes it that anything coming would be seen first.
+- V2: `[face]` `[public]` Anyone here can name the house a stranger slept in, and nobody can name who asked him his business.
+- V3: `[face]` `[public]` Everyone in the town has seen which households walk out and which do not, and the town counts the walking as a thing owed rather than a thing chosen.
 
 ## THE ARCHIVER OBSERVING `[archiver · observed]` (ruling 27, as re-cut by 40) — bare passive, no observer named, one per variant
 
-- V1 — `[face]` `[archiver · observed]` No line has ever been drawn round the place, and the ground where the houses stop has been left as it is.
-- V2 — `[face]` `[archiver · observed]` A person coming down the road is looked at from the houses and then not looked at again.
-- V3 — `[face]` `[archiver · observed]` The ground past the last houses is worn where people walk out and unworn a little beyond that.
+- V1: `[face]` `[archiver · observed]` No line has ever been drawn round the place, and the ground where the houses stop has been left as it is.
+- V2: `[face]` `[archiver · observed]` A person coming down the road is looked at from the houses and then not looked at again.
+- V3: `[face]` `[archiver · observed]` The ground past the last houses is worn where people walk out and unworn a little beyond that.
 
 ## THE ARCHIVER'S WEIGHING (ruling 22; car 18i not landed) — one per variant, each on a disagree pair, each opening
 
-- V1, after pair 1 (hall · guild) — `[face]` `[archiver · pair 1 · weigh]` It may be that both are right, and the arrangement was settled by the people it costs least.
-- V2, after pair 1 (watch · tavern) — `[face]` `[archiver · pair 1 · weigh]` Which of the two is right is argued over in the town and is not settled here.
-- V3, after pair 2 (muster · elders) — `[face]` `[archiver · pair 2 · weigh]` The elders' account is the likelier of the two, the muster having no ground of its own to reckon by.
+- V1, after pair 1 (hall · guild): `[face]` `[archiver · pair 1 · weigh]` It may be that both are right, and the arrangement was settled by the people it costs least.
+- V2, after pair 1 (watch · tavern): `[face]` `[archiver · pair 1 · weigh]` Which of the two is right is argued over in the town and is not settled here.
+- V3, after pair 2 (muster · elders): `[face]` `[archiver · pair 2 · weigh]` The elders' account is the likelier of the two, the muster having no ground of its own to reckon by.
 
 ## THE NOTEBOOK `dm-only` — offers, spread by shade and feeling
 
 This pool is marked by NO covert field (card section (2c)), so nothing here settles a question: the notes suspect and stop.
 
-- Curiosity — `[face]` `[dm-only]` Nobody here names who calls the muster out, and everybody agrees that it gets called. Who that is would be worth knowing before it matters.
-- Unease — `[face]` `[dm-only]` The households furthest out are the ones who go, and the ones who decide how far are not among them. Nothing in that is irregular, which is the part of it that sits badly.
-- Clarity — `[face]` `[dm-only]` The same households lose the argument about how far to walk, and they lose it the same way… one of them could decline to walk, and nothing in the custom says what happens then.
+- Curiosity: `[face]` `[dm-only]` Nobody here names who calls the muster out, and everybody agrees that it gets called. Who that is would be worth knowing before it matters.
+- Unease: `[face]` `[dm-only]` The households furthest out are the ones who go, and the ones who decide how far are not among them. Nothing in that is irregular, which is the part of it that sits badly.
+- Clarity: `[face]` `[dm-only]` The same households lose the argument about how far to walk, and they lose it the same way… one of them could decline to walk, and nothing in the custom says what happens then.
 
 ---
 
