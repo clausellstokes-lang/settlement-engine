@@ -681,3 +681,470 @@ THE CARD (mechanical sections) — block DS-DEF-2 · pool `Internal Security: fu
   city: the hall: City hall · the tavern: Inns and taverns (district) · the guilds: — · the register (parish): Parish churches (10-30), Burial grounds and charnel house · the elders: —
   metropolis: the hall: — · the tavern: — · the guilds: — · the register (parish): Cemetery network · the elders: —
   the key on the force buckets and the gates: watch: OPEN · garrison: OPEN · militia: OPEN · mercenary: OPEN · charter: OPEN · gates: OPEN
+
+════════════════════════════════════════════════════════════════════════════════
+  THE MARKER'S SECTIONS (7) (8) (9) — written by the marker seat, ADDENDUM 18
+  ruling 4: THE CARD IS WHAT WOULD BE FALSE, never what is licensed.
+════════════════════════════════════════════════════════════════════════════════
+
+⛔⛔ READ THIS BEFORE SECTION (2), (5) OR (7) ABOVE — A MEASURED CARD DEFECT.
+  `assembleInstitutions.js:243-245` builds the metropolis catalogue as
+  `mergeCatalogs(institutionalCatalog['city'], institutionalCatalog['metropolis'])`
+  (the merge is at `:117-124`, per category, the metropolis row shadowing a
+  same-named city row). Every other tier reads its own block alone. The
+  instrument above reads the metropolis BLOCK, so its sections (2), (2b), (5)
+  and (7) understate the metropolis by thirteen required rows.
+  ⭐ VERIFIED BY EXECUTION (the merge run over the shipped catalogue):
+  METROPOLIS carries FOURTEEN required rows, not one —
+    City walls and gates · Garrison · Professional city watch · City granaries ·
+    Inns and taverns (district) · Multiple market squares · Warehouse district ·
+    Aqueduct or water system · City hall · Housing (1000-5000) ·
+    Multiple courthouses · Burial grounds and charnel house ·
+    Parish churches (10-30) · Cemetery network.
+  CONSEQUENCES THE WRITER MUST TAKE FROM THIS CARD AND NOT FROM SECTION (5):
+    · the WATCH is required at town (`Town watch`), city and metropolis
+      (`Professional city watch`) — **it is required on EVERY town of the
+      preimage and is a UNIVERSAL SPEAKER, not an open roster.**
+    · the GARRISON, the WALLS and the GATES are required at city AND metropolis
+      and open only at TOWN.
+    · the HALL, the MARKET, the GRANARY and the CHURCH are required at all three
+      tiers.
+    · §5's "open at metropolis" on watch, garrison, walls, gates, granary,
+      market, hall and church is FALSE. The rows that are genuinely open across
+      the whole preimage are: militia · mercenary · charter · hospital.
+  This makes the writer's ground SAFER, not narrower: more bodies stand that a
+  face may not deny, and correspondingly more that a face may not infer away.
+
+────────────────────────────────────────────────────────────────────────────────
+(7) THE SOURCES
+────────────────────────────────────────────────────────────────────────────────
+
+  ⛔ READ THIS FIRST — WHAT THE KEY ACTUALLY FIXES, AND WHAT IT DOES NOT.
+  The preimage is TOWN, CITY and METROPOLIS and nothing else (thorp, hamlet and
+  village are silent). Every town this pool draws is large, fully rostered, and
+  carries a hall, a tavern, a market, a granary, a parish and a WATCH by
+  requirement. This is the inverse of `Internal Security: no legal
+  infrastructure`, whose whole preimage is below town: there the writer's danger
+  was seating a body; HERE THE WRITER'S DANGER IS DESCRIBING THE MACHINERY THE
+  KEY TURNS ON, because the key fixes only that the two flags are TRUE and fixes
+  NOTHING about what stands, what it does, or how well it works.
+
+  ⭐ THE KEY IS TWO FLAGS AND THE FLAGS ARE WIDE.
+  `hasCourtSystem` (`priorityHelpers.js:55`) fires on any of
+  `['courthouse','court buildings','democratic assembly','city hall','town hall']`.
+  `hasPrison` (`:54`) fires on any of `['prison','stocks','large prison','massive prison']`.
+  The key fixes BOTH TRUE. ⛔ **`hasCourtSystem` IS THEREFORE AUTOMATIC ON EVERY
+  TOWN OF THE PREIMAGE AND CARRIES NO INFORMATION AT ALL:** `Town hall` is
+  `required: true` at town, `City hall` and `Multiple courthouses` are
+  `required: true` at city and (by the merge) at metropolis. The only thing this
+  key genuinely discriminates is the PRISON ROW — `required: false` at every
+  tier of the preimage (town `Small prison/stocks` 0.7 · city `Large prison` 0.7
+  · metropolis `Large prison` 0.7 + `Massive prison` 0.5), which is why the rate
+  grid reads 94/128 · 92/128 · 116/128 rather than 128/128.
+  ⇒ A FACE WHOSE CONTENT IS "THERE IS A COURT HERE" SAYS NOTHING THIS KEY FIXES
+  AND WOULD SIT AS COMFORTABLY ON A TOWN WITH NO PRISON. That is the neighbouring
+  rung `Internal Security: court without detention`, and §2d makes it a floor-1
+  finding (ADDENDUM 18 ruling 35). **The pool's own content is the DETENTION and
+  the chain between the two.**
+
+  ⭐⭐ THE TIER SPLIT IS THIS POOL'S WHOLE SUBJECT, AND IT IS SHARP.
+  The two links exist everywhere; WHAT THEY ARE differs by tier, and every one
+  of these is a printed row description or an instantiated service, not an
+  inference:
+    · TOWN. The court may be nothing but the required `Town hall` — "Meeting
+      place and administrative center", whose instantiated procedure above the
+      bar is `Dispute arbitration` (on, p 0.8): "Bring COMMERCIAL AND CIVIL
+      disputes before a magistrate." A `Courthouse` row (0.6, "Borough court for
+      local justice", services `Civil disputes` p 1.0 AND `Criminal trials`
+      p 1.0) is a COIN, not a requirement. The prison is `Small prison/stocks`:
+      "Holding cells and public punishment" — `Holding cells` (p 1.0) is
+      **"SHORT-TERM detention pending trial or payment of fines"**, plus
+      `Public punishment` (p 0.8) "Stocks and pillory for public shaming and
+      minor offenses" and `Fine payment` (p 0.9).
+    · CITY. `Multiple courthouses` is required — "Commercial, criminal, and
+      ecclesiastical courts" — so a criminal court genuinely stands. The prison
+      is `Large prison` (0.7): **`Long-term incarceration` (p 1.0)** "Hold
+      convicted criminals for extended sentences", with `Hard labour contracts`,
+      `Bail hearings` and `Visitor permits` all OFF by default.
+    · METROPOLIS. `Multiple courthouses` required by the merge; `Multiple court
+      buildings` (0.65) adds `Civil litigation` p 1.0 and `Criminal proceedings`
+      p 0.9; the prison is `Large prison` or `Massive prison` — "State prison
+      complex: political prisoners, debtors, convicted criminals held separately."
+  ⛔ THE TWO CONSEQUENCES A WRITER WILL WALK INTO:
+    (a) THE STOCKS AND THE PILLORY ARE A TOWN-ONLY ROW. `Public punishment`
+        belongs to `Small prison/stocks` and to nothing else; `Large prison` and
+        `Massive prison` carry no such service. A stocks face draws on the city
+        and the metropolis, where the row denies it.
+    (b) A SERVED SENTENCE IS A CITY-AND-ABOVE ROW. The town's holding is
+        explicitly SHORT-TERM, pending trial or a fine. "A man is a year inside",
+        "serving out his term", "the long-held" contradicts the town row's own
+        printed service — and the duration is floor 2 besides.
+
+  ⭐⭐ THE COURT IS A PRESENCE EVERYWHERE AND A RECORD-KEEPER ALMOST NOWHERE.
+  `HOLDER_RECORDS`' `court` kind (`holderTable.js`) resolves on the service
+  names `Criminal trials · Civil disputes · Notary services · Criminal
+  proceedings · Civil litigation · Appeals`, cited to `Courthouse` and `Multiple
+  court buildings` — **and to nothing else.** The required `Multiple courthouses`
+  carries NO SERVICE MENU AT ALL; `Town hall` and `City hall` carry none of those
+  names. `holdersOf` reads instantiated service rows against the LIVE roster
+  (`:599-615`), so:
+    ⛔ ON A CITY, WHERE THE KEY IS SATISFIED BY A REQUIRED `Multiple courthouses`,
+      THE `court` HOLDER KIND DOES NOT RESOLVE. Citing "the court's book", "what
+      the court entered", "the record of the hearing" is F1-24 / §R-8 —
+      SOURCE-UNRESOLVED — on the very pool named *full legal chain*.
+    ✔ The COURT may speak as a source everywhere (a body that stands may hold an
+      opinion). It may not be CITED AS A RECORD unless the card's roster prints a
+      `Courthouse` or a `Multiple court buildings` row.
+  ⛔ AND THERE IS NO GAOL HOLDER KIND AT ALL. `HOLDER_KINDS` is closed —
+  `treasury · muster · census · parish · toll-bar · market · watch · court ·
+  elders · tradition · road · office`. The prison keeps NO record in the engine's
+  model. A gaol book, a committal roll, a list of the held: F1-24, every time.
+  ⛔ AND THERE IS NO GALLOWS, GIBBET, HANGING OR EXECUTIONER ANYWHERE IN THE
+  ESTATE (grepped across `src/data/` and `src/domain/display/`: zero hits). A
+  capital sentence is an invention on every town, and F1-12 names it.
+
+  ── UNIVERSAL (exists on every one of the 302 towns this pool can draw) ──
+
+  • THE HALL — `Town hall` (town) / `City hall` (city, metropolis), all
+    `required: true`. **This is the body that satisfies the court half of the key
+    on most of the preimage**, which is why the hall is both the pool's richest
+    source and its sharpest trap.
+    INTEREST: THE PURSE, and the purse is ONE. `defenseGenerator.js:244-253` —
+    the order gate is `internalUpkeepMult = min(1, 0.65 + econOutput/50 × 0.35)`
+    over **"watch wages, court and gaol funding"** together, floor 0.65,
+    community self-policing exempt. `fieldSynonyms.js:51` calls the military gate
+    "the town's pay for its watch" and F4-19 rules that **the watch arms BOTH
+    purses**. So the hall funds the court, the gaol and the watch out of one
+    multiplier on one input, and F4-02 / F4-03 make any SPLIT of direction a
+    finding: the court kept and the gaol starved, the watch paid and the court
+    not, is the engine denying itself.
+    ✔ The hall's honest grievance is DEGREE — short, late, thin. F4-04 fixes the
+    extreme: never none, never emptied, never "nothing has been paid".
+    ⛔ Say "the hall" or "a clerk in the hall", never "the mayor": `Mayor` is a
+    `TIER_MANDATORY_ROLES` NPC at town, city (and `Governor` at metropolis) with
+    a personality, a disposition and a secret on the next tab (F3-06).
+    ⛔ The hall's own record service is `Record filing` (town, p 0.6) /
+    `Public record access` (city, p 0.6) — **both OFF by default**, so the
+    `office` kind is CONDITIONAL. `Tax payment` (town, p 0.9, ON) DOES seat the
+    `treasury` kind at town; the city hall carries no `Tax payment`. Cite the
+    accounts only where the card's roster prints the service.
+
+  • THE WATCH — `Town watch` required at town; `Professional city watch` required
+    at city AND metropolis. ⭐ REQUIRED ON EVERY TOWN OF THE PREIMAGE. It is a
+    body, a speaker and a `standing` bucket member (`deriveArmedForces`), and
+    §2b's bar applies: denying its services is floor 1 whatever the face is
+    otherwise about.
+    ⛔ THE TWO WATCHES ARE DIFFERENT FACTS AND THE DIFFERENCE IS PRINTED.
+      TOWN `Town watch`: "Part-time guards. Night patrol and gate duty."
+      Services: `Night patrol` (p 1.0) "Patrol the streets after dark. Deter
+      crime and respond to incidents", `Gate duty` (p 0.8) "Check travelers
+      entering and leaving. Note unusual visitors", and **`Crime response`
+      (p 0.7, OFF)**. F1-27 is explicit: a town watch described as professional,
+      full-time, or as soldiers is a finding — the professional rung is a
+      separate CITY row.
+      CITY / METROPOLIS `Professional city watch`: `Law enforcement` (p 1.0)
+      "Patrol, arrest, and basic investigation", `Crime reporting` (p 0.8)
+      **"Accept and record crime reports. ISSUE WARRANTS."**
+    ⇒ THE WATCH IS A RESOLVING RECORD-KEEPER AT CITY AND ABOVE AND NOT AT TOWN.
+      The `watch` kind's services are `Crime reporting · Crime response ·
+      Missing persons`; at town the only one is OFF by default. A warrant, a
+      filed report, "what the watch has written down" is F1-24 on a town-tier
+      town unless the roster prints `Crime response`.
+    ⛔ F1-29 as §V.2 corrects it: at CITY, `Garrison` and `Professional city
+      watch` are BOTH required with different names and `dedupByName` cannot
+      merge them — so "the garrison relieves the watch" IS two rows at every
+      city and metropolis. The contrast is refused only at TOWN, where one row
+      seats both buckets.
+    INTEREST: what the purse pays it, and what reaches it. The watch is the one
+    body that touches both ends of this chain — it takes the person and the court
+    disposes of them — and the pay gate that funds it also funds the court and
+    the gaol out of the same coin.
+    ⭐ THE COMPROMISED CANDIDATE (§2c, ruling 26; car 18m NOT YET LANDED). THIS
+      POOL IS ONE OF THE THREE THE WATCH'S COVERT BLOC MARKS. Where a
+      `covert: true` bloc seats the watch, offer ONE extra candidate per variant
+      tagged `[watch · compromised]`, concealing about THE WATCH'S OWN KEEPING —
+      the circuit, the wage, who is on the walk after dark — and denying nothing
+      about the court, the purse or the walls. Inverted test; more than one
+      shape across the variants; reported as flatly as any account.
+    ⛔ Never "the guard captain": a `Guard Captain` is mandated at town and city,
+      a `City Watch Chief` at metropolis (`npcGenerator.js:1511-1517`).
+
+  • THE COURT — fixed present by the key at every tier. A speaker everywhere; a
+    citable record only where `Courthouse` / `Multiple court buildings` prints
+    (above).
+    INTEREST: what reaches it and what it can do about it. At town its recorded
+    procedure may be CIVIL ONLY (`Dispute arbitration`), so a town court's
+    grievance is jurisdiction; at city its criminal court is required and its
+    grievance is volume and what the watch brings it.
+    ⭐ THE COMPROMISED CANDIDATE (§2c). THIS POOL IS ONE OF THE TWO THE COURT'S
+      COVERT BLOC MARKS. Tag `[court · compromised]`; it conceals about WHAT
+      REACHES THE LAW AND WHAT IT DOES WITH IT, and denies nothing else.
+    ⛔ Never "the magistrate" as a singular office where a `Chief Magistrate` is
+      mandated (`recently_betrayed`, `succession_void`, `insurgency`) — F3-06.
+      "A magistrate", "those who hear it", "whoever sits that day" are safe.
+
+  • THE TAVERN — `Taverns (5-20)` required at town; `Inns and taverns (district)`
+    required at city and metropolis. `Information` (p 0.7, OFF) is the town row's
+    own word for it: "Drinking loosens tongues."
+    INTEREST: the safety label and who the law actually reaches. The tavern is
+    the source that can say what the printed `safetyLabel` says, from below,
+    without being the panel.
+
+  • THE GUILDS' FACTOR — ⚠ REQUIRED ONLY AT TOWN (`Craft guilds (5-15)`). At city
+    and metropolis NO guild row is required, so the guilds are CONDITIONAL on two
+    thirds of the preimage. F1-16 also warns that `hasGuild` is the bare token
+    `guild` and fires on a `Thieves' guild`.
+    INTEREST (where seated): `Dispute resolution` (p 0.6, OFF) — "Arbitrate
+    disputes between guild members and their clients." The guilds run a PRIVATE
+    settling beside the town's public one, and that rivalry is this pool's best
+    two-source disagreement.
+
+  • THE REGISTER / THE PARISH — `Parish churches (2-5)` + `Parish burial grounds`
+    (town), `Parish churches (10-30)` + `Burial grounds and charnel house`
+    (city, metropolis), `Cemetery network` (metropolis). Required at every tier.
+    The `parish` holder kind resolves on `Register of the dead` (town, p 0.8, ON)
+    and `Central register` (metropolis `Cemetery network`, p 0.9, ON) — so unlike
+    the court, the parish IS a resolving record-keeper across the preimage.
+    INTEREST: the parish keeps the town's other book, and it records the ends of
+    people the law also handles. Write it from the creed's STANDING where the
+    card prints one (ruling 18; D-04–D-10 bind — the zeal is the followers', never
+    the god's).
+    ⛔ Say "the register" or "the sexton", never "the priest": `High Priest` is
+      mandated at town, city and metropolis; `Parish Priest` under `plague_onset`
+      and `religious_conversion`.
+
+  • THE MARKET AND THE GRANARY — `Market square` + `Weekly market` + `Town
+    granary` (town); `Multiple market squares` + `Daily markets` + `City
+    granaries` (city, metropolis). Required at every tier; both are places and
+    speaker families (the traders, whoever keeps the stores).
+    ⛔ PLACEMENT (§2b′): "in the square" is stated by the town's `Civic
+      announcements` service ONLY — silent at city and metropolis. A proclamation
+      read in the square draws on the city, where the data does not say it.
+
+  • THE STRANGER / THE TRAVELLER — seated by the road; needs no roster row.
+    INTEREST: what happened to him when he brought something, and what he was
+    told. On this pool his sharpest content is the SEAM: he was taken up by one
+    body and handed to another, and he can report the join without claiming to
+    know either side's record.
+
+  • THE PUBLIC (ruling 28) and THE ARCHIVER AS WITNESS (ruling 27) — available on
+    every town, kept under NOTES until car 18n lands.
+    ⚠ READ §2b′ FIRST, AND ON THIS POOL IT BITES HARD. A watch is required on
+      EVERY town of the preimage, so "nobody has been seen on the street after
+      dark", "no one comes when it is reported" is floor 1 in a witness's coat.
+      A garrison and walls are required at city and metropolis, so "no soldier
+      has been seen" — safe on the no-force pools — is a finding on two thirds
+      of this one. The SAFE observed facts here are the ones the key itself
+      seats: a door that locks, a room with a lock on the outside, a bench
+      outside a chamber, a name written down and a person waiting on it.
+    ⛔ BARE PASSIVE, NO OBSERVER NAMED (ruling 40): never "in the survey's time
+      here", "on the nights the survey kept", "this office".
+
+  ── CONDITIONAL (with the field that seats each) ──
+
+  • THE GARRISON — `Garrison` required at CITY and METROPOLIS ("Professional
+    soldiers. Noble or royal."; `Defence services` p 1.0 "Patrol, wall-walking,
+    gate duty"); OPEN at TOWN. F1-28: at city tier, denying the town has soldiers
+    of its own is a finding. §R-3: a `Barracks` licenses "the garrison".
+    INTEREST: it is paid out of the SAME military gate that maintains the wall
+    (`defenseGenerator.js:177-192`), and it is not the body that takes people up
+    for crimes — that is the watch. Its stake in this pool is the overlap.
+
+  • WHOEVER HOLDS THE WAY THROUGH — `City walls and gates` required at CITY and
+    METROPOLIS; `hasGates` OPEN at TOWN (it fires on `gates · town walls · city
+    walls · massive walls · palisade`). `Gates (if walled)` carries `Toll
+    collection`, which seats the `toll-bar` holder kind.
+    ⛔ F1-08 CUTS BOTH WAYS: asserting a gate on a town-tier town with no gated
+      row is a finding, and DENYING one at city or metropolis is the same finding
+      reversed. ⚠ W-08: `Town watch`'s `Gate duty` is ON while
+      `safetyProfile.js:463-464` can print "no gates to bribe and no checkpoints
+      to avoid" — a WIRING row, so a writer agreeing with EITHER surface cannot
+      be failed.
+    INTEREST: the gate is where a person is stopped before any of this machinery
+    touches them, and the only place the town decides who comes in at all.
+
+  • THE MILITIA · THE MERCENARY · THE CHARTER HALL · THE HOSPITAL — ⛔ THE FOUR
+    GENUINELY OPEN ROSTERS across the whole preimage. Seat none of them without
+    the card's own roster row. F1-03 (a militia as a standing body, or a muster
+    ROLL cited — the class word "the muster" is free), F1-05 (a mercenary
+    company; ⚠ W-01, the flag and the bucket disagree on three rows), F1-06 (a
+    charter hall), F1-14 (a hospital BUILDING — `hasHospital` fires on a HEALER,
+    a monastery or a friary). ⛔ F1-26: `Citizen militia` and `Town watch` share
+    `exclusiveGroup: 'civilianDefense'` and the militia row's own text is
+    "Present only when no professional watch exists" — **so on a town whose watch
+    is required, a citizen militia beside it is a contradiction in the catalogue's
+    own terms.**
+
+  • ⛔ THE ELDERS ARE NOT A SPEAKER ANYWHERE IN THIS POOL. The `elders` kind
+    resolves `Household elder · Village elder · Village headman · Town council`
+    (`holderTable.js:332-336`) and NONE is required at any preimage tier. This is
+    the exact inverse of the below-town pools, where the elders are the safe
+    source and the hall is barred. Here the hall is yours and the elders are not.
+
+  • ⛔ THE CROWN'S ASSESSOR is not a speaker anywhere. The engine has no typed
+    crown collector and no producer mints one.
+
+  ── THE NAMED OFFICES A SPEAKER MUST NEVER BE (`npcGenerator.js:1511-1537`) ──
+    town:        Mayor · GUARD CAPTAIN · High Priest
+    city:        Mayor · GUARD CAPTAIN · High Priest · Wealthiest Merchant
+    metropolis:  Governor · CITY WATCH CHIEF · High Priest · Guild Archmage ·
+                 Wealthiest Merchant
+    plus, by the town's PRIMARY stress: Garrison Commander + Guard Captain
+    (`under_siege`, `wartime`, `slave_revolt`, `monster_pressure`) ·
+    Healer + Guild Master (`famine`, `mass_migration`) · Corrupt Official
+    (`occupied`, `insurgency`) · Council Member ×2 (`politically_fractured`) ·
+    Moneylender (`indebted`) · CHIEF MAGISTRATE (`recently_betrayed`,
+    `succession_void`, `insurgency`) · Parish Priest + Healer (`plague_onset`) ·
+    Retired Adventurer (`monster_pressure`).
+
+    ⭐⭐ THIS POOL'S F3-06 TRAPS ARE THE WORST IN THE BLOCK, because the singular
+    offices the tier emits are EXACTLY the people this pool's subject is about.
+    A Guard Captain (or a City Watch Chief) and a Mayor stand on EVERY town of
+    the preimage, and a Chief Magistrate stands on every `recently_betrayed`,
+    `succession_void` or `insurgency` town. So "the one who decides what is
+    charged", "whoever sits in judgment", "the man who holds the keys to the
+    cells", "the officer who brings them in" all read, to every reader, as
+    statements about a named NPC with a disposition and a secret on the next tab.
+    Use a plural, a trade, a bystander, or an office the roster does not seat:
+    "a clerk in the hall", "those who sit that day", "whoever has the keys",
+    "the men of the night patrol".
+    ⚠ F1-111 and F4-14: clean hands, an unbought office or an unreachable seat is
+    FALSE where `occupied` / `insurgency` mandates a `Corrupt Official` — and
+    that role string is OPENLY ROSTERED, so calling that corruption hidden is
+    F4-14 in the other direction.
+
+────────────────────────────────────────────────────────────────────────────────
+(8) WHAT WOULD BE FALSE
+────────────────────────────────────────────────────────────────────────────────
+
+  The key fixes two flags and nothing else, and the machine says so on every town
+  of the preimage in three places: "Full legal infrastructure provides
+  enforcement capacity." (`threatAssessment.js:145`), the status word "Court +
+  Prison" and the note "Full enforcement chain. Arrest, prosecute, detain."
+  (`defenseDisplay.js:231`, `:233`); beside them `guardEffectivenessDesc` appends
+  " A functioning court and prison mean crimes carry real consequences." on every
+  branch where any law body resolves (`safetyProfile.js:327-335` and eleven
+  further branches), and the `Safe` branch adds " A functioning court system
+  means organized crime operates with greater caution." So the CHAIN is stated
+  for the writer and the writer's content must be elsewhere — which is where all
+  of this pool's findings live, in two shapes: SAYING MORE ABOUT THE MACHINERY
+  THAN THE ROW BEHIND IT SAYS, and READING THE MACHINERY AS ORDER. Taking them by
+  field: no COURTHOUSE BUILDING, no criminal TRIAL, no sentence, no gaoling and
+  no gallows off a town whose court flag is seated by the required `Town hall`
+  alone, whose only procedure above the bar is `Dispute arbitration` — commercial
+  and civil (F1-12, `institutionServices.js` "Town hall"; §R-4: the WORD court is
+  free, the criminal PROCEDURE is the finding, and F1-12 names the gallows by
+  name on an estate that has none); no STOCKS, pillory or public shaming at city
+  or metropolis, where `Large prison` and `Massive prison` carry no such service
+  and only the town's `Small prison/stocks` does (F1-32's shape — the row's own
+  printed description fixes it); no SERVED SENTENCE, term, or long holding at
+  town, where `Holding cells` is printed as short-term detention pending trial or
+  a fine (F1-32 + F2-02's duration); no cited COURT RECORD where the roster's
+  court row is the required `Multiple courthouses`, which has no service menu and
+  seats no `court` holder (F1-24 / §R-8, the pool's signature finding); no GAOL
+  BOOK, committal roll or list of the held anywhere, since `HOLDER_KINDS` is
+  closed and carries no prison kind (F1-24); no WARRANT or filed crime report at
+  town, where `Crime response` is OFF by default (F1-24); no professional,
+  full-time or soldierly TOWN WATCH (F1-27) and no denial of the watch anywhere,
+  since it is required at all three tiers (F1-25, V-23's direction reversed); no
+  militia beside the required watch (F1-26), no mercenary company (F1-05, ⚠
+  W-01), no charter hall (F1-06), no hospital BUILDING (F1-14); no denial of the
+  GARRISON, the WALLS or the GATES at city or metropolis (F1-28, F1-07, F1-08 in
+  its reversed direction), and no assertion of them at town without the row; no
+  "the garrison relieves the watch" AT TOWN, where one row seats both buckets
+  (F1-29 as §V.2 corrects it — the contrast is TRUE at city and metropolis); no
+  second, unnamed governing body (F1-59) and no hall, market, granary or parish
+  denied anywhere (F1-25, §2b). Reading the machinery as ORDER is the other half
+  and it is the subtler one: the key is INDEPENDENT of `safetyLabel`, so a town
+  with a court and a prison can print `Dangerous` — "Violence and theft are
+  routine… Residents protect themselves through community networks or tribute
+  paid to whoever controls their street" — beside the face, and a face asserting
+  that the law holds, that crime is answered, or that the chain works
+  contradicts the printed band (F1-107, and F1-34 for any TOTALITY of safety);
+  equally `Very Safe` prints "among the safest settlements in the region", and a
+  face asserting the law is a dead letter contradicts THAT. The capture rungs are
+  their own trap: `none` is not "no crime", `equilibrium` prints as "Criminal:
+  Tolerated", and `adversarial` asserts enforcement is WINNING (F1-37, F4-15),
+  while `deriveCriminalStructure` prints its own label and "no organized crime
+  here" off a `null` structure is a finding (F1-38). The PURSE is one and its
+  direction cannot be split: `defenseGenerator.js:244-253` funds "watch wages,
+  court and gaol funding" on ONE multiplier (floor 0.65) and `:177-192` funds the
+  garrison and the wall on another (floor 0.6), and both are the same shape on
+  the same input, so the court kept while the gaol starves, the watch paid while
+  the court is not, or any of the four gates pointed against another is F4-02 /
+  F4-03; a TOTAL collapse of pay is F4-04 (short, late and thin is the licensed
+  extreme, and men drifting off slowly is the model's own word per §R-9); and the
+  pay gate DOES reach the watch, so denying that is F4-19. Floor 2 binds as
+  everywhere and this pool's subject invites every one of its rows: no count of
+  the held, the heard, the charged or the watch (F2-01 — and note the engine's
+  own trap, that a band word is the only licensed magnitude); no term, sentence
+  length, arrears, date or season (F2-02); no founding or raising of the
+  courthouse or the gaol (F2-03); no event the record did not run — a trial held,
+  a man released, a gaol-break, an officer dismissed (F2-04); no elapsed course
+  over a LIVE field (F2-05) — ⭐ BUT `hasCourtSystem`, `hasPrison`, `safetyLabel`,
+  `guardEffectivenessDesc`, `scores.internal`, `compound.inst` and
+  `economicGates.military` all carry ZERO writers under `src/domain/worldPulse/`
+  (§6), so THE PERFECT AND THE DURATIVE ARE LICENSED OVER THEM: "the cells have
+  never been filled", "nobody has been brought before it that anyone remembers",
+  "the chain has held" are lawful sentences on this pool; and no RATE — "most
+  nights", "every assize", "more often than not" (F2-06). Floor 3: no named
+  character's fate (F3-01), nothing predicated of a deity (F3-02), and — the row
+  most likely to recur — NO CULTURAL FURNITURE THE TOWN'S PROFILE DENIES (F3-05,
+  ELEVEN profiles ship): no churchyard, no market green, no thatch, and on this
+  pool no assize, no shire, no borough-and-county apparatus, which is
+  north-European by construction and is exactly what a writer reaches for when
+  writing a court. Floor 3's F3-06 rider is transcribed in §7 and is this pool's
+  worst trap. And two placements the data states at one tier only: "in the
+  square" (town's `Civic announcements`) and the burial placements at city
+  (§2b′). ⛔ Finally, §2d: a face that would sit as comfortably on `court without
+  detention` or on `detention without process` is a floor-1 finding (ruling 35) —
+  and because `hasCourtSystem` is automatic at every preimage tier, ANY FACE
+  WHOSE WHOLE CONTENT IS "THERE IS A COURT HERE" is that finding by construction.
+  ⚠ AND THE CARD ITSELF IS IN ERROR ABOVE: §2, §2b, §5 and the instrument's §7
+  read the metropolis BLOCK and not the merged catalogue, so they understate the
+  metropolis by thirteen required rows; take the required rows, the watch, the
+  garrison and the walls from the correction at the head of these sections and
+  not from §5. A refuter charging a face for "asserting a hall at metropolis" on
+  §5's authority would be charging the truthful party (§R-1).
+
+────────────────────────────────────────────────────────────────────────────────
+(9) WHERE THE FLAVOUR IS
+────────────────────────────────────────────────────────────────────────────────
+
+  WHAT IS IN USE. This is the only defense pool whose key turns on TWO ROOMS with
+  DOORS, and the rooms are furnished by the catalogue in the engine's own words:
+  holding cells occupied pending a trial or a fine; the stocks and pillory
+  standing in a town square for public shaming and minor offenses; at the city, a
+  prison holding debtors, criminals and political prisoners, and courts sorted
+  into commercial, criminal and ecclesiastical; a watch that at city and above
+  accepts reports, records them and ISSUES WARRANTS, and at town walks the
+  streets after dark and checks who comes through the gate. The concrete objects
+  are a lock on the outside of a door, a bench where people wait, a fine paid to
+  secure release, a name taken down at the gate and read out somewhere else.
+
+  WHAT IS IN DISPUTE. Three disagreements are seated by the town's own fields and
+  need no invention. First, THE JOIN: the watch takes people up and the court
+  disposes of them, and at town the watch's `Crime response` is off by default
+  while the court's recorded procedure may be civil only — so what the watch
+  brings and what the hall will hear are two different accounts of the same
+  event, and both sources are required rows. Second, THE PURSE: one multiplier
+  funds watch wages, court and gaol funding together, so the hall defending the
+  chain and the watch complaining of its wage are arguing about a single coin,
+  and neither is wrong. Third, THE PRIVATE SETTLING: where the guilds' row is
+  seated, `Dispute resolution` arbitrates between members and their clients — a
+  second, older machinery running beside the town's, which is the tavern's best
+  subject and the hall's worst.
+
+  WHAT THE ABSENCE LOOKS LIKE ON THE GROUND. The absence on this pool is never
+  the machinery — it stands, by the key — but what does NOT reach it, and that
+  absence is visible: an empty holding cell in a town that prints `Dangerous`; a
+  court whose only recorded procedure is a contract dispute in a town where the
+  streets are not safe after dark; a chain that can arrest, prosecute and detain,
+  and a shared perception that whatever happened last was settled some other way.
+  ⭐ AND THE FROZEN LICENCE IS THE WRITER'S BEST INSTRUMENT HERE (§6, F2-05 as
+  §V.0 re-cuts it): the flags, the safety label, the guard description and the
+  internal score have no pulse writer, so the perfect and the durative are
+  lawful over them — "the cells have stood empty", "nobody has been brought
+  before it", "the chain has held and nobody has tested it" — which is exactly
+  the register this pool wants and exactly the register a writer will assume is
+  barred.
