@@ -1,28 +1,24 @@
-# LANE-STATUS — written 2026-09-13 01:31:26 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-13 01:36:44 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = b32e2cc28 Plan: Wave 0 shipped (§919.6 b9c3fe322); the sitting sealed; wave 1 the machinery re-cut 
 
 ## BUILD / KIT LANES (dock · base · cars · porcelain · receipt)
 - REWRITE 8b DS-DEF-11 (the validation block; cure round): dock laneRW-DEF11 ABSENT
 - REWRITE 8b-W (the wiring car, landed in its dock = the consist lineage): dock laneRW-DEFW ABSENT
-- **DS-DEF-2 (waits for the tables)** dock `laneRW-DEF2` HEAD 6a6c2ddf3 · 9 cars over f2da5a3ee · porcelain 15 · last commits:
+- **DS-DEF-2 (waits for the tables)** dock `laneRW-DEF2` HEAD 6e5ee9716 · 10 cars over f2da5a3ee · porcelain 8 · last commits:
+    6e5ee9716 REWRITE 8b-W-18b: the round-1 draft retired from the annex (v3 restarts DS-DEF-2 from the shipped rows) and the {defmaterial} fill lands (ADDENDUM 18 ruling 10) — zero text shift beyond the retirement
     6a6c2ddf3 REWRITE 8b-W-18a: the gate refuses nothing on taste (ADDENDUM 18 ruling 1); a face's slots are a subset of its spine's and the town never names itself in a face (ruling 12); the claim-equality prose struck (ruling 2)
     a3e877e6e REWRITE 8b DS-DEF-2 draft round 1: THREE FIGURES IN 8e549c4a6's message CORRECTED
     8e549c4a6 REWRITE 8b DS-DEF-2 draft round 1: 10/26
-    f20532e18 REWRITE 8b DS-DEF-2: the licence-test rewrite is reverted to the shipped rows, and the re-cut starts from the original
     porcelain (uncommitted work in the dock — commit it FIRST after re-proving):
-       M docs/content/RECEIPT_POOLS_DOSSIER_STATE.md
-       M docs/content/wiring-census.json
-       M src/data/dossierStateProse/defense.generated.js
-       M src/domain/display/stateProse/defenseStateProse.js
-       M tests/data/dossierStateProseProjection.contract.test.js
-       M tests/domain/defenseStateProseDesk.test.js
-       M tests/lint/proseLicenceCard.walker.test.js
-       M tests/lint/proseWiringCensus.walker.test.js
       ?? docs/content/sibling-string-pack.json
       ?? scripts/frozen-field-census.mjs
       ?? scripts/lib/prose-mark-fields.mjs
       ?? scripts/lib/prose-render-defense-page.mjs
+      ?? scripts/prose-mark-card.mjs
+      ?? scripts/prose-region-nouns.mjs
+      ?? scripts/prose-render-page.mjs
+      ?? scripts/sibling-string-pack.mjs
     receipt `receipt-rewrite.md` (mtime 09-12 20:49) head:
       | # RECEIPT — the REWRITE train
       | 
@@ -517,4 +513,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `ad30ac0bb` FOLDER · DONE · transcript 09-11 06:02 1531 KB · 36 tool calls · files: _partD.md, _partE.md, _partF.md, _partG.md · result: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/entailment/ENTAILMENT-TABLE.draft.md
 
 ## PROCESSES: 
-load: 1.91 2.34 2.13
+load: 2.00 2.45 2.29
