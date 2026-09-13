@@ -32,7 +32,7 @@ import {
   TEXT_LEVEL_METRICS, bandGrainsOf, bandPositionAt, bandPositionOf, censusSynonymTable,
   exemplarBands, exemplarCitationRate, fixtureSection, inBandOf, keepOrRevert, labelOfFinding,
   measure, packetDirFor, packetRefusal, packetTargetFor, poolRosterOf, qVocabularyReport,
-  roundsOf, sampleSizeFor, scopedWalkOf,
+  reportRowsOf, roundsOf, sampleSizeFor, scopedWalkOf,
   sectionsCoverEveryPool, shapeReport, siblingSpreadOf, siteOfFinding, tableLines, tieRate,
   unitsOfPool, withheldPoolRow,
 } from '../../scripts/prose-wave-gate.mjs';
@@ -296,12 +296,25 @@ describe('the exemplar bands, and the band position of one face', () => {
     expect(position.executable).toBe(true);
     expect(position.scored).toBeGreaterThan(0);
     expect(position.meanDistanceFromMedian).toBeGreaterThanOrEqual(0);
-    // THE THREE NUMBERS AT THE ENTRY GRAIN are the ones applied, and they are read from the
-    // constant rather than retyped: budget two thirds, depth 1.75.
+    // THE THREE NUMBERS AT THE ENTRY GRAIN are REPORTED CONSTANTS, READ BY NO VERDICT
+    // (ADDENDUM 18 ruling 1, 2026-09-12): the scorer still computes `budgetOk` / `depthOk`
+    // from them — budget two thirds, depth 1.75 — and the values are pinned here because the
+    // ruling's reversal clause restores `ENTRY_NUMBERS.depth` as a gate arm, which only means
+    // something while the constant is what §16.2 cut.
     expect(ENTRY_NUMBERS.depth).toBe(1.75);
     expect(Math.round(ENTRY_NUMBERS.budgetShare * 3)).toBe(2);
     expect(typeof position.budgetOk).toBe('boolean');
     expect(typeof position.depthOk).toBe('boolean');
+    // AND NO VERDICT READS THEM: a face with both flags false is reported, never refused.
+    const breached = inBandOf({
+      band: [{ ...cleanBand(1)[0], budgetOk: false, depthOk: false, deepest: { metric: 'punctuation.colonRate', depth: 6.987, side: 'over' } }],
+      lengths: cleanLengths,
+      owned: null,
+    });
+    expect(breached.inBand).toBe(true);
+    expect(breached.failing).toEqual([]);
+    expect(breached.report.depth.map((r) => r.measure)).toEqual(['band depth · punctuation.colonRate (over)']);
+    expect(breached.report.budget.map((r) => r.measure)).toEqual(['band budget']);
   });
 
   it('flags a PERFECTION-suspect face, which is a finding and never a rewrite trigger', () => {
@@ -587,7 +600,7 @@ describe('⭐⭐ CAR M-9: a finding is sited on the spine, the modifier or the j
     expect(verdict.inBand, 'a spine-withheld pool with a clean modifier IS in band').toBe(true);
   });
 
-  it('PLANT 2 — the same finding on the MODIFIER is OWNED: out of band, and named in failing[]', () => {
+  it('PLANT 2 — the same finding on the MODIFIER is OWNED: still IN BAND, and named in report.composedWalk (ADDENDUM 18 ruling 1)', () => {
     const scoped = scopedWalkOf([fixtureUnit()], () => plantedResult({
       entryWithheld: [entryFinding('The watch is bought where the muster fell short.')],
     }));
@@ -595,12 +608,15 @@ describe('⭐⭐ CAR M-9: a finding is sited on the spine, the modifier or the j
     expect(scoped.inheritedCount).toBe(0);
     expect(scoped.owned.findings[0].site).toBe('modifier');
     const verdict = inBandOf({ band: cleanBand(4), lengths: cleanLengths, owned: scoped.owned });
-    expect(verdict.inBand).toBe(false);
-    expect(verdict.failing.map((f) => f.measure)).toContain('composed walk · Q · a trailing coordinate naming no second field');
-    expect(verdict.failing.map((f) => f.measure)).toContain('composed walk · owned unit verdicts');
+    // ⛔ THE SITING IS UNCHANGED AND THE VERDICT IS NOT: the owned finding is the writers' own
+    // and it is REPORTED — a lexical detector's finding is not a mechanical refusal (ruling 1).
+    expect(verdict.inBand).toBe(true);
+    expect(verdict.failing).toEqual([]);
+    expect(verdict.report.composedWalk.map((f) => f.measure)).toContain('composed walk · Q · a trailing coordinate naming no second field');
+    expect(verdict.report.composedWalk.map((f) => f.measure)).toContain('composed walk · owned unit verdicts');
   });
 
-  it('PLANT 3 — a JOINT finding counts as owned, and a FAIL carries the pool out of band', () => {
+  it('PLANT 3 — a JOINT finding counts as owned, and a FAIL is REPORTED, never a refusal (ADDENDUM 18 ruling 1)', () => {
     const jointFail = {
       id: 'x', arm: 'A2', channel: 'FAIL', subject: 'no row', value: 'forces.walls.present | security.watch', description: 'the joint has no relation row',
     };
@@ -610,34 +626,48 @@ describe('⭐⭐ CAR M-9: a finding is sited on the spine, the modifier or the j
     expect(scoped.inheritedCount).toBe(0);
     expect(scoped.owned.findings[0].site).toBe('joint');
     const verdict = inBandOf({ band: cleanBand(4), lengths: cleanLengths, owned: scoped.owned });
-    expect(verdict.inBand).toBe(false);
-    expect(verdict.failing.map((f) => f.measure)).toContain('composed walk · A2 · no row');
+    expect(verdict.inBand).toBe(true);
+    expect(verdict.failing).toEqual([]);
+    expect(verdict.report.composedWalk.map((f) => f.measure)).toContain('composed walk · A2 · no row');
+    expect(verdict.report.composedWalk.map((f) => f.measure)).toContain('composed walk · owned unit verdicts');
   });
 
-  it('CONTROL — no finding at all is IN BAND, and a band breach alone carries it out', () => {
+  it('CONTROL — no finding at all is IN BAND; a band breach is REPORTED and refuses nothing (ADDENDUM 18 ruling 1); only the fragment word COUNT refuses', () => {
     const scoped = scopedWalkOf([fixtureUnit()], () => plantedResult());
     expect(scoped.verdicts).toEqual({ FAIL: 0, WITHHELD: 0, PASS: 1 });
     expect(scoped.owned.verdicts).toEqual({ FAIL: 0, WITHHELD: 0, PASS: 1 });
-    expect(inBandOf({ band: cleanBand(4), lengths: cleanLengths, owned: scoped.owned }).inBand).toBe(true);
-    // ⛔ THE BAND HALF IS NOT SCOPED AWAY: a face outside its band is the writer's own defect
-    // whatever the spine does, so it carries the pool out of band on its own.
+    const clean = inBandOf({ band: cleanBand(4), lengths: cleanLengths, owned: scoped.owned });
+    expect(clean.inBand).toBe(true);
+    expect(clean.failing).toEqual([]);
+    expect(clean.report).toEqual({
+      band: [], depth: [], budget: [], composedWalk: [],
+    });
+    // ⛔ THE BAND HALF IS STILL MEASURED AND STILL ROWED — the same figure, the same row shape —
+    // and it is a REPORT: taste is judged at the pool and the block, never at the face
+    // (ADDENDUM 18 ruling 1). Before the ruling this exact row refused the pool; on DS-DEF-2 it
+    // held 16 of 26 pools open for one colon or one participial opener in one of twelve faces.
     const deep = cleanBand(4);
     deep[2] = {
       ...deep[2], depthOk: false, deepest: { metric: 'closers.pronounRate', depth: 10.249, side: 'over' },
     };
     const banded = inBandOf({ band: deep, lengths: cleanLengths, owned: scoped.owned });
-    expect(banded.inBand).toBe(false);
-    expect(banded.failing[0].measure).toBe('band depth · closers.pronounRate (over)');
-    expect(banded.failing[0].value).toContain('10.249 band-widths on 1 of 4 face(s)');
-    // AND SO DOES A BAND THAT COULD NOT BE MEASURED: NOT-EXECUTABLE is never a pass.
+    expect(banded.inBand).toBe(true);
+    expect(banded.failing).toEqual([]);
+    expect(banded.report.depth[0].measure).toBe('band depth · closers.pronounRate (over)');
+    expect(banded.report.depth[0].value).toContain('10.249 band-widths on 1 of 4 face(s)');
+    expect(banded.report.depth[0].band).toContain('REPORTED, refuses nothing');
+    // A BAND THAT COULD NOT BE MEASURED IS REPORTED AS NOT-EXECUTABLE — honest about the
+    // absent instrument, and not a refusal: the fingerprints' absence is a fact about the
+    // machine, not about the face.
     const absent = inBandOf({
       band: [{ executable: false, why: 'the exemplar fingerprints are not on this machine' }],
       lengths: cleanLengths,
       owned: scoped.owned,
     });
-    expect(absent.inBand).toBe(false);
-    expect(absent.failing[0].value).toContain('NOT-EXECUTABLE');
-    // AND A FRAGMENT OVER ITS FORM'S WORD CEILING.
+    expect(absent.inBand).toBe(true);
+    expect(absent.failing).toEqual([]);
+    expect(absent.report.band[0].value).toContain('NOT-EXECUTABLE');
+    // ⛔ THE ONE REFUSAL THIS FUNCTION KEEPS IS A COUNT: a fragment over its form's word ceiling.
     const long = inBandOf({
       band: cleanBand(1),
       lengths: { form: 'fragment', ceiling: 12, rows: [{ vid: 0, faces: [9, 14] }] },
@@ -645,6 +675,10 @@ describe('⭐⭐ CAR M-9: a finding is sited on the spine, the modifier or the j
     });
     expect(long.inBand).toBe(false);
     expect(long.failing[0].measure).toBe('words per face (fragment form)');
+    // AND THE FLAT READER THE TABLE PRINTS FROM keeps the report's order: band, depth, budget,
+    // composed walk — and answers nothing on the rows an unwritten or absent pool carries.
+    expect(reportRowsOf(banded.report).map((r) => r.measure)).toEqual(['band depth · closers.pronounRate (over)']);
+    expect(reportRowsOf(null)).toEqual([]);
   });
 
   it('names a finding in the grain the gate rounds print', () => {

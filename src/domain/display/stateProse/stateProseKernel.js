@@ -74,9 +74,11 @@
  *   word (see STATE_MARK_DIMENSIONS), or a causal arm name
  * @property {string} text the sentence, slots unfilled — FACE 0, canonical-at-zero
  * @property {ReadonlyArray<string>} [slots] every `{slot}` the sentence names
- * @property {ReadonlyArray<string>} [wordings] FACES 1..n — the same claim set, the same
- *   `{slot}` set and the same marks BY CONSTRUCTION (ARCH §2.3). Absent on every variant
- *   the corpus ships today, which is why `drawFace` below takes no hash at all.
+ * @property {ReadonlyArray<string>} [wordings] FACES 1..n — the same marks and a SUBSET of
+ *   the same `{slot}` set BY CONSTRUCTION (ARCH §2.3 as amended by ADDENDUM 18 rulings 2 and
+ *   12, 2026-09-12): a face need not restate its key, may not contradict it, and never names
+ *   `{settlement}`. Absent on every variant the corpus shipped before the REWRITE wave, which
+ *   is why `drawFace` below takes no hash at all on such a variant.
  * @property {number} [vid] THE STABLE ID — the annex row number, frozen at SEAM car 4 and
  *   pinned on `docs/content/prose-shift-register.json`. It is what law 6's draw hashes on,
  *   and it is OPTIONAL on this type because the causal register (R2) carries none: §13 row
@@ -369,7 +371,7 @@ export function stableVid(variant) {
  * ⛔ A FACT NEVER MOVES. The eligible SET is untouched by this function: the audience
  * filter, the anchoring filter and the state-dimension filter have already run, and the
  * argmax only chooses among members the old draw could equally have chosen. Same pool,
- * same claim set, a different member of it.
+ * same eligible set, a different member of it.
  *
  * ⛔ WHY THE MODULUS SURVIVES AS A FALLBACK, AND WHY THAT IS NOT TWO REGIMES. A pool
  * whose members carry no `vid` has NO stable id, so there is nothing append-safe to hash
@@ -433,7 +435,8 @@ export function hashKey(key) {
 
 /**
  * THE WORDING FACE (ARCH §2.6, car 3a). A variant carries one authored sentence today and,
- * after the rewrite wave, up to four SURFACES of the same claim set. This picks the surface.
+ * after the rewrite wave, up to four FACES sharing its slots (a subset) and marks — never a
+ * claim set (ADDENDUM 18 ruling 2). This picks the face.
  *
  * ── THE THREE THINGS THIS FUNCTION IS ────────────────────────────────────────────────
  *

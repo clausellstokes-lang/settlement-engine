@@ -55,6 +55,19 @@
  * AND THE TWO-PHASE RULE of Part B §21 as the gate's own KEEP-OR-REVERT verdict, with the
  * BANKED count printed and shrink-only.
  *
+ * ⛔⛔ THE GATE REFUSES NOTHING ON TASTE (ADDENDUM 18 ruling 1, the owner's "do all of that" of
+ * 2026-09-12; REWRITE car 8b-W-18a). Every band measure above — (e)'s per-face depth and
+ * budget, a band that could not be measured, the composed walk's owned findings — is still
+ * MEASURED and PRINTED, and none of it holds a pool open or refuses it. A pool's `failing[]`
+ * carries MECHANICAL refusals only: the wording set unwritten, the unit set absent, and a
+ * fragment face over its form's word ceiling (a COUNT). Variant and face counts, tag grammar
+ * and the projector refuse at `generate-dossier-state-prose.mjs --check`; the E2 voice ratchet
+ * (no em dash, bang or digit in a face) at `tests/copy/voiceMechanics.test.js`. Taste is the
+ * refuter's verdict at the POOL grain (DULL), never this gate's. The band figures ride in each
+ * pool's `report` and the table prints them as REPORTED; `ENTRY_NUMBERS` stays exported so the
+ * ruling's reversal clause ("restore `ENTRY_NUMBERS.depth` as a gate arm") is one edit, and no
+ * verdict reads it.
+ *
  *   node scripts/prose-wave-gate.mjs --arm draft --round 3
  *   node scripts/prose-wave-gate.mjs --arm A --base <cells.json>
  *   node scripts/prose-wave-gate.mjs --arm draft --variety 1     a cheap slice of measure (d)
@@ -67,11 +80,18 @@
  * row reads NOT-EXECUTABLE. That is honest and it is not a measurement; 8b's workflow names a
  * roster on every call (fold NEW-5).
  *
- * READ-ONLY except ONE JSON, written at `<scratch>/packets/<dock>/measure-<arm>.json` —
+ * READ-ONLY except ONE JSON, written at `<kit>/packets/<dock>/measure-<arm>.json` — that is
+ * `packetDirFor`: the dock's PARENT directory's `packets/`, namespaced by the dock's own
+ * basename (for a dock at `<kit>/laneRW-DEF2` the packets land in `<kit>/packets/laneRW-DEF2/`),
+ * and NEVER `<dock>/.packets/` — a workflow prompt that says so is wrong, and this header wins.
  * NAMESPACED BY DOCK since REWRITE car 8a-11 (SITTING §U c-1), overridable by `$PACKETS` (the
  * directory) or `--out` (the whole path), and REFUSED where the file already there names
  * another arm or a later round. It does not write into `$PACKETS/`, which is the writers'
  * shared packet root and is only ever listed.
+ *
+ * ⚠ `--pools` SPLITS ON THE COMMA, so a pool whose NAME carries a comma (DS-DEF-2's
+ * "Beasts & Monsters: plagued, perimeter AND organized force" and its siblings) cannot be
+ * named through it: pass `--section` and read the block's rows out of the JSON instead.
  */
 import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
@@ -252,9 +272,15 @@ export const EXEMPLAR_LEAVES = Object.freeze([
 
 /**
  * ⭐ THE THREE NUMBERS AT THE ENTRY GRAIN (`RULES-V2-PART-B.md` §16.2, the chair's ruling).
- * A wording FACE is one entry, so the entry band is the one that governs it: BUDGET two
+ * A wording FACE is one entry, so the entry band is the one it is scored against: BUDGET two
  * thirds of the soft rules measurable on it, DEPTH 1.75 band-widths outside on any one, and
  * the PERFECTION CEILING at every grain.
+ *
+ * ⛔ REPORTED CONSTANTS, READ BY NO VERDICT (ADDENDUM 18 ruling 1, 2026-09-12). `budgetOk` and
+ * `depthOk` are still computed from them on every face and printed at both grains, and
+ * `inBandOf` no longer reads either: a band breach is a REPORT row, never a refusal. The
+ * export stays so the ruling's reversal ("restore `ENTRY_NUMBERS.depth` as a gate arm") is one
+ * edit in `inBandOf` and not an archaeology.
  */
 export const ENTRY_NUMBERS = Object.freeze({ budgetShare: 2 / 3, depth: 1.75 });
 
@@ -794,37 +820,60 @@ export function scopedWalkOf(units, walkOne) {
 }
 
 /**
- * ⭐⭐ THE GATE'S OWN VERDICT, SCOPED. A pool is IN BAND when every face sits inside every band it
- * is measured on and every OWNED arm is green. The failing measures are returned in the shape the
- * writing workflow's schema already asks a gate agent for (`measure`, `value`, `band`), so the
- * gate copies them rather than composing a sentence of its own about a number it did not measure.
+ * ⭐⭐ THE GATE'S OWN VERDICT, SCOPED — AND MECHANICAL ONLY (ADDENDUM 18 ruling 1, 2026-09-12;
+ * REWRITE car 8b-W-18a). A pool is IN BAND unless a MECHANICAL measure refuses it. The one
+ * mechanical measure this function owns is the fragment form's word ceiling, which is a COUNT;
+ * the unwritten set and the absent unit set are `withheldPoolRow` / `absentPoolRow`'s own rows.
+ *
+ * ⛔ WHAT MOVED TO `report`, AND WHY IT IS STILL HERE. Before the ruling this function refused a
+ * pool on (1) a band that could not be measured, (2) any face deeper than `ENTRY_NUMBERS.depth`
+ * on any one soft rule, (3) a face over the two-thirds budget, and (5) any OWNED finding of the
+ * composed walk; on DS-DEF-2 the round-1 gate held 16 of 26 pools open for a single colon or a
+ * participial opener in one of twelve faces, and the run died on its quota. The sitting ruled
+ * that taste is judged at the POOL and the BLOCK (the refuter's DULL verdict, ruling 8's
+ * selector) and never at the face. So the same four measures are computed exactly as before,
+ * in the same `{measure, value, band}` row shape, and returned under `report` — where the table
+ * prints them and no verdict reads them. Reversal is moving a row from `report` back to
+ * `failing`.
  *
  * ⛔ `inBand` IS `failing.length === 0` AND IS NOT A SECOND OPINION. A verdict computed apart
  * from its own reason list is a pair that can disagree, and the disagreement is always silent.
  * @param {{band?: Array<object>|null, lengths?: {form: string, ceiling: number|null,
  *   rows: Array<{faces: number[]}>}|null, owned?: {verdicts: Record<string, number>,
  *   byLabel: Array<{label: string, count: number}>}|null}} pool
- * @returns {{inBand: boolean, failing: Array<{measure: string, value: string, band: string}>}}
+ * @returns {{inBand: boolean, failing: Array<{measure: string, value: string, band: string}>,
+ *   report: {band: Array<{measure: string, value: string, band: string}>,
+ *     depth: Array<{measure: string, value: string, band: string}>,
+ *     budget: Array<{measure: string, value: string, band: string}>,
+ *     composedWalk: Array<{measure: string, value: string, band: string}>}}}
  */
 export function inBandOf(pool) {
   /** @type {Array<{measure: string, value: string, band: string}>} */
   const failing = [];
+  /** @type {{band: Array<{measure: string, value: string, band: string}>, depth: Array<{measure: string, value: string, band: string}>, budget: Array<{measure: string, value: string, band: string}>, composedWalk: Array<{measure: string, value: string, band: string}>}} */
+  const report = {
+    band: [], depth: [], budget: [], composedWalk: [],
+  };
   const band = Array.isArray(pool.band) ? pool.band : [];
   const measured = band.filter((face) => face.executable);
   const absent = band.filter((face) => !face.executable);
+  // (1) A BAND THAT COULD NOT BE MEASURED — REPORTED. Honest about the absent instrument, and
+  // not a refusal: the ruling's refusals are mechanical, and "the exemplar fingerprints are
+  // not on this machine" is a fact about the machine, not about the face.
   if (band.length === 0) {
-    failing.push({
+    report.band.push({
       measure: 'band position',
       value: 'NOT-EXECUTABLE: no face was measured',
       band: 'every face measured against the ten leaf registers',
     });
   } else if (absent.length) {
-    failing.push({
+    report.band.push({
       measure: 'band position',
       value: `NOT-EXECUTABLE on ${absent.length} of ${band.length} face(s): ${absent[0].why}`,
       band: 'every face measured against the ten leaf registers',
     });
   }
+  // (2) THE PER-FACE DEPTH — REPORTED. The figure is the same one that used to refuse.
   /** @type {Map<string, {depth: number, side: string, faces: number}>} */
   const deep = new Map();
   for (const face of measured) {
@@ -838,20 +887,22 @@ export function inBandOf(pool) {
     deep.set(face.deepest.metric, seen);
   }
   for (const [metric, seen] of deep) {
-    failing.push({
+    report.depth.push({
       measure: `band depth · ${metric} (${seen.side})`,
       value: `${seen.depth} band-widths on ${seen.faces} of ${measured.length} face(s)`,
-      band: `DEPTH at most ${ENTRY_NUMBERS.depth} band-widths on every face`,
+      band: `DEPTH at most ${ENTRY_NUMBERS.depth} band-widths on every face (REPORTED, refuses nothing — ADDENDUM 18 ruling 1)`,
     });
   }
+  // (3) THE PER-FACE BUDGET — REPORTED.
   const overBudget = measured.filter((face) => face.budgetOk === false);
   if (overBudget.length) {
-    failing.push({
+    report.budget.push({
       measure: 'band budget',
       value: `over on ${overBudget.length} of ${measured.length} face(s)`,
-      band: 'a face exceeds at most two thirds of the soft rules measurable on it',
+      band: 'a face exceeds at most two thirds of the soft rules measurable on it (REPORTED, refuses nothing — ADDENDUM 18 ruling 1)',
     });
   }
+  // (4) THE FRAGMENT FORM'S WORD CEILING — A COUNT, AND THE ONE REFUSAL THIS FUNCTION KEEPS.
   const lengths = pool.lengths || null;
   if (lengths && lengths.ceiling) {
     const over = (lengths.rows || []).flatMap((r) => r.faces).filter((n) => n > lengths.ceiling);
@@ -863,24 +914,33 @@ export function inBandOf(pool) {
       });
     }
   }
+  // (5) THE COMPOSED WALK'S OWNED FINDINGS — REPORTED. These are the licence-era lexical
+  // detectors (Q, X, C3, C4, A13 …); the sitting's refuter reads the rendered page and the
+  // contradiction table instead, and on DS-DEF-2 these arms refused nothing at all.
   const owned = pool.owned || null;
   if (owned) {
     for (const { label, count } of owned.byLabel) {
-      failing.push({
+      report.composedWalk.push({
         measure: `composed walk · ${label}`,
         value: `${count} owned finding(s)`,
-        band: 'every owned arm green: FAIL 0 and WITHHELD 0 over the pool\'s composed units',
+        band: 'every owned arm green: FAIL 0 and WITHHELD 0 over the pool\'s composed units (REPORTED, refuses nothing — ADDENDUM 18 ruling 1)',
       });
     }
     if (owned.verdicts.FAIL > 0 || owned.verdicts.WITHHELD > 0) {
-      failing.push({
+      report.composedWalk.push({
         measure: 'composed walk · owned unit verdicts',
         value: `FAIL ${owned.verdicts.FAIL} · WITHHELD ${owned.verdicts.WITHHELD} · PASS ${owned.verdicts.PASS}`,
-        band: 'FAIL 0 and WITHHELD 0 on the writers\' own grain',
+        band: 'FAIL 0 and WITHHELD 0 on the writers\' own grain (REPORTED, refuses nothing — ADDENDUM 18 ruling 1)',
       });
     }
   }
-  return { inBand: failing.length === 0, failing };
+  return { inBand: failing.length === 0, failing, report };
+}
+
+/** Every reported (never refusing) row of a pool, flat, in the order the table prints them. */
+export function reportRowsOf(report) {
+  if (!report) return [];
+  return [...report.band, ...report.depth, ...report.budget, ...report.composedWalk];
 }
 
 /**
@@ -1007,6 +1067,7 @@ export function withheldPoolRow(entry, input) {
       value: `${input.marked.length} of ${input.variants.length} variant(s) carry ${AUTHORING_MARKER}`,
       band: 'a written set, whose measures are executable',
     }],
+    report: null,
     owned: null,
     inherited: [],
     inheritedCount: 0,
@@ -1025,8 +1086,10 @@ export function withheldPoolRow(entry, input) {
  * back to `[]`, `unitsOfPool` answers `[]`, the walk over an empty unit set returns
  * `{FAIL: 0, WITHHELD: 0, PASS: 0}`, and the verdict line — `FAIL > 0 ? … : 'PASS'` — reads
  * **PASS with an empty `why`**. A pool that does not exist was reported as a clean one. The
- * gate did not pass it (`inBandOf` puts `band position: no face was measured` in `failing`, so
- * `inBand` is false), but the WORD a reader sees was PASS and the reason column was blank,
+ * gate did not pass it (`inBandOf` then put `band position: no face was measured` in
+ * `failing`, so `inBand` was false — since ADDENDUM 18 ruling 1 that row is a REPORT, so this
+ * row's OWN `failing` entry below is the only thing holding an absent pool out of band), but
+ * the WORD a reader sees was PASS and the reason column was blank,
  * which is the same class of lie car M-9 built `withheldPoolRow` to stop for an UNWRITTEN set.
  * An unwritten set was guarded; an ABSENT one fell through the guard.
  *
@@ -1062,6 +1125,7 @@ export function absentPoolRow(entry, input) {
       value: `NOT-EXECUTABLE: ${input.why}`,
       band: 'a pool that composes at least one unit',
     }],
+    report: null,
     owned: null,
     inherited: [],
     inheritedCount: 0,
@@ -1842,6 +1906,12 @@ export function tableLines(out) {
     for (const fail of pool.failing || []) {
       lines.push(`     failing: ${fail.measure} = ${fail.value} | band ${fail.band}`);
     }
+    // ⭐ ADDENDUM 18 ruling 1: the band and composed-walk rows are REPORTED in the same shape,
+    // printed under their own word so no reader mistakes one for a refusal.
+    for (const rep of reportRowsOf(pool.report)) {
+      lines.push(`     reported: ${rep.measure} = ${rep.value} | ${rep.band}`);
+    }
+
     if (!pool.walk) continue;
     lines.push(`     walk: FAIL ${pool.walk.verdicts.FAIL} · WITHHELD ${pool.walk.verdicts.WITHHELD}`
       + ` · PASS ${pool.walk.verdicts.PASS} · findings ${pool.walk.findingCount}`);

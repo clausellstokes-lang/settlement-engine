@@ -1670,13 +1670,15 @@ describe('SEAM car 4 — §2.5\'s grammar, and every refusal it declares', () =>
     expect(tagged).toEqual([]);
   });
 
-  it('PLANT: a face beyond the pin, on a bound row, with a different slot set, or proper-initial', () => {
+  it('PLANT: a face beyond the pin, on a bound row, naming a slot its parent lacks, naming {settlement} (ADDENDUM 18 ruling 12), or proper-initial', () => {
     const base = {
       label: 'x',
       parent: { angle: 'plain', text: 'the {settlement} muster is thin', slots: ['settlement'] },
-      faces: ['the muster of {settlement} is thin'],
+      // THE SUBSET CONTROL: a face may OMIT a parent slot (ADDENDUM 18 ruling 12 — the fills
+      // are the spine's; an unused fill is harmless).
+      faces: ['the muster here is thin'],
       pinnedFaceCount: 4,
-      shapeOf: (slot) => (slot === 'settlement' ? 'proper' : 'bare-common'),
+      shapeOf: (slot) => (slot === 'settlement' || slot === 'faction' ? 'proper' : 'bare-common'),
       clauseOpeners: ['and', 'so'],
       form: 'sentence',
     };
@@ -1684,8 +1686,15 @@ describe('SEAM car 4 — §2.5\'s grammar, and every refusal it declares', () =>
     expect(() => assertFaces({ ...base, faces: ['a', 'b', 'c', 'd'] })).toThrow(/against a pin of 4/);
     expect(() => assertFaces({ ...base, parent: { ...base.parent, angle: 'canonical' } }))
       .toThrow(/the seven bound rows keep ONE face/);
-    expect(() => assertFaces({ ...base, faces: ['the muster is thin'] })).toThrow(/names slots/);
-    expect(() => assertFaces({ ...base, faces: ['{settlement} keeps a thin muster'] }))
+    // A face may never ADD a slot: no fill reaches it and the rung goes silent.
+    expect(() => assertFaces({ ...base, faces: ['the {faction} muster is thin'] })).toThrow(/SUBSET of its spine/);
+    // ⛔ RULING 12: the town never names itself inside a [face] — mid-sentence or opening.
+    expect(() => assertFaces({ ...base, faces: ['the muster of {settlement} is thin'] })).toThrow(/ruling 12/);
+    expect(() => assertFaces({ ...base, faces: ['{settlement} keeps a thin muster'] })).toThrow(/ruling 12/);
+    // T-F8 STAYS for the other `proper`-typed slots: a sentence face never opens on one.
+    const twoSlots = { ...base, parent: { angle: 'plain', text: 'the {settlement} muster answers to {faction}', slots: ['settlement', 'faction'] } };
+    expect(() => assertFaces({ ...twoSlots, faces: ['the muster answers to {faction}'] })).not.toThrow();
+    expect(() => assertFaces({ ...twoSlots, faces: ['{faction} keeps the muster'] }))
       .toThrow(/opens on the `proper`-typed slot/);
     // The fragment half: a face may never carry the joint, which lives in the leaf.
     const frag = { ...base, form: 'fragment', parent: { angle: 'plain', text: 'thin', slots: [] }, faces: ['thin'] };

@@ -103,7 +103,7 @@ const DECLARATION_RE = /\*\*([A-Z-]+):\*\*\s*([^*]*?)(?=\s*·\s*\*\*[A-Z-]+:\*\*
 export const DECLARATION_TAGS = Object.freeze([
   'ROLE', 'READS', 'NARROWS', 'RELATION', 'FORM', 'MOVE', 'ATTACH', 'EXPLAINS', 'SPINES', 'COVERS',
 ]);
-/** A face sub-row: `   - \`[face]\` the same claim, said again`. */
+/** A face sub-row: `   - \`[face]\` another wording on the same key` — the same marks and a SUBSET of the slots, never a claim set (ADDENDUM 18 rulings 2 and 12). */
 export const FACE_ROW_RE = /^\s*-\s+`\[face\]`\s+(.*)$/;
 /** The `[grammar: Vn]` tag, wherever it stands among a variant's tags. */
 export const GRAMMAR_TAG_RE = /^grammar:\s*(V[1-8])$/;
@@ -672,14 +672,31 @@ export function assertFaces(input) {
       + ' is a mechanism of the SHIFT REGISTER: every world drawing this variant re-rolls its'
       + ' face when the modulus moves, so growth is a declared car and never an edit (P-F6)');
   }
-  const parentSlots = [...new Set(parent.slots)].sort().join(' ');
+  const parentSlots = new Set(parent.slots);
   for (const face of faces) {
     const slots = [...new Set([...face.matchAll(/\{([a-zA-Z_][a-zA-Z0-9_]*)\}/g)].map((m) => m[1]))]
-      .sort().join(' ');
-    if (slots !== parentSlots) {
-      refuse(label, `a face names slots {${slots || 'none'}} where its parent names`
-        + ` {${parentSlots || 'none'}} — a wording set says the SAME claim with the same fills,`
-        + ' so eligibility cannot differ within it (A6)');
+      .sort();
+    // ⭐ A FACE'S SLOTS ARE A SUBSET OF ITS SPINE'S (ADDENDUM 18 ruling 12, amending ruling 2's
+    // "share slots by construction"; 2026-09-12). The fills are the spine's: an unused fill is
+    // harmless, an UNFILLED one silences the rung, so a face may omit a slot and never add one.
+    // The faces of a pool share SLOTS and MARKS, never a claim set (ruling 2): a face may say
+    // nothing about the key, and may not contradict it.
+    const foreign = slots.filter((slot) => !parentSlots.has(slot));
+    if (foreign.length) {
+      refuse(label, `a face names slot(s) {${foreign.join(' ')}} its parent does not name (parent`
+        + ` slots {${[...parentSlots].sort().join(' ') || 'none'}}) — a face's slots are a SUBSET of its`
+        + ' spine\'s, because the fills are the spine\'s and an unfilled slot silences the rung'
+        + ' (ADDENDUM 18 ruling 12; A6)');
+    }
+    // ⛔ THE TOWN NEVER NAMES ITSELF INSIDE A FACE (ADDENDUM 18 ruling 12, the owner's word of
+    // 2026-09-12: "any mention of {settlement} is redundant because it is in its own dossier").
+    // `{settlement}` appears in at most ONE unit per pool and never in a `[face]` sub-row; the
+    // face says "the town", "here", "the place", or leaves it implied. Measured cause: the
+    // settlement token was the most frequent content token in all three corpora.
+    if (slots.includes('settlement')) {
+      refuse(label, 'a face names {settlement} — the town never names itself inside a [face]'
+        + ' (ADDENDUM 18 ruling 12): the reader is standing in the dossier, so the face says'
+        + ' "the town", "here", "the place", or leaves it implied; the spine row keeps the token');
     }
     if (form === 'fragment') {
       if (/^\s*,/.test(face)) refuse(label, 'a fragment face opens on a comma: the comma lives in the CONNECTIVES leaf and nowhere else (T-F1)');

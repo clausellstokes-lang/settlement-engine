@@ -656,7 +656,7 @@ describe('A5 — the four faces are not four synonym swaps', () => {
   });
 });
 
-describe('A6 — a face is claim-equal to its parent, with the LONGER arm SUPPRESSED', () => {
+describe('A6 — a face shares its parent\'s slots (a subset) and marks, never a claim set (ADDENDUM 18 ruling 2), with the LONGER arm SUPPRESSED', () => {
   const located = { context: null, pool: null, siblingTexts: [] };
 
   it('⛔ THE LONGER ARM IS THE SWITCH, and both settings are driven', () => {
@@ -674,12 +674,17 @@ describe('A6 — a face is claim-equal to its parent, with the LONGER arm SUPPRE
     expect(counts.fails.some((line) => line.startsWith('COUNT words ADDED'))).toBe(true);
   });
 
-  it('the BYTE-EQUALITY half: a face names its parent\'s slots and carries its parent\'s marks', () => {
+  it('the SLOTS-AND-MARKS half: a face names a SUBSET of its parent\'s slots (ruling 12) and carries its parent\'s marks byte for byte', () => {
     const parent = { text: 'The walls at {settlement} are kept.', marks: ['dm-only'] };
     expect(armA6({ id: 'clean', parent, face: 'Masons still draw wages at {settlement}.', faceMarks: ['dm-only'] }).fails)
       .toEqual([]);
+    // THE SUBSET PASSES: a face that omits its parent's slot names no fill it cannot receive.
+    expect(armA6({ id: 'subset', parent, face: 'Masons still draw wages here.', faceMarks: ['dm-only'] }).fails)
+      .toEqual([]);
+    // A FOREIGN SLOT STILL FAILS: {faction} is absent from the parent, so no fill reaches it.
     const slots = armA6({ id: 'slots', parent, face: 'The walls at {faction} are kept.', faceMarks: ['dm-only'] });
     expect(slots.fails.map((f) => f.subject)).toEqual(['slot set']);
+
     const marks = armA6({ id: 'marks', parent, face: 'Masons still draw wages at {settlement}.', faceMarks: [] });
     expect(marks.fails.map((f) => f.subject)).toEqual(['mark set']);
   });

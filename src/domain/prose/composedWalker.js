@@ -615,7 +615,7 @@ export function armA5(input) {
   return out;
 }
 
-// ── A6 · the four faces are claim-equal to their parent ─────────────────────────────
+// ── A6 · the faces share their parent's slots (a subset) and marks, never a claim set ──
 
 /** @param {string} text @returns {string[]} the slot names a text carries, sorted */
 function slotsOf(text) {
@@ -624,26 +624,33 @@ function slotsOf(text) {
 }
 
 /**
- * ⭐ ARM A6, THE BYTE-EQUALITY HALF (ARCH §8.4). A face says the SAME claim with the SAME fills
- * to the SAME audience: its slot set and its mark set are byte-equal to its parent's.
+ * ⭐ ARM A6, THE SLOTS-AND-MARKS HALF (ARCH §8.4 as amended by ADDENDUM 18 rulings 2 and 12,
+ * 2026-09-12). The faces of a pool share SLOTS and MARKS by construction, never a claim set: a
+ * face may say nothing about its key and may not contradict it, and it answers the SAME
+ * audience as its parent. Its slot set is a SUBSET of its parent's — the fills are the spine's,
+ * so an unused fill is harmless and an unfilled one would silence the rung — and its mark set
+ * is byte-equal.
  *
- * ⛔ THE CLAIM-EQUALITY HALF IS `scripts/check-pair.mjs` WITH THE LONGER ARM SUPPRESSED, and it
- * is not re-implemented here. That instrument owns the duration, count, ration, antithesis and
- * closer vocabularies; a second copy in `src/domain` would be a second home for a word list the
- * estate argues with by editing ONE file. The gate drives it with `longer: false`, because a
- * face is a SIBLING and not a rewrite: a longer face is a different wording, which is the point
- * of a wording set, while a longer REWRITE is the drift that arm was written to catch.
+ * ⛔ NO CLAIM-EQUALITY IS ASSERTED ANYWHERE. `scripts/check-pair.mjs` with the LONGER arm
+ * suppressed is the instrument the gate drives over a face pair for the duration, count,
+ * ration, antithesis and closer vocabularies, and it is not re-implemented here: a second copy
+ * in `src/domain` would be a second home for a word list the estate argues with by editing ONE
+ * file. The gate drives it with `longer: false`, because a face is a SIBLING and not a rewrite:
+ * a longer face is a different wording, which is the point of a wording set, while a longer
+ * REWRITE is the drift that arm was written to catch. The projector (`assertFaces`) is where
+ * ruling 12's "{settlement} never inside a [face]" refuses; this arm reports the slot relation.
  * @param {{id: string, parent: {text: string, marks?: ReadonlyArray<string>},
  *   face: string, faceMarks?: ReadonlyArray<string>}} input
  * @returns {ComposedResult}
  */
 export function armA6(input) {
   const out = emptyResult();
-  const parentSlots = slotsOf(input.parent.text).join(' ');
-  const faceSlots = slotsOf(input.face).join(' ');
-  if (parentSlots !== faceSlots) {
-    emit(out, row(input.id, 'A6', 'FAIL', 'slot set', `{${faceSlots || 'none'}} vs {${parentSlots || 'none'}}`,
-      'a face names different slots from its parent, so the two are not eligible on the same towns and the wording set is not one record'));
+  const parentSlots = slotsOf(input.parent.text);
+  const faceSlots = slotsOf(input.face);
+  const foreign = faceSlots.filter((slot) => !parentSlots.includes(slot));
+  if (foreign.length) {
+    emit(out, row(input.id, 'A6', 'FAIL', 'slot set', `{${faceSlots.join(' ') || 'none'}} vs {${parentSlots.join(' ') || 'none'}}`,
+      'a face names a slot its parent does not, so no fill reaches it and the rung goes silent on every town; a face\'s slots are a SUBSET of its parent\'s (ADDENDUM 18 ruling 12)'));
   }
   const parentMarks = [...(input.parent.marks || [])].sort().join(' ');
   const faceMarks = [...(input.faceMarks || input.parent.marks || [])].sort().join(' ');
