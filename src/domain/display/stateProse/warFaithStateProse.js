@@ -110,6 +110,7 @@
  */
 import { DOSSIER_STATE_PROSE_WAR_FAITH } from '../../../data/dossierStateProse/warFaith.generated.js';
 import { composeStateProse } from './composeStateProse.js';
+import { withFaceSources } from './faceSources.js';
 import { warFaithStateProseCandidates } from './warFaithStateProseCandidates.js';
 import { legibilityRung } from './legibilityRung.js';
 import { documentSideOf } from '../../worldPulse/treatyOrientation.js';
@@ -776,6 +777,9 @@ export function nicheContestPoolKey(ranks) {
  * @returns {Readonly<Record<string, object|null>>}
  */
 export function warFaithStateProse(settlement, readings = {}, options = {}) {
+  // ONE FACE PER POWER (ADDENDUM 18 ruling 15; car 8b-W-18c): the town's roster of sources,
+  // computed ONCE here and spread into every composer call below with the rest of `options`.
+  options = withFaceSources(settlement, options);
   const war = readings.war || null;
   const faith = readings.faith || null;
   const name = properFill(settlement?.name);

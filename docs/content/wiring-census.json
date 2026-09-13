@@ -2,12 +2,12 @@
   "schema": "wiring-census/1",
   "stamp": {
     "files": {
-      "src/domain/display/stateProse/generalStateProse.js": "ab4ed0fce45d2d0b3a81cbfca929b1dda17c2b26038e68643616c5590f54c9ce",
-      "src/domain/display/stateProse/powerStateProse.js": "25683c4233065281f1e879c284249d5b2165fcf0c3e39235e093717dccb0c95a",
-      "src/domain/display/stateProse/economyStateProse.js": "19782d3f280828fdd9b6ad1270aa647edcf3ea2e5696fc61e6c8918f9feff9f4",
-      "src/domain/display/stateProse/defenseStateProse.js": "33c65670b64c3e2c7be8bf458f3dfd0b313b179c9a02a2e5f38d4b6cc1f62b13",
-      "src/domain/display/stateProse/stressorsStateProse.js": "e51c4df98e6941f6ea8d2f94665aabf143813189c0b787bd289dc9a55765d8ad",
-      "src/domain/display/stateProse/warFaithStateProse.js": "cf003edcea618016dbd640dbe5ca3c68e5dae52fe08ac3af4dd23ac80995f9d8",
+      "src/domain/display/stateProse/generalStateProse.js": "ce977e6b51961f665b428132f10f46a341652a96a72fd3c344d02acd055d45a4",
+      "src/domain/display/stateProse/powerStateProse.js": "050f93469c7b5403244e661df9103f85e0676171aea9f86d7a78f99a52cd5429",
+      "src/domain/display/stateProse/economyStateProse.js": "408db8e8fd53dd51762b4f8e26fc5e32bc108804d91fa6cbbf1809e64a1be45f",
+      "src/domain/display/stateProse/defenseStateProse.js": "9b3bf689cd12374ab214b4938375877c8799d353f75eaf1bc40179cacc35a845",
+      "src/domain/display/stateProse/stressorsStateProse.js": "b8973ebedc9e6ce761e2484adcd5d1efd2aa76dd1b92e454cd366ccb40412d7b",
+      "src/domain/display/stateProse/warFaithStateProse.js": "a67dc76a95364198a59ee4857521ab3c3ae35563b685dd2525cdbf5194bc7640",
       "src/domain/display/stateProse/dossierMounts.js": "b9314c6d9cb005166297370d350ad2d7294b7c7a87ae5ceecdfdf17526140603"
     },
     "candidateLeaves": {
@@ -18,7 +18,7 @@
       "src/domain/display/stateProse/stressorsStateProseCandidates.js": "ee0548fc8b662da76e4bf85a1fae30433e9f738277c774e16c6a7abd7fb93552",
       "src/domain/display/stateProse/warFaithStateProseCandidates.js": "b5b193dd2a2c83d077da5f82fd4a5fc5f5ad15a3b6a214725daf41ede442324b"
     },
-    "producerIndexFiles": 1156
+    "producerIndexFiles": 1159
   },
   "totals": {
     "pools": 708,
@@ -59,7 +59,7 @@
     "kNotExecutable": 347,
     "branchGrainRows": 330,
     "functionGrainRows": 378,
-    "customReachableRows": 25,
+    "customReachableRows": 29,
     "relationRows": 165,
     "relationRowsJoinable": 0,
     "ratifiedAliases": 3,
@@ -45621,16 +45621,16 @@
   "customReachable": {
     "byKind": [
       [
+        "institutions",
+        10
+      ],
+      [
         "services",
         7
       ],
       [
         "resources",
         7
-      ],
-      [
-        "institutions",
-        6
       ],
       [
         "tradeGoods",
@@ -45723,6 +45723,34 @@
         "kind": "tradeGoods",
         "via": "value",
         "on": "moderate"
+      },
+      {
+        "block": "DS-GEN-3",
+        "pool": "scores.military: STRONG",
+        "kind": "institutions",
+        "via": "value",
+        "on": "military"
+      },
+      {
+        "block": "DS-GEN-3",
+        "pool": "scores.military: ADEQUATE",
+        "kind": "institutions",
+        "via": "value",
+        "on": "military"
+      },
+      {
+        "block": "DS-GEN-3",
+        "pool": "scores.military: WEAK",
+        "kind": "institutions",
+        "via": "value",
+        "on": "military"
+      },
+      {
+        "block": "DS-GEN-3",
+        "pool": "scores.military: CRITICAL",
+        "kind": "institutions",
+        "via": "value",
+        "on": "military"
       },
       {
         "block": "DS-GEN-6",

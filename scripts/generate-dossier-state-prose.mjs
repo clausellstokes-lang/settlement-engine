@@ -39,7 +39,7 @@ import { isCovertPath } from '../src/domain/prose/wiringCensus.js';
 import { parseSlotShapes, mergeSlotShapes, assertSlotShapesTotal } from './lib/dossier-slot-shapes.mjs';
 import {
   CONNECTIVES_HEADING_RE, FACE_ROW_RE, GRAMMAR_TAG_RE, applyDeclaration, assertCensusCurrent,
-  assertFaces, assertNoAuthoringMarker, assertPoolDeclaration, isDeclarationLine, kinSpines,
+  assertFaces, assertNoAuthoringMarker, assertPoolDeclaration, isDeclarationLine, kinSpines, parseFaceRow,
   parseConnectives, readDeclarations, seatMeta, seatOf, vidsOf,
 } from './lib/dossier-annex-grammar.mjs';
 // ⭐ THE ESTATE'S ONE STOP LIST, read HERE and never in the composer (ARCH §4.1 refuses a
@@ -444,7 +444,12 @@ function parseAnnex(src, headerRe, label, options = {}) {
     if (face) {
       const last = pool && pool.variants.length ? pool.variants[pool.variants.length - 1] : null;
       if (!last) throw new Error(`${label} ${block.id}: a \`[face]\` row stands before any variant (line ${i + 1})`);
-      last.wordings.push(cleanText(face[1]));
+      // ONE FACE PER POWER (ADDENDUM 18 ruling 15; car 8b-W-18c): the row may open on a source
+      // tag, which is parsed off and never reaches the text. The three lists stay parallel.
+      const row = parseFaceRow(face[1], `${label} ${block.id} :: ${pool.key} #${last.index} (line ${i + 1})`);
+      last.wordings.push(cleanText(row.text));
+      last.sources.push(row.source);
+      last.pairs.push(row.pair);
       continue;
     }
 
@@ -499,6 +504,8 @@ function parseAnnex(src, headerRe, label, options = {}) {
           marks: folded.marks,
           grammar: folded.grammar,
           wordings: [],
+          sources: [],
+          pairs: [],
           text: cleanText(lead ? m[3].slice(lead[0].length) : m[3]),
         });
       }
@@ -520,7 +527,7 @@ function parseAnnex(src, headerRe, label, options = {}) {
       // family, and the few single-state blocks); '*' is its reserved key.
       if (!pool) openPool(SOLE_POOL);
       pool.variants.push({
-        index: 0, angle: 'canonical', marks: [], grammar: null, wordings: [], text: cleanText(canonical[2]),
+        index: 0, angle: 'canonical', marks: [], grammar: null, wordings: [], sources: [], pairs: [], text: cleanText(canonical[2]),
       });
       lastIndex = 0;
       continue;
@@ -547,6 +554,8 @@ function parseAnnex(src, headerRe, label, options = {}) {
         marks: folded.marks,
         grammar: folded.grammar,
         wordings: [],
+        sources: [],
+        pairs: [],
         text: cleanText(variant[4]),
       });
       continue;
@@ -775,6 +784,8 @@ function projectBlocks(blocks, options = {}) {
             label: `${label} #${v.index}`,
             parent: { angle: v.angle, text: v.text, slots: [...new Set(slotsOn(v.text))] },
             faces: v.wordings,
+            sources: v.sources,
+            pairs: v.pairs,
             pinnedFaceCount: FACE_PIN,
             shapeOf: meta.shapeOf,
             clauseOpeners: meta.clauseOpeners,
@@ -789,6 +800,12 @@ function projectBlocks(blocks, options = {}) {
         slots: [...new Set(slotsOn(v.text))],
         ...(meta ? { vid: v.index } : {}),
         ...(v.wordings.length ? { wordings: v.wordings } : {}),
+        // ONE FACE PER POWER (car 8b-W-18c): `sources` and `pairs` are parallel to
+        // `[text, ...wordings]` — index 0 is the spine's, always null (a spine row carries no
+        // tag) — and are EMITTED ONLY WHERE A FACE CARRIES ONE, so a leaf whose faces are all
+        // the stranger's is byte-identical to the leaf before this car.
+        ...(v.sources.some((source) => source !== null) ? { sources: [null, ...v.sources] } : {}),
+        ...(v.pairs.some((pair) => pair !== null) ? { pairs: [null, ...v.pairs] } : {}),
         ...(v.grammar ? { grammar: v.grammar } : {}),
       }));
       if (meta) {

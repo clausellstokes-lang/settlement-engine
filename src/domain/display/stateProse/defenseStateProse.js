@@ -103,6 +103,7 @@ import {
   DM_FIELD_FRAMED_BY_BLOCK, projectBesideDmField, readProsePath,
 } from './dmFieldProjection.js';
 import { composeStateProse } from './composeStateProse.js';
+import { withFaceSources } from './faceSources.js';
 import { defenseStateProseCandidates } from './defenseStateProseCandidates.js';
 import { legibilityRung } from './legibilityRung.js';
 
@@ -647,6 +648,9 @@ export function disasterRowPoolKey(granary, hospital, church) {
  *   economic: object|null, disaster: object|null}>}
  */
 export function defenseThreatProse(settlement, options = {}) {
+  // ONE FACE PER POWER (ADDENDUM 18 ruling 15; car 8b-W-18c): the town's roster of sources,
+  // computed ONCE here and spread into every composer call below with the rest of `options`.
+  options = withFaceSources(settlement, options);
   const dp = settlement?.defenseProfile || {};
   const compound = settlement?.economicState?.compound?.inst || {};
   const slots = { settlement: properFill(text(settlement?.name)) };
@@ -871,6 +875,9 @@ export function strategicPrizePoolKey(terrain) {
  * @returns {Readonly<{posture: object|null, terrain: object|null, prize: object|null}>}
  */
 export function defensePostureProse(settlement, options = {}) {
+  // ONE FACE PER POWER (ADDENDUM 18 ruling 15; car 8b-W-18c): the town's roster of sources,
+  // computed ONCE here and spread into every composer call below with the rest of `options`.
+  options = withFaceSources(settlement, options);
   const slots = { settlement: properFill(text(settlement?.name)) };
   const terrain = settlement?.resourceAnalysis?.terrain;
   // THE DM'S FIELD ALL THREE LENSES SIT BESIDE. Read through the projection's own path
@@ -1008,6 +1015,9 @@ export function criminalCapturePoolKey(captureState) {
  * @returns {Readonly<{structure: object|null, capture: object|null}>}
  */
 export function defenseCriminalProse(settlement, structureKey, options = {}) {
+  // ONE FACE PER POWER (ADDENDUM 18 ruling 15; car 8b-W-18c): the town's roster of sources,
+  // computed ONCE here and spread into every composer call below with the rest of `options`.
+  options = withFaceSources(settlement, options);
   const power = settlement?.powerStructure || {};
   const slots = {
     settlement: properFill(text(settlement?.name)),
@@ -1221,6 +1231,9 @@ export function wallRationalePoolKey(walls, monsterThreat, militaryGate, tier) {
  * @returns {Readonly<{rationale: object|null}>}
  */
 export function defenseWallRationaleProse(settlement, options = {}) {
+  // ONE FACE PER POWER (ADDENDUM 18 ruling 15; car 8b-W-18c): the town's roster of sources,
+  // computed ONCE here and spread into every composer call below with the rest of `options`.
+  options = withFaceSources(settlement, options);
   const forces = standingDefenseForces(settlement);
   // Every DS-DEF-11 pool key either fixes a standing wall (`WALLED-*`) or reads the wall's
   // absence (`UNWALLED-*`); on the second the fill is `undefined` and the slot inert, so
@@ -1347,6 +1360,9 @@ export function viabilityUnderStressPoolKey(stress, viable) {
  * @returns {Readonly<{override: object|null, viability: object|null}>}
  */
 export function defenseMilitaryStatusProse(settlement, options = {}) {
+  // ONE FACE PER POWER (ADDENDUM 18 ruling 15; car 8b-W-18c): the town's roster of sources,
+  // computed ONCE here and spread into every composer call below with the rest of `options`.
+  options = withFaceSources(settlement, options);
   const slots = { settlement: properFill(text(settlement?.name)) };
   const stress = settlement?.stress;
 
@@ -1512,6 +1528,9 @@ export function arcaneDefensePoolKey(forces, magicWorks) {
  *   charter: object|null, arcane: object|null}>}
  */
 export function defenseForcesProse(settlement, options = {}) {
+  // ONE FACE PER POWER (ADDENDUM 18 ruling 15; car 8b-W-18c): the town's roster of sources,
+  // computed ONCE here and spread into every composer call below with the rest of `options`.
+  options = withFaceSources(settlement, options);
   const forces = standingDefenseForces(settlement);
   const slots = { settlement: properFill(text(settlement?.name)) };
   const config = settlement?.config || {};
@@ -1550,6 +1569,9 @@ export function defenseForcesProse(settlement, options = {}) {
  * @returns {Readonly<{publicOrder: object|null, firstSurvey: object|null}>}
  */
 export function defenseStateProse(settlement, options = {}) {
+  // ONE FACE PER POWER (ADDENDUM 18 ruling 15; car 8b-W-18c): the town's roster of sources,
+  // computed ONCE here and spread into every composer call below with the rest of `options`.
+  options = withFaceSources(settlement, options);
   const safety = settlement?.economicState?.safetyProfile || {};
   const label = safety.safetyLabel;
   const slots = { settlement: properFill(text(settlement?.name)) };
@@ -1775,6 +1797,9 @@ export function navalDefensePoolKey(navy, port, blockaded) {
  * @returns {Readonly<{logistics: object|null, naval: object|null}>}
  */
 export function defenseSupportingProse(settlement, options = {}) {
+  // ONE FACE PER POWER (ADDENDUM 18 ruling 15; car 8b-W-18c): the town's roster of sources,
+  // computed ONCE here and spread into every composer call below with the rest of `options`.
+  options = withFaceSources(settlement, options);
   const compound = settlement?.economicState?.compound?.inst || {};
   const stockpile = settlement?.economicState?.foodSecurity?.stockpile || null;
   const slots = { settlement: properFill(text(settlement?.name)) };
@@ -1929,6 +1954,9 @@ export function magicDependencyPoolKey(magicDependency, namedChain) {
  * @returns {Readonly<{arcaneReliance: object|null}>}
  */
 export function defenseMagicDependencyProse(settlement, options = {}) {
+  // ONE FACE PER POWER (ADDENDUM 18 ruling 15; car 8b-W-18c): the town's roster of sources,
+  // computed ONCE here and spread into every composer call below with the rest of `options`.
+  options = withFaceSources(settlement, options);
   const chains = settlement?.economicState?.activeChains;
   const slots = {
     settlement: properFill(text(settlement?.name)),

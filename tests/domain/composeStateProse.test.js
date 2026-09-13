@@ -1333,3 +1333,143 @@ describe('the car-4 leaf roster', () => {
     expect(Object.isFrozen(CAR_4_LEAF_SPECIFIERS)).toBe(true);
   });
 });
+
+/**
+ * ── ONE FACE PER POWER AT THE COMPOSER (ADDENDUM 18 ruling 15; REWRITE car 8b-W-18c) ──
+ * The desk hands the town's roster as `sources`; the face is drawn among the faces whose power
+ * resolves; a marked PAIR renders both halves in face order, the partner's piece marked
+ * `pairOf` with the pair's `pairKind`; the head's power rides on the unit as `source`.
+ */
+describe('the composer — ONE FACE PER POWER: the source filter and the pair (car 8b-W-18c)', () => {
+  /** One variant, four faces: the spine (stranger), the hall, the tavern (paired, disagree), a bare face. */
+  const POWERED = {
+    angle: 'ledger',
+    text: 'The walls stand.',
+    wordings: ['The hall has the circuit kept.', 'The tavern says nobody stands on it.', 'Anyone can see the stone.'],
+    sources: [null, 'hall', 'tavern', null],
+    pairs: [null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null],
+  };
+  const poweredCorpus = () => fixtureCorpus({ pools: { [SPINE]: [POWERED] } });
+  const SEEDS = Array.from({ length: 200 }, (_, i) => `pair-seed-${i}`);
+
+  it('⭐ a pair renders BOTH where both powers resolve, in face order, the partner marked pairOf + pairKind', () => {
+    const corpus = poweredCorpus();
+    let paired = 0;
+    for (const seed of SEEDS) {
+      const unit = composeFixture(corpus, { seed, sources: new Set(['stranger', 'hall', 'tavern']) });
+      expect(unit).not.toBe(null);
+      const faces = unit.pieces.map((piece) => piece.face);
+      if (unit.pieces.length === 2) {
+        paired += 1;
+        expect(faces, 'face order, whichever half was drawn').toEqual([1, 2]);
+        expect(unit.text).toBe('The hall has the circuit kept. The tavern says nobody stands on it.');
+        const drawn = unit.pieces.find((piece) => piece.pairOf === undefined);
+        const partner = unit.pieces.find((piece) => piece.pairOf !== undefined);
+        expect(drawn.source).toBe(drawn.face === 1 ? 'hall' : 'tavern');
+        expect(partner.pairOf).toBe(drawn.face);
+        expect(partner.pairKind).toBe('disagree');
+        expect(partner.source).toBe(partner.face === 1 ? 'hall' : 'tavern');
+        expect(unit.source, 'the unit carries the DRAWN half\'s power').toBe(drawn.source);
+        expect(Object.isFrozen(partner)).toBe(true);
+      } else {
+        expect(unit.pieces.length).toBe(1);
+        expect([0, 3]).toContain(faces[0]);
+        expect(unit.source, 'an unsourced face puts no source on the unit').toBe(undefined);
+        expect(unit.pieces[0].source).toBe(undefined);
+      }
+    }
+    expect(paired, 'and the pair really was drawn').toBeGreaterThan(40);
+  });
+
+  it('⭐ a pair renders ONE where the partner\'s power is absent — the drawn face alone', () => {
+    const corpus = poweredCorpus();
+    let hall = 0;
+    for (const seed of SEEDS) {
+      const unit = composeFixture(corpus, { seed, sources: ['stranger', 'hall'] });
+      expect(unit.pieces.length, seed).toBe(1);
+      expect(unit.pieces[0].face, 'the tavern never speaks in a town without one').not.toBe(2);
+      if (unit.pieces[0].face === 1) {
+        hall += 1;
+        expect(unit.text).toBe('The hall has the circuit kept.');
+        expect(unit.source).toBe('hall');
+        expect(unit.pieces[0].pairOf, 'the drawn face is never marked as a partner').toBe(undefined);
+      }
+    }
+    expect(hall).toBeGreaterThan(30);
+  });
+
+  it('no roster on the read is the stranger alone; an empty roster likewise', () => {
+    const corpus = poweredCorpus();
+    for (const seed of SEEDS.slice(0, 60)) {
+      for (const sources of [undefined, null, [], new Set(), 'hall']) {
+        const unit = composeFixture(corpus, { seed, sources });
+        expect([0, 3], `seed ${seed}`).toContain(unit.pieces[0].face);
+        expect(unit.pieces.length).toBe(1);
+      }
+    }
+  });
+
+  it('⭐ ZERO SHIFT: the shipped corpus composes byte-identically with any roster, all 708 pools, both audiences', () => {
+    const rosters = [undefined, new Set(['stranger']), new Set(['stranger', 'hall', 'tavern', 'guild', 'register', 'muster', 'watch', 'garrison', 'gate', 'market', 'court', 'elders'])];
+    const drift = [];
+    let checks = 0;
+    for (const { blockId, poolKey, pool } of SHIPPED_POOLS) {
+      const slots = bagFor(pool);
+      const dimensions = dimensionsFor(pool);
+      for (const audience of ['dm', 'player']) {
+        for (const seed of SWEEP_SEEDS) {
+          const base = composeStateProse(CORPUS, blockId, { slots, seed, audience, dimensions, spineKey: poolKey, candidates: [] });
+          for (const sources of rosters) {
+            checks += 1;
+            const unit = composeStateProse(CORPUS, blockId, { slots, seed, audience, dimensions, sources, spineKey: poolKey, candidates: [] });
+            if (JSON.stringify(unit) !== JSON.stringify(base)) drift.push(`${blockId} :: ${poolKey} :: ${audience} :: "${seed}"`);
+          }
+        }
+      }
+    }
+    expect(drift.slice(0, 10)).toEqual([]);
+    expect(checks).toBe(708 * 2 * SWEEP_SEEDS.length * rosters.length);
+  });
+
+  it('the one-piece shipped unit keeps exactly its five keys — no source, no pairOf, no pairKind', () => {
+    const unit = composeFixture(fixtureCorpus());
+    expect(Object.keys(unit.pieces[0]).sort()).toEqual(['face', 'index', 'key', 'role', 'vid']);
+    expect('source' in unit).toBe(false);
+    // And a sourced piece carries exactly the keys it earned.
+    const sourced = composedPieceOf([POWERED], POWERED, SPINE, { role: 'spine', face: 2, source: 'tavern', pairOf: 1, pairKind: 'disagree' });
+    expect(Object.keys(sourced).sort()).toEqual(['face', 'index', 'key', 'pairKind', 'pairOf', 'role', 'source', 'vid']);
+    const bare = composedPieceOf([POWERED], POWERED, SPINE, { role: 'spine', face: 3, source: null, pairOf: null, pairKind: null });
+    expect(Object.keys(bare).sort()).toEqual(['face', 'index', 'key', 'role', 'vid']);
+  });
+
+  it('a paired head closes the SENTENCE seat (two sentences), as a two-sentence spine would', () => {
+    const corpus = fixtureCorpus({
+      pools: {
+        [SPINE]: [POWERED],
+        'muster: short': [{ angle: 'ledger', text: 'The muster is short.' }],
+      },
+      poolMeta: { 'muster: short': modifierMeta() },
+    });
+    const both = new Set(['hall', 'tavern']);
+    let pairedUnits = 0;
+    for (const seed of SEEDS) {
+      const unit = composeStateProse(corpus, FIX, {
+        spineKey: SPINE, candidates: [{ key: 'muster: short' }], seed, audience: 'dm', sources: both, leaves: { connectives: CONNECTIVES },
+      });
+      const headPieces = unit.pieces.filter((piece) => piece.key === SPINE);
+      if (headPieces.length === 2) {
+        pairedUnits += 1;
+        expect(unit.pieces.some((piece) => piece.role === 'modifier'), 'no third sentence after a pair').toBe(false);
+      }
+    }
+    expect(pairedUnits).toBeGreaterThan(40);
+  });
+
+  it('the mount passes the roster through to every rung', () => {
+    const corpus = poweredCorpus();
+    const out = composeStateProseMount(corpus, FIX, [{ spineKey: SPINE }, { spineKey: SPINE }], { seed: 'mount-7', audience: 'dm', sources: new Set(['hall', 'tavern']) });
+    const direct = composeFixture(corpus, { seed: 'mount-7', sources: new Set(['hall', 'tavern']) });
+    expect(JSON.stringify(out[0])).toBe(JSON.stringify(direct));
+    expect(JSON.stringify(out[1])).toBe(JSON.stringify(direct));
+  });
+});

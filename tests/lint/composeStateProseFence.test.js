@@ -413,3 +413,43 @@ describe('the six candidates leaves are PURE HEADLESS LEAVES (ARCH §4.1, M-F7)'
       'the kernel does read pools, so the scan is not blind').toBe(true);
   });
 });
+
+/**
+ * ── THE ROSTER READER'S FENCE (ADDENDUM 18 ruling 15; REWRITE car 8b-W-18c) ────────────
+ * `faceSources.js` is the ONE product reader of "which powers exist on this town". It may
+ * reach the institution modules and the kernel's vocabulary, and NOTHING under
+ * `src/domain/prose/` — the prose island (the holder table it mirrors) is byte-fenced off the
+ * product. And the six desks reach it, since every desk entry point puts the roster on its
+ * read; the composer does NOT (its own fence above holds its list at the kernel plus leaves).
+ */
+describe('the roster reader\'s import fence (car 8b-W-18c)', () => {
+  const FACE_SOURCES_MODULE = 'src/domain/display/stateProse/faceSources.js';
+  const LICENSED = Object.freeze([
+    '../../institutions/institutionRoster.js',
+    '../../institutions/defenseInstitutionBuckets.js',
+    '../../content/customContentSemanticAuthority.js',
+    './stateProseKernel.js',
+  ]);
+
+  test('⭐ faceSources.js imports exactly its licensed four, and nothing from the prose island', () => {
+    const specifiers = specifiersIn(read(FACE_SOURCES_MODULE));
+    expect(specifiers, 'the whole import list').toEqual([...LICENSED]);
+    expect(specifiers.filter((s) => /domain\/prose\//.test(s)), 'a prose-island import').toEqual([]);
+    expect(bannedApisIn(read(FACE_SOURCES_MODULE)), 'no locale API on a seeded path').toEqual([]);
+  });
+
+  test('⭐ every routed desk imports the roster reader; the composer and the kernel do not', () => {
+    expect(importersOf(FACE_SOURCES_MODULE, LIVE_FILES)).toEqual([...ROUTED_COMPOSERS]);
+    expect(specifiersIn(read(COMPOSER)).filter((s) => /faceSources/.test(s))).toEqual([]);
+    expect(specifiersIn(read('src/domain/display/stateProse/stateProseKernel.js')), 'the kernel imports nothing').toEqual([]);
+    // And each desk's entry points put the roster on the read: one `withFaceSources` per exported
+    // entry that composes, counted against the exported `(settlement, …, options = {})` signatures.
+    for (const rel of ROUTED_COMPOSERS) {
+      const code = codeOnly(read(rel));
+      const entries = [...code.matchAll(/^export function \w+\(settlement[^)]*options = \{\}\) \{/gm)].length;
+      const wrapped = [...code.matchAll(/options = withFaceSources\(settlement, options\);/g)].length;
+      expect(entries, `${rel} exports at least one composing entry`).toBeGreaterThan(0);
+      expect(wrapped, `${rel}: every exported entry puts the roster on its read`).toBe(entries);
+    }
+  });
+});

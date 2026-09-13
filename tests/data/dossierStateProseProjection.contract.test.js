@@ -35,9 +35,10 @@ import {
 import {
   INDEX_PAIRED_BLOCKS, MODIFIER_MOVES, POOL_ROLES, RELATIONS, S2_SIGNED,
   applyDeclaration, assertCensusCurrent, assertFaces, assertPoolDeclaration,
-  endpointReads, isDeclarationLine, kinSpines, parseConnectives, readDeclarations, seatMeta,
-  seatOf, turnKeyStanding, vidsOf,
+  endpointReads, isDeclarationLine, kinSpines, parseConnectives, parseFaceRow, readDeclarations, seatMeta,
+  seatOf, turnKeyStanding, vidsOf, FACE_ROW_RE, FACE_TAG_RE,
 } from '../../scripts/lib/dossier-annex-grammar.mjs';
+import { FACE_SOURCES, PAIR_KINDS } from '../../src/domain/display/stateProse/stateProseKernel.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { COVERT_SOURCES } from '../../src/domain/prose/wiringCensus.js';
 // ⭐ THE ESTATE'S ONE STOP LIST, driven here exactly as the projector drives it (REWRITE car
@@ -1743,6 +1744,71 @@ describe('SEAM car 4 — §2.5\'s grammar, and every refusal it declares', () =>
     expect(() => assertFaces(frag)).not.toThrow();
     expect(() => assertFaces({ ...frag, faces: [', and thin'] })).toThrow(/opens on a comma/);
     expect(() => assertFaces({ ...frag, faces: ['and thin'] })).toThrow(/a word of a clause list/);
+  });
+
+  it('⭐ ONE FACE PER POWER — the source tag parses, is stripped from the text, and an unknown source is refused NAMING the vocabulary (ADDENDUM 18 ruling 15; car 8b-W-18c)', () => {
+    // The row shape, end to end: FACE_ROW_RE takes the row, parseFaceRow the rest.
+    const row = '  - `[face]` `[hall]` The hall would like it noted that the circuit is kept.';
+    const m = row.match(FACE_ROW_RE);
+    expect(m, 'FACE_ROW_RE is unchanged and still takes a tagged row').toBeTruthy();
+    expect(parseFaceRow(m[1], 'x')).toEqual({ text: 'The hall would like it noted that the circuit is kept.', source: 'hall', pair: null });
+    // A bare face is the stranger's: no tag, no source, no pair — the shape every face had before this car.
+    expect(parseFaceRow('The circuit is kept.', 'x')).toEqual({ text: 'The circuit is kept.', source: null, pair: null });
+    // The pair, with its KIND (the owner's refinement, 2026-09-13).
+    expect(parseFaceRow('`[tavern · pair 1 · disagree]` Nobody stands on it, says the tavern.', 'x'))
+      .toEqual({ text: 'Nobody stands on it, says the tavern.', source: 'tavern', pair: { id: 1, kind: 'disagree' } });
+    for (const kind of PAIR_KINDS) {
+      expect(parseFaceRow(`\`[watch · pair 3 · ${kind}]\` text`, 'x').pair).toEqual({ id: 3, kind });
+    }
+    expect(FACE_TAG_RE.test('`[hall]` text')).toBe(true);
+    expect(FACE_TAG_RE.test('The hall text')).toBe(false);
+    // Every word of the vocabulary parses; the vocabulary is the kernel's, not a copy.
+    for (const source of FACE_SOURCES) expect(parseFaceRow(`\`[${source}]\` t`, 'x').source).toBe(source);
+    // ⛔ REFUSALS, each naming what a writer needs to read.
+    expect(() => parseFaceRow('`[guilds]` t', 'L')).toThrow(/L: .*`guilds`.*not a power of the town.*stranger · elders · hall · tavern · guild · register · muster · watch · garrison · gate · market · court/);
+    expect(() => parseFaceRow('`[ledger]` t', 'L'), 'an angle tag in the source slot is refused, loudly').toThrow(/not a power of the town/);
+    expect(() => parseFaceRow('`[hall · twin 1 · disagree]` t', 'L')).toThrow(/pair N · KIND/);
+    expect(() => parseFaceRow('`[hall · pair 0 · disagree]` t', 'L')).toThrow(/positive integer/);
+    expect(() => parseFaceRow('`[hall · pair 1]` t', 'L'), 'a pair with no kind').toThrow(/PAIR KINDS.*disagree · reinforce · aside · view/);
+    expect(() => parseFaceRow('`[hall · pair 1 · quarrel]` t', 'L')).toThrow(/`quarrel`.*disagree · reinforce · aside · view/);
+    expect(() => parseFaceRow('`[hall · pair 1 · view · extra]` t', 'L')).toThrow(/the most is three/);
+  });
+
+  it('⭐ assertFaces refuses an unknown source, a pair of one or three, a one-source pair, a mixed-kind pair and a pair on a fragment (car 8b-W-18c)', () => {
+    const base = {
+      label: 'y',
+      parent: { angle: 'plain', text: 'the muster is thin', slots: [] },
+      faces: ['the hall counts it thin', 'the tavern counts it thinner'],
+      sources: ['hall', 'tavern'],
+      pairs: [{ id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }],
+      pinnedFaceCount: 4,
+      shapeOf: () => 'bare-common',
+      clauseOpeners: ['and', 'so'],
+      form: 'sentence',
+    };
+    expect(() => assertFaces(base), 'two powers, one pair, one kind: lawful').not.toThrow();
+    expect(() => assertFaces({ ...base, sources: undefined, pairs: undefined }), 'no lists at all: the pre-car shape').not.toThrow();
+    expect(() => assertFaces({ ...base, sources: ['hall', 'guilds'] })).toThrow(/face 2 names the source `guilds`.*CLOSED at the kernel/);
+    expect(() => assertFaces({ ...base, pairs: [{ id: 1, kind: 'disagree' }, null] })).toThrow(/pair 1 is carried by 1 face/);
+    expect(() => assertFaces({ ...base, faces: [...base.faces, 'the watch too'], sources: ['hall', 'tavern', 'watch'], pairs: [{ id: 1, kind: 'view' }, { id: 1, kind: 'view' }, { id: 1, kind: 'view' }] }))
+      .toThrow(/pair 1 is carried by 3 face/);
+    expect(() => assertFaces({ ...base, sources: ['hall', 'hall'] })).toThrow(/two faces of ONE source \(`hall`\)/);
+    expect(() => assertFaces({ ...base, sources: [null, null] }), 'two untagged faces are two strangers').toThrow(/ONE source \(`stranger`\)/);
+    expect(() => assertFaces({ ...base, pairs: [{ id: 1, kind: 'disagree' }, { id: 1, kind: 'aside' }] })).toThrow(/a pair has ONE kind/);
+    expect(() => assertFaces({ ...base, pairs: [{ id: 1, kind: 'quarrel' }, { id: 1, kind: 'quarrel' }] })).toThrow(/the kinds are disagree · reinforce · aside · view/);
+    expect(() => assertFaces({ ...base, form: 'fragment', faces: ['thin', 'thinner'] })).toThrow(/stands on a `fragment`-form pool/);
+    expect(() => assertFaces({ ...base, sources: ['hall'] })).toThrow(/parallel by construction/);
+    // Unpaired sourced faces are lawful on either form.
+    expect(() => assertFaces({ ...base, pairs: [null, null] })).not.toThrow();
+    expect(() => assertFaces({ ...base, form: 'fragment', faces: ['thin', 'thinner'], pairs: [null, null] })).not.toThrow();
+  });
+
+  it('the shipped leaves carry no `sources` and no `pairs` on any variant — the zero-shift ground of car 8b-W-18c', () => {
+    const carrying = allStateBlocks.flatMap(([id, b]) => Object.entries(b.pools)
+      .flatMap(([pool, variants]) => variants.map((v, at) => ({ id, pool, at, v }))))
+      .filter(({ v }) => v.sources !== undefined || v.pairs !== undefined)
+      .map(({ id, pool, at }) => `${id} :: ${pool} #${at}`);
+    expect(carrying).toEqual([]);
   });
 
   it('PLANT: a RENUMBERING that would move an existing vid, and a count above its pin', () => {

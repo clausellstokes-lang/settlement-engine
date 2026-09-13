@@ -80,6 +80,7 @@ import { liveInstitutions } from '../../institutions/institutionRoster.js';
 // not assumed: see `yearBand` below.
 import { timeBandOf, timeBandWord } from '../heraldCausalGrammar.js';
 import { composeStateProse } from './composeStateProse.js';
+import { withFaceSources } from './faceSources.js';
 import { generalStateProseCandidates } from './generalStateProseCandidates.js';
 import { legibilityRung } from './legibilityRung.js';
 
@@ -1705,6 +1706,9 @@ export const GENERAL_STATE_PROSE_SILENT = Object.freeze({
  * @returns {typeof GENERAL_STATE_PROSE_SILENT}
  */
 export function generalStateProse(settlement, readings = {}, options = {}) {
+  // ONE FACE PER POWER (ADDENDUM 18 ruling 15; car 8b-W-18c): the town's roster of sources,
+  // computed ONCE here and spread into every composer call below with the rest of `options`.
+  options = withFaceSources(settlement, options);
   const slots = { settlement: properFill(text(settlement?.name)) };
 
   // ⭐ ROUTED THROUGH THE COMPOSER (SEAM car 3g), at all eleven of this desk's call sites.

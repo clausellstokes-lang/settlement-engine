@@ -79,6 +79,7 @@ import { DOSSIER_STATE_PROSE_POWER } from '../../../data/dossierStateProse/power
 import { criminalOpEcon } from '../../criminalOpRole.js';
 import { governanceLedger } from '../../governanceLedger.js';
 import { composeStateProse } from './composeStateProse.js';
+import { withFaceSources } from './faceSources.js';
 import { powerStateProseCandidates } from './powerStateProseCandidates.js';
 import { legibilityRung } from './legibilityRung.js';
 
@@ -627,6 +628,9 @@ export function ladderPoolKey(rungs, instability) {
  * @returns {object|null}
  */
 export function powerLadderRung(settlement, reading = {}, options = {}) {
+  // ONE FACE PER POWER (ADDENDUM 18 ruling 15; car 8b-W-18c): the town's roster of sources,
+  // computed ONCE here and spread into every composer call below with the rest of `options`.
+  options = withFaceSources(settlement, options);
   const key = ladderPoolKey(reading.rungs, reading.instability);
   if (!key) return null;
   const faction = properFill(text(reading.factionName));
@@ -847,6 +851,9 @@ export function politicsEndPoolKey(projection) {
  *   blocPresence: object|null, blocGlue: object|null, blocEnd: object|null}>}
  */
 export function powerStateProse(settlement, readings = {}, options = {}) {
+  // ONE FACE PER POWER (ADDENDUM 18 ruling 15; car 8b-W-18c): the town's roster of sources,
+  // computed ONCE here and spread into every composer call below with the rest of `options`.
+  options = withFaceSources(settlement, options);
   const power = settlement?.powerStructure || {};
   // A legacy numeric `publicLegitimacy` carries no label, breakdown or flag. Reading it as
   // an object would yield `undefined` at every field and silence at every pool, which is

@@ -24,6 +24,10 @@
  * @enforced-by tests/data/dossierStateProseProjection.contract.test.js
  * @consumes docs/content/RECEIPT_POOLS_DOSSIER_STATE.md §7b
  */
+// THE ONE PRODUCT IMPORT, and it is the vocabulary and nothing else (car 8b-W-18c): the source
+// words and the pair kinds a `[face]` row may carry are CLOSED at the kernel, and a grammar
+// that re-spelled them would be a second home for a list that must not drift.
+import { FACE_SOURCES, PAIR_KINDS } from '../../src/domain/display/stateProse/stateProseKernel.js';
 
 /** ARCH §2.3: the three roles a pool may declare. */
 export const POOL_ROLES = Object.freeze(['spine', 'modifier', 'turn']);
@@ -103,8 +107,20 @@ const DECLARATION_RE = /\*\*([A-Z-]+):\*\*\s*([^*]*?)(?=\s*·\s*\*\*[A-Z-]+:\*\*
 export const DECLARATION_TAGS = Object.freeze([
   'ROLE', 'READS', 'NARROWS', 'RELATION', 'FORM', 'MOVE', 'ATTACH', 'EXPLAINS', 'SPINES', 'COVERS',
 ]);
-/** A face sub-row: `   - \`[face]\` another wording on the same key` — the same marks and a SUBSET of the slots, never a claim set (ADDENDUM 18 rulings 2 and 12). */
+/** A face sub-row: `   - \`[face]\` another wording on the same key` — the same marks and a SUBSET of the slots, never a claim set (ADDENDUM 18 rulings 2 and 12). The rest of the row may open on a SOURCE TAG (`parseFaceRow`). */
 export const FACE_ROW_RE = /^\s*-\s+`\[face\]`\s+(.*)$/;
+/**
+ * THE SOURCE TAG of a face row (ADDENDUM 18 ruling 15; car 8b-W-18c): a second backticked
+ * bracket right after `[face]`, mirroring the spine row's optional second bracket —
+ *   `- \`[face]\` \`[hall]\` The hall would like it noted …`
+ *   `- \`[face]\` \`[tavern · pair 1 · disagree]\` The tavern holds otherwise …`
+ * The first token is a word of the kernel's `FACE_SOURCES`; an optional `pair N · KIND`
+ * follows, `N` a positive integer shared by exactly two faces of the variant and `KIND` a word
+ * of `PAIR_KINDS`. A row with no tag is the stranger's, eligible everywhere.
+ */
+export const FACE_TAG_RE = /^`\[([^\]`]+)\]`\s+(.*)$/;
+/** `pair N` inside a face tag. */
+const PAIR_TOKEN_RE = /^pair\s+(\d+)$/;
 /** The `[grammar: Vn]` tag, wherever it stands among a variant's tags. */
 export const GRAMMAR_TAG_RE = /^grammar:\s*(V[1-8])$/;
 /** A pool key that is a bare number (P-F12) — it collides with a variant row's own numbering. */
@@ -195,6 +211,45 @@ export function readDeclarations(line) {
 /** @param {string} label @param {string} message */
 function refuse(label, message) {
   throw new Error(`${label}: ${message}`);
+}
+
+/**
+ * ⭐ ONE FACE PER POWER — parse the rest of a `[face]` row into its source, its pair mark and
+ * its text (ADDENDUM 18 ruling 15; car 8b-W-18c). The tag is STRIPPED from the text, so the
+ * leaf's `wordings[]` never carries a bracket and the reader keys nothing on it.
+ *
+ * REFUSED by name: a source word outside `FACE_SOURCES` (the vocabulary is printed, so a
+ * writer who typed `guilds` for `guild` reads the list rather than a silent stranger); a pair
+ * token that is not `pair N`; a pair with no kind, or a kind outside `PAIR_KINDS`; a tag with
+ * a fourth token. `null` where the row carries no tag at all — a bare face, the stranger's.
+ * @param {string} rest everything after `` `[face]` `` — `FACE_ROW_RE`'s first group
+ * @param {string} label where the row stands, for the refusal
+ * @returns {{text: string, source: string|null, pair: {id: number, kind: string}|null}}
+ */
+export function parseFaceRow(rest, label) {
+  const tagged = String(rest).match(FACE_TAG_RE);
+  if (!tagged) return { text: String(rest), source: null, pair: null };
+  const tokens = tagged[1].split('·').map((token) => token.trim()).filter(Boolean);
+  const source = tokens[0] || '';
+  if (!FACE_SOURCES.includes(source)) {
+    refuse(label, `a [face] row names the source \`${source}\`, which is not a power of the`
+      + ` town — the vocabulary is CLOSED at the kernel (ADDENDUM 18 ruling 15): ${FACE_SOURCES.join(' · ')}`);
+  }
+  if (tokens.length === 1) return { text: tagged[2], source, pair: null };
+  const pairToken = tokens[1].match(PAIR_TOKEN_RE);
+  if (!pairToken) {
+    refuse(label, `a [face] row's tag reads \`${tokens[1]}\` after its source; the only thing`
+      + ' that may follow a source is `pair N · KIND` (ADDENDUM 18 ruling 15)');
+  }
+  const id = Number(pairToken[1]);
+  if (!Number.isInteger(id) || id <= 0) refuse(label, `a pair id must be a positive integer, not \`${pairToken[1]}\``);
+  const kind = tokens[2] || '';
+  if (!PAIR_KINDS.includes(kind)) {
+    refuse(label, `a [face] row marks pair ${id} with the kind \`${kind}\`, which is not one of the`
+      + ` PAIR KINDS (the owner's refinement of ruling 15, 2026-09-13): ${PAIR_KINDS.join(' · ')}`);
+  }
+  if (tokens.length > 3) refuse(label, `a [face] row's tag carries ${tokens.length} tokens; the most is three: SOURCE · pair N · KIND`);
+  return { text: tagged[2], source, pair: { id, kind } };
 }
 
 /**
@@ -650,11 +705,18 @@ export function seatMeta(input) {
 }
 
 /**
- * The face sub-rows of one variant, refused where §2.5's table refuses them.
+ * The face sub-rows of one variant, refused where §2.5's table refuses them — and, since car
+ * 8b-W-18c, where ruling 15's seating refuses them: a source outside the vocabulary; a pair
+ * id carried by any number of faces but two; a pair whose two faces speak for one source (a
+ * pair is two POWERS on one state, whatever its kind); a pair on a `fragment`-form pool (each
+ * half is a whole sentence the composer joins on a space).
  * @param {object} input
  * @param {string} input.label
  * @param {{angle: string, text: string, slots: string[]}} input.parent
  * @param {string[]} input.faces
+ * @param {ReadonlyArray<string|null>} [input.sources] parallel to `faces` (NOT to the leaf's
+ *   `[spine, ...faces]` — the spine carries none); absent reads as all-null
+ * @param {ReadonlyArray<{id: number, kind: string}|null>} [input.pairs] parallel to `faces`
  * @param {number} input.pinnedFaceCount
  * @param {(slot: string) => string|undefined} input.shapeOf
  * @param {ReadonlyArray<string>} input.clauseOpeners
@@ -663,6 +725,44 @@ export function seatMeta(input) {
 export function assertFaces(input) {
   const { label, parent, faces, pinnedFaceCount, shapeOf, clauseOpeners, form } = input;
   if (faces.length === 0) return;
+  const sources = Array.isArray(input.sources) ? input.sources : faces.map(() => null);
+  const pairs = Array.isArray(input.pairs) ? input.pairs : faces.map(() => null);
+  if (sources.length !== faces.length || pairs.length !== faces.length) {
+    refuse(label, `${faces.length} faces against ${sources.length} sources and ${pairs.length} pair marks — the three lists are parallel by construction`);
+  }
+  sources.forEach((source, at) => {
+    if (source !== null && !FACE_SOURCES.includes(source)) {
+      refuse(label, `face ${at + 1} names the source \`${source}\`, which is not a power of the town —`
+        + ` the vocabulary is CLOSED at the kernel (ADDENDUM 18 ruling 15): ${FACE_SOURCES.join(' · ')}`);
+    }
+  });
+  /** @type {Map<number, number[]>} */
+  const byPair = new Map();
+  pairs.forEach((pair, at) => {
+    if (pair === null) return;
+    if (!PAIR_KINDS.includes(pair.kind)) refuse(label, `face ${at + 1} marks pair ${pair.id} with the kind \`${pair.kind}\` — the kinds are ${PAIR_KINDS.join(' · ')}`);
+    const held = byPair.get(pair.id) || [];
+    held.push(at);
+    byPair.set(pair.id, held);
+  });
+  for (const [id, members] of byPair) {
+    if (members.length !== 2) {
+      refuse(label, `pair ${id} is carried by ${members.length} face(s); a pair is exactly TWO faces —`
+        + ' two sources on one state, presented together (ADDENDUM 18 ruling 15)');
+    }
+    const [a, b] = members;
+    const kindA = pairs[a] ? pairs[a].kind : '';
+    const kindB = pairs[b] ? pairs[b].kind : '';
+    if (kindA !== kindB) refuse(label, `pair ${id} is marked \`${kindA}\` on one face and \`${kindB}\` on the other; a pair has ONE kind`);
+    if ((sources[a] || 'stranger') === (sources[b] || 'stranger')) {
+      refuse(label, `pair ${id} puts two faces of ONE source (\`${sources[a] || 'stranger'}\`) together; a pair is two`
+        + ' POWERS reading one state — mark the second face with its own source (ADDENDUM 18 ruling 15)');
+    }
+    if (form === 'fragment') {
+      refuse(label, `pair ${id} stands on a \`fragment\`-form pool; a pair's two halves are whole sentences the`
+        + ' composer joins on a space, and a fragment takes the clause seat instead (ADDENDUM 18 ruling 15)');
+    }
+  }
   if (parent.angle === 'canonical') {
     refuse(label, 'a `canonical` row is a byte-copy of a string the engine ships; a face on it'
       + ' would mint a second home for that sentence, so the seven bound rows keep ONE face (P-F6)');

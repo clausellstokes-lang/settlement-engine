@@ -33,7 +33,11 @@ import {
   AUDIENCE_PLAYER,
   drawFace,
   drawVariant,
+  eligibleFaces,
   eligibleVariants,
+  facePairOf,
+  facePartner,
+  faceSourceOf,
   fillSlots,
   hasStateProsePool,
   hashKey,
@@ -43,7 +47,10 @@ import {
   stateProseSentence,
   variantIsAnchored,
   variantIsAudible,
+  FACE_SOURCES,
+  PAIR_KINDS,
   STATE_MARK_DIMENSIONS,
+  UNIVERSAL_SOURCE,
 } from '../../src/domain/display/stateProse/stateProseKernel.js';
 import { DOSSIER_STATE_PROSE_ECONOMY } from '../../src/data/dossierStateProse/economy.generated.js';
 import { DOSSIER_STATE_PROSE_POWER } from '../../src/data/dossierStateProse/power.generated.js';
@@ -1021,5 +1028,172 @@ describe('the state-prose reader — law 6, the index-stable draw', () => {
     }
     expect(escapes).toEqual([]);
     expect(checks, 'the draws checked').toBeGreaterThanOrEqual(708 * 6);
+  });
+});
+
+/**
+ * ── ONE FACE PER POWER — THE SOURCE FILTER ON THE FACE DRAW AND THE PAIR (ADDENDUM 18
+ * ruling 15, the owner's 2026-09-13 refinement on pair KINDS; REWRITE car 8b-W-18c) ──────
+ *
+ * `drawFace` now runs over the faces whose SOURCE resolves on this town. Four properties are
+ * measured here rather than quoted:
+ *   IDENTITY      a roster admitting every face draws exactly the shipped modulus, and a
+ *                 variant with no sourced face draws exactly as before whatever the roster —
+ *                 the zero-shift argument for the corpus that ships, executed.
+ *   FILTER        a face whose source is absent is never drawn, over many seeds.
+ *   FALLBACK      no eligible face falls back to the full set; no roster reads as the
+ *                 stranger alone.
+ *   STABILITY     the same seed and the same eligible set is the same face, always.
+ * And the PAIR: the partner is the other eligible face carrying the same id, or nothing.
+ */
+describe('the state-prose reader — ONE FACE PER POWER: the source filter and the pair (car 8b-W-18c)', () => {
+  /** A four-face variant, one face per power: the spine (stranger), the hall, the tavern, a bare face. */
+  const POWERED = Object.freeze({
+    text: 'The walls stand.',
+    angle: 'ledger',
+    wordings: Object.freeze(['The hall has it kept.', 'The tavern says nobody stands on it.', 'Anyone can see it.']),
+    sources: Object.freeze([null, 'hall', 'tavern', null]),
+    pairs: Object.freeze([null, Object.freeze({ id: 1, kind: 'disagree' }), Object.freeze({ id: 1, kind: 'disagree' }), null]),
+  });
+  /** The same faces with NO source list — the shape every shipped variant has. */
+  const UNSOURCED = Object.freeze({ text: POWERED.text, angle: 'ledger', wordings: POWERED.wordings });
+  const SEEDS = Array.from({ length: 400 }, (_, i) => `power-seed-${i}`);
+  /** The six state leaves, whole and live — the ground of the zero-shift arm below. */
+  const LIVE_POOLS = [
+    DOSSIER_STATE_PROSE_ECONOMY, DOSSIER_STATE_PROSE_POWER, DOSSIER_STATE_PROSE_DEFENSE,
+    DOSSIER_STATE_PROSE_WAR_FAITH, DOSSIER_STATE_PROSE_STRESSORS, DOSSIER_STATE_PROSE_GENERAL,
+  ].flatMap((corpus) => Object.entries(corpus)
+    .flatMap(([blockId, block]) => Object.entries(block.pools)
+      .map(([poolKey, pool]) => ({ blockId, poolKey, pool }))));
+
+  it('the vocabulary is closed, frozen, and the universal source is in it', () => {
+    expect(Object.isFrozen(FACE_SOURCES)).toBe(true);
+    expect(FACE_SOURCES).toEqual([
+      'stranger', 'elders', 'hall', 'tavern', 'guild', 'register',
+      'muster', 'watch', 'garrison', 'gate', 'market', 'court',
+    ]);
+    expect(UNIVERSAL_SOURCE).toBe('stranger');
+    expect(FACE_SOURCES).toContain(UNIVERSAL_SOURCE);
+    expect(Object.isFrozen(PAIR_KINDS)).toBe(true);
+    expect(PAIR_KINDS).toEqual(['disagree', 'reinforce', 'aside', 'view']);
+  });
+
+  it('⭐ IDENTITY: a roster admitting every face is the shipped modulus, byte for byte, and an unsourced variant ignores the roster', () => {
+    const all = new Set(FACE_SOURCES);
+    for (const seed of SEEDS) {
+      const shipped = referenceHash(`${seed}::DS-DEF-11::UNWALLED-SMALL::w`) % 4;
+      expect(drawFace(POWERED, 'DS-DEF-11', 'UNWALLED-SMALL', seed, all), `full roster ${seed}`).toBe(shipped);
+      expect(drawFace(POWERED, 'DS-DEF-11', 'UNWALLED-SMALL', seed, ['hall', 'tavern']), `hall+tavern ${seed}`).toBe(shipped);
+      for (const roster of [undefined, null, [], new Set(), new Set(['hall']), all]) {
+        expect(drawFace(UNSOURCED, 'DS-DEF-11', 'UNWALLED-SMALL', seed, roster), `unsourced ${seed}`).toBe(shipped);
+      }
+    }
+    expect(eligibleFaces(POWERED, all)).toEqual([0, 1, 2, 3]);
+    expect(eligibleFaces(UNSOURCED, undefined), 'no source list: every face, whatever the roster').toEqual([0, 1, 2, 3]);
+  });
+
+  it('⭐ FILTER: a face whose power is absent is never drawn, and the eligible list is the ascending set', () => {
+    expect(eligibleFaces(POWERED, new Set(['hall'])), 'the tavern is out').toEqual([0, 1, 3]);
+    expect(eligibleFaces(POWERED, ['tavern']), 'the hall is out').toEqual([0, 2, 3]);
+    expect(eligibleFaces(POWERED, new Set(['stranger'])), 'only the stranger').toEqual([0, 3]);
+    const drawn = new Set();
+    for (const seed of SEEDS) drawn.add(drawFace(POWERED, 'B', 'P', seed, new Set(['hall'])));
+    expect([...drawn].sort(), 'a hall town never hears the tavern, and reaches every other face').toEqual([0, 1, 3]);
+    // The modulus is the ELIGIBLE count, so the draw indexes the eligible list, never the raw index.
+    for (const seed of SEEDS) {
+      const at = referenceHash(`${seed}::B::P::w`) % 3;
+      expect(drawFace(POWERED, 'B', 'P', seed, ['hall']), seed).toBe([0, 1, 3][at]);
+    }
+  });
+
+  it('⛔ FALLBACK: no roster reads as the stranger alone; nothing eligible falls back to the full set', () => {
+    expect(eligibleFaces(POWERED, undefined), 'no roster').toEqual([0, 3]);
+    expect(eligibleFaces(POWERED, null)).toEqual([0, 3]);
+    expect(eligibleFaces(POWERED, new Set())).toEqual([0, 3]);
+    for (const seed of SEEDS) expect([0, 3]).toContain(drawFace(POWERED, 'B', 'P', seed));
+    // A leaf the projector never saw: every face sourced, none resolving. The full set, so the
+    // rung does not go silent for want of a source.
+    const orphan = { text: 'a', wordings: ['b', 'c'], sources: ['court', 'watch', 'market'] };
+    expect(eligibleFaces(orphan, new Set(['hall']))).toEqual([0, 1, 2]);
+    const reached = new Set(SEEDS.map((seed) => drawFace(orphan, 'B', 'P', seed, ['hall'])));
+    expect([...reached].sort()).toEqual([0, 1, 2]);
+  });
+
+  it('STABILITY: same seed, same eligible set, same face — and seedless is the first eligible face', () => {
+    const roster = new Set(['tavern', 'muster']);
+    for (const seed of SEEDS.slice(0, 64)) {
+      const once = drawFace(POWERED, 'B', 'P', seed, roster);
+      expect(drawFace(POWERED, 'B', 'P', seed, new Set(['tavern', 'muster']))).toBe(once);
+      expect(drawFace(POWERED, 'B', 'P', seed, ['tavern']), 'the muster changes no eligible set here').toBe(once);
+    }
+    expect(drawFace(POWERED, 'B', 'P', '', roster), 'seedless').toBe(0);
+    // A variant whose spine is sourced and absent (unlawful at the projector; the kernel still answers).
+    const spineSourced = { text: 'a', wordings: ['b'], sources: ['court', null] };
+    expect(drawFace(spineSourced, 'B', 'P', '', new Set()), 'seedless takes the FIRST ELIGIBLE').toBe(1);
+  });
+
+  it('⭐ ONE ELIGIBLE FACE NEVER HASHES — the no-hash short-circuit survives the filter', () => {
+    const spy = vi.spyOn(Math, 'imul');
+    try {
+      // The hall alone resolves: faces 0, 1 and 3 — three eligible, so the fold RUNS (control).
+      drawFace(POWERED, 'B', 'P', 'seed-x', new Set(['hall']));
+      expect(spy.mock.calls.length, 'the live control').toBeGreaterThan(0);
+      spy.mockClear();
+      // A two-face variant whose second face is a court's, on a town with no court: one eligible.
+      const oneLeft = { text: 'a', wordings: ['b'], sources: [null, 'court'] };
+      expect(drawFace(oneLeft, 'B', 'P', 'seed-x', new Set(['hall']))).toBe(0);
+      expect(spy.mock.calls.length, 'one eligible face: neither half of the pair ran').toBe(0);
+    } finally {
+      spy.mockRestore();
+    }
+  });
+
+  it('the face readers: source and pair mark, malformed reads as none', () => {
+    expect(faceSourceOf(POWERED, 0)).toBe(null);
+    expect(faceSourceOf(POWERED, 1)).toBe('hall');
+    expect(faceSourceOf(POWERED, 3)).toBe(null);
+    expect(faceSourceOf(UNSOURCED, 1)).toBe(null);
+    expect(faceSourceOf({ text: 'a', wordings: ['b'], sources: [null, ''] }, 1), 'the empty string is none').toBe(null);
+    expect(facePairOf(POWERED, 1)).toEqual({ id: 1, kind: 'disagree' });
+    expect(facePairOf(POWERED, 0)).toBe(null);
+    expect(facePairOf({ text: 'a', wordings: ['b'], pairs: [null, { id: 0, kind: 'view' }] }, 1), 'id 0').toBe(null);
+    expect(facePairOf({ text: 'a', wordings: ['b'], pairs: [null, { id: 2, kind: 'quarrel' }] }, 1), 'an unknown kind').toBe(null);
+    expect(facePairOf({ text: 'a', wordings: ['b'], pairs: [null, 2] }, 1), 'a bare number is not a mark').toBe(null);
+    expect(facePairOf(null, 0)).toBe(null);
+  });
+
+  it('⭐ THE PARTNER: the other eligible face of the pair, or nothing where it does not resolve', () => {
+    const both = new Set(['hall', 'tavern']);
+    expect(facePartner(POWERED, 1, both), 'the hall\'s partner is the tavern').toBe(2);
+    expect(facePartner(POWERED, 2, both), 'and the tavern\'s the hall').toBe(1);
+    expect(facePartner(POWERED, 1, new Set(['hall'])), 'no tavern here: the hall speaks alone').toBe(null);
+    expect(facePartner(POWERED, 0, both), 'an unpaired face has no partner').toBe(null);
+    expect(facePartner(POWERED, 3, both)).toBe(null);
+    expect(facePartner(UNSOURCED, 1, both), 'no pair list at all').toBe(null);
+    expect(facePartner(POWERED, 1), 'no roster: the tavern is not eligible').toBe(null);
+    // Every kind pairs the same way at this car; the kind is data the composer carries.
+    for (const kind of PAIR_KINDS) {
+      const v = { text: 'a', wordings: ['b', 'c'], sources: [null, 'hall', 'court'], pairs: [null, { id: 7, kind }, { id: 7, kind }] };
+      expect(facePartner(v, 1, new Set(['hall', 'court'])), kind).toBe(2);
+    }
+  });
+
+  it('⭐ THE SHIPPED CORPUS CARRIES NO SOURCED FACE AND NO PAIR — the zero-shift ground, read live', () => {
+    const sourced = LIVE_POOLS
+      .flatMap(({ blockId, poolKey, pool }) => pool.map((v, at) => ({ blockId, poolKey, at, v })))
+      .filter(({ v }) => Array.isArray(v.sources) || Array.isArray(v.pairs))
+      .map(({ blockId, poolKey, at }) => `${blockId} :: ${poolKey} #${at}`);
+    expect(sourced.slice(0, 5), 'a shipped variant carrying a source or a pair list').toEqual([]);
+    expect(LIVE_POOLS.length).toBeGreaterThanOrEqual(700);
+    // And so every shipped variant's eligible list is [0] whatever the roster.
+    let checked = 0;
+    for (const { pool } of LIVE_POOLS) {
+      for (const v of pool) {
+        checked += 1;
+        expect(eligibleFaces(v, undefined)).toEqual([0]);
+        expect(eligibleFaces(v, new Set(FACE_SOURCES))).toEqual([0]);
+      }
+    }
+    expect(checked).toBeGreaterThanOrEqual(2266);
   });
 });

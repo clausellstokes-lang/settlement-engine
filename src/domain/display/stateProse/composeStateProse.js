@@ -34,7 +34,9 @@
  *   3  salience: three integer signals, a band, then a seeded order under a written law.
  *   4  the bound: the fact budget, the seats, the capacity.
  *   5  the per-piece draw; an unfillable fill DROPS that candidate and the walk continues.
- *   6  the face draw and the connective draw.
+ *   6  the face draw — over the faces whose SOURCE resolves on this town, and its PAIR
+ *      partner where one is marked (ADDENDUM 18 ruling 15, car 8b-W-18c) — and the
+ *      connective draw.
  *   7  the fill, per piece, from the block's bag.
  *
  * ⚠ TWO DECLARED DEPARTURES FROM §4.2 AS WRITTEN, BOTH HARMLESS AND BOTH MEASURED (the seam
@@ -73,6 +75,9 @@ import {
   drawFace,
   drawVariant,
   eligibleVariants,
+  facePairOf,
+  facePartner,
+  faceSourceOf,
   fillSlots,
   hashKey,
   variantIsAudible,
@@ -96,6 +101,14 @@ import { DOSSIER_CONNECTIVES } from '../../../data/dossierConnectives.generated.
  * @property {string} [relation] modifier only — the EFFECTIVE relation the joint was drawn
  *   from, which is `addition` when a declared `consequence` could not take the clause seat
  * @property {'sentence'|'clause'} [seat] modifier only
+ * @property {string} [source] THE POWER THAT SPEAKS this face (ADDENDUM 18 ruling 15; car
+ *   8b-W-18c) — a word of the kernel's `FACE_SOURCES`; absent where the face carries none,
+ *   which is every face of every shipped variant
+ * @property {number} [pairOf] the PARTNER half of a pair: the face index of the drawn face
+ *   this piece was rendered beside. Absent on the drawn face and on every unpaired piece
+ * @property {string} [pairKind] with `pairOf` — the pair's KIND (`PAIR_KINDS`): `disagree`,
+ *   `reinforce`, `aside` or `view`. Carried so a later car can vary the joint by kind; the
+ *   composer renders all four the same way at this car
  */
 /**
  * One composed unit — what a rung renders and what it is made of.
@@ -105,6 +118,8 @@ import { DOSSIER_CONNECTIVES } from '../../../data/dossierConnectives.generated.
  * @property {string} angle
  * @property {string} text
  * @property {ReadonlyArray<ComposedPiece>} pieces
+ * @property {string} [source] the head piece's source, beside `angle` (car 8b-W-18c); absent
+ *   where the drawn face carries none
  */
 /**
  * The frozen render half of a pool's metadata (ARCH §2.3), projected by car 4 and 4d.
@@ -342,6 +357,20 @@ function audienceOf(audience) {
 }
 
 /**
+ * The town's roster of powers as the kernel reads it (car 8b-W-18c). A Set or an array is
+ * handed through; anything else is NO roster, which the kernel reads as the stranger alone —
+ * the fail-closed reading, so a caller that forgot the roster hears the universal face and
+ * never a hall it cannot vouch for.
+ * @param {unknown} sources
+ * @returns {ReadonlySet<string>|ReadonlyArray<string>|null}
+ */
+function rosterOf(sources) {
+  if (sources instanceof Set) return sources;
+  if (Array.isArray(sources)) return sources;
+  return null;
+}
+
+/**
  * ⭐ THE SPINE PIECE — the composer's own coordinate rule, and the one the composed-prose
  * manifest's base-side synthesis is pinned against on every recorded cell.
  *
@@ -362,7 +391,8 @@ function audienceOf(audience) {
  * @param {import('./stateProseKernel.js').StateProseVariant} variant
  * @param {string} poolKey
  * @param {{role: 'spine'|'modifier'|'turn', face: number, audience?: string,
- *   relation?: string, seat?: string}} options
+ *   relation?: string, seat?: string, source?: string|null, pairOf?: number|null,
+ *   pairKind?: string|null}} options
  * @returns {ComposedPiece}
  */
 export function composedPieceOf(pool, variant, poolKey, options) {
@@ -378,22 +408,51 @@ export function composedPieceOf(pool, variant, poolKey, options) {
   };
   if (options.relation) piece.relation = /** @type {string} */ (options.relation);
   if (options.seat) piece.seat = /** @type {'sentence'|'clause'} */ (options.seat);
+  // THE SPEAKER AND THE PAIR (car 8b-W-18c) ride only where the face carries them, so the
+  // one-piece unit every shipped rung is today keeps its five keys exactly — the manifest's
+  // base-side synthesis reproduces `pieces` key for key.
+  if (typeof options.source === 'string' && options.source !== '') piece.source = options.source;
+  if (typeof options.pairOf === 'number') {
+    piece.pairOf = options.pairOf;
+    if (typeof options.pairKind === 'string') piece.pairKind = options.pairKind;
+  }
   return Object.freeze(piece);
 }
 
 /**
- * Draw one pool: the variant, its face, its filled text and its piece. `null` when the pool
- * is absent, when nothing is eligible, or when the fill fails — the caller DROPS a candidate
- * that answers `null` and walks on, which changes no modulus of any pool it already drew.
+ * The raw text of one face of a variant — the spine's for face 0, else the wording.
+ * @param {import('./stateProseKernel.js').StateProseVariant} variant
+ * @param {number} face
+ * @returns {string}
+ */
+function faceRawOf(variant, face) {
+  const wordings = variant.wordings;
+  return face === 0 || !Array.isArray(wordings) ? variant.text : wordings[face - 1];
+}
+
+/**
+ * Draw one pool: the variant, its face, its filled text and its piece(s). `null` when the
+ * pool is absent, when nothing is eligible, or when the fill fails — the caller DROPS a
+ * candidate that answers `null` and walks on, which changes no modulus of any pool it
+ * already drew.
+ *
+ * ⭐ THE FACE DRAW FILTERS BY SOURCE AND A MARKED PAIR RENDERS BOTH (ADDENDUM 18 ruling 15;
+ * car 8b-W-18c). The face is drawn over the faces whose source resolves on this town
+ * (`read.sources`, the desk's roster from `faceSources.js`); where the drawn face carries a
+ * pair mark and its partner also resolves, BOTH render, in FACE ORDER, the partner's piece
+ * marked `pairOf` the drawn face with the pair's `pairKind`. An ineligible partner leaves the
+ * drawn face alone. The two texts are joined by one space: each face is a whole sentence (the
+ * projector refuses a pair on a `fragment`-form pool), so the unit's capacity rule then sees
+ * two sentences and closes the sentence seat exactly as it would for a two-sentence spine.
  * @param {{pools?: Record<string, ReadonlyArray<import('./stateProseKernel.js').StateProseVariant>>}} block
  * @param {string} blockId
  * @param {string} poolKey
  * @param {'spine'|'modifier'|'turn'} role
  * @param {{slots: Record<string, unknown>, seed: string, audience: string,
- *   dimensions: Record<string, string>}} read
+ *   dimensions: Record<string, string>, sources: ReadonlySet<string>|ReadonlyArray<string>|null}} read
  * @param {{relation?: string, seat?: string}} [typing]
- * @returns {{variant: import('./stateProseKernel.js').StateProseVariant, source: string,
- *   text: string, piece: ComposedPiece}|null}
+ * @returns {{variant: import('./stateProseKernel.js').StateProseVariant, raw: string,
+ *   text: string, source: string|null, pieces: ComposedPiece[]}|null}
  */
 function drawPiece(block, blockId, poolKey, role, read, typing = {}) {
   const pool = block.pools ? block.pools[poolKey] : undefined;
@@ -401,18 +460,36 @@ function drawPiece(block, blockId, poolKey, role, read, typing = {}) {
   const eligible = eligibleVariants(pool, read);
   const variant = drawVariant(eligible, blockId, poolKey, read.seed);
   if (!variant) return null;
-  const face = drawFace(variant, blockId, poolKey, read.seed);
-  const wordings = variant.wordings;
-  const source = face === 0 || !Array.isArray(wordings) ? variant.text : wordings[face - 1];
-  const text = fillSlots(source, read.slots);
+  const face = drawFace(variant, blockId, poolKey, read.seed, read.sources);
+  const raw = faceRawOf(variant, face);
+  const text = fillSlots(raw, read.slots);
   if (text === null) return null;
+  const source = faceSourceOf(variant, face);
+  const drawn = composedPieceOf(pool, variant, poolKey, {
+    role, face, audience: read.audience, relation: typing.relation, seat: typing.seat, source,
+  });
+  const partner = facePartner(variant, face, read.sources);
+  if (partner === null) {
+    return { variant, raw, text, source, pieces: [drawn] };
+  }
+  const partnerText = fillSlots(faceRawOf(variant, partner), read.slots);
+  if (partnerText === null) {
+    return { variant, raw, text, source, pieces: [drawn] };
+  }
+  const mark = facePairOf(variant, face);
+  const second = composedPieceOf(pool, variant, poolKey, {
+    role, face: partner, audience: read.audience, relation: typing.relation, seat: typing.seat,
+    source: faceSourceOf(variant, partner), pairOf: face, pairKind: mark ? mark.kind : null,
+  });
+  // FACE ORDER, for the text and for the pieces alike: the lower index leads, whichever was
+  // drawn, so the same pair reads the same way on every town that hears both.
+  const first = partner < face;
   return {
     variant,
+    raw: first ? faceRawOf(variant, partner) : raw,
+    text: first ? `${partnerText} ${text}` : `${text} ${partnerText}`,
     source,
-    text,
-    piece: composedPieceOf(pool, variant, poolKey, {
-      role, face, audience: read.audience, relation: typing.relation, seat: typing.seat,
-    }),
+    pieces: first ? [second, drawn] : [drawn, second],
   };
 }
 
@@ -745,11 +822,11 @@ function asOpener(phrase) {
  * one so that refusal has a second, independent limb here — by the time the text is filled,
  * a proper noun and a common one look the same.
  * @param {string} filled the text after `fillSlots`
- * @param {string} source the variant's raw text, slots unfilled
+ * @param {string} raw the variant's raw text, slots unfilled
  * @returns {string}
  */
-function downCaseOpening(filled, source) {
-  if (String(source).startsWith('{')) return filled;
+function downCaseOpening(filled, raw) {
+  if (String(raw).startsWith('{')) return filled;
   return filled.charAt(0).toLowerCase() + filled.slice(1);
 }
 
@@ -760,7 +837,7 @@ function downCaseOpening(filled, source) {
  * the unit's derived order is literally the spine's order followed by the modifier's move,
  * and the unit closes on the standing cost.
  * @param {string} spineText
- * @param {{text: string, source: string, seat: 'sentence'|'clause', phrase: string}} modifier
+ * @param {{text: string, raw: string, seat: 'sentence'|'clause', phrase: string}} modifier
  * @returns {string}
  */
 function arrange(spineText, modifier) {
@@ -770,7 +847,7 @@ function arrange(spineText, modifier) {
   }
   const opener = asOpener(modifier.phrase);
   if (!opener) return `${spineText} ${modifier.text}`;
-  return `${spineText} ${opener} ${downCaseOpening(modifier.text, modifier.source)}`;
+  return `${spineText} ${opener} ${downCaseOpening(modifier.text, modifier.raw)}`;
 }
 
 /**
@@ -787,7 +864,10 @@ function arrange(spineText, modifier) {
  * @param {{spineKey?: string|null, candidates?: ReadonlyArray<StateProseCandidate>,
  *   turns?: ReadonlyArray<{key: string}>, slots?: Record<string, unknown>,
  *   seed?: string|null, audience?: string, dimensions?: Record<string, string>,
- *   leaves?: ProseLeaves}} [options] `leaves` defaults to the three floors above
+ *   sources?: ReadonlySet<string>|ReadonlyArray<string>|null,
+ *   leaves?: ProseLeaves}} [options] `leaves` defaults to the three floors above; `sources`
+ *   is the town's roster of powers (`faceSources.js` `sourcesOf`, put on by the desk's
+ *   `withFaceSources`) — absent reads as the stranger alone (kernel `eligibleFaces`)
  * @returns {ComposedUnit|null}
  */
 export function composeStateProse(corpus, blockId, options = {}) {
@@ -802,6 +882,7 @@ export function composeStateProse(corpus, blockId, options = {}) {
     seed: typeof options.seed === 'string' ? options.seed : '',
     audience: audienceOf(options.audience),
     dimensions: options.dimensions || {},
+    sources: rosterOf(options.sources),
   };
 
   const turn = seatedTurn(block, spineKey, options.turns, read);
@@ -817,7 +898,7 @@ export function composeStateProse(corpus, blockId, options = {}) {
   );
 
   /** @type {ComposedPiece[]} */
-  const pieces = [head.piece];
+  const pieces = [...head.pieces];
   let text = head.text;
   let budget = factBudget(spineMeta);
   // ONE JOINT PER UNIT and at most TWO SENTENCES (wall 6, R-DA-03, R-DA-06): each seat opens
@@ -838,9 +919,9 @@ export function composeStateProse(corpus, blockId, options = {}) {
     const drawn = drawPiece(block, blockId, row.key, 'modifier', read, { relation, seat });
     if (!drawn) continue;
     text = arrange(text, {
-      text: drawn.text, source: drawn.source, seat, phrase,
+      text: drawn.text, raw: drawn.raw, seat, phrase,
     });
-    pieces.push(drawn.piece);
+    pieces.push(...drawn.pieces);
     budget -= 1;
     seats[seat] = false;
   }
@@ -849,6 +930,7 @@ export function composeStateProse(corpus, blockId, options = {}) {
     blockId,
     poolKey: spineKey,
     angle: head.variant.angle || '',
+    ...(head.source ? { source: head.source } : {}),
     text,
     pieces: Object.freeze(pieces),
   });
@@ -881,7 +963,8 @@ export function composeStateProse(corpus, blockId, options = {}) {
  * @param {ReadonlyArray<{spineKey?: string|null, candidates?: ReadonlyArray<StateProseCandidate>,
  *   turns?: ReadonlyArray<{key: string}>}>} rungs in the desk's own order, which is preserved
  * @param {{slots?: Record<string, unknown>, seed?: string|null, audience?: string,
- *   dimensions?: Record<string, string>, limit?: number, leaves?: ProseLeaves}} [options]
+ *   dimensions?: Record<string, string>, sources?: ReadonlySet<string>|ReadonlyArray<string>|null,
+ *   limit?: number, leaves?: ProseLeaves}} [options]
  *   `limit` defaults to `COMPOSITION_BOUNDS.modifierBearingRungs`
  * @returns {Array<ComposedUnit|null>} one entry per rung, in the rungs' own order
  */
@@ -897,6 +980,7 @@ export function composeStateProseMount(corpus, blockId, rungs, options = {}) {
     seed: typeof options.seed === 'string' ? options.seed : '',
     audience: audienceOf(options.audience),
     dimensions: options.dimensions || {},
+    sources: rosterOf(options.sources),
   };
 
   const ranked = rows.map((rung, at) => {

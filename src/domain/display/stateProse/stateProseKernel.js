@@ -79,6 +79,16 @@
  *   12, 2026-09-12): a face need not restate its key, may not contradict it, and never names
  *   `{settlement}`. Absent on every variant the corpus shipped before the REWRITE wave, which
  *   is why `drawFace` below takes no hash at all on such a variant.
+ * @property {ReadonlyArray<string|null>} [sources] ONE FACE PER POWER (ADDENDUM 18 ruling 15,
+ *   car 8b-W-18c): the SOURCE of each face, parallel to `[text, ...wordings]` — index 0 is the
+ *   spine's (null today: a spine row carries no tag), index i the i-th wording's. A word of
+ *   `FACE_SOURCES` or `null`; `null` and `stranger` resolve on every town. Absent on every
+ *   shipped variant, and absent means every face is the stranger's.
+ * @property {ReadonlyArray<{id: number, kind: string}|null>} [pairs] the PAIR mark, parallel
+ *   to `sources`: two faces sharing a pair `id` are presented TOGETHER on a town where both
+ *   resolve (ruling 15's "two where they differ", widened by the owner's refinement of
+ *   2026-09-13 to four KINDS — see `PAIR_KINDS`). `null` on an unpaired face; absent when no
+ *   face is paired.
  * @property {number} [vid] THE STABLE ID — the annex row number, frozen at SEAM car 4 and
  *   pinned on `docs/content/prose-shift-register.json`. It is what law 6's draw hashes on,
  *   and it is OPTIONAL on this type because the causal register (R2) carries none: §13 row
@@ -434,17 +444,132 @@ export function hashKey(key) {
 }
 
 /**
- * THE WORDING FACE (ARCH §2.6, car 3a). A variant carries one authored sentence today and,
- * after the rewrite wave, up to four FACES sharing its slots (a subset) and marks — never a
- * claim set (ADDENDUM 18 ruling 2). This picks the face.
+ * ⭐ THE SOURCE VOCABULARY — ONE FACE PER POWER (ADDENDUM 18 ruling 15; car 8b-W-18c).
  *
- * ── THE THREE THINGS THIS FUNCTION IS ────────────────────────────────────────────────
+ * The powers of a town that can read a state, each a word a `[face]` row may carry in its
+ * second bracket (`- \`[face]\` \`[hall]\` …`). CLOSED: the projector refuses a word outside
+ * this list by name, so a writer cannot mint a thirteenth power with a typo. The seating is
+ * ADDENDUM 18 ruling 13b's, measured on the holder table: the stranger everywhere; the elders
+ * below town; the hall, the tavern, the guilds and the register where the catalogue row
+ * stands; the muster, the watch, the garrison and the gate where the force bucket or the
+ * `hasGates` flag resolves; the market and the court likewise. WHICH of these a given town
+ * has is answered OUTSIDE this leaf (`faceSources.js` `sourcesOf`, the only reader of the
+ * institution roster on this path) and handed to `drawFace` as a set: this kernel imports
+ * nothing and reads no settlement, so it names the words and never the town.
+ * @type {ReadonlyArray<string>}
+ */
+export const FACE_SOURCES = Object.freeze([
+  'stranger', 'elders', 'hall', 'tavern', 'guild', 'register',
+  'muster', 'watch', 'garrison', 'gate', 'market', 'court',
+]);
+
+/** The one source that resolves on EVERY town — a face with no tag is this source's. */
+export const UNIVERSAL_SOURCE = 'stranger';
+
+/**
+ * ⭐ THE PAIR KINDS (the owner's refinement of ruling 15, 2026-09-13, received at car
+ * 8b-W-18c): a pair is not only a disagreement. CLOSED, refused by name at the projector.
+ *   `disagree`   two sources read the state against each other
+ *   `reinforce`  a second source says the same from its own stake
+ *   `aside`      an unrelated notice from another source on the same state
+ *   `view`       a second view of the same subject
+ * The composer's pair draw is the same for all four — the partner renders when it resolves —
+ * and the kind rides on the partner piece as `pairKind`, so a later car can vary the joint
+ * by kind without re-cutting the leaf. Not this car.
+ * @type {ReadonlyArray<string>}
+ */
+export const PAIR_KINDS = Object.freeze(['disagree', 'reinforce', 'aside', 'view']);
+
+/**
+ * The source of one face of a variant, or `null` where the face carries none (which is every
+ * face of every shipped variant, and the spine of every variant that carries any).
+ * @param {StateProseVariant|null|undefined} variant
+ * @param {number} face the face index: 0 the spine, 1..n into `wordings`
+ * @returns {string|null}
+ */
+export function faceSourceOf(variant, face) {
+  const sources = variant ? variant.sources : undefined;
+  if (!Array.isArray(sources)) return null;
+  const source = sources[face];
+  return typeof source === 'string' && source !== '' ? source : null;
+}
+
+/**
+ * The pair mark of one face — its id and its kind — or `null` where the face is unpaired or
+ * the mark is malformed (a display path: a blank pairing beats a crashed page; the projector
+ * is what refuses a malformed mark).
+ * @param {StateProseVariant|null|undefined} variant
+ * @param {number} face
+ * @returns {{id: number, kind: string}|null}
+ */
+export function facePairOf(variant, face) {
+  const pairs = variant ? variant.pairs : undefined;
+  if (!Array.isArray(pairs)) return null;
+  const pair = pairs[face];
+  if (!pair || typeof pair !== 'object') return null;
+  const id = /** @type {{id?: unknown}} */ (pair).id;
+  const kind = /** @type {{kind?: unknown}} */ (pair).kind;
+  if (typeof id !== 'number' || !Number.isInteger(id) || id <= 0) return null;
+  if (typeof kind !== 'string' || !PAIR_KINDS.includes(kind)) return null;
+  return { id, kind };
+}
+
+/**
+ * ⭐ THE ELIGIBLE FACES OF A VARIANT ON THIS TOWN (ruling 15's "among the faces whose source
+ * exists on that town"). A face is eligible when it carries no source, when its source is
+ * the universal one, or when its source is in the town's roster.
+ *
+ * ⛔ NO ROSTER READS AS THE EMPTY ROSTER, NEVER AS "EVERYTHING". A caller that hands no set —
+ * a walker, a census, a print path with no settlement in hand — hears the stranger and the
+ * untagged faces only. That is floor 1 fail-closed: a face attributed to the hall may not be
+ * drawn by a reader that cannot say whether a hall stands. (Kernel law 2's own shape, applied
+ * to a power instead of an audience.)
+ *
+ * ⛔ AND NONE ELIGIBLE FALLS BACK TO THE FULL SET, so a rung never goes silent for want of a
+ * source: the fallback is the spine and every face, which is exactly what the reader heard
+ * before any face carried a source at all. The projector keeps this line unreachable on a
+ * lawful corpus (a variant's spine carries no source, so index 0 is always eligible); it is
+ * here for a leaf that was not projected by it.
+ *
+ * ⛔ ALL ELIGIBLE IS THE IDENTITY. When every face is eligible the list is `[0..n-1]`, so
+ * `eligible[hash % n]` is `hash % n` — the shipped draw, byte for byte. That is the whole
+ * zero-shift argument for a corpus with no sourced face, and the kernel's test drives it
+ * rather than reading it here.
+ * @param {StateProseVariant|null|undefined} variant
+ * @param {ReadonlySet<string>|ReadonlyArray<string>|null|undefined} sources the town's roster
+ * @returns {number[]} face indices, ascending
+ */
+export function eligibleFaces(variant, sources) {
+  const wordings = variant ? variant.wordings : undefined;
+  const faces = 1 + (Array.isArray(wordings) ? wordings.length : 0);
+  /** @type {number[]} */
+  const all = [];
+  for (let face = 0; face < faces; face += 1) all.push(face);
+  if (!variant || !Array.isArray(variant.sources)) return all;
+  const roster = sources instanceof Set ? sources : new Set(Array.isArray(sources) ? sources : []);
+  /** @type {number[]} */
+  const eligible = [];
+  for (const face of all) {
+    const source = faceSourceOf(variant, face);
+    if (source === null || source === UNIVERSAL_SOURCE || roster.has(source)) eligible.push(face);
+  }
+  return eligible.length === 0 ? all : eligible;
+}
+
+/**
+ * THE WORDING FACE (ARCH §2.6, car 3a; the SOURCE FILTER added at car 8b-W-18c). A variant
+ * carries one authored sentence today and, after the rewrite wave, one FACE PER POWER sharing
+ * its slots (a subset) and marks — never a claim set (ADDENDUM 18 ruling 2). This picks the
+ * face — among the faces whose source exists on this town (ruling 15).
+ *
+ * ── THE FOUR THINGS THIS FUNCTION IS ─────────────────────────────────────────────────
  *
  * 1. A NO-HASH SHORT-CIRCUIT ON TODAY'S CORPUS. Every one of the 2,266 shipped variants has
- *    exactly one face, so `faces === 1` and the function returns before touching either half
- *    of the hash pair. That is not an optimisation: it is what makes the seam provably
- *    byte-identical on the corpus that ships, and it is asserted by COUNTING the hash pair's
- *    own multiplications rather than by reading this paragraph.
+ *    exactly one face, so ONE face is eligible and the function returns before touching
+ *    either half of the hash pair. That is not an optimisation: it is what makes the seam
+ *    provably byte-identical on the corpus that ships, and it is asserted by COUNTING the
+ *    hash pair's own multiplications rather than by reading this paragraph. The same
+ *    short-circuit covers a town on which only one face resolves.
  *
  * 2. A SUFFIX OF THE VARIANT KEY, NEVER A NEW ONE. The key is
  *    `${seed}::${blockId}::${poolKey}::w` — key 1 of ARCH §2.4 with `::w` appended — so the
@@ -453,21 +578,56 @@ export function hashKey(key) {
  *    spelled it `::wording`, and a key that disagrees with the shipped one measures a
  *    different world (P-F10).
  *
- * 3. CANONICAL-AT-ZERO, like every other draw here (law 4). A seedless read — the gallery
- *    import nulls `_seed` — takes face 0, the authored text.
+ * 3. THE MODULUS IS THE ELIGIBLE COUNT, NOT THE FACE COUNT (car 8b-W-18c). The digest is
+ *    taken modulo the number of faces THIS TOWN can hear, and indexes the ascending eligible
+ *    list, so neighbouring towns with different rosters hear different halls on the same
+ *    seed — ruling 15's "organic variance" — and a town whose roster admits every face draws
+ *    exactly as the shipped modulus did (`eligibleFaces` above, the identity case). This is
+ *    a DECLARED TEXT SHIFT on the register's `face-draw-key` row: on a corpus that carries
+ *    a sourced face, the same seed and the same eligible SET can yield a different face than
+ *    the unfiltered modulus would. The corpus that ships carries none, and moves nothing.
+ *
+ * 4. CANONICAL-AT-ZERO, like every other draw here (law 4). A seedless read — the gallery
+ *    import nulls `_seed` — takes the FIRST ELIGIBLE face, which is face 0, the authored
+ *    text, on every lawful variant (a spine row carries no source).
  *
  * @param {StateProseVariant|null|undefined} variant
  * @param {string} blockId
  * @param {string} poolKey
  * @param {string} seed
+ * @param {ReadonlySet<string>|ReadonlyArray<string>|null} [sources] the town's roster
+ *   (`faceSources.js` `sourcesOf`); absent reads as the empty roster (see `eligibleFaces`)
  * @returns {number} the face index: 0 for the authored text, 1..n into `wordings`
  */
-export function drawFace(variant, blockId, poolKey, seed) {
-  const wordings = variant ? variant.wordings : undefined;
-  const faces = 1 + (Array.isArray(wordings) ? wordings.length : 0);
-  if (faces === 1) return 0;
-  if (!seed) return 0;
-  return hashKey(`${seed}::${blockId}::${poolKey}::w`) % faces;
+export function drawFace(variant, blockId, poolKey, seed, sources = null) {
+  const eligible = eligibleFaces(variant, sources);
+  if (eligible.length === 1) return eligible[0];
+  if (!seed) return eligible[0];
+  return eligible[hashKey(`${seed}::${blockId}::${poolKey}::w`) % eligible.length];
+}
+
+/**
+ * THE PARTNER OF A DRAWN FACE (ruling 15's PAIR draw; car 8b-W-18c). Where the drawn face
+ * carries a pair id, the OTHER eligible face of the same variant carrying the same id — the
+ * source that reads the state differently — is returned so the composer renders both. `null`
+ * when the face is unpaired, when its partner does not resolve on this town (then the drawn
+ * face renders alone), or when the variant is malformed. The lowest such index, so a
+ * projector that let three faces share an id would still draw deterministically; the
+ * projector refuses that shape upstream.
+ * @param {StateProseVariant|null|undefined} variant
+ * @param {number} face the drawn face
+ * @param {ReadonlySet<string>|ReadonlyArray<string>|null} [sources]
+ * @returns {number|null}
+ */
+export function facePartner(variant, face, sources = null) {
+  const pair = facePairOf(variant, face);
+  if (pair === null) return null;
+  for (const other of eligibleFaces(variant, sources)) {
+    if (other === face) continue;
+    const mark = facePairOf(variant, other);
+    if (mark !== null && mark.id === pair.id) return other;
+  }
+  return null;
 }
 
 /**

@@ -52,6 +52,7 @@ import { STRESS_TYPE_MAP } from '../../../data/stressTypes.js';
 import { severityBand } from '../../activeConditions.js';
 import { DOSSIER_STATE_PROSE_STRESSORS } from '../../../data/dossierStateProse/stressors.generated.js';
 import { composeStateProse } from './composeStateProse.js';
+import { withFaceSources } from './faceSources.js';
 import { stressorsStateProseCandidates } from './stressorsStateProseCandidates.js';
 import { legibilityRung } from './legibilityRung.js';
 
@@ -455,6 +456,9 @@ export function stressorOriginPoolKey(stressor) {
  *   worldStressorOrigin: object|null}>}
  */
 export function stressorsStateProse(settlement, readings = {}, options = {}) {
+  // ONE FACE PER POWER (ADDENDUM 18 ruling 15; car 8b-W-18c): the town's roster of sources,
+  // computed ONCE here and spread into every composer call below with the rest of `options`.
+  options = withFaceSources(settlement, options);
   const town = properFill(text(settlement?.name));
   const slots = { settlement: town };
   const banners = readings.banners ?? null;
@@ -513,6 +517,9 @@ export function stressorsStateProse(settlement, readings = {}, options = {}) {
  * @returns {object|null}
  */
 export function crisisBannerRung(settlement, banner, options = {}) {
+  // ONE FACE PER POWER (ADDENDUM 18 ruling 15; car 8b-W-18c): the town's roster of sources,
+  // computed ONCE here and spread into every composer call below with the rest of `options`.
+  options = withFaceSources(settlement, options);
   const key = crisisBannerPoolKey(banner?.type);
   if (!key) return null;
   const slots = { settlement: properFill(text(settlement?.name)) };
