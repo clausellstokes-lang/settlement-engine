@@ -1,15 +1,17 @@
-# LANE-STATUS — written 2026-09-13 05:12:54 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-13 05:18:10 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = 7b91cc148 Plan: rulings 24–26 recorded (the seats — Opus + Fable draft, Fable selects, Opus refu
 
 ## BUILD / KIT LANES (dock · base · cars · porcelain · receipt)
 - REWRITE 8b DS-DEF-11 (the validation block; cure round): dock laneRW-DEF11 ABSENT
 - REWRITE 8b-W (the wiring car, landed in its dock = the consist lineage): dock laneRW-DEFW ABSENT
-- **DS-DEF-2 (waits for the tables)** dock `laneRW-DEF2` HEAD 48b58031a · 24 cars over f2da5a3ee · porcelain 0 · last commits:
+- **DS-DEF-2 (waits for the tables)** dock `laneRW-DEF2` HEAD 48b58031a · 24 cars over f2da5a3ee · porcelain 1 · last commits:
     48b58031a REWRITE 8b-W-18m: a COMPROMISED role speaks to reassure, and says nothing three years in ten — the covert fields, the symptom pools and the first year-seeded roll in the dossier (ADDENDUM 18 ruling 26); zero text moved today
     60efe812b REWRITE 8b-W-18l (the re-cut): DS-DEF-2's nine faces stop saying "the hall" and start printing a person — and rendering the page found the defect that would have silenced every one of them
     311589326 REWRITE 8b-W-18l: the page prints a ROLE, never an institution — the attribution slots, the number-aware verb and the town's own roster of speakers (ADDENDUM 18 ruling 25); zero text moved today
     95760e212 REWRITE 8b dock hygiene: the first v3 pool has lawfully ended the zero-shift world, so the face-count register row is re-frozen as a DECLARED GROW and all six zero-shift arms are re-pinned to name their one mover
+    porcelain (uncommitted work in the dock — commit it FIRST after re-proving):
+       M src/domain/display/stateProse/stateProseKernel.js
     receipt `receipt-rewrite.md` (mtime 09-12 20:49) head:
       | # RECEIPT — the REWRITE train
       | 
@@ -105,4 +107,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `ab8783d22` WRITER Invasion & War: walls with NO force · DONE · transcript 09-13 02:30 725 KB · 17 tool calls · files: candidates-2.md, facetext.txt, ft2.txt · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasio
 
 ## PROCESSES: 
-load: 1.92 2.41 2.80
+load: 3.24 2.60 2.73

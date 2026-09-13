@@ -1,16 +1,10 @@
-> ⚠ **RE-CUT A THIRD TIME, 2026-09-13, before pool 2, under ADDENDUM 18's rulings 13a through 39 — the sources, the roles, the archiver's hand, the notebook, the pairs, the unit cap and the research reconciliation. WHAT CHANGED IN THIS PASS: PART IV is re-cut whole and re-titled, because its twelve lines were unattributed, self-naming, semicolon-and-clever-beat faces the law now refuses on four separate rulings; §9's pair no longer adjudicates and gains a weighing that OPENS (ruling 22); §17's 'a near fact stands bare' and its courtier's caution are struck (every sentence names its source, 13a; the attribution is symmetric, 19); §4's reversal loses its semicolon and gains the compound pair (23); the vague-authority veto narrows to the bare form (39); the triad leaves the tell list (36); the twelve-rendering arithmetic and the four-face floor become ONE FACE PER SEATED SOURCE (15, reconciliation 2); the singular-office rider is split, binding a face's SUBJECT and not its attribution (25a); §22 gains the unit cap's arithmetic (30, 37); the PART IV self-check is re-marked as the frozen-field licence (11); and a new PART V carries the archiver's notebook (17). Seven forms the law now has gained an exemplar line apiece: the role's attributed account, the archiver's observation, the public's perceived truth, the compromised role's concealment, the archiver's weighing, the compound pair, the bill and the physical particular. THE EARLIER PASSES STAND: the Fable sitting of 2026-09-12, and 2026-09-13 ~05:1x under rulings 12, 14 and 20 (no `{settlement}` inside an example face — now true of this file throughout, PART IV and §25's closing line included; no which-clause closers; plain words, 'the hall' not 'the moot', a named record not 'the books'). Under ruling 5 every example line was scanned by the floor-2 grammar test (`rewrite/scan-floor2.py`); under ruling 11 a durative over a FROZEN read or over the archiver's own presence is lawful, and the examples that keep one say so where they stand. The pass before this one is `EXEMPLAR-PACK.pre-recut3.md`; the one before that, `EXEMPLAR-PACK.md.pre-add18`.**
+> ⚠ **RE-CUT BY THE FABLE SITTING, 2026-09-12, and again 2026-09-13 ~05:1x under rulings 12, 14 and 20 (no {settlement} inside an example face; no which-clause closers; plain words — 'goods' not 'in kind', 'the hall' not 'the moot', a named record not 'the books'; the date example withdrawn). Earlier (ruling 5): every example line in this pack was scanned by the floor-2 grammar test (`rewrite/scan-floor2.py`) and the lines that carried a RATE or an ELAPSED COURSE over a live read were rewritten — a writer aims at nothing a refuter refuses. Under ruling 11 a durative over a FROZEN read is lawful and one example keeps it, marked. Under rulings 12 and 13 the town is not named inside a face and every face has a SPEAKER with a stake; the moves below are read through that voice. The pre-recut text is `EXEMPLAR-PACK.md.pre-add18`.**
 
 # THE EXEMPLAR PACK — what to aim at
 
 *Folded from four packets over the exhaustive sweeps of Tolkien, Kay, Martin, Hobb, Le Guin, Wolfe, the D&D corpus and the AI-tell research (~1.5 MB, `prose-research/sweep/`). Those sweeps were once converted into bars a refuter could cite — the wrong reading of what the research found. ADDENDUM 14 reverses it: the references are **guideposts, not laws**. Moves from copyrighted texts are paraphrased and the illustrations are our own; named critics attribute the move, not the wording.*
 
-**⛔ NOTHING IN THIS FILE IS A REFUTER'S FINDING. ALL OF IT IS THE SELECTOR'S GROUND.** That distinction is the whole of the re-cut, and it is not the same as the old "nothing here is a rule".
-
-No clause of this pack is ever a refuter's finding, a gate's arm, or a floor. If a face is CHARGED with anything from this pack, the charge is void; the only hard refusals are the four floors, and they live in `CONTRADICTION-TABLE.md`.
-
-And this pack is now what the SELECTOR chooses by. Taste is judged once, at the pool, by the reader who keeps one face per source (ruling 8) — and the criteria they read are these. The tells in PART III **are** the selector's veto list (ruling 14), and its tie-breaker is the sentence that stops sooner. The corpus here **is** the measure of variety (ruling 29d), read in the mix's own order: clarity for the game master who scans, then immersion, then the prose, then engagement — a page that reads varied but not clear has failed the first test.
-
-So: a writer aims at this pack and is never charged with it. A selector reads it and decides by it. You will miss a lot of it. Missing it is not a fault; not aiming is.
+**⛔ NOTHING IN THIS FILE IS A RULE.** No clause of it is ever a refuter's finding, a gate's arm, or a judge's ground. If a face is charged with anything from this pack, the charge is void. The only hard refusals are the four floors, and they live in `CONTRADICTION-TABLE.md`. Everything here is aim. You will miss a lot of it — missing it is not a fault; not aiming is.
 
 ---
 
@@ -22,17 +16,13 @@ One fantasy town. A handful of recorded facts — often exactly one. A sentence,
 
 **The record is the floor, not the ceiling.** The facts you hold are the ground you stand on. What you build on it — the noticing, the grievance, the habit, the thing nobody mentions — is yours. Say nothing the record denies. Then say something.
 
-**And the arithmetic that broke the last round is dissolved twice over.** A pool's recorded claim set is often ONE fact, and the old corpus asked twelve renderings of it. Renderings of a bare fact are impossible at any count. **Evocations of a place where that fact holds are easy.** That was the first dissolution.
-
-The second is the count itself. A pool now carries **one face per source that can speak here** (ruling 15, reconciliation 2) — the register's pinned number is a CEILING and was never a floor. A thin roster is a thin pool: a thorp with a well and a shrine has two speakers and no guild, and the selector does not pad it to a city's count. Places with less have less to say, and that is organic thinness, not a defect. The floor and the ceiling of a town's variance is its roster.
+**And the arithmetic that broke the last round is dissolved.** A pool's recorded claim set is often ONE fact, and the corpus asks twelve renderings of it. Twelve renderings of a bare fact is impossible. **Twelve evocations of a place where that fact holds is easy.** That sentence is the whole re-cut.
 
 Hartlage's cutting test is worth keeping in your head while you draft, and it cuts both ways: **cut the line a typical GM would have imagined anyway; keep the line only the record could have supplied.**
 
 ---
 
 # PART I — THE MOVES, most load-bearing first
-
-*A note on the illustrations below. Some are shown bare, without their attribution, because the move is what is being shown and the frame would crowd it. **Every face you actually write carries its source** (ruling 13a) — a role drawn from the town's own rows, the survey, a named record this town keeps, the archiver's own eye, or the public. Where a move's illustration is shown bare, put a speaker in front of it before it is a face. §17 is where the attribution itself is set out.*
 
 ### 1. The telling particular — the recorded fact, met at the grain a person meets it at
 
@@ -44,13 +34,6 @@ Name the object, never the class. Beeswax, not lighting. Clean straw, not beddin
 > Aimed: *The gate-bar is kept oiled. The brazier beside it burns whatever the ward can spare, and what it burns is sea-coal, which everyone at the gate complains of.*
 
 Three things happened there and none was a new fact: an object, a smell, and a grievance.
-
-**Ruling 31 promotes this from a habit to a candidate class: ONE PHYSICAL PARTICULAR per rendered page** — a thing seen, heard or smelled. Le Guin's traders, windships and pelts and Hobb's named object are the same instrument at two grains, and the page has two carriers for it that no power owns: the public, who all saw it at once, and the archiver, who was standing there. A source may carry one too, where the thing it notices is the thing its stake makes it notice.
-
-> *A drover says the brazier at the gate burns sea-coal and that everyone standing near it complains of the smell.*
-> *It is observed that the brazier beside the gate burns sea-coal, and that the smell of it carries to the first houses.*
-
-One per page, elected by the roles' seed. Two is furniture. The presence measure (concrete sensory nouns against the page's words) is reported to the refuter and refuses nothing.
 
 You hold `walls.present` and `economicGates.military < 1`. Two facts. You cannot get twelve renderings of two facts; you can get twelve **meetings** with a town where those two facts hold.
 
@@ -80,37 +63,17 @@ Floor 3 was relaxed by name: **an unnamed person may appear, act, keep a key, ch
 
 > *Somebody keeps the key to the gate-house, and whoever has it that night decides what gets looked at.*
 
-Two riders, and ruling 25 split the second one in half.
-
-**Never a minted proper NAME.** A pooled face is written once and drawn by every matching town, so a christened person prints identically across a region and reads as a bug.
-
-**And the singular office the tier already names is barred as a face's SUBJECT, not as its attribution.** There is exactly one Guard Captain per village-plus, with a generated personality and a secret of their own on the NPC tab, and the engine owns that person's name and fate. So do not make them ACT in a pooled face: use a plural, a trade, a bystander, or an office the roster does not seat. *Whoever keeps the gate-house key decides what gets looked at* — not the captain, by name or by office. But ruling 25a puts the office TITLE on the attribution roll wherever the town's roster prints it, so the same office may SPEAK:
-
-> Licensed as attribution: *The guard captain says the gate is kept as it has always been kept.*
-> Refused as subject: *The guard captain keeps the gate-house key and decides what gets looked at.*
-
-The title speaks; the office-holder never acts; the holder's own name is never printed. The old circumlocution — *whoever keeps the toll book*, never *the toll-keeper* — stays one more option on the roll and is no longer the only one.
+Two riders, both cheap. **Never a minted proper NAME** — a pooled face is written once and drawn by every matching town, so a christened person prints identically across a region and reads as a bug. And **not in the singular office the tier already names** (exactly one Guard Captain per village-plus, with a generated personality and a secret of their own on the NPC tab); use a plural, a trade, a bystander, or an office the roster does not seat.
 
 ### 4. How a second clause earns its place
 
 Our measured failure: **seventy-one per cent of units were a two-clause `and` join**, and most second clauses restated the first. The cure is second clauses that do a job. Six earners:
 
-1. **Cost** — Hobb's fractal *buts*: nothing arrives without its remainder. *The wall stands, and the keeping of it is short.*
-
-   **And the same joint carries a PAIR** (ruling 23). Where two sources speak to one state, the archiver may join their accounts into ONE compound sentence instead of two, so the second attribution rides inside the sentence rather than opening a new one. The joints are the archiver's, drawn at render by the pair's kind: *, though* · *, but* · *, while* · *, and yet* on a disagree; *, and* · *, as* on a reinforce. Never a semicolon, never an em dash, and only where both halves are a single sentence each.
-
-   > *A clerk in the hall says the keeping is paid out of the common purse, though at the tavern a carter says it is paid by the people who do it.*
-   > *A guild factor says the {defwork} is kept up, and a drover found it in good repair from the road.*
-
-   This is the one `, and` join the pack licenses, and it is licensed because the two clauses have two different speakers with two different stakes. The four-times-running `, and` of PART III is one speaker restating themself, which is a different fault entirely. Offer some pairs shaped to join — each half a single clause that reads after *though* or *and* — and mark them `joinable`; the selector keeps a mix, so a page carries both the compound and the full stop.
-
-2. **Consequence, landed on somebody** — *A household that sends a son to the muster is a household short a hand at the nets.* Ruling 32 makes this a candidate class in its own right: **THE BILL.** A face's second sentence may land the state's cost on a household, a trade or an office the roster actually holds, in its own clause. At most one per variant, and the bearer must be a row the town has.
-
-   > *A guild factor says the keeping of the {defwork} is done by the trades and paid for by nobody.*
-   > *At the tavern a carter says a household that sends a son to the muster is a household short a hand at the nets.*
+1. **Cost** — Hobb's fractal *buts*; nothing arrives without its remainder. *The wall stands, and the keeping of it is short.*
+2. **Consequence, landed on somebody** — *A household that sends a son to the muster is a household short a hand at the nets.*
 3. **Contrast** — *The gate is new. The wall it hangs in is not.* (Seven words, two facts, and a question: who paid for the gate, and why only the gate?)
 4. **Voice or notice** — *The watch keeps the gate. The carters keep their own count of when it is kept.*
-5. **Reversal**, on a full stop — Le Guin's move, re-cut off the semicolon that rulings 23c and 29b bar outright: *The farmers depend on the herds. The herds do not depend on them.* The reversal never needed the mark; it needed the second clause to turn the first one over.
+5. **Reversal**, on a semicolon — Le Guin's move: the farmers depend on the herds; the herds do not depend on them.
 6. **Withholding** — *…and the reason is nobody's business but the town's.*
 
 Three clauses never earn their place: the **restatement**, the **reassurance** (*but the town endures*), and the **abstraction pair** (*both practical and symbolic*). Those three are the bulk of what we have been shipping.
@@ -125,17 +88,9 @@ Two sentences beat a limp join. The short line exists; use it.
 Hobb's most distinctive habit is negative narration: sentences opening on what is *not*. The effect, per Oliver, is training the reader to see what is not there. It is also **free under the floors** — an absence invents no number and no date.
 
 > *No boat crosses after dark. There is no rule about it.*
-> *Nothing marks where the town ends. The town and the country have agreed to differ.*
+> *Nothing marks where the town ends; the town and the country have agreed to differ.*
 
 For a town with no wall, no watch, no market, this is the whole game: the absence is the most usable sentence in the dossier, because it implies a decision somebody made.
-
-**And ruling 27 gives the absence a frame no novelist has: the archiver was standing there.** Beside the survey's finding and a source's account, a face may be THE ARCHIVER'S OWN OBSERVATION, set down as a witness sets it down, in the third person and the record's own frame. Hobb's move with the compiler's presence behind it.
-
-> *In the survey's time here no soldier of the town has been seen on the {defwork}.* *(the elapsed course is licensed by ruling 27b: the archiver's own presence is the frame, and no number is carried)*
-> *It is observed that the stair to the walk has stores stacked on it and that nobody has moved them.*
-> *This office has watched the gate at dusk and seen it barred by whoever was nearest.*
-
-Three riders, and the first is the hard one. An observation is a **fact the archiver claims**, so floor 1 binds it in full and hardest: it states only what the key's own reads and the page allow, and it never infers into a silence a required row denies. Where the town is required to keep a night patrol, *nobody of the watch has been seen on the wall* is a refusal in a witness's coat; *no soldier has stood on it* is true on every town that draws the key. Second, floor 2 binds, so the elapsed course carries no number: *in the survey's time here*, *on any night the survey kept*, *since this record was opened*, *not once while this office watched*. Third, the share is rationed — at most one observed face per variant and one per rendered page (ruling 38), so the sources never vanish behind the witness.
 
 Four clean forms of not-knowing, from a gazetteer entry and worth stealing whole: **the unaccounted** (two went in; neither has given an account) · **the disputed** (which came first is a matter of some dispute, and the entry does not settle it) · **the reported** (there have been reports, unconfirmed) · **the controlled** (access is by leave, and the leave is somebody's to give).
 
@@ -150,9 +105,7 @@ Four clean forms of not-knowing, from a gazetteer entry and worth stealing whole
 
 Kay's most-repeated principle: an emperor's death far off matters less to a farmhand than a hired hand's broken leg. **A civic fact lands on a trade, a door, or a household, in the same unit** — the upkeep shortfall lands on the coin the muster was promised, the keeping-work done anyway, the season's work not let out to contract.
 
-> *At the tavern a carter says the {defwork} is kept up by people who are owed for the work.*
-
-The bearer must be a row the town actually holds (ruling 32): a household, a trade, an office on the roster. A cost landed on "the community" is landed on nobody, and a cost landed on a guild the town has no guild hall for is a floor-1 refusal wearing Kay's clothes.
+> *The {defwork} is kept up by people who are owed for the work.*
 
 ### 7. Turn the history you wanted into a standing condition
 
@@ -175,19 +128,7 @@ The licensed substitute for the dates floor 2 forbids, and not a consolation pri
 
 Kay keeps competing versions side by side and adjudicates neither; Martin invented contradictory sources precisely so he would not have to make up his mind. Two versions of one fact is a session premise, and it asserts no cause — only that the town disagrees about one.
 
-> *A carter at the tavern says the toll is paid in kind, goods not coin. The toll book has it as coin.*
-
-The old version of that line closed itself — *and the toll book is the one that counts* — which is a heading that says "neither settled" adjudicating in its own last clause. The pair states the two accounts and stops. Neither may deny the field: the hall may say the fine was paid and the tavern may say the fine is nothing to a house that can pay it, and neither may say there was no fine.
-
-**Then the archiver may weigh in, once, in a sentence that OPENS** (ruling 22). This is the one place on the player page where the archiver's own hand shows. It is not a restatement of the survey, which already spoke on the spine. It is the office's own conjecture, or a plain statement that the matter is in dispute, or the office's confidence in what the two say.
-
-> *Which is right is a matter of debate in the town, and this record does not settle it.*
-> *It may be that both are right, and the one purse is filled at the gate and spent by the hall.*
-> *The two do not agree, and the office holds no view.*
-> Leaning, with its reason drawn from the other's stake: *The office would sooner trust the toll book here, a carter counting the toll as a loss whichever way it is paid.*
-> On a reinforce pair, usually nothing at all. Where it is taken: *On this the two agree, and the office sees no cause to doubt them.*
-
-**Nothing the archiver adds decides what happened.** A conjecture is offered as the office's guess, a dispute is left standing, a confidence is an opinion and never the record's verdict — the game master decides what actually happened, and the dossier is an opportunity for their creativity, never a ruling on it. A weighing that reads as a ruling on the facts is refused for that reason alone. The edges: never on an `aside` or a `view` pair; never circling a covert fact, which is the notebook's work; never asserting a field's opposite; the conjecture's register is the notebook's (*it may be*, *likely*, *the office would sooner*) without the notebook's devices; no favouring the same source across a block; at most two weighings per rendered page, spread (ruling 38); and the unit stays at three sentences (ruling 30).
+> *The ward says the toll is paid in kind, goods not coin. The toll book says coin, and the toll book is the one that counts.*
 
 ### 10. The craft lexicon supplies nouns, never figures
 
@@ -200,21 +141,6 @@ Wolfe: the novice's paragon has virtues that *"are only talked about. Never show
 > Stated: *The watch is corrupt and unpopular.*
 > Shown: *A matter goes to the watch, and then it goes quiet.*
 > *The court sits when there is something to sit on. The cases that never reach it are the ones everybody can name.*
-
-**And where the engine holds a secret that compromises a source, the concealment IS the behaviour** (ruling 26). Wolfe's engine one turn further: the teller whose omission leaves an objective trace in the record. A captured hall, a watch under a covert bloc, an unexposed officer, a register under a cult's hand — that source is drawn into the unit on that town, and the face it speaks dismisses what is out of the ordinary or says that all is well. The player page never states the compromise. It shows the compromised power behaving, and the notebook beside it carries the fact.
-
-The concealment takes more than one shape, on purpose, because a role that always reassured would itself be the signal:
-
-> Dismiss: *A clerk in the hall says there is nothing in the accounts worth a stranger's time.*
-> Reassure: *The parish priest holds that the parish is at peace and asks that it be left so.*
-> Minimise: *The guard captain says the gate is kept as it has always been kept, and that talk at the tavern is talk.*
-> Change the subject: *One of the aldermen says the accounts can wait and the roof over them cannot.*
-> Blame the talk: *A guild factor says the count is the count, and whoever says otherwise has a reason of their own.*
-> Say nothing beyond the form: *A clerk in the hall says what a clerk is required to say, that the accounts are open to anyone who asks.*
-
-Three riders. **The reassurance, vetoed everywhere else in this pack, is HERE the move** — but only on a face tagged `compromised`, and the archiver reports it as flatly as any other account, with no wink and no warmer verb. **An honest source may reassure truthfully** now and then, about one face in a pool, so that a reassurance on the page is a question and never an answer. And **the denial is narrow**: a compromised source may deny the visible SYMPTOM of the very field that compromises it, in the direction of concealment only. Never an unrelated field, never a required row, never the covert fact by name.
-
-The silence counts too. Where a compromised source is present, a seeded roll decides per render whether it speaks or says nothing at all, so a game master who reads the same town in two different years notices the year it had nothing to say. That is behaviour as well.
 
 ### 12. Two registers in one breath, and the consequence chain
 
@@ -232,16 +158,6 @@ ADDENDUM 15 opens this ground: **the followers act, the god never does.** The co
 > *The people who keep the feast are slow to answer a provocation, so the town sends them into a quarrel first.*
 
 Subject: the people. Content: the recorded temper. No god, no cosmology, no count, no date. The most under-used licence in the estate.
-
-**And ruling 28 seats the public itself as a source.** Kay's principle — write the world as its inhabitants believe it, with no irony and no distancing — is exactly the shape of a public face, which has two parts and two laws. **What everyone SAW**, which is true and binds under floor 1 in full, and **what everyone MAKES OF IT**, which is the town's shared perception and may be mistaken.
-
-> *Everyone in the town has seen the {defwork} kept and nobody on it, and takes it that nobody is coming.* *(the durative is over a frozen read, ruling 11)*
-> *It is common knowledge here that the gate is barred at dusk by whoever is nearest, and the town counts that as guarded.*
-> *The whole hamlet saw the works mended after the wet season and holds that they will hold.*
-
-The public is owed to no power and seated by no row, so it draws on every town as the stranger does. It carries no grievance, no zeal, no greed and no reassurance on anybody's behalf, because those belong to the sources; it never names a covert fact, though a visible symptom everyone can see is fair. It is distinct from the tavern, which is a source with a stake and a table, and from the households, who are a party to the work.
-
-**The town can be collectively wrong about what a thing MEANS and never about what was SEEN.** That is the cleanest hook in the whole form, because the game master owns it outright: the town thinks it is safe.
 
 ### 14. The withheld thing leaves a trace; one odd particular, unexplained
 
