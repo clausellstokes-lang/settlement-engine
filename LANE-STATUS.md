@@ -1,28 +1,20 @@
-# LANE-STATUS — written 2026-09-13 05:28:41 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-13 05:33:54 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
-product claude/composite-r4 = f73bdbf16 · ledger = 7b91cc148 Plan: rulings 24–26 recorded (the seats — Opus + Fable draft, Fable selects, Opus refu
+product claude/composite-r4 = f73bdbf16 · ledger = 85a3d71f2 Plan: HANDOFF_CURRENT refreshed to the re-cut machinery's first pool (§919.6 and after: t
 
 ## BUILD / KIT LANES (dock · base · cars · porcelain · receipt)
 - REWRITE 8b DS-DEF-11 (the validation block; cure round): dock laneRW-DEF11 ABSENT
 - REWRITE 8b-W (the wiring car, landed in its dock = the consist lineage): dock laneRW-DEFW ABSENT
-- **DS-DEF-2 (waits for the tables)** dock `laneRW-DEF2` HEAD 48b58031a · 24 cars over f2da5a3ee · porcelain 14 · last commits:
+- **DS-DEF-2 (waits for the tables)** dock `laneRW-DEF2` HEAD 0389fe89c · 25 cars over f2da5a3ee · porcelain 4 · last commits:
+    0389fe89c REWRITE 8b-W-18n: the archiver may WITNESS and the town's people may SPEAK — the one archiver row that draws alone, and a fourteenth source nothing can capture (ADDENDUM 18 rulings 27 and 28, the owner's); zero text moved today
     48b58031a REWRITE 8b-W-18m: a COMPROMISED role speaks to reassure, and says nothing three years in ten — the covert fields, the symptom pools and the first year-seeded roll in the dossier (ADDENDUM 18 ruling 26); zero text moved today
     60efe812b REWRITE 8b-W-18l (the re-cut): DS-DEF-2's nine faces stop saying "the hall" and start printing a person — and rendering the page found the defect that would have silenced every one of them
     311589326 REWRITE 8b-W-18l: the page prints a ROLE, never an institution — the attribution slots, the number-aware verb and the town's own roster of speakers (ADDENDUM 18 ruling 25); zero text moved today
-    95760e212 REWRITE 8b dock hygiene: the first v3 pool has lawfully ended the zero-shift world, so the face-count register row is re-frozen as a DECLARED GROW and all six zero-shift arms are re-pinned to name their one mover
     porcelain (uncommitted work in the dock — commit it FIRST after re-proving):
-      M  docs/content/prose-shift-register.json
-      M  scripts/generate-dossier-state-prose.mjs
-      M  scripts/lib/dossier-annex-grammar.mjs
-      M  scripts/prose-mark-card.mjs
-      M  src/data/institutionRoles.js
-      M  src/domain/display/stateProse/faceSources.js
-      M  src/domain/display/stateProse/stateProseKernel.js
-      M  src/domain/prose/entryWalker.js
-      M  tests/data/dossierStateProseProjection.contract.test.js
-      M  tests/domain/compromisedRole.test.js
-      M  tests/domain/faceSources.test.js
-      M  tests/domain/institutionRoles.test.js
+       M scripts/generate-dossier-state-prose.mjs
+       M scripts/lib/dossier-annex-grammar.mjs
+       M src/domain/display/stateProse/composeStateProse.js
+       M src/domain/display/stateProse/stateProseKernel.js
     receipt `receipt-rewrite.md` (mtime 09-12 20:49) head:
       | # RECEIPT — the REWRITE train
       | 
@@ -118,4 +110,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `ab8783d22` WRITER Invasion & War: walls with NO force · DONE · transcript 09-13 02:30 725 KB · 17 tool calls · files: candidates-2.md, facetext.txt, ft2.txt · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasio
 
 ## PROCESSES: 
-load: 3.34 3.37 3.01
+load: 1.96 2.47 2.71
