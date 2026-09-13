@@ -77,6 +77,13 @@
   },
   "excludedEnvSpellings": [
     {
+      "envSpelling": "UPDATE_PROSE_VOICE_ARMS",
+      "files": [
+        "tests/copy/proseVoiceArms.test.js"
+      ],
+      "reason": "A voice/prose RATCHET register with its own governed walker, not a same-seed world fingerprint — the SAME disposition as UPDATE_VOICE_BASELINE above, and the file says so in its own hand: the two ADDENDUM 18 arms (ruling 33 NO FORECAST, ruling 40 (d) THE FAIR COPY DOES NOT CITE ITSELF) are SHRINK-ONLY per BLOCK over tests/copy/.prose-voice-arms-baseline.json, and its header names voiceMechanics.test.js beside it as the same shape. It records which prose shapes are allowed to exist, not what a seed produces: no seed is drawn, no world is generated, and the counts fall as the REWRITE cures blocks. Excluded rather than enrolled because an enrolled row would put a prose ratchet through the freeze act's door, where a FALL is the approved act and a freeze would forbid it. The spelling was minted by REWRITE car 8b-W-18o-r and left undisposed; arm 2 caught it, which is the arm working."
+    },
+    {
       "envSpelling": "UPDATE_VOICE_BASELINE",
       "files": [
         "tests/copy/voiceMechanics.test.js",
