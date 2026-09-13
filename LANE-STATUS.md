@@ -1,18 +1,15 @@
-# LANE-STATUS — written 2026-09-13 02:50:38 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-13 02:55:54 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = 0167b831e Plan: rulings 20–23 recorded (plain language, not casual; the archiver weighs in on a pa
 
 ## BUILD / KIT LANES (dock · base · cars · porcelain · receipt)
 - REWRITE 8b DS-DEF-11 (the validation block; cure round): dock laneRW-DEF11 ABSENT
 - REWRITE 8b-W (the wiring car, landed in its dock = the consist lineage): dock laneRW-DEFW ABSENT
-- **DS-DEF-2 (waits for the tables)** dock `laneRW-DEF2` HEAD 6275e8027 · 14 cars over f2da5a3ee · porcelain 2 · last commits:
+- **DS-DEF-2 (waits for the tables)** dock `laneRW-DEF2` HEAD 180acd14d · 15 cars over f2da5a3ee · porcelain 0 · last commits:
+    180acd14d REWRITE 8b DS-DEF-2 draft (v3): 1/1 pools
     6275e8027 REWRITE 8b-W-18e (golden): the generator golden master re-recorded at the clean tip d8a77df97 — 525 of 525 rows moved under ADDENDUM 18 ruling 16, predicted and held through the signed door; the register stays UNFROZEN and the signed record is withdrawn to the packet until the freeze act
     d8a77df97 REWRITE 8b-W-18e: a power exists only where an institution can represent it (ADDENDUM 18 ruling 16) — the faction roster gated on the live institution roster per archetype; a declared simulation shift: 532 of 768 sample towns lose Merchant Guilds (219), Noble Families (121), Landed Gentry (88), Manor Household (64), Military/Guard (58), Noble Houses (28), Arcane Orders (26), Thieves' Guild (1)
     4cf42141b REWRITE 8b-W-18c: one face per POWER — the face draw filters by the town's own sources and a marked pair renders both (ADDENDUM 18 ruling 15); the face-draw register row re-recorded as a declared shift; zero text moved today
-    8a236ea21 REWRITE 8b-W-18d: the marker's instruments (ADDENDUM 18 rulings 4, 6, 11) — the card prints what would be false, the page renders beside the machine sentences, the frozen-field census is field-grain
-    porcelain (uncommitted work in the dock — commit it FIRST after re-proving):
-      M  docs/content/RECEIPT_POOLS_DOSSIER_STATE.md
-      M  src/data/dossierStateProse/defense.generated.js
     receipt `receipt-rewrite.md` (mtime 09-12 20:49) head:
       | # RECEIPT — the REWRITE train
       | 
@@ -75,7 +72,7 @@ stat: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-
 - **L-PROBE-2 (chair)**: cheap /6 tips · full:  · bracket: 
 ## REWRITE 8b PACKETS (rewrite/DS-DEF-n/<pool>/: skeleton · draft-round-N · refine · kept · refute* · cure-round-N · cured-round-N; JUDGMENT.md / JUDGMENT-cure.md per block; the entailment + referent tables)
 - DS-DEF-11: pools 5 · skeleton 5 · draft 5 · refine 5 · kept 5 · refute 13 · cure 10 · cured 10 · JUDGMENT yes · JUDGMENT-cure yes
-- DS-DEF-2: pools 26 · skeleton 26 · draft 39 · refine 0 · kept 0 · refute 0 · cure 0 · cured 0 · JUDGMENT no · JUDGMENT-cure no
+- DS-DEF-2: pools 26 · skeleton 26 · draft 39 · refine 0 · kept 0 · refute 1 · cure 0 · cured 0 · JUDGMENT no · JUDGMENT-cure no
 - DS-DEF-2.licence-test-attempt: pools 26 · skeleton 26 · draft 36 · refine 26 · kept 26 · refute 32 · cure 24 · cured 0 · JUDGMENT yes · JUDGMENT-cure no
 - entailment: surveys 6 · refutes 6 · ENTAILMENT-TABLE.draft.md 09-12 20:49 346945 B · referent surveys 6 · referent refutes 6 · REFERENT-TABLE.draft.md 09-12 20:49 285943 B
 - HOLD-VITEST absent · runner count 0
@@ -96,13 +93,14 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
 - LAST-RUNS: 
 
 ## WORKFLOW RUNS of chair session 4e3d2f70-f45f-4e14-b571-514c339cfa17 — PER AGENT, PER LANE (owner 09-11: save progress per agent per lane; a run dies with the session, its journal + the packets + the dock commits are the checkpoint; journals mirrored under $SC/_progress/<wf>/)
-- **wf_fef9717d-ad4** (mtime 09-13 02:42): agent calls 2 (2 distinct) · DONE 1 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 1 — mirror `_progress/wf_fef9717d-ad4/`
+- **wf_fef9717d-ad4** (mtime 09-13 02:51): agent calls 3 (3 distinct) · DONE 2 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 1 — mirror `_progress/wf_fef9717d-ad4/`
     - `ae1e5e82c` SELECTOR Invasion & War: walls with NO force · DONE · transcript 09-13 02:42 954 KB · 31 tool calls · files: draft.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasio
-    - `afe1e560d` GATE r1 · IN FLIGHT · transcript 09-13 02:50 757 KB · 62 tool calls · files: rows.txt, "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasion-war-walls-with-no-force/speakers.md, gate-out.txt · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `afe1e560d` GATE r1 · DONE · transcript 09-13 02:51 807 KB · 70 tool calls · files: rows.txt, "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasion-war-walls-with-no-force/speakers.md, gate-out.txt, (git commit) · result: {"pools": [{"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def
+    - `ab25b0b9f` REFUTER Invasion & War: walls with NO force · IN FLIGHT · transcript 09-13 02:54 579 KB · 21 tool calls · files: "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasion-war-walls-with-no-force/refute.md · last: Bash cd "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scra
 - **wf_208f835e-a94** (mtime 09-13 02:21): agent calls 3 (3 distinct) · DONE 3 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 0 — mirror `_progress/wf_208f835e-a94/`
     - `a76ef67c1` MARKER Invasion & War: walls with NO force · DONE · transcript 09-13 02:21 728 KB · 28 tool calls · files: card.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasio
     - `a3e5e33ce` WRITER Invasion & War: walls with NO force · DONE · transcript 09-13 02:28 656 KB · 15 tool calls · files: shipped-f2da5a3ee.md, candidates-1.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasio
     - `ab8783d22` WRITER Invasion & War: walls with NO force · DONE · transcript 09-13 02:30 725 KB · 17 tool calls · files: candidates-2.md, facetext.txt, ft2.txt · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasio
 
 ## PROCESSES: 
-load: 2.21 2.50 2.58
+load: 1.51 1.95 2.30
