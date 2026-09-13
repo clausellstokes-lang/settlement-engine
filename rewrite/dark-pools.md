@@ -261,6 +261,29 @@ not: they read `settlement.economicState.compound.inst`, which is
   `nativeSemanticNames` (`priorityHelpers.js:41-42`), so a custom "Stocks" cannot set
   `hasPrison` and a custom shrine cannot set `hasChurch`. Custom content can move these flags
   in NEITHER direction.
+- **Nor can missing data.** `civicFlag(v) { return v === true; }`
+  (`defenseStateProse.js:306-308`) is strict, so a settlement with no `economicState` at all
+  reads every civic flag FALSE — landing in `no legal infrastructure` and `no reserves, no
+  medical provision`, never in either dark pool. The degenerate path exits away from them.
+
+### THE REFUTATION ATTEMPT — it failed, which is why the verdict stands
+
+The structural argument for pools 2 and 3 rests on `required: true` rows. The obvious way to
+break it is an institution-count cap that drops a required row. So the verdicts were attacked
+with a sweep over the only three tiers that carry a prison or a granary at all, across the
+FULL configuration space rather than the plagued slice:
+
+```
+generated 4800 settlements at town/city/metropolis, all 4 threats x 8 routes x swept culture+terrain
+  court MISSING at town+ : 0   (of those, with a prison: 0)
+  church MISSING at town+: 0   (of those, with a granary: 0)
+  HIT 'Internal Security: detention without process' : 0
+  HIT 'Disasters & Famine: granary, NO medical provision' : 0
+```
+
+No required row is ever dropped. Across everything run for this car — the 768-town seeded
+grid, a 6,000-town plagued sweep and this 4,800-town town-and-above sweep, **11,568 generated
+settlements** — neither pool fires once, and the catalogue walk says why.
 
 Both pools therefore stay **DEAD BY CONSTRUCTION**. The chair may strike them.
 
@@ -283,8 +306,12 @@ ledger, an owner-gated fix (it moves a shipped reading), and not a dark-pool que
 
 ---
 
-LAST LINE — SETTLED: the DS-DEF-2 THREE, each DEAD BY CONSTRUCTION, each backed by an
-executed probe over 6,768 generated settlements with 0 hits and by an exhaustive walk of the
-shipped institution catalogue; the chair may leave all three shipped rows untouched and never
-write them. NOT SETTLED: the other 53 zero pools; the probe recipe and the reproduction check
-above are the instrument for them.
+LAST LINE — SETTLED: the DS-DEF-2 THREE. `Internal Security: detention without process` and
+`Disasters & Famine: granary, NO medical provision` are DEAD BY CONSTRUCTION — strike them,
+never write them — proved by an exhaustive walk of the shipped catalogue's `required` rows
+and by 11,568 generated settlements with zero hits, including a failed refutation attempt
+aimed at the one hole the argument had. `Beasts & Monsters: plagued, NO perimeter and NO
+force` is **OUT OF GRID, NOT DEAD** — the generator will not BUILD such a town but a ruined
+palisade MAKES one, and the probe returns the key; the chair must NOT strike it. NOT SETTLED:
+the other 53 zero pools, out with four investigators; the probe recipe, the seed trap and the
+reproduction check above are the instrument for them.
