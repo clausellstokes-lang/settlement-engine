@@ -88,7 +88,9 @@
  *   to `sources`: two faces sharing a pair `id` are presented TOGETHER on a town where both
  *   resolve (ruling 15's "two where they differ", widened by the owner's refinement of
  *   2026-09-13 to four KINDS — see `PAIR_KINDS`). `null` on an unpaired face; absent when no
- *   face is paired.
+ *   face is paired. A FIFTH kind, `weigh`, marks the ARCHIVER'S ROW on the same pair id as the
+ *   two halves it closes (ADDENDUM 18 ruling 22; car 8b-W-18i): a pair id is therefore carried
+ *   by exactly two halves and AT MOST ONE weigh, never by three halves.
  * @property {number} [vid] THE STABLE ID — the annex row number, frozen at SEAM car 4 and
  *   pinned on `docs/content/prose-shift-register.json`. It is what law 6's draw hashes on,
  *   and it is OPTIONAL on this type because the causal register (R2) carries none: §13 row
@@ -448,7 +450,7 @@ export function hashKey(key) {
  *
  * The powers of a town that can read a state, each a word a `[face]` row may carry in its
  * second bracket (`- \`[face]\` \`[hall]\` …`). CLOSED: the projector refuses a word outside
- * this list by name, so a writer cannot mint a thirteenth power with a typo. The seating is
+ * this list by name, so a writer cannot mint a new power with a typo. The seating is
  * ADDENDUM 18 ruling 13b's, measured on the holder table: the stranger everywhere; the elders
  * below town; the hall, the tavern, the guilds and the register where the catalogue row
  * stands; the muster, the watch, the garrison and the gate where the force bucket or the
@@ -456,15 +458,37 @@ export function hashKey(key) {
  * has is answered OUTSIDE this leaf (`faceSources.js` `sourcesOf`, the only reader of the
  * institution roster on this path) and handed to `drawFace` as a set: this kernel imports
  * nothing and reads no settlement, so it names the words and never the town.
+ *
+ * ⛔ THE THIRTEENTH WORD IS NOT A POWER. `archiver` (car 8b-W-18i) is in this list because it
+ * is a word a `[face]` tag may carry, and for no other reason: it seats nowhere, `sourcesOf`
+ * never emits it, and `eligibleFaces` refuses to draw it. See `ARCHIVER_SOURCE`.
  * @type {ReadonlyArray<string>}
  */
 export const FACE_SOURCES = Object.freeze([
   'stranger', 'elders', 'hall', 'tavern', 'guild', 'register',
   'muster', 'watch', 'garrison', 'gate', 'market', 'court',
+  'archiver',
 ]);
 
 /** The one source that resolves on EVERY town — a face with no tag is this source's. */
 export const UNIVERSAL_SOURCE = 'stranger';
+
+/**
+ * ⭐ THE ARCHIVER — A WORD OF THE FACE VOCABULARY THAT IS NOT A POWER OF THE TOWN (ADDENDUM 18
+ * ruling 22, the owner's; car 8b-W-18i).
+ *
+ * The twelve words above are SOURCES: places where talk is collected, seated by the town's own
+ * roster (`faceSources.js` `sourcesOf`, which never emits this thirteenth word). The archiver
+ * is the hand the whole dossier is written in, and the archiver's row is not a reading of the
+ * state at all: it is ONE SENTENCE THAT CLOSES A PAIR — a conjecture, a plain "a matter of
+ * debate", or a reasoned confidence.
+ *
+ * ⛔ SO IT NEVER DRAWS ALONE. `eligibleFaces` excludes it outright, which means the face draw
+ * can never land on it and `facePartner` can never return it; it reaches the page only through
+ * `faceWeigh` below, beside the pair it weighs. That is the mechanical form of the ruling's
+ * "it opens and never closes": nothing the archiver adds may stand as a town's account.
+ */
+export const ARCHIVER_SOURCE = 'archiver';
 
 /**
  * ⭐ THE PAIR KINDS (the owner's refinement of ruling 15, 2026-09-13, received at car
@@ -478,7 +502,63 @@ export const UNIVERSAL_SOURCE = 'stranger';
  * by kind without re-cutting the leaf. Not this car.
  * @type {ReadonlyArray<string>}
  */
-export const PAIR_KINDS = Object.freeze(['disagree', 'reinforce', 'aside', 'view']);
+export const PAIR_KINDS = Object.freeze(['disagree', 'reinforce', 'aside', 'view', 'weigh']);
+
+/**
+ * ⭐ THE ARCHIVER'S ATTACHMENT KIND (ADDENDUM 18 ruling 22; car 8b-W-18i). A face marked
+ * `weigh` is the archiver's one sentence on a pair that already stands, and it rides on the
+ * SAME pair id as the two halves it closes.
+ *
+ * ⛔ WHY IT IS A FIFTH PAIR KIND AND NOT A SEPARATE `weigh` FIELD ON THE VARIANT — the brief's
+ * open choice, decided here and recorded. A separate field would be a FOURTH list the leaf
+ * must keep parallel to `[text, ...wordings]`, a fourth thing `assertFaces` must check the
+ * length of, and a second grammar in the annex tag. Riding on `pairs` costs nothing: the row
+ * is already a face, so the face-count ratchet counts it with no change (a weigh row is a
+ * wording like any other, which is what makes 8b-W-18j's ceiling the thing that lets it fit),
+ * the tag parses under the existing `SOURCE · pair N · KIND` shape, and the ONE invariant that
+ * had to move — "a pair id is carried by exactly two faces" — becomes "exactly two HALVES and
+ * at most one WEIGH", which is a single named split inside `assertFaces`.
+ */
+export const WEIGH_KIND = 'weigh';
+
+/**
+ * The pair kinds a weigh may close (ruling 22: "after a `disagree` or `reinforce` pair"). An
+ * `aside` is two unrelated facts and a `view` is two takes neither of which denies the other:
+ * there is nothing for the archiver to weigh, so the grammar refuses a weigh on either.
+ * @type {ReadonlyArray<string>}
+ */
+export const WEIGHABLE_KINDS = Object.freeze(['disagree', 'reinforce']);
+
+/**
+ * The full stop, which is always among a pair's joints and is the only joint an `aside`, a
+ * `view` or a two-sentence half can take. The trailing space is part of it: the first half
+ * keeps its own terminal stop and the two are set side by side.
+ */
+export const FULL_STOP_JOINT = '. ';
+
+/**
+ * ⭐⭐ THE PAIR'S JOINTS (ADDENDUM 18 ruling 23, the owner's; car 8b-W-18i). A pair whose two
+ * faces are ONE SENTENCE EACH may render as ONE COMPOUND SENTENCE, so the second attribution
+ * rides inside the sentence rather than starting a new one.
+ *
+ * ⛔ NEVER A SEMICOLON (the ruling says so outright), and never an em dash, which §0d bans from
+ * the corpus anyway. The lists are CLOSED and the full stop is a member of every one of them,
+ * which is what the law means by "the joint is chosen at render, seeded, or the full stop, so
+ * a page mixes both": on a disagree pair the stop wins one read in five, on a reinforce pair
+ * one in three, and the same seed always chooses the same joint.
+ *
+ * ⛔ A KIND WITH NO COMPOUND FORM READS AS THE FULL STOP ALONE, which is `aside`, `view` and
+ * `weigh` — and an unknown kind too, fail-closed: the stop is the arrangement the corpus has
+ * always rendered, so an unrecognised kind falls back to what the page already did.
+ * @type {Readonly<Record<string, ReadonlyArray<string>>>}
+ */
+export const PAIR_JOINTS = Object.freeze({
+  disagree: Object.freeze([', though ', ', but ', ', while ', ', and yet ', FULL_STOP_JOINT]),
+  reinforce: Object.freeze([', and ', ', as ', FULL_STOP_JOINT]),
+  aside: Object.freeze([FULL_STOP_JOINT]),
+  view: Object.freeze([FULL_STOP_JOINT]),
+  weigh: Object.freeze([FULL_STOP_JOINT]),
+});
 
 /**
  * The source of one face of a variant, or `null` where the face carries none (which is every
@@ -551,6 +631,11 @@ export function eligibleFaces(variant, sources) {
   const eligible = [];
   for (const face of all) {
     const source = faceSourceOf(variant, face);
+    // ⭐ THE ARCHIVER NEVER DRAWS ALONE (ADDENDUM 18 ruling 22; car 8b-W-18i). A weigh row is
+    // not a reading of the state — it is the archiver closing a pair — so it is never a
+    // candidate for the draw and never a partner. `faceWeigh` is the only door it has, and it
+    // opens only where the pair it weighs has already been drawn whole.
+    if (source === ARCHIVER_SOURCE) continue;
     if (source === null || source === UNIVERSAL_SOURCE || roster.has(source)) eligible.push(face);
   }
   return eligible.length === 0 ? all : eligible;
@@ -622,12 +707,161 @@ export function drawFace(variant, blockId, poolKey, seed, sources = null) {
 export function facePartner(variant, face, sources = null) {
   const pair = facePairOf(variant, face);
   if (pair === null) return null;
+  // ⛔ A WEIGH ROW HAS NO PARTNER, it has a pair it closes (car 8b-W-18i). The line is
+  // unreachable through `drawFace`, which cannot land on an archiver face at all, and it
+  // stands so that a caller holding a face index of its own cannot turn the archiver into
+  // half of a pair by asking the wrong question.
+  if (pair.kind === WEIGH_KIND) return null;
   for (const other of eligibleFaces(variant, sources)) {
     if (other === face) continue;
     const mark = facePairOf(variant, other);
-    if (mark !== null && mark.id === pair.id) return other;
+    if (mark !== null && mark.id === pair.id && mark.kind !== WEIGH_KIND) return other;
   }
   return null;
+}
+
+/**
+ * ⭐ THE ARCHIVER'S WEIGHING ROW FOR THIS PAIR (ADDENDUM 18 ruling 22; car 8b-W-18i), or `null`
+ * where the pair carries none, where the face is unpaired, or where the pair's kind cannot be
+ * weighed (`aside` and `view` — the grammar refuses those upstream, and this reads the same
+ * refusal from the leaf's own side so a leaf projected by something else cannot smuggle one
+ * onto the page).
+ *
+ * ⛔ IT TAKES NO ROSTER. The archiver is not a power of the town (`ARCHIVER_SOURCE`), so there
+ * is no institution whose absence could silence the row: wherever the pair renders whole, the
+ * hand that wrote the page may close it. The row is nonetheless gated on the PAIR, so a town
+ * that hears only one of the two halves hears no weighing either — which is the ruling's
+ * "after a disagree or reinforce pair", read strictly.
+ * @param {StateProseVariant|null|undefined} variant
+ * @param {number} face either half of the pair
+ * @returns {number|null} the weigh row's face index
+ */
+export function faceWeigh(variant, face) {
+  const pair = facePairOf(variant, face);
+  if (pair === null || pair.kind === WEIGH_KIND) return null;
+  if (!WEIGHABLE_KINDS.includes(pair.kind)) return null;
+  const wordings = variant ? variant.wordings : undefined;
+  const faces = 1 + (Array.isArray(wordings) ? wordings.length : 0);
+  for (let other = 0; other < faces; other += 1) {
+    if (other === face) continue;
+    const mark = facePairOf(variant, other);
+    if (mark === null || mark.id !== pair.id || mark.kind !== WEIGH_KIND) continue;
+    if (faceSourceOf(variant, other) !== ARCHIVER_SOURCE) continue;
+    return other;
+  }
+  return null;
+}
+
+/**
+ * HOW MANY SENTENCES THIS FACE STATES — the test ruling 23 gates the compound joint on.
+ *
+ * ⛔ AN ELLIPSIS DOES NOT END A SENTENCE, and that is the whole reason this counter exists
+ * beside the composer's own. The notebook's devices include the ellipsis (§7 of the law), so a
+ * DM face may carry `…` or `...` mid-thought; counting its dots as stops would read a
+ * one-sentence face as two or four and silently refuse it the joint it is entitled to. Both
+ * spellings are struck before the stops are counted.
+ *
+ * ⛔ AND THE BANG IS NOT READ, because §0d bans it from the corpus outright: a face carrying
+ * one is refused at `tests/copy/voiceMechanics.test.js` long before it reaches here.
+ * @param {string} text
+ * @returns {number}
+ */
+export function faceSentenceCount(text) {
+  const body = String(text).replace(/…/g, ' ').replace(/\.\.\./g, ' ');
+  const stops = body.match(/[.?](?:\s|$)/g);
+  return stops ? stops.length : 1;
+}
+
+/**
+ * Can this face take a COMPOUND joint? Exactly one sentence, and that sentence closes on a
+ * full stop — a question is left to stand on its own, because ", though" after a question mark
+ * is not a sentence in any hand.
+ * @param {string} text
+ * @returns {boolean}
+ */
+export function faceIsCompoundable(text) {
+  return faceSentenceCount(text) === 1 && /\.\s*$/.test(String(text));
+}
+
+/**
+ * ⭐⭐ THE JOINT OF ONE PAIR (ADDENDUM 18 ruling 23; car 8b-W-18i) — drawn, seeded, from the
+ * kind's own closed list.
+ *
+ * ⛔ A KEY OF ITS OWN, ON NEW MATERIAL (ARCH §2.4). The key is `${seed}::${blockId}::${poolKey}
+ * ::pairjoint` — a NEW suffix, not a variant of `::w` and not the modifier joint's
+ * `::joint::${modifierKey}` — so the variant draw, the face draw and the connective draw are
+ * all untouched by a joint arriving, and a pair that was rendering on the full stop before
+ * this car can only move to a compound form, never to a different face.
+ *
+ * ⛔ SEEDLESS IS CANONICAL-AT-ZERO (kernel law 4), and index 0 of every list is the kind's
+ * FIRST COMPOUND JOINT rather than the stop — a walker or a print path with no telling to key
+ * on reads the compound form, which is the form the ruling is about. The full stop sits LAST
+ * in each list so that appending a joint to a kind never moves the stop's own index.
+ * @param {string} kind a word of `PAIR_KINDS`
+ * @param {string} blockId
+ * @param {string} poolKey
+ * @param {string} seed
+ * @returns {string} one joint, including its trailing space
+ */
+export function pairJoint(kind, blockId, poolKey, seed) {
+  const joints = PAIR_JOINTS[kind];
+  if (!Array.isArray(joints) || joints.length === 0) return FULL_STOP_JOINT;
+  if (joints.length === 1 || !seed) return joints[0];
+  return joints[hashKey(`${seed}::${blockId}::${poolKey}::pairjoint`) % joints.length];
+}
+
+/**
+ * ⭐ THE SECOND HALF'S OPENING CHARACTER, lowercased where ruling 23 allows it: "only when it
+ * is a common word (never a `{slot}`, never a capitalised name)".
+ *
+ * THREE BRANCHES, EACH MECHANICAL AND EACH DRIVEN BY A TEST:
+ *   1. THE SLOT. The RAW face — the text before the fills — opening on `{` means the first
+ *      word on the page is a fill, and a fill's case is the fill's own business. Left alone.
+ *      (`assertFaces` already refuses a sentence face that opens on a `proper`-typed slot, so
+ *      this branch is a second wall on the same hazard rather than the only one.)
+ *   2. THE NAME. A first word carrying an INTERIOR capital is a name or an initialism
+ *      ("McGrath", "Gate Duty"), never a common word. Left alone.
+ *   3. THE COMMON WORD. Everything else is lowercased at its first character and nowhere else.
+ *
+ * ⛔ WHAT THIS CANNOT SEE, SAID PLAINLY RATHER THAN LEFT AS A SILENCE: a LITERAL proper noun
+ * with no interior capital, typed into the head of a face by a writer, would be lowercased.
+ * The law closes that from the other side — floor 3 refuses a named singular office as a
+ * person and the scope rule refuses a named world — so a face may not carry one at all. A
+ * mechanical name test does not exist in a setting-agnostic engine; this is the honest edge.
+ * @param {string} raw the face's text BEFORE its fills
+ * @param {string} text the face's text AFTER its fills
+ * @returns {string}
+ */
+export function openLowercased(raw, text) {
+  if (/^\s*\{/.test(String(raw))) return text;
+  const at = String(text).search(/\S/);
+  if (at < 0) return text;
+  const first = String(text).slice(at).split(/\s+/)[0] || '';
+  if (!/^[A-Z]/.test(first)) return text;
+  if (/[A-Z]/.test(first.slice(1))) return text;
+  return text.slice(0, at) + text[at].toLowerCase() + text.slice(at + 1);
+}
+
+/**
+ * ⭐⭐ THE PAIR, RENDERED (ADDENDUM 18 ruling 23; car 8b-W-18i). Two faces in FACE ORDER, joined
+ * either as one compound sentence or by the full stop.
+ *
+ * ⛔ THE FULL STOP IS THE OLD ARRANGEMENT, BYTE FOR BYTE. `${lead} ${trail}` is exactly what
+ * car 8b-W-18c rendered, so every pair that draws the stop, and every pair either of whose
+ * halves states two sentences, composes as it did before this car existed. That is the
+ * zero-shift argument and the reason the stop is a member of every joint list rather than an
+ * absence of one.
+ * @param {string} lead the lower-indexed face's filled text
+ * @param {string} trail the higher-indexed face's filled text
+ * @param {string} trailRaw the higher-indexed face's text BEFORE its fills
+ * @param {string} joint one joint of `PAIR_JOINTS`
+ * @returns {string}
+ */
+export function joinPairFaces(lead, trail, trailRaw, joint) {
+  if (joint === FULL_STOP_JOINT || !faceIsCompoundable(lead) || !faceIsCompoundable(trail)) {
+    return `${lead} ${trail}`;
+  }
+  return `${String(lead).replace(/\.\s*$/, '')}${joint}${openLowercased(trailRaw, trail)}`;
 }
 
 /**

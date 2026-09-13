@@ -50,7 +50,8 @@ import {
   composedPieceOf,
 } from '../../src/domain/display/stateProse/composeStateProse.js';
 import {
-  STATE_MARK_DIMENSIONS, poolDimensions, readStateProse,
+  ARCHIVER_SOURCE, FULL_STOP_JOINT, STATE_MARK_DIMENSIONS, WEIGH_KIND,
+  pairJoint, poolDimensions, readStateProse,
 } from '../../src/domain/display/stateProse/stateProseKernel.js';
 import { DOSSIER_CONNECTIVES } from '../../src/data/dossierConnectives.generated.js';
 import { drawnAtMount } from '../../src/domain/display/stateProse/dossierMounts.js';
@@ -1352,6 +1353,20 @@ describe('the composer — ONE FACE PER POWER: the source filter and the pair (c
   const poweredCorpus = () => fixtureCorpus({ pools: { [SPINE]: [POWERED] } });
   const SEEDS = Array.from({ length: 200 }, (_, i) => `pair-seed-${i}`);
 
+  /**
+   * ⭐ THE FIVE ARRANGEMENTS A `disagree` PAIR OF TWO SINGLE SENTENCES CAN TAKE (ADDENDUM 18
+   * ruling 23; car 8b-W-18i) — the four compound joints and the full stop. Spelled out here
+   * rather than recomputed from `PAIR_JOINTS`, so a car that quietly re-worded a joint or
+   * dropped the lowercase rule reds against the SENTENCES a reader would see.
+   */
+  const PAIR_RENDERS = Object.freeze([
+    'The hall has the circuit kept, though the tavern says nobody stands on it.',
+    'The hall has the circuit kept, but the tavern says nobody stands on it.',
+    'The hall has the circuit kept, while the tavern says nobody stands on it.',
+    'The hall has the circuit kept, and yet the tavern says nobody stands on it.',
+    'The hall has the circuit kept. The tavern says nobody stands on it.',
+  ]);
+
   it('⭐ a pair renders BOTH where both powers resolve, in face order, the partner marked pairOf + pairKind', () => {
     const corpus = poweredCorpus();
     let paired = 0;
@@ -1362,7 +1377,10 @@ describe('the composer — ONE FACE PER POWER: the source filter and the pair (c
       if (unit.pieces.length === 2) {
         paired += 1;
         expect(faces, 'face order, whichever half was drawn').toEqual([1, 2]);
-        expect(unit.text).toBe('The hall has the circuit kept. The tavern says nobody stands on it.');
+        // ⭐ THE JOINT IS DRAWN (ADDENDUM 18 ruling 23; car 8b-W-18i): the pair renders as one
+        // of five arrangements — four compound forms and the full stop, which is car
+        // 8b-W-18c's own render. The set is closed and the membership is the assertion.
+        expect(PAIR_RENDERS, `seed ${seed}`).toContain(unit.text);
         const drawn = unit.pieces.find((piece) => piece.pairOf === undefined);
         const partner = unit.pieces.find((piece) => piece.pairOf !== undefined);
         expect(drawn.source).toBe(drawn.face === 1 ? 'hall' : 'tavern');
@@ -1442,7 +1460,7 @@ describe('the composer — ONE FACE PER POWER: the source filter and the pair (c
     expect(Object.keys(bare).sort()).toEqual(['face', 'index', 'key', 'role', 'vid']);
   });
 
-  it('a paired head closes the SENTENCE seat (two sentences), as a two-sentence spine would', () => {
+  it('a paired head closes the SENTENCE seat while it states two sentences, and a COMPOUND pair opens it again (ruling 23)', () => {
     const corpus = fixtureCorpus({
       pools: {
         [SPINE]: [POWERED],
@@ -1451,18 +1469,130 @@ describe('the composer — ONE FACE PER POWER: the source filter and the pair (c
       poolMeta: { 'muster: short': modifierMeta() },
     });
     const both = new Set(['hall', 'tavern']);
-    let pairedUnits = 0;
+    let stopped = 0;
+    let compounded = 0;
     for (const seed of SEEDS) {
       const unit = composeStateProse(corpus, FIX, {
         spineKey: SPINE, candidates: [{ key: 'muster: short' }], seed, audience: 'dm', sources: both, leaves: { connectives: CONNECTIVES },
       });
       const headPieces = unit.pieces.filter((piece) => piece.key === SPINE);
-      if (headPieces.length === 2) {
-        pairedUnits += 1;
-        expect(unit.pieces.some((piece) => piece.role === 'modifier'), 'no third sentence after a pair').toBe(false);
+      if (headPieces.length !== 2) continue;
+      // ⭐ THE CAPACITY IS SPENT IN SENTENCES, NOT IN FACES (car 8b-W-18i, said out loud rather
+      // than discovered later). A pair joined by the FULL STOP states two sentences and closes
+      // the sentence seat exactly as a two-sentence spine would. A pair that COMPOUNDS states
+      // ONE, so the unit has a sentence left and the seat is open — which is ruling 23 working
+      // as written: the second attribution rides inside the sentence and costs nothing extra.
+      const joint = pairJoint('disagree', FIX, SPINE, seed);
+      const modifiers = unit.pieces.filter((piece) => piece.role === 'modifier');
+      if (joint === FULL_STOP_JOINT) {
+        stopped += 1;
+        expect(modifiers, `seed ${seed}: no third sentence after a stopped pair`).toEqual([]);
+      } else {
+        compounded += 1;
+        expect(modifiers.length, `seed ${seed}: the compound left a sentence to spend`).toBe(1);
+        // The compound itself, whole and in one sentence, wherever the arrangement puts it.
+        expect(unit.text, seed).toContain('The hall has the circuit kept,');
+        expect(unit.text, seed).toContain('the tavern says nobody stands on it.');
+        // The modifier seats with the connectives leaf's own opener, so the match is on its
+        // body rather than on its capital: "Also, the muster is short."
+        expect(unit.text.toLowerCase(), seed).toContain('the muster is short.');
       }
     }
-    expect(pairedUnits).toBeGreaterThan(40);
+    expect(stopped, 'the full-stop arrangement really was drawn').toBeGreaterThan(10);
+    expect(compounded, 'and so was the compound').toBeGreaterThan(40);
+  });
+
+  // ── THE ARCHIVER'S WEIGHING ROW (ADDENDUM 18 ruling 22; car 8b-W-18i) ──────────────────
+  /** The same pair, with the archiver's one sentence closing it. */
+  const WEIGHED = {
+    angle: 'ledger',
+    text: 'The walls stand.',
+    wordings: [
+      'The hall has the circuit kept.',
+      'The tavern says nobody stands on it.',
+      'It may be that the two are describing different weeks.',
+    ],
+    sources: [null, 'hall', 'tavern', ARCHIVER_SOURCE],
+    pairs: [null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, { id: 1, kind: WEIGH_KIND }],
+  };
+
+  it('⭐ THE WEIGHING ROW CLOSES THE PAIR — appended after the joint, marked pairOf + pairKind weigh, and never drawn alone (ruling 22)', () => {
+    const corpus = fixtureCorpus({ pools: { [SPINE]: [WEIGHED] } });
+    const both = new Set(['stranger', 'hall', 'tavern']);
+    let weighed = 0;
+    let alone = 0;
+    for (const seed of SEEDS) {
+      const unit = composeFixture(corpus, { seed, sources: both });
+      // ⛔ THE ARCHIVER IS NEVER THE DRAWN FACE, on any seed.
+      expect(unit.pieces[0].face, `seed ${seed}`).not.toBe(3);
+      expect(unit.pieces[0].source).not.toBe(ARCHIVER_SOURCE);
+      if (unit.pieces.length === 1) {
+        alone += 1;
+        // The spine drew: no pair, so no weighing either.
+        expect(unit.pieces[0].face).toBe(0);
+        expect(unit.text).toBe('The walls stand.');
+        continue;
+      }
+      weighed += 1;
+      expect(unit.pieces.map((piece) => piece.face), 'the pair in face order, then the weighing')
+        .toEqual([1, 2, 3]);
+      const weigh = unit.pieces[2];
+      expect(weigh.source).toBe(ARCHIVER_SOURCE);
+      expect(weigh.pairKind).toBe(WEIGH_KIND);
+      expect(weigh.pairOf, 'the weighing is marked against the DRAWN half').toBe(unit.pieces
+        .find((piece) => piece.pairOf === undefined).face);
+      expect(Object.isFrozen(weigh)).toBe(true);
+      // THE TEXT: the pair as ruling 23 arranged it, then the archiver's sentence, on a space.
+      expect(unit.text.endsWith(' It may be that the two are describing different weeks.')).toBe(true);
+      const pair = unit.text.slice(0, -' It may be that the two are describing different weeks.'.length);
+      expect(PAIR_RENDERS, `seed ${seed}: the pair under the weighing`).toContain(pair);
+      // ⛔ AND THE UNIT'S SOURCE IS STILL THE DRAWN HALF'S, never the archiver's.
+      expect(['hall', 'tavern']).toContain(unit.source);
+    }
+    expect(weighed, 'the pair really was drawn').toBeGreaterThan(40);
+    expect(alone, 'and the spine really was drawn too').toBeGreaterThan(10);
+  });
+
+  it('⭐ NO PAIR, NO WEIGHING: a town that hears only one half hears no weighing either (ruling 22)', () => {
+    const corpus = fixtureCorpus({ pools: { [SPINE]: [WEIGHED] } });
+    for (const seed of SEEDS.slice(0, 80)) {
+      // Only the hall stands here, so the pair never resolves whole.
+      const unit = composeFixture(corpus, { seed, sources: new Set(['stranger', 'hall']) });
+      expect(unit.pieces.length, `seed ${seed}`).toBe(1);
+      expect(unit.pieces[0].face).not.toBe(3);
+      expect(unit.text).not.toContain('It may be that');
+      expect(unit.pieces[0].pairKind).toBe(undefined);
+    }
+  });
+
+  it('⭐ AN UNFILLED WEIGHING ROW SILENCES ITSELF AND LEAVES THE PAIR STANDING (car 8b-W-18i)', () => {
+    // The weighing names a slot the read has no fill for; the pair still renders.
+    const corpus = fixtureCorpus({
+      pools: {
+        [SPINE]: [{
+          ...WEIGHED,
+          slots: ['material'],
+          text: 'The walls of {material} stand.',
+          wordings: [
+            'The hall has the circuit kept.',
+            'The tavern says nobody stands on it.',
+            'It may be that the {counterpart} road is the older argument.',
+          ],
+        }],
+      },
+    });
+    let paired = 0;
+    for (const seed of SEEDS.slice(0, 120)) {
+      const unit = composeFixture(corpus, {
+        seed, sources: new Set(['stranger', 'hall', 'tavern']), slots: { material: 'stone' },
+      });
+      if (unit === null || unit.pieces.length === 1) continue;
+      paired += 1;
+      expect(unit.pieces.map((piece) => piece.face), 'the weighing dropped, the pair kept').toEqual([1, 2]);
+      expect(unit.text).not.toContain('{counterpart}');
+      expect(PAIR_RENDERS).toContain(unit.text);
+    }
+    expect(paired, 'the pair really was drawn').toBeGreaterThan(20);
   });
 
   it('the mount passes the roster through to every rung', () => {

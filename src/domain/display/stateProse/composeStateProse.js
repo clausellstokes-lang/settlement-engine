@@ -78,9 +78,13 @@ import {
   facePairOf,
   facePartner,
   faceSourceOf,
+  faceWeigh,
   fillSlots,
   hashKey,
+  joinPairFaces,
+  pairJoint,
   variantIsAudible,
+  WEIGH_KIND,
 } from './stateProseKernel.js';
 // ⭐ THE FIRST OF ARCH §4.1's THREE FROZEN LEAVES, WIRED (REWRITE car 8a-11, SITTING §U c-5).
 // It is not a lexicon and it is not `src/domain/prose/`: it is this composer's own data leaf,
@@ -441,9 +445,23 @@ function faceRawOf(variant, face) {
  * (`read.sources`, the desk's roster from `faceSources.js`); where the drawn face carries a
  * pair mark and its partner also resolves, BOTH render, in FACE ORDER, the partner's piece
  * marked `pairOf` the drawn face with the pair's `pairKind`. An ineligible partner leaves the
- * drawn face alone. The two texts are joined by one space: each face is a whole sentence (the
- * projector refuses a pair on a `fragment`-form pool), so the unit's capacity rule then sees
- * two sentences and closes the sentence seat exactly as it would for a two-sentence spine.
+ * drawn face alone.
+ *
+ * ⭐⭐ AND THE PAIR MAY BE ONE COMPOUND SENTENCE (ADDENDUM 18 ruling 23; car 8b-W-18i). The
+ * joint is drawn, seeded, from the pair KIND's own closed list on a key of its own
+ * (`::pairjoint`), and the FULL STOP is a member of every list, so a page mixes both forms.
+ * Where the joint is the stop — and wherever either half states two sentences — the render is
+ * `${lead} ${trail}`, which is car 8b-W-18c's arrangement byte for byte.
+ *
+ * ⛔ WHAT A COMPOUND COSTS THE CAPACITY RULE, SAID RATHER THAN LEFT TO BE DISCOVERED. The
+ * unit's capacity counts SENTENCES in the composed text, so a pair that compounds states ONE
+ * sentence where two stood and the SENTENCE seat is open where it was closed. That is ruling
+ * 23 working as written (the second attribution rides inside the sentence, so the unit has
+ * spent one sentence and not two), and it is inert at this tip: no shipped pool declares
+ * `role: modifier`, so no candidate exists to take the seat that opens.
+ *
+ * ⭐ THE ARCHIVER'S WEIGHING ROW closes the unit after the pair (ADDENDUM 18 ruling 22), from
+ * `faceWeigh` — never from the draw, which cannot land on the archiver at all.
  * @param {{pools?: Record<string, ReadonlyArray<import('./stateProseKernel.js').StateProseVariant>>}} block
  * @param {string} blockId
  * @param {string} poolKey
@@ -484,12 +502,38 @@ function drawPiece(block, blockId, poolKey, role, read, typing = {}) {
   // FACE ORDER, for the text and for the pieces alike: the lower index leads, whichever was
   // drawn, so the same pair reads the same way on every town that hears both.
   const first = partner < face;
+  // ⭐⭐ THE JOINT (ADDENDUM 18 ruling 23; car 8b-W-18i). The kind's own closed list, drawn on a
+  // key of its own, and the full stop is a member of every list — so a pair either becomes ONE
+  // COMPOUND SENTENCE with the second attribution riding inside it, or renders exactly as car
+  // 8b-W-18c rendered it, `${lead} ${trail}`. `joinPairFaces` takes the second half's RAW text
+  // as well as its filled one, because the lowercase rule may not touch a `{slot}`'s fill.
+  const joint = pairJoint(mark ? mark.kind : '', blockId, poolKey, read.seed);
+  const joined = joinPairFaces(
+    first ? partnerText : text,
+    first ? text : partnerText,
+    faceRawOf(variant, first ? face : partner),
+    joint,
+  );
+  const pieces = first ? [second, drawn] : [drawn, second];
+  // ⭐ THE ARCHIVER'S WEIGHING ROW (ADDENDUM 18 ruling 22), which CLOSES the unit and is never
+  // drawn on its own. It rides after the pair whatever the joint was: the ruling's three
+  // sentences at most in the unit are the two halves (or one compound) plus this one. An
+  // unfilled weigh row silences ITSELF and leaves the pair standing — the same rule the
+  // partner takes above, for the same reason: a rendered `{slot}` is worse than no sentence.
+  const weigh = faceWeigh(variant, face);
+  const weighText = weigh === null ? null : fillSlots(faceRawOf(variant, weigh), read.slots);
+  if (weigh !== null && weighText !== null) {
+    pieces.push(composedPieceOf(pool, variant, poolKey, {
+      role, face: weigh, audience: read.audience, relation: typing.relation, seat: typing.seat,
+      source: faceSourceOf(variant, weigh), pairOf: face, pairKind: WEIGH_KIND,
+    }));
+  }
   return {
     variant,
     raw: first ? faceRawOf(variant, partner) : raw,
-    text: first ? `${partnerText} ${text}` : `${text} ${partnerText}`,
+    text: weigh !== null && weighText !== null ? `${joined} ${weighText}` : joined,
     source,
-    pieces: first ? [second, drawn] : [drawn, second],
+    pieces,
   };
 }
 

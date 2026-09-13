@@ -27,7 +27,9 @@
 // THE ONE PRODUCT IMPORT, and it is the vocabulary and nothing else (car 8b-W-18c): the source
 // words and the pair kinds a `[face]` row may carry are CLOSED at the kernel, and a grammar
 // that re-spelled them would be a second home for a list that must not drift.
-import { FACE_SOURCES, PAIR_KINDS } from '../../src/domain/display/stateProse/stateProseKernel.js';
+import {
+  ARCHIVER_SOURCE, FACE_SOURCES, PAIR_KINDS, WEIGHABLE_KINDS, WEIGH_KIND, faceSentenceCount,
+} from '../../src/domain/display/stateProse/stateProseKernel.js';
 
 /** ARCH §2.3: the three roles a pool may declare. */
 export const POOL_ROLES = Object.freeze(['spine', 'modifier', 'turn']);
@@ -235,7 +237,17 @@ export function parseFaceRow(rest, label) {
     refuse(label, `a [face] row names the source \`${source}\`, which is not a power of the`
       + ` town — the vocabulary is CLOSED at the kernel (ADDENDUM 18 ruling 15): ${FACE_SOURCES.join(' · ')}`);
   }
-  if (tokens.length === 1) return { text: tagged[2], source, pair: null };
+  if (tokens.length === 1) {
+    // ⛔ A WEIGH WITH NO PAIR. The archiver's row exists only to close a pair; untagged with a
+    // pair id it would be a bare assertion in the archiver's own hand, which is the one thing
+    // §4 of the law says the selector refuses outright.
+    if (source === ARCHIVER_SOURCE) {
+      refuse(label, `a [face] row speaks for the \`${ARCHIVER_SOURCE}\` with no pair. The archiver's`
+        + ' sentence CLOSES a pair and never stands alone (ADDENDUM 18 ruling 22): tag it'
+        + ` \`${ARCHIVER_SOURCE} · pair N · ${WEIGH_KIND}\` naming the pair it weighs`);
+    }
+    return { text: tagged[2], source, pair: null };
+  }
   const pairToken = tokens[1].match(PAIR_TOKEN_RE);
   if (!pairToken) {
     refuse(label, `a [face] row's tag reads \`${tokens[1]}\` after its source; the only thing`
@@ -249,6 +261,21 @@ export function parseFaceRow(rest, label) {
       + ` PAIR KINDS (the owner's refinement of ruling 15, 2026-09-13): ${PAIR_KINDS.join(' · ')}`);
   }
   if (tokens.length > 3) refuse(label, `a [face] row's tag carries ${tokens.length} tokens; the most is three: SOURCE · pair N · KIND`);
+  // ⭐ THE WEIGHING ROW IS THE ARCHIVER'S AND THE ARCHIVER'S ONLY (ADDENDUM 18 ruling 22; car
+  // 8b-W-18i). Both halves of that rule are decidable from THIS ROW ALONE — the source and the
+  // kind stand in one tag — so the refusal is taken here, where a writer reads it beside the
+  // line they typed. `assertFaces` asks the same question again from the LEAF's side, because
+  // a leaf projected by something other than this parser must not be able to smuggle one in.
+  if (kind === WEIGH_KIND && source !== ARCHIVER_SOURCE) {
+    refuse(label, `a [face] row marks pair ${id} \`${WEIGH_KIND}\` but speaks for \`${source}\`.`
+      + ' A weighing row is the ARCHIVER\'S one sentence closing a pair, never a power\'s'
+      + ` reading of the state (ADDENDUM 18 ruling 22): tag it \`${ARCHIVER_SOURCE} · pair ${id} · ${WEIGH_KIND}\``);
+  }
+  if (source === ARCHIVER_SOURCE && kind !== WEIGH_KIND) {
+    refuse(label, `a [face] row speaks for the \`${ARCHIVER_SOURCE}\` and marks pair ${id}`
+      + ` \`${kind}\`. The archiver is not a power of the town and never half of a pair; the`
+      + ` only mark it takes is \`${WEIGH_KIND}\` (ADDENDUM 18 ruling 22)`);
+  }
   return { text: tagged[2], source, pair: { id, kind } };
 }
 
@@ -710,6 +737,14 @@ export function seatMeta(input) {
  * id carried by any number of faces but two; a pair whose two faces speak for one source (a
  * pair is two POWERS on one state, whatever its kind); a pair on a `fragment`-form pool (each
  * half is a whole sentence the composer joins on a space).
+ *
+ * ⭐ AND SINCE CAR 8b-W-18i, THE ARCHIVER'S WEIGHING ROW (ADDENDUM 18 ruling 22). A `weigh`
+ * rides on the SAME pair id as the two halves it closes, so a pair id groups exactly two
+ * HALVES and AT MOST ONE WEIGH. Refused: a `weigh` on any source but the `archiver`; an
+ * `archiver` face that is not a `weigh` (the archiver never reads a state and never stands
+ * alone); a weigh whose id carries no pair; a second weigh on one pair; a weigh on an `aside`
+ * or a `view`, neither of which leaves anything to weigh; and a weigh stating more than ONE
+ * sentence, counted by the kernel's `faceSentenceCount` so an ellipsis is not a stop.
  * @param {object} input
  * @param {string} input.label
  * @param {{angle: string, text: string, slots: string[]}} input.parent
@@ -736,19 +771,58 @@ export function assertFaces(input) {
         + ` the vocabulary is CLOSED at the kernel (ADDENDUM 18 ruling 15): ${FACE_SOURCES.join(' · ')}`);
     }
   });
-  /** @type {Map<number, number[]>} */
+  // ⭐ THE ARCHIVER'S ROW, CHECKED FROM THE LEAF'S SIDE (ADDENDUM 18 ruling 22; car 8b-W-18i).
+  // `parseFaceRow` takes the same two refusals at the annex row; these stand because
+  // `assertFaces` is fed the PARALLEL LISTS and a leaf projected by something else must not be
+  // able to put a bare archiver sentence, or a power's weigh, on the page.
+  sources.forEach((source, at) => {
+    const pair = pairs[at];
+    if (pair === null || pair.kind !== WEIGH_KIND) {
+      if (source === ARCHIVER_SOURCE) {
+        refuse(label, `face ${at + 1} speaks for the \`${ARCHIVER_SOURCE}\` and is not a`
+          + ` \`${WEIGH_KIND}\`. The archiver is not a power of the town: its one sentence CLOSES`
+          + ' a pair and never stands alone or reads the state (ADDENDUM 18 ruling 22)');
+      }
+      return;
+    }
+    if (source !== ARCHIVER_SOURCE) {
+      refuse(label, `face ${at + 1} is marked \`${WEIGH_KIND}\` but speaks for`
+        + ` \`${source || 'stranger'}\`. Only the \`${ARCHIVER_SOURCE}\` weighs a pair (ADDENDUM 18 ruling 22)`);
+    }
+    // ⛔ ONE SENTENCE, AND THE COUNTER IS THE KERNEL'S so an ellipsis in the archiver's hand
+    // (§7's own device) does not read as two or four stops.
+    const stated = faceSentenceCount(faces[at]);
+    if (stated !== 1) {
+      refuse(label, `face ${at + 1} weighs pair ${pair.id} in ${stated} sentences.`
+        + ' The archiver\'s weighing is ONE sentence — three in the unit at most, and two of them'
+        + ' are the pair (ADDENDUM 18 ruling 22)');
+    }
+  });
+  /** @type {Map<number, {halves: number[], weighs: number[]}>} */
   const byPair = new Map();
   pairs.forEach((pair, at) => {
     if (pair === null) return;
     if (!PAIR_KINDS.includes(pair.kind)) refuse(label, `face ${at + 1} marks pair ${pair.id} with the kind \`${pair.kind}\` — the kinds are ${PAIR_KINDS.join(' · ')}`);
-    const held = byPair.get(pair.id) || [];
-    held.push(at);
+    const held = byPair.get(pair.id) || { halves: [], weighs: [] };
+    // ⭐ A PAIR ID NOW GROUPS TWO KINDS OF ROW: the two HALVES that read the state, and at most
+    // one WEIGH that closes them. Splitting here is what lets "exactly two faces" stay exactly
+    // two faces while the archiver rides on the same id (car 8b-W-18i).
+    (pair.kind === WEIGH_KIND ? held.weighs : held.halves).push(at);
     byPair.set(pair.id, held);
   });
-  for (const [id, members] of byPair) {
+  for (const [id, { halves: members, weighs }] of byPair) {
+    if (members.length === 0 && weighs.length > 0) {
+      refuse(label, `pair ${id} carries a weighing row and NO pair to weigh. The archiver's`
+        + ' sentence closes a `disagree` or a `reinforce` that stands on the same id'
+        + ' (ADDENDUM 18 ruling 22)');
+    }
     if (members.length !== 2) {
       refuse(label, `pair ${id} is carried by ${members.length} face(s); a pair is exactly TWO faces —`
         + ' two sources on one state, presented together (ADDENDUM 18 ruling 15)');
+    }
+    if (weighs.length > 1) {
+      refuse(label, `pair ${id} carries ${weighs.length} weighing rows. The archiver speaks ONCE`
+        + ' on a pair, or not at all (ADDENDUM 18 ruling 22)');
     }
     const [a, b] = members;
     const kindA = pairs[a] ? pairs[a].kind : '';
@@ -761,6 +835,15 @@ export function assertFaces(input) {
     if (form === 'fragment') {
       refuse(label, `pair ${id} stands on a \`fragment\`-form pool; a pair's two halves are whole sentences the`
         + ' composer joins on a space, and a fragment takes the clause seat instead (ADDENDUM 18 ruling 15)');
+    }
+    // ⛔ THE ARCHIVER WEIGHS A DISAGREEMENT OR A REINFORCEMENT, NOTHING ELSE (ruling 22, the
+    // owner's word: "after a `disagree` or `reinforce` pair"). An `aside` is two unrelated
+    // facts and a `view` is two takes neither of which denies the other, so there is nothing
+    // in the air for the archiver's conjecture or confidence to be about.
+    if (weighs.length === 1 && !WEIGHABLE_KINDS.includes(kindA)) {
+      refuse(label, `pair ${id} is a \`${kindA}\` and carries a weighing row. The archiver weighs a`
+        + ` \`${WEIGHABLE_KINDS.join('` or a `')}\` pair only — an aside is two unrelated facts and a view`
+        + ' is two takes that do not deny each other, and neither leaves anything to weigh (ADDENDUM 18 ruling 22)');
     }
   }
   if (parent.angle === 'canonical') {

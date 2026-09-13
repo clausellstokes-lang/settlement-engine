@@ -37,20 +37,31 @@ import {
   eligibleVariants,
   facePairOf,
   facePartner,
+  faceSentenceCount,
   faceSourceOf,
+  faceIsCompoundable,
+  faceWeigh,
   fillSlots,
   hasStateProsePool,
   hashKey,
+  joinPairFaces,
+  openLowercased,
+  pairJoint,
   poolDimensions,
   readStateProse,
   stableVid,
   stateProseSentence,
   variantIsAnchored,
   variantIsAudible,
+  ARCHIVER_SOURCE,
   FACE_SOURCES,
+  FULL_STOP_JOINT,
+  PAIR_JOINTS,
   PAIR_KINDS,
   STATE_MARK_DIMENSIONS,
   UNIVERSAL_SOURCE,
+  WEIGHABLE_KINDS,
+  WEIGH_KIND,
 } from '../../src/domain/display/stateProse/stateProseKernel.js';
 import { DOSSIER_STATE_PROSE_ECONOMY } from '../../src/data/dossierStateProse/economy.generated.js';
 import { DOSSIER_STATE_PROSE_POWER } from '../../src/data/dossierStateProse/power.generated.js';
@@ -1071,11 +1082,127 @@ describe('the state-prose reader — ONE FACE PER POWER: the source filter and t
     expect(FACE_SOURCES).toEqual([
       'stranger', 'elders', 'hall', 'tavern', 'guild', 'register',
       'muster', 'watch', 'garrison', 'gate', 'market', 'court',
+      // ⭐ THE THIRTEENTH WORD IS NOT A POWER (ADDENDUM 18 ruling 22; car 8b-W-18i). It is in
+      // the list because a `[face]` tag may carry it and for no other reason — it seats on no
+      // town, and the arms below prove it never draws.
+      'archiver',
     ]);
     expect(UNIVERSAL_SOURCE).toBe('stranger');
     expect(FACE_SOURCES).toContain(UNIVERSAL_SOURCE);
+    expect(ARCHIVER_SOURCE).toBe('archiver');
+    expect(FACE_SOURCES).toContain(ARCHIVER_SOURCE);
+    expect(ARCHIVER_SOURCE, 'the archiver is not the universal source').not.toBe(UNIVERSAL_SOURCE);
     expect(Object.isFrozen(PAIR_KINDS)).toBe(true);
-    expect(PAIR_KINDS).toEqual(['disagree', 'reinforce', 'aside', 'view']);
+    expect(PAIR_KINDS).toEqual(['disagree', 'reinforce', 'aside', 'view', 'weigh']);
+    expect(WEIGH_KIND).toBe('weigh');
+    expect(PAIR_KINDS).toContain(WEIGH_KIND);
+    expect(Object.isFrozen(WEIGHABLE_KINDS)).toBe(true);
+    expect(WEIGHABLE_KINDS, 'an aside and a view leave nothing to weigh').toEqual(['disagree', 'reinforce']);
+    for (const kind of WEIGHABLE_KINDS) expect(PAIR_KINDS).toContain(kind);
+  });
+
+  it('⭐ THE JOINTS ARE CLOSED, THE FULL STOP IS IN EVERY LIST, AND NO LIST CARRIES A SEMICOLON (ruling 23; car 8b-W-18i)', () => {
+    expect(Object.isFrozen(PAIR_JOINTS)).toBe(true);
+    expect(Object.keys(PAIR_JOINTS).sort(), 'one list per kind, no kind without one')
+      .toEqual([...PAIR_KINDS].sort());
+    expect(PAIR_JOINTS.disagree).toEqual([', though ', ', but ', ', while ', ', and yet ', '. ']);
+    expect(PAIR_JOINTS.reinforce).toEqual([', and ', ', as ', '. ']);
+    expect(PAIR_JOINTS.aside).toEqual(['. ']);
+    expect(PAIR_JOINTS.view).toEqual(['. ']);
+    expect(PAIR_JOINTS.weigh).toEqual(['. ']);
+    expect(FULL_STOP_JOINT).toBe('. ');
+    for (const [kind, list] of Object.entries(PAIR_JOINTS)) {
+      expect(Object.isFrozen(list), kind).toBe(true);
+      // ⛔ THE RULING'S OWN BAR: "Never a semicolon." And §0d's: no em dash, no bang, no digit.
+      expect(list.filter((j) => /[;—!\d]/.test(j)), `${kind} carries a barred mark`).toEqual([]);
+      expect(list, `${kind} can always take the stop`).toContain(FULL_STOP_JOINT);
+      // THE STOP IS LAST, so appending a compound joint never moves the stop's own index.
+      expect(list[list.length - 1], `${kind} keeps the stop last`).toBe(FULL_STOP_JOINT);
+    }
+  });
+
+  it('⭐ THE JOINT DRAW: seeded, on a key of its own, canonical-at-zero, and every joint reachable (ruling 23)', () => {
+    // A one-joint list takes no hash at all, which is `aside`, `view` and `weigh`.
+    for (const kind of ['aside', 'view', 'weigh']) {
+      for (const seed of SEEDS) expect(pairJoint(kind, 'B', 'P', seed), kind).toBe(FULL_STOP_JOINT);
+    }
+    // ⛔ AN UNKNOWN KIND FAILS CLOSED ONTO THE STOP — the arrangement the corpus already had.
+    expect(pairJoint('quarrel', 'B', 'P', 'seed-x')).toBe(FULL_STOP_JOINT);
+    expect(pairJoint('', 'B', 'P', 'seed-x')).toBe(FULL_STOP_JOINT);
+    // CANONICAL-AT-ZERO (kernel law 4): no seed reads index 0, the kind's first compound form.
+    expect(pairJoint('disagree', 'B', 'P', '')).toBe(', though ');
+    expect(pairJoint('reinforce', 'B', 'P', '')).toBe(', and ');
+    // EVERY JOINT IS REACHABLE, and the same seed always draws the same one.
+    for (const kind of ['disagree', 'reinforce']) {
+      const drawn = new Set();
+      for (let i = 0; i < 400; i += 1) drawn.add(pairJoint(kind, 'DS-DEF-2', 'walls', `seed-${i}`));
+      expect([...drawn].sort(), `${kind} reaches its whole list`).toEqual([...PAIR_JOINTS[kind]].sort());
+    }
+    for (const seed of SEEDS) {
+      expect(pairJoint('disagree', 'B', 'P', seed)).toBe(pairJoint('disagree', 'B', 'P', seed));
+    }
+    // ⛔ A KEY OF ITS OWN: the pool identity is in it, so two pools on one seed may differ, and
+    // the face key `::w` is untouched by the joint arriving.
+    const spread = new Set(SEEDS.map((seed) => `${pairJoint('disagree', 'B', 'P1', seed)}|${pairJoint('disagree', 'B', 'P2', seed)}`));
+    expect([...spread].some((row) => row.split('|')[0] !== row.split('|')[1]), 'the pool key is in the key').toBe(true);
+  });
+
+  it('⭐ THE ONE-SENTENCE GUARD: an ellipsis does not end a sentence, and a question is never compounded (ruling 23)', () => {
+    expect(faceSentenceCount('The wall is kept.')).toBe(1);
+    expect(faceSentenceCount('The wall is kept. Nobody is paid to guard it.')).toBe(2);
+    // ⛔ THE ELLIPSIS, BOTH SPELLINGS — §7's own device in the archiver's notebook.
+    expect(faceSentenceCount('The sum does not close… and nobody has asked why.')).toBe(1);
+    expect(faceSentenceCount('The sum does not close... and nobody has asked why.')).toBe(1);
+    expect(faceSentenceCount('The sum does not close… Nobody has asked why.')).toBe(1);
+    expect(faceSentenceCount('a fragment with no stop at all'), 'no stop reads as one').toBe(1);
+    expect(faceSentenceCount('Who keeps it?')).toBe(1);
+    // COMPOUNDABLE is one sentence AND a full stop to close it.
+    expect(faceIsCompoundable('The wall is kept.')).toBe(true);
+    expect(faceIsCompoundable('The wall is kept. Nobody guards it.')).toBe(false);
+    expect(faceIsCompoundable('Who keeps it?'), 'a question stands on its own').toBe(false);
+    expect(faceIsCompoundable('a fragment with no stop')).toBe(false);
+    expect(faceIsCompoundable('The sum does not close… and nobody has asked why.')).toBe(true);
+  });
+
+  it('⭐ THE LOWERCASE RULE: a common word falls, a {slot} never does, a capitalised name never does (ruling 23)', () => {
+    // (1) THE COMMON WORD — the only branch that changes a byte.
+    expect(openLowercased('The tavern says otherwise.', 'The tavern says otherwise.'))
+      .toBe('the tavern says otherwise.');
+    expect(openLowercased('Nobody stands on it.', 'Nobody stands on it.')).toBe('nobody stands on it.');
+    expect(openLowercased('the tavern says otherwise.', 'the tavern says otherwise.'), 'already lower')
+      .toBe('the tavern says otherwise.');
+    // (2) THE SLOT — read on the RAW text, because the fill's case is the fill's own business.
+    expect(openLowercased('{faction} says otherwise.', 'Ironhold says otherwise.'))
+      .toBe('Ironhold says otherwise.');
+    expect(openLowercased('  {faction} says otherwise.', '  Ironhold says otherwise.'))
+      .toBe('  Ironhold says otherwise.');
+    // (3) THE NAME — an interior capital is a name or an initialism, never a common word.
+    expect(openLowercased('McGrath keeps the book.', 'McGrath keeps the book.'))
+      .toBe('McGrath keeps the book.');
+    expect(openLowercased('GateDuty is filed under standing.', 'GateDuty is filed under standing.'))
+      .toBe('GateDuty is filed under standing.');
+    // The rest of the sentence is never touched, only the opening character.
+    expect(openLowercased('The Hall says so.', 'The Hall says so.')).toBe('the Hall says so.');
+    expect(openLowercased('', '')).toBe('');
+  });
+
+  it('⭐ THE PAIR, JOINED: the full stop is byte-for-byte the old arrangement, and a compound needs both halves single (ruling 23)', () => {
+    const a = 'The hall has the circuit kept.';
+    const b = 'The tavern says nobody stands on it.';
+    // THE STOP — exactly `${lead} ${trail}`, which is car 8b-W-18c's render.
+    expect(joinPairFaces(a, b, b, FULL_STOP_JOINT)).toBe(`${a} ${b}`);
+    // THE COMPOUND — the lead's own stop is struck, the joint carries its space, the trail falls.
+    expect(joinPairFaces(a, b, b, ', though '))
+      .toBe('The hall has the circuit kept, though the tavern says nobody stands on it.');
+    expect(joinPairFaces(a, b, b, ', and yet '))
+      .toBe('The hall has the circuit kept, and yet the tavern says nobody stands on it.');
+    // ⛔ A TWO-SENTENCE HALF JOINS BY THE FULL STOP WHATEVER THE DRAW SAID — either half.
+    const two = 'The tavern says nobody stands on it. Nobody at the table is surprised.';
+    expect(joinPairFaces(a, two, two, ', though ')).toBe(`${a} ${two}`);
+    expect(joinPairFaces(two, b, b, ', though ')).toBe(`${two} ${b}`);
+    // ⛔ AND A SLOT-OPENING TRAIL KEEPS ITS FILL'S CASE INSIDE THE COMPOUND.
+    expect(joinPairFaces(a, 'Ironhold says otherwise.', '{faction} says otherwise.', ', but '))
+      .toBe('The hall has the circuit kept, but Ironhold says otherwise.');
   });
 
   it('⭐ IDENTITY: a roster admitting every face is the shipped modulus, byte for byte, and an unsourced variant ignores the roster', () => {
@@ -1171,11 +1298,59 @@ describe('the state-prose reader — ONE FACE PER POWER: the source filter and t
     expect(facePartner(POWERED, 3, both)).toBe(null);
     expect(facePartner(UNSOURCED, 1, both), 'no pair list at all').toBe(null);
     expect(facePartner(POWERED, 1), 'no roster: the tavern is not eligible').toBe(null);
-    // Every kind pairs the same way at this car; the kind is data the composer carries.
-    for (const kind of PAIR_KINDS) {
+    // Every READING kind pairs the same way; the kind is data the composer carries.
+    for (const kind of PAIR_KINDS.filter((k) => k !== WEIGH_KIND)) {
       const v = { text: 'a', wordings: ['b', 'c'], sources: [null, 'hall', 'court'], pairs: [null, { id: 7, kind }, { id: 7, kind }] };
       expect(facePartner(v, 1, new Set(['hall', 'court'])), kind).toBe(2);
     }
+    // ⛔ A WEIGH IS NOT HALF OF A PAIR (car 8b-W-18i): asked from either side, it answers null,
+    // so no caller holding a face index of its own can turn the archiver into a partner.
+    const weighed = {
+      text: 'The walls stand.',
+      wordings: ['The hall has it kept.', 'The tavern says nobody stands on it.', 'It may be that both are describing the same week.'],
+      sources: [null, 'hall', 'tavern', ARCHIVER_SOURCE],
+      pairs: [null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, { id: 1, kind: WEIGH_KIND }],
+    };
+    const town = new Set(['hall', 'tavern']);
+    expect(facePartner(weighed, 3, town), 'the weigh row has no partner').toBe(null);
+    expect(facePartner(weighed, 1, town), 'and the hall\'s partner is still the tavern, not the archiver').toBe(2);
+    expect(facePartner(weighed, 2, town)).toBe(1);
+  });
+
+  it('⭐ THE ARCHIVER NEVER DRAWS ALONE — excluded from every eligible list, on every roster (ruling 22; car 8b-W-18i)', () => {
+    const weighed = {
+      text: 'The walls stand.',
+      wordings: ['The hall has it kept.', 'The tavern says nobody stands on it.', 'It may be that both are describing the same week.'],
+      sources: [null, 'hall', 'tavern', ARCHIVER_SOURCE],
+      pairs: [null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, { id: 1, kind: WEIGH_KIND }],
+    };
+    // Face 3 is in NO eligible list — not the full vocabulary's, not a roster that names the
+    // archiver outright (no town's roster ever does; `sourcesOf` cannot emit it).
+    expect(eligibleFaces(weighed, new Set(FACE_SOURCES))).toEqual([0, 1, 2]);
+    expect(eligibleFaces(weighed, new Set(['stranger', 'hall', 'tavern', ARCHIVER_SOURCE])))
+      .toEqual([0, 1, 2]);
+    expect(eligibleFaces(weighed, new Set(['hall']))).toEqual([0, 1]);
+    expect(eligibleFaces(weighed, undefined), 'no roster: the spine alone').toEqual([0]);
+    // And so the draw can never land on it, on any seed.
+    const drawn = new Set(SEEDS.map((seed) => drawFace(weighed, 'B', 'P', seed, new Set(FACE_SOURCES))));
+    expect([...drawn].sort(), 'every face the draw ever reaches').toEqual([0, 1, 2]);
+    expect(drawn.has(3), 'the archiver is never drawn').toBe(false);
+    // ⛔ THE ONE DOOR IT HAS. `faceWeigh` finds it from either half, and takes no roster.
+    expect(faceWeigh(weighed, 1)).toBe(3);
+    expect(faceWeigh(weighed, 2)).toBe(3);
+    expect(faceWeigh(weighed, 0), 'an unpaired face weighs nothing').toBe(null);
+    expect(faceWeigh(weighed, 3), 'and the weigh row does not weigh itself').toBe(null);
+    // ⛔ NOT ON AN `aside` OR A `view` — the leaf's own side of the grammar's refusal.
+    for (const kind of ['aside', 'view']) {
+      const v = { ...weighed, pairs: [null, { id: 1, kind }, { id: 1, kind }, { id: 1, kind: WEIGH_KIND }] };
+      expect(faceWeigh(v, 1), kind).toBe(null);
+    }
+    // ⛔ NOT WHERE THE ROW IS NOT THE ARCHIVER'S, and not where no row carries the mark.
+    expect(faceWeigh({ ...weighed, sources: [null, 'hall', 'tavern', 'court'] }, 1)).toBe(null);
+    expect(faceWeigh({ ...weighed, pairs: [null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null] }, 1)).toBe(null);
+    expect(faceWeigh(POWERED, 1), 'a variant with no weigh row at all').toBe(null);
+    expect(faceWeigh(UNSOURCED, 1), 'no pair list at all').toBe(null);
+    expect(faceWeigh(null, 0)).toBe(null);
   });
 
   it('⭐ THE SHIPPED CORPUS CARRIES NO SOURCED FACE AND NO PAIR — the zero-shift ground, read live', () => {

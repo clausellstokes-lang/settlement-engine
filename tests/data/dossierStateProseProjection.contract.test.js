@@ -38,7 +38,9 @@ import {
   endpointReads, isDeclarationLine, kinSpines, parseConnectives, parseFaceRow, readDeclarations, seatMeta,
   seatOf, turnKeyStanding, vidsOf, FACE_ROW_RE, FACE_TAG_RE,
 } from '../../scripts/lib/dossier-annex-grammar.mjs';
-import { FACE_SOURCES, PAIR_KINDS } from '../../src/domain/display/stateProse/stateProseKernel.js';
+import {
+  ARCHIVER_SOURCE, FACE_SOURCES, PAIR_JOINTS, PAIR_KINDS, WEIGH_KIND,
+} from '../../src/domain/display/stateProse/stateProseKernel.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { COVERT_SOURCES } from '../../src/domain/prose/wiringCensus.js';
 // ⭐ THE ESTATE'S ONE STOP LIST, driven here exactly as the projector drives it (REWRITE car
@@ -1210,6 +1212,16 @@ describe('SEAM car 4 — the SHIFT REGISTER, printed and every pin recomputed (A
         // comparator has an input it did not have before — which is exactly a declared row.
         META_ROWS.filter((r) => Array.isArray(r.meta.kin) && r.meta.kin.length > 0).length,
       ],
+      // ⭐ THE PAIR'S JOINTS (ADDENDUM 18 ruling 23; car 8b-W-18i). Indices 0 and 1 are the two
+      // `source` pins, which the loop returns on before it reads this table — hence the two
+      // deliberate holes. Index 2 recomputes the kind-to-joint table from the KERNEL's own
+      // export, so a car that re-worded a joint, dropped the full stop out of a list or moved
+      // it off the end of one reds here naming the mechanism.
+      'pair-joint': [
+        undefined,
+        undefined,
+        Object.fromEntries(Object.entries(PAIR_JOINTS).map(([kind, list]) => [kind, [...list]])),
+      ],
       'fact-and-position-budget': [{ ...COMPOSITION_BOUNDS }],
       'registry-id': [META_ROWS.filter((r) => r.meta.role === 'turn').length],
       // ⛔ A NON-MECHANISM WITH A PIN (SEAM car 5c, SITTING §R cure 4). `seat` was the one
@@ -1794,13 +1806,20 @@ describe('SEAM car 4 — §2.5\'s grammar, and every refusal it declares', () =>
     // The pair, with its KIND (the owner's refinement, 2026-09-13).
     expect(parseFaceRow('`[tavern · pair 1 · disagree]` Nobody stands on it, says the tavern.', 'x'))
       .toEqual({ text: 'Nobody stands on it, says the tavern.', source: 'tavern', pair: { id: 1, kind: 'disagree' } });
-    for (const kind of PAIR_KINDS) {
+    for (const kind of PAIR_KINDS.filter((k) => k !== WEIGH_KIND)) {
       expect(parseFaceRow(`\`[watch · pair 3 · ${kind}]\` text`, 'x').pair).toEqual({ id: 3, kind });
     }
+    // ⭐ THE FIFTH KIND IS THE ARCHIVER'S AND ONLY THE ARCHIVER'S (car 8b-W-18i).
+    expect(parseFaceRow(`\`[${ARCHIVER_SOURCE} · pair 3 · ${WEIGH_KIND}]\` It may be that both are right.`, 'x'))
+      .toEqual({ text: 'It may be that both are right.', source: ARCHIVER_SOURCE, pair: { id: 3, kind: WEIGH_KIND } });
     expect(FACE_TAG_RE.test('`[hall]` text')).toBe(true);
     expect(FACE_TAG_RE.test('The hall text')).toBe(false);
     // Every word of the vocabulary parses; the vocabulary is the kernel's, not a copy.
-    for (const source of FACE_SOURCES) expect(parseFaceRow(`\`[${source}]\` t`, 'x').source).toBe(source);
+    // Every POWER parses bare. The thirteenth word is not a power: a bare `archiver` tag is
+    // refused, and its own arm below drives that (car 8b-W-18i).
+    for (const source of FACE_SOURCES.filter((s) => s !== ARCHIVER_SOURCE)) {
+      expect(parseFaceRow(`\`[${source}]\` t`, 'x').source).toBe(source);
+    }
     // ⛔ REFUSALS, each naming what a writer needs to read.
     expect(() => parseFaceRow('`[guilds]` t', 'L')).toThrow(/L: .*`guilds`.*not a power of the town.*stranger · elders · hall · tavern · guild · register · muster · watch · garrison · gate · market · court/);
     expect(() => parseFaceRow('`[ledger]` t', 'L'), 'an angle tag in the source slot is refused, loudly').toThrow(/not a power of the town/);
@@ -1838,6 +1857,78 @@ describe('SEAM car 4 — §2.5\'s grammar, and every refusal it declares', () =>
     // Unpaired sourced faces are lawful on either form.
     expect(() => assertFaces({ ...base, pairs: [null, null] })).not.toThrow();
     expect(() => assertFaces({ ...base, form: 'fragment', faces: ['thin', 'thinner'], pairs: [null, null] })).not.toThrow();
+  });
+
+  it('⭐ THE ARCHIVER\'S WEIGHING ROW — the tag parses at the row, and every refusal names what a writer must read (ADDENDUM 18 ruling 22; car 8b-W-18i)', () => {
+    // ── THE ROW-LOCAL REFUSALS (`parseFaceRow`), taken where the writer can see the line ───
+    // A weigh on a power, and a power's mark on the archiver, are both decidable from ONE tag.
+    expect(() => parseFaceRow(`\`[tavern · pair 1 · ${WEIGH_KIND}]\` t`, 'L'))
+      .toThrow(/L: .*marks pair 1 `weigh` but speaks for `tavern`.*ARCHIVER'S one sentence closing a pair/);
+    expect(() => parseFaceRow(`\`[${ARCHIVER_SOURCE} · pair 1 · disagree]\` t`, 'L'))
+      .toThrow(/not a power of the town and never half of a pair; the only mark it takes is `weigh`/);
+    expect(() => parseFaceRow(`\`[${ARCHIVER_SOURCE}]\` It may be that both are right.`, 'L'))
+      .toThrow(/with no pair.*CLOSES a pair and never stands alone/);
+
+    // ── THE LEAF-SIDE REFUSALS (`assertFaces`), which a leaf projected elsewhere still meets ─
+    const lawful = {
+      label: 'w',
+      parent: { angle: 'plain', text: 'the walls stand', slots: [] },
+      faces: [
+        'The hall has the circuit kept.',
+        'The tavern says nobody stands on it.',
+        'It may be that the two are describing different weeks.',
+      ],
+      sources: ['hall', 'tavern', ARCHIVER_SOURCE],
+      pairs: [{ id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, { id: 1, kind: WEIGH_KIND }],
+      pinnedFaceCount: 1 + FACE_SOURCES.length,
+      shapeOf: () => 'bare-common',
+      clauseOpeners: ['and', 'so'],
+      form: 'sentence',
+    };
+    expect(() => assertFaces(lawful), 'two halves and one weighing: lawful').not.toThrow();
+    expect(() => assertFaces({ ...lawful, pairs: [{ id: 1, kind: 'reinforce' }, { id: 1, kind: 'reinforce' }, { id: 1, kind: WEIGH_KIND }] }),
+      'a reinforce may be weighed too').not.toThrow();
+    // ⛔ A WEIGH ON AN ASIDE OR A VIEW — neither leaves anything to weigh.
+    for (const kind of ['aside', 'view']) {
+      expect(() => assertFaces({ ...lawful, pairs: [{ id: 1, kind }, { id: 1, kind }, { id: 1, kind: WEIGH_KIND }] }), kind)
+        .toThrow(new RegExp(`pair 1 is a \`${kind}\` and carries a weighing row`));
+    }
+    // ⛔ A SECOND WEIGH ON ONE PAIR — the archiver speaks once, or not at all.
+    expect(() => assertFaces({
+      ...lawful,
+      faces: [...lawful.faces, 'Or the hall is simply behind on its filing.'],
+      sources: [...lawful.sources, ARCHIVER_SOURCE],
+      pairs: [...lawful.pairs, { id: 1, kind: WEIGH_KIND }],
+    })).toThrow(/pair 1 carries 2 weighing rows.*speaks ONCE/);
+    // ⛔ A WEIGH WITH NO PAIR — an id no two halves carry.
+    expect(() => assertFaces({ ...lawful, pairs: [null, null, { id: 4, kind: WEIGH_KIND }] }))
+      .toThrow(/pair 4 carries a weighing row and NO pair to weigh/);
+    // ⛔ A WEIGH THAT IS NOT THE ARCHIVER'S, AND AN ARCHIVER THAT IS NOT A WEIGH.
+    expect(() => assertFaces({ ...lawful, sources: ['hall', 'tavern', 'court'] }))
+      .toThrow(/face 3 is marked `weigh` but speaks for `court`/);
+    expect(() => assertFaces({ ...lawful, pairs: [{ id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null] }))
+      .toThrow(/face 3 speaks for the `archiver` and is not a `weigh`/);
+    // ⛔ MORE THAN ONE SENTENCE IN THE ARCHIVER'S HAND — three in the unit at most.
+    expect(() => assertFaces({
+      ...lawful,
+      faces: [...lawful.faces.slice(0, 2), 'It may be that the two describe different weeks. The hall is behind on its filing.'],
+    })).toThrow(/face 3 weighs pair 1 in 2 sentences.*ONE sentence/);
+    // ⛔ AND THE ELLIPSIS IS NOT A STOP — the counter is the kernel's, so §7's own device in
+    // the archiver's hand does not read as two sentences and is not refused.
+    expect(() => assertFaces({
+      ...lawful,
+      faces: [...lawful.faces.slice(0, 2), 'It may be that the two describe different weeks… or that one of them is wrong.'],
+    })).not.toThrow();
+    // ⛔ THE PAIR ITSELF IS STILL EXACTLY TWO HALVES: the weighing does not make it three.
+    expect(() => assertFaces({
+      ...lawful,
+      faces: [...lawful.faces, 'The watch says the walk is not in the record.'],
+      sources: [...lawful.sources, 'watch'],
+      pairs: [...lawful.pairs, { id: 1, kind: 'disagree' }],
+    })).toThrow(/pair 1 is carried by 3 face/);
+    // ⛔ AND THE WEIGHING COUNTS AGAINST THE FACE PIN like any other face (car 8b-W-18j's
+    // ceiling is what lets a full pool carry one at all).
+    expect(() => assertFaces({ ...lawful, pinnedFaceCount: 3 })).toThrow(/against a pin of 3/);
   });
 
   it('the shipped leaves carry no `sources` and no `pairs` on any variant — the zero-shift ground of car 8b-W-18c', () => {
