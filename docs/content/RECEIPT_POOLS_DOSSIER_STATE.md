@@ -2639,9 +2639,18 @@ supplies the ancestry.
 3. `[unfolding]` What {settlement} has would hold against the first thing and is unlikely to hold against the second, and nothing in hand changes that.
 
 **`Invasion & War`: walls with NO force**
-1. `[ledger]` {settlement} has walls and nobody to put on them. A determined attacker takes this town with ladders and patience, and requires nothing else.
-2. `[visitor]` A stranger at {settlement} sees a serious perimeter and a serious absence of anyone standing in it.
-3. `[street]` The town has the thing that would save it and not the people who would use it, and says so when pressed.
+1. `[ledger]` The survey finds the walls at {settlement} kept and no force under arms behind them. Entered here as kept.
+   - `[face]` `[elders]` The custom the elders keep says which households owe work on the walls. It says nothing about who is owed for it.
+   - `[face]` `[hall · pair 1 · disagree]` The hall holds that the walls are kept out of the military purse and that the keeping is not in dispute.
+   - `[face]` `[guild · pair 1 · disagree]` The guilds hold that they pay into the purse that keeps the walls and that no garrison came of it.
+2. `[visitor]` The stranger reports the walls kept and no force under arms behind them. The survey finds the same and enters it.
+   - `[face]` `[stranger]` A traveller found a stair up to the walk with somebody's stores stacked on it.
+   - `[face]` `[tavern]` At the tavern the stranger was given one account of what the walls are for, and then another from further along the table.
+   - `[face]` `[gate]` The stranger was stopped at the bar and asked his business before he was let through. Nobody who asked him was under arms.
+3. `[street]` The households hold that keeping the walls up is their own work. The survey finds the walls kept and no force under arms.
+   - `[face]` `[elders]` Among the elders the walls are a boundary before they are anything else, and where the line runs is the older argument.
+   - `[face]` `[watch]` The watch says the keeping the hall enters is not the same thing as the walk they keep, and that the difference falls on them.
+   - `[face]` `[court]` The matters that reach the court about the walls are about who owes the work on them. None of them are about who would hold them.
 
 **`Invasion & War`: force with NO walls**
 1. `[ledger]` {settlement} keeps a professional force and no perimeter. It answers raiders well and cannot hold a siege, because there is nothing here to hold.

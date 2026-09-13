@@ -603,25 +603,68 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "Invasion & War: walls with NO force": [
         {
           "angle": "ledger",
-          "text": "{settlement} has walls and nobody to put on them. A determined attacker takes this town with ladders and patience, and requires nothing else.",
+          "text": "The survey finds the walls at {settlement} kept and no force under arms behind them. Entered here as kept.",
           "slots": [
             "settlement"
           ],
-          "vid": 1
+          "vid": 1,
+          "wordings": [
+            "The custom the elders keep says which households owe work on the walls. It says nothing about who is owed for it.",
+            "The hall holds that the walls are kept out of the military purse and that the keeping is not in dispute.",
+            "The guilds hold that they pay into the purse that keeps the walls and that no garrison came of it."
+          ],
+          "sources": [
+            null,
+            "elders",
+            "hall",
+            "guild"
+          ],
+          "pairs": [
+            null,
+            null,
+            {
+              "id": 1,
+              "kind": "disagree"
+            },
+            {
+              "id": 1,
+              "kind": "disagree"
+            }
+          ]
         },
         {
           "angle": "visitor",
-          "text": "A stranger at {settlement} sees a serious perimeter and a serious absence of anyone standing in it.",
-          "slots": [
-            "settlement"
+          "text": "The stranger reports the walls kept and no force under arms behind them. The survey finds the same and enters it.",
+          "slots": [],
+          "vid": 2,
+          "wordings": [
+            "A traveller found a stair up to the walk with somebody's stores stacked on it.",
+            "At the tavern the stranger was given one account of what the walls are for, and then another from further along the table.",
+            "The stranger was stopped at the bar and asked his business before he was let through. Nobody who asked him was under arms."
           ],
-          "vid": 2
+          "sources": [
+            null,
+            "stranger",
+            "tavern",
+            "gate"
+          ]
         },
         {
           "angle": "street",
-          "text": "The town has the thing that would save it and not the people who would use it, and says so when pressed.",
+          "text": "The households hold that keeping the walls up is their own work. The survey finds the walls kept and no force under arms.",
           "slots": [],
-          "vid": 3
+          "vid": 3,
+          "wordings": [
+            "Among the elders the walls are a boundary before they are anything else, and where the line runs is the older argument.",
+            "The watch says the keeping the hall enters is not the same thing as the walk they keep, and that the difference falls on them.",
+            "The matters that reach the court about the walls are about who owes the work on them. None of them are about who would hold them."
+          ],
+          "sources": [
+            null,
+            "elders",
+            "watch",
+            "court"
+          ]
         }
       ],
       "Invasion & War: force with NO walls": [
@@ -1164,9 +1207,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         "role": "spine",
         "variantCount": 3,
         "faceCounts": [
-          1,
-          1,
-          1
+          4,
+          4,
+          4
         ],
         "vids": [
           1,
