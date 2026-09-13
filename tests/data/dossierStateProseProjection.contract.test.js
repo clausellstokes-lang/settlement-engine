@@ -2043,7 +2043,12 @@ describe('SEAM car 4 — §2.5\'s grammar, and every refusal it declares', () =>
       pairs: [null, null, null, null, { id: 1, kind: 'view' }, { id: 1, kind: 'view' }],
     },
     'DS-DEF-2 :: Invasion & War: walls AND professional garrison #1': {
-      sources: [null, 'gate', 'hall', 'court', 'stranger', 'elders'],
+      // ⭐ RE-PINNED AT THE 8b DS-DEF-2 CURE GATE (v3): face 5 moved `elders` -> `tavern`. The
+      // cure's one target — `elders` seats on thorp/hamlet/village ALONE (`ELDER_TIERS` in
+      // `faceSources.js`), so the face drew on no preimage town of this pool; `tavern` seats on
+      // every tier, and V2 now draws five faces where it drew four. The SENTENCE is the
+      // writer's, carried across unchanged but for its attribution.
+      sources: [null, 'gate', 'hall', 'court', 'stranger', 'tavern'],
       pairs: [null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null, null, null],
     },
     'DS-DEF-2 :: Invasion & War: walls AND professional garrison #2': {

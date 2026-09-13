@@ -395,7 +395,28 @@ describe('⭐ THE BASE-SIDE SYNTHESIS — every recorded cell, against the compo
         'Internal Security: full legal chain (court AND prison)',
         'Internal Security: no legal infrastructure',
         'Invasion & War: walls AND professional garrison']);
-    expect(blind.length, 'and the blind spot is the size the gate measured').toBe(2080);
+    // ⭐⭐ RE-PINNED AT THE 8b DS-DEF-2 CURE GATE (v3), AND THE BLIND SPOT NARROWED — 2080 -> 1858.
+    // The fall is the CURE'S OWN and it is measured, not assumed (`driftRun` piece-count
+    // histogram, per pool, read at this head and at d57c601cf2768804c143c36ef2833159c62e58eb):
+    //   Economic Survival: STRONG                       520 -> 408   npieces {1:520} -> {1:408, 3:112}
+    //   Disasters & Famine: granary AND hospital        176 ->  64   npieces {1:176,2:224} -> {1:64,2:336}
+    //   Internal Security: full legal chain             490 -> 486   npieces {1:492} unchanged
+    //   Invasion & War: walls AND professional garrison 390 -> 396   npieces {1:394,2:4} -> {1:396,2:2}
+    //   Internal Security: no legal infrastructure      504 -> 504   (not a pool of this gate)
+    // WHAT MOVED, AND WHY IT IS A NARROWING AND NOT A LOOSENING: in the two pools that fell by
+    // 112 each, units that used to compose as ONE piece now compose as a PAIR (and, in
+    // `Economic Survival: STRONG`, a pair PLUS the archiver's weighing — 3 pieces). At the old
+    // head that pool rendered {1:520}: the pair and its weighing reached the page on NO cell of
+    // the DRIFT corpus. The cure's rewrite of the weighing sentence is what made them render,
+    // so the recorder can now read the composer's pieces instead of failing to match a face
+    // against a spine template. The instrument SEES MORE than it did, which is why the carve-out
+    // shrank. The +6 on `Invasion & War` is the same mechanism in the other direction and is the
+    // cure's one target: face 5 moved `elders` -> `tavern`, `elders` seats on thorp/hamlet/village
+    // alone, and two units that used to pair now draw a face instead.
+    // ⛔ THE ARM THAT GUARDS CORRECTNESS IS UNTOUCHED AND STILL GREEN: `real.length` is 0, so no
+    // cell anywhere is a coordinate DISAGREEMENT, and the blind pool SET above is unchanged — no
+    // pool went blind that was not already named. Only the carve-out's SIZE moved.
+    expect(blind.length, 'and the blind spot is the size the gate measured').toBe(1858);
     expect(checked, 'the whole recorded table').toBe(run.cells.length);
     expect(run.rows.size, 'and the table is the full DRIFT corpus').toBe(1050);
     // NON-VACUITY OF THE RE-PIN: the DRIFT run really does reach the one faced pool, and

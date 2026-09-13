@@ -1474,7 +1474,11 @@ describe('the state-prose reader — ONE FACE PER POWER: the source filter and t
       [null, 'stranger', 'gate', 'register', 'hall', 'watch', 'tavern', 'garrison', 'guild', 'market', 'court', 'elders'], 
       [null, 'market', 'register', 'gate', 'court', 'muster', 'tavern', 'garrison', 'guild', 'hall', 'elders'], 
       [null, 'guild', 'market', 'tavern', 'hall', 'gate'], 
-      [null, 'gate', 'hall', 'court', 'stranger', 'elders'], 
+      // ⭐ RE-PINNED AT THE 8b DS-DEF-2 CURE GATE (v3): `Invasion & War: walls AND professional
+      // garrison` #1 face 5 moved `elders` -> `tavern`, the cure's one target. `elders` seats on
+      // thorp/hamlet/village ALONE, so the face drew on no preimage town of this pool; `tavern`
+      // seats on every tier. A MOUTH moved, not a face count: the row below is one word wide.
+      [null, 'gate', 'hall', 'court', 'stranger', 'tavern'], 
       [null, 'stranger', 'tavern', 'register', 'garrison', 'watch'], 
       [null, 'elders', 'hall', 'guild'], 
       [null, 'stranger', 'tavern', 'gate', 'archiver'], 
