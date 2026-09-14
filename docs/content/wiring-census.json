@@ -1368,7 +1368,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [
         {
           "field": "invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)",
@@ -39490,7 +39490,7 @@
         "DS-DEF-2 :: Invasion & War: neither walls nor force"
       ],
       "variants": 18,
-      "grammars": 13,
+      "grammars": 12,
       "blocks": [
         "DS-DEF-2"
       ]
@@ -48350,7 +48350,7 @@
         "invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)"
       ],
       "readingFunction": "INVASION_ROW_POOL",
-      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",

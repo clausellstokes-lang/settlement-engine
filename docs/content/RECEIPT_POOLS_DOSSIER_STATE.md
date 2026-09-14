@@ -2631,38 +2631,38 @@ supplies the ancestry.
 1. `[ledger]` The country around {settlement} is thick with creatures. There is a line around the town and there are people who stand it.
    - `[face]` `[gate]` Those who hold the way through say the hooked pole kept by the bar is for pulling a thing off the road, and that it is not for using on a person.
    - `[face]` `[stranger]` A traveller says the line looked well kept, and that the first person he asked what it cost changed the subject.
-   - `[face]` `[muster]` The ground outside is cut back by the same people who stand above it, the muster says, and none of that cutting is counted as standing.
+   - `[face]` `[muster]` The ground outside is cut back by the same people who stand above it, the muster says, and the cutting counts as the household's own work.
    - `[face]` `[hall · pair 1 · disagree]` A clerk in the hall says the people who complain hardest about the purse are the people who put least into it.
    - `[face]` `[guild · pair 1 · disagree]` A guild factor says the purse is filled by the trades before anybody in the hall decides how it is spent.
-   - `[face]` `[tavern]` At the tavern a carter says the ones who come in off the walk stand by the door and are not asked what they saw.
-   - `[face]` `[register]` Whoever buries the dead says the ground fills from the outlying work and not from the line.
-   - `[face]` `[garrison]` One of the garrison says the people who decide what the purse does have not stood a night on the line.
-   - `[face]` `[court]` The line reaches the court as a debt between households and never as a matter of the town's, by the court's own account.
+   - `[face]` `[tavern]` At the tavern a carter says the ones who come in off the walk stand by the door, and that the talk in the room goes on around them.
+   - `[face]` `[register]` Whoever buries the dead says the ground fills from the outlying work, where people are at their own labour and alone.
+   - `[face]` `[garrison]` One of the garrison says what the purse does is decided by people whose nights are their own.
+   - `[face]` `[court]` What reaches the court off the line is a debt between households, by the court's own account.
    - `[face]` `[market]` Stallholders say goods from outside are looked over at the way through and priced after, and that the looking is done before the stalls go up.
-   - `[face]` `[elders]` The elders say the turn goes round the households and is settled between them. A day stood on the line is a day the field does not get back.
+   - `[face]` `[elders]` The elders have it that the turn goes round the households and is settled between them. A day stood on the line is a day the field does not get back.
 2. `[street]` Everyone in the town has seen the line kept and somebody standing on it, and the town takes it for ordinary work.
-   - `[face]` `[gate · pair 3 · disagree]` Those who hold the way through say the trouble at the bar comes from late carts and not from the country.
+   - `[face]` `[gate · pair 3 · disagree]` Those who hold the way through say the trouble at the bar is a matter of late carts and the people driving them.
    - `[face]` `[tavern · pair 3 · disagree]` At the tavern they say what comes to the bar late is not always a cart.
-   - `[face]` `[stranger]` A traveller says he was looked over at the way through by people who did not stop talking to each other while they did it.
-   - `[face]` `[register]` Whoever buries the dead says the burials the country causes are done in the same hours as any other.
-   - `[face]` `[muster]` Nobody here asks a person going out after dark where they are going, the muster says.
-   - `[face]` `[watch]` One of the watch says the round is walked the same way whatever the country is doing, and that nobody has asked whether it should be.
+   - `[face]` `[stranger]` A traveller says the people at the way through looked him over and went on with their talk.
+   - `[face]` `[register]` The burials the country causes are done in the same hours as any other, whoever buries the dead says.
+   - `[face]` `[muster]` The muster says whoever goes up is whoever the household could spare that day.
+   - `[face]` `[watch]` One of the watch says the walk above the gate belongs to whoever stands it, and the round goes under it.
    - `[face]` `[guild]` A guild factor holds that the apprentices learn the hours of the way through before they learn much of the trade.
-   - `[face]` `[hall]` Nothing about the line has come to the hall in a form that needed a decision, a clerk in the hall says.
-   - `[face]` `[market]` Stallholders say the day's trade is finished while there is light, and that nobody here calls that early.
-   - `[face]` `[elders]` The elders say people go up in the clothes they were working in and go back to the work after.
+   - `[face]` `[hall]` The works come to the hall the way the water does, a clerk in the hall says.
+   - `[face]` `[market]` Stallholders say the day's trade is finished while there is light, and that the buyers mean to be home before dusk.
+   - `[face]` `[elders]` People go up in the clothes they were working in and go back to the work after, the elders have it.
 3. `[unfolding]` The line holds because people are standing on it, and anyone standing on it is somebody who is not anywhere else that night, those who hold the way through say.
-   - `[face]` `[stranger]` A traveller says everyone here could name the people who hold the line, and that nobody could say who holds it when those people are wanted elsewhere.
+   - `[face]` `[stranger]` A traveller says people here name what is in the country as readily as they name their own work.
    - `[face]` `[muster]` The muster says it can be on the line or at its own work, and that the town asks for both on the same day.
-   - `[face]` `[guild]` What the line costs the trades is counted by the trades and by nobody else, a guild factor says.
+   - `[face]` `[guild]` What the line costs the trades is carried by them and talked of in the trade, a guild factor says.
    - `[face]` `[hall · pair 6 · disagree]` A clerk in the hall says the purse carries the line and the people on it alike, and that the town has never been asked to choose between them.
-   - `[face]` `[garrison · pair 6 · disagree]` One of the garrison says the choosing is done on any night two things come at once, and that it is not done in the hall.
+   - `[face]` `[garrison · pair 6 · disagree]` The choosing is done on any night two things come at once, one of the garrison says, and it is done on the walk.
    - `[face]` `[market]` The goods that come in late come in by leave, stallholders say, and the leave is somebody's to give.
    - `[face]` `[watch]` One of the watch holds that the round covers what it covers, and that the parts it does not cover are known to the people who live on them.
    - `[face]` `[register]` Whoever buries the dead says the ones the country takes are brought in by the people who were standing nearest, and those people go back out after.
    - `[face]` `[tavern]` At the tavern they say the town is one bad night from finding out, and nobody there says what it would find out.
-   - `[face]` `[court]` The court says the matters that reach it from the line arrive after the night is over and never during it.
-   - `[face]` `[elders]` The elders say the households find somebody to send, and what the finding costs a household is its own business.
+   - `[face]` `[court]` The court says the matters that reach it from the line arrive in daylight, after the people who were standing have gone home.
+   - `[face]` `[elders]` The elders have it that the households find somebody to send, and that what the finding costs a household is its own business.
 
 **`Beasts & Monsters`: `plagued`, perimeter but NO force to hold it**
 1. `[ledger]` The works around {settlement} are kept up. No garrison and no militia stand behind them, and the country outside is thick with creatures.
@@ -2699,30 +2699,30 @@ supplies the ancestry.
 
 **`Beasts & Monsters`: `plagued`, NO perimeter and NO force**
 1. `[ledger]` The country around {settlement} is thick with creatures. The town keeps no wall against it, and no soldier of its own stands between the country and the doors.
-   - `[face]` `[hall · pair 1 · disagree]` A clerk in the hall says the watch is paid what the town can pay, and that what lies outside the houses is nobody's charge.
-   - `[face]` `[watch · pair 1 · disagree]` One of the watch puts it that what lies outside the houses is charged to whoever is out in it after dark, and that his pay was set by people who are not.
-   - `[face]` `[tavern]` At the tavern a carter says the ones who go out when something is heard are the ones with the least between them and the country, and that they go out carrying whatever was by the door.
-   - `[face]` `[elders]` The elders say the house nearest the open country is owed a hand from the houses behind it, and that the owing has never been put to anybody in words.
-   - `[face]` `[register]` A local priest holds that those the country takes are buried on the same terms as everyone else, and that no household has asked for ground of its own.
-   - `[face]` `[stranger]` A drover says he came in by the cart road with his own lamp still lit, and that the first person to speak to him was the one who gave him a bed.
+   - `[face]` `[hall · pair 1 · disagree]` A clerk in the hall says the wage covers the walk between the houses.
+   - `[face]` `[watch · pair 1 · disagree]` One of the watch says the door he is called to is the last one on the road.
+   - `[face]` `[tavern]` The ones who go out when something is heard are the ones with the least between them and the country, they say at the tavern, and they go with whatever was by the door.
+   - `[face]` `[elders]` The house at the end of the road sends its children in first, one of the elders says, and the houses behind it take that for the hour.
+   - `[face]` `[register]` Those the country takes are carried in by whoever finds them, a local priest says, and whoever finds them says the words.
+   - `[face]` `[stranger]` A traveller says he came in by the road with his own lamp still lit, and that the first person to speak to him was the one who gave him a bed.
 2. `[street]` Everyone here can name the last house on each road out, and the place counts those houses the edge and thinks no further about it.
-   - `[face]` `[market]` The stallholders say the pitches nearest the road are the last ones taken, and that nobody at the market gives the reason.
-   - `[face]` `[hall]` A clerk in the hall says the purse pays the mill, the water and the burying before it pays anything else, and that the households that fill it would not thank the hall for a different order.
-   - `[face]` `[court]` The court holds that a household may be brought before it for a hand not given and cannot be made to give one.
-   - `[face]` `[tavern]` At the tavern a carter has it that a man who drinks late walks home on his own, and that nobody here counts that worth remarking.
-   - `[face]` `[elders]` A door left on the latch is a door somebody means to come back to, one of the elders says, and here the latch is the whole of it.
-   - `[face]` `[watch]` One of the watch says the households on the outside send for him and the households on the inside settle what he is paid.
-   - `[face]` `[guild]` A guild factor reckons the trades are asked what they can spare toward the town's keeping and are never asked what the country already takes off them.
-   - `[face]` `[stranger]` A pedlar says nobody here warned him about the road out and everybody watched him take it.
-3. `[visitor]` A drover says the road runs into the place without changing under him, and that he was among the houses before he knew he had arrived.
-   - `[face]` `[market · pair 5 · reinforce]` The stallholders say a load brought in off the country is priced for the carrying and not for the goods.
-   - `[face]` `[guild · pair 5 · reinforce]` A guild factor says the trades pay that price at both ends of the road and count it as the town's charge on them.
-   - `[face]` `[watch]` One of the watch puts it that he hears of a stranger from the houses at the edge and hears of him last from the hall.
-   - `[face]` `[tavern]` At the tavern a carter says the talk stops when a stranger sits down and starts again when he asks about the country.
-   - `[face]` `[elders]` One of the elders says the stock comes in before the light goes and the dogs go out after it, and that nobody here calls either of those a watch.
-   - `[face]` `[register · pair 6 · aside]` A local priest holds that a stranger who dies on the road is buried at the town's cost and without anybody deciding it.
-   - `[face]` `[court · pair 6 · aside]` The court says it hears what one household claims of another and hears nothing at all of what happens outside the houses.
-   - `[face]` `[stranger]` A traveller says the first thing anybody here asked him was whether he had come by the road or off it.
+   - `[face]` `[market]` The people who trade here from outside come early, the stallholders say, and leave while the market is still full.
+   - `[face]` `[hall]` A clerk in the hall says the purse pays the mill, the water and the burying first, and that the households who fill it set that order.
+   - `[face]` `[court]` The court says a household can be brought before it for help it did not give, and the giving stays the household's own.
+   - `[face]` `[tavern]` They say at the tavern that a man who drinks late walks home on his own, and the last of the company sees him to his door.
+   - `[face]` `[elders]` The door of the last house stays on the latch until everyone is in, one of the elders says, and the one who comes in last drops the latch.
+   - `[face]` `[watch]` A lamp is left burning for him at the far end of the road, one of the watch says, and it is the house there that pays for the light.
+   - `[face]` `[guild]` A guild factor says the country takes its share of the trades on the road, and the town asks for its own at the market.
+   - `[face]` `[stranger]` A traveller says he was fed before anyone asked his business, and the same house showed him the road out.
+3. `[visitor]` A traveller says the road runs into the place without changing under him, and that he was among the houses before he knew he had arrived.
+   - `[face]` `[market · pair 5 · reinforce]` The stallholders say a load brought in off the country is priced for the carrying before it is priced for the goods.
+   - `[face]` `[guild · pair 5 · reinforce]` A guild factor says the trades pay that carrying at both ends of the road and count it the town's own charge on the trade.
+   - `[face]` `[watch]` The houses at the edge send him word of a stranger, one of the watch says, and he carries it to the hall.
+   - `[face]` `[tavern]` At the tavern they say the talk stops when a stranger sits down and starts again when he asks about the country.
+   - `[face]` `[elders]` One of the elders says the dogs are put out when the light goes, and that nobody here calls that a watch.
+   - `[face]` `[register · pair 6 · aside]` A stranger who dies on the road is buried at the town's cost, a local priest says, and in the ground the town keeps for its own.
+   - `[face]` `[court · pair 6 · aside]` The court says what it is asked to settle after a bad night is who took in whom, and at whose cost.
+   - `[face]` `[stranger]` The first thing a traveller is asked here, he says, is whether he came by the road or off it.
 
 **`Beasts & Monsters`: `frontier`, credible deterrence**
 1. `[ledger]` {settlement} sits on an active frontier with a line around it and a force behind the line. Most of what comes out of the country does not press a kept perimeter.
@@ -2801,42 +2801,42 @@ supplies the ancestry.
 
 **`Beasts & Monsters`: `settled`, defenses beyond the need**
 1. `[counterforce]` The country around {settlement} is quiet. The town keeps built work facing that country.
-   - `[face]` `[hall · pair 1 · disagree]` A clerk in the hall says the keeping is the whole town's charge and is borne by the whole town.
-   - `[face]` `[guild · pair 1 · disagree]` The guilds say openly that the trades bear it and the whole town is thanked for it.
-   - `[face]` `[stranger]` By a drover's account nothing on the road in gave him a reason for what the town has standing at the end of it.
-   - `[face]` `[court]` The court holds that nothing about the keeping comes before it except the question of who owes the work.
-   - `[face]` `[tavern]` At the tavern a carter says every household pays for the works, and no household could say what it has had for the money.
-   - `[face]` `[watch]` The watch says its round goes along the works and past a hen-coop somebody has built against them.
-   - `[face]` `[register]` A local priest holds that the town keeps its works better than it keeps its ground.
-   - `[face]` `[garrison]` The garrison says the boots it walks in wear out on the road and not on the works.
+   - `[face]` `[hall · pair 1 · disagree]` A clerk in the hall says the mending is the whole town's charge and comes round to every household in its turn.
+   - `[face]` `[guild · pair 1 · disagree]` A guild factor says the trades send the hands and the households send word that they are busy.
+   - `[face]` `[stranger]` By a pedlar's account the first thing the works showed him was a line of washing put out to dry.
+   - `[face]` `[court]` The court holds that the quarrels it hears here are between neighbours and about work owed.
+   - `[face]` `[tavern]` At the tavern a carter says every household pays for the works. Nobody at that table can say what the money buys.
+   - `[face]` `[watch]` One of the watch says the round goes along the works and round somebody's hen-coop.
+   - `[face]` `[register]` By the register's account the works get their mending before the burial ground gets its own.
+   - `[face]` `[garrison]` One of the garrison says the town is glad of soldiers it has no occasion to use. The town is short with them whenever the purse is counted.
    - `[face]` `[market]` At the market the best pitch is reckoned to be the one in the lee of the works, and it is spoken for before the stalls go up.
-   - `[face]` `[muster]` The muster says the tools it brings to the works are the ones it was using that morning, and that they go back to the same work after.
-   - `[face]` `[elders]` One of the elders says the keeping falls on the households that stand behind it and on nobody else, and that nobody now asks where the custom came from.
-   - `[face]` `[gate]` Whoever holds the way through says the bar is dropped at dusk, and that what it turns back is stock straying in off the road.
+   - `[face]` `[muster]` The muster says the tools it brings to the mending are the tools it uses for everything else.
+   - `[face]` `[elders]` One of the elders has it that a household mends the part of the works its door faces.
+   - `[face]` `[gate]` Whoever holds the way through says the bar goes down at dusk because it goes down at dusk, and that nobody asks for a better reason.
 2. `[ledger]` Settled country, and built work standing in it. One purse meets the keeping of that work and whatever else the town's defence costs.
-   - `[face]` `[hall · pair 1 · disagree]` A clerk in the hall says the keeping is met in full and in its turn.
-   - `[face]` `[tavern · pair 1 · disagree]` At the tavern a carter says the keeping is met last and by whoever can be made to do it.
+   - `[face]` `[hall · pair 1 · disagree]` A clerk in the hall says the keeping is met in its turn like every other charge the town carries.
+   - `[face]` `[tavern · pair 1 · disagree]` At the tavern a carter says the works are the last thing the purse comes round to and the first thing it is asked about.
    - `[face]` `[stranger]` By a traveller's account he was told what the works cost the town before he was told the town's name.
-   - `[face]` `[court]` The court says a household that lets its part of the mending go is brought before it by its neighbours and not by the town.
-   - `[face]` `[guild]` A guild factor holds that the keeping is a charge the trades meet and nobody at the hall calls it that.
-   - `[face]` `[market]` The stallholders say what the works cost comes off the stalls first and is explained to nobody.
+   - `[face]` `[court]` The court says a household that lets its part of the mending go answers for it to the households either side.
+   - `[face]` `[guild]` A guild factor says the purse takes from the trades first and answers to them last.
+   - `[face]` `[market]` The stallholders reckon the mending is the first call on the stalls. What becomes of the rest is the hall's business.
    - `[face]` `[watch]` One of the watch says the purse reaches the round late. The people who walk it make the difference up out of their own time.
-   - `[face]` `[register]` By the register's account the money for the ground has to be asked for and the money for the works does not.
-   - `[face]` `[garrison]` One of the garrison has it that the town is proud of its works and grudging about what it pays the soldiers standing beside them.
-   - `[face]` `[muster]` The muster says it costs the town nothing and is reminded of it.
-   - `[face]` `[gate]` Whoever holds the way through says what is taken at the bar pays for the keeping, and that no one paying it is told where it goes.
-   - `[face]` `[elders]` One of the elders takes it that the keeping is work owed and not work paid for, and that what is owed is written down nowhere.
+   - `[face]` `[register]` By the register's account the works come with their money found for them, and the ground comes with a letter to write.
+   - `[face]` `[garrison]` One of the garrison says the town speaks well of its works. The town says little about the soldiers' wage.
+   - `[face]` `[muster]` The muster has it that the calling is the whole of the arrangement.
+   - `[face]` `[gate]` Whoever holds the way through says the bar takes its share for the keeping, though nobody paying it is told as much.
+   - `[face]` `[elders]` One of the elders takes it that the households mend their own stretch without being asked, and that what is owed is written down nowhere.
 3. `[visitor]` A drover says he saw nothing on the road worth reporting and then came on the works.
-   - `[face]` `[tavern · pair 5 · disagree]` At the tavern they say a stranger's account of the road is worth a drink and is not believed.
-   - `[face]` `[watch · pair 5 · disagree]` The watch says a stranger's account of the road is the only report of the country it gets.
-   - `[face]` `[hall]` A clerk in the hall holds that the works are the town's own business and that a stranger asking after them is asking after the town's purse.
-   - `[face]` `[court]` The court says the works come before it as a boundary and not as a defence.
-   - `[face]` `[register]` By the register's account a stranger who dies on the road is buried by whoever carried him in, and the carrying is never argued over.
-   - `[face]` `[gate · pair 2 · reinforce]` Whoever holds the way through says the only people who look up at the works are the ones arriving.
-   - `[face]` `[market · pair 2 · reinforce]` The stallholders say the only people who stop in front of the works are the ones with nothing to buy.
-   - `[face]` `[guild]` A guild factor holds that the trades no longer argue the keeping and have not agreed to it either.
-   - `[face]` `[garrison]` The garrison has it that the soldiers are counted part of the town until the purse is counted.
-   - `[face]` `[muster]` One of the muster says they know their places well enough and have not been put in them.
+   - `[face]` `[tavern · pair 5 · disagree]` At the tavern a carter says a stranger's report of the country is worth a drink.
+   - `[face]` `[watch · pair 5 · disagree]` One of the watch says strangers bring the town its only news of the country.
+   - `[face]` `[hall]` A clerk in the hall holds that a stranger asking after the works is asking after the town's purse.
+   - `[face]` `[court]` The court holds that the works come before it as a boundary and not as a defence.
+   - `[face]` `[register]` By the register's account a stranger is buried by whoever brings him in, and the carrying is settled between neighbours.
+   - `[face]` `[gate · pair 2 · reinforce]` Whoever holds the way through says the same faces come through the bar and not one of them looks up.
+   - `[face]` `[market · pair 2 · reinforce]` The stallholders say a stranger asks about the works and a neighbour asks the price.
+   - `[face]` `[guild]` A guild factor holds that the trades pay the keeping, and that the hall takes their silence for consent.
+   - `[face]` `[garrison]` One of the garrison says the soldiers are counted part of the town until the purse is counted.
+   - `[face]` `[muster]` One of the muster says they know their places on the works, and that the knowing is the whole of what the town asks of them.
    - `[face]` `[elders]` The elders take it that the mending falls to the households that stand behind the works. The same households are the ones with least to spare for it.
 
 **`Beasts & Monsters`: `settled`, nothing organized**
@@ -2951,55 +2951,55 @@ supplies the ancestry.
 
 **`Invasion & War`: militia only**
 1. `[ledger]` No wall stands at {settlement} and no soldier of the town's own. The people who come out armed are the people who work the ground, and they come with their own tools.
-   - `[face]` `[muster]` One of the muster says he brings the tool he works with and takes it home wanting an edge.
-   - `[face]` `[market]` By a stallholder's account the day the muster comes out is a day the stalls stand half-tended, the same hands being wanted in both places.
-   - `[face]` `[stranger]` A drover says nobody meets the road here, and that a man is well into the houses before anybody looks up.
-   - `[face]` `[elders]` The man the town sends its questions to holds that the turns are fairly set, and does not say who set them.
-   - `[face]` `[tavern]` At the alehouse they say it is the same households out every time, and they can name them.
-   - `[face]` `[register]` A priest says the same hands carry the bier and stand the night, and that there are no other hands here to ask.
+   - `[face]` `[muster]` A billhook that goes out comes home wanting an edge, one of the muster puts it. The bench it is mended at is the owner's.
+   - `[face]` `[market]` On a day the muster is wanted the stalls stand half-tended, a stallholder says, and what does not sell that day does not keep.
+   - `[face]` `[stranger]` A pedlar reports that the people he passed here had a blade or a hook about them, and that none of them was dressed for a fight.
+   - `[face]` `[elders]` Whoever the town sends its questions to allows that the turns fall harder on some households than on others, and offers no account of how they came to be set.
+   - `[face]` `[tavern]` It is said at the alehouse that the same households turn out every time, and the drinkers there can put a name to each one that stays in.
+   - `[face]` `[register]` A priest says the bier is carried by the households that stand the night.
 2. `[street]` Everyone here has seen who comes out when the call goes up and who does not, and the town takes the turnout for its answer to trouble.
-   - `[face]` `[tavern · pair 2 · disagree]` At the alehouse they say the man who always comes out is owed a drink by the man who never does.
-   - `[face]` `[muster · pair 2 · disagree]` One of the muster says he is owed nothing and would take nothing, and that this is why he comes.
-   - `[face]` `[stranger]` A pedlar says that elsewhere he asks who keeps order at night, and here he is told which door to knock at and whose it is.
-   - `[face]` `[elders]` One of the elders says the man who stays in is not spoken to about it, and that his name goes nowhere because there is nowhere to put it.
-   - `[face]` `[market]` At the market a stallholder says the night a man stands is a morning somebody else keeps his stall.
-   - `[face]` `[register]` A priest says the households that come out are not the households that complain, and that he hears from both.
-3. `[visitor]` A drover says there is nothing here for a stranger to be stopped at, and that what stands between the place and trouble is whoever comes out of the houses.
-   - `[face]` `[muster · pair 3 · disagree]` One of the muster says a stranger is looked over by the whole place before he is a street in.
-   - `[face]` `[market · pair 3 · disagree]` A stallholder says nobody looks at a stranger here until he wants something bought or sold.
-   - `[face]` `[elders]` One of the elders says a stranger is asked his business at the table he is fed at and not before it.
-   - `[face]` `[register]` A priest says a stranger is counted a guest until somebody decides otherwise, and does not say who decides.
+   - `[face]` `[tavern · pair 2 · disagree]` At the alehouse it is held that a man who never takes his turn owes a drink to the neighbour who takes it instead.
+   - `[face]` `[muster · pair 2 · disagree]` Those who stand say that nothing is owed either way, and that a man takes his turn for his own household and for no other reason.
+   - `[face]` `[stranger]` A traveller says that elsewhere he asks who keeps order after dark, and here he is given a door to knock at.
+   - `[face]` `[elders]` The one the town sends to holds that a household that keeps its door shut is not spoken to about it, and that nothing is written against its name.
+   - `[face]` `[market]` By a stallholder's account a night spent standing costs the stall its morning.
+   - `[face]` `[register]` The sexton has it that the households that turn out are not the households that complain, and that he hears both at the same door.
+3. `[visitor]` A drover says there is nothing here for a stranger to be stopped at, and that whoever answers trouble here is at the day's work until somebody shouts.
+   - `[face]` `[muster · pair 3 · disagree]` The muster's view is that a stranger is asked after from one house to the next before he has spoken to anybody.
+   - `[face]` `[market · pair 3 · disagree]` A stallholder puts it that nobody here asks a stranger his business until he wants something bought or sold.
+   - `[face]` `[elders]` Whoever answers for the place says a stranger is fed before he is questioned.
+   - `[face]` `[register]` By a priest's telling a stranger who dies here is laid in the same ground as anybody born here.
 
 **`Invasion & War`: neither walls nor force**
-1. `[ledger]` {settlement} has nothing raised around it and no soldiers of its own. The households do what defending is done here, out of their own hours.
-   - `[face]` `[market]` The grain is the one thing here worth anybody's coming for, the stallholders say, and the town has never spent anything on standing over the grain.
-   - `[face]` `[stranger]` A pedlar says every house he called at had something leaning behind the door, and that not one of the householders made anything of it.
-   - `[face]` `[elders]` The older households say nobody has yet asked them to spend anything on a wall, and that what this place does spend is agreed among them at their own doors.
-   - `[face]` `[court]` A quarrel between two households is the worst thing anybody is ever asked to settle here, those who sit to hear a matter say.
-   - `[face]` `[register]` The sexton says the same hands cut the turf for the dead and lay it back, and that nobody has ever had to be sent for.
-   - `[face]` `[tavern]` At the tavern a carter says the door is barred at closing because of the drinkers and for no other reason.
-   - `[face]` `[guild]` The trades pay into the town's purse like everybody else, a guild factor says, and whatever stands around their stock at night they have put there themselves.
-   - `[face]` `[hall · pair 1 · disagree]` A clerk in the hall says the town pays what it can for the safety of the place.
-   - `[face]` `[watch · pair 1 · disagree]` One of the watch says what the town pays for is a man on a street after dark, and nothing besides.
-2. `[counterforce]` A drover says he came up a road like any other and found the houses standing in the open, with nothing raised around them.
-   - `[face]` `[watch]` One of the watch says nobody has ever told him what he is to do if something comes up the road, and that he no longer asks.
-   - `[face]` `[tavern]` At the tavern the reason there is no wall is well known, and it is not the same reason twice.
-   - `[face]` `[hall]` A clerk in the hall says the money has never been there for a wall, and says nothing about what it has been there for instead.
-   - `[face]` `[market]` The stallholders say the town finds money for the scales and for the upkeep of the square, and has never found any for a wall.
-   - `[face]` `[guild]` A guild factor puts it that the trades could say what a wall would cost them and who would pay for it, and that nobody has asked.
-   - `[face]` `[court]` Those who sit to hear a matter say the want of a wall is not a thing anybody can bring before them, and offer no opinion beyond it.
-   - `[face]` `[elders · pair 2 · view]` One of the older households says the water is why anybody is here, and the place has never wanted another reason.
-   - `[face]` `[register · pair 2 · view]` The sexton says the ground here takes a spade easily, and that this is as much as was ever asked of it.
-3. `[street]` Everyone here knows there is no wall around the place and no soldier in it, and nobody here treats that as a thing to be put right.
-   - `[face]` `[stranger]` A traveller says the people here asked him about the state of the road and not about what might be coming along it.
-   - `[face]` `[elders]` The older households say the matter comes up when a stranger raises it and goes quiet again when he has gone.
-   - `[face]` `[market]` A stallholder says the square empties at dusk and fills in the morning, and that nothing decides either but the light.
-   - `[face]` `[tavern]` At the tavern they say everyone can name the houses that would come out if anything happened, and that naming them is as far as it has ever gone.
-   - `[face]` `[watch]` One of the night patrol says the round is walked by people with a trade to get back to in the morning.
-   - `[face]` `[court]` Those who sit to hear a matter say they have heard neighbours argue over a boundary between two plots and never over the want of one around the place.
-   - `[face]` `[register]` The sexton holds that the town is easier in its mind about the matter than any stranger is, and does not say which of them has it right.
-   - `[face]` `[guild · pair 3 · reinforce]` A guild factor says the trades have never asked the town for a wall.
-   - `[face]` `[hall · pair 3 · reinforce]` A clerk in the hall says the hall has never been asked for one by anybody.
+1. `[ledger]` {settlement} has no line around it and no soldiers of its own. What keeping there is falls to the people who live here, out of their own hours.
+   - `[face]` `[market]` The grain in the store is the one thing here worth coming for, the stallholders say, and what the town has put over it is a lock.
+   - `[face]` `[stranger]` A pedlar has it that he is asked to step round the thing leaning behind every door he calls at here.
+   - `[face]` `[elders]` The older households say they have been asked for a bed for a stranger and a hand at a neighbour's roof, and never yet for a wall.
+   - `[face]` `[court]` Those who sit to hear a matter hold that nothing a wall would have kept out has ever come before them.
+   - `[face]` `[register]` The sexton says the opening of the ground for a burial has never been anybody's wage here, the people nearest doing it between them.
+   - `[face]` `[tavern]` At the tavern a carter puts it that the nights are all the town pays to keep itself, and that everything else here gets done when work is over.
+   - `[face]` `[guild]` The trades pay into the purse like everybody else, a guild factor says, and the shutters on a workshop go up at the workshop's own charge.
+   - `[face]` `[hall · pair 1 · disagree]` A clerk in the hall has it that the purse that would have kept a wall up keeps the nights.
+   - `[face]` `[watch · pair 1 · disagree]` One of the watch says the wage he draws is the whole of what the town pays against an army.
+2. `[counterforce]` The houses here stand with nothing about them, a drover has it, and at the first door he was asked the state of the road behind him.
+   - `[face]` `[watch]` A night patrolman says he was given the round street by street and left to guess at the rest.
+   - `[face]` `[tavern]` At the tavern the reason there is no wall is given freely and comes out different at every table.
+   - `[face]` `[hall]` A clerk in the hall puts the want of a wall down to a want of money, and does not say what the money there is goes on.
+   - `[face]` `[market]` The stallholders say the town's money here runs to the scales and the sweeping of the square.
+   - `[face]` `[guild]` A guild factor says the trades could price a wall down to the carting, and that what the trades are asked for is money and never men.
+   - `[face]` `[court]` Whether a line goes round the place is nothing anyone can put before them, those who sit to hear a matter hold, and they leave the question there.
+   - `[face]` `[elders · pair 2 · view]` The older households say the water is the whole of what this place is careful of.
+   - `[face]` `[register · pair 2 · view]` By the sexton's account the ground for the dead is marked off and the rest of the place is not.
+3. `[street]` Everyone here has seen the place go about its week with no line around it and no soldier in it, and the town counts that an answer.
+   - `[face]` `[stranger]` A traveller says he asked at a door here what the place would do if an army came, and was answered about the price of salt.
+   - `[face]` `[elders]` Whoever asks about a wall here is leaving in the morning, the older households have it.
+   - `[face]` `[market]` The stallholders say the square fills when the light comes and empties when it goes, and that the light is what they work to.
+   - `[face]` `[tavern]` At the tavern anybody can name the houses that would come out if anything happened, the naming being where it has always stopped.
+   - `[face]` `[watch]` One of the watch says the round is walked by people who keep a bench by day.
+   - `[face]` `[court]` Those who sit to hear a matter say the place has no line of its own, and that the boundaries before them run between one plot and the next.
+   - `[face]` `[register]` The sexton holds that the people here are easier about the place as it stands than anybody who comes through, and does not say which of them is right.
+   - `[face]` `[guild · pair 3 · reinforce]` A guild factor says the trades have priced their goods to a place that stands open.
+   - `[face]` `[hall · pair 3 · reinforce]` The hall has never had anybody come in asking for a wall, a clerk there says.
 
 **`Internal Security`: full legal chain (court AND prison)**
 1. `[ledger]` {settlement} keeps a watch that takes a person up and a place where the matter is heard. It keeps a room with a lock on the outside of its door.
