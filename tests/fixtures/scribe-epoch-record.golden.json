@@ -1,0 +1,242 @@
+[
+  {
+    "advanceSeq": 1,
+    "delta": {
+      "added": [],
+      "counts": {
+        "added": 0,
+        "moved": 5,
+        "removed": 0
+      },
+      "empty": false,
+      "fields": {
+        "epoch.advanced": {
+          "after": true,
+          "before": false
+        },
+        "epoch.calendar": {
+          "after": "{elapsedMonths, elapsedWeeks, month, season, year}",
+          "before": null
+        },
+        "epoch.foodStockpileLastTick": {
+          "after": 1,
+          "before": null
+        },
+        "epoch.tick": {
+          "after": 1,
+          "before": 0
+        },
+        "lastAdvance": {
+          "after": "{calendar, committed, corruption, factionCapture, id, interval, outcomes, summary, tick}",
+          "before": null
+        }
+      },
+      "moved": [
+        {
+          "after": true,
+          "before": false,
+          "path": "epoch.advanced"
+        },
+        {
+          "after": "{elapsedMonths, elapsedWeeks, month, season, year}",
+          "before": null,
+          "path": "epoch.calendar"
+        },
+        {
+          "after": 1,
+          "before": null,
+          "path": "epoch.foodStockpileLastTick"
+        },
+        {
+          "after": 1,
+          "before": 0,
+          "path": "epoch.tick"
+        },
+        {
+          "after": "{calendar, committed, corruption, factionCapture, id, interval, outcomes, summary, tick}",
+          "before": null,
+          "path": "lastAdvance"
+        }
+      ],
+      "pageLines": {
+        "after": 41,
+        "before": 41
+      },
+      "poolsStarted": [],
+      "poolsStopped": [],
+      "removed": [],
+      "rosterAdded": [],
+      "rosterRemoved": [],
+      "schema": "scribe-epoch-record/1"
+    },
+    "events": [],
+    "from": 0,
+    "isFirstEpoch": false,
+    "pulse": {
+      "calendar": {
+        "elapsedMonths": 3,
+        "elapsedWeeks": 13,
+        "month": 4,
+        "season": "summer",
+        "year": 1
+      },
+      "committed": true,
+      "corruption": [],
+      "factionCapture": [],
+      "id": "world_pulse.scribe_epoch.1",
+      "interval": "one_season",
+      "outcomes": [],
+      "summary": [],
+      "tick": 1
+    },
+    "schema": "scribe-epoch-record/1",
+    "to": 1
+  },
+  {
+    "advanceSeq": 2,
+    "delta": {
+      "added": [],
+      "counts": {
+        "added": 0,
+        "moved": 11,
+        "removed": 0
+      },
+      "empty": false,
+      "fields": {
+        "epoch.calendar.elapsedMonths": {
+          "after": 6,
+          "before": 3
+        },
+        "epoch.calendar.elapsedWeeks": {
+          "after": 26,
+          "before": 13
+        },
+        "epoch.calendar.month": {
+          "after": 7,
+          "before": 4
+        },
+        "epoch.calendar.season": {
+          "after": "autumn",
+          "before": "summer"
+        },
+        "epoch.tick": {
+          "after": 2,
+          "before": 1
+        },
+        "lastAdvance.calendar.elapsedMonths": {
+          "after": 6,
+          "before": 3
+        },
+        "lastAdvance.calendar.elapsedWeeks": {
+          "after": 26,
+          "before": 13
+        },
+        "lastAdvance.calendar.month": {
+          "after": 7,
+          "before": 4
+        },
+        "lastAdvance.calendar.season": {
+          "after": "autumn",
+          "before": "summer"
+        },
+        "lastAdvance.id": {
+          "after": "world_pulse.scribe_epoch.2",
+          "before": "world_pulse.scribe_epoch.1"
+        },
+        "lastAdvance.tick": {
+          "after": 2,
+          "before": 1
+        }
+      },
+      "moved": [
+        {
+          "after": 6,
+          "before": 3,
+          "path": "epoch.calendar.elapsedMonths"
+        },
+        {
+          "after": 26,
+          "before": 13,
+          "path": "epoch.calendar.elapsedWeeks"
+        },
+        {
+          "after": 7,
+          "before": 4,
+          "path": "epoch.calendar.month"
+        },
+        {
+          "after": "autumn",
+          "before": "summer",
+          "path": "epoch.calendar.season"
+        },
+        {
+          "after": 2,
+          "before": 1,
+          "path": "epoch.tick"
+        },
+        {
+          "after": 6,
+          "before": 3,
+          "path": "lastAdvance.calendar.elapsedMonths"
+        },
+        {
+          "after": 26,
+          "before": 13,
+          "path": "lastAdvance.calendar.elapsedWeeks"
+        },
+        {
+          "after": 7,
+          "before": 4,
+          "path": "lastAdvance.calendar.month"
+        },
+        {
+          "after": "autumn",
+          "before": "summer",
+          "path": "lastAdvance.calendar.season"
+        },
+        {
+          "after": "world_pulse.scribe_epoch.2",
+          "before": "world_pulse.scribe_epoch.1",
+          "path": "lastAdvance.id"
+        },
+        {
+          "after": 2,
+          "before": 1,
+          "path": "lastAdvance.tick"
+        }
+      ],
+      "pageLines": {
+        "after": 41,
+        "before": 41
+      },
+      "poolsStarted": [],
+      "poolsStopped": [],
+      "removed": [],
+      "rosterAdded": [],
+      "rosterRemoved": [],
+      "schema": "scribe-epoch-record/1"
+    },
+    "events": [],
+    "from": 1,
+    "isFirstEpoch": false,
+    "pulse": {
+      "calendar": {
+        "elapsedMonths": 6,
+        "elapsedWeeks": 26,
+        "month": 7,
+        "season": "autumn",
+        "year": 1
+      },
+      "committed": true,
+      "corruption": [],
+      "factionCapture": [],
+      "id": "world_pulse.scribe_epoch.2",
+      "interval": "one_season",
+      "outcomes": [],
+      "summary": [],
+      "tick": 2
+    },
+    "schema": "scribe-epoch-record/1",
+    "to": 2
+  }
+]
