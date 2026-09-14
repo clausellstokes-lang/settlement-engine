@@ -2601,7 +2601,7 @@ describe('⭐⭐ REWRITE car 8a-6 — THE FIELD-SYNONYM TABLE, a REPORT column r
     expect(FIELD_SYNONYM_ROWS[0].field).toBe('settlement.defenseProfile.economicGates.military');
     expect(FIELD_SYNONYM_ROWS[0].nouns, 'the owner\'s own exemplar word').toContain('wages');
     // R-ECO-4, the chair's cut of the ECONOMY clarity leaf: the SEASON TILE's own field, so the
-    // store it holds may be named by the store's nouns and thirteen spines stop saying `granary`.
+    // store it holds may be named by the store's nouns and TEN of the thirteen `granary` spines stop saying it (the three INSTITUTION spines stay — `moveGrammar.js` carries INSTITUTION on literal nouns and no store noun is one).
     expect(FIELD_SYNONYM_ROWS[1].field).toBe('granary');
     expect(FIELD_SYNONYM_ROWS[1].nouns, 'the noun the block\'s own FOOD pools already write')
       .toContain('grain store');
