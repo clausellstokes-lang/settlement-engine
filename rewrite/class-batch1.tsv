@@ -1,0 +1,147 @@
+1	C	perimeter: the bar
+2	C	walls: "the line looked well kept"
+3	C	walls+militia: "stand above it"
+4	C	purse
+5	C	purse+hall
+6	C	perimeter: "the walk"
+7	C	burial ground row
+8	C	purse
+9	C	court(hasCourtSystem)+the line
+10	C	gate+market stalls
+11	C	the line + standing turn
+12	C	the bar
+13	C	the bar
+14	C	the way through
+15	C	burials + "the country causes"
+16	C	muster + "goes up" (wall)
+17	C	the walk above the gate
+18	C	way through + apprenticeship service
+19	C	works + hall + water source
+20	S	timing/intention only; speaker market seated
+21	C	J: "go up" entails the wall-walk
+22	C	monsterThreat: "what is in the country"
+23	C	the line + muster
+24	C	the line + its cost
+25	C	purse + line + force
+26	C	the walk
+27	C	J: "come in by leave" entails gate control
+28	C	the watch's round (Town watch service)
+29	C	"the country takes" + standing
+30	S	foreboding, no typed noun; tavern seated
+31	C	court + the line
+32	C	turnout to the line
+33	C	the bar at the way through
+34	C	works + common purse
+35	C	hall + the line
+36	C	the line + pay
+37	C	the line + who pays
+38	C	the country + the works
+39	C	court + the line
+40	C	the way through
+41	C	stalls in the square (Market square)
+42	C	the line
+43	C	the country
+44	C	the works + the hall
+45	C	denies soldiers (force bucket)
+46	C	the line + the bed
+47	S	conduct only; tavern seated
+48	C	the country
+49	C	the bar + the stalls
+50	C	court + the stopping (gate)
+51	C	J: "let through" entails the gate
+52	C	the line
+53	C	the bar
+54	C	the hall
+55	C	the line
+56	C	the line
+57	C	court + no detention (hasPrison)
+58	C	a company (force bucket) + pay
+59	C	the country + the burial ground
+60	C	the line + the gap + the mill
+61	C	a wage + the walk (watch function)
+62	C	watch call-out (Town watch service)
+63	C	turnout + the country
+64	U	conduct/timing; elders universal
+65	C	the country + the ground opened (burial)
+66	U	conduct; stranger universal
+67	C	the market named
+68	C	purse + mill + water + burying
+69	C	the court
+70	S	conduct; tavern seated
+71	U	conduct; elders universal
+72	C	watch function (the round's far end) + payment
+73	C	the country + the market
+74	U	conduct; stranger universal
+75	C	the country + pricing (market function)
+76	C	J: "the town's own charge on the trade" = a levy
+77	C	watch function + the hall
+78	S	J: names the country as a topic only; tavern seated
+79	C	denies the watch (F1-25 bucket)
+80	C	burial ground + the town's cost
+81	C	court function
+82	U	conduct; stranger universal
+83	C	the way through
+84	C	gate function
+85	C	the line
+86	C	the line + common purse
+87	C	toll + way through
+88	C	the line + purse + pay
+89	C	burial ground + the country
+90	C	muster + line + country
+91	C	court + way through
+92	C	purse + line + hall
+93	C	the way through
+94	U	conduct; stranger universal
+95	C	the bar
+96	C	the church + the line
+97	C	hall intake (its own function)
+98	C	the way through
+99	C	J: "who stands the nights" entails the standing force
+100	C	garrison drill
+101	C	toll + way + line
+102	C	stalls + the country
+103	C	court + toll + country
+104	C	J: standing nights entails the turnout
+105	C	the bar
+106	C	the country
+107	C	the bar + the country
+108	C	court + way through
+109	C	the line + muster
+110	S	J: private escort, not a typed body; tavern seated
+111	C	garrison patrol + the country
+112	C	the bar
+113	C	BAND WORD: "adequate" (scoreBand)
+114	C	the line + the country + tier word "village"
+115	C	the call-out (muster)
+116	C	J: "the last houses on the edge" = the key's perimeter=false read
+117	C	muster + the country
+118	C	turning out (muster)
+119	C	register + the going out
+120	C	J: "the arrangement" = the key's own defense arrangement
+121	C	the arrangement + its cost
+122	S	J: travel conduct; market seated
+123	C	watch round + no perimeter
+124	C	garrison + nowhere to stand (no wall)
+125	C	court + nothing written (no legal record)
+126	U	J: could read as asserting no organized body; taken as social conduct; stranger universal
+127	U	conduct; elders universal
+128	C	J: "the road begins where the houses stop" = perimeter=false
+129	C	muster
+130	C	watch function
+131	C	names the watch
+132	C	hall function
+133	C	the stall (Market square)
+134	C	church function + the roof
+135	C	garrison
+136	C	court + nothing stopped him coming in (no perimeter)
+137	C	muster
+138	C	the obligation (militia duty)
+139	C	the going out + church function
+140	C	"never anything built" = perimeter=false
+141	C	going out (muster)
+142	C	turnout
+143	C	the mill + the hall + turnout
+144	C	watch function + the country
+145	C	the country + the stalls
+146	C	garrison
+147	C	court + the owed walk (turnout)
