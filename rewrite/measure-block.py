@@ -348,12 +348,18 @@ ATTRIB_VERB_TABLE = [
     ('claim',    re.compile(r'\b(?:claims|claim|claimed)\b', re.I)),
     ('reckon',   re.compile(r'\b(?:reckons|reckon|is\s+reckoned|are\s+reckoned|reckoned)\b', re.I)),
     ('tell',     re.compile(r'\b(?:tells|tell|told)\b', re.I)),
-    ('ask',      re.compile(r'\b(?:is|are|was|were)\s+asked\b', re.I)),
-    # ⚠ `is heard` TAKES A SAYING COMPLEMENT OR IT IS NOT COUNTED, on the `holds` precedent above.
-    # MEASURED: the bare passive fires once in DS-DEF-2 and the hit is "when something IS HEARD" —
-    # a noise in the country, not a source reporting. The refuter's own alternative ("a source is
-    # heard") is still counted; a sound is not.
-    ('hear',     re.compile(r'\b(?:is|are|was|were)\s+heard\s+to\s+(?:say|hold|put|tell)\b', re.I)),
+    # ⛔⛔ `ask` AND `hear` WERE ON THIS TABLE AND ARE STRUCK, BY A REFUTER'S CHARGE AGAINST THIS
+    # INSTRUMENT AT ITS FIRST SITTING (2026-09-13, pool `plagued, NO perimeter and NO force`).
+    # The charge, executed and upheld: in "A traveller IS ASKED his business" and "when something
+    # IS HEARD", the passive is the MAIN PREDICATE about what happens to the traveller or in the
+    # country — it reports nothing. Counting it as an attribution alternative made two faces that
+    # had STOPPED ATTRIBUTING ALTOGETHER score as if they had reached for a plainer verb, and the
+    # pool's measure-1 figure read 0.727 where the honest count is 0.800.
+    # THE GENERAL FORM OF THE DEFECT IS WORSE THAN THE TWO ROWS, and it is why measure 5 below now
+    # stands beside measure 1: measure 1 is a share OF ATTRIBUTED ROWS, so a face that loses its
+    # attribution leaves the DENOMINATOR instead of counting against the pool — the measure pays a
+    # cure for DELETING A SPEAKER. Measure 1 alone can be gamed; measure 1 read beside measure 5
+    # cannot. A passive with no sayer is not an attribution and is no longer read as one.
     ('add',      re.compile(r'\b(?:adds|add)\s+that\b', re.I)),
     ('allow',    re.compile(r'\b(?:allows|allow)\s+that\b', re.I)),
     ('agree',    re.compile(r'\b(?:agrees|agree)\s+that\b', re.I)),
@@ -488,6 +494,29 @@ def sibling_overlaps(variants):
             'medianOfVariantMediansBp': int(statistics.median(meds)) if meds else None,
             'worstVariantMedianBp': max(meds) if meds else None}
 
+# ── (5) THE UNATTRIBUTED FACE ───────────────────────────────────────────────────────────────
+# ⭐ THE FIFTH MEASURE, ADDED THE SAME DAY THE FOUR LANDED, on the charge of the refuter that
+# first read them (W-DEF2-E): "THE FOUR MEASURES REWARD DELETING A SPEAKER." Measures 1-4 all read
+# the pool AS AUTHORED. None of them can tell "this face reached for a plainer verb" from "this
+# face stopped attributing at all", and measure 1 scores the second MORE KINDLY, because an
+# unattributed face leaves its denominator.
+# ⛔ AND THE REASON IT MATTERS IS NOT TIDINESS — IT IS THE PAGE. A face with no attribution is the
+# ARCHIVER'S voice, and the archiver is not a speaker. Both DULL pools' worst recorded axis is that
+# BELOW TOWN the pool renders from only two seated sources, so a variant that loses one attribution
+# there loses HALF its speakers on that page while the packet still reads as nine.
+# PER VARIANT as well as per pool, because the variant is the unit that co-renders.
+def unattributed(variants):
+    per, tot, un = [], 0, 0
+    for v in variants:
+        n = sum(1 for f in v['faces'] if not attrib_verbs_of(f))
+        per.append({'variant': v['n'], 'faces': len(v['faces']), 'unattributed': n,
+                    'spineUnattributed': not bool(attrib_verbs_of(v['spine']))})
+        tot += len(v['faces']); un += n
+    return {'faces': tot, 'unattributedFaces': un,
+            'unattributedShare': round(un / tot, 3) if tot else 0.0,
+            'worstVariantUnattributed': max((p['unattributed'] for p in per), default=0),
+            'perVariant': per}
+
 def cut7_measures(name, variants):
     rows = [v['spine'] for v in variants] + [f for v in variants for f in v['faces']]
     faces = [f for v in variants for f in v['faces']]
@@ -495,7 +524,8 @@ def cut7_measures(name, variants):
             'verbConcentration': verb_concentration(rows),
             'sentencesPerFace': sentences_per_face(faces),
             'openerTrigram': opener_trigrams(variants),
-            'siblingOverlap': sibling_overlaps(variants)}
+            'siblingOverlap': sibling_overlaps(variants),
+            'unattributedFaces': unattributed(variants)}
 
 # ── THE FABLE-SELECTED BENCHMARK ────────────────────────────────────────────────────────────
 # ⭐ PRINTED BESIDE EACH OF THE FOUR, exactly as the exemplars' attribution baseline is printed
@@ -529,7 +559,13 @@ FABLE_BENCHMARK_FROZEN = {
     'twoSentenceShare': 0.067,           # about one face in fifteen stops and starts again
     'repeatedWithinVariantShare': 0.0,   # ⭐ ZERO: not one Fable-selected pool repeats an opener trigram
     'medianOfVariantMediansBp': 556,     # siblings share ~5.6% of their content tokens
+    'unattributedShare': 0.111,          # about one face in nine is in the archiver's bare voice
 }
+# ⚠ RE-TAKEN after `ask`/`hear` were struck from the verb table and measure 5 was added. The four
+# frozen figures above are UNCHANGED by that strike (verb concentration still 0.786), which is
+# itself the finding: those two limbs barely fire on the Fable-selected population and fired on the
+# cure that was being measured. A benchmark that moves when the instrument is corrected would mean
+# the benchmark was an artefact of the defect; this one did not move.
 # ⚠ A FIGURE THAT IS NOT A CEILING. The two DULL pools sit at 556 and 477 on measure 4 — AT and
 # BELOW the Fable benchmark — so measure 4 is the one of the four that does NOT separate the two
 # populations, and no cure should be steered by it alone. It is kept because the refuter's own
@@ -543,7 +579,8 @@ def benchmark_of(cut7_rows):
     if not rows:
         return {'pools': 0, 'found': [], 'missing': FABLE_SELECTED_POOLS,
                 'verbConcentration': None, 'twoSentenceShare': None,
-                'repeatedWithinVariantShare': None, 'medianOfVariantMediansBp': None}
+                'repeatedWithinVariantShare': None, 'medianOfVariantMediansBp': None,
+                'unattributedShare': None}
     found = [r['pool'] for r in rows]
     meds = [r['siblingOverlap']['medianOfVariantMediansBp'] for r in rows
             if r['siblingOverlap']['medianOfVariantMediansBp'] is not None]
@@ -554,6 +591,7 @@ def benchmark_of(cut7_rows):
         'twoSentenceShare': round(statistics.median([r['sentencesPerFace']['twoSentenceShare'] for r in rows]), 3),
         'repeatedWithinVariantShare': round(statistics.median([r['openerTrigram']['repeatedWithinVariantShare'] for r in rows]), 3),
         'medianOfVariantMediansBp': int(statistics.median(meds)) if meds else None,
+        'unattributedShare': round(statistics.median([r['unattributedFaces']['unattributedShare'] for r in rows]), 3),
     }
 def _bench_pair(live, frozen):
     l = '—' if live is None else live
@@ -620,6 +658,8 @@ def fingerprint(label, pools, variants=None):
             'repeatedOpenerFaces': sum(c['openerTrigram']['repeatedWithinVariantFaces'] for c in cut7),
             'poolsWithARepeatedOpener': sum(1 for c in cut7 if c['openerTrigram']['repeatedWithinVariantFaces'] > 0),
             'siblingOverlapMedianBp': int(statistics.median(meds)) if meds else None,
+            'unattributedFaces': sum(c['unattributedFaces']['unattributedFaces'] for c in cut7),
+            'poolsWithAnUnattributedFace': sum(1 for c in cut7 if c['unattributedFaces']['unattributedFaces']),
         }
     return {'label': label, 'pools': rows, 'summary': summary, 'cut7': cut7, 'cut7Summary': c7sum,
             'cut7SkippedPools': skipped,
@@ -699,6 +739,11 @@ def print_cut7(fp):
             else:
                 print(f"            v{r['variant']}: median {r['medianOverlapBp']} bp · min {r['minOverlapBp']} · max {r['maxOverlapBp']} · "
                       f"pairs {r['pairs']} · sameSegmentPairs {r['sameSegmentPairs']}/{r['pairs']}")
+        ua = c['unattributedFaces']
+        print(f"        (5) UNATTRIBUTED FACES  {ua['unattributedFaces']} of {ua['faces']} ({ua['unattributedShare']}) · "
+              f"worst variant {ua['worstVariantUnattributed']} · "
+              f"per variant {' · '.join('v%d %d/%d' % (p['variant'], p['unattributed'], p['faces']) for p in ua['perVariant'])} · "
+              f"{_bench_pair(live.get('unattributedShare'), frozen.get('unattributedShare'))}")
     s = fp.get('cut7Summary')
     if s:
         print(f"  BLOCK SUMMARY (the four measures) {fp['label']}: pools {s['pools']} · rows {s['rows']} · faces {s['faces']}")
@@ -706,10 +751,11 @@ def print_cut7(fp):
         print(f"    (2) two-sentence share median {s['twoSentenceShareMedian']} · pools with NO two-sentence face: {s['poolsWithNoTwoSentenceFace']}/{s['pools']}")
         print(f"    (3) faces sharing an opener trigram with a sibling: {s['repeatedOpenerFaces']} · pools breached {s['poolsWithARepeatedOpener']}/{s['pools']}")
         print(f"    (4) sibling overlap, median over pools: {s['siblingOverlapMedianBp']} bp")
+        print(f"    (5) UNATTRIBUTED faces: {s['unattributedFaces']} · pools carrying one: {s['poolsWithAnUnattributedFace']}/{s['pools']}")
     print(f"    BENCHMARK — the {live['pools']} FABLE-SELECTED pools found in this block "
           f"(frozen figures taken at {b['frozenAt']}): verb-concentration {live['verbConcentration']} · "
           f"two-sentence share {live['twoSentenceShare']} · repeated-opener share {live['repeatedWithinVariantShare']} · "
-          f"sibling overlap {live['medianOfVariantMediansBp']} bp")
+          f"sibling overlap {live['medianOfVariantMediansBp']} bp · unattributed share {live.get('unattributedShare')}")
     if sk:
         print(f"    ⚠ {len(sk)} pool(s) of bare spines NOT MEASURED (no `[face]` row): {' | '.join(sk)}")
     if live['missing']:
