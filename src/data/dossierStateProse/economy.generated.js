@@ -3869,7 +3869,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "INCOME MIX: one source carries the town": [
         {
           "angle": "ledger",
-          "text": "Well past half of what {settlement} earns comes from a single trade, and the accounts have no second column worth the name.",
+          "text": "Well past half of what {settlement} earns comes from a single trade. The accounts have no second column worth the name.",
           "slots": [
             "settlement"
           ],
@@ -3877,13 +3877,13 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "There is one thing this town does for money, and everybody's living is downstream of it whether or not they work in it.",
+          "text": "There is one thing this town does for money. Everybody's living is downstream of it whether or not they work in it.",
           "slots": [],
           "vid": 2
         },
         {
           "angle": "threshold",
-          "text": "{settlement} rests on one earner. Nothing about that is failing; everything about the town's next hard season depends on it not failing.",
+          "text": "{settlement} rests on one earner. Nothing about that is failing. Everything about the town's next hard season depends on it not failing.",
           "slots": [
             "settlement"
           ],
@@ -3893,7 +3893,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "INCOME MIX: two or three sources between them": [
         {
           "angle": "ledger",
-          "text": "{settlement}'s earnings come from a handful of trades in roughly comparable portions, and no one of them could carry the town alone.",
+          "text": "{settlement}'s earnings come from a handful of trades in roughly comparable portions. No one of them could carry the town alone.",
           "slots": [
             "settlement"
           ],
@@ -3901,13 +3901,13 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "Ask what this town lives on and you will be given a short list rather than an answer.",
+          "text": "Ask what this town lives on and you are given a short list rather than an answer.",
           "slots": [],
           "vid": 2
         },
         {
           "angle": "counterforce",
-          "text": "No single trade at {settlement} is large enough to dictate to the hall, and the town's politics are quieter for it.",
+          "text": "No single trade at {settlement} is large enough to dictate to the hall. The town's politics are quieter for it.",
           "slots": [
             "settlement"
           ],
@@ -3917,7 +3917,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "INCOME MIX: a broad spread, no leader": [
         {
           "angle": "ledger",
-          "text": "Nothing {settlement} does earns a real portion of the whole; the town's income is a great many small columns and no large one.",
+          "text": "Nothing {settlement} does earns a real portion of the whole. The town's income is a great many small columns and no large one.",
           "slots": [
             "settlement"
           ],
@@ -3925,7 +3925,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "A stranger cannot say what {settlement} is for, and the reason is that the town is not for any one thing.",
+          "text": "A stranger cannot say what {settlement} is for. The reason is that the town is not for any one thing.",
           "slots": [
             "settlement"
           ],
@@ -3933,7 +3933,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
-          "text": "{settlement} would barely notice losing any single trade and could not replace several, which is a different exposure from the obvious one.",
+          "text": "{settlement} would barely notice losing any single trade and could not replace several. That is a different exposure from the obvious one.",
           "slots": [
             "settlement"
           ],
@@ -3946,7 +3946,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "dm-only"
           ],
-          "text": "A real portion of what {settlement} earns is earned by people who would not describe the earning to a clerk, and the books show the difference as a gap rather than a line.",
+          "text": "A real portion of what {settlement} earns is earned by people who would not describe the earning to a clerk. The books show the difference as a gap rather than a line.",
           "slots": [
             "settlement"
           ],
@@ -3957,7 +3957,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "dm-only"
           ],
-          "text": "Some of this town's money has no honest account of itself, and the town's ordinary trades compete against it without being told.",
+          "text": "Some of this town's money has no honest account of itself. The town's ordinary trades compete against it without being told.",
           "slots": [],
           "vid": 2
         },
@@ -3966,7 +3966,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "dm-only"
           ],
-          "text": "The unlawful earnings at {settlement} are real and contained: {faction} takes its portion and has never reached for a second one.",
+          "text": "The unlawful earnings at {settlement} are real and contained. {faction} takes its portion and has never reached for a second one.",
           "slots": [
             "settlement",
             "faction"
@@ -3980,7 +3980,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "dm-only"
           ],
-          "text": "The largest single earner at {settlement} is the one that is not written down, and every lawful trade in the town is priced against it.",
+          "text": "The largest single earner at {settlement} is the one that is not written down. Every lawful trade in the town is priced against it.",
           "slots": [
             "settlement"
           ],
@@ -3991,7 +3991,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "dm-only"
           ],
-          "text": "What keeps this town solvent is the part of it nobody will name, and the naming is what would cost somebody.",
+          "text": "What keeps this town solvent is the part of it nobody is willing to name. The naming is what would cost somebody.",
           "slots": [],
           "vid": 2
         },
@@ -4010,7 +4010,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "TRADE PROFILE: exports and imports both present": [
         {
           "angle": "ledger",
-          "text": "{settlement} sends {good} out and takes other goods in, and the two columns are the whole of the town's dealings with the world.",
+          "text": "{settlement} sends {good} out and takes other goods in. The two columns are the whole of the town's dealings with the world.",
           "slots": [
             "settlement",
             "good"
@@ -4025,7 +4025,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "The market at {settlement} carries the town's own goods and other towns' goods on the same stalls, and does not distinguish them for a stranger's benefit.",
+          "text": "The market at {settlement} carries the town's own goods and other towns' goods on the same stalls. It does not distinguish them for a stranger's benefit.",
           "slots": [
             "settlement"
           ],
@@ -4035,7 +4035,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "TRADE PROFILE: no significant exports": [
         {
           "angle": "ledger",
-          "text": "{settlement} sends nothing out worth recording. What the town makes, the town uses, and the outward column is empty rather than thin.",
+          "text": "{settlement} sends nothing out worth recording. What the town makes, the town uses. The outward column is empty rather than thin.",
           "slots": [
             "settlement"
           ],
@@ -4049,7 +4049,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
-          "text": "{settlement} produces enough to feed and clothe itself and sells none of it, which is a decision the town has never had to revisit.",
+          "text": "{settlement} produces enough to feed and clothe itself and sells none of it. That is a decision the town has never had to revisit.",
           "slots": [
             "settlement"
           ],
@@ -4059,7 +4059,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "TRADE PROFILE: imports only, nothing outward": [
         {
           "angle": "ledger",
-          "text": "More arrives at {settlement} than leaves it, and what pays for the difference is not in the trade columns.",
+          "text": "More arrives at {settlement} than leaves it. What pays for the difference is not in the trade columns.",
           "slots": [
             "settlement"
           ],
@@ -4067,13 +4067,13 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
-          "text": "The town buys what it needs and sells almost nothing, and the arrangement holds exactly as long as whatever is paying for it holds.",
+          "text": "The town buys what it needs and sells almost nothing. The arrangement holds exactly as long as whatever is paying for it holds.",
           "slots": [],
           "vid": 2
         },
         {
           "angle": "street",
-          "text": "This town takes delivery and does not dispatch, and everybody here can name what the difference is bought with.",
+          "text": "This town takes delivery and does not dispatch. Everybody here can name what the difference is bought with.",
           "slots": [],
           "vid": 3
         }
@@ -4081,7 +4081,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "TRADE PROFILE: local production listed": [
         {
           "angle": "ledger",
-          "text": "A good portion of what {settlement} consumes is made inside its own walls, and never appears in either trade column.",
+          "text": "A good portion of what {settlement} consumes is made inside its own walls. It never appears in either trade column.",
           "slots": [
             "settlement"
           ],
@@ -4089,7 +4089,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "Much of what a stranger will buy at {settlement} was made within sight of where it is sold.",
+          "text": "Much of what a stranger buys at {settlement} was made within sight of where it is sold.",
           "slots": [
             "settlement"
           ],
@@ -4097,7 +4097,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "The town makes its own ordinary things and buys its extraordinary ones, which is the arrangement of most towns and is worth stating plainly.",
+          "text": "The town makes its own ordinary things and buys its extraordinary ones. That is the arrangement of most towns, and it is worth stating plainly.",
           "slots": [],
           "vid": 3
         }
@@ -4105,7 +4105,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "TRADE PROFILE: isEntrepot, transit goods marked among the exports": [
         {
           "angle": "ledger",
-          "text": "Some of what leaves {settlement} as an export never belonged to the town. It arrived, was counted, and went on, and the earnings are in the counting.",
+          "text": "Some of what leaves {settlement} as an export never belonged to the town. It arrived, was counted, and went on. The earnings are in the counting.",
           "slots": [
             "settlement"
           ],
@@ -4113,7 +4113,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "The export list at {settlement} is longer than the town's own trades would explain, and the difference is what passes through.",
+          "text": "The export list at {settlement} is longer than the town's own trades would explain. The difference is what passes through.",
           "slots": [
             "settlement"
           ],
@@ -4121,7 +4121,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "Half of what goes out of this town came into it the same season, and the town's part of the business is the yard and the road.",
+          "text": "Half of what goes out of this town came into it the same season. Its part of the business is the yard and the road.",
           "slots": [],
           "vid": 3
         }
