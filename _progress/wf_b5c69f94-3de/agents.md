@@ -1,4 +1,4 @@
-# wf_b5c69f94-3de — per-agent progress, 2026-09-14 00:49:20
+# wf_b5c69f94-3de — per-agent progress, 2026-09-14 00:54:33
     - `a4e6a289a` MARKER Economic Survival: ADEQUATE · DONE · transcript 09-13 22:06 941 KB · 53 tool calls · files: card.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--economi
     - `a5592c2e9` MARKER Economic Survival: CRITICAL · DONE · transcript 09-13 22:05 934 KB · 46 tool calls · files: card.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--economi
     - `a33cc95ba` MARKER Disasters & Famine: NO reserves, hospital present · DONE · transcript 09-13 22:02 856 KB · 46 tool calls · files: card.md, _s789.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--disaste
