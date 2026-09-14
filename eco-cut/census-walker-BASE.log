@@ -1,0 +1,57 @@
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.502.lock as PID 19735 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+
+ RUN  v4.1.11 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/lane-clarity-ECONOMY
+
+ ❯ tests/lint/proseWiringCensus.walker.test.js (78 tests | 2 failed) 4939ms
+     × (e) THE FENCE: no src/ file outside the ISLAND names any of its FIFTEEN modules 444ms
+     × custom-content reachability is enumerable from code, per kind, with the limb named 1ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/lint/proseWiringCensus.walker.test.js > THE CONTROLS — each must fire, and each cure must stop it firing > (e) THE FENCE: no src/ file outside the ISLAND names any of its FIFTEEN modules
+AssertionError: no product surface reaches the island: expected [ …(2) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "institutionTable <- src/data/institutionRoles.js",
++   "institutionTable <- src/domain/display/stateProse/faceSources.js",
++ ]
+
+ ❯ tests/lint/proseWiringCensus.walker.test.js:570:63
+    568|       for (const hit of hits) if (!inIsland(hit)) breaches.push(`${mod…
+    569|     }
+    570|     expect(breaches, 'no product surface reaches the island').toEqual(…
+       |                                                               ^
+    571|     // AND THE THIRTEENTH IS REACHED FROM EXACTLY ONE PLACE INSIDE THE…
+    572|     // paired positive for the module this car lands: the census write…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/lint/proseWiringCensus.walker.test.js > car 0 — mounts per fact, custom reachability, and the relation table > custom-content reachability is enumerable from code, per kind, with the limb named
+AssertionError: in-house (block, pool) predicates a custom definition can reach: expected 30 to be 25 // Object.is equality
+
+- Expected
++ Received
+
+- 25
++ 30
+
+ ❯ tests/lint/proseWiringCensus.walker.test.js:1587:99
+    1585|     const custom = committed.customReachable;
+    1586|     expect(custom.byKind.length, 'the eight authorable kinds, enumerat…
+    1587|     expect(custom.rows.length, 'in-house (block, pool) predicates a cu…
+       |                                                                                                   ^
+    1588|     expect(Object.fromEntries(custom.byKind), 'per kind, as integers')…
+    1589|       services: 7, resources: 7, institutions: 6, factions: 2, tradeGo…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 76 passed (78)
+   Start at  10:34:23
+   Duration  8.58s (transform 1.53s, setup 26ms, import 3.52s, tests 4.94s, environment 0ms)
+
