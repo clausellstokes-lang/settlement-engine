@@ -5134,28 +5134,28 @@ reads what the panel renders. A page draws at most one of each.
 
 **PATRON: `rankAxis: major`**
 1. `[visitor]` {creed} is the patron here, and it is no local creed. The same rite is kept across enough of the realm to carry weight well past {settlement}'s walls.
-2. `[street]` The observance here is {creed}'s, and it is the observance of the region besides; the calendar kept in this town is the calendar kept along the whole road.
+2. `[street]` The observance here is {creed}'s, and it is the observance of the region besides, and the calendar here is kept along the whole road.
 3. `[ledger]` {settlement} keeps {creed}, a faith holding seats far beyond this one. Its clergy speak with the confidence of people who are not alone.
 
 **PATRON: `rankAxis: minor`**
-1. `[ledger]` {creed} is the patron here, kept in a handful of settlements and nowhere near all of them; its reach ends not far past the district.
+1. `[ledger]` {creed} is the patron here, kept in a handful of settlements and nowhere near all of them. Its reach ends not far past the district.
 2. `[street]` The town's rite is {creed}'s: established, unremarkable elsewhere, and entirely sufficient here.
-3. `[visitor]` {settlement} keeps {creed}. Travellers from far enough away will not know the name, which the clergy find easier to forgive than to fix.
+3. `[visitor]` {settlement} keeps {creed}. Travellers from far enough away do not know the name. The clergy find that easier to forgive than to fix.
 
 **PATRON: `rankAxis: cult`**
 1. `[visitor]` The patron of {settlement} is {creed}, a creed with few other homes. What it lacks in reach it holds in intensity.
-2. `[ledger]` {creed} holds the seat here and almost nowhere else; the town is the faith rather than a part of it.
+2. `[ledger]` {creed} holds the seat here and almost nowhere else, and the town is the faith rather than a part of it.
 3. `[street]` Outside these walls {creed} is a curiosity. Inside them it is the calendar, the oath and the burial rite.
 
 **CULTS: `cults[]` present beneath the patron**
 1. `[visitor]` Beneath {creed}, smaller observances keep their own shrines: tolerated, attended, and not confused with the town's own rite.
-2. `[ledger]` The patron is not the only creed here; {rival_creed} keeps a following that is real without being a rival for the seat.
+2. `[ledger]` The patron is not the only creed here. {rival_creed} keeps a following that is real without being a rival for the seat.
 3. `[street]` Several lesser rites run alongside the patron's, each with its own days and its own quarter of the town.
 
 **DEVOTION: `devout`** · plain description; no cause clause without `piety.causes[]`
 1. `[street]` Devotion here runs deep. The rites are kept by people who would keep them without being asked.
-2. `[visitor]` {settlement} is a pious town in the plain sense: the observance's calendar and the town's calendar are the same document.
-3. `[ledger]` Observance is near-total, and it is not performance; the creed shapes what people do on ordinary days.
+2. `[visitor]` {settlement} is a pious town in the plain sense. The observance's calendar and the town's calendar are the same document.
+3. `[ledger]` Observance is near-total, and it is not performance. The creed shapes what people do on ordinary days.
 
 **DEVOTION: `faithful`**
 1. `[ledger]` The town keeps its faith properly. Attendance is the rule rather than the exception, and lapsing is noticed.
@@ -5165,12 +5165,12 @@ reads what the panel renders. A page draws at most one of each.
 **DEVOTION: `observant`**
 1. `[street]` Faith here is habit more than fervour. The rites are kept, and kept without much heat.
 2. `[visitor]` The town observes. It marks the days, attends the required occasions, and does not think about it much between them.
-3. `[ledger]` Devotion in {settlement} is ordinary: real enough to organize a year around, thin enough not to organize a life around.
+3. `[ledger]` Devotion in {settlement} is ordinary. It is real enough to organize a year around and thin enough not to organize a life around.
 
 **DEVOTION: `lukewarm`**
 1. `[visitor]` The benches are thinly filled. The rites survive as custom rather than conviction, and the custom is wearing.
 2. `[street]` Faith here has become a formality. The forms are observed, and fewer people each season could say why.
-3. `[ledger]` {settlement} keeps the calendar and little else of the creed; the clergy preach to the same few households.
+3. `[ledger]` {settlement} keeps the calendar and little else of the creed. The clergy preach to the same few households.
 
 **DEVOTION: `secular`**
 1. `[ledger]` Devotion here is nearly gone. The building stands and the rites are performed, largely for the people who have always performed them.
@@ -5178,63 +5178,63 @@ reads what the panel renders. A page draws at most one of each.
 3. `[threshold]` {settlement} is not a godless town, but it is a distracted one. The creed reaches the ceremonies and not much further.
 
 **ARC: `trend: rising`** · a cause clause is licensed ONLY where `piety.causes[]` carries `conduct_alignment`
-1. `[unfolding]` Devotion is climbing, and the reason is plain enough: the town lives by the creed it professes, and the professing has followed the living.
-2. `[street]` The tide is coming back in. Attendance has not caught up with belief yet (it rarely does), but it is moving.
-3. `[ledger]` The observance is gaining. What the clergy record is larger each time they record it, and nothing in the reckoning runs the other way.
+1. `[unfolding]` Devotion is climbing. The town lives by the creed it professes, and the professing has followed the living.
+2. `[street]` The tide is coming back in. Attendance has not caught up with belief yet, and it rarely does. It is moving.
+3. `[ledger]` The observance is gaining. What the clergy record is larger each time they record it. Nothing in the reckoning runs the other way.
 
 **ARC: `trend: falling`** · a cause clause is licensed ONLY where `piety.causes[]` carries `conduct_drift` or `clergy_distortion`
 1. `[unfolding]` Devotion is ebbing. The town no longer lives as its creed asks, and the observance is following the conduct rather than correcting it.
 2. `[street]` The benches empty a little each season, not from any quarrel with the faith, only from the slow discovery that nothing punishes absence.
-3. `[threshold]` Belief here is receding ahead of the ceremonies; the ceremonies are the last part to go, and they have not gone.
+3. `[threshold]` Belief here is receding ahead of the ceremonies. The ceremonies are the last part to go, and they have not gone.
 
 **ARC: `trend: steady`**
 1. `[ledger]` Devotion holds where it has been. Nothing is pulling it up and nothing is pulling it down.
-2. `[visitor]` The town's faith is at rest: neither a revival nor a drift, only the same observance it kept within the year.
+2. `[visitor]` The town's faith is at rest. It is neither a revival nor a drift, only the same observance it kept within the year.
 3. `[street]` Nothing about the creed is moving here. The measure of that is that nobody discusses it.
 
 **STANDINGS: the patron dominant**
-1. `[ledger]` The patron holds most of the town's adherence outright; the other creeds keep shrines rather than congregations.
-2. `[street]` There is no real contest for the seat: {creed} holds well past what a rival could close, and the rest of the field knows it.
+1. `[ledger]` The patron holds most of the town's adherence outright. The other creeds keep shrines rather than congregations.
+2. `[street]` There is no real contest for the seat. {creed} holds well past what a rival could close, and the rest of the field knows it.
 3. `[visitor]` One creed carries {settlement}. What else is kept here is kept in its shadow and on its sufferance.
 
 **STANDINGS: the patron pressed by a near rival**
-1. `[threshold]` The patron holds the seat, but not comfortably: {rival_creed} has taken enough of the town's adherence to be counted.
-2. `[ledger]` {creed} still leads, and not by much; a rival draws from the same households the patron does, and is close enough to be counted against it.
+1. `[threshold]` The patron holds the seat, but not comfortably. {rival_creed} has taken enough of the town's adherence to be counted.
+2. `[ledger]` {creed} still leads, and not by much. A rival draws from the same households the patron does, and is close enough to be counted against it.
 3. `[street]` The seat is held rather than secure. Another rite has closed most of the distance between them.
 
 **STANDINGS: a plural field, no majority**
 1. `[ledger]` No creed commands {settlement}. Adherence is divided across several rites, none of them near a majority.
 2. `[visitor]` The town's faith is a field rather than a hierarchy. The patron leads a crowd rather than a following.
-3. `[street]` Several observances share this town in rough proportion, which the clergy of each describe differently.
+3. `[street]` Several observances share this town in rough proportion. The clergy of each describe it differently.
 
 **SINK: `unaffiliated` present, arc falling** (the pews draining)
 1. `[ledger]` A growing share of the town keeps no god at all. The share is not going to a rival rite, it is going out of the rites altogether.
-2. `[threshold]` The unaffiliated are the fastest-growing part of {settlement}'s religious life, which is a way of saying its religious life is shrinking.
-3. `[street]` People here are leaving the rites without joining anything; the benches thin and nothing fills them.
+2. `[threshold]` The unaffiliated are the fastest-growing part of {settlement}'s religious life. Its religious life is shrinking.
+3. `[street]` People here are leaving the rites without joining anything. The benches thin and nothing fills them.
 
 **SINK: `unaffiliated` present, arc rising** (the pews reclaiming)
 1. `[unfolding]` The unaffiliated are drifting back toward the observances. Crisis has a way of ending indifference.
-2. `[ledger]` The godless share of the town is shrinking; whatever emptied the benches has stopped being persuasive.
+2. `[ledger]` The godless share of the town is shrinking. Whatever emptied the benches has stopped being persuasive.
 3. `[street]` People who kept no rite are keeping one again, and mostly the one their households kept before them.
 
 **MANDATE: contested, or patron security below the floor**
 1. `[counterforce]` The ruler's claim gets no help from the observances. A divided faith cannot lend authority it does not itself hold.
-2. `[ledger]` Whatever legitimacy the seat has, it is not borrowed from the creed; the faith here is too contested to vouch for anyone.
+2. `[ledger]` Whatever legitimacy the seat has, it is not borrowed from the creed. The faith here is too contested to vouch for anyone.
 3. `[street]` The faith and the government stand apart. Neither is strengthened by the other, and the ruler feels it more than the clergy do.
 
 **MANDATE: a dominant church**
 1. `[ledger]` The observance stands behind the seat, and it is an observance worth standing behind. The ruler governs with the creed's open endorsement.
 2. `[street]` Authority here is doubled: what the ruling power asks, the patron's clergy have already asked.
-3. `[visitor]` The faith is strong and it is aligned; the ruler's writ carries a weight the office alone would not give it.
+3. `[visitor]` The faith is strong and it is aligned. What the ruler decides carries a weight the office alone would not give it.
 
 **MANDATE: a measure of divine mandate**
-1. `[ledger]` The creed lends the ruler some standing, not the whole of the seat's authority, but a serviceable part of it.
-2. `[threshold]` The endorsement is real and measured; the ruler has it, and does not have it unconditionally.
+1. `[ledger]` The creed lends the ruler some standing, not the whole of the seat's authority, but a useful part of it.
+2. `[threshold]` The endorsement is real and measured. The ruler has it, and does not have it unconditionally.
 3. `[visitor]` Faith props the government here modestly, the way a wall props a roof that would mostly stand anyway.
 
 **`live: false`** — newly founded, no measured shares yet
 1. `[ledger]` The faith here has only just taken root. What share it holds, how firmly, and which way devotion is running are all questions the years have not answered.
-2. `[visitor]` {settlement} has a patron and no history with it. The rite is established, the following is not yet measurable.
+2. `[visitor]` {settlement} has a patron and no history with it. The rite is established and the following is not yet measurable.
 3. `[street]` The creed is new to this town. Its standing exists on the founding record and nowhere else so far.
 
 ---
@@ -5269,7 +5269,7 @@ touches the original not at all.
 
 **PUBLIC / SHARED DOSSIER**
 1. `[ledger]` The town keeps no named faith. What devotion there is runs through custom rather than clergy.
-2. `[visitor]` Observance here is local and unorganized; nothing in {settlement} speaks for a god.
+2. `[visitor]` Observance here is local and unorganized. Nothing in {settlement} speaks for a god.
 3. `[elder]` The shrines are old and unaffiliated. Whatever is kept at them is kept without a name attached.
 4. `[street]` No creed governs the calendar here. The year is marked by the season and the market, not the rite.
 
