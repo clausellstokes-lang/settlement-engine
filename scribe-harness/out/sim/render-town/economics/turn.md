@@ -31,11 +31,11 @@ POOL "COMBINATION C3: the middle rungs" in block DS-ECO-1
     {access} is "road" on this town
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
-    prosperityRank(settlement.economicState.prosperity) = UNKNOWN (the engine has not decided this; assert nothing that depends on it)
+    prosperityRank(settlement.economicState.prosperity) = DERIVED: the engine computes this as `prosperityRank(settlement.economicState.prosperity)`, from `economicState.prosperity` = "Comfortable". Write from those values and give this reading no value of its own.
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
-    A field reading UNKNOWN cannot carry a sentence, and no absence may be read
-    out of it.
+    A field reading UNKNOWN or DERIVED cannot carry a value of its own, and no
+    absence may be read out of one.
   faces to write: 0
   THE CORPUS LINE, as the claim and the fallback:
     spine: There is nothing striking about {settlement}'s condition in either direction: a working {access}, a working market, a town neither building nor selling off.
@@ -46,9 +46,9 @@ POOL "INCOME MIX: two or three sources between them" in block DS-ECO-12
   THE ORDER: the corpus spine realises the move order `V1` — `PRESENT` (the state key alone); keep that order in your spine.
   slots you may use: (none)
   THE FIELDS this pool reads, with their values here:
-    economicState.incomeSources = "[10 rows]" (FROZEN)
-    economicState.incomeSources.length = 10 (FROZEN)
-    economicState.incomeSources.reduce = "[10 rows]" (FROZEN)
+    economicState.incomeSources = "[10 rows]"
+    economicState.incomeSources.length = 10
+    economicState.incomeSources.reduce = "[10 rows]" (the engine's own field is `economicState.incomeSources`)
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 0
@@ -63,11 +63,11 @@ POOL "TRADE PROFILE: exports and imports both present" in block DS-ECO-12
     {settlement} is "Spitzplatz" on this town
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
-    economicState = "{activeChains, compound, economicComplexity, foodSecurity, incomeSources, institutionalServices, isEntrepot, localProduction, necessityImports, primaryExports, primaryImports, priorities, prosperity, safetyProfile, situationDesc, tier, tradeAccess, tradeDependencies, transit}" (LIVE)
-    economicState.isEntrepot = false (FROZEN)
-    economicState.localProduction = "[33 rows]" (FROZEN)
-    economicState.primaryExports = "[12 rows]" (LIVE)
-    economicState.primaryImports = "[6 rows]" (FROZEN)
+    economicState = "{activeChains, compound, economicComplexity, foodSecurity, incomeSources, institutionalServices, isEntrepot, localProduction, necessityImports, primaryExports, primaryImports, priorities, prosperity, safetyProfile, situationDesc, tier, tradeAccess, tradeDependencies, transit}"
+    economicState.isEntrepot = false
+    economicState.localProduction = "[33 rows]"
+    economicState.primaryExports = "[12 rows]"
+    economicState.primaryImports = "[6 rows]"
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 0
@@ -80,11 +80,11 @@ POOL "POSTURE: established" in block DS-ECO-10
   THE ORDER: the corpus spine realises the move order `V1` — `PRESENT` (the state key alone); keep that order in your spine.
   slots you may use: (none)
   THE FIELDS this pool reads, with their values here:
-    readings.exportPosture.status = UNKNOWN (the engine has not decided this; assert nothing that depends on it)
+    readings.exportPosture.status = DERIVED: the engine computes this as `deriveExportPosture(settlement).status`. The card holds no input for it, so give this reading no value: what the engine decided about it is what the pool key and the page lines already say.
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
-    A field reading UNKNOWN cannot carry a sentence, and no absence may be read
-    out of it.
+    A field reading UNKNOWN or DERIVED cannot carry a value of its own, and no
+    absence may be read out of one.
   faces to write: 0
   THE CORPUS LINE, as the claim and the fallback:
     spine: There is always something going out. If one trade is quiet, another is not.
@@ -110,11 +110,11 @@ POOL "STALLED" in block DS-GEN-18
     {institution} is "Caravaneer's post" on this town
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
-    readings = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
-    readings.activeChains = "[24 rows]" (FROZEN)
-    readings.exploitation = "{}" (FROZEN)
-    readings.isEntrepot = false (FROZEN)
-    readings.primaryImports = "[6 rows]" (FROZEN)
+    readings = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says) — the desk's whole reading bag rather than one reading; the pool's other rows name the readings its key actually turns on
+    readings.activeChains = "[24 rows]" (the engine's own field is `economicState.activeChains`)
+    readings.exploitation = "{}" (the engine's own field is `resourceAnalysis.exploitation`)
+    readings.isEntrepot = false (the engine's own field is `economicState.isEntrepot`)
+    readings.primaryImports = "[6 rows]" (the engine's own field is `economicState.primaryImports`)
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 0
@@ -127,7 +127,7 @@ POOL "TIER: minor shadow activity (≥3)" in block DS-ECO-6
   THE ORDER: the corpus spine realises the move order `V1` — `PRESENT` (the state key alone); keep that order in your spine.
   slots you may use: (none)
   THE FIELDS this pool reads, with their values here:
-    economicState.safetyProfile.blackMarketCapture = 8 (FROZEN)
+    economicState.safetyProfile.blackMarketCapture = 8
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 0

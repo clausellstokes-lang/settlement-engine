@@ -67,8 +67,8 @@ POOL "recentConflict present" in block DS-POW-2
     {settlement} is "Spitzplatz" on this town
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
-    powerStructure.factions = "[5 rows]" (LIVE)
-    powerStructure.recentConflict = "Guild Council has been debating market levies for three months. The merchants have stopped attending the sessions. Both sides are now acting as if the other has already lost." (FROZEN)
+    powerStructure.factions = "[5 rows]"
+    powerStructure.recentConflict = "Guild Council has been debating market levies for three months. The merchants have stopped attending the sessions. Both sides are now acting as if the other has already lost."
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 0
@@ -99,11 +99,11 @@ POOL "layer DORMANT (no ledger materialized)" in block DS-POW-7
     {settlement} is "Spitzplatz" on this town
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
-    readings.politics ?? null.blocs = UNKNOWN (the engine has not decided this; assert nothing that depends on it)
+    readings.politics ?? null.blocs = DERIVED: the engine computes this as `settlementBlocs(Object.fromEntries([ ['worldState', world || null], ['settlementId', settlement.id], ['includeGroundTruth', audienceOf(options) === 'dm'], ['includeCovert', audienceOf(options) === 'dm'], ])).blocs`, from `id` = "s_014aefbc38036f89". Write from those values and give this reading no value of its own.
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
-    A field reading UNKNOWN cannot carry a sentence, and no absence may be read
-    out of it.
+    A field reading UNKNOWN or DERIVED cannot carry a value of its own, and no
+    absence may be read out of one.
   faces to write: 0
   THE CORPUS LINE, as the claim and the fallback:
     spine: There are interests at {settlement} and there are no camps; a question is answered by whoever cares about that question.
@@ -155,7 +155,7 @@ POOL "legitimacyHold: public backing hardens the hold" in block DS-POW-4
   THE FIELDS this pool reads, with their values here:
     typeof power.publicLegitimacy === 'object' && power.publicLegitimacy !== null
     ? power.publicLegitimacy
-    : /** @type {PublicLegitimacyView} */ ({}).govMultiplier = 1.15 (FROZEN)
+    : /** @type {PublicLegitimacyView} */ ({}).govMultiplier = 1.15 (the engine's own field is `powerStructure.publicLegitimacy.govMultiplier`)
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 0

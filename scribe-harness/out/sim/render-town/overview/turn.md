@@ -112,7 +112,7 @@ POOL "scores.military: STRONG" in block DS-GEN-3
     {settlement} is "Spitzplatz" on this town
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
-    axis = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says) — the loop variable of `SCORE_AXES.map((axis) => …)` in generalStateProse.js: a closed vocabulary of score axes, not a settlement field. The pool key names which axis this is (`scores.economic: STRONG`), and the score itself resolves through `readings.scores`
+    axis = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says) — the loop variable of `SCORE_AXES.map((axis) => …)` in generalStateProse.js: a closed vocabulary of score axes, not a settlement field. THIS POOL'S OWN KEY NAMES THE AXIS, and every axis's score is in `readings.scores` above
     readings.scores = "{disaster: 64, economic: 76, internal: 47, magicDependency: false, magical: 38, military: 73, monster: 76, traditions: {5 keys}}" (the engine's own field is `defenseProfile.scores`)
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
@@ -128,7 +128,7 @@ POOL "scores.monster: STRONG" in block DS-GEN-3
     {settlement} is "Spitzplatz" on this town
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
-    axis = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says) — the loop variable of `SCORE_AXES.map((axis) => …)` in generalStateProse.js: a closed vocabulary of score axes, not a settlement field. The pool key names which axis this is (`scores.economic: STRONG`), and the score itself resolves through `readings.scores`
+    axis = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says) — the loop variable of `SCORE_AXES.map((axis) => …)` in generalStateProse.js: a closed vocabulary of score axes, not a settlement field. THIS POOL'S OWN KEY NAMES THE AXIS, and every axis's score is in `readings.scores` above
     readings.scores = "{disaster: 64, economic: 76, internal: 47, magicDependency: false, magical: 38, military: 73, monster: 76, traditions: {5 keys}}" (the engine's own field is `defenseProfile.scores`)
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
@@ -144,7 +144,7 @@ POOL "scores.internal: ADEQUATE" in block DS-GEN-3
     {settlement} is "Spitzplatz" on this town
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
-    axis = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says) — the loop variable of `SCORE_AXES.map((axis) => …)` in generalStateProse.js: a closed vocabulary of score axes, not a settlement field. The pool key names which axis this is (`scores.economic: STRONG`), and the score itself resolves through `readings.scores`
+    axis = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says) — the loop variable of `SCORE_AXES.map((axis) => …)` in generalStateProse.js: a closed vocabulary of score axes, not a settlement field. THIS POOL'S OWN KEY NAMES THE AXIS, and every axis's score is in `readings.scores` above
     readings.scores = "{disaster: 64, economic: 76, internal: 47, magicDependency: false, magical: 38, military: 73, monster: 76, traditions: {5 keys}}" (the engine's own field is `defenseProfile.scores`)
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
@@ -160,7 +160,7 @@ POOL "scores.economic: STRONG" in block DS-GEN-3
     {settlement} is "Spitzplatz" on this town
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
-    axis = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says) — the loop variable of `SCORE_AXES.map((axis) => …)` in generalStateProse.js: a closed vocabulary of score axes, not a settlement field. The pool key names which axis this is (`scores.economic: STRONG`), and the score itself resolves through `readings.scores`
+    axis = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says) — the loop variable of `SCORE_AXES.map((axis) => …)` in generalStateProse.js: a closed vocabulary of score axes, not a settlement field. THIS POOL'S OWN KEY NAMES THE AXIS, and every axis's score is in `readings.scores` above
     readings.scores = "{disaster: 64, economic: 76, internal: 47, magicDependency: false, magical: 38, military: 73, monster: 76, traditions: {5 keys}}" (the engine's own field is `defenseProfile.scores`)
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
@@ -176,7 +176,7 @@ POOL "scores.magical: WEAK" in block DS-GEN-3
     {settlement} is "Spitzplatz" on this town
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
-    axis = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says) — the loop variable of `SCORE_AXES.map((axis) => …)` in generalStateProse.js: a closed vocabulary of score axes, not a settlement field. The pool key names which axis this is (`scores.economic: STRONG`), and the score itself resolves through `readings.scores`
+    axis = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says) — the loop variable of `SCORE_AXES.map((axis) => …)` in generalStateProse.js: a closed vocabulary of score axes, not a settlement field. THIS POOL'S OWN KEY NAMES THE AXIS, and every axis's score is in `readings.scores` above
     readings.scores = "{disaster: 64, economic: 76, internal: 47, magicDependency: false, magical: 38, military: 73, monster: 76, traditions: {5 keys}}" (the engine's own field is `defenseProfile.scores`)
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.

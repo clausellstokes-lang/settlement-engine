@@ -282,7 +282,7 @@ POOL "watch PRESENT" in block DS-DEF-5
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
     institutions = "[52 rows]"
-    standingDefenseForces(settlement) = DERIVED: the engine computes this as `standingDefenseForces(settlement)`. Write from those values and give this reading no value of its own.
+    standingDefenseForces(settlement) = DERIVED: the engine computes this as `standingDefenseForces(settlement)`. The card holds no input for it, so give this reading no value: what the engine decided about it is what the pool key and the page lines already say.
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
     A field reading UNKNOWN or DERIVED cannot carry a value of its own, and no
@@ -300,7 +300,7 @@ POOL "charter hall PRESENT (specialist monster response)" in block DS-DEF-5
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
     institutions = "[52 rows]"
-    standingDefenseForces(settlement) = DERIVED: the engine computes this as `standingDefenseForces(settlement)`. Write from those values and give this reading no value of its own.
+    standingDefenseForces(settlement) = DERIVED: the engine computes this as `standingDefenseForces(settlement)`. The card holds no input for it, so give this reading no value: what the engine decided about it is what the pool key and the page lines already say.
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
     A field reading UNKNOWN or DERIVED cannot carry a value of its own, and no
@@ -317,7 +317,7 @@ POOL "arcane defense PRESENT" in block DS-DEF-5
     {settlement} is "Spitzplatz" on this town
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
-    magicWorksAt({ settlement }) = DERIVED: the engine computes this as `magicWorksAt({ settlement })`. Write from those values and give this reading no value of its own.
+    magicWorksAt({ settlement }) = DERIVED: the engine computes this as `magicWorksAt({ settlement })`. The card holds no input for it, so give this reading no value: what the engine decided about it is what the pool key and the page lines already say.
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
     A field reading UNKNOWN or DERIVED cannot carry a value of its own, and no
