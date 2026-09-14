@@ -23,6 +23,58 @@ the page. A source speaks through one of the roles its own roster lists and thro
    "Professional city watch"
   ]
  },
+ "bodies": [
+  {
+   "kind": "power bloc",
+   "name": "Arcane Orders",
+   "source": "powerStructure.factions[].faction"
+  },
+  {
+   "kind": "power bloc",
+   "name": "City Council",
+   "source": "powerStructure.factions[].faction"
+  },
+  {
+   "kind": "power bloc",
+   "name": "Craft Guilds",
+   "source": "powerStructure.factions[].faction"
+  },
+  {
+   "kind": "power bloc",
+   "name": "Merchant Guilds",
+   "source": "powerStructure.factions[].faction"
+  },
+  {
+   "kind": "power bloc",
+   "name": "Military/Guard",
+   "source": "powerStructure.factions[].faction"
+  },
+  {
+   "kind": "power bloc",
+   "name": "Religious Authorities",
+   "source": "powerStructure.factions[].faction"
+  },
+  {
+   "kind": "faction",
+   "name": "The Faithful Assembly",
+   "source": "factions[].name"
+  },
+  {
+   "kind": "faction",
+   "name": "The Free Alliance",
+   "source": "factions[].name"
+  },
+  {
+   "kind": "faction",
+   "name": "The Governing Council",
+   "source": "factions[].name"
+  },
+  {
+   "kind": "power bloc",
+   "name": "Thieves' Guild",
+   "source": "powerStructure.factions[].faction"
+  }
+ ],
  "compromised": [],
  "compromisedRate": 0.7,
  "culture": "germanic",
@@ -777,6 +829,19 @@ the page. A source speaks through one of the roles its own roster lists and thro
  ],
  "tier": "city"
 }
+
+THE BODIES THIS PAGE NAMES
+A body here may act and speak; a body not here may be named only as the corpus line names it.
+  Arcane Orders (power bloc, from powerStructure.factions[].faction)
+  City Council (power bloc, from powerStructure.factions[].faction)
+  Craft Guilds (power bloc, from powerStructure.factions[].faction)
+  Merchant Guilds (power bloc, from powerStructure.factions[].faction)
+  Military/Guard (power bloc, from powerStructure.factions[].faction)
+  Religious Authorities (power bloc, from powerStructure.factions[].faction)
+  The Faithful Assembly (faction, from factions[].name)
+  The Free Alliance (faction, from factions[].name)
+  The Governing Council (faction, from factions[].name)
+  Thieves' Guild (power bloc, from powerStructure.factions[].faction)
 
 THE TWO LADDERS, WHICH ARE BOTH THE ENGINE'S. The posture badge word (Fortress, Well-Defended,
 Defensible, Lightly Defended, Vulnerable, Undefended) and the readiness band (STRONG, ADEQUATE,

@@ -13,6 +13,13 @@ THE STATE THIS PAGE READS:
  "tick": null
 }
 
+THE PAGE AS THE READER MEETS IT
+These lines are printed on the same page as yours.
+A line of yours that denies one of them is refused; a line that agrees with the band where the
+badge word differs is not (the two ladders).
+  [badge] powerStructure.stability: Stable
+  [machine] recentConflict: Elected Reeve has been debating market levies for three months. The merchants have stopped attending the sessions. Both sides are now acting as if the other has already lost.
+
 THE LINES TO WRITE:
 POOL "Tolerated" in block DS-POW-1
   vid: 4
@@ -76,6 +83,7 @@ POOL "layer DORMANT (no ledger materialized)" in block DS-POW-7
   THIS POOL IS NOT WRITEABLE ON THIS TOWN: OMIT IT. No reading it rests on has a
   value here, so there is nothing to stand a sentence on but the pool key itself.
   Return no unit for this pool. The hand corpus draws it, which is the right answer.
+  CAVEAT: this pool's key names a departure (the word `dormant`) and not one of the readings behind it has a value on this card; write the key as the engine states it and assert nothing about what departed, when, or what it carried
   THE ORDER: the corpus spine realises none of the eight closed level-1 orders, so this pool sets no order for you to keep.
   slots you may use: settlement
     {settlement} is "Hochhausen" on this town

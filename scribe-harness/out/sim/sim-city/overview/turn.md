@@ -13,6 +13,18 @@ THE STATE THIS PAGE READS:
  "tick": null
 }
 
+THE PAGE AS THE READER MEETS IT
+These lines are printed on the same page as yours.
+A line of yours that denies one of them is refused; a line that agrees with the band where the
+badge word differs is not (the two ladders).
+  [machine] historicalCharacter: Everything before the Occupation is referred to as 'the old settlement'. What exists now was built after, by different people, with different assumptions, over different rubble
+  [badge] prosperity: Prosperous
+  [badge] safetyLabel: Moderate
+  [badge] readiness: Well-Defended
+  [badge] foodSecurity: Secure
+  [machine] arrivalScene: Rundgate is neither impressive nor disappointing from the approach. It is what it is, which is a working settlement of reasonable size doing reasonable things. A city, properly speaking: dense, layered, too large to take in at once. Steep roofs, enclosed craft yards, and carved lintels mark the older wards. A magelight lamp post marks the main gate. The cathedral bell tower is the first thing visible from this direction. Rundgate appears around a bend in the road, its walls and towers coming into view all at once.
+  [machine] pressureSentence: Nora Jäger's relationship with Tangmar Werner is more complicated than their public roles suggest. A document each believed only they possessed has surfaced in a third set of hands.
+
 THE LINES TO WRITE:
 POOL "MARKET-OPEN" in block DS-GEN-13
   vid: 1
@@ -232,6 +244,7 @@ POOL "tier overlay: city" in block DS-GEN-6
 POOL "flagDriven count zero" in block DS-REL-2
   vid: 4
   stance: counterforce
+  CAVEAT: this town's historical character names an occupation or a conquest while this key counts no tie the engine drove off a flag; the count is of the engine's own flags and not of the town's past, so write the key as the narrow count it is and read no wider denial out of it
   THE ORDER: the corpus spine realises the move order `V1` — `PRESENT` (the state key alone); keep that order in your spine.
   slots you may use: settlement
     {settlement} is "Rundgate" on this town

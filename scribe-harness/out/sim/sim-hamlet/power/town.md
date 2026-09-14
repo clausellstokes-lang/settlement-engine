@@ -10,6 +10,23 @@ the page. A source speaks through one of the roles its own roster lists and thro
   "fortifications": [],
   "standing": []
  },
+ "bodies": [
+  {
+   "kind": "power bloc",
+   "name": "Free Elder Council",
+   "source": "powerStructure.factions[].faction"
+  },
+  {
+   "kind": "power bloc",
+   "name": "Monster Hunters / Adventurers",
+   "source": "powerStructure.factions[].faction"
+  },
+  {
+   "kind": "faction",
+   "name": "The Independent Bloc",
+   "source": "factions[].name"
+  }
+ ],
  "compromised": [],
  "compromisedRate": 0.7,
  "culture": "germanic",
@@ -291,6 +308,12 @@ the page. A source speaks through one of the roles its own roster lists and thro
  ],
  "tier": "hamlet"
 }
+
+THE BODIES THIS PAGE NAMES
+A body here may act and speak; a body not here may be named only as the corpus line names it.
+  Free Elder Council (power bloc, from powerStructure.factions[].faction)
+  Monster Hunters / Adventurers (power bloc, from powerStructure.factions[].faction)
+  The Independent Bloc (faction, from factions[].name)
 
 THE TWO LADDERS, WHICH ARE BOTH THE ENGINE'S. The posture badge word (Fortress, Well-Defended,
 Defensible, Lightly Defended, Vulnerable, Undefended) and the readiness band (STRONG, ADEQUATE,

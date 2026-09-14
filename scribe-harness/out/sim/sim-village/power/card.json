@@ -194,6 +194,7 @@
    "angle": "counterforce",
    "authoredIndex": 3,
    "blockId": "DS-POW-1",
+   "caveats": [],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -259,6 +260,7 @@
    "angle": "ledger",
    "authoredIndex": 0,
    "blockId": "DS-POW-1",
+   "caveats": [],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -327,6 +329,7 @@
    "angle": "street",
    "authoredIndex": 0,
    "blockId": "DS-POW-2",
+   "caveats": [],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -398,6 +401,7 @@
    "angle": "street",
    "authoredIndex": 1,
    "blockId": "DS-POW-2",
+   "caveats": [],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -466,6 +470,13 @@
    "angle": "street",
    "authoredIndex": 1,
    "blockId": "DS-POW-7",
+   "caveats": [
+    {
+     "channel": "REPORT",
+     "key": "departure key with no reading under it",
+     "note": "this pool's key names a departure (the word `dormant`) and not one of the readings behind it has a value on this card; write the key as the engine states it and assert nothing about what departed, when, or what it carried"
+    }
+   ],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -539,6 +550,7 @@
    "angle": "ledger",
    "authoredIndex": 0,
    "blockId": "DS-POW-5",
+   "caveats": [],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -604,6 +616,7 @@
    "angle": "ledger",
    "authoredIndex": 0,
    "blockId": "DS-POW-5",
+   "caveats": [],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -672,6 +685,7 @@
    "angle": "street",
    "authoredIndex": 1,
    "blockId": "DS-POW-4",
+   "caveats": [],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -736,6 +750,7 @@
    "angle": "street",
    "authoredIndex": 1,
    "blockId": "DS-POW-4",
+   "caveats": [],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -815,7 +830,7 @@
    "writeable": true
   }
  ],
- "schema": "scribe-town-card/4",
+ "schema": "scribe-town-card/6",
  "seed": "sim-village",
  "staticCardJoined": true,
  "tab": "power",
@@ -830,6 +845,53 @@
    "fortifications": [],
    "standing": []
   },
+  "bodies": [
+   {
+    "kind": "power bloc",
+    "name": "Craft Guilds",
+    "source": "powerStructure.factions[].faction"
+   },
+   {
+    "kind": "power bloc",
+    "name": "Elected Reeve",
+    "source": "powerStructure.factions[].faction"
+   },
+   {
+    "kind": "relationship party",
+    "name": "Ingrid Köhler",
+    "source": "prominentRelationship.npc1"
+   },
+   {
+    "kind": "relationship party",
+    "name": "Ivo Werner",
+    "source": "prominentRelationship.npc2"
+   },
+   {
+    "kind": "power bloc",
+    "name": "Merchant Guilds",
+    "source": "powerStructure.factions[].faction"
+   },
+   {
+    "kind": "power bloc",
+    "name": "Military/Guard",
+    "source": "powerStructure.factions[].faction"
+   },
+   {
+    "kind": "power bloc",
+    "name": "Religious Authorities",
+    "source": "powerStructure.factions[].faction"
+   },
+   {
+    "kind": "faction",
+    "name": "The Administrative Circle",
+    "source": "factions[].name"
+   },
+   {
+    "kind": "faction",
+    "name": "The Commercial Circle",
+    "source": "factions[].name"
+   }
+  ],
   "compromised": [],
   "compromisedRate": 0.7,
   "culture": "germanic",

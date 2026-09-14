@@ -308,6 +308,7 @@
    "angle": "street",
    "authoredIndex": 0,
    "blockId": "DS-GEN-13",
+   "caveats": [],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -403,6 +404,7 @@
    "angle": "visitor",
    "authoredIndex": 0,
    "blockId": "DS-GEN-17",
+   "caveats": [],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -478,6 +480,7 @@
    "angle": "street",
    "authoredIndex": 2,
    "blockId": "DS-GEN-3",
+   "caveats": [],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -553,6 +556,7 @@
    "angle": "street",
    "authoredIndex": 2,
    "blockId": "DS-GEN-3",
+   "caveats": [],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -632,6 +636,7 @@
    "angle": "visitor",
    "authoredIndex": 0,
    "blockId": "DS-GEN-3",
+   "caveats": [],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -707,6 +712,7 @@
    "angle": "visitor",
    "authoredIndex": 0,
    "blockId": "DS-GEN-3",
+   "caveats": [],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -793,6 +799,7 @@
    "angle": "street",
    "authoredIndex": 2,
    "blockId": "DS-GEN-3",
+   "caveats": [],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -879,6 +886,7 @@
    "angle": "ledger",
    "authoredIndex": 1,
    "blockId": "DS-GEN-3",
+   "caveats": [],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -963,6 +971,7 @@
    "angle": "visitor",
    "authoredIndex": 1,
    "blockId": "DS-GEN-3",
+   "caveats": [],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -1049,6 +1058,7 @@
    "angle": "visitor",
    "authoredIndex": 0,
    "blockId": "DS-GEN-3",
+   "caveats": [],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -1135,6 +1145,7 @@
    "angle": "street",
    "authoredIndex": 1,
    "blockId": "DS-GEN-3",
+   "caveats": [],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -1210,6 +1221,7 @@
    "angle": "street",
    "authoredIndex": 1,
    "blockId": "DS-GEN-5",
+   "caveats": [],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -1274,6 +1286,7 @@
    "angle": "ledger",
    "authoredIndex": 2,
    "blockId": "DS-GEN-6",
+   "caveats": [],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -1351,6 +1364,7 @@
    "angle": "visitor",
    "authoredIndex": 2,
    "blockId": "DS-GEN-6",
+   "caveats": [],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -1426,6 +1440,13 @@
    "angle": "counterforce",
    "authoredIndex": 3,
    "blockId": "DS-REL-2",
+   "caveats": [
+    {
+     "channel": "REPORT",
+     "key": "a flag count of zero on a town with a recorded upheaval",
+     "note": "this town's historical character names an occupation or a conquest while this key counts no tie the engine drove off a flag; the count is of the engine's own flags and not of the town's past, so write the key as the narrow count it is and read no wider denial out of it"
+    }
+   ],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -1509,7 +1530,7 @@
    "writeable": true
   }
  ],
- "schema": "scribe-town-card/4",
+ "schema": "scribe-town-card/6",
  "seed": "sim-city",
  "staticCardJoined": true,
  "tab": "overview",
@@ -1535,6 +1556,58 @@
     "Professional city watch"
    ]
   },
+  "bodies": [
+   {
+    "kind": "power bloc",
+    "name": "Arcane Orders",
+    "source": "powerStructure.factions[].faction"
+   },
+   {
+    "kind": "power bloc",
+    "name": "City Council",
+    "source": "powerStructure.factions[].faction"
+   },
+   {
+    "kind": "power bloc",
+    "name": "Craft Guilds",
+    "source": "powerStructure.factions[].faction"
+   },
+   {
+    "kind": "power bloc",
+    "name": "Merchant Guilds",
+    "source": "powerStructure.factions[].faction"
+   },
+   {
+    "kind": "power bloc",
+    "name": "Military/Guard",
+    "source": "powerStructure.factions[].faction"
+   },
+   {
+    "kind": "power bloc",
+    "name": "Religious Authorities",
+    "source": "powerStructure.factions[].faction"
+   },
+   {
+    "kind": "faction",
+    "name": "The Faithful Assembly",
+    "source": "factions[].name"
+   },
+   {
+    "kind": "faction",
+    "name": "The Free Alliance",
+    "source": "factions[].name"
+   },
+   {
+    "kind": "faction",
+    "name": "The Governing Council",
+    "source": "factions[].name"
+   },
+   {
+    "kind": "power bloc",
+    "name": "Thieves' Guild",
+    "source": "powerStructure.factions[].faction"
+   }
+  ],
   "compromised": [],
   "compromisedRate": 0.7,
   "culture": "germanic",

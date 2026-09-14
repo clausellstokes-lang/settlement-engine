@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-14 16:44:18 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-14 16:49:40 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = 67fa50f40 Plan: the collection at 09-14 ~16:5x — under the owner's non-contradiction standard the 
 
@@ -113,6 +113,13 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
 - LAST-RUNS: 
 
 ## WORKFLOW RUNS of chair session f86a239c-ba8e-464d-a904-e4b70a0c4b2e — PER AGENT, PER LANE (owner 09-11: save progress per agent per lane; a run dies with the session, its journal + the packets + the dock commits are the checkpoint; journals mirrored under $SC/_progress/<wf>/)
+- **wf_ce8d34f2-917** (mtime 09-14 16:48): agent calls 6 (6 distinct) · DONE 0 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 6 — mirror `_progress/wf_ce8d34f2-917/`
+    - `a38b65557` ? · IN FLIGHT · transcript 09-14 16:48 448 KB · 5 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
+    - `aef1b837d` ? · IN FLIGHT · transcript 09-14 16:48 459 KB · 7 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
+    - `a986300e6` ? · IN FLIGHT · transcript 09-14 16:48 434 KB · 6 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
+    - `a22d3524e` ? · IN FLIGHT · transcript 09-14 16:48 446 KB · 6 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
+    - `a928cc714` ? · IN FLIGHT · transcript 09-14 16:48 444 KB · 7 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
+    - `a055d73a7` ? · IN FLIGHT · transcript 09-14 16:48 458 KB · 8 tool calls · last: Bash wc -c /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/sc
 - **wf_59ec807d-940** (mtime 09-14 16:02): agent calls 64 (64 distinct) · DONE 64 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 0 — mirror `_progress/wf_59ec807d-940/`
     - `aa0a85931` ? · DONE · transcript 09-14 15:10 606 KB · 9 tool calls · files: response-opus.json · result: {"unitsWritten": 14, "notes": ["Two seats have no roster on this town: DS-DEF-2 'Invasion & War' face 0 is seated on `elders` and DS-DEF-2 'Internal Security' f
     - `a1a27c60a` ? · DONE · transcript 09-14 15:35 1366 KB · 12 tool calls · files: response-sonnet.json · result: {"unitsWritten": 14, "notes": ["Two pools call for faces attributed to roles Spitzplatz's own roster does not seat: `elders` in DS-DEF-2 Invasion & War (the tow
@@ -292,4 +299,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `afbaa2e6b` ADVERSARY · DONE · transcript 09-14 03:02 490 KB · 6 tool calls · result: {"pool": "Disasters & Famine: NO reserves, NO medical provision", "auditorWasWrong": true, "missedFindings": [{"kind": "CLAIM_MOVED", "variant": 2, "faceOrSpine
 
 ## PROCESSES: 
-load: 2.43 2.64 2.61
+load: 3.33 2.71 2.61

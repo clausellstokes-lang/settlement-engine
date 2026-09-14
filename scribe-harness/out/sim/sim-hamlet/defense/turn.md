@@ -13,6 +13,34 @@ THE STATE THIS PAGE READS:
  "tick": null
 }
 
+THE PAGE AS THE READER MEETS IT
+These lines are printed on the same page as yours.
+A line of yours that denies one of them is refused; a line that agrees with the band where the
+badge word differs is not (the two ladders).
+  [badge] readiness: Vulnerable
+  [machine] guardEffectivenessDesc: There is no formal enforcement body. Order is maintained through community social pressure, the authority of established families, and the implicit threat of collective action against those who break the peace. This works until it doesn't.
+  [row] Beasts & Monsters: Beasts & Monsters — CRITICAL
+  [machine] Beasts & Monsters.assess: Active frontier with no organized defense. Vulnerable to any monster of moderate capability.
+  [machine] Beasts & Monsters.fundingNote: Upkeep underfunded: patrol provisioning at 93%
+  [row] Invasion & War: Invasion & War — CRITICAL
+  [machine] Invasion & War.assess: No walls or garrison. Cannot resist organized military aggression. Survival depends entirely on distance, diplomacy, or irrelevance to the attacker.
+  [row] Internal Security: Internal Security — WEAK
+  [machine] Internal Security.assess: Internal security: Dangerous — Monster Threat. Active violence and organized crime make internal order the primary threat. No legal infrastructure: order relies on force alone.
+  [row] Economic Survival: Economic Survival — WEAK
+  [machine] Economic Survival.assess: Economic base cannot support crisis response. Any sustained threat quickly overwhelms the capacity to respond.
+  [machine] Economic Survival.fundingNote: Upkeep underfunded: crisis logistics at 87%
+  [row] Disasters & Famine: Disasters & Famine — ADEQUATE
+  [machine] Disasters & Famine.assess: No food reserves. A crop failure or supply disruption causes immediate hardship. Parish clergy provide basic wound care: better than nothing, worse than a hospital.
+  [machine] Disasters & Famine.fundingNote: Upkeep underfunded: relief funding at 89%
+  [badge] safetyLabel: Dangerous — Monster Threat
+  [machine] safetyDesc: Monster pressure from the surrounding region has changed how the settlement operates after dark. Outlying areas are avoided. Night movement is restricted.
+  [machine] Economic Backing: Economic Backing: Critical — Cannot sustain forces. Systemic breakdown.
+  [machine] Magical Capability: Magical Capability: None — Conventional defense only. Invisible threats go undetected and unanswered.
+  [machine] Legal Infrastructure: Legal Infrastructure: None — No deterrence beyond force.
+  [machine] Medical Readiness: Medical Readiness: Clergy care — Parish care. Basic wound and disease management.
+  [machine] Logistics & Supply: Logistics & Supply: No reserves — No food buffer. Any supply disruption becomes a survival crisis within days.
+  [badge] militaryStatus: BEAST PRESSURE (monster_pressure)
+
 THE LINES TO WRITE:
 POOL "readiness CRITICAL" in block DS-DEF-1
   vid: 2
@@ -230,6 +258,7 @@ POOL "First-Survey qualification (the reading is a first look)" in block DS-DEF-
 POOL "structure null (nothing organized recognized)" in block DS-DEF-4
   vid: 1
   stance: ledger
+  CAVEAT: the page's own internal security line reads Dangerous beside this key, which says nothing organised is RECOGNISED; both are the engine's and both stand, because one is about what is recognised and the other about what is happening; write the key and do not reconcile the two
   THE ORDER: the corpus spine realises the move order `V1` — `PRESENT` (the state key alone); keep that order in your spine.
   slots you may use: settlement
     {settlement} is "Warmholz" on this town
@@ -311,6 +340,7 @@ POOL "charter hall ABSENT where the country warrants one" in block DS-DEF-5
 POOL "arcane defense ABSENT" in block DS-DEF-5
   vid: 3
   stance: counterforce
+  CAVEAT: this pool's key names a departure (the word `absent`) and not one of the readings behind it has a value on this card; write the key as the engine states it and assert nothing about what departed, when, or what it carried
   THE ORDER: the corpus spine realises none of the eight closed level-1 orders, so this pool sets no order for you to keep.
   slots you may use: settlement
     {settlement} is "Warmholz" on this town

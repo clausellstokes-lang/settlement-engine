@@ -13,6 +13,30 @@ THE STATE THIS PAGE READS:
  "tick": null
 }
 
+THE PAGE AS THE READER MEETS IT
+These lines are printed on the same page as yours.
+A line of yours that denies one of them is refused; a line that agrees with the band where the
+badge word differs is not (the two ladders).
+  [badge] readiness: Lightly Defended
+  [machine] guardEffectivenessDesc: A mercenary company provides enforcement: professional and effective, but loyal to the contract, not the community. When the coin stops, so does the protection. Without courts or prison, enforcement relies entirely on fines, exile, or summary violence.
+  [row] Beasts & Monsters: Beasts & Monsters — WEAK
+  [machine] Beasts & Monsters.assess: Active frontier with no organized defense. Vulnerable to any monster of moderate capability.
+  [row] Invasion & War: Invasion & War — ADEQUATE
+  [machine] Invasion & War.assess: No walls or garrison. Cannot resist organized military aggression. Survival depends entirely on distance, diplomacy, or irrelevance to the attacker.
+  [row] Internal Security: Internal Security — WEAK
+  [machine] Internal Security.assess: Internal security: Moderate. No legal infrastructure: order relies on force alone.
+  [row] Economic Survival: Economic Survival — WEAK
+  [machine] Economic Survival.assess: Chronic underfunding limits emergency response. A sustained crisis will exhaust reserves and undermine garrison morale.
+  [row] Disasters & Famine: Disasters & Famine — STRONG
+  [machine] Disasters & Famine.assess: No food reserves. A crop failure or supply disruption causes immediate hardship. Parish clergy provide basic wound care: better than nothing, worse than a hospital.
+  [badge] safetyLabel: Moderate
+  [machine] safetyDesc: A mix of safer and more exposed areas. Locals watch over the main paths; quieter spots after dark carry genuine risk. Residents know which corners to avoid.
+  [machine] Economic Backing: Economic Backing: Underfunded — Irregular pay, worn equipment, morale risk.
+  [machine] Magical Capability: Magical Capability: None — Conventional defense only. Invisible threats go undetected and unanswered.
+  [machine] Legal Infrastructure: Legal Infrastructure: None — No deterrence beyond force.
+  [machine] Medical Readiness: Medical Readiness: Clergy care — Parish care. Basic wound and disease management.
+  [machine] Logistics & Supply: Logistics & Supply: No reserves — No food buffer. Any supply disruption becomes a survival crisis within days.
+
 THE LINES TO WRITE:
 POOL "readiness WEAK" in block DS-DEF-1
   vid: 1
@@ -271,6 +295,7 @@ POOL "charter hall PRESENT (specialist monster response)" in block DS-DEF-5
 POOL "arcane defense ABSENT" in block DS-DEF-5
   vid: 2
   stance: street
+  CAVEAT: this pool's key names a departure (the word `absent`) and not one of the readings behind it has a value on this card; write the key as the engine states it and assert nothing about what departed, when, or what it carried
   THE ORDER: the corpus spine realises the move order `V1` — `PRESENT` (the state key alone); keep that order in your spine.
   slots you may use: (none)
   THE FIELDS this pool reads, with their values here:

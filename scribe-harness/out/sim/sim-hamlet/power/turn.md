@@ -13,6 +13,14 @@ THE STATE THIS PAGE READS:
  "tick": null
 }
 
+THE PAGE AS THE READER MEETS IT
+These lines are printed on the same page as yours.
+A line of yours that denies one of them is refused; a line that agrees with the band where the
+badge word differs is not (the two ladders).
+  [machine] chain.absence: No named seat-holder stands in the record. The chain ends, honestly, at the faction.
+  [badge] powerStructure.stability: Tense (monster pressure from surrounding region)
+  [machine] recentConflict: A farmstead a short walk from here was destroyed last night. The family is gone. No one is going to look for them.
+
 THE LINES TO WRITE:
 POOL "Legitimacy Crisis" in block DS-POW-1
   vid: 2
@@ -107,6 +115,7 @@ POOL "layer DORMANT (no ledger materialized)" in block DS-POW-7
   THIS POOL IS NOT WRITEABLE ON THIS TOWN: OMIT IT. No reading it rests on has a
   value here, so there is nothing to stand a sentence on but the pool key itself.
   Return no unit for this pool. The hand corpus draws it, which is the right answer.
+  CAVEAT: this pool's key names a departure (the word `dormant`) and not one of the readings behind it has a value on this card; write the key as the engine states it and assert nothing about what departed, when, or what it carried
   THE ORDER: the corpus spine realises none of the eight closed level-1 orders, so this pool sets no order for you to keep.
   slots you may use: settlement
     {settlement} is "Warmholz" on this town
@@ -162,6 +171,7 @@ POOL "riskLabel: Contested" in block DS-POW-4
 POOL "legitimacyHold: public rejection is breaking the hold" in block DS-POW-4
   vid: 3
   stance: ledger
+  CAVEAT: this pool's key names a departure (the word `breaking`) and not one of the readings behind it has a value on this card; write the key as the engine states it and assert nothing about what departed, when, or what it carried
   THE ORDER: the corpus spine realises the move order `V5` — `INSTITUTION then PRESENT` (an institution row + the state key); keep that order in your spine.
   slots you may use: seat, settlement
     {seat} is "Free Elder Council" on this town

@@ -18,6 +18,63 @@ the page. A source speaks through one of the roles its own roster lists and thro
    "Town watch"
   ]
  },
+ "bodies": [
+  {
+   "kind": "relationship party",
+   "name": "Berchta Schmidt",
+   "source": "prominentRelationship.npc1"
+  },
+  {
+   "kind": "power bloc",
+   "name": "Craft Guilds",
+   "source": "powerStructure.factions[].faction"
+  },
+  {
+   "kind": "power bloc",
+   "name": "Guild Council",
+   "source": "powerStructure.factions[].faction"
+  },
+  {
+   "kind": "relationship party",
+   "name": "Karl Berger",
+   "source": "prominentRelationship.npc2"
+  },
+  {
+   "kind": "power bloc",
+   "name": "Merchant Guilds",
+   "source": "powerStructure.factions[].faction"
+  },
+  {
+   "kind": "power bloc",
+   "name": "Military/Guard",
+   "source": "powerStructure.factions[].faction"
+  },
+  {
+   "kind": "power bloc",
+   "name": "Religious Authorities",
+   "source": "powerStructure.factions[].faction"
+  },
+  {
+   "kind": "faction",
+   "name": "The Governing Council",
+   "source": "factions[].name"
+  },
+  {
+   "kind": "faction",
+   "name": "The Grey Council",
+   "source": "factions[].name"
+  },
+  {
+   "kind": "faction",
+   "name": "The Merchant Bloc",
+   "source": "factions[].name"
+  },
+  {
+   "kind": "faction",
+   "name": "The Order of the Watch",
+   "source": "factions[].name"
+  }
+ ],
  "compromised": [],
  "compromisedRate": 0.7,
  "culture": "germanic",
@@ -754,6 +811,20 @@ the page. A source speaks through one of the roles its own roster lists and thro
  ],
  "tier": "town"
 }
+
+THE BODIES THIS PAGE NAMES
+A body here may act and speak; a body not here may be named only as the corpus line names it.
+  Berchta Schmidt (relationship party, from prominentRelationship.npc1)
+  Craft Guilds (power bloc, from powerStructure.factions[].faction)
+  Guild Council (power bloc, from powerStructure.factions[].faction)
+  Karl Berger (relationship party, from prominentRelationship.npc2)
+  Merchant Guilds (power bloc, from powerStructure.factions[].faction)
+  Military/Guard (power bloc, from powerStructure.factions[].faction)
+  Religious Authorities (power bloc, from powerStructure.factions[].faction)
+  The Governing Council (faction, from factions[].name)
+  The Grey Council (faction, from factions[].name)
+  The Merchant Bloc (faction, from factions[].name)
+  The Order of the Watch (faction, from factions[].name)
 
 THE TWO LADDERS, WHICH ARE BOTH THE ENGINE'S. The posture badge word (Fortress, Well-Defended,
 Defensible, Lightly Defended, Vulnerable, Undefended) and the readiness band (STRONG, ADEQUATE,

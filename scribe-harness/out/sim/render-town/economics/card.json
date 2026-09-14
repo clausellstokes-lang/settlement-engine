@@ -296,6 +296,7 @@
    "angle": "visitor",
    "authoredIndex": 2,
    "blockId": "DS-ECO-1",
+   "caveats": [],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -376,6 +377,7 @@
    "angle": "street",
    "authoredIndex": 1,
    "blockId": "DS-ECO-12",
+   "caveats": [],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -466,6 +468,7 @@
    "angle": "visitor",
    "authoredIndex": 2,
    "blockId": "DS-ECO-12",
+   "caveats": [],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -585,6 +588,7 @@
    "angle": "street",
    "authoredIndex": 2,
    "blockId": "DS-ECO-10",
+   "caveats": [],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -653,6 +657,7 @@
    "angle": "threshold",
    "authoredIndex": 2,
    "blockId": "DS-ECO-9",
+   "caveats": [],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -715,6 +720,13 @@
    "angle": "ledger",
    "authoredIndex": 1,
    "blockId": "DS-GEN-18",
+   "caveats": [
+    {
+     "channel": "REPORT",
+     "key": "departure key with no reading under it",
+     "note": "this pool's key names a departure (the word `stalled`) and not one of the readings behind it has a value on this card; write the key as the engine states it and assert nothing about what departed, when, or what it carried"
+    }
+   ],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -840,6 +852,7 @@
    "angle": "counterforce",
    "authoredIndex": 3,
    "blockId": "DS-ECO-6",
+   "caveats": [],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -907,7 +920,7 @@
    "writeable": true
   }
  ],
- "schema": "scribe-town-card/4",
+ "schema": "scribe-town-card/6",
  "seed": "render-town",
  "staticCardJoined": true,
  "tab": "economics",
@@ -928,6 +941,63 @@
     "Town watch"
    ]
   },
+  "bodies": [
+   {
+    "kind": "relationship party",
+    "name": "Berchta Schmidt",
+    "source": "prominentRelationship.npc1"
+   },
+   {
+    "kind": "power bloc",
+    "name": "Craft Guilds",
+    "source": "powerStructure.factions[].faction"
+   },
+   {
+    "kind": "power bloc",
+    "name": "Guild Council",
+    "source": "powerStructure.factions[].faction"
+   },
+   {
+    "kind": "relationship party",
+    "name": "Karl Berger",
+    "source": "prominentRelationship.npc2"
+   },
+   {
+    "kind": "power bloc",
+    "name": "Merchant Guilds",
+    "source": "powerStructure.factions[].faction"
+   },
+   {
+    "kind": "power bloc",
+    "name": "Military/Guard",
+    "source": "powerStructure.factions[].faction"
+   },
+   {
+    "kind": "power bloc",
+    "name": "Religious Authorities",
+    "source": "powerStructure.factions[].faction"
+   },
+   {
+    "kind": "faction",
+    "name": "The Governing Council",
+    "source": "factions[].name"
+   },
+   {
+    "kind": "faction",
+    "name": "The Grey Council",
+    "source": "factions[].name"
+   },
+   {
+    "kind": "faction",
+    "name": "The Merchant Bloc",
+    "source": "factions[].name"
+   },
+   {
+    "kind": "faction",
+    "name": "The Order of the Watch",
+    "source": "factions[].name"
+   }
+  ],
   "compromised": [],
   "compromisedRate": 0.7,
   "culture": "germanic",

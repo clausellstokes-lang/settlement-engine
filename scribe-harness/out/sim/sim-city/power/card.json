@@ -204,6 +204,7 @@
    "angle": "ledger",
    "authoredIndex": 1,
    "blockId": "DS-POW-1",
+   "caveats": [],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -272,6 +273,7 @@
    "angle": "street",
    "authoredIndex": 1,
    "blockId": "DS-POW-1",
+   "caveats": [],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -344,6 +346,7 @@
    "angle": "threshold",
    "authoredIndex": 3,
    "blockId": "DS-POW-2",
+   "caveats": [],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -408,6 +411,7 @@
    "angle": "street",
    "authoredIndex": 2,
    "blockId": "DS-POW-2",
+   "caveats": [],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -494,6 +498,7 @@
    "angle": "ledger",
    "authoredIndex": 0,
    "blockId": "DS-POW-6",
+   "caveats": [],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -558,6 +563,13 @@
    "angle": "ledger",
    "authoredIndex": 0,
    "blockId": "DS-POW-7",
+   "caveats": [
+    {
+     "channel": "REPORT",
+     "key": "departure key with no reading under it",
+     "note": "this pool's key names a departure (the word `dormant`) and not one of the readings behind it has a value on this card; write the key as the engine states it and assert nothing about what departed, when, or what it carried"
+    }
+   ],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -633,6 +645,7 @@
    "angle": "unfolding",
    "authoredIndex": 2,
    "blockId": "DS-POW-5",
+   "caveats": [],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -701,6 +714,7 @@
    "angle": "visitor",
    "authoredIndex": 1,
    "blockId": "DS-POW-5",
+   "caveats": [],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -766,6 +780,7 @@
    "angle": "ledger",
    "authoredIndex": 0,
    "blockId": "DS-POW-4",
+   "caveats": [],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -838,6 +853,7 @@
    "angle": "ledger",
    "authoredIndex": 1,
    "blockId": "DS-POW-4",
+   "caveats": [],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -916,7 +932,7 @@
    "writeable": true
   }
  ],
- "schema": "scribe-town-card/4",
+ "schema": "scribe-town-card/6",
  "seed": "sim-city",
  "staticCardJoined": true,
  "tab": "power",
@@ -942,6 +958,58 @@
     "Professional city watch"
    ]
   },
+  "bodies": [
+   {
+    "kind": "power bloc",
+    "name": "Arcane Orders",
+    "source": "powerStructure.factions[].faction"
+   },
+   {
+    "kind": "power bloc",
+    "name": "City Council",
+    "source": "powerStructure.factions[].faction"
+   },
+   {
+    "kind": "power bloc",
+    "name": "Craft Guilds",
+    "source": "powerStructure.factions[].faction"
+   },
+   {
+    "kind": "power bloc",
+    "name": "Merchant Guilds",
+    "source": "powerStructure.factions[].faction"
+   },
+   {
+    "kind": "power bloc",
+    "name": "Military/Guard",
+    "source": "powerStructure.factions[].faction"
+   },
+   {
+    "kind": "power bloc",
+    "name": "Religious Authorities",
+    "source": "powerStructure.factions[].faction"
+   },
+   {
+    "kind": "faction",
+    "name": "The Faithful Assembly",
+    "source": "factions[].name"
+   },
+   {
+    "kind": "faction",
+    "name": "The Free Alliance",
+    "source": "factions[].name"
+   },
+   {
+    "kind": "faction",
+    "name": "The Governing Council",
+    "source": "factions[].name"
+   },
+   {
+    "kind": "power bloc",
+    "name": "Thieves' Guild",
+    "source": "powerStructure.factions[].faction"
+   }
+  ],
   "compromised": [],
   "compromisedRate": 0.7,
   "culture": "germanic",

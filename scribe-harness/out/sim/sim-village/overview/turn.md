@@ -13,6 +13,19 @@ THE STATE THIS PAGE READS:
  "tick": null
 }
 
+THE PAGE AS THE READER MEETS IT
+These lines are printed on the same page as yours.
+A line of yours that denies one of them is refused; a line that agrees with the band where the
+badge word differs is not (the two ladders).
+  [machine] historicalCharacter: Older residents still distinguish between 'the original settlement' and 'what we have now'. The Siege is where that line falls, not a clean line, but a real one
+  [badge] prosperity: Comfortable
+  [badge] safetyLabel: Moderate
+  [badge] readiness: Lightly Defended
+  [badge] foodSecurity: Secure
+  [machine] arrivalScene: Hochhausen is ordinary in the best sense: a place where people live and work and argue and sleep, which is most of what places are for. A proper village, large enough to have a market and small enough that strangers are noticed: steep roofs, enclosed craft yards, and carved lintels mark the older wards. A magelight lamp post marks the main gate. Hochhausen is announced by the smoke of its cookfires and the sound of its market before its buildings are visible.
+  [machine] pressureSentence: Elected Reeve has been debating market levies for three months. The merchants have stopped attending the sessions. Both sides are now acting as if the other has already lost.
+  [machine] prominentRelationship: Ingrid Köhler and Ivo Werner are connected by something neither discusses openly: A third party has asked Ingrid Köhler, quietly, whether Ivo Werner can be trusted. The answer took too long.
+
 THE LINES TO WRITE:
 POOL "MARKET-OPEN" in block DS-GEN-13
   vid: 3
@@ -158,6 +171,7 @@ POOL "scores.economic: WEAK" in block DS-GEN-3
 POOL "scores.magical: CRITICAL" in block DS-GEN-3
   vid: 2
   stance: ledger
+  CAVEAT: this pool's key names a departure (the word `critical`) and not one of the readings behind it has a value on this card; write the key as the engine states it and assert nothing about what departed, when, or what it carried
   THE ORDER: the corpus spine realises the move order `V1` — `PRESENT` (the state key alone); keep that order in your spine.
   slots you may use: settlement
     {settlement} is "Hochhausen" on this town

@@ -13,6 +13,14 @@ THE STATE THIS PAGE READS:
  "tick": null
 }
 
+THE PAGE AS THE READER MEETS IT
+These lines are printed on the same page as yours.
+A line of yours that denies one of them is refused; a line that agrees with the band where the
+badge word differs is not (the two ladders).
+  [badge] prosperity: Prosperous
+  [machine] situationDesc: Trade proceeds at an ordinary pace for a settlement of this size.
+  [badge] foodSecurity.label: Secure
+
 THE LINES TO WRITE:
 POOL "COMBINATION C1: a high rung on a working approach" in block DS-ECO-1
   vid: 1
@@ -93,6 +101,7 @@ POOL "SECURE" in block DS-ECO-9
 POOL "STALLED" in block DS-GEN-18
   vid: 2
   stance: ledger
+  CAVEAT: this pool's key names a departure (the word `stalled`) and not one of the readings behind it has a value on this card; write the key as the engine states it and assert nothing about what departed, when, or what it carried
   THE ORDER: the corpus spine realises the move order `V5` — `INSTITUTION then PRESENT` (an institution row + the state key); keep that order in your spine.
   slots you may use: institution, settlement
     {settlement} is "Rundgate" on this town

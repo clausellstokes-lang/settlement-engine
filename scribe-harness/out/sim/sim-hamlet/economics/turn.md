@@ -13,6 +13,14 @@ THE STATE THIS PAGE READS:
  "tick": null
 }
 
+THE PAGE AS THE READER MEETS IT
+These lines are printed on the same page as yours.
+A line of yours that denies one of them is refused; a line that agrees with the band where the
+badge word differs is not (the two ladders).
+  [badge] prosperity: Poor
+  [machine] situationDesc: Trade proceeds at an ordinary pace for a settlement of this size.
+  [badge] foodSecurity.label: Secure
+
 THE LINES TO WRITE:
 POOL "COMBINATION C4: a low rung on a working approach" in block DS-ECO-1
   vid: 2

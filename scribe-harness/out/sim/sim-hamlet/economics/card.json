@@ -232,6 +232,7 @@
    "angle": "street",
    "authoredIndex": 1,
    "blockId": "DS-ECO-1",
+   "caveats": [],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -300,6 +301,7 @@
    "angle": "street",
    "authoredIndex": 1,
    "blockId": "DS-ECO-12",
+   "caveats": [],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -390,6 +392,7 @@
    "angle": "street",
    "authoredIndex": 1,
    "blockId": "DS-ECO-12",
+   "caveats": [],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -502,6 +505,7 @@
    "angle": "ledger",
    "authoredIndex": 0,
    "blockId": "DS-ECO-10",
+   "caveats": [],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -577,6 +581,7 @@
    "angle": "ledger",
    "authoredIndex": 0,
    "blockId": "DS-ECO-9",
+   "caveats": [],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -639,6 +644,7 @@
    "angle": "ledger",
    "authoredIndex": 0,
    "blockId": "DS-GEN-18",
+   "caveats": [],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -761,7 +767,7 @@
    "writeable": true
   }
  ],
- "schema": "scribe-town-card/4",
+ "schema": "scribe-town-card/6",
  "seed": "sim-hamlet",
  "staticCardJoined": true,
  "tab": "economics",
@@ -774,6 +780,23 @@
    "fortifications": [],
    "standing": []
   },
+  "bodies": [
+   {
+    "kind": "power bloc",
+    "name": "Free Elder Council",
+    "source": "powerStructure.factions[].faction"
+   },
+   {
+    "kind": "power bloc",
+    "name": "Monster Hunters / Adventurers",
+    "source": "powerStructure.factions[].faction"
+   },
+   {
+    "kind": "faction",
+    "name": "The Independent Bloc",
+    "source": "factions[].name"
+   }
+  ],
   "compromised": [],
   "compromisedRate": 0.7,
   "culture": "germanic",

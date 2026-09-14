@@ -12,6 +12,53 @@ the page. A source speaks through one of the roles its own roster lists and thro
   "fortifications": [],
   "standing": []
  },
+ "bodies": [
+  {
+   "kind": "power bloc",
+   "name": "Craft Guilds",
+   "source": "powerStructure.factions[].faction"
+  },
+  {
+   "kind": "power bloc",
+   "name": "Elected Reeve",
+   "source": "powerStructure.factions[].faction"
+  },
+  {
+   "kind": "relationship party",
+   "name": "Ingrid Köhler",
+   "source": "prominentRelationship.npc1"
+  },
+  {
+   "kind": "relationship party",
+   "name": "Ivo Werner",
+   "source": "prominentRelationship.npc2"
+  },
+  {
+   "kind": "power bloc",
+   "name": "Merchant Guilds",
+   "source": "powerStructure.factions[].faction"
+  },
+  {
+   "kind": "power bloc",
+   "name": "Military/Guard",
+   "source": "powerStructure.factions[].faction"
+  },
+  {
+   "kind": "power bloc",
+   "name": "Religious Authorities",
+   "source": "powerStructure.factions[].faction"
+  },
+  {
+   "kind": "faction",
+   "name": "The Administrative Circle",
+   "source": "factions[].name"
+  },
+  {
+   "kind": "faction",
+   "name": "The Commercial Circle",
+   "source": "factions[].name"
+  }
+ ],
  "compromised": [],
  "compromisedRate": 0.7,
  "culture": "germanic",
@@ -454,6 +501,18 @@ the page. A source speaks through one of the roles its own roster lists and thro
  ],
  "tier": "village"
 }
+
+THE BODIES THIS PAGE NAMES
+A body here may act and speak; a body not here may be named only as the corpus line names it.
+  Craft Guilds (power bloc, from powerStructure.factions[].faction)
+  Elected Reeve (power bloc, from powerStructure.factions[].faction)
+  Ingrid Köhler (relationship party, from prominentRelationship.npc1)
+  Ivo Werner (relationship party, from prominentRelationship.npc2)
+  Merchant Guilds (power bloc, from powerStructure.factions[].faction)
+  Military/Guard (power bloc, from powerStructure.factions[].faction)
+  Religious Authorities (power bloc, from powerStructure.factions[].faction)
+  The Administrative Circle (faction, from factions[].name)
+  The Commercial Circle (faction, from factions[].name)
 
 THE TWO LADDERS, WHICH ARE BOTH THE ENGINE'S. The posture badge word (Fortress, Well-Defended,
 Defensible, Lightly Defended, Vulnerable, Undefended) and the readiness band (STRONG, ADEQUATE,
