@@ -4835,18 +4835,18 @@ the mechanism behind it.
 
 **LIFECYCLE: `emerging`**
 1. `[unfolding]` The trouble is new here. It shows in small displacements (a schedule slipping, a price moving) and has not yet been named out loud.
-2. `[street]` Something has begun. The town is not yet organized around it, and the people worst placed for it have not worked that out.
+2. `[street]` Something has begun. The town is not yet organized around it. The people worst placed for it have not worked that out.
 3. `[threshold]` This is the early part: legible to anyone paying attention, deniable to anyone who would rather not.
 
 **LIFECYCLE: `active`**
 1. `[visitor]` The crisis is fully underway and the town is arranged around it. Everything ordinary now happens in its margins.
 2. `[ledger]` This is the middle of it. The improvisations have become procedures, and nothing in the accounts assumes relief.
-3. `[street]` {settlement} is living inside the trouble rather than reacting to it; the shape of ordinary life has already shifted to accommodate it.
+3. `[street]` {settlement} is living inside the trouble rather than reacting to it. The shape of ordinary life has already shifted to accommodate it.
 
 **LIFECYCLE: `peaking`**
-1. `[counterforce]` It is as bad as it has been. Whatever the town had in reserve is being spent, and there is no obvious second reserve.
+1. `[counterforce]` It is as bad as it has been. Whatever the town had in reserve is being spent. There is no obvious second reserve.
 2. `[unfolding]` This is the worst of it. The strain has stopped compounding and started simply holding at a level nothing here was built for.
-3. `[threshold]` The pressure is at its height. What is going to survive this part is surviving it; what is not is failing now.
+3. `[threshold]` The pressure is at its height. What is going to survive this part is surviving it. What is not is failing now.
 
 **LIFECYCLE: `easing`**
 1. `[unfolding]` The worst has passed. The town is not recovered, but it has begun to plan past the trouble rather than around it.
@@ -4855,58 +4855,58 @@ the mechanism behind it.
 
 **LIFECYCLE: `residual`** (the echo, weighted by `memoryStrength`)
 1. `[elder]` The crisis is over and the town still moves as though it were not. The habits it forced have outlived the reason for them.
-2. `[street]` What is left is memory doing the work of pressure. The trouble has ended; its weight has not entirely lifted.
-3. `[visitor]` {settlement} still carries the mark. The event is finished; the caution it taught is not.
+2. `[street]` What is left is memory doing the work of pressure. The trouble has ended. Its weight has not entirely lifted.
+3. `[visitor]` {settlement} still carries the mark. The event is finished. The caution it taught is not.
 
 **COUNTERFORCE: `floorsMet` with a strong score** · **THE GOOD STATE (R-DST-G)**
-1. `[counterforce]` The town is meeting this well. Its strengths line up against exactly this kind of trouble, and the trouble is losing ground faster than it would elsewhere.
-2. `[ledger]` {settlement} has what this crisis requires and has it in the right combination; recovery here is a schedule rather than a hope.
-3. `[elder]` Every leg the town needed, it has. That is rarer than it sounds, and it is why this is ending sooner than it began.
+1. `[counterforce]` The town is meeting this well. Its strengths line up against exactly this kind of trouble. The trouble is losing ground faster than it would elsewhere.
+2. `[ledger]` {settlement} has what this crisis requires and has it in the right combination. Recovery here is a schedule rather than a hope.
+3. `[elder]` Every leg the town needed, it has. That is rarer than it sounds. It is why this is ending sooner than it began.
 
 **COUNTERFORCE: `floorsMet: false`** (partial strength, capped at neutral)
-1. `[threshold]` The town is strong in most of what this demands and short in one part, and the short part sets the pace.
+1. `[threshold]` The town is strong in most of what this demands and short in one part. The short part sets the pace.
 2. `[counterforce]` {settlement} has resources against this and not the full set. The missing leg means its strengths hold rather than push.
 3. `[ledger]` The response here is adequate without being decisive. One gap is enough to turn a recovery into an endurance.
 
 **COUNTERFORCE: a named leading source** · `{reason}` fills from a `SOURCE_LABEL` present in `sourceBreakdown[]`
 1. `[counterforce]` What is carrying {settlement} through this is {reason}. The rest of the town's strengths are following that one.
-2. `[ledger]` The recovery here rests on {reason}, which is doing more work than anyone sized it for.
+2. `[ledger]` The recovery here rests on {reason}. It is doing more work than anyone sized it for.
 3. `[threshold]` {reason} is why this has not been worse. Take it out and the arithmetic is a different arithmetic.
 
 **COUNTERFORCE: weak or absent**
-1. `[street]` The town has little to bring against this. It will end when it ends, and not because of anything {settlement} does.
+1. `[street]` The town has little to bring against this. It ends when it ends, and not because of anything {settlement} does.
 2. `[counterforce]` There is no lever here. The strengths that would shorten this crisis are the strengths the town does not have.
-3. `[elder]` {settlement} is enduring rather than resisting. The trouble decays at its own pace, and the town waits it out.
+3. `[elder]` {settlement} is enduring rather than resisting. The trouble decays at its own pace. The town waits it out.
 
 **SYNERGY: famine × disease_outbreak**
-1. `[ledger]` Hunger and sickness are compounding here. The ill cannot work the fields, and the fields are why they are ill.
-2. `[street]` The two troubles feed each other: what the sickness takes from the harvest, the shortfall returns to the sickbeds.
-3. `[counterforce]` {settlement} is short of food and short of the health to grow it, and neither shortage lifts before the other.
+1. `[ledger]` Hunger and sickness are compounding here. The ill cannot work the fields. The fields are why they are ill.
+2. `[street]` The two troubles feed each other. What the sickness takes from the harvest, the shortfall returns to the sickbeds.
+3. `[counterforce]` {settlement} is short of food and short of the health to grow it. Neither shortage lifts before the other.
 
 **SYNERGY: famine × siege** · `blocksResolution: true` (a HARD causal dependency)
-1. `[counterforce]` The hunger cannot lift while the lines hold. Relief exists; it is simply on the wrong side of the walls.
+1. `[counterforce]` The hunger cannot lift while the lines hold. Relief exists. It is simply on the wrong side of the walls.
 2. `[ledger]` There is grain within a short road of here and none of it can reach the town. The shortage ends when the siege does, and not before.
-3. `[visitor]` This famine is not a failure of harvest. It is a blockade, and it keeps exactly as long as the blockade keeps.
+3. `[visitor]` This famine is not a failure of harvest. It is a blockade. It keeps exactly as long as the blockade keeps.
 
 **SYNERGY: occupation × insurgency** · the one ACCELERATING pair
-1. `[unfolding]` The resistance is bleeding the garrison. Occupation and revolt feed each other here, and the arrangement costs the occupier more each season.
-2. `[street]` {settlement} is held and it is fighting; the holding is expensive in a way that is shortening it.
-3. `[threshold]` The occupation made the resistance and the resistance is unmaking the occupation: an ugly equilibrium, and an expensive one for whoever is paying to hold it.
+1. `[unfolding]` The resistance is bleeding the garrison. Occupation and revolt feed each other here. The arrangement costs the occupier more each season.
+2. `[street]` {settlement} is held and it is fighting. The holding is expensive in a way that is shortening it.
+3. `[threshold]` The occupation made the resistance and the resistance is unmaking the occupation. It is an ugly equilibrium, and an expensive one for whoever is paying to hold it.
 
 **SYNERGY: mass_migration × disease_outbreak**
 1. `[visitor]` The camps and the contagion are one problem. People packed close enough to shelter each other are packed close enough to infect each other.
-2. `[unfolding]` Flight from the sickness is spreading the sickness; every column that leaves carries some of it forward.
-3. `[counterforce]` {settlement} is absorbing arrivals faster than it can space them, and the illness is taking the difference.
+2. `[unfolding]` Flight from the sickness is spreading the sickness. Every column that leaves carries some of it forward.
+3. `[counterforce]` {settlement} is absorbing arrivals faster than it can space them. The illness is taking the difference.
 
 **SYNERGY: coup_detat × succession_void**
 1. `[threshold]` An empty seat invites the knives. The vacancy did not cause the conspiracy, but it removed every reason not to have one.
-2. `[street]` There is no undisputed claim, and there are several people acting as though there might be. The void is doing the plotting's recruiting for it.
-3. `[counterforce]` The unresolved succession keeps the plot alive; a settled claim would have ended it without a fight.
+2. `[street]` There is no undisputed claim. There are several people acting as though there might be. The void is doing the plotting's recruiting for it.
+3. `[counterforce]` The unresolved succession keeps the plot alive. A settled claim would have ended it without a fight.
 
 **SYNERGY: market_shock × indebtedness**
 1. `[ledger]` The crash and the debt are one problem now. Creditors are calling in what they are owed precisely because they doubt it is collectable.
-2. `[street]` {settlement} owes coin it could have paid before the market turned; each week the obligation grows against the means.
-3. `[unfolding]` The panic made the debts unpayable, and the debts are making the panic worse; neither settles in isolation.
+2. `[street]` {settlement} owes coin it could have paid before the market turned. Each week the obligation grows against the means.
+3. `[unfolding]` The panic made the debts unpayable. The debts are making the panic worse. Neither settles in isolation.
 
 **ORIGIN: `foreign_sponsored`**
 1. `[ledger]` The trouble here has a foreign hand behind it: coin that traces back across a border, and someone local living better than their station explains.
