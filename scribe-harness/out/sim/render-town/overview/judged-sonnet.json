@@ -1,0 +1,680 @@
+{
+ "verdicts": [
+  {
+   "blockId": "DS-GEN-13",
+   "poolKey": "MARKET-OPEN",
+   "vid": 4,
+   "verdict": "WITHHELD",
+   "arms": [
+    "ORDER"
+   ],
+   "findings": [
+    {
+     "arm": "ORDER",
+     "channel": "WITHHELD",
+     "subject": "a move sequence outside the closed set",
+     "value": "PRESENT then OBJECT then PRESENT",
+     "description": "the spine realises none of the eight level-1 orders; 83.7 per cent of the shipped defense leaf does, so this is a question for the refuter and not a mechanical refusal"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-GEN-17",
+   "poolKey": "ADMINISTERED",
+   "vid": 2,
+   "verdict": "PASS",
+   "arms": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "prosperity: Comfortable / Prosperous",
+   "vid": 3,
+   "verdict": "PASS",
+   "arms": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "economicViability.viable: true",
+   "vid": 2,
+   "verdict": "FAIL",
+   "arms": [
+    "NON-MOVE"
+   ],
+   "findings": [
+    {
+     "arm": "NON-MOVE",
+     "channel": "FAIL",
+     "subject": "FIGURE",
+     "value": "like a ",
+     "description": "the pools carry no simile slot; a comparison is a measurement in words"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "defenseProfile.readiness.label: Well-Defended",
+   "vid": 1,
+   "verdict": "PASS",
+   "arms": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.military: STRONG",
+   "vid": 3,
+   "verdict": "FAIL",
+   "arms": [
+    "C3",
+    "NON-MOVE"
+   ],
+   "findings": [
+    {
+     "arm": "NON-MOVE",
+     "channel": "FAIL",
+     "subject": "FIGURE",
+     "value": "as though ",
+     "description": "the pools carry no simile slot; a comparison is a measurement in words"
+    },
+    {
+     "arm": "C3",
+     "channel": "WITHHELD",
+     "subject": "is this clause historical?",
+     "value": "Nobody here expects the town to lose a straight fight, and it deals with its neighbours as",
+     "description": "a past-tense or formerly-construction: whether it asserts history is A6, the refuter's (semantic)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.monster: STRONG",
+   "vid": 2,
+   "verdict": "PASS",
+   "arms": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.internal: ADEQUATE",
+   "vid": 1,
+   "verdict": "PASS",
+   "arms": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.economic: STRONG",
+   "vid": 2,
+   "verdict": "PASS",
+   "arms": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.magical: WEAK",
+   "vid": 2,
+   "verdict": "PASS",
+   "arms": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "foodSecurity.label: Pressured",
+   "vid": 2,
+   "verdict": "PASS",
+   "arms": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-GEN-2",
+   "poolKey": "intensity: moderate",
+   "vid": 4,
+   "verdict": "WITHHELD",
+   "arms": [
+    "X"
+   ],
+   "findings": [
+    {
+     "arm": "X",
+     "channel": "WITHHELD",
+     "subject": "exhaustivity over an open column",
+     "value": "Political influence is what stands to change hands here, and both The Governing Council an",
+     "description": "the copula entails the subject is the column's only value; the column is not closed (open)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-GEN-5",
+   "poolKey": "ordinary (route road and the default)",
+   "vid": 4,
+   "verdict": "PASS",
+   "arms": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-GEN-6",
+   "poolKey": "road",
+   "vid": 3,
+   "verdict": "PASS",
+   "arms": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-GEN-6",
+   "poolKey": "tier overlay: other tiers",
+   "vid": 3,
+   "verdict": "PASS",
+   "arms": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-REL-2",
+   "poolKey": "prominentRelationship present",
+   "vid": 2,
+   "verdict": "PASS",
+   "arms": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-REL-2",
+   "poolKey": "flagDriven count zero",
+   "vid": 1,
+   "verdict": "PASS",
+   "arms": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-GEN-13",
+   "poolKey": "MARKET-OPEN",
+   "vid": 4,
+   "verdict": "FAIL",
+   "arms": [
+    "T1-CERTAINTY",
+    "T1-MECHANISM",
+    "T1-SCOPE"
+   ],
+   "findings": [
+    {
+     "arm": "T1-CERTAINTY",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "The market took root where the carts already stopped, the stalls followed the carts, and the town grew up around the hab (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    },
+    {
+     "arm": "T1-SCOPE",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "The market took root where the carts already stopped, the stalls followed the carts, and the town grew up around the hab (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    },
+    {
+     "arm": "T1-MECHANISM",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "The market took root where the carts already stopped, the stalls followed the carts, and the town grew up around the hab (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-GEN-17",
+   "poolKey": "ADMINISTERED",
+   "vid": 2,
+   "verdict": "FAIL",
+   "arms": [
+    "T1-CERTAINTY",
+    "T1-MECHANISM",
+    "T1-SCOPE"
+   ],
+   "findings": [
+    {
+     "arm": "T1-CERTAINTY",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "Rule in the town runs through rooms, and each room has an officer who answers for it. (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    },
+    {
+     "arm": "T1-SCOPE",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "Rule in the town runs through rooms, and each room has an officer who answers for it. (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    },
+    {
+     "arm": "T1-MECHANISM",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "Rule in the town runs through rooms, and each room has an officer who answers for it. (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.monster: STRONG",
+   "vid": 2,
+   "verdict": "FAIL",
+   "arms": [
+    "T1-MECHANISM"
+   ],
+   "findings": [
+    {
+     "arm": "T1-MECHANISM",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "The town keeps men who know the work and the tools they need, a standing answer to the beasts that come off its own grou (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.internal: ADEQUATE",
+   "vid": 1,
+   "verdict": "FAIL",
+   "arms": [
+    "T1-CERTAINTY",
+    "T1-SCOPE"
+   ],
+   "findings": [
+    {
+     "arm": "T1-CERTAINTY",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "Order holds on the town's main streets, and slackens on the rest. (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    },
+    {
+     "arm": "T1-SCOPE",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "Order holds on the town's main streets, and slackens on the rest. (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.economic: STRONG",
+   "vid": 2,
+   "verdict": "FAIL",
+   "arms": [
+    "T1-MECHANISM",
+    "T1-SCOPE"
+   ],
+   "findings": [
+    {
+     "arm": "T1-SCOPE",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "Prices in the town stay steady, and that steadiness does not depend only on the last thing that sold. (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    },
+    {
+     "arm": "T1-MECHANISM",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "Prices in the town stay steady, and that steadiness does not depend only on the last thing that sold. (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.magical: WEAK",
+   "vid": 2,
+   "verdict": "FAIL",
+   "arms": [
+    "T1-CERTAINTY",
+    "T1-MECHANISM",
+    "T1-SAMEPAGE"
+   ],
+   "findings": [
+    {
+     "arm": "T1-CERTAINTY",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "No standing arrangement for magic exists here, and what is wanted of it comes from outside. (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    },
+    {
+     "arm": "T1-MECHANISM",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "No standing arrangement for magic exists here, and what is wanted of it comes from outside. (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    },
+    {
+     "arm": "T1-SAMEPAGE",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "No standing arrangement for magic exists here, and what is wanted of it comes from outside. (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "foodSecurity.label: Pressured",
+   "vid": 2,
+   "verdict": "FAIL",
+   "arms": [
+    "T1-MECHANISM"
+   ],
+   "findings": [
+    {
+     "arm": "T1-MECHANISM",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "Bread prices here get watched closely, the kind of watching a town with plenty would not need. (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-GEN-2",
+   "poolKey": "intensity: moderate",
+   "vid": 4,
+   "verdict": "FAIL",
+   "arms": [
+    "T1-ACTOR",
+    "T1-CERTAINTY",
+    "T1-MECHANISM"
+   ],
+   "findings": [
+    {
+     "arm": "T1-CERTAINTY",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "Political influence is what stands to change hands here, and both The Governing Council and The Order of the Watch know  (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    },
+    {
+     "arm": "T1-ACTOR",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "Political influence is what stands to change hands here, and both The Governing Council and The Order of the Watch know  (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    },
+    {
+     "arm": "T1-MECHANISM",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "Political influence is what stands to change hands here, and both The Governing Council and The Order of the Watch know  (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-GEN-5",
+   "poolKey": "ordinary (route road and the default)",
+   "vid": 4,
+   "verdict": "FAIL",
+   "arms": [
+    "T1-CERTAINTY",
+    "T1-MECHANISM",
+    "T1-QUANTIFIER"
+   ],
+   "findings": [
+    {
+     "arm": "T1-CERTAINTY",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "The road runs past the town and takes little from it, though the traffic on it is real enough. (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    },
+    {
+     "arm": "T1-QUANTIFIER",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "The road runs past the town and takes little from it, though the traffic on it is real enough. (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    },
+    {
+     "arm": "T1-MECHANISM",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "The road runs past the town and takes little from it, though the traffic on it is real enough. (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-GEN-6",
+   "poolKey": "road",
+   "vid": 3,
+   "verdict": "FAIL",
+   "arms": [
+    "T1-CERTAINTY",
+    "T1-MECHANISM"
+   ],
+   "findings": [
+    {
+     "arm": "T1-CERTAINTY",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "What the town cannot grow, the road brings, and the town could not do without it. (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    },
+    {
+     "arm": "T1-MECHANISM",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "What the town cannot grow, the road brings, and the town could not do without it. (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-GEN-6",
+   "poolKey": "tier overlay: other tiers",
+   "vid": 3,
+   "verdict": "FAIL",
+   "arms": [
+    "T1-CERTAINTY",
+    "T1-SAMEPAGE",
+    "T1-SCOPE"
+   ],
+   "findings": [
+    {
+     "arm": "T1-CERTAINTY",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "Nothing about the town's standing sets it apart from another town its size. (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    },
+    {
+     "arm": "T1-SCOPE",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "Nothing about the town's standing sets it apart from another town its size. (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    },
+    {
+     "arm": "T1-SAMEPAGE",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "Nothing about the town's standing sets it apart from another town its size. (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-REL-2",
+   "poolKey": "prominentRelationship present",
+   "vid": 2,
+   "verdict": "FAIL",
+   "arms": [
+    "T1-CERTAINTY",
+    "T1-MECHANISM",
+    "T1-SCOPE"
+   ],
+   "findings": [
+    {
+     "arm": "T1-CERTAINTY",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "One tie matters to the town more than the rest, and that shows in what the town does for it and what it withholds from e (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    },
+    {
+     "arm": "T1-SCOPE",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "One tie matters to the town more than the rest, and that shows in what the town does for it and what it withholds from e (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    },
+    {
+     "arm": "T1-MECHANISM",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "One tie matters to the town more than the rest, and that shows in what the town does for it and what it withholds from e (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-REL-2",
+   "poolKey": "flagDriven count zero",
+   "vid": 1,
+   "verdict": "FAIL",
+   "arms": [
+    "T1-CERTAINTY",
+    "T1-MECHANISM",
+    "T1-SAMEPAGE",
+    "T1-SCOPE"
+   ],
+   "findings": [
+    {
+     "arm": "T1-CERTAINTY",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "Everyone here is tied to everyone else the ordinary way, by work, family, and proximity. (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    },
+    {
+     "arm": "T1-SCOPE",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "Everyone here is tied to everyone else the ordinary way, by work, family, and proximity. (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    },
+    {
+     "arm": "T1-MECHANISM",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "Everyone here is tied to everyone else the ordinary way, by work, family, and proximity. (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    },
+    {
+     "arm": "T1-SAMEPAGE",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "Everyone here is tied to everyone else the ordinary way, by work, family, and proximity. (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    }
+   ]
+  }
+ ],
+ "kept": [
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "prosperity: Comfortable / Prosperous",
+   "vid": 3,
+   "spine": "People here have enough left over to argue about things other than money.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "defenseProfile.readiness.label: Well-Defended",
+   "vid": 1,
+   "spine": "The works that defend the town are sound, and none of them are kept for show.",
+   "faces": [],
+   "notebook": []
+  }
+ ],
+ "dropped": 15,
+ "page": {
+  "verdict": "PASS",
+  "findings": [],
+  "report": {
+   "units": 17,
+   "openers": [
+    {
+     "opener": "bread prices here",
+     "n": 1
+    },
+    {
+     "opener": "everyone here is",
+     "n": 1
+    },
+    {
+     "opener": "no standing arrangement",
+     "n": 1
+    },
+    {
+     "opener": "nobody here expects",
+     "n": 1
+    },
+    {
+     "opener": "nothing about the",
+     "n": 1
+    },
+    {
+     "opener": "one tie matters",
+     "n": 1
+    },
+    {
+     "opener": "order holds on",
+     "n": 1
+    },
+    {
+     "opener": "people here have",
+     "n": 1
+    },
+    {
+     "opener": "political influence is",
+     "n": 1
+    },
+    {
+     "opener": "prices in the",
+     "n": 1
+    },
+    {
+     "opener": "rule in the",
+     "n": 1
+    },
+    {
+     "opener": "the market took",
+     "n": 1
+    },
+    {
+     "opener": "the road runs",
+     "n": 1
+    },
+    {
+     "opener": "the town earns",
+     "n": 1
+    },
+    {
+     "opener": "the town keeps",
+     "n": 1
+    },
+    {
+     "opener": "the works that",
+     "n": 1
+    },
+    {
+     "opener": "what the town",
+     "n": 1
+    }
+   ]
+  }
+ },
+ "missing": [],
+ "unknown": []
+}

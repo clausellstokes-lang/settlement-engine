@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-14 13:36:11 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-14 13:41:32 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = 1e584a9ca Plan: the collection at 09-14 ~10:4x — the clarity line-edit is complete on all five lea
 
@@ -113,7 +113,7 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
 - LAST-RUNS: 
 
 ## WORKFLOW RUNS of chair session f86a239c-ba8e-464d-a904-e4b70a0c4b2e — PER AGENT, PER LANE (owner 09-11: save progress per agent per lane; a run dies with the session, its journal + the packets + the dock commits are the checkpoint; journals mirrored under $SC/_progress/<wf>/)
-- **wf_0c7e8fcf-e4a** (mtime 09-14 13:36): agent calls 39 (39 distinct) · DONE 33 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 6 — mirror `_progress/wf_0c7e8fcf-e4a/`
+- **wf_0c7e8fcf-e4a** (mtime 09-14 13:41): agent calls 44 (44 distinct) · DONE 38 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 6 — mirror `_progress/wf_0c7e8fcf-e4a/`
     - `a64dc9d07` ? · DONE · transcript 09-14 13:09 616 KB · 11 tool calls · files: response-opus.json · result: {"unitsWritten": 12, "notes": ["Three pools were omitted as unwritable, not skipped: DS-DEF-2 'Invasion & War: walls with NO force' seats face 0 through `elders
     - `a0141863e` ? · DONE · transcript 09-14 13:11 695 KB · 11 tool calls · files: response-sonnet.json · result: {"unitsWritten": 12, "notes": ["Omitted 3 of 15 pools (DS-DEF-2: 'Invasion & War: walls with NO force' vid 3, 'Internal Security: full legal chain (court AND pr
     - `af7353a3e` ? · DONE · transcript 09-14 13:06 521 KB · 8 tool calls · files: response-opus.json · result: {"unitsWritten": 7, "notes": ["Two of the turn's stance tags, `threshold` (PRESSURED) and `counterforce` (DS-ECO-6), are not defined anywhere in the brief, whic
@@ -147,12 +147,17 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `a58eea221` ? · DONE · transcript 09-14 13:35 557 KB · 8 tool calls · files: response-opus.json · result: {"unitsWritten": 10, "notes": ["DS-POW-6 contradicts itself: the pool key says capture pressure ADVANCING but its only LIVE field reads criminalCaptureState = \
     - `a5ff2c44a` ? · DONE · transcript 09-14 13:36 582 KB · 10 tool calls · files: response-sonnet.json · result: {"unitsWritten": 10, "notes": ["turn.md's 'riskLabel: Contested' pool declares {faction} twice with conflicting fills (\"Free Elder Council\" then \"F\"); treat
     - `a56f7ca50` SECOND · DONE · transcript 09-14 13:35 413 KB · 6 tool calls · files: answers-opus.json · result: {"poolsOnCard": 7, "unitsReturned": 7, "tier0Kept": 6, "tier0Dropped": 1, "tier1Dropped": 5, "finalKept": 1, "pass": 0, "withheld": 1, "fail": 6, "arms": ["T1-C
-    - `af83f5fc8` SECOND · IN FLIGHT · transcript 09-14 13:36 409 KB · 5 tool calls · files: answers-sonnet.json · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
-    - `aca830154` SECOND · IN FLIGHT · transcript 09-14 13:33 317 KB · 3 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
-    - `aa0684511` SECOND · IN FLIGHT · transcript 09-14 13:35 317 KB · 3 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
-    - `a76ac84bd` SECOND · IN FLIGHT · transcript 09-14 13:35 322 KB · 3 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
-    - `a1fbe07f8` SECOND · IN FLIGHT · transcript 09-14 13:35 315 KB · 3 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
-    - `af9a4f5c6` SECOND · IN FLIGHT · transcript 09-14 13:36 289 KB · 1 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `af83f5fc8` SECOND · DONE · transcript 09-14 13:36 424 KB · 6 tool calls · files: answers-sonnet.json · result: {"arms": ["Q", "Q", "WALL-5", "T1-CERTAINTY", "T1-CERTAINTY", "T1-CERTAINTY", "T1-CERTAINTY"], "fail": 4, "finalKept": 3, "judgeLine": "verdicts {\"WITHHELD\":3
+    - `aca830154` SECOND · DONE · transcript 09-14 13:39 499 KB · 7 tool calls · files: answers-sonnet.json · result: {"poolsOnCard": 17, "unitsReturned": 17, "tier0Kept": 15, "tier0Dropped": 2, "tier1Dropped": 13, "finalKept": 2, "pass": 2, "withheld": 0, "fail": 15, "arms": [
+    - `aa0684511` SECOND · DONE · transcript 09-14 13:41 488 KB · 6 tool calls · files: answers-opus.json · result: {"arms": ["T1-CERTAINTY", "ORDER", "T1-CERTAINTY", "T1-MECHANISM", "T1-MECHANISM", "T1-MECHANISM", "T1-CERTAINTY", "T1-CERTAINTY", "T1-CERTAINTY", "T1-CERTAINTY
+    - `a76ac84bd` SECOND · IN FLIGHT · transcript 09-14 13:41 482 KB · 5 tool calls · files: answers-opus.json · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `a1fbe07f8` SECOND · DONE · transcript 09-14 13:38 415 KB · 6 tool calls · files: answers-opus.json · result: {"arms": ["T1-MECHANISM", "T1-CERTAINTY", "T1-QUANTIFIER", "NON-MOVE", "T1-CERTAINTY", "T1-MECHANISM", "T1-CERTAINTY", "T1-CERTAINTY", "T1-CERTAINTY"], "fail": 
+    - `af9a4f5c6` SECOND · IN FLIGHT · transcript 09-14 13:41 461 KB · 5 tool calls · files: answers-sonnet.json · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `a783c0d4b` SECOND · DONE · transcript 09-14 13:40 413 KB · 6 tool calls · files: answers-opus.json · result: {"arms": ["T1-CERTAINTY", "T1-CERTAINTY", "T1-CERTAINTY", "T1-CERTAINTY", "T1-CERTAINTY", "T1-CERTAINTY"], "fail": 6, "finalKept": 0, "judgeLine": "verdicts {\"
+    - `ac818b725` SECOND · IN FLIGHT · transcript 09-14 13:38 318 KB · 3 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `a7acdb2bb` SECOND · IN FLIGHT · transcript 09-14 13:39 305 KB · 2 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `a7563a365` SECOND · IN FLIGHT · transcript 09-14 13:40 314 KB · 3 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
+    - `a44500d9d` SECOND · IN FLIGHT · transcript 09-14 13:41 313 KB · 3 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
 - **wf_eca79448-a67** (mtime 09-14 11:54): agent calls 12 (12 distinct) · DONE 11 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 1 — mirror `_progress/wf_eca79448-a67/`
     - `a5035890d` MARKER readiness STRONG · DONE · transcript 09-14 11:42 897 KB · 50 tool calls · files: card-mech.txt, "$D/card.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-1/ds-def-1--readine
     - `a2f99685d` MARKER readiness ADEQUATE · DONE · transcript 09-14 11:38 717 KB · 38 tool calls · files: '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-1/ds-def-1--readiness-adequate/card.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-1/ds-def-1--readine
@@ -202,4 +207,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `afbaa2e6b` ADVERSARY · DONE · transcript 09-14 03:02 490 KB · 6 tool calls · result: {"pool": "Disasters & Famine: NO reserves, NO medical provision", "auditorWasWrong": true, "missedFindings": [{"kind": "CLAIM_MOVED", "variant": 2, "faceOrSpine
 
 ## PROCESSES: 
-load: 1.44 2.07 2.18
+load: 4.15 3.28 2.69

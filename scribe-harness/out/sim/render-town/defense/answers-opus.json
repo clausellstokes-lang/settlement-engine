@@ -1,0 +1,174 @@
+{
+  "answers": [
+    {
+      "n": 1,
+      "certainty": "no",
+      "quantifier": "no",
+      "scope": "no",
+      "actor": "no",
+      "forecast": "no",
+      "mechanism": "no",
+      "samePage": "yes"
+    },
+    {
+      "n": 2,
+      "certainty": "no",
+      "quantifier": "no",
+      "scope": "no",
+      "actor": "no",
+      "forecast": "no",
+      "mechanism": "no",
+      "samePage": "no"
+    },
+    {
+      "n": 3,
+      "certainty": "no",
+      "quantifier": "no",
+      "scope": "no",
+      "actor": "no",
+      "forecast": "no",
+      "mechanism": "no",
+      "samePage": "no"
+    },
+    {
+      "n": 4,
+      "certainty": "no",
+      "quantifier": "no",
+      "scope": "no",
+      "actor": "no",
+      "forecast": "no",
+      "mechanism": "yes",
+      "samePage": "no"
+    },
+    {
+      "n": 5,
+      "certainty": "no",
+      "quantifier": "no",
+      "scope": "no",
+      "actor": "no",
+      "forecast": "no",
+      "mechanism": "yes",
+      "samePage": "no"
+    },
+    {
+      "n": 6,
+      "certainty": "no",
+      "quantifier": "yes",
+      "scope": "yes",
+      "actor": "no",
+      "forecast": "no",
+      "mechanism": "no",
+      "samePage": "no"
+    },
+    {
+      "n": 7,
+      "certainty": "no",
+      "quantifier": "no",
+      "scope": "no",
+      "actor": "no",
+      "forecast": "no",
+      "mechanism": "yes",
+      "samePage": "no"
+    },
+    {
+      "n": 8,
+      "certainty": "no",
+      "quantifier": "no",
+      "scope": "no",
+      "actor": "no",
+      "forecast": "no",
+      "mechanism": "yes",
+      "samePage": "no"
+    },
+    {
+      "n": 9,
+      "certainty": "yes",
+      "quantifier": "yes",
+      "scope": "yes",
+      "actor": "no",
+      "forecast": "no",
+      "mechanism": "no",
+      "samePage": "no"
+    },
+    {
+      "n": 10,
+      "certainty": "yes",
+      "quantifier": "no",
+      "scope": "no",
+      "actor": "no",
+      "forecast": "no",
+      "mechanism": "no",
+      "samePage": "no"
+    },
+    {
+      "n": 11,
+      "certainty": "no",
+      "quantifier": "no",
+      "scope": "no",
+      "actor": "no",
+      "forecast": "no",
+      "mechanism": "no",
+      "samePage": "yes"
+    },
+    {
+      "n": 12,
+      "certainty": "no",
+      "quantifier": "no",
+      "scope": "no",
+      "actor": "no",
+      "forecast": "no",
+      "mechanism": "no",
+      "samePage": "yes"
+    },
+    {
+      "n": 13,
+      "certainty": "no",
+      "quantifier": "no",
+      "scope": "no",
+      "actor": "no",
+      "forecast": "no",
+      "mechanism": "no",
+      "samePage": "no"
+    },
+    {
+      "n": 14,
+      "certainty": "no",
+      "quantifier": "no",
+      "scope": "no",
+      "actor": "no",
+      "forecast": "no",
+      "mechanism": "no",
+      "samePage": "no"
+    },
+    {
+      "n": 15,
+      "certainty": "yes",
+      "quantifier": "no",
+      "scope": "no",
+      "actor": "no",
+      "forecast": "no",
+      "mechanism": "no",
+      "samePage": "no"
+    },
+    {
+      "n": 16,
+      "certainty": "no",
+      "quantifier": "no",
+      "scope": "no",
+      "actor": "no",
+      "forecast": "no",
+      "mechanism": "no",
+      "samePage": "no"
+    },
+    {
+      "n": 17,
+      "certainty": "yes",
+      "quantifier": "yes",
+      "scope": "no",
+      "actor": "no",
+      "forecast": "no",
+      "mechanism": "no",
+      "samePage": "yes"
+    }
+  ]
+}

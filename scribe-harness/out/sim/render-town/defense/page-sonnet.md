@@ -1,29 +1,23 @@
-[WITHHELD] Spitzplatz keeps its arrangements at the point where they are enough and nothing more. One further demand on them would mean choosing which one goes short.
+[FAIL] Spitzplatz keeps its defenses at the point where the arrangements are sufficient and nothing more can be spared. One further demand on them and the town would be choosing which post to leave uncovered.
 
-[PASS] A clerk of the court says every dispute that reaches it about the walls is over who owes the keeping, and none of it is over who would hold them.
+[FAIL] A pilgrim says the town looks well provided from outside, and that whoever nurses the sick here works out of the church. A local priest reports that a stranger taken sick here is given a person to sit with him instead of a house, and that nobody born in the town would think to ask for one. Grain keeps badly here for anyone without a door of their own, a woman who sells at the market says. At the tavern they say a stranger walks over and looks at the grain store, and that nobody from the town bothers. A night patrolman says strangers ask more than once where the grain is kept, and that nobody has ever asked him where the sick are tended. A guild factor reckons what a stranger takes as provision came from a store the trades filled and cannot open. A bailiff says a stranger's questions about the grain store are nothing unusual, and that questions about the sick are ones nobody here has put to him before.
 
-[PASS] At the tavern they say a man who cannot pay his fine sits in the cell until somebody else does.
+[FAIL] The balance at Spitzplatz could tip either way. A thinner watch or a bolder operator would show up in the season's returns, and nothing else about the town would need to change.
 
-[PASS] A guild factor says the trades filled the store against a bad season, and the hall's share of it stopped short.
+[FAIL] What Spitzplatz says about its own safety is what it says to a newcomer's first look, and a longer stay would tell a different account.
 
-[PASS] At the tavern they say a stranger who falls sick here is taken to the parish, because there is nowhere else to take him.
+[FAIL] Very little street violence troubles Spitzplatz, and the quiet is a structured interest's doing, not the watch's.
 
-[WITHHELD] At Spitzplatz the peace holds by a narrow margin. A weaker watch or a bolder criminal would tip it, and little else would need to change.
+[PASS] Whatever business runs at Spitzplatz runs outside the hall, and the town's dealings with the hall remain the town's dealings with the hall.
 
-[PASS] What Spitzplatz says of its own safety is a first look only, and a longer stay here would tell a different account.
+[WITHHELD] Spitzplatz controls its own entry points. A perimeter buys not invulnerability but the choice of where anything happens.
 
-[WITHHELD] Street violence at Spitzplatz is rare, and the watch is not why. A structured hand keeps down whatever would draw enforcement, more thoroughly than the watch manages.
+[FAIL] People still walk Spitzplatz at night, and the town's sense of itself leans more on that than on anything at the gate.
 
-[PASS] Whatever is run here is run outside the hall, and the hall's own business with the town stays untouched by it.
+[FAIL] A traveller passing through Spitzplatz finds a hall whose business is trouble no ordinary company of arms is fit for, and finds it busy.
 
-[WITHHELD] Spitzplatz holds its own entry points. A perimeter buys not safety but the choice of where trouble happens.
+[PASS] Spitzplatz keeps arcane provision among its defenses, with detection, wards, and an answer to what conventional arrangements cannot see coming.
 
-[PASS] People walk the town at Spitzplatz at night, and the town rests its own sense of safety more on that than on anything at the gate.
+[FAIL] The town walls around Spitzplatz are sound, and the muster that mans them is thinning. It is the kind of shortfall a town is slow to notice.
 
-[PASS] A stranger here finds a hall built for the trouble a garrison is the wrong tool for, and finds it kept busy.
-
-[PASS] Spitzplatz folds arcane means into its defenses, detection and wards among them, for what conventional force never sees coming.
-
-[PASS] The town walls around Spitzplatz hold sound, and the muster meant to stand behind them is thinning, an arithmetic the town notices only late.
-
-[WITHHELD] A break on the roads into Spitzplatz never reaches the table, and the granary is why, not the roads themselves.
+[FAIL] An interruption on the roads to Spitzplatz never reaches the table, and the granary is why, not the roads.
