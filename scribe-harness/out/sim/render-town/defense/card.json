@@ -1867,7 +1867,7 @@
    "writeable": true
   }
  ],
- "schema": "scribe-town-card/4",
+ "schema": "scribe-town-card/5",
  "seed": "render-town",
  "staticCardJoined": true,
  "tab": "defense",
@@ -1888,6 +1888,63 @@
     "Town watch"
    ]
   },
+  "bodies": [
+   {
+    "kind": "relationship party",
+    "name": "Berchta Schmidt",
+    "source": "prominentRelationship.npc1"
+   },
+   {
+    "kind": "power bloc",
+    "name": "Craft Guilds",
+    "source": "powerStructure.factions[].faction"
+   },
+   {
+    "kind": "power bloc",
+    "name": "Guild Council",
+    "source": "powerStructure.factions[].faction"
+   },
+   {
+    "kind": "relationship party",
+    "name": "Karl Berger",
+    "source": "prominentRelationship.npc2"
+   },
+   {
+    "kind": "power bloc",
+    "name": "Merchant Guilds",
+    "source": "powerStructure.factions[].faction"
+   },
+   {
+    "kind": "power bloc",
+    "name": "Military/Guard",
+    "source": "powerStructure.factions[].faction"
+   },
+   {
+    "kind": "power bloc",
+    "name": "Religious Authorities",
+    "source": "powerStructure.factions[].faction"
+   },
+   {
+    "kind": "faction",
+    "name": "The Governing Council",
+    "source": "factions[].name"
+   },
+   {
+    "kind": "faction",
+    "name": "The Grey Council",
+    "source": "factions[].name"
+   },
+   {
+    "kind": "faction",
+    "name": "The Merchant Bloc",
+    "source": "factions[].name"
+   },
+   {
+    "kind": "faction",
+    "name": "The Order of the Watch",
+    "source": "factions[].name"
+   }
+  ],
   "compromised": [],
   "compromisedRate": 0.7,
   "culture": "germanic",

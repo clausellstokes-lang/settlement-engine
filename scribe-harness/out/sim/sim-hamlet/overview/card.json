@@ -1924,7 +1924,7 @@
    "writeable": true
   }
  ],
- "schema": "scribe-town-card/4",
+ "schema": "scribe-town-card/5",
  "seed": "sim-hamlet",
  "staticCardJoined": true,
  "tab": "overview",
@@ -1937,6 +1937,23 @@
    "fortifications": [],
    "standing": []
   },
+  "bodies": [
+   {
+    "kind": "power bloc",
+    "name": "Free Elder Council",
+    "source": "powerStructure.factions[].faction"
+   },
+   {
+    "kind": "power bloc",
+    "name": "Monster Hunters / Adventurers",
+    "source": "powerStructure.factions[].faction"
+   },
+   {
+    "kind": "faction",
+    "name": "The Independent Bloc",
+    "source": "factions[].name"
+   }
+  ],
   "compromised": [],
   "compromisedRate": 0.7,
   "culture": "germanic",
