@@ -1,0 +1,807 @@
+{
+ "verdicts": [
+  {
+   "blockId": "DS-DEF-1",
+   "poolKey": "readiness STRONG",
+   "vid": 4,
+   "verdict": "WITHHELD",
+   "arms": [
+    "Q"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "Q",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a second sentence naming no second field",
+     "value": "A place kept this ready costs more to try than it is worth.",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call (reads [defenseProfile.readiness.score]; none claimed)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-DEF-2",
+   "poolKey": "Beasts & Monsters: frontier, credible deterrence",
+   "vid": 2,
+   "verdict": "PATCHED",
+   "arms": [
+    "A13",
+    "C5",
+    "ORDER",
+    "Q",
+    "REFERENT-body"
+   ],
+   "patched": [
+    "face 10"
+   ],
+   "findings": [
+    {
+     "arm": "ORDER",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a move sequence outside the closed set",
+     "value": "PRESENT then OBJECT then PRESENT",
+     "description": "the spine realises none of the eight level-1 orders; 83.7 per cent of the shipped defense leaf does, so this is a question for the refuter and not a mechanical refusal"
+    },
+    {
+     "arm": "Q",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a second sentence naming no second field",
+     "value": "The walls are kept up, and the garrison is paid to stand behind them.",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call (reads [config.monsterThreat, institutions]; none claimed)"
+    },
+    {
+     "arm": "ORDER",
+     "channel": "WITHHELD",
+     "seat": "face 2",
+     "subject": "a move sequence outside the closed set",
+     "value": "PRESENT then OBJECT",
+     "description": "the spine realises none of the eight level-1 orders; 83.7 per cent of the shipped defense leaf does, so this is a question for the refuter and not a mechanical refusal"
+    },
+    {
+     "arm": "ORDER",
+     "channel": "WITHHELD",
+     "seat": "face 3",
+     "subject": "a move sequence outside the closed set",
+     "value": "PRESENT then INSTITUTION then CONSEQUENCE then OBJECT",
+     "description": "the spine realises none of the eight level-1 orders; 83.7 per cent of the shipped defense leaf does, so this is a question for the refuter and not a mechanical refusal"
+    },
+    {
+     "arm": "ORDER",
+     "channel": "WITHHELD",
+     "seat": "face 7",
+     "subject": "a move sequence outside the closed set",
+     "value": "PRESENT then OBJECT",
+     "description": "the spine realises none of the eight level-1 orders; 83.7 per cent of the shipped defense leaf does, so this is a question for the refuter and not a mechanical refusal"
+    },
+    {
+     "arm": "C5",
+     "channel": "WITHHELD",
+     "seat": "face 7",
+     "subject": "siblings differ in offices",
+     "value": "A warden of one of the guilds reckons the trades pay the toll at the gates and the whole t",
+     "description": "this variant carries offices warden; its sibling carries priest; whether they name one subject is the refuter's (warden vs priest)"
+    },
+    {
+     "arm": "REFERENT-body",
+     "channel": "FAIL",
+     "seat": "face 10",
+     "subject": "a record no body in this town keeps",
+     "value": "elders",
+     "description": "the text cites a record, and no institution on this card offers the service by which it is kept; the citation names a body the town does not have, which is floor 1"
+    },
+    {
+     "arm": "ORDER",
+     "channel": "WITHHELD",
+     "seat": "face 10",
+     "subject": "a move sequence outside the closed set",
+     "value": "PROVENANCE",
+     "description": "the spine realises none of the eight level-1 orders; 83.7 per cent of the shipped defense leaf does, so this is a question for the refuter and not a mechanical refusal"
+    },
+    {
+     "arm": "A13",
+     "channel": "WITHHELD",
+     "seat": "face 10",
+     "subject": "a holder with no institution",
+     "value": "Beasts & Monsters: frontier, credible deterrence: muster",
+     "description": "the holder kind resolves to no institution in this town's roster, so the cited record has nobody keeping it"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-DEF-2",
+   "poolKey": "Invasion & War: walls AND professional garrison",
+   "vid": 2,
+   "verdict": "WITHHELD",
+   "arms": [
+    "Q"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "Q",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a second sentence naming no second field",
+     "value": "What he is let into is a town that keeps a garrison of its own.",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call (reads [institutions]; none claimed)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-DEF-2",
+   "poolKey": "Internal Security: court without detention",
+   "vid": 1,
+   "verdict": "WITHHELD",
+   "arms": [
+    "C3",
+    "C5",
+    "ORDER"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "ORDER",
+     "channel": "WITHHELD",
+     "seat": "face 1",
+     "subject": "a move sequence outside the closed set",
+     "value": "PRESENT then INSTITUTION",
+     "description": "the spine realises none of the eight level-1 orders; 83.7 per cent of the shipped defense leaf does, so this is a question for the refuter and not a mechanical refusal"
+    },
+    {
+     "arm": "C5",
+     "channel": "WITHHELD",
+     "seat": "face 1",
+     "subject": "siblings differ in offices",
+     "value": "A bailiff says the court hears in daylight what the watch settled in the dark and is not a",
+     "description": "this variant carries offices bailiff; its sibling carries magistrate; whether they name one subject is the refuter's (bailiff vs magistrate)"
+    },
+    {
+     "arm": "C5",
+     "channel": "WITHHELD",
+     "seat": "face 1",
+     "subject": "siblings differ in offices",
+     "value": "A bailiff says the court hears in daylight what the watch settled in the dark and is not a",
+     "description": "this variant carries offices bailiff; its sibling carries priest; whether they name one subject is the refuter's (bailiff vs priest)"
+    },
+    {
+     "arm": "C3",
+     "channel": "WITHHELD",
+     "seat": "face 4",
+     "subject": "is this clause historical?",
+     "value": "A parish warden holds that the parish has a place for a man once he is dead and the town h",
+     "description": "a past-tense or formerly-construction: whether it asserts history is A6, the refuter's (semantic)"
+    },
+    {
+     "arm": "C5",
+     "channel": "WITHHELD",
+     "seat": "face 4",
+     "subject": "siblings differ in offices",
+     "value": "A parish warden holds that the parish has a place for a man once he is dead and the town h",
+     "description": "this variant carries offices warden; its sibling carries magistrate; whether they name one subject is the refuter's (warden vs magistrate)"
+    },
+    {
+     "arm": "C5",
+     "channel": "WITHHELD",
+     "seat": "face 4",
+     "subject": "siblings differ in offices",
+     "value": "A parish warden holds that the parish has a place for a man once he is dead and the town h",
+     "description": "this variant carries offices warden; its sibling carries priest; whether they name one subject is the refuter's (warden vs priest)"
+    },
+    {
+     "arm": "ORDER",
+     "channel": "WITHHELD",
+     "seat": "face 7",
+     "subject": "a move sequence outside the closed set",
+     "value": "PRESENT then ABSENCE then PRESENT",
+     "description": "the spine realises none of the eight level-1 orders; 83.7 per cent of the shipped defense leaf does, so this is a question for the refuter and not a mechanical refusal"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-DEF-2",
+   "poolKey": "Economic Survival: STRONG",
+   "vid": 2,
+   "verdict": "WITHHELD",
+   "arms": [
+    "C5",
+    "ORDER",
+    "X"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "ORDER",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a move sequence outside the closed set",
+     "value": "PRESENT then OBJECT then PRESENT",
+     "description": "the spine realises none of the eight level-1 orders; 83.7 per cent of the shipped defense leaf does, so this is a question for the refuter and not a mechanical refusal"
+    },
+    {
+     "arm": "ORDER",
+     "channel": "WITHHELD",
+     "seat": "face 0",
+     "subject": "a move sequence outside the closed set",
+     "value": "PERSON",
+     "description": "the spine realises none of the eight level-1 orders; 83.7 per cent of the shipped defense leaf does, so this is a question for the refuter and not a mechanical refusal"
+    },
+    {
+     "arm": "C5",
+     "channel": "WITHHELD",
+     "seat": "face 0",
+     "subject": "siblings differ in offices",
+     "value": "The mayor says the town asks the trades for no more than the trades can carry.",
+     "description": "this variant carries offices mayor; its sibling carries priest; whether they name one subject is the refuter's (mayor vs priest)"
+    },
+    {
+     "arm": "C5",
+     "channel": "WITHHELD",
+     "seat": "face 1",
+     "subject": "siblings differ in offices",
+     "value": "A warden of one of the guilds says the carrying is theirs and the asking is not.",
+     "description": "this variant carries offices warden; its sibling carries priest; whether they name one subject is the refuter's (warden vs priest)"
+    },
+    {
+     "arm": "X",
+     "channel": "WITHHELD",
+     "seat": "face 2",
+     "subject": "exhaustivity over an open column",
+     "value": "The guilds' account is the likelier, the hall having a purse to defend and the guilds only",
+     "description": "the copula entails the subject is the column's only value; the column is not closed (open)"
+    },
+    {
+     "arm": "ORDER",
+     "channel": "WITHHELD",
+     "seat": "face 4",
+     "subject": "a move sequence outside the closed set",
+     "value": "PRESENT then OBJECT",
+     "description": "the spine realises none of the eight level-1 orders; 83.7 per cent of the shipped defense leaf does, so this is a question for the refuter and not a mechanical refusal"
+    },
+    {
+     "arm": "C5",
+     "channel": "WITHHELD",
+     "seat": "face 4",
+     "subject": "siblings differ in offices",
+     "value": "A gatekeeper says a cart bound for the grain store goes through ahead of whatever else is ",
+     "description": "this variant carries offices gatekeeper; its sibling carries priest; whether they name one subject is the refuter's (gatekeeper vs priest)"
+    },
+    {
+     "arm": "ORDER",
+     "channel": "WITHHELD",
+     "seat": "face 5",
+     "subject": "a move sequence outside the closed set",
+     "value": "PRESENT then OBJECT",
+     "description": "the spine realises none of the eight level-1 orders; 83.7 per cent of the shipped defense leaf does, so this is a question for the refuter and not a mechanical refusal"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-DEF-2",
+   "poolKey": "Disasters & Famine: granary AND parish care only",
+   "vid": 3,
+   "verdict": "WITHHELD",
+   "arms": [
+    "C5",
+    "ORDER"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "ORDER",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a move sequence outside the closed set",
+     "value": "PRESENT then TRADITION then PRESENT then CONSEQUENCE",
+     "description": "the spine realises none of the eight level-1 orders; 83.7 per cent of the shipped defense leaf does, so this is a question for the refuter and not a mechanical refusal"
+    },
+    {
+     "arm": "ORDER",
+     "channel": "WITHHELD",
+     "seat": "face 2",
+     "subject": "a move sequence outside the closed set",
+     "value": "PRESENT then OBJECT then HISTORY",
+     "description": "the spine realises none of the eight level-1 orders; 83.7 per cent of the shipped defense leaf does, so this is a question for the refuter and not a mechanical refusal"
+    },
+    {
+     "arm": "ORDER",
+     "channel": "WITHHELD",
+     "seat": "face 3",
+     "subject": "a move sequence outside the closed set",
+     "value": "PRESENT then OBJECT then ABSENCE",
+     "description": "the spine realises none of the eight level-1 orders; 83.7 per cent of the shipped defense leaf does, so this is a question for the refuter and not a mechanical refusal"
+    },
+    {
+     "arm": "ORDER",
+     "channel": "WITHHELD",
+     "seat": "face 4",
+     "subject": "a move sequence outside the closed set",
+     "value": "INSTITUTION",
+     "description": "the spine realises none of the eight level-1 orders; 83.7 per cent of the shipped defense leaf does, so this is a question for the refuter and not a mechanical refusal"
+    },
+    {
+     "arm": "C5",
+     "channel": "WITHHELD",
+     "seat": "face 4",
+     "subject": "siblings differ in offices",
+     "value": "The guild master holds that what a stranger takes for plenty is a store the trades filled ",
+     "description": "this variant carries offices guild master; its sibling carries priest; whether they name one subject is the refuter's (guild master vs priest)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-DEF-3",
+   "poolKey": "Moderate",
+   "vid": 1,
+   "verdict": "WITHHELD",
+   "arms": [
+    "Q"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "Q",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a second sentence naming no second field",
+     "value": "Its safer streets and its exposed ones are a short walk apart, and neither the law nor the",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call (reads [economicState.safetyProfile.safetyLabel]; none claimed)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-DEF-3",
+   "poolKey": "First-Survey qualification (the reading is a first look)",
+   "vid": 2,
+   "verdict": "WITHHELD",
+   "arms": [
+    "Q"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "Q",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a second sentence naming no second field",
+     "value": "The quiet corners after dark are where a first look stops.",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call (reads [economicState.safetyProfile.safetyLabel]; none claimed)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-DEF-4",
+   "poolKey": "structure organized",
+   "vid": 3,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-DEF-5",
+   "poolKey": "walls PRESENT",
+   "vid": 2,
+   "verdict": "WITHHELD",
+   "arms": [
+    "ORDER",
+    "Q",
+    "X"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "ORDER",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a move sequence outside the closed set",
+     "value": "PRESENT then OBJECT",
+     "description": "the spine realises none of the eight level-1 orders; 83.7 per cent of the shipped defense leaf does, so this is a question for the refuter and not a mechanical refusal"
+    },
+    {
+     "arm": "Q",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a second sentence naming no second field",
+     "value": "The walls and gates are what let it choose where anything happens.",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call (reads [institutions]; none claimed)"
+    },
+    {
+     "arm": "X",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "exhaustivity over an open column",
+     "value": "The walls and gates are what let it choose where anything happens.",
+     "description": "the copula entails the subject is the column's only value; the column is not closed (open)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-DEF-5",
+   "poolKey": "garrison PRESENT",
+   "vid": 1,
+   "verdict": "WITHHELD",
+   "arms": [
+    "Q",
+    "WALL-5"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "WALL-5",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a contrast",
+     "value": "and not somebody's turn.",
+     "description": "no sibling pool key on this page names the rejected alternative, so the contrast may reject something the town never had"
+    },
+    {
+     "arm": "Q",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a second sentence naming no second field",
+     "value": "The garrison and the city watch draw a wage for the work and answer for the work.",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call (reads [institutions, standingDefenseForces(settlement)]; none claimed)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-DEF-5",
+   "poolKey": "mercenary / contracted forces PRESENT",
+   "vid": 2,
+   "verdict": "WITHHELD",
+   "arms": [
+    "Q"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "Q",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a second sentence naming no second field",
+     "value": "The mercenary quarter keeps its own streets, and the town deals with it the way it deals w",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call (reads [institutions, standingDefenseForces(settlement)]; none claimed)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-DEF-5",
+   "poolKey": "charter hall PRESENT (specialist monster response)",
+   "vid": 3,
+   "verdict": "WITHHELD",
+   "arms": [
+    "Q",
+    "X"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "Q",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a second sentence naming no second field",
+     "value": "The adventurers' guilds keep more than one house in this town and none of them is quiet.",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call (reads [institutions, standingDefenseForces(settlement)]; none claimed)"
+    },
+    {
+     "arm": "X",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "exhaustivity over an open column",
+     "value": "The kind of trouble a garrison is the wrong tool against has its own trade here.",
+     "description": "the copula entails the subject is the column's only value; the column is not closed (open)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-DEF-5",
+   "poolKey": "arcane defense PRESENT",
+   "vid": 2,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-DEF-11",
+   "poolKey": "WALLED-STRAINED",
+   "vid": 1,
+   "verdict": "WITHHELD",
+   "arms": [
+    "ORDER"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "ORDER",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a move sequence outside the closed set",
+     "value": "PRESENT then OBJECT then PRESENT",
+     "description": "the spine realises none of the eight level-1 orders; 83.7 per cent of the shipped defense leaf does, so this is a question for the refuter and not a mechanical refusal"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-DEF-6",
+   "poolKey": "Logistics & Supply: Granary with road supply",
+   "vid": 1,
+   "verdict": "WITHHELD",
+   "arms": [
+    "Q"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "Q",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a second sentence naming no second field",
+     "value": "What the store buys, if the roads are cut, is time.",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call (reads [config.tradeRouteAccess, economicState.compound.inst.hasGranary, economicState.compound.inst.hasPort]; none claimed)"
+    }
+   ]
+  }
+ ],
+ "kept": [
+  {
+   "blockId": "DS-DEF-1",
+   "poolKey": "readiness STRONG",
+   "vid": 4,
+   "spine": "Nothing presses the town at present, and the quiet is not luck. A place kept this ready costs more to try than it is worth.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-2",
+   "poolKey": "Beasts & Monsters: frontier, credible deterrence",
+   "vid": 2,
+   "spine": "The country outside is frontier, and what is in it is known here and talked of nowhere. The walls are kept up, and the garrison is paid to stand behind them.",
+   "faces": [
+    "A drover says he is asked at the gate what he carries and never what he came past on the road.",
+    "The men who hold the ways in say the bar goes down at dusk, and whoever is late sleeps outside the wall.",
+    "A priest of one of the parishes holds that the walls have the town's thanks and the almshouse behind them has what is left.",
+    "One of the aldermen says the hall pays for the walls and hears nothing back from the country but quiet.",
+    "The watch says a complaint about the nights is made to it at the gate and goes no further.",
+    "At one of the taverns a carter says the talk is all of who stands the nights, and the country itself never comes up.",
+    "A soldier of the garrison says the town never comes out to watch a drill and never asks what the drilling is for.",
+    "A warden of one of the guilds reckons the trades pay the toll at the gates and the whole town takes the credit for the walls.",
+    "The stallholders say the stalls go up whatever is loose in the country, and that a frontier is a word for people who do not sell.",
+    "A clerk of one of the courts holds that a dispute over the toll is heard the day it is brought, and the country brings none.",
+    "The elders say the young stand the nights and the old say how they are stood."
+   ],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-2",
+   "poolKey": "Invasion & War: walls AND professional garrison",
+   "vid": 2,
+   "spine": "A traveller is stopped at the gate and counted before he is let through. What he is let into is a town that keeps a garrison of its own.",
+   "faces": [
+    "A gatekeeper says a stranger pays where he is stopped and the hall is settled with later, in the gate's own time.",
+    "A woman who keeps the hall books says a stranger who pays at the gate has paid the town, and that the men there are not the town.",
+    "The officers of the court hold that anyone who paid the toll may argue it there, a stranger as readily as a carter.",
+    "A traveller says his pack is opened at the gate and nothing is taken out of it but the toll.",
+    "A woman at the long table says the town is never asked whether it wants soldiers, only what they cost."
+   ],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-2",
+   "poolKey": "Internal Security: court without detention",
+   "vid": 1,
+   "spine": "The law here has a court and no cell. What the court can take from a man is his money or his place in the town.",
+   "faces": [
+    "A night patrolman says what he comes across after dark is settled after dark, there being nowhere to leave a man until morning.",
+    "A bailiff says the court hears in daylight what the watch settled in the dark and is not asked first.",
+    "A clerk in the hall reckons the purse has never run to a cell and that the court manages without one.",
+    "A stallholder says a short weight goes before the court and comes back as a sum, and the scales stay on the stall.",
+    "A parish warden holds that the parish has a place for a man once he is dead and the town has none for him alive.",
+    "A journeyman says a fine is paid out of a man's takings and forgotten, and the same is never true of his name.",
+    "The drinkers of the district say a man with a house here pays and stays, and a man without one is walked to the gate.",
+    "A pilgrim says there is nothing here to take from a man who owns nothing, and the town is left with only the road.",
+    "A man on one of the gates says he is handed a person and a direction and no reason for either.",
+    "A soldier of the garrison says what comes at the town is his to answer for and what is walked out of it is the court's."
+   ],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-2",
+   "poolKey": "Economic Survival: STRONG",
+   "vid": 2,
+   "spine": "Everyone in the town has seen the grain store kept full, and takes it that a crisis would find the place ready.",
+   "faces": [
+    "The mayor says the town asks the trades for no more than the trades can carry.",
+    "A warden of one of the guilds says the carrying is theirs and the asking is not.",
+    "The guilds' account is the likelier, the hall having a purse to defend and the guilds only a bill.",
+    "One of the watch says the rounds are walked by people who are owed for walking them.",
+    "A gatekeeper says a cart bound for the grain store goes through ahead of whatever else is waiting at the gate.",
+    "A rider who stopped a night says the grain store is praised and the wage complained of by the same people.",
+    "An innkeeper says the watch is a trade that drinks on what it is owed.",
+    "A man who draws the wage says a town that can be fed through a crisis and still pays him short has decided something, and has not said what.",
+    "The traders at the fair say the hall is settled with before anybody settles anything of their own.",
+    "The parish clerks hold that the town keeps its word to the dead before it keeps its word to the living."
+   ],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-2",
+   "poolKey": "Disasters & Famine: granary AND parish care only",
+   "vid": 3,
+   "spine": "A grain store is kept here and the place looks provided for from outside. No sick house stands in the town, and whoever tends the sick comes out of the church.",
+   "faces": [
+    "A priest of one of the parishes says a stranger asking for a sick house is given the name of a person.",
+    "A porter in the square reckons grain is hard to keep here for anybody without a door of his own.",
+    "A potboy of the district says strangers ask him the way to the grain store and never ask him after the sick.",
+    "The watch says strangers ask it where the grain is kept and nobody has ever asked it where the sick are.",
+    "The guild master holds that what a stranger takes for plenty is a store the trades filled and cannot open.",
+    "A clerk of the court says a stranger's questions about the store are ordinary and his questions about the sick are new here."
+   ],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-3",
+   "poolKey": "Moderate",
+   "vid": 1,
+   "spine": "Rundgate runs on a working balance. Its safer streets and its exposed ones are a short walk apart, and neither the law nor the crime has the run of the town.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-3",
+   "poolKey": "First-Survey qualification (the reading is a first look)",
+   "vid": 2,
+   "spine": "The safety here rests on a first look. The quiet corners after dark are where a first look stops.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-4",
+   "poolKey": "structure organized",
+   "vid": 3,
+   "spine": "A stranger here is not robbed, and somebody takes him aside to tell him the arrangement.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-5",
+   "poolKey": "walls PRESENT",
+   "vid": 2,
+   "spine": "The town holds every way into itself. The walls and gates are what let it choose where anything happens.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-5",
+   "poolKey": "garrison PRESENT",
+   "vid": 1,
+   "spine": "Defending this place is somebody's trade and not somebody's turn. The garrison and the city watch draw a wage for the work and answer for the work.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-5",
+   "poolKey": "mercenary / contracted forces PRESENT",
+   "vid": 2,
+   "spine": "Some of the men who fight for this town are hired, and the town knows which ones. The mercenary quarter keeps its own streets, and the town deals with it the way it deals with a trade.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-5",
+   "poolKey": "charter hall PRESENT (specialist monster response)",
+   "vid": 3,
+   "spine": "The kind of trouble a garrison is the wrong tool against has its own trade here. The adventurers' guilds keep more than one house in this town and none of them is quiet.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-5",
+   "poolKey": "arcane defense PRESENT",
+   "vid": 2,
+   "spine": "Whoever comes in at the gate is looked over in a way he cannot put a name to, and nobody offers him the name.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-11",
+   "poolKey": "WALLED-STRAINED",
+   "vid": 1,
+   "spine": "The city walls and gates are in better repair than the watch that stands on them is paid. The upkeep of the stone and the wage come out of one purse, and the wage comes last.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-6",
+   "poolKey": "Logistics & Supply: Granary with road supply",
+   "vid": 1,
+   "spine": "The town keeps a grain store and is fed by the roads and by no water. What the store buys, if the roads are cut, is time.",
+   "faces": [],
+   "notebook": []
+  }
+ ],
+ "dropped": 0,
+ "patched": 1,
+ "tier1Dropped": 0,
+ "tier1Patched": 0,
+ "page": {
+  "verdict": "PASS",
+  "findings": [],
+  "report": {
+   "units": 16,
+   "openers": [
+    {
+     "opener": "a grain store",
+     "n": 1
+    },
+    {
+     "opener": "a stranger here",
+     "n": 1
+    },
+    {
+     "opener": "a traveller is",
+     "n": 1
+    },
+    {
+     "opener": "defending this place",
+     "n": 1
+    },
+    {
+     "opener": "everyone in the",
+     "n": 1
+    },
+    {
+     "opener": "nothing presses the",
+     "n": 1
+    },
+    {
+     "opener": "rundgate runs on",
+     "n": 1
+    },
+    {
+     "opener": "some of the",
+     "n": 1
+    },
+    {
+     "opener": "the city walls",
+     "n": 1
+    },
+    {
+     "opener": "the country outside",
+     "n": 1
+    },
+    {
+     "opener": "the kind of",
+     "n": 1
+    },
+    {
+     "opener": "the law here",
+     "n": 1
+    },
+    {
+     "opener": "the safety here",
+     "n": 1
+    },
+    {
+     "opener": "the town holds",
+     "n": 1
+    },
+    {
+     "opener": "the town keeps",
+     "n": 1
+    },
+    {
+     "opener": "whoever comes in",
+     "n": 1
+    }
+   ]
+  }
+ },
+ "missing": [
+  "capture adversarial"
+ ],
+ "unknown": []
+}

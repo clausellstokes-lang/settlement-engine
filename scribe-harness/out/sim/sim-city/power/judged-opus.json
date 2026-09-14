@@ -1,0 +1,297 @@
+{
+ "verdicts": [
+  {
+   "blockId": "DS-POW-1",
+   "poolKey": "Approved",
+   "vid": 2,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-POW-1",
+   "poolKey": "breakdown dominated by PROSPERITY, favourable",
+   "vid": 2,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-POW-2",
+   "poolKey": "stable matched",
+   "vid": 4,
+   "verdict": "WITHHELD",
+   "arms": [
+    "WALL-5",
+    "X"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "WALL-5",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a contrast",
+     "value": "and not what the answer is.",
+     "description": "no sibling pool key on this page names the rejected alternative, so the contrast may reject something the town never had"
+    },
+    {
+     "arm": "X",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "exhaustivity over an open column",
+     "value": "What is settled here is who answers, and not what the answer is.",
+     "description": "the copula entails the subject is the column's only value; the column is not closed (open)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-POW-2",
+   "poolKey": "recentConflict present",
+   "vid": 3,
+   "verdict": "FAIL",
+   "arms": [
+    "NON-MOVE",
+    "Q"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "NON-MOVE",
+     "channel": "FAIL",
+     "seat": "spine",
+     "subject": "FIGURE",
+     "value": "as though ",
+     "description": "the pools carry no simile slot; a comparison is a measurement in words"
+    },
+    {
+     "arm": "Q",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a second sentence naming no second field",
+     "value": "The City Council and the merchant guilds are each acting as though the other has already l",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call (reads [powerStructure.factions, powerStructure.recentConflict]; none claimed)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-POW-6",
+   "poolKey": "operation role criminal revenue stream (unclassified)",
+   "vid": 1,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-POW-5",
+   "poolKey": "council",
+   "vid": 3,
+   "verdict": "WITHHELD",
+   "arms": [
+    "X"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "X",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "exhaustivity over an open column",
+     "value": "The City Council's trouble is the town's own temper, and never a rival.",
+     "description": "the copula entails the subject is the column's only value; the column is not closed (open)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-POW-5",
+   "poolKey": "governing body name: a SLOT, never a baked noun",
+   "vid": 2,
+   "verdict": "WITHHELD",
+   "arms": [
+    "C3"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "C3",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "is this clause historical?",
+     "value": "A stranger who calls the City Council by any other name is corrected at once, and politely",
+     "description": "a past-tense or formerly-construction: whether it asserts history is A6, the refuter's (semantic)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-POW-4",
+   "poolKey": "riskLabel: Holding",
+   "vid": 1,
+   "verdict": "WITHHELD",
+   "arms": [
+    "WALL-5"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "WALL-5",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a contrast",
+     "value": "and not one of them is quiet about wanting it.",
+     "description": "no sibling pool key on this page names the rejected alternative, so the contrast may reject something the town never had"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-POW-4",
+   "poolKey": "legitimacyHold: public backing hardens the hold",
+   "vid": 2,
+   "verdict": "WITHHELD",
+   "arms": [
+    "Q"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "Q",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a second sentence naming no second field",
+     "value": "That backing turns what would be a contest in another town into an inconvenience.",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call (reads [typeof power.publicLegitimacy === 'object' && power.publicLegitimacy !== null\n    ? power.publicLegitimacy\n    : /** @type {PublicLegitimacyView} */ ({}).govMultiplier, powerStructure.publicLegitimacy.govMultiplier]; none claimed)"
+    }
+   ]
+  }
+ ],
+ "kept": [
+  {
+   "blockId": "DS-POW-1",
+   "poolKey": "Approved",
+   "vid": 2,
+   "spine": "The City Council governs with a modest edge, and what it asks of the town is given more often than it is refused.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-1",
+   "poolKey": "breakdown dominated by PROSPERITY, favourable",
+   "vid": 2,
+   "spine": "The City Council is credited with the good years whether or not it made them, and the case in its favour is the trade and nothing else.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-2",
+   "poolKey": "stable matched",
+   "vid": 4,
+   "spine": "What is settled here is who answers, and not what the answer is.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-6",
+   "poolKey": "operation role criminal revenue stream (unclassified)",
+   "vid": 1,
+   "spine": "Something organised here takes its share of a street or of a trade, and it has no clearer name than that.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-5",
+   "poolKey": "council",
+   "vid": 3,
+   "spine": "The City Council's trouble is the town's own temper, and never a rival.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-5",
+   "poolKey": "governing body name: a SLOT, never a baked noun",
+   "vid": 2,
+   "spine": "A stranger who calls the City Council by any other name is corrected at once, and politely.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-4",
+   "poolKey": "riskLabel: Holding",
+   "vid": 1,
+   "spine": "Nobody who wants the City Council's place at Rundgate is within reach of it, and not one of them is quiet about wanting it.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-4",
+   "poolKey": "legitimacyHold: public backing hardens the hold",
+   "vid": 2,
+   "spine": "The City Council's hold is hardened by the town's own backing. That backing turns what would be a contest in another town into an inconvenience.",
+   "faces": [],
+   "notebook": []
+  }
+ ],
+ "dropped": 1,
+ "patched": 0,
+ "tier1Dropped": 0,
+ "tier1Patched": 0,
+ "page": {
+  "verdict": "PASS",
+  "findings": [
+   {
+    "id": "(tab)",
+    "arm": "C7-opener",
+    "channel": "REPORT",
+    "subject": "an opener trigram repeated on one page",
+    "value": "the city council: 2",
+    "description": "two units of one page open on the same three words, which is the measure the block fingerprint bands"
+   },
+   {
+    "id": "(tab)",
+    "arm": "C7-opener",
+    "channel": "REPORT",
+    "subject": "an opener trigram repeated on one page",
+    "value": "the city council's: 2",
+    "description": "two units of one page open on the same three words, which is the measure the block fingerprint bands"
+   }
+  ],
+  "report": {
+   "units": 9,
+   "openers": [
+    {
+     "opener": "a stranger who",
+     "n": 1
+    },
+    {
+     "opener": "nobody here needs",
+     "n": 1
+    },
+    {
+     "opener": "nobody who wants",
+     "n": 1
+    },
+    {
+     "opener": "something organised here",
+     "n": 1
+    },
+    {
+     "opener": "the city council",
+     "n": 2
+    },
+    {
+     "opener": "the city council's",
+     "n": 2
+    },
+    {
+     "opener": "what is settled",
+     "n": 1
+    }
+   ]
+  }
+ },
+ "missing": [
+  "layer DORMANT (no ledger materialized)"
+ ],
+ "unknown": []
+}
