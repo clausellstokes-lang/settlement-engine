@@ -14,8 +14,9 @@
     "DS-DEF-6"
   ],
   "pools": 15,
-  "briefBytes": 112932,
-  "turnBytes": 33609,
-  "cardBytes": 40302,
-  "approxTokens": 36635
+  "briefBytes": 94229,
+  "townBytes": 13247,
+  "turnBytes": 21203,
+  "cardBytes": 43985,
+  "approxTokens": 32170
 }
