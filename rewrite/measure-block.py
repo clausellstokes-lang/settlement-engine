@@ -8,7 +8,21 @@ distinct words, content types, mean words per unit, the comma-and join rate, the
 ⭐ ADDENDUM 18 RULING 35 — "A NUMBER THE READER SEES". Beneath the two legacy lines this prints the
 POOL-GRAIN FINGERPRINT: per pool and summarised per block, ten measures for the refuter's eye.
 ⛔ IT REFUSES NOTHING. No exit code moves, no gate returns, no measure is a threshold. Ruling 1 binds:
-the figure is reported with every round and is never a refusal. `--json` carries the whole of it."""
+the figure is reported with every round and is never a refusal. `--json` carries the whole of it.
+
+⭐⭐ THE CHAIR'S CUT 7 (2026-09-13) — THE FOUR MEASURES. A fifth block below the fingerprint, and it
+exists for a stated reason: at batch 5 the selector seat and both writer seats were the SAME MODEL,
+and neither could see the repetition. A count does not need a better reader; it needs an instrument.
+  1. VERB CONCENTRATION  — the share of ATTRIBUTED rows carried by the single commonest attribution
+                           verb (lemma-grouped; the surface histogram printed beside it).
+  2. SENTENCES PER FACE  — the distribution, and the share of faces carrying TWO sentences.
+  3. OPENER TRIGRAM      — the commonest first-three-words and its count, PER VARIANT and per pool,
+                           plus the faces sharing a trigram with a sibling in their own variant.
+  4. SIBLING OVERLAP     — median pairwise content-token overlap in basis points, PER VARIANT, on the
+                           estate's own ruler (`composedWalker.siblingDistance`, ported).
+Each is printed beside the FABLE-SELECTED BENCHMARK, live from the tree and frozen at 57a75858b, the
+same way the exemplars' attribution baseline is printed today. ⛔ THESE REFUSE NOTHING EITHER.
+extra flags: --benchmark (print the benchmark derivation and stop)"""
 import subprocess, re, sys, statistics, os, json
 STOP = set('the a an and or of to in at is are was be been it its this that with no not nor neither what for on by has have had as from'.split())
 def block_lines(text, head):
@@ -23,6 +37,26 @@ def pools_of(lines):
         if m: cur = m.group(1); pools.setdefault(cur, []); continue
         m = re.match(r'\s*- `\[face\]` (.+)', l) or re.match(r'\d+\. `\[\w+\]` (.+)', l)
         if m and cur is not None: pools[cur].append(re.sub(r'<!--.*?-->', '', m.group(1)).strip())
+    return pools
+def variants_of(lines):
+    """The same walk as `pools_of`, but KEEPING THE VARIANT BOUNDARY, which the four measures of
+    cut 7 need and the legacy flattening throws away. Returns pool -> [{'n', 'spine', 'faces'}].
+    A face is a `- `[face]`` row under the numbered spine that precedes it; a row before any
+    spine (there are none in the annex today) is dropped rather than guessed at."""
+    pools, cur, vs = {}, None, None
+    for l in lines:
+        m = re.match(r'^\*\*(.+)\*\*\s*$', l.strip())
+        if m:
+            cur = m.group(1); pools.setdefault(cur, []); vs = pools[cur]; continue
+        if cur is None: continue
+        m = re.match(r'(\d+)\. `\[\w+\]` (.+)', l)
+        if m:
+            vs.append({'n': int(m.group(1)),
+                       'spine': re.sub(r'<!--.*?-->', '', m.group(2)).strip(), 'faces': []})
+            continue
+        m = re.match(r'\s*- `\[face\]` (.+)', l)
+        if m and vs:
+            vs[-1]['faces'].append(re.sub(r'<!--.*?-->', '', m.group(1)).strip())
     return pools
 def tok(xs): return [w.lower().strip('.,;:?!') for x in xs for w in x.split()]
 def upto(xs, b):
