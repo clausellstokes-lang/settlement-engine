@@ -317,6 +317,35 @@ export function buildScribeBrief(input) {
 }
 
 /**
+ * ⭐⭐ THE BODIES THIS PAGE NAMES (W3d car 2), read off `town.bodies` and printed under a heading of
+ * their own rather than left inside the town's JSON.
+ *
+ * ⛔ RUN 3 MEASURED 8 ROSTER REFUSALS AND MOST WERE THE CARD'S FAULT. "The Governing Council and
+ * The Order of the Watch" and "the Commercial Circle and the Administrative Circle" are the
+ * engine's own faction and conflict rows, handed to the WRITER as the pool's `{faction}` fills; the
+ * town block claimed to be the complete list of nameable bodies and listed none of them, so a
+ * reader holding the block to its word had to answer yes. The list is stated in words here because
+ * the sentence beside it is an INSTRUCTION about standing, and an instruction buried in a JSON
+ * value is an instruction a reader may take as data.
+ * @param {object|null} town @returns {string}
+ */
+function bodiesBlock(town) {
+  const bodies = Array.isArray(town?.bodies) ? town.bodies : [];
+  const rows = [
+    'THE BODIES THIS PAGE NAMES',
+    'A body here may act and speak; a body not here may be named only as the corpus line names it.',
+  ];
+  if (!bodies.length) {
+    rows.push('  (this settlement holds no named body: name none, and let the corpus line name what it names)');
+    return rows.join('\n');
+  }
+  for (const body of bodies) {
+    rows.push(`  ${String(body?.name ?? '')} (${String(body?.kind ?? '')}, from ${String(body?.source ?? '')})`);
+  }
+  return rows.join('\n');
+}
+
+/**
  * ⭐ THE TOWN BLOCK — cache breakpoint 2, one per settlement rather than one per tab.
  *
  * W0 measured that about 7 KB of every tab card is the same `town` section (the roster, the
@@ -336,6 +365,8 @@ export function buildTownBlock(card) {
     'and a record no body here keeps are both refused outright by the instruments and never reach',
     'the page. A source speaks through one of the roles its own roster lists and through no other.',
     JSON.stringify(town ?? {}, null, 1),
+    '',
+    bodiesBlock(town),
     '',
     // ⭐ THE LADDERS RIDE HERE TOO (W3b car 2). They are facts of the PAGE, and every seat that
     // reads this block reads them: the writer, and the second reader whose checklist rides on the
@@ -803,10 +834,14 @@ export const TIER1_QUESTIONS = Object.freeze([
     arm: 'T1-PAGE',
     ask: 'PAGE: does it contradict a machine line or a badge on this page? The posture badge word and the readiness band are TWO LADDERS over one score and BOTH are the engine\'s, so a line that agrees with the band is NOT a contradiction of the badge; a funding note reading underfunded at ninety seven percent beside `Economic Backing: Well-funded` is likewise two fields and both are true. Neither pair is an answer of yes.',
   }),
+  // ⭐ THE ROSTER QUESTION NAMES THE THREE PLACES A BODY CAN BE SEATED (W3d car 2). RUN 3 measured
+  // 8 roster refusals and most were bodies the ENGINE holds and the town block did not list: the
+  // faction and conflict rows the writer was handed as its own `{faction}` fills. A reader shown
+  // one of the three lists and told it was complete had to refuse the other two.
   Object.freeze({
     key: 'roster',
     arm: 'T1-ROSTER',
-    ask: 'ROSTER: does someone act in it, or is a record cited in it, that the facts below do not seat or keep?',
+    ask: 'ROSTER: does someone act in it, or is a record cited in it, that the facts below do not seat or keep? A name is SEATED if the town section seats the role, or `bodies` names the body, or the pool\'s own declared fills below print it: any of the three is enough, and a body the engine named is not an invention.',
   }),
   Object.freeze({
     key: 'model',
@@ -908,6 +943,22 @@ function pageLinesOf(card) {
  * the writer was refuses lines the writer was licensed to write (ruling 26's defect class, pointed
  * at the second seat).
  */
+/**
+ * ⭐ THE POOL'S OWN DECLARED FILLS, FOR THE SECOND READER (W3d car 2).
+ *
+ * ⛔ THE FALSE POSITIVE THE RUN-3 READER DIAGNOSED ITSELF, in its own note: "the tier-1 checklist
+ * ships the second reader only the two cached system blocks plus the line list, and NEITHER carries
+ * the pool's slot table. The reader therefore sees two proper-named bodies acting, checks the TOWN
+ * block that claims to be the complete list of nameable bodies, and must answer yes." The WRITER
+ * was told those names in terms (`{faction} is "The Governing Council" on this town`) and the brief
+ * licenses exactly that. So the fills ride here too, and the two seats read one page again.
+ */
+function fillsFor(card, unit) {
+  const pool = cardPool(card, String(unit?.blockId ?? ''), String(unit?.poolKey ?? ''));
+  return (Array.isArray(pool?.slots?.fills) ? pool.slots.fills : [])
+    .map((f) => `    {${String(f?.slot ?? '')}} is ${JSON.stringify(String(f?.value ?? ''))} on this town, and the page prints it`);
+}
+
 function fieldsFor(card, unit) {
   const pool = cardPool(card, String(unit?.blockId ?? ''), String(unit?.poolKey ?? ''));
   return (Array.isArray(pool?.fields) ? pool.fields : [])
@@ -970,6 +1021,10 @@ export function buildTier1Checklist(units, card) {
   lines.push('THE TOWN:');
   lines.push(JSON.stringify(card?.town ?? {}, null, 1));
   lines.push('');
+  // ⭐ THE SAME NAMED LIST THE WRITER WAS GIVEN (W3d car 2), in the same words and under the same
+  // heading, so a body the engine seated is not read as an invention at the second seat.
+  lines.push(bodiesBlock(card?.town ?? null));
+  lines.push('');
   lines.push('THE STATE THIS PAGE READS:');
   lines.push(JSON.stringify(card?.epoch ?? {}, null, 1));
   const page = pageLinesOf(card);
@@ -996,6 +1051,8 @@ export function buildTier1Checklist(units, card) {
       const fields = fieldsFor(card, unit);
       if (fields.length) for (const field of fields) lines.push(field);
       else lines.push('    (this pool declares no typed field)');
+      // ⭐ AND THE NAMES THE WRITER WAS HANDED FOR THIS POOL (W3d car 2). See `fillsFor`.
+      for (const fill of fillsFor(card, unit)) lines.push(fill);
     }
     lines.push(`${row.n}. (${row.row}) ${row.text}`);
   }

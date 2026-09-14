@@ -33,7 +33,15 @@ const brief = () => buildScribeBrief({ voice: SCRIBE_VOICE, exemplars: SCRIBE_EX
 const card = {
   tab: 'defense',
   audience: 'dm',
-  town: { name: 'Ashford', tier: 'town', sources: ['hall', 'watch'] },
+  town: {
+    name: 'Ashford',
+    tier: 'town',
+    sources: ['hall', 'watch'],
+    bodies: [
+      { kind: 'faction', name: 'The Governing Council', source: 'factions[].name' },
+      { kind: 'faction', name: 'The Order of the Watch', source: 'factions[].name' },
+    ],
+  },
   epoch: { tick: 8, calendar: { year: 2 } },
   pools: [{
     blockId: 'DS-DEF-2',
@@ -41,7 +49,10 @@ const card = {
     vid: 3,
     angle: 'ledger',
     marks: [],
-    slots: { declared: ['settlement'] },
+    slots: {
+      declared: ['settlement', 'faction'],
+      fills: [{ slot: 'faction', value: 'The Governing Council' }],
+    },
     faceSources: [null, 'hall'],
     unit: { spine: 'The corpus spine stands.', faces: ['face nought', 'face one'] },
   }],
@@ -114,6 +125,31 @@ Deno.test('the volatile turn carries the page, the ground and the corpus line', 
   assert(turn.includes('The corpus spine stands.'), 'the corpus line is the claim and the fallback');
   assert(turn.includes('face 1 speaks through: hall'), 'the seating is told, never chosen');
   assert(turn.includes('faces to write: 2'));
+});
+
+Deno.test('⭐⭐ THE ROSTER SEATS THE BODIES THE PAGE NAMES (W3d car 2)', () => {
+  // ⛔ RUN 3 measured 8 ROSTER contradictions and most were not inventions: "The Governing Council
+  // and The Order of the Watch" are the engine's own faction rows, handed to the WRITER as that
+  // pool's own `{faction}` fills, while the town block claimed in terms to list every body that may
+  // be named and listed neither. The second reader, holding the block to its word, had to answer
+  // yes on a body the engine seated.
+  const block = buildTownBlock(card);
+  assert(block.includes('THE BODIES THIS PAGE NAMES'));
+  assert(block.includes('A body here may act and speak; a body not here may be named only as the corpus line names it.'));
+  assert(block.includes('The Governing Council (faction, from factions[].name)'));
+  assert(block.includes('The Order of the Watch (faction, from factions[].name)'));
+  // BOTH SEATS READ THE SAME LIST IN THE SAME WORDS, which is the whole of ruling 26 at the roster.
+  const checklist = buildTier1Checklist([unit()], card);
+  assert(checklist.includes('THE BODIES THIS PAGE NAMES'));
+  assert(checklist.includes('The Order of the Watch (faction, from factions[].name)'));
+  // ⭐ AND THE POOL'S OWN DECLARED FILLS RIDE BESIDE ITS LINES, which is the fix the RUN 3 reader
+  // wrote out itself: it saw two proper-named bodies acting, checked a town block that claimed to
+  // be complete, and had to answer yes because no seat carried the pool's slot table.
+  assert(checklist.includes('{faction} is "The Governing Council" on this town, and the page prints it'));
+  assert(checklist.includes('A name is SEATED if the town section seats the role, or `bodies` names the body, or the pool\'s own declared fills below print it'));
+  // A SETTLEMENT THE ENGINE NAMED NO BODY FOR SAYS SO, rather than printing an empty heading.
+  const bare = { ...card, town: { name: 'Ashford', tier: 'town', bodies: [] } };
+  assert(buildTownBlock(bare).includes('(this settlement holds no named body'));
 });
 
 Deno.test('⭐⭐ THE WRITER SEES THE PAGE, AND NEVER THE COMPOSED ROWS (W3d car 1)', () => {

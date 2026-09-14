@@ -250,8 +250,8 @@ export const REFUTE_ARMS = Object.freeze([
   Object.freeze({ arm: 'X', ground: GROUND_CARD, note: 'exhaustivity over the card office and institution columns' }),
   Object.freeze({ arm: 'F25', ground: GROUND_CARD, note: 'via walkEntry on the card ground' }),
   Object.freeze({ arm: 'W', ground: GROUND_INPUT, note: 'the wiring row; the static card carries status only, so the predicate limb is NOT-EXECUTABLE' }),
-  Object.freeze({ arm: 'REFERENT-role', ground: GROUND_CARD, note: 'every office noun in the text must be a role the card seats; floor 1' }),
-  Object.freeze({ arm: 'REFERENT-body', ground: GROUND_CARD, note: 'every record cited must have a holder in the card roster; floor 1' }),
+  Object.freeze({ arm: 'REFERENT-role', ground: GROUND_CARD, note: 'every office noun in the text must be a role the card seats, an institution it holds or a body it names; floor 1' }),
+  Object.freeze({ arm: 'REFERENT-body', ground: GROUND_CARD, note: 'every record cited must have a holder in the card roster or a named body that keeps it; floor 1' }),
   Object.freeze({ arm: 'CORPUS-DIFF', ground: GROUND_INPUT, note: 'a move ADDED, or a LEVEL1 order lost on a spine; needs the corpus unit' }),
   Object.freeze({ arm: 'EPOCH', ground: GROUND_CARD, note: 'elapsed-course language over an epoch the card does not hold' }),
   Object.freeze({ arm: 'CLARITY', ground: GROUND_TEXT, note: 'REPORT only: the three clarity-sweep proxy limbs' }),
@@ -384,6 +384,26 @@ export function seatedRolesOf(card) {
 export function institutionsOfCard(card) {
   return (Array.isArray(card?.town?.institutions) ? card.town.institutions : [])
     .map((inst) => str(inst?.name)).filter(Boolean).sort(compareCodepoint);
+}
+
+/**
+ * ⭐⭐ EVERY NAMED BODY THE CARD'S TOWN HOLDS (card schema /5, W3d car 2).
+ *
+ * ⛔ THE THIRD LIST FLOOR 1 ALWAYS NEEDED. A town seats ROLES (an office a source may speak
+ * through) and holds INSTITUTIONS (a building or a service), and neither is the set of NAMED BODIES
+ * the engine decided for this settlement: its factions, its power blocs, the two parties of its
+ * conflicts, the two of its prominent relationship. RUN 3 measured the gap as 8 roster
+ * contradictions, most of them bodies the engine named and the card did not list — "The Governing
+ * Council and The Order of the Watch" on the pinned town, handed to the writer as that pool's own
+ * `{faction}` fills.
+ *
+ * ⛔ A CARD OLDER THAN SCHEMA /5 ANSWERS THE EMPTY LIST, which leaves both arms exactly where they
+ * were before this car rather than licensing anything new.
+ * @param {object} card @returns {string[]}
+ */
+export function bodiesOfCard(card) {
+  return (Array.isArray(card?.town?.bodies) ? card.town.bodies : [])
+    .map((body) => str(body?.name)).filter(Boolean).sort(compareCodepoint);
 }
 
 /**
@@ -759,6 +779,10 @@ function armWall10(id, card, blockId, poolKey, out) {
 function armReferentRole(id, text, card, out) {
   const seated = seatedRolesOf(card);
   const institutions = institutionsOfCard(card).map((n) => n.toLowerCase());
+  // ⭐ THE THIRD LIST (W3d car 2). A named body the engine decided for this settlement — a faction,
+  // a power bloc, a party to a conflict — is a seat as much as a role or an institution is, and
+  // RUN 3 measured the cost of leaving it out at 8 roster refusals of the engine's own names.
+  const bodies = bodiesOfCard(card).map((n) => n.toLowerCase());
   if (!seated.length) {
     emit(out, finding(id, 'REFERENT-role', 'NOT-EXECUTABLE', '(the seated roles)', '0',
       'the card seats no role, so a named office cannot be licensed or refused here'));
@@ -769,8 +793,9 @@ function armReferentRole(id, text, card, out) {
     if (!new RegExp(`\\b${noun.replace(/ /g, '\\s+')}\\b`, 'i').test(low)) continue;
     if (seated.some((r) => r.includes(noun))) continue;
     if (institutions.some((n) => n.includes(noun))) continue;
+    if (bodies.some((n) => n.includes(noun))) continue;
     emit(out, finding(id, 'REFERENT-role', 'FAIL', 'an office the card does not seat', noun,
-      'the text names an office, and this town seats no role and holds no institution by that name; floor 1'));
+      'the text names an office, and this town seats no role, holds no institution and names no body by that name; floor 1'));
   }
 }
 
@@ -797,14 +822,25 @@ function armReferentBody(id, text, card, out) {
   // modifier; scanning the unit for each kind's noun would convict the second on the strength
   // of the first. `PROVENANCE_CLAUSE` is `moveGrammar.js`'s own PROVENANCE alternation, so a
   // kind is cited only where the shape that MAKES it a citation actually fired.
+  // ⭐ A NAMED BODY KEEPS A RECORD TOO (W3d car 2). The institution roster is buildings and
+  // services; `town.bodies` is the engine's own named bodies. A town that holds "The Order of the
+  // Watch" holds a body by which the watch's roll is kept, and refusing that citation for want of
+  // an institution row is the roster half of RUN 3's 8 measured refusals.
+  const bodies = bodiesOfCard(card);
   for (const hit of text.matchAll(PROVENANCE_CLAUSE)) {
     const clause = hit[0];
     const record = HOLDER_RECORDS.find((r) => new RegExp(`\\b${r.kind}\\b`, 'i').test(clause));
     if (!record) continue;
     const kind = str(record.kind);
     const holders = holdersFromCard(kind, card);
-    cited.push({ kind, holder: holders.length ? holders[0] : null });
+    const named = holders.length ? holders : bodies.filter((b) => new RegExp(`\\b${kind}\\b`, 'i').test(b));
+    cited.push({ kind, holder: named.length ? named[0] : null });
     if (holders.length) continue;
+    if (named.length) {
+      emit(out, finding(id, 'REFERENT-body', 'REPORT', 'a record kept by a named body rather than an institution', `${kind}: ${named[0]}`,
+        'no institution on this card offers the service by which this record is kept, but the town names a body that does, and a body the engine named is a seat; floor 1 is satisfied by the body'));
+      continue;
+    }
     if (record.rosterBacked !== true || record.services.length === 0) {
       // The kind has no service any institution in the shipped roster can offer, so NO town
       // could ever hold it. That is a wiring debt of the holder table (its own `muster` note

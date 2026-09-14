@@ -128,8 +128,15 @@ import { DOSSIER_STATE_PROSE_WAR_FAITH } from '../../data/dossierStateProse/warF
  * reading has no value, and the card printed `= null` for those readings without saying that a
  * null is not a fact. See `fieldState` and `writeableOf`. The golden was re-recorded for this
  * cause and no other: the only new bytes on any tab are those three keys and the schema string.
+ *
+ * /5 (W3d car 2, 2026-09-14): `town.bodies` added — every NAMED body the engine holds for this
+ * settlement, with the row each came from. RUN 3 measured 8 roster contradictions and the bulk of
+ * them are bodies the page names out of the pool's OWN fills ("The Governing Council and The Order
+ * of the Watch", "the Commercial Circle and the Administrative Circle") which the town block's
+ * roster does not list, so the second reader called a body the engine seated unseated. See
+ * `bodiesOf`. The golden was re-recorded for this cause and no other.
  */
-export const TOWN_CARD_SCHEMA = 'scribe-town-card/4';
+export const TOWN_CARD_SCHEMA = 'scribe-town-card/5';
 
 /**
  * The engine fingerprint the artefact is keyed to (§7). Spelled from the schema's own two
@@ -449,6 +456,92 @@ function rosterRows(roles, source) {
 }
 
 /**
+ * ⛔⛔ THE ONE BODY ROW THAT MAY NOT BE NAMED, AND IT IS A NAMED TABLE RATHER THAN A HEURISTIC.
+ *
+ * `stressFactions.js:105` pushes a power-bloc row `Unknown Faction (hidden)` on an `infiltrated`
+ * town, and its own `desc` says what it is: "An external interest with embedded assets in at least
+ * two factions. ITS PRESENCE IS NOT KNOWN TO THE SETTLEMENT." A list whose sentence is "a body here
+ * may act and speak" may not carry a body the settlement does not know of: on the player page it
+ * would be a secret printed as a fact, and on either page the string itself is an engine
+ * placeholder with a parenthetical mark in it rather than a name a clerk would use.
+ *
+ * MEASURED: this is the ONLY row of its kind in the estate — one `(hidden)` faction literal in
+ * `src/`, and one matching key in `factionBacking.js`'s stress table. It is matched EXACTLY and by
+ * name, not by a parenthetical pattern, so a real body whose name happens to carry brackets is not
+ * silently unseated. REPORTED to the chair as a finding about the engine's own row rather than
+ * cured here.
+ * @type {ReadonlyArray<string>}
+ */
+export const UNNAMEABLE_BODIES = Object.freeze(['Unknown Faction (hidden)']);
+
+/**
+ * ⭐⭐ THE BODIES THIS PAGE CAN NAME (W3d car 2), IN ONE SORTED LIST WITH THE ROW EACH CAME FROM.
+ *
+ * ⛔⛔ THE MEASUREMENT. RUN 3's second reader refused 8 lines on ROSTER and most of them were not
+ * inventions at all: "The Governing Council and The Order of the Watch" on the pinned town, "the
+ * Commercial Circle and the Administrative Circle" on the village. Every one of those names is the
+ * engine's own — a `factions[].name`, a conflict party — and the WRITER was given them as the
+ * pool's own `{faction}` fills. The TOWN BLOCK, which says in terms "every role, body and record
+ * you may name is in this section", listed none of them, so a reader holding the card to its word
+ * had to answer yes on a body the engine seated. A refusal for a fact the card withheld is ruling
+ * 26's defect class again, this time on the roster.
+ *
+ * ⛔ THE FOUR ROWS, AND WHY EACH IS A DIFFERENT FACT. `factions[].name` are the NAMED bodies of the
+ * settlement's own politics ("The Order of the Watch"); `powerStructure.factions[].faction` are the
+ * POWER BLOCS the projection runs on ("Guild Council", "Military/Guard"), which are a different
+ * vocabulary over the same town and both reach the page; the conflict rows name the two parties of
+ * a quarrel the engine decided; `prominentRelationship` names two PERSONS, who are bodies in the
+ * sense that matters here — they act and are named on the page.
+ *
+ * ⛔ DEDUPED BY NAME, WITH A FIXED PRECEDENCE, so a body that stands in three rows is ONE row here
+ * and the `source` names the first row that holds it. Two rows for one name would read to a model
+ * as two bodies, which is worse than a source that is one of several true answers.
+ *
+ * ⛔ THE DRAWN `{hall}`-SHAPED FILLS ARE NOT HERE, AND THAT IS DELIBERATE. They are a TAB's fact,
+ * not a TOWN's, and this section is cache breakpoint two, whose whole contract is that it is the
+ * same bytes on all thirteen tabs of one settlement. They already ride in the writer's own turn
+ * beside their pool, and since this car they ride in the second reader's checklist there too.
+ * @param {object} s
+ * @returns {Array<{kind: string, name: string, source: string}>} sorted by name, byte-stable
+ */
+function bodiesOf(s) {
+  /** @type {Array<[string, string, string]>} name, kind, source — in PRECEDENCE order. */
+  const rows = [];
+  const push = (name, kind, source) => {
+    const held = String(name ?? '').trim();
+    if (held !== '' && !UNNAMEABLE_BODIES.includes(held)) rows.push([held, kind, source]);
+  };
+  for (const f of (Array.isArray(s?.factions) ? s.factions : [])) push(f?.name, 'faction', 'factions[].name');
+  const power = s?.powerStructure || {};
+  for (const f of (Array.isArray(power.factions) ? power.factions : [])) {
+    push(f?.faction, 'power bloc', 'powerStructure.factions[].faction');
+  }
+  push(power.governingName, 'power bloc', 'powerStructure.governingName');
+  for (const c of (Array.isArray(s?.conflicts) ? s.conflicts : [])) {
+    for (const party of (Array.isArray(c?.parties) ? c.parties : [])) push(party, 'conflict party', 'conflicts[].parties');
+  }
+  for (const c of (Array.isArray(power.conflicts) ? power.conflicts : [])) {
+    for (const party of (Array.isArray(c?.parties) ? c.parties : [])) {
+      push(party, 'conflict party', 'powerStructure.conflicts[].parties');
+    }
+  }
+  const prominent = s?.prominentRelationship || null;
+  push(prominent?.npc1, 'relationship party', 'prominentRelationship.npc1');
+  push(prominent?.npc2, 'relationship party', 'prominentRelationship.npc2');
+
+  /** @type {Set<string>} */
+  const seen = new Set();
+  /** @type {Array<object>} */
+  const out = [];
+  for (const [name, kind, source] of rows) {
+    if (seen.has(name)) continue;
+    seen.add(name);
+    out.push(rec([['name', name], ['kind', kind], ['source', source]]));
+  }
+  return out.sort((a, b) => compareCodepoint(String(a.name), String(b.name)));
+}
+
+/**
  * ⭐ THE TOWN'S OWN ROWS — corpus-card sections (2), (2b), (2c) and (7), collapsed to this town.
  * @param {object} s @param {object|null} world
  */
@@ -471,6 +564,9 @@ function townOf(s, world) {
     ['roles', sources.map((source) => rec([['source', source], ['roster', rosterRows(roles, source)]]))],
     ['compromised', compromised],
     ['compromisedRate', COMPROMISED_SPEAKS],
+    // ⭐ (W3d car 2) THE NAMED BODIES, so the block's own claim to be the complete list of what may
+    // be named is TRUE. See `bodiesOf` for the measurement that put them here.
+    ['bodies', bodiesOf(s)],
     // (2)/(2b): the rows the town HAS, with the services actually on each.
     ['institutions', live
       .map((inst) => rec([

@@ -115,7 +115,7 @@
           "writeable": true
         }
       ],
-      "schema": "scribe-town-card/4",
+      "schema": "scribe-town-card/5",
       "seed": "golden-master-v3",
       "staticCardJoined": true,
       "tab": "daily_life",
@@ -128,6 +128,28 @@
           "fortifications": [],
           "standing": []
         },
+        "bodies": [
+          {
+            "kind": "power bloc",
+            "name": "Elder Council",
+            "source": "powerStructure.factions[].faction"
+          },
+          {
+            "kind": "relationship party",
+            "name": "Liutgar Bauer",
+            "source": "prominentRelationship.npc2"
+          },
+          {
+            "kind": "faction",
+            "name": "The Common Interest",
+            "source": "factions[].name"
+          },
+          {
+            "kind": "relationship party",
+            "name": "Vilbirg Becker",
+            "source": "prominentRelationship.npc1"
+          }
+        ],
         "compromised": [],
         "compromisedRate": 0.7,
         "culture": "germanic",
@@ -2265,7 +2287,7 @@
           "writeable": true
         }
       ],
-      "schema": "scribe-town-card/4",
+      "schema": "scribe-town-card/5",
       "seed": "golden-master-v3",
       "staticCardJoined": true,
       "tab": "defense",
@@ -2278,6 +2300,28 @@
           "fortifications": [],
           "standing": []
         },
+        "bodies": [
+          {
+            "kind": "power bloc",
+            "name": "Elder Council",
+            "source": "powerStructure.factions[].faction"
+          },
+          {
+            "kind": "relationship party",
+            "name": "Liutgar Bauer",
+            "source": "prominentRelationship.npc2"
+          },
+          {
+            "kind": "faction",
+            "name": "The Common Interest",
+            "source": "factions[].name"
+          },
+          {
+            "kind": "relationship party",
+            "name": "Vilbirg Becker",
+            "source": "prominentRelationship.npc1"
+          }
+        ],
         "compromised": [],
         "compromisedRate": 0.7,
         "culture": "germanic",
@@ -3258,7 +3302,7 @@
           "writeable": true
         }
       ],
-      "schema": "scribe-town-card/4",
+      "schema": "scribe-town-card/5",
       "seed": "golden-master-v3",
       "staticCardJoined": true,
       "tab": "economics",
@@ -3271,6 +3315,28 @@
           "fortifications": [],
           "standing": []
         },
+        "bodies": [
+          {
+            "kind": "power bloc",
+            "name": "Elder Council",
+            "source": "powerStructure.factions[].faction"
+          },
+          {
+            "kind": "relationship party",
+            "name": "Liutgar Bauer",
+            "source": "prominentRelationship.npc2"
+          },
+          {
+            "kind": "faction",
+            "name": "The Common Interest",
+            "source": "factions[].name"
+          },
+          {
+            "kind": "relationship party",
+            "name": "Vilbirg Becker",
+            "source": "prominentRelationship.npc1"
+          }
+        ],
         "compromised": [],
         "compromisedRate": 0.7,
         "culture": "germanic",
@@ -3643,7 +3709,7 @@
           "writeable": false
         }
       ],
-      "schema": "scribe-town-card/4",
+      "schema": "scribe-town-card/5",
       "seed": "golden-master-v3",
       "staticCardJoined": true,
       "tab": "faith",
@@ -3656,6 +3722,28 @@
           "fortifications": [],
           "standing": []
         },
+        "bodies": [
+          {
+            "kind": "power bloc",
+            "name": "Elder Council",
+            "source": "powerStructure.factions[].faction"
+          },
+          {
+            "kind": "relationship party",
+            "name": "Liutgar Bauer",
+            "source": "prominentRelationship.npc2"
+          },
+          {
+            "kind": "faction",
+            "name": "The Common Interest",
+            "source": "factions[].name"
+          },
+          {
+            "kind": "relationship party",
+            "name": "Vilbirg Becker",
+            "source": "prominentRelationship.npc1"
+          }
+        ],
         "compromised": [],
         "compromisedRate": 0.7,
         "culture": "germanic",
@@ -4440,7 +4528,7 @@
           "writeable": true
         }
       ],
-      "schema": "scribe-town-card/4",
+      "schema": "scribe-town-card/5",
       "seed": "golden-master-v3",
       "staticCardJoined": true,
       "tab": "history",
@@ -4453,6 +4541,28 @@
           "fortifications": [],
           "standing": []
         },
+        "bodies": [
+          {
+            "kind": "power bloc",
+            "name": "Elder Council",
+            "source": "powerStructure.factions[].faction"
+          },
+          {
+            "kind": "relationship party",
+            "name": "Liutgar Bauer",
+            "source": "prominentRelationship.npc2"
+          },
+          {
+            "kind": "faction",
+            "name": "The Common Interest",
+            "source": "factions[].name"
+          },
+          {
+            "kind": "relationship party",
+            "name": "Vilbirg Becker",
+            "source": "prominentRelationship.npc1"
+          }
+        ],
         "compromised": [],
         "compromisedRate": 0.7,
         "culture": "germanic",
@@ -6628,7 +6738,7 @@
           "writeable": true
         }
       ],
-      "schema": "scribe-town-card/4",
+      "schema": "scribe-town-card/5",
       "seed": "golden-master-v3",
       "staticCardJoined": true,
       "tab": "overview",
@@ -6641,6 +6751,28 @@
           "fortifications": [],
           "standing": []
         },
+        "bodies": [
+          {
+            "kind": "power bloc",
+            "name": "Elder Council",
+            "source": "powerStructure.factions[].faction"
+          },
+          {
+            "kind": "relationship party",
+            "name": "Liutgar Bauer",
+            "source": "prominentRelationship.npc2"
+          },
+          {
+            "kind": "faction",
+            "name": "The Common Interest",
+            "source": "factions[].name"
+          },
+          {
+            "kind": "relationship party",
+            "name": "Vilbirg Becker",
+            "source": "prominentRelationship.npc1"
+          }
+        ],
         "compromised": [],
         "compromisedRate": 0.7,
         "culture": "germanic",
@@ -7351,7 +7483,7 @@
           "writeable": true
         }
       ],
-      "schema": "scribe-town-card/4",
+      "schema": "scribe-town-card/5",
       "seed": "golden-master-v3",
       "staticCardJoined": true,
       "tab": "plot_hooks",
@@ -7364,6 +7496,28 @@
           "fortifications": [],
           "standing": []
         },
+        "bodies": [
+          {
+            "kind": "power bloc",
+            "name": "Elder Council",
+            "source": "powerStructure.factions[].faction"
+          },
+          {
+            "kind": "relationship party",
+            "name": "Liutgar Bauer",
+            "source": "prominentRelationship.npc2"
+          },
+          {
+            "kind": "faction",
+            "name": "The Common Interest",
+            "source": "factions[].name"
+          },
+          {
+            "kind": "relationship party",
+            "name": "Vilbirg Becker",
+            "source": "prominentRelationship.npc1"
+          }
+        ],
         "compromised": [],
         "compromisedRate": 0.7,
         "culture": "germanic",
@@ -8420,7 +8574,7 @@
           "writeable": true
         }
       ],
-      "schema": "scribe-town-card/4",
+      "schema": "scribe-town-card/5",
       "seed": "golden-master-v3",
       "staticCardJoined": true,
       "tab": "power",
@@ -8433,6 +8587,28 @@
           "fortifications": [],
           "standing": []
         },
+        "bodies": [
+          {
+            "kind": "power bloc",
+            "name": "Elder Council",
+            "source": "powerStructure.factions[].faction"
+          },
+          {
+            "kind": "relationship party",
+            "name": "Liutgar Bauer",
+            "source": "prominentRelationship.npc2"
+          },
+          {
+            "kind": "faction",
+            "name": "The Common Interest",
+            "source": "factions[].name"
+          },
+          {
+            "kind": "relationship party",
+            "name": "Vilbirg Becker",
+            "source": "prominentRelationship.npc1"
+          }
+        ],
         "compromised": [],
         "compromisedRate": 0.7,
         "culture": "germanic",
@@ -8710,7 +8886,7 @@
         }
       ],
       "pools": [],
-      "schema": "scribe-town-card/4",
+      "schema": "scribe-town-card/5",
       "seed": "golden-master-v3",
       "staticCardJoined": true,
       "tab": "relationships",
@@ -8723,6 +8899,28 @@
           "fortifications": [],
           "standing": []
         },
+        "bodies": [
+          {
+            "kind": "power bloc",
+            "name": "Elder Council",
+            "source": "powerStructure.factions[].faction"
+          },
+          {
+            "kind": "relationship party",
+            "name": "Liutgar Bauer",
+            "source": "prominentRelationship.npc2"
+          },
+          {
+            "kind": "faction",
+            "name": "The Common Interest",
+            "source": "factions[].name"
+          },
+          {
+            "kind": "relationship party",
+            "name": "Vilbirg Becker",
+            "source": "prominentRelationship.npc1"
+          }
+        ],
         "compromised": [],
         "compromisedRate": 0.7,
         "culture": "germanic",
@@ -9254,7 +9452,7 @@
           "writeable": true
         }
       ],
-      "schema": "scribe-town-card/4",
+      "schema": "scribe-town-card/5",
       "seed": "golden-master-v3",
       "staticCardJoined": true,
       "tab": "resources",
@@ -9267,6 +9465,28 @@
           "fortifications": [],
           "standing": []
         },
+        "bodies": [
+          {
+            "kind": "power bloc",
+            "name": "Elder Council",
+            "source": "powerStructure.factions[].faction"
+          },
+          {
+            "kind": "relationship party",
+            "name": "Liutgar Bauer",
+            "source": "prominentRelationship.npc2"
+          },
+          {
+            "kind": "faction",
+            "name": "The Common Interest",
+            "source": "factions[].name"
+          },
+          {
+            "kind": "relationship party",
+            "name": "Vilbirg Becker",
+            "source": "prominentRelationship.npc1"
+          }
+        ],
         "compromised": [],
         "compromisedRate": 0.7,
         "culture": "germanic",
@@ -9641,7 +9861,7 @@
           "writeable": true
         }
       ],
-      "schema": "scribe-town-card/4",
+      "schema": "scribe-town-card/5",
       "seed": "golden-master-v3",
       "staticCardJoined": true,
       "tab": "services",
@@ -9654,6 +9874,28 @@
           "fortifications": [],
           "standing": []
         },
+        "bodies": [
+          {
+            "kind": "power bloc",
+            "name": "Elder Council",
+            "source": "powerStructure.factions[].faction"
+          },
+          {
+            "kind": "relationship party",
+            "name": "Liutgar Bauer",
+            "source": "prominentRelationship.npc2"
+          },
+          {
+            "kind": "faction",
+            "name": "The Common Interest",
+            "source": "factions[].name"
+          },
+          {
+            "kind": "relationship party",
+            "name": "Vilbirg Becker",
+            "source": "prominentRelationship.npc1"
+          }
+        ],
         "compromised": [],
         "compromisedRate": 0.7,
         "culture": "germanic",
@@ -10281,7 +10523,7 @@
           "writeable": true
         }
       ],
-      "schema": "scribe-town-card/4",
+      "schema": "scribe-town-card/5",
       "seed": "golden-master-v3",
       "staticCardJoined": true,
       "tab": "viability",
@@ -10294,6 +10536,28 @@
           "fortifications": [],
           "standing": []
         },
+        "bodies": [
+          {
+            "kind": "power bloc",
+            "name": "Elder Council",
+            "source": "powerStructure.factions[].faction"
+          },
+          {
+            "kind": "relationship party",
+            "name": "Liutgar Bauer",
+            "source": "prominentRelationship.npc2"
+          },
+          {
+            "kind": "faction",
+            "name": "The Common Interest",
+            "source": "factions[].name"
+          },
+          {
+            "kind": "relationship party",
+            "name": "Vilbirg Becker",
+            "source": "prominentRelationship.npc1"
+          }
+        ],
         "compromised": [],
         "compromisedRate": 0.7,
         "culture": "germanic",
@@ -10583,7 +10847,7 @@
         }
       ],
       "pools": [],
-      "schema": "scribe-town-card/4",
+      "schema": "scribe-town-card/5",
       "seed": "golden-master-v3",
       "staticCardJoined": true,
       "tab": "war",
@@ -10596,6 +10860,28 @@
           "fortifications": [],
           "standing": []
         },
+        "bodies": [
+          {
+            "kind": "power bloc",
+            "name": "Elder Council",
+            "source": "powerStructure.factions[].faction"
+          },
+          {
+            "kind": "relationship party",
+            "name": "Liutgar Bauer",
+            "source": "prominentRelationship.npc2"
+          },
+          {
+            "kind": "faction",
+            "name": "The Common Interest",
+            "source": "factions[].name"
+          },
+          {
+            "kind": "relationship party",
+            "name": "Vilbirg Becker",
+            "source": "prominentRelationship.npc1"
+          }
+        ],
         "compromised": [],
         "compromisedRate": 0.7,
         "culture": "germanic",

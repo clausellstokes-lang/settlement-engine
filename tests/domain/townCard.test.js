@@ -26,6 +26,7 @@ import {
 } from '../../src/generators/generateSettlementPipeline.js';
 import {
   townCard, townCardJson, variantAt, recoverFills, faceRawOf, fieldState, WORLD_ONLY_READINGS,
+  UNNAMEABLE_BODIES,
 } from '../../src/domain/prose/townCard.js';
 import { renderTabPage, SCRIBE_TABS } from '../../src/domain/prose/scribePage.js';
 import {
@@ -391,6 +392,89 @@ describe('townCard — what has no value, and what cannot be written (W3b car 2)
   }, 300_000);
 });
 
+describe('townCard — the bodies this page names (W3d car 2)', () => {
+  const PINNED = {
+    settType: 'town', culture: 'germanic', terrainOverride: 'river', roadOverride: 'road', civOverride: 'civilized',
+  };
+
+  it('⭐⭐ seats the two bodies RUN 3 refused, each with the row it came from', () => {
+    // ⛔⛔ THE MEASUREMENT. RUN 3's second reader answered ROSTER `yes` on "The Governing Council
+    // and The Order of the Watch" — names the ENGINE decided for this settlement and handed to the
+    // WRITER as that pool's own `{faction}` fills — because the town block said in terms that it
+    // listed every body that may be named and listed neither. A refusal for a fact the card
+    // withheld is ruling 26's defect class on the roster.
+    const s = townOf(PINNED, 'render-town');
+    const bodies = cardOf(s, 'overview').town.bodies;
+    const byName = new Map(bodies.map((b) => [b.name, b]));
+    expect(byName.get('The Governing Council')).toEqual({
+      name: 'The Governing Council', kind: 'faction', source: 'factions[].name',
+    });
+    expect(byName.get('The Order of the Watch')).toEqual({
+      name: 'The Order of the Watch', kind: 'faction', source: 'factions[].name',
+    });
+    // AND THE OTHER THREE ROWS ARE REACHED, so the list is not one limb wearing four names.
+    const kinds = new Set(bodies.map((b) => b.kind));
+    expect([...kinds].sort()).toEqual(['faction', 'power bloc', 'relationship party']);
+    expect(byName.get('Guild Council').source).toBe('powerStructure.factions[].faction');
+    expect(byName.get('Berchta Schmidt').kind).toBe('relationship party');
+    // THE CONFLICT LIMB IS REACHED TOO, and its parties are this town's factions, so the DEDUPE is
+    // what keeps them at one row each under the faction source rather than two rows under two.
+    expect(s.conflicts.flatMap((c) => c.parties).sort())
+      .toEqual(['The Governing Council', 'The Order of the Watch']);
+  }, 60_000);
+
+  it('is sorted, deduped by name, byte-stable, and the SAME on all thirteen tabs', () => {
+    // ⛔ THE TOWN SECTION IS CACHE BREAKPOINT TWO and its contract is that it is the same bytes on
+    // every tab of one settlement. A per-tab body would cost a full-price town block on every tab
+    // after the first, which is why the drawn `{hall}` fills are NOT in this list.
+    const s = townOf(PINNED, 'render-town');
+    const first = JSON.stringify(cardOf(s, SCRIBE_TABS[0]).town);
+    for (const tab of SCRIBE_TABS) {
+      const bodies = cardOf(s, tab).town.bodies;
+      expect(JSON.stringify(cardOf(s, tab).town), `${tab}: the town section moved between tabs`).toBe(first);
+      expect(bodies.map((b) => b.name)).toEqual([...bodies.map((b) => b.name)].sort());
+      expect(new Set(bodies.map((b) => b.name)).size).toBe(bodies.length);
+      for (const body of bodies) expect(Object.keys(body)).toEqual(['kind', 'name', 'source']);
+    }
+  }, 120_000);
+
+  it('⛔ THE SECRET BODY IS NOT SEATED, on the golden town that actually holds one', () => {
+    // ⛔⛔ THE FINDING. `stressFactions.js:105` pushes a power bloc `Unknown Faction (hidden)` on an
+    // `infiltrated` town, and its own description says "its presence is not known to the
+    // settlement". A list whose sentence to the model is "a body here may act and speak" may not
+    // carry a body the settlement does not know of: on a player page that is a secret printed as a
+    // fact. It is struck BY NAME and not by a parenthetical pattern, so a real body whose name
+    // carries brackets is not silently unseated.
+    const s = settlementOf(goldenCorpus()[0]);
+    expect(
+      s.powerStructure.factions.map((f) => f.faction),
+      'the golden town no longer carries the hidden bloc: move this control to one that does',
+    ).toContain('Unknown Faction (hidden)');
+    const bodies = cardOf(s, 'power').town.bodies;
+    expect(bodies.map((b) => b.name)).not.toContain('Unknown Faction (hidden)');
+    // POSITIVE CONTROL — the other blocs of the SAME row are seated, so the strike is one row and
+    // not the limb.
+    expect(bodies.some((b) => b.source === 'powerStructure.factions[].faction')).toBe(true);
+    expect(UNNAMEABLE_BODIES).toEqual(['Unknown Faction (hidden)']);
+  }, 60_000);
+
+  it('answers the empty list on a town the engine named no body for, rather than guessing', () => {
+    // NEGATIVE CONTROL — a settlement whose four rows are all absent carries no body at all, and
+    // the block says so rather than inventing one or omitting the key.
+    const bare = townCard(
+      { id: 'x', name: 'Nowhere', tier: 'thorp' },
+      { tab: 'defense', audience: 'dm', staticCard: STATIC_CARD },
+    );
+    expect(bare.town.bodies).toEqual([]);
+    // AND A HAMLET WITH ONE FACTION AND NO CONFLICT CARRIES EXACTLY WHAT THE ENGINE GAVE IT.
+    const hamlet = townOf({ ...PINNED, settType: 'hamlet' }, 'sim-hamlet');
+    const names = cardOf(hamlet, 'overview').town.bodies.map((b) => b.name);
+    expect(names).toContain('The Independent Bloc');
+    expect(hamlet.conflicts).toEqual([]);
+    expect(hamlet.prominentRelationship).toBe(null);
+  }, 60_000);
+});
+
 describe('townCard — determinism of the trace', () => {
   it('the drawn variant, the roles and the compromised flag are the render\'s own', () => {
     const bad = [];
@@ -713,6 +797,17 @@ describe('townCard — the golden', () => {
    *   engine had decided in terms. A pool key that fired is a decided fact. NOTHING ELSE MOVED:
    *   `pools[].writeable` is the only key that changed value on any tab, it changed only from
    *   false to true, and no key was added or removed.
+   *
+   * 2026-09-14 — RE-RECORDED (W3d car 2), card schema /4 → /5. CAUSE: `town.bodies` was added —
+   *   every NAMED body the engine holds for this settlement (its factions, its power blocs, the
+   *   parties of its conflicts and of its prominent relationship), deduped by name with the row
+   *   each came from. RUN 3 measured 8 roster contradictions and most were not inventions: "The
+   *   Governing Council and The Order of the Watch" and "the Commercial Circle and the
+   *   Administrative Circle" are the engine's own rows, handed to the WRITER as the pool's own
+   *   `{faction}` fills, while the town block claimed to list every body that may be named and
+   *   listed none of them. NOTHING ELSE MOVED: the only new bytes on any tab are `town.bodies` and
+   *   the schema string, the section is identical on all thirteen tabs (it is cache breakpoint
+   *   two), and the derivation is re-run by the arms above rather than frozen here.
    */
   it('the first golden town matches the committed card, byte for byte, on every tab', () => {
     const row = goldenCorpus()[0];

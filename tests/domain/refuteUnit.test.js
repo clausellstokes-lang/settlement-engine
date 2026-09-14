@@ -24,8 +24,9 @@ import { fileURLToPath } from 'node:url';
 
 import {
   AGNOSTIC_TELLS, ELAPSED_COURSE, LEAK_CLASSES, PROVENANCE_CLAUSE, REFUTE_ARMS,
-  ROLE_SLOT_WORDS, VOICE_BARS, fieldPathsOfPool, groundOfCard, holdersFromCard, poolOfCard,
-  refuteTab, institutionsOfCard, refuteUnit, seatedRolesOf, unitRowOf, vocabularyOfPool,
+  ROLE_SLOT_WORDS, VOICE_BARS, bodiesOfCard, fieldPathsOfPool, groundOfCard, holdersFromCard,
+  poolOfCard, refuteTab, institutionsOfCard, refuteUnit, seatedRolesOf, unitRowOf,
+  vocabularyOfPool,
 } from '../../src/domain/prose/refuteUnit.js';
 import { FIELD_SYNONYM_ROWS } from '../../src/domain/prose/fieldSynonyms.js';
 import { OFFICE_NOUN_CANDIDATES } from '../../src/domain/prose/entryLexicons.js';
@@ -292,6 +293,70 @@ describe('refuteUnit — every arm with its negative control', () => {
       { options: { flagKeys: new Set(['warLayerEnabled']) } },
     );
     expect(leaked.findings.some((f) => f.arm === 'LEAK' && f.value === 'warLayerEnabled' && f.channel === 'FAIL')).toBe(true);
+  });
+});
+
+describe('refuteUnit — the roster seats the bodies the page names (W3d car 2)', () => {
+  /** The same card with a different `town.bodies`, so both controls run on ONE real ground. */
+  const withBodies = (bodies) => ({ ...BASE_CARD, town: { ...BASE_CARD.town, bodies } });
+  const body = (name) => ({ name, kind: 'faction', source: 'factions[].name' });
+  const judgeOn = (text, card) => refuteUnit(
+    {
+      text, stance: 'spine', blockId: '', poolKey: '', slots: slotsIn(text),
+    },
+    card,
+    {},
+  );
+
+  it('the card carries the engine\'s own named bodies, and the reader is the card\'s', () => {
+    // ⛔ RUN 3 MEASURED 8 ROSTER REFUSALS and most were the engine's own rows: "The Governing
+    // Council and The Order of the Watch" on the pinned town, handed to the WRITER as that pool's
+    // own `{faction}` fills while the card's roster listed neither.
+    expect(bodiesOfCard(BASE_CARD).length).toBeGreaterThan(0);
+    expect(bodiesOfCard(BASE_CARD)).toEqual([...bodiesOfCard(BASE_CARD)].sort());
+    // A CARD OLDER THAN SCHEMA /5 ANSWERS THE EMPTY LIST rather than throwing, which leaves both
+    // arms exactly where they stood before this car.
+    expect(bodiesOfCard({ town: {} })).toEqual([]);
+    expect(bodiesOfCard(null)).toEqual([]);
+  });
+
+  it('⭐ REFERENT-role licenses an office noun a NAMED BODY carries, and refuses it without one', () => {
+    const seated = seatedRolesOf(BASE_CARD);
+    const unseated = OFFICE_NOUN_CANDIDATES.find(
+      (noun) => !seated.some((r) => r.includes(noun))
+        && !institutionsOfCard(BASE_CARD).some((n) => n.toLowerCase().includes(noun))
+        && !bodiesOfCard(BASE_CARD).some((n) => n.toLowerCase().includes(noun)),
+    );
+    expect(unseated, 'this town seats every office noun the list holds').toBeTruthy();
+    const text = `The ${unseated} keeps the walls.`;
+    // NEGATIVE CONTROL — with no body carrying the noun the arm still convicts, exactly as before.
+    const refused = judgeOn(text, withBodies([])).findings
+      .filter((f) => f.arm === 'REFERENT-role' && f.channel === 'FAIL');
+    expect(refused.map((f) => f.value)).toContain(unseated);
+    // POSITIVE CONTROL — a body the ENGINE named that carries the noun seats it.
+    const licensed = judgeOn(text, withBodies([body(`The ${unseated} Council`)])).findings
+      .filter((f) => f.arm === 'REFERENT-role' && f.channel === 'FAIL');
+    expect(licensed.map((f) => f.value)).not.toContain(unseated);
+  });
+
+  it('⭐ REFERENT-body REPORTS a record a named body keeps, and still FAILS one nothing keeps', () => {
+    const cited = 'The elders say the walls are kept.';
+    // MEASURED and unchanged: no institution in the shipped roster offers `Record of custom`.
+    expect(holdersFromCard('elders', BASE_CARD)).toEqual([]);
+    // NEGATIVE CONTROL — with no body by that name the citation is refused, as it always was.
+    const refused = judgeOn(cited, withBodies([])).findings.filter((f) => f.arm === 'REFERENT-body');
+    expect(refused.map((f) => `${f.channel}/${f.value}`)).toEqual(['FAIL/elders']);
+    // POSITIVE CONTROL — a body the engine named keeps it, and the arm REPORTS rather than refuses:
+    // a body the engine seated is a seat, and floor 1 is satisfied by the body.
+    const seated = judgeOn(cited, withBodies([body('The Council of Elders')])).findings
+      .filter((f) => f.arm === 'REFERENT-body');
+    expect(seated.map((f) => f.channel)).toEqual(['REPORT']);
+    expect(seated[0].value).toBe('elders: The Council of Elders');
+    // ⛔ AND A BODY THAT DOES NOT NAME THE KIND LICENSES NOTHING, so the limb is a lookup and not a
+    // blanket: any body at all would otherwise turn floor 1 off.
+    const unrelated = judgeOn(cited, withBodies([body('The Merchant Bloc')])).findings
+      .filter((f) => f.arm === 'REFERENT-body');
+    expect(unrelated.map((f) => `${f.channel}/${f.value}`)).toEqual(['FAIL/elders']);
   });
 });
 
