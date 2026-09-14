@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-14 02:45:25 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-14 02:50:39 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = 82eb84237 Plan: ruling 41 — a face is UNFALSIFIABLE or COUPLED (the owner's, and the largest simpl
 
@@ -96,14 +96,20 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
 - LAST-RUNS: 
 
 ## WORKFLOW RUNS of chair session f86a239c-ba8e-464d-a904-e4b70a0c4b2e — PER AGENT, PER LANE (owner 09-11: save progress per agent per lane; a run dies with the session, its journal + the packets + the dock commits are the checkpoint; journals mirrored under $SC/_progress/<wf>/)
-- **wf_980caecf-038** (mtime 09-14 02:44): agent calls 7 (7 distinct) · DONE 1 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 6 — mirror `_progress/wf_980caecf-038/`
-    - `a58382150` ? · IN FLIGHT · transcript 09-14 02:41 301 KB · 2 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
-    - `af201562a` ? · IN FLIGHT · transcript 09-14 02:41 299 KB · 2 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
-    - `a6c164d77` ? · IN FLIGHT · transcript 09-14 02:44 357 KB · 3 tool calls · last: Bash F=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scratc
-    - `ab31afd96` ? · IN FLIGHT · transcript 09-14 02:41 301 KB · 2 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
-    - `a29c465bb` ? · IN FLIGHT · transcript 09-14 02:45 367 KB · 3 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scrat
+- **wf_980caecf-038** (mtime 09-14 02:49): agent calls 13 (13 distinct) · DONE 7 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 6 — mirror `_progress/wf_980caecf-038/`
+    - `a58382150` ? · DONE · transcript 09-14 02:48 453 KB · 4 tool calls · result: {"pool": "Economic Survival \u00b7 ADEQUATE", "claimFreezeHeld": false, "facesChanged": 22, "facesUnchanged": 9, "lineTotal": 31, "ownerTestBefore": 13, "ownerT
+    - `af201562a` ? · DONE · transcript 09-14 02:49 495 KB · 6 tool calls · result: {"pool": "Economic Survival / WEAK", "claimFreezeHeld": false, "facesChanged": 9, "facesUnchanged": 18, "lineTotal": 30, "ownerTestBefore": 19, "ownerTestAfter"
+    - `a6c164d77` ? · DONE · transcript 09-14 02:46 430 KB · 4 tool calls · result: {"pool": "Economic Survival \u00b7 CRITICAL (3 variants, 3 spines, 20 faces, 23 lines)", "claimFreezeHeld": false, "facesChanged": 7, "facesUnchanged": 13, "lin
+    - `ab31afd96` ? · DONE · transcript 09-14 02:47 447 KB · 5 tool calls · files: nowlines.txt · result: {"pool": "Disasters & Famine: granary AND hospital", "claimFreezeHeld": false, "facesChanged": 20, "facesUnchanged": 7, "lineTotal": 30, "ownerTestBefore": 9, "
+    - `a29c465bb` ? · DONE · transcript 09-14 02:47 439 KB · 4 tool calls · result: {"pool": "Disasters & Famine: granary AND parish care only", "claimFreezeHeld": false, "facesChanged": 15, "facesUnchanged": 7, "lineTotal": 25, "ownerTestBefor
     - `a5dbb4880` ? · DONE · transcript 09-14 02:44 384 KB · 6 tool calls · result: {"pool": "Disasters & Famine: granary, NO medical provision", "claimFreezeHeld": true, "facesChanged": 0, "facesUnchanged": 0, "lineTotal": 3, "ownerTestBefore"
-    - `af9be1f6f` ? · IN FLIGHT · transcript 09-14 02:44 298 KB · 2 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
+    - `af9be1f6f` ? · DONE · transcript 09-14 02:49 424 KB · 4 tool calls · result: {"pool": "Disasters & Famine: NO reserves, hospital present", "claimFreezeHeld": false, "facesChanged": 10, "facesUnchanged": 5, "lineTotal": 18, "ownerTestBefo
+    - `a2817714c` ? · IN FLIGHT · transcript 09-14 02:47 297 KB · 2 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
+    - `a730388b8` ADVERSARY · IN FLIGHT · transcript 09-14 02:50 432 KB · 17 tool calls · last: Bash cd "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scra
+    - `a8169bf8f` ADVERSARY · IN FLIGHT · transcript 09-14 02:47 309 KB · 1 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scratchp
+    - `a045eb4cd` ADVERSARY · IN FLIGHT · transcript 09-14 02:48 314 KB · 2 tool calls · last: Bash cat -A /dev/null; cat "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a90
+    - `a559db5be` ADVERSARY · IN FLIGHT · transcript 09-14 02:49 310 KB · 1 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scratchp
+    - `ab59e15b2` ADVERSARY · IN FLIGHT · transcript 09-14 02:49 310 KB · 1 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scratchp
 
 ## PROCESSES: 
-load: 1.91 1.98 2.30
+load: 2.05 2.08 2.25
