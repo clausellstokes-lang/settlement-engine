@@ -1,56 +1,50 @@
 {
- "$schema": "https://json-schema.org/draft/2020-12/schema",
  "type": "object",
+ "additionalProperties": false,
+ "required": [
+  "units"
+ ],
  "properties": {
   "units": {
    "type": "array",
    "items": {
     "type": "object",
-    "properties": {
-     "blockId": {
-      "type": "string",
-      "description": "the block the pool belongs to, copied from the card"
-     },
-     "poolKey": {
-      "type": "string",
-      "description": "the pool key, copied from the card exactly"
-     },
-     "stance": {
-      "type": "string",
-      "enum": [
-       "spine",
-       "face"
-      ],
-      "description": "a spine carries the pool key; a face is one thing a person could notice"
-     },
-     "source": {
-      "type": "string",
-      "description": "the face source this unit speaks through, from the card faceSources"
-     },
-     "pair": {
-      "type": "string",
-      "description": "the pair kind where the card names one for this pool, else an empty string"
-     },
-     "text": {
-      "type": "string",
-      "description": "the unit itself: no em dash, no exclamation mark, no digit, no semicolon, no contraction, no first person, no will or shall"
-     }
-    },
+    "additionalProperties": false,
     "required": [
      "blockId",
      "poolKey",
-     "stance",
-     "source",
-     "pair",
-     "text"
+     "vid",
+     "spine",
+     "faces",
+     "notebook"
     ],
-    "additionalProperties": false
-   },
-   "description": "one entry per pool on the card, in the card page order"
+    "properties": {
+     "blockId": {
+      "type": "string"
+     },
+     "poolKey": {
+      "type": "string"
+     },
+     "vid": {
+      "type": "integer"
+     },
+     "spine": {
+      "type": "string"
+     },
+     "faces": {
+      "type": "array",
+      "items": {
+       "type": "string"
+      }
+     },
+     "notebook": {
+      "type": "array",
+      "items": {
+       "type": "string"
+      }
+     }
+    }
+   }
   }
- },
- "required": [
-  "units"
- ],
- "additionalProperties": false
+ }
 }
