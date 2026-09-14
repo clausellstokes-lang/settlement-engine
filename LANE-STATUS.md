@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-14 01:41:54 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-14 01:47:11 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = 82eb84237 Plan: ruling 41 — a face is UNFALSIFIABLE or COUPLED (the owner's, and the largest simpl
 
@@ -78,7 +78,7 @@ stat: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-
 - DS-DEF-2: pools 26 · skeleton 26 · draft 39 · refine 0 · kept 0 · refute 24 · cure 0 · cured 0 · JUDGMENT no · JUDGMENT-cure no
 - DS-DEF-2.licence-test-attempt: pools 26 · skeleton 26 · draft 36 · refine 26 · kept 26 · refute 32 · cure 24 · cured 0 · JUDGMENT yes · JUDGMENT-cure no
 - entailment: surveys 6 · refutes 6 · ENTAILMENT-TABLE.draft.md 09-12 20:49 346945 B · referent surveys 6 · referent refutes 6 · REFERENT-TABLE.draft.md 09-12 20:49 285943 B
-- HOLD-VITEST absent · runner count 0
+- HOLD-VITEST absent · runner count 31
 
 ## RESEARCH SWEEPS (state = claims/verdicts/kept; verdict files; section/critic mtimes) — round tags in sweep/LAST-RUNS.json
 Traceback (most recent call last):
@@ -312,4 +312,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `ab8783d22` WRITER Invasion & War: walls with NO force · DONE · transcript 09-13 02:30 725 KB · 17 tool calls · files: candidates-2.md, facetext.txt, ft2.txt · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasio
 
 ## PROCESSES: 
-load: 2.02 2.17 2.20
+load: 3.02 2.69 2.42
