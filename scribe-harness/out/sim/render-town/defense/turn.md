@@ -13,6 +13,37 @@ THE STATE THIS PAGE READS:
  "tick": null
 }
 
+THE PAGE AS THE READER MEETS IT
+These lines are printed on the same page as yours.
+A line of yours that denies one of them is refused; a line that agrees with the band where the
+badge word differs is not (the two ladders).
+  [badge] readiness: Well-Defended
+  [machine] guardEffectivenessDesc: The town watch maintains standard patrol coverage. Effective against opportunistic crime; less effective against organized operations that can plan around patrol routes. A functioning court and prison mean crimes carry real consequences. Walls control entry points and give the guard a chokehold on smuggling routes.
+  [row] Beasts & Monsters: Beasts & Monsters — STRONG
+  [machine] Beasts & Monsters.assess: Active frontier with no organized defense. Vulnerable to any monster of moderate capability.
+  [machine] Beasts & Monsters.fundingNote: Upkeep underfunded: patrol provisioning at 98%
+  [row] Invasion & War: Invasion & War — STRONG
+  [machine] Invasion & War.assess: Walls present but no organized military force to man them. A determined attacker takes the walls if they have ladders and time.
+  [machine] Invasion & War.fundingNote: Upkeep underfunded: garrison pay at 98%
+  [row] Internal Security: Internal Security — ADEQUATE
+  [machine] Internal Security.assess: Internal security: Moderate. Full legal infrastructure provides enforcement capacity.
+  [machine] Internal Security.fundingNote: Upkeep underfunded: watch and court funding at 98%
+  [row] Economic Survival: Economic Survival — STRONG
+  [machine] Economic Survival.assess: Strong economic base can absorb a sustained crisis. Tax revenue funds emergency measures and sustains garrison pay during prolonged engagement.
+  [machine] Economic Survival.fundingNote: Upkeep underfunded: crisis logistics at 97%
+  [row] Disasters & Famine: Disasters & Famine — ADEQUATE
+  [machine] Disasters & Famine.assess: Granary provides food buffer. The community can absorb a bad harvest without immediate hardship. Parish clergy provide basic wound care: better than nothing, worse than a hospital.
+  [machine] Disasters & Famine.fundingNote: Upkeep underfunded: relief funding at 97%
+  [badge] safetyLabel: Moderate
+  [machine] safetyDesc: A mix of safer and more exposed areas. The watch covers the main paths; quieter spots after dark carry genuine risk. Residents know which corners to avoid. The walls contain the problem somewhat: crime is concentrated inside rather than spilling into the surrounding territory.
+  [badge] criminalStructure: Organized Syndicate
+  [machine] criminalStructure.note: A structured criminal hierarchy controls what crime is permitted. Predictable rules, a hierarchy to negotiate with. Or cross. Random violence is suppressed because it draws enforcement. The real danger is systematic: protection, extortion, corruption of officials.
+  [machine] Economic Backing: Economic Backing: Well-funded — Full pay, maintained equipment, reserve capacity.
+  [machine] Magical Capability: Magical Capability: Arcane support — Alchemist shop. Detection, wards, counterspell.
+  [machine] Legal Infrastructure: Legal Infrastructure: Court + Prison — Full enforcement chain. Arrest, prosecute, detain.
+  [machine] Medical Readiness: Medical Readiness: Clergy care — Parish care. Basic wound and disease management.
+  [machine] Logistics & Supply: Logistics & Supply: Granary present — Granary with road supply. Cut the roads, cut the supply.
+
 THE LINES TO WRITE:
 POOL "readiness ADEQUATE" in block DS-DEF-1
   vid: 4

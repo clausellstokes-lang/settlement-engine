@@ -13,6 +13,21 @@ THE STATE THIS PAGE READS:
  "tick": null
 }
 
+THE PAGE AS THE READER MEETS IT
+These lines are printed on the same page as yours.
+A line of yours that denies one of them is refused; a line that agrees with the band where the
+badge word differs is not (the two ladders).
+  [machine] historicalCharacter: A settlement whose great advantage is that nothing has ever forced it to become anything in particular. It has kept its options, its neighbours, and its temper, and it regards all three as achievements, correctly, though few visitors see why
+  [badge] crisis.label: Beast & Raider Threat
+  [machine] crisis.summary: Something in the surrounding region has grown bolder. Caravans are disappearing. A farmstead burned last week. Whether wolves, raiders, or worse. The settlement's defences are adequate for normal times, but these are not normal times.
+  [machine] crisis.hook: The attacks are following a pattern that suggests coordination, not desperation. Someone is directing this (whether a rival lord, a beast of unusual cunning, or something stranger). The evidence is there for anyone who looks carefully.
+  [badge] prosperity: Poor
+  [badge] safetyLabel: Dangerous — Monster Threat
+  [badge] readiness: Vulnerable
+  [badge] foodSecurity: Secure
+  [machine] arrivalScene: Warmholz buys arrows. The fletcher's is the busiest shop in the settlement, and the militia board outside the gate lists a standing bounty in terms that carefully avoid naming what it is for. A dozen buildings around a central green, most of them old. Half-timbered upper floors project above the busier lanes. A magelight lamp post marks the main gate. A mile marker, then a second, then the outlying farms of Warmholz begin. The settlement proper is still a quarter hour ahead.
+  [machine] pressureSentence: Warmholz has drawn its edges inward (fields left unworked, a mill standing idle) trading the charcoal it needs for a perimeter the able-bodied can actually hold.
+
 THE LINES TO WRITE:
 POOL "NO-MARKET" in block DS-GEN-13
   vid: 2

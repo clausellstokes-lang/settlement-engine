@@ -13,6 +13,19 @@ THE STATE THIS PAGE READS:
  "tick": null
 }
 
+THE PAGE AS THE READER MEETS IT
+These lines are printed on the same page as yours.
+A line of yours that denies one of them is refused; a line that agrees with the band where the
+badge word differs is not (the two ladders).
+  [machine] historicalCharacter: The Occupation did not just change what happened next; it changed what the settlement believed was possible, and a people's sense of the possible is the slowest thing in the world to rebuild
+  [badge] prosperity: Comfortable
+  [badge] safetyLabel: Moderate
+  [badge] readiness: Well-Defended
+  [badge] foodSecurity: Pressured
+  [machine] arrivalScene: Spitzplatz smells like bread from the gate: a bakehouse near the entrance, open early, already on the second bake of the day. A market town of substance: multiple streets, a visible guild quarter, a hall-and-market axis organizes the settlement center. A magelight lamp post marks the main gate. The gatehouse arch frames the main road. Spitzplatz is announced by the smoke of its cookfires and the sound of its market before its buildings are visible.
+  [machine] pressureSentence: Mechthild Wolf's relationship with Berchta Schmidt is more complicated than their public roles suggest. Berchta Schmidt is about to call it in.
+  [machine] prominentRelationship: The relationship between Berchta Schmidt and Karl Berger is best understood as outstanding debt. Karl Berger is about to call it in.
+
 THE LINES TO WRITE:
 POOL "MARKET-OPEN" in block DS-GEN-13
   vid: 4
