@@ -343,7 +343,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
       "breakdown dominated by FOOD, adverse": [
         {
           "angle": "ledger",
-          "text": "The {seat} at {settlement} is being judged at the store door, and the store is short.",
+          "text": "The {seat} at {settlement} is being judged at the store door, and the town is short of food.",
           "slots": [
             "seat",
             "settlement"
@@ -1200,7 +1200,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
       "shallow ladder (few rungs recorded)": [
         {
           "angle": "ledger",
-          "text": "{faction} at {settlement} has a head and very little structure beneath. The ladder is short because the faction is small, and not because the climbing has finished.",
+          "text": "{faction} at {settlement} has a head and very little structure beneath. The ladder is short because few rungs of it are recorded, and not because the climbing has finished.",
           "slots": [
             "faction",
             "settlement"
@@ -1986,7 +1986,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "The town's whole fear at {settlement} is the day the workings run out. The town talks about it openly and often.",
+          "text": "The town's whole fear at {settlement} is the day the workings run out. It is discussed at {settlement} the way weather is discussed elsewhere.",
           "slots": [
             "settlement"
           ],
@@ -2036,7 +2036,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "What frightens the town is a route turning elsewhere. {settlement} watches the {route} closely and constantly.",
+          "text": "What frightens the town is a route turning elsewhere. {settlement} watches the {route} the way a farming town watches the sky.",
           "slots": [
             "settlement",
             "route"

@@ -2018,7 +2018,7 @@ common state.
 3. `[street]` {settlement} has one accusation against the {seat}: the {seat} has left the town open. The town brings it against the {seat} whenever anything else goes wrong.
 
 **`breakdown` dominated by FOOD, adverse**
-1. `[ledger]` The {seat} at {settlement} is being judged at the store door, and the store is short.
+1. `[ledger]` The {seat} at {settlement} is being judged at the store door, and the town is short of food.
 2. `[street]` Hunger at {settlement} is now a question about the {seat} and not about the harvest. The town has decided that somebody could have arranged this better.
 3. `[unfolding]` The {seat}'s standing falls with the food at {settlement}, and it does not climb back when the food does.
 
@@ -2142,7 +2142,7 @@ life.
 3. `[counterforce]` There are people below {npc} in {faction} at {settlement} with the standing to try, and none of them tries. The settled order is worth more to them than the rung would be.
 
 **shallow ladder (few rungs recorded)**
-1. `[ledger]` {faction} at {settlement} has a head and very little structure beneath. The ladder is short because the faction is small, and not because the climbing has finished.
+1. `[ledger]` {faction} at {settlement} has a head and very little structure beneath. The ladder is short because few rungs of it are recorded, and not because the climbing has finished.
 2. `[street]` {faction} at {settlement} is {npc} and a handful of others. The town treats the handful as {npc}'s people and not as anybody's rivals.
 3. `[visitor]` A stranger dealing with {faction} at {settlement} finds there is nobody to be passed to. {npc} is the arrangement, and the rest are people {npc} knows.
 
@@ -2278,7 +2278,7 @@ and never an assertion that the feared thing is happening.
 
 **`economicBase: extraction`**
 1. `[ledger]` {settlement} lives on what it takes out of the ground. Everything about the town follows the yield: its rhythm, its politics, its fear.
-2. `[street]` The town's whole fear at {settlement} is the day the workings run out. The town talks about it openly and often.
+2. `[street]` The town's whole fear at {settlement} is the day the workings run out. It is discussed at {settlement} the way weather is discussed elsewhere.
 3. `[counterforce]` When it fights, {settlement} digs in at the chokepoints. It does not campaign, and it holds the two or three places that matter and lets the rest go.
 
 **`economicBase: agrarian`**
@@ -2288,7 +2288,7 @@ and never an assertion that the feared thing is happening.
 
 **`economicBase: trade_hub`**
 1. `[ledger]` {settlement} lives on what passes through it. The town is built on its roads and not on its fields.
-2. `[street]` What frightens the town is a route turning elsewhere. {settlement} watches the {route} closely and constantly.
+2. `[street]` What frightens the town is a route turning elsewhere. {settlement} watches the {route} the way a farming town watches the sky.
 3. `[counterforce]` {settlement} fights route wars and folds to embargoes. A closed road presses the town harder than an army does, and its neighbours know it.
 
 **`economicBase: craft`**
